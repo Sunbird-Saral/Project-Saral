@@ -1,0 +1,113 @@
+---
+title: saral_ocr
+description: Saral Optical Character Recognition(OCR) Schema
+properties:
+  data:
+    "$ref": "#/definitions/rootType"
+  additionalProperties: false
+definitions:
+  cell:
+    type: object
+    properties:
+      id:
+        type: integer
+        minimum: 1
+        unique: true
+      roi:
+        "$ref": "#/definitions/roiType"
+      name:
+        type: string
+      type:
+        "$ref": "#/definitions/cellType"
+      isLabel:
+        type: boolean
+      tags:
+        type: array
+        items:
+          type: string
+      format:
+        "$ref": "#/definitions/dataFormatType"
+      maxChars:
+        type: integer
+        minimum: 1
+      subCells:
+        type: array
+        items:
+          "$ref": "#/definitions/cell"
+      response:
+        type: string
+      auditDtls:
+        type: object
+        properties:
+          user:
+            type: string
+        required:
+        - user
+    required:
+    - id
+    - roi
+    - type
+  cellType:
+    type: string
+    enum:
+    - Row_Cell
+    - Column_Cell
+    - QR_Code
+    - Hand_Written_Block_Text
+    - Hand_Written_Digits
+    - Hand_Written_Cursive_Text
+    - Printed_Digits
+    - Printed_Text
+    - Optical_Mark_Reader
+  pointType:
+    type: object
+    properties:
+      xCord:
+        type: integer
+      yCord:
+        type: integer
+    required:
+    - xCord
+    - yCord
+  roiType:
+    type: object
+    properties:
+      four:
+        "$ref": "#/definitions/pointType"
+      one:
+        "$ref": "#/definitions/pointType"
+      three:
+        "$ref": "#/definitions/pointType"
+      two:
+        "$ref": "#/definitions/pointType"
+    additionalProperties: false
+    required:
+    - four
+    - one
+    - three
+    - two
+  sheetType:
+    type: string
+    enum:
+    - A4_Size_PAT_OMR_Sheet
+    - A5_Size_PAT_OMR_Sheet
+    - A4_Size_SAT_OMR_Sheet
+    - A5_Size_SAT_OMR_Sheet
+  rootType:
+    type: object
+    properties:
+      sheet:
+        "$ref": "#/definitions/sheetType"
+      cells:
+        type: array
+        items:
+          "$ref": "#/definitions/cell"
+    additionalProperties: false
+    required:
+    - sheet
+    - cells
+  dataFormatType:
+    type: string
+    enum:
+    - string
+    - positiveInteger
