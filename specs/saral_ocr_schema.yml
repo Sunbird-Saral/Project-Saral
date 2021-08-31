@@ -30,6 +30,8 @@ definitions:
       maxChars:
         type: integer
         minimum: 1
+      validators:
+        "$ref": "#/definitions/validatorsType"
       subCells:
         type: array
         items:
@@ -93,11 +95,31 @@ definitions:
     - A5_Size_PAT_OMR_Sheet
     - A4_Size_SAT_OMR_Sheet
     - A5_Size_SAT_OMR_Sheet
+  validatorsType:
+    type: array
+    items:
+      type: object
+      properties:
+        name:
+          type: string
+        regex:
+          type: string
+  identifiersType:
+    type: array
+    items:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
   rootType:
     type: object
     properties:
       sheet:
         "$ref": "#/definitions/sheetType"
+      identifiers:
+        "$ref": "#/definitions/identifiersType"
       cells:
         type: array
         items:

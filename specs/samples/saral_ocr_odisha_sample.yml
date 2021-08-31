@@ -1,5 +1,12 @@
 data:
   sheet: A5_Size_PAT_OMR_Sheet
+  identifiers:
+    - name: teacherId
+      value: 100201
+    - name: schoolId
+      value: 5300
+    - name: testId
+      value: MA0001
   cells:
     - id: 1
       roi:
@@ -72,6 +79,9 @@ data:
               yCord: 95
           type: Hand_Written_Digits
           name: Hand Written Student Unique ID
+          validators:
+            - name: Rule_10_to_14_Digits
+              regex: "^\\d{10,14}$"
     - id: 5
       roi:
             one:
@@ -123,6 +133,9 @@ data:
               yCord: 95
           type: Printed_Text
           name: Marks Obtained
+          validators:
+            - name: Rule_Valid_3Digit_100Marks
+              regex: "^([1-9][0-9]{0,9}|100)$"
           tags:
             - Marks Obtained
         - id: 8
