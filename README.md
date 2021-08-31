@@ -7,7 +7,10 @@ Project Saral should be viewed as an OCR-plus application that is capable of doi
 # Sample
 - /specs/samples/saral_ocr_odisha_sample.yml
 
+# Saral OCR Odisha sample Layout
+
 ![Alt text](https://github.com/project-anuvaad/Project-Saral/blob/feature/saral_schema_changes/specs/images/saral_ocr_layout.png "Saral OCR Layout")
 
+# Saral OCR-plus draft Architecture v1.0
 
 ![Alt text](https://github.com/project-anuvaad/Project-Saral/blob/feature/saral_schema_changes/specs/images/saral_v1.0_architecture-view-point1.jpg "Saral OCR Architecture")
