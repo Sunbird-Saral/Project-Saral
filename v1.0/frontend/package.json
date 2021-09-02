@@ -1,0 +1,52 @@
+{
+  "name": "UP_SaralData",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-native start",
+    "test": "jest",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@react-native-community/async-storage": "^1.12.1",
+    "@react-native-community/datetimepicker": "^3.0.9",
+    "@react-native-community/masked-view": "^0.1.10",
+    "axios": "^0.21.1",
+    "lodash": "^4.17.20",
+    "moment": "^2.29.1",
+    "react": "16.13.1",
+    "react-native": "0.63.4",
+    "react-native-gesture-handler": "^1.9.0",
+    "react-native-global-props": "^1.1.5",
+    "react-native-localization": "^2.1.6",
+    "react-native-modal-dropdown": "git+https://github.com/siemiatj/react-native-modal-dropdown.git",
+    "react-native-responsive-dimensions": "^3.1.1",
+    "react-native-safe-area-context": "^3.1.9",
+    "react-native-screens": "^2.16.1",
+    "react-native-system-setting": "^1.7.6",
+    "react-native-uuid": "^1.4.9",
+    "react-navigation": "^4.4.3",
+    "react-navigation-stack": "^2.10.2",
+    "react-redux": "^7.2.2",
+    "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-logger": "^3.0.6",
+    "redux-persist": "^6.0.0",
+    "redux-thunk": "^2.3.0"
+  },
+  "devDependencies": {
+    "@babel/core": "7.12.10",
+    "@babel/runtime": "7.12.5",
+    "@react-native-community/eslint-config": "1.1.0",
+    "babel-jest": "25.5.1",
+    "eslint": "6.8.0",
+    "jest": "25.5.4",
+    "metro-react-native-babel-preset": "0.59.0",
+    "react-test-renderer": "16.13.1"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
