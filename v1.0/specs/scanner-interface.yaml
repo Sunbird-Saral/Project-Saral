@@ -1,0 +1,69 @@
+openapi: 3.0.0
+info:
+  title: Saral Scanner specification for scanner component
+  description: >-
+    The schema defines the communication interface between the UI layer and scanner layer.
+  contact:
+    name: ekstep foundation
+    email: contact@ekstep.org
+  version: 0.7.0
+servers:
+  - url: /ulca
+paths: {}
+
+components:
+  schemas:
+    roiConfigs:
+      type: array
+      items:
+        $ref: '#/components/schemas/roiConfig'
+        minItems: 1
+  
+    roiConfig:
+      type: object
+      description: a scanning area defined on the image. Scanning application will extract the result based upon 'roiId' and update the 'result' key
+      required:
+        - roiId
+        - extractionMethod
+        - roi
+      properties:
+        roiId:
+          type: string
+          description: unique roi identifier
+          format: uuidv4
+        extractionMethod:
+          type: string
+          example: NUMERIC_CLASSIFICATION
+          enum:
+            - NUMERIC_CLASSIFICATION
+            - CELL_OMR
+        result:
+          type: string
+          description: extracted result based upon the method
+        confidence:
+          type: number
+          description: extract confidence returned from the extract method, if available
+        roi:
+          $ref: '#/components/schemas/roi'
+  
+    roi:
+      type: object
+      required:
+        - top
+        - left
+        - bottom
+        - right
+      properties:
+        top:
+          type: number
+          description: x-coordinate of the ROI on the image
+        left:
+          type: number
+          description: y-coordinate of the ROI on the image
+        bottom:
+          type: number
+          description: x-coordinate of the ROI on the image
+        right:
+          type: number
+          description: y-coordinate of the ROI on the image
+    
