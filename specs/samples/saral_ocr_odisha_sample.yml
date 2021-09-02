@@ -1,12 +1,16 @@
 data:
-  sheet: A5_Size_PAT_OMR_Sheet
+  sheet: PAT_20_MARKSHEET
   identifiers:
     - name: teacherId
       value: "100201"
     - name: schoolId
-      value: "5300"
-    - name: testId
-      value: "MA0001"
+      value: "9270700701"
+    - name: classId
+      value: "3"
+    - name: examId
+      value: "EXAM020212012021"
+    - name: examSubject
+      value: Math
   cells:
     - id: 1
       roi:
@@ -62,6 +66,7 @@ data:
               yCord: 95
           type: Printed_Text
           name: Student Unique ID
+          response: Student Unique ID
           isLabel: true
         - id: 4
           roi:
