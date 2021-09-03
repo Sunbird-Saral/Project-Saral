@@ -1,9 +1,8 @@
-package com.up_saraldata;
+package com.saral;
 
 import android.app.Activity;
 import android.content.Intent;
 
-import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -13,9 +12,7 @@ import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-import com.up_saraldata.scanner.SCANNER_TYPE;
-import com.up_saraldata.scanner.UPPATScannerActivity;
-import com.up_saraldata.scanner.UPSATScannerActivity;
+import com.saral.scanner.OpenCVScannerActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,11 +20,7 @@ import static com.facebook.react.views.textinput.ReactTextInputManager.TAG;
 
 public class RNOpenCvCameraModel extends ReactContextBaseJavaModule implements ActivityEventListener {
     private static Boolean isOn = false;
-
-
-
     Promise mPromise;
-
 
     public RNOpenCvCameraModel(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -35,24 +28,18 @@ public class RNOpenCvCameraModel extends ReactContextBaseJavaModule implements A
     }
 
     @ReactMethod
-    void openScanCamera(String rollNumberList, String scannerType, int scannerCode, Promise promise) throws JSONException {
-        JSONArray rollArray = new JSONArray(rollNumberList);
-        Log.d(TAG, "NumberPool-OpenCamera  :: "+rollArray);
-        mPromise = promise;
+    void openScanCamera(String roiConfigs, Promise promise) throws JSONException {
+
+        JSONArray rois  = new JSONArray(roiConfigs);
+        mPromise        = promise;
+
         final Activity activity = getCurrentActivity();
         Intent intent = new Intent();
-        if(scannerType.equals(SCANNER_TYPE.PAT)) {
-            intent = new Intent(activity, UPPATScannerActivity.class);
+        if (rois.length() > 0) {
+            intent  = new Intent(activity, OpenCVScannerActivity.class);
         }
-        else if(scannerType.equals(SCANNER_TYPE.SAT)) {
-            intent = new Intent(activity, UPSATScannerActivity.class);
-        }
-//        Intent intent = new Intent(activity, UPPATScannerActivity.class);
-//        Bundle b        = new Bundle();
-//        b.putInt("scanner", scannerType);
-        intent.putExtra("scanner", scannerCode);
-        intent.putExtra("scannerType", scannerType);
-        intent.putExtra("NUMBER_POOL",rollArray.toString());
+
+        intent.putExtra("roiConfigs", roiConfigs);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         getReactApplicationContext().startActivity(intent);
     }
@@ -81,7 +68,7 @@ public class RNOpenCvCameraModel extends ReactContextBaseJavaModule implements A
         if (requestCode == 1) {
             Log.d(TAG, "DatagetDataString"+data.getDataString());
             //example for handling success response
-            this.mPromise.resolve(data.getStringExtra("fileName")); // you can further process this data in react native component.
+            this.mPromise.resolve(data.getStringExtra("roiConfigsResult")); // you can further process this data in react native component.
 
         }
         else if(requestCode == 0) {

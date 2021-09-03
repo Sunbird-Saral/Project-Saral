@@ -1,4 +1,4 @@
-package com.up_saraldata.hwmodel;
+package com.saral.hwmodel;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -15,7 +15,6 @@ import com.google.firebase.ml.custom.FirebaseModelInterpreterOptions;
 
 import org.opencv.android.Utils;
 import org.opencv.core.Core;
-import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfDouble;
 import org.opencv.imgproc.Imgproc;
@@ -25,12 +24,12 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
 public class HWClassifier {
-    private static final String TAG             = "UP_Saral::HWClassifier";
+    private static final String TAG             = "OCRApp::HWClassifier";
     /**
      * Name of the model file hosted with Firebase.
      */
     private static final String HOSTED_MODEL_NAME = null;
-    private static final String LOCAL_MODEL_ASSET = "trained_resnet_model_v2_10.tflite";//"digit_trained_model_resnet.tflite";
+    private static final String LOCAL_MODEL_ASSET = "digit_trained_model_resnet.tflite";
 
     /**
      * Dimensions of inputs.
@@ -58,7 +57,7 @@ public class HWClassifier {
 
     public void initialize() {
         int[] inputDims = {DIM_BATCH_SIZE, DIM_IMG_SIZE_X, DIM_IMG_SIZE_Y, DIM_PIXEL_SIZE};
-        int[] outputDims = {DIM_BATCH_SIZE, 11};
+        int[] outputDims = {DIM_BATCH_SIZE, 10};
         try {
             int firebaseModelDataType = FirebaseModelDataType.FLOAT32;
             mDataOptions =
@@ -83,22 +82,9 @@ public class HWClassifier {
 
     public void classifyMat(Mat mat, String id) {
         if(mInterpreter != null) {
-            //For Old Modal
-//            Mat processedMat    = preprocessMatForModel(mat);
-            //For New Modal
-            Mat processedMat = preprocessMatForNewModal(mat);
+            Mat processedMat    = preprocessMatForModel(mat);
             runInference(convertMattoTfLiteInput(processedMat), id);
         }
-    }
-
-    private Mat preprocessMatForNewModal(Mat mat) {
-        Mat gray_img = new Mat();
-        Imgproc.cvtColor(mat, gray_img, Imgproc.COLOR_BGR2GRAY);
-        Mat matFinal        = new Mat();
-
-        //img = np.array(img,dtype=np.float32) / 255.0 -- Python
-        gray_img.convertTo(matFinal, CvType.CV_32FC3, 1/255.0); // -- Java
-        return matFinal;
     }
 
     private Mat preprocessMatForModel(Mat mat) {
@@ -155,7 +141,7 @@ public class HWClassifier {
                             float[][] output        = result.getOutput(0);
                             float[] probabilities   = output[0];
                             int digit               = getMarksValue(probabilities);
-                            predictionListener.OnPredictionSuccess(digit, id);
+                            predictionListener.OnPredictionSuccess(digit, probabilities[digit], id);
                         })
                         .addOnFailureListener(e -> {
                             e.printStackTrace();

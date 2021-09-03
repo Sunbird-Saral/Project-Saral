@@ -1,20 +1,18 @@
-package com.up_saraldata.opencv;
+package com.saral.opencv;
 
 import android.util.Log;
 
-import com.up_saraldata.commons.CVOperations;
+import com.saral.commons.CVOperations;
 
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
-import org.opencv.core.Point;
 import org.opencv.core.Rect;
-import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 
 public class DetectShaded {
-    private static final String  TAG                = "UP_Saral::DetectShaded";
+    private static final String  TAG                = "OCRApp::DetectShaded";
     private boolean DEBUG                           = false;
     public DetectShaded(boolean debug){
         DEBUG = debug;

@@ -1,4 +1,4 @@
-package com.up_saraldata.scanner;
+package com.saral.scanner;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -14,13 +14,11 @@ import android.view.WindowManager;
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.bridge.ReactContext;
-import com.up_saraldata.R;
-import com.up_saraldata.hwmodel.HWClassifier;
-import com.up_saraldata.hwmodel.PredictionListener;
-import com.up_saraldata.opencv.BlurDetection;
-import com.up_saraldata.opencv.DetectShaded;
-import com.up_saraldata.opencv.ExtractROIs;
-import com.up_saraldata.opencv.TableCornerCirclesDetection;
+import com.saral.R;
+import com.saral.hwmodel.HWClassifier;
+import com.saral.hwmodel.PredictionListener;
+import com.saral.opencv.DetectShaded;
+import com.saral.opencv.TableCornerCirclesDetection;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,13 +37,13 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
-public class UPPATScannerActivity extends ReactActivity implements CameraBridgeViewBase.CvCameraViewListener2 {
-    private static final String  TAG                    = "UP_Saral::UPPAT";
+public class OpenCVScannerActivity extends ReactActivity implements CameraBridgeViewBase.CvCameraViewListener2 {
+    private static final String  TAG                    = "OCRApp::Scanner";
     private static long mframeCount                     = 0;
     private static long mIgnoreFrameCount               = 0;
     private static final int START_PROCESSING_COUNT     = 20;
 
-    private int mScannerType                            = SCANNER_PAT_CODE.SCANNER_NUMERACY;
+    private String mROIConfigs                          = null;
     private boolean isHWClassiferAvailable              = true;
     private boolean isRelevantFrameAvailable            = false;
     private boolean mIsScanningComplete                 = false;
@@ -54,9 +52,7 @@ public class UPPATScannerActivity extends ReactActivity implements CameraBridgeV
     private Mat                             mRgba;
     private CameraBridgeViewBase            mOpenCvCameraView;
     private TableCornerCirclesDetection     mTableCornerDetection;
-    private ExtractROIs                     mROIs;
     private DetectShaded                    mDetectShaded;
-    private BlurDetection                   blurDetection;
     private long                            mStartTime;
     private long                            mStartPredictTime;
 
@@ -84,7 +80,7 @@ public class UPPATScannerActivity extends ReactActivity implements CameraBridgeV
             }
         }
     };
-    public UPPATScannerActivity() {
+    public OpenCVScannerActivity() {
         Log.i(TAG, "Instantiated new " + this.getClass());
     }
 
@@ -94,22 +90,20 @@ public class UPPATScannerActivity extends ReactActivity implements CameraBridgeV
     public void onCreate(Bundle savedInstanceState) {
         Log.i(TAG, "called onCreate");
         super.onCreate(savedInstanceState);
-//        Bundle b = getIntent().getExtras();
-
-        if(getIntent().hasExtra("scanner")) {
-            mScannerType = getIntent().getIntExtra("scanner", 1);
-            Log.d(TAG, "Scanner type: " + mScannerType);
+        Bundle b = getIntent().getExtras();
+        if(b != null) {
+            mROIConfigs = b.getString("roiConfigs");
+            Log.d(TAG, "Scanner type: " + mROIConfigs);
         }
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        setContentView(R.layout.activity_up_pat_scanner);
+        setContentView(R.layout.activity_scanner);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         mOpenCvCameraView = (CameraBridgeViewBase) findViewById(R.id.up_pat_scanner_activity_surface_view);
         mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
         mOpenCvCameraView.setCvCameraViewListener(this);
-        mOpenCvCameraView.setMaxFrameSize(1280,720);
         mOpenCvCameraView.enableFpsMeter();
     }
 
@@ -136,16 +130,18 @@ public class UPPATScannerActivity extends ReactActivity implements CameraBridgeV
              * Now load the classifier
              */
             try {
-                hwClassifier    = new HWClassifier(UPPATScannerActivity.this, new PredictionListener() {
+                hwClassifier    = new HWClassifier(OpenCVScannerActivity.this, new PredictionListener() {
                     @Override
-                    public void OnPredictionSuccess(int digit, String id) {
-                        Log.d(TAG, "predicted digit:" + digit + " unique id:" + id);
+                    public void OnPredictionSuccess(int digit, float confidence, String id) {
+                        Log.d(TAG, "predicted digit:" + digit + " unique id:" + id + " confidence:" + confidence);
                         mTotalClassifiedCount++;
-                        if(digit == 10) {
-                            mPredictedDigits.put(id, "");
-                        }
-                        else {
-                            mPredictedDigits.put(id, new Integer(digit).toString());
+                        try {
+                            JSONObject result = new JSONObject();
+                            result.put("prediction", new Integer(digit));
+                            result.put("confidence", new Double(confidence));
+                            mPredictedDigits.put(id, result.toString());
+                        } catch (JSONException e) {
+                            Log.e(TAG, "unable to parse mROIConfigs object");
                         }
 
                         if (mIsClassifierRequestSubmitted && mTotalClassifiedCount >= mPredictedDigits.size()) {
@@ -179,23 +175,21 @@ public class UPPATScannerActivity extends ReactActivity implements CameraBridgeV
         }
     }
 
+    @Override
+    public List<? extends CameraBridgeViewBase> getCameraViewList() {
+        return null;
+    }
+
     public void onDestroy() {
         super.onDestroy();
         if (mOpenCvCameraView != null)
             mOpenCvCameraView.disableView();
     }
 
-    @Override
-    public List<? extends CameraBridgeViewBase> getCameraViewList() {
-        return null;
-    }
-
     public void onCameraViewStarted(int width, int height) {
         mRgba                           = new Mat(height, width, CvType.CV_8UC4);
         mTableCornerDetection           = new TableCornerCirclesDetection(false);
-        mROIs                           = new ExtractROIs(false);
         mDetectShaded                   = new DetectShaded(false);
-        blurDetection                   = new BlurDetection(false);
         mTotalClassifiedCount           = 0;
         mIsScanningComplete             = false;
         mScanningResultShared           = false;
@@ -228,16 +222,10 @@ public class UPPATScannerActivity extends ReactActivity implements CameraBridgeV
 //        return;
 
         if (tableMat != null && isHWClassiferAvailable) {
-//            if (mIgnoreFrameCount < START_PROCESSING_COUNT) {
-//                mIgnoreFrameCount ++;
-//                return;
-//            }
-            Log.d(TAG, "processCameraFrame: blurDetection before:: "+blurDetection.detectBlur(tableMat));
-            if(blurDetection.detectBlur(tableMat)) {
-                Log.d(TAG, "processCameraFrame: blurDetection after:: "+blurDetection.detectBlur(tableMat));
+            if (mIgnoreFrameCount < START_PROCESSING_COUNT) {
+                mIgnoreFrameCount ++;
                 return;
             }
-
             isRelevantFrameAvailable        = true;
             mIsScanningComplete             = false;
             mIsClassifierRequestSubmitted   = false;
@@ -251,27 +239,31 @@ public class UPPATScannerActivity extends ReactActivity implements CameraBridgeV
 
             try {
                 for (int i = 0; i < rois.length(); i++) {
-                    JSONObject roi  = rois.getJSONObject(i);
+                    JSONObject roiConfig  = rois.getJSONObject(i);
 
-                    if (roi.getString("method").equals("omr")) {
-                        StringBuilder sb    = new StringBuilder().append(roi.getInt("row")).append("_").append(roi.getInt("col")).append("_").append(roi.getInt("index"));
+                    if (roiConfig.getString("extractionMethod").equals("CELL_OMR")) {
+                        String roiId        = roiConfig.getString("roiId");
+                        JSONObject roi      = roiConfig.getJSONObject("roi");
+
                         double percent      = mDetectShaded.getShadedPercentage(tableMat, roi.getInt("top"), roi.getInt("left"), roi.getInt("bottom"), roi.getInt("right"));
                         Integer answer      = 0;
                         if (percent > DARKNESS_THRESHOLD) {
                             answer = 1;
                         }
-                        mPredictedOMRs.put(sb.toString(), answer.toString());
-                        Log.d(TAG, "key: " + sb.toString() + " answer: " + answer.toString());
+                        mPredictedOMRs.put(roiId, answer.toString());
+                        Log.d(TAG, "key: " + roiId + " answer: " + answer.toString());
                     }
 
-                    if (roi.getString("method").equals("classify")) {
-                        StringBuilder sb    = new StringBuilder().append(roi.getInt("row")).append("_").append(roi.getInt("col")).append("_").append(roi.getInt("index"));
-                        mPredictedDigits.put(sb.toString(), "0");
+                    if (roiConfig.getString("extractionMethod").equals("NUMERIC_CLASSIFICATION")) {
+                        String roiId        = roiConfig.getString("roiId");
+                        JSONObject roi      = roiConfig.getJSONObject("roi");
+
+                        mPredictedDigits.put(roiId, "0");
 
                         Mat digitROI        = mDetectShaded.getROIMat(tableMat, roi.getInt("top"), roi.getInt("left"), roi.getInt("bottom"), roi.getInt("right"));
                         if(hwClassifier != null) {
-                            Log.d(TAG, "Requesting prediction for: " + sb.toString());
-                            hwClassifier.classifyMat(digitROI, sb.toString());
+                            Log.d(TAG, "Requesting prediction for: " + roiId);
+                            hwClassifier.classifyMat(digitROI, roiId);
                         }
                     }
                 }
@@ -285,13 +277,13 @@ public class UPPATScannerActivity extends ReactActivity implements CameraBridgeV
     }
 
     private JSONArray getROIs() {
-        if (mScannerType == SCANNER_PAT_CODE.SCANNER_LITERACY_2_3) {
-            return mROIs.getLiteracyClass2_3_ROIs();
+        try {
+            JSONArray array = new JSONArray(mROIConfigs);
+            return array;
+        } catch (JSONException e) {
+            Log.e(TAG, "unable to parse mROIConfigs object");
+            return null;
         }
-        if (mScannerType == SCANNER_PAT_CODE.SCANNER_LITERACY_5_6) {
-            return mROIs.getLiteracyClass4_5_ROIs();
-        }
-        return mROIs.getNumeracyClass2_3_ROIs();
     }
 
     private void processScanningCompleted() {
@@ -303,160 +295,46 @@ public class UPPATScannerActivity extends ReactActivity implements CameraBridgeV
         MediaActionSound sound  = new MediaActionSound();
         sound.play(MediaActionSound.SHUTTER_CLICK);
 
-        JSONObject  response        = getScanResult();
+        JSONArray  response = getScanResult();
         Log.d(TAG, "Scanning completed OMR count: " + mPredictedOMRs.size() + " classifier count: " + mPredictedDigits.size());
 
+        /**
+         * return result to react-native
+         */
         ReactInstanceManager mReactInstanceManager  = getReactNativeHost().getReactInstanceManager();
         ReactContext reactContext                   = mReactInstanceManager.getCurrentReactContext();
-        Intent sendData                             = new Intent(reactContext, UPPATScannerActivity.class);
-
-        sendData.putExtra("fileName", response.toString());
-        mReactInstanceManager.onActivityResult(null, 1, 2, sendData);
+        Intent intent                               = new Intent(reactContext, OpenCVScannerActivity.class);
+        intent.putExtra("roiConfigsResult", response.toString());
+        mReactInstanceManager.onActivityResult(null, 1, 2, intent);
         finish();
     }
 
-    private JSONObject getScanResult() {
-        String studentClass     = mPredictedDigits.get("-1_-1_0");
-        String studentSection   = mPredictedDigits.get("-1_-1_1");
-        JSONObject result       = new JSONObject();
-
+    private JSONArray getScanResult() {
+        JSONArray inputROIs     = getROIs();
+        JSONArray ouputROIs     = new JSONArray();
 
         try {
-            Log.d(TAG, "mPredictedDigits: " + new JSONObject(mPredictedDigits).toString());
-            Log.d(TAG, "mPredictedOMRs: " + new JSONObject(mPredictedOMRs).toString());
+            for (int i = 0; i < inputROIs.length(); i++) {
+                JSONObject roiConfig    = inputROIs.getJSONObject(i);
 
-            result.put("scanner", mScannerType);
-            result.put("class", studentClass);
-            result.put("section", studentSection);
-            JSONArray students  = getStudentsAndMarks();
+                if (roiConfig.getString("extractionMethod").equals("NUMERIC_CLASSIFICATION")) {
+                    JSONObject out  = new JSONObject(mPredictedDigits.get(roiConfig.get("roiId")));
+                    roiConfig.put("result", out);
+                    ouputROIs.put(roiConfig);
+                }
 
-            result.put("students", students);
-            result.put("predict", new Double((SystemClock.uptimeMillis() - mStartPredictTime)/1000));
-            result.put("total", new Double((SystemClock.uptimeMillis() - mStartTime)/1000));
-
-        } catch (JSONException e) {
-            return result;
-        }
-
-        return result;
-    }
-
-    private JSONArray getStudentsAndMarks() {
-        JSONArray students  = new JSONArray();
-        JSONArray rolls     = getStudentsRoll();
-        JSONArray allMarks  = getStudentsMarks();
-
-        try {
-            if (rolls.length() > 0 && allMarks.length() > 0) {
-                for (int i = 0; i < rolls.length(); i++) {
-                    JSONObject roll     = rolls.getJSONObject(i);
-                    JSONObject student  = new JSONObject();
-                    JSONArray marks     = new JSONArray();
-
-                    student.put("roll", roll.getString("roll"));
-
-                    for (int j = 0; j < allMarks.length(); j++) {
-                        JSONObject mark = allMarks.getJSONObject(j);
-                        if (mark.getInt("row") == roll.getInt("row")) {
-                            JSONObject studentMark  = new JSONObject();
-                            studentMark.put("question", mark.getInt("question"));
-                            studentMark.put("mark", mark.getString("mark"));
-                            marks.put(studentMark);
-                        }
-                    }
-                    student.put("marks", marks);
-                    students.put(student);
+                if (roiConfig.getString("extractionMethod").equals("CELL_OMR")) {
+                    JSONObject out  = new JSONObject();
+                    out.put("prediction", mPredictedOMRs.get(roiConfig.get("roiId")));
+                    out.put("confidence", new Double(1.00));
+                    roiConfig.put("result", out);
+                    ouputROIs.put(roiConfig);
                 }
             }
         } catch (JSONException e) {
-            return students;
+            return ouputROIs;
         }
-        return students;
-    }
-
-    private JSONArray getStudentsRoll() {
-        int rows = 1;
-        int cols = 1;
-        if (mScannerType == SCANNER_PAT_CODE.SCANNER_NUMERACY) {
-            rows    = 8;
-            cols    = 1;
-        }
-        if (mScannerType == SCANNER_PAT_CODE.SCANNER_LITERACY_2_3) {
-            rows    = 4;
-            cols    = 1;
-        }
-        if (mScannerType == SCANNER_PAT_CODE.SCANNER_LITERACY_5_6) {
-            rows    = 3;
-            cols    = 1;
-        }
-        JSONArray students  = new JSONArray();
-        try {
-            for (int row = 0; row < rows; row++) {
-                for (int col = 0; col < cols; col++) {
-                    StringBuffer sb = new StringBuffer();
-
-                    for (int index = 0; index < 7; index++) {
-                        String key = row + "_" + col + "_" + index;
-                        String result  = mPredictedDigits.get(key);
-                        if (result != null) {
-                            sb.append(result);
-                        }
-                    }
-                    JSONObject student  = new JSONObject();
-                    student.put("roll", sb.toString());
-                    student.put("row", row);
-                    students.put(student);
-                }
-            }
-        } catch (JSONException e) {
-            Log.e(TAG, "Unable to collect students roll");
-            return students;
-        }
-        return students;
-    }
-
-    private JSONArray getStudentsMarks() {
-        int rows    = 1;
-        int cols    = 13;
-        int indices = 1;
-        if (mScannerType == SCANNER_PAT_CODE.SCANNER_NUMERACY) {
-            rows    = 8;
-            cols    = 13;
-            indices = 1;
-        }
-        if (mScannerType == SCANNER_PAT_CODE.SCANNER_LITERACY_2_3) {
-            rows    = 4;
-            cols    = 13;
-            indices = 20;
-        }
-        if (mScannerType == SCANNER_PAT_CODE.SCANNER_LITERACY_5_6) {
-            rows    = 3;
-            cols    = 13;
-            indices = 30;
-        }
-
-        JSONArray marks  = new JSONArray();
-        try {
-            for (int row = 0; row < rows; row++) {
-                for (int col = 0; col < cols; col++) {
-                    for (int index = 0; index < indices; index++) {
-                        String key = row + "_" + (col+1)  + "_" + index;
-                        String result  = mPredictedOMRs.get(key);
-                        if (result != null) {
-                            JSONObject mark  = new JSONObject();
-                            mark.put("row", row);
-                            mark.put("question", index);
-                            mark.put("mark", result);
-                            marks.put(mark);
-                        }
-                    }
-                }
-            }
-        } catch (JSONException e) {
-            Log.e(TAG, "Unable to collect students marks");
-            return marks;
-        }
-        return marks;
+        return ouputROIs;
     }
 
     private void showProcessingInformation(Mat image) {

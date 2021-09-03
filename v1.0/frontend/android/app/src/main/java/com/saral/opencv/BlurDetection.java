@@ -1,8 +1,4 @@
-package com.up_saraldata.opencv;
-
-import android.util.Log;
-
-import com.up_saraldata.commons.CVOperations;
+package com.saral.opencv;
 
 import org.opencv.core.Core;
 import org.opencv.core.CvType;

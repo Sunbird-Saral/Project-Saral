@@ -8,7 +8,7 @@ info:
     email: contact@ekstep.org
   version: 0.7.0
 servers:
-  - url: /ulca
+  - url: /none
 paths: {}
 
 components:
@@ -37,15 +37,11 @@ components:
           enum:
             - NUMERIC_CLASSIFICATION
             - CELL_OMR
-        result:
-          type: string
-          description: extracted result based upon the method
-        confidence:
-          type: number
-          description: extract confidence returned from the extract method, if available
         roi:
           $ref: '#/components/schemas/roi'
-  
+        result:
+          $ref: '#/components/schemas/scanResult'
+
     roi:
       type: object
       required:
@@ -66,4 +62,15 @@ components:
         right:
           type: number
           description: y-coordinate of the ROI on the image
+          
+    scanResult:
+      type: object
+      description: result of data extraction
+      properties:
+        prediction:
+          type: number
+          description: detected data
+        confidence:
+          type: number
+          description: degree of confidence regarding the prediction
     

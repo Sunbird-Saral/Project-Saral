@@ -1,4 +1,4 @@
-package com.up_saraldata.commons;
+package com.saral.commons;
 
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
@@ -15,15 +15,13 @@ import org.opencv.imgproc.Imgproc;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 
 public class CVOperations {
-    private static final String  TAG              = "UP_Saral::CVOps";
+    private static final String  TAG              = "OCRApp::CVOps";
 
     public static List<Point> getCirclesPoint(Mat circles) {
         List<Point> points = new ArrayList<Point>();

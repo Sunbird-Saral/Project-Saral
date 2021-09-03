@@ -1,8 +1,8 @@
-package com.up_saraldata.opencv;
+package com.saral.opencv;
 
 import android.util.Log;
 
-import com.up_saraldata.commons.CVOperations;
+import com.saral.commons.CVOperations;
 
 import org.opencv.calib3d.Calib3d;
 import org.opencv.core.CvType;
@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TableCornerCirclesDetection {
-    private static final String  TAG        = "UP_Saral::TableDetector";
+    private static final String  TAG        = "OCRApp::TableDetector";
     private boolean DEBUG                   = false;
     private double mROI                     = 0.0;
     private Point mTopLeft, mTopRight, mBottomLeft, mBottomRight;
@@ -56,7 +56,7 @@ public class TableCornerCirclesDetection {
         Imgproc.cvtColor(image, gray, Imgproc.COLOR_BGR2GRAY);
         Imgproc.medianBlur(gray, gray, 5);
         Mat circles     = new Mat();
-        Imgproc.HoughCircles(gray, circles, Imgproc.CV_HOUGH_GRADIENT,1.3,280, 100.0, 30, 15, 20);
+        Imgproc.HoughCircles(gray, circles, Imgproc.CV_HOUGH_GRADIENT,1.5,400.0, 100.0, 30.0, 15, 20);
 
         /**
          * Draw the detected circles.
