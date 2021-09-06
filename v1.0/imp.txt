@@ -1,0 +1,99 @@
+new APIS
+school:
+ update and delete school
+class:
+ delete class API
+ when we are deleting class we are deleting sections of it
+ then delete all section of student as well
+ update class API
+student:
+ update and delete student
+
+
+
+create pass param as examId
+roi config:-
+school
+clas -4
+subject- hindi
+
+lo learning objective
+
+examid will be in body for scan
+
+
+apis ready
+School:-
+   delete ,update school API
+   delete school :-
+
+requirements for delete school:-
+params:- schoolId
+functionality:-
+delete all the classes who is linked to schoolId
+delete all the student who is linked to schoolId
+delete all marks who is linked to schoolId
+
+   update school :- 
+   
+requirements for update school:-
+params:- schoolId
+body:-
+  what are the fields need to update school
+  school name
+  district
+  blockName
+  hmName
+  hmMobileNumber
+  noOfStudents
+  udisecode
+
+Classes:-we need to modify update api also becuase in update class we are updating class id but we are not making anychanges on student collection
+delete class API
+case1: we can delete class
+case2: we can delete class section 
+
+case1:
+ classId is not a unique Id
+ params:- schoolId,classId
+ we will take the combinaton of classId and schoolId and delete the classId from class collection
+ then we will delete the student who have that combination of schoolid and classId and then delete the student marks also
+  
+
+Student:-
+ delete,update student API
+ delete Student:-
+
+requirement for delete student:-
+params:- studentId
+functionality:-
+delete student
+delete students marks
+
+ update student:-
+
+scenario for update student:-
+params:schoolId
+body:
+ 1. name
+ 2. section -> we cant change section for that we need to change the student Id also because student Id is getting generated from section code.
+    if we will update section then we need to change studentId 
+    and then update all places where that studentId Is used? 
+    student Id is used in marks.
+    section is also used in marks
+ 3. studentclass ->[{
+     "classId"
+}]
+if we are updating a classId then we need to update classId on marks also
+
+current requirement for update: -> we will only update name
+if someone want to update class and section 
+then first call deletestudent API then createStudent
+
+
+
+
+
+
+
+
