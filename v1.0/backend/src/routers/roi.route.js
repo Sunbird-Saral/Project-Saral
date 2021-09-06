@@ -32,8 +32,19 @@ router.patch('/updateRoi/:roiId', async (req, res) => {
         if (!isValidOperation) {
             return res.status(400).send({ error: 'Invaid Updates' })
         }
-        let roi = await ROI.findOneAndUpdate({ roiId: req.params.roiId },req.body).lean();
-        if(!roi) res.status(404).send({"message": 'ROI is not updated.'})  
+        let lookup ={
+            roiId: req.params.roiId    
+        }
+        let roiData = await ROI.findOne(lookup);
+        if(!roiData) res.status(404).send({"message": "ROI Id does not exist."})
+        let updateObj = {}
+        if(req.body.roi){
+            updateObj["roi.top"] = !(req.body.roi.top) ? roiData.roi.top : req.body.roi.top
+            updateObj["roi.bottom"] = !(req.body.roi.bottom) ? roiData.roi.bottom : req.body.roi.bottom
+            updateObj["roi.left"] = !(req.body.roi.left) ? roiData.roi.left : req.body.roi.left
+            updateObj["roi.right"] = !(req.body.roi.right) ? roiData.roi.right : req.body.roi.right
+        }
+        await ROI.update(lookup,updateObj).lean();
         res.status(201).send({"message": 'ROI is updated successfully.'})  
     } catch (e){   
         res.status(400).send(e)
