@@ -109,7 +109,7 @@ router.delete('/deleteStudentByStudentId/:studentId', async (req, res) => {
         }
         await Student.deleteOne(lookup).lean()
         await Marks.findOneAndRemove(lookup).lean()
-        res.status(200).send(marks)
+        res.status(200).send({"message": "Student has been deleted."})
     } 
     catch(e){
         console.log(e);
