@@ -1,0 +1,182 @@
+---
+title: saral_ocr
+description: Saral Optical Character Recognition(OCR) Schema
+properties:
+  data:
+    description: |
+      Main data section of saral sheet to be scanned.
+    "$ref": "#/definitions/rootType"
+  additionalProperties: false
+  contact:
+    name: ekstep foundation
+    email: contact@ekstep.org
+  version: 1.5
+
+definitions:
+  cell:
+    description: |
+      Represents a complex cell structure which is a Region of Interest(ROI). 
+      Each of cell internally can have nested subCells based on the sheet layout.
+    type: object
+    properties:
+      id:
+        description: |
+          Unique identifier which can be used for sequencing.
+        type: integer
+        minimum: 1
+        unique: true
+      roi:
+        "$ref": "#/definitions/roiType"
+      name:
+        type: string
+      type:
+        "$ref": "#/definitions/cellType"
+      isLabel:
+        description: |
+          Some of the cells may carry printed text which can be marked as isLabel true.
+        type: boolean
+      tags:
+        description: |
+          Each of the cells can be tagged to categories based on requirement.
+          For example set of questions to be tagged as special category.
+        type: array
+        items:
+          type: string
+      format:
+        "$ref": "#/definitions/dataFormatType"
+      maxChars:
+        type: integer
+        minimum: 1
+      validators:
+        "$ref": "#/definitions/validatorsType"
+      subCells:
+        type: array
+        items:
+          "$ref": "#/definitions/cell"
+      response:
+        type: string
+      auditDtls:
+        type: object
+        properties:
+          user:
+            type: string
+        required:
+        - user
+    required:
+    - id
+    - roi
+    - type
+  cellType:
+    description: |
+      Represents type of cell with list of enumerated values.
+      Cell may contain Handwritten or printed text or QR Code or OMR to be recognized.
+    type: string
+    enum:
+    - Row_Cell
+    - Column_Cell
+    - QR_Code
+    - Hand_Written_Block_Text
+    - Hand_Written_Digits
+    - Hand_Written_Cursive_Text
+    - Printed_Digits
+    - Printed_Text
+    - Optical_Mark_Reader
+  pointType:
+    description: |
+      This represents a point on two dimensional sheet with X and Y coordiates.
+    type: object
+    properties:
+      xCord:
+        type: integer
+      yCord:
+        type: integer
+    required:
+    - xCord
+    - yCord
+  roiType:
+    description: |
+      This represents Region of interest(ROI) with four points in rectangular or square shape.
+      Each of these Region of interests are called as cells.
+    type: object
+    properties:
+      four:
+        "$ref": "#/definitions/pointType"
+      one:
+        "$ref": "#/definitions/pointType"
+      three:
+        "$ref": "#/definitions/pointType"
+      two:
+        "$ref": "#/definitions/pointType"
+    additionalProperties: false
+    required:
+    - four
+    - one
+    - three
+    - two
+  sheetType:
+    description: |
+      Sheet type identifies unique layout of the sheet. 
+      For example PAT_12_MARKSHEET is PAT(Periodical Assesment Sheet) 
+      covering 12 question and answers.
+    type: string
+    enum:
+    - PAT_12_MARKSHEET
+    - PAT_20_MARKSHEET
+    - PAT_34_MARKSHEET
+    - SAT_12_MARKSHEET
+    - SAT_20_MARKSHEET
+    - SAT_34_MARKSHEET
+    - ATTENDANCE_SHEET_20
+  validatorsType:
+    description: |
+      Array of validators with a name and regular expression which can be used for 
+      custom validations during scanning. Once scanned and translated to set of characters these 
+      configured validators can be used to validate the data scanned based on the cell.
+      Any violation of these validators can raise a flag on the screen and prompt user to 
+      correct the data.
+    type: array
+    items:
+      type: object
+      properties:
+        name:
+          type: string
+        regex:
+          type: string
+  identifiersType:
+    description: |
+      Array of name value paris that can be captured or associated during scanning process.
+      Typical usage of these identifiers are to capture teacherId,schoolId etc. for SAT or PAT assesment sheets.
+      Its kept generic to make sure it can be used for any other OCR use cases.
+    type: array
+    items:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+  rootType:
+    description: |
+      Root Type of the sheet includes sheet type , identiifers,
+      array of cell definitions.
+    type: object
+    properties:
+      sheet:
+        "$ref": "#/definitions/sheetType"
+      identifiers:
+        "$ref": "#/definitions/identifiersType"
+      cells:
+        type: array
+        items:
+          "$ref": "#/definitions/cell"
+    additionalProperties: false
+    required:
+    - sheet
+    - cells
+  dataFormatType:
+    description: |
+      This is highlevel data format of individual cells that are captured.
+    type: string
+    enum:
+    - string
+    - positiveInteger
