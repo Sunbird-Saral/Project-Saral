@@ -6,6 +6,7 @@ const studentRouter = require('./routers/student.route')
 const classRouter = require('./routers/class.route')
 const examRouter = require('./routers/exam.route')
 const markRouter = require('./routers/mark.route')
+const roiRouter = require('./routers/roi.route')
 
 const app = express()
 
@@ -24,8 +25,7 @@ app.use(studentRouter)
 app.use(classRouter)
 app.use(examRouter)
 app.use(markRouter)
-
-
+app.use(roiRouter)
 
 
 module.exports = app
