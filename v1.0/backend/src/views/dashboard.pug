@@ -1,0 +1,32 @@
+doctype html
+head
+  meta(name='viewport' content='width=device-width, initial-scale=1')
+  style
+    include ../public/stylesheets/style.css
+  title Create Report
+.container
+  .row
+    h2(style='text-align:center') Scan Report
+  h4(style='text-align:center') Filter
+  .subContainer  
+    form(action=`/generateReport`)
+      .row
+        select(name='subject', id='subject')
+          option(value='Subject') Subject
+          each subject in subjects
+            option(value=subject) #{subject}
+        //- input#subject(type='text' name='subject' placeholder='Subject..' required autocomplete="off")
+      .row
+        select(name='classId' id='classId')
+          option(value='Class Id') Class Id
+          each classId in classIds
+            option(value=classId) #{classId}
+        //- input#classId(type='text' name='classId' placeholder='Class Id..' autocomplete="off")
+      .row
+        select(name='schoolId' id='schoolId')
+          option(value='School Id') School Id
+          each schoolId in schoolIds
+            option(value=schoolId) #{schoolId}
+        //- input#schoolId(type='text' name='schoolId' placeholder='School Id..' style='margin-bottom: 20px' autocomplete="off")
+      .row
+        input(type='submit' value='Submit')
