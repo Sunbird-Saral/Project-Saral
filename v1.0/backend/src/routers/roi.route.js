@@ -61,6 +61,22 @@ router.delete('/deleteRoi/:roiId', async (req, res) => {
     }
 })
 
+router.get('/roi?', async (req, res) => {
+    try {
+        let lookup = {}
+        if(req.query)  lookup.roiId =  req.query.roiId
+        let roi = await ROI.find(lookup,{_id: 0,__v: 0 }).lean()
+        for(let data of roi){
+        delete data.createdAt
+        delete data.updatedAt
+        }
+        res.status(200).send(roi)
+    } catch (e){   
+        res.status(400).send(e)
+    }
+})
+
+
 
 
 module.exports = router
