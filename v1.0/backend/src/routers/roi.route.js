@@ -12,7 +12,7 @@ router.post('/createRoi/:examId', async (req, res) => {
             res.status(404).send({"message":'TestId Does not exist'})
         }
         const roiExist = await ROI.findOne({examId:req.params.examId}).lean() 
-        if(roiExist) res.status(400).send( {"message":`ROI already exist for ${req.params.examId}`}) 
+        if(!roiExist){
         let createObject = req.body
         createObject.roiId = uuidv1()
         createObject.examId = req.params.examId
@@ -25,6 +25,9 @@ router.post('/createRoi/:examId', async (req, res) => {
         }
         
         res.status(201).send(roiResponse)  
+    }else{
+        res.status(400).send( {"message":`ROI already exist for ${req.params.examId}`}) 
+    }
     } catch (e){   
         res.status(400).send(e)
     }
@@ -59,9 +62,9 @@ router.patch('/updateRoi/:examId', async (req, res) => {
     }
 })
 
-router.delete('/deleteRoi/:roiId', async (req, res) => {
+router.delete('/deleteRoi/:examId', async (req, res) => {
     try {
-        let roi = await ROI.findOneAndRemove({roiId: req.params.roiId})
+        let roi = await ROI.findOneAndRemove({examId: req.params.examId})
         if(!roi) res.status(404).send({"message": "ROI ID has been already deleted."})
         res.status(200).send({"message": "ROI has been deleted successfully."})
     } catch (e){   
