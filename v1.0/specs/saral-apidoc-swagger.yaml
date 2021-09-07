@@ -352,14 +352,14 @@ paths:
         "400":
           description: "unsuccessful operation"
             
-  /deleteRoi/{roiId}:
+  /deleteRoi/{examId}:
     delete:
       tags:
         - "ROI"
       summary: "Delete ROI"
       parameters:
       - in: path
-        name: roiId
+        name: examId
         type: string
         required: true
       responses:
@@ -395,6 +395,8 @@ definitions:
         type: string
       schoolId:
         type: string
+      state:
+        type: string
       district:
         type: string
       block:
@@ -422,6 +424,8 @@ definitions:
           name:
             type: string
           schoolId:
+            type: string
+          state:
             type: string
           district:
             type: string
@@ -465,6 +469,8 @@ definitions:
         type: string
       password: 
         type: string
+      state:
+        type: string
       district:
         type: string
       block: 
@@ -489,6 +495,8 @@ definitions:
           name: 
             type: string
           schoolId:
+            type: string
+          state:
             type: string
           district:
             type: string
@@ -516,6 +524,8 @@ definitions:
     type: object
     properties:
       name:
+        type: string
+      state:
         type: string
       district:
         type: string
@@ -915,3 +925,12 @@ definitions:
         type: string
       roi:
         $ref: "#/definitions/roi"
+        
+        
+      
+        
+      
+       
+  
+        
+
