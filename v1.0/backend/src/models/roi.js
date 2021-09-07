@@ -15,6 +15,12 @@ const ROISchema = new mongoose.Schema({
     extractionMethod: {
         type: String,
         enum: ["NUMERIC_CLASSIFICATION","CELL_OMR"]
+    },
+    examId:{
+        type: String,
+        required: true,
+        trim: true,
+        ref: 'Exam'
     }
 },{
     timestamps: true

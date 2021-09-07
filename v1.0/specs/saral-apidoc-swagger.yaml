@@ -2,7 +2,7 @@ swagger: "2.0"
 info:
   description: "Store School information"
   version: "1.0.0"
-  title: "SARALUP "
+  title: "SARAL APIs "
 host: "store.swagger.io"
 basePath: "/v1"
 tags:
@@ -328,7 +328,7 @@ paths:
         "404":
           description: "TestId Does not exist"
         "400":
-          description: "unsuccessful operation"
+          description: "ROI already exist for EXAM020208092021"
     
   /updateRoi/{roiId}:
     patch:
@@ -364,9 +364,9 @@ paths:
         required: true
       responses:
         "200":
-          description: "ROI is updated successfully."
+          description: "ROI has been deleted successfully."
         "404":
-          description: "ROI is not updated."
+          description: "ROI ID has been already deleted."
         "400":
           description: "unsuccessful operation"
   
@@ -377,7 +377,7 @@ paths:
       summary: "Get ROI data"
       parameters:
       - in: query
-        name: roiId
+        name: examId
         type: string
       responses:
         "200":
@@ -883,6 +883,8 @@ definitions:
         roiId:
           type: string
           format: uuid
+        examId:
+          type: string
         roi:
           $ref: '#/definitions/roi'
   
@@ -897,21 +899,14 @@ definitions:
   CreateROIResponse:
     type: object
     properties:
-      _id:
-        type: string
-      extractionMethod:
-        type: string
       roiId:
         type: string
         format: uuid
+      examId:
+        type: string
       createdAt:
         type: string
         format: date-time
-      updatedAt:
-        type: string
-        format: date-time
-      roi:
-        $ref: "#/definitions/roi"
         
   UpdateRoiBody:
     type: object
