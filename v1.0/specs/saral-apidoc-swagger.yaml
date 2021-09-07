@@ -330,14 +330,14 @@ paths:
         "400":
           description: "ROI already exist for EXAM020208092021"
     
-  /updateRoi/{roiId}:
+  /updateRoi/{examId}:
     patch:
       tags:
         - "ROI"
       summary: "Update ROI"
       parameters:
       - in: path
-        name: roiId
+        name: examId
         type: string
         required: true
       - in: body
@@ -346,7 +346,7 @@ paths:
           $ref: "#/definitions/UpdateRoiBody"
       responses:
         "200":
-          description: "ROI is updated successfully.'"
+          description: "ROI is updated successfully."
         "404":
           description: "ROI is not updated."
         "400":
@@ -915,12 +915,3 @@ definitions:
         type: string
       roi:
         $ref: "#/definitions/roi"
-        
-        
-      
-        
-      
-       
-  
-        
-

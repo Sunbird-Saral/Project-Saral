@@ -54,7 +54,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Aryman Vikram Birla\",\n    \"schoolId\": \"89\",\n    \"password\": \"tarento@123\",\n    \"district\": \"nainital\",\n    \"block\": \"haldwani\",\n    \"hmName\": \"acbc\",\n    \"hmMobileNo\": \"8006079875\",\n    \"noOfStudents\": \"100\",\n    \"udiseCode\": \"123\"\n\n}"
+							"raw": "{\n    \"name\": \"Aryman Vikram Birla\",\n    \"schoolId\": \"890\",\n    \"password\": \"tarento@123\",\n    \"district\": \"nainital\",\n    \"block\": \"haldwani\",\n    \"hmName\": \"acbc\",\n    \"hmMobileNo\": \"8006079875\",\n    \"noOfStudents\": \"100\",\n    \"udiseCode\": \"123\"\n\n}"
 						},
 						"url": {
 							"raw": "{{url}}/schools/create",
@@ -619,7 +619,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n     \"roi\":{\r\n       \"top\": \"67\",\r\n       \"left\": \"189\",\r\n       \"bottom\": \"63\",\r\n       \"right\": \"76\"\r\n    }\r\n}",
+							"raw": "{\r\n     \"roi\":{\r\n       \"top\": \"60\",\r\n       \"left\": \"189\",\r\n       \"bottom\": \"63\",\r\n       \"right\": \"76\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -627,18 +627,25 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/updateRoi/:roiId",
+							"raw": "{{url}}/updateRoi/:examId",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"updateRoi",
-								":roiId"
+								":examId"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
 							],
 							"variable": [
 								{
-									"key": "roiId",
-									"value": "1675db10-0f22-11ec-8be4-f7997e83d465"
+									"key": "examId",
+									"value": "EXAM020208092021"
 								}
 							]
 						}
@@ -662,7 +669,7 @@
 							"variable": [
 								{
 									"key": "roiId",
-									"value": "EXAM020208092021"
+									"value": "0958b0d0-0fd9-11ec-8e42-3a190d333deb"
 								}
 							]
 						}
@@ -675,7 +682,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/roi?roiId=756e0b40-0f4c-11ec-89ea-b48d7104d7a5",
+							"raw": "{{url}}/roi",
 							"host": [
 								"{{url}}"
 							],
@@ -684,8 +691,9 @@
 							],
 							"query": [
 								{
-									"key": "roiId",
-									"value": "756e0b40-0f4c-11ec-89ea-b48d7104d7a5"
+									"key": "examId",
+									"value": "EXAM020208092021",
+									"disabled": true
 								}
 							]
 						}

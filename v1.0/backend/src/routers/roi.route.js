@@ -30,7 +30,7 @@ router.post('/createRoi/:examId', async (req, res) => {
     }
 })
 
-router.patch('/updateRoi/:roiId', async (req, res) => {
+router.patch('/updateRoi/:examId', async (req, res) => {
     try {
         if (Object.keys(req.body).length === 0) res.status(400).send({ message: 'Validation error.' })
         const updates = Object.keys(req.body)
@@ -38,12 +38,12 @@ router.patch('/updateRoi/:roiId', async (req, res) => {
         const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
     
         if (!isValidOperation) {
-            return res.status(400).send({ error: 'Invaid Updates' })
+            return res.status(400).send({ error: 'Invalid Updates' })
         }
         let lookup ={
-            roiId: req.params.roiId    
+            examId: req.params.examId
         }
-        let roiData = await ROI.findOne(lookup);
+        let roiData = await ROI.findOne(lookup).lean();
         if(!roiData) res.status(404).send({"message": "ROI Id does not exist."})
         let updateObj = {}
         if(req.body.roi){
