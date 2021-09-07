@@ -101,7 +101,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"schoolId\": \"7\",\n    \"password\": \"tarento@123\",\n    \"classes\": false \n}"
+							"raw": "{\n    \"schoolId\": \"7747\",\n    \"password\": \"tarento@123\",\n    \"classes\": false \n}"
 						},
 						"url": {
 							"raw": "{{url}}/schools/login",
@@ -513,7 +513,7 @@
 							"basic": [
 								{
 									"key": "username",
-									"value": "7",
+									"value": "7747",
 									"type": "string"
 								},
 								{
@@ -663,6 +663,29 @@
 								{
 									"key": "roiId",
 									"value": "EXAM020208092021"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get ROI",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/roi?roiId=756e0b40-0f4c-11ec-89ea-b48d7104d7a5",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"roi"
+							],
+							"query": [
+								{
+									"key": "roiId",
+									"value": "756e0b40-0f4c-11ec-89ea-b48d7104d7a5"
 								}
 							]
 						}
