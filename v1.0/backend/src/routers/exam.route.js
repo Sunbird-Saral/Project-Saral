@@ -7,6 +7,7 @@ const Counter = require('../models/counter')
 const router = new express.Router()
 
 router.post('/addExamsByClass', auth,async (req, res) => {
+    try {
     const body = [...req.body]
     const exams = []
     for(let data of body){
@@ -20,14 +21,12 @@ router.post('/addExamsByClass', auth,async (req, res) => {
             schoolId
         })
         exams.push(examData)
+            let examResult = await Exam.insertMany(exams)
+            res.status(201).send(examResult)
     }else{
         res.status(400).send({"message": "Exam Id should be unique."})
     }
     }
-
-    try {
-       let examResult = await Exam.insertMany(exams)
-        res.status(201).send(examResult)
     } catch (e) {
         console.log(e);
         res.status(400).send(e)
