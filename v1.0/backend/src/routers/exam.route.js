@@ -1,34 +1,33 @@
 const express = require('express')
 const Exam = require('../models/exams')
-const ExamMetaData = require('../models/examMetaData')
+// const ExamMetaData = require('../models/examMetaData')
 const { auth } = require('../middleware/auth')
 const { getSubjectCode } = require('../utils/commonUtils')
+const Counter = require('../models/counter')
 const router = new express.Router()
 
 router.post('/addExamsByClass', auth,async (req, res) => {
     const body = [...req.body]
     const exams = []
-    const examsMeta = []
-    body.forEach(data => {
-        // let subjectCode = getSubjectCode(data.subject)
-        // let classId = data.classId !== "10" ? `0${data.classId}` : data.classId
-        let examDate = data.examDate.split('/').join('')
-        // let examId = `EXAM${classId}${subjectCode}${examDate}`    
-        // let examId =  await Counter.getValueForNextSequence("item_id")
-        let examId = 2
-        let schoolId = req.school.schoolId
-
+    for(let data of body){
+        let schoolId = req.school.schoolId   
+        let examExist = await Exam.find({schoolId, classId: data.classId,examDate: data.examDate,subject: data.subject})
+        if(!examExist.length){
+        let examId = await Counter.getValueForNextSequence("examId")
         const examData = new Exam({
             ...data,
-            examId,
+            examId: examId,
             schoolId
         })
         exams.push(examData)
-        })
-    
+    }else{
+        res.status(400).send({"message": "Exam Id should be unique."})
+    }
+    }
+
     try {
-        await Exam.insertMany(exams)
-        res.status(201).send(exams)
+       let examResult = await Exam.insertMany(exams)
+        res.status(201).send(examResult)
     } catch (e) {
         console.log(e);
         res.status(400).send(e)
@@ -76,7 +75,7 @@ router.delete('/deleteExamByExamIdAndClassId/:examId', auth, async (req, res) =>
         console.log(e);
         res.status(400).send(e)
     }
-    
+
 })
 
 router.patch('/updateExam/:examId', auth, async (req, res) => {
@@ -84,14 +83,14 @@ router.patch('/updateExam/:examId', auth, async (req, res) => {
         const updates = Object.keys(req.body)
         const allowedUpdates = ['subject', 'examLO','examDate', 'totalMarks', 'questions']
         const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
-        
+    
         if(!isValidOperation) {
             return res.status(400).send({ message: 'Invaild Updates' })
         }
         let match={
             examId: req.params.examId,
             schoolId: req.school.schoolId
-    } 
+        }
         let update = { $set: req.body }
         const exam = await Exam.find(match).lean()
         if(exam.length){
