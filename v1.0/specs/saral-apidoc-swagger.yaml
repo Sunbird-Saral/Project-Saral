@@ -250,40 +250,41 @@ paths:
         "200":
           description: "Data Saved Successfully"
   
-  /getExamsByClass:
+  /getExamsByClass/{classId}:
     post:
       tags:
         - "Exam"
       summary: "Get Exam Details by ClassId"
       parameters:
-      - in: body
-        name: body
-        schema:
-          type: object
-          properties:
-            classId:
-              type: string
+        - in: path
+          name: classId
+          type: string
+          required: true
+        - in: query
+          name: subject
+          type: string
+        - in: query
+          name: examDate
+          type: string
+        
       responses:
         "200":
           description: "successful operation"
           schema:
             $ref: "#/definitions/GetExamByClassResponse"
+        "404":
+          description: "Exam dose not exist for 520"
   
-  /deleteExamByExamIdAndClassId:
+  /deleteExamByExamIdAndClassId/{examId}:
     delete:
       tags:
         - "Exam"
       summary: "Delete exam by class Id"
       parameters:
-      - in: body
-        name: body
-        schema:
-          type: object
-          properties:
-            examId:
-              type: string
-            classId:
-              type: string
+        - in: path
+          name: examId
+          type: string
+          required: true
       responses:
         "200":
           description: "successful operation"
@@ -305,6 +306,28 @@ paths:
           description: "successful operation"
           schema:
             $ref: "#/definitions/CreateExamBodyResponse"
+    
+  /updateExam/{examId}:
+    patch:
+      tags:
+        - "Exam"
+      summary: "Update Exam for a class"
+      parameters:
+      - in: path
+        name: examId
+        type: string
+        required: true
+      - in: body
+        name: body
+        schema:
+          $ref: "#/definitions/UpdateExamBody"
+      responses:
+        "200": 
+          description: "Exam is Updated Successfully."
+        "404":
+          description: "Exam Id does not exist."
+        "400": 
+          description: "Unsuccessful operation"
           
   /createRoi/{examId}:
     post:
@@ -624,8 +647,6 @@ definitions:
         $ref: '#/definitions/CreateStudentResponse' 
       exams: 
         $ref: '#/definitions/GetExamByClassResponse' 
-      examMetaData:
-        $ref: '#/definitions/ExamsMetadata' 
       _id:
         type: string
         description: unique id
@@ -747,13 +768,12 @@ definitions:
   CreateExamBodyResponse:
       type: object
       properties:
-        exam:
-          $ref: '#/definitions/GetExamByClassResponse' 
-        examsMeta:
-          $ref: '#/definitions/ExamsMetadata' 
         _id:
           type: string
-          description: unique Id
+        subject:
+          type: string
+        examLo:
+          type: string
         classId:
           type: string
           description: Class Id
@@ -763,19 +783,41 @@ definitions:
         totalMarks:
           type: string
           description: Total Marks
+        questions:
+          $ref: '#/definitions/Questions' 
         examId:
           type: string
           description: Exam Id
+        schoolId:
+          type: string
+          description: School Id
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
           
+  UpdateExamBody:
+    type: object
+    properties:
+      subject:
+        type: string
+      examLO:
+        type: string
+      examDate:
+        type: string
+      totalMarks:
+        type: string
+      questions: 
+        $ref: '#/definitions/Questions' 
+        
   GetExamByClassResponse:
     type: array
     items:
       type: object
       properties: 
-        _id: 
-          type: string
-          description: unique id
-        examName:
+        subject:
           type: string
           description: Exam Name
         examLO: 
@@ -787,18 +829,17 @@ definitions:
         examDate:
           type: string
           description: Date of exam
+        totalMarks:
+          type: string
+          description: Total Marks
+        questions:
+          $ref: '#/definitions/Questions'  
         examId:
           type: string
           description: Exam Id
-        uniqueId:
+        schoolId:
           type: string
           description: Unique Id
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
           
   DeleteExamByExamIdAndClassIdResponse:
     type: object
@@ -806,7 +847,7 @@ definitions:
       _id: 
         type: string
         description: unique id
-      examName:
+      subject:
         type: string
         description: Exam Name
       examLO: 
@@ -818,12 +859,17 @@ definitions:
       examDate:
         type: string
         description: Date of exam
+      totalMarks:
+        type: string
+        description: Total marks of exam
+      questions:
+        $ref : '#/definitions/Questions' 
       examId:
         type: string
         description: Exam Id
-      uniqueId:
+      schoolId:
         type: string
-        description: Unique Id
+        description: School Id
       createdAt:
         type: string
         format: date-time
@@ -836,15 +882,15 @@ definitions:
     items:
       type: object
       properties:
-        examName:
+        subject:
           type: string
         examLo:
           type: string
         classId:
           type: string
-        examDate:
+        schoolId:
           type: string
-        totalMarks:
+        examDate:
           type: string
         questions:
           $ref: '#/definitions/Questions' 
@@ -929,8 +975,3 @@ definitions:
         
       
         
-      
-       
-  
-        
-
