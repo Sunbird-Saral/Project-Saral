@@ -89,9 +89,9 @@ router.post('/fetchStudentsandExamsByQuery', auth, async (req, res) => {
     try {
         const students = await Student.find(match)
         const exams = await Exam.find(examMatch)
-        const examMetaData = await ExamMetaData.find(examMatch)
+        // const examMetaData = await ExamMetaData.find(examMatch)
         
-        res.send({students, exams, examMetaData})
+        res.send({students, exams})
     } catch (e) {
         console.log(e);
         res.status(500).send()
