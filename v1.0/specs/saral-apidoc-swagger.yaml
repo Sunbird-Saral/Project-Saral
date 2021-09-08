@@ -116,6 +116,42 @@ paths:
         "400":
           description: "unsuccessful operation"
          
+  /addClasses:
+    post:
+      tags:
+      - Class
+      summary: "Create Class"
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: "#/definitions/addClassesBody"
+      responses:
+        "200":
+          description: "successful operation"
+        "400":
+          description: "unsuccessful operation"
+        "404":
+          description: ""
+  
+  /updateClass:
+    post:
+      tags:
+      - Class
+      summary: "Update Class"
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: "#/definitions/updateClassBody"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/updateClassResponse"
+        "400":
+          description: "unsuccessful operation"
+        
   
   /fetchStudentsByQuery:
     post:
@@ -251,7 +287,7 @@ paths:
           description: "Data Saved Successfully"
   
   /getExamsByClass/{classId}:
-    post:
+    get:
       tags:
         - "Exam"
       summary: "Get Exam Details by ClassId"
@@ -329,16 +365,12 @@ paths:
         "400": 
           description: "Unsuccessful operation"
           
-  /createRoi/{examId}:
+  /createRoi:
     post:
       tags:
         - "ROI"
       summary: "Create ROI"
       parameters:
-      - in: path
-        name: examId
-        type: string
-        required: true
       - in: body
         name: body
         schema:
@@ -353,14 +385,14 @@ paths:
         "400":
           description: "ROI already exist for EXAM020208092021"
     
-  /updateRoi/{examId}:
+  /updateRoi/{roiId}:
     patch:
       tags:
         - "ROI"
       summary: "Update ROI"
       parameters:
       - in: path
-        name: examId
+        name: roiId
         type: string
         required: true
       - in: body
@@ -375,14 +407,14 @@ paths:
         "400":
           description: "unsuccessful operation"
             
-  /deleteRoi/{examId}:
+  /deleteRoi/{roiId}:
     delete:
       tags:
         - "ROI"
       summary: "Delete ROI"
       parameters:
       - in: path
-        name: examId
+        name: roiId
         type: string
         required: true
       responses:
@@ -399,9 +431,11 @@ paths:
       - "ROI"
       summary: "Get ROI data"
       parameters:
-      - in: query
-        name: examId
-        type: string
+      - in: body
+        name: body
+        schema:
+          $ref: "#/definitions/GetROIBody"
+
       responses:
         "200":
           description: "successful operation"
@@ -929,6 +963,12 @@ definitions:
       right:
         type: string
   
+  GetROIBody:
+    type: object
+    properties:
+      examId:
+        type: string
+  
   GetROIResponse:
      type: array
      items:
@@ -937,9 +977,12 @@ definitions:
         extractionMethod:
           type: string
         roiId:
+          type: number
+        classId:
           type: string
-          format: uuid
-        examId:
+        subject:
+          type: string
+        state:
           type: string
         roi:
           $ref: '#/definitions/roi'
@@ -947,6 +990,10 @@ definitions:
   CreateROIBody:
     type: object
     properties:
+      subject:
+        type: string
+      classId:
+        type: string
       roi:
         $ref: '#/definitions/roi'
       extractionMethod:
@@ -956,9 +1003,12 @@ definitions:
     type: object
     properties:
       roiId:
+        type: number
+      classId:
         type: string
-        format: uuid
-      examId:
+      subject:
+        type: string
+      state:
         type: string
       createdAt:
         type: string
@@ -972,6 +1022,52 @@ definitions:
       roi:
         $ref: "#/definitions/roi"
         
+  sections:
+    type: array
+    items:
+      type: object
+      properties: 
+        section:
+          type: string
         
-      
-        
+  addClassesBody:
+    type: array
+    items:
+      type: object
+      properties: 
+        classId:
+          type: string
+        sections:
+          $ref: "#/definitions/sections"
+          
+  updateClassBody:
+    type: object
+    properties:
+      classId:
+        type: string
+      sections: 
+          $ref: "#/definitions/sections"
+          
+  updateClassResponse:
+    type: object
+    properties:
+      sections:
+        $ref: "#/definitions/sections"
+      _id:
+        type: string
+      classId:
+        type: string
+      className:
+        type: string
+      schoolId:
+        type: string
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+    
+  
+
+    
