@@ -16,11 +16,20 @@ const ROISchema = new mongoose.Schema({
         type: String,
         enum: ["NUMERIC_CLASSIFICATION","CELL_OMR"]
     },
-    examId:{
+    classId:{
         type: String,
         required: true,
-        trim: true,
-        ref: 'Exam'
+        trim: true
+    },
+    subject:{
+        type: String,
+        required: true,
+        trim: true
+    },
+    state:{
+        type: String,
+        required: true,
+        trim: true
     }
 },{
     timestamps: true
