@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "3ee76ab5-025d-4bc2-8f13-12f5dc156f3a",
-		"name": "UP_SARALDATA",
+		"name": "SARALDATA",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -54,7 +54,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Aryman Vikram Birla\",\n    \"schoolId\": \"890\",\n    \"password\": \"tarento@123\",\n    \"district\": \"nainital\",\n    \"block\": \"haldwani\",\n    \"hmName\": \"acbc\",\n    \"hmMobileNo\": \"8006079875\",\n    \"noOfStudents\": \"100\",\n    \"udiseCode\": \"123\"\n\n}"
+							"raw": "{\n    \"name\": \"Aryman Vikram Birla\",\n    \"schoolId\": \"898\",\n    \"password\": \"tarento@123\",\n    \"district\": \"nainital\",\n    \"block\": \"haldwani\",\n    \"hmName\": \"acbc\",\n    \"hmMobileNo\": \"8006079875\",\n    \"noOfStudents\": \"100\",\n    \"udiseCode\": \"123\"\n\n}"
 						},
 						"url": {
 							"raw": "{{url}}/schools/create",
@@ -101,7 +101,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"schoolId\": \"7747\",\n    \"password\": \"tarento@123\",\n    \"classes\": false \n}"
+							"raw": "{\n    \"schoolId\": \"8980\",\n    \"password\": \"tarento@123\",\n    \"classes\": false \n}"
 						},
 						"url": {
 							"raw": "{{url}}/schools/login",
@@ -265,7 +265,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{   \n    \"classId\": \"2\"\n}"
+							"raw": "{   \n    \"classId\": \"5\"\n}"
 						},
 						"url": {
 							"raw": "{{url}}/fetchStudentsandExamsByQuery",
@@ -391,7 +391,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"classId\": \"2\",\n    \"sections\": [\n        {\n            \"section\": \"B\"\n        }\n    ]\n}"
+							"raw": "{\n    \"classId\": \"2\",\n    \"sections\": [\n        {\n            \"section\": \"E\"\n        }\n    ]\n}"
 						},
 						"url": {
 							"raw": "{{url}}/updateClass",
@@ -414,7 +414,14 @@
 					"name": "Add Exam by Class",
 					"request": {
 						"auth": {
-							"type": "noauth"
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTMyZmEzNjk2ZTdjNzUyMzg3NWVhNzEiLCJpYXQiOjE2MzEwMTg5NzR9.V-W6moHpuAFvIkBC-86AHkeVwCl_H0s2K1sg9qq_bXQ",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [
@@ -426,7 +433,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "[{\n    \"examName\": \"Math\",\n    \"examLO\": \"Math\",\n    \"classId\": \"2\",\n    \"examDate\": \"08/09/2021\",\n    \"totalMarks\": 20,\n    \"questions\" : [\n        {\n            \"questionId\": 1,\n            \"indicatorTitle\": \"L0-1\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 2,\n            \"indicatorTitle\": \"L0-2\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 3,\n            \"indicatorTitle\": \"L0-3\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 4,\n            \"indicatorTitle\": \"L0-4\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 5,\n            \"indicatorTitle\": \"L0-5\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 6,\n            \"indicatorTitle\": \"L0-6\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 7,\n            \"indicatorTitle\": \"L0-7\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 8,\n            \"indicatorTitle\": \"L0-8\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 9,\n            \"indicatorTitle\": \"L0-9\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 10,\n            \"indicatorTitle\": \"L0-10\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 11,\n            \"indicatorTitle\": \"L0-11\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 12,\n            \"indicatorTitle\": \"L0-12\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 13,\n            \"indicatorTitle\": \"L0-13\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 14,\n            \"indicatorTitle\": \"L0-14\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 15,\n            \"indicatorTitle\": \"L0-15\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 16,\n            \"indicatorTitle\": \"L0-16\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 17,\n            \"indicatorTitle\": \"L0-17\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 18,\n            \"indicatorTitle\": \"L0-18\",\n            \"questionMarks\": 1.0\n        },{\n            \"questionId\": 19,\n            \"indicatorTitle\": \"L0-19\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 20,\n            \"indicatorTitle\": \"L0-20\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 21,\n            \"indicatorTitle\": \"L0-21\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 22,\n            \"indicatorTitle\": \"L0-22\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 23,\n            \"indicatorTitle\": \"L0-23\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 24,\n            \"indicatorTitle\": \"L0-24\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 25,\n            \"indicatorTitle\": \"L0-25\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 26,\n            \"indicatorTitle\": \"L0-26\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 27,\n            \"indicatorTitle\": \"L0-27\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 28,\n            \"indicatorTitle\": \"L0-28\",\n            \"questionMarks\": 1.0\n        },{\n            \"questionId\": 29,\n            \"indicatorTitle\": \"L0-29\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 30,\n            \"indicatorTitle\": \"L0-30\",\n            \"questionMarks\": 1.0\n        }\n    ]\n}]"
+							"raw": "[{\n    \"subject\": \"Math\",\n    \"examLO\": \"Math\",\n    \"classId\": \"8004\",\n    \"examDate\": \"08/01/2001\",\n    \"totalMarks\": 20,\n    \"questions\" : [\n        {\n            \"questionId\": 1,\n            \"indicatorTitle\": \"L0-1\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 2,\n            \"indicatorTitle\": \"L0-2\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 3,\n            \"indicatorTitle\": \"L0-3\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 4,\n            \"indicatorTitle\": \"L0-4\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 5,\n            \"indicatorTitle\": \"L0-5\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 6,\n            \"indicatorTitle\": \"L0-6\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 7,\n            \"indicatorTitle\": \"L0-7\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 8,\n            \"indicatorTitle\": \"L0-8\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 9,\n            \"indicatorTitle\": \"L0-9\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 10,\n            \"indicatorTitle\": \"L0-10\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 11,\n            \"indicatorTitle\": \"L0-11\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 12,\n            \"indicatorTitle\": \"L0-12\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 13,\n            \"indicatorTitle\": \"L0-13\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 14,\n            \"indicatorTitle\": \"L0-14\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 15,\n            \"indicatorTitle\": \"L0-15\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 16,\n            \"indicatorTitle\": \"L0-16\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 17,\n            \"indicatorTitle\": \"L0-17\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 18,\n            \"indicatorTitle\": \"L0-18\",\n            \"questionMarks\": 1.0\n        },{\n            \"questionId\": 19,\n            \"indicatorTitle\": \"L0-19\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 20,\n            \"indicatorTitle\": \"L0-20\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 21,\n            \"indicatorTitle\": \"L0-21\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 22,\n            \"indicatorTitle\": \"L0-22\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 23,\n            \"indicatorTitle\": \"L0-23\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 24,\n            \"indicatorTitle\": \"L0-24\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 25,\n            \"indicatorTitle\": \"L0-25\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 26,\n            \"indicatorTitle\": \"L0-26\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 27,\n            \"indicatorTitle\": \"L0-27\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 28,\n            \"indicatorTitle\": \"L0-28\",\n            \"questionMarks\": 1.0\n        },{\n            \"questionId\": 29,\n            \"indicatorTitle\": \"L0-29\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 30,\n            \"indicatorTitle\": \"L0-30\",\n            \"questionMarks\": 1.0\n        }\n    ]\n},\n{\n    \"subject\": \"Hindi\",\n    \"examLO\": \"Hindi\",\n    \"classId\": \"5\",\n    \"examDate\": \"08/09/2001\",\n    \"totalMarks\": 20,\n    \"questions\" : [\n        {\n            \"questionId\": 1,\n            \"indicatorTitle\": \"L0-1\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 2,\n            \"indicatorTitle\": \"L0-2\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 3,\n            \"indicatorTitle\": \"L0-3\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 4,\n            \"indicatorTitle\": \"L0-4\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 5,\n            \"indicatorTitle\": \"L0-5\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 6,\n            \"indicatorTitle\": \"L0-6\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 7,\n            \"indicatorTitle\": \"L0-7\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 8,\n            \"indicatorTitle\": \"L0-8\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 9,\n            \"indicatorTitle\": \"L0-9\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 10,\n            \"indicatorTitle\": \"L0-10\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 11,\n            \"indicatorTitle\": \"L0-11\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 12,\n            \"indicatorTitle\": \"L0-12\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 13,\n            \"indicatorTitle\": \"L0-13\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 14,\n            \"indicatorTitle\": \"L0-14\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 15,\n            \"indicatorTitle\": \"L0-15\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 16,\n            \"indicatorTitle\": \"L0-16\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 17,\n            \"indicatorTitle\": \"L0-17\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 18,\n            \"indicatorTitle\": \"L0-18\",\n            \"questionMarks\": 1.0\n        },{\n            \"questionId\": 19,\n            \"indicatorTitle\": \"L0-19\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 20,\n            \"indicatorTitle\": \"L0-20\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 21,\n            \"indicatorTitle\": \"L0-21\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 22,\n            \"indicatorTitle\": \"L0-22\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 23,\n            \"indicatorTitle\": \"L0-23\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 24,\n            \"indicatorTitle\": \"L0-24\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 25,\n            \"indicatorTitle\": \"L0-25\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 26,\n            \"indicatorTitle\": \"L0-26\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 27,\n            \"indicatorTitle\": \"L0-27\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 28,\n            \"indicatorTitle\": \"L0-28\",\n            \"questionMarks\": 1.0\n        },{\n            \"questionId\": 29,\n            \"indicatorTitle\": \"L0-29\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 30,\n            \"indicatorTitle\": \"L0-30\",\n            \"questionMarks\": 1.0\n        }\n    ]\n}]"
 						},
 						"url": {
 							"raw": "{{url}}/addExamsByClass",
@@ -448,7 +455,17 @@
 						}
 					},
 					"request": {
-						"method": "POST",
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTMyZmEzNjk2ZTdjNzUyMzg3NWVhNzEiLCJpYXQiOjE2MzEwMTg5NzR9.V-W6moHpuAFvIkBC-86AHkeVwCl_H0s2K1sg9qq_bXQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -459,15 +476,27 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"examId\": \"EXAM050115012021\",\n    \"classId\": \"5\"\n}"
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
-							"raw": "{{url}}/deleteExamByExamIdAndClassId",
+							"raw": "{{url}}/deleteExamByExamIdAndClassId/:examId",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"deleteExamByExamIdAndClassId"
+								"deleteExamByExamIdAndClassId",
+								":examId"
+							],
+							"variable": [
+								{
+									"key": "examId",
+									"value": "EXAM020209112021"
+								}
 							]
 						}
 					},
@@ -475,8 +504,21 @@
 				},
 				{
 					"name": "Get Exams by Class",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
-						"method": "POST",
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTMyZmEzNjk2ZTdjNzUyMzg3NWVhNzEiLCJpYXQiOjE2MzEwMTg5NzR9.V-W6moHpuAFvIkBC-86AHkeVwCl_H0s2K1sg9qq_bXQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -489,12 +531,74 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{url}}/getExamsByClass",
+							"raw": "{{url}}/getExamsByClas/:classId",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"getExamsByClass"
+								"getExamsByClas",
+								":classId"
+							],
+							"query": [
+								{
+									"key": "subject",
+									"value": "Math",
+									"disabled": true
+								},
+								{
+									"key": "examDate",
+									"value": " 08/09/2001",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "classId",
+									"value": "52"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update exam",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTMyZmEzNjk2ZTdjNzUyMzg3NWVhNzEiLCJpYXQiOjE2MzEwMTg5NzR9.V-W6moHpuAFvIkBC-86AHkeVwCl_H0s2K1sg9qq_bXQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \"examLO\": \"Hindis\",\r\n    \"subject\": \"Hindi\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/updateExam/:examId",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"updateExam",
+								":examId"
+							],
+							"variable": [
+								{
+									"key": "examId",
+									"value": "2"
+								}
 							]
 						}
 					},
@@ -619,7 +723,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n     \"roi\":{\r\n       \"top\": \"60\",\r\n       \"left\": \"189\",\r\n       \"bottom\": \"63\",\r\n       \"right\": \"76\"\r\n    }\r\n}",
+							"raw": "{\r\n     \"roi\":{\r\n       \"top\": \"69\",\r\n       \"left\": \"189\",\r\n       \"bottom\": \"60\",\r\n       \"right\": \"76\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -658,18 +762,18 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/deleteRoi/:roiId",
+							"raw": "{{url}}/deleteRoi/:examId",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"deleteRoi",
-								":roiId"
+								":examId"
 							],
 							"variable": [
 								{
-									"key": "roiId",
-									"value": "0958b0d0-0fd9-11ec-8e42-3a190d333deb"
+									"key": "examId",
+									"value": "EXAM020208092021"
 								}
 							]
 						}
@@ -682,7 +786,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/roi",
+							"raw": "{{url}}/roi?examId=EXAM020208092021",
 							"host": [
 								"{{url}}"
 							],
@@ -692,8 +796,7 @@
 							"query": [
 								{
 									"key": "examId",
-									"value": "EXAM020208092021",
-									"disabled": true
+									"value": "EXAM020208092021"
 								}
 							]
 						}
