@@ -68,7 +68,7 @@ router.delete('/deleteExamByExamIdAndClassId/:examId', auth, async (req, res) =>
         if (!exam) {
             res.status(404).send({ "message": 'Exam Id does not exist.' })
         }
-        res.send(exam)
+        res.status(200).send({"message": "Exam has been deleted successfully."})
     }
     catch (e) {
         console.log(e);
