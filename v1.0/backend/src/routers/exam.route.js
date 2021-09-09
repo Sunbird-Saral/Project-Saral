@@ -1,31 +1,32 @@
 const express = require('express')
 const Exam = require('../models/exams')
-// const ExamMetaData = require('../models/examMetaData')
 const { auth } = require('../middleware/auth')
 const { getSubjectCode } = require('../utils/commonUtils')
 const Counter = require('../models/counter')
 const router = new express.Router()
 
-router.post('/addExamsByClass', auth,async (req, res) => {
-    try {
+router.post('/addExamsByClass', auth, async (req, res) => {
     const body = [...req.body]
     const exams = []
-    for(let data of body){
         let schoolId = req.school.schoolId   
-        let examExist = await Exam.find({schoolId, classId: data.classId,examDate: data.examDate,subject: data.subject})
-        if(!examExist.length){
+    
+    for (let i = 0; i < body.length - 1; i++) {
+        let examExist = await Exam.find({ schoolId, classId: body[i].classId, examDate: body[i].examDate, subject: body[i].subject })
+        if (examExist.length) continue
         let examId = await Counter.getValueForNextSequence("examId")
         const examData = new Exam({
-            ...data,
-            examId: examId,
+            ...body[i],
+            examId,
             schoolId
         })
         exams.push(examData)
-            let examResult = await Exam.insertMany(exams)
-            res.status(201).send(examResult)
+    }
+    try {
+        if(exams.length){
+        await Exam.insertMany(exams)
+        res.status(201).send({ exams })
     }else{
         res.status(400).send({"message": "Exam Id should be unique."})
-    }
     }
     } catch (e) {
         console.log(e);
@@ -109,3 +110,34 @@ router.patch('/updateExam/:examId', auth, async (req, res) => {
 
 
 module.exports = router
+
+
+// router.post('/addExamsByClass', auth,async (req, res) => {
+//     try {
+//     const body = [...req.body]
+//     const exams = []
+//     for(let data of body){
+//         let schoolId = req.school.schoolId   
+//         let examExist = await Exam.find({schoolId, classId: data.classId,examDate: data.examDate,subject: data.subject})
+//         console.log(examExist.length)
+//         if(!examExist.length){
+//         // let examId = await Counter.getValueForNextSequence("examId")
+//         const examData = new Exam({
+//             ...data,
+//             examId: await Counter.getValueForNextSequence("examId"),
+//             schoolId
+//         })
+//         exams.push(examData)
+//         console.log(exams.length)
+//             let examResult = await Exam.insertMany(exams)
+//             console.log(examResult)
+//             res.status(201).send(examResult)
+//     }else{
+//         res.status(400).send({"message": "Exam Id should be unique."})
+//     }
+//     }
+//     } catch (e) {
+//         console.log(e);
+//         res.status(400).send(e)
+//     }
+// })
