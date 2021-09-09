@@ -1,0 +1,13 @@
+[{
+  "subject": "Math",
+  "classId": "2",
+  "roi": {
+    "top": "32",
+    "left": "119",
+    "bottom": "63",
+    "right": "76"
+  },
+  "extractionMethod": "NUMERIC_CLASSIFICATION",
+  "state": "uttrakhand",
+  "roiId": "1"
+}]

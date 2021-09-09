@@ -1,27 +1,23 @@
 [{
-  "_id": "613988aa4630ae0f98e0ebc1",
-  "name": "Aryman Vikram Birla",
-  "schoolId": "6",
-  "password": "$2a$08$XuUYmIMIg3.edCDi/dGuLOmt42vbgqM9rVXGHk.LBssrc0IqbE3ly",
-  "state": "KA",
-  "district": "nainital",
-  "block": "haldwani",
-  "hmName": "acbc",
-  "hmMobileNo": "8006079875",
-  "noOfStudents": "100",
-  "udiseCode": "6",
-  "__v": 0
-},{
-  "_id": "61398a294630ae0f98e0ebc8",
   "name": "D.A.V",
-  "schoolId": "7",
-  "password": "$2a$08$Voi0G9mlbQ8cdyVVYHDiKuf15LW1O6BuLRhTFuPM7ppgw3imp7fWG",
+  "schoolId": "1",
+  "password": "$2a$08$x9WEpdMERQLTfo8Ai0zG3OXXBmgcHoPQeT1PD9Kh1MI.yae..L0yW",
   "state": "uttrakhand",
   "district": "nainital",
   "block": "haldwani",
   "hmName": "acbc",
   "hmMobileNo": "8006079875",
   "noOfStudents": "100",
-  "udiseCode": "7",
-  "__v": 0
+  "udiseCode": "1"
+},{
+  "name": "Aryman",
+  "schoolId": "2",
+  "password": "$2a$08$sn2Picwnj8w9FLj4Jfcx8OC57iXGWk94mGiIHcWZXh8m3qm8bQogy",
+  "state": "uttrakhand",
+  "district": "nainital",
+  "block": "haldwani",
+  "hmName": "acbc",
+  "hmMobileNo": "8006079875",
+  "noOfStudents": "100",
+  "udiseCode": "2"
 }]
