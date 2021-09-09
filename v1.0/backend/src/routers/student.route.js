@@ -1,7 +1,6 @@
 const express = require('express')
 const Student = require('../models/students')
 const Exam = require('../models/exams')
-const ExamMetaData = require('../models/examMetaData')
 const Marks = require('../models/marks')
 const { auth } = require('../middleware/auth')
 const { getSectionCode } = require('../utils/commonUtils')
