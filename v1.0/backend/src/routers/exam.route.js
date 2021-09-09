@@ -8,8 +8,8 @@ const router = new express.Router()
 router.post('/addExamsByClass', auth, async (req, res) => {
     const body = [...req.body]
     const exams = []
-        let schoolId = req.school.schoolId   
-    
+    let schoolId = req.school.schoolId
+
     for (let i = 0; i < body.length - 1; i++) {
         let examExist = await Exam.find({ schoolId, classId: body[i].classId, examDate: body[i].examDate, subject: body[i].subject })
         if (examExist.length) continue
@@ -22,12 +22,12 @@ router.post('/addExamsByClass', auth, async (req, res) => {
         exams.push(examData)
     }
     try {
-        if(exams.length){
-        await Exam.insertMany(exams)
-        res.status(201).send({ exams })
-    }else{
-        res.status(400).send({"message": "Exam Id should be unique."})
-    }
+        if (exams.length) {
+            await Exam.insertMany(exams)
+            res.status(201).send({ exams })
+        } else {
+            res.status(400).send({ "message": "Exam Id should be unique." })
+        }
     } catch (e) {
         console.log(e);
         res.status(400).send(e)
@@ -47,15 +47,15 @@ router.get('/getExamsByClas/:classId', auth, async (req, res) => {
     if (req.query.examDate) {
         match.examDate = req.query.examDate
     }
-    
+
     try {
         const exams = await Exam.find(match, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 }).lean()
-        
+
         if (!exams.length) {
-            res.status(404).send({"message":`Exam dose not exist for ${req.params.classId}`}) 
+            res.status(404).send({ "message": `Exam dose not exist for ${req.params.classId}` })
         }
         res.send(exams)
-    } 
+    }
     catch (e) {
         console.log(e);
         res.status(400).send(e)
@@ -69,7 +69,7 @@ router.delete('/deleteExamByExamIdAndClassId/:examId', auth, async (req, res) =>
         if (!exam) {
             res.status(404).send({ "message": 'Exam Id does not exist.' })
         }
-        res.status(200).send({"message": "Exam has been deleted successfully."})
+        res.status(200).send({ "message": "Exam has been deleted successfully." })
     }
     catch (e) {
         console.log(e);
@@ -81,25 +81,25 @@ router.delete('/deleteExamByExamIdAndClassId/:examId', auth, async (req, res) =>
 router.patch('/updateExam/:examId', auth, async (req, res) => {
     try {
         const updates = Object.keys(req.body)
-        const allowedUpdates = ['subject', 'examLO','examDate', 'totalMarks', 'questions']
+        const allowedUpdates = ['subject', 'examLO', 'examDate', 'totalMarks', 'questions']
         const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
-    
-        if(!isValidOperation) {
+
+        if (!isValidOperation) {
             return res.status(400).send({ message: 'Invaild Updates' })
         }
-        let match={
+        let match = {
             examId: req.params.examId,
             schoolId: req.school.schoolId
         }
         let update = { $set: req.body }
         const exam = await Exam.find(match).lean()
-        if(exam.length){
+        if (exam.length) {
             await Exam.updateOne(match, update).lean().exec();
-            res.status(200).send({"message": "Exam has been updated successfully."})
-        }else{
+            res.status(200).send({ "message": "Exam has been updated successfully." })
+        } else {
             res.status(404).send({ "message": 'Exam Id does not exist.' })
         }
-       
+
     }
     catch (e) {
         console.log(e);
