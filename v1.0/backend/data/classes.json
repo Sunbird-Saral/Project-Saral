@@ -1,0 +1,28 @@
+[{
+  "_id": "613989124630ae0f98e0ebc3",
+  "sections": [
+    {
+      "section": "D"
+    }
+  ],
+  "classId": "2",
+  "className": "Class-2",
+  "schoolId": "6",
+  "__v": 0
+},
+{
+  "_id": "61398a4b4630ae0f98e0ebc9",
+  "sections": [
+    {
+      "section": "D"
+    },
+    {
+      "section": "B"
+    }
+  ],
+  "classId": "2",
+  "className": "Class-2",
+  "schoolId": "7",
+  "__v": 0
+}
+]

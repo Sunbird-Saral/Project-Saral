@@ -1,0 +1,40 @@
+[{
+  "_id": "613988e64630ae0f98e0ebc2",
+  "studentClass": [
+    {
+      "classId": "2",
+      "className": "Class-2"
+    }
+  ],
+  "section": "A",
+  "name": "apurva bisht",
+  "studentId": "62010000001",
+  "schoolId": "6",
+  "__v": 0
+},{
+  "_id": "613989e84630ae0f98e0ebc7",
+  "studentClass": [
+    {
+      "classId": "2",
+      "className": "Class-2"
+    }
+  ],
+  "section": "A",
+  "name": "arman",
+  "studentId": "62010000002",
+  "schoolId": "6",
+  "__v": 0
+},{
+  "_id": "61398a544630ae0f98e0ebcd",
+  "studentClass": [
+    {
+      "classId": "3",
+      "className": "Class-3"
+    }
+  ],
+  "section": "A",
+  "name": "ram",
+  "studentId": "73010000001",
+  "schoolId": "7",
+  "__v": 0
+}]
