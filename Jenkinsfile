@@ -1,5 +1,13 @@
 pipeline {
-  agent any
+  agent { 
+        dockerfile {
+            filename 'Dockerfile'
+            dir './v1.0/backend'
+            //label '1.0-latest'
+            additionalBuildArgs  '--build-arg PORT=3000'
+            //args '-v /tmp:/tmp'
+        }
+   }
 
   stages {
     stage("build-backend") {
@@ -8,7 +16,10 @@ pipeline {
               if (env.BRANCH_NAME == 'main' || env.BRANCH_NAME == 'v1') {
                   echo 'WIP....'
               } else if (env.BRANCH_NAME == 'feature/v1-devops') {
-                  echo 'Backend npm build'
+                  def backendImg = docker.build("saral-backend:${env.BUILD_ID}", "./v1.0/backend")
+                  backendImg.inside {
+                        sh 'ls -l'
+                    }
               }
           }
         }
