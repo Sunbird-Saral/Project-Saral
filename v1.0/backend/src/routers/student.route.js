@@ -56,7 +56,7 @@ router.post('/fetchStudentsByQuery', auth, async (req, res) => {
     }
         
     try {
-        const students = await Student.find(match)
+        const students = await Student.find(match,{_id:0,__v:0,createdAt:0 ,updatedAt:0})
         res.send(students)
     } catch (e) {
         console.log(e);
@@ -87,10 +87,8 @@ router.post('/fetchStudentsandExamsByQuery', auth, async (req, res) => {
     }
         
     try {
-        const students = await Student.find(match)
-        const exams = await Exam.find(examMatch)
-        // const examMetaData = await ExamMetaData.find(examMatch)
-        
+        const students = await Student.find(match,{_id:0,__v:0,createdAt:0,updatedAt:0}).lean()
+        const exams = await Exam.find(examMatch,{_id:0,__v:0,createdAt:0,updatedAt:0}).lean()
         res.send({students, exams})
     } catch (e) {
         console.log(e);
