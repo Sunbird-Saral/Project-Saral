@@ -37,10 +37,10 @@ const importData = async () => {
   try {
     await School.create(school);
     await ClassModel.create(classes);
-    await Student.create(student)
-    await Exam.create(exam)
-    await Marks.create(marks)
-    await ROI.create(roi)
+    await Student.create(student);
+    await Exam.create(exam);
+    await Marks.create(marks);
+    await ROI.create(roi);
     await Counter.create(counter)
 
     console.log('Data successfully added');
