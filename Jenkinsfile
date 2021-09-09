@@ -2,16 +2,12 @@ pipeline {
   agent any
 
   stages {
-    stage("This is stage 1") {
-      steps {
-        // Cool stuff goes here!
-      }
-    }
-
-    stage("This is stage 2") {
-      steps {
-        // Cool stuff goes here!
-      }
-    }
+    stage("build-backend") {
+      if (env.BRANCH_NAME != 'feature/v1-devops') {
+        echo 'building for feature/v1-devops'
+      }{
+        echo 'no action for other branches'
+      } 
   }
+ }
 }
