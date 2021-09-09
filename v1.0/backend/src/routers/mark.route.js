@@ -102,7 +102,7 @@ const fetchSavedData = async (req) => {
             return {"error" : true, totalPages, "message" : "invalid page number, can not be more than Total pages"}
         }
 
-        const savedScan = await Mark.find(match)
+        const savedScan = await Mark.find(match,{_id:0,__v:0})
                                     .limit(parseInt(limit) * 1)
                                     .skip((parseInt(parseInt(page)) - 1) * parseInt(parseInt(limit)))
 
