@@ -128,7 +128,11 @@ paths:
             $ref: "#/definitions/addClassesBody"
       responses:
         "200":
-          description: "successful operation"
+          description: "successful operation"       
+          schema:
+            $ref: "#/definitions/addClassesResponse"
+          
+          
         "400":
           description: "unsuccessful operation"
         "404":
@@ -172,9 +176,9 @@ paths:
         "201":
           description: "successful operation"
           schema:
-            $ref: "#/definitions/CreateStudentResponse"
+            $ref: "#/definitions/FetchStudentsByQueryResponse"
           
-  /createStudentBody:
+  /createStudent:
     post:
       tags:
       - "Student"
@@ -654,11 +658,6 @@ definitions:
           properties:
             marksInfo:
               $ref: '#/definitions/MarksInfo'
-            createdOn:
-              type: string
-              format: date-time
-            _id:
-              type: string
             section: 
               type: string
             studentId:
@@ -678,24 +677,9 @@ definitions:
     type: object
     properties:
       students: 
-        $ref: '#/definitions/CreateStudentResponse' 
+        $ref: '#/definitions/FetchStudentsByQueryResponse' 
       exams: 
         $ref: '#/definitions/GetExamByClassResponse' 
-      _id:
-        type: string
-        description: unique id
-      classId:
-        type: string
-        description: Class Id
-      examDate:
-        type: string
-        description: Exam Date
-      totalMarks:
-        type: string
-        description: Total Marks
-      examId:
-        type: number
-        description: Exam Id
       
           
   SaveMarksBody:
@@ -753,6 +737,20 @@ definitions:
         description: Class Section
       studentClass:
         $ref: '#/definitions/StudentClass' 
+        
+  FetchStudentsByQueryResponse:
+    type: object
+    properties:
+      studentClass:
+        $ref: '#/definitions/StudentClassName'
+      section:
+        type: string
+      name:
+        type: string
+      studentId:
+        type: string
+      schoolId:
+        type: string
       
   CreateStudentResponse:
     type: object
@@ -771,6 +769,9 @@ definitions:
       studentId:
         type: string
         description: Student Id
+      schoolId:
+        type: string
+        description: School Id
       createdAt:
         type: string
         format: date-time
@@ -1039,6 +1040,26 @@ definitions:
           type: string
         sections:
           $ref: "#/definitions/sections"
+          
+  addClassesResponse:
+    type: array
+    items:
+      type: object
+      properties:
+        sections:
+          $ref: "#/definitions/sections"
+        _id:
+          type: string
+        classId:
+          type: string
+        className:
+          type: string
+        schoolId:
+          type: string
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
           
   updateClassBody:
     type: object
