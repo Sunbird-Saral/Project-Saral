@@ -1,5 +1,11 @@
 pipeline {
   agent { 
+        label 'docker' 
+   }
+
+  stages {
+    stage("build-backend") {
+      agent{
         dockerfile {
             filename 'Dockerfile'
             dir './v1.0/backend'
@@ -7,10 +13,7 @@ pipeline {
             additionalBuildArgs  '--build-arg PORT=3000'
             //args '-v /tmp:/tmp'
         }
-   }
-
-  stages {
-    stage("build-backend") {
+      }
         steps {
           script { 
               if (env.BRANCH_NAME == 'main' || env.BRANCH_NAME == 'v1') {

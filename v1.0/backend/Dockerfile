@@ -3,7 +3,7 @@ LABEL maintainer="dileep.gadiraju@tarento.com"
 
 ARG PROFILE=dev
 ARG PORT=3000
-ARG MONGODB_URL=mongodb://localhost:27017/saralnew
+ARG MONGODB_URL=mongodb://docker.for.mac.localhost:27017/saralnew
 ARG JWT_SECRET=UP_SARALDATA_NODE
 WORKDIR /app
 COPY package*.json ./
