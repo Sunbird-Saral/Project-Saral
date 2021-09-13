@@ -155,6 +155,29 @@ paths:
             $ref: "#/definitions/updateClassResponse"
         "400":
           description: "unsuccessful operation"
+          
+  /deleteClass:
+    delete:
+      tags:
+      - Class
+      summary: "Delete class by class Id"
+      parameters:
+       - in: body
+         name: body
+         schema:
+            type: object
+            required:
+              - classId
+            properties:
+              classId:
+                type: string
+      responses:
+        "200": 
+          description: "Class has been deleted successfully."
+        "404":
+          description: "Class does not exist."
+        "400":
+          description: "unsuccessful updates"
         
   
   /fetchStudentsByQuery:
