@@ -1,11 +1,13 @@
 {
-  "name": "backend",
+  "name": "saral-backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "Saral Backend APIs",
   "main": "index.js",
   "scripts": {
     "start": "env-cmd ./config/prod.env pm2 start src/index.js",
     "dev": "env-cmd ./config/dev.env nodemon src/index.js -e js,pug",
+    "uat": "env-cmd ./config/uat.env nodemon src/index.js -e js,pug",
+    "prod": "env-cmd ./config/prod.env nodemon src/index.js -e js,pug",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
