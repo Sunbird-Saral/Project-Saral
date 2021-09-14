@@ -1,12 +1,33 @@
 version: '3.3'
 services:
-  web:
+  saral-backend:
     image: saral-backend:1.0-latest
     container_name: saral-backend
+    restart: always
+    # networks: 
+    #   - saralbackend
     ports:
-      - "3005:3005"
+      - "0.0.0.0:3005:3005"
     environment:
       PROFILE: dev
       PORT: 3005
-      MONGODB_URL: mongodb://docker.for.mac.localhost:27017/saralnew
+    #MONGODB_URL: mongodb://docker.for.mac.localhost:27019/local
+      MONGODB_URL: mongodb://saral-mongodb:27019/local
       JWT_SECRET: UP_SARALDATA_NODE
+  saral-mongodb:
+    image: mongo:latest
+    container_name: saral-mongodb
+    restart: unless-stopped
+    # networks: 
+    #   - saralbackend
+    #environment:
+      # MONGO_INITDB_ROOT_USERNAME: admin
+      # MONGO_INITDB_ROOT_PASSWORD: admin
+      # MONGO_INITDB_DATABASE: saralv1dev
+    ports:
+      - "0.0.0.0:27019:27019"
+    volumes:
+      - /usr/local/mongodb/data/saralv1db:/data/db
+# networks: 
+#   saralbackend:
+#     driver: custom-driver1
