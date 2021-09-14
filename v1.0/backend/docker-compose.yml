@@ -15,7 +15,7 @@ services:
       PORT: 3005
     #MONGODB_URL: mongodb://docker.for.mac.localhost:27019/local
       MONGODB_URL: mongodb://saral-mongodb:27019/local
-      JWT_SECRET: UP_SARALDATA_NODE
+      JWT_SECRET: SARALDATA_NODE
   saral-mongodb:
     image: mongo:latest
     container_name: saral-mongodb

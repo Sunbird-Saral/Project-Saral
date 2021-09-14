@@ -18,10 +18,17 @@
 
 >> `docker run --env PROFILE=uat --env PORT=3005 --env MONGODB_URL=mongodb://docker.for.mac.localhost:27017/saralnew --env JWT_SECRET=UP_SARALDATA_NODE --name saral-backend -p "0.0.0.0:3005:3005" -it saral-backend:1.0-latest`
 
-# Saral Backend APIs docker compose deployment #
+# Saral Backend APIs docker compose deployment and undeployment #
 
 * Change Director to ./backend folder where docker-compose.yml
 * Make a directory(eg. /usr/local/mongodb/data/saralv1db) for saral database on host machine and update docker-compose.yml volume mount if directory is different.
 * Execute below command to bring up saral-mongodb and saral-backend
 >> `docker-compose up --detach`
+* To bringdown the app , execute below command
+>> `docker-compose down`
 
+# Saral Backend APIs docker Swarm deployment, tear down #
+
+>> `docker stack deploy -c saralbackend-stack.yml saral-backend`
+>> `docker service list`
+>> `docker stack rm saral-backend`

@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+  saral-backend:
+    image: saral-backend:1.0-latest
+    ports:
+      - "0.0.0.0:3005:3005"
+    environment:
+      PROFILE: dev
+      PORT: 3005
+      MONGODB_URL: mongodb://saral-mongodb:27019/local
+      JWT_SECRET: SARALDATA_NODE
+  saral-mongodb:
+    image: mongo:latest
+    ports:
+      - "0.0.0.0:27019:27019"
