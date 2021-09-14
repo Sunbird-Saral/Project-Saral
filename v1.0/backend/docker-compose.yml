@@ -4,10 +4,12 @@ services:
     image: saral-backend:1.0-latest
     container_name: saral-backend
     restart: always
-    # networks: 
-    #   - saralbackend
+    networks: 
+      - saralbackend-network
     ports:
       - "0.0.0.0:3005:3005"
+    depends_on:
+      - saral-mongodb
     environment:
       PROFILE: dev
       PORT: 3005
@@ -18,8 +20,8 @@ services:
     image: mongo:latest
     container_name: saral-mongodb
     restart: unless-stopped
-    # networks: 
-    #   - saralbackend
+    networks: 
+      - saralbackend-network
     #environment:
       # MONGO_INITDB_ROOT_USERNAME: admin
       # MONGO_INITDB_ROOT_PASSWORD: admin
@@ -28,6 +30,7 @@ services:
       - "0.0.0.0:27019:27019"
     volumes:
       - /usr/local/mongodb/data/saralv1db:/data/db
-# networks: 
-#   saralbackend:
-#     driver: custom-driver1
+
+networks:
+  saralbackend-network:
+    driver: bridge
