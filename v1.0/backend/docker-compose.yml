@@ -11,7 +11,7 @@ services:
       - "0.0.0.0:3005:3005"
     depends_on:
       - saral-mongodb
-    external_links:
+    links:
       - saral-mongodb
     environment:
       PROFILE: dev
