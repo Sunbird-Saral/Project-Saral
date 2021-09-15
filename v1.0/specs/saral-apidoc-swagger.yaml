@@ -977,16 +977,30 @@ definitions:
           description: Question Marks
   
   roi:
-    type: object
-    properties:
-      top:
-        type: string
-      left:
-        type: string
-      bottom:
-        type: string
-      right:
-        type: string
+    type: array
+    items:
+      type: object
+      properties:
+        name:
+          type: string
+        method:
+          type: string
+        question:
+          type: string
+        index:
+          type: string
+        row:
+          type: string
+        col:
+          type: string
+        top:
+          type: string
+        left:
+          type: string
+        bottom:
+          type: string
+        right:
+          type: string
   
   GetROIResponse:
      type: array
@@ -1106,5 +1120,3 @@ definitions:
       updatedAt:
         type: string
         format: date-time
-    
-  

@@ -6,12 +6,22 @@ const ROISchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    roi: {
+    roi: [
+        {
+            _id: false,
+            name: {type: String},
+            method: {type: String},
+            question: {type: String},
+            index: {type: String},
+            row: {type: String},
+            col: {type: String},
         top: { type: String },
         left: { type: String },
         bottom: {type: String},
-        right: {type: String}
-    },
+            right: {type: String},
+
+        }
+    ],
     extractionMethod: {
         type: String,
         enum: ["NUMERIC_CLASSIFICATION","CELL_OMR"]
