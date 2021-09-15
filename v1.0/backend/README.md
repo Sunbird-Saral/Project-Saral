@@ -14,9 +14,12 @@
 >> `docker run --env PROFILE=uat --env PORT=3005 --env MONGODB_URL=mongodb://localhost:27017/saralnew --env JWT_SECRET=SARALDATA_NODE --name saral-backend -p 3005:3005 -it saral-backend:1.0-latest`
 
 
+
 * For Mac Machine use docker.for.mac.localhost to refer to host machine from container. Also use -p "0.0.0.0:3005:3005" so that container be reached from host machine using localhost.
 
 >> `docker run --env PROFILE=uat --env PORT=3005 --env MONGODB_URL=mongodb://docker.for.mac.localhost:27017/saralnew --env JWT_SECRET=SARALDATA_NODE --name saral-backend -p "0.0.0.0:3005:3005" -it saral-backend:1.0-latest`
+
+>> `docker run --env PROFILE=uat -d --env PORT=3005 --env MONGODB_URL=mongodb://docker.for.mac.localhost:27017/saralnew --env JWT_SECRET=SARALDATA_NODE --name saral-backend -p "0.0.0.0:3005:3005" -it saral-backend:1.0-latest`
 
 # Saral Backend APIs docker compose deployment , tear down #
 
