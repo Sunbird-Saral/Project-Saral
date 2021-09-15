@@ -452,16 +452,17 @@ paths:
         "400":
           description: "unsuccessful operation"
   
-  /roi:
+  /roi/{examId}:
     get:
       tags:
       - "ROI"
       summary: "Get ROI data"
       parameters:
-      - in: body
-        name: body
-        schema:
-          $ref: "#/definitions/GetROIBody"
+      - in: path
+        name: examId
+        type: number
+        required: true
+
 
       responses:
         "200":
@@ -893,7 +894,7 @@ definitions:
         questions:
           $ref: '#/definitions/Questions'  
         examId:
-          type: string
+          type: number
           description: Exam Id
         schoolId:
           type: string
@@ -923,7 +924,7 @@ definitions:
       questions:
         $ref : '#/definitions/Questions' 
       examId:
-        type: string
+        type: number
         description: Exam Id
       schoolId:
         type: string
@@ -985,12 +986,6 @@ definitions:
       bottom:
         type: string
       right:
-        type: string
-  
-  GetROIBody:
-    type: object
-    properties:
-      examId:
         type: string
   
   GetROIResponse:
