@@ -1,5 +1,5 @@
+# Maintainer dileep.gadiraju@tarento.com
 version: '3.7'
-
 services:
   saral-backend:
     image: saral-backend:1.0-latest
