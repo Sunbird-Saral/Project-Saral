@@ -33,5 +33,7 @@
 # Saral Backend APIs docker Swarm deployment, tear down #
 
 >> `docker stack deploy -c saralbackend-stack.yml saral-backend`
+
 >> `docker service list`
+
 >> `docker stack rm saral-backend`
