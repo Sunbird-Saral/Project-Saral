@@ -15,9 +15,9 @@ const ROISchema = new mongoose.Schema({
             index: {type: String},
             row: {type: String},
             col: {type: String},
-        top: { type: String },
-        left: { type: String },
-        bottom: {type: String},
+            top: { type: String },
+            left: { type: String },
+            bottom: {type: String},
             right: {type: String},
 
         }
