@@ -468,7 +468,7 @@ paths:
         "200":
           description: "successful operation"
           schema:
-            $ref: "#/definitions/GetROIResponse"
+            $ref: "#/definitions/roi"
         "400":
           description: "unsuccessful operation"
 
@@ -977,34 +977,30 @@ definitions:
           description: Question Marks
   
   roi:
-    type: object
-    properties:
-      top:
-        type: string
-      left:
-        type: string
-      bottom:
-        type: string
-      right:
-        type: string
-  
-  GetROIResponse:
-     type: array
-     items:
+    type: array
+    items:
       type: object
-      properties: 
-        extractionMethod:
+      properties:
+        name:
           type: string
-        roiId:
-          type: number
-        classId:
+        method:
           type: string
-        subject:
+        question:
           type: string
-        state:
+        index:
           type: string
-        roi:
-          $ref: '#/definitions/roi'
+        row:
+          type: string
+        col:
+          type: string
+        top:
+          type: string
+        left:
+          type: string
+        bottom:
+          type: string
+        right:
+          type: string
   
   CreateROIBody:
     type: object
@@ -1107,4 +1103,3 @@ definitions:
         type: string
         format: date-time
     
-  
