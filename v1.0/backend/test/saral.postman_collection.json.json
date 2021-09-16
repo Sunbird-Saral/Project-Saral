@@ -54,7 +54,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Ahmedabad International School\",\n    \"schoolId\": \"1\",\n    \"password\": \"tarento@123\",\n    \"state\": \"gujrat\",\n    \"district\": \"ahmedabad\",\n    \"block\": \"haldwani\",\n    \"hmName\": \"acbc\",\n    \"hmMobileNo\": \"8006079875\",\n    \"noOfStudents\": \"100\",\n    \"udiseCode\": \"123\"\n\n}"
+							"raw": "{\n    \"name\": \"Fountainhead School\",\n    \"schoolId\": \"1\",\n    \"password\": \"tarento@123\",\n    \"state\": \"gujrat\",\n    \"district\": \"ahmedabad\",\n    \"block\": \"haldwani\",\n    \"hmName\": \"acbc\",\n    \"hmMobileNo\": \"8006079875\",\n    \"noOfStudents\": \"100\",\n    \"udiseCode\": \"123\"\n\n}"
 						},
 						"url": {
 							"raw": "{{url}}/schools/create",
@@ -133,7 +133,7 @@
 							"variable": [
 								{
 									"key": "schoolId",
-									"value": "7"
+									"value": "1"
 								}
 							]
 						}
@@ -147,7 +147,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"birla\",\r\n    \"district\": \"nainital\",\r\n    \"block\": \"haldwanis\",\r\n    \"hmName\": \"ha\",\r\n    \"hmMobileNo\": \"8006079636\",\r\n    \"noOfStudents\": \"23\",\r\n    \"udisceCode\":123\r\n\r\n}",
+							"raw": "{\r\n    \"name\": \"Karnavati Public School\",\r\n    \"district\": \"ahemdabad\",\r\n    \"state\": \"gujrat\",\r\n    \"block\": \"haldwanis\",\r\n    \"hmName\": \"ha\",\r\n    \"hmMobileNo\": \"8006079636\",\r\n    \"noOfStudents\": \"23\",\r\n    \"udisceCode\":123\r\n\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -166,7 +166,7 @@
 							"variable": [
 								{
 									"key": "SchoolId",
-									"value": "7"
+									"value": "1"
 								}
 							]
 						}
@@ -286,7 +286,7 @@
 							"variable": [
 								{
 									"key": "studentId",
-									"value": "77472010000002"
+									"value": "12040000001"
 								}
 							]
 						}
@@ -344,7 +344,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "[\n    {\n        \"classId\": \"3\",\n         \"sections\": [\n        {\n            \"section\": \"D\"\n        },\n         {\n            \"section\": \"B\"\n        },{\n            \"section\": \"C\"\n        }\n    ]\n    }\n]"
+							"raw": "[\n    {\n        \"classId\": \"2\",\n         \"sections\": [\n        {\n            \"section\": \"D\"\n        },\n         {\n            \"section\": \"B\"\n        },{\n            \"section\": \"C\"\n        }\n    ]\n    }\n]"
 						},
 						"url": {
 							"raw": "{{url}}/addClasses",
@@ -398,7 +398,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"classId\": \"6\"\r\n}",
+							"raw": "{\r\n    \"classId\": \"2\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -499,7 +499,7 @@
 							"variable": [
 								{
 									"key": "examId",
-									"value": "43"
+									"value": "1"
 								}
 							]
 						}
@@ -525,7 +525,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{url}}/getExamsByClas/:classId",
+							"raw": "{{url}}/getExamsByClas/:classId?examDate= 17/09/2001",
 							"host": [
 								"{{url}}"
 							],
@@ -541,14 +541,13 @@
 								},
 								{
 									"key": "examDate",
-									"value": " 08/09/2001",
-									"disabled": true
+									"value": " 17/09/2001"
 								}
 							],
 							"variable": [
 								{
 									"key": "classId",
-									"value": "21"
+									"value": "2"
 								}
 							]
 						}
@@ -558,21 +557,11 @@
 				{
 					"name": "Update exam",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTMyZmEzNjk2ZTdjNzUyMzg3NWVhNzEiLCJpYXQiOjE2MzEwMTg5NzR9.V-W6moHpuAFvIkBC-86AHkeVwCl_H0s2K1sg9qq_bXQ",
-									"type": "string"
-								}
-							]
-						},
 						"method": "PATCH",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{  \"examLO\": \"Hindis\",\r\n    \"subject\": \"Hindi\"\r\n\r\n}",
+							"raw": "{ \r\n     \"examLO\": \"Science\",\r\n    \"subject\": \"Science\"\r\n\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -684,7 +673,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"subject\": \"Hindi\",\r\n    \"classId\": \"2\",\r\n    \"roi\":  [{\r\n        \"name\": \"roll\",\r\n        \"method\": \"classify\",\r\n        \"index\": 0,\r\n        \"row\": -1,\r\n        \"col\": 0,\r\n        \"left\": 150,\r\n        \"right\": 168,\r\n        \"top\": 28,\r\n        \"bottom\": 47\r\n    },\r\n{\r\n        \"name\": \"roll\",\r\n        \"method\": \"classify\",\r\n        \"index\": 0,\r\n        \"row\": -1,\r\n        \"col\": 0,\r\n        \"left\": 170,\r\n        \"right\": 188,\r\n        \"top\": 28,\r\n        \"bottom\": 46\r\n    },\r\n{\r\n        \"name\": \"roll\",\r\n        \"method\": \"classify\",\r\n        \"index\": 0,\r\n        \"row\": -1,\r\n        \"col\": 0,\r\n        \"left\": 190,\r\n        \"right\": 208,\r\n        \"top\": 28,\r\n        \"bottom\": 46\r\n    },\r\n {\r\n        \"name\": \"roll\",\r\n        \"method\": \"classify\",\r\n        \"index\": 3,\r\n        \"row\": -1,\r\n        \"col\": -1,\r\n        \"left\": 211,\r\n        \"right\": 228,\r\n        \"top\": 34,\r\n        \"bottom\": 50\r\n    },\r\n{\r\n        \"name\": \"roll\",\r\n        \"method\": \"classify\",\r\n        \"index\": 4,\r\n        \"row\": -1,\r\n        \"col\": -1,\r\n        \"left\": 231,\r\n        \"right\": 248,\r\n        \"top\": 34,\r\n        \"bottom\": 50\r\n    },\r\n\r\n {\r\n        \"name\": \"roll\",\r\n        \"method\": \"classify\",\r\n        \"index\": 5,\r\n        \"row\": -1,\r\n        \"col\": -1,\r\n        \"left\": 251,\r\n        \"right\": 269,\r\n        \"top\": 34,\r\n        \"bottom\": 50\r\n    }, \r\n {\r\n        \"name\": \"roll\",\r\n        \"method\": \"classify\",\r\n        \"index\": 6,\r\n        \"row\": -1,\r\n        \"col\": -1,\r\n        \"left\": 271,\r\n        \"right\": 289,\r\n        \"top\": 34,\r\n        \"bottom\": 50\r\n    },\r\n\r\n\r\n  {\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n\t\"question\":1,\r\n        \"index\": 0,\r\n        \"row\": 0,\r\n        \"col\": 0,\r\n        \"left\": 149,\r\n        \"right\": 166,\r\n        \"top\": 98,\r\n        \"bottom\": 115\r\n    },\r\n  {\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n\t    \"question\":1,\r\n        \"index\": 1,\r\n        \"row\": 0,\r\n        \"col\": 0,\r\n        \"left\": 178,\r\n        \"right\": 196,\r\n        \"top\": 98,\r\n        \"bottom\": 115\r\n    },\r\n\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n\t\"question\":2,\r\n        \"index\": 0,\r\n        \"row\": 0,\r\n        \"col\": 0,\r\n        \"left\": 149,\r\n        \"right\": 167,\r\n        \"top\": 126,\r\n        \"bottom\": 142\r\n    },\r\n\r\n  {\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n\t\"question\":2,\r\n        \"index\": 1,\r\n        \"row\": 1,\r\n        \"col\": 0,\r\n        \"left\": 180,\r\n        \"right\": 196,\r\n        \"top\": 126,\r\n        \"bottom\": 143\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":3,\r\n        \"index\": 0,\r\n        \"row\": 2,\r\n        \"col\": 0,\r\n        \"left\": 150,\r\n        \"right\": 167,\r\n        \"top\": 153,\r\n        \"bottom\": 168\r\n    },\r\n\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":3,\r\n        \"index\": 1,\r\n        \"row\": 2,\r\n        \"col\": 0,\r\n        \"left\": 180,\r\n        \"right\": 197,\r\n        \"top\": 153,\r\n        \"bottom\": 168\r\n    },\r\n\r\n\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":4,\r\n        \"index\": 0,\r\n        \"row\": 3,\r\n        \"col\": 0,\r\n        \"left\": 150,\r\n        \"right\": 167,\r\n         \"top\": 179,\r\n        \"bottom\": 195\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":4,\r\n        \"index\": 1,\r\n        \"row\": 3,\r\n        \"col\": 0,\r\n        \"left\": 180,\r\n        \"right\": 197,\r\n        \"top\": 179,\r\n        \"bottom\": 195\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":5,\r\n        \"index\": 0,\r\n        \"row\": 4,\r\n        \"col\": 0,\r\n        \"left\": 150,\r\n        \"right\": 167,\r\n        \"top\": 205,\r\n        \"bottom\": 221\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":5,\r\n        \"index\": 1,\r\n        \"row\": 4,\r\n        \"col\": 0,\r\n        \"left\": 180,\r\n        \"right\": 197,\r\n        \"top\": 206,\r\n        \"bottom\": 222\r\n    },\r\n\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":6,\r\n        \"index\": 0,\r\n        \"row\": 5,\r\n        \"col\": 0,\r\n        \"left\": 151,\r\n        \"right\": 168,\r\n        \"top\": 233,\r\n        \"bottom\": 249\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":6,\r\n        \"index\": 1,\r\n        \"row\": 5,\r\n        \"col\": 0,\r\n        \"left\": 180,\r\n        \"right\": 198,\r\n        \"top\": 233,\r\n        \"bottom\": 249\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":7,\r\n        \"index\": 0,\r\n        \"row\": 6,\r\n        \"col\": 0,\r\n        \"left\": 151,\r\n        \"right\": 168,\r\n        \"top\": 259,\r\n        \"bottom\": 276\r\n    },\r\n\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":7,\r\n        \"index\": 1,\r\n        \"row\": 6,\r\n        \"col\": 0,\r\n        \"left\": 180,\r\n        \"right\": 198,\r\n        \"top\": 259,\r\n        \"bottom\": 276\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":8,\r\n        \"index\": 0,\r\n        \"row\": 7,\r\n        \"col\": 0,\r\n        \"left\": 151,\r\n        \"right\": 168,\r\n        \"top\": 286,\r\n        \"bottom\": 303\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":8,\r\n        \"index\": 1,\r\n        \"row\": 7,\r\n        \"col\": 0,\r\n        \"left\": 180,\r\n        \"right\": 198,\r\n         \"top\": 287,\r\n        \"bottom\": 303\r\n    },\r\n\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":9,\r\n        \"index\": 0,\r\n        \"row\": 8,\r\n        \"col\": 0,\r\n        \"left\": 151,\r\n        \"right\": 168,\r\n        \"top\": 315,\r\n        \"bottom\": 332\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":9,\r\n        \"index\": 1,\r\n        \"row\": 8,\r\n        \"col\": 0,\r\n        \"left\": 181,\r\n        \"right\": 198,\r\n        \"top\": 315,\r\n        \"bottom\": 331\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":10,\r\n        \"index\": 0,\r\n        \"row\": 9,\r\n        \"col\": 0,\r\n        \"left\": 150,\r\n        \"right\": 168,\r\n        \"top\": 342,\r\n        \"bottom\": 359\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":10,\r\n        \"index\": 1,\r\n        \"row\": 9,\r\n        \"col\": 0,\r\n        \"left\": 180,\r\n        \"right\": 198,\r\n        \"top\": 342,\r\n        \"bottom\": 359\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":11,\r\n        \"index\": 0,\r\n        \"row\": 10,\r\n        \"col\": 0,\r\n        \"left\": 150,\r\n        \"right\": 168,\r\n        \"top\": 369,\r\n        \"bottom\": 385\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":11,\r\n        \"index\": 1,\r\n        \"row\": 10,\r\n        \"col\": 0,\r\n        \"left\": 180,\r\n        \"right\": 198,\r\n        \"top\": 369,\r\n        \"bottom\": 385\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":12,\r\n        \"index\": 0,\r\n        \"row\": 11,\r\n        \"col\": 0,\r\n        \"left\": 150,\r\n        \"right\": 167,\r\n        \"top\": 396,\r\n        \"bottom\": 412\r\n    },\r\n\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":12,\r\n        \"index\": 1,\r\n        \"row\": 11,\r\n        \"col\": 0,\r\n        \"left\": 180,\r\n        \"right\": 198,\r\n        \"top\": 395,\r\n        \"bottom\": 412\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":13,\r\n        \"index\": 0,\r\n        \"row\": 0,\r\n        \"col\": 1,\r\n        \"left\": 346,\r\n        \"right\": 363,\r\n        \"top\": 99,\r\n        \"bottom\": 116\r\n    },\r\n\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":13,\r\n        \"index\": 1,\r\n        \"row\": 0,\r\n        \"col\": 1,\r\n        \"left\": 375,\r\n        \"right\": 392,\r\n        \"top\": 99,\r\n        \"bottom\": 116\r\n    },\r\n\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":14,\r\n        \"index\": 0,\r\n        \"row\": 1,\r\n        \"col\": 1,\r\n        \"left\": 345,\r\n        \"right\": 363,\r\n        \"top\": 126,\r\n        \"bottom\": 142\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":14,\r\n        \"index\": 1,\r\n        \"row\": 1,\r\n        \"col\": 1,\r\n        \"left\": 375,\r\n        \"right\": 392,\r\n        \"top\": 126,\r\n        \"bottom\": 142\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":15,\r\n        \"index\": 0,\r\n        \"row\": 2,\r\n        \"col\": 1,\r\n        \"left\": 345,\r\n        \"right\": 363,\r\n        \"top\": 153,\r\n        \"bottom\": 169\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":15,\r\n        \"index\": 1,\r\n        \"row\": 2,\r\n        \"col\": 1,\r\n        \"left\": 375,\r\n        \"right\": 392,\r\n        \"top\": 153,\r\n        \"bottom\": 169\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":16,\r\n        \"index\": 0,\r\n        \"row\": 3,\r\n        \"col\": 1,\r\n        \"left\": 346,\r\n        \"right\": 363,\r\n        \"top\": 179,\r\n        \"bottom\": 195\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":16,\r\n        \"index\": 1,\r\n        \"row\": 3,\r\n        \"col\": 1,\r\n        \"left\": 375,\r\n        \"right\": 392,\r\n        \"top\": 179,\r\n        \"bottom\": 195\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":17,\r\n        \"index\": 0,\r\n        \"row\": 4,\r\n        \"col\": 1,\r\n        \"left\": 346,\r\n        \"right\": 363,\r\n        \"top\": 206,\r\n        \"bottom\": 222\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":17,\r\n        \"index\": 1,\r\n        \"row\": 4,\r\n        \"col\": 1,\r\n        \"left\": 375,\r\n        \"right\": 392,\r\n        \"top\": 206,\r\n        \"bottom\": 223\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":18,\r\n        \"index\": 0,\r\n        \"row\": 5,\r\n        \"col\": 1,\r\n        \"left\": 346,\r\n        \"right\": 362,\r\n        \"top\": 233,\r\n        \"bottom\": 250\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":18,\r\n        \"index\": 1,\r\n        \"row\": 5,\r\n        \"col\": 1,\r\n        \"left\": 375,\r\n        \"right\": 393,\r\n        \"top\": 233,\r\n        \"bottom\": 250\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":19,\r\n        \"index\": 0,\r\n        \"row\": 6,\r\n        \"col\": 1,\r\n        \"left\": 346,\r\n        \"right\": 364,\r\n        \"top\": 260,\r\n        \"bottom\": 276\r\n    },\r\n\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":19,\r\n        \"index\": 1,\r\n        \"row\": 6,\r\n        \"col\": 1,\r\n        \"left\": 376,\r\n        \"right\": 392,\r\n        \"top\": 260,\r\n        \"bottom\": 276\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":20,\r\n        \"index\": 0,\r\n        \"row\": 7,\r\n        \"col\": 1,\r\n        \"left\": 348,\r\n        \"right\": 364,\r\n        \"top\": 287,\r\n        \"bottom\": 304\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":20,\r\n        \"index\": 1,\r\n        \"row\": 7,\r\n        \"col\": 1,\r\n        \"left\": 378,\r\n        \"right\": 393,\r\n        \"top\": 287,\r\n        \"bottom\": 304\r\n    },\r\n\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":21,\r\n        \"index\": 0,\r\n        \"row\": 8,\r\n        \"col\": 1,\r\n        \"left\": 348,\r\n        \"right\": 364,\r\n        \"top\": 315,\r\n        \"bottom\": 331\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":21,\r\n        \"index\": 1,\r\n        \"row\": 8,\r\n        \"col\": 1,\r\n        \"left\": 378,\r\n        \"right\": 390,\r\n        \"top\": 315,\r\n        \"bottom\": 331\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":22,\r\n        \"index\": 0,\r\n        \"row\": 9,\r\n        \"col\": 1,\r\n        \"left\": 347,\r\n        \"right\": 363,\r\n        \"top\": 342,\r\n        \"bottom\": 358\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":22,\r\n        \"index\": 1,\r\n        \"row\": 9,\r\n        \"col\": 1,\r\n        \"left\": 378,\r\n        \"right\": 394,\r\n        \"top\": 342,\r\n        \"bottom\": 358\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":23,\r\n        \"index\": 0,\r\n        \"row\": 10,\r\n        \"col\": 1,\r\n        \"left\": 347,\r\n        \"right\": 365,\r\n        \"top\": 369,\r\n        \"bottom\": 385\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":23,\r\n        \"index\": 1,\r\n        \"row\": 10,\r\n        \"col\": 1,\r\n        \"left\": 376,\r\n        \"right\": 394,\r\n        \"top\": 369,\r\n        \"bottom\": 385\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":24,\r\n        \"index\": 0,\r\n        \"row\": 11,\r\n        \"col\": 1,\r\n        \"left\": 348,\r\n        \"right\": 365,\r\n        \"top\": 395,\r\n        \"bottom\": 411\r\n    },\r\n\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":24,\r\n        \"index\": 1,\r\n        \"row\": 11,\r\n        \"col\": 1,\r\n        \"left\": 377,\r\n        \"right\": 394,\r\n        \"top\": 395,\r\n        \"bottom\": 411\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":25,\r\n        \"index\": 0,\r\n        \"row\": 0,\r\n        \"col\": 2,\r\n        \"left\": 543,\r\n        \"right\": 561,\r\n        \"top\": 98,\r\n        \"bottom\": 115\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":25,\r\n        \"index\": 1,\r\n        \"row\": 0,\r\n        \"col\": 2,\r\n        \"left\": 574,\r\n        \"right\": 591,\r\n        \"top\": 98,\r\n        \"bottom\": 115\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":26,\r\n        \"index\": 0,\r\n        \"row\": 1,\r\n        \"col\": 2,\r\n        \"left\": 544,\r\n        \"right\": 561,\r\n        \"top\": 126,\r\n        \"bottom\": 141\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":26,\r\n        \"index\": 1,\r\n        \"row\": 1,\r\n        \"col\": 2,\r\n        \"left\": 574,\r\n        \"right\": 591,\r\n        \"top\": 125,\r\n        \"bottom\": 142\r\n    },\r\n\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":27,\r\n        \"index\": 0,\r\n        \"row\": 2,\r\n        \"col\": 2,\r\n        \"left\": 543,\r\n        \"right\": 561,\r\n        \"top\": 152,\r\n        \"bottom\": 168\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":27,\r\n        \"index\": 1,\r\n        \"row\": 2,\r\n        \"col\": 2,\r\n        \"left\": 573,\r\n        \"right\": 590,\r\n        \"top\": 152,\r\n        \"bottom\": 168\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":28,\r\n        \"index\": 0,\r\n        \"row\": 3,\r\n        \"col\": 2,\r\n        \"left\": 542,\r\n        \"right\": 560,\r\n        \"top\": 179,\r\n        \"bottom\": 195\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":28,\r\n        \"index\": 1,\r\n        \"row\": 3,\r\n        \"col\": 2,\r\n        \"left\": 573,\r\n        \"right\": 590,\r\n        \"top\": 179,\r\n        \"bottom\": 195\r\n    },\r\n\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":29,\r\n        \"index\": 0,\r\n        \"row\": 4,\r\n        \"col\": 2,\r\n        \"left\": 543,\r\n        \"right\": 560,\r\n        \"top\": 206,\r\n        \"bottom\": 222\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":29,\r\n        \"index\": 1,\r\n        \"row\": 4,\r\n        \"col\": 2,\r\n        \"left\": 573,\r\n        \"right\": 590,\r\n        \"top\": 206,\r\n        \"bottom\": 222\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":30,\r\n        \"index\": 0,\r\n        \"row\": 5,\r\n        \"col\": 2,\r\n        \"left\": 542,\r\n        \"right\": 560,\r\n        \"top\": 233,\r\n        \"bottom\": 249\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":30,\r\n        \"index\": 1,\r\n        \"row\": 5,\r\n        \"col\": 2,\r\n        \"left\": 573,\r\n        \"right\": 590,\r\n        \"top\": 233,\r\n        \"bottom\": 250\r\n    },\r\n\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":31,\r\n        \"index\": 0,\r\n        \"row\": 6,\r\n        \"col\": 2,\r\n        \"left\": 543,\r\n        \"right\": 561,\r\n        \"top\": 260,\r\n        \"bottom\": 276\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":31,\r\n        \"index\": 1,\r\n        \"row\": 6,\r\n        \"col\": 2,\r\n        \"left\": 573,\r\n        \"right\": 591,\r\n        \"top\": 260,\r\n        \"bottom\": 277\r\n    },\r\n\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":32,\r\n        \"index\": 0,\r\n        \"row\": 7,\r\n        \"col\": 2,\r\n        \"left\": 543,\r\n        \"right\": 561,\r\n        \"top\": 287,\r\n        \"bottom\": 304\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":32,\r\n        \"index\": 1,\r\n        \"row\": 7,\r\n        \"col\": 2,\r\n        \"left\": 573,\r\n        \"right\": 591,\r\n        \"top\": 287,\r\n        \"bottom\": 304\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":33,\r\n        \"index\": 0,\r\n        \"row\": 8,\r\n        \"col\": 2,\r\n        \"left\": 543,\r\n        \"right\": 562,\r\n        \"top\": 315,\r\n        \"bottom\": 332\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":33,\r\n        \"index\": 1,\r\n        \"row\": 8,\r\n        \"col\": 2,\r\n        \"left\": 573,\r\n        \"right\": 592,\r\n        \"top\": 315,\r\n        \"bottom\": 332\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":34,\r\n        \"index\": 0,\r\n        \"row\": 9,\r\n        \"col\": 2,\r\n        \"left\": 543,\r\n        \"right\": 562,\r\n        \"top\": 342,\r\n        \"bottom\": 359\r\n    },\r\n{\r\n        \"name\": \"marks\",\r\n        \"method\": \"classify\",\r\n        \"question\":34,\r\n        \"index\": 1,\r\n        \"row\": 9,\r\n        \"col\": 2,\r\n        \"left\": 574,\r\n        \"right\": 592,\r\n        \"top\": 342,\r\n        \"bottom\": 359\r\n    },\r\n{\r\n        \"name\": \"totalMarks\",\r\n        \"method\": \"classify\",\r\n        \"index\": 0,\r\n        \"row\": -2,\r\n        \"col\": 0,\r\n        \"left\": 342,\r\n        \"right\": 360,\r\n        \"top\": 436,\r\n        \"bottom\": 454\r\n    },\r\n\r\n{\r\n        \"name\": \"totalMarks\",\r\n        \"method\": \"classify\",\r\n        \"index\": 1,\r\n        \"row\": -2,\r\n        \"col\": 1,\r\n        \"left\": 363,\r\n        \"right\": 380,\r\n        \"top\": 436,\r\n        \"bottom\": 453\r\n    },\r\n{\r\n        \"name\": \"totalMarks\",\r\n        \"method\": \"classify\",\r\n        \"index\": 2,\r\n        \"row\": -2,\r\n        \"col\": 2,\r\n        \"left\": 382,\r\n        \"right\": 400,\r\n        \"top\": 436,\r\n        \"bottom\": 453\r\n    }\r\n],\r\n    \"extractionMethod\": \"NUMERIC_CLASSIFICATION\"\r\n}",
+							"raw": "{\r\n    \"subject\": \"Hindi\",\r\n    \"classId\": \"2\",\r\n    \"roi\":  [{\r\n        \"name\": \"roll\",\r\n        \"method\": \"classify\",\r\n        \"index\": \"0\",\r\n        \"row\": \"-1\",\r\n        \"col\": \"0\",\r\n        \"left\": \"150\",\r\n        \"right\": \"168\",\r\n        \"top\": \"28\",\r\n        \"bottom\": \"47\"\r\n    }\r\n],\r\n    \"extractionMethod\": \"NUMERIC_CLASSIFICATION\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -710,7 +699,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n     \"roi\":{\r\n       \"left\": \"189\",\r\n       \"bottom\": \"69\",\r\n       \"right\": \"76\"\r\n    }\r\n}",
+							"raw": "{\r\n       \"roi\":  [\r\n        {\r\n        \"name\": \"roll\",\r\n        \"method\": \"classify\",\r\n        \"index\": \"0\",\r\n        \"row\": \"-1\",\r\n        \"col\": \"0\",\r\n        \"left\": \"150\",\r\n        \"right\": \"168\",\r\n        \"top\": \"28\",\r\n        \"bottom\": \"47\"\r\n    }\r\n]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -802,15 +791,15 @@
 							],
 							"query": [
 								{
-									"key": "examId",
-									"value": null,
+									"key": "",
+									"value": "",
 									"disabled": true
 								}
 							],
 							"variable": [
 								{
 									"key": "examId",
-									"value": "22"
+									"value": "1"
 								}
 							]
 						}
