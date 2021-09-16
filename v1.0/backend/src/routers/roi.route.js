@@ -68,12 +68,10 @@ router.patch('/updateRoi/:roiId', async (req, res) => {
         let roiData = await ROI.findOne(lookup).lean();
         if(!roiData) res.status(404).send({"message": "ROI Id does not exist."})
         let updateObj = {}
-        if(req.body.roi){
-            updateObj["roi.top"] = !(req.body.roi.top) ? roiData.roi.top : req.body.roi.top
-            updateObj["roi.bottom"] = !(req.body.roi.bottom) ? roiData.roi.bottom : req.body.roi.bottom
-            updateObj["roi.left"] = !(req.body.roi.left) ? roiData.roi.left : req.body.roi.left
-            updateObj["roi.right"] = !(req.body.roi.right) ? roiData.roi.right : req.body.roi.right
-        }
+        
+        if(req.body.roi) updateObj["roi"] = req.body.roi
+        if(req.body.extractionMethod) updateObj["extractionMethod"] = req.body.extractionMethod
+    
         await ROI.update(lookup,updateObj).lean();
         res.status(201).send({"message": 'ROI is updated successfully.'})  
     } catch (e){   
