@@ -17,8 +17,9 @@ router.post('/schools/create', async (req, res) => {
         if (e.message.includes(' duplicate key error')) {
             let key = Object.keys(e.keyValue)
             res.status(401).send({ error: `${key[0]}: ${e.keyValue[key[0]]} already exist` })
-        }
+        }else{
         res.status(400).send(e)
+        }
     }
 })
 
