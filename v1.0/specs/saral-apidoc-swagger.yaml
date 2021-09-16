@@ -289,10 +289,24 @@ paths:
       - "Marks"
       summary: "Get Scan Marks"
       parameters:
-        - name: body
-          in: body
-          schema:
-            $ref: "#/definitions/GetSavedScanBody"
+        - in: query
+          name: classId
+          type: string
+        - in: query
+          name: subject
+          type: string
+        - in: query
+          name: fromDate
+          type: string
+        - in: query
+          name: page
+          type: integer
+        - in: query
+          name: downloadRes
+          type: string
+        - in: query
+          name: limit
+          type: integer
       responses:
         "201":
           description: "successful operation"
