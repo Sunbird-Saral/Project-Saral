@@ -1,7 +1,7 @@
 [{
   "name": "Fountainhead School",
   "schoolId": "1",
-  "password": "$2a$08$NKt36ZjJeVuX0ZVWUn4YbuXHWrlKuQFBOtfBchuNDbea/QBw6q/1W",
+  "password": "tarento@123",
   "state": "gujrat",
   "district": "ahmedabad",
   "block": "haldwani",
@@ -12,7 +12,7 @@
 },{
   "name": "Ahmedabad International School",
   "schoolId": "2",
-  "password": "$2a$08$EA7Qv4HPg.fetli7p/FaJu1D2DVYjQVYnn5HJyd0NrqxMBwkuqIVi",
+  "password": "tarento@123",
   "state": "gujrat",
   "district": "ahmedabad",
   "block": "haldwani",
