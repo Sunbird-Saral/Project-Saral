@@ -1,0 +1,39 @@
+# Maintainer dileep.gadiraju@tarento.com
+version: '3.3'
+services:
+  saral-backend:
+    image: saral-backend:1.0-latest
+    container_name: saral-backend
+    restart: always
+    networks: 
+      - saralbackend-network
+    ports:
+      - "0.0.0.0:3005:3005"
+    depends_on:
+      - saral-mongodb
+    links:
+      - saral-mongodb
+    environment:
+      PROFILE: dev
+      PORT: 3005
+    #MONGODB_URL: mongodb://docker.for.mac.localhost:27019/local
+      MONGODB_URL: mongodb://saral-mongodb:27017/saralv1db
+      JWT_SECRET: SARALDATA_NODE
+  saral-mongodb:
+    image: mongo:latest
+    container_name: saral-mongodb
+    restart: unless-stopped
+    networks: 
+      - saralbackend-network
+    #environment:
+      # MONGO_INITDB_ROOT_USERNAME: admin
+      # MONGO_INITDB_ROOT_PASSWORD: admin
+      # MONGO_INITDB_DATABASE: saralv1dev
+    ports:
+      - "0.0.0.0:27019:27017"
+    volumes:
+      - /usr/local/mongodb/data/saralv1db:/data/db
+
+networks:
+  saralbackend-network:
+    driver: bridge
