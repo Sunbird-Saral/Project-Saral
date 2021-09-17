@@ -30,10 +30,24 @@
 * To bringdown the app , execute below command
 >> `docker-compose down`
 
-# Saral Backend APIs docker Swarm deployment, tear down #
+# Saral Backend APIs docker Swarm deployment,scale, tear down #
 
 >> `docker stack deploy -c saralbackend-stack.yml saral-backend`
 
 >> `docker service list`
 
+>> `docker service scale saral-backend_saral-backend=3`
+
 >> `docker stack rm saral-backend`
+
+# Golden data import #
+
+* Make sure golden data json files are in ./data folder.
+* If you are running backend as docker container , use below commands to import golden data placed in ./data folder.
+
+>> `docker exec -it saral-backend bash`
+
+* Below commands to be executed with in saral-backend container to load golden data.
+
+>> `node ./data/import-data.js --delete`
+>> `node ./data/import-data.js --import`
