@@ -118,28 +118,28 @@ const fetchSavedData = async (req) => {
     }
 }
 
-router.get('/getSavedScan?', basicAuth, async (req, res) => {
-    try {
-        const resposne = await fetchSavedData(req)
-        if (resposne && resposne.error) {
-            return res.status(404).send(resposne)
-        }
-        const { downloadRes = false, subject } = req.query
-        if (downloadRes) {
-            deleteAllfilesFromReports()
-            let filePath = getFilePath(subject, 'json')
-            fs.writeFile(filePath, JSON.stringify(resposne), (err) => {
-                if (err) throw err;
-                res.download(filePath)
-            });
-        } else {
-            res.send(resposne)
-        }
-    } catch (e) {
-        console.log(e);
-        res.status(400).send({ "error": true, e })
-    }
-})
+// router.get('/getSavedScan?', basicAuth, async (req, res) => {
+//     try {
+//         const resposne = await fetchSavedData(req)
+//         if (resposne && resposne.error) {
+//             return res.status(404).send(resposne)
+//         }
+//         const { downloadRes = false, subject } = req.query
+//         if (downloadRes) {
+//             deleteAllfilesFromReports()
+//             let filePath = getFilePath(subject, 'json')
+//             fs.writeFile(filePath, JSON.stringify(resposne), (err) => {
+//                 if (err) throw err;
+//                 res.download(filePath)
+//             });
+//         } else {
+//             res.send(resposne)
+//         }
+//     } catch (e) {
+//         console.log(e);
+//         res.status(400).send({ "error": true, e })
+//     }
+// })
 
 router.post('/getSavedScan', basicAuth, async (req, res) => {
     try {
