@@ -15,6 +15,18 @@ tags:
 schemes:
 - "https"
 - "http"
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    basicAuth:
+      type: http
+      scheme: basic
+
+
 paths:
   /schools:
     get:
@@ -118,6 +130,8 @@ paths:
          
   /addClasses:
     post:
+      security:
+        - BearerAuth: []
       tags:
       - Class
       summary: "Create Class"
@@ -140,6 +154,8 @@ paths:
   
   /updateClass:
     post:
+      security:
+        - BearerAuth: []
       tags:
       - Class
       summary: "Update Class"
@@ -158,6 +174,8 @@ paths:
           
   /deleteClass:
     delete:
+      security:
+        - BearerAuth: []
       tags:
       - Class
       summary: "Delete class by class Id"
@@ -182,6 +200,8 @@ paths:
   
   /fetchStudentsByQuery:
     post:
+      security:
+        - BearerAuth: []
       tags:
       - "Student"
       summary: "Get students list"
@@ -203,6 +223,8 @@ paths:
           
   /createStudent:
     post:
+      security:
+        - BearerAuth: []
       tags:
       - "Student"
       summary: "Create Student"
@@ -221,6 +243,8 @@ paths:
           
   /fetchStudentsandExamsByQuery:
     post:
+      security:
+        - BearerAuth: []
       tags:
       - "Student"
       summary: "Get Exam Details by class Id"
@@ -285,6 +309,8 @@ paths:
           description: "unsuccessful operation"
   /getSavedScan:  
     post:
+      security:
+        - basicAuth: []
       tags:
       - "Marks"
       summary: "Get Scan Marks"
@@ -301,6 +327,8 @@ paths:
             
   /saveMarks:
     post:
+      security:
+        - BearerAuth: []
       tags:
         - "Marks"
       summary: "create marks for students exam"
@@ -315,6 +343,8 @@ paths:
   
   /getExamsByClass/{classId}:
     get:
+      security:
+        - BearerAuth: []
       tags:
         - "Exam"
       summary: "Get Exam Details by ClassId"
@@ -340,6 +370,8 @@ paths:
   
   /deleteExamByExamIdAndClassId/{examId}:
     delete:
+      security:
+        - BearerAuth: []
       tags:
         - "Exam"
       summary: "Delete exam by class Id"
@@ -356,6 +388,8 @@ paths:
             
   /addExamsByClass:
     post:
+      security:
+        - BearerAuth: []
       tags:
         - "Exam"
       summary: "Create Exam for a class"
@@ -372,6 +406,8 @@ paths:
     
   /updateExam/{examId}:
     patch:
+      security:
+        - BearerAuth: []
       tags:
         - "Exam"
       summary: "Update Exam for a class"
@@ -394,6 +430,8 @@ paths:
           
   /createRoi:
     post:
+      security:
+        - BearerAuth: []
       tags:
         - "ROI"
       summary: "Create ROI"
@@ -414,6 +452,8 @@ paths:
     
   /updateRoi/{roiId}:
     patch:
+      security:
+        - BearerAuth: []
       tags:
         - "ROI"
       summary: "Update ROI"
@@ -436,6 +476,8 @@ paths:
             
   /deleteRoi/{roiId}:
     delete:
+      security:
+        - BearerAuth: []
       tags:
         - "ROI"
       summary: "Delete ROI"
@@ -454,6 +496,8 @@ paths:
   
   /roi/{examId}:
     get:
+      security:
+        - BearerAuth: []
       tags:
       - "ROI"
       summary: "Get ROI data"
@@ -993,6 +1037,7 @@ definitions:
         $ref: '#/definitions/roi'
       extractionMethod:
         type: string
+        enum: ["NUMERIC_CLASSIFICATION","CELL_OMR"]
           
   CreateROIResponse:
     type: object
@@ -1082,4 +1127,3 @@ definitions:
       updatedAt:
         type: string
         format: date-time
-    
