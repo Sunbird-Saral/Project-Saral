@@ -284,29 +284,15 @@ paths:
         "400":
           description: "unsuccessful operation"
   /getSavedScan:  
-    get:
+    post:
       tags:
       - "Marks"
       summary: "Get Scan Marks"
       parameters:
-        - in: query
-          name: classId
-          type: string
-        - in: query
-          name: subject
-          type: string
-        - in: query
-          name: fromDate
-          type: string
-        - in: query
-          name: page
-          type: integer
-        - in: query
-          name: downloadRes
-          type: string
-        - in: query
-          name: limit
-          type: integer
+        - in : body
+          name: body
+          schema:
+            $ref: "#/definitions/GetSavedScanBody"
       responses:
         "201":
           description: "successful operation"
@@ -638,26 +624,6 @@ definitions:
         type: string
       udisceCode:
         type: string
-      
-  Students:
-    type: "object"
-    properties:
-      section:
-        type: string
-      _id:
-        type: string
-      name:
-        type: string
-      studentId:
-        type: string
-      schoolId:
-        type: string
-      createdAt:
-        type: string
-        format: date-time
-      updatedAt:
-        type: string
-        format: date-time
         
   UpdateStudentBody:
     type: "object"
