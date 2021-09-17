@@ -52,7 +52,7 @@ router.post('/createRoi',auth, async (req, res) => {
     }
 })
 
-router.patch('/updateRoi/:roiId', async (req, res) => {
+router.patch('/updateRoi/:roiId', auth, async (req, res) => {
     try {
         if (Object.keys(req.body).length === 0) res.status(400).send({ message: 'Validation error.' })
         const updates = Object.keys(req.body)
@@ -79,7 +79,7 @@ router.patch('/updateRoi/:roiId', async (req, res) => {
     }
 })
 
-router.delete('/deleteRoi/:roiId', async (req, res) => {
+router.delete('/deleteRoi/:roiId',auth, async (req, res) => {
     try {
         let roi = await ROI.findOneAndRemove({roiId: req.params.roiId})
         if(!roi) res.status(404).send({"message": "ROI ID has been already deleted."})
