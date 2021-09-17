@@ -1,0 +1,23 @@
+[{
+  "name": "Fountainhead School",
+  "schoolId": "1",
+  "password": "tarento@123",
+  "state": "gujrat",
+  "district": "ahmedabad",
+  "block": "haldwani",
+  "hmName": "acbc",
+  "hmMobileNo": "8006079875",
+  "noOfStudents": "100",
+  "udiseCode": "1"
+},{
+  "name": "Ahmedabad International School",
+  "schoolId": "2",
+  "password": "tarento@123",
+  "state": "gujrat",
+  "district": "ahmedabad",
+  "block": "haldwani",
+  "hmName": "acbc",
+  "hmMobileNo": "8006079875",
+  "noOfStudents": "100",
+  "udiseCode": "2"
+}]

@@ -1,0 +1,63 @@
+[{
+  "marksInfo": [
+    {
+      "questionId": "LO-1",
+      "obtainedMarks": 1
+    },
+    {
+      "questionId": "LO-2",
+      "obtainedMarks": 1
+    },
+    {
+      "questionId": "LO-3",
+      "obtainedMarks": 0
+    },
+    {
+      "questionId": "LO-4",
+      "obtainedMarks": 0
+    },
+    {
+      "questionId": "LO-5",
+      "obtainedMarks": 1
+    }
+  ],
+  "section": "D",
+  "studentId": "12040000001",
+  "securedMarks": 3,
+  "totalMarks": 5,
+  "schoolId": "1",
+  "examDate": "2021-09-18",
+  "subject": "Hindi",
+  "classId": "2"
+},{
+  "marksInfo": [
+    {
+      "questionId": "LO-1",
+      "obtainedMarks": 1
+    },
+    {
+      "questionId": "LO-2",
+      "obtainedMarks": 1
+    },
+    {
+      "questionId": "LO-3",
+      "obtainedMarks": 0
+    },
+    {
+      "questionId": "LO-4",
+      "obtainedMarks": 0
+    },
+    {
+      "questionId": "LO-5",
+      "obtainedMarks": 1
+    }
+  ],
+  "section": "D",
+  "studentId": "12040000001",
+  "securedMarks": 3,
+  "totalMarks": 5,
+  "schoolId": "1",
+  "examDate": "2021-09-17",
+  "subject": "Math",
+  "classId": "2"
+}]

@@ -1,0 +1,842 @@
+{
+	"info": {
+		"_postman_id": "3ee76ab5-025d-4bc2-8f13-12f5dc156f3a",
+		"name": "SARALDATA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "school",
+			"item": [
+				{
+					"name": "fetch school",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/schools",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"schools"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create School",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 201) {",
+									"    pm.environment.set('authToken', pm.response.json().token)",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Fountainhead School\",\n    \"schoolId\": \"1\",\n    \"password\": \"tarento@123\",\n    \"state\": \"gujrat\",\n    \"district\": \"ahmedabad\",\n    \"block\": \"haldwani\",\n    \"hmName\": \"acbc\",\n    \"hmMobileNo\": \"8006079875\",\n    \"noOfStudents\": \"100\",\n    \"udiseCode\": \"123\"\n\n}"
+						},
+						"url": {
+							"raw": "{{url}}/schools/create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"schools",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UP Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    pm.environment.set('authToken', pm.response.json().token)",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"schoolId\": \"1\",\n    \"password\": \"tarento@123\",\n    \"classes\": true \n}"
+						},
+						"url": {
+							"raw": "{{url}}/schools/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"schools",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete School",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/deleteSchoolBySchoolId/:schoolId",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"deleteSchoolBySchoolId",
+								":schoolId"
+							],
+							"variable": [
+								{
+									"key": "schoolId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update school",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Karnavati Public School\",\r\n    \"district\": \"ahemdabad\",\r\n    \"state\": \"gujrat\",\r\n    \"block\": \"haldwanis\",\r\n    \"hmName\": \"ha\",\r\n    \"hmMobileNo\": \"8006079636\",\r\n    \"noOfStudents\": \"23\",\r\n    \"udisceCode\":123\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/updateSchool/:SchoolId",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"updateSchool",
+								":SchoolId"
+							],
+							"variable": [
+								{
+									"key": "SchoolId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "student",
+			"item": [
+				{
+					"name": "Create Student",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Apurva\",\n    \"section\": \"D\",\n    \"studentClass\": [\n        {\n            \"classId\": \"2\"\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{url}}/createStudent",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"createStudent"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch Students",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"classId\": \"2\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/fetchStudentsByQuery",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"fetchStudentsByQuery"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch Students and exam",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \n    \"classId\": \"2\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/fetchStudentsandExamsByQuery",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"fetchStudentsandExamsByQuery"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete student",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "authToken",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/deleteStudentByStudentId/:studentId",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"deleteStudentByStudentId",
+								":studentId"
+							],
+							"variable": [
+								{
+									"key": "studentId",
+									"value": "12040000001"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Student",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"name\": \"test5\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/updateStudent/:studentId",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"updateStudent",
+								":studentId"
+							],
+							"variable": [
+								{
+									"key": "studentId",
+									"value": "77472010000004"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "classes",
+			"item": [
+				{
+					"name": "Add Classes",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"classId\": \"2\",\n         \"sections\": [\n        {\n            \"section\": \"D\"\n        },\n         {\n            \"section\": \"B\"\n        },{\n            \"section\": \"C\"\n        }\n    ]\n    }\n]"
+						},
+						"url": {
+							"raw": "{{url}}/addClasses",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"addClasses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Class",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"classId\": \"2\",\n    \"sections\": [\n        {\n            \"section\": \"E\"\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{url}}/updateClass",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"updateClass"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Class",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"classId\": \"2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/deleteClass",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"deleteClass"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "exam",
+			"item": [
+				{
+					"name": "Add Exam by Class",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
+								"key": "Authorization",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[{\n    \"subject\": \"Math\",\n    \"examLO\": \"Math\",\n    \"classId\": \"2\",\n    \"examDate\": \"17/09/2001\",\n    \"totalMarks\": 20,\n    \"questions\" : [\n        {\n            \"questionId\": 1,\n            \"indicatorTitle\": \"L0-1\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 2,\n            \"indicatorTitle\": \"L0-2\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 3,\n            \"indicatorTitle\": \"L0-3\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 4,\n            \"indicatorTitle\": \"L0-4\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 5,\n            \"indicatorTitle\": \"L0-5\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 6,\n            \"indicatorTitle\": \"L0-6\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 7,\n            \"indicatorTitle\": \"L0-7\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 8,\n            \"indicatorTitle\": \"L0-8\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 9,\n            \"indicatorTitle\": \"L0-9\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 10,\n            \"indicatorTitle\": \"L0-10\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 11,\n            \"indicatorTitle\": \"L0-11\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 12,\n            \"indicatorTitle\": \"L0-12\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 13,\n            \"indicatorTitle\": \"L0-13\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 14,\n            \"indicatorTitle\": \"L0-14\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 15,\n            \"indicatorTitle\": \"L0-15\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 16,\n            \"indicatorTitle\": \"L0-16\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 17,\n            \"indicatorTitle\": \"L0-17\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 18,\n            \"indicatorTitle\": \"L0-18\",\n            \"questionMarks\": 1.0\n        },{\n            \"questionId\": 19,\n            \"indicatorTitle\": \"L0-19\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 20,\n            \"indicatorTitle\": \"L0-20\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 21,\n            \"indicatorTitle\": \"L0-21\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 22,\n            \"indicatorTitle\": \"L0-22\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 23,\n            \"indicatorTitle\": \"L0-23\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 24,\n            \"indicatorTitle\": \"L0-24\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 25,\n            \"indicatorTitle\": \"L0-25\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 26,\n            \"indicatorTitle\": \"L0-26\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 27,\n            \"indicatorTitle\": \"L0-27\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 28,\n            \"indicatorTitle\": \"L0-28\",\n            \"questionMarks\": 1.0\n        },{\n            \"questionId\": 29,\n            \"indicatorTitle\": \"L0-29\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 30,\n            \"indicatorTitle\": \"L0-30\",\n            \"questionMarks\": 1.0\n        }\n    ]\n},\n{\n    \"subject\": \"Hindi\",\n    \"examLO\": \"Hindi\",\n    \"classId\": \"2\",\n    \"examDate\": \"18/09/2001\",\n    \"totalMarks\": 20,\n    \"questions\" : [\n        {\n            \"questionId\": 1,\n            \"indicatorTitle\": \"L0-1\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 2,\n            \"indicatorTitle\": \"L0-2\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 3,\n            \"indicatorTitle\": \"L0-3\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 4,\n            \"indicatorTitle\": \"L0-4\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 5,\n            \"indicatorTitle\": \"L0-5\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 6,\n            \"indicatorTitle\": \"L0-6\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 7,\n            \"indicatorTitle\": \"L0-7\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 8,\n            \"indicatorTitle\": \"L0-8\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 9,\n            \"indicatorTitle\": \"L0-9\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 10,\n            \"indicatorTitle\": \"L0-10\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 11,\n            \"indicatorTitle\": \"L0-11\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 12,\n            \"indicatorTitle\": \"L0-12\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 13,\n            \"indicatorTitle\": \"L0-13\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 14,\n            \"indicatorTitle\": \"L0-14\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 15,\n            \"indicatorTitle\": \"L0-15\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 16,\n            \"indicatorTitle\": \"L0-16\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 17,\n            \"indicatorTitle\": \"L0-17\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 18,\n            \"indicatorTitle\": \"L0-18\",\n            \"questionMarks\": 1.0\n        },{\n            \"questionId\": 19,\n            \"indicatorTitle\": \"L0-19\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 20,\n            \"indicatorTitle\": \"L0-20\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 21,\n            \"indicatorTitle\": \"L0-21\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 22,\n            \"indicatorTitle\": \"L0-22\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 23,\n            \"indicatorTitle\": \"L0-23\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 24,\n            \"indicatorTitle\": \"L0-24\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 25,\n            \"indicatorTitle\": \"L0-25\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 26,\n            \"indicatorTitle\": \"L0-26\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 27,\n            \"indicatorTitle\": \"L0-27\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 28,\n            \"indicatorTitle\": \"L0-28\",\n            \"questionMarks\": 1.0\n        },{\n            \"questionId\": 29,\n            \"indicatorTitle\": \"L0-29\",\n            \"questionMarks\": 1.0\n        },\n        {\n            \"questionId\": 30,\n            \"indicatorTitle\": \"L0-30\",\n            \"questionMarks\": 1.0\n        }\n    ]\n}]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/addExamsByClass",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"addExamsByClass"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Exam by Examid and classid",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/deleteExamByExamIdAndClassId/:examId",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"deleteExamByExamIdAndClassId",
+								":examId"
+							],
+							"variable": [
+								{
+									"key": "examId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Exams by Class",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/getExamsByClas/:classId?examDate= 17/09/2001",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"getExamsByClas",
+								":classId"
+							],
+							"query": [
+								{
+									"key": "subject",
+									"value": "Math",
+									"disabled": true
+								},
+								{
+									"key": "examDate",
+									"value": " 17/09/2001"
+								}
+							],
+							"variable": [
+								{
+									"key": "classId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update exam",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n     \"examLO\": \"Science\",\r\n    \"subject\": \"Science\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/updateExam/:examId",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"updateExam",
+								":examId"
+							],
+							"variable": [
+								{
+									"key": "examId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "marks",
+			"item": [
+				{
+					"name": "Get Saved Scan",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "7",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "tarento@123",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"classId\" : \"2\", \n    \"subject\": \"Math\",\n    \"fromDate\": \"07/09/2021\",\n    \"page\": 1,\n    \"downloadRes\": true\n}"
+						},
+						"url": {
+							"raw": "{{url}}/getSavedScan",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"getSavedScan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Save Marks",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"classId\": \"2\",\n    \"examDate\": \"2021-09-17\",\n    \"subject\": \"Math\",\n    \"studentsMarkInfo\": [\n        {\n            \"section\": \"D\",\n            \"studentId\": \"12040000001\",\n            \"securedMarks\": 3,\n            \"totalMarks\": 5,\n            \"marksInfo\": [\n                {\n                    \"questionId\": \"LO-1\",\n                    \"obtainedMarks\": 1\n                },\n                {\n                    \"questionId\": \"LO-2\",\n                    \"obtainedMarks\": 1\n                },\n                {\n                    \"questionId\": \"LO-3\",\n                    \"obtainedMarks\": 0\n                },\n                {\n                    \"questionId\": \"LO-4\",\n                    \"obtainedMarks\": 0\n                },\n                {\n                    \"questionId\": \"LO-5\",\n                    \"obtainedMarks\": 1\n                }\n            ]\n        }\n    ]\n}"
+						},
+						"url": {
+							"raw": "{{url}}/saveMarks",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"saveMarks"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ROI",
+			"item": [
+				{
+					"name": "Create ROI",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"subject\": \"Hindi\",\r\n    \"classId\": \"2\",\r\n    \"roi\":  [{\r\n        \"name\": \"roll\",\r\n        \"method\": \"classify\",\r\n        \"index\": \"0\",\r\n        \"row\": \"-1\",\r\n        \"col\": \"0\",\r\n        \"left\": \"150\",\r\n        \"right\": \"168\",\r\n        \"top\": \"28\",\r\n        \"bottom\": \"47\"\r\n    }\r\n],\r\n    \"extractionMethod\": \"NUMERIC_CLASSIFICATION\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/createRoi",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"createRoi"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update ROI",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n       \"roi\":  [\r\n        {\r\n        \"name\": \"roll\",\r\n        \"method\": \"classify\",\r\n        \"index\": \"0\",\r\n        \"row\": \"-1\",\r\n        \"col\": \"0\",\r\n        \"left\": \"150\",\r\n        \"right\": \"168\",\r\n        \"top\": \"28\",\r\n        \"bottom\": \"47\"\r\n    }\r\n]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/updateRoi/:roiId",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"updateRoi",
+								":roiId"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "roiId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete ROI",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/deleteRoi/:roiId",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"deleteRoi",
+								":roiId"
+							],
+							"variable": [
+								{
+									"key": "roiId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get ROI",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
+								"key": "Authorization",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/roi/:examId",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"roi",
+								":examId"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "examId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{authToken}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
