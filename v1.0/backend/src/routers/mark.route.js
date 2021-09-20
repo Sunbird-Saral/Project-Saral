@@ -44,7 +44,7 @@ router.post('/saveMarks', auth, async (req, res) => {
 })
 
 const fetchSavedData = async (req) => {
-    const { schoolId, classId, section, subject, fromDate, toDate } = req.query
+    const { schoolId, classId, section, subject, fromDate, toDate } = req.body
     const match = {}
     if (schoolId) {
         match.schoolId = schoolId
@@ -86,7 +86,7 @@ const fetchSavedData = async (req) => {
     }
 
     try {
-        const { limit = 10, page = 1 } = req.query
+        const { limit = 10, page = 1 } = req.body
 
         if (parseInt(page) < 0 || parseInt(page) === 0) {
             return { "error": true, "message": "invalid page number, should start with 1" }
@@ -118,13 +118,36 @@ const fetchSavedData = async (req) => {
     }
 }
 
-router.get('/getSavedScan?', basicAuth, async (req, res) => {
+// router.get('/getSavedScan?', basicAuth, async (req, res) => {
+//     try {
+//         const resposne = await fetchSavedData(req)
+//         if (resposne && resposne.error) {
+//             return res.status(404).send(resposne)
+//         }
+//         const { downloadRes = false, subject } = req.query
+//         if (downloadRes) {
+//             deleteAllfilesFromReports()
+//             let filePath = getFilePath(subject, 'json')
+//             fs.writeFile(filePath, JSON.stringify(resposne), (err) => {
+//                 if (err) throw err;
+//                 res.download(filePath)
+//             });
+//         } else {
+//             res.send(resposne)
+//         }
+//     } catch (e) {
+//         console.log(e);
+//         res.status(400).send({ "error": true, e })
+//     }
+// })
+
+router.post('/getSavedScan', basicAuth, async (req, res) => {
     try {
         const resposne = await fetchSavedData(req)
         if (resposne && resposne.error) {
             return res.status(404).send(resposne)
         }
-        const { downloadRes = false, subject } = req.query
+        const { downloadRes = false, subject } = req.body
         if (downloadRes) {
             deleteAllfilesFromReports()
             let filePath = getFilePath(subject, 'json')
