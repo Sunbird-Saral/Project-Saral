@@ -12,19 +12,19 @@ tags:
 - name: "Exam"
 - name: "Marks"
 - name: "ROI"
-schemes:
-- "https"
-- "http"
 
-components:
-  securitySchemes:
-    BearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
+
+securityDefinitions:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header
+
     basicAuth:
-      type: http
-      scheme: basic
+      type: basic
+schemes:
+  - "https"
+  - "http"
 
 
 paths:
@@ -131,7 +131,7 @@ paths:
   /addClasses:
     post:
       security:
-        - BearerAuth: []
+        - Bearer: []
       tags:
       - Class
       summary: "Create Class"
@@ -155,7 +155,7 @@ paths:
   /updateClass:
     post:
       security:
-        - BearerAuth: []
+        - Bearer: []
       tags:
       - Class
       summary: "Update Class"
@@ -175,7 +175,7 @@ paths:
   /deleteClass:
     delete:
       security:
-        - BearerAuth: []
+        - Bearer: []
       tags:
       - Class
       summary: "Delete class by class Id"
@@ -201,7 +201,7 @@ paths:
   /fetchStudentsByQuery:
     post:
       security:
-        - BearerAuth: []
+        - Bearer: []
       tags:
       - "Student"
       summary: "Get students list"
@@ -224,7 +224,7 @@ paths:
   /createStudent:
     post:
       security:
-        - BearerAuth: []
+        - Bearer: []
       tags:
       - "Student"
       summary: "Create Student"
@@ -244,7 +244,7 @@ paths:
   /fetchStudentsandExamsByQuery:
     post:
       security:
-        - BearerAuth: []
+        - Bearer: []
       tags:
       - "Student"
       summary: "Get Exam Details by class Id"
@@ -328,7 +328,7 @@ paths:
   /saveMarks:
     post:
       security:
-        - BearerAuth: []
+        - Bearer: []
       tags:
         - "Marks"
       summary: "create marks for students exam"
@@ -344,7 +344,7 @@ paths:
   /getExamsByClass/{classId}:
     get:
       security:
-        - BearerAuth: []
+        - Bearer: []
       tags:
         - "Exam"
       summary: "Get Exam Details by ClassId"
@@ -371,7 +371,7 @@ paths:
   /deleteExamByExamIdAndClassId/{examId}:
     delete:
       security:
-        - BearerAuth: []
+        - Bearer: []
       tags:
         - "Exam"
       summary: "Delete exam by class Id"
@@ -389,7 +389,7 @@ paths:
   /addExamsByClass:
     post:
       security:
-        - BearerAuth: []
+        - Bearer: []
       tags:
         - "Exam"
       summary: "Create Exam for a class"
@@ -407,7 +407,7 @@ paths:
   /updateExam/{examId}:
     patch:
       security:
-        - BearerAuth: []
+        - Bearer: []
       tags:
         - "Exam"
       summary: "Update Exam for a class"
@@ -431,7 +431,7 @@ paths:
   /createRoi:
     post:
       security:
-        - BearerAuth: []
+        - Bearer: []
       tags:
         - "ROI"
       summary: "Create ROI"
@@ -446,14 +446,14 @@ paths:
           schema:
             $ref: "#/definitions/CreateROIResponse"
         "404":
-          description: "TestId Does not exist"
+          description: "examId does not exist"
         "400":
-          description: "ROI already exist for EXAM020208092021"
+          description: "roiId already exist"
     
   /updateRoi/{roiId}:
     patch:
       security:
-        - BearerAuth: []
+        - Bearer: []
       tags:
         - "ROI"
       summary: "Update ROI"
@@ -470,14 +470,14 @@ paths:
         "200":
           description: "ROI is updated successfully."
         "404":
-          description: "ROI is not updated."
+          description: "ROI Id does not exist."
         "400":
           description: "unsuccessful operation"
             
   /deleteRoi/{roiId}:
     delete:
       security:
-        - BearerAuth: []
+        - Bearer: []
       tags:
         - "ROI"
       summary: "Delete ROI"
@@ -497,7 +497,7 @@ paths:
   /roi/{examId}:
     get:
       security:
-        - BearerAuth: []
+        - Bearer: []
       tags:
       - "ROI"
       summary: "Get ROI data"
@@ -515,6 +515,7 @@ paths:
             $ref: "#/definitions/roi"
         "400":
           description: "unsuccessful operation"
+          
 
 definitions:
   Schools:
@@ -1127,3 +1128,18 @@ definitions:
       updatedAt:
         type: string
         format: date-time
+        
+
+    
+  
+
+    
+        
+        
+      
+        
+      
+       
+  
+        
+
