@@ -20,7 +20,7 @@ const classSchema = new mongoose.Schema({
     },
     schoolId: {
         type: String,
-        unique: true,
+        // unique: true,
         required: true,
         ref: 'School'
     }
