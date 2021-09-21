@@ -20,4 +20,15 @@
   "hmMobileNo": "8006079875",
   "noOfStudents": "100",
   "udiseCode": "2"
+},{
+  "name": "Delhi Public School",
+  "schoolId": "3",
+  "password": "tarento@123",
+  "state": "UP",
+  "district": "delhi",
+  "block": "sector-15",
+  "hmName": "acbc",
+  "hmMobileNo": "8006079875",
+  "noOfStudents": "100",
+  "udiseCode": "3"
 }]

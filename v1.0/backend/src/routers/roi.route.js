@@ -23,12 +23,12 @@ router.post('/createRoi',auth, async (req, res) => {
             subject: req.body.subject,
             classId: req.body.classId
         }
-        
         const examExist = await Exam.findOne(lookup)
         if(examExist){
-            const roiExist = await ROI.findOne({classId: req.body.classId, subject: req.body.subject})
-            if(!roiExist){
                 const school = await School.findOne({schoolId:examExist.schoolId})
+            const roiExist = await ROI.findOne({classId: req.body.classId, subject: req.body.subject, state: school.state, extractionMethod: req.body.extractionMethod})
+            if(!roiExist){
+                // const school = await School.findOne({schoolId:examExist.schoolId})
                 req.body.state = school.state
                 req.body.roiId= await Counter.getValueForNextSequence("roiId")
                 let roi = await ROI.create(req.body)

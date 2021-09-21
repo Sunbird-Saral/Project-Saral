@@ -9,4 +9,81 @@
   "name": "Apurva",
   "studentId": "12040000001",
   "schoolId": "1"
+},{
+  "studentClass": [
+    {
+      "classId": "2",
+      "className": "Class-2"
+    }
+  ],
+  "section": "D",
+  "name": "Arman",
+  "studentId": "32040000001",
+  "schoolId": "3"
+},{
+  "studentClass": [
+    {
+      "classId": "3",
+      "className": "Class-3"
+    }
+  ],
+  "section": "D",
+  "name": "testUpStudent",
+  "studentId": "33040000001",
+  "schoolId": "3"
+},{
+  "studentClass": [
+    {
+      "classId": "4",
+      "className": "Class-4"
+    }
+  ],
+  "section": "D",
+  "name": "testStudent4",
+  "studentId": "34040000001",
+  "schoolId": "3"
+},{
+  "studentClass": [
+    {
+      "classId": "5",
+      "className": "Class-5"
+    }
+  ],
+  "section": "C",
+  "name": "testStudent5",
+  "studentId": "35030000001",
+  "schoolId": "3"
+},{
+  "studentClass": [
+    {
+      "classId": "6",
+      "className": "Class-6"
+    }
+  ],
+  "section": "B",
+  "name": "testStudent6",
+  "studentId": "36020000001",
+  "schoolId": "3"
+},{
+  "studentClass": [
+    {
+      "classId": "7",
+      "className": "Class-7"
+    }
+  ],
+  "section": "B",
+  "name": "testStudent7",
+  "studentId": "37020000001",
+  "schoolId": "3"
+},{
+  "studentClass": [
+    {
+      "classId": "8",
+      "className": "Class-8"
+    }
+  ],
+  "section": "B",
+  "name": "testStudent8",
+  "studentId": "38020000001",
+  "schoolId": "3"
 }]
