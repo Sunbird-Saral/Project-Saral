@@ -93,9 +93,10 @@ router.get('/roi/:examId',auth, async (req, res) => {
     try {
         const examExist = await Exam.findOne({examId: req.params.examId}).lean()
         if(examExist){
-            const roiExist = await ROI.findOne({ classId: examExist.classId, subject: examExist.subject}).lean()
-            if(roiExist){
                 const school = await School.findOne({schoolId: req.school.schoolId})
+            const roiExist = await ROI.findOne({ classId: examExist.classId, subject: examExist.subject,state: school.state}).lean()
+            if(roiExist){
+               
                 let lookup = {
                     classId: examExist.classId,
                     subject: examExist.subject,
