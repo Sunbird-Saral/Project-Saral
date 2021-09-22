@@ -11,7 +11,7 @@ const Counter = require('../models/counter')
 router.post('/createRoi',auth, async (req, res) => {
     try { 
         const inputKeys = Object.keys(req.body)
-        const allowedUpdates = ['subject', 'classId', 'roi', 'extractionMethod']
+        const allowedUpdates = ['subject', 'classId', 'type', 'roi', 'extractionMethod']
         const isValidOperation = inputKeys.every((input) => allowedUpdates.includes(input))
    
         if(!isValidOperation) {
@@ -26,7 +26,7 @@ router.post('/createRoi',auth, async (req, res) => {
         const examExist = await Exam.findOne(lookup)
         if(examExist){
             const school = await School.findOne({schoolId:examExist.schoolId})
-            const roiExist = await ROI.findOne({classId: req.body.classId, subject: req.body.subject, state: school.state, extractionMethod: req.body.extractionMethod})
+            const roiExist = await ROI.findOne({classId: req.body.classId, subject: req.body.subject, state: school.state, type: req.body.type})
             if(!roiExist){
                 // const school = await School.findOne({schoolId:examExist.schoolId})
                 req.body.state = school.state
@@ -89,7 +89,7 @@ router.delete('/deleteRoi/:roiId',auth, async (req, res) => {
     }
 })
 
-router.get('/roi/:examId',auth, async (req, res) => {
+router.get('/roi/:examId/type/:type',auth, async (req, res) => {
     try {
         const examExist = await Exam.findOne({examId: req.params.examId}).lean()
         if(examExist){
@@ -100,10 +100,15 @@ router.get('/roi/:examId',auth, async (req, res) => {
                 let lookup = {
                     classId: examExist.classId,
                     subject: examExist.subject,
-                    state: school.state
+                    state: school.state,
+                    type: req.params.type
                 }
                 let roi = await ROI.find(lookup,{_id: 0,__v: 0 }).lean()
+                if(roi.length){
                 res.status(200).send(roi[0].roi)
+                }else{
+                    res.status(404).send({"message": "ROI does not exist"})              
+                }
             }else{
                 res.status(404).send({"message": "ROI does not exist"})
             }
