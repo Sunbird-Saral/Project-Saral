@@ -70,7 +70,6 @@ router.patch('/updateRoi/:roiId', auth, async (req, res) => {
         let updateObj = {}
         
         if(req.body.roi) updateObj["roi"] = req.body.roi
-        if(req.body.extractionMethod) updateObj["extractionMethod"] = req.body.extractionMethod
     
         await ROI.update(lookup,updateObj).lean();
         res.status(201).send({"message": 'ROI is updated successfully.'})  
