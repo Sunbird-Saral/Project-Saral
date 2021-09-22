@@ -494,7 +494,7 @@ paths:
         "400":
           description: "unsuccessful operation"
   
-  /roi/{examId}:
+  /roi/{examId}/type/{type}:
     get:
       security:
         - Bearer: []
@@ -506,6 +506,11 @@ paths:
         name: examId
         type: number
         required: true
+      - in: path
+        name: type
+        type: string
+        required: true
+        
 
 
       responses:
@@ -1034,6 +1039,9 @@ definitions:
         type: string
       classId:
         type: string
+      type: 
+        type: string
+        enum: ["SAT","PAT"]
       roi:
         $ref: '#/definitions/roi'
       extractionMethod:

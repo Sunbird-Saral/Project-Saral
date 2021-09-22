@@ -1,9 +1,9 @@
 [{
   "_id": "examId",
   "__v": 0,
-  "counter_value": 2
+  "counter_value": 10
 },{
   "_id": "roiId",
   "__v": 0,
-  "counter_value": 2
+  "counter_value": 13
 }]

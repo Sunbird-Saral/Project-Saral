@@ -9,4 +9,70 @@
   "name": "Apurva",
   "studentId": "12040000001",
   "schoolId": "1"
+},{
+  "studentClass": [
+    {
+      "classId": "3",
+      "className": "Class-3"
+    }
+  ],
+  "section": "D",
+  "name": "Arman",
+  "studentId": "13040000001",
+  "schoolId": "1"
+},{
+  "studentClass": [
+    {
+      "classId": "4",
+      "className": "Class-4"
+    }
+  ],
+  "section": "D",
+  "name": "testStudent4",
+  "studentId": "14040000001",
+  "schoolId": "1"
+},{
+  "studentClass": [
+    {
+      "classId": "5",
+      "className": "Class-5"
+    }
+  ],
+  "section": "D",
+  "name": "testStudent5",
+  "studentId": "14040000002",
+  "schoolId": "1"
+},{
+  "studentClass": [
+    {
+      "classId": "6",
+      "className": "Class-6"
+    }
+  ],
+  "section": "D",
+  "name": "testStudent6",
+  "studentId": "16040000001",
+  "schoolId": "1"
+},{
+  "studentClass": [
+    {
+      "classId": "7",
+      "className": "Class-7"
+    }
+  ],
+  "section": "D",
+  "name": "testStudent7",
+  "studentId": "17040000001",
+  "schoolId": "1"
+},{
+  "studentClass": [
+    {
+      "classId": "8",
+      "className": "Class-8"
+    }
+  ],
+  "section": "D",
+  "name": "testStudent8",
+  "studentId": "18040000001",
+  "schoolId": "1"
 }]

@@ -13,5 +13,94 @@
   "classId": "2",
   "className": "Class-2",
   "schoolId": "1"
-}
-]
+},{
+  "sections": [
+    {
+      "section": "D"
+    },
+    {
+      "section": "B"
+    },
+    {
+      "section": "C"
+    }
+  ],
+  "classId": "3",
+  "className": "Class-3",
+  "schoolId": "1"
+},{
+  "sections": [
+    {
+      "section": "D"
+    },
+    {
+      "section": "B"
+    },
+    {
+      "section": "C"
+    }
+  ],
+  "classId": "4",
+  "className": "Class-4",
+  "schoolId": "1"
+},{
+  "sections": [
+    {
+      "section": "D"
+    },
+    {
+      "section": "B"
+    },
+    {
+      "section": "C"
+    }
+  ],
+  "classId": "5",
+  "className": "Class-5",
+  "schoolId": "1"
+},{
+  "sections": [
+    {
+      "section": "D"
+    },
+    {
+      "section": "B"
+    },
+    {
+      "section": "C"
+    }
+  ],
+  "classId": "6",
+  "className": "Class-6",
+  "schoolId": "1"
+},{
+  "sections": [
+    {
+      "section": "D"
+    },
+    {
+      "section": "B"
+    },
+    {
+      "section": "C"
+    }
+  ],
+  "classId": "7",
+  "className": "Class-7",
+  "schoolId": "1"
+},{
+  "sections": [
+    {
+      "section": "D"
+    },
+    {
+      "section": "B"
+    },
+    {
+      "section": "C"
+    }
+  ],
+  "classId": "8",
+  "className": "Class-8",
+  "schoolId": "1"
+}]
