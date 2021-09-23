@@ -214,11 +214,16 @@ dependencies {
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 
+ // SaralSDK use OpenCV and SaralSDK code, make them as dependencies here
+
     //firebase tflite
     implementation 'com.google.firebase:firebase-firestore:21.4.0'
     implementation 'com.google.firebase:firebase-ml-model-interpreter:22.0.1'
     implementation 'org.tensorflow:tensorflow-lite:1.13.1@aar'
+    //this may be commented in future
     implementation project(path: ':openCVLibrary343')
+
+    implementation project(path: ':saralsdk')
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
       exclude group:'com.facebook.fbjni'
     }
@@ -250,4 +255,5 @@ task copyDownloadableDepsToLibs(type: Copy) {
 }
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
+// SaralSDK uses Firebase libraray to load and make model prediction
 apply plugin: 'com.google.gms.google-services'
