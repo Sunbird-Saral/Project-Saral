@@ -1,0 +1,186 @@
+openapi: 3.0.0
+info:
+  title: Saral Scanning layout specification
+  description: >-
+    The schema defines physicial layout representation of tabular layout that includes handwritten digits and OMR in the individual tabular cell.
+  contact:
+    name: ekstep foundation
+    email: contact@ekstep.org
+  version: 1.5.0
+servers:
+  - url: /none
+paths: {}
+
+components:
+  schemas:
+    layout:
+      type: object
+      description: defines the physical layout of the scanning area
+      properties:
+        version:
+          type: string
+          default: '1.0'
+          description: layout detection version
+        name:
+          type: string
+          description: layout name for human understanding
+          example: Odisa SAT exam sheet format for class 2 to 5
+        type:
+          $ref: '#/components/schemas/sheetType'
+        identifiers:
+          $ref: '#/components/schemas/identifiersType'
+        cells:
+          type: array
+          items:
+            $ref: '#/components/schemas/cell'
+            minItems: 1
+
+    cell:
+      type: object
+      description: each logical area on the layout that needs to be scanned
+      properties:
+        cellId:
+          type: string
+          description: unique identity of the cell
+          format: uuidv4
+        rois:
+          $ref: '#/components/schemas/rois'
+        render:
+          $ref: '#/components/schemas/renderingInformation'
+        format:
+          $ref: '#/components/schemas/formattingInformation'
+        tags:
+          description: |
+            Each of the cells can be tagged to categories based on requirement.
+            For example set of questions to be tagged as special category.
+          type: array
+          items:
+            type: string
+        validate:
+          $ref: '#/components/schemas/validationInformation'
+        consolidatedCellPrediction:
+          description: |
+            Each of the cells can be tagged to categories based on requirement.
+            For example set of questions to be tagged as special category.
+          type: string
+    
+    renderingInformation:
+      type: object
+      description: should be used to render the layout for visualization and data correction.
+      properties:
+        index:
+          type: number
+          description: display index on the view
+    
+    formattingInformation:
+      type: object
+      description: represents logical purpose of the cell.
+      properties:
+        name:
+          type: string
+          description: human understandable description that explain cell purpose
+          example: roll number
+        value:
+          type: string
+          description: extracted resultData will be reported under this key. Be wise with the name
+          example: rollNumber
+          
+    validationInformation:
+      type: object
+      description: validation rules thats needs to be applied on the cell level.
+      properties:
+        regExp:
+          type: string
+          description: regular expression to detect errorneous resultData
+  
+    rois:
+      type: array
+      items:
+        $ref: '#/components/schemas/roi'
+        minItems: 1
+  
+    roi:
+      type: object
+      description: a scanning area defined on the image. Scanning application will extract the result based upon 'roiId' and update the 'result' key
+      required:
+        - roiId
+        - extractionMethod
+        - roi
+      properties:
+        roiId:
+          type: string
+          description: unique roi identifier
+          format: uuidv4
+        index:
+          type: number
+          description: index of roi in a cell area
+          default: 0
+        extractionMethod:
+          type: string
+          example: NUMERIC_CLASSIFICATION
+          enum:
+            - NUMERIC_CLASSIFICATION
+            - CELL_OMR
+            - QR_CODE
+            - HANDWRITTEN_TEXT
+        rect:
+          $ref: '#/components/schemas/rect'
+        result:
+          $ref: '#/components/schemas/extractedResult'
+
+    rect:
+      type: object
+      description: rectangular area on the image frame
+      required:
+        - top
+        - left
+        - bottom
+        - right
+      properties:
+        top:
+          type: number
+          description: x-coordinate of the ROI on the image
+        left:
+          type: number
+          description: y-coordinate of the ROI on the image
+        bottom:
+          type: number
+          description: x-coordinate of the ROI on the image
+        right:
+          type: number
+          description: y-coordinate of the ROI on the image
+          
+    extractedResult:
+      type: object
+      description: result of data extraction
+      properties:
+        prediction:
+          type: number
+          description: detected data
+        confidence:
+          type: number
+          description: degree of confidence regarding the prediction
+    sheetType:
+      description: |
+        Sheet type identifies unique layout of the sheet. 
+        For example PAT_12_MARKSHEET is PAT(Periodical Assesment Sheet) 
+        covering 12 question and answers.
+      type: string
+      enum:
+      - SAT_20_MARKSHEET
+      - PAT_12_MARKSHEET
+      - PAT_34_MARKSHEET
+      - ATTENDANCE_SHEET_20
+    identifiersType:
+      description: |
+        Array of name value paris that can be captured or associated during scanning process.
+        Typical usage of these identifiers are to capture teacherId,schoolId etc. for SAT or PAT assesment sheets.
+        Its kept generic to make sure it can be used for any other OCR use cases.
+      type: array
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+          value:
+            type: string
