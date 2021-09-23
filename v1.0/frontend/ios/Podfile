@@ -8,6 +8,8 @@ target 'UP_SaralData' do
 
   use_react_native!(:path => config["reactNativePath"])
 
+  pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-async-storage/async-storage'
+
   target 'UP_SaralDataTests' do
     inherit! :complete
     # Pods for testing

@@ -136,10 +136,10 @@ android {
 
     defaultConfig {
         applicationId "com.up_saraldata"
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode appVersionCode
-        versionName appVersionName
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
         multiDexEnabled true
     }
     splits {
@@ -214,11 +214,17 @@ dependencies {
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 
+    implementation platform('com.google.firebase:firebase-bom:28.4.1')
+    implementation 'com.google.firebase:firebase-analytics'
+
     //firebase tflite
     implementation 'com.google.firebase:firebase-firestore:21.4.0'
     implementation 'com.google.firebase:firebase-ml-model-interpreter:22.0.1'
     implementation 'org.tensorflow:tensorflow-lite:1.13.1@aar'
-    implementation project(path: ':openCVLibrary343')
+    // implementation project(path: ':openCVLibrary343')
+
+    // SaralSDK use OpenCV and SaralSDK code, make them as dependencies here
+    implementation project(path: ':saralsdk')
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
       exclude group:'com.facebook.fbjni'
     }

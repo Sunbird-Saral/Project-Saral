@@ -1,0 +1,829 @@
+{
+    "layout": {
+        "version": "1.0",
+        "name": "State SAT exam sheet format",
+        "cells": [
+            {
+                "cellId": "a2c49a05-ec4f-4e48-8f06-2d0fdff90d4b",
+                "rois": [
+                    {
+                       "annotationId": "eKS5GDoKy",
+                       "annotationTags": "STUDENTID_1",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "8bbda24b-48bd-476e-a61f-7ad33dfbf8b5",
+                       "index": 0,
+                       "rect": {
+                          "top": 30,
+                          "left": 192,
+                          "bottom": 50,
+                          "right": 210
+                       }
+                    },
+                    {
+                       "annotationId": "07gfo-X6k",
+                       "annotationTags": "STUDENTID_2",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "92145f9d-f877-4eb9-a93a-82d340a891d0",
+                       "index": 1,
+                       "rect": {
+                          "top": 29,
+                          "left": 215,
+                          "bottom": 51,
+                          "right": 238
+                       }
+                    },
+                    {
+                       "annotationId": "bv3o6dbOL",
+                       "annotationTags": "STUDENTID_3",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "d4d533e2-36fc-4db7-a39c-5bd91c758b01",
+                       "index": 2,
+                       "rect": {
+                          "top": 30,
+                          "left": 242,
+                          "bottom": 50,
+                          "right": 265
+                       }
+                    },
+                    {
+                       "annotationId": "bxUpSr1kN",
+                       "annotationTags": "STUDENTID_4",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "8e67b9d9-d69c-4728-8180-cb4960986a22",
+                       "index": 3,
+                       "rect": {
+                          "top": 30,
+                          "left": 269,
+                          "bottom": 49,
+                          "right": 291
+                       }
+                    },
+                    {
+                       "annotationId": "2AjEL9QuH",
+                       "annotationTags": "STUDENTID_5",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "321b3bdb-e72b-4203-a571-0fde30f60f62",
+                       "index": 4,
+                       "rect": {
+                          "top": 31,
+                          "left": 294,
+                          "bottom": 50,
+                          "right": 315
+                       }
+                    },
+                    {
+                       "annotationId": "sVXs9IDX3",
+                       "annotationTags": "STUDENTID_6",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "52d68c47-10d5-41ab-8596-55f70e5ca36b",
+                       "index": 5,
+                       "rect": {
+                          "top": 31,
+                          "left": 319,
+                          "bottom": 49,
+                          "right": 340
+                       }
+                    },
+                    {
+                       "annotationId": "AcbEHjPdD",
+                       "annotationTags": "STUDENTID_7",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "3dc4a66b-09ac-4419-a78b-538171cafced",
+                       "index": 6,
+                       "rect": {
+                          "top": 31,
+                          "left": 344,
+                          "bottom": 50,
+                          "right": 367
+                       }
+                    },
+                    {
+                       "annotationId": "Om50EqhmL",
+                       "annotationTags": "STUDENTID_8",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "0c0a417e-90a3-4466-991e-4b435fc32d4c",
+                       "index": 7,
+                       "rect": {
+                          "top": 31,
+                          "left": 371,
+                          "bottom": 50,
+                          "right": 392
+                       }
+                    },
+                    {
+                       "annotationId": "_EITxSSf2",
+                       "annotationTags": "STUDENTID_9",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "48d1dbc5-c557-4b60-9ae8-825d8f93b8fa",
+                       "index": 8,
+                       "rect": {
+                          "top": 31,
+                          "left": 395,
+                          "bottom": 50,
+                          "right": 417
+                       }
+                    },
+                    {
+                       "annotationId": "RouzCuE85",
+                       "annotationTags": "STUDENTID_10",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "3c687e97-8632-4e5c-b5be-7726e4ff67e1",
+                       "index": 9,
+                       "rect": {
+                          "top": 31,
+                          "left": 421,
+                          "bottom": 50,
+                          "right": 442
+                       }
+                    },
+                    {
+                       "annotationId": "KMkXP1EDG",
+                       "annotationTags": "STUDENTID_11",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "7a9f4345-a09c-4818-b0ca-16e285d30d7d",
+                       "index": 10,
+                       "rect": {
+                          "top": 31,
+                          "left": 446,
+                          "bottom": 50,
+                          "right": 468
+                       }
+                    },
+                    {
+                       "annotationId": "11AKDb31Z",
+                       "annotationTags": "STUDENTID_12",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "cb15f14f-b49c-4c8f-8e81-0b6a1291ad3b",
+                       "index": 11,
+                       "rect": {
+                          "top": 30,
+                          "left": 472,
+                          "bottom": 48,
+                          "right": 494
+                       }
+                    },
+                    {
+                       "annotationId": "fL6XpwpwP",
+                       "annotationTags": "STUDENTID_13",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "d7cf8acc-ab35-4744-b6d0-8413e7a61791",
+                       "index": 12,
+                       "rect": {
+                          "top": 30,
+                          "left": 498,
+                          "bottom": 51,
+                          "right": 519
+                       }
+                    },
+                    {
+                       "annotationId": "7_X3wXjhL",
+                       "annotationTags": "STUDENTID_14",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "087f3552-0ca2-40fb-8f52-5a3f16419735",
+                       "index": 13,
+                       "rect": {
+                          "top": 31,
+                          "left": 522,
+                          "bottom": 51,
+                          "right": 544
+                       }
+                    },
+                    {
+                       "annotationId": "9jfgY1qtO",
+                       "annotationTags": "STUDENTID_15",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "5ce082c6-effb-42c6-a15b-3ae02486a99b",
+                       "index": 14,
+                       "rect": {
+                          "top": 31,
+                          "left": 548,
+                          "bottom": 51,
+                          "right": 570
+                       }
+                    },
+                    {
+                       "annotationId": "QcswxWY1s",
+                       "annotationTags": "STUDENTID_16",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "5dd8e149-fb09-42dc-9cde-3fb489f6f250",
+                       "index": 15,
+                       "rect": {
+                          "top": 30,
+                          "left": 573,
+                          "bottom": 50,
+                          "right": 596
+                       }
+                    },
+                    {
+                       "annotationId": "vFcepRW2k",
+                       "annotationTags": "QUESTION1_1",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "7b35b4d9-14a1-4406-ae3f-b505546a2123",
+                       "index": 16,
+                       "rect": {
+                          "top": 96,
+                          "left": 215,
+                          "bottom": 115,
+                          "right": 238
+                       }
+                    },
+                    {
+                       "annotationId": "Z4Q8hjcR7",
+                       "annotationTags": "QUESTION1_2",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "09d0d436-d2f2-46ea-8d22-96ce2b5edde4",
+                       "index": 17,
+                       "rect": {
+                          "top": 97,
+                          "left": 252,
+                          "bottom": 117,
+                          "right": 276
+                       }
+                    },
+                    {
+                       "annotationId": "MvthTtZS0",
+                       "annotationTags": "QUESTION2_1",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "c1ccbda8-8db8-4806-9891-c125b484a2ae",
+                       "index": 18,
+                       "rect": {
+                          "top": 128,
+                          "left": 216,
+                          "bottom": 147,
+                          "right": 240
+                       }
+                    },
+                    {
+                       "annotationId": "9NsptTzne",
+                       "annotationTags": "QUESTION2_2",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "977ab540-dd35-4ac8-9a89-9fd8708a8944",
+                       "index": 19,
+                       "rect": {
+                          "top": 128,
+                          "left": 253,
+                          "bottom": 148,
+                          "right": 275
+                       }
+                    },
+                    {
+                       "annotationId": "Y1tY6l4N3",
+                       "annotationTags": "QUESTION3_1",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "c6cee03b-e0c4-4650-8adc-6f1c53fab088",
+                       "index": 20,
+                       "rect": {
+                          "top": 158,
+                          "left": 216,
+                          "bottom": 179,
+                          "right": 239
+                       }
+                    },
+                    {
+                       "annotationId": "2B7hKNVlm",
+                       "annotationTags": "QUESTION3_2",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "4849535d-68f0-4308-b5b1-4f05fbddebc8",
+                       "index": 21,
+                       "rect": {
+                          "top": 159,
+                          "left": 254,
+                          "bottom": 179,
+                          "right": 277
+                       }
+                    },
+                    {
+                       "annotationId": "lJajZC-En",
+                       "annotationTags": "QUESTION4_1",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "62d2eea4-f0d4-4ae4-9d97-8e98c5ce8f70",
+                       "index": 22,
+                       "rect": {
+                          "top": 191,
+                          "left": 215,
+                          "bottom": 211,
+                          "right": 239
+                       }
+                    },
+                    {
+                       "annotationId": "a27bXhfIq",
+                       "annotationTags": "QUESTION4_2",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "a2930d89-fa2d-4f2a-9ed0-16602aad8814",
+                       "index": 23,
+                       "rect": {
+                          "top": 190,
+                          "left": 254,
+                          "bottom": 211,
+                          "right": 277
+                       }
+                    },
+                    {
+                       "annotationId": "dwrADIlko",
+                       "annotationTags": "QUESTION5_1",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "78590d65-287f-449c-9ec6-d036301d7c55",
+                       "index": 24,
+                       "rect": {
+                          "top": 221,
+                          "left": 217,
+                          "bottom": 241,
+                          "right": 240
+                       }
+                    },
+                    {
+                       "annotationId": "5G1m9rB0M",
+                       "annotationTags": "QUESTION5_2",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "a750e9e4-1607-449f-a586-7ccd48634606",
+                       "index": 25,
+                       "rect": {
+                          "top": 221,
+                          "left": 254,
+                          "bottom": 240,
+                          "right": 277
+                       }
+                    },
+                    {
+                       "annotationId": "n4Q67gnZH",
+                       "annotationTags": "QUESTION6_1",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "59f92128-5206-4944-83f2-f0ee959e38b1",
+                       "index": 26,
+                       "rect": {
+                          "top": 253,
+                          "left": 216,
+                          "bottom": 272,
+                          "right": 239
+                       }
+                    },
+                    {
+                       "annotationId": "IK_dnNCHL",
+                       "annotationTags": "QUESTION6_2",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "4b03d06a-e0eb-4f0a-bf58-b8557d3199da",
+                       "index": 27,
+                       "rect": {
+                          "top": 252,
+                          "left": 255,
+                          "bottom": 272,
+                          "right": 277
+                       }
+                    },
+                    {
+                       "annotationId": "zF7l1F1E6",
+                       "annotationTags": "QUESTION7_1",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "55ed61ad-061b-4b87-a0e9-7dbc32297a7a",
+                       "index": 28,
+                       "rect": {
+                          "top": 284,
+                          "left": 217,
+                          "bottom": 304,
+                          "right": 240
+                       }
+                    },
+                    {
+                       "annotationId": "yqb811NKt",
+                       "annotationTags": "QUESTION7_2",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "43b97acd-82b4-4b3c-9abe-1d9c64cf76f6",
+                       "index": 29,
+                       "rect": {
+                          "top": 282,
+                          "left": 255,
+                          "bottom": 303,
+                          "right": 277
+                       }
+                    },
+                    {
+                       "annotationId": "-m8mtkweq",
+                       "annotationTags": "QUESTION8_1",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "3b3a599c-3ae7-43f0-88f5-af2c79441919",
+                       "index": 30,
+                       "rect": {
+                          "top": 315,
+                          "left": 216,
+                          "bottom": 333,
+                          "right": 238
+                       }
+                    },
+                    {
+                       "annotationId": "mhXVeEpNP",
+                       "annotationTags": "QUESTION8_2",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "a47a0a61-f7ce-4fd0-90bd-64b66fbf843f",
+                       "index": 31,
+                       "rect": {
+                          "top": 314,
+                          "left": 254,
+                          "bottom": 334,
+                          "right": 276
+                       }
+                    },
+                    {
+                       "annotationId": "obB0ldNIa",
+                       "annotationTags": "QUESTION9_1",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "a3295e6f-6e8e-4c38-bb8c-3f2e7cc92021",
+                       "index": 32,
+                       "rect": {
+                          "top": 346,
+                          "left": 217,
+                          "bottom": 364,
+                          "right": 240
+                       }
+                    },
+                    {
+                       "annotationId": "rXbrEobnu",
+                       "annotationTags": "QUESTION9_2",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "086a4120-0874-438f-b06b-bc2ad664acf3",
+                       "index": 33,
+                       "rect": {
+                          "top": 346,
+                          "left": 254,
+                          "bottom": 365,
+                          "right": 277
+                       }
+                    },
+                    {
+                       "annotationId": "Ifp71Rcwk",
+                       "annotationTags": "QUESTION10_1",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "4881501c-b180-471f-b525-41f69daaee90",
+                       "index": 34,
+                       "rect": {
+                          "top": 378,
+                          "left": 217,
+                          "bottom": 396,
+                          "right": 239
+                       }
+                    },
+                    {
+                       "annotationId": "0Ef9J59as",
+                       "annotationTags": "QUESTION10_2",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "310d5144-b723-4276-a946-22a06e8c17f3",
+                       "index": 35,
+                       "rect": {
+                          "top": 378,
+                          "left": 254,
+                          "bottom": 396,
+                          "right": 277
+                       }
+                    },
+                    {
+                       "annotationId": "jrwUFusmU",
+                       "annotationTags": "QUESTION11_1",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "2c6b3deb-820c-4d2d-ab66-53219de2288a",
+                       "index": 36,
+                       "rect": {
+                          "top": 96,
+                          "left": 512,
+                          "bottom": 115,
+                          "right": 534
+                       }
+                    },
+                    {
+                       "annotationId": "CWIYnEzlF",
+                       "annotationTags": "QUESTION11_2",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "21fbee35-ab9e-4389-a313-27d498e65cd4",
+                       "index": 37,
+                       "rect": {
+                          "top": 97,
+                          "left": 550,
+                          "bottom": 115,
+                          "right": 571
+                       }
+                    },
+                    {
+                       "annotationId": "zk0eRRqMi",
+                       "annotationTags": "QUESTION12_1",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "081c45b6-2620-4028-8682-8da77c836c7e",
+                       "index": 38,
+                       "rect": {
+                          "top": 129,
+                          "left": 512,
+                          "bottom": 148,
+                          "right": 534
+                       }
+                    },
+                    {
+                       "annotationId": "D_jFs5_Zc",
+                       "annotationTags": "QUESTION12_2",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "b31a41e7-a5a6-4aaf-ab2a-b93de9d2bb41",
+                       "index": 39,
+                       "rect": {
+                          "top": 128,
+                          "left": 551,
+                          "bottom": 147,
+                          "right": 572
+                       }
+                    },
+                    {
+                       "annotationId": "d-bW8vYQG",
+                       "annotationTags": "QUESTION13_1",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "48d4627f-29e7-445a-9d12-2c2fb75d0d4f",
+                       "index": 40,
+                       "rect": {
+                          "top": 160,
+                          "left": 512,
+                          "bottom": 178,
+                          "right": 534
+                       }
+                    },
+                    {
+                       "annotationId": "1ZoWIQLxG",
+                       "annotationTags": "QUESTION13_2",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "d3a88354-2a7b-4da9-a71b-d1ecf6ea34de",
+                       "index": 41,
+                       "rect": {
+                          "top": 160,
+                          "left": 550,
+                          "bottom": 177,
+                          "right": 572
+                       }
+                    },
+                    {
+                       "annotationId": "VqzZ0uw_h",
+                       "annotationTags": "QUESTION14_1",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "c005c207-8921-4ae2-ade8-17381db87713",
+                       "index": 42,
+                       "rect": {
+                          "top": 191,
+                          "left": 511,
+                          "bottom": 210,
+                          "right": 533
+                       }
+                    },
+                    {
+                       "annotationId": "aQ6stvzCG",
+                       "annotationTags": "QUESTION14_2",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "ce00ab8c-71d0-4c46-8c13-d328a897b290",
+                       "index": 43,
+                       "rect": {
+                          "top": 190,
+                          "left": 549,
+                          "bottom": 210,
+                          "right": 570
+                       }
+                    },
+                    {
+                       "annotationId": "S3MWGUi8W",
+                       "annotationTags": "QUESTION15_1",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "f3b6506c-3f8f-4d26-b118-ccc4bfc91276",
+                       "index": 44,
+                       "rect": {
+                          "top": 222,
+                          "left": 511,
+                          "bottom": 240,
+                          "right": 532
+                       }
+                    },
+                    {
+                       "annotationId": "IxTpX_Nwm",
+                       "annotationTags": "QUESTION15_2",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "64895c83-92d5-4fef-b16e-2189a78dce5e",
+                       "index": 45,
+                       "rect": {
+                          "top": 222,
+                          "left": 549,
+                          "bottom": 239,
+                          "right": 570
+                       }
+                    },
+                    {
+                       "annotationId": "oVk3gXqe7",
+                       "annotationTags": "QUESTION16_1",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "d0ee7ed2-f586-4b8a-bb3b-1ab25ac71c40",
+                       "index": 46,
+                       "rect": {
+                          "top": 253,
+                          "left": 511,
+                          "bottom": 272,
+                          "right": 532
+                       }
+                    },
+                    {
+                       "annotationId": "zxLlGErzP",
+                       "annotationTags": "QUESTION16_2",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "c38343ff-8282-453e-b408-50bcd0d85b8c",
+                       "index": 47,
+                       "rect": {
+                          "top": 253,
+                          "left": 549,
+                          "bottom": 272,
+                          "right": 570
+                       }
+                    },
+                    {
+                       "annotationId": "vvri1ICpi",
+                       "annotationTags": "QUESTION17_1",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "6b12895e-3e24-480d-a2ec-3ec594568ddd",
+                       "index": 48,
+                       "rect": {
+                          "top": 284,
+                          "left": 512,
+                          "bottom": 302,
+                          "right": 535
+                       }
+                    },
+                    {
+                       "annotationId": "XRYDpDPhu",
+                       "annotationTags": "QUESTION17_2",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "f1fe0336-0295-44ca-bd93-4f9dd845fc61",
+                       "index": 49,
+                       "rect": {
+                          "top": 284,
+                          "left": 550,
+                          "bottom": 303,
+                          "right": 571
+                       }
+                    },
+                    {
+                       "annotationId": "LVFeB7Esk",
+                       "annotationTags": "QUESTION18_1",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "b97e3136-b978-496f-a5f2-5575f8bfdb80",
+                       "index": 50,
+                       "rect": {
+                          "top": 315,
+                          "left": 512,
+                          "bottom": 333,
+                          "right": 534
+                       }
+                    },
+                    {
+                       "annotationId": "kmFd_TUYR",
+                       "annotationTags": "QUESTION18_2",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "f08fd8ca-a038-489f-9e10-61bdc858bf38",
+                       "index": 51,
+                       "rect": {
+                          "top": 315,
+                          "left": 550,
+                          "bottom": 334,
+                          "right": 570
+                       }
+                    },
+                    {
+                       "annotationId": "E-P0HcZDx",
+                       "annotationTags": "QUESTION19_1",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "f3da1de6-4fc9-41a8-ba0a-e458ff5bf573",
+                       "index": 52,
+                       "rect": {
+                          "top": 346,
+                          "left": 512,
+                          "bottom": 365,
+                          "right": 534
+                       }
+                    },
+                    {
+                       "annotationId": "bH-bcnmQt",
+                       "annotationTags": "QUESTION19_2",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "485e961c-6d6f-494e-a002-01834befbba3",
+                       "index": 53,
+                       "rect": {
+                          "top": 347,
+                          "left": 551,
+                          "bottom": 365,
+                          "right": 570
+                       }
+                    },
+                    {
+                       "annotationId": "mbxoMePCZ",
+                       "annotationTags": "QUESTION20_1",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "8e690594-6b68-4e5f-82e3-3ce95d7554a0",
+                       "index": 54,
+                       "rect": {
+                          "top": 378,
+                          "left": 512,
+                          "bottom": 396,
+                          "right": 534
+                       }
+                    },
+                    {
+                       "annotationId": "uK2ozwlw5",
+                       "annotationTags": "QUESTION20_2",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "ab7bbfc9-28e8-49ec-a0f8-d6359130a66f",
+                       "index": 55,
+                       "rect": {
+                          "top": 377,
+                          "left": 551,
+                          "bottom": 395,
+                          "right": 571
+                       }
+                    },
+                    {
+                       "annotationId": "T2kCVI_K3",
+                       "annotationTags": "MAX_MARKS_1",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "35c74cb4-681f-42ee-a988-0d8d70446cd1",
+                       "index": 56,
+                       "rect": {
+                          "top": 430,
+                          "left": 133,
+                          "bottom": 449,
+                          "right": 156
+                       }
+                    },
+                    {
+                       "annotationId": "8htMWqCEw",
+                       "annotationTags": "MAX_MARKS_2",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "56c561d0-55cd-430c-8323-336bb9723a24",
+                       "index": 57,
+                       "rect": {
+                          "top": 431,
+                          "left": 159,
+                          "bottom": 450,
+                          "right": 181
+                       }
+                    },
+                    {
+                       "annotationId": "WGj6_lo-N",
+                       "annotationTags": "MAX_MARKS_3",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "fb3ba791-d17b-4b70-9a52-1bd23fc92aba",
+                       "index": 58,
+                       "rect": {
+                          "top": 431,
+                          "left": 185,
+                          "bottom": 451,
+                          "right": 207
+                       }
+                    },
+                    {
+                       "annotationId": "RXj9Bn8hV",
+                       "annotationTags": "MARKS_OBTAINED_1",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "2eb533de-c418-4f13-bfb7-14d36a07a9b2",
+                       "index": 59,
+                       "rect": {
+                          "top": 430,
+                          "left": 333,
+                          "bottom": 449,
+                          "right": 354
+                       }
+                    },
+                    {
+                       "annotationId": "8dMmpKvYj",
+                       "annotationTags": "MARKS_OBTAINED_2",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "fb215e78-1aab-4bed-b5ae-558fc04b8ce2",
+                       "index": 60,
+                       "rect": {
+                          "top": 430,
+                          "left": 358,
+                          "bottom": 448,
+                          "right": 380
+                       }
+                    },
+                    {
+                       "annotationId": "AgmM8n0lW",
+                       "annotationTags": "MARKS_OBTAINED_3",
+                       "extractionMethod": "NUMERIC_CLASSIFICATION",
+                       "roiId": "5911be1c-527c-41e8-9ef0-05f3b00df434",
+                       "index": 61,
+                       "rect": {
+                          "top": 430,
+                          "left": 384,
+                          "bottom": 450,
+                          "right": 405
+                       }
+                    }
+                 ],
+                "render": {
+                    "index": 1
+                },
+                "format": {
+                    "name": "student roll number",
+                    "value": "rollCode"
+                },
+                "validate": {
+                    "regExp": null
+                }
+            }
+        ]
+    }
+}
