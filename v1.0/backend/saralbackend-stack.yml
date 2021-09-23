@@ -1,0 +1,27 @@
+# Maintainer dileep.gadiraju@tarento.com
+version: '3.7'
+services:
+  saral-backend:
+    image: saral-backend:1.0-latest
+    ports:
+      - "0.0.0.0:3005:3005"
+    networks: 
+      - saralbackend-network
+    depends_on:
+      - saral-mongodb
+    environment:
+      PROFILE: dev
+      PORT: 3005
+      MONGODB_URL: mongodb://tasks.saral-mongodb:27017/saralv1db
+      JWT_SECRET: SARALDATA_NODE
+  saral-mongodb:
+    image: mongo:latest
+    ports:
+      - "0.0.0.0:27019:27017"
+    networks: 
+      - saralbackend-network
+    volumes:
+      - /usr/local/mongodb/data/saralv1db:/data/db
+networks:
+  saralbackend-network:
+    driver: overlay
