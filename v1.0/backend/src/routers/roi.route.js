@@ -11,7 +11,7 @@ const Counter = require('../models/counter')
 router.post('/createRoi',auth, async (req, res) => {
     try { 
         const inputKeys = Object.keys(req.body)
-        const allowedUpdates = ['subject', 'classId', 'type', 'roi', 'extractionMethod']
+        const allowedUpdates = ['subject', 'classId', 'type', 'roi']
         const isValidOperation = inputKeys.every((input) => allowedUpdates.includes(input))
    
         if(!isValidOperation) {
@@ -56,7 +56,7 @@ router.patch('/updateRoi/:roiId', auth, async (req, res) => {
     try {
         if (Object.keys(req.body).length === 0) res.status(400).send({ message: 'Validation error.' })
         const updates = Object.keys(req.body)
-        const allowedUpdates = ['roi', 'extractionMethod']
+        const allowedUpdates = ['roi']
         const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
     
         if (!isValidOperation) {
@@ -70,7 +70,6 @@ router.patch('/updateRoi/:roiId', auth, async (req, res) => {
         let updateObj = {}
         
         if(req.body.roi) updateObj["roi"] = req.body.roi
-        if(req.body.extractionMethod) updateObj["extractionMethod"] = req.body.extractionMethod
     
         await ROI.update(lookup,updateObj).lean();
         res.status(201).send({"message": 'ROI is updated successfully.'})  

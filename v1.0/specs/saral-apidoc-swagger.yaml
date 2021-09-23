@@ -517,7 +517,7 @@ paths:
         "200":
           description: "successful operation"
           schema:
-            $ref: "#/definitions/roi"
+            $ref: "#/definitions/rois"
         "400":
           description: "unsuccessful operation"
           
@@ -1005,32 +1005,64 @@ definitions:
         questionMarks:
           type: string
           description: Question Marks
+          
+  rect:
+    type: object
+    properties:
+      top:
+        type: string
+      left:
+        type: string
+      bottom:
+        type: string
+      right:
+        type: string
   
   roi:
     type: array
     items:
       type: object
       properties:
-        name:
+        annotationId:
           type: string
-        method:
+        annotationTags:
           type: string
-        question:
+        extractionMethod:
           type: string
+          enum: ["NUMERIC_CLASSIFICATION", "CELL_OMR"]
+        roiId:
+          type: string
+          format: uuid
         index:
           type: string
-        row:
+        rect:
+          $ref: '#/definitions/rect'
+          
+  cells:
+    type: array
+    items:
+      type: object
+      properties:
+        cellId:
           type: string
-        col:
-          type: string
-        top:
-          type: string
-        left:
-          type: string
-        bottom:
-          type: string
-        right:
-          type: string
+          format: uuid
+        rois:
+          $ref: '#/definitions/roi'
+
+          
+  rois:
+    type: object
+    properties:
+      layout:
+        type: object
+        properties:
+          version: 
+            type: string
+          name:
+            type: string
+          cells:
+            $ref: '#/definitions/cells' 
+      
   
   CreateROIBody:
     type: object
@@ -1043,10 +1075,7 @@ definitions:
         type: string
         enum: ["SAT","PAT"]
       roi:
-        $ref: '#/definitions/roi'
-      extractionMethod:
-        type: string
-        enum: ["NUMERIC_CLASSIFICATION","CELL_OMR"]
+        $ref: '#/definitions/rois'
           
   CreateROIResponse:
     type: object
@@ -1066,10 +1095,8 @@ definitions:
   UpdateRoiBody:
     type: object
     properties:
-      extractionMethod:
-        type: string
       roi:
-        $ref: "#/definitions/roi"
+        $ref: "#/definitions/rois"
         
   sections:
     type: array
