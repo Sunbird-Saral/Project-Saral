@@ -11,6 +11,20 @@ servers:
   - url: /none
 paths: {}
 
+      # validation of obtained marks = sum of all marks (Cross validations)
+      # Validation to check overalaps of cells and ROIs 
+      # No two cells overalp with each other , all ROIs of cell should be with the cell
+      # boundaries. 
+      # Size validation for cell with toleration value.
+      # School , Exam level validations , tagging.
+      # Define what goes into backend response.
+      # Tolerance for confidence of recog.
+      # Label for only printing , consider other factors for printing.
+      # Eg. Signature or any image as backend respons for processing.
+      # Compress full sheet and send to backend for reporcessing as needed.
+      # Presentation - to review 
+      # Rx or Medical field.
+
 components:
   schemas:
     layout:
