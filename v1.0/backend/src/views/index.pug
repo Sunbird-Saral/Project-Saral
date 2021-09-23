@@ -1,0 +1,45 @@
+extends layout
+
+block content    
+  style
+    include ../public/stylesheets/style.css
+  script
+    include ../public/index.js
+  .container
+      .row
+        .logo
+          h3
+           = title
+      .row
+        .span12
+          .mini-layout
+            h3 Saved Scan
+             if rowsData && rowsData.length > 0  
+              a(href=`/downloadReport?filePath=${filePath}` style="margin-left: 60%; margin-bottom: 30px;" target="_blank") Export to Excel with Details
+            if rowsData && rowsData.length > 0
+              table
+                thead
+                  tr
+                    th School Id
+                    th Class
+                    th Section
+                    th Subject
+                    th Exam Date
+                    th Student Id
+                    th Total Marks
+                    th Secured Marks
+                    th Created On
+                  tbody
+                    each item in rowsData
+                      tr
+                        td.align-middle #{item['schoolId']}
+                        td.align-middle #{item['classId']}
+                        td.align-middle #{item['section']}
+                        td.align-middle #{item['subject']}
+                        td.align-middle.width #{item['examDate']}
+                        td.align-middle #{item['studentId']}
+                        td.align-middle #{item['totalMarks']}
+                        td.align-middle #{item['securedMarks']}
+                        td.align-middle #{item['createdOn']}
+            else 
+              h4 #{message}
