@@ -13,9 +13,9 @@ paths: {}
 
       #1) Validation of obtained marks = sum of all marks (Cross validations) :Post Scan
       #2) Validation to check overalaps of cells and ROIs No two cells overalp with each other , all ROIs of cell should be with the cell
-      # boundaries. :Admin setup Validation 
-      #3) Size validation for cell with toleration value.
-      #5) School , Exam level validations , tagging which comes in during scanning.
+      # boundaries. :Admin setup Validation. During ROI config this validation has to be thrown. Have provision in the schema.
+      #3) Size validation for cell with toleration value. Width/Height tolerance.
+      #5) School , Exam level validations ,tagging which comes in during scanning not during setup.
       #6) Define what goes into backend response , sanitizing unwanted information.
       #7) Tolerance for confidence of recog.
       #8) Label for only printing , consider other factors for printing.
