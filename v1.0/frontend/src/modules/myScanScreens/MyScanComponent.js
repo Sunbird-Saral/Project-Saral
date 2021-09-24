@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { StackActions, NavigationActions } from 'react-navigation';
 import SystemSetting from 'react-native-system-setting'
-import RNOpenCvCameraModel from '../../utils/RNOpenCvCamera';
 import Strings from '../../utils/Strings';
 import AppTheme from '../../utils/AppTheme';
 import Spinner from '../common/components/loadingIndicator';
@@ -12,6 +11,9 @@ import { OcrLocalResponseAction } from '../../flux/actions/apis/OcrLocalResponse
 import { apkVersion } from '../../configs/config';
 import HeaderComponent from '../common/components/HeaderComponent';
 import { SCAN_TYPES } from '../../utils/CommonUtils';
+
+import SaralSDK from '../../utils/SaralSDK';
+import SaralSpecData from '../../utils/saral-physical-layout-representation-specs-example1.json'
 
 class MyScanComponent extends Component {
     constructor(props) {
@@ -59,7 +61,7 @@ class MyScanComponent extends Component {
                     SystemSetting.saveBrightness();
                 }
             })
-            RNOpenCvCameraModel.cancelActivity().then(data => {
+            SaralSDK.stopCamera().then(data => {
                 if (data) {
                     const resetAction = StackActions.reset({
                         index: 0,
