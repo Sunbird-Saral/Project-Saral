@@ -11,6 +11,7 @@ servers:
   - url: /none
 paths: {}
 
+      # Scenarios discussed during call with Vivek Raghavan
       #1) Validation of obtained marks = sum of all marks (Cross validations) :Post Scan -- This can come from backend validation rules based on the layout , exam
       #2) Validation to check overalaps of cells and ROIs No two cells overalp with each other , all ROIs of cell should be with the cell
       # boundaries. :Admin setup Validation. During ROI config this validation has to be thrown. Have provision in the schema.
@@ -32,6 +33,11 @@ components:
     layout:
       type: object
       description: defines the physical layout of the scanning area
+      required:
+        - version
+        - name
+        - type
+        - cells
       properties:
         version:
           type: string
@@ -71,15 +77,22 @@ components:
           items:
             $ref: '#/components/schemas/cell'
             minItems: 1
+        responseExcludeFields:
+          type: array
+          description: list of response fields to be excluded in the response when saved to backend for analytics.
+          items:
+            type: string
+
 
     cell:
       type: object
       description: each logical area on the layout that needs to be scanned
+      required:
+        - cellId
       properties:
         cellId:
           type: string
-          description: unique identity of the cell
-          format: uuidv4
+          description: unique identity of the cell with in the layout.
         rois:
           $ref: '#/components/schemas/rois'
         render:
@@ -95,10 +108,12 @@ components:
             type: string
         validate:
           $ref: '#/components/schemas/validationInformation'
+          description: |
+            validation rules applies on consolidatedCellPrediction
         consolidatedCellPrediction:
           description: |
-            Each of the cells can be tagged to categories based on requirement.
-            For example set of questions to be tagged as special category.
+            consolidated prediction of all the rois with in a cell. 
+            This is mandatory on the response sent to backend.
           type: string
     
     renderingInformation:
@@ -115,7 +130,9 @@ components:
       properties:
         name:
           type: string
-          description: human understandable description that explain cell purpose
+          description: |
+            human understandable description that explain cell purpose. 
+            This can be also used as key to ingest cell validations from backend. configure it accordingly.
           example: roll number
         value:
           type: string
@@ -162,8 +179,7 @@ components:
       properties:
         roiId:
           type: string
-          description: unique roi identifier
-          format: uuidv4
+          description: unique roi identifier with cell.
         annotationTag:
           type: string
           description: Tag to identify specific ROI
