@@ -301,7 +301,10 @@
                "value":"Roll Number"
             },
             "validate":{
-               "regExp":""
+               "name": "Between 10 to 15 Digits Number",
+               "regExp": "^[1-9][0-9]{9,14}$",
+               "errorMessage": "Should be 10 to 15 Digits",
+               "source" : "BACKEND_SCHOOL" 
             },
             "consolidatedCellPrediction": "1146112131721182"
          },

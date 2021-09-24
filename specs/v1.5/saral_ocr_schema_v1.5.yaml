@@ -11,7 +11,7 @@ servers:
   - url: /none
 paths: {}
 
-      #1) Validation of obtained marks = sum of all marks (Cross validations) :Post Scan
+      #1) Validation of obtained marks = sum of all marks (Cross validations) :Post Scan -- This can come from backend validation rules based on the layout , exam
       #2) Validation to check overalaps of cells and ROIs No two cells overalp with each other , all ROIs of cell should be with the cell
       # boundaries. :Admin setup Validation. During ROI config this validation has to be thrown. Have provision in the schema.
       #3) Size validation for cell with toleration value. Width/Height tolerance.
@@ -25,6 +25,7 @@ paths: {}
       #   - LANG_BLOCK_TEXT
       # Presentation - to review 
       # Rx or Medical field.
+      # 
 
 components:
   schemas:
@@ -42,6 +43,27 @@ components:
           example: Odisa SAT exam sheet format for class 2 to 5
         type:
           $ref: '#/components/schemas/sheetType'
+        tolerance:
+          type: object
+          description: |
+            Object that carriers tolerance levels of predictions , roi widh and height.
+          properties:
+            predictionMin:
+              type: number
+              description: |
+                prediction tolerance value. 
+                if confidence value of any roi is below prediction tolerance value , front end can request user to review the value or show error.
+            roiMinWidth:
+              type: number
+              description: |
+                roi width tolerance value.
+                if width of roi is less than this tolerance value , roi configuration can be rejected by backend.
+            roiMinHeight:
+              type: number
+              description: |
+                roi height tolerance value.
+                if height of roi is less than this tolerance value , roi configuration can be rejected by backend.
+          example: 0.95
         identifiers:
           $ref: '#/components/schemas/identifiersType'
         cells:
@@ -104,9 +126,25 @@ components:
       type: object
       description: validation rules thats needs to be applied on the cell level.
       properties:
+        name:
+          type: string
+          description: name of the validation role.
         regExp:
           type: string
           description: regular expression to detect errorneous resultData
+        errorMessage:
+          type: string
+          description: error message to be shown to user in case of violation of regExp
+        source:
+          type: string
+          description: |
+            specifies source of these validation rules. PRE_CONFIGURED will be attached to layout configuration itself.
+            if BACKEND , these validations are added from backend entities like scool , exam etc.
+          enum:
+            - PRE_CONFIGURED
+            - BACKEND_SCHOOL
+            - BACKEND_EXAM
+          default: BACKEND_EXAM
   
     rois:
       type: array
@@ -120,12 +158,15 @@ components:
       required:
         - roiId
         - extractionMethod
-        - roi
+        - rect
       properties:
         roiId:
           type: string
           description: unique roi identifier
           format: uuidv4
+        annotationTag:
+          type: string
+          description: Tag to identify specific ROI
         index:
           type: number
           description: index of roi in a cell area
@@ -138,6 +179,12 @@ components:
             - CELL_OMR
             - QR_CODE
             - HANDWRITTEN_TEXT
+            - BLOCK_TEXT
+        langIsoCode:
+          type: string
+          description: |
+            Language ISO Code applicable for extractionMethod like HANDWRITTEN_TEXT,BLOCK_TEXT
+          example: 'ger (B)'
         rect:
           $ref: '#/components/schemas/rect'
         result:
@@ -186,6 +233,7 @@ components:
       - PAT_12_MARKSHEET
       - PAT_34_MARKSHEET
       - ATTENDANCE_SHEET_20
+      - MEDICAL_RX_TYPE1
     identifiersType:
       description: |
         Array of name value paris that can be captured or associated during scanning process.
