@@ -27,7 +27,7 @@ paths: {}
       #   - LANG_BLOCK_TEXT
       # Presentation - to review 
       # Rx or Medical field.
-      # 
+      #  Please also validate that all boxes lie within the page limit for different page sizes.
 
 components:
   schemas:
@@ -80,7 +80,7 @@ components:
             minItems: 1
         responseExcludeFields:
           type: array
-          description: list of response fields to be excluded in the response when saved to backend for analytics.
+          description: list of fields to be excluded in the response when saved to backend for analytics.
           items:
             type: string
 
