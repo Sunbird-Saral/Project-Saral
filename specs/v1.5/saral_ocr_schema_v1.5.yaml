@@ -109,7 +109,7 @@ components:
         validate:
           $ref: '#/components/schemas/validationInformation'
           description: |
-            validation rules applies on consolidatedCellPrediction
+            validation rules applies on consolidatedPrediction
         consolidatedPrediction:
           description: |
             consolidated prediction of all the rois with in a cell. 
