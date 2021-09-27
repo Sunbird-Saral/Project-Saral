@@ -11,7 +11,7 @@ pipeline {
             dir './v1.0/backend'
             //label '1.0-latest'
             additionalBuildArgs  '--build-arg PORT=3000'
-            //args '-v /tmp:/tmp'
+            //args '-u root -v /tmp:/tmp'
         }
       }
         steps {
