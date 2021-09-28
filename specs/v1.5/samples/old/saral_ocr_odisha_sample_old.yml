@@ -1,0 +1,240 @@
+---
+data:
+  sheet: PAT_20_MARKSHEET
+  identifiers:
+    - name: teacherId
+      value: "100201"
+    - name: schoolId
+      value: "9270700701"
+    - name: classId
+      value: "3"
+    - name: examId
+      value: "EXAM020212012021"
+    - name: examSubject
+      value: Math
+  cells:
+    - id: 1
+      roi:
+        one:
+          xCord: 5
+          yCord: 80
+        two:
+          xCord: 15
+          yCord: 80
+        three:
+          xCord: 5
+          yCord: 95
+        four:
+          xCord: 15
+          yCord: 95
+      type: QR_Code
+      name: QR Code Cell
+      isLabel: false
+      subCells: []
+    - id: 2
+      roi:
+        one:
+          xCord: 25
+          yCord: 10
+        two:
+          xCord: 30
+          yCord: 10
+        three:
+          xCord: 25
+          yCord: 95
+        four:
+          xCord: 30
+          yCord: 95
+      type: Row_Cell
+      name: Row Cell with Student ID
+      isLabel: false
+      tags:
+        - Category1
+      subCells:
+        - id: 3
+          roi:
+            one:
+              xCord: 25
+              yCord: 10
+            two:
+              xCord: 30
+              yCord: 10
+            three:
+              xCord: 25
+              yCord: 95
+            four:
+              xCord: 30
+              yCord: 95
+          type: Printed_Text
+          name: Student Unique ID
+          response: Student Unique ID
+          isLabel: true
+        - id: 4
+          roi:
+            one:
+              xCord: 25
+              yCord: 10
+            two:
+              xCord: 30
+              yCord: 10
+            three:
+              xCord: 25
+              yCord: 95
+            four:
+              xCord: 30
+              yCord: 95
+          type: Hand_Written_Digits
+          name: Hand Written Student Unique ID
+          validators:
+            - name: Rule_10_to_14_Digits
+              regex: "^\\d{10,14}$"
+    - id: 5
+      roi:
+            one:
+              xCord: 25
+              yCord: 10
+            two:
+              xCord: 30
+              yCord: 10
+            three:
+              xCord: 25
+              yCord: 95
+            four:
+              xCord: 30
+              yCord: 95
+      type: Row_Cell
+      name: Row Cell with Printed Headers
+      subCells:
+        - id: 6
+          roi:
+            one:
+              xCord: 25
+              yCord: 10
+            two:
+              xCord: 30
+              yCord: 10
+            three:
+              xCord: 25
+              yCord: 95
+            four:
+              xCord: 30
+              yCord: 95
+          type: Printed_Text
+          name: Question Number
+          tags:
+            - Question Number
+        - id: 7
+          roi:
+            one:
+              xCord: 25
+              yCord: 10
+            two:
+              xCord: 30
+              yCord: 10
+            three:
+              xCord: 25
+              yCord: 95
+            four:
+              xCord: 30
+              yCord: 95
+          type: Printed_Text
+          name: Marks Obtained
+          validators:
+            - name: Rule_Valid_3Digit_100Marks
+              regex: "^([1-9][0-9]{0,9}|100)$"
+          tags:
+            - Marks Obtained
+        - id: 8
+          roi:
+            one:
+              xCord: 25
+              yCord: 10
+            two:
+              xCord: 30
+              yCord: 10
+            three:
+              xCord: 25
+              yCord: 95
+            four:
+              xCord: 30
+              yCord: 95
+          type: Printed_Text
+          name: Question Number
+          tags:
+            - Question Number
+        - id: 9
+          roi:
+            one:
+              xCord: 25
+              yCord: 10
+            two:
+              xCord: 30
+              yCord: 10
+            three:
+              xCord: 25
+              yCord: 95
+            four:
+              xCord: 30
+              yCord: 95
+          type: Printed_Text
+          name: Marks Obtained
+          tags:
+            - Marks Obtained
+      isLabel: true
+      auditDtls:
+        user: admin
+    - id: 10
+      roi:
+        one:
+          xCord: 25
+          yCord: 10
+        two:
+          xCord: 30
+          yCord: 10
+        three:
+          xCord: 25
+          yCord: 95
+        four:
+          xCord: 30
+          yCord: 95
+      type: Row_Cell
+      name: Row Cell with Question1 and Answer
+      isLabel: false
+      tags:
+        - Category1
+      subCells:
+        - id: 11
+          roi:
+            one:
+              xCord: 25
+              yCord: 10
+            two:
+              xCord: 30
+              yCord: 10
+            three:
+              xCord: 25
+              yCord: 95
+            four:
+              xCord: 30
+              yCord: 95
+          type: Printed_Text
+          name: Question1
+          isLabel: true
+        - id: 12
+          roi:
+            one:
+              xCord: 25
+              yCord: 10
+            two:
+              xCord: 30
+              yCord: 10
+            three:
+              xCord: 25
+              yCord: 95
+            four:
+              xCord: 30
+              yCord: 95
+          type: Hand_Written_Digits
+          name: Answer1
+          maxChars: 2
+          format: positiveInteger
