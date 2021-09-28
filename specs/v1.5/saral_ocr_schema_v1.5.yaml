@@ -97,7 +97,38 @@ components:
           description: list of fields to be excluded in the response when saved to backend for analytics.
           items:
             type: string
-
+        validate:
+          type: array
+          items:
+            type: object
+            description: layout level validation.
+            properties:
+              name:
+                type: string
+                description: validation name.
+              fields:
+                type: array
+                description: array of fields to be injected for validation.
+                items:
+                  type: object
+                  properties:
+                    fieldKey:
+                      type: string
+                      description: field key
+                      example: '$MAXMARKS'
+                    fieldValue:
+                      type: string
+                      description: field value
+                      example: '250'
+              expression:
+                type: string
+                description: validate expression to be evaluated
+                example: '$HINDI_QUESTION_1 + $HINDI_QUESTION_2 <= $MAXMARKS'
+              errorMessage:
+                type: string
+                description: error message to be shown to user if validation fails.
+            
+  
     cell:
       type: object
       description: each logical area on the layout that needs to be scanned
