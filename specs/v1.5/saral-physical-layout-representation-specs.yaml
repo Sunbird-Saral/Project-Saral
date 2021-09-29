@@ -42,8 +42,8 @@ components:
       properties:
         version:
           type: string
-          default: '1.0'
-          description: layout detection version
+          default: '1.5'
+          description: layout detection and rendering version
         name:
           type: string
           description: layout name for human understanding
