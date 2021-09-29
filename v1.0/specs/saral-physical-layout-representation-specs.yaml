@@ -25,6 +25,8 @@ components:
           type: string
           description: layout name for human understanding
           example: Odisa SAT exam sheet format for class 2 to 5
+        cells:
+          $ref: '#/components/schemas/cell'
     
     cell:
       type: object

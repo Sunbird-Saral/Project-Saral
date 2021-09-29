@@ -1,0 +1,55 @@
+{
+  "name": "SaralApp",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-native start",
+    "test": "jest",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@react-native-community/async-storage": "^1.12.1",
+    "@react-native-community/datetimepicker": "^3.0.9",
+    "@react-native-community/masked-view": "^0.1.10",
+    "axios": "^0.21.1",
+    "lodash": "^4.17.20",
+    "moment": "^2.29.1",
+
+    "react": "17.0.2",
+    "react-native": "0.65.1",
+
+    "react-native-gesture-handler": "^1.9.0",
+    "react-native-global-props": "^1.1.5",
+    "react-native-localization": "^2.1.6",
+    "react-native-modal-dropdown": "git+https://github.com/siemiatj/react-native-modal-dropdown.git",
+    "react-native-responsive-dimensions": "^3.1.1",
+    "react-native-safe-area-context": "^3.1.9",
+    "react-native-screens": "^2.16.1",
+    "react-native-system-setting": "^1.7.6",
+    "react-native-uuid": "^1.4.9",
+    "react-navigation": "^4.4.3",
+    "react-navigation-stack": "^2.10.2",
+    "react-redux": "^7.2.2",
+    "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-logger": "^3.0.6",
+    "redux-persist": "^6.0.0",
+    "redux-thunk": "^2.3.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.15.5",
+    "@babel/runtime": "^7.15.4",
+    "@react-native-community/eslint-config": "^3.0.1",
+    "babel-jest": "^27.2.3",
+    "eslint": "^7.32.0",
+    "jest": "^27.2.3",
+    "metro-react-native-babel-preset": "^0.66.2",
+    "react-native-codegen": "^0.0.7",
+    "react-test-renderer": "17.0.2"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
