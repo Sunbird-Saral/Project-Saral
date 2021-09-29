@@ -12,6 +12,8 @@
                 },
                 "rois": [
                     {
+                        "annotationId": "eKS5GDoKy",
+                        "annotationTags": "STUDENTID_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 0,
                         "rect": {
@@ -23,6 +25,8 @@
                         "roiId": 1
                     },
                     {
+                        "annotationId": "07gfo-X6k",
+                        "annotationTags": "STUDENTID_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 1,
                         "rect": {
@@ -34,6 +38,8 @@
                         "roiId": 2
                     },
                     {
+                        "annotationId": "bv3o6dbOL",
+                        "annotationTags": "STUDENTID_3",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 2,
                         "rect": {
@@ -45,6 +51,8 @@
                         "roiId": 3
                     },
                     {
+                        "annotationId": "bxUpSr1kN",
+                        "annotationTags": "STUDENTID_4",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 3,
                         "rect": {
@@ -56,6 +64,8 @@
                         "roiId": 4
                     },
                     {
+                        "annotationId": "2AjEL9QuH",
+                        "annotationTags": "STUDENTID_5",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 4,
                         "rect": {
@@ -67,6 +77,8 @@
                         "roiId": 5
                     },
                     {
+                        "annotationId": "sVXs9IDX3",
+                        "annotationTags": "STUDENTID_6",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 5,
                         "rect": {
@@ -78,6 +90,8 @@
                         "roiId": 6
                     },
                     {
+                        "annotationId": "AcbEHjPdD",
+                        "annotationTags": "STUDENTID_7",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 6,
                         "rect": {
@@ -89,6 +103,8 @@
                         "roiId": 7
                     },
                     {
+                        "annotationId": "Om50EqhmL",
+                        "annotationTags": "STUDENTID_8",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 7,
                         "rect": {
@@ -100,6 +116,8 @@
                         "roiId": 8
                     },
                     {
+                        "annotationId": "_EITxSSf2",
+                        "annotationTags": "STUDENTID_9",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 8,
                         "rect": {
@@ -111,6 +129,8 @@
                         "roiId": 9
                     },
                     {
+                        "annotationId": "RouzCuE85",
+                        "annotationTags": "STUDENTID_10",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 9,
                         "rect": {
@@ -122,6 +142,8 @@
                         "roiId": 10
                     },
                     {
+                        "annotationId": "KMkXP1EDG",
+                        "annotationTags": "STUDENTID_11",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 10,
                         "rect": {
@@ -133,6 +155,8 @@
                         "roiId": 11
                     },
                     {
+                        "annotationId": "11AKDb31Z",
+                        "annotationTags": "STUDENTID_12",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 11,
                         "rect": {
@@ -144,6 +168,8 @@
                         "roiId": 12
                     },
                     {
+                        "annotationId": "fL6XpwpwP",
+                        "annotationTags": "STUDENTID_13",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 12,
                         "rect": {
@@ -155,6 +181,8 @@
                         "roiId": 13
                     },
                     {
+                        "annotationId": "7_X3wXjhL",
+                        "annotationTags": "STUDENTID_14",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 13,
                         "rect": {
@@ -166,6 +194,8 @@
                         "roiId": 14
                     },
                     {
+                        "annotationId": "9jfgY1qtO",
+                        "annotationTags": "STUDENTID_15",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 14,
                         "rect": {
@@ -177,6 +207,8 @@
                         "roiId": 15
                     },
                     {
+                        "annotationId": "QcswxWY1s",
+                        "annotationTags": "STUDENTID_16",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 15,
                         "rect": {
@@ -203,6 +235,8 @@
                 },
                 "rois": [
                     {
+                        "annotationId": "vFcepRW2k",
+                        "annotationTags": "QUESTION1_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 0,
                         "rect": {
@@ -214,6 +248,8 @@
                         "roiId": 1
                     },
                     {
+                        "annotationId": "Z4Q8hjcR7",
+                        "annotationTags": "QUESTION1_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 1,
                         "rect": {
@@ -240,6 +276,8 @@
                 },
                 "rois": [
                     {
+                        "annotationId": "MvthTtZS0",
+                        "annotationTags": "QUESTION2_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 0,
                         "rect": {
@@ -251,6 +289,8 @@
                         "roiId": 1
                     },
                     {
+                        "annotationId": "9NsptTzne",
+                        "annotationTags": "QUESTION2_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 1,
                         "rect": {
@@ -277,6 +317,8 @@
                 },
                 "rois": [
                     {
+                        "annotationId": "Y1tY6l4N3",
+                        "annotationTags": "QUESTION3_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 0,
                         "rect": {
@@ -288,6 +330,8 @@
                         "roiId": 1
                     },
                     {
+                        "annotationId": "2B7hKNVlm",
+                        "annotationTags": "QUESTION3_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 1,
                         "rect": {
@@ -314,6 +358,8 @@
                 },
                 "rois": [
                     {
+                        "annotationId": "lJajZC-En",
+                        "annotationTags": "QUESTION4_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 0,
                         "rect": {
@@ -325,6 +371,8 @@
                         "roiId": 1
                     },
                     {
+                        "annotationId": "a27bXhfIq",
+                        "annotationTags": "QUESTION4_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 1,
                         "rect": {
@@ -351,6 +399,8 @@
                 },
                 "rois": [
                     {
+                        "annotationId": "dwrADIlko",
+                        "annotationTags": "QUESTION5_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 0,
                         "rect": {
@@ -362,6 +412,8 @@
                         "roiId": 1
                     },
                     {
+                        "annotationId": "5G1m9rB0M",
+                        "annotationTags": "QUESTION5_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 1,
                         "rect": {
@@ -388,6 +440,8 @@
                 },
                 "rois": [
                     {
+                        "annotationId": "n4Q67gnZH",
+                        "annotationTags": "QUESTION6_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 0,
                         "rect": {
@@ -399,6 +453,8 @@
                         "roiId": 1
                     },
                     {
+                        "annotationId": "IK_dnNCHL",
+                        "annotationTags": "QUESTION6_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 1,
                         "rect": {
@@ -425,6 +481,8 @@
                 },
                 "rois": [
                     {
+                        "annotationId": "zF7l1F1E6",
+                        "annotationTags": "QUESTION7_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 0,
                         "rect": {
@@ -436,6 +494,8 @@
                         "roiId": 1
                     },
                     {
+                        "annotationId": "yqb811NKt",
+                        "annotationTags": "QUESTION7_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 1,
                         "rect": {
@@ -462,6 +522,8 @@
                 },
                 "rois": [
                     {
+                        "annotationId": "-m8mtkweq",
+                        "annotationTags": "QUESTION8_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 0,
                         "rect": {
@@ -473,6 +535,8 @@
                         "roiId": 1
                     },
                     {
+                        "annotationId": "mhXVeEpNP",
+                        "annotationTags": "QUESTION8_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 1,
                         "rect": {
@@ -499,6 +563,8 @@
                 },
                 "rois": [
                     {
+                        "annotationId": "obB0ldNIa",
+                        "annotationTags": "QUESTION9_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 0,
                         "rect": {
@@ -510,6 +576,8 @@
                         "roiId": 1
                     },
                     {
+                        "annotationId": "rXbrEobnu",
+                        "annotationTags": "QUESTION9_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 1,
                         "rect": {
@@ -536,6 +604,8 @@
                 },
                 "rois": [
                     {
+                        "annotationId": "Ifp71Rcwk",
+                        "annotationTags": "QUESTION10_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 0,
                         "rect": {
@@ -547,6 +617,8 @@
                         "roiId": 1
                     },
                     {
+                        "annotationId": "0Ef9J59as",
+                        "annotationTags": "QUESTION10_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 1,
                         "rect": {
@@ -573,6 +645,8 @@
                 },
                 "rois": [
                     {
+                        "annotationId": "jrwUFusmU",
+                        "annotationTags": "QUESTION11_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 0,
                         "rect": {
@@ -584,6 +658,8 @@
                         "roiId": 1
                     },
                     {
+                        "annotationId": "CWIYnEzlF",
+                        "annotationTags": "QUESTION11_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 1,
                         "rect": {
@@ -610,6 +686,8 @@
                 },
                 "rois": [
                     {
+                        "annotationId": "zk0eRRqMi",
+                        "annotationTags": "QUESTION12_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 0,
                         "rect": {
@@ -621,6 +699,8 @@
                         "roiId": 1
                     },
                     {
+                        "annotationId": "D_jFs5_Zc",
+                        "annotationTags": "QUESTION12_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 1,
                         "rect": {
@@ -647,6 +727,8 @@
                 },
                 "rois": [
                     {
+                        "annotationId": "d-bW8vYQG",
+                        "annotationTags": "QUESTION13_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 0,
                         "rect": {
@@ -658,6 +740,8 @@
                         "roiId": 1
                     },
                     {
+                        "annotationId": "1ZoWIQLxG",
+                        "annotationTags": "QUESTION13_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 1,
                         "rect": {
@@ -684,6 +768,8 @@
                 },
                 "rois": [
                     {
+                        "annotationId": "VqzZ0uw_h",
+                        "annotationTags": "QUESTION14_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 0,
                         "rect": {
@@ -695,6 +781,8 @@
                         "roiId": 1
                     },
                     {
+                        "annotationId": "aQ6stvzCG",
+                        "annotationTags": "QUESTION14_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 1,
                         "rect": {
@@ -721,6 +809,8 @@
                 },
                 "rois": [
                     {
+                        "annotationId": "S3MWGUi8W",
+                        "annotationTags": "QUESTION15_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 0,
                         "rect": {
@@ -732,6 +822,8 @@
                         "roiId": 1
                     },
                     {
+                        "annotationId": "IxTpX_Nwm",
+                        "annotationTags": "QUESTION15_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 1,
                         "rect": {
@@ -758,6 +850,8 @@
                 },
                 "rois": [
                     {
+                        "annotationId": "oVk3gXqe7",
+                        "annotationTags": "QUESTION16_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 0,
                         "rect": {
@@ -769,6 +863,8 @@
                         "roiId": 1
                     },
                     {
+                        "annotationId": "zxLlGErzP",
+                        "annotationTags": "QUESTION16_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 1,
                         "rect": {
@@ -795,6 +891,8 @@
                 },
                 "rois": [
                     {
+                        "annotationId": "vvri1ICpi",
+                        "annotationTags": "QUESTION17_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 0,
                         "rect": {
@@ -806,6 +904,8 @@
                         "roiId": 1
                     },
                     {
+                        "annotationId": "XRYDpDPhu",
+                        "annotationTags": "QUESTION17_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 1,
                         "rect": {
@@ -832,6 +932,8 @@
                 },
                 "rois": [
                     {
+                        "annotationId": "LVFeB7Esk",
+                        "annotationTags": "QUESTION18_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 0,
                         "rect": {
@@ -843,6 +945,8 @@
                         "roiId": 1
                     },
                     {
+                        "annotationId": "kmFd_TUYR",
+                        "annotationTags": "QUESTION18_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 1,
                         "rect": {
@@ -869,6 +973,8 @@
                 },
                 "rois": [
                     {
+                        "annotationId": "E-P0HcZDx",
+                        "annotationTags": "QUESTION19_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 0,
                         "rect": {
@@ -880,6 +986,8 @@
                         "roiId": 1
                     },
                     {
+                        "annotationId": "bH-bcnmQt",
+                        "annotationTags": "QUESTION19_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 1,
                         "rect": {
@@ -906,6 +1014,8 @@
                 },
                 "rois": [
                     {
+                        "annotationId": "mbxoMePCZ",
+                        "annotationTags": "QUESTION20_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 0,
                         "rect": {
@@ -917,6 +1027,8 @@
                         "roiId": 1
                     },
                     {
+                        "annotationId": "uK2ozwlw5",
+                        "annotationTags": "QUESTION20_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 1,
                         "rect": {
@@ -943,6 +1055,8 @@
                 },
                 "rois": [
                     {
+                        "annotationId": "T2kCVI_K3",
+                        "annotationTags": "MAX_MARKS_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 0,
                         "rect": {
@@ -954,6 +1068,8 @@
                         "roiId": 1
                     },
                     {
+                        "annotationId": "8htMWqCEw",
+                        "annotationTags": "MAX_MARKS_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 1,
                         "rect": {
@@ -965,6 +1081,8 @@
                         "roiId": 2
                     },
                     {
+                        "annotationId": "WGj6_lo-N",
+                        "annotationTags": "MAX_MARKS_3",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 2,
                         "rect": {
@@ -991,6 +1109,8 @@
                 },
                 "rois": [
                     {
+                        "annotationId": "RXj9Bn8hV",
+                        "annotationTags": "MARKS_OBTAINED_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 0,
                         "rect": {
@@ -1002,6 +1122,8 @@
                         "roiId": 1
                     },
                     {
+                        "annotationId": "8dMmpKvYj",
+                        "annotationTags": "MARKS_OBTAINED_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 1,
                         "rect": {
@@ -1013,6 +1135,8 @@
                         "roiId": 2
                     },
                     {
+                        "annotationId": "AgmM8n0lW",
+                        "annotationTags": "MARKS_OBTAINED_3",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "index": 2,
                         "rect": {
