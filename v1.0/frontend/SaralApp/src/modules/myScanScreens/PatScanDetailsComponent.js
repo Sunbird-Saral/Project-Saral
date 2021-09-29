@@ -17,6 +17,7 @@ import StudentsSummaryCard from './StudentsSummaryCard';
 import APITransport from '../../flux/actions/transport/apitransport';
 import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
 import { SCAN_TYPES } from '../../utils/CommonUtils';
+import callScanStatusDataConst from '../callScanStatusDataConst';
 
 class PatScanDetailsComponent extends Component {
     constructor(props) {
@@ -300,14 +301,15 @@ class PatScanDetailsComponent extends Component {
     componentDidUpdate(prevProps) {
         if(prevProps != this.props) {
             const { calledSavedData } = this.state
-            const { savedScanData } = this.props
+            const { savedScanData,filteredData } = this.props
             if(calledSavedData) {
-                if (savedScanData && prevProps.savedScanData !== savedScanData) {                    
+                if (savedScanData && prevProps.savedScanData !== savedScanData) {
                     this.setState({ isLoading: false, calledSavedData: false })
                     if (savedScanData.status && savedScanData.status == 200) {
-                            
                         Alert.alert(Strings.message_text, Strings.saved_successfully, [{
-                            text: Strings.ok_text, onPress: () => { this.goToDashBoard() }
+                            text: Strings.ok_text, onPress: () => {
+                                this.props.callScanStatusDataConst(filteredData)
+                                this.goToDashBoard()}
                         }])
     
                     } else {
@@ -422,21 +424,21 @@ class PatScanDetailsComponent extends Component {
 
                             {saveObj && saveObj.studentsMarkInfo && saveObj.studentsMarkInfo.length > 0 && this.renderPatSummary()}
                             <View style={[styles.container3, { paddingTop: '7%', paddingBottom: '7%' }]}>
-                            <ButtonWithIcon
-                                customBtnStyle={styles.editBtnStyle}
-                                customBtnTextStyle={styles.editBtnTextStyle}
-                                bgColor={AppTheme.TAB_BORDER}
-                                btnIcon={require('../../assets/images/editIcon.png')}
-                                btnText={Strings.edit_text}
-                                onPress={this.onSummaryCancel}
+                                <ButtonWithIcon
+                                    customBtnStyle={styles.editBtnStyle}
+                                    customBtnTextStyle={styles.editBtnTextStyle}
+                                    bgColor={AppTheme.TAB_BORDER}
+                                    btnIcon={require('../../assets/images/editIcon.png')}
+                                    btnText={Strings.edit_text}
+                                    onPress={this.onSummaryCancel}
 
-                            />
-                            <ButtonComponent
-                                customBtnStyle={styles.submitBtnStyle}
-                                btnText={Strings.submit_text}
-                                onPress={this.onSubmitClick}
-                            />
-                        </View>
+                                />
+                                <ButtonComponent
+                                    customBtnStyle={styles.submitBtnStyle}
+                                    btnText={Strings.submit_text}
+                                    onPress={this.onSubmitClick}
+                                />
+                            </View>
                         </ScrollView>
                         
                     </View>
@@ -516,7 +518,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        APITransport: APITransport
+        APITransport: APITransport,
+        callScanStatusDataConst: callScanStatusDataConst
     }, dispatch)
 }
 

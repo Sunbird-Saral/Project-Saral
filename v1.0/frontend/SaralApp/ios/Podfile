@@ -12,6 +12,8 @@ target 'SaralApp' do
     :hermes_enabled => false
   )
 
+  pod 'RCTSystemSetting', :path => '../node_modules/react-native-system-setting'
+
   target 'SaralAppTests' do
     inherit! :complete
     # Pods for testing

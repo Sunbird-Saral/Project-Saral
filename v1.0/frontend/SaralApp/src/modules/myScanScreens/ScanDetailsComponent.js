@@ -19,6 +19,7 @@ import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
 import { SCAN_TYPES } from '../../utils/CommonUtils';
 import DataCard from './DataCard';
 import TextField from '../common/components/TextField';
+import { callScanStatusDataConst } from '../callScanStatusDataConst';
 
 class ScanDetailsComponent extends Component {
     constructor(props) {
@@ -313,6 +314,7 @@ class ScanDetailsComponent extends Component {
             calledSavedData: true,
             isLoading: true
         }, () => {
+            console.log("SaveScanData",saveObj);
             let apiObj = new SaveScanData(saveObj, loginData.data.token);
             this.props.APITransport(apiObj)
         })
@@ -330,14 +332,17 @@ class ScanDetailsComponent extends Component {
     componentDidUpdate(prevProps) {
         if(prevProps != this.props) {
             const { calledSavedData } = this.state
-            const { savedScanData } = this.props
+            const { savedScanData,filteredData } = this.props
             if(calledSavedData) {
                 if (savedScanData && prevProps.savedScanData !== savedScanData) {                    
                     this.setState({ isLoading: false, calledSavedData: false })
                     if (savedScanData.status && savedScanData.status == 200) {
                             
-                        Alert.alert(Strings.message_text, Strings.saved_successfully, [{
-                            text: Strings.ok_text, onPress: () => { this.goToDashBoard() }
+                        Alert.alert(Strings.message_text, Strings.saved_successfully+"hello", [{
+                            text: Strings.ok_text, onPress: () => { 
+                               callScanStatusDataConst(filteredData)
+                                this.goToDashBoard()
+                             }
                         }])
     
                     } else {

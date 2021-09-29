@@ -5,12 +5,15 @@ import {
 
 import { createStackNavigator } from 'react-navigation-stack'
 import LoginComponent from "../modules/loginScreens/LoginComponent";
-import DashboardComponent from '../modules/myScanScreens/DashboardComponent';
 import MyScanComponent from '../modules/myScanScreens/MyScanComponent';
 import ScanDetailsComponent from "../modules/myScanScreens/ScanDetailsComponent";
 import SelectDetailsComponent from "../modules/myScanScreens/SelectDetailsComponent";
 import PatScanDetailsComponent from "../modules/myScanScreens/PatScanDetailsComponent";
 import SatScanDetailsComponent from "../modules/myScanScreens/SatScanDetailsComponent";
+import StudentsList from "../modules/StudentsList/StudentsList";
+import ScanHistory from "../modules/ScanHistory/ScanHistory";
+import ScanStatus from "../modules/ScanStatus/ScanStatus";
+import DashboardComponent from '../modules/myScanScreens/DashboardComponent'
 
 
 const AuthStack = createStackNavigator({
@@ -41,6 +44,15 @@ const MainStack = createStackNavigator(
         },
         satScanDetails: {
             screen: SatScanDetailsComponent
+        },
+        StudentsList: {
+            screen: StudentsList
+        },
+        ScanHistory: {
+            screen: ScanHistory
+        },
+        ScanStatus: {
+            screen: ScanStatus
         }
     },
     {

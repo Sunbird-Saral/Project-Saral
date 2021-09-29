@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Alert, BackHandler } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import _ from 'lodash'
 import Strings from '../../utils/Strings';
 import AppTheme from '../../utils/AppTheme';
@@ -71,7 +71,7 @@ class DashboardComponent extends Component {
                     onLogoutClick={this.onLogoutClick}
                 />
                  {(loginData && loginData.data) && 
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                    <View>
                         <Text 
                             style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold',  paddingHorizontal: '5%', paddingVertical: '2%' }}
                         >
