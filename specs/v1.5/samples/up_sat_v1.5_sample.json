@@ -29,6 +29,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "",
                     "name": "",
@@ -64,6 +65,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "",
                     "name": "",
@@ -99,6 +101,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "",
                     "name": "",
@@ -134,6 +137,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "",
                     "name": "",
@@ -197,6 +201,7 @@
                         "roiId": 3
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "Should be 2 to 3 Digits",
                     "name": "Between 2 to 3 Digits",
@@ -232,6 +237,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "",
                     "name": "",
@@ -267,6 +273,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "",
                     "name": "",
@@ -302,6 +309,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "",
                     "name": "",
@@ -337,6 +345,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "",
                     "name": "",
@@ -386,6 +395,7 @@
                         "roiId": 2
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "",
                     "name": "",
@@ -419,8 +429,23 @@
                             "top": 141
                         },
                         "roiId": 1
+                    },
+                    {
+                        "annotationId": "N_Z_qI16y",
+                        "annotationTag": "CELL_QUESTION_10",
+                        "extractionMethod": "",
+                        "index": 1,
+                        "langIsoCode": "eng",
+                        "rect": {
+                            "bottom": 192,
+                            "left": 572,
+                            "right": 619,
+                            "top": 142
+                        },
+                        "roiId": 2
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "",
                     "name": "",
@@ -456,6 +481,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "",
                     "name": "",
@@ -491,6 +517,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "",
                     "name": "",
@@ -526,6 +553,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "",
                     "name": "",
@@ -561,6 +589,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "",
                     "name": "",
@@ -596,6 +625,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "",
                     "name": "",
@@ -631,6 +661,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "",
                     "name": "",
@@ -666,6 +697,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "",
                     "name": "",
@@ -701,6 +733,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "",
                     "name": "",
@@ -736,6 +769,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "",
                     "name": "",
@@ -771,6 +805,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "",
                     "name": "",
@@ -806,6 +841,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "HINDI QUESTION 1 should range from 0 to 5 Marks",
                     "name": "Between 0 to 5 Marks",
@@ -841,6 +877,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "HINDI QUESTION2 should range from 0 to 5 Marks",
                     "name": "Between 0 to 5 Marks",
@@ -876,6 +913,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "HINDI QUESTION3 should range from 0 to 5 Marks",
                     "name": "Between 0 to 5 Marks",
@@ -911,6 +949,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "HINDI QUESTION4 should range from 0 to 10 Marks",
                     "name": "Between 0 to 10 Marks",
@@ -946,6 +985,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "HINDI QUESTION5 should range from 0 to 10 Marks",
                     "name": "Between 0 to 10 Marks",
@@ -981,6 +1021,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "HINDI QUESTION6 should range from 0 to 5 Marks",
                     "name": "Between 0 to 5 Marks",
@@ -1016,6 +1057,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "HINDI QUESTION7 should range from 0 to 5 Marks",
                     "name": "Between 0 to 5 Marks",
@@ -1051,6 +1093,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "HINDI QUESTION8 should range from 0 to 5 Marks",
                     "name": "Between 0 to 5 Marks",
@@ -1086,6 +1129,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "HINDI QUESTION9 should range from 0 to 5 Marks",
                     "name": "Between 0 to 5 Marks",
@@ -1121,6 +1165,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "HINDI QUESTION10 should range from 0 to 5 Marks",
                     "name": "Between 0 to 5 Marks",
@@ -1156,6 +1201,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "",
                     "name": "",
@@ -1191,6 +1237,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "ENGLISH QUESTION 1 should range from 0 to 5 Marks",
                     "name": "Between 0 to 5 Marks",
@@ -1226,6 +1273,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "ENGLISH QUESTION2 should range from 0 to 5 Marks",
                     "name": "Between 0 to 5 Marks",
@@ -1261,6 +1309,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "ENGLISH QUESTION3 should range from 0 to 5 Marks",
                     "name": "Between 0 to 5 Marks",
@@ -1296,6 +1345,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "ENGLISH QUESTION4 should range from 0 to 10 Marks",
                     "name": "Between 0 to 10 Marks",
@@ -1331,6 +1381,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "ENGLISH QUESTION5 should range from 0 to 10 Marks",
                     "name": "Between 0 to 10 Marks",
@@ -1366,6 +1417,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "ENGLISH QUESTION6 should range from 0 to 5 Marks",
                     "name": "Between 0 to 5 Marks",
@@ -1401,6 +1453,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "ENGLISH QUESTION7 should range from 0 to 5 Marks",
                     "name": "Between 0 to 5 Marks",
@@ -1436,6 +1489,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "ENGLISH QUESTION8 should range from 0 to 5 Marks",
                     "name": "Between 0 to 5 Marks",
@@ -1471,6 +1525,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "ENGLISH QUESTION9 should range from 0 to 5 Marks",
                     "name": "Between 0 to 5 Marks",
@@ -1506,6 +1561,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "ENGLISH QUESTION10 should range from 0 to 5 Marks",
                     "name": "Between 0 to 5 Marks",
@@ -1541,6 +1597,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "",
                     "name": "",
@@ -1575,6 +1632,9 @@
                         },
                         "roiId": 1
                     }
+                ],
+                "tag": [
+                    "Aptitude"
                 ],
                 "validate": {
                     "errorMessage": "MATHS QUESTION 1 should range from 0 to 5 Marks",
@@ -1611,6 +1671,9 @@
                         "roiId": 1
                     }
                 ],
+                "tag": [
+                    "Aptitude"
+                ],
                 "validate": {
                     "errorMessage": "MATHS QUESTION2 should range from 0 to 5 Marks",
                     "name": "Between 0 to 5 Marks",
@@ -1645,6 +1708,9 @@
                         },
                         "roiId": 1
                     }
+                ],
+                "tag": [
+                    "Aptitude"
                 ],
                 "validate": {
                     "errorMessage": "MATHS QUESTION3 should range from 0 to 5 Marks",
@@ -1681,6 +1747,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "MATHS QUESTION4 should range from 0 to 10 Marks",
                     "name": "Between 0 to 10 Marks",
@@ -1716,6 +1783,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "MATHS QUESTION5 should range from 0 to 10 Marks",
                     "name": "Between 0 to 10 Marks",
@@ -1751,6 +1819,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "MATHS QUESTION6 should range from 0 to 5 Marks",
                     "name": "Between 0 to 5 Marks",
@@ -1786,6 +1855,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "MATHS QUESTION7 should range from 0 to 5 Marks",
                     "name": "Between 0 to 5 Marks",
@@ -1821,6 +1891,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "MATHS QUESTION8 should range from 0 to 5 Marks",
                     "name": "Between 0 to 5 Marks",
@@ -1856,6 +1927,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "MATHS QUESTION9 should range from 0 to 5 Marks",
                     "name": "Between 0 to 5 Marks",
@@ -1891,6 +1963,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "MATHS QUESTION10 should range from 0 to 5 Marks",
                     "name": "Between 0 to 5 Marks",
@@ -1926,6 +1999,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "",
                     "name": "",
@@ -1960,6 +2034,9 @@
                         },
                         "roiId": 1
                     }
+                ],
+                "tag": [
+                    "Aptitude"
                 ],
                 "validate": {
                     "errorMessage": "MATHS QUESTION 1 should range from 0 to 5 Marks",
@@ -1996,6 +2073,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "EVS QUESTION2 should range from 0 to 5 Marks",
                     "name": "Between 0 to 5 Marks",
@@ -2031,6 +2109,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "EVS QUESTION3 should range from 0 to 5 Marks",
                     "name": "Between 0 to 5 Marks",
@@ -2066,6 +2145,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "EVS QUESTION4 should range from 0 to 10 Marks",
                     "name": "Between 0 to 10 Marks",
@@ -2101,6 +2181,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "EVS QUESTION5 should range from 0 to 10 Marks",
                     "name": "Between 0 to 10 Marks",
@@ -2136,6 +2217,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "EVS QUESTION6 should range from 0 to 5 Marks",
                     "name": "Between 0 to 5 Marks",
@@ -2171,6 +2253,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "EVS QUESTION7 should range from 0 to 5 Marks",
                     "name": "Between 0 to 5 Marks",
@@ -2206,6 +2289,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "EVS QUESTION8 should range from 0 to 5 Marks",
                     "name": "Between 0 to 5 Marks",
@@ -2241,6 +2325,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "EVS QUESTION9 should range from 0 to 5 Marks",
                     "name": "Between 0 to 5 Marks",
@@ -2276,6 +2361,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "EVS QUESTION10 should range from 0 to 5 Marks",
                     "name": "Between 0 to 5 Marks",
@@ -2311,6 +2397,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "",
                     "name": "",
@@ -2345,6 +2432,10 @@
                         },
                         "roiId": 1
                     }
+                ],
+                "tag": [
+                    "General Knowledge",
+                    "Social Awareness"
                 ],
                 "validate": {
                     "errorMessage": "SCIENCE QUESTION 1 should range from 0 to 5 Marks",
@@ -2381,6 +2472,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "SCIENCE QUESTION2 should range from 0 to 5 Marks",
                     "name": "Between 0 to 5 Marks",
@@ -2416,6 +2508,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "SCIENCE QUESTION3 should range from 0 to 5 Marks",
                     "name": "Between 0 to 5 Marks",
@@ -2451,6 +2544,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "SCIENCE QUESTION4 should range from 0 to 10 Marks",
                     "name": "Between 0 to 10 Marks",
@@ -2500,6 +2594,7 @@
                         "roiId": 2
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "SCIENCE QUESTION5 should range from 0 to 10 Marks",
                     "name": "Between 0 to 10 Marks",
@@ -2535,6 +2630,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "SCIENCE QUESTION6 should range from 0 to 5 Marks",
                     "name": "Between 0 to 5 Marks",
@@ -2570,6 +2666,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "SCIENCE QUESTION7 should range from 0 to 5 Marks",
                     "name": "Between 0 to 5 Marks",
@@ -2605,6 +2702,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "SCIENCE QUESTION8 should range from 0 to 5 Marks",
                     "name": "Between 0 to 5 Marks",
@@ -2640,6 +2738,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "SCIENCE QUESTION9 should range from 0 to 5 Marks",
                     "name": "Between 0 to 5 Marks",
@@ -2675,6 +2774,7 @@
                         "roiId": 1
                     }
                 ],
+                "tag": {},
                 "validate": {
                     "errorMessage": "SCIENCE QUESTION10 should range from 0 to 5 Marks",
                     "name": "Between 0 to 5 Marks",
@@ -2702,7 +2802,7 @@
         "validate": [
             {
                 "errorMessage": "MAX MARKS Validation failed, please review",
-                "expression": "($HINDI_QUESTION_1 + $HINDI_QUESTION_2 + $HINDI_QUESTION_3 + $HINDI_QUESTION_4 + $HINDI_QUESTION_5 + $HINDI_QUESTION_6 + $HINDI_QUESTION_7 + $HINDI_QUESTION_8 + $HINDI_QUESTION_9 + $HINDI_QUESTION_TEN <= $MAXMARKS)",
+                "expression": "($HINDI_QUESTION_1 + $HINDI_QUESTION_2 + $HINDI_QUESTION_3 + $HINDI_QUESTION_4 + $HINDI_QUESTION_5 + $HINDI_QUESTION_6 + $HINDI_QUESTION_7 + $HINDI_QUESTION_8 + $HINDI_QUESTION_9 + $HINDI_QUESTION_TEN + $ENGLISH_QUESTION_1 + $ENGLISH_QUESTION_2 + $ENGLISH_QUESTION_3 + $ENGLISH_QUESTION_4 + $ENGLISH_QUESTION_5 + $ENGLISH_QUESTION_6 + $ENGLISH_QUESTION_7 + $ENGLISH_QUESTION_8 + $ENGLISH_QUESTION_9 + $ENGLISH_QUESTION_TEN + $MATHS_QUESTION_1 + $MATHS_QUESTION_2 + $MATHS_QUESTION_3 + $MATHS_QUESTION_4 + $MATHS_QUESTION_5 + $MATHS_QUESTION_6 + $MATHS_QUESTION_7 + $MATHS_QUESTION_8 + $MATHS_QUESTION_9 + $MATHS_QUESTION_TEN + $EVS_QUESTION_1 + $EVS_QUESTION_2 + $EVS_QUESTION_3 + $EVS_QUESTION_4 + $EVS_QUESTION_5 + $EVS_QUESTION_6 + $EVS_QUESTION_7 + $EVS_QUESTION_8 + $EVS_QUESTION_9 + $EVS_QUESTION_TEN + $SCIENCE_QUESTION_1 + $SCIENCE_QUESTION_2 + $SCIENCE_QUESTION_3 + $SCIENCE_QUESTION_4 + $SCIENCE_QUESTION_5 + $SCIENCE_QUESTION_6 + $SCIENCE_QUESTION_7 + $SCIENCE_QUESTION_8 + $SCIENCE_QUESTION_9 + $SCIENCE_QUESTION_TEN <= $MAXMARKS)",
                 "fields": {
                     "fieldKey": "$MAXMARKS",
                     "fieldValue": "250"
