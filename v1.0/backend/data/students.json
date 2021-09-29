@@ -75,4 +75,28 @@
   "name": "testStudent8",
   "studentId": "18040000001",
   "schoolId": "1"
-}]
+},
+{
+  "studentClass": [
+    {
+      "classId": "2",
+      "className": "Class-2"
+    }
+  ],
+  "section": "D",
+  "name": "Ajay",
+  "studentId": "22040000001",
+  "schoolId": "2"
+},{
+  "studentClass": [
+    {
+      "classId": "2",
+      "className": "Class-2"
+    }
+  ],
+  "section": "C",
+  "name": "Abhay",
+  "studentId": "22030000001",
+  "schoolId": "2"
+}
+]
