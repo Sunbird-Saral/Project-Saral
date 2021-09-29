@@ -103,4 +103,21 @@
   "classId": "8",
   "className": "Class-8",
   "schoolId": "1"
-}]
+},
+{
+  "sections": [
+    {
+      "section": "D"
+    },
+    {
+      "section": "B"
+    },
+    {
+      "section": "C"
+    }
+  ],
+  "classId": "2",
+  "className": "Class-2",
+  "schoolId": "2"
+}
+]

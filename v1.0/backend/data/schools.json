@@ -9,4 +9,17 @@
   "hmMobileNo": "8006079875",
   "noOfStudents": "100",
   "udiseCode": "1"
-}]
+},
+{
+  "name": "Aditya Birla Public School, Rayagada.",
+  "schoolId": "2",
+  "password": "tarento@123",
+  "state": "odisha",
+  "district": "odisha",
+  "block": "Rayagada",
+  "hmName": "acbc",
+  "hmMobileNo": "8006079875",
+  "noOfStudents": "100",
+  "udiseCode": "2"
+}
+]
