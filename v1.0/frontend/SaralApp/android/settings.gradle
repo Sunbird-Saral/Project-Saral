@@ -1,0 +1,6 @@
+rootProject.name = 'SaralApp'
+apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
+include ':app'
+// SaralSDK: Include both as modules
+include ':saralsdk'
+include ':openCVLibrary343'

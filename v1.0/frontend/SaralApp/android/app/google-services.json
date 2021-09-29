@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "2733844998",
+    "firebase_url": "https://ocrapp-3da24.firebaseio.com",
+    "project_id": "ocrapp-3da24",
+    "storage_bucket": "ocrapp-3da24.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:2733844998:android:2988d17ff95b46545ab187",
+        "android_client_info": {
+          "package_name": "com.saralapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "2733844998-u2rof1lb62nf2kg1r9lr39mtashqp81s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "ABzaSyD478Ivfz0uvMFARJIJSeyqnwFOBdC20zs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "2733844998-u2rof1lb62nf2kg1r9lr39mtashqp81s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
