@@ -11,24 +11,6 @@ servers:
   - url: /none
 paths: {}
 
-      # Scenarios discussed during call with Vivek Raghavan
-      #1) Validation of obtained marks = sum of all marks (Cross validations) :Post Scan -- This can come from backend validation rules based on the layout , exam
-      #2) Validation to check overalaps of cells and ROIs No two cells overalp with each other , all ROIs of cell should be with the cell
-      # boundaries. :Admin setup Validation. During ROI config this validation has to be thrown. Have provision in the schema.
-      #3) Size validation for cell with toleration value. Width/Height tolerance.
-      #5) School , Exam level validations ,tagging which comes in during scanning not during setup.
-      #6) Define what goes into backend response , sanitizing unwanted information.
-      #7) Tolerance for confidence of recog.
-      #8) Label for only printing , consider other factors for printing.
-      #9) Eg. Signature or any image as backend respons for processing.
-      #10) Compress full sheet and send to backend for reporcessing as needed.
-      #11) Validate all the boxes lies with in the page of different page sizes.
-      #   - LANG_HANDWRITTEN_TEXT lang specific
-      #   - LANG_BLOCK_TEXT
-      # Presentation - to review 
-      # Rx or Medical field.
-      #  Please also validate that all boxes lie within the page limit for different page sizes.
-
 components:
   schemas:
     layout:
@@ -42,8 +24,8 @@ components:
       properties:
         version:
           type: string
-          default: '1.0'
-          description: layout detection version
+          default: '1.5'
+          description: layout detection and rendering version
         name:
           type: string
           description: layout name for human understanding
