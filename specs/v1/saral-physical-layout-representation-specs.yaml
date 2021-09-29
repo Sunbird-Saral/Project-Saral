@@ -25,6 +25,11 @@ components:
           type: string
           description: layout name for human understanding
           example: Odisa SAT exam sheet format for class 2 to 5
+        cells:
+          type: array
+          items:
+            $ref: '#/components/schemas/cell'
+            minItems: 1
     
     cell:
       type: object
@@ -33,15 +38,19 @@ components:
         cellId:
           type: string
           description: unique identity of the cell
-          format: uuidv4
         rois:
-          $ref: '#/components/schemas/roi'
+          $ref: '#/components/schemas/rois'
         render:
           $ref: '#/components/schemas/renderingInformation'
         format:
           $ref: '#/components/schemas/formattingInformation'
         validate:
           $ref: '#/components/schemas/validationInformation'
+        consolidatedPrediction:
+          description: |
+            consolidated prediction of all the rois with in a cell. 
+            This is mandatory on the response sent to backend.
+          type: string
     
     renderingInformation:
       type: object
@@ -89,7 +98,6 @@ components:
         roiId:
           type: string
           description: unique roi identifier
-          format: uuidv4
         index:
           type: number
           description: index of roi in a cell area
