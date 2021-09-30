@@ -65,7 +65,8 @@ export default function dispatchAPI(api) {
                         if (typeof api.getNextStep === 'function' && res.data && (res.status == 200 || res.status == 201))
                             dispatch(api.getNextStep())
                     })
-                    .catch(function (err) {                        
+                    .catch(function (err) {        
+                        console.log("err",err);                
                         clearTimeout(id)
                         if(err && err.message == 'The request timed out.') {
                             dispatch(apiStatusAsync(false, true, Strings.request_timeout_custom_message, null, err && err.response && err.response.status && err.response.status === 401 ? true : false))
