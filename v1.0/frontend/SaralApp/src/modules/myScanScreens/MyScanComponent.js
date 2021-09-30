@@ -16,6 +16,8 @@ import ScanHistoryCard from '../ScanHistory/ScanHistoryCard';
 
 import SaralSDK from '../../../SaralSDK'
 import SaralSpecData from '../../../sat_odisha_generated_roi.json'
+// import SaralSpecData from '../../../sat_up_generated_roi.json'
+// import SaralSpecData from '../../../up_sat_cell_roi_seq.json'
 
 class MyScanComponent extends Component {
     constructor(props) {
@@ -154,7 +156,7 @@ class MyScanComponent extends Component {
                 activityOpen: true
             })
             SaralSDK.startCamera(JSON.stringify(SaralSpecData)).then(res => {
-                console.log("UPSAT",res);
+                // console.log("UPSAT",res);
               let roisData = JSON.parse(res);
               let cells = roisData.layout.cells;
               this.consolidatePrediction( cells , roisData )
@@ -183,7 +185,8 @@ class MyScanComponent extends Component {
             
             }
             console.log("JSON",JSON.stringify(roisData));
-            // this.props.OcrLocalResponseAction(roisData)
+            this.props.OcrLocalResponseAction(roisData)
+            this.props.navigation.navigate('ScannedDetailsComponent');
       }
 
     // openCameraActivity = () => {

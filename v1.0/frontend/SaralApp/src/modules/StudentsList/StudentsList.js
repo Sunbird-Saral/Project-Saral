@@ -33,7 +33,8 @@ import { scanStatusDataAction } from '../../modules/ScanStatus/scanStatusDataAct
 const StudentsList = ({
     filteredData,
     loginData,
-    navigation
+    navigation,
+    scanTypeData
 }) => {
 
     //hooks
@@ -145,8 +146,8 @@ const StudentsList = ({
 
         let payload =
         {
-            "examId": filteredData.response.examTestID
-            // "examId": "string"
+            "examId": filteredData.response.examTestID,
+            "type": scanTypeData.scanType
         }
 
         let apiObj = new ROIAction(payload);
@@ -215,8 +216,8 @@ const mapStateToProps = (state) => {
     return {
         filteredData: state.filteredData,
         loginData: state.loginData,
-        roiData: state.roiData
-        
+        roiData: state.roiData,
+        scanTypeData: state.scanTypeData.response
     }
 }
 

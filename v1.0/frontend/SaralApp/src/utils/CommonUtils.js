@@ -18,3 +18,7 @@ export const SCAN_TYPES = {
     SAT_TYPE: 'sat',
     PAT_TYPE: 'pat'
 }
+
+export const TABLE_HEADER =[
+    "Sr No","Max Marks","Obtanied Marks"
+]

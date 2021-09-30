@@ -1,7 +1,7 @@
 const configs = {
     // BASE_URL: 'http://uppat.idc.tarento.com:3000'
     // BASE_URL: 'http://44.241.36.235:3000'
-    BASE_URL: 'http://192.168.43.200:3000'
+    BASE_URL: 'http://192.168.1.208:3000'
 }
 
 export default configs;
