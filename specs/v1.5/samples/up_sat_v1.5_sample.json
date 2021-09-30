@@ -33,7 +33,6 @@
                 "cellId": 1,
                 "rois": [
                     {
-                        "annotationId": "av3CIJxCK",
                         "annotationTag": "CELL_ROLLNUMBER_0",
                         "extractionMethod": "",
                         "langIsoCode": "eng",
@@ -69,7 +68,6 @@
                 "cellId": 2,
                 "rois": [
                     {
-                        "annotationId": "d8IE27EHC",
                         "annotationTag": "CELL_ROLLNUMBER_1",
                         "extractionMethod": "",
                         "langIsoCode": "eng",
@@ -105,7 +103,6 @@
                 "cellId": 3,
                 "rois": [
                     {
-                        "annotationId": "bJ59kMV5v",
                         "annotationTag": "CELL_ROLLNUMBER_2",
                         "extractionMethod": "",
                         "langIsoCode": "eng",
@@ -141,7 +138,6 @@
                 "cellId": 4,
                 "rois": [
                     {
-                        "annotationId": "-ao8WUT1W",
                         "annotationTag": "CELL_ROLLNUMBER_3",
                         "extractionMethod": "",
                         "langIsoCode": "eng",
@@ -177,7 +173,6 @@
                 "cellId": 5,
                 "rois": [
                     {
-                        "annotationId": "w2YWhWjDD",
                         "annotationTag": "ROLLNUMBER_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -191,7 +186,6 @@
                         }
                     },
                     {
-                        "annotationId": "EH5E9epOl",
                         "annotationTag": "ROLLNUMBER_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -205,7 +199,6 @@
                         }
                     },
                     {
-                        "annotationId": "byVn93veE",
                         "annotationTag": "ROLLNUMBER_3",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -241,7 +234,6 @@
                 "cellId": 6,
                 "rois": [
                     {
-                        "annotationId": "AWvrH-t0m",
                         "annotationTag": "CELL_ROLLNUMBER_4",
                         "extractionMethod": "",
                         "langIsoCode": "eng",
@@ -277,7 +269,6 @@
                 "cellId": 7,
                 "rois": [
                     {
-                        "annotationId": "fD8TBUoH9",
                         "annotationTag": "CELL_LABEL_0",
                         "extractionMethod": "",
                         "langIsoCode": "eng",
@@ -313,7 +304,6 @@
                 "cellId": 8,
                 "rois": [
                     {
-                        "annotationId": "M1H9CEf0u",
                         "annotationTag": "CELL_OBJECTIVE",
                         "extractionMethod": "",
                         "langIsoCode": "eng",
@@ -349,7 +339,6 @@
                 "cellId": 9,
                 "rois": [
                     {
-                        "annotationId": "K5uq0kiWV",
                         "annotationTag": "CELL_SUBJECTIVE",
                         "extractionMethod": "",
                         "langIsoCode": "eng",
@@ -385,7 +374,6 @@
                 "cellId": 10,
                 "rois": [
                     {
-                        "annotationId": "K5uq0kiWV",
                         "annotationTag": "CELL_SUBJECTIVE",
                         "extractionMethod": "",
                         "langIsoCode": "eng",
@@ -399,7 +387,6 @@
                         }
                     },
                     {
-                        "annotationId": "1q6JlCHIL",
                         "annotationTag": "CELL_SUBJECT",
                         "extractionMethod": "",
                         "langIsoCode": "eng",
@@ -435,7 +422,6 @@
                 "cellId": 11,
                 "rois": [
                     {
-                        "annotationId": "pbe6YFBEA",
                         "annotationTag": "CELL_QUESTION_1",
                         "extractionMethod": "",
                         "langIsoCode": "eng",
@@ -471,7 +457,6 @@
                 "cellId": 12,
                 "rois": [
                     {
-                        "annotationId": "Zw6kaLsgE",
                         "annotationTag": "CELL_QUESTION_2",
                         "extractionMethod": "",
                         "langIsoCode": "eng",
@@ -507,7 +492,6 @@
                 "cellId": 13,
                 "rois": [
                     {
-                        "annotationId": "3UwadIj-H",
                         "annotationTag": "CELL_QUESTION_3",
                         "extractionMethod": "",
                         "langIsoCode": "eng",
@@ -543,7 +527,6 @@
                 "cellId": 14,
                 "rois": [
                     {
-                        "annotationId": "2Ukgcz6aa",
                         "annotationTag": "CELL_QUESTION_4",
                         "extractionMethod": "",
                         "langIsoCode": "eng",
@@ -579,7 +562,6 @@
                 "cellId": 15,
                 "rois": [
                     {
-                        "annotationId": "UK_e9ytac",
                         "annotationTag": "CELL_QUESTION_5",
                         "extractionMethod": "",
                         "langIsoCode": "eng",
@@ -615,7 +597,6 @@
                 "cellId": 16,
                 "rois": [
                     {
-                        "annotationId": "hKMX7FV4d",
                         "annotationTag": "CELL_QUESTION_6",
                         "extractionMethod": "",
                         "langIsoCode": "eng",
@@ -651,7 +632,6 @@
                 "cellId": 17,
                 "rois": [
                     {
-                        "annotationId": "YhmcZDYby",
                         "annotationTag": "CELL_QUESTION_7",
                         "extractionMethod": "",
                         "langIsoCode": "eng",
@@ -687,7 +667,6 @@
                 "cellId": 18,
                 "rois": [
                     {
-                        "annotationId": "d1p7ohuqh",
                         "annotationTag": "CELL_QUESTION_8",
                         "extractionMethod": "",
                         "langIsoCode": "eng",
@@ -723,7 +702,6 @@
                 "cellId": 19,
                 "rois": [
                     {
-                        "annotationId": "VnNBGqkVz",
                         "annotationTag": "CELL_QUESTION_9",
                         "extractionMethod": "",
                         "langIsoCode": "eng",
@@ -759,7 +737,6 @@
                 "cellId": 20,
                 "rois": [
                     {
-                        "annotationId": "N_Z_qI16y",
                         "annotationTag": "CELL_QUESTION_10",
                         "extractionMethod": "",
                         "langIsoCode": "eng",
@@ -795,7 +772,6 @@
                 "cellId": 21,
                 "rois": [
                     {
-                        "annotationId": "eTwo21vaW",
                         "annotationTag": "CELL_LABEL_HINDI",
                         "extractionMethod": "",
                         "langIsoCode": "eng",
@@ -831,7 +807,6 @@
                 "cellId": 22,
                 "rois": [
                     {
-                        "annotationId": "cxfP8uVOx",
                         "annotationTag": "HINDI_QUESTION_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -867,7 +842,6 @@
                 "cellId": 23,
                 "rois": [
                     {
-                        "annotationId": "Muatqaseb",
                         "annotationTag": "HINDI_QUESTION_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -903,7 +877,6 @@
                 "cellId": 24,
                 "rois": [
                     {
-                        "annotationId": "jZmW-nez7",
                         "annotationTag": "HINDI_QUESTION_3",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -939,7 +912,6 @@
                 "cellId": 25,
                 "rois": [
                     {
-                        "annotationId": "MMc9B9gLn",
                         "annotationTag": "HINDI_QUESTION_4",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -975,7 +947,6 @@
                 "cellId": 26,
                 "rois": [
                     {
-                        "annotationId": "5DFeVRjUq",
                         "annotationTag": "HINDI_QUESTION_5",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -1011,7 +982,6 @@
                 "cellId": 27,
                 "rois": [
                     {
-                        "annotationId": "CbMCC8zrn",
                         "annotationTag": "HINDI_QUESTION_6",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -1047,7 +1017,6 @@
                 "cellId": 28,
                 "rois": [
                     {
-                        "annotationId": "o9cBJO5Vr",
                         "annotationTag": "HINDI_QUESTION_7",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -1083,7 +1052,6 @@
                 "cellId": 29,
                 "rois": [
                     {
-                        "annotationId": "9dCFXBLiV",
                         "annotationTag": "HINDI_QUESTION_8",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -1119,7 +1087,6 @@
                 "cellId": 30,
                 "rois": [
                     {
-                        "annotationId": "x2MPxcbEV",
                         "annotationTag": "HINDI_QUESTION_9",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -1155,7 +1122,6 @@
                 "cellId": 31,
                 "rois": [
                     {
-                        "annotationId": "W4jYa1vCS",
                         "annotationTag": "HINDI_QUESTION_TEN",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -1191,7 +1157,6 @@
                 "cellId": 32,
                 "rois": [
                     {
-                        "annotationId": "ShKrIsoTX",
                         "annotationTag": "CELL_LABEL_ENGLISH",
                         "extractionMethod": "",
                         "langIsoCode": "eng",
@@ -1227,7 +1192,6 @@
                 "cellId": 33,
                 "rois": [
                     {
-                        "annotationId": "eY_nH_Kqw",
                         "annotationTag": "ENGLISH_QUESTION_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -1263,7 +1227,6 @@
                 "cellId": 34,
                 "rois": [
                     {
-                        "annotationId": "vhAHjFizv",
                         "annotationTag": "ENGLISH_QUESTION_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -1299,7 +1262,6 @@
                 "cellId": 35,
                 "rois": [
                     {
-                        "annotationId": "5LDSXmWs9",
                         "annotationTag": "ENGLISH_QUESTION_3",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -1335,7 +1297,6 @@
                 "cellId": 36,
                 "rois": [
                     {
-                        "annotationId": "so9WEurw4",
                         "annotationTag": "ENGLISH_QUESTION_4",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -1371,7 +1332,6 @@
                 "cellId": 37,
                 "rois": [
                     {
-                        "annotationId": "M5mw0hg4g",
                         "annotationTag": "ENGLISH_QUESTION_5",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -1407,7 +1367,6 @@
                 "cellId": 38,
                 "rois": [
                     {
-                        "annotationId": "tn9rjjvxZ",
                         "annotationTag": "ENGLISH_QUESTION_6",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -1443,7 +1402,6 @@
                 "cellId": 39,
                 "rois": [
                     {
-                        "annotationId": "62iFMSzw5",
                         "annotationTag": "ENGLISH_QUESTION_7",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -1479,7 +1437,6 @@
                 "cellId": 40,
                 "rois": [
                     {
-                        "annotationId": "wpSshya3P",
                         "annotationTag": "ENGLISH_QUESTION_8",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -1515,7 +1472,6 @@
                 "cellId": 41,
                 "rois": [
                     {
-                        "annotationId": "0_AbVIp4_",
                         "annotationTag": "ENGLISH_QUESTION_9",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -1551,7 +1507,6 @@
                 "cellId": 42,
                 "rois": [
                     {
-                        "annotationId": "33rLNckDL",
                         "annotationTag": "ENGLISH_QUESTION_TEN",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -1587,7 +1542,6 @@
                 "cellId": 43,
                 "rois": [
                     {
-                        "annotationId": "qLmGD_N8N",
                         "annotationTag": "CELL_LABEL_MATHS",
                         "extractionMethod": "",
                         "langIsoCode": "eng",
@@ -1623,7 +1577,6 @@
                 "cellId": 44,
                 "rois": [
                     {
-                        "annotationId": "bJz0So938",
                         "annotationTag": "MATHS_QUESTION_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -1661,7 +1614,6 @@
                 "cellId": 45,
                 "rois": [
                     {
-                        "annotationId": "JGceL6wb8",
                         "annotationTag": "MATHS_QUESTION_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -1699,7 +1651,6 @@
                 "cellId": 46,
                 "rois": [
                     {
-                        "annotationId": "YvPdBPLYt",
                         "annotationTag": "MATHS_QUESTION_3",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -1737,7 +1688,6 @@
                 "cellId": 47,
                 "rois": [
                     {
-                        "annotationId": "LVQHYsc6g",
                         "annotationTag": "MATHS_QUESTION_4",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -1773,7 +1723,6 @@
                 "cellId": 48,
                 "rois": [
                     {
-                        "annotationId": "nJNRKSFCA",
                         "annotationTag": "MATHS_QUESTION_5",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -1809,7 +1758,6 @@
                 "cellId": 49,
                 "rois": [
                     {
-                        "annotationId": "YS_hFUgEO",
                         "annotationTag": "MATHS_QUESTION_6",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -1845,7 +1793,6 @@
                 "cellId": 50,
                 "rois": [
                     {
-                        "annotationId": "Nds6EzgPE",
                         "annotationTag": "MATHS_QUESTION_7",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -1881,7 +1828,6 @@
                 "cellId": 51,
                 "rois": [
                     {
-                        "annotationId": "B-5TCF5mo",
                         "annotationTag": "MATHS_QUESTION_8",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -1917,7 +1863,6 @@
                 "cellId": 52,
                 "rois": [
                     {
-                        "annotationId": "ZRQKebuLb",
                         "annotationTag": "MATHS_QUESTION_9",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -1953,7 +1898,6 @@
                 "cellId": 53,
                 "rois": [
                     {
-                        "annotationId": "0M673nBF5",
                         "annotationTag": "MATHS_QUESTION_TEN",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -1989,7 +1933,6 @@
                 "cellId": 54,
                 "rois": [
                     {
-                        "annotationId": "qLmGD_N8N",
                         "annotationTag": "CELL_LABEL_MATHS",
                         "extractionMethod": "",
                         "langIsoCode": "eng",
@@ -2025,7 +1968,6 @@
                 "cellId": 55,
                 "rois": [
                     {
-                        "annotationId": "bJz0So938",
                         "annotationTag": "MATHS_QUESTION_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -2063,7 +2005,6 @@
                 "cellId": 56,
                 "rois": [
                     {
-                        "annotationId": "hrE8jiSGi",
                         "annotationTag": "EVS_QUESTION_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -2099,7 +2040,6 @@
                 "cellId": 57,
                 "rois": [
                     {
-                        "annotationId": "wo3-YSl2H",
                         "annotationTag": "EVS_QUESTION_3",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -2135,7 +2075,6 @@
                 "cellId": 58,
                 "rois": [
                     {
-                        "annotationId": "VT5TrWozx",
                         "annotationTag": "EVS_QUESTION_4",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -2171,7 +2110,6 @@
                 "cellId": 59,
                 "rois": [
                     {
-                        "annotationId": "ZGKpO8ex-",
                         "annotationTag": "EVS_QUESTION_5",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -2207,7 +2145,6 @@
                 "cellId": 60,
                 "rois": [
                     {
-                        "annotationId": "_BJEejm-x",
                         "annotationTag": "EVS_QUESTION_6",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -2243,7 +2180,6 @@
                 "cellId": 61,
                 "rois": [
                     {
-                        "annotationId": "b9E4575ov",
                         "annotationTag": "EVS_QUESTION_7",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -2279,7 +2215,6 @@
                 "cellId": 62,
                 "rois": [
                     {
-                        "annotationId": "bDEcnxJf8",
                         "annotationTag": "EVS_QUESTION_8",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -2315,7 +2250,6 @@
                 "cellId": 63,
                 "rois": [
                     {
-                        "annotationId": "HwHMoHP8f",
                         "annotationTag": "EVS_QUESTION_9",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -2351,7 +2285,6 @@
                 "cellId": 64,
                 "rois": [
                     {
-                        "annotationId": "3m3rRH0lN",
                         "annotationTag": "EVS_QUESTION_TEN",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -2387,7 +2320,6 @@
                 "cellId": 65,
                 "rois": [
                     {
-                        "annotationId": "uYBC8WQ0S",
                         "annotationTag": "CELL_LABEL_SCIENCE",
                         "extractionMethod": "",
                         "langIsoCode": "eng",
@@ -2423,7 +2355,6 @@
                 "cellId": 66,
                 "rois": [
                     {
-                        "annotationId": "D7EhDm4uy",
                         "annotationTag": "SCIENCE_QUESTION_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -2462,7 +2393,6 @@
                 "cellId": 67,
                 "rois": [
                     {
-                        "annotationId": "t5zTgSdc2",
                         "annotationTag": "SCIENCE_QUESTION_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -2498,7 +2428,6 @@
                 "cellId": 68,
                 "rois": [
                     {
-                        "annotationId": "OrRvGhzLV",
                         "annotationTag": "SCIENCE_QUESTION_3",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -2534,7 +2463,6 @@
                 "cellId": 69,
                 "rois": [
                     {
-                        "annotationId": "-x_u3fFhV",
                         "annotationTag": "SCIENCE_QUESTION_4",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -2570,7 +2498,6 @@
                 "cellId": 70,
                 "rois": [
                     {
-                        "annotationId": "LVHw1QHMH",
                         "annotationTag": "SCIENCE_QUESTION_5",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -2584,7 +2511,6 @@
                         }
                     },
                     {
-                        "annotationId": "JfjpePMxn",
                         "annotationTag": "SCIENCE_QUESTION_5",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -2620,7 +2546,6 @@
                 "cellId": 71,
                 "rois": [
                     {
-                        "annotationId": "JXXYfHtGc",
                         "annotationTag": "SCIENCE_QUESTION_6",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -2656,7 +2581,6 @@
                 "cellId": 72,
                 "rois": [
                     {
-                        "annotationId": "j6qSm7bRU",
                         "annotationTag": "SCIENCE_QUESTION_7",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -2692,7 +2616,6 @@
                 "cellId": 73,
                 "rois": [
                     {
-                        "annotationId": "6TPxclnwr",
                         "annotationTag": "SCIENCE_QUESTION_8",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -2728,7 +2651,6 @@
                 "cellId": 74,
                 "rois": [
                     {
-                        "annotationId": "Li5u6VAyY",
                         "annotationTag": "SCIENCE_QUESTION_9",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
@@ -2764,7 +2686,6 @@
                 "cellId": 75,
                 "rois": [
                     {
-                        "annotationId": "eZpuYFTx-",
                         "annotationTag": "SCIENCE_QUESTION_TEN",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "langIsoCode": "eng",
