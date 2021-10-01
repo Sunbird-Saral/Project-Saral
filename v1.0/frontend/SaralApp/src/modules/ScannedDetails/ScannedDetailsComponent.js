@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Text, View, ScrollView, ToastAndroid } from 'react-native';
 import { connect } from 'react-redux';
 import AppTheme from '../../utils/AppTheme';
-import { SCAN_TYPES, TABLE_HEADER } from '../../utils/CommonUtils';
+import { neglectData, SCAN_TYPES, TABLE_HEADER } from '../../utils/CommonUtils';
 import Strings from '../../utils/Strings';
 import ButtonComponent from '../common/components/ButtonComponent';
 import DropDownMenu from '../common/components/DropDownComponent';
@@ -13,7 +13,6 @@ import { styles } from './ScannedDetailsStyle'
 import TabHeader from './TabHeader';
 
 //rois
-import OdishaROI from '../../../sat_odisha_generated_roi.json';
 import MarksHeaderTable from './MarksHeaderTable';
 
 const ScannedDetailsComponent = ({
@@ -34,7 +33,7 @@ const ScannedDetailsComponent = ({
     const [testId, setTestID] = useState(123456)
     const [testDate, setTestDate] = useState('30/09/2021')
     const [nextValue, setNextValue] = useState(5)
-    const [preValue, setPreValue] = useState(1)
+    const [preValue, setPreValue] = useState(0)
     const [newArrayValue, setNewArrayValue] = useState([])
     const [isNextExist, setNextExist] = useState(false)
     const [btnName, setBtnName] = useState('Cancel')
@@ -163,9 +162,20 @@ const ScannedDetailsComponent = ({
     }
 
     useEffect(() => {
-        let len = ocrLocalResponse.layout.cells.length - 3
+        let data = ''
+        let elements = neglectData;
+        data = ocrLocalResponse.layout.cells.filter((element) => {
+            if (element.format.name == elements[0] || element.format.name == elements[1] || element.format.name == elements[2] || element.format.name == elements[3]) {
+            }
+            else {
+                return true
+            }
+        })
+        // console.log("DATA=================>", data);
+
+        let len = data.length
         console.log("PRevValue", preValue, nextValue, "length", len);
-        let newArray = ocrLocalResponse.layout.cells.slice(preValue, nextValue + 1);
+        let newArray = data.slice(preValue, nextValue);
         setNewArrayValue([...newArray])
         if (newArray.length < 5 || len == nextValue) {
             setNextExist(true)
@@ -214,51 +224,51 @@ const ScannedDetailsComponent = ({
 
                     // ocrLocalResponse.layout.cells.slice(preValue, nextValue)
                     newArrayValue.map((element, index) => {
-                        if (element.format.name == `QUESTION${element.render.index - 1}`) {
-                            return (
-                                <View style={{ flexDirection: 'row' }}>
+                        // if (element.format.name == `QUESTION${element.render.index - 1}`) {
+                        return (
+                            <View style={{ flexDirection: 'row' }}>
 
-                                    <MarksHeaderTable
-                                        customRowStyle={{ width: '30%', }}
-                                        key={`Questions${index}`}
-                                        // icon={key == 'pass'}
-                                        rowTitle={element.format.name}
-                                        rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
-                                        // editable={key == 'earned' ? edit : false}
-                                        keyboardType={'number-pad'}
-                                    // onChangeText={(text) => {
-                                    //     this.handleTextChange(text.trim(), indexNumber, marksdetails)
-                                    // }}
-                                    />
-                                    <MarksHeaderTable
-                                        customRowStyle={{ width: '30%', }}
-                                        key={`MaxMarks${index}`}
-                                        // icon={key == 'pass'}
-                                        rowTitle={"10"}
-                                        rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
-                                        // editable={key == 'earned' ? edit : false}
-                                        keyboardType={'number-pad'}
-                                    // onChangeText={(text) => {
-                                    //     this.handleTextChange(text.trim(), indexNumber, marksdetails)
-                                    // }}
-                                    />
-                                    <MarksHeaderTable
-                                        customRowStyle={{ width: '30%', }}
-                                        key={`ObtainedMarks${index}`}
-                                        // icon={key == 'pass'}
-                                        rowTitle={element.consolidatePrediction}
-                                        rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
-                                        // editable={key == 'earned' ? edit : false}
-                                        keyboardType={'number-pad'}
-                                    // onChangeText={(text) => {
-                                    //     this.handleTextChange(text.trim(), indexNumber, marksdetails)
-                                    // }}
+                                <MarksHeaderTable
+                                    customRowStyle={{ width: '30%', }}
+                                    key={`Questions${index}`}
+                                    // icon={key == 'pass'}
+                                    rowTitle={element.format.name}
+                                    rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
+                                    // editable={key == 'earned' ? edit : false}
+                                    keyboardType={'number-pad'}
+                                // onChangeText={(text) => {
+                                //     this.handleTextChange(text.trim(), indexNumber, marksdetails)
+                                // }}
+                                />
+                                <MarksHeaderTable
+                                    customRowStyle={{ width: '30%', }}
+                                    key={`MaxMarks${index}`}
+                                    // icon={key == 'pass'}
+                                    rowTitle={"10"}
+                                    rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
+                                    // editable={key == 'earned' ? edit : false}
+                                    keyboardType={'number-pad'}
+                                // onChangeText={(text) => {
+                                //     this.handleTextChange(text.trim(), indexNumber, marksdetails)
+                                // }}
+                                />
+                                <MarksHeaderTable
+                                    customRowStyle={{ width: '30%', }}
+                                    key={`ObtainedMarks${index}`}
+                                    // icon={key == 'pass'}
+                                    rowTitle={element.consolidatePrediction}
+                                    rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
+                                    // editable={key == 'earned' ? edit : false}
+                                    keyboardType={'number-pad'}
+                                // onChangeText={(text) => {
+                                //     this.handleTextChange(text.trim(), indexNumber, marksdetails)
+                                // }}
 
-                                    />
+                                />
 
-                                </View>
-                            )
-                        }
+                            </View>
+                        )
+                        // }
                     })
                 }
 
@@ -287,13 +297,15 @@ const ScannedDetailsComponent = ({
             ToastAndroid.show("no more data", ToastAndroid.SHORT);
         } else {
             setBtnName('Back')
-            setPreValue(nextValue + 1)
+            setPreValue(nextValue)
             setNextValue(nextValue + 5)
         }
     }
 
     const onBackButtonClick = () => {
-        if (preValue == 1) {
+        console.log("onBackButtonClick outside", preValue);
+        if (preValue == 0) {
+            console.log("onBackButtonClick", preValue);
             // ToastAndroid.show("proceed further", ToastAndroid.SHORT)
             setBtnName('Cancel')
         } else {
@@ -302,7 +314,7 @@ const ScannedDetailsComponent = ({
             setPreValue(preValue - 5)
             setNextValue(nextValue - 5)
         }
-        if (preValue==6) {
+        if (preValue == 5) {
             setBtnName('cancel')
         }
     }

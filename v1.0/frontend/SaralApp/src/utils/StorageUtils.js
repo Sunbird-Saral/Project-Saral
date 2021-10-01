@@ -6,10 +6,36 @@ const LOGIN_DATA_KEY = 'login_data_key'
 const LOGIN_CRED_KEY = 'login_cred_key'
 const STUDENTS_EXAM_KEY = 'students_exam_key'
 const FETCH_SCAN_KEY = 'fetch_scan_key'
+const SAVE_ABSENT_DATA_INTO_LOCAL='save_absent_data_into_local'
 
 export const setData = async (key, value) => {
     await AsyncStorage.setItem(key, value);
     return true
+}
+
+export const setTotalStudent=async(data)=>{
+    let value=JSON.stringify(data);
+    let saved=await AsyncStorage.setItem(SAVE_TOTAL_STUDENT,value);
+    if (saved) {
+        return true
+    }else{
+        return false
+    }
+}
+
+export const setAbsentStudentDataIntoAsync=async(data)=>{
+    let value=JSON.stringify(data);
+    if (value==[]) {
+        AsyncStorage.removeItem(SAVE_ABSENT_DATA_INTO_LOCAL)
+    }else{
+        let saved=await AsyncStorage.setItem(SAVE_ABSENT_DATA_INTO_LOCAL,value);
+        if (saved) {
+            return true
+        }
+        else{
+            return false
+        }
+    }
 }
 
 export const getData = async (key) => {
