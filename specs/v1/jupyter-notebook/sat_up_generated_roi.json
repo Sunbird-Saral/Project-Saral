@@ -4,12 +4,12 @@
         "name": "UP SAT Exam Sheet Form",
         "cells": [
             {
-                "cellId": "da45954a-a2b1-482b-9125-34dcd2bfd56c",
+                "cellId": "1",
                 "rois": [
                     {
                         "annotationTags": "ROLLID1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "5d7644a7-46e3-4464-8f47-fad3e46166af",
+                        "roiId": "1",
                         "index": 0,
                         "rect": {
                             "top": 40,
@@ -21,7 +21,7 @@
                     {
                         "annotationTags": "ROLLID2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "f3a8c9be-de05-4dcb-9870-6c5b94edabb4",
+                        "roiId": "2",
                         "index": 1,
                         "rect": {
                             "top": 41,
@@ -33,7 +33,7 @@
                     {
                         "annotationTags": "ROLLID3",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "a1f670b0-2dff-4c06-8fae-8237b859dda9",
+                        "roiId": "3",
                         "index": 2,
                         "rect": {
                             "top": 41,
@@ -55,12 +55,12 @@
                 }
             },
             {
-                "cellId": "9d21d493-decc-4fa1-8c9d-6c0176f87d37",
+                "cellId": "2",
                 "rois": [
                     {
                         "annotationTags": "HINDIID1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "69cc78eb-293f-4baf-9be5-b97cdcb4d7fa",
+                        "roiId": "4",
                         "index": 0,
                         "rect": {
                             "top": 200,
@@ -82,12 +82,12 @@
                 }
             },
             {
-                "cellId": "c32bf7dd-8b13-4f75-acee-f2c6b8c446f5",
+                "cellId": "3",
                 "rois": [
                     {
                         "annotationTags": "HINDIID2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "3e2bc779-80a4-4246-9a9d-03ceeb626c25",
+                        "roiId": "5",
                         "index": 0,
                         "rect": {
                             "top": 200,
@@ -109,12 +109,12 @@
                 }
             },
             {
-                "cellId": "eef81f53-9194-4a12-bd90-a9d99bc7d4c3",
+                "cellId": "4",
                 "rois": [
                     {
                         "annotationTags": "HINDIID3",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "3d5aa8ad-3b45-4421-8dbc-7ef82b10372b",
+                        "roiId": "6",
                         "index": 0,
                         "rect": {
                             "top": 201,
@@ -136,12 +136,12 @@
                 }
             },
             {
-                "cellId": "49e47b46-b6b5-4dd8-9ed0-eba2727e0542",
+                "cellId": "5",
                 "rois": [
                     {
                         "annotationTags": "HINDIID4",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "83323609-5612-4085-8e52-6a820c933203",
+                        "roiId": "7",
                         "index": 0,
                         "rect": {
                             "top": 202,
@@ -163,12 +163,12 @@
                 }
             },
             {
-                "cellId": "a6e748fb-8da2-4c74-8d5c-14a5b4315039",
+                "cellId": "6",
                 "rois": [
                     {
                         "annotationTags": "HINDIID5",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "7993fb60-d58d-4ea5-b346-270bc40d490e",
+                        "roiId": "8",
                         "index": 0,
                         "rect": {
                             "top": 200,
@@ -190,12 +190,12 @@
                 }
             },
             {
-                "cellId": "b05e9477-7e4e-47d5-9906-3a29aaea1139",
+                "cellId": "7",
                 "rois": [
                     {
                         "annotationTags": "HINDIID6",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "525465cb-1758-42a8-ad94-6080976b735d",
+                        "roiId": "9",
                         "index": 0,
                         "rect": {
                             "top": 202,
@@ -217,12 +217,12 @@
                 }
             },
             {
-                "cellId": "60d84599-aaa4-45eb-b8d6-151d1a85bd82",
+                "cellId": "8",
                 "rois": [
                     {
                         "annotationTags": "HINDIID7",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "d295a5f7-33ea-498e-b5a4-ba8935e4ad65",
+                        "roiId": "10",
                         "index": 0,
                         "rect": {
                             "top": 202,
@@ -244,12 +244,12 @@
                 }
             },
             {
-                "cellId": "13d56163-d358-467f-8555-0bcf3e35e8ef",
+                "cellId": "9",
                 "rois": [
                     {
                         "annotationTags": "HINDIID8",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "670eed29-a299-41fb-9272-4b28863608a3",
+                        "roiId": "11",
                         "index": 0,
                         "rect": {
                             "top": 201,
@@ -271,12 +271,12 @@
                 }
             },
             {
-                "cellId": "0e7880c6-2ff4-48b5-8e6c-5f6c17f27e91",
+                "cellId": "10",
                 "rois": [
                     {
                         "annotationTags": "HINDIID9",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "ffb451d9-4473-4fac-b730-f31282e8e459",
+                        "roiId": "12",
                         "index": 0,
                         "rect": {
                             "top": 201,
@@ -298,12 +298,12 @@
                 }
             },
             {
-                "cellId": "72bee0b0-f55b-4243-973b-7cba00c06ada",
+                "cellId": "11",
                 "rois": [
                     {
                         "annotationTags": "HINDIIDTEN",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "30b383a4-ef53-4d8a-8156-d4f49824f9e0",
+                        "roiId": "13",
                         "index": 0,
                         "rect": {
                             "top": 202,
@@ -325,12 +325,12 @@
                 }
             },
             {
-                "cellId": "b3e892cb-a9b9-41cd-a8a0-472776f00390",
+                "cellId": "12",
                 "rois": [
                     {
                         "annotationTags": "ENGLISHID1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "7657e89c-34f1-4ad3-b358-6b905eeb121e",
+                        "roiId": "14",
                         "index": 0,
                         "rect": {
                             "top": 253,
@@ -352,12 +352,12 @@
                 }
             },
             {
-                "cellId": "57c7f232-dcf8-4e53-b4fd-88b3bbb59b53",
+                "cellId": "13",
                 "rois": [
                     {
                         "annotationTags": "ENGLISHID2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "345cd0c0-38f6-4a8f-8efc-b862087c6b43",
+                        "roiId": "15",
                         "index": 0,
                         "rect": {
                             "top": 254,
@@ -379,12 +379,12 @@
                 }
             },
             {
-                "cellId": "340cc751-507c-4a53-9ed5-440bb248b5b4",
+                "cellId": "14",
                 "rois": [
                     {
                         "annotationTags": "ENGLISHID3",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "8f012cdf-a684-4b00-9668-f00048f5fa88",
+                        "roiId": "16",
                         "index": 0,
                         "rect": {
                             "top": 254,
@@ -406,12 +406,12 @@
                 }
             },
             {
-                "cellId": "f6ed7783-ffab-49da-89d8-4d5e901840bc",
+                "cellId": "15",
                 "rois": [
                     {
                         "annotationTags": "ENGLISHID4",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "7653e8f8-f04c-4d10-974d-184612dbeb15",
+                        "roiId": "17",
                         "index": 0,
                         "rect": {
                             "top": 255,
@@ -433,12 +433,12 @@
                 }
             },
             {
-                "cellId": "41776b69-4b15-48b8-a3f1-0505f3f10652",
+                "cellId": "16",
                 "rois": [
                     {
                         "annotationTags": "ENGLISHID5",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "77ef52b1-a633-4303-86f6-686e632614aa",
+                        "roiId": "18",
                         "index": 0,
                         "rect": {
                             "top": 255,
@@ -460,12 +460,12 @@
                 }
             },
             {
-                "cellId": "5ae5ec53-b5ba-4d98-a439-ad316a8a6ec4",
+                "cellId": "17",
                 "rois": [
                     {
                         "annotationTags": "ENGLISHID6",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "366324b0-5ef1-4402-a6e9-c0717b1b5b11",
+                        "roiId": "19",
                         "index": 0,
                         "rect": {
                             "top": 253,
@@ -487,12 +487,12 @@
                 }
             },
             {
-                "cellId": "3c271702-0ec9-4f4c-a302-c113e3351c36",
+                "cellId": "18",
                 "rois": [
                     {
                         "annotationTags": "ENGLISHID7",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "3bd7669e-1893-4969-a57d-453cd118b6b6",
+                        "roiId": "20",
                         "index": 0,
                         "rect": {
                             "top": 253,
@@ -514,12 +514,12 @@
                 }
             },
             {
-                "cellId": "70606695-5668-4496-9ec6-45721ffa66ec",
+                "cellId": "19",
                 "rois": [
                     {
                         "annotationTags": "ENGLISHID8",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "863c2da6-25de-4e32-a283-3249bd940a88",
+                        "roiId": "21",
                         "index": 0,
                         "rect": {
                             "top": 254,
@@ -541,12 +541,12 @@
                 }
             },
             {
-                "cellId": "8830f387-02c7-478c-bafb-b387e5738fa2",
+                "cellId": "20",
                 "rois": [
                     {
                         "annotationTags": "ENGLISHID9",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "14ba004c-a60a-4215-9598-cbc7ad7b796c",
+                        "roiId": "22",
                         "index": 0,
                         "rect": {
                             "top": 254,
@@ -568,12 +568,12 @@
                 }
             },
             {
-                "cellId": "bbe0c300-b2be-45ec-b2b5-0d9c565146f3",
+                "cellId": "21",
                 "rois": [
                     {
                         "annotationTags": "ENGLISHIDTEN",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "65090f86-d93d-4daa-b31d-66bcceffe6ce",
+                        "roiId": "23",
                         "index": 0,
                         "rect": {
                             "top": 254,
@@ -595,12 +595,12 @@
                 }
             },
             {
-                "cellId": "71757a33-0a24-4ef8-b577-86807e03e069",
+                "cellId": "22",
                 "rois": [
                     {
                         "annotationTags": "MATHSID1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "764be008-047a-4253-b3de-48c7813f3e88",
+                        "roiId": "24",
                         "index": 0,
                         "rect": {
                             "top": 304,
@@ -622,12 +622,12 @@
                 }
             },
             {
-                "cellId": "194bd5f3-8485-4fc8-bc04-ec6e2f0b3886",
+                "cellId": "23",
                 "rois": [
                     {
                         "annotationTags": "MATHSID2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "165a9a42-e4e3-45da-8091-f20ad4ecfc92",
+                        "roiId": "25",
                         "index": 0,
                         "rect": {
                             "top": 306,
@@ -649,12 +649,12 @@
                 }
             },
             {
-                "cellId": "7987dc1b-1d68-43ac-a15a-63f9b6d585a2",
+                "cellId": "24",
                 "rois": [
                     {
                         "annotationTags": "MATHSID3",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "a2e3246a-44e6-4ea3-9022-8e1178f65861",
+                        "roiId": "26",
                         "index": 0,
                         "rect": {
                             "top": 306,
@@ -676,12 +676,12 @@
                 }
             },
             {
-                "cellId": "d04227d2-41b4-4639-b023-da405f2502fa",
+                "cellId": "25",
                 "rois": [
                     {
                         "annotationTags": "MATHSID4",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "ad01e923-2484-40dd-9c89-9ace5c86b61c",
+                        "roiId": "27",
                         "index": 0,
                         "rect": {
                             "top": 306,
@@ -703,12 +703,12 @@
                 }
             },
             {
-                "cellId": "45110d8c-0192-4216-801d-d6bd73c0d083",
+                "cellId": "26",
                 "rois": [
                     {
                         "annotationTags": "MATHSID5",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "d60ce5ef-6193-4220-978c-19c17005e0ab",
+                        "roiId": "28",
                         "index": 0,
                         "rect": {
                             "top": 308,
@@ -730,12 +730,12 @@
                 }
             },
             {
-                "cellId": "748f9542-1e77-4c4c-ab5c-ab8017ce5153",
+                "cellId": "27",
                 "rois": [
                     {
                         "annotationTags": "MATHSID6",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "d85e4a21-9d5e-496f-9216-6163e34d67b9",
+                        "roiId": "29",
                         "index": 0,
                         "rect": {
                             "top": 308,
@@ -757,12 +757,12 @@
                 }
             },
             {
-                "cellId": "c7e02910-11ab-40c0-aebb-c08119e2c323",
+                "cellId": "28",
                 "rois": [
                     {
                         "annotationTags": "MATHSID7",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "7fc19e3e-976b-4fbe-8ee1-b7384e2d8227",
+                        "roiId": "30",
                         "index": 0,
                         "rect": {
                             "top": 308,
@@ -784,12 +784,12 @@
                 }
             },
             {
-                "cellId": "d8f42ef9-a348-4a6b-8a92-ae02a60262eb",
+                "cellId": "29",
                 "rois": [
                     {
                         "annotationTags": "MATHSID8",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "137e69fc-71b7-4bae-904b-c75398238b36",
+                        "roiId": "31",
                         "index": 0,
                         "rect": {
                             "top": 306,
@@ -811,12 +811,12 @@
                 }
             },
             {
-                "cellId": "29eab8f2-532d-43b6-a8a6-663c8f9e0fd2",
+                "cellId": "30",
                 "rois": [
                     {
                         "annotationTags": "MATHSID9",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "f160dac0-6d4e-4266-9e95-b412b6ea2563",
+                        "roiId": "32",
                         "index": 0,
                         "rect": {
                             "top": 308,
@@ -838,12 +838,12 @@
                 }
             },
             {
-                "cellId": "166feb36-8c34-4284-a56e-7b8051ef7d4b",
+                "cellId": "31",
                 "rois": [
                     {
                         "annotationTags": "MATHSIDTEN",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "d5d1fce5-251f-4052-a66e-aa8abca51bb2",
+                        "roiId": "33",
                         "index": 0,
                         "rect": {
                             "top": 308,
@@ -865,12 +865,12 @@
                 }
             },
             {
-                "cellId": "18b6a2cc-8d75-48fe-94ce-c7ac282ae04c",
+                "cellId": "32",
                 "rois": [
                     {
                         "annotationTags": "EVS/SOCIALSCIENCEID1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "1e82c8e7-4846-49dd-96eb-638054b52787",
+                        "roiId": "34",
                         "index": 0,
                         "rect": {
                             "top": 359,
@@ -892,12 +892,12 @@
                 }
             },
             {
-                "cellId": "417aea16-849e-42cb-a028-de76b48ccc36",
+                "cellId": "33",
                 "rois": [
                     {
                         "annotationTags": "EVS/SOCIALSCIENCEID2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "2cb99477-0003-47f4-94b3-97c082093ec6",
+                        "roiId": "35",
                         "index": 0,
                         "rect": {
                             "top": 358,
@@ -919,12 +919,12 @@
                 }
             },
             {
-                "cellId": "84a579bc-8d37-45a7-b509-606f96b32e03",
+                "cellId": "34",
                 "rois": [
                     {
                         "annotationTags": "EVS/SOCIALSCIENCEID3",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "68225985-5ed6-4ab2-818a-3f3ed567cd7e",
+                        "roiId": "36",
                         "index": 0,
                         "rect": {
                             "top": 357,
@@ -946,12 +946,12 @@
                 }
             },
             {
-                "cellId": "8d1e6fa2-ca27-4433-ad20-fea1d509b194",
+                "cellId": "35",
                 "rois": [
                     {
                         "annotationTags": "EVS/SOCIALSCIENCEID4",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "35afeafa-47f2-47cd-b9e3-4a215c170d9d",
+                        "roiId": "37",
                         "index": 0,
                         "rect": {
                             "top": 359,
@@ -973,12 +973,12 @@
                 }
             },
             {
-                "cellId": "7050fd56-172c-45f1-8a86-e021e7804bfc",
+                "cellId": "36",
                 "rois": [
                     {
                         "annotationTags": "EVS/SOCIALSCIENCEID5",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "31541d5b-2815-490f-a65f-44422a025093",
+                        "roiId": "38",
                         "index": 0,
                         "rect": {
                             "top": 359,
@@ -1000,12 +1000,12 @@
                 }
             },
             {
-                "cellId": "f177fe89-b57d-46d7-90ed-a42a094299d7",
+                "cellId": "37",
                 "rois": [
                     {
                         "annotationTags": "EVS/SOCIALSCIENCEID6",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "e89b4a99-57e7-4460-8051-15a8aa4ce7c0",
+                        "roiId": "39",
                         "index": 0,
                         "rect": {
                             "top": 359,
@@ -1027,12 +1027,12 @@
                 }
             },
             {
-                "cellId": "18021370-135a-476e-afbb-b33a336c0687",
+                "cellId": "38",
                 "rois": [
                     {
                         "annotationTags": "EVS/SOCIALSCIENCEID7",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "ac801fb1-fa8d-41e7-900b-dd79dda80b6c",
+                        "roiId": "40",
                         "index": 0,
                         "rect": {
                             "top": 360,
@@ -1054,12 +1054,12 @@
                 }
             },
             {
-                "cellId": "a8b7241d-b1f4-419c-8b34-bf0cd47f575b",
+                "cellId": "39",
                 "rois": [
                     {
                         "annotationTags": "EVS/SOCIALSCIENCEID8",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "b0dce6e2-6a7d-4b2f-9777-20bff4906fb3",
+                        "roiId": "41",
                         "index": 0,
                         "rect": {
                             "top": 359,
@@ -1081,12 +1081,12 @@
                 }
             },
             {
-                "cellId": "75302a02-b535-4ab3-93de-d4de0d223dc5",
+                "cellId": "40",
                 "rois": [
                     {
                         "annotationTags": "EVS/SOCIALSCIENCEID9",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "b10559a7-1943-4dc3-a959-b5163a9b496d",
+                        "roiId": "42",
                         "index": 0,
                         "rect": {
                             "top": 361,
@@ -1108,12 +1108,12 @@
                 }
             },
             {
-                "cellId": "86207215-f6f8-4b81-889a-bba07058bd0b",
+                "cellId": "41",
                 "rois": [
                     {
                         "annotationTags": "EVS/SOCIALSCIENCEIDTEN",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "f4646810-802e-4248-baf7-534a36398495",
+                        "roiId": "43",
                         "index": 0,
                         "rect": {
                             "top": 360,
@@ -1135,12 +1135,12 @@
                 }
             },
             {
-                "cellId": "716b7ad3-39f0-4643-9431-f50734f8bc32",
+                "cellId": "42",
                 "rois": [
                     {
                         "annotationTags": "SCIENCEID1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "f68199e6-b6e9-4514-8709-62efd9188ed1",
+                        "roiId": "44",
                         "index": 0,
                         "rect": {
                             "top": 413,
@@ -1162,12 +1162,12 @@
                 }
             },
             {
-                "cellId": "dd87e0dc-1e8d-442e-ab19-48a05ffdb3b3",
+                "cellId": "43",
                 "rois": [
                     {
                         "annotationTags": "SCIENCEID2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "74d7651e-418a-4b25-bd34-46e029dca96b",
+                        "roiId": "45",
                         "index": 0,
                         "rect": {
                             "top": 411,
@@ -1189,12 +1189,12 @@
                 }
             },
             {
-                "cellId": "8ea1d206-4e5a-49d2-a47b-fb774b4d6109",
+                "cellId": "44",
                 "rois": [
                     {
                         "annotationTags": "SCIENCEID3",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "f4bd747a-5188-4485-9743-09fc3134e6d0",
+                        "roiId": "46",
                         "index": 0,
                         "rect": {
                             "top": 411,
@@ -1216,12 +1216,12 @@
                 }
             },
             {
-                "cellId": "2c67e8ce-d0d1-458f-8759-aab6503356bd",
+                "cellId": "45",
                 "rois": [
                     {
                         "annotationTags": "SCIENCEID4",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "6573ab50-643b-4239-9c03-d8423a3e22df",
+                        "roiId": "47",
                         "index": 0,
                         "rect": {
                             "top": 411,
@@ -1243,12 +1243,12 @@
                 }
             },
             {
-                "cellId": "6a2c7a29-ca56-4516-9065-0190d1227593",
+                "cellId": "46",
                 "rois": [
                     {
                         "annotationTags": "SCIENCEID5",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "73eb5157-facd-4035-a35f-50829c5d09ae",
+                        "roiId": "48",
                         "index": 0,
                         "rect": {
                             "top": 411,
@@ -1270,12 +1270,12 @@
                 }
             },
             {
-                "cellId": "59b10dfd-2e2c-420e-a2e2-ee75ef0d69f3",
+                "cellId": "47",
                 "rois": [
                     {
                         "annotationTags": "SCIENCEID6",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "5dcfe7c0-fe9d-4c86-9e8d-4a4dfd1d691e",
+                        "roiId": "49",
                         "index": 0,
                         "rect": {
                             "top": 412,
@@ -1297,12 +1297,12 @@
                 }
             },
             {
-                "cellId": "4e5aedbf-1893-4808-ba3f-ca14fdf8a9bc",
+                "cellId": "48",
                 "rois": [
                     {
                         "annotationTags": "SCIENCEID7",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "d9f99b75-0190-4ab7-b2fd-ec651e440322",
+                        "roiId": "50",
                         "index": 0,
                         "rect": {
                             "top": 411,
@@ -1324,12 +1324,12 @@
                 }
             },
             {
-                "cellId": "71821427-d1db-4f6e-a7cf-890cc0cace0a",
+                "cellId": "49",
                 "rois": [
                     {
                         "annotationTags": "SCIENCEID8",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "4b376fa1-b9fa-4f97-94d7-0d294622a5ec",
+                        "roiId": "51",
                         "index": 0,
                         "rect": {
                             "top": 412,
@@ -1351,12 +1351,12 @@
                 }
             },
             {
-                "cellId": "dae64456-c8f7-44b6-997c-c3d9fa9516dc",
+                "cellId": "50",
                 "rois": [
                     {
                         "annotationTags": "SCIENCEID9",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "5709075f-d360-42e8-8c98-dd8334a6fb8f",
+                        "roiId": "52",
                         "index": 0,
                         "rect": {
                             "top": 413,
@@ -1378,12 +1378,12 @@
                 }
             },
             {
-                "cellId": "01cdf656-96f1-4c9c-b0ff-f80e8e003371",
+                "cellId": "51",
                 "rois": [
                     {
                         "annotationTags": "SCIENCEIDTEN",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "47c1a29d-18b4-4f3f-8cb3-3742d7104947",
+                        "roiId": "53",
                         "index": 0,
                         "rect": {
                             "top": 412,

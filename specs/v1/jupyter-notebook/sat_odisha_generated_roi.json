@@ -4,12 +4,12 @@
         "name": "Odisha SAT Exam Sheet Form",
         "cells": [
             {
-                "cellId": "7733cc64-085f-4255-af09-2ab956aef785",
+                "cellId": "1",
                 "rois": [
                     {
                         "annotationTags": "STUDENTID_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "62020e69-eda9-46c3-953b-6d55e33abf5d",
+                        "roiId": "1",
                         "index": 0,
                         "rect": {
                             "top": 30,
@@ -21,7 +21,7 @@
                     {
                         "annotationTags": "STUDENTID_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "a0985cf0-e7d8-45b6-932d-696023465ec3",
+                        "roiId": "2",
                         "index": 1,
                         "rect": {
                             "top": 29,
@@ -33,7 +33,7 @@
                     {
                         "annotationTags": "STUDENTID_3",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "d88daec9-ea6f-4413-a01e-a7bf94e5f0ed",
+                        "roiId": "3",
                         "index": 2,
                         "rect": {
                             "top": 30,
@@ -45,7 +45,7 @@
                     {
                         "annotationTags": "STUDENTID_4",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "08df5508-0a11-4b81-b87a-1bbf3f0ebfc8",
+                        "roiId": "4",
                         "index": 3,
                         "rect": {
                             "top": 30,
@@ -57,7 +57,7 @@
                     {
                         "annotationTags": "STUDENTID_5",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "e4bdea05-7c9b-44e6-8282-d40e71671cf3",
+                        "roiId": "5",
                         "index": 4,
                         "rect": {
                             "top": 31,
@@ -69,7 +69,7 @@
                     {
                         "annotationTags": "STUDENTID_6",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "f97c0717-1cc4-4662-bea6-60b8457e59a8",
+                        "roiId": "6",
                         "index": 5,
                         "rect": {
                             "top": 31,
@@ -81,7 +81,7 @@
                     {
                         "annotationTags": "STUDENTID_7",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "9c7a9b3c-55a2-4b88-8d36-6b5700e35dab",
+                        "roiId": "7",
                         "index": 6,
                         "rect": {
                             "top": 31,
@@ -93,7 +93,7 @@
                     {
                         "annotationTags": "STUDENTID_8",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "df91e376-3666-4a0c-a195-833a23f3eae5",
+                        "roiId": "8",
                         "index": 7,
                         "rect": {
                             "top": 31,
@@ -105,7 +105,7 @@
                     {
                         "annotationTags": "STUDENTID_9",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "fa1ef61f-645d-4157-97b4-15b4711b9a69",
+                        "roiId": "9",
                         "index": 8,
                         "rect": {
                             "top": 31,
@@ -117,7 +117,7 @@
                     {
                         "annotationTags": "STUDENTID_10",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "98b2c877-5d84-46e9-8bc1-62e36e4fff31",
+                        "roiId": "10",
                         "index": 9,
                         "rect": {
                             "top": 31,
@@ -129,7 +129,7 @@
                     {
                         "annotationTags": "STUDENTID_11",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "10d0d3fb-eb9c-4c87-97c8-dd60a828ea1c",
+                        "roiId": "11",
                         "index": 10,
                         "rect": {
                             "top": 31,
@@ -141,7 +141,7 @@
                     {
                         "annotationTags": "STUDENTID_12",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "8d5387b8-a7ed-409c-bf57-fa2e8e47f79d",
+                        "roiId": "12",
                         "index": 11,
                         "rect": {
                             "top": 30,
@@ -153,7 +153,7 @@
                     {
                         "annotationTags": "STUDENTID_13",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "03ba01bc-b75c-418f-8be9-82a67ed39d3b",
+                        "roiId": "13",
                         "index": 12,
                         "rect": {
                             "top": 30,
@@ -165,7 +165,7 @@
                     {
                         "annotationTags": "STUDENTID_14",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "b4850e1a-ca8e-45a9-adf7-659c7d53bee8",
+                        "roiId": "14",
                         "index": 13,
                         "rect": {
                             "top": 31,
@@ -177,7 +177,7 @@
                     {
                         "annotationTags": "STUDENTID_15",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "26795b06-9bfc-4cf4-a1f2-0be49c9068e6",
+                        "roiId": "15",
                         "index": 14,
                         "rect": {
                             "top": 31,
@@ -189,7 +189,7 @@
                     {
                         "annotationTags": "STUDENTID_16",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "dad8e09f-be73-4b36-8de3-11da3fef2599",
+                        "roiId": "16",
                         "index": 15,
                         "rect": {
                             "top": 30,
@@ -211,12 +211,12 @@
                 }
             },
             {
-                "cellId": "f47db74c-7afa-4a62-9eeb-062ca0ce8b9b",
+                "cellId": "17",
                 "rois": [
                     {
                         "annotationTags": "QUESTION1_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "e67aea7b-6125-472a-a216-b01ca1b957a6",
+                        "roiId": "17",
                         "index": 0,
                         "rect": {
                             "top": 96,
@@ -228,7 +228,7 @@
                     {
                         "annotationTags": "QUESTION1_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "fde43737-184f-4e87-a23b-3a52226dce4f",
+                        "roiId": "18",
                         "index": 1,
                         "rect": {
                             "top": 97,
@@ -250,12 +250,12 @@
                 }
             },
             {
-                "cellId": "e6748d61-c932-48e5-a803-7c56848c1ab7",
+                "cellId": "19",
                 "rois": [
                     {
                         "annotationTags": "QUESTION2_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "2230eeab-0287-4520-9830-741f396d5823",
+                        "roiId": "19",
                         "index": 0,
                         "rect": {
                             "top": 128,
@@ -267,7 +267,7 @@
                     {
                         "annotationTags": "QUESTION2_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "7fac66ce-8df9-46b4-85fc-e1c8d987e66f",
+                        "roiId": "20",
                         "index": 1,
                         "rect": {
                             "top": 128,
@@ -289,12 +289,12 @@
                 }
             },
             {
-                "cellId": "87cd63b1-d54f-4244-99c9-365dbe97b6a6",
+                "cellId": "21",
                 "rois": [
                     {
                         "annotationTags": "QUESTION3_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "48bbd072-c6bf-4503-b707-711bb34daa45",
+                        "roiId": "21",
                         "index": 0,
                         "rect": {
                             "top": 158,
@@ -306,7 +306,7 @@
                     {
                         "annotationTags": "QUESTION3_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "bab14d60-d317-4b17-8b64-a3a52ba33f86",
+                        "roiId": "22",
                         "index": 1,
                         "rect": {
                             "top": 159,
@@ -328,12 +328,12 @@
                 }
             },
             {
-                "cellId": "d340944e-f877-4375-8533-90ef2338f11a",
+                "cellId": "23",
                 "rois": [
                     {
                         "annotationTags": "QUESTION4_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "50d0349c-de7a-44ff-b41f-7981c1eac4f0",
+                        "roiId": "23",
                         "index": 0,
                         "rect": {
                             "top": 191,
@@ -345,7 +345,7 @@
                     {
                         "annotationTags": "QUESTION4_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "5f321f2e-e282-4c08-9651-4fd0e3af578f",
+                        "roiId": "24",
                         "index": 1,
                         "rect": {
                             "top": 190,
@@ -367,12 +367,12 @@
                 }
             },
             {
-                "cellId": "8297e4a4-3e4b-4345-b97d-d83ad838ed62",
+                "cellId": "25",
                 "rois": [
                     {
                         "annotationTags": "QUESTION5_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "67fecb0c-4ea6-4d82-8b5f-6d1e6fd7731c",
+                        "roiId": "25",
                         "index": 0,
                         "rect": {
                             "top": 221,
@@ -384,7 +384,7 @@
                     {
                         "annotationTags": "QUESTION5_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "633ddebd-97e1-4453-844b-0acb48f22e7c",
+                        "roiId": "26",
                         "index": 1,
                         "rect": {
                             "top": 221,
@@ -406,12 +406,12 @@
                 }
             },
             {
-                "cellId": "36be80e4-0beb-463c-900b-5d3473a9eaf8",
+                "cellId": "27",
                 "rois": [
                     {
                         "annotationTags": "QUESTION6_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "0a310ca6-2546-4e17-854d-8bfc369a5b66",
+                        "roiId": "27",
                         "index": 0,
                         "rect": {
                             "top": 253,
@@ -423,7 +423,7 @@
                     {
                         "annotationTags": "QUESTION6_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "a65c4089-be4e-42e3-8dbd-3f5264ba5ca6",
+                        "roiId": "28",
                         "index": 1,
                         "rect": {
                             "top": 252,
@@ -445,12 +445,12 @@
                 }
             },
             {
-                "cellId": "ae1c594e-41c6-4e48-b210-cf4c8885b309",
+                "cellId": "29",
                 "rois": [
                     {
                         "annotationTags": "QUESTION7_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "29d09bf2-893b-4b63-b028-80acc9b5cfc4",
+                        "roiId": "29",
                         "index": 0,
                         "rect": {
                             "top": 284,
@@ -462,7 +462,7 @@
                     {
                         "annotationTags": "QUESTION7_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "1854885d-e163-45ef-879a-5a7325b875e1",
+                        "roiId": "30",
                         "index": 1,
                         "rect": {
                             "top": 282,
@@ -484,12 +484,12 @@
                 }
             },
             {
-                "cellId": "33a81ed9-5cc1-47bb-8de6-a822e48f8a96",
+                "cellId": "31",
                 "rois": [
                     {
                         "annotationTags": "QUESTION8_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "c2a98d44-d29d-4058-9d3f-0483fef873f0",
+                        "roiId": "31",
                         "index": 0,
                         "rect": {
                             "top": 315,
@@ -501,7 +501,7 @@
                     {
                         "annotationTags": "QUESTION8_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "7a06583a-10ed-4e7f-87b5-12fe08c461a2",
+                        "roiId": "32",
                         "index": 1,
                         "rect": {
                             "top": 314,
@@ -523,12 +523,12 @@
                 }
             },
             {
-                "cellId": "5d54c432-9044-496c-b70d-390b2b536336",
+                "cellId": "33",
                 "rois": [
                     {
                         "annotationTags": "QUESTION9_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "3582adfb-2534-4da8-9307-ca138313a413",
+                        "roiId": "33",
                         "index": 0,
                         "rect": {
                             "top": 346,
@@ -540,7 +540,7 @@
                     {
                         "annotationTags": "QUESTION9_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "eaa90e75-f5e2-4772-9451-f79e6bd73d68",
+                        "roiId": "34",
                         "index": 1,
                         "rect": {
                             "top": 346,
@@ -562,12 +562,12 @@
                 }
             },
             {
-                "cellId": "44b6ceff-d2f1-422f-9e59-55d4f1f82172",
+                "cellId": "35",
                 "rois": [
                     {
                         "annotationTags": "QUESTION10_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "66e4e9be-7cf4-43f6-aa4a-629f879fbe00",
+                        "roiId": "35",
                         "index": 0,
                         "rect": {
                             "top": 378,
@@ -579,7 +579,7 @@
                     {
                         "annotationTags": "QUESTION10_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "c7f01d1e-f4b3-4084-bac4-b5c3ddf75da8",
+                        "roiId": "36",
                         "index": 1,
                         "rect": {
                             "top": 378,
@@ -601,12 +601,12 @@
                 }
             },
             {
-                "cellId": "924dd6c1-3324-457f-be5d-7b1139cc0ecc",
+                "cellId": "37",
                 "rois": [
                     {
                         "annotationTags": "QUESTION11_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "3a8fc120-ffde-4c6b-89f2-6dad16fc3f10",
+                        "roiId": "37",
                         "index": 0,
                         "rect": {
                             "top": 96,
@@ -618,7 +618,7 @@
                     {
                         "annotationTags": "QUESTION11_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "c432ddd9-ba3f-416a-b82c-7a246f4441a0",
+                        "roiId": "38",
                         "index": 1,
                         "rect": {
                             "top": 97,
@@ -640,12 +640,12 @@
                 }
             },
             {
-                "cellId": "0ee14d3d-5b0e-4f9e-9002-78b9a6a8aa92",
+                "cellId": "39",
                 "rois": [
                     {
                         "annotationTags": "QUESTION12_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "d53619e2-bb71-4604-99b3-0fb2be4cc429",
+                        "roiId": "39",
                         "index": 0,
                         "rect": {
                             "top": 129,
@@ -657,7 +657,7 @@
                     {
                         "annotationTags": "QUESTION12_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "cd36cdef-17ce-41f7-8570-804d5bfd1c6f",
+                        "roiId": "40",
                         "index": 1,
                         "rect": {
                             "top": 128,
@@ -679,12 +679,12 @@
                 }
             },
             {
-                "cellId": "907df19e-ca26-4460-8dd2-7c2e0a87e585",
+                "cellId": "41",
                 "rois": [
                     {
                         "annotationTags": "QUESTION13_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "a9177157-761e-4395-9a09-cc98537d6449",
+                        "roiId": "41",
                         "index": 0,
                         "rect": {
                             "top": 160,
@@ -696,7 +696,7 @@
                     {
                         "annotationTags": "QUESTION13_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "21252f42-936a-44ab-ab83-0a34f211d00c",
+                        "roiId": "42",
                         "index": 1,
                         "rect": {
                             "top": 160,
@@ -718,12 +718,12 @@
                 }
             },
             {
-                "cellId": "d7bb1fcc-3f6f-4d0d-b0e1-329c18b8922e",
+                "cellId": "43",
                 "rois": [
                     {
                         "annotationTags": "QUESTION14_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "5cd252a3-e2b0-4ac6-a73b-a68c0557ae60",
+                        "roiId": "43",
                         "index": 0,
                         "rect": {
                             "top": 191,
@@ -735,7 +735,7 @@
                     {
                         "annotationTags": "QUESTION14_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "6d46c382-680c-453f-b2b7-db323d343455",
+                        "roiId": "44",
                         "index": 1,
                         "rect": {
                             "top": 190,
@@ -757,12 +757,12 @@
                 }
             },
             {
-                "cellId": "ab750c64-af3f-441b-961d-c516f3da3d23",
+                "cellId": "45",
                 "rois": [
                     {
                         "annotationTags": "QUESTION15_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "63dcf0b4-1a37-436e-8ea3-7caf33f8c4a5",
+                        "roiId": "45",
                         "index": 0,
                         "rect": {
                             "top": 222,
@@ -774,7 +774,7 @@
                     {
                         "annotationTags": "QUESTION15_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "c7cd5dfd-a6f5-423d-9ca9-666a9393d084",
+                        "roiId": "46",
                         "index": 1,
                         "rect": {
                             "top": 222,
@@ -796,12 +796,12 @@
                 }
             },
             {
-                "cellId": "4b1f0048-44f6-410f-872b-eb894575f507",
+                "cellId": "47",
                 "rois": [
                     {
                         "annotationTags": "QUESTION16_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "346d8e8c-18c8-4b71-952b-43b402388921",
+                        "roiId": "47",
                         "index": 0,
                         "rect": {
                             "top": 253,
@@ -813,7 +813,7 @@
                     {
                         "annotationTags": "QUESTION16_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "efd4f74b-8ade-4a19-a56b-8612f43fb11a",
+                        "roiId": "48",
                         "index": 1,
                         "rect": {
                             "top": 253,
@@ -835,12 +835,12 @@
                 }
             },
             {
-                "cellId": "c457263a-1147-4bb4-8bb2-a02ac55e9cb6",
+                "cellId": "49",
                 "rois": [
                     {
                         "annotationTags": "QUESTION17_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "d43d8498-c08e-49da-8297-7fc96f0fff21",
+                        "roiId": "49",
                         "index": 0,
                         "rect": {
                             "top": 284,
@@ -852,7 +852,7 @@
                     {
                         "annotationTags": "QUESTION17_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "862cab57-b0db-442d-b3cd-cb51609e4393",
+                        "roiId": "50",
                         "index": 1,
                         "rect": {
                             "top": 284,
@@ -874,12 +874,12 @@
                 }
             },
             {
-                "cellId": "3eba37e7-84ee-4711-8fc2-9c7520954b3d",
+                "cellId": "51",
                 "rois": [
                     {
                         "annotationTags": "QUESTION18_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "29a43c37-5c5f-4dd2-bb50-f5acd659ef80",
+                        "roiId": "51",
                         "index": 0,
                         "rect": {
                             "top": 315,
@@ -891,7 +891,7 @@
                     {
                         "annotationTags": "QUESTION18_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "e4aca8d1-9da5-47fa-9c0a-428c8e34e094",
+                        "roiId": "52",
                         "index": 1,
                         "rect": {
                             "top": 315,
@@ -913,12 +913,12 @@
                 }
             },
             {
-                "cellId": "ddc8e7e0-5733-4abe-ad40-29e14ce06790",
+                "cellId": "53",
                 "rois": [
                     {
                         "annotationTags": "QUESTION19_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "5d188935-5de1-40fd-abc6-7fee623cb056",
+                        "roiId": "53",
                         "index": 0,
                         "rect": {
                             "top": 346,
@@ -930,7 +930,7 @@
                     {
                         "annotationTags": "QUESTION19_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "1e4fae03-d2a7-48bd-9694-50efe98a25f0",
+                        "roiId": "54",
                         "index": 1,
                         "rect": {
                             "top": 347,
@@ -952,12 +952,12 @@
                 }
             },
             {
-                "cellId": "7d2afe0b-5cc7-4747-a298-ab54ffe128bb",
+                "cellId": "55",
                 "rois": [
                     {
                         "annotationTags": "QUESTION20_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "edee4e8c-3db9-4a17-b48d-4d75341ca2af",
+                        "roiId": "55",
                         "index": 0,
                         "rect": {
                             "top": 378,
@@ -969,7 +969,7 @@
                     {
                         "annotationTags": "QUESTION20_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "44d69c27-496d-47a1-aa7f-1e4c443fab27",
+                        "roiId": "56",
                         "index": 1,
                         "rect": {
                             "top": 377,
@@ -991,12 +991,12 @@
                 }
             },
             {
-                "cellId": "b5dc1a5d-ea0a-4447-8516-8ac9e2afe2e7",
+                "cellId": "57",
                 "rois": [
                     {
                         "annotationTags": "MAX_MARKS_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "5fbf3bfd-7396-4941-be81-6a06f43ae699",
+                        "roiId": "57",
                         "index": 0,
                         "rect": {
                             "top": 430,
@@ -1008,7 +1008,7 @@
                     {
                         "annotationTags": "MAX_MARKS_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "477c5ab1-a7e3-47b1-9aca-23d6b1b49bb3",
+                        "roiId": "58",
                         "index": 1,
                         "rect": {
                             "top": 431,
@@ -1020,7 +1020,7 @@
                     {
                         "annotationTags": "MAX_MARKS_3",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "93c3561e-6616-44ee-8434-f29ffc51b75f",
+                        "roiId": "59",
                         "index": 2,
                         "rect": {
                             "top": 431,
@@ -1042,12 +1042,12 @@
                 }
             },
             {
-                "cellId": "0fac7393-8e62-4804-9e71-0b0a204ef5a8",
+                "cellId": "60",
                 "rois": [
                     {
                         "annotationTags": "MARKS_OBTAINED_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "04e91ddb-4150-467c-8965-813ec067dbdd",
+                        "roiId": "60",
                         "index": 0,
                         "rect": {
                             "top": 430,
@@ -1059,7 +1059,7 @@
                     {
                         "annotationTags": "MARKS_OBTAINED_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "2a37e7f6-d367-4859-836d-25e94db1b051",
+                        "roiId": "61",
                         "index": 1,
                         "rect": {
                             "top": 430,
@@ -1071,7 +1071,7 @@
                     {
                         "annotationTags": "MARKS_OBTAINED_3",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "3ce43725-772e-4c93-afee-8fbab872c0ce",
+                        "roiId": "62",
                         "index": 2,
                         "rect": {
                             "top": 430,
