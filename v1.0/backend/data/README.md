@@ -39,3 +39,14 @@ studentId:-  for UP SAT we have 16 digit student Id
 1. hindi,odisha,SAT,class 2,examId 11
 2. hindi,odisha,SAT,class 3,examId 12
 2. math,odisha,SAT,class 2,eamxId 13
+
+state: gujrat
+school:- Sainik School
+classes:- 3,4,5
+student:- aarti,smriti,shristi,priyanka
+exam: hindi,maths and english
+roi:-
+studentId:- for GUJRAT PAT 7 digit student Id
+1. hindi,gujrat,PAT,class 3, examId 14
+2. maths,gujrat,PAT,class 3, examId 15
+3. english,gujrat,PAT,class 3, examId 16

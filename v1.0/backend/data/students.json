@@ -98,5 +98,50 @@
   "name": "Abhay",
   "studentId": "2203000000000001",
   "schoolId": "2"
+},
+{
+  "studentClass": [
+    {
+      "classId": "3",
+      "className": "Class-3"
+    }
+  ],
+  "section": "D",
+  "name": "Aarti bhatt",
+  "studentId": "3304001",
+  "schoolId": "3"
+},{
+  "studentClass": [
+    {
+      "classId": "3",
+      "className": "Class-3"
+    }
+  ],
+  "section": "B",
+  "name": "Smriti",
+  "studentId": "3302001",
+  "schoolId": "3"
+},{
+  "studentClass": [
+    {
+      "classId": "3",
+      "className": "Class-3"
+    }
+  ],
+  "section": "B",
+  "name": "shristi",
+  "studentId": "3302002",
+  "schoolId": "3"
+},{
+  "studentClass": [
+    {
+      "classId": "3",
+      "className": "Class-3"
+    }
+  ],
+  "section": "B",
+  "name": "priyanka bisht",
+  "studentId": "3302003",
+  "schoolId": "3"
 }
 ]

@@ -22,7 +22,7 @@
     }
   ],
   "section": "D",
-  "studentId": "12040000001",
+  "studentId": "121",
   "securedMarks": 3,
   "totalMarks": 5,
   "schoolId": "1",
@@ -85,13 +85,13 @@
     }
   ],
   "section": "D",
-  "studentId": "13040000001",
+  "studentId": "122",
   "securedMarks": 3,
   "totalMarks": 5,
   "schoolId": "1",
-  "examDate": "2021-09-25",
+  "examDate": "2021-09-23",
   "subject": "Maths",
-  "classId": "3"
+  "classId": "2"
 },{
   "marksInfo": [
     {
@@ -116,7 +116,7 @@
     }
   ],
   "section": "D",
-  "studentId": "14040000001",
+  "studentId": "123",
   "securedMarks": 3,
   "totalMarks": 5,
   "schoolId": "1",
@@ -147,7 +147,7 @@
     }
   ],
   "section": "D",
-  "studentId": "14040000002",
+  "studentId": "124",
   "securedMarks": 3,
   "totalMarks": 5,
   "schoolId": "1",
@@ -178,13 +178,13 @@
     }
   ],
   "section": "D",
-  "studentId": "14040000001",
+  "studentId": "181",
   "securedMarks": 3,
   "totalMarks": 5,
   "schoolId": "1",
   "examDate": "2021-09-28",
   "subject": "Hindi",
-  "classId": "4"
+  "classId": "2"
 },{
   "marksInfo": [
     {
@@ -209,13 +209,13 @@
     }
   ],
   "section": "D",
-  "studentId": "14040000002",
+  "studentId": "182",
   "securedMarks": 3,
   "totalMarks": 5,
   "schoolId": "1",
-  "examDate": "2021-09-29",
+  "examDate": "2021-09-28",
   "subject": "Hindi",
-  "classId": "5"
+  "classId": "2"
 },{
   "marksInfo": [
     {
@@ -302,7 +302,7 @@
     }
   ],
   "section": "D",
-  "studentId": "18040000001",
+  "studentId": "183",
   "securedMarks": 3,
   "totalMarks": 5,
   "schoolId": "1",
@@ -334,7 +334,7 @@
     }
   ],
   "section": "D",
-  "studentId": "22040000001",
+  "studentId": "2203000000000001",
   "securedMarks": 3,
   "totalMarks": 5,
   "schoolId": "2",
@@ -365,12 +365,137 @@
     }
   ],
   "section": "C",
-  "studentId": "22030000001",
+  "studentId": "2203000000000001",
   "securedMarks": 3,
   "totalMarks": 5,
   "schoolId": "2",
   "examDate": "2021-10-02",
   "subject": "Maths",
   "classId": "2"
+}, 
+{
+  "marksInfo": [
+    {
+      "questionId": "LO-1",
+      "obtainedMarks": 1
+    },
+    {
+      "questionId": "LO-2",
+      "obtainedMarks": 1
+    },
+    {
+      "questionId": "LO-3",
+      "obtainedMarks": 0
+    },
+    {
+      "questionId": "LO-4",
+      "obtainedMarks": 0
+    },
+    {
+      "questionId": "LO-5",
+      "obtainedMarks": 1
+    }
+  ],
+  "section": "D",
+  "studentId": "3304001",
+  "securedMarks": 3,
+  "totalMarks": 5,
+  "schoolId": "3",
+  "examDate": "2021-10-05",
+  "subject": "Hindi",
+  "classId": "3"
+},{
+  "marksInfo": [
+    {
+      "questionId": "LO-1",
+      "obtainedMarks": 1
+    },
+    {
+      "questionId": "LO-2",
+      "obtainedMarks": 1
+    },
+    {
+      "questionId": "LO-3",
+      "obtainedMarks": 0
+    },
+    {
+      "questionId": "LO-4",
+      "obtainedMarks": 0
+    },
+    {
+      "questionId": "LO-5",
+      "obtainedMarks": 1
+    }
+  ],
+  "section": "D",
+  "studentId": "3304001",
+  "securedMarks": 3,
+  "totalMarks": 5,
+  "schoolId": "3",
+  "examDate": "2021-10-06",
+  "subject": "Maths",
+  "classId": "3"
+},{
+  "marksInfo": [
+    {
+      "questionId": "LO-1",
+      "obtainedMarks": 1
+    },
+    {
+      "questionId": "LO-2",
+      "obtainedMarks": 1
+    },
+    {
+      "questionId": "LO-3",
+      "obtainedMarks": 0
+    },
+    {
+      "questionId": "LO-4",
+      "obtainedMarks": 0
+    },
+    {
+      "questionId": "LO-5",
+      "obtainedMarks": 1
+    }
+  ],
+  "section": "D",
+  "studentId": "3304001",
+  "securedMarks": 3,
+  "totalMarks": 5,
+  "schoolId": "3",
+  "examDate": "2021-10-06",
+  "subject": "Maths",
+  "classId": "3"
+},{
+  "marksInfo": [
+    {
+      "questionId": "LO-1",
+      "obtainedMarks": 1
+    },
+    {
+      "questionId": "LO-2",
+      "obtainedMarks": 1
+    },
+    {
+      "questionId": "LO-3",
+      "obtainedMarks": 0
+    },
+    {
+      "questionId": "LO-4",
+      "obtainedMarks": 0
+    },
+    {
+      "questionId": "LO-5",
+      "obtainedMarks": 1
+    }
+  ],
+  "section": "D",
+  "studentId": "3304001",
+  "securedMarks": 3,
+  "totalMarks": 5,
+  "schoolId": "3",
+  "examDate": "2021-10-07",
+  "subject": "English",
+  "classId": "3"
 }
 ]
