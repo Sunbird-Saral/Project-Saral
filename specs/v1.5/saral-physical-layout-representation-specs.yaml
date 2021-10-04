@@ -37,10 +37,10 @@ components:
           description: |
             Object that carriers tolerance levels of predictions , roi widh and height.
           properties:
-            predictionMin:
+            predictionThreshold:
               type: number
               description: |
-                prediction tolerance value. 
+                prediction threshold value. 
                 if confidence value of any roi is below prediction tolerance value , front end can request user to review the value or show error.
               example: 0.95
             roiMinWidth:

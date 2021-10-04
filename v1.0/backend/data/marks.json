@@ -309,4 +309,68 @@
   "examDate": "2021-09-29",
   "subject": "Hindi",
   "classId": "8"
-}]
+},
+{
+  "marksInfo": [
+    {
+      "questionId": "LO-1",
+      "obtainedMarks": 1
+    },
+    {
+      "questionId": "LO-2",
+      "obtainedMarks": 1
+    },
+    {
+      "questionId": "LO-3",
+      "obtainedMarks": 0
+    },
+    {
+      "questionId": "LO-4",
+      "obtainedMarks": 0
+    },
+    {
+      "questionId": "LO-5",
+      "obtainedMarks": 1
+    }
+  ],
+  "section": "D",
+  "studentId": "22040000001",
+  "securedMarks": 3,
+  "totalMarks": 5,
+  "schoolId": "2",
+  "examDate": "2021-10-01",
+  "subject": "Hindi",
+  "classId": "2"
+},{
+  "marksInfo": [
+    {
+      "questionId": "LO-1",
+      "obtainedMarks": 1
+    },
+    {
+      "questionId": "LO-2",
+      "obtainedMarks": 1
+    },
+    {
+      "questionId": "LO-3",
+      "obtainedMarks": 0
+    },
+    {
+      "questionId": "LO-4",
+      "obtainedMarks": 0
+    },
+    {
+      "questionId": "LO-5",
+      "obtainedMarks": 1
+    }
+  ],
+  "section": "C",
+  "studentId": "22030000001",
+  "securedMarks": 3,
+  "totalMarks": 5,
+  "schoolId": "2",
+  "examDate": "2021-10-02",
+  "subject": "Maths",
+  "classId": "2"
+}
+]
