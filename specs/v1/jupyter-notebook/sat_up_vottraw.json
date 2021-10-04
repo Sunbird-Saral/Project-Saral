@@ -16,7 +16,7 @@
             "id": "pZn3JFSXv",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLID_1"
+                "ROLLID1"
             ],
             "boundingBox": {
                 "height": 33.08474783170021,
@@ -47,7 +47,7 @@
             "id": "f2ni5KqLs",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLID_2"
+                "ROLLID2"
             ],
             "boundingBox": {
                 "height": 31.45762298066737,
@@ -78,7 +78,7 @@
             "id": "om_Yha6Vk",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLID_3"
+                "ROLLID3"
             ],
             "boundingBox": {
                 "height": 33.08474783170021,
@@ -109,7 +109,7 @@
             "id": "T3ycX4WeJ",
             "type": "RECTANGLE",
             "tags": [
-                "HINDIID_1"
+                "HINDIID1"
             ],
             "boundingBox": {
                 "height": 35.79660189353813,
@@ -140,7 +140,7 @@
             "id": "Z3QseayMW",
             "type": "RECTANGLE",
             "tags": [
-                "HINDIID_2"
+                "HINDIID2"
             ],
             "boundingBox": {
                 "height": 35.79662258342161,
@@ -171,7 +171,7 @@
             "id": "_LPabv_17",
             "type": "RECTANGLE",
             "tags": [
-                "HINDIID_3"
+                "HINDIID3"
             ],
             "boundingBox": {
                 "height": 35.25423728813559,
@@ -202,7 +202,7 @@
             "id": "7aN1KkQrb",
             "type": "RECTANGLE",
             "tags": [
-                "HINDIID_4"
+                "HINDIID4"
             ],
             "boundingBox": {
                 "height": 34.169508077330505,
@@ -233,7 +233,7 @@
             "id": "NKLc-0r4a",
             "type": "RECTANGLE",
             "tags": [
-                "HINDIID_5"
+                "HINDIID5"
             ],
             "boundingBox": {
                 "height": 36.33898718882415,
@@ -264,7 +264,7 @@
             "id": "enN4vcMDM",
             "type": "RECTANGLE",
             "tags": [
-                "HINDIID_6"
+                "HINDIID6"
             ],
             "boundingBox": {
                 "height": 34.711851992849574,
@@ -295,7 +295,7 @@
             "id": "a4yq09K1r",
             "type": "RECTANGLE",
             "tags": [
-                "HINDIID_7"
+                "HINDIID7"
             ],
             "boundingBox": {
                 "height": 35.79662258342161,
@@ -326,7 +326,7 @@
             "id": "hGKjG34x8",
             "type": "RECTANGLE",
             "tags": [
-                "HINDIID_8"
+                "HINDIID8"
             ],
             "boundingBox": {
                 "height": 34.71187268273305,
@@ -357,7 +357,7 @@
             "id": "N85qwaVEy",
             "type": "RECTANGLE",
             "tags": [
-                "HINDIID_9"
+                "HINDIID9"
             ],
             "boundingBox": {
                 "height": 36.33896649894068,
@@ -388,7 +388,7 @@
             "id": "0Sew2dW4K",
             "type": "RECTANGLE",
             "tags": [
-                "HINDIID_10"
+                "HINDIIDTEN"
             ],
             "boundingBox": {
                 "height": 35.79662258342161,
@@ -419,7 +419,7 @@
             "id": "RlwIIG2Vz",
             "type": "RECTANGLE",
             "tags": [
-                "ENGLISHID_1"
+                "ENGLISHID1"
             ],
             "boundingBox": {
                 "height": 34.169487387447035,
@@ -450,7 +450,7 @@
             "id": "O7ACxOTxb",
             "type": "RECTANGLE",
             "tags": [
-                "ENGLISHID_2"
+                "ENGLISHID2"
             ],
             "boundingBox": {
                 "height": 34.169508077330505,
@@ -481,7 +481,7 @@
             "id": "qGw-0WXs3",
             "type": "RECTANGLE",
             "tags": [
-                "ENGLISHID_3"
+                "ENGLISHID3"
             ],
             "boundingBox": {
                 "height": 34.169508077330505,
@@ -512,7 +512,7 @@
             "id": "8dYSZ-uvJ",
             "type": "RECTANGLE",
             "tags": [
-                "ENGLISHID_4"
+                "ENGLISHID4"
             ],
             "boundingBox": {
                 "height": 35.254216598252114,
@@ -543,7 +543,7 @@
             "id": "BBhDFTABd",
             "type": "RECTANGLE",
             "tags": [
-                "ENGLISHID_5"
+                "ENGLISHID5"
             ],
             "boundingBox": {
                 "height": 34.711851992849574,
@@ -574,7 +574,7 @@
             "id": "r-lRrgLCw",
             "type": "RECTANGLE",
             "tags": [
-                "ENGLISHID_6"
+                "ENGLISHID6"
             ],
             "boundingBox": {
                 "height": 35.25425797801907,
@@ -605,7 +605,7 @@
             "id": "hTBJkW_OQ",
             "type": "RECTANGLE",
             "tags": [
-                "ENGLISHID_7"
+                "ENGLISHID7"
             ],
             "boundingBox": {
                 "height": 36.33898718882415,
@@ -636,7 +636,7 @@
             "id": "kVPFkqMne",
             "type": "RECTANGLE",
             "tags": [
-                "ENGLISHID_8"
+                "ENGLISHID8"
             ],
             "boundingBox": {
                 "height": 34.169508077330505,
@@ -667,7 +667,7 @@
             "id": "69UHvPLxW",
             "type": "RECTANGLE",
             "tags": [
-                "ENGLISHID_9"
+                "ENGLISHID9"
             ],
             "boundingBox": {
                 "height": 35.25423728813559,
@@ -698,7 +698,7 @@
             "id": "8mrCiVpWg",
             "type": "RECTANGLE",
             "tags": [
-                "ENGLISHID_10"
+                "ENGLISHIDTEN"
             ],
             "boundingBox": {
                 "height": 35.25423728813559,
@@ -729,7 +729,7 @@
             "id": "UW0Zh38bH",
             "type": "RECTANGLE",
             "tags": [
-                "MATHSID_1"
+                "MATHSID1"
             ],
             "boundingBox": {
                 "height": 36.88133110434322,
@@ -760,7 +760,7 @@
             "id": "Aa2nixaTG",
             "type": "RECTANGLE",
             "tags": [
-                "MATHSID_2"
+                "MATHSID2"
             ],
             "boundingBox": {
                 "height": 33.627143471927965,
@@ -791,7 +791,7 @@
             "id": "VWCf2rK7l",
             "type": "RECTANGLE",
             "tags": [
-                "MATHSID_3"
+                "MATHSID3"
             ],
             "boundingBox": {
                 "height": 33.627143471927965,
@@ -822,7 +822,7 @@
             "id": "Q7-Bm94YT",
             "type": "RECTANGLE",
             "tags": [
-                "MATHSID_4"
+                "MATHSID4"
             ],
             "boundingBox": {
                 "height": 35.79660189353813,
@@ -853,7 +853,7 @@
             "id": "kidpeKKEe",
             "type": "RECTANGLE",
             "tags": [
-                "MATHSID_5"
+                "MATHSID5"
             ],
             "boundingBox": {
                 "height": 33.08473748675847,
@@ -884,7 +884,7 @@
             "id": "Gmk0b5x7N",
             "type": "RECTANGLE",
             "tags": [
-                "MATHSID_6"
+                "MATHSID6"
             ],
             "boundingBox": {
                 "height": 35.79660189353813,
@@ -915,7 +915,7 @@
             "id": "ZcZYt13v3",
             "type": "RECTANGLE",
             "tags": [
-                "MATHSID_7"
+                "MATHSID7"
             ],
             "boundingBox": {
                 "height": 35.25423728813559,
@@ -946,7 +946,7 @@
             "id": "Nh7XL7Gpl",
             "type": "RECTANGLE",
             "tags": [
-                "MATHSID_8"
+                "MATHSID8"
             ],
             "boundingBox": {
                 "height": 37.42373708951271,
@@ -977,7 +977,7 @@
             "id": "igqQF4t2Y",
             "type": "RECTANGLE",
             "tags": [
-                "MATHSID_9"
+                "MATHSID9"
             ],
             "boundingBox": {
                 "height": 35.25423728813559,
@@ -1008,7 +1008,7 @@
             "id": "USPiZ1SkD",
             "type": "RECTANGLE",
             "tags": [
-                "MATHSID_10"
+                "MATHSIDTEN"
             ],
             "boundingBox": {
                 "height": 33.62710209216102,
@@ -1039,7 +1039,7 @@
             "id": "0hcouollM",
             "type": "RECTANGLE",
             "tags": [
-                "EVSID_1"
+                "EVS/SOCIALSCIENCEID1"
             ],
             "boundingBox": {
                 "height": 35.79660189353813,
@@ -1070,7 +1070,7 @@
             "id": "YG9j5TScJ",
             "type": "RECTANGLE",
             "tags": [
-                "EVSID_2"
+                "EVS/SOCIALSCIENCEID2"
             ],
             "boundingBox": {
                 "height": 37.42373708951271,
@@ -1101,7 +1101,7 @@
             "id": "NGK37iQlS",
             "type": "RECTANGLE",
             "tags": [
-                "EVSID_3"
+                "EVS/SOCIALSCIENCEID3"
             ],
             "boundingBox": {
                 "height": 36.33896649894068,
@@ -1132,7 +1132,7 @@
             "id": "zbv1pzqmk",
             "type": "RECTANGLE",
             "tags": [
-                "EVSID_4"
+                "EVS/SOCIALSCIENCEID4"
             ],
             "boundingBox": {
                 "height": 36.33896649894068,
@@ -1163,7 +1163,7 @@
             "id": "DsYoxUSWo",
             "type": "RECTANGLE",
             "tags": [
-                "EVSID_5"
+                "EVS/SOCIALSCIENCEID5"
             ],
             "boundingBox": {
                 "height": 36.33896649894068,
@@ -1194,7 +1194,7 @@
             "id": "rDKhdcwdy",
             "type": "RECTANGLE",
             "tags": [
-                "EVSID_6"
+                "EVS/SOCIALSCIENCEID6"
             ],
             "boundingBox": {
                 "height": 35.25423728813559,
@@ -1225,7 +1225,7 @@
             "id": "XfDL8clr1",
             "type": "RECTANGLE",
             "tags": [
-                "EVSID_7"
+                "EVS/SOCIALSCIENCEID7"
             ],
             "boundingBox": {
                 "height": 36.33896649894068,
@@ -1256,7 +1256,7 @@
             "id": "JhTRm9sKl",
             "type": "RECTANGLE",
             "tags": [
-                "EVSID_8"
+                "EVS/SOCIALSCIENCEID8"
             ],
             "boundingBox": {
                 "height": 35.25423728813559,
@@ -1287,7 +1287,7 @@
             "id": "mgg0Yhtvy",
             "type": "RECTANGLE",
             "tags": [
-                "EVSID_9"
+                "EVS/SOCIALSCIENCEID9"
             ],
             "boundingBox": {
                 "height": 33.084778866525426,
@@ -1318,7 +1318,7 @@
             "id": "l0I0R9Eo9",
             "type": "RECTANGLE",
             "tags": [
-                "EVSID_10"
+                "EVS/SOCIALSCIENCEIDTEN"
             ],
             "boundingBox": {
                 "height": 34.169508077330505,
@@ -1349,7 +1349,7 @@
             "id": "yzgmDqAqc",
             "type": "RECTANGLE",
             "tags": [
-                "SCIENCEID_1"
+                "SCIENCEID1"
             ],
             "boundingBox": {
                 "height": 35.25423728813559,
@@ -1380,7 +1380,7 @@
             "id": "yfBDvMLgS",
             "type": "RECTANGLE",
             "tags": [
-                "SCIENCEID_2"
+                "SCIENCEID2"
             ],
             "boundingBox": {
                 "height": 38.50846630031779,
@@ -1411,7 +1411,7 @@
             "id": "WOVDyyOey",
             "type": "RECTANGLE",
             "tags": [
-                "SCIENCEID_3"
+                "SCIENCEID3"
             ],
             "boundingBox": {
                 "height": 36.88133110434322,
@@ -1442,7 +1442,7 @@
             "id": "tuOTv1OOh",
             "type": "RECTANGLE",
             "tags": [
-                "SCIENCEID_4"
+                "SCIENCEID4"
             ],
             "boundingBox": {
                 "height": 37.96610169491525,
@@ -1473,7 +1473,7 @@
             "id": "KyGUFrtXu",
             "type": "RECTANGLE",
             "tags": [
-                "SCIENCEID_5"
+                "SCIENCEID5"
             ],
             "boundingBox": {
                 "height": 36.33896649894068,
@@ -1504,7 +1504,7 @@
             "id": "J78BtK_pp",
             "type": "RECTANGLE",
             "tags": [
-                "SCIENCEID_7"
+                "SCIENCEID6"
             ],
             "boundingBox": {
                 "height": 36.339007878707626,
@@ -1535,7 +1535,7 @@
             "id": "v6gAySKbL",
             "type": "RECTANGLE",
             "tags": [
-                "SCIENCEID_7"
+                "SCIENCEID7"
             ],
             "boundingBox": {
                 "height": 36.881372484110166,
@@ -1566,7 +1566,7 @@
             "id": "f9tsg6ov3",
             "type": "RECTANGLE",
             "tags": [
-                "SCIENCEID_8"
+                "SCIENCEID8"
             ],
             "boundingBox": {
                 "height": 34.169508077330505,
@@ -1597,7 +1597,7 @@
             "id": "zsTiguH3p",
             "type": "RECTANGLE",
             "tags": [
-                "SCIENCEID_9"
+                "SCIENCEID9"
             ],
             "boundingBox": {
                 "height": 32.54237288135593,
@@ -1628,7 +1628,7 @@
             "id": "uZhFmD5kG",
             "type": "RECTANGLE",
             "tags": [
-                "SCIENCEID_10"
+                "SCIENCEIDTEN"
             ],
             "boundingBox": {
                 "height": 35.389838784427965,
