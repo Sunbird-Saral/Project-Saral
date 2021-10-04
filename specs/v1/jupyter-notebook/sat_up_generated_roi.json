@@ -7,7 +7,7 @@
                 "cellId": "1",
                 "rois": [
                     {
-                        "annotationTags": "ROLLNUMBER1",
+                        "annotationTags": "ROLLID1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "1",
                         "index": 0,
@@ -19,7 +19,7 @@
                         }
                     },
                     {
-                        "annotationTags": "ROLLNUMBER2",
+                        "annotationTags": "ROLLID2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "2",
                         "index": 1,
@@ -31,7 +31,7 @@
                         }
                     },
                     {
-                        "annotationTags": "ROLLNUMBER3",
+                        "annotationTags": "ROLLID3",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "3",
                         "index": 2,
@@ -47,8 +47,8 @@
                     "index": 1
                 },
                 "format": {
-                    "name": "ROLLNUMBER",
-                    "value": ""
+                    "name": "ROLLID",
+                    "value": "ROLLID"
                 },
                 "validate": {
                     "regExp": ""
@@ -885,7 +885,7 @@
                 },
                 "format": {
                     "name": "EVS/SOCIALSCIENCEID1",
-                    "value": "EVS/SOCIAL SCIENCE 1"
+                    "value": "EVS/SOCIALSCIENCE 1"
                 },
                 "validate": {
                     "regExp": ""
@@ -912,7 +912,7 @@
                 },
                 "format": {
                     "name": "EVS/SOCIALSCIENCEID2",
-                    "value": "EVS/SOCIAL SCIENCE 2"
+                    "value": "EVS/SOCIALSCIENCE 2"
                 },
                 "validate": {
                     "regExp": ""
@@ -939,7 +939,7 @@
                 },
                 "format": {
                     "name": "EVS/SOCIALSCIENCEID3",
-                    "value": "EVS/SOCIAL SCIENCE 3"
+                    "value": "EVS/SOCIALSCIENCE 3"
                 },
                 "validate": {
                     "regExp": ""
@@ -966,7 +966,7 @@
                 },
                 "format": {
                     "name": "EVS/SOCIALSCIENCEID4",
-                    "value": "EVS/SOCIAL SCIENCE 4"
+                    "value": "EVS/SOCIALSCIENCE 4"
                 },
                 "validate": {
                     "regExp": ""
@@ -993,7 +993,7 @@
                 },
                 "format": {
                     "name": "EVS/SOCIALSCIENCEID5",
-                    "value": "EVS/SOCIAL SCIENCE 5"
+                    "value": "EVS/SOCIALSCIENCE 5"
                 },
                 "validate": {
                     "regExp": ""
@@ -1020,7 +1020,7 @@
                 },
                 "format": {
                     "name": "EVS/SOCIALSCIENCEID6",
-                    "value": "EVS/SOCIAL SCIENCE 6"
+                    "value": "EVS/SOCIALSCIENCE 6"
                 },
                 "validate": {
                     "regExp": ""
@@ -1047,7 +1047,7 @@
                 },
                 "format": {
                     "name": "EVS/SOCIALSCIENCEID7",
-                    "value": "EVS/SOCIAL SCIENCE 7"
+                    "value": "EVS/SOCIALSCIENCE 7"
                 },
                 "validate": {
                     "regExp": ""
@@ -1074,7 +1074,7 @@
                 },
                 "format": {
                     "name": "EVS/SOCIALSCIENCEID8",
-                    "value": "EVS/SOCIAL SCIENCE 8"
+                    "value": ""
                 },
                 "validate": {
                     "regExp": ""
@@ -1101,7 +1101,7 @@
                 },
                 "format": {
                     "name": "EVS/SOCIALSCIENCEID9",
-                    "value": "EVS/SOCIAL SCIENCE 9"
+                    "value": "EVS/SOCIALSCIENCE 9"
                 },
                 "validate": {
                     "regExp": ""
@@ -1128,7 +1128,7 @@
                 },
                 "format": {
                     "name": "EVS/SOCIALSCIENCEIDTEN",
-                    "value": "EVS/SOCIAL SCIENCE 10"
+                    "value": "EVS/SOCIALSCIENCE 10"
                 },
                 "validate": {
                     "regExp": ""
