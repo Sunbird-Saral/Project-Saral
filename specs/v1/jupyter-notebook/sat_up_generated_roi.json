@@ -48,7 +48,7 @@
                 },
                 "format": {
                     "name": "ROLLID",
-                    "value": ""
+                    "value": "ROLLID"
                 },
                 "validate": {
                     "regExp": ""
