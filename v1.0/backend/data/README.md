@@ -2,7 +2,7 @@ This readme is created for loading data in the database .
 
 commands:- 
 First you need to come under docker container
-docker exec -it saral-backend bash
+-> "docker exec -it saral-backend bash"
 for loading data in database
 1. node ./data/import-data.js --import
 for deleting current data in database
