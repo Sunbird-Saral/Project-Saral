@@ -21,5 +21,17 @@
   "hmMobileNo": "8006079875",
   "noOfStudents": "100",
   "udiseCode": "2"
+},
+{
+  "name": "Sainik School",
+  "schoolId": "3",
+  "password": "tarento@123",
+  "state": "gujrat",
+  "district": "ahmedabad",
+  "block": "Jamnagar",
+  "hmName": "acbc",
+  "hmMobileNo": "8006079875",
+  "noOfStudents": "100",
+  "udiseCode": "3"
 }
 ]
