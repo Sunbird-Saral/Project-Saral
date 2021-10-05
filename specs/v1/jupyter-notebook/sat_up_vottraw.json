@@ -16,7 +16,7 @@
             "id": "pZn3JFSXv",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLID1"
+                "ROLLNUMBER1"
             ],
             "boundingBox": {
                 "height": 33.08474783170021,
@@ -47,7 +47,7 @@
             "id": "f2ni5KqLs",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLID2"
+                "ROLLNUMBER2"
             ],
             "boundingBox": {
                 "height": 31.45762298066737,
@@ -78,7 +78,7 @@
             "id": "om_Yha6Vk",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLID3"
+                "ROLLNUMBER3"
             ],
             "boundingBox": {
                 "height": 33.08474783170021,

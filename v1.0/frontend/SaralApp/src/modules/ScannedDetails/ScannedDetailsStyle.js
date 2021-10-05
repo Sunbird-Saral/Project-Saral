@@ -116,7 +116,7 @@ export const styles = {
     },
     fieldContainerStyle: {
         paddingVertical: '2.5%',
-        marginHorizontal: '5%'
+        marginHorizontal: '2.5%'
     },
     labelTextStyle: {
         width: '40%',

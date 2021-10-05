@@ -24,7 +24,7 @@ export default strings = new LocalizedStrings({
         no_btn_text: 'No',
         yes_btn_text: 'Yes',
         complete_these_steps_submit_marks: 'complete these steps to submits marks',
-
+        please_select_exam_taken_at: 'Please Select Exam Taken At',
         test_id:'Test_ID',
         scan_status: 'Scan Status',
         save_status: 'Save Status',

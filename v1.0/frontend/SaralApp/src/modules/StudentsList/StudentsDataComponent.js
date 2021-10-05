@@ -18,7 +18,7 @@ const StudentsDataComponent = ({
                 <View style={styles.line} />
 
                 <TouchableOpacity
-                    style={[styles.btnCon, { backgroundColor: item.isAbsent ? AppTheme.BLUE : AppTheme.GREEN }]}
+                    style={[styles.btnCon, { backgroundColor: item.isAbsent ? AppTheme.BLUE : AppTheme.BLUE }]}
                     activeOpacity={0.7}
                     onPress={() => onBtnClick(item)}
                 >

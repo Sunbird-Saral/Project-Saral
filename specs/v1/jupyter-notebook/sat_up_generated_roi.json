@@ -7,7 +7,7 @@
                 "cellId": "1",
                 "rois": [
                     {
-                        "annotationTags": "ROLLID1",
+                        "annotationTags": "ROLLNUMBER1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "1",
                         "index": 0,
@@ -19,7 +19,7 @@
                         }
                     },
                     {
-                        "annotationTags": "ROLLID2",
+                        "annotationTags": "ROLLNUMBER2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "2",
                         "index": 1,
@@ -31,7 +31,7 @@
                         }
                     },
                     {
-                        "annotationTags": "ROLLID3",
+                        "annotationTags": "ROLLNUMBER3",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "3",
                         "index": 2,
@@ -47,8 +47,8 @@
                     "index": 1
                 },
                 "format": {
-                    "name": "ROLLID",
-                    "value": "ROLLID"
+                    "name": "ROLLNUMBER",
+                    "value": "ROLL NUMBER"
                 },
                 "validate": {
                     "regExp": ""
