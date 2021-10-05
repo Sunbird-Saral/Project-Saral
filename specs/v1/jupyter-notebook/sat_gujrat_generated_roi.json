@@ -925,48 +925,9 @@
                 "cellId": "50",
                 "rois": [
                     {
-                        "annotationTags": "QUESTION21_1",
-                        "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "50",
-                        "index": 0,
-                        "rect": {
-                            "top": 309,
-                            "left": 343,
-                            "bottom": 329,
-                            "right": 362
-                        }
-                    },
-                    {
-                        "annotationTags": "QUESTION21_2",
-                        "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "51",
-                        "index": 1,
-                        "rect": {
-                            "top": 310,
-                            "left": 373,
-                            "bottom": 328,
-                            "right": 394
-                        }
-                    }
-                ],
-                "render": {
-                    "index": 23
-                },
-                "format": {
-                    "name": "QUESTION21",
-                    "value": "QUESTION 21"
-                },
-                "validate": {
-                    "regExp": ""
-                }
-            },
-            {
-                "cellId": "52",
-                "rois": [
-                    {
                         "annotationTags": "QUESTION22_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "52",
+                        "roiId": "50",
                         "index": 0,
                         "rect": {
                             "top": 337,
@@ -978,7 +939,7 @@
                     {
                         "annotationTags": "QUESTION22_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "53",
+                        "roiId": "51",
                         "index": 1,
                         "rect": {
                             "top": 337,
@@ -989,7 +950,7 @@
                     }
                 ],
                 "render": {
-                    "index": 24
+                    "index": 23
                 },
                 "format": {
                     "name": "QUESTION22",
@@ -1000,12 +961,12 @@
                 }
             },
             {
-                "cellId": "54",
+                "cellId": "52",
                 "rois": [
                     {
                         "annotationTags": "QUESTION23_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "54",
+                        "roiId": "52",
                         "index": 0,
                         "rect": {
                             "top": 365,
@@ -1017,7 +978,7 @@
                     {
                         "annotationTags": "QUESTION23_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "55",
+                        "roiId": "53",
                         "index": 1,
                         "rect": {
                             "top": 366,
@@ -1028,7 +989,7 @@
                     }
                 ],
                 "render": {
-                    "index": 25
+                    "index": 24
                 },
                 "format": {
                     "name": "QUESTION23",
@@ -1039,12 +1000,12 @@
                 }
             },
             {
-                "cellId": "56",
+                "cellId": "54",
                 "rois": [
                     {
                         "annotationTags": "QUESTION24_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "56",
+                        "roiId": "54",
                         "index": 0,
                         "rect": {
                             "top": 392,
@@ -1056,7 +1017,7 @@
                     {
                         "annotationTags": "QUESTION24_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "57",
+                        "roiId": "55",
                         "index": 1,
                         "rect": {
                             "top": 393,
@@ -1067,7 +1028,7 @@
                     }
                 ],
                 "render": {
-                    "index": 26
+                    "index": 25
                 },
                 "format": {
                     "name": "QUESTION24",
@@ -1078,12 +1039,12 @@
                 }
             },
             {
-                "cellId": "58",
+                "cellId": "56",
                 "rois": [
                     {
                         "annotationTags": "QUESTION25_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "58",
+                        "roiId": "56",
                         "index": 0,
                         "rect": {
                             "top": 88,
@@ -1095,7 +1056,7 @@
                     {
                         "annotationTags": "QUESTION25_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "59",
+                        "roiId": "57",
                         "index": 1,
                         "rect": {
                             "top": 88,
@@ -1106,7 +1067,7 @@
                     }
                 ],
                 "render": {
-                    "index": 27
+                    "index": 26
                 },
                 "format": {
                     "name": "QUESTION25",
@@ -1117,12 +1078,12 @@
                 }
             },
             {
-                "cellId": "60",
+                "cellId": "58",
                 "rois": [
                     {
                         "annotationTags": "QUESTION26_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "60",
+                        "roiId": "58",
                         "index": 0,
                         "rect": {
                             "top": 116,
@@ -1134,7 +1095,7 @@
                     {
                         "annotationTags": "QUESTION26_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "61",
+                        "roiId": "59",
                         "index": 1,
                         "rect": {
                             "top": 117,
@@ -1145,7 +1106,7 @@
                     }
                 ],
                 "render": {
-                    "index": 28
+                    "index": 27
                 },
                 "format": {
                     "name": "QUESTION26",
@@ -1156,12 +1117,12 @@
                 }
             },
             {
-                "cellId": "62",
+                "cellId": "60",
                 "rois": [
                     {
                         "annotationTags": "QUESTION27_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "62",
+                        "roiId": "60",
                         "index": 0,
                         "rect": {
                             "top": 145,
@@ -1173,7 +1134,7 @@
                     {
                         "annotationTags": "QUESTION27_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "63",
+                        "roiId": "61",
                         "index": 1,
                         "rect": {
                             "top": 145,
@@ -1184,7 +1145,7 @@
                     }
                 ],
                 "render": {
-                    "index": 29
+                    "index": 28
                 },
                 "format": {
                     "name": "QUESTION27",
@@ -1195,12 +1156,12 @@
                 }
             },
             {
-                "cellId": "64",
+                "cellId": "62",
                 "rois": [
                     {
                         "annotationTags": "QUESTION28_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "64",
+                        "roiId": "62",
                         "index": 0,
                         "rect": {
                             "top": 172,
@@ -1212,7 +1173,7 @@
                     {
                         "annotationTags": "QUESTION28_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "65",
+                        "roiId": "63",
                         "index": 1,
                         "rect": {
                             "top": 172,
@@ -1223,7 +1184,7 @@
                     }
                 ],
                 "render": {
-                    "index": 30
+                    "index": 29
                 },
                 "format": {
                     "name": "QUESTION28",
@@ -1234,12 +1195,12 @@
                 }
             },
             {
-                "cellId": "66",
+                "cellId": "64",
                 "rois": [
                     {
                         "annotationTags": "QUESTION29_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "66",
+                        "roiId": "64",
                         "index": 0,
                         "rect": {
                             "top": 201,
@@ -1251,7 +1212,7 @@
                     {
                         "annotationTags": "QUESTION29_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "67",
+                        "roiId": "65",
                         "index": 1,
                         "rect": {
                             "top": 200,
@@ -1262,7 +1223,7 @@
                     }
                 ],
                 "render": {
-                    "index": 31
+                    "index": 30
                 },
                 "format": {
                     "name": "QUESTION29",
@@ -1273,12 +1234,12 @@
                 }
             },
             {
-                "cellId": "68",
+                "cellId": "66",
                 "rois": [
                     {
                         "annotationTags": "QUESTION30_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "68",
+                        "roiId": "66",
                         "index": 0,
                         "rect": {
                             "top": 229,
@@ -1290,7 +1251,7 @@
                     {
                         "annotationTags": "QUESTION30_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "69",
+                        "roiId": "67",
                         "index": 1,
                         "rect": {
                             "top": 228,
@@ -1301,7 +1262,7 @@
                     }
                 ],
                 "render": {
-                    "index": 32
+                    "index": 31
                 },
                 "format": {
                     "name": "QUESTION30",
@@ -1312,12 +1273,12 @@
                 }
             },
             {
-                "cellId": "70",
+                "cellId": "68",
                 "rois": [
                     {
                         "annotationTags": "QUESTION31_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "70",
+                        "roiId": "68",
                         "index": 0,
                         "rect": {
                             "top": 255,
@@ -1329,7 +1290,7 @@
                     {
                         "annotationTags": "QUESTION31_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "71",
+                        "roiId": "69",
                         "index": 1,
                         "rect": {
                             "top": 256,
@@ -1340,23 +1301,23 @@
                     }
                 ],
                 "render": {
-                    "index": 33
+                    "index": 32
                 },
                 "format": {
                     "name": "QUESTION31",
-                    "value": "QUESTION 30"
+                    "value": "QUESTION 31"
                 },
                 "validate": {
                     "regExp": ""
                 }
             },
             {
-                "cellId": "72",
+                "cellId": "70",
                 "rois": [
                     {
                         "annotationTags": "QUESTION32_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "72",
+                        "roiId": "70",
                         "index": 0,
                         "rect": {
                             "top": 283,
@@ -1368,7 +1329,7 @@
                     {
                         "annotationTags": "QUESTION32_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "73",
+                        "roiId": "71",
                         "index": 1,
                         "rect": {
                             "top": 283,
@@ -1379,7 +1340,7 @@
                     }
                 ],
                 "render": {
-                    "index": 34
+                    "index": 33
                 },
                 "format": {
                     "name": "QUESTION32",
@@ -1390,12 +1351,12 @@
                 }
             },
             {
-                "cellId": "74",
+                "cellId": "72",
                 "rois": [
                     {
                         "annotationTags": "QUESTION33_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "74",
+                        "roiId": "72",
                         "index": 0,
                         "rect": {
                             "top": 309,
@@ -1407,7 +1368,7 @@
                     {
                         "annotationTags": "QUESTION33_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "75",
+                        "roiId": "73",
                         "index": 1,
                         "rect": {
                             "top": 309,
@@ -1418,7 +1379,7 @@
                     }
                 ],
                 "render": {
-                    "index": 35
+                    "index": 34
                 },
                 "format": {
                     "name": "QUESTION33",
@@ -1429,12 +1390,12 @@
                 }
             },
             {
-                "cellId": "76",
+                "cellId": "74",
                 "rois": [
                     {
                         "annotationTags": "QUESTION34_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "76",
+                        "roiId": "74",
                         "index": 0,
                         "rect": {
                             "top": 337,
@@ -1446,7 +1407,7 @@
                     {
                         "annotationTags": "QUESTION34_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "77",
+                        "roiId": "75",
                         "index": 1,
                         "rect": {
                             "top": 337,
@@ -1457,7 +1418,7 @@
                     }
                 ],
                 "render": {
-                    "index": 36
+                    "index": 35
                 },
                 "format": {
                     "name": "QUESTION34",
@@ -1468,12 +1429,12 @@
                 }
             },
             {
-                "cellId": "78",
+                "cellId": "76",
                 "rois": [
                     {
                         "annotationTags": "MAX_MARKS_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "78",
+                        "roiId": "76",
                         "index": 0,
                         "rect": {
                             "top": 438,
@@ -1485,7 +1446,7 @@
                     {
                         "annotationTags": "MAX_MARKS_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "79",
+                        "roiId": "77",
                         "index": 1,
                         "rect": {
                             "top": 437,
@@ -1497,7 +1458,7 @@
                     {
                         "annotationTags": "MAX_MARKS_3",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "80",
+                        "roiId": "78",
                         "index": 2,
                         "rect": {
                             "top": 436,
@@ -1508,7 +1469,7 @@
                     }
                 ],
                 "render": {
-                    "index": 37
+                    "index": 36
                 },
                 "format": {
                     "name": "MAX_MARKS",
@@ -1519,12 +1480,12 @@
                 }
             },
             {
-                "cellId": "81",
+                "cellId": "79",
                 "rois": [
                     {
                         "annotationTags": "MARKS_OBTAINED_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "81",
+                        "roiId": "79",
                         "index": 0,
                         "rect": {
                             "top": 436,
@@ -1536,7 +1497,7 @@
                     {
                         "annotationTags": "MARKS_OBTAINED_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "82",
+                        "roiId": "80",
                         "index": 1,
                         "rect": {
                             "top": 436,
@@ -1548,7 +1509,7 @@
                     {
                         "annotationTags": "MARKS_OBTAINED_3",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "83",
+                        "roiId": "81",
                         "index": 2,
                         "rect": {
                             "top": 435,
@@ -1559,7 +1520,7 @@
                     }
                 ],
                 "render": {
-                    "index": 38
+                    "index": 37
                 },
                 "format": {
                     "name": "MARKS_OBTAINED",
