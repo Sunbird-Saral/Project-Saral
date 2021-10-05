@@ -14,11 +14,20 @@ import TabHeader from './TabHeader';
 
 //rois
 import MarksHeaderTable from './MarksHeaderTable';
+import ButtonWithIcon from '../common/components/ButtonWithIcon';
+import { getScanData, getStudentsExamData, setScanData } from '../../utils/StorageUtils';
+import { NavigationActions, StackActions } from 'react-navigation';
+import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
+import Spinner from '../common/components/loadingIndicator';
+
+import APITransport from '../../flux/actions/transport/apitransport'
+import { bindActionCreators } from 'redux';
+import { TextInput } from 'react-native-gesture-handler';
 
 const ScannedDetailsComponent = ({
-    params,
-    filteredData,
     loginData,
+    navigation,
+    filteredData,
     scanTypeData,
     ocrLocalResponse
 }) => {
@@ -31,12 +40,27 @@ const ScannedDetailsComponent = ({
     const [testIdIndex, setTestIdIndex] = useState(-1)
     const [errTestId, setErrTestID] = useState('')
     const [testId, setTestID] = useState(123456)
-    const [testDate, setTestDate] = useState('30/09/2021')
+    const [testDate, setTestDate] = useState(filteredData.examDate)
     const [nextValue, setNextValue] = useState(5)
     const [preValue, setPreValue] = useState(0)
     const [newArrayValue, setNewArrayValue] = useState([])
     const [isNextExist, setNextExist] = useState(false)
     const [btnName, setBtnName] = useState('Cancel')
+    const [maxMarks, setMaxMarks] = useState(0)
+    const [obtainedMarks, setObtainedMarks] = useState(0)
+    const [saveDataObj, setSaveDataObj] = useState()
+    const [isLoading, setIsLoading] = useState(false)
+    const [number, onChangeNumber] = useState(0);
+    const [securedMarks, onSecuredMarks] = useState(0);
+    const [examTakenAtIndex, setExamTakenAtIndex] = useState(-1);
+    const [examTakenAt, setExamTakenAt] = useState("");
+    const [errExamTakenAt, setErrExamTakenAt] = useState("");
+    const [defaultSelected, setDefaultSelected] = useState(Strings.select_text);
+    const [studentId, setStudentID] = useState();
+    const [stdErr, setStdErr] = useState("");
+    const [edit, setEditValue] = useState(true)
+    const [studentValid, setStudentValid] = useState()
+
 
     const inputRef = React.createRef();
 
@@ -50,16 +74,42 @@ const ScannedDetailsComponent = ({
         setNextBtnClick(false)
     }
 
+    const setExamTakenAtPlace = (index, value) => {
+        setExamTakenAtIndex(index)
+        setExamTakenAt(value)
+        setErrExamTakenAt("")
+    }
+
     const onDropDownSelect = (idx, value, type) => {
         if (type == 'testId') {
-
             setTestIds(value)
             setTestIdIndex(Number(idx))
-
         }
         else if (type == 'examTakenAt') {
-            setExamTakenArr(Number(idx), value)
+            setExamTakenAtPlace(Number(idx), value)
         }
+    }
+
+    useEffect(() => {
+        validateStudentId(studentId)
+    }, [studentId])
+
+    const validateStudentId = async (value) => {
+        let studentsExamData = await getStudentsExamData();
+
+        let a = studentsExamData[0].data.students.filter((e) => {
+            if (e.studentId == value) {
+                return true
+            }
+        })
+
+        if (a.length > 0) {
+            setStudentValid(true)
+            setStdErr('')
+        } else {
+            setStdErr(Strings.please_correct_student_id)
+        }
+
     }
 
     const setTestIds = (value) => {
@@ -68,42 +118,43 @@ const ScannedDetailsComponent = ({
     }
 
     const renderTabFirst = () => {
-        // const { testIdIndex, defaultSelected } = this.state
-        // const { edit, studentId, testDate, stdErr, testIds, testId, testDateErr, errTestId, errExamTakenAt, examTakenAtIndex, examTakenAtArr, examTakenAt, scanType, loginDataRes } = this.props
         return (
             <View>
                 {
-                    scanTypeData.scanType == SCAN_TYPES.SAT_TYPE
-                    &&
-                    loginData
-                    &&
-                    loginData.data
-                    &&
+                    // scanTypeData.scanType == SCAN_TYPES.SAT_TYPE
+                    // &&
+                    // loginData
+                    // &&
+                    // loginData.data
+                    // &&
                     <View style={styles.fieldContainerStyle}>
                         <View style={{ flexDirection: 'row' }}>
                             <Text style={[styles.labelTextStyle]}>{Strings.exam_taken_at}</Text>
-                            {/* {errExamTakenAt != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 1, width: '60%', textAlign: 'right', fontWeight: 'normal' }]}>{errExamTakenAt}</Text>} */}
+                            {errExamTakenAt != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 1, width: '60%', textAlign: 'right', fontWeight: 'normal' }]}>{errExamTakenAt}</Text>}
                         </View>
                         <DropDownMenu
                             disabled={examTakenAtArr.length <= 1}
                             options={examTakenAtArr && examTakenAtArr}
-                            // onSelect={(idx, value) => onDropDownSelect(idx, value, 'examTakenAt')}
-                            // defaultData={defaultSelected}
-                            // defaultIndex={examTakenAtIndex}
-                            // selectedData={examTakenAt}
+                            onSelect={(idx, value) => onDropDownSelect(idx, value, 'examTakenAt')}
+                            defaultData={defaultSelected}
+                            defaultIndex={examTakenAtIndex}
+                            selectedData={examTakenAt}
                             icon={examTakenAtArr.length == 1 ? null : require('../../assets/images/Arrow_Right.png')}
                         />
                     </View>}
                 <TextField
                     labelText={Strings.student_id}
-                    // errorField={stdErr != '' || isNaN(studentId)}
-                    // errorText={stdErr != '' ? stdErr : Strings.please_correct_student_id}
-                    // onChangeText={(text) => this.onDetailsChange(text.trim(), 'studentId')}
-                    // value={studentId}
-                    // editable={edit}
+                    errorField={stdErr != '' || isNaN(studentId)}
+                    errorText={stdErr != '' ? stdErr : Strings.please_correct_student_id}
+                    onChangeText={(text) => {
+                        setStudentID(text)
+                    }
+                    }
+                    value={studentId}
+                    editable={edit}
                     keyboardType={'numeric'}
                 />
-                <View style={styles.fieldContainerStyle}>
+                {/* <View style={styles.fieldContainerStyle}>
                     <View style={{ flexDirection: 'row' }}>
                         <Text style={[styles.labelTextStyle]}>{Strings.test_id}</Text>
                         {
@@ -120,17 +171,12 @@ const ScannedDetailsComponent = ({
                         selectedData={testId}
                         icon={testId.length == 1 ? null : require('../../assets/images/Arrow_Right.png')}
                     />
-                </View>
+                </View> */}
                 <TextField
                     labelText={Strings.test_date}
                     ref={inputRef}
-                    // errorField={testDateErr != ''}
-                    // errorText={testDateErr}
-                    // ref={this.inputRef}
-                    // // onChangeText={(text) => this.onDetailsChange(text.trim(), 'testDate')}
                     value={testDate}
                     editable={false}
-                // onEndEditing={() => this.props.getExamID(testDate)}
                 />
 
                 <View style={[styles.container3, { paddingBottom: '5%', }]}>
@@ -145,20 +191,22 @@ const ScannedDetailsComponent = ({
                         customBtnTextStyle={styles.nxtBtnTextStyle}
                         btnText={Strings.next_text.toUpperCase()}
                         onPress={onNextClick}
+                        disabled={!studentValid}
                     />
                 </View>
 
             </View>
         )
     }
-
     const onNextClick = () => {
-
-        if (inputRef.current.isFocused()) {
-            inputRef.current.blur();
+        if (examTakenAtIndex == -1) {
+            setErrExamTakenAt(Strings.please_select_exam_taken_at)
+        } else if (!studentValid) {
+            setStdErr(Strings.please_correct_student_id)
         }
-        // onNext()
-        setTabIndex(2)
+        else {
+            setTabIndex(2)
+        }
     }
 
     useEffect(() => {
@@ -171,17 +219,49 @@ const ScannedDetailsComponent = ({
                 return true
             }
         })
-        // console.log("DATA=================>", data);
-
         let len = data.length
-        console.log("PRevValue", preValue, nextValue, "length", len);
-        let newArray = data.slice(preValue, nextValue);
-        setNewArrayValue([...newArray])
-        if (newArray.length < 5 || len == nextValue) {
-            setNextExist(true)
+        setNewArrayValue(data)
+
+        ocrLocalResponse.layout.cells.filter((element) => {
+            if (element.format.name == "ROLLNUMBER" || element.format.name == "STUDENTID") {
+                setStudentID(element.consolidatePrediction)
+            }
+        })
+
+    }, [])
+
+    useEffect(() => {
+        let elements = neglectData;
+        let data = ocrLocalResponse.layout.cells.filter((element) => {
+            if (element.format.name == "ROLLNUMBER" || element.format.name == "STUDENTID") {
+                return false
+            }
+            else {
+                //for odisha one
+                if (element.format.name == elements[2]) {
+                    console.log("obtained marks",element.consolidatePrediction);
+                    setObtainedMarks(element.consolidatePrediction)
+
+                    if (element.format.name === elements[3]) {
+                        setMaxMarks(element.consolidatePrediction)
+                    }
+                } else {
+                    return true
+                }
+            }
+        })
+        console.log("data", data);
+        if (data.length > 0) {
+            let maximum = 0;
+            data.forEach(element => {
+                maximum = maximum + Number(element.consolidatePrediction)
+            });
+            console.log("MAX MArks", maximum);
+            setMaxMarks(maximum)
+
         }
 
-    }, [nextValue])
+    }, [])
 
     const renderTabSecond = () => {
         return (
@@ -196,7 +276,7 @@ const ScannedDetailsComponent = ({
                     </View>
                     <View style={styles.deatilsViewContainer}>
                         <View style={styles.detailsSubContainerStyle}>
-                            <Text style={[styles.nameTextStyle, { fontWeight: 'bold', color: AppTheme.BLACK, fontSize: AppTheme.FONT_SIZE_LARGE }]}>Ansari Arman</Text>
+                            <Text style={[styles.nameTextStyle, { fontWeight: 'bold', color: AppTheme.BLACK, fontSize: AppTheme.FONT_SIZE_LARGE }]}>Anil kumar</Text>
                             {/* <Text style={styles.nameTextStyle}>{Strings.student_id + ': ' + studentId}</Text>
                             <Text style={styles.nameTextStyle}>{Strings.test_id + ': ' + testId}</Text> */}
                             <Text style={styles.nameTextStyle}>{Strings.student_id + ': ' + "12345"}</Text>
@@ -221,10 +301,7 @@ const ScannedDetailsComponent = ({
                     }
                 </View>
                 {
-
-                    // ocrLocalResponse.layout.cells.slice(preValue, nextValue)
                     newArrayValue.map((element, index) => {
-                        // if (element.format.name == `QUESTION${element.render.index - 1}`) {
                         return (
                             <View style={{ flexDirection: 'row' }}>
 
@@ -232,7 +309,7 @@ const ScannedDetailsComponent = ({
                                     customRowStyle={{ width: '30%', }}
                                     key={`Questions${index}`}
                                     // icon={key == 'pass'}
-                                    rowTitle={element.format.name}
+                                    rowTitle={`${element.render.index - 1}`}
                                     rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                     // editable={key == 'earned' ? edit : false}
                                     keyboardType={'number-pad'}
@@ -244,7 +321,7 @@ const ScannedDetailsComponent = ({
                                     customRowStyle={{ width: '30%', }}
                                     key={`MaxMarks${index}`}
                                     // icon={key == 'pass'}
-                                    rowTitle={"10"}
+                                    rowTitle={element.format.value}
                                     rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                     // editable={key == 'earned' ? edit : false}
                                     keyboardType={'number-pad'}
@@ -272,6 +349,29 @@ const ScannedDetailsComponent = ({
                     })
                 }
 
+                <View style={{ flexDirection: 'row', }}>
+                    <Text style={[styles.studentDetailsTxtStyle, { paddingTop: '4%', paddingBottom: 0 }]}>{Strings.total_marks + ':'}</Text>
+                    <TextInput
+                        style={{ paddingTop: '4%', color: AppTheme.BLACK, paddingHorizontal: 0 }}
+                        onChangeText={setMaxMarks}
+                        value={maxMarks}
+                        maxLength={5}
+                        placeholder="Max Marks"
+                        keyboardType="numeric"
+                    />
+                </View>
+                <View style={{ flexDirection: 'row', }}>
+                    <Text style={[styles.studentDetailsTxtStyle, { paddingTop: 0 }]}>{Strings.total_marks_secured + ':'}</Text>
+                    <TextInput
+                        style={[styles.studentDetailsTxtStyle, { paddingTop: 0 }]}
+                        onChangeText={setObtainedMarks}
+                        value={obtainedMarks}
+                        maxLength={5}
+                        placeholder="Secured Marks"
+                        keyboardType="numeric"
+                    />
+                </View>
+
 
                 <View style={[styles.container3, { paddingTop: '7%' }]}>
                     <ButtonComponent
@@ -283,8 +383,8 @@ const ScannedDetailsComponent = ({
                     <ButtonComponent
                         customBtnStyle={styles.nxtBtnStyle}
                         customBtnTextStyle={styles.nxtBtnTextStyle}
-                        btnText={Strings.next_text.toUpperCase()}
-                        onPress={onNextButtonClick}
+                        btnText={Strings.submit_text.toUpperCase()}
+                        onPress={() => onNextButtonClick()}
                     />
                 </View>
 
@@ -293,30 +393,70 @@ const ScannedDetailsComponent = ({
     }
 
     const onNextButtonClick = () => {
-        if (isNextExist) {
-            ToastAndroid.show("no more data", ToastAndroid.SHORT);
-        } else {
-            setBtnName('Back')
-            setPreValue(nextValue)
-            setNextValue(nextValue + 5)
-        }
     }
 
     const onBackButtonClick = () => {
-        console.log("onBackButtonClick outside", preValue);
-        if (preValue == 0) {
-            console.log("onBackButtonClick", preValue);
-            // ToastAndroid.show("proceed further", ToastAndroid.SHORT)
-            setBtnName('Cancel')
-        } else {
-            setBtnName('back')
-            setNextExist(false)
-            setPreValue(preValue - 5)
-            setNextValue(nextValue - 5)
-        }
-        if (preValue == 5) {
-            setBtnName('cancel')
-        }
+        // const resetAction = StackActions.reset({
+        //     index: 0,
+        //     actions: [NavigationActions.navigate({ routeName: 'cameraActivity', params: { from_screen: 'myScan' } })],
+        // });
+        // navigation.dispatch(resetAction);
+    }
+
+    const onSummaryCancel = () => {
+        setSummary(false)
+    }
+
+    const onSubmitClick = async () => {
+
+        // let elements = neglectData;
+        // let data = ocrLocalResponse.layout.cells.filter((element) => {
+        //     if (element.format.name == elements[0] || element.format.name == elements[1] || element.format.name == elements[2] || element.format.name == elements[3]) {
+        //     }
+        //     else {
+        //         return true
+        //     }
+        // })
+
+        // let objects = []
+
+        // data.map((e) => {
+        //     let data = {
+        //         "questionId": e.format.name,
+        //         "obtainedMarks": e.consolidatePrediction
+        //     }
+        //     objects.push(data)
+        // })
+
+        // let Studentmarks = objects;
+
+        // let saveObj = {
+        //     "classId": filteredData.class,
+        //     "examDate": filteredData.examDate,
+        //     "subject": filteredData.subject,
+        //     "studentsMarkInfo": [
+        //         {
+        //             "section": filteredData.section,
+        //             "studentId": "33040000001",
+        //             "securedMarks": obtainedMarks,
+        //             "totalMarks": maxMarks,
+        //             "marksInfo": Studentmarks
+        //         }
+        //     ]
+        // }
+
+        // console.log("SAVEOBJ", saveObj, loginData.data.token);
+        // setIsLoading(true)
+        // let apiObj = new SaveScanData(saveObj, loginData.data.token);
+        // APITransport(apiObj)
+        // setIsLoading(false)
+
+        const resetAction = StackActions.reset({
+            index: 0,
+            actions: [NavigationActions.navigate({ routeName: 'myScan', params: { from_screen: 'cameraActivity' } })],
+        });
+        navigation.dispatch(resetAction);
+        // return true
     }
 
     return (
@@ -361,23 +501,25 @@ const ScannedDetailsComponent = ({
                         <View style={styles.imageViewContainer}>
                             <View style={styles.imageContainerStyle}>
                                 {/* <Text style={{ textAlign: 'center', fontSize: AppTheme.HEADER_FONT_SIZE_LARGE }}>{studentName.charAt(0)}</Text> */}
+                                <Text style={{ textAlign: 'center', fontSize: AppTheme.HEADER_FONT_SIZE_LARGE }}>A</Text>
                             </View>
                         </View>
                         <View style={styles.deatilsViewContainer}>
                             <View style={styles.detailsSubContainerStyle}>
                                 {/* <Text style={[styles.nameTextStyle, { fontWeight: 'bold', color: AppTheme.BLACK, fontSize: AppTheme.FONT_SIZE_LARGE }]}>{studentName}</Text> */}
-                                {/* <Text style={styles.nameTextStyle}>{Strings.student_id + ': ' + studentId}</Text>
-                                <Text style={styles.nameTextStyle}>{Strings.test_id + ': ' + testId}</Text> */}
+                                <Text style={[styles.nameTextStyle, { fontWeight: 'bold', color: AppTheme.BLACK, fontSize: AppTheme.FONT_SIZE_LARGE }]}>Anil kumar</Text>
+                                <Text style={styles.nameTextStyle}>{Strings.student_id + ': ' + 1}</Text>
+                                <Text style={styles.nameTextStyle}>{Strings.test_id + ': ' + 1}</Text>
                             </View>
                         </View>
                     </View>
                     <View style={{ flexDirection: 'row', paddingLeft: '5%' }}>
                         <Text style={[styles.studentDetailsTxtStyle, { paddingTop: '4%', paddingBottom: 0 }]}>{Strings.total_marks + ':'}</Text>
-                        {/* <Text style={[styles.studentDetailsTxtStyle, { paddingTop: '4%', color: AppTheme.BLACK, paddingHorizontal: 0 }]}>{totalMarks}</Text> */}
+                        <Text style={[styles.studentDetailsTxtStyle, { paddingTop: '4%', color: AppTheme.BLACK, paddingHorizontal: 0 }]}>150</Text>
                     </View>
                     <View style={{ flexDirection: 'row', paddingLeft: '5%' }}>
                         <Text style={[styles.studentDetailsTxtStyle, { paddingTop: 0 }]}>{Strings.total_marks_secured + ':'}</Text>
-                        {/* <Text style={[styles.studentDetailsTxtStyle, { paddingTop: 0, color: AppTheme.BLACK, paddingHorizontal: 0 }]}>{securedMarks}</Text> */}
+                        <Text style={[styles.studentDetailsTxtStyle, { paddingTop: 0, color: AppTheme.BLACK, paddingHorizontal: 0 }]}>100</Text>
                     </View>
 
                     <View style={[styles.container3, { paddingTop: '7%' }]}>
@@ -387,17 +529,18 @@ const ScannedDetailsComponent = ({
                             bgColor={AppTheme.TAB_BORDER}
                             // btnIcon={require('../../../assets/images/editIcon.png')}
                             btnText={Strings.edit_text.toUpperCase()}
-                        // onPress={() => onSummaryCancel()}
+                            onPress={() => onSummaryCancel()}
 
                         />
                         <ButtonComponent
                             customBtnStyle={styles.submitBtnStyle}
                             btnText={Strings.submit_text.toUpperCase()}
-                        // onPress={onSubmitClick}
+                            onPress={onSubmitClick}
                         />
                     </View>
                 </View>
             }
+            {isLoading && <Spinner animating={isLoading} />}
         </ScrollView>
     );
 }
@@ -405,16 +548,16 @@ const mapStateToProps = (state) => {
     return {
         ocrLocalResponse: state.ocrLocalResponse.response,
         loginData: state.loginData,
-        filteredData: state.filteredData,
+        filteredData: state.filteredData.response,
         scanTypeData: state.scanTypeData.response,
         roiData: state.roiData
     }
 }
 
-// const mapDispatchToProps = (dispatch) => {
-//     return bindActionCreators({
-//         OcrLocalResponseAction: OcrLocalResponseAction,
-//     }, dispatch)
-// }
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({
+        APITransport: APITransport,
+    }, dispatch)
+}
 
-export default (connect(mapStateToProps, null)(ScannedDetailsComponent));
+export default (connect(mapStateToProps, mapDispatchToProps)(ScannedDetailsComponent));

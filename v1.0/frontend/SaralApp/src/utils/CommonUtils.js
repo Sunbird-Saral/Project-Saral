@@ -36,7 +36,7 @@ export const SCAN_TYPES = {
 }
 
 export const TABLE_HEADER =[
-    "Sr No","Max Marks","Obtanied Marks"
+    "Sr No","Questions","Obtanied Marks"
 ]
 
 export const neglectData = ["ROLLNUMBER","STUDENTID","MARKS_OBTAINED","MAX_MARKS"];

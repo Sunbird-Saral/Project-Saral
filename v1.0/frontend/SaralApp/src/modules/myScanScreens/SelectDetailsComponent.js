@@ -18,10 +18,11 @@ import { OcrLocalResponseAction } from '../../flux/actions/apis/OcrLocalResponse
 import { GetStudentsAndExamData } from '../../flux/actions/apis/getStudentsAndExamData';
 import { FilteredDataAction } from '../../flux/actions/apis/filteredDataActions';
 import APITransport from '../../flux/actions/transport/apitransport';
-import { SCAN_TYPES, validateToken } from '../../utils/CommonUtils';
+import { cryptoText, SCAN_TYPES, validateToken } from '../../utils/CommonUtils';
 import { StackActions, NavigationActions } from 'react-navigation';
 import { ROIAction } from '../StudentsList/ROIAction';
 import { GetAbsentStudentData } from '../../flux/actions/apis/getAbsentStudentData';
+import { LoginAction } from '../../flux/actions/apis/LoginAction';
 
 
 const clearState = {
@@ -53,7 +54,7 @@ const clearState = {
     callApi: '',
     dateVisible: false,
     examDate: [],
-    calledAbsentStatus:false,
+    calledAbsentStatus: false,
     calledScanStaus: false,
     absentStatusPayload: null,
 }
@@ -94,7 +95,7 @@ class SelectDetailsComponent extends Component {
             dateVisible: false,
             scanType: SCAN_TYPES.PAT_TYPE,
             examDate: [],
-            calledAbsentStatus:false,
+            calledAbsentStatus: false,
             absentStatusPayload: null,
         }
         this.onBack = this.onBack.bind(this)
@@ -113,6 +114,8 @@ class SelectDetailsComponent extends Component {
                     scanType: scanTypeData.scanType
                 })
             }
+            // console.log("Helo");
+            // this.loginAgain()
 
             let loginDetails = await getLoginData()
             if (loginDetails) {
@@ -189,6 +192,7 @@ class SelectDetailsComponent extends Component {
                         this.setState({
                             dataPayload: payload
                         }, () => {
+                            console.log("LoginDetailexpire", loginDetails);
                             // let isTokenValid = validateToken(loginDetails.expiresOn)                                 
                             // if(isTokenValid) {
                             this.callStudentsData(loginDetails.token)
@@ -271,6 +275,7 @@ class SelectDetailsComponent extends Component {
                 subIndex: Number(index),
                 selectedSubject: value
             })
+            // this.validateAbsentStatusApi()
         }
     }
 
@@ -286,39 +291,42 @@ class SelectDetailsComponent extends Component {
     }
 
     validateAbsentStatusApi = () => {
-        const { selectedClassId, selectedExam, selectedSection } = this.state
-        const { loginDetails } = this.props
-        let schoolId = loginDetails.schoolInfo.schoolCode
+        const { selectedClassId, selectedExam, selectedSection, loginDetails } = this.state
+        // const { loginDetails } = this.props
+        let schoolId = loginDetails.school.schoolId
+        console.log("seelceted", selectedClassId, selectedSection);
         let payload = {
             schoolId: schoolId,
-            examCode: selectedExam,
+            // examCode: selectedExam,
             classId: selectedClassId,
             section: selectedSection == 'All' ? 0 : selectedSection,
         }
-        
+
         this.setState({
             absentStatusPayload: payload
         }, () => {
-            let isTokenValid = validateToken(loginDetails.expiresOn)
-            
-            if (isTokenValid) {
-                this.callAbsentStatus(payload, loginDetails.jwtToken)
-            }
-            else if (!isTokenValid) {
-                this.setState({
-                    callApi: 'callAbsentStatus'
-                })
-                this.loginAgain()
-            }
+            // let isTokenValid = validateToken(loginDetails.expiresOn)
+
+            // if (isTokenValid) {
+            this.callAbsentStatus(payload, loginDetails.jwtToken)
+            // }
+            // else if (!isTokenValid) {
+            //     this.setState({
+            //         callApi: 'callAbsentStatus'
+            //     })
+            //     this.loginAgain()
+            // }
         })
     }
 
-    loginAgain = async() => {
-        let loginCred = await getLoginCred()        
-        if(loginCred) {
+    loginAgain = async () => {
+        console.log("hello");
+        let loginCred = await getLoginCred()
+        if (loginCred) {
+            console.log("hellologincred", loginCred);
             this.setState({
                 isLoading: true,
-                username: loginCred.username,
+                username: loginCred.schoolId,
                 password: loginCred.password
             }, () => {
 
@@ -328,7 +336,7 @@ class SelectDetailsComponent extends Component {
         }
         else {
             Alert.alert(Strings.message_text, Strings.please_try_again, [
-                { 'text': Strings.ok_text, onPress: () => this.loginAgain()}
+                { 'text': Strings.ok_text, onPress: () => this.loginAgain() }
             ])
         }
     }
@@ -338,9 +346,16 @@ class SelectDetailsComponent extends Component {
             isLoading: true,
             calledLogin: true
         }, () => {
+            console.log("this", this.state.password, this.state.username);
             let encPass = cryptoText(this.state.password)
-            let apiObj = new LoginAction(this.state.username, encPass);
+            let loginObj = {
+                "schoolId": this.state.username,
+                "password": this.state.password
+            }
+            console.log("LoGiNOBJ", loginObj);
+            let apiObj = new LoginAction(loginObj);
             this.props.APITransport(apiObj);
+
         })
     }
 
@@ -349,6 +364,7 @@ class SelectDetailsComponent extends Component {
             isLoading: true,
             calledAbsentStatus: true
         }, () => {
+            console.log("callAbsentStatus", payload);
             let apiObj = new GetAbsentStudentData(payload, token);
             this.props.APITransport(apiObj)
         })
@@ -364,12 +380,12 @@ class SelectDetailsComponent extends Component {
             section: selectedSection == 'All' ? 0 : selectedSection,
             examCode: selectedExam
         }
-        
+
         this.setState({
             scanStatusPayload: payload
         }, () => {
             let isTokenValid = validateToken(loginDetails.expiresOn)
-            
+
             if (isTokenValid) {
                 this.callScanStatus(payload, loginDetails.jwtToken)
             }
@@ -397,12 +413,12 @@ class SelectDetailsComponent extends Component {
             loginData: data
         })
     }
-    
+
 
     async componentDidUpdate(prevProps) {
         if (prevProps != this.props) {
-            const { apiStatus, studentsAndExamData, absentStudentDataResponse, getScanStatusData , loginData } = this.props
-            const { calledStudentsData,calledAbsentStatus, selectedClass, selectedSection, selectedClassId,calledScanStaus , calledLogin , callApi , absentStatusPayload } = this.state
+            const { apiStatus, studentsAndExamData, absentStudentDataResponse, getScanStatusData, loginData } = this.props
+            const { calledStudentsData, calledAbsentStatus, selectedClass, selectedSection, selectedClassId, calledScanStaus, calledLogin, callApi, absentStatusPayload } = this.state
             if (apiStatus && prevProps.apiStatus != apiStatus && apiStatus.error) {
                 if (calledStudentsData) {
                     this.loader(false)
@@ -464,7 +480,7 @@ class SelectDetailsComponent extends Component {
                                     let testID = []
                                     let examDates = []
                                     _.filter(studentsAndExamData.data.exams, function (o) {
-                                        subArr.push(o.subject)
+                                        subArr.push(o.subject + " " + o.examDate)
                                         testID.push(o.examId)
                                         examDates.push(o.examDate)
                                     })
@@ -503,39 +519,41 @@ class SelectDetailsComponent extends Component {
                     })
                 }
             }
-
-            if(calledLogin) {                
+            if (calledLogin) {
                 if (loginData && prevProps.loginData != loginData) {
                     this.setState({
                         isLoading: false,
                         calledLogin: false
-                    }, async() => {
-                        if(loginData.status && loginData.status == 200) {
-                                let loginSaved = await setLoginData(loginData.data)
-                                setLoginDataLocally(loginData.data)                                
-                                if(loginSaved) {
-                                    if (callApi == 'callScanStatus') {
-                                        this.callScanStatus(scanStatusPayload, loginData.data.jwtToken)
-                                    }
-                                    else if (callApi == 'callStudentsData') {
-                                        this.callStudentsData(loginData.data.jwtToken)
-                                    } else if(callApi == 'callAbsentStatus') {
-                                        this.callAbsentStatus(absentStatusPayload, loginData.data.jwtToken)
-                                    }
+                    }, async () => {
+                        if (loginData.status && loginData.status == 200) {
+                            let loginSaved = await setLoginData(loginData.data)
+                            this.setLoginDataLocally(loginData.data)
+                            console.log("callApi", callApi);
+                            if (loginSaved) {
+                                if (callApi == 'callScanStatus') {
+                                    this.callScanStatus(scanStatusPayload, loginData.data.jwtToken)
                                 }
-                                else {
-                                    Alert.alert(Strings.message_text, Strings.process_failed_try_again, [
-                                        { 'text': Strings.cancel_text, style: Strings.cancel_text, onPress: () => loader(false) },
-                                        { 'text': Strings.retry_text, onPress: () => this.callLogin() }
-                        
-                                    ])
+                                else if (callApi == 'callStudentsData') {
+                                    this.callStudentsData(loginData.data.jwtToken)
+                                } else if (callApi == 'callAbsentStatus') {
+                                    console.log("helloLogin");
+
+                                    this.callAbsentStatus(absentStatusPayload, loginData.data.jwtToken)
                                 }
+                            }
+                            else {
+                                Alert.alert(Strings.message_text, Strings.process_failed_try_again, [
+                                    { 'text': Strings.cancel_text, style: Strings.cancel_text, onPress: () => loader(false) },
+                                    { 'text': Strings.retry_text, onPress: () => this.callLogin() }
+
+                                ])
+                            }
                         }
                         else {
                             Alert.alert(Strings.message_text, Strings.process_failed_try_again, [
                                 { 'text': Strings.cancel_text, style: Strings.cancel_text, onPress: () => loader(false) },
                                 { 'text': Strings.retry_text, onPress: () => this.callLogin() }
-                
+
                             ])
                         }
                     })
@@ -557,7 +575,7 @@ class SelectDetailsComponent extends Component {
                                 text: Strings.ok_text, onPress: () => {
                                     this.validateScanStatusApi()
                                 }
-                            }])    
+                            }])
                         })
                     }
                 }
@@ -577,7 +595,7 @@ class SelectDetailsComponent extends Component {
                                 text: Strings.ok_text, onPress: () => {
                                     this.validateAbsentStatusApi()
                                 }
-                            }])    
+                            }])
                         })
                     }
                 }
@@ -642,13 +660,13 @@ class SelectDetailsComponent extends Component {
 
     onSubmitClick = () => {
         const { selectedClass, selectedClassId, selectedDate, selectedSection, selectedSubject, examTestID, subIndex, examDate } = this.state
-        const { loginData , apiStatus,scanTypeData } = this.props
+        const { loginData, apiStatus, scanTypeData } = this.props
         this.setState({
             errClass: '',
             errSub: '',
             errSection: '',
             errSub: '',
-            isLoading:true
+            isLoading: true
         }, () => {
             let valid = this.validateFields()
             if (valid) {
@@ -665,8 +683,8 @@ class SelectDetailsComponent extends Component {
                     "examId": examTestID[subIndex],
                     "type": scanTypeData.scanType
                 }
-                this.callROIData(payload,loginData.data.token)
-            }else{
+                this.callROIData(payload, loginData.data.token)
+            } else {
                 this.setState({
                     isLoading: false
                 })
@@ -674,15 +692,15 @@ class SelectDetailsComponent extends Component {
         })
     }
 
-    callROIData = ( dataPayload , token  ) => {
+    callROIData = (dataPayload, token) => {
         const { apiStatus } = this.props;
-        console.log("apiStatus",apiStatus);
-        let apiObj = new ROIAction(dataPayload,token);            
+        console.log("apiStatus", apiStatus);
+        let apiObj = new ROIAction(dataPayload, token);
         this.props.APITransport(apiObj)
-            this.setState({
-               isLoading:false
-            })
-            console.log("ApiStatusAfterCalling",apiStatus);
+        this.setState({
+            isLoading: false
+        })
+        console.log("ApiStatusAfterCalling", apiStatus);
         this.props.navigation.navigate('StudentsList')
     }
 
@@ -730,7 +748,7 @@ class SelectDetailsComponent extends Component {
                     onLogoutClick={this.onLogoutClick}
                 /> */}
                 {(loginData && loginData.data) &&
-                    <View style={{marginTop:20}}>
+                    <View style={{ marginTop: 20 }}>
                         <Text
                             style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}
                         >

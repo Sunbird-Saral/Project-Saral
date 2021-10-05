@@ -154,43 +154,47 @@ const StudentsList = ({
                 return true
             }
         })
-        setTotalStudent(filterStudentsData[0].data ? filterStudentsData[0].data.studentsInfo : []);
-        let examId = ''
+        setTotalStudent(filterStudentsData[0].data ? filterStudentsData[0].data.students : []);
+        // let examId = ''
 
-        _.forEach(filterStudentsData[0].data.examInfo, (o) => {
-            if (o.examCode == filteredData.response.examCode) {
-                examId = o.examId
-            }
-        })
+        // _.forEach(filterStudentsData[0].data.examInfo, (o) => {
+        //     if (o.examCode == filteredData.response.examCode) {
+        //         examId = o.examId
+        //     }
+        // })
 
-        let examCode = filteredData.response.examCode
+        // let examCode = filteredData.response.examCode
 
-        setExamDatabj({
-            examCode,
-            examId: examId
-        })
-        let studentsList = JSON.parse(JSON.stringify(filterStudentsData[0].data.studentsInfo))
-        let absentStudentlist = absentStudentDataResponse && absentStudentDataResponse.data.length > 0 ? JSON.parse(absentStudentDataResponse.data[0])[0].AbsentStudents : [];
-        studentsList.forEach((element) => {
-            element.isAbsent = false
-            absentStudentlist.forEach(o => {
-                if (o.AadhaarUID == element.aadhaarUID) {
-                    element.isAbsent = true;
-                }
-            })
-        });
+        // setExamDatabj({
+        //     examCode,
+        //     examId: examId
+        // })
 
-        setFetchedAbsentList(absentStudentlist)
-        setAllStudentData(studentsList)
+        // let studentsList = JSON.parse(JSON.stringify(filterStudentsData[0].data.students))
+        // console.log("studentsList", studentsList);
+        // let absentStudentlist = absentStudentDataResponse && absentStudentDataResponse.data.length > 0 ? JSON.parse(absentStudentDataResponse.data[0])[0].AbsentStudents : [];
+        // console.log("absentStudentlist", absentStudentlist);
+        // studentsList.forEach((element) => {
+        //     element.isAbsent = false
+        //     absentStudentlist.forEach(o => {
+        //         if (o.AadhaarUID == element.aadhaarUID) {
+        //             element.isAbsent = true;
+        //         }
+        //     })
+        // });
+
+        // setFetchedAbsentList(absentStudentlist)
+        setAllStudentData(filterStudentsData[0].data.students)
         setIsLoading(false)
-
+        // console.log("setFetchedAbsentList", absentStudentlist);
+        // console.log("setFetchedAbsentList", studentsList);
     }
 
     const onMarkPresentAbsent = (data) => {
         let createdTime = new Date()
         let obj = {
-            examId: examDataObj.examId,
-            examCode: examDataObj.examCode,
+            // examId: examDataObj.examId,
+            // examCode: examDataObj.examCode,
             schoolId: data.schoolId,
             aadhaarUID: data.aadhaarUID,
             studyingClass: data.studyingClass,
@@ -257,22 +261,22 @@ const StudentsList = ({
         APITransport(apiObj);
     }
 
-    const navigateToNext = (token) => {
-        if (absentStudentsData.length > 0) {
-            let isTokenValid = validateToken(token)
-            if (isTokenValid) {
-                let absentList = _.filter(allStudentData, (o) => o.isAbsent);
-                saveAbsentDetails(token);
-                setAbsentStudentDataIntoAsync(absentList);
-            }
-            else if (!isTokenValid) {
-                loginAgain()
-            }
-        } else {
-            let absentList = _.filter(allStudentData, (o) => o.isAbsent);
-            setAbsentStudentDataIntoAsync(absentList);
-            navigation.navigate('scanHistory');
-        }
+    const navigateToNext = () => {
+        // if (absentStudentsData.length > 0) {
+        //     let isTokenValid = validateToken(token)
+        //     if (isTokenValid) {
+        //         let absentList = _.filter(allStudentData, (o) => o.isAbsent);
+        //         saveAbsentDetails(token);
+        //         setAbsentStudentDataIntoAsync(absentList);
+        //     }
+        //     else if (!isTokenValid) {
+        //         loginAgain()
+        //     }
+        // } else {
+        //     let absentList = _.filter(allStudentData, (o) => o.isAbsent);
+        //     setAbsentStudentDataIntoAsync(absentList);
+            navigation.navigate('ScanHistory');
+        // }
     }
 
     const loginAgain = async () => {
@@ -366,7 +370,8 @@ const StudentsList = ({
                 customBtnStyle={styles.nxtBtnStyle}
                 btnText={Strings.next_text.toUpperCase()}
                 activeOpacity={0.8}
-                onPress={() => navigateToNext(loginData.data.jwtToken)}
+                // onPress={() => navigateToNext(loginData.data.jwtToken)}
+                onPress={navigateToNext}
             />
 
             {
