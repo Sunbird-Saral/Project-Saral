@@ -66,7 +66,7 @@ const StudentsList = ({
     useEffect(() => {
         studentData()
         getRoi()
-        callScanStatusData()
+        // callScanStatusData()
     }, []);
 
     useEffect(() => {
@@ -106,7 +106,7 @@ const StudentsList = ({
             "classId": filteredData.class,
             "subject": filteredData.subject,
             "fromDate": filteredData.examDate,
-            "page": 1,
+            "page": 3,
             "downloadRes": true
         }
         let apiObj = new scanStatusDataAction(dataPayload);
@@ -186,6 +186,7 @@ const StudentsList = ({
         // setFetchedAbsentList(absentStudentlist)
         setAllStudentData(filterStudentsData[0].data.students)
         setIsLoading(false)
+        callScanStatusData()
         // console.log("setFetchedAbsentList", absentStudentlist);
         // console.log("setFetchedAbsentList", studentsList);
     }

@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Text, View, ScrollView, ToastAndroid } from 'react-native';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import AppTheme from '../../utils/AppTheme';
 import { neglectData, SCAN_TYPES, TABLE_HEADER } from '../../utils/CommonUtils';
 import Strings from '../../utils/Strings';
-import ButtonComponent from '../common/components/ButtonComponent';
-import DropDownMenu from '../common/components/DropDownComponent';
-import TextField from '../common/components/TextField';
+
 
 //styles
 import { styles } from './ScannedDetailsStyle'
@@ -14,15 +12,22 @@ import TabHeader from './TabHeader';
 
 //rois
 import MarksHeaderTable from './MarksHeaderTable';
+
+//components
 import ButtonWithIcon from '../common/components/ButtonWithIcon';
+import ButtonComponent from '../common/components/ButtonComponent';
+import DropDownMenu from '../common/components/DropDownComponent';
+import TextField from '../common/components/TextField';
 import { getScanData, getStudentsExamData, setScanData } from '../../utils/StorageUtils';
 import { NavigationActions, StackActions } from 'react-navigation';
 import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
 import Spinner from '../common/components/loadingIndicator';
 
-import APITransport from '../../flux/actions/transport/apitransport'
+import APITransport from '../../flux/actions/transport/apitransport';
+
 import { bindActionCreators } from 'redux';
-import { TextInput } from 'react-native-gesture-handler';
+import axios from 'axios';
+
 
 const ScannedDetailsComponent = ({
     loginData,
@@ -31,6 +36,7 @@ const ScannedDetailsComponent = ({
     scanTypeData,
     ocrLocalResponse
 }) => {
+
 
     //Hookes
     const [tabIndex, setTabIndex] = useState(1)
@@ -60,6 +66,7 @@ const ScannedDetailsComponent = ({
     const [stdErr, setStdErr] = useState("");
     const [edit, setEditValue] = useState(true)
     const [studentValid, setStudentValid] = useState()
+    const [studentData, setStudentDATA] = useState()
 
 
     const inputRef = React.createRef();
@@ -106,6 +113,7 @@ const ScannedDetailsComponent = ({
         if (a.length > 0) {
             setStudentValid(true)
             setStdErr('')
+            setStudentDATA(a)
         } else {
             setStdErr(Strings.please_correct_student_id)
         }
@@ -224,7 +232,7 @@ const ScannedDetailsComponent = ({
 
         ocrLocalResponse.layout.cells.filter((element) => {
             if (element.format.name == "ROLLNUMBER" || element.format.name == "STUDENTID") {
-                setStudentID(element.consolidatePrediction)
+                setStudentID(element.consolidatedPrediction)
             }
         })
 
@@ -236,30 +244,27 @@ const ScannedDetailsComponent = ({
             if (element.format.name == "ROLLNUMBER" || element.format.name == "STUDENTID") {
                 return false
             }
-            else {
-                //for odisha one
-                if (element.format.name == elements[2]) {
-                    console.log("obtained marks",element.consolidatePrediction);
-                    setObtainedMarks(element.consolidatePrediction)
+            else if (element.format.name == elements[2] || element.format.name == elements[3]) {
+                return true
 
-                    if (element.format.name === elements[3]) {
-                        setMaxMarks(element.consolidatePrediction)
-                    }
-                } else {
-                    return true
-                }
+            } else {
+                return true
             }
         })
         console.log("data", data);
-        if (data.length > 0) {
-            let maximum = 0;
-            data.forEach(element => {
-                maximum = maximum + Number(element.consolidatePrediction)
-            });
-            console.log("MAX MArks", maximum);
-            setMaxMarks(maximum)
 
-        }
+        data.filter((e) => {
+            var maximum = 0;
+            if (e.format.name == elements[2]) {
+                setObtainedMarks(e.consolidatedPrediction)
+            } else if (e.format.name == elements[3]) {
+                setMaxMarks(e.consolidatedPrediction)
+            }
+            // else {
+            //     maximum = maximum + Number(e.consolidatedPrediction)
+            //     return maximum
+            // }
+        })
 
     }, [])
 
@@ -270,17 +275,17 @@ const ScannedDetailsComponent = ({
                 <View style={styles.studentContainer}>
                     <View style={styles.imageViewContainer}>
                         <View style={styles.imageContainerStyle}>
-                            {/* <Text style={{ textAlign: 'center', fontSize: AppTheme.HEADER_FONT_SIZE_LARGE }}>{studentName.charAt(0)}</Text> */}
-                            <Text style={{ textAlign: 'center', fontSize: AppTheme.HEADER_FONT_SIZE_LARGE }}>A</Text>
+                            <Text style={{ textAlign: 'center', fontSize: AppTheme.HEADER_FONT_SIZE_LARGE }}>{studentData[0].name.charAt(0)}</Text>
+                            {/* <Text style={{ textAlign: 'center', fontSize: AppTheme.HEADER_FONT_SIZE_LARGE }}>A</Text> */}
                         </View>
                     </View>
                     <View style={styles.deatilsViewContainer}>
                         <View style={styles.detailsSubContainerStyle}>
-                            <Text style={[styles.nameTextStyle, { fontWeight: 'bold', color: AppTheme.BLACK, fontSize: AppTheme.FONT_SIZE_LARGE }]}>Anil kumar</Text>
-                            {/* <Text style={styles.nameTextStyle}>{Strings.student_id + ': ' + studentId}</Text>
-                            <Text style={styles.nameTextStyle}>{Strings.test_id + ': ' + testId}</Text> */}
-                            <Text style={styles.nameTextStyle}>{Strings.student_id + ': ' + "12345"}</Text>
-                            <Text style={styles.nameTextStyle}>{Strings.test_id + ': ' + '123456852'}</Text>
+                            <Text style={[styles.nameTextStyle, { fontWeight: 'bold', color: AppTheme.BLACK, fontSize: AppTheme.FONT_SIZE_LARGE }]}>{studentData[0].name}</Text>
+                            <Text style={styles.nameTextStyle}>{Strings.student_id + ': ' + studentId}</Text>
+                            {/* <Text style={styles.nameTextStyle}>{Strings.test_id + ': ' + testId}</Text> */}
+                            {/* <Text style={styles.nameTextStyle}>{Strings.student_id + ': ' + "12345"}</Text> */}
+                            <Text style={styles.nameTextStyle}>{Strings.test_id + ': ' + filteredData.examTestID}</Text>
                         </View>
                     </View>
                 </View>
@@ -333,7 +338,7 @@ const ScannedDetailsComponent = ({
                                     customRowStyle={{ width: '30%', }}
                                     key={`ObtainedMarks${index}`}
                                     // icon={key == 'pass'}
-                                    rowTitle={element.consolidatePrediction}
+                                    rowTitle={element.consolidatedPrediction}
                                     rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                     // editable={key == 'earned' ? edit : false}
                                     keyboardType={'number-pad'}
@@ -351,23 +356,23 @@ const ScannedDetailsComponent = ({
 
                 <View style={{ flexDirection: 'row', }}>
                     <Text style={[styles.studentDetailsTxtStyle, { paddingTop: '4%', paddingBottom: 0 }]}>{Strings.total_marks + ':'}</Text>
-                    <TextInput
-                        style={{ paddingTop: '4%', color: AppTheme.BLACK, paddingHorizontal: 0 }}
+                    <TextField
+                        customInputStyle={{ paddingTop: '-4%', color: AppTheme.GREY_TITLE, fontWeight: 'bold', paddingHorizontal: 0, width: 100, paddingLeft: 5 }}
                         onChangeText={setMaxMarks}
                         value={maxMarks}
                         maxLength={5}
-                        placeholder="Max Marks"
+                        // placeholder="Max Marks"
                         keyboardType="numeric"
                     />
                 </View>
                 <View style={{ flexDirection: 'row', }}>
                     <Text style={[styles.studentDetailsTxtStyle, { paddingTop: 0 }]}>{Strings.total_marks_secured + ':'}</Text>
-                    <TextInput
-                        style={[styles.studentDetailsTxtStyle, { paddingTop: 0 }]}
+                    <TextField
+                        customInputStyle={{ paddingTop: '-8%', color: AppTheme.GREY_TITLE, fontWeight: 'bold', paddingHorizontal: 0, width: 100, paddingLeft: 5 }}
                         onChangeText={setObtainedMarks}
                         value={obtainedMarks}
                         maxLength={5}
-                        placeholder="Secured Marks"
+                        // placeholder="Secured Marks"
                         keyboardType="numeric"
                     />
                 </View>
@@ -384,7 +389,7 @@ const ScannedDetailsComponent = ({
                         customBtnStyle={styles.nxtBtnStyle}
                         customBtnTextStyle={styles.nxtBtnTextStyle}
                         btnText={Strings.submit_text.toUpperCase()}
-                        onPress={() => onNextButtonClick()}
+                        onPress={() => onSubmitClick()}
                     />
                 </View>
 
@@ -396,6 +401,7 @@ const ScannedDetailsComponent = ({
     }
 
     const onBackButtonClick = () => {
+        onTabClick(1)
         // const resetAction = StackActions.reset({
         //     index: 0,
         //     actions: [NavigationActions.navigate({ routeName: 'cameraActivity', params: { from_screen: 'myScan' } })],
@@ -407,56 +413,87 @@ const ScannedDetailsComponent = ({
         setSummary(false)
     }
 
+    const dispatch = useDispatch()
+
     const onSubmitClick = async () => {
+        let elements = neglectData;
+        let data = ocrLocalResponse.layout.cells.filter((element) => {
+            if (element.format.name == elements[0] || element.format.name == elements[1] || element.format.name == elements[2] || element.format.name == elements[3]) {
+            }
+            else {
+                return true
+            }
+        })
 
-        // let elements = neglectData;
-        // let data = ocrLocalResponse.layout.cells.filter((element) => {
-        //     if (element.format.name == elements[0] || element.format.name == elements[1] || element.format.name == elements[2] || element.format.name == elements[3]) {
-        //     }
-        //     else {
-        //         return true
-        //     }
-        // })
+        let objects = []
 
-        // let objects = []
+        data.map((e) => {
+            let data = {
+                "questionId": e.format.name,
+                "obtainedMarks": e.consolidatedPrediction
+            }
+            objects.push(data)
+        })
 
-        // data.map((e) => {
-        //     let data = {
-        //         "questionId": e.format.name,
-        //         "obtainedMarks": e.consolidatePrediction
-        //     }
-        //     objects.push(data)
-        // })
+        let Studentmarks = objects;
 
-        // let Studentmarks = objects;
+        let saveObj = {
+            "classId": filteredData.class,
+            "examDate": filteredData.examDate,
+            "subject": filteredData.subject,
+            "studentsMarkInfo": [
+                {
+                    "section": filteredData.section,
+                    "studentId": studentId,
+                    "securedMarks": obtainedMarks,
+                    "totalMarks": maxMarks,
+                    "marksInfo": Studentmarks
+                }
+            ]
+        }
 
-        // let saveObj = {
-        //     "classId": filteredData.class,
-        //     "examDate": filteredData.examDate,
-        //     "subject": filteredData.subject,
-        //     "studentsMarkInfo": [
-        //         {
-        //             "section": filteredData.section,
-        //             "studentId": "33040000001",
-        //             "securedMarks": obtainedMarks,
-        //             "totalMarks": maxMarks,
-        //             "marksInfo": Studentmarks
-        //         }
-        //     ]
-        // }
+        setIsLoading(true)
+        let apiObj = new SaveScanData(saveObj, loginData.data.token);
+        dispatch(APITransport(apiObj))
+        setIsLoading(false)
 
-        // console.log("SAVEOBJ", saveObj, loginData.data.token);
-        // setIsLoading(true)
-        // let apiObj = new SaveScanData(saveObj, loginData.data.token);
-        // APITransport(apiObj)
-        // setIsLoading(false)
-
-        const resetAction = StackActions.reset({
-            index: 0,
-            actions: [NavigationActions.navigate({ routeName: 'myScan', params: { from_screen: 'cameraActivity' } })],
-        });
-        navigation.dispatch(resetAction);
+        // const resetAction = StackActions.reset({
+        //     index: 0,
+        //     actions: [NavigationActions.navigate({ routeName: 'myScan', params: { from_screen: 'cameraActivity' } })],
+        // });
+        // navigation.dispatch(resetAction);
         // return true
+    }
+
+    const FetchSavedScannedData = (api) => {
+        if (api.method === 'POST') {
+            let apiResponse = null
+            const source = axios.CancelToken.source()
+            const id = setTimeout(() => {
+                if (apiResponse === null) {
+                    source.cancel('The request timed out.');
+                }
+            }, 60000);
+            axios.post(api.apiEndPoint(), api.getBody())
+                .then(function (res) {
+                    console.log("RES", res);
+                    apiResponse = res
+                    clearTimeout(id)
+                    api.processResponse(res)
+                    dispatch(dispatchAPIAsync(api));
+                })
+                .catch(function (err) {
+                    console.log("Err", err.response);
+                    clearTimeout(id)
+                });
+        }
+    }
+
+    function dispatchAPIAsync(api) {
+        return {
+            type: api.type,
+            payload: api.getPayload()
+        }
     }
 
     return (
@@ -560,4 +597,4 @@ const mapDispatchToProps = (dispatch) => {
     }, dispatch)
 }
 
-export default (connect(mapStateToProps, mapDispatchToProps)(ScannedDetailsComponent));
+export default connect(mapStateToProps, mapDispatchToProps)(ScannedDetailsComponent);

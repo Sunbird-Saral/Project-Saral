@@ -14,11 +14,7 @@ import StudentsList from "../modules/StudentsList/StudentsList";
 import ScanHistory from "../modules/ScanHistory/ScanHistory";
 import ScanStatus from "../modules/ScanStatus/ScanStatus";
 import DashboardComponent from '../modules/myScanScreens/DashboardComponent'
-<<<<<<< HEAD
 import ScannedDetailsComponent from "../modules/ScannedDetails/ScannedDetailsComponent";
-=======
-import ScannedDetailsComponent from "../modules/myScanScreens/ScannedDetailsComponent";
->>>>>>> v1-develop
 
 
 const AuthStack = createStackNavigator({

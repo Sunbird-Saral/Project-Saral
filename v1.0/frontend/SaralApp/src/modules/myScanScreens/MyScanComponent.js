@@ -17,6 +17,7 @@ import ScanHistoryCard from '../ScanHistory/ScanHistoryCard';
 import SaralSDK from '../../../SaralSDK'
 import SaralSpecData from '../../../latest_sat_odisha_generated_roi.json'
 // import SaralSpecData from '../../../latest_sat_up_generated_roi.json'
+// import SaralSpecData from '../../../sat_gujrat_generated_roi_newly.json'
 
 class MyScanComponent extends Component {
     constructor(props) {
@@ -32,7 +33,7 @@ class MyScanComponent extends Component {
     }
 
     componentDidMount() {
-        const { navigation } = this.props
+        const { navigation,scanedData } = this.props
         const { params } = navigation.state
         navigation.addListener('willFocus', payload => {
             BackHandler.addEventListener('hardwareBackPress', this.onBack)
@@ -180,18 +181,12 @@ class MyScanComponent extends Component {
             marks = marks + cells[i].rois[j].result.prediction
             
             }
-            roisData.layout.cells[i].consolidatePrediction = marks
+            roisData.layout.cells[i].consolidatedPrediction = marks
             
             }
-<<<<<<< HEAD
-            console.log("JSON",JSON.stringify(roisData));
-            this.props.OcrLocalResponseAction(roisData)
-            this.props.navigation.navigate('ScannedDetailsComponent');
-=======
             // console.log("JSON",JSON.stringify(roisData));
-            this.props.OcrLocalResponseAction(JSON.stringify(roisData))
+            this.props.OcrLocalResponseAction(JSON.parse(JSON.stringify(roisData)))
             this.props.navigation.navigate('ScannedDetailsComponent', { oldBrightness: this.state.oldBrightness })
->>>>>>> v1-develop
       }
 
     render() {
@@ -366,7 +361,8 @@ const mapStateToProps = (state) => {
         ocrLocalResponse: state.ocrLocalResponse,
         loginData: state.loginData,
         filteredData: state.filteredData,
-        scanTypeData: state.scanTypeData.response
+        scanTypeData: state.scanTypeData.response,
+        scanedData: state.scanedData
     }
 }
 

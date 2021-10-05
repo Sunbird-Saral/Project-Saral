@@ -20,6 +20,7 @@ import { SCAN_TYPES } from '../../utils/CommonUtils';
 import DataCard from './DataCard';
 import TextField from '../common/components/TextField';
 import { callScanStatusDataConst } from '../callScanStatusDataConst';
+import { scanStatusDataAction } from '../ScanStatus/scanStatusDataAction';
 
 class ScanDetailsComponent extends Component {
     constructor(props) {
@@ -314,8 +315,7 @@ class ScanDetailsComponent extends Component {
             calledSavedData: true,
             isLoading: true
         }, () => {
-            console.log("SaveScanData",saveObj);
-            let apiObj = new SaveScanData(saveObj, loginData.data.token);
+            let apiObj = new scanStatusDataAction(saveObj, loginData.data.token);
             this.props.APITransport(apiObj)
         })
     }
