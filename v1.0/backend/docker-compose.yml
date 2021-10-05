@@ -30,9 +30,9 @@ services:
       # MONGO_INITDB_ROOT_PASSWORD: admin
       # MONGO_INITDB_DATABASE: saralv1dev
     ports:
-      - "0.0.0.0:27019:27017"
+      - "0.0.0.0:27017:27017"
     volumes:
-      - /usr/local/mongodb/data/saralv1db:/data/db
+      - /usr/local/mongodb/data/db:/data/db
 
 networks:
   saralbackend-network:

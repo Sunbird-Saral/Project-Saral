@@ -4,7 +4,7 @@
         "name": "UP SAT Exam Sheet Form",
         "type": "SAT_50_MARKSHEET",
         "tolerance": {
-            "predictionMin": 0.95,
+            "predictionThreshold": 0.95,
             "roiMinWidth": 15,
             "roiMinHeight": 15,
             "page": {

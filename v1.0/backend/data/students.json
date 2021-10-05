@@ -7,18 +7,18 @@
   ],
   "section": "D",
   "name": "Apurva",
-  "studentId": "12040000001",
+  "studentId": "121",
   "schoolId": "1"
 },{
   "studentClass": [
     {
-      "classId": "3",
-      "className": "Class-3"
+      "classId": "2",
+      "className": "Class-2"
     }
   ],
   "section": "D",
   "name": "Arman",
-  "studentId": "13040000001",
+  "studentId": "122",
   "schoolId": "1"
 },{
   "studentClass": [
@@ -28,8 +28,8 @@
     }
   ],
   "section": "D",
-  "name": "testStudent4",
-  "studentId": "14040000001",
+  "name": "Jaya",
+  "studentId": "123",
   "schoolId": "1"
 },{
   "studentClass": [
@@ -39,30 +39,30 @@
     }
   ],
   "section": "D",
-  "name": "testStudent5",
-  "studentId": "14040000002",
+  "name": "Deepti",
+  "studentId": "124",
   "schoolId": "1"
 },{
   "studentClass": [
     {
-      "classId": "6",
-      "className": "Class-6"
+      "classId": "2",
+      "className": "Class-2"
     }
   ],
   "section": "D",
-  "name": "testStudent6",
-  "studentId": "16040000001",
+  "name": "Rajesh",
+  "studentId": "181",
   "schoolId": "1"
 },{
   "studentClass": [
     {
-      "classId": "7",
-      "className": "Class-7"
+      "classId": "2",
+      "className": "Class-2"
     }
   ],
   "section": "D",
-  "name": "testStudent7",
-  "studentId": "17040000001",
+  "name": "Raju",
+  "studentId": "182",
   "schoolId": "1"
 },{
   "studentClass": [
@@ -72,7 +72,76 @@
     }
   ],
   "section": "D",
-  "name": "testStudent8",
-  "studentId": "18040000001",
+  "name": "Prajesh",
+  "studentId": "183",
   "schoolId": "1"
-}]
+},
+{
+  "studentClass": [
+    {
+      "classId": "2",
+      "className": "Class-2"
+    }
+  ],
+  "section": "D",
+  "name": "Ajay",
+  "studentId": "2204000000000001",
+  "schoolId": "2"
+},{
+  "studentClass": [
+    {
+      "classId": "2",
+      "className": "Class-2"
+    }
+  ],
+  "section": "C",
+  "name": "Abhay",
+  "studentId": "2203000000000001",
+  "schoolId": "2"
+},
+{
+  "studentClass": [
+    {
+      "classId": "3",
+      "className": "Class-3"
+    }
+  ],
+  "section": "D",
+  "name": "Aarti bhatt",
+  "studentId": "3304001",
+  "schoolId": "3"
+},{
+  "studentClass": [
+    {
+      "classId": "3",
+      "className": "Class-3"
+    }
+  ],
+  "section": "B",
+  "name": "Smriti",
+  "studentId": "3302001",
+  "schoolId": "3"
+},{
+  "studentClass": [
+    {
+      "classId": "3",
+      "className": "Class-3"
+    }
+  ],
+  "section": "B",
+  "name": "shristi",
+  "studentId": "3302002",
+  "schoolId": "3"
+},{
+  "studentClass": [
+    {
+      "classId": "3",
+      "className": "Class-3"
+    }
+  ],
+  "section": "B",
+  "name": "priyanka bisht",
+  "studentId": "3302003",
+  "schoolId": "3"
+}
+]
