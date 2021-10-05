@@ -203,9 +203,9 @@ class LoginComponent extends Component {
                             source={require('../../assets/images/logo.jpeg')}
                             style={{ width: 100, height: 100 }}
                         />
-                        <Text style={styles.header1TextStyle}>
+                        {/* <Text style={styles.header1TextStyle}>
                             {Strings.up_saralData.toUpperCase()}
-                        </Text>
+                        </Text> */}
                     </View>
 
                     <View style={styles.container2}>
