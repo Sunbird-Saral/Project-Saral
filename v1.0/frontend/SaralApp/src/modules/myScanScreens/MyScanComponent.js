@@ -15,9 +15,6 @@ import { SCAN_TYPES } from '../../utils/CommonUtils';
 import ScanHistoryCard from '../ScanHistory/ScanHistoryCard';
 
 import SaralSDK from '../../../SaralSDK'
-import SaralSpecData from '../../../latest_sat_odisha_generated_roi.json'
-// import SaralSpecData from '../../../latest_sat_up_generated_roi.json'
-// import SaralSpecData from '../../../sat_gujrat_generated_roi_newly.json'
 
 class MyScanComponent extends Component {
     constructor(props) {
@@ -33,9 +30,10 @@ class MyScanComponent extends Component {
     }
 
     componentDidMount() {
-        const { navigation,scanedData } = this.props
+        const { navigation, scanedData } = this.props
         const { params } = navigation.state
         navigation.addListener('willFocus', payload => {
+
             BackHandler.addEventListener('hardwareBackPress', this.onBack)
             if (params && params.from_screen && params.from_screen == 'scanDetails') {
                 this.setState({
@@ -139,55 +137,56 @@ class MyScanComponent extends Component {
 
     openCameraActivity = async () => {
         try {
-          const granted = await PermissionsAndroid.request(
-            PermissionsAndroid.PERMISSIONS.CAMERA,
-            {
-              title: "SaralSDK Demo App Camera Permission",
-              message:
-                "SaralSDK Demo application require camera to perform scanning operation ",
-              buttonNeutral: "Ask Me Later",
-              buttonNegative: "Cancel",
-              buttonPositive: "OK"
+            const granted = await PermissionsAndroid.request(
+                PermissionsAndroid.PERMISSIONS.CAMERA,
+                {
+                    title: "SaralSDK Demo App Camera Permission",
+                    message:
+                        "SaralSDK Demo application require camera to perform scanning operation ",
+                    buttonNeutral: "Ask Me Later",
+                    buttonNegative: "Cancel",
+                    buttonPositive: "OK"
+                }
+            );
+            if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+                console.log("Camera permission granted, launching now ..");
+                this.setState({
+                    activityOpen: true
+                })
+                console.log("roiData", this.props.roiData.data);
+                SaralSDK.startCamera(JSON.stringify(this.props.roiData.data)).then(res => {
+                    console.log("UPSAT", res);
+                    let roisData = JSON.parse(res);
+                    let cells = roisData.layout.cells;
+                    this.consolidatePrediction(cells, roisData)
+
+                }).catch((code, message) => {
+                    console.log(message)
+                })
+            } else {
+                console.log("Camera permission denied");
             }
-          );
-          if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-            console.log("Camera permission granted, launching now ..");
-            this.setState({
-                activityOpen: true
-            })
-            SaralSDK.startCamera(JSON.stringify(SaralSpecData)).then(res => {
-                console.log("UPSAT",res);
-              let roisData = JSON.parse(res);
-              let cells = roisData.layout.cells;
-              this.consolidatePrediction( cells , roisData )
-
-            }).catch((code, message) => {
-              console.log(message)
-            })
-          } else {
-            console.log("Camera permission denied");
-          }
         } catch (err) {
-          console.warn(err);
+            console.warn(err);
         }
-      };
+    };
 
-      consolidatePrediction( cells , roisData ){
-          var marks = "";
-          for(let i=0;i<cells.length;i++){
+    consolidatePrediction(cells, roisData) {
+        var marks = "";
+        for (let i = 0; i < cells.length; i++) {
             marks = ""
-            for(let j=0;j<cells[i].rois.length;j++){
-            
-            marks = marks + cells[i].rois[j].result.prediction
-            
+            for (let j = 0; j < cells[i].rois.length; j++) {
+
+                marks = marks + cells[i].rois[j].result.prediction
+
             }
             roisData.layout.cells[i].consolidatedPrediction = marks
-            
-            }
-            // console.log("JSON",JSON.stringify(roisData));
-            this.props.OcrLocalResponseAction(JSON.parse(JSON.stringify(roisData)))
-            this.props.navigation.navigate('ScannedDetailsComponent', { oldBrightness: this.state.oldBrightness })
-      }
+
+        }
+        // console.log("JSON",JSON.stringify(roisData));
+        this.props.OcrLocalResponseAction(JSON.parse(JSON.stringify(roisData)))
+        this.props.navigation.navigate('ScannedDetailsComponent', { oldBrightness: this.state.oldBrightness })
+    }
 
     render() {
         const { isLoading } = this.state;
@@ -201,7 +200,7 @@ class MyScanComponent extends Component {
                 {
                     (loginData && loginData.data)
                     &&
-                    <View style={{ marginVertical:'2%' }}>
+                    <View style={{ marginVertical: '2%' }}>
                         <Text
                             style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}
                         >
@@ -240,7 +239,7 @@ class MyScanComponent extends Component {
                             {Strings.ongoing_scan}
                         </Text>
                     </View>
-                    
+
                     <ScanHistoryCard
                         showButtons={false}
                     />
@@ -362,7 +361,8 @@ const mapStateToProps = (state) => {
         loginData: state.loginData,
         filteredData: state.filteredData,
         scanTypeData: state.scanTypeData.response,
-        scanedData: state.scanedData
+        scanedData: state.scanedData,
+        roiData: state.roiData.response
     }
 }
 
