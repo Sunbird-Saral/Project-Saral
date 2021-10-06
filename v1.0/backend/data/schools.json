@@ -33,5 +33,17 @@
   "hmMobileNo": "8006079875",
   "noOfStudents": "100",
   "udiseCode": "3"
+},
+{
+"name": "Amtul's Public School",
+"schoolId": "4",
+"password": "tarento@123",
+"state": "UP",
+"district": "MORADABAD",
+"block": "MORADABAD",
+"hmName": "acbc",
+"hmMobileNo": "8006079875",
+"noOfStudents": "100",
+"udiseCode": "4"
 }
 ]
