@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, ScrollView, ToastAndroid } from 'react-native';
+import { Text, View, ScrollView, ToastAndroid, Alert } from 'react-native';
 import { connect, useDispatch } from 'react-redux';
 import AppTheme from '../../utils/AppTheme';
 import { neglectData, SCAN_TYPES, student_ID, TABLE_HEADER } from '../../utils/CommonUtils';
@@ -18,7 +18,7 @@ import ButtonWithIcon from '../common/components/ButtonWithIcon';
 import ButtonComponent from '../common/components/ButtonComponent';
 import DropDownMenu from '../common/components/DropDownComponent';
 import TextField from '../common/components/TextField';
-import { getScanData, getStudentsExamData, setScanData } from '../../utils/StorageUtils';
+import { getLoginCred, getScanData, getStudentsExamData, setScanData } from '../../utils/StorageUtils';
 import { NavigationActions, StackActions } from 'react-navigation';
 import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
 import Spinner from '../common/components/loadingIndicator';
@@ -27,6 +27,8 @@ import APITransport from '../../flux/actions/transport/apitransport';
 
 import { bindActionCreators } from 'redux';
 import axios from 'axios';
+import { scanStatusDataAction } from '../ScanStatus/scanStatusDataAction';
+import { OcrLocalResponseAction } from '../../flux/actions/apis/OcrLocalResponseAction';
 
 
 const ScannedDetailsComponent = ({
@@ -42,7 +44,6 @@ const ScannedDetailsComponent = ({
     const [summary, setSummary] = useState(false)
     const [newArrayValue, setNewArrayValue] = useState([])
     const [btnName, setBtnName] = useState('Cancel')
-    const [maxMarks, setMaxMarks] = useState(0)
     const [obtainedMarks, setObtainedMarks] = useState(0)
     const [isLoading, setIsLoading] = useState(false)
     const [studentId, setStudentID] = useState();
@@ -50,9 +51,17 @@ const ScannedDetailsComponent = ({
     const [edit, setEditValue] = useState(true)
     const [studentValid, setStudentValid] = useState()
     const [studentData, setStudentDATA] = useState([])
+    const [maxMarksTotal, setMaxMarksTotal] = useState(0)
+    const [sumOfObtainedMarks, setSummOfObtainedMarks] = useState(0)
+    const [totalMarkSecured, setTotalMarkSecured] = useState()
+    const [obtnmarkErr, setObtnMarkErr] = useState(false)
+    const [maxmarkErr, setMaxMarkErr] = useState(false)
+    const [disable, setDisabled] = useState(false)
 
 
     const inputRef = React.createRef();
+    const dispatch = useDispatch()
+
 
     //function
 
@@ -68,7 +77,6 @@ const ScannedDetailsComponent = ({
                 return true
             }
         })
-        console.log("DATA======>", a);
         if (a.length > 0) {
             setStudentValid(true)
             setStdErr('')
@@ -89,7 +97,6 @@ const ScannedDetailsComponent = ({
     }
 
     useEffect(() => {
-        console.log("ocrLocalResponse.layout.cells",ocrLocalResponse.layout.cells);
         let data = ''
         let elements = neglectData;
         data = ocrLocalResponse.layout.cells.filter((element) => {
@@ -100,36 +107,44 @@ const ScannedDetailsComponent = ({
                 return true
             }
         })
-        console.log(data, data.length);
 
-        //check value is present in array or not
+        //check value marksObtained and maxMarks is present in array or not
         let marksObtained = data.some(item => item.format.name === elements[2])
         let maxMarks = data.some(item => item.format.name === elements[3])
 
         let len = data.length;
 
         if (maxMarks && marksObtained) {
+            //get maxMark and Obtained marks to validate
+            let extract_MAX_OBTAINED_MARKS = data.filter((e) => {
+                if (e.format.name == elements[2]) {
+                    setTotalMarkSecured(e.consolidatedPrediction)
+                    return
+                }
+                if (e.format.name == elements[3]) {
+                    setMaxMarksTotal(e.consolidatedPrediction)
+                    return
+                }
+                else {
+                    return true
+                }
+            })
+            //extract_MAX_OBTAINED_MARKS return all question data except max marks and obtained marks
+
+            //DO summ of all result from extract_MAX_OBTAINED_MARKS except max marks and obtained marks
+            let maximum = 0;
+            let sum = extract_MAX_OBTAINED_MARKS.forEach((e) => {
+                maximum = parseInt(maximum) + parseInt(e.consolidatedPrediction)
+                return maximum
+            });
+            setSummOfObtainedMarks(maximum)
             setNewArrayValue(data)
         } else {
-            // let maxMarks = {
-            //     cellId: "2212312",
-            //     consolidatedPrediction: "0",
-            //     format: { name: 'MAX_MARKS', value: 'MAX MARKS' },
-            //     render: { index: len + 2 }
-            // }
-            // let marksObtained = {
-            //     cellId: "2312312",
-            //     consolidatedPrediction: "0",
-            //     format: { name: 'MARKS_OBTAINED', value: 'MARKS OBTAINED' },
-            //     render: { index: len + 3 }
-            // }
-            // data.push(maxMarks)
-            // data.push(marksObtained)
-            console.log("================>", data);
+            //set Data of Other sheet except of marksObtained and maxMarks wala
             setNewArrayValue(data)
         }
 
-
+        //get student Id
         ocrLocalResponse.layout.cells.filter((element) => {
             student_ID.forEach((e) => {
                 if (element.format.name == e) {
@@ -194,39 +209,30 @@ const ScannedDetailsComponent = ({
 
                                 <MarksHeaderTable
                                     customRowStyle={{ width: '30%', }}
-                                    key={`Questions${index}`}
-                                    // icon={key == 'pass'}
+                                    key={`Questions${element.cellId}`}
                                     rowTitle={`${element.render.index - 1}`}
                                     rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
-                                    // editable={key == 'earned' ? edit : false}
+                                    editable={false}
                                     keyboardType={'number-pad'}
-                                // onChangeText={(text) => {
-                                //     this.handleTextChange(text.trim(), indexNumber, marksdetails)
-                                // }}
                                 />
                                 <MarksHeaderTable
                                     customRowStyle={{ width: '30%', }}
-                                    key={`MaxMarks${index}`}
-                                    // icon={key == 'pass'}
+                                    key={`MaxMarks${element.cellId}`}
                                     rowTitle={element.format.value}
                                     rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
-                                    // editable={key == 'earned' ? edit : false}
+                                    editable={false}
                                     keyboardType={'number-pad'}
-                                // onChangeText={(text) => {
-                                //     this.handleTextChange(text.trim(), indexNumber, marksdetails)
-                                // }}
                                 />
                                 <MarksHeaderTable
                                     customRowStyle={{ width: '30%', }}
-                                    key={`ObtainedMarks${index}`}
-                                    // icon={key == 'pass'}
+                                    key={`ObtainedMarks${element.cellId}`}
                                     rowTitle={element.consolidatedPrediction}
-                                    rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
-                                    // editable={key == 'earned' ? edit : false}
+                                    rowBorderColor={markBorderOnCell(element)}
+                                    editable={true}
                                     keyboardType={'number-pad'}
-                                // onChangeText={(text) => {
-                                //     this.handleTextChange(text.trim(), indexNumber, marksdetails)
-                                // }}
+                                    onChangeText={(text) => {
+                                        handleTextChange(text.trim(), index, newArrayValue)
+                                    }}
 
                                 />
 
@@ -255,24 +261,87 @@ const ScannedDetailsComponent = ({
         )
     }
 
+
+    const handleTextChange = (text, index, array) => {
+        let len = text.length
+        setDisabled(len == 0 ? true : false)
+        let newArray = JSON.parse(JSON.stringify(array))
+        newArray[index].consolidatedPrediction = text
+        setNewArrayValue(newArray)
+
+        newArray.map((e) => {
+            if (e.format.name == "MAX_MARK") {
+                setMaxMarksTotal(e.consolidatedPrediction)
+            }
+            if (e.format.name == "MARKS_OBTAINED") {
+                setTotalMarkSecured(e.consolidatedPrediction)
+            }
+        })
+        // dispatch(OcrLocalResponseAction(ocrData))
+
+
+    }
+
+    const markBorderOnCell = (element) => {
+        if (element.consolidatedPrediction.length == 0) {
+            return AppTheme.ERROR_RED
+        }
+        else if (element.format.name == neglectData[2] && obtnmarkErr) {
+            return AppTheme.ERROR_RED
+        } else if (element.format.name == neglectData[3] && maxmarkErr) {
+            return AppTheme.ERROR_RED
+        }
+        else {
+            return AppTheme.INACTIVE_BTN_TEXT
+        }
+    }
+
     const onNextButtonClick = () => {
     }
 
     const onBackButtonClick = () => {
-        // const resetAction = StackActions.reset({
-        //     index: 0,
-        //     actions: [NavigationActions.navigate({ routeName: 'cameraActivity', params: { from_screen: 'myScan' } })],
-        // });
-        // navigation.dispatch(resetAction);
+        const resetAction = StackActions.reset({
+            index: 0,
+            actions: [NavigationActions.navigate({ routeName: 'myScan', params: { from_screen: 'ScannedDetailsComponent' } })],
+        });
+        navigation.dispatch(resetAction);
     }
 
-    const onSummaryCancel = () => {
-        setSummary(false)
-    }
 
-    const dispatch = useDispatch()
+    const showErrorMessage = (message) => {
+        Alert.alert(message)
+    }
 
     const onSubmitClick = async () => {
+        if (disable) {
+            showErrorMessage("Please fill marks")
+        }
+        else {
+            if (sumOfObtainedMarks > 0) {
+                //with MAX & OBTAINED MARKS
+                if (sumOfObtainedMarks != totalMarkSecured) {
+                    console.log("SUMOFOBTAINEMARKS", sumOfObtainedMarks);
+                    setObtnMarkErr(true)
+                    showErrorMessage("Sum Of All obtained marks should be equal to marksObtained")
+                }
+                else if (maxMarksTotal <= sumOfObtainedMarks) {
+                    setObtnMarkErr(true)
+                    showErrorMessage("Max mark should be less than and equal to Sum of All obtained")
+                    setMaxMarkErr(true)
+                }
+                else {
+                    setMaxMarkErr(false)
+                    setObtnMarkErr(false)
+                    saveData()
+                }
+            } else {
+                //without MAX & OBTAINED MARKS
+                saveData()
+            }
+        }
+    }
+
+    const saveData = async () => {
         let elements = neglectData;
         let data = ocrLocalResponse.layout.cells.filter((element) => {
             if (element.format.name == elements[0] || element.format.name == elements[1] || element.format.name == elements[2] || element.format.name == elements[3]) {
@@ -302,8 +371,8 @@ const ScannedDetailsComponent = ({
                 {
                     "section": filteredData.section,
                     "studentId": studentId,
-                    "securedMarks": obtainedMarks,
-                    "totalMarks": maxMarks,
+                    "securedMarks": sumOfObtainedMarks > 0 ? sumOfObtainedMarks : 0,
+                    "totalMarks": maxMarksTotal > 0 ? maxMarksTotal : 0,
                     "marksInfo": Studentmarks
                 }
             ]
@@ -314,6 +383,63 @@ const ScannedDetailsComponent = ({
         dispatch(APITransport(apiObj))
         setIsLoading(false)
 
+        Alert.alert(Strings.message_text, Strings.saved_successfully, [{
+            text: Strings.ok_text, onPress: () => {
+                callScanStatusData()
+            }
+        }])
+    }
+
+    const callScanStatusData = async () => {
+        let loginCred = await getLoginCred()
+
+        let dataPayload = {
+            "classId": filteredData.class,
+            "subject": filteredData.subject,
+            "fromDate": filteredData.examDate,
+            "page": 1,
+            "downloadRes": true
+        }
+        let apiObj = new scanStatusDataAction(dataPayload);
+        FetchSavedScannedData(apiObj, loginCred.schoolId, loginCred.password)
+        goToMyScanScreen()
+    }
+
+    const FetchSavedScannedData = (api, uname, pass) => {
+        if (api.method === 'POST') {
+            let apiResponse = null
+            const source = axios.CancelToken.source()
+            const id = setTimeout(() => {
+                if (apiResponse === null) {
+                    source.cancel('The request timed out.');
+                }
+            }, 60000);
+            axios.post(api.apiEndPoint(), api.getBody(), {
+                auth: {
+                    username: uname,
+                    password: pass
+                }
+            })
+                .then(function (res) {
+                    apiResponse = res
+                    clearTimeout(id)
+                    api.processResponse(res)
+                    dispatch(dispatchAPIAsync(api));
+                })
+                .catch(function (err) {
+                    clearTimeout(id)
+                });
+        }
+    }
+
+    function dispatchAPIAsync(api) {
+        return {
+            type: api.type,
+            payload: api.getPayload()
+        }
+    }
+
+    const goToMyScanScreen = () => {
         const resetAction = StackActions.reset({
             index: 0,
             actions: [NavigationActions.navigate({ routeName: 'myScan', params: { from_screen: 'cameraActivity' } })],
@@ -364,6 +490,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
         APITransport: APITransport,
+        OcrLocalResponseAction: OcrLocalResponseAction
     }, dispatch)
 }
 
