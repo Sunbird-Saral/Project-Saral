@@ -497,5 +497,130 @@
   "examDate": "2021-10-07",
   "subject": "English",
   "classId": "3"
+},
+{
+  "marksInfo": [
+    {
+      "questionId": "LO-1",
+      "obtainedMarks": 1
+    },
+    {
+      "questionId": "LO-2",
+      "obtainedMarks": 1
+    },
+    {
+      "questionId": "LO-3",
+      "obtainedMarks": 0
+    },
+    {
+      "questionId": "LO-4",
+      "obtainedMarks": 0
+    },
+    {
+      "questionId": "LO-5",
+      "obtainedMarks": 1
+    }
+  ],
+  "section": "D",
+  "studentId": "4204001",
+  "securedMarks": 3,
+  "totalMarks": 5,
+  "schoolId": "4",
+  "examDate": "2021-10-11",
+  "subject": "Hindi",
+  "classId": "2"
+},{
+  "marksInfo": [
+    {
+      "questionId": "LO-1",
+      "obtainedMarks": 1
+    },
+    {
+      "questionId": "LO-2",
+      "obtainedMarks": 1
+    },
+    {
+      "questionId": "LO-3",
+      "obtainedMarks": 0
+    },
+    {
+      "questionId": "LO-4",
+      "obtainedMarks": 0
+    },
+    {
+      "questionId": "LO-5",
+      "obtainedMarks": 1
+    }
+  ],
+  "section": "D",
+  "studentId": "4204001",
+  "securedMarks": 3,
+  "totalMarks": 5,
+  "schoolId": "4",
+  "examDate": "2021-10-12",
+  "subject": "Maths",
+  "classId": "2"
+},{
+  "marksInfo": [
+    {
+      "questionId": "LO-1",
+      "obtainedMarks": 1
+    },
+    {
+      "questionId": "LO-2",
+      "obtainedMarks": 1
+    },
+    {
+      "questionId": "LO-3",
+      "obtainedMarks": 0
+    },
+    {
+      "questionId": "LO-4",
+      "obtainedMarks": 0
+    },
+    {
+      "questionId": "LO-5",
+      "obtainedMarks": 1
+    }
+  ],
+  "section": "D",
+  "studentId": "4204001",
+  "securedMarks": 3,
+  "totalMarks": 5,
+  "schoolId": "4",
+  "examDate": "2021-10-13",
+  "subject": "English",
+  "classId": "2"
+},{
+  "marksInfo": [
+    {
+      "questionId": "LO-1",
+      "obtainedMarks": 1
+    },
+    {
+      "questionId": "LO-2",
+      "obtainedMarks": 1
+    },
+    {
+      "questionId": "LO-3",
+      "obtainedMarks": 0
+    },
+    {
+      "questionId": "LO-4",
+      "obtainedMarks": 0
+    },
+    {
+      "questionId": "LO-5",
+      "obtainedMarks": 1
+    }
+  ],
+  "section": "D",
+  "studentId": "4304001",
+  "securedMarks": 3,
+  "totalMarks": 5,
+  "schoolId": "4",
+  "examDate": "2021-10-13",
+  "subject": "Maths",
+  "classId": "3"
 }
 ]
