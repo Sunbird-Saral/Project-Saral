@@ -15,7 +15,9 @@ import { SCAN_TYPES } from '../../utils/CommonUtils';
 import ScanHistoryCard from '../ScanHistory/ScanHistoryCard';
 
 import SaralSDK from '../../../SaralSDK'
-import SaralSpecData from '../../../sat_odisha_generated_roi.json'
+import SaralSpecData from '../../../latest_sat_odisha_generated_roi.json'
+// import SaralSpecData from '../../../latest_sat_up_generated_roi.json'
+// import SaralSpecData from '../../../sat_gujrat_generated_roi_newly.json'
 
 class MyScanComponent extends Component {
     constructor(props) {
@@ -31,7 +33,7 @@ class MyScanComponent extends Component {
     }
 
     componentDidMount() {
-        const { navigation } = this.props
+        const { navigation,scanedData } = this.props
         const { params } = navigation.state
         navigation.addListener('willFocus', payload => {
             BackHandler.addEventListener('hardwareBackPress', this.onBack)
@@ -179,81 +181,13 @@ class MyScanComponent extends Component {
             marks = marks + cells[i].rois[j].result.prediction
             
             }
-            roisData.layout.cells[i].consolidatePrediction = marks
+            roisData.layout.cells[i].consolidatedPrediction = marks
             
             }
-            console.log("JSON",JSON.stringify(roisData));
-            // this.props.OcrLocalResponseAction(roisData)
+            // console.log("JSON",JSON.stringify(roisData));
+            this.props.OcrLocalResponseAction(JSON.parse(JSON.stringify(roisData)))
+            this.props.navigation.navigate('ScannedDetailsComponent', { oldBrightness: this.state.oldBrightness })
       }
-
-    // openCameraActivity = () => {
-    //     const { scanTypeData } = this.props
-    //     SystemSetting.setBrightnessForce(1).then(async (success) => {
-    //         if (success) {
-    //             SystemSetting.saveBrightness();
-    //             this.setState({
-    //                 activityOpen: true
-    //             })
-    //             let uniqStudentsList = ['1234567', '2345678']
-    //             // const scannerType = scanTypeData.scanType ? scanTypeData.scanType : SCAN_TYPES.PAT_TYPE
-    //             const scannerType = SCAN_TYPES.PAT_TYPE
-    //             const scannerCode = this.getScannerType(scannerType)
-    //             RNOpenCvCameraModel.openScanCamera(JSON.stringify(uniqStudentsList), scannerType, scannerCode)
-    //                 .then(data => {
-    //                     // console.log("imgArrSuccess", JSON.parse(data));
-    //                     let scannerResponse = JSON.parse(data)
-    //                     scannerResponse.scannerCode = scannerCode
-    //                     scannerResponse.scannerType = scannerType
-    //                     this.props.OcrLocalResponseAction(scannerResponse)
-    //                     this.setState({ isLoading: false })
-
-    //                     // if (scannerType == SCAN_TYPES.PAT_TYPE) {
-    //                         this.props.navigation.navigate('patScanDetails', { oldBrightness: this.state.oldBrightness })
-    //                     // } else if (scannerType == SCAN_TYPES.SAT_TYPE) {
-    //                     //     this.props.navigation.navigate('satScanDetails', { oldBrightness: this.state.oldBrightness })
-    //                     // }
-
-    //                 })
-    //                 .catch((code, errorMessage) => {
-    //                     this.setState({ isLoading: false })
-    //                     Alert.alert(Strings.message_text, Strings.table_image_is_not_proper)
-    //                     console.log("dataFailure", code, "Message", errorMessage);
-    //                 });
-    //         }
-    //         else if (!success) {
-    //             Alert.alert(Strings.permission_deny, Strings.you_have_no_permission_to_change_settings, [
-    //                 { 'text': Strings.ok_text, style: Strings.cancel_text },
-    //                 { 'text': Strings.open_settings, onPress: () =>          
-    //                 SystemSetting.grantWriteSettingPremission()
-    //              }
-    //             ])
-    //         }
-    //     });
-    // }
-
-    getScannerType = (scanType) => {
-        const { filteredData } = this.props
-        let response = filteredData.response
-        let classId = response.class
-        if (scanType == SCAN_TYPES.PAT_TYPE) {
-            let subject = response.subject.toLowerCase()
-            let classId = response.class
-            if (subject == 'math' && (classId == 3 || classId == 4 || classId == 5||classId==2)) { //subject math - class -3,4&5.  - type -1
-                return 1
-            } else if (subject == 'hindi' && (classId == 2 || classId == 3)) { //subject hindi - class -2&3 - type - 2
-                return 2
-            }
-            else if (subject == 'hindi' && (classId == 4 || classId == 5)) { //subject hindi - class -4&5 - type - 2
-                return 3
-            }
-        } else if (scanType == SCAN_TYPES.SAT_TYPE) {
-            if (classId == 3 || classId == 4 || classId == 5) {
-                return 1
-            } else if (classId == 6 || classId == 7 || classId == 8) {
-                return 2
-            }
-        }
-    }
 
     render() {
         const { isLoading } = this.state;
@@ -427,7 +361,8 @@ const mapStateToProps = (state) => {
         ocrLocalResponse: state.ocrLocalResponse,
         loginData: state.loginData,
         filteredData: state.filteredData,
-        scanTypeData: state.scanTypeData.response
+        scanTypeData: state.scanTypeData.response,
+        scanedData: state.scanedData
     }
 }
 

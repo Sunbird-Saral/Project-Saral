@@ -65,7 +65,7 @@ class DashboardComponent extends Component {
 
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
                 <HeaderComponent
-                    title={Strings.up_saralData}
+                    // title={Strings.up_saralData}
                     logoutHeaderText={Strings.logout_text}
                     customLogoutTextStyle={{ color: AppTheme.GREY }}
                     onLogoutClick={this.onLogoutClick}
