@@ -95,12 +95,11 @@ router.get('/roi/:examId/type/:type',auth, async (req, res) => {
                 const school = await School.findOne({schoolId: req.school.schoolId})
             const roiExist = await ROI.findOne({ classId: examExist.classId, subject: examExist.subject,state: school.state}).lean()
             if(roiExist){
-               
                 let lookup = {
                     classId: examExist.classId,
                     subject: examExist.subject,
                     state: school.state,
-                    type: req.params.type
+                    type: req.params.type.toUpperCase()
                 }
                 let roi = await ROI.find(lookup,{_id: 0,__v: 0 }).lean()
                 if(roi.length){
