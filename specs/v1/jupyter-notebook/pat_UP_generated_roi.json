@@ -8,7 +8,7 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER1_1",
-                        "extractionMethod": "Numeric Classification",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "1",
                         "index": 0,
                         "rect": {
@@ -20,7 +20,7 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER1_2",
-                        "extractionMethod": "Numeric Classification",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "2",
                         "index": 1,
                         "rect": {
@@ -32,7 +32,7 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER1_3",
-                        "extractionMethod": "Numeric Classification",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "3",
                         "index": 2,
                         "rect": {
@@ -44,7 +44,7 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER1_4",
-                        "extractionMethod": "Numeric Classification",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "4",
                         "index": 3,
                         "rect": {
@@ -56,7 +56,7 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER1_5",
-                        "extractionMethod": "Numeric Classification",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "5",
                         "index": 4,
                         "rect": {
@@ -68,7 +68,7 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER1_6",
-                        "extractionMethod": "Numeric Classification",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "6",
                         "index": 5,
                         "rect": {
@@ -80,7 +80,7 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER1_7",
-                        "extractionMethod": "Numeric Classification",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "7",
                         "index": 6,
                         "rect": {
@@ -92,7 +92,7 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER1_Q1_1",
-                        "extractionMethod": "Cell OMR",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "8",
                         "index": 7,
                         "rect": {
@@ -104,7 +104,7 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER1_Q2_1",
-                        "extractionMethod": "Cell OMR",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "9",
                         "index": 8,
                         "rect": {
@@ -116,7 +116,7 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER1_Q3_1",
-                        "extractionMethod": "Cell OMR",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "10",
                         "index": 9,
                         "rect": {
@@ -128,7 +128,7 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER1_Q4_2",
-                        "extractionMethod": "Cell OMR",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "11",
                         "index": 10,
                         "rect": {
@@ -140,7 +140,7 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER1_Q5_2",
-                        "extractionMethod": "Cell OMR",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "12",
                         "index": 11,
                         "rect": {
@@ -152,7 +152,7 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER1_Q6_2",
-                        "extractionMethod": "Cell OMR",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "13",
                         "index": 12,
                         "rect": {
@@ -164,7 +164,7 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER1_Q7_2",
-                        "extractionMethod": "Cell OMR",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "14",
                         "index": 13,
                         "rect": {
@@ -176,7 +176,7 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER1_Q8_3",
-                        "extractionMethod": "Cell OMR",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "15",
                         "index": 14,
                         "rect": {
@@ -188,7 +188,7 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER1_Q9_3",
-                        "extractionMethod": "Cell OMR",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "16",
                         "index": 15,
                         "rect": {
@@ -200,7 +200,7 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER1_Q10_3",
-                        "extractionMethod": "Cell OMR",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "17",
                         "index": 16,
                         "rect": {
@@ -212,7 +212,7 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER1_Q11_3",
-                        "extractionMethod": "Cell OMR",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "18",
                         "index": 17,
                         "rect": {
@@ -224,7 +224,7 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER1_Q12_3",
-                        "extractionMethod": "Cell OMR",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "19",
                         "index": 18,
                         "rect": {
@@ -236,7 +236,7 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER1_Q13_3",
-                        "extractionMethod": "Cell OMR",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "20",
                         "index": 19,
                         "rect": {
@@ -252,7 +252,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER1",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u0940"
                 },
                 "validate": {
                     "regExp": ""
@@ -263,7 +263,7 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER1_Q1_1",
-                        "extractionMethod": "Cell OMR",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "21",
                         "index": 0,
                         "rect": {
@@ -279,7 +279,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER1_Q1_1",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401_Q1_1"
                 },
                 "validate": {
                     "regExp": ""
@@ -290,7 +290,7 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER1_Q2_1",
-                        "extractionMethod": "Cell OMR",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "22",
                         "index": 0,
                         "rect": {
@@ -306,7 +306,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER1_Q2_1",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401_Q2_1"
                 },
                 "validate": {
                     "regExp": ""
@@ -317,7 +317,7 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER1_Q3_1",
-                        "extractionMethod": "Cell OMR",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "23",
                         "index": 0,
                         "rect": {
@@ -333,7 +333,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER1_Q3_1",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401_Q3_1"
                 },
                 "validate": {
                     "regExp": ""
@@ -344,7 +344,7 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER1_Q4_2",
-                        "extractionMethod": "Cell OMR",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "24",
                         "index": 0,
                         "rect": {
@@ -360,7 +360,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER1_Q4_2",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401_Q4_2"
                 },
                 "validate": {
                     "regExp": ""
@@ -371,7 +371,7 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER1_Q5_2",
-                        "extractionMethod": "Cell OMR",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "25",
                         "index": 0,
                         "rect": {
@@ -387,7 +387,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER1_Q5_2",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401_Q5_2"
                 },
                 "validate": {
                     "regExp": ""
@@ -398,7 +398,7 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER1_Q6_2",
-                        "extractionMethod": "Cell OMR",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "26",
                         "index": 0,
                         "rect": {
@@ -414,7 +414,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER1_Q6_2",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401_Q6_2"
                 },
                 "validate": {
                     "regExp": ""
@@ -422,13 +422,26 @@
             },
             {
                 "cellId": "8",
-                "rois": [],
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER1_Q7_2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "27",
+                        "index": 0,
+                        "rect": {
+                            "top": 147,
+                            "left": 381,
+                            "bottom": 185,
+                            "right": 414
+                        }
+                    }
+                ],
                 "render": {
                     "index": 8
                 },
                 "format": {
-                    "name": "ROLLNUMBER1_Q7_3",
-                    "value": ""
+                    "name": "ROLLNUMBER1_Q7_2",
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401_Q7_2"
                 },
                 "validate": {
                     "regExp": ""
@@ -436,13 +449,26 @@
             },
             {
                 "cellId": "9",
-                "rois": [],
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER1_Q8_3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "28",
+                        "index": 0,
+                        "rect": {
+                            "top": 146,
+                            "left": 415,
+                            "bottom": 184,
+                            "right": 448
+                        }
+                    }
+                ],
                 "render": {
                     "index": 9
                 },
                 "format": {
-                    "name": "ROLLNUMBER1_Q8_2",
-                    "value": ""
+                    "name": "ROLLNUMBER1_Q8_3",
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401_Q8_3"
                 },
                 "validate": {
                     "regExp": ""
@@ -453,8 +479,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER1_Q9_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "27",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "29",
                         "index": 0,
                         "rect": {
                             "top": 146,
@@ -469,7 +495,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER1_Q9_3",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401_Q9_3"
                 },
                 "validate": {
                     "regExp": ""
@@ -480,8 +506,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER2_Q10_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "28",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "30",
                         "index": 0,
                         "rect": {
                             "top": 186,
@@ -496,7 +522,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER2_Q10_3",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402_Q10_3"
                 },
                 "validate": {
                     "regExp": ""
@@ -506,14 +532,14 @@
                 "cellId": "12",
                 "rois": [
                     {
-                        "annotationTags": "ROLLNUMBER2_Q11_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "29",
+                        "annotationTags": "ROLLNUMBER1_Q11_3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "31",
                         "index": 0,
                         "rect": {
-                            "top": 185,
+                            "top": 145,
                             "left": 518,
-                            "bottom": 224,
+                            "bottom": 183,
                             "right": 550
                         }
                     }
@@ -522,8 +548,8 @@
                     "index": 12
                 },
                 "format": {
-                    "name": "ROLLNUMBER2_Q11_3",
-                    "value": ""
+                    "name": "ROLLNUMBER1_Q11_3",
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401_Q11_3"
                 },
                 "validate": {
                     "regExp": ""
@@ -533,15 +559,15 @@
                 "cellId": "13",
                 "rois": [
                     {
-                        "annotationTags": "ROLLNUMBER2_Q12_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "30",
+                        "annotationTags": "ROLLNUMBER1_Q12_3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "32",
                         "index": 0,
                         "rect": {
-                            "top": 185,
+                            "top": 145,
                             "left": 553,
-                            "bottom": 222,
-                            "right": 585
+                            "bottom": 184,
+                            "right": 584
                         }
                     }
                 ],
@@ -549,8 +575,8 @@
                     "index": 13
                 },
                 "format": {
-                    "name": "ROLLNUMBER2_Q12_3",
-                    "value": ""
+                    "name": "ROLLNUMBER1_Q12_3",
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401_Q12_3"
                 },
                 "validate": {
                     "regExp": ""
@@ -561,8 +587,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER1_Q13_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "31",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "33",
                         "index": 0,
                         "rect": {
                             "top": 146,
@@ -577,7 +603,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER1_Q13_3",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401_Q13_3"
                 },
                 "validate": {
                     "regExp": ""
@@ -588,8 +614,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER2_1",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "32",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "34",
                         "index": 0,
                         "rect": {
                             "top": 190,
@@ -600,8 +626,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER2_2",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "33",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "35",
                         "index": 1,
                         "rect": {
                             "top": 191,
@@ -612,8 +638,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER2_3",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "34",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "36",
                         "index": 2,
                         "rect": {
                             "top": 192,
@@ -624,8 +650,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER2_4",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "35",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "37",
                         "index": 3,
                         "rect": {
                             "top": 192,
@@ -636,8 +662,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER2_5",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "36",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "38",
                         "index": 4,
                         "rect": {
                             "top": 191,
@@ -648,8 +674,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER2_6",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "37",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "39",
                         "index": 5,
                         "rect": {
                             "top": 192,
@@ -660,8 +686,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER2_7",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "38",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "40",
                         "index": 6,
                         "rect": {
                             "top": 192,
@@ -672,8 +698,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER2_Q1_1",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "39",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "41",
                         "index": 7,
                         "rect": {
                             "top": 186,
@@ -684,8 +710,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER2_Q2_1",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "40",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "42",
                         "index": 8,
                         "rect": {
                             "top": 187,
@@ -696,8 +722,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER2_Q3_1",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "41",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "43",
                         "index": 9,
                         "rect": {
                             "top": 185,
@@ -708,8 +734,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER2_Q4_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "42",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "44",
                         "index": 10,
                         "rect": {
                             "top": 187,
@@ -720,8 +746,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER2_Q5_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "43",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "45",
                         "index": 11,
                         "rect": {
                             "top": 187,
@@ -732,8 +758,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER2_Q6_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "44",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "46",
                         "index": 12,
                         "rect": {
                             "top": 186,
@@ -744,8 +770,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER2_Q7_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "45",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "47",
                         "index": 13,
                         "rect": {
                             "top": 187,
@@ -756,8 +782,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER2_Q8_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "46",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "48",
                         "index": 14,
                         "rect": {
                             "top": 186,
@@ -768,8 +794,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER2_Q9_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "47",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "49",
                         "index": 15,
                         "rect": {
                             "top": 186,
@@ -780,8 +806,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER2_Q10_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "48",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "50",
                         "index": 16,
                         "rect": {
                             "top": 186,
@@ -792,8 +818,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER2_Q11_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "49",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "51",
                         "index": 17,
                         "rect": {
                             "top": 185,
@@ -804,8 +830,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER2_Q12_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "50",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "52",
                         "index": 18,
                         "rect": {
                             "top": 185,
@@ -816,8 +842,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER2_Q13_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "51",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "53",
                         "index": 19,
                         "rect": {
                             "top": 186,
@@ -832,7 +858,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER2",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u0940"
                 },
                 "validate": {
                     "regExp": ""
@@ -842,15 +868,15 @@
                 "cellId": "16",
                 "rois": [
                     {
-                        "annotationTags": "ROLLNUMBER1_Q1_1",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "52",
+                        "annotationTags": "ROLLNUMBER2_Q1_1",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "54",
                         "index": 0,
                         "rect": {
-                            "top": 146,
-                            "left": 176,
-                            "bottom": 183,
-                            "right": 209
+                            "top": 186,
+                            "left": 177,
+                            "bottom": 223,
+                            "right": 211
                         }
                     }
                 ],
@@ -858,8 +884,8 @@
                     "index": 16
                 },
                 "format": {
-                    "name": "ROLLNUMBER1_Q1_1",
-                    "value": ""
+                    "name": "ROLLNUMBER2_Q1_1",
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402_Q1_1"
                 },
                 "validate": {
                     "regExp": ""
@@ -869,15 +895,15 @@
                 "cellId": "17",
                 "rois": [
                     {
-                        "annotationTags": "ROLLNUMBER1_Q2_1",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "53",
+                        "annotationTags": "ROLLNUMBER2_Q2_1",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "55",
                         "index": 0,
                         "rect": {
-                            "top": 146,
+                            "top": 187,
                             "left": 210,
-                            "bottom": 184,
-                            "right": 244
+                            "bottom": 224,
+                            "right": 243
                         }
                     }
                 ],
@@ -885,8 +911,8 @@
                     "index": 17
                 },
                 "format": {
-                    "name": "ROLLNUMBER1_Q2_1",
-                    "value": ""
+                    "name": "ROLLNUMBER2_Q2_1",
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402_Q2_1"
                 },
                 "validate": {
                     "regExp": ""
@@ -896,15 +922,15 @@
                 "cellId": "18",
                 "rois": [
                     {
-                        "annotationTags": "ROLLNUMBER1_Q3_1",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "54",
+                        "annotationTags": "ROLLNUMBER2_Q3_1",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "56",
                         "index": 0,
                         "rect": {
-                            "top": 148,
-                            "left": 245,
-                            "bottom": 185,
-                            "right": 278
+                            "top": 185,
+                            "left": 244,
+                            "bottom": 223,
+                            "right": 277
                         }
                     }
                 ],
@@ -912,8 +938,8 @@
                     "index": 18
                 },
                 "format": {
-                    "name": "ROLLNUMBER1_Q3_1",
-                    "value": ""
+                    "name": "ROLLNUMBER2_Q3_1",
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402_Q3_1"
                 },
                 "validate": {
                     "regExp": ""
@@ -923,15 +949,15 @@
                 "cellId": "19",
                 "rois": [
                     {
-                        "annotationTags": "ROLLNUMBER1_Q4_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "55",
+                        "annotationTags": "ROLLNUMBER2_Q4_2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "57",
                         "index": 0,
                         "rect": {
-                            "top": 147,
-                            "left": 278,
-                            "bottom": 185,
-                            "right": 312
+                            "top": 187,
+                            "left": 279,
+                            "bottom": 223,
+                            "right": 311
                         }
                     }
                 ],
@@ -939,8 +965,8 @@
                     "index": 19
                 },
                 "format": {
-                    "name": "ROLLNUMBER1_Q4_2",
-                    "value": ""
+                    "name": "ROLLNUMBER2_Q4_2",
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402_Q4_2"
                 },
                 "validate": {
                     "regExp": ""
@@ -950,15 +976,15 @@
                 "cellId": "20",
                 "rois": [
                     {
-                        "annotationTags": "ROLLNUMBER1_Q5_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "56",
+                        "annotationTags": "ROLLNUMBER2_Q5_2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "58",
                         "index": 0,
                         "rect": {
-                            "top": 148,
-                            "left": 313,
-                            "bottom": 185,
-                            "right": 346
+                            "top": 187,
+                            "left": 312,
+                            "bottom": 223,
+                            "right": 345
                         }
                     }
                 ],
@@ -966,8 +992,8 @@
                     "index": 20
                 },
                 "format": {
-                    "name": "ROLLNUMBER1_Q5_2",
-                    "value": ""
+                    "name": "ROLLNUMBER2_Q5_2",
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402_Q5_2"
                 },
                 "validate": {
                     "regExp": ""
@@ -977,14 +1003,14 @@
                 "cellId": "21",
                 "rois": [
                     {
-                        "annotationTags": "ROLLNUMBER1_Q6_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "57",
+                        "annotationTags": "ROLLNUMBER2_Q6_2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "59",
                         "index": 0,
                         "rect": {
-                            "top": 146,
-                            "left": 347,
-                            "bottom": 184,
+                            "top": 186,
+                            "left": 346,
+                            "bottom": 224,
                             "right": 380
                         }
                     }
@@ -993,8 +1019,8 @@
                     "index": 21
                 },
                 "format": {
-                    "name": "ROLLNUMBER1_Q6_2",
-                    "value": ""
+                    "name": "ROLLNUMBER2_Q6_2",
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402_Q6_2"
                 },
                 "validate": {
                     "regExp": ""
@@ -1004,14 +1030,14 @@
                 "cellId": "22",
                 "rois": [
                     {
-                        "annotationTags": "ROLLNUMBER1_Q7_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "58",
+                        "annotationTags": "ROLLNUMBER2_Q7_2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "60",
                         "index": 0,
                         "rect": {
-                            "top": 147,
+                            "top": 187,
                             "left": 381,
-                            "bottom": 185,
+                            "bottom": 223,
                             "right": 414
                         }
                     }
@@ -1020,8 +1046,8 @@
                     "index": 22
                 },
                 "format": {
-                    "name": "ROLLNUMBER1_Q7_2",
-                    "value": ""
+                    "name": "ROLLNUMBER2_Q7_2",
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402_Q7_2"
                 },
                 "validate": {
                     "regExp": ""
@@ -1031,14 +1057,14 @@
                 "cellId": "23",
                 "rois": [
                     {
-                        "annotationTags": "ROLLNUMBER1_Q8_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "59",
+                        "annotationTags": "ROLLNUMBER2_Q8_3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "61",
                         "index": 0,
                         "rect": {
-                            "top": 146,
+                            "top": 186,
                             "left": 415,
-                            "bottom": 184,
+                            "bottom": 224,
                             "right": 448
                         }
                     }
@@ -1047,8 +1073,8 @@
                     "index": 23
                 },
                 "format": {
-                    "name": "ROLLNUMBER1_Q8_3",
-                    "value": ""
+                    "name": "ROLLNUMBER2_Q8_3",
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402_Q8_3"
                 },
                 "validate": {
                     "regExp": ""
@@ -1058,14 +1084,14 @@
                 "cellId": "24",
                 "rois": [
                     {
-                        "annotationTags": "ROLLNUMBER1_Q9_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "60",
+                        "annotationTags": "ROLLNUMBER2_Q9_3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "62",
                         "index": 0,
                         "rect": {
-                            "top": 146,
-                            "left": 449,
-                            "bottom": 185,
+                            "top": 186,
+                            "left": 450,
+                            "bottom": 223,
                             "right": 482
                         }
                     }
@@ -1074,8 +1100,8 @@
                     "index": 24
                 },
                 "format": {
-                    "name": "ROLLNUMBER1_Q9_3",
-                    "value": ""
+                    "name": "ROLLNUMBER2_Q9_3",
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402_Q9_3"
                 },
                 "validate": {
                     "regExp": ""
@@ -1085,15 +1111,15 @@
                 "cellId": "25",
                 "rois": [
                     {
-                        "annotationTags": "ROLLNUMBER1_Q10_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "61",
+                        "annotationTags": "ROLLNUMBER2_Q10_3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "63",
                         "index": 0,
                         "rect": {
-                            "top": 145,
+                            "top": 186,
                             "left": 484,
-                            "bottom": 185,
-                            "right": 518
+                            "bottom": 222,
+                            "right": 516
                         }
                     }
                 ],
@@ -1101,8 +1127,8 @@
                     "index": 25
                 },
                 "format": {
-                    "name": "ROLLNUMBER1_Q10_3",
-                    "value": ""
+                    "name": "ROLLNUMBER2_Q10_3",
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402_Q10_3"
                 },
                 "validate": {
                     "regExp": ""
@@ -1112,14 +1138,14 @@
                 "cellId": "26",
                 "rois": [
                     {
-                        "annotationTags": "ROLLNUMBER1_Q11_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "62",
+                        "annotationTags": "ROLLNUMBER2_Q11_3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "64",
                         "index": 0,
                         "rect": {
-                            "top": 145,
+                            "top": 185,
                             "left": 518,
-                            "bottom": 183,
+                            "bottom": 224,
                             "right": 550
                         }
                     }
@@ -1128,8 +1154,8 @@
                     "index": 26
                 },
                 "format": {
-                    "name": "ROLLNUMBER1_Q11_3",
-                    "value": ""
+                    "name": "ROLLNUMBER2_Q11_3",
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402_Q11_3"
                 },
                 "validate": {
                     "regExp": ""
@@ -1139,15 +1165,15 @@
                 "cellId": "27",
                 "rois": [
                     {
-                        "annotationTags": "ROLLNUMBER1_Q12_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "63",
+                        "annotationTags": "ROLLNUMBER2_Q12_3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "65",
                         "index": 0,
                         "rect": {
-                            "top": 145,
+                            "top": 185,
                             "left": 553,
-                            "bottom": 184,
-                            "right": 584
+                            "bottom": 222,
+                            "right": 585
                         }
                     }
                 ],
@@ -1155,8 +1181,8 @@
                     "index": 27
                 },
                 "format": {
-                    "name": "ROLLNUMBER1_Q12_3",
-                    "value": ""
+                    "name": "ROLLNUMBER2_Q12_3",
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402_Q12_3"
                 },
                 "validate": {
                     "regExp": ""
@@ -1166,15 +1192,15 @@
                 "cellId": "28",
                 "rois": [
                     {
-                        "annotationTags": "ROLLNUMBER1_Q13_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "64",
+                        "annotationTags": "ROLLNUMBER2_Q13_3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "66",
                         "index": 0,
                         "rect": {
-                            "top": 146,
+                            "top": 186,
                             "left": 586,
-                            "bottom": 183,
-                            "right": 619
+                            "bottom": 223,
+                            "right": 620
                         }
                     }
                 ],
@@ -1182,8 +1208,8 @@
                     "index": 28
                 },
                 "format": {
-                    "name": "ROLLNUMBER1_Q13_3",
-                    "value": ""
+                    "name": "ROLLNUMBER2_Q13_3",
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402_Q13_3"
                 },
                 "validate": {
                     "regExp": ""
@@ -1194,8 +1220,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER3_1",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "65",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "67",
                         "index": 0,
                         "rect": {
                             "top": 229,
@@ -1206,8 +1232,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER3_2",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "66",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "68",
                         "index": 1,
                         "rect": {
                             "top": 230,
@@ -1218,8 +1244,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER3_3",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "67",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "69",
                         "index": 2,
                         "rect": {
                             "top": 231,
@@ -1230,8 +1256,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER3_4",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "68",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "70",
                         "index": 3,
                         "rect": {
                             "top": 231,
@@ -1242,8 +1268,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER3_5",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "69",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "71",
                         "index": 4,
                         "rect": {
                             "top": 229,
@@ -1254,8 +1280,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER3_6",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "70",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "72",
                         "index": 5,
                         "rect": {
                             "top": 230,
@@ -1266,8 +1292,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER3_7",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "71",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "73",
                         "index": 6,
                         "rect": {
                             "top": 229,
@@ -1278,8 +1304,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER3_Q1_1",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "72",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "74",
                         "index": 7,
                         "rect": {
                             "top": 223,
@@ -1290,8 +1316,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER3_Q2_1",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "73",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "75",
                         "index": 8,
                         "rect": {
                             "top": 225,
@@ -1302,8 +1328,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER3_Q3_1",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "74",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "76",
                         "index": 9,
                         "rect": {
                             "top": 225,
@@ -1314,8 +1340,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER3_Q4_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "75",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "77",
                         "index": 10,
                         "rect": {
                             "top": 225,
@@ -1326,8 +1352,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER3_Q5_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "76",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "78",
                         "index": 11,
                         "rect": {
                             "top": 225,
@@ -1338,8 +1364,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER3_Q6_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "77",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "79",
                         "index": 12,
                         "rect": {
                             "top": 224,
@@ -1350,8 +1376,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER3_Q7_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "78",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "80",
                         "index": 13,
                         "rect": {
                             "top": 225,
@@ -1362,8 +1388,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER3_Q8_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "79",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "81",
                         "index": 14,
                         "rect": {
                             "top": 226,
@@ -1374,8 +1400,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER3_Q9_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "80",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "82",
                         "index": 15,
                         "rect": {
                             "top": 225,
@@ -1386,8 +1412,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER3_Q10_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "81",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "83",
                         "index": 16,
                         "rect": {
                             "top": 225,
@@ -1398,8 +1424,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER3_Q11_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "82",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "84",
                         "index": 17,
                         "rect": {
                             "top": 225,
@@ -1410,8 +1436,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER3_Q12_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "83",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "85",
                         "index": 18,
                         "rect": {
                             "top": 223,
@@ -1422,8 +1448,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER3_Q13_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "84",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "86",
                         "index": 19,
                         "rect": {
                             "top": 223,
@@ -1438,7 +1464,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER3",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u0940"
                 },
                 "validate": {
                     "regExp": ""
@@ -1449,8 +1475,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER3_Q1_1",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "85",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "87",
                         "index": 0,
                         "rect": {
                             "top": 223,
@@ -1465,7 +1491,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER3_Q1_1",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403_Q1_1"
                 },
                 "validate": {
                     "regExp": ""
@@ -1476,8 +1502,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER3_Q2_1",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "86",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "88",
                         "index": 0,
                         "rect": {
                             "top": 225,
@@ -1492,7 +1518,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER3_Q2_1",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403_Q2_1"
                 },
                 "validate": {
                     "regExp": ""
@@ -1503,8 +1529,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER3_Q3_1",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "87",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "89",
                         "index": 0,
                         "rect": {
                             "top": 225,
@@ -1519,7 +1545,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER3_Q3_1",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403_Q3_1"
                 },
                 "validate": {
                     "regExp": ""
@@ -1530,8 +1556,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER3_Q4_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "88",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "90",
                         "index": 0,
                         "rect": {
                             "top": 225,
@@ -1546,7 +1572,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER3_Q4_2",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403_Q4_2"
                 },
                 "validate": {
                     "regExp": ""
@@ -1557,8 +1583,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER3_Q5_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "89",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "91",
                         "index": 0,
                         "rect": {
                             "top": 225,
@@ -1573,7 +1599,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER3_Q5_2",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403_Q5_2"
                 },
                 "validate": {
                     "regExp": ""
@@ -1584,8 +1610,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER3_Q6_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "90",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "92",
                         "index": 0,
                         "rect": {
                             "top": 224,
@@ -1600,7 +1626,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER3_Q6_2",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403_Q6_2"
                 },
                 "validate": {
                     "regExp": ""
@@ -1608,13 +1634,26 @@
             },
             {
                 "cellId": "36",
-                "rois": [],
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER3_Q7_2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "93",
+                        "index": 0,
+                        "rect": {
+                            "top": 225,
+                            "left": 379,
+                            "bottom": 264,
+                            "right": 414
+                        }
+                    }
+                ],
                 "render": {
                     "index": 36
                 },
                 "format": {
-                    "name": "ROLLNUMBER3_Q7_3",
-                    "value": ""
+                    "name": "ROLLNUMBER3_Q7_2",
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403_Q7_2"
                 },
                 "validate": {
                     "regExp": ""
@@ -1622,13 +1661,26 @@
             },
             {
                 "cellId": "37",
-                "rois": [],
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER3_Q8_3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "94",
+                        "index": 0,
+                        "rect": {
+                            "top": 226,
+                            "left": 415,
+                            "bottom": 261,
+                            "right": 448
+                        }
+                    }
+                ],
                 "render": {
                     "index": 37
                 },
                 "format": {
-                    "name": "ROLLNUMBER3_Q8_2",
-                    "value": ""
+                    "name": "ROLLNUMBER3_Q8_3",
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403_Q8_3"
                 },
                 "validate": {
                     "regExp": ""
@@ -1639,8 +1691,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER3_Q9_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "91",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "95",
                         "index": 0,
                         "rect": {
                             "top": 225,
@@ -1655,7 +1707,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER3_Q9_3",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403_Q9_3"
                 },
                 "validate": {
                     "regExp": ""
@@ -1666,8 +1718,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER3_Q10_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "92",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "96",
                         "index": 0,
                         "rect": {
                             "top": 225,
@@ -1682,7 +1734,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER3_Q10_3",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403_Q10_3"
                 },
                 "validate": {
                     "regExp": ""
@@ -1693,8 +1745,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER3_Q11_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "93",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "97",
                         "index": 0,
                         "rect": {
                             "top": 225,
@@ -1709,7 +1761,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER3_Q11_3",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403_Q11_3"
                 },
                 "validate": {
                     "regExp": ""
@@ -1720,8 +1772,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER3_Q12_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "94",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "98",
                         "index": 0,
                         "rect": {
                             "top": 223,
@@ -1736,7 +1788,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER3_Q12_3",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403_Q12_3"
                 },
                 "validate": {
                     "regExp": ""
@@ -1747,8 +1799,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER3_Q13_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "95",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "99",
                         "index": 0,
                         "rect": {
                             "top": 223,
@@ -1763,7 +1815,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER3_Q13_3",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403_Q13_3"
                 },
                 "validate": {
                     "regExp": ""
@@ -1774,8 +1826,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER4_2",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "96",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "100",
                         "index": 0,
                         "rect": {
                             "top": 269,
@@ -1786,8 +1838,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER4_1",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "97",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "101",
                         "index": 1,
                         "rect": {
                             "top": 268,
@@ -1798,8 +1850,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER4_3",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "98",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "102",
                         "index": 2,
                         "rect": {
                             "top": 270,
@@ -1810,8 +1862,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER4_4",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "99",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "103",
                         "index": 3,
                         "rect": {
                             "top": 270,
@@ -1822,8 +1874,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER4_5",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "100",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "104",
                         "index": 4,
                         "rect": {
                             "top": 269,
@@ -1834,8 +1886,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER4_6",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "101",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "105",
                         "index": 5,
                         "rect": {
                             "top": 269,
@@ -1846,8 +1898,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER4_7",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "102",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "106",
                         "index": 6,
                         "rect": {
                             "top": 269,
@@ -1858,8 +1910,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER4_Q1_1",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "103",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "107",
                         "index": 7,
                         "rect": {
                             "top": 265,
@@ -1870,8 +1922,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER4_Q2_1",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "104",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "108",
                         "index": 8,
                         "rect": {
                             "top": 264,
@@ -1882,8 +1934,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER4_Q3_1",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "105",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "109",
                         "index": 9,
                         "rect": {
                             "top": 264,
@@ -1894,8 +1946,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER4_Q4_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "106",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "110",
                         "index": 10,
                         "rect": {
                             "top": 263,
@@ -1906,8 +1958,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER4_Q5_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "107",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "111",
                         "index": 11,
                         "rect": {
                             "top": 264,
@@ -1918,8 +1970,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER4_Q6_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "108",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "112",
                         "index": 12,
                         "rect": {
                             "top": 265,
@@ -1930,8 +1982,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER4_Q7_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "109",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "113",
                         "index": 13,
                         "rect": {
                             "top": 263,
@@ -1942,8 +1994,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER4_Q8_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "110",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "114",
                         "index": 14,
                         "rect": {
                             "top": 264,
@@ -1954,8 +2006,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER4_Q9_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "111",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "115",
                         "index": 15,
                         "rect": {
                             "top": 264,
@@ -1966,8 +2018,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER4_Q10_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "112",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "116",
                         "index": 16,
                         "rect": {
                             "top": 263,
@@ -1978,8 +2030,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER4_Q11_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "113",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "117",
                         "index": 17,
                         "rect": {
                             "top": 263,
@@ -1990,8 +2042,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER4_Q12_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "114",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "118",
                         "index": 18,
                         "rect": {
                             "top": 263,
@@ -2002,8 +2054,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER4_Q13_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "115",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "119",
                         "index": 19,
                         "rect": {
                             "top": 265,
@@ -2018,7 +2070,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER4",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u0940"
                 },
                 "validate": {
                     "regExp": ""
@@ -2029,8 +2081,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER4_Q1_1",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "116",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "120",
                         "index": 0,
                         "rect": {
                             "top": 265,
@@ -2045,7 +2097,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER4_Q1_1",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404_Q1_1"
                 },
                 "validate": {
                     "regExp": ""
@@ -2056,8 +2108,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER4_Q2_1",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "117",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "121",
                         "index": 0,
                         "rect": {
                             "top": 264,
@@ -2072,7 +2124,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER4_Q2_1",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404_Q2_1"
                 },
                 "validate": {
                     "regExp": ""
@@ -2083,8 +2135,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER4_Q3_1",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "118",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "122",
                         "index": 0,
                         "rect": {
                             "top": 264,
@@ -2099,7 +2151,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER4_Q3_1",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404_Q3_1"
                 },
                 "validate": {
                     "regExp": ""
@@ -2110,8 +2162,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER4_Q4_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "119",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "123",
                         "index": 0,
                         "rect": {
                             "top": 263,
@@ -2126,7 +2178,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER4_Q4_2",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404_Q4_2"
                 },
                 "validate": {
                     "regExp": ""
@@ -2137,8 +2189,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER4_Q5_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "120",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "124",
                         "index": 0,
                         "rect": {
                             "top": 264,
@@ -2153,7 +2205,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER4_Q5_2",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404_Q5_2"
                 },
                 "validate": {
                     "regExp": ""
@@ -2164,8 +2216,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER4_Q6_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "121",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "125",
                         "index": 0,
                         "rect": {
                             "top": 265,
@@ -2180,7 +2232,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER4_Q6_2",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404_Q6_2"
                 },
                 "validate": {
                     "regExp": ""
@@ -2188,13 +2240,26 @@
             },
             {
                 "cellId": "50",
-                "rois": [],
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER4_Q7_2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "126",
+                        "index": 0,
+                        "rect": {
+                            "top": 263,
+                            "left": 379,
+                            "bottom": 300,
+                            "right": 413
+                        }
+                    }
+                ],
                 "render": {
                     "index": 50
                 },
                 "format": {
-                    "name": "ROLLNUMBER4_Q7_3",
-                    "value": ""
+                    "name": "ROLLNUMBER4_Q7_2",
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404_Q7_2"
                 },
                 "validate": {
                     "regExp": ""
@@ -2202,13 +2267,26 @@
             },
             {
                 "cellId": "51",
-                "rois": [],
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER4_Q8_3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "127",
+                        "index": 0,
+                        "rect": {
+                            "top": 264,
+                            "left": 414,
+                            "bottom": 300,
+                            "right": 446
+                        }
+                    }
+                ],
                 "render": {
                     "index": 51
                 },
                 "format": {
-                    "name": "ROLLNUMBER4_Q8_2",
-                    "value": ""
+                    "name": "ROLLNUMBER4_Q8_3",
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404_Q8_3"
                 },
                 "validate": {
                     "regExp": ""
@@ -2219,8 +2297,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER4_Q9_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "122",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "128",
                         "index": 0,
                         "rect": {
                             "top": 264,
@@ -2235,7 +2313,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER4_Q9_3",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404_Q9_3"
                 },
                 "validate": {
                     "regExp": ""
@@ -2246,8 +2324,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER4_Q10_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "123",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "129",
                         "index": 0,
                         "rect": {
                             "top": 263,
@@ -2262,7 +2340,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER4_Q10_3",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404_Q10_3"
                 },
                 "validate": {
                     "regExp": ""
@@ -2273,8 +2351,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER4_Q11_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "124",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "130",
                         "index": 0,
                         "rect": {
                             "top": 263,
@@ -2289,7 +2367,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER4_Q11_3",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404_Q11_3"
                 },
                 "validate": {
                     "regExp": ""
@@ -2300,8 +2378,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER4_Q12_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "125",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "131",
                         "index": 0,
                         "rect": {
                             "top": 263,
@@ -2316,7 +2394,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER4_Q12_3",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404_Q12_3"
                 },
                 "validate": {
                     "regExp": ""
@@ -2327,8 +2405,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER4_Q13_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "126",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "132",
                         "index": 0,
                         "rect": {
                             "top": 265,
@@ -2343,7 +2421,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER4_Q13_3",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404_Q13_3"
                 },
                 "validate": {
                     "regExp": ""
@@ -2354,8 +2432,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER5_1",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "127",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "133",
                         "index": 0,
                         "rect": {
                             "top": 308,
@@ -2366,8 +2444,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER5_2",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "128",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "134",
                         "index": 1,
                         "rect": {
                             "top": 308,
@@ -2378,8 +2456,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER5_3",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "129",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "135",
                         "index": 2,
                         "rect": {
                             "top": 308,
@@ -2390,8 +2468,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER5_4",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "130",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "136",
                         "index": 3,
                         "rect": {
                             "top": 308,
@@ -2402,8 +2480,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER5_5",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "131",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "137",
                         "index": 4,
                         "rect": {
                             "top": 307,
@@ -2414,8 +2492,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER5_6",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "132",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "138",
                         "index": 5,
                         "rect": {
                             "top": 308,
@@ -2426,8 +2504,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER5_7",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "133",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "139",
                         "index": 6,
                         "rect": {
                             "top": 307,
@@ -2438,8 +2516,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER5_Q1_1",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "134",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "140",
                         "index": 7,
                         "rect": {
                             "top": 303,
@@ -2450,8 +2528,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER5_Q2_1",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "135",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "141",
                         "index": 8,
                         "rect": {
                             "top": 303,
@@ -2462,8 +2540,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER5_Q3_1",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "136",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "142",
                         "index": 9,
                         "rect": {
                             "top": 303,
@@ -2474,8 +2552,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER5_Q4_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "137",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "143",
                         "index": 10,
                         "rect": {
                             "top": 302,
@@ -2486,8 +2564,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER5_Q5_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "138",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "144",
                         "index": 11,
                         "rect": {
                             "top": 302,
@@ -2498,8 +2576,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER5_Q6_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "139",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "145",
                         "index": 12,
                         "rect": {
                             "top": 302,
@@ -2510,8 +2588,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER5_Q7_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "140",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "146",
                         "index": 13,
                         "rect": {
                             "top": 303,
@@ -2522,8 +2600,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER5_Q8_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "141",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "147",
                         "index": 14,
                         "rect": {
                             "top": 303,
@@ -2534,8 +2612,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER5_Q9_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "142",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "148",
                         "index": 15,
                         "rect": {
                             "top": 303,
@@ -2546,8 +2624,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER5_Q10_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "143",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "149",
                         "index": 16,
                         "rect": {
                             "top": 304,
@@ -2558,8 +2636,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER5_Q11_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "144",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "150",
                         "index": 17,
                         "rect": {
                             "top": 303,
@@ -2570,8 +2648,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER5_Q12_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "145",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "151",
                         "index": 18,
                         "rect": {
                             "top": 302,
@@ -2582,8 +2660,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER5_Q6=13_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "146",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "152",
                         "index": 19,
                         "rect": {
                             "top": 303,
@@ -2598,7 +2676,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER5",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u0940"
                 },
                 "validate": {
                     "regExp": ""
@@ -2609,8 +2687,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER5_Q1_1",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "147",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "153",
                         "index": 0,
                         "rect": {
                             "top": 303,
@@ -2625,7 +2703,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER5_Q1_1",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09405_Q1_1"
                 },
                 "validate": {
                     "regExp": ""
@@ -2636,8 +2714,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER5_Q2_1",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "148",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "154",
                         "index": 0,
                         "rect": {
                             "top": 303,
@@ -2652,7 +2730,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER5_Q2_1",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09405_Q2_1"
                 },
                 "validate": {
                     "regExp": ""
@@ -2663,8 +2741,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER5_Q3_1",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "149",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "155",
                         "index": 0,
                         "rect": {
                             "top": 303,
@@ -2679,7 +2757,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER5_Q3_1",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09405_Q3_1"
                 },
                 "validate": {
                     "regExp": ""
@@ -2690,8 +2768,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER5_Q4_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "150",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "156",
                         "index": 0,
                         "rect": {
                             "top": 302,
@@ -2706,7 +2784,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER5_Q4_2",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09405_Q4_2"
                 },
                 "validate": {
                     "regExp": ""
@@ -2717,8 +2795,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER5_Q5_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "151",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "157",
                         "index": 0,
                         "rect": {
                             "top": 302,
@@ -2733,7 +2811,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER5_Q5_2",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09405_Q5_2"
                 },
                 "validate": {
                     "regExp": ""
@@ -2744,8 +2822,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER5_Q6_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "152",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "158",
                         "index": 0,
                         "rect": {
                             "top": 302,
@@ -2760,7 +2838,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER5_Q6_2",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09405_Q6_2"
                 },
                 "validate": {
                     "regExp": ""
@@ -2771,8 +2849,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER5_Q7_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "153",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "159",
                         "index": 0,
                         "rect": {
                             "top": 303,
@@ -2787,7 +2865,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER5_Q7_2",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09405_Q7_2"
                 },
                 "validate": {
                     "regExp": ""
@@ -2798,8 +2876,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER5_Q8_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "154",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "160",
                         "index": 0,
                         "rect": {
                             "top": 303,
@@ -2814,7 +2892,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER5_Q8_3",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09405_Q8_3"
                 },
                 "validate": {
                     "regExp": ""
@@ -2825,8 +2903,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER5_Q9_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "155",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "161",
                         "index": 0,
                         "rect": {
                             "top": 303,
@@ -2841,7 +2919,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER5_Q9_3",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09405_Q9_3"
                 },
                 "validate": {
                     "regExp": ""
@@ -2852,8 +2930,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER5_Q10_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "156",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "162",
                         "index": 0,
                         "rect": {
                             "top": 304,
@@ -2868,7 +2946,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER5_Q10_3",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09405_Q10_3"
                 },
                 "validate": {
                     "regExp": ""
@@ -2879,8 +2957,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER5_Q11_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "157",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "163",
                         "index": 0,
                         "rect": {
                             "top": 303,
@@ -2895,7 +2973,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER5_Q11_3",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09405_Q11_3"
                 },
                 "validate": {
                     "regExp": ""
@@ -2906,8 +2984,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER5_Q12_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "158",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "164",
                         "index": 0,
                         "rect": {
                             "top": 302,
@@ -2922,7 +3000,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER5_Q12_3",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09405_Q12_3"
                 },
                 "validate": {
                     "regExp": ""
@@ -2936,7 +3014,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER5_Q13_3",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09405_Q13_3"
                 },
                 "validate": {
                     "regExp": ""
@@ -2947,8 +3025,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER6_1",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "159",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "165",
                         "index": 0,
                         "rect": {
                             "top": 347,
@@ -2959,8 +3037,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER6_2",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "160",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "166",
                         "index": 1,
                         "rect": {
                             "top": 348,
@@ -2971,8 +3049,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER6_3",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "161",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "167",
                         "index": 2,
                         "rect": {
                             "top": 348,
@@ -2983,8 +3061,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER6_4",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "162",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "168",
                         "index": 3,
                         "rect": {
                             "top": 348,
@@ -2995,8 +3073,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER6_5",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "163",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "169",
                         "index": 4,
                         "rect": {
                             "top": 346,
@@ -3007,8 +3085,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER6_6",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "164",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "170",
                         "index": 5,
                         "rect": {
                             "top": 347,
@@ -3019,8 +3097,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER6_7",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "165",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "171",
                         "index": 6,
                         "rect": {
                             "top": 347,
@@ -3031,8 +3109,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER6_Q1_1",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "166",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "172",
                         "index": 7,
                         "rect": {
                             "top": 342,
@@ -3043,8 +3121,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER6_Q2_1",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "167",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "173",
                         "index": 8,
                         "rect": {
                             "top": 342,
@@ -3055,8 +3133,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER6_Q3_1",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "168",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "174",
                         "index": 9,
                         "rect": {
                             "top": 341,
@@ -3067,8 +3145,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER6_Q4_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "169",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "175",
                         "index": 10,
                         "rect": {
                             "top": 341,
@@ -3079,8 +3157,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER6_Q5_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "170",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "176",
                         "index": 11,
                         "rect": {
                             "top": 340,
@@ -3091,8 +3169,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER6_Q6_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "171",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "177",
                         "index": 12,
                         "rect": {
                             "top": 340,
@@ -3103,8 +3181,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER6_Q7_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "172",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "178",
                         "index": 13,
                         "rect": {
                             "top": 341,
@@ -3115,8 +3193,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER6_Q8_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "173",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "179",
                         "index": 14,
                         "rect": {
                             "top": 343,
@@ -3127,8 +3205,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER6_Q9_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "174",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "180",
                         "index": 15,
                         "rect": {
                             "top": 341,
@@ -3139,8 +3217,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER6_Q10_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "175",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "181",
                         "index": 16,
                         "rect": {
                             "top": 341,
@@ -3151,8 +3229,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER6_Q11_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "176",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "182",
                         "index": 17,
                         "rect": {
                             "top": 342,
@@ -3163,8 +3241,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER6_Q12_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "177",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "183",
                         "index": 18,
                         "rect": {
                             "top": 342,
@@ -3175,8 +3253,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER6_Q13_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "178",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "184",
                         "index": 19,
                         "rect": {
                             "top": 340,
@@ -3191,7 +3269,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER6",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u0940"
                 },
                 "validate": {
                     "regExp": ""
@@ -3199,13 +3277,26 @@
             },
             {
                 "cellId": "72",
-                "rois": [],
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER6_Q1_1",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "185",
+                        "index": 0,
+                        "rect": {
+                            "top": 342,
+                            "left": 176,
+                            "bottom": 379,
+                            "right": 210
+                        }
+                    }
+                ],
                 "render": {
                     "index": 72
                 },
                 "format": {
-                    "name": "ROLLNUMBE6_Q1_1",
-                    "value": ""
+                    "name": "ROLLNUMBER6_Q1_1",
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09406_Q1_1"
                 },
                 "validate": {
                     "regExp": ""
@@ -3216,8 +3307,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER6_Q2_1",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "179",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "186",
                         "index": 0,
                         "rect": {
                             "top": 342,
@@ -3232,7 +3323,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER6_Q2_1",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09406_Q2_1"
                 },
                 "validate": {
                     "regExp": ""
@@ -3243,8 +3334,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER6_Q3_1",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "180",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "187",
                         "index": 0,
                         "rect": {
                             "top": 341,
@@ -3259,7 +3350,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER6_Q3_1",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09406_Q3_1"
                 },
                 "validate": {
                     "regExp": ""
@@ -3270,8 +3361,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER6_Q4_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "181",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "188",
                         "index": 0,
                         "rect": {
                             "top": 341,
@@ -3286,7 +3377,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER6_Q4_2",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09406_Q4_2"
                 },
                 "validate": {
                     "regExp": ""
@@ -3297,8 +3388,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER6_Q5_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "182",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "189",
                         "index": 0,
                         "rect": {
                             "top": 340,
@@ -3313,7 +3404,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER6_Q5_2",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09406_Q5_2"
                 },
                 "validate": {
                     "regExp": ""
@@ -3324,8 +3415,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER6_Q6_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "183",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "190",
                         "index": 0,
                         "rect": {
                             "top": 340,
@@ -3340,7 +3431,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER6_Q6_2",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09406_Q6_2"
                 },
                 "validate": {
                     "regExp": ""
@@ -3348,13 +3439,26 @@
             },
             {
                 "cellId": "78",
-                "rois": [],
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER6_Q7_2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "191",
+                        "index": 0,
+                        "rect": {
+                            "top": 341,
+                            "left": 380,
+                            "bottom": 378,
+                            "right": 414
+                        }
+                    }
+                ],
                 "render": {
                     "index": 78
                 },
                 "format": {
-                    "name": "ROLLNUMBER6_Q7_3",
-                    "value": ""
+                    "name": "ROLLNUMBER6_Q7_2",
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09406_Q7_2"
                 },
                 "validate": {
                     "regExp": ""
@@ -3362,13 +3466,26 @@
             },
             {
                 "cellId": "79",
-                "rois": [],
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER6_Q8_3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "192",
+                        "index": 0,
+                        "rect": {
+                            "top": 343,
+                            "left": 415,
+                            "bottom": 379,
+                            "right": 448
+                        }
+                    }
+                ],
                 "render": {
                     "index": 79
                 },
                 "format": {
-                    "name": "ROLLNUMBER6_Q8_2",
-                    "value": ""
+                    "name": "ROLLNUMBER6_Q8_3",
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09406_Q8_3"
                 },
                 "validate": {
                     "regExp": ""
@@ -3379,8 +3496,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER6_Q9_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "184",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "193",
                         "index": 0,
                         "rect": {
                             "top": 341,
@@ -3395,7 +3512,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER6_Q9_3",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09406_Q9_3"
                 },
                 "validate": {
                     "regExp": ""
@@ -3406,8 +3523,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER6_Q10_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "185",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "194",
                         "index": 0,
                         "rect": {
                             "top": 341,
@@ -3422,7 +3539,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER6_Q10_3",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09406_Q10_3"
                 },
                 "validate": {
                     "regExp": ""
@@ -3433,8 +3550,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER6_Q11_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "186",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "195",
                         "index": 0,
                         "rect": {
                             "top": 342,
@@ -3449,7 +3566,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER6_Q11_3",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09406_Q11_3"
                 },
                 "validate": {
                     "regExp": ""
@@ -3460,8 +3577,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER6_Q12_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "187",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "196",
                         "index": 0,
                         "rect": {
                             "top": 342,
@@ -3476,7 +3593,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER6_Q12_3",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09406_Q12_3"
                 },
                 "validate": {
                     "regExp": ""
@@ -3487,8 +3604,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER6_Q13_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "188",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "197",
                         "index": 0,
                         "rect": {
                             "top": 340,
@@ -3503,7 +3620,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER6_Q13_3",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09406_Q13_3"
                 },
                 "validate": {
                     "regExp": ""
@@ -3514,8 +3631,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER7_1",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "189",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "198",
                         "index": 0,
                         "rect": {
                             "top": 386,
@@ -3526,8 +3643,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER7_2",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "190",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "199",
                         "index": 1,
                         "rect": {
                             "top": 387,
@@ -3538,8 +3655,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER7_3",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "191",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "200",
                         "index": 2,
                         "rect": {
                             "top": 387,
@@ -3550,8 +3667,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER7_4",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "192",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "201",
                         "index": 3,
                         "rect": {
                             "top": 387,
@@ -3562,8 +3679,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER7_5",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "193",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "202",
                         "index": 4,
                         "rect": {
                             "top": 386,
@@ -3574,8 +3691,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER7_6",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "194",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "203",
                         "index": 5,
                         "rect": {
                             "top": 387,
@@ -3586,8 +3703,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER7_7",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "195",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "204",
                         "index": 6,
                         "rect": {
                             "top": 386,
@@ -3598,8 +3715,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER7_Q1_1",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "196",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "205",
                         "index": 7,
                         "rect": {
                             "top": 380,
@@ -3610,8 +3727,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER7_Q2_1",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "197",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "206",
                         "index": 8,
                         "rect": {
                             "top": 382,
@@ -3622,8 +3739,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER7_Q3_1",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "198",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "207",
                         "index": 9,
                         "rect": {
                             "top": 381,
@@ -3634,8 +3751,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER7_Q4_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "199",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "208",
                         "index": 10,
                         "rect": {
                             "top": 379,
@@ -3646,8 +3763,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER7_Q5_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "200",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "209",
                         "index": 11,
                         "rect": {
                             "top": 381,
@@ -3658,8 +3775,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER7_Q6_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "201",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "210",
                         "index": 12,
                         "rect": {
                             "top": 382,
@@ -3670,8 +3787,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER7_Q7_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "202",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "211",
                         "index": 13,
                         "rect": {
                             "top": 381,
@@ -3682,8 +3799,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER7_Q8_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "203",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "212",
                         "index": 14,
                         "rect": {
                             "top": 381,
@@ -3694,8 +3811,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER7_Q9_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "204",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "213",
                         "index": 15,
                         "rect": {
                             "top": 380,
@@ -3706,8 +3823,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER7_Q10_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "205",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "214",
                         "index": 16,
                         "rect": {
                             "top": 381,
@@ -3718,8 +3835,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER7_Q11_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "206",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "215",
                         "index": 17,
                         "rect": {
                             "top": 381,
@@ -3730,8 +3847,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER7_Q12_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "207",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "216",
                         "index": 18,
                         "rect": {
                             "top": 381,
@@ -3742,8 +3859,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER7_Q13_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "208",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "217",
                         "index": 19,
                         "rect": {
                             "top": 382,
@@ -3758,7 +3875,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER7",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u0940"
                 },
                 "validate": {
                     "regExp": ""
@@ -3769,8 +3886,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER7_Q1_1",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "209",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "218",
                         "index": 0,
                         "rect": {
                             "top": 380,
@@ -3785,7 +3902,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER7_Q1_1",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09407_Q1_1"
                 },
                 "validate": {
                     "regExp": ""
@@ -3796,8 +3913,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER7_Q2_1",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "210",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "219",
                         "index": 0,
                         "rect": {
                             "top": 382,
@@ -3812,7 +3929,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER7_Q2_1",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09407_Q2_1"
                 },
                 "validate": {
                     "regExp": ""
@@ -3823,8 +3940,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER7_Q3_1",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "211",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "220",
                         "index": 0,
                         "rect": {
                             "top": 381,
@@ -3839,7 +3956,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER7_Q3_1",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09407_Q3_1"
                 },
                 "validate": {
                     "regExp": ""
@@ -3850,8 +3967,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER7_Q4_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "212",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "221",
                         "index": 0,
                         "rect": {
                             "top": 379,
@@ -3866,7 +3983,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER7_Q4_2",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09407_Q4_2"
                 },
                 "validate": {
                     "regExp": ""
@@ -3877,8 +3994,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER7_Q5_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "213",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "222",
                         "index": 0,
                         "rect": {
                             "top": 381,
@@ -3893,7 +4010,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER7_Q5_2",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09407_Q5_2"
                 },
                 "validate": {
                     "regExp": ""
@@ -3904,8 +4021,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER7_Q6_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "214",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "223",
                         "index": 0,
                         "rect": {
                             "top": 382,
@@ -3920,7 +4037,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER7_Q6_2",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09407_Q6_2"
                 },
                 "validate": {
                     "regExp": ""
@@ -3928,13 +4045,26 @@
             },
             {
                 "cellId": "92",
-                "rois": [],
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER7_Q7_2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "224",
+                        "index": 0,
+                        "rect": {
+                            "top": 381,
+                            "left": 414,
+                            "bottom": 418,
+                            "right": 447
+                        }
+                    }
+                ],
                 "render": {
                     "index": 92
                 },
                 "format": {
-                    "name": "ROLLNUMBER7_Q7_3",
-                    "value": ""
+                    "name": "ROLLNUMBER7_Q7_2",
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09407_Q7_2"
                 },
                 "validate": {
                     "regExp": ""
@@ -3942,26 +4072,13 @@
             },
             {
                 "cellId": "93",
-                "rois": [
-                    {
-                        "annotationTags": "ROLLNUMBER7_Q8_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "215",
-                        "index": 0,
-                        "rect": {
-                            "top": 381,
-                            "left": 380,
-                            "bottom": 417,
-                            "right": 411
-                        }
-                    }
-                ],
+                "rois": [],
                 "render": {
                     "index": 93
                 },
                 "format": {
-                    "name": "ROLLNUMBER7_Q8_2",
-                    "value": ""
+                    "name": "ROLLNUMBER7_Q8_3",
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09407_Q8_3"
                 },
                 "validate": {
                     "regExp": ""
@@ -3972,8 +4089,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER7_Q9_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "216",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "225",
                         "index": 0,
                         "rect": {
                             "top": 380,
@@ -3988,7 +4105,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER7_Q9_3",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09407_Q9_3"
                 },
                 "validate": {
                     "regExp": ""
@@ -3999,8 +4116,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER7_Q10_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "217",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "226",
                         "index": 0,
                         "rect": {
                             "top": 381,
@@ -4015,7 +4132,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER7_Q10_3",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09407_Q10_3"
                 },
                 "validate": {
                     "regExp": ""
@@ -4026,8 +4143,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER7_Q11_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "218",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "227",
                         "index": 0,
                         "rect": {
                             "top": 381,
@@ -4042,7 +4159,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER7_Q11_3",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09407_Q11_3"
                 },
                 "validate": {
                     "regExp": ""
@@ -4050,13 +4167,26 @@
             },
             {
                 "cellId": "97",
-                "rois": [],
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER7_Q12_3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "228",
+                        "index": 0,
+                        "rect": {
+                            "top": 381,
+                            "left": 553,
+                            "bottom": 420,
+                            "right": 584
+                        }
+                    }
+                ],
                 "render": {
                     "index": 97
                 },
                 "format": {
-                    "name": "ROLLNUMBER7Q12_3",
-                    "value": ""
+                    "name": "ROLLNUMBER7_Q12_3",
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09407_Q12_3"
                 },
                 "validate": {
                     "regExp": ""
@@ -4067,8 +4197,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER7_Q13_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "219",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "229",
                         "index": 0,
                         "rect": {
                             "top": 382,
@@ -4083,7 +4213,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER7_Q13_3",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09407_Q13_3"
                 },
                 "validate": {
                     "regExp": ""
@@ -4094,8 +4224,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER8_1",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "220",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "230",
                         "index": 0,
                         "rect": {
                             "top": 427,
@@ -4106,8 +4236,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER8_2",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "221",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "231",
                         "index": 1,
                         "rect": {
                             "top": 426,
@@ -4118,8 +4248,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER8_3",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "222",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "232",
                         "index": 2,
                         "rect": {
                             "top": 426,
@@ -4130,8 +4260,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER8_4",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "223",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "233",
                         "index": 3,
                         "rect": {
                             "top": 424,
@@ -4142,8 +4272,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER8_5",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "224",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "234",
                         "index": 4,
                         "rect": {
                             "top": 426,
@@ -4154,8 +4284,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER8_6",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "225",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "235",
                         "index": 5,
                         "rect": {
                             "top": 425,
@@ -4166,8 +4296,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER8_7",
-                        "extractionMethod": "Numeric Classification",
-                        "roiId": "226",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "236",
                         "index": 6,
                         "rect": {
                             "top": 425,
@@ -4178,8 +4308,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER8_Q1_1",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "227",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "237",
                         "index": 7,
                         "rect": {
                             "top": 419,
@@ -4190,8 +4320,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER8_Q2_1",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "228",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "238",
                         "index": 8,
                         "rect": {
                             "top": 420,
@@ -4202,8 +4332,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER8_Q3_1",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "229",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "239",
                         "index": 9,
                         "rect": {
                             "top": 420,
@@ -4214,8 +4344,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER8_Q4_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "230",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "240",
                         "index": 10,
                         "rect": {
                             "top": 419,
@@ -4226,8 +4356,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER8_Q5_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "231",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "241",
                         "index": 11,
                         "rect": {
                             "top": 418,
@@ -4238,8 +4368,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER8_Q6_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "232",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "242",
                         "index": 12,
                         "rect": {
                             "top": 419,
@@ -4250,8 +4380,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER8_Q7_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "233",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "243",
                         "index": 13,
                         "rect": {
                             "top": 419,
@@ -4262,8 +4392,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER8_Q8_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "234",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "244",
                         "index": 14,
                         "rect": {
                             "top": 419,
@@ -4274,8 +4404,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER8_Q9_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "235",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "245",
                         "index": 15,
                         "rect": {
                             "top": 419,
@@ -4286,8 +4416,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER8_Q10_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "236",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "246",
                         "index": 16,
                         "rect": {
                             "top": 421,
@@ -4298,8 +4428,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER8_Q11_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "237",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "247",
                         "index": 17,
                         "rect": {
                             "top": 420,
@@ -4310,8 +4440,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER8_Q12_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "238",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "248",
                         "index": 18,
                         "rect": {
                             "top": 420,
@@ -4322,8 +4452,8 @@
                     },
                     {
                         "annotationTags": "ROLLNUMBER8_Q13_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "239",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "249",
                         "index": 19,
                         "rect": {
                             "top": 420,
@@ -4338,7 +4468,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER8",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u0940"
                 },
                 "validate": {
                     "regExp": ""
@@ -4349,8 +4479,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER8_Q1_1",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "240",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "250",
                         "index": 0,
                         "rect": {
                             "top": 419,
@@ -4365,7 +4495,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER8_Q1_1",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09408_Q1_1"
                 },
                 "validate": {
                     "regExp": ""
@@ -4376,8 +4506,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER8_Q2_1",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "241",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "251",
                         "index": 0,
                         "rect": {
                             "top": 420,
@@ -4392,7 +4522,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER8_Q2_1",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09408_Q2_1"
                 },
                 "validate": {
                     "regExp": ""
@@ -4403,8 +4533,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER8_Q3_1",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "242",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "252",
                         "index": 0,
                         "rect": {
                             "top": 420,
@@ -4419,7 +4549,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER8_Q3_1",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09408_Q3_1"
                 },
                 "validate": {
                     "regExp": ""
@@ -4430,8 +4560,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER8_Q4_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "243",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "253",
                         "index": 0,
                         "rect": {
                             "top": 419,
@@ -4446,7 +4576,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER8_Q4_2",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09408_Q4_2"
                 },
                 "validate": {
                     "regExp": ""
@@ -4457,8 +4587,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER8_Q5_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "244",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "254",
                         "index": 0,
                         "rect": {
                             "top": 418,
@@ -4473,7 +4603,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER8_Q5_2",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09408_Q5_2"
                 },
                 "validate": {
                     "regExp": ""
@@ -4484,8 +4614,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER8_Q6_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "245",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "255",
                         "index": 0,
                         "rect": {
                             "top": 419,
@@ -4500,7 +4630,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER8_Q6_2",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09408_Q6_2"
                 },
                 "validate": {
                     "regExp": ""
@@ -4511,8 +4641,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER8_Q7_2",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "246",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "256",
                         "index": 0,
                         "rect": {
                             "top": 419,
@@ -4527,7 +4657,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER8_Q7_2",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09408_Q7_2"
                 },
                 "validate": {
                     "regExp": ""
@@ -4538,8 +4668,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER8_Q8_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "247",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "257",
                         "index": 0,
                         "rect": {
                             "top": 419,
@@ -4554,7 +4684,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER8_Q8_3",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09408_Q8_3"
                 },
                 "validate": {
                     "regExp": ""
@@ -4565,8 +4695,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER8_Q9_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "248",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "258",
                         "index": 0,
                         "rect": {
                             "top": 419,
@@ -4581,7 +4711,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER8_Q9_3",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09408_Q9_3"
                 },
                 "validate": {
                     "regExp": ""
@@ -4592,8 +4722,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER8_Q10_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "249",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "259",
                         "index": 0,
                         "rect": {
                             "top": 421,
@@ -4608,7 +4738,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER8_Q10_3",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09408_Q10_3"
                 },
                 "validate": {
                     "regExp": ""
@@ -4619,8 +4749,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER8_Q11_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "250",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "260",
                         "index": 0,
                         "rect": {
                             "top": 420,
@@ -4635,7 +4765,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER8_Q11_3",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09408_Q11_3"
                 },
                 "validate": {
                     "regExp": ""
@@ -4646,8 +4776,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER8_Q12_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "251",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "261",
                         "index": 0,
                         "rect": {
                             "top": 420,
@@ -4662,7 +4792,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER8_Q12_3",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09408_Q12_3"
                 },
                 "validate": {
                     "regExp": ""
@@ -4673,8 +4803,8 @@
                 "rois": [
                     {
                         "annotationTags": "ROLLNUMBER8_Q13_3",
-                        "extractionMethod": "Cell OMR",
-                        "roiId": "252",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "262",
                         "index": 0,
                         "rect": {
                             "top": 420,
@@ -4689,7 +4819,7 @@
                 },
                 "format": {
                     "name": "ROLLNUMBER8_Q13_3",
-                    "value": ""
+                    "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09408_Q13_3"
                 },
                 "validate": {
                     "regExp": ""
