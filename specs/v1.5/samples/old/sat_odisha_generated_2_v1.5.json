@@ -1,0 +1,1441 @@
+{
+    "layout": {
+        "name": "Odisha SAT 20 Questions Exam Sheet Form",
+        "responseExcludeFields": [
+            "rois",
+            "validate",
+            "render"
+        ],
+        "tolerance": {
+            "predictionMin": 0.95,
+            "roiMinHeight": 15,
+            "roiMinWidth": 15
+        },
+        "type": "SAT_20_MARKSHEET",
+        "version": "1.0",
+        "cells": [
+            {
+                "cellId": 1,
+                "format": {
+                    "name": "STUDENTID",
+                    "value": "STUDENTID"
+                },
+                "render": {
+                    "index": 1
+                },
+                "rois": [
+                    {
+                        "annotationTag": "STUDENTID_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 0,
+                        "rect": {
+                            "bottom": 50,
+                            "left": 192,
+                            "right": 210,
+                            "top": 30
+                        },
+                        "roiId": 1
+                    },
+                    {
+                        "annotationTag": "STUDENTID_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 1,
+                        "rect": {
+                            "bottom": 51,
+                            "left": 215,
+                            "right": 238,
+                            "top": 29
+                        },
+                        "roiId": 2
+                    },
+                    {
+                        "annotationTag": "STUDENTID_3",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 2,
+                        "rect": {
+                            "bottom": 50,
+                            "left": 242,
+                            "right": 265,
+                            "top": 30
+                        },
+                        "roiId": 3
+                    },
+                    {
+                        "annotationTag": "STUDENTID_4",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 3,
+                        "rect": {
+                            "bottom": 49,
+                            "left": 269,
+                            "right": 291,
+                            "top": 30
+                        },
+                        "roiId": 4
+                    },
+                    {
+                        "annotationTag": "STUDENTID_5",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 4,
+                        "rect": {
+                            "bottom": 50,
+                            "left": 294,
+                            "right": 315,
+                            "top": 31
+                        },
+                        "roiId": 5
+                    },
+                    {
+                        "annotationTag": "STUDENTID_6",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 5,
+                        "rect": {
+                            "bottom": 49,
+                            "left": 319,
+                            "right": 340,
+                            "top": 31
+                        },
+                        "roiId": 6
+                    },
+                    {
+                        "annotationTag": "STUDENTID_7",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 6,
+                        "rect": {
+                            "bottom": 50,
+                            "left": 344,
+                            "right": 367,
+                            "top": 31
+                        },
+                        "roiId": 7
+                    },
+                    {
+                        "annotationTag": "STUDENTID_8",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 7,
+                        "rect": {
+                            "bottom": 50,
+                            "left": 371,
+                            "right": 392,
+                            "top": 31
+                        },
+                        "roiId": 8
+                    },
+                    {
+                        "annotationTag": "STUDENTID_9",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 8,
+                        "rect": {
+                            "bottom": 50,
+                            "left": 395,
+                            "right": 417,
+                            "top": 31
+                        },
+                        "roiId": 9
+                    },
+                    {
+                        "annotationTag": "STUDENTID_10",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 9,
+                        "rect": {
+                            "bottom": 50,
+                            "left": 421,
+                            "right": 442,
+                            "top": 31
+                        },
+                        "roiId": 10
+                    },
+                    {
+                        "annotationTag": "STUDENTID_11",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 10,
+                        "rect": {
+                            "bottom": 50,
+                            "left": 446,
+                            "right": 468,
+                            "top": 31
+                        },
+                        "roiId": 11
+                    },
+                    {
+                        "annotationTag": "STUDENTID_12",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 11,
+                        "rect": {
+                            "bottom": 48,
+                            "left": 472,
+                            "right": 494,
+                            "top": 30
+                        },
+                        "roiId": 12
+                    },
+                    {
+                        "annotationTag": "STUDENTID_13",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 12,
+                        "rect": {
+                            "bottom": 51,
+                            "left": 498,
+                            "right": 519,
+                            "top": 30
+                        },
+                        "roiId": 13
+                    },
+                    {
+                        "annotationTag": "STUDENTID_14",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 13,
+                        "rect": {
+                            "bottom": 51,
+                            "left": 522,
+                            "right": 544,
+                            "top": 31
+                        },
+                        "roiId": 14
+                    },
+                    {
+                        "annotationTag": "STUDENTID_15",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 14,
+                        "rect": {
+                            "bottom": 51,
+                            "left": 548,
+                            "right": 570,
+                            "top": 31
+                        },
+                        "roiId": 15
+                    },
+                    {
+                        "annotationTag": "STUDENTID_16",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 15,
+                        "rect": {
+                            "bottom": 50,
+                            "left": 573,
+                            "right": 596,
+                            "top": 30
+                        },
+                        "roiId": 16
+                    }
+                ],
+                "validate": {
+                    "errorMessage": "Should be 10 to 15 Digits",
+                    "name": "Between 10 to 15 Digits",
+                    "regExp": "^[1-9][0-9]{9,14}$",
+                    "source": "BACKEND_SCHOOL"
+                }
+            },
+            {
+                "cellId": 2,
+                "format": {
+                    "name": "QUESTION1",
+                    "value": "QUESTION1"
+                },
+                "render": {
+                    "index": 2
+                },
+                "rois": [
+                    {
+                        "annotationTag": "QUESTION1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 0,
+                        "rect": {
+                            "bottom": 115,
+                            "left": 215,
+                            "right": 238,
+                            "top": 96
+                        },
+                        "roiId": 1
+                    },
+                    {
+                        "annotationTag": "QUESTION1_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 1,
+                        "rect": {
+                            "bottom": 117,
+                            "left": 252,
+                            "right": 276,
+                            "top": 97
+                        },
+                        "roiId": 2
+                    },
+                    {
+                        "annotationTag": "QUESTION10_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 2,
+                        "rect": {
+                            "bottom": 396,
+                            "left": 217,
+                            "right": 239,
+                            "top": 378
+                        },
+                        "roiId": 3
+                    },
+                    {
+                        "annotationTag": "QUESTION10_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 3,
+                        "rect": {
+                            "bottom": 396,
+                            "left": 254,
+                            "right": 277,
+                            "top": 378
+                        },
+                        "roiId": 4
+                    },
+                    {
+                        "annotationTag": "QUESTION11_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 4,
+                        "rect": {
+                            "bottom": 115,
+                            "left": 512,
+                            "right": 534,
+                            "top": 96
+                        },
+                        "roiId": 5
+                    },
+                    {
+                        "annotationTag": "QUESTION11_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 5,
+                        "rect": {
+                            "bottom": 115,
+                            "left": 550,
+                            "right": 571,
+                            "top": 97
+                        },
+                        "roiId": 6
+                    },
+                    {
+                        "annotationTag": "QUESTION12_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 6,
+                        "rect": {
+                            "bottom": 148,
+                            "left": 512,
+                            "right": 534,
+                            "top": 129
+                        },
+                        "roiId": 7
+                    },
+                    {
+                        "annotationTag": "QUESTION12_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 7,
+                        "rect": {
+                            "bottom": 147,
+                            "left": 551,
+                            "right": 572,
+                            "top": 128
+                        },
+                        "roiId": 8
+                    },
+                    {
+                        "annotationTag": "QUESTION13_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 8,
+                        "rect": {
+                            "bottom": 178,
+                            "left": 512,
+                            "right": 534,
+                            "top": 160
+                        },
+                        "roiId": 9
+                    },
+                    {
+                        "annotationTag": "QUESTION13_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 9,
+                        "rect": {
+                            "bottom": 177,
+                            "left": 550,
+                            "right": 572,
+                            "top": 160
+                        },
+                        "roiId": 10
+                    },
+                    {
+                        "annotationTag": "QUESTION14_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 10,
+                        "rect": {
+                            "bottom": 210,
+                            "left": 511,
+                            "right": 533,
+                            "top": 191
+                        },
+                        "roiId": 11
+                    },
+                    {
+                        "annotationTag": "QUESTION14_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 11,
+                        "rect": {
+                            "bottom": 210,
+                            "left": 549,
+                            "right": 570,
+                            "top": 190
+                        },
+                        "roiId": 12
+                    },
+                    {
+                        "annotationTag": "QUESTION15_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 12,
+                        "rect": {
+                            "bottom": 240,
+                            "left": 511,
+                            "right": 532,
+                            "top": 222
+                        },
+                        "roiId": 13
+                    },
+                    {
+                        "annotationTag": "QUESTION15_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 13,
+                        "rect": {
+                            "bottom": 239,
+                            "left": 549,
+                            "right": 570,
+                            "top": 222
+                        },
+                        "roiId": 14
+                    },
+                    {
+                        "annotationTag": "QUESTION16_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 14,
+                        "rect": {
+                            "bottom": 272,
+                            "left": 511,
+                            "right": 532,
+                            "top": 253
+                        },
+                        "roiId": 15
+                    },
+                    {
+                        "annotationTag": "QUESTION16_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 15,
+                        "rect": {
+                            "bottom": 272,
+                            "left": 549,
+                            "right": 570,
+                            "top": 253
+                        },
+                        "roiId": 16
+                    },
+                    {
+                        "annotationTag": "QUESTION17_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 16,
+                        "rect": {
+                            "bottom": 302,
+                            "left": 512,
+                            "right": 535,
+                            "top": 284
+                        },
+                        "roiId": 17
+                    },
+                    {
+                        "annotationTag": "QUESTION17_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 17,
+                        "rect": {
+                            "bottom": 303,
+                            "left": 550,
+                            "right": 571,
+                            "top": 284
+                        },
+                        "roiId": 18
+                    },
+                    {
+                        "annotationTag": "QUESTION18_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 18,
+                        "rect": {
+                            "bottom": 333,
+                            "left": 512,
+                            "right": 534,
+                            "top": 315
+                        },
+                        "roiId": 19
+                    },
+                    {
+                        "annotationTag": "QUESTION18_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 19,
+                        "rect": {
+                            "bottom": 334,
+                            "left": 550,
+                            "right": 570,
+                            "top": 315
+                        },
+                        "roiId": 20
+                    },
+                    {
+                        "annotationTag": "QUESTION19_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 20,
+                        "rect": {
+                            "bottom": 365,
+                            "left": 512,
+                            "right": 534,
+                            "top": 346
+                        },
+                        "roiId": 21
+                    },
+                    {
+                        "annotationTag": "QUESTION19_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 21,
+                        "rect": {
+                            "bottom": 365,
+                            "left": 551,
+                            "right": 570,
+                            "top": 347
+                        },
+                        "roiId": 22
+                    }
+                ],
+                "validate": {
+                    "errorMessage": "QUESTION1 should range from 0 to 5 Marks",
+                    "name": "Between 0 to 5 Marks",
+                    "regExp": "[0-5]",
+                    "source": "BACKEND_EXAM"
+                }
+            },
+            {
+                "cellId": 3,
+                "format": {
+                    "name": "QUESTION2",
+                    "value": "QUESTION2"
+                },
+                "render": {
+                    "index": 3
+                },
+                "rois": [
+                    {
+                        "annotationTag": "QUESTION2_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 0,
+                        "rect": {
+                            "bottom": 147,
+                            "left": 216,
+                            "right": 240,
+                            "top": 128
+                        },
+                        "roiId": 1
+                    },
+                    {
+                        "annotationTag": "QUESTION2_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 1,
+                        "rect": {
+                            "bottom": 148,
+                            "left": 253,
+                            "right": 275,
+                            "top": 128
+                        },
+                        "roiId": 2
+                    },
+                    {
+                        "annotationTag": "QUESTION20_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 2,
+                        "rect": {
+                            "bottom": 396,
+                            "left": 512,
+                            "right": 534,
+                            "top": 378
+                        },
+                        "roiId": 3
+                    },
+                    {
+                        "annotationTag": "QUESTION20_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 3,
+                        "rect": {
+                            "bottom": 395,
+                            "left": 551,
+                            "right": 571,
+                            "top": 377
+                        },
+                        "roiId": 4
+                    }
+                ],
+                "validate": {
+                    "errorMessage": "QUESTION2 should range from 0 to 5 Marks",
+                    "name": "Between 0 to 5 Marks",
+                    "regExp": "[0-5]",
+                    "source": "BACKEND_EXAM"
+                }
+            },
+            {
+                "cellId": 4,
+                "format": {
+                    "name": "QUESTION3",
+                    "value": "QUESTION3"
+                },
+                "render": {
+                    "index": 4
+                },
+                "rois": [
+                    {
+                        "annotationTag": "QUESTION3_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 0,
+                        "rect": {
+                            "bottom": 179,
+                            "left": 216,
+                            "right": 239,
+                            "top": 158
+                        },
+                        "roiId": 1
+                    },
+                    {
+                        "annotationTag": "QUESTION3_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 1,
+                        "rect": {
+                            "bottom": 179,
+                            "left": 254,
+                            "right": 277,
+                            "top": 159
+                        },
+                        "roiId": 2
+                    }
+                ],
+                "validate": {
+                    "errorMessage": "QUESTION3 should range from 0 to 5 Marks",
+                    "name": "Between 0 to 5 Marks",
+                    "regExp": "[0-5]",
+                    "source": "BACKEND_EXAM"
+                }
+            },
+            {
+                "cellId": 5,
+                "format": {
+                    "name": "QUESTION4",
+                    "value": "QUESTION4"
+                },
+                "render": {
+                    "index": 5
+                },
+                "rois": [
+                    {
+                        "annotationTag": "QUESTION4_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 0,
+                        "rect": {
+                            "bottom": 211,
+                            "left": 215,
+                            "right": 239,
+                            "top": 191
+                        },
+                        "roiId": 1
+                    },
+                    {
+                        "annotationTag": "QUESTION4_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 1,
+                        "rect": {
+                            "bottom": 211,
+                            "left": 254,
+                            "right": 277,
+                            "top": 190
+                        },
+                        "roiId": 2
+                    }
+                ],
+                "validate": {
+                    "errorMessage": "QUESTION4 should range from 0 to 10 Marks",
+                    "name": "Between 0 to 10 Marks",
+                    "regExp": "[0-10]",
+                    "source": "BACKEND_EXAM"
+                }
+            },
+            {
+                "cellId": 6,
+                "format": {
+                    "name": "QUESTION5",
+                    "value": "QUESTION5"
+                },
+                "render": {
+                    "index": 6
+                },
+                "rois": [
+                    {
+                        "annotationTag": "QUESTION5_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 0,
+                        "rect": {
+                            "bottom": 241,
+                            "left": 217,
+                            "right": 240,
+                            "top": 221
+                        },
+                        "roiId": 1
+                    },
+                    {
+                        "annotationTag": "QUESTION5_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 1,
+                        "rect": {
+                            "bottom": 240,
+                            "left": 254,
+                            "right": 277,
+                            "top": 221
+                        },
+                        "roiId": 2
+                    }
+                ],
+                "validate": {
+                    "errorMessage": "QUESTION5 should range from 0 to 10 Marks",
+                    "name": "Between 0 to 10 Marks",
+                    "regExp": "[0-10]",
+                    "source": "BACKEND_EXAM"
+                }
+            },
+            {
+                "cellId": 7,
+                "format": {
+                    "name": "QUESTION6",
+                    "value": "QUESTION6"
+                },
+                "render": {
+                    "index": 7
+                },
+                "rois": [
+                    {
+                        "annotationTag": "QUESTION6_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 0,
+                        "rect": {
+                            "bottom": 272,
+                            "left": 216,
+                            "right": 239,
+                            "top": 253
+                        },
+                        "roiId": 1
+                    },
+                    {
+                        "annotationTag": "QUESTION6_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 1,
+                        "rect": {
+                            "bottom": 272,
+                            "left": 255,
+                            "right": 277,
+                            "top": 252
+                        },
+                        "roiId": 2
+                    }
+                ],
+                "validate": {
+                    "errorMessage": "QUESTION6 should range from 0 to 5 Marks",
+                    "name": "Between 0 to 5 Marks",
+                    "regExp": "[0-5]",
+                    "source": "BACKEND_EXAM"
+                }
+            },
+            {
+                "cellId": 8,
+                "format": {
+                    "name": "QUESTION7",
+                    "value": "QUESTION7"
+                },
+                "render": {
+                    "index": 8
+                },
+                "rois": [
+                    {
+                        "annotationTag": "QUESTION7_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 0,
+                        "rect": {
+                            "bottom": 304,
+                            "left": 217,
+                            "right": 240,
+                            "top": 284
+                        },
+                        "roiId": 1
+                    },
+                    {
+                        "annotationTag": "QUESTION7_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 1,
+                        "rect": {
+                            "bottom": 303,
+                            "left": 255,
+                            "right": 277,
+                            "top": 282
+                        },
+                        "roiId": 2
+                    }
+                ],
+                "validate": {
+                    "errorMessage": "QUESTION7 should range from 0 to 5 Marks",
+                    "name": "Between 0 to 5 Marks",
+                    "regExp": "[0-5]",
+                    "source": "BACKEND_EXAM"
+                }
+            },
+            {
+                "cellId": 9,
+                "format": {
+                    "name": "QUESTION8",
+                    "value": "QUESTION8"
+                },
+                "render": {
+                    "index": 9
+                },
+                "rois": [
+                    {
+                        "annotationTag": "QUESTION8_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 0,
+                        "rect": {
+                            "bottom": 333,
+                            "left": 216,
+                            "right": 238,
+                            "top": 315
+                        },
+                        "roiId": 1
+                    },
+                    {
+                        "annotationTag": "QUESTION8_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 1,
+                        "rect": {
+                            "bottom": 334,
+                            "left": 254,
+                            "right": 276,
+                            "top": 314
+                        },
+                        "roiId": 2
+                    }
+                ],
+                "validate": {
+                    "errorMessage": "QUESTION8 should range from 0 to 5 Marks",
+                    "name": "Between 0 to 5 Marks",
+                    "regExp": "[0-5]",
+                    "source": "BACKEND_EXAM"
+                }
+            },
+            {
+                "cellId": 10,
+                "format": {
+                    "name": "QUESTION9",
+                    "value": "QUESTION9"
+                },
+                "render": {
+                    "index": 10
+                },
+                "rois": [
+                    {
+                        "annotationTag": "QUESTION9_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 0,
+                        "rect": {
+                            "bottom": 364,
+                            "left": 217,
+                            "right": 240,
+                            "top": 346
+                        },
+                        "roiId": 1
+                    },
+                    {
+                        "annotationTag": "QUESTION9_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 1,
+                        "rect": {
+                            "bottom": 365,
+                            "left": 254,
+                            "right": 277,
+                            "top": 346
+                        },
+                        "roiId": 2
+                    }
+                ],
+                "validate": {
+                    "errorMessage": "QUESTION9 should range from 0 to 5 Marks",
+                    "name": "Between 0 to 5 Marks",
+                    "regExp": "[0-5]",
+                    "source": "BACKEND_EXAM"
+                }
+            },
+            {
+                "cellId": 11,
+                "format": {
+                    "name": "QUESTION10",
+                    "value": "QUESTION10"
+                },
+                "render": {
+                    "index": 11
+                },
+                "rois": [
+                    {
+                        "annotationTag": "QUESTION10_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 0,
+                        "rect": {
+                            "bottom": 396,
+                            "left": 217,
+                            "right": 239,
+                            "top": 378
+                        },
+                        "roiId": 1
+                    },
+                    {
+                        "annotationTag": "QUESTION10_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 1,
+                        "rect": {
+                            "bottom": 396,
+                            "left": 254,
+                            "right": 277,
+                            "top": 378
+                        },
+                        "roiId": 2
+                    }
+                ],
+                "validate": {
+                    "errorMessage": "QUESTION10 should range from 0 to 5 Marks",
+                    "name": "Between 0 to 5 Marks",
+                    "regExp": "[0-5]",
+                    "source": "BACKEND_EXAM"
+                }
+            },
+            {
+                "cellId": 12,
+                "format": {
+                    "name": "QUESTION11",
+                    "value": "QUESTION11"
+                },
+                "render": {
+                    "index": 12
+                },
+                "rois": [
+                    {
+                        "annotationTag": "QUESTION11_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 0,
+                        "rect": {
+                            "bottom": 115,
+                            "left": 512,
+                            "right": 534,
+                            "top": 96
+                        },
+                        "roiId": 1
+                    },
+                    {
+                        "annotationTag": "QUESTION11_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 1,
+                        "rect": {
+                            "bottom": 115,
+                            "left": 550,
+                            "right": 571,
+                            "top": 97
+                        },
+                        "roiId": 2
+                    }
+                ],
+                "validate": {
+                    "errorMessage": "QUESTION11 should range from 0 to 5 Marks",
+                    "name": "Between 0 to 5 Marks",
+                    "regExp": "[0-5]",
+                    "source": "BACKEND_EXAM"
+                }
+            },
+            {
+                "cellId": 13,
+                "format": {
+                    "name": "QUESTION12",
+                    "value": "QUESTION12"
+                },
+                "render": {
+                    "index": 13
+                },
+                "rois": [
+                    {
+                        "annotationTag": "QUESTION12_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 0,
+                        "rect": {
+                            "bottom": 148,
+                            "left": 512,
+                            "right": 534,
+                            "top": 129
+                        },
+                        "roiId": 1
+                    },
+                    {
+                        "annotationTag": "QUESTION12_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 1,
+                        "rect": {
+                            "bottom": 147,
+                            "left": 551,
+                            "right": 572,
+                            "top": 128
+                        },
+                        "roiId": 2
+                    }
+                ],
+                "validate": {
+                    "errorMessage": "QUESTION12 should range from 0 to 5 Marks",
+                    "name": "Between 0 to 5 Marks",
+                    "regExp": "[0-5]",
+                    "source": "BACKEND_EXAM"
+                }
+            },
+            {
+                "cellId": 14,
+                "format": {
+                    "name": "QUESTION13",
+                    "value": "QUESTION13"
+                },
+                "render": {
+                    "index": 14
+                },
+                "rois": [
+                    {
+                        "annotationTag": "QUESTION13_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 0,
+                        "rect": {
+                            "bottom": 178,
+                            "left": 512,
+                            "right": 534,
+                            "top": 160
+                        },
+                        "roiId": 1
+                    },
+                    {
+                        "annotationTag": "QUESTION13_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 1,
+                        "rect": {
+                            "bottom": 177,
+                            "left": 550,
+                            "right": 572,
+                            "top": 160
+                        },
+                        "roiId": 2
+                    }
+                ],
+                "validate": {
+                    "errorMessage": "QUESTION13 should range from 0 to 5 Marks",
+                    "name": "Between 0 to 5 Marks",
+                    "regExp": "[0-5]",
+                    "source": "BACKEND_EXAM"
+                }
+            },
+            {
+                "cellId": 15,
+                "format": {
+                    "name": "QUESTION14",
+                    "value": "QUESTION14"
+                },
+                "render": {
+                    "index": 15
+                },
+                "rois": [
+                    {
+                        "annotationTag": "QUESTION14_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 0,
+                        "rect": {
+                            "bottom": 210,
+                            "left": 511,
+                            "right": 533,
+                            "top": 191
+                        },
+                        "roiId": 1
+                    },
+                    {
+                        "annotationTag": "QUESTION14_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 1,
+                        "rect": {
+                            "bottom": 210,
+                            "left": 549,
+                            "right": 570,
+                            "top": 190
+                        },
+                        "roiId": 2
+                    }
+                ],
+                "validate": {
+                    "errorMessage": "QUESTION14 should range from 0 to 5 Marks",
+                    "name": "Between 0 to 5 Marks",
+                    "regExp": "[0-5]",
+                    "source": "BACKEND_EXAM"
+                }
+            },
+            {
+                "cellId": 16,
+                "format": {
+                    "name": "QUESTION15",
+                    "value": "QUESTION15"
+                },
+                "render": {
+                    "index": 16
+                },
+                "rois": [
+                    {
+                        "annotationTag": "QUESTION15_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 0,
+                        "rect": {
+                            "bottom": 240,
+                            "left": 511,
+                            "right": 532,
+                            "top": 222
+                        },
+                        "roiId": 1
+                    },
+                    {
+                        "annotationTag": "QUESTION15_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 1,
+                        "rect": {
+                            "bottom": 239,
+                            "left": 549,
+                            "right": 570,
+                            "top": 222
+                        },
+                        "roiId": 2
+                    }
+                ],
+                "validate": {
+                    "errorMessage": "QUESTION15 should range from 0 to 5 Marks",
+                    "name": "Between 0 to 5 Marks",
+                    "regExp": "[0-5]",
+                    "source": "BACKEND_EXAM"
+                }
+            },
+            {
+                "cellId": 17,
+                "format": {
+                    "name": "QUESTION16",
+                    "value": "QUESTION16"
+                },
+                "render": {
+                    "index": 17
+                },
+                "rois": [
+                    {
+                        "annotationTag": "QUESTION16_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 0,
+                        "rect": {
+                            "bottom": 272,
+                            "left": 511,
+                            "right": 532,
+                            "top": 253
+                        },
+                        "roiId": 1
+                    },
+                    {
+                        "annotationTag": "QUESTION16_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 1,
+                        "rect": {
+                            "bottom": 272,
+                            "left": 549,
+                            "right": 570,
+                            "top": 253
+                        },
+                        "roiId": 2
+                    }
+                ],
+                "validate": {
+                    "errorMessage": "QUESTION16 should range from 0 to 5 Marks",
+                    "name": "Between 0 to 5 Marks",
+                    "regExp": "[0-5]",
+                    "source": "BACKEND_EXAM"
+                }
+            },
+            {
+                "cellId": 18,
+                "format": {
+                    "name": "QUESTION17",
+                    "value": "QUESTION17"
+                },
+                "render": {
+                    "index": 18
+                },
+                "rois": [
+                    {
+                        "annotationTag": "QUESTION17_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 0,
+                        "rect": {
+                            "bottom": 302,
+                            "left": 512,
+                            "right": 535,
+                            "top": 284
+                        },
+                        "roiId": 1
+                    },
+                    {
+                        "annotationTag": "QUESTION17_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 1,
+                        "rect": {
+                            "bottom": 303,
+                            "left": 550,
+                            "right": 571,
+                            "top": 284
+                        },
+                        "roiId": 2
+                    }
+                ],
+                "validate": {
+                    "errorMessage": "QUESTION17 should range from 0 to 5 Marks",
+                    "name": "Between 0 to 5 Marks",
+                    "regExp": "[0-5]",
+                    "source": "BACKEND_EXAM"
+                }
+            },
+            {
+                "cellId": 19,
+                "format": {
+                    "name": "QUESTION18",
+                    "value": "QUESTION18"
+                },
+                "render": {
+                    "index": 19
+                },
+                "rois": [
+                    {
+                        "annotationTag": "QUESTION18_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 0,
+                        "rect": {
+                            "bottom": 333,
+                            "left": 512,
+                            "right": 534,
+                            "top": 315
+                        },
+                        "roiId": 1
+                    },
+                    {
+                        "annotationTag": "QUESTION18_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 1,
+                        "rect": {
+                            "bottom": 334,
+                            "left": 550,
+                            "right": 570,
+                            "top": 315
+                        },
+                        "roiId": 2
+                    }
+                ],
+                "validate": {
+                    "errorMessage": "QUESTION18 should range from 0 to 5 Marks",
+                    "name": "Between 0 to 5 Marks",
+                    "regExp": "[0-5]",
+                    "source": "BACKEND_EXAM"
+                }
+            },
+            {
+                "cellId": 20,
+                "format": {
+                    "name": "QUESTION19",
+                    "value": "QUESTION19"
+                },
+                "render": {
+                    "index": 20
+                },
+                "rois": [
+                    {
+                        "annotationTag": "QUESTION19_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 0,
+                        "rect": {
+                            "bottom": 365,
+                            "left": 512,
+                            "right": 534,
+                            "top": 346
+                        },
+                        "roiId": 1
+                    },
+                    {
+                        "annotationTag": "QUESTION19_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 1,
+                        "rect": {
+                            "bottom": 365,
+                            "left": 551,
+                            "right": 570,
+                            "top": 347
+                        },
+                        "roiId": 2
+                    }
+                ],
+                "validate": {
+                    "errorMessage": "QUESTION19 should range from 0 to 5 Marks",
+                    "name": "Between 0 to 5 Marks",
+                    "regExp": "[0-5]",
+                    "source": "BACKEND_EXAM"
+                }
+            },
+            {
+                "cellId": 21,
+                "format": {
+                    "name": "QUESTION20",
+                    "value": "QUESTION20"
+                },
+                "render": {
+                    "index": 21
+                },
+                "rois": [
+                    {
+                        "annotationTag": "QUESTION20_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 0,
+                        "rect": {
+                            "bottom": 396,
+                            "left": 512,
+                            "right": 534,
+                            "top": 378
+                        },
+                        "roiId": 1
+                    },
+                    {
+                        "annotationTag": "QUESTION20_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 1,
+                        "rect": {
+                            "bottom": 395,
+                            "left": 551,
+                            "right": 571,
+                            "top": 377
+                        },
+                        "roiId": 2
+                    }
+                ],
+                "validate": {
+                    "errorMessage": "QUESTION20 should range from 0 to 5 Marks",
+                    "name": "Between 0 to 5 Marks",
+                    "regExp": "[0-5]",
+                    "source": "BACKEND_EXAM"
+                }
+            },
+            {
+                "cellId": 22,
+                "format": {
+                    "name": "MAX_MARKS",
+                    "value": "MAXMARKS"
+                },
+                "render": {
+                    "index": 22
+                },
+                "rois": [
+                    {
+                        "annotationTag": "MAX_MARKS_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 0,
+                        "rect": {
+                            "bottom": 449,
+                            "left": 133,
+                            "right": 156,
+                            "top": 430
+                        },
+                        "roiId": 1
+                    },
+                    {
+                        "annotationTag": "MAX_MARKS_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 1,
+                        "rect": {
+                            "bottom": 450,
+                            "left": 159,
+                            "right": 181,
+                            "top": 431
+                        },
+                        "roiId": 2
+                    },
+                    {
+                        "annotationTag": "MAX_MARKS_3",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 2,
+                        "rect": {
+                            "bottom": 451,
+                            "left": 185,
+                            "right": 207,
+                            "top": 431
+                        },
+                        "roiId": 3
+                    }
+                ],
+                "validate": {
+                    "errorMessage": "should be 110 Marks",
+                    "name": "Should be 110 Marks",
+                    "regExp": "^110$",
+                    "source": "BACKEND_EXAM"
+                }
+            },
+            {
+                "cellId": 23,
+                "format": {
+                    "name": "MARKS_OBTAINED",
+                    "value": "MARKSOBTAINED"
+                },
+                "render": {
+                    "index": 23
+                },
+                "rois": [
+                    {
+                        "annotationTag": "MARKS_OBTAINED_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 0,
+                        "rect": {
+                            "bottom": 449,
+                            "left": 333,
+                            "right": 354,
+                            "top": 430
+                        },
+                        "roiId": 1
+                    },
+                    {
+                        "annotationTag": "MARKS_OBTAINED_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 1,
+                        "rect": {
+                            "bottom": 448,
+                            "left": 358,
+                            "right": 380,
+                            "top": 430
+                        },
+                        "roiId": 2
+                    },
+                    {
+                        "annotationTag": "MARKS_OBTAINED_3",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "index": 2,
+                        "rect": {
+                            "bottom": 450,
+                            "left": 384,
+                            "right": 405,
+                            "top": 430
+                        },
+                        "roiId": 3
+                    }
+                ],
+                "validate": {
+                    "errorMessage": "Should be MAX of 110 Marks",
+                    "name": "Between 0 to 110 Marks",
+                    "regExp": "\b([0-9]|[1-9][0-9]|110)\b",
+                    "source": "BACKEND_EXAM"
+                }
+            }
+        ]
+    }
+}

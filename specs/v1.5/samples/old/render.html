@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<canvas id="myCanvas" width="794" height="1122" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+
+<script>
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+// A4 Sheet width="794" height="1122"
+// Red rectangle
+//CELL_ROLLNUMBER_0
+//
+ctx.beginPath();
+ctx.lineWidth = "1";
+ctx.strokeStyle = "black";
+ctx.rect(17, 23, 142, 61);   // x = x +15 to properly render ,  (left,top , right - left , bottom -top)
+ctx.fillText("ROLL NUMBER", 25, 50);
+ctx.stroke();
+
+//CELL_ROLLNUMBER_1
+ctx.beginPath();
+ctx.lineWidth = "1";
+ctx.strokeStyle = "black";
+ctx.rect(160, 25, 45, 61);  // x = x +15 to properly render
+ctx.stroke();
+
+//CELL_ROLLNUMBER_2
+ctx.beginPath();
+ctx.lineWidth = "1";
+ctx.strokeStyle = "black";
+ctx.rect(207, 26, 45, 61);   // x = x +15 to properly render
+ctx.stroke();
+
+//CELL_ROLLNUMBER_3
+ctx.beginPath();
+ctx.lineWidth = "1";
+ctx.strokeStyle = "black";
+ctx.rect(255, 26, 45, 61);    // x = x +15 to properly render
+ctx.stroke();
+
+//ROLLNUMBER_1
+ctx.beginPath();
+ctx.lineWidth = "1";
+ctx.strokeStyle = "black";
+ctx.rect(165, 39, 25, 34);   // x = x +15 to properly render , its overlapping
+ctx.stroke();
+
+//CELL_ROLLNUMBER_4
+ctx.beginPath();
+ctx.lineWidth = "1";
+ctx.strokeStyle = "black";
+ctx.rect(302, 27, 332, 61);   // x = x +15 to properly render , its overlapping
+ctx.stroke();
+
+</script> 
+
+</body>
+</html>

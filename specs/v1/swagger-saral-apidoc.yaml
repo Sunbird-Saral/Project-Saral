@@ -1,0 +1,1178 @@
+swagger: "2.0"
+info:
+  description: "Store School information"
+  version: "1.0.0"
+  title: "SARAL APIs "
+host: "store.swagger.io"
+basePath: "/v1"
+tags:
+- name: "School"
+- name: "Student"
+- name: "Class"
+- name: "Exam"
+- name: "Marks"
+- name: "ROI"
+
+
+securityDefinitions:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header
+
+    basicAuth:
+      type: basic
+schemes:
+  - "https"
+  - "http"
+
+
+paths:
+  /schools:
+    get:
+      tags:
+      - "School"
+      summary: "Get School List"
+      description: "should return list of school"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Schools"
+        "400":
+          description: "unsuccessful operation"
+          
+  /create:
+    post:
+      tags:
+      - "School"
+      summary: "create school"
+      description: "create school"
+      parameters:
+      - name : body
+        in: body
+        schema:
+          $ref: "#/definitions/CreateSchoolBody"
+      responses:
+        "201":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/CreateSchoolResponse"
+        "401":
+          description: "schoolId: id already exist"
+        "400":
+          description: "unsuccessful operation"
+          
+  /login:        
+    post:
+      tags:
+      - "School"
+      summary: "LOGIN"
+      description: ""
+      produces:
+      - "application/json"
+      parameters:
+        - name: body
+          in: body
+          schema:
+            $ref: "#/definitions/LoginSchoolBody"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/LoginSchool"
+        "422":
+          description: "School Id or Password is not correct."
+  
+  /deleteSchoolBySchoolId/{schoolId}:
+    delete:
+      tags:
+      - "School"
+      summary: "Delete School By SchoolId"
+      description: ""
+      parameters:
+        - in: path
+          name: schoolId
+          type: string
+          required: true
+      responses:
+        "200": 
+          description: "School has been deleted"
+        "404":
+          description: "School Id does not exist."
+        "400":
+          description: "unsuccessful operation"
+      
+  /updateSchool/{schoolId}:
+    patch:
+      tags:
+      - "School"
+      summary: "Update School By SchoolId"
+      description: ""
+      parameters:
+        - in: path
+          name: schoolId
+          type: string
+          required: true
+        - in: body
+          name: body
+          schema:
+            $ref: "#/definitions/UpdateSchoolBody"
+      responses:
+        "200": 
+          description: "School has been updated."
+        "404":
+          description: "School Id does not exist."
+        "400":
+          description: "unsuccessful operation"
+         
+  /addClasses:
+    post:
+      security:
+        - Bearer: []
+      tags:
+      - Class
+      summary: "Create Class"
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: "#/definitions/addClassesBody"
+      responses:
+        "200":
+          description: "successful operation"       
+          schema:
+            $ref: "#/definitions/addClassesResponse"
+          
+          
+        "400":
+          description: "unsuccessful operation"
+        "404":
+          description: ""
+  
+  /updateClass:
+    post:
+      security:
+        - Bearer: []
+      tags:
+      - Class
+      summary: "Update Class"
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: "#/definitions/updateClassBody"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/updateClassResponse"
+        "400":
+          description: "unsuccessful operation"
+          
+  /deleteClass:
+    delete:
+      security:
+        - Bearer: []
+      tags:
+      - Class
+      summary: "Delete class by class Id"
+      parameters:
+       - in: body
+         name: body
+         schema:
+            type: object
+            required:
+              - classId
+            properties:
+              classId:
+                type: string
+      responses:
+        "200": 
+          description: "Class has been deleted successfully."
+        "404":
+          description: "Class does not exist."
+        "400":
+          description: "unsuccessful updates"
+        
+  
+  /fetchStudentsByQuery:
+    post:
+      security:
+        - Bearer: []
+      tags:
+      - "Student"
+      summary: "Get students list"
+      parameters:
+       - in: body
+         name: body
+         schema:
+            type: object
+            required:
+              - classId
+            properties:
+              classId:
+                type: string
+      responses:
+        "201":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/FetchStudentsByQueryResponse"
+          
+  /createStudent:
+    post:
+      security:
+        - Bearer: []
+      tags:
+      - "Student"
+      summary: "Create Student"
+      parameters:
+        - name: body
+          in: body
+          schema:
+            $ref: "#/definitions/CreateStudentBody"
+      responses:
+        "201":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/CreateStudentResponse"
+        "400":
+          description: "unsuccessful operation"
+          
+  /fetchStudentsandExamsByQuery:
+    post:
+      security:
+        - Bearer: []
+      tags:
+      - "Student"
+      summary: "Get Exam Details by class Id"
+      parameters:
+       - in: body
+         name: body
+         schema:
+            type: object
+            required:
+              - classId
+            properties:
+              classId:
+                type: string
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/fetchStudentsandExamsByQuery"
+        "404":
+          description: "Please send classId"
+        "500":
+          description: "unsuccessful operation"
+          
+  /deleteStudentByStudentId/{studentId}:
+    delete:
+      tags:
+      - "Student"
+      summary: "Delete Student "
+      parameters:
+        - in: path
+          name: studentId
+          type: string
+          required: true
+      responses:
+        "200": 
+          description: "Student has been deleted."
+        "404":
+          description: "Student Id does not exist"
+        "400":
+          description: "unsuccessful operation"
+            
+  /updateStudent/{studentId}:
+    patch:
+      tags:
+      - "Student"
+      summary: "Update Student"
+      parameters:
+        - in: path
+          name: studentId
+          type: string
+          required: true
+        - in: body
+          name: body
+          schema:
+            $ref: "#/definitions/UpdateStudentBody"
+      responses:
+        "200":
+          description: "Student has been updated."
+        "404":
+          description: "Student Id does not exist."
+        "400":
+          description: "unsuccessful operation"
+  /getSavedScan:  
+    post:
+      security:
+        - basicAuth: []
+      tags:
+      - "Marks"
+      summary: "Get Scan Marks"
+      parameters:
+        - in : body
+          name: body
+          schema:
+            $ref: "#/definitions/GetSavedScanBody"
+      responses:
+        "201":
+          description: "successful operation"
+          schema: 
+            $ref: "#/definitions/GetSavedScanResponse"
+            
+  /saveMarks:
+    post:
+      security:
+        - Bearer: []
+      tags:
+        - "Marks"
+      summary: "create marks for students exam"
+      parameters:
+        - name: body
+          in: body
+          schema:
+            $ref: "#/definitions/SaveMarksBody"
+      responses:
+        "200":
+          description: "Data Saved Successfully"
+  
+  /getExamsByClass/{classId}:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - "Exam"
+      summary: "Get Exam Details by ClassId"
+      parameters:
+        - in: path
+          name: classId
+          type: string
+          required: true
+        - in: query
+          name: subject
+          type: string
+        - in: query
+          name: examDate
+          type: string
+        
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/GetExamByClassResponse"
+        "404":
+          description: "Exam dose not exist for 520"
+  
+  /deleteExamByExamIdAndClassId/{examId}:
+    delete:
+      security:
+        - Bearer: []
+      tags:
+        - "Exam"
+      summary: "Delete exam by class Id"
+      parameters:
+        - in: path
+          name: examId
+          type: number
+          required: true
+      responses:
+        "200":
+          description: "Exam has been deleted successfully."
+        "400":
+          description: "Exam Id does not exist."
+            
+  /addExamsByClass:
+    post:
+      security:
+        - Bearer: []
+      tags:
+        - "Exam"
+      summary: "Create Exam for a class"
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: "#/definitions/CreateExamBody"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/CreateExamBodyResponse"
+    
+  /updateExam/{examId}:
+    patch:
+      security:
+        - Bearer: []
+      tags:
+        - "Exam"
+      summary: "Update Exam for a class"
+      parameters:
+      - in: path
+        name: examId
+        type: number
+        required: true
+      - in: body
+        name: body
+        schema:
+          $ref: "#/definitions/UpdateExamBody"
+      responses:
+        "200": 
+          description: "Exam is Updated Successfully."
+        "404":
+          description: "Exam Id does not exist."
+        "400": 
+          description: "Unsuccessful operation"
+          
+  /createRoi:
+    post:
+      security:
+        - Bearer: []
+      tags:
+        - "ROI"
+      summary: "Create ROI"
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: "#/definitions/CreateROIBody"
+      responses:
+        "201":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/CreateROIResponse"
+        "404":
+          description: "examId does not exist"
+        "400":
+          description: "roiId already exist"
+    
+  /updateRoi/{roiId}:
+    patch:
+      security:
+        - Bearer: []
+      tags:
+        - "ROI"
+      summary: "Update ROI"
+      parameters:
+      - in: path
+        name: roiId
+        type: number
+        required: true
+      - in: body
+        name: body
+        schema:
+          $ref: "#/definitions/UpdateRoiBody"
+      responses:
+        "200":
+          description: "ROI is updated successfully."
+        "404":
+          description: "ROI Id does not exist."
+        "400":
+          description: "unsuccessful operation"
+            
+  /deleteRoi/{roiId}:
+    delete:
+      security:
+        - Bearer: []
+      tags:
+        - "ROI"
+      summary: "Delete ROI"
+      parameters:
+      - in: path
+        name: roiId
+        type: number
+        required: true
+      responses:
+        "200":
+          description: "ROI has been deleted successfully."
+        "404":
+          description: "ROI ID has been already deleted."
+        "400":
+          description: "unsuccessful operation"
+  
+  /roi/{examId}/type/{type}:
+    get:
+      security:
+        - Bearer: []
+      tags:
+      - "ROI"
+      summary: "Get ROI data"
+      parameters:
+      - in: path
+        name: examId
+        type: number
+        required: true
+      - in: path
+        name: type
+        type: string
+        required: true
+        
+
+
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/rois"
+        "400":
+          description: "unsuccessful operation"
+          
+
+definitions:
+  Schools:
+    type: "object"
+    properties:
+      name:
+        type: string
+      schoolId:
+        type: string
+      state:
+        type: string
+      district:
+        type: string
+      block:
+        type: string
+      hmName:
+        type: string
+      noOfStudents:
+        type: string
+      createdAt: 
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+  
+        
+  LoginSchool:
+    type: object
+    properties:
+      school:
+        type: object
+        properties:
+          _id:
+            type: string
+          name:
+            type: string
+          schoolId:
+            type: string
+          state:
+            type: string
+          district:
+            type: string
+          block:
+            type: string
+          hmName:
+            type: string
+          hmMobileNo:
+            type: string
+          noOfStudents:
+            type: string
+          udiseCode:
+            type: string
+          createdAt: 
+            type: string
+            format: date-time
+          updatedAt:
+            type: string
+            format: date-time
+      token:
+        type: object
+        example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTMwOWQyYjJlNzEyMzAyZGY5NmM3NjEiLCJpYXQiOjE2MzA1NzU5MTV9.FCt2Q4R_sN1ctdOfoOPzBzfdUohAPA-TlLFtJJEeTBE"
+  
+  LoginSchoolBody:
+    type: object
+    properties:
+      schoolId:
+        type: string
+      password:
+        type: string
+      classes:
+        type: "boolean"
+        default: "true"
+    
+  CreateSchoolBody:
+    type: object
+    properties:
+      name:
+        type: string
+      schoolId:
+        type: string
+      password: 
+        type: string
+      state:
+        type: string
+      district:
+        type: string
+      block: 
+        type: string
+      hmName:
+        type: string
+      hmMobileNo:
+        type: string
+      noOfStudents:
+        type: string
+      udiseCode:
+        type: string
+        
+  CreateSchoolResponse:
+    type: object
+    properties:
+      school:
+        type: object
+        properties:
+          _id:
+            type: string
+          name: 
+            type: string
+          schoolId:
+            type: string
+          state:
+            type: string
+          district:
+            type: string
+          block:
+            type: string
+          hmName:
+            type: string
+          hmMobileNo:
+            type: string
+          noOfStudents:
+            type: string
+          udiseCode:
+            type: string
+          createdAt:
+            type: string
+            format: date-time
+          updatedAt:
+            type: string
+            format: date-time
+      token:
+        type: object
+        example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTMwOWQyYjJlNzEyMzAyZGY5NmM3NjEiLCJpYXQiOjE2MzA1NzU5MTV9.FCt2Q4R_sN1ctdOfoOPzBzfdUohAPA-TlLFtJJEeTBE"
+        
+  UpdateSchoolBody:
+    type: object
+    properties:
+      name:
+        type: string
+      state:
+        type: string
+      district:
+        type: string
+      block:
+        type: string
+      hmName:
+        type: string
+      hmMobileNo:
+        type: string
+      noOfStudents:
+        type: string
+      udisceCode:
+        type: string
+        
+  UpdateStudentBody:
+    type: "object"
+    properties:
+      name: 
+        type: string
+        
+  GetSavedScanBody:
+    type: "object"
+    properties:
+      classId:
+        type: string
+      subject:
+        type: string
+      fromDate:
+        type: string
+      page:
+        type: string
+      downloadRes:
+        type: string
+        
+  GetSavedScanResponse:
+    type: object
+    properties: 
+      data:
+        $ref: '#/definitions/GetSavedScan'
+      totalPages:
+        type: number
+      currentPage:
+        type: number
+        
+  GetSavedScan:
+        type: array
+        items:
+          type: object
+          properties:
+            marksInfo:
+              $ref: '#/definitions/MarksInfo'
+            section: 
+              type: string
+            studentId:
+              type: string
+            securedMarks:
+              type: string
+            totalMarks:
+              type: string
+            schoolId:
+              type: string
+            examDate:
+              type: string
+            subject:
+              type: string
+  
+  fetchStudentsandExamsByQuery:
+    type: object
+    properties:
+      students: 
+        $ref: '#/definitions/FetchStudentsByQueryResponse' 
+      exams: 
+        $ref: '#/definitions/GetExamByClassResponse' 
+      
+          
+  SaveMarksBody:
+    type: object
+    properties:
+      classId:
+        type: string
+        description: Class Id
+      examDate:
+        type: string
+        description: Date Of Exam
+      studentsMarkInfo:
+        $ref: '#/definitions/StudentMarkInfo'
+        
+  StudentMarkInfo:
+    type: array
+    items:
+      type: object
+      properties: 
+        section:
+          type: string
+          description: Class Section
+        studentId:
+          type: string
+          description: Student Id
+        securedMarks:
+          type: string
+          description: Total marks Obtained
+        totalMarks:
+          type: string
+          description: Total Marks
+        marksInfo:
+          $ref: '#/definitions/MarksInfo'  
+          
+  MarksInfo:
+    type: array
+    items:
+      type: object
+      properties: 
+        questionId:
+          type: string
+          description: question id
+        obtainedMarks:
+          type: string
+          description: total marks obtained
+          
+  CreateStudentBody:
+    type: object
+    properties:
+      name:
+        type: string
+        description: Student Name
+      section:
+        type: string
+        description: Class Section
+      studentClass:
+        $ref: '#/definitions/StudentClass' 
+        
+  FetchStudentsByQueryResponse:
+    type: object
+    properties:
+      studentClass:
+        $ref: '#/definitions/StudentClassName'
+      section:
+        type: string
+      name:
+        type: string
+      studentId:
+        type: string
+      schoolId:
+        type: string
+      
+  CreateStudentResponse:
+    type: object
+    properties:
+      studentClass: 
+        $ref: '#/definitions/StudentClassName' 
+      section:
+        type: string
+        description: Class Section
+      _id:
+        type: string
+        description: Unique id
+      name:
+        type: string
+        description: Student Name
+      studentId:
+        type: string
+        description: Student Id
+      schoolId:
+        type: string
+        description: School Id
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+        
+  StudentClass:
+    type: array
+    items:
+      type: object
+      properties: 
+        classId:
+          type: string
+          description: Id of class
+          
+  StudentClassName:
+    type: array
+    items:
+      type: object
+      properties: 
+        classId:
+          type: string
+          description: Id of class
+        className:
+          type: string
+          description: class Name
+          
+  CreateExamBodyResponse:
+      type: object
+      properties:
+        _id:
+          type: string
+        subject:
+          type: string
+        examLo:
+          type: string
+        classId:
+          type: string
+          description: Class Id
+        examDate:
+          type: string
+          description: Exam Of Date
+        totalMarks:
+          type: string
+          description: Total Marks
+        questions:
+          $ref: '#/definitions/Questions' 
+        examId:
+          type: number
+          description: Exam Id
+        schoolId:
+          type: string
+          description: School Id
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+          
+  UpdateExamBody:
+    type: object
+    properties:
+      subject:
+        type: string
+      examLO:
+        type: string
+      examDate:
+        type: string
+      totalMarks:
+        type: string
+      questions: 
+        $ref: '#/definitions/Questions' 
+        
+  GetExamByClassResponse:
+    type: array
+    items:
+      type: object
+      properties: 
+        subject:
+          type: string
+          description: Exam Name
+        examLO: 
+          type: string
+          description: Exam LO
+        classId:
+          type: string
+          description: Id of class
+        examDate:
+          type: string
+          description: Date of exam
+        totalMarks:
+          type: string
+          description: Total Marks
+        questions:
+          $ref: '#/definitions/Questions'  
+        examId:
+          type: number
+          description: Exam Id
+        schoolId:
+          type: string
+          description: Unique Id
+          
+  DeleteExamByExamIdAndClassIdResponse:
+    type: object
+    properties: 
+      _id: 
+        type: string
+        description: unique id
+      subject:
+        type: string
+        description: Exam Name
+      examLO: 
+        type: string
+        description: Exam LO
+      classId:
+        type: string
+        description: Id of class
+      examDate:
+        type: string
+        description: Date of exam
+      totalMarks:
+        type: string
+        description: Total marks of exam
+      questions:
+        $ref : '#/definitions/Questions' 
+      examId:
+        type: number
+        description: Exam Id
+      schoolId:
+        type: string
+        description: School Id
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+        
+  CreateExamBody:
+    type: array
+    items:
+      type: object
+      properties:
+        subject:
+          type: string
+        examLo:
+          type: string
+        classId:
+          type: string
+        schoolId:
+          type: string
+        examDate:
+          type: string
+        questions:
+          $ref: '#/definitions/Questions' 
+          
+  ExamsMetadata:
+    type: array
+    items:
+      properties:
+        questions:
+          $ref: '#/definitions/Questions' 
+    
+  Questions:
+    type: array
+    items:
+      type: object
+      properties: 
+        questionId:
+          type: string
+          description: Question Id
+        indicatorTitle:
+          type: string
+          description: Indicator Title
+        questionMarks:
+          type: string
+          description: Question Marks
+          
+  rect:
+    type: object
+    properties:
+      top:
+        type: string
+      left:
+        type: string
+      bottom:
+        type: string
+      right:
+        type: string
+  
+  roi:
+    type: array
+    items:
+      type: object
+      properties:
+        annotationId:
+          type: string
+        annotationTags:
+          type: string
+        extractionMethod:
+          type: string
+          enum: ["NUMERIC_CLASSIFICATION", "CELL_OMR"]
+        roiId:
+          type: string
+        index:
+          type: string
+        rect:
+          $ref: '#/definitions/rect'
+          
+  cells:
+    type: array
+    items:
+      type: object
+      properties:
+        cellId:
+          type: string
+        rois:
+          $ref: '#/definitions/roi'
+
+          
+  rois:
+    type: object
+    properties:
+      layout:
+        type: object
+        properties:
+          version: 
+            type: string
+          name:
+            type: string
+          cells:
+            $ref: '#/definitions/cells' 
+      
+  
+  CreateROIBody:
+    type: object
+    properties:
+      subject:
+        type: string
+      classId:
+        type: string
+      type: 
+        type: string
+        enum: ["SAT","PAT"]
+      roi:
+        $ref: '#/definitions/rois'
+          
+  CreateROIResponse:
+    type: object
+    properties:
+      roiId:
+        type: number
+      classId:
+        type: string
+      subject:
+        type: string
+      state:
+        type: string
+      createdAt:
+        type: string
+        format: date-time
+        
+  UpdateRoiBody:
+    type: object
+    properties:
+      roi:
+        $ref: "#/definitions/rois"
+        
+  sections:
+    type: array
+    items:
+      type: object
+      properties: 
+        section:
+          type: string
+        
+  addClassesBody:
+    type: array
+    items:
+      type: object
+      properties: 
+        classId:
+          type: string
+        sections:
+          $ref: "#/definitions/sections"
+          
+  addClassesResponse:
+    type: array
+    items:
+      type: object
+      properties:
+        sections:
+          $ref: "#/definitions/sections"
+        _id:
+          type: string
+        classId:
+          type: string
+        className:
+          type: string
+        schoolId:
+          type: string
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+          
+  updateClassBody:
+    type: object
+    properties:
+      classId:
+        type: string
+      sections: 
+          $ref: "#/definitions/sections"
+          
+  updateClassResponse:
+    type: object
+    properties:
+      sections:
+        $ref: "#/definitions/sections"
+      _id:
+        type: string
+      classId:
+        type: string
+      className:
+        type: string
+      schoolId:
+        type: string
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+        
+
+    
+  
+
+    
+        
+        
+      
+        
+      
+       
+  
+        
+
