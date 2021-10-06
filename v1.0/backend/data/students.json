@@ -143,5 +143,83 @@
   "name": "priyanka bisht",
   "studentId": "3302003",
   "schoolId": "3"
+},
+{
+  "studentClass": [
+    {
+      "classId": "2",
+      "className": "Class-2"
+    }
+  ],
+  "section": "D",
+  "name": "Niti Joshi",
+  "studentId": "4204001",
+  "schoolId": "4"
+},{
+  "studentClass": [
+    {
+      "classId": "2",
+      "className": "Class-2"
+    }
+  ],
+  "section": "D",
+  "name": "Chesta Bisht",
+  "studentId": "4204002",
+  "schoolId": "4"
+},{
+  "studentClass": [
+    {
+      "classId": "2",
+      "className": "Class-2"
+    }
+  ],
+  "section": "D",
+  "name": "Megha Kanyal",
+  "studentId": "4204003",
+  "schoolId": "4"
+},{
+  "studentClass": [
+    {
+      "classId": "2",
+      "className": "Class-2"
+    }
+  ],
+  "section": "D",
+  "name": "Mousumee Alam",
+  "studentId": "4204004",
+  "schoolId": "4"
+},{
+  "studentClass": [
+    {
+      "classId": "3",
+      "className": "Class-3"
+    }
+  ],
+  "section": "D",
+  "name": "Ruchika Kandpal",
+  "studentId": "4304001",
+  "schoolId": "4"
+},{
+  "studentClass": [
+    {
+      "classId": "4",
+      "className": "Class-4"
+    }
+  ],
+  "section": "D",
+  "name": "Ruchika Joshi",
+  "studentId": "4404001",
+  "schoolId": "4"
+},{
+  "studentClass": [
+    {
+      "classId": "5",
+      "className": "Class-5"
+    }
+  ],
+  "section": "D",
+  "name": "Shantanu Bankoti",
+  "studentId": "4504001",
+  "schoolId": "4"
 }
 ]

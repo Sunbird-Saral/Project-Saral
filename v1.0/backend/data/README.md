@@ -50,3 +50,16 @@ studentId:- for GUJRAT PAT 7 digit student Id
 1. hindi,gujrat,PAT,class 3, examId 14
 2. maths,gujrat,PAT,class 3, examId 15
 3. english,gujrat,PAT,class 3, examId 16
+
+state:- UP(For multiple students)
+school:- Amtul's Public School
+classes:- 2,3,4,5
+student:- Niti Joshi,Chesta Bisht, Megha Kanyal,Mousumee Alam,Ruchika Kandpal,Ruchika Joshi,Shantanu Bankoti
+exam:- hindi,maths and english for class 2 and maths exam for class 3
+marks:- hindi,maths and english for class 2 and maths marks save for class 3
+roi:- 
+type :PAT
+studentId:- 7 digit studentId
+1. hindi,UP,PAT,class 2,examId 17
+2. Maths,UP,PAT,class 2, examid 19
+3. english,UP,PAT,class 2, examID 18
