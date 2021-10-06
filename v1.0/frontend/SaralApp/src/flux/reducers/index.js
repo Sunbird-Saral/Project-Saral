@@ -7,6 +7,8 @@ import saveScanReducer from './saveScanReducer';
 import scanTypeReducer from './scanTypeReducer';
 import roiDataReducer from './roiDataReducer';
 import scanedDataReducer from './scanedDataReducer'
+import saveAbsentStudentReducer from './saveAbsentStudentReducer';
+import absentStudentReducer from './absentStudentReducer';
 
 export default {
     apiStatus: apiStatus,
@@ -17,5 +19,7 @@ export default {
     savedScanData: saveScanReducer,
     scanTypeData: scanTypeReducer,
     roiData: roiDataReducer,
-    scanedData: scanedDataReducer
+    scanedData: scanedDataReducer,
+    saveAbsentStudent: saveAbsentStudentReducer,
+    absentStudentDataResponse: absentStudentReducer,
 }
