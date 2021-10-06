@@ -7,7 +7,7 @@
                 "cellId": "1",
                 "rois": [
                     {
-                        "annotationTags": "ROLLNUMBER1",
+                        "annotationTags": "ROLLNUMBERID1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "1",
                         "index": 0,
@@ -19,7 +19,7 @@
                         }
                     },
                     {
-                        "annotationTags": "ROLLNUMBER2",
+                        "annotationTags": "ROLLNUMBERID2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "2",
                         "index": 1,
@@ -31,7 +31,7 @@
                         }
                     },
                     {
-                        "annotationTags": "ROLLNUMBER3",
+                        "annotationTags": "ROLLNUMBERID3",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "3",
                         "index": 2,
@@ -43,7 +43,7 @@
                         }
                     },
                     {
-                        "annotationTags": "ROLLNUMBER4",
+                        "annotationTags": "ROLLNUMBERID4",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "4",
                         "index": 3,
@@ -55,7 +55,7 @@
                         }
                     },
                     {
-                        "annotationTags": "ROLLNUMBER5",
+                        "annotationTags": "ROLLNUMBERID5",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "5",
                         "index": 4,
@@ -67,7 +67,7 @@
                         }
                     },
                     {
-                        "annotationTags": "ROLLNUMBER6",
+                        "annotationTags": "ROLLNUMBERID6",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "6",
                         "index": 5,
@@ -79,7 +79,7 @@
                         }
                     },
                     {
-                        "annotationTags": "ROLLNUMBER7",
+                        "annotationTags": "ROLLNUMBERID7",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "7",
                         "index": 6,
