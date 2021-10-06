@@ -16,7 +16,7 @@
             "id": "eKS5GDoKy",
             "type": "RECTANGLE",
             "tags": [
-                "STUDENTID_1"
+                "ROLLNUMBER1"
             ],
             "boundingBox": {
                 "height": 20.06715689132463,
@@ -47,7 +47,7 @@
             "id": "07gfo-X6k",
             "type": "RECTANGLE",
             "tags": [
-                "STUDENTID_2"
+                "ROLLNUMBER2"
             ],
             "boundingBox": {
                 "height": 22.313025323275863,
@@ -78,7 +78,7 @@
             "id": "bv3o6dbOL",
             "type": "RECTANGLE",
             "tags": [
-                "STUDENTID_3"
+                "ROLLNUMBER3"
             ],
             "boundingBox": {
                 "height": 20.170698887645056,
@@ -109,8 +109,7 @@
             "id": "bxUpSr1kN",
             "type": "RECTANGLE",
             "tags": [
-                "STUDENTID_4",
-                "STUDENTID_1"
+                "ROLLNUMBER4"
             ],
             "boundingBox": {
                 "height": 19.446044675517154,
@@ -141,7 +140,7 @@
             "id": "2AjEL9QuH",
             "type": "RECTANGLE",
             "tags": [
-                "STUDENTID_5"
+                "ROLLNUMBER5"
             ],
             "boundingBox": {
                 "height": 19.288693493559162,
@@ -172,7 +171,7 @@
             "id": "sVXs9IDX3",
             "type": "RECTANGLE",
             "tags": [
-                "STUDENTID_6"
+                "ROLLNUMBER6"
             ],
             "boundingBox": {
                 "height": 18.619633698541442,
@@ -203,7 +202,7 @@
             "id": "AcbEHjPdD",
             "type": "RECTANGLE",
             "tags": [
-                "STUDENTID_7"
+                "ROLLNUMBER7"
             ],
             "boundingBox": {
                 "height": 19.549330250647493,
@@ -234,7 +233,7 @@
             "id": "Om50EqhmL",
             "type": "RECTANGLE",
             "tags": [
-                "STUDENTID_8"
+                "ROLLNUMBER8"
             ],
             "boundingBox": {
                 "height": 19.178614559194386,
@@ -265,7 +264,7 @@
             "id": "_EITxSSf2",
             "type": "RECTANGLE",
             "tags": [
-                "STUDENTID_9"
+                "ROLLNUMBER9"
             ],
             "boundingBox": {
                 "height": 19.70837841637132,
@@ -296,7 +295,7 @@
             "id": "RouzCuE85",
             "type": "RECTANGLE",
             "tags": [
-                "STUDENTID_10"
+                "ROLLNUMBER10"
             ],
             "boundingBox": {
                 "height": 19.75462402876227,
@@ -327,7 +326,7 @@
             "id": "KMkXP1EDG",
             "type": "RECTANGLE",
             "tags": [
-                "STUDENTID_11"
+                "ROLLNUMBER11"
             ],
             "boundingBox": {
                 "height": 19.346456579709653,
@@ -358,7 +357,7 @@
             "id": "11AKDb31Z",
             "type": "RECTANGLE",
             "tags": [
-                "STUDENTID_12"
+                "ROLLNUMBER12"
             ],
             "boundingBox": {
                 "height": 18.941571850293077,
@@ -389,7 +388,7 @@
             "id": "fL6XpwpwP",
             "type": "RECTANGLE",
             "tags": [
-                "STUDENTID_13"
+                "ROLLNUMBER13"
             ],
             "boundingBox": {
                 "height": 21.032847962956655,
@@ -420,7 +419,7 @@
             "id": "7_X3wXjhL",
             "type": "RECTANGLE",
             "tags": [
-                "STUDENTID_14"
+                "ROLLNUMBER14"
             ],
             "boundingBox": {
                 "height": 20.9784075322042,
@@ -451,7 +450,7 @@
             "id": "9jfgY1qtO",
             "type": "RECTANGLE",
             "tags": [
-                "STUDENTID_15"
+                "ROLLNUMBER15"
             ],
             "boundingBox": {
                 "height": 20.691772594056708,
@@ -482,7 +481,7 @@
             "id": "QcswxWY1s",
             "type": "RECTANGLE",
             "tags": [
-                "STUDENTID_16"
+                "ROLLNUMBER16"
             ],
             "boundingBox": {
                 "height": 20.92273707998228,
