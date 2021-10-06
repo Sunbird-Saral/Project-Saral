@@ -51,8 +51,8 @@
                     "index": 1
                 },
                 "format": {
-                    "name": "ROLL NUMBER",
-                    "value": "ROLL NUMBER"
+                    "name": "ROLLNUMBER",
+                    "value": "ROLLNUMBER"
                 },
                 "validate": {
                     "regExp": ""
@@ -872,7 +872,7 @@
                 "cellId": "32",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID1",
+                        "annotationTags": "EVS 1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "34",
                         "index": 0,
@@ -888,8 +888,8 @@
                     "index": 32
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID1",
-                    "value": "EVS/SOCIALSCIENCE 1"
+                    "name": "EVS 1",
+                    "value": "EVS 1"
                 },
                 "validate": {
                     "regExp": ""
@@ -899,7 +899,7 @@
                 "cellId": "33",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID2",
+                        "annotationTags": "EVS 2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "35",
                         "index": 0,
@@ -915,8 +915,8 @@
                     "index": 33
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID2",
-                    "value": "EVS/SOCIALSCIENCE 2"
+                    "name": "EVS 2",
+                    "value": "EVS 2"
                 },
                 "validate": {
                     "regExp": ""
@@ -926,7 +926,7 @@
                 "cellId": "34",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID3",
+                        "annotationTags": "EVS 3",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "36",
                         "index": 0,
@@ -942,8 +942,8 @@
                     "index": 34
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID3",
-                    "value": "EVS/SOCIALSCIENCE 3"
+                    "name": "EVS 3",
+                    "value": "EVS 3"
                 },
                 "validate": {
                     "regExp": ""
@@ -953,7 +953,7 @@
                 "cellId": "35",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID4",
+                        "annotationTags": "EVS 4",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "37",
                         "index": 0,
@@ -969,8 +969,8 @@
                     "index": 35
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID4",
-                    "value": "EVS/SOCIALSCIENCE 4"
+                    "name": "EVS 4",
+                    "value": "EVS 4"
                 },
                 "validate": {
                     "regExp": ""
@@ -980,7 +980,7 @@
                 "cellId": "36",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID5",
+                        "annotationTags": "EVS 5",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "38",
                         "index": 0,
@@ -996,8 +996,8 @@
                     "index": 36
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID5",
-                    "value": "EVS/SOCIALSCIENCE 5"
+                    "name": "EVS 5",
+                    "value": "EVS 5"
                 },
                 "validate": {
                     "regExp": ""
@@ -1007,7 +1007,7 @@
                 "cellId": "37",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID6",
+                        "annotationTags": "EVS 6",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "39",
                         "index": 0,
@@ -1023,8 +1023,8 @@
                     "index": 37
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID6",
-                    "value": "EVS/SOCIALSCIENCE 6"
+                    "name": "EVS 6",
+                    "value": "EVS 6"
                 },
                 "validate": {
                     "regExp": ""
@@ -1034,7 +1034,7 @@
                 "cellId": "38",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID7",
+                        "annotationTags": "EVS 7",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "40",
                         "index": 0,
@@ -1050,8 +1050,8 @@
                     "index": 38
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID7",
-                    "value": "EVS/SOCIALSCIENCE 7"
+                    "name": "EVS 7",
+                    "value": "EVS 7"
                 },
                 "validate": {
                     "regExp": ""
@@ -1061,7 +1061,7 @@
                 "cellId": "39",
                 "rois": [
                     {
-                        "annotationTags": "",
+                        "annotationTags": "EVS 8",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "41",
                         "index": 0,
@@ -1077,8 +1077,8 @@
                     "index": 39
                 },
                 "format": {
-                    "name": "",
-                    "value": ""
+                    "name": "EVS 8",
+                    "value": "EVS 8"
                 },
                 "validate": {
                     "regExp": ""
@@ -1088,7 +1088,7 @@
                 "cellId": "40",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID9",
+                        "annotationTags": "EVS 9",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "42",
                         "index": 0,
@@ -1104,8 +1104,8 @@
                     "index": 40
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID9",
-                    "value": "EVS/SOCIALSCIENCE 9"
+                    "name": "EVS 9",
+                    "value": "EVS 9"
                 },
                 "validate": {
                     "regExp": ""
@@ -1115,7 +1115,7 @@
                 "cellId": "41",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID10",
+                        "annotationTags": "EVS 10",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "43",
                         "index": 0,
@@ -1131,8 +1131,8 @@
                     "index": 41
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID10",
-                    "value": "EVS/SOCIALSCIENCE 10"
+                    "name": "EVS 10",
+                    "value": "EVS 10"
                 },
                 "validate": {
                     "regExp": ""
@@ -1466,8 +1466,8 @@
                     "index": 1
                 },
                 "format": {
-                    "name": "ROLL NUMBER",
-                    "value": "ROLL NUMBER"
+                    "name": "ROLLNUMBER",
+                    "value": "ROLLNUMBER"
                 },
                 "validate": {
                     "regExp": ""
@@ -2287,7 +2287,7 @@
                 "cellId": "32",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID1",
+                        "annotationTags": "EVS 1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "34",
                         "index": 0,
@@ -2303,8 +2303,8 @@
                     "index": 32
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID1",
-                    "value": "EVS/SOCIALSCIENCE 1"
+                    "name": "EVS 1",
+                    "value": "EVS 1"
                 },
                 "validate": {
                     "regExp": ""
@@ -2314,7 +2314,7 @@
                 "cellId": "33",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID2",
+                        "annotationTags": "EVS 2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "35",
                         "index": 0,
@@ -2330,8 +2330,8 @@
                     "index": 33
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID2",
-                    "value": "EVS/SOCIALSCIENCE 2"
+                    "name": "EVS 2",
+                    "value": "EVS 2"
                 },
                 "validate": {
                     "regExp": ""
@@ -2341,7 +2341,7 @@
                 "cellId": "34",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID3",
+                        "annotationTags": "EVS 3",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "36",
                         "index": 0,
@@ -2357,8 +2357,8 @@
                     "index": 34
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID3",
-                    "value": "EVS/SOCIALSCIENCE 3"
+                    "name": "EVS 3",
+                    "value": "EVS 3"
                 },
                 "validate": {
                     "regExp": ""
@@ -2368,7 +2368,7 @@
                 "cellId": "35",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID4",
+                        "annotationTags": "EVS 4",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "37",
                         "index": 0,
@@ -2384,8 +2384,8 @@
                     "index": 35
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID4",
-                    "value": "EVS/SOCIALSCIENCE 4"
+                    "name": "EVS 4",
+                    "value": "EVS 4"
                 },
                 "validate": {
                     "regExp": ""
@@ -2395,7 +2395,7 @@
                 "cellId": "36",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID5",
+                        "annotationTags": "EVS 5",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "38",
                         "index": 0,
@@ -2411,8 +2411,8 @@
                     "index": 36
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID5",
-                    "value": "EVS/SOCIALSCIENCE 5"
+                    "name": "EVS 5",
+                    "value": "EVS 5"
                 },
                 "validate": {
                     "regExp": ""
@@ -2422,7 +2422,7 @@
                 "cellId": "37",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID6",
+                        "annotationTags": "EVS 6",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "39",
                         "index": 0,
@@ -2438,8 +2438,8 @@
                     "index": 37
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID6",
-                    "value": "EVS/SOCIALSCIENCE 6"
+                    "name": "EVS 6",
+                    "value": "EVS 6"
                 },
                 "validate": {
                     "regExp": ""
@@ -2449,7 +2449,7 @@
                 "cellId": "38",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID7",
+                        "annotationTags": "EVS 7",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "40",
                         "index": 0,
@@ -2465,8 +2465,8 @@
                     "index": 38
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID7",
-                    "value": "EVS/SOCIALSCIENCE 7"
+                    "name": "EVS 7",
+                    "value": "EVS 7"
                 },
                 "validate": {
                     "regExp": ""
@@ -2476,7 +2476,7 @@
                 "cellId": "39",
                 "rois": [
                     {
-                        "annotationTags": "",
+                        "annotationTags": "EVS 8",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "41",
                         "index": 0,
@@ -2492,8 +2492,8 @@
                     "index": 39
                 },
                 "format": {
-                    "name": "",
-                    "value": ""
+                    "name": "EVS 8",
+                    "value": "EVS 8"
                 },
                 "validate": {
                     "regExp": ""
@@ -2503,7 +2503,7 @@
                 "cellId": "40",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID9",
+                        "annotationTags": "EVS 9",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "42",
                         "index": 0,
@@ -2519,8 +2519,8 @@
                     "index": 40
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID9",
-                    "value": "EVS/SOCIALSCIENCE 9"
+                    "name": "EVS 9",
+                    "value": "EVS 9"
                 },
                 "validate": {
                     "regExp": ""
@@ -2530,7 +2530,7 @@
                 "cellId": "41",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID10",
+                        "annotationTags": "EVS 10",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "43",
                         "index": 0,
@@ -2546,8 +2546,8 @@
                     "index": 41
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID10",
-                    "value": "EVS/SOCIALSCIENCE 10"
+                    "name": "EVS 10",
+                    "value": "EVS 10"
                 },
                 "validate": {
                     "regExp": ""
@@ -2881,8 +2881,8 @@
                     "index": 1
                 },
                 "format": {
-                    "name": "ROLL NUMBER",
-                    "value": "ROLL NUMBER"
+                    "name": "ROLLNUMBER",
+                    "value": "ROLLNUMBER"
                 },
                 "validate": {
                     "regExp": ""
@@ -3702,7 +3702,7 @@
                 "cellId": "32",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID1",
+                        "annotationTags": "EVS 1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "34",
                         "index": 0,
@@ -3718,8 +3718,8 @@
                     "index": 32
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID1",
-                    "value": "EVS/SOCIALSCIENCE 1"
+                    "name": "EVS 1",
+                    "value": "EVS 1"
                 },
                 "validate": {
                     "regExp": ""
@@ -3729,7 +3729,7 @@
                 "cellId": "33",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID2",
+                        "annotationTags": "EVS 2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "35",
                         "index": 0,
@@ -3745,8 +3745,8 @@
                     "index": 33
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID2",
-                    "value": "EVS/SOCIALSCIENCE 2"
+                    "name": "EVS 2",
+                    "value": "EVS 2"
                 },
                 "validate": {
                     "regExp": ""
@@ -3756,7 +3756,7 @@
                 "cellId": "34",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID3",
+                        "annotationTags": "EVS 3",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "36",
                         "index": 0,
@@ -3772,8 +3772,8 @@
                     "index": 34
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID3",
-                    "value": "EVS/SOCIALSCIENCE 3"
+                    "name": "EVS 3",
+                    "value": "EVS 3"
                 },
                 "validate": {
                     "regExp": ""
@@ -3783,7 +3783,7 @@
                 "cellId": "35",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID4",
+                        "annotationTags": "EVS 4",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "37",
                         "index": 0,
@@ -3799,8 +3799,8 @@
                     "index": 35
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID4",
-                    "value": "EVS/SOCIALSCIENCE 4"
+                    "name": "EVS 4",
+                    "value": "EVS 4"
                 },
                 "validate": {
                     "regExp": ""
@@ -3810,7 +3810,7 @@
                 "cellId": "36",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID5",
+                        "annotationTags": "EVS 5",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "38",
                         "index": 0,
@@ -3826,8 +3826,8 @@
                     "index": 36
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID5",
-                    "value": "EVS/SOCIALSCIENCE 5"
+                    "name": "EVS 5",
+                    "value": "EVS 5"
                 },
                 "validate": {
                     "regExp": ""
@@ -3837,7 +3837,7 @@
                 "cellId": "37",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID6",
+                        "annotationTags": "EVS 6",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "39",
                         "index": 0,
@@ -3853,8 +3853,8 @@
                     "index": 37
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID6",
-                    "value": "EVS/SOCIALSCIENCE 6"
+                    "name": "EVS 6",
+                    "value": "EVS 6"
                 },
                 "validate": {
                     "regExp": ""
@@ -3864,7 +3864,7 @@
                 "cellId": "38",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID7",
+                        "annotationTags": "EVS 7",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "40",
                         "index": 0,
@@ -3880,8 +3880,8 @@
                     "index": 38
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID7",
-                    "value": "EVS/SOCIALSCIENCE 7"
+                    "name": "EVS 7",
+                    "value": "EVS 7"
                 },
                 "validate": {
                     "regExp": ""
@@ -3891,7 +3891,7 @@
                 "cellId": "39",
                 "rois": [
                     {
-                        "annotationTags": "",
+                        "annotationTags": "EVS 8",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "41",
                         "index": 0,
@@ -3907,8 +3907,8 @@
                     "index": 39
                 },
                 "format": {
-                    "name": "",
-                    "value": ""
+                    "name": "EVS 8",
+                    "value": "EVS 8"
                 },
                 "validate": {
                     "regExp": ""
@@ -3918,7 +3918,7 @@
                 "cellId": "40",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID9",
+                        "annotationTags": "EVS 9",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "42",
                         "index": 0,
@@ -3934,8 +3934,8 @@
                     "index": 40
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID9",
-                    "value": "EVS/SOCIALSCIENCE 9"
+                    "name": "EVS 9",
+                    "value": "EVS 9"
                 },
                 "validate": {
                     "regExp": ""
@@ -3945,7 +3945,7 @@
                 "cellId": "41",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID10",
+                        "annotationTags": "EVS 10",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "43",
                         "index": 0,
@@ -3961,8 +3961,8 @@
                     "index": 41
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID10",
-                    "value": "EVS/SOCIALSCIENCE 10"
+                    "name": "EVS 10",
+                    "value": "EVS 10"
                 },
                 "validate": {
                     "regExp": ""
@@ -4296,8 +4296,8 @@
                     "index": 1
                 },
                 "format": {
-                    "name": "ROLL NUMBER",
-                    "value": "ROLL NUMBER"
+                    "name": "ROLLNUMBER",
+                    "value": "ROLLNUMBER"
                 },
                 "validate": {
                     "regExp": ""
@@ -5117,7 +5117,7 @@
                 "cellId": "32",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID1",
+                        "annotationTags": "EVS 1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "34",
                         "index": 0,
@@ -5133,8 +5133,8 @@
                     "index": 32
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID1",
-                    "value": "EVS/SOCIALSCIENCE 1"
+                    "name": "EVS 1",
+                    "value": "EVS 1"
                 },
                 "validate": {
                     "regExp": ""
@@ -5144,7 +5144,7 @@
                 "cellId": "33",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID2",
+                        "annotationTags": "EVS 2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "35",
                         "index": 0,
@@ -5160,8 +5160,8 @@
                     "index": 33
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID2",
-                    "value": "EVS/SOCIALSCIENCE 2"
+                    "name": "EVS 2",
+                    "value": "EVS 2"
                 },
                 "validate": {
                     "regExp": ""
@@ -5171,7 +5171,7 @@
                 "cellId": "34",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID3",
+                        "annotationTags": "EVS 3",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "36",
                         "index": 0,
@@ -5187,8 +5187,8 @@
                     "index": 34
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID3",
-                    "value": "EVS/SOCIALSCIENCE 3"
+                    "name": "EVS 3",
+                    "value": "EVS 3"
                 },
                 "validate": {
                     "regExp": ""
@@ -5198,7 +5198,7 @@
                 "cellId": "35",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID4",
+                        "annotationTags": "EVS 4",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "37",
                         "index": 0,
@@ -5214,8 +5214,8 @@
                     "index": 35
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID4",
-                    "value": "EVS/SOCIALSCIENCE 4"
+                    "name": "EVS 4",
+                    "value": "EVS 4"
                 },
                 "validate": {
                     "regExp": ""
@@ -5225,7 +5225,7 @@
                 "cellId": "36",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID5",
+                        "annotationTags": "EVS 5",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "38",
                         "index": 0,
@@ -5241,8 +5241,8 @@
                     "index": 36
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID5",
-                    "value": "EVS/SOCIALSCIENCE 5"
+                    "name": "EVS 5",
+                    "value": "EVS 5"
                 },
                 "validate": {
                     "regExp": ""
@@ -5252,7 +5252,7 @@
                 "cellId": "37",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID6",
+                        "annotationTags": "EVS 6",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "39",
                         "index": 0,
@@ -5268,8 +5268,8 @@
                     "index": 37
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID6",
-                    "value": "EVS/SOCIALSCIENCE 6"
+                    "name": "EVS 6",
+                    "value": "EVS 6"
                 },
                 "validate": {
                     "regExp": ""
@@ -5279,7 +5279,7 @@
                 "cellId": "38",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID7",
+                        "annotationTags": "EVS 7",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "40",
                         "index": 0,
@@ -5295,8 +5295,8 @@
                     "index": 38
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID7",
-                    "value": "EVS/SOCIALSCIENCE 7"
+                    "name": "EVS 7",
+                    "value": "EVS 7"
                 },
                 "validate": {
                     "regExp": ""
@@ -5306,7 +5306,7 @@
                 "cellId": "39",
                 "rois": [
                     {
-                        "annotationTags": "",
+                        "annotationTags": "EVS 8",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "41",
                         "index": 0,
@@ -5322,8 +5322,8 @@
                     "index": 39
                 },
                 "format": {
-                    "name": "",
-                    "value": ""
+                    "name": "EVS 8",
+                    "value": "EVS 8"
                 },
                 "validate": {
                     "regExp": ""
@@ -5333,7 +5333,7 @@
                 "cellId": "40",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID9",
+                        "annotationTags": "EVS 9",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "42",
                         "index": 0,
@@ -5349,8 +5349,8 @@
                     "index": 40
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID9",
-                    "value": "EVS/SOCIALSCIENCE 9"
+                    "name": "EVS 9",
+                    "value": "EVS 9"
                 },
                 "validate": {
                     "regExp": ""
@@ -5360,7 +5360,7 @@
                 "cellId": "41",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID10",
+                        "annotationTags": "EVS 10",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "43",
                         "index": 0,
@@ -5376,8 +5376,8 @@
                     "index": 41
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID10",
-                    "value": "EVS/SOCIALSCIENCE 10"
+                    "name": "EVS 10",
+                    "value": "EVS 10"
                 },
                 "validate": {
                     "regExp": ""
@@ -5711,8 +5711,8 @@
                     "index": 1
                 },
                 "format": {
-                    "name": "ROLL NUMBER",
-                    "value": "ROLL NUMBER"
+                    "name": "ROLLNUMBER",
+                    "value": "ROLLNUMBER"
                 },
                 "validate": {
                     "regExp": ""
@@ -6532,7 +6532,7 @@
                 "cellId": "32",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID1",
+                        "annotationTags": "EVS 1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "34",
                         "index": 0,
@@ -6548,8 +6548,8 @@
                     "index": 32
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID1",
-                    "value": "EVS/SOCIALSCIENCE 1"
+                    "name": "EVS 1",
+                    "value": "EVS 1"
                 },
                 "validate": {
                     "regExp": ""
@@ -6559,7 +6559,7 @@
                 "cellId": "33",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID2",
+                        "annotationTags": "EVS 2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "35",
                         "index": 0,
@@ -6575,8 +6575,8 @@
                     "index": 33
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID2",
-                    "value": "EVS/SOCIALSCIENCE 2"
+                    "name": "EVS 2",
+                    "value": "EVS 2"
                 },
                 "validate": {
                     "regExp": ""
@@ -6586,7 +6586,7 @@
                 "cellId": "34",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID3",
+                        "annotationTags": "EVS 3",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "36",
                         "index": 0,
@@ -6602,8 +6602,8 @@
                     "index": 34
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID3",
-                    "value": "EVS/SOCIALSCIENCE 3"
+                    "name": "EVS 3",
+                    "value": "EVS 3"
                 },
                 "validate": {
                     "regExp": ""
@@ -6613,7 +6613,7 @@
                 "cellId": "35",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID4",
+                        "annotationTags": "EVS 4",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "37",
                         "index": 0,
@@ -6629,8 +6629,8 @@
                     "index": 35
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID4",
-                    "value": "EVS/SOCIALSCIENCE 4"
+                    "name": "EVS 4",
+                    "value": "EVS 4"
                 },
                 "validate": {
                     "regExp": ""
@@ -6640,7 +6640,7 @@
                 "cellId": "36",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID5",
+                        "annotationTags": "EVS 5",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "38",
                         "index": 0,
@@ -6656,8 +6656,8 @@
                     "index": 36
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID5",
-                    "value": "EVS/SOCIALSCIENCE 5"
+                    "name": "EVS 5",
+                    "value": "EVS 5"
                 },
                 "validate": {
                     "regExp": ""
@@ -6667,7 +6667,7 @@
                 "cellId": "37",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID6",
+                        "annotationTags": "EVS 6",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "39",
                         "index": 0,
@@ -6683,8 +6683,8 @@
                     "index": 37
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID6",
-                    "value": "EVS/SOCIALSCIENCE 6"
+                    "name": "EVS 6",
+                    "value": "EVS 6"
                 },
                 "validate": {
                     "regExp": ""
@@ -6694,7 +6694,7 @@
                 "cellId": "38",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID7",
+                        "annotationTags": "EVS 7",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "40",
                         "index": 0,
@@ -6710,8 +6710,8 @@
                     "index": 38
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID7",
-                    "value": "EVS/SOCIALSCIENCE 7"
+                    "name": "EVS 7",
+                    "value": "EVS 7"
                 },
                 "validate": {
                     "regExp": ""
@@ -6721,7 +6721,7 @@
                 "cellId": "39",
                 "rois": [
                     {
-                        "annotationTags": "",
+                        "annotationTags": "EVS 8",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "41",
                         "index": 0,
@@ -6737,8 +6737,8 @@
                     "index": 39
                 },
                 "format": {
-                    "name": "",
-                    "value": ""
+                    "name": "EVS 8",
+                    "value": "EVS 8"
                 },
                 "validate": {
                     "regExp": ""
@@ -6748,7 +6748,7 @@
                 "cellId": "40",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID9",
+                        "annotationTags": "EVS 9",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "42",
                         "index": 0,
@@ -6764,8 +6764,8 @@
                     "index": 40
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID9",
-                    "value": "EVS/SOCIALSCIENCE 9"
+                    "name": "EVS 9",
+                    "value": "EVS 9"
                 },
                 "validate": {
                     "regExp": ""
@@ -6775,7 +6775,7 @@
                 "cellId": "41",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID10",
+                        "annotationTags": "EVS 10",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "43",
                         "index": 0,
@@ -6791,8 +6791,8 @@
                     "index": 41
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID10",
-                    "value": "EVS/SOCIALSCIENCE 10"
+                    "name": "EVS 10",
+                    "value": "EVS 10"
                 },
                 "validate": {
                     "regExp": ""
@@ -7126,8 +7126,8 @@
                     "index": 1
                 },
                 "format": {
-                    "name": "ROLL NUMBER",
-                    "value": "ROLL NUMBER"
+                    "name": "ROLLNUMBER",
+                    "value": "ROLLNUMBER"
                 },
                 "validate": {
                     "regExp": ""
@@ -7947,7 +7947,7 @@
                 "cellId": "32",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID1",
+                        "annotationTags": "EVS 1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "34",
                         "index": 0,
@@ -7963,8 +7963,8 @@
                     "index": 32
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID1",
-                    "value": "EVS/SOCIALSCIENCE 1"
+                    "name": "EVS 1",
+                    "value": "EVS 1"
                 },
                 "validate": {
                     "regExp": ""
@@ -7974,7 +7974,7 @@
                 "cellId": "33",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID2",
+                        "annotationTags": "EVS 2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "35",
                         "index": 0,
@@ -7990,8 +7990,8 @@
                     "index": 33
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID2",
-                    "value": "EVS/SOCIALSCIENCE 2"
+                    "name": "EVS 2",
+                    "value": "EVS 2"
                 },
                 "validate": {
                     "regExp": ""
@@ -8001,7 +8001,7 @@
                 "cellId": "34",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID3",
+                        "annotationTags": "EVS 3",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "36",
                         "index": 0,
@@ -8017,8 +8017,8 @@
                     "index": 34
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID3",
-                    "value": "EVS/SOCIALSCIENCE 3"
+                    "name": "EVS 3",
+                    "value": "EVS 3"
                 },
                 "validate": {
                     "regExp": ""
@@ -8028,7 +8028,7 @@
                 "cellId": "35",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID4",
+                        "annotationTags": "EVS 4",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "37",
                         "index": 0,
@@ -8044,8 +8044,8 @@
                     "index": 35
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID4",
-                    "value": "EVS/SOCIALSCIENCE 4"
+                    "name": "EVS 4",
+                    "value": "EVS 4"
                 },
                 "validate": {
                     "regExp": ""
@@ -8055,7 +8055,7 @@
                 "cellId": "36",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID5",
+                        "annotationTags": "EVS 5",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "38",
                         "index": 0,
@@ -8071,8 +8071,8 @@
                     "index": 36
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID5",
-                    "value": "EVS/SOCIALSCIENCE 5"
+                    "name": "EVS 5",
+                    "value": "EVS 5"
                 },
                 "validate": {
                     "regExp": ""
@@ -8082,7 +8082,7 @@
                 "cellId": "37",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID6",
+                        "annotationTags": "EVS 6",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "39",
                         "index": 0,
@@ -8098,8 +8098,8 @@
                     "index": 37
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID6",
-                    "value": "EVS/SOCIALSCIENCE 6"
+                    "name": "EVS 6",
+                    "value": "EVS 6"
                 },
                 "validate": {
                     "regExp": ""
@@ -8109,7 +8109,7 @@
                 "cellId": "38",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID7",
+                        "annotationTags": "EVS 7",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "40",
                         "index": 0,
@@ -8125,8 +8125,8 @@
                     "index": 38
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID7",
-                    "value": "EVS/SOCIALSCIENCE 7"
+                    "name": "EVS 7",
+                    "value": "EVS 7"
                 },
                 "validate": {
                     "regExp": ""
@@ -8136,7 +8136,7 @@
                 "cellId": "39",
                 "rois": [
                     {
-                        "annotationTags": "",
+                        "annotationTags": "EVS 8",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "41",
                         "index": 0,
@@ -8152,8 +8152,8 @@
                     "index": 39
                 },
                 "format": {
-                    "name": "",
-                    "value": ""
+                    "name": "EVS 8",
+                    "value": "EVS 8"
                 },
                 "validate": {
                     "regExp": ""
@@ -8163,7 +8163,7 @@
                 "cellId": "40",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID9",
+                        "annotationTags": "EVS 9",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "42",
                         "index": 0,
@@ -8179,8 +8179,8 @@
                     "index": 40
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID9",
-                    "value": "EVS/SOCIALSCIENCE 9"
+                    "name": "EVS 9",
+                    "value": "EVS 9"
                 },
                 "validate": {
                     "regExp": ""
@@ -8190,7 +8190,7 @@
                 "cellId": "41",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID10",
+                        "annotationTags": "EVS 10",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "43",
                         "index": 0,
@@ -8206,8 +8206,8 @@
                     "index": 41
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID10",
-                    "value": "EVS/SOCIALSCIENCE 10"
+                    "name": "EVS 10",
+                    "value": "EVS 10"
                 },
                 "validate": {
                     "regExp": ""
@@ -8541,8 +8541,8 @@
                     "index": 1
                 },
                 "format": {
-                    "name": "ROLL NUMBER",
-                    "value": "ROLL NUMBER"
+                    "name": "ROLLNUMBER",
+                    "value": "ROLLNUMBER"
                 },
                 "validate": {
                     "regExp": ""
@@ -9362,7 +9362,7 @@
                 "cellId": "32",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID1",
+                        "annotationTags": "EVS 1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "34",
                         "index": 0,
@@ -9378,8 +9378,8 @@
                     "index": 32
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID1",
-                    "value": "EVS/SOCIALSCIENCE 1"
+                    "name": "EVS 1",
+                    "value": "EVS 1"
                 },
                 "validate": {
                     "regExp": ""
@@ -9389,7 +9389,7 @@
                 "cellId": "33",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID2",
+                        "annotationTags": "EVS 2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "35",
                         "index": 0,
@@ -9405,8 +9405,8 @@
                     "index": 33
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID2",
-                    "value": "EVS/SOCIALSCIENCE 2"
+                    "name": "EVS 2",
+                    "value": "EVS 2"
                 },
                 "validate": {
                     "regExp": ""
@@ -9416,7 +9416,7 @@
                 "cellId": "34",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID3",
+                        "annotationTags": "EVS 3",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "36",
                         "index": 0,
@@ -9432,8 +9432,8 @@
                     "index": 34
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID3",
-                    "value": "EVS/SOCIALSCIENCE 3"
+                    "name": "EVS 3",
+                    "value": "EVS 3"
                 },
                 "validate": {
                     "regExp": ""
@@ -9443,7 +9443,7 @@
                 "cellId": "35",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID4",
+                        "annotationTags": "EVS 4",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "37",
                         "index": 0,
@@ -9459,8 +9459,8 @@
                     "index": 35
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID4",
-                    "value": "EVS/SOCIALSCIENCE 4"
+                    "name": "EVS 4",
+                    "value": "EVS 4"
                 },
                 "validate": {
                     "regExp": ""
@@ -9470,7 +9470,7 @@
                 "cellId": "36",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID5",
+                        "annotationTags": "EVS 5",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "38",
                         "index": 0,
@@ -9486,8 +9486,8 @@
                     "index": 36
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID5",
-                    "value": "EVS/SOCIALSCIENCE 5"
+                    "name": "EVS 5",
+                    "value": "EVS 5"
                 },
                 "validate": {
                     "regExp": ""
@@ -9497,7 +9497,7 @@
                 "cellId": "37",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID6",
+                        "annotationTags": "EVS 6",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "39",
                         "index": 0,
@@ -9513,8 +9513,8 @@
                     "index": 37
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID6",
-                    "value": "EVS/SOCIALSCIENCE 6"
+                    "name": "EVS 6",
+                    "value": "EVS 6"
                 },
                 "validate": {
                     "regExp": ""
@@ -9524,7 +9524,7 @@
                 "cellId": "38",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID7",
+                        "annotationTags": "EVS 7",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "40",
                         "index": 0,
@@ -9540,8 +9540,8 @@
                     "index": 38
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID7",
-                    "value": "EVS/SOCIALSCIENCE 7"
+                    "name": "EVS 7",
+                    "value": "EVS 7"
                 },
                 "validate": {
                     "regExp": ""
@@ -9551,7 +9551,7 @@
                 "cellId": "39",
                 "rois": [
                     {
-                        "annotationTags": "",
+                        "annotationTags": "EVS 8",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "41",
                         "index": 0,
@@ -9567,8 +9567,8 @@
                     "index": 39
                 },
                 "format": {
-                    "name": "",
-                    "value": ""
+                    "name": "EVS 8",
+                    "value": "EVS 8"
                 },
                 "validate": {
                     "regExp": ""
@@ -9578,7 +9578,7 @@
                 "cellId": "40",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID9",
+                        "annotationTags": "EVS 9",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "42",
                         "index": 0,
@@ -9594,8 +9594,8 @@
                     "index": 40
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID9",
-                    "value": "EVS/SOCIALSCIENCE 9"
+                    "name": "EVS 9",
+                    "value": "EVS 9"
                 },
                 "validate": {
                     "regExp": ""
@@ -9605,7 +9605,7 @@
                 "cellId": "41",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID10",
+                        "annotationTags": "EVS 10",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "43",
                         "index": 0,
@@ -9621,8 +9621,8 @@
                     "index": 41
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID10",
-                    "value": "EVS/SOCIALSCIENCE 10"
+                    "name": "EVS 10",
+                    "value": "EVS 10"
                 },
                 "validate": {
                     "regExp": ""
@@ -9956,8 +9956,8 @@
                     "index": 1
                 },
                 "format": {
-                    "name": "ROLL NUMBER",
-                    "value": "ROLL NUMBER"
+                    "name": "ROLLNUMBER",
+                    "value": "ROLLNUMBER"
                 },
                 "validate": {
                     "regExp": ""
@@ -10777,7 +10777,7 @@
                 "cellId": "32",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID1",
+                        "annotationTags": "EVS 1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "34",
                         "index": 0,
@@ -10793,8 +10793,8 @@
                     "index": 32
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID1",
-                    "value": "EVS/SOCIALSCIENCE 1"
+                    "name": "EVS 1",
+                    "value": "EVS 1"
                 },
                 "validate": {
                     "regExp": ""
@@ -10804,7 +10804,7 @@
                 "cellId": "33",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID2",
+                        "annotationTags": "EVS 2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "35",
                         "index": 0,
@@ -10820,8 +10820,8 @@
                     "index": 33
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID2",
-                    "value": "EVS/SOCIALSCIENCE 2"
+                    "name": "EVS 2",
+                    "value": "EVS 2"
                 },
                 "validate": {
                     "regExp": ""
@@ -10831,7 +10831,7 @@
                 "cellId": "34",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID3",
+                        "annotationTags": "EVS 3",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "36",
                         "index": 0,
@@ -10847,8 +10847,8 @@
                     "index": 34
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID3",
-                    "value": "EVS/SOCIALSCIENCE 3"
+                    "name": "EVS 3",
+                    "value": "EVS 3"
                 },
                 "validate": {
                     "regExp": ""
@@ -10858,7 +10858,7 @@
                 "cellId": "35",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID4",
+                        "annotationTags": "EVS 4",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "37",
                         "index": 0,
@@ -10874,8 +10874,8 @@
                     "index": 35
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID4",
-                    "value": "EVS/SOCIALSCIENCE 4"
+                    "name": "EVS 4",
+                    "value": "EVS 4"
                 },
                 "validate": {
                     "regExp": ""
@@ -10885,7 +10885,7 @@
                 "cellId": "36",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID5",
+                        "annotationTags": "EVS 5",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "38",
                         "index": 0,
@@ -10901,8 +10901,8 @@
                     "index": 36
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID5",
-                    "value": "EVS/SOCIALSCIENCE 5"
+                    "name": "EVS 5",
+                    "value": "EVS 5"
                 },
                 "validate": {
                     "regExp": ""
@@ -10912,7 +10912,7 @@
                 "cellId": "37",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID6",
+                        "annotationTags": "EVS 6",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "39",
                         "index": 0,
@@ -10928,8 +10928,8 @@
                     "index": 37
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID6",
-                    "value": "EVS/SOCIALSCIENCE 6"
+                    "name": "EVS 6",
+                    "value": "EVS 6"
                 },
                 "validate": {
                     "regExp": ""
@@ -10939,7 +10939,7 @@
                 "cellId": "38",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID7",
+                        "annotationTags": "EVS 7",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "40",
                         "index": 0,
@@ -10955,8 +10955,8 @@
                     "index": 38
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID7",
-                    "value": "EVS/SOCIALSCIENCE 7"
+                    "name": "EVS 7",
+                    "value": "EVS 7"
                 },
                 "validate": {
                     "regExp": ""
@@ -10966,7 +10966,7 @@
                 "cellId": "39",
                 "rois": [
                     {
-                        "annotationTags": "",
+                        "annotationTags": "EVS 8",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "41",
                         "index": 0,
@@ -10982,8 +10982,8 @@
                     "index": 39
                 },
                 "format": {
-                    "name": "",
-                    "value": ""
+                    "name": "EVS 8",
+                    "value": "EVS 8"
                 },
                 "validate": {
                     "regExp": ""
@@ -10993,7 +10993,7 @@
                 "cellId": "40",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID9",
+                        "annotationTags": "EVS 9",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "42",
                         "index": 0,
@@ -11009,8 +11009,8 @@
                     "index": 40
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID9",
-                    "value": "EVS/SOCIALSCIENCE 9"
+                    "name": "EVS 9",
+                    "value": "EVS 9"
                 },
                 "validate": {
                     "regExp": ""
@@ -11020,7 +11020,7 @@
                 "cellId": "41",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID10",
+                        "annotationTags": "EVS 10",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "43",
                         "index": 0,
@@ -11036,8 +11036,8 @@
                     "index": 41
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID10",
-                    "value": "EVS/SOCIALSCIENCE 10"
+                    "name": "EVS 10",
+                    "value": "EVS 10"
                 },
                 "validate": {
                     "regExp": ""
@@ -11371,8 +11371,8 @@
                     "index": 1
                 },
                 "format": {
-                    "name": "ROLL NUMBER",
-                    "value": "ROLL NUMBER"
+                    "name": "ROLLNUMBER",
+                    "value": "ROLLNUMBER"
                 },
                 "validate": {
                     "regExp": ""
@@ -12192,7 +12192,7 @@
                 "cellId": "32",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID1",
+                        "annotationTags": "EVS 1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "34",
                         "index": 0,
@@ -12208,8 +12208,8 @@
                     "index": 32
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID1",
-                    "value": "EVS/SOCIALSCIENCE 1"
+                    "name": "EVS 1",
+                    "value": "EVS 1"
                 },
                 "validate": {
                     "regExp": ""
@@ -12219,7 +12219,7 @@
                 "cellId": "33",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID2",
+                        "annotationTags": "EVS 2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "35",
                         "index": 0,
@@ -12235,8 +12235,8 @@
                     "index": 33
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID2",
-                    "value": "EVS/SOCIALSCIENCE 2"
+                    "name": "EVS 2",
+                    "value": "EVS 2"
                 },
                 "validate": {
                     "regExp": ""
@@ -12246,7 +12246,7 @@
                 "cellId": "34",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID3",
+                        "annotationTags": "EVS 3",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "36",
                         "index": 0,
@@ -12262,8 +12262,8 @@
                     "index": 34
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID3",
-                    "value": "EVS/SOCIALSCIENCE 3"
+                    "name": "EVS 3",
+                    "value": "EVS 3"
                 },
                 "validate": {
                     "regExp": ""
@@ -12273,7 +12273,7 @@
                 "cellId": "35",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID4",
+                        "annotationTags": "EVS 4",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "37",
                         "index": 0,
@@ -12289,8 +12289,8 @@
                     "index": 35
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID4",
-                    "value": "EVS/SOCIALSCIENCE 4"
+                    "name": "EVS 4",
+                    "value": "EVS 4"
                 },
                 "validate": {
                     "regExp": ""
@@ -12300,7 +12300,7 @@
                 "cellId": "36",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID5",
+                        "annotationTags": "EVS 5",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "38",
                         "index": 0,
@@ -12316,8 +12316,8 @@
                     "index": 36
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID5",
-                    "value": "EVS/SOCIALSCIENCE 5"
+                    "name": "EVS 5",
+                    "value": "EVS 5"
                 },
                 "validate": {
                     "regExp": ""
@@ -12327,7 +12327,7 @@
                 "cellId": "37",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID6",
+                        "annotationTags": "EVS 6",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "39",
                         "index": 0,
@@ -12343,8 +12343,8 @@
                     "index": 37
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID6",
-                    "value": "EVS/SOCIALSCIENCE 6"
+                    "name": "EVS 6",
+                    "value": "EVS 6"
                 },
                 "validate": {
                     "regExp": ""
@@ -12354,7 +12354,7 @@
                 "cellId": "38",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID7",
+                        "annotationTags": "EVS 7",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "40",
                         "index": 0,
@@ -12370,8 +12370,8 @@
                     "index": 38
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID7",
-                    "value": "EVS/SOCIALSCIENCE 7"
+                    "name": "EVS 7",
+                    "value": "EVS 7"
                 },
                 "validate": {
                     "regExp": ""
@@ -12381,7 +12381,7 @@
                 "cellId": "39",
                 "rois": [
                     {
-                        "annotationTags": "",
+                        "annotationTags": "EVS 8",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "41",
                         "index": 0,
@@ -12397,8 +12397,8 @@
                     "index": 39
                 },
                 "format": {
-                    "name": "",
-                    "value": ""
+                    "name": "EVS 8",
+                    "value": "EVS 8"
                 },
                 "validate": {
                     "regExp": ""
@@ -12408,7 +12408,7 @@
                 "cellId": "40",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID9",
+                        "annotationTags": "EVS 9",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "42",
                         "index": 0,
@@ -12424,8 +12424,8 @@
                     "index": 40
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID9",
-                    "value": "EVS/SOCIALSCIENCE 9"
+                    "name": "EVS 9",
+                    "value": "EVS 9"
                 },
                 "validate": {
                     "regExp": ""
@@ -12435,7 +12435,7 @@
                 "cellId": "41",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID10",
+                        "annotationTags": "EVS 10",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "43",
                         "index": 0,
@@ -12451,8 +12451,8 @@
                     "index": 41
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID10",
-                    "value": "EVS/SOCIALSCIENCE 10"
+                    "name": "EVS 10",
+                    "value": "EVS 10"
                 },
                 "validate": {
                     "regExp": ""
@@ -12786,8 +12786,8 @@
                     "index": 1
                 },
                 "format": {
-                    "name": "ROLL NUMBER",
-                    "value": "ROLL NUMBER"
+                    "name": "ROLLNUMBER",
+                    "value": "ROLLNUMBER"
                 },
                 "validate": {
                     "regExp": ""
@@ -13607,7 +13607,7 @@
                 "cellId": "32",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID1",
+                        "annotationTags": "EVS 1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "34",
                         "index": 0,
@@ -13623,8 +13623,8 @@
                     "index": 32
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID1",
-                    "value": "EVS/SOCIALSCIENCE 1"
+                    "name": "EVS 1",
+                    "value": "EVS 1"
                 },
                 "validate": {
                     "regExp": ""
@@ -13634,7 +13634,7 @@
                 "cellId": "33",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID2",
+                        "annotationTags": "EVS 2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "35",
                         "index": 0,
@@ -13650,8 +13650,8 @@
                     "index": 33
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID2",
-                    "value": "EVS/SOCIALSCIENCE 2"
+                    "name": "EVS 2",
+                    "value": "EVS 2"
                 },
                 "validate": {
                     "regExp": ""
@@ -13661,7 +13661,7 @@
                 "cellId": "34",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID3",
+                        "annotationTags": "EVS 3",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "36",
                         "index": 0,
@@ -13677,8 +13677,8 @@
                     "index": 34
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID3",
-                    "value": "EVS/SOCIALSCIENCE 3"
+                    "name": "EVS 3",
+                    "value": "EVS 3"
                 },
                 "validate": {
                     "regExp": ""
@@ -13688,7 +13688,7 @@
                 "cellId": "35",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID4",
+                        "annotationTags": "EVS 4",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "37",
                         "index": 0,
@@ -13704,8 +13704,8 @@
                     "index": 35
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID4",
-                    "value": "EVS/SOCIALSCIENCE 4"
+                    "name": "EVS 4",
+                    "value": "EVS 4"
                 },
                 "validate": {
                     "regExp": ""
@@ -13715,7 +13715,7 @@
                 "cellId": "36",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID5",
+                        "annotationTags": "EVS 5",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "38",
                         "index": 0,
@@ -13731,8 +13731,8 @@
                     "index": 36
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID5",
-                    "value": "EVS/SOCIALSCIENCE 5"
+                    "name": "EVS 5",
+                    "value": "EVS 5"
                 },
                 "validate": {
                     "regExp": ""
@@ -13742,7 +13742,7 @@
                 "cellId": "37",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID6",
+                        "annotationTags": "EVS 6",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "39",
                         "index": 0,
@@ -13758,8 +13758,8 @@
                     "index": 37
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID6",
-                    "value": "EVS/SOCIALSCIENCE 6"
+                    "name": "EVS 6",
+                    "value": "EVS 6"
                 },
                 "validate": {
                     "regExp": ""
@@ -13769,7 +13769,7 @@
                 "cellId": "38",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID7",
+                        "annotationTags": "EVS 7",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "40",
                         "index": 0,
@@ -13785,8 +13785,8 @@
                     "index": 38
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID7",
-                    "value": "EVS/SOCIALSCIENCE 7"
+                    "name": "EVS 7",
+                    "value": "EVS 7"
                 },
                 "validate": {
                     "regExp": ""
@@ -13796,7 +13796,7 @@
                 "cellId": "39",
                 "rois": [
                     {
-                        "annotationTags": "",
+                        "annotationTags": "EVS 8",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "41",
                         "index": 0,
@@ -13812,8 +13812,8 @@
                     "index": 39
                 },
                 "format": {
-                    "name": "",
-                    "value": ""
+                    "name": "EVS 8",
+                    "value": "EVS 8"
                 },
                 "validate": {
                     "regExp": ""
@@ -13823,7 +13823,7 @@
                 "cellId": "40",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID9",
+                        "annotationTags": "EVS 9",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "42",
                         "index": 0,
@@ -13839,8 +13839,8 @@
                     "index": 40
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID9",
-                    "value": "EVS/SOCIALSCIENCE 9"
+                    "name": "EVS 9",
+                    "value": "EVS 9"
                 },
                 "validate": {
                     "regExp": ""
@@ -13850,7 +13850,7 @@
                 "cellId": "41",
                 "rois": [
                     {
-                        "annotationTags": "EVS/SOCIALSCIENCEID10",
+                        "annotationTags": "EVS 10",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "43",
                         "index": 0,
@@ -13866,8 +13866,8 @@
                     "index": 41
                 },
                 "format": {
-                    "name": "EVS/SOCIALSCIENCEID10",
-                    "value": "EVS/SOCIALSCIENCE 10"
+                    "name": "EVS 10",
+                    "value": "EVS 10"
                 },
                 "validate": {
                     "regExp": ""
