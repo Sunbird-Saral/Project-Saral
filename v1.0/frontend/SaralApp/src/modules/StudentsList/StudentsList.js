@@ -42,7 +42,9 @@ const StudentsList = ({
     navigation,
     scanTypeData,
     saveAbsentStudent,
-    absentStudentDataResponse
+    absentStudentDataResponse,
+    roiData,
+    apiStatus
 }) => {
 
 
@@ -65,7 +67,7 @@ const StudentsList = ({
 
     useEffect(() => {
         studentData()
-        getRoi()
+        // getRoi()
         // callScanStatusData()
     }, []);
 
@@ -187,6 +189,7 @@ const StudentsList = ({
         setAllStudentData(filterStudentsData[0].data.students)
         setIsLoading(false)
         callScanStatusData()
+        getRoi()
         // console.log("setFetchedAbsentList", absentStudentlist);
         // console.log("setFetchedAbsentList", studentsList);
     }
@@ -276,7 +279,7 @@ const StudentsList = ({
         // } else {
         //     let absentList = _.filter(allStudentData, (o) => o.isAbsent);
         //     setAbsentStudentDataIntoAsync(absentList);
-            navigation.navigate('ScanHistory');
+        navigation.navigate('ScanHistory');
         // }
     }
 
@@ -306,17 +309,19 @@ const StudentsList = ({
             }
         ])
     }
-
+    
     const getRoi = () => {
 
         let payload =
         {
             "examId": filteredData.response.examTestID,
-            "type": scanTypeData.scanType
+            "type": scanTypeData.scanType.toUpperCase()
         }
-
-        let apiObj = new ROIAction(payload);
-        APITransport(apiObj)
+        let token = loginData.data.token
+        console.log("Toekne", token);
+        let apiObj = new ROIAction(payload, token);
+        dispatch(APITransport(apiObj))
+        console.log("apiStatus", apiStatus);
     }
 
     return (
@@ -394,7 +399,8 @@ const mapStateToProps = (state) => {
         roiData: state.roiData,
         scanTypeData: state.scanTypeData.response,
         saveAbsentStudent: state.saveAbsentStudent,
-        absentStudentDataResponse: state.absentStudentDataResponse
+        absentStudentDataResponse: state.absentStudentDataResponse,
+        apiStatus: state.apiStatus,
     }
 }
 

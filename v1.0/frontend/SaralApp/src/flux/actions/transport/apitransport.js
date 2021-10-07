@@ -67,7 +67,6 @@ export default function dispatchAPI(api) {
                             dispatch(api.getNextStep())
                     })
                     .catch(function (err) {        
-                        console.log("err",err.response);                
                         clearTimeout(id)
                         if(err && err.message == 'The request timed out.') {
                             dispatch(apiStatusAsync(false, true, Strings.request_timeout_custom_message, null, err && err.response && err.response.status && err.response.status === 401 ? true : false))
@@ -120,7 +119,7 @@ export default function dispatchAPI(api) {
                     })
                     .catch(function (err) {                        
                         if (err.response)
-                            dispatch(apiStatusAsync(false, true, Strings.something_went_wrong_please_try_again, null, err && err.response && err.response.status && err.response.status === 401 ? true : false))
+                            dispatch(apiStatusAsync(false, true, Strings.something_went_wrong_please_try_again, null, err && err.response && err.response.status && err.response.status === 401 || err.response.status === 404 ? true : false))
                     });
             }
         }
