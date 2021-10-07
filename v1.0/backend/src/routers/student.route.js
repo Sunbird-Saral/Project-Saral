@@ -78,7 +78,7 @@ router.post('/fetchStudentsandExamsByQuery', auth, async (req, res) => {
         examMatch.classId = studentClassObj.classId
         examMatch.schoolId = req.school.schoolId
     } else {
-        res.status(404).send({ error: 'Please send classId' })
+        return res.status(404).send({ message: 'Please send classId' })
     }
 
     if (req.body.section && req.body.section != "0") {
@@ -98,15 +98,13 @@ router.post('/fetchStudentsandExamsByQuery', auth, async (req, res) => {
 router.delete('/deleteStudentByStudentId/:studentId', async (req, res) => {
     try {
         const student = await Student.findOne({ studentId: req.params.studentId })
-        if (!student) {
-            res.status(404).send({ message: 'Student Id does not exist.' })
-        }
+        if (!student) return res.status(404).send({ message: 'Student Id does not exist.' })
         let lookup = {
             studentId: student.studentId
         }
         await Student.deleteOne(lookup).lean()
         await Marks.findOneAndRemove(lookup).lean()
-        res.status(200).send({ "message": "Student has been deleted." })
+        return res.status(200).send({ "message": "Student has been deleted." })
     }
     catch (e) {
         console.log(e);
@@ -121,7 +119,7 @@ router.patch('/updateStudent/:studentId', async (req, res) => {
     const allowedUpdates = ['name', 'studentClass']
     const isValidOperation = inputKey.every((update) => allowedUpdates.includes(update))
     if (!isValidOperation) {
-        return res.status(400).send({ error: 'Invaid Updates' })
+        return res.status(400).send({ message: 'Invaid Updates' })
     }
     let lookup = {
         studentId: req.params.studentId
@@ -140,7 +138,7 @@ router.patch('/updateStudent/:studentId', async (req, res) => {
             updateData["studentClass"] = studentClass
         }
         const school = await Student.findOne(lookup).lean();
-        if (!school) res.status(404).send({ message: 'Student Id does not exist.' })
+        if (!school) return res.status(404).send({ message: 'Student Id does not exist.' })
 
         await Student.updateOne(lookup, updateData).lean().exec();
         res.status(200).send({ message: 'Student has been updated.' })

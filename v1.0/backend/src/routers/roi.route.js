@@ -55,19 +55,19 @@ router.post('/createRoi',auth, async (req, res) => {
 
 router.patch('/updateRoi/:roiId', auth, async (req, res) => {
     try {
-        if (Object.keys(req.body).length === 0) res.status(400).send({ message: 'Validation error.' })
-        const updates = Object.keys(req.body)
-        const allowedUpdates = ['roi']
-        const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
+        if (Object.keys(req.body) != "roi") return res.status(400).send({ message: 'Invalid Input .' })
+        // const updates = Object.keys(req.body)
+        // const allowedUpdates = ['roi']
+        // const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
     
-        if (!isValidOperation) {
-            return res.status(400).send({ error: 'Invalid Updates' })
-        }
+        // if (!isValidOperation) {
+        //     return res.status(400).send({ error: 'Invalid Updates' })
+        // }
         let lookup ={
             roiId: req.params.roiId
         }
         let roiData = await ROI.findOne(lookup).lean();
-        if(!roiData) res.status(404).send({"message": "ROI Id does not exist."})
+        if(!roiData) return res.status(404).send({"message": "ROI Id does not exist."})
         let updateObj = {}
         
         if(req.body.roi) updateObj["roi"] = req.body.roi
@@ -82,8 +82,11 @@ router.patch('/updateRoi/:roiId', auth, async (req, res) => {
 router.delete('/deleteRoi/:roiId',auth, async (req, res) => {
     try {
         let roi = await ROI.findOneAndRemove({roiId: req.params.roiId})
-        if(!roi) res.status(404).send({"message": "ROI ID has been already deleted."})
+        if(roi){
         res.status(200).send({"message": "ROI has been deleted successfully."})
+        }else{
+            res.status(404).send({"message": "ROI does not exist."})
+        }
     } catch (e){   
         res.status(400).send(e)
     }
