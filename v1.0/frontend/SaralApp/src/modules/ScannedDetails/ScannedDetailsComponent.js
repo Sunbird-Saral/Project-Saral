@@ -269,8 +269,9 @@ const ScannedDetailsComponent = ({
         newArray[index].consolidatedPrediction = text
         setNewArrayValue(newArray)
 
+        
         newArray.map((e) => {
-            if (e.format.name == "MAX_MARK") {
+            if (e.format.name == "MAX_MARKS") {
                 setMaxMarksTotal(e.consolidatedPrediction)
             }
             if (e.format.name == "MARKS_OBTAINED") {
@@ -319,14 +320,15 @@ const ScannedDetailsComponent = ({
         else {
             if (sumOfObtainedMarks > 0) {
                 //with MAX & OBTAINED MARKS
+                console.log("sumof", sumOfObtainedMarks, totalMarkSecured,maxMarksTotal);
                 if (sumOfObtainedMarks != totalMarkSecured) {
-                    console.log("SUMOFOBTAINEMARKS", sumOfObtainedMarks);
+                    console.log("SUMOFOBTAINEMARKSss", sumOfObtainedMarks);
                     setObtnMarkErr(true)
                     showErrorMessage("Sum Of All obtained marks should be equal to marksObtained")
                 }
-                else if (maxMarksTotal <= sumOfObtainedMarks) {
-                    setObtnMarkErr(true)
-                    showErrorMessage("Max mark should be less than and equal to Sum of All obtained")
+                else if (maxMarksTotal < sumOfObtainedMarks) {
+                    setObtnMarkErr(false)
+                    showErrorMessage("Total mark should be less than or equal to Maximum marks")
                     setMaxMarkErr(true)
                 }
                 else {
