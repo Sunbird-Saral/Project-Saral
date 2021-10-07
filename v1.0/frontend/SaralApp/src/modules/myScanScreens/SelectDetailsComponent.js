@@ -744,12 +744,12 @@ class SelectDetailsComponent extends Component {
         return (
 
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
-                {/* <HeaderComponent
-                    title={Strings.up_saralData}
+                <HeaderComponent
+                    // title={Strings.up_saralData}
                     logoutHeaderText={Strings.logout_text}
                     customLogoutTextStyle={{ color: AppTheme.GREY }}
                     onLogoutClick={this.onLogoutClick}
-                /> */}
+                />
                 {(loginData && loginData.data) &&
                     <View style={{ marginTop: 20 }}>
                         <Text
