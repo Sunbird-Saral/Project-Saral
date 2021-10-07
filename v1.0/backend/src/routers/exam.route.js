@@ -11,6 +11,7 @@ router.post('/addExamsByClass', auth, async (req, res) => {
     let schoolId = req.school.schoolId
 
     for (let i = 0; i < body.length; i++) {
+        body[i].type = body[i].type.toUpperCase()
         let examExist = await Exam.find({ schoolId, classId: body[i].classId, examDate: body[i].examDate, subject: body[i].subject })
         if (examExist.length) continue
         let examId = await Counter.getValueForNextSequence("examId")

@@ -64,7 +64,6 @@ router.post('/fetchStudentsByQuery', auth, async (req, res) => {
 })
 
 router.post('/fetchStudentsandExamsByQuery', auth, async (req, res) => {
-
     const match = {}
     const examMatch = {}
     match.schoolId = req.school.schoolId
@@ -77,6 +76,7 @@ router.post('/fetchStudentsandExamsByQuery', auth, async (req, res) => {
         let studentClass = [studentClassObj]
         match.studentClass = studentClass
         examMatch.classId = studentClassObj.classId
+        examMatch.schoolId = req.school.schoolId
     } else {
         res.status(404).send({ error: 'Please send classId' })
     }
