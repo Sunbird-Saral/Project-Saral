@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Text, View, ScrollView, ToastAndroid, Alert } from 'react-native';
 import { connect, useDispatch } from 'react-redux';
 import AppTheme from '../../utils/AppTheme';
-import { neglectData, SCAN_TYPES, student_ID, TABLE_HEADER } from '../../utils/CommonUtils';
+import { multipleStudent, neglectData, SCAN_TYPES, student_ID, TABLE_HEADER } from '../../utils/CommonUtils';
 import Strings from '../../utils/Strings';
 
 
@@ -57,7 +57,14 @@ const ScannedDetailsComponent = ({
     const [obtnmarkErr, setObtnMarkErr] = useState(false)
     const [maxmarkErr, setMaxMarkErr] = useState(false)
     const [disable, setDisabled] = useState(false)
+    const [isMultipleStudent, setIsmultipleStudent] = useState(false)
 
+    const [stdRollArray, setStdRollArray] = useState([])
+    const [structureList, setStructureList] = useState([])
+    const [currentIndex, setCurrentIndex] = useState(0)
+    const [valid, setValid] = useState(false);
+
+    const [nextBtn, setNextBtn] = useState('NEXT')
 
     const inputRef = React.createRef();
     const dispatch = useDispatch()
@@ -97,6 +104,58 @@ const ScannedDetailsComponent = ({
     }
 
     useEffect(() => {
+        let checkIsStudentMultipleSingle = ocrLocalResponse.layout.cells.filter((e) => {
+            let wordLen = e.format.name.length - 1;
+            let multiple = 0
+            if (wordLen === multipleStudent[0].length) {
+                multiple = multiple + 1
+            }
+            return multiple
+        })
+
+        if (checkIsStudentMultipleSingle.length > 0) {
+            setStdRollArray(checkIsStudentMultipleSingle)
+            setIsmultipleStudent(true)
+            callMultipleStudentSheetData(checkIsStudentMultipleSingle)
+        } else {
+            callSingleStudentSheetData()
+        }
+    }, []);
+
+    const callMultipleStudentSheetData = (checkIsStudentMultipleSingle) => {
+
+        let marTemp = []
+        let dummy = []
+
+        let len = ocrLocalResponse.layout.cells.length;
+
+        ocrLocalResponse.layout.cells.forEach((element, index) => {
+            checkIsStudentMultipleSingle.forEach((e, i) => {
+                if (element.format.name === e.format.name) {
+                    dummy.push(index)
+                }
+            });
+        });
+        dummy.push(len)
+
+        dummy.forEach((el, index) => {
+            if (dummy.length > index + 1) {
+                let data = ocrLocalResponse.layout.cells.slice(dummy[index], dummy[index + 1])
+                marTemp.push({
+                    RollNo: data[0].consolidatedPrediction,
+                    data: data.slice(1, data.length)
+                })
+            }
+        });
+        setStudentID(marTemp[0].RollNo)
+        setNewArrayValue(marTemp[0].data)
+        setStructureList(marTemp)
+
+
+
+    }
+
+    const callSingleStudentSheetData = () => {
         let data = ''
         let elements = neglectData;
         data = ocrLocalResponse.layout.cells.filter((element) => {
@@ -152,10 +211,54 @@ const ScannedDetailsComponent = ({
                 }
             })
         })
+    }
 
-    }, [])
+    const goNextFrame = () => {
 
+        let validCell = false
+        for (let i = 0; i < newArrayValue.length; i++) {
+            if (newArrayValue[i].consolidatedPrediction == '') {
+                // setValid(true)
+                validCell = true
+            }
 
+        }
+
+        if (disable) {
+            showErrorMessage(Strings.please_correct_marks_data)
+        }
+        else if (validCell) {
+            showErrorMessage(Strings.please_correct_marks_data)
+        }
+        else if (!studentValid) {
+            showErrorMessage(Strings.please_correct_student_id)
+        }
+        else {
+            if (currentIndex + 1 <= stdRollArray.length - 1) {
+                validCell = false
+                console.log(currentIndex, stdRollArray.length - 1);
+                console.log(structureList[currentIndex + 1]);
+                setNewArrayValue(structureList[currentIndex + 1].data)
+                setStudentID(structureList[currentIndex + 1].RollNo)
+                setCurrentIndex(currentIndex + 1)
+                setBtnName('Back')
+            }
+        }
+    }
+
+    const goBackFrame = () => {
+        if (currentIndex - 1 >= 0) {
+            setNewArrayValue(structureList[currentIndex - 1].data)
+            setStudentID(structureList[currentIndex - 1].RollNo)
+            setCurrentIndex(currentIndex - 1)
+            if (currentIndex == 1) {
+                setBtnName('cancel')
+            }
+        }
+        else {
+            onBackButtonClick()
+        }
+    }
 
     const renderTabSecond = () => {
         return (
@@ -193,7 +296,7 @@ const ScannedDetailsComponent = ({
                             return (
                                 <MarksHeaderTable
                                     customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
-                                    key={index}
+                                    key={`TableHeader${index}`}
                                     rowTitle={data}
                                     rowBorderColor={AppTheme.TAB_BORDER}
                                     editable={false}
@@ -209,7 +312,7 @@ const ScannedDetailsComponent = ({
 
                                 <MarksHeaderTable
                                     customRowStyle={{ width: '30%', }}
-                                    key={`Questions${element.cellId}`}
+                                    key={`Questions${element.cellId + 10}`}
                                     rowTitle={`${element.render.index - 1}`}
                                     rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                     editable={false}
@@ -247,13 +350,13 @@ const ScannedDetailsComponent = ({
                         customBtnStyle={[styles.cancelBtnStyle, { width: '35%' }]}
                         customBtnTextStyle={styles.editBtnTextStyle}
                         btnText={btnName.toUpperCase()}
-                        onPress={() => onBackButtonClick()}
+                        onPress={() => isMultipleStudent ? goBackFrame() : onBackButtonClick()}
                     />
                     <ButtonComponent
                         customBtnStyle={styles.nxtBtnStyle}
                         customBtnTextStyle={styles.nxtBtnTextStyle}
-                        btnText={Strings.submit_text.toUpperCase()}
-                        onPress={() => onSubmitClick()}
+                        btnText={isMultipleStudent ? "Next" : Strings.submit_text.toUpperCase()}
+                        onPress={() => isMultipleStudent ? goNextFrame() : onSubmitClick()}
                     />
                 </View>
 
@@ -263,13 +366,18 @@ const ScannedDetailsComponent = ({
 
 
     const handleTextChange = (text, index, array) => {
+
         let len = text.length
         setDisabled(len == 0 ? true : false)
-        let newArray = JSON.parse(JSON.stringify(array))
-        newArray[index].consolidatedPrediction = text
-        setNewArrayValue(newArray)
 
-        
+        console.log("lenggg", text);
+
+        let newArray = JSON.parse(JSON.stringify(array))
+        newArray[index].consolidatedPrediction = isMultipleStudent ? text > 1 ? 0 : text : text
+        setNewArrayValue(newArray)
+        console.log("ewArray[index].consolidatedPrediction ", newArray[index].consolidatedPrediction);
+
+
         newArray.map((e) => {
             if (e.format.name == "MAX_MARKS") {
                 setMaxMarksTotal(e.consolidatedPrediction)
@@ -315,12 +423,14 @@ const ScannedDetailsComponent = ({
 
     const onSubmitClick = async () => {
         if (disable) {
-            showErrorMessage("Please fill marks")
+            showErrorMessage(Strings.please_fill_cells)
+        }
+        else if (!studentValid) {
+            showErrorMessage(Strings.please_correct_student_id)
         }
         else {
             if (sumOfObtainedMarks > 0) {
                 //with MAX & OBTAINED MARKS
-                console.log("sumof", sumOfObtainedMarks, totalMarkSecured,maxMarksTotal);
                 if (sumOfObtainedMarks != totalMarkSecured) {
                     console.log("SUMOFOBTAINEMARKSss", sumOfObtainedMarks);
                     setObtnMarkErr(true)
@@ -393,18 +503,19 @@ const ScannedDetailsComponent = ({
     }
 
     const callScanStatusData = async () => {
+        setIsLoading(true)
         let loginCred = await getLoginCred()
 
         let dataPayload = {
             "classId": filteredData.class,
             "subject": filteredData.subject,
             "fromDate": filteredData.examDate,
-            "page": 1,
+            "page": 0,
+            "schoolId": loginCred.schoolId,
             "downloadRes": true
         }
         let apiObj = new scanStatusDataAction(dataPayload);
         FetchSavedScannedData(apiObj, loginCred.schoolId, loginCred.password)
-        goToMyScanScreen()
     }
 
     const FetchSavedScannedData = (api, uname, pass) => {
@@ -423,12 +534,15 @@ const ScannedDetailsComponent = ({
                 }
             })
                 .then(function (res) {
+                    setIsLoading(false)
+                    goToMyScanScreen()
                     apiResponse = res
                     clearTimeout(id)
                     api.processResponse(res)
                     dispatch(dispatchAPIAsync(api));
                 })
                 .catch(function (err) {
+                    setIsLoading(false)
                     clearTimeout(id)
                 });
         }
@@ -475,7 +589,7 @@ const ScannedDetailsComponent = ({
 
 
 
-            {isLoading && <Spinner animating={isLoading} />}
+            {isLoading && <Spinner animating={isLoading} iconShow={false} />}
         </ScrollView>
     );
 }
