@@ -60,7 +60,7 @@ const MainStack = createStackNavigator(
         }
     },
     {
-        initialRouteName: 'dashboard',
+        initialRouteName: 'selectDetails',
         headerMode: 'none'
     }
 )

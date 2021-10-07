@@ -193,7 +193,7 @@ const ScannedDetailsComponent = ({
                             return (
                                 <MarksHeaderTable
                                     customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
-                                    key={index}
+                                    key={`TableHeader${index}`}
                                     rowTitle={data}
                                     rowBorderColor={AppTheme.TAB_BORDER}
                                     editable={false}
@@ -209,7 +209,7 @@ const ScannedDetailsComponent = ({
 
                                 <MarksHeaderTable
                                     customRowStyle={{ width: '30%', }}
-                                    key={`Questions${element.cellId}`}
+                                    key={`Questions${element.cellId + 10}`}
                                     rowTitle={`${element.render.index - 1}`}
                                     rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                     editable={false}
@@ -320,7 +320,6 @@ const ScannedDetailsComponent = ({
         else {
             if (sumOfObtainedMarks > 0) {
                 //with MAX & OBTAINED MARKS
-                console.log("sumof", sumOfObtainedMarks, totalMarkSecured,maxMarksTotal);
                 if (sumOfObtainedMarks != totalMarkSecured) {
                     console.log("SUMOFOBTAINEMARKSss", sumOfObtainedMarks);
                     setObtnMarkErr(true)
@@ -393,18 +392,19 @@ const ScannedDetailsComponent = ({
     }
 
     const callScanStatusData = async () => {
+        setIsLoading(true)
         let loginCred = await getLoginCred()
 
         let dataPayload = {
             "classId": filteredData.class,
             "subject": filteredData.subject,
             "fromDate": filteredData.examDate,
-            "page": 1,
+            "page": 0,
+            "schoolId": loginCred.schoolId,
             "downloadRes": true
         }
         let apiObj = new scanStatusDataAction(dataPayload);
         FetchSavedScannedData(apiObj, loginCred.schoolId, loginCred.password)
-        goToMyScanScreen()
     }
 
     const FetchSavedScannedData = (api, uname, pass) => {
@@ -423,12 +423,15 @@ const ScannedDetailsComponent = ({
                 }
             })
                 .then(function (res) {
+                    setIsLoading(false)
+                    goToMyScanScreen()
                     apiResponse = res
                     clearTimeout(id)
                     api.processResponse(res)
                     dispatch(dispatchAPIAsync(api));
                 })
                 .catch(function (err) {
+                    setIsLoading(false)
                     clearTimeout(id)
                 });
         }
@@ -475,7 +478,7 @@ const ScannedDetailsComponent = ({
 
 
 
-            {isLoading && <Spinner animating={isLoading} />}
+            {isLoading && <Spinner animating={isLoading} iconShow={false} />}
         </ScrollView>
     );
 }
