@@ -86,30 +86,26 @@ const fetchSavedData = async (req) => {
     }
 
     try {
-        const { limit = 10, page = 1 } = req.body
-
-        if (parseInt(page) < 0 || parseInt(page) === 0) {
-            return { "error": true, "message": "invalid page number, should start with 1" }
-        }
-
         const count = await Mark.countDocuments(match)
-
-        let totalPages = count ? Math.ceil(count / parseInt(limit)) : 0
-
-        if (totalPages == 0) {
-            return { data: [], totalPages }
-        } else if (parseInt(page) > totalPages) {
-            return { "error": true, totalPages, "message": "invalid page number, can not be more than Total pages" }
+        let totalPages;
+        if (req.body.page) {
+            req.body.limit = 10;
+            req.body.page = 1;
+            totalPages = count ? Math.ceil(count / parseInt(req.body.limit)) : 0
+        }else{
+            req.body.limit = 0;
+            req.body.page = 1;
+            totalPages = 1
         }
 
         const savedScan = await Mark.find(match, { _id: 0, __v: 0 })
-            .limit(parseInt(limit) * 1)
-            .skip((parseInt(parseInt(page)) - 1) * parseInt(parseInt(limit)))
+            .limit(parseInt(req.body.limit) * 1)
+            .skip((parseInt(parseInt(req.body.page)) - 1) * parseInt(parseInt(req.body.limit)))
 
         return {
             data: savedScan,
-            totalPages,
-            currentPage: totalPages != 0 ? parseInt(page) : 0
+            totalPages: totalPages,
+            currentPage: totalPages != 0 ? parseInt(req.body.page) : 0
         }
     }
     catch (e) {
@@ -336,3 +332,32 @@ router.get('/downloadSchoolList', async (req, res) => {
 
 
 module.exports = router
+
+
+
+
+// const { limit = 10, page = 1 } = req.body
+
+// if (parseInt(page) < 0 || parseInt(page) === 0) {
+//     return { "error": true, "message": "invalid page number, should start with 1" }
+// }
+
+// const count = await Mark.countDocuments(match)
+
+// let totalPages = count ? Math.ceil(count / parseInt(limit)) : 0
+
+// if (totalPages == 0) {
+//     return { data: [], totalPages }
+// } else if (parseInt(page) > totalPages) {
+//     return { "error": true, totalPages, "message": "invalid page number, can not be more than Total pages" }
+// }
+
+// const savedScan = await Mark.find(match, { _id: 0, __v: 0 })
+//     .limit(parseInt(limit) * 1)
+//     .skip((parseInt(parseInt(page)) - 1) * parseInt(parseInt(limit)))
+
+// return {
+//     data: savedScan,
+//     totalPages,
+//     currentPage: totalPages != 0 ? parseInt(page) : 0
+// }

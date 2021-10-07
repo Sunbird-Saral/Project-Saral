@@ -494,7 +494,7 @@ paths:
         "400":
           description: "unsuccessful operation"
   
-  /roi/{examId}/type/{type}:
+  /roi/{examId}:
     get:
       security:
         - Bearer: []
@@ -506,12 +506,6 @@ paths:
         name: examId
         type: number
         required: true
-      - in: path
-        name: type
-        type: string
-        required: true
-        
-
 
       responses:
         "200":

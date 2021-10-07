@@ -26,6 +26,7 @@ router.post('/createRoi',auth, async (req, res) => {
         const examExist = await Exam.findOne(lookup)
         if(examExist){
             const school = await School.findOne({schoolId:examExist.schoolId})
+            req.body.type = req.body.type.toUpperCase()
             const roiExist = await ROI.findOne({classId: req.body.classId, subject: req.body.subject, state: school.state, type: req.body.type})
             if(!roiExist){
                 // const school = await School.findOne({schoolId:examExist.schoolId})
@@ -88,19 +89,18 @@ router.delete('/deleteRoi/:roiId',auth, async (req, res) => {
     }
 })
 
-router.get('/roi/:examId/type/:type',auth, async (req, res) => {
+router.get('/roi/:examId',auth, async (req, res) => {
     try {
         const examExist = await Exam.findOne({examId: req.params.examId}).lean()
         if(examExist){
                 const school = await School.findOne({schoolId: req.school.schoolId})
             const roiExist = await ROI.findOne({ classId: examExist.classId, subject: examExist.subject,state: school.state}).lean()
             if(roiExist){
-               
                 let lookup = {
                     classId: examExist.classId,
                     subject: examExist.subject,
                     state: school.state,
-                    type: req.params.type
+                    type: examExist.type
                 }
                 let roi = await ROI.find(lookup,{_id: 0,__v: 0 }).lean()
                 if(roi.length){
