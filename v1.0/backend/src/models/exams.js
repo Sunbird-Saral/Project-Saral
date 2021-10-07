@@ -35,6 +35,10 @@ const examSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
+    type:{
+        type: String,
+        required: true
+    },
     questions: [{
         _id: false,
         questionId: {type: String},
