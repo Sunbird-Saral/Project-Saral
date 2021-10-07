@@ -89,7 +89,7 @@ router.delete('/deleteRoi/:roiId',auth, async (req, res) => {
     }
 })
 
-router.get('/roi/:examId/type/:type',auth, async (req, res) => {
+router.get('/roi/:examId',auth, async (req, res) => {
     try {
         const examExist = await Exam.findOne({examId: req.params.examId}).lean()
         if(examExist){
@@ -100,7 +100,7 @@ router.get('/roi/:examId/type/:type',auth, async (req, res) => {
                     classId: examExist.classId,
                     subject: examExist.subject,
                     state: school.state,
-                    type: req.params.type.toUpperCase()
+                    type: examExist.type
                 }
                 let roi = await ROI.find(lookup,{_id: 0,__v: 0 }).lean()
                 if(roi.length){
