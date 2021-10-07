@@ -7,7 +7,7 @@
                 "cellId": "1",
                 "rois": [
                     {
-                        "annotationTags": "ROLLNUMBER1",
+                        "annotationTags": "ROLLNUMBERID1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "1",
                         "index": 0,
@@ -19,7 +19,7 @@
                         }
                     },
                     {
-                        "annotationTags": "ROLLNUMBER2",
+                        "annotationTags": "ROLLNUMBERID2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "2",
                         "index": 1,
@@ -31,7 +31,7 @@
                         }
                     },
                     {
-                        "annotationTags": "ROLLNUMBER3",
+                        "annotationTags": "ROLLNUMBERID3",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "3",
                         "index": 2,
@@ -868,7 +868,7 @@
                 "cellId": "32",
                 "rois": [
                     {
-                        "annotationTags": "EVS 1",
+                        "annotationTags": "EVSID1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "34",
                         "index": 0,
@@ -884,7 +884,7 @@
                     "index": 32
                 },
                 "format": {
-                    "name": "EVS 1",
+                    "name": "EVSID1",
                     "value": "EVS 1"
                 },
                 "validate": {
@@ -895,7 +895,7 @@
                 "cellId": "33",
                 "rois": [
                     {
-                        "annotationTags": "EVS 2",
+                        "annotationTags": "EVSID2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "35",
                         "index": 0,
@@ -911,7 +911,7 @@
                     "index": 33
                 },
                 "format": {
-                    "name": "EVS 2",
+                    "name": "EVSID2",
                     "value": "EVS 2"
                 },
                 "validate": {
@@ -922,7 +922,7 @@
                 "cellId": "34",
                 "rois": [
                     {
-                        "annotationTags": "EVS 3",
+                        "annotationTags": "EVSID3",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "36",
                         "index": 0,
@@ -938,7 +938,7 @@
                     "index": 34
                 },
                 "format": {
-                    "name": "EVS 3",
+                    "name": "EVSID3",
                     "value": "EVS 3"
                 },
                 "validate": {
@@ -949,7 +949,7 @@
                 "cellId": "35",
                 "rois": [
                     {
-                        "annotationTags": "EVS 4",
+                        "annotationTags": "EVSID4",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "37",
                         "index": 0,
@@ -965,7 +965,7 @@
                     "index": 35
                 },
                 "format": {
-                    "name": "EVS 4",
+                    "name": "EVSID4",
                     "value": "EVS 4"
                 },
                 "validate": {
@@ -976,7 +976,7 @@
                 "cellId": "36",
                 "rois": [
                     {
-                        "annotationTags": "EVS 5",
+                        "annotationTags": "EVSID5",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "38",
                         "index": 0,
@@ -992,7 +992,7 @@
                     "index": 36
                 },
                 "format": {
-                    "name": "EVS 5",
+                    "name": "EVSID5",
                     "value": "EVS 5"
                 },
                 "validate": {
@@ -1003,7 +1003,7 @@
                 "cellId": "37",
                 "rois": [
                     {
-                        "annotationTags": "EVS 6",
+                        "annotationTags": "EVSID6",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "39",
                         "index": 0,
@@ -1019,7 +1019,7 @@
                     "index": 37
                 },
                 "format": {
-                    "name": "EVS 6",
+                    "name": "EVSID6",
                     "value": "EVS 6"
                 },
                 "validate": {
@@ -1030,7 +1030,7 @@
                 "cellId": "38",
                 "rois": [
                     {
-                        "annotationTags": "EVS 7",
+                        "annotationTags": "EVSID7",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "40",
                         "index": 0,
@@ -1046,7 +1046,7 @@
                     "index": 38
                 },
                 "format": {
-                    "name": "EVS 7",
+                    "name": "EVSID7",
                     "value": "EVS 7"
                 },
                 "validate": {
@@ -1057,7 +1057,7 @@
                 "cellId": "39",
                 "rois": [
                     {
-                        "annotationTags": "EVS 8",
+                        "annotationTags": "EVSID8",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "41",
                         "index": 0,
@@ -1073,7 +1073,7 @@
                     "index": 39
                 },
                 "format": {
-                    "name": "EVS 8",
+                    "name": "EVSID8",
                     "value": "EVS 8"
                 },
                 "validate": {
@@ -1084,7 +1084,7 @@
                 "cellId": "40",
                 "rois": [
                     {
-                        "annotationTags": "EVS 9",
+                        "annotationTags": "EVSID9",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "42",
                         "index": 0,
@@ -1100,7 +1100,7 @@
                     "index": 40
                 },
                 "format": {
-                    "name": "EVS 9",
+                    "name": "EVSID9",
                     "value": "EVS 9"
                 },
                 "validate": {
@@ -1111,7 +1111,7 @@
                 "cellId": "41",
                 "rois": [
                     {
-                        "annotationTags": "EVS 10",
+                        "annotationTags": "EVSID10",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "43",
                         "index": 0,
@@ -1127,7 +1127,7 @@
                     "index": 41
                 },
                 "format": {
-                    "name": "EVS 10",
+                    "name": "EVSID10",
                     "value": "EVS 10"
                 },
                 "validate": {

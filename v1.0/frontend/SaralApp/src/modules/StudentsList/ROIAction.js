@@ -12,7 +12,7 @@
         this.type = C.ROI_DATA;
     }
     toString() {
-        return `${super.toString()} payload: ${this.payload} type: ${this.type}`
+        return `${super.toString()} payload: ${this.payload} `
     }
 
     processResponse(res) {
@@ -23,7 +23,7 @@
     }
 
     apiEndPoint() {
-        return `${super.apiEndPoint()}/roi/${this.payload.examId}/type/${this.payload.type}`;
+        return `${super.apiEndPoint()}/roi/${this.payload.examId}`;
     }
 
     getHeaders() {
