@@ -2098,6 +2098,7 @@
   "classId": "3",
   "examDate": "05/10/2021",
   "totalMarks": 20,
+  "type": "PAT",
   "questions": [
     {
       "questionId": "1",
