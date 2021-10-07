@@ -13,28 +13,44 @@ schoolId:1
 school:- Fountainhead School
 classes:- 2,3,4,5,6,7,8
 student:- no of student 7 
-name of student in up school:- Apurva,Arman,Jaya,Deepti,Rajesh,Raju,Prajesh
+name of student in up school:- 
+name   id
+Arman: 122
+Jaya: 123
+Deepti: 124
+Rajesh: 181
+Raju: 182
+Prajesh: 183
 exam:- hindi,maths
 roi:-
 type:- SAT
 rollId:-  for UP SAT we have 3 digit roll number
-1. class 2,UP,HINDI,SAT,examId 1
-2. class 3,UP,HINDI,SAT,examId 2
-3. class 3,UP,MATH,SAT,examId 3
-4. class 4,UP,MATH,SAT,examId 4
-5. class 5,UP,MATH,SAT,examId 5
-6. class 4,UP,HINDI,SAT,examId 6
-7. class 5,UP,HINDI,SAT,examId 7
-8. class 6,UP,HINDI,SAT,examId 8
-9. class 7,UP,HINDI,SAT,examId 9 
-10. class 8,UP,HINDI,SAT,examId 10
+1. class 3,UP,HINDI,SAT,examId 2
+2. class 3,UP,MATH,SAT,examId 3
+3. class 4,UP,MATH,SAT,examId 4
+4. class 5,UP,MATH,SAT,examId 5
+5. class 4,UP,HINDI,SAT,examId 6
+6. class 5,UP,HINDI,SAT,examId 7
+7. class 6,UP,HINDI,SAT,examId 8
+8. class 7,UP,HINDI,SAT,examId 9 
+9. class 8,UP,HINDI,SAT,examId 10
+
+type:- UP_HINDI_4S
+rollId:- for UP_HINDI_4S it accept 7 digit roll number
+student:
+Name    id
+Apurva: 1210001   
+1. class 2,UP,HINDI,UP_HINDI_4S,examId 1
 
 
 state:- odisha
 schoolID:2
 school:- Aditya Birla Public School, Rayagada.
 classes:- 2
-student:- ajay,abhay
+student:- 
+Name   id
+ajay: 2204000000000001
+abhay: 2203000000000001
 exam:- hindi,maths
 roi:- 
 studentId:-  for UP SAT we have 16 digit student Id
