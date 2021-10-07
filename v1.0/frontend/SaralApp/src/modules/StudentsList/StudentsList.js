@@ -108,9 +108,11 @@ const StudentsList = ({
             "classId": filteredData.class,
             "subject": filteredData.subject,
             "fromDate": filteredData.examDate,
-            "page": 3,
+            "schoolId": loginCred.schoolId,
+            "page": 0,
             "downloadRes": true
         }
+        console.log("data",dataPayload);
         let apiObj = new scanStatusDataAction(dataPayload);
         FetchSavedScannedData(apiObj, loginCred.schoolId, loginCred.password)
     }
@@ -152,7 +154,7 @@ const StudentsList = ({
     const studentData = async () => {
         let studentsExamData = await getStudentsExamData();
         const filterStudentsData = studentsExamData.filter((e) => {
-            if (e.class == filteredData.response.className && e.section == filteredData.response.section) {
+            if (e.class == filteredData.className && e.section == filteredData.section) {
                 return true
             }
         })
@@ -160,12 +162,12 @@ const StudentsList = ({
         // let examId = ''
 
         // _.forEach(filterStudentsData[0].data.examInfo, (o) => {
-        //     if (o.examCode == filteredData.response.examCode) {
+        //     if (o.examCode == filteredData.examCode) {
         //         examId = o.examId
         //     }
         // })
 
-        // let examCode = filteredData.response.examCode
+        // let examCode = filteredData.examCode
 
         // setExamDatabj({
         //     examCode,
@@ -309,19 +311,16 @@ const StudentsList = ({
             }
         ])
     }
-    
+
     const getRoi = () => {
 
         let payload =
         {
-            "examId": filteredData.response.examTestID,
-            "type": scanTypeData.scanType.toUpperCase()
+            "examId": filteredData.examTestID,
         }
         let token = loginData.data.token
-        console.log("Toekne", token);
         let apiObj = new ROIAction(payload, token);
         dispatch(APITransport(apiObj))
-        console.log("apiStatus", apiStatus);
     }
 
     return (
@@ -394,7 +393,7 @@ const StudentsList = ({
 
 const mapStateToProps = (state) => {
     return {
-        filteredData: state.filteredData,
+        filteredData: state.filteredData.response,
         loginData: state.loginData,
         roiData: state.roiData,
         scanTypeData: state.scanTypeData.response,

@@ -57,6 +57,7 @@ const clearState = {
     calledAbsentStatus: false,
     calledScanStaus: false,
     absentStatusPayload: null,
+    subjectsData:[]
 }
 
 class SelectDetailsComponent extends Component {
@@ -97,6 +98,7 @@ class SelectDetailsComponent extends Component {
             examDate: [],
             calledAbsentStatus: false,
             absentStatusPayload: null,
+            subjectsData:[]
         }
         this.onBack = this.onBack.bind(this)
     }
@@ -479,17 +481,20 @@ class SelectDetailsComponent extends Component {
                                     let subArr = []
                                     let testID = []
                                     let examDates = []
+                                    let subjects=[]
                                     _.filter(studentsAndExamData.data.exams, function (o) {
-                                        subArr.push(o.subject + " " + o.examDate)
+                                        subArr.push(o.subject+" "+o.examDate)
                                         testID.push(o.examId)
                                         examDates.push(o.examDate)
+                                        subjects.push(o.subject)
                                     })
                                     this.setState({
                                         errSection: '',
                                         sectionValid: true,
                                         subArr: subArr,
                                         examTestID: testID,
-                                        examDate: examDates
+                                        examDate: examDates,
+                                        subjectsData: subjects
 
                                     })
                                 }
@@ -660,7 +665,7 @@ class SelectDetailsComponent extends Component {
     }
 
     onSubmitClick = () => {
-        const { selectedClass, selectedClassId, selectedDate, selectedSection, selectedSubject, examTestID, subIndex, examDate } = this.state
+        const { selectedClass, selectedClassId, selectedDate, selectedSection, selectedSubject, examTestID, subIndex, examDate, subjectsData } = this.state
         const { loginData, apiStatus, scanTypeData } = this.props
         this.setState({
             errClass: '',
@@ -676,13 +681,12 @@ class SelectDetailsComponent extends Component {
                     class: selectedClassId,
                     examDate: examDate[subIndex],
                     section: selectedSection,
-                    subject: selectedSubject,
+                    subject: subjectsData[subIndex],
                     examTestID: examTestID[subIndex],
                 }
                 this.props.FilteredDataAction(obj)
                 let payload = {
                     "examId": examTestID[subIndex],
-                    "type": scanTypeData.scanType
                 }
                 this.callROIData(payload, loginData.data.token)
             } else {
@@ -695,13 +699,11 @@ class SelectDetailsComponent extends Component {
 
     callROIData = (dataPayload, token) => {
         const { apiStatus } = this.props;
-        console.log("apiStatus", apiStatus);
         let apiObj = new ROIAction(dataPayload, token);
         this.props.APITransport(apiObj)
         this.setState({
             isLoading: false
         })
-        console.log("ApiStatusAfterCalling", apiStatus);
         this.props.navigation.navigate('StudentsList')
     }
 
@@ -742,12 +744,12 @@ class SelectDetailsComponent extends Component {
         return (
 
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
-                {/* <HeaderComponent
-                    title={Strings.up_saralData}
+                <HeaderComponent
+                    // title={Strings.up_saralData}
                     logoutHeaderText={Strings.logout_text}
                     customLogoutTextStyle={{ color: AppTheme.GREY }}
                     onLogoutClick={this.onLogoutClick}
-                /> */}
+                />
                 {(loginData && loginData.data) &&
                     <View style={{ marginTop: 20 }}>
                         <Text
