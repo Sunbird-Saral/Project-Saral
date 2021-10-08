@@ -4,7 +4,7 @@
   "classId": "2",
   "examDate": "23/09/2021",
   "totalMarks": 20,
-  "type": "SAT",
+  "type": "UP_HINDI_4S",
   "questions": [
     {
       "questionId": "1",
@@ -165,7 +165,7 @@
   "classId": "3",
   "examDate": "24/09/2021",
   "totalMarks": 20,
-  "type": "SAT",
+  "type": "UP_HINDI_4S",
   "questions": [
     {
       "questionId": "1",
@@ -970,7 +970,7 @@
   "classId": "5",
   "examDate": "29/09/2021",
   "totalMarks": 20,
-  "type": "SAT",
+  "type": "UP_HINDI_4S",
   "questions": [
     {
       "questionId": "1",
@@ -1131,7 +1131,7 @@
   "classId": "6",
   "examDate": "28/09/2021",
   "totalMarks": 20,
-  "type": "SAT",
+  "type": "UP_HINDI_4S",
   "questions": [
     {
       "questionId": "1",
@@ -1292,7 +1292,7 @@
   "classId": "7",
   "examDate": "29/09/2021",
   "totalMarks": 20,
-  "type": "SAT",
+  "type": "UP_HINDI_4S",
   "questions": [
     {
       "questionId": "1",
@@ -1931,8 +1931,8 @@
   "examId": 12,
   "schoolId": "2"
 },{
-  "subject": "Math",
-  "examLO": "Math",
+  "subject": "Maths",
+  "examLO": "Maths",
   "classId": "2",
   "examDate": "02/10/2021",
   "totalMarks": 20,

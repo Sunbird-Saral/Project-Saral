@@ -53,7 +53,7 @@ router.get('/getExamsByClas/:classId', auth, async (req, res) => {
         const exams = await Exam.find(match, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 }).lean()
 
         if (!exams.length) {
-            res.status(404).send({ "message": `Exam dose not exist for ${req.params.classId}` })
+            return res.status(404).send({ "message": `Exam dose not exist for ${req.params.classId}` })
         }
         res.send(exams)
     }
@@ -67,10 +67,11 @@ router.delete('/deleteExamByExamIdAndClassId/:examId', auth, async (req, res) =>
     try {
         const exam = await Exam.findOneAndDelete({ examId: req.params.examId }).lean()
 
-        if (!exam) {
+        if (exam) {
+            res.status(200).send({ "message": "Exam has been deleted successfully." })
+        }else{
             res.status(404).send({ "message": 'Exam Id does not exist.' })
         }
-        res.status(200).send({ "message": "Exam has been deleted successfully." })
     }
     catch (e) {
         console.log(e);
