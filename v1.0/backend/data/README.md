@@ -12,10 +12,11 @@ for deleting current data in database
 # state:- UP
 
 ## schoolId:1
-school:- Fountainhead School
-classes:- 2,3,4,5,6,7,8
-student:- no of student 7 
-name of student in up school:- 
+>> school:- Fountainhead School
+>> classes:- 2,3,4,5,6,7,8
+>> student:- no of student 7 
+
+* name of student in up school:- 
 
 |STUDENT NAME| STUDENT ID|
 |---|---|
@@ -30,6 +31,7 @@ name of student in up school:-
 ## roi:-
 **type:- SAT**
 **ROLLNUMBER:- for UP SAT we have 3 digit roll number**
+
 | SUBJECT | STATE | TYPE | CLASS | EXAM ID|
 |---|---|---|---|---|
 |MATH|UP|SAT|3|3|
@@ -40,7 +42,9 @@ name of student in up school:-
 
 **type:- UP_HINDI_4S**
 **ROLLNUMBER:- for UP_HINDI_4S it accept 7 digit roll number**
-name of student in UP_HINDI_4S school:- 
+
+* name of student in UP_HINDI_4S school:- 
+
 |STUDENT NAME|STUDENT ID|
 |---|---|
 |Apurva |           1210001|  
@@ -48,6 +52,8 @@ name of student in UP_HINDI_4S school:-
 |Neha Rawat |       1210003|
 |Ankit Negi  |      1210004|
 |Khusbhoo Sharma|   1210005|
+
+## roi
 
 | SUBJECT | STATE | TYPE | CLASSID | EXAMID|
 |---|---|---|---|---|
@@ -60,9 +66,10 @@ name of student in UP_HINDI_4S school:-
 
 # state:- odisha
 ## schoolID:2
-school:- Aditya Birla Public School, Rayagada.
-classes:- 2,3
-student:- 
+>> school:- Aditya Birla Public School, Rayagada.
+>> classes:- 2,3
+>> name of student in ODISHA school:-  
+
 |STUDENT NAME |STUDENT ID|
 |---|---|
 |ajay       |2204000000000001|
@@ -75,6 +82,7 @@ student:-
 ## roi:- 
 **type:- SAT**
 **studentId:-  for ODISHA SAT we have 16 digit student Id**
+
 |SUBJECT|STATE|TYPE|CLASS|EXAM|
 |---|---|---|---|---|
 |hindi|odisha|SAT|2| 11|
@@ -83,9 +91,10 @@ student:-
 
 # state: gujrat
 ## schoolId:3
-school:- Sainik School
-classes:- 3,4,5
-name of student in gujrat school:- 
+>> school:- Sainik School
+>> classes:- 3,4,5
+>> name of student in gujrat school:- 
+
 |STUDENT NAME| STUDENT ID| 
 |---|---|
 |aarti      |3304001|
@@ -96,6 +105,7 @@ name of student in gujrat school:-
 ## roi:-
 **type:- PAT**
 **ROLLNUMBER:- 7 digit student Id**
+
 |SUBJECT|STATE|TYPE|CLASS|EXAM|
 |---|---|---|---|---|
 | hindi|gujrat|PAT| 3|14|
@@ -105,8 +115,9 @@ name of student in gujrat school:-
 # state:- UP(For multiple students)
 school:- Amtul's Public School
 ## schoolId:-4
-classes:- 2,3,4,5
-student:- 
+>> classes:- 2,3,4,5
+>> name of student in MULTI UP school:- 
+
 |STUDENT NAME| STUDENT ID|
 |---|---|
 |Niti Joshi       |4204001|
@@ -121,6 +132,7 @@ student:-
 ## roi:- 
 **type:- PAT**
 **ROLLNUMBER:- 7 digit studentId**
+
 |SUBJECT |STATE |TYPE |CLASS ID |EXAM ID |
 |---|---|---|---|---|
 |hindi|UP|PAT|2|17|
