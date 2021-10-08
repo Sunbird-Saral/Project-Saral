@@ -41,7 +41,7 @@ for deleting current data in database
 |HINDI|UP|SAT|8|10|
 
 **type:- UP_HINDI_4S**
-**ROLLNUMBER:- for UP_HINDI_4S it accept 7 digit roll number**
+**ROLLNUMBER:- UP_HINDI_4S it accept 7 digit roll number**
 
 * name of student in UP_HINDI_4S school:- 
 
@@ -80,8 +80,9 @@ for deleting current data in database
 
 
 ## roi:- 
+
 **type:- SAT**
-**studentId:-  for ODISHA SAT we have 16 digit student Id**
+**ROLLNUMBER:- 16 digit student Id**
 
 |SUBJECT|STATE|TYPE|CLASS|EXAM|
 |---|---|---|---|---|
@@ -91,9 +92,10 @@ for deleting current data in database
 
 # state: gujrat
 ## schoolId:3
->> school:- Sainik School
->> classes:- 3,4,5
->> name of student in gujrat school:- 
+>> `school:- Sainik School`
+>> `classes:- 3,4,5`
+
+name of student in gujrat school:- 
 
 |STUDENT NAME| STUDENT ID| 
 |---|---|
@@ -113,8 +115,8 @@ for deleting current data in database
 |english|gujrat|PAT|3|16|
 
 # state:- UP(For multiple students)
-school:- Amtul's Public School
 ## schoolId:-4
+>> `school:- Amtul's Public School`
 >> `classes:- 2,3,4,5`
 >> `name of student in MULTI UP school` 
 
