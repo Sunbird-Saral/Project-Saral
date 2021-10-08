@@ -48,6 +48,10 @@ for deleting current data in database
 |STUDENT NAME|STUDENT ID|
 |---|---|
 |Apurva |           1210001|  
+|Himani Bisht|      1220002| 
+|Sandeep Kumar|     1220003|
+|Gopal Bhatt|       1220004|
+|Mukul|             1220005|
 |Navin Nair|        1210002|
 |Neha Rawat |       1210003|
 |Ankit Negi  |      1210004|

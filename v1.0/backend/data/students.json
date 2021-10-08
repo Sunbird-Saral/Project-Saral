@@ -13,6 +13,54 @@
 {
   "studentClass": [
     {
+      "classId": "2",
+      "className": "Class-2"
+    }
+  ],
+  "section": "D",
+  "name": "Himani Bisht",
+  "studentId": "1220002",
+  "schoolId": "1"
+},
+{
+  "studentClass": [
+    {
+      "classId": "2",
+      "className": "Class-2"
+    }
+  ],
+  "section": "D",
+  "name": "Sandeep Kumar",
+  "studentId": "1220003",
+  "schoolId": "1"
+},
+{
+  "studentClass": [
+    {
+      "classId": "2",
+      "className": "Class-2"
+    }
+  ],
+  "section": "D",
+  "name": "Gopal Bhatt",
+  "studentId": "1220004",
+  "schoolId": "1"
+},
+{
+  "studentClass": [
+    {
+      "classId": "2",
+      "className": "Class-2"
+    }
+  ],
+  "section": "D",
+  "name": "Mukul",
+  "studentId": "1220005",
+  "schoolId": "1"
+},
+{
+  "studentClass": [
+    {
       "classId": "3",
       "className": "Class-3"
     }
