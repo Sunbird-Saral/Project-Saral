@@ -139,13 +139,49 @@
 },{
   "studentClass": [
     {
-      "classId": "2",
-      "className": "Class-2"
+      "classId": "3",
+      "className": "Class-3"
     }
   ],
   "section": "C",
   "name": "Abhay",
   "studentId": "2203000000000001",
+  "schoolId": "2"
+},
+{
+  "studentClass": [
+    {
+      "classId": "2",
+      "className": "Class-2"
+    }
+  ],
+  "section": "B",
+  "name": "Rishab Sharma",
+  "studentId": "2203000000000002",
+  "schoolId": "2"
+},
+{
+  "studentClass": [
+    {
+      "classId": "3",
+      "className": "Class-3"
+    }
+  ],
+  "section": "B",
+  "name": "Harshita Bhatt",
+  "studentId": "2203000000000003",
+  "schoolId": "2"
+},
+{
+  "studentClass": [
+    {
+      "classId": "2",
+      "className": "Class-2"
+    }
+  ],
+  "section": "B",
+  "name": "Nishant Bhatt",
+  "studentId": "2203000000000004",
   "schoolId": "2"
 },
 {

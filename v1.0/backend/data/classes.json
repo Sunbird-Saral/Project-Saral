@@ -120,6 +120,22 @@
   "className": "Class-2",
   "schoolId": "2"
 },
+{
+  "sections": [
+    {
+      "section": "D"
+    },
+    {
+      "section": "B"
+    },
+    {
+      "section": "C"
+    }
+  ],
+  "classId": "3",
+  "className": "Class-3",
+  "schoolId": "2"
+},
   {
     "sections": [
       {

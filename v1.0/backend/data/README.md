@@ -52,15 +52,18 @@ schoolID:2
 school:- Aditya Birla Public School, Rayagada.
 classes:- 2
 student:- 
-Name   id
-ajay: 2204000000000001
-abhay: 2203000000000001
+Name               id
+ajay            2204000000000001
+abhay           2203000000000001
+Rishab Sharma   2203000000000002
+Harshita Bhatt  2203000000000003
+Nishant Bhatt   2203000000000004
 exam:- hindi,maths
 roi:- 
 studentId:-  for UP SAT we have 16 digit student Id
-1. hindi,odisha,SAT,class 2,examId 11
-2. hindi,odisha,SAT,class 3,examId 12
-2. math,odisha,SAT,class 2,eamxId 13
+1. hindi,odisha,SAT,class 2,examId 11,roiId 11
+2. hindi,odisha,SAT,class 3,examId 12,roiId 12
+2. math,odisha,SAT,class 2,eamxId 13,roiId 13
 
 state: gujrat
 schoolId:3

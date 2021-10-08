@@ -1931,8 +1931,8 @@
   "examId": 12,
   "schoolId": "2"
 },{
-  "subject": "Math",
-  "examLO": "Math",
+  "subject": "Maths",
+  "examLO": "Maths",
   "classId": "2",
   "examDate": "02/10/2021",
   "totalMarks": 20,
