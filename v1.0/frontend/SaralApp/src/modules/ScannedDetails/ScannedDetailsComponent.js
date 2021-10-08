@@ -542,8 +542,6 @@ const ScannedDetailsComponent = ({
     const markBorderOnCell = (element) => {
         if (element.consolidatedPrediction.length == 0) {
             return AppTheme.ERROR_RED
-        } else if (isMultipleStudent && element.consolidatedPrediction > 1) {
-            return AppTheme.ERROR_RED
         }
         else if (element.format.name == neglectData[2] && obtnmarkErr) {
             return AppTheme.ERROR_RED
