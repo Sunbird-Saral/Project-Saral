@@ -12,9 +12,9 @@ for deleting current data in database
 # state:- UP
 
 ## schoolId:1
->> school:- Fountainhead School
->> classes:- 2,3,4,5,6,7,8
->> student:- no of student 7 
+>> `school:- Fountainhead School`
+>> `classes:- 2,3,4,5,6,7,8`
+>> `student:- no of student 7` 
 
 * name of student in up school:- 
 
@@ -66,9 +66,9 @@ for deleting current data in database
 
 # state:- odisha
 ## schoolID:2
->> school:- Aditya Birla Public School, Rayagada.
->> classes:- 2,3
->> name of student in ODISHA school:-  
+>> `school:- Aditya Birla Public School, Rayagada.`
+>> `classes:- 2,3`
+>> `name of student in ODISHA school:-`  
 
 |STUDENT NAME |STUDENT ID|
 |---|---|
@@ -115,8 +115,8 @@ for deleting current data in database
 # state:- UP(For multiple students)
 school:- Amtul's Public School
 ## schoolId:-4
->> classes:- 2,3,4,5
->> name of student in MULTI UP school:- 
+>> `classes:- 2,3,4,5`
+>> `name of student in MULTI UP school` 
 
 |STUDENT NAME| STUDENT ID|
 |---|---|
