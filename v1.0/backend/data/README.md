@@ -69,13 +69,18 @@ state: gujrat
 schoolId:3
 school:- Sainik School
 classes:- 3,4,5
-student:- aarti,smriti,shristi,priyanka
+student:- 
+name       id 
+aarti      3304001
+smriti     3302001
+shristi    3302002
+priyanka   3302003
 exam: hindi,maths and english
 roi:-
 studentId:- for GUJRAT PAT 7 digit student Id
-1. hindi,gujrat,PAT,class 3, examId 14
-2. maths,gujrat,PAT,class 3, examId 15
-3. english,gujrat,PAT,class 3, examId 16
+1. hindi,gujrat,PAT,class 3, examId 14,roiId 14
+2. maths,gujrat,PAT,class 3, examId 15,roiId 15
+3. english,gujrat,PAT,class 3, examId 16,roiId 16
 
 state:- UP(For multiple students)
 school:- Amtul's Public School
