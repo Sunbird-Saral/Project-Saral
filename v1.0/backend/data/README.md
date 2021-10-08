@@ -25,22 +25,26 @@ exam:- hindi,maths
 roi:-
 type:- SAT
 rollId:-  for UP SAT we have 3 digit roll number
-1. class 3,UP,HINDI,SAT,examId 2
-2. class 3,UP,MATH,SAT,examId 3
-3. class 4,UP,MATH,SAT,examId 4
-4. class 5,UP,MATH,SAT,examId 5
-5. class 4,UP,HINDI,SAT,examId 6
-6. class 5,UP,HINDI,SAT,examId 7
-7. class 6,UP,HINDI,SAT,examId 8
-8. class 7,UP,HINDI,SAT,examId 9 
-9. class 8,UP,HINDI,SAT,examId 10
+1. class 3,UP,MATH,SAT,examId 3
+2. class 4,UP,MATH,SAT,examId 4
+3. class 5,UP,MATH,SAT,examId 5
+4. class 4,UP,HINDI,SAT,examId 6
+5. class 8,UP,HINDI,SAT,examId 10
 
 type:- UP_HINDI_4S
 rollId:- for UP_HINDI_4S it accept 7 digit roll number
 student:
-Name    id
-Apurva: 1210001   
-1. class 2,UP,HINDI,UP_HINDI_4S,examId 1
+Name              id
+Apurva            1210001  
+Navin Nair        1210002
+Neha Rawat        1210003
+Ankit Negi        1210004
+Khusbhoo Sharma   1210005
+1. class 2,UP,HINDI,UP_HINDI_4S,examId 1,roiId 1
+2. class 3,UP,HINDI,UP_HINDI_4S,examId 2,roiId 2
+3. class 5,UP,HINDI,UP_HINDI_4S,examId 7,roiId 7
+4. class 6,UP,HINDI,UP_HINDI_4S,examId 8,roiId 8
+5. class 7,UP,HINDI,UP_HINDI_4S,examId 9,roiId 9
 
 
 state:- odisha

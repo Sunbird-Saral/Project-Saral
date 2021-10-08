@@ -9,7 +9,56 @@
   "name": "Apurva",
   "studentId": "1210001",
   "schoolId": "1"
-},{
+},
+{
+  "studentClass": [
+    {
+      "classId": "3",
+      "className": "Class-3"
+    }
+  ],
+  "section": "D",
+  "name": "Navin Nair",
+  "studentId": "1210002",
+  "schoolId": "1"
+},
+{
+  "studentClass": [
+    {
+      "classId": "6",
+      "className": "Class-6"
+    }
+  ],
+  "section": "D",
+  "name": "Neha Rawat",
+  "studentId": "1210003",
+  "schoolId": "1"
+},
+{
+  "studentClass": [
+    {
+      "classId": "7",
+      "className": "Class-7"
+    }
+  ],
+  "section": "D",
+  "name": "Ankit Negi",
+  "studentId": "1210004",
+  "schoolId": "1"
+},
+{
+  "studentClass": [
+    {
+      "classId": "5",
+      "className": "Class-5"
+    }
+  ],
+  "section": "D",
+  "name": "Khushboo Sharma",
+  "studentId": "1210005",
+  "schoolId": "1"
+},
+{
   "studentClass": [
     {
       "classId": "2",
