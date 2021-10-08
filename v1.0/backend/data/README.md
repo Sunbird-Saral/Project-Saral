@@ -86,7 +86,15 @@ state:- UP(For multiple students)
 school:- Amtul's Public School
 schoolId:-4
 classes:- 2,3,4,5
-student:- Niti Joshi,Chesta Bisht, Megha Kanyal,Mousumee Alam,Ruchika Kandpal,Ruchika Joshi,Shantanu Bankoti
+student:- 
+name             id
+Niti Joshi       4204001
+Chesta Bisht     4204002
+Megha Kanyal     4204003
+Mousumee Alam    4204004
+Ruchika Kandpal  4304001
+Ruchika Joshi    4404001
+Shantanu Bankoti 4504001
 exam:- hindi,maths and english for class 2 and maths exam for class 3
 marks:- hindi,maths and english for class 2 and maths marks save for class 3
 roi:- 
