@@ -24,7 +24,7 @@ class LoginComponent extends Component {
             password: '',
             calledLogin: false,
             appState: AppState.currentState,
-            DefaultImage: true,
+          
         }
     }
 
@@ -120,10 +120,7 @@ class LoginComponent extends Component {
     Changelogo(input) {
         switch (input) {
             case '1':
-                return <View>
-                    <Image style={styles.img} source={Assets.SchoolId1} />
-                   
-                </View>;
+                return <Image style={styles.img} source={Assets.SchoolId1} />;
             case '2':
                 return <Image style={styles.img} source={Assets.SchoolId2} />;
             case '3':
