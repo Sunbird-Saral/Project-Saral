@@ -90,9 +90,7 @@ router.post('/schools/login', async (req, res) => {
 router.delete('/deleteSchoolBySchoolId/:schoolId', async (req, res) => {
     try {
         const school = await (await School.findOne({ schoolId: req.params.schoolId }))
-        if (!school) {
-            res.status(404).send({ message: 'School Id does not exist.' })
-        }
+        if(!school) return res.status(404).send({ message: 'School Id does not exist.' })
         let lookup = {
             schoolId: school.schoolId
         }
@@ -124,7 +122,7 @@ router.patch('/updateSchool/:schoolId', async (req, res) => {
         let update = req.body
 
         const school = await School.findOne(lookup).lean();
-        if (!school) res.status(404).send({ message: 'School Id does not exist.' })
+        if (!school) return res.status(404).send({ message: 'School Id does not exist.' })
 
         await School.updateOne(lookup, update).lean().exec();
         res.status(200).send({ message: 'School has been updated.' })
