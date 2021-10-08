@@ -218,7 +218,7 @@ class LoginComponent extends Component {
                     keyboardShouldPersistTaps={'handled'}
                 >
                     <View style={styles.container1}>
-                        {schoolId ?
+                        {schoolId.length ?
                             this.Changelogo(schoolId) : <Image style={{ width: 100, height: 100 }} source={Assets.AppLogo} />
                             }
 
