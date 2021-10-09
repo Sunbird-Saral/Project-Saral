@@ -39,6 +39,7 @@ export default strings = new LocalizedStrings({
         please_wait: 'Please wait...',
         student_roll: 'Student Roll No.',
         please_correct_student_roll: 'Please correct the Student Roll No.',
+        omr_mark_should_be: 'Omr mark should be 1 or 0',
         login_text: 'Login',
         up_saralData: 'UP Saraldata',
         schoolId_text: 'School Id',

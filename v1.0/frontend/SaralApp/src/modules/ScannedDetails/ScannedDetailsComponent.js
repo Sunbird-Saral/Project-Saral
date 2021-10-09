@@ -64,7 +64,7 @@ const ScannedDetailsComponent = ({
     const [currentIndex, setCurrentIndex] = useState(0)
     const [valid, setValid] = useState(false);
 
-    const [nextBtn, setNextBtn] = useState('NEXT')
+    const [nextBtn, setNextBtn] = useState('SUBMIT')
 
     const inputRef = React.createRef();
     const dispatch = useDispatch()
@@ -80,16 +80,21 @@ const ScannedDetailsComponent = ({
     const validateStudentId = async (value) => {
         let studentsExamData = await getStudentsExamData();
         let a = studentsExamData[0].data.students.filter((e) => {
+            console.log(e.studentId);
             if (e.studentId == value) {
                 return true
             }
         })
+        console.log("studentData", a);
         if (a.length > 0) {
+
             setStudentValid(true)
             setStdErr('')
             setStudentDATA(a)
         } else {
             setStdErr(Strings.please_correct_student_id)
+            setStudentDATA([])
+            setStudentValid(false)
         }
 
     }
@@ -114,6 +119,7 @@ const ScannedDetailsComponent = ({
         })
 
         if (checkIsStudentMultipleSingle.length > 0) {
+            setNextBtn("NEXT")
             setStdRollArray(checkIsStudentMultipleSingle)
             setIsmultipleStudent(true)
             callMultipleStudentSheetData(checkIsStudentMultipleSingle)
@@ -218,12 +224,14 @@ const ScannedDetailsComponent = ({
         let validCell = false
         for (let i = 0; i < newArrayValue.length; i++) {
             if (newArrayValue[i].consolidatedPrediction == '') {
-                // setValid(true)
                 validCell = true
             }
 
         }
-
+        // console.log("valid", valid);
+        // if (valid) {
+        //     showErrorMessage(Strings.omr_mark_should_be)
+        // }
         if (disable) {
             showErrorMessage(Strings.please_correct_marks_data)
         }
@@ -235,15 +243,100 @@ const ScannedDetailsComponent = ({
         }
         else {
             if (currentIndex + 1 <= stdRollArray.length - 1) {
+
+                //for student validataion
+                console.log("hello", currentIndex);
+
+                ocrLocalResponse.layout.cells.forEach(element => {
+
+                    if (element.cellId == stdRollArray[currentIndex].cellId) {
+                        element.consolidatedPrediction = studentId
+
+                        structureList.forEach((el, index) => {
+                            if (currentIndex == index) {
+                                el.RollNo = studentId
+                            }
+                        });
+
+                    }
+                });
+                //save validated student
+                dispatch(OcrLocalResponseAction(JSON.parse(JSON.stringify(ocrLocalResponse))))
+
                 validCell = false
-                console.log(currentIndex, stdRollArray.length - 1);
-                console.log(structureList[currentIndex + 1]);
                 setNewArrayValue(structureList[currentIndex + 1].data)
                 setStudentID(structureList[currentIndex + 1].RollNo)
                 setCurrentIndex(currentIndex + 1)
                 setBtnName('Back')
+                if (currentIndex + 1 == stdRollArray.length - 1) {
+                    setNextBtn(Strings.submit_text)
+                }
+            } else {
+                saveMultipleStudentDataSheet()
             }
         }
+    }
+
+    const saveMultipleStudentDataSheet = () => {
+        if (isMultipleStudent && nextBtn === Strings.submit_text) {
+            saveMultiData()
+        }
+    }
+
+    const saveMultiData = () => {
+
+        let stdMarkInfo = []
+
+        structureList.forEach((el, index) => {
+            let stdTotalMarks = 0
+            let stdData = {
+                "studentId": '',
+                "section": filteredData.section,
+                "marksInfo": '',
+                "securedMarks": stdTotalMarks,
+                "totalMarks": 0
+            }
+
+            stdData.studentId = el.RollNo
+
+            let stdMarks_info = []
+
+            el.data.forEach((value, i) => {
+                let marks_data = {
+                    "questionId": '',
+                    "obtainedMarks": ''
+                }
+                marks_data.questionId = value.format.name,
+                    marks_data.obtainedMarks = value.consolidatedPrediction
+                stdTotalMarks = Number(stdTotalMarks) + Number(value.consolidatedPrediction)
+                stdMarks_info.push(marks_data)
+
+            })
+            stdData.securedMarks = stdTotalMarks
+            stdData.marksInfo = stdMarks_info
+            stdMarkInfo.push(stdData)
+
+        })
+        console.log("stdMarkInfo", stdMarkInfo);
+
+
+        let saveObj = {
+            "classId": filteredData.class,
+            "examDate": filteredData.examDate,
+            "subject": filteredData.subject,
+            "studentsMarkInfo": stdMarkInfo
+        }
+
+        setIsLoading(true)
+        let apiObj = new SaveScanData(saveObj, loginData.data.token);
+        dispatch(APITransport(apiObj))
+        setIsLoading(false)
+
+        Alert.alert(Strings.message_text, Strings.saved_successfully, [{
+            text: Strings.ok_text, onPress: () => {
+                callScanStatusData()
+            }
+        }])
     }
 
     const goBackFrame = () => {
@@ -257,6 +350,14 @@ const ScannedDetailsComponent = ({
         }
         else {
             onBackButtonClick()
+        }
+    }
+
+    const renderSRNo = (element, index) => {
+        if (isMultipleStudent) {
+            return `${index + 1}`
+        } else {
+            return `${element.render.index - 1}`
         }
     }
 
@@ -313,7 +414,7 @@ const ScannedDetailsComponent = ({
                                 <MarksHeaderTable
                                     customRowStyle={{ width: '30%', }}
                                     key={`Questions${element.cellId + 10}`}
-                                    rowTitle={`${element.render.index - 1}`}
+                                    rowTitle={renderSRNo(element, index)}
                                     rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                     editable={false}
                                     keyboardType={'number-pad'}
@@ -333,8 +434,9 @@ const ScannedDetailsComponent = ({
                                     rowBorderColor={markBorderOnCell(element)}
                                     editable={true}
                                     keyboardType={'number-pad'}
+                                    maxLength={lengthAccordingSheet(element)}
                                     onChangeText={(text) => {
-                                        handleTextChange(text.trim(), index, newArrayValue)
+                                        handleTextChange(text.trim(), index, newArrayValue, element)
                                     }}
 
                                 />
@@ -355,7 +457,7 @@ const ScannedDetailsComponent = ({
                     <ButtonComponent
                         customBtnStyle={styles.nxtBtnStyle}
                         customBtnTextStyle={styles.nxtBtnTextStyle}
-                        btnText={isMultipleStudent ? "Next" : Strings.submit_text.toUpperCase()}
+                        btnText={nextBtn}
                         onPress={() => isMultipleStudent ? goNextFrame() : onSubmitClick()}
                     />
                 </View>
@@ -364,28 +466,74 @@ const ScannedDetailsComponent = ({
         )
     }
 
-
-    const handleTextChange = (text, index, array) => {
-
-        let len = text.length
-        setDisabled(len == 0 ? true : false)
-
-        console.log("lenggg", text);
-
-        let newArray = JSON.parse(JSON.stringify(array))
-        newArray[index].consolidatedPrediction = isMultipleStudent ? text > 1 ? 0 : text : text
-        setNewArrayValue(newArray)
-        console.log("ewArray[index].consolidatedPrediction ", newArray[index].consolidatedPrediction);
+    const lengthAccordingSheet = (element) => {
+        if (isMultipleStudent) {
+            return 1
+        } else if (element.format.name === neglectData[2] || element.format.name === neglectData[3]) {
+            return 3
+        } else {
+            return 2
+        }
+    }
 
 
-        newArray.map((e) => {
-            if (e.format.name == "MAX_MARKS") {
-                setMaxMarksTotal(e.consolidatedPrediction)
-            }
-            if (e.format.name == "MARKS_OBTAINED") {
-                setTotalMarkSecured(e.consolidatedPrediction)
-            }
-        })
+    const handleTextChange = (text, index, array, value) => {
+
+        if (isMultipleStudent) {
+            let len = text.length
+            setDisabled(len == 0 ? true : false)
+            // if (text > 1) {
+            //     setValid(true)
+            // }
+            // console.log("text",text);
+
+            let newArray = JSON.parse(JSON.stringify(array))
+            newArray[index].consolidatedPrediction = text > 1 ? 0 : text
+            setNewArrayValue(newArray)
+
+            ocrLocalResponse.layout.cells.forEach(element => {
+
+                if (element.cellId == value.cellId) {
+                    structureList.forEach(Datas => {
+                        //this ll add into OCRLocal
+                        element.consolidatedPrediction = text > 1 ? 0 : text
+                        //this ll add in our structure
+                        Datas.data.forEach((el, index) => {
+                            if (el.cellId === value.cellId) {
+                                el.consolidatedPrediction = text > 1 ? 0 : text
+                            }
+                        });
+
+                    });
+                }
+            });
+            dispatch(OcrLocalResponseAction(ocrLocalResponse))
+
+        } else {
+            let len = text.length
+            setDisabled(len == 0 ? true : false)
+            let newArray = JSON.parse(JSON.stringify(array))
+            newArray[index].consolidatedPrediction = isMultipleStudent ? text > 1 ? 0 : text : text
+            setNewArrayValue(newArray)
+
+            ocrLocalResponse.layout.cells.forEach(element => {
+                if (element.cellId == value.cellId) {
+                    element.consolidatedPrediction = text
+
+                }
+            });
+            dispatch(OcrLocalResponseAction(ocrLocalResponse))
+
+
+            newArray.map((e) => {
+                if (e.format.name == "MAX_MARKS") {
+                    setMaxMarksTotal(e.consolidatedPrediction)
+                }
+                if (e.format.name == "MARKS_OBTAINED") {
+                    setTotalMarkSecured(e.consolidatedPrediction)
+                }
+            })
+        }
         // dispatch(OcrLocalResponseAction(ocrData))
 
 
@@ -534,6 +682,7 @@ const ScannedDetailsComponent = ({
                 }
             })
                 .then(function (res) {
+                    console.log("fetch", res);
                     setIsLoading(false)
                     goToMyScanScreen()
                     apiResponse = res
