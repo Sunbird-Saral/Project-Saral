@@ -354,5 +354,52 @@
   "name": "Shantanu Bankoti",
   "studentId": "4504001",
   "schoolId": "4"
+},{
+  "studentClass": [
+      {
+          "classId": "5",
+          "className": "Class-5"
+      }
+  ],
+  "section": "B",
+  "name": "Sherlyn",
+  "studentId": "2000001",
+  "schoolId": "1"
+},
+{
+  "studentClass": [
+      {
+          "classId": "5",
+          "className": "Class-5"
+      }
+  ],
+  "section": "B",
+  "name": "Rita Bhojak",
+  "studentId": "2000002",
+  "schoolId": "1"
+},
+{
+  "studentClass": [
+      {
+          "classId": "5",
+          "className": "Class-5"
+      }
+  ],
+  "section": "B",
+  "name": "Karan Bhojak",
+  "studentId": "2000003",
+  "schoolId": "1"
+},
+{
+  "studentClass": [
+      {
+          "classId": "5",
+          "className": "Class-5"
+      }
+  ],
+  "section": "B",
+  "name": "Aayushi Dhondiyal",
+  "studentId": "2000004",
+  "schoolId": "1"
 }
 ]
