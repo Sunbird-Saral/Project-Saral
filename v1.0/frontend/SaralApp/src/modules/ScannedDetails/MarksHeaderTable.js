@@ -9,10 +9,11 @@ const MarksHeaderTable = ({
     editable,
     onChangeText,
     rowBorderColor,
-    keyboardType
+    keyboardType,
+    maxLength
 }) => {
     return (
-        <View style={[styles.container, customRowStyle, {borderColor: rowBorderColor}]}>
+        <View style={[styles.container, customRowStyle, { borderColor: rowBorderColor }]}>
             {icon ?
                 <Image
                     style={{ height: 20, width: 20 }}
@@ -27,6 +28,7 @@ const MarksHeaderTable = ({
                     editable={editable}
                     onChangeText={onChangeText}
                     keyboardType={keyboardType}
+                    maxLength={maxLength}
                 />
             }
         </View>
