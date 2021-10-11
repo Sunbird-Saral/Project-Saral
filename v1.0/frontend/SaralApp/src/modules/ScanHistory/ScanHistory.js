@@ -14,7 +14,8 @@ import ScanHistoryCard from './ScanHistoryCard';
 
 const ScanHistory = ({
     loginData,
-    navigation
+    navigation,
+    roiData
 }) => {
 
     return (
@@ -45,9 +46,14 @@ const ScanHistory = ({
                     {Strings.ongoing_scan}
                 </Text>
             </View>
+            {
+                roiData.length == 0
+                &&
+                <Text style={{color:AppTheme.ERROR_RED,marginLeft:40,fontWeight:'bold'}}>Roi Doesn't Exist</Text>
+            }
 
             <ScanHistoryCard
-                showButtons={true}
+                showButtons={roiData.hasOwnProperty("data") ? true : false}
                 navigation={navigation}
             />
 
@@ -57,7 +63,9 @@ const ScanHistory = ({
 const mapStateToProps = (state) => {
     return {
         filteredData: state.filteredData,
-        loginData: state.loginData
+        loginData: state.loginData,
+        apiStatus: state.apiStatus,
+        roiData: state.roiData.response
     }
 }
 

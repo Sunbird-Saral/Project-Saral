@@ -79,13 +79,17 @@ const ScannedDetailsComponent = ({
 
     const validateStudentId = async (value) => {
         let studentsExamData = await getStudentsExamData();
-        let a = studentsExamData[0].data.students.filter((e) => {
-            console.log(e.studentId);
+        const filterStudentsData = studentsExamData.filter((e) => {
+            if (e.class == filteredData.className && e.section == filteredData.section) {
+                return true
+            }
+        })
+
+        let a = filterStudentsData[0].data.students.filter((e) => {
             if (e.studentId == value) {
                 return true
             }
         })
-        console.log("studentData", a);
         if (a.length > 0) {
 
             setStudentValid(true)
@@ -222,17 +226,20 @@ const ScannedDetailsComponent = ({
     const goNextFrame = () => {
 
         let validCell = false
+        let omrMark = false
         for (let i = 0; i < newArrayValue.length; i++) {
-            if (newArrayValue[i].consolidatedPrediction == '') {
+            if (newArrayValue[i].consolidatedPrediction === '') {
                 validCell = true
+            }
+            else if (newArrayValue[i].consolidatedPrediction === 0) {
+                omrMark = true
             }
 
         }
-        // console.log("valid", valid);
-        // if (valid) {
-        //     showErrorMessage(Strings.omr_mark_should_be)
-        // }
-        if (disable) {
+        if (omrMark) {
+            showErrorMessage(Strings.omr_mark_should_be)
+        }
+        else if (disable) {
             showErrorMessage(Strings.please_correct_marks_data)
         }
         else if (validCell) {
@@ -245,7 +252,6 @@ const ScannedDetailsComponent = ({
             if (currentIndex + 1 <= stdRollArray.length - 1) {
 
                 //for student validataion
-                console.log("hello", currentIndex);
 
                 ocrLocalResponse.layout.cells.forEach(element => {
 
@@ -317,7 +323,6 @@ const ScannedDetailsComponent = ({
             stdMarkInfo.push(stdData)
 
         })
-        console.log("stdMarkInfo", stdMarkInfo);
 
 
         let saveObj = {
@@ -347,6 +352,7 @@ const ScannedDetailsComponent = ({
             if (currentIndex == 1) {
                 setBtnName('cancel')
             }
+            setNextBtn(Strings.next_text)
         }
         else {
             onBackButtonClick()
@@ -387,6 +393,7 @@ const ScannedDetailsComponent = ({
                                 keyboardType={'numeric'}
                             />
                             <Text style={styles.nameTextStyle}>{Strings.test_id + ': ' + filteredData.examTestID}</Text>
+                            <Text style={styles.nameTextStyle}>{Strings.page_no + ': ' + (currentIndex + 1)}</Text>
                         </View>
                     </View>
                 </View>
@@ -457,7 +464,7 @@ const ScannedDetailsComponent = ({
                     <ButtonComponent
                         customBtnStyle={styles.nxtBtnStyle}
                         customBtnTextStyle={styles.nxtBtnTextStyle}
-                        btnText={nextBtn}
+                        btnText={nextBtn.toUpperCase()}
                         onPress={() => isMultipleStudent ? goNextFrame() : onSubmitClick()}
                     />
                 </View>
@@ -482,10 +489,11 @@ const ScannedDetailsComponent = ({
         if (isMultipleStudent) {
             let len = text.length
             setDisabled(len == 0 ? true : false)
-            // if (text > 1) {
-            //     setValid(true)
-            // }
-            // console.log("text",text);
+            if (text > 1) {
+                setValid(true)
+            } else {
+                setValid(false)
+            }
 
             let newArray = JSON.parse(JSON.stringify(array))
             newArray[index].consolidatedPrediction = text > 1 ? 0 : text
@@ -495,9 +503,9 @@ const ScannedDetailsComponent = ({
 
                 if (element.cellId == value.cellId) {
                     structureList.forEach(Datas => {
-                        //this ll add into OCRLocal
+                        //this'll add into OCRLocal
                         element.consolidatedPrediction = text > 1 ? 0 : text
-                        //this ll add in our structure
+                        //this'll add in  structurelist
                         Datas.data.forEach((el, index) => {
                             if (el.cellId === value.cellId) {
                                 el.consolidatedPrediction = text > 1 ? 0 : text
@@ -682,7 +690,6 @@ const ScannedDetailsComponent = ({
                 }
             })
                 .then(function (res) {
-                    console.log("fetch", res);
                     setIsLoading(false)
                     goToMyScanScreen()
                     apiResponse = res
