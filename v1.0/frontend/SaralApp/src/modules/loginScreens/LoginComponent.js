@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, TextInput, Image, AppState } from 'react-native';
+import { View, ScrollView, Text, TextInput, Image, AppState, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Strings from '../../utils/Strings';
@@ -10,6 +10,8 @@ import APITransport from '../../flux/actions/transport/apitransport';
 import { LoginAction } from '../../flux/actions/apis/LoginAction';
 import { setLoginData, setLoginCred, getLoginCred } from '../../utils/StorageUtils'
 import { Assets } from '../../assets/index'
+import JsonData from '../../../multi-tenant-branding.json'
+import { lowerCase } from 'lodash';
 
 class LoginComponent extends Component {
     constructor(props) {
@@ -24,7 +26,8 @@ class LoginComponent extends Component {
             password: '',
             calledLogin: false,
             appState: AppState.currentState,
-          
+            text: '',
+            filterdata: []
         }
     }
 
@@ -32,6 +35,7 @@ class LoginComponent extends Component {
         this.props.navigation.addListener('willFocus', async payload => {
             AppState.addEventListener('change', this.handleAppStateChange);
             this.componentMountCall()
+           
         })
     }
 
@@ -117,25 +121,9 @@ class LoginComponent extends Component {
 
     }
 
-    Changelogo(input) {
-        switch (input) {
-            case '1':
-                return <Image style={styles.img} source={Assets.SchoolId1} />;
-            case '2':
-                return <Image style={styles.img} source={Assets.SchoolId2} />;
-            case '3':
-                return <Image style={styles.img} source={Assets.SchoolId3} />;
-            case '4':
-                return <Image style={styles.img} source={Assets.SchoolId4} />;
-            default:
-                return <Image style={styles.img} source={Assets.AppLogo} />;
-        }
-    }
-
-
     componentDidUpdate(prevProps) {
         if (prevProps != this.props) {
-
+            this.dataShow()
             const { apiStatus, loginData, navigation } = this.props
             const { schoolId, password, calledLogin } = this.state
             if (apiStatus && prevProps.apiStatus != apiStatus && apiStatus.error) {
@@ -201,14 +189,29 @@ class LoginComponent extends Component {
         }
     }
 
+
+
     onLoginDetailsChange = (text, type) => {
         this.setState({ [type]: text })
     }
-
-
+    dataShow = (text) => {
+        var data = JsonData.multiTenantConfig.filter((item => {
+            if (item.schoolId == text) {
+                return true
+            }else{
+                return false
+            }
+        }))
+        // console.log('data++++++', data)
+         this.setState({filterdata:data})
+    }
 
     render() {
-        const { schoolId, password, isLoading, errUsername, errPassword, errCommon } = this.state;
+        const { password, isLoading, errUsername, errPassword, errCommon } = this.state;
+        //  console.log('schoolid filter++++++++++',this.state.filterdata )
+        // console.log('schoolid',this.state.schoolId)
+
+
         return (
             <View style={styles.container}>
                 <ScrollView
@@ -218,14 +221,16 @@ class LoginComponent extends Component {
                     keyboardShouldPersistTaps={'handled'}
                 >
                     <View style={styles.container1}>
-                        {schoolId.length ?
-                            this.Changelogo(schoolId) : <Image style={{ width: 100, height: 100 }} source={Assets.AppLogo} />
+                        {
+                            (this.state.filterdata.length > 0) ?
+                                <View>
+                                    <Image style={{ height: 100, width: 100 }} source={{ uri: 'data:image/png;base64,' + this.state.filterdata[0].logoImage }}
+                                    />
+                                    <Text style={{ textAlign: 'center' }}>{this.state.filterdata[0].label1}</Text>
+                                </View>
+                                :
+                                <Image style={{ width: 100, height: 100 }} source={Assets.AppLogo} />
                             }
-
-
-                        {/* <Text style={styles.header1TextStyle}>
-                            {Strings.up_saralData.toUpperCase()}
-                        </Text> */}
                     </View>
 
                     <View style={styles.container2}>
@@ -244,12 +249,15 @@ class LoginComponent extends Component {
                                 <TextInput
                                     ref="schoolId"
                                     style={styles.inputStyle}
-                                    onChangeText={(text) => this.onLoginDetailsChange(text, 'schoolId')}
-                                    value={schoolId}
+                                    onChangeText={(text) => {
+                                        this.dataShow(text)
+                                        this.onLoginDetailsChange(text, 'schoolId') }}
+                                    value={this.state.schoolId}
                                     placeholder={Strings.schoolId_text}
                                     placeholderTextColor={AppTheme.BLACK_OPACITY_30}
                                     autoCapitalize={'none'}
                                 />
+
                             </View>
                             <View style={styles.fieldContainerStyle}>
                                 <View style={{ flexDirection: 'row' }}>
