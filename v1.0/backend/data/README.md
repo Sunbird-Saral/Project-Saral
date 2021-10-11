@@ -45,17 +45,21 @@ for deleting current data in database
 
 * name of student in UP_HINDI_4S school:- 
 
-|STUDENT NAME|STUDENT ID|
-|---|---|
-|Apurva |           1210001|  
-|Himani Bisht|      1220002| 
-|Sandeep Kumar|     1220003|
-|Gopal Bhatt|       1220004|
-|Mukul|             1220005|
-|Navin Nair|        1210002|
-|Neha Rawat |       1210003|
-|Ankit Negi  |      1210004|
-|Khusbhoo Sharma|   1210005|
+|STUDENT NAME|STUDENT ID|CLASS|
+|---|---|---|
+|Apurva |           1210001|2|  
+|Himani Bisht|      1220002|2|
+|Sandeep Kumar|     1220003|2|
+|Gopal Bhatt|       1220004|2|
+|Mukul|             1220005|2|
+|Navin Nair|        1210002|2|
+|Neha Rawat |       1210003|2|
+|Ankit Negi  |      1210004|2|
+|Khusbhoo Sharma|   1210005|2|
+|Sherlyn|           2000001|5|
+|Rita Bhojak|       2000002|5|
+|Karan Bhojak|      2000003|5|
+|Aayushi Dhondiyal| 2000004|5|
 
 ## roi
 
