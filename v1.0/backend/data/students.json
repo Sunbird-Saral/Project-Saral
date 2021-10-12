@@ -67,8 +67,32 @@
   ],
   "section": "D",
   "name": "Navin Nair",
-  "studentId": "1210002",
+  "studentId": "1000001",
   "schoolId": "1"
+},
+{
+  "studentClass": [
+    {
+      "classId": "3",
+      "className": "Class-3"
+    }
+  ],
+  "section": "D",
+  "name": "Deepankar",
+  "studentId": "1000002",
+  "schoolId": "1"
+},
+{
+"studentClass": [
+  {
+    "classId": "3",
+    "className": "Class-3"
+  }
+],
+"section": "D",
+"name": "Jatin",
+"studentId": "1000003",
+"schoolId": "1"
 },
 {
   "studentClass": [
