@@ -52,7 +52,6 @@ for deleting current data in database
 |Sandeep Kumar|     1220003|2|
 |Gopal Bhatt|       1220004|2|
 |Mukul|             1220005|2|
-|Navin Nair|        1210002|2|
 |Neha Rawat |       1210003|2|
 |Ankit Negi  |      1210004|2|
 |Khusbhoo Sharma|   1210005|2|
@@ -66,11 +65,26 @@ for deleting current data in database
 | SUBJECT | STATE | TYPE | CLASSID | EXAMID|
 |---|---|---|---|---|
 |Hindi|UP|UP_HINDI_4S|2|1|
-|Hindi|UP|UP_HINDI_4S|3|2|
 |Hindi|UP|UP_HINDI_4S|5|7|
 |Hindi|UP|UP_HINDI_4S|6|8|
 |Hindi|UP|UP_HINDI_4S|7|9|
 
+**type:- UP_HINDI_3S**
+**ROLLNUMBER:- UP_HINDI_3S it accept 7 digit roll number**
+
+
+* name of student in UP_HINDI_4S school:- 
+
+|STUDENT NAME|STUDENT ID|CLASS|
+|---|---|---|
+|Navin Nair|        1000001|3|
+|Deepankar|         1000002|3|
+|Jatin|         1000002|3|
+
+## roi
+| SUBJECT | STATE | TYPE | CLASSID | EXAMID|
+|---|---|---|---|---|
+|Hindi|UP|UP_HINDI_3S|3|2|
 
 # state:- odisha
 ## schoolID:2
