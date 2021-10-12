@@ -168,8 +168,8 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
 
     public void onCameraViewStarted(int width, int height) {
         mRgba                           = new Mat(height, width, CvType.CV_8UC4);
-        mTableCornerDetection           = new TableCornerCirclesDetection(false);
-        mDetectShaded                   = new DetectShaded(false);
+        mTableCornerDetection           = new TableCornerCirclesDetection(true);
+        mDetectShaded                   = new DetectShaded(true);
         mTotalClassifiedCount           = 0;
         mIsScanningComplete             = false;
         mScanningResultShared           = false;
