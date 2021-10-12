@@ -53,7 +53,7 @@
     }
   ],
   "section": "D",
-  "studentId": "13040000001",
+  "studentId": "1210002",
   "securedMarks": 3,
   "totalMarks": 5,
   "schoolId": "1",
@@ -61,7 +61,104 @@
   "subject": "Hindi",
   "classId": "3",
   "__v": 0
-},{
+},
+{
+  "marksInfo": [
+    {
+      "questionId": "LO-1",
+      "obtainedMarks": 1
+    },
+    {
+      "questionId": "LO-2",
+      "obtainedMarks": 1
+    },
+    {
+      "questionId": "LO-3",
+      "obtainedMarks": 0
+    },
+    {
+      "questionId": "LO-4",
+      "obtainedMarks": 0
+    },
+    {
+      "questionId": "LO-5",
+      "obtainedMarks": 1
+    }
+  ],
+  "section": "D",
+  "studentId": "1210003",
+  "securedMarks": 3,
+  "totalMarks": 5,
+  "schoolId": "1",
+  "examDate": "2021-09-28",
+  "subject": "Hindi",
+  "classId": "6"
+},
+{
+  "marksInfo": [
+    {
+      "questionId": "LO-1",
+      "obtainedMarks": 1
+    },
+    {
+      "questionId": "LO-2",
+      "obtainedMarks": 1
+    },
+    {
+      "questionId": "LO-3",
+      "obtainedMarks": 0
+    },
+    {
+      "questionId": "LO-4",
+      "obtainedMarks": 0
+    },
+    {
+      "questionId": "LO-5",
+      "obtainedMarks": 1
+    }
+  ],
+  "section": "D",
+  "studentId": "1210004",
+  "securedMarks": 3,
+  "totalMarks": 5,
+  "schoolId": "1",
+  "examDate": "2021-09-29",
+  "subject": "Hindi",
+  "classId": "7"
+},
+{
+  "marksInfo": [
+    {
+      "questionId": "LO-1",
+      "obtainedMarks": 1
+    },
+    {
+      "questionId": "LO-2",
+      "obtainedMarks": 1
+    },
+    {
+      "questionId": "LO-3",
+      "obtainedMarks": 0
+    },
+    {
+      "questionId": "LO-4",
+      "obtainedMarks": 0
+    },
+    {
+      "questionId": "LO-5",
+      "obtainedMarks": 1
+    }
+  ],
+  "section": "D",
+  "studentId": "1210005",
+  "securedMarks": 3,
+  "totalMarks": 5,
+  "schoolId": "1",
+  "examDate": "2021-09-28",
+  "subject": "Hindi",
+  "classId": "5"
+}
+,{
   "marksInfo": [
     {
       "questionId": "LO-1",
@@ -334,7 +431,7 @@
     }
   ],
   "section": "D",
-  "studentId": "2203000000000001",
+  "studentId": "2204000000000001",
   "securedMarks": 3,
   "totalMarks": 5,
   "schoolId": "2",
@@ -364,14 +461,46 @@
       "obtainedMarks": 1
     }
   ],
-  "section": "C",
-  "studentId": "2203000000000001",
+  "section": "D",
+  "studentId": "2204000000000001",
   "securedMarks": 3,
   "totalMarks": 5,
   "schoolId": "2",
   "examDate": "2021-10-02",
   "subject": "Maths",
   "classId": "2"
+}, 
+{
+  "marksInfo": [
+    {
+      "questionId": "LO-1",
+      "obtainedMarks": 1
+    },
+    {
+      "questionId": "LO-2",
+      "obtainedMarks": 1
+    },
+    {
+      "questionId": "LO-3",
+      "obtainedMarks": 0
+    },
+    {
+      "questionId": "LO-4",
+      "obtainedMarks": 0
+    },
+    {
+      "questionId": "LO-5",
+      "obtainedMarks": 1
+    }
+  ],
+  "section": "C",
+  "studentId": "2203000000000001",
+  "securedMarks": 3,
+  "totalMarks": 5,
+  "schoolId": "2",
+  "examDate": "2021-09-24",
+  "subject": "Maths",
+  "classId": "3"
 }, 
 {
   "marksInfo": [
@@ -459,7 +588,7 @@
     }
   ],
   "section": "D",
-  "studentId": "3304001",
+  "studentId": "3302003",
   "securedMarks": 3,
   "totalMarks": 5,
   "schoolId": "3",
