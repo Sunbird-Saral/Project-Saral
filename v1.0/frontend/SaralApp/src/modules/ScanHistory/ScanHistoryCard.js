@@ -59,7 +59,15 @@ const ScanHistoryCard = ({
                     </View>
                     <View style={styles.scanCardStyle}>
                         <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                            <Text>{Strings.test_id}</Text>
+                            <Text>{Strings.subject}</Text>
+                        </View>
+                        <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
+                            <Text>{filteredData.response.subject}</Text>
+                        </View>
+                    </View>
+                    <View style={styles.scanCardStyle}>
+                        <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
+                            <Text>{Strings.exam_id}</Text>
                         </View>
                         <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
                             <Text>{filteredData.response.examTestID}</Text>
