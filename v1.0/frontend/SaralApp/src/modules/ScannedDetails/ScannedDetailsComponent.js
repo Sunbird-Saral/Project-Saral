@@ -392,7 +392,8 @@ const ScannedDetailsComponent = ({
                                 editable={edit}
                                 keyboardType={'numeric'}
                             />
-                            <Text style={styles.nameTextStyle}>{Strings.test_id + ': ' + filteredData.examTestID}</Text>
+                             <Text style={styles.nameTextStyle}>{Strings.Exam} : {filteredData.subject} {filteredData.examDate} ({filteredData.examTestID})</Text>
+                            {/* <Text style={styles.nameTextStyle}>{Strings.test_id + ': ' + filteredData.examTestID}</Text> */}
                             <Text style={styles.nameTextStyle}>{Strings.page_no + ': ' + (currentIndex + 1)}</Text>
                         </View>
                     </View>
