@@ -13,7 +13,7 @@ const fs = require('fs');
 
 const fromTime = "T00:00:00"
 const toTime = "T23:59:59"
-router.post('/saveMarks', auth, async (req, res) => {
+router.put('/saveMarks', auth, async (req, res) => {
     const marks = []
     // const examId = req.body.examId
     const subject = req.body.subject
