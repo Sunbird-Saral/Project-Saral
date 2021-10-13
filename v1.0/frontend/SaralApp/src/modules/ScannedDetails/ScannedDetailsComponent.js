@@ -65,6 +65,7 @@ const ScannedDetailsComponent = ({
     const [valid, setValid] = useState(false);
 
     const [nextBtn, setNextBtn] = useState('SUBMIT')
+    const [checkStdRollDuplicate, setCheckStdRollDuplicate] = useState([])
 
     const inputRef = React.createRef();
     const dispatch = useDispatch()
@@ -91,7 +92,7 @@ const ScannedDetailsComponent = ({
             }
         })
         if (a.length > 0) {
-
+            checkDuplicateRollNo(value)
             setStudentValid(true)
             setStdErr('')
             setStudentDATA(a)
@@ -101,6 +102,10 @@ const ScannedDetailsComponent = ({
             setStudentValid(false)
         }
 
+    }
+
+    const checkDuplicateRollNo = (stdId) => {
+        console.log("stdId", stdId);
     }
 
 
