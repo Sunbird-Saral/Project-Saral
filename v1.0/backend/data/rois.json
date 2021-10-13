@@ -2707,7 +2707,7 @@
         ]
     }
   },
-  "state": "UP",
+  "state": "up",
   "roiId": "1"
 },{
   "subject": "Hindi",
@@ -5628,7 +5628,7 @@
         ]
     }
   },
-  "state": "UP",
+  "state": "up",
   "roiId": "2"
 },{
   "subject": "Maths",
@@ -7043,7 +7043,7 @@
         ]
     }
   },
-  "state": "UP",
+  "state": "up",
   "roiId": "3"
 },{
   "subject": "Maths",
@@ -8458,7 +8458,7 @@
         ]
     }
   },
-  "state": "UP",
+  "state": "up",
   "roiId": "4"
 },{
   "subject": "Maths",
@@ -9873,7 +9873,7 @@
         ]
     }
   },
-  "state": "UP",
+  "state": "up",
   "roiId": "5"
 },{
   "subject": "Hindi",
@@ -11288,7 +11288,7 @@
         ]
     }
   },
-  "state": "UP",
+  "state": "up",
   "roiId": "6"
 },{
   "subject": "Hindi",
@@ -14050,7 +14050,7 @@
             ]
         }
   },
-  "state": "UP",
+  "state": "up",
   "roiId": "7"
 },{
   "subject": "Hindi",
@@ -16959,7 +16959,7 @@
         ]
     }
   },
-  "state": "UP",
+  "state": "up",
   "roiId": "8"
 },{
   "subject": "Hindi",
@@ -19868,7 +19868,7 @@
         ]
     }
   },
-  "state": "UP",
+  "state": "up",
   "roiId": "9"
 },{
   "subject": "Hindi",
@@ -21283,7 +21283,7 @@
         ]
     }
   },
-  "state": "UP",
+  "state": "up",
   "roiId": "10"
 },
 {
@@ -32806,7 +32806,7 @@
             ]
         }
     },
-    "state": "UP",
+    "state": "up",
     "roiId": "17"
   },{
     "subject": "English",
@@ -36394,7 +36394,7 @@
             ]
         }
     },
-    "state": "UP",
+    "state": "up",
     "roiId": "18"
   },{
     "subject": "Maths",
@@ -39982,7 +39982,7 @@
             ]
         }
     },
-    "state": "UP",
+    "state": "up",
     "roiId": "19"
 }
 ]
