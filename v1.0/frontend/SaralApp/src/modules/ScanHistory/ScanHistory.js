@@ -15,7 +15,8 @@ import ScanHistoryCard from './ScanHistoryCard';
 const ScanHistory = ({
     loginData,
     navigation,
-    roiData
+    roiData,
+    apiStatus
 }) => {
 
     return (
@@ -47,13 +48,13 @@ const ScanHistory = ({
                 </Text>
             </View>
             {
-                roiData.length == 0
+                apiStatus.unauthorized
                 &&
-                <Text style={{color:AppTheme.ERROR_RED,marginLeft:40,fontWeight:'bold'}}>Roi Doesn't Exist</Text>
+                <Text style={{ color: AppTheme.ERROR_RED, marginLeft: 40, fontWeight: 'bold' }}>Roi Doesn't Exist</Text>
             }
 
             <ScanHistoryCard
-                showButtons={roiData.hasOwnProperty("data") ? true : false}
+                showButtons={apiStatus.unauthorized ? false : true}
                 navigation={navigation}
             />
 

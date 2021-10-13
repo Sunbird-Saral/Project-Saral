@@ -6,7 +6,7 @@ import C from '../constants';
 
 export class SaveScanData extends API {
     constructor(requestBody, token, timeout = 30000) {
-        super('POST', timeout, false);
+        super('PUT', timeout, false);
         
         this.requestBody = requestBody;
         this.token = token;
