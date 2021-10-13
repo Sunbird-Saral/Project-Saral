@@ -18,7 +18,12 @@ router.post('/createStudent', auth, async (req, res) => {
         const newStudentCount = String(studentsCount + 1)
         const newStudentLastSevenDigit = commonDigit.slice(0, - newStudentCount.length) + newStudentCount
         const sectionCode = getSectionCode(section)
-        const studentId = `${req.school.schoolId}${classId}${sectionCode}${newStudentLastSevenDigit}`
+        const studentId = {}
+        if(req.body.studentId){
+            studentId = req.body.studentId
+        }else{
+            studentId = `${req.school.schoolId}${classId}${sectionCode}${newStudentLastSevenDigit}` 
+        }
         const studentClass = req.body.studentClass && req.body.studentClass.length > 0 && [{
             classId: req.body.studentClass[0].classId,
             className: `Class-${req.body.studentClass[0].classId}`

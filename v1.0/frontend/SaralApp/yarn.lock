@@ -6741,7 +6741,7 @@
     "react-localization" "^1.0.17"
 
 "react-native-modal-dropdown@git+https://github.com/siemiatj/react-native-modal-dropdown.git":
-  "integrity" "sha512-mcdyz8vP/e5ahS2WObhqIRJxGSP8MNbo/YDjSRYwVSxz/0dxo3Zfdf3/E8vCmb5OOEAzTB12pqdxt5tX+MMUuw=="
+  "integrity" "sha512-x0+8bNrRF49XKa6RCPbzw9w5DwoJlZr3w1XxRgkFYNucayXvV3mfgv4UJY9KrOaExV/UWh3SM+t+9PQxLy6I/A=="
   "resolved" "git+ssh://git@github.com/siemiatj/react-native-modal-dropdown.git"
   "version" "1.0.2"
   dependencies:
