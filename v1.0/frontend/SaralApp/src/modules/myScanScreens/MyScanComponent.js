@@ -58,8 +58,12 @@ class MyScanComponent extends Component {
     sumOfLocalData = async () => {
         const data = await getScannedDataFromLocal()
         console.log("Data", data);
+        let len = 0
         if (data != null) {
-            let len = data.length
+            data.forEach((element, index) => {
+                len = len + element.studentsMarkInfo.length
+            });
+            console.log("len", len);
             this.setState({
                 scanStatusData: len
             })

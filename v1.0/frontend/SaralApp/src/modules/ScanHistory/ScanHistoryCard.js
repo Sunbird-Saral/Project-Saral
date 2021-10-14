@@ -25,7 +25,8 @@ const ScanHistoryCard = ({
     scanedData,
     loginData,
     setIsLoading,
-    scanStatusData
+    scanStatusData,
+    setScanStatusData
 }) => {
 
     const SAVED_SCANNED_DATA_INTO_LOCAL = 'saved_scanned_data_into_local'
@@ -53,6 +54,7 @@ const ScanHistoryCard = ({
                 dispatch(APITransport(apiObj))
                 callScanStatusData()
             }
+            setScanStatusData(0)
         } else {
             setIsLoading(false)
             Alert.alert('There is no data!')

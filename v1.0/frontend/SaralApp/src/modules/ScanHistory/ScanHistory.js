@@ -28,9 +28,11 @@ const ScanHistory = ({
     //functions
     const sumOfLocalData = async () => {
         const data = await getScannedDataFromLocal()
-        console.log("Data", data);
+        let len = 0
         if (data != null) {
-            let len = data.length
+            data.forEach((element, index) => {
+                len = len + element.studentsMarkInfo.length
+            });
             setScanStatusData(len)
         } else {
             setScanStatusData(0)
@@ -81,6 +83,7 @@ const ScanHistory = ({
                 isLoading={isLoading}
                 setIsLoading={setIsLoading}
                 scanStatusData={scanStatusData}
+                setScanStatusData={setScanStatusData}
             />
             {
                 isLoading && <Spinner animating={isLoading} />
