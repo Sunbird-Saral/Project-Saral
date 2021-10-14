@@ -6,10 +6,13 @@ import { styles } from './StudentsDataStyle';
 
 const StudentsDataComponent = ({
     item,
-    onBtnClick
+    onBtnClick,
+    Theme
+    
 }) => {
+    console.log('theme',Theme)
     return (
-        <View style={[styles.cardCon, { backgroundColor: AppTheme.BLUE  }]}>
+        <View style={[styles.cardCon, { backgroundColor:Theme }]}>
             <View style={[styles.cardChildCon, { backgroundColor:  "#ffffffED" }]}>
 
                 <Text style={styles.aadhar}>{item.studentId}</Text>
@@ -18,7 +21,7 @@ const StudentsDataComponent = ({
                 <View style={styles.line} />
 
                 <TouchableOpacity
-                    style={[styles.btnCon, { backgroundColor: item.isAbsent ? AppTheme.BLUE : AppTheme.BLUE }]}
+                    style={[styles.btnCon, { backgroundColor: Theme? Theme : AppTheme.BLUE }]}
                     activeOpacity={0.7}
                     onPress={() => onBtnClick(item)}
                 >

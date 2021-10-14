@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Text, View, FlatList, Alert } from 'react-native';
+import { Text, View, FlatList, Alert, ScrollView } from 'react-native';
 
 //redux
 import { connect, useDispatch } from 'react-redux';
@@ -64,6 +64,7 @@ const StudentsList = ({
     const [isLoading, setIsLoading] = useState(false)
     const prevloginResponse = usePrevious(loginData);
     const prevSaveRes = usePrevious(saveAbsentStudent)
+    const Theme = navigation.getParam('Theme')
 
     useEffect(() => {
         studentData()
@@ -87,7 +88,7 @@ const StudentsList = ({
         if (prevSaveRes && saveAbsentStudent && prevSaveRes != saveAbsentStudent) {
             setIsLoading(false)
             if (saveAbsentStudent && saveAbsentStudent.data && saveAbsentStudent.status == 200) {
-                navigation.navigate('scanHistory')
+                navigation.navigate('scanHistory',{Theme:Theme})
             } else if (saveAbsentStudent && saveAbsentStudent.data && saveAbsentStudent.status != 200) {
                 Alert.alert(Strings.message_text, Strings.process_failed_try_again, [
                     { 'text': Strings.ok_text, style: Strings.cancel_text }
@@ -112,7 +113,7 @@ const StudentsList = ({
             "page": 0,
             "downloadRes": true
         }
-        console.log("data",dataPayload);
+        // console.log("data",dataPayload);
         let apiObj = new scanStatusDataAction(dataPayload);
         FetchSavedScannedData(apiObj, loginCred.schoolId, loginCred.password)
     }
@@ -244,8 +245,11 @@ const StudentsList = ({
 
 
     const renderStudentData = ({ item }) => {
+        // const Theme = navigation.getParam('Theme')
         return (
             <StudentsDataComponent
+            
+                Theme ={Theme}
                 item={item}
                 onBtnClick={onMarkPresentAbsent}
             />
@@ -262,7 +266,7 @@ const StudentsList = ({
 
     const saveAbsentDetails = (token) => {
         setIsLoading(true)
-        console.log("absentStudentDataResponse", absentStudentsData);
+        // console.log("absentStudentDataResponse", absentStudentsData);
         let apiObj = new SaveAbsentDataAction(absentStudentsData, token)
         APITransport(apiObj);
     }
@@ -281,7 +285,7 @@ const StudentsList = ({
         // } else {
         //     let absentList = _.filter(allStudentData, (o) => o.isAbsent);
         //     setAbsentStudentDataIntoAsync(absentList);
-        navigation.navigate('ScanHistory');
+        navigation.navigate('ScanHistory',{Theme:Theme});
         // }
     }
 
@@ -322,8 +326,9 @@ const StudentsList = ({
         let apiObj = new ROIAction(payload, token);
         dispatch(APITransport(apiObj))
     }
-
+  console.log('Themem',Theme)
     return (
+        <ScrollView>
         <View style={{ flex: 1, backgroundColor: 'white' }}>
 
             {/* <HeaderComponent
@@ -361,18 +366,19 @@ const StudentsList = ({
                     {apkVersion}
                 </Text>
             </Text>
-
+            <View style={{backgroundColor:Theme}}>
             <FlatList
                 data={allStudentData}
                 renderItem={renderStudentData}
+                background ={Theme}
                 ListEmptyComponent={renderEmptyList}
                 keyExtractor={(item) => item.studentId.toString()}
                 contentContainerStyle={styles.flatlistCon}
                 showsVerticalScrollIndicator={false}
-            />
+            /></View>
 
             <ButtonComponent
-                customBtnStyle={styles.nxtBtnStyle}
+                customBtnStyle={[styles.nxtBtnStyle,{backgroundColor:Theme ? Theme: AppTheme.BLUE}]}
                 btnText={Strings.next_text.toUpperCase()}
                 activeOpacity={0.8}
                 // onPress={() => navigateToNext(loginData.data.jwtToken)}
@@ -388,6 +394,7 @@ const StudentsList = ({
             }
 
         </View>
+        </ScrollView>
     );
 }
 

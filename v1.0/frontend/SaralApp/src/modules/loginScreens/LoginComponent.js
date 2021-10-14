@@ -202,16 +202,13 @@ class LoginComponent extends Component {
                 return false
             }
         }))
-        // console.log('data++++++', data)
+        // console.log('data',data)
          this.setState({filterdata:data})
     }
 
     render() {
         const { password, isLoading, errUsername, errPassword, errCommon } = this.state;
-        //  console.log('schoolid filter++++++++++',this.state.filterdata )
-        // console.log('schoolid',this.state.schoolId)
-
-
+       
         return (
             <View style={styles.container}>
                 <ScrollView
@@ -221,7 +218,7 @@ class LoginComponent extends Component {
                     keyboardShouldPersistTaps={'handled'}
                 >
                     <View style={styles.container1}>
-                        {
+                        {/* {
                             (this.state.filterdata.length > 0) ?
                                 <View>
                                     <Image style={{ height: 100, width: 100 }} source={{ uri: 'data:image/png;base64,' + this.state.filterdata[0].logoImage }}
@@ -230,7 +227,8 @@ class LoginComponent extends Component {
                                 </View>
                                 :
                                 <Image style={{ width: 100, height: 100 }} source={Assets.AppLogo} />
-                            }
+                            } */}
+                              <Image style={{ width: 100, height: 100 }} source={Assets.AppLogo} />
                     </View>
 
                     <View style={styles.container2}>

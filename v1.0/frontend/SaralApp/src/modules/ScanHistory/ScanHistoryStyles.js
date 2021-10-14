@@ -1,9 +1,9 @@
 import { StyleSheet } from "react-native";
 import AppTheme from "../../utils/AppTheme";
-
+import Theme from './ScanHistory'
 export const styles = StyleSheet.create({
     container: {
-        backgroundColor: AppTheme.BLUE,
+        backgroundColor:AppTheme.BLUE,
         width: '80%',
         borderRadius: 8,
         marginTop: 20,

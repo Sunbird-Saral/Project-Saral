@@ -17,7 +17,7 @@ const ScanHistory = ({
     navigation,
     roiData
 }) => {
-
+    const Theme = navigation.getParam('Theme')
     return (
         <View style={styles.container}>
             {/* <HeaderComponent
@@ -42,7 +42,7 @@ const ScanHistory = ({
 
 
             <View style={styles.container1}>
-                <Text style={styles.header1TextStyle}>
+                <Text style={[styles.header1TextStyle,{backgroundColor:Theme ? Theme : AppTheme.LIGHT_BLUE}]}>
                     {Strings.ongoing_scan}
                 </Text>
             </View>
@@ -55,6 +55,7 @@ const ScanHistory = ({
             <ScanHistoryCard
                 showButtons={roiData.hasOwnProperty("data") ? true : false}
                 navigation={navigation}
+                Theme ={Theme}
             />
 
         </View>

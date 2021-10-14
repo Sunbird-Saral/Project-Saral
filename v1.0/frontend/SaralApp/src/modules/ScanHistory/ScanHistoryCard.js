@@ -12,22 +12,23 @@ const ScanHistoryCard = ({
     showButtons = true,
     navigation,
     filteredData,
-    scanedData
+    scanedData,
+    Theme
 }) => {
 
 
     const onPressContinue = () => {
-        navigation.navigate('myScan')
+        navigation.navigate('myScan',{Theme:Theme})
     }
 
     const onPressStatus = () => {
-        navigation.navigate('ScanStatus')
+        navigation.navigate('ScanStatus',{Theme:Theme})
     }
 
     
     return (
         <TouchableOpacity
-            style={[styles.container]}
+            style={[styles.container,{backgroundColor:Theme ? Theme : AppTheme.BLUE}]}
             disabled
 
         >

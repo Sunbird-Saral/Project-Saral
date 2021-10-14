@@ -25,6 +25,7 @@ class MyScanComponent extends Component {
             oldBrightness: null,
             activityOpen: false,
             isLoading: false,
+            Theme: this.props.navigation.getParam('Theme')
         }
         this.onBack = this.onBack.bind(this)
     }
@@ -189,7 +190,7 @@ class MyScanComponent extends Component {
     }
 
     render() {
-        const { isLoading } = this.state;
+        const { isLoading,Theme } = this.state;
         const { loginData } = this.props
         return (
 
@@ -235,12 +236,13 @@ class MyScanComponent extends Component {
                     keyboardShouldPersistTaps={'handled'}
                 >
                     <View style={styles.onGoingContainer}>
-                        <Text style={styles.header1TextStyle}>
+                        <Text style={[styles.header1TextStyle,{backgroundColor:Theme ? Theme :AppTheme.LIGHT_BLUE}]}>
                             {Strings.ongoing_scan}
                         </Text>
                     </View>
 
                     <ScanHistoryCard
+                    Theme={Theme}
                         showButtons={false}
                     />
 
@@ -256,7 +258,7 @@ class MyScanComponent extends Component {
                             style={[styles.scanTabContainerStyle,]}
                         >
                             <TouchableOpacity
-                                style={styles.scanSubTabContainerStyle}
+                                style={[styles.scanSubTabContainerStyle,{backgroundColor:Theme ? Theme: AppTheme.BLUE}]}
                             >
                                 <Image
                                     source={require('../../assets/images/scanIcon.jpeg')}

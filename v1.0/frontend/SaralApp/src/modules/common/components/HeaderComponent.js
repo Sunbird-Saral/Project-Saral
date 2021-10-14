@@ -16,6 +16,7 @@ class HeaderComponent extends Component {
             customHeaderTextStyle,
             headerButton,
             customBtnStyle,
+            titletextstyle,
             btnIcon,
             btnText,
             onPress,
@@ -26,7 +27,7 @@ class HeaderComponent extends Component {
         } = this.props
         return (
             <View style={[styles.mainHeaderContainerStyle, customHeaderContainer]}>
-                <Text style={[styles.headerTitleTextStyle, customHeaderTextStyle]}>{title}</Text>
+                <Text style={[styles.headerTitleTextStyle, customHeaderTextStyle,titletextstyle]}>{title}</Text>
                 {logoutHeaderText && logoutHeaderText.length > 0 && 
                 <TouchableOpacity
                     onPress={onLogoutClick}

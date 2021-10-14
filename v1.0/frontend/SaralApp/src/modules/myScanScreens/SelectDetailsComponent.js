@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, BackHandler, Alert, TouchableOpacity } from 'react-native';
+import { View, ScrollView, Text, BackHandler, Alert, TouchableOpacity,Image } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -7,6 +7,7 @@ import _ from 'lodash'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import Strings from '../../utils/Strings';
 import AppTheme from '../../utils/AppTheme';
+import { Assets } from '../../assets/index'
 import Spinner from '../common/components/loadingIndicator';
 import { apkVersion } from '../../configs/config';
 import HeaderComponent from '../common/components/HeaderComponent';
@@ -23,6 +24,7 @@ import { StackActions, NavigationActions } from 'react-navigation';
 import { ROIAction } from '../StudentsList/ROIAction';
 import { GetAbsentStudentData } from '../../flux/actions/apis/getAbsentStudentData';
 import { LoginAction } from '../../flux/actions/apis/LoginAction';
+import JsonData from '../../../multi-tenant-branding.json'
 
 
 const clearState = {
@@ -98,20 +100,26 @@ class SelectDetailsComponent extends Component {
             examDate: [],
             calledAbsentStatus: false,
             absentStatusPayload: null,
-            subjectsData:[]
+            subjectsData:[],
+            filterdataid:[],
+           Theme : this.props.navigation.getParam('Theme')
+            
+          
         }
         this.onBack = this.onBack.bind(this)
+        this.dataShow()
     }
 
     componentDidMount() {
         const { navigation, scanTypeData } = this.props
-
+        this.dataShow()
         navigation.addListener('willFocus', async payload => {
             BackHandler.addEventListener('hardwareBackPress', this.onBack)
 
             this.setState(clearState)
 
             if (scanTypeData && scanTypeData.scanType) {
+                // this.dataShow()
                 this.setState({
                     scanType: scanTypeData.scanType
                 })
@@ -419,6 +427,7 @@ class SelectDetailsComponent extends Component {
 
     async componentDidUpdate(prevProps) {
         if (prevProps != this.props) {
+           
             const { apiStatus, studentsAndExamData, absentStudentDataResponse, getScanStatusData, loginData } = this.props
             const { calledStudentsData, calledAbsentStatus, selectedClass, selectedSection, selectedClassId, calledScanStaus, calledLogin, callApi, absentStatusPayload } = this.state
             if (apiStatus && prevProps.apiStatus != apiStatus && apiStatus.error) {
@@ -590,7 +599,7 @@ class SelectDetailsComponent extends Component {
                 if (absentStudentDataResponse && prevProps.absentStudentDataResponse != absentStudentDataResponse) {
                     this.setState({ calledAbsentStatus: false, callApi: '' })
                     if (absentStudentDataResponse.status && absentStudentDataResponse.status == 200) {
-                        this.props.navigation.navigate('AbsentUi')
+                        this.props.navigation.navigate('AbsentUi',{Theme:this.state.Theme})
                     }
                     else {
                         this.setState({
@@ -704,7 +713,7 @@ class SelectDetailsComponent extends Component {
         this.setState({
             isLoading: false
         })
-        this.props.navigation.navigate('StudentsList')
+        this.props.navigation.navigate('StudentsList',{Theme:this.state.Theme})
     }
 
     setDate = date => {
@@ -737,19 +746,50 @@ class SelectDetailsComponent extends Component {
             this.setState({ dateVisible: false })
         }
     }
-
+    dataShow = (text) => {
+        var data = JsonData.multiTenantConfig.filter((item => {
+            if (item.schoolId == text) {
+                return true
+            }else{
+                return false
+            }
+        }))
+        // console.log('data++++++', data)
+         this.setState({filterdata:data})
+    }
+    dataShow(){
+        const id =this.props.loginData.data.school.schoolId
+        conspole.log("iddddddddd",id)
+        var data = JsonData.multiTenantConfig.filter((item => {
+            if (item.schoolId == this.props.loginData.data.school.schoolId) {
+                return true
+            }else{
+                return false
+            }
+        }))
+         console.log('data++++++', data)
+         this.setState({filterdataid:data})
+    }
     render() {
-        const { isLoading, defaultSelected, classList, classListIndex, selectedClass, sectionList, sectionListIndex, selectedSection, pickerDate, selectedDate, subArr, selectedSubject, subIndex, errClass, errSub, errDate, errSection, sectionValid, dateVisible, examTestID } = this.state
+        console.log(this.state.Theme)
+        const {navigation, isLoading, defaultSelected, classList, classListIndex, selectedClass, sectionList, sectionListIndex, selectedSection, pickerDate, selectedDate, subArr, selectedSubject, subIndex, errClass, errSub, errDate, errSection, sectionValid, dateVisible, examTestID } = this.state
         const { loginData, scanTypeData } = this.props
+        const Theme = this.props.navigation.getParam('Theme');
+        console.log('theme',Theme)
+        const Logindataid = loginData.data.school.schoolId
+    
         return (
 
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
+                {/* <View style={{backgroundColor:Theme}}> */}
                 <HeaderComponent
-                    // title={Strings.up_saralData}
+                    //  title={Strings.title_saralapp}
                     logoutHeaderText={Strings.logout_text}
+                    titletextstyle={{color:AppTheme.WHITE}}
                     customLogoutTextStyle={{ color: AppTheme.GREY }}
                     onLogoutClick={this.onLogoutClick}
                 />
+                {/* </View> */}
                 {(loginData && loginData.data) &&
                     <View style={{ marginTop: 20 }}>
                         <Text
@@ -848,14 +888,20 @@ class SelectDetailsComponent extends Component {
                                         placeholder={Strings.please_select_date}
                                     />
                                 } */}
-                            <ButtonComponent
-                                customBtnStyle={styles.nxtBtnStyle}
-                                btnText={Strings.submit_text}
-                                onPress={this.onSubmitClick}
-                            />
+                                {/* {buttontheme()} */}
+                              
                         </View>
+                       
                     </View>
+                    
                 </ScrollView>
+                <View style={styles.btnContainer}>
+                <ButtonComponent
+                            customBtnStyle={[styles.nxtBtnStyle,{backgroundColor:Theme ? Theme : AppTheme.BLUE}]}
+                            btnText={Strings.submit_text}
+                            onPress={this.onSubmitClick}
+                        />
+                        </View>
                 {dateVisible && (
                     <DateTimePicker
                         display="default"
@@ -876,6 +922,11 @@ const styles = {
         flex: 1,
         marginHorizontal: '6%',
         alignItems: 'center'
+    },
+    btnContainer: {
+        paddingVertical: '15%',
+        alignItems:'center',
+        paddingHorizontal:10
     },
     header1TextStyle: {
         // backgroundColor: AppTheme.WHITE_OPACITY,
@@ -902,7 +953,9 @@ const styles = {
         lineHeight: 35
     },
     nxtBtnStyle: {
-        marginHorizontal: '10%',
+     
+        
+        // marginHorizontal: '15%',
     }
 }
 
