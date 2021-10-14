@@ -112,6 +112,7 @@ class HomeComponent extends Component {
                                             <Image style={{ height: 100, width: 100 }} source={Assets.AppLogo} />}
                                     </View>
                                     <View>
+                                        {/* <Text style={styles.welcometext}>{Strings.welcome_up}</Text> */}
                                         <Text style={styles.welcometext}>{Strings.welcome_up}</Text>
                                     </View>
 
