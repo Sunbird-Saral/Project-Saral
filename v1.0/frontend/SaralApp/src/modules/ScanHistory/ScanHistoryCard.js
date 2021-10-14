@@ -4,7 +4,7 @@ import { connect, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
 import AppTheme from '../../utils/AppTheme';
-import { getLoginCred, getScannedDataFromLocal } from '../../utils/StorageUtils';
+import { getLoginCred, getScannedDataFromLocal, setScannedDataIntoLocal } from '../../utils/StorageUtils';
 import Strings from '../../utils/Strings';
 
 //api
@@ -45,17 +45,48 @@ const ScanHistoryCard = ({
 
     const onPressSaveInDB = async () => {
         const data = await getScannedDataFromLocal();
-        console.log("data", data);
+        const { subject, examDate } = filteredData.response
+
         if (data) {
+            const filterData = data.filter((e) => {
+                if (e.classId == filteredData.response.class && e.subject == subject && e.examDate == examDate) {
+                    return true
+                } else {
+                    return false
+                }
+            })
+
             setIsLoading(true)
-            for (const value of data) {
-                console.log("value", value);
-                let apiObj = new SaveScanData(value, loginData.data.token);
-                dispatch(APITransport(apiObj))
-                callScanStatusData()
+            let filterDataLen = 0
+
+            let dummy2 = ''
+            if (filterData.length != 0) {
+                filterData.filter((f) => {
+                    dummy2 = data.filter((e) => {
+                        if (e.classId == f.classId && e.subject == f.subject && e.examDate == f.examDate) {
+                            return false
+                        } else {
+                            filterDataLen = filterDataLen + e.studentsMarkInfo.length
+                            return true
+                        }
+                    })
+                })
+
+
+                for (const value of filterData) {
+                    let apiObj = new SaveScanData(value, loginData.data.token);
+                    dispatch(APITransport(apiObj))
+                    callScanStatusData()
+                }
+                setScanStatusData(filterDataLen)
+                setScannedDataIntoLocal(dummy2)
+            } else {
+                setIsLoading(false)
+                Alert.alert('There is no scanned data for this class!')
             }
-            setScanStatusData(0)
-        } else {
+
+        }
+        else {
             setIsLoading(false)
             Alert.alert('There is no data!')
         }
@@ -95,7 +126,6 @@ const ScanHistoryCard = ({
                     setIsLoading(false)
                     Alert.alert(Strings.message_text, Strings.saved_successfully, [{
                         text: Strings.ok_text, onPress: () => {
-                            AsyncStorage.removeItem(SAVED_SCANNED_DATA_INTO_LOCAL)
                         }
                     }])
                     apiResponse = res
