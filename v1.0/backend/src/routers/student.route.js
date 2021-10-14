@@ -92,6 +92,18 @@ router.post('/fetchStudentsandExamsByQuery', auth, async (req, res) => {
 
     try {
         const students = await Student.find(match, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 }).lean()
+        let studentIds = students.map(id=>id.studentId)
+        const marks = await Marks.StudentsMark(studentIds)
+        
+        for(let student of students){
+        for(let mark of marks){
+            if(student.studentId == mark.studentId){
+                student["studentAvailability"] = mark.studentAvailability
+            }else{
+                student["studentAvailability"] = "true"
+            }
+        }
+        }
         const exams = await Exam.find(examMatch, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 }).lean()
         res.send({ students, exams })
     } catch (e) {
