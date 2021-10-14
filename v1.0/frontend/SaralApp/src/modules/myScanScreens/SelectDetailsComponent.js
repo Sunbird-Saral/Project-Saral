@@ -141,8 +141,8 @@ class SelectDetailsComponent extends Component {
 
     onBack = () => {
         const { navigation } = this.props;
-        // BackHandler.exitApp()
-        navigation.goBack();
+        BackHandler.exitApp()
+        // navigation.goBack();
         return true
     }
 

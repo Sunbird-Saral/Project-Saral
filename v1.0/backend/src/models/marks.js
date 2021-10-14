@@ -25,7 +25,6 @@ const marksSchema = new mongoose.Schema({
     },
     studentId: {
         type: String,
-        unique: true,
         required: true,
         trim: true
     },

@@ -148,9 +148,10 @@ name of student in gujrat school:-
 |Chesta Bisht     |4204002|
 |Megha Kanyal     |4204003|
 |Mousumee Alam    |4204004|
-|Ruchika Kandpal  |4304001|
-|Ruchika Joshi    |4404001|
-|Shantanu Bankoti |4504001|
+|Ruchika Kandpal  |4204005|
+|Ruchika Joshi    |4204006|
+|Shantanu Bankoti |4204007|
+|Kavita kuwarbi   |4204008|
 
 
 ## roi:- 
