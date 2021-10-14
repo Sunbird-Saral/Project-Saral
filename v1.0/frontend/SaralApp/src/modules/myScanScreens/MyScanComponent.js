@@ -15,6 +15,7 @@ import { SCAN_TYPES } from '../../utils/CommonUtils';
 import ScanHistoryCard from '../ScanHistory/ScanHistoryCard';
 
 import SaralSDK from '../../../SaralSDK'
+import { getScannedDataFromLocal } from '../../utils/StorageUtils';
 
 class MyScanComponent extends Component {
     constructor(props) {
@@ -25,6 +26,7 @@ class MyScanComponent extends Component {
             oldBrightness: null,
             activityOpen: false,
             isLoading: false,
+            scanStatusData: 0
         }
         this.onBack = this.onBack.bind(this)
     }
@@ -33,7 +35,7 @@ class MyScanComponent extends Component {
         const { navigation, scanedData } = this.props
         const { params } = navigation.state
         navigation.addListener('willFocus', payload => {
-
+            this.sumOfLocalData()
             BackHandler.addEventListener('hardwareBackPress', this.onBack)
             if (params && params.from_screen && params.from_screen == 'scanDetails') {
                 this.setState({
@@ -50,6 +52,22 @@ class MyScanComponent extends Component {
         this.willBlur = navigation.addListener('willBlur', payload =>
             BackHandler.removeEventListener('hardwareBackPress', this.onBack)
         );
+    }
+
+    //functions
+    sumOfLocalData = async () => {
+        const data = await getScannedDataFromLocal()
+        console.log("Data", data);
+        if (data != null) {
+            let len = data.length
+            this.setState({
+                scanStatusData: len
+            })
+        } else {
+            this.setState({
+                scanStatusData: 0
+            })
+        }
     }
 
     onBack = () => {
@@ -242,6 +260,7 @@ class MyScanComponent extends Component {
 
                     <ScanHistoryCard
                         showButtons={false}
+                        scanStatusData={this.state.scanStatusData}
                     />
 
                 </ScrollView>

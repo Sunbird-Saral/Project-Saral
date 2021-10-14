@@ -1,19 +1,35 @@
-import React, { memo } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
-import { connect } from 'react-redux';
+import React, { memo, useState } from 'react';
+import { Alert, Text, TouchableOpacity, View } from 'react-native';
+import { connect, useDispatch } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
 import AppTheme from '../../utils/AppTheme';
+import { getLoginCred, getScannedDataFromLocal } from '../../utils/StorageUtils';
 import Strings from '../../utils/Strings';
+
+//api
+import APITransport from '../../flux/actions/transport/apitransport'
 
 //styles
 import { styles } from './ScanHistoryStyles';
+import { scanStatusDataAction } from '../ScanStatus/scanStatusDataAction';
+import axios from 'axios';
+import { NavigationActions, StackActions } from 'react-navigation';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const ScanHistoryCard = ({
     showButtons = true,
     navigation,
     filteredData,
-    scanedData
+    scanedData,
+    loginData,
+    setIsLoading,
+    scanStatusData
 }) => {
+
+    const SAVED_SCANNED_DATA_INTO_LOCAL = 'saved_scanned_data_into_local'
+
 
 
     const onPressContinue = () => {
@@ -24,7 +40,84 @@ const ScanHistoryCard = ({
         navigation.navigate('ScanStatus')
     }
 
-    
+    const dispatch = useDispatch()
+
+    const onPressSaveInDB = async () => {
+        const data = await getScannedDataFromLocal();
+        console.log("data", data);
+        if (data) {
+            setIsLoading(true)
+            for (const value of data) {
+                console.log("value", value);
+                let apiObj = new SaveScanData(value, loginData.data.token);
+                dispatch(APITransport(apiObj))
+                callScanStatusData()
+            }
+        } else {
+            setIsLoading(false)
+            Alert.alert('There is no data!')
+        }
+    }
+
+    const callScanStatusData = async () => {
+        let loginCred = await getLoginCred()
+
+        let dataPayload = {
+            "classId": filteredData.class,
+            "subject": filteredData.subject,
+            "fromDate": filteredData.examDate,
+            "page": 0,
+            "schoolId": loginCred.schoolId,
+            "downloadRes": true
+        }
+        let apiObj = new scanStatusDataAction(dataPayload);
+        FetchSavedScannedData(apiObj, loginCred.schoolId, loginCred.password)
+    }
+
+    const FetchSavedScannedData = (api, uname, pass) => {
+        if (api.method === 'POST') {
+            let apiResponse = null
+            const source = axios.CancelToken.source()
+            const id = setTimeout(() => {
+                if (apiResponse === null) {
+                    source.cancel('The request timed out.');
+                }
+            }, 60000);
+            axios.post(api.apiEndPoint(), api.getBody(), {
+                auth: {
+                    username: uname,
+                    password: pass
+                }
+            })
+                .then(function (res) {
+                    setIsLoading(false)
+                    Alert.alert(Strings.message_text, Strings.saved_successfully, [{
+                        text: Strings.ok_text, onPress: () => {
+                            AsyncStorage.removeItem(SAVED_SCANNED_DATA_INTO_LOCAL)
+                        }
+                    }])
+                    apiResponse = res
+                    clearTimeout(id)
+                    api.processResponse(res)
+                    dispatch(dispatchAPIAsync(api));
+                })
+                .catch(function (err) {
+                    console.log("Err", err);
+                    Alert.alert("Something Went Wrong")
+                    setIsLoading(false)
+                    clearTimeout(id)
+                });
+        }
+    }
+
+    function dispatchAPIAsync(api) {
+        return {
+            type: api.type,
+            payload: api.getPayload()
+        }
+    }
+
+
     return (
         <TouchableOpacity
             style={[styles.container]}
@@ -78,7 +171,7 @@ const ScanHistoryCard = ({
                             <Text>{Strings.scan_status}</Text>
                         </View>
                         <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle,]}>
-                            <Text>{0}</Text>
+                            <Text>{scanStatusData}</Text>
                         </View>
                     </View>
                     <View style={styles.scanCardStyle}>
@@ -86,7 +179,7 @@ const ScanHistoryCard = ({
                             <Text>{Strings.save_status}</Text>
                         </View>
                         <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle, { borderBottomWidth: 1 }]}>
-                            <Text>{scanedData ? scanedData.length :0}</Text>
+                            <Text>{scanedData ? scanedData.length : 0}</Text>
                         </View>
                     </View>
                 </View>
@@ -122,7 +215,7 @@ const ScanHistoryCard = ({
                                 marginLeft: 5,
                                 marginRight: 5
                             }}
-                        // onPress={onPressSave}
+                            onPress={onPressSaveInDB}
                         >
                             <Text style={{ color: AppTheme.BLACK }}>{Strings.save_scan}</Text>
                         </TouchableOpacity>}
@@ -154,9 +247,16 @@ const ScanHistoryCard = ({
 const mapStateToProps = (state) => {
     return {
         filteredData: state.filteredData,
-        scanedData: state.scanedData.response.data
+        scanedData: state.scanedData.response.data,
+        loginData: state.loginData
     }
 }
 
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({
+        APITransport: APITransport,
+    }, dispatch)
+}
 
-export default connect(mapStateToProps, null)(memo(ScanHistoryCard));
+
+export default connect(mapStateToProps, mapDispatchToProps)(memo(ScanHistoryCard));

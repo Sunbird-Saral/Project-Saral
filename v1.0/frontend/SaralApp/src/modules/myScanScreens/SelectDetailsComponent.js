@@ -13,7 +13,7 @@ import HeaderComponent from '../common/components/HeaderComponent';
 import DropDownMenu from '../common/components/DropDownComponent';
 import TextField from '../common/components/TextField';
 import ButtonComponent from '../common/components/ButtonComponent';
-import { getLoginData, setStudentsExamData, getStudentsExamData, getLoginCred, setLoginData } from '../../utils/StorageUtils'
+import { getLoginData, setStudentsExamData, getStudentsExamData, getLoginCred, setLoginData,getScannedDataFromLocal } from '../../utils/StorageUtils'
 import { OcrLocalResponseAction } from '../../flux/actions/apis/OcrLocalResponseAction'
 import { GetStudentsAndExamData } from '../../flux/actions/apis/getStudentsAndExamData';
 import { FilteredDataAction } from '../../flux/actions/apis/filteredDataActions';
@@ -23,6 +23,7 @@ import { StackActions, NavigationActions } from 'react-navigation';
 import { ROIAction } from '../StudentsList/ROIAction';
 import { GetAbsentStudentData } from '../../flux/actions/apis/getAbsentStudentData';
 import { LoginAction } from '../../flux/actions/apis/LoginAction';
+import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
 
 
 const clearState = {
@@ -147,6 +148,18 @@ class SelectDetailsComponent extends Component {
     }
 
     onLogoutClick = async () => {
+        this.onPressSaveInDB()
+    }
+
+    onPressSaveInDB = async () => {
+        let data = await getScannedDataFromLocal();
+        if (data) {
+            for (const value of data) {
+                console.log("value", value);
+                let apiObj = new SaveScanData(value, loginData.data.token);
+                dispatch(APITransport(apiObj))
+            }
+        }
         Alert.alert(Strings.message_text, Strings.are_you_sure_you_want_to_logout, [
             { 'text': Strings.no_text, style: 'cancel' },
             {
