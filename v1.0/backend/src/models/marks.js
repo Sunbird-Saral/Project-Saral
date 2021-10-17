@@ -28,7 +28,7 @@ const marksSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    studentAvailability:{
+    studentAvailability: {
         type: Boolean,
         default: true,
         required: true
