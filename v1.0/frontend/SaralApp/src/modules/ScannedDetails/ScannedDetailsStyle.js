@@ -51,7 +51,7 @@ export const styles = {
         backgroundColor: 'transparent',
         width: '60%',
         borderWidth: 1,
-        borderColor: AppTheme.BLUE
+        // borderColor: AppTheme.BLUE
     },
     nxtBtnTextStyle: {
         color: AppTheme.BLUE

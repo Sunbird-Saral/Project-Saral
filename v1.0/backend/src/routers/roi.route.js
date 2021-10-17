@@ -37,7 +37,7 @@ router.post('/createRoi',auth, async (req, res) => {
                   roiId: roi.roiId,
                   classId: roi.classId,
                   subject: roi.subject,
-                  state: roi.state,
+                  state: roi.state.toLowerCase(),
                   createdAt: roi.createdAt
                 }
                 res.status(201).send(roiResponse)

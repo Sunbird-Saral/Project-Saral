@@ -192,6 +192,8 @@ class MyScanComponent extends Component {
     render() {
         const { isLoading,Theme } = this.state;
         const { loginData } = this.props
+        const themeColor1 = this.props.multiBrandingData.themeColor1
+        const themeColor2 = this.props.multiBrandingData.themeColor2
         return (
 
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
@@ -236,13 +238,13 @@ class MyScanComponent extends Component {
                     keyboardShouldPersistTaps={'handled'}
                 >
                     <View style={styles.onGoingContainer}>
-                        <Text style={[styles.header1TextStyle,{backgroundColor:Theme ? Theme :AppTheme.LIGHT_BLUE}]}>
+                        <Text style={[styles.header1TextStyle,{backgroundColor:themeColor2 ? themeColor2 :AppTheme.LIGHT_BLUE}]}>
                             {Strings.ongoing_scan}
                         </Text>
                     </View>
 
                     <ScanHistoryCard
-                    Theme={Theme}
+                    Theme={themeColor1}
                         showButtons={false}
                     />
 
@@ -258,7 +260,7 @@ class MyScanComponent extends Component {
                             style={[styles.scanTabContainerStyle,]}
                         >
                             <TouchableOpacity
-                                style={[styles.scanSubTabContainerStyle,{backgroundColor:Theme ? Theme: AppTheme.BLUE}]}
+                                style={[styles.scanSubTabContainerStyle,{backgroundColor:themeColor1 ? themeColor1: AppTheme.BLUE}]}
                             >
                                 <Image
                                     source={require('../../assets/images/scanIcon.jpeg')}
@@ -364,7 +366,8 @@ const mapStateToProps = (state) => {
         filteredData: state.filteredData,
         scanTypeData: state.scanTypeData.response,
         scanedData: state.scanedData,
-        roiData: state.roiData.response
+        roiData: state.roiData.response,
+        multiBrandingData: state.multiBrandingData.response.data
     }
 }
 

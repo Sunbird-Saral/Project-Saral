@@ -16,6 +16,7 @@ import TextField from '../common/components/TextField';
 import ButtonComponent from '../common/components/ButtonComponent';
 import { getLoginData, setStudentsExamData, getStudentsExamData, getLoginCred, setLoginData } from '../../utils/StorageUtils'
 import { OcrLocalResponseAction } from '../../flux/actions/apis/OcrLocalResponseAction'
+import { MultiBrandingAction } from '../../flux/actions/apis/multiBranding';
 import { GetStudentsAndExamData } from '../../flux/actions/apis/getStudentsAndExamData';
 import { FilteredDataAction } from '../../flux/actions/apis/filteredDataActions';
 import APITransport from '../../flux/actions/transport/apitransport';
@@ -25,7 +26,6 @@ import { ROIAction } from '../StudentsList/ROIAction';
 import { GetAbsentStudentData } from '../../flux/actions/apis/getAbsentStudentData';
 import { LoginAction } from '../../flux/actions/apis/LoginAction';
 import JsonData from '../../../multi-tenant-branding.json'
-
 
 const clearState = {
     defaultSelected: Strings.select_text,
@@ -102,7 +102,7 @@ class SelectDetailsComponent extends Component {
             absentStatusPayload: null,
             subjectsData:[],
             filterdataid:[],
-           Theme : this.props.navigation.getParam('Theme')
+        //    Theme : this.props.navigation.getParam('Theme')
             
           
         }
@@ -149,8 +149,8 @@ class SelectDetailsComponent extends Component {
 
     onBack = () => {
         const { navigation } = this.props;
-        // BackHandler.exitApp()
-        navigation.goBack();
+        BackHandler.exitApp()
+        // navigation.goBack();
         return true
     }
 
@@ -599,7 +599,7 @@ class SelectDetailsComponent extends Component {
                 if (absentStudentDataResponse && prevProps.absentStudentDataResponse != absentStudentDataResponse) {
                     this.setState({ calledAbsentStatus: false, callApi: '' })
                     if (absentStudentDataResponse.status && absentStudentDataResponse.status == 200) {
-                        this.props.navigation.navigate('AbsentUi',{Theme:this.state.Theme})
+                        this.props.navigation.navigate('AbsentUi')
                     }
                     else {
                         this.setState({
@@ -713,7 +713,7 @@ class SelectDetailsComponent extends Component {
         this.setState({
             isLoading: false
         })
-        this.props.navigation.navigate('StudentsList',{Theme:this.state.Theme})
+        this.props.navigation.navigate('StudentsList')
     }
 
     setDate = date => {
@@ -767,17 +767,16 @@ class SelectDetailsComponent extends Component {
                 return false
             }
         }))
-         console.log('data++++++', data)
+        //  console.log('data++++++', data)
          this.setState({filterdataid:data})
     }
     render() {
-        console.log(this.state.Theme)
+        // console.log(this.state.Theme)
         const {navigation, isLoading, defaultSelected, classList, classListIndex, selectedClass, sectionList, sectionListIndex, selectedSection, pickerDate, selectedDate, subArr, selectedSubject, subIndex, errClass, errSub, errDate, errSection, sectionValid, dateVisible, examTestID } = this.state
         const { loginData, scanTypeData } = this.props
-        const Theme = this.props.navigation.getParam('Theme');
-        console.log('theme',Theme)
-        const Logindataid = loginData.data.school.schoolId
-    
+        // const Theme = this.props.navigation.getParam('Theme');
+        const themeColor1 = this.props.multiBrandingData.themeColor1
+       
         return (
 
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
@@ -875,21 +874,7 @@ class SelectDetailsComponent extends Component {
                                     />
                                 </View>
                             }
-                            {/* {
-                            (subIndex != -1 &&  sectionValid)
-                             &&
-                                    <TextField
-                                        customContainerStyle={{ marginHorizontal: 0, paddingBottom: '10%', paddingVertical: '0%', }}
-                                        labelText={Strings.test_id}
-                                        errorField={errDate != ''}
-                                        errorText={errDate}
-                                        value={examTestID[subIndex]}
-                                        editable={false}
-                                        placeholder={Strings.please_select_date}
-                                    />
-                                } */}
-                                {/* {buttontheme()} */}
-                              
+                    
                         </View>
                        
                     </View>
@@ -897,7 +882,7 @@ class SelectDetailsComponent extends Component {
                 </ScrollView>
                 <View style={styles.btnContainer}>
                 <ButtonComponent
-                            customBtnStyle={[styles.nxtBtnStyle,{backgroundColor:Theme ? Theme : AppTheme.BLUE}]}
+                            customBtnStyle={[styles.nxtBtnStyle,{backgroundColor:themeColor1 ? themeColor1 : AppTheme.BLUE}]}
                             btnText={Strings.submit_text}
                             onPress={this.onSubmitClick}
                         />
@@ -968,7 +953,8 @@ const mapStateToProps = (state) => {
         apiStatus: state.apiStatus,
         roiData: state.roiData,
         absentStudentDataResponse: state.absentStudentDataResponse,
-        getScanStatusData: state.getScanStatusData
+        getScanStatusData: state.getScanStatusData,
+        multiBrandingData: state.multiBrandingData.response.data
     }
 }
 

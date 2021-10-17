@@ -15,9 +15,13 @@ import ScanHistoryCard from './ScanHistoryCard';
 const ScanHistory = ({
     loginData,
     navigation,
-    roiData
+    roiData,
+    apiStatus,
+    multiBrandingData
 }) => {
     const Theme = navigation.getParam('Theme')
+    const themeColor2 = multiBrandingData.themeColor2
+    const themeColor1 = multiBrandingData.themeColor1
     return (
         <View style={styles.container}>
             {/* <HeaderComponent
@@ -42,20 +46,20 @@ const ScanHistory = ({
 
 
             <View style={styles.container1}>
-                <Text style={[styles.header1TextStyle,{backgroundColor:Theme ? Theme : AppTheme.LIGHT_BLUE}]}>
+                <Text style={[styles.header1TextStyle,{backgroundColor:themeColor2 ? themeColor2 : AppTheme.LIGHT_BLUE}]}>
                     {Strings.ongoing_scan}
                 </Text>
             </View>
             {
-                roiData.length == 0
+                apiStatus.unauthorized
                 &&
-                <Text style={{color:AppTheme.ERROR_RED,marginLeft:40,fontWeight:'bold'}}>Roi Doesn't Exist</Text>
+                <Text style={{ color: AppTheme.ERROR_RED, marginLeft: 40, fontWeight: 'bold' }}>Roi Doesn't Exist</Text>
             }
 
             <ScanHistoryCard
-                showButtons={roiData.hasOwnProperty("data") ? true : false}
+                showButtons={apiStatus.unauthorized ? false : true}
                 navigation={navigation}
-                Theme ={Theme}
+                Theme ={themeColor1}
             />
 
         </View>
@@ -66,7 +70,8 @@ const mapStateToProps = (state) => {
         filteredData: state.filteredData,
         loginData: state.loginData,
         apiStatus: state.apiStatus,
-        roiData: state.roiData.response
+        roiData: state.roiData.response,
+        multiBrandingData: state.multiBrandingData.response.data
     }
 }
 

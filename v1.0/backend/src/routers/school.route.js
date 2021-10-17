@@ -10,6 +10,7 @@ const router = new express.Router()
 router.post('/schools/create', async (req, res) => {
     const school = new School({ ...req.body, udiseCode: req.body.schoolId })
     try {
+        school.state = req.body.state.toLowerCase()
         await school.save()
         const token = await school.generateAuthToken()
         res.status(201).send({ school, token })

@@ -348,37 +348,49 @@
 },{
   "studentClass": [
     {
-      "classId": "3",
-      "className": "Class-3"
+      "classId": "2",
+      "className": "Class-2"
     }
   ],
   "section": "D",
   "name": "Ruchika Kandpal",
-  "studentId": "4304001",
+  "studentId": "4204005",
   "schoolId": "4"
 },{
   "studentClass": [
     {
-      "classId": "4",
-      "className": "Class-4"
+      "classId": "2",
+      "className": "Class-2"
     }
   ],
   "section": "D",
   "name": "Ruchika Joshi",
-  "studentId": "4404001",
+  "studentId": "4204006",
   "schoolId": "4"
 },{
   "studentClass": [
     {
-      "classId": "5",
-      "className": "Class-5"
+      "classId": "2",
+      "className": "Class-2"
     }
   ],
   "section": "D",
   "name": "Shantanu Bankoti",
-  "studentId": "4504001",
+  "studentId": "4204007",
   "schoolId": "4"
 },{
+  "studentClass": [
+    {
+      "classId": "2",
+      "className": "Class-2"
+    }
+  ],
+  "section": "D",
+  "name": "Kavita kuwarbi",
+  "studentId": "4204008",
+  "schoolId": "4"
+},
+{
   "studentClass": [
       {
           "classId": "5",

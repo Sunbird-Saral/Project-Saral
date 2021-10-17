@@ -87,6 +87,7 @@ class LoginComponent extends Component {
                 "schoolId": schoolId,
                 "password": password
             }
+            console.log('hcccccccchchhchchch',loginCredObj)
             let apiObj = new LoginAction(loginCredObj);
             this.props.APITransport(apiObj);
         })
@@ -123,7 +124,7 @@ class LoginComponent extends Component {
 
     componentDidUpdate(prevProps) {
         if (prevProps != this.props) {
-            this.dataShow()
+            // this.dataShow()
             const { apiStatus, loginData, navigation } = this.props
             const { schoolId, password, calledLogin } = this.state
             if (apiStatus && prevProps.apiStatus != apiStatus && apiStatus.error) {
@@ -194,21 +195,21 @@ class LoginComponent extends Component {
     onLoginDetailsChange = (text, type) => {
         this.setState({ [type]: text })
     }
-    dataShow = (text) => {
-        var data = JsonData.multiTenantConfig.filter((item => {
-            if (item.schoolId == text) {
-                return true
-            }else{
-                return false
-            }
-        }))
-        // console.log('data',data)
-         this.setState({filterdata:data})
-    }
+    // dataShow = (text) => {
+    //     var data = JsonData.multiTenantConfig.filter((item => {
+    //         if (item.schoolId == text) {
+    //             return true
+    //         }else{
+    //             return false
+    //         }
+    //     }))
+    //     // console.log('data',data)
+    //      this.setState({filterdata:data})
+    // }
 
     render() {
         const { password, isLoading, errUsername, errPassword, errCommon } = this.state;
-       
+    //    console.log('filterdataaaa',this.state.filterdata)
         return (
             <View style={styles.container}>
                 <ScrollView
@@ -248,7 +249,7 @@ class LoginComponent extends Component {
                                     ref="schoolId"
                                     style={styles.inputStyle}
                                     onChangeText={(text) => {
-                                        this.dataShow(text)
+                                        // this.dataShow(text)
                                         this.onLoginDetailsChange(text, 'schoolId') }}
                                     value={this.state.schoolId}
                                     placeholder={Strings.schoolId_text}

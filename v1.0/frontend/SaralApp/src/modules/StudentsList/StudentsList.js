@@ -35,6 +35,7 @@ import Spinner from '../common/components/loadingIndicator';
 import { cryptoText, validateToken } from '../../utils/CommonUtils';
 import { SaveAbsentDataAction } from '../../flux/actions/apis/saveAbsentDataAction';
 import { LoginAction } from '../../flux/actions/apis/LoginAction';
+import { MultiBrandingAction } from '../../flux/actions/apis/multiBranding';
 
 const StudentsList = ({
     filteredData,
@@ -42,6 +43,7 @@ const StudentsList = ({
     navigation,
     scanTypeData,
     saveAbsentStudent,
+    multiBrandingData,
     absentStudentDataResponse,
     roiData,
     apiStatus
@@ -65,6 +67,7 @@ const StudentsList = ({
     const prevloginResponse = usePrevious(loginData);
     const prevSaveRes = usePrevious(saveAbsentStudent)
     const Theme = navigation.getParam('Theme')
+    const themeColor1 = multiBrandingData.themeColor1
 
     useEffect(() => {
         studentData()
@@ -160,41 +163,11 @@ const StudentsList = ({
             }
         })
         setTotalStudent(filterStudentsData[0].data ? filterStudentsData[0].data.students : []);
-        // let examId = ''
-
-        // _.forEach(filterStudentsData[0].data.examInfo, (o) => {
-        //     if (o.examCode == filteredData.examCode) {
-        //         examId = o.examId
-        //     }
-        // })
-
-        // let examCode = filteredData.examCode
-
-        // setExamDatabj({
-        //     examCode,
-        //     examId: examId
-        // })
-
-        // let studentsList = JSON.parse(JSON.stringify(filterStudentsData[0].data.students))
-        // console.log("studentsList", studentsList);
-        // let absentStudentlist = absentStudentDataResponse && absentStudentDataResponse.data.length > 0 ? JSON.parse(absentStudentDataResponse.data[0])[0].AbsentStudents : [];
-        // console.log("absentStudentlist", absentStudentlist);
-        // studentsList.forEach((element) => {
-        //     element.isAbsent = false
-        //     absentStudentlist.forEach(o => {
-        //         if (o.AadhaarUID == element.aadhaarUID) {
-        //             element.isAbsent = true;
-        //         }
-        //     })
-        // });
-
-        // setFetchedAbsentList(absentStudentlist)
         setAllStudentData(filterStudentsData[0].data.students)
         setIsLoading(false)
         callScanStatusData()
         getRoi()
-        // console.log("setFetchedAbsentList", absentStudentlist);
-        // console.log("setFetchedAbsentList", studentsList);
+    
     }
 
     const onMarkPresentAbsent = (data) => {
@@ -245,11 +218,12 @@ const StudentsList = ({
 
 
     const renderStudentData = ({ item }) => {
-        // const Theme = navigation.getParam('Theme')
+        const themeColor1 = multiBrandingData.themeColor1
+        console.log('themeColor1',themeColor1)
         return (
             <StudentsDataComponent
             
-                Theme ={Theme}
+                themeColor1 ={themeColor1}
                 item={item}
                 onBtnClick={onMarkPresentAbsent}
             />
@@ -272,21 +246,7 @@ const StudentsList = ({
     }
 
     const navigateToNext = () => {
-        // if (absentStudentsData.length > 0) {
-        //     let isTokenValid = validateToken(token)
-        //     if (isTokenValid) {
-        //         let absentList = _.filter(allStudentData, (o) => o.isAbsent);
-        //         saveAbsentDetails(token);
-        //         setAbsentStudentDataIntoAsync(absentList);
-        //     }
-        //     else if (!isTokenValid) {
-        //         loginAgain()
-        //     }
-        // } else {
-        //     let absentList = _.filter(allStudentData, (o) => o.isAbsent);
-        //     setAbsentStudentDataIntoAsync(absentList);
         navigation.navigate('ScanHistory',{Theme:Theme});
-        // }
     }
 
     const loginAgain = async () => {
@@ -327,6 +287,7 @@ const StudentsList = ({
         dispatch(APITransport(apiObj))
     }
   console.log('Themem',Theme)
+
     return (
         <ScrollView>
         <View style={{ flex: 1, backgroundColor: 'white' }}>
@@ -366,11 +327,11 @@ const StudentsList = ({
                     {apkVersion}
                 </Text>
             </Text>
-            <View style={{backgroundColor:Theme}}>
+            <View style={{backgroundColor:themeColor1}}>
             <FlatList
                 data={allStudentData}
                 renderItem={renderStudentData}
-                background ={Theme}
+                background ={themeColor1}
                 ListEmptyComponent={renderEmptyList}
                 keyExtractor={(item) => item.studentId.toString()}
                 contentContainerStyle={styles.flatlistCon}
@@ -378,7 +339,7 @@ const StudentsList = ({
             /></View>
 
             <ButtonComponent
-                customBtnStyle={[styles.nxtBtnStyle,{backgroundColor:Theme ? Theme: AppTheme.BLUE}]}
+                customBtnStyle={[styles.nxtBtnStyle,{backgroundColor:themeColor1 ? themeColor1: AppTheme.BLUE}]}
                 btnText={Strings.next_text.toUpperCase()}
                 activeOpacity={0.8}
                 // onPress={() => navigateToNext(loginData.data.jwtToken)}
@@ -407,6 +368,7 @@ const mapStateToProps = (state) => {
         saveAbsentStudent: state.saveAbsentStudent,
         absentStudentDataResponse: state.absentStudentDataResponse,
         apiStatus: state.apiStatus,
+        multiBrandingData: state.multiBrandingData.response.data
     }
 }
 

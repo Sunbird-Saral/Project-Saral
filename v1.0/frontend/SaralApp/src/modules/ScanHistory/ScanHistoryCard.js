@@ -18,11 +18,11 @@ const ScanHistoryCard = ({
 
 
     const onPressContinue = () => {
-        navigation.navigate('myScan',{Theme:Theme})
+        navigation.navigate('myScan')
     }
 
     const onPressStatus = () => {
-        navigation.navigate('ScanStatus',{Theme:Theme})
+        navigation.navigate('ScanStatus')
     }
 
     

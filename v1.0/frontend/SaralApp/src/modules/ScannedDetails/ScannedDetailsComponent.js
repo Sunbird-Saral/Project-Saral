@@ -22,9 +22,7 @@ import { getLoginCred, getScanData, getStudentsExamData, setScanData } from '../
 import { NavigationActions, StackActions } from 'react-navigation';
 import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
 import Spinner from '../common/components/loadingIndicator';
-
 import APITransport from '../../flux/actions/transport/apitransport';
-
 import { bindActionCreators } from 'redux';
 import axios from 'axios';
 import { scanStatusDataAction } from '../ScanStatus/scanStatusDataAction';
@@ -36,7 +34,8 @@ const ScannedDetailsComponent = ({
     navigation,
     filteredData,
     scanTypeData,
-    ocrLocalResponse
+    ocrLocalResponse,
+    multiBrandingData
 }) => {
 
 
@@ -65,12 +64,15 @@ const ScannedDetailsComponent = ({
     const [valid, setValid] = useState(false);
 
     const [nextBtn, setNextBtn] = useState('SUBMIT')
+    const [checkStdRollDuplicate, setCheckStdRollDuplicate] = useState([])
+    const [isDuplicate, setIsDuplicate] = useState(false)
 
     const inputRef = React.createRef();
     const dispatch = useDispatch()
-
-
+    // const Theme= this.props.navigation.navigate.getParam('Theme')
+//   console.log(Theme)
     //function
+    const themeColor1 = multiBrandingData.themeColor1
 
 
     useEffect(() => {
@@ -91,7 +93,6 @@ const ScannedDetailsComponent = ({
             }
         })
         if (a.length > 0) {
-
             setStudentValid(true)
             setStdErr('')
             setStudentDATA(a)
@@ -102,6 +103,7 @@ const ScannedDetailsComponent = ({
         }
 
     }
+
 
 
 
@@ -236,7 +238,21 @@ const ScannedDetailsComponent = ({
             }
 
         }
-        if (omrMark) {
+
+        let duplication = false
+
+        const duplicate = checkStdRollDuplicate.some((item) => studentId == item)
+        if (duplicate) {
+            duplication = true
+        } else {
+            setCheckStdRollDuplicate([...checkStdRollDuplicate, studentId])
+            duplication = false
+        }
+
+        if (duplication) {
+            Alert.alert("Student ID Shouldn't be duplicated")
+        }
+        else if (omrMark) {
             showErrorMessage(Strings.omr_mark_should_be)
         }
         else if (disable) {
@@ -331,7 +347,7 @@ const ScannedDetailsComponent = ({
             "subject": filteredData.subject,
             "studentsMarkInfo": stdMarkInfo
         }
-
+        console.log("saveObjec", saveObj);
         setIsLoading(true)
         let apiObj = new SaveScanData(saveObj, loginData.data.token);
         dispatch(APITransport(apiObj))
@@ -344,8 +360,16 @@ const ScannedDetailsComponent = ({
         }])
     }
 
+
     const goBackFrame = () => {
         if (currentIndex - 1 >= 0) {
+            let std = structureList[currentIndex - 1].RollNo
+            const index = checkStdRollDuplicate.indexOf(std);
+            if (index > -1) {
+                checkStdRollDuplicate.splice(index, 1);
+            }
+            setCheckStdRollDuplicate(checkStdRollDuplicate)
+
             setNewArrayValue(structureList[currentIndex - 1].data)
             setStudentID(structureList[currentIndex - 1].RollNo)
             setCurrentIndex(currentIndex - 1)
@@ -463,8 +487,8 @@ const ScannedDetailsComponent = ({
                         onPress={() => isMultipleStudent ? goBackFrame() : onBackButtonClick()}
                     />
                     <ButtonComponent
-                        customBtnStyle={styles.nxtBtnStyle}
-                        customBtnTextStyle={styles.nxtBtnTextStyle}
+                        customBtnStyle={[styles.nxtBtnStyle,{borderColor:themeColor1 ? themeColor1 : AppTheme.BLUE}]}
+                        customBtnTextStyle={{color:themeColor1 ? themeColor1 : AppTheme.BLUE}}
                         btnText={nextBtn.toUpperCase()}
                         onPress={() => isMultipleStudent ? goNextFrame() : onSubmitClick()}
                     />
@@ -756,7 +780,8 @@ const mapStateToProps = (state) => {
         loginData: state.loginData,
         filteredData: state.filteredData.response,
         scanTypeData: state.scanTypeData.response,
-        roiData: state.roiData
+        roiData: state.roiData,
+        multiBrandingData: state.multiBrandingData.response.data
     }
 }
 
