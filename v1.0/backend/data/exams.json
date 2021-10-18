@@ -321,8 +321,8 @@
   "examId": 2,
   "schoolId": "1"
 },{
-  "subject": "Maths",
-  "examLO": "Maths",
+  "subject": "Multi-Subject",
+  "examLO": "Multi-Subject",
   "classId": "3",
   "examDate": "25/09/2021",
   "totalMarks": 20,
@@ -482,8 +482,8 @@
   "examId": 3,
   "schoolId": "1"
 },{
-  "subject": "Maths",
-  "examLO": "Maths",
+  "subject": "Multi-Subject",
+  "examLO": "Multi-Subject",
   "classId": "4",
   "examDate": "26/09/2021",
   "totalMarks": 20,
@@ -643,8 +643,8 @@
   "examId": 4,
   "schoolId": "1"
 },{
-  "subject": "Maths",
-  "examLO": "Maths",
+  "subject": "Multi-Subject",
+  "examLO": "Multi-Subject",
   "classId": "5",
   "examDate": "27/09/2021",
   "totalMarks": 20,
@@ -804,8 +804,8 @@
   "examId": 5,
   "schoolId": "1"
 },{
-  "subject": "Hindi",
-  "examLO": "Hindi",
+  "subject": "Multi-Subject",
+  "examLO": "Multi-Subject",
   "classId": "4",
   "examDate": "28/09/2021",
   "totalMarks": 20,
@@ -1448,8 +1448,8 @@
   "examId": 9,
   "schoolId": "1"
 },{
-  "subject": "Hindi",
-  "examLO": "Hindi",
+  "subject": "Multi-Subject",
+  "examLO": "Multi-Subject",
   "classId": "8",
   "examDate": "29/09/2021",
   "totalMarks": 20,
