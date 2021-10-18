@@ -1,0 +1,125 @@
+swagger: "2.0"
+info:
+  description: "Saral APIs"
+  version: "1.0.0"
+  title: "Saral APIs"
+host: "store.swagger.io"
+basePath: "/v1.5"
+tags:
+- name: "Organisations"
+- name: "Users"
+- name: "Participants"
+- name: "Events"
+- name: "Layouts"
+
+securityDefinitions:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header
+
+    basicAuth:
+      type: basic
+schemes:
+  - "https"
+  - "http"
+
+paths:
+  /organisation:
+    get:
+      tags:
+      - "Organisations"
+      summary: "Get Organisations"
+      description: "should return list of Organisations"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Organisations"
+        "400":
+          description: "unsuccessful operation"
+
+definitions:
+  Organisation:
+    type: "object"
+    properties:
+      name:
+        type: string
+        description: Organisation Name
+        example: Apollo Pharmacy
+      type:
+        type: string
+        description: Organization Type
+        example: Pharmacy
+      users:
+        type: array
+        items:
+          $ref: '#/definitions/User'
+          minItems: 1
+
+  User:
+    type: "object"
+    properties:
+      firstName:
+        type: string
+        description: First Name of User
+        example: Praveen
+      lastName:
+        type: string
+        description: Last Name of User
+        example: Chand
+      password:
+        type: string
+        description: User Password in encrypted format
+        example: $2a$08$uYCG9.pkye9AwGt0oMfPlev.5E45LWJ/bBYmI0tTL1MGOFs73.WJS
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+
+  Event:
+    type: "object"
+    properties:
+      name:
+        type: string
+        description: Event Name
+        example : Staff Attendance
+      date:
+        type: string
+        format: date-time
+      participants:
+        type: array
+        items:
+          $ref: '#/definitions/Participant'
+
+  Participant:
+      type: "object"
+    properties:
+      type:
+        type: string
+        description: Participant Type
+        example: EmployeeID
+      participantId:
+        type: string
+        description: Participant ID
+        example: 1020112
+      firstName:
+        type: string
+        description: First Name of Participant
+        example: Praveen
+      lastName:
+        type: string
+        description: Last Name of Participant
+        example: Chand
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+  
+  Layout:
