@@ -85,7 +85,6 @@ export default function dispatchAPI(api) {
             }
         }
         else if (api.method === "PUT") {
-            console.log("put");
             return dispatch => {
                 dispatch(apiStatusAsync(true, false, ''))
                 let apiResponse = null

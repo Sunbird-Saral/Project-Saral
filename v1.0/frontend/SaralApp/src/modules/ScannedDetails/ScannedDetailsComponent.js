@@ -18,7 +18,7 @@ import ButtonWithIcon from '../common/components/ButtonWithIcon';
 import ButtonComponent from '../common/components/ButtonComponent';
 import DropDownMenu from '../common/components/DropDownComponent';
 import TextField from '../common/components/TextField';
-import { getLoginCred, getScanData, getScannedDataFromLocal, getStudentsExamData, setScanData, setScannedDataIntoLocal } from '../../utils/StorageUtils';
+import { getLoginCred, getPresentAbsentStudent, getScanData, getScannedDataFromLocal, getStudentsExamData, setScanData, setScannedDataIntoLocal } from '../../utils/StorageUtils';
 import { NavigationActions, StackActions } from 'react-navigation';
 import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
 import Spinner from '../common/components/loadingIndicator';
@@ -27,7 +27,6 @@ import APITransport from '../../flux/actions/transport/apitransport';
 
 import { bindActionCreators } from 'redux';
 import axios from 'axios';
-import { scanStatusDataAction } from '../ScanStatus/scanStatusDataAction';
 import { OcrLocalResponseAction } from '../../flux/actions/apis/OcrLocalResponseAction';
 
 
@@ -36,7 +35,8 @@ const ScannedDetailsComponent = ({
     navigation,
     filteredData,
     scanTypeData,
-    ocrLocalResponse
+    ocrLocalResponse,
+    scanedData
 }) => {
 
 
@@ -92,11 +92,33 @@ const ScannedDetailsComponent = ({
                 return true
             }
         })
-        if (a.length > 0) {
+
+        let absentPresentStudent = await getPresentAbsentStudent()
+        console.log("absentPresentStudent", absentPresentStudent);
+
+        let datas = absentPresentStudent.length > 0 ? absentPresentStudent : []
+
+        let absent = datas.filter((item) => item.studentId == studentId & item.studentAvailability == false)
+
+
+        let scan = scanedData.data.length > 0 ? scanedData.data : []
+
+        let isAbsent = scan.filter((o) => {
+            if (o.studentAvailability == false && studentId == o.studentId) {
+                return true
+            }
+        })
+
+        if (absent.length > 0) {
+            setStdErr("Student is Absent")
+            setStudentValid(false)
+        }
+        else if (a.length > 0) {
             setStudentValid(true)
             setStdErr('')
             setStudentDATA(a)
-        } else {
+        }
+        else {
             setStdErr(Strings.please_correct_student_id)
             setStudentDATA([])
             setStudentValid(false)
@@ -306,7 +328,8 @@ const ScannedDetailsComponent = ({
                 "section": filteredData.section,
                 "marksInfo": '',
                 "securedMarks": stdTotalMarks,
-                "totalMarks": 0
+                "totalMarks": 0,
+                "studentAvailability": true
             }
 
             stdData.studentId = el.RollNo
@@ -346,7 +369,6 @@ const ScannedDetailsComponent = ({
         let getDataFromLocal = await getScannedDataFromLocal();
         let len = 0
         if (getDataFromLocal != null) {
-            console.log("getDataFromLocal", getDataFromLocal);
             getDataFromLocal.forEach((element, index) => {
                 len = len + element.studentsMarkInfo.length
             });
@@ -355,7 +377,6 @@ const ScannedDetailsComponent = ({
                 if (getDataFromLocal) {
                     let data = getDataFromLocal
                     getDataFromLocal.push(saveObj)
-                    console.log("getDataFromLocal", getDataFromLocal);
                     setScannedDataIntoLocal(getDataFromLocal)
                     goToMyScanScreen()
                 }
@@ -363,7 +384,6 @@ const ScannedDetailsComponent = ({
                 Alert.alert("You can Save Only 10 Student. In Order to Continue have to save first")
             }
         } else if (saveObj.studentsMarkInfo.length <= 10) {
-            console.log("saveObjects", saveObj);
             setScannedDataIntoLocal([saveObj])
             goToMyScanScreen()
         } else {
@@ -427,7 +447,7 @@ const ScannedDetailsComponent = ({
                                 editable={edit}
                                 keyboardType={'numeric'}
                             />
-                             <Text style={styles.nameTextStyle}>{Strings.Exam} : {filteredData.subject} {filteredData.examDate} ({filteredData.examTestID})</Text>
+                            <Text style={styles.nameTextStyle}>{Strings.Exam} : {filteredData.subject} {filteredData.examDate} ({filteredData.examTestID})</Text>
                             {/* <Text style={styles.nameTextStyle}>{Strings.test_id + ': ' + filteredData.examTestID}</Text> */}
                             <Text style={styles.nameTextStyle}>{Strings.page_no + ': ' + (currentIndex + 1)}</Text>
                         </View>
@@ -677,7 +697,8 @@ const ScannedDetailsComponent = ({
                     "studentId": studentId,
                     "securedMarks": sumOfObtainedMarks > 0 ? sumOfObtainedMarks : 0,
                     "totalMarks": maxMarksTotal > 0 ? maxMarksTotal : 0,
-                    "marksInfo": Studentmarks
+                    "marksInfo": Studentmarks,
+                    "studentAvailability": true
                 }
             ]
         }
@@ -728,7 +749,8 @@ const mapStateToProps = (state) => {
         loginData: state.loginData,
         filteredData: state.filteredData.response,
         scanTypeData: state.scanTypeData.response,
-        roiData: state.roiData
+        roiData: state.roiData,
+        scanedData: state.scanedData.response
     }
 }
 
