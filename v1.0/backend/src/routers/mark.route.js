@@ -15,7 +15,6 @@ const fromTime = "T00:00:00"
 const toTime = "T23:59:59"
 router.put('/saveMarks', auth, async (req, res) => {
     const marks = []
-    // const examId = req.body.examId
     const subject = req.body.subject
     const examDate = req.body.examDate
     const schoolId = req.school.schoolId
@@ -35,13 +34,62 @@ router.put('/saveMarks', auth, async (req, res) => {
     });
 
     try {
+        let studentIds = marks.map(id => id.studentId)
+        let marksExist = await Mark.StudentsMark(studentIds)
+     
+        if(!marksExist.length){
         await Mark.insertMany(marks)
-        res.status(200).send({ message: 'Data Saved Successfully' })
+        }else{
+        for(let data of marks){
+            for(let mark of marksExist){
+                if(data.studentId === mark.studentId){
+                    let lookup = {
+                        studentId: data.studentId
+                    }
+                    let update = { $set: {studentAvailability: data.studentAvailability, marksInfo: data.marksInfo
+                    }}
+                    await Mark.update(lookup ,update)
+                }
+            }
+        }
+        }
+        res.status(200).send({message: 'Data Saved Successfully' })
     } catch (e) {
         console.log(e);
         res.status(400).send({ e })
     }
 })
+
+
+// router.put('/saveMarks', auth, async (req, res) => {
+//     const marks = []
+//     // const examId = req.body.examId
+//     const subject = req.body.subject
+//     const examDate = req.body.examDate
+//     const schoolId = req.school.schoolId
+//     const classId = req.body.classId
+//     const createdOn = new Date().getTime()
+
+//     req.body.studentsMarkInfo.forEach(studentsData => {
+//         const marksData = new Mark({
+//             ...studentsData,
+//             schoolId,
+//             examDate,
+//             subject,
+//             classId,
+//             createdOn
+//         })
+//         marks.push(marksData)
+//     });
+
+//     try {
+//         await Mark.insertMany(marks)
+//         res.status(200).send({ message: 'Data Saved Successfully' })
+//     } catch (e) {
+//         console.log(e);
+//         res.status(400).send({ e })
+//     }
+// })
 
 const fetchSavedData = async (req) => {
     const { schoolId, classId, section, subject, fromDate, toDate } = req.body
