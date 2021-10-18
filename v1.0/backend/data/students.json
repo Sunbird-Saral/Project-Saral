@@ -133,8 +133,8 @@
 {
   "studentClass": [
     {
-      "classId": "2",
-      "className": "Class-2"
+      "classId": "4",
+      "className": "Class-4"
     }
   ],
   "section": "D",
@@ -155,8 +155,8 @@
 },{
   "studentClass": [
     {
-      "classId": "5",
-      "className": "Class-5"
+      "classId": "4",
+      "className": "Class-4"
     }
   ],
   "section": "D",
@@ -166,8 +166,8 @@
 },{
   "studentClass": [
     {
-      "classId": "2",
-      "className": "Class-2"
+      "classId": "8",
+      "className": "Class-8"
     }
   ],
   "section": "D",
@@ -177,8 +177,8 @@
 },{
   "studentClass": [
     {
-      "classId": "2",
-      "className": "Class-2"
+      "classId": "8",
+      "className": "Class-8"
     }
   ],
   "section": "D",
