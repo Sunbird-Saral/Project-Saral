@@ -18,7 +18,7 @@ import ButtonWithIcon from '../common/components/ButtonWithIcon';
 import ButtonComponent from '../common/components/ButtonComponent';
 import DropDownMenu from '../common/components/DropDownComponent';
 import TextField from '../common/components/TextField';
-import { getLoginCred, getScanData, getStudentsExamData, setScanData } from '../../utils/StorageUtils';
+import { getLoginCred, getScanData, getScannedDataFromLocal, getStudentsExamData, setScanData, setScannedDataIntoLocal } from '../../utils/StorageUtils';
 import { NavigationActions, StackActions } from 'react-navigation';
 import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
 import Spinner from '../common/components/loadingIndicator';
@@ -102,16 +102,6 @@ const ScannedDetailsComponent = ({
             setStudentValid(false)
         }
 
-    }
-
-
-
-
-
-    const onNextClick = () => {
-        if (!studentValid) {
-            setStdErr(Strings.please_correct_student_id)
-        }
     }
 
     useEffect(() => {
@@ -305,7 +295,7 @@ const ScannedDetailsComponent = ({
         }
     }
 
-    const saveMultiData = () => {
+    const saveMultiData = async () => {
 
         let stdMarkInfo = []
 
@@ -347,17 +337,38 @@ const ScannedDetailsComponent = ({
             "subject": filteredData.subject,
             "studentsMarkInfo": stdMarkInfo
         }
-        console.log("saveObjec", saveObj);
-        setIsLoading(true)
-        let apiObj = new SaveScanData(saveObj, loginData.data.token);
-        dispatch(APITransport(apiObj))
-        setIsLoading(false)
 
-        Alert.alert(Strings.message_text, Strings.saved_successfully, [{
-            text: Strings.ok_text, onPress: () => {
-                callScanStatusData()
+        saveAndFetchFromLocalStorag(saveObj)
+    }
+
+
+    const saveAndFetchFromLocalStorag = async (saveObj) => {
+        let getDataFromLocal = await getScannedDataFromLocal();
+        let len = 0
+        if (getDataFromLocal != null) {
+            console.log("getDataFromLocal", getDataFromLocal);
+            getDataFromLocal.forEach((element, index) => {
+                len = len + element.studentsMarkInfo.length
+            });
+            let totalLenOfStudentsMarkInfo = len + saveObj.studentsMarkInfo.length;
+            if (totalLenOfStudentsMarkInfo <= 10) {
+                if (getDataFromLocal) {
+                    let data = getDataFromLocal
+                    getDataFromLocal.push(saveObj)
+                    console.log("getDataFromLocal", getDataFromLocal);
+                    setScannedDataIntoLocal(getDataFromLocal)
+                    goToMyScanScreen()
+                }
+            } else {
+                Alert.alert("You can Save Only 10 Student. In Order to Continue have to save first")
             }
-        }])
+        } else if (saveObj.studentsMarkInfo.length <= 10) {
+            console.log("saveObjects", saveObj);
+            setScannedDataIntoLocal([saveObj])
+            goToMyScanScreen()
+        } else {
+            Alert.alert("You can Save Only 10 Student. In Order to Continue have to save first")
+        }
     }
 
 
@@ -670,70 +681,7 @@ const ScannedDetailsComponent = ({
                 }
             ]
         }
-
-        setIsLoading(true)
-        let apiObj = new SaveScanData(saveObj, loginData.data.token);
-        dispatch(APITransport(apiObj))
-        setIsLoading(false)
-
-        Alert.alert(Strings.message_text, Strings.saved_successfully, [{
-            text: Strings.ok_text, onPress: () => {
-                callScanStatusData()
-            }
-        }])
-    }
-
-    const callScanStatusData = async () => {
-        setIsLoading(true)
-        let loginCred = await getLoginCred()
-
-        let dataPayload = {
-            "classId": filteredData.class,
-            "subject": filteredData.subject,
-            "fromDate": filteredData.examDate,
-            "page": 0,
-            "schoolId": loginCred.schoolId,
-            "downloadRes": true
-        }
-        let apiObj = new scanStatusDataAction(dataPayload);
-        FetchSavedScannedData(apiObj, loginCred.schoolId, loginCred.password)
-    }
-
-    const FetchSavedScannedData = (api, uname, pass) => {
-        if (api.method === 'POST') {
-            let apiResponse = null
-            const source = axios.CancelToken.source()
-            const id = setTimeout(() => {
-                if (apiResponse === null) {
-                    source.cancel('The request timed out.');
-                }
-            }, 60000);
-            axios.post(api.apiEndPoint(), api.getBody(), {
-                auth: {
-                    username: uname,
-                    password: pass
-                }
-            })
-                .then(function (res) {
-                    setIsLoading(false)
-                    goToMyScanScreen()
-                    apiResponse = res
-                    clearTimeout(id)
-                    api.processResponse(res)
-                    dispatch(dispatchAPIAsync(api));
-                })
-                .catch(function (err) {
-                    setIsLoading(false)
-                    clearTimeout(id)
-                });
-        }
-    }
-
-    function dispatchAPIAsync(api) {
-        return {
-            type: api.type,
-            payload: api.getPayload()
-        }
+        saveAndFetchFromLocalStorag(saveObj)
     }
 
     const goToMyScanScreen = () => {
