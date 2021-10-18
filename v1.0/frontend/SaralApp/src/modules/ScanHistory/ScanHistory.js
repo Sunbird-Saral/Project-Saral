@@ -46,7 +46,7 @@ const ScanHistory = ({
 
 
             <View style={styles.container1}>
-                <Text style={[styles.header1TextStyle,{backgroundColor:themeColor2 ? themeColor2 : AppTheme.LIGHT_BLUE}]}>
+                <Text style={[styles.header1TextStyle,{borderColor:themeColor2 ? themeColor2 : AppTheme.LIGHT_BLUE, backgroundColor:themeColor2 ? themeColor2 : AppTheme.LIGHT_BLUE}]}>
                     {Strings.ongoing_scan}
                 </Text>
             </View>

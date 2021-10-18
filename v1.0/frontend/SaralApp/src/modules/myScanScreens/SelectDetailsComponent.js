@@ -658,16 +658,7 @@ class SelectDetailsComponent extends Component {
                 })
                 return false
             }
-            // else if (selectedDate.length == 0) {
-            //     console.log("Subjectsss",selectedDate);
-            //     this.setState({
-            //         errClass: '',
-            //         errSection: '',
-            //         errSub: '',
-            //         errDate: Strings.please_select_date
-            //     })
-            //     return false
-            // }
+        
             return true
         }
         return true

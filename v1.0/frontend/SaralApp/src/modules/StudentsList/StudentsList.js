@@ -91,7 +91,7 @@ const StudentsList = ({
         if (prevSaveRes && saveAbsentStudent && prevSaveRes != saveAbsentStudent) {
             setIsLoading(false)
             if (saveAbsentStudent && saveAbsentStudent.data && saveAbsentStudent.status == 200) {
-                navigation.navigate('scanHistory',{Theme:Theme})
+                navigation.navigate('scanHistory')
             } else if (saveAbsentStudent && saveAbsentStudent.data && saveAbsentStudent.status != 200) {
                 Alert.alert(Strings.message_text, Strings.process_failed_try_again, [
                     { 'text': Strings.ok_text, style: Strings.cancel_text }
@@ -246,7 +246,7 @@ const StudentsList = ({
     }
 
     const navigateToNext = () => {
-        navigation.navigate('ScanHistory',{Theme:Theme});
+        navigation.navigate('ScanHistory');
     }
 
     const loginAgain = async () => {

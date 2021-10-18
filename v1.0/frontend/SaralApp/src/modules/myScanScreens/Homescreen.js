@@ -9,18 +9,16 @@ import { Assets } from '../../assets/index'
 import ButtonComponent from '../common/components/ButtonComponent';
 import { MultiBrandingAction } from '../../flux/actions/apis/multiBranding';
 import APITransport from '../../flux/actions/transport/apitransport';
-
+import Brands from '../common/components/Brands';
 
 class HomeComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
             isLoading: false,
-            logindataid: this.props.loginData.data.school.state,
-            filterdataid: [],       
+            logindataid: this.props.loginData.data.school.state,     
         }   
     }
-
     componentDidMount(){
         this.callMultiBrandingActiondata()
     }
@@ -36,26 +34,13 @@ class HomeComponent extends Component {
         return (
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
                  {this.props.multiBrandingData ?
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                    <View>
-                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                            {this.props.multiBrandingData.logoImage ? 
-                                <Image style={{ height: 100, width: 100 }} source={{ uri: 'data:image/png;base64,' + this.props.multiBrandingData.logoImage }} />:<Image style={{ height: 100, width: 100 }} source={Assets.AppLogo} /> }
-                        </View>
-                        <View>
-                          <Text style={styles.welcometext}>{this.props.multiBrandingData.Appname}</Text>
-                        </View>
-
-                        <View style={styles.btnContainer}>
-                            <ButtonComponent
-                                customBtnStyle={[styles.nxtBtnStyle, { backgroundColor: this.props.multiBrandingData.themeColor1 ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE }]}
-                                btnText={Strings.get_start}
-                                  onPress={() => this.props.navigation.navigate('selectDetails')}
-                                icon={"arrowright"}
-                            />
-                        </View>
-                    </View>
-                </View>:null}
+                 <Brands 
+                 Image = {'data:image/png;base64,' + this.props.multiBrandingData.logoImage }
+                 Appname ={this.props.multiBrandingData.Appname}
+                 themeColor={this.props.multiBrandingData.themeColor1}
+                 onPress ={()=>this.props.navigation.navigate('selectDetails')} 
+                 />
+                :null}
             </View>
         );
     }
