@@ -327,7 +327,7 @@ const StudentsList = ({
                     {apkVersion}
                 </Text>
             </Text>
-            <View style={{backgroundColor:themeColor1}}>
+            <View style={{backgroundColor:themeColor1 ?themeColor1 :AppTheme.BLUE}}>
             <FlatList
                 data={allStudentData}
                 renderItem={renderStudentData}

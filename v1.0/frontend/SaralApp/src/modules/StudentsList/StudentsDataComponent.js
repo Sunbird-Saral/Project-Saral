@@ -12,7 +12,7 @@ const StudentsDataComponent = ({
 }) => {
     console.log('theme',themeColor1)
     return (
-        <View style={[styles.cardCon, { backgroundColor:themeColor1 }]}>
+        <View style={[styles.cardCon, { backgroundColor:themeColor1?themeColor1:AppTheme.BLUE }]}>
             <View style={[styles.cardChildCon, { backgroundColor:  "#ffffffED" }]}>
 
                 <Text style={styles.aadhar}>{item.studentId}</Text>
