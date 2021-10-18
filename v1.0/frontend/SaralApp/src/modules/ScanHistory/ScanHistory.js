@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 //redux
@@ -6,10 +6,12 @@ import { connect } from 'react-redux';
 
 //constant
 import AppTheme from '../../utils/AppTheme';
+import { getScannedDataFromLocal } from '../../utils/StorageUtils';
 import Strings from '../../utils/Strings';
 
 //component
 import HeaderComponent from '../common/components/HeaderComponent';
+import Spinner from '../common/components/loadingIndicator';
 import ScanHistoryCard from './ScanHistoryCard';
 
 const ScanHistory = ({
@@ -61,7 +63,9 @@ const ScanHistory = ({
                 navigation={navigation}
                 Theme ={themeColor1}
             />
-
+            {
+                isLoading && <Spinner animating={isLoading} />
+            }
         </View>
     );
 }
