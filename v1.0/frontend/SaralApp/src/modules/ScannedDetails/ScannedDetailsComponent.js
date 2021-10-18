@@ -69,9 +69,6 @@ const ScannedDetailsComponent = ({
 
     const inputRef = React.createRef();
     const dispatch = useDispatch()
-    // const Theme= this.props.navigation.navigate.getParam('Theme')
-//   console.log(Theme)
-    //function
     const themeColor1 = multiBrandingData.themeColor1
 
 
@@ -346,7 +343,6 @@ const ScannedDetailsComponent = ({
         let getDataFromLocal = await getScannedDataFromLocal();
         let len = 0
         if (getDataFromLocal != null) {
-            console.log("getDataFromLocal", getDataFromLocal);
             getDataFromLocal.forEach((element, index) => {
                 len = len + element.studentsMarkInfo.length
             });
@@ -355,7 +351,6 @@ const ScannedDetailsComponent = ({
                 if (getDataFromLocal) {
                     let data = getDataFromLocal
                     getDataFromLocal.push(saveObj)
-                    console.log("getDataFromLocal", getDataFromLocal);
                     setScannedDataIntoLocal(getDataFromLocal)
                     goToMyScanScreen()
                 }
@@ -363,7 +358,6 @@ const ScannedDetailsComponent = ({
                 Alert.alert("You can Save Only 10 Student. In Order to Continue have to save first")
             }
         } else if (saveObj.studentsMarkInfo.length <= 10) {
-            console.log("saveObjects", saveObj);
             setScannedDataIntoLocal([saveObj])
             goToMyScanScreen()
         } else {
@@ -428,7 +422,6 @@ const ScannedDetailsComponent = ({
                                 keyboardType={'numeric'}
                             />
                              <Text style={styles.nameTextStyle}>{Strings.Exam} : {filteredData.subject} {filteredData.examDate} ({filteredData.examTestID})</Text>
-                            {/* <Text style={styles.nameTextStyle}>{Strings.test_id + ': ' + filteredData.examTestID}</Text> */}
                             <Text style={styles.nameTextStyle}>{Strings.page_no + ': ' + (currentIndex + 1)}</Text>
                         </View>
                     </View>
@@ -624,7 +617,6 @@ const ScannedDetailsComponent = ({
             if (sumOfObtainedMarks > 0) {
                 //with MAX & OBTAINED MARKS
                 if (sumOfObtainedMarks != totalMarkSecured) {
-                    console.log("SUMOFOBTAINEMARKSss", sumOfObtainedMarks);
                     setObtnMarkErr(true)
                     showErrorMessage("Sum Of All obtained marks should be equal to marksObtained")
                 }

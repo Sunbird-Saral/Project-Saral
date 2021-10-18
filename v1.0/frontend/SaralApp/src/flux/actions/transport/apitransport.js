@@ -10,7 +10,6 @@ export default function dispatchAPI(api) {
             dispatch(apiStatusAsync(true, false, ''))
             axios.post(api.apiEndPoint(), api.getFormData(), api.getHeaders())
                 .then(function (res) {
-                    console.log('Log>>>>>>',res)
                     api.processResponse(res.data)
                     dispatch(apiStatusAsync(false, false, null, res.data))
                     dispatch(dispatchAPIAsync(api));
@@ -58,7 +57,6 @@ export default function dispatchAPI(api) {
                 }, 60000);
                 axios.post(api.apiEndPoint(), api.getBody(), { headers: api.getHeaders(), cancelToken: source.token },)
                     .then(function (res) {
-                         console.log("LOG", res);
                         apiResponse = res
                         clearTimeout(id)
                         api.processResponse(res)
@@ -68,7 +66,6 @@ export default function dispatchAPI(api) {
                             dispatch(api.getNextStep())
                     })
                     .catch(function (err) {
-                         console.log("err", err);
                         clearTimeout(id)
                         if (err && err.message == 'The request timed out.') {
                             dispatch(apiStatusAsync(false, true, Strings.request_timeout_custom_message, null, err && err.response && err.response.status && err.response.status === 401 ? true : false))
@@ -86,7 +83,6 @@ export default function dispatchAPI(api) {
             }
         }
         else if (api.method === "PUT") {
-            console.log("put");
             return dispatch => {
                 dispatch(apiStatusAsync(true, false, ''))
                 let apiResponse = null
@@ -98,7 +94,6 @@ export default function dispatchAPI(api) {
                 }, 60000);
                 axios.put(api.apiEndPoint(), api.getBody(), { headers: api.getHeaders(), cancelToken: source.token },)
                     .then(function (res) {
-                        console.log("LOG", res);
                         apiResponse = res
                         clearTimeout(id)
                         api.processResponse(res)
@@ -108,7 +103,6 @@ export default function dispatchAPI(api) {
                             dispatch(api.getNextStep())
                     })
                     .catch(function (err) {
-                         console.log("err", err);
                         clearTimeout(id)
                         if (err && err.message == 'The request timed out.') {
                             dispatch(apiStatusAsync(false, true, Strings.request_timeout_custom_message, null, err && err.response && err.response.status && err.response.status === 401 ? true : false))

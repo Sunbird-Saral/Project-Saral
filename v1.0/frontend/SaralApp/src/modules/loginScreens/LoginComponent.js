@@ -10,8 +10,6 @@ import APITransport from '../../flux/actions/transport/apitransport';
 import { LoginAction } from '../../flux/actions/apis/LoginAction';
 import { setLoginData, setLoginCred, getLoginCred } from '../../utils/StorageUtils'
 import { Assets } from '../../assets/index'
-import JsonData from '../../../multi-tenant-branding.json'
-import { lowerCase } from 'lodash';
 
 class LoginComponent extends Component {
     constructor(props) {
@@ -51,12 +49,9 @@ class LoginComponent extends Component {
     }
 
     componentMountCall = async () => {
-        // let updateNeeded = await VersionCheck.needUpdate();
-        // if (updateNeeded && updateNeeded.isNeeded) {
-        //     this.onAppUpdateCheck()
-        // } else {
+    
         this.loginUser()
-        // }
+      
     }
 
     loginUser = async () => {
@@ -87,7 +82,7 @@ class LoginComponent extends Component {
                 "schoolId": schoolId,
                 "password": password
             }
-            console.log('hcccccccchchhchchch',loginCredObj)
+
             let apiObj = new LoginAction(loginCredObj);
             this.props.APITransport(apiObj);
         })
@@ -124,7 +119,7 @@ class LoginComponent extends Component {
 
     componentDidUpdate(prevProps) {
         if (prevProps != this.props) {
-            // this.dataShow()
+            
             const { apiStatus, loginData, navigation } = this.props
             const { schoolId, password, calledLogin } = this.state
             if (apiStatus && prevProps.apiStatus != apiStatus && apiStatus.error) {
@@ -195,21 +190,11 @@ class LoginComponent extends Component {
     onLoginDetailsChange = (text, type) => {
         this.setState({ [type]: text })
     }
-    // dataShow = (text) => {
-    //     var data = JsonData.multiTenantConfig.filter((item => {
-    //         if (item.schoolId == text) {
-    //             return true
-    //         }else{
-    //             return false
-    //         }
-    //     }))
-    //     // console.log('data',data)
-    //      this.setState({filterdata:data})
-    // }
+
 
     render() {
         const { password, isLoading, errUsername, errPassword, errCommon } = this.state;
-    //    console.log('filterdataaaa',this.state.filterdata)
+
         return (
             <View style={styles.container}>
                 <ScrollView
@@ -219,16 +204,6 @@ class LoginComponent extends Component {
                     keyboardShouldPersistTaps={'handled'}
                 >
                     <View style={styles.container1}>
-                        {/* {
-                            (this.state.filterdata.length > 0) ?
-                                <View>
-                                    <Image style={{ height: 100, width: 100 }} source={{ uri: 'data:image/png;base64,' + this.state.filterdata[0].logoImage }}
-                                    />
-                                    <Text style={{ textAlign: 'center' }}>{this.state.filterdata[0].label1}</Text>
-                                </View>
-                                :
-                                <Image style={{ width: 100, height: 100 }} source={Assets.AppLogo} />
-                            } */}
                               <Image style={{ width: 100, height: 100 }} source={Assets.AppLogo} />
                     </View>
 
@@ -249,7 +224,6 @@ class LoginComponent extends Component {
                                     ref="schoolId"
                                     style={styles.inputStyle}
                                     onChangeText={(text) => {
-                                        // this.dataShow(text)
                                         this.onLoginDetailsChange(text, 'schoolId') }}
                                     value={this.state.schoolId}
                                     placeholder={Strings.schoolId_text}

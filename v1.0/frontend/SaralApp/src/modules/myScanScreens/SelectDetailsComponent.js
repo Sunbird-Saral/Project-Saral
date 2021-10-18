@@ -16,7 +16,6 @@ import TextField from '../common/components/TextField';
 import ButtonComponent from '../common/components/ButtonComponent';
 import { getLoginData, setStudentsExamData, getStudentsExamData, getLoginCred, setLoginData,getScannedDataFromLocal } from '../../utils/StorageUtils'
 import { OcrLocalResponseAction } from '../../flux/actions/apis/OcrLocalResponseAction'
-import { MultiBrandingAction } from '../../flux/actions/apis/multiBranding';
 import { GetStudentsAndExamData } from '../../flux/actions/apis/getStudentsAndExamData';
 import { FilteredDataAction } from '../../flux/actions/apis/filteredDataActions';
 import APITransport from '../../flux/actions/transport/apitransport';
@@ -25,7 +24,6 @@ import { StackActions, NavigationActions } from 'react-navigation';
 import { ROIAction } from '../StudentsList/ROIAction';
 import { GetAbsentStudentData } from '../../flux/actions/apis/getAbsentStudentData';
 import { LoginAction } from '../../flux/actions/apis/LoginAction';
-import JsonData from '../../../multi-tenant-branding.json'
 
 const clearState = {
     defaultSelected: Strings.select_text,
@@ -101,31 +99,24 @@ class SelectDetailsComponent extends Component {
             calledAbsentStatus: false,
             absentStatusPayload: null,
             subjectsData:[],
-            filterdataid:[],
-        //    Theme : this.props.navigation.getParam('Theme')
-            
-          
+            filterdataid:[],     
         }
         this.onBack = this.onBack.bind(this)
-        this.dataShow()
+
     }
 
     componentDidMount() {
         const { navigation, scanTypeData } = this.props
-        this.dataShow()
         navigation.addListener('willFocus', async payload => {
             BackHandler.addEventListener('hardwareBackPress', this.onBack)
 
             this.setState(clearState)
 
             if (scanTypeData && scanTypeData.scanType) {
-                // this.dataShow()
                 this.setState({
                     scanType: scanTypeData.scanType
                 })
             }
-            // console.log("Helo");
-            // this.loginAgain()
 
             let loginDetails = await getLoginData()
             if (loginDetails) {
@@ -162,7 +153,6 @@ class SelectDetailsComponent extends Component {
         let data = await getScannedDataFromLocal();
         if (data) {
             for (const value of data) {
-                console.log("value", value);
                 let apiObj = new SaveScanData(value, loginData.data.token);
                 dispatch(APITransport(apiObj))
             }
@@ -214,16 +204,9 @@ class SelectDetailsComponent extends Component {
                         this.setState({
                             dataPayload: payload
                         }, () => {
-                            console.log("LoginDetailexpire", loginDetails);
-                            // let isTokenValid = validateToken(loginDetails.expiresOn)                                 
-                            // if(isTokenValid) {
+                       
                             this.callStudentsData(loginDetails.token)
-                            // }
-                            // else if(!isTokenValid) {
-                            //     this.setState({
-                            //         callApi: 'callStudentsData'
-                            //     }, () => this.loginAgain())
-                            // }
+                      
                         })
                     }
                 })
@@ -316,7 +299,6 @@ class SelectDetailsComponent extends Component {
         const { selectedClassId, selectedExam, selectedSection, loginDetails } = this.state
         // const { loginDetails } = this.props
         let schoolId = loginDetails.school.schoolId
-        console.log("seelceted", selectedClassId, selectedSection);
         let payload = {
             schoolId: schoolId,
             // examCode: selectedExam,
@@ -327,25 +309,15 @@ class SelectDetailsComponent extends Component {
         this.setState({
             absentStatusPayload: payload
         }, () => {
-            // let isTokenValid = validateToken(loginDetails.expiresOn)
-
-            // if (isTokenValid) {
+         
             this.callAbsentStatus(payload, loginDetails.jwtToken)
-            // }
-            // else if (!isTokenValid) {
-            //     this.setState({
-            //         callApi: 'callAbsentStatus'
-            //     })
-            //     this.loginAgain()
-            // }
+        
         })
     }
 
     loginAgain = async () => {
-        console.log("hello");
         let loginCred = await getLoginCred()
         if (loginCred) {
-            console.log("hellologincred", loginCred);
             this.setState({
                 isLoading: true,
                 username: loginCred.schoolId,
@@ -368,13 +340,11 @@ class SelectDetailsComponent extends Component {
             isLoading: true,
             calledLogin: true
         }, () => {
-            console.log("this", this.state.password, this.state.username);
             let encPass = cryptoText(this.state.password)
             let loginObj = {
                 "schoolId": this.state.username,
                 "password": this.state.password
             }
-            console.log("LoGiNOBJ", loginObj);
             let apiObj = new LoginAction(loginObj);
             this.props.APITransport(apiObj);
 
@@ -386,7 +356,6 @@ class SelectDetailsComponent extends Component {
             isLoading: true,
             calledAbsentStatus: true
         }, () => {
-            console.log("callAbsentStatus", payload);
             let apiObj = new GetAbsentStudentData(payload, token);
             this.props.APITransport(apiObj)
         })
@@ -554,7 +523,6 @@ class SelectDetailsComponent extends Component {
                         if (loginData.status && loginData.status == 200) {
                             let loginSaved = await setLoginData(loginData.data)
                             this.setLoginDataLocally(loginData.data)
-                            console.log("callApi", callApi);
                             if (loginSaved) {
                                 if (callApi == 'callScanStatus') {
                                     this.callScanStatus(scanStatusPayload, loginData.data.jwtToken)
@@ -562,7 +530,6 @@ class SelectDetailsComponent extends Component {
                                 else if (callApi == 'callStudentsData') {
                                     this.callStudentsData(loginData.data.jwtToken)
                                 } else if (callApi == 'callAbsentStatus') {
-                                    console.log("helloLogin");
 
                                     this.callAbsentStatus(absentStatusPayload, loginData.data.jwtToken)
                                 }
@@ -749,49 +716,20 @@ class SelectDetailsComponent extends Component {
             this.setState({ dateVisible: false })
         }
     }
-    dataShow = (text) => {
-        var data = JsonData.multiTenantConfig.filter((item => {
-            if (item.schoolId == text) {
-                return true
-            }else{
-                return false
-            }
-        }))
-        // console.log('data++++++', data)
-         this.setState({filterdata:data})
-    }
-    dataShow(){
-        const id =this.props.loginData.data.school.schoolId
-        conspole.log("iddddddddd",id)
-        var data = JsonData.multiTenantConfig.filter((item => {
-            if (item.schoolId == this.props.loginData.data.school.schoolId) {
-                return true
-            }else{
-                return false
-            }
-        }))
-        //  console.log('data++++++', data)
-         this.setState({filterdataid:data})
-    }
+   
     render() {
-        // console.log(this.state.Theme)
         const {navigation, isLoading, defaultSelected, classList, classListIndex, selectedClass, sectionList, sectionListIndex, selectedSection, pickerDate, selectedDate, subArr, selectedSubject, subIndex, errClass, errSub, errDate, errSection, sectionValid, dateVisible, examTestID } = this.state
         const { loginData, scanTypeData } = this.props
-        // const Theme = this.props.navigation.getParam('Theme');
         const themeColor1 = this.props.multiBrandingData.themeColor1
        
         return (
-
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
-                {/* <View style={{backgroundColor:Theme}}> */}
                 <HeaderComponent
-                    //  title={Strings.title_saralapp}
                     logoutHeaderText={Strings.logout_text}
                     titletextstyle={{color:AppTheme.WHITE}}
                     customLogoutTextStyle={{ color: AppTheme.GREY }}
                     onLogoutClick={this.onLogoutClick}
                 />
-                {/* </View> */}
                 {(loginData && loginData.data) &&
                     <View style={{ marginTop: 20 }}>
                         <Text
@@ -860,7 +798,6 @@ class SelectDetailsComponent extends Component {
                                     />
                                 </View>}
                             {
-                                // scanTypeData.scanType == SCAN_TYPES.PAT_TYPE &&
                                 sectionListIndex != -1 && sectionValid &&
                                 <View style={[styles.fieldContainerStyle, { paddingBottom: subIndex != -1 ? '10%' : '10%' }]}>
                                     <View style={{ flexDirection: 'row' }}>
@@ -917,10 +854,8 @@ const styles = {
         paddingHorizontal:10
     },
     header1TextStyle: {
-        // backgroundColor: AppTheme.WHITE_OPACITY,
         lineHeight: 40,
         borderRadius: 4,
-        // borderWidth: 1,
         borderColor: AppTheme.LIGHT_GREY,
         width: '100%',
         textAlign: 'center',
@@ -942,8 +877,6 @@ const styles = {
     },
     nxtBtnStyle: {
      
-        
-        // marginHorizontal: '15%',
     }
 }
 

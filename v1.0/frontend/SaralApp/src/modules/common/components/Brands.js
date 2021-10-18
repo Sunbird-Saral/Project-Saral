@@ -1,12 +1,9 @@
 import React, { PureComponent } from 'react'
 import { View, Text, Image, StyleSheet } from 'react-native'
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import Strings from '../../../utils/Strings';
 import AppTheme from '../../../utils/AppTheme';
 import { Assets } from '../../../assets/index'
 import ButtonComponent from './ButtonComponent';
-import APITransport from '../../../flux/actions/transport/apitransport';
 class Brands extends PureComponent {
     constructor() {
         super()
@@ -25,7 +22,7 @@ class Brands extends PureComponent {
                                 onLoad={() => this.setState({ defaultIamge: false })} />
                         </View>
                         <View>
-                            <Text style={styles.welcometext}>{this.props.Appname ? this.props.Appname : <Text>Saral Ocr App</Text>}</Text>
+                            <Text style={styles.welcometext}>{this.props.appName ? this.props.appName : <Text>Saral Ocr App</Text>}</Text>
                         </View>
 
                         <View style={styles.btnContainer}>

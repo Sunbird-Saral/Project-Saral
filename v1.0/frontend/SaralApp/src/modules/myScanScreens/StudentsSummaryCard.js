@@ -2,8 +2,6 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import AppTheme from '../../utils/AppTheme';
 import Strings from '../../utils/Strings'
-
-
 const StudentsSummaryCard = ({
     studentRollNumber,
     totalMarks,
@@ -14,14 +12,8 @@ const StudentsSummaryCard = ({
             style={styles.container}
         >
             <View style={styles.studentContainer}>
-                {/* <View style={styles.imageViewContainer}>
-                    <View style={styles.imageContainerStyle}>
-                        <Text style={{ textAlign: 'center', fontSize: AppTheme.HEADER_FONT_SIZE_LARGE }}>{studentName.charAt(0)}</Text>
-                    </View>
-                </View> */}
                 <View style={styles.deatilsViewContainer}>
                     <View style={styles.detailsSubContainerStyle}>
-                        {/* <Text style={[styles.nameTextStyle, { fontWeight: 'bold', color: AppTheme.BLACK, fontSize: AppTheme.FONT_SIZE_LARGE }]}>{studentName}</Text> */}
                         <Text style={styles.nameTextStyle}>{Strings.student_roll + ': ' + studentRollNumber}</Text>
                     </View>
                 </View>

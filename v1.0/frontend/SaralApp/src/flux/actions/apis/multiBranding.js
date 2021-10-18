@@ -13,9 +13,6 @@
          this.type = C.MULTI_BRANDING;
      }
  
-    //  toString() {
-    //      return `${super.toString()} requestBody: ${this.requestBody} type: ${this.type}`
-    //  }
      toString() {
         return `${super.toString()} payload: ${this.payload} `
     }
@@ -28,7 +25,7 @@
      }
  
      apiEndPoint() {
-        //  console.log('apiEndPoint()')
+      
          return `${super.apiEndPoint()}/brand`;
          
      }

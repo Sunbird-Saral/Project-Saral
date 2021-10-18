@@ -7,7 +7,6 @@ import { scanStatusDataAction } from "./ScanStatus/scanStatusDataAction";
 export default function  callScanStatusDataConst(filteredData) {
 
     return async dispatch => {
-        console.log("FilteredDAta", filteredData.response);
 
         let loginCred = await getLoginCred()
 
@@ -28,7 +27,6 @@ export default function  callScanStatusDataConst(filteredData) {
                     source.cancel('The request timed out.');
                 }
             }, 60000);
-            console.log("loginCred", loginCred.schoolId, loginCred.password);
             axios.post(apiObj.apiEndPoint(), apiObj.getBody(), {
                 auth: {
                     username: loginCred.schoolId,

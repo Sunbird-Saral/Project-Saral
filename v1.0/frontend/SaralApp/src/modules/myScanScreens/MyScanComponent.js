@@ -4,16 +4,12 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { StackActions, NavigationActions } from 'react-navigation';
 import SystemSetting from 'react-native-system-setting'
-import RNOpenCvCameraModel from '../../utils/RNOpenCvCamera';
 import Strings from '../../utils/Strings';
 import AppTheme from '../../utils/AppTheme';
 import Spinner from '../common/components/loadingIndicator';
 import { OcrLocalResponseAction } from '../../flux/actions/apis/OcrLocalResponseAction'
 import { apkVersion } from '../../configs/config';
-import HeaderComponent from '../common/components/HeaderComponent';
-import { SCAN_TYPES } from '../../utils/CommonUtils';
 import ScanHistoryCard from '../ScanHistory/ScanHistoryCard';
-
 import SaralSDK from '../../../SaralSDK'
 import { getScannedDataFromLocal } from '../../utils/StorageUtils';
 
@@ -57,7 +53,6 @@ class MyScanComponent extends Component {
     //functions
     sumOfLocalData = async () => {
         const data = await getScannedDataFromLocal()
-        console.log("Data", data);
         let len = 0
         if (data != null) {
             data.forEach((element, index) => {
@@ -217,10 +212,7 @@ class MyScanComponent extends Component {
         const themeColor2 = this.props.multiBrandingData.themeColor2
         return (
 
-            <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
-                {/* <HeaderComponent
-                    title={Strings.up_saralData}
-                /> */}
+            <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}> 
                 {
                     (loginData && loginData.data)
                     &&

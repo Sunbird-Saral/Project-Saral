@@ -28,11 +28,7 @@ const DropDownMenu = ({
                 onSelect={onSelect}
                 defaultIndex={defaultIndex}
                 showsVerticalScrollIndicator={false}
-                // renderSeparator={() => {
-                //     return (
-                //         <View style={{ width: '100%', height: 1, backgroundColor: AppTheme.GREY }}></View>
-                //     )
-                // }}
+            
             >
                 <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', }}>
                     <Text style={[styles.dropDownTextLabelStyle, {color: defaultIndex == -1 ? AppTheme.BLACK_OPACITY_30: AppTheme.BLACK}]}>

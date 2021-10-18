@@ -219,7 +219,6 @@ const StudentsList = ({
 
     const renderStudentData = ({ item }) => {
         const themeColor1 = multiBrandingData.themeColor1
-        console.log('themeColor1',themeColor1)
         return (
             <StudentsDataComponent
             
@@ -240,7 +239,6 @@ const StudentsList = ({
 
     const saveAbsentDetails = (token) => {
         setIsLoading(true)
-        // console.log("absentStudentDataResponse", absentStudentsData);
         let apiObj = new SaveAbsentDataAction(absentStudentsData, token)
         APITransport(apiObj);
     }
@@ -292,12 +290,6 @@ const StudentsList = ({
         <ScrollView>
         <View style={{ flex: 1, backgroundColor: 'white' }}>
 
-            {/* <HeaderComponent
-                title={Strings.up_saralData}
-                logoutHeaderText={Strings.logout_text}
-                customLogoutTextStyle={{ color: AppTheme.GREY }}
-                onLogoutClick={onLogoutClick}
-            /> */}
             {(loginData && loginData.data) &&
                 <View>
                     <Text

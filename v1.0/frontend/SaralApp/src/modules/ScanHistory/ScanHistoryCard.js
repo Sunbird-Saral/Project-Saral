@@ -14,9 +14,6 @@ import APITransport from '../../flux/actions/transport/apitransport'
 import { styles } from './ScanHistoryStyles';
 import { scanStatusDataAction } from '../ScanStatus/scanStatusDataAction';
 import axios from 'axios';
-import { NavigationActions, StackActions } from 'react-navigation';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
 
 const ScanHistoryCard = ({
     showButtons = true,
@@ -135,7 +132,6 @@ const ScanHistoryCard = ({
                     dispatch(dispatchAPIAsync(api));
                 })
                 .catch(function (err) {
-                    console.log("Err", err);
                     Alert.alert("Something Went Wrong")
                     setIsLoading(false)
                     clearTimeout(id)

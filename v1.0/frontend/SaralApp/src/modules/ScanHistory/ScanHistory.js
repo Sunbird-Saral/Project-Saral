@@ -48,11 +48,6 @@ const ScanHistory = ({
 
     return (
         <View style={styles.container}>
-            {/* <HeaderComponent
-                title={Strings.up_saralData}
-                customLogoutTextStyle={{ color: AppTheme.GREY }}
-                versionText={apkVersion}
-            /> */}
 
             {
                 (loginData && loginData.data)
@@ -67,8 +62,6 @@ const ScanHistory = ({
                     </Text>
                 </View>
             }
-
-
             <View style={styles.container1}>
             <Text style={[styles.header1TextStyle,{borderColor:themeColor2 ? themeColor2 : AppTheme.LIGHT_BLUE, backgroundColor:themeColor2 ? themeColor2 : AppTheme.LIGHT_BLUE}]}>
                     {Strings.ongoing_scan}

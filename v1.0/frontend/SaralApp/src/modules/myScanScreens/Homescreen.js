@@ -33,13 +33,13 @@ class HomeComponent extends Component {
                  {this.props.multiBrandingData  ?
                  <Brands 
                  Image = {'data:image/png;base64,' + this.props.multiBrandingData.logoImage }
-                 Appname ={this.props.multiBrandingData.Appname}
+                 appName ={this.props.multiBrandingData.appName}
                  themeColor={this.props.multiBrandingData.themeColor1}
                  onPress ={()=>this.props.navigation.navigate('selectDetails')} 
                  />
                 :  
                 <Brands 
-                Appname ={'Saral OCR App'}
+                appName ={'Saral OCR App'}
                 themeColor={AppTheme.BLUE}
                 onPress ={()=>this.props.navigation.navigate('selectDetails')} 
                 />
