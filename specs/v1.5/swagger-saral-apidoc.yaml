@@ -66,6 +66,10 @@ paths:
       summary: "Update Organisation"
       description: "Update Organisation"
       parameters:
+      - in: path
+        name: id
+        type: string
+        required: true
       - name : body
         in: body
         schema:
@@ -91,6 +95,21 @@ paths:
           description: "Organisation does not exist."
         "400":
           description: "unsuccessful operation"
+  /organisations/{id}/users:
+    get:
+      tags:
+      - "Users"
+      summary: "Get Users of organisation"
+      description: "should return list of users of organisation"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/User"
+        "400":
+          description: "unsuccessful operation"      
 
 definitions:
   Organisation:
