@@ -218,7 +218,7 @@ paths:
               classId:
                 type: string
       responses:
-        "201":
+        "200":
           description: "successful operation"
           schema:
             $ref: "#/definitions/FetchStudentsByQueryResponse"
@@ -259,6 +259,8 @@ paths:
               - classId
             properties:
               classId:
+                type: string
+              section:
                 type: string
       responses:
         "200":
@@ -523,7 +525,7 @@ paths:
         - Bearer: []
       tags:
         - "Brand"
-      summary: "Create Brand for school"
+      summary: "Create Brand for state"
       parameters:
       - in: body
         name: body
@@ -540,7 +542,7 @@ paths:
         - Bearer: []
       tags:
         - "Brand"
-      summary: "Get Brand for school"
+      summary: "Get Brand for state"
       responses:
         "200":
           description: "successful operation"
@@ -554,7 +556,7 @@ paths:
         - Bearer: []
       tags:
         - "Brand"
-      summary: "Delete Brand for school"
+      summary: "Delete Brand for state"
       responses:
         "200":
           description: "Brand has been deleted successfully."
@@ -566,7 +568,7 @@ paths:
         - Bearer: []
       tags:
         - "Brand"
-      summary: "Update Brand for school"     
+      summary: "Update Brand for state"     
       parameters:
       - in: body
         name: body
@@ -790,7 +792,7 @@ definitions:
     type: object
     properties:
       students: 
-        $ref: '#/definitions/FetchStudentsByQueryResponse' 
+        $ref: '#/definitions/FetchStudentsByQueryAndExamResponse' 
       exams: 
         $ref: '#/definitions/GetExamByClassResponse' 
       
@@ -858,6 +860,20 @@ definitions:
         $ref: '#/definitions/StudentClass' 
         
   FetchStudentsByQueryResponse:
+    type: object
+    properties:
+      studentClass:
+        $ref: '#/definitions/StudentClassName'
+      section:
+        type: string
+      name:
+        type: string
+      studentId:
+        type: string
+      schoolId:
+        type: string
+        
+  FetchStudentsByQueryAndExamResponse:
     type: object
     properties:
       studentClass:
