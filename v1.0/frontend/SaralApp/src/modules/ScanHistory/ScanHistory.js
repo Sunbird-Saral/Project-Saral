@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 //redux
@@ -6,10 +6,12 @@ import { connect } from 'react-redux';
 
 //constant
 import AppTheme from '../../utils/AppTheme';
+import { getScannedDataFromLocal } from '../../utils/StorageUtils';
 import Strings from '../../utils/Strings';
 
 //component
 import HeaderComponent from '../common/components/HeaderComponent';
+import Spinner from '../common/components/loadingIndicator';
 import ScanHistoryCard from './ScanHistoryCard';
 
 const ScanHistory = ({
@@ -18,6 +20,28 @@ const ScanHistory = ({
     roiData,
     apiStatus
 }) => {
+
+    //Hooks
+    const [isLoading, setIsLoading] = useState(false)
+    const [scanStatusData, setScanStatusData] = useState(false)
+
+    //functions
+    const sumOfLocalData = async () => {
+        const data = await getScannedDataFromLocal()
+        let len = 0
+        if (data != null) {
+            data.forEach((element, index) => {
+                len = len + element.studentsMarkInfo.length
+            });
+            setScanStatusData(len)
+        } else {
+            setScanStatusData(0)
+        }
+    }
+
+    useEffect(() => {
+        sumOfLocalData()
+    }, [])
 
     return (
         <View style={styles.container}>
@@ -56,8 +80,14 @@ const ScanHistory = ({
             <ScanHistoryCard
                 showButtons={apiStatus.unauthorized ? false : true}
                 navigation={navigation}
+                isLoading={isLoading}
+                setIsLoading={setIsLoading}
+                scanStatusData={scanStatusData}
+                setScanStatusData={setScanStatusData}
             />
-
+            {
+                isLoading && <Spinner animating={isLoading} />
+            }
         </View>
     );
 }
