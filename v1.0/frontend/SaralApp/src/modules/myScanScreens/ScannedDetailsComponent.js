@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 const ScannedDetailsComponent = ({
     ocrLocalResponse
 }) => {
-    console.log("ocrLocalResponse",ocrLocalResponse);
     return (
         <View>
             <Text>ScannedDetailsComponent</Text>

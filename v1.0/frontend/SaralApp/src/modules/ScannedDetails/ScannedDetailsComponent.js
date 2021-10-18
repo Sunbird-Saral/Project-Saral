@@ -94,14 +94,12 @@ const ScannedDetailsComponent = ({
         })
 
         let absentPresentStudent = await getPresentAbsentStudent()
-        console.log("absentPresentStudent", absentPresentStudent);
 
         let datas = absentPresentStudent.length > 0 ? absentPresentStudent : []
 
         let absent = datas.filter((item) => item.studentId == studentId & item.studentAvailability == false)
 
-
-        let scan = scanedData.data.length > 0 ? scanedData.data : []
+        let scan = scanedData.length > 0  && scanedData.data.length > 0 ?  scanedData.data : []
 
         let isAbsent = scan.filter((o) => {
             if (o.studentAvailability == false && studentId == o.studentId) {

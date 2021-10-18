@@ -153,10 +153,8 @@ export const getPresentAbsentStudent = async () => {
     return JSON.parse(data)
 }
 export const setPresentAbsentStudent = async (data) => {
-    console.log("SET_PRESENT_ABSENT_DATA",data);
     const value = JSON.stringify(data)
     const saved = await AsyncStorage.setItem(SET_PRESENT_ABSENT_DATA, value);
-    console.log("saved", saved);
     if (saved) {
         return true
     } else {

@@ -47,18 +47,12 @@ const StudentsDataComponent = ({
 
                 let findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.section)
 
-                // console.log("eeeeeeeeee", e, findSection, "filter", filteredData.section);
-                // console.log("wwwwwwww", e.classId, filteredData.class, e.subject, filteredData.subject, findSection);
-
                 if (e.classId === filteredData.class && e.subject === filteredData.subject && findSection) {
                     return e
                 }
             })
 
-            // console.log("filterStdData", filterStdData);
-
             if (filterStdData.length > 0) {
-                // console.log("filterStdDataaaaaaa", filterStdData);
                 isStudentScannedInLocal = filterStdData[0].studentsMarkInfo.filter((o) => o.studentId == data.studentId)
             }
         }
@@ -66,9 +60,7 @@ const StudentsDataComponent = ({
 
         if (isStudentPresent) {
             let scannedDATa = scanedData.data.length > 0 ? scanedData.data : []
-            // console.log("scannedDATa", scannedDATa);
             const isSheetScanned = scannedDATa.filter((o) => o.studentId == data.studentId)
-            // console.log("isStudentPresent", scanedData, isSheetScanned);
 
             if (isSheetScanned.length > 0 || isStudentScannedInLocal.length > 0) {
                 Alert.alert("student can't be mark as absent once scanned !")
