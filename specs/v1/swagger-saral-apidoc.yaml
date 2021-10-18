@@ -28,6 +28,7 @@ schemes:
 
 
 paths:
+  
   /schools:
     get:
       tags:
@@ -326,7 +327,7 @@ paths:
             $ref: "#/definitions/GetSavedScanResponse"
             
   /saveMarks:
-    post:
+    put:
       security:
         - Bearer: []
       tags:
@@ -704,6 +705,8 @@ definitions:
         items:
           type: object
           properties:
+            studentAvailability:
+              type: boolean
             marksInfo:
               $ref: '#/definitions/MarksInfo'
             section: 
@@ -753,6 +756,9 @@ definitions:
         studentId:
           type: string
           description: Student Id
+        studentAvailability:
+          type: boolean
+          description: Student Availability Flag
         securedMarks:
           type: string
           description: Total marks Obtained
@@ -783,6 +789,9 @@ definitions:
       section:
         type: string
         description: Class Section
+      studentId:
+        type: string
+        description: Student ID
       studentClass:
         $ref: '#/definitions/StudentClass' 
         
@@ -799,6 +808,8 @@ definitions:
         type: string
       schoolId:
         type: string
+      studentAvailability:
+        type: boolean
       
   CreateStudentResponse:
     type: object
@@ -915,6 +926,9 @@ definitions:
         totalMarks:
           type: string
           description: Total Marks
+        type:
+          type: string
+          description: type of Exam
         questions:
           $ref: '#/definitions/Questions'  
         examId:
@@ -975,13 +989,6 @@ definitions:
           type: string
         examDate:
           type: string
-        questions:
-          $ref: '#/definitions/Questions' 
-          
-  ExamsMetadata:
-    type: array
-    items:
-      properties:
         questions:
           $ref: '#/definitions/Questions' 
     
@@ -1065,7 +1072,6 @@ definitions:
         type: string
       type: 
         type: string
-        enum: ["SAT","PAT"]
       roi:
         $ref: '#/definitions/rois'
           
