@@ -25,8 +25,6 @@ const ScanHistory = ({
     //Hooks
     const [isLoading, setIsLoading] = useState(false)
     const [scanStatusData, setScanStatusData] = useState(false)
-    const themeColor2 = multiBrandingData.themeColor2
-    const themeColor1 = multiBrandingData.themeColor1
 
     //functions
     const sumOfLocalData = async () => {
@@ -63,7 +61,7 @@ const ScanHistory = ({
                 </View>
             }
             <View style={styles.container1}>
-            <Text style={[styles.header1TextStyle,{borderColor:themeColor2 ? themeColor2 : AppTheme.LIGHT_BLUE, backgroundColor:themeColor2 ? themeColor2 : AppTheme.LIGHT_BLUE}]}>
+            <Text style={[styles.header1TextStyle,{borderColor:multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE, backgroundColor:multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE}]}>
                     {Strings.ongoing_scan}
                 </Text>
             </View>
@@ -76,7 +74,7 @@ const ScanHistory = ({
             <ScanHistoryCard
                 showButtons={apiStatus.unauthorized ? false : true}
                 navigation={navigation}
-                Theme ={themeColor1}
+                Theme ={multiBrandingData ? multiBrandingData.themeColor1 :AppTheme.BLUE}
                 isLoading={isLoading}
                 setIsLoading={setIsLoading}
                 scanStatusData={scanStatusData}

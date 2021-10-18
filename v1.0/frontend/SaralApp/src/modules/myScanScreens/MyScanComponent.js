@@ -22,7 +22,6 @@ class MyScanComponent extends Component {
             oldBrightness: null,
             activityOpen: false,
             isLoading: false,
-            Theme: this.props.navigation.getParam('Theme')
         }
         this.onBack = this.onBack.bind(this)
     }
@@ -200,7 +199,6 @@ class MyScanComponent extends Component {
             roisData.layout.cells[i].consolidatedPrediction = marks
 
         }
-        // console.log("JSON",JSON.stringify(roisData));
         this.props.OcrLocalResponseAction(JSON.parse(JSON.stringify(roisData)))
         this.props.navigation.navigate('ScannedDetailsComponent', { oldBrightness: this.state.oldBrightness })
     }
@@ -208,8 +206,6 @@ class MyScanComponent extends Component {
     render() {
         const { isLoading,Theme } = this.state;
         const { loginData } = this.props
-        const themeColor1 = this.props.multiBrandingData.themeColor1
-        const themeColor2 = this.props.multiBrandingData.themeColor2
         return (
 
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}> 
@@ -251,13 +247,13 @@ class MyScanComponent extends Component {
                     keyboardShouldPersistTaps={'handled'}
                 >
                     <View style={styles.onGoingContainer}>
-                        <Text style={[styles.header1TextStyle,{backgroundColor:themeColor2 ? themeColor2 :AppTheme.LIGHT_BLUE}]}>
+                        <Text style={[styles.header1TextStyle,{backgroundColor:this.props.multiBrandingData ? this.props.multiBrandingData.themeColor2 :AppTheme.LIGHT_BLUE}]}>
                             {Strings.ongoing_scan}
                         </Text>
                     </View>
 
                     <ScanHistoryCard
-                    Theme={themeColor1}
+                    Theme={this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE }
                         showButtons={false}
                         scanStatusData={this.state.scanStatusData}
                     />
@@ -274,7 +270,7 @@ class MyScanComponent extends Component {
                             style={[styles.scanTabContainerStyle,]}
                         >
                             <TouchableOpacity
-                                style={[styles.scanSubTabContainerStyle,{backgroundColor:themeColor1 ? themeColor1: AppTheme.BLUE}]}
+                                style={[styles.scanSubTabContainerStyle,{backgroundColor:this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1: AppTheme.BLUE}]}
                             >
                                 <Image
                                     source={require('../../assets/images/scanIcon.jpeg')}

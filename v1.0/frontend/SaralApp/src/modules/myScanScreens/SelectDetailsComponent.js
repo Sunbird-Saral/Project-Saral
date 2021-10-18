@@ -719,9 +719,7 @@ class SelectDetailsComponent extends Component {
    
     render() {
         const {navigation, isLoading, defaultSelected, classList, classListIndex, selectedClass, sectionList, sectionListIndex, selectedSection, pickerDate, selectedDate, subArr, selectedSubject, subIndex, errClass, errSub, errDate, errSection, sectionValid, dateVisible, examTestID } = this.state
-        const { loginData, scanTypeData } = this.props
-        const themeColor1 = this.props.multiBrandingData.themeColor1
-       
+        const { loginData, scanTypeData } = this.props 
         return (
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
                 <HeaderComponent
@@ -822,7 +820,7 @@ class SelectDetailsComponent extends Component {
                 </ScrollView>
                 <View style={styles.btnContainer}>
                 <ButtonComponent
-                            customBtnStyle={[styles.nxtBtnStyle,{backgroundColor:themeColor1 ? themeColor1 : AppTheme.BLUE}]}
+                            customBtnStyle={[styles.nxtBtnStyle,{backgroundColor:this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE}]}
                             btnText={Strings.submit_text}
                             onPress={this.onSubmitClick}
                         />

@@ -35,7 +35,7 @@ import Spinner from '../common/components/loadingIndicator';
 import { cryptoText, validateToken } from '../../utils/CommonUtils';
 import { SaveAbsentDataAction } from '../../flux/actions/apis/saveAbsentDataAction';
 import { LoginAction } from '../../flux/actions/apis/LoginAction';
-import { MultiBrandingAction } from '../../flux/actions/apis/multiBranding';
+
 
 const StudentsList = ({
     filteredData,
@@ -66,13 +66,11 @@ const StudentsList = ({
     const [isLoading, setIsLoading] = useState(false)
     const prevloginResponse = usePrevious(loginData);
     const prevSaveRes = usePrevious(saveAbsentStudent)
-    const Theme = navigation.getParam('Theme')
-    const themeColor1 = multiBrandingData.themeColor1
+
 
     useEffect(() => {
         studentData()
-        // getRoi()
-        // callScanStatusData()
+        
     }, []);
 
     useEffect(() => {
@@ -116,7 +114,6 @@ const StudentsList = ({
             "page": 0,
             "downloadRes": true
         }
-        // console.log("data",dataPayload);
         let apiObj = new scanStatusDataAction(dataPayload);
         FetchSavedScannedData(apiObj, loginCred.schoolId, loginCred.password)
     }
@@ -218,11 +215,10 @@ const StudentsList = ({
 
 
     const renderStudentData = ({ item }) => {
-        const themeColor1 = multiBrandingData.themeColor1
         return (
             <StudentsDataComponent
             
-                themeColor1 ={themeColor1}
+                themeColor1 ={multiBrandingData?multiBrandingData.themeColor1:AppTheme.BLUE}
                 item={item}
                 onBtnClick={onMarkPresentAbsent}
             />
@@ -284,7 +280,7 @@ const StudentsList = ({
         let apiObj = new ROIAction(payload, token);
         dispatch(APITransport(apiObj))
     }
-  console.log('Themem',Theme)
+
 
     return (
         <ScrollView>
@@ -319,19 +315,18 @@ const StudentsList = ({
                     {apkVersion}
                 </Text>
             </Text>
-            <View style={{backgroundColor:themeColor1 ?themeColor1 :AppTheme.BLUE}}>
             <FlatList
                 data={allStudentData}
                 renderItem={renderStudentData}
-                background ={themeColor1}
+                background ={multiBrandingData?multiBrandingData.themeColor1:AppTheme.BLUE}
                 ListEmptyComponent={renderEmptyList}
                 keyExtractor={(item) => item.studentId.toString()}
                 contentContainerStyle={styles.flatlistCon}
                 showsVerticalScrollIndicator={false}
-            /></View>
-
+            />
+           
             <ButtonComponent
-                customBtnStyle={[styles.nxtBtnStyle,{backgroundColor:themeColor1 ? themeColor1: AppTheme.BLUE}]}
+                customBtnStyle={[styles.nxtBtnStyle,{backgroundColor:multiBrandingData ? multiBrandingData.themeColor1: AppTheme.BLUE}]}
                 btnText={Strings.next_text.toUpperCase()}
                 activeOpacity={0.8}
                 // onPress={() => navigateToNext(loginData.data.jwtToken)}

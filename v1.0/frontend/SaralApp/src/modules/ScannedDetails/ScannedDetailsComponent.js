@@ -69,7 +69,6 @@ const ScannedDetailsComponent = ({
 
     const inputRef = React.createRef();
     const dispatch = useDispatch()
-    const themeColor1 = multiBrandingData.themeColor1
 
 
     useEffect(() => {
@@ -491,8 +490,8 @@ const ScannedDetailsComponent = ({
                         onPress={() => isMultipleStudent ? goBackFrame() : onBackButtonClick()}
                     />
                     <ButtonComponent
-                        customBtnStyle={[styles.nxtBtnStyle,{borderColor:themeColor1 ? themeColor1 : AppTheme.BLUE}]}
-                        customBtnTextStyle={{color:themeColor1 ? themeColor1 : AppTheme.BLUE}}
+                        customBtnStyle={[styles.nxtBtnStyle,{borderColor:multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}]}
+                        customBtnTextStyle={{color:multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}}
                         btnText={nextBtn.toUpperCase()}
                         onPress={() => isMultipleStudent ? goNextFrame() : onSubmitClick()}
                     />
