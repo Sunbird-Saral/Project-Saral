@@ -13,7 +13,7 @@ const BrandSchema = new mongoose.Schema({
         type: String,
         trim: true
     },
-    Appname:{
+    appName:{
         type: String,
         required: true,
         trim: true

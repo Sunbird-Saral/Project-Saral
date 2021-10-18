@@ -8,7 +8,7 @@ const Brand = require('../models/brand')
 router.post('/brand',auth, async (req, res) => {
     try { 
         const inputKeys = Object.keys(req.body)
-        const allowedUpdates = ['logoImage', 'themeColor1','themeColor2', 'Appname']
+        const allowedUpdates = ['logoImage', 'themeColor1','themeColor2', 'appName']
         const isValidOperation = inputKeys.every((input) => allowedUpdates.includes(input))
    
         if(!isValidOperation) {
@@ -18,12 +18,11 @@ router.post('/brand',auth, async (req, res) => {
         let lookup={
             schoolId: req.school.schoolId
         }
-       console.log(lookup)
+       
         const school = await School.findOne(lookup)
-        console.log("hi",school)
         req.body.state = school.state
         await Brand.create(req.body)
-        res.status(201).send({message:"Brand create successfully ."})
+        res.status(201).send({message:"Brand has been created successfully ."})
     
     } catch (e){   
         res.status(400).send(e)
@@ -35,8 +34,26 @@ router.get('/brand',auth, async (req, res) => {
 
         const school = await School.findOne({schoolId: req.school.schoolId})
         const brand = await Brand.findOne({state: school.state},{ _id: 0, __v: 0, createdAt: 0, updatedAt: 0 ,state:0 })
-        console.log(brand)
-        res.status(200).send(brand)
+        if(brand){
+            res.status(200).send(brand)
+        }else{
+            res.status(404).send({error: "Brand does not exist."})
+        }
+    
+    } catch (e){   
+        res.status(400).send(e)
+    }
+})
+
+router.delete('/brand',auth, async (req, res) => {
+    try { 
+        const school = await School.findOne({schoolId: req.school.schoolId})
+        const brand = await Brand.deleteOne({state: school.state},{ _id: 0, __v: 0, createdAt: 0, updatedAt: 0 ,state:0 })
+        if(brand.deletedCount > 0){
+            res.status(200).send({message: "Brand has been deleted successfully."})
+        }else{
+            res.status(404).send({error: "Brand does not exist."})
+        }
     
     } catch (e){   
         res.status(400).send(e)
@@ -46,7 +63,7 @@ router.get('/brand',auth, async (req, res) => {
 router.put('/brand',auth, async (req, res) => {
     try { 
         const inputKeys = Object.keys(req.body)
-        const allowedUpdates = ['logoImage', 'themeColor1','themeColor2', 'Appname']
+        const allowedUpdates = ['logoImage', 'themeColor1','themeColor2', 'appName']
         const isValidOperation = inputKeys.every((input) => allowedUpdates.includes(input))
    
         if(!isValidOperation) {
@@ -57,7 +74,7 @@ router.put('/brand',auth, async (req, res) => {
         let update = req.body
         const updateBrand = await Brand.update({state: school.state},update)
 
-        res.status(200).send({message: "Brand updated successfully."})
+        res.status(200).send({message: "Brand has been updated successfully."})
     
     } catch (e){   
         res.status(400).send(e)
