@@ -23,6 +23,10 @@ const ScanHistoryCard = ({
     navigation,
     filteredData,
     scanedData,
+    loginData,
+    setIsLoading,
+    scanStatusData,
+    setScanStatusData,
     Theme
 }) => {
 
@@ -149,7 +153,7 @@ const ScanHistoryCard = ({
 
     return (
         <TouchableOpacity
-            style={[styles.container,{backgroundColor:Theme ? Theme : AppTheme.BLUE}]}
+        style={[styles.container,{backgroundColor:Theme ? Theme : AppTheme.BLUE}]}
             disabled
 
         >

@@ -21,9 +21,31 @@ const ScanHistory = ({
     apiStatus,
     multiBrandingData
 }) => {
-    const Theme = navigation.getParam('Theme')
+
+    //Hooks
+    const [isLoading, setIsLoading] = useState(false)
+    const [scanStatusData, setScanStatusData] = useState(false)
     const themeColor2 = multiBrandingData.themeColor2
     const themeColor1 = multiBrandingData.themeColor1
+
+    //functions
+    const sumOfLocalData = async () => {
+        const data = await getScannedDataFromLocal()
+        let len = 0
+        if (data != null) {
+            data.forEach((element, index) => {
+                len = len + element.studentsMarkInfo.length
+            });
+            setScanStatusData(len)
+        } else {
+            setScanStatusData(0)
+        }
+    }
+
+    useEffect(() => {
+        sumOfLocalData()
+    }, [])
+
     return (
         <View style={styles.container}>
             {/* <HeaderComponent
@@ -48,7 +70,7 @@ const ScanHistory = ({
 
 
             <View style={styles.container1}>
-                <Text style={[styles.header1TextStyle,{borderColor:themeColor2 ? themeColor2 : AppTheme.LIGHT_BLUE, backgroundColor:themeColor2 ? themeColor2 : AppTheme.LIGHT_BLUE}]}>
+            <Text style={[styles.header1TextStyle,{borderColor:themeColor2 ? themeColor2 : AppTheme.LIGHT_BLUE, backgroundColor:themeColor2 ? themeColor2 : AppTheme.LIGHT_BLUE}]}>
                     {Strings.ongoing_scan}
                 </Text>
             </View>
@@ -62,6 +84,10 @@ const ScanHistory = ({
                 showButtons={apiStatus.unauthorized ? false : true}
                 navigation={navigation}
                 Theme ={themeColor1}
+                isLoading={isLoading}
+                setIsLoading={setIsLoading}
+                scanStatusData={scanStatusData}
+                setScanStatusData={setScanStatusData}
             />
             {
                 isLoading && <Spinner animating={isLoading} />

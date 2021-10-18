@@ -33,14 +33,21 @@ class HomeComponent extends Component {
     render() {
         return (
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
-                 {this.props.multiBrandingData ?
+                 {this.props.multiBrandingData  ?
                  <Brands 
                  Image = {'data:image/png;base64,' + this.props.multiBrandingData.logoImage }
                  Appname ={this.props.multiBrandingData.Appname}
                  themeColor={this.props.multiBrandingData.themeColor1}
                  onPress ={()=>this.props.navigation.navigate('selectDetails')} 
                  />
-                :null}
+                :  
+                <Brands 
+                //  Image = {Assets.AppLogo}
+                Appname ={'Saral OCR App'}
+                themeColor={AppTheme.BLUE}
+                onPress ={()=>this.props.navigation.navigate('selectDetails')} 
+                />
+                }
             </View>
         );
     }
