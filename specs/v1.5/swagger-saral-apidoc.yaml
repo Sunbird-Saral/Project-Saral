@@ -37,13 +37,13 @@ paths:
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/Organisations"
+              $ref: "#/definitions/Organisation"
         "400":
           description: "unsuccessful operation"
 
 definitions:
   Organisation:
-    type: "object"
+    type: object
     properties:
       name:
         type: string
@@ -57,10 +57,13 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/User'
-          minItems: 1
+      events:
+        type: array
+        items:
+          $ref: '#/definitions/Event'
 
   User:
-    type: "object"
+    type: object
     properties:
       firstName:
         type: string
@@ -82,12 +85,20 @@ definitions:
         format: date-time
 
   Event:
-    type: "object"
+    type: object
     properties:
+      id:
+        type: number
+        description: Event ID
+        example: 1000
+      type:
+        type: string
+        description: Event Type
+        example: staff_attendance
       name:
         type: string
         description: Event Name
-        example : Staff Attendance
+        example : Staff Attendance for EKSteps
       date:
         type: string
         format: date-time
@@ -97,7 +108,7 @@ definitions:
           $ref: '#/definitions/Participant'
 
   Participant:
-      type: "object"
+    type: object
     properties:
       type:
         type: string
@@ -107,19 +118,113 @@ definitions:
         type: string
         description: Participant ID
         example: 1020112
-      firstName:
+      name:
         type: string
-        description: First Name of Participant
-        example: Praveen
-      lastName:
-        type: string
-        description: Last Name of Participant
-        example: Chand
+        description: Name of Participant
+        example: Praveen Chand
       createdAt:
         type: string
         format: date-time
       updatedAt:
         type: string
         format: date-time
-  
+
+  EventPredictions:
+    type: object
+    properties:
+      eventId:
+        type: number
+        description: Event ID
+        example: 1000
+      participantId:
+        type: string
+        description: Participant ID
+        example: 1020112
+      predictionItems:
+        type: array
+        description: Array of Prediction Items
+        items:
+          type: object
+          properties:
+            name:
+              type: string
+              description: Prediction Item Name
+              example: Hindi Question 1
+            value:
+              type: string
+              description: Prediction Item Value
+              example: 25
+            tags:
+              type: array
+              description: Tag for each prediction Items.
+              items:
+                type: string        
+
   Layout:
+    type: object
+    properties:
+      eventType:
+        type: string
+      rois:
+        type: object
+        properties:
+          layout:
+            type: object
+            properties:
+              version: 
+                type: string
+              name:
+                type: string
+              cells:
+                $ref: '#/definitions/cells'
+
+  cells:
+    type: array
+    items:
+      type: object
+      properties:
+        cellId:
+          type: string
+        rois:
+          $ref: '#/definitions/roi'
+
+  roi:
+    type: array
+    items:
+      type: object
+      properties:
+        annotationId:
+          type: string
+        annotationTags:
+          type: string
+        extractionMethod:
+          type: string
+          enum: ["NUMERIC_CLASSIFICATION", "CELL_OMR","QR_CODE","HANDWRITTEN_TEXT","BLOCK_TEXT"]
+        roiId:
+          type: string
+        index:
+          type: string
+        rect:
+          $ref: '#/definitions/rect'
+
+  rect:
+    type: object
+    description: rectangular area on the image frame
+    required:
+      - top
+      - left
+      - bottom
+      - right
+    properties:
+      top:
+        type: number
+        description: x-coordinate of the ROI on the image
+      left:
+        type: number
+        description: y-coordinate of the ROI on the image
+      bottom:
+        type: number
+        description: x-coordinate of the ROI on the image
+      right:
+        type: number
+        description: y-coordinate of the ROI on the image
