@@ -110,7 +110,6 @@ const mapStateToProps = (state) => {
         loginData: state.loginData,
         apiStatus: state.apiStatus,
         roiData: state.roiData.response,
-        absenetPresentReducer: state.AbsentPresentReducer,
     }
 }
 

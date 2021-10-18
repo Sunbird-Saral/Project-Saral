@@ -37,8 +37,6 @@ import { LoginAction } from '../../flux/actions/apis/LoginAction';
 
 import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction'
 
-import C from '../../flux/actions/constants'
-import AbsentPresentReducer from '../../flux/reducers/AbsentPresentReducer';
 
 const StudentsList = ({
     filteredData,
@@ -321,8 +319,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        APITransport: APITransport,
-        AbsentPresentReducer: AbsentPresentReducer
+        APITransport: APITransport
     }, dispatch)
 }
 
