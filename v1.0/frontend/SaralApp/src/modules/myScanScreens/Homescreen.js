@@ -3,10 +3,7 @@ import { View, Text, Image,  } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash'
-import Strings from '../../utils/Strings';
 import AppTheme from '../../utils/AppTheme';
-import { Assets } from '../../assets/index'
-import ButtonComponent from '../common/components/ButtonComponent';
 import { MultiBrandingAction } from '../../flux/actions/apis/multiBranding';
 import APITransport from '../../flux/actions/transport/apitransport';
 import Brands from '../common/components/Brands';
@@ -42,7 +39,6 @@ class HomeComponent extends Component {
                  />
                 :  
                 <Brands 
-                //  Image = {Assets.AppLogo}
                 Appname ={'Saral OCR App'}
                 themeColor={AppTheme.BLUE}
                 onPress ={()=>this.props.navigation.navigate('selectDetails')} 
@@ -53,17 +49,6 @@ class HomeComponent extends Component {
     }
 }
 
-const styles = {
- 
-    btnContainer: {
-        paddingVertical: '5%'
-    },
-    welcometext: { textAlign: 'center', marginBottom: 5, fontSize: 15, color: '#00000033', fontWeight: 'bold' },
-    nxtBtnStyle: {
-        width: 250,
-        marginBottom: 15
-    }
-}
 
 const mapStateToProps = (state) => {
     return {

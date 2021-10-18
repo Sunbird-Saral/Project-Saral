@@ -1,7 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, Text,View } from 'react-native'
 import AppTheme from '../../../utils/AppTheme';
-import Icon from 'react-native-vector-icons/AntDesign';
 
 const ButtonComponent = ({
     onPress,
@@ -26,9 +25,6 @@ const ButtonComponent = ({
             >
                 {btnText}
             </Text>
-            {/* <View> */}
-            <Icon  style={{}} name={icon} size ={20} color={'#fff'} />
-            {/* </View> */}
         </TouchableOpacity>
     );
 }

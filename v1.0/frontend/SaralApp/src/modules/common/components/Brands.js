@@ -6,8 +6,6 @@ import Strings from '../../../utils/Strings';
 import AppTheme from '../../../utils/AppTheme';
 import { Assets } from '../../../assets/index'
 import ButtonComponent from './ButtonComponent';
-// import HomeScreen from '../../myScanScreens/Homescreen'
-import { MultiBrandingAction } from '../../../flux/actions/apis/multiBranding';
 import APITransport from '../../../flux/actions/transport/apitransport';
 class Brands extends PureComponent {
     constructor() {
@@ -35,7 +33,6 @@ class Brands extends PureComponent {
                                 customBtnStyle={[styles.nxtBtnStyle, { backgroundColor: this.props.themeColor ? this.props.themeColor : AppTheme.BLUE }]}
                                 btnText={Strings.get_start}
                                 onPress={this.props.onPress}
-                                icon={"arrowright"}
                             />
                         </View>
                     </View>
@@ -58,23 +55,6 @@ const styles = {
         marginBottom: 15
     }
 }
-const mapStateToProps = (state) => {
-    return {
-        // ocrLocalResponse: state.ocrLocalResponse,
-        loginData: state.loginData,
-        studentsAndExamData: state.studentsAndExamData,
-        scanTypeData: state.scanTypeData.response,
-        apiStatus: state.apiStatus,
-        roiData: state.roiData,
-        absentStudentDataResponse: state.absentStudentDataResponse,
-        getScanStatusData: state.getScanStatusData,
-        multiBrandingData: state.multiBrandingData.response.data
-    }
-}
-const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({
-        APITransport: APITransport,
-    }, dispatch)
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Brands);
+
+export default Brands;
