@@ -857,6 +857,16 @@
 				{
 					"name": "get brand",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTY3ZGRlZjY4YWIyNzE0YzAzYjY1ZWIiLCJpYXQiOjE2MzQxOTY5OTh9.qfafSmt3FGBphuwvPZv052PDAVI0_6RAIP_mHCEWM3w",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -901,22 +911,6 @@
 							],
 							"path": [
 								"brand"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete brand",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTZkNDllYjk2M2FlNjU1ZDhiMTY1YmYiLCJpYXQiOjE2MzQ1NTIzNzV9.FHhBINswnno-kDlOhp678aMQAs2nQanX0yVv7FCvbA4",
-									"type": "string"
-								}
 							]
 						},
 						"method": "DELETE",

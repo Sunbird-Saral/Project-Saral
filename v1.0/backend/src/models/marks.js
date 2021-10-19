@@ -28,6 +28,11 @@ const marksSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
+    studentAvailability: {
+        type: Boolean,
+        default: true,
+        required: true
+    },
     schoolId: {
         type: String,
         required: true,
@@ -51,6 +56,14 @@ const marksSchema = new mongoose.Schema({
     }
 })
 
+marksSchema.statics.StudentsMark = async (studentIds) => {   
+    let marks = await Mark
+    .find({
+      studentId: { $in: studentIds }
+    })
+    .lean(); 
+    return marks
+}
 
 const Mark = mongoose.model('Mark', marksSchema)
 

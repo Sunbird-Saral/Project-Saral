@@ -34,14 +34,12 @@ export default function  callScanStatusDataConst(filteredData) {
                 }
             })
                 .then(function (res) {
-                    console.log("RES", res);
                     apiResponse = res
                     clearTimeout(id)
                     apiObj.processResponse(res)
                     dispatch(dispatchAPIAsync(apiObj));
                 })
                 .catch(function (err) {
-                    console.log("ERROR", err);
                     clearTimeout(id)
                 });
         }

@@ -872,20 +872,6 @@ definitions:
         type: string
       schoolId:
         type: string
-        
-  FetchStudentsByQueryAndExamResponse:
-    type: object
-    properties:
-      studentClass:
-        $ref: '#/definitions/StudentClassName'
-      section:
-        type: string
-      name:
-        type: string
-      studentId:
-        type: string
-      schoolId:
-        type: string
       studentAvailability:
         type: boolean
       

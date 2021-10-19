@@ -57,7 +57,6 @@ class MyScanComponent extends Component {
             data.forEach((element, index) => {
                 len = len + element.studentsMarkInfo.length
             });
-            console.log("len", len);
             this.setState({
                 scanStatusData: len
             })
@@ -165,22 +164,17 @@ class MyScanComponent extends Component {
                 }
             );
             if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-                console.log("Camera permission granted, launching now ..");
                 this.setState({
                     activityOpen: true
                 })
-                console.log("roiData", this.props.roiData.data);
                 SaralSDK.startCamera(JSON.stringify(this.props.roiData.data)).then(res => {
-                    console.log("UPSAT", res);
                     let roisData = JSON.parse(res);
                     let cells = roisData.layout.cells;
                     this.consolidatePrediction(cells, roisData)
 
                 }).catch((code, message) => {
-                    console.log(message)
                 })
             } else {
-                console.log("Camera permission denied");
             }
         } catch (err) {
             console.warn(err);

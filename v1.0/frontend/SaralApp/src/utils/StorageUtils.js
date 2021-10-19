@@ -9,6 +9,7 @@ const FETCH_SCAN_KEY = 'fetch_scan_key'
 const SAVE_ABSENT_DATA_INTO_LOCAL = 'save_absent_data_into_local'
 const SAVE_TOTAL_STUDENT = 'save_total_student'
 const SAVED_SCANNED_DATA_INTO_LOCAL = 'saved_scanned_data_into_local'
+const SET_PRESENT_ABSENT_DATA = 'set_present_absent_data'
 
 export const setData = async (key, value) => {
     await AsyncStorage.setItem(key, value);
@@ -145,4 +146,18 @@ export const setScannedDataIntoLocal = async (data) => {
 export const getScannedDataFromLocal = async () => {
     const data = await AsyncStorage.getItem(SAVED_SCANNED_DATA_INTO_LOCAL);
     return JSON.parse(data)
+}
+
+export const getPresentAbsentStudent = async () => {
+    const data = await AsyncStorage.getItem(SET_PRESENT_ABSENT_DATA);
+    return JSON.parse(data)
+}
+export const setPresentAbsentStudent = async (data) => {
+    const value = JSON.stringify(data)
+    const saved = await AsyncStorage.setItem(SET_PRESENT_ABSENT_DATA, value);
+    if (saved) {
+        return true
+    } else {
+        return false
+    }
 }

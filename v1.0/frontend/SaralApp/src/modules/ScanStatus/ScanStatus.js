@@ -28,7 +28,6 @@ const ScanStatus = ({
     scanedData
 }) => {
 
-
     //function
     const renderItem = ({ item, index }) => {
         return (

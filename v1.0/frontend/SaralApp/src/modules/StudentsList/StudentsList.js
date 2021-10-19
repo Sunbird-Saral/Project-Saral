@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux';
 import APITransport from '../../flux/actions/transport/apitransport'
 
 //storage
-import { getLoginCred, getStudentsExamData, setAbsentStudentDataIntoAsync, setTotalStudent } from '../../utils/StorageUtils';
+import { getLoginCred, getStudentsExamData, setAbsentStudentDataIntoAsync, setPresentAbsentStudent, setTotalStudent } from '../../utils/StorageUtils';
 import ButtonComponent from '../common/components/ButtonComponent';
 import StudentsDataComponent from './StudentsDataComponent';
 
@@ -33,8 +33,9 @@ import axios from 'axios';
 import { scanStatusDataAction } from '../../modules/ScanStatus/scanStatusDataAction';
 import Spinner from '../common/components/loadingIndicator';
 import { cryptoText, validateToken } from '../../utils/CommonUtils';
-import { SaveAbsentDataAction } from '../../flux/actions/apis/saveAbsentDataAction';
 import { LoginAction } from '../../flux/actions/apis/LoginAction';
+
+import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction'
 
 
 const StudentsList = ({
@@ -46,7 +47,9 @@ const StudentsList = ({
     multiBrandingData,
     absentStudentDataResponse,
     roiData,
-    apiStatus
+    apiStatus,
+    scanedData,
+    getScanStatusData
 }) => {
 
 
@@ -60,10 +63,8 @@ const StudentsList = ({
 
     //hooks
     const [allStudentData, setAllStudentData] = useState([])
-    const [absentStudentsData, setAbsentStudentsData] = useState([]);
-    const [fetchedAbsentList, setFetchedAbsentList] = useState([])
-    const [examDataObj, setExamDatabj] = useState({});
     const [isLoading, setIsLoading] = useState(false)
+    const [stdArray, setStdArray] = useState([])
     const prevloginResponse = usePrevious(loginData);
     const prevSaveRes = usePrevious(saveAbsentStudent)
 
@@ -74,29 +75,7 @@ const StudentsList = ({
     }, []);
 
     useEffect(() => {
-        if (prevloginResponse && loginData && prevloginResponse != loginData) {
-            setIsLoading(false);
-            if (loginData && loginData.data && loginData.status == 200) {
-                onNextClick(loginData.data.jwtToken)
-            } else if (loginData && loginData.data && loginData.status != 200) {
-                Alert.alert(Strings.message_text, Strings.process_failed_try_again, [
-                    { 'text': Strings.cancel_text, style: Strings.cancel_text },
-                    { 'text': Strings.retry_text, onPress: () => loginAgain() }
-                ])
-            }
-        }
-
-        if (prevSaveRes && saveAbsentStudent && prevSaveRes != saveAbsentStudent) {
-            setIsLoading(false)
-            if (saveAbsentStudent && saveAbsentStudent.data && saveAbsentStudent.status == 200) {
-                navigation.navigate('scanHistory')
-            } else if (saveAbsentStudent && saveAbsentStudent.data && saveAbsentStudent.status != 200) {
-                Alert.alert(Strings.message_text, Strings.process_failed_try_again, [
-                    { 'text': Strings.ok_text, style: Strings.cancel_text }
-                ])
-            }
-        }
-    }, [saveAbsentStudent, loginData])
+    }, [])
 
     const dispatch = useDispatch();
 
@@ -164,54 +143,9 @@ const StudentsList = ({
         setIsLoading(false)
         callScanStatusData()
         getRoi()
-    
     }
 
-    const onMarkPresentAbsent = (data) => {
-        let createdTime = new Date()
-        let obj = {
-            // examId: examDataObj.examId,
-            // examCode: examDataObj.examCode,
-            schoolId: data.schoolId,
-            aadhaarUID: data.aadhaarUID,
-            studyingClass: data.studyingClass,
-            section: data.section.trim().toUpperCase(),
-            createdOn: createdTime,
-        }
-        let isAlreadyMarkedAbsent = _.find(fetchedAbsentList, (o) => o.AadhaarUID == data.aadhaarUID)
 
-        let scanedData = JSON.parse(getScanStatusData.data);
-        if (data.isAbsent) {
-            data.isAbsent = false
-            if (isAlreadyMarkedAbsent) {
-                obj.isAbsent = 0
-                let absentStudentsDataArr = JSON.parse(JSON.stringify(absentStudentsData))
-                absentStudentsDataArr.push(obj)
-                setAbsentStudentsData(absentStudentsDataArr)
-            } else {
-                const modified = _.filter(absentStudentsData, (o) => o.aadhaarUID != data.aadhaarUID)
-                setAbsentStudentsData((modified))
-            }
-        } else if (!data.isAbsent) {
-            const checkIsScanned = scanedData[0].EntryCompletedStudents.filter((o) => o.AadhaarUID === data.aadhaarUID);
-            if (checkIsScanned.length > 0) {
-                Alert.alert("student can't be mark as absent once scanned !")
-            }
-            else {
-                data.isAbsent = true
-                if (isAlreadyMarkedAbsent) {
-                    const modified = _.filter(absentStudentsData, (o) => o.aadhaarUID != data.aadhaarUID)
-                    setAbsentStudentsData((modified))
-
-                } else {
-                    obj.isAbsent = 1
-                    let absentStudentsDataArr = JSON.parse(JSON.stringify(absentStudentsData))
-                    absentStudentsDataArr.push(obj)
-                    setAbsentStudentsData(absentStudentsDataArr)
-                }
-            }
-        }
-    }
 
 
     const renderStudentData = ({ item }) => {
@@ -220,7 +154,11 @@ const StudentsList = ({
             
                 themeColor1 ={multiBrandingData?multiBrandingData.themeColor1:AppTheme.BLUE}
                 item={item}
-                onBtnClick={onMarkPresentAbsent}
+                pabsent={item.studentAvailability}
+                scanedData={scanedData}
+                filteredData={filteredData}
+                setStdArray={setStdArray}
+                stdArray={stdArray}
             />
         )
     }
@@ -233,14 +171,46 @@ const StudentsList = ({
         )
     }
 
-    const saveAbsentDetails = (token) => {
-        setIsLoading(true)
-        let apiObj = new SaveAbsentDataAction(absentStudentsData, token)
-        APITransport(apiObj);
+    const saveAbsentPresentDetails = (token) => {
+
+        let stdPstAbsArray = []
+
+        let absentPresentStatus = {
+            "classId": filteredData.class,
+            "examDate": filteredData.examDate,
+            "subject": filteredData.subject,
+            "studentsMarkInfo": stdPstAbsArray
+        }
+
+        stdArray.forEach((element, index) => {
+
+            let stdPstAbs = {
+                "section": filteredData.section,
+                "studentId": 0,
+                "studentAvailability": true,
+                "securedMarks": 0,
+                "totalMarks": 0
+            }
+
+            stdPstAbs.studentAvailability = element.studentAvailability
+            stdPstAbs.studentId = element.studentId
+            stdPstAbsArray.push(stdPstAbs)
+        });
+
+        absentPresentStatus.studentsMarkInfo = stdPstAbsArray
+
+        // setIsLoading(true)
+        let dataPayload = absentPresentStatus
+        let apiObj = new SaveScanData(dataPayload, token)
+        dispatch(APITransport(apiObj));
+        setPresentAbsentStudent(allStudentData)
+        navigation.navigate('ScanHistory');
     }
 
     const navigateToNext = () => {
-        navigation.navigate('ScanHistory');
+        if (allStudentData.length > 0) {
+            saveAbsentPresentDetails(loginData.data.token)
+        }
     }
 
     const loginAgain = async () => {
@@ -256,18 +226,6 @@ const StudentsList = ({
                 { 'text': Strings.ok_text, onPress: () => loginAgain() }
             ])
         }
-    }
-
-    const onLogoutClick = async () => {
-        Alert.alert(Strings.message_text, Strings.are_you_sure_you_want_to_logout, [
-            { 'text': Strings.no_text, style: 'cancel' },
-            {
-                'text': Strings.yes_text, onPress: async () => {
-                    await AsyncStorage.clear();
-                    navigation.navigate('auth');
-                }
-            }
-        ])
     }
 
     const getRoi = () => {
@@ -355,13 +313,14 @@ const mapStateToProps = (state) => {
         saveAbsentStudent: state.saveAbsentStudent,
         absentStudentDataResponse: state.absentStudentDataResponse,
         apiStatus: state.apiStatus,
-        multiBrandingData: state.multiBrandingData.response.data
+        multiBrandingData: state.multiBrandingData.response.data,
+        scanedData: state.scanedData.response
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        APITransport: APITransport,
+        APITransport: APITransport
     }, dispatch)
 }
 

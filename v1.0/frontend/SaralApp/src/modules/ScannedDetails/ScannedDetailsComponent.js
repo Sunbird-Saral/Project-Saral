@@ -18,14 +18,13 @@ import ButtonWithIcon from '../common/components/ButtonWithIcon';
 import ButtonComponent from '../common/components/ButtonComponent';
 import DropDownMenu from '../common/components/DropDownComponent';
 import TextField from '../common/components/TextField';
-import { getLoginCred, getScanData, getScannedDataFromLocal, getStudentsExamData, setScanData, setScannedDataIntoLocal } from '../../utils/StorageUtils';
+import { getLoginCred, getPresentAbsentStudent, getScanData, getScannedDataFromLocal, getStudentsExamData, setScanData, setScannedDataIntoLocal } from '../../utils/StorageUtils';
 import { NavigationActions, StackActions } from 'react-navigation';
 import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
 import Spinner from '../common/components/loadingIndicator';
 import APITransport from '../../flux/actions/transport/apitransport';
 import { bindActionCreators } from 'redux';
 import axios from 'axios';
-import { scanStatusDataAction } from '../ScanStatus/scanStatusDataAction';
 import { OcrLocalResponseAction } from '../../flux/actions/apis/OcrLocalResponseAction';
 
 
@@ -35,7 +34,8 @@ const ScannedDetailsComponent = ({
     filteredData,
     scanTypeData,
     ocrLocalResponse,
-    multiBrandingData
+    multiBrandingData,
+    scanedData
 }) => {
 
 
@@ -88,11 +88,31 @@ const ScannedDetailsComponent = ({
                 return true
             }
         })
-        if (a.length > 0) {
+
+        let absentPresentStudent = await getPresentAbsentStudent()
+
+        let datas = absentPresentStudent.length > 0 ? absentPresentStudent : []
+
+        let absent = datas.filter((item) => item.studentId == studentId & item.studentAvailability == false)
+
+        let scan = scanedData.length > 0  && scanedData.data.length > 0 ?  scanedData.data : []
+
+        let isAbsent = scan.filter((o) => {
+            if (o.studentAvailability == false && studentId == o.studentId) {
+                return true
+            }
+        })
+
+        if (absent.length > 0) {
+            setStdErr("Student is Absent")
+            setStudentValid(false)
+        }
+        else if (a.length > 0) {
             setStudentValid(true)
             setStdErr('')
             setStudentDATA(a)
-        } else {
+        }
+        else {
             setStdErr(Strings.please_correct_student_id)
             setStudentDATA([])
             setStudentValid(false)
@@ -302,7 +322,8 @@ const ScannedDetailsComponent = ({
                 "section": filteredData.section,
                 "marksInfo": '',
                 "securedMarks": stdTotalMarks,
-                "totalMarks": 0
+                "totalMarks": 0,
+                "studentAvailability": true
             }
 
             stdData.studentId = el.RollNo
@@ -421,6 +442,7 @@ const ScannedDetailsComponent = ({
                                 keyboardType={'numeric'}
                             />
                              <Text style={styles.nameTextStyle}>{Strings.Exam} : {filteredData.subject} {filteredData.examDate} ({filteredData.examTestID})</Text>
+                    
                             <Text style={styles.nameTextStyle}>{Strings.page_no + ': ' + (currentIndex + 1)}</Text>
                         </View>
                     </View>
@@ -668,7 +690,8 @@ const ScannedDetailsComponent = ({
                     "studentId": studentId,
                     "securedMarks": sumOfObtainedMarks > 0 ? sumOfObtainedMarks : 0,
                     "totalMarks": maxMarksTotal > 0 ? maxMarksTotal : 0,
-                    "marksInfo": Studentmarks
+                    "marksInfo": Studentmarks,
+                    "studentAvailability": true
                 }
             ]
         }
@@ -720,7 +743,8 @@ const mapStateToProps = (state) => {
         filteredData: state.filteredData.response,
         scanTypeData: state.scanTypeData.response,
         roiData: state.roiData,
-        multiBrandingData: state.multiBrandingData.response.data
+        multiBrandingData: state.multiBrandingData.response.data,
+        scanedData: state.scanedData.response
     }
 }
 
