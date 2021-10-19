@@ -9,15 +9,6 @@ try {
 	
 		
 	stage('Docker-compose')
-withCredentials([string(credentialsId: 'anuvaad-encryption-password', variable: 'encryption_pass')]){
-		sh '''
-		echo $encryption_pass > encryption_pass.txt
-		environment=$(echo "$JOB_BASE_NAME" | rev | cut -d'-' -f 1 | rev)
-                echo "$environment"
-		cp -rpf ./env-vars/$environment.env ./$environment.env;
-		ccrypt -d translate.json.cpt -K "$(cat encryption_pass.txt)"
-             '''
-
 withCredentials([usernamePassword(credentialsId: 'anuvaad-docker-hub-credentials', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
 	       sh '''
 	  
@@ -25,9 +16,7 @@ withCredentials([usernamePassword(credentialsId: 'anuvaad-docker-hub-credentials
 		compose_file=$(echo "$image_name" | cut -d':' -f 1)
 		tag=$(echo "$image_name" | cut -d':' -f 2)
                 sudo docker login -u $USERNAME -p $PASSWORD
-		sudo env image="$compose_file" tag=$tag env="$environment" docker stack deploy --compose-file=$compose_file.yml --with-registry-auth --resolve-image=always gateway
-		rm -rf encryption_pass.txt translate.json
-		
+		sudo env image="$compose_file" tag=$tag env="$environment" docker stack deploy --compose-file=$compose_file.yml --with-registry-auth --resolve-image=always saralpoc
 		'''
 
 	}
