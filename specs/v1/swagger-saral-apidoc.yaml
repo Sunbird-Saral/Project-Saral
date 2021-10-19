@@ -789,6 +789,9 @@ definitions:
       section:
         type: string
         description: Class Section
+      studentId:
+        type: string
+        description: Student ID
       studentClass:
         $ref: '#/definitions/StudentClass' 
         
@@ -923,6 +926,9 @@ definitions:
         totalMarks:
           type: string
           description: Total Marks
+        type:
+          type: string
+          description: type of Exam
         questions:
           $ref: '#/definitions/Questions'  
         examId:
@@ -983,13 +989,6 @@ definitions:
           type: string
         examDate:
           type: string
-        questions:
-          $ref: '#/definitions/Questions' 
-          
-  ExamsMetadata:
-    type: array
-    items:
-      properties:
         questions:
           $ref: '#/definitions/Questions' 
     
@@ -1073,7 +1072,6 @@ definitions:
         type: string
       type: 
         type: string
-        enum: ["SAT","PAT"]
       roi:
         $ref: '#/definitions/rois'
           
