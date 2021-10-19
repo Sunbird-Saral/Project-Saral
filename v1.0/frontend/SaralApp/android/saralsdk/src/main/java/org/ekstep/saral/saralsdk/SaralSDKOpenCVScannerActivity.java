@@ -11,6 +11,9 @@ import android.util.Log;
 import android.view.SurfaceView;
 import android.view.Window;
 import android.view.WindowManager;
+import android.util.Base64;
+import android.graphics.Bitmap;
+import org.opencv.android.Utils;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactInstanceManager;
@@ -35,6 +38,7 @@ import org.opencv.core.Point;
 import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -63,6 +67,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
     private HashMap<String, String> mPredictedDigits    = new HashMap<>();
     private HashMap<String, String> mPredictedOMRs      = new HashMap<>();
     private HashMap<String, String> mPredictedClass     = new HashMap<>();
+    private HashMap<String, String> mRoiMatBase64       = new HashMap<>();
 
     public SaralSDKOpenCVScannerActivity() {
         Log.i(TAG, "Instantiated new " + this.getClass());
@@ -110,11 +115,16 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
             @Override
             public void OnPredictionSuccess(int digit, float confidence, String id) {
                 Log.d(TAG, "predicted digit:" + digit + " unique id:" + id + " confidence:" + confidence);
+                
                 mTotalClassifiedCount++;
                 try {
                     JSONObject result = new JSONObject();
                     result.put("prediction", new Integer(digit));
                     result.put("confidence", new Double(confidence));
+                    if(mRoiMatBase64.get(id)!=null){
+                        result.put("roiImage",mRoiMatBase64.get(id));
+                        Log.d(TAG, "roiId : "+id+" roiImage : " +mRoiMatBase64.get(id));      
+                    }
                     mPredictedDigits.put(id, result.toString());
                 } catch (JSONException e) {
                     Log.e(TAG, "unable to create prediction object");
@@ -138,6 +148,10 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                     JSONObject result = new JSONObject();
                     result.put("prediction", new Integer(0));
                     result.put("confidence", new Double(0.0));
+                    if(mRoiMatBase64.get(id)!=null){
+                        result.put("roiImage",mRoiMatBase64.get(id));
+                        Log.d(TAG, "roiId : "+id+" roiImage : " +mRoiMatBase64.get(id));
+                    }
                     mPredictedDigits.put(id, result.toString());
                 } catch (JSONException e) {
                     Log.e(TAG, "unable to create prediction object");
@@ -238,8 +252,8 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                         JSONObject rect      = roiConfig.getJSONObject("rect");
 
                         mPredictedDigits.put(roiId, "0");
-
                         Mat digitROI        = mDetectShaded.getROIMat(tableMat, rect.getInt("top"), rect.getInt("left"), rect.getInt("bottom"), rect.getInt("right"));
+                        mRoiMatBase64.put(roiId,createBase64FromMat(digitROI));
                         if(HWClassifier.getInstance().isInitialized() == true) {
                             Log.d(TAG, "Requesting prediction for: " + roiId);
                             HWClassifier.getInstance().classifyMat(digitROI, roiId);
@@ -342,5 +356,16 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
         int scale       = 1;
         int thickness   = 3;
         Imgproc.putText(image, text, position, font, scale, color, thickness);
+    }
+
+    private String createBase64FromMat(Mat image) {
+        Bitmap resultBitmap = Bitmap.createBitmap(image.cols(), image.rows(), Bitmap.Config.ARGB_8888);
+        Utils.matToBitmap(image, resultBitmap);
+
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        resultBitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        byte[] byteArray    = byteArrayOutputStream.toByteArray();
+        String base64       = Base64.encodeToString(byteArray, Base64.DEFAULT);
+        return base64;
     }
 }
