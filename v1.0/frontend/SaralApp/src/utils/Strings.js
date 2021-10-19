@@ -1,10 +1,13 @@
 import LocalizedStrings from 'react-native-localization'
 export default strings = new LocalizedStrings({
     en: {
+        title_saralapp:'Saral Scan App',
         cancel_text_caps: 'CANCEL',
         cancel_text: 'Cancel',
         ok_text: 'Ok',
         submit_text: 'SUBMIT',
+        Back :'Back',
+        get_start: 'GET STARTED',
         permission_deny: 'Permission Deny',
         you_have_no_permission_to_change_settings: 'You have no permission to change settings',
         open_settings: 'Open Settings',
@@ -81,5 +84,6 @@ export default strings = new LocalizedStrings({
         student_roll_length_error: 'RollNo. should be 7 digit',
         sat_string: 'SAT',
         pat_string: 'PAT',
+        welcome_up:'Welcome to Saral Scan App'
     }
 })

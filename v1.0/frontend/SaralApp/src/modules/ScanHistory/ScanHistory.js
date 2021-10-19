@@ -13,12 +13,13 @@ import Strings from '../../utils/Strings';
 import HeaderComponent from '../common/components/HeaderComponent';
 import Spinner from '../common/components/loadingIndicator';
 import ScanHistoryCard from './ScanHistoryCard';
-
+import ButtonComponent from '../common/components/ButtonComponent';
 const ScanHistory = ({
     loginData,
     navigation,
     roiData,
     apiStatus,
+    multiBrandingData,
     absenetPresentReducer,
     filteredData
 }) => {
@@ -58,11 +59,6 @@ const ScanHistory = ({
 
     return (
         <View style={styles.container}>
-            {/* <HeaderComponent
-                title={Strings.up_saralData}
-                customLogoutTextStyle={{ color: AppTheme.GREY }}
-                versionText={apkVersion}
-            /> */}
 
             {
                 (loginData && loginData.data)
@@ -77,10 +73,8 @@ const ScanHistory = ({
                     </Text>
                 </View>
             }
-
-
             <View style={styles.container1}>
-                <Text style={styles.header1TextStyle}>
+            <Text style={[styles.header1TextStyle,{borderColor:multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE, backgroundColor:multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE}]}>
                     {Strings.ongoing_scan}
                 </Text>
             </View>
@@ -93,6 +87,7 @@ const ScanHistory = ({
             <ScanHistoryCard
                 showButtons={apiStatus.unauthorized ? false : true}
                 navigation={navigation}
+                Theme ={multiBrandingData ? multiBrandingData.themeColor1 :AppTheme.BLUE}
                 isLoading={isLoading}
                 setIsLoading={setIsLoading}
                 scanStatusData={scanStatusData}
@@ -101,6 +96,14 @@ const ScanHistory = ({
             {
                 isLoading && <Spinner animating={isLoading} />
             }
+                <ButtonComponent
+                customBtnStyle={[styles.nxtBtnStyle, {backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+                btnText={Strings.Back.toUpperCase()}
+                activeOpacity={0.8}
+                 onPress={() => navigation.navigate('StudentsList')}
+                // onPress={navigateToNext}
+            />
+       
         </View>
     );
 }
@@ -110,6 +113,7 @@ const mapStateToProps = (state) => {
         loginData: state.loginData,
         apiStatus: state.apiStatus,
         roiData: state.roiData.response,
+        multiBrandingData: state.multiBrandingData.response.data
     }
 }
 
@@ -137,4 +141,5 @@ const styles = StyleSheet.create({
         color: AppTheme.BLACK,
         letterSpacing: 1
     },
+    nxtBtnStyle:{top:100,  marginHorizontal: 40, marginBottom: 20,borderRadius: 10,}
 });

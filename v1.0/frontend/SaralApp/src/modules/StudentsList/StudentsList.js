@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Text, View, FlatList, Alert } from 'react-native';
+import { Text, View, FlatList, Alert, ScrollView } from 'react-native';
 
 //redux
 import { connect, useDispatch } from 'react-redux';
@@ -42,13 +42,9 @@ const StudentsList = ({
     filteredData,
     loginData,
     navigation,
-    scanTypeData,
     saveAbsentStudent,
-    absentStudentDataResponse,
-    roiData,
-    apiStatus,
+    multiBrandingData,
     scanedData,
-    getScanStatusData
 }) => {
 
 
@@ -67,10 +63,10 @@ const StudentsList = ({
     const prevloginResponse = usePrevious(loginData);
     const prevSaveRes = usePrevious(saveAbsentStudent)
 
+
     useEffect(() => {
         studentData()
-        // getRoi()
-        // callScanStatusData()
+        
     }, []);
 
     useEffect(() => {
@@ -150,6 +146,8 @@ const StudentsList = ({
     const renderStudentData = ({ item }) => {
         return (
             <StudentsDataComponent
+                themeColor1 ={multiBrandingData?multiBrandingData.themeColor1:AppTheme.BLUE}
+                themeColor2 = {multiBrandingData?multiBrandingData.themeColor2:AppTheme.LIGHT_BLUE}
                 item={item}
                 pabsent={item.studentAvailability}
                 scanedData={scanedData}
@@ -236,15 +234,11 @@ const StudentsList = ({
         dispatch(APITransport(apiObj))
     }
 
+
     return (
+        <ScrollView>
         <View style={{ flex: 1, backgroundColor: 'white' }}>
 
-            {/* <HeaderComponent
-                title={Strings.up_saralData}
-                logoutHeaderText={Strings.logout_text}
-                customLogoutTextStyle={{ color: AppTheme.GREY }}
-                onLogoutClick={onLogoutClick}
-            /> */}
             {(loginData && loginData.data) &&
                 <View>
                     <Text
@@ -274,18 +268,18 @@ const StudentsList = ({
                     {apkVersion}
                 </Text>
             </Text>
-
             <FlatList
                 data={allStudentData}
                 renderItem={renderStudentData}
+                background ={multiBrandingData?multiBrandingData.themeColor1:AppTheme.BLUE}
                 ListEmptyComponent={renderEmptyList}
                 keyExtractor={(item) => item.studentId.toString()}
                 contentContainerStyle={styles.flatlistCon}
                 showsVerticalScrollIndicator={false}
             />
-
+           
             <ButtonComponent
-                customBtnStyle={styles.nxtBtnStyle}
+                customBtnStyle={[styles.nxtBtnStyle,{backgroundColor:multiBrandingData ? multiBrandingData.themeColor1: AppTheme.BLUE}]}
                 btnText={Strings.next_text.toUpperCase()}
                 activeOpacity={0.8}
                 // onPress={() => navigateToNext(loginData.data.jwtToken)}
@@ -301,6 +295,7 @@ const StudentsList = ({
             }
 
         </View>
+        </ScrollView>
     );
 }
 
@@ -313,6 +308,7 @@ const mapStateToProps = (state) => {
         saveAbsentStudent: state.saveAbsentStudent,
         absentStudentDataResponse: state.absentStudentDataResponse,
         apiStatus: state.apiStatus,
+        multiBrandingData: state.multiBrandingData.response.data,
         scanedData: state.scanedData.response
     }
 }

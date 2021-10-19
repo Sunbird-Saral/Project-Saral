@@ -191,7 +191,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Apurva\",\n    \"section\": \"D\",\n    \"studentClass\": [\n        {\n            \"classId\": \"2\"\n        }\n    ]\n}"
+							"raw": "{\n    \"name\": \"Apurva\",\n    \"section\": \"D\",\n    \"studentClass\": [\n        {\n            \"classId\": \"2\"\n        }\n    ],\n    \"studentId\": \"1232\"\n}"
 						},
 						"url": {
 							"raw": "{{url}}/createStudent",
@@ -904,6 +904,17 @@
 								}
 							}
 						},
+						"url": {
+							"raw": "{{url}}/brand",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"brand"
+							]
+						},
+						"method": "DELETE",
+						"header": [],
 						"url": {
 							"raw": "{{url}}/brand",
 							"host": [

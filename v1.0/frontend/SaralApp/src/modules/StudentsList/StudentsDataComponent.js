@@ -7,6 +7,7 @@ import { styles } from './StudentsDataStyle';
 
 const StudentsDataComponent = ({
     item,
+    themeColor1, 
     pabsent,
     stdArray,
     scanedData,
@@ -81,7 +82,7 @@ const StudentsDataComponent = ({
         setStdMarkAsPrsAbst(data, chkPresent)
     }
     return (
-        <View style={[styles.cardCon, { backgroundColor: isPresent ? AppTheme.BLUE : AppTheme.LIGHT_BLUE }]}>
+        <View style={[styles.cardCon, { backgroundColor: isPresent ? themeColor1 : AppTheme.BLUE }]}>
             <View style={[styles.cardChildCon, { backgroundColor: "#ffffffED" }]}>
 
                 <Text style={styles.aadhar}>{item.studentId}</Text>
@@ -90,7 +91,7 @@ const StudentsDataComponent = ({
                 <View style={styles.line} />
 
                 <TouchableOpacity
-                    style={[styles.btnCon, { backgroundColor: isPresent ? AppTheme.BLUE : AppTheme.LIGHT_BLUE }]}
+                    style={[styles.btnCon, { backgroundColor: isPresent ? themeColor1 : AppTheme.LIGHT_BLUE }]}
                     activeOpacity={0.7}
                     onPress={() => onBtnClick(item)}
                 >

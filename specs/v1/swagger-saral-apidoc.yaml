@@ -12,6 +12,7 @@ tags:
 - name: "Exam"
 - name: "Marks"
 - name: "ROI"
+- name: "Brand"
 
 
 securityDefinitions:
@@ -217,7 +218,7 @@ paths:
               classId:
                 type: string
       responses:
-        "201":
+        "200":
           description: "successful operation"
           schema:
             $ref: "#/definitions/FetchStudentsByQueryResponse"
@@ -258,6 +259,8 @@ paths:
               - classId
             properties:
               classId:
+                type: string
+              section:
                 type: string
       responses:
         "200":
@@ -516,6 +519,67 @@ paths:
         "400":
           description: "unsuccessful operation"
           
+  /brand:
+    post:
+      security:
+        - Bearer: []
+      tags:
+        - "Brand"
+      summary: "Create Brand for state"
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: "#/definitions/CreateBrandBody"
+      responses:
+        "201":
+          description: "Brand has been created successfully ."
+        "400":
+          description: "unsuccessful operation"
+    
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - "Brand"
+      summary: "Get Brand for state"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/CreateBrandBody"
+        "404":
+          description: "Brand does not exist."
+          
+    delete:
+      security:
+        - Bearer: []
+      tags:
+        - "Brand"
+      summary: "Delete Brand for state"
+      responses:
+        "200":
+          description: "Brand has been deleted successfully."
+        "404":
+          description: "Brand does not exist."
+          
+    put:
+      security:
+        - Bearer: []
+      tags:
+        - "Brand"
+      summary: "Update Brand for state"     
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: "#/definitions/CreateBrandBody"
+      responses:
+        "200":
+          description: "Brand has been updated successfully."
+        "400":
+          description: "unsuccessful operation"
+
 
 definitions:
   Schools:
@@ -728,7 +792,7 @@ definitions:
     type: object
     properties:
       students: 
-        $ref: '#/definitions/FetchStudentsByQueryResponse' 
+        $ref: '#/definitions/FetchStudentsByQueryAndExamResponse' 
       exams: 
         $ref: '#/definitions/GetExamByClassResponse' 
       
@@ -789,6 +853,9 @@ definitions:
       section:
         type: string
         description: Class Section
+      studentId:
+        type: string
+        description: Student ID
       studentClass:
         $ref: '#/definitions/StudentClass' 
         
@@ -923,6 +990,9 @@ definitions:
         totalMarks:
           type: string
           description: Total Marks
+        type:
+          type: string
+          description: type of Exam
         questions:
           $ref: '#/definitions/Questions'  
         examId:
@@ -983,13 +1053,6 @@ definitions:
           type: string
         examDate:
           type: string
-        questions:
-          $ref: '#/definitions/Questions' 
-          
-  ExamsMetadata:
-    type: array
-    items:
-      properties:
         questions:
           $ref: '#/definitions/Questions' 
     
@@ -1073,7 +1136,6 @@ definitions:
         type: string
       type: 
         type: string
-        enum: ["SAT","PAT"]
       roi:
         $ref: '#/definitions/rois'
           
@@ -1163,6 +1225,19 @@ definitions:
       updatedAt:
         type: string
         format: date-time
+        
+        
+  CreateBrandBody:
+     type: object
+     properties:
+      appName:
+        type: string
+      themeColor1:
+        type: string
+      themeColor2:
+        type: string
+      logoImage:
+        type: string
         
 
     
