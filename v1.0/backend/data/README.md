@@ -30,15 +30,12 @@ for deleting current data in database
 
 ## roi:-
 **type:- SAT**
-**ROLLNUMBER:- for UP SAT we have 3 digit roll number**
+**ROLLNUMBER:- for UP SAT MULTI SUBJECT we have 3 digit roll number**
 
 | SUBJECT | STATE | TYPE | CLASS | EXAM ID|
 |---|---|---|---|---|
-|MATH|UP|SAT|3|3|
-|MATH|UP|SAT|4|4|
-|MATH|UP|SAT|5|5|
-|HINDI|UP|SAT|4|6|
-|HINDI|UP|SAT|8|10|
+|Multi-Subject|UP|SAT|4|3|
+||Multi-Subject|UP|SAT|8|7|
 
 **type:- UP_HINDI_4S**
 **ROLLNUMBER:- UP_HINDI_4S it accept 7 digit roll number**
@@ -65,15 +62,15 @@ for deleting current data in database
 | SUBJECT | STATE | TYPE | CLASSID | EXAMID|
 |---|---|---|---|---|
 |Hindi|UP|UP_HINDI_4S|2|1|
-|Hindi|UP|UP_HINDI_4S|5|7|
-|Hindi|UP|UP_HINDI_4S|6|8|
-|Hindi|UP|UP_HINDI_4S|7|9|
+|Hindi|UP|UP_HINDI_4S|5|4|
+|Hindi|UP|UP_HINDI_4S|6|5|
+|Hindi|UP|UP_HINDI_4S|7|7|
 
 **type:- UP_HINDI_3S**
 **ROLLNUMBER:- UP_HINDI_3S it accept 7 digit roll number**
 
 
-* name of student in UP_HINDI_4S school:- 
+* name of student in UP_HINDI_3S school:- 
 
 |STUDENT NAME|STUDENT ID|CLASS|
 |---|---|---|
@@ -135,6 +132,20 @@ name of student in gujrat school:-
 | hindi|gujrat|PAT| 3|14|
 | maths|gujrat|PAT|3|15|
 |english|gujrat|PAT|3|16|
+
+## type:- Gujrat_HINDI_1S 
+## ROLLNUMBER:- 7 digit student Id name of student in Gujrat_HINDI_4S:-
+
+|STUDENT NAME| STUDENT ID| 
+|---|---|
+|divya negi|	30000001|
+|Kamla Dharamwal|	30000002|
+|Jayanti Bisht|	30000003|
+
+## roi:-
+|SUBJECT|STATE|TYPE|CLASS|EXAM|
+|---|---|---|---|---|
+|hindi|	gujrat|	gujrat_hindi_1s|4|18|
 
 # state:- UP(For multiple students)
 ## schoolId:-4
