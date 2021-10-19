@@ -21,8 +21,6 @@ withCredentials([usernamePassword(credentialsId: 'anuvaad-docker-hub-credentials
 
 	}
 
-
-	}
    
  }
 catch (err) {
