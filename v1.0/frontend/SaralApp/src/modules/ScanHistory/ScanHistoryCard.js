@@ -14,9 +14,6 @@ import APITransport from '../../flux/actions/transport/apitransport'
 import { styles } from './ScanHistoryStyles';
 import { scanStatusDataAction } from '../ScanStatus/scanStatusDataAction';
 import axios from 'axios';
-import { NavigationActions, StackActions } from 'react-navigation';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
 
 const ScanHistoryCard = ({
     showButtons = true,
@@ -26,7 +23,8 @@ const ScanHistoryCard = ({
     loginData,
     setIsLoading,
     scanStatusData,
-    setScanStatusData
+    setScanStatusData,
+    Theme
 }) => {
 
     const SAVED_SCANNED_DATA_INTO_LOCAL = 'saved_scanned_data_into_local'
@@ -134,8 +132,6 @@ const ScanHistoryCard = ({
                     setScannedDataIntoLocal(localScanData)
                 })
                 .catch(function (err) {
-                    console.warn("Error",err);
-                    console.warn("Error",err.response);
                     Alert.alert("Something Went Wrong")
                     setIsLoading(false)
                     clearTimeout(id)
@@ -152,8 +148,9 @@ const ScanHistoryCard = ({
 
 
     return (
+        <View>
         <TouchableOpacity
-            style={[styles.container]}
+            style={[styles.container, { backgroundColor: Theme ? Theme : AppTheme.BLUE }]}
             disabled
 
         >
@@ -275,8 +272,11 @@ const ScanHistoryCard = ({
             }
 
         </TouchableOpacity>
+    
+        </View>
     );
 }
+
 const mapStateToProps = (state) => {
     return {
         filteredData: state.filteredData,

@@ -20,10 +20,5 @@ const mapStateToProps = (state) => {
     }
 }
 
-// const mapDispatchToProps = (dispatch) => {
-//     return bindActionCreators({
-//         OcrLocalResponseAction: OcrLocalResponseAction,
-//     }, dispatch)
-// }
 
 export default (connect(mapStateToProps, null)(ScannedDetailsComponent));

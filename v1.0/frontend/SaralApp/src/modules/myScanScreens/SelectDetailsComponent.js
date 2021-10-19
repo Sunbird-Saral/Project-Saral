@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, BackHandler, Alert, TouchableOpacity } from 'react-native';
+import { View, ScrollView, Text, BackHandler, Alert, TouchableOpacity,Image } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -7,6 +7,7 @@ import _ from 'lodash'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import Strings from '../../utils/Strings';
 import AppTheme from '../../utils/AppTheme';
+import { Assets } from '../../assets/index'
 import Spinner from '../common/components/loadingIndicator';
 import { apkVersion } from '../../configs/config';
 import HeaderComponent from '../common/components/HeaderComponent';
@@ -23,8 +24,6 @@ import { StackActions, NavigationActions } from 'react-navigation';
 import { ROIAction } from '../StudentsList/ROIAction';
 import { GetAbsentStudentData } from '../../flux/actions/apis/getAbsentStudentData';
 import { LoginAction } from '../../flux/actions/apis/LoginAction';
-import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
-
 
 const clearState = {
     defaultSelected: Strings.select_text,
@@ -99,14 +98,15 @@ class SelectDetailsComponent extends Component {
             examDate: [],
             calledAbsentStatus: false,
             absentStatusPayload: null,
-            subjectsData:[]
+            subjectsData:[],
+            filterdataid:[],     
         }
         this.onBack = this.onBack.bind(this)
+
     }
 
     componentDidMount() {
         const { navigation, scanTypeData } = this.props
-
         navigation.addListener('willFocus', async payload => {
             BackHandler.addEventListener('hardwareBackPress', this.onBack)
 
@@ -157,16 +157,19 @@ class SelectDetailsComponent extends Component {
                 dispatch(APITransport(apiObj))
             }
         }
+       
         Alert.alert(Strings.message_text, Strings.are_you_sure_you_want_to_logout, [
             { 'text': Strings.no_text, style: 'cancel' },
             {
                 'text': Strings.yes_text, onPress: async () => {
                     await AsyncStorage.clear();
+               
                     this.props.navigation.navigate('auth')
                 }
             }
         ])
     }
+    
 
     loader = (flag) => {
         this.setState({
@@ -204,15 +207,11 @@ class SelectDetailsComponent extends Component {
                         this.setState({
                             dataPayload: payload
                         }, () => {
+                       
                             // let isTokenValid = validateToken(loginDetails.expiresOn)                                 
                             // if(isTokenValid) {
                             this.callStudentsData(loginDetails.token)
-                            // }
-                            // else if(!isTokenValid) {
-                            //     this.setState({
-                            //         callApi: 'callStudentsData'
-                            //     }, () => this.loginAgain())
-                            // }
+                      
                         })
                     }
                 })
@@ -315,17 +314,9 @@ class SelectDetailsComponent extends Component {
         this.setState({
             absentStatusPayload: payload
         }, () => {
-            // let isTokenValid = validateToken(loginDetails.expiresOn)
-
-            // if (isTokenValid) {
+         
             this.callAbsentStatus(payload, loginDetails.jwtToken)
-            // }
-            // else if (!isTokenValid) {
-            //     this.setState({
-            //         callApi: 'callAbsentStatus'
-            //     })
-            //     this.loginAgain()
-            // }
+        
         })
     }
 
@@ -422,6 +413,7 @@ class SelectDetailsComponent extends Component {
 
     async componentDidUpdate(prevProps) {
         if (prevProps != this.props) {
+           
             const { apiStatus, studentsAndExamData, absentStudentDataResponse, getScanStatusData, loginData } = this.props
             const { calledStudentsData, calledAbsentStatus, selectedClass, selectedSection, selectedClassId, calledScanStaus, calledLogin, callApi, absentStatusPayload } = this.state
             if (apiStatus && prevProps.apiStatus != apiStatus && apiStatus.error) {
@@ -650,15 +642,7 @@ class SelectDetailsComponent extends Component {
                 })
                 return false
             }
-            // else if (selectedDate.length == 0) {
-            //     this.setState({
-            //         errClass: '',
-            //         errSection: '',
-            //         errSub: '',
-            //         errDate: Strings.please_select_date
-            //     })
-            //     return false
-            // }
+        
             return true
         }
         return true
@@ -737,16 +721,15 @@ class SelectDetailsComponent extends Component {
             this.setState({ dateVisible: false })
         }
     }
-
+   
     render() {
-        const { isLoading, defaultSelected, classList, classListIndex, selectedClass, sectionList, sectionListIndex, selectedSection, pickerDate, selectedDate, subArr, selectedSubject, subIndex, errClass, errSub, errDate, errSection, sectionValid, dateVisible, examTestID } = this.state
-        const { loginData, scanTypeData } = this.props
+        const {navigation, isLoading, defaultSelected, classList, classListIndex, selectedClass, sectionList, sectionListIndex, selectedSection, pickerDate, selectedDate, subArr, selectedSubject, subIndex, errClass, errSub, errDate, errSection, sectionValid, dateVisible, examTestID } = this.state
+        const { loginData, scanTypeData } = this.props 
         return (
-
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
                 <HeaderComponent
-                    // title={Strings.up_saralData}
                     logoutHeaderText={Strings.logout_text}
+                    titletextstyle={{color:AppTheme.WHITE}}
                     customLogoutTextStyle={{ color: AppTheme.GREY }}
                     onLogoutClick={this.onLogoutClick}
                 />
@@ -818,7 +801,6 @@ class SelectDetailsComponent extends Component {
                                     />
                                 </View>}
                             {
-                                // scanTypeData.scanType == SCAN_TYPES.PAT_TYPE &&
                                 sectionListIndex != -1 && sectionValid &&
                                 <View style={[styles.fieldContainerStyle, { paddingBottom: subIndex != -1 ? '10%' : '10%' }]}>
                                     <View style={{ flexDirection: 'row' }}>
@@ -835,27 +817,19 @@ class SelectDetailsComponent extends Component {
                                     />
                                 </View>
                             }
-                            {/* {
-                            (subIndex != -1 &&  sectionValid)
-                             &&
-                                    <TextField
-                                        customContainerStyle={{ marginHorizontal: 0, paddingBottom: '10%', paddingVertical: '0%', }}
-                                        labelText={Strings.test_id}
-                                        errorField={errDate != ''}
-                                        errorText={errDate}
-                                        value={examTestID[subIndex]}
-                                        editable={false}
-                                        placeholder={Strings.please_select_date}
-                                    />
-                                } */}
-                            <ButtonComponent
-                                customBtnStyle={styles.nxtBtnStyle}
-                                btnText={Strings.submit_text}
-                                onPress={this.onSubmitClick}
-                            />
+                    
                         </View>
+                       
                     </View>
+                    
                 </ScrollView>
+                <View style={styles.btnContainer}>
+                <ButtonComponent
+                            customBtnStyle={[styles.nxtBtnStyle,{backgroundColor:this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE}]}
+                            btnText={Strings.submit_text}
+                            onPress={this.onSubmitClick}
+                        />
+                        </View>
                 {dateVisible && (
                     <DateTimePicker
                         display="default"
@@ -877,11 +851,14 @@ const styles = {
         marginHorizontal: '6%',
         alignItems: 'center'
     },
+    btnContainer: {
+        paddingVertical: '15%',
+        alignItems:'center',
+        paddingHorizontal:10
+    },
     header1TextStyle: {
-        // backgroundColor: AppTheme.WHITE_OPACITY,
         lineHeight: 40,
         borderRadius: 4,
-        // borderWidth: 1,
         borderColor: AppTheme.LIGHT_GREY,
         width: '100%',
         textAlign: 'center',
@@ -902,7 +879,7 @@ const styles = {
         lineHeight: 35
     },
     nxtBtnStyle: {
-        marginHorizontal: '10%',
+     
     }
 }
 
@@ -915,7 +892,8 @@ const mapStateToProps = (state) => {
         apiStatus: state.apiStatus,
         roiData: state.roiData,
         absentStudentDataResponse: state.absentStudentDataResponse,
-        getScanStatusData: state.getScanStatusData
+        getScanStatusData: state.getScanStatusData,
+        multiBrandingData: state.multiBrandingData.response.data
     }
 }
 

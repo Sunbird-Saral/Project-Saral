@@ -4,18 +4,16 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { StackActions, NavigationActions } from 'react-navigation';
 import SystemSetting from 'react-native-system-setting'
-import RNOpenCvCameraModel from '../../utils/RNOpenCvCamera';
 import Strings from '../../utils/Strings';
 import AppTheme from '../../utils/AppTheme';
 import Spinner from '../common/components/loadingIndicator';
 import { OcrLocalResponseAction } from '../../flux/actions/apis/OcrLocalResponseAction'
 import { apkVersion } from '../../configs/config';
-import HeaderComponent from '../common/components/HeaderComponent';
-import { SCAN_TYPES } from '../../utils/CommonUtils';
 import ScanHistoryCard from '../ScanHistory/ScanHistoryCard';
-
 import SaralSDK from '../../../SaralSDK'
 import { getScannedDataFromLocal } from '../../utils/StorageUtils';
+import ButtonComponent from '../common/components/ButtonComponent';
+import ScanHistory from '../ScanHistory/ScanHistory';
 
 class MyScanComponent extends Component {
     constructor(props) {
@@ -26,7 +24,6 @@ class MyScanComponent extends Component {
             oldBrightness: null,
             activityOpen: false,
             isLoading: false,
-            scanStatusData: 0
         }
         this.onBack = this.onBack.bind(this)
     }
@@ -99,7 +96,7 @@ class MyScanComponent extends Component {
             const { navigation } = this.props
             const { params } = navigation.state
             if (params && params.from_screen && params.from_screen == 'cameraActivity') {
-                this.props.navigation.navigate('selectDetails', { from_screen: 'cameraActivity' })
+                this.props.navigation.navigate('ScanHistory', { from_screen: 'cameraActivity' })
                 return true
             }
         }
@@ -203,14 +200,11 @@ class MyScanComponent extends Component {
     }
 
     render() {
-        const { isLoading } = this.state;
+        const { isLoading, Theme } = this.state;
         const { loginData } = this.props
         return (
 
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
-                {/* <HeaderComponent
-                    title={Strings.up_saralData}
-                /> */}
                 {
                     (loginData && loginData.data)
                     &&
@@ -249,12 +243,13 @@ class MyScanComponent extends Component {
                     keyboardShouldPersistTaps={'handled'}
                 >
                     <View style={styles.onGoingContainer}>
-                        <Text style={styles.header1TextStyle}>
+                        <Text style={[styles.header1TextStyle, { backgroundColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE }]}>
                             {Strings.ongoing_scan}
                         </Text>
                     </View>
 
                     <ScanHistoryCard
+                        Theme={this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE}
                         showButtons={false}
                         scanStatusData={this.state.scanStatusData}
                     />
@@ -262,16 +257,17 @@ class MyScanComponent extends Component {
                 </ScrollView>
                 <View style={styles.bottomTabStyle}>
                 </View>
-
+                
+             
                 <View style={[styles.bottomTabStyle, { height: 135, width: '50%', marginHorizontal: '25%', backgroundColor: 'transparent', justifyContent: 'center' }]}>
                     <TouchableOpacity style={[styles.subTabContainerStyle]}
                         onPress={this.onScanClick}
-                    >
+                    >     
                         <TouchableOpacity
                             style={[styles.scanTabContainerStyle,]}
                         >
                             <TouchableOpacity
-                                style={styles.scanSubTabContainerStyle}
+                                style={[styles.scanSubTabContainerStyle, { backgroundColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE }]}
                             >
                                 <Image
                                     source={require('../../assets/images/scanIcon.jpeg')}
@@ -280,9 +276,10 @@ class MyScanComponent extends Component {
                                 />
                             </TouchableOpacity>
                         </TouchableOpacity>
-                        <Text style={[styles.tabLabelStyle, { paddingTop: '71%' }]}>
+                        <Text style={[styles.tabLabelStyle, { paddingTop: '60%' }]}>
                             {Strings.scan_text}
                         </Text>
+                       
                     </TouchableOpacity>
                 </View>
                 {
@@ -335,7 +332,7 @@ const styles = {
         justifyContent: 'space-between'
     },
     subTabContainerStyle: {
-        height: 100,
+        // height: 100,
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -343,7 +340,18 @@ const styles = {
         width: 40,
         height: 40
     },
+    Backbutton:{
+        width:200,
+        lineHeight: 40,
+        textAlign: 'center',
+        fontSize: AppTheme.FONT_SIZE_LARGE,
+        color: AppTheme.BLACK,
+        letterSpacing: 1,
+        fontWeight: 'bold'
+
+    },
     tabLabelStyle: {
+        height:100,
         lineHeight: 40,
         textAlign: 'center',
         fontSize: AppTheme.FONT_SIZE_SMALL,
@@ -377,7 +385,8 @@ const mapStateToProps = (state) => {
         filteredData: state.filteredData,
         scanTypeData: state.scanTypeData.response,
         scanedData: state.scanedData,
-        roiData: state.roiData.response
+        roiData: state.roiData.response,
+        multiBrandingData: state.multiBrandingData.response.data
     }
 }
 

@@ -912,6 +912,17 @@
 							"path": [
 								"brand"
 							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/brand",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"brand"
+							]
 						}
 					},
 					"response": []

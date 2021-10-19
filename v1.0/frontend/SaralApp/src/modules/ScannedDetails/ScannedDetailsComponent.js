@@ -22,9 +22,7 @@ import { getLoginCred, getPresentAbsentStudent, getScanData, getScannedDataFromL
 import { NavigationActions, StackActions } from 'react-navigation';
 import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
 import Spinner from '../common/components/loadingIndicator';
-
 import APITransport from '../../flux/actions/transport/apitransport';
-
 import { bindActionCreators } from 'redux';
 import axios from 'axios';
 import { OcrLocalResponseAction } from '../../flux/actions/apis/OcrLocalResponseAction';
@@ -36,6 +34,7 @@ const ScannedDetailsComponent = ({
     filteredData,
     scanTypeData,
     ocrLocalResponse,
+    multiBrandingData,
     scanedData
 }) => {
 
@@ -70,9 +69,6 @@ const ScannedDetailsComponent = ({
 
     const inputRef = React.createRef();
     const dispatch = useDispatch()
-
-
-    //function
 
 
     useEffect(() => {
@@ -445,8 +441,8 @@ const ScannedDetailsComponent = ({
                                 editable={edit}
                                 keyboardType={'numeric'}
                             />
-                            <Text style={styles.nameTextStyle}>{Strings.Exam} : {filteredData.subject} {filteredData.examDate} ({filteredData.examTestID})</Text>
-                            {/* <Text style={styles.nameTextStyle}>{Strings.test_id + ': ' + filteredData.examTestID}</Text> */}
+                             <Text style={styles.nameTextStyle}>{Strings.Exam} : {filteredData.subject} {filteredData.examDate} ({filteredData.examTestID})</Text>
+                    
                             <Text style={styles.nameTextStyle}>{Strings.page_no + ': ' + (currentIndex + 1)}</Text>
                         </View>
                     </View>
@@ -516,8 +512,8 @@ const ScannedDetailsComponent = ({
                         onPress={() => isMultipleStudent ? goBackFrame() : onBackButtonClick()}
                     />
                     <ButtonComponent
-                        customBtnStyle={styles.nxtBtnStyle}
-                        customBtnTextStyle={styles.nxtBtnTextStyle}
+                        customBtnStyle={[styles.nxtBtnStyle,{borderColor:multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}]}
+                        customBtnTextStyle={{color:multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}}
                         btnText={nextBtn.toUpperCase()}
                         onPress={() => isMultipleStudent ? goNextFrame() : onSubmitClick()}
                     />
@@ -642,7 +638,6 @@ const ScannedDetailsComponent = ({
             if (sumOfObtainedMarks > 0) {
                 //with MAX & OBTAINED MARKS
                 if (sumOfObtainedMarks != totalMarkSecured) {
-                    console.log("SUMOFOBTAINEMARKSss", sumOfObtainedMarks);
                     setObtnMarkErr(true)
                     showErrorMessage("Sum Of All obtained marks should be equal to marksObtained")
                 }
@@ -748,6 +743,7 @@ const mapStateToProps = (state) => {
         filteredData: state.filteredData.response,
         scanTypeData: state.scanTypeData.response,
         roiData: state.roiData,
+        multiBrandingData: state.multiBrandingData.response.data,
         scanedData: state.scanedData.response
     }
 }

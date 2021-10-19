@@ -48,11 +48,6 @@ const ScanStatus = ({
 
     return (
         <View style={styles.container}>
-            {/* <HeaderComponent
-                title={Strings.up_saralData}
-                customLogoutTextStyle={{ color: AppTheme.GREY }}
-                versionText={apkVersion}
-            /> */}
             {
                 (loginData && loginData.data)
                 &&
