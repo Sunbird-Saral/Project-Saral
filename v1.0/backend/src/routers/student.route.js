@@ -96,23 +96,6 @@ router.post('/fetchStudentsandExamsByQuery', auth, async (req, res) => {
                 }
                 }
 
-        // let studentIds = students.map(id => id.studentId)
-        // // console.log(studentIds)
-        // const marks = await Marks.StudentsMark(studentIds) // 4field data 
-        // console.log(marks.length , studentIds.length)
-
-        // if (marks.length) {
-        //     for (let student of students) {
-        //         for (let mark of marks) {
-        //             if (student.studentId == mark.studentId) student["studentAvailability"] = mark.studentAvailability
-        //         }
-        //         }
-        // } else {
-        //     console.log("hiiiii")
-        //     for (let student of students) {
-        //         student["studentAvailability"] = "true"
-        //     }
-        // }
         const exams = await Exam.find(examMatch, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 }).lean()
         res.send({ students, exams })
     } catch (e) {
