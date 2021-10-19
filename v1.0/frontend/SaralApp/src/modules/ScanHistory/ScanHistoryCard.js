@@ -148,8 +148,9 @@ const ScanHistoryCard = ({
 
 
     return (
+        <View>
         <TouchableOpacity
-        style={[styles.container,{backgroundColor:Theme ? Theme : AppTheme.BLUE}]}
+            style={[styles.container, { backgroundColor: Theme ? Theme : AppTheme.BLUE }]}
             disabled
 
         >
@@ -271,8 +272,11 @@ const ScanHistoryCard = ({
             }
 
         </TouchableOpacity>
+    
+        </View>
     );
 }
+
 const mapStateToProps = (state) => {
     return {
         filteredData: state.filteredData,

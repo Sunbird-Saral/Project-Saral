@@ -6,6 +6,7 @@ export default strings = new LocalizedStrings({
         cancel_text: 'Cancel',
         ok_text: 'Ok',
         submit_text: 'SUBMIT',
+        Back :'Back',
         get_start: 'GET STARTED',
         permission_deny: 'Permission Deny',
         you_have_no_permission_to_change_settings: 'You have no permission to change settings',

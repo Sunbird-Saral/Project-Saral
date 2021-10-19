@@ -42,14 +42,9 @@ const StudentsList = ({
     filteredData,
     loginData,
     navigation,
-    scanTypeData,
     saveAbsentStudent,
     multiBrandingData,
-    absentStudentDataResponse,
-    roiData,
-    apiStatus,
     scanedData,
-    getScanStatusData
 }) => {
 
 
@@ -151,8 +146,8 @@ const StudentsList = ({
     const renderStudentData = ({ item }) => {
         return (
             <StudentsDataComponent
-            
                 themeColor1 ={multiBrandingData?multiBrandingData.themeColor1:AppTheme.BLUE}
+                themeColor2 = {multiBrandingData?multiBrandingData.themeColor2:AppTheme.LIGHT_BLUE}
                 item={item}
                 pabsent={item.studentAvailability}
                 scanedData={scanedData}

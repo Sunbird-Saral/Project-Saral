@@ -13,7 +13,7 @@ import Strings from '../../utils/Strings';
 import HeaderComponent from '../common/components/HeaderComponent';
 import Spinner from '../common/components/loadingIndicator';
 import ScanHistoryCard from './ScanHistoryCard';
-
+import ButtonComponent from '../common/components/ButtonComponent';
 const ScanHistory = ({
     loginData,
     navigation,
@@ -96,6 +96,14 @@ const ScanHistory = ({
             {
                 isLoading && <Spinner animating={isLoading} />
             }
+                <ButtonComponent
+                customBtnStyle={[styles.nxtBtnStyle, {backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+                btnText={Strings.Back.toUpperCase()}
+                activeOpacity={0.8}
+                 onPress={() => navigation.navigate('StudentsList')}
+                // onPress={navigateToNext}
+            />
+       
         </View>
     );
 }
@@ -133,4 +141,5 @@ const styles = StyleSheet.create({
         color: AppTheme.BLACK,
         letterSpacing: 1
     },
+    nxtBtnStyle:{top:100,  marginHorizontal: 40, marginBottom: 20,borderRadius: 10,}
 });

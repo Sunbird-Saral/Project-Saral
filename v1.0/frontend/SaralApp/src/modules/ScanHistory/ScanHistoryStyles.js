@@ -47,6 +47,6 @@ export const styles = StyleSheet.create({
         backgroundColor: AppTheme.WHITE,
         borderLeftWidth: .5,
         borderRightWidth: 1,
-    }
+    },
 
 });

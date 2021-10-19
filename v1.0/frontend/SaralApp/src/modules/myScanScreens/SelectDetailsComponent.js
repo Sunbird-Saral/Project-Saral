@@ -157,16 +157,19 @@ class SelectDetailsComponent extends Component {
                 dispatch(APITransport(apiObj))
             }
         }
+       
         Alert.alert(Strings.message_text, Strings.are_you_sure_you_want_to_logout, [
             { 'text': Strings.no_text, style: 'cancel' },
             {
                 'text': Strings.yes_text, onPress: async () => {
                     await AsyncStorage.clear();
+               
                     this.props.navigation.navigate('auth')
                 }
             }
         ])
     }
+    
 
     loader = (flag) => {
         this.setState({
