@@ -1,6 +1,6 @@
 version: '3.7'
 services:
-  aai4b-nmt-inference:
+  saral-backend:
     image: anuvaadio/${image}:${tag}
     deploy:
       replicas: 1
