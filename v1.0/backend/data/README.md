@@ -133,7 +133,8 @@ name of student in gujrat school:-
 | maths|gujrat|PAT|3|15|
 |english|gujrat|PAT|3|16|
 
-type:- Gujrat_HINDI_4S ROLLNUMBER:- 7 digit student Id name of student in Gujrat_HINDI_4S:-
+## type:- Gujrat_HINDI_1S 
+## ROLLNUMBER:- 7 digit student Id name of student in Gujrat_HINDI_4S:-
 
 |STUDENT NAME| STUDENT ID| 
 |---|---|
