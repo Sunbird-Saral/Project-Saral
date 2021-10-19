@@ -59,10 +59,10 @@ const ScanHistoryCard = ({
             setIsLoading(true)
             let filterDataLen = 0
 
-            let dummy2 = ''
+            let localScanData = ''
             if (filterData.length != 0) {
                 filterData.filter((f) => {
-                    dummy2 = data.filter((e) => {
+                    localScanData = data.filter((e) => {
                         if (e.classId == f.classId && e.subject == f.subject && e.examDate == f.examDate) {
                             return false
                         } else {
@@ -76,10 +76,8 @@ const ScanHistoryCard = ({
                 for (const value of filterData) {
                     let apiObj = new SaveScanData(value, loginData.data.token);
                     dispatch(APITransport(apiObj))
-                    callScanStatusData()
+                    callScanStatusData(filterDataLen, localScanData)
                 }
-                setScanStatusData(filterDataLen)
-                setScannedDataIntoLocal(dummy2)
             } else {
                 setIsLoading(false)
                 Alert.alert('There is no scanned data for this class!')
@@ -92,7 +90,7 @@ const ScanHistoryCard = ({
         }
     }
 
-    const callScanStatusData = async () => {
+    const callScanStatusData = async (filteredDatalen, localScanData) => {
         let loginCred = await getLoginCred()
 
         let dataPayload = {
@@ -104,10 +102,10 @@ const ScanHistoryCard = ({
             "downloadRes": true
         }
         let apiObj = new scanStatusDataAction(dataPayload);
-        FetchSavedScannedData(apiObj, loginCred.schoolId, loginCred.password)
+        FetchSavedScannedData(apiObj, loginCred.schoolId, loginCred.password, filteredDatalen, localScanData)
     }
 
-    const FetchSavedScannedData = (api, uname, pass) => {
+    const FetchSavedScannedData = (api, uname, pass, filterDataLen, localScanData) => {
         if (api.method === 'POST') {
             let apiResponse = null
             const source = axios.CancelToken.source()
@@ -132,9 +130,12 @@ const ScanHistoryCard = ({
                     clearTimeout(id)
                     api.processResponse(res)
                     dispatch(dispatchAPIAsync(api));
+                    setScanStatusData(filterDataLen)
+                    setScannedDataIntoLocal(localScanData)
                 })
                 .catch(function (err) {
-                    console.log("Err", err);
+                    console.warn("Error",err);
+                    console.warn("Error",err.response);
                     Alert.alert("Something Went Wrong")
                     setIsLoading(false)
                     clearTimeout(id)

@@ -117,8 +117,6 @@ class SelectDetailsComponent extends Component {
                     scanType: scanTypeData.scanType
                 })
             }
-            // console.log("Helo");
-            // this.loginAgain()
 
             let loginDetails = await getLoginData()
             if (loginDetails) {
@@ -155,7 +153,6 @@ class SelectDetailsComponent extends Component {
         let data = await getScannedDataFromLocal();
         if (data) {
             for (const value of data) {
-                console.log("value", value);
                 let apiObj = new SaveScanData(value, loginData.data.token);
                 dispatch(APITransport(apiObj))
             }
@@ -207,7 +204,6 @@ class SelectDetailsComponent extends Component {
                         this.setState({
                             dataPayload: payload
                         }, () => {
-                            console.log("LoginDetailexpire", loginDetails);
                             // let isTokenValid = validateToken(loginDetails.expiresOn)                                 
                             // if(isTokenValid) {
                             this.callStudentsData(loginDetails.token)
@@ -309,7 +305,6 @@ class SelectDetailsComponent extends Component {
         const { selectedClassId, selectedExam, selectedSection, loginDetails } = this.state
         // const { loginDetails } = this.props
         let schoolId = loginDetails.school.schoolId
-        console.log("seelceted", selectedClassId, selectedSection);
         let payload = {
             schoolId: schoolId,
             // examCode: selectedExam,
@@ -335,10 +330,8 @@ class SelectDetailsComponent extends Component {
     }
 
     loginAgain = async () => {
-        console.log("hello");
         let loginCred = await getLoginCred()
         if (loginCred) {
-            console.log("hellologincred", loginCred);
             this.setState({
                 isLoading: true,
                 username: loginCred.schoolId,
@@ -361,13 +354,11 @@ class SelectDetailsComponent extends Component {
             isLoading: true,
             calledLogin: true
         }, () => {
-            console.log("this", this.state.password, this.state.username);
             let encPass = cryptoText(this.state.password)
             let loginObj = {
                 "schoolId": this.state.username,
                 "password": this.state.password
             }
-            console.log("LoGiNOBJ", loginObj);
             let apiObj = new LoginAction(loginObj);
             this.props.APITransport(apiObj);
 
@@ -379,7 +370,6 @@ class SelectDetailsComponent extends Component {
             isLoading: true,
             calledAbsentStatus: true
         }, () => {
-            console.log("callAbsentStatus", payload);
             let apiObj = new GetAbsentStudentData(payload, token);
             this.props.APITransport(apiObj)
         })
@@ -546,7 +536,6 @@ class SelectDetailsComponent extends Component {
                         if (loginData.status && loginData.status == 200) {
                             let loginSaved = await setLoginData(loginData.data)
                             this.setLoginDataLocally(loginData.data)
-                            console.log("callApi", callApi);
                             if (loginSaved) {
                                 if (callApi == 'callScanStatus') {
                                     this.callScanStatus(scanStatusPayload, loginData.data.jwtToken)
@@ -554,7 +543,6 @@ class SelectDetailsComponent extends Component {
                                 else if (callApi == 'callStudentsData') {
                                     this.callStudentsData(loginData.data.jwtToken)
                                 } else if (callApi == 'callAbsentStatus') {
-                                    console.log("helloLogin");
 
                                     this.callAbsentStatus(absentStatusPayload, loginData.data.jwtToken)
                                 }
@@ -663,7 +651,6 @@ class SelectDetailsComponent extends Component {
                 return false
             }
             // else if (selectedDate.length == 0) {
-            //     console.log("Subjectsss",selectedDate);
             //     this.setState({
             //         errClass: '',
             //         errSection: '',
