@@ -18,7 +18,9 @@ const ScanHistory = ({
     loginData,
     navigation,
     roiData,
-    apiStatus
+    apiStatus,
+    absenetPresentReducer,
+    filteredData
 }) => {
 
     //Hooks
@@ -28,9 +30,19 @@ const ScanHistory = ({
     //functions
     const sumOfLocalData = async () => {
         const data = await getScannedDataFromLocal()
-        let len = 0
+        
         if (data != null) {
-            data.forEach((element, index) => {
+
+            let filter = data.filter((e) => {
+                if (filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject) {
+                    return true
+                }
+            })
+
+
+            let len = 0
+
+            filter.forEach((element, index) => {
                 len = len + element.studentsMarkInfo.length
             });
             setScanStatusData(len)
@@ -42,6 +54,7 @@ const ScanHistory = ({
     useEffect(() => {
         sumOfLocalData()
     }, [])
+
 
     return (
         <View style={styles.container}>
@@ -93,10 +106,10 @@ const ScanHistory = ({
 }
 const mapStateToProps = (state) => {
     return {
-        filteredData: state.filteredData,
+        filteredData: state.filteredData.response,
         loginData: state.loginData,
         apiStatus: state.apiStatus,
-        roiData: state.roiData.response
+        roiData: state.roiData.response,
     }
 }
 
