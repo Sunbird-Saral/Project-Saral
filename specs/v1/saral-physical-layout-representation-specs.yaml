@@ -145,4 +145,7 @@ components:
         confidence:
           type: number
           description: degree of confidence regarding the prediction
+        roiImage:
+          type: string
+          description: roi Mat Image encoded in Base64
     
