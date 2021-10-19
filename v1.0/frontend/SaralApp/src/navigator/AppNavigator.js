@@ -38,6 +38,9 @@ const MainStack = createStackNavigator(
         selectDetails: {
             screen: SelectDetailsComponent
         },
+        StudentsList: {
+            screen: StudentsList
+        },
         myScan: {
             screen: MyScanComponent
         },
@@ -49,9 +52,6 @@ const MainStack = createStackNavigator(
         },
         satScanDetails: {
             screen: SatScanDetailsComponent
-        },
-        StudentsList: {
-            screen: StudentsList
         },
         ScanHistory: {
             screen: ScanHistory

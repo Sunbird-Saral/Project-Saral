@@ -8,31 +8,24 @@ import Strings from '../../utils/Strings';
 
 //styles
 import { styles } from './ScannedDetailsStyle'
-import TabHeader from './TabHeader';
 
 //rois
 import MarksHeaderTable from './MarksHeaderTable';
 
 //components
-import ButtonWithIcon from '../common/components/ButtonWithIcon';
 import ButtonComponent from '../common/components/ButtonComponent';
-import DropDownMenu from '../common/components/DropDownComponent';
 import TextField from '../common/components/TextField';
 import { getLoginCred, getPresentAbsentStudent, getScanData, getScannedDataFromLocal, getStudentsExamData, setScanData, setScannedDataIntoLocal } from '../../utils/StorageUtils';
 import { NavigationActions, StackActions } from 'react-navigation';
-import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
 import Spinner from '../common/components/loadingIndicator';
 import APITransport from '../../flux/actions/transport/apitransport';
 import { bindActionCreators } from 'redux';
-import axios from 'axios';
 import { OcrLocalResponseAction } from '../../flux/actions/apis/OcrLocalResponseAction';
 
 
 const ScannedDetailsComponent = ({
-    loginData,
     navigation,
     filteredData,
-    scanTypeData,
     ocrLocalResponse,
     multiBrandingData,
     scanedData
@@ -592,8 +585,7 @@ const ScannedDetailsComponent = ({
                 }
             })
         }
-        // dispatch(OcrLocalResponseAction(ocrData))
-
+     
 
     }
 

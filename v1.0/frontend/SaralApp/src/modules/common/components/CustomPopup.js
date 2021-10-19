@@ -40,7 +40,7 @@ export default class CustomPopup extends Component {
                                 paddingRight: width * 0.06,
                                 paddingTop: height * .03,
                                 borderRadius: 8
-                                // marginTop: height * .4
+
                             }, customPopStyle]}>
                             <Text style={[styles.titleTextStyle, customTitleTextStyle]}>{title}</Text>
                             <Text style={[styles.messageTextStyle, customMessageTxtStyle]}>{message}</Text>

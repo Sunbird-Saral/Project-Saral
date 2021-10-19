@@ -12,8 +12,6 @@ import { apkVersion } from '../../configs/config';
 import ScanHistoryCard from '../ScanHistory/ScanHistoryCard';
 import SaralSDK from '../../../SaralSDK'
 import { getScannedDataFromLocal } from '../../utils/StorageUtils';
-import ButtonComponent from '../common/components/ButtonComponent';
-import ScanHistory from '../ScanHistory/ScanHistory';
 
 class MyScanComponent extends Component {
     constructor(props) {
@@ -200,7 +198,7 @@ class MyScanComponent extends Component {
     }
 
     render() {
-        const { isLoading, Theme } = this.state;
+        const { isLoading } = this.state;
         const { loginData } = this.props
         return (
 
@@ -249,7 +247,7 @@ class MyScanComponent extends Component {
                     </View>
 
                     <ScanHistoryCard
-                        Theme={this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE}
+                        themeColor1={this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE}
                         showButtons={false}
                         scanStatusData={this.state.scanStatusData}
                     />

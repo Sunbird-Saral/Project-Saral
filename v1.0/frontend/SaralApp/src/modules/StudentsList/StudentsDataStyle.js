@@ -21,7 +21,6 @@ export const styles = StyleSheet.create({
         marginBottom: '2%'
     },
     flatlistCon: {
-        // flex: 1,
         paddingBottom: 20,
         backgroundColor: 'white'
     },

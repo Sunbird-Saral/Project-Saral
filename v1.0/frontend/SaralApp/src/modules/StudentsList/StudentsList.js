@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Text, View, FlatList, Alert, ScrollView } from 'react-native';
+import { Text, View, FlatList, Alert,SafeAreaView, } from 'react-native';
 
 //redux
 import { connect, useDispatch } from 'react-redux';
@@ -14,8 +14,7 @@ import StudentsDataComponent from './StudentsDataComponent';
 //style
 import { styles } from './StudentsDataStyle';
 
-//header
-import HeaderComponent from '../common/components/HeaderComponent';
+
 
 //action
 
@@ -26,7 +25,7 @@ import { apkVersion } from '../../configs/config';
 import { ROIAction } from './ROIAction';
 
 //npm
-import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import axios from 'axios';
 
 //components
@@ -69,8 +68,6 @@ const StudentsList = ({
         
     }, []);
 
-    useEffect(() => {
-    }, [])
 
     const dispatch = useDispatch();
 
@@ -236,9 +233,7 @@ const StudentsList = ({
 
 
     return (
-        <ScrollView>
-        <View style={{ flex: 1, backgroundColor: 'white' }}>
-
+        <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
             {(loginData && loginData.data) &&
                 <View>
                     <Text
@@ -282,7 +277,6 @@ const StudentsList = ({
                 customBtnStyle={[styles.nxtBtnStyle,{backgroundColor:multiBrandingData ? multiBrandingData.themeColor1: AppTheme.BLUE}]}
                 btnText={Strings.next_text.toUpperCase()}
                 activeOpacity={0.8}
-                // onPress={() => navigateToNext(loginData.data.jwtToken)}
                 onPress={navigateToNext}
             />
 
@@ -293,9 +287,10 @@ const StudentsList = ({
                     customContainer={{ opacity: 0.4, elevation: 15 }}
                 />
             }
-
-        </View>
-        </ScrollView>
+        
+       
+        </SafeAreaView>
+      
     );
 }
 

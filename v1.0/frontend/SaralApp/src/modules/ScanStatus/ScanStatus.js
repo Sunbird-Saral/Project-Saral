@@ -1,16 +1,13 @@
-import React, { useEffect } from 'react';
-import { Alert, FlatList, Text, View } from 'react-native';
+import React from 'react';
+import { FlatList, Text, View } from 'react-native';
 
 //redux
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 
 //constant
-import { apkVersion } from '../../configs/config';
-import AppTheme from '../../utils/AppTheme';
 import Strings from '../../utils/Strings';
 
 //components
-import HeaderComponent from '../common/components/HeaderComponent';
 import ScanStatusList from './ScanStatusList';
 
 //styles
@@ -21,17 +18,20 @@ import { bindActionCreators } from 'redux';
 
 //api
 import APITransport from '../../flux/actions/transport/apitransport'
+import AppTheme from '../../utils/AppTheme';
 
 
 const ScanStatus = ({
     loginData,
-    scanedData
+    scanedData,
+    multiBrandingData
 }) => {
 
     //function
     const renderItem = ({ item, index }) => {
         return (
             <ScanStatusList
+                themColor1 ={multiBrandingData ? multiBrandingData.themColor1 : AppTheme.BLUE}
                 id={item.studentId}
                 subject={item.subject}
             />
@@ -84,7 +84,8 @@ const mapStateToProps = (state) => {
     return {
         loginData: state.loginData,
         filteredData: state.filteredData.response,
-        scanedData: state.scanedData.response
+        scanedData: state.scanedData.response,
+        multiBrandingData: state.multiBrandingData.response.data,
     }
 }
 

@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, {useState } from 'react';
 import { Alert, Text, TouchableOpacity, View } from 'react-native';
 import AppTheme from '../../utils/AppTheme';
 import { getScannedDataFromLocal } from '../../utils/StorageUtils';

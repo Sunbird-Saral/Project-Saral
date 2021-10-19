@@ -1,6 +1,4 @@
 import axios from "axios";
-import { useEffect } from "react";
-import { connect, useDispatch } from "react-redux";
 import { getLoginCred } from "../utils/StorageUtils";
 import { scanStatusDataAction } from "./ScanStatus/scanStatusDataAction";
 

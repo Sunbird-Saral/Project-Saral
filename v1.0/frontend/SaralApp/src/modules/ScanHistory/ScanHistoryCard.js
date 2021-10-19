@@ -24,7 +24,7 @@ const ScanHistoryCard = ({
     setIsLoading,
     scanStatusData,
     setScanStatusData,
-    Theme
+    themeColor1
 }) => {
 
     const SAVED_SCANNED_DATA_INTO_LOCAL = 'saved_scanned_data_into_local'
@@ -150,7 +150,7 @@ const ScanHistoryCard = ({
     return (
         <View>
         <TouchableOpacity
-            style={[styles.container, { backgroundColor: Theme ? Theme : AppTheme.BLUE }]}
+            style={[styles.container, { backgroundColor: themeColor1 ? themeColor1 : AppTheme.BLUE }]}
             disabled
 
         >
@@ -218,13 +218,13 @@ const ScanHistoryCard = ({
             <View style={{ marginBottom: '3%', width: '100%', alignItems: 'center' }}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', width: '100%' }}>
                     {
-                        // scanStatusShow
+                     
                         showButtons
                         &&
                         <TouchableOpacity
                             style={{
                                 backgroundColor: AppTheme.WHITE, borderRadius: 4,
-                                // width: showButtons ? '45%' : '80%',
+                
                                 width: true ? '45%' : '80%',
                                 alignItems: 'center', justifyContent: 'center', elevation: 8, paddingVertical: 4,
                                 marginLeft: 5,
@@ -256,10 +256,6 @@ const ScanHistoryCard = ({
                 showButtons
                 &&
                 <View style={{ marginBottom: '5%', marginTop: '2%', width: '100%', alignItems: 'center' }}>
-                    {/* // showContinueBtn
-                    // &&
-                    // scanStatus != 'Completed' && */}
-
                     <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', width: '100%' }}>
                         <TouchableOpacity
                             style={{ backgroundColor: AppTheme.GREY, borderRadius: 4, width: '80%', alignItems: 'center', justifyContent: 'center', elevation: 8, paddingVertical: 4 }}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, BackHandler, Alert, TouchableOpacity,Image } from 'react-native';
+import { View, ScrollView, Text, BackHandler, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -7,20 +7,17 @@ import _ from 'lodash'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import Strings from '../../utils/Strings';
 import AppTheme from '../../utils/AppTheme';
-import { Assets } from '../../assets/index'
 import Spinner from '../common/components/loadingIndicator';
 import { apkVersion } from '../../configs/config';
 import HeaderComponent from '../common/components/HeaderComponent';
 import DropDownMenu from '../common/components/DropDownComponent';
-import TextField from '../common/components/TextField';
 import ButtonComponent from '../common/components/ButtonComponent';
-import { getLoginData, setStudentsExamData, getStudentsExamData, getLoginCred, setLoginData,getScannedDataFromLocal } from '../../utils/StorageUtils'
+import { getLoginData, setStudentsExamData, getStudentsExamData, getLoginCred, setLoginData } from '../../utils/StorageUtils'
 import { OcrLocalResponseAction } from '../../flux/actions/apis/OcrLocalResponseAction'
 import { GetStudentsAndExamData } from '../../flux/actions/apis/getStudentsAndExamData';
 import { FilteredDataAction } from '../../flux/actions/apis/filteredDataActions';
 import APITransport from '../../flux/actions/transport/apitransport';
 import { cryptoText, SCAN_TYPES, validateToken } from '../../utils/CommonUtils';
-import { StackActions, NavigationActions } from 'react-navigation';
 import { ROIAction } from '../StudentsList/ROIAction';
 import { GetAbsentStudentData } from '../../flux/actions/apis/getAbsentStudentData';
 import { LoginAction } from '../../flux/actions/apis/LoginAction';
@@ -150,13 +147,13 @@ class SelectDetailsComponent extends Component {
     }
 
     onPressSaveInDB = async () => {
-        let data = await getScannedDataFromLocal();
-        if (data) {
-            for (const value of data) {
-                let apiObj = new SaveScanData(value, loginData.data.token);
-                dispatch(APITransport(apiObj))
-            }
-        }
+        // let data = await getScannedDataFromLocal();
+        // if (data) {
+        //     for (const value of data) {
+        //         let apiObj = new SaveScanData(value, loginData.data.token);
+        //         dispatch(APITransport(apiObj))
+        //     }
+        // }
        
         Alert.alert(Strings.message_text, Strings.are_you_sure_you_want_to_logout, [
             { 'text': Strings.no_text, style: 'cancel' },
@@ -182,10 +179,8 @@ class SelectDetailsComponent extends Component {
         if (type == 'class') {
             if (value != selectedClass) {
                 const sections = [...classesArr[index].sections]
-                // let sectionListArr = ['All']
                 let sectionListArr = []
                 _.forEach(sections, (sectionData) => sectionListArr.push(sectionData.section))
-                // sectionListArr.push('NA')
                 this.setState({
                     sectionList: sectionListArr,
                     sectionListIndex: 0,
@@ -200,16 +195,12 @@ class SelectDetailsComponent extends Component {
                             classId: classesArr[index].classId,
                             section: sectionListArr[0],
                         }
-                        // if(sectionListArr[0] == 'All') {
-                        //     payload.section = "0"
-                        // }
+                       
                         this.loader(true)
                         this.setState({
                             dataPayload: payload
                         }, () => {
                        
-                            // let isTokenValid = validateToken(loginDetails.expiresOn)                                 
-                            // if(isTokenValid) {
                             this.callStudentsData(loginDetails.token)
                       
                         })
@@ -257,15 +248,8 @@ class SelectDetailsComponent extends Component {
                     this.setState({
                         dataPayload: payload
                     }, () => {
-                        // let isTokenValid = validateToken(loginDetails.expiresOn)     
-                        // if(isTokenValid) {
+                       
                         this.callStudentsData(loginDetails.token)
-                        // }
-                        // else if(!isTokenValid) {
-                        //     this.setState({
-                        //         callApi: 'callStudentsData'
-                        //     }, () =>  this.loginAgain())
-                        // }
                     })
                 }
             })
@@ -285,7 +269,6 @@ class SelectDetailsComponent extends Component {
                 subIndex: Number(index),
                 selectedSubject: value
             })
-            // this.validateAbsentStatusApi()
         }
     }
 
@@ -302,11 +285,9 @@ class SelectDetailsComponent extends Component {
 
     validateAbsentStatusApi = () => {
         const { selectedClassId, selectedExam, selectedSection, loginDetails } = this.state
-        // const { loginDetails } = this.props
         let schoolId = loginDetails.school.schoolId
         let payload = {
             schoolId: schoolId,
-            // examCode: selectedExam,
             classId: selectedClassId,
             section: selectedSection == 'All' ? 0 : selectedSection,
         }
@@ -563,7 +544,6 @@ class SelectDetailsComponent extends Component {
                     this.setState({ calledScanStaus: false, callApi: '' })
                     if (getScanStatusData.status && getScanStatusData.status == 200) {
                         this.validateAbsentStatusApi()
-                        // this.props.navigation.navigate('AbsentUi')
                     }
                     else {
                         this.setState({
@@ -602,7 +582,7 @@ class SelectDetailsComponent extends Component {
     }
 
     validateFields = () => {
-        const { classListIndex, subIndex, sectionListIndex, sectionValid, selectedDate } = this.state
+        const { classListIndex, subIndex, sectionListIndex, sectionValid } = this.state
         const { scanTypeData } = this.props
         if (classListIndex == -1) {
             this.setState({
@@ -649,8 +629,8 @@ class SelectDetailsComponent extends Component {
     }
 
     onSubmitClick = () => {
-        const { selectedClass, selectedClassId, selectedDate, selectedSection, selectedSubject, examTestID, subIndex, examDate, subjectsData } = this.state
-        const { loginData, apiStatus, scanTypeData } = this.props
+        const { selectedClass, selectedClassId, selectedSection, examTestID, subIndex, examDate, subjectsData } = this.state
+        const { loginData} = this.props
         this.setState({
             errClass: '',
             errSub: '',

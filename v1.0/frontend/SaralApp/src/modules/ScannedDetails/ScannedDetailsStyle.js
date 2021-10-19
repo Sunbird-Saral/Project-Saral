@@ -7,7 +7,6 @@ export const styles = {
         marginHorizontal: '5%',
         justifyContent: 'center',
         alignItems: 'center',
-        // backgroundColor: 'yellow'
     },
     header1TextStyle: {
         padding: '5%',
@@ -21,7 +20,6 @@ export const styles = {
         borderRadius: 4,
         elevation: 4,
         marginHorizontal: '5%',
-        // paddingBottom: '5%',
         backgroundColor: AppTheme.WHITE,
     },
     cancelBtnStyle: {
@@ -51,7 +49,6 @@ export const styles = {
         backgroundColor: 'transparent',
         width: '60%',
         borderWidth: 1,
-        // borderColor: AppTheme.BLUE
     },
     nxtBtnTextStyle: {
         color: AppTheme.BLUE
@@ -77,7 +74,6 @@ export const styles = {
     imageViewContainer: {
         width: '30%',
         height: '100%',
-        // paddingTop: '4%',
         marginRight: '1%'
     },
     imageContainerStyle: {
@@ -92,8 +88,6 @@ export const styles = {
     imageStyle: {
         height: '90%',
         width: '90%',
-
-        // borderRadius: 45
     },
     deatilsViewContainer: {
         width: '70%',
