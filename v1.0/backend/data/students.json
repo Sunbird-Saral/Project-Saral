@@ -437,5 +437,41 @@
   "name": "Aayushi Dhondiyal",
   "studentId": "2000004",
   "schoolId": "1"
+},
+{
+  "studentClass": [
+    {
+      "classId": "4",
+      "className": "Class-4"
+    }
+  ],
+  "section": "B",
+  "name": "divya negi",
+  "studentId": "30000001",
+  "schoolId": "3"
+},
+{
+  "studentClass": [
+    {
+      "classId": "4",
+      "className": "Class-4"
+    }
+  ],
+  "section": "B",
+  "name": "Kamla Dharamwal",
+  "studentId": "30000002",
+  "schoolId": "3"
+},
+{
+  "studentClass": [
+    {
+      "classId": "4",
+      "className": "Class-4"
+    }
+  ],
+  "section": "B",
+  "name": "Jayanti Bisht",
+  "studentId": "30000003",
+  "schoolId": "3"
 }
 ]

@@ -136,6 +136,22 @@ name of student in gujrat school:-
 | maths|gujrat|PAT|3|15|
 |english|gujrat|PAT|3|16|
 
+**type:- Gujrat_HINDI_4S**
+**ROLLNUMBER:- 7 digit student Id**
+name of student in Gujrat_HINDI_4S:- 
+
+|STUDENT NAME| STUDENT ID| 
+|---|---|
+|divya negi      |30000001|
+|Kamla Dharamwal     |30000002|
+|Jayanti Bisht    |30000003|
+
+## roi:-
+
+|SUBJECT|STATE|TYPE|CLASS|EXAM|
+|---|---|---|---|---|
+| hindi|gujrat|gujrat_hindi_1s| 4|21|
+
 # state:- UP(For multiple students)
 ## schoolId:-4
 >> `school:- Amtul's Public School`
