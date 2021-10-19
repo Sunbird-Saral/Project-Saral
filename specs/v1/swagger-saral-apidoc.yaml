@@ -241,7 +241,7 @@ paths:
           schema:
             $ref: "#/definitions/CreateStudentResponse"
         "400":
-          description: "unsuccessful operation"
+          description: "Student Id is required."
           
   /fetchStudentsandExamsByQuery:
     post:
@@ -860,6 +860,20 @@ definitions:
         $ref: '#/definitions/StudentClass' 
         
   FetchStudentsByQueryResponse:
+    type: object
+    properties:
+      studentClass:
+        $ref: '#/definitions/StudentClassName'
+      section:
+        type: string
+      name:
+        type: string
+      studentId:
+        type: string
+      schoolId:
+        type: string
+        
+  FetchStudentsByQueryAndExamResponse:
     type: object
     properties:
       studentClass:

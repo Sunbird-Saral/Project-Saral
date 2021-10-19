@@ -10,7 +10,7 @@ const router = new express.Router()
 
 router.post('/createStudent', auth, async (req, res) => {
     try {
-        if(!req.body.studentId)  return res.status(400).send({ error: "Student Id is missing" })
+        if(!req.body.studentId)  return res.status(400).send({ error: "Student Id is required." })
         // let commonDigit = "0000000"
         const classId = req.body.studentClass && req.body.studentClass.length > 0 ? req.body.studentClass[0].classId : "2"
         const section = req.body.section ? req.body.section : "A"
