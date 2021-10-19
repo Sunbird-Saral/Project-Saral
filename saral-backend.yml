@@ -1,0 +1,26 @@
+version: '3.7'
+services:
+  saral-backend:
+    image: anuvaadio/${image}:${tag}
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 1
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+    environment:
+      PROFILE: dev
+      PORT: 3005
+      MONGODB_URL: mongodb://172.31.51.8:27017/saralv1db
+      JWT_SECRET: SARALDATA_NODE
+    ports:
+    - "3005:3005"
+
+    networks:
+      - app
+
+networks:
+  app:
+    driver: overlay
+    external: true
