@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View,BackHandler } from 'react-native';
 
 //redux
 import { connect } from 'react-redux';
@@ -10,17 +10,14 @@ import { getScannedDataFromLocal } from '../../utils/StorageUtils';
 import Strings from '../../utils/Strings';
 
 //component
-import HeaderComponent from '../common/components/HeaderComponent';
 import Spinner from '../common/components/loadingIndicator';
 import ScanHistoryCard from './ScanHistoryCard';
 import ButtonComponent from '../common/components/ButtonComponent';
 const ScanHistory = ({
     loginData,
     navigation,
-    roiData,
     apiStatus,
     multiBrandingData,
-    absenetPresentReducer,
     filteredData
 }) => {
 
@@ -55,7 +52,18 @@ const ScanHistory = ({
     useEffect(() => {
         sumOfLocalData()
     }, [])
-
+    
+    useEffect(
+        React.useCallback(() => {
+          const onBackPress = () => {
+            return true;
+          };
+          BackHandler.addEventListener('hardwareBackPress', onBackPress);
+          return () =>
+            BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+        }, []),
+      );
+ 
 
     return (
         <View style={styles.container}>
@@ -87,7 +95,7 @@ const ScanHistory = ({
             <ScanHistoryCard
                 showButtons={apiStatus.unauthorized ? false : true}
                 navigation={navigation}
-                Theme ={multiBrandingData ? multiBrandingData.themeColor1 :AppTheme.BLUE}
+                themeColor1 ={multiBrandingData ? multiBrandingData.themeColor1 :AppTheme.BLUE}
                 isLoading={isLoading}
                 setIsLoading={setIsLoading}
                 scanStatusData={scanStatusData}
@@ -100,8 +108,7 @@ const ScanHistory = ({
                 customBtnStyle={[styles.nxtBtnStyle, {backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
                 btnText={Strings.Back.toUpperCase()}
                 activeOpacity={0.8}
-                 onPress={() => navigation.navigate('StudentsList')}
-                // onPress={navigateToNext}
+                 onPress={() =>navigation.navigate('StudentsList')}
             />
        
         </View>

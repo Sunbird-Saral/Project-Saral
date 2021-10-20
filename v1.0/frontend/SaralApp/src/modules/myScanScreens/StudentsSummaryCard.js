@@ -43,8 +43,6 @@ const styles = {
     studentContainer: {
         flexDirection: 'row',
         alignSelf: 'center',
-        // paddingBottom: '5%',
-        // paddingTop: '3%',
         width: '100%',
         borderBottomWidth: 1,
         borderBottomColor: AppTheme.LIGHT_GREY
@@ -52,7 +50,6 @@ const styles = {
     imageViewContainer: {
         width: '30%',
         height: '100%',
-        // paddingTop: '4%',
         marginRight: '1%'
     },
     imageContainerStyle: {
