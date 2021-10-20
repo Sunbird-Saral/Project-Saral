@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, TextInput, Image, AppState, FlatList } from 'react-native';
+import { View, ScrollView, Text, TextInput, Image, AppState } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Strings from '../../utils/Strings';
@@ -33,7 +33,7 @@ class LoginComponent extends Component {
         this.props.navigation.addListener('willFocus', async payload => {
             AppState.addEventListener('change', this.handleAppStateChange);
             this.componentMountCall()
-           
+
         })
     }
 
@@ -49,9 +49,9 @@ class LoginComponent extends Component {
     }
 
     componentMountCall = async () => {
-    
+
         this.loginUser()
-      
+
     }
 
     loginUser = async () => {
@@ -119,7 +119,7 @@ class LoginComponent extends Component {
 
     componentDidUpdate(prevProps) {
         if (prevProps != this.props) {
-            
+
             const { apiStatus, loginData, navigation } = this.props
             const { schoolId, password, calledLogin } = this.state
             if (apiStatus && prevProps.apiStatus != apiStatus && apiStatus.error) {
@@ -204,7 +204,7 @@ class LoginComponent extends Component {
                     keyboardShouldPersistTaps={'handled'}
                 >
                     <View style={styles.container1}>
-                              <Image style={{ width: 100, height: 100 }} source={Assets.AppLogo} />
+                        <Image style={{ width: 100, height: 100 }} source={Assets.AppLogo} />
                     </View>
 
                     <View style={styles.container2}>
@@ -224,7 +224,8 @@ class LoginComponent extends Component {
                                     ref="schoolId"
                                     style={styles.inputStyle}
                                     onChangeText={(text) => {
-                                        this.onLoginDetailsChange(text, 'schoolId') }}
+                                        this.onLoginDetailsChange(text, 'schoolId')
+                                    }}
                                     value={this.state.schoolId}
                                     placeholder={Strings.schoolId_text}
                                     placeholderTextColor={AppTheme.BLACK_OPACITY_30}
@@ -255,8 +256,6 @@ class LoginComponent extends Component {
                             </View>
                         </View>
                     </View>
-
-
                 </ScrollView>
                 {isLoading && <Spinner animating={isLoading} />}
             </View>
@@ -273,7 +272,6 @@ const styles = {
         minHeight: 230,
         justifyContent: 'center',
         alignItems: 'center',
-        // backgroundColor: 'yellow'
     },
     img: {
         width: 100,

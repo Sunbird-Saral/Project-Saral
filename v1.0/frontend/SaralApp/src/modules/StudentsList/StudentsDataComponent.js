@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, {useState } from 'react';
 import { Alert, Text, TouchableOpacity, View } from 'react-native';
 import AppTheme from '../../utils/AppTheme';
 import { getScannedDataFromLocal } from '../../utils/StorageUtils';
@@ -8,6 +8,7 @@ import { styles } from './StudentsDataStyle';
 const StudentsDataComponent = ({
     item,
     themeColor1, 
+    themeColor2,
     pabsent,
     stdArray,
     scanedData,
@@ -91,16 +92,15 @@ const StudentsDataComponent = ({
                 <View style={styles.line} />
 
                 <TouchableOpacity
-                    style={[styles.btnCon, { backgroundColor: isPresent ? themeColor1 : AppTheme.LIGHT_BLUE }]}
                     activeOpacity={0.7}
                     onPress={() => onBtnClick(item)}
                 >
                     {
                         isPresent
                             ?
-                            <Text style={styles.markasAbsent}>Mark as Absent</Text>
+                            <Text style={[styles.markasAbsent,{ backgroundColor: isPresent ? themeColor1 : AppTheme.LIGHT_BLUE }]}>Mark as Absent</Text>
                             :
-                            <Text style={styles.markasAbsent}>Mark as Present</Text>
+                            <Text style={[styles.markasAbsent,{ backgroundColor: isPresent ? themeColor2 : AppTheme.LIGHT_BLUE }]}>Mark as Present</Text>
                     }
                 </TouchableOpacity>
 
