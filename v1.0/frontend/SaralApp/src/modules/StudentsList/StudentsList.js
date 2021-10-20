@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Text, View, FlatList, Alert,SafeAreaView, } from 'react-native';
+import { Text, View, FlatList, Alert, SafeAreaView,BackHandler } from 'react-native';
 
 //redux
 import { connect, useDispatch } from 'react-redux';
@@ -65,8 +65,19 @@ const StudentsList = ({
 
     useEffect(() => {
         studentData()
-        
+
     }, []);
+
+     useEffect(
+        React.useCallback(() => {
+          const onBackPress = () => {
+            return true;
+          };
+          BackHandler.addEventListener('hardwareBackPress', onBackPress);
+          return () =>
+            BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+        }, []),
+      );
 
 
     const dispatch = useDispatch();
@@ -143,8 +154,8 @@ const StudentsList = ({
     const renderStudentData = ({ item }) => {
         return (
             <StudentsDataComponent
-                themeColor1 ={multiBrandingData?multiBrandingData.themeColor1:AppTheme.BLUE}
-                themeColor2 = {multiBrandingData?multiBrandingData.themeColor2:AppTheme.LIGHT_BLUE}
+                themeColor1={multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}
+                themeColor2={multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE}
                 item={item}
                 pabsent={item.studentAvailability}
                 scanedData={scanedData}
@@ -204,6 +215,10 @@ const StudentsList = ({
             saveAbsentPresentDetails(loginData.data.token)
         }
     }
+    const navigateToBack =()=> {
+        navigation.navigate('selectDetails')
+    }
+    
 
     const loginAgain = async () => {
         let loginCred = await getLoginCred()
@@ -266,19 +281,29 @@ const StudentsList = ({
             <FlatList
                 data={allStudentData}
                 renderItem={renderStudentData}
-                background ={multiBrandingData?multiBrandingData.themeColor1:AppTheme.BLUE}
+                background={multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}
                 ListEmptyComponent={renderEmptyList}
                 keyExtractor={(item) => item.studentId.toString()}
                 contentContainerStyle={styles.flatlistCon}
                 showsVerticalScrollIndicator={false}
             />
-           
+
+
+           <View style={styles.viewnxtBtnStyle1}>
             <ButtonComponent
-                customBtnStyle={[styles.nxtBtnStyle,{backgroundColor:multiBrandingData ? multiBrandingData.themeColor1: AppTheme.BLUE}]}
+                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+                btnText={Strings.Back.toUpperCase()}
+                activeOpacity={0.8}
+                onPress={navigateToBack}
+            />
+
+            <ButtonComponent
+                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
                 btnText={Strings.next_text.toUpperCase()}
                 activeOpacity={0.8}
                 onPress={navigateToNext}
             />
+            </View>
 
             {
                 isLoading &&
@@ -287,10 +312,7 @@ const StudentsList = ({
                     customContainer={{ opacity: 0.4, elevation: 15 }}
                 />
             }
-        
-       
         </SafeAreaView>
-      
     );
 }
 

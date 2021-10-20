@@ -147,13 +147,13 @@ class SelectDetailsComponent extends Component {
     }
 
     onPressSaveInDB = async () => {
-        // let data = await getScannedDataFromLocal();
-        // if (data) {
-        //     for (const value of data) {
-        //         let apiObj = new SaveScanData(value, loginData.data.token);
-        //         dispatch(APITransport(apiObj))
-        //     }
-        // }
+        let data = await getScannedDataFromLocal();
+        if (data) {
+            for (const value of data) {
+                let apiObj = new SaveScanData(value, loginData.data.token);
+                dispatch(APITransport(apiObj))
+            }
+        }
        
         Alert.alert(Strings.message_text, Strings.are_you_sure_you_want_to_logout, [
             { 'text': Strings.no_text, style: 'cancel' },

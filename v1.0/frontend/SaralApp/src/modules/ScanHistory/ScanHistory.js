@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View,BackHandler } from 'react-native';
 
 //redux
 import { connect } from 'react-redux';
@@ -13,7 +13,6 @@ import Strings from '../../utils/Strings';
 import Spinner from '../common/components/loadingIndicator';
 import ScanHistoryCard from './ScanHistoryCard';
 import ButtonComponent from '../common/components/ButtonComponent';
-import { NavigationActions, StackActions } from 'react-navigation';
 const ScanHistory = ({
     loginData,
     navigation,
@@ -54,13 +53,17 @@ const ScanHistory = ({
         sumOfLocalData()
     }, [])
     
-    const onBackButtonClick = () => {
-        const resetAction = StackActions.reset({
-            index: 0,
-            actions: [NavigationActions.navigate({ routeName: 'StudentList', params: { from_screen: 'ScanHistory' } })],
-        });
-        navigation.dispatch(resetAction);
-    }
+    useEffect(
+        React.useCallback(() => {
+          const onBackPress = () => {
+            return true;
+          };
+          BackHandler.addEventListener('hardwareBackPress', onBackPress);
+          return () =>
+            BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+        }, []),
+      );
+ 
 
     return (
         <View style={styles.container}>

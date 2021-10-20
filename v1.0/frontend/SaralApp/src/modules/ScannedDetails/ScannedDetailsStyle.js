@@ -120,4 +120,15 @@ export const styles = {
         letterSpacing: 1,
         lineHeight: 35
     },
+    viewnxtBtnStyle1 : {
+        flexDirection:'row',
+        justifyContent:'center',
+        alignItems:'center'
+    },
+    nxtBtnStyle1: {
+        width:'45%',
+        marginHorizontal: 5,
+        marginBottom: 20,
+        borderRadius: 10
+    },
 }

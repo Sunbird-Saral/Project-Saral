@@ -1,5 +1,5 @@
-import React from 'react';
-import { FlatList, Text, View } from 'react-native';
+import React ,{useEffect} from 'react';
+import { FlatList, Text, View ,BackHandler} from 'react-native';
 
 //redux
 import { connect } from 'react-redux';
@@ -24,8 +24,10 @@ import AppTheme from '../../utils/AppTheme';
 const ScanStatus = ({
     loginData,
     scanedData,
-    multiBrandingData
+    multiBrandingData,
+    navigation
 }) => {
+   
 
     //function
     const renderItem = ({ item, index }) => {
@@ -45,6 +47,18 @@ const ScanStatus = ({
             </View>
         )
     }
+    
+
+    useEffect(
+        React.useCallback(() => {
+          const onBackPress = () => {
+            navigation.navigate('ScanHistory');
+          };
+          BackHandler.addEventListener('hardwareBackPress', onBackPress);
+          return () =>
+            BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+        }, []),
+      );
 
     return (
         <View style={styles.container}>

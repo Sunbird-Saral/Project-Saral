@@ -24,8 +24,21 @@ class MyScanComponent extends Component {
             isLoading: false,
         }
         this.onBack = this.onBack.bind(this)
+        this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
     }
-
+    
+    componentWillMount() {
+        BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
+    }
+ 
+    componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
+    }
+ 
+    handleBackButtonClick() {
+        this.props.navigation.goBack(null);
+        return false;
+    }
     componentDidMount() {
         const { navigation, scanedData } = this.props
         const { params } = navigation.state

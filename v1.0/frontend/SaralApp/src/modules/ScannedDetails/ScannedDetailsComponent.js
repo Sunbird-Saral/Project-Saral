@@ -88,7 +88,7 @@ const ScannedDetailsComponent = ({
 
         let absent = datas.filter((item) => item.studentId == studentId & item.studentAvailability == false)
 
-        let scan = scanedData.length > 0  && scanedData.data.length > 0 ?  scanedData.data : []
+        let scan = scanedData.length > 0 && scanedData.data.length > 0 ? scanedData.data : []
 
         let isAbsent = scan.filter((o) => {
             if (o.studentAvailability == false && studentId == o.studentId) {
@@ -434,8 +434,8 @@ const ScannedDetailsComponent = ({
                                 editable={edit}
                                 keyboardType={'numeric'}
                             />
-                             <Text style={styles.nameTextStyle}>{Strings.Exam} : {filteredData.subject} {filteredData.examDate} ({filteredData.examTestID})</Text>
-                    
+                            <Text style={styles.nameTextStyle}>{Strings.Exam} : {filteredData.subject} {filteredData.examDate} ({filteredData.examTestID})</Text>
+
                             <Text style={styles.nameTextStyle}>{Strings.page_no + ': ' + (currentIndex + 1)}</Text>
                         </View>
                     </View>
@@ -497,16 +497,14 @@ const ScannedDetailsComponent = ({
                     })
                 }
 
-                <View style={[styles.container3, { paddingTop: '7%' }]}>
+                <View style={[styles.viewnxtBtnStyle1, { paddingTop: '7%' }]}>
                     <ButtonComponent
-                        customBtnStyle={[styles.cancelBtnStyle, { width: '35%' }]}
-                        customBtnTextStyle={styles.editBtnTextStyle}
+                        customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
                         btnText={btnName.toUpperCase()}
                         onPress={() => isMultipleStudent ? goBackFrame() : onBackButtonClick()}
                     />
                     <ButtonComponent
-                        customBtnStyle={[styles.nxtBtnStyle,{borderColor:multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}]}
-                        customBtnTextStyle={{color:multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}}
+                        customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
                         btnText={nextBtn.toUpperCase()}
                         onPress={() => isMultipleStudent ? goNextFrame() : onSubmitClick()}
                     />
@@ -585,7 +583,7 @@ const ScannedDetailsComponent = ({
                 }
             })
         }
-     
+
 
     }
 
