@@ -283,7 +283,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                         trainingDataSet.put(j,mRoiMatBase64.get(roiId));
                     }
                     rois.put(roi);
-                }p
+                }
                 if(trainingDataSet.length() > 0)
                 {
                     cell.put("trainingDataSet",trainingDataSet);
