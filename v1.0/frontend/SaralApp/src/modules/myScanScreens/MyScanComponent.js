@@ -60,10 +60,21 @@ class MyScanComponent extends Component {
 
     //functions
     sumOfLocalData = async () => {
+        const { filteredData } = this.props
         const data = await getScannedDataFromLocal()
         let len = 0
         if (data != null) {
-            data.forEach((element, index) => {
+
+            let filter = data.filter((e) => {
+                let findSection = false
+                findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.section)
+
+                if (filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject && findSection) {
+                    return true
+                }
+            })
+
+            filter.forEach((element, index) => {
                 len = len + element.studentsMarkInfo.length
             });
             this.setState({
@@ -389,7 +400,7 @@ const mapStateToProps = (state) => {
     return {
         ocrLocalResponse: state.ocrLocalResponse,
         loginData: state.loginData,
-        filteredData: state.filteredData,
+        filteredData: state.filteredData.response,
         scanTypeData: state.scanTypeData.response,
         scanedData: state.scanedData,
         roiData: state.roiData.response,

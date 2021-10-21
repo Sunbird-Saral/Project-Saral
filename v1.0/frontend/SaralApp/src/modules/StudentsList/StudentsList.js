@@ -70,12 +70,12 @@ const StudentsList = ({
 
      useEffect(
         React.useCallback(() => {
-          const onBackPress = () => {
-            return true;
-          };
-          BackHandler.addEventListener('hardwareBackPress', onBackPress);
-          return () =>
-            BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+            const onBackPress = () => {
+                return true;
+            };
+            BackHandler.addEventListener('hardwareBackPress', onBackPress);
+            return () =>
+                BackHandler.removeEventListener('hardwareBackPress', onBackPress);
         }, []),
       );
 

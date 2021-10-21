@@ -27,6 +27,7 @@ const ScanHistoryCard = ({
     themeColor1
 }) => {
 
+
     const SAVED_SCANNED_DATA_INTO_LOCAL = 'saved_scanned_data_into_local'
 
 
@@ -47,7 +48,10 @@ const ScanHistoryCard = ({
 
         if (data) {
             const filterData = data.filter((e) => {
-                if (e.classId == filteredData.response.class && e.subject == subject && e.examDate == examDate) {
+
+                let findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.response.section)
+
+                if (e.classId == filteredData.response.class && e.subject == subject && e.examDate == examDate && findSection) {
                     return true
                 } else {
                     return false
@@ -55,13 +59,19 @@ const ScanHistoryCard = ({
             })
 
             setIsLoading(true)
+
+
             let filterDataLen = 0
 
-            let localScanData = ''
+            let setIntolocalAfterFilter = ''
             if (filterData.length != 0) {
+
                 filterData.filter((f) => {
-                    localScanData = data.filter((e) => {
-                        if (e.classId == f.classId && e.subject == f.subject && e.examDate == f.examDate) {
+
+                    let findSection = f.studentsMarkInfo.some((item) => item.section == filteredData.response.section)
+
+                    setIntolocalAfterFilter = data.filter((e) => {
+                        if (e.classId == f.classId && e.subject == f.subject && e.examDate == f.examDate && findSection) {
                             return false
                         } else {
                             filterDataLen = filterDataLen + e.studentsMarkInfo.length
@@ -70,15 +80,16 @@ const ScanHistoryCard = ({
                     })
                 })
 
-
-                for (const value of filterData) {
+                filterData.map((value) => {
+                    console.log("value",value);
                     let apiObj = new SaveScanData(value, loginData.data.token);
                     dispatch(APITransport(apiObj))
-                    callScanStatusData(filterDataLen, localScanData)
-                }
+                    callScanStatusData(filterDataLen, setIntolocalAfterFilter)
+                })
+
             } else {
+                Alert.alert('There is no data!')
                 setIsLoading(false)
-                Alert.alert('There is no scanned data for this class!')
             }
 
         }
@@ -132,7 +143,8 @@ const ScanHistoryCard = ({
                     setScannedDataIntoLocal(localScanData)
                 })
                 .catch(function (err) {
-
+                    console.warn("Error", err);
+                    console.warn("Error", err.response);
                     Alert.alert("Something Went Wrong")
                     setIsLoading(false)
                     clearTimeout(id)

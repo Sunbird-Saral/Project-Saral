@@ -61,7 +61,7 @@ const StudentsDataComponent = ({
 
         if (isStudentPresent) {
             
-            let scannedDATa = scanedData.data > 0 ? scanedData.data : []
+            let scannedDATa = scanedData.length > 0 && scanedData.data.length > 0 ? scanedData.data : []
             const isSheetScanned = scannedDATa.filter((o) => o.studentId == data.studentId)
 
             if (isSheetScanned.length > 0 || isStudentScannedInLocal.length > 0) {
