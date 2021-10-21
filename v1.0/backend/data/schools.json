@@ -8,7 +8,8 @@
   "hmName": "acbc",
   "hmMobileNo": "8006079875",
   "noOfStudents": "100",
-  "udiseCode": "1"
+  "udiseCode": "1",
+  "storeTrainingData": false
 },
 {
   "name": "Aditya Birla Public School, Rayagada.",
@@ -20,7 +21,8 @@
   "hmName": "acbc",
   "hmMobileNo": "8006079875",
   "noOfStudents": "100",
-  "udiseCode": "2"
+  "udiseCode": "2",
+  "storeTrainingData": false
 },
 {
   "name": "Sainik School",
@@ -32,7 +34,8 @@
   "hmName": "acbc",
   "hmMobileNo": "8006079875",
   "noOfStudents": "100",
-  "udiseCode": "3"
+  "udiseCode": "3",
+  "storeTrainingData": false
 },
 {
 "name": "Amtul's Public School",
@@ -44,6 +47,7 @@
 "hmName": "acbc",
 "hmMobileNo": "8006079875",
 "noOfStudents": "100",
-"udiseCode": "4"
+"udiseCode": "4",
+"storeTrainingData": false
 }
 ]

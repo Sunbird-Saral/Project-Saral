@@ -39,6 +39,7 @@ router.get('/schools', async (req, res) => {
                     block: element.block,
                     hmName: element.hmName,
                     noOfStudents: element.noOfStudents,
+                    storeTrainingData: element.storeTrainingData,
                     createdAt: element.createdAt,
                     updatedAt: element.updatedAt
                 }
@@ -111,7 +112,7 @@ router.patch('/updateSchool/:schoolId', async (req, res) => {
     try {
         if (Object.keys(req.body).length === 0) res.status(400).send({ message: 'Validation error.' })
         const updates = Object.keys(req.body)
-        const allowedUpdates = ['name', 'state', 'district', 'block', 'hmName', 'hmMobileNo', 'noOfStudents', 'udisceCode']
+        const allowedUpdates = ['name', 'state', 'district', 'block', 'hmName', 'hmMobileNo', 'noOfStudents', 'udisceCode','storeTrainingData']
         const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
 
         if (!isValidOperation) {

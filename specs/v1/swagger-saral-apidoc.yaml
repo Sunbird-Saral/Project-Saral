@@ -599,6 +599,9 @@ definitions:
         type: string
       noOfStudents:
         type: string
+      storeTrainingData:
+        type: boolean
+        default: false
       createdAt: 
         type: string
         format: date-time
@@ -633,12 +636,16 @@ definitions:
             type: string
           udiseCode:
             type: string
+          storeTrainingData:
+            type: boolean
+            default: "false"
           createdAt: 
             type: string
             format: date-time
           updatedAt:
             type: string
             format: date-time
+
       token:
         type: object
         example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTMwOWQyYjJlNzEyMzAyZGY5NmM3NjEiLCJpYXQiOjE2MzA1NzU5MTV9.FCt2Q4R_sN1ctdOfoOPzBzfdUohAPA-TlLFtJJEeTBE"
@@ -677,6 +684,9 @@ definitions:
         type: string
       udiseCode:
         type: string
+      storeTrainingData:
+        type: boolean
+        default: false
         
   CreateSchoolResponse:
     type: object
@@ -733,6 +743,9 @@ definitions:
         type: string
       udisceCode:
         type: string
+      storeTrainingData:  
+        type: "boolean"
+        default: "false"
         
   UpdateStudentBody:
     type: "object"
@@ -769,6 +782,10 @@ definitions:
         items:
           type: object
           properties:
+            studentIdTrainingData:
+              type: array
+              items:
+                type: string
             studentAvailability:
               type: boolean
             marksInfo:
@@ -820,6 +837,10 @@ definitions:
         studentId:
           type: string
           description: Student Id
+        studentIdTrainingData:
+          type: array
+          items:
+            type: string
         studentAvailability:
           type: boolean
           description: Student Availability Flag
@@ -843,6 +864,10 @@ definitions:
         obtainedMarks:
           type: string
           description: total marks obtained
+        trainingData:
+          type: array
+          items:
+            type: string
           
   CreateStudentBody:
     type: object
