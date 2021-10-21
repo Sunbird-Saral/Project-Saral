@@ -16892,7 +16892,7 @@
                     "index": 22
                 },
                 "format": {
-                    "name": "MAX MARKS",
+                    "name": "MAX_MARKS",
                     "value": "MAX MARKS"
                 },
                 "validate": {
@@ -16943,7 +16943,7 @@
                     "index": 23
                 },
                 "format": {
-                    "name": "MARKS OBTAINED",
+                    "name": "MARKS_OBTAINED",
                     "value": "MARKS OBTAINED"
                 },
                 "validate": {
@@ -17995,7 +17995,7 @@
                     "index": 22
                 },
                 "format": {
-                    "name": "MAX MARKS",
+                    "name": "MAX_MARKS",
                     "value": "MAX MARKS"
                 },
                 "validate": {
@@ -18046,7 +18046,7 @@
                     "index": 23
                 },
                 "format": {
-                    "name": "MARKS OBTAINED",
+                    "name": "MARKS_OBTAINED",
                     "value": "MARKS OBTAINED"
                 },
                 "validate": {
@@ -19098,7 +19098,7 @@
                     "index": 22
                 },
                 "format": {
-                    "name": "MAX MARKS",
+                    "name": "MAX_MARKS",
                     "value": "MAX MARKS"
                 },
                 "validate": {
@@ -19149,7 +19149,7 @@
                     "index": 23
                 },
                 "format": {
-                    "name": "MARKS OBTAINED",
+                    "name": "MARKS_OBTAINED",
                     "value": "MARKS OBTAINED"
                 },
                 "validate": {
@@ -20640,7 +20640,7 @@
                         "index": 36
                     },
                     "format": {
-                        "name": "MAX MARKS",
+                        "name": "MAX_MARKS",
                         "value": "MAX MARKS"
                     },
                     "validate": {
@@ -20691,7 +20691,7 @@
                         "index": 37
                     },
                     "format": {
-                        "name": "MARKS OBTAINED",
+                        "name": "MARKS_OBTAINED",
                         "value": "MARKS OBTAINED"
                     },
                     "validate": {
@@ -22182,7 +22182,7 @@
                     },
                     "format": {
                         "name": "MAX_MARKS",
-                        "value": "MAX_MARKS"
+                        "value": "MAX MARKS"
                     },
                     "validate": {
                         "regExp": ""
@@ -22233,7 +22233,7 @@
                     },
                     "format": {
                         "name": "MARKS_OBTAINED",
-                        "value": "MARKS_OBTAINED"
+                        "value": "MARKS OBTAINED"
                     },
                     "validate": {
                         "regExp": ""
@@ -23723,7 +23723,7 @@
                     },
                     "format": {
                         "name": "MAX_MARKS",
-                        "value": "MAX_MARKS"
+                        "value": "MAX MARKS"
                     },
                     "validate": {
                         "regExp": ""
@@ -23774,7 +23774,7 @@
                     },
                     "format": {
                         "name": "MARKS_OBTAINED",
-                        "value": "MARKS_OBTAINED"
+                        "value": "MARKS OBTAINED"
                     },
                     "validate": {
                         "regExp": ""
