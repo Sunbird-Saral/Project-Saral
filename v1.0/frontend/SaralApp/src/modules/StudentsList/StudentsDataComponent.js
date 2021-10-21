@@ -15,7 +15,6 @@ const StudentsDataComponent = ({
     setStdArray,
     filteredData
 }) => {
-
     const [isPresent, setIsPresent] = useState(pabsent)
 
     const checkStdAbsPrst = (data, chkPresent, filteredData, valid) => {
@@ -61,7 +60,8 @@ const StudentsDataComponent = ({
 
 
         if (isStudentPresent) {
-            let scannedDATa = scanedData.data.length > 0 ? scanedData.data : []
+            
+            let scannedDATa = scanedData.data > 0 ? scanedData.data : []
             const isSheetScanned = scannedDATa.filter((o) => o.studentId == data.studentId)
 
             if (isSheetScanned.length > 0 || isStudentScannedInLocal.length > 0) {
@@ -83,7 +83,7 @@ const StudentsDataComponent = ({
         setStdMarkAsPrsAbst(data, chkPresent)
     }
     return (
-        <View style={[styles.cardCon, { backgroundColor: isPresent ? themeColor1 : AppTheme.BLUE }]}>
+        <View style={[styles.cardCon, { backgroundColor: themeColor1 ? themeColor1 : AppTheme.BLUE }]}>
             <View style={[styles.cardChildCon, { backgroundColor: "#ffffffED" }]}>
 
                 <Text style={styles.aadhar}>{item.studentId}</Text>
@@ -98,9 +98,9 @@ const StudentsDataComponent = ({
                     {
                         isPresent
                             ?
-                            <Text style={[styles.markasAbsent,{ backgroundColor: isPresent ? themeColor1 : AppTheme.LIGHT_BLUE }]}>Mark as Absent</Text>
+                            <Text style={[styles.markasAbsent,{ backgroundColor: themeColor1 ? themeColor1 : AppTheme.LIGHT_BLUE }]}>Mark as Absent</Text>
                             :
-                            <Text style={[styles.markasAbsent,{ backgroundColor: isPresent ? themeColor2 : AppTheme.LIGHT_BLUE }]}>Mark as Present</Text>
+                            <Text style={[styles.markasPresent,{ backgroundColor: themeColor2 ? themeColor2 : AppTheme.LIGHT_BLUE }]}>Mark as Present</Text>
                     }
                 </TouchableOpacity>
 

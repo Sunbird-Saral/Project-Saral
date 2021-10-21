@@ -121,10 +121,6 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                     JSONObject result = new JSONObject();
                     result.put("prediction", new Integer(digit));
                     result.put("confidence", new Double(confidence));
-                    if(mRoiMatBase64.get(id)!=null){
-                        result.put("roiImage",mRoiMatBase64.get(id));
-                        Log.d(TAG, "roiId : "+id+" roiImage : " +mRoiMatBase64.get(id));      
-                    }
                     mPredictedDigits.put(id, result.toString());
                 } catch (JSONException e) {
                     Log.e(TAG, "unable to create prediction object");
@@ -148,10 +144,6 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                     JSONObject result = new JSONObject();
                     result.put("prediction", new Integer(0));
                     result.put("confidence", new Double(0.0));
-                    if(mRoiMatBase64.get(id)!=null){
-                        result.put("roiImage",mRoiMatBase64.get(id));
-                        Log.d(TAG, "roiId : "+id+" roiImage : " +mRoiMatBase64.get(id));
-                    }
                     mPredictedDigits.put(id, result.toString());
                 } catch (JSONException e) {
                     Log.e(TAG, "unable to create prediction object");
@@ -262,13 +254,47 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                 }
                 mIsClassifierRequestSubmitted = true;
                 Log.d(TAG, "Detected OMR count: " + mPredictedOMRs.size() + " classifier count: " + mPredictedDigits.size());
-
+                populateTrainingData();
+                Log.d(TAG, " Populated Training Data ");                
             } catch (JSONException e) {
                 Log.e(TAG, "got JSON exception");
             }
         }
     }
 
+    private void populateTrainingData()
+    {
+        try{
+            JSONArray rois              = new JSONArray();
+            JSONObject layoutConfigs    = new JSONObject(mlayoutConfigs);
+
+            JSONObject layoutObject     = layoutConfigs.getJSONObject("layout");
+            JSONArray  cells            = layoutObject.getJSONArray("cells");
+            
+            for (int i = 0; i < cells.length(); i++) {
+                JSONArray cellROIs      = cells.getJSONObject(i).getJSONArray("rois");
+                JSONObject cell = cells.getJSONObject(i);
+                JSONArray trainingDataSet = new JSONArray();
+                for (int j = 0; j < cellROIs.length(); j++) {
+                    JSONObject roi      = cellROIs.getJSONObject(j);
+                    String roiId = roi.getString("roiId");
+                    if(mRoiMatBase64.get(roiId)!=null)
+                    {
+                        trainingDataSet.put(j,mRoiMatBase64.get(roiId));
+                    }
+                    rois.put(roi);
+                }
+                if(trainingDataSet.length() > 0)
+                {
+                    cell.put("trainingDataSet",trainingDataSet);
+                    Log.d(TAG, "CellId:" + cell.getString("cellId")+" trainingDataSet :: "+trainingDataSet);
+                }
+            }
+
+        }catch (JSONException e) {
+            Log.e(TAG, "unable to parse LayoutConfigs object ");
+        }
+    }
     private JSONArray getROIs() {
         try {
             JSONArray rois              = new JSONArray();

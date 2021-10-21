@@ -31,10 +31,6 @@ class MyScanComponent extends Component {
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
     }
  
-    componentWillUnmount() {
-        BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
-    }
- 
     handleBackButtonClick() {
         this.props.navigation.goBack(null);
         return false;
@@ -190,7 +186,6 @@ class MyScanComponent extends Component {
             } else {
             }
         } catch (err) {
-            console.warn(err);
         }
     };
 
@@ -209,7 +204,8 @@ class MyScanComponent extends Component {
         this.props.OcrLocalResponseAction(JSON.parse(JSON.stringify(roisData)))
         this.props.navigation.navigate('ScannedDetailsComponent', { oldBrightness: this.state.oldBrightness })
     }
-
+    
+    
     render() {
         const { isLoading } = this.state;
         const { loginData } = this.props
