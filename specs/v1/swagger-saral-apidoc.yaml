@@ -744,7 +744,7 @@ definitions:
       udisceCode:
         type: string
       storeTrainingData:  
-        type: "boolean"
+        type: boolean
         default: "false"
         
   UpdateStudentBody:
