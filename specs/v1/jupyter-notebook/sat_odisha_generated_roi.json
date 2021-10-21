@@ -1034,8 +1034,8 @@
                     "index": 22
                 },
                 "format": {
-                    "name": "MAX MARKS",
-                    "value": "MAX MARKS"
+                    "name": "MAX_MARKS",
+                    "value": "MAX_MARKS"
                 },
                 "validate": {
                     "regExp": ""
@@ -1085,8 +1085,8 @@
                     "index": 23
                 },
                 "format": {
-                    "name": "MARKS OBTAINED",
-                    "value": "MARKS OBTAINED"
+                    "name": "MARKS_OBTAINED",
+                    "value": "MARKS_OBTAINED"
                 },
                 "validate": {
                     "regExp": ""
