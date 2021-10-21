@@ -28,6 +28,10 @@ const marksSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
+    studentIdTrainingData:{
+        type: Array,
+        required: false
+    },
     studentAvailability: {
         type: Boolean,
         default: true,
@@ -38,10 +42,14 @@ const marksSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    marksInfo: {
-        type: Array,
-        required: true
-    },
+    marksInfo: [
+        {
+            _id: false,
+            questionId: { type: String, required: true },
+            obtainedMarks: { type: String, required: true  },
+            trainingData: {type: Array,required: false}
+          }
+        ],
     totalMarks: {
         type: Number,
         required: true

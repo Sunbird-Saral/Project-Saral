@@ -59,7 +59,11 @@ const schoolSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true
-    }
+    },
+    storeTrainingData:{
+        type: Boolean,
+        default: false,
+    },
 }, {
     timestamps: true
 })
