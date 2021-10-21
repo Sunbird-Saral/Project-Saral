@@ -53,6 +53,13 @@ export const styles = StyleSheet.create({
         borderRadius: 20,
         margin: 10
     },
+    markasPresent:{
+        color: '#000',
+        paddingHorizontal: 25,
+        paddingVertical: 6,
+        borderRadius: 20,
+        margin: 10
+    },
     btnCon: {
         paddingHorizontal: 25,
         paddingVertical: 6,

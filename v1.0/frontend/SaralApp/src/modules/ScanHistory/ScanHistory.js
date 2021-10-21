@@ -64,7 +64,6 @@ const ScanHistory = ({
         }, []),
       );
  
-
     return (
         <View style={styles.container}>
 

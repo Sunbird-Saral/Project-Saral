@@ -21,7 +21,8 @@ import { cryptoText, SCAN_TYPES, validateToken } from '../../utils/CommonUtils';
 import { ROIAction } from '../StudentsList/ROIAction';
 import { GetAbsentStudentData } from '../../flux/actions/apis/getAbsentStudentData';
 import { LoginAction } from '../../flux/actions/apis/LoginAction';
-
+import { getScannedDataFromLocal } from '../../utils/StorageUtils';
+import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
 const clearState = {
     defaultSelected: Strings.select_text,
     classesArr: [],
@@ -150,8 +151,8 @@ class SelectDetailsComponent extends Component {
         let data = await getScannedDataFromLocal();
         if (data) {
             for (const value of data) {
-                let apiObj = new SaveScanData(value, loginData.data.token);
-                dispatch(APITransport(apiObj))
+                let apiObj = new SaveScanData(value, this.props.loginData.data.token);
+                this.props.APITransport(apiObj)
             }
         }
        

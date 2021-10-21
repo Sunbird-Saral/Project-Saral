@@ -132,6 +132,7 @@ const ScanHistoryCard = ({
                     setScannedDataIntoLocal(localScanData)
                 })
                 .catch(function (err) {
+
                     Alert.alert("Something Went Wrong")
                     setIsLoading(false)
                     clearTimeout(id)
@@ -232,7 +233,7 @@ const ScanHistoryCard = ({
                             }}
                             onPress={onPressStatus}
                         >
-                            <Text>{Strings.scan_status}</Text>
+                            <Text>{Strings.save_status}</Text>
                         </TouchableOpacity>
                     }
                     {
