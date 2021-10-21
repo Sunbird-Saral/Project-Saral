@@ -745,7 +745,7 @@ definitions:
         type: string
       storeTrainingData:  
         type: boolean
-        default: "false"
+        default: false
         
   UpdateStudentBody:
     type: "object"
