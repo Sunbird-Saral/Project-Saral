@@ -604,7 +604,7 @@
                 "cellId": "12",
                 "rois": [
                     {
-                        "annotationTags": "QUESTIONELEV_1",
+                        "annotationTags": "QUESTION11_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "37",
                         "index": 0,
@@ -616,7 +616,7 @@
                         }
                     },
                     {
-                        "annotationTags": "QUESTIONELEV_2",
+                        "annotationTags": "QUESTION11_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "38",
                         "index": 1,
@@ -1035,7 +1035,7 @@
                 },
                 "format": {
                     "name": "MAX_MARKS",
-                    "value": "MAX_MARKS"
+                    "value": "MAX MARKS"
                 },
                 "validate": {
                     "regExp": ""
@@ -1086,7 +1086,7 @@
                 },
                 "format": {
                     "name": "MARKS_OBTAINED",
-                    "value": "MARKS_OBTAINED"
+                    "value": "MARKS OBTAINED"
                 },
                 "validate": {
                     "regExp": ""
