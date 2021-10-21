@@ -3,12 +3,12 @@ import { StyleSheet, Text, View } from 'react-native';
 import AppTheme from '../../utils/AppTheme';
 
 const ScanStatusList = ({
-    themColor1,
+    themeColor1,
     id,
     subject
 }) => {
     return (
-        <View style={[styles.container, { backgroundColor: themColor1 ? themColor1:AppTheme.GREEN }]}>
+        <View style={[styles.container, { backgroundColor: themeColor1 ? themeColor1:AppTheme.GREEN }]}>
             <View style={styles.childCon}>
                 <Text style={styles.align}>{subject}</Text>
                 <View style={styles.line} />

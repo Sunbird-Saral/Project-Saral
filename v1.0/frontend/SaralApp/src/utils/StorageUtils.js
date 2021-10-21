@@ -148,6 +148,7 @@ export const getScannedDataFromLocal = async () => {
     return JSON.parse(data)
 }
 
+
 export const getPresentAbsentStudent = async () => {
     const data = await AsyncStorage.getItem(SET_PRESENT_ABSENT_DATA);
     return JSON.parse(data)

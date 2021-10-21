@@ -25,15 +25,14 @@ const ScanStatus = ({
     loginData,
     scanedData,
     multiBrandingData,
-    navigation
+    navigation,
 }) => {
-   
 
     //function
     const renderItem = ({ item, index }) => {
         return (
             <ScanStatusList
-                themColor1 ={multiBrandingData ? multiBrandingData.themColor1 : AppTheme.BLUE}
+                themeColor1 ={multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}
                 id={item.studentId}
                 subject={item.subject}
             />
