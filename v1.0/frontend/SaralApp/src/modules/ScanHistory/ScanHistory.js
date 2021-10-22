@@ -30,7 +30,7 @@ const ScanHistory = ({
         const data = await getScannedDataFromLocal()
 
         if (data != null) {
-
+            console.log("dataaa",data);
             let filter = data.filter((e) => {
                 let findSection = false
                 findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.section)
@@ -48,6 +48,7 @@ const ScanHistory = ({
             });
             setScanStatusData(len)
         } else {
+            console.log("arman");
             setScanStatusData(0)
         }
     }

@@ -1473,7 +1473,7 @@
                 },
                 "format": {
                     "name": "MAX_MARKS",
-                    "value": "MAX_MARKS"
+                    "value": "MAX MARKS"
                 },
                 "validate": {
                     "regExp": ""
@@ -1524,7 +1524,7 @@
                 },
                 "format": {
                     "name": "MARKS_OBTAINED",
-                    "value": "MARKS_OBTAINED"
+                    "value": "MARKS OBTAINED"
                 },
                 "validate": {
                     "regExp": ""

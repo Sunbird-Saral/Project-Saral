@@ -382,8 +382,6 @@ const ScannedDetailsComponent = ({
                 }
             })
 
-            console.log("filtergetDataFromLocal", filterData);
-
 
             if (filterData.length > 0) {
                 filterData.forEach((element, index) => {
@@ -394,7 +392,6 @@ const ScannedDetailsComponent = ({
 
                 if (totalLenOfStudentsMarkInfo <= 10) {
                     if (filterData) {
-                        console.log("before len", getDataFromLocal[0].studentsMarkInfo.length);
 
                         getDataFromLocal.forEach((e, index) => {
 
@@ -419,20 +416,15 @@ const ScannedDetailsComponent = ({
 
 
                                         let findMultipleStudent = structureList.filter((item) => {
-                                            console.log("item", item);
                                             if (item.RollNo == element.studentId) {
-                                                console.log("true");
                                                 return true
                                             }
                                         })
-
-                                        console.log("findMultipleStudent", findMultipleStudent);
 
 
                                         if (findMultipleStudent.length > 0) {
                                             getDataFromLocal[index].studentsMarkInfo[i] = saveObj.studentsMarkInfo[i]
                                         } else {
-                                            console.log("hello", getDataFromLocal[index].studentsMarkInfo.push(saveObj.studentsMarkInfo[i]));
                                             getDataFromLocal[index].studentsMarkInfo.push(saveObj.studentsMarkInfo[i])
                                         }
                                     }
@@ -444,9 +436,7 @@ const ScannedDetailsComponent = ({
                             }
 
                         });
-
-                        console.log("After len", getDataFromLocal[0].studentsMarkInfo.length);
-                        console.log("studentmarksInfo", getDataFromLocal[0].studentsMarkInfo);
+                        console.log("getDataFromLocal",getDataFromLocal);
                         setScannedDataIntoLocal(getDataFromLocal)
                         goToMyScanScreen()
                     }
@@ -455,7 +445,8 @@ const ScannedDetailsComponent = ({
                 }
 
             } else if (saveObj.studentsMarkInfo.length <= 10) {
-                setScannedDataIntoLocal([saveObj])
+                let data = getDataFromLocal.push(saveObj)
+                setScannedDataIntoLocal(getDataFromLocal)
                 goToMyScanScreen()
             }
 

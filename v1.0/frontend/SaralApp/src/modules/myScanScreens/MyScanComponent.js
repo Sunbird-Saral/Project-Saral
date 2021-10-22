@@ -12,6 +12,7 @@ import { apkVersion } from '../../configs/config';
 import ScanHistoryCard from '../ScanHistory/ScanHistoryCard';
 import SaralSDK from '../../../SaralSDK'
 import { getScannedDataFromLocal } from '../../utils/StorageUtils';
+import ButtonComponent from '../common/components/ButtonComponent';
 
 class MyScanComponent extends Component {
     constructor(props) {
@@ -26,11 +27,11 @@ class MyScanComponent extends Component {
         this.onBack = this.onBack.bind(this)
         this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
     }
-    
+
     componentWillMount() {
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
     }
- 
+
     handleBackButtonClick() {
         this.props.navigation.goBack(null);
         return false;
@@ -64,7 +65,7 @@ class MyScanComponent extends Component {
         const data = await getScannedDataFromLocal()
         let len = 0
         if (data != null) {
-
+            console.log("dataaaaaa", data);
             let filter = data.filter((e) => {
                 let findSection = false
                 findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.section)
@@ -215,8 +216,8 @@ class MyScanComponent extends Component {
         this.props.OcrLocalResponseAction(JSON.parse(JSON.stringify(roisData)))
         this.props.navigation.navigate('ScannedDetailsComponent', { oldBrightness: this.state.oldBrightness })
     }
-    
-    
+
+
     render() {
         const { isLoading } = this.state;
         const { loginData } = this.props
@@ -273,14 +274,24 @@ class MyScanComponent extends Component {
                     />
 
                 </ScrollView>
+
+                <View>
+                    <ButtonComponent
+                        customBtnStyle={[styles.nxtBtnStyle, { backgroundColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+                        customBtnTextStyle={{fontSize:15}}
+                        btnText={ Strings.backToDashboard}
+                        activeOpacity={0.8}
+                        onPress={() => this.props.navigation.navigate('selectDetails')}
+                    />
+                </View>
                 <View style={styles.bottomTabStyle}>
                 </View>
-                
-             
+
+
                 <View style={[styles.bottomTabStyle, { height: 135, width: '50%', marginHorizontal: '25%', backgroundColor: 'transparent', justifyContent: 'center' }]}>
                     <TouchableOpacity style={[styles.subTabContainerStyle]}
                         onPress={this.onScanClick}
-                    >     
+                    >
                         <TouchableOpacity
                             style={[styles.scanTabContainerStyle,]}
                         >
@@ -297,7 +308,7 @@ class MyScanComponent extends Component {
                         <Text style={[styles.tabLabelStyle, { paddingTop: '60%' }]}>
                             {Strings.scan_text}
                         </Text>
-                       
+
                     </TouchableOpacity>
                 </View>
                 {
@@ -358,8 +369,8 @@ const styles = {
         width: 40,
         height: 40
     },
-    Backbutton:{
-        width:200,
+    Backbutton: {
+        width: 200,
         lineHeight: 40,
         textAlign: 'center',
         fontSize: AppTheme.FONT_SIZE_LARGE,
@@ -369,7 +380,7 @@ const styles = {
 
     },
     tabLabelStyle: {
-        height:100,
+        height: 100,
         lineHeight: 40,
         textAlign: 'center',
         fontSize: AppTheme.FONT_SIZE_SMALL,
@@ -389,11 +400,13 @@ const styles = {
     scanSubTabContainerStyle: {
         width: '90%',
         height: '90%',
+        bottom:15,
         backgroundColor: AppTheme.BLUE,
         borderRadius: 45,
         justifyContent: 'center',
         alignItems: 'center'
-    }
+    },
+    nxtBtnStyle:{bottom:115 , marginHorizontal: 40, marginBottom: 20,borderRadius: 10,}
 }
 
 const mapStateToProps = (state) => {
