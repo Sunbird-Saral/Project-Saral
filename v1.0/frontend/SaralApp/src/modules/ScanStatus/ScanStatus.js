@@ -78,7 +78,6 @@ const ScanStatus = ({
     const getDataFromLocal = async () => {
         let data = await getScannedDataFromLocal();
         if (data != null) {
-            console.log("data", data);
             let students = data.studentsMarkInfo
         }
     }

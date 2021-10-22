@@ -88,13 +88,6 @@ const ScannedDetailsComponent = ({
 
         let absent = datas.filter((item) => item.studentId == studentId & item.studentAvailability == false)
 
-        let scan = scanedData.length > 0 && scanedData.data.length > 0 ? scanedData.data : []
-
-        // let isAbsent = scan.filter((o) => {
-        //     if (o.studentAvailability == false && studentId == o.studentId) {
-        //         return true
-        //     }
-        // })
 
         if (absent.length > 0) {
             setStdErr("Student is Absent")
@@ -252,18 +245,18 @@ const ScannedDetailsComponent = ({
         if (duplication) {
             Alert.alert("Student ID Shouldn't be duplicated")
         }
-        // else if (omrMark) {
-        //     showErrorMessage(Strings.omr_mark_should_be)
-        // }
-        // else if (disable) {
-        //     showErrorMessage(Strings.please_correct_marks_data)
-        // }
-        // else if (validCell) {
-        //     showErrorMessage(Strings.please_correct_marks_data)
-        // }
-        // else if (!studentValid) {
-        //     showErrorMessage(Strings.please_correct_student_id)
-        // }
+        else if (omrMark) {
+            showErrorMessage(Strings.omr_mark_should_be)
+        }
+        else if (disable) {
+            showErrorMessage(Strings.please_correct_marks_data)
+        }
+        else if (validCell) {
+            showErrorMessage(Strings.please_correct_marks_data)
+        }
+        else if (!studentValid) {
+            showErrorMessage(Strings.please_correct_student_id)
+        }
         else {
             if (currentIndex + 1 <= stdRollArray.length - 1) {
 
@@ -369,7 +362,6 @@ const ScannedDetailsComponent = ({
 
     const saveAndFetchFromLocalStorag = async (saveObj) => {
         let getDataFromLocal = await getScannedDataFromLocal();
-        console.log("getDataFromLocal", getDataFromLocal);
         let len = 0
         if (getDataFromLocal != null) {
 
@@ -436,7 +428,6 @@ const ScannedDetailsComponent = ({
                             }
 
                         });
-                        console.log("getDataFromLocal",getDataFromLocal);
                         setScannedDataIntoLocal(getDataFromLocal)
                         goToMyScanScreen()
                     }

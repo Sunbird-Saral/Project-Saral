@@ -65,7 +65,6 @@ class MyScanComponent extends Component {
         const data = await getScannedDataFromLocal()
         let len = 0
         if (data != null) {
-            console.log("dataaaaaa", data);
             let filter = data.filter((e) => {
                 let findSection = false
                 findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.section)

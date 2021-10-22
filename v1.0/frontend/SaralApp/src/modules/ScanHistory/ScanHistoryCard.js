@@ -81,11 +81,10 @@ const ScanHistoryCard = ({
                 })
 
                 filterData.map((value) => {
-                    console.log("value",value);
                     let apiObj = new SaveScanData(value, loginData.data.token);
                     dispatch(APITransport(apiObj))
-                    callScanStatusData(filterDataLen, setIntolocalAfterFilter)
                 })
+                callScanStatusData(filterDataLen, setIntolocalAfterFilter)
 
             } else {
                 Alert.alert('There is no data!')

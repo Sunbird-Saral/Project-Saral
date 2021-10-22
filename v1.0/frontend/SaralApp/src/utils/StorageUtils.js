@@ -135,7 +135,6 @@ export const getFetchedScanData = async () => {
 
 export const setScannedDataIntoLocal = async (data) => {
     const value = JSON.stringify(data)
-    console.log("VAlue",value);
     const saved = await AsyncStorage.setItem(SAVED_SCANNED_DATA_INTO_LOCAL, value);
     if (saved) {
         return true
