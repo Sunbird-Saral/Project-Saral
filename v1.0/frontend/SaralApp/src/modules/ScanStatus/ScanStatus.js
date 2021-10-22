@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FlatList, Text, View, BackHandler } from 'react-native';
 
 //redux
@@ -19,7 +19,7 @@ import { bindActionCreators } from 'redux';
 //api
 import APITransport from '../../flux/actions/transport/apitransport'
 import AppTheme from '../../utils/AppTheme';
-import { getScannedDataFromLocal } from '../../utils/StorageUtils';
+import { getPresentAbsentStudent, getScannedDataFromLocal } from '../../utils/StorageUtils';
 
 
 const ScanStatus = ({
@@ -29,6 +29,8 @@ const ScanStatus = ({
     navigation,
 }) => {
 
+    const [studentList, setStudentList] = useState([])
+
     //function
     const renderItem = ({ item, index }) => {
         return (
@@ -36,6 +38,7 @@ const ScanStatus = ({
                 themeColor1={multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}
                 id={item.studentId}
                 subject={item.subject}
+                studentList={studentList}
             />
         )
     }
@@ -62,7 +65,15 @@ const ScanStatus = ({
 
     useEffect(() => {
         getDataFromLocal()
+        getStudentList()
     }, [])
+
+    const getStudentList = async () => {
+        let data = await getPresentAbsentStudent()
+        if (data != null) {
+            setStudentList(data)
+        }
+    }
 
     const getDataFromLocal = async () => {
         let data = await getScannedDataFromLocal();

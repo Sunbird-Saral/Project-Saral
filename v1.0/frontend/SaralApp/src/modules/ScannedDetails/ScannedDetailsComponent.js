@@ -390,7 +390,7 @@ const ScannedDetailsComponent = ({
 
                 let totalLenOfStudentsMarkInfo = len + saveObj.studentsMarkInfo.length;
 
-                if (totalLenOfStudentsMarkInfo <= 10) {
+                if (totalLenOfStudentsMarkInfo <= 20) {
                     if (filterData) {
 
                         getDataFromLocal.forEach((e, index) => {
@@ -452,7 +452,7 @@ const ScannedDetailsComponent = ({
 
         } else if (saveObj.studentsMarkInfo.length <= 10) {
             setScannedDataIntoLocal([saveObj])
-            // goToMyScanScreen()
+            goToMyScanScreen()
         } else {
             Alert.alert("You can Save Only 10 Student. In Order to Continue have to save first")
         }
@@ -599,7 +599,7 @@ const ScannedDetailsComponent = ({
         if (isMultipleStudent) {
             return 1
         } else if (element.format.name === neglectData[2] || element.format.name === neglectData[3]) {
-            return 3
+            return 4
         } else {
             return 2
         }
@@ -656,10 +656,10 @@ const ScannedDetailsComponent = ({
 
 
             newArray.map((e) => {
-                if (e.format.name == "MAX_MARKS") {
+                if (e.format.name == neglectData[3]) {
                     setMaxMarksTotal(e.consolidatedPrediction)
                 }
-                if (e.format.name == "MARKS_OBTAINED") {
+                if (e.format.name == neglectData[2]) {
                     setTotalMarkSecured(e.consolidatedPrediction)
                 }
             })
@@ -708,6 +708,7 @@ const ScannedDetailsComponent = ({
         else {
             if (sumOfObtainedMarks > 0) {
                 //with MAX & OBTAINED MARKS
+                console.log("sumOfObtainedMarks",sumOfObtainedMarks);
                 if (sumOfObtainedMarks != totalMarkSecured) {
                     setObtnMarkErr(true)
                     showErrorMessage("Sum Of All obtained marks should be equal to marksObtained")
