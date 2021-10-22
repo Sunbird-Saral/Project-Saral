@@ -235,18 +235,17 @@ const ScannedDetailsComponent = ({
         let duplication = false
 
         const duplicate = checkStdRollDuplicate.some((item) => studentId == item)
+
         if (duplicate) {
             duplication = true
         } else {
-            setCheckStdRollDuplicate([...checkStdRollDuplicate, studentId])
             duplication = false
         }
-
-        if (duplication) {
-            Alert.alert("Student ID Shouldn't be duplicated")
-        }
-        else if (omrMark) {
+        if (omrMark) {
             showErrorMessage(Strings.omr_mark_should_be)
+        }
+        else if (duplication) {
+            Alert.alert("Student ID Shouldn't be duplicated")
         }
         else if (disable) {
             showErrorMessage(Strings.please_correct_marks_data)
@@ -277,7 +276,7 @@ const ScannedDetailsComponent = ({
                 });
                 //save validated student
                 dispatch(OcrLocalResponseAction(JSON.parse(JSON.stringify(ocrLocalResponse))))
-
+                setCheckStdRollDuplicate([...checkStdRollDuplicate, studentId])
                 validCell = false
                 setNewArrayValue(structureList[currentIndex + 1].data)
                 setStudentID(structureList[currentIndex + 1].RollNo)
@@ -570,7 +569,7 @@ const ScannedDetailsComponent = ({
 
                 <View style={[styles.viewnxtBtnStyle1, { paddingTop: '7%' }]}>
                     <ButtonComponent
-                        customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+                        customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE, marginTop: '5%' }]}
                         btnText={btnName.toUpperCase()}
                         onPress={() => isMultipleStudent ? goBackFrame() : onBackButtonClick()}
                     />
