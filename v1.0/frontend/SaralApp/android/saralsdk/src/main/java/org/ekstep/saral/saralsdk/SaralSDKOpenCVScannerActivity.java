@@ -327,9 +327,9 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
             }
         } catch (JSONException e) {
             Log.e(TAG, "unable to create response LayoutConfigs object");
-        }finally{
-            return false;
         }
+            
+         return false;
     }
 
     private void resetInvalidOMRChoice(JSONArray cellROIs)
