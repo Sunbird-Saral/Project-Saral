@@ -306,22 +306,65 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
         finish();
     }
 
+    private boolean isMultiChoiceOMRLayout(JSONArray  cells)
+    {
+        try {
+                JSONObject cell = cells.getJSONObject(0);
+                JSONArray cellROIs      = cells.getJSONObject(0).getJSONArray("rois");
+                int omrROIsCountInCell=0;
+                for (int j = 0; j < cellROIs.length(); j++) {
+                    JSONObject roi = cellROIs.getJSONObject(j);
+                    if(roi.getString("extractionMethod").equals("CELL_OMR"))
+                    {
+                        omrROIsCountInCell++;
+                    }
+                    if(omrROIsCountInCell > 1)
+                    {
+                        return true;
+                    }
+                }
+        } catch (JSONException e) {
+            Log.e(TAG, "unable to create response LayoutConfigs object");
+        }finally{
+            return false;
+        }
+    }
+
+    private void resetInvalidOMRChoice(JSONArray cellROIs)
+    {
+        try {
+            if (cellROIs != null) {
+                for (int i = 0; i < cellROIs.length(); i++) {
+                    JSONObject roi = cellROIs.getJSONObject(i);
+                    JSONObject result  = new JSONObject();
+                    result.put("prediction", "");
+                    result.put("confidence", new Double(0.00));
+                    roi.put("result", result);
+                }
+            }
+        }catch (JSONException e) {
+            Log.w(TAG, "unable to resetInvalidOMRChoice");
+        }
+    }
+
     private JSONObject getScanResult() {
 
         try {
             JSONObject layoutConfigs    = new JSONObject(mlayoutConfigs);
             JSONObject layoutObject     = layoutConfigs.getJSONObject("layout");
             JSONArray  cells            = layoutObject.getJSONArray("cells");
-
+            boolean isMultiChoiceOMRLayout = isMultiChoiceOMRLayout(cells);
+            
             for (int i = 0; i < cells.length(); i++) {
                 JSONArray cellROIs      = cells.getJSONObject(i).getJSONArray("rois");
                 JSONObject cell = cells.getJSONObject(i);
                 JSONArray trainingDataSet = new JSONArray();
+                int countOMRChoice =0;
                 for (int j = 0; j < cellROIs.length(); j++) {
                     JSONObject roi      = cellROIs.getJSONObject(j);
                     String roiId = roi.getString("roiId");
                     if (roi.getString("extractionMethod").equals("NUMERIC_CLASSIFICATION")) {
-                        JSONObject result  = new JSONObject(mPredictedDigits.get(roi.get("roiId")));
+                        JSONObject result  = new JSONObject(mPredictedDigits.get(roiId));
                         roi.put("result", result);
                         if(mRoiMatBase64.get(roiId)!=null)
                         {
@@ -331,10 +374,28 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
 
                     if (roi.getString("extractionMethod").equals("CELL_OMR")) {
                         JSONObject result  = new JSONObject();
-                        result.put("prediction", mPredictedOMRs.get(roi.get("roiId")));
-                        result.put("confidence", new Double(1.00));
+                        if(isMultiChoiceOMRLayout)
+                        {
+                            //Handling Multi Choice OMR Layout predictions
+                            String prediction =mPredictedOMRs.get(roiId);
+                            if(prediction!=null && prediction.equals("1")){
+                                result.put("prediction", String.valueOf(j));
+                                result.put("confidence", new Double(1.00));
+                                countOMRChoice++;
+                            }else{
+                                result.put("prediction", "");
+                                result.put("confidence", new Double(0.0));
+                            }
+                        }else {
+                            result.put("prediction", mPredictedOMRs.get(roiId));
+                            result.put("confidence", new Double(1.00));
+                        }
                         roi.put("result", result);
-                    }                  
+                    }
+                }
+                if(isMultiChoiceOMRLayout && countOMRChoice > 1)
+                {
+                    resetInvalidOMRChoice(cellROIs);
                 }
                 if(trainingDataSet.length() > 0)
                 {
