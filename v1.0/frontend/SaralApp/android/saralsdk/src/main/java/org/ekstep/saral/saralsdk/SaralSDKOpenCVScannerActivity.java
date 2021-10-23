@@ -309,7 +309,8 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
     private boolean isMultiChoiceOMRLayout(JSONArray  cells)
     {
         try {
-                JSONObject cell = cells.getJSONObject(0);
+            for (int i = 0; i < cells.length(); i++) { 
+                JSONObject cell = cells.getJSONObject(i);
                 JSONArray cellROIs      = cells.getJSONObject(0).getJSONArray("rois");
                 int omrROIsCountInCell=0;
                 for (int j = 0; j < cellROIs.length(); j++) {
@@ -323,6 +324,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                         return true;
                     }
                 }
+            }
         } catch (JSONException e) {
             Log.e(TAG, "unable to create response LayoutConfigs object");
         }finally{
@@ -355,6 +357,8 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
             JSONArray  cells            = layoutObject.getJSONArray("cells");
             boolean isMultiChoiceOMRLayout = isMultiChoiceOMRLayout(cells);
             
+            Log.d(TAG, "isMultiChoiceOMRLayout:: "+isMultiChoiceOMRLayout);
+
             for (int i = 0; i < cells.length(); i++) {
                 JSONArray cellROIs      = cells.getJSONObject(i).getJSONArray("rois");
                 JSONObject cell = cells.getJSONObject(i);
