@@ -326,7 +326,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                 }
             }
         } catch (JSONException e) {
-            Log.e(TAG, "unable to create response LayoutConfigs object");
+            Log.e(TAG, "Failed to parse layout configuration");
         }
             
          return false;
