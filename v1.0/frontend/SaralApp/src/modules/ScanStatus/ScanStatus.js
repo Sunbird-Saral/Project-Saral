@@ -1,5 +1,5 @@
-import React ,{useEffect} from 'react';
-import { FlatList, Text, View ,BackHandler} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { FlatList, Text, View, BackHandler } from 'react-native';
 
 //redux
 import { connect } from 'react-redux';
@@ -19,6 +19,7 @@ import { bindActionCreators } from 'redux';
 //api
 import APITransport from '../../flux/actions/transport/apitransport'
 import AppTheme from '../../utils/AppTheme';
+import { getPresentAbsentStudent, getScannedDataFromLocal } from '../../utils/StorageUtils';
 
 
 const ScanStatus = ({
@@ -28,36 +29,58 @@ const ScanStatus = ({
     navigation,
 }) => {
 
+    const [studentList, setStudentList] = useState([])
+
     //function
     const renderItem = ({ item, index }) => {
         return (
             <ScanStatusList
-                themeColor1 ={multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}
+                themeColor1={multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}
                 id={item.studentId}
                 subject={item.subject}
+                studentList={studentList}
             />
         )
     }
 
     const renderEmptyData = ({ item }) => {
         return (
-            <View style={{alignItems:'center',justifyContent:'center',flex:1}}>
+            <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
                 <Text>No Data Available</Text>
             </View>
         )
     }
-    
+
 
     useEffect(
         React.useCallback(() => {
-          const onBackPress = () => {
-            navigation.navigate('ScanHistory');
-          };
-          BackHandler.addEventListener('hardwareBackPress', onBackPress);
-          return () =>
-            BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+            const onBackPress = () => {
+                navigation.navigate('ScanHistory');
+            };
+            BackHandler.addEventListener('hardwareBackPress', onBackPress);
+            return () =>
+                BackHandler.removeEventListener('hardwareBackPress', onBackPress);
         }, []),
-      );
+    );
+
+    useEffect(() => {
+        getDataFromLocal()
+        getStudentList()
+    }, [])
+
+    const getStudentList = async () => {
+        let data = await getPresentAbsentStudent()
+        if (data != null) {
+            setStudentList(data)
+        }
+    }
+
+    const getDataFromLocal = async () => {
+        let data = await getScannedDataFromLocal();
+        if (data != null) {
+            let students = data.studentsMarkInfo
+        }
+    }
 
     return (
         <View style={styles.container}>
@@ -86,7 +109,7 @@ const ScanStatus = ({
                 data={scanedData && scanedData.data}
                 renderItem={renderItem}
                 ListEmptyComponent={renderEmptyData}
-                keyExtractor={(item,index) => `${index.toString()}`}
+                keyExtractor={(item, index) => `${index.toString()}`}
                 contentContainerStyle={styles.content}
             />
 

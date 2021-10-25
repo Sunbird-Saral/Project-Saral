@@ -47,7 +47,10 @@ const ScanHistoryCard = ({
 
         if (data) {
             const filterData = data.filter((e) => {
-                if (e.classId == filteredData.response.class && e.subject == subject && e.examDate == examDate) {
+
+                let findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.response.section)
+
+                if (e.classId == filteredData.response.class && e.subject == subject && e.examDate == examDate && findSection) {
                     return true
                 } else {
                     return false
@@ -57,11 +60,14 @@ const ScanHistoryCard = ({
             setIsLoading(true)
             let filterDataLen = 0
 
-            let localScanData = ''
+            let setIntolocalAfterFilter = ''
             if (filterData.length != 0) {
                 filterData.filter((f) => {
-                    localScanData = data.filter((e) => {
-                        if (e.classId == f.classId && e.subject == f.subject && e.examDate == f.examDate) {
+
+                    let findSection = f.studentsMarkInfo.some((item) => item.section == filteredData.response.section)
+
+                    setIntolocalAfterFilter = data.filter((e) => {
+                        if (e.classId == f.classId && e.subject == f.subject && e.examDate == f.examDate && findSection) {
                             return false
                         } else {
                             filterDataLen = filterDataLen + e.studentsMarkInfo.length
@@ -70,15 +76,16 @@ const ScanHistoryCard = ({
                     })
                 })
 
-
-                for (const value of filterData) {
-                    let apiObj = new SaveScanData(value, loginData.data.token);
+                    let apiObj = new SaveScanData(filterData[0], loginData.data.token);
                     dispatch(APITransport(apiObj))
-                    callScanStatusData(filterDataLen, localScanData)
-                }
+
+                setTimeout(function () {
+                    callScanStatusData(filterDataLen, setIntolocalAfterFilter)
+                }, 2000);
+
             } else {
+                Alert.alert('There is no data!')
                 setIsLoading(false)
-                Alert.alert('There is no scanned data for this class!')
             }
 
         }
@@ -92,9 +99,9 @@ const ScanHistoryCard = ({
         let loginCred = await getLoginCred()
 
         let dataPayload = {
-            "classId": filteredData.class,
-            "subject": filteredData.subject,
-            "fromDate": filteredData.examDate,
+            "classId": filteredData.response.class,
+            "subject": filteredData.response.subject,
+            "fromDate": filteredData.response.examDate,
             "page": 0,
             "schoolId": loginCred.schoolId,
             "downloadRes": true
@@ -132,7 +139,8 @@ const ScanHistoryCard = ({
                     setScannedDataIntoLocal(localScanData)
                 })
                 .catch(function (err) {
-
+                    console.warn("Error", err);
+                    console.warn("Error", err.response);
                     Alert.alert("Something Went Wrong")
                     setIsLoading(false)
                     clearTimeout(id)
@@ -150,68 +158,68 @@ const ScanHistoryCard = ({
 
     return (
         <View>
-        <TouchableOpacity
-            style={[styles.container, { backgroundColor: themeColor1 ? themeColor1 : AppTheme.BLUE }]}
-            disabled
+            <TouchableOpacity
+                style={[styles.container, { backgroundColor: themeColor1 ? themeColor1 : AppTheme.BLUE }]}
+                disabled
 
-        >
-            <View style={{ flexDirection: 'row', width: '100%', alignItems: 'center', paddingTop: '3%', paddingLeft: '1%', paddingRight: '1%', paddingBottom: '5%' }}>
-                <View>
-                    <View style={styles.scanCardStyle}>
-                        <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                            <Text>{Strings.class_text}</Text>
+            >
+                <View style={{ flexDirection: 'row', width: '100%', alignItems: 'center', paddingTop: '3%', paddingLeft: '1%', paddingRight: '1%', paddingBottom: '5%' }}>
+                    <View>
+                        <View style={styles.scanCardStyle}>
+                            <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
+                                <Text>{Strings.class_text}</Text>
+                            </View>
+                            <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
+                                <Text>{filteredData.response.className}</Text>
+                            </View>
                         </View>
-                        <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
-                            <Text>{filteredData.response.className}</Text>
+                        <View style={styles.scanCardStyle}>
+                            <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
+                                <Text>{Strings.section}</Text>
+                            </View>
+                            <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
+                                <Text>{filteredData.response.section}</Text>
+                            </View>
                         </View>
-                    </View>
-                    <View style={styles.scanCardStyle}>
-                        <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                            <Text>{Strings.section}</Text>
+                        <View style={styles.scanCardStyle}>
+                            <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
+                                <Text>{Strings.exam_date}</Text>
+                            </View>
+                            <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
+                                <Text>{filteredData.response.examDate}</Text>
+                            </View>
                         </View>
-                        <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
-                            <Text>{filteredData.response.section}</Text>
+                        <View style={styles.scanCardStyle}>
+                            <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
+                                <Text>{Strings.subject}</Text>
+                            </View>
+                            <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
+                                <Text>{filteredData.response.subject}</Text>
+                            </View>
                         </View>
-                    </View>
-                    <View style={styles.scanCardStyle}>
-                        <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                            <Text>{Strings.exam_date}</Text>
+                        <View style={styles.scanCardStyle}>
+                            <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
+                                <Text>{Strings.exam_id}</Text>
+                            </View>
+                            <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
+                                <Text>{filteredData.response.examTestID}</Text>
+                            </View>
                         </View>
-                        <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
-                            <Text>{filteredData.response.examDate}</Text>
+                        <View style={styles.scanCardStyle}>
+                            <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle,]}>
+                                <Text>{Strings.scan_status}</Text>
+                            </View>
+                            <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle,]}>
+                                <Text>{scanStatusData}</Text>
+                            </View>
                         </View>
-                    </View>
-                    <View style={styles.scanCardStyle}>
-                        <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                            <Text>{Strings.subject}</Text>
-                        </View>
-                        <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
-                            <Text>{filteredData.response.subject}</Text>
-                        </View>
-                    </View>
-                    <View style={styles.scanCardStyle}>
-                        <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                            <Text>{Strings.exam_id}</Text>
-                        </View>
-                        <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
-                            <Text>{filteredData.response.examTestID}</Text>
-                        </View>
-                    </View>
-                    <View style={styles.scanCardStyle}>
-                        <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle,]}>
-                            <Text>{Strings.scan_status}</Text>
-                        </View>
-                        <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle,]}>
-                            <Text>{scanStatusData}</Text>
-                        </View>
-                    </View>
-                    <View style={styles.scanCardStyle}>
-                        <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle, { borderBottomWidth: 1 }]}>
-                            <Text>{Strings.save_status}</Text>
-                        </View>
-                        <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle, { borderBottomWidth: 1 }]}>
-                            <Text>{scanedData ? scanedData.length : 0}</Text>
-                        </View>
+                        <View style={styles.scanCardStyle}>
+                            <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle, { borderBottomWidth: 1 }]}>
+                                <Text>{Strings.save_status}</Text>
+                            </View>
+                            <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle, { borderBottomWidth: 1 }]}>
+                                <Text>{scanedData ? scanedData.length : 0}</Text>
+                            </View>
                     </View>
                 </View>
             </View>
@@ -219,13 +227,12 @@ const ScanHistoryCard = ({
             <View style={{ marginBottom: '3%', width: '100%', alignItems: 'center' }}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', width: '100%' }}>
                     {
-                     
                         showButtons
                         &&
                         <TouchableOpacity
                             style={{
                                 backgroundColor: AppTheme.WHITE, borderRadius: 4,
-                
+
                                 width: true ? '45%' : '80%',
                                 alignItems: 'center', justifyContent: 'center', elevation: 8, paddingVertical: 4,
                                 marginLeft: 5,
@@ -269,7 +276,6 @@ const ScanHistoryCard = ({
             }
 
         </TouchableOpacity>
-    
         </View>
     );
 }

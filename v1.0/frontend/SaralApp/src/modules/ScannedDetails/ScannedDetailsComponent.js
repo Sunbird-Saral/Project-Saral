@@ -88,13 +88,6 @@ const ScannedDetailsComponent = ({
 
         let absent = datas.filter((item) => item.studentId == studentId & item.studentAvailability == false)
 
-        let scan = scanedData.length > 0 && scanedData.data.length > 0 ? scanedData.data : []
-
-        let isAbsent = scan.filter((o) => {
-            if (o.studentAvailability == false && studentId == o.studentId) {
-                return true
-            }
-        })
 
         if (absent.length > 0) {
             setStdErr("Student is Absent")
@@ -225,7 +218,6 @@ const ScannedDetailsComponent = ({
     }
 
 
-
     const goNextFrame = () => {
 
         let validCell = false
@@ -241,18 +233,17 @@ const ScannedDetailsComponent = ({
         let duplication = false
 
         const duplicate = checkStdRollDuplicate.some((item) => studentId == item)
+
         if (duplicate) {
             duplication = true
         } else {
-            setCheckStdRollDuplicate([...checkStdRollDuplicate, studentId])
             duplication = false
         }
-
-        if (duplication) {
-            Alert.alert("Student ID Shouldn't be duplicated")
-        }
-        else if (omrMark) {
+        if (omrMark) {
             showErrorMessage(Strings.omr_mark_should_be)
+        }
+        else if (duplication) {
+            Alert.alert("Student ID Shouldn't be duplicated")
         }
         else if (disable) {
             showErrorMessage(Strings.please_correct_marks_data)
@@ -282,7 +273,7 @@ const ScannedDetailsComponent = ({
                 });
                 //save validated student
                 dispatch(OcrLocalResponseAction(JSON.parse(JSON.stringify(ocrLocalResponse))))
-
+                setCheckStdRollDuplicate([...checkStdRollDuplicate, studentId])
                 validCell = false
                 setNewArrayValue(structureList[currentIndex + 1].data)
                 setStudentID(structureList[currentIndex + 1].RollNo)
@@ -292,6 +283,20 @@ const ScannedDetailsComponent = ({
                     setNextBtn(Strings.submit_text)
                 }
             } else {
+                ocrLocalResponse.layout.cells.forEach(element => {
+
+                    if (element.cellId == stdRollArray[currentIndex].cellId) {
+                        element.consolidatedPrediction = studentId
+
+                        structureList.forEach((el, index) => {
+                            if (currentIndex == index) {
+                                el.RollNo = studentId
+                            }
+                        });
+
+                    }
+                });
+                dispatch(OcrLocalResponseAction(JSON.parse(JSON.stringify(ocrLocalResponse))))
                 saveMultipleStudentDataSheet()
             }
         }
@@ -356,20 +361,83 @@ const ScannedDetailsComponent = ({
         let getDataFromLocal = await getScannedDataFromLocal();
         let len = 0
         if (getDataFromLocal != null) {
-            getDataFromLocal.forEach((element, index) => {
-                len = len + element.studentsMarkInfo.length
-            });
-            let totalLenOfStudentsMarkInfo = len + saveObj.studentsMarkInfo.length;
-            if (totalLenOfStudentsMarkInfo <= 10) {
-                if (getDataFromLocal) {
-                    let data = getDataFromLocal
-                    getDataFromLocal.push(saveObj)
-                    setScannedDataIntoLocal(getDataFromLocal)
-                    goToMyScanScreen()
+
+            let filterData = getDataFromLocal.filter((e) => {
+                let findSection = false
+                findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.section)
+
+                if (filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject && findSection) {
+                    return true
                 }
-            } else {
-                Alert.alert("You can Save Only 10 Student. In Order to Continue have to save first")
+            })
+
+
+            if (filterData.length > 0) {
+                filterData.forEach((element, index) => {
+                    len = len + element.studentsMarkInfo.length
+                });
+
+                let totalLenOfStudentsMarkInfo = len + saveObj.studentsMarkInfo.length;
+
+                if (totalLenOfStudentsMarkInfo <= 20) {
+                    if (filterData) {
+
+                        getDataFromLocal.forEach((e, index) => {
+
+                            let findSection = false
+                            findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.section)
+
+                            if (filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject && findSection) {
+
+
+                                e.studentsMarkInfo.forEach((element, i) => {
+
+                                    let findStudent = e.studentsMarkInfo.filter(o => {
+                                        if (o.studentId == studentId) {
+                                            return true;
+                                        }
+                                    })
+
+                                    if (!isMultipleStudent && findStudent.length > 0) {
+                                        getDataFromLocal[index].studentsMarkInfo[i] = saveObj.studentsMarkInfo[0]
+                                    }
+                                    else if (isMultipleStudent) {
+
+
+                                        let findMultipleStudent = structureList.filter((item) => {
+                                            if (item.RollNo == element.studentId) {
+                                                return true
+                                            }
+                                        })
+
+
+                                        if (findMultipleStudent.length > 0) {
+                                            getDataFromLocal[index].studentsMarkInfo[i] = saveObj.studentsMarkInfo[i]
+                                        } else {
+                                            getDataFromLocal[index].studentsMarkInfo.push(saveObj.studentsMarkInfo[i])
+                                        }
+                                    }
+                                    else {
+                                        getDataFromLocal[index].studentsMarkInfo.push(saveObj.studentsMarkInfo[0])
+                                    }
+
+                                });
+                            }
+
+                        });
+                        setScannedDataIntoLocal(getDataFromLocal)
+                        goToMyScanScreen()
+                    }
+                } else {
+                    Alert.alert("You can Save Only 10 Student. In Order to Continue have to save first")
+                }
+
+            } else if (saveObj.studentsMarkInfo.length <= 10) {
+                let data = getDataFromLocal.push(saveObj)
+                setScannedDataIntoLocal(getDataFromLocal)
+                goToMyScanScreen()
             }
+
         } else if (saveObj.studentsMarkInfo.length <= 10) {
             setScannedDataIntoLocal([saveObj])
             goToMyScanScreen()
@@ -498,18 +566,19 @@ const ScannedDetailsComponent = ({
                         })
                     }
 
-                    <View style={[styles.viewnxtBtnStyle1, { paddingTop: '7%' }]}>
-                        <ButtonComponent
-                            customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
-                            btnText={btnName.toUpperCase()}
-                            onPress={() => isMultipleStudent ? goBackFrame() : onBackButtonClick()}
-                        />
-                        <ButtonComponent
-                            customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
-                            btnText={nextBtn.toUpperCase()}
-                            onPress={() => isMultipleStudent ? goNextFrame() : onSubmitClick()}
-                        />
-                    </View>
+                <View style={[styles.viewnxtBtnStyle1, { paddingTop: '7%' }]}>
+                    <ButtonComponent
+                        customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE, marginTop: '5%' }]}
+                        btnText={btnName.toUpperCase()}
+                        onPress={() => isMultipleStudent ? goBackFrame() : onBackButtonClick()}
+                    />
+                    <ButtonComponent
+                        customBtnStyle={[styles.nxtBtnStyle, { borderColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+                        customBtnTextStyle={{ color: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }}
+                        btnText={nextBtn.toUpperCase()}
+                        onPress={() => isMultipleStudent ? goNextFrame() : onSubmitClick()}
+                    />
+                </View>
 
                 </ScrollView>
             </View>
@@ -520,7 +589,7 @@ const ScannedDetailsComponent = ({
         if (isMultipleStudent) {
             return 1
         } else if (element.format.name === neglectData[2] || element.format.name === neglectData[3]) {
-            return 3
+            return 4
         } else {
             return 2
         }
@@ -577,10 +646,10 @@ const ScannedDetailsComponent = ({
 
 
             newArray.map((e) => {
-                if (e.format.name == "MAX_MARKS") {
+                if (e.format.name == neglectData[3]) {
                     setMaxMarksTotal(e.consolidatedPrediction)
                 }
-                if (e.format.name == "MARKS_OBTAINED") {
+                if (e.format.name == neglectData[2]) {
                     setTotalMarkSecured(e.consolidatedPrediction)
                 }
             })
@@ -619,7 +688,7 @@ const ScannedDetailsComponent = ({
 
     const onSubmitClick = async () => {
         if (disable) {
-            showErrorMessage(Strings.please_fill_cells)
+            showErrorMessage(Strings.please_correct_marks_data)
         }
         else if (!studentValid) {
             showErrorMessage(Strings.please_correct_student_id)
@@ -627,6 +696,7 @@ const ScannedDetailsComponent = ({
         else {
             if (sumOfObtainedMarks > 0) {
                 //with MAX & OBTAINED MARKS
+                console.log("sumOfObtainedMarks",sumOfObtainedMarks);
                 if (sumOfObtainedMarks != totalMarkSecured) {
                     setObtnMarkErr(true)
                     showErrorMessage("Sum Of All obtained marks should be equal to marksObtained")

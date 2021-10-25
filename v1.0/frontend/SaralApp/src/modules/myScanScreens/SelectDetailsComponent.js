@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, BackHandler, Alert } from 'react-native';
+import { View, ScrollView, Text, BackHandler, Alert, TouchableOpacity, Image } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -12,7 +12,7 @@ import { apkVersion } from '../../configs/config';
 import HeaderComponent from '../common/components/HeaderComponent';
 import DropDownMenu from '../common/components/DropDownComponent';
 import ButtonComponent from '../common/components/ButtonComponent';
-import { getLoginData, setStudentsExamData, getStudentsExamData, getLoginCred, setLoginData } from '../../utils/StorageUtils'
+import { getLoginData, setStudentsExamData, getStudentsExamData, getLoginCred, setLoginData, getScannedDataFromLocal } from '../../utils/StorageUtils'
 import { OcrLocalResponseAction } from '../../flux/actions/apis/OcrLocalResponseAction'
 import { GetStudentsAndExamData } from '../../flux/actions/apis/getStudentsAndExamData';
 import { FilteredDataAction } from '../../flux/actions/apis/filteredDataActions';
@@ -24,6 +24,7 @@ import { LoginAction  } from '../../flux/actions/apis/LoginAction';
 import { LogoutAction  } from '../../flux/actions/apis/LogoutAction';
 import { getScannedDataFromLocal } from '../../utils/StorageUtils';
 import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
+
 const clearState = {
     defaultSelected: Strings.select_text,
     classesArr: [],
@@ -56,7 +57,7 @@ const clearState = {
     calledAbsentStatus: false,
     calledScanStaus: false,
     absentStatusPayload: null,
-    subjectsData:[]
+    subjectsData: []
 }
 
 class SelectDetailsComponent extends Component {
@@ -97,8 +98,8 @@ class SelectDetailsComponent extends Component {
             examDate: [],
             calledAbsentStatus: false,
             absentStatusPayload: null,
-            subjectsData:[],
-            filterdataid:[],     
+            subjectsData: [],
+            filterdataid: []
         }
         this.onBack = this.onBack.bind(this)
 
@@ -149,10 +150,11 @@ class SelectDetailsComponent extends Component {
     }
 
     onPressSaveInDB = async () => {
+        const { loginData } = this.props
         let data = await getScannedDataFromLocal();
-        if (data) {
+        if (data != null) {
             for (const value of data) {
-                let apiObj = new SaveScanData(value, this.props.loginData.data.token);
+                let apiObj = new SaveScanData(value, loginData.data.token);
                 this.props.APITransport(apiObj)
             }   
         }
@@ -166,7 +168,7 @@ class SelectDetailsComponent extends Component {
             }
         ]) 
     }
-    
+
 
     loader = (flag) => {
         this.setState({
@@ -195,14 +197,16 @@ class SelectDetailsComponent extends Component {
                             classId: classesArr[index].classId,
                             section: sectionListArr[0],
                         }
-                       
+
                         this.loader(true)
                         this.setState({
                             dataPayload: payload
                         }, () => {
-                       
+
+                            // let isTokenValid = validateToken(loginDetails.expiresOn)                                 
+                            // if(isTokenValid) {
                             this.callStudentsData(loginDetails.token)
-                      
+
                         })
                     }
                 })
@@ -248,7 +252,7 @@ class SelectDetailsComponent extends Component {
                     this.setState({
                         dataPayload: payload
                     }, () => {
-                       
+
                         this.callStudentsData(loginDetails.token)
                     })
                 }
@@ -295,9 +299,9 @@ class SelectDetailsComponent extends Component {
         this.setState({
             absentStatusPayload: payload
         }, () => {
-         
+
             this.callAbsentStatus(payload, loginDetails.jwtToken)
-        
+
         })
     }
 
@@ -394,7 +398,7 @@ class SelectDetailsComponent extends Component {
 
     async componentDidUpdate(prevProps) {
         if (prevProps != this.props) {
-           
+
             const { apiStatus, studentsAndExamData, absentStudentDataResponse, getScanStatusData, loginData } = this.props
             const { calledStudentsData, calledAbsentStatus, selectedClass, selectedSection, selectedClassId, calledScanStaus, calledLogin, callApi, absentStatusPayload } = this.state
             if (apiStatus && prevProps.apiStatus != apiStatus && apiStatus.error) {
@@ -457,9 +461,9 @@ class SelectDetailsComponent extends Component {
                                     let subArr = []
                                     let testID = []
                                     let examDates = []
-                                    let subjects=[]
+                                    let subjects = []
                                     _.filter(studentsAndExamData.data.exams, function (o) {
-                                        subArr.push(o.subject+" "+o.examDate)
+                                        subArr.push(o.subject + " " + o.examDate)
                                         testID.push(o.examId)
                                         examDates.push(o.examDate)
                                         subjects.push(o.subject)
@@ -622,7 +626,7 @@ class SelectDetailsComponent extends Component {
                 })
                 return false
             }
-        
+
             return true
         }
         return true
@@ -630,7 +634,7 @@ class SelectDetailsComponent extends Component {
 
     onSubmitClick = () => {
         const { selectedClass, selectedClassId, selectedSection, examTestID, subIndex, examDate, subjectsData } = this.state
-        const { loginData} = this.props
+        const { loginData } = this.props
         this.setState({
             errClass: '',
             errSub: '',
@@ -701,15 +705,15 @@ class SelectDetailsComponent extends Component {
             this.setState({ dateVisible: false })
         }
     }
-   
+
     render() {
-        const {navigation, isLoading, defaultSelected, classList, classListIndex, selectedClass, sectionList, sectionListIndex, selectedSection, pickerDate, selectedDate, subArr, selectedSubject, subIndex, errClass, errSub, errDate, errSection, sectionValid, dateVisible, examTestID } = this.state
-        const { loginData, scanTypeData } = this.props 
+        const { navigation, isLoading, defaultSelected, classList, classListIndex, selectedClass, sectionList, sectionListIndex, selectedSection, pickerDate, selectedDate, subArr, selectedSubject, subIndex, errClass, errSub, errDate, errSection, sectionValid, dateVisible, examTestID } = this.state
+        const { loginData, scanTypeData } = this.props
         return (
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
                 <HeaderComponent
                     logoutHeaderText={Strings.logout_text}
-                    titletextstyle={{color:AppTheme.WHITE}}
+                    titletextstyle={{ color: AppTheme.WHITE }}
                     customLogoutTextStyle={{ color: AppTheme.GREY }}
                     onLogoutClick={this.onLogoutClick}
                 />
@@ -797,19 +801,19 @@ class SelectDetailsComponent extends Component {
                                     />
                                 </View>
                             }
-                    
+
                         </View>
-                       
+
                     </View>
-                    
+
                 </ScrollView>
                 <View style={styles.btnContainer}>
-                <ButtonComponent
-                            customBtnStyle={[styles.nxtBtnStyle,{backgroundColor:this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE}]}
-                            btnText={Strings.submit_text}
-                            onPress={this.onSubmitClick}
-                        />
-                        </View>
+                    <ButtonComponent
+                        customBtnStyle={[styles.nxtBtnStyle, { backgroundColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+                        btnText={Strings.submit_text}
+                        onPress={this.onSubmitClick}
+                    />
+                </View>
                 {dateVisible && (
                     <DateTimePicker
                         display="default"
@@ -833,8 +837,8 @@ const styles = {
     },
     btnContainer: {
         paddingVertical: '15%',
-        alignItems:'center',
-        paddingHorizontal:10
+        alignItems: 'center',
+        paddingHorizontal: 10
     },
     header1TextStyle: {
         lineHeight: 40,
@@ -859,7 +863,7 @@ const styles = {
         lineHeight: 35
     },
     nxtBtnStyle: {
-     
+
     }
 }
 
