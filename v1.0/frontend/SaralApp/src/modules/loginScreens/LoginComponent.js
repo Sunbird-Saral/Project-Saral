@@ -36,12 +36,7 @@ class LoginComponent extends Component {
 
         })
     }
-
-    componentWillUnmount() {
-        AppState.removeEventListener('change', this.handleAppStateChange);
-    }
-
-    handleAppStateChange = (nextAppState) => {
+        handleAppStateChange = (nextAppState) => {
         if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
             this.componentMountCall()
         }

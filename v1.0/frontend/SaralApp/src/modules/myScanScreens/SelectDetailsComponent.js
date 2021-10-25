@@ -20,7 +20,8 @@ import APITransport from '../../flux/actions/transport/apitransport';
 import { cryptoText, SCAN_TYPES, validateToken } from '../../utils/CommonUtils';
 import { ROIAction } from '../StudentsList/ROIAction';
 import { GetAbsentStudentData } from '../../flux/actions/apis/getAbsentStudentData';
-import { LoginAction } from '../../flux/actions/apis/LoginAction';
+import { LoginAction  } from '../../flux/actions/apis/LoginAction';
+import { LogoutAction  } from '../../flux/actions/apis/LogoutAction';
 import { getScannedDataFromLocal } from '../../utils/StorageUtils';
 import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
 const clearState = {
@@ -153,19 +154,17 @@ class SelectDetailsComponent extends Component {
             for (const value of data) {
                 let apiObj = new SaveScanData(value, this.props.loginData.data.token);
                 this.props.APITransport(apiObj)
-            }
+            }   
         }
-       
         Alert.alert(Strings.message_text, Strings.are_you_sure_you_want_to_logout, [
             { 'text': Strings.no_text, style: 'cancel' },
             {
                 'text': Strings.yes_text, onPress: async () => {
-                    await AsyncStorage.clear();
-               
-                    this.props.navigation.navigate('auth')
+                      await AsyncStorage.clear();
+                     this.props.navigation.navigate('auth')
                 }
             }
-        ])
+        ]) 
     }
     
 
@@ -882,7 +881,8 @@ const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
         APITransport: APITransport,
         OcrLocalResponseAction: OcrLocalResponseAction,
-        FilteredDataAction: FilteredDataAction
+        FilteredDataAction: FilteredDataAction,
+       
     }, dispatch)
 }
 
