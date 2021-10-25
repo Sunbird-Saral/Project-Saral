@@ -12,7 +12,7 @@ import { apkVersion } from '../../configs/config';
 import HeaderComponent from '../common/components/HeaderComponent';
 import DropDownMenu from '../common/components/DropDownComponent';
 import ButtonComponent from '../common/components/ButtonComponent';
-import { getLoginData, setStudentsExamData, getStudentsExamData, getLoginCred, setLoginData, getScannedDataFromLocal } from '../../utils/StorageUtils'
+import { getLoginData, setStudentsExamData, getStudentsExamData, getLoginCred, setLoginData } from '../../utils/StorageUtils'
 import { OcrLocalResponseAction } from '../../flux/actions/apis/OcrLocalResponseAction'
 import { GetStudentsAndExamData } from '../../flux/actions/apis/getStudentsAndExamData';
 import { FilteredDataAction } from '../../flux/actions/apis/filteredDataActions';
@@ -102,7 +102,6 @@ class SelectDetailsComponent extends Component {
             filterdataid: []
         }
         this.onBack = this.onBack.bind(this)
-
     }
 
     componentDidMount() {
@@ -162,7 +161,9 @@ class SelectDetailsComponent extends Component {
             { 'text': Strings.no_text, style: 'cancel' },
             {
                 'text': Strings.yes_text, onPress: async () => {
-                      await AsyncStorage.clear();
+                    //    await AsyncStorage.clear();
+                      this.props.LogoutAction(loginData.data.token)
+                      console.warn('logout')
                      this.props.navigation.navigate('auth')
                 }
             }
@@ -886,6 +887,7 @@ const mapDispatchToProps = (dispatch) => {
         APITransport: APITransport,
         OcrLocalResponseAction: OcrLocalResponseAction,
         FilteredDataAction: FilteredDataAction,
+        LogoutAction:LogoutAction
        
     }, dispatch)
 }
