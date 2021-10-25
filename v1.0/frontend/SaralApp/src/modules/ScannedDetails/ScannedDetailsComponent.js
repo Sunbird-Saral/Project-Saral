@@ -481,6 +481,7 @@ const ScannedDetailsComponent = ({
 
     const renderTabSecond = () => {
         return (
+            <View style={{flex:1}}> 
             <ScrollView contentContainerStyle={{ backgroundColor: AppTheme.WHITE, paddingBottom: '15%' }} keyboardShouldPersistTaps={'handled'}>
                 <Text style={styles.studentDetailsTxtStyle}>{Strings.student_details}</Text>
                 <View style={styles.studentContainer}>
@@ -582,6 +583,7 @@ const ScannedDetailsComponent = ({
                 </View>
 
             </ScrollView>
+            </View>
         )
     }
 
@@ -770,6 +772,7 @@ const ScannedDetailsComponent = ({
     }
 
     return (
+        <View style={{flex:1}}>
         <ScrollView
             contentContainerStyle={{ backgroundColor: AppTheme.BACKGROUND_COLOR, paddingBottom: '15%' }}
             showsVerticalScrollIndicator={false}
@@ -796,6 +799,7 @@ const ScannedDetailsComponent = ({
 
             {isLoading && <Spinner animating={isLoading} iconShow={false} />}
         </ScrollView>
+        </View>
     );
 }
 const mapStateToProps = (state) => {
