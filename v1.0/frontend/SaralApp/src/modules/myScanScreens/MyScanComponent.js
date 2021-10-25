@@ -28,7 +28,7 @@ class MyScanComponent extends Component {
         this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
     }
 
-    componentDidMount() {
+    componentWillMount() {
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
     }
 
@@ -61,10 +61,20 @@ class MyScanComponent extends Component {
 
     //functions
     sumOfLocalData = async () => {
+        const { filteredData } = this.props
         const data = await getScannedDataFromLocal()
         let len = 0
         if (data != null) {
-            data.forEach((element, index) => {
+            let filter = data.filter((e) => {
+                let findSection = false
+                findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.section)
+
+                if (filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject && findSection) {
+                    return true
+                }
+            })
+
+            filter.forEach((element, index) => {
                 len = len + element.studentsMarkInfo.length
             });
             this.setState({
@@ -205,6 +215,8 @@ class MyScanComponent extends Component {
         this.props.OcrLocalResponseAction(JSON.parse(JSON.stringify(roisData)))
         this.props.navigation.navigate('ScannedDetailsComponent', { oldBrightness: this.state.oldBrightness })
     }
+
+
     render() {
         const { isLoading } = this.state;
         const { loginData } = this.props
@@ -273,6 +285,8 @@ class MyScanComponent extends Component {
                 </View>
                 <View style={styles.bottomTabStyle}>
                 </View>
+
+
                 <View style={[styles.bottomTabStyle, { height: 135, width: '50%', marginHorizontal: '25%', backgroundColor: 'transparent', justifyContent: 'center' }]}>
                     <TouchableOpacity style={[styles.subTabContainerStyle]}
                         onPress={this.onScanClick}
@@ -354,8 +368,8 @@ const styles = {
         width: 40,
         height: 40
     },
-    Backbutton:{
-        width:200,
+    Backbutton: {
+        width: 200,
         lineHeight: 40,
         textAlign: 'center',
         fontSize: AppTheme.FONT_SIZE_LARGE,
@@ -365,7 +379,7 @@ const styles = {
 
     },
     tabLabelStyle: {
-        height:100,
+        height: 100,
         lineHeight: 40,
         textAlign: 'center',
         fontSize: AppTheme.FONT_SIZE_SMALL,
@@ -398,7 +412,7 @@ const mapStateToProps = (state) => {
     return {
         ocrLocalResponse: state.ocrLocalResponse,
         loginData: state.loginData,
-        filteredData: state.filteredData,
+        filteredData: state.filteredData.response,
         scanTypeData: state.scanTypeData.response,
         scanedData: state.scanedData,
         roiData: state.roiData.response,
