@@ -26,6 +26,12 @@ const ScanHistory = ({
     const [scanStatusData, setScanStatusData] = useState(false)
 
     //functions
+
+
+    useEffect(() => {
+        sumOfLocalData()
+    }, [])
+
     const sumOfLocalData = async () => {
         const data = await getScannedDataFromLocal()
 
@@ -36,6 +42,8 @@ const ScanHistory = ({
 
                 if (filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject && findSection) {
                     return true
+                } else {
+                    return false
                 }
             })
 
@@ -51,21 +59,17 @@ const ScanHistory = ({
         }
     }
 
-    useEffect(() => {
-        sumOfLocalData()
-    }, [])
-    
     useEffect(
         React.useCallback(() => {
-          const onBackPress = () => {
-            return true;
-          };
-          BackHandler.addEventListener('hardwareBackPress', onBackPress);
-          return () =>
-            BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+            const onBackPress = () => {
+                return true;
+            };
+            BackHandler.addEventListener('hardwareBackPress', onBackPress);
+            return () =>
+                BackHandler.removeEventListener('hardwareBackPress', onBackPress);
         }, []),
-      );
- 
+    );
+
     return (
         <View style={styles.container}>
 
@@ -83,7 +87,7 @@ const ScanHistory = ({
                 </View>
             }
             <View style={styles.container1}>
-            <Text style={[styles.header1TextStyle,{borderColor:multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE, backgroundColor:multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE}]}>
+                <Text style={[styles.header1TextStyle, { borderColor: multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE, backgroundColor: multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE }]}>
                     {Strings.ongoing_scan}
                 </Text>
             </View>
@@ -96,7 +100,7 @@ const ScanHistory = ({
             <ScanHistoryCard
                 showButtons={apiStatus.unauthorized ? false : true}
                 navigation={navigation}
-                themeColor1 ={multiBrandingData ? multiBrandingData.themeColor1 :AppTheme.BLUE}
+                themeColor1={multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}
                 isLoading={isLoading}
                 setIsLoading={setIsLoading}
                 scanStatusData={scanStatusData}
@@ -105,13 +109,13 @@ const ScanHistory = ({
             {
                 isLoading && <Spinner animating={isLoading} />
             }
-                <ButtonComponent
-                customBtnStyle={[styles.nxtBtnStyle, {backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+            <ButtonComponent
+                customBtnStyle={[styles.nxtBtnStyle, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
                 btnText={Strings.Back.toUpperCase()}
                 activeOpacity={0.8}
-                 onPress={() =>navigation.navigate('StudentsList')}
+                onPress={() => navigation.navigate('StudentsList')}
             />
-       
+
         </View>
     );
 }
@@ -149,5 +153,5 @@ const styles = StyleSheet.create({
         color: AppTheme.BLACK,
         letterSpacing: 1
     },
-    nxtBtnStyle:{top:100,  marginHorizontal: 40, marginBottom: 20,borderRadius: 10,}
+    nxtBtnStyle:{ top: 100, marginHorizontal: 40, marginBottom: 20, borderRadius: 10, }
 });

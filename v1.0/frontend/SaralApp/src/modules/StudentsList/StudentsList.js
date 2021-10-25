@@ -68,16 +68,18 @@ const StudentsList = ({
 
     }, []);
 
-     useEffect(
-        React.useCallback(() => {
-            const onBackPress = () => {
-                return true;
-            };
-            BackHandler.addEventListener('hardwareBackPress', onBackPress);
-            return () =>
-                BackHandler.removeEventListener('hardwareBackPress', onBackPress);
-        }, []),
-      );
+
+    const onBackPress = () => {
+        navigation.goBack();
+        return true;
+    };
+
+    useEffect(() => {
+        BackHandler.addEventListener("hardwareBackPress", onBackPress);
+
+        return () =>
+            BackHandler.removeEventListener("hardwareBackPress", onBackPress);
+    }, []);
 
 
     const dispatch = useDispatch();
@@ -207,7 +209,7 @@ const StudentsList = ({
         let apiObj = new SaveScanData(dataPayload, token)
         dispatch(APITransport(apiObj));
         setPresentAbsentStudent(allStudentData)
-        navigation.navigate('ScanHistory');
+        navigation.push('ScanHistory');
     }
 
     const navigateToNext = () => {

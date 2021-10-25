@@ -36,7 +36,7 @@ const ScanHistoryCard = ({
     }
 
     const onPressStatus = () => {
-        navigation.navigate('ScanStatus')
+        navigation.push('ScanStatus')
     }
 
     const dispatch = useDispatch()
@@ -70,7 +70,6 @@ const ScanHistoryCard = ({
                         if (e.classId == f.classId && e.subject == f.subject && e.examDate == f.examDate && findSection) {
                             return false
                         } else {
-                            filterDataLen = filterDataLen + e.studentsMarkInfo.length
                             return true
                         }
                     })

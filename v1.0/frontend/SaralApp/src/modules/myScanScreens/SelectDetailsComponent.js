@@ -673,7 +673,7 @@ class SelectDetailsComponent extends Component {
         this.setState({
             isLoading: false
         })
-        this.props.navigation.navigate('StudentsList')
+        this.props.navigation.push('StudentsList')
     }
 
     setDate = date => {

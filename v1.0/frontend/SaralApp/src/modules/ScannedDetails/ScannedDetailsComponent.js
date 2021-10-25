@@ -793,8 +793,8 @@ const ScannedDetailsComponent = ({
 
 
 
-                {isLoading && <Spinner animating={isLoading} iconShow={false} />}
-            </ScrollView>
+            {isLoading && <Spinner animating={isLoading} iconShow={false} />}
+        </ScrollView>
         </View>
     );
 }
