@@ -15,7 +15,6 @@ import ButtonWithIcon from '../common/components/ButtonWithIcon';
 import NumeracyScanCard from './NumeracyScanCard';
 import StudentsSummaryCard from './StudentsSummaryCard';
 import APITransport from '../../flux/actions/transport/apitransport';
-import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
 import { SCAN_TYPES } from '../../utils/CommonUtils';
 import DataCard from './DataCard';
 import TextField from '../common/components/TextField';
