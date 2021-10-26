@@ -5,37 +5,14 @@
  import C from '../constants';
  
 
-
-//  export function LogoutAction (){
-//     console.warn('logoutttttt')
-//     dispatch({
-//         type:C.LOGIN_PROCESS,
-//         payload:{}
-//     })
-//      try {
-//         setTimeout(() => {
-//             console.warn('gghhfhfhf')
-//             dispatch({
-//                 type:C.LOGIN_PROCESS,
-//                 payload:'login_process'
-//             })
-//         },2000)
-//     }
-//     catch(e) {
-//         console.warn(e)
-//         dispatch({
-//             type : C.LOGIN_PROCESS,
-//             payload: 'login_process'
-//         })
-//     }
- 
-//  }
-
- export const LogoutAction = () => (dispatch) => {
-     console.warn('logout',this.loginData)
-    this.loginData.LogoutAction();
-    dispatch({
-      type: C.LOGOUT_PROCESS,
-      payload:{}
+  
+  export const loggedOut = () => ({
+    type: C.LOGOUT_PROCESS,
+  });
+  export const LogoutAction = () => async (dispatch, getState) => {
+    await API.LogoutAction(getState).then((res) => {
+      dispatch(loggedOut());
+    }).catch((err) => { 
+      console.log(err)
     });
   };
