@@ -308,10 +308,11 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
 
     private boolean isMultiChoiceOMRLayout(JSONArray  cells)
     {
+        boolean isMultiChoiceOMRLayout=false;
         try {
             for (int i = 0; i < cells.length(); i++) { 
                 JSONObject cell = cells.getJSONObject(i);
-                JSONArray cellROIs      = cells.getJSONObject(0).getJSONArray("rois");
+                JSONArray cellROIs      = cell.getJSONArray("rois");
                 int omrROIsCountInCell=0;
                 for (int j = 0; j < cellROIs.length(); j++) {
                     JSONObject roi = cellROIs.getJSONObject(j);
@@ -321,7 +322,8 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                     }
                     if(omrROIsCountInCell > 1)
                     {
-                        return true;
+                        isMultiChoiceOMRLayout= true;
+                        break;
                     }
                 }
             }
@@ -329,7 +331,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
             Log.e(TAG, "Failed to parse layout configuration");
         }
             
-         return false;
+         return isMultiChoiceOMRLayout;
     }
 
     private void resetInvalidOMRChoice(JSONArray cellROIs)
