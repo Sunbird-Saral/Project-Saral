@@ -15,7 +15,7 @@ class HomeComponent extends Component {
             isLoading: false,
         }
     }
-    componentDidMount() {
+    componentDidMount(){
         this.callMultiBrandingActiondata()
     }
 
