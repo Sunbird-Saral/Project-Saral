@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, View } from 'react-native';
+import {View} from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash'
