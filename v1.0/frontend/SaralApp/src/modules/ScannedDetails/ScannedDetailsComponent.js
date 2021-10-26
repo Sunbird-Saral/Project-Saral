@@ -487,116 +487,6 @@ const ScannedDetailsComponent = ({
         }
     }
 
-<<<<<<< HEAD
-=======
-    const renderTabSecond = () => {
-        return (
-            <View style={{ flex: 1 }}>
-                <ScrollView contentContainerStyle={{ backgroundColor: AppTheme.WHITE, paddingBottom: '15%' }} keyboardShouldPersistTaps={'handled'}>
-                    <Text style={styles.studentDetailsTxtStyle}>{Strings.student_details}</Text>
-                    <View style={styles.studentContainer}>
-                        <View style={styles.imageViewContainer}>
-                            <View style={styles.imageContainerStyle}>
-                                <Text style={{ textAlign: 'center', fontSize: AppTheme.HEADER_FONT_SIZE_LARGE }}>{studentData.length > 0 && studentData[0].name.charAt(0)}</Text>
-                            </View>
-                        </View>
-                        <View style={styles.deatilsViewContainer}>
-                            <View style={styles.detailsSubContainerStyle}>
-                                <Text style={[styles.nameTextStyle, { fontWeight: 'bold', color: AppTheme.BLACK, fontSize: AppTheme.FONT_SIZE_LARGE }]}>{studentData.length > 0 && studentData[0].name}</Text>
-                                <TextField
-                                    labelText={Strings.student_id}
-                                    errorField={stdErr != '' || isNaN(studentId)}
-                                    errorText={stdErr != '' ? stdErr : Strings.please_correct_student_id}
-                                    onChangeText={(text) => {
-                                        setStudentID(text)
-                                    }
-                                    }
-                                    value={studentId}
-                                    editable={edit}
-                                    keyboardType={'numeric'}
-                                />
-                                <Text style={styles.nameTextStyle}>{Strings.Exam} : {filteredData.subject} {filteredData.examDate} ({filteredData.examTestID})</Text>
-
-                                <Text style={styles.nameTextStyle}>{Strings.page_no + ': ' + (currentIndex + 1)}</Text>
-                            </View>
-                        </View>
-                    </View>
-
-                    <View style={{ flexDirection: 'row', marginTop: 20 }}>
-                        {
-                            TABLE_HEADER.map((data, index) => {
-                                return (
-                                    <MarksHeaderTable
-                                        customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
-                                        key={`TableHeader${index}`}
-                                        rowTitle={data}
-                                        rowBorderColor={AppTheme.TAB_BORDER}
-                                        editable={false}
-                                    />
-                                )
-                            })
-                        }
-                    </View>
-                    {
-                        newArrayValue.map((element, index) => {
-                            return (
-                                <View style={{ flexDirection: 'row' }}>
-
-                                    <MarksHeaderTable
-                                        customRowStyle={{ width: '30%', }}
-                                        key={`Questions${element.cellId + 10}`}
-                                        rowTitle={renderSRNo(element, index)}
-                                        rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
-                                        editable={false}
-                                        keyboardType={'number-pad'}
-                                    />
-                                    <MarksHeaderTable
-                                        customRowStyle={{ width: '30%', }}
-                                        key={`MaxMarks${element.cellId}`}
-                                        rowTitle={element.format.value}
-                                        rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
-                                        editable={false}
-                                        keyboardType={'number-pad'}
-                                    />
-                                    <MarksHeaderTable
-                                        customRowStyle={{ width: '30%', }}
-                                        key={`ObtainedMarks${element.cellId}`}
-                                        rowTitle={element.consolidatedPrediction}
-                                        rowBorderColor={markBorderOnCell(element)}
-                                        editable={true}
-                                        keyboardType={'number-pad'}
-                                        maxLength={lengthAccordingSheet(element)}
-                                        onChangeText={(text) => {
-                                            handleTextChange(text.trim(), index, newArrayValue, element)
-                                        }}
-
-                                    />
-
-                                </View>
-                            )
-                            // }
-                        })
-                    }
-
-                    <View style={[styles.viewnxtBtnStyle1, { paddingTop: '7%' }]}>
-                        <ButtonComponent
-                            customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE, marginTop: '5%' }]}
-                            btnText={btnName.toUpperCase()}
-                            onPress={() => isMultipleStudent ? goBackFrame() : onBackButtonClick()}
-                        />
-                        <ButtonComponent
-                            customBtnStyle={[styles.nxtBtnStyle, { borderColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
-                            customBtnTextStyle={{ color: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }}
-                            btnText={nextBtn.toUpperCase()}
-                            onPress={() => isMultipleStudent ? goNextFrame() : onSubmitClick()}
-                        />
-                    </View>
-
-                </ScrollView>
-            </View>
-        )
-    }
->>>>>>> v1-develop
 
     const lengthAccordingSheet = (element) => {
         if (isMultipleStudent) {
@@ -806,7 +696,6 @@ const ScannedDetailsComponent = ({
                             </Text>
                         </View>
                         <View style={styles.container2}>
-<<<<<<< HEAD
                             <View style={{ flex: 1 }}>
                                 <ScrollView contentContainerStyle={{ backgroundColor: AppTheme.WHITE, paddingBottom: '15%' }} keyboardShouldPersistTaps={'always'}>
                                     <Text style={styles.studentDetailsTxtStyle}>{Strings.student_details}</Text>
@@ -912,17 +801,6 @@ const ScannedDetailsComponent = ({
                         </View>
                     </View>
                 }
-=======
-                            {
-                                renderTabSecond()
-                            }
-                        </View>
-                    </View>
-                }
-
-
-
->>>>>>> v1-develop
                 {isLoading && <Spinner animating={isLoading} iconShow={false} />}
             </ScrollView>
         </View>
