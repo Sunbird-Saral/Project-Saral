@@ -49,19 +49,22 @@ router.get('/brand/default', async (req, res) => {
     try {
 
         const brand = await Brand.find().lean()
+        if(brand.length){
         const brandRes = brand.filter((brand) => !brand.state);
+            if (brandRes.length) {
         let resultObj = {
             appName: brandRes[0].appName,
             themeColor1: brandRes[0].themeColor1,
             themeColor2: brandRes[0].themeColor2,
             logoImage: brandRes[0].logoImage
         }
-        if (brandRes) {
             res.status(200).send(resultObj)
         } else {
             res.status(404).send({ error: "Brand does not exist." })
         }
-    
+        }else{
+            res.status(404).send({ error: "Brand does not exist." })
+        } 
     } catch (e) {
         res.status(400).send(e)
     }
