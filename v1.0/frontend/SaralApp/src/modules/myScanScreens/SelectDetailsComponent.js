@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, BackHandler, Alert, TouchableOpacity, Image } from 'react-native';
+import { View, ScrollView, Text, BackHandler, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -20,10 +20,11 @@ import APITransport from '../../flux/actions/transport/apitransport';
 import { cryptoText, SCAN_TYPES, validateToken } from '../../utils/CommonUtils';
 import { ROIAction } from '../StudentsList/ROIAction';
 import { GetAbsentStudentData } from '../../flux/actions/apis/getAbsentStudentData';
-import { LoginAction  } from '../../flux/actions/apis/LoginAction';
-import { LogoutAction  } from '../../flux/actions/apis/LogoutAction';
+import { LoginAction } from '../../flux/actions/apis/LoginAction';
+import { LogoutAction } from '../../flux/actions/apis/LogoutAction';
 import { getScannedDataFromLocal } from '../../utils/StorageUtils';
 import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
+import C from '../../flux/actions/constants';
 
 const clearState = {
     defaultSelected: Strings.select_text,
@@ -155,18 +156,25 @@ class SelectDetailsComponent extends Component {
             for (const value of data) {
                 let apiObj = new SaveScanData(value, loginData.data.token);
                 this.props.APITransport(apiObj)
-            }  
+            }
         }
         Alert.alert(Strings.message_text, Strings.are_you_sure_you_want_to_logout, [
             { 'text': Strings.no_text, style: 'cancel' },
             {
                 'text': Strings.yes_text, onPress: async () => {
-                       await AsyncStorage.clear();
-                    //    this.props.LogoutAction()
-                     this.props.navigation.navigate('auth')
+                    this.props.LogoutAction()
+                    await AsyncStorage.clear();
+                    this.props.navigation.navigate('auth')
                 }
             }
-        ]) 
+        ])
+    }
+
+    EmptyLoginData = (user) => {
+        return {
+            type: C.LOGIN_PROCESS,
+            user: {}
+        }
     }
 
 
@@ -708,7 +716,8 @@ class SelectDetailsComponent extends Component {
 
     render() {
         const { navigation, isLoading, defaultSelected, classList, classListIndex, selectedClass, sectionList, sectionListIndex, selectedSection, pickerDate, selectedDate, subArr, selectedSubject, subIndex, errClass, errSub, errDate, errSection, sectionValid, dateVisible, examTestID } = this.state
-        const { loginData, scanTypeData } = this.props
+        const { loginData } = this.props
+    
         return (
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
                 <HeaderComponent
@@ -886,8 +895,7 @@ const mapDispatchToProps = (dispatch) => {
         APITransport: APITransport,
         OcrLocalResponseAction: OcrLocalResponseAction,
         FilteredDataAction: FilteredDataAction,
-        LogoutAction:LogoutAction
-       
+        LogoutAction: LogoutAction
     }, dispatch)
 }
 
