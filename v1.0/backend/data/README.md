@@ -147,6 +147,20 @@ name of student in gujrat school:-
 |---|---|---|---|---|
 |hindi|	gujrat|	gujrat_hindi_1s|4|18|
 
+## type:- gujrat_5q_multichoice 
+## ROLLNUMBER:- 7 digit student Id name of student in Gujrat_HINDI_4S:-
+
+|STUDENT NAME| STUDENT ID| 
+|---|---|
+|Priya Sood|	3302004|
+|Ram Kapoor|	3302005|
+
+
+## roi:-
+|SUBJECT|STATE|TYPE|CLASS|EXAM|
+|---|---|---|---|---|
+|hindi|	gujrat|	gujrat_5q_multichoice|5|19|
+
 # state:- UP(For multiple students)
 ## schoolId:-4
 >> `school:- Amtul's Public School`
