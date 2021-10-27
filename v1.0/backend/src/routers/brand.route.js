@@ -36,11 +36,36 @@ router.get('/brand',auth, async (req, res) => {
         const brand = await Brand.findOne({state: school.state},{ _id: 0, __v: 0, createdAt: 0, updatedAt: 0 ,state:0 })
         if(brand){
             res.status(200).send(brand)
-        }else{
-            res.status(404).send({error: "Brand does not exist."})
+        } else {
+            res.status(404).send({ error: "Brand does not exist." })
         }
-    
-    } catch (e){   
+
+    } catch (e) {
+        res.status(400).send(e)
+    }
+})
+
+router.get('/brand/default', async (req, res) => {
+    try {
+
+        const brand = await Brand.find().lean()
+        if(brand.length){
+        const brandRes = brand.filter((brand) => !brand.state);
+            if (brandRes.length) {
+        let resultObj = {
+            appName: brandRes[0].appName,
+            themeColor1: brandRes[0].themeColor1,
+            themeColor2: brandRes[0].themeColor2,
+            logoImage: brandRes[0].logoImage
+        }
+            res.status(200).send(resultObj)
+        } else {
+            res.status(404).send({ error: "Brand does not exist." })
+        }
+        }else{
+            res.status(404).send({ error: "Brand does not exist." })
+        } 
+    } catch (e) {
         res.status(400).send(e)
     }
 })
