@@ -27,11 +27,7 @@ const ScanHistoryCard = ({
     themeColor1
 }) => {
 
-
     const SAVED_SCANNED_DATA_INTO_LOCAL = 'saved_scanned_data_into_local'
-
-
-
     const onPressContinue = () => {
         navigation.navigate('myScan')
     }
@@ -59,13 +55,10 @@ const ScanHistoryCard = ({
             })
 
             setIsLoading(true)
-
-
             let filterDataLen = 0
 
             let setIntolocalAfterFilter = ''
             if (filterData.length != 0) {
-
                 filterData.filter((f) => {
 
                     let findSection = f.studentsMarkInfo.some((item) => item.section == filteredData.response.section)
@@ -157,7 +150,6 @@ const ScanHistoryCard = ({
             payload: api.getPayload()
         }
     }
-
 
     return (
         <View>
@@ -253,7 +245,7 @@ const ScanHistoryCard = ({
                             style={{
                                 backgroundColor: AppTheme.WHITE, borderRadius: 4, width: '45%',
                                 alignItems: 'center', justifyContent: 'center', elevation: 8, paddingVertical: 4,
-                             marginLeft: 5,
+                                marginLeft: 5,
                                 marginRight: 5
                             }}
                             onPress={onPressSaveInDB}
@@ -279,7 +271,6 @@ const ScanHistoryCard = ({
             }
 
         </TouchableOpacity>
-
         </View>
     );
 }

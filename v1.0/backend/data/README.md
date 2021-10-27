@@ -138,9 +138,9 @@ name of student in gujrat school:-
 
 |STUDENT NAME| STUDENT ID| 
 |---|---|
-|divya negi|	30000001|
-|Kamla Dharamwal|	30000002|
-|Jayanti Bisht|	30000003|
+|divya negi|	3000001|
+|Kamla Dharamwal|	3000002|
+|Jayanti Bisht|	3000003|
 
 ## roi:-
 |SUBJECT|STATE|TYPE|CLASS|EXAM|
