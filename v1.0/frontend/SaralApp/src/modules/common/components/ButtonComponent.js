@@ -10,12 +10,13 @@ const ButtonComponent = ({
     activeOpacity,
     customBtnTextStyle,
     btnText,
+    themeColor1
     
 }) => {
     return (
         <TouchableOpacity
             onPress={onPress}
-            style={[styles.btnStyle, customBtnStyle]}
+            style={[styles.btnStyle,themeColor1, customBtnStyle]}
             disabled={disabled}
             activeOpacity={activeOpacity}
            
