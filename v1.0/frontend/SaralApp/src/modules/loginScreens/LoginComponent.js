@@ -8,6 +8,7 @@ import ButtonComponent from '../common/components/ButtonComponent'
 import Spinner from '../common/components/loadingIndicator';
 import APITransport from '../../flux/actions/transport/apitransport';
 import { LoginAction } from '../../flux/actions/apis/LoginAction';
+import { DefaultBrandAction } from '../../flux/actions/apis/defaultBrandAction';
 import { setLoginData, setLoginCred, getLoginCred } from '../../utils/StorageUtils'
 import { Assets } from '../../assets/index'
 
@@ -30,13 +31,19 @@ class LoginComponent extends Component {
     }
 
     componentDidMount() {
+        this.callDefaultbrandingData()
         this.props.navigation.addListener('willFocus', async payload => {
             AppState.addEventListener('change', this.handleAppStateChange);
             this.componentMountCall()
 
         })
     }
-        handleAppStateChange = (nextAppState) => {
+
+    // componentWillUnmount() {
+    //     AppState.removeEventListener('change', this.handleAppStateChange);
+    // }
+
+    handleAppStateChange = (nextAppState) => {
         if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
             this.componentMountCall()
         }
@@ -47,6 +54,13 @@ class LoginComponent extends Component {
 
         this.loginUser()
 
+    }
+
+
+    callDefaultbrandingData() {
+        let payload = this.props.defaultBrandingdata
+        let apiObj = new DefaultBrandAction(payload);
+        this.props.APITransport(apiObj)
     }
 
     loginUser = async () => {
@@ -189,7 +203,6 @@ class LoginComponent extends Component {
 
     render() {
         const { password, isLoading, errUsername, errPassword, errCommon } = this.state;
-
         return (
             <View style={styles.container}>
                 <ScrollView
@@ -198,9 +211,16 @@ class LoginComponent extends Component {
                     bounces={false}
                     keyboardShouldPersistTaps={'handled'}
                 >
-                    <View style={styles.container1}>
+
+                    {this.props.defaultBrandingdata ?
+                      <View style={styles.container1}>
+                        <Image style={{ width: 100, height: 100 }} source={{ uri: 'data:image/png;base64,' + this.props.defaultBrandingdata.logoImage }} />
+                    </View>    
+                        : 
+                        <View style={styles.container1}>
                         <Image style={{ width: 100, height: 100 }} source={Assets.AppLogo} />
-                    </View>
+                    </View> 
+                    }
 
                     <View style={styles.container2}>
                         <View style={styles.loginContainer}>
@@ -246,6 +266,7 @@ class LoginComponent extends Component {
                                     <ButtonComponent
                                         btnText={Strings.login_text.toUpperCase()}
                                         onPress={this.onSubmit}
+                                        themeColor1={{backgroundColor:this.props.defaultBrandingdata ? this.props.defaultBrandingdata.themeColor1: AppTheme.BLUE}}
                                     />
                                 </View>
                             </View>
@@ -331,13 +352,14 @@ const styles = {
 const mapStateToProps = (state) => {
     return {
         apiStatus: state.apiStatus,
-        loginData: state.loginData
+        loginData: state.loginData,
+        defaultBrandingdata: state.defaultBrandingdata.response.data
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        APITransport: APITransport
+        APITransport: APITransport,
     }, dispatch)
 }
 
