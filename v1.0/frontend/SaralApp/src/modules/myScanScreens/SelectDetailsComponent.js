@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, BackHandler, Alert, TouchableOpacity, Image } from 'react-native';
+import { View, ScrollView, Text, BackHandler, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -12,7 +12,7 @@ import { apkVersion } from '../../configs/config';
 import HeaderComponent from '../common/components/HeaderComponent';
 import DropDownMenu from '../common/components/DropDownComponent';
 import ButtonComponent from '../common/components/ButtonComponent';
-import { getLoginData, setStudentsExamData, getStudentsExamData, getLoginCred, setLoginData, getScannedDataFromLocal } from '../../utils/StorageUtils'
+import { getLoginData, setStudentsExamData, getStudentsExamData, getLoginCred, setLoginData } from '../../utils/StorageUtils'
 import { OcrLocalResponseAction } from '../../flux/actions/apis/OcrLocalResponseAction'
 import { GetStudentsAndExamData } from '../../flux/actions/apis/getStudentsAndExamData';
 import { FilteredDataAction } from '../../flux/actions/apis/filteredDataActions';
@@ -21,7 +21,10 @@ import { cryptoText, SCAN_TYPES, validateToken } from '../../utils/CommonUtils';
 import { ROIAction } from '../StudentsList/ROIAction';
 import { GetAbsentStudentData } from '../../flux/actions/apis/getAbsentStudentData';
 import { LoginAction } from '../../flux/actions/apis/LoginAction';
+import { LogoutAction } from '../../flux/actions/apis/LogoutAction';
+import { getScannedDataFromLocal } from '../../utils/StorageUtils';
 import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
+import C from '../../flux/actions/constants';
 
 const clearState = {
     defaultSelected: Strings.select_text,
@@ -100,7 +103,6 @@ class SelectDetailsComponent extends Component {
             filterdataid: []
         }
         this.onBack = this.onBack.bind(this)
-
     }
 
     componentDidMount() {
@@ -156,17 +158,23 @@ class SelectDetailsComponent extends Component {
                 this.props.APITransport(apiObj)
             }
         }
-
         Alert.alert(Strings.message_text, Strings.are_you_sure_you_want_to_logout, [
             { 'text': Strings.no_text, style: 'cancel' },
             {
                 'text': Strings.yes_text, onPress: async () => {
+                    this.props.LogoutAction()
                     await AsyncStorage.clear();
-
                     this.props.navigation.navigate('auth')
                 }
             }
         ])
+    }
+
+    EmptyLoginData = (user) => {
+        return {
+            type: C.LOGIN_PROCESS,
+            user: {}
+        }
     }
 
 
@@ -708,7 +716,8 @@ class SelectDetailsComponent extends Component {
 
     render() {
         const { navigation, isLoading, defaultSelected, classList, classListIndex, selectedClass, sectionList, sectionListIndex, selectedSection, pickerDate, selectedDate, subArr, selectedSubject, subIndex, errClass, errSub, errDate, errSection, sectionValid, dateVisible, examTestID } = this.state
-        const { loginData, scanTypeData } = this.props
+        const { loginData } = this.props
+    
         return (
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
                 <HeaderComponent
@@ -885,7 +894,8 @@ const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
         APITransport: APITransport,
         OcrLocalResponseAction: OcrLocalResponseAction,
-        FilteredDataAction: FilteredDataAction
+        FilteredDataAction: FilteredDataAction,
+        LogoutAction: LogoutAction
     }, dispatch)
 }
 

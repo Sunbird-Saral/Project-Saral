@@ -10,7 +10,6 @@ import scanedDataReducer from './scanedDataReducer'
 import saveAbsentStudentReducer from './saveAbsentStudentReducer';
 import absentStudentReducer from './absentStudentReducer';
 import multiBrandingReducer from './multiBrandingReducer'
-
 export default {
     apiStatus: apiStatus,
     ocrLocalResponse: OcrLocalResponseReducer,
@@ -24,6 +23,5 @@ export default {
     saveAbsentStudent: saveAbsentStudentReducer,
     absentStudentDataResponse: absentStudentReducer,
     multiBrandingData:multiBrandingReducer
-
 
 }
