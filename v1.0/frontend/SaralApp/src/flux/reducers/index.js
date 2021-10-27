@@ -9,7 +9,9 @@ import roiDataReducer from './roiDataReducer';
 import scanedDataReducer from './scanedDataReducer'
 import saveAbsentStudentReducer from './saveAbsentStudentReducer';
 import absentStudentReducer from './absentStudentReducer';
-import multiBrandingReducer from './multiBrandingReducer'
+import multiBrandingReducer from './multiBrandingReducer';
+import defaultBrandReducer from './defaultBrandReducer';
+
 export default {
     apiStatus: apiStatus,
     ocrLocalResponse: OcrLocalResponseReducer,
@@ -22,6 +24,8 @@ export default {
     scanedData: scanedDataReducer,
     saveAbsentStudent: saveAbsentStudentReducer,
     absentStudentDataResponse: absentStudentReducer,
-    multiBrandingData:multiBrandingReducer
+    multiBrandingData:multiBrandingReducer,
+    defaultBrandingdata:defaultBrandReducer
+
 
 }
