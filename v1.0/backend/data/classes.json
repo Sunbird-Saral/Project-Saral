@@ -12,7 +12,7 @@
   ],
   "classId": "2",
   "className": "Class-2",
-  "schoolId": "1"
+  "schoolId": "up001"
 },{
   "sections": [
     {
@@ -27,7 +27,7 @@
   ],
   "classId": "3",
   "className": "Class-3",
-  "schoolId": "1"
+  "schoolId": "up001"
 },{
   "sections": [
     {
@@ -42,7 +42,7 @@
   ],
   "classId": "4",
   "className": "Class-4",
-  "schoolId": "1"
+  "schoolId": "up001"
 },{
   "sections": [
     {
@@ -57,7 +57,7 @@
   ],
   "classId": "5",
   "className": "Class-5",
-  "schoolId": "1"
+  "schoolId": "up001"
 },{
   "sections": [
     {
@@ -72,7 +72,7 @@
   ],
   "classId": "6",
   "className": "Class-6",
-  "schoolId": "1"
+  "schoolId": "up001"
 },{
   "sections": [
     {
@@ -87,7 +87,7 @@
   ],
   "classId": "7",
   "className": "Class-7",
-  "schoolId": "1"
+  "schoolId": "up001"
 },{
   "sections": [
     {
@@ -102,7 +102,7 @@
   ],
   "classId": "8",
   "className": "Class-8",
-  "schoolId": "1"
+  "schoolId": "up001"
 },
 {
   "sections": [
@@ -118,7 +118,7 @@
   ],
   "classId": "2",
   "className": "Class-2",
-  "schoolId": "2"
+  "schoolId": "odisha001"
 },
 {
   "sections": [
@@ -134,7 +134,7 @@
   ],
   "classId": "3",
   "className": "Class-3",
-  "schoolId": "2"
+  "schoolId": "odisha001"
 },
   {
     "sections": [
@@ -150,7 +150,7 @@
     ],
     "classId": "3",
     "className": "Class-3",
-    "schoolId": "3"
+    "schoolId": "gujrat001"
   },
   {
     "sections": [
@@ -166,7 +166,7 @@
     ],
     "classId": "4",
     "className": "Class-4",
-    "schoolId": "3"
+    "schoolId": "gujrat001"
   },
   {
     "sections": [
@@ -182,7 +182,7 @@
     ],
     "classId": "5",
     "className": "Class-5",
-    "schoolId": "3"
+    "schoolId": "gujrat001"
 },
 {
   "sections": [
@@ -198,7 +198,7 @@
   ],
   "classId": "2",
   "className": "Class-2",
-  "schoolId": "4"
+  "schoolId": "up002"
 },
 {
   "sections": [
@@ -214,7 +214,7 @@
   ],
   "classId": "3",
   "className": "Class-3",
-  "schoolId": "4"
+  "schoolId": "up002"
 },{
   "sections": [
     {
@@ -229,7 +229,7 @@
   ],
   "classId": "4",
   "className": "Class-4",
-  "schoolId": "4"
+  "schoolId": "up002"
 },{
   "sections": [
     {
@@ -244,6 +244,6 @@
   ],
   "classId": "5",
   "className": "Class-5",
-  "schoolId": "4"
+  "schoolId": "up002"
 }
 ]
