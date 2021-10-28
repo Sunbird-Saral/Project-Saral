@@ -11,7 +11,7 @@ for deleting current data in database
 
 # state:- UP
 
-## schoolId:1
+## schoolId:up001
 >> `school:- Fountainhead School`
 >> `classes:- 2,3,4,5,6,7,8`
 >> `student:- no of student 7` 
@@ -84,7 +84,7 @@ for deleting current data in database
 |Hindi|UP|UP_HINDI_3S|3|2|
 
 # state:- odisha
-## schoolID:2
+## schoolID: odisha001
 >> `school:- Aditya Birla Public School, Rayagada.`
 >> `classes:- 2,3`
 >> `name of student in ODISHA school:-`  
@@ -110,7 +110,7 @@ for deleting current data in database
 |math|odisha|SAT|2|13|
 
 # state: gujrat
-## schoolId:3
+## schoolId:gujrat001
 >> `school:- Sainik School`
 >> `classes:- 3,4,5`
 
@@ -162,7 +162,7 @@ name of student in gujrat school:-
 |hindi|	gujrat|	gujrat_5q_multichoice|5|19|
 
 # state:- UP(For multiple students)
-## schoolId:-4
+## schoolId:-up002
 >> `school:- Amtul's Public School`
 >> `classes:- 2,3,4,5`
 >> `name of student in MULTI UP school` 
