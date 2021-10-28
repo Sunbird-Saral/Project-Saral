@@ -11,6 +11,7 @@ router.post('/schools/create', async (req, res) => {
     const school = new School({ ...req.body, udiseCode: req.body.schoolId })
     try {
         school.state = req.body.state.toLowerCase()
+        school.schoolId = req.body.schoolId.toLowerCase()
         await school.save()
         const token = await school.generateAuthToken()
         res.status(201).send({ school, token })
@@ -54,7 +55,7 @@ router.get('/schools', async (req, res) => {
 
 router.post('/schools/login', async (req, res) => {
     try {
-        const school = await School.findByCredentials(req.body.schoolId, req.body.password)
+        const school = await School.findByCredentials(req.body.schoolId.toLowerCase(), req.body.password)
         const token = await school.generateAuthToken()
         let classes = []
         let response = {
@@ -91,7 +92,7 @@ router.post('/schools/login', async (req, res) => {
 
 router.delete('/deleteSchoolBySchoolId/:schoolId', async (req, res) => {
     try {
-        const school = await (await School.findOne({ schoolId: req.params.schoolId }))
+        const school = await School.findOne({ schoolId: req.params.schoolId.toLowerCase() })
         if(!school) return res.status(404).send({ message: 'School Id does not exist.' })
         let lookup = {
             schoolId: school.schoolId
@@ -119,7 +120,7 @@ router.patch('/updateSchool/:schoolId', async (req, res) => {
             return res.status(400).send({ error: 'Invaid Updates' })
         }
         let lookup = {
-            schoolId: req.params.schoolId
+            schoolId: req.params.schoolId.toLowerCase()
         }
         let update = req.body
 
