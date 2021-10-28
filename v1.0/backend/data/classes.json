@@ -198,7 +198,7 @@
   ],
   "classId": "2",
   "className": "Class-2",
-  "schoolId": "up004"
+  "schoolId": "up002"
 },
 {
   "sections": [
@@ -214,7 +214,7 @@
   ],
   "classId": "3",
   "className": "Class-3",
-  "schoolId": "up004"
+  "schoolId": "up002"
 },{
   "sections": [
     {
@@ -229,7 +229,7 @@
   ],
   "classId": "4",
   "className": "Class-4",
-  "schoolId": "up004"
+  "schoolId": "up002"
 },{
   "sections": [
     {
@@ -244,6 +244,6 @@
   ],
   "classId": "5",
   "className": "Class-5",
-  "schoolId": "up004"
+  "schoolId": "up002"
 }
 ]
