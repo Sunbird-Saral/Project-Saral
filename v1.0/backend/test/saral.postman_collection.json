@@ -54,7 +54,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Fountainhead School\",\n    \"schoolId\": \"1\",\n    \"password\": \"tarento@123\",\n    \"state\": \"gujrat\",\n    \"district\": \"ahmedabad\",\n    \"block\": \"haldwani\",\n    \"hmName\": \"acbc\",\n    \"hmMobileNo\": \"8006079875\",\n    \"noOfStudents\": \"100\",\n    \"udiseCode\": \"123\"\n\n}"
+							"raw": "{\n    \"name\": \"Fountainhead School\",\n    \"schoolId\": \"UP001\",\n    \"password\": \"tarento@123\",\n    \"state\": \"gujrat\",\n    \"district\": \"ahmedabad\",\n    \"block\": \"haldwani\",\n    \"hmName\": \"acbc\",\n    \"hmMobileNo\": \"8006079875\",\n    \"noOfStudents\": \"100\",\n    \"udiseCode\": \"123\",\n    \"storeTrainingData\": true\n\n}"
 						},
 						"url": {
 							"raw": "{{url}}/schools/create",
@@ -101,7 +101,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"schoolId\": \"1\",\n    \"password\": \"tarento@123\",\n    \"classes\": true \n}"
+							"raw": "{\n    \"schoolId\": \"up001\",\n    \"password\": \"tarento@123\",\n    \"classes\": true \n}"
 						},
 						"url": {
 							"raw": "{{url}}/schools/login",
@@ -133,7 +133,7 @@
 							"variable": [
 								{
 									"key": "schoolId",
-									"value": "3"
+									"value": "UP001"
 								}
 							]
 						}
@@ -147,7 +147,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Karnavati Public School\",\r\n    \"district\": \"ahemdabad\",\r\n    \"state\": \"gujrat\",\r\n    \"block\": \"haldwanis\",\r\n    \"hmName\": \"ha\",\r\n    \"hmMobileNo\": \"8006079636\",\r\n    \"noOfStudents\": \"23\",\r\n    \"udisceCode\":123\r\n\r\n}",
+							"raw": "{\r\n    \"name\": \"Karnavati Public School\",\r\n    \"district\": \"ahemdabad\",\r\n    \"state\": \"gujrat\",\r\n    \"block\": \"haldwanis\",\r\n    \"hmName\": \"ha\",\r\n    \"hmMobileNo\": \"8006079636\",\r\n    \"noOfStudents\": \"23\",\r\n    \"udisceCode\":123,\r\n    \"storeTrainingData\": true\r\n\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -857,16 +857,6 @@
 				{
 					"name": "get brand",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTY3ZGRlZjY4YWIyNzE0YzAzYjY1ZWIiLCJpYXQiOjE2MzQxOTY5OTh9.qfafSmt3FGBphuwvPZv052PDAVI0_6RAIP_mHCEWM3w",
-									"type": "string"
-								}
-							]
-						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -912,6 +902,22 @@
 							"path": [
 								"brand"
 							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete brand",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTZkNDllYjk2M2FlNjU1ZDhiMTY1YmYiLCJpYXQiOjE2MzQ1NTIzNzV9.FHhBINswnno-kDlOhp678aMQAs2nQanX0yVv7FCvbA4",
+									"type": "string"
+								}
+							]
 						},
 						"method": "DELETE",
 						"header": [],
@@ -922,6 +928,24 @@
 							],
 							"path": [
 								"brand"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Default brand",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/brand/default",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"brand",
+								"default"
 							]
 						}
 					},
