@@ -304,6 +304,30 @@
 {
   "studentClass": [
     {
+      "classId": "5",
+      "className": "Class-5"
+    }
+  ],
+  "section": "D",
+  "name": "Priya Sood",
+  "studentId": "3302004",
+  "schoolId": "3"
+},
+{
+  "studentClass": [
+    {
+      "classId": "5",
+      "className": "Class-5"
+    }
+  ],
+  "section": "D",
+  "name": "Ram Kapoor",
+  "studentId": "3302005",
+  "schoolId": "3"
+},
+{
+  "studentClass": [
+    {
       "classId": "2",
       "className": "Class-2"
     }
