@@ -5,26 +5,36 @@ const School = require('../models/school')
 const Brand = require('../models/brand')
 
 
-router.post('/brand',auth, async (req, res) => {
+router.post('/brand?', auth, async (req, res) => {
     try { 
         const inputKeys = Object.keys(req.body)
-        const allowedUpdates = ['logoImage', 'themeColor1','themeColor2', 'appName']
+        const allowedUpdates = ['logoImage', 'themeColor1', 'themeColor2', 'appName']
         const isValidOperation = inputKeys.every((input) => allowedUpdates.includes(input))
    
-        if(!isValidOperation) {
+        if (!isValidOperation) {
             return res.status(400).send({ error: 'Invaid Input' })
         }
-    
-        let lookup={
-            schoolId: req.school.schoolId
+        let brandExist = {}
+        
+        if (!req.query.default) {
+            let lookup = {
+                schoolId: req.school.schoolId
+            }      
+            let school = await School.findOne(lookup)
+            brandExist = await Brand.find({ state: school.state })
+                req.body.state = school.state
+        } else {
+            let defaultBrand = await Brand.find()
+            brandExist = defaultBrand.filter((brand) => !brand.state);
         }
-       
-        const school = await School.findOne(lookup)
-        req.body.state = school.state
-        await Brand.create(req.body)
-        res.status(201).send({message:"Brand has been created successfully ."})
     
-    } catch (e){   
+        if (brandExist.length < 1) {
+                await Brand.create(req.body)
+            res.status(201).send({ message: "Brand has been created successfully ." })
+        } else {
+            res.status(403).send({ message: "Brand already exist." })
+            }
+    } catch (e) {
         res.status(400).send(e)
     }
 })

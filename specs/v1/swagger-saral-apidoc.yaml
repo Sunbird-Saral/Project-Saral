@@ -527,6 +527,10 @@ paths:
         - "Brand"
       summary: "Create Brand for state"
       parameters:
+      - in: query
+        name: default
+        type: boolean
+        description: The default flag is used when we want to create a deafult logo for school. For creating default brand default flag will be true .
       - in: body
         name: body
         schema:
