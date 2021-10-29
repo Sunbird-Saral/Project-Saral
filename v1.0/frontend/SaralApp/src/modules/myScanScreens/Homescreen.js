@@ -1,21 +1,24 @@
 import React, { Component } from 'react';
-import {View} from 'react-native';
+import { View,Text } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash'
 import AppTheme from '../../utils/AppTheme';
 import { MultiBrandingAction } from '../../flux/actions/apis/multiBranding';
+import { LogoutAction } from '../../flux/actions/apis/LogoutAction';
 import APITransport from '../../flux/actions/transport/apitransport';
 import Brands from '../common/components/Brands';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 class HomeComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isLoading: false,
+            isLoading: true,
         }
     }
-    componentDidMount(){
+    componentDidMount() {
+        setTimeout(() => { this.setState({ isLoading: false }) }, 3000)
         this.callMultiBrandingActiondata()
     }
 
@@ -31,18 +34,26 @@ class HomeComponent extends Component {
     render() {
         return (
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
-                {this.props.multiBrandingData ?
-                    <Brands
-                        Image={'data:image/png;base64,' + this.props.multiBrandingData.logoImage}
-                        appName={this.props.multiBrandingData && this.props.multiBrandingData.appName}
-                        themeColor={this.props.multiBrandingData && this.props.multiBrandingData.themeColor1}
-                        onPress={() => this.props.navigation.navigate('selectDetails')}
-                    />
-                    : <Brands
-                        appName={'Saral OCR App'}
-                        themeColor={AppTheme.BLUE}
-                        onPress={() => this.props.navigation.navigate('selectDetails')}
-                    />
+                {
+
+                    this.state.isLoading ?
+                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                            <Text style={{ fontSize: 12, fontWeight: 'bold', fontFamily: 'sans-serif-condensed' }}>Loading Branding ...</Text>
+                        </View> :
+                        this.props.multiBrandingData != '' ?
+                            <Brands
+                                Image={this.props.multiBrandingData && 'data:image/png;base64,' + this.props.multiBrandingData.logoImage}
+                                appName={this.props.multiBrandingData && this.props.multiBrandingData.appName}
+                                themeColor={this.props.multiBrandingData && this.props.multiBrandingData.themeColor1}
+                                onPress={() => this.props.navigation.navigate('selectDetails')}
+                            /> :
+
+                            <Brands
+                                appName={'Saral OCR App'}
+                                themeColor={AppTheme.BLUE}
+                                onPress={() => this.props.navigation.navigate('selectDetails')}
+                            />
+
                 }
             </View>
         );
@@ -59,6 +70,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
         APITransport: APITransport,
+        LogoutAction: LogoutAction
     }, dispatch)
 }
 

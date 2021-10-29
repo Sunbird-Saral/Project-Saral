@@ -163,20 +163,11 @@ class SelectDetailsComponent extends Component {
             {
                 'text': Strings.yes_text, onPress: async () => {
                     this.props.LogoutAction()
-                    await AsyncStorage.clear();
                     this.props.navigation.navigate('auth')
                 }
             }
         ])
     }
-
-    EmptyLoginData = (user) => {
-        return {
-            type: C.LOGIN_PROCESS,
-            user: {}
-        }
-    }
-
 
     loader = (flag) => {
         this.setState({
