@@ -3,26 +3,36 @@
 node('saral-poc') {
 
 try {
+
    stage('Checkout'){
       checkout scm
-	    }
+	}
 	
 		
 	stage('Docker-compose')
 withCredentials([usernamePassword(credentialsId: 'anuvaad-docker-hub-credentials', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
 	       sh '''
-	  
+
 		environment=$(echo "$JOB_BASE_NAME" | rev | cut -d'-' -f 1 | rev)
 		compose_file=$(echo "$image_name" | cut -d':' -f 1)
 		tag=$(echo "$image_name" | cut -d':' -f 2)
 		sudo docker service rm saralpoc_$compose_file
 		sudo env image="$compose_file" tag=$tag env="$environment" docker stack deploy --compose-file=$compose_file.yml --with-registry-auth --resolve-image=always saralpoc
 		sudo docker service update saralpoc_gateway --force
+		
+		echo "Reload Saral Reference Data ? : $reloadSaralReferenceData"
+		if [ $reloadSaralReferenceData = true ]
+		then 
+			echo "sleeping for 30s for containers to start"
+			sleep 30s
+			sudo docker exec $(sudo docker ps -aqf "name=^saralpoc_saral-backend") node ./data/import-data.js --delete
+			sudo docker exec $(sudo docker ps -aqf "name=^saralpoc_saral-backend") node ./data/import-data.js --import
+			echo 'Reloaded Saral Reference Data'
+		else 
+			echo 'skipping Reload Saral Reference Data'
+		fi
 		'''
-
-	}
-
-   
+		}   
  }
 catch (err) {
     currentBuild.result = "FAILURE"
