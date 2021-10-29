@@ -68,6 +68,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
     private HashMap<String, String> mPredictedOMRs      = new HashMap<>();
     private HashMap<String, String> mPredictedClass     = new HashMap<>();
     private HashMap<String, String> mRoiMatBase64       = new HashMap<>();
+    private boolean isMultiChoiceOMRLayout = false;
 
     public SaralSDKOpenCVScannerActivity() {
         Log.i(TAG, "Instantiated new " + this.getClass());
@@ -205,7 +206,11 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
         double DARKNESS_THRESHOLD   = 80.0;
         Mat tableMat                = mTableCornerDetection.processMat(image);
         mStartTime                  = SystemClock.uptimeMillis();
-
+        isMultiChoiceOMRLayout = isMultiChoiceOMRLayout();
+        if(isMultiChoiceOMRLayout)
+        {
+            DARKNESS_THRESHOLD = 70.0;
+        }
         if (tableMat != null && isHWClassiferAvailable) {
             if (mIgnoreFrameCount < START_PROCESSING_COUNT) {
                 mIgnoreFrameCount ++;
@@ -230,13 +235,13 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                         String roiId        = roiConfig.getString("roiId");
                         JSONObject rect      = roiConfig.getJSONObject("rect");
 
-                        double percent      = mDetectShaded.getShadedPercentage(tableMat, rect.getInt("top"), rect.getInt("left"), rect.getInt("bottom"), rect.getInt("right"));
+                        double percent      = mDetectShaded.getShadedPercentage(tableMat, rect.getInt("top"), rect.getInt("left"), rect.getInt("bottom"), rect.getInt("right"),isMultiChoiceOMRLayout);
                         Integer answer      = 0;
                         if (percent > DARKNESS_THRESHOLD) {
                             answer = 1;
                         }
                         mPredictedOMRs.put(roiId, answer.toString());
-                        Log.d(TAG, "key: " + roiId + " answer: " + answer.toString());
+                        Log.d(TAG, "key: " + roiId + " answer: " + answer.toString()+" percent "+percent);
                     }
 
                     if (roiConfig.getString("extractionMethod").equals("NUMERIC_CLASSIFICATION")) {
@@ -306,10 +311,13 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
         finish();
     }
 
-    private boolean isMultiChoiceOMRLayout(JSONArray  cells)
+    private boolean isMultiChoiceOMRLayout()
     {
         boolean isMultiChoiceOMRLayout=false;
         try {
+            JSONObject layoutConfigs    = new JSONObject(mlayoutConfigs);
+            JSONObject layoutObject     = layoutConfigs.getJSONObject("layout");
+            JSONArray  cells            = layoutObject.getJSONArray("cells");
             for (int i = 0; i < cells.length(); i++) { 
                 JSONObject cell = cells.getJSONObject(i);
                 JSONArray cellROIs      = cell.getJSONArray("rois");
@@ -325,6 +333,10 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                         isMultiChoiceOMRLayout= true;
                         break;
                     }
+                }
+                if(isMultiChoiceOMRLayout)
+                {
+                    break;
                 }
             }
         } catch (JSONException e) {
@@ -357,7 +369,6 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
             JSONObject layoutConfigs    = new JSONObject(mlayoutConfigs);
             JSONObject layoutObject     = layoutConfigs.getJSONObject("layout");
             JSONArray  cells            = layoutObject.getJSONArray("cells");
-            boolean isMultiChoiceOMRLayout = isMultiChoiceOMRLayout(cells);
             
             Log.d(TAG, "isMultiChoiceOMRLayout:: "+isMultiChoiceOMRLayout);
 
