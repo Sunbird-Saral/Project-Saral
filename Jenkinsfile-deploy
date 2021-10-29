@@ -23,6 +23,8 @@ withCredentials([usernamePassword(credentialsId: 'anuvaad-docker-hub-credentials
 		echo "Reload Saral Reference Data ? : $reloadSaralReferenceData"
 		if [ $reloadSaralReferenceData ]
 		then 
+			echo "sleeping for 30s for containers to start"
+			sleep 30s
 			sudo docker exec $(sudo docker ps -aqf "name=^saralpoc_saral-backend") node ./data/import-data.js --delete
 			sudo docker exec $(sudo docker ps -aqf "name=^saralpoc_saral-backend") node ./data/import-data.js --import
 			echo 'Reloaded Saral Reference Data'
