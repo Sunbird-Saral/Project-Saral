@@ -21,7 +21,7 @@ withCredentials([usernamePassword(credentialsId: 'anuvaad-docker-hub-credentials
 		sudo docker service update saralpoc_gateway --force
 		
 		echo "Reload Saral Reference Data ? : $reloadSaralReferenceData"
-		if [ $reloadSaralReferenceData ]
+		if [ $reloadSaralReferenceData = true ]
 		then 
 			echo "sleeping for 30s for containers to start"
 			sleep 30s
