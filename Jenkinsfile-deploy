@@ -3,9 +3,10 @@
 node('saral-poc') {
 
 try {
+
    stage('Checkout'){
       checkout scm
-	    }
+	}
 	
 		
 	stage('Docker-compose')
@@ -29,10 +30,7 @@ withCredentials([usernamePassword(credentialsId: 'anuvaad-docker-hub-credentials
 			echo 'skipping Reload Saral Reference Data'
 		fi
 		'''
-		}
-	}
-
-   
+		}   
  }
 catch (err) {
     currentBuild.result = "FAILURE"
