@@ -1,4 +1,5 @@
 import LocalizedStrings from 'react-native-localization'
+import { studentLimitSaveInLocal } from './CommonUtils'
 export default strings = new LocalizedStrings({
     en: {
         title_saralapp:'Saral Scan App',
@@ -22,9 +23,11 @@ export default strings = new LocalizedStrings({
         no_text: 'No',
         version_text: 'Version',
         page_no:'Page Number',
+        skip:'Skip',
         give_permission_from_settings: 'Please give permission from Settings to use app',
         optional_update_available: 'A new update is available of App. Do you want to update now?',
         force_update_available: 'We have an updated version for you. Please Update to continue using App.',
+        you_can_save_only_limited_student_In_Order_to_continue_have_to_save_first:`You can Save Only ${studentLimitSaveInLocal} Student. In Order to Continue have to save first`,
         no_btn_text: 'No',
         yes_btn_text: 'Yes',
         complete_these_steps_submit_marks: 'complete these steps to submits marks',
