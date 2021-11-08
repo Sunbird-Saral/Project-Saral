@@ -32,9 +32,9 @@ router.put('/saveMarks', auth, async (req, res) => {
         })
         marks.push(marksData)
     });
-
     try {
         for (let data of marks) {
+            if(data.studentAvailability == false) continue
             let studentMarksExist = await Mark.findOne({ studentId: data.studentId })
             if (!studentMarksExist) {
                 await Mark.create(data)
