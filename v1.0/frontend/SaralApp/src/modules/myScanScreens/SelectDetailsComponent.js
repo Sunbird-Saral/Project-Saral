@@ -615,7 +615,6 @@ class SelectDetailsComponent extends Component {
             })
             return false
         }
-        else if (scanTypeData.scanType == SCAN_TYPES.PAT_TYPE) {
             if (subIndex == -1) {
                 this.setState({
                     errClass: '',
@@ -626,8 +625,6 @@ class SelectDetailsComponent extends Component {
                 return false
             }
 
-            return true
-        }
         return true
     }
 

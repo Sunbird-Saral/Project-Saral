@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import { Alert, Text, TouchableOpacity, View } from 'react-native';
 import { connect, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -26,6 +26,20 @@ const ScanHistoryCard = ({
     setScanStatusData,
     themeColor1
 }) => {
+
+    useEffect(()=>{
+       getSaveCount()
+    },[])
+
+    const getSaveCount = ()=>{
+        let data = scanedData.length > 0 ? scanedData.filter((o,index)=>{
+            if (o.studentAvailability) {
+                return true
+            }
+        })
+        :[]
+        return data.length;
+    }
 
     const SAVED_SCANNED_DATA_INTO_LOCAL = 'saved_scanned_data_into_local'
     const onPressContinue = () => {
@@ -213,7 +227,7 @@ const ScanHistoryCard = ({
                                 <Text>{Strings.save_status}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle, { borderBottomWidth: 1 }]}>
-                                <Text>{scanedData ? scanedData.length : 0}</Text>
+                                <Text>{scanedData ? getSaveCount() : 0}</Text>
                             </View>
                     </View>
                 </View>
