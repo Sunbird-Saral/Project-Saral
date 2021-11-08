@@ -24,7 +24,8 @@ const ScanHistoryCard = ({
     setIsLoading,
     scanStatusData,
     setScanStatusData,
-    themeColor1
+    themeColor1,
+    studentsAndExamData
 }) => {
 
     const SAVED_SCANNED_DATA_INTO_LOCAL = 'saved_scanned_data_into_local'
@@ -151,6 +152,13 @@ const ScanHistoryCard = ({
         }
     }
 
+    // for exam type
+    let Examtypedata = studentsAndExamData.data.exams
+    Examtypedata = studentsAndExamData.data.exams.filter(function (item) {
+        return item.subject == filteredData.response.subject;
+    }).map(({type}) => ({type}));
+
+
     return (
         <View>
             <TouchableOpacity
@@ -190,6 +198,16 @@ const ScanHistoryCard = ({
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
                                 <Text>{filteredData.response.subject}</Text>
+                            </View>
+                        </View>
+                        <View style={styles.scanCardStyle}>
+                            <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle,]}>
+                                <Text>{Strings.Exam_Type}</Text>
+                            </View>
+                            <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle,]}>
+                                {Examtypedata.map((item) =>
+                                    <Text>{item.type}</Text>
+                                )}
                             </View>
                         </View>
                         <View style={styles.scanCardStyle}>
@@ -279,7 +297,8 @@ const mapStateToProps = (state) => {
     return {
         filteredData: state.filteredData,
         scanedData: state.scanedData.response.data,
-        loginData: state.loginData
+        loginData: state.loginData,
+        studentsAndExamData: state.studentsAndExamData,
     }
 }
 
