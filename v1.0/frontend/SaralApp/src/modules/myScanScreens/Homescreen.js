@@ -9,6 +9,7 @@ import { LogoutAction } from '../../flux/actions/apis/LogoutAction';
 import APITransport from '../../flux/actions/transport/apitransport';
 import Brands from '../common/components/Brands';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Assets } from '../../assets';
 
 class HomeComponent extends Component {
     constructor(props) {
@@ -18,7 +19,7 @@ class HomeComponent extends Component {
         }
     }
     componentDidMount() {
-        setTimeout(() => { this.setState({ isLoading: false }) }, 3000)
+        setTimeout(() => { this.setState({ isLoading: false }) }, 1000)
         this.callMultiBrandingActiondata()
     }
 
@@ -49,6 +50,7 @@ class HomeComponent extends Component {
                             /> :
 
                             <Brands
+                                Image={Assets.AppLogo}
                                 appName={'Saral OCR App'}
                                 themeColor={AppTheme.BLUE}
                                 onPress={() => this.props.navigation.navigate('selectDetails')}

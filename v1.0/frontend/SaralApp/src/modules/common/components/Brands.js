@@ -18,8 +18,8 @@ class Brands extends PureComponent {
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                     <View>
                         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                            <Image style={{ height: 100, width: 100 }} source={this.state.defaultIamge ? Assets.AppLogo : this.props.Image ? { uri: this.props.Image } : Assets.AppLogo}
-                                onLoad={() => this.setState({ defaultIamge: false })} />
+                            <Image style={{ height: 100, width: 100 }} source={this.props.Image ?  { uri: this.props.Image } : Assets.AppLogo}
+                                 />
                         </View>
                         <View>
                             <Text style={styles.welcometext}>{this.props.appName ? this.props.appName : <Text>Saral Ocr App</Text>}</Text>

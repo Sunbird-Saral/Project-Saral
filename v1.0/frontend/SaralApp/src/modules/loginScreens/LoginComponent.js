@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, TextInput, Image, AppState } from 'react-native';
+import { View, ScrollView, Text, TextInput, Image, AppState, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Strings from '../../utils/Strings';
@@ -31,6 +31,7 @@ class LoginComponent extends Component {
     }
 
     componentDidMount() {
+        setTimeout(() => { this.setState({ isLoading: false }) },4000)
         this.callDefaultbrandingData()
         this.props.navigation.addListener('willFocus', async payload => {
             AppState.addEventListener('change', this.handleAppStateChange);
@@ -39,9 +40,6 @@ class LoginComponent extends Component {
         })
     }
 
-    // componentWillUnmount() {
-    //     AppState.removeEventListener('change', this.handleAppStateChange);
-    // }
 
     handleAppStateChange = (nextAppState) => {
         if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
@@ -203,6 +201,7 @@ class LoginComponent extends Component {
 
     render() {
         const { password, isLoading, errUsername, errPassword, errCommon } = this.state;
+        const { defaultBrandingdata } = this.props
         return (
             <View style={styles.container}>
                 <ScrollView
@@ -212,14 +211,22 @@ class LoginComponent extends Component {
                     keyboardShouldPersistTaps={'handled'}
                 >
 
-                    {this.props.defaultBrandingdata ?
-                      <View style={styles.container1}>
-                        <Image style={{ width: 100, height: 100 }} source={{ uri: 'data:image/png;base64,' + this.props.defaultBrandingdata.logoImage }} />
-                    </View>    
-                        : 
-                        <View style={styles.container1}>
-                        <Image style={{ width: 100, height: 100 }} source={Assets.AppLogo} />
-                    </View> 
+                    {
+
+                        this.state.isLoading ?
+                            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                                <Text style={{ fontSize: 12, fontWeight: 'bold', fontFamily: 'sans-serif-condensed' }}>Loading Branding ...</Text>
+                            </View> :
+
+                            defaultBrandingdata.response.data ?
+                                <View style={styles.container1}>
+                                    <Image style={{ width: 100, height: 100 }} source={{ uri: 'data:image/png;base64,' + this.props.defaultBrandingdata.response.data.logoImage }} />
+                                </View>
+                                :
+
+                                <View style={{ flex: 1, justifyContent: 'center' }}>
+                                   {isLoading && <Spinner animating={isLoading} />}
+                                </View> 
                     }
 
                     <View style={styles.container2}>
@@ -263,11 +270,11 @@ class LoginComponent extends Component {
                                     secureTextEntry
                                 />
                                 <View style={styles.btnContainer}>
-                                    <ButtonComponent
-                                        btnText={Strings.login_text.toUpperCase()}
-                                        onPress={this.onSubmit}
-                                        themeColor1={{backgroundColor:this.props.defaultBrandingdata ? this.props.defaultBrandingdata.themeColor1: AppTheme.BLUE}}
-                                    />
+                                        <ButtonComponent
+                                            btnText={Strings.login_text.toUpperCase()}
+                                            onPress={this.onSubmit}
+                                            themeColor1={{ backgroundColor: this.props.defaultBrandingdata.response.data ? this.props.defaultBrandingdata.response.data.themeColor1 : '' }}
+                                        />
                                 </View>
                             </View>
                         </View>
@@ -353,7 +360,7 @@ const mapStateToProps = (state) => {
     return {
         apiStatus: state.apiStatus,
         loginData: state.loginData,
-        defaultBrandingdata: state.defaultBrandingdata.response.data
+        defaultBrandingdata: state.defaultBrandingdata
     }
 }
 
