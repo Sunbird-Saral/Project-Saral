@@ -415,12 +415,15 @@ const ScannedDetailsComponent = ({
                                 e.studentsMarkInfo.forEach((element, i) => {
 
                                     let findStudent = !isMultipleStudent && e.studentsMarkInfo.filter(o => {
-                                        if (o.studentId == studentId) {
-                                            return true;
+                                        if (i < structureList.length) {
+                                            if (o.studentId == studentId) {
+                                                return true;
+                                            }
                                         }
                                     })
 
-                                    if (!isMultipleStudent && findStudent.length > 0) {
+
+                                    if (!isMultipleStudent && findStudent.length > 0 && saveObj.studentsMarkInfo.length > 0) {
                                         getDataFromLocal[index].studentsMarkInfo[i] = saveObj.studentsMarkInfo[0]
                                     }
                                     else if (isMultipleStudent) {
@@ -438,11 +441,11 @@ const ScannedDetailsComponent = ({
                                         if (findMultipleStudent.length > 0 && saveObj.studentsMarkInfo.length > 0) {
                                             getDataFromLocal[index].studentsMarkInfo[i] = saveObj.studentsMarkInfo[i]
 
-                                        } else if (saveObj.studentsMarkInfo.length > 0 && i < structureList.length) {
-                                            getDataFromLocal[index].studentsMarkInfo.push(saveObj.studentsMarkInfo[i])
+                                        } else if (saveObj.studentsMarkInfo.length > 0 && i < structureList.length && i < saveObj.studentsMarkInfo.length) {
+                                                getDataFromLocal[index].studentsMarkInfo.push(saveObj.studentsMarkInfo[i])
                                         }
                                     }
-                                    else {
+                                    else if(saveObj.studentsMarkInfo.length > 0 && i <= 0){
                                         getDataFromLocal[index].studentsMarkInfo.push(saveObj.studentsMarkInfo[0])
                                     }
 
