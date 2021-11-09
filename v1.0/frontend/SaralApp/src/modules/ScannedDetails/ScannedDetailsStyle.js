@@ -15,6 +15,9 @@ export const styles = {
         color: AppTheme.BLACK,
         letterSpacing: 1,
     },
+    row: {
+        flexDirection: 'row'
+    },
     container2: {
         flex: 1,
         borderRadius: 4,
@@ -69,7 +72,7 @@ export const styles = {
         width: '90%',
         borderBottomWidth: 1,
         borderBottomColor: AppTheme.LIGHT_GREY,
-        paddingBottom:10
+        paddingBottom: 10
     },
     imageViewContainer: {
         width: '30%',
@@ -120,13 +123,13 @@ export const styles = {
         letterSpacing: 1,
         lineHeight: 35
     },
-    viewnxtBtnStyle1 : {
-        flexDirection:'row',
-        justifyContent:'center',
-        alignItems:'center'
+    viewnxtBtnStyle1: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     nxtBtnStyle1: {
-        width:'45%',
+        width: '45%',
         marginHorizontal: 5,
         marginBottom: 20,
         borderRadius: 10

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Text, View, FlatList, Alert, SafeAreaView,BackHandler } from 'react-native';
+import { Text, View, FlatList, Alert, SafeAreaView, BackHandler } from 'react-native';
 
 //redux
 import { connect, useDispatch } from 'react-redux';
@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux';
 import APITransport from '../../flux/actions/transport/apitransport'
 
 //storage
-import { getLoginCred, getStudentsExamData, setAbsentStudentDataIntoAsync, setPresentAbsentStudent, setTotalStudent } from '../../utils/StorageUtils';
+import { getLoginCred, getStudentsExamData, setAbsentStudentDataIntoAsync, setPresentAbsentStudent, setStudentsExamData, setTotalStudent } from '../../utils/StorageUtils';
 import ButtonComponent from '../common/components/ButtonComponent';
 import StudentsDataComponent from './StudentsDataComponent';
 
@@ -176,7 +176,7 @@ const StudentsList = ({
         )
     }
 
-    const saveAbsentPresentDetails = (token) => {
+    const saveAbsentPresentDetails =async (token) => {
 
         let stdPstAbsArray = []
 
@@ -204,6 +204,24 @@ const StudentsList = ({
 
         absentPresentStatus.studentsMarkInfo = stdPstAbsArray
 
+        let stud = await getStudentsExamData();
+
+        stud.forEach((e, i) => {
+            if (e.class == filteredData.className && e.section == filteredData.section) {
+                e.data.students.forEach((element) => {
+
+                    const updated = allStudentData.filter((o) => {
+                        if (element.studentId == o.studentId) {
+                            element.studentAvailability = o.studentAvailability
+                        }
+                    })
+                })
+            }
+        })
+
+
+        setStudentsExamData(stud)
+
         // setIsLoading(true)
         let dataPayload = absentPresentStatus
         let apiObj = new SaveScanData(dataPayload, token)
@@ -217,7 +235,7 @@ const StudentsList = ({
             saveAbsentPresentDetails(loginData.data.token)
         }
     }
-    const navigateToBack =()=> {
+    const navigateToBack = () => {
         navigation.navigate('selectDetails')
     }
     
@@ -291,20 +309,20 @@ const StudentsList = ({
             />
 
 
-           <View style={styles.viewnxtBtnStyle1}>
-            <ButtonComponent
-                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
-                btnText={Strings.Back.toUpperCase()}
-                activeOpacity={0.8}
-                onPress={navigateToBack}
-            />
+            <View style={styles.viewnxtBtnStyle1}>
+                <ButtonComponent
+                    customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+                    btnText={Strings.Back.toUpperCase()}
+                    activeOpacity={0.8}
+                    onPress={navigateToBack}
+                />
 
-            <ButtonComponent
-                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
-                btnText={Strings.next_text.toUpperCase()}
-                activeOpacity={0.8}
-                onPress={navigateToNext}
-            />
+                <ButtonComponent
+                    customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+                    btnText={Strings.next_text.toUpperCase()}
+                    activeOpacity={0.8}
+                    onPress={navigateToNext}
+                />
             </View>
 
             {
