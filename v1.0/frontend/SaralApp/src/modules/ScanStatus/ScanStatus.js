@@ -56,7 +56,7 @@ const ScanStatus = ({
     useEffect(
         React.useCallback(() => {
             const onBackPress = () => {
-                navigation.navigate('ScanHistory');
+                navigation.push('ScanHistory');
             };
             BackHandler.addEventListener('hardwareBackPress', onBackPress);
             return () =>
