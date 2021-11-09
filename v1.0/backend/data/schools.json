@@ -1,5 +1,5 @@
 [{
-  "name": "Fountainhead School",
+  "name": "Dummy school 1",
   "schoolId": "up001",
   "password": "tarento@123",
   "state": "up",
@@ -12,7 +12,7 @@
   "storeTrainingData": false
 },
 {
-  "name": "Aditya Birla Public School, Rayagada.",
+  "name": "Dummy school 2",
   "schoolId": "odisha001",
   "password": "tarento@123",
   "state": "odisha",
@@ -25,7 +25,7 @@
   "storeTrainingData": true
 },
 {
-  "name": "Sainik School",
+  "name": "Dummy school 3",
   "schoolId": "gujrat001",
   "password": "tarento@123",
   "state": "gujrat",
@@ -38,7 +38,7 @@
   "storeTrainingData": true
 },
 {
-"name": "Amtul's Public School",
+"name": "Dummy school 4",
 "schoolId": "up002",
 "password": "tarento@123",
 "state": "up",
