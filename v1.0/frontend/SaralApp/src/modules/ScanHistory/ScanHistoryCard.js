@@ -33,7 +33,7 @@ const ScanHistoryCard = ({
 
     const getSaveCount = ()=>{
         let data = scanedData.length > 0 ? scanedData.filter((o,index)=>{
-            if (o.studentAvailability) {
+            if (o.studentAvailability && o.marksInfo.length > 0) {
                 return true
             }
         })

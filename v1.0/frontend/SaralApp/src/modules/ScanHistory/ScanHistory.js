@@ -113,7 +113,7 @@ const ScanHistory = ({
                 customBtnStyle={[styles.nxtBtnStyle, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
                 btnText={Strings.Back.toUpperCase()}
                 activeOpacity={0.8}
-                onPress={() => navigation.navigate('StudentsList')}
+                onPress={() => navigation.push('StudentsList')}
             />
 
         </View>

@@ -28,7 +28,7 @@ class MyScanComponent extends Component {
         this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
     }
 
-    componentWillMount() {
+    componentDidMount() {
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
     }
 
