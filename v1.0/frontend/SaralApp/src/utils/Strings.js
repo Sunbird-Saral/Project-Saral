@@ -19,6 +19,7 @@ export default strings = new LocalizedStrings({
         please_try_again: 'Please try again.',
         request_timeout_custom_message : "Request timed out. Please check your internet connection and retry.",
         you_seem_to_be_offline_please_check_your_internet_connection: 'Please check your internet connection.',
+        please_select_at_least_one_student : 'at least one student should be there',
         yes_text: 'Yes',
         no_text: 'No',
         version_text: 'Version',
