@@ -243,7 +243,7 @@ const ScanHistoryCard = ({
                                 <Text>{Strings.save_status}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle, { borderBottomWidth: 1 }]}>
-                                <Text>{scanedData.data ? getSaveCount() : 0}</Text>
+                                <Text>{scanedData ? getSaveCount() : 0}</Text>
                             </View>
                     </View>
                 </View>
