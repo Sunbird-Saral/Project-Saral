@@ -33,7 +33,7 @@ const ScanHistoryCard = ({
     },[])
 
     const getSaveCount = ()=>{
-        let data = scanedData.data.length > 0 ? scanedData.data.filter((o,index)=>{
+        let data = scanedData.length > 0 ? scanedData.filter((o,index)=>{
             if (o.studentAvailability && o.marksInfo.length > 0) {
                 return true
             }
@@ -308,7 +308,7 @@ const ScanHistoryCard = ({
 const mapStateToProps = (state) => {
     return {
         filteredData: state.filteredData,
-        scanedData: state.scanedData.response,
+        scanedData: state.scanedData.response.data,
         loginData: state.loginData,
         studentsAndExamData: state.studentsAndExamData,
     }
