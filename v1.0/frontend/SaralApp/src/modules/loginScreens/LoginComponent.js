@@ -224,9 +224,9 @@ class LoginComponent extends Component {
                                 </View>
                                 :
 
-                                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                <Image style={{ width: 100, height: 100 }} source={Assets.AppLogo} />
-                            </View>
+                                <View style={{ flex: 1, justifyContent: 'center' }}>
+                                   {isLoading && <Spinner animating={isLoading} />}
+                                </View>
                     }
 
                     <View style={styles.container2}>
@@ -273,7 +273,7 @@ class LoginComponent extends Component {
                                         <ButtonComponent
                                             btnText={Strings.login_text.toUpperCase()}
                                             onPress={this.onSubmit}
-                                            themeColor1={{ backgroundColor: this.props.defaultBrandingdata.response.data ? this.props.defaultBrandingdata.response.data.themeColor1 : AppTheme.BLUE }}
+                                            themeColor1={{ backgroundColor: this.props.defaultBrandingdata.response.data ? this.props.defaultBrandingdata.response.data.themeColor1 : '' }}
                                         />
                                 </View>
                             </View>
