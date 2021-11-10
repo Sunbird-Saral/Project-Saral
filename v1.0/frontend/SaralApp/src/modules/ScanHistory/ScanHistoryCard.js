@@ -165,13 +165,11 @@ const ScanHistoryCard = ({
             payload: api.getPayload()
         }
     }
-
-    // for exam type
-    let Examtypedata = studentsAndExamData.data.exams
-    Examtypedata = studentsAndExamData.data.exams.filter(function (item) {
-        return item.subject == filteredData.response.subject;
-    }).map(({type}) => ({type}));
-
+        // for exam type
+        let Examtypedata = studentsAndExamData.data.exams
+        Examtypedata = studentsAndExamData.data.exams.filter(function (item) {
+            return item.subject == filteredData.response.subject;
+        }).map(({type}) => ({type}));
 
     return (
         <View>
@@ -310,7 +308,7 @@ const ScanHistoryCard = ({
 const mapStateToProps = (state) => {
     return {
         filteredData: state.filteredData,
-        scanedData: state.scanedData.response.data,
+        scanedData: state.scanedData.response,
         loginData: state.loginData,
         studentsAndExamData: state.studentsAndExamData,
     }
