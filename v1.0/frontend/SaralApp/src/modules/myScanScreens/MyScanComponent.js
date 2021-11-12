@@ -252,12 +252,8 @@ class MyScanComponent extends Component {
                         {apkVersion}
                     </Text>
                 </Text>
-                <ScrollView
-                    contentContainerStyle={{ paddingTop: '5%', paddingBottom: '35%' }}
-                    showsVerticalScrollIndicator={false}
-                    bounces={false}
-                    keyboardShouldPersistTaps={'handled'}
-                >
+             
+                <View style={{paddingBottom: '35%'}}>
                     <View style={styles.onGoingContainer}>
                         <Text style={[styles.header1TextStyle, { backgroundColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE }]}>
                             {Strings.ongoing_scan}
@@ -269,8 +265,7 @@ class MyScanComponent extends Component {
                         showButtons={false}
                         scanStatusData={this.state.scanStatusData}
                     />
-
-                </ScrollView>
+                    </View>
 
                 <View>
                     <ButtonComponent

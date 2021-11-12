@@ -61,6 +61,7 @@ export default strings = new LocalizedStrings({
         class_text: 'Class',
         section: 'Section',
         exam_sub: 'Exam Subject',
+        Exam_Type:'Exam Type',
         exam_sub_date: 'Exam Subject - Date',
         exam_id: 'Exam Id',
         Exam:'Exam',
