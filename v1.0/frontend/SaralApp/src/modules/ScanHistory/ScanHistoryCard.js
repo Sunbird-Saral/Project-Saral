@@ -32,12 +32,21 @@ const ScanHistoryCard = ({
     },[])
 
     const getSaveCount = ()=>{
-        let data = scanedData.data.length > 0 ? scanedData.data.filter((o,index)=>{
+        let data =
+         scanedData 
+        ? 
+        scanedData.data.length > 0 
+        ?
+         scanedData.data.filter((o,index)=>{
             if (o.studentAvailability && o.marksInfo.length > 0) {
                 return true
             }
         })
-        :[]
+        :
+        []
+        :
+        []
+
         return data.length;
     }
 

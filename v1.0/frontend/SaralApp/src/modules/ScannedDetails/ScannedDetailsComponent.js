@@ -442,23 +442,25 @@ const ScannedDetailsComponent = ({
                                     else if (isMultipleStudent) {
 
 
-                                        let findMultipleStudent = structureList.filter((item) => {
-                                            if (i < structureList.length) {
-                                                if (item.RollNo == element.studentId) {
-                                                    return true
-                                                }
+                                        let findMultipleStudent = saveObj.studentsMarkInfo.length > 0 ? saveObj.studentsMarkInfo.filter((item) => {
+                                            if (item.studentId == element.studentId) {
+                                                return true
                                             }
                                         })
+                                            :
+                                            []
 
+                                        if (i < saveObj.studentsMarkInfo.length) {
 
-                                        if (findMultipleStudent.length > 0 && saveObj.studentsMarkInfo.length > 0) {
-                                            getDataFromLocal[index].studentsMarkInfo[i] = saveObj.studentsMarkInfo[i]
+                                            if (findMultipleStudent.length > 0 && saveObj.studentsMarkInfo.length > 0) {
+                                                getDataFromLocal[index].studentsMarkInfo[i] = findMultipleStudent[0]
 
-                                        } else if (saveObj.studentsMarkInfo.length > 0 && i < structureList.length && i < saveObj.studentsMarkInfo.length) {
-                                            getDataFromLocal[index].studentsMarkInfo.push(saveObj.studentsMarkInfo[i])
+                                            } else if (saveObj.studentsMarkInfo.length > 0 && i < structureList.length && i < saveObj.studentsMarkInfo.length) {
+                                                getDataFromLocal[index].studentsMarkInfo.push(saveObj.studentsMarkInfo[i])
+                                            }
                                         }
                                     }
-                                    else if(saveObj.studentsMarkInfo.length > 0 && i <= 0){
+                                    else if (saveObj.studentsMarkInfo.length > 0 && i <= 0) {
                                         getDataFromLocal[index].studentsMarkInfo.push(saveObj.studentsMarkInfo[0])
                                     }
 
