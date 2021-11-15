@@ -31,7 +31,7 @@ class LoginComponent extends Component {
     }
 
     componentDidMount() {
-        setTimeout(() => { this.setState({ isLoading: false }) },4000)
+        setTimeout(() => { this.setState({ isLoading: false }) }, 1000)
         this.callDefaultbrandingData()
         this.props.navigation.addListener('willFocus', async payload => {
             AppState.addEventListener('change', this.handleAppStateChange);
@@ -211,22 +211,19 @@ class LoginComponent extends Component {
                     keyboardShouldPersistTaps={'handled'}
                 >
 
-                    {
-
-                        this.state.isLoading ?
+                    {this.state.isLoading ?
+                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                            <Text style={{ fontSize: 12, fontWeight: 'bold', fontFamily: 'sans-serif-condensed' }}>Loading Branding ...</Text>
+                        </View>
+                        :
+                        defaultBrandingdata.response.data  ?
+                            <View style={styles.container1}>
+                                <Image style={{ width: 100, height: 100 }} source={{ uri: 'data:image/png;base64,' + this.props.defaultBrandingdata.response.data.logoImage }} />
+                            </View>
+                             :
                             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                <Text style={{ fontSize: 12, fontWeight: 'bold', fontFamily: 'sans-serif-condensed' }}>Loading Branding ...</Text>
-                            </View> :
-
-                            defaultBrandingdata.response.data ?
-                                <View style={styles.container1}>
-                                    <Image style={{ width: 100, height: 100 }} source={{ uri: 'data:image/png;base64,' + this.props.defaultBrandingdata.response.data.logoImage }} />
-                                </View>
-                                :
-
-                                <View style={{ flex: 1, justifyContent: 'center' }}>
-                                   {isLoading && <Spinner animating={isLoading} />}
-                                </View> 
+                                <Image style={{ width: 100, height: 100 }} source={Assets.AppLogo} />
+                            </View>
                     }
 
                     <View style={styles.container2}>
@@ -270,11 +267,11 @@ class LoginComponent extends Component {
                                     secureTextEntry
                                 />
                                 <View style={styles.btnContainer}>
-                                        <ButtonComponent
-                                            btnText={Strings.login_text.toUpperCase()}
-                                            onPress={this.onSubmit}
-                                            themeColor1={{ backgroundColor: this.props.defaultBrandingdata.response.data ? this.props.defaultBrandingdata.response.data.themeColor1 : '' }}
-                                        />
+                                    <ButtonComponent
+                                        btnText={Strings.login_text.toUpperCase()}
+                                        onPress={this.onSubmit}
+                                        themeColor1={{ backgroundColor: this.props.defaultBrandingdata.response.data ? this.props.defaultBrandingdata.response.data.themeColor1 : AppTheme.BLUE }}
+                                    />
                                 </View>
                             </View>
                         </View>

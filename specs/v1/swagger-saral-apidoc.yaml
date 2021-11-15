@@ -46,7 +46,7 @@ paths:
         "400":
           description: "unsuccessful operation"
           
-  /create:
+  /schools/create:
     post:
       tags:
       - "School"
@@ -67,7 +67,7 @@ paths:
         "400":
           description: "unsuccessful operation"
           
-  /login:        
+  /schools/login:        
     post:
       tags:
       - "School"

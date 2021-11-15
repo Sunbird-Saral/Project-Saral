@@ -35,7 +35,7 @@
   "hmMobileNo": "8006079875",
   "noOfStudents": "100",
   "udiseCode": "3",
-  "storeTrainingData": false
+  "storeTrainingData": true
 },
 {
 "name": "Dummy school 4",

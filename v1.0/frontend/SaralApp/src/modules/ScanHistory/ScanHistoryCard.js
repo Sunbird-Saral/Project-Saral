@@ -24,7 +24,8 @@ const ScanHistoryCard = ({
     setIsLoading,
     scanStatusData,
     setScanStatusData,
-    themeColor1
+    themeColor1,
+    studentsAndExamData
 }) => {
 
     useEffect(()=>{
@@ -180,6 +181,11 @@ const ScanHistoryCard = ({
             payload: api.getPayload()
         }
     }
+        // for exam type
+        let Examtypedata = studentsAndExamData.data.exams
+        Examtypedata = studentsAndExamData.data.exams.filter(function (item) {
+            return item.subject == filteredData.response.subject;
+        }).map(({type}) => ({type}));
 
     return (
         <View>
@@ -220,6 +226,16 @@ const ScanHistoryCard = ({
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
                                 <Text>{filteredData.response.subject}</Text>
+                            </View>
+                        </View>
+                        <View style={styles.scanCardStyle}>
+                            <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle,]}>
+                                <Text>{Strings.Exam_Type}</Text>
+                            </View>
+                            <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle,]}>
+                                {Examtypedata.map((item) =>
+                                    <Text>{item.type}</Text>
+                                )}
                             </View>
                         </View>
                         <View style={styles.scanCardStyle}>
