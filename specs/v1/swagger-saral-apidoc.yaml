@@ -1230,7 +1230,7 @@ definitions:
         type:
           type: string
           description: "type of Exam"
-          example: "SAT"
+          example: "uphindi1s"
         questions:
           $ref: '#/definitions/Questions'  
         examId:
