@@ -830,20 +830,28 @@ definitions:
     properties:
       name:
         type: string
+        example: "Dummy school 1"
       state:
         type: string
+        example: up
       district:
         type: string
+        example: delhi
       block:
         type: string
+        example: haldwani
       hmName:
         type: string
+        example: abc
       hmMobileNo:
         type: string
+        example: 8006079875
       noOfStudents:
         type: string
+        example: 100
       udisceCode:
         type: string
+        example: 1
       storeTrainingData:  
         type: boolean
         default: false
@@ -860,14 +868,18 @@ definitions:
     properties:
       classId:
         type: string
+        example: 2
       subject:
         type: string
+        example: Maths
       fromDate:
         type: string
+        example: 24-12-2021
       page:
-        type: string
+        type: number
+        example: 1
       downloadRes:
-        type: string
+        type: boolean
         
   GetSavedScanResponse:
     type: object
