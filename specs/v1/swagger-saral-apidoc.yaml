@@ -13,6 +13,8 @@ tags:
 - name: "Marks"
 - name: "ROI"
 - name: "Brand"
+- name: "Frontend API"
+- name: "Maintenance API"
 
 
 securityDefinitions:
@@ -40,9 +42,11 @@ paths:
         "200":
           description: "successful operation"
           schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Schools"
+            type: object
+            properties:
+              schools: 
+                $ref: "#/definitions/Schools"
+              
         "400":
           description: "unsuccessful operation"
           
@@ -101,7 +105,7 @@ paths:
           required: true
       responses:
         "200": 
-          description: "School has been deleted"
+          description: "School has been deleted."
         "404":
           description: "School Id does not exist."
         "400":
@@ -583,7 +587,7 @@ paths:
           description: "Brand has been updated successfully."
         "400":
           description: "unsuccessful operation"
-
+          
   /brand/default:
     get:
       tags:
@@ -601,31 +605,33 @@ paths:
 
 definitions:
   Schools:
-    type: "object"
-    properties:
-      name:
-        type: string
-      schoolId:
-        type: string
-      state:
-        type: string
-      district:
-        type: string
-      block:
-        type: string
-      hmName:
-        type: string
-      noOfStudents:
-        type: string
-      storeTrainingData:
-        type: boolean
-        default: false
-      createdAt: 
-        type: string
-        format: date-time
-      updatedAt:
-        type: string
-        format: date-time
+      type: array
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+          schoolId:
+            type: string
+          state:
+            type: string
+          district:
+            type: string
+          block:
+            type: string
+          hmName:
+            type: string
+          noOfStudents:
+            type: string
+          storeTrainingData:
+            type: boolean
+            default: false
+          createdAt: 
+            type: string
+            format: date-time
+          updatedAt:
+            type: string
+            format: date-time
   
         
   LoginSchool:
@@ -663,11 +669,30 @@ definitions:
           updatedAt:
             type: string
             format: date-time
+          classes:
+            $ref: '#/definitions/classResponse'
 
       token:
         type: object
         example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTMwOWQyYjJlNzEyMzAyZGY5NmM3NjEiLCJpYXQiOjE2MzA1NzU5MTV9.FCt2Q4R_sN1ctdOfoOPzBzfdUohAPA-TlLFtJJEeTBE"
   
+  classResponse:
+        type: array
+        items:
+          type: object
+          properties:
+            sections:
+              type: array
+              items:
+                properties:
+                  section:
+                    type: string
+            classId:
+              type: string
+            className:
+              type: string
+        
+        
   LoginSchoolBody:
     type: object
     properties:
@@ -676,8 +701,8 @@ definitions:
       password:
         type: string
       classes:
-        type: "boolean"
-        default: "true"
+        type: boolean
+        default: true
     
   CreateSchoolBody:
     type: object
@@ -766,13 +791,13 @@ definitions:
         default: false
         
   UpdateStudentBody:
-    type: "object"
+    type: object
     properties:
       name: 
         type: string
         
   GetSavedScanBody:
-    type: "object"
+    type: object
     properties:
       classId:
         type: string
@@ -900,7 +925,7 @@ definitions:
         type: string
         description: Student ID
       studentClass:
-        $ref: '#/definitions/StudentClass' 
+        $ref: '#/definitions/StudentClass'
         
   FetchStudentsByQueryResponse:
     type: object
@@ -1058,43 +1083,7 @@ definitions:
         schoolId:
           type: string
           description: Unique Id
-          
-  DeleteExamByExamIdAndClassIdResponse:
-    type: object
-    properties: 
-      _id: 
-        type: string
-        description: unique id
-      subject:
-        type: string
-        description: Exam Name
-      examLO: 
-        type: string
-        description: Exam LO
-      classId:
-        type: string
-        description: Id of class
-      examDate:
-        type: string
-        description: Date of exam
-      totalMarks:
-        type: string
-        description: Total marks of exam
-      questions:
-        $ref : '#/definitions/Questions' 
-      examId:
-        type: number
-        description: Exam Id
-      schoolId:
-        type: string
-        description: School Id
-      createdAt:
-        type: string
-        format: date-time
-      updatedAt:
-        type: string
-        format: date-time
-        
+
   CreateExamBody:
     type: array
     items:
@@ -1145,8 +1134,6 @@ definitions:
     items:
       type: object
       properties:
-        annotationId:
-          type: string
         annotationTags:
           type: string
         extractionMethod:
