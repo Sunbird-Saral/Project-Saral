@@ -33,11 +33,15 @@ const ScanHistoryCard = ({
 
     const getSaveCount = ()=>{
         let data =
-         scanedData 
+         scanedData
         ? 
-        scanedData.data.length > 0 
+        scanedData.response
         ?
-         scanedData.data.filter((o,index)=>{
+        scanedData.response.length > 0 
+        ?
+        scanedData.response.length > 0 
+        ?
+         scanedData.response.data.filter((o,index)=>{
             if (o.studentAvailability && o.marksInfo.length > 0) {
                 return true
             }
@@ -46,6 +50,9 @@ const ScanHistoryCard = ({
         []
         :
         []
+        :
+        []
+        :[]
 
         return data.length;
     }
@@ -236,7 +243,7 @@ const ScanHistoryCard = ({
                                 <Text>{Strings.save_status}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle, { borderBottomWidth: 1 }]}>
-                                <Text>{scanedData.data ? getSaveCount() : 0}</Text>
+                                <Text>{scanedData.response ? getSaveCount() : 0}</Text>
                             </View>
                     </View>
                 </View>
@@ -301,7 +308,7 @@ const ScanHistoryCard = ({
 const mapStateToProps = (state) => {
     return {
         filteredData: state.filteredData,
-        scanedData: state.scanedData.response,
+        scanedData: state.scanedData,
         loginData: state.loginData
     }
 }
