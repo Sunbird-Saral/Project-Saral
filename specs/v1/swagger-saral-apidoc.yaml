@@ -35,7 +35,8 @@ paths:
   /schools:
     get:
       tags:
-      - "School"
+      - Frontend API
+      - School
       summary: "Get School List"
       description: "should return list of school"
       responses:
@@ -53,7 +54,8 @@ paths:
   /schools/create:
     post:
       tags:
-      - "School"
+      - Maintenance API
+      - School
       summary: "create school"
       description: "create school"
       parameters:
@@ -74,7 +76,8 @@ paths:
   /schools/login:        
     post:
       tags:
-      - "School"
+      - Frontend API
+      - School
       summary: "LOGIN"
       description: ""
       produces:
@@ -95,7 +98,8 @@ paths:
   /deleteSchoolBySchoolId/{schoolId}:
     delete:
       tags:
-      - "School"
+      - Maintenance API
+      - School
       summary: "Delete School By SchoolId"
       description: ""
       parameters:
@@ -114,7 +118,8 @@ paths:
   /updateSchool/{schoolId}:
     patch:
       tags:
-      - "School"
+      - Maintenance API
+      - School
       summary: "Update School By SchoolId"
       description: ""
       parameters:
@@ -139,6 +144,7 @@ paths:
       security:
         - Bearer: []
       tags:
+      - Maintenance API
       - Class
       summary: "Create Class"
       parameters:
@@ -163,6 +169,7 @@ paths:
       security:
         - Bearer: []
       tags:
+      - Maintenance API
       - Class
       summary: "Update Class"
       parameters:
@@ -183,6 +190,7 @@ paths:
       security:
         - Bearer: []
       tags:
+      - Maintenance API
       - Class
       summary: "Delete class by class Id"
       parameters:
@@ -209,7 +217,8 @@ paths:
       security:
         - Bearer: []
       tags:
-      - "Student"
+      - Maintenance API
+      - Student
       summary: "Get students list"
       parameters:
        - in: body
@@ -232,7 +241,8 @@ paths:
       security:
         - Bearer: []
       tags:
-      - "Student"
+      - Maintenance API
+      - Student
       summary: "Create Student"
       parameters:
         - name: body
@@ -252,7 +262,8 @@ paths:
       security:
         - Bearer: []
       tags:
-      - "Student"
+      - Frontend API
+      - Student
       summary: "Get Exam Details by class Id"
       parameters:
        - in: body
@@ -279,7 +290,8 @@ paths:
   /deleteStudentByStudentId/{studentId}:
     delete:
       tags:
-      - "Student"
+      - Maintenance API
+      - Student
       summary: "Delete Student "
       parameters:
         - in: path
@@ -297,7 +309,8 @@ paths:
   /updateStudent/{studentId}:
     patch:
       tags:
-      - "Student"
+      - Maintenance API
+      - Student
       summary: "Update Student"
       parameters:
         - in: path
@@ -320,7 +333,8 @@ paths:
       security:
         - basicAuth: []
       tags:
-      - "Marks"
+      - Frontend API
+      - Marks
       summary: "Get Scan Marks"
       parameters:
         - in : body
@@ -338,7 +352,8 @@ paths:
       security:
         - Bearer: []
       tags:
-        - "Marks"
+        - Frontend API
+        - Marks
       summary: "create marks for students exam"
       parameters:
         - name: body
@@ -354,7 +369,8 @@ paths:
       security:
         - Bearer: []
       tags:
-        - "Exam"
+        - Maintenance API
+        - Exam
       summary: "Get Exam Details by ClassId"
       parameters:
         - in: path
@@ -381,7 +397,8 @@ paths:
       security:
         - Bearer: []
       tags:
-        - "Exam"
+        - Maintenance API
+        - Exam
       summary: "Delete exam by class Id"
       parameters:
         - in: path
@@ -399,7 +416,8 @@ paths:
       security:
         - Bearer: []
       tags:
-        - "Exam"
+        - Maintenance API
+        - Exam
       summary: "Create Exam for a class"
       parameters:
       - in: body
@@ -417,7 +435,8 @@ paths:
       security:
         - Bearer: []
       tags:
-        - "Exam"
+        - Maintenance API
+        - Exam
       summary: "Update Exam for a class"
       parameters:
       - in: path
@@ -441,7 +460,8 @@ paths:
       security:
         - Bearer: []
       tags:
-        - "ROI"
+        - Maintenance API
+        - ROI
       summary: "Create ROI"
       parameters:
       - in: body
@@ -463,7 +483,8 @@ paths:
       security:
         - Bearer: []
       tags:
-        - "ROI"
+        - Maintenance API
+        - ROI
       summary: "Update ROI"
       parameters:
       - in: path
@@ -487,7 +508,8 @@ paths:
       security:
         - Bearer: []
       tags:
-        - "ROI"
+        - Maintenance API
+        - ROI
       summary: "Delete ROI"
       parameters:
       - in: path
@@ -507,7 +529,8 @@ paths:
       security:
         - Bearer: []
       tags:
-      - "ROI"
+      - Frontend API
+      - ROI
       summary: "Get ROI data"
       parameters:
       - in: path
@@ -528,7 +551,8 @@ paths:
       security:
         - Bearer: []
       tags:
-        - "Brand"
+        - Maintenance API
+        - Brand
       summary: "Create Brand for state"
       parameters:
       - in: query
@@ -549,7 +573,8 @@ paths:
       security:
         - Bearer: []
       tags:
-        - "Brand"
+        - Frontend API
+        - Brand
       summary: "Get Brand for state"
       responses:
         "200":
@@ -562,8 +587,9 @@ paths:
     delete:
       security:
         - Bearer: []
-      tags:
-        - "Brand"
+      tags: 
+        - Maintenance API
+        - Brand
       summary: "Delete Brand for state"
       responses:
         "200":
@@ -575,7 +601,8 @@ paths:
       security:
         - Bearer: []
       tags:
-        - "Brand"
+        - Maintenance API
+        - Brand
       summary: "Update Brand for state"     
       parameters:
       - in: body
@@ -591,7 +618,8 @@ paths:
   /brand/default:
     get:
       tags:
-        - "Brand"
+        - Frontend API
+        - Brand
       summary: "Get Default Brand"
       responses:
         "200":
