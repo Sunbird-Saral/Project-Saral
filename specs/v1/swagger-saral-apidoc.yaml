@@ -161,8 +161,7 @@ paths:
           
         "400":
           description: "unsuccessful operation"
-        "404":
-          description: ""
+
   
   /updateClass:
     post:
@@ -721,7 +720,8 @@ definitions:
           updatedAt:
             type: string
             format: date-time
-          classes:
+          
+      classes:
             $ref: '#/definitions/classResponse'
 
       token:
@@ -1171,6 +1171,10 @@ definitions:
           type: number
           description: "Total Marks"
           example: 20
+        type:
+          type: string
+          description: "exam type"
+          example: "uphindi1s"
         questions:
           $ref: '#/definitions/Questions' 
         examId:
@@ -1265,6 +1269,11 @@ definitions:
           example: "up001"
         examDate:
           type: string
+          example: "24-12-2021"
+        type:
+          type: string
+          description: "exam type"
+          example: "uphindi1s"
         questions:
           $ref: '#/definitions/Questions' 
     
