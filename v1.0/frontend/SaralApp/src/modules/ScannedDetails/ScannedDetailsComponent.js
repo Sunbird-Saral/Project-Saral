@@ -767,11 +767,11 @@ const ScannedDetailsComponent = ({
 
                                     <View style={{ flexDirection: 'row', marginTop: 20 }}>
                                         {
-                                            TABLE_HEADER.map((data, index) => {
+                                            TABLE_HEADER.map((data) => {
                                                 return (
                                                     <MarksHeaderTable
                                                         customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
-                                                        key={`TableHeader${index}`}
+                                                        key={data}
                                                         rowTitle={data}
                                                         rowBorderColor={AppTheme.TAB_BORDER}
                                                         editable={false}
@@ -783,11 +783,10 @@ const ScannedDetailsComponent = ({
                                     {
                                         newArrayValue.map((element, index) => {
                                             return (
-                                                <View style={{ flexDirection: 'row' }}>
+                                                <View element={element} key={index} style={{ flexDirection: 'row' }}>
 
                                                     <MarksHeaderTable
                                                         customRowStyle={{ width: '30%', }}
-                                                        key={`Questions${element.cellId + 10}`}
                                                         rowTitle={renderSRNo(element, index)}
                                                         rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                                         editable={false}
@@ -795,7 +794,6 @@ const ScannedDetailsComponent = ({
                                                     />
                                                     <MarksHeaderTable
                                                         customRowStyle={{ width: '30%', }}
-                                                        key={`MaxMarks${element.cellId}`}
                                                         rowTitle={element.format.value}
                                                         rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                                         editable={false}
@@ -803,7 +801,6 @@ const ScannedDetailsComponent = ({
                                                     />
                                                     <MarksHeaderTable
                                                         customRowStyle={{ width: '30%', }}
-                                                        key={`ObtainedMarks${element.cellId}`}
                                                         rowTitle={element.consolidatedPrediction}
                                                         rowBorderColor={markBorderOnCell(element)}
                                                         editable={true}

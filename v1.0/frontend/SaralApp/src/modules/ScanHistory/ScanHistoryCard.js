@@ -218,7 +218,9 @@ const ScanHistoryCard = ({
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle,]}>
                                 {Examtypedata.map((item) =>
+                                <View key = {item}>
                                     <Text>{item.type}</Text>
+                                    </View>
                                 )}
                             </View>
                         </View>
