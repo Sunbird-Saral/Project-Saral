@@ -976,6 +976,10 @@ definitions:
         type: string
         description: "Date Of Exam"
         example: "2021-09-24"
+      subject:
+        type: string
+        description: "Subject of Exam"
+        example: "Maths"
       studentsMarkInfo:
         $ref: '#/definitions/StudentMarkInfo'
         
@@ -1319,6 +1323,30 @@ definitions:
         rect:
           $ref: '#/definitions/rect'
           
+  render:
+    type: object
+    properties:
+      index:
+        type: string
+        example: 1
+          
+  format:
+    type: object
+    properties:
+      name:
+        type: string
+        example: "ROLLNUMBER"
+      value:
+        type: string
+        example: "ROLLNUMBER"
+        
+  validate:
+    type: object
+    properties:
+      regExp:
+        type: string
+        example: ""
+          
   cells:
     type: array
     items:
@@ -1329,6 +1357,13 @@ definitions:
           example: 1
         rois:
           $ref: '#/definitions/roi'
+        render:
+          $ref: '#/definitions/render'
+        format:
+          $ref: '#/definitions/format'
+        validate:
+          $ref: '#/definitions/validate'
+          
 
           
   rois:
