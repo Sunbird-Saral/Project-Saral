@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Text, View, ScrollView, ToastAndroid, Alert } from 'react-native';
 import { connect, useDispatch } from 'react-redux';
 import AppTheme from '../../utils/AppTheme';
-import { multipleStudent, neglectData, SCAN_TYPES, studentLimitSaveInLocal, student_ID, TABLE_HEADER } from '../../utils/CommonUtils';
+import { CELL_OMR, extractionMethod, multipleStudent, neglectData, SCAN_TYPES, studentLimitSaveInLocal, student_ID, TABLE_HEADER } from '../../utils/CommonUtils';
 import Strings from '../../utils/Strings';
 
 
@@ -236,6 +236,7 @@ const ScannedDetailsComponent = ({
         }
         let duplication = false
 
+        let cellOmrValidation = validateCellOMR(true)
         const duplicate = checkStdRollDuplicate.some((item) => studentId == item)
 
         if (duplicate) {
@@ -245,6 +246,9 @@ const ScannedDetailsComponent = ({
         }
         if (omrMark) {
             showErrorMessage(Strings.omr_mark_should_be)
+        }
+        else if (cellOmrValidation[0]) {
+            showErrorMessage(`omr value should be 0 to ${cellOmrValidation[1] + 1}`)
         }
         else if (duplication) {
             Alert.alert("Student ID Shouldn't be duplicated")
@@ -293,6 +297,7 @@ const ScannedDetailsComponent = ({
                 }
                 setToggleCheckBox(false)
             } else {
+                let chkSkip = 0
                 ocrLocalResponse.layout.cells.forEach(element => {
 
                     if (element.cellId == stdRollArray[currentIndex].cellId) {
@@ -303,12 +308,20 @@ const ScannedDetailsComponent = ({
                                 el.RollNo = studentId
                                 el.isNotAbleToSave = toggleCheckBox
                             }
+                            if (el.isNotAbleToSave) {
+                                chkSkip = chkSkip + 1
+                            }
                         });
 
                     }
                 });
-                dispatch(OcrLocalResponseAction(JSON.parse(JSON.stringify(ocrLocalResponse))))
-                saveMultipleStudentDataSheet()
+                if (chkSkip == structureList.length) {
+                    showErrorMessage(Strings.please_select_at_least_one_student)
+                }else{
+                    dispatch(OcrLocalResponseAction(JSON.parse(JSON.stringify(ocrLocalResponse))))
+                    saveMultipleStudentDataSheet()
+
+                }
             }
         }
     }
@@ -415,7 +428,7 @@ const ScannedDetailsComponent = ({
                                 e.studentsMarkInfo.forEach((element, i) => {
 
                                     let findStudent = !isMultipleStudent && e.studentsMarkInfo.filter(o => {
-                                        if (i < structureList.length) {
+                                        if (i < saveObj.studentsMarkInfo.length > 0) {
                                             if (o.studentId == studentId) {
                                                 return true;
                                             }
@@ -429,23 +442,25 @@ const ScannedDetailsComponent = ({
                                     else if (isMultipleStudent) {
 
 
-                                        let findMultipleStudent = structureList.filter((item) => {
-                                            if (i < structureList.length) {
-                                                if (item.RollNo == element.studentId) {
-                                                    return true
-                                                }
+                                        let findMultipleStudent = saveObj.studentsMarkInfo.length > 0 ? saveObj.studentsMarkInfo.filter((item) => {
+                                            if (item.studentId == element.studentId) {
+                                                return true
                                             }
                                         })
+                                            :
+                                            []
 
+                                        if (i < saveObj.studentsMarkInfo.length) {
 
-                                        if (findMultipleStudent.length > 0 && saveObj.studentsMarkInfo.length > 0) {
-                                            getDataFromLocal[index].studentsMarkInfo[i] = saveObj.studentsMarkInfo[i]
+                                            if (findMultipleStudent.length > 0 && saveObj.studentsMarkInfo.length > 0) {
+                                                getDataFromLocal[index].studentsMarkInfo[i] = findMultipleStudent[0]
 
-                                        } else if (saveObj.studentsMarkInfo.length > 0 && i < structureList.length && i < saveObj.studentsMarkInfo.length) {
-                                            getDataFromLocal[index].studentsMarkInfo.push(saveObj.studentsMarkInfo[i])
+                                            } else if (saveObj.studentsMarkInfo.length > 0 && i < structureList.length && i < saveObj.studentsMarkInfo.length) {
+                                                getDataFromLocal[index].studentsMarkInfo.push(saveObj.studentsMarkInfo[i])
+                                            }
                                         }
                                     }
-                                    else if(saveObj.studentsMarkInfo.length > 0 && i <= 0){
+                                    else if (saveObj.studentsMarkInfo.length > 0 && i <= 0) {
                                         getDataFromLocal[index].studentsMarkInfo.push(saveObj.studentsMarkInfo[0])
                                     }
 
@@ -509,7 +524,7 @@ const ScannedDetailsComponent = ({
 
     const lengthAccordingSheet = (element) => {
         if (isMultipleStudent) {
-            return 1
+            return 2
         } else if (element.format.name === neglectData[2] || element.format.name === neglectData[3]) {
             return 4
         } else {
@@ -608,9 +623,39 @@ const ScannedDetailsComponent = ({
         Alert.alert(message)
     }
 
+    const validateCellOMR = (isMultiple) => {
+        let validationCellOmr = false
+        let totalRois = 0
+        newArrayValue.forEach((element, index) => {
+            element.rois.forEach((data) => {
+                if (data.extractionMethod == CELL_OMR) {
+                    totalRois = isMultiple ? element.rois.length : element.rois.length - 1
+                    if (totalRois < element.consolidatedPrediction) {
+                        validationCellOmr = true
+                    }
+                }
+            })
+        });
+        return [validationCellOmr, totalRois]
+    }
+
+
     const onSubmitClick = async () => {
-        if (disable) {
+        let validCell = false
+        for (let i = 0; i < newArrayValue.length; i++) {
+            if (newArrayValue[i].consolidatedPrediction === '') {
+                validCell = true
+            }
+        }
+
+        let cellOmrValidation = validateCellOMR(false)
+
+
+        if (disable || validCell) {
             showErrorMessage(Strings.please_correct_marks_data)
+        }
+        else if (cellOmrValidation[0]) {
+            showErrorMessage(`omr value should be 0 to ${cellOmrValidation[1]}`)
         }
         else if (!studentValid && !toggleCheckBox) {
             showErrorMessage(Strings.please_correct_student_id)
@@ -746,6 +791,9 @@ const ScannedDetailsComponent = ({
                                                 <Text style={styles.nameTextStyle}>{Strings.Exam} : {filteredData.subject} {filteredData.examDate} ({filteredData.examTestID})</Text>
 
                                                 <Text style={styles.nameTextStyle}>{Strings.page_no + ': ' + (currentIndex + 1)}</Text>
+                                               {
+                                                   isMultipleStudent
+                                                   &&
                                                 <View style={styles.row}>
                                                     <Text style={styles.nameTextStyle}>{Strings.skip}</Text>
                                                     <CheckBox
@@ -761,6 +809,7 @@ const ScannedDetailsComponent = ({
                                                         }}
                                                     />
                                                 </View>
+}
                                             </View>
                                         </View>
                                     </View>
