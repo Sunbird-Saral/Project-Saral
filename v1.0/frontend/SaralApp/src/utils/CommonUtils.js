@@ -45,4 +45,6 @@ export const student_ID = ["ROLLNUMBER", "STUDENTID","ROLLID"]
 
 export const multipleStudent = ["ROLLNUMBERID"]
 
+export const CELL_OMR = "CELL_OMR"
+
 export const studentLimitSaveInLocal = 50
