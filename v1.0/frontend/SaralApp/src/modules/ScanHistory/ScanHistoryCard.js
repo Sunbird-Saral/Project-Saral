@@ -4,7 +4,7 @@ import { connect, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
 import AppTheme from '../../utils/AppTheme';
-import { getLoginCred, getScannedDataFromLocal, setScannedDataIntoLocal } from '../../utils/StorageUtils';
+import { getLoginCred, getScanData, getScannedDataFromLocal, setScannedDataIntoLocal } from '../../utils/StorageUtils';
 import Strings from '../../utils/Strings';
 
 //api
@@ -33,12 +33,21 @@ const ScanHistoryCard = ({
     },[])
 
     const getSaveCount = ()=>{
-        let data = scanedData.length > 0 ? scanedData.filter((o,index)=>{
+        let data =
+         scanedData
+        ? 
+        scanedData.response
+        ?
+         scanedData.response.data.filter((o,index)=>{
             if (o.studentAvailability && o.marksInfo.length > 0) {
                 return true
             }
         })
-        :[]
+        :
+        []
+        :
+        []
+
         return data.length;
     }
 
@@ -243,7 +252,7 @@ const ScanHistoryCard = ({
                                 <Text>{Strings.save_status}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle, { borderBottomWidth: 1 }]}>
-                                <Text>{scanedData ? getSaveCount() : 0}</Text>
+                                <Text>{scanedData.response ? getSaveCount() : 0}</Text>
                             </View>
                     </View>
                 </View>
@@ -308,9 +317,9 @@ const ScanHistoryCard = ({
 const mapStateToProps = (state) => {
     return {
         filteredData: state.filteredData,
-        scanedData: state.scanedData.response.data,
+        scanedData: state.scanedData,
         loginData: state.loginData,
-        studentsAndExamData: state.studentsAndExamData,
+        studentsAndExamData : state.studentsAndExamData
     }
 }
 
