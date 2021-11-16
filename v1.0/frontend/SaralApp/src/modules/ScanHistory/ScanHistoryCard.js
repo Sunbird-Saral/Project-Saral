@@ -4,7 +4,7 @@ import { connect, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
 import AppTheme from '../../utils/AppTheme';
-import { getLoginCred, getScannedDataFromLocal, setScannedDataIntoLocal } from '../../utils/StorageUtils';
+import { getLoginCred, getScanData, getScannedDataFromLocal, setScannedDataIntoLocal } from '../../utils/StorageUtils';
 import Strings from '../../utils/Strings';
 
 //api
@@ -38,10 +38,6 @@ const ScanHistoryCard = ({
         ? 
         scanedData.response
         ?
-        scanedData.response.length > 0 
-        ?
-        scanedData.response.length > 0 
-        ?
          scanedData.response.data.filter((o,index)=>{
             if (o.studentAvailability && o.marksInfo.length > 0) {
                 return true
@@ -51,9 +47,6 @@ const ScanHistoryCard = ({
         []
         :
         []
-        :
-        []
-        :[]
 
         return data.length;
     }
@@ -325,7 +318,8 @@ const mapStateToProps = (state) => {
     return {
         filteredData: state.filteredData,
         scanedData: state.scanedData,
-        loginData: state.loginData
+        loginData: state.loginData,
+        studentsAndExamData : state.studentsAndExamData
     }
 }
 
