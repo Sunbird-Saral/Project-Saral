@@ -97,15 +97,17 @@ const ScannedDetailsComponent = ({
             setStdErr("Student is Absent")
             setStudentValid(false)
         }
-        else if (a.length > 0) {
+        else if (a.length > 0 && !toggleCheckBox) {
             setStudentValid(true)
             setStdErr('')
             setStudentDATA(a)
         }
-        else {
+        else if (!toggleCheckBox) {
             setStdErr(Strings.please_correct_student_id)
             setStudentDATA([])
             setStudentValid(false)
+        } else {
+            setStudentDATA([])
         }
 
     }
@@ -261,6 +263,7 @@ const ScannedDetailsComponent = ({
         }
         else if (!studentValid && !toggleCheckBox) {
             showErrorMessage(Strings.please_correct_student_id)
+            setStdErr(Strings.please_correct_student_id)
         }
         else {
             if (currentIndex + 1 <= stdRollArray.length - 1) {
@@ -278,7 +281,7 @@ const ScannedDetailsComponent = ({
                         structureList.forEach((el, index) => {
                             if (currentIndex == index) {
                                 el.RollNo = studentId,
-                                    el.isNotAbleToSave = toggle ? toggle : toggleCheckBox
+                                    el.isNotAbleToSave = toggleCheckBox ? toggleCheckBox : false
                             }
                         });
 
@@ -295,7 +298,6 @@ const ScannedDetailsComponent = ({
                 if (currentIndex + 1 == stdRollArray.length - 1) {
                     setNextBtn(Strings.submit_text)
                 }
-                setToggleCheckBox(false)
             } else {
                 let chkSkip = 0
                 ocrLocalResponse.layout.cells.forEach(element => {
@@ -387,8 +389,18 @@ const ScannedDetailsComponent = ({
             "subject": filteredData.subject,
             "studentsMarkInfo": stdMarkInfo
         }
-
         saveAndFetchFromLocalStorag(saveObj)
+    }
+
+
+    function updateInsertStudentData(array, element, getDataFromLocal, index, i, saveObj, k) { // (1)
+        const result = array[0].studentsMarkInfo.findIndex(_element => _element.studentId === element.studentId);
+        if (result > -1) {
+            getDataFromLocal[index].studentsMarkInfo[result] = element; // (2)
+        }
+        else {
+            getDataFromLocal[index].studentsMarkInfo.push(saveObj.studentsMarkInfo[k])
+        }
     }
 
 
@@ -413,8 +425,16 @@ const ScannedDetailsComponent = ({
                 });
 
                 let totalLenOfStudentsMarkInfo = len + saveObj.studentsMarkInfo.length;
+                
+                let result = -1
+                if (saveObj.studentsMarkInfo.length > 0 && isMultipleStudent) {
+                    saveObj.studentsMarkInfo.forEach((value) => {
+                        result = filterData[0].studentsMarkInfo.findIndex(_element => _element.studentId === value.studentId);
+                    })
+                }
 
-                if (totalLenOfStudentsMarkInfo <= studentLimitSaveInLocal) {
+
+                if (totalLenOfStudentsMarkInfo <= studentLimitSaveInLocal || result > -1) {
                     if (filterData) {
 
                         getDataFromLocal.forEach((e, index) => {
@@ -428,7 +448,7 @@ const ScannedDetailsComponent = ({
                                 e.studentsMarkInfo.forEach((element, i) => {
 
                                     let findStudent = !isMultipleStudent && e.studentsMarkInfo.filter(o => {
-                                        if (i < saveObj.studentsMarkInfo.length > 0) {
+                                        if (i < saveObj.studentsMarkInfo.length) {
                                             if (o.studentId == studentId) {
                                                 return true;
                                             }
@@ -441,23 +461,10 @@ const ScannedDetailsComponent = ({
                                     }
                                     else if (isMultipleStudent) {
 
-
-                                        let findMultipleStudent = saveObj.studentsMarkInfo.length > 0 ? saveObj.studentsMarkInfo.filter((item) => {
-                                            if (item.studentId == element.studentId) {
-                                                return true
-                                            }
-                                        })
-                                            :
-                                            []
-
-                                        if (i < saveObj.studentsMarkInfo.length) {
-
-                                            if (findMultipleStudent.length > 0 && saveObj.studentsMarkInfo.length > 0) {
-                                                getDataFromLocal[index].studentsMarkInfo[i] = findMultipleStudent[0]
-
-                                            } else if (saveObj.studentsMarkInfo.length > 0 && i < structureList.length && i < saveObj.studentsMarkInfo.length) {
-                                                getDataFromLocal[index].studentsMarkInfo.push(saveObj.studentsMarkInfo[i])
-                                            }
+                                        if (saveObj.studentsMarkInfo.length > 0 && i < saveObj.studentsMarkInfo.length) {
+                                            saveObj.studentsMarkInfo.forEach((element, k) => {
+                                                updateInsertStudentData(filterData, element, getDataFromLocal, index, i, saveObj, k);
+                                            })
                                         }
                                     }
                                     else if (saveObj.studentsMarkInfo.length > 0 && i <= 0) {
@@ -789,8 +796,11 @@ const ScannedDetailsComponent = ({
                                                     keyboardType={'numeric'}
                                                 />
                                                 <Text style={styles.nameTextStyle}>{Strings.Exam} : {filteredData.subject} {filteredData.examDate} ({filteredData.examTestID})</Text>
-
-                                                <Text style={styles.nameTextStyle}>{Strings.page_no + ': ' + (currentIndex + 1)}</Text>
+                                                {
+                                                    isMultipleStudent
+                                                    &&
+                                                    <Text style={styles.nameTextStyle}>{Strings.page_no + ': ' + (currentIndex + 1)}</Text>
+                                                }
                                                {
                                                    isMultipleStudent
                                                    &&
