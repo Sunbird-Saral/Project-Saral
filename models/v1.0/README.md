@@ -1,4 +1,4 @@
-# Handwritten digit recognition with MNIST and Keras
+# Handwritten digit recognition with MNIST and Keras - Playbook
 
 This repository is for handwritten digit recognition which is integrated to Saral project. Saral is an OCR-plus application that is capable of doing OCR and can also understand the structure of the physical input.
 ##### total no. of classes- 11(0-10)
