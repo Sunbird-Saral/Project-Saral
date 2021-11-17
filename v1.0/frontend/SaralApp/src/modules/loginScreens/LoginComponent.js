@@ -32,15 +32,16 @@ class LoginComponent extends Component {
     }
 
     componentDidMount() {
-        setTimeout(() => { this.setState({ Loading: false }) }, 5000)
+        this.timerState = setTimeout(() => { this.setState({ Loading: false }) }, 5000)
         this.callDefaultbrandingData()
         this.props.navigation.addListener('willFocus', async payload => {
             AppState.addEventListener('change', this.handleAppStateChange);
             this.componentMountCall()
-
         })
     }
-
+    componentWillUnmount(){
+        clearTimeout(this.timerState)    
+    }
 
     handleAppStateChange = (nextAppState) => {
         if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
@@ -289,16 +290,10 @@ class LoginComponent extends Component {
                     keyboardShouldPersistTaps={'handled'}
                 >
 
-                    {
-                        Loading ?
-                            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                <Text style={{ fontSize: 12, fontWeight: 'bold', fontFamily: 'sans-serif-condensed' }}>Loading Branding ...</Text>
-                            </View> :
-                            <View style={styles.container1}>
-                                <Image style={{ width: 100, height: 100 }} source={{ uri: defaultBrandingdata && 'data:image/png;base64,' + this.props.defaultBrandingdata.logoImage }} />
-                            </View>
+                    <View style={styles.container1}>
+                        <Image style={{ width: 100, height: 100 }} source={{ uri: defaultBrandingdata && 'data:image/png;base64,' + this.props.defaultBrandingdata.logoImage }} />
+                    </View>
 
-                    }
 
                     <View style={styles.container2}>
                         <View style={styles.loginContainer}>

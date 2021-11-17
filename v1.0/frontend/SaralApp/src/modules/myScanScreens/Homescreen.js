@@ -19,7 +19,11 @@ class HomeComponent extends Component {
         }
     }
     componentDidMount() {
-        setTimeout(() => { this.setState({ isLoading: false }) }, 5000)
+        setTimeout(
+            () => this.setState(prevState => ({ test: !prevState.isLoading })),
+            5000,
+        );
+        
         this.callMultiBrandingActiondata()
     }
 
@@ -31,10 +35,10 @@ class HomeComponent extends Component {
 
     }
 
-
     render() {
         if(this.props.multiBrandingData === undefined || this.props.multiBrandingData === null){
-            <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
+           
+            return <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
             {
 
                 this.state.isLoading ?
@@ -47,26 +51,18 @@ class HomeComponent extends Component {
                             themeColor={AppTheme.BLUE}
                             onPress={() => this.props.navigation.navigate('selectDetails')}
                         />
-
             }
         </View>
 
         }
         return (
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
-                {
-
-                    this.state.isLoading ?
-                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                            <Text style={{ fontSize: 12, fontWeight: 'bold', fontFamily: 'sans-serif-condensed' }}>Loading Branding ...</Text>
-                        </View> :
                             <Brands
                                 Image={this.props.multiBrandingData && 'data:image/png;base64,' + this.props.multiBrandingData.logoImage}
                                 appName={this.props.multiBrandingData && this.props.multiBrandingData.appName}
                                 themeColor={this.props.multiBrandingData && this.props.multiBrandingData.themeColor1}
                                 onPress={() => this.props.navigation.navigate('selectDetails')}
-                            /> }
-
+                            /> 
             </View>
         );
     }
