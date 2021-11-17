@@ -339,7 +339,7 @@ paths:
       tags:
       - Frontend API
       - Marks
-      summary: "Get Scan Marks"
+      summary: "This API accepts Basic Auth which expects username/password instead of bearer token .This is specific to this particular API and the reason is, apart from the frontend Saral App this API (/getSavedScan) may be used by other Apps or jobs to fetch saved scan details to process or push to CCube database."
       parameters:
         - in : body
           name: body
@@ -666,6 +666,7 @@ definitions:
           storeTrainingData:
             type: boolean
             default: false
+            description: "If this is set to true frontend application will return base 64 encoded images . In savesMarksAPI and getSavedScanAPI these APIs will get data and value of encoded images will be stored in these fields studentIdTrainingData and trainningData, studentIdTrainingData field will contain base 64 encoded images of rollnumber and trainningData field will contain base 64 encoded images for marks. "
             example: true
           createdAt: 
             type: string
@@ -713,6 +714,7 @@ definitions:
             example: "4"
           storeTrainingData:
             type: boolean
+            description: "If this is set to true frontend application will return base 64 encoded images . In savesMarksAPI and getSavedScanAPI these APIs will get data and value of encoded images will be stored in these fields studentIdTrainingData and trainningData, studentIdTrainingData field will contain base 64 encoded images of rollnumber and trainningData field will contain base 64 encoded images for marks. "
             default: false
           createdAt: 
             type: string
@@ -750,6 +752,10 @@ definitions:
         
   LoginSchoolBody:
     type: object
+    required:
+       - schoolId
+       - password
+       - classes
     properties:
       schoolId:
         type: string
@@ -764,6 +770,17 @@ definitions:
     
   CreateSchoolBody:
     type: object
+    required:
+      - name
+      - schoolId
+      - password
+      - state
+      - district
+      - block
+      - hmName
+      - hmMobileNo
+      - noOfStudents
+      - udiseCode
     properties:
       name:
         type: string
@@ -798,6 +815,7 @@ definitions:
       storeTrainingData:
         type: boolean
         default: false
+        description: "If this is set to true frontend application will return base 64 encoded images . In savesMarksAPI and getSavedScanAPI these APIs will get data and value of encoded images will be stored in these fields studentIdTrainingData and trainningData, studentIdTrainingData field will contain base 64 encoded images of rollnumber and trainningData field will contain base 64 encoded images for marks. "
         
   CreateSchoolResponse:
     type: object
@@ -876,9 +894,12 @@ definitions:
       storeTrainingData:  
         type: boolean
         default: false
+        description: "If this is set to true frontend application will return base 64 encoded images . In savesMarksAPI and getSavedScanAPI these APIs will get data and value of encoded images will be stored in these fields studentIdTrainingData and trainningData, studentIdTrainingData field will contain base 64 encoded images of rollnumber and trainningData field will contain base 64 encoded images for marks. "
         
   UpdateStudentBody:
     type: object
+    required:
+      - name
     properties:
       name: 
         type: string
@@ -929,6 +950,8 @@ definitions:
               type: array
               items:
                 type: string
+                description: "It contains base 64 encoded images of rollnumber "
+                example: "/9j/4AAQSkZJRgABAQAAAQABAAD/4gIoSUNDX1BST0ZJTEUAAQEAAAIYAAAAAAIQAABtbnRyUkdC\nIFhZWiAAAAAAAAAAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAA\nAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlk\nZXNjAAAA8AAAAHRyWFlaAAABZAAAABRnWFlaAAABeAAAABRiWFlaAAABjAAAABRyVFJDAAABoAAA\nAChnVFJDAAABoAAAAChiVFJDAAABoAAAACh3dHB0AAAByAAAABRjcHJ0AAAB3AAAADxtbHVjAAAA\nAAAAAAEAAAAMZW5VUwAAAFgAAAAcAHMAUgBHAEIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFhZWiAA\nAAAAAABvogAAOPUAAAOQWFlaIAAAAAAAAGKZAAC3hQAAGNpYWVogAAAAAAAAJKAAAA+EAAC2z3Bh\ncmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABYWVogAAAAAAAA9tYAAQAAAADT\nLW1sdWMAAAAAAAAAAQAAAAxlblVTAAAAIAAAABwARwBvAG8AZwBsAGUAIABJAG4AYwAuACAAMgAw\nADEANv/bAEMAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEB\nAQEBAQEBAQEBAQEBAQEBAf/bAEMBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEB\nAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAf/AABEIABwAHAMBIgACEQEDEQH/xAAbAAABBAMA\nAAAAAAAAAAAAAAAGAQQFCAMHCv/EACkQAAIBAwMEAAYDAAAAAAAAAAECAwQFEQAGIRIiMUEHFFFx\ngZETobH/xAAYAQACAwAAAAAAAAAAAAAAAAAEBQABAv/EACURAQACAQMDAwUAAAAAAAAAAAECESEA\nAzESQYEEYfAyUZGh8f/aAAwDAQACEQMRAD8A6wpYaCngnnMaJHCCzuR0qiAKWY+gPyPeh+3bk2rc\nZVjp7jQzuzCMKk0bKW54JDEdWT4zn6DOj+pgWRJ6eSnQwzRmOVXIAKNgNnB4GPeR99Vi+MW3KCHa\n9Ntr4fWlTuaqutERUUEsrSUsYrKVpZZGE5VVEaSFuoYwDxzpH6XZ2t2XRu9UOQkAgUNv7L5+xprc\ng5y00mex2cD4z2utWKe30a4ZaaM9vHafB8HIxnPn8aRaa3gYenTqHB4xz9tONq2242rbtntd4mWs\nuVJRwJVTsykySpGobkYB7lJzzyR9dSsvWHYLBGADjx7/AL0PMIyQeqI0So9mgeCuDxktddVVZzzk\nKbPhzkvWs/i7vNtp0FClNDVTLdJfl5amnhaX5cYZiW6OphhVxkAHkAHjgDte/bBtakjqKG0Xi8XO\nqQGarFOWlywwQrTyqVAz6I8kD1qwiTyBXTtKZz0kZGe30TqHqpmdACqDkYwuMZZRxz9P1ouPrdra\n2zblsspFjMauq5z31CDFVld+xfA/jP8AaNYbJdDfLTS3v+GqpJJgc0dSemVCqqxBUOygdxAIJ5B0\nSRyGRFfHJAz1HnOBnwD/AL+tRtOoiaPpzyASDyMkfv1p/kjOCRkk8H2TnQkk3JLGPSOaW6GseNVK\nCkcv0iX2Hg7cfHX/2Q==\n"
             studentAvailability:
               type: boolean
               example: true
@@ -967,6 +990,11 @@ definitions:
           
   SaveMarksBody:
     type: object
+    required:
+      - classId
+      - examDate
+      - subject
+      - studentId
     properties:
       classId:
         type: string
@@ -1000,6 +1028,8 @@ definitions:
           type: array
           items:
             type: string
+            description: "It contains base 64 encoded images of rollnumber "
+            example: "/9j/4AAQSkZJRgABAQAAAQABAAD/4gIoSUNDX1BST0ZJTEUAAQEAAAIYAAAAAAIQAABtbnRyUkdC\nIFhZWiAAAAAAAAAAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAA\nAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlk\nZXNjAAAA8AAAAHRyWFlaAAABZAAAABRnWFlaAAABeAAAABRiWFlaAAABjAAAABRyVFJDAAABoAAA\nAChnVFJDAAABoAAAAChiVFJDAAABoAAAACh3dHB0AAAByAAAABRjcHJ0AAAB3AAAADxtbHVjAAAA\nAAAAAAEAAAAMZW5VUwAAAFgAAAAcAHMAUgBHAEIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFhZWiAA\nAAAAAABvogAAOPUAAAOQWFlaIAAAAAAAAGKZAAC3hQAAGNpYWVogAAAAAAAAJKAAAA+EAAC2z3Bh\ncmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABYWVogAAAAAAAA9tYAAQAAAADT\nLW1sdWMAAAAAAAAAAQAAAAxlblVTAAAAIAAAABwARwBvAG8AZwBsAGUAIABJAG4AYwAuACAAMgAw\nADEANv/bAEMAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEB\nAQEBAQEBAQEBAQEBAQEBAf/bAEMBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEB\nAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAf/AABEIABwAHAMBIgACEQEDEQH/xAAbAAABBAMA\nAAAAAAAAAAAAAAAGAQQFCAMHCv/EACkQAAIBAwMEAAYDAAAAAAAAAAECAwQFEQAGIRIiMUEHFFFx\ngZETobH/xAAYAQACAwAAAAAAAAAAAAAAAAAEBQABAv/EACURAQACAQMDAwUAAAAAAAAAAAECESEA\nAzESQYEEYfAyUZGh8f/aAAwDAQACEQMRAD8A6wpYaCngnnMaJHCCzuR0qiAKWY+gPyPeh+3bk2rc\nZVjp7jQzuzCMKk0bKW54JDEdWT4zn6DOj+pgWRJ6eSnQwzRmOVXIAKNgNnB4GPeR99Vi+MW3KCHa\n9Ntr4fWlTuaqutERUUEsrSUsYrKVpZZGE5VVEaSFuoYwDxzpH6XZ2t2XRu9UOQkAgUNv7L5+xprc\ng5y00mex2cD4z2utWKe30a4ZaaM9vHafB8HIxnPn8aRaa3gYenTqHB4xz9tONq2242rbtntd4mWs\nuVJRwJVTsykySpGobkYB7lJzzyR9dSsvWHYLBGADjx7/AL0PMIyQeqI0So9mgeCuDxktddVVZzzk\nKbPhzkvWs/i7vNtp0FClNDVTLdJfl5amnhaX5cYZiW6OphhVxkAHkAHjgDte/bBtakjqKG0Xi8XO\nqQGarFOWlywwQrTyqVAz6I8kD1qwiTyBXTtKZz0kZGe30TqHqpmdACqDkYwuMZZRxz9P1ouPrdra\n2zblsspFjMauq5z31CDFVld+xfA/jP8AaNYbJdDfLTS3v+GqpJJgc0dSemVCqqxBUOygdxAIJ5B0\nSRyGRFfHJAz1HnOBnwD/AL+tRtOoiaPpzyASDyMkfv1p/kjOCRkk8H2TnQkk3JLGPSOaW6GseNVK\nCkcv0iX2Hg7cfHX/2Q==\n"
         studentAvailability:
           type: boolean
           description: "Student Availability Flag"
@@ -1032,9 +1062,14 @@ definitions:
           type: array
           items:
             type: string
+            description: "It contains base 64 encoded images for marks"
+            example: "/9j/4AAQSkZJRgABAQAAAQABAAD/4gIoSUNDX1BST0ZJTEUAAQEAAAIYAAAAAAIQAABtbnRyUkdC\nIFhZWiAAAAAAAAAAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAA\nAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlk\nZXNjAAAA8AAAAHRyWFlaAAABZAAAABRnWFlaAAABeAAAABRiWFlaAAABjAAAABRyVFJDAAABoAAA\nAChnVFJDAAABoAAAAChiVFJDAAABoAAAACh3dHB0AAAByAAAABRjcHJ0AAAB3AAAADxtbHVjAAAA\nAAAAAAEAAAAMZW5VUwAAAFgAAAAcAHMAUgBHAEIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFhZWiAA\nAAAAAABvogAAOPUAAAOQWFlaIAAAAAAAAGKZAAC3hQAAGNpYWVogAAAAAAAAJKAAAA+EAAC2z3Bh\ncmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABYWVogAAAAAAAA9tYAAQAAAADT\nLW1sdWMAAAAAAAAAAQAAAAxlblVTAAAAIAAAABwARwBvAG8AZwBsAGUAIABJAG4AYwAuACAAMgAw\nADEANv/bAEMAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEB\nAQEBAQEBAQEBAQEBAQEBAf/bAEMBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEB\nAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAf/AABEIABwAHAMBIgACEQEDEQH/xAAaAAACAgMA\nAAAAAAAAAAAAAAAFBgQHAQIK/8QALBAAAgEDAwIFAwUBAAAAAAAAAQIRAwQFACExBhIHExQiUTJh\ngSNBYnGRsf/EABcBAQEBAQAAAAAAAAAAAAAAAAMFAgT/xAAnEQACAQMDAwMFAAAAAAAAAAABEQIh\nQVEAEjEDIoEEE5EyUmGx8f/aAAwDAQACEQMRAD8A7SxbWQooGsUVCY7WA7Y54gfnU23xWId09RjL\ndqTICCaasoE8qRMEfM8/GhXWF16Lorq7IDuovY9M5u8ouDPbUt8dc1VcGVIKlZHEGN9IPgNd5G98\nKelLvI3T3l1kFu7xqtZyzslW4YIJMwqqsD8j76iT6Z9n3pSkBu27U6qEiHREPkAft0Q+aMNol8Mk\nu2M35WrTucRiWEJaKlBSCEVQFJBkyOP2+J+x1u+J6ebsIsqS+wAghZJkyTInfRkQaYpNT7W7RB2O\n3PMDkf5zrBsLOoFapXZX7YKxxBPG421yheMnbZUrev8AdII9tvqqTHigpUeRfOkzxBsbi+6F63x2\nNpNeXmV6Yy2Ms7ekfdVuL6zq26BdiZJqEDYneNLHhN09kekvDDoPD5e2e0yOPw/k3ts/10a/qrkh\nGJAk+V5Z3AO+rUy1ZratbrSVFDqgYdu3u5gSN/g6D5i4q0aAZDBUFhO4BaCdpj4j+hpet6hRHp9o\nMQQWeWRHCpQfA/OshwBmZE9oQsFUGxzfRhGSDUn3AyJPAEcjiBtsCd9Ra13Q7/1atBGgbFoMbwYg\n/wDdJtbMXqNQVWpxUSmW9h3LCSfq20dNc1UpO9OkzNSUklDJ3b+WiBMSCUe0JhqoVGMZ8F6OfVkn\n91Vb4821/9k=\n"
           
   CreateStudentBody:
     type: object
+    required:
+       - name
+       - studentId
     properties:
       name:
         type: string
@@ -1252,6 +1287,11 @@ definitions:
 
   CreateExamBody:
     type: array
+    required:
+      - subject
+      - classId
+      - examDate
+      - type
     items:
       type: object
       properties:
@@ -1393,6 +1433,11 @@ definitions:
   
   CreateROIBody:
     type: object
+    required:
+      - subject
+      - classId
+      - type
+      - roi
     properties:
       subject:
         type: string
@@ -1427,6 +1472,8 @@ definitions:
         
   UpdateRoiBody:
     type: object
+    required:
+      - roi
     properties:
       roi:
         $ref: "#/definitions/rois"
@@ -1442,6 +1489,8 @@ definitions:
         
   addClassesBody:
     type: array
+    required:
+      - classId
     items:
       type: object
       properties: 
@@ -1480,6 +1529,8 @@ definitions:
           
   updateClassBody:
     type: object
+    required:
+       - classId
     properties:
       classId:
         type: string
@@ -1515,6 +1566,9 @@ definitions:
         
   CreateBrandBody:
      type: object
+     required:
+        - appName
+        - logoImage
      properties:
       appName:
         type: string
