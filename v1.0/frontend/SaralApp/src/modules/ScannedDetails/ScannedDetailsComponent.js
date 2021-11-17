@@ -475,7 +475,6 @@ const ScannedDetailsComponent = ({
                             }
 
                         });
-                        console.log("getDataFromLocal", getDataFromLocal[0].studentsMarkInfo);
                         setScannedDataIntoLocal(getDataFromLocal)
                         goToMyScanScreen()
                     }
