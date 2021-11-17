@@ -339,7 +339,7 @@ paths:
       tags:
       - Frontend API
       - Marks
-      summary: "Get Scan Marks"
+      summary: "This API accepts Basic Auth which expects username/password instead of bearer token .This is specific to this particular API and the reason is, apart from the frontend Saral App this API (/getSavedScan) may be used by other Apps or jobs to fetch saved scan details to process or push to CCube database."
       parameters:
         - in : body
           name: body
@@ -1433,6 +1433,11 @@ definitions:
   
   CreateROIBody:
     type: object
+    required:
+      - subject
+      - classId
+      - type
+      - roi
     properties:
       subject:
         type: string
@@ -1467,6 +1472,8 @@ definitions:
         
   UpdateRoiBody:
     type: object
+    required:
+      - roi
     properties:
       roi:
         $ref: "#/definitions/rois"
