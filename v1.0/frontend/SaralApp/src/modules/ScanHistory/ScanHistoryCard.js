@@ -31,7 +31,6 @@ const ScanHistoryCard = ({
     useEffect(()=>{
        getSaveCount()
     },[])
-
     const getSaveCount = ()=>{
         let data =
          scanedData
@@ -123,7 +122,7 @@ const ScanHistoryCard = ({
             "fromDate": filteredData.response.examDate,
             "page": 0,
             "schoolId": loginCred.schoolId,
-            "downloadRes": true
+            "downloadRes": false
         }
         let apiObj = new scanStatusDataAction(dataPayload);
         FetchSavedScannedData(apiObj, loginCred.schoolId, loginCred.password, filteredDatalen, localScanData)

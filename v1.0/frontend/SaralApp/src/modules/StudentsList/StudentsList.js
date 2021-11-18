@@ -96,7 +96,7 @@ const StudentsList = ({
             "fromDate": filteredData.examDate,
             "schoolId": loginCred.schoolId,
             "page": 0,
-            "downloadRes": true
+            "downloadRes": false
         }
         let apiObj = new scanStatusDataAction(dataPayload);
         FetchSavedScannedData(apiObj, loginCred.schoolId, loginCred.password)
