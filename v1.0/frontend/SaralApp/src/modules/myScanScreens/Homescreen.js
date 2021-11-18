@@ -20,7 +20,7 @@ class HomeComponent extends Component {
     }
     componentDidMount() {
         setTimeout(
-            () => this.setState(prevState => ({ test: !prevState.isLoading })),
+            () => this.setState(prevState => ({ isLoading: !prevState.isLoading })),
             5000,
         );
         

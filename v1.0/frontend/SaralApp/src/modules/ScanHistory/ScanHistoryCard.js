@@ -36,8 +36,7 @@ const ScanHistoryCard = ({
         let data =
          scanedData
         ? 
-        scanedData.response
-        ?
+        scanedData.response != undefined || scanedData.response !=null ?
          scanedData.response.data.filter((o,index)=>{
             if (o.studentAvailability && o.marksInfo.length > 0) {
                 return true
