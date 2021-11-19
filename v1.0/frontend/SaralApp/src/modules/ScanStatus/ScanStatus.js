@@ -85,13 +85,11 @@ const ScanStatus = ({
     }
 
     const getPresentStudentList = ()=>{
-        let data = scanedData !=null ? scanedData.data.filter((o,index)=>{
+        let data =  scanedData.data.filter((o,index)=>{
             if (o.studentAvailability && o.marksInfo.length > 0) {
                 return true
             }
         })
-        : 
-        []
         setPresentStudentList(data)
         
     }
