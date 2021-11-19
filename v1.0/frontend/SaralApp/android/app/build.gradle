@@ -147,9 +147,13 @@ android {
             storePassword MYAPP_RELEASE_STORE_PASSWORD
             keyAlias MYAPP_RELEASE_KEY_ALIAS
             keyPassword MYAPP_RELEASE_KEY_PASSWORD
+
+                 // Optional, specify signing versions used
+                // v1SigningEnabled true
+                // v2SigningEnabled true
         }
     }
-        debug {
+        debug { 
             storeFile file('debug.keystore')
             storePassword 'android'
             keyAlias 'androiddebugkey'
@@ -165,6 +169,11 @@ android {
             // see https://reactnative.dev/docs/signed-apk-android.
              signingConfig signingConfigs.release
             signingConfig signingConfigs.debug
+            
+            // shrinkResources enableProguardInReleaseBuilds
+            // zipAlignEnabled enableProguardInReleaseBuilds
+            // useProguard enableProguardInReleaseBuilds
+
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
