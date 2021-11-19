@@ -295,7 +295,7 @@ class MyScanComponent extends Component {
                                 />
                             </TouchableOpacity>
                         </TouchableOpacity>
-                        <Text style={[styles.tabLabelStyle, { paddingTop: '60%' }]}>
+                        <Text style={[styles.tabLabelStyle, { paddingTop: '10%' }]}>
                             {Strings.scan_text}
                         </Text>
 

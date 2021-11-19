@@ -31,13 +31,10 @@ const ScanHistoryCard = ({
     useEffect(()=>{
        getSaveCount()
     },[])
-
     const getSaveCount = ()=>{
         let data =
-         scanedData
-        ? 
-        scanedData.response
-        ?
+        typeof(scanedData.response)==="object" ?
+        scanedData.response.data ?
          scanedData.response.data.filter((o,index)=>{
             if (o.studentAvailability && o.marksInfo.length > 0) {
                 return true
@@ -124,7 +121,7 @@ const ScanHistoryCard = ({
             "fromDate": filteredData.response.examDate,
             "page": 0,
             "schoolId": loginCred.schoolId,
-            "downloadRes": true
+            "downloadRes": false
         }
         let apiObj = new scanStatusDataAction(dataPayload);
         FetchSavedScannedData(apiObj, loginCred.schoolId, loginCred.password, filteredDatalen, localScanData)
@@ -227,7 +224,9 @@ const ScanHistoryCard = ({
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle,]}>
                                 {Examtypedata.map((item) =>
+                                <View key = {item}>
                                     <Text>{item.type}</Text>
+                                    </View>
                                 )}
                             </View>
                         </View>

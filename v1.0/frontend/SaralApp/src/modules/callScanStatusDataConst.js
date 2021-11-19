@@ -13,7 +13,7 @@ export default function  callScanStatusDataConst(filteredData) {
             "subject": filteredData.response.subject,
             "fromDate": filteredData.response.examDate,
             "page": 1,
-            "downloadRes": true
+            "downloadRes": false
         }
         let apiObj = new scanStatusDataAction(dataPayload);
 

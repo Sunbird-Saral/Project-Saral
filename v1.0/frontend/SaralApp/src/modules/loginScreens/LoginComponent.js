@@ -17,7 +17,8 @@ class LoginComponent extends Component {
         super(props);
 
         this.state = {
-            isLoading: true,
+            Loading: true,
+            isLoading:true,
             errUsername: '',
             errPassword: '',
             errCommon: '',
@@ -26,20 +27,21 @@ class LoginComponent extends Component {
             calledLogin: false,
             appState: AppState.currentState,
             text: '',
-            filterdata: []
+
         }
     }
 
     componentDidMount() {
-        setTimeout(() => { this.setState({ isLoading: false }) }, 1000)
+        this.timerState = setTimeout(() => { this.setState({ Loading: false }) }, 5000)
         this.callDefaultbrandingData()
         this.props.navigation.addListener('willFocus', async payload => {
             AppState.addEventListener('change', this.handleAppStateChange);
             this.componentMountCall()
-
         })
     }
-
+    componentWillUnmount(){
+        clearTimeout(this.timerState)    
+    }
 
     handleAppStateChange = (nextAppState) => {
         if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
@@ -200,8 +202,85 @@ class LoginComponent extends Component {
 
 
     render() {
-        const { password, isLoading, errUsername, errPassword, errCommon } = this.state;
+        const { password, isLoading, Loading, errUsername, errPassword, errCommon } = this.state;
         const { defaultBrandingdata } = this.props
+        if (defaultBrandingdata === undefined || defaultBrandingdata === null) {
+            return <View style={styles.container}>
+                <ScrollView
+                    contentContainerStyle={{ flexGrow: 1 }}
+                    showsVerticalScrollIndicator={false}
+                    bounces={false}
+                    keyboardShouldPersistTaps={'handled'}
+                >
+                    {Loading ?
+                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                            <Text style={{ fontSize: 12, fontWeight: 'bold', fontFamily: 'sans-serif-condensed' }}>Loading Branding ...</Text>
+                        </View> :
+
+                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                            <Image style={{ width: 100, height: 100 }} source={Assets.AppLogo} />
+                        </View>
+
+                    }
+
+                    <View style={styles.container2}>
+                        <View style={styles.loginContainer}>
+                            <Text style={[styles.header1TextStyle, { paddingTop: '5%' }]}>
+                                {Strings.login_text.toUpperCase()}
+                            </Text>
+                            <View style={{ flexDirection: 'row' }}>
+                                {errCommon != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 2, width: '100%', fontWeight: 'normal', textAlign: 'center' }]}>{errCommon}</Text>}
+                            </View>
+                            <View style={styles.fieldContainerStyle}>
+                                <View style={{ flexDirection: 'row' }}>
+                                    <Text style={[styles.labelTextStyle, { width: errUsername != '' ? '55%' : '100%' }]}>{Strings.enter_username}</Text>
+                                    {errUsername != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 1, width: '45%', textAlign: 'right', fontWeight: 'normal', }]}>{errUsername}</Text>}
+                                </View>
+                                <TextInput
+                                    ref="schoolId"
+                                    style={styles.inputStyle}
+                                    onChangeText={(text) => {
+                                        this.onLoginDetailsChange(text, 'schoolId')
+                                    }}
+                                    value={this.state.schoolId}
+                                    placeholder={Strings.schoolId_text}
+                                    placeholderTextColor={AppTheme.BLACK_OPACITY_30}
+                                    autoCapitalize={'none'}
+                                />
+
+                            </View>
+                            <View style={styles.fieldContainerStyle}>
+                                <View style={{ flexDirection: 'row' }}>
+                                    <Text style={[styles.labelTextStyle, { width: errPassword != '' ? '50%' : '100%' }]}>{Strings.enter_password}</Text>
+                                    {errPassword != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 1, width: '50%', textAlign: 'right', fontWeight: 'normal' }]}>{errPassword}</Text>}
+                                </View>
+                                <TextInput
+                                    ref="password"
+                                    style={styles.inputStyle}
+                                    onChangeText={(text) => this.onLoginDetailsChange(text, 'password')}
+                                    value={password}
+                                    placeholder={Strings.password_text}
+                                    placeholderTextColor={AppTheme.BLACK_OPACITY_30}
+                                    secureTextEntry
+                                />
+                                <View style={styles.btnContainer}>
+                                    {Loading ?
+                                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                                            <Text style={{ fontSize: 12, fontWeight: 'bold', fontFamily: 'sans-serif-condensed' }}>Loading Branding ...</Text>
+                                        </View> :
+                                        <ButtonComponent
+                                            btnText={Strings.login_text.toUpperCase()}
+                                            onPress={this.onSubmit}
+                                            themeColor1={{ backgroundColor: AppTheme.BLUE }}
+                                        />}
+                                </View>
+                            </View>
+                        </View>
+                    </View>
+                </ScrollView>
+                {isLoading && <Spinner animating={isLoading} />}
+            </View>
+        }
         return (
             <View style={styles.container}>
                 <ScrollView
@@ -211,20 +290,10 @@ class LoginComponent extends Component {
                     keyboardShouldPersistTaps={'handled'}
                 >
 
-                    {this.state.isLoading ?
-                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                            <Text style={{ fontSize: 12, fontWeight: 'bold', fontFamily: 'sans-serif-condensed' }}>Loading Branding ...</Text>
-                        </View>
-                        :
-                        defaultBrandingdata.response.data  ?
-                            <View style={styles.container1}>
-                                <Image style={{ width: 100, height: 100 }} source={{ uri: 'data:image/png;base64,' + this.props.defaultBrandingdata.response.data.logoImage }} />
-                            </View>
-                             :
-                            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                <Image style={{ width: 100, height: 100 }} source={Assets.AppLogo} />
-                            </View>
-                    }
+                    <View style={styles.container1}>
+                        <Image style={{ width: 100, height: 100 }} source={{ uri: defaultBrandingdata && 'data:image/png;base64,' + this.props.defaultBrandingdata.logoImage }} />
+                    </View>
+
 
                     <View style={styles.container2}>
                         <View style={styles.loginContainer}>
@@ -270,7 +339,7 @@ class LoginComponent extends Component {
                                     <ButtonComponent
                                         btnText={Strings.login_text.toUpperCase()}
                                         onPress={this.onSubmit}
-                                        themeColor1={{ backgroundColor: this.props.defaultBrandingdata.response.data ? this.props.defaultBrandingdata.response.data.themeColor1 : AppTheme.BLUE }}
+                                        themeColor1={{ backgroundColor: defaultBrandingdata && defaultBrandingdata.themeColor1 }}
                                     />
                                 </View>
                             </View>
@@ -357,7 +426,7 @@ const mapStateToProps = (state) => {
     return {
         apiStatus: state.apiStatus,
         loginData: state.loginData,
-        defaultBrandingdata: state.defaultBrandingdata
+        defaultBrandingdata: state.defaultBrandingdata.response.data
     }
 }
 
