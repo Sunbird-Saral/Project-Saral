@@ -9,8 +9,10 @@ tags:
 - name: "Organisations"
 - name: "Users"
 - name: "Participants"
-- name: "Events"
+- name: "Scans"
 - name: "Layouts"
+- name: "Frontend API"
+- name: "Maintenance API"
 
 securityDefinitions:
     Bearer:
@@ -29,6 +31,7 @@ paths:
     get:
       tags:
       - "Organisations"
+      - "Frontend API"
       summary: "Get Organisations"
       description: "should return list of Organisations"
       responses:
@@ -43,6 +46,7 @@ paths:
     post:
       tags:
       - "Organisations"
+      - "Maintenance API"
       summary: "Create Organisation"
       description: "Create Organisation"
       parameters:
@@ -59,10 +63,12 @@ paths:
           description: "Organisation Id already exist"
         "400":
           description: "unsuccessful operation"
+
   /organisations/{id}:
     put:
       tags:
       - "Organisations"
+      - "Maintenance API"
       summary: "Update Organisation"
       description: "Update Organisation"
       parameters:
@@ -86,6 +92,7 @@ paths:
     delete:
       tags:
       - "Organisations"
+      - "Maintenance API"
       summary: "Delete Organisation"
       description: "Delete Organisation"      
       responses:
@@ -95,21 +102,43 @@ paths:
           description: "Organisation does not exist."
         "400":
           description: "unsuccessful operation"
-  /organisations/{id}/users:
-    get:
+
+  /organisations/login:
+    post:
       tags:
-      - "Users"
-      summary: "Get Users of organisation"
-      description: "should return list of users of organisation"
+      - "Frontend API"
+      summary: "Login API"
+      description: "Login API"
+      produces:
+      - "application/json"
+      parameters:
+        - name: body
+          in: body
+          schema:
+            $ref: "#/definitions/LoginOrgReqBody"
       responses:
         "200":
           description: "successful operation"
           schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/User"
-        "400":
-          description: "unsuccessful operation"      
+            $ref: "#/definitions/Organisation"
+        "422":
+          description: "User Id or Password is not correct."      
+
+  # /organisations/{id}/users:
+  #   get:
+  #     tags:
+  #     - "Users"
+  #     summary: "Get Users of organisation"
+  #     description: "should return list of users of organisation"
+  #     responses:
+  #       "200":
+  #         description: "successful operation"
+  #         schema:
+  #           type: "array"
+  #           items:
+  #             $ref: "#/definitions/User"
+  #       "400":
+  #         description: "unsuccessful operation"
 
 definitions:
   Organisation:
@@ -127,14 +156,57 @@ definitions:
         type: string
         description: Organization Type
         example: Pharmacy
-      users:
-        type: array
-        items:
-          $ref: '#/definitions/User'
-      events:
-        type: array
-        items:
-          $ref: '#/definitions/Event'
+      state:
+        type: string
+        example: "up" 
+      district:
+        type: string
+        example: "delhi"
+      block:
+        type: string
+        example: "haldwani"
+      pointOfContact:
+        type: string
+        example: "Prateek"
+      noOfParticipants:
+        type: string
+        example: "100"
+      storeTrainingData:
+        type: boolean
+        default: false
+        description: "If this is set to true frontend application will return base 64 encoded images of predictions."
+        example: true
+      createdAt: 
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+      # users:
+      #   type: array
+      #   items:
+      #     $ref: '#/definitions/User'
+      # participants:
+      #   type: array
+      #   items:
+      #     $ref: '#/definitions/Participant'          
+      # scans:
+      #   type: array
+      #   items:
+      #     $ref: '#/definitions/Scan'
+
+  LoginOrgReqBody:
+    type: object
+    required:
+       - userId
+       - password
+    properties:
+      userId:
+        type: string
+        example: "eksteps.admin.user1"
+      password:
+        type: string
+        example: "eksteps.changeit"
 
   User:
     type: object
@@ -158,24 +230,25 @@ definitions:
         type: string
         format: date-time
 
-  Event:
+  Scan:
     type: object
     properties:
       id:
         type: number
-        description: Event ID
+        description: Scan ID
         example: 1000
       type:
         type: string
-        description: Event Type
+        description: Scan Type
         example: staff_attendance
       name:
         type: string
-        description: Event Name
-        example : Staff Attendance for EKSteps
+        description: Scan Name
+        example : Staff Attendance for EKSteps Quorum Office
       date:
         type: string
-        format: date-time
+        format: date
+        example: "2017-01-01"
       participants:
         type: array
         items:
@@ -203,12 +276,12 @@ definitions:
         type: string
         format: date-time
 
-  EventPredictions:
+  ScanPredictions:
     type: object
     properties:
-      eventId:
+      scanId:
         type: number
-        description: Event ID
+        description: Scan ID
         example: 1000
       participantId:
         type: string
@@ -237,7 +310,7 @@ definitions:
   Layout:
     type: object
     properties:
-      eventType:
+      scanType:
         type: string
       rois:
         type: object
