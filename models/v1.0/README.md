@@ -37,6 +37,11 @@ This can be done using keras_to_tf_converter.py module. As a input it takes path
 $ python keras_to_tf_converter.py 
 ```
 
+## TFLite model configuration for Saral App
+1. Place the .tflite model file in below project path.
+2. Use it in ``org.ekstep.saral.saralsdk.hwmodel.HWClassifier.java`` file
+``/Project-Saral/v1.0/frontend/SaralApp/android/saralsdk/src/main/assets``
+
 ### Evaluation
 ##### prediction.ipynb for benchmarking the test dataset for both keras and tflite model at digit and roll number level
 #### Config Parameters
@@ -82,5 +87,3 @@ optional arguments:
 ```
 #### ResNet Implementation
 - [ResNet Author's Implementation](https://github.com/KaimingHe/resnet-1k-layers/blob/master/resnet-pre-act.lua)
-
-
