@@ -41,9 +41,13 @@ router.put('/saveMarks', auth, async (req, res) => {
             } else {
                 if (data.studentId == studentMarksExist.studentId) {
                     let lookup = {
+                        schoolId: data.schoolId,
                         studentId: data.studentId,
-                        subject: data.subject
+                        subject: data.subject,
+                        examDate: data.examDate,
+                        classId: data.classId
                     }
+                    
                     let update = { $set: { studentAvailability: data.studentAvailability, marksInfo: data.marksInfo , securedMarks: data.securedMarks, totalMarks: data.totalMarks } }
                     await Mark.update(lookup, update)
                 }
