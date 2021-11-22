@@ -375,7 +375,7 @@ const ScannedDetailsComponent = ({
 
                     let putTrainingData = loginData.data.school.storeTrainingData && value.hasOwnProperty("trainingDataSet") ? marks_data.trainingData = value.trainingDataSet : ''
                     marks_data.questionId = value.format.name,
-                        marks_data.obtainedMarks = value.consolidatedPrediction,
+                    marks_data.obtainedMarks = value.consolidatedPrediction
                     stdTotalMarks = Number(stdTotalMarks) + Number(value.consolidatedPrediction)
                     stdMarks_info.push(marks_data)
 
