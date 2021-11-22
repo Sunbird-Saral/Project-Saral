@@ -211,11 +211,10 @@ class MyScanComponent extends Component {
             for (let j = 0; j < cells[i].rois.length; j++) {
 
                 marks = marks + cells[i].rois[j].result.prediction,
-                    predictionConfidenceArray.push(cells[i].rois[j].result.confidence)
+                roisData.layout.cells[i].predictionConfidence = cells[i].rois[j].result.confidence
 
             }
             roisData.layout.cells[i].consolidatedPrediction = marks
-            roisData.layout.cells[i].predictionConfidence = predictionConfidenceArray
             if (roisData.layout.cells[i].format.value === neglectData[0] || roisData.layout.cells[i].format.name.length-3 == neglectData[0].length) {
                 roisData.layout.cells[i].studentIdPrediction = marks
             } else {
