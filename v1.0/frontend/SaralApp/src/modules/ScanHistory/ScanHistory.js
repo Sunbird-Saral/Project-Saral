@@ -29,6 +29,10 @@ const ScanHistory = ({
 
 
     useEffect(() => {
+        setIsLoading(true)
+        setTimeout(() => {
+            setIsLoading(false)
+        }, 2000);
         sumOfLocalData()
     }, [])
 
@@ -107,7 +111,7 @@ const ScanHistory = ({
                 setScanStatusData={setScanStatusData}
             />
             {
-                isLoading && <Spinner animating={isLoading} />
+                isLoading && <Spinner animating={isLoading} iconShow={false} />
             }
             <ButtonComponent
                 customBtnStyle={[styles.nxtBtnStyle, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}

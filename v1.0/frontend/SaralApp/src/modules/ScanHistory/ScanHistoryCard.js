@@ -143,7 +143,6 @@ const ScanHistoryCard = ({
                 }
             })
                 .then(function (res) {
-                    setIsLoading(false)
                     Alert.alert(Strings.message_text, Strings.saved_successfully, [{
                         text: Strings.ok_text, onPress: () => {
                         }
@@ -154,6 +153,7 @@ const ScanHistoryCard = ({
                     dispatch(dispatchAPIAsync(api));
                     setScanStatusData(filterDataLen)
                     setScannedDataIntoLocal(localScanData)
+                    setIsLoading(false)
                 })
                 .catch(function (err) {
                     console.warn("Error", err);
