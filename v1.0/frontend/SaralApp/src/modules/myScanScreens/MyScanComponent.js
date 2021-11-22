@@ -61,10 +61,20 @@ class MyScanComponent extends Component {
 
     //functions
     sumOfLocalData = async () => {
+        const { filteredData } = this.props
         const data = await getScannedDataFromLocal()
         let len = 0
         if (data != null) {
-            data.forEach((element, index) => {
+            let filter = data.filter((e) => {
+                let findSection = false
+                findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.section)
+
+                if (filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject && findSection) {
+                    return true
+                }
+            })
+
+            filter.forEach((element, index) => {
                 len = len + element.studentsMarkInfo.length
             });
             this.setState({
@@ -242,12 +252,8 @@ class MyScanComponent extends Component {
                         {apkVersion}
                     </Text>
                 </Text>
-                <ScrollView
-                    contentContainerStyle={{ paddingTop: '5%', paddingBottom: '35%' }}
-                    showsVerticalScrollIndicator={false}
-                    bounces={false}
-                    keyboardShouldPersistTaps={'handled'}
-                >
+             
+                <View style={{paddingBottom: '35%'}}>
                     <View style={styles.onGoingContainer}>
                         <Text style={[styles.header1TextStyle, { backgroundColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE }]}>
                             {Strings.ongoing_scan}
@@ -259,8 +265,7 @@ class MyScanComponent extends Component {
                         showButtons={false}
                         scanStatusData={this.state.scanStatusData}
                     />
-
-                </ScrollView>
+                    </View>
 
                 <View>
                     <ButtonComponent
@@ -398,7 +403,7 @@ const mapStateToProps = (state) => {
     return {
         ocrLocalResponse: state.ocrLocalResponse,
         loginData: state.loginData,
-        filteredData: state.filteredData,
+        filteredData: state.filteredData.response,
         scanTypeData: state.scanTypeData.response,
         scanedData: state.scanedData,
         roiData: state.roiData.response,

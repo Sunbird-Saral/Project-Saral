@@ -1,4 +1,5 @@
 import LocalizedStrings from 'react-native-localization'
+import { studentLimitSaveInLocal } from './CommonUtils'
 export default strings = new LocalizedStrings({
     en: {
         title_saralapp:'Saral Scan App',
@@ -18,13 +19,16 @@ export default strings = new LocalizedStrings({
         please_try_again: 'Please try again.',
         request_timeout_custom_message : "Request timed out. Please check your internet connection and retry.",
         you_seem_to_be_offline_please_check_your_internet_connection: 'Please check your internet connection.',
+        please_select_at_least_one_student : 'at least one student should be there',
         yes_text: 'Yes',
         no_text: 'No',
         version_text: 'Version',
         page_no:'Page Number',
+        skip:'Skip',
         give_permission_from_settings: 'Please give permission from Settings to use app',
         optional_update_available: 'A new update is available of App. Do you want to update now?',
         force_update_available: 'We have an updated version for you. Please Update to continue using App.',
+        you_can_save_only_limited_student_In_Order_to_continue_have_to_save_first:`You can Save Only ${studentLimitSaveInLocal} Student. In Order to Continue have to save first`,
         no_btn_text: 'No',
         yes_btn_text: 'Yes',
         complete_these_steps_submit_marks: 'complete these steps to submits marks',
@@ -58,6 +62,7 @@ export default strings = new LocalizedStrings({
         class_text: 'Class',
         section: 'Section',
         exam_sub: 'Exam Subject',
+        Exam_Type:'Exam Type',
         exam_sub_date: 'Exam Subject - Date',
         exam_id: 'Exam Id',
         Exam:'Exam',

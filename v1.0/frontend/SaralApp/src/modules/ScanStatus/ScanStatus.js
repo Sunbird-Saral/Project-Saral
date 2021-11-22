@@ -30,6 +30,7 @@ const ScanStatus = ({
 }) => {
 
     const [studentList, setStudentList] = useState([])
+    const [presentStudentList, setPresentStudentList] = useState([])
 
     //function
     const renderItem = ({ item, index }) => {
@@ -55,7 +56,7 @@ const ScanStatus = ({
     useEffect(
         React.useCallback(() => {
             const onBackPress = () => {
-                navigation.navigate('ScanHistory');
+                navigation.push('ScanHistory');
             };
             BackHandler.addEventListener('hardwareBackPress', onBackPress);
             return () =>
@@ -66,6 +67,7 @@ const ScanStatus = ({
     useEffect(() => {
         getDataFromLocal()
         getStudentList()
+        getPresentStudentList()
     }, [])
 
     const getStudentList = async () => {
@@ -80,6 +82,24 @@ const ScanStatus = ({
         if (data != null) {
             let students = data.studentsMarkInfo
         }
+    }
+
+    const getPresentStudentList = ()=>{
+        let data = typeof (scanedData) === "object"
+        ?
+        scanedData.data
+            ?
+            scanedData.data.filter((o, index) => {
+                if (o.studentAvailability && o.marksInfo.length > 0) {
+                    return true
+                }
+            })
+            :
+            []
+        :
+        []
+        setPresentStudentList(data)
+        
     }
 
     return (
@@ -106,7 +126,7 @@ const ScanStatus = ({
             <Text style={styles.scanStatus}>{Strings.scan_status}</Text>
 
             <FlatList
-                data={scanedData && scanedData.data}
+                data={scanedData && presentStudentList}
                 renderItem={renderItem}
                 ListEmptyComponent={renderEmptyData}
                 keyExtractor={(item, index) => `${index.toString()}`}

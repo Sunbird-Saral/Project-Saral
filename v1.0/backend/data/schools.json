@@ -1,6 +1,6 @@
 [{
-  "name": "Fountainhead School",
-  "schoolId": "1",
+  "name": "Dummy school 1",
+  "schoolId": "up001",
   "password": "tarento@123",
   "state": "up",
   "district": "delhi",
@@ -12,8 +12,8 @@
   "storeTrainingData": false
 },
 {
-  "name": "Aditya Birla Public School, Rayagada.",
-  "schoolId": "2",
+  "name": "Dummy school 2",
+  "schoolId": "odisha001",
   "password": "tarento@123",
   "state": "odisha",
   "district": "odisha",
@@ -25,8 +25,8 @@
   "storeTrainingData": true
 },
 {
-  "name": "Sainik School",
-  "schoolId": "3",
+  "name": "Dummy school 3",
+  "schoolId": "gujrat001",
   "password": "tarento@123",
   "state": "gujrat",
   "district": "ahmedabad",
@@ -35,11 +35,11 @@
   "hmMobileNo": "8006079875",
   "noOfStudents": "100",
   "udiseCode": "3",
-  "storeTrainingData": false
+  "storeTrainingData": true
 },
 {
-"name": "Amtul's Public School",
-"schoolId": "4",
+"name": "Dummy school 4",
+"schoolId": "up002",
 "password": "tarento@123",
 "state": "up",
 "district": "MORADABAD",

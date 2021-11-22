@@ -54,7 +54,7 @@ public class TableCornerCirclesDetection {
         Imgproc.cvtColor(image, gray, Imgproc.COLOR_BGR2GRAY);
         Imgproc.medianBlur(gray, gray, 5);
         Mat circles     = new Mat();
-        Imgproc.HoughCircles(gray, circles, Imgproc.CV_HOUGH_GRADIENT,1.5,400.0, 100.0, 30.0, 15, 20);
+        Imgproc.HoughCircles(gray, circles, Imgproc.CV_HOUGH_GRADIENT,1.5,100.0, 100.0, 30.0, 15, 20);
 
         /**
          * Draw the detected circles.

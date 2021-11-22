@@ -20,7 +20,7 @@ public class DetectShaded {
         DEBUG = debug;
     }
 
-    public double getShadedPercentage(Mat image, int top, int left, int bottom, int right) {
+    public double getShadedPercentage(Mat image, int top, int left, int bottom, int right,boolean isMultiChoiceOMRLayout) {
         Mat gray                            = new Mat();
         Imgproc.cvtColor(image, gray, Imgproc.COLOR_BGR2GRAY);
         Mat blurred = new Mat();
@@ -37,10 +37,18 @@ public class DetectShaded {
         Rect rect           = new Rect(left, top, right - left, bottom - top);
         Mat croppedImage    = new Mat(bw_img.clone(), rect);
         int total           = Core.countNonZero(croppedImage);
-        double pixel        = total / croppedImage.width()*croppedImage.height();
-
+        double pixel;
+        if(isMultiChoiceOMRLayout)
+        {
+            double area         = croppedImage.width()*croppedImage.height();      
+            pixel = (total/ area) * 100;
+        }
+        else 
+        {
+            pixel      = total / croppedImage.width()*croppedImage.height();
+        }   
         if (DEBUG) {
-            Log.d(TAG, "input image width: " + image.width() + " height: " + image.height());
+            Log.d(TAG, "input image width: " + image.width() + " height: " + image.height()+" pixel "+pixel);
             Log.d(TAG, "rows: " + croppedImage.rows() + " cols: " + croppedImage.cols());
             CVOperations.saveImage(croppedImage, "rows-", 3, false);
         }

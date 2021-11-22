@@ -163,20 +163,11 @@ class SelectDetailsComponent extends Component {
             {
                 'text': Strings.yes_text, onPress: async () => {
                     this.props.LogoutAction()
-                    await AsyncStorage.clear();
                     this.props.navigation.navigate('auth')
                 }
             }
         ])
     }
-
-    EmptyLoginData = (user) => {
-        return {
-            type: C.LOGIN_PROCESS,
-            user: {}
-        }
-    }
-
 
     loader = (flag) => {
         this.setState({
@@ -624,7 +615,6 @@ class SelectDetailsComponent extends Component {
             })
             return false
         }
-        else if (scanTypeData.scanType == SCAN_TYPES.PAT_TYPE) {
             if (subIndex == -1) {
                 this.setState({
                     errClass: '',
@@ -635,8 +625,6 @@ class SelectDetailsComponent extends Component {
                 return false
             }
 
-            return true
-        }
         return true
     }
 
@@ -717,7 +705,6 @@ class SelectDetailsComponent extends Component {
     render() {
         const { navigation, isLoading, defaultSelected, classList, classListIndex, selectedClass, sectionList, sectionListIndex, selectedSection, pickerDate, selectedDate, subArr, selectedSubject, subIndex, errClass, errSub, errDate, errSection, sectionValid, dateVisible, examTestID } = this.state
         const { loginData } = this.props
-    
         return (
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
                 <HeaderComponent
