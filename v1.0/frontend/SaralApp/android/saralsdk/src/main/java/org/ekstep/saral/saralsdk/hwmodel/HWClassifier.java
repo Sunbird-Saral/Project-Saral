@@ -31,7 +31,7 @@ public class HWClassifier {
      * Name of the model file hosted with Firebase.
      */
     private static final String HOSTED_MODEL_NAME = null;
-    private static final String LOCAL_MODEL_ASSET = "digit_trained_model_resnet.tflite";
+    private static final String LOCAL_MODEL_ASSET = "trained_resnet_model_v2_10.tflite";
 
     /**
      * Dimensions of inputs.
@@ -80,7 +80,7 @@ public class HWClassifier {
 
     public void initialize(HWClassifierStatusListener listener) {
         int[] inputDims = {DIM_BATCH_SIZE, DIM_IMG_SIZE_X, DIM_IMG_SIZE_Y, DIM_PIXEL_SIZE};
-        int[] outputDims = {DIM_BATCH_SIZE, 10};
+        int[] outputDims = {DIM_BATCH_SIZE, 11};
         try {
             int firebaseModelDataType = FirebaseModelDataType.FLOAT32;
             mDataOptions =
@@ -111,20 +111,23 @@ public class HWClassifier {
     }
 
     private Mat preprocessMatForModel(Mat mat) {
-//        Mat rotatedMat = rotateMat(mat);
+        //  Mat rotatedMat = rotateMat(mat);
 
         //mean and std deviation
         Mat gray_img        = new Mat();
         Imgproc.cvtColor(mat, gray_img, Imgproc.COLOR_BGR2GRAY);
-        Core.bitwise_not(gray_img, gray_img);
+        //Core.bitwise_not(gray_img, gray_img);
 
-        MatOfDouble mu      = new MatOfDouble();
-        MatOfDouble sigma   = new MatOfDouble();
-        Core.meanStdDev(gray_img, mu, sigma);
-        Mat meanMat         =  new Mat();
-        Core.subtract(gray_img, mu, meanMat);
+        //MatOfDouble mu      = new MatOfDouble();
+        //MatOfDouble sigma   = new MatOfDouble();
+        //Core.meanStdDev(gray_img, mu, sigma);
+        gray_img.convertTo(gray_img, org.opencv.core.CvType.CV_32F);
+        MatOfDouble sigma   = new MatOfDouble(255L);
+        //Mat meanMat         =  new Mat();
+        //Core.subtract(gray_img, mu, meanMat);
         Mat matFinal        = new Mat();
-        Core.divide(meanMat, sigma, matFinal);
+        //  Core.divide(meanMat, sigma, matFinal);
+       Core.divide(gray_img, sigma, matFinal);
         return matFinal;
     }
 
