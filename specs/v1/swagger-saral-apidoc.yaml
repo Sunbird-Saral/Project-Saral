@@ -1,3 +1,4 @@
+
 swagger: "2.0"
 info:
   description: "Store School information"
@@ -1024,6 +1025,16 @@ definitions:
           type: string
           description: "Student Id"
           example: "1210001"
+        predictedStudentId:
+          type: string
+          description: "Predicted Student Id which we are getting after scan ."
+          example: "1210001"
+        predictionConfidence:
+          type: array
+          description: "Predicted Student Id accuracy."
+          items:
+            type: string
+            example: "0.9999982118606567"
         studentIdTrainingData:
           type: array
           items:
@@ -1058,6 +1069,16 @@ definitions:
           type: string
           description: "total marks obtained"
           example: "110"
+        predictedMarks:
+          type: string
+          description: "Predicted Marks which we are getting after scan "
+          example: "11"
+        predictionConfidence:
+          type: array
+          description: "Predicted Marks accuracy."
+          items:
+            type: string
+            example: "22.99"
         trainingData:
           type: array
           items:
