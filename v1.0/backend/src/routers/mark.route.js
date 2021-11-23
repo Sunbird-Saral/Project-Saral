@@ -35,15 +35,15 @@ router.put('/saveMarks', auth, async (req, res) => {
     try {
         for (let data of marks) {
          
-            let studentMarksExist = await Mark.findOne({ studentId: data.studentId,subject: data.subject })
+            let studentMarksExist = await Mark.findOne({ schoolId:data.schoolId,studentId: data.studentId,classId:data.classId,subject: data.subject, examDate: data.examDate })
             if (!studentMarksExist) {
                 await Mark.create(data)
             } else {
-                if (data.studentId == studentMarksExist.studentId) {
+                if (data.schoolId == studentMarksExist.schoolId && data.studentId == studentMarksExist.studentId && data.classId == studentMarksExist.classId && data.subject == studentMarksExist.subject && data.examDate  == studentMarksExist.examDate) {
                     let lookup = {
-                        studentId: data.studentId,
-                        subject: data.subject
+                        studentId: data.studentId
                     }
+                    
                     let update = { $set: { studentAvailability: data.studentAvailability, marksInfo: data.marksInfo , securedMarks: data.securedMarks, totalMarks: data.totalMarks } }
                     await Mark.update(lookup, update)
                 }
