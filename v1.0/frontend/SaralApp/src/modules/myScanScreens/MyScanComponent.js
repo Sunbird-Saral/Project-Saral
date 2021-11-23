@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, Image, TouchableOpacity, Platform, PermissionsAndroid, Alert, BackHandler } from 'react-native';
+import { View, ScrollView, Text, Image, TouchableOpacity, Platform, PermissionsAndroid, Alert, BackHandler, LogBox} from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { StackActions, NavigationActions } from 'react-navigation';
@@ -14,6 +14,8 @@ import SaralSDK from '../../../SaralSDK'
 import { getScannedDataFromLocal } from '../../utils/StorageUtils';
 import ButtonComponent from '../common/components/ButtonComponent';
 import { neglectData } from '../../utils/CommonUtils';
+
+LogBox.ignoreAllLogs()
 
 class MyScanComponent extends Component {
     constructor(props) {
