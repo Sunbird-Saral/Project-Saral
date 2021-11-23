@@ -350,6 +350,8 @@ const ScannedDetailsComponent = ({
                 let stdTotalMarks = 0
                 let stdData = {
                     "studentId": '',
+                    "predictedStudentId": loginData.data.school.storeTrainingData ? storeTrainingData[index].studentIdPrediction : '',
+                    "predictionConfidence": loginData.data.school.storeTrainingData ? storeTrainingData[index].predictionConfidence : '',
                     "section": filteredData.section,
                     "marksInfo": '',
                     "securedMarks": stdTotalMarks,
@@ -366,15 +368,19 @@ const ScannedDetailsComponent = ({
                 el.data.forEach((value, i) => {
                     let marks_data = {
                         "questionId": '',
-                        "obtainedMarks": ''
+                        "obtainedMarks": '',
+                        "predictedMarks": loginData.data.school.storeTrainingData ? value.predictedMarks : "",
+                        "predictionConfidence": loginData.data.school.storeTrainingData  ? value.predictionConfidence : ""
                     }
+
                     let putTrainingData = loginData.data.school.storeTrainingData && value.hasOwnProperty("trainingDataSet") ? marks_data.trainingData = value.trainingDataSet : ''
                     marks_data.questionId = value.format.name,
-                        marks_data.obtainedMarks = value.consolidatedPrediction
+                    marks_data.obtainedMarks = value.consolidatedPrediction
                     stdTotalMarks = Number(stdTotalMarks) + Number(value.consolidatedPrediction)
                     stdMarks_info.push(marks_data)
 
                 })
+
                 stdData.securedMarks = stdTotalMarks
                 stdData.marksInfo = stdMarks_info
                 stdMarkInfo.push(stdData)
@@ -708,6 +714,8 @@ const ScannedDetailsComponent = ({
             let data = {
                 "questionId": e.format.name,
                 "obtainedMarks": e.consolidatedPrediction,
+                "predictedMarks": loginData.data.school.storeTrainingData ? e.predictedMarks : '',
+                "predictionConfidence": loginData.data.school.storeTrainingData ? e.predictionConfidence : '',
             }
 
             let putTrainingData = loginData.data.school.storeTrainingData && e.hasOwnProperty("trainingDataSet") ? data.trainingData = e.trainingDataSet : ''
@@ -729,6 +737,8 @@ const ScannedDetailsComponent = ({
             "subject": filteredData.subject,
             "studentsMarkInfo": [
                 {
+                    "predictedStudentId":loginData.data.school.storeTrainingData ? storeTrainingData[0].studentIdPrediction : '',
+                    "predictionConfidence":loginData.data.school.storeTrainingData ? storeTrainingData[0].predictionConfidence : '',
                     "section": filteredData.section,
                     "studentId": studentId,
                     "securedMarks": sumOfObtainedMarks > 0 ? sumOfObtainedMarks : 0,

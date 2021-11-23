@@ -13,6 +13,7 @@ import ScanHistoryCard from '../ScanHistory/ScanHistoryCard';
 import SaralSDK from '../../../SaralSDK'
 import { getScannedDataFromLocal } from '../../utils/StorageUtils';
 import ButtonComponent from '../common/components/ButtonComponent';
+import { neglectData } from '../../utils/CommonUtils';
 
 class MyScanComponent extends Component {
     constructor(props) {
@@ -202,14 +203,25 @@ class MyScanComponent extends Component {
 
     consolidatePrediction(cells, roisData) {
         var marks = "";
+        var predictionConfidenceArray = []
+        var studentIdPrediction = ""
         for (let i = 0; i < cells.length; i++) {
             marks = ""
+            predictionConfidenceArray = []
             for (let j = 0; j < cells[i].rois.length; j++) {
 
-                marks = marks + cells[i].rois[j].result.prediction
+                marks = marks + cells[i].rois[j].result.prediction,
+                    predictionConfidenceArray.push(cells[i].rois[j].result.confidence)
 
             }
             roisData.layout.cells[i].consolidatedPrediction = marks
+            roisData.layout.cells[i].predictionConfidence = predictionConfidenceArray
+            if (roisData.layout.cells[i].format.value === neglectData[0] || roisData.layout.cells[i].format.name.length-3 == neglectData[0].length) {
+                roisData.layout.cells[i].studentIdPrediction = marks
+            } else {
+                roisData.layout.cells[i].predictedMarks = marks
+            }
+
 
         }
         this.props.OcrLocalResponseAction(JSON.parse(JSON.stringify(roisData)))
@@ -252,8 +264,8 @@ class MyScanComponent extends Component {
                         {apkVersion}
                     </Text>
                 </Text>
-             
-                <View style={{paddingBottom: '35%'}}>
+
+                <View style={{ paddingBottom: '35%' }}>
                     <View style={styles.onGoingContainer}>
                         <Text style={[styles.header1TextStyle, { backgroundColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE }]}>
                             {Strings.ongoing_scan}
@@ -265,13 +277,13 @@ class MyScanComponent extends Component {
                         showButtons={false}
                         scanStatusData={this.state.scanStatusData}
                     />
-                    </View>
+                </View>
 
                 <View>
                     <ButtonComponent
                         customBtnStyle={[styles.nxtBtnStyle, { backgroundColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE }]}
-                        customBtnTextStyle={{fontSize:15}}
-                        btnText={ Strings.backToDashboard}
+                        customBtnTextStyle={{ fontSize: 15 }}
+                        btnText={Strings.backToDashboard}
                         activeOpacity={0.8}
                         onPress={() => this.props.navigation.navigate('selectDetails')}
                     />
@@ -359,8 +371,8 @@ const styles = {
         width: 40,
         height: 40
     },
-    Backbutton:{
-        width:200,
+    Backbutton: {
+        width: 200,
         lineHeight: 40,
         textAlign: 'center',
         fontSize: AppTheme.FONT_SIZE_LARGE,
@@ -370,7 +382,7 @@ const styles = {
 
     },
     tabLabelStyle: {
-        height:100,
+        height: 100,
         lineHeight: 40,
         textAlign: 'center',
         fontSize: AppTheme.FONT_SIZE_SMALL,
@@ -390,13 +402,13 @@ const styles = {
     scanSubTabContainerStyle: {
         width: '90%',
         height: '90%',
-        bottom:15,
+        bottom: 15,
         backgroundColor: AppTheme.BLUE,
         borderRadius: 45,
         justifyContent: 'center',
         alignItems: 'center'
     },
-    nxtBtnStyle:{bottom:115 , marginHorizontal: 40, marginBottom: 20,borderRadius: 10,}
+    nxtBtnStyle: { bottom: 115, marginHorizontal: 40, marginBottom: 20, borderRadius: 10, }
 }
 
 const mapStateToProps = (state) => {
