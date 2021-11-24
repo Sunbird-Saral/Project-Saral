@@ -109,9 +109,6 @@ const ScanHistory = ({
                 scanStatusData={scanStatusData}
                 setScanStatusData={setScanStatusData}
             />
-            {
-                isLoading && <Spinner animating={isLoading} iconShow={false} />
-            }
             <ButtonComponent
                 customBtnStyle={[styles.nxtBtnStyle, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
                 btnText={Strings.Back.toUpperCase()}

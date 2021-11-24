@@ -1,5 +1,5 @@
 import React, { memo, useEffect, useState } from 'react';
-import { Alert, Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, Alert, Text, TouchableOpacity, View } from 'react-native';
 import { connect, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
@@ -252,8 +252,8 @@ const ScanHistoryCard = ({
                                 <Text>{Strings.save_status}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle, { borderBottomWidth: 1 }]}>
-                                {loading&&
-                                <Text>{scanedData.response && getSaveCount()}</Text>}
+                                {loading ?
+                                <Text>{getSaveCount()}</Text>: <View style={{alignItems:'flex-start'}}><ActivityIndicator size={'small'} color={'grey'}/></View>}
                             </View>
                     </View>
                 </View>
