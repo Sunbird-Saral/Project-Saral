@@ -27,9 +27,10 @@ const ScanHistoryCard = ({
     themeColor1,
     studentsAndExamData
 }) => {
-
+    const [loading, setLoading] = useState(false)
     useEffect(()=>{
-       getSaveCount()
+         setTimeout(() => {setLoading( !loading )}, 3000)
+        getSaveCount()
     },[])
     const getSaveCount = ()=>{
         let data =
@@ -251,7 +252,8 @@ const ScanHistoryCard = ({
                                 <Text>{Strings.save_status}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle, { borderBottomWidth: 1 }]}>
-                                <Text>{scanedData.response ? getSaveCount() : 0}</Text>
+                                {loading&&
+                                <Text>{scanedData.response && getSaveCount()}</Text>}
                             </View>
                     </View>
                 </View>

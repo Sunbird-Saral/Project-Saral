@@ -24,7 +24,6 @@ const ScanHistory = ({
     //Hooks
     const [isLoading, setIsLoading] = useState(false)
     const [scanStatusData, setScanStatusData] = useState(false)
-
     //functions
 
 
