@@ -241,10 +241,12 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                         JSONObject rect      = roiConfig.getJSONObject("rect");
 
                         double percent      = mDetectShaded.getShadedPercentage(tableMat, rect.getInt("top"), rect.getInt("left"), rect.getInt("bottom"), rect.getInt("right"),isMultiChoiceOMRLayout);
+                        Mat omrROI        = mDetectShaded.getROIMat(tableMat, rect.getInt("top"), rect.getInt("left"), rect.getInt("bottom"), rect.getInt("right"));                   
                         Integer answer      = 0;
                         if (percent > DARKNESS_THRESHOLD) {
                             answer = 1;
                         }
+                        mRoiMatBase64.put(roiId,createBase64FromMat(omrROI));
                         mPredictedOMRs.put(roiId, answer.toString());
                         Log.d(TAG, "key: " + roiId + " answer: " + answer.toString()+" percent "+percent);
                     }
@@ -411,6 +413,10 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                         }else {
                             result.put("prediction", mPredictedOMRs.get(roiId));
                             result.put("confidence", new Double(1.00));
+                        }
+                        if(mRoiMatBase64.get(roiId)!=null)
+                        {
+                            trainingDataSet.put(j,mRoiMatBase64.get(roiId));
                         }
                         roi.put("result", result);
                     }
