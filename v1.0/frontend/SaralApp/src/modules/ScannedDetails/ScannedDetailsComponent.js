@@ -343,7 +343,7 @@ const ScannedDetailsComponent = ({
                 }
 
                 stdData.studentId = el.RollNo
-                let putTrainingData = loginData.data.school.storeTrainingData ? stdData.studentIdTrainingData = storeTrainingData.length > 0 ? storeTrainingData[0].trainingDataSet : '' : ''
+                let putTrainingData = loginData.data.school.storeTrainingData ? stdData.studentIdTrainingData = storeTrainingData.length > 0 ? storeTrainingData[index].trainingDataSet : '' : ''
 
 
                 let stdMarks_info = []
