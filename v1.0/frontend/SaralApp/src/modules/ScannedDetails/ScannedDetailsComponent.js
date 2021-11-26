@@ -360,7 +360,7 @@ const ScannedDetailsComponent = ({
                 }
 
                 stdData.studentId = el.RollNo
-                let putTrainingData = loginData.data.school.storeTrainingData ? stdData.studentIdTrainingData = storeTrainingData.length > 0 ? storeTrainingData[index].trainingDataSet : '' : ''
+                let putTrainingData = loginData.data.school.storeTrainingData ? stdData.studentIdTrainingData = storeTrainingData.length > 0 ? el.RollNo != storeTrainingData[index].studentIdPrediction ? storeTrainingData[index].trainingDataSet : '' : '' : ''
 
 
                 let stdMarks_info = []
@@ -372,8 +372,7 @@ const ScannedDetailsComponent = ({
                         "predictedMarks": loginData.data.school.storeTrainingData ? value.predictedMarks : "",
                         "predictionConfidence": loginData.data.school.storeTrainingData  ? value.predictionConfidence : ""
                     }
-
-                    let putTrainingData = loginData.data.school.storeTrainingData && value.hasOwnProperty("trainingDataSet") ? marks_data.trainingData = value.trainingDataSet : ''
+                    let putTrainingData = loginData.data.school.storeTrainingData ? marks_data.trainingData = value.consolidatedPrediction != value.predictedMarks ? value.trainingDataSet : '' : ''
                     marks_data.questionId = value.format.name,
                     marks_data.obtainedMarks = value.consolidatedPrediction
                     stdTotalMarks = Number(stdTotalMarks) + Number(value.consolidatedPrediction)
@@ -718,7 +717,7 @@ const ScannedDetailsComponent = ({
                 "predictionConfidence": loginData.data.school.storeTrainingData ? e.predictionConfidence : '',
             }
 
-            let putTrainingData = loginData.data.school.storeTrainingData && e.hasOwnProperty("trainingDataSet") ? data.trainingData = e.trainingDataSet : ''
+            let putTrainingData = loginData.data.school.storeTrainingData && e.hasOwnProperty("trainingDataSet") ? data.trainingData = e.consolidatedPrediction !=e.predictedMarks ? e.trainingDataSet : '' : ''
             objects.push(data)
         })
 
@@ -748,7 +747,7 @@ const ScannedDetailsComponent = ({
                 }
             ]
         }
-        let putTrainingData = loginData.data.school.storeTrainingData ? saveObj.studentsMarkInfo[0].studentIdTrainingData = storeTrainingData.length > 0 && storeTrainingData[0].trainingDataSet : ''
+        let putTrainingData = loginData.data.school.storeTrainingData ? saveObj.studentsMarkInfo[0].studentIdTrainingData = storeTrainingData.length > 0 ? storeTrainingData[0].consolidatedPrediction != studentId ? storeTrainingData[0].trainingDataSet : '' : '' :''
         if (toggleCheckBox) {
             saveObj.studentsMarkInfo = []
         }

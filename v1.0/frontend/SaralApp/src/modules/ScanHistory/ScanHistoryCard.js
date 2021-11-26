@@ -25,7 +25,8 @@ const ScanHistoryCard = ({
     scanStatusData,
     setScanStatusData,
     themeColor1,
-    studentsAndExamData
+    studentsAndExamData,
+    apiStatus
 }) => {
     const [loading, setLoading] = useState(false)
     useEffect(()=>{
@@ -97,10 +98,17 @@ const ScanHistoryCard = ({
                     let apiObj = new SaveScanData(filterData[0], loginData.data.token);
                     dispatch(APITransport(apiObj))
 
-                setTimeout(function () {
-                    callScanStatusData(filterDataLen, setIntolocalAfterFilter)
-                }, 2000);
+                    if (apiStatus && apiStatus.error && apiStatus.message != null) {
 
+                        Alert.alert("Something went wrong , contact Admin")
+                        setIsLoading(false)
+
+                    }else{
+                        setTimeout(function () {
+                            callScanStatusData(filterDataLen, setIntolocalAfterFilter)
+                        }, 2000);
+
+                    }
             } else {
                 Alert.alert('There is no data!')
                 setIsLoading(false)
@@ -320,7 +328,8 @@ const mapStateToProps = (state) => {
         filteredData: state.filteredData,
         scanedData: state.scanedData,
         loginData: state.loginData,
-        studentsAndExamData : state.studentsAndExamData
+        studentsAndExamData : state.studentsAndExamData,
+        apiStatus: state.apiStatus
     }
 }
 

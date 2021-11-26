@@ -28,10 +28,6 @@ const ScanHistory = ({
 
 
     useEffect(() => {
-        setIsLoading(true)
-        setTimeout(() => {
-            setIsLoading(false)
-        }, 2000);
         sumOfLocalData()
     }, [])
 
@@ -116,6 +112,8 @@ const ScanHistory = ({
                 activeOpacity={0.8}
                 onPress={() => navigation.push('StudentsList')}
             />
+
+            {isLoading && <Spinner animating={isLoading} />}
 
         </View>
     );
