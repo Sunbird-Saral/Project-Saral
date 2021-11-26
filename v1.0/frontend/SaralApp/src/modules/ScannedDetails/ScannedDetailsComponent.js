@@ -360,7 +360,7 @@ const ScannedDetailsComponent = ({
                 }
 
                 stdData.studentId = el.RollNo
-                let putTrainingData = loginData.data.school.storeTrainingData ? stdData.studentIdTrainingData = storeTrainingData.length > 0 ? el.RollNo != storeTrainingData[index].studentIdPrediction ? storeTrainingData[0].trainingDataSet : '' : '' : ''
+                let putTrainingData = loginData.data.school.storeTrainingData ? stdData.studentIdTrainingData = storeTrainingData.length > 0 ? el.RollNo != storeTrainingData[index].studentIdPrediction ? storeTrainingData[index].trainingDataSet : '' : '' : ''
 
 
                 let stdMarks_info = []
