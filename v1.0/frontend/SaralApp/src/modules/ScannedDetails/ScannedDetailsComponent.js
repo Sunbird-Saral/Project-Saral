@@ -372,7 +372,6 @@ const ScannedDetailsComponent = ({
                         "predictedMarks": loginData.data.school.storeTrainingData ? value.predictedMarks : "",
                         "predictionConfidence": loginData.data.school.storeTrainingData  ? value.predictionConfidence : ""
                     }
-console.log(value.consolidatedPrediction!=value.predictedMarks?value.trainingDataSet:'no trainig data')
                     let putTrainingData = loginData.data.school.storeTrainingData ? marks_data.trainingData = value.consolidatedPrediction != value.predictedMarks ? value.trainingDataSet : '' : ''
                     marks_data.questionId = value.format.name,
                     marks_data.obtainedMarks = value.consolidatedPrediction
