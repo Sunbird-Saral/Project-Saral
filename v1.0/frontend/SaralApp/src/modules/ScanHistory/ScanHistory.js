@@ -152,5 +152,5 @@ const styles = StyleSheet.create({
         color: AppTheme.BLACK,
         letterSpacing: 1
     },
-    nxtBtnStyle:{ top: 100, marginHorizontal: 40, marginBottom: 20, borderRadius: 10, }
+    nxtBtnStyle:{ top:50, marginHorizontal: 40, marginBottom: 20, borderRadius: 10, }
 });
