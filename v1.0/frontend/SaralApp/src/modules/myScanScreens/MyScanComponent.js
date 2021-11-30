@@ -26,6 +26,7 @@ class MyScanComponent extends Component {
             oldBrightness: null,
             activityOpen: false,
             isLoading: false,
+            scanStatusData:false
         }
         this.onBack = this.onBack.bind(this)
         this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
@@ -278,9 +279,11 @@ class MyScanComponent extends Component {
                     </View>
 
                     <ScanHistoryCard
+                       scanstatusbutton ={this.props.apiStatus.unauthorized ? false : true}
                         themeColor1={this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE}
                         showButtons={false}
                         scanStatusData={this.state.scanStatusData}
+                         navigation={this.props.navigation}
                     />
                 </View>
 
@@ -424,7 +427,8 @@ const mapStateToProps = (state) => {
         scanTypeData: state.scanTypeData.response,
         scanedData: state.scanedData,
         roiData: state.roiData.response,
-        multiBrandingData: state.multiBrandingData.response.data
+        multiBrandingData: state.multiBrandingData.response.data,
+        apiStatus: state.apiStatus
     }
 }
 

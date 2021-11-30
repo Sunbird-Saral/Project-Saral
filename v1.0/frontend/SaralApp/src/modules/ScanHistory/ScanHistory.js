@@ -99,6 +99,7 @@ const ScanHistory = ({
 
             <ScanHistoryCard
                 showButtons={apiStatus.unauthorized ? false : true}
+                scanstatusbutton={false}
                 navigation={navigation}
                 themeColor1={multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}
                 isLoading={isLoading}
