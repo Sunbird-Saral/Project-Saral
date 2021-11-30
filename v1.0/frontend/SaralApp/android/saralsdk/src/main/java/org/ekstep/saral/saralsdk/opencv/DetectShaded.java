@@ -58,7 +58,7 @@ public class DetectShaded {
     public boolean isOMRFilled(Mat imageMat, int top, int left, int bottom, int right)
     {
         boolean isOMRFilled = false;
-        byte _blackPixelThreshold = 50;
+        byte _blackPixelThreshold = 100;
         byte _omrFilledThreshold = 100;
         Mat gray                            = new Mat();
         Imgproc.cvtColor(imageMat, gray, Imgproc.COLOR_BGR2GRAY);
@@ -77,7 +77,7 @@ public class DetectShaded {
             for (int c = 0; c < width; c++) {
                 pixel = gray.get(r,c);
                 //Log.d(TAG, " OMR Array Values ["+r+","+c+"]"+pixel[0]);
-                if(pixel[0]<=70)
+                if(pixel[0]<=_blackPixelThreshold)
                 {
                     darkPixelCount++;
                 }
