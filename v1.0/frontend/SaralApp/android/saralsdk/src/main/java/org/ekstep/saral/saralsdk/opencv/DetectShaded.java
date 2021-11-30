@@ -64,30 +64,48 @@ public class DetectShaded {
         Imgproc.cvtColor(imageMat, gray, Imgproc.COLOR_BGR2GRAY);
 
 
-        byte [] image = new byte[(int) (gray.total() * gray.channels())];
-        gray.get(0,0,image);
+        byte [] imageArray = new byte[(int) (gray.total() * gray.channels())];
+        gray.get(0,0,imageArray);
 
         int width = gray.width();
         int height = gray.height();
         int num_pixels = (int) gray.total();
         int channels = gray.channels();
         int darkPixelCount =0;
-
-        Log.d(TAG, " OMR Image width"+width+" height :: "+height+" num_pixels:: "+num_pixels+" channels "+channels);
-
-        for (int r =0; r<height; r++) 
-        {
-            for (int c = 0; c<width; c++)    
-            {
-                for(int i=0; i<channels; i++)
+        double [] pixel = new double[3];
+        for (int r = 0; r < height; r++) {
+            for (int c = 0; c < width; c++) {
+                pixel = gray.get(r,c);
+                Log.d(TAG, " OMR Array Values ["+r+","+c+"]"+pixel[0]);
+                if(pixel[0]<=50)
                 {
-                    if (image[r*(width*channels) + c*channels + i] <= _blackPixelThreshold)
-                    {
-                        darkPixelCount++;
-                    }    
+                    darkPixelCount++;
                 }
-            }    
+            }
         }
+
+
+//        for(int index = 0; index< num_pixels; index++ )
+//        {
+//                //to get pixel corresponding to row r and column c
+//                Log.d(TAG, " imageArray ["+index+"]"+imageArray[index]);
+//                if (imageArray[index] <= _blackPixelThreshold){
+//                    darkPixelCount++;
+//                }
+//        }
+        // for (int r =0; r<height; r++) 
+        // {
+        //     for (int c = 0; c<width; c++)    
+        //     {
+        //         for(int i=0; i<channels; i++)
+        //         {
+        //             if (image[r*(width*channels) + c*channels + i] <= _blackPixelThreshold)
+        //             {
+        //                 darkPixelCount++;
+        //             }    
+        //         }
+        //     }    
+        // }
         Log.d(TAG, "OMR Dark Pixels Count:: "+darkPixelCount+" channels :: "+channels+" num_pixels:: "+num_pixels+" Width "+width+" height "+height);
         isOMRFilled = darkPixelCount >= _omrFilledThreshold;
         return isOMRFilled;
