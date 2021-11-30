@@ -55,6 +55,44 @@ public class DetectShaded {
         return pixel;
     }
 
+    public boolean isOMRFilled(Mat imageMat, int top, int left, int bottom, int right)
+    {
+        boolean isOMRFilled = false;
+        byte _blackPixelThreshold = 50;
+        byte _omrFilledThreshold = 100;
+        Mat gray                            = new Mat();
+        Imgproc.cvtColor(imageMat, gray, Imgproc.COLOR_BGR2GRAY);
+
+
+        byte [] image = new byte[(int) (gray.total() * gray.channels())];
+        gray.get(0,0,image);
+
+        int width = gray.width();
+        int height = gray.height();
+        int num_pixels = (int) gray.total();
+        int channels = gray.channels();
+        int darkPixelCount =0;
+
+        Log.d(TAG, " OMR Image width"+width+" height :: "+height+" num_pixels:: "+num_pixels+" channels "+channels);
+
+        for (int r =0; r<height; r++) 
+        {
+            for (int c = 0; c<width; c++)    
+            {
+                for(int i=0; i<channels; i++)
+                {
+                    if (image[r*(width*channels) + c*channels + i] <= _blackPixelThreshold)
+                    {
+                        darkPixelCount++;
+                    }    
+                }
+            }    
+        }
+        Log.d(TAG, "OMR Dark Pixels Count:: "+darkPixelCount+" channels :: "+channels+" num_pixels:: "+num_pixels+" Width "+width+" height "+height);
+        isOMRFilled = darkPixelCount >= _omrFilledThreshold;
+        return isOMRFilled;
+    }
+
     public Mat getROIMat(Mat image, int top, int left, int bottom, int right) {
         Rect rect           = new Rect(left, top, right - left, bottom - top);
         Mat croppedImage    = new Mat(image.clone(), rect);
@@ -68,6 +106,8 @@ public class DetectShaded {
 
         return resizedImage;
     }
+
+
     /**
      * Resize the rect to 28x28 size.
      */
