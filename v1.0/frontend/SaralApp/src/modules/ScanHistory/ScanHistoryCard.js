@@ -341,8 +341,9 @@ const ScanHistoryCard = ({
                 animationType='fade'
                 visible={isModalVisible}
             >
+                <View style={{ backgroundColor: '#fff', flex: 1 }}>
                 <ScrollView scrollEnabled showsVerticalScrollIndicator={false}>
-                    <View style={{ flexDirection: 'row', marginTop: 20, justifyContent: 'center', alignItems: 'center' }}>
+                    <View style={[styles1.container1, { flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 20 }]}>
                         {
                             Exam_QuestionHeader.map((data) => {
                                 return (
@@ -378,24 +379,19 @@ const ScanHistoryCard = ({
                                         rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                     />
                                 </View>
-
                             )
                         })}
-                        <View >
+                        </View>
+                    </ScrollView>
+                    <View >
                         <ButtonComponent
                             customBtnStyle={[styles1.nxtBtnStyle, { backgroundColor: themeColor1 ? themeColor1 : AppTheme.BLUE }]}
                             btnText={Strings.close.toUpperCase()}
                             activeOpacity={0.8}
                             onPress={() => setIsModalVisible(!isModalVisible)}
                         />
-                        </View>
                     </View>
-
-
-                </ScrollView>
-
-
-
+                </View>
             </Modal>
         </View>
 
@@ -419,13 +415,19 @@ const mapDispatchToProps = (dispatch) => {
 }
 const styles1 = StyleSheet.create({
     container1: { flex: 1, backgroundColor: '#fff', },
+    container: {
+        padding: 25,
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
     modal: {
         flex: 1,
         margin: 5,
         padding: 10, backgroundColor: '#fff',
         borderRadius: 10
     },
-    nxtBtnStyle:{marginTop:10,  marginHorizontal: 40, marginBottom: 20, borderRadius: 10, }
+    nxtBtnStyle:{marginTop:10, marginHorizontal: 40, marginBottom: 20, borderRadius: 10, }
 })
 
 
