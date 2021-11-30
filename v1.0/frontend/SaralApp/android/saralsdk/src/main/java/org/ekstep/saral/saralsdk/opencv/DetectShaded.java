@@ -76,8 +76,8 @@ public class DetectShaded {
         for (int r = 0; r < height; r++) {
             for (int c = 0; c < width; c++) {
                 pixel = gray.get(r,c);
-                Log.d(TAG, " OMR Array Values ["+r+","+c+"]"+pixel[0]);
-                if(pixel[0]<=50)
+                //Log.d(TAG, " OMR Array Values ["+r+","+c+"]"+pixel[0]);
+                if(pixel[0]<=70)
                 {
                     darkPixelCount++;
                 }
