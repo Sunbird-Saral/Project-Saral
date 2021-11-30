@@ -31,15 +31,16 @@ class MyScanComponent extends Component {
         this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
     }
 
-    componentDidMount() {
-        BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
+    componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
     }
 
-    handleBackButtonClick() {
-        this.props.navigation.goBack(null);
-        return false;
+    handleBackButtonClick =()=> {
+        this.props.navigation.navigate('ScanHistory');
+        return true;
     }
     componentDidMount() {
+        BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
         const { navigation, scanedData } = this.props
         const { params } = navigation.state
         navigation.addListener('willFocus', payload => {
@@ -107,7 +108,7 @@ class MyScanComponent extends Component {
                         index: 0,
                         actions: [NavigationActions.navigate({ routeName: 'myScan', params: { from_screen: 'cameraActivity' } })],
                     });
-                    this.props.navigation.dispatch(resetAction);
+                     this.props.navigation.dispatch(resetAction);
                     return true
                 }
             })

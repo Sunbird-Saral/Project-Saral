@@ -69,17 +69,17 @@ const StudentsList = ({
     }, []);
 
 
-    const onBackPress = () => {
-        navigation.goBack();
-        return true;
-    };
-
-    useEffect(() => {
-        BackHandler.addEventListener("hardwareBackPress", onBackPress);
-
-        return () =>
-            BackHandler.removeEventListener("hardwareBackPress", onBackPress);
-    }, []);
+    useEffect(
+        React.useCallback(() => {
+            const onBackPress = () => {
+                navigation.navigate('selectDetails');
+                return true;
+            };
+            BackHandler.addEventListener('hardwareBackPress', onBackPress);
+            return () =>
+                BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+        }, []),
+    );
 
 
     const dispatch = useDispatch();
