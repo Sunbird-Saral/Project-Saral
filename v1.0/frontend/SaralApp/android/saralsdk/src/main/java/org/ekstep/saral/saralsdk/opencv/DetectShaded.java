@@ -58,8 +58,8 @@ public class DetectShaded {
     public boolean isOMRFilled(Mat imageMat, int top, int left, int bottom, int right)
     {
         boolean isOMRFilled = false;
-        byte _blackPixelThreshold = 100;
-        byte _omrFilledThreshold = 100;
+        byte _BLACK_PIXEL_THRESHOLD = 100;
+        byte _OMR_FILLED_THRESHOULD = 100;
         Mat gray                            = new Mat();
         Imgproc.cvtColor(imageMat, gray, Imgproc.COLOR_BGR2GRAY);
 
@@ -76,38 +76,15 @@ public class DetectShaded {
         for (int r = 0; r < height; r++) {
             for (int c = 0; c < width; c++) {
                 pixel = gray.get(r,c);
-                //Log.d(TAG, " OMR Array Values ["+r+","+c+"]"+pixel[0]);
-                if(pixel[0]<=_blackPixelThreshold)
+                if(pixel[0]<=_BLACK_PIXEL_THRESHOLD)
                 {
                     darkPixelCount++;
                 }
             }
         }
 
-
-//        for(int index = 0; index< num_pixels; index++ )
-//        {
-//                //to get pixel corresponding to row r and column c
-//                Log.d(TAG, " imageArray ["+index+"]"+imageArray[index]);
-//                if (imageArray[index] <= _blackPixelThreshold){
-//                    darkPixelCount++;
-//                }
-//        }
-        // for (int r =0; r<height; r++) 
-        // {
-        //     for (int c = 0; c<width; c++)    
-        //     {
-        //         for(int i=0; i<channels; i++)
-        //         {
-        //             if (image[r*(width*channels) + c*channels + i] <= _blackPixelThreshold)
-        //             {
-        //                 darkPixelCount++;
-        //             }    
-        //         }
-        //     }    
-        // }
-        Log.d(TAG, "OMR Dark Pixels Count:: "+darkPixelCount+" channels :: "+channels+" num_pixels:: "+num_pixels+" Width "+width+" height "+height);
-        isOMRFilled = darkPixelCount >= _omrFilledThreshold;
+        Log.d(TAG, "OMR Dark Pixels Count:: "+darkPixelCount+"num_pixels:: "+num_pixels);
+        isOMRFilled = darkPixelCount >= _OMR_FILLED_THRESHOULD;
         return isOMRFilled;
     }
 
