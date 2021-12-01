@@ -39,6 +39,10 @@ export const TABLE_HEADER = [
     "Sr No", "Questions", "Marks"
 ]
 
+export const Exam_QuestionHeader =[
+    "Question Id","Indicator Title","Question Marks"
+]
+
 export const neglectData = ["ROLLNUMBER", "STUDENTID", "MARKS_OBTAINED", "MAX_MARKS", "ROLLID"];
 
 export const student_ID = ["ROLLNUMBER", "STUDENTID","ROLLID"]
