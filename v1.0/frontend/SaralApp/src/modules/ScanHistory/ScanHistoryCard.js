@@ -1,20 +1,24 @@
 import React, { memo, useEffect, useState } from 'react';
-import { ActivityIndicator, Alert, Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, Alert, Text, TouchableOpacity, View, Modal, StyleSheet, Dimensions } from 'react-native';
 import { connect, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
 import AppTheme from '../../utils/AppTheme';
 import { getLoginCred, getScanData, getScannedDataFromLocal, setScannedDataIntoLocal } from '../../utils/StorageUtils';
+import { Exam_QuestionHeader } from '../../utils/CommonUtils';
+import PopupTable from '../ScannedDetails/PopupTable';
+import ButtonComponent from '../common/components/ButtonComponent';
 import Strings from '../../utils/Strings';
-
 //api
 import APITransport from '../../flux/actions/transport/apitransport'
-
 //styles
 import { styles } from './ScanHistoryStyles';
 import { scanStatusDataAction } from '../ScanStatus/scanStatusDataAction';
 import axios from 'axios';
-
+import { ScrollView } from 'react-native-gesture-handler';
+const WIDTH = Dimensions.get('window').width;
+const HEIGHT = Dimensions.get('window').height;
+const HEIGHT_MODAL = 150;
 const ScanHistoryCard = ({
     showButtons = true,
     navigation,
@@ -26,26 +30,29 @@ const ScanHistoryCard = ({
     setScanStatusData,
     themeColor1,
     studentsAndExamData,
-    apiStatus
+    apiStatus,
+    setShow, show
 }) => {
     const [loading, setLoading] = useState(false)
-    useEffect(()=>{
-         setTimeout(() => {setLoading( !loading )}, 3000)
+    const [isModalVisible, setIsModalVisible] = useState(false)
+
+    useEffect(() => {
+        setTimeout(() => { setLoading(!loading) }, 3000)
         getSaveCount()
-    },[])
-    const getSaveCount = ()=>{
+    }, [])
+    const getSaveCount = () => {
         let data =
-        typeof(scanedData.response)==="object" ?
-        scanedData.response.data ?
-         scanedData.response.data.filter((o,index)=>{
-            if (o.studentAvailability && o.marksInfo.length > 0) {
-                return true
-            }
-        })
-        :
-        []
-        :
-        []
+            typeof (scanedData.response) === "object" ?
+                scanedData.response.data ?
+                    scanedData.response.data.filter((o, index) => {
+                        if (o.studentAvailability && o.marksInfo.length > 0) {
+                            return true
+                        }
+                    })
+                    :
+                    []
+                :
+                []
 
         return data.length;
     }
@@ -95,20 +102,20 @@ const ScanHistoryCard = ({
                     })
                 })
 
-                    let apiObj = new SaveScanData(filterData[0], loginData.data.token);
-                    dispatch(APITransport(apiObj))
+                let apiObj = new SaveScanData(filterData[0], loginData.data.token);
+                dispatch(APITransport(apiObj))
 
-                    if (apiStatus && apiStatus.error && apiStatus.message != null) {
+                if (apiStatus && apiStatus.error && apiStatus.message != null) {
 
-                        Alert.alert("Something went wrong , contact Admin")
-                        setIsLoading(false)
+                    Alert.alert("Something went wrong , contact Admin")
+                    setIsLoading(false)
 
-                    }else{
-                        setTimeout(function () {
-                            callScanStatusData(filterDataLen, setIntolocalAfterFilter)
-                        }, 2000);
+                } else {
+                    setTimeout(function () {
+                        callScanStatusData(filterDataLen, setIntolocalAfterFilter)
+                    }, 2000);
 
-                    }
+                }
             } else {
                 Alert.alert('There is no data!')
                 setIsLoading(false)
@@ -180,11 +187,12 @@ const ScanHistoryCard = ({
             payload: api.getPayload()
         }
     }
-        // for exam type
-        let Examtypedata = studentsAndExamData.data.exams
-        Examtypedata = studentsAndExamData.data.exams.filter(function (item) {
-            return item.subject == filteredData.response.subject;
-        }).map(({type}) => ({type}));
+    // for exam type
+    let Examtypedata = studentsAndExamData.data.exams
+    Examtypedata = studentsAndExamData.data.exams.filter(function (item) {
+        return item.subject == filteredData.response.subject;
+    }).map(({ type }) => ({ type }));
+    // console.log('studentsAndExamData', JSON.stringify(studentsAndExamData.data.exams))
 
     return (
         <View>
@@ -233,8 +241,8 @@ const ScanHistoryCard = ({
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle,]}>
                                 {Examtypedata.map((item) =>
-                                <View key = {item}>
-                                    <Text>{item.type}</Text>
+                                    <View key={item}>
+                                        <Text>{item.type}</Text>
                                     </View>
                                 )}
                             </View>
@@ -245,6 +253,14 @@ const ScanHistoryCard = ({
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
                                 <Text>{filteredData.response.examTestID}</Text>
+                            </View>
+                        </View>
+                        <View style={styles.scanCardStyle}>
+                            <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
+                                <Text>{Strings.exam_details}</Text>
+                            </View>
+                            <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
+                                <Text  onPress={() => setIsModalVisible(!isModalVisible)} style={{textDecorationLine:'underline',color:'blue'}}>{Strings.details}</Text>
                             </View>
                         </View>
                         <View style={styles.scanCardStyle}>
@@ -261,65 +277,124 @@ const ScanHistoryCard = ({
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle, { borderBottomWidth: 1 }]}>
                                 {loading ?
-                                <Text>{getSaveCount()}</Text>: <View style={{alignItems:'flex-start'}}><ActivityIndicator size={'small'} color={'grey'}/></View>}
+                                    <Text>{getSaveCount()}</Text> : <View style={{ alignItems: 'flex-start' }}><ActivityIndicator size={'small'} color={'grey'} /></View>}
                             </View>
+                        </View>
                     </View>
                 </View>
-            </View>
 
-            <View style={{ marginBottom: '3%', width: '100%', alignItems: 'center' }}>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', width: '100%' }}>
-                    {
-                        showButtons
-                        &&
-                        <TouchableOpacity
-                            style={{
-                                backgroundColor: AppTheme.WHITE, borderRadius: 4,
-
-                                width: true ? '45%' : '80%',
-                                alignItems: 'center', justifyContent: 'center', elevation: 8, paddingVertical: 4,
-                                marginLeft: 5,
-                                marginRight: 5
-                            }}
-                            onPress={onPressStatus}
-                        >
-                            <Text>{Strings.save_status}</Text>
-                        </TouchableOpacity>
-                    }
-                    {
-                        showButtons
-                        &&
-                        <TouchableOpacity
-                            style={{
-                                backgroundColor: AppTheme.WHITE, borderRadius: 4, width: '45%',
-                                alignItems: 'center', justifyContent: 'center', elevation: 8, paddingVertical: 4,
-                                marginLeft: 5,
-                                marginRight: 5
-                            }}
-                            onPress={onPressSaveInDB}
-                        >
-                            <Text style={{ color: AppTheme.BLACK }}>{Strings.save_scan}</Text>
-                        </TouchableOpacity>}
-                </View>
-            </View>
-
-            {
-                showButtons
-                &&
-                <View style={{ marginBottom: '5%', marginTop: '2%', width: '100%', alignItems: 'center' }}>
+                <View style={{ marginBottom: '3%', width: '100%', alignItems: 'center' }}>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', width: '100%' }}>
-                        <TouchableOpacity
-                            style={{ backgroundColor: AppTheme.GREY, borderRadius: 4, width: '80%', alignItems: 'center', justifyContent: 'center', elevation: 8, paddingVertical: 4 }}
-                            onPress={onPressContinue}
-                        >
-                            <Text style={{ color: AppTheme.WHITE }}>{Strings.continue_scan}</Text>
-                        </TouchableOpacity>
+                        {
+                            showButtons
+                            &&
+                            <TouchableOpacity
+                                style={{
+                                    backgroundColor: AppTheme.WHITE, borderRadius: 4,
+
+                                    width: true ? '45%' : '80%',
+                                    alignItems: 'center', justifyContent: 'center', elevation: 8, paddingVertical: 4,
+                                    marginLeft: 5,
+                                    marginRight: 5
+                                }}
+                                onPress={onPressStatus}
+                            >
+                                <Text>{Strings.save_status}</Text>
+                            </TouchableOpacity>
+                        }
+                        {
+                            showButtons
+                            &&
+                            <TouchableOpacity
+                                style={{
+                                    backgroundColor: AppTheme.WHITE, borderRadius: 4, width: '45%',
+                                    alignItems: 'center', justifyContent: 'center', elevation: 8, paddingVertical: 4,
+                                    marginLeft: 5,
+                                    marginRight: 5
+                                }}
+                                onPress={onPressSaveInDB}
+                            >
+                                <Text style={{ color: AppTheme.BLACK }}>{Strings.save_scan}</Text>
+                            </TouchableOpacity>}
                     </View>
                 </View>
-            }
 
-        </TouchableOpacity>
+                {
+                    showButtons
+                    &&
+                    <View style={{ marginBottom: '5%', marginTop: '2%', width: '100%', alignItems: 'center' }}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', width: '100%' }}>
+                            <TouchableOpacity
+                                style={{ backgroundColor: AppTheme.GREY, borderRadius: 4, width: '80%', alignItems: 'center', justifyContent: 'center', elevation: 8, paddingVertical: 4 }}
+                                onPress={onPressContinue}
+                            >
+                                <Text style={{ color: AppTheme.WHITE }}>{Strings.continue_scan}</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                }
+
+            </TouchableOpacity>
+
+            <Modal
+                transparent={true}
+                animationType='fade'
+                visible={isModalVisible}
+            >
+                <View style={{ backgroundColor: '#fff', flex: 1 }}>
+                <ScrollView scrollEnabled showsVerticalScrollIndicator={false}>
+                    <View style={[styles1.container1, { flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 20 }]}>
+                        {
+                            Exam_QuestionHeader.map((data) => {
+                                return (
+                                    <PopupTable
+                                        customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
+                                        key={data}
+                                        rowTitle={data}
+                                        rowBorderColor={AppTheme.TAB_BORDER}
+                                    
+                                    />
+                                )
+                            })
+                        }
+                    </View>
+                    <View style={styles1.container1}>
+                        {studentsAndExamData.data.exams[0].questions.map((stu) => {
+                            return (
+                                <View key={stu} style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+
+                                    <PopupTable
+                                        customRowStyle={{ width: '30%', }}
+                                        rowTitle={stu.questionId}
+                                        rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
+                                    />
+                                    <PopupTable
+                                        customRowStyle={{ width: '30%', }}
+                                        rowTitle={stu.indicatorTitle}
+                                        rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
+                                    />
+                                    <PopupTable
+                                        customRowStyle={{ width: '30%', }}
+                                        rowTitle={stu.questionMarks}
+                                        rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
+                                    />
+                                </View>
+                            )
+                        })}
+                        </View>
+                    </ScrollView>
+                    <View >
+                        <ButtonComponent
+                            customBtnStyle={[styles1.nxtBtnStyle, { backgroundColor: themeColor1 ? themeColor1 : AppTheme.BLUE }]}
+                            btnText={Strings.close.toUpperCase()}
+                            activeOpacity={0.8}
+                            onPress={() => setIsModalVisible(!isModalVisible)}
+                        />
+                    </View>
+                </View>
+            </Modal>
         </View>
+
     );
 }
 
@@ -328,7 +403,7 @@ const mapStateToProps = (state) => {
         filteredData: state.filteredData,
         scanedData: state.scanedData,
         loginData: state.loginData,
-        studentsAndExamData : state.studentsAndExamData,
+        studentsAndExamData: state.studentsAndExamData,
         apiStatus: state.apiStatus
     }
 }
@@ -338,6 +413,22 @@ const mapDispatchToProps = (dispatch) => {
         APITransport: APITransport,
     }, dispatch)
 }
+const styles1 = StyleSheet.create({
+    container1: { flex: 1, backgroundColor: '#fff', },
+    container: {
+        padding: 25,
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    modal: {
+        flex: 1,
+        margin: 5,
+        padding: 10, backgroundColor: '#fff',
+        borderRadius: 10
+    },
+    nxtBtnStyle:{marginTop:10, marginHorizontal: 40, marginBottom: 20, borderRadius: 10, }
+})
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(memo(ScanHistoryCard));
