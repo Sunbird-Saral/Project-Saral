@@ -13,7 +13,7 @@ const  ExamDetailsPopup = ({
             {icon ?
                 <Image
                     style={{ height: 20, width: 20 }}
-                    source={rowTitle == 'Passed' ? require('../../assets/images/pass.png') : require('../../../assets/images/fail.png')}
+                    source={rowTitle == 'Passed' ? require('../../../assets/images/pass.png') : require('../../../assets/images/fail.png')}
                     resizeMode={'contain'}
                 />
                 :
