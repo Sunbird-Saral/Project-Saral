@@ -82,8 +82,9 @@ public class DetectShaded {
                 }
             }
         }
-
-        Log.d(TAG, "OMR Dark Pixels Count:: "+darkPixelCount+" num_pixels:: "+num_pixels);
+        if (DEBUG) {
+            Log.d(TAG, "OMR Dark Pixels Count:: "+darkPixelCount+" num_pixels:: "+num_pixels);
+        }
         isOMRFilled = darkPixelCount >= _OMR_FILLED_THRESHOULD;
         return isOMRFilled;
     }
