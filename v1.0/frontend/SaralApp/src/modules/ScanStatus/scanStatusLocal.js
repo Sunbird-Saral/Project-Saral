@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import Strings from '../../utils/Strings';
 
 //components
-import ScanStatusList from './ScanStatusList';
+import ScanStatusLocalList from './ScanStatusLocalList';
 
 //styles
 import { styles } from './ScanStatusStyle';
@@ -30,20 +30,20 @@ const ScanStatusLocal = ({
 }) => {
 
     const [studentList, setStudentList] = useState([])
-    const [loacaldatalist, setLoacaldatalist] = useState([])
+    const [loacalstutlist, setLoacalstutlist] = useState([])
     const [presentStudentList, setPresentStudentList] = useState([])
 
-    console.log('loacaldatalist/////////',JSON.stringify(loacaldatalist))
+      console.log('loacaldatalist/////////',JSON.stringify(loacalstutlist))
 
 
     //function
     const renderItem = ({ item, index }) => {
         return (
-            <ScanStatusList
+            <ScanStatusLocalList
                 themeColor1={multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}
                 id={item.studentId}
                 subject={item.subject}
-                studentList={studentList}
+                loacalstutlist={loacalstutlist}
             />
         )
     }
@@ -77,15 +77,15 @@ const ScanStatusLocal = ({
     const getStudentList = async () => {
         let data = await getPresentAbsentStudent()
         if (data != null) {
-            setStudentList(data)
+            setLoacalstutlist(data)
         }
     }
 
     const getDataFromLocal = async () => {
         let data = await getScannedDataFromLocal();
         if (data != null) {
-            setLoacaldatalist(data)
-            const students = data
+            let students = data.studentsMarkInfo
+            // const students = data
            
         }
     }
