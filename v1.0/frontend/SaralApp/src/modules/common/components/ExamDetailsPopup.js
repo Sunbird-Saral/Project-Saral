@@ -1,23 +1,19 @@
 import React from 'react';
 import { View, TextInput, Image,Text } from 'react-native';
-import AppTheme from '../../utils/AppTheme';
+import AppTheme from '../../../utils/AppTheme';
 
-const PopupTable = ({
+const  ExamDetailsPopup = ({
     customRowStyle,
     rowTitle,
     icon,
-    editable,
-    onChangeText,
     rowBorderColor,
-    keyboardType,
-    maxLength
 }) => {
     return (
         <View style={[styles.container, customRowStyle, { borderColor: rowBorderColor }]}>
             {icon ?
                 <Image
                     style={{ height: 20, width: 20 }}
-                    source={rowTitle == 'Passed' ? require('../../assets/images/pass.png') : require('../../assets/images/fail.png')}
+                    source={rowTitle == 'Passed' ? require('../../assets/images/pass.png') : require('../../../assets/images/fail.png')}
                     resizeMode={'contain'}
                 />
                 :
@@ -50,4 +46,4 @@ const styles = {
     }
 }
 
-export default PopupTable;
+export default ExamDetailsPopup;

@@ -6,7 +6,7 @@ import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
 import AppTheme from '../../utils/AppTheme';
 import { getLoginCred, getScanData, getScannedDataFromLocal, setScannedDataIntoLocal } from '../../utils/StorageUtils';
 import { Exam_QuestionHeader } from '../../utils/CommonUtils';
-import PopupTable from '../ScannedDetails/PopupTable';
+import ExamDetailsPopup from '../common/components/ExamDetailsPopup';
 import ButtonComponent from '../common/components/ButtonComponent';
 import Strings from '../../utils/Strings';
 //api
@@ -348,7 +348,7 @@ const ScanHistoryCard = ({
                         {
                             Exam_QuestionHeader.map((data) => {
                                 return (
-                                    <PopupTable
+                                    <ExamDetailsPopup
                                         customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
                                         key={data}
                                         rowTitle={data}
@@ -364,17 +364,17 @@ const ScanHistoryCard = ({
                             return (
                                 <View key={stu} style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
 
-                                    <PopupTable
+                                    <ExamDetailsPopup
                                         customRowStyle={{ width: '30%', }}
                                         rowTitle={stu.questionId}
                                         rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                     />
-                                    <PopupTable
+                                    <ExamDetailsPopup
                                         customRowStyle={{ width: '30%', }}
                                         rowTitle={stu.indicatorTitle}
                                         rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                     />
-                                    <PopupTable
+                                    <ExamDetailsPopup
                                         customRowStyle={{ width: '30%', }}
                                         rowTitle={stu.questionMarks}
                                         rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
