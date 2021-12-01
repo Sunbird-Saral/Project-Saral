@@ -127,7 +127,7 @@ const ScanHistoryCard = ({
         let dataPayload = {
             "classId": filteredData.response.class,
             "subject": filteredData.response.subject,
-            "section": filteredData.section,
+            "section": filteredData.response.section,
             "fromDate": filteredData.response.examDate,
             "page": 0,
             "schoolId": loginCred.schoolId,
