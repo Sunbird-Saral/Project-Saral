@@ -1,5 +1,5 @@
 import React, { memo, useEffect, useState } from 'react';
-import { Alert, Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, Alert, Text, TouchableOpacity, View } from 'react-native';
 import { connect, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
@@ -26,18 +26,25 @@ const ScanHistoryCard = ({
     setScanStatusData,
     themeColor1
 }) => {
+    const [loading, setLoading] = useState(false)
 
-    useEffect(()=>{
-       getSaveCount()
-    },[])
-
+    useEffect(() => {
+        setTimeout(() => { setLoading(!loading) }, 3000)
+        getSaveCount()
+    }, [])
     const getSaveCount = ()=>{
-        let data = scanedData.data.length > 0 ? scanedData.data.filter((o,index)=>{
+        let data =
+        typeof(scanedData.response)==="object" ?
+        scanedData.response.data ?
+         scanedData.response.data.filter((o,index)=>{
             if (o.studentAvailability && o.marksInfo.length > 0) {
                 return true
             }
         })
-        :[]
+        :
+        []
+        :
+        []
         return data.length;
     }
 
@@ -227,7 +234,8 @@ const ScanHistoryCard = ({
                                 <Text>{Strings.save_status}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle, { borderBottomWidth: 1 }]}>
-                                <Text>{scanedData.data ? getSaveCount() : 0}</Text>
+                            {loading ?
+                                    <Text>{getSaveCount()}</Text> : <View style={{ alignItems: 'flex-start' }}><ActivityIndicator size={'small'} color={'grey'} /></View>}
                             </View>
                     </View>
                 </View>
@@ -292,7 +300,7 @@ const ScanHistoryCard = ({
 const mapStateToProps = (state) => {
     return {
         filteredData: state.filteredData,
-        scanedData: state.scanedData.response,
+        scanedData: state.scanedData,
         loginData: state.loginData
     }
 }
