@@ -93,6 +93,7 @@ const StudentsList = ({
         let dataPayload = {
             "classId": filteredData.class,
             "subject": filteredData.subject,
+            "section": filteredData.section,
             "fromDate": filteredData.examDate,
             "schoolId": loginCred.schoolId,
             "page": 0,
