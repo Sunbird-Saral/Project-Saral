@@ -88,6 +88,7 @@ const StudentsList = ({
 
 
     const callScanStatusData = async () => {
+        setIsLoading(true)
         let loginCred = await getLoginCred()
 
         let dataPayload = {
@@ -122,8 +123,10 @@ const StudentsList = ({
                     clearTimeout(id)
                     api.processResponse(res)
                     dispatch(dispatchAPIAsync(api));
+                    setIsLoading(false)
                 })
                 .catch(function (err) {
+                    setIsLoading(false)
                     clearTimeout(id)
                 });
         }
@@ -145,9 +148,8 @@ const StudentsList = ({
         })
         setTotalStudent(filterStudentsData[0].data ? filterStudentsData[0].data.students : []);
         setAllStudentData(filterStudentsData[0].data.students)
-        setIsLoading(false)
-        callScanStatusData()
         getRoi()
+        callScanStatusData()
     }
 
 
