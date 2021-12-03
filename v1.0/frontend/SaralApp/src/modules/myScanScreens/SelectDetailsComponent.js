@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, BackHandler, Alert } from 'react-native';
+import { View, ScrollView, Text, BackHandler, Alert,TouchableOpacity} from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -9,7 +9,7 @@ import Strings from '../../utils/Strings';
 import AppTheme from '../../utils/AppTheme';
 import Spinner from '../common/components/loadingIndicator';
 import { apkVersion } from '../../configs/config';
-import HeaderComponent from '../common/components/HeaderComponent';
+import HeaderComponents from '../common/components/HeaderComponents';
 import DropDownMenu from '../common/components/DropDownComponent';
 import ButtonComponent from '../common/components/ButtonComponent';
 import { getLoginData, setStudentsExamData, getStudentsExamData, getLoginCred, setLoginData } from '../../utils/StorageUtils'
@@ -100,10 +100,15 @@ class SelectDetailsComponent extends Component {
             calledAbsentStatus: false,
             absentStatusPayload: null,
             subjectsData: [],
-            filterdataid: []
+            filterdataid: [],
+            isHidden: false
         }
+        this.onPress = this.onPress.bind(this);
         this.onBack = this.onBack.bind(this)
     }
+    onPress() {
+        this.setState({isHidden: !this.state.isHidden})
+      }
 
     componentDidMount() {
         const { navigation, scanTypeData } = this.props
@@ -615,15 +620,15 @@ class SelectDetailsComponent extends Component {
             })
             return false
         }
-            if (subIndex == -1) {
-                this.setState({
-                    errClass: '',
-                    errSection: '',
-                    errSub: Strings.please_select_sub,
-                    errDate: ''
-                })
-                return false
-            }
+        if (subIndex == -1) {
+            this.setState({
+                errClass: '',
+                errSection: '',
+                errSub: Strings.please_select_sub,
+                errDate: ''
+            })
+            return false
+        }
 
         return true
     }
@@ -701,18 +706,31 @@ class SelectDetailsComponent extends Component {
             this.setState({ dateVisible: false })
         }
     }
+   
 
     render() {
         const { navigation, isLoading, defaultSelected, classList, classListIndex, selectedClass, sectionList, sectionListIndex, selectedSection, pickerDate, selectedDate, subArr, selectedSubject, subIndex, errClass, errSub, errDate, errSection, sectionValid, dateVisible, examTestID } = this.state
         const { loginData } = this.props
+      
         return (
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
-                <HeaderComponent
+               
+                    <View style={styles.imageViewContainer}>
+                    <TouchableOpacity  onPress={this.onPress}>
+                        <View style={styles.imageContainerStyle}>
+                            {/* <Text style={{ textAlign: 'center', fontSize: AppTheme.HEADER_FONT_SIZE_LARGE }}>{studentData.length > 0 && studentData[0].name.charAt(0)}</Text> */}
+                        </View>
+                        </TouchableOpacity>
+                    </View>
+                
+                {this.state.isHidden ?
+                  <HeaderComponents
+                    supportTeamText={'Support'}
                     logoutHeaderText={Strings.logout_text}
-                    titletextstyle={{ color: AppTheme.WHITE }}
-                    customLogoutTextStyle={{ color: AppTheme.GREY }}
-                    onLogoutClick={this.onLogoutClick}
-                />
+                    customLogoutTextStyle={{ color: AppTheme.BLACK, }}
+                     onLogoutClick={this.onLogoutClick}
+                /> 
+                 : null}
                 {(loginData && loginData.data) &&
                     <View style={{ marginTop: 20 }}>
                         <Text
@@ -859,8 +877,24 @@ const styles = {
         lineHeight: 35
     },
     nxtBtnStyle: {
+    },
+    imageViewContainer: {
 
-    }
+        alignItems: 'flex-end',
+        backgroundColor: '#fff'
+        // justifyContent:'center'
+    },
+    imageContainerStyle: {
+        padding: 5,
+        marginRight: 10,
+        height: 50,
+        width: 50,
+        borderRadius: 45,
+        borderWidth: 1,
+        borderColor: AppTheme.TAB_BORDER,
+        justifyContent: 'center',
+        backgroundColor: AppTheme.TAB_BORDER
+    },
 }
 
 const mapStateToProps = (state) => {
