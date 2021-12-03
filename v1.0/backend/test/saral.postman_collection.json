@@ -674,7 +674,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{   \n    \"classId\": \"2\"\n}"
+							"raw": "{   \n    \"classId\": \"2\",\n    \"section\":\"D\"\n}"
 						},
 						"url": {
 							"raw": "{{url}}/fetchStudentsandExamsByQuery",
@@ -777,7 +777,7 @@
 							"variable": [
 								{
 									"key": "studentId",
-									"value": "2204000000000001"
+									"value": "2203000000000002"
 								}
 							]
 						}
@@ -1475,7 +1475,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTk0OTIzNzIzMWFiYzQyM2MyMjQyZWIiLCJpYXQiOjE2MzcxMjk4NjB9.ys45lBepJ6sne3gxH2sk_WlKHXr9Bk76aOm1q8iQrfc",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWE3MzNmYTU2YTA3ZTFkMDA4MGQxOWQiLCJpYXQiOjE2Mzg1MDg4ODh9.KC9T6Z0eMf3AaYA_g40v1R5AT_-FOzjRyh7CLG8bbdE",
 									"type": "string"
 								}
 							]
@@ -1493,7 +1493,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{url}}/getExamsByClas/:classId",
+							"raw": "{{url}}/getExamsByClas/:classId?subject=Hindi&examDate=01/10/2021",
 							"host": [
 								"{{url}}"
 							],
@@ -1503,14 +1503,12 @@
 							],
 							"query": [
 								{
-									"key": "",
-									"value": "",
-									"disabled": true
+									"key": "subject",
+									"value": "Hindi"
 								},
 								{
-									"key": "",
-									"value": "",
-									"disabled": true
+									"key": "examDate",
+									"value": "01/10/2021"
 								}
 							],
 							"variable": [
@@ -1650,7 +1648,7 @@
 							"basic": [
 								{
 									"key": "username",
-									"value": "odisha001",
+									"value": "up001",
 									"type": "string"
 								},
 								{
@@ -1670,7 +1668,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"classId\" : \"2\"\n}"
+							"raw": "{\n  \"classId\": \"2\",\n  \"section\": \"B\",\n  \"subject\": \"Maths\",\n  \"fromDate\": \"24-12-2021\",\n  \"schoolId\": \"up001\",\n  \"limit\": 10,\n  \"page\": 1,\n  \"downloadRes\": false\n}"
 						},
 						"url": {
 							"raw": "{{url}}/getSavedScan",

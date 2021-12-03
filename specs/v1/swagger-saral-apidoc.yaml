@@ -912,23 +912,29 @@ definitions:
       classId:
         type: string
         example: 2
+      section:
+        type: string
+        example: "B"
       subject:
         type: string
         example: "Maths"
       fromDate:
         type: string
         example: "24-12-2021"
+      schoolId:
+        type: string
+        example: "up001"
       limit:
         type: number
         example: 10
-        description: "Page size"
+        description: "Page size. Currently this parameter is not used by Saral App"
       page:
         type: number
         example: 1
-        description: "Page Number to be retrieved"
+        description: "Page Number to be retrieved. Currently this parameter is not used by Saral App"
       downloadRes:
         type: boolean
-        example: true
+        example: false
         
   GetSavedScanResponse:
     type: object
