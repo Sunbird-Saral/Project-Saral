@@ -13,7 +13,6 @@ const ScanStatusLocalList = ({
             return true
         }
     })
-    console.log('loacalstutlist',studentName)
     return (
         <View style={[styles.container, { backgroundColor: themeColor1 ? themeColor1 : AppTheme.GREEN }]}>
             <View style={styles.childCon}>

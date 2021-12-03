@@ -279,7 +279,7 @@ class MyScanComponent extends Component {
                     </View>
 
                     <ScanHistoryCard
-                       scanstatusbutton ={this.props.apiStatus.unauthorized ? false : true}
+                        scanstatusbutton ={true}
                         themeColor1={this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE}
                         showButtons={false}
                         scanStatusData={this.state.scanStatusData}

@@ -24,28 +24,43 @@ import { getPresentAbsentStudent, getScannedDataFromLocal } from '../../utils/St
 
 const ScanStatusLocal = ({
     loginData,
-    scanedData,
+    filteredData,
     multiBrandingData,
     navigation,
 }) => {
 
-    const [studentList, setStudentList] = useState([])
+    const [unsavedstudentList, setUnsavedstudentList] = useState([])
     const [loacalstutlist, setLoacalstutlist] = useState([])
     const [presentStudentList, setPresentStudentList] = useState([])
 
-      console.log('loacaldatalist/////////',JSON.stringify(loacalstutlist))
 
 
-    //function
+useEffect(
+    React.useCallback(() => {
+        const onBackPress = () => {
+            navigation.navigate('ScanHistory');
+        };
+        BackHandler.addEventListener('hardwareBackPress', onBackPress);
+        return () =>
+            BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+    }, []),
+);
+useEffect(() => {
+       getPresentStudentList()
+        getStudentList()
+        getDataFromLocal()
+}, [])
+
+
+
     const renderItem = ({ item, index }) => {
-        return (
-            <ScanStatusLocalList
+        console.log('item',item.studentId)
+        return <ScanStatusLocalList
+        id={item.studentId}
+                loacalstutlist={unsavedstudentList}
                 themeColor1={multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}
-                id={item.studentId}
-                subject={item.subject}
-                loacalstutlist={loacalstutlist}
             />
-        )
+        
     }
 
     const renderEmptyData = ({ item }) => {
@@ -57,53 +72,41 @@ const ScanStatusLocal = ({
     }
 
 
-    useEffect(
-        React.useCallback(() => {
-            const onBackPress = () => {
-                navigation.navigate('ScanHistory');
-            };
-            BackHandler.addEventListener('hardwareBackPress', onBackPress);
-            return () =>
-                BackHandler.removeEventListener('hardwareBackPress', onBackPress);
-        }, []),
-    );
-
-    useEffect(() => {
-        getDataFromLocal()
-        getStudentList()
-        getPresentStudentList()
-    }, [])
-
-    const getStudentList = async () => {
+    const getDataFromLocal = async () => {
         let data = await getPresentAbsentStudent()
         if (data != null) {
-            setLoacalstutlist(data)
-        }
-    }
-
-    const getDataFromLocal = async () => {
-        let data = await getScannedDataFromLocal();
-        if (data != null) {
-            let students = data.studentsMarkInfo
-            // const students = data
+            setUnsavedstudentList(data)
+             let students = data.studentsMarkInfo
+            //  const students = data
            
         }
     }
 
+    const getStudentList = async () => {
+        let data = await getScannedDataFromLocal()
+        if (data != null) {
+          let filterscandata =  data.filter((item)=>{
+                if( filteredData.class == item.classId &&  filteredData.examDate == item.examDate){
+                    return true
+                }
+                setLoacalstutlist(filterscandata)
+            })
+            setLoacalstutlist(filterscandata)
+        }
+    }
+
+
     const getPresentStudentList = ()=>{
-        let data = typeof (scanedData) === "object"
-        ?
-        scanedData.data
+        let data = typeof (loacalstutlist[0]) === "object"
+       
             ?
-            scanedData.data.filter((o, index) => {
+            loacalstutlist[0].studentsMarkInfo.filter((o, index) => {
                 if (o.studentAvailability && o.marksInfo.length > 0) {
                     return true
                 }
             })
             :
-            []
-        :
-        []
+            []  
         setPresentStudentList(data)
         
     }
@@ -130,13 +133,13 @@ const ScanStatusLocal = ({
             }
 
             <Text style={styles.scanStatus}>{Strings.scan_status}</Text>
-
+        
             <FlatList
-                data={scanedData && presentStudentList}
+                data={ loacalstutlist && presentStudentList}
                 renderItem={renderItem}
                 ListEmptyComponent={renderEmptyData}
-                keyExtractor={(item, index) => `${index.toString()}`}
-                contentContainerStyle={styles.content}
+            keyExtractor={(item, index) => `${index.toString()}`}
+            contentContainerStyle={styles.content}
             />
 
         </View>
