@@ -935,6 +935,7 @@ definitions:
       downloadRes:
         type: boolean
         example: false
+        description: "Download Result. Currently this parameter is always set to false by Saral App ."
         
   GetSavedScanResponse:
     type: object
