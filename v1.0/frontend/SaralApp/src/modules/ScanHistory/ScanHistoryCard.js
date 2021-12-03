@@ -197,7 +197,6 @@ const ScanHistoryCard = ({
     Examtypedata = studentsAndExamData.data.exams.filter(function (item) {
         return item.subject == filteredData.response.subject;
     }).map(({ type }) => ({ type }));
-    // console.log('studentsAndExamData', JSON.stringify(studentsAndExamData.data.exams))
 
     return (
         <View>

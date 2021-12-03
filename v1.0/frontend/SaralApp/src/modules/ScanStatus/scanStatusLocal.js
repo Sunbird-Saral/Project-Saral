@@ -38,23 +38,17 @@ const ScanStatusLocal = ({
 useEffect(
     React.useCallback(() => {
         const onBackPress = () => {
-            navigation.navigate('ScanHistory');
+            navigation.goBack('myScan');
         };
         BackHandler.addEventListener('hardwareBackPress', onBackPress);
         return () =>
             BackHandler.removeEventListener('hardwareBackPress', onBackPress);
     }, []),
 );
-useEffect(() => {
-       getPresentStudentList()
-        getStudentList()
-        getDataFromLocal()
-}, [])
 
 
 
     const renderItem = ({ item, index }) => {
-        console.log('item',item.studentId)
         return <ScanStatusLocalList
         id={item.studentId}
                 loacalstutlist={unsavedstudentList}
@@ -70,26 +64,28 @@ useEffect(() => {
             </View>
         )
     }
-
-
-    const getDataFromLocal = async () => {
+    
+    useEffect(()=>{
+        getDataFromLocal()
+        getStudentList()
+        getPresentStudentList()
+    },[loacalstutlist])
+    
+    const getStudentList = async () => {
         let data = await getPresentAbsentStudent()
         if (data != null) {
             setUnsavedstudentList(data)
-             let students = data.studentsMarkInfo
-            //  const students = data
-           
         }
     }
 
-    const getStudentList = async () => {
+    const getDataFromLocal = async () => {
         let data = await getScannedDataFromLocal()
-        if (data != null) {
+        if (data) {
           let filterscandata =  data.filter((item)=>{
-                if( filteredData.class == item.classId &&  filteredData.examDate == item.examDate){
+            let findSection = item.studentsMarkInfo.some((item) => item.section == filteredData.section)
+                if( filteredData.class == item.classId &&  filteredData.examDate == item.examDate &&  filteredData.subject == item.subject && findSection   ){
                     return true
-                }
-                setLoacalstutlist(filterscandata)
+                }   
             })
             setLoacalstutlist(filterscandata)
         }
@@ -97,8 +93,10 @@ useEffect(() => {
 
 
     const getPresentStudentList = ()=>{
-        let data = typeof (loacalstutlist[0]) === "object"
-       
+      
+        let data =typeof (loacalstutlist) === "object"
+            ?
+            loacalstutlist[0]
             ?
             loacalstutlist[0].studentsMarkInfo.filter((o, index) => {
                 if (o.studentAvailability && o.marksInfo.length > 0) {
@@ -106,7 +104,9 @@ useEffect(() => {
                 }
             })
             :
-            []  
+            []
+            :
+           []
         setPresentStudentList(data)
         
     }
