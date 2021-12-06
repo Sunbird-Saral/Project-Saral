@@ -68,7 +68,7 @@ const ScanHistoryCard = ({
     }
 
     const onPressScanStatus = () => {
-        navigation.push('scanStatusLocal')
+        navigation.push('ScanStatusLocal')
     }
     const dispatch = useDispatch()
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, Text, View, BackHandler } from 'react-native';
+import { FlatList, Text, View, BackHandler, Image, TouchableOpacity, Linking, Share } from 'react-native';
 
 //redux
 import { connect } from 'react-redux';
@@ -20,6 +20,7 @@ import { bindActionCreators } from 'redux';
 import APITransport from '../../flux/actions/transport/apitransport'
 import AppTheme from '../../utils/AppTheme';
 import { getPresentAbsentStudent, getScannedDataFromLocal } from '../../utils/StorageUtils';
+import { Assets } from '../../assets';
 
 
 const ScanStatusLocal = ({
@@ -46,15 +47,34 @@ useEffect(
     }, []),
 );
 
-
+    const onShare = async () => {
+        try {
+            const result = await Share.share({
+                title: '',
+                message:
+                    `${JSON.stringify(loacalstutlist[0])}`
+            });
+            if (result.action === Share.sharedAction) {
+                if (result.activityType) {
+                    // shared with activity type of result.activityType
+                } else {
+                    // shared
+                }
+            } else if (result.action === Share.dismissedAction) {
+                // dismissed
+            }
+        } catch (error) {
+            alert(error.message);
+        }
+    };
 
     const renderItem = ({ item, index }) => {
         return <ScanStatusLocalList
-        id={item.studentId}
-                loacalstutlist={unsavedstudentList}
-                themeColor1={multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}
-            />
-        
+            id={item.studentId}
+            loacalstutlist={unsavedstudentList}
+            themeColor1={multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}
+        />
+
     }
 
     const renderEmptyData = ({ item }) => {
@@ -64,8 +84,8 @@ useEffect(
             </View>
         )
     }
-    
-    useEffect(()=>{
+
+    useEffect(() => {
         getDataFromLocal()
         getStudentList()
         getPresentStudentList()
@@ -113,24 +133,29 @@ useEffect(
 
     return (
         <View style={styles.container}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
             {
                 (loginData && loginData.data)
                 &&
-                <View style={styles.schoolCon}>
+                <View>
                     <Text
                         style={styles.schoolName}
                     >
                         {Strings.school_name + ' Name : '}
                         <Text style={{ fontWeight: 'normal' }}>{loginData.data.school.name}</Text>
                     </Text>
-                    <Text style={styles.schoolId}>
+                    <Text style={[styles.schoolId, { marginLeft: 5 }]}>
                         {Strings.schoolId_text + ' : '}
-                        <Text style={{ fontWeight: 'normal' }}>
+                        <Text style={{ fontWeight: 'normal', }}>
                             {loginData.data.school.schoolId}
                         </Text>
                     </Text>
                 </View>
             }
+            <TouchableOpacity onPress={onShare}>
+                    <Image style={{ height: 25, width: 25, marginHorizontal: 15, marginVertical: 20 }} source={Assets.Share} />
+                </TouchableOpacity>
+            </View>
 
             <Text style={styles.scanStatus}>{Strings.scan_status}</Text>
         

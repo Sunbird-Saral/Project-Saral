@@ -9,7 +9,7 @@ import Strings from '../../utils/Strings';
 import AppTheme from '../../utils/AppTheme';
 import Spinner from '../common/components/loadingIndicator';
 import { apkVersion } from '../../configs/config';
-import HeaderComponents from '../common/components/HeaderComponents';
+import HeaderComponent from '../common/components/HeaderComponent';
 import DropDownMenu from '../common/components/DropDownComponent';
 import ButtonComponent from '../common/components/ButtonComponent';
 import { getLoginData, setStudentsExamData, getStudentsExamData, getLoginCred, setLoginData } from '../../utils/StorageUtils'
@@ -715,22 +715,12 @@ class SelectDetailsComponent extends Component {
         return (
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
                
-                    <View style={styles.imageViewContainer}>
-                    <TouchableOpacity  onPress={this.onPress}>
-                        <View style={styles.imageContainerStyle}>
-                            {/* <Text style={{ textAlign: 'center', fontSize: AppTheme.HEADER_FONT_SIZE_LARGE }}>{studentData.length > 0 && studentData[0].name.charAt(0)}</Text> */}
-                        </View>
-                        </TouchableOpacity>
-                    </View>
-                
-                {this.state.isHidden ?
-                  <HeaderComponents
-                    supportTeamText={'Support'}
+                    <HeaderComponent
                     logoutHeaderText={Strings.logout_text}
-                    customLogoutTextStyle={{ color: AppTheme.BLACK, }}
-                     onLogoutClick={this.onLogoutClick}
-                /> 
-                 : null}
+                    titletextstyle={{ color: AppTheme.WHITE }}
+                    customLogoutTextStyle={{ color: AppTheme.GREY }}
+                    onLogoutClick={this.onLogoutClick}
+                />
                 {(loginData && loginData.data) &&
                     <View style={{ marginTop: 20 }}>
                         <Text

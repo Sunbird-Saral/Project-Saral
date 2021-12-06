@@ -16,7 +16,7 @@ import ScanStatus from "../modules/ScanStatus/ScanStatus";
 import DashboardComponent from '../modules/myScanScreens/DashboardComponent'
 import ScannedDetailsComponent from "../modules/ScannedDetails/ScannedDetailsComponent";
 import HomeComponent from "../modules/myScanScreens/Homescreen"
-import scanStatusLocal from "../modules/ScanStatus/scanStatusLocal";
+import ScanStatusLocal from "../modules/ScanStatus/ScanStatusLocal";
 
 
 const AuthStack = createStackNavigator({
@@ -60,8 +60,8 @@ const MainStack = createStackNavigator(
         ScanStatus: {
             screen: ScanStatus
         },
-        scanStatusLocal: {
-            screen: scanStatusLocal
+        ScanStatusLocal: {
+            screen: ScanStatusLocal
         },
         ScannedDetailsComponent: {
             screen: ScannedDetailsComponent
