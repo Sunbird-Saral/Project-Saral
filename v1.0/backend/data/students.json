@@ -115,7 +115,7 @@
   ],
   "section": "D",
   "name": "Monika Gupta",
-  "studentId": "12126 03",
+  "studentId": "1212603",
   "schoolId": "up001"
 },
 {
@@ -354,6 +354,54 @@
   "section": "D",
   "name": "Nitin Agarwal",
   "studentId": "888",
+  "schoolId": "up001"
+},
+{
+  "studentClass": [
+    {
+      "classId": "4",
+      "className": "Class-4"
+    }
+  ],
+  "section": "D",
+  "name": "Swapnil Kanyal",
+  "studentId": "826",
+  "schoolId": "up001"
+},
+{
+  "studentClass": [
+    {
+      "classId": "4",
+      "className": "Class-4"
+    }
+  ],
+  "section": "D",
+  "name": "Neetu Bhatt",
+  "studentId": "836",
+  "schoolId": "up001"
+},
+{
+  "studentClass": [
+    {
+      "classId": "4",
+      "className": "Class-4"
+    }
+  ],
+  "section": "D",
+  "name": "Geet Nayal",
+  "studentId": "846",
+  "schoolId": "up001"
+},
+{
+  "studentClass": [
+    {
+      "classId": "4",
+      "className": "Class-4"
+    }
+  ],
+  "section": "D",
+  "name": "Harshit Singh",
+  "studentId": "856",
   "schoolId": "up001"
 },
 {
