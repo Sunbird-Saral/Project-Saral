@@ -26,7 +26,8 @@ const ScanHistoryCard = ({
     setScanStatusData,
     themeColor1,
     studentsAndExamData,
-    apiStatus
+    apiStatus,
+    bgFlag
 }) => {
     const [loading, setLoading] = useState(false)
     useEffect(()=>{
@@ -66,6 +67,7 @@ const ScanHistoryCard = ({
         const { subject, examDate } = filteredData.response
 
         if (data) {
+            if (!bgFlag) {
             const filterData = data.filter((e) => {
 
                 let findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.response.section)
@@ -113,6 +115,9 @@ const ScanHistoryCard = ({
                 Alert.alert('There is no data!')
                 setIsLoading(false)
             }
+        }else{
+            Alert.alert("Data is Uploading please wait till it finished.")
+        }
 
         }
         else {
@@ -329,7 +334,8 @@ const mapStateToProps = (state) => {
         scanedData: state.scanedData,
         loginData: state.loginData,
         studentsAndExamData : state.studentsAndExamData,
-        apiStatus: state.apiStatus
+        apiStatus: state.apiStatus,
+        bgFlag: state.bgFlag
     }
 }
 

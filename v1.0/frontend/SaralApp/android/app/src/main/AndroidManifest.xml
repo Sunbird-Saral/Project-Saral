@@ -24,30 +24,6 @@
       android:theme="@style/AppTheme">
 
 
-    <meta-data
-    android:name="com.dieam.reactnativepushnotification.notification_foreground"
-    android:value="false"/>
-    <meta-data  
-    android:name="com.dieam.reactnativepushnotification.notification_color"
-    android:resource="@color/white"/> <!-- or @android:color/{name} to use a standard color -->
-
-    <receiver android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationActions" />
-        <receiver android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationPublisher" />
-        <receiver android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationBootEventReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
-                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON"/>
-            </intent-filter>
-        </receiver>
-
-        <service
-            android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationListenerService"
-            android:exported="false" >
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
                     
       <activity
         android:name=".MainActivity"
@@ -63,6 +39,30 @@
 
         <!--    Make an activity entry here as SaralSDK launch an activity internally.-->
         <activity android:name="org.ekstep.saral.saralsdk.SaralSDKOpenCVScannerActivity" />
+
+<!-- Change the value to true to enable pop-up for in foreground on receiving remote notifications (for prevent duplicating while showing local notifications set this to false) -->
+        <meta-data  android:name="com.dieam.reactnativepushnotification.notification_foreground"
+                    android:value="false"/>
+        <!-- Change the resource name to your App's accent color - or any other color you want -->
+        <meta-data  android:name="com.dieam.reactnativepushnotification.notification_color"
+                    android:resource="@color/white"/> <!-- or @android:color/{name} to use a standard color -->
+
+        <receiver android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationActions" />
+        <receiver android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationPublisher" />
+        <receiver android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationBootEventReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationListenerService"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
 
     </application>
 </manifest>

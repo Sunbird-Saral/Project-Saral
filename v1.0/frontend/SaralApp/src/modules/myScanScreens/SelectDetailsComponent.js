@@ -150,7 +150,7 @@ class SelectDetailsComponent extends Component {
     }
 
     onPressSaveInDB = async () => {
-        const { loginData } = this.props
+        const { loginData, bgFlag } = this.props
         let data = await getScannedDataFromLocal();
         if (data != null) {
             for (const value of data) {
@@ -158,15 +158,19 @@ class SelectDetailsComponent extends Component {
                 this.props.APITransport(apiObj)
             }
         }
-        Alert.alert(Strings.message_text, Strings.are_you_sure_you_want_to_logout, [
-            { 'text': Strings.no_text, style: 'cancel' },
-            {
-                'text': Strings.yes_text, onPress: async () => {
-                    this.props.LogoutAction()
-                    this.props.navigation.navigate('auth')
+        if (bgFlag) {
+            Alert.alert("Data is Uploading please wait till it finished.")
+        } else {
+            Alert.alert(Strings.message_text, Strings.are_you_sure_you_want_to_logout, [
+                { 'text': Strings.no_text, style: 'cancel' },
+                {
+                    'text': Strings.yes_text, onPress: async () => {
+                        this.props.LogoutAction()
+                        this.props.navigation.navigate('auth')
+                    }
                 }
-            }
-        ])
+            ])
+        }
     }
 
     loader = (flag) => {
@@ -615,15 +619,15 @@ class SelectDetailsComponent extends Component {
             })
             return false
         }
-            if (subIndex == -1) {
-                this.setState({
-                    errClass: '',
-                    errSection: '',
-                    errSub: Strings.please_select_sub,
-                    errDate: ''
-                })
-                return false
-            }
+        if (subIndex == -1) {
+            this.setState({
+                errClass: '',
+                errSection: '',
+                errSub: Strings.please_select_sub,
+                errDate: ''
+            })
+            return false
+        }
 
         return true
     }
@@ -873,7 +877,8 @@ const mapStateToProps = (state) => {
         roiData: state.roiData,
         absentStudentDataResponse: state.absentStudentDataResponse,
         getScanStatusData: state.getScanStatusData,
-        multiBrandingData: state.multiBrandingData.response.data
+        multiBrandingData: state.multiBrandingData.response.data,
+        bgFlag: state.bgFlag
     }
 }
 

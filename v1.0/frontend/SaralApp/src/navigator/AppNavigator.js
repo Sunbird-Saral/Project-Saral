@@ -23,6 +23,12 @@ import { storeFactory } from '../flux/store/store'
 import C from '../flux/actions/constants'
 import NetInfo from "@react-native-community/netinfo";
 import PushNotification, { Importance } from "react-native-push-notification";
+import { getScannedDataFromLocal, setErrorMessage, setScannedDataIntoLocal } from "../utils/StorageUtils";
+import { SaveScanData } from "../flux/actions/apis/saveScanDataAction";
+import APITransport from '../flux/actions/transport/apitransport'
+import { Alert } from "react-native";
+import axios from "axios";
+import Strings from "../utils/Strings";
 
 const AuthStack = createStackNavigator({
     login: {
@@ -82,57 +88,104 @@ function flagAction(payload) {
     }
 }
 
-const checkNetworkConnectivity = () => {
-    const subscribe = NetInfo.addEventListener(state => {
-        return state.isConnected
-    })
-    return subscribe()
+const checkNetworkConnectivity = async () => {
+    var subscribe = false
+    NetInfo.fetch().then(state => {
+        subscribe = state.isConnected;
+    });
+    return subscribe
 }
 
 
 const testPushNotification = (title, msg) => {
 
-    PushNotification.createChannel(
-        {
-            channelId: "1dzD0LtdsIe6n1OalyqYdQZvrFv1", // (required)
-            channelName: "Notifications", // (required)
-            channelDescription: "A channel to categorise your notifications", // (optional) default: undefined.
-            soundName: "notification.mp3",
-            importance: 4,
-            vibrate: true,
-        });
-
-    PushNotification.configure({
-        permissions: {
-            alert: true,
-            badge: true,
-            sound: true,
-        },
-        popInitialNotification: true,
-        requestPermissions: true
-    })
-
     PushNotification.localNotification({
         channelId: "1dzD0LtdsIe6n1OalyqYdQZvrFv1",
-        smallIcon: "ic_notification",
-        color: "white",
+        // smallIcon: "ic_notification",
+        // color: "white",
         vibrate: true,
-        shortcutId: "shortcut-id",
+        // shortcutId: "shortcut-id",
         title: title,
         message: msg,
         playSound: true,
-        soundName: "notification.mp3",
+        // soundName: "notification.mp3",
         priority: "high"
     });
 }
 
 
-setTimeout(() => {
-    storeFactory.dispatch(flagAction(true))
-    if (checkNetworkConnectivity()) {
-        testPushNotification("Uploading...☻☻☻", "please wait we are uploading")
+const testCancel = () => {
+    PushNotification.cancelAllLocalNotifications()
+}
+
+const saveDataInDB = async () => {
+
+    const data = await getScannedDataFromLocal();
+    if (data != null) {
+        let len = 0
+        data.forEach(element => {
+            len = len + element.studentsMarkInfo.length
+        });
+
+        if (len >= 5) {
+            const loginData = storeFactory.getState().loginData
+            const apiStatus = storeFactory.getState().apiStatus
+
+
+            data.map(element => {
+
+                let apiObj = new SaveScanData(element, loginData.data.token);
+                let apiResponse = null
+                const source = axios.CancelToken.source()
+                const id = setTimeout(() => {
+                    if (apiResponse === null) {
+                        source.cancel('The request timed out.');
+                    }
+                }, 60000);
+                axios.put(apiObj.apiEndPoint(), apiObj.getBody(), { headers: apiObj.getHeaders(), cancelToken: source.token },)
+                    .then(function (res) {
+                        apiResponse = res
+                        success = true
+                        clearTimeout(id)
+                        apiObj.processResponse(res)
+                        storeFactory.dispatch(dispatchAPIAsync(apiObj));
+                        if (typeof apiObj.getNextStep === 'function' && res.data && (res.status == 200 || res.status == 201))
+                        storeFactory.dispatch(apiObj.getNextStep())
+                        storeFactory.dispatch(flagAction(false))
+                    })
+                    .catch(function (err) {
+                        clearTimeout(id)
+                        Alert.alert("Something went wrong with background process, please contact Admin")
+                        setErrorMessage(err)
+                        storeFactory.dispatch(flagAction(false))
+                    });
+            });
+            // setScannedDataIntoLocal([])
+        }
+
     }
-}, 9000);
+}
+
+
+function dispatchAPIAsync(apiObj) {
+    return {
+        type: apiObj.type,
+        payload: apiObj.getPayload()
+    }
+}
+
+setTimeout(() => {
+
+    //get redux value 
+    const isLogin = storeFactory.getState().loginData
+    if (isLogin.status == 200) {
+        storeFactory.dispatch(flagAction(true))
+        if (checkNetworkConnectivity()) {
+            testPushNotification("Uploading...☻☻☻", "please wait we are uploading")
+            saveDataInDB()
+        }
+    }
+}, 4000);
 
 
 const AppNavigation = createSwitchNavigator(
@@ -148,7 +201,8 @@ const AppNavigation = createSwitchNavigator(
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        bgFlag: bgFlag
+        bgFlag: bgFlag,
+        APITransport: APITransport
     }, dispatch)
 }
 
