@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, BackHandler, Alert,TouchableOpacity} from 'react-native';
+import { View, ScrollView, Text, BackHandler, Alert,TouchableOpacity,Share} from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -9,7 +9,7 @@ import Strings from '../../utils/Strings';
 import AppTheme from '../../utils/AppTheme';
 import Spinner from '../common/components/loadingIndicator';
 import { apkVersion } from '../../configs/config';
-import HeaderComponent from '../common/components/HeaderComponent';
+import HeaderComponents from '../common/components/HeaderComponents';
 import DropDownMenu from '../common/components/DropDownComponent';
 import ButtonComponent from '../common/components/ButtonComponent';
 import { getLoginData, setStudentsExamData, getStudentsExamData, getLoginCred, setLoginData } from '../../utils/StorageUtils'
@@ -25,6 +25,7 @@ import { LogoutAction } from '../../flux/actions/apis/LogoutAction';
 import { getScannedDataFromLocal } from '../../utils/StorageUtils';
 import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
 import C from '../../flux/actions/constants';
+import ShareComponent from '../common/components/Share';
 
 const clearState = {
     defaultSelected: Strings.select_text,
@@ -707,20 +708,37 @@ class SelectDetailsComponent extends Component {
         }
     }
    
+     onShare = async () => {
+          try {
+            const result = await Share.share({
+              message:
+                `${JSON.stringify(this.props.loginData.data)}`
+            });
+            if (result.action === Share.sharedAction) {
+              if (result.activityType) {
+                // shared with activity type of result.activityType
+              } else {
+                // shared
+              }
+            } else if (result.action === Share.dismissedAction) {
+              // dismissed
+            }
+          } catch (error) {
+            alert(error.message);
+          }
+        };
+     
 
     render() {
         const { navigation, isLoading, defaultSelected, classList, classListIndex, selectedClass, sectionList, sectionListIndex, selectedSection, pickerDate, selectedDate, subArr, selectedSubject, subIndex, errClass, errSub, errDate, errSection, sectionValid, dateVisible, examTestID } = this.state
-        const { loginData } = this.props
-      
+        const { loginData } = this.props      
         return (
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
-               
-                    <HeaderComponent
-                    logoutHeaderText={Strings.logout_text}
-                    titletextstyle={{ color: AppTheme.WHITE }}
-                    customLogoutTextStyle={{ color: AppTheme.GREY }}
-                    onLogoutClick={this.onLogoutClick}
-                />
+                 <ShareComponent
+                 onLogoutClick={()=>this.onLogoutClick()}
+                 message={'hello'}
+                
+                 />
                 {(loginData && loginData.data) &&
                     <View style={{ marginTop: 20 }}>
                         <Text
