@@ -18,14 +18,22 @@ for deleting current data in database
 
 * name of student in up school:- 
 
-|STUDENT NAME| STUDENT ID|
-|---|---|
-|Arman| 122|
-|Jaya| 123|
-|Deepti| 124|
-|Rajesh| 181|
-|Raju:| 182|
-|Prajesh| 183|
+|STUDENT NAME| STUDENT ID|Class|
+|---|---|---|
+|Arman| 122|4|
+|Jaya| 123|4|
+|Deepti| 124|4|
+|Shivani Kutiyal| 945|4|
+|Deeksha Negi| 928|4|
+|Nitin Agarwal| 888|4|
+|Swapnil Kanayal| 826|4|
+|Neetu Bhatt| 836|4|
+|Geet Nayal| 846|4|
+|Harshit Singh| 856|4|
+|Vandana Yadav| 936|4|
+|Rajesh| 181|8|
+|Raju:| 182|8|
+|Prajesh| 183|8|
 
 
 ## roi:-
@@ -35,7 +43,7 @@ for deleting current data in database
 | SUBJECT | STATE | TYPE | CLASS | EXAM ID|
 |---|---|---|---|---|
 |Multi-Subject|UP|SAT|4|3|
-||Multi-Subject|UP|SAT|8|7|
+|Multi-Subject|UP|SAT|8|7|
 
 **type:- UP_HINDI_4S**
 **ROLLNUMBER:- UP_HINDI_4S it accept 7 digit roll number**
@@ -49,9 +57,22 @@ for deleting current data in database
 |Sandeep Kumar|     1220003|2|
 |Gopal Bhatt|       1220004|2|
 |Mukul|             1220005|2|
-|Neha Rawat |       1210003|2|
-|Ankit Negi  |      1210004|2|
-|Khusbhoo Sharma|   1210005|2|
+|Neha Rawat |       1210003|6|
+|Monika Gupta|      1212603|6|
+|Aman Agarwal|      1230003|6|
+|Rishabh Pant|      1240003|6|
+|Sakshi Pant|       1250003|6|
+|Neetu Khayant|     1260003|6|
+|Kanchan Sah|       1278003|6|
+|Mohit Negi|        1216704|7|
+|Tushar Murthy|     1213564|7|
+|Ankita Verma|      1217894|7|
+|Ankit Negi  |      1210004|7|
+|Khusbhoo Sharma|   1210005|5|
+|Parul Sirohi|      1212005|5|
+|Shivani Rawat|     1213005|5|
+|Kamal Guar|        1214005|5|
+|Lalit Mehta|       1215005|5|
 |Sherlyn|           2000001|5|
 |Rita Bhojak|       2000002|5|
 |Karan Bhojak|      2000003|5|
@@ -89,14 +110,31 @@ for deleting current data in database
 >> `classes:- 2,3`
 >> `name of student in ODISHA school:-`  
 
-|STUDENT NAME |STUDENT ID|
-|---|---|
-|ajay       |2204000000000001|
-|abhay      |2203000000000001|
-|Rishab Sharma  | 2203000000000002|
-|Harshita Bhatt|  2203000000000003|
-|Nishant Bhatt|   2203000000000004|
-
+|STUDENT NAME |STUDENT ID|Class|
+|---|---|---|
+|Ajay       |2204000000000001|2|
+|Bharat Mehta| 223456789994301|2|
+|Yogita Negi| 2234567899984311|2|
+|Ritika Joshi| 2234567890084311|2|
+|Megha Mehra|  2233507890084311|2|
+|Mansi Mehta| 2233507890084311|2|
+|abhay      |2203000000000001|3|
+|Deepankar Bisht| 2203300000000001|3|
+|Akshay Kumar| 2203400000000001|3|
+|Jatin Kumar| 2203500000000001|3|
+|Aditya Birla| 2203600000000001|3|
+|Rishab Sharma| 2203000000000002|2|
+|Anjali Bhatt|  2203000000000112|2|
+|Hema Joshi|   2203000000000122|2|
+|Sikha Kandpal| 2203000000000132|2|
+|Prince Kandpal| 2203000000000142|2|
+|Nishant Bhatt|   2203000000000004|2|
+|Harshita Bhatt|  2203000000000003|3|
+|Yogita Bhatt|  2203000000000043|3|
+|Kirti Tiwari|  2203000000000053|3|
+|Hitesh Bisht|  2203000000000063|3|
+|Manish Nagarkoti|  2203000000000073|3|
+|Yuvika Jha|  2203000000000083|3|
 
 ## roi:- 
 
@@ -116,9 +154,13 @@ for deleting current data in database
 
 name of student in gujrat school:- 
 
-|STUDENT NAME| STUDENT ID| 
-|---|---|
-|aarti      |3304001|
+|STUDENT NAME| STUDENT ID| Class| 
+|---|---|---|
+|Aarti Bhatt     |3304001|3|
+|Kaushal Singh     |3394871|3|
+|Shivam Manral     |3365871|3|
+|Bhavna Bisht     |3365851|3|
+|Arun Bisht     |3365831|3|
 |smriti     |3302001|
 |shristi    |3302002|
 |priyanka   |3302003|
@@ -136,11 +178,16 @@ name of student in gujrat school:-
 ## type:- Gujrat_HINDI_1S 
 ## ROLLNUMBER:- 7 digit student Id name of student in Gujrat_HINDI_4S:-
 
-|STUDENT NAME| STUDENT ID| 
-|---|---|
-|divya negi|	3000001|
-|Kamla Dharamwal|	3000002|
-|Jayanti Bisht|	3000003|
+|STUDENT NAME| STUDENT ID| Class|
+|---|---|---|
+|Divya Negi|	3000001|4|
+|Kamla Dharamwal|	3000002|4|
+|Jayanti Bisht|	3000003|4|
+|Chetan Negi| 3000004|4|
+|Bhanu Joshi| 3000005|4|
+|Indra Pawar| 3000006|4|
+|Rekha Joshi| 3000007|4|
+
 
 ## roi:-
 |SUBJECT|STATE|TYPE|CLASS|EXAM|
@@ -150,10 +197,18 @@ name of student in gujrat school:-
 ## type:- gujrat_5q_multichoice 
 ## ROLLNUMBER:- 7 digit student Id name of student in Gujrat_HINDI_4S:-
 
-|STUDENT NAME| STUDENT ID| 
-|---|---|
-|Priya Sood|	3302004|
-|Ram Kapoor|	3302005|
+|STUDENT NAME| STUDENT ID| Class|
+|---|---|---|
+|Priya Sood|	3302004|5|
+|Ram Kapoor|	3302005|5|
+|Rashmi Desai|  3872645|5|
+|Astha Chaudary| 3901345|5|
+|Aparna Dixit|   4987654|5|
+|Develoeena|     4765432|5|
+|Soni Suyal|     4963432|5|
+|Gaurav Pandey| 4963431|5|
+|Pushpendara Rana| 4963471|5|
+|Nitin Verma|      4963461|5|
 
 
 ## roi:-
