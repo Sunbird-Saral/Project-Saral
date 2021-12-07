@@ -408,14 +408,11 @@ const mapStateToProps = (state) => {
         filteredData: state.filteredData,
         scanedData: state.scanedData,
         loginData: state.loginData,
-<<<<<<< HEAD
         studentsAndExamData : state.studentsAndExamData,
         apiStatus: state.apiStatus,
-        bgFlag: state.bgFlag
-=======
+        bgFlag: state.bgFlag,
         studentsAndExamData: state.studentsAndExamData,
         apiStatus: state.apiStatus
->>>>>>> v1-develop
     }
 }
 
