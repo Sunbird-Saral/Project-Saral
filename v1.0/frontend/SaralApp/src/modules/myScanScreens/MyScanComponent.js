@@ -31,15 +31,16 @@ class MyScanComponent extends Component {
         this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
     }
 
-    componentDidMount() {
-        BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
+    componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
     }
 
-    handleBackButtonClick() {
-        this.props.navigation.goBack(null);
-        return false;
+    handleBackButtonClick =()=> {
+        this.props.navigation.navigate('ScanHistory');
+        return true;
     }
     componentDidMount() {
+        BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
         const { navigation, scanedData } = this.props
         const { params } = navigation.state
         navigation.addListener('willFocus', payload => {
@@ -107,7 +108,7 @@ class MyScanComponent extends Component {
                         index: 0,
                         actions: [NavigationActions.navigate({ routeName: 'myScan', params: { from_screen: 'cameraActivity' } })],
                     });
-                    this.props.navigation.dispatch(resetAction);
+                     this.props.navigation.dispatch(resetAction);
                     return true
                 }
             })
@@ -236,6 +237,7 @@ class MyScanComponent extends Component {
         return (
 
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
+                <ScrollView>
                 {
                     (loginData && loginData.data)
                     &&
@@ -291,9 +293,10 @@ class MyScanComponent extends Component {
                         onPress={() => this.props.navigation.navigate('selectDetails')}
                     />
                 </View>
+                </ScrollView>
                 <View style={styles.bottomTabStyle}>
                 </View>
-                <View style={[styles.bottomTabStyle, { height: 135, width: '50%', marginHorizontal: '25%', backgroundColor: 'transparent', justifyContent: 'center' }]}>
+                <View style={[styles.bottomTabStyle, { height: 90, width: '50%', marginHorizontal: '25%', backgroundColor: 'transparent', justifyContent: 'center' }]}>
                     <TouchableOpacity style={[styles.subTabContainerStyle]}
                         onPress={this.onScanClick}
                     >
@@ -356,7 +359,7 @@ const styles = {
         position: 'absolute',
         flexDirection: 'row',
         bottom: 0,
-        height: 90,
+        height: 60,
         left: 0,
         right: 0,
         backgroundColor: AppTheme.WHITE,
@@ -396,7 +399,6 @@ const styles = {
     scanTabContainerStyle: {
         width: 85,
         height: 85,
-        backgroundColor: AppTheme.WHITE,
         position: 'absolute',
         borderRadius: 45,
         justifyContent: 'center',
