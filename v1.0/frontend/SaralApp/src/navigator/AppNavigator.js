@@ -127,10 +127,11 @@ const saveDataInDB = async () => {
             len = len + element.studentsMarkInfo.length
         });
 
-        if (len >= 5) {
-            const loginData = storeFactory.getState().loginData
-            const apiStatus = storeFactory.getState().apiStatus
+        if (len >= 10) {
 
+            testPushNotification("Uploading•••", "please wait we are uploading")
+
+            const loginData = storeFactory.getState().loginData
 
             data.map(element => {
 
@@ -144,14 +145,19 @@ const saveDataInDB = async () => {
                 }, 60000);
                 axios.put(apiObj.apiEndPoint(), apiObj.getBody(), { headers: apiObj.getHeaders(), cancelToken: source.token },)
                     .then(function (res) {
+                        let localDataResponse = removeItemFromLocalStorage(res, data)
+                        if (localDataResponse.length == 0) {
+                            setScannedDataIntoLocal(localDataResponse)
+                            testPushNotification("Uploaded ☻☻☻", "Data has been uploaded successfully!")
+                        }
                         apiResponse = res
                         success = true
                         clearTimeout(id)
                         apiObj.processResponse(res)
                         storeFactory.dispatch(dispatchAPIAsync(apiObj));
                         if (typeof apiObj.getNextStep === 'function' && res.data && (res.status == 200 || res.status == 201))
-                        storeFactory.dispatch(apiObj.getNextStep())
-                        storeFactory.dispatch(flagAction(false))
+                            storeFactory.dispatch(apiObj.getNextStep())
+                        // storeFactory.dispatch(flagAction(false))
                     })
                     .catch(function (err) {
                         clearTimeout(id)
@@ -160,10 +166,22 @@ const saveDataInDB = async () => {
                         storeFactory.dispatch(flagAction(false))
                     });
             });
-            // setScannedDataIntoLocal([])
         }
 
     }
+}
+
+const removeItemFromLocalStorage = (res, value) => {
+
+    let data = JSON.parse(res.config.data)
+
+    value.forEach((element, index) => {
+        if (element.classId == data.classId) {
+            value.splice(index, 1)
+        }
+    });
+
+    return value
 }
 
 
@@ -181,7 +199,6 @@ setTimeout(() => {
     if (isLogin.status == 200) {
         storeFactory.dispatch(flagAction(true))
         if (checkNetworkConnectivity()) {
-            testPushNotification("Uploading...☻☻☻", "please wait we are uploading")
             saveDataInDB()
         }
     }

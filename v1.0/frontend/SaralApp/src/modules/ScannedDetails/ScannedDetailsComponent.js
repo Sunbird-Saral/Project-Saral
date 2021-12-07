@@ -32,7 +32,8 @@ const ScannedDetailsComponent = ({
     ocrLocalResponse,
     multiBrandingData,
     scanedData,
-    loginData
+    loginData,
+    bgFlag
 }) => {
 
 
@@ -480,8 +481,12 @@ const ScannedDetailsComponent = ({
                             }
 
                         });
-                        setScannedDataIntoLocal(getDataFromLocal)
-                        goToMyScanScreen()
+                        if (bgFlag) {
+                            Alert.alert("Data is Uploading please wait till it finished.")
+                        } else {
+                            setScannedDataIntoLocal(getDataFromLocal)
+                            goToMyScanScreen()
+                        }
                     }
                 } else {
                     Alert.alert(Strings.you_can_save_only_limited_student_In_Order_to_continue_have_to_save_first)
@@ -921,7 +926,8 @@ const mapStateToProps = (state) => {
         scanTypeData: state.scanTypeData.response,
         roiData: state.roiData,
         multiBrandingData: state.multiBrandingData.response.data,
-        scanedData: state.scanedData.response
+        scanedData: state.scanedData.response,
+        bgFlag: state.bgFlag
     }
 }
 
