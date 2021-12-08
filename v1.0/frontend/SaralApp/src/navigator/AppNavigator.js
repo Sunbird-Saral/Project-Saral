@@ -127,6 +127,8 @@ const saveDataInDB = async () => {
             len = len + element.studentsMarkInfo.length
         });
 
+        storeFactory.dispatch(flagAction(false))
+
         if (len >= 10) {
 
             testPushNotification("Uploading•••", "please wait we are uploading")
@@ -157,7 +159,7 @@ const saveDataInDB = async () => {
                         storeFactory.dispatch(dispatchAPIAsync(apiObj));
                         if (typeof apiObj.getNextStep === 'function' && res.data && (res.status == 200 || res.status == 201))
                             storeFactory.dispatch(apiObj.getNextStep())
-                        // storeFactory.dispatch(flagAction(false))
+                        storeFactory.dispatch(flagAction(false))
                     })
                     .catch(function (err) {
                         clearTimeout(id)

@@ -152,15 +152,15 @@ class SelectDetailsComponent extends Component {
     onPressSaveInDB = async () => {
         const { loginData, bgFlag } = this.props
         let data = await getScannedDataFromLocal();
-        if (data != null) {
+        if (bgFlag) {
+            Alert.alert("Data is Uploading please wait till it finished.")
+        } else if (data != null) {
+
             for (const value of data) {
                 let apiObj = new SaveScanData(value, loginData.data.token);
                 this.props.APITransport(apiObj)
             }
-        }
-        if (bgFlag) {
-            Alert.alert("Data is Uploading please wait till it finished.")
-        } else {
+
             Alert.alert(Strings.message_text, Strings.are_you_sure_you_want_to_logout, [
                 { 'text': Strings.no_text, style: 'cancel' },
                 {
