@@ -1,12 +1,14 @@
 import axios from "axios";
-import { getLoginCred } from "../utils/StorageUtils";
+import { getErrorMessage, getLoginCred, setErrorMessage } from "../utils/StorageUtils";
 import { scanStatusDataAction } from "./ScanStatus/scanStatusDataAction";
 
-export default function  callScanStatusDataConst(filteredData) {
+export default function callScanStatusDataConst(filteredData) {
 
     return async dispatch => {
 
         let loginCred = await getLoginCred()
+        let errorData = await getErrorMessage()
+        let errorMessage = errorData != null ? errorData : []
 
         let dataPayload = {
             "classId": filteredData.response.class,
@@ -38,6 +40,13 @@ export default function  callScanStatusDataConst(filteredData) {
                     dispatch(dispatchAPIAsync(apiObj));
                 })
                 .catch(function (err) {
+                    setErrorMessage(errorMessage.push(
+                        {
+                            name: `[callScanStatusDataConst.js]`,
+                            funcName: `callScanStatusDataConst`,
+                            apiUrl: `${apiObj.apiEndPoint()} `,
+                            erroMsg: err
+                        }))
                     clearTimeout(id)
                 });
         }
