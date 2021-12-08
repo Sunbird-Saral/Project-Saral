@@ -121,13 +121,13 @@ const testCancel = () => {
 const saveDataInDB = async () => {
 
     const data = await getScannedDataFromLocal();
+    storeFactory.dispatch(flagAction(false))
     if (data != null) {
         let len = 0
         data.forEach(element => {
             len = len + element.studentsMarkInfo.length
         });
 
-        storeFactory.dispatch(flagAction(false))
 
         if (len >= 10) {
 
