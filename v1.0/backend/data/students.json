@@ -1032,6 +1032,42 @@
 {
   "studentClass": [
       {
+      "classId": "2",
+      "className": "Class-2"
+    }
+  ],
+  "section": "D",
+  "name": "Kanchan Joshi",
+  "studentId": "4204009",
+  "schoolId": "up002"
+},
+{
+  "studentClass": [
+    {
+      "classId": "2",
+      "className": "Class-2"
+    }
+  ],
+  "section": "D",
+  "name": "Pragati Singh",
+  "studentId": "4204010",
+  "schoolId": "up002"
+},
+{
+  "studentClass": [
+    {
+      "classId": "2",
+      "className": "Class-2"
+    }
+  ],
+  "section": "D",
+  "name": "Saurav Joshi",
+  "studentId": "4204011",
+  "schoolId": "up002"
+},
+{
+  "studentClass": [
+      {
           "classId": "5",
           "className": "Class-5"
       }
