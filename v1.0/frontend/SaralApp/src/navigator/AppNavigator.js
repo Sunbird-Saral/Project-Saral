@@ -131,8 +131,8 @@ const saveDataInDB = async () => {
 
         if (len >= 10) {
 
+            storeFactory.dispatch(flagAction(true))
             testPushNotification("Uploading•••", "please wait we are uploading")
-
             const loginData = storeFactory.getState().loginData
 
             data.map(element => {
