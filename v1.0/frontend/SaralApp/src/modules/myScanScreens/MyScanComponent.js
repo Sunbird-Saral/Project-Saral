@@ -14,6 +14,7 @@ import SaralSDK from '../../../SaralSDK'
 import { getScannedDataFromLocal } from '../../utils/StorageUtils';
 import ButtonComponent from '../common/components/ButtonComponent';
 import { neglectData } from '../../utils/CommonUtils';
+import ShareComponent from '../common/components/Share';
 
 LogBox.ignoreAllLogs()
 
@@ -238,7 +239,12 @@ class MyScanComponent extends Component {
         return (
 
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
-                <ScrollView>
+                  <ShareComponent
+                 onLogoutClick={()=>this.onLogoutClick()}
+                 message={'hello'}
+                
+                 />
+                <ScrollView showsHorizontalScrollIndicator={false}>
                 {
                     (loginData && loginData.data)
                     &&

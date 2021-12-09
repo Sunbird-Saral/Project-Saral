@@ -29,14 +29,13 @@ class HeaderComponents extends Component {
             onSupportClick
         } = this.props
         return (
-            <View style={[customHeaderContainer]}>
-
-
-                <Text style={[styles.headerTitleTextStyle, customHeaderTextStyle, titletextstyle]}>{title}</Text>
+            <View style={{flex:1}}>
                 <View style={styles.imageViewContainer}>
                     <View style={styles.imageContainerStyle}>
                         
                         <TouchableOpacity
+                         accessible={true}
+                         activeOpacity={1}
                         style={styles.imageContainerViewstyle}
                         onPress={onSupportClick}
                         > 
@@ -46,6 +45,8 @@ class HeaderComponents extends Component {
                        
                         {logoutHeaderText && logoutHeaderText.length > 0 &&
                             <TouchableOpacity
+                            accessible={true}
+                            activeOpacity={0.5}
                                style={styles.imageContainerViewstyle}
                                 onPress={onLogoutClick}
                             >
@@ -117,18 +118,14 @@ const styles = {
         letterSpacing: 1
     },
     imageViewContainer: {
-        bottom: 18,
+       
         marginRight: 5,
         alignItems: 'flex-end',
-        elevation: 20
-        // justifyContent:'center'
+       
     },
     imageContainerStyle: {
         padding: 10,
         marginRight: 10,
-        // alignItems: "center",
-        // justifyContent: 'center',
-        width: '40%',
         height:80,
         elevation: 20,
         justifyContent: 'center',

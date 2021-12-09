@@ -4,6 +4,7 @@ import { connect, useDispatch } from 'react-redux';
 import AppTheme from '../../utils/AppTheme';
 import { CELL_OMR, extractionMethod, multipleStudent, neglectData, SCAN_TYPES, studentLimitSaveInLocal, student_ID, TABLE_HEADER } from '../../utils/CommonUtils';
 import Strings from '../../utils/Strings';
+import ShareComponent from '../common/components/Share';
 
 
 //styles
@@ -765,6 +766,10 @@ const ScannedDetailsComponent = ({
 
     return (
         <View style={{ flex: 1 }}>
+              <ShareComponent
+                 navigation={navigation}
+                 message={'hello'}
+                 />
             <ScrollView
                 contentContainerStyle={{ backgroundColor: AppTheme.BACKGROUND_COLOR, paddingBottom: '15%' }}
                 showsVerticalScrollIndicator={false}

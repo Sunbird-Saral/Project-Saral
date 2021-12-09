@@ -14,14 +14,12 @@ const ShareComponent = ({
   loginData,
   message,
   navigation,
-  onLogoutClick,props
 }) => {
   const [ishidden, setIshidden] = useState(false)
   const dispatch = useDispatch()
-  console.log('propssssssssssss', loginData.data.school.name)
-  const Logoutcall = async (props,navigation) => {
-    
-    navigation.navigation('auth')
+
+  const Logoutcall = async () => {
+
     
     let data = await getScannedDataFromLocal();
     if (data != null) {
@@ -34,15 +32,15 @@ const ShareComponent = ({
       { 'text': Strings.no_text, style: 'cancel' },
       {
         'text': Strings.yes_text, onPress: async () => {
-            LogoutAction
+            dispatch(LogoutAction())
             navigation.navigate('auth')
-            console.log('nnammmm',navigation)
+            
         }
       }
     ])
   }
 
-  const ShareCompo = useCallback(async (message) => {
+  const ShareCompo = useCallback(async () => {
     try {
       const result = await Share.share({
         message:
@@ -63,7 +61,7 @@ const ShareComponent = ({
     }
   }, [message]);
   return (
-    <View>
+    <View style={{width:'-10%'}}>
       <View style={styles.imageViewContainer}>
       <TouchableOpacity onPress={()=>setIshidden(!ishidden)}>
         <View style={styles.imageContainerStyle}>
@@ -76,7 +74,7 @@ const ShareComponent = ({
         logoutHeaderText={Strings.logout_text}
         customLogoutTextStyle={{ color: AppTheme.BLACK, }}
         onSupportClick={ShareCompo}
-        onLogoutClick={onLogoutClick}
+        onLogoutClick={Logoutcall}
       /> :null}
         </View>
       )

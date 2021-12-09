@@ -13,6 +13,8 @@ import Strings from '../../utils/Strings';
 import Spinner from '../common/components/loadingIndicator';
 import ScanHistoryCard from './ScanHistoryCard';
 import ButtonComponent from '../common/components/ButtonComponent';
+import ShareComponent from '../common/components/Share';
+
 const ScanHistory = ({
     loginData,
     navigation,
@@ -72,14 +74,18 @@ const ScanHistory = ({
 
     return (
         <View style={styles.container}>
-
+              <ShareComponent
+                 navigation={navigation}
+                 message={'hello'}
+                 />
+                 {/* <ScrollView> */}
             {
                 (loginData && loginData.data)
                 &&
-                <View style={{ marginTop: 20 }}>
+                <View style={{ marginTop: 20,width:'60%' }}>
                     <Text
                         style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}>
-                        {Strings.school_name + ' Name : '}
+                        {Strings.school_name + '  : '}
                         <Text style={{ fontWeight: 'normal' }}>
                             {loginData.data.school.name}
                         </Text>
@@ -134,7 +140,7 @@ export default connect(mapStateToProps, null)(ScanHistory);
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white'
+        backgroundColor: AppTheme.WHITE_OPACITY
     },
     container1: {
         marginHorizontal: '4%',
@@ -153,5 +159,5 @@ const styles = StyleSheet.create({
         color: AppTheme.BLACK,
         letterSpacing: 1
     },
-    nxtBtnStyle:{ top:50, marginHorizontal: 40, marginBottom: 20, borderRadius: 10, }
+    nxtBtnStyle:{marginTop:20, marginHorizontal: 40, marginBottom: 20, borderRadius: 10, }
 });

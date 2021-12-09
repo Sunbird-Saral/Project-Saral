@@ -10,7 +10,7 @@ import APITransport from '../../flux/actions/transport/apitransport'
 import { getLoginCred, getStudentsExamData, setAbsentStudentDataIntoAsync, setPresentAbsentStudent, setStudentsExamData, setTotalStudent } from '../../utils/StorageUtils';
 import ButtonComponent from '../common/components/ButtonComponent';
 import StudentsDataComponent from './StudentsDataComponent';
-
+import ShareComponent from '../common/components/Share'
 //style
 import { styles } from './StudentsDataStyle';
 
@@ -270,8 +270,13 @@ const StudentsList = ({
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+             <ShareComponent
+                 navigation={navigation}
+                 message={'hello'}
+                
+                 />
             {(loginData && loginData.data) &&
-                <View>
+                <View style={{width:'60%'}}>
                     <Text
                         style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingTop: '4%' }}
                     >
@@ -292,7 +297,7 @@ const StudentsList = ({
 
             }
             <Text
-                style={{ fontSize: AppTheme.FONT_SIZE_REGULAR - 3, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', marginBottom: '4%' }}
+                style={{ fontSize: AppTheme.FONT_SIZE_REGULAR - 3, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '3%', marginBottom: '4%' }}
             >
                 {Strings.version_text + ' : '}
                 <Text style={{ fontWeight: 'normal' }}>

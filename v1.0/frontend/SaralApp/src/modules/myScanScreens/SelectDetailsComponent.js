@@ -735,12 +735,12 @@ class SelectDetailsComponent extends Component {
         return (
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
                  <ShareComponent
-                 onLogoutClick={()=>this.onLogoutClick()}
+                 navigation={this.props.navigation}
                  message={'hello'}
                 
                  />
                 {(loginData && loginData.data) &&
-                    <View style={{ marginTop: 20 }}>
+                    <View style={{ marginTop: 20,width:'60%' }}>
                         <Text
                             style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}
                         >
@@ -759,7 +759,7 @@ class SelectDetailsComponent extends Component {
                         </Text>
                     </View>}
                 <Text
-                    style={{ fontSize: AppTheme.FONT_SIZE_REGULAR - 3, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', marginBottom: '4%' }}
+                    style={{ fontSize: AppTheme.FONT_SIZE_REGULAR - 3, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '3%', marginBottom: '4%' }}
                 >
                     {Strings.version_text + ' : '}
                     <Text style={{ fontWeight: 'normal' }}>
