@@ -708,16 +708,16 @@ const ScannedDetailsComponent = ({
                 else {
                     setMaxMarkErr(false)
                     setObtnMarkErr(false)
-                    saveData()
+                    saveData(maximum)
                 }
             } else {
                 //without MAX & OBTAINED MARKS
-                saveData()
+                saveData(0)
             }
         }
     }
 
-    const saveData = async () => {
+    const saveData = async (sumOfAllMarks) => {
         let elements = neglectData;
         let data = ocrLocalResponse.layout.cells.filter((element) => {
             if (element.format.name == elements[0] || element.format.name == elements[1] || element.format.name == elements[2] || element.format.name == elements[3]) {
@@ -760,7 +760,7 @@ const ScannedDetailsComponent = ({
                     "predictionConfidence":loginData.data.school.storeTrainingData ? storeTrainingData[0].predictionConfidence : '',
                     "section": filteredData.section,
                     "studentId": studentId,
-                    "securedMarks": sumOfObtainedMarks > 0 ? sumOfObtainedMarks : 0,
+                    "securedMarks": sumOfAllMarks > 0 ? sumOfAllMarks : 0,
                     "totalMarks": maxMarksTotal > 0 ? maxMarksTotal : 0,
                     "marksInfo": Studentmarks,
                     "studentAvailability": true
