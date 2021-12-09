@@ -674,13 +674,33 @@ const ScannedDetailsComponent = ({
         }
         else {
             if (sumOfObtainedMarks > 0) {
-                //with MAX & OBTAINED MARKS
-                console.log("sumOfObtainedMarks", sumOfObtainedMarks);
-                if (sumOfObtainedMarks != totalMarkSecured) {
+
+                let elements = neglectData
+
+                //remove maxMark and Obtained marks from the newArrayValue
+                let extract_MAX_OBTAINED_MARKS = newArrayValue.filter((e) => {
+                    if (e.format.name == elements[2]) {
+                        return
+                    }
+                    if (e.format.name == elements[3]) {
+                        return
+                    }
+                    else {
+                        return true
+                        }
+            })
+            //DO summ of all result from extract_MAX_OBTAINED_MARKS except max marks and obtained marks
+            let maximum = 0;
+            let sum = extract_MAX_OBTAINED_MARKS.forEach((e) => {
+                maximum = parseInt(maximum) + parseInt(e.consolidatedPrediction)
+                return maximum
+            });
+            console.log("sumOfObtained",maximum);
+                if (maximum != totalMarkSecured) {
                     setObtnMarkErr(true)
                     showErrorMessage("Sum Of All obtained marks should be equal to marksObtained")
                 }
-                else if (maxMarksTotal < sumOfObtainedMarks) {
+                else if (maxMarksTotal < maximum) {
                     setObtnMarkErr(false)
                     showErrorMessage("Total mark should be less than or equal to Maximum marks")
                     setMaxMarkErr(true)
