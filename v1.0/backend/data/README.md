@@ -232,6 +232,19 @@ name of student in gujrat school:-
 |Ruchika Joshi    |4204006|
 |Shantanu Bankoti |4204007|
 |Kavita kuwarbi   |4204008|
+|Kanchan Joshi    |4204009|
+|Pragati Singh    |4204010|
+|Saurav Joshi     |4204011|
+|Shivam Manral    |4204012|
+|Adita Agarwal    |4204013|
+|Aditya Agarwal   |4204014|
+|Vimal Daramwal   |4204015|
+|Smriti Arora     |4204016|
+|Vishakha Gupta   |4204017|
+|Shubham Tiwari   |4204018|
+|Venkat Rao       |4204019|
+|Vicky Kaushal    |4204020|
+|Ritika Nagarkoti |4204021|
 
 
 ## roi:- 

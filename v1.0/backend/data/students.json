@@ -1067,6 +1067,126 @@
 },
 {
   "studentClass": [
+    {
+      "classId": "2",
+      "className": "Class-2"
+    }
+  ],
+  "section": "D",
+  "name": "Shivam Manral",
+  "studentId": "4204012",
+  "schoolId": "up002"
+},
+{
+  "studentClass": [
+    {
+      "classId": "2",
+      "className": "Class-2"
+    }
+  ],
+  "section": "D",
+  "name": "Adita Agarwal",
+  "studentId": "4204012",
+  "schoolId": "up002"
+},
+{
+  "studentClass": [
+    {
+      "classId": "2",
+      "className": "Class-2"
+    }
+  ],
+  "section": "D",
+  "name": "Aditya Agarwal",
+  "studentId": "4204013",
+  "schoolId": "up002"
+},
+{
+  "studentClass": [
+    {
+      "classId": "2",
+      "className": "Class-2"
+    }
+  ],
+  "section": "D",
+  "name": "Vimal Daramwal",
+  "studentId": "4204013",
+  "schoolId": "up002"
+},
+{
+  "studentClass": [
+    {
+      "classId": "2",
+      "className": "Class-2"
+    }
+  ],
+  "section": "D",
+  "name": "Smriti Arora",
+  "studentId": "4204014",
+  "schoolId": "up002"
+},
+{
+  "studentClass": [
+    {
+      "classId": "2",
+      "className": "Class-2"
+    }
+  ],
+  "section": "D",
+  "name": "Vishakha Gupta",
+  "studentId": "4204015",
+  "schoolId": "up002"
+},
+{
+  "studentClass": [
+    {
+      "classId": "2",
+      "className": "Class-2"
+    }
+  ],
+  "section": "D",
+  "name": "Shubham Tiwari",
+  "studentId": "4204016",
+  "schoolId": "up002"
+},
+{
+  "studentClass": [
+    {
+      "classId": "2",
+      "className": "Class-2"
+    }
+  ],
+  "section": "D",
+  "name": "Venkat Rao",
+  "studentId": "4204017",
+  "schoolId": "up002"
+},
+{
+  "studentClass": [
+    {
+      "classId": "2",
+      "className": "Class-2"
+    }
+  ],
+  "section": "D",
+  "name": "Vicky Kaushal",
+  "studentId": "4204018",
+  "schoolId": "up002"
+},
+{
+  "studentClass": [
+    {
+      "classId": "2",
+      "className": "Class-2"
+    }
+  ],
+  "section": "D",
+  "name": "Ritika Nagarkoti",
+  "studentId": "4204019",
+  "schoolId": "up002"
+},
+{
+  "studentClass": [
       {
           "classId": "5",
           "className": "Class-5"
