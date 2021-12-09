@@ -12,7 +12,7 @@ for deleting current data in database
 # state:- UP
 
 ## schoolId:up001
->> `school:- Fountainhead School`
+>> `school:- Dummy school 1`
 >> `classes:- 2,3,4,5,6,7,8`
 >> `student:- no of student 7` 
 
@@ -106,35 +106,35 @@ for deleting current data in database
 
 # state:- odisha
 ## schoolID: odisha001
->> `school:- Aditya Birla Public School, Rayagada.`
+>> `school:- Dummy school 2`
 >> `classes:- 2,3`
 >> `name of student in ODISHA school:-`  
 
 |STUDENT NAME |STUDENT ID|Class|
 |---|---|---|
-|Ajay       |2204000000000001|2|
-|Bharat Mehta| 223456789994301|2|
-|Yogita Negi| 2234567899984311|2|
+|Ajay       |  2204000000000001|2|
+|Bharat Mehta| 2234567899984301|2|
+|Yogita Negi|  2234567899984311|2|
 |Ritika Joshi| 2234567890084311|2|
-|Megha Mehra|  2233507890084311|2|
-|Mansi Mehta| 2233507890084311|2|
-|abhay      |2203000000000001|3|
+|Megha Mehra|  2233567890084311|2|
+|Mansi Mehta|  2233507890084311|2|
+|abhay      |  2203000000000001|3|
 |Deepankar Bisht| 2203300000000001|3|
-|Akshay Kumar| 2203400000000001|3|
-|Jatin Kumar| 2203500000000001|3|
-|Aditya Birla| 2203600000000001|3|
-|Rishab Sharma| 2203000000000002|2|
-|Anjali Bhatt|  2203000000000112|2|
-|Hema Joshi|   2203000000000122|2|
-|Sikha Kandpal| 2203000000000132|2|
-|Prince Kandpal| 2203000000000142|2|
+|Akshay Kumar|    2203400000000001|3|
+|Jatin Kumar|     2203500000000001|3|
+|Aditya Birla|    2203600000000001|3|
+|Rishab Sharma|   2203000000000002|2|
+|Anjali Bhatt|    2203000000000112|2|
+|Hema Joshi|      2203000000000122|2|
+|Sikha Kandpal|   2203000000000132|2|
+|Prince Kandpal|  2203000000000142|2|
 |Nishant Bhatt|   2203000000000004|2|
 |Harshita Bhatt|  2203000000000003|3|
-|Yogita Bhatt|  2203000000000043|3|
-|Kirti Tiwari|  2203000000000053|3|
-|Hitesh Bisht|  2203000000000063|3|
-|Manish Nagarkoti|  2203000000000073|3|
-|Yuvika Jha|  2203000000000083|3|
+|Yogita Bhatt|    2203000000000043|3|
+|Kirti Tiwari|    2203000000000053|3|
+|Hitesh Bisht|    2203000000000063|3|
+|Manish Nagarkoti|2203000000000073|3|
+|Yuvika Jha|      2203000000000083|3|
 
 ## roi:- 
 
@@ -149,7 +149,7 @@ for deleting current data in database
 
 # state: gujrat
 ## schoolId:gujrat001
->> `school:- Sainik School`
+>> `school:- Dummy school 3`
 >> `classes:- 3,4,5`
 
 name of student in gujrat school:- 
@@ -218,7 +218,7 @@ name of student in gujrat school:-
 
 # state:- UP(For multiple students)
 ## schoolId:-up002
->> `school:- Amtul's Public School`
+>> `school:- Dummy school 4`
 >> `classes:- 2,3,4,5`
 >> `name of student in MULTI UP school` 
 
@@ -232,6 +232,19 @@ name of student in gujrat school:-
 |Ruchika Joshi    |4204006|
 |Shantanu Bankoti |4204007|
 |Kavita kuwarbi   |4204008|
+|Kanchan Joshi    |4204009|
+|Pragati Singh    |4204010|
+|Saurav Joshi     |4204011|
+|Shivam Manral    |4204012|
+|Adita Agarwal    |4204013|
+|Aditya Agarwal   |4204014|
+|Vimal Daramwal   |4204015|
+|Smriti Arora     |4204016|
+|Vishakha Gupta   |4204017|
+|Shubham Tiwari   |4204018|
+|Venkat Rao       |4204019|
+|Vicky Kaushal    |4204020|
+|Ritika Nagarkoti |4204021|
 
 
 ## roi:- 
