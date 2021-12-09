@@ -2,9 +2,14 @@ import axios from 'axios';
 import C from '../constants'
 // import RNFetchBlob from 'rn-fetch-blob'
 import Strings from '../../../utils/Strings';
+import { getErrorMessage, setErrorMessage } from '../../../utils/StorageUtils';
 
 
-export default function dispatchAPI(api) {    
+export default async function dispatchAPI(api) {    
+
+    let errorData = await getErrorMessage()
+    let errorMessage = errorData != null ? errorData : []
+
     if (api.reqType === 'MULTIPART') {
         return dispatch => {
             dispatch(apiStatusAsync(true, false, ''))
@@ -17,6 +22,13 @@ export default function dispatchAPI(api) {
                         dispatch(api.getNextStep())
                 })
                 .catch(function (err) {
+                    setErrorMessage(errorMessage.push(
+                        {
+                            name: `[apitransport.js]`,
+                            funcName: `dispatchAPI`,
+                            apiUrl: `${api.apiEndPoint()} `,
+                            erroMsg: err
+                        }))
                     dispatch(apiStatusAsync(false, true, Strings.something_went_wrong_please_try_again, null, err && err.response && err.response.status && err.response.status === 401 ? true : false))
                 });
         }
@@ -66,6 +78,13 @@ export default function dispatchAPI(api) {
                             dispatch(api.getNextStep())
                     })
                     .catch(function (err) {
+                        setErrorMessage(errorMessage.push(
+                            {
+                                name: `[apitransport.js]`,
+                                funcName: `dispatchAPI`,
+                                apiUrl: `${api.apiEndPoint()} `,
+                                erroMsg: err
+                            }))
                         clearTimeout(id)
                         if (err && err.message == 'The request timed out.') {
                             dispatch(apiStatusAsync(false, true, Strings.request_timeout_custom_message, null, err && err.response && err.response.status && err.response.status === 401 ? true : false))
@@ -103,6 +122,13 @@ export default function dispatchAPI(api) {
                             dispatch(api.getNextStep())
                     })
                     .catch(function (err) {
+                        setErrorMessage(errorMessage.push(
+                            {
+                                name: `[apitransport.js]`,
+                                funcName: `dispatchAPI`,
+                                apiUrl: `${api.apiEndPoint()} `,
+                                erroMsg: err
+                            }))
                         clearTimeout(id)
                         if (err && err.message == 'The request timed out.') {
                             dispatch(apiStatusAsync(false, true, Strings.request_timeout_custom_message, null, err && err.response && err.response.status && err.response.status === 401 ? true : false))
@@ -133,6 +159,13 @@ export default function dispatchAPI(api) {
                             dispatch(api.getNextStep())
                     })
                     .catch(function (err) {
+                        setErrorMessage(errorMessage.push(
+                            {
+                                name: `[apitransport.js]`,
+                                funcName: `dispatchAPI`,
+                                apiUrl: `${api.apiEndPoint()} `,
+                                erroMsg: err
+                            }))
                         dispatch(apiStatusAsync(false, true, Strings.something_went_wrong_please_try_again, null, err && err.response && err.response.status && err.response.status === 401 ? true : false))
                     });
             }
@@ -157,6 +190,13 @@ export default function dispatchAPI(api) {
                             dispatch(api.getNextStep())
                     })
                     .catch(function (err) {                        
+                        setErrorMessage(errorMessage.push(
+                            {
+                                name: `[apitransport.js]`,
+                                funcName: `dispatchAPI`,
+                                apiUrl: `${api.apiEndPoint()} `,
+                                erroMsg: err
+                            }))
                         if (err.response)
                             dispatch(apiStatusAsync(false, true, Strings.something_went_wrong_please_try_again, null, err && err.response && err.response.status && err.response.status === 401 || err.response.status === 404 ? true : false))
                     });

@@ -4,7 +4,7 @@ import { connect, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
 import AppTheme from '../../utils/AppTheme';
-import { getLoginCred, getScanData, getScannedDataFromLocal, setScannedDataIntoLocal } from '../../utils/StorageUtils';
+import { getErrorMessage, getLoginCred, getScanData, getScannedDataFromLocal, setErrorMessage, setScannedDataIntoLocal } from '../../utils/StorageUtils';
 import { Exam_QuestionHeader } from '../../utils/CommonUtils';
 import ExamDetailsPopup from '../common/components/ExamDetailsPopup';
 import ButtonComponent from '../common/components/ButtonComponent';
@@ -149,6 +149,10 @@ const ScanHistoryCard = ({
     }
 
     const FetchSavedScannedData = (api, uname, pass, filterDataLen, localScanData) => {
+
+        let errorData = await getErrorMessage()
+        let errorMessage = errorData != null ? errorData : []
+
         if (api.method === 'POST') {
             let apiResponse = null
             const source = axios.CancelToken.source()
@@ -177,6 +181,13 @@ const ScanHistoryCard = ({
                     setIsLoading(false)
                 })
                 .catch(function (err) {
+                    setErrorMessage(errorMessage.push(
+                        {
+                            name: `[scanHistoryCard]`,
+                            funcName: `FetchSavedScannedData`,
+                            apiUrl: `${api.apiEndPoint()} `,
+                            erroMsg: err
+                        }))
                     console.warn("Error", err);
                     console.warn("Error", err.response);
                     Alert.alert("Something Went Wrong")
@@ -360,45 +371,45 @@ const ScanHistoryCard = ({
                 visible={isModalVisible}
             >
                 <View style={{ backgroundColor: '#fff', flex: 1 }}>
-                <ScrollView scrollEnabled showsVerticalScrollIndicator={false}>
-                    <View style={[styles1.container1, { flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 20 }]}>
-                        {
-                            Exam_QuestionHeader.map((data) => {
-                                return (
-                                    <ExamDetailsPopup
-                                        customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
-                                        key={data}
-                                        rowTitle={data}
-                                        rowBorderColor={AppTheme.TAB_BORDER}
-                                    
-                                    />
-                                )
-                            })
-                        }
-                    </View>
-                    <View style={styles1.container1}>
-                        {studentsAndExamData.data.exams[0].questions.map((stu) => {
-                            return (
-                                <View key={stu} style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                    <ScrollView scrollEnabled showsVerticalScrollIndicator={false}>
+                        <View style={[styles1.container1, { flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 20 }]}>
+                            {
+                                Exam_QuestionHeader.map((data) => {
+                                    return (
+                                        <ExamDetailsPopup
+                                            customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
+                                            key={data}
+                                            rowTitle={data}
+                                            rowBorderColor={AppTheme.TAB_BORDER}
 
-                                    <ExamDetailsPopup
-                                        customRowStyle={{ width: '30%', }}
-                                        rowTitle={stu.questionId}
-                                        rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
-                                    />
-                                    <ExamDetailsPopup
-                                        customRowStyle={{ width: '30%', }}
-                                        rowTitle={stu.indicatorTitle}
-                                        rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
-                                    />
-                                    <ExamDetailsPopup
-                                        customRowStyle={{ width: '30%', }}
-                                        rowTitle={stu.questionMarks}
-                                        rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
-                                    />
-                                </View>
-                            )
-                        })}
+                                        />
+                                    )
+                                })
+                            }
+                        </View>
+                        <View style={styles1.container1}>
+                            {studentsAndExamData.data.exams[0].questions.map((stu) => {
+                                return (
+                                    <View key={stu} style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+
+                                        <ExamDetailsPopup
+                                            customRowStyle={{ width: '30%', }}
+                                            rowTitle={stu.questionId}
+                                            rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
+                                        />
+                                        <ExamDetailsPopup
+                                            customRowStyle={{ width: '30%', }}
+                                            rowTitle={stu.indicatorTitle}
+                                            rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
+                                        />
+                                        <ExamDetailsPopup
+                                            customRowStyle={{ width: '30%', }}
+                                            rowTitle={stu.questionMarks}
+                                            rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
+                                        />
+                                    </View>
+                                )
+                            })}
                         </View>
                     </ScrollView>
                     <View >
@@ -445,7 +456,7 @@ const styles1 = StyleSheet.create({
         padding: 10, backgroundColor: '#fff',
         borderRadius: 10
     },
-    nxtBtnStyle:{marginTop:10, marginHorizontal: 40, marginBottom: 20, borderRadius: 10, }
+    nxtBtnStyle:{marginTop:10,marginHorizontal:40, marginBottom: 20, borderRadius: 10, }
 })
 
 

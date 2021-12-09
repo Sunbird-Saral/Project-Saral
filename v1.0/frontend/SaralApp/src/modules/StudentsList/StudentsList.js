@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux';
 import APITransport from '../../flux/actions/transport/apitransport'
 
 //storage
-import { getLoginCred, getStudentsExamData, setAbsentStudentDataIntoAsync, setPresentAbsentStudent, setStudentsExamData, setTotalStudent } from '../../utils/StorageUtils';
+import { getErrorMessage, getLoginCred, getStudentsExamData, setAbsentStudentDataIntoAsync, setErrorMessage, setPresentAbsentStudent, setStudentsExamData, setTotalStudent } from '../../utils/StorageUtils';
 import ButtonComponent from '../common/components/ButtonComponent';
 import StudentsDataComponent from './StudentsDataComponent';
 import ShareComponent from '../common/components/Share'
@@ -104,6 +104,9 @@ const StudentsList = ({
     }
 
     const FetchSavedScannedData = (api, uname, pass) => {
+        let errorData = await getErrorMessage()
+        let errorMessage = errorData != null ? errorData : []
+
         if (api.method === 'POST') {
             let apiResponse = null
             const source = axios.CancelToken.source()
@@ -125,6 +128,13 @@ const StudentsList = ({
                     dispatch(dispatchAPIAsync(api));
                 })
                 .catch(function (err) {
+                    setErrorMessage(errorMessage.push(
+                        {
+                            name: `[StudentList.js]`,
+                            funcName: `FetchSavedScannedData`,
+                            apiUrl: `${api.apiEndPoint()} `,
+                            erroMsg: err
+                        }))
                     clearTimeout(id)
                 });
         }
