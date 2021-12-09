@@ -12,7 +12,7 @@ for deleting current data in database
 # state:- UP
 
 ## schoolId:up001
->> `school:- Fountainhead School`
+>> `school:- Dummy school 1`
 >> `classes:- 2,3,4,5,6,7,8`
 >> `student:- no of student 7` 
 
@@ -106,7 +106,7 @@ for deleting current data in database
 
 # state:- odisha
 ## schoolID: odisha001
->> `school:- Aditya Birla Public School, Rayagada.`
+>> `school:- Dummy school 2`
 >> `classes:- 2,3`
 >> `name of student in ODISHA school:-`  
 
@@ -149,7 +149,7 @@ for deleting current data in database
 
 # state: gujrat
 ## schoolId:gujrat001
->> `school:- Sainik School`
+>> `school:- Dummy school 3`
 >> `classes:- 3,4,5`
 
 name of student in gujrat school:- 
@@ -218,7 +218,7 @@ name of student in gujrat school:-
 
 # state:- UP(For multiple students)
 ## schoolId:-up002
->> `school:- Amtul's Public School`
+>> `school:- Dummy school 4`
 >> `classes:- 2,3,4,5`
 >> `name of student in MULTI UP school` 
 
@@ -232,6 +232,19 @@ name of student in gujrat school:-
 |Ruchika Joshi    |4204006|
 |Shantanu Bankoti |4204007|
 |Kavita kuwarbi   |4204008|
+|Kanchan Joshi    |4204009|
+|Pragati Singh    |4204010|
+|Saurav Joshi     |4204011|
+|Shivam Manral    |4204012|
+|Adita Agarwal    |4204013|
+|Aditya Agarwal   |4204014|
+|Vimal Daramwal   |4204015|
+|Smriti Arora     |4204016|
+|Vishakha Gupta   |4204017|
+|Shubham Tiwari   |4204018|
+|Venkat Rao       |4204019|
+|Vicky Kaushal    |4204020|
+|Ritika Nagarkoti |4204021|
 
 
 ## roi:- 
