@@ -340,7 +340,7 @@ const ScanHistoryCard = ({
                  {
                     scanstatusbutton
                     &&
-                    <View style={{ marginBottom: '5%', marginTop: '2%', width: '100%', alignItems: 'center' }}>
+                    <View style={{bottom:10,  width: '100%', alignItems: 'center' }}>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', width: '100%' }}>
                             <TouchableOpacity
                                 style={{ backgroundColor: AppTheme.GREY, borderRadius: 4, width: '80%', alignItems: 'center', justifyContent: 'center', elevation: 8, paddingVertical: 4 }}

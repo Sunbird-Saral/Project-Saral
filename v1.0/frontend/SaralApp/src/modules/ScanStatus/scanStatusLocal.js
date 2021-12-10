@@ -52,7 +52,7 @@ useEffect(
             const result = await Share.share({
                 title: `Saral App v1.0 Marks JSON - SchoolId:${loginData.data.school.schoolId} & Exam Id:${filteredData.examTestID}`,
                 message:
-                    `${(data)}`
+                    `${(data ? data : '')}`
             });
             if (result.action === Share.sharedAction) {
                 if (result.activityType) {
@@ -152,9 +152,11 @@ useEffect(
                     </Text>
                 </View>
             }
+            {loacalstutlist[0] ?
             <TouchableOpacity onPress={onShare}>
                     <Image style={{ height: 25, width: 25, marginHorizontal: 15, marginVertical: 20 }} source={Assets.Share} />
-                </TouchableOpacity>
+                </TouchableOpacity>:
+                null}
             </View>
 
             <Text style={styles.scanStatus}>{Strings.scan_status}</Text>
