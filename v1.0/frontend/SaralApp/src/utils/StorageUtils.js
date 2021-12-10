@@ -15,8 +15,12 @@ const SET_ERROR_MESSAGE = 'set_error_message'
 
 export const setErrorMessage = async (data) => {
     let value = JSON.stringify(data)
-    await AsyncStorage.setItem(SET_ERROR_MESSAGE, value)
-    return true
+    let saved = await AsyncStorage.setItem(SET_ERROR_MESSAGE, value);
+    if (saved) {
+        return true
+    } else {
+        return false
+    }
 }
 
 export const setData = async (key, value) => {
@@ -171,7 +175,11 @@ export const setPresentAbsentStudent = async (data) => {
     }
 }
 
-export const getErrorMessage = async ()=>{
+export const getErrorMessage = async () => {
     const message = await AsyncStorage.getItem(SET_ERROR_MESSAGE)
-    return JSON.parse(message)
+    if (message != null) {
+        return JSON.parse(message)
+    } else {
+        return message
+    }
 }

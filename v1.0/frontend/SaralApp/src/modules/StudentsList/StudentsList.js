@@ -35,6 +35,7 @@ import { cryptoText, validateToken } from '../../utils/CommonUtils';
 import { LoginAction } from '../../flux/actions/apis/LoginAction';
 
 import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction'
+import { collectErrorLogs } from '../CollectErrorLogs';
 
 
 const StudentsList = ({
@@ -103,9 +104,7 @@ const StudentsList = ({
         FetchSavedScannedData(apiObj, loginCred.schoolId, loginCred.password)
     }
 
-    const FetchSavedScannedData = (api, uname, pass) => {
-        let errorData = await getErrorMessage()
-        let errorMessage = errorData != null ? errorData : []
+    const FetchSavedScannedData = async(api, uname, pass) => {
 
         if (api.method === 'POST') {
             let apiResponse = null
@@ -128,13 +127,7 @@ const StudentsList = ({
                     dispatch(dispatchAPIAsync(api));
                 })
                 .catch(function (err) {
-                    setErrorMessage(errorMessage.push(
-                        {
-                            name: `[StudentList.js]`,
-                            funcName: `FetchSavedScannedData`,
-                            apiUrl: `${api.apiEndPoint()} `,
-                            erroMsg: err
-                        }))
+                    collectErrorLogs("StrudentList.js","FetchSavedScannedData",api.apiEndPoint(),err,false)
                     clearTimeout(id)
                 });
         }

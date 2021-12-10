@@ -7,8 +7,6 @@ export default function callScanStatusDataConst(filteredData) {
     return async dispatch => {
 
         let loginCred = await getLoginCred()
-        let errorData = await getErrorMessage()
-        let errorMessage = errorData != null ? errorData : []
 
         let dataPayload = {
             "classId": filteredData.response.class,
@@ -40,13 +38,7 @@ export default function callScanStatusDataConst(filteredData) {
                     dispatch(dispatchAPIAsync(apiObj));
                 })
                 .catch(function (err) {
-                    setErrorMessage(errorMessage.push(
-                        {
-                            name: `[callScanStatusDataConst.js]`,
-                            funcName: `callScanStatusDataConst`,
-                            apiUrl: `${apiObj.apiEndPoint()} `,
-                            erroMsg: err
-                        }))
+                    collectErrorLogs("callScanStatusDataConst.js","callScanStatusDataConst",apiObj.apiEndPoint(),err,false)
                     clearTimeout(id)
                 });
         }

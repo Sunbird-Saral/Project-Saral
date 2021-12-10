@@ -2,16 +2,14 @@ import axios from 'axios';
 import C from '../constants'
 // import RNFetchBlob from 'rn-fetch-blob'
 import Strings from '../../../utils/Strings';
-import { getErrorMessage, setErrorMessage } from '../../../utils/StorageUtils';
+import { collectErrorLogs } from '../../../modules/CollectErrorLogs';
 
 
-export default async function dispatchAPI(api) {    
+export default function dispatchAPI(api) {    
 
-    let errorData = await getErrorMessage()
-    let errorMessage = errorData != null ? errorData : []
 
     if (api.reqType === 'MULTIPART') {
-        return dispatch => {
+        return async dispatch => {
             dispatch(apiStatusAsync(true, false, ''))
             axios.post(api.apiEndPoint(), api.getFormData(), api.getHeaders())
                 .then(function (res) {
@@ -22,13 +20,7 @@ export default async function dispatchAPI(api) {
                         dispatch(api.getNextStep())
                 })
                 .catch(function (err) {
-                    setErrorMessage(errorMessage.push(
-                        {
-                            name: `[apitransport.js]`,
-                            funcName: `dispatchAPI`,
-                            apiUrl: `${api.apiEndPoint()} `,
-                            erroMsg: err
-                        }))
+                    collectErrorLogs("apitransport.js","MULTIPART MEthod", api.apiEndPoint(), err, true)
                     dispatch(apiStatusAsync(false, true, Strings.something_went_wrong_please_try_again, null, err && err.response && err.response.status && err.response.status === 401 ? true : false))
                 });
         }
@@ -58,7 +50,7 @@ export default async function dispatchAPI(api) {
         // }
         // else 
         if (api.method === 'POST') {
-            return dispatch => {
+            return async dispatch => {
                 dispatch(apiStatusAsync(true, false, ''))
                 let apiResponse = null
                 const source = axios.CancelToken.source()
@@ -78,13 +70,7 @@ export default async function dispatchAPI(api) {
                             dispatch(api.getNextStep())
                     })
                     .catch(function (err) {
-                        setErrorMessage(errorMessage.push(
-                            {
-                                name: `[apitransport.js]`,
-                                funcName: `dispatchAPI`,
-                                apiUrl: `${api.apiEndPoint()} `,
-                                erroMsg: err
-                            }))
+                        collectErrorLogs("apitransport.js","POST MEthod", api.apiEndPoint(), err, true)
                         clearTimeout(id)
                         if (err && err.message == 'The request timed out.') {
                             dispatch(apiStatusAsync(false, true, Strings.request_timeout_custom_message, null, err && err.response && err.response.status && err.response.status === 401 ? true : false))
@@ -102,7 +88,7 @@ export default async function dispatchAPI(api) {
             }
         }
         else if (api.method === "PUT") {
-            return dispatch => {
+            return async dispatch => {
                 dispatch(apiStatusAsync(true, false, ''))
                 let apiResponse = null
                 const source = axios.CancelToken.source()
@@ -122,13 +108,7 @@ export default async function dispatchAPI(api) {
                             dispatch(api.getNextStep())
                     })
                     .catch(function (err) {
-                        setErrorMessage(errorMessage.push(
-                            {
-                                name: `[apitransport.js]`,
-                                funcName: `dispatchAPI`,
-                                apiUrl: `${api.apiEndPoint()} `,
-                                erroMsg: err
-                            }))
+                        collectErrorLogs("apitransport.js","PUT MEthod", api.apiEndPoint(), err, true)
                         clearTimeout(id)
                         if (err && err.message == 'The request timed out.') {
                             dispatch(apiStatusAsync(false, true, Strings.request_timeout_custom_message, null, err && err.response && err.response.status && err.response.status === 401 ? true : false))
@@ -148,7 +128,7 @@ export default async function dispatchAPI(api) {
         }
 
         else if (api.method === 'DELETE') {
-            return dispatch => {
+            return async dispatch => {
                 dispatch(apiStatusAsync(true, false, ''))
                 axios.delete(api.apiEndPoint(), api.getHeaders())
                     .then(function (res) {
@@ -159,18 +139,12 @@ export default async function dispatchAPI(api) {
                             dispatch(api.getNextStep())
                     })
                     .catch(function (err) {
-                        setErrorMessage(errorMessage.push(
-                            {
-                                name: `[apitransport.js]`,
-                                funcName: `dispatchAPI`,
-                                apiUrl: `${api.apiEndPoint()} `,
-                                erroMsg: err
-                            }))
+                        collectErrorLogs("apitransport.js","DELETE MEthod", api.apiEndPoint(), err, true)
                         dispatch(apiStatusAsync(false, true, Strings.something_went_wrong_please_try_again, null, err && err.response && err.response.status && err.response.status === 401 ? true : false))
                     });
             }
         } else {
-            return dispatch => {
+            return async dispatch => {
                 dispatch(apiStatusAsync(true, false, ''))
                 let apiResponse = null
                 const source = axios.CancelToken.source()
@@ -189,14 +163,8 @@ export default async function dispatchAPI(api) {
                         if (typeof api.getNextStep === 'function' && res.data && (res.status == 200 || res.status == 201))
                             dispatch(api.getNextStep())
                     })
-                    .catch(function (err) {                        
-                        setErrorMessage(errorMessage.push(
-                            {
-                                name: `[apitransport.js]`,
-                                funcName: `dispatchAPI`,
-                                apiUrl: `${api.apiEndPoint()} `,
-                                erroMsg: err
-                            }))
+                    .catch(function (err) {
+                        collectErrorLogs("apitransport.js","GET MEthod", api.apiEndPoint(), err, true)
                         if (err.response)
                             dispatch(apiStatusAsync(false, true, Strings.something_went_wrong_please_try_again, null, err && err.response && err.response.status && err.response.status === 401 || err.response.status === 404 ? true : false))
                     });

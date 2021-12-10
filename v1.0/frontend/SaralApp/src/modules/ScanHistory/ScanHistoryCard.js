@@ -16,6 +16,7 @@ import { styles } from './ScanHistoryStyles';
 import { scanStatusDataAction } from '../ScanStatus/scanStatusDataAction';
 import axios from 'axios';
 import { ScrollView } from 'react-native-gesture-handler';
+import { collectErrorLogs } from '../CollectErrorLogs';
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
 const HEIGHT_MODAL = 150;
@@ -148,10 +149,7 @@ const ScanHistoryCard = ({
         FetchSavedScannedData(apiObj, loginCred.schoolId, loginCred.password, filteredDatalen, localScanData)
     }
 
-    const FetchSavedScannedData = (api, uname, pass, filterDataLen, localScanData) => {
-
-        let errorData = await getErrorMessage()
-        let errorMessage = errorData != null ? errorData : []
+    const FetchSavedScannedData = async(api, uname, pass, filterDataLen, localScanData) => {
 
         if (api.method === 'POST') {
             let apiResponse = null
@@ -181,13 +179,7 @@ const ScanHistoryCard = ({
                     setIsLoading(false)
                 })
                 .catch(function (err) {
-                    setErrorMessage(errorMessage.push(
-                        {
-                            name: `[scanHistoryCard]`,
-                            funcName: `FetchSavedScannedData`,
-                            apiUrl: `${api.apiEndPoint()} `,
-                            erroMsg: err
-                        }))
+                    collectErrorLogs("ScanHistoryCard.js","FetchSavedScannedData",api.apiEndPoint(),err,false)
                     console.warn("Error", err);
                     console.warn("Error", err.response);
                     Alert.alert("Something Went Wrong")
