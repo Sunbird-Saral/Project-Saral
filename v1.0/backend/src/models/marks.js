@@ -64,9 +64,33 @@ const marksSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    maxMarksTrainingData:{
+        type: String,
+        required: false
+    },
+    maxMarksPredicted:{
+        type: String,
+        required: false
+    },
+    maxMarksCofidence:{
+        type: String,
+        required: false
+    },
     securedMarks: {
         type: Number,
         required: true
+    },
+    obtainedMarksTrainingData:{
+        type: String,
+        required: false
+    },
+    obtainedMarksPredicted:{
+        type: String,
+        required: false
+    },
+    obtainedMarksConfidence:{
+        type: String,
+        required: false
     },
     createdOn: { 
         type: String, 
