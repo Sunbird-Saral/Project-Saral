@@ -33,7 +33,7 @@ const ScanStatusLocal = ({
     const [unsavedstudentList, setUnsavedstudentList] = useState([])
     const [loacalstutlist, setLoacalstutlist] = useState([])
     const [presentStudentList, setPresentStudentList] = useState([])
-
+    const data =(JSON.stringify(loacalstutlist[0],null, 2))
 
 
 useEffect(
@@ -50,9 +50,9 @@ useEffect(
     const onShare = async () => {
         try {
             const result = await Share.share({
-                title: '',
+                title: `Saral App v1.0 Marks JSON - SchoolId:${loginData.data.school.schoolId} & Exam Id:${filteredData.examTestID}`,
                 message:
-                    `${JSON.stringify(loacalstutlist[0])}`
+                    `${(data ? data : '')}`
             });
             if (result.action === Share.sharedAction) {
                 if (result.activityType) {
@@ -152,9 +152,11 @@ useEffect(
                     </Text>
                 </View>
             }
+            {loacalstutlist[0] ?
             <TouchableOpacity onPress={onShare}>
                     <Image style={{ height: 25, width: 25, marginHorizontal: 15, marginVertical: 20 }} source={Assets.Share} />
-                </TouchableOpacity>
+                </TouchableOpacity>:
+                null}
             </View>
 
             <Text style={styles.scanStatus}>{Strings.scan_status}</Text>

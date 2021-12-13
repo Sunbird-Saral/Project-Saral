@@ -17,6 +17,7 @@ import ButtonComponent from '../common/components/ButtonComponent';
 import ShareComponent from '../common/components/Share';
 import { collectErrorLogs } from '../CollectErrorLogs';
 
+import { ScrollView } from 'react-native-gesture-handler';
 const ScanHistory = ({
     loginData,
     navigation,
@@ -85,6 +86,8 @@ const ScanHistory = ({
                  message={JSON.stringify(logmessage, null, 2)}
                  />
                  {/* <ScrollView> */}
+            <ScrollView>
+
             {
                 (loginData && loginData.data)
                 &&
@@ -119,6 +122,8 @@ const ScanHistory = ({
                 scanStatusData={scanStatusData}
                 setScanStatusData={setScanStatusData}
             />
+            </ScrollView>
+
             <ButtonComponent
                 customBtnStyle={[styles.nxtBtnStyle, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
                 btnText={Strings.Back.toUpperCase()}
