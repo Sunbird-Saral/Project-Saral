@@ -11,9 +11,10 @@ import { OcrLocalResponseAction } from '../../flux/actions/apis/OcrLocalResponse
 import { apkVersion } from '../../configs/config';
 import ScanHistoryCard from '../ScanHistory/ScanHistoryCard';
 import SaralSDK from '../../../SaralSDK'
-import { getScannedDataFromLocal } from '../../utils/StorageUtils';
+import { getScannedDataFromLocal,getErrorMessage } from '../../utils/StorageUtils';
 import ButtonComponent from '../common/components/ButtonComponent';
 import { neglectData } from '../../utils/CommonUtils';
+import { collectErrorLogs } from '../CollectErrorLogs';
 import ShareComponent from '../common/components/Share';
 
 LogBox.ignoreAllLogs()
@@ -27,7 +28,9 @@ class MyScanComponent extends Component {
             oldBrightness: null,
             activityOpen: false,
             isLoading: false,
-            scanStatusData:false
+            scanStatusData:false,
+            logmessage:''
+
         }
         this.onBack = this.onBack.bind(this)
         this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
@@ -41,6 +44,12 @@ class MyScanComponent extends Component {
         this.props.navigation.navigate('ScanHistory');
         return true;
     }
+
+    logFunction(){
+        const message =  getErrorMessage()
+        this.setState({logmessage:message})
+    }
+
     componentDidMount() {
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
         const { navigation, scanedData } = this.props
@@ -239,16 +248,15 @@ class MyScanComponent extends Component {
         return (
 
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
-                  <ShareComponent
-                 onLogoutClick={()=>this.onLogoutClick()}
-                 message={'hello'}
-                
+                 <ShareComponent
+                 navigation={this.props.navigation}
+                 message={JSON.stringify(this.state.logmessage, null, 2)}
                  />
                 <ScrollView showsHorizontalScrollIndicator={false}>
                 {
                     (loginData && loginData.data)
                     &&
-                    <View style={{ marginVertical: '2%' }}>
+                    <View style={{ marginTop: 20,width:'60%'  }}>
                         <Text
                             style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}
                         >
@@ -441,6 +449,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
         OcrLocalResponseAction: OcrLocalResponseAction,
+        collectErrorLogs:collectErrorLogs
     }, dispatch)
 }
 

@@ -3,10 +3,11 @@ import { StyleSheet, Text, View,BackHandler } from 'react-native';
 
 //redux
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 //constant
 import AppTheme from '../../utils/AppTheme';
-import { getScannedDataFromLocal } from '../../utils/StorageUtils';
+import { getScannedDataFromLocal,getErrorMessage } from '../../utils/StorageUtils';
 import Strings from '../../utils/Strings';
 
 //component
@@ -14,6 +15,7 @@ import Spinner from '../common/components/loadingIndicator';
 import ScanHistoryCard from './ScanHistoryCard';
 import ButtonComponent from '../common/components/ButtonComponent';
 import ShareComponent from '../common/components/Share';
+import { collectErrorLogs } from '../CollectErrorLogs';
 
 const ScanHistory = ({
     loginData,
@@ -26,9 +28,13 @@ const ScanHistory = ({
     //Hooks
     const [isLoading, setIsLoading] = useState(false)
     const [scanStatusData, setScanStatusData] = useState(false)
+    const [logmessage,setLogmessage] = useState()
     //functions
 
-
+    useEffect(async() => {
+        let message = await getErrorMessage()
+        setLogmessage({message})
+    }, []);
     useEffect(() => {
         sumOfLocalData()
     }, [])
@@ -76,7 +82,7 @@ const ScanHistory = ({
         <View style={styles.container}>
               <ShareComponent
                  navigation={navigation}
-                 message={'hello'}
+                 message={JSON.stringify(logmessage, null, 2)}
                  />
                  {/* <ScrollView> */}
             {
@@ -135,7 +141,13 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, null)(ScanHistory);
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({
+        collectErrorLogs: collectErrorLogs
+    }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ScanHistory);
 
 const styles = StyleSheet.create({
     container: {

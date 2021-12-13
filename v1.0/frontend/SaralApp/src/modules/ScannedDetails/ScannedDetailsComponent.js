@@ -16,12 +16,13 @@ import MarksHeaderTable from './MarksHeaderTable';
 //components
 import ButtonComponent from '../common/components/ButtonComponent';
 import TextField from '../common/components/TextField';
-import { getLoginCred, getPresentAbsentStudent, getScanData, getScannedDataFromLocal, getStudentsExamData, setScanData, setScannedDataIntoLocal } from '../../utils/StorageUtils';
+import { getLoginCred,getErrorMessage, getPresentAbsentStudent, getScanData, getScannedDataFromLocal, getStudentsExamData, setScanData, setScannedDataIntoLocal } from '../../utils/StorageUtils';
 import { NavigationActions, StackActions } from 'react-navigation';
 import Spinner from '../common/components/loadingIndicator';
 import APITransport from '../../flux/actions/transport/apitransport';
 import { bindActionCreators } from 'redux';
 import { OcrLocalResponseAction } from '../../flux/actions/apis/OcrLocalResponseAction';
+import { collectErrorLogs } from '../CollectErrorLogs';
 
 //npm
 import CheckBox from '@react-native-community/checkbox';
@@ -64,9 +65,15 @@ const ScannedDetailsComponent = ({
     const [nextBtn, setNextBtn] = useState('SUBMIT')
     const [checkStdRollDuplicate, setCheckStdRollDuplicate] = useState([])
     const [toggleCheckBox, setToggleCheckBox] = useState(false)
+    const [logmessage,setLogmessage] = useState()
 
     const inputRef = React.createRef();
     const dispatch = useDispatch()
+
+    useEffect(async() => {
+        let message = await getErrorMessage()
+        setLogmessage({message})
+    }, []);
 
 
     useEffect(() => {
@@ -933,7 +940,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
         APITransport: APITransport,
-        OcrLocalResponseAction: OcrLocalResponseAction
+        OcrLocalResponseAction: OcrLocalResponseAction,
+        collectErrorLogs:collectErrorLogs
     }, dispatch)
 }
 
