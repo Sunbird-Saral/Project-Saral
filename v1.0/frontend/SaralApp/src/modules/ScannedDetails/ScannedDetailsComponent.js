@@ -701,7 +701,7 @@ const ScannedDetailsComponent = ({
     const saveData = async () => {
         let elements = neglectData;
         let data = ocrLocalResponse.layout.cells.filter((element) => {
-            if (element.format.name == elements[0] || element.format.name == elements[1] || element.format.name == elements[2] || element.format.name == elements[3]) {
+            if (element.format.name == elements[0] || element.format.name == elements[1]) {
             }
             else {
                 return true
