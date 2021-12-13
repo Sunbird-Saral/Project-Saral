@@ -780,8 +780,8 @@ const ScannedDetailsComponent = ({
 
         } 
         if (maxObtainedTrainingData.length > 0 && loginData.data.school.storeTrainingData && maxObtainedTrainingData[1].format.name == elements[2]) {
-            saveObj.studentsMarkInfo[0].ObtainedMarksTrainingData = maxObtainedTrainingData[1].predictedMarks != maxMarksTotal ? maxObtainedTrainingData[1].trainingDataSet : []
-            saveObj.studentsMarkInfo[0].ObtainedMarksPredicted  =  maxObtainedTrainingData[1].predictedMarks
+            saveObj.studentsMarkInfo[0].obtainedMarksTrainingData = maxObtainedTrainingData[1].predictedMarks != maxMarksTotal ? maxObtainedTrainingData[1].trainingDataSet : []
+            saveObj.studentsMarkInfo[0].obtainedMarksPredicted  =  maxObtainedTrainingData[1].predictedMarks
             saveObj.studentsMarkInfo[0].obtainedMarksConfidence =  maxObtainedTrainingData[1].predictionConfidence
         }
 
