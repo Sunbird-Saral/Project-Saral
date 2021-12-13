@@ -65,7 +65,7 @@ const marksSchema = new mongoose.Schema({
         required: true
     },
     maxMarksTrainingData:{
-        type: String,
+        type: Array,
         required: false
     },
     maxMarksPredicted:{
@@ -73,7 +73,7 @@ const marksSchema = new mongoose.Schema({
         required: false
     },
     maxMarksCofidence:{
-        type: String,
+        type: Array,
         required: false
     },
     securedMarks: {
@@ -81,7 +81,7 @@ const marksSchema = new mongoose.Schema({
         required: true
     },
     obtainedMarksTrainingData:{
-        type: String,
+        type: Array,
         required: false
     },
     obtainedMarksPredicted:{
@@ -89,7 +89,7 @@ const marksSchema = new mongoose.Schema({
         required: false
     },
     obtainedMarksConfidence:{
-        type: String,
+        type: Array,
         required: false
     },
     createdOn: { 
