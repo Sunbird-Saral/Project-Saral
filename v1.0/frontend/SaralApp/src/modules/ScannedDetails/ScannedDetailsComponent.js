@@ -351,7 +351,7 @@ const ScannedDetailsComponent = ({
                 let stdData = {
                     "studentId": '',
                     "predictedStudentId": loginData.data.school.storeTrainingData ? storeTrainingData[index].studentIdPrediction : '',
-                    "predictionConfidence": loginData.data.school.storeTrainingData ? storeTrainingData[index].predictionConfidence : '',
+                    "predictionConfidence": loginData.data.school.storeTrainingData ? storeTrainingData[index].studentIdPrediction != el.RollNo ? storeTrainingData[index].predictionConfidence : [] : [],
                     "section": filteredData.section,
                     "marksInfo": '',
                     "securedMarks": stdTotalMarks,
@@ -762,7 +762,7 @@ const ScannedDetailsComponent = ({
             "studentsMarkInfo": [
                 {
                     "predictedStudentId":loginData.data.school.storeTrainingData ? storeTrainingData[0].studentIdPrediction : '',
-                    "predictionConfidence":loginData.data.school.storeTrainingData ? storeTrainingData[0].predictionConfidence : '',
+                    "predictionConfidence":loginData.data.school.storeTrainingData ? storeTrainingData[0].studentIdPrediction != studentId ? storeTrainingData[0].predictionConfidence : [] : [],
                     "section": filteredData.section,
                     "studentId": studentId,
                     "securedMarks": sumOfAllMarks > 0 ? sumOfAllMarks : 0,
