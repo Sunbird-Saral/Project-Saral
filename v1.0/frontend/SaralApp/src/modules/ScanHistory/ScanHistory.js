@@ -13,6 +13,7 @@ import Strings from '../../utils/Strings';
 import Spinner from '../common/components/loadingIndicator';
 import ScanHistoryCard from './ScanHistoryCard';
 import ButtonComponent from '../common/components/ButtonComponent';
+import { ScrollView } from 'react-native-gesture-handler';
 const ScanHistory = ({
     loginData,
     navigation,
@@ -72,6 +73,7 @@ const ScanHistory = ({
 
     return (
         <View style={styles.container}>
+            <ScrollView>
 
             {
                 (loginData && loginData.data)
@@ -79,7 +81,7 @@ const ScanHistory = ({
                 <View style={{ marginTop: 20 }}>
                     <Text
                         style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}>
-                        {Strings.school_name + ' Name : '}
+                        {Strings.school_name + '  : '}
                         <Text style={{ fontWeight: 'normal' }}>
                             {loginData.data.school.name}
                         </Text>
@@ -99,6 +101,7 @@ const ScanHistory = ({
 
             <ScanHistoryCard
                 showButtons={apiStatus.unauthorized ? false : true}
+                scanstatusbutton={false}
                 navigation={navigation}
                 themeColor1={multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}
                 isLoading={isLoading}
@@ -106,6 +109,8 @@ const ScanHistory = ({
                 scanStatusData={scanStatusData}
                 setScanStatusData={setScanStatusData}
             />
+            </ScrollView>
+
             <ButtonComponent
                 customBtnStyle={[styles.nxtBtnStyle, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
                 btnText={Strings.Back.toUpperCase()}
@@ -152,5 +157,5 @@ const styles = StyleSheet.create({
         color: AppTheme.BLACK,
         letterSpacing: 1
     },
-    nxtBtnStyle:{ top:50, marginHorizontal: 40, marginBottom: 20, borderRadius: 10, }
+    nxtBtnStyle:{marginTop:10, marginHorizontal: 40, marginBottom: 20, borderRadius: 10 }
 });

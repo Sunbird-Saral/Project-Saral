@@ -26,6 +26,7 @@ class MyScanComponent extends Component {
             oldBrightness: null,
             activityOpen: false,
             isLoading: false,
+            scanStatusData:false
         }
         this.onBack = this.onBack.bind(this)
         this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
@@ -237,7 +238,7 @@ class MyScanComponent extends Component {
         return (
 
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
-                <ScrollView>
+                <ScrollView showsHorizontalScrollIndicator={false}>
                 {
                     (loginData && loginData.data)
                     &&
@@ -270,7 +271,7 @@ class MyScanComponent extends Component {
                     </Text>
                 </Text>
 
-                <View style={{ paddingBottom: '35%' }}>
+                <View style={{bottom:20 }}>
                     <View style={styles.onGoingContainer}>
                         <Text style={[styles.header1TextStyle, { backgroundColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE }]}>
                             {Strings.ongoing_scan}
@@ -278,9 +279,11 @@ class MyScanComponent extends Component {
                     </View>
 
                     <ScanHistoryCard
+                        scanstatusbutton ={true}
                         themeColor1={this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE}
                         showButtons={false}
                         scanStatusData={this.state.scanStatusData}
+                         navigation={this.props.navigation}
                     />
                 </View>
 
@@ -296,7 +299,7 @@ class MyScanComponent extends Component {
                 </ScrollView>
                 <View style={styles.bottomTabStyle}>
                 </View>
-                <View style={[styles.bottomTabStyle, { height: 90, width: '50%', marginHorizontal: '25%', backgroundColor: 'transparent', justifyContent: 'center' }]}>
+                <View style={[styles.bottomTabStyle, { height: 50,  marginHorizontal: '25%', backgroundColor: 'transparent', justifyContent: 'center' }]}>
                     <TouchableOpacity style={[styles.subTabContainerStyle]}
                         onPress={this.onScanClick}
                     >
@@ -359,7 +362,7 @@ const styles = {
         position: 'absolute',
         flexDirection: 'row',
         bottom: 0,
-        height: 60,
+        height: 40,
         left: 0,
         right: 0,
         backgroundColor: AppTheme.WHITE,
@@ -413,7 +416,20 @@ const styles = {
         justifyContent: 'center',
         alignItems: 'center'
     },
-    nxtBtnStyle: { bottom: 115, marginHorizontal: 40, marginBottom: 20, borderRadius: 10, }
+    nxtBtnStyle:{ marginHorizontal: 40, marginBottom: 90,bottom:10, borderRadius: 10 },
+   
+    nxtBtnStyle1: {
+        marginTop:15,
+        width:'45%',
+        marginHorizontal: 5,
+        marginBottom: 20,
+        borderRadius: 10
+    },
+    viewnxtBtnStyle1 : {
+        flexDirection:'row',
+        justifyContent:'center',
+        alignItems:'center'
+    }
 }
 
 const mapStateToProps = (state) => {
@@ -424,7 +440,8 @@ const mapStateToProps = (state) => {
         scanTypeData: state.scanTypeData.response,
         scanedData: state.scanedData,
         roiData: state.roiData.response,
-        multiBrandingData: state.multiBrandingData.response.data
+        multiBrandingData: state.multiBrandingData.response.data,
+        apiStatus: state.apiStatus
     }
 }
 
