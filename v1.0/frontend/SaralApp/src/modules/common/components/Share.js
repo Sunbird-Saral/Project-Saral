@@ -43,6 +43,7 @@ const ShareComponent = ({
   const ShareCompo = useCallback(async () => {
     try {
       const result = await Share.share({
+        title: `Saral App v1.0 logs collection`,
         message:
           `${message}`
 
@@ -69,13 +70,15 @@ const ShareComponent = ({
         </View>
       </TouchableOpacity>
       </View>
-     { ishidden ? <HeaderComponents
+     { ishidden ?
+      <HeaderComponents
         supportTeamText={'Support'}
         logoutHeaderText={Strings.logout_text}
         customLogoutTextStyle={{ color: AppTheme.BLACK, }}
         onSupportClick={ShareCompo}
         onLogoutClick={Logoutcall}
-      /> :null}
+      /> 
+      :null}
         </View>
       )
   }

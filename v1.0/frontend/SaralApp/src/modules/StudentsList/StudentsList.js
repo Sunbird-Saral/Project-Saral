@@ -67,7 +67,7 @@ const StudentsList = ({
 useEffect(async() => {
     studentData()
     let message = await getErrorMessage()
-    setLogmessage(message)
+    setLogmessage(message[0])
 }, []);
 
 

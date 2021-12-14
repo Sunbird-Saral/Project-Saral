@@ -34,7 +34,7 @@ const ScanHistory = ({
 
     useEffect(async() => {
         let message = await getErrorMessage()
-        setLogmessage({message})
+        setLogmessage(message[0])
     }, []);
     useEffect(() => {
         sumOfLocalData()
@@ -86,12 +86,12 @@ const ScanHistory = ({
                  message={JSON.stringify(logmessage, null, 2)}
                  />
                  {/* <ScrollView> */}
-            <ScrollView>
-
+            <ScrollView style={{marginTop:45}} showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false} >
+                       
             {
                 (loginData && loginData.data)
                 &&
-                <View style={{ marginTop: 20,width:'60%' }}>
+                <View style={{ width:'60%' }}>
                     <Text
                         style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}>
                         {Strings.school_name + '  : '}
@@ -162,7 +162,8 @@ const styles = StyleSheet.create({
     container1: {
         marginHorizontal: '4%',
         alignItems: 'center',
-        paddingVertical: '4%'
+        marginTop:13,
+        // paddingVertical: '4%'
     },
     header1TextStyle: {
         backgroundColor: AppTheme.LIGHT_BLUE,
@@ -176,5 +177,5 @@ const styles = StyleSheet.create({
         color: AppTheme.BLACK,
         letterSpacing: 1
     },
-    nxtBtnStyle:{marginTop:20, marginHorizontal: 40, marginBottom: 20, borderRadius: 10, }
+    nxtBtnStyle:{ marginHorizontal: 40, marginBottom: 20, borderRadius: 10, }
 });

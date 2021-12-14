@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, Image, TouchableOpacity, Platform, PermissionsAndroid, Alert, BackHandler, LogBox} from 'react-native';
+import { View, ScrollView, Text, Image, TouchableOpacity, Platform, PermissionsAndroid, Alert, BackHandler, LogBox,Share} from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { StackActions, NavigationActions } from 'react-navigation';
@@ -14,8 +14,8 @@ import SaralSDK from '../../../SaralSDK'
 import { getScannedDataFromLocal,getErrorMessage } from '../../utils/StorageUtils';
 import ButtonComponent from '../common/components/ButtonComponent';
 import { neglectData } from '../../utils/CommonUtils';
-import { collectErrorLogs } from '../CollectErrorLogs';
 import ShareComponent from '../common/components/Share';
+import { collectErrorLogs } from '../CollectErrorLogs';
 
 LogBox.ignoreAllLogs()
 
@@ -30,11 +30,15 @@ class MyScanComponent extends Component {
             isLoading: false,
             scanStatusData:false,
             logmessage:''
-
         }
         this.onBack = this.onBack.bind(this)
         this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
     }
+
+    logFunction=() => {
+        let message =  getErrorMessage()
+       this.setState({logmessage:message})
+    };
 
     componentWillUnmount() {
         BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
@@ -44,13 +48,8 @@ class MyScanComponent extends Component {
         this.props.navigation.navigate('ScanHistory');
         return true;
     }
-
-    logFunction(){
-        const message =  getErrorMessage()
-        this.setState({logmessage:message})
-    }
-
     componentDidMount() {
+        this.logFunction()
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
         const { navigation, scanedData } = this.props
         const { params } = navigation.state
@@ -248,20 +247,22 @@ class MyScanComponent extends Component {
         return (
 
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
-                 <ShareComponent
-                 navigation={this.props.navigation}
-                 message={JSON.stringify(this.state.logmessage, null, 2)}
-                 />
+                
                 <ScrollView showsHorizontalScrollIndicator={false}>
+                <ShareComponent
+                 navigation={this.props.navigation}
+                  message={JSON.stringify(this.state.logmessage, null, 2)}
+                 />
+                
                 {
                     (loginData && loginData.data)
                     &&
-                    <View style={{ marginTop: 20,width:'60%'  }}>
+                    <View style={{ width:'60%' }}>
                         <Text
                             style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}
                         >
                             {Strings.school_name + ' : '}
-                            <Text style={{ fontWeight: 'normal' }}>
+                            <Text style={{ fontWeight: 'normal' ,width:'60%' }}>
                                 {loginData.data.school.name}
                             </Text>
                         </Text>
@@ -269,7 +270,7 @@ class MyScanComponent extends Component {
                             style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}
                         >
                             {Strings.schoolId_text + ' : '}
-                            <Text style={{ fontWeight: 'normal' }}>
+                            <Text style={{ fontWeight: 'normal',width:'60%' }}>
                                 {loginData.data.school.schoolId}
                             </Text>
                         </Text>
@@ -285,21 +286,18 @@ class MyScanComponent extends Component {
                     </Text>
                 </Text>
 
-                <View style={{bottom:20 }}>
-                    <View style={styles.onGoingContainer}>
-                        <Text style={[styles.header1TextStyle, { backgroundColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE }]}>
-                            {Strings.ongoing_scan}
-                        </Text>
-                    </View>
-
-                    <ScanHistoryCard
+                <View style={styles.container1}>
+                <Text style={[styles.header1TextStyle, { borderColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE, backgroundColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE }]}>
+                    {Strings.ongoing_scan}
+                </Text>
+            </View>
+                <ScanHistoryCard
                         scanstatusbutton ={true}
                         themeColor1={this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE}
                         showButtons={false}
                         scanStatusData={this.state.scanStatusData}
                          navigation={this.props.navigation}
                     />
-                </View>
 
                 <View>
                     <ButtonComponent
@@ -351,14 +349,14 @@ class MyScanComponent extends Component {
 
 const styles = {
     container1: {
-        flex: 1,
-        marginHorizontal: '6%',
-        alignItems: 'center'
+        marginHorizontal: '4%',
+        alignItems: 'center',
+        // marginTop:13,
     },
     onGoingContainer: {
         marginHorizontal: '4%',
         alignItems: 'center',
-        paddingVertical: '4%'
+        paddingVertical: '3%'
     },
     header1TextStyle: {
         backgroundColor: AppTheme.LIGHT_BLUE,
@@ -430,7 +428,7 @@ const styles = {
         justifyContent: 'center',
         alignItems: 'center'
     },
-    nxtBtnStyle:{ marginHorizontal: 40, marginBottom: 90,bottom:10, borderRadius: 10 },
+    nxtBtnStyle:{ marginHorizontal: 40,marginTop:8, borderRadius: 10 },
    
     nxtBtnStyle1: {
         marginTop:15,
