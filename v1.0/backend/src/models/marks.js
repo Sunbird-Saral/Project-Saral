@@ -72,7 +72,7 @@ const marksSchema = new mongoose.Schema({
         type: String,
         required: false
     },
-    maxMarksCofidence:{
+    maxMarksConfidence:{
         type: Array,
         required: false
     },
