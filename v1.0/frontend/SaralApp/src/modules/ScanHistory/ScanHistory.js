@@ -3,10 +3,11 @@ import { StyleSheet, Text, View,BackHandler } from 'react-native';
 
 //redux
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 //constant
 import AppTheme from '../../utils/AppTheme';
-import { getScannedDataFromLocal } from '../../utils/StorageUtils';
+import { getScannedDataFromLocal,getErrorMessage } from '../../utils/StorageUtils';
 import Strings from '../../utils/Strings';
 
 //component
@@ -14,7 +15,9 @@ import Spinner from '../common/components/loadingIndicator';
 import ScanHistoryCard from './ScanHistoryCard';
 import ButtonComponent from '../common/components/ButtonComponent';
 import ShareComponent from '../common/components/Share';
+import { collectErrorLogs } from '../CollectErrorLogs';
 
+import { ScrollView } from 'react-native-gesture-handler';
 const ScanHistory = ({
     loginData,
     navigation,
@@ -26,9 +29,13 @@ const ScanHistory = ({
     //Hooks
     const [isLoading, setIsLoading] = useState(false)
     const [scanStatusData, setScanStatusData] = useState(false)
+    const [logmessage,setLogmessage] = useState()
     //functions
 
-
+    useEffect(async() => {
+        let message = await getErrorMessage()
+        setLogmessage(message[0])
+    }, []);
     useEffect(() => {
         sumOfLocalData()
     }, [])
@@ -76,13 +83,15 @@ const ScanHistory = ({
         <View style={styles.container}>
               <ShareComponent
                  navigation={navigation}
-                 message={'hello'}
+                 message={JSON.stringify(logmessage, null, 2)}
                  />
                  {/* <ScrollView> */}
+            <ScrollView style={{marginTop:45}} showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false} >
+                       
             {
                 (loginData && loginData.data)
                 &&
-                <View style={{ marginTop: 20,width:'60%' }}>
+                <View style={{ width:'60%' }}>
                     <Text
                         style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}>
                         {Strings.school_name + '  : '}
@@ -113,6 +122,8 @@ const ScanHistory = ({
                 scanStatusData={scanStatusData}
                 setScanStatusData={setScanStatusData}
             />
+            </ScrollView>
+
             <ButtonComponent
                 customBtnStyle={[styles.nxtBtnStyle, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
                 btnText={Strings.Back.toUpperCase()}
@@ -135,7 +146,13 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, null)(ScanHistory);
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({
+        collectErrorLogs: collectErrorLogs
+    }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ScanHistory);
 
 const styles = StyleSheet.create({
     container: {
@@ -145,7 +162,8 @@ const styles = StyleSheet.create({
     container1: {
         marginHorizontal: '4%',
         alignItems: 'center',
-        paddingVertical: '4%'
+        marginTop:13,
+        // paddingVertical: '4%'
     },
     header1TextStyle: {
         backgroundColor: AppTheme.LIGHT_BLUE,
@@ -159,5 +177,5 @@ const styles = StyleSheet.create({
         color: AppTheme.BLACK,
         letterSpacing: 1
     },
-    nxtBtnStyle:{marginTop:20, marginHorizontal: 40, marginBottom: 20, borderRadius: 10, }
+    nxtBtnStyle:{ marginHorizontal: 40, marginBottom: 20, borderRadius: 10, }
 });

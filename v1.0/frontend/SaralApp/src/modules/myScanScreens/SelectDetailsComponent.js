@@ -12,7 +12,7 @@ import { apkVersion } from '../../configs/config';
 import HeaderComponents from '../common/components/HeaderComponents';
 import DropDownMenu from '../common/components/DropDownComponent';
 import ButtonComponent from '../common/components/ButtonComponent';
-import { getLoginData, setStudentsExamData, getStudentsExamData, getLoginCred, setLoginData } from '../../utils/StorageUtils'
+import { getLoginData, setStudentsExamData, getStudentsExamData, getLoginCred, setLoginData,getErrorMessage } from '../../utils/StorageUtils'
 import { OcrLocalResponseAction } from '../../flux/actions/apis/OcrLocalResponseAction'
 import { GetStudentsAndExamData } from '../../flux/actions/apis/getStudentsAndExamData';
 import { FilteredDataAction } from '../../flux/actions/apis/filteredDataActions';
@@ -102,16 +102,23 @@ class SelectDetailsComponent extends Component {
             absentStatusPayload: null,
             subjectsData: [],
             filterdataid: [],
-            isHidden: false
+            isHidden: false,
+            logmessage:''
         }
         this.onPress = this.onPress.bind(this);
         this.onBack = this.onBack.bind(this)
     }
+
+    logFunction=() => {
+        let message =  getErrorMessage()
+       this.setState({logmessage:message})
+    };
     onPress() {
         this.setState({isHidden: !this.state.isHidden})
       }
 
     componentDidMount() {
+        this.logFunction()
         const { navigation, scanTypeData } = this.props
         navigation.addListener('willFocus', async payload => {
             BackHandler.addEventListener('hardwareBackPress', this.onBack)
@@ -736,7 +743,7 @@ class SelectDetailsComponent extends Component {
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
                  <ShareComponent
                  navigation={this.props.navigation}
-                 message={'hello'}
+                 message={JSON.stringify(this.state.logmessage, null, 2)}
                 
                  />
                 {(loginData && loginData.data) &&

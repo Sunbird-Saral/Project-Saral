@@ -208,7 +208,7 @@ const ScanHistoryCard = ({
                 disabled
 
             >
-                <View style={{ flexDirection: 'row', width: '100%', alignItems: 'center', paddingTop: '3%', paddingLeft: '1%', paddingRight: '1%', paddingBottom: '5%' }}>
+                <View style={{ flexDirection: 'row', width: '100%', alignItems: 'center', paddingTop: '3%', paddingLeft: '1%', paddingRight: '1%', marginBottom:10}}>
                     <View>
                         <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
@@ -343,7 +343,7 @@ const ScanHistoryCard = ({
                  {
                     scanstatusbutton
                     &&
-                    <View style={{ marginBottom: '5%', marginTop: '2%', width: '100%', alignItems: 'center' }}>
+                    <View style={{bottom:10,  width: '100%', alignItems: 'center' }}>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', width: '100%' }}>
                             <TouchableOpacity
                                 style={{ backgroundColor: AppTheme.GREY, borderRadius: 4, width: '80%', alignItems: 'center', justifyContent: 'center', elevation: 8, paddingVertical: 4 }}
@@ -437,6 +437,7 @@ const mapDispatchToProps = (dispatch) => {
 const styles1 = StyleSheet.create({
     container1: { flex: 1, backgroundColor: '#fff', },
     container: {
+        top:-40,
         padding: 25,
         flex: 1,
         alignItems: 'center',

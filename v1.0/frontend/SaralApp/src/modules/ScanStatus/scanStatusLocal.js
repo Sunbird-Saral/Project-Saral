@@ -19,8 +19,9 @@ import { bindActionCreators } from 'redux';
 //api
 import APITransport from '../../flux/actions/transport/apitransport'
 import AppTheme from '../../utils/AppTheme';
-import { getPresentAbsentStudent, getScannedDataFromLocal } from '../../utils/StorageUtils';
+import { getPresentAbsentStudent, getScannedDataFromLocal,getErrorMessage } from '../../utils/StorageUtils';
 import { Assets } from '../../assets';
+import ShareComponent from '../common/components/Share';
 
 
 const ScanStatusLocal = ({
@@ -33,7 +34,14 @@ const ScanStatusLocal = ({
     const [unsavedstudentList, setUnsavedstudentList] = useState([])
     const [loacalstutlist, setLoacalstutlist] = useState([])
     const [presentStudentList, setPresentStudentList] = useState([])
-
+    const [logmessage,setLogmessage] = useState()
+    const data =(JSON.stringify(loacalstutlist[0],null, 2))
+   
+    useEffect(async() => {
+        studentData()
+        let message = await getErrorMessage()
+        setLogmessage(message[0])
+    }, []);
 
 
 useEffect(
@@ -50,9 +58,9 @@ useEffect(
     const onShare = async () => {
         try {
             const result = await Share.share({
-                title: '',
+                title: `Saral App v1.0 Marks JSON - SchoolId:${loginData.data.school.schoolId} & Exam Id:${filteredData.examTestID}`,
                 message:
-                    `${JSON.stringify(loacalstutlist[0])}`
+                    `${(data ? data : '')}`
             });
             if (result.action === Share.sharedAction) {
                 if (result.activityType) {
@@ -133,6 +141,10 @@ useEffect(
 
     return (
         <View style={styles.container}>
+             <ShareComponent
+                 navigation={navigation}
+                  message={JSON.stringify(logmessage, null, 2)}
+                 />
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
             {
                 (loginData && loginData.data)
@@ -152,9 +164,11 @@ useEffect(
                     </Text>
                 </View>
             }
+            {loacalstutlist[0] ?
             <TouchableOpacity onPress={onShare}>
                     <Image style={{ height: 25, width: 25, marginHorizontal: 15, marginVertical: 20 }} source={Assets.Share} />
-                </TouchableOpacity>
+                </TouchableOpacity>:
+                null}
             </View>
 
             <Text style={styles.scanStatus}>{Strings.scan_status}</Text>

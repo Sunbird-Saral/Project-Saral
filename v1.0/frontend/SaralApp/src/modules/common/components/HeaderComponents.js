@@ -34,8 +34,6 @@ class HeaderComponents extends Component {
                     <View style={styles.imageContainerStyle}>
                         
                         <TouchableOpacity
-                         accessible={true}
-                         activeOpacity={1}
                         style={styles.imageContainerViewstyle}
                         onPress={onSupportClick}
                         > 
@@ -45,8 +43,6 @@ class HeaderComponents extends Component {
                        
                         {logoutHeaderText && logoutHeaderText.length > 0 &&
                             <TouchableOpacity
-                            accessible={true}
-                            activeOpacity={0.5}
                                style={styles.imageContainerViewstyle}
                                 onPress={onLogoutClick}
                             >
@@ -126,9 +122,9 @@ const styles = {
     imageContainerStyle: {
         padding: 10,
         marginRight: 10,
-        height:80,
-        elevation: 20,
-        justifyContent: 'center',
+        height:60,
+        elevation: 10,
+         justifyContent: 'center',
         backgroundColor: AppTheme.WHITE
     },
     imageContainerViewstyle:{

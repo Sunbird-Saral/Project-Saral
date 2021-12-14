@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, Image, TouchableOpacity, Platform, PermissionsAndroid, Alert, BackHandler, LogBox} from 'react-native';
+import { View, ScrollView, Text, Image, TouchableOpacity, Platform, PermissionsAndroid, Alert, BackHandler, LogBox,Share} from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { StackActions, NavigationActions } from 'react-navigation';
@@ -11,10 +11,11 @@ import { OcrLocalResponseAction } from '../../flux/actions/apis/OcrLocalResponse
 import { apkVersion } from '../../configs/config';
 import ScanHistoryCard from '../ScanHistory/ScanHistoryCard';
 import SaralSDK from '../../../SaralSDK'
-import { getScannedDataFromLocal } from '../../utils/StorageUtils';
+import { getScannedDataFromLocal,getErrorMessage } from '../../utils/StorageUtils';
 import ButtonComponent from '../common/components/ButtonComponent';
 import { neglectData } from '../../utils/CommonUtils';
 import ShareComponent from '../common/components/Share';
+import { collectErrorLogs } from '../CollectErrorLogs';
 
 LogBox.ignoreAllLogs()
 
@@ -27,11 +28,17 @@ class MyScanComponent extends Component {
             oldBrightness: null,
             activityOpen: false,
             isLoading: false,
-            scanStatusData:false
+            scanStatusData:false,
+            logmessage:''
         }
         this.onBack = this.onBack.bind(this)
         this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
     }
+
+    logFunction=() => {
+        let message =  getErrorMessage()
+       this.setState({logmessage:message})
+    };
 
     componentWillUnmount() {
         BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
@@ -42,6 +49,7 @@ class MyScanComponent extends Component {
         return true;
     }
     componentDidMount() {
+        this.logFunction()
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
         const { navigation, scanedData } = this.props
         const { params } = navigation.state
@@ -239,21 +247,22 @@ class MyScanComponent extends Component {
         return (
 
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
-                  <ShareComponent
-                 onLogoutClick={()=>this.onLogoutClick()}
-                 message={'hello'}
                 
-                 />
                 <ScrollView showsHorizontalScrollIndicator={false}>
+                <ShareComponent
+                 navigation={this.props.navigation}
+                  message={JSON.stringify(this.state.logmessage, null, 2)}
+                 />
+                
                 {
                     (loginData && loginData.data)
                     &&
-                    <View style={{ marginVertical: '2%' }}>
+                    <View style={{ width:'60%' }}>
                         <Text
                             style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}
                         >
                             {Strings.school_name + ' : '}
-                            <Text style={{ fontWeight: 'normal' }}>
+                            <Text style={{ fontWeight: 'normal' ,width:'60%' }}>
                                 {loginData.data.school.name}
                             </Text>
                         </Text>
@@ -261,7 +270,7 @@ class MyScanComponent extends Component {
                             style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}
                         >
                             {Strings.schoolId_text + ' : '}
-                            <Text style={{ fontWeight: 'normal' }}>
+                            <Text style={{ fontWeight: 'normal',width:'60%' }}>
                                 {loginData.data.school.schoolId}
                             </Text>
                         </Text>
@@ -277,21 +286,18 @@ class MyScanComponent extends Component {
                     </Text>
                 </Text>
 
-                <View style={{ paddingBottom: '35%' }}>
-                    <View style={styles.onGoingContainer}>
-                        <Text style={[styles.header1TextStyle, { backgroundColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE }]}>
-                            {Strings.ongoing_scan}
-                        </Text>
-                    </View>
-
-                    <ScanHistoryCard
+                <View style={styles.container1}>
+                <Text style={[styles.header1TextStyle, { borderColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE, backgroundColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE }]}>
+                    {Strings.ongoing_scan}
+                </Text>
+            </View>
+                <ScanHistoryCard
                         scanstatusbutton ={true}
                         themeColor1={this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE}
                         showButtons={false}
                         scanStatusData={this.state.scanStatusData}
                          navigation={this.props.navigation}
                     />
-                </View>
 
                 <View>
                     <ButtonComponent
@@ -305,7 +311,7 @@ class MyScanComponent extends Component {
                 </ScrollView>
                 <View style={styles.bottomTabStyle}>
                 </View>
-                <View style={[styles.bottomTabStyle, { height: 90, width: '50%', marginHorizontal: '25%', backgroundColor: 'transparent', justifyContent: 'center' }]}>
+                <View style={[styles.bottomTabStyle, { height: 50,  marginHorizontal: '25%', backgroundColor: 'transparent', justifyContent: 'center' }]}>
                     <TouchableOpacity style={[styles.subTabContainerStyle]}
                         onPress={this.onScanClick}
                     >
@@ -343,14 +349,14 @@ class MyScanComponent extends Component {
 
 const styles = {
     container1: {
-        flex: 1,
-        marginHorizontal: '6%',
-        alignItems: 'center'
+        marginHorizontal: '4%',
+        alignItems: 'center',
+        // marginTop:13,
     },
     onGoingContainer: {
         marginHorizontal: '4%',
         alignItems: 'center',
-        paddingVertical: '4%'
+        paddingVertical: '3%'
     },
     header1TextStyle: {
         backgroundColor: AppTheme.LIGHT_BLUE,
@@ -368,7 +374,7 @@ const styles = {
         position: 'absolute',
         flexDirection: 'row',
         bottom: 0,
-        height: 60,
+        height: 40,
         left: 0,
         right: 0,
         backgroundColor: AppTheme.WHITE,
@@ -422,7 +428,20 @@ const styles = {
         justifyContent: 'center',
         alignItems: 'center'
     },
-    nxtBtnStyle: { bottom: 115, marginHorizontal: 40, marginBottom: 20, borderRadius: 10, }
+    nxtBtnStyle:{ marginHorizontal: 40,marginTop:8, borderRadius: 10 },
+   
+    nxtBtnStyle1: {
+        marginTop:15,
+        width:'45%',
+        marginHorizontal: 5,
+        marginBottom: 20,
+        borderRadius: 10
+    },
+    viewnxtBtnStyle1 : {
+        flexDirection:'row',
+        justifyContent:'center',
+        alignItems:'center'
+    }
 }
 
 const mapStateToProps = (state) => {
@@ -441,6 +460,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
         OcrLocalResponseAction: OcrLocalResponseAction,
+        collectErrorLogs:collectErrorLogs
     }, dispatch)
 }
 
