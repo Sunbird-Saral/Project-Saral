@@ -15,6 +15,7 @@ const SET_ERROR_MESSAGE = 'set_error_message'
 
 export const setErrorMessage = async (data) => {
     let value = JSON.stringify(data)
+    await AsyncStorage.removeItem(SET_ERROR_MESSAGE)
     let saved = await AsyncStorage.setItem(SET_ERROR_MESSAGE, value);
     if (saved) {
         return true

@@ -17,12 +17,8 @@ export const collectErrorLogs = async (fileName, funcName, apiEndPoint, error, i
     let getErrorData = await getErrorMessage()
 
     if (getErrorData != null) {
-
-        Array.isArray(getErrorData)
-            ?
-            setErrorMessage(getErrorData.push(errorMsg))
-            :
-            []
+        getErrorData.push(errorMsg)
+        setErrorMessage(getErrorData)
     }
     else {
         setErrorMessage([errorMsg])
