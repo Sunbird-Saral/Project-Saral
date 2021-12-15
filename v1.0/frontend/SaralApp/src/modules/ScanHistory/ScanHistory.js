@@ -86,21 +86,27 @@ const ScanHistory = ({
                  message={JSON.stringify(logmessage, null, 2)}
                  />
                  {/* <ScrollView> */}
-            <ScrollView style={{marginTop:45}} showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false} >
-                       
-            {
-                (loginData && loginData.data)
-                &&
-                <View style={{ width:'60%' }}>
-                    <Text
-                        style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}>
-                        {Strings.school_name + '  : '}
-                        <Text style={{ fontWeight: 'normal' }}>
-                            {loginData.data.school.name}
+            
+                 <View>
+                {
+                    (loginData && loginData.data)
+                    &&
+                    <View style={{ width:'60%' }}>
+                        <Text
+                            style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}
+                        >
+                            {Strings.school_name + ' : '}
+                            <Text style={{ fontWeight: 'normal' }}>
+                                {loginData.data.school.name}
+                            </Text>
                         </Text>
-                    </Text>
+                        <Text
+                            style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}>
+                        </Text>
+                    </View>
+                }
                 </View>
-            }
+            <ScrollView  >
             <View style={styles.container1}>
                 <Text style={[styles.header1TextStyle, { borderColor: multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE, backgroundColor: multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE }]}>
                     {Strings.ongoing_scan}
@@ -162,8 +168,7 @@ const styles = StyleSheet.create({
     container1: {
         marginHorizontal: '4%',
         alignItems: 'center',
-        marginTop:13,
-        // paddingVertical: '4%'
+        marginTop:30
     },
     header1TextStyle: {
         backgroundColor: AppTheme.LIGHT_BLUE,

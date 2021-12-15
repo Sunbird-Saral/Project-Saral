@@ -247,13 +247,11 @@ class MyScanComponent extends Component {
         return (
 
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
-                
-                <ScrollView showsHorizontalScrollIndicator={false}>
-                <ShareComponent
+                 <ShareComponent
                  navigation={this.props.navigation}
                   message={JSON.stringify(this.state.logmessage, null, 2)}
                  />
-                
+               <View>
                 {
                     (loginData && loginData.data)
                     &&
@@ -262,7 +260,7 @@ class MyScanComponent extends Component {
                             style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}
                         >
                             {Strings.school_name + ' : '}
-                            <Text style={{ fontWeight: 'normal' ,width:'60%' }}>
+                            <Text style={{ fontWeight: 'normal' }}>
                                 {loginData.data.school.name}
                             </Text>
                         </Text>
@@ -270,13 +268,10 @@ class MyScanComponent extends Component {
                             style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}
                         >
                             {Strings.schoolId_text + ' : '}
-                            <Text style={{ fontWeight: 'normal',width:'60%' }}>
+                            <Text style={{ fontWeight: 'normal' }}>
                                 {loginData.data.school.schoolId}
                             </Text>
                         </Text>
-                    </View>
-                }
-
                 <Text
                     style={{ fontSize: AppTheme.FONT_SIZE_REGULAR - 3, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', marginBottom: '4%' }}
                 >
@@ -285,7 +280,11 @@ class MyScanComponent extends Component {
                         {apkVersion}
                     </Text>
                 </Text>
-
+                    </View>
+                }
+                
+                </View> 
+                <ScrollView>
                 <View style={styles.container1}>
                 <Text style={[styles.header1TextStyle, { borderColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE, backgroundColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE }]}>
                     {Strings.ongoing_scan}

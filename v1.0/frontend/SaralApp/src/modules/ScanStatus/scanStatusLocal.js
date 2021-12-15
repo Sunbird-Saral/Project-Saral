@@ -38,7 +38,6 @@ const ScanStatusLocal = ({
     const data =(JSON.stringify(loacalstutlist[0],null, 2))
    
     useEffect(async() => {
-        studentData()
         let message = await getErrorMessage()
         setLogmessage(message[0])
     }, []);
@@ -72,7 +71,7 @@ useEffect(
                 // dismissed
             }
         } catch (error) {
-            alert(error.message);
+            console.log(error.message);
         }
     };
 
