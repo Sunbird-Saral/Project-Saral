@@ -12,7 +12,7 @@ import { apkVersion } from '../../configs/config';
 import HeaderComponents from '../common/components/HeaderComponents';
 import DropDownMenu from '../common/components/DropDownComponent';
 import ButtonComponent from '../common/components/ButtonComponent';
-import { getLoginData, setStudentsExamData, getStudentsExamData, getLoginCred, setLoginData,getErrorMessage } from '../../utils/StorageUtils'
+import { getLoginData, setStudentsExamData, getStudentsExamData, getLoginCred, setLoginData,getErrorMessage, eraseErrorLogs } from '../../utils/StorageUtils'
 import { OcrLocalResponseAction } from '../../flux/actions/apis/OcrLocalResponseAction'
 import { GetStudentsAndExamData } from '../../flux/actions/apis/getStudentsAndExamData';
 import { FilteredDataAction } from '../../flux/actions/apis/filteredDataActions';
@@ -177,6 +177,7 @@ class SelectDetailsComponent extends Component {
                 'text': Strings.yes_text, onPress: async () => {
                     this.props.LogoutAction()
                     this.props.navigation.navigate('auth')
+                    await eraseErrorLogs()                    
                 }
             }
         ])

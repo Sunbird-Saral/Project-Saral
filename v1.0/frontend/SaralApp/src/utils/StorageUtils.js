@@ -24,6 +24,10 @@ export const setErrorMessage = async (data) => {
     }
 }
 
+export const eraseErrorLogs = async () => {
+    await AsyncStorage.removeItem(SET_ERROR_MESSAGE)
+}
+
 export const setData = async (key, value) => {
     await AsyncStorage.setItem(key, value);
     return true
