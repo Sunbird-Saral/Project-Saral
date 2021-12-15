@@ -59,9 +59,11 @@ useEffect(
                     // shared with activity type of result.activityType
                 } else {
                     // shared
+                    console.log('shared',result)
                 }
             } else if (result.action === Share.dismissedAction) {
                 // dismissed
+                console.log('dismissed',result)
             }
         } catch (error) {
             alert(error.message);
