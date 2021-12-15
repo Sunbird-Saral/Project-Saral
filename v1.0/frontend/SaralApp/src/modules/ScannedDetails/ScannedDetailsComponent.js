@@ -795,7 +795,7 @@ const ScannedDetailsComponent = ({
         <View style={{ flex: 1 }}>
               <ShareComponent
                  navigation={navigation}
-                 message={'hello'}
+                 message={JSON.stringify(logmessage, null, 2)}
                  />
             <ScrollView
                 contentContainerStyle={{ backgroundColor: AppTheme.BACKGROUND_COLOR, paddingBottom: '15%' }}
