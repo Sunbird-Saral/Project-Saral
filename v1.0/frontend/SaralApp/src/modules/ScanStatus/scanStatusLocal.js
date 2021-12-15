@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, Text, View, BackHandler, Image, TouchableOpacity, Linking, Share } from 'react-native';
+import { FlatList, Text, View, BackHandler, Image, TouchableOpacity, Linking } from 'react-native';
 
 //redux
 import { connect } from 'react-redux';
@@ -21,6 +21,7 @@ import APITransport from '../../flux/actions/transport/apitransport'
 import AppTheme from '../../utils/AppTheme';
 import { getPresentAbsentStudent, getScannedDataFromLocal } from '../../utils/StorageUtils';
 import { Assets } from '../../assets';
+import Share from 'react-native-share';
 
 
 const ScanStatusLocal = ({
@@ -33,42 +34,55 @@ const ScanStatusLocal = ({
     const [unsavedstudentList, setUnsavedstudentList] = useState([])
     const [loacalstutlist, setLoacalstutlist] = useState([])
     const [presentStudentList, setPresentStudentList] = useState([])
-    const data =(JSON.stringify(loacalstutlist[0],null, 2))
+    const data = (JSON.stringify(loacalstutlist[0], null, 2))
 
 
-useEffect(
-    React.useCallback(() => {
-        const onBackPress = () => {
-            navigation.goBack('myScan');
-        };
-        BackHandler.addEventListener('hardwareBackPress', onBackPress);
-        return () =>
-            BackHandler.removeEventListener('hardwareBackPress', onBackPress);
-    }, []),
-);
+    useEffect(
+        React.useCallback(() => {
+            const onBackPress = () => {
+                navigation.goBack('myScan');
+            };
+            BackHandler.addEventListener('hardwareBackPress', onBackPress);
+            return () =>
+                BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+        }, []),
+    );
 
-    const onShare = async () => {
-        try {
-            const result = await Share.share({
-                title: `Saral App v1.0 Marks JSON - SchoolId:${loginData.data.school.schoolId} & Exam Id:${filteredData.examTestID}`,
-                message:
-                    `${(data ? data : '')}`
-            });
-            if (result.action === Share.sharedAction) {
-                if (result.activityType) {
-                    // shared with activity type of result.activityType
-                } else {
-                    // shared
-                    console.log('shared',result)
-                }
-            } else if (result.action === Share.dismissedAction) {
-                // dismissed
-                console.log('dismissed',result)
+    // const onShare = async () => {
+    //     try {
+    //         const result = await Share.share({
+    //             title: `Saral App v1.0 Marks JSON - SchoolId:${loginData.data.school.schoolId} & Exam Id:${filteredData.examTestID}`,
+    //             message:
+    //                 `${(data ? data : '')}`
+    //         });
+    //         if (result.action === Share.sharedAction) {
+    //             if (result.activityType) {
+    //                 // shared with activity type of result.activityType
+    //             } else {
+    //                 // shared
+    //                 console.log('shared',result)
+    //             }
+    //         } else if (result.action === Share.dismissedAction) {
+    //             // dismissed
+    //             console.log('dismissed',result)
+    //         }
+    //     } catch (error) {
+    //         alert(error.message);
+    //     }
+    // };
+    // const onShare = async () => {
+        const onShare = async () => {
+            const shareOptions ={
+                message:`${(data ? data : '')}`
             }
-        } catch (error) {
-            alert(error.message);
-        }
-    };
+
+            try{
+                const ShareResponse = await Share.open(shareOptions);
+            } catch(error) {
+                console.log('error',error)
+            }
+          };
+    // }
 
     const renderItem = ({ item, index }) => {
         return <ScanStatusLocalList
@@ -91,8 +105,8 @@ useEffect(
         getDataFromLocal()
         getStudentList()
         getPresentStudentList()
-    },[loacalstutlist])
-    
+    }, [loacalstutlist])
+
     const getStudentList = async () => {
         let data = await getPresentAbsentStudent()
         if (data != null) {
@@ -103,72 +117,72 @@ useEffect(
     const getDataFromLocal = async () => {
         let data = await getScannedDataFromLocal()
         if (data) {
-          let filterscandata =  data.filter((item)=>{
-            let findSection = item.studentsMarkInfo.some((item) => item.section == filteredData.section)
-                if( filteredData.class == item.classId &&  filteredData.examDate == item.examDate &&  filteredData.subject == item.subject && findSection   ){
+            let filterscandata = data.filter((item) => {
+                let findSection = item.studentsMarkInfo.some((item) => item.section == filteredData.section)
+                if (filteredData.class == item.classId && filteredData.examDate == item.examDate && filteredData.subject == item.subject && findSection) {
                     return true
-                }   
+                }
             })
             setLoacalstutlist(filterscandata)
         }
     }
 
 
-    const getPresentStudentList = ()=>{
-      
-        let data =typeof (loacalstutlist) === "object"
+    const getPresentStudentList = () => {
+
+        let data = typeof (loacalstutlist) === "object"
             ?
             loacalstutlist[0]
-            ?
-            loacalstutlist[0].studentsMarkInfo.filter((o, index) => {
-                if (o.studentAvailability && o.marksInfo.length > 0) {
-                    return true
-                }
-            })
+                ?
+                loacalstutlist[0].studentsMarkInfo.filter((o, index) => {
+                    if (o.studentAvailability && o.marksInfo.length > 0) {
+                        return true
+                    }
+                })
+                :
+                []
             :
             []
-            :
-           []
         setPresentStudentList(data)
-        
+
     }
 
     return (
         <View style={styles.container}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-            {
-                (loginData && loginData.data)
-                &&
-                <View>
-                    <Text
-                        style={styles.schoolName}
-                    >
-                        {Strings.school_name + ' Name : '}
-                        <Text style={{ fontWeight: 'normal' }}>{loginData.data.school.name}</Text>
-                    </Text>
-                    <Text style={[styles.schoolId, { marginLeft: 5 }]}>
-                        {Strings.schoolId_text + ' : '}
-                        <Text style={{ fontWeight: 'normal', }}>
-                            {loginData.data.school.schoolId}
+                {
+                    (loginData && loginData.data)
+                    &&
+                    <View>
+                        <Text
+                            style={styles.schoolName}
+                        >
+                            {Strings.school_name + ' Name : '}
+                            <Text style={{ fontWeight: 'normal' }}>{loginData.data.school.name}</Text>
                         </Text>
-                    </Text>
-                </View>
-            }
-            {loacalstutlist[0] ?
-            <TouchableOpacity onPress={onShare}>
-                    <Image style={{ height: 25, width: 25, marginHorizontal: 15, marginVertical: 20 }} source={Assets.Share} />
-                </TouchableOpacity>:
-                null}
+                        <Text style={[styles.schoolId, { marginLeft: 5 }]}>
+                            {Strings.schoolId_text + ' : '}
+                            <Text style={{ fontWeight: 'normal', }}>
+                                {loginData.data.school.schoolId}
+                            </Text>
+                        </Text>
+                    </View>
+                }
+                {loacalstutlist[0] ?
+                    <TouchableOpacity onPress={onShare}>
+                        <Image style={{ height: 25, width: 25, marginHorizontal: 15, marginVertical: 20 }} source={Assets.Share} />
+                    </TouchableOpacity> :
+                    null}
             </View>
 
             <Text style={styles.scanStatus}>{Strings.scan_status}</Text>
-        
+
             <FlatList
-                data={ loacalstutlist && presentStudentList}
+                data={loacalstutlist && presentStudentList}
                 renderItem={renderItem}
                 ListEmptyComponent={renderEmptyData}
-            keyExtractor={(item, index) => `${index.toString()}`}
-            contentContainerStyle={styles.content}
+                keyExtractor={(item, index) => `${index.toString()}`}
+                contentContainerStyle={styles.content}
             />
 
         </View>
