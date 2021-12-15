@@ -8,7 +8,7 @@ const Exam = require('../models/exams')
 const Mark = require('../models/marks')
 const router = new express.Router()
 
-router.post('/addClasses', auth, async (req, res) => {
+router.post('/classes', auth, async (req, res) => {
 
     const body = [...req.body]
     const classModel = []
@@ -50,7 +50,7 @@ router.post('/addClasses', auth, async (req, res) => {
     }
 })
 
-router.post('/updateClass', auth, async (req, res) => {
+router.post('/classes', auth, async (req, res) => {
     const updates = Object.keys(req.body)
     const allowedUpdates = ['sections', 'classId']
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
@@ -94,7 +94,7 @@ router.post('/updateClass', auth, async (req, res) => {
     }
 })
 
-router.delete('/deleteClass', auth, async (req, res) => {
+router.delete('/classes', auth, async (req, res) => {
     if (Object.keys(req.body).length === 0) res.status(400).send({ message: 'Validation error.' })
     const inputKeys = Object.keys(req.body)
     const allowedUpdates = ['classId']

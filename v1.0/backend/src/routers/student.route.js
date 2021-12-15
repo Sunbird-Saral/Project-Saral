@@ -8,7 +8,7 @@ const router = new express.Router()
 
 
 
-router.post('/createStudent', auth, async (req, res) => {
+router.post('/student', auth, async (req, res) => {
     try {
         let commonDigit = "0000000"
         const classId = req.body.studentClass && req.body.studentClass.length > 0 ? req.body.studentClass[0].classId : "2"
@@ -38,7 +38,7 @@ router.post('/createStudent', auth, async (req, res) => {
     }
 })
 
-router.post('/fetchStudentsByQuery', auth, async (req, res) => {
+router.post('/student', auth, async (req, res) => {
     const match = {}
     match.schoolId = req.school.schoolId
     if (req.body.classId) {
@@ -95,7 +95,7 @@ router.post('/fetchStudentsandExamsByQuery', auth, async (req, res) => {
     }
 })
 
-router.delete('/deleteStudentByStudentId/:studentId', async (req, res) => {
+router.delete('/student/:studentId', async (req, res) => {
     try {
         const student = await Student.findOne({ studentId: req.params.studentId })
         if (!student) {
@@ -115,7 +115,7 @@ router.delete('/deleteStudentByStudentId/:studentId', async (req, res) => {
 
 })
 
-router.patch('/updateStudent/:studentId', async (req, res) => {
+router.patch('/student/:studentId', async (req, res) => {
     if (Object.keys(req.body).length === 0) res.status(400).send({ message: 'Validation error.' })
     const inputKey = Object.keys(req.body)
     const allowedUpdates = ['name', 'studentClass']

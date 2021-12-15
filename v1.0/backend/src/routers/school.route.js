@@ -87,7 +87,7 @@ router.post('/schools/login', async (req, res) => {
     }
 })
 
-router.delete('/deleteSchoolBySchoolId/:schoolId', async (req, res) => {
+router.delete('/schools/:schoolId', async (req, res) => {
     try {
         const school = await (await School.findOne({ schoolId: req.params.schoolId }))
         if (!school) {
@@ -108,7 +108,7 @@ router.delete('/deleteSchoolBySchoolId/:schoolId', async (req, res) => {
     }
 })
 
-router.patch('/updateSchool/:schoolId', async (req, res) => {
+router.patch('/schools/:schoolId', async (req, res) => {
     try {
         if (Object.keys(req.body).length === 0) res.status(400).send({ message: 'Validation error.' })
         const updates = Object.keys(req.body)
