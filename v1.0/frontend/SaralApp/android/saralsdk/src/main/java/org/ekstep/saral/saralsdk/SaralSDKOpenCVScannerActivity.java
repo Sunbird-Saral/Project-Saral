@@ -11,6 +11,9 @@ import android.util.Log;
 import android.view.SurfaceView;
 import android.view.Window;
 import android.view.WindowManager;
+import android.util.Base64;
+import android.graphics.Bitmap;
+import org.opencv.android.Utils;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactInstanceManager;
@@ -35,6 +38,7 @@ import org.opencv.core.Point;
 import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -63,6 +67,8 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
     private HashMap<String, String> mPredictedDigits    = new HashMap<>();
     private HashMap<String, String> mPredictedOMRs      = new HashMap<>();
     private HashMap<String, String> mPredictedClass     = new HashMap<>();
+    private HashMap<String, String> mRoiMatBase64       = new HashMap<>();
+    private boolean isMultiChoiceOMRLayout = false;
 
     public SaralSDKOpenCVScannerActivity() {
         Log.i(TAG, "Instantiated new " + this.getClass());
@@ -111,15 +117,20 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
             public void OnPredictionSuccess(int digit, float confidence, String id) {
                 Log.d(TAG, "predicted digit:" + digit + " unique id:" + id + " confidence:" + confidence);
                 mTotalClassifiedCount++;
-                try {
-                    JSONObject result = new JSONObject();
-                    result.put("prediction", new Integer(digit));
-                    result.put("confidence", new Double(confidence));
-                    mPredictedDigits.put(id, result.toString());
-                } catch (JSONException e) {
-                    Log.e(TAG, "unable to create prediction object");
-                }
-
+                    try {
+                        JSONObject result = new JSONObject();
+                        if(digit != 10 ) {
+                            result.put("prediction", new Integer(digit));
+                            result.put("confidence", new Double(confidence));
+                        }else{
+                            // if classifier is 10 , assigning prediction as 0
+                            result.put("prediction", new Integer(0));
+                            result.put("confidence", new Double(0));
+                        }
+                        mPredictedDigits.put(id, result.toString());
+                    } catch (JSONException e) {
+                        Log.e(TAG, "unable to create prediction object");
+                    }
                 if (mIsClassifierRequestSubmitted && mTotalClassifiedCount >= mPredictedDigits.size()) {
                     mIsScanningComplete     = true;
                 }
@@ -128,6 +139,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                     Log.d(TAG, "Scaning completed, classification count " + mTotalClassifiedCount);
                     processScanningCompleted();
                 }
+          
             }
 
             @Override
@@ -199,7 +211,11 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
         double DARKNESS_THRESHOLD   = 80.0;
         Mat tableMat                = mTableCornerDetection.processMat(image);
         mStartTime                  = SystemClock.uptimeMillis();
-
+        isMultiChoiceOMRLayout = isMultiChoiceOMRLayout();
+        if(isMultiChoiceOMRLayout)
+        {
+            DARKNESS_THRESHOLD = 70.0;
+        }
         if (tableMat != null && isHWClassiferAvailable) {
             if (mIgnoreFrameCount < START_PROCESSING_COUNT) {
                 mIgnoreFrameCount ++;
@@ -224,13 +240,15 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                         String roiId        = roiConfig.getString("roiId");
                         JSONObject rect      = roiConfig.getJSONObject("rect");
 
-                        double percent      = mDetectShaded.getShadedPercentage(tableMat, rect.getInt("top"), rect.getInt("left"), rect.getInt("bottom"), rect.getInt("right"));
+                        double percent      = mDetectShaded.getShadedPercentage(tableMat, rect.getInt("top"), rect.getInt("left"), rect.getInt("bottom"), rect.getInt("right"),isMultiChoiceOMRLayout);
+                        Mat omrROI        = mDetectShaded.getROIMat(tableMat, rect.getInt("top"), rect.getInt("left"), rect.getInt("bottom"), rect.getInt("right"));                   
                         Integer answer      = 0;
                         if (percent > DARKNESS_THRESHOLD) {
                             answer = 1;
                         }
+                        mRoiMatBase64.put(roiId,createBase64FromMat(omrROI));
                         mPredictedOMRs.put(roiId, answer.toString());
-                        Log.d(TAG, "key: " + roiId + " answer: " + answer.toString());
+                        Log.d(TAG, "key: " + roiId + " answer: " + answer.toString()+" percent "+percent);
                     }
 
                     if (roiConfig.getString("extractionMethod").equals("NUMERIC_CLASSIFICATION")) {
@@ -238,8 +256,8 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                         JSONObject rect      = roiConfig.getJSONObject("rect");
 
                         mPredictedDigits.put(roiId, "0");
-
                         Mat digitROI        = mDetectShaded.getROIMat(tableMat, rect.getInt("top"), rect.getInt("left"), rect.getInt("bottom"), rect.getInt("right"));
+                        mRoiMatBase64.put(roiId,createBase64FromMat(digitROI));
                         if(HWClassifier.getInstance().isInitialized() == true) {
                             Log.d(TAG, "Requesting prediction for: " + roiId);
                             HWClassifier.getInstance().classifyMat(digitROI, roiId);
@@ -248,7 +266,6 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                 }
                 mIsClassifierRequestSubmitted = true;
                 Log.d(TAG, "Detected OMR count: " + mPredictedOMRs.size() + " classifier count: " + mPredictedDigits.size());
-
             } catch (JSONException e) {
                 Log.e(TAG, "got JSON exception");
             }
@@ -301,30 +318,118 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
         finish();
     }
 
+    private boolean isMultiChoiceOMRLayout()
+    {
+        boolean isMultiChoiceOMRLayout=false;
+        try {
+            JSONObject layoutConfigs    = new JSONObject(mlayoutConfigs);
+            JSONObject layoutObject     = layoutConfigs.getJSONObject("layout");
+            JSONArray  cells            = layoutObject.getJSONArray("cells");
+            for (int i = 0; i < cells.length(); i++) { 
+                JSONObject cell = cells.getJSONObject(i);
+                JSONArray cellROIs      = cell.getJSONArray("rois");
+                int omrROIsCountInCell=0;
+                for (int j = 0; j < cellROIs.length(); j++) {
+                    JSONObject roi = cellROIs.getJSONObject(j);
+                    if(roi.getString("extractionMethod").equals("CELL_OMR"))
+                    {
+                        omrROIsCountInCell++;
+                    }
+                    if(omrROIsCountInCell > 1)
+                    {
+                        isMultiChoiceOMRLayout= true;
+                        break;
+                    }
+                }
+                if(isMultiChoiceOMRLayout)
+                {
+                    break;
+                }
+            }
+        } catch (JSONException e) {
+            Log.e(TAG, "Failed to parse layout configuration");
+        }
+            
+         return isMultiChoiceOMRLayout;
+    }
+
+    private void resetInvalidOMRChoice(JSONArray cellROIs)
+    {
+        try {
+            if (cellROIs != null) {
+                for (int i = 0; i < cellROIs.length(); i++) {
+                    JSONObject roi = cellROIs.getJSONObject(i);
+                    JSONObject result  = new JSONObject();
+                    result.put("prediction", "");
+                    result.put("confidence", new Double(0.00));
+                    roi.put("result", result);
+                }
+            }
+        }catch (JSONException e) {
+            Log.w(TAG, "unable to resetInvalidOMRChoice");
+        }
+    }
+
     private JSONObject getScanResult() {
 
         try {
             JSONObject layoutConfigs    = new JSONObject(mlayoutConfigs);
             JSONObject layoutObject     = layoutConfigs.getJSONObject("layout");
             JSONArray  cells            = layoutObject.getJSONArray("cells");
+            
+            Log.d(TAG, "isMultiChoiceOMRLayout:: "+isMultiChoiceOMRLayout);
 
             for (int i = 0; i < cells.length(); i++) {
                 JSONArray cellROIs      = cells.getJSONObject(i).getJSONArray("rois");
+                JSONObject cell = cells.getJSONObject(i);
+                JSONArray trainingDataSet = new JSONArray();
+                int countOMRChoice =0;
                 for (int j = 0; j < cellROIs.length(); j++) {
                     JSONObject roi      = cellROIs.getJSONObject(j);
-
+                    String roiId = roi.getString("roiId");
                     if (roi.getString("extractionMethod").equals("NUMERIC_CLASSIFICATION")) {
-                        JSONObject result  = new JSONObject(mPredictedDigits.get(roi.get("roiId")));
+                        JSONObject result  = new JSONObject(mPredictedDigits.get(roiId));
                         roi.put("result", result);
+                        if(mRoiMatBase64.get(roiId)!=null)
+                        {
+                            trainingDataSet.put(j,mRoiMatBase64.get(roiId));
+                        }    
                     }
 
                     if (roi.getString("extractionMethod").equals("CELL_OMR")) {
                         JSONObject result  = new JSONObject();
-                        result.put("prediction", mPredictedOMRs.get(roi.get("roiId")));
-                        result.put("confidence", new Double(1.00));
+                        if(isMultiChoiceOMRLayout)
+                        {
+                            //Handling Multi Choice OMR Layout predictions
+                            String prediction =mPredictedOMRs.get(roiId);
+                            if(prediction!=null && prediction.equals("1")){
+                                result.put("prediction", String.valueOf(j));
+                                result.put("confidence", new Double(1.00));
+                                countOMRChoice++;
+                            }else{
+                                result.put("prediction", "");
+                                result.put("confidence", new Double(0.0));
+                            }
+                        }else {
+                            result.put("prediction", mPredictedOMRs.get(roiId));
+                            result.put("confidence", new Double(1.00));
+                        }
+                        if(mRoiMatBase64.get(roiId)!=null)
+                        {
+                            trainingDataSet.put(j,mRoiMatBase64.get(roiId));
+                        }
                         roi.put("result", result);
                     }
                 }
+                if(isMultiChoiceOMRLayout && countOMRChoice > 1)
+                {
+                    resetInvalidOMRChoice(cellROIs);
+                }
+                if(trainingDataSet.length() > 0)
+                {
+                    cell.put("trainingDataSet",trainingDataSet);
+                    Log.d(TAG, "CellId:" + cell.getString("cellId")+" trainingDataSet :: "+trainingDataSet);
+                }                
             }
             return layoutConfigs;
 
@@ -342,5 +447,16 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
         int scale       = 1;
         int thickness   = 3;
         Imgproc.putText(image, text, position, font, scale, color, thickness);
+    }
+
+    private String createBase64FromMat(Mat image) {
+        Bitmap resultBitmap = Bitmap.createBitmap(image.cols(), image.rows(), Bitmap.Config.ARGB_8888);
+        Utils.matToBitmap(image, resultBitmap);
+
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        resultBitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        byte[] byteArray    = byteArrayOutputStream.toByteArray();
+        String base64       = Base64.encodeToString(byteArray, Base64.DEFAULT);
+        return base64;
     }
 }

@@ -1,16 +1,13 @@
-import React, { useEffect } from 'react';
-import { Alert, FlatList, Text, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { FlatList, Text, View, BackHandler } from 'react-native';
 
 //redux
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 
 //constant
-import { apkVersion } from '../../configs/config';
-import AppTheme from '../../utils/AppTheme';
 import Strings from '../../utils/Strings';
 
 //components
-import HeaderComponent from '../common/components/HeaderComponent';
 import ScanStatusList from './ScanStatusList';
 
 //styles
@@ -21,40 +18,92 @@ import { bindActionCreators } from 'redux';
 
 //api
 import APITransport from '../../flux/actions/transport/apitransport'
+import AppTheme from '../../utils/AppTheme';
+import { getPresentAbsentStudent, getScannedDataFromLocal } from '../../utils/StorageUtils';
 
 
 const ScanStatus = ({
     loginData,
-    scanedData
+    scanedData,
+    multiBrandingData,
+    navigation,
 }) => {
 
-    console.log("scannedData",scanedData);
+    const [studentList, setStudentList] = useState([])
+    const [presentStudentList, setPresentStudentList] = useState([])
 
     //function
     const renderItem = ({ item, index }) => {
         return (
             <ScanStatusList
+                themeColor1={multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}
                 id={item.studentId}
                 subject={item.subject}
+                studentList={studentList}
             />
         )
     }
 
     const renderEmptyData = ({ item }) => {
         return (
-            <View style={{alignItems:'center',justifyContent:'center',flex:1}}>
+            <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
                 <Text>No Data Available</Text>
             </View>
         )
     }
 
+
+    useEffect(
+        React.useCallback(() => {
+            const onBackPress = () => {
+                navigation.navigate('ScanHistory');
+            };
+            BackHandler.addEventListener('hardwareBackPress', onBackPress);
+            return () =>
+                BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+        }, []),
+    );
+
+    useEffect(() => {
+        getDataFromLocal()
+        getStudentList()
+        getPresentStudentList()
+    }, [])
+
+    const getStudentList = async () => {
+        let data = await getPresentAbsentStudent()
+        if (data != null) {
+            setStudentList(data)
+        }
+    }
+
+    const getDataFromLocal = async () => {
+        let data = await getScannedDataFromLocal();
+        if (data != null) {
+            let students = data.studentsMarkInfo
+        }
+    }
+
+    const getPresentStudentList = ()=>{
+        let data = typeof (scanedData) === "object"
+        ?
+        scanedData.data
+            ?
+            scanedData.data.filter((o, index) => {
+                if (o.studentAvailability && o.marksInfo.length > 0) {
+                    return true
+                }
+            })
+            :
+            []
+        :
+        []
+        setPresentStudentList(data)
+        
+    }
+
     return (
         <View style={styles.container}>
-            {/* <HeaderComponent
-                title={Strings.up_saralData}
-                customLogoutTextStyle={{ color: AppTheme.GREY }}
-                versionText={apkVersion}
-            /> */}
             {
                 (loginData && loginData.data)
                 &&
@@ -77,10 +126,10 @@ const ScanStatus = ({
             <Text style={styles.scanStatus}>{Strings.scan_status}</Text>
 
             <FlatList
-                data={scanedData && scanedData.data}
+                data={scanedData && presentStudentList}
                 renderItem={renderItem}
                 ListEmptyComponent={renderEmptyData}
-                keyExtractor={(item,index) => `${index.toString()}`}
+                keyExtractor={(item, index) => `${index.toString()}`}
                 contentContainerStyle={styles.content}
             />
 
@@ -91,7 +140,8 @@ const mapStateToProps = (state) => {
     return {
         loginData: state.loginData,
         filteredData: state.filteredData.response,
-        scanedData: state.scanedData.response
+        scanedData: state.scanedData.response,
+        multiBrandingData: state.multiBrandingData.response.data,
     }
 }
 

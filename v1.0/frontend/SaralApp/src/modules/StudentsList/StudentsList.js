@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Text, View, FlatList, Alert } from 'react-native';
+import { Text, View, FlatList, Alert, SafeAreaView, BackHandler } from 'react-native';
 
 //redux
 import { connect, useDispatch } from 'react-redux';
@@ -7,15 +7,14 @@ import { bindActionCreators } from 'redux';
 import APITransport from '../../flux/actions/transport/apitransport'
 
 //storage
-import { getLoginCred, getStudentsExamData, setAbsentStudentDataIntoAsync, setTotalStudent } from '../../utils/StorageUtils';
+import { getLoginCred, getStudentsExamData, setAbsentStudentDataIntoAsync, setPresentAbsentStudent, setStudentsExamData, setTotalStudent } from '../../utils/StorageUtils';
 import ButtonComponent from '../common/components/ButtonComponent';
 import StudentsDataComponent from './StudentsDataComponent';
 
 //style
 import { styles } from './StudentsDataStyle';
 
-//header
-import HeaderComponent from '../common/components/HeaderComponent';
+
 
 //action
 
@@ -26,25 +25,25 @@ import { apkVersion } from '../../configs/config';
 import { ROIAction } from './ROIAction';
 
 //npm
-import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import axios from 'axios';
 
 //components
 import { scanStatusDataAction } from '../../modules/ScanStatus/scanStatusDataAction';
 import Spinner from '../common/components/loadingIndicator';
 import { cryptoText, validateToken } from '../../utils/CommonUtils';
-import { SaveAbsentDataAction } from '../../flux/actions/apis/saveAbsentDataAction';
 import { LoginAction } from '../../flux/actions/apis/LoginAction';
+
+import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction'
+
 
 const StudentsList = ({
     filteredData,
     loginData,
     navigation,
-    scanTypeData,
     saveAbsentStudent,
-    absentStudentDataResponse,
-    roiData,
-    apiStatus
+    multiBrandingData,
+    scanedData,
 }) => {
 
 
@@ -58,43 +57,30 @@ const StudentsList = ({
 
     //hooks
     const [allStudentData, setAllStudentData] = useState([])
-    const [absentStudentsData, setAbsentStudentsData] = useState([]);
-    const [fetchedAbsentList, setFetchedAbsentList] = useState([])
-    const [examDataObj, setExamDatabj] = useState({});
     const [isLoading, setIsLoading] = useState(false)
+    const [stdArray, setStdArray] = useState([])
     const prevloginResponse = usePrevious(loginData);
     const prevSaveRes = usePrevious(saveAbsentStudent)
 
+
     useEffect(() => {
         studentData()
-        // getRoi()
-        // callScanStatusData()
+
     }, []);
 
-    useEffect(() => {
-        if (prevloginResponse && loginData && prevloginResponse != loginData) {
-            setIsLoading(false);
-            if (loginData && loginData.data && loginData.status == 200) {
-                onNextClick(loginData.data.jwtToken)
-            } else if (loginData && loginData.data && loginData.status != 200) {
-                Alert.alert(Strings.message_text, Strings.process_failed_try_again, [
-                    { 'text': Strings.cancel_text, style: Strings.cancel_text },
-                    { 'text': Strings.retry_text, onPress: () => loginAgain() }
-                ])
-            }
-        }
 
-        if (prevSaveRes && saveAbsentStudent && prevSaveRes != saveAbsentStudent) {
-            setIsLoading(false)
-            if (saveAbsentStudent && saveAbsentStudent.data && saveAbsentStudent.status == 200) {
-                navigation.navigate('scanHistory')
-            } else if (saveAbsentStudent && saveAbsentStudent.data && saveAbsentStudent.status != 200) {
-                Alert.alert(Strings.message_text, Strings.process_failed_try_again, [
-                    { 'text': Strings.ok_text, style: Strings.cancel_text }
-                ])
-            }
-        }
-    }, [saveAbsentStudent, loginData])
+    useEffect(
+        React.useCallback(() => {
+            const onBackPress = () => {
+                navigation.navigate('selectDetails');
+                return true;
+            };
+            BackHandler.addEventListener('hardwareBackPress', onBackPress);
+            return () =>
+                BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+        }, []),
+    );
+
 
     const dispatch = useDispatch();
 
@@ -107,12 +93,12 @@ const StudentsList = ({
         let dataPayload = {
             "classId": filteredData.class,
             "subject": filteredData.subject,
+            "section": filteredData.section,
             "fromDate": filteredData.examDate,
             "schoolId": loginCred.schoolId,
             "page": 0,
-            "downloadRes": true
+            "downloadRes": false
         }
-        console.log("data",dataPayload);
         let apiObj = new scanStatusDataAction(dataPayload);
         FetchSavedScannedData(apiObj, loginCred.schoolId, loginCred.password)
     }
@@ -159,95 +145,26 @@ const StudentsList = ({
             }
         })
         setTotalStudent(filterStudentsData[0].data ? filterStudentsData[0].data.students : []);
-        // let examId = ''
-
-        // _.forEach(filterStudentsData[0].data.examInfo, (o) => {
-        //     if (o.examCode == filteredData.examCode) {
-        //         examId = o.examId
-        //     }
-        // })
-
-        // let examCode = filteredData.examCode
-
-        // setExamDatabj({
-        //     examCode,
-        //     examId: examId
-        // })
-
-        // let studentsList = JSON.parse(JSON.stringify(filterStudentsData[0].data.students))
-        // console.log("studentsList", studentsList);
-        // let absentStudentlist = absentStudentDataResponse && absentStudentDataResponse.data.length > 0 ? JSON.parse(absentStudentDataResponse.data[0])[0].AbsentStudents : [];
-        // console.log("absentStudentlist", absentStudentlist);
-        // studentsList.forEach((element) => {
-        //     element.isAbsent = false
-        //     absentStudentlist.forEach(o => {
-        //         if (o.AadhaarUID == element.aadhaarUID) {
-        //             element.isAbsent = true;
-        //         }
-        //     })
-        // });
-
-        // setFetchedAbsentList(absentStudentlist)
         setAllStudentData(filterStudentsData[0].data.students)
         setIsLoading(false)
         callScanStatusData()
         getRoi()
-        // console.log("setFetchedAbsentList", absentStudentlist);
-        // console.log("setFetchedAbsentList", studentsList);
     }
 
-    const onMarkPresentAbsent = (data) => {
-        let createdTime = new Date()
-        let obj = {
-            // examId: examDataObj.examId,
-            // examCode: examDataObj.examCode,
-            schoolId: data.schoolId,
-            aadhaarUID: data.aadhaarUID,
-            studyingClass: data.studyingClass,
-            section: data.section.trim().toUpperCase(),
-            createdOn: createdTime,
-        }
-        let isAlreadyMarkedAbsent = _.find(fetchedAbsentList, (o) => o.AadhaarUID == data.aadhaarUID)
 
-        let scanedData = JSON.parse(getScanStatusData.data);
-        if (data.isAbsent) {
-            data.isAbsent = false
-            if (isAlreadyMarkedAbsent) {
-                obj.isAbsent = 0
-                let absentStudentsDataArr = JSON.parse(JSON.stringify(absentStudentsData))
-                absentStudentsDataArr.push(obj)
-                setAbsentStudentsData(absentStudentsDataArr)
-            } else {
-                const modified = _.filter(absentStudentsData, (o) => o.aadhaarUID != data.aadhaarUID)
-                setAbsentStudentsData((modified))
-            }
-        } else if (!data.isAbsent) {
-            const checkIsScanned = scanedData[0].EntryCompletedStudents.filter((o) => o.AadhaarUID === data.aadhaarUID);
-            if (checkIsScanned.length > 0) {
-                Alert.alert("student can't be mark as absent once scanned !")
-            }
-            else {
-                data.isAbsent = true
-                if (isAlreadyMarkedAbsent) {
-                    const modified = _.filter(absentStudentsData, (o) => o.aadhaarUID != data.aadhaarUID)
-                    setAbsentStudentsData((modified))
-
-                } else {
-                    obj.isAbsent = 1
-                    let absentStudentsDataArr = JSON.parse(JSON.stringify(absentStudentsData))
-                    absentStudentsDataArr.push(obj)
-                    setAbsentStudentsData(absentStudentsDataArr)
-                }
-            }
-        }
-    }
 
 
     const renderStudentData = ({ item }) => {
         return (
             <StudentsDataComponent
+                themeColor1={multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}
+                themeColor2={multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE}
                 item={item}
-                onBtnClick={onMarkPresentAbsent}
+                pabsent={item.studentAvailability}
+                scanedData={scanedData}
+                filteredData={filteredData}
+                setStdArray={setStdArray}
+                stdArray={stdArray}
             />
         )
     }
@@ -260,30 +177,69 @@ const StudentsList = ({
         )
     }
 
-    const saveAbsentDetails = (token) => {
-        setIsLoading(true)
-        console.log("absentStudentDataResponse", absentStudentsData);
-        let apiObj = new SaveAbsentDataAction(absentStudentsData, token)
-        APITransport(apiObj);
+    const saveAbsentPresentDetails =async (token) => {
+
+        let stdPstAbsArray = []
+
+        let absentPresentStatus = {
+            "classId": filteredData.class,
+            "examDate": filteredData.examDate,
+            "subject": filteredData.subject,
+            "studentsMarkInfo": stdPstAbsArray
+        }
+
+        stdArray.forEach((element, index) => {
+
+            let stdPstAbs = {
+                "section": filteredData.section,
+                "studentId": 0,
+                "studentAvailability": true,
+                "securedMarks": 0,
+                "totalMarks": 0
+            }
+
+            stdPstAbs.studentAvailability = element.studentAvailability
+            stdPstAbs.studentId = element.studentId
+            stdPstAbsArray.push(stdPstAbs)
+        });
+
+        absentPresentStatus.studentsMarkInfo = stdPstAbsArray
+
+        let stud = await getStudentsExamData();
+
+        stud.forEach((e, i) => {
+            if (e.class == filteredData.className && e.section == filteredData.section) {
+                e.data.students.forEach((element) => {
+
+                    const updated = allStudentData.filter((o) => {
+                        if (element.studentId == o.studentId) {
+                            element.studentAvailability = o.studentAvailability
+                        }
+                    })
+                })
+            }
+        })
+
+
+        setStudentsExamData(stud)
+
+        // setIsLoading(true)
+        let dataPayload = absentPresentStatus
+        let apiObj = new SaveScanData(dataPayload, token)
+        dispatch(APITransport(apiObj));
+        setPresentAbsentStudent(allStudentData)
+        navigation.push('ScanHistory');
     }
 
     const navigateToNext = () => {
-        // if (absentStudentsData.length > 0) {
-        //     let isTokenValid = validateToken(token)
-        //     if (isTokenValid) {
-        //         let absentList = _.filter(allStudentData, (o) => o.isAbsent);
-        //         saveAbsentDetails(token);
-        //         setAbsentStudentDataIntoAsync(absentList);
-        //     }
-        //     else if (!isTokenValid) {
-        //         loginAgain()
-        //     }
-        // } else {
-        //     let absentList = _.filter(allStudentData, (o) => o.isAbsent);
-        //     setAbsentStudentDataIntoAsync(absentList);
-        navigation.navigate('ScanHistory');
-        // }
+        if (allStudentData.length > 0) {
+            saveAbsentPresentDetails(loginData.data.token)
+        }
     }
+    const navigateToBack = () => {
+        navigation.navigate('selectDetails')
+    }
+    
 
     const loginAgain = async () => {
         let loginCred = await getLoginCred()
@@ -300,18 +256,6 @@ const StudentsList = ({
         }
     }
 
-    const onLogoutClick = async () => {
-        Alert.alert(Strings.message_text, Strings.are_you_sure_you_want_to_logout, [
-            { 'text': Strings.no_text, style: 'cancel' },
-            {
-                'text': Strings.yes_text, onPress: async () => {
-                    await AsyncStorage.clear();
-                    navigation.navigate('auth');
-                }
-            }
-        ])
-    }
-
     const getRoi = () => {
 
         let payload =
@@ -323,15 +267,9 @@ const StudentsList = ({
         dispatch(APITransport(apiObj))
     }
 
-    return (
-        <View style={{ flex: 1, backgroundColor: 'white' }}>
 
-            {/* <HeaderComponent
-                title={Strings.up_saralData}
-                logoutHeaderText={Strings.logout_text}
-                customLogoutTextStyle={{ color: AppTheme.GREY }}
-                onLogoutClick={onLogoutClick}
-            /> */}
+    return (
+        <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
             {(loginData && loginData.data) &&
                 <View>
                     <Text
@@ -361,23 +299,32 @@ const StudentsList = ({
                     {apkVersion}
                 </Text>
             </Text>
-
             <FlatList
                 data={allStudentData}
                 renderItem={renderStudentData}
+                background={multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}
                 ListEmptyComponent={renderEmptyList}
                 keyExtractor={(item) => item.studentId.toString()}
                 contentContainerStyle={styles.flatlistCon}
                 showsVerticalScrollIndicator={false}
             />
 
-            <ButtonComponent
-                customBtnStyle={styles.nxtBtnStyle}
-                btnText={Strings.next_text.toUpperCase()}
-                activeOpacity={0.8}
-                // onPress={() => navigateToNext(loginData.data.jwtToken)}
-                onPress={navigateToNext}
-            />
+
+            <View style={styles.viewnxtBtnStyle1}>
+                <ButtonComponent
+                    customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+                    btnText={Strings.Back.toUpperCase()}
+                    activeOpacity={0.8}
+                    onPress={navigateToBack}
+                />
+
+                <ButtonComponent
+                    customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+                    btnText={Strings.next_text.toUpperCase()}
+                    activeOpacity={0.8}
+                    onPress={navigateToNext}
+                />
+            </View>
 
             {
                 isLoading &&
@@ -386,8 +333,7 @@ const StudentsList = ({
                     customContainer={{ opacity: 0.4, elevation: 15 }}
                 />
             }
-
-        </View>
+        </SafeAreaView>
     );
 }
 
@@ -400,12 +346,14 @@ const mapStateToProps = (state) => {
         saveAbsentStudent: state.saveAbsentStudent,
         absentStudentDataResponse: state.absentStudentDataResponse,
         apiStatus: state.apiStatus,
+        multiBrandingData: state.multiBrandingData.response.data,
+        scanedData: state.scanedData.response
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        APITransport: APITransport,
+        APITransport: APITransport
     }, dispatch)
 }
 

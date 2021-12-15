@@ -1,13 +1,10 @@
 import axios from "axios";
-import { useEffect } from "react";
-import { connect, useDispatch } from "react-redux";
 import { getLoginCred } from "../utils/StorageUtils";
 import { scanStatusDataAction } from "./ScanStatus/scanStatusDataAction";
 
 export default function  callScanStatusDataConst(filteredData) {
 
     return async dispatch => {
-        console.log("FilteredDAta", filteredData.response);
 
         let loginCred = await getLoginCred()
 
@@ -16,7 +13,7 @@ export default function  callScanStatusDataConst(filteredData) {
             "subject": filteredData.response.subject,
             "fromDate": filteredData.response.examDate,
             "page": 1,
-            "downloadRes": true
+            "downloadRes": false
         }
         let apiObj = new scanStatusDataAction(dataPayload);
 
@@ -28,7 +25,6 @@ export default function  callScanStatusDataConst(filteredData) {
                     source.cancel('The request timed out.');
                 }
             }, 60000);
-            console.log("loginCred", loginCred.schoolId, loginCred.password);
             axios.post(apiObj.apiEndPoint(), apiObj.getBody(), {
                 auth: {
                     username: loginCred.schoolId,
@@ -36,14 +32,12 @@ export default function  callScanStatusDataConst(filteredData) {
                 }
             })
                 .then(function (res) {
-                    console.log("RES", res);
                     apiResponse = res
                     clearTimeout(id)
                     apiObj.processResponse(res)
                     dispatch(dispatchAPIAsync(apiObj));
                 })
                 .catch(function (err) {
-                    console.log("ERROR", err);
                     clearTimeout(id)
                 });
         }

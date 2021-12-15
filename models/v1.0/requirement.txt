@@ -1,0 +1,9 @@
+tensorflow
+Keras
+numpy
+opencv-python==4.2.0.32
+scikit-learn
+scikit-image
+np_utils
+h5py==2.10.0
+grpcio==1.41.1

@@ -51,6 +51,14 @@ components:
             consolidated prediction of all the rois with in a cell. 
             This is mandatory on the response sent to backend.
           type: string
+        trainingDataSet:
+          type: array
+          description: |
+            Training Data Set of each roi mat images in base 64 encoding.
+            This data will be useful to train and optimise ML models.
+          items:
+            type: string
+
     
     renderingInformation:
       type: object

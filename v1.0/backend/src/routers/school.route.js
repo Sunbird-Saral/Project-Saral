@@ -10,6 +10,8 @@ const router = new express.Router()
 router.post('/schools/create', async (req, res) => {
     const school = new School({ ...req.body, udiseCode: req.body.schoolId })
     try {
+        school.state = req.body.state.toLowerCase()
+        school.schoolId = req.body.schoolId.toLowerCase()
         await school.save()
         const token = await school.generateAuthToken()
         res.status(201).send({ school, token })
@@ -38,6 +40,7 @@ router.get('/schools', async (req, res) => {
                     block: element.block,
                     hmName: element.hmName,
                     noOfStudents: element.noOfStudents,
+                    storeTrainingData: element.storeTrainingData,
                     createdAt: element.createdAt,
                     updatedAt: element.updatedAt
                 }
@@ -52,7 +55,7 @@ router.get('/schools', async (req, res) => {
 
 router.post('/schools/login', async (req, res) => {
     try {
-        const school = await School.findByCredentials(req.body.schoolId, req.body.password)
+        const school = await School.findByCredentials(req.body.schoolId.toLowerCase(), req.body.password)
         const token = await school.generateAuthToken()
         let classes = []
         let response = {
@@ -89,10 +92,8 @@ router.post('/schools/login', async (req, res) => {
 
 router.delete('/schools/:schoolId', async (req, res) => {
     try {
-        const school = await (await School.findOne({ schoolId: req.params.schoolId }))
-        if (!school) {
-            res.status(404).send({ message: 'School Id does not exist.' })
-        }
+        const school = await School.findOne({ schoolId: req.params.schoolId.toLowerCase() })
+        if(!school) return res.status(404).send({ message: 'School Id does not exist.' })
         let lookup = {
             schoolId: school.schoolId
         }
@@ -112,19 +113,19 @@ router.patch('/schools/:schoolId', async (req, res) => {
     try {
         if (Object.keys(req.body).length === 0) res.status(400).send({ message: 'Validation error.' })
         const updates = Object.keys(req.body)
-        const allowedUpdates = ['name', 'state', 'district', 'block', 'hmName', 'hmMobileNo', 'noOfStudents', 'udisceCode']
+        const allowedUpdates = ['name', 'state', 'district', 'block', 'hmName', 'hmMobileNo', 'noOfStudents', 'udisceCode','storeTrainingData']
         const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
 
         if (!isValidOperation) {
             return res.status(400).send({ error: 'Invaid Updates' })
         }
         let lookup = {
-            schoolId: req.params.schoolId
+            schoolId: req.params.schoolId.toLowerCase()
         }
         let update = req.body
 
         const school = await School.findOne(lookup).lean();
-        if (!school) res.status(404).send({ message: 'School Id does not exist.' })
+        if (!school) return res.status(404).send({ message: 'School Id does not exist.' })
 
         await School.updateOne(lookup, update).lean().exec();
         res.status(200).send({ message: 'School has been updated.' })

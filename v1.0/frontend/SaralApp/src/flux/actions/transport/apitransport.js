@@ -55,9 +55,8 @@ export default function dispatchAPI(api) {
                         source.cancel('The request timed out.');
                     }
                 }, 60000);
-                axios.post(api.apiEndPoint(), api.getBody(), { headers: api.getHeaders(), cancelToken: source.token }, )
+                axios.post(api.apiEndPoint(), api.getBody(), { headers: api.getHeaders(), cancelToken: source.token },)
                     .then(function (res) {
-                        console.log("LOG");
                         apiResponse = res
                         clearTimeout(id)
                         api.processResponse(res)
@@ -66,15 +65,15 @@ export default function dispatchAPI(api) {
                         if (typeof api.getNextStep === 'function' && res.data && (res.status == 200 || res.status == 201))
                             dispatch(api.getNextStep())
                     })
-                    .catch(function (err) {        
+                    .catch(function (err) {
                         clearTimeout(id)
-                        if(err && err.message == 'The request timed out.') {
+                        if (err && err.message == 'The request timed out.') {
                             dispatch(apiStatusAsync(false, true, Strings.request_timeout_custom_message, null, err && err.response && err.response.status && err.response.status === 401 ? true : false))
                         }
-                        else if(err && err.message == 'Network Error') {
+                        else if (err && err.message == 'Network Error') {
                             dispatch(apiStatusAsync(false, true, Strings.you_seem_to_be_offline_please_check_your_internet_connection, null, err && err.response && err.response.status && err.response.status === 401 ? true : false))
                         }
-                        else if(api.type == 'login_process') {
+                        else if (api.type == 'login_process') {
                             dispatch(apiStatusAsync(false, true, err && err.response && err.response.status && err.response.status === 422 ? Strings.schoolid_password_doesnot_match : Strings.something_went_wrong_please_try_again, null, err && err.response && err.response.status && err.response.status === 401 ? true : false))
                         }
                         else {
@@ -82,7 +81,47 @@ export default function dispatchAPI(api) {
                         }
                     });
             }
-        } else if (api.method === 'DELETE') {
+        }
+        else if (api.method === "PUT") {
+            return dispatch => {
+                dispatch(apiStatusAsync(true, false, ''))
+                let apiResponse = null
+                const source = axios.CancelToken.source()
+                const id = setTimeout(() => {
+                    if (apiResponse === null) {
+                        source.cancel('The request timed out.');
+                    }
+                }, 60000);
+                axios.put(api.apiEndPoint(), api.getBody(), { headers: api.getHeaders(), cancelToken: source.token },)
+                    .then(function (res) {
+                        apiResponse = res
+                        clearTimeout(id)
+                        api.processResponse(res)
+                        dispatch(apiStatusAsync(false, false, null, res.data))
+                        dispatch(dispatchAPIAsync(api));
+                        if (typeof api.getNextStep === 'function' && res.data && (res.status == 200 || res.status == 201))
+                            dispatch(api.getNextStep())
+                    })
+                    .catch(function (err) {
+                        clearTimeout(id)
+                        if (err && err.message == 'The request timed out.') {
+                            dispatch(apiStatusAsync(false, true, Strings.request_timeout_custom_message, null, err && err.response && err.response.status && err.response.status === 401 ? true : false))
+                        }
+                        else if (err && err.message == 'Network Error') {
+                            dispatch(apiStatusAsync(false, true, Strings.you_seem_to_be_offline_please_check_your_internet_connection, null, err && err.response && err.response.status && err.response.status === 401 ? true : false))
+                        }
+                        else if (api.type == 'login_process') {
+                            dispatch(apiStatusAsync(false, true, err && err.response && err.response.status && err.response.status === 422 ? Strings.schoolid_password_doesnot_match : Strings.something_went_wrong_please_try_again, null, err && err.response && err.response.status && err.response.status === 401 ? true : false))
+                        }
+                        else {
+                            dispatch(apiStatusAsync(false, true, Strings.something_went_wrong_please_try_again, null, err && err.response && err.response.status && err.response.status === 401 ? true : false))
+                        }
+                    });
+            }
+
+        }
+
+        else if (api.method === 'DELETE') {
             return dispatch => {
                 dispatch(apiStatusAsync(true, false, ''))
                 axios.delete(api.apiEndPoint(), api.getHeaders())

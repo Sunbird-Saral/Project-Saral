@@ -95,14 +95,14 @@ router.post('/classes', auth, async (req, res) => {
 })
 
 router.delete('/classes', auth, async (req, res) => {
-    if (Object.keys(req.body).length === 0) res.status(400).send({ message: 'Validation error.' })
-    const inputKeys = Object.keys(req.body)
-    const allowedUpdates = ['classId']
-    const isValidOperation = inputKeys.every((update) => allowedUpdates.includes(update))
+    if (Object.keys(req.body) != "classId") return res.status(400).send({ message: 'Validation error.' })
+    // const inputKeys = Object.keys(req.body)
+    // const allowedUpdates = ['classId']
+    // const isValidOperation = inputKeys.every((update) => allowedUpdates.includes(update))
 
-    if (!isValidOperation) {
-        return res.status(400).send({ error: 'Invalid delete opration' })
-    }
+    // if (!isValidOperation) {
+    //     return res.status(400).send({ error: 'Invalid delete opration' })
+    // }
 
     const match = {
         schoolId: req.school.schoolId,

@@ -1321,6 +1321,11 @@
   dependencies:
     "merge-options" "^3.0.4"
 
+"@react-native-community/checkbox@^0.3.0":
+  "integrity" "sha512-O/H/I9r+9Hn91oO6rS0IWnaUAtuUg1wuLM4U+MWogW1JzUrFxz+fWRnCl1g5zX1rLbHb4m1bZkBHSJM2dOBZpw=="
+  "resolved" "https://registry.npmjs.org/@react-native-community/checkbox/-/checkbox-0.3.0.tgz"
+  "version" "0.3.0"
+
 "@react-native-community/cli-debugger-ui@^5.0.1":
   "integrity" "sha512-5gGKaaXYOVE423BUqxIfvfAVSj5Cg1cU/TpGbeg/iqpy2CfqyWqJB3tTuVUbOOiOvR5wbU8tti6pIi1pchJ+oA=="
   "resolved" "https://registry.npmjs.org/@react-native-community/cli-debugger-ui/-/cli-debugger-ui-5.0.1.tgz"
@@ -2408,6 +2413,11 @@
   "integrity" "sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw=="
   "resolved" "https://registry.npmjs.org/balanced-match/-/balanced-match-1.0.2.tgz"
   "version" "1.0.2"
+
+"base-64@^1.0.0":
+  "integrity" "sha512-kwDPIFCGx0NZHog36dj+tHiwP4QMzsZ3AgMViUBKI0+V5n4U0ufTCUMhnQ04diaRI8EX/QcPfql7zlhZ7j4zgg=="
+  "resolved" "https://registry.npmjs.org/base-64/-/base-64-1.0.0.tgz"
+  "version" "1.0.0"
 
 "base@^0.11.1":
   "integrity" "sha512-5T6P4xPgpp0YDFvSWwEZ4NoE3aM4QBQXDzmVbraCkFj8zHM+mba8SyqB5DbZWyR7mYHo6Y7BdQo3MoA4m0TeQg=="
@@ -6741,7 +6751,7 @@
     "react-localization" "^1.0.17"
 
 "react-native-modal-dropdown@git+https://github.com/siemiatj/react-native-modal-dropdown.git":
-  "integrity" "sha512-mcdyz8vP/e5ahS2WObhqIRJxGSP8MNbo/YDjSRYwVSxz/0dxo3Zfdf3/E8vCmb5OOEAzTB12pqdxt5tX+MMUuw=="
+  "integrity" "sha512-x0+8bNrRF49XKa6RCPbzw9w5DwoJlZr3w1XxRgkFYNucayXvV3mfgv4UJY9KrOaExV/UWh3SM+t+9PQxLy6I/A=="
   "resolved" "git+ssh://git@github.com/siemiatj/react-native-modal-dropdown.git"
   "version" "1.0.2"
   dependencies:

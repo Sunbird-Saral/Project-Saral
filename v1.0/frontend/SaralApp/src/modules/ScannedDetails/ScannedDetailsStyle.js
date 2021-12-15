@@ -7,7 +7,6 @@ export const styles = {
         marginHorizontal: '5%',
         justifyContent: 'center',
         alignItems: 'center',
-        // backgroundColor: 'yellow'
     },
     header1TextStyle: {
         padding: '5%',
@@ -16,12 +15,14 @@ export const styles = {
         color: AppTheme.BLACK,
         letterSpacing: 1,
     },
+    row: {
+        flexDirection: 'row'
+    },
     container2: {
         flex: 1,
         borderRadius: 4,
         elevation: 4,
         marginHorizontal: '5%',
-        // paddingBottom: '5%',
         backgroundColor: AppTheme.WHITE,
     },
     cancelBtnStyle: {
@@ -51,7 +52,6 @@ export const styles = {
         backgroundColor: 'transparent',
         width: '60%',
         borderWidth: 1,
-        borderColor: AppTheme.BLUE
     },
     nxtBtnTextStyle: {
         color: AppTheme.BLUE
@@ -72,12 +72,11 @@ export const styles = {
         width: '90%',
         borderBottomWidth: 1,
         borderBottomColor: AppTheme.LIGHT_GREY,
-        paddingBottom:10
+        paddingBottom: 10
     },
     imageViewContainer: {
         width: '30%',
         height: '100%',
-        // paddingTop: '4%',
         marginRight: '1%'
     },
     imageContainerStyle: {
@@ -92,8 +91,6 @@ export const styles = {
     imageStyle: {
         height: '90%',
         width: '90%',
-
-        // borderRadius: 45
     },
     deatilsViewContainer: {
         width: '70%',
@@ -125,5 +122,16 @@ export const styles = {
         fontWeight: 'bold',
         letterSpacing: 1,
         lineHeight: 35
+    },
+    viewnxtBtnStyle1: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    nxtBtnStyle1: {
+        width: '45%',
+        marginHorizontal: 5,
+        marginBottom: 20,
+        borderRadius: 10
     },
 }

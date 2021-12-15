@@ -21,7 +21,6 @@ export const styles = StyleSheet.create({
         marginBottom: '2%'
     },
     flatlistCon: {
-        // flex: 1,
         paddingBottom: 20,
         backgroundColor: 'white'
     },
@@ -49,6 +48,17 @@ export const styles = StyleSheet.create({
     },
     markasAbsent: {
         color: '#ffffff',
+        paddingHorizontal: 25,
+        paddingVertical: 6,
+        borderRadius: 20,
+        margin: 10
+    },
+    markasPresent:{
+        color: '#000',
+        paddingHorizontal: 25,
+        paddingVertical: 6,
+        borderRadius: 20,
+        margin: 10
     },
     btnCon: {
         paddingHorizontal: 25,
@@ -60,5 +70,17 @@ export const styles = StyleSheet.create({
         marginHorizontal: 40,
         marginBottom: 20,
         borderRadius: 10
+    },
+    nxtBtnStyle1: {
+        width:'45%',
+        marginHorizontal: 5,
+        marginBottom: 20,
+        borderRadius: 10
+    },
+    viewnxtBtnStyle1 : {
+        flexDirection:'row',
+        justifyContent:'center',
+        alignItems:'center'
     }
+
 });
