@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, Text, View, BackHandler, Image, TouchableOpacity, Share } from 'react-native';
+import { FlatList, Text, View, BackHandler, Image, TouchableOpacity,Linking } from 'react-native';
 
 //redux
 import { connect } from 'react-redux';
@@ -21,14 +21,7 @@ import APITransport from '../../flux/actions/transport/apitransport'
 import AppTheme from '../../utils/AppTheme';
 import { getPresentAbsentStudent, getScannedDataFromLocal } from '../../utils/StorageUtils';
 import { Assets } from '../../assets';
-// import Share from 'react-native-share';
-
-
-
-
-
-
-
+ import Share from 'react-native-share';
 
 const ScanStatusLocal = ({
     loginData,
@@ -55,34 +48,38 @@ const ScanStatusLocal = ({
     );
    
  
-    const onShare = async () => {
-        try {
-            loacalstutlist.map((item)=>{
-                const itemdata = item
-                const sharedata = JSON.stringify(itemdata,2)
-                //  console.log('itemdata',JSON.stringify(itemdata,null,2))
-            
-            const result =  Share.share({
-                title: `Saral App v1.0 Marks JSON - SchoolId:${loginData.data.school.schoolId} & Exam Id:${filteredData.examTestID}`,
-                message:
-                    `${JSON.stringify(itemdata,null,2)}`
-            });})
-            if (result.action === Share.sharedAction) {
-                if (result.activityType) {
-                    // shared with activity type of result.activityType
-                } else {
-                    // shared
-                    console.log('shared',result)
-                }
-            } else if (result.action === Share.dismissedAction) {
-                // dismissed
-                console.log('dismissed',result)
-            }
-        } catch (error) {
-            alert(error.message);
-        }
-    };
     // const onShare = async () => {
+    //     try {
+    //         loacalstutlist.map((item)=>{
+    //             const itemdata = item
+    //             const sharedata = JSON.stringify(itemdata,2)
+    //             //  console.log('itemdata',JSON.stringify(itemdata,null,2))
+            
+    //         const result =  Share.share({
+    //             title: `Saral App v1.0 Marks JSON - SchoolId:${loginData.data.school.schoolId} & Exam Id:${filteredData.examTestID}`,
+    //             message:
+    //                 `${JSON.stringify(itemdata)}`
+    //         });
+    //         if (result.action === Share.sharedAction) {
+    //             if (result.activityType) {
+    //                 // shared with activity type of result.activityType
+    //                 console.log('shared with activity type of result.activityType',result)
+    //             } else {
+    //                 // shared
+    //                 console.log('shared',result)
+    //             }
+    //         } else if (result.action === Share.dismissedAction) {
+    //             // dismissed
+    //             console.log('dismissed',result)
+    //         }})
+    //     } catch (error) {
+    //         console(error.message);
+    //     }
+    // };
+    // const onShare = async () => {
+
+
+
     //    const onShare =async ()=> loacalstutlist.map((item)=>{
     //      const itemdata = JSON.stringify(item)
     //         const shareOptions ={
@@ -90,13 +87,31 @@ const ScanStatusLocal = ({
     //         }
 
     //         try{
-    //             const ShareResponse = await Share.open(shareOptions);
+    //             const ShareResponse =  Share.open(shareOptions);
     //             console.log('ShareResponse',ShareResponse)
     //         } catch(error) {
     //             console.log('error',error)
     //         }
-    //     //   };
+    //       })
     //     })
+
+    // const shareOptions = {
+    //     title: 'Share via',
+    //     message: 'some message',
+    //     url: 'some share url',
+    //     social: Share.Social.WHATSAPP,
+    //     // whatsAppNumber: "9584809011",  // country code + phone number
+    //     filename: 'test' , // only for base64 file in Android
+    //   };
+    
+    //   const onShare = async () => {
+    //     const shareResponse = await Share.shareSingle(shareOptions);
+    //   }
+    const onShare = () => {
+        const subject = `Saral App v1.0 Marks JSON - SchoolId:${loginData.data.school.schoolId} Exam Id:${filteredData.examTestID}`;
+        const message = JSON.stringify(loacalstutlist[0],null, 4);
+        Linking.openURL(`mailto: ?subject=${subject}&body=${message}`)
+     } 
       
 
     const renderItem = ({ item, index }) => {
