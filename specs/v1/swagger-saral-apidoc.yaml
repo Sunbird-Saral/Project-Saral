@@ -96,7 +96,7 @@ paths:
         "422":
           description: "School Id or Password is not correct."
   
-  /deleteSchoolBySchoolId/{schoolId}:
+  /schools/{schoolId}:
     delete:
       tags:
       - Maintenance API
@@ -116,7 +116,6 @@ paths:
         "400":
           description: "unsuccessful operation"
       
-  /updateSchool/{schoolId}:
     patch:
       tags:
       - Maintenance API
@@ -140,7 +139,7 @@ paths:
         "400":
           description: "unsuccessful operation"
          
-  /addClasses:
+  /classes:
     post:
       security:
         - Bearer: []
@@ -163,29 +162,6 @@ paths:
         "400":
           description: "unsuccessful operation"
 
-  
-  /updateClass:
-    post:
-      security:
-        - Bearer: []
-      tags:
-      - Maintenance API
-      - Class
-      summary: "Update Class"
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: "#/definitions/updateClassBody"
-      responses:
-        "200":
-          description: "successful operation"
-          schema:
-            $ref: "#/definitions/updateClassResponse"
-        "400":
-          description: "unsuccessful operation"
-          
-  /deleteClass:
     delete:
       security:
         - Bearer: []
@@ -211,6 +187,27 @@ paths:
           description: "Class does not exist."
         "400":
           description: "unsuccessful updates"
+          
+  /updateClass:
+    post:
+      security:
+        - Bearer: []
+      tags:
+      - Maintenance API
+      - Class
+      summary: "Update Class"
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: "#/definitions/updateClassBody"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/updateClassResponse"
+        "400":
+          description: "unsuccessful operation"
         
   
   /fetchStudentsByQuery:
@@ -238,7 +235,7 @@ paths:
           schema:
             $ref: "#/definitions/FetchStudentsByQueryResponse"
           
-  /createStudent:
+  /student:
     post:
       security:
         - Bearer: []
@@ -291,7 +288,7 @@ paths:
         "500":
           description: "unsuccessful operation"
           
-  /deleteStudentByStudentId/{studentId}:
+  /student/{studentId}:
     delete:
       tags:
       - Maintenance API
@@ -310,7 +307,7 @@ paths:
         "400":
           description: "unsuccessful operation"
             
-  /updateStudent/{studentId}:
+
     patch:
       tags:
       - Maintenance API
@@ -368,8 +365,71 @@ paths:
       responses:
         "200":
           description: "Data Saved Successfully"
-  
-  /getExamsByClass/{classId}:
+
+            
+  /exam:
+    post:
+      security:
+        - Bearer: []
+      tags:
+        - Maintenance API
+        - Exam
+      summary: "Create Exam for a class"
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: "#/definitions/CreateExamBody"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/CreateExamBodyResponse"
+            
+  /exam/{examId}:
+    delete:
+      security:
+        - Bearer: []
+      tags:
+        - Maintenance API
+        - Exam
+      summary: "Delete exam by class Id"
+      parameters:
+        - in: path
+          name: examId
+          type: number
+          required: true
+      responses:
+        "200":
+          description: "Exam has been deleted successfully."
+        "400":
+          description: "Exam Id does not exist."
+    
+    patch:
+      security:
+        - Bearer: []
+      tags:
+        - Maintenance API
+        - Exam
+      summary: "Update Exam for a class"
+      parameters:
+      - in: path
+        name: examId
+        type: number
+        required: true
+      - in: body
+        name: body
+        schema:
+          $ref: "#/definitions/UpdateExamBody"
+      responses:
+        "200": 
+          description: "Exam is Updated Successfully."
+        "404":
+          description: "Exam Id does not exist."
+        "400": 
+          description: "Unsuccessful operation"
+    
+  /examByClass/{classId}:
     get:
       security:
         - Bearer: []
@@ -396,71 +456,9 @@ paths:
             $ref: "#/definitions/GetExamByClassResponse"
         "404":
           description: "Exam dose not exist for 520"
-  
-  /deleteExamByExamIdAndClassId/{examId}:
-    delete:
-      security:
-        - Bearer: []
-      tags:
-        - Maintenance API
-        - Exam
-      summary: "Delete exam by class Id"
-      parameters:
-        - in: path
-          name: examId
-          type: number
-          required: true
-      responses:
-        "200":
-          description: "Exam has been deleted successfully."
-        "400":
-          description: "Exam Id does not exist."
-            
-  /addExamsByClass:
-    post:
-      security:
-        - Bearer: []
-      tags:
-        - Maintenance API
-        - Exam
-      summary: "Create Exam for a class"
-      parameters:
-      - in: body
-        name: body
-        schema:
-          $ref: "#/definitions/CreateExamBody"
-      responses:
-        "200":
-          description: "successful operation"
-          schema:
-            $ref: "#/definitions/CreateExamBodyResponse"
-    
-  /updateExam/{examId}:
-    patch:
-      security:
-        - Bearer: []
-      tags:
-        - Maintenance API
-        - Exam
-      summary: "Update Exam for a class"
-      parameters:
-      - in: path
-        name: examId
-        type: number
-        required: true
-      - in: body
-        name: body
-        schema:
-          $ref: "#/definitions/UpdateExamBody"
-      responses:
-        "200": 
-          description: "Exam is Updated Successfully."
-        "404":
-          description: "Exam Id does not exist."
-        "400": 
-          description: "Unsuccessful operation"
           
-  /createRoi:
+          
+  /roi:
     post:
       security:
         - Bearer: []
@@ -483,7 +481,7 @@ paths:
         "400":
           description: "roiId already exist"
     
-  /updateRoi/{roiId}:
+  /roi/{examId}:
     patch:
       security:
         - Bearer: []
@@ -493,7 +491,7 @@ paths:
       summary: "Update ROI"
       parameters:
       - in: path
-        name: roiId
+        name: examId
         type: number
         required: true
       - in: body
@@ -508,7 +506,6 @@ paths:
         "400":
           description: "unsuccessful operation"
             
-  /deleteRoi/{roiId}:
     delete:
       security:
         - Bearer: []
@@ -518,7 +515,7 @@ paths:
       summary: "Delete ROI"
       parameters:
       - in: path
-        name: roiId
+        name: examId
         type: number
         required: true
       responses:
@@ -528,8 +525,7 @@ paths:
           description: "ROI ID has been already deleted."
         "400":
           description: "unsuccessful operation"
-  
-  /roi/{examId}:
+          
     get:
       security:
         - Bearer: []
@@ -551,6 +547,8 @@ paths:
             $ref: "#/definitions/rois"
         "400":
           description: "unsuccessful operation"
+  
+
           
   /brand:
     post:

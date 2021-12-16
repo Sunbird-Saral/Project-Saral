@@ -50,7 +50,7 @@ router.post('/classes', auth, async (req, res) => {
     }
 })
 
-router.post('/classes', auth, async (req, res) => {
+router.post('/updateClasses', auth, async (req, res) => {
     const updates = Object.keys(req.body)
     const allowedUpdates = ['sections', 'classId']
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))

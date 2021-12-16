@@ -38,7 +38,7 @@ router.post('/student', auth, async (req, res) => {
     }
 })
 
-router.post('/student', auth, async (req, res) => {
+router.post('/fetchStudentsByQuery', auth, async (req, res) => {
     const match = {}
     match.schoolId = req.school.schoolId
     if (req.body.classId) {
