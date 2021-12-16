@@ -1,7 +1,7 @@
 const configs = {
     // BASE_URL: 'http://uppat.idc.tarento.com:3000'
     // BASE_URL: 'http://44.241.36.235:3000'
-    BASE_URL: 'https://saral-dev-api.anuvaad.org'
+    BASE_URL: 'https://sahaj.odisha.gov.in/api'
 }
 
 export default configs;
