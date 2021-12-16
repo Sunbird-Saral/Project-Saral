@@ -188,8 +188,7 @@ paths:
         "400":
           description: "unsuccessful updates"
           
-  /updateClass:
-    post:
+    put:
       security:
         - Bearer: []
       tags:

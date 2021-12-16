@@ -1041,7 +1041,7 @@
 				{
 					"name": "Update Class",
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -1054,12 +1054,12 @@
 							"raw": "{\n    \"classId\": \"2\",\n    \"sections\": [\n        {\n            \"section\": \"E\"\n        }\n    ]\n}"
 						},
 						"url": {
-							"raw": "{{url}}/updateClasses",
+							"raw": "{{url}}/classes",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"updateClasses"
+								"classes"
 							]
 						}
 					},
@@ -1067,7 +1067,7 @@
 						{
 							"name": "Update Class",
 							"originalRequest": {
-								"method": "POST",
+								"method": "PUT",
 								"header": [
 									{
 										"key": "Content-Type",
@@ -1080,12 +1080,12 @@
 									"raw": "{\n    \"classId\": \"2\",\n    \"sections\": [\n        {\n            \"section\": \"E\"\n        }\n    ]\n}"
 								},
 								"url": {
-									"raw": "{{url}}/updateClasses",
+									"raw": "{{url}}/classes",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"updateClasses"
+										"classes"
 									]
 								}
 							},
