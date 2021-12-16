@@ -36,7 +36,7 @@ router.post('/exam', auth, async (req, res) => {
 })
 
 
-router.get('/exam/:classId', auth, async (req, res) => {
+router.get('/examByClass/:classId', auth, async (req, res) => {
     const match = {
         schoolId: req.school.schoolId,
         classId: req.params.classId
