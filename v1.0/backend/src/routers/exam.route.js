@@ -5,7 +5,7 @@ const { getSubjectCode } = require('../utils/commonUtils')
 const Counter = require('../models/counter')
 const router = new express.Router()
 
-router.post('/addExamsByClass', auth, async (req, res) => {
+router.post('/exam', auth, async (req, res) => {
     const body = [...req.body]
     const exams = []
     let schoolId = req.school.schoolId
@@ -36,7 +36,7 @@ router.post('/addExamsByClass', auth, async (req, res) => {
 })
 
 
-router.get('/getExamsByClas/:classId', auth, async (req, res) => {
+router.get('/examByClass/:classId', auth, async (req, res) => {
     const match = {
         schoolId: req.school.schoolId,
         classId: req.params.classId
@@ -63,7 +63,7 @@ router.get('/getExamsByClas/:classId', auth, async (req, res) => {
     }
 })
 
-router.delete('/deleteExamByExamIdAndClassId/:examId', auth, async (req, res) => {
+router.delete('/exam/:examId', auth, async (req, res) => {
     try {
         const exam = await Exam.findOneAndDelete({ examId: req.params.examId }).lean()
 
@@ -80,7 +80,7 @@ router.delete('/deleteExamByExamIdAndClassId/:examId', auth, async (req, res) =>
 
 })
 
-router.patch('/updateExam/:examId', auth, async (req, res) => {
+router.patch('/exam/:examId', auth, async (req, res) => {
     try {
         const updates = Object.keys(req.body)
         const allowedUpdates = ['subject', 'examLO', 'examDate', 'totalMarks', 'questions']

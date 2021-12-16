@@ -216,7 +216,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"schoolId\": \"odisha001\",\n    \"password\": \"tarento@123\",\n    \"classes\": true \n}"
+							"raw": "{\n    \"schoolId\": \"up001\",\n    \"password\": \"tarento@123\",\n    \"classes\": true \n}"
 						},
 						"url": {
 							"raw": "{{url}}/schools/login",
@@ -300,12 +300,12 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/deleteSchoolBySchoolId/:schoolId",
+							"raw": "{{url}}/schools/:schoolId",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"deleteSchoolBySchoolId",
+								"schools",
 								":schoolId"
 							],
 							"variable": [
@@ -323,12 +323,12 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/deleteSchoolBySchoolId/:schoolId",
+									"raw": "{{url}}/schools/:schoolId",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"deleteSchoolBySchoolId",
+										"schools",
 										":schoolId"
 									],
 									"variable": [
@@ -392,12 +392,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/updateSchool/:SchoolId",
+							"raw": "{{url}}/schools/:SchoolId",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"updateSchool",
+								"schools",
 								":SchoolId"
 							],
 							"variable": [
@@ -424,12 +424,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}/updateSchool/:SchoolId",
+									"raw": "{{url}}/schools/:SchoolId",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"updateSchool",
+										"schools",
 										":SchoolId"
 									],
 									"variable": [
@@ -499,12 +499,12 @@
 							"raw": "{\n    \"name\": \"Ajay\",\n    \"section\": \"D\",\n    \"studentClass\": [\n        {\n            \"classId\": \"2\"\n        }\n    ],\n    \"studentId\": \"2204000000000001\"\n}"
 						},
 						"url": {
-							"raw": "{{url}}/createStudent",
+							"raw": "{{url}}/student",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"createStudent"
+								"student"
 							]
 						}
 					},
@@ -525,12 +525,12 @@
 									"raw": "{\n    \"name\": \"Ajay\",\n    \"section\": \"D\",\n    \"studentClass\": [\n        {\n            \"classId\": \"2\"\n        }\n    ],\n    \"studentId\": \"2204000000000001\"\n}"
 								},
 								"url": {
-									"raw": "{{url}}/createStudent",
+									"raw": "{{url}}/student",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"createStudent"
+										"student"
 									]
 								}
 							},
@@ -766,12 +766,12 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/deleteStudentByStudentId/:studentId",
+							"raw": "{{url}}/student/:studentId",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"deleteStudentByStudentId",
+								"student",
 								":studentId"
 							],
 							"variable": [
@@ -789,12 +789,12 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/deleteStudentByStudentId/:studentId",
+									"raw": "{{url}}/student/:studentId",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"deleteStudentByStudentId",
+										"student",
 										":studentId"
 									],
 									"variable": [
@@ -858,12 +858,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/updateStudent/:studentId",
+							"raw": "{{url}}/student/:studentId",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"updateStudent",
+								"student",
 								":studentId"
 							],
 							"variable": [
@@ -890,12 +890,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}/updateStudent/:studentId",
+									"raw": "{{url}}/student/:studentId",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"updateStudent",
+										"student",
 										":studentId"
 									],
 									"variable": [
@@ -965,12 +965,12 @@
 							"raw": "[\n    {\n        \"classId\": \"2\",\n         \"sections\": [\n        {\n            \"section\": \"D\"\n        },\n         {\n            \"section\": \"B\"\n        },{\n            \"section\": \"C\"\n        }\n    ]\n    }\n]"
 						},
 						"url": {
-							"raw": "{{url}}/addClasses",
+							"raw": "{{url}}/classes",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"addClasses"
+								"classes"
 							]
 						}
 					},
@@ -991,12 +991,12 @@
 									"raw": "[\n    {\n        \"classId\": \"2\",\n         \"sections\": [\n        {\n            \"section\": \"D\"\n        },\n         {\n            \"section\": \"B\"\n        },{\n            \"section\": \"C\"\n        }\n    ]\n    }\n]"
 								},
 								"url": {
-									"raw": "{{url}}/addClasses",
+									"raw": "{{url}}/classes",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"addClasses"
+										"classes"
 									]
 								}
 							},
@@ -1041,7 +1041,7 @@
 				{
 					"name": "Update Class",
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -1054,12 +1054,12 @@
 							"raw": "{\n    \"classId\": \"2\",\n    \"sections\": [\n        {\n            \"section\": \"E\"\n        }\n    ]\n}"
 						},
 						"url": {
-							"raw": "{{url}}/updateClass",
+							"raw": "{{url}}/classes",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"updateClass"
+								"classes"
 							]
 						}
 					},
@@ -1067,7 +1067,7 @@
 						{
 							"name": "Update Class",
 							"originalRequest": {
-								"method": "POST",
+								"method": "PUT",
 								"header": [
 									{
 										"key": "Content-Type",
@@ -1080,12 +1080,12 @@
 									"raw": "{\n    \"classId\": \"2\",\n    \"sections\": [\n        {\n            \"section\": \"E\"\n        }\n    ]\n}"
 								},
 								"url": {
-									"raw": "{{url}}/updateClass",
+									"raw": "{{url}}/classes",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"updateClass"
+										"classes"
 									]
 								}
 							},
@@ -1148,12 +1148,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/deleteClass",
+							"raw": "{{url}}/classes",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"deleteClass"
+								"classes"
 							]
 						}
 					},
@@ -1179,12 +1179,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}/deleteClass",
+									"raw": "{{url}}/classes",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"deleteClass"
+										"classes"
 									]
 								}
 							},
@@ -1259,12 +1259,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/addExamsByClass",
+							"raw": "{{url}}/exam",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"addExamsByClass"
+								"exam"
 							]
 						}
 					},
@@ -1297,12 +1297,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}/addExamsByClass",
+									"raw": "{{url}}/exam",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"addExamsByClass"
+										"exam"
 									]
 								}
 							},
@@ -1371,12 +1371,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/deleteExamByExamIdAndClassId/:examId",
+							"raw": "{{url}}/exam/:examId",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"deleteExamByExamIdAndClassId",
+								"exam",
 								":examId"
 							],
 							"variable": [
@@ -1410,12 +1410,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}/deleteExamByExamIdAndClassId/:examId",
+									"raw": "{{url}}/exam/:examId",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"deleteExamByExamIdAndClassId",
+										"exam",
 										":examId"
 									],
 									"variable": [
@@ -1493,12 +1493,12 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{url}}/getExamsByClas/:classId?subject=Hindi&examDate=01/10/2021",
+							"raw": "{{url}}/examByClass/:classId?subject=Hindi&examDate=01/10/2021",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"getExamsByClas",
+								"examByClass",
 								":classId"
 							],
 							"query": [
@@ -1536,12 +1536,12 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{url}}/getExamsByClas/:classId",
+									"raw": "{{url}}/examByClass/:classId",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"getExamsByClas",
+										"examByClass",
 										":classId"
 									],
 									"query": [
@@ -1617,12 +1617,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/updateExam/:examId",
+							"raw": "{{url}}/exam/:examId",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"updateExam",
+								"exam",
 								":examId"
 							],
 							"variable": [
@@ -1633,7 +1633,75 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Update exam",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \r\n     \"examLO\": \"Science\",\r\n    \"subject\": \"Science\"\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/exam/:examId",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"exam",
+										":examId"
+									],
+									"variable": [
+										{
+											"key": "examId",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "49"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"31-b5wTORWj0NFgFLysurdi8EUAS9w\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 15 Dec 2021 11:48:58 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Exam has been updated successfully.\"\n}"
+						}
+					]
 				}
 			]
 		},
@@ -1859,12 +1927,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/createRoi",
+							"raw": "{{url}}/roi",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"createRoi"
+								"roi"
 							]
 						}
 					},
@@ -1890,12 +1958,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}/createRoi",
+									"raw": "{{url}}/roi",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"createRoi"
+										"roi"
 									]
 								}
 							},
@@ -1952,13 +2020,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/updateRoi/:roiId",
+							"raw": "{{url}}/roi/:examId",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"updateRoi",
-								":roiId"
+								"roi",
+								":examId"
 							],
 							"query": [
 								{
@@ -1969,8 +2037,8 @@
 							],
 							"variable": [
 								{
-									"key": "roiId",
-									"value": "8"
+									"key": "examId",
+									"value": null
 								}
 							]
 						}
@@ -1991,13 +2059,13 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}/updateRoi/:roiId",
+									"raw": "{{url}}/roi/:examId",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"updateRoi",
-										":roiId"
+										"roi",
+										":examId"
 									],
 									"query": [
 										{
@@ -2008,8 +2076,12 @@
 									],
 									"variable": [
 										{
-											"key": "roiId",
-											"value": "8"
+											"key": "examId",
+											"value": null
+										},
+										{
+											"value": "8",
+											"key": "roiId"
 										}
 									]
 								}
@@ -2058,18 +2130,18 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/deleteRoi/:roiId",
+							"raw": "{{url}}/roi/:examId",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"deleteRoi",
-								":roiId"
+								"roi",
+								":examId"
 							],
 							"variable": [
 								{
-									"key": "roiId",
-									"value": "9"
+									"key": "examId",
+									"value": "3"
 								}
 							]
 						}
@@ -2081,18 +2153,18 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/deleteRoi/:roiId",
+									"raw": "{{url}}/roi/:examId",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"deleteRoi",
-										":roiId"
+										"roi",
+										":examId"
 									],
 									"variable": [
 										{
-											"key": "roiId",
-											"value": "9"
+											"key": "examId",
+											"value": "3"
 										}
 									]
 								}
@@ -2119,7 +2191,7 @@
 								},
 								{
 									"key": "Date",
-									"value": "Wed, 17 Nov 2021 06:28:35 GMT"
+									"value": "Thu, 16 Dec 2021 05:50:01 GMT"
 								},
 								{
 									"key": "Connection",

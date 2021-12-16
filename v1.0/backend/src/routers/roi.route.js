@@ -8,7 +8,7 @@ const { compareSync } = require('bcryptjs')
 const Counter = require('../models/counter')
 
 
-router.post('/createRoi',auth, async (req, res) => {
+router.post('/roi',auth, async (req, res) => {
     try { 
         const inputKeys = Object.keys(req.body)
         const allowedUpdates = ['subject', 'classId', 'type', 'roi']
@@ -53,41 +53,56 @@ router.post('/createRoi',auth, async (req, res) => {
     }
 })
 
-router.patch('/updateRoi/:roiId', auth, async (req, res) => {
+router.patch('/roi/:examId', auth, async (req, res) => {
     try {
         if (Object.keys(req.body) != "roi") return res.status(400).send({ message: 'Invalid Input .' })
-        // const updates = Object.keys(req.body)
-        // const allowedUpdates = ['roi']
-        // const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
     
-        // if (!isValidOperation) {
-        //     return res.status(400).send({ error: 'Invalid Updates' })
-        // }
-        let lookup ={
-            roiId: req.params.roiId
+        const examExist = await Exam.findOne({ examId: req.params.examId }).lean()
+        if (examExist) {
+            const school = await School.findOne({ schoolId: req.school.schoolId })
+            let lookup = {
+                classId: examExist.classId,
+                subject: examExist.subject,
+                state: school.state
         }
-        let roiData = await ROI.findOne(lookup).lean();
-        if(!roiData) return res.status(404).send({"message": "ROI Id does not exist."})
+            
+            const roiData = await ROI.findOne(lookup).lean()
+            if (!roiData) return res.status(404).send({ "message": "ROI Id does not exist." })
         let updateObj = {}
         
-        if(req.body.roi) updateObj["roi"] = req.body.roi
+            if (req.body.roi) updateObj["roi"] = req.body.roi
     
-        await ROI.update(lookup,updateObj).lean();
-        res.status(201).send({"message": 'ROI is updated successfully.'})  
-    } catch (e){   
+            let filter ={
+                roiId: roiData.roiId
+            }
+            await ROI.update(filter, updateObj).lean();
+            res.status(201).send({ "message": 'ROI is updated successfully.' })
+        }
+    } catch (e) {
         res.status(400).send(e)
     }
 })
 
-router.delete('/deleteRoi/:roiId',auth, async (req, res) => {
+router.delete('/roi/:examId', auth, async (req, res) => {
     try {
-        let roi = await ROI.findOneAndRemove({roiId: req.params.roiId})
-        if(roi){
-        res.status(200).send({"message": "ROI has been deleted successfully."})
-        }else{
-            res.status(404).send({"message": "ROI does not exist."})
+        const examExist = await Exam.findOne({ examId: req.params.examId }).lean()
+        if (examExist) {
+            const school = await School.findOne({ schoolId: req.school.schoolId })
+            let lookup = {
+                classId: examExist.classId,
+                subject: examExist.subject,
+                state: school.state
         }
-    } catch (e){   
+            const roiExist = await ROI.findOne(lookup).lean()
+            let roi = await ROI.findOneAndRemove({ roiId: roiExist.roiId })
+            if (roi) {
+                res.status(200).send({ "message": "ROI has been deleted successfully." })
+            } else {
+                res.status(404).send({ "message": "ROI does not exist." })
+            }
+        }
+
+    } catch (e) {
         res.status(400).send(e)
     }
 })

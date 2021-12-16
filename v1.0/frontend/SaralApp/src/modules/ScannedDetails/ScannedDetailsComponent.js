@@ -359,7 +359,7 @@ const ScannedDetailsComponent = ({
                 let stdData = {
                     "studentId": '',
                     "predictedStudentId": loginData.data.school.storeTrainingData ? storeTrainingData[index].studentIdPrediction : '',
-                    "predictionConfidence": loginData.data.school.storeTrainingData ? storeTrainingData[index].predictionConfidence : '',
+                    "predictionConfidence": loginData.data.school.storeTrainingData ? storeTrainingData[index].studentIdPrediction != el.RollNo ? storeTrainingData[index].predictionConfidence : [] : [],
                     "section": filteredData.section,
                     "marksInfo": '',
                     "securedMarks": stdTotalMarks,
@@ -368,7 +368,7 @@ const ScannedDetailsComponent = ({
                 }
 
                 stdData.studentId = el.RollNo
-                let putTrainingData = loginData.data.school.storeTrainingData ? stdData.studentIdTrainingData = storeTrainingData.length > 0 ? el.RollNo != storeTrainingData[index].studentIdPrediction ? storeTrainingData[index].trainingDataSet : '' : '' : ''
+                let putTrainingData = loginData.data.school.storeTrainingData ? stdData.studentIdTrainingData = storeTrainingData.length > 0 ? el.RollNo != storeTrainingData[index].studentIdPrediction ? storeTrainingData[index].trainingDataSet : [] : [] : ''
 
 
                 let stdMarks_info = []
@@ -380,7 +380,7 @@ const ScannedDetailsComponent = ({
                         "predictedMarks": loginData.data.school.storeTrainingData ? value.predictedMarks : "",
                         "predictionConfidence": loginData.data.school.storeTrainingData  ? value.predictionConfidence : ""
                     }
-                    let putTrainingData = loginData.data.school.storeTrainingData ? marks_data.trainingData = value.consolidatedPrediction != value.predictedMarks ? value.trainingDataSet : '' : ''
+                    let putTrainingData = loginData.data.school.storeTrainingData ? marks_data.trainingData = value.consolidatedPrediction != value.predictedMarks ? value.trainingDataSet : [] : ''
                     marks_data.questionId = value.format.name,
                     marks_data.obtainedMarks = value.consolidatedPrediction
                     stdTotalMarks = Number(stdTotalMarks) + Number(value.consolidatedPrediction)
@@ -742,10 +742,10 @@ const ScannedDetailsComponent = ({
                 "questionId": e.format.name,
                 "obtainedMarks": e.consolidatedPrediction,
                 "predictedMarks": loginData.data.school.storeTrainingData ? e.predictedMarks : '',
-                "predictionConfidence": loginData.data.school.storeTrainingData ? e.predictionConfidence : '',
+                "predictionConfidence": loginData.data.school.storeTrainingData ? e.consolidatedPrediction !=e.predictedMarks ? e.predictionConfidence : '' : '',
             }
 
-            let putTrainingData = loginData.data.school.storeTrainingData && e.hasOwnProperty("trainingDataSet") ? data.trainingData = e.consolidatedPrediction !=e.predictedMarks ? e.trainingDataSet : '' : ''
+            let putTrainingData = loginData.data.school.storeTrainingData && e.hasOwnProperty("trainingDataSet") ? data.trainingData = e.consolidatedPrediction !=e.predictedMarks ? e.trainingDataSet : [] : []
             objects.push(data)
         })
 
@@ -755,6 +755,11 @@ const ScannedDetailsComponent = ({
             }
         })
 
+        let maxObtainedTrainingData = ocrLocalResponse.layout.cells.filter((element) => {
+            if (element.format.name === elements[2] || element.format.name === elements[3]) {
+                return true
+            }
+        })
 
         let Studentmarks = objects;
 
@@ -765,7 +770,7 @@ const ScannedDetailsComponent = ({
             "studentsMarkInfo": [
                 {
                     "predictedStudentId":loginData.data.school.storeTrainingData ? storeTrainingData[0].studentIdPrediction : '',
-                    "predictionConfidence":loginData.data.school.storeTrainingData ? storeTrainingData[0].predictionConfidence : '',
+                    "predictionConfidence":loginData.data.school.storeTrainingData ? storeTrainingData[0].studentIdPrediction != studentId ? storeTrainingData[0].predictionConfidence : [] : [],
                     "section": filteredData.section,
                     "studentId": studentId,
                     "securedMarks": sumOfAllMarks > 0 ? sumOfAllMarks : 0,
@@ -775,7 +780,20 @@ const ScannedDetailsComponent = ({
                 }
             ]
         }
-        let putTrainingData = loginData.data.school.storeTrainingData ? saveObj.studentsMarkInfo[0].studentIdTrainingData = storeTrainingData.length > 0 ? storeTrainingData[0].consolidatedPrediction != studentId ? storeTrainingData[0].trainingDataSet : '' : '' :''
+
+        if (maxObtainedTrainingData.length > 0 && loginData.data.school.storeTrainingData && maxObtainedTrainingData[0].format.name == elements[3] ) {
+            saveObj.studentsMarkInfo[0].maxMarksTrainingData = maxObtainedTrainingData[0].predictedMarks != maxMarksTotal ? maxObtainedTrainingData[0].trainingDataSet : []
+            saveObj.studentsMarkInfo[0].maxMarksPredicted =  maxObtainedTrainingData[0].predictedMarks,
+            saveObj.studentsMarkInfo[0].maxMarksConfidence = maxObtainedTrainingData[0].predictedMarks != maxMarksTotal ?  maxObtainedTrainingData[0].predictionConfidence : []
+
+        } 
+        if (maxObtainedTrainingData.length > 0 && loginData.data.school.storeTrainingData && maxObtainedTrainingData[1].format.name == elements[2]) {
+            saveObj.studentsMarkInfo[0].obtainedMarksTrainingData = maxObtainedTrainingData[1].predictedMarks != sumOfAllMarks ? maxObtainedTrainingData[1].trainingDataSet : []
+            saveObj.studentsMarkInfo[0].obtainedMarksPredicted  =  maxObtainedTrainingData[1].predictedMarks
+            saveObj.studentsMarkInfo[0].obtainedMarksConfidence = maxObtainedTrainingData[1].predictedMarks != sumOfAllMarks ? maxObtainedTrainingData[1].predictionConfidence : []
+        }
+
+        let putTrainingData = loginData.data.school.storeTrainingData ? saveObj.studentsMarkInfo[0].studentIdTrainingData = storeTrainingData.length > 0 ? storeTrainingData[0].consolidatedPrediction != studentId ? storeTrainingData[0].trainingDataSet : [] : [] :''
         if (toggleCheckBox) {
             saveObj.studentsMarkInfo = []
         }

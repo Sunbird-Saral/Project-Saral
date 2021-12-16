@@ -8,7 +8,7 @@ const router = new express.Router()
 
 
 
-router.post('/createStudent', auth, async (req, res) => {
+router.post('/student', auth, async (req, res) => {
     try {
         if(!req.body.studentId)  return res.status(400).send({ error: "Student Id is required." })
         // let commonDigit = "0000000"
@@ -104,7 +104,7 @@ router.post('/fetchStudentsandExamsByQuery', auth, async (req, res) => {
     }
 })
 
-router.delete('/deleteStudentByStudentId/:studentId', async (req, res) => {
+router.delete('/student/:studentId', async (req, res) => {
     try {
         const student = await Student.findOne({ studentId: req.params.studentId })
         if (!student) return res.status(404).send({ message: 'Student Id does not exist.' })
@@ -122,7 +122,7 @@ router.delete('/deleteStudentByStudentId/:studentId', async (req, res) => {
 
 })
 
-router.patch('/updateStudent/:studentId', async (req, res) => {
+router.patch('/student/:studentId', async (req, res) => {
     if (Object.keys(req.body).length === 0) res.status(400).send({ message: 'Validation error.' })
     const inputKey = Object.keys(req.body)
     const allowedUpdates = ['name', 'studentClass']
