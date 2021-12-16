@@ -103,14 +103,14 @@ class SelectDetailsComponent extends Component {
             subjectsData: [],
             filterdataid: [],
             isHidden: false,
-            logmessage:[]
+            logmessage:''
         }
         this.onPress = this.onPress.bind(this);
         this.onBack = this.onBack.bind(this)
     }
 
-    logFunction=() => {
-        let message =  getErrorMessage()
+    logFunction=async () => {
+        let message = await getErrorMessage()
        this.setState({logmessage:message})
     };
     onPress() {
@@ -118,7 +118,6 @@ class SelectDetailsComponent extends Component {
       }
 
     componentDidMount() {
-        this.logFunction()
         const { navigation, scanTypeData } = this.props
         navigation.addListener('willFocus', async payload => {
             BackHandler.addEventListener('hardwareBackPress', this.onBack)
@@ -149,6 +148,7 @@ class SelectDetailsComponent extends Component {
         this.willBlur = navigation.addListener('willBlur', payload =>
             BackHandler.removeEventListener('hardwareBackPress', this.onBack)
         );
+        this.logFunction()
     }
 
     onBack = () => {
@@ -158,30 +158,7 @@ class SelectDetailsComponent extends Component {
         return true
     }
 
-    onLogoutClick = async () => {
-        this.onPressSaveInDB()
-    }
 
-    onPressSaveInDB = async () => {
-        const { loginData } = this.props
-        let data = await getScannedDataFromLocal();
-        if (data != null) {
-            for (const value of data) {
-                let apiObj = new SaveScanData(value, loginData.data.token);
-                this.props.APITransport(apiObj)
-            }
-        }
-        Alert.alert(Strings.message_text, Strings.are_you_sure_you_want_to_logout, [
-            { 'text': Strings.no_text, style: 'cancel' },
-            {
-                'text': Strings.yes_text, onPress: async () => {
-                    this.props.LogoutAction()
-                    this.props.navigation.navigate('auth')
-                    await eraseErrorLogs()                    
-                }
-            }
-        ])
-    }
 
     loader = (flag) => {
         this.setState({

@@ -35,7 +35,7 @@ const ScanHistory = ({
 
     useEffect(async() => {
         let message = await getErrorMessage()
-        setLogmessage(message)
+        setLogmessage(message[0])
     }, []);
     useEffect(() => {
         sumOfLocalData()

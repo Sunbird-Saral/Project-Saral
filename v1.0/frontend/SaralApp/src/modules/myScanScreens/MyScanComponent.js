@@ -35,8 +35,8 @@ class MyScanComponent extends Component {
         this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
     }
 
-    logFunction=() => {
-        let message =  getErrorMessage()
+    logFunction=async() => {
+        let message = await getErrorMessage()
        this.setState({logmessage:message})
     };
 

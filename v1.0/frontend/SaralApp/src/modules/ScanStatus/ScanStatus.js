@@ -67,7 +67,7 @@ const ScanStatus = ({
     );
     useEffect(async() => {
         let message = await getErrorMessage()
-        setLogmessage(message[0])
+        setLogmessage(message)
     }, []);
     useEffect(() => {
         getDataFromLocal()

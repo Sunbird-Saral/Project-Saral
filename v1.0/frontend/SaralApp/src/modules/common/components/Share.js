@@ -8,7 +8,7 @@ import HeaderComponents from './HeaderComponents';
 import { SaveScanData } from '../../../flux/actions/apis/saveScanDataAction';
 import APITransport from '../../../flux/actions/transport/apitransport';
 import { LogoutAction } from '../../../flux/actions/apis/LogoutAction';
-import { getScannedDataFromLocal } from '../../../utils/StorageUtils';
+import { getScannedDataFromLocal,eraseErrorLogs } from '../../../utils/StorageUtils';
 
 const ShareComponent = ({
   loginData,
@@ -33,6 +33,7 @@ const ShareComponent = ({
       {
         'text': Strings.yes_text, onPress: async () => {
             dispatch(LogoutAction())
+            eraseErrorLogs() 
             navigation.navigate('auth')
             
         }
