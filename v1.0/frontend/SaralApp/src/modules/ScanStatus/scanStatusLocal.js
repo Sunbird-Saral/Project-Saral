@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, Text, View, BackHandler, Image, TouchableOpacity, Linking } from 'react-native';
+import { FlatList, Text, View, BackHandler, Image, TouchableOpacity, Share } from 'react-native';
 
 //redux
 import { connect } from 'react-redux';
@@ -21,7 +21,13 @@ import APITransport from '../../flux/actions/transport/apitransport'
 import AppTheme from '../../utils/AppTheme';
 import { getPresentAbsentStudent, getScannedDataFromLocal } from '../../utils/StorageUtils';
 import { Assets } from '../../assets';
-import Share from 'react-native-share';
+// import Share from 'react-native-share';
+
+
+
+
+
+
 
 
 const ScanStatusLocal = ({
@@ -34,7 +40,7 @@ const ScanStatusLocal = ({
     const [unsavedstudentList, setUnsavedstudentList] = useState([])
     const [loacalstutlist, setLoacalstutlist] = useState([])
     const [presentStudentList, setPresentStudentList] = useState([])
-    const data = (JSON.stringify(loacalstutlist[0], null, 2))
+    const data = JSON.stringify(loacalstutlist,null,2)
 
 
     useEffect(
@@ -47,42 +53,51 @@ const ScanStatusLocal = ({
                 BackHandler.removeEventListener('hardwareBackPress', onBackPress);
         }, []),
     );
-
+   
+ 
+    const onShare = async () => {
+        try {
+            loacalstutlist.map((item)=>{
+                const itemdata = item
+                const sharedata = JSON.stringify(itemdata,2)
+                //  console.log('itemdata',JSON.stringify(itemdata,null,2))
+            
+            const result =  Share.share({
+                title: `Saral App v1.0 Marks JSON - SchoolId:${loginData.data.school.schoolId} & Exam Id:${filteredData.examTestID}`,
+                message:
+                    `${JSON.stringify(itemdata,null,2)}`
+            });})
+            if (result.action === Share.sharedAction) {
+                if (result.activityType) {
+                    // shared with activity type of result.activityType
+                } else {
+                    // shared
+                    console.log('shared',result)
+                }
+            } else if (result.action === Share.dismissedAction) {
+                // dismissed
+                console.log('dismissed',result)
+            }
+        } catch (error) {
+            alert(error.message);
+        }
+    };
     // const onShare = async () => {
-    //     try {
-    //         const result = await Share.share({
-    //             title: `Saral App v1.0 Marks JSON - SchoolId:${loginData.data.school.schoolId} & Exam Id:${filteredData.examTestID}`,
-    //             message:
-    //                 `${(data ? data : '')}`
-    //         });
-    //         if (result.action === Share.sharedAction) {
-    //             if (result.activityType) {
-    //                 // shared with activity type of result.activityType
-    //             } else {
-    //                 // shared
-    //                 console.log('shared',result)
-    //             }
-    //         } else if (result.action === Share.dismissedAction) {
-    //             // dismissed
-    //             console.log('dismissed',result)
+    //    const onShare =async ()=> loacalstutlist.map((item)=>{
+    //      const itemdata = JSON.stringify(item)
+    //         const shareOptions ={
+    //               message:`${(itemdata ? itemdata : '')}`
     //         }
-    //     } catch (error) {
-    //         alert(error.message);
-    //     }
-    // };
-    // const onShare = async () => {
-        const onShare = async () => {
-            const shareOptions ={
-                message:`${(data ? data : '')}`
-            }
 
-            try{
-                const ShareResponse = await Share.open(shareOptions);
-            } catch(error) {
-                console.log('error',error)
-            }
-          };
-    // }
+    //         try{
+    //             const ShareResponse = await Share.open(shareOptions);
+    //             console.log('ShareResponse',ShareResponse)
+    //         } catch(error) {
+    //             console.log('error',error)
+    //         }
+    //     //   };
+    //     })
+      
 
     const renderItem = ({ item, index }) => {
         return <ScanStatusLocalList
@@ -169,9 +184,11 @@ const ScanStatusLocal = ({
                     </View>
                 }
                 {loacalstutlist[0] ?
+                
                     <TouchableOpacity onPress={onShare}>
                         <Image style={{ height: 25, width: 25, marginHorizontal: 15, marginVertical: 20 }} source={Assets.Share} />
-                    </TouchableOpacity> :
+                    </TouchableOpacity> 
+                    :
                     null}
             </View>
 
@@ -179,6 +196,7 @@ const ScanStatusLocal = ({
 
             <FlatList
                 data={loacalstutlist && presentStudentList}
+                initialNumToRender={15}
                 renderItem={renderItem}
                 ListEmptyComponent={renderEmptyData}
                 keyExtractor={(item, index) => `${index.toString()}`}
