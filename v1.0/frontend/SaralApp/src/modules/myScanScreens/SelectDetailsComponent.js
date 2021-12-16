@@ -103,7 +103,7 @@ class SelectDetailsComponent extends Component {
             subjectsData: [],
             filterdataid: [],
             isHidden: false,
-            logmessage:''
+            logmessage:[]
         }
         this.onPress = this.onPress.bind(this);
         this.onBack = this.onBack.bind(this)
@@ -744,7 +744,7 @@ class SelectDetailsComponent extends Component {
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
                  <ShareComponent
                  navigation={this.props.navigation}
-                 message={JSON.stringify(this.state.logmessage, null, 2)}
+                 message={this.state.logmessage?JSON.stringify(this.state.logmessage, null, 2):''}
                 
                  />
                 {(loginData && loginData.data) &&

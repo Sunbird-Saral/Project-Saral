@@ -15,6 +15,7 @@ import Spinner from '../common/components/loadingIndicator';
 import ScanHistoryCard from './ScanHistoryCard';
 import ButtonComponent from '../common/components/ButtonComponent';
 import ShareComponent from '../common/components/Share';
+import APITransport from '../../flux/actions/transport/apitransport';
 import { collectErrorLogs } from '../CollectErrorLogs';
 
 import { ScrollView } from 'react-native-gesture-handler';
@@ -34,7 +35,7 @@ const ScanHistory = ({
 
     useEffect(async() => {
         let message = await getErrorMessage()
-        setLogmessage(message[0])
+        setLogmessage(message)
     }, []);
     useEffect(() => {
         sumOfLocalData()
@@ -83,7 +84,7 @@ const ScanHistory = ({
         <View style={styles.container}>
               <ShareComponent
                  navigation={navigation}
-                 message={JSON.stringify(logmessage, null, 2)}
+                 message={logmessage?JSON.stringify(logmessage, null, 2):''}
                  />
                  {/* <ScrollView> */}
             

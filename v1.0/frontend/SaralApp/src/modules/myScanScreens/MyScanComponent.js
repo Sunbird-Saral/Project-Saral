@@ -249,7 +249,7 @@ class MyScanComponent extends Component {
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
                  <ShareComponent
                  navigation={this.props.navigation}
-                  message={JSON.stringify(this.state.logmessage, null, 2)}
+                  message={this.state.logmessage?JSON.stringify(this.state.logmessage, null, 2):''}
                  />
                <View>
                 {

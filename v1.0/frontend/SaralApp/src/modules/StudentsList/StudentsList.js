@@ -67,7 +67,7 @@ const StudentsList = ({
 useEffect(async() => {
     studentData()
     let message = await getErrorMessage()
-    setLogmessage(message[0])
+    setLogmessage(message)
 }, []);
 
 
@@ -276,7 +276,7 @@ useEffect(async() => {
         <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
              <ShareComponent
                  navigation={navigation}
-                 message={JSON.stringify(logmessage,null, 2)}
+                 message={logmessage?JSON.stringify(logmessage,null, 2):''}
                 
                  />
             {(loginData && loginData.data) &&

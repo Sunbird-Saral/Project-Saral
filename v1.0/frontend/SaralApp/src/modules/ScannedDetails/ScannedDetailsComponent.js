@@ -72,7 +72,7 @@ const ScannedDetailsComponent = ({
 
     useEffect(async() => {
         let message = await getErrorMessage()
-        setLogmessage({message})
+        setLogmessage(message)
     }, []);
 
 
@@ -792,17 +792,19 @@ const ScannedDetailsComponent = ({
     }
 
     return (
-        <View style={{ flex: 1 }}>
-              <ShareComponent
-                 navigation={navigation}
-                 message={JSON.stringify(logmessage, null, 2)}
-                 />
+        <View style={{flex:1 }}>
+             
+                 <View style={{flex:1}}>
             <ScrollView
                 contentContainerStyle={{ backgroundColor: AppTheme.BACKGROUND_COLOR, paddingBottom: '15%' }}
                 showsVerticalScrollIndicator={false}
                 bounces={false}
                 keyboardShouldPersistTaps={'handled'}
             >
+                 <ShareComponent
+                 navigation={navigation}
+                 message={logmessage?JSON.stringify(logmessage, null, 2):''}
+                 />
                 {
                     !summary &&
                     <View>
@@ -942,6 +944,7 @@ const ScannedDetailsComponent = ({
 
                 {isLoading && <Spinner animating={isLoading} iconShow={false} />}
             </ScrollView>
+            </View>
         </View>
     );
 }
@@ -961,7 +964,6 @@ const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
         APITransport: APITransport,
         OcrLocalResponseAction: OcrLocalResponseAction,
-        collectErrorLogs:collectErrorLogs
     }, dispatch)
 }
 
