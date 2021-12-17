@@ -14,6 +14,7 @@ const ShareComponent = ({
   loginData,
   message,
   navigation,
+  multiBrandingData
 }) => {
   const [ishidden, setIshidden] = useState(false)
   const dispatch = useDispatch()
@@ -66,8 +67,8 @@ const ShareComponent = ({
     <View style={{width:'-10%'}}>
       <View style={styles.imageViewContainer}>
       <TouchableOpacity onPress={()=>setIshidden(!ishidden)}>
-        <View style={styles.imageContainerStyle}>
-          {/* <Text style={{ textAlign: 'center', fontSize: AppTheme.HEADER_FONT_SIZE_LARGE }}>{loginData.data.school.name.charAt(0)}</Text> */}
+        <View style={[styles.imageContainerStyle,{backgroundColor: multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE}]}>
+          <Text style={{ textAlign: 'center', fontSize: AppTheme.HEADER_FONT_SIZE_LARGE }}>{loginData.data.school.name.charAt(0)}</Text>
         </View>
       </TouchableOpacity>
       </View>

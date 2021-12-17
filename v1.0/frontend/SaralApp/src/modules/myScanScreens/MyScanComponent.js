@@ -16,6 +16,7 @@ import ButtonComponent from '../common/components/ButtonComponent';
 import { neglectData } from '../../utils/CommonUtils';
 import ShareComponent from '../common/components/Share';
 import { collectErrorLogs } from '../CollectErrorLogs';
+import { Assets } from '../../assets';
 
 LogBox.ignoreAllLogs()
 
@@ -309,8 +310,7 @@ class MyScanComponent extends Component {
                 </View>
                 </ScrollView>
                 <View style={styles.bottomTabStyle}>
-                </View>
-                <View style={[styles.bottomTabStyle, { height: 50,  marginHorizontal: '25%', backgroundColor: 'transparent', justifyContent: 'center' }]}>
+                <View style={[{elevation:20,  backgroundColor: 'transparent', justifyContent: 'center',alignItems:'center' }]}>
                     <TouchableOpacity style={[styles.subTabContainerStyle]}
                         onPress={this.onScanClick}
                     >
@@ -321,17 +321,18 @@ class MyScanComponent extends Component {
                                 style={[styles.scanSubTabContainerStyle, { backgroundColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE }]}
                             >
                                 <Image
-                                    source={require('../../assets/images/scanIcon.jpeg')}
+                                    source={Assets.ScanButton}
                                     style={styles.tabIconStyle}
                                     resizeMode={'contain'}
                                 />
                             </TouchableOpacity>
                         </TouchableOpacity>
-                        <Text style={[styles.tabLabelStyle, { paddingTop: '10%' }]}>
+                        <Text style={styles.tabLabelStyle}>
                             {Strings.scan_text}
                         </Text>
 
                     </TouchableOpacity>
+                </View>
                 </View>
                 {
                     isLoading
@@ -373,17 +374,16 @@ const styles = {
         position: 'absolute',
         flexDirection: 'row',
         bottom: 0,
-        height: 40,
+        height: 50,
         left: 0,
         right: 0,
         backgroundColor: AppTheme.WHITE,
         elevation: 10,
-        paddingLeft: '5%',
-        paddingRight: '5%',
-        justifyContent: 'space-between'
+        justifyContent:'center',
+        alignItems:'center'
+        
     },
     subTabContainerStyle: {
-        // height: 100,
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -402,7 +402,7 @@ const styles = {
 
     },
     tabLabelStyle: {
-        height: 100,
+        height: 70,
         lineHeight: 40,
         textAlign: 'center',
         fontSize: AppTheme.FONT_SIZE_SMALL,
@@ -411,17 +411,17 @@ const styles = {
         fontWeight: 'bold'
     },
     scanTabContainerStyle: {
-        width: 85,
-        height: 85,
+        width: 80,
+        height: 80,
         position: 'absolute',
-        borderRadius: 45,
+        borderRadius: 40,
         justifyContent: 'center',
         alignItems: 'center'
     },
     scanSubTabContainerStyle: {
         width: '90%',
         height: '90%',
-        bottom: 15,
+        marginBottom: 30,
         backgroundColor: AppTheme.BLUE,
         borderRadius: 45,
         justifyContent: 'center',
