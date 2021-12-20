@@ -2325,7 +2325,7 @@
   "classId": "5",
   "examDate": "05/10/2021",
   "totalMarks": 20,
-  "type": "gujrat_5q_multichoice",
+  "type": "any_1s_5q_multichoice",
   "questions": [
     {
       "questionId": "1",
