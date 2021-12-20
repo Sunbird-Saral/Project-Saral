@@ -212,6 +212,10 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
         Mat tableMat                = mTableCornerDetection.processMat(image);
         mStartTime                  = SystemClock.uptimeMillis();
         isMultiChoiceOMRLayout = isMultiChoiceOMRLayout();
+        if(isMultiChoiceOMRLayout)
+        {
+            DARKNESS_THRESHOLD = 70.0;
+        }
         if (tableMat != null && isHWClassiferAvailable) {
             if (mIgnoreFrameCount < START_PROCESSING_COUNT) {
                 mIgnoreFrameCount ++;
@@ -236,15 +240,19 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                         String roiId        = roiConfig.getString("roiId");
                         JSONObject rect      = roiConfig.getJSONObject("rect");
 
-                        //double percent      = mDetectShaded.getShadedPercentage(tableMat, rect.getInt("top"), rect.getInt("left"), rect.getInt("bottom"), rect.getInt("right"),isMultiChoiceOMRLayout);
+                        double percent      = mDetectShaded.getShadedPercentage(tableMat, rect.getInt("top"), rect.getInt("left"), rect.getInt("bottom"), rect.getInt("right"),isMultiChoiceOMRLayout);
                         Mat omrROI        = mDetectShaded.getROIMat(tableMat, rect.getInt("top"), rect.getInt("left"), rect.getInt("bottom"), rect.getInt("right"));                   
                         Integer answer      = 0;
-                        if (mDetectShaded.isOMRFilled(omrROI, rect.getInt("top"), rect.getInt("left"), rect.getInt("bottom"), rect.getInt("right"))) {
+                        if (percent > DARKNESS_THRESHOLD) {
                             answer = 1;
                         }
+                        // Alternative logic
+                        // if (mDetectShaded.isOMRFilled(omrROI, rect.getInt("top"), rect.getInt("left"), rect.getInt("bottom"), rect.getInt("right"))) {
+                        //     answer = 1;
+                        // }
                         mRoiMatBase64.put(roiId,createBase64FromMat(omrROI));
                         mPredictedOMRs.put(roiId, answer.toString());
-                        Log.d(TAG, "key: " + roiId + " answer: " + answer.toString());
+                        Log.d(TAG, "key: " + roiId + " answer: " + answer.toString()+" percent "+percent);
                     }
 
                     if (roiConfig.getString("extractionMethod").equals("NUMERIC_CLASSIFICATION")) {
