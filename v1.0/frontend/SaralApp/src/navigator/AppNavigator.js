@@ -23,7 +23,7 @@ import { storeFactory } from '../flux/store/store'
 import C from '../flux/actions/constants'
 import NetInfo from "@react-native-community/netinfo";
 import PushNotification, { Importance } from "react-native-push-notification";
-import { getScannedDataFromLocal, setErrorMessage, setScannedDataIntoLocal } from "../utils/StorageUtils";
+import { getScannedDataFromLocal, setScannedDataIntoLocal } from "../utils/StorageUtils";
 import { SaveScanData } from "../flux/actions/apis/saveScanDataAction";
 import APITransport from '../flux/actions/transport/apitransport'
 import { Alert } from "react-native";
@@ -169,7 +169,6 @@ const saveDataInDB = async () => {
                     .catch(function (err) {
                         clearTimeout(id)
                         Alert.alert("Something went wrong with background process, please contact Admin")
-                        setErrorMessage(err)
                         storeFactory.dispatch(flagAction(false))
                     });
             });

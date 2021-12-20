@@ -181,8 +181,6 @@ const ScanHistoryCard = ({
                     setIsLoading(false)
                 })
                 .catch(function (err) {
-                    console.warn("Error", err);
-                    console.warn("Error", err.response);
                     Alert.alert("Something Went Wrong")
                     setIsLoading(false)
                     clearTimeout(id)
