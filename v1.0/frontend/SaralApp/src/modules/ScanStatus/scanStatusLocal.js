@@ -74,7 +74,7 @@ const ScanStatusLocal = ({
                 // dismissed
             }
         } catch (error) {
-            alert(error.message);
+            Alert.alert("Data size limit exceeded,so cant't share it in email.Extract from backend")
         }
     };
       
