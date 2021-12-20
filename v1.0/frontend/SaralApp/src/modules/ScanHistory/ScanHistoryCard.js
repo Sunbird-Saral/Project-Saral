@@ -21,6 +21,7 @@ const HEIGHT = Dimensions.get('window').height;
 const HEIGHT_MODAL = 150;
 const ScanHistoryCard = ({
     showButtons = true,
+    scanstatusbutton = true,
     navigation,
     filteredData,
     scanedData,
@@ -66,6 +67,9 @@ const ScanHistoryCard = ({
         navigation.push('ScanStatus')
     }
 
+    const onPressScanStatus = () => {
+        navigation.push('ScanStatusLocal')
+    }
     const dispatch = useDispatch()
 
     const onPressSaveInDB = async () => {
@@ -197,7 +201,6 @@ const ScanHistoryCard = ({
     Examtypedata = studentsAndExamData.data.exams.filter(function (item) {
         return item.subject == filteredData.response.subject;
     }).map(({ type }) => ({ type }));
-    // console.log('studentsAndExamData', JSON.stringify(studentsAndExamData.data.exams))
 
     return (
         <View>
@@ -334,6 +337,20 @@ const ScanHistoryCard = ({
                                 onPress={onPressContinue}
                             >
                                 <Text style={{ color: AppTheme.WHITE }}>{Strings.continue_scan}</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                }
+                 {
+                    scanstatusbutton
+                    &&
+                    <View style={{bottom:10,  width: '100%', alignItems: 'center' }}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', width: '100%' }}>
+                            <TouchableOpacity
+                                style={{ backgroundColor: AppTheme.GREY, borderRadius: 4, width: '80%', alignItems: 'center', justifyContent: 'center', elevation: 8, paddingVertical: 4 }}
+                                 onPress={onPressScanStatus}
+                            >
+                                <Text style={{ color: AppTheme.WHITE }}>{Strings.scan_status}</Text>
                             </TouchableOpacity>
                         </View>
                     </View>

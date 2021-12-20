@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, BackHandler, Alert } from 'react-native';
+import { View, ScrollView, Text, BackHandler, Alert,TouchableOpacity} from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -100,10 +100,15 @@ class SelectDetailsComponent extends Component {
             calledAbsentStatus: false,
             absentStatusPayload: null,
             subjectsData: [],
-            filterdataid: []
+            filterdataid: [],
+            isHidden: false
         }
+        this.onPress = this.onPress.bind(this);
         this.onBack = this.onBack.bind(this)
     }
+    onPress() {
+        this.setState({isHidden: !this.state.isHidden})
+      }
 
     componentDidMount() {
         const { navigation, scanTypeData } = this.props
@@ -705,13 +710,16 @@ class SelectDetailsComponent extends Component {
             this.setState({ dateVisible: false })
         }
     }
+   
 
     render() {
         const { navigation, isLoading, defaultSelected, classList, classListIndex, selectedClass, sectionList, sectionListIndex, selectedSection, pickerDate, selectedDate, subArr, selectedSubject, subIndex, errClass, errSub, errDate, errSection, sectionValid, dateVisible, examTestID } = this.state
         const { loginData } = this.props
+      
         return (
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
-                <HeaderComponent
+               
+                    <HeaderComponent
                     logoutHeaderText={Strings.logout_text}
                     titletextstyle={{ color: AppTheme.WHITE }}
                     customLogoutTextStyle={{ color: AppTheme.GREY }}
@@ -863,8 +871,24 @@ const styles = {
         lineHeight: 35
     },
     nxtBtnStyle: {
+    },
+    imageViewContainer: {
 
-    }
+        alignItems: 'flex-end',
+        backgroundColor: '#fff'
+        // justifyContent:'center'
+    },
+    imageContainerStyle: {
+        padding: 5,
+        marginRight: 10,
+        height: 50,
+        width: 50,
+        borderRadius: 45,
+        borderWidth: 1,
+        borderColor: AppTheme.TAB_BORDER,
+        justifyContent: 'center',
+        backgroundColor: AppTheme.TAB_BORDER
+    },
 }
 
 const mapStateToProps = (state) => {

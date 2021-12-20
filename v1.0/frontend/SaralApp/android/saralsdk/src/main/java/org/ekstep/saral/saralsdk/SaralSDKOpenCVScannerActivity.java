@@ -246,6 +246,10 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                         if (percent > DARKNESS_THRESHOLD) {
                             answer = 1;
                         }
+                        // Alternative logic
+                        // if (mDetectShaded.isOMRFilled(omrROI, rect.getInt("top"), rect.getInt("left"), rect.getInt("bottom"), rect.getInt("right"))) {
+                        //     answer = 1;
+                        // }
                         mRoiMatBase64.put(roiId,createBase64FromMat(omrROI));
                         mPredictedOMRs.put(roiId, answer.toString());
                         Log.d(TAG, "key: " + roiId + " answer: " + answer.toString()+" percent "+percent);

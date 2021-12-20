@@ -29,6 +29,8 @@ import APITransport from '../flux/actions/transport/apitransport'
 import { Alert } from "react-native";
 import axios from "axios";
 import Strings from "../utils/Strings";
+import ScanStatusLocal from "../modules/ScanStatus/scanStatusLocal";
+
 
 const AuthStack = createStackNavigator({
     login: {
@@ -70,6 +72,9 @@ const MainStack = createStackNavigator(
         },
         ScanStatus: {
             screen: ScanStatus
+        },
+        ScanStatusLocal: {
+            screen: ScanStatusLocal
         },
         ScannedDetailsComponent: {
             screen: ScannedDetailsComponent
