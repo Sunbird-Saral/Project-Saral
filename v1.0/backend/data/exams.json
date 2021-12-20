@@ -1465,7 +1465,7 @@
   "classId": "3",
   "examDate": "05/10/2021",
   "totalMarks": 20,
-  "type": "PAT",
+  "type": "any_1s_34q",
   "questions": [
     {
       "questionId": "1",
@@ -1646,7 +1646,7 @@
   "classId": "3",
   "examDate": "06/10/2021",
   "totalMarks": 20,
-  "type": "PAT",
+  "type": "any_1s_34q",
   "questions": [
     {
       "questionId": "1",
@@ -1827,7 +1827,7 @@
   "classId": "3",
   "examDate": "07/10/2021",
   "totalMarks": 20,
-  "type": "PAT",
+  "type": "any_1s_34q",
   "questions": [
     {
       "questionId": "1",

@@ -18061,7 +18061,7 @@
 },{
   "subject": "Maths",
   "classId": "2",
-  "type": "SAT",
+  "type": "any_1s_10q",
   "roi": {
     "layout": {
         "version": "1.0",
@@ -19159,17 +19159,17 @@
         ]
     }
   },
-  "state": "any_1s_10q",
+  "state": "odisha",
   "roiId": "10"
 },
 {
     "subject": "Hindi",
     "classId": "3",
-    "type": "PAT",
+    "type": "any_1s_34q",
     "roi": {
         "layout": {
             "version": "1.0",
-            "name": "GUJRAT PAT Exam Sheet Form",
+            "name": "ANY1S34Q PAT Exam Sheet Form",
             "cells": [
                 {
                     "cellId": "1",
@@ -20706,7 +20706,7 @@
   },{
     "subject": "Maths",
     "classId": "3",
-    "type": "PAT",
+    "type": "any_1s_34q",
     "roi": {
         "layout": {
             "version": "1.0",
@@ -22247,7 +22247,7 @@
   },{
     "subject": "English",
     "classId": "3",
-    "type": "PAT",
+    "type": "any_1s_34q",
     "roi": {
         "layout": {
             "version": "1.0",
