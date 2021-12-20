@@ -1131,7 +1131,7 @@
   "classId": "2",
   "examDate": "01/10/2021",
   "totalMarks": 20,
-  "type": "SAT",
+  "type": "any_1s_10q",
   "questions": [
     {
       "questionId": "1",
@@ -1242,7 +1242,7 @@
   "classId": "3",
   "examDate": "24/09/2021",
   "totalMarks": 20,
-  "type": "SAT",
+  "type": "any_1s_10q",
   "questions": [
     {
       "questionId": "1",
@@ -1353,7 +1353,7 @@
   "classId": "2",
   "examDate": "02/10/2021",
   "totalMarks": 20,
-  "type": "SAT",
+  "type": "any_1s_10q",
   "questions": [
     {
       "questionId": "1",

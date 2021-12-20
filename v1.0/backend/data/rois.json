@@ -15855,11 +15855,11 @@
 {
   "subject": "Hindi",
   "classId": "2",
-  "type": "SAT",
+  "type": "any_1s_10q",
   "roi": {
     "layout": {
         "version": "1.0",
-        "name": "Odisha SAT Exam Sheet Form",
+        "name": "ANY1S10Q SAT Exam Sheet Form",
         "cells": [
             {
                 "cellId": "1",
@@ -16958,11 +16958,11 @@
 },{
   "subject": "Hindi",
   "classId": "3",
-  "type": "SAT",
+  "type": "any_1s_10q",
   "roi": {
     "layout": {
         "version": "1.0",
-        "name": "Odisha SAT Exam Sheet Form",
+        "name": "ANY1S10Q SAT Exam Sheet Form",
         "cells": [
             {
                 "cellId": "1",
@@ -18065,7 +18065,7 @@
   "roi": {
     "layout": {
         "version": "1.0",
-        "name": "Odisha SAT Exam Sheet Form",
+        "name": "ANY1S10Q SAT Exam Sheet Form",
         "cells": [
             {
                 "cellId": "1",
@@ -19159,7 +19159,7 @@
         ]
     }
   },
-  "state": "odisha",
+  "state": "any_1s_10q",
   "roiId": "10"
 },
 {
