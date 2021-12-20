@@ -4,6 +4,7 @@ import AppTheme from '../../utils/AppTheme';
 import { getScannedDataFromLocal } from '../../utils/StorageUtils';
 
 import { styles } from './StudentsDataStyle';
+import Strings from '../../utils/Strings';
 
 const StudentsDataComponent = ({
     item,
@@ -60,7 +61,7 @@ const StudentsDataComponent = ({
         }
         // console.log("apistatus",apiStatus)
         if (apiStatus && apiStatus.progress == true && apiStatus.message != null) {
-            Alert.alert("Something went wrong , contact Admin")
+            Alert.alert(Strings.something_went_wrong_please_try_again)
         }
 
         if (isStudentPresent && apiStatus.progress==false) {
