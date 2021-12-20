@@ -67,14 +67,14 @@ const ScanStatusLocal = ({
                     // shared with activity type of result.activityType
                 } else {
                     // shared
-                    Alert.alert("Data size limit exceeded,so cant't share it in email.Extract from backend")
+                    Alert.alert(Strings.shareDataExceed)
                     //  console.log('jjjjj',result)
                 }
             } else if (result.action === Share.dismissedAction) {
                 // dismissed
             }
         } catch (error) {
-            Alert.alert("Data size limit exceeded,so cant't share it in email.Extract from backend")
+            Alert.alert(Strings.shareDataExceed)
         }
     };
       
