@@ -2,11 +2,11 @@
 [{
   "subject": "Hindi",
   "classId": "2",
-  "type": "up_hindi_4s",
+  "type": "hindi_4s_20q_omr",
   "roi": {
     "layout": {
         "version": "1.0",
-        "name": "UP HINDI4S Exam Sheet Form",
+        "name": "HINDI4S20QOMR Exam Sheet Form",
         "cells": [
             {
                 "cellId": "1",
@@ -2572,11 +2572,11 @@
 },{
   "subject": "Hindi",
   "classId": "3",
-  "type": "up_hindi_3s",
+  "type": "hindi_3s_30q_omr",
   "roi": {
     "layout": {
         "version": "1.0",
-        "name": "UP HINDI3S Exam Sheet Form",
+        "name": "HINDI3S30QOMR Exam Sheet Form",
         "cells": [
             {
                 "cellId": "1",
@@ -5313,7 +5313,7 @@
 },{
   "subject": "Multi-Subject",
   "classId": "4",
-  "type": "SAT",
+  "type": "multisubject_1s_10q",
   "roi": {
     "layout": {
         "version": "1.0",
@@ -6729,11 +6729,11 @@
 {
   "subject": "Hindi",
   "classId": "5",
-  "type": "up_hindi_4s",
+  "type": "hindi_4s_20q_omr",
   "roi": {
     "layout": {
         "version": "1.0",
-        "name": "UP HINDI4S Exam Sheet Form",
+        "name": "HINDI4S20QOMR Exam Sheet Form",
         "cells": [
             {
                 "cellId": "1",
@@ -9299,11 +9299,11 @@
 },{
   "subject": "Hindi",
   "classId": "6",
-  "type": "up_hindi_4s",
+  "type": "hindi_4s_20q_omr",
   "roi": {
     "layout": {
         "version": "1.0",
-        "name": "UP HINDI4S Exam Sheet Form",
+        "name": "HINDI4S20Q Exam Sheet Form",
         "cells": [
             {
                 "cellId": "1",
@@ -11869,11 +11869,11 @@
 },{
   "subject": "Hindi",
   "classId": "7",
-  "type": "up_hindi_4s",
+  "type": "hindi_4s_20q_omr",
   "roi": {
     "layout": {
         "version": "1.0",
-        "name": "UP HINDI4S Exam Sheet Form",
+        "name": "HINDI4S20Q Exam Sheet Form",
         "cells": [
             {
                 "cellId": "1",
@@ -14439,11 +14439,11 @@
 },{
   "subject": "Multi-Subject",
   "classId": "8",
-  "type": "SAT",
+  "type": "multisubject_1s_10q",
   "roi": {
     "layout": {
         "version": "1.0",
-        "name": "UP SAT Exam Sheet Form",
+        "name": "MULTISUBJECT1S10Q Exam Sheet Form",
         "cells": [
             {
                 "cellId": "1",
@@ -15855,11 +15855,11 @@
 {
   "subject": "Hindi",
   "classId": "2",
-  "type": "SAT",
+  "type": "any_1s_10q",
   "roi": {
     "layout": {
         "version": "1.0",
-        "name": "Odisha SAT Exam Sheet Form",
+        "name": "ANY1S10Q SAT Exam Sheet Form",
         "cells": [
             {
                 "cellId": "1",
@@ -16958,11 +16958,11 @@
 },{
   "subject": "Hindi",
   "classId": "3",
-  "type": "SAT",
+  "type": "any_1s_10q",
   "roi": {
     "layout": {
         "version": "1.0",
-        "name": "Odisha SAT Exam Sheet Form",
+        "name": "ANY1S10Q SAT Exam Sheet Form",
         "cells": [
             {
                 "cellId": "1",
@@ -18061,11 +18061,11 @@
 },{
   "subject": "Maths",
   "classId": "2",
-  "type": "SAT",
+  "type": "any_1s_10q",
   "roi": {
     "layout": {
         "version": "1.0",
-        "name": "Odisha SAT Exam Sheet Form",
+        "name": "ANY1S10Q SAT Exam Sheet Form",
         "cells": [
             {
                 "cellId": "1",
@@ -19165,11 +19165,11 @@
 {
     "subject": "Hindi",
     "classId": "3",
-    "type": "PAT",
+    "type": "any_1s_34q",
     "roi": {
         "layout": {
             "version": "1.0",
-            "name": "GUJRAT PAT Exam Sheet Form",
+            "name": "ANY1S34Q PAT Exam Sheet Form",
             "cells": [
                 {
                     "cellId": "1",
@@ -20706,7 +20706,7 @@
   },{
     "subject": "Maths",
     "classId": "3",
-    "type": "PAT",
+    "type": "any_1s_34q",
     "roi": {
         "layout": {
             "version": "1.0",
@@ -22247,7 +22247,7 @@
   },{
     "subject": "English",
     "classId": "3",
-    "type": "PAT",
+    "type": "any_1s_34q",
     "roi": {
         "layout": {
             "version": "1.0",
@@ -23789,11 +23789,11 @@
   {
     "subject": "Hindi",
     "classId": "2",
-    "type": "up_hindi_8s",
+    "type": "hindi_8s_13q_omr",
     "roi": {
         "layout": {
             "version": "1.0",
-            "name": "UP HINDI8S Exam Sheet Form",
+            "name": "HINDI8S13QOMR Exam Sheet Form",
             "cells": [
                 {
                     "cellId": "1",
@@ -27404,11 +27404,11 @@
 {
     "subject": "Hindi",
     "classId": "4",
-    "type": "gujrat_hindi_1s",
+    "type": "any_1s_12q ",
     "roi": {
         "layout": {
             "version": "1.0",
-            "name": "GUJRAT HINDI1S Exam Sheet Form",
+            "name": "ANY1S12Q Exam Sheet Form",
             "cells": [
                 {
                     "cellId": "1",
@@ -27986,11 +27986,11 @@
 {
     "subject": "Hindi",
     "classId": "5",
-    "type": "gujrat_5q_multichoice",
+    "type": "any_1s_5q_multichoice",
     "roi": {
         "layout": {
             "version": "1.0",
-            "name": "Gujrat 5Q MultiChoice Exam Sheet Form",
+            "name": "ANY1S5QMULTICHOICE Exam Sheet Form",
             "cells": [
                 {
                     "cellId": "1",
