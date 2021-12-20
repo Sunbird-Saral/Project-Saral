@@ -4,7 +4,7 @@
   "classId": "2",
   "examDate": "23/09/2021",
   "totalMarks": 20,
-  "type": "up_hindi_4s",
+  "type": "hindi_4s_20q_omr",
   "questions": [
     {
       "questionId": "1",
@@ -115,7 +115,7 @@
   "classId": "3",
   "examDate": "24/09/2021",
   "totalMarks": 20,
-  "type": "up_hindi_3s",
+  "type": "hindi_3s_30q_omr",
   "questions": [
     {
       "questionId": "1",
@@ -276,7 +276,7 @@
   "classId": "4",
   "examDate": "28/09/2021",
   "totalMarks": 20,
-  "type": "SAT",
+  "type": "multisubject_1s_10q",
   "questions": [
     {
       "questionId": "1",
@@ -537,7 +537,7 @@
   "classId": "5",
   "examDate": "29/09/2021",
   "totalMarks": 20,
-  "type": "up_hindi_4s",
+  "type": "hindi_4s_20q_omr",
   "questions": [
     {
       "questionId": "1",
@@ -648,7 +648,7 @@
   "classId": "6",
   "examDate": "28/09/2021",
   "totalMarks": 20,
-  "type": "up_hindi_4s",
+  "type": "hindi_4s_20q_omr",
   "questions": [
     {
       "questionId": "1",
@@ -759,7 +759,7 @@
   "classId": "7",
   "examDate": "29/09/2021",
   "totalMarks": 20,
-  "type": "up_hindi_4s",
+  "type": "hindi_4s_20q_omr",
   "questions": [
     {
       "questionId": "1",
@@ -870,7 +870,7 @@
   "classId": "8",
   "examDate": "29/09/2021",
   "totalMarks": 20,
-  "type": "SAT",
+  "type": "multisubject_1s_10q",
   "questions": [
     {
       "questionId": "1",
@@ -2009,7 +2009,7 @@
   "classId": "2",
   "examDate": "11/10/2021",
   "totalMarks": 20,
-  "type": "up_hindi_8s",
+  "type": "hindi_8s_13q_omr",
   "questions": [
     {
       "questionId": "1",
@@ -2070,7 +2070,7 @@
   "classId": "2",
   "examDate": "12/10/2021",
   "totalMarks": 20,
-  "type": "up_hindi_8s",
+  "type": "hindi_8s_13q_omr",
   "questions": [
     {
       "questionId": "1",
@@ -2131,7 +2131,7 @@
   "classId": "2",
   "examDate": "13/10/2021",
   "totalMarks": 20,
-  "type": "up_hindi_8s",
+  "type": "hindi_8s_13q_omr",
   "questions": [
     {
       "questionId": "1",
@@ -2192,7 +2192,7 @@
   "classId": "3",
   "examDate": "14/10/2021",
   "totalMarks": 20,
-  "type": "up_hindi_8s",
+  "type": "hindi_8s_13q_omr",
   "questions": [
     {
       "questionId": "1",
