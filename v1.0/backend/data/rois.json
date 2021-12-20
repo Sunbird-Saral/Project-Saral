@@ -27404,11 +27404,11 @@
 {
     "subject": "Hindi",
     "classId": "4",
-    "type": "gujrat_hindi_1s",
+    "type": "any_1s_12q ",
     "roi": {
         "layout": {
             "version": "1.0",
-            "name": "GUJRAT HINDI1S Exam Sheet Form",
+            "name": "ANY1S12Q Exam Sheet Form",
             "cells": [
                 {
                     "cellId": "1",
