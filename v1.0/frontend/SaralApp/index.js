@@ -12,9 +12,9 @@ import { eraseErrorLogs } from './src/utils/StorageUtils';
  AppState.addEventListener("change", nextAppState => {
     if (nextAppState === "active") {
     }
-    if (nextAppState === "background") {
-        eraseErrorLogs()
-    }
+    // if (nextAppState === "background") {
+    //     eraseErrorLogs()
+    // }
 });
 
 

@@ -1,5 +1,5 @@
 import React, { Component, useCallback, useState,useEffect } from 'react';
-import { Share, Alert,View,TouchableOpacity,Text } from 'react-native';
+import { Share, Alert,View,TouchableOpacity,Text,Modal } from 'react-native';
 import Strings from '../../../utils/Strings';
 import AppTheme from '../../../utils/AppTheme';
 import { connect, useDispatch } from 'react-redux';
@@ -14,8 +14,10 @@ const ShareComponent = ({
   loginData,
   message,
   navigation,
-  multiBrandingData
+  multiBrandingData,
+
 }) => {
+  const [isModalVisible, setIsModalVisible] = useState(false)
   const [ishidden, setIshidden] = useState(false)
   const dispatch = useDispatch()
   
@@ -42,14 +44,15 @@ const ShareComponent = ({
   }
 
   const ShareCompo = async () => {
-  const  errorMessage = await getErrorMessage()
+  const  message = await getErrorMessage()
+  const errorMessage = JSON.stringify(message , null ,2)
 
     console.log('errorMessage',errorMessage)
     try {
       const result = await Share.share({
         title: `Saral App v1.0 logs collection`,
         message:
-          `${JSON.stringify(errorMessage ? errorMessage : null)}`
+          `${errorMessage ? errorMessage : ''}`
 
       });
       if (result.action === Share.sharedAction) {
@@ -57,7 +60,7 @@ const ShareComponent = ({
           // shared with activity type of result.activityType
          
         } else {
-          console.log('>>>>>>>>>',JSON.stringify(errorMessage))
+         
           // shared
         }
       }
@@ -66,37 +69,45 @@ const ShareComponent = ({
     }
   }
       
-  const onShare = async () => {
-    try {
-      const result = await Share.share({
-        title: `Saral App v1.0 logs collection`,
-        message:
-          `${JSON.stringify(errorMessage)}`
-        });
-        if (result.action === Share.sharedAction) {
-            if (result.activityType) {
-                // shared with activity type of result.activityType
-            } else {
-                // shared
-                Alert.alert(Strings.shareDataExceed)
-                //  console.log('jjjjj',result)
-            }
-        } else if (result.action === Share.dismissedAction) {
-            // dismissed
-        }
-    } catch (error) {
-        Alert.alert(Strings.shareDataExceed)
-    }
-};
+//   const onShare = async () => {
+//     try {
+//       const result = await Share.share({
+//         title: `Saral App v1.0 logs collection`,
+//         message:
+//           `${JSON.stringify(errorMessage)}`
+//         });
+//         if (result.action === Share.sharedAction) {
+//             if (result.activityType) {
+//                 // shared with activity type of result.activityType
+//             } else {
+//                 // shared
+//                 Alert.alert(Strings.shareDataExceed)
+//                 //  console.log('jjjjj',result)
+//             }
+//         } else if (result.action === Share.dismissedAction) {
+//             // dismissed
+//         }
+//     } catch (error) {
+//         Alert.alert(Strings.shareDataExceed)
+//     }
+// };
   return (
     <View style={{width:'-10%'}}>
+       {/* <Modal
+                transparent={true}
+                animationType='fade'
+                 visible={isModalVisible}
+            > */}
       <View style={styles.imageViewContainer}>
+     
       <TouchableOpacity onPress={()=>setIshidden(!ishidden)}>
         <View style={[styles.imageContainerStyle,{backgroundColor: multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE}]}>
           <Text style={{ textAlign: 'center', fontSize: AppTheme.HEADER_FONT_SIZE_LARGE }}>{loginData.data.school.name.charAt(0)}</Text>
         </View>
       </TouchableOpacity>
       </View>
+      {/* </Modal> */}
+      
      { ishidden ?
       <HeaderComponents
         supportTeamText={'Support'}
