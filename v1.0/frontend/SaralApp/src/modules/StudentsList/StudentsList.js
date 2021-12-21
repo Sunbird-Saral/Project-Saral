@@ -227,12 +227,38 @@ useEffect(async() => {
 
         setStudentsExamData(stud)
 
-        // setIsLoading(true)
         let dataPayload = absentPresentStatus
         let apiObj = new SaveScanData(dataPayload, token)
+        setIsLoading(true)
         dispatch(APITransport(apiObj));
-        setPresentAbsentStudent(allStudentData)
-        navigation.push('ScanHistory');
+        saveStudentData(apiObj)
+    }
+
+    const saveStudentData = (api) => {
+        if (api.method === 'PUT') {
+            let apiResponse = null
+            const source = axios.CancelToken.source()
+            const id = setTimeout(() => {
+                if (apiResponse === null) {
+                    source.cancel('The request timed out.');
+                }
+            }, 60000);
+            axios.put(api.apiEndPoint(), api.getBody(), { headers: api.getHeaders(), cancelToken: source.token },)
+                .then(function (res) {
+                    setIsLoading(false)
+                    setPresentAbsentStudent(allStudentData)
+                    navigation.push('ScanHistory');
+                    apiResponse = res
+                    clearTimeout(id)
+                    api.processResponse(res)
+                    dispatch(dispatchAPIAsync(api));
+                })
+                .catch(function (err) {
+                    Alert.alert(Strings.something_went_wrong_please_try_again)
+                    setIsLoading(false)
+                    clearTimeout(id)
+                });
+        }
     }
 
     const navigateToNext = () => {
