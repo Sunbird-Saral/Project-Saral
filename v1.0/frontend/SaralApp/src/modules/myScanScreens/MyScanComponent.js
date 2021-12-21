@@ -15,7 +15,6 @@ import { getScannedDataFromLocal,getErrorMessage } from '../../utils/StorageUtil
 import ButtonComponent from '../common/components/ButtonComponent';
 import { neglectData } from '../../utils/CommonUtils';
 import ShareComponent from '../common/components/Share';
-import { collectErrorLogs } from '../CollectErrorLogs';
 import { Assets } from '../../assets';
 
 LogBox.ignoreAllLogs()
@@ -451,8 +450,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        OcrLocalResponseAction: OcrLocalResponseAction,
-        collectErrorLogs:collectErrorLogs
+        OcrLocalResponseAction: OcrLocalResponseAction
     }, dispatch)
 }
 

@@ -64,7 +64,7 @@ const StudentsList = ({
     const prevloginResponse = usePrevious(loginData);
     const prevSaveRes = usePrevious(saveAbsentStudent)
 
-useEffect(async() => {
+useEffect(() => {
     studentData()
 }, []);
 
@@ -103,7 +103,7 @@ useEffect(async() => {
         FetchSavedScannedData(apiObj, loginCred.schoolId, loginCred.password)
     }
 
-    const FetchSavedScannedData = async(api, uname, pass) => {
+    const FetchSavedScannedData = (api, uname, pass) => {
 
         if (api.method === 'POST') {
             let apiResponse = null

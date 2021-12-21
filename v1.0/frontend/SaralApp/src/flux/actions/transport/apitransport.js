@@ -9,7 +9,7 @@ export default function dispatchAPI(api) {
 
 
     if (api.reqType === 'MULTIPART') {
-        return async dispatch => {
+        return  dispatch => {
             dispatch(apiStatusAsync(true, false, ''))
             axios.post(api.apiEndPoint(), api.getFormData(), api.getHeaders())
                 .then(function (res) {
@@ -50,7 +50,7 @@ export default function dispatchAPI(api) {
         // }
         // else 
         if (api.method === 'POST') {
-            return async dispatch => {
+            return  dispatch => {
                 dispatch(apiStatusAsync(true, false, ''))
                 let apiResponse = null
                 const source = axios.CancelToken.source()
@@ -88,7 +88,7 @@ export default function dispatchAPI(api) {
             }
         }
         else if (api.method === "PUT") {
-            return async dispatch => {
+            return  dispatch => {
                 dispatch(apiStatusAsync(true, false, ''))
                 let apiResponse = null
                 const source = axios.CancelToken.source()
@@ -128,7 +128,7 @@ export default function dispatchAPI(api) {
         }
 
         else if (api.method === 'DELETE') {
-            return async dispatch => {
+            return  dispatch => {
                 dispatch(apiStatusAsync(true, false, ''))
                 axios.delete(api.apiEndPoint(), api.getHeaders())
                     .then(function (res) {
@@ -144,7 +144,7 @@ export default function dispatchAPI(api) {
                     });
             }
         } else {
-            return async dispatch => {
+            return dispatch => {
                 dispatch(apiStatusAsync(true, false, ''))
                 let apiResponse = null
                 const source = axios.CancelToken.source()

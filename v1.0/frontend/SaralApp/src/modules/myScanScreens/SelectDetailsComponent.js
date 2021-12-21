@@ -686,27 +686,7 @@ class SelectDetailsComponent extends Component {
             this.setState({ dateVisible: false })
         }
     }
-   
-     onShare = async () => {
-          try {
-            const result = await Share.share({
-              message:
-                `${JSON.stringify(this.props.loginData.data)}`
-            });
-            if (result.action === Share.sharedAction) {
-              if (result.activityType) {
-                // shared with activity type of result.activityType
-              } else {
-                // shared
-              }
-            } else if (result.action === Share.dismissedAction) {
-              // dismissed
-            }
-          } catch (error) {
-            alert(error.message);
-          }
-        };
-     
+    
 
     render() {
         const { navigation, isLoading, defaultSelected, classList, classListIndex, selectedClass, sectionList, sectionListIndex, selectedSection, pickerDate, selectedDate, subArr, selectedSubject, subIndex, errClass, errSub, errDate, errSection, sectionValid, dateVisible, examTestID } = this.state
