@@ -112,7 +112,7 @@ const ScanHistoryCard = ({
 
                 if (apiStatus && apiStatus.error && apiStatus.message != null) {
 
-                    Alert.alert("Something went wrong , contact Admin")
+                    Alert.alert(Strings.contactAdmin)
                     setIsLoading(false)
 
                 } else {

@@ -1,4 +1,4 @@
-import React, { Component, useCallback, useState } from 'react';
+import React, { Component, useCallback, useState,useEffect } from 'react';
 import { Share, Alert,View,TouchableOpacity,Text } from 'react-native';
 import Strings from '../../../utils/Strings';
 import AppTheme from '../../../utils/AppTheme';
@@ -8,7 +8,7 @@ import HeaderComponents from './HeaderComponents';
 import { SaveScanData } from '../../../flux/actions/apis/saveScanDataAction';
 import APITransport from '../../../flux/actions/transport/apitransport';
 import { LogoutAction } from '../../../flux/actions/apis/LogoutAction';
-import { getScannedDataFromLocal,eraseErrorLogs } from '../../../utils/StorageUtils';
+import { getScannedDataFromLocal,eraseErrorLogs,getErrorMessage } from '../../../utils/StorageUtils';
 
 const ShareComponent = ({
   loginData,
@@ -18,10 +18,9 @@ const ShareComponent = ({
 }) => {
   const [ishidden, setIshidden] = useState(false)
   const dispatch = useDispatch()
-
+  
+ 
   const Logoutcall = async () => {
-
-    
     let data = await getScannedDataFromLocal();
     if (data != null) {
       for (const value of data) {
@@ -42,27 +41,53 @@ const ShareComponent = ({
     ])
   }
 
-  const ShareCompo = useCallback(async () => {
+  const ShareCompo = async () => {
+  const  errorMessage = await getErrorMessage()
+
+    console.log('errorMessage',errorMessage)
     try {
       const result = await Share.share({
         title: `Saral App v1.0 logs collection`,
         message:
-          `${message}`
+          `${JSON.stringify(errorMessage ? errorMessage : null)}`
 
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
           // shared with activity type of result.activityType
+         
         } else {
+          console.log('>>>>>>>>>',JSON.stringify(errorMessage))
           // shared
         }
-      } else if (result.action === Share.dismissedAction) {
-        // dismissed
       }
     } catch (error) {
       alert(error.message);
     }
-  }, [message]);
+  }
+      
+  const onShare = async () => {
+    try {
+      const result = await Share.share({
+        title: `Saral App v1.0 logs collection`,
+        message:
+          `${JSON.stringify(errorMessage)}`
+        });
+        if (result.action === Share.sharedAction) {
+            if (result.activityType) {
+                // shared with activity type of result.activityType
+            } else {
+                // shared
+                Alert.alert(Strings.shareDataExceed)
+                //  console.log('jjjjj',result)
+            }
+        } else if (result.action === Share.dismissedAction) {
+            // dismissed
+        }
+    } catch (error) {
+        Alert.alert(Strings.shareDataExceed)
+    }
+};
   return (
     <View style={{width:'-10%'}}>
       <View style={styles.imageViewContainer}>

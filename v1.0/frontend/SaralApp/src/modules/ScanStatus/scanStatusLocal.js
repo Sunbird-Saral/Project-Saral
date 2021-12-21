@@ -74,6 +74,7 @@ useEffect(
             console.log(error.message);
         }
     };
+    
 
     const renderItem = ({ item, index }) => {
         return <ScanStatusLocalList

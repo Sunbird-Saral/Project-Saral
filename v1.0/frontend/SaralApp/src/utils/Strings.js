@@ -92,6 +92,7 @@ export default strings = new LocalizedStrings({
         student_roll_length_error: 'RollNo. should be 7 digit',
         sat_string: 'SAT',
         pat_string: 'PAT',
-        backToDashboard:'Go Back To Dashboard'
+        backToDashboard:'Go Back To Dashboard',
+        contactAdmin:'Something went wrong , contact Admin'
     }
 })
