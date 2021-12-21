@@ -44,6 +44,7 @@ const StudentsList = ({
     saveAbsentStudent,
     multiBrandingData,
     scanedData,
+    apiStatus
 }) => {
 
 
@@ -165,6 +166,7 @@ const StudentsList = ({
                 filteredData={filteredData}
                 setStdArray={setStdArray}
                 stdArray={stdArray}
+                apiStatus={apiStatus}
             />
         )
     }

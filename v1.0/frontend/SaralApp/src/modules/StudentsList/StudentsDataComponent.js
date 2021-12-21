@@ -1,19 +1,21 @@
-import React, {useState } from 'react';
+import React, { useState } from 'react';
 import { Alert, Text, TouchableOpacity, View } from 'react-native';
 import AppTheme from '../../utils/AppTheme';
 import { getScannedDataFromLocal } from '../../utils/StorageUtils';
 
 import { styles } from './StudentsDataStyle';
+import Strings from '../../utils/Strings';
 
 const StudentsDataComponent = ({
     item,
-    themeColor1, 
+    themeColor1,
     themeColor2,
     pabsent,
     stdArray,
     scanedData,
     setStdArray,
-    filteredData
+    filteredData,
+    apiStatus
 }) => {
     const [isPresent, setIsPresent] = useState(pabsent)
 
@@ -57,9 +59,12 @@ const StudentsDataComponent = ({
                 isStudentScannedInLocal = filterStdData[0].studentsMarkInfo.filter((o) => o.studentId == data.studentId)
             }
         }
+        // console.log("apistatus",apiStatus)
+        if (apiStatus && apiStatus.progress == true && apiStatus.message != null) {
+            Alert.alert(Strings.something_went_wrong_please_try_again)
+        }
 
-
-        if (isStudentPresent) {
+        if (isStudentPresent && apiStatus.progress==false) {
             const isSheetScanned = typeof (scanedData) === 'object' && scanedData.data.length > 0 && scanedData.data.filter((o) => o.studentId == data.studentId && o.studentAvailability === true && o.marksInfo.length > 0)
 
             if (isSheetScanned.length > 0 || isStudentScannedInLocal.length > 0) {
@@ -69,7 +74,7 @@ const StudentsDataComponent = ({
                 setIsPresent(false)
                 checkStdAbsPrst(data, chkPresent, filteredData, false)
             }
-        } else if (data.studentAvailability == false) {
+        } else if (data.studentAvailability == false && apiStatus.progress==false) {
             data.studentAvailability = true
             setIsPresent(true)
             checkStdAbsPrst(data, chkPresent, filteredData, true)
@@ -96,9 +101,9 @@ const StudentsDataComponent = ({
                     {
                         isPresent
                             ?
-                            <Text style={[styles.markasAbsent,{ backgroundColor: themeColor1 ? themeColor1 : AppTheme.LIGHT_BLUE }]}>Mark as Absent</Text>
+                            <Text style={[styles.markasAbsent, { backgroundColor: themeColor1 ? themeColor1 : AppTheme.LIGHT_BLUE }]}>Mark as Absent</Text>
                             :
-                            <Text style={[styles.markasPresent,{ backgroundColor: themeColor2 ? themeColor2 : AppTheme.LIGHT_BLUE }]}>Mark as Present</Text>
+                            <Text style={[styles.markasPresent, { backgroundColor: themeColor2 ? themeColor2 : AppTheme.LIGHT_BLUE }]}>Mark as Present</Text>
                     }
                 </TouchableOpacity>
 
