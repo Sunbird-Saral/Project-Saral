@@ -25,22 +25,22 @@ const ShareComponent = ({
   const Logoutcall = async () => {
     let data = await getScannedDataFromLocal();
     if (data != null) {
-      for (const value of data) {
-        let apiObj = new SaveScanData(value, loginData.data.token);
-        dispatch(APITransport(apiObj))
-      }
-    }
     Alert.alert(Strings.message_text, Strings.are_you_sure_you_want_to_logout, [
       { 'text': Strings.no_text, style: 'cancel' },
       {
         'text': Strings.yes_text, onPress: async () => {
+          for (const value of data) {
+            let apiObj = new SaveScanData(value, loginData.data.token);
+            dispatch(APITransport(apiObj))
+          }
             dispatch(LogoutAction())
-            eraseErrorLogs() 
+            await eraseErrorLogs() 
             navigation.navigate('auth')
             
         }
       }
     ])
+  }
   }
 
   const ShareCompo = async () => {
