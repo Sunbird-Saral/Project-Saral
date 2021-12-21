@@ -18,7 +18,7 @@ class Brands extends PureComponent {
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                     <View>
                         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                            <Image style={{ height: 100, width: 100 }} source={this.props.Image ?  { uri: this.props.Image } : Assets.AppLogo}
+                            <Image style={{ height: 100, width: 100 }} source={this.props.Image ?  { uri: this.props.Image } : this.props.Image1}
                                  />
                         </View>
                         <View>
