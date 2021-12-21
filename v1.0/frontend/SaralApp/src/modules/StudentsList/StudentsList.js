@@ -251,6 +251,7 @@ useEffect(async() => {
                     dispatch(dispatchAPIAsync(api));
                 })
                 .catch(function (err) {
+                    collectErrorLogs("StrudentList.js","saveStudentData",api.apiEndPoint(),err,false)
                     Alert.alert(Strings.something_went_wrong_please_try_again)
                     setIsLoading(false)
                     clearTimeout(id)
