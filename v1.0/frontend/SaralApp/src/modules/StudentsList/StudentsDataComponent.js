@@ -4,7 +4,6 @@ import AppTheme from '../../utils/AppTheme';
 import { getScannedDataFromLocal } from '../../utils/StorageUtils';
 import Strings from '../../utils/Strings';
 import { styles } from './StudentsDataStyle';
-import Strings from '../../utils/Strings';
 
 const StudentsDataComponent = ({
     item,
