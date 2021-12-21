@@ -34,13 +34,9 @@ const ScanStatusLocal = ({
     const [unsavedstudentList, setUnsavedstudentList] = useState([])
     const [loacalstutlist, setLoacalstutlist] = useState([])
     const [presentStudentList, setPresentStudentList] = useState([])
-    const [logmessage,setLogmessage] = useState()
+    
     const data =(JSON.stringify(loacalstutlist[0],null, 2))
    
-    useEffect(async() => {
-        let message = await getErrorMessage()
-        setLogmessage(message)
-    }, []);
 
 
 useEffect(
@@ -143,7 +139,6 @@ useEffect(
         <View style={styles.container}>
              <ShareComponent
                  navigation={navigation}
-                  message={logmessage?JSON.stringify(logmessage, null, 2):''}
                  />
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
             {

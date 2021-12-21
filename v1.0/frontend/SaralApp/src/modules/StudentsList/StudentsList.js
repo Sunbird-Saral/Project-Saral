@@ -62,12 +62,9 @@ const StudentsList = ({
     const [stdArray, setStdArray] = useState([])
     const prevloginResponse = usePrevious(loginData);
     const prevSaveRes = usePrevious(saveAbsentStudent)
-    const [logmessage,setLogmessage] = useState()
 
 useEffect(async() => {
     studentData()
-    let message = await getErrorMessage()
-    setLogmessage(message)
 }, []);
 
 
@@ -302,8 +299,6 @@ useEffect(async() => {
         <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
              <ShareComponent
                  navigation={navigation}
-                 message={logmessage?JSON.stringify(logmessage,null, 2):''}
-                
                  />
             {(loginData && loginData.data) &&
                 <View style={{width:'60%'}}>

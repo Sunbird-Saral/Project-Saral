@@ -46,8 +46,6 @@ const ShareComponent = ({
   const ShareCompo = async () => {
   const  message = await getErrorMessage()
   const errorMessage = JSON.stringify(message , null ,2)
-
-    console.log('errorMessage',errorMessage)
     try {
       const result = await Share.share({
         title: `Saral App v1.0 logs collection`,

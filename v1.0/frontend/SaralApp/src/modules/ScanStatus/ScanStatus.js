@@ -32,7 +32,7 @@ const ScanStatus = ({
 
     const [studentList, setStudentList] = useState([])
     const [presentStudentList, setPresentStudentList] = useState([])
-    const [logmessage,setLogmessage] = useState()
+    
 
     //function
     const renderItem = ({ item, index }) => {
@@ -65,10 +65,7 @@ const ScanStatus = ({
                 BackHandler.removeEventListener('hardwareBackPress', onBackPress);
         }, []),
     );
-    useEffect(async() => {
-        let message = await getErrorMessage()
-        setLogmessage(message)
-    }, []);
+  
     useEffect(() => {
         getDataFromLocal()
         getStudentList()
@@ -111,7 +108,6 @@ const ScanStatus = ({
         <View style={styles.container}>
               <ShareComponent
                  navigation={navigation}
-                 message={logmessage?JSON.stringify(logmessage, null, 2):''}
                  />
                  <View>
             {

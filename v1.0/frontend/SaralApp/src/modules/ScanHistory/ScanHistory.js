@@ -30,7 +30,6 @@ const ScanHistory = ({
     //Hooks
     const [isLoading, setIsLoading] = useState(false)
     const [scanStatusData, setScanStatusData] = useState(false)
-    const [logmessage,setLogmessage] = useState()
     //functions
         useEffect(() => {
         sumOfLocalData()
@@ -79,9 +78,7 @@ const ScanHistory = ({
         <View style={styles.container}>
               <ShareComponent
                  navigation={navigation}
-                 message={logmessage?JSON.stringify(logmessage, null, 2):''}
                  />
-                 {/* <ScrollView> */}
             
                  <View>
                 {

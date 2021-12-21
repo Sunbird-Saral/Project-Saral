@@ -103,16 +103,11 @@ class SelectDetailsComponent extends Component {
             subjectsData: [],
             filterdataid: [],
             isHidden: false,
-            logmessage:''
         }
         this.onPress = this.onPress.bind(this);
         this.onBack = this.onBack.bind(this)
     }
 
-    logFunction=async () => {
-        let message = await getErrorMessage()
-       this.setState({logmessage:message})
-    };
     onPress() {
         this.setState({isHidden: !this.state.isHidden})
       }
@@ -148,7 +143,6 @@ class SelectDetailsComponent extends Component {
         this.willBlur = navigation.addListener('willBlur', payload =>
             BackHandler.removeEventListener('hardwareBackPress', this.onBack)
         );
-        this.logFunction()
     }
 
     onBack = () => {

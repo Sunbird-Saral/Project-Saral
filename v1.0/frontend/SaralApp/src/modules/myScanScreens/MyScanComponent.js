@@ -30,16 +30,11 @@ class MyScanComponent extends Component {
             activityOpen: false,
             isLoading: false,
             scanStatusData:false,
-            logmessage:''
         }
         this.onBack = this.onBack.bind(this)
         this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
     }
 
-    logFunction=async() => {
-        let message = await getErrorMessage()
-       this.setState({logmessage:message})
-    };
 
     componentWillUnmount() {
         BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
@@ -50,7 +45,6 @@ class MyScanComponent extends Component {
         return true;
     }
     componentDidMount() {
-        this.logFunction()
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
         const { navigation, scanedData } = this.props
         const { params } = navigation.state
@@ -250,7 +244,6 @@ class MyScanComponent extends Component {
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
                  <ShareComponent
                  navigation={this.props.navigation}
-                  message={this.state.logmessage?JSON.stringify(this.state.logmessage, null, 2):''}
                  />
                <View>
                 {
