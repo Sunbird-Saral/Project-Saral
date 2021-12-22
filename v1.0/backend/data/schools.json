@@ -26,7 +26,7 @@
 },
 {
   "name": "Dummy school 3",
-  "schoolId": "DemoUser",
+  "schoolId": "demouser",
   "password": "Demo@123",
   "state": "gujrat",
   "district": "ahmedabad",
