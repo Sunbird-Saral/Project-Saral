@@ -1,6 +1,6 @@
 [{
   "name": "Dummy school 1",
-  "schoolId": "up001",
+  "schoolId": "d001",
   "password": "tarento@123",
   "state": "up",
   "district": "delhi",
@@ -13,7 +13,7 @@
 },
 {
   "name": "Dummy school 2",
-  "schoolId": "odisha001",
+  "schoolId": "d002",
   "password": "tarento@123",
   "state": "odisha",
   "district": "odisha",
@@ -26,7 +26,7 @@
 },
 {
   "name": "Dummy school 3",
-  "schoolId": "gujrat001",
+  "schoolId": "d003",
   "password": "tarento@123",
   "state": "gujrat",
   "district": "ahmedabad",
@@ -39,7 +39,7 @@
 },
 {
 "name": "Dummy school 4",
-"schoolId": "up002",
+"schoolId": "d004",
 "password": "tarento@123",
 "state": "up",
 "district": "MORADABAD",
