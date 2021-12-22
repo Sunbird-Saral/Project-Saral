@@ -736,7 +736,7 @@
   "section": "D",
   "name": "Aarti bhatt",
   "studentId": "3304001",
-  "schoolId": "DemoUser"
+  "schoolId": "demouser"
 },
 {
   "studentClass": [
@@ -748,7 +748,7 @@
   "section": "D",
   "name": "Kaushal Singh",
   "studentId": "3394871",
-  "schoolId": "DemoUser"
+  "schoolId": "demouser"
 },
 {
   "studentClass": [
@@ -760,7 +760,7 @@
   "section": "D",
   "name": "Shivam Manral",
   "studentId": "3365871",
-  "schoolId": "DemoUser"
+  "schoolId": "demouser"
 },
 {
   "studentClass": [
@@ -772,7 +772,7 @@
   "section": "D",
   "name": "Bhavana Bisht",
   "studentId": "3365851",
-  "schoolId": "DemoUser"
+  "schoolId": "demouser"
 },
 {
   "studentClass": [
@@ -784,7 +784,7 @@
   "section": "D",
   "name": "Arun Bisht",
   "studentId": "3365831",
-  "schoolId": "DemoUser"
+  "schoolId": "demouser"
 },
 {
   "studentClass": [
@@ -796,7 +796,7 @@
   "section": "B",
   "name": "Smriti",
   "studentId": "3302001",
-  "schoolId": "DemoUser"
+  "schoolId": "demouser"
 },{
   "studentClass": [
     {
@@ -807,7 +807,7 @@
   "section": "B",
   "name": "shristi",
   "studentId": "3302002",
-  "schoolId": "DemoUser"
+  "schoolId": "demouser"
 },{
   "studentClass": [
     {
@@ -818,7 +818,7 @@
   "section": "B",
   "name": "priyanka bisht",
   "studentId": "3302003",
-  "schoolId": "DemoUser"
+  "schoolId": "demouser"
 },
 {
   "studentClass": [
@@ -830,7 +830,7 @@
   "section": "D",
   "name": "Priya Sood",
   "studentId": "3302004",
-  "schoolId": "DemoUser"
+  "schoolId": "demouser"
 },
 {
   "studentClass": [
@@ -842,7 +842,7 @@
   "section": "D",
   "name": "Ram Kapoor",
   "studentId": "3302005",
-  "schoolId": "DemoUser"
+  "schoolId": "demouser"
 },
 {
   "studentClass": [
@@ -854,7 +854,7 @@
   "section": "D",
   "name": "Rashmi Desai",
   "studentId": "3872645",
-  "schoolId": "DemoUser"
+  "schoolId": "demouser"
 },
 {
   "studentClass": [
@@ -866,7 +866,7 @@
   "section": "D",
   "name": "Astha Chaudary",
   "studentId": "3901345",
-  "schoolId": "DemoUser"
+  "schoolId": "demouser"
 },
 {
   "studentClass": [
@@ -878,7 +878,7 @@
   "section": "D",
   "name": "Aparna Dixit",
   "studentId": "4987654",
-  "schoolId": "DemoUser"
+  "schoolId": "demouser"
 },
 {
   "studentClass": [
@@ -890,7 +890,7 @@
   "section": "D",
   "name": "Develoeena",
   "studentId": "4765432",
-  "schoolId": "DemoUser"
+  "schoolId": "demouser"
 },
 {
   "studentClass": [
@@ -902,7 +902,7 @@
   "section": "D",
   "name": "Soni Suyal",
   "studentId": "4963432",
-  "schoolId": "DemoUser"
+  "schoolId": "demouser"
 },
 {
   "studentClass": [
@@ -914,7 +914,7 @@
   "section": "D",
   "name": "Gaurav Pandey",
   "studentId": "4963431",
-  "schoolId": "DemoUser"
+  "schoolId": "demouser"
 },
 {
   "studentClass": [
@@ -926,7 +926,7 @@
   "section": "D",
   "name": "Pushpendara Rana",
   "studentId": "4963471",
-  "schoolId": "DemoUser"
+  "schoolId": "demouser"
 },
 {
   "studentClass": [
@@ -938,7 +938,7 @@
   "section": "D",
   "name": "Nitin Verma",
   "studentId": "4963461",
-  "schoolId": "DemoUser"
+  "schoolId": "demouser"
 },
 {
   "studentClass": [
@@ -1636,7 +1636,7 @@
   "section": "B",
   "name": "Divya Negi",
   "studentId": "3000001",
-  "schoolId": "DemoUser"
+  "schoolId": "demouser"
 },
 {
   "studentClass": [
@@ -1648,7 +1648,7 @@
   "section": "B",
   "name": "Kamla Dharamwal",
   "studentId": "3000002",
-  "schoolId": "DemoUser"
+  "schoolId": "demouser"
 },
 {
   "studentClass": [
@@ -1660,7 +1660,7 @@
   "section": "B",
   "name": "Jayanti Bisht",
   "studentId": "3000003",
-  "schoolId": "DemoUser"
+  "schoolId": "demouser"
 },
 {
   "studentClass": [
@@ -1672,7 +1672,7 @@
   "section": "B",
   "name": "Chetan Negi",
   "studentId": "3000004",
-  "schoolId": "DemoUser"
+  "schoolId": "demouser"
 },
 {
   "studentClass": [
@@ -1684,7 +1684,7 @@
   "section": "B",
   "name": "Bhanu Joshi",
   "studentId": "3000005",
-  "schoolId": "DemoUser"
+  "schoolId": "demouser"
 },
 {
   "studentClass": [
@@ -1696,7 +1696,7 @@
   "section": "B",
   "name": "Indra Pawar",
   "studentId": "3000006",
-  "schoolId": "DemoUser"
+  "schoolId": "demouser"
 },
 {
   "studentClass": [
@@ -1708,6 +1708,6 @@
   "section": "B",
   "name": "Rekha Joshi",
   "studentId": "3000007",
-  "schoolId": "DemoUser"
+  "schoolId": "demouser"
 }
 ]

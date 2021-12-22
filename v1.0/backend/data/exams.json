@@ -1639,7 +1639,7 @@
     }
   ],
   "examId": 11,
-  "schoolId": "DemoUser"
+  "schoolId": "demouser"
 },{
   "subject": "Maths",
   "examLO": "Maths",
@@ -1820,7 +1820,7 @@
     }
   ],
   "examId": 12,
-  "schoolId": "DemoUser"
+  "schoolId": "demouser"
 },{
   "subject": "English",
   "examLO": "English",
@@ -2001,7 +2001,7 @@
     }
   ],
   "examId": 13,
-  "schoolId": "DemoUser"
+  "schoolId": "demouser"
 },
 {
   "subject": "Hindi",
@@ -2377,7 +2377,7 @@
     }
   ],
   "examId": 18,
-  "schoolId": "DemoUser"
+  "schoolId": "demouser"
 },
 {
   "subject": "Hindi",
@@ -2414,6 +2414,6 @@
     } 
   ],
   "examId": 19,
-  "schoolId": "DemoUser"
+  "schoolId": "demouser"
 }
 ]
