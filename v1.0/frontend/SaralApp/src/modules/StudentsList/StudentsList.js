@@ -126,7 +126,7 @@ useEffect(() => {
                     dispatch(dispatchAPIAsync(api));
                 })
                 .catch(function (err) {
-                    collectErrorLogs("StrudentList.js","FetchSavedScannedData",api.apiEndPoint(),err,false)
+                    collectErrorLogs("StudentList.js","FetchSavedScannedData",api.apiEndPoint(),err,false)
                     clearTimeout(id)
                 });
         }
@@ -148,9 +148,8 @@ useEffect(() => {
         })
         setTotalStudent(filterStudentsData[0].data ? filterStudentsData[0].data.students : []);
         setAllStudentData(filterStudentsData[0].data.students)
-        setIsLoading(false)
-        callScanStatusData()
         getRoi()
+        callScanStatusData()
     }
 
 
