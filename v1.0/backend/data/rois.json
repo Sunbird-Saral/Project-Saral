@@ -15855,7 +15855,7 @@
 {
   "subject": "Hindi",
   "classId": "2",
-  "type": "any_1s_10q",
+  "type": "any_1s_20q",
   "roi": {
     "layout": {
         "version": "1.0",
@@ -16958,7 +16958,7 @@
 },{
   "subject": "Hindi",
   "classId": "3",
-  "type": "any_1s_10q",
+  "type": "any_1s_20q",
   "roi": {
     "layout": {
         "version": "1.0",
@@ -18061,7 +18061,7 @@
 },{
   "subject": "Maths",
   "classId": "2",
-  "type": "any_1s_10q",
+  "type": "any_1s_20q",
   "roi": {
     "layout": {
         "version": "1.0",

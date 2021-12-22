@@ -10,6 +10,23 @@ const SAVE_ABSENT_DATA_INTO_LOCAL = 'save_absent_data_into_local'
 const SAVE_TOTAL_STUDENT = 'save_total_student'
 const SAVED_SCANNED_DATA_INTO_LOCAL = 'saved_scanned_data_into_local'
 const SET_PRESENT_ABSENT_DATA = 'set_present_absent_data'
+const SET_ERROR_MESSAGE = 'set_error_message'
+
+
+export const setErrorMessage = async (data) => {
+    let value = JSON.stringify(data)
+    await AsyncStorage.removeItem(SET_ERROR_MESSAGE)
+    let saved = await AsyncStorage.setItem(SET_ERROR_MESSAGE, value);
+    if (saved) {
+        return true
+    } else {
+        return false
+    }
+}
+
+export const eraseErrorLogs = async () => {
+    await AsyncStorage.removeItem(SET_ERROR_MESSAGE)
+}
 
 export const setData = async (key, value) => {
     await AsyncStorage.setItem(key, value);
@@ -160,5 +177,14 @@ export const setPresentAbsentStudent = async (data) => {
         return true
     } else {
         return false
+    }
+}
+
+export const getErrorMessage = async () => {
+    const message = await AsyncStorage.getItem(SET_ERROR_MESSAGE)
+    if (message != null) {
+        return JSON.parse(message)
+    } else {
+        return message
     }
 }

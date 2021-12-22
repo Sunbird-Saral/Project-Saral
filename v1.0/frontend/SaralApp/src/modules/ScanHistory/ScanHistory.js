@@ -3,16 +3,21 @@ import { StyleSheet, Text, View,BackHandler } from 'react-native';
 
 //redux
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 //constant
 import AppTheme from '../../utils/AppTheme';
-import { getScannedDataFromLocal } from '../../utils/StorageUtils';
+import { getScannedDataFromLocal,getErrorMessage } from '../../utils/StorageUtils';
 import Strings from '../../utils/Strings';
 
 //component
 import Spinner from '../common/components/loadingIndicator';
 import ScanHistoryCard from './ScanHistoryCard';
 import ButtonComponent from '../common/components/ButtonComponent';
+import ShareComponent from '../common/components/Share';
+import APITransport from '../../flux/actions/transport/apitransport';
+import { collectErrorLogs } from '../CollectErrorLogs';
+
 import { ScrollView } from 'react-native-gesture-handler';
 const ScanHistory = ({
     loginData,
@@ -26,9 +31,7 @@ const ScanHistory = ({
     const [isLoading, setIsLoading] = useState(false)
     const [scanStatusData, setScanStatusData] = useState(false)
     //functions
-
-
-    useEffect(() => {
+        useEffect(() => {
         sumOfLocalData()
     }, [])
 
@@ -73,21 +76,30 @@ const ScanHistory = ({
 
     return (
         <View style={styles.container}>
-            <ScrollView>
-
-            {
-                (loginData && loginData.data)
-                &&
-                <View style={{ marginTop: 20 }}>
-                    <Text
-                        style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}>
-                        {Strings.school_name + '  : '}
-                        <Text style={{ fontWeight: 'normal' }}>
-                            {loginData.data.school.name}
+              <ShareComponent
+                 navigation={navigation}
+                 />
+            
+                 <View>
+                {
+                    (loginData && loginData.data)
+                    &&
+                    <View style={{ width:'60%' }}>
+                        <Text
+                            style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}
+                        >
+                            {Strings.school_name + ' : '}
+                            <Text style={{ fontWeight: 'normal' }}>
+                                {loginData.data.school.name}
+                            </Text>
                         </Text>
-                    </Text>
+                        <Text
+                            style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}>
+                        </Text>
+                    </View>
+                }
                 </View>
-            }
+            <ScrollView  >
             <View style={styles.container1}>
                 <Text style={[styles.header1TextStyle, { borderColor: multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE, backgroundColor: multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE }]}>
                     {Strings.ongoing_scan}
@@ -133,17 +145,23 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, null)(ScanHistory);
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({
+        collectErrorLogs: collectErrorLogs
+    }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ScanHistory);
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white'
+        backgroundColor: AppTheme.WHITE_OPACITY
     },
     container1: {
         marginHorizontal: '4%',
         alignItems: 'center',
-        paddingVertical: '4%'
+        marginTop:30
     },
     header1TextStyle: {
         backgroundColor: AppTheme.LIGHT_BLUE,
@@ -157,5 +175,5 @@ const styles = StyleSheet.create({
         color: AppTheme.BLACK,
         letterSpacing: 1
     },
-    nxtBtnStyle:{marginTop:10, marginHorizontal: 40, marginBottom: 20, borderRadius: 10 }
+    nxtBtnStyle:{ marginHorizontal: 40, marginBottom: 20, borderRadius: 10, }
 });

@@ -19,8 +19,9 @@ import { bindActionCreators } from 'redux';
 //api
 import APITransport from '../../flux/actions/transport/apitransport'
 import AppTheme from '../../utils/AppTheme';
-import { getPresentAbsentStudent, getScannedDataFromLocal } from '../../utils/StorageUtils';
+import { getPresentAbsentStudent, getScannedDataFromLocal,getErrorMessage } from '../../utils/StorageUtils';
 import { Assets } from '../../assets';
+import ShareComponent from '../common/components/Share';
 
 
 const ScanStatusLocal = ({
@@ -33,7 +34,9 @@ const ScanStatusLocal = ({
     const [unsavedstudentList, setUnsavedstudentList] = useState([])
     const [loacalstutlist, setLoacalstutlist] = useState([])
     const [presentStudentList, setPresentStudentList] = useState([])
+    
     const data =(JSON.stringify(loacalstutlist[0],null, 2))
+   
 
 
 useEffect(
@@ -64,9 +67,10 @@ useEffect(
                 // dismissed
             }
         } catch (error) {
-            alert(error.message);
+            console.log(error.message);
         }
     };
+    
 
     const renderItem = ({ item, index }) => {
         return <ScanStatusLocalList
@@ -133,6 +137,9 @@ useEffect(
 
     return (
         <View style={styles.container}>
+             <ShareComponent
+                 navigation={navigation}
+                 />
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
             {
                 (loginData && loginData.data)

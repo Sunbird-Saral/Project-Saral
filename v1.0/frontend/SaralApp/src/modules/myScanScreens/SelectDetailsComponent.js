@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, BackHandler, Alert,TouchableOpacity} from 'react-native';
+import { View, ScrollView, Text, BackHandler, Alert,TouchableOpacity,Share} from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -9,10 +9,10 @@ import Strings from '../../utils/Strings';
 import AppTheme from '../../utils/AppTheme';
 import Spinner from '../common/components/loadingIndicator';
 import { apkVersion } from '../../configs/config';
-import HeaderComponent from '../common/components/HeaderComponent';
+import HeaderComponents from '../common/components/HeaderComponents';
 import DropDownMenu from '../common/components/DropDownComponent';
 import ButtonComponent from '../common/components/ButtonComponent';
-import { getLoginData, setStudentsExamData, getStudentsExamData, getLoginCred, setLoginData } from '../../utils/StorageUtils'
+import { getLoginData, setStudentsExamData, getStudentsExamData, getLoginCred, setLoginData,getErrorMessage, eraseErrorLogs } from '../../utils/StorageUtils'
 import { OcrLocalResponseAction } from '../../flux/actions/apis/OcrLocalResponseAction'
 import { GetStudentsAndExamData } from '../../flux/actions/apis/getStudentsAndExamData';
 import { FilteredDataAction } from '../../flux/actions/apis/filteredDataActions';
@@ -25,6 +25,7 @@ import { LogoutAction } from '../../flux/actions/apis/LogoutAction';
 import { getScannedDataFromLocal } from '../../utils/StorageUtils';
 import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
 import C from '../../flux/actions/constants';
+import ShareComponent from '../common/components/Share';
 
 const clearState = {
     defaultSelected: Strings.select_text,
@@ -101,11 +102,12 @@ class SelectDetailsComponent extends Component {
             absentStatusPayload: null,
             subjectsData: [],
             filterdataid: [],
-            isHidden: false
+            isHidden: false,
         }
         this.onPress = this.onPress.bind(this);
         this.onBack = this.onBack.bind(this)
     }
+
     onPress() {
         this.setState({isHidden: !this.state.isHidden})
       }
@@ -150,29 +152,7 @@ class SelectDetailsComponent extends Component {
         return true
     }
 
-    onLogoutClick = async () => {
-        this.onPressSaveInDB()
-    }
 
-    onPressSaveInDB = async () => {
-        const { loginData } = this.props
-        let data = await getScannedDataFromLocal();
-        if (data != null) {
-            for (const value of data) {
-                let apiObj = new SaveScanData(value, loginData.data.token);
-                this.props.APITransport(apiObj)
-            }
-        }
-        Alert.alert(Strings.message_text, Strings.are_you_sure_you_want_to_logout, [
-            { 'text': Strings.no_text, style: 'cancel' },
-            {
-                'text': Strings.yes_text, onPress: async () => {
-                    this.props.LogoutAction()
-                    this.props.navigation.navigate('auth')
-                }
-            }
-        ])
-    }
 
     loader = (flag) => {
         this.setState({
@@ -706,23 +686,20 @@ class SelectDetailsComponent extends Component {
             this.setState({ dateVisible: false })
         }
     }
-   
+    
 
     render() {
         const { navigation, isLoading, defaultSelected, classList, classListIndex, selectedClass, sectionList, sectionListIndex, selectedSection, pickerDate, selectedDate, subArr, selectedSubject, subIndex, errClass, errSub, errDate, errSection, sectionValid, dateVisible, examTestID } = this.state
-        const { loginData } = this.props
-      
+        const { loginData } = this.props      
         return (
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
-               
-                    <HeaderComponent
-                    logoutHeaderText={Strings.logout_text}
-                    titletextstyle={{ color: AppTheme.WHITE }}
-                    customLogoutTextStyle={{ color: AppTheme.GREY }}
-                    onLogoutClick={this.onLogoutClick}
-                />
+                 <ShareComponent
+                 navigation={this.props.navigation}
+                 message={this.state.logmessage?JSON.stringify(this.state.logmessage, null, 2):''}
+                
+                 />
                 {(loginData && loginData.data) &&
-                    <View style={{ marginTop: 20 }}>
+                    <View style={{ marginTop: 20,width:'60%' }}>
                         <Text
                             style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}
                         >
@@ -741,7 +718,7 @@ class SelectDetailsComponent extends Component {
                         </Text>
                     </View>}
                 <Text
-                    style={{ fontSize: AppTheme.FONT_SIZE_REGULAR - 3, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', marginBottom: '4%' }}
+                    style={{ fontSize: AppTheme.FONT_SIZE_REGULAR - 3, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '3%', marginBottom: '4%' }}
                 >
                     {Strings.version_text + ' : '}
                     <Text style={{ fontWeight: 'normal' }}>
