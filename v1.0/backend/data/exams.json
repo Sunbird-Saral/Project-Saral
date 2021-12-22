@@ -108,7 +108,7 @@
     }
   ],
   "examId": 1,
-  "schoolId": "up001"
+  "schoolId": "u001"
 },{
   "subject": "Hindi",
   "examLO": "Hindi",
@@ -269,7 +269,7 @@
     }
   ],
   "examId": 2,
-  "schoolId": "up001"
+  "schoolId": "u001"
 },{
   "subject": "Multi-Subject",
   "examLO": "Multi-Subject",
@@ -530,7 +530,7 @@
     }
   ],
   "examId": 3,
-  "schoolId": "up001"
+  "schoolId": "u001"
 },{
   "subject": "Hindi",
   "examLO": "Hindi",
@@ -641,7 +641,7 @@
     }
   ],
   "examId": 4,
-  "schoolId": "up001"
+  "schoolId": "u001"
 },{
   "subject": "Hindi",
   "examLO": "Hindi",
@@ -752,7 +752,7 @@
     }
   ],
   "examId": 5,
-  "schoolId": "up001"
+  "schoolId": "u001"
 },{
   "subject": "Hindi",
   "examLO": "Hindi",
@@ -863,7 +863,7 @@
     }
   ],
   "examId": 6,
-  "schoolId": "up001"
+  "schoolId": "u001"
 },{
   "subject": "Multi-Subject",
   "examLO": "Multi-Subject",
@@ -1124,14 +1124,14 @@
     }
   ],
   "examId": 7,
-  "schoolId": "up001"
+  "schoolId": "u001"
 },{
   "subject": "Hindi",
   "examLO": "Hindi",
   "classId": "2",
   "examDate": "01/10/2021",
   "totalMarks": 20,
-  "type": "any_1s_10q",
+  "type": "any_1s_20q",
   "questions": [
     {
       "questionId": "1",
@@ -1235,14 +1235,14 @@
     }
   ],
   "examId": 8,
-  "schoolId": "odisha001"
+  "schoolId": "od001"
 },{
   "subject": "Hindi",
   "examLO": "Hindi",
   "classId": "3",
   "examDate": "24/09/2021",
   "totalMarks": 20,
-  "type": "any_1s_10q",
+  "type": "any_1s_20q",
   "questions": [
     {
       "questionId": "1",
@@ -1346,14 +1346,14 @@
     }
   ],
   "examId": 9,
-  "schoolId": "odisha001"
+  "schoolId": "od001"
 },{
   "subject": "Maths",
   "examLO": "Maths",
   "classId": "2",
   "examDate": "02/10/2021",
   "totalMarks": 20,
-  "type": "any_1s_10q",
+  "type": "any_1s_20q",
   "questions": [
     {
       "questionId": "1",
@@ -1457,7 +1457,7 @@
     }
   ],
   "examId": 10,
-  "schoolId": "odisha001"
+  "schoolId": "od001"
 },
 {
   "subject": "Hindi",
@@ -1639,7 +1639,7 @@
     }
   ],
   "examId": 11,
-  "schoolId": "gujrat001"
+  "schoolId": "DemoUser"
 },{
   "subject": "Maths",
   "examLO": "Maths",
@@ -1820,7 +1820,7 @@
     }
   ],
   "examId": 12,
-  "schoolId": "gujrat001"
+  "schoolId": "DemoUser"
 },{
   "subject": "English",
   "examLO": "English",
@@ -2001,7 +2001,7 @@
     }
   ],
   "examId": 13,
-  "schoolId": "gujrat001"
+  "schoolId": "DemoUser"
 },
 {
   "subject": "Hindi",
@@ -2060,10 +2060,25 @@
       "questionId": "10",
       "indicatorTitle": "L0-10",
       "questionMarks": "1"
+    },
+    {
+      "questionId": "11",
+      "indicatorTitle": "L0-10",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "12",
+      "indicatorTitle": "L0-10",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "13",
+      "indicatorTitle": "L0-10",
+      "questionMarks": "1"
     }
   ],
   "examId": 14,
-  "schoolId": "up002"
+  "schoolId": "u002"
 },{
   "subject": "Maths",
   "examLO": "Maths",
@@ -2121,10 +2136,25 @@
       "questionId": "10",
       "indicatorTitle": "L0-10",
       "questionMarks": "1"
+    },
+    {
+      "questionId": "11",
+      "indicatorTitle": "L0-10",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "12",
+      "indicatorTitle": "L0-10",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "13",
+      "indicatorTitle": "L0-10",
+      "questionMarks": "1"
     }
   ],
   "examId": 15,
-  "schoolId": "up002"
+  "schoolId": "u002"
 },{
   "subject": "English",
   "examLO": "English",
@@ -2182,10 +2212,25 @@
       "questionId": "10",
       "indicatorTitle": "L0-10",
       "questionMarks": "1"
+    },
+    {
+      "questionId": "11",
+      "indicatorTitle": "L0-10",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "12",
+      "indicatorTitle": "L0-10",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "13",
+      "indicatorTitle": "L0-10",
+      "questionMarks": "1"
     }
   ],
   "examId": 16,
-  "schoolId": "up002"
+  "schoolId": "u002"
 },{
   "subject": "Maths",
   "examLO": "Maths",
@@ -2243,10 +2288,25 @@
       "questionId": "10",
       "indicatorTitle": "L0-10",
       "questionMarks": "1"
+    },
+      {
+      "questionId": "11",
+      "indicatorTitle": "L0-10",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "12",
+      "indicatorTitle": "L0-10",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "13",
+      "indicatorTitle": "L0-10",
+      "questionMarks": "1"
     }
   ],
   "examId": 17,
-  "schoolId": "up002"
+  "schoolId": "u002"
 },{
   "subject": "Hindi",
   "examLO": "Hindi",
@@ -2317,7 +2377,7 @@
     }
   ],
   "examId": 18,
-  "schoolId": "gujrat001"
+  "schoolId": "DemoUser"
 },
 {
   "subject": "Hindi",
@@ -2354,6 +2414,6 @@
     } 
   ],
   "examId": 19,
-  "schoolId": "gujrat001"
+  "schoolId": "DemoUser"
 }
 ]

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TouchableOpacity, Image, Share } from 'react-native';
 import { Assets } from '../../../assets';
 import AppTheme from '../../../utils/AppTheme';
 import Strings from '../../../utils/Strings';
@@ -9,7 +9,7 @@ class HeaderComponents extends Component {
     constructor(props) {
         super(props);
     }
-
+       
     render() {
         const {
             title,
@@ -25,21 +25,19 @@ class HeaderComponents extends Component {
             onLogoutClick,
             customLogoutTextStyle,
             versionText,
-            supportTeamText
+            supportTeamText,
+            onSupportClick
         } = this.props
         return (
-            <View style={[customHeaderContainer]}>
-
-
-                <Text style={[styles.headerTitleTextStyle, customHeaderTextStyle, titletextstyle]}>{title}</Text>
+            <View style={{flex:1}}>
                 <View style={styles.imageViewContainer}>
                     <View style={styles.imageContainerStyle}>
                         
                         <TouchableOpacity
                         style={styles.imageContainerViewstyle}
-                        // onPress={}
+                        onPress={onSupportClick}
                         > 
-                         <Image style={{width:30,height:30}}  source={Assets.AppLogo}/>
+                         <Image style={{width:15,height:15,top:5}}  source={Assets.Support}/>
                             <Text style={[styles.headerTitleTextStyle, customLogoutTextStyle]}>{supportTeamText}</Text>
                         </TouchableOpacity>
                        
@@ -48,7 +46,7 @@ class HeaderComponents extends Component {
                                style={styles.imageContainerViewstyle}
                                 onPress={onLogoutClick}
                             >
-                                 <Image style={{width:30,height:30}}  source={Assets.AppLogo}/>
+                                 <Image style={{width:15,height:25}}  source={Assets.Logout}/>
                                 <Text style={[styles.headerTitleTextStyle, customLogoutTextStyle]}>{logoutHeaderText}</Text>
                             </TouchableOpacity>}
 
@@ -116,26 +114,22 @@ const styles = {
         letterSpacing: 1
     },
     imageViewContainer: {
-        bottom: 18,
+       
         marginRight: 5,
         alignItems: 'flex-end',
-        elevation: 20
-        // justifyContent:'center'
+       
     },
     imageContainerStyle: {
         padding: 10,
         marginRight: 10,
-        // alignItems: "center",
-        // justifyContent: 'center',
-        width: '40%',
-        height:80,
-        elevation: 20,
-        justifyContent: 'center',
+        height:60,
+        elevation: 10,
+         justifyContent: 'center',
         backgroundColor: AppTheme.WHITE
     },
     imageContainerViewstyle:{
         flexDirection:'row',
-        marginVertical:3,
+        marginVertical:5,
     }
 }
 export default HeaderComponents;

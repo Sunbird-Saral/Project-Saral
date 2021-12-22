@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { Alert, Text, TouchableOpacity, View } from 'react-native';
 import AppTheme from '../../utils/AppTheme';
 import { getScannedDataFromLocal } from '../../utils/StorageUtils';
-
-import { styles } from './StudentsDataStyle';
 import Strings from '../../utils/Strings';
+import { styles } from './StudentsDataStyle';
 
 const StudentsDataComponent = ({
     item,
@@ -68,7 +67,7 @@ const StudentsDataComponent = ({
             const isSheetScanned = typeof (scanedData) === 'object' && scanedData.data.length > 0 && scanedData.data.filter((o) => o.studentId == data.studentId && o.studentAvailability === true && o.marksInfo.length > 0)
 
             if (isSheetScanned.length > 0 || isStudentScannedInLocal.length > 0) {
-                Alert.alert("student can't be mark as absent once scanned !")
+                Alert.alert(Strings.student_cant_be_mark_as_absent_once_scanned)
             } else {
                 data.studentAvailability = false
                 setIsPresent(false)

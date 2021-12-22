@@ -46,7 +46,7 @@ class HomeComponent extends Component {
                         <Text style={{ fontSize: 12, fontWeight: 'bold', fontFamily: 'sans-serif-condensed' }}>Loading Branding ...</Text>
                     </View> :
                         <Brands
-                            Image={Assets.AppLogo}
+                            Image1={Assets.AppLogo}
                             appName={'Saral OCR App'}
                             themeColor={AppTheme.BLUE}
                             onPress={() => this.props.navigation.navigate('selectDetails')}

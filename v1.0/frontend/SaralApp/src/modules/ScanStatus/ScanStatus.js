@@ -19,7 +19,8 @@ import { bindActionCreators } from 'redux';
 //api
 import APITransport from '../../flux/actions/transport/apitransport'
 import AppTheme from '../../utils/AppTheme';
-import { getPresentAbsentStudent, getScannedDataFromLocal } from '../../utils/StorageUtils';
+import { getPresentAbsentStudent, getScannedDataFromLocal,getErrorMessage } from '../../utils/StorageUtils';
+import ShareComponent from '../common/components/Share';
 
 
 const ScanStatus = ({
@@ -31,6 +32,7 @@ const ScanStatus = ({
 
     const [studentList, setStudentList] = useState([])
     const [presentStudentList, setPresentStudentList] = useState([])
+    
 
     //function
     const renderItem = ({ item, index }) => {
@@ -63,7 +65,7 @@ const ScanStatus = ({
                 BackHandler.removeEventListener('hardwareBackPress', onBackPress);
         }, []),
     );
-
+  
     useEffect(() => {
         getDataFromLocal()
         getStudentList()
@@ -104,14 +106,18 @@ const ScanStatus = ({
 
     return (
         <View style={styles.container}>
+              <ShareComponent
+                 navigation={navigation}
+                 />
+                 <View>
             {
                 (loginData && loginData.data)
                 &&
-                <View style={styles.schoolCon}>
+                <View style={{width:'60%'}}>
                     <Text
                         style={styles.schoolName}
                     >
-                        {Strings.school_name + ' Name : '}
+                        {Strings.school_name + '  : '}
                         <Text style={{ fontWeight: 'normal' }}>{loginData.data.school.name}</Text>
                     </Text>
                     <Text style={styles.schoolId}>
@@ -122,6 +128,7 @@ const ScanStatus = ({
                     </Text>
                 </View>
             }
+            </View>
 
             <Text style={styles.scanStatus}>{Strings.scan_status}</Text>
 

@@ -7,10 +7,10 @@ import { bindActionCreators } from 'redux';
 import APITransport from '../../flux/actions/transport/apitransport'
 
 //storage
-import { getLoginCred, getStudentsExamData, setAbsentStudentDataIntoAsync, setPresentAbsentStudent, setStudentsExamData, setTotalStudent } from '../../utils/StorageUtils';
+import { getErrorMessage, getLoginCred, getStudentsExamData, setAbsentStudentDataIntoAsync, setErrorMessage, setPresentAbsentStudent, setStudentsExamData, setTotalStudent } from '../../utils/StorageUtils';
 import ButtonComponent from '../common/components/ButtonComponent';
 import StudentsDataComponent from './StudentsDataComponent';
-
+import ShareComponent from '../common/components/Share'
 //style
 import { styles } from './StudentsDataStyle';
 
@@ -35,6 +35,7 @@ import { cryptoText, validateToken } from '../../utils/CommonUtils';
 import { LoginAction } from '../../flux/actions/apis/LoginAction';
 
 import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction'
+import { collectErrorLogs } from '../CollectErrorLogs';
 
 
 const StudentsList = ({
@@ -63,11 +64,9 @@ const StudentsList = ({
     const prevloginResponse = usePrevious(loginData);
     const prevSaveRes = usePrevious(saveAbsentStudent)
 
-
-    useEffect(() => {
-        studentData()
-
-    }, []);
+useEffect(() => {
+    studentData()
+}, []);
 
 
     useEffect(
@@ -105,6 +104,7 @@ const StudentsList = ({
     }
 
     const FetchSavedScannedData = (api, uname, pass) => {
+
         if (api.method === 'POST') {
             let apiResponse = null
             const source = axios.CancelToken.source()
@@ -126,6 +126,7 @@ const StudentsList = ({
                     dispatch(dispatchAPIAsync(api));
                 })
                 .catch(function (err) {
+                    collectErrorLogs("StrudentList.js","FetchSavedScannedData",api.apiEndPoint(),err,false)
                     clearTimeout(id)
                 });
         }
@@ -225,12 +226,39 @@ const StudentsList = ({
 
         setStudentsExamData(stud)
 
-        // setIsLoading(true)
         let dataPayload = absentPresentStatus
         let apiObj = new SaveScanData(dataPayload, token)
+        setIsLoading(true)
         dispatch(APITransport(apiObj));
-        setPresentAbsentStudent(allStudentData)
-        navigation.push('ScanHistory');
+        saveStudentData(apiObj)
+    }
+
+    const saveStudentData = (api) => {
+        if (api.method === 'PUT') {
+            let apiResponse = null
+            const source = axios.CancelToken.source()
+            const id = setTimeout(() => {
+                if (apiResponse === null) {
+                    source.cancel('The request timed out.');
+                }
+            }, 60000);
+            axios.put(api.apiEndPoint(), api.getBody(), { headers: api.getHeaders(), cancelToken: source.token },)
+                .then(function (res) {
+                    setIsLoading(false)
+                    setPresentAbsentStudent(allStudentData)
+                    navigation.push('ScanHistory');
+                    apiResponse = res
+                    clearTimeout(id)
+                    api.processResponse(res)
+                    dispatch(dispatchAPIAsync(api));
+                })
+                .catch(function (err) {
+                    collectErrorLogs("StrudentList.js","saveStudentData",api.apiEndPoint(),err,false)
+                    Alert.alert(Strings.something_went_wrong_please_try_again)
+                    setIsLoading(false)
+                    clearTimeout(id)
+                });
+        }
     }
 
     const navigateToNext = () => {
@@ -272,8 +300,11 @@ const StudentsList = ({
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+             <ShareComponent
+                 navigation={navigation}
+                 />
             {(loginData && loginData.data) &&
-                <View>
+                <View style={{width:'60%'}}>
                     <Text
                         style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingTop: '4%' }}
                     >
@@ -294,7 +325,7 @@ const StudentsList = ({
 
             }
             <Text
-                style={{ fontSize: AppTheme.FONT_SIZE_REGULAR - 3, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', marginBottom: '4%' }}
+                style={{ fontSize: AppTheme.FONT_SIZE_REGULAR - 3, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '3%', marginBottom: '4%' }}
             >
                 {Strings.version_text + ' : '}
                 <Text style={{ fontWeight: 'normal' }}>

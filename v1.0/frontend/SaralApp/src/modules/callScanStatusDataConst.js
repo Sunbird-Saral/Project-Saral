@@ -1,8 +1,8 @@
 import axios from "axios";
-import { getLoginCred } from "../utils/StorageUtils";
+import { getErrorMessage, getLoginCred, setErrorMessage } from "../utils/StorageUtils";
 import { scanStatusDataAction } from "./ScanStatus/scanStatusDataAction";
 
-export default function  callScanStatusDataConst(filteredData) {
+export default function callScanStatusDataConst(filteredData) {
 
     return async dispatch => {
 
@@ -38,6 +38,7 @@ export default function  callScanStatusDataConst(filteredData) {
                     dispatch(dispatchAPIAsync(apiObj));
                 })
                 .catch(function (err) {
+                    collectErrorLogs("callScanStatusDataConst.js","callScanStatusDataConst",apiObj.apiEndPoint(),err,false)
                     clearTimeout(id)
                 });
         }
