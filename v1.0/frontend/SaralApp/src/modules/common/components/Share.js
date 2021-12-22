@@ -30,7 +30,7 @@ const ShareComponent = ({
       { 'text': Strings.no_text, style: 'cancel' },
       {
         'text': Strings.yes_text, onPress: async () => {
-          if (data != null) {
+          if (data != null && data.length > 0) {
             for (const value of data) {
               let apiObj = new SaveScanData(value, loginData.data.token);
               saveStudentData(apiObj)
