@@ -36,8 +36,8 @@ const ShareComponent = ({
               saveStudentData(apiObj)
             }
           } else {
-            dispatch(LogoutAction())
             await eraseErrorLogs()
+            dispatch(LogoutAction())
             navigation.navigate('auth')
           }
         }

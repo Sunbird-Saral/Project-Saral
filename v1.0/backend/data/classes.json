@@ -12,7 +12,7 @@
   ],
   "classId": "2",
   "className": "Class-2",
-  "schoolId": "up001"
+  "schoolId": "d001"
 },{
   "sections": [
     {
@@ -27,7 +27,7 @@
   ],
   "classId": "3",
   "className": "Class-3",
-  "schoolId": "up001"
+  "schoolId": "d001"
 },{
   "sections": [
     {
@@ -42,7 +42,7 @@
   ],
   "classId": "4",
   "className": "Class-4",
-  "schoolId": "up001"
+  "schoolId": "d001"
 },{
   "sections": [
     {
@@ -57,7 +57,7 @@
   ],
   "classId": "5",
   "className": "Class-5",
-  "schoolId": "up001"
+  "schoolId": "d001"
 },{
   "sections": [
     {
@@ -72,7 +72,7 @@
   ],
   "classId": "6",
   "className": "Class-6",
-  "schoolId": "up001"
+  "schoolId": "d001"
 },{
   "sections": [
     {
@@ -87,7 +87,7 @@
   ],
   "classId": "7",
   "className": "Class-7",
-  "schoolId": "up001"
+  "schoolId": "d001"
 },{
   "sections": [
     {
@@ -102,7 +102,7 @@
   ],
   "classId": "8",
   "className": "Class-8",
-  "schoolId": "up001"
+  "schoolId": "d001"
 },
 {
   "sections": [
@@ -118,7 +118,7 @@
   ],
   "classId": "2",
   "className": "Class-2",
-  "schoolId": "odisha001"
+  "schoolId": "d002"
 },
 {
   "sections": [
@@ -134,7 +134,7 @@
   ],
   "classId": "3",
   "className": "Class-3",
-  "schoolId": "odisha001"
+  "schoolId": "d002"
 },
   {
     "sections": [
@@ -150,7 +150,7 @@
     ],
     "classId": "3",
     "className": "Class-3",
-    "schoolId": "gujrat001"
+    "schoolId": "d003"
   },
   {
     "sections": [
@@ -166,7 +166,7 @@
     ],
     "classId": "4",
     "className": "Class-4",
-    "schoolId": "gujrat001"
+    "schoolId": "d003"
   },
   {
     "sections": [
@@ -182,7 +182,7 @@
     ],
     "classId": "5",
     "className": "Class-5",
-    "schoolId": "gujrat001"
+    "schoolId": "d003"
 },
 {
   "sections": [
@@ -198,7 +198,7 @@
   ],
   "classId": "2",
   "className": "Class-2",
-  "schoolId": "up002"
+  "schoolId": "d004"
 },
 {
   "sections": [
@@ -214,7 +214,7 @@
   ],
   "classId": "3",
   "className": "Class-3",
-  "schoolId": "up002"
+  "schoolId": "d004"
 },{
   "sections": [
     {
@@ -229,7 +229,7 @@
   ],
   "classId": "4",
   "className": "Class-4",
-  "schoolId": "up002"
+  "schoolId": "d004"
 },{
   "sections": [
     {
@@ -244,6 +244,6 @@
   ],
   "classId": "5",
   "className": "Class-5",
-  "schoolId": "up002"
+  "schoolId": "d004"
 }
 ]
