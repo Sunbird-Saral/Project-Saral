@@ -1131,7 +1131,7 @@
   "classId": "2",
   "examDate": "01/10/2021",
   "totalMarks": 20,
-  "type": "any_1s_10q",
+  "type": "any_1s_20q",
   "questions": [
     {
       "questionId": "1",
@@ -1242,7 +1242,7 @@
   "classId": "3",
   "examDate": "24/09/2021",
   "totalMarks": 20,
-  "type": "any_1s_10q",
+  "type": "any_1s_20q",
   "questions": [
     {
       "questionId": "1",
@@ -1353,7 +1353,7 @@
   "classId": "2",
   "examDate": "02/10/2021",
   "totalMarks": 20,
-  "type": "any_1s_10q",
+  "type": "any_1s_20q",
   "questions": [
     {
       "questionId": "1",
@@ -2060,6 +2060,21 @@
       "questionId": "10",
       "indicatorTitle": "L0-10",
       "questionMarks": "1"
+    },
+    {
+      "questionId": "11",
+      "indicatorTitle": "L0-10",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "12",
+      "indicatorTitle": "L0-10",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "13",
+      "indicatorTitle": "L0-10",
+      "questionMarks": "1"
     }
   ],
   "examId": 14,
@@ -2119,6 +2134,21 @@
     },
     {
       "questionId": "10",
+      "indicatorTitle": "L0-10",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "11",
+      "indicatorTitle": "L0-10",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "12",
+      "indicatorTitle": "L0-10",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "13",
       "indicatorTitle": "L0-10",
       "questionMarks": "1"
     }
@@ -2182,6 +2212,21 @@
       "questionId": "10",
       "indicatorTitle": "L0-10",
       "questionMarks": "1"
+    },
+    {
+      "questionId": "11",
+      "indicatorTitle": "L0-10",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "12",
+      "indicatorTitle": "L0-10",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "13",
+      "indicatorTitle": "L0-10",
+      "questionMarks": "1"
     }
   ],
   "examId": 16,
@@ -2241,6 +2286,21 @@
     },
     {
       "questionId": "10",
+      "indicatorTitle": "L0-10",
+      "questionMarks": "1"
+    },
+      {
+      "questionId": "11",
+      "indicatorTitle": "L0-10",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "12",
+      "indicatorTitle": "L0-10",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "13",
       "indicatorTitle": "L0-10",
       "questionMarks": "1"
     }
