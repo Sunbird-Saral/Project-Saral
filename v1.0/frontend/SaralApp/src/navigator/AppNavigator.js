@@ -30,6 +30,7 @@ import { Alert } from "react-native";
 import axios from "axios";
 import Strings from "../utils/Strings";
 import ScanStatusLocal from "../modules/ScanStatus/scanStatusLocal";
+import { collectErrorLogs } from "../modules/CollectErrorLogs";
 
 
 const AuthStack = createStackNavigator({
@@ -167,6 +168,7 @@ const saveDataInDB = async () => {
                         storeFactory.dispatch(flagAction(false))
                     })
                     .catch(function (err) {
+                        collectErrorLogs("AppNavigator.js","saveDataInDB",apiObj.apiEndPoint(),err,false)
                         clearTimeout(id)
                         Alert.alert("Something went wrong with background process, please contact Admin")
                         storeFactory.dispatch(flagAction(false))
