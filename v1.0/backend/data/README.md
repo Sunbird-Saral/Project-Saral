@@ -11,7 +11,7 @@ for deleting current data in database
 
 # state:- UP
 
-## schoolId:d001
+## schoolId:U001
 >> `school:- Dummy school 1`
 >> `classes:- 2,3,4,5,6,7,8`
 >> `student:- no of student 7` 
@@ -105,7 +105,7 @@ for deleting current data in database
 |Hindi|UP|UP_HINDI_3S|3|2|
 
 # state:- odisha
-## schoolID: d002
+## schoolID: OD002
 >> `school:- Dummy school 2`
 >> `classes:- 2,3`
 >> `name of student in ODISHA school:-`  
@@ -148,7 +148,7 @@ for deleting current data in database
 |math|odisha|SAT|2|13|
 
 # state: gujrat
-## schoolId: d003
+## schoolId: G003
 >> `school:- Dummy school 3`
 >> `classes:- 3,4,5`
 
@@ -217,7 +217,7 @@ name of student in gujrat school:-
 |hindi|	gujrat|	gujrat_5q_multichoice|5|19|
 
 # state:- UP(For multiple students)
-## schoolId:-d004
+## schoolId:-U004
 >> `school:- Dummy school 4`
 >> `classes:- 2,3,4,5`
 >> `name of student in MULTI UP school` 

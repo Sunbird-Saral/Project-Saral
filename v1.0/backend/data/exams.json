@@ -108,7 +108,7 @@
     }
   ],
   "examId": 1,
-  "schoolId": "d001"
+  "schoolId": "u001"
 },{
   "subject": "Hindi",
   "examLO": "Hindi",
@@ -269,7 +269,7 @@
     }
   ],
   "examId": 2,
-  "schoolId": "d001"
+  "schoolId": "u001"
 },{
   "subject": "Multi-Subject",
   "examLO": "Multi-Subject",
@@ -530,7 +530,7 @@
     }
   ],
   "examId": 3,
-  "schoolId": "d001"
+  "schoolId": "u001"
 },{
   "subject": "Hindi",
   "examLO": "Hindi",
@@ -641,7 +641,7 @@
     }
   ],
   "examId": 4,
-  "schoolId": "d001"
+  "schoolId": "u001"
 },{
   "subject": "Hindi",
   "examLO": "Hindi",
@@ -752,7 +752,7 @@
     }
   ],
   "examId": 5,
-  "schoolId": "d001"
+  "schoolId": "u001"
 },{
   "subject": "Hindi",
   "examLO": "Hindi",
@@ -863,7 +863,7 @@
     }
   ],
   "examId": 6,
-  "schoolId": "d001"
+  "schoolId": "u001"
 },{
   "subject": "Multi-Subject",
   "examLO": "Multi-Subject",
@@ -1124,7 +1124,7 @@
     }
   ],
   "examId": 7,
-  "schoolId": "d001"
+  "schoolId": "u001"
 },{
   "subject": "Hindi",
   "examLO": "Hindi",
@@ -1235,7 +1235,7 @@
     }
   ],
   "examId": 8,
-  "schoolId": "d002"
+  "schoolId": "od001"
 },{
   "subject": "Hindi",
   "examLO": "Hindi",
@@ -1346,7 +1346,7 @@
     }
   ],
   "examId": 9,
-  "schoolId": "d002"
+  "schoolId": "od001"
 },{
   "subject": "Maths",
   "examLO": "Maths",
@@ -1457,7 +1457,7 @@
     }
   ],
   "examId": 10,
-  "schoolId": "d002"
+  "schoolId": "od001"
 },
 {
   "subject": "Hindi",
@@ -1639,7 +1639,7 @@
     }
   ],
   "examId": 11,
-  "schoolId": "d003"
+  "schoolId": "g001"
 },{
   "subject": "Maths",
   "examLO": "Maths",
@@ -1820,7 +1820,7 @@
     }
   ],
   "examId": 12,
-  "schoolId": "d003"
+  "schoolId": "g001"
 },{
   "subject": "English",
   "examLO": "English",
@@ -2001,7 +2001,7 @@
     }
   ],
   "examId": 13,
-  "schoolId": "d003"
+  "schoolId": "g001"
 },
 {
   "subject": "Hindi",
@@ -2078,7 +2078,7 @@
     }
   ],
   "examId": 14,
-  "schoolId": "d004"
+  "schoolId": "u002"
 },{
   "subject": "Maths",
   "examLO": "Maths",
@@ -2154,7 +2154,7 @@
     }
   ],
   "examId": 15,
-  "schoolId": "d004"
+  "schoolId": "u002"
 },{
   "subject": "English",
   "examLO": "English",
@@ -2230,7 +2230,7 @@
     }
   ],
   "examId": 16,
-  "schoolId": "d004"
+  "schoolId": "u002"
 },{
   "subject": "Maths",
   "examLO": "Maths",
@@ -2306,7 +2306,7 @@
     }
   ],
   "examId": 17,
-  "schoolId": "d004"
+  "schoolId": "u002"
 },{
   "subject": "Hindi",
   "examLO": "Hindi",
@@ -2377,7 +2377,7 @@
     }
   ],
   "examId": 18,
-  "schoolId": "d003"
+  "schoolId": "g001"
 },
 {
   "subject": "Hindi",
@@ -2414,6 +2414,6 @@
     } 
   ],
   "examId": 19,
-  "schoolId": "d003"
+  "schoolId": "g001"
 }
 ]
