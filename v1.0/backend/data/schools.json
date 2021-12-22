@@ -26,8 +26,8 @@
 },
 {
   "name": "Dummy school 3",
-  "schoolId": "g001",
-  "password": "tarento@123",
+  "schoolId": "demouser",
+  "password": "Demo@123",
   "state": "gujrat",
   "district": "ahmedabad",
   "block": "Jamnagar",

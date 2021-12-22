@@ -150,7 +150,7 @@
     ],
     "classId": "3",
     "className": "Class-3",
-    "schoolId": "g001"
+    "schoolId": "DemoUser"
   },
   {
     "sections": [
@@ -166,7 +166,7 @@
     ],
     "classId": "4",
     "className": "Class-4",
-    "schoolId": "g001"
+    "schoolId": "DemoUser"
   },
   {
     "sections": [
@@ -182,7 +182,7 @@
     ],
     "classId": "5",
     "className": "Class-5",
-    "schoolId": "g001"
+    "schoolId": "DemoUser"
 },
 {
   "sections": [
