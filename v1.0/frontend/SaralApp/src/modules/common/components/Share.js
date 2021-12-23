@@ -17,7 +17,7 @@ const ShareComponent = ({
   message,
   navigation,
   multiBrandingData,
-
+  bgFlag
 }) => {
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [ishidden, setIshidden] = useState(false)
@@ -26,23 +26,27 @@ const ShareComponent = ({
 
   const Logoutcall = async () => {
     let data = await getScannedDataFromLocal();
-    Alert.alert(Strings.message_text, Strings.are_you_sure_you_want_to_logout, [
-      { 'text': Strings.no_text, style: 'cancel' },
-      {
-        'text': Strings.yes_text, onPress: async () => {
-          if (data != null && data.length > 0) {
-            for (const value of data) {
-              let apiObj = new SaveScanData(value, loginData.data.token);
-              saveStudentData(apiObj)
+    if (bgFlag) {
+      Alert.alert("Data is Uploading please wait till it finished.")
+    } else {
+      Alert.alert(Strings.message_text, Strings.are_you_sure_you_want_to_logout, [
+        { 'text': Strings.no_text, style: 'cancel' },
+        {
+          'text': Strings.yes_text, onPress: async () => {
+            if (data != null && data.length > 0) {
+              for (const value of data) {
+                let apiObj = new SaveScanData(value, loginData.data.token);
+                saveStudentData(apiObj)
+              }
+            } else {
+              await eraseErrorLogs()
+              dispatch(LogoutAction())
+              navigation.navigate('auth')
             }
-          } else {
-            await eraseErrorLogs()
-            dispatch(LogoutAction())
-            navigation.navigate('auth')
           }
         }
-      }
-    ])
+      ])
+    }
   }
 
 
@@ -133,7 +137,8 @@ const mapStateToProps = (state) => {
     roiData: state.roiData,
     absentStudentDataResponse: state.absentStudentDataResponse,
     getScanStatusData: state.getScanStatusData,
-    multiBrandingData: state.multiBrandingData.response.data
+    multiBrandingData: state.multiBrandingData.response.data,
+    bgFlag: state.bgFlag
   }
 }
 
