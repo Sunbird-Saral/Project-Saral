@@ -127,7 +127,7 @@ const ScanHistoryCard = ({
                 setIsLoading(false)
             }
         }else{
-            Alert.alert("Data is Uploading please wait till it finished.")
+            Alert.alert(Strings.auto_sync_in_progress_please_wait)
         }
 
         }

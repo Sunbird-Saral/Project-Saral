@@ -138,7 +138,7 @@ const saveDataInDB = async () => {
         if (len >= 10) {
 
             storeFactory.dispatch(flagAction(true))
-            testPushNotification("Uploading•••", "please wait we are uploading")
+            testPushNotification("Uploading•••", Strings.auto_sync_in_progress_please_wait)
             const loginData = storeFactory.getState().loginData
 
             data.map(element => {
@@ -156,7 +156,7 @@ const saveDataInDB = async () => {
                         let localDataResponse = removeItemFromLocalStorage(res, data)
                         if (localDataResponse.length == 0) {
                             setScannedDataIntoLocal(localDataResponse)
-                            testPushNotification("Uploaded ☻☻☻", "Data has been uploaded successfully!")
+                            testPushNotification("Uploaded", "Data has been uploaded successfully!")
                         }
                         apiResponse = res
                         success = true

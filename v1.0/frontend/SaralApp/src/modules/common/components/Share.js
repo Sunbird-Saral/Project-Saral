@@ -27,7 +27,7 @@ const ShareComponent = ({
   const Logoutcall = async () => {
     let data = await getScannedDataFromLocal();
     if (bgFlag) {
-      Alert.alert("Data is Uploading please wait till it finished.")
+      Alert.alert(Strings.auto_sync_in_progress_please_wait)
     } else {
       Alert.alert(Strings.message_text, Strings.are_you_sure_you_want_to_logout, [
         { 'text': Strings.no_text, style: 'cancel' },

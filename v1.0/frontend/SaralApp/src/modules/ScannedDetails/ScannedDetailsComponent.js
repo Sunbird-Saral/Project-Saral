@@ -490,7 +490,7 @@ const ScannedDetailsComponent = ({
 
                         });
                         if (bgFlag) {
-                            Alert.alert("Data is Uploading please wait till it finished.")
+                            Alert.alert(Strings.auto_sync_in_progress_please_wait)
                         } else {
                             setScannedDataIntoLocal(getDataFromLocal)
                             goToMyScanScreen()
