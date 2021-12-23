@@ -168,7 +168,7 @@ const saveDataInDB = async () => {
                         storeFactory.dispatch(flagAction(false))
                     })
                     .catch(function (err) {
-                        collectErrorLogs("AppNavigator.js","saveDataInDB",apiObj.apiEndPoint(),err,false)
+                        collectErrorLogs("AppNavigator.js","backgroundJob",apiObj.apiEndPoint(),err,false)
                         clearTimeout(id)
                         Alert.alert("Something went wrong with background process, please contact Admin")
                         storeFactory.dispatch(flagAction(false))
@@ -210,7 +210,8 @@ setTimeout(() => {
             saveDataInDB()
         }
     }
-}, 4000);
+    //timer for 10 min
+}, 600000);
 
 
 const AppNavigation = createSwitchNavigator(
