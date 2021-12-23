@@ -156,7 +156,7 @@ const saveDataInDB = async () => {
                         let localDataResponse = removeItemFromLocalStorage(res, data)
                         if (localDataResponse.length == 0) {
                             setScannedDataIntoLocal(localDataResponse)
-                            testPushNotification("Uploaded", "Data has been uploaded successfully!")
+                            testPushNotification("Uploaded", Strings.auto_sync_completed)
                         }
                         apiResponse = res
                         success = true
