@@ -11,6 +11,7 @@ import saveAbsentStudentReducer from './saveAbsentStudentReducer';
 import absentStudentReducer from './absentStudentReducer';
 import multiBrandingReducer from './multiBrandingReducer';
 import defaultBrandReducer from './defaultBrandReducer';
+import bgFlag from './bgFlag';
 
 export default {
     apiStatus: apiStatus,
@@ -25,7 +26,8 @@ export default {
     saveAbsentStudent: saveAbsentStudentReducer,
     absentStudentDataResponse: absentStudentReducer,
     multiBrandingData:multiBrandingReducer,
-    defaultBrandingdata:defaultBrandReducer
+    defaultBrandingdata:defaultBrandReducer,
+    bgFlag: bgFlag
 
 
 }

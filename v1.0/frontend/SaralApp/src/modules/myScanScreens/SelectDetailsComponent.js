@@ -874,7 +874,8 @@ const mapStateToProps = (state) => {
         roiData: state.roiData,
         absentStudentDataResponse: state.absentStudentDataResponse,
         getScanStatusData: state.getScanStatusData,
-        multiBrandingData: state.multiBrandingData.response.data
+        multiBrandingData: state.multiBrandingData.response.data,
+        bgFlag: state.bgFlag
     }
 }
 
