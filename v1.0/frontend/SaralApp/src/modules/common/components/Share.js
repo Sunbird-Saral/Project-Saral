@@ -86,7 +86,7 @@ const ShareComponent = ({
           // shared with activity type of result.activityType
 
         } else {
-
+          Alert.alert(Strings.shareDataExceed)
           // shared
         }
       }
