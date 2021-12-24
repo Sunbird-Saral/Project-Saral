@@ -106,7 +106,7 @@ const checkNetworkConnectivity = async () => {
 const testPushNotification = (title, msg) => {
 
     PushNotification.localNotification({
-        channelId: "1dzD0LtdsIe6n1OalyqYdQZvrFv1",
+        channelId: Strings.saral_app_auto_sync_channel,
         // smallIcon: "ic_notification",
         // color: "white",
         vibrate: true,

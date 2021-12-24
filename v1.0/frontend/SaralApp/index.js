@@ -7,13 +7,14 @@ import App from './App';
 import {name as appName} from './app.json';
 import {decode, encode} from 'base-64'
 import PushNotification from "react-native-push-notification";
+import Strings from './src/utils/Strings';
 
 
 
 
 PushNotification.createChannel(
     {
-        channelId: "1dzD0LtdsIe6n1OalyqYdQZvrFv1", // (required)
+        channelId: Strings.saral_app_auto_sync_channel, // (required)
         channelName: "Notifications", // (required)
         channelDescription: "A channel to categorise your notifications", // (optional) default: undefined.,
         importance: 4,
