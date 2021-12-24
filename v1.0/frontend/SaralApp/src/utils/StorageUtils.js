@@ -185,6 +185,6 @@ export const getErrorMessage = async () => {
     if (message != null) {
         return JSON.parse(message)
     } else {
-        return message
+        return 
     }
 }
