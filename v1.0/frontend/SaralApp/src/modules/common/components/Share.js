@@ -19,7 +19,6 @@ const ShareComponent = ({
   multiBrandingData,
 
 }) => {
-  const [isModalVisible, setIsModalVisible] = useState(false)
   const [ishidden, setIshidden] = useState(false)
   const dispatch = useDispatch()
 
