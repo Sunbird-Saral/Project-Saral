@@ -33,7 +33,7 @@ const ScanHistoryCard = ({
     themeColor1,
     studentsAndExamData,
     apiStatus,
-    setShow, show
+    bgFlag,
 }) => {
     const [loading, setLoading] = useState(false)
     const [isModalVisible, setIsModalVisible] = useState(false)
@@ -78,6 +78,7 @@ const ScanHistoryCard = ({
         const { subject, examDate } = filteredData.response
 
         if (data) {
+            if (!bgFlag) {
             const filterData = data.filter((e) => {
 
                 let findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.response.section)
@@ -125,6 +126,9 @@ const ScanHistoryCard = ({
                 Alert.alert('There is no data!')
                 setIsLoading(false)
             }
+        }else{
+            Alert.alert(Strings.auto_sync_in_progress_please_wait)
+        }
 
         }
         else {
@@ -424,6 +428,9 @@ const mapStateToProps = (state) => {
         filteredData: state.filteredData,
         scanedData: state.scanedData,
         loginData: state.loginData,
+        studentsAndExamData : state.studentsAndExamData,
+        apiStatus: state.apiStatus,
+        bgFlag: state.bgFlag,
         studentsAndExamData: state.studentsAndExamData,
         apiStatus: state.apiStatus
     }
