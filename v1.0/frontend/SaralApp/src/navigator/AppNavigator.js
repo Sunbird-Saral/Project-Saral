@@ -115,7 +115,8 @@ const testPushNotification = (title, msg) => {
         message: msg,
         playSound: true,
         // soundName: "notification.mp3",
-        priority: "high"
+        priority: "high",
+        importance: "high"
     });
 }
 
@@ -159,7 +160,7 @@ const saveDataInDB = async () => {
                             testPushNotification("Uploaded", Strings.auto_sync_completed)
                         }
                         apiResponse = res
-                        success = true
+                        
                         clearTimeout(id)
                         apiObj.processResponse(res)
                         storeFactory.dispatch(dispatchAPIAsync(apiObj));
@@ -200,7 +201,7 @@ function dispatchAPIAsync(apiObj) {
     }
 }
 
-setTimeout(() => {
+setInterval(() => {
 
     //get redux value 
     const isLogin = storeFactory.getState().loginData
