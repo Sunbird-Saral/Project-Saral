@@ -96,13 +96,18 @@ const ShareComponent = ({
     }
   }
 
-
+ const showModal = () => {
+    setIshidden(!ishidden);
+    setTimeout(() => {
+      setIshidden(ishidden);
+    }, 3000);
+  };
   return (
     <View style={{ width: '-10%' }}>
 
       <View style={styles.imageViewContainer}>
 
-        <TouchableOpacity onPress={() => setIshidden(!ishidden)}>
+        <TouchableOpacity onPress={()=> showModal()}>
           <View style={[styles.imageContainerStyle, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE }]}>
             <Text style={{ textAlign: 'center', fontSize: AppTheme.HEADER_FONT_SIZE_LARGE }}>{loginData.data.school.name.charAt(0)}</Text>
           </View>
