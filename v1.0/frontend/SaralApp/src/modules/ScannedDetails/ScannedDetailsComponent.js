@@ -67,6 +67,7 @@ const ScannedDetailsComponent = ({
     const [checkStdRollDuplicate, setCheckStdRollDuplicate] = useState([])
     const [toggleCheckBox, setToggleCheckBox] = useState(false)
     const [logmessage,setLogmessage] = useState()
+    const [multiPage, setMultiPage] = useState(0)
 
     const inputRef = React.createRef();
     const dispatch = useDispatch()
@@ -130,6 +131,9 @@ const ScannedDetailsComponent = ({
             }
             return multiple
         })
+        if (ocrLocalResponse.layout.pages > 0) {
+            setMultiPage(ocrLocalResponse.layout.pages)
+        }
 
         if (checkIsStudentMultipleSingle.length > 0) {
             setNextBtn("NEXT")
