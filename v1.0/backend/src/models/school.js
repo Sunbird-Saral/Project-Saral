@@ -35,37 +35,12 @@ const schoolSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    district: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    block: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    hmName: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    hmMobileNo: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    noOfStudents: {
-        type: String,
-        required: true,
-        trim: true
-    },
     storeTrainingData:{
         type: Boolean,
         default: false,
     },
 }, {
-    timestamps: true
+    timestamps: false
 })
 
 //instance method
