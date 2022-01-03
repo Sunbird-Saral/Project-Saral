@@ -851,6 +851,18 @@
       "className": "Class-5"
     }
   ],
+  "section": "A",
+  "name": "Ram Bisht",
+  "studentId": "3302055",
+  "schoolId": "demouser"
+},
+{
+  "studentClass": [
+    {
+      "classId": "5",
+      "className": "Class-5"
+    }
+  ],
   "section": "D",
   "name": "Rashmi Desai",
   "studentId": "3872645",
