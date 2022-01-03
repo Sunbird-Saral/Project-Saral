@@ -211,6 +211,8 @@ dependencies {
 
     compile project(':react-native-system-setting')
 
+    implementation project(':react-native-push-notification')
+
     // SaralSDK use OpenCV and SaralSDK code, make them as dependencies here
     implementation project(path: ':saralsdk')
 

@@ -94,6 +94,10 @@ export default strings = new LocalizedStrings({
         pat_string: 'PAT',
         backToDashboard:'Go Back To Dashboard',
         contactAdmin:'Something went wrong , contact Admin',
-        student_cant_be_mark_as_absent_once_scanned:"student can't be mark as absent once scanned !"
+        student_cant_be_mark_as_absent_once_scanned:"student can't be mark as absent once scanned !",
+        shareDataExceed:'Data limit exceeded,Extract from backend',
+        auto_sync_in_progress_please_wait: 'Auto-Sync Is In Progress, Please wait',
+        auto_sync_completed: 'Auto-Sync Completed',
+        saral_app_auto_sync_channel: 'saral-app-auto-sync-channel'
     }
 })

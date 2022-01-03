@@ -17,32 +17,35 @@ const ShareComponent = ({
   message,
   navigation,
   multiBrandingData,
-
+  bgFlag
 }) => {
-  const [isModalVisible, setIsModalVisible] = useState(false)
   const [ishidden, setIshidden] = useState(false)
   const dispatch = useDispatch()
 
 
   const Logoutcall = async () => {
     let data = await getScannedDataFromLocal();
-    Alert.alert(Strings.message_text, Strings.are_you_sure_you_want_to_logout, [
-      { 'text': Strings.no_text, style: 'cancel' },
-      {
-        'text': Strings.yes_text, onPress: async () => {
-          if (data != null && data.length > 0) {
-            for (const value of data) {
-              let apiObj = new SaveScanData(value, loginData.data.token);
-              saveStudentData(apiObj)
+    if (bgFlag) {
+      Alert.alert(Strings.auto_sync_in_progress_please_wait)
+    } else {
+      Alert.alert(Strings.message_text, Strings.are_you_sure_you_want_to_logout, [
+        { 'text': Strings.no_text, style: 'cancel' },
+        {
+          'text': Strings.yes_text, onPress: async () => {
+            if (data != null && data.length > 0) {
+              for (const value of data) {
+                let apiObj = new SaveScanData(value, loginData.data.token);
+                saveStudentData(apiObj)
+              }
+            } else {
+              await eraseErrorLogs()
+              dispatch(LogoutAction())
+              navigation.navigate('auth')
             }
-          } else {
-            await eraseErrorLogs()
-            dispatch(LogoutAction())
-            navigation.navigate('auth')
           }
         }
-      }
-    ])
+      ])
+    }
   }
 
 
@@ -87,7 +90,7 @@ const ShareComponent = ({
           // shared with activity type of result.activityType
 
         } else {
-
+          Alert.alert(Strings.shareDataExceed)
           // shared
         }
       }
@@ -96,13 +99,18 @@ const ShareComponent = ({
     }
   }
 
-
+ const showModal = () => {
+    setIshidden(!ishidden);
+    setTimeout(() => {
+      setIshidden(ishidden);
+    }, 3000);
+  };
   return (
     <View style={{ width: '-10%' }}>
 
       <View style={styles.imageViewContainer}>
 
-        <TouchableOpacity onPress={() => setIshidden(!ishidden)}>
+        <TouchableOpacity onPress={()=> showModal()}>
           <View style={[styles.imageContainerStyle, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE }]}>
             <Text style={{ textAlign: 'center', fontSize: AppTheme.HEADER_FONT_SIZE_LARGE }}>{loginData.data.school.name.charAt(0)}</Text>
           </View>
@@ -133,7 +141,8 @@ const mapStateToProps = (state) => {
     roiData: state.roiData,
     absentStudentDataResponse: state.absentStudentDataResponse,
     getScanStatusData: state.getScanStatusData,
-    multiBrandingData: state.multiBrandingData.response.data
+    multiBrandingData: state.multiBrandingData.response.data,
+    bgFlag: state.bgFlag
   }
 }
 

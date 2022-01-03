@@ -228,7 +228,6 @@ useEffect(() => {
         let dataPayload = absentPresentStatus
         let apiObj = new SaveScanData(dataPayload, token)
         setIsLoading(true)
-        dispatch(APITransport(apiObj));
         saveStudentData(apiObj)
     }
 
