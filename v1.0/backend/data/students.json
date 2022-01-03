@@ -1709,5 +1709,53 @@
   "name": "Rekha Joshi",
   "studentId": "3000007",
   "schoolId": "demouser"
+},
+{
+  "studentClass": [
+    {
+      "classId": "6",
+      "className": "Class-6"
+    }
+  ],
+  "section": "B",
+  "name": "Tejaswai Prakash",
+  "studentId": "3000008",
+  "schoolId": "demouser"
+},
+{
+  "studentClass": [
+    {
+      "classId": "6",
+      "className": "Class-6"
+    }
+  ],
+  "section": "B",
+  "name": "Kartika Pandey",
+  "studentId": "3000010",
+  "schoolId": "demouser"
+},
+{
+  "studentClass": [
+    {
+      "classId": "6",
+      "className": "Class-6"
+    }
+  ],
+  "section": "B",
+  "name": "Sumit Bajaj",
+  "studentId": "3000011",
+  "schoolId": "demouser"
+},
+{
+  "studentClass": [
+    {
+      "classId": "6",
+      "className": "Class-6"
+    }
+  ],
+  "section": "B",
+  "name": "Deepa Kumari",
+  "studentId": "3000012",
+  "schoolId": "demouser"
 }
 ]

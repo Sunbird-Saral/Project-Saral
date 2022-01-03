@@ -196,6 +196,22 @@
       "section": "C"
     }
   ],
+  "classId": "6",
+  "className": "Class-6",
+  "schoolId": "demouser"
+},
+{
+  "sections": [
+    {
+      "section": "D"
+    },
+    {
+      "section": "B"
+    },
+    {
+      "section": "C"
+    }
+  ],
   "classId": "2",
   "className": "Class-2",
   "schoolId": "u002"
