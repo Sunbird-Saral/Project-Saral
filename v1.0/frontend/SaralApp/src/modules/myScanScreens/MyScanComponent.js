@@ -195,7 +195,7 @@ class MyScanComponent extends Component {
                 this.setState({
                     activityOpen: true
                 })
-                SaralSDK.startCamera(JSON.stringify(this.props.roiData.data)).then(res => {
+                SaralSDK.startCamera(JSON.stringify(this.props.roiData.data),"1").then(res => {
                     let roisData = JSON.parse(res);
                     let cells = roisData.layout.cells;
                     this.consolidatePrediction(cells, roisData)

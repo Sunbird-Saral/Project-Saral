@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, ScrollView, ToastAndroid, Alert } from 'react-native';
+import { Text, View, ScrollView, ToastAndroid, Alert, Image, TouchableOpacity, PermissionsAndroid } from 'react-native';
 import { connect, useDispatch } from 'react-redux';
 import AppTheme from '../../utils/AppTheme';
 import { CELL_OMR, extractionMethod, multipleStudent, neglectData, SCAN_TYPES, studentLimitSaveInLocal, student_ID, TABLE_HEADER } from '../../utils/CommonUtils';
@@ -23,7 +23,10 @@ import APITransport from '../../flux/actions/transport/apitransport';
 import { bindActionCreators } from 'redux';
 import { OcrLocalResponseAction } from '../../flux/actions/apis/OcrLocalResponseAction';
 import { collectErrorLogs } from '../CollectErrorLogs';
+import {MultiPageActions} from '../../flux/actions/multiPageActions'
 
+import { Assets } from '../../assets';
+import SaralSDK from '../../../SaralSDK'
 //npm
 import CheckBox from '@react-native-community/checkbox';
 
@@ -35,7 +38,8 @@ const ScannedDetailsComponent = ({
     multiBrandingData,
     scanedData,
     loginData,
-    bgFlag
+    bgFlag,
+    roiData
 }) => {
 
 
@@ -133,6 +137,7 @@ const ScannedDetailsComponent = ({
         })
         if (ocrLocalResponse.layout.pages > 0) {
             setMultiPage(ocrLocalResponse.layout.pages)
+            setNextBtn("NEXT")
         }
 
         if (checkIsStudentMultipleSingle.length > 0) {
@@ -182,10 +187,13 @@ const ScannedDetailsComponent = ({
         let data = ''
         let elements = neglectData;
         data = ocrLocalResponse.layout.cells.filter((element) => {
-            if (element.format.name == elements[0] || element.format.name == elements[1] || element.format.name == elements[4]) {
+            if (element.format.name == elements[0] || element.format.name == elements[1] || element.format.name == elements[4] || element.page != 1) {
                 return false
             }
             else {
+                if (element.page > 0) {
+                    setCurrentIndex(currentIndex + 1)
+                }
                 return true
             }
         })
@@ -725,14 +733,64 @@ const ScannedDetailsComponent = ({
                 else {
                     setMaxMarkErr(false)
                     setObtnMarkErr(false)
-                    saveData(maximum)
+                    if (multiPage > 0) {
+                        saveScanedDataIntoRedux()
+                    } else {
+                        saveData(maximum)
+                    }
                 }
             } else {
                 //without MAX & OBTAINED MARKS
-                saveData(0)
+                if (multiPage > 0) {
+                    saveScanedDataIntoRedux()
+                } else {
+                    saveData(0)
+                }
             }
         }
     }
+
+    const goNextPage = () => {
+        onSubmitClick()
+    }
+
+    const filterScanDataAsCondition = () =>{
+        const elements = neglectData
+        let  data = ocrLocalResponse.layout.cells.filter((element) => {
+            if (element.format.name == elements[0] || element.format.name == elements[1] || element.format.name == elements[4] || element.page != currentIndex + 1) {
+                return false
+            }
+            else {
+                return true
+            }
+        })
+
+        return data
+    }
+
+    const saveScanedDataIntoRedux = () => {
+        let filterData = filterScanDataAsCondition()
+        setBtnName("BACK")
+        setNewArrayValue(filterData)
+        setCurrentIndex( currentIndex + 1)
+    }
+
+
+
+    const goBackPage = () => {
+        if (currentIndex - 1 >= 1) {
+            let filterData = filterScanDataAsCondition()
+            if (currentIndex == 1) {
+                setBtnName('cancel')
+            }
+            setNewArrayValue(filterData)
+            setCurrentIndex(currentIndex - 1)
+        }
+        else {
+            onBackButtonClick()
+        }
+    }
+
 
     const saveData = async (sumOfAllMarks) => {
         let elements = neglectData;
@@ -818,6 +876,46 @@ const ScannedDetailsComponent = ({
         return true
     }
 
+   const  openCameraActivity = async () => {
+        try {
+                SaralSDK.startCamera(JSON.stringify(roiData.data),"1").then(res => {
+                    console.log("RESOURCE",res);
+                    let roisData = JSON.parse(res);
+                    let cells = roisData.layout.cells;consolidatePrediction(cells, roisData)
+
+                }).catch((code, message) => {
+                })
+        } catch (err) {
+        }
+    };
+
+   const consolidatePrediction= (cells, roisData) => {
+        var marks = "";
+        var predictionConfidenceArray = []
+        var studentIdPrediction = ""
+        for (let i = 0; i < cells.length; i++) {
+            marks = ""
+            predictionConfidenceArray = []
+            for (let j = 0; j < cells[i].rois.length; j++) {
+
+                marks = marks + cells[i].rois[j].result.prediction,
+                predictionConfidenceArray.push(cells[i].rois[j].result.confidence)
+                // roisData.layout.cells[i].predictionConfidence = cells[i].rois[j].result.confidence
+
+            }
+            roisData.layout.cells[i].consolidatedPrediction = marks
+            roisData.layout.cells[i].predictionConfidence = predictionConfidenceArray
+            if (roisData.layout.cells[i].format.value === neglectData[0] || roisData.layout.cells[i].format.name.length-3 == neglectData[0].length) {
+                roisData.layout.cells[i].studentIdPrediction = marks
+            } else {
+                roisData.layout.cells[i].predictedMarks = marks
+            }
+
+
+        }
+       dispatch(OcrLocalResponseAction(JSON.parse(JSON.stringify(roisData))))
+    }
+
     return (
         <View style={{flex:1 }}>
              
@@ -832,6 +930,7 @@ const ScannedDetailsComponent = ({
                  navigation={navigation}
                  message={logmessage?JSON.stringify(logmessage, null, 2):''}
                  />
+
                 {
                     !summary &&
                     <View>
@@ -843,7 +942,22 @@ const ScannedDetailsComponent = ({
                         <View style={styles.container2}>
                             <View style={{ flex: 1 }}>
                                 <ScrollView contentContainerStyle={{ backgroundColor: AppTheme.WHITE, paddingBottom: '15%' }} keyboardShouldPersistTaps={'handled'}>
+                                    <View style={{flexDirection:'row',justifyContent: 'space-between',}}>
                                     <Text style={styles.studentDetailsTxtStyle}>{Strings.student_details}</Text>
+                                    <TouchableOpacity 
+                                    style={[styles.subTabContainerStyle]} 
+                                    onPress={openCameraActivity}
+                                    >
+                                         <View>
+                                             <Image
+                                                source={Assets.ScanButton}
+                                                style={{width:40, height:40}}
+                                                resizeMode={'contain'}
+                                            />
+                                            </View>
+                                            <Text style={styles.tabLabelStyle}>{Strings.scan_text}</Text>
+                                    </TouchableOpacity>
+                                    </View>
                                     <View style={styles.studentContainer}>
                                         <View style={styles.imageViewContainer}>
                                             <View style={styles.imageContainerStyle}>
@@ -951,12 +1065,12 @@ const ScannedDetailsComponent = ({
                                         <ButtonComponent
                                             customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE, marginTop: '5%' }]}
                                             btnText={btnName.toUpperCase()}
-                                            onPress={() => isMultipleStudent ? goBackFrame() : onBackButtonClick()}
+                                            onPress={() => isMultipleStudent ? goBackFrame() : multiPage > 0 ? goBackPage() : onBackButtonClick()}
                                         />
                                         <ButtonComponent
                                             customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE, marginTop: '5%' }]}
                                             btnText={nextBtn.toUpperCase()}
-                                            onPress={() => isMultipleStudent ? goNextFrame() : onSubmitClick()}
+                                            onPress={() => isMultipleStudent ? goNextFrame() : multiPage > 0 ? goNextPage() : onSubmitClick()}
                                         />
                                     </View>
 
@@ -981,7 +1095,7 @@ const mapStateToProps = (state) => {
         loginData: state.loginData,
         filteredData: state.filteredData.response,
         scanTypeData: state.scanTypeData.response,
-        roiData: state.roiData,
+        roiData: state.roiData.response,
         multiBrandingData: state.multiBrandingData.response.data,
         scanedData: state.scanedData.response,
         bgFlag: state.bgFlag
@@ -992,6 +1106,7 @@ const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
         APITransport: APITransport,
         OcrLocalResponseAction: OcrLocalResponseAction,
+        MultiPageActions: MultiPageActions
     }, dispatch)
 }
 

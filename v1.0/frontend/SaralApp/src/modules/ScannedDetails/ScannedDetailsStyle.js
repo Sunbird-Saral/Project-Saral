@@ -134,4 +134,17 @@ export const styles = {
         marginBottom: 20,
         borderRadius: 10
     },
+    tabLabelStyle: {
+        height: 70,
+        lineHeight: 20,
+        fontSize: AppTheme.FONT_SIZE_SMALL,
+        color: AppTheme.BLACK,
+        letterSpacing: 1,
+        fontWeight: 'bold'
+    },
+    subTabContainerStyle: {
+        marginBottom: -60,
+        paddingHorizontal: 20,
+        marginTop: 20
+    }
 }
