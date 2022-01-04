@@ -39,7 +39,8 @@ const ScannedDetailsComponent = ({
     scanedData,
     loginData,
     bgFlag,
-    roiData
+    roiData,
+    multiPageReducer
 }) => {
 
 
@@ -187,7 +188,7 @@ const ScannedDetailsComponent = ({
         let data = ''
         let elements = neglectData;
         data = ocrLocalResponse.layout.cells.filter((element) => {
-            if (element.format.name == elements[0] || element.format.name == elements[1] || element.format.name == elements[4] || element.page != 1) {
+            if (element.format.name == elements[0] || element.format.name == elements[1] || element.format.name == elements[4] || element.page && element.page != 1) {
                 return false
             }
             else {
@@ -228,10 +229,13 @@ const ScannedDetailsComponent = ({
                 return maximum
             });
             setSummOfObtainedMarks(maximum)
+            saveDataIntoMultiPageReducer(1)
             setNewArrayValue(data)
         } else {
+            saveDataIntoMultiPageReducer(1)
             //set Data of Other sheet except of marksObtained and maxMarks wala
             setNewArrayValue(data)
+            
         }
 
         //get student Id
@@ -244,7 +248,7 @@ const ScannedDetailsComponent = ({
         })
     }
 
-
+    
     const goNextFrame = () => {
 
         let validCell = false
@@ -734,7 +738,7 @@ const ScannedDetailsComponent = ({
                     setMaxMarkErr(false)
                     setObtnMarkErr(false)
                     if (multiPage > 0) {
-                        saveScanedDataIntoRedux()
+                        scanNextSheet()
                     } else {
                         saveData(maximum)
                     }
@@ -742,7 +746,7 @@ const ScannedDetailsComponent = ({
             } else {
                 //without MAX & OBTAINED MARKS
                 if (multiPage > 0) {
-                    saveScanedDataIntoRedux()
+                    scanNextSheet()
                 } else {
                     saveData(0)
                 }
@@ -754,35 +758,71 @@ const ScannedDetailsComponent = ({
         onSubmitClick()
     }
 
-    const filterScanDataAsCondition = () =>{
-        const elements = neglectData
-        let  data = ocrLocalResponse.layout.cells.filter((element) => {
-            if (element.format.name == elements[0] || element.format.name == elements[1] || element.format.name == elements[4] || element.page != currentIndex + 1) {
-                return false
+    const saveDataIntoMultiPageReducer = (num) => {
+        if (multiPage > 0) {
+            let data = {
+                "page" : currentIndex + num,
+                "scanData" : newArrayValue
             }
-            else {
-                return true
-            }
-        })
-
-        return data
+            multiPageReducer.push(data)
+            dispatch(MultiPageActions(multiPageReducer))
+        }
     }
 
-    const saveScanedDataIntoRedux = () => {
-        let filterData = filterScanDataAsCondition()
-        setBtnName("BACK")
-        setNewArrayValue(filterData)
-        setCurrentIndex( currentIndex + 1)
+    const filterScanDataAsPage = () => {
+        let  data = multiPageReducer.filter((element) => {
+            if (element.page == currentIndex - 1) {
+                return true
+            }
+            else {
+                return false
+            }
+        })
+        return data[0].scanData
+    }
+
+    const scanNextSheet = () => {
+        const elements = neglectData
+        let isAbleToGoNextPage = currentIndex + 1 <= multiPage
+        if (isAbleToGoNextPage) {
+            let checkIsNextPageExist = multiPageReducer.some(item=> item.page > currentIndex)
+            let filterDataAccordingPage = ocrLocalResponse.layout.cells.filter((element) => {
+                if (element.format.name == elements[0] || element.format.name == elements[1] || element.format.name == elements[4] || element.page && element.page != currentIndex + 1) {
+                    return false
+                }
+                else {
+                    return true
+                }
+            })
+            if (!checkIsNextPageExist && filterDataAccordingPage.length > 0) {
+                filterDataAccordingPage.forEach(element => {
+                    element.consolidatedPrediction = ""
+                });
+                saveDataIntoMultiPageReducer(0)
+                setCurrentIndex( currentIndex + 1)
+                setBtnName("BACK")
+                setNewArrayValue(filterDataAccordingPage)
+            } else {
+            setNewArrayValue(multiPageReducer[currentIndex].scanData)
+        }
+        if (currentIndex + 1 == multiPage ) {
+            setNextBtn(Strings.submit_text)
+        }
+    }else{
+        
+    }
+
     }
 
 
 
     const goBackPage = () => {
+        if (currentIndex - 1 == 1) {
+            setBtnName(Strings.cancel_text)
+        }
         if (currentIndex - 1 >= 1) {
-            let filterData = filterScanDataAsCondition()
-            if (currentIndex == 1) {
-                setBtnName('cancel')
-            }
+            setNextBtn(Strings.next_text)
+            let filterData = filterScanDataAsPage()
             setNewArrayValue(filterData)
             setCurrentIndex(currentIndex - 1)
         }
@@ -879,7 +919,6 @@ const ScannedDetailsComponent = ({
    const  openCameraActivity = async () => {
         try {
                 SaralSDK.startCamera(JSON.stringify(roiData.data),"1").then(res => {
-                    console.log("RESOURCE",res);
                     let roisData = JSON.parse(res);
                     let cells = roisData.layout.cells;consolidatePrediction(cells, roisData)
 
@@ -1098,7 +1137,8 @@ const mapStateToProps = (state) => {
         roiData: state.roiData.response,
         multiBrandingData: state.multiBrandingData.response.data,
         scanedData: state.scanedData.response,
-        bgFlag: state.bgFlag
+        bgFlag: state.bgFlag,
+        multiPageReducer: state.multiPage.response
     }
 }
 

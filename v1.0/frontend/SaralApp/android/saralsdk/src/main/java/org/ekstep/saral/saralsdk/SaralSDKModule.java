@@ -76,8 +76,9 @@ public class SaralSDKModule extends ReactContextBaseJavaModule implements Activi
     }
 
     @ReactMethod
-    void startCamera(String layoutSchema, Promise promise) {
+    void startCamera(String layoutSchema,String page, Promise promise) {
         Log.d(TAG, "startCamera called with: " + layoutSchema);
+        Log.d(TAG, "startCamera called with: " + page);
 
         mPromise                        = promise;
 
