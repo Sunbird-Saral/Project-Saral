@@ -8,7 +8,7 @@ const router = new express.Router()
 
 
 router.post('/schools/create', async (req, res) => {
-    const school = new School({ ...req.body, udiseCode: req.body.schoolId })
+    const school = new School({ ...req.body })
     try {
         school.state = req.body.state.toLowerCase()
         school.schoolId = req.body.schoolId.toLowerCase()
