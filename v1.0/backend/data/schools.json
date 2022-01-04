@@ -3,7 +3,6 @@
   "schoolId": "u001",
   "password": "tarento@123",
   "state": "up",
-  "udiseCode": "1",
   "storeTrainingData": true
 },
 {
@@ -11,7 +10,6 @@
   "schoolId": "od001",
   "password": "tarento@123",
   "state": "odisha",
-  "udiseCode": "2",
   "storeTrainingData": true
 },
 {
@@ -19,7 +17,6 @@
   "schoolId": "demouser",
   "password": "Demo@123",
   "state": "gujrat",
-  "udiseCode": "3",
   "storeTrainingData": true
 },
 {
@@ -27,7 +24,6 @@
 "schoolId": "u002",
 "password": "tarento@123",
 "state": "up",
-"udiseCode": "4",
 "storeTrainingData": true
 }
 ]

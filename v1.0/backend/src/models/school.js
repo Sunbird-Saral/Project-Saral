@@ -25,11 +25,6 @@ const schoolSchema = new mongoose.Schema({
             }
         }
     },
-    udiseCode: {
-        type: String,
-        required: true,
-        trim: true,
-    },
     state:{
         type: String,
         required: true,
