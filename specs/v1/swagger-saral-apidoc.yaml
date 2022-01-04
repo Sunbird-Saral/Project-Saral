@@ -837,12 +837,6 @@ definitions:
     properties: 
       data:
         $ref: '#/definitions/GetSavedScan'
-      totalPages:
-        type: number
-        example: 1
-      currentPage:
-        type: number
-        example: 1
         
   GetSavedScan:
         type: array
