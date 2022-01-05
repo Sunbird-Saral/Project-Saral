@@ -2422,7 +2422,7 @@
   "classId": "6",
   "examDate": "05/10/2021",
   "totalMarks": 10,
-  "type": "any_1s_10q_multichoice",
+  "type": "any_1s_15q_multichoice",
   "questions": [
     {
       "questionId": "1",
@@ -2473,7 +2473,32 @@
       "questionId": "10",
       "indicatorTitle": "L0-10",
       "questionMarks": "1"
-    } 
+    },
+    {
+      "questionId": "11",
+      "indicatorTitle": "L0-11",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "12",
+      "indicatorTitle": "L0-12",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "13",
+      "indicatorTitle": "L0-13",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "14",
+      "indicatorTitle": "L0-14",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "15",
+      "indicatorTitle": "L0-15",
+      "questionMarks": "1"
+    }  
   ],
   "examId": 20,
   "schoolId": "demouser"
