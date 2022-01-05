@@ -662,9 +662,6 @@ definitions:
       school:
         type: object
         properties:
-          _id:
-            type: string
-            example: "618bc72460546f3224df6229"
           name:
             type: string
             example: "Dummy school 1"
@@ -757,10 +754,6 @@ definitions:
       school:
         type: object
         properties:
-          _id:
-            type: string
-            description: Unique id
-            example: "61922ebd5d6f484c78e8513f"
           name: 
             type: string
             example: "dummy school 1"
@@ -1051,10 +1044,6 @@ definitions:
         type: string
         description: "Class Section"
         example: "D"
-      _id:
-        type: string
-        description: "Unique id"
-        example: "61922ebd5d6f484c78e8513f"
       name:
         type: string
         description: "Student Name"
@@ -1067,6 +1056,9 @@ definitions:
         type: string
         description: "School Id"
         example: "up001"
+      createdAt:
+        type: string
+        format: date-time
       updatedAt:
         type: string
         format: date-time
@@ -1421,10 +1413,6 @@ definitions:
       properties:
         sections:
           $ref: "#/definitions/sections"
-        _id:
-          type: string
-          description: "Unique id"
-          example: "61922ebd5d6f484c78e8513f"
         classId:
           type: string
           example: "2"
@@ -1457,10 +1445,6 @@ definitions:
     properties:
       sections:
         $ref: "#/definitions/sections"
-      _id:
-        type: string
-        description: "Unique Id"
-        example: "61922ebd5d6f484c78e8513f"
       classId:
         type: string
         example: "2"
