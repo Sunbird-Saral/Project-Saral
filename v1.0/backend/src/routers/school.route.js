@@ -13,8 +13,14 @@ router.post('/schools/create', async (req, res) => {
         school.state = req.body.state.toLowerCase()
         school.schoolId = req.body.schoolId.toLowerCase()
         await school.save()
+        let response = {
+            storeTrainingData: school.storeTrainingData,
+            name: school.name,
+            schoolId: school.schoolId,
+            state: school.state
+        }
         const token = await school.generateAuthToken()
-        res.status(201).send({ school, token })
+        res.status(201).send({ response, token })
     } catch (e) {
         if (e.message.includes(' duplicate key error')) {
             let key = Object.keys(e.keyValue)
@@ -52,8 +58,14 @@ router.post('/schools/login', async (req, res) => {
         const school = await School.findByCredentials(req.body.schoolId.toLowerCase(), req.body.password)
         const token = await school.generateAuthToken()
         let classes = []
+        let result = {
+            storeTrainingData: school.storeTrainingData,
+            name: school.name,
+            schoolId: school.schoolId,
+            state: school.state
+        }
         let response = {
-            school,
+            result,
             token
         }
         if (req.body.classes) {

@@ -61,7 +61,7 @@ schoolSchema.methods.toJSON = function () {
 //model method created
 schoolSchema.statics.findByCredentials = async (schoolId, password) => {
     
-    const school = await School.findOne({ schoolId })
+    const school = await School.findOne({ schoolId },{__v: 0})
     
     if(!school) {
         throw new Error('School Id or Password is not correct.')
