@@ -145,6 +145,17 @@ export const styles = {
     subTabContainerStyle: {
         marginBottom: -60,
         paddingHorizontal: 20,
-        marginTop: 20
-    }
+        paddingTop: 20,
+        height: 90,
+        borderRadius: 100,
+        margin: 10
+    },
+    scanTabContainerStyle: {
+        width: 80,
+        height: 80,
+        position: 'absolute',
+        borderRadius: 40,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
 }
