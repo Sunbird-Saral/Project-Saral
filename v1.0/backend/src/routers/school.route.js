@@ -55,21 +55,21 @@ router.get('/schools', async (req, res) => {
 
 router.post('/schools/login', async (req, res) => {
     try {
-        const school = await School.findByCredentials(req.body.schoolId.toLowerCase(), req.body.password)
-        const token = await school.generateAuthToken()
+        const schools = await School.findByCredentials(req.body.schoolId.toLowerCase(), req.body.password)
+        const token = await schools.generateAuthToken()
         let classes = []
-        let result = {
-            storeTrainingData: school.storeTrainingData,
-            name: school.name,
-            schoolId: school.schoolId,
-            state: school.state
+        let school = {
+            storeTrainingData: schools.storeTrainingData,
+            name: schools.name,
+            schoolId: schools.schoolId,
+            state: schools.state
         }
         let response = {
-            result,
+            school,
             token
         }
         if (req.body.classes) {
-            const classData = await ClassModel.findClassesBySchools(school.schoolId)
+            const classData = await ClassModel.findClassesBySchools(schools.schoolId)
 
             classData.forEach(data => {
                 const { sections, classId, className } = data
