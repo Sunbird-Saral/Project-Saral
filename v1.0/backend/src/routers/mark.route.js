@@ -119,15 +119,15 @@ const fetchSavedData = async (req) => {
 
     try {
         const count = await Mark.countDocuments(match)
-        let totalPages;
+        // let totalPages;
         if (req.body.page) {
             req.body.limit = 10;
             req.body.page = 1;
-            totalPages = count ? Math.ceil(count / parseInt(req.body.limit)) : 0
+            // totalPages = count ? Math.ceil(count / parseInt(req.body.limit)) : 0
         }else{
             req.body.limit = 0;
             req.body.page = 1;
-            totalPages = 1
+            // totalPages = 1
         }
 
         const savedScan = await Mark.find(match, { _id: 0, __v: 0 })
@@ -136,8 +136,8 @@ const fetchSavedData = async (req) => {
 
         return {
             data: savedScan,
-            totalPages: totalPages,
-            currentPage: totalPages != 0 ? parseInt(req.body.page) : 0
+            // totalPages: totalPages,
+            // currentPage: totalPages != 0 ? parseInt(req.body.page) : 0
         }
     }
     catch (e) {

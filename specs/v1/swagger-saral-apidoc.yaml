@@ -649,29 +649,11 @@ definitions:
           state:
             type: string
             example: "up" 
-          district:
-            type: string
-            example: "delhi"
-          block:
-            type: string
-            example: "haldwani"
-          hmName:
-            type: string
-            example: "abc"
-          noOfStudents:
-            type: string
-            example: "100"
           storeTrainingData:
             type: boolean
             default: false
             example: true
             description: "If this is set to true frontend application will return base 64 encoded images . In savesMarksAPI and getSavedScanAPI these APIs will get data and value of encoded images will be stored in these fields studentIdTrainingData and trainningData, studentIdTrainingData field will contain base 64 encoded images of rollnumber and trainningData field will contain base 64 encoded images for marks. "
-          createdAt: 
-            type: string
-            format: date-time
-          updatedAt:
-            type: string
-            format: date-time
   
         
   LoginSchool:
@@ -680,9 +662,6 @@ definitions:
       school:
         type: object
         properties:
-          _id:
-            type: string
-            example: "618bc72460546f3224df6229"
           name:
             type: string
             example: "Dummy school 1"
@@ -692,35 +671,11 @@ definitions:
           state:
             type: string
             example: "up"
-          district:
-            type: string
-            example: "delhi"
-          block:
-            type: string
-            example: "haldwani"
-          hmName:
-            type: string
-            example: "abc"
-          hmMobileNo:
-            type: string
-            example: "8006079875"
-          noOfStudents:
-            type: string
-            example: "100"
-          udiseCode:
-            type: string
-            example: "4"
           storeTrainingData:
             type: boolean
             description: "If this is set to true frontend application will return base 64 encoded images . In savesMarksAPI and getSavedScanAPI these APIs will get data and value of encoded images will be stored in these fields studentIdTrainingData and trainningData, studentIdTrainingData field will contain base 64 encoded images of rollnumber and trainningData field will contain base 64 encoded images for marks. "
             default: false
             example: true
-          createdAt: 
-            type: string
-            format: date-time
-          updatedAt:
-            type: string
-            format: date-time
           
       classes:
             $ref: '#/definitions/classResponse'
@@ -774,12 +729,6 @@ definitions:
       - schoolId
       - password
       - state
-      - district
-      - block
-      - hmName
-      - hmMobileNo
-      - noOfStudents
-      - udiseCode
     properties:
       name:
         type: string
@@ -793,24 +742,6 @@ definitions:
       state:
         type: string
         example: "up"
-      district:
-        type: string
-        example: "delhi"
-      block: 
-        type: string
-        example: "haldwani"
-      hmName:
-        type: string
-        example: "xyz"
-      hmMobileNo:
-        type: string
-        example: "8006079875"
-      noOfStudents:
-        type: string
-        example: "100"
-      udiseCode:
-        type: string
-        example: "1"
       storeTrainingData:
         type: boolean
         default: false
@@ -823,10 +754,6 @@ definitions:
       school:
         type: object
         properties:
-          _id:
-            type: string
-            description: Unique id
-            example: "61922ebd5d6f484c78e8513f"
           name: 
             type: string
             example: "dummy school 1"
@@ -836,30 +763,6 @@ definitions:
           state:
             type: string
             example: "up"
-          district:
-            type: string
-            example: "delhi"
-          block:
-            type: string
-            example: "haldwani"
-          hmName:
-            type: string
-            example: "abc"
-          hmMobileNo:
-            type: string
-            example: "8006079875"
-          noOfStudents:
-            type: string
-            example: "100"
-          udiseCode:
-            type: string
-            example: "123"
-          createdAt:
-            type: string
-            format: date-time
-          updatedAt:
-            type: string
-            format: date-time
       token:
         type: object
         example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTMwOWQyYjJlNzEyMzAyZGY5NmM3NjEiLCJpYXQiOjE2MzA1NzU5MTV9.FCt2Q4R_sN1ctdOfoOPzBzfdUohAPA-TlLFtJJEeTBE"
@@ -873,21 +776,6 @@ definitions:
       state:
         type: string
         example: "up"
-      district:
-        type: string
-        example: "delhi"
-      block:
-        type: string
-        example: "haldwani"
-      hmName:
-        type: string
-        example: "abc"
-      hmMobileNo:
-        type: string
-        example: "8006079875"
-      noOfStudents:
-        type: string
-        example: "100"
       udisceCode:
         type: string
         example: "1"
@@ -942,12 +830,6 @@ definitions:
     properties: 
       data:
         $ref: '#/definitions/GetSavedScan'
-      totalPages:
-        type: number
-        example: 1
-      currentPage:
-        type: number
-        example: 1
         
   GetSavedScan:
         type: array
@@ -1162,10 +1044,6 @@ definitions:
         type: string
         description: "Class Section"
         example: "D"
-      _id:
-        type: string
-        description: "Unique id"
-        example: "61922ebd5d6f484c78e8513f"
       name:
         type: string
         description: "Student Name"
@@ -1535,10 +1413,6 @@ definitions:
       properties:
         sections:
           $ref: "#/definitions/sections"
-        _id:
-          type: string
-          description: "Unique id"
-          example: "61922ebd5d6f484c78e8513f"
         classId:
           type: string
           example: "2"
@@ -1571,10 +1445,6 @@ definitions:
     properties:
       sections:
         $ref: "#/definitions/sections"
-      _id:
-        type: string
-        description: "Unique Id"
-        example: "61922ebd5d6f484c78e8513f"
       classId:
         type: string
         example: "2"
