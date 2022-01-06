@@ -136,9 +136,9 @@ const ScannedDetailsComponent = ({
             }
             return multiple
         })
-        if (ocrLocalResponse.layout.pages > 0) {
+        if (ocrLocalResponse.layout.hasOwnProperty("pages") && ocrLocalResponse.layout.pages > 0) {
             setMultiPage(ocrLocalResponse.layout.pages)
-            setNextBtn("NEXT")
+            setNextBtn("SCAN PAGE #2")
         }
 
         if (checkIsStudentMultipleSingle.length > 0) {
@@ -738,7 +738,7 @@ const ScannedDetailsComponent = ({
                     setMaxMarkErr(false)
                     setObtnMarkErr(false)
                     if (multiPage > 0) {
-                        scanNextSheet()
+                        openCameraActivity("next")
                     } else {
                         saveData(maximum)
                     }
@@ -746,7 +746,7 @@ const ScannedDetailsComponent = ({
             } else {
                 //without MAX & OBTAINED MARKS
                 if (multiPage > 0) {
-                    scanNextSheet()
+                    openCameraActivity("next")
                 } else {
                     saveData(0)
                 }
@@ -801,8 +801,10 @@ const ScannedDetailsComponent = ({
 
             const checkIsNextPageExist = multiPageReducer.findIndex(_element => _element.page === currentIndex + 1);
 
+            const checkIsCurrentPageExist = multiPageReducer.findIndex(_element => _element.page === currentIndex);
+
             let filterDataAccordingPage = ocrLocalResponse.layout.cells.filter((element) => {
-                if (element.format.name == elements[0] || element.format.name == elements[1] || element.format.name == elements[4] || element.page != currentIndex + 1) {
+                if (element.format.name == elements[0] || element.format.name == elements[1] || element.format.name == elements[4] || element.page != 1) {
                     return false
                 }
                 else {
@@ -812,41 +814,68 @@ const ScannedDetailsComponent = ({
 
 
             if (checkIsNextPageExist == -1 && filterDataAccordingPage.length > 0) {
-                filterDataAccordingPage.forEach(element => {
-                    element.consolidatedPrediction = ""
-                });
-                saveDataIntoMultiPageReducer(0, newArrayValue)
+                setNextBtn(`Scan Page#${currentIndex + 2}`)
+                if (checkIsCurrentPageExist > -1) {
+                    updatePageInReducer(newArrayValue)
+                }else{
+                    saveDataIntoMultiPageReducer(0, newArrayValue)
+                }
                 setCurrentIndex(currentIndex + 1)
-                setBtnName("BACK")
+                setBtnName(`Scan Page#${currentIndex}`)
                 setNewArrayValue(filterDataAccordingPage)
             } else {
                 updatePageInReducer(newArrayValue)
                 setNewArrayValue(multiPageReducer[currentIndex].scanData)
                 setCurrentIndex(currentIndex + 1)
-                setBtnName("BACK")
+                setBtnName(`Scan Page#${currentIndex}`)
+                setNextBtn(`Scan Page#${currentIndex+2}`)
             }
             if (currentIndex + 1 == multiPage) {
                 setNextBtn(Strings.submit_text)
             }
         } else {
+            saveDataIntoMultiPageReducer(0, newArrayValue)
+            saveMultiPageIntoLocalStorage()
         }
 
     }
 
+    const saveMultiPageIntoLocalStorage = () => {
+    }
 
 
     const goBackPage = () => {
-        if (currentIndex - 1 == 1) {
-            setBtnName(Strings.cancel_text)
-        }
-        if (currentIndex - 1 >= 1) {
-            setNextBtn(Strings.next_text)
-            let filterData = filterScanDataAsPage()
-            setNewArrayValue(filterData)
+        openCameraActivity("back")
+    }
+
+    const scanBackSheet = () => {
+        const elements = neglectData
+        if (currentIndex -1 >= 1) {
+            
+            let filterDataAccordingPage = ocrLocalResponse.layout.cells.filter((element) => {
+                if (element.format.name == elements[0] || element.format.name == elements[1] || element.format.name == elements[4] || element.page != 1) {
+                    return false
+                }
+                else {
+                    return true
+                }
+            })
+            filterDataAccordingPage.forEach((element,index) => {
+                element.format.value  = `QUESTION ${((5*currentIndex) + 1 - (5 - index ))}`
+            });
+
+            setNextBtn(`Scan Page#${currentIndex}`)
+            setBtnName(`Scan Page#${currentIndex - 2}`)
+            updatePageInReducer(filterDataAccordingPage)
+            setNewArrayValue(multiPageReducer)
             setCurrentIndex(currentIndex - 1)
+            if (currentIndex - 1 == 1) {
+                setBtnName(Strings.cancel_text)
+            }
         }
         else {
             onBackButtonClick()
+            dispatch(MultiPageActions([]))
         }
     }
 
@@ -935,12 +964,12 @@ const ScannedDetailsComponent = ({
         return true
     }
 
-    const openCameraActivity = async () => {
+    const openCameraActivity = async (value) => {
         try {
             SaralSDK.startCamera(JSON.stringify(roiData.data), "1").then(res => {
                 let roisData = JSON.parse(res);
                 let cells = roisData.layout.cells;
-                consolidatePrediction(cells, roisData)
+                consolidatePrediction(cells, roisData,value)
 
             }).catch((code, message) => {
             })
@@ -948,7 +977,7 @@ const ScannedDetailsComponent = ({
         }
     };
 
-    const consolidatePrediction = (cells, roisData) => {
+    const consolidatePrediction = (cells, roisData, value) => {
         var marks = "";
         var predictionConfidenceArray = []
         for (let i = 0; i < cells.length; i++) {
@@ -968,7 +997,19 @@ const ScannedDetailsComponent = ({
             }
         }
         dispatch(OcrLocalResponseAction(JSON.parse(JSON.stringify(roisData))))
-        overWriteScanSheet(roisData)
+        let rollNumber = roisData.layout.cells[0].consolidatedPrediction
+        // if (rollNumber != studentId) {
+        //     setStdErr(Strings.student_id_should_be_same)
+        // } else {
+            if (value == "next") {
+                setStdErr("")
+                scanNextSheet()
+            }
+            else{
+                scanBackSheet()
+            }
+        // }
+        // overWriteScanSheet(roisData)
     }
 
     const overWriteScanSheet = (roisData) => {
@@ -1015,23 +1056,8 @@ const ScannedDetailsComponent = ({
                             <View style={styles.container2}>
                                 <View style={{ flex: 1 }}>
                                     <ScrollView contentContainerStyle={{ backgroundColor: AppTheme.WHITE, paddingBottom: '15%' }} keyboardShouldPersistTaps={'handled'}>
-                                        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
 
-                                            <Text style={styles.studentDetailsTxtStyle}>{Strings.student_details}</Text>
-                                            <TouchableOpacity
-                                                style={[styles.subTabContainerStyle, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
-                                                onPress={() => openCameraActivity()}
-                                            >
-                                                <View>
-                                                    <Image
-                                                        source={Assets.ScanButton}
-                                                        style={{ width: 40, height: 40 }}
-                                                        resizeMode={'contain'}
-                                                    />
-                                                </View>
-                                                <Text style={styles.tabLabelStyle}>{Strings.scan_text}</Text>
-                                            </TouchableOpacity>
-                                        </View>
+                                        <Text style={styles.studentDetailsTxtStyle}>{Strings.student_details}</Text>
                                         <View style={styles.studentContainer}>
                                             <View style={styles.imageViewContainer}>
                                                 <View style={styles.imageContainerStyle}>
@@ -1056,8 +1082,14 @@ const ScannedDetailsComponent = ({
                                                     <Text style={styles.nameTextStyle}>{Strings.Exam} : {filteredData.subject} {filteredData.examDate} ({filteredData.examTestID})</Text>
                                                     {
                                                         isMultipleStudent
-                                                        &&
-                                                        <Text style={styles.nameTextStyle}>{Strings.page_no + ': ' + (currentIndex + 1)}</Text>
+                                                            ?
+                                                            <Text style={styles.nameTextStyle}>{Strings.page_no + ': ' + (currentIndex + 1)}</Text>
+                                                            :
+                                                            ocrLocalResponse.layout.pages > 0
+                                                                ?
+                                                                <Text style={styles.nameTextStyle}>{Strings.page_no + ': ' + (currentIndex)}</Text>
+                                                                :
+                                                                null
                                                     }
                                                     {
                                                         isMultipleStudent

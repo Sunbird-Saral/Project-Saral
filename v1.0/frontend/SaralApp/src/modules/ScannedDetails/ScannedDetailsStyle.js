@@ -158,4 +158,13 @@ export const styles = {
         justifyContent: 'center',
         alignItems: 'center'
     },
+    scanSubTabContainerStyle: {
+        width: '90%',
+        height: '90%',
+        marginBottom: 30,
+        backgroundColor: AppTheme.BLUE,
+        borderRadius: 45,
+        justifyContent: 'center',
+        alignItems: 'center'
+    }
 }
