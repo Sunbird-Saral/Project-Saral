@@ -2422,7 +2422,7 @@
   "classId": "6",
   "examDate": "05/10/2021",
   "totalMarks": 10,
-  "type": "any_1s_15q_multichoice",
+  "type": "any_1s_15q_multipage",
   "questions": [
     {
       "questionId": "1",
