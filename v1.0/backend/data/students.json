@@ -1709,5 +1709,29 @@
   "name": "Rekha Joshi",
   "studentId": "3000007",
   "schoolId": "demouser"
+},
+{
+  "studentClass": [
+    {
+      "classId": "7",
+      "className": "Class-7"
+    }
+  ],
+  "section": "B",
+  "name": "Sadhana Kumari",
+  "studentId": "7000001",
+  "schoolId": "u002"
+},
+{
+  "studentClass": [
+    {
+      "classId": "7",
+      "className": "Class-7"
+    }
+  ],
+  "section": "C",
+  "name": "Ashu jeena",
+  "studentId": "7000002",
+  "schoolId": "u002"
 }
 ]
