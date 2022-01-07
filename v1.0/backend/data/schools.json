@@ -25,5 +25,12 @@
 "password": "tarento@123",
 "state": "up",
 "storeTrainingData": true
-}
+},
+{
+  "name": "Dummy Skill School",
+  "schoolId": "label",
+  "password": "Label@123",
+  "state": "up",
+  "storeTrainingData": true
+  }
 ]

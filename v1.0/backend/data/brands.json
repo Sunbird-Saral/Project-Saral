@@ -10,6 +10,36 @@
         "SchoolId": "OrganisationId",
         "Class": "Category",
         "Section": "Skill"
+      },
+      "studentList": {
+        "School": "Organisation",
+        "SchoolId": "OrganisationId",
+        "Class": "Category",
+        "Section": "Skill"
+      },
+      "scanHistory": {
+        "School": "Organisation",
+        "SchoolId": "OrganisationId",
+        "Class": "Category",
+        "Section": "Skill"
+      },
+      "myScan": {
+        "School": "Organisation",
+        "SchoolId": "OrganisationId",
+        "Class": "Category",
+        "Section": "Skill"
+      },
+      "scanStatus": {
+        "School": "Organisation",
+        "SchoolId": "OrganisationId",
+        "Class": "Category",
+        "Section": "Skill"
+      },
+      "scanStatusLocal": {
+        "School": "Organisation",
+        "SchoolId": "OrganisationId",
+        "Class": "Category",
+        "Section": "Skill"
       }
     },
     "state": "up"

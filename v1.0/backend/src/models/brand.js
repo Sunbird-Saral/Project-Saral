@@ -29,6 +29,36 @@ const BrandSchema = new mongoose.Schema({
             SchoolId: String,
             Class: String,
             Section: String
+        },
+        studentList: {
+            School: String,
+            SchoolId: String,
+            Class: String,
+            Section: String
+        },
+        scanHistory: {
+            School: String,
+            SchoolId: String,
+            Class: String,
+            Section: String
+        },
+        myScan: {
+            School: String,
+            SchoolId: String,
+            Class: String,
+            Section: String
+        },
+        scanStatus: {
+            School: String,
+            SchoolId: String,
+            Class: String,
+            Section: String
+        },
+        scanStatusLocal: {
+            School: String,
+            SchoolId: String,
+            Class: String,
+            Section: String
         }
     }   
 },{

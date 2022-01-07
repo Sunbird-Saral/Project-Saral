@@ -691,7 +691,8 @@ class SelectDetailsComponent extends Component {
 
     render() {
         const { navigation, isLoading, defaultSelected, classList, classListIndex, selectedClass, sectionList, sectionListIndex, selectedSection, pickerDate, selectedDate, subArr, selectedSubject, subIndex, errClass, errSub, errDate, errSection, sectionValid, dateVisible, examTestID } = this.state
-        const { loginData,multiBrandingData } = this.props      
+        const { loginData,multiBrandingData } = this.props     
+        console.log('multibbb////',multiBrandingData.screenLabels) 
         return (
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
                  <ShareComponent
