@@ -23,7 +23,7 @@ const BrandSchema = new mongoose.Schema({
         // required: true,
         trim: true
     },
-    navigationLabels: {
+    screenLabels: {
         selectDetails: {
             School: String,
             SchoolId: String,

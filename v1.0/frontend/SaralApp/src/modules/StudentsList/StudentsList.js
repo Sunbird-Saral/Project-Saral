@@ -11,6 +11,7 @@ import { getErrorMessage, getLoginCred, getStudentsExamData, setAbsentStudentDat
 import ButtonComponent from '../common/components/ButtonComponent';
 import StudentsDataComponent from './StudentsDataComponent';
 import ShareComponent from '../common/components/Share'
+import MultibrandLabels from '../common/components/Multibrandlabels';
 //style
 import { styles } from './StudentsDataStyle';
 
@@ -301,7 +302,17 @@ useEffect(() => {
              <ShareComponent
                  navigation={navigation}
                  />
-            {(loginData && loginData.data) &&
+
+            {
+                    (multiBrandingData && multiBrandingData.screenLabels) ?
+                        <MultibrandLabels
+                        School ={loginData.data.school.name}
+                        SchoolId={loginData.data.school.schoolId}
+                        Class={filteredData.className}
+                        Section={filteredData.section}
+                        />
+                     :
+            (loginData && loginData.data) &&
                 <View style={{width:'60%'}}>
                     <Text
                         style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingTop: '4%' }}
@@ -319,17 +330,18 @@ useEffect(() => {
                             {loginData.data.school.schoolId}
                         </Text>
                     </Text>
-                </View>
-
-            }
-            <Text
-                style={{ fontSize: AppTheme.FONT_SIZE_REGULAR - 3, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '3%', marginBottom: '4%' }}
+                    <Text
+                style={{ fontSize: AppTheme.FONT_SIZE_REGULAR - 3, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', marginBottom: '4%' }}
             >
                 {Strings.version_text + ' : '}
                 <Text style={{ fontWeight: 'normal' }}>
                     {apkVersion}
                 </Text>
             </Text>
+                </View>
+
+            }
+         
             <FlatList
                 data={allStudentData}
                 renderItem={renderStudentData}

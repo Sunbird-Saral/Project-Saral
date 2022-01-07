@@ -26,6 +26,7 @@ import { getScannedDataFromLocal } from '../../utils/StorageUtils';
 import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
 import C from '../../flux/actions/constants';
 import ShareComponent from '../common/components/Share';
+import MultibrandLabels from '../common/components/Multibrandlabels';
 
 const clearState = {
     defaultSelected: Strings.select_text,
@@ -690,7 +691,7 @@ class SelectDetailsComponent extends Component {
 
     render() {
         const { navigation, isLoading, defaultSelected, classList, classListIndex, selectedClass, sectionList, sectionListIndex, selectedSection, pickerDate, selectedDate, subArr, selectedSubject, subIndex, errClass, errSub, errDate, errSection, sectionValid, dateVisible, examTestID } = this.state
-        const { loginData } = this.props      
+        const { loginData,multiBrandingData } = this.props      
         return (
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
                  <ShareComponent
@@ -698,7 +699,55 @@ class SelectDetailsComponent extends Component {
                  message={this.state.logmessage?JSON.stringify(this.state.logmessage, null, 2):''}
                 
                  />
-                {(loginData && loginData.data) &&
+                {(multiBrandingData && multiBrandingData.screenLabels) ?
+                <MultibrandLabels
+                School ={loginData.data.school.name}
+                SchoolId={loginData.data.school.schoolId}
+                Class={selectedClass}
+                Section={selectedSection}
+                
+                />
+
+                // <MultibrandLabels
+                // // School ={multiBrandingData.navigationLabels.selectDetails.School}
+                // />
+            //      <View style={{ marginTop: 10,width:'60%' }}>
+            //      <Text
+            //          style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}
+            //      >
+            //          {Strings.school_name + ' : '}
+            //          <Text style={{ fontWeight: 'normal' }}>
+            //              {multiBrandingData.navigationLabels.selectDetails.School}
+            //          </Text>
+            //      </Text>
+            //      <Text
+            //          style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}
+            //      >
+            //          {Strings.schoolId_text + ' : '}
+            //          <Text style={{ fontWeight: 'normal' }}>
+            //              {multiBrandingData.navigationLabels.selectDetails.SchoolId}
+            //          </Text>
+            //      </Text>
+            //      <Text
+            //          style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}
+            //      >
+            //          {Strings.class_text + ' : '}
+            //          <Text style={{ fontWeight: 'normal' }}>
+            //              {multiBrandingData.navigationLabels.selectDetails.Class}
+            //          </Text>
+            //      </Text>
+            //      <Text
+            //          style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}
+            //      >
+            //          {Strings.section + ' : '}
+            //          <Text style={{ fontWeight: 'normal' }}>
+            //              {multiBrandingData.navigationLabels.selectDetails.Section}
+            //          </Text>
+            //      </Text>
+            //  </View>
+             :
+                
+                (loginData && loginData.data) &&
                     <View style={{ marginTop: 20,width:'60%' }}>
                         <Text
                             style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}
@@ -716,15 +765,16 @@ class SelectDetailsComponent extends Component {
                                 {loginData.data.school.schoolId}
                             </Text>
                         </Text>
-                    </View>}
-                <Text
-                    style={{ fontSize: AppTheme.FONT_SIZE_REGULAR - 3, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '3%', marginBottom: '4%' }}
+                        <Text
+                    style={{ fontSize: AppTheme.FONT_SIZE_REGULAR - 3, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', marginBottom: '4%' }}
                 >
                     {Strings.version_text + ' : '}
                     <Text style={{ fontWeight: 'normal' }}>
                         {apkVersion}
                     </Text>
                 </Text>
+                    </View>}
+                
                 <ScrollView
                     contentContainerStyle={{ paddingTop: '5%', paddingBottom: '35%' }}
                     showsVerticalScrollIndicator={false}

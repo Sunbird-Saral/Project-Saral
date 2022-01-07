@@ -98,6 +98,10 @@ export default strings = new LocalizedStrings({
         shareDataExceed:'Data limit exceeded,Extract from backend',
         auto_sync_in_progress_please_wait: 'Auto-Sync Is In Progress, Please wait',
         auto_sync_completed: 'Auto-Sync Completed',
-        saral_app_auto_sync_channel: 'saral-app-auto-sync-channel'
+        saral_app_auto_sync_channel: 'saral-app-auto-sync-channel',
+        organization:'Organization',
+        organizationId:'Organization Id',
+        category:'Category',
+        skill:'Skill'
     }
 })

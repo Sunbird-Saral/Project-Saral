@@ -15,6 +15,7 @@ import { getScannedDataFromLocal,getErrorMessage } from '../../utils/StorageUtil
 import ButtonComponent from '../common/components/ButtonComponent';
 import { neglectData } from '../../utils/CommonUtils';
 import ShareComponent from '../common/components/Share';
+import MultibrandLabels from '../common/components/Multibrandlabels';
 import { Assets } from '../../assets';
 
 LogBox.ignoreAllLogs()
@@ -237,7 +238,7 @@ class MyScanComponent extends Component {
     }
     render() {
         const { isLoading } = this.state;
-        const { loginData } = this.props
+        const { loginData,multiBrandingData } = this.props
         return (
 
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
@@ -246,6 +247,34 @@ class MyScanComponent extends Component {
                  />
                <View>
                 {
+                      (multiBrandingData && multiBrandingData.screenLabels) ?
+                      <View style={{ marginTop: 10,width:'62%' }}>
+                      <Text
+                      style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}
+                  >
+                      {Strings.organization + ' : '}
+                      <Text style={{ fontWeight: 'normal' }}>
+                          {loginData.data.school.name}
+                      </Text>
+                  </Text>
+                  <Text
+                      style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}
+                  >
+                      {Strings.organizationId + ' : '}
+                      <Text style={{ fontWeight: 'normal' }}>
+                          {loginData.data.school.schoolId}
+                      </Text>
+                  </Text>
+                  </View>
+                   :
+                // (multiBrandingData && multiBrandingData.navigationLabels) ?
+                //             <MultibrandLabels
+                //             School ={multiBrandingData.navigationLabels.selectDetails.School}
+                //             SchoolId={multiBrandingData.navigationLabels.selectDetails.SchoolId}
+                //             Class={multiBrandingData.navigationLabels.selectDetails.Class}
+                //             Section={multiBrandingData.navigationLabels.selectDetails.Section}
+                //             />
+                //          :
                     (loginData && loginData.data)
                     &&
                     <View style={{ width:'60%' }}>
@@ -277,7 +306,7 @@ class MyScanComponent extends Component {
                 }
                 
                 </View> 
-                <ScrollView>
+                <ScrollView scrollEnabled>
                 <View style={styles.container1}>
                 <Text style={[styles.header1TextStyle, { borderColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE, backgroundColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE }]}>
                     {Strings.ongoing_scan}
@@ -302,7 +331,7 @@ class MyScanComponent extends Component {
                 </View>
                 </ScrollView>
                 <View style={styles.bottomTabStyle}>
-                <View style={[{elevation:20,  backgroundColor: 'transparent', justifyContent: 'center',alignItems:'center' }]}>
+                <View style={[{elevation:10,  backgroundColor: 'transparent', justifyContent: 'center',alignItems:'center' }]}>
                     <TouchableOpacity style={[styles.subTabContainerStyle]}
                         onPress={this.onScanClick}
                     >
@@ -419,7 +448,7 @@ const styles = {
         justifyContent: 'center',
         alignItems: 'center'
     },
-    nxtBtnStyle:{ marginHorizontal: 40,marginTop:8, borderRadius: 10 },
+    nxtBtnStyle:{ marginHorizontal: 40,marginTop:8,marginBottom:20, borderRadius: 10 },
    
     nxtBtnStyle1: {
         marginTop:15,
