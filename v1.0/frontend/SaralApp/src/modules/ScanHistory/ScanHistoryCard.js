@@ -34,6 +34,7 @@ const ScanHistoryCard = ({
     studentsAndExamData,
     apiStatus,
     bgFlag,
+    multiBrandingData
 }) => {
     const [loading, setLoading] = useState(false)
     const [isModalVisible, setIsModalVisible] = useState(false)
@@ -216,7 +217,7 @@ const ScanHistoryCard = ({
                     <View>
                         <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                                <Text>{Strings.class_text}</Text>
+                                <Text>{multiBrandingData.screenLabels ? multiBrandingData.screenLabels.scanHistoryCard.Class : Strings.class_text}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
                                 <Text>{filteredData.response.className}</Text>
@@ -224,7 +225,7 @@ const ScanHistoryCard = ({
                         </View>
                         <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                                <Text>{Strings.section}</Text>
+                                <Text>{multiBrandingData.screenLabels ? multiBrandingData.screenLabels.scanHistoryCard.Section:Strings.section}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
                                 <Text>{filteredData.response.section}</Text>
@@ -232,7 +233,7 @@ const ScanHistoryCard = ({
                         </View>
                         <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                                <Text>{Strings.exam_date}</Text>
+                            <Text>{multiBrandingData.screenLabels ? multiBrandingData.screenLabels.scanHistoryCard.ExamDate:Strings.exam_date}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
                                 <Text>{filteredData.response.examDate}</Text>
@@ -240,7 +241,7 @@ const ScanHistoryCard = ({
                         </View>
                         <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                                <Text>{Strings.subject}</Text>
+                                <Text>{multiBrandingData.screenLabels ? multiBrandingData.screenLabels.scanHistoryCard.Subject:Strings.subject}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
                                 <Text>{filteredData.response.subject}</Text>
@@ -248,7 +249,7 @@ const ScanHistoryCard = ({
                         </View>
                         <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle,]}>
-                                <Text>{Strings.Exam_Type}</Text>
+                            <Text>{multiBrandingData.screenLabels ? multiBrandingData.screenLabels.scanHistoryCard.ExamType:Strings.Exam_Type}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle,]}>
                                 {Examtypedata.map((item) =>
@@ -260,7 +261,7 @@ const ScanHistoryCard = ({
                         </View>
                         <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                                <Text>{Strings.exam_id}</Text>
+                            <Text>{multiBrandingData.screenLabels ? multiBrandingData.screenLabels.scanHistoryCard.ExamId:Strings.exam_id}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
                                 <Text>{filteredData.response.examTestID}</Text>
@@ -268,7 +269,7 @@ const ScanHistoryCard = ({
                         </View>
                         <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                                <Text>{Strings.exam_details}</Text>
+                            <Text>{multiBrandingData.screenLabels ? multiBrandingData.screenLabels.scanHistoryCard.ExamDetail:Strings.exam_details}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
                                 <Text  onPress={() => setIsModalVisible(!isModalVisible)} style={{textDecorationLine:'underline',color:'blue'}}>{Strings.details}</Text>
@@ -390,7 +391,7 @@ const ScanHistoryCard = ({
 
                                         <ExamDetailsPopup
                                             customRowStyle={{ width: '30%', }}
-                                            rowTitle={stu.questionId}
+                                            rowTitle={ stu.questionId}
                                             rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                         />
                                         <ExamDetailsPopup
@@ -432,7 +433,8 @@ const mapStateToProps = (state) => {
         apiStatus: state.apiStatus,
         bgFlag: state.bgFlag,
         studentsAndExamData: state.studentsAndExamData,
-        apiStatus: state.apiStatus
+        apiStatus: state.apiStatus,
+        multiBrandingData: state.multiBrandingData.response.data
     }
 }
 

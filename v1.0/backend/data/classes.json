@@ -249,17 +249,17 @@
 {
   "sections": [
     {
-      "section": "D"
+      "section": "Carpentry"
     },
     {
-      "section": "B"
+      "section": "Plumbing"
     },
     {
-      "section": "C"
+      "section": "Cleaning"
     }
   ],
   "classId": "5",
-  "className": "Class-5",
-  "schoolId": "label"
+  "className": "HouseHold",
+  "schoolId": "skill001"
 }
 ]

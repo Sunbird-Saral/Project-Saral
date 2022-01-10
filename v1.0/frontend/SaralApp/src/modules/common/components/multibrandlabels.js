@@ -6,6 +6,8 @@ import Strings from '../../../utils/Strings';
 const  MultibrandLabels = ({
     School,
     SchoolId,
+    Label1,
+    Label2,
     Class,
     Section
 }) => {
@@ -14,7 +16,7 @@ const  MultibrandLabels = ({
         <Text
             style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}
         >
-            {Strings.organization + ' : '}
+            {Label1 + ' : '}
             <Text style={{ fontWeight: 'normal' }}>
                 {School}
             </Text>
@@ -22,27 +24,12 @@ const  MultibrandLabels = ({
         <Text
             style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}
         >
-            {Strings.organizationId + ' : '}
+           {Label2 ?  Label2 + ' : ' : null}
             <Text style={{ fontWeight: 'normal' }}>
                 {SchoolId}
             </Text>
         </Text>
-        <Text
-            style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}
-        >
-            {Strings.category + ' : '}
-            <Text style={{ fontWeight: 'normal' }}>
-                {Class}
-            </Text>
-        </Text>
-        <Text
-            style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}
-        >
-            {Strings.skill + ' : '}
-            <Text style={{ fontWeight: 'normal' }}>
-                {Section}
-            </Text>
-        </Text>
+        
     </View>
     );
 }

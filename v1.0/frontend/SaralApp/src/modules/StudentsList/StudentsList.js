@@ -306,10 +306,10 @@ useEffect(() => {
             {
                     (multiBrandingData && multiBrandingData.screenLabels) ?
                         <MultibrandLabels
+                        Label1={multiBrandingData.screenLabels.studentList.School}
+                        Label2={multiBrandingData.screenLabels.studentList.SchoolId}
                         School ={loginData.data.school.name}
                         SchoolId={loginData.data.school.schoolId}
-                        Class={filteredData.className}
-                        Section={filteredData.section}
                         />
                      :
             (loginData && loginData.data) &&

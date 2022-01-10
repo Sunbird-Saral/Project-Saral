@@ -112,15 +112,15 @@ const ScanStatus = ({
                  navigation={navigation}
                  />
                  <View>
-            {
-                 (multiBrandingData && multiBrandingData.screenLabels) ?
-                 <MultibrandLabels
-                 School ={loginData.data.school.name}
-                 SchoolId={loginData.data.school.schoolId}
-                 Class={filteredData.className}
-                 Section={filteredData.section}
-                 />
-              :
+                 {
+                    (multiBrandingData && multiBrandingData.screenLabels) ?
+                        <MultibrandLabels
+                        Label1={multiBrandingData.screenLabels.scanStatus.School}
+                        Label2={multiBrandingData.screenLabels.scanStatus.SchoolId}
+                        School ={loginData.data.school.name}
+                        SchoolId={loginData.data.school.schoolId}
+                        />
+                     :
                 (loginData && loginData.data)
                 &&
                 <View style={{width:'60%'}}>

@@ -143,14 +143,14 @@ useEffect(
                  />
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
             {
-                 (multiBrandingData && multiBrandingData.screenLabels) ?
-                 <MultibrandLabels
-                 School ={loginData.data.school.name}
-                 SchoolId={loginData.data.school.SchoolId}
-                 Class={filteredData.className}
-                 Section={filteredData.section}
-                 />
-              :
+                    (multiBrandingData && multiBrandingData.screenLabels) ?
+                        <MultibrandLabels
+                        Label1={multiBrandingData.screenLabels.scanStatusLocal.School}
+                        Label2={multiBrandingData.screenLabels.scanStatusLocal.SchoolId}
+                        School ={loginData.data.school.name}
+                        SchoolId={loginData.data.school.schoolId}
+                        />
+                     :
                 (loginData && loginData.data)
                 &&
                 <View>

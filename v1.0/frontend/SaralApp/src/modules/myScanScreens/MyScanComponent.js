@@ -246,35 +246,13 @@ class MyScanComponent extends Component {
                  navigation={this.props.navigation}
                  />
                <View>
-                {
-                      (multiBrandingData && multiBrandingData.screenLabels) ?
-                      <View style={{ marginTop: 10,width:'62%' }}>
-                      <Text
-                      style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}
-                  >
-                      {Strings.organization + ' : '}
-                      <Text style={{ fontWeight: 'normal' }}>
-                          {loginData.data.school.name}
-                      </Text>
-                  </Text>
-                  <Text
-                      style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}
-                  >
-                      {Strings.organizationId + ' : '}
-                      <Text style={{ fontWeight: 'normal' }}>
-                          {loginData.data.school.schoolId}
-                      </Text>
-                  </Text>
-                  </View>
-                   :
-                // (multiBrandingData && multiBrandingData.navigationLabels) ?
-                //             <MultibrandLabels
-                //             School ={multiBrandingData.navigationLabels.selectDetails.School}
-                //             SchoolId={multiBrandingData.navigationLabels.selectDetails.SchoolId}
-                //             Class={multiBrandingData.navigationLabels.selectDetails.Class}
-                //             Section={multiBrandingData.navigationLabels.selectDetails.Section}
-                //             />
-                //          :
+               {(multiBrandingData && multiBrandingData.screenLabels) ?
+                <MultibrandLabels
+                Label1={multiBrandingData.screenLabels.scanHistory.School}
+                Label2={multiBrandingData.screenLabels.scanHistory.SchoolId}
+                School ={loginData.data.school.name}
+                SchoolId={loginData.data.school.schoolId}
+                />:
                     (loginData && loginData.data)
                     &&
                     <View style={{ width:'60%' }}>
@@ -372,7 +350,7 @@ const styles = {
     container1: {
         marginHorizontal: '4%',
         alignItems: 'center',
-        // marginTop:13,
+         marginTop:10,
     },
     onGoingContainer: {
         marginHorizontal: '4%',

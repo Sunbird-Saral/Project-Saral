@@ -82,15 +82,11 @@ const ScanHistory = ({
                  />
             
                  <View>
-                {
-                        (multiBrandingData && multiBrandingData.screenLabels) ?
-                            <MultibrandLabels
-                            School ={loginData.data.school.name}
-                            SchoolId={loginData.data.school.schoolId}
-                            Class={filteredData.className}
-                            Section={filteredData.section}
-                            />
-                         :
+                 {(multiBrandingData && multiBrandingData.screenLabels) ?
+                <MultibrandLabels
+                Label1={multiBrandingData.screenLabels.scanHistory.School}
+                School ={loginData.data.school.name}
+                />:
                     (loginData && loginData.data)
                     &&
                     <View style={{ width:'60%' }}>
@@ -185,5 +181,5 @@ const styles = StyleSheet.create({
         color: AppTheme.BLACK,
         letterSpacing: 1
     },
-    nxtBtnStyle:{ marginHorizontal: 40, marginTop: 10, borderRadius: 10, }
+    nxtBtnStyle:{ marginHorizontal: 40, marginTop: 20, borderRadius: 10, }
 });

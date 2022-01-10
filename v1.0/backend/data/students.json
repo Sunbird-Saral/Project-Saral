@@ -1717,9 +1717,93 @@
       "className": "Class-5"
     }
   ],
-  "section": "B",
+  "section": "Carpentry",
   "name": "Radha",
-  "studentId": "5678",
-  "schoolId": "label"
+  "studentId": "401",
+  "schoolId": "skill001"
+},
+{
+  "studentClass": [
+    {
+      "classId": "5",
+      "className": "Class-5"
+    }
+  ],
+  "section": "Carpentry",
+  "name": "Meera",
+  "studentId": "402",
+  "schoolId": "skill001"
+},
+{
+  "studentClass": [
+    {
+      "classId": "5",
+      "className": "Class-5"
+    }
+  ],
+  "section": "Carpentry",
+  "name": "Sweta",
+  "studentId": "403",
+  "schoolId": "skill001"
+},
+{
+  "studentClass": [
+    {
+      "classId": "5",
+      "className": "Class-5"
+    }
+  ],
+  "section": "Carpentry",
+  "name": "Alpesh",
+  "studentId": "404",
+  "schoolId": "skill001"
+},
+{
+  "studentClass": [
+    {
+      "classId": "5",
+      "className": "Class-5"
+    }
+  ],
+  "section": "Carpentry",
+  "name": "Mukesh",
+  "studentId": "405",
+  "schoolId": "skill001"
+},
+{
+  "studentClass": [
+    {
+      "classId": "5",
+      "className": "Class-5"
+    }
+  ],
+  "section": "Carpentry",
+  "name": "Divyansh",
+  "studentId": "406",
+  "schoolId": "skill001"
+},
+{
+  "studentClass": [
+    {
+      "classId": "5",
+      "className": "Class-5"
+    }
+  ],
+  "section": "Carpentry",
+  "name": "Shreya",
+  "studentId": "407",
+  "schoolId": "skill001"
+},
+{
+  "studentClass": [
+    {
+      "classId": "5",
+      "className": "Class-5"
+    }
+  ],
+  "section": "Carpentry",
+  "name": "Durgesh",
+  "studentId": "408",
+  "schoolId": "skill001"
 }
 ]
