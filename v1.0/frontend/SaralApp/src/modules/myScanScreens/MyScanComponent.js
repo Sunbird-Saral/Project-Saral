@@ -15,7 +15,7 @@ import { getScannedDataFromLocal,getErrorMessage } from '../../utils/StorageUtil
 import ButtonComponent from '../common/components/ButtonComponent';
 import { neglectData } from '../../utils/CommonUtils';
 import ShareComponent from '../common/components/Share';
-import MultibrandLabels from '../common/components/Multibrandlabels';
+import MultibrandLabels from '../common/components/multibrandlabels';
 import { Assets } from '../../assets';
 
 LogBox.ignoreAllLogs()

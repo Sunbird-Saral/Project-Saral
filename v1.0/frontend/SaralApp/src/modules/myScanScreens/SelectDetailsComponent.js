@@ -26,7 +26,7 @@ import { getScannedDataFromLocal } from '../../utils/StorageUtils';
 import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
 import C from '../../flux/actions/constants';
 import ShareComponent from '../common/components/Share';
-import MultibrandLabels from '../common/components/Multibrandlabels';
+import MultibrandLabels from '../common/components/multibrandlabels';
 
 const clearState = {
     defaultSelected: Strings.select_text,

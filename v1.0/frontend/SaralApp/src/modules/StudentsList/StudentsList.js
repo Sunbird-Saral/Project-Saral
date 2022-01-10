@@ -11,7 +11,7 @@ import { getErrorMessage, getLoginCred, getStudentsExamData, setAbsentStudentDat
 import ButtonComponent from '../common/components/ButtonComponent';
 import StudentsDataComponent from './StudentsDataComponent';
 import ShareComponent from '../common/components/Share'
-import MultibrandLabels from '../common/components/Multibrandlabels';
+import MultibrandLabels from '../common/components/multibrandlabels';
 //style
 import { styles } from './StudentsDataStyle';
 
