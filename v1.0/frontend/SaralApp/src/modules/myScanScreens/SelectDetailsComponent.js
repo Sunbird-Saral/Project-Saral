@@ -26,7 +26,7 @@ import { getScannedDataFromLocal } from '../../utils/StorageUtils';
 import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
 import C from '../../flux/actions/constants';
 import ShareComponent from '../common/components/Share';
-import MultibrandLabels from '../common/components/multibrandlabels';
+import MultibrandLabels from '../common/components/Multibrandlabels';
 
 const clearState = {
     defaultSelected: Strings.select_text,
@@ -692,7 +692,8 @@ class SelectDetailsComponent extends Component {
     render() {
         const { navigation, isLoading, defaultSelected, classList, classListIndex, selectedClass, sectionList, sectionListIndex, selectedSection, pickerDate, selectedDate, subArr, selectedSubject, subIndex, errClass, errSub, errDate, errSection, sectionValid, dateVisible, examTestID } = this.state
         const { loginData, multiBrandingData } = this.props
-        // console.log(multiBrandingData.screenLabels.selectDetails)
+        const BrandLabel = multiBrandingData.screenLabels.selectDetails[0]
+
         return (
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
                 <ShareComponent
@@ -700,12 +701,12 @@ class SelectDetailsComponent extends Component {
                     message={this.state.logmessage ? JSON.stringify(this.state.logmessage, null, 2) : ''}
 
                 />
-                {multiBrandingData&&multiBrandingData.screenLabels?
+                {multiBrandingData&&BrandLabel?
                     <MultibrandLabels
-                        Label1={multiBrandingData.screenLabels&&multiBrandingData.screenLabels.selectDetails.School}
-                        Label2={multiBrandingData.screenLabels&&multiBrandingData.screenLabels.selectDetails.SchoolId}
-                        School={loginData.data.school.name}
-                        SchoolId={loginData.data.school.schoolId}
+                         Label1={BrandLabel.School}
+                         Label2={BrandLabel.SchoolId}
+                         School={loginData.data.school.name}
+                         SchoolId={loginData.data.school.schoolId}
                     />
 
                     :
@@ -751,9 +752,9 @@ class SelectDetailsComponent extends Component {
                         <View style={{ backgroundColor: 'white', paddingHorizontal: '5%', minWidth: '100%', paddingVertical: '10%', borderRadius: 4 }}>
                             <View style={[styles.fieldContainerStyle, { paddingBottom: classListIndex != -1 ? 0 : '10%' }]}>
                                 <View style={{ flexDirection: 'row' }}>
-                                    {multiBrandingData && multiBrandingData.screenLabels ?
-                                        <Text style={[styles.labelTextStyle]}>{multiBrandingData.screenLabels.selectDetails.Class}</Text> :
-                                        <Text style={[styles.labelTextStyle]}>{Strings.class_text}</Text>}
+                                   
+                                        <Text style={[styles.labelTextStyle]}>{BrandLabel&&BrandLabel.Class ? BrandLabel.Class : Strings.class_text }</Text> 
+                                       
                                     {errClass != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 1, width: '60%', textAlign: 'right', fontWeight: 'normal' }]}>{errClass}</Text>}
                                 </View>
                                 <DropDownMenu
@@ -768,10 +769,9 @@ class SelectDetailsComponent extends Component {
                             {classListIndex != -1 &&
                                 <View style={[styles.fieldContainerStyle, { paddingBottom: sectionListIndex != -1 && sectionValid ? 0 : '10%' }]}>
                                     <View style={{ flexDirection: 'row' }}>
-                                        {multiBrandingData && multiBrandingData.screenLabels ?
-                                            <Text style={[styles.labelTextStyle]}>{multiBrandingData.screenLabels.selectDetails.Section}</Text> :
-                                            <Text style={[styles.labelTextStyle]}>{Strings.section}</Text>
-                                        }
+                                       
+                                            <Text style={[styles.labelTextStyle]}>{BrandLabel && BrandLabel.Section ? BrandLabel.Section:Strings.section}</Text> 
+                                        
                                         {errSection != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 1, width: '60%', textAlign: 'right', fontWeight: 'normal' }]}>{errSection}</Text>}
                                     </View>
                                     <DropDownMenu
@@ -787,10 +787,7 @@ class SelectDetailsComponent extends Component {
                                 sectionListIndex != -1 && sectionValid &&
                                 <View style={[styles.fieldContainerStyle, { paddingBottom: subIndex != -1 ? '10%' : '10%' }]}>
                                     <View style={{ flexDirection: 'row' }}>
-                                    {multiBrandingData && multiBrandingData.screenLabels ?
-                                    <Text style={[[styles.labelTextStyle, { width: '50%' }]]}>{multiBrandingData.screenLabels.selectDetails.Subject}</Text>:
-                                        <Text style={[[styles.labelTextStyle, { width: '50%' }]]}>{Strings.subject}</Text>
-                                    }
+                                    <Text style={[styles.labelTextStyle]}>{BrandLabel && BrandLabel.Subject ? BrandLabel.Subject:Strings.subject}</Text> 
                                         {errSub != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 1, width: '50%', textAlign: 'right', fontWeight: 'normal' }]}>{errSub}</Text>}
                                     </View>
                                     <DropDownMenu

@@ -17,7 +17,7 @@ import ButtonComponent from '../common/components/ButtonComponent';
 import ShareComponent from '../common/components/Share';
 import APITransport from '../../flux/actions/transport/apitransport';
 import { collectErrorLogs } from '../CollectErrorLogs';
-import MultibrandLabels from '../common/components/multibrandlabels';
+import MultibrandLabels from '../common/components/Multibrandlabels';
 
 import { ScrollView } from 'react-native-gesture-handler';
 const ScanHistory = ({
@@ -31,6 +31,7 @@ const ScanHistory = ({
     //Hooks
     const [isLoading, setIsLoading] = useState(false)
     const [scanStatusData, setScanStatusData] = useState(false)
+    const BrandLabel = multiBrandingData.screenLabels.scanHistory[0]
     //functions
         useEffect(() => {
         sumOfLocalData()
@@ -82,10 +83,12 @@ const ScanHistory = ({
                  />
             
                  <View>
-                 {(multiBrandingData && multiBrandingData.screenLabels) ?
+                 {(multiBrandingData && BrandLabel) ?
                 <MultibrandLabels
-                Label1={multiBrandingData.screenLabels.scanHistory.School}
+                Label1={BrandLabel.School}
+                Label2={BrandLabel.SchoolId}
                 School ={loginData.data.school.name}
+                SchoolId={loginData.data.school.schoolId}
                 />:
                     (loginData && loginData.data)
                     &&

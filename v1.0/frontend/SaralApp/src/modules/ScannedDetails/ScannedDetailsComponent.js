@@ -67,6 +67,9 @@ const ScannedDetailsComponent = ({
     const [checkStdRollDuplicate, setCheckStdRollDuplicate] = useState([])
     const [toggleCheckBox, setToggleCheckBox] = useState(false)
     const [logmessage,setLogmessage] = useState()
+    const BrandLabel = multiBrandingData.screenLabels.scannedDetailComponent[0]
+    
+
 
     const inputRef = React.createRef();
     const dispatch = useDispatch()
@@ -839,7 +842,7 @@ const ScannedDetailsComponent = ({
                         <View style={styles.container2}>
                             <View style={{ flex: 1 }}>
                                 <ScrollView contentContainerStyle={{ backgroundColor: AppTheme.WHITE, paddingBottom: '15%' }} keyboardShouldPersistTaps={'handled'}>
-                                    <Text style={styles.studentDetailsTxtStyle}>{multiBrandingData.screenLabels ? multiBrandingData.screenLabels.scannedDetailComponent.EmployeDetail:Strings.student_details}</Text>
+                                    <Text style={styles.studentDetailsTxtStyle}>{BrandLabel && BrandLabel.EmployeDetail ? BrandLabel.EmployeDetail:Strings.student_details}</Text>
                                     <View style={styles.studentContainer}>
                                         <View style={styles.imageViewContainer}>
                                             <View style={styles.imageContainerStyle}>
@@ -850,9 +853,9 @@ const ScannedDetailsComponent = ({
                                             <View style={styles.detailsSubContainerStyle}>
                                                 <Text style={[styles.nameTextStyle, { fontWeight: 'bold', color: AppTheme.BLACK, fontSize: AppTheme.FONT_SIZE_LARGE }]}>{studentData.length > 0 && studentData[0].name}</Text>
                                                 <TextField
-                                                    labelText={multiBrandingData.screenLabels ? multiBrandingData.screenLabels.scannedDetailComponent.StudentId : Strings.student_id}
+                                                    labelText={BrandLabel && BrandLabel.StudentId ? BrandLabel.StudentId : Strings.student_id}
                                                     errorField={ stdErr != '' || isNaN(studentId)}
-                                                    errorText={multiBrandingData.screenLabels?stdErr != '' ? stdErr :multiBrandingData.screenLabels.scannedDetailComponent.CorrectId  : stdErr != '' ? stdErr : Strings.please_correct_student_id}
+                                                    errorText={BrandLabel && BrandLabel.CorrectId?stdErr != '' ? stdErr :BrandLabel.CorrectId  : stdErr != '' ? stdErr : Strings.please_correct_student_id}
                                                     onChangeText={(text) => {
                                                         setStudentID(text)
                                                     }
@@ -861,7 +864,7 @@ const ScannedDetailsComponent = ({
                                                     editable={edit}
                                                     keyboardType={'numeric'}
                                                 />
-                                                <Text style={styles.nameTextStyle}>{multiBrandingData.screenLabels ? multiBrandingData.screenLabels.scannedDetailComponent.Exam : Strings.Exam} : {filteredData.subject} {filteredData.examDate} ({filteredData.examTestID})</Text>
+                                                <Text style={styles.nameTextStyle}>{BrandLabel && BrandLabel.Exam ? BrandLabel.Exam : Strings.Exam} : {filteredData.subject} {filteredData.examDate} ({filteredData.examTestID})</Text>
                                                 {
                                                     isMultipleStudent
                                                     &&
@@ -892,19 +895,19 @@ const ScannedDetailsComponent = ({
 
                                     <View style={{ flexDirection: 'row', marginTop: 20 }}>
                                         {
-                                            // multiBrandingData.screenLabels?
-                                            // multiBrandingData.screenLabels.scannedDetailComponent.ListLabel.map((data) => {
-                                            //     return (
-                                            //         <MarksHeaderTable
-                                            //             customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
-                                            //             key={data}
-                                            //             rowTitle={data}
-                                            //             rowBorderColor={AppTheme.TAB_BORDER}
-                                            //             editable={false}
-                                            //         />
-                                            //     )
-                                            // })
-                                            // :
+                                            BrandLabel &&BrandLabel.ListTableHeading[0]  ?
+                                            BrandLabel.ListTableHeading.map((data) => {
+                                                return (
+                                                    <MarksHeaderTable
+                                                        customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
+                                                        key={data}
+                                                        rowTitle={data}
+                                                        rowBorderColor={AppTheme.TAB_BORDER}
+                                                        editable={false}
+                                                    />
+                                                )
+                                            })
+                                            :
                                             TABLE_HEADER.map((data) => {
                                                 return (
                                                     <MarksHeaderTable

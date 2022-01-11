@@ -6,17 +6,16 @@ import Strings from '../../../utils/Strings';
 const  MultibrandLabels = ({
     School,
     SchoolId,
+    Label,
     Label1,
-    Label2,
-    Class,
-    Section
+    Label2
 }) => {
     return (
         <View style={{ marginTop: 10,width:'62%' }}>
         <Text
             style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}
         >
-            {Label1 + ' : '}
+            {Label1 ? Label1 + ' : ': Strings.school_name + ' : '}
             <Text style={{ fontWeight: 'normal' }}>
                 {School}
             </Text>
@@ -24,7 +23,7 @@ const  MultibrandLabels = ({
         <Text
             style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}
         >
-           {Label2 ? Label2 + ' : ' : null}
+           {Label2 ? Label2 + ' : ' : Strings.schoolId_text + ' : '}
             <Text style={{ fontWeight: 'normal' }}>
                 {SchoolId}
             </Text>

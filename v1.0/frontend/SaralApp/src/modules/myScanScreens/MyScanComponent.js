@@ -15,7 +15,7 @@ import { getScannedDataFromLocal,getErrorMessage } from '../../utils/StorageUtil
 import ButtonComponent from '../common/components/ButtonComponent';
 import { neglectData } from '../../utils/CommonUtils';
 import ShareComponent from '../common/components/Share';
-import MultibrandLabels from '../common/components/multibrandlabels';
+import MultibrandLabels from '../common/components/Multibrandlabels';
 import { Assets } from '../../assets';
 
 LogBox.ignoreAllLogs()
@@ -239,6 +239,7 @@ class MyScanComponent extends Component {
     render() {
         const { isLoading } = this.state;
         const { loginData,multiBrandingData } = this.props
+        const BrandLabel = multiBrandingData.screenLabels.myScan[0]
         return (
 
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
@@ -246,10 +247,10 @@ class MyScanComponent extends Component {
                  navigation={this.props.navigation}
                  />
                <View>
-               {(multiBrandingData && multiBrandingData.screenLabels) ?
+               {(multiBrandingData && BrandLabel) ?
                 <MultibrandLabels
-                Label1={multiBrandingData.screenLabels.scanHistory.School}
-                Label2={multiBrandingData.screenLabels.scanHistory.SchoolId}
+                Label1={BrandLabel.School}
+                Label2={BrandLabel.SchoolId}
                 School ={loginData.data.school.name}
                 SchoolId={loginData.data.school.schoolId}
                 />:

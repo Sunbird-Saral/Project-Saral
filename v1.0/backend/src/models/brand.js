@@ -24,46 +24,46 @@ const BrandSchema = new mongoose.Schema({
         trim: true
     },
     screenLabels: {
-        selectDetails: {
+        selectDetails: [{
             School: String,
             SchoolId: String,
             Class: String,
             Section: String,
             Subject: String
-        },
-        studentList: {
+        }],
+        studentList: [{
             School: String,
             SchoolId: String,
             Class: String,
             Section: String,
             Subject: String
-        },
-        scanHistory: {
+        }],
+        scanHistory: [{
             School: String,
             SchoolId: String,
             Class: String,
             Section: String,
             Subject: String
-        },
-        myScan: {
+        }],
+        myScan: [{
             School: String,
             SchoolId: String,
             Class: String,
             Section: String,
             Subject: String
-        },
-        scanStatus: {
+        }],
+        scanStatus: [{
             School: String,
             SchoolId: String,
             Class: String,
             Section: String,
             Subject: String
-        },
-        scanStatusLocal: {
+        }],
+        scanStatusLocal: [{
             School: String,
             SchoolId: String,
-        },
-        scanHistoryCard: {
+        }],
+        scanHistoryCard: [{
             School: String,
             SchoolId: String,
             Class: String,
@@ -72,23 +72,22 @@ const BrandSchema = new mongoose.Schema({
             ExamDate: String,
             ExamType: String,
             ExamId: String,
-            ExamDetail: String
-        },
-        examDetailsPopup: {
-            QuestionId: String,
-            IndicatorTitle: String,
-            QuestionMark: String,
-        },
-        scannedDetailComponent: {
+            ExamDetail: String,
+            Details: String
+        }],
+        examDetailsPopup: [
+           String
+        ],
+        scannedDetailComponent: [{
            StudentId: String,
            Exam: String,
            Subject: String,
-           Marks: String,
-           SerialNo: String,
-           Questions: String,
            EmployeDetail: String,
-           CorrectId: String
-        }
+           CorrectId: String,
+           ListTableHeading:[
+               String
+           ]
+        }]
     }   
 },{
     timestamps: true

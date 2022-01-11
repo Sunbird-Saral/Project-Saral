@@ -21,7 +21,7 @@ import APITransport from '../../flux/actions/transport/apitransport'
 import AppTheme from '../../utils/AppTheme';
 import { getPresentAbsentStudent, getScannedDataFromLocal,getErrorMessage } from '../../utils/StorageUtils';
 import ShareComponent from '../common/components/Share';
-import MultibrandLabels from '../common/components/multibrandlabels';
+import MultibrandLabels from '../common/components/Multibrandlabels';
 
 
 const ScanStatus = ({
@@ -34,6 +34,7 @@ const ScanStatus = ({
 
     const [studentList, setStudentList] = useState([])
     const [presentStudentList, setPresentStudentList] = useState([])
+    const BrandLabel = multiBrandingData.screenLabels.scanHistory[0]
     
 
     //function
@@ -112,14 +113,13 @@ const ScanStatus = ({
                  navigation={navigation}
                  />
                  <View>
-                 {
-                    (multiBrandingData && multiBrandingData.screenLabels) ?
-                        <MultibrandLabels
-                        Label1={multiBrandingData.screenLabels.scanStatus.School}
-                        Label2={multiBrandingData.screenLabels.scanStatus.SchoolId}
-                        School ={loginData.data.school.name}
-                        SchoolId={loginData.data.school.schoolId}
-                        />
+                 {(multiBrandingData && BrandLabel) ?
+                <MultibrandLabels
+                Label1={BrandLabel.School}
+                Label2={BrandLabel.SchoolId}
+                School ={loginData.data.school.name}
+                SchoolId={loginData.data.school.schoolId}
+                />
                      :
                 (loginData && loginData.data)
                 &&

@@ -11,7 +11,7 @@ import { getErrorMessage, getLoginCred, getStudentsExamData, setAbsentStudentDat
 import ButtonComponent from '../common/components/ButtonComponent';
 import StudentsDataComponent from './StudentsDataComponent';
 import ShareComponent from '../common/components/Share'
-import MultibrandLabels from '../common/components/multibrandlabels';
+import MultibrandLabels from '../common/components/Multibrandlabels';
 //style
 import { styles } from './StudentsDataStyle';
 
@@ -64,6 +64,7 @@ const StudentsList = ({
     const [stdArray, setStdArray] = useState([])
     const prevloginResponse = usePrevious(loginData);
     const prevSaveRes = usePrevious(saveAbsentStudent)
+    const BrandLabel = multiBrandingData.screenLabels.studentList[0]
 
 useEffect(() => {
     studentData()
@@ -304,10 +305,10 @@ useEffect(() => {
                  />
 
             {
-                    (multiBrandingData && multiBrandingData.screenLabels) ?
+                    (multiBrandingData && BrandLabel) ?
                         <MultibrandLabels
-                        Label1={multiBrandingData.screenLabels.studentList.School}
-                        Label2={multiBrandingData.screenLabels.studentList.SchoolId}
+                        Label1={BrandLabel.School}
+                        Label2={BrandLabel.SchoolId}
                         School ={loginData.data.school.name}
                         SchoolId={loginData.data.school.schoolId}
                         />
