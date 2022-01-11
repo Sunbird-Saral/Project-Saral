@@ -29531,10 +29531,10 @@
                             "roiId": "68",
                             "index": 0,
                             "rect": {
-                                "top": 401,
-                                "left": 274,
-                                "bottom": 430,
-                                "right": 299
+                                "top": 165,
+                                "left": 275,
+                                "bottom": 194,
+                                "right": 300
                             }
                         },
                         {
@@ -29543,9 +29543,9 @@
                             "roiId": "69",
                             "index": 1,
                             "rect": {
-                                "top": 400,
-                                "left": 310,
-                                "bottom": 430,
+                                "top": 165,
+                                "left": 311,
+                                "bottom": 194,
                                 "right": 335
                             }
                         },
@@ -29555,10 +29555,10 @@
                             "roiId": "70",
                             "index": 2,
                             "rect": {
-                                "top": 400,
-                                "left": 348,
-                                "bottom": 430,
-                                "right": 372
+                                "top": 165,
+                                "left": 349,
+                                "bottom": 195,
+                                "right": 373
                             }
                         },
                         {
@@ -29567,9 +29567,9 @@
                             "roiId": "71",
                             "index": 3,
                             "rect": {
-                                "top": 401,
+                                "top": 165,
                                 "left": 385,
-                                "bottom": 429,
+                                "bottom": 195,
                                 "right": 409
                             }
                         },
@@ -29579,9 +29579,9 @@
                             "roiId": "72",
                             "index": 4,
                             "rect": {
-                                "top": 401,
-                                "left": 422,
-                                "bottom": 430,
+                                "top": 165,
+                                "left": 423,
+                                "bottom": 193,
                                 "right": 447
                             }
                         },
@@ -29591,10 +29591,10 @@
                             "roiId": "73",
                             "index": 5,
                             "rect": {
-                                "top": 400,
-                                "left": 458,
-                                "bottom": 430,
-                                "right": 482
+                                "top": 165,
+                                "left": 460,
+                                "bottom": 193,
+                                "right": 483
                             }
                         }
                     ],
@@ -29619,10 +29619,10 @@
                             "roiId": "74",
                             "index": 0,
                             "rect": {
-                                "top": 401,
-                                "left": 274,
-                                "bottom": 430,
-                                "right": 299
+                                "top": 225,
+                                "left": 275,
+                                "bottom": 254,
+                                "right": 298
                             }
                         },
                         {
@@ -29631,9 +29631,9 @@
                             "roiId": "75",
                             "index": 1,
                             "rect": {
-                                "top": 400,
-                                "left": 310,
-                                "bottom": 430,
+                                "top": 224,
+                                "left": 311,
+                                "bottom": 253,
                                 "right": 335
                             }
                         },
@@ -29643,9 +29643,9 @@
                             "roiId": "76",
                             "index": 2,
                             "rect": {
-                                "top": 400,
-                                "left": 348,
-                                "bottom": 430,
+                                "top": 224,
+                                "left": 347,
+                                "bottom": 252,
                                 "right": 372
                             }
                         },
@@ -29655,10 +29655,10 @@
                             "roiId": "77",
                             "index": 3,
                             "rect": {
-                                "top": 401,
-                                "left": 385,
-                                "bottom": 429,
-                                "right": 409
+                                "top": 225,
+                                "left": 386,
+                                "bottom": 253,
+                                "right": 410
                             }
                         },
                         {
@@ -29667,10 +29667,10 @@
                             "roiId": "78",
                             "index": 4,
                             "rect": {
-                                "top": 401,
+                                "top": 225,
                                 "left": 422,
-                                "bottom": 430,
-                                "right": 447
+                                "bottom": 254,
+                                "right": 446
                             }
                         },
                         {
@@ -29679,10 +29679,10 @@
                             "roiId": "79",
                             "index": 5,
                             "rect": {
-                                "top": 400,
-                                "left": 458,
-                                "bottom": 430,
-                                "right": 482
+                                "top": 224,
+                                "left": 459,
+                                "bottom": 253,
+                                "right": 483
                             }
                         }
                     ],
@@ -29707,9 +29707,9 @@
                             "roiId": "80",
                             "index": 0,
                             "rect": {
-                                "top": 401,
-                                "left": 274,
-                                "bottom": 430,
+                                "top": 284,
+                                "left": 275,
+                                "bottom": 312,
                                 "right": 299
                             }
                         },
@@ -29719,9 +29719,9 @@
                             "roiId": "81",
                             "index": 1,
                             "rect": {
-                                "top": 400,
+                                "top": 284,
                                 "left": 310,
-                                "bottom": 430,
+                                "bottom": 313,
                                 "right": 335
                             }
                         },
@@ -29731,9 +29731,9 @@
                             "roiId": "82",
                             "index": 2,
                             "rect": {
-                                "top": 400,
+                                "top": 284,
                                 "left": 348,
-                                "bottom": 430,
+                                "bottom": 311,
                                 "right": 372
                             }
                         },
@@ -29743,9 +29743,9 @@
                             "roiId": "83",
                             "index": 3,
                             "rect": {
-                                "top": 401,
+                                "top": 283,
                                 "left": 385,
-                                "bottom": 429,
+                                "bottom": 312,
                                 "right": 409
                             }
                         },
@@ -29755,10 +29755,10 @@
                             "roiId": "84",
                             "index": 4,
                             "rect": {
-                                "top": 401,
+                                "top": 282,
                                 "left": 422,
-                                "bottom": 430,
-                                "right": 447
+                                "bottom": 312,
+                                "right": 446
                             }
                         },
                         {
@@ -29767,10 +29767,10 @@
                             "roiId": "85",
                             "index": 5,
                             "rect": {
-                                "top": 400,
-                                "left": 458,
-                                "bottom": 430,
-                                "right": 482
+                                "top": 283,
+                                "left": 459,
+                                "bottom": 311,
+                                "right": 483
                             }
                         }
                     ],
@@ -29795,10 +29795,10 @@
                             "roiId": "86",
                             "index": 0,
                             "rect": {
-                                "top": 401,
+                                "top": 342,
                                 "left": 274,
-                                "bottom": 430,
-                                "right": 299
+                                "bottom": 371,
+                                "right": 298
                             }
                         },
                         {
@@ -29807,9 +29807,9 @@
                             "roiId": "87",
                             "index": 1,
                             "rect": {
-                                "top": 400,
-                                "left": 310,
-                                "bottom": 430,
+                                "top": 343,
+                                "left": 311,
+                                "bottom": 371,
                                 "right": 335
                             }
                         },
@@ -29819,9 +29819,9 @@
                             "roiId": "88",
                             "index": 2,
                             "rect": {
-                                "top": 400,
+                                "top": 343,
                                 "left": 348,
-                                "bottom": 430,
+                                "bottom": 371,
                                 "right": 372
                             }
                         },
@@ -29831,9 +29831,9 @@
                             "roiId": "89",
                             "index": 3,
                             "rect": {
-                                "top": 401,
-                                "left": 385,
-                                "bottom": 429,
+                                "top": 342,
+                                "left": 384,
+                                "bottom": 371,
                                 "right": 409
                             }
                         },
@@ -29843,10 +29843,10 @@
                             "roiId": "90",
                             "index": 4,
                             "rect": {
-                                "top": 401,
+                                "top": 342,
                                 "left": 422,
-                                "bottom": 430,
-                                "right": 447
+                                "bottom": 370,
+                                "right": 445
                             }
                         },
                         {
@@ -29855,10 +29855,10 @@
                             "roiId": "91",
                             "index": 5,
                             "rect": {
-                                "top": 400,
-                                "left": 458,
-                                "bottom": 430,
-                                "right": 482
+                                "top": 342,
+                                "left": 459,
+                                "bottom": 371,
+                                "right": 483
                             }
                         }
                     ],
