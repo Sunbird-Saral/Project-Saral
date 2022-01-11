@@ -67,7 +67,6 @@ const ScannedDetailsComponent = ({
     const [checkStdRollDuplicate, setCheckStdRollDuplicate] = useState([])
     const [toggleCheckBox, setToggleCheckBox] = useState(false)
     const [logmessage,setLogmessage] = useState()
-    console.log("hiiiiiiiiiiiiiiiiiiiiiiiiiiiiii")
    
     const inputRef = React.createRef();
     const dispatch = useDispatch()
@@ -123,19 +122,17 @@ const ScannedDetailsComponent = ({
     }
 
     useEffect(() => {
-        console.log("insidessssssssss",checkIsStudentMultipleSingle)
         let checkIsStudentMultipleSingle = ocrLocalResponse.layout.cells.filter((e) => {
             let withNoDigits = e.format.name.replace(/[0-9]/g, '');
-            let wordLen = withNoDigits.length
-            console.log("lengthhhh",wordLen)
+            let wordLen = withNoDigits.length;
             // let wordLensss = e.format.name.length - 1;
-            // console.log(wordLensss,"hellllllllloooooooooooo")
             let multiple = 0
-            if (wordLen === multipleStudent[0].length) {
+            if (wordLen === multipleStudent[0].length && withNoDigits === multipleStudent[0]) {
                 multiple = multiple + 1
             }
             return multiple
         })
+
 
         if (checkIsStudentMultipleSingle.length > 0) {
             setNextBtn("NEXT")
@@ -148,7 +145,6 @@ const ScannedDetailsComponent = ({
     }, []);
 
     const callMultipleStudentSheetData = (checkIsStudentMultipleSingle) => {
-console.log("vcallsssssss",checkIsStudentMultipleSingle)
         let marTemp = []
         let dummy = []
 
@@ -157,13 +153,12 @@ console.log("vcallsssssss",checkIsStudentMultipleSingle)
         ocrLocalResponse.layout.cells.forEach((element, index) => {
             checkIsStudentMultipleSingle.forEach((e, i) => {
                 if (element.format.name === e.format.name) {
-                    console.log("hiiiiiiiiiiiiiiieeeeeeeeeeeeeeeeeeeeeee",element.format.name, e.format.name)
                     dummy.push(index)
                 }
             });
         });
         dummy.push(len)
-console.log("dummy",dummy)
+
         dummy.forEach((el, index) => {
             if (dummy.length > index + 1) {
                 let data = ocrLocalResponse.layout.cells.slice(dummy[index], dummy[index + 1])
@@ -173,8 +168,6 @@ console.log("dummy",dummy)
                 })
             }
         });
-        console.log("rolllnumbeeeeeeeerrrrrrr",marTemp[0].RollNo)
-        console.log("datasssssssssssssssssss",marTemp[0].data)
         setStudentID(marTemp[0].RollNo)
         setNewArrayValue(marTemp[0].data)
         setStructureList(marTemp)
