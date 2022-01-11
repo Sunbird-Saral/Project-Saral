@@ -87,6 +87,7 @@ public class SaralSDKModule extends ReactContextBaseJavaModule implements Activi
 
         Intent intent                   = new Intent(currentActivity, SaralSDKOpenCVScannerActivity.class);
         intent.putExtra("layoutConfigs", layoutSchema);
+        intent.putExtra("page", page);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         currentActivity.startActivity(intent);
     }

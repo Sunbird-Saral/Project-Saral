@@ -50,6 +50,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
     private static final int START_PROCESSING_COUNT     = 20;
 
     private String mlayoutConfigs                       = null;
+    private String pageNumber                           = null;
     private boolean isHWClassiferAvailable              = true;
     private boolean isRelevantFrameAvailable            = false;
     private boolean mIsScanningComplete                 = false;
@@ -85,7 +86,9 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
         Bundle b = getIntent().getExtras();
         if(b != null) {
             mlayoutConfigs = b.getString("layoutConfigs");
+            pageNumber     = b.getString("page");
             Log.d(TAG, "Scanner type: " + mlayoutConfigs);
+            Log.d(TAG, "Page Number" + pageNumber);
         }
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -284,12 +287,49 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
             JSONObject layoutObject     = layoutConfigs.getJSONObject("layout");
             JSONArray  cells            = layoutObject.getJSONArray("cells");
 
-            for (int i = 0; i < cells.length(); i++) {
-                JSONArray cellROIs      = cells.getJSONObject(i).getJSONArray("rois");
-                for (int j = 0; j < cellROIs.length(); j++) {
-                    JSONObject roi      = cellROIs.getJSONObject(j);
-                    rois.put(roi);
+            Log.d(TAG, "Cells Data" + cells);
+            Log.d(TAG, "Cells Data" + cells.length() + pageNumber);
+
+            
+                for (int i = 0; i < cells.length(); i++) {
+
+                    JSONObject jsonObject1 = cells.getJSONObject(i);
+
+                    if(jsonObject1.has("page")){
+                    
+                    String pageExist = jsonObject1.getString("page");
+                    JSONArray cellROIs      = cells.getJSONObject(i).getJSONArray("rois");
+
+                    Boolean a = pageExist.equals(pageNumber);
+
+                    // Log.d(TAG, "pageExist == pageNumber" + a);
+                    // Log.d(TAG, "pageExist " + pageExist);
+                    // Log.d(TAG, "pageNumber " + pageNumber);
+                    // Log.d(TAG, "pageNumber " + ((Object)pageExist).getClass().getSimpleName());
+                    // Log.d(TAG, "pageNumber " + ((Object)pageNumber).getClass().getSimpleName());
+                    
+                    if(pageExist.equals(pageNumber)){
+    
+                    for (int j = 0; j < cellROIs.length(); j++) {
+                        JSONObject roi      = cellROIs.getJSONObject(j);
+                        rois.put(roi);
+                    }
                 }
+                }
+                else{
+
+                    JSONArray cellROIs      = cells.getJSONObject(i).getJSONArray("rois");
+                    for (int j = 0; j < cellROIs.length(); j++) {
+                        JSONObject roi      = cellROIs.getJSONObject(j);
+                        rois.put(roi);
+                    }
+                }
+                }
+                for (int roi = 0; roi < rois.length(); roi++) {
+                    JSONObject jsObj = rois.getJSONObject(roi);
+                    String roiID = jsObj.getString("roiId");
+                    Log.d(TAG,"[SaralSDKROIS]roiID" + roiID);
+                    Log.d(TAG,"[[SaralSDKROIS]]jsObj" + jsObj);
             }
             return rois;
 
@@ -422,7 +462,10 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                         {
                             trainingDataSet.put(j,mRoiMatBase64.get(roiId));
                         }
-                        roi.put("result", result);
+
+                        if(!roi.has("result")){
+                            roi.put("result", result);    
+                        }
                     }
                 }
                 if(isMultiChoiceOMRLayout && countOMRChoice > 1)
