@@ -17,7 +17,7 @@ import ButtonComponent from '../common/components/ButtonComponent';
 import ShareComponent from '../common/components/Share';
 import APITransport from '../../flux/actions/transport/apitransport';
 import { collectErrorLogs } from '../CollectErrorLogs';
-import MultibrandLabels from '../common/components/Multibrandlabels';
+import MultibrandLabels from '../common/components/multibrandlabels';
 
 import { ScrollView } from 'react-native-gesture-handler';
 const ScanHistory = ({

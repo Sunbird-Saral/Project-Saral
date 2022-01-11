@@ -9,12 +9,6 @@ router.post('/brand?', auth, async (req, res) => {
     try { 
         const inputKeys = Object.keys(req.body)
         
-        // const allowedUpdates = ['logoImage', 'themeColor1', 'themeColor2', 'appName']
-        // const isValidOperation = inputKeys.every((input) => allowedUpdates.includes(input))
-   
-        // if (!isValidOperation) {
-            // return res.status(400).send({ error: 'Invaid Input' })
-        // }
         let brandExist = {}
         
         if (!req.query.default) {

@@ -21,7 +21,7 @@ import APITransport from '../../flux/actions/transport/apitransport'
 import AppTheme from '../../utils/AppTheme';
 import { getPresentAbsentStudent, getScannedDataFromLocal,getErrorMessage } from '../../utils/StorageUtils';
 import ShareComponent from '../common/components/Share';
-import MultibrandLabels from '../common/components/Multibrandlabels';
+import MultibrandLabels from '../common/components/multibrandlabels';
 
 
 const ScanStatus = ({
