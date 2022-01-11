@@ -230,12 +230,9 @@ const ScannedDetailsComponent = ({
             });
             setNewArrayValue(data)
             setSummOfObtainedMarks(maximum)
-            // saveDataIntoMultiPageReducer(1, data)
         } else {
             //set Data of Other sheet except of marksObtained and maxMarks wala
             setNewArrayValue(data)
-            // saveDataIntoMultiPageReducer(1, data)
-
         }
 
         //get student Id
@@ -738,7 +735,13 @@ const ScannedDetailsComponent = ({
                     setMaxMarkErr(false)
                     setObtnMarkErr(false)
                     if (multiPage > 0) {
-                        openCameraActivity("next")
+                        let isAbleToGoNextPage = currentIndex + 1 <= multiPage;
+                        if (isAbleToGoNextPage) {
+                            openCameraActivity();
+                        } else {
+                            saveDataIntoMultiPageReducer(0, newArrayValue);
+                            saveMultiPageIntoLocalStorage();
+                        }
                     } else {
                         saveData(maximum)
                     }
@@ -746,7 +749,13 @@ const ScannedDetailsComponent = ({
             } else {
                 //without MAX & OBTAINED MARKS
                 if (multiPage > 0) {
-                    openCameraActivity("next")
+                    let isAbleToGoNextPage = currentIndex + 1 <= multiPage;
+                    if (isAbleToGoNextPage) {
+                        openCameraActivity();
+                    } else {
+                        saveDataIntoMultiPageReducer(0, newArrayValue);
+                        saveMultiPageIntoLocalStorage();
+                    }
                 } else {
                     saveData(0)
                 }
@@ -793,87 +802,93 @@ const ScannedDetailsComponent = ({
         dispatch(MultiPageActions(multiPageReducer))
     }
 
-    const scanNextSheet = () => {
-        const elements = neglectData
-        let isAbleToGoNextPage = currentIndex + 1 <= multiPage
+    const scanNextSheet = (roisData) => {
+        const elements = neglectData;
+        const checkIsNextPageExist = multiPageReducer.findIndex(_element => _element.page === currentIndex + 1);
 
-        if (isAbleToGoNextPage) {
+        const checkIsCurrentPageExist = multiPageReducer.findIndex(_element => _element.page === currentIndex);
 
-            const checkIsNextPageExist = multiPageReducer.findIndex(_element => _element.page === currentIndex + 1);
+        let filterDataAccordingPage = roisData.layout.cells.filter((element) => {
+            if (element.format.name == elements[0] || element.format.name == elements[1] || element.format.name == elements[4] || element.page != currentIndex + 1) {
+                return false
+            }
+            else {
+                return true
+            }
+        })
 
-            const checkIsCurrentPageExist = multiPageReducer.findIndex(_element => _element.page === currentIndex);
-
-            let filterDataAccordingPage = ocrLocalResponse.layout.cells.filter((element) => {
-                if (element.format.name == elements[0] || element.format.name == elements[1] || element.format.name == elements[4] || element.page != 1) {
-                    return false
-                }
-                else {
-                    return true
-                }
-            })
-
-
-            if (checkIsNextPageExist == -1 && filterDataAccordingPage.length > 0) {
-                setNextBtn(`Scan Page#${currentIndex + 2}`)
-                if (checkIsCurrentPageExist > -1) {
-                    updatePageInReducer(newArrayValue)
-                }else{
-                    saveDataIntoMultiPageReducer(0, newArrayValue)
-                }
-                setCurrentIndex(currentIndex + 1)
-                setBtnName(`Scan Page#${currentIndex}`)
-                setNewArrayValue(filterDataAccordingPage)
-            } else {
+        if (checkIsNextPageExist == -1 && filterDataAccordingPage.length > 0) {
+            setNextBtn(`Scan Page#${currentIndex + 2}`)
+            if (checkIsCurrentPageExist > -1) {
                 updatePageInReducer(newArrayValue)
-                setNewArrayValue(multiPageReducer[currentIndex].scanData)
-                setCurrentIndex(currentIndex + 1)
-                setBtnName(`Scan Page#${currentIndex}`)
-                setNextBtn(`Scan Page#${currentIndex+2}`)
+            } else {
+                saveDataIntoMultiPageReducer(0, newArrayValue)
             }
-            if (currentIndex + 1 == multiPage) {
-                setNextBtn(Strings.submit_text)
-            }
+            setCurrentIndex(currentIndex + 1)
+            setBtnName(Strings.Back)
+            setNewArrayValue(filterDataAccordingPage)
         } else {
-            saveDataIntoMultiPageReducer(0, newArrayValue)
-            saveMultiPageIntoLocalStorage()
+            updatePageInReducer(newArrayValue)
+            setNewArrayValue(multiPageReducer[currentIndex].scanData)
+            setCurrentIndex(currentIndex + 1)
+            setBtnName(Strings.Back)
+            setNextBtn(`Scan Page#${currentIndex + 2}`)
         }
-
+        if (currentIndex + 1 == multiPage) {
+            setNextBtn(Strings.submit_text)
+        }
     }
+
 
     const saveMultiPageIntoLocalStorage = () => {
+        let totalMarks = 0
+        if (sumOfObtainedMarks > 0) {
+            totalMarks = sumOfAllObtainedMarks();
+        } else {
+            totalMarks = 0
+        }
+
+        saveData(totalMarks);
     }
 
+    const sumOfAllObtainedMarks = () => {
+
+        const elements = neglectData
+
+        let extract_MAX_OBTAINED_MARKS = ocrLocalResponse.layout.cells.filter((e) => {
+            if (e.format.name == elements[0]) {
+                return
+            }
+            if (e.format.name == elements[2]) {
+                return
+            }
+            if (e.format.name == elements[3]) {
+                return
+            }
+            else {
+                return true
+            }
+        })
+        //DO summ of all result from extract_MAX_OBTAINED_MARKS except max marks and obtained marks and rollNumber
+        let maximum = 0;
+        let sum = extract_MAX_OBTAINED_MARKS.forEach((e) => {
+            maximum = parseInt(maximum) + parseInt(e.consolidatedPrediction)
+            return maximum
+        });
+
+        return maximum;
+    }
 
     const goBackPage = () => {
-        openCameraActivity("back")
-    }
-
-    const scanBackSheet = () => {
-        const elements = neglectData
-        if (currentIndex -1 >= 1) {
-            
-            let filterDataAccordingPage = ocrLocalResponse.layout.cells.filter((element) => {
-                if (element.format.name == elements[0] || element.format.name == elements[1] || element.format.name == elements[4] || element.page != 1) {
-                    return false
-                }
-                else {
-                    return true
-                }
-            })
-            filterDataAccordingPage.forEach((element,index) => {
-                element.format.value  = `QUESTION ${((5*currentIndex) + 1 - (5 - index ))}`
-            });
-
+        if (currentIndex - 1 >= 1) {
             setNextBtn(`Scan Page#${currentIndex}`)
-            setBtnName(`Scan Page#${currentIndex - 2}`)
-            updatePageInReducer(filterDataAccordingPage)
-            setNewArrayValue(multiPageReducer)
+            let filterData = filterScanDataAsPage()
+            setNewArrayValue(filterData)
             setCurrentIndex(currentIndex - 1)
             if (currentIndex - 1 == 1) {
                 setBtnName(Strings.cancel_text)
             }
-        }
-        else {
+        } else {
             onBackButtonClick()
             dispatch(MultiPageActions([]))
         }
@@ -964,12 +979,12 @@ const ScannedDetailsComponent = ({
         return true
     }
 
-    const openCameraActivity = async (value) => {
+    const openCameraActivity = async () => {
         try {
-            SaralSDK.startCamera(JSON.stringify(roiData.data), "1").then(res => {
+            SaralSDK.startCamera(JSON.stringify(ocrLocalResponse), (currentIndex + 1).toString()).then(res => {
                 let roisData = JSON.parse(res);
                 let cells = roisData.layout.cells;
-                consolidatePrediction(cells, roisData,value)
+                consolidatePrediction(cells, roisData)
 
             }).catch((code, message) => {
             })
@@ -977,7 +992,7 @@ const ScannedDetailsComponent = ({
         }
     };
 
-    const consolidatePrediction = (cells, roisData, value) => {
+    const consolidatePrediction = (cells, roisData) => {
         var marks = "";
         var predictionConfidenceArray = []
         for (let i = 0; i < cells.length; i++) {
@@ -998,18 +1013,12 @@ const ScannedDetailsComponent = ({
         }
         dispatch(OcrLocalResponseAction(JSON.parse(JSON.stringify(roisData))))
         let rollNumber = roisData.layout.cells[0].consolidatedPrediction
-        // if (rollNumber != studentId) {
-        //     setStdErr(Strings.student_id_should_be_same)
-        // } else {
-            if (value == "next") {
-                setStdErr("")
-                scanNextSheet()
-            }
-            else{
-                scanBackSheet()
-            }
-        // }
-        // overWriteScanSheet(roisData)
+        if (rollNumber != studentId) {
+            setStdErr(Strings.student_id_should_be_same)
+        } else {
+            setStdErr("");
+            scanNextSheet(roisData);
+        }
     }
 
     const overWriteScanSheet = (roisData) => {
