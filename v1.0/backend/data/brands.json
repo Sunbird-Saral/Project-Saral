@@ -13,16 +13,12 @@
         "Subject": "Skill Assesment"
       }],
       "studentList": [{
-        "School": "Organisation",
-        "SchoolId": "Organisation Id"
       }],
       "scanHistory": [{
         "School": "Organisation",
         "SchoolId": "Organisation Id"
       }],
       "myScan": [{
-        "School": "Organisation",
-        "SchoolId": "Organisation Id"
       }],
       "scanStatus": [{
         "School": "Organisation",
