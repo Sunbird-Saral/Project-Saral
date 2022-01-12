@@ -2436,8 +2436,8 @@
 {
   "subject": "section-attendance",
   "examLO": "section-attendance",
-  "classId": "7",
-  "examDate": "07/01/2022",
+  "classId": "2",
+  "examDate": "08/01/2022",
   "totalMarks": 20,
   "type": "any_20s_attendance",
   "questions": [

@@ -245,21 +245,5 @@
   "classId": "5",
   "className": "Class-5",
   "schoolId": "u002"
-},
-{
-  "sections": [
-    {
-      "section": "D"
-    },
-    {
-      "section": "B"
-    },
-    {
-      "section": "C"
-    }
-  ],
-  "classId": "7",
-  "className": "Class-7",
-  "schoolId": "u002"
 }
 ]
