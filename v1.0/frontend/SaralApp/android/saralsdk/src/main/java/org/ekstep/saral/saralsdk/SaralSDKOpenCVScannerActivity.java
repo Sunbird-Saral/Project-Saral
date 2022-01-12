@@ -287,51 +287,18 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
             JSONObject layoutObject     = layoutConfigs.getJSONObject("layout");
             JSONArray  cells            = layoutObject.getJSONArray("cells");
 
-            Log.d(TAG, "Cells Data" + cells);
-            Log.d(TAG, "Cells Data" + cells.length() + pageNumber);
-
-            
                 for (int i = 0; i < cells.length(); i++) {
-
-                    JSONObject jsonObject1 = cells.getJSONObject(i);
-
-                    if(jsonObject1.has("page")){
-                    
-                    String pageExist = jsonObject1.getString("page");
+                    JSONObject cell = cells.getJSONObject(i);
+                    boolean includeRois = (cell.has("page") && pageNumber!=null && cell.getString("page").equals(pageNumber)) || ((!cell.has("page") && (pageNumber==null || pageNumber!=null)));
+                    if(includeRois) {
                     JSONArray cellROIs      = cells.getJSONObject(i).getJSONArray("rois");
-
-                    Boolean a = pageExist.equals(pageNumber);
-
-                    // Log.d(TAG, "pageExist == pageNumber" + a);
-                    // Log.d(TAG, "pageExist " + pageExist);
-                    // Log.d(TAG, "pageNumber " + pageNumber);
-                    // Log.d(TAG, "pageNumber " + ((Object)pageExist).getClass().getSimpleName());
-                    // Log.d(TAG, "pageNumber " + ((Object)pageNumber).getClass().getSimpleName());
-                    
-                    if(pageExist.equals(pageNumber)){
-    
-                    for (int j = 0; j < cellROIs.length(); j++) {
-                        JSONObject roi      = cellROIs.getJSONObject(j);
-                        rois.put(roi);
+                        for (int j = 0; j < cellROIs.length(); j++) {
+                            JSONObject roi      = cellROIs.getJSONObject(j);
+                            rois.put(roi);
+                        }
                     }
                 }
-                }
-                else{
-
-                    JSONArray cellROIs      = cells.getJSONObject(i).getJSONArray("rois");
-                    for (int j = 0; j < cellROIs.length(); j++) {
-                        JSONObject roi      = cellROIs.getJSONObject(j);
-                        rois.put(roi);
-                    }
-                }
-                }
-                for (int roi = 0; roi < rois.length(); roi++) {
-                    JSONObject jsObj = rois.getJSONObject(roi);
-                    String roiID = jsObj.getString("roiId");
-                    Log.d(TAG,"[SaralSDKROIS]roiID" + roiID);
-                    Log.d(TAG,"[[SaralSDKROIS]]jsObj" + jsObj);
-            }
-            return rois;
+                return rois;
 
         } catch (JSONException e) {
             Log.e(TAG, "unable to parse LayoutConfigs object");
@@ -465,6 +432,11 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
 
                         if(!roi.has("result")){
                             roi.put("result", result);    
+                        }else{
+                            JSONObject resultObj = roi.getJSONObject("result");
+                            if(resultObj.getString("prediction") != null && resultObj.getString("prediction").trim().equals("")){
+                                roi.put("result", result);    
+                            }
                         }
                     }
                 }
