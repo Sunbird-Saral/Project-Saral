@@ -1506,15 +1506,7 @@ definitions:
                 SchoolId:
                   type: string
                   example: "Organisation Id"
-                Class:
-                  type: string
-                  example: "Category"
-                Section:
-                  type: string
-                  example: "Skill"
-                Subject:
-                  type: string
-                  example: "Skill Assesment"
+
           scanHistory:
             type: array
             items:
@@ -1525,15 +1517,7 @@ definitions:
                 SchoolId:
                   type: string
                   example: "Organisation Id"
-                Class:
-                  type: string
-                  example: "Category"
-                Section:
-                  type: string
-                  example: "Skill"
-                Subject:
-                  type: string
-                  example: "Skill Assesment"
+              
           myScan:
             type: array
             items:
@@ -1544,15 +1528,6 @@ definitions:
                 SchoolId:
                   type: string
                   example: "Organisation Id"
-                Class:
-                  type: string
-                  example: "Category"
-                Section:
-                  type: string
-                  example: "Skill"
-                Subject:
-                  type: string
-                  example: "Skill Assesment"
                   
           scanStatus:
             type: array
@@ -1564,15 +1539,7 @@ definitions:
                 SchoolId:
                   type: string
                   example: "Organisation Id"
-                Class:
-                  type: string
-                  example: "Category"
-                Section:
-                  type: string
-                  example: "Skill"
-                Subject:
-                  type: string
-                  example: "Skill Assesment"
+            
           scanStatusLocal:
             type: array
             items:
@@ -1583,15 +1550,6 @@ definitions:
                 SchoolId:
                   type: string
                   example: "Organisation Id"
-                Class:
-                  type: string
-                  example: "Category"
-                Section:
-                  type: string
-                  example: "Skill"
-                Subject:
-                  type: string
-                  example: "Skill Assesment"
             
           scanHistoryCard:
             type: array

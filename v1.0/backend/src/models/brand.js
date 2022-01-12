@@ -25,68 +25,124 @@ const BrandSchema = new mongoose.Schema({
     },
     screenLabels: {
         selectDetails: [{
-            School: String,
-            SchoolId: String,
-            Class: String,
-            Section: String,
-            Subject: String
+            _id: false,
+            School: {
+                type: String
+            },
+            SchoolId: {
+                type: String
+            },
+            Class: {
+                type: String
+            },
+            Section: {
+                type: String
+            },
+            Subject:{
+                type: String
+            }
         }],
         studentList: [{
-            School: String,
-            SchoolId: String,
-            Class: String,
-            Section: String,
-            Subject: String
+           _id: false,
+           School: {
+              type: String
+        },
+           SchoolId: {
+              type: String
+        }
         }],
         scanHistory: [{
-            School: String,
-            SchoolId: String,
-            Class: String,
-            Section: String,
-            Subject: String
+            _id: false,
+            School: {
+                type: String
+            },
+            SchoolId: {
+                type: String
+            }
         }],
         myScan: [{
-            School: String,
-            SchoolId: String,
-            Class: String,
-            Section: String,
-            Subject: String
+            _id: false,
+            School: {
+                type: String
+            },
+            SchoolId: {
+                type: String
+            }
         }],
         scanStatus: [{
-            School: String,
-            SchoolId: String,
-            Class: String,
-            Section: String,
-            Subject: String
+            _id: false,
+            School: {
+                type: String
+            },
+            SchoolId: {
+                type: String
+            }
         }],
         scanStatusLocal: [{
-            School: String,
-            SchoolId: String,
+            _id: false,
+            School: {
+                type: String
+            },
+            SchoolId: {
+                type:String
+            }
         }],
         scanHistoryCard: [{
-            School: String,
-            SchoolId: String,
-            Class: String,
-            Section: String,
-            Subject: String,
-            ExamDate: String,
-            ExamType: String,
-            ExamId: String,
-            ExamDetail: String,
-            Details: String
+            _id: false,
+            School: {
+                type: String
+            },
+            SchoolId: {
+                type: String
+            },
+            Class: {
+                type: String
+            },
+            Section: {
+                type: String
+            },
+            Subject:{
+                type: String
+            },
+            ExamDate:{
+                type: String
+            },
+            ExamType:{
+                type: String
+            },
+            ExamId:{
+                type: String
+            },
+            ExamDetail:{
+                type: String
+            },
+            Details:{
+                type: String
+            }
         }],
-        examDetailsPopup: [
-           String
-        ],
+        examDetailsPopup: {
+            type:Array
+        },
         scannedDetailComponent: [{
-           StudentId: String,
-           Exam: String,
-           Subject: String,
-           StudentDetail: String,
-           CorrectId: String,
-           ListTableHeading:[
-               String
-           ]
+           _id: false,
+           StudentId:{
+               type: String
+            },
+           Exam:{
+               type: String
+            },
+           Subject:{
+               type: String
+            },
+           StudentDetail:{
+               type: String
+            },
+           CorrectId:{
+               type: String
+            },
+           ListTableHeading:{
+               type:Array
+            }
         }]
     }   
 },{
