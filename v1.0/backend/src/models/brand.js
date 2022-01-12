@@ -82,7 +82,7 @@ const BrandSchema = new mongoose.Schema({
            StudentId: String,
            Exam: String,
            Subject: String,
-           EmployeDetail: String,
+           StudentDetail: String,
            CorrectId: String,
            ListTableHeading:[
                String

@@ -842,7 +842,7 @@ const ScannedDetailsComponent = ({
                         <View style={styles.container2}>
                             <View style={{ flex: 1 }}>
                                 <ScrollView contentContainerStyle={{ backgroundColor: AppTheme.WHITE, paddingBottom: '15%' }} keyboardShouldPersistTaps={'handled'}>
-                                    <Text style={styles.studentDetailsTxtStyle}>{BrandLabel && BrandLabel.EmployeDetail ? BrandLabel.EmployeDetail:Strings.student_details}</Text>
+                                    <Text style={styles.studentDetailsTxtStyle}>{BrandLabel && BrandLabel.StudentDetail ? BrandLabel.StudentDetail:Strings.student_details}</Text>
                                     <View style={styles.studentContainer}>
                                         <View style={styles.imageViewContainer}>
                                             <View style={styles.imageContainerStyle}>
