@@ -692,7 +692,7 @@ class SelectDetailsComponent extends Component {
     render() {
         const { navigation, isLoading, defaultSelected, classList, classListIndex, selectedClass, sectionList, sectionListIndex, selectedSection, pickerDate, selectedDate, subArr, selectedSubject, subIndex, errClass, errSub, errDate, errSection, sectionValid, dateVisible, examTestID } = this.state
         const { loginData, multiBrandingData } = this.props
-        const BrandLabel = multiBrandingData.screenLabels.selectDetails[0]
+        const BrandLabel = multiBrandingData&&multiBrandingData.screenLabels&&multiBrandingData.screenLabels.selectDetails[0]
 
         return (
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
@@ -701,7 +701,7 @@ class SelectDetailsComponent extends Component {
                     message={this.state.logmessage ? JSON.stringify(this.state.logmessage, null, 2) : ''}
 
                 />
-                {multiBrandingData&&BrandLabel?
+                {BrandLabel?
                     <MultibrandLabels
                          Label1={BrandLabel.School}
                          Label2={BrandLabel.SchoolId}

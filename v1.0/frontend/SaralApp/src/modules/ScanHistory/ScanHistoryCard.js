@@ -38,8 +38,8 @@ const ScanHistoryCard = ({
 }) => {
     const [loading, setLoading] = useState(false)
     const [isModalVisible, setIsModalVisible] = useState(false)
-    const BrandLabel = multiBrandingData.screenLabels.scanHistoryCard[0]
-    const ExamDetaildata = multiBrandingData.screenLabels.examDetailsPopup
+    const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.scanHistoryCard[0]
+    const ExamDetaildata = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.examDetailsPopup
     
     
     useEffect(() => {
