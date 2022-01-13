@@ -34,10 +34,14 @@ const ScanHistoryCard = ({
     studentsAndExamData,
     apiStatus,
     bgFlag,
+    multiBrandingData
 }) => {
     const [loading, setLoading] = useState(false)
     const [isModalVisible, setIsModalVisible] = useState(false)
-
+    const BrandLabel = multiBrandingData.screenLabels.scanHistoryCard[0]
+    const ExamDetaildata = multiBrandingData.screenLabels.examDetailsPopup
+    
+    
     useEffect(() => {
         setTimeout(() => { setLoading(!loading) }, 3000)
         getSaveCount()
@@ -204,7 +208,6 @@ const ScanHistoryCard = ({
     Examtypedata = studentsAndExamData.data.exams.filter(function (item) {
         return item.subject == filteredData.response.subject;
     }).map(({ type }) => ({ type }));
-
     return (
         <View>
             <TouchableOpacity
@@ -216,7 +219,7 @@ const ScanHistoryCard = ({
                     <View>
                         <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                                <Text>{Strings.class_text}</Text>
+                                <Text>{BrandLabel&&BrandLabel.Class ? BrandLabel.Class : Strings.class_text}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
                                 <Text>{filteredData.response.className}</Text>
@@ -224,7 +227,7 @@ const ScanHistoryCard = ({
                         </View>
                         <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                                <Text>{Strings.section}</Text>
+                                <Text>{BrandLabel && BrandLabel.Section ? BrandLabel.Section:Strings.section}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
                                 <Text>{filteredData.response.section}</Text>
@@ -232,7 +235,7 @@ const ScanHistoryCard = ({
                         </View>
                         <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                                <Text>{Strings.exam_date}</Text>
+                            <Text>{BrandLabel&&BrandLabel.ExamDate ? BrandLabel.ExamDate:Strings.exam_date}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
                                 <Text>{filteredData.response.examDate}</Text>
@@ -240,7 +243,7 @@ const ScanHistoryCard = ({
                         </View>
                         <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                                <Text>{Strings.subject}</Text>
+                                <Text>{BrandLabel&&BrandLabel.Subject ? BrandLabel.Subject:Strings.subject}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
                                 <Text>{filteredData.response.subject}</Text>
@@ -248,7 +251,7 @@ const ScanHistoryCard = ({
                         </View>
                         <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle,]}>
-                                <Text>{Strings.Exam_Type}</Text>
+                            <Text>{BrandLabel&&BrandLabel.ExamType ? BrandLabel.ExamType:Strings.Exam_Type}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle,]}>
                                 {Examtypedata.map((item) =>
@@ -260,7 +263,7 @@ const ScanHistoryCard = ({
                         </View>
                         <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                                <Text>{Strings.exam_id}</Text>
+                            <Text>{BrandLabel && BrandLabel.ExamId ? BrandLabel.ExamId:Strings.exam_id}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
                                 <Text>{filteredData.response.examTestID}</Text>
@@ -268,10 +271,10 @@ const ScanHistoryCard = ({
                         </View>
                         <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                                <Text>{Strings.exam_details}</Text>
+                            <Text>{BrandLabel && BrandLabel.ExamDetail ? BrandLabel.ExamDetail:Strings.exam_details}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
-                                <Text  onPress={() => setIsModalVisible(!isModalVisible)} style={{textDecorationLine:'underline',color:'blue'}}>{Strings.details}</Text>
+                                <Text  onPress={() => setIsModalVisible(!isModalVisible)} style={{textDecorationLine:'underline',color:'blue'}}>{BrandLabel && BrandLabel.Details ? BrandLabel.Details: Strings.details}</Text>
                             </View>
                         </View>
                         <View style={styles.scanCardStyle}>
@@ -370,6 +373,20 @@ const ScanHistoryCard = ({
                     <ScrollView scrollEnabled showsVerticalScrollIndicator={false}>
                         <View style={[styles1.container1, { flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 20 }]}>
                             {
+                                ExamDetaildata && ExamDetaildata.length > 0 ?
+                                ExamDetaildata.map((data) => {
+                                    return (
+                                        <ExamDetailsPopup
+                                            customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
+                                            key={data}
+                                            rowTitle={data}
+                                            rowBorderColor={AppTheme.TAB_BORDER}
+
+                                        />
+                                    )
+                                })
+                                :
+
                                 Exam_QuestionHeader.map((data) => {
                                     return (
                                         <ExamDetailsPopup
@@ -390,7 +407,7 @@ const ScanHistoryCard = ({
 
                                         <ExamDetailsPopup
                                             customRowStyle={{ width: '30%', }}
-                                            rowTitle={stu.questionId}
+                                            rowTitle={ stu.questionId}
                                             rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                         />
                                         <ExamDetailsPopup
@@ -432,7 +449,8 @@ const mapStateToProps = (state) => {
         apiStatus: state.apiStatus,
         bgFlag: state.bgFlag,
         studentsAndExamData: state.studentsAndExamData,
-        apiStatus: state.apiStatus
+        apiStatus: state.apiStatus,
+        multiBrandingData: state.multiBrandingData.response.data
     }
 }
 

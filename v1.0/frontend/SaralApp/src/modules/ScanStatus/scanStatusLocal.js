@@ -22,6 +22,7 @@ import AppTheme from '../../utils/AppTheme';
 import { getPresentAbsentStudent, getScannedDataFromLocal,getErrorMessage } from '../../utils/StorageUtils';
 import { Assets } from '../../assets';
 import ShareComponent from '../common/components/Share';
+import MultibrandLabels from '../common/components/multibrandlabels';
 
 
 const ScanStatusLocal = ({
@@ -34,6 +35,7 @@ const ScanStatusLocal = ({
     const [unsavedstudentList, setUnsavedstudentList] = useState([])
     const [loacalstutlist, setLoacalstutlist] = useState([])
     const [presentStudentList, setPresentStudentList] = useState([])
+    const BrandLabel = multiBrandingData.screenLabels.scanHistory[0]
     
     const data =(JSON.stringify(loacalstutlist[0],null, 2))
    
@@ -141,7 +143,14 @@ useEffect(
                  navigation={navigation}
                  />
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-            {
+            {(multiBrandingData && BrandLabel) ?
+                <MultibrandLabels
+                Label1={BrandLabel.School}
+                Label2={BrandLabel.SchoolId}
+                School ={loginData.data.school.name}
+                SchoolId={loginData.data.school.schoolId}
+                />
+                     :
                 (loginData && loginData.data)
                 &&
                 <View>

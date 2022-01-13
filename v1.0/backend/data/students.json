@@ -1709,5 +1709,101 @@
   "name": "Rekha Joshi",
   "studentId": "3000007",
   "schoolId": "demouser"
+},
+{
+  "studentClass": [
+    {
+      "classId": "5",
+      "className": "Class-5"
+    }
+  ],
+  "section": "Carpentry",
+  "name": "Radha",
+  "studentId": "4000001",
+  "schoolId": "skill001"
+},
+{
+  "studentClass": [
+    {
+      "classId": "5",
+      "className": "Class-5"
+    }
+  ],
+  "section": "Carpentry",
+  "name": "Meera",
+  "studentId": "4000002",
+  "schoolId": "skill001"
+},
+{
+  "studentClass": [
+    {
+      "classId": "5",
+      "className": "Class-5"
+    }
+  ],
+  "section": "Carpentry",
+  "name": "Sweta",
+  "studentId": "4000003",
+  "schoolId": "skill001"
+},
+{
+  "studentClass": [
+    {
+      "classId": "5",
+      "className": "Class-5"
+    }
+  ],
+  "section": "Carpentry",
+  "name": "Alpesh",
+  "studentId": "4000004",
+  "schoolId": "skill001"
+},
+{
+  "studentClass": [
+    {
+      "classId": "5",
+      "className": "Class-5"
+    }
+  ],
+  "section": "Carpentry",
+  "name": "Mukesh",
+  "studentId": "4000005",
+  "schoolId": "skill001"
+},
+{
+  "studentClass": [
+    {
+      "classId": "5",
+      "className": "Class-5"
+    }
+  ],
+  "section": "Carpentry",
+  "name": "Divyansh",
+  "studentId": "4000006",
+  "schoolId": "skill001"
+},
+{
+  "studentClass": [
+    {
+      "classId": "5",
+      "className": "Class-5"
+    }
+  ],
+  "section": "Carpentry",
+  "name": "Shreya",
+  "studentId": "4000007",
+  "schoolId": "skill001"
+},
+{
+  "studentClass": [
+    {
+      "classId": "5",
+      "className": "Class-5"
+    }
+  ],
+  "section": "Carpentry",
+  "name": "Durgesh",
+  "studentId": "4000008",
+  "schoolId": "skill001"
 }
 ]

@@ -2415,5 +2415,43 @@
   ],
   "examId": 19,
   "schoolId": "demouser"
+},
+
+{
+  "subject": "Carpentary Assesment",
+  "examLO": "Carpentary Assesment",
+  "classId": "5",
+  "examDate": "05/10/2021",
+  "totalMarks": 20,
+  "type": "any_1s_5q_multichoice",
+  "questions": [
+    {
+      "questionId": "1",
+      "indicatorTitle": "L0-1",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "2",
+      "indicatorTitle": "L0-2",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "3",
+      "indicatorTitle": "L0-3",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "4",
+      "indicatorTitle": "L0-4",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "5",
+      "indicatorTitle": "L0-5",
+      "questionMarks": "1"
+    } 
+  ],
+  "examId": 20,
+  "schoolId": "skill001"
 }
 ]

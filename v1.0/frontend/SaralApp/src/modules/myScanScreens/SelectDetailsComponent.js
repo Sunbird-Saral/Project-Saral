@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, BackHandler, Alert,TouchableOpacity,Share} from 'react-native';
+import { View, ScrollView, Text, BackHandler, Alert, TouchableOpacity, Share } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -12,7 +12,7 @@ import { apkVersion } from '../../configs/config';
 import HeaderComponents from '../common/components/HeaderComponents';
 import DropDownMenu from '../common/components/DropDownComponent';
 import ButtonComponent from '../common/components/ButtonComponent';
-import { getLoginData, setStudentsExamData, getStudentsExamData, getLoginCred, setLoginData,getErrorMessage, eraseErrorLogs } from '../../utils/StorageUtils'
+import { getLoginData, setStudentsExamData, getStudentsExamData, getLoginCred, setLoginData, getErrorMessage, eraseErrorLogs } from '../../utils/StorageUtils'
 import { OcrLocalResponseAction } from '../../flux/actions/apis/OcrLocalResponseAction'
 import { GetStudentsAndExamData } from '../../flux/actions/apis/getStudentsAndExamData';
 import { FilteredDataAction } from '../../flux/actions/apis/filteredDataActions';
@@ -26,6 +26,7 @@ import { getScannedDataFromLocal } from '../../utils/StorageUtils';
 import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
 import C from '../../flux/actions/constants';
 import ShareComponent from '../common/components/Share';
+import MultibrandLabels from '../common/components/multibrandlabels';
 
 const clearState = {
     defaultSelected: Strings.select_text,
@@ -686,20 +687,32 @@ class SelectDetailsComponent extends Component {
             this.setState({ dateVisible: false })
         }
     }
-    
+
 
     render() {
         const { navigation, isLoading, defaultSelected, classList, classListIndex, selectedClass, sectionList, sectionListIndex, selectedSection, pickerDate, selectedDate, subArr, selectedSubject, subIndex, errClass, errSub, errDate, errSection, sectionValid, dateVisible, examTestID } = this.state
-        const { loginData } = this.props      
+        const { loginData, multiBrandingData } = this.props
+        const BrandLabel = multiBrandingData.screenLabels.selectDetails[0]
+
         return (
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
-                 <ShareComponent
-                 navigation={this.props.navigation}
-                 message={this.state.logmessage?JSON.stringify(this.state.logmessage, null, 2):''}
-                
-                 />
-                {(loginData && loginData.data) &&
-                    <View style={{ marginTop: 20,width:'60%' }}>
+                <ShareComponent
+                    navigation={this.props.navigation}
+                    message={this.state.logmessage ? JSON.stringify(this.state.logmessage, null, 2) : ''}
+
+                />
+                {multiBrandingData&&BrandLabel?
+                    <MultibrandLabels
+                         Label1={BrandLabel.School}
+                         Label2={BrandLabel.SchoolId}
+                         School={loginData.data.school.name}
+                         SchoolId={loginData.data.school.schoolId}
+                    />
+
+                    :
+
+                    (loginData && loginData.data) &&
+                    <View style={{ marginTop: 20, width: '60%' }}>
                         <Text
                             style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}
                         >
@@ -716,15 +729,16 @@ class SelectDetailsComponent extends Component {
                                 {loginData.data.school.schoolId}
                             </Text>
                         </Text>
+                        <Text
+                            style={{ fontSize: AppTheme.FONT_SIZE_REGULAR - 3, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', marginBottom: '4%' }}
+                        >
+                            {Strings.version_text + ' : '}
+                            <Text style={{ fontWeight: 'normal' }}>
+                                {apkVersion}
+                            </Text>
+                        </Text>
                     </View>}
-                <Text
-                    style={{ fontSize: AppTheme.FONT_SIZE_REGULAR - 3, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '3%', marginBottom: '4%' }}
-                >
-                    {Strings.version_text + ' : '}
-                    <Text style={{ fontWeight: 'normal' }}>
-                        {apkVersion}
-                    </Text>
-                </Text>
+
                 <ScrollView
                     contentContainerStyle={{ paddingTop: '5%', paddingBottom: '35%' }}
                     showsVerticalScrollIndicator={false}
@@ -738,7 +752,9 @@ class SelectDetailsComponent extends Component {
                         <View style={{ backgroundColor: 'white', paddingHorizontal: '5%', minWidth: '100%', paddingVertical: '10%', borderRadius: 4 }}>
                             <View style={[styles.fieldContainerStyle, { paddingBottom: classListIndex != -1 ? 0 : '10%' }]}>
                                 <View style={{ flexDirection: 'row' }}>
-                                    <Text style={[styles.labelTextStyle]}>{Strings.class_text}</Text>
+                                   
+                                        <Text style={[styles.labelTextStyle]}>{BrandLabel&&BrandLabel.Class ? BrandLabel.Class : Strings.class_text }</Text> 
+                                       
                                     {errClass != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 1, width: '60%', textAlign: 'right', fontWeight: 'normal' }]}>{errClass}</Text>}
                                 </View>
                                 <DropDownMenu
@@ -753,7 +769,9 @@ class SelectDetailsComponent extends Component {
                             {classListIndex != -1 &&
                                 <View style={[styles.fieldContainerStyle, { paddingBottom: sectionListIndex != -1 && sectionValid ? 0 : '10%' }]}>
                                     <View style={{ flexDirection: 'row' }}>
-                                        <Text style={[styles.labelTextStyle]}>{Strings.section}</Text>
+                                       
+                                            <Text style={[styles.labelTextStyle]}>{BrandLabel && BrandLabel.Section ? BrandLabel.Section:Strings.section}</Text> 
+                                        
                                         {errSection != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 1, width: '60%', textAlign: 'right', fontWeight: 'normal' }]}>{errSection}</Text>}
                                     </View>
                                     <DropDownMenu
@@ -769,7 +787,7 @@ class SelectDetailsComponent extends Component {
                                 sectionListIndex != -1 && sectionValid &&
                                 <View style={[styles.fieldContainerStyle, { paddingBottom: subIndex != -1 ? '10%' : '10%' }]}>
                                     <View style={{ flexDirection: 'row' }}>
-                                        <Text style={[[styles.labelTextStyle, { width: '50%' }]]}>{Strings.subject}</Text>
+                                    <Text style={[styles.labelTextStyle]}>{BrandLabel && BrandLabel.Subject ? BrandLabel.Subject:Strings.subject}</Text> 
                                         {errSub != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 1, width: '50%', textAlign: 'right', fontWeight: 'normal' }]}>{errSub}</Text>}
                                     </View>
                                     <DropDownMenu

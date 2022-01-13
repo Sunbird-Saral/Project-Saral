@@ -25,5 +25,12 @@
 "password": "tarento@123",
 "state": "up",
 "storeTrainingData": true
-}
+},
+{
+  "name": "Dummy Skill School",
+  "schoolId": "skill001",
+  "password": "skill@123",
+  "state": "karnataka",
+  "storeTrainingData": true
+  }
 ]

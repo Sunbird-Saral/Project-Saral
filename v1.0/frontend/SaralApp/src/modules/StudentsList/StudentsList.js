@@ -11,6 +11,7 @@ import { getErrorMessage, getLoginCred, getStudentsExamData, setAbsentStudentDat
 import ButtonComponent from '../common/components/ButtonComponent';
 import StudentsDataComponent from './StudentsDataComponent';
 import ShareComponent from '../common/components/Share'
+import MultibrandLabels from '../common/components/multibrandlabels';
 //style
 import { styles } from './StudentsDataStyle';
 
@@ -63,6 +64,7 @@ const StudentsList = ({
     const [stdArray, setStdArray] = useState([])
     const prevloginResponse = usePrevious(loginData);
     const prevSaveRes = usePrevious(saveAbsentStudent)
+    const BrandLabel = multiBrandingData.screenLabels.studentList[0]
 
 useEffect(() => {
     studentData()
@@ -301,7 +303,17 @@ useEffect(() => {
              <ShareComponent
                  navigation={navigation}
                  />
-            {(loginData && loginData.data) &&
+
+            {
+                    (multiBrandingData && BrandLabel) ?
+                        <MultibrandLabels
+                        Label1={BrandLabel.School}
+                        Label2={BrandLabel.SchoolId}
+                        School ={loginData.data.school.name}
+                        SchoolId={loginData.data.school.schoolId}
+                        />
+                     :
+            (loginData && loginData.data) &&
                 <View style={{width:'60%'}}>
                     <Text
                         style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingTop: '4%' }}
@@ -319,17 +331,18 @@ useEffect(() => {
                             {loginData.data.school.schoolId}
                         </Text>
                     </Text>
-                </View>
-
-            }
-            <Text
-                style={{ fontSize: AppTheme.FONT_SIZE_REGULAR - 3, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '3%', marginBottom: '4%' }}
+                    <Text
+                style={{ fontSize: AppTheme.FONT_SIZE_REGULAR - 3, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', marginBottom: '4%' }}
             >
                 {Strings.version_text + ' : '}
                 <Text style={{ fontWeight: 'normal' }}>
                     {apkVersion}
                 </Text>
             </Text>
+                </View>
+
+            }
+         
             <FlatList
                 data={allStudentData}
                 renderItem={renderStudentData}
