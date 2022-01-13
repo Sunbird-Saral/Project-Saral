@@ -614,6 +614,9 @@ const ScannedDetailsComponent = ({
             ocrLocalResponse.layout.cells.forEach(element => {
                 if (element.cellId == value.cellId) {
                     element.consolidatedPrediction = text
+                    if (multiPage > 0 && text >= 0 &&  text <= 5) {
+                        element.rois[text].result.prediction = text
+                    }
 
                 }
             });
@@ -739,7 +742,6 @@ const ScannedDetailsComponent = ({
                         if (isAbleToGoNextPage) {
                             openCameraActivity();
                         } else {
-                            saveDataIntoMultiPageReducer(0, newArrayValue);
                             saveMultiPageIntoLocalStorage();
                         }
                     } else {
@@ -753,7 +755,6 @@ const ScannedDetailsComponent = ({
                     if (isAbleToGoNextPage) {
                         openCameraActivity();
                     } else {
-                        saveDataIntoMultiPageReducer(0, newArrayValue);
                         saveMultiPageIntoLocalStorage();
                     }
                 } else {
@@ -767,46 +768,8 @@ const ScannedDetailsComponent = ({
         onSubmitClick()
     }
 
-    const saveDataIntoMultiPageReducer = (num, scanData) => {
-        let totalPages = ocrLocalResponse.layout.hasOwnProperty("pages") ? ocrLocalResponse.layout.pages : 0
-        if (totalPages > 0) {
-            let data = {
-                "page": currentIndex + num,
-                "scanData": scanData
-            }
-            multiPageReducer.push(data)
-            dispatch(MultiPageActions(multiPageReducer))
-        }
-    }
-
-    const filterScanDataAsPage = () => {
-        let data = multiPageReducer.filter((element) => {
-            if (element.page == currentIndex - 1) {
-                return true
-            }
-            else {
-                return false
-            }
-        })
-        return data[0].scanData
-    }
-
-    const updatePageInReducer = (data) => {
-        multiPageReducer.forEach(element => {
-            if (element.page == currentIndex) {
-                element.page = currentIndex,
-                    element.scanData = data
-
-            }
-        });
-        dispatch(MultiPageActions(multiPageReducer))
-    }
-
     const scanNextSheet = (roisData) => {
         const elements = neglectData;
-        const checkIsNextPageExist = multiPageReducer.findIndex(_element => _element.page === currentIndex + 1);
-
-        const checkIsCurrentPageExist = multiPageReducer.findIndex(_element => _element.page === currentIndex);
 
         let filterDataAccordingPage = roisData.layout.cells.filter((element) => {
             if (element.format.name == elements[0] || element.format.name == elements[1] || element.format.name == elements[4] || element.page != currentIndex + 1) {
@@ -816,26 +779,14 @@ const ScannedDetailsComponent = ({
                 return true
             }
         })
-
-        if (checkIsNextPageExist == -1 && filterDataAccordingPage.length > 0) {
+        if (filterDataAccordingPage.length > 0) {
             setNextBtn(`Scan Page#${currentIndex + 2}`)
-            if (checkIsCurrentPageExist > -1) {
-                updatePageInReducer(newArrayValue)
-            } else {
-                saveDataIntoMultiPageReducer(0, newArrayValue)
-            }
             setCurrentIndex(currentIndex + 1)
             setBtnName(Strings.Back)
             setNewArrayValue(filterDataAccordingPage)
-        } else {
-            updatePageInReducer(newArrayValue)
-            setNewArrayValue(multiPageReducer[currentIndex].scanData)
-            setCurrentIndex(currentIndex + 1)
-            setBtnName(Strings.Back)
-            setNextBtn(`Scan Page#${currentIndex + 2}`)
-        }
-        if (currentIndex + 1 == multiPage) {
-            setNextBtn(Strings.submit_text)
+            if (currentIndex + 1 == multiPage) {
+                setNextBtn(Strings.submit_text)
+            }
         }
     }
 
@@ -882,8 +833,16 @@ const ScannedDetailsComponent = ({
     const goBackPage = () => {
         if (currentIndex - 1 >= 1) {
             setNextBtn(`Scan Page#${currentIndex}`)
-            let filterData = filterScanDataAsPage()
-            setNewArrayValue(filterData)
+            const elements = neglectData;
+            let filterDataAccordingPage = ocrLocalResponse.layout.cells.filter((element) => {
+                if (element.format.name == elements[0] || element.format.name == elements[1] || element.format.name == elements[4] || element.page != currentIndex - 1) {
+                    return false
+                }
+                else {
+                    return true
+                }
+            })
+            setNewArrayValue(filterDataAccordingPage)
             setCurrentIndex(currentIndex - 1)
             if (currentIndex - 1 == 1) {
                 setBtnName(Strings.cancel_text)
@@ -981,6 +940,7 @@ const ScannedDetailsComponent = ({
 
     const openCameraActivity = async () => {
         try {
+
             SaralSDK.startCamera(JSON.stringify(ocrLocalResponse), (currentIndex + 1).toString()).then(res => {
                 let roisData = JSON.parse(res);
                 let cells = roisData.layout.cells;
@@ -1011,32 +971,15 @@ const ScannedDetailsComponent = ({
                 roisData.layout.cells[i].predictedMarks = marks
             }
         }
+
         dispatch(OcrLocalResponseAction(JSON.parse(JSON.stringify(roisData))))
         let rollNumber = roisData.layout.cells[0].consolidatedPrediction
-        if (rollNumber != studentId) {
-            setStdErr(Strings.student_id_should_be_same)
-        } else {
-            setStdErr("");
-            scanNextSheet(roisData);
-        }
-    }
-
-    const overWriteScanSheet = (roisData) => {
-        const elements = neglectData
-
-        let data = roisData.layout.cells.filter((element) => {
-            if (element.format.name == elements[0] || element.format.name == elements[1] || element.format.name == elements[4] || element.page != currentIndex) {
-                return false
-            }
-            else {
-                return true
-            }
-        })
-        setNewArrayValue(data)
-        const checkIsNextPageExist = multiPageReducer.findIndex(_element => _element.page === currentIndex);
-        if (checkIsNextPageExist >= 0) {
-            updatePageInReducer(data)
-        }
+        // if (rollNumber != studentId) {
+        //     setStdErr(Strings.student_id_should_be_same)
+        // } else {
+        setStdErr("");
+        scanNextSheet(roisData);
+        // }
     }
 
     return (

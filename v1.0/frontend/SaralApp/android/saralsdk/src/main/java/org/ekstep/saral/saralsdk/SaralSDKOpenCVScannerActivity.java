@@ -289,7 +289,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
 
                 for (int i = 0; i < cells.length(); i++) {
                     JSONObject cell = cells.getJSONObject(i);
-                    boolean includeRois = (cell.has("page") && pageNumber!=null && cell.getString("page").equals(pageNumber)) || ((!cell.has("page") && (pageNumber==null || pageNumber!=null)));
+                    boolean includeRois = (cell.has("page") && pageNumber!=null && cell.getString("page").equals(pageNumber)) || (!cell.has("page"));
                     if(includeRois) {
                     JSONArray cellROIs      = cells.getJSONObject(i).getJSONArray("rois");
                         for (int j = 0; j < cellROIs.length(); j++) {
@@ -388,11 +388,12 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
             JSONObject layoutObject     = layoutConfigs.getJSONObject("layout");
             JSONArray  cells            = layoutObject.getJSONArray("cells");
             
-            Log.d(TAG, "isMultiChoiceOMRLayout:: "+isMultiChoiceOMRLayout);
 
             for (int i = 0; i < cells.length(); i++) {
                 JSONArray cellROIs      = cells.getJSONObject(i).getJSONArray("rois");
                 JSONObject cell = cells.getJSONObject(i);
+                boolean includeRois = (cell.has("page") && pageNumber!=null && cell.getString("page").equals(pageNumber)) || (!cell.has("page"));
+                if (includeRois) {
                 JSONArray trainingDataSet = new JSONArray();
                 int countOMRChoice =0;
                 for (int j = 0; j < cellROIs.length(); j++) {
@@ -434,12 +435,12 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                             roi.put("result", result);    
                         }else{
                             JSONObject resultObj = roi.getJSONObject("result");
-                            if(resultObj.getString("prediction") != null && resultObj.getString("prediction").trim().equals("")){
+                            if(resultObj.getString("prediction") != null){
                                 roi.put("result", result);    
                             }
                         }
                     }
-                }
+                
                 if(isMultiChoiceOMRLayout && countOMRChoice > 1)
                 {
                     resetInvalidOMRChoice(cellROIs);
@@ -450,6 +451,8 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                     Log.d(TAG, "CellId:" + cell.getString("cellId")+" trainingDataSet :: "+trainingDataSet);
                 }                
             }
+        }
+        }
             return layoutConfigs;
 
         } catch (JSONException e) {

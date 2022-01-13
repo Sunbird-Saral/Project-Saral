@@ -218,10 +218,18 @@ class MyScanComponent extends Component {
             marks = ""
             predictionConfidenceArray = []
             for (let j = 0; j < cells[i].rois.length; j++) {
-
-                marks = marks + cells[i].rois[j].result.prediction,
-                predictionConfidenceArray.push(cells[i].rois[j].result.confidence)
-                // roisData.layout.cells[i].predictionConfidence = cells[i].rois[j].result.confidence
+                if (cells[i].rois[j].hasOwnProperty("result")) {
+                    marks = marks + cells[i].rois[j].result.prediction,
+                        predictionConfidenceArray.push(cells[i].rois[j].result.confidence)
+                    // roisData.layout.cells[i].predictionConfidence = cells[i].rois[j].result.confidence
+                } else {
+                    let resultProperty = {
+                            "prediction": "0",
+                            "confidence": 0
+                        }
+                    
+                    roisData.layout.cells[i].rois[j].result = resultProperty
+                }
 
             }
             roisData.layout.cells[i].consolidatedPrediction = marks
