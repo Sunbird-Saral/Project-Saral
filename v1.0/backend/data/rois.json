@@ -23795,9 +23795,9 @@
               "version": "1.0",
               "name": "HINDI8S13QOMR Exam Sheet Form",
               "threshold": {
-                  "minWidth" : 930,
-                  "minHeight": 520
-              },            
+                  "minWidth" : 920,
+                  "minHeight": 510
+              },
               "cells": [
                   {
                       "cellId": "1",
@@ -28535,5 +28535,554 @@
       },
       "state": "gujrat",
       "roiId": "16"
+  },
+  {
+      "subject": "Carpentary Assesment",
+      "classId": "5",
+      "type": "any_1s_5q_multichoice",
+      "roi": {
+          "layout": {
+              "version": "1.0",
+              "name": "ANY1S5QMULTICHOICE Exam Sheet Form",
+              "cells": [
+                  {
+                      "cellId": "1",
+                      "rois": [
+                          {
+                              "annotationTags": "ROLLNUMBER_1",
+                              "extractionMethod": "NUMERIC_CLASSIFICATION",
+                              "roiId": "1",
+                              "index": 0,
+                              "rect": {
+                                  "top": 38,
+                                  "left": 274,
+                                  "bottom": 77,
+                                  "right": 302
+                              }
+                          },
+                          {
+                              "annotationTags": "ROLLNUMBER_2",
+                              "extractionMethod": "NUMERIC_CLASSIFICATION",
+                              "roiId": "2",
+                              "index": 1,
+                              "rect": {
+                                  "top": 36,
+                                  "left": 311,
+                                  "bottom": 76,
+                                  "right": 339
+                              }
+                          },
+                          {
+                              "annotationTags": "ROLLNUMBER_3",
+                              "extractionMethod": "NUMERIC_CLASSIFICATION",
+                              "roiId": "3",
+                              "index": 2,
+                              "rect": {
+                                  "top": 36,
+                                  "left": 347,
+                                  "bottom": 76,
+                                  "right": 379
+                              }
+                          },
+                          {
+                              "annotationTags": "ROLLNUMBER_4",
+                              "extractionMethod": "NUMERIC_CLASSIFICATION",
+                              "roiId": "4",
+                              "index": 3,
+                              "rect": {
+                                  "top": 36,
+                                  "left": 385,
+                                  "bottom": 79,
+                                  "right": 416
+                              }
+                          },
+                          {
+                              "annotationTags": "ROLLNUMBER5",
+                              "extractionMethod": "NUMERIC_CLASSIFICATION",
+                              "roiId": "5",
+                              "index": 4,
+                              "rect": {
+                                  "top": 36,
+                                  "left": 423,
+                                  "bottom": 80,
+                                  "right": 455
+                              }
+                          },
+                          {
+                              "annotationTags": "ROLLNUMBER6",
+                              "extractionMethod": "NUMERIC_CLASSIFICATION",
+                              "roiId": "6",
+                              "index": 5,
+                              "rect": {
+                                  "top": 36,
+                                  "left": 460,
+                                  "bottom": 79,
+                                  "right": 492
+                              }
+                          },
+                          {
+                              "annotationTags": "ROLLNUMBER7",
+                              "extractionMethod": "NUMERIC_CLASSIFICATION",
+                              "roiId": "7",
+                              "index": 6,
+                              "rect": {
+                                  "top": 35,
+                                  "left": 498,
+                                  "bottom": 79,
+                                  "right": 529
+                              }
+                          }
+                      ],
+                      "render": {
+                          "index": 1
+                      },
+                      "format": {
+                          "name": "ROLLNUMBER",
+                          "value": "ROLLNUMBER"
+                      },
+                      "validate": {
+                          "regExp": ""
+                      }
+                  },
+                  {
+                      "cellId": "2",
+                      "rois": [
+                          {
+                              "annotationTags": "QUESTION1_0",
+                              "extractionMethod": "CELL_OMR",
+                              "roiId": "8",
+                              "index": 0,
+                              "rect": {
+                                  "top": 165,
+                                  "left": 275,
+                                  "bottom": 194,
+                                  "right": 300
+                              }
+                          },
+                          {
+                              "annotationTags": "QUESTION1_1",
+                              "extractionMethod": "CELL_OMR",
+                              "roiId": "9",
+                              "index": 1,
+                              "rect": {
+                                  "top": 165,
+                                  "left": 311,
+                                  "bottom": 194,
+                                  "right": 335
+                              }
+                          },
+                          {
+                              "annotationTags": "QUESTION1_2",
+                              "extractionMethod": "CELL_OMR",
+                              "roiId": "10",
+                              "index": 2,
+                              "rect": {
+                                  "top": 165,
+                                  "left": 349,
+                                  "bottom": 195,
+                                  "right": 373
+                              }
+                          },
+                          {
+                              "annotationTags": "QUESTION1_3",
+                              "extractionMethod": "CELL_OMR",
+                              "roiId": "11",
+                              "index": 3,
+                              "rect": {
+                                  "top": 165,
+                                  "left": 385,
+                                  "bottom": 195,
+                                  "right": 409
+                              }
+                          },
+                          {
+                              "annotationTags": "QUESTION1_4",
+                              "extractionMethod": "CELL_OMR",
+                              "roiId": "12",
+                              "index": 4,
+                              "rect": {
+                                  "top": 165,
+                                  "left": 423,
+                                  "bottom": 193,
+                                  "right": 447
+                              }
+                          },
+                          {
+                              "annotationTags": "QUESTION1_5",
+                              "extractionMethod": "CELL_OMR",
+                              "roiId": "13",
+                              "index": 5,
+                              "rect": {
+                                  "top": 165,
+                                  "left": 460,
+                                  "bottom": 193,
+                                  "right": 483
+                              }
+                          }
+                      ],
+                      "render": {
+                          "index": 2
+                      },
+                      "format": {
+                          "name": "QUESTION1",
+                          "value": "Measuring Skills"
+                      },
+                      "validate": {
+                          "regExp": ""
+                      }
+                  },
+                  {
+                      "cellId": "3",
+                      "rois": [
+                          {
+                              "annotationTags": "QUESTION2_0",
+                              "extractionMethod": "CELL_OMR",
+                              "roiId": "14",
+                              "index": 0,
+                              "rect": {
+                                  "top": 225,
+                                  "left": 275,
+                                  "bottom": 254,
+                                  "right": 298
+                              }
+                          },
+                          {
+                              "annotationTags": "QUESTION2_1",
+                              "extractionMethod": "CELL_OMR",
+                              "roiId": "15",
+                              "index": 1,
+                              "rect": {
+                                  "top": 224,
+                                  "left": 311,
+                                  "bottom": 253,
+                                  "right": 335
+                              }
+                          },
+                          {
+                              "annotationTags": "QUESTION2_2",
+                              "extractionMethod": "CELL_OMR",
+                              "roiId": "16",
+                              "index": 2,
+                              "rect": {
+                                  "top": 224,
+                                  "left": 347,
+                                  "bottom": 252,
+                                  "right": 372
+                              }
+                          },
+                          {
+                              "annotationTags": "QUESTION2_3",
+                              "extractionMethod": "CELL_OMR",
+                              "roiId": "17",
+                              "index": 3,
+                              "rect": {
+                                  "top": 225,
+                                  "left": 386,
+                                  "bottom": 253,
+                                  "right": 410
+                              }
+                          },
+                          {
+                              "annotationTags": "QUESTION2_4",
+                              "extractionMethod": "CELL_OMR",
+                              "roiId": "18",
+                              "index": 4,
+                              "rect": {
+                                  "top": 225,
+                                  "left": 422,
+                                  "bottom": 254,
+                                  "right": 446
+                              }
+                          },
+                          {
+                              "annotationTags": "QUESTION2_5",
+                              "extractionMethod": "CELL_OMR",
+                              "roiId": "19",
+                              "index": 5,
+                              "rect": {
+                                  "top": 224,
+                                  "left": 459,
+                                  "bottom": 253,
+                                  "right": 483
+                              }
+                          }
+                      ],
+                      "render": {
+                          "index": 3
+                      },
+                      "format": {
+                          "name": "QUESTION2",
+                          "value": "Carpentary Skills"
+                      },
+                      "validate": {
+                          "regExp": ""
+                      }
+                  },
+                  {
+                      "cellId": "4",
+                      "rois": [
+                          {
+                              "annotationTags": "QUESTION3_0",
+                              "extractionMethod": "CELL_OMR",
+                              "roiId": "20",
+                              "index": 0,
+                              "rect": {
+                                  "top": 284,
+                                  "left": 275,
+                                  "bottom": 312,
+                                  "right": 299
+                              }
+                          },
+                          {
+                              "annotationTags": "QUESTION3_1",
+                              "extractionMethod": "CELL_OMR",
+                              "roiId": "21",
+                              "index": 1,
+                              "rect": {
+                                  "top": 284,
+                                  "left": 310,
+                                  "bottom": 313,
+                                  "right": 335
+                              }
+                          },
+                          {
+                              "annotationTags": "QUESTION3_2",
+                              "extractionMethod": "CELL_OMR",
+                              "roiId": "22",
+                              "index": 2,
+                              "rect": {
+                                  "top": 284,
+                                  "left": 348,
+                                  "bottom": 311,
+                                  "right": 372
+                              }
+                          },
+                          {
+                              "annotationTags": "QUESTION3_3",
+                              "extractionMethod": "CELL_OMR",
+                              "roiId": "23",
+                              "index": 3,
+                              "rect": {
+                                  "top": 283,
+                                  "left": 385,
+                                  "bottom": 312,
+                                  "right": 409
+                              }
+                          },
+                          {
+                              "annotationTags": "QUESTION3_4",
+                              "extractionMethod": "CELL_OMR",
+                              "roiId": "24",
+                              "index": 4,
+                              "rect": {
+                                  "top": 282,
+                                  "left": 422,
+                                  "bottom": 312,
+                                  "right": 446
+                              }
+                          },
+                          {
+                              "annotationTags": "QUESTION3_5",
+                              "extractionMethod": "CELL_OMR",
+                              "roiId": "25",
+                              "index": 5,
+                              "rect": {
+                                  "top": 283,
+                                  "left": 459,
+                                  "bottom": 311,
+                                  "right": 483
+                              }
+                          }
+                      ],
+                      "render": {
+                          "index": 4
+                      },
+                      "format": {
+                          "name": "QUESTION3",
+                          "value": "Plumbing Skills"
+                      },
+                      "validate": {
+                          "regExp": ""
+                      }
+                  },
+                  {
+                      "cellId": "5",
+                      "rois": [
+                          {
+                              "annotationTags": "QUESTION4_0",
+                              "extractionMethod": "CELL_OMR",
+                              "roiId": "26",
+                              "index": 0,
+                              "rect": {
+                                  "top": 342,
+                                  "left": 274,
+                                  "bottom": 371,
+                                  "right": 298
+                              }
+                          },
+                          {
+                              "annotationTags": "QUESTION4_1",
+                              "extractionMethod": "CELL_OMR",
+                              "roiId": "27",
+                              "index": 1,
+                              "rect": {
+                                  "top": 343,
+                                  "left": 311,
+                                  "bottom": 371,
+                                  "right": 335
+                              }
+                          },
+                          {
+                              "annotationTags": "QUESTION4_2",
+                              "extractionMethod": "CELL_OMR",
+                              "roiId": "28",
+                              "index": 2,
+                              "rect": {
+                                  "top": 343,
+                                  "left": 348,
+                                  "bottom": 371,
+                                  "right": 372
+                              }
+                          },
+                          {
+                              "annotationTags": "QUESTION4_3",
+                              "extractionMethod": "CELL_OMR",
+                              "roiId": "29",
+                              "index": 3,
+                              "rect": {
+                                  "top": 342,
+                                  "left": 384,
+                                  "bottom": 371,
+                                  "right": 409
+                              }
+                          },
+                          {
+                              "annotationTags": "QUESTION4_4",
+                              "extractionMethod": "CELL_OMR",
+                              "roiId": "30",
+                              "index": 4,
+                              "rect": {
+                                  "top": 342,
+                                  "left": 422,
+                                  "bottom": 370,
+                                  "right": 445
+                              }
+                          },
+                          {
+                              "annotationTags": "QUESTION4_5",
+                              "extractionMethod": "CELL_OMR",
+                              "roiId": "31",
+                              "index": 5,
+                              "rect": {
+                                  "top": 342,
+                                  "left": 459,
+                                  "bottom": 371,
+                                  "right": 483
+                              }
+                          }
+                      ],
+                      "render": {
+                          "index": 5
+                      },
+                      "format": {
+                          "name": "QUESTION4",
+                          "value": "Cleaning Skills"
+                      },
+                      "validate": {
+                          "regExp": ""
+                      }
+                  },
+                  {
+                      "cellId": "6",
+                      "rois": [
+                          {
+                              "annotationTags": "QUESTION5_0",
+                              "extractionMethod": "CELL_OMR",
+                              "roiId": "32",
+                              "index": 0,
+                              "rect": {
+                                  "top": 401,
+                                  "left": 274,
+                                  "bottom": 430,
+                                  "right": 299
+                              }
+                          },
+                          {
+                              "annotationTags": "QUESTION5_1",
+                              "extractionMethod": "CELL_OMR",
+                              "roiId": "33",
+                              "index": 1,
+                              "rect": {
+                                  "top": 400,
+                                  "left": 310,
+                                  "bottom": 430,
+                                  "right": 335
+                              }
+                          },
+                          {
+                              "annotationTags": "QUESTION5_2",
+                              "extractionMethod": "CELL_OMR",
+                              "roiId": "34",
+                              "index": 2,
+                              "rect": {
+                                  "top": 400,
+                                  "left": 348,
+                                  "bottom": 430,
+                                  "right": 372
+                              }
+                          },
+                          {
+                              "annotationTags": "QUESTION5_3",
+                              "extractionMethod": "CELL_OMR",
+                              "roiId": "35",
+                              "index": 3,
+                              "rect": {
+                                  "top": 401,
+                                  "left": 385,
+                                  "bottom": 429,
+                                  "right": 409
+                              }
+                          },
+                          {
+                              "annotationTags": "QUESTION5_4",
+                              "extractionMethod": "CELL_OMR",
+                              "roiId": "36",
+                              "index": 4,
+                              "rect": {
+                                  "top": 401,
+                                  "left": 422,
+                                  "bottom": 430,
+                                  "right": 447
+                              }
+                          },
+                          {
+                              "annotationTags": "QUESTION5_5",
+                              "extractionMethod": "CELL_OMR",
+                              "roiId": "37",
+                              "index": 5,
+                              "rect": {
+                                  "top": 400,
+                                  "left": 458,
+                                  "bottom": 430,
+                                  "right": 482
+                              }
+                          }
+                      ],
+                      "render": {
+                          "index": 6
+                      },
+                      "format": {
+                          "name": "QUESTION5",
+                          "value": "Learning Skills"
+                      },
+                      "validate": {
+                          "regExp": ""
+                      }
+                  }
+              ]
+          }
+      },
+      "state": "karnataka",
+      "roiId": "17"
   }
   ]
