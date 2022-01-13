@@ -1,9 +1,17 @@
 [{
   "_id": "examId",
   "__v": 0,
+<<<<<<< HEAD
   "counter_value": 21
 },{
   "_id": "roiId",
   "__v": 0,
   "counter_value": 18
+=======
+  "counter_value": 20
+},{
+  "_id": "roiId",
+  "__v": 0,
+  "counter_value": 17
+>>>>>>> v1-develop
 }]

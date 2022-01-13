@@ -31,7 +31,7 @@ export const styles = StyleSheet.create({
         paddingHorizontal: '2%',
     },
     scanLabelStyle: {
-        padding: '3%',
+        padding: '2.4%',
         borderTopWidth: 1,
         borderColor: AppTheme.BLACK
     },
