@@ -239,7 +239,7 @@ class MyScanComponent extends Component {
     render() {
         const { isLoading } = this.state;
         const { loginData,multiBrandingData } = this.props
-        const BrandLabel = multiBrandingData.screenLabels.myScan[0]
+        const BrandLabel = multiBrandingData&&multiBrandingData.screenLabels&&multiBrandingData.screenLabels.myScan[0]
         return (
 
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
@@ -247,7 +247,7 @@ class MyScanComponent extends Component {
                  navigation={this.props.navigation}
                  />
                <View>
-               {(multiBrandingData && BrandLabel) ?
+               {( BrandLabel) ?
                 <MultibrandLabels
                 Label1={BrandLabel.School}
                 Label2={BrandLabel.SchoolId}

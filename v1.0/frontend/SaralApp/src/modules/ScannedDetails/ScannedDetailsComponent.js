@@ -67,7 +67,7 @@ const ScannedDetailsComponent = ({
     const [checkStdRollDuplicate, setCheckStdRollDuplicate] = useState([])
     const [toggleCheckBox, setToggleCheckBox] = useState(false)
     const [logmessage,setLogmessage] = useState()
-    const BrandLabel = multiBrandingData.screenLabels.scannedDetailComponent[0]
+    const BrandLabel =multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.scannedDetailComponent[0]
     
 
 

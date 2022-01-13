@@ -31,7 +31,7 @@ const ScanHistory = ({
     //Hooks
     const [isLoading, setIsLoading] = useState(false)
     const [scanStatusData, setScanStatusData] = useState(false)
-    const BrandLabel = multiBrandingData.screenLabels.scanHistory[0]
+    const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.scanHistory[0]
     //functions
         useEffect(() => {
         sumOfLocalData()
@@ -83,7 +83,7 @@ const ScanHistory = ({
                  />
             
                  <View>
-                 {(multiBrandingData && BrandLabel) ?
+                 {( BrandLabel) ?
                 <MultibrandLabels
                 Label1={BrandLabel.School}
                 Label2={BrandLabel.SchoolId}

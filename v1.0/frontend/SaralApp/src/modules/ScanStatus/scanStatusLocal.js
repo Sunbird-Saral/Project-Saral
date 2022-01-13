@@ -35,7 +35,7 @@ const ScanStatusLocal = ({
     const [unsavedstudentList, setUnsavedstudentList] = useState([])
     const [loacalstutlist, setLoacalstutlist] = useState([])
     const [presentStudentList, setPresentStudentList] = useState([])
-    const BrandLabel = multiBrandingData.screenLabels.scanHistory[0]
+    const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.scanHistory[0]
     
     const data =(JSON.stringify(loacalstutlist[0],null, 2))
    

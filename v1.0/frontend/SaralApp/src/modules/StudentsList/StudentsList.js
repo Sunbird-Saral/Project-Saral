@@ -64,7 +64,7 @@ const StudentsList = ({
     const [stdArray, setStdArray] = useState([])
     const prevloginResponse = usePrevious(loginData);
     const prevSaveRes = usePrevious(saveAbsentStudent)
-    const BrandLabel = multiBrandingData.screenLabels.studentList[0]
+    const BrandLabel = multiBrandingData&&multiBrandingData.screenLabels&&multiBrandingData.screenLabels.studentList[0]
 
 useEffect(() => {
     studentData()
@@ -305,7 +305,7 @@ useEffect(() => {
                  />
 
             {
-                    (multiBrandingData && BrandLabel) ?
+                    (BrandLabel) ?
                         <MultibrandLabels
                         Label1={BrandLabel.School}
                         Label2={BrandLabel.SchoolId}
