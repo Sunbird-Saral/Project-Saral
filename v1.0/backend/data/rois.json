@@ -23794,6 +23794,10 @@
         "layout": {
             "version": "1.0",
             "name": "HINDI8S13QOMR Exam Sheet Form",
+            "threshold": {
+                "minWidth" : 920,
+                "minHeight": 510
+            },            
             "cells": [
                 {
                     "cellId": "1",
