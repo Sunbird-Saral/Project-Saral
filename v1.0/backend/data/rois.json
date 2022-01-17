@@ -23795,8 +23795,8 @@
               "version": "1.0",
               "name": "UP HINDI8S Exam Sheet Form",
               "threshold": {
-                "minWidth" : 920,
-                "minHeight": 510
+                "minWidth" : 500,
+                "minHeight": 200
             },            
               "cells": [
                   {
