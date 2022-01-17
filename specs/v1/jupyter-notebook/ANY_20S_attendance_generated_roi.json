@@ -1245,10 +1245,10 @@
                         "roiId": "80",
                         "index": 0,
                         "rect": {
-                            "top": 432,
-                            "left": 265,
-                            "bottom": 452,
-                            "right": 283
+                            "top": 436,
+                            "left": 267,
+                            "bottom": 450,
+                            "right": 284
                         }
                     }
                 ],
@@ -1371,9 +1371,9 @@
                         "roiId": "88",
                         "index": 0,
                         "rect": {
-                            "top": 120,
-                            "left": 564,
-                            "bottom": 140,
+                            "top": 125,
+                            "left": 568,
+                            "bottom": 138,
                             "right": 582
                         }
                     }
@@ -1497,10 +1497,10 @@
                         "roiId": "96",
                         "index": 0,
                         "rect": {
-                            "top": 156,
-                            "left": 564,
-                            "bottom": 176,
-                            "right": 584
+                            "top": 157,
+                            "left": 567,
+                            "bottom": 171,
+                            "right": 582
                         }
                     }
                 ],
@@ -1624,9 +1624,9 @@
                         "index": 0,
                         "rect": {
                             "top": 193,
-                            "left": 568,
-                            "bottom": 207,
-                            "right": 582
+                            "left": 566,
+                            "bottom": 206,
+                            "right": 583
                         }
                     }
                 ],
@@ -1750,9 +1750,9 @@
                         "index": 0,
                         "rect": {
                             "top": 228,
-                            "left": 568,
+                            "left": 567,
                             "bottom": 242,
-                            "right": 582
+                            "right": 583
                         }
                     }
                 ],
@@ -2380,9 +2380,9 @@
                         "index": 0,
                         "rect": {
                             "top": 402,
-                            "left": 568,
+                            "left": 566,
                             "bottom": 415,
-                            "right": 581
+                            "right": 583
                         }
                     }
                 ],
@@ -2505,8 +2505,8 @@
                         "roiId": "160",
                         "index": 0,
                         "rect": {
-                            "top": 437,
-                            "left": 569,
+                            "top": 438,
+                            "left": 567,
                             "bottom": 451,
                             "right": 583
                         }
