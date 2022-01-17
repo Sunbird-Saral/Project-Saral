@@ -69,6 +69,8 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
     private HashMap<String, String> mPredictedClass     = new HashMap<>();
     private HashMap<String, String> mRoiMatBase64       = new HashMap<>();
     private boolean isMultiChoiceOMRLayout = false;
+    private int layoutMinWidth = 0;
+    private int layoutMinHeight = 0;
 
     public SaralSDKOpenCVScannerActivity() {
         Log.i(TAG, "Instantiated new " + this.getClass());
@@ -209,9 +211,9 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
 
     private void processCameraFrame(Mat image, long frameCount) {
         double DARKNESS_THRESHOLD   = 80.0;
-        Mat tableMat                = mTableCornerDetection.processMat(image);
         mStartTime                  = SystemClock.uptimeMillis();
-        isMultiChoiceOMRLayout = isMultiChoiceOMRLayout();
+        loadLayoutConfiguration();
+        Mat tableMat                = mTableCornerDetection.processMat(image,layoutMinWidth,layoutMinHeight);
         if(isMultiChoiceOMRLayout)
         {
             DARKNESS_THRESHOLD = 70.0;
@@ -246,6 +248,10 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                         if (percent > DARKNESS_THRESHOLD) {
                             answer = 1;
                         }
+                        // Alternative logic
+                        // if (mDetectShaded.isOMRFilled(omrROI, rect.getInt("top"), rect.getInt("left"), rect.getInt("bottom"), rect.getInt("right"))) {
+                        //     answer = 1;
+                        // }
                         mRoiMatBase64.put(roiId,createBase64FromMat(omrROI));
                         mPredictedOMRs.put(roiId, answer.toString());
                         Log.d(TAG, "key: " + roiId + " answer: " + answer.toString()+" percent "+percent);
@@ -318,12 +324,16 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
         finish();
     }
 
-    private boolean isMultiChoiceOMRLayout()
+    private void loadLayoutConfiguration()
     {
-        boolean isMultiChoiceOMRLayout=false;
         try {
             JSONObject layoutConfigs    = new JSONObject(mlayoutConfigs);
             JSONObject layoutObject     = layoutConfigs.getJSONObject("layout");
+            if(layoutObject.has("threshold")){
+                JSONObject threshold = layoutObject.getJSONObject("threshold");
+                layoutMinWidth=Integer.parseInt(threshold.getString("minWidth"));
+                layoutMinHeight=Integer.parseInt(threshold.getString("minHeight"));
+            }
             JSONArray  cells            = layoutObject.getJSONArray("cells");
             for (int i = 0; i < cells.length(); i++) { 
                 JSONObject cell = cells.getJSONObject(i);
@@ -349,8 +359,6 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
         } catch (JSONException e) {
             Log.e(TAG, "Failed to parse layout configuration");
         }
-            
-         return isMultiChoiceOMRLayout;
     }
 
     private void resetInvalidOMRChoice(JSONArray cellROIs)
