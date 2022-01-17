@@ -974,12 +974,12 @@ const ScannedDetailsComponent = ({
 
         dispatch(OcrLocalResponseAction(JSON.parse(JSON.stringify(roisData))))
         let rollNumber = roisData.layout.cells[0].consolidatedPrediction
-        // if (rollNumber != studentId) {
-        //     setStdErr(Strings.student_id_should_be_same)
-        // } else {
-        setStdErr("");
-        scanNextSheet(roisData);
-        // }
+        if (rollNumber != studentId) {
+            setStdErr(Strings.student_id_should_be_same)
+        } else {
+            setStdErr("");
+            scanNextSheet(roisData);
+        }
     }
 
     return (
