@@ -3,12 +3,6 @@
   "schoolId": "u001",
   "password": "tarento@123",
   "state": "up",
-  "district": "delhi",
-  "block": "haldwani",
-  "hmName": "acbc",
-  "hmMobileNo": "8006079875",
-  "noOfStudents": "100",
-  "udiseCode": "1",
   "storeTrainingData": true
 },
 {
@@ -16,12 +10,6 @@
   "schoolId": "od001",
   "password": "tarento@123",
   "state": "odisha",
-  "district": "odisha",
-  "block": "Rayagada",
-  "hmName": "acbc",
-  "hmMobileNo": "8006079875",
-  "noOfStudents": "100",
-  "udiseCode": "2",
   "storeTrainingData": true
 },
 {
@@ -29,12 +17,6 @@
   "schoolId": "demouser",
   "password": "Demo@123",
   "state": "gujrat",
-  "district": "ahmedabad",
-  "block": "Jamnagar",
-  "hmName": "acbc",
-  "hmMobileNo": "8006079875",
-  "noOfStudents": "100",
-  "udiseCode": "3",
   "storeTrainingData": true
 },
 {
@@ -42,12 +24,13 @@
 "schoolId": "u002",
 "password": "tarento@123",
 "state": "up",
-"district": "MORADABAD",
-"block": "MORADABAD",
-"hmName": "acbc",
-"hmMobileNo": "8006079875",
-"noOfStudents": "100",
-"udiseCode": "4",
 "storeTrainingData": true
-}
+},
+{
+  "name": "Dummy Skill School",
+  "schoolId": "skill001",
+  "password": "skill@123",
+  "state": "karnataka",
+  "storeTrainingData": true
+  }
 ]
