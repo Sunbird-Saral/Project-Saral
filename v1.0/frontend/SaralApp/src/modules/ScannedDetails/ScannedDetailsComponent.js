@@ -614,8 +614,8 @@ const ScannedDetailsComponent = ({
             ocrLocalResponse.layout.cells.forEach(element => {
                 if (element.cellId == value.cellId) {
                     element.consolidatedPrediction = text
-                    if (multiPage > 0 && text >= 0 &&  text <= 5) {
-                        element.rois[text].result.prediction = text
+                    if (multiPage > 0) {
+                        element.rois[index].result.prediction = text
                     }
 
                 }
