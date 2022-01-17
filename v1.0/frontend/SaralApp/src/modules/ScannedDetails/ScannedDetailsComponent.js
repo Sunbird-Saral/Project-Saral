@@ -265,7 +265,7 @@ const ScannedDetailsComponent = ({
             showErrorMessage(`omr value should be 0 to ${cellOmrValidation[1] + 1}`)
         }
         else if (duplication) {
-            Alert.alert("Student ID Shouldn't be duplicated")
+            Alert.alert(Strings.Student_ID_Shouldnt_be_duplicated)
         }
         else if (disable) {
             showErrorMessage(Strings.please_correct_marks_data)
@@ -855,7 +855,7 @@ const ScannedDetailsComponent = ({
                                                 <TextField
                                                     labelText={BrandLabel && BrandLabel.StudentId ? BrandLabel.StudentId : Strings.student_id}
                                                     errorField={ stdErr != '' || isNaN(studentId)}
-                                                    errorText={BrandLabel && BrandLabel.CorrectId?stdErr != '' ? stdErr :BrandLabel.CorrectId  : stdErr != '' ? stdErr : Strings.please_correct_student_id}
+                                                    errorText={ stdErr != '' ? stdErr : Strings.please_correct_student_id}
                                                     onChangeText={(text) => {
                                                         setStudentID(text)
                                                     }
