@@ -88,7 +88,7 @@ export default strings = new LocalizedStrings({
         summary_text: 'Summary',
         student_id: 'Student ID',
         please_correct_student_id: 'please correct ID',
-        please_correct_marks_data: 'Please edit and correct marks data.',
+        please_correct_marks_data: 'Please edit and correct results data.',
         student_roll_length_error: 'RollNo. should be 7 digit',
         sat_string: 'SAT',
         pat_string: 'PAT',
@@ -99,6 +99,7 @@ export default strings = new LocalizedStrings({
         shareDataExceed:'Data limit exceeded,Extract from backend',
         auto_sync_in_progress_please_wait: 'Auto-Sync Is In Progress, Please wait',
         auto_sync_completed: 'Auto-Sync Completed',
-        saral_app_auto_sync_channel: 'saral-app-auto-sync-channel'
+        saral_app_auto_sync_channel: 'saral-app-auto-sync-channel',
+        Sum_Of_All_obtained_marks:"Sum Of All obtained result should be equal to result Obtained"
     }
 })

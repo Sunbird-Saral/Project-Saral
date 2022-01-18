@@ -714,7 +714,7 @@ const ScannedDetailsComponent = ({
             console.log("sumOfObtained",maximum);
                 if (maximum != totalMarkSecured) {
                     setObtnMarkErr(true)
-                    showErrorMessage("Sum Of All obtained marks should be equal to marksObtained")
+                    showErrorMessage(Strings.Sum_Of_All_obtained_marks)
                 }
                 else if (maxMarksTotal < maximum) {
                     setObtnMarkErr(false)
