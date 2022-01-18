@@ -32619,10 +32619,10 @@
                             "roiId": "64",
                             "index": 0,
                             "rect": {
-                                "top": 366,
-                                "left": 268,
-                                "bottom": 381,
-                                "right": 284
+                                "top": 368,
+                                "left": 270,
+                                "bottom": 379,
+                                "right": 283
                             }
                         }
                     ],
@@ -33249,10 +33249,10 @@
                             "roiId": "104",
                             "index": 0,
                             "rect": {
-                                "top": 264,
-                                "left": 567,
-                                "bottom": 275,
-                                "right": 582
+                                "top": 194,
+                                "left": 568,
+                                "bottom": 205,
+                                "right": 581
                             }
                         }
                     ],
@@ -34027,10 +34027,22 @@
                     "cellId": "39",
                     "rois": [
                         {
-                            "annotationTags": "ROLLNUMBERID20_2",
+                            "annotationTags": "ROLLNUMBERID20_1",
                             "extractionMethod": "NUMERIC_CLASSIFICATION",
                             "roiId": "153",
                             "index": 0,
+                            "rect": {
+                                "top": 430,
+                                "left": 370,
+                                "bottom": 456,
+                                "right": 391
+                            }
+                        },
+                        {
+                            "annotationTags": "ROLLNUMBERID20_2",
+                            "extractionMethod": "NUMERIC_CLASSIFICATION",
+                            "roiId": "154",
+                            "index": 1,
                             "rect": {
                                 "top": 430,
                                 "left": 392,
@@ -34041,8 +34053,8 @@
                         {
                             "annotationTags": "ROLLNUMBERID20_3 ",
                             "extractionMethod": "NUMERIC_CLASSIFICATION",
-                            "roiId": "154",
-                            "index": 1,
+                            "roiId": "155",
+                            "index": 2,
                             "rect": {
                                 "top": 430,
                                 "left": 414,
@@ -34053,8 +34065,8 @@
                         {
                             "annotationTags": "ROLLNUMBERID20_4",
                             "extractionMethod": "NUMERIC_CLASSIFICATION",
-                            "roiId": "155",
-                            "index": 2,
+                            "roiId": "156",
+                            "index": 3,
                             "rect": {
                                 "top": 431,
                                 "left": 435,
@@ -34065,8 +34077,8 @@
                         {
                             "annotationTags": "ROLLNUMBERID20_5",
                             "extractionMethod": "NUMERIC_CLASSIFICATION",
-                            "roiId": "156",
-                            "index": 3,
+                            "roiId": "157",
+                            "index": 4,
                             "rect": {
                                 "top": 431,
                                 "left": 456,
@@ -34077,8 +34089,8 @@
                         {
                             "annotationTags": "ROLLNUMBERID20_6",
                             "extractionMethod": "NUMERIC_CLASSIFICATION",
-                            "roiId": "157",
-                            "index": 4,
+                            "roiId": "158",
+                            "index": 5,
                             "rect": {
                                 "top": 431,
                                 "left": 478,
@@ -34089,8 +34101,8 @@
                         {
                             "annotationTags": "ROLLNUMBERID20_7",
                             "extractionMethod": "NUMERIC_CLASSIFICATION",
-                            "roiId": "158",
-                            "index": 5,
+                            "roiId": "159",
+                            "index": 6,
                             "rect": {
                                 "top": 431,
                                 "left": 500,
@@ -34116,7 +34128,7 @@
                         {
                             "annotationTags": "ROLLNUMBER20_Q1",
                             "extractionMethod": "CELL_OMR",
-                            "roiId": "159",
+                            "roiId": "160",
                             "index": 0,
                             "rect": {
                                 "top": 438,
