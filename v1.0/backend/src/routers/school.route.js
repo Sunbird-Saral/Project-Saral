@@ -17,14 +17,14 @@ router.post('/schools/create', async (req, res) => {
             school.autoSync = req.body.autoSync
         }
         await school.save()
-        let response = {
+        let schools = {
             storeTrainingData: school.storeTrainingData,
             name: school.name,
             schoolId: school.schoolId,
             state: school.state
         }
         const token = await school.generateAuthToken()
-        res.status(201).send({ response, token })
+        res.status(201).send({ schools, token })
     } catch (e) {
         if (e.message.includes(' duplicate key error')) {
             let key = Object.keys(e.keyValue)
