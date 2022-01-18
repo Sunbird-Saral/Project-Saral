@@ -73,7 +73,6 @@ const ScannedDetailsComponent = ({
     const [toggleCheckBox, setToggleCheckBox] = useState(false)
     const [logmessage, setLogmessage] = useState()
     const [multiPage, setMultiPage] = useState(0)
-    const [logmessage, setLogmessage] = useState()
     const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.scannedDetailComponent[0]
 
 
@@ -279,7 +278,7 @@ const ScannedDetailsComponent = ({
             showErrorMessage(`omr value should be 0 to ${cellOmrValidation[1] + 1}`)
         }
         else if (duplication) {
-            Alert.alert("Student ID Shouldn't be duplicated")
+            Alert.alert(Strings.Student_ID_Shouldnt_be_duplicated)
         }
         else if (disable) {
             showErrorMessage(Strings.please_correct_marks_data)
@@ -1024,7 +1023,8 @@ const ScannedDetailsComponent = ({
                                                     <TextField
                                                         labelText={BrandLabel && BrandLabel.StudentId ? BrandLabel.StudentId : Strings.student_id}
                                                         errorField={stdErr != '' || isNaN(studentId)}
-                                                        errorText={BrandLabel && BrandLabel.CorrectId ? stdErr != '' ? stdErr : BrandLabel.CorrectId : stdErr != '' ? stdErr : Strings.please_correct_student_id}
+                                                        // errorText={BrandLabel && BrandLabel.CorrectId ? stdErr != '' ? stdErr : BrandLabel.CorrectId : stdErr != '' ? stdErr : Strings.please_correct_student_id}
+                                                        errorText={ stdErr != '' ? stdErr : Strings.please_correct_student_id}
                                                         onChangeText={(text) => {
                                                             setStudentID(text)
                                                         }}
@@ -1035,8 +1035,14 @@ const ScannedDetailsComponent = ({
                                                     <Text style={styles.nameTextStyle}>{BrandLabel && BrandLabel.Exam ? BrandLabel.Exam : Strings.Exam} : {filteredData.subject} {filteredData.examDate} ({filteredData.examTestID})</Text>
                                                     {
                                                         isMultipleStudent
-                                                        &&
-                                                        <Text style={styles.nameTextStyle}>{Strings.page_no + ': ' + (currentIndex + 1)}</Text>
+                                                            ?
+                                                            <Text style={styles.nameTextStyle}>{Strings.page_no + ': ' + (currentIndex + 1)}</Text>
+                                                            :
+                                                            ocrLocalResponse.layout.pages > 0
+                                                                ?
+                                                                <Text style={styles.nameTextStyle}>{Strings.page_no + ': ' + (currentIndex)}</Text>
+                                                                :
+                                                                null
                                                     }
                                                     {
                                                         isMultipleStudent
@@ -1057,73 +1063,76 @@ const ScannedDetailsComponent = ({
                                                             />
                                                         </View>
                                                     }
+                                                </View>
                                             </View>
-                                            </View>
+                                        </View>
+
 
                                             <View style={{ flexDirection: 'row', marginTop: 20 }}>
                                                 {
-                                                    TABLE_HEADER.map((data) => {
-                                                        return (
-                                                            <MarksHeaderTable
-                                                                customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
-                                                                key={data}
-                                                                rowTitle={data}
-                                                                rowBorderColor={AppTheme.TAB_BORDER}
-                                                                editable={false}
-                                                            />
-                                                        )
-                                                    })
+                                                    BrandLabel && BrandLabel.ListTableHeading[0] ?
+                                                        BrandLabel.ListTableHeading.map((data) => {
+                                                            return (
+                                                                <MarksHeaderTable
+                                                                    customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
+                                                                    key={data}
+                                                                    rowTitle={data}
+                                                                    rowBorderColor={AppTheme.TAB_BORDER}
+                                                                    editable={false}
+                                                                />
+                                                            )
+                                                        })
+                                                        :
+                                                        TABLE_HEADER.map((data) => {
+                                                            return (
+                                                                <MarksHeaderTable
+                                                                    customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
+                                                                    key={data}
+                                                                    rowTitle={data}
+                                                                    rowBorderColor={AppTheme.TAB_BORDER}
+                                                                    editable={false}
+                                                                />
+                                                            )
+                                                        })
                                                 }
                                             </View>
+
                                             {
-                                                BrandLabel && BrandLabel.ListTableHeading[0] ?
-                                                    BrandLabel.ListTableHeading.map((data) => {
-                                                        return (
+                                                newArrayValue.map((element, index) => {
+                                                    return (
+                                                        <View element={element} key={index} style={{ flexDirection: 'row' }}>
+
                                                             <MarksHeaderTable
-                                                                customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
-                                                                key={data}
-                                                                rowTitle={data}
-                                                                rowBorderColor={AppTheme.TAB_BORDER}
+                                                                customRowStyle={{ width: '30%', }}
+                                                                rowTitle={renderSRNo(element, index)}
+                                                                rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                                                 editable={false}
+                                                                keyboardType={'number-pad'}
                                                             />
-                                                        )
-                                                    })
-                                                    :
-                                                    TABLE_HEADER.map((data) => {
-                                                        return (
-                                                            <View element={element} key={index} style={{ flexDirection: 'row' }}>
+                                                            <MarksHeaderTable
+                                                                customRowStyle={{ width: '30%', }}
+                                                                rowTitle={element.format.value}
+                                                                rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
+                                                                editable={false}
+                                                                keyboardType={'number-pad'}
+                                                            />
+                                                            <MarksHeaderTable
+                                                                customRowStyle={{ width: '30%', }}
+                                                                rowTitle={element.consolidatedPrediction}
+                                                                rowBorderColor={markBorderOnCell(element)}
+                                                                editable={true}
+                                                                keyboardType={'number-pad'}
+                                                                maxLength={lengthAccordingSheet(element)}
+                                                                onChangeText={(text) => {
+                                                                    handleTextChange(text.trim(), index, newArrayValue, element)
+                                                                }}
 
-                                                                <MarksHeaderTable
-                                                                    customRowStyle={{ width: '30%', }}
-                                                                    rowTitle={renderSRNo(element, index)}
-                                                                    rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
-                                                                    editable={false}
-                                                                    keyboardType={'number-pad'}
-                                                                />
-                                                                <MarksHeaderTable
-                                                                    customRowStyle={{ width: '30%', }}
-                                                                    rowTitle={element.format.value}
-                                                                    rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
-                                                                    editable={false}
-                                                                    keyboardType={'number-pad'}
-                                                                />
-                                                                <MarksHeaderTable
-                                                                    customRowStyle={{ width: '30%', }}
-                                                                    rowTitle={element.consolidatedPrediction}
-                                                                    rowBorderColor={markBorderOnCell(element)}
-                                                                    editable={true}
-                                                                    keyboardType={'number-pad'}
-                                                                    maxLength={lengthAccordingSheet(element)}
-                                                                    onChangeText={(text) => {
-                                                                        handleTextChange(text.trim(), index, newArrayValue, element)
-                                                                    }}
+                                                            />
 
-                                                                />
-
-                                                            </View>
-                                                        )
-                                                        // }
-                                                    })
+                                                        </View>
+                                                    )
+                                                    // }
+                                                })
                                             }
 
                                             <View style={[styles.viewnxtBtnStyle1, { paddingTop: '7%' }]}>
@@ -1137,7 +1146,6 @@ const ScannedDetailsComponent = ({
                                                     btnText={nextBtn.toUpperCase()}
                                                     onPress={() => isMultipleStudent ? goNextFrame() : multiPage > 0 ? goNextPage() : onSubmitClick()}
                                                 />
-                                            </View>
                                             </View>
                                     </ScrollView>
                                 </View>
