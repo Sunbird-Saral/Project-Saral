@@ -119,6 +119,16 @@ const ScannedDetailsComponent = ({
             setStudentValid(true)
             setStdErr('')
             setStudentDATA(a)
+            if (!isMultipleStudent) {
+                //set student Id
+                ocrLocalResponse.layout.cells.forEach((element) => {
+                    student_ID.forEach((e) => {
+                        if (element.format.name == e) {
+                            element.consolidatedPrediction = value
+                        }
+                    })
+                })
+            }
         }
         else if (!toggleCheckBox) {
             setStdErr(Strings.please_correct_student_id)
