@@ -15,6 +15,7 @@ import { getScannedDataFromLocal,getErrorMessage } from '../../utils/StorageUtil
 import ButtonComponent from '../common/components/ButtonComponent';
 import { neglectData } from '../../utils/CommonUtils';
 import ShareComponent from '../common/components/Share';
+import MultibrandLabels from '../common/components/multibrandlabels';
 import { Assets } from '../../assets';
 
 LogBox.ignoreAllLogs()
@@ -218,10 +219,18 @@ class MyScanComponent extends Component {
             marks = ""
             predictionConfidenceArray = []
             for (let j = 0; j < cells[i].rois.length; j++) {
-
-                marks = marks + cells[i].rois[j].result.prediction,
-                predictionConfidenceArray.push(cells[i].rois[j].result.confidence)
-                // roisData.layout.cells[i].predictionConfidence = cells[i].rois[j].result.confidence
+                if (cells[i].rois[j].hasOwnProperty("result")) {
+                    marks = marks + cells[i].rois[j].result.prediction,
+                        predictionConfidenceArray.push(cells[i].rois[j].result.confidence)
+                    // roisData.layout.cells[i].predictionConfidence = cells[i].rois[j].result.confidence
+                } else {
+                    let resultProperty = {
+                            "prediction": "0",
+                            "confidence": 0
+                        }
+                    
+                    roisData.layout.cells[i].rois[j].result = resultProperty
+                }
 
             }
             roisData.layout.cells[i].consolidatedPrediction = marks
@@ -239,7 +248,8 @@ class MyScanComponent extends Component {
     }
     render() {
         const { isLoading } = this.state;
-        const { loginData } = this.props
+        const { loginData,multiBrandingData } = this.props
+        const BrandLabel = multiBrandingData&&multiBrandingData.screenLabels&&multiBrandingData.screenLabels.myScan[0]
         return (
 
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
@@ -247,7 +257,13 @@ class MyScanComponent extends Component {
                  navigation={this.props.navigation}
                  />
                <View>
-                {
+               {( BrandLabel) ?
+                <MultibrandLabels
+                Label1={BrandLabel.School}
+                Label2={BrandLabel.SchoolId}
+                School ={loginData.data.school.name}
+                SchoolId={loginData.data.school.schoolId}
+                />:
                     (loginData && loginData.data)
                     &&
                     <View style={{ width:'60%' }}>
@@ -279,7 +295,7 @@ class MyScanComponent extends Component {
                 }
                 
                 </View> 
-                <ScrollView>
+                <ScrollView scrollEnabled>
                 <View style={styles.container1}>
                 <Text style={[styles.header1TextStyle, { borderColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE, backgroundColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE }]}>
                     {Strings.ongoing_scan}
@@ -304,7 +320,7 @@ class MyScanComponent extends Component {
                 </View>
                 </ScrollView>
                 <View style={styles.bottomTabStyle}>
-                <View style={[{elevation:20,  backgroundColor: 'transparent', justifyContent: 'center',alignItems:'center' }]}>
+                <View style={[{elevation:10,  backgroundColor: 'transparent', justifyContent: 'center',alignItems:'center' }]}>
                     <TouchableOpacity style={[styles.subTabContainerStyle]}
                         onPress={this.onScanClick}
                     >
@@ -345,7 +361,7 @@ const styles = {
     container1: {
         marginHorizontal: '4%',
         alignItems: 'center',
-        // marginTop:13,
+         marginTop:10,
     },
     onGoingContainer: {
         marginHorizontal: '4%',
@@ -421,7 +437,7 @@ const styles = {
         justifyContent: 'center',
         alignItems: 'center'
     },
-    nxtBtnStyle:{ marginHorizontal: 40,marginTop:8, borderRadius: 10 },
+    nxtBtnStyle:{ marginHorizontal: 40,marginTop:8,marginBottom:20, borderRadius: 10 },
    
     nxtBtnStyle1: {
         marginTop:15,

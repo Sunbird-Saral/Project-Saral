@@ -25,6 +25,20 @@ components:
           type: string
           description: layout name for human understanding
           example: Odisa SAT exam sheet format for class 2 to 5
+        threshold:
+          type: object
+          description: layout threshold of width and height for POI(Point of Interest)
+          properties:
+            minWidth: 
+              type: positiveInteger
+              description: Minimum widht of layout for detection
+            minHeight:
+              type: positiveInteger
+              description: Minimum height of layout for detection
+        pages:
+          type: positiveInteger
+          description: number of pages supported by layout. Optional feild , to be used for multi-page layouts.
+          example: 3
         cells:
           type: array
           items:
@@ -38,6 +52,10 @@ components:
         cellId:
           type: string
           description: unique identity of the cell
+        page:
+          type: positiveInteger
+          description: page number this cell belongs to. This field is added to support Multi-Page layouts.
+          example: 2
         rois:
           $ref: '#/components/schemas/rois'
         render:

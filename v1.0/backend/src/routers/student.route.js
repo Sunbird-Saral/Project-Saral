@@ -31,7 +31,17 @@ router.post('/student', auth, async (req, res) => {
         })
 
         await students.save()
-        res.status(201).send(students)
+        let response = {
+            studentClass: students.studentClass,
+            section: students.section,
+            name: students.name,
+            studentId: students.studentId,
+            schoolId: students.schoolId,
+            createdAt: students.createdAt,
+            updatedAt: students.updatedAt
+        }
+        
+        res.status(201).send(response)
     } catch (e) {
         console.log(e);
         res.status(400).send(e)

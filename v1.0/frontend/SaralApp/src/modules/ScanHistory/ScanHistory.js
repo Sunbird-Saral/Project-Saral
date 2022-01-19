@@ -17,6 +17,7 @@ import ButtonComponent from '../common/components/ButtonComponent';
 import ShareComponent from '../common/components/Share';
 import APITransport from '../../flux/actions/transport/apitransport';
 import { collectErrorLogs } from '../CollectErrorLogs';
+import MultibrandLabels from '../common/components/multibrandlabels';
 
 import { ScrollView } from 'react-native-gesture-handler';
 const ScanHistory = ({
@@ -30,6 +31,7 @@ const ScanHistory = ({
     //Hooks
     const [isLoading, setIsLoading] = useState(false)
     const [scanStatusData, setScanStatusData] = useState(false)
+    const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.scanHistory[0]
     //functions
         useEffect(() => {
         sumOfLocalData()
@@ -81,7 +83,13 @@ const ScanHistory = ({
                  />
             
                  <View>
-                {
+                 {( BrandLabel) ?
+                <MultibrandLabels
+                Label1={BrandLabel.School}
+                Label2={BrandLabel.SchoolId}
+                School ={loginData.data.school.name}
+                SchoolId={loginData.data.school.schoolId}
+                />:
                     (loginData && loginData.data)
                     &&
                     <View style={{ width:'60%' }}>
@@ -99,7 +107,7 @@ const ScanHistory = ({
                     </View>
                 }
                 </View>
-            <ScrollView  >
+            <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styles.container1}>
                 <Text style={[styles.header1TextStyle, { borderColor: multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE, backgroundColor: multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE }]}>
                     {Strings.ongoing_scan}
@@ -121,14 +129,15 @@ const ScanHistory = ({
                 scanStatusData={scanStatusData}
                 setScanStatusData={setScanStatusData}
             />
-            </ScrollView>
-
+            
             <ButtonComponent
                 customBtnStyle={[styles.nxtBtnStyle, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
                 btnText={Strings.Back.toUpperCase()}
                 activeOpacity={0.8}
                 onPress={() => navigation.push('StudentsList')}
             />
+            </ScrollView>
+
 
             {isLoading && <Spinner animating={isLoading} />}
 
@@ -161,7 +170,7 @@ const styles = StyleSheet.create({
     container1: {
         marginHorizontal: '4%',
         alignItems: 'center',
-        marginTop:30
+        // marginTop:30
     },
     header1TextStyle: {
         backgroundColor: AppTheme.LIGHT_BLUE,
@@ -175,5 +184,5 @@ const styles = StyleSheet.create({
         color: AppTheme.BLACK,
         letterSpacing: 1
     },
-    nxtBtnStyle:{ marginHorizontal: 40, marginBottom: 20, borderRadius: 10, }
+    nxtBtnStyle:{ marginHorizontal: 40, marginTop: 20, borderRadius: 10, }
 });

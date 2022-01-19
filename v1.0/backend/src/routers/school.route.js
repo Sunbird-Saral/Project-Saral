@@ -8,13 +8,19 @@ const router = new express.Router()
 
 
 router.post('/schools/create', async (req, res) => {
-    const school = new School({ ...req.body, udiseCode: req.body.schoolId })
+    const school = new School({ ...req.body })
     try {
         school.state = req.body.state.toLowerCase()
         school.schoolId = req.body.schoolId.toLowerCase()
         await school.save()
+        let response = {
+            storeTrainingData: school.storeTrainingData,
+            name: school.name,
+            schoolId: school.schoolId,
+            state: school.state
+        }
         const token = await school.generateAuthToken()
-        res.status(201).send({ school, token })
+        res.status(201).send({ response, token })
     } catch (e) {
         if (e.message.includes(' duplicate key error')) {
             let key = Object.keys(e.keyValue)
@@ -36,13 +42,7 @@ router.get('/schools', async (req, res) => {
                     name: element.name,
                     schoolId: element.schoolId,
                     state: element.state,
-                    district: element.district,
-                    block: element.block,
-                    hmName: element.hmName,
-                    noOfStudents: element.noOfStudents,
-                    storeTrainingData: element.storeTrainingData,
-                    createdAt: element.createdAt,
-                    updatedAt: element.updatedAt
+                    storeTrainingData: element.storeTrainingData
                 }
                 schools.push(obj)
             });
@@ -55,15 +55,21 @@ router.get('/schools', async (req, res) => {
 
 router.post('/schools/login', async (req, res) => {
     try {
-        const school = await School.findByCredentials(req.body.schoolId.toLowerCase(), req.body.password)
-        const token = await school.generateAuthToken()
+        const schools = await School.findByCredentials(req.body.schoolId.toLowerCase(), req.body.password)
+        const token = await schools.generateAuthToken()
         let classes = []
+        let school = {
+            storeTrainingData: schools.storeTrainingData,
+            name: schools.name,
+            schoolId: schools.schoolId,
+            state: schools.state
+        }
         let response = {
             school,
             token
         }
         if (req.body.classes) {
-            const classData = await ClassModel.findClassesBySchools(school.schoolId)
+            const classData = await ClassModel.findClassesBySchools(schools.schoolId)
 
             classData.forEach(data => {
                 const { sections, classId, className } = data
@@ -113,7 +119,7 @@ router.patch('/schools/:schoolId', async (req, res) => {
     try {
         if (Object.keys(req.body).length === 0) res.status(400).send({ message: 'Validation error.' })
         const updates = Object.keys(req.body)
-        const allowedUpdates = ['name', 'state', 'district', 'block', 'hmName', 'hmMobileNo', 'noOfStudents', 'udisceCode','storeTrainingData']
+        const allowedUpdates = ['name', 'state', 'udisceCode','storeTrainingData']
         const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
 
         if (!isValidOperation) {

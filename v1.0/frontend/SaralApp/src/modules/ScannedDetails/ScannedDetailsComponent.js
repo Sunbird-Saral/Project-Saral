@@ -73,6 +73,9 @@ const ScannedDetailsComponent = ({
     const [toggleCheckBox, setToggleCheckBox] = useState(false)
     const [logmessage, setLogmessage] = useState()
     const [multiPage, setMultiPage] = useState(0)
+    const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.scannedDetailComponent[0]
+
+
 
     const inputRef = React.createRef();
     const dispatch = useDispatch()
@@ -230,12 +233,9 @@ const ScannedDetailsComponent = ({
             });
             setNewArrayValue(data)
             setSummOfObtainedMarks(maximum)
-            // saveDataIntoMultiPageReducer(1, data)
         } else {
             //set Data of Other sheet except of marksObtained and maxMarks wala
             setNewArrayValue(data)
-            // saveDataIntoMultiPageReducer(1, data)
-
         }
 
         //get student Id
@@ -278,7 +278,7 @@ const ScannedDetailsComponent = ({
             showErrorMessage(`omr value should be 0 to ${cellOmrValidation[1] + 1}`)
         }
         else if (duplication) {
-            Alert.alert("Student ID Shouldn't be duplicated")
+            Alert.alert(Strings.Student_ID_Shouldnt_be_duplicated)
         }
         else if (disable) {
             showErrorMessage(Strings.please_correct_marks_data)
@@ -617,6 +617,9 @@ const ScannedDetailsComponent = ({
             ocrLocalResponse.layout.cells.forEach(element => {
                 if (element.cellId == value.cellId) {
                     element.consolidatedPrediction = text
+                    if (multiPage > 0) {
+                        element.rois[index].result.prediction = text
+                    }
 
                 }
             });
@@ -738,7 +741,12 @@ const ScannedDetailsComponent = ({
                     setMaxMarkErr(false)
                     setObtnMarkErr(false)
                     if (multiPage > 0) {
-                        openCameraActivity("next")
+                        let isAbleToGoNextPage = currentIndex + 1 <= multiPage;
+                        if (isAbleToGoNextPage) {
+                            openCameraActivity();
+                        } else {
+                            saveMultiPageIntoLocalStorage();
+                        }
                     } else {
                         saveData(maximum)
                     }
@@ -746,7 +754,12 @@ const ScannedDetailsComponent = ({
             } else {
                 //without MAX & OBTAINED MARKS
                 if (multiPage > 0) {
-                    openCameraActivity("next")
+                    let isAbleToGoNextPage = currentIndex + 1 <= multiPage;
+                    if (isAbleToGoNextPage) {
+                        openCameraActivity();
+                    } else {
+                        saveMultiPageIntoLocalStorage();
+                    }
                 } else {
                     saveData(0)
                 }
@@ -758,122 +771,86 @@ const ScannedDetailsComponent = ({
         onSubmitClick()
     }
 
-    const saveDataIntoMultiPageReducer = (num, scanData) => {
-        let totalPages = ocrLocalResponse.layout.hasOwnProperty("pages") ? ocrLocalResponse.layout.pages : 0
-        if (totalPages > 0) {
-            let data = {
-                "page": currentIndex + num,
-                "scanData": scanData
-            }
-            multiPageReducer.push(data)
-            dispatch(MultiPageActions(multiPageReducer))
-        }
-    }
+    const scanNextSheet = (roisData) => {
+        const elements = neglectData;
 
-    const filterScanDataAsPage = () => {
-        let data = multiPageReducer.filter((element) => {
-            if (element.page == currentIndex - 1) {
-                return true
-            }
-            else {
+        let filterDataAccordingPage = roisData.layout.cells.filter((element) => {
+            if (element.format.name == elements[0] || element.format.name == elements[1] || element.format.name == elements[4] || element.page != currentIndex + 1) {
                 return false
             }
+            else {
+                return true
+            }
         })
-        return data[0].scanData
-    }
-
-    const updatePageInReducer = (data) => {
-        multiPageReducer.forEach(element => {
-            if (element.page == currentIndex) {
-                element.page = currentIndex,
-                    element.scanData = data
-
-            }
-        });
-        dispatch(MultiPageActions(multiPageReducer))
-    }
-
-    const scanNextSheet = () => {
-        const elements = neglectData
-        let isAbleToGoNextPage = currentIndex + 1 <= multiPage
-
-        if (isAbleToGoNextPage) {
-
-            const checkIsNextPageExist = multiPageReducer.findIndex(_element => _element.page === currentIndex + 1);
-
-            const checkIsCurrentPageExist = multiPageReducer.findIndex(_element => _element.page === currentIndex);
-
-            let filterDataAccordingPage = ocrLocalResponse.layout.cells.filter((element) => {
-                if (element.format.name == elements[0] || element.format.name == elements[1] || element.format.name == elements[4] || element.page != 1) {
-                    return false
-                }
-                else {
-                    return true
-                }
-            })
-
-
-            if (checkIsNextPageExist == -1 && filterDataAccordingPage.length > 0) {
-                setNextBtn(`Scan Page#${currentIndex + 2}`)
-                if (checkIsCurrentPageExist > -1) {
-                    updatePageInReducer(newArrayValue)
-                }else{
-                    saveDataIntoMultiPageReducer(0, newArrayValue)
-                }
-                setCurrentIndex(currentIndex + 1)
-                setBtnName(`Scan Page#${currentIndex}`)
-                setNewArrayValue(filterDataAccordingPage)
-            } else {
-                updatePageInReducer(newArrayValue)
-                setNewArrayValue(multiPageReducer[currentIndex].scanData)
-                setCurrentIndex(currentIndex + 1)
-                setBtnName(`Scan Page#${currentIndex}`)
-                setNextBtn(`Scan Page#${currentIndex+2}`)
-            }
+        if (filterDataAccordingPage.length > 0) {
+            setNextBtn(`Scan Page#${currentIndex + 2}`)
+            setCurrentIndex(currentIndex + 1)
+            setBtnName(Strings.Back)
+            setNewArrayValue(filterDataAccordingPage)
             if (currentIndex + 1 == multiPage) {
                 setNextBtn(Strings.submit_text)
             }
-        } else {
-            saveDataIntoMultiPageReducer(0, newArrayValue)
-            saveMultiPageIntoLocalStorage()
         }
-
     }
+
 
     const saveMultiPageIntoLocalStorage = () => {
+        let totalMarks = 0
+        if (sumOfObtainedMarks > 0) {
+            totalMarks = sumOfAllObtainedMarks();
+        } else {
+            totalMarks = 0
+        }
+
+        saveData(totalMarks);
     }
 
+    const sumOfAllObtainedMarks = () => {
+
+        const elements = neglectData
+
+        let extract_MAX_OBTAINED_MARKS = ocrLocalResponse.layout.cells.filter((e) => {
+            if (e.format.name == elements[0]) {
+                return
+            }
+            if (e.format.name == elements[2]) {
+                return
+            }
+            if (e.format.name == elements[3]) {
+                return
+            }
+            else {
+                return true
+            }
+        })
+        //DO summ of all result from extract_MAX_OBTAINED_MARKS except max marks and obtained marks and rollNumber
+        let maximum = 0;
+        let sum = extract_MAX_OBTAINED_MARKS.forEach((e) => {
+            maximum = parseInt(maximum) + parseInt(e.consolidatedPrediction)
+            return maximum
+        });
+
+        return maximum;
+    }
 
     const goBackPage = () => {
-        openCameraActivity("back")
-    }
-
-    const scanBackSheet = () => {
-        const elements = neglectData
-        if (currentIndex -1 >= 1) {
-            
+        if (currentIndex - 1 >= 1) {
+            setNextBtn(`Scan Page#${currentIndex}`)
+            const elements = neglectData;
             let filterDataAccordingPage = ocrLocalResponse.layout.cells.filter((element) => {
-                if (element.format.name == elements[0] || element.format.name == elements[1] || element.format.name == elements[4] || element.page != 1) {
+                if (element.format.name == elements[0] || element.format.name == elements[1] || element.format.name == elements[4] || element.page != currentIndex - 1) {
                     return false
                 }
                 else {
                     return true
                 }
             })
-            filterDataAccordingPage.forEach((element,index) => {
-                element.format.value  = `QUESTION ${((5*currentIndex) + 1 - (5 - index ))}`
-            });
-
-            setNextBtn(`Scan Page#${currentIndex}`)
-            setBtnName(`Scan Page#${currentIndex - 2}`)
-            updatePageInReducer(filterDataAccordingPage)
-            setNewArrayValue(multiPageReducer)
+            setNewArrayValue(filterDataAccordingPage)
             setCurrentIndex(currentIndex - 1)
             if (currentIndex - 1 == 1) {
                 setBtnName(Strings.cancel_text)
             }
-        }
-        else {
+        } else {
             onBackButtonClick()
             dispatch(MultiPageActions([]))
         }
@@ -964,12 +941,13 @@ const ScannedDetailsComponent = ({
         return true
     }
 
-    const openCameraActivity = async (value) => {
+    const openCameraActivity = async () => {
         try {
-            SaralSDK.startCamera(JSON.stringify(roiData.data), "1").then(res => {
+
+            SaralSDK.startCamera(JSON.stringify(ocrLocalResponse), (currentIndex + 1).toString()).then(res => {
                 let roisData = JSON.parse(res);
                 let cells = roisData.layout.cells;
-                consolidatePrediction(cells, roisData,value)
+                consolidatePrediction(cells, roisData)
 
             }).catch((code, message) => {
             })
@@ -977,7 +955,7 @@ const ScannedDetailsComponent = ({
         }
     };
 
-    const consolidatePrediction = (cells, roisData, value) => {
+    const consolidatePrediction = (cells, roisData) => {
         var marks = "";
         var predictionConfidenceArray = []
         for (let i = 0; i < cells.length; i++) {
@@ -996,37 +974,14 @@ const ScannedDetailsComponent = ({
                 roisData.layout.cells[i].predictedMarks = marks
             }
         }
+
         dispatch(OcrLocalResponseAction(JSON.parse(JSON.stringify(roisData))))
         let rollNumber = roisData.layout.cells[0].consolidatedPrediction
-        // if (rollNumber != studentId) {
-        //     setStdErr(Strings.student_id_should_be_same)
-        // } else {
-            if (value == "next") {
-                setStdErr("")
-                scanNextSheet()
-            }
-            else{
-                scanBackSheet()
-            }
-        // }
-        // overWriteScanSheet(roisData)
-    }
-
-    const overWriteScanSheet = (roisData) => {
-        const elements = neglectData
-
-        let data = roisData.layout.cells.filter((element) => {
-            if (element.format.name == elements[0] || element.format.name == elements[1] || element.format.name == elements[4] || element.page != currentIndex) {
-                return false
-            }
-            else {
-                return true
-            }
-        })
-        setNewArrayValue(data)
-        const checkIsNextPageExist = multiPageReducer.findIndex(_element => _element.page === currentIndex);
-        if (checkIsNextPageExist >= 0) {
-            updatePageInReducer(data)
+        if (rollNumber != studentId) {
+            setStdErr(Strings.student_id_should_be_same)
+        } else {
+            setStdErr("");
+            scanNextSheet(roisData);
         }
     }
 
@@ -1044,7 +999,6 @@ const ScannedDetailsComponent = ({
                         navigation={navigation}
                         message={logmessage ? JSON.stringify(logmessage, null, 2) : ''}
                     />
-
                     {
                         !summary &&
                         <View>
@@ -1056,8 +1010,7 @@ const ScannedDetailsComponent = ({
                             <View style={styles.container2}>
                                 <View style={{ flex: 1 }}>
                                     <ScrollView contentContainerStyle={{ backgroundColor: AppTheme.WHITE, paddingBottom: '15%' }} keyboardShouldPersistTaps={'handled'}>
-
-                                        <Text style={styles.studentDetailsTxtStyle}>{Strings.student_details}</Text>
+                                        <Text style={styles.studentDetailsTxtStyle}>{BrandLabel && BrandLabel.StudentDetail ? BrandLabel.StudentDetail : Strings.student_details}</Text>
                                         <View style={styles.studentContainer}>
                                             <View style={styles.imageViewContainer}>
                                                 <View style={styles.imageContainerStyle}>
@@ -1068,18 +1021,18 @@ const ScannedDetailsComponent = ({
                                                 <View style={styles.detailsSubContainerStyle}>
                                                     <Text style={[styles.nameTextStyle, { fontWeight: 'bold', color: AppTheme.BLACK, fontSize: AppTheme.FONT_SIZE_LARGE }]}>{studentData.length > 0 && studentData[0].name}</Text>
                                                     <TextField
-                                                        labelText={Strings.student_id}
+                                                        labelText={BrandLabel && BrandLabel.StudentId ? BrandLabel.StudentId : Strings.student_id}
                                                         errorField={stdErr != '' || isNaN(studentId)}
-                                                        errorText={stdErr != '' ? stdErr : Strings.please_correct_student_id}
+                                                        // errorText={BrandLabel && BrandLabel.CorrectId ? stdErr != '' ? stdErr : BrandLabel.CorrectId : stdErr != '' ? stdErr : Strings.please_correct_student_id}
+                                                        errorText={ stdErr != '' ? stdErr : Strings.please_correct_student_id}
                                                         onChangeText={(text) => {
                                                             setStudentID(text)
-                                                        }
-                                                        }
+                                                        }}
                                                         value={studentId}
                                                         editable={edit}
                                                         keyboardType={'numeric'}
                                                     />
-                                                    <Text style={styles.nameTextStyle}>{Strings.Exam} : {filteredData.subject} {filteredData.examDate} ({filteredData.examTestID})</Text>
+                                                    <Text style={styles.nameTextStyle}>{BrandLabel && BrandLabel.Exam ? BrandLabel.Exam : Strings.Exam} : {filteredData.subject} {filteredData.examDate} ({filteredData.examTestID})</Text>
                                                     {
                                                         isMultipleStudent
                                                             ?
@@ -1114,72 +1067,86 @@ const ScannedDetailsComponent = ({
                                             </View>
                                         </View>
 
-                                        <View style={{ flexDirection: 'row', marginTop: 20 }}>
+
+                                            <View style={{ flexDirection: 'row', marginTop: 20 }}>
+                                                {
+                                                    BrandLabel && BrandLabel.ListTableHeading[0] ?
+                                                        BrandLabel.ListTableHeading.map((data) => {
+                                                            return (
+                                                                <MarksHeaderTable
+                                                                    customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
+                                                                    key={data}
+                                                                    rowTitle={data}
+                                                                    rowBorderColor={AppTheme.TAB_BORDER}
+                                                                    editable={false}
+                                                                />
+                                                            )
+                                                        })
+                                                        :
+                                                        TABLE_HEADER.map((data) => {
+                                                            return (
+                                                                <MarksHeaderTable
+                                                                    customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
+                                                                    key={data}
+                                                                    rowTitle={data}
+                                                                    rowBorderColor={AppTheme.TAB_BORDER}
+                                                                    editable={false}
+                                                                />
+                                                            )
+                                                        })
+                                                }
+                                            </View>
+
                                             {
-                                                TABLE_HEADER.map((data) => {
+                                                newArrayValue.map((element, index) => {
                                                     return (
-                                                        <MarksHeaderTable
-                                                            customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
-                                                            key={data}
-                                                            rowTitle={data}
-                                                            rowBorderColor={AppTheme.TAB_BORDER}
-                                                            editable={false}
-                                                        />
+                                                        <View element={element} key={index} style={{ flexDirection: 'row' }}>
+
+                                                            <MarksHeaderTable
+                                                                customRowStyle={{ width: '30%', }}
+                                                                rowTitle={renderSRNo(element, index)}
+                                                                rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
+                                                                editable={false}
+                                                                keyboardType={'number-pad'}
+                                                            />
+                                                            <MarksHeaderTable
+                                                                customRowStyle={{ width: '30%', }}
+                                                                rowTitle={element.format.value}
+                                                                rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
+                                                                editable={false}
+                                                                keyboardType={'number-pad'}
+                                                            />
+                                                            <MarksHeaderTable
+                                                                customRowStyle={{ width: '30%', }}
+                                                                rowTitle={element.consolidatedPrediction}
+                                                                rowBorderColor={markBorderOnCell(element)}
+                                                                editable={true}
+                                                                keyboardType={'number-pad'}
+                                                                maxLength={lengthAccordingSheet(element)}
+                                                                onChangeText={(text) => {
+                                                                    handleTextChange(text.trim(), index, newArrayValue, element)
+                                                                }}
+
+                                                            />
+
+                                                        </View>
                                                     )
+                                                    // }
                                                 })
                                             }
-                                        </View>
-                                        {
-                                            newArrayValue.map((element, index) => {
-                                                return (
-                                                    <View element={element} key={index} style={{ flexDirection: 'row' }}>
 
-                                                        <MarksHeaderTable
-                                                            customRowStyle={{ width: '30%', }}
-                                                            rowTitle={renderSRNo(element, index)}
-                                                            rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
-                                                            editable={false}
-                                                            keyboardType={'number-pad'}
-                                                        />
-                                                        <MarksHeaderTable
-                                                            customRowStyle={{ width: '30%', }}
-                                                            rowTitle={element.format.value}
-                                                            rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
-                                                            editable={false}
-                                                            keyboardType={'number-pad'}
-                                                        />
-                                                        <MarksHeaderTable
-                                                            customRowStyle={{ width: '30%', }}
-                                                            rowTitle={element.consolidatedPrediction}
-                                                            rowBorderColor={markBorderOnCell(element)}
-                                                            editable={true}
-                                                            keyboardType={'number-pad'}
-                                                            maxLength={lengthAccordingSheet(element)}
-                                                            onChangeText={(text) => {
-                                                                handleTextChange(text.trim(), index, newArrayValue, element)
-                                                            }}
-
-                                                        />
-
-                                                    </View>
-                                                )
-                                                // }
-                                            })
-                                        }
-
-                                        <View style={[styles.viewnxtBtnStyle1, { paddingTop: '7%' }]}>
-                                            <ButtonComponent
-                                                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE, marginTop: '5%' }]}
-                                                btnText={btnName.toUpperCase()}
-                                                onPress={() => isMultipleStudent ? goBackFrame() : multiPage > 0 ? goBackPage() : onBackButtonClick()}
-                                            />
-                                            <ButtonComponent
-                                                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE, marginTop: '5%' }]}
-                                                btnText={nextBtn.toUpperCase()}
-                                                onPress={() => isMultipleStudent ? goNextFrame() : multiPage > 0 ? goNextPage() : onSubmitClick()}
-                                            />
-                                        </View>
-
+                                            <View style={[styles.viewnxtBtnStyle1, { paddingTop: '7%' }]}>
+                                                <ButtonComponent
+                                                    customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE, marginTop: '5%' }]}
+                                                    btnText={btnName.toUpperCase()}
+                                                    onPress={() => isMultipleStudent ? goBackFrame() : multiPage > 0 ? goBackPage() : onBackButtonClick()}
+                                                />
+                                                <ButtonComponent
+                                                    customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE, marginTop: '5%' }]}
+                                                    btnText={nextBtn.toUpperCase()}
+                                                    onPress={() => isMultipleStudent ? goNextFrame() : multiPage > 0 ? goNextPage() : onSubmitClick()}
+                                                />
+                                            </View>
                                     </ScrollView>
                                 </View>
 
