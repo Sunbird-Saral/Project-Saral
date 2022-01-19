@@ -1773,6 +1773,18 @@
 {
   "studentClass": [
     {
+      "classId": "7",
+      "className": "Class-7"
+    }
+  ],
+  "section": "B",
+  "name": "Umar",
+  "studentId": "3004221",
+  "schoolId": "demouser"
+},
+{
+  "studentClass": [
+    {
       "classId": "5",
       "className": "Class-5"
     }
