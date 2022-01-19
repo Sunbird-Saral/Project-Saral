@@ -196,7 +196,9 @@ class MyScanComponent extends Component {
                 this.setState({
                     activityOpen: true
                 })
-                SaralSDK.startCamera(JSON.stringify(this.props.roiData.data)).then(res => {
+                let totalPages = this.props.roiData.data.layout.hasOwnProperty("pages") && this.props.roiData.data.layout.pages
+                let pageNumber = totalPages || totalPages > 0 ? "1" : null
+                SaralSDK.startCamera(JSON.stringify(this.props.roiData.data), pageNumber).then(res => {
                     let roisData = JSON.parse(res);
                     let cells = roisData.layout.cells;
                     this.consolidatePrediction(cells, roisData)
@@ -217,10 +219,18 @@ class MyScanComponent extends Component {
             marks = ""
             predictionConfidenceArray = []
             for (let j = 0; j < cells[i].rois.length; j++) {
-
-                marks = marks + cells[i].rois[j].result.prediction,
-                predictionConfidenceArray.push(cells[i].rois[j].result.confidence)
-                // roisData.layout.cells[i].predictionConfidence = cells[i].rois[j].result.confidence
+                if (cells[i].rois[j].hasOwnProperty("result")) {
+                    marks = marks + cells[i].rois[j].result.prediction,
+                        predictionConfidenceArray.push(cells[i].rois[j].result.confidence)
+                    // roisData.layout.cells[i].predictionConfidence = cells[i].rois[j].result.confidence
+                } else {
+                    let resultProperty = {
+                            "prediction": "0",
+                            "confidence": 0
+                        }
+                    
+                    roisData.layout.cells[i].rois[j].result = resultProperty
+                }
 
             }
             roisData.layout.cells[i].consolidatedPrediction = marks

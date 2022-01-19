@@ -178,11 +178,30 @@
       },
       {
         "section": "C"
+      },
+      {
+        "section": "A"
       }
     ],
     "classId": "5",
     "className": "Class-5",
     "schoolId": "demouser"
+},
+{
+  "sections": [
+    {
+      "section": "D"
+    },
+    {
+      "section": "B"
+    },
+    {
+      "section": "C"
+    }
+  ],
+  "classId": "6",
+  "className": "Class-6",
+  "schoolId": "demouser"
 },
 {
   "sections": [

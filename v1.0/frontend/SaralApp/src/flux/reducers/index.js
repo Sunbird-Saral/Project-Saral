@@ -12,6 +12,7 @@ import absentStudentReducer from './absentStudentReducer';
 import multiBrandingReducer from './multiBrandingReducer';
 import defaultBrandReducer from './defaultBrandReducer';
 import bgFlag from './bgFlag';
+import multiPageReducer from './multiPageReducer';
 
 export default {
     apiStatus: apiStatus,
@@ -27,7 +28,8 @@ export default {
     absentStudentDataResponse: absentStudentReducer,
     multiBrandingData:multiBrandingReducer,
     defaultBrandingdata:defaultBrandReducer,
-    bgFlag: bgFlag
+    bgFlag: bgFlag,
+    multiPage: multiPageReducer
 
 
 }

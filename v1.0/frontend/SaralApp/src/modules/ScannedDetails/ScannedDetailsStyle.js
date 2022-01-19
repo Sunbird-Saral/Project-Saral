@@ -134,4 +134,37 @@ export const styles = {
         marginBottom: 20,
         borderRadius: 10
     },
+    tabLabelStyle: {
+        height: 70,
+        lineHeight: 20,
+        fontSize: AppTheme.FONT_SIZE_SMALL,
+        color: AppTheme.BLACK,
+        letterSpacing: 1,
+        fontWeight: 'bold'
+    },
+    subTabContainerStyle: {
+        marginBottom: -60,
+        paddingHorizontal: 20,
+        paddingTop: 20,
+        height: 90,
+        borderRadius: 100,
+        margin: 10
+    },
+    scanTabContainerStyle: {
+        width: 80,
+        height: 80,
+        position: 'absolute',
+        borderRadius: 40,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    scanSubTabContainerStyle: {
+        width: '90%',
+        height: '90%',
+        marginBottom: 30,
+        backgroundColor: AppTheme.BLUE,
+        borderRadius: 45,
+        justifyContent: 'center',
+        alignItems: 'center'
+    }
 }

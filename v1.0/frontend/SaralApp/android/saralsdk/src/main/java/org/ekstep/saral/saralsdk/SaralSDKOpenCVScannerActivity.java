@@ -50,6 +50,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
     private static final int START_PROCESSING_COUNT     = 20;
 
     private String mlayoutConfigs                       = null;
+    private String pageNumber                           = null;
     private boolean isHWClassiferAvailable              = true;
     private boolean isRelevantFrameAvailable            = false;
     private boolean mIsScanningComplete                 = false;
@@ -87,7 +88,9 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
         Bundle b = getIntent().getExtras();
         if(b != null) {
             mlayoutConfigs = b.getString("layoutConfigs");
+            pageNumber     = b.getString("page");
             Log.d(TAG, "Scanner type: " + mlayoutConfigs);
+            Log.d(TAG, "Page Number" + pageNumber);
         }
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -286,14 +289,18 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
             JSONObject layoutObject     = layoutConfigs.getJSONObject("layout");
             JSONArray  cells            = layoutObject.getJSONArray("cells");
 
-            for (int i = 0; i < cells.length(); i++) {
-                JSONArray cellROIs      = cells.getJSONObject(i).getJSONArray("rois");
-                for (int j = 0; j < cellROIs.length(); j++) {
-                    JSONObject roi      = cellROIs.getJSONObject(j);
-                    rois.put(roi);
+                for (int i = 0; i < cells.length(); i++) {
+                    JSONObject cell = cells.getJSONObject(i);
+                    boolean includeRois = (cell.has("page") && pageNumber!=null && cell.getString("page").equals(pageNumber)) || (!cell.has("page"));
+                    if(includeRois) {
+                    JSONArray cellROIs      = cells.getJSONObject(i).getJSONArray("rois");
+                        for (int j = 0; j < cellROIs.length(); j++) {
+                            JSONObject roi      = cellROIs.getJSONObject(j);
+                            rois.put(roi);
+                        }
+                    }
                 }
-            }
-            return rois;
+                return rois;
 
         } catch (JSONException e) {
             Log.e(TAG, "unable to parse LayoutConfigs object");
@@ -385,11 +392,12 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
             JSONObject layoutObject     = layoutConfigs.getJSONObject("layout");
             JSONArray  cells            = layoutObject.getJSONArray("cells");
             
-            Log.d(TAG, "isMultiChoiceOMRLayout:: "+isMultiChoiceOMRLayout);
 
             for (int i = 0; i < cells.length(); i++) {
                 JSONArray cellROIs      = cells.getJSONObject(i).getJSONArray("rois");
                 JSONObject cell = cells.getJSONObject(i);
+                boolean includeRois = (cell.has("page") && pageNumber!=null && cell.getString("page").equals(pageNumber)) || (!cell.has("page"));
+                if (includeRois) {
                 JSONArray trainingDataSet = new JSONArray();
                 int countOMRChoice =0;
                 for (int j = 0; j < cellROIs.length(); j++) {
@@ -426,9 +434,17 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                         {
                             trainingDataSet.put(j,mRoiMatBase64.get(roiId));
                         }
-                        roi.put("result", result);
+
+                        if(!roi.has("result")){
+                            roi.put("result", result);    
+                        }else{
+                            JSONObject resultObj = roi.getJSONObject("result");
+                            if(resultObj.getString("prediction") != null){
+                                roi.put("result", result);    
+                            }
+                        }
                     }
-                }
+                
                 if(isMultiChoiceOMRLayout && countOMRChoice > 1)
                 {
                     resetInvalidOMRChoice(cellROIs);
@@ -439,6 +455,8 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                     Log.d(TAG, "CellId:" + cell.getString("cellId")+" trainingDataSet :: "+trainingDataSet);
                 }                
             }
+        }
+        }
             return layoutConfigs;
 
         } catch (JSONException e) {
