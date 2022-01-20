@@ -58,7 +58,6 @@ const StudentsDataComponent = ({
                 isStudentScannedInLocal = filterStdData[0].studentsMarkInfo.filter((o) => o.studentId == data.studentId)
             }
         }
-        // console.log("apistatus",apiStatus)
         if (apiStatus && apiStatus.progress == true && apiStatus.message != null) {
             Alert.alert(Strings.something_went_wrong_please_try_again)
         }
