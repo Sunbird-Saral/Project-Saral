@@ -203,16 +203,21 @@ function dispatchAPIAsync(apiObj) {
 
 setInterval(() => {
 
-    //get redux value 
-    const isLogin = storeFactory.getState().loginData
-    if (isLogin.status == 200) {
-        storeFactory.dispatch(flagAction(true))
-        if (checkNetworkConnectivity()) {
-            saveDataInDB()
+    const loginData = storeFactory.getState().loginData
+    const hasAutoSync = loginData.data.school.hasOwnProperty("autoSync") && loginData.data.school.autoSync ? true : false
+    
+    if (hasAutoSync) {
+        //get redux value 
+        const isLogin = storeFactory.getState().loginData
+        if (isLogin.status == 200) {
+            storeFactory.dispatch(flagAction(true))
+            if (checkNetworkConnectivity()) {
+                saveDataInDB()
+            }
         }
     }
     //timer for 10 min
-}, 600000);
+}, 10000);
 
 
 const AppNavigation = createSwitchNavigator(
@@ -225,6 +230,11 @@ const AppNavigation = createSwitchNavigator(
     }
 );
 
+const mapStateToProps = (state) => {
+    return {
+        loginData: state.loginData
+    }
+}
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
@@ -233,4 +243,4 @@ const mapDispatchToProps = (dispatch) => {
     }, dispatch)
 }
 
-export default connect(null, mapDispatchToProps)(AppContainer = createAppContainer(AppNavigation));
+export default connect(mapStateToProps, mapDispatchToProps)(AppContainer = createAppContainer(AppNavigation));
