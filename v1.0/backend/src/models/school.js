@@ -34,6 +34,10 @@ const schoolSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    autoSync:{
+        type: Boolean,
+        required:false
+    }
 }, {
     timestamps: false
 })

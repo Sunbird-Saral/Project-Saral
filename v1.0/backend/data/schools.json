@@ -3,6 +3,7 @@
   "schoolId": "u001",
   "password": "tarento@123",
   "state": "up",
+  "autoSync": true,
   "storeTrainingData": true
 },
 {
@@ -10,6 +11,7 @@
   "schoolId": "od001",
   "password": "tarento@123",
   "state": "odisha",
+  "autoSync": false,
   "storeTrainingData": true
 },
 {
@@ -17,12 +19,14 @@
   "schoolId": "demouser",
   "password": "Demo@123",
   "state": "gujrat",
+  "autoSync": false,
   "storeTrainingData": true
 },
 {
 "name": "Dummy school 4",
 "schoolId": "u002",
 "password": "tarento@123",
+"autoSync": true,
 "state": "up",
 "storeTrainingData": true
 },

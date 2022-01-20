@@ -12,15 +12,19 @@ router.post('/schools/create', async (req, res) => {
     try {
         school.state = req.body.state.toLowerCase()
         school.schoolId = req.body.schoolId.toLowerCase()
+       
+        if(req.body.autoSync){
+            school.autoSync = req.body.autoSync
+        }
         await school.save()
-        let response = {
+        let schools = {
             storeTrainingData: school.storeTrainingData,
             name: school.name,
             schoolId: school.schoolId,
             state: school.state
         }
         const token = await school.generateAuthToken()
-        res.status(201).send({ response, token })
+        res.status(201).send({ schools, token })
     } catch (e) {
         if (e.message.includes(' duplicate key error')) {
             let key = Object.keys(e.keyValue)
@@ -62,8 +66,10 @@ router.post('/schools/login', async (req, res) => {
             storeTrainingData: schools.storeTrainingData,
             name: schools.name,
             schoolId: schools.schoolId,
-            state: schools.state
+            state: schools.state,
+            autoSync: schools.autoSync
         }
+   
         let response = {
             school,
             token
@@ -119,7 +125,7 @@ router.patch('/schools/:schoolId', async (req, res) => {
     try {
         if (Object.keys(req.body).length === 0) res.status(400).send({ message: 'Validation error.' })
         const updates = Object.keys(req.body)
-        const allowedUpdates = ['name', 'state', 'udisceCode','storeTrainingData']
+        const allowedUpdates = ['name', 'state', 'udisceCode','storeTrainingData','autoSync']
         const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
 
         if (!isValidOperation) {
