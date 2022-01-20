@@ -142,9 +142,10 @@ const ScannedDetailsComponent = ({
 
     useEffect(() => {
         let checkIsStudentMultipleSingle = ocrLocalResponse.layout.cells.filter((e) => {
-            let wordLen = e.format.name.length - 1;
+            let withNoDigits = e.format.name.replace(/[0-9]/g, '');
+            let wordLen = withNoDigits.length;
             let multiple = 0
-            if (wordLen === multipleStudent[0].length) {
+            if (wordLen === multipleStudent[0].length  && withNoDigits === multipleStudent[0]) {
                 multiple = multiple + 1
             }
             return multiple

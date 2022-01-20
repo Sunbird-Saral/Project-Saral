@@ -2541,6 +2541,40 @@
   "schoolId": "demouser"
 },
 {
+  "subject": "midday-meal",
+  "examLO": "midday-meal",
+  "classId": "2",
+  "examDate": "07/01/2022",
+  "totalMarks": 20,
+  "type": "any_20s_midday_meal",
+  "questions": [
+    {
+      "questionId": "1",
+      "indicatorTitle": "L0-1",
+      "questionMarks": "1"
+    }
+  ],
+  "examId": 22,
+  "schoolId": "u002"
+},
+{
+  "subject": "section-attendance",
+  "examLO": "section-attendance",
+  "classId": "2",
+  "examDate": "08/01/2022",
+  "totalMarks": 20,
+  "type": "any_20s_attendance",
+  "questions": [
+    {
+      "questionId": "1",
+      "indicatorTitle": "L0-1",
+      "questionMarks": "1"
+    }
+  ],
+  "examId": 23,
+  "schoolId": "u002"
+},
+{
   "subject": "Hindi",
   "examLO": "Hindi",
   "classId": "7",
@@ -2669,7 +2703,7 @@
       "questionMarks": "1"
     }
   ],
-  "examId": 22,
+  "examId": 24,
   "schoolId": "demouser"
 }
 ]
