@@ -204,7 +204,7 @@ function dispatchAPIAsync(apiObj) {
 setInterval(() => {
 
     const loginData = storeFactory.getState().loginData
-    const hasAutoSync = loginData.data.school.hasOwnProperty("autoSync") && loginData.data.school.autoSync ? true : false
+    const hasAutoSync = Object.keys(loginData).length > 0  && loginData.data.school.hasOwnProperty("autoSync") && loginData.data.school.autoSync ? true : false
     
     if (hasAutoSync) {
         //get redux value 
