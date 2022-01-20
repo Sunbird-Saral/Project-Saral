@@ -204,6 +204,22 @@
   "schoolId": "demouser"
 },
 {
+"sections": [
+  {
+    "section": "D"
+  },
+  {
+    "section": "B"
+  },
+  {
+    "section": "C"
+  }
+],
+"classId": "7",
+"className": "Class-7",
+"schoolId": "demouser"
+},
+{
   "sections": [
     {
       "section": "D"
