@@ -711,7 +711,7 @@ definitions:
     properties:
       schoolId:
         type: string
-        example: "up001"
+        example: "u001"
       password:
         type: string
         example: "123"
@@ -733,7 +733,7 @@ definitions:
         example: "dummy school 1"
       schoolId:
         type: string
-        example: "up001"
+        example: "u001"
       password: 
         type: string
         example: "abc"
@@ -757,7 +757,7 @@ definitions:
             example: "dummy school 1"
           schoolId:
             type: string
-            example: "up001"
+            example: "u001"
           state:
             type: string
             example: "up"
@@ -809,7 +809,7 @@ definitions:
         example: "24-12-2021"
       schoolId:
         type: string
-        example: "up001"
+        example: "u001"
       limit:
         type: number
         example: 10
@@ -859,7 +859,7 @@ definitions:
               example: 5
             schoolId:
               type: string
-              example: "up001"
+              example: "u001"
             examDate:
               type: string
               example: "2021-09-17"
@@ -1010,28 +1010,30 @@ definitions:
         example: "1210001"
       schoolId:
         type: string
-        example: "up001"
+        example: "u001"
         
   FetchStudentsByQueryAndExamResponse:
-    type: object
-    properties:
-      studentClass:
-        $ref: '#/definitions/StudentClassName'
-      section:
-        type: string
-        example: "D"
-      name:
-        type: string
-        example: "2"
-      studentId:
-        type: string
-        example: "1210001"
-      schoolId:
-        type: string
-        example: "up001"
-      studentAvailability:
-        type: boolean
-        example: true
+    type: array
+    items:
+      type: object
+      properties: 
+        studentClass:
+          $ref: '#/definitions/StudentClassName'
+        section:
+          type: string
+          example: "D"
+        name:
+          type: string
+          example: "2"
+        studentId:
+          type: string
+          example: "1210001"
+        schoolId:
+          type: string
+          example: "u001"
+        studentAvailability:
+          type: boolean
+          example: true
       
   CreateStudentResponse:
     type: object
@@ -1053,7 +1055,7 @@ definitions:
       schoolId:
         type: string
         description: "School Id"
-        example: "up001"
+        example: "u001"
       createdAt:
         type: string
         format: date-time
@@ -1123,7 +1125,7 @@ definitions:
         schoolId:
           type: string
           description: "School Id"
-          example: "up001"
+          example: "u001"
         createdAt:
           type: string
           format: date-time
@@ -1187,7 +1189,7 @@ definitions:
         schoolId:
           type: string
           description: "Unique Id"
-          example: "up001"
+          example: "u001"
 
   CreateExamBody:
     type: array
@@ -1210,7 +1212,7 @@ definitions:
           example: "24-12-2021"
         schoolId:
           type: string
-          example: "up001"
+          example: "u001"
         examDate:
           type: string
           example: "24-12-2021"
@@ -1419,7 +1421,7 @@ definitions:
           example: "Class-2"
         schoolId:
           type: string
-          example: "up001"
+          example: "u001"
         createdAt:
           type: string
           format: date-time
@@ -1451,7 +1453,7 @@ definitions:
         example: "Class-2"
       schoolId:
         type: string
-        example: "up001"
+        example: "u001"
       createdAt:
         type: string
         format: date-time
@@ -1619,4 +1621,3 @@ definitions:
        
   
         
-
