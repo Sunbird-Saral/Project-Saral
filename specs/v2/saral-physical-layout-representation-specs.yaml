@@ -1,0 +1,317 @@
+openapi: 3.0.0
+info:
+  title: Saral Scanning layout specification
+  description: >-
+    The schema defines physicial layout representation of tabular layout that includes handwritten digits and OMR in the individual tabular cell.
+  contact:
+    name: ekstep foundation
+    email: contact@ekstep.org
+  version: 2.0.0
+servers:
+  - url: /none
+paths: {}
+
+components:
+  schemas:
+    layout:
+      type: object
+      description: defines the physical layout of the scanning area
+      required:
+        - version
+        - name
+        - type
+        - cells
+      properties:
+        version:
+          type: string
+          default: '2.0'
+          description: layout detection and rendering version
+        name:
+          type: string
+          description: layout name for human understanding
+          example: UP SAT 50 Questions Exam Sheet Form
+        type:
+          $ref: '#/components/schemas/sheetType'
+        tolerance:
+          type: object
+          description: |
+            Object that carriers tolerance levels of predictions , roi widh and height.
+          properties:
+            predictionThreshold:
+              type: number
+              description: |
+                prediction threshold value. 
+                if confidence value of any roi is below prediction tolerance value , front end can request user to review the value or show error.
+              example: 0.95
+            roiMinWidth:
+              type: number
+              description: |
+                roi width tolerance value.
+                if width of roi is less than this tolerance value , roi configuration can be rejected by backend.
+            roiMinHeight:
+              type: number
+              description: |
+                roi height tolerance value.
+                if height of roi is less than this tolerance value , roi configuration can be rejected by backend.
+            page:
+              type: object
+              description: |
+                page level tolerance values
+              properties:
+                width:
+                  type: number
+                  description: overall page width. For example A4 sheet width = 8.3 inches.
+                  example: 8.3
+                height:
+                  type: number
+                  description: overall page height. For example A4 sheet height = 11.7 inches.
+                  example: 11.7
+
+        identifiers:
+          $ref: '#/components/schemas/identifiersType'
+        cells:
+          type: array
+          items:
+            $ref: '#/components/schemas/cell'
+            minItems: 1
+        excludeFieldsInResponse:
+          type: array
+          description: list of fields to be excluded in the response when saved to backend for analytics.
+          items:
+            type: string
+        validate:
+          type: array
+          items:
+            type: object
+            description: layout level validation.
+            properties:
+              name:
+                type: string
+                description: validation name.
+              fields:
+                type: array
+                description: array of fields to be injected for validation.
+                items:
+                  type: object
+                  properties:
+                    fieldKey:
+                      type: string
+                      description: field key
+                      example: '$MAXMARKS'
+                    fieldValue:
+                      type: string
+                      description: field value
+                      example: '250'
+              expression:
+                type: string
+                description: validate expression to be evaluated
+                example: '$HINDI_QUESTION_1 + $HINDI_QUESTION_2 <= $MAXMARKS'
+              errorMessage:
+                type: string
+                description: error message to be shown to user if validation fails.
+            
+  
+    cell:
+      type: object
+      description: each logical area on the layout that needs to be scanned
+      required:
+        - cellId
+      properties:
+        cellId:
+          type: string
+          description: unique identity of the cell with in the layout.
+        rois:
+          $ref: '#/components/schemas/rois'
+        render:
+          $ref: '#/components/schemas/renderingInformation'
+        format:
+          $ref: '#/components/schemas/formattingInformation'
+        tags:
+          description: |
+            Each of the cells can be tagged to categories based on requirement.
+            For example set of questions to be tagged as special category.
+          type: array
+          items:
+            type: string
+        validate:
+          $ref: '#/components/schemas/validationInformation'
+          description: |
+            validation rules applies on consolidatedPrediction
+        consolidatedPrediction:
+          description: |
+            consolidated prediction of all the rois with in a cell. 
+            This is mandatory on the response sent to backend.
+          type: string
+    
+    renderingInformation:
+      type: object
+      description: should be used to render the layout for visualization and data correction.
+      properties:
+        index:
+          type: number
+          description: display index on the view
+        text:
+          type: string
+          description: text to be displayed in cell during rendering.
+        langIsoCode:
+          type: string
+          description: |
+            Language ISO Code applicable for render text.
+          example: 'eng'
+        omrType:
+          type: string
+          description: omr circles to be rendered.
+          default: OMR_ONE
+          enum:
+          - OMR_ONE
+          - OMR_FOUR
+        alignment:
+          type: string
+          description: alignment of text with in the cell.
+          default: center
+          enum:
+          - left
+          - right
+          - center
+          - justify
+    
+    formattingInformation:
+      type: object
+      description: represents logical purpose of the cell.
+      properties:
+        name:
+          type: string
+          description: |
+            human understandable description that explain cell purpose. 
+            This can be also used as key to ingest cell validations from backend. configure it accordingly.
+          example: roll number
+        value:
+          type: string
+          description: extracted resultData will be reported under this key. Be wise with the name
+          example: rollNumber
+          
+    validationInformation:
+      type: object
+      description: validation rules thats needs to be applied on the cell level.
+      properties:
+        name:
+          type: string
+          description: name of the validation role.
+        regExp:
+          type: string
+          description: regular expression to detect errorneous resultData
+        errorMessage:
+          type: string
+          description: error message to be shown to user in case of violation of regExp
+        source:
+          type: string
+          description: |
+            specifies source of these validation rules. PRE_CONFIGURED will be attached to layout configuration itself.
+            if BACKEND , these validations are added from backend entities like scool , exam etc.
+          enum:
+            - PRE_CONFIGURED
+            - BACKEND_SCHOOL
+            - BACKEND_EXAM
+          default: BACKEND_EXAM
+  
+    rois:
+      type: array
+      items:
+        $ref: '#/components/schemas/roi'
+        minItems: 1
+  
+    roi:
+      type: object
+      description: a scanning area defined on the image. Scanning application will extract the result based upon 'roiId' and update the 'result' key
+      required:
+        - roiId
+        - extractionMethod
+        - rect
+      properties:
+        roiId:
+          type: string
+          description: unique roi identifier with cell.
+        annotationTag:
+          type: string
+          description: Tag to identify specific ROI
+        index:
+          type: number
+          description: index of roi in a cell area
+          default: 0
+        extractionMethod:
+          type: string
+          example: NUMERIC_CLASSIFICATION
+          enum:
+            - NUMERIC_CLASSIFICATION
+            - CELL_OMR
+            - QR_CODE
+            - HANDWRITTEN_TEXT
+            - BLOCK_TEXT
+        langIsoCode:
+          type: string
+          description: |
+            Language ISO Code applicable for extractionMethod like HANDWRITTEN_TEXT,BLOCK_TEXT
+          example: 'ger (B)'
+        rect:
+          $ref: '#/components/schemas/rect'
+        result:
+          $ref: '#/components/schemas/extractedResult'
+
+    rect:
+      type: object
+      description: rectangular area on the image frame
+      required:
+        - top
+        - left
+        - bottom
+        - right
+      properties:
+        top:
+          type: number
+          description: x-coordinate of the ROI on the image
+        left:
+          type: number
+          description: y-coordinate of the ROI on the image
+        bottom:
+          type: number
+          description: x-coordinate of the ROI on the image
+        right:
+          type: number
+          description: y-coordinate of the ROI on the image
+          
+    extractedResult:
+      type: object
+      description: result of data extraction
+      properties:
+        prediction:
+          type: number
+          description: detected data
+        confidence:
+          type: number
+          description: degree of confidence regarding the prediction
+    sheetType:
+      description: |
+        Sheet type identifies unique layout of the sheet. 
+        For example PAT_12_MARKSHEET is PAT(Periodical Assesment Sheet) 
+        covering 12 question and answers.
+      type: string
+      enum:
+      - SAT_20_MARKSHEET
+      - SAT_50_MARKSHEET
+      - PAT_12_MARKSHEET
+      - PAT_34_MARKSHEET
+      - ATTENDANCE_SHEET_20
+      - MEDICAL_RX_TYPE1
+    identifiersType:
+      description: |
+        Array of name value paris that can be captured or associated during scanning process.
+        Typical usage of these identifiers are to capture teacherId,schoolId etc. for SAT or PAT assesment sheets.
+        Its kept generic to make sure it can be used for any other OCR use cases.
+      type: array
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+          value:
+            type: string
