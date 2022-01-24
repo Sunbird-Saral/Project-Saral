@@ -6,7 +6,7 @@ info:
   contact:
     name: ekstep foundation
     email: contact@ekstep.org
-  version: 0.7.0
+  version: 1.5.0
 servers:
   - url: /none
 paths: {}
@@ -19,7 +19,7 @@ components:
       properties:
         version:
           type: string
-          default: '1.0'
+          default: '1.5'
           description: layout detection version
         name:
           type: string
