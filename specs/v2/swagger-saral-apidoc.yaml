@@ -4,7 +4,7 @@ info:
   version: "1.0.0"
   title: "Saral APIs"
 host: "store.swagger.io"
-basePath: "/v1.5"
+basePath: "/v2.0"
 tags:
 - name: "Organisations"
 - name: "Users"

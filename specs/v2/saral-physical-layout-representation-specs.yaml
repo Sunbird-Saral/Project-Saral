@@ -6,7 +6,7 @@ info:
   contact:
     name: ekstep foundation
     email: contact@ekstep.org
-  version: 1.5.0
+  version: 2.0.0
 servers:
   - url: /none
 paths: {}
