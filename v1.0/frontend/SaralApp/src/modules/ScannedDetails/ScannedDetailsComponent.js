@@ -1071,7 +1071,9 @@ const ScannedDetailsComponent = ({
                                                         errorText={ stdErr != '' ? stdErr : Strings.please_correct_student_id}
                                                         onChangeText={(text) => {
                                                             setStudentID(text)
-                                                            setMultipageStdId(text)
+                                                            if (currentIndex == 1 && multiPage > 0) {
+                                                                setMultipageStdId(text)
+                                                            }
                                                         }}
                                                         value={studentId}
                                                         editable={edit}
