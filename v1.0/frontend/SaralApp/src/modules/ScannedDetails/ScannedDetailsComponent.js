@@ -67,6 +67,8 @@ const ScannedDetailsComponent = ({
     const [structureList, setStructureList] = useState([])
     const [currentIndex, setCurrentIndex] = useState(0)
     const [valid, setValid] = useState(false);
+    const [isStudentValid, setIsStudentValid] = useState(false);
+    const [multiPageStdId, setMultipageStdId] = useState();
 
     const [nextBtn, setNextBtn] = useState('SUBMIT')
     const [checkStdRollDuplicate, setCheckStdRollDuplicate] = useState([])
@@ -110,10 +112,32 @@ const ScannedDetailsComponent = ({
 
         let absent = datas.filter((item) => item.studentId == studentId & item.studentAvailability == false)
 
-
         if (absent.length > 0) {
             setStdErr("Student is Absent")
             setStudentValid(false)
+        }
+        else if (ocrLocalResponse.layout.pages > 0) {
+            if (a.length > 0 && a[0].studentId != multiPageStdId) {
+                setIsStudentValid(true)
+                setStdErr(Strings.student_id_should_be_same)
+                setStudentDATA([])
+            }   else if (a.length == 0) {
+                setStdErr(Strings.please_correct_student_id)
+            } else {
+                setIsStudentValid(false)
+                setStudentValid(true)
+                setStdErr('')
+                setStudentDATA(a)
+                //set student Id
+                ocrLocalResponse.layout.cells.forEach((element) => {
+                    student_ID.forEach((e) => {
+                        if (element.format.name == e) {
+                            element.consolidatedPrediction = value
+                            setMultipageStdId(element.consolidatedPrediction)
+                        }
+                    })
+                })
+            }
         }
         else if (a.length > 0 && !toggleCheckBox) {
             setStudentValid(true)
@@ -125,6 +149,7 @@ const ScannedDetailsComponent = ({
                     student_ID.forEach((e) => {
                         if (element.format.name == e) {
                             element.consolidatedPrediction = value
+                            setMultipageStdId(element.consolidatedPrediction)
                         }
                     })
                 })
@@ -254,6 +279,7 @@ const ScannedDetailsComponent = ({
             student_ID.forEach((e) => {
                 if (element.format.name == e) {
                     setStudentID(element.consolidatedPrediction)
+                    setMultipageStdId(element.consolidatedPrediction)
                 }
             })
         })
@@ -715,6 +741,9 @@ const ScannedDetailsComponent = ({
         else if (!studentValid && !toggleCheckBox) {
             showErrorMessage(Strings.please_correct_student_id)
         }
+        else if(isStudentValid){
+            showErrorMessage(Strings.student_id_should_be_same)
+        }
         else {
             if (sumOfObtainedMarks > 0) {
 
@@ -936,7 +965,7 @@ const ScannedDetailsComponent = ({
             saveObj.studentsMarkInfo[0].obtainedMarksConfidence = maxObtainedTrainingData[1].predictedMarks != sumOfAllMarks ? maxObtainedTrainingData[1].predictionConfidence : []
         }
 
-        let putTrainingData = loginData.data.school.storeTrainingData ? saveObj.studentsMarkInfo[0].studentIdTrainingData = storeTrainingData.length > 0 ? storeTrainingData[0].consolidatedPrediction != studentId ? storeTrainingData[0].trainingDataSet : [] : [] : ''
+        let putTrainingData = loginData.data.school.storeTrainingData ? saveObj.studentsMarkInfo[0].studentIdTrainingData = storeTrainingData.length > 0 ? storeTrainingData[0].consolidatedPrediction != studentId || (storeTrainingData[0].studentIdPrediction != studentId && multiPage > 0) ? storeTrainingData[0].trainingDataSet : [] : [] : ''
         if (toggleCheckBox) {
             saveObj.studentsMarkInfo = []
         }
@@ -989,10 +1018,14 @@ const ScannedDetailsComponent = ({
         dispatch(OcrLocalResponseAction(JSON.parse(JSON.stringify(roisData))))
         let rollNumber = roisData.layout.cells[0].consolidatedPrediction
         if (rollNumber != studentId) {
-            setStdErr(Strings.student_id_should_be_same)
-        } else {
+            setStudentID(rollNumber);
+            scanNextSheet(roisData);
+            setIsStudentValid(true);
+        }else {
+            setStudentID(rollNumber)
             setStdErr("");
             scanNextSheet(roisData);
+            setIsStudentValid(false);
         }
     }
 
@@ -1038,6 +1071,7 @@ const ScannedDetailsComponent = ({
                                                         errorText={ stdErr != '' ? stdErr : Strings.please_correct_student_id}
                                                         onChangeText={(text) => {
                                                             setStudentID(text)
+                                                            setMultipageStdId(text)
                                                         }}
                                                         value={studentId}
                                                         editable={edit}

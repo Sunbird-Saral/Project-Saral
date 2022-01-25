@@ -58,11 +58,8 @@ const StudentsDataComponent = ({
                 isStudentScannedInLocal = filterStdData[0].studentsMarkInfo.filter((o) => o.studentId == data.studentId)
             }
         }
-        if (apiStatus && apiStatus.progress == true && apiStatus.message != null) {
-            Alert.alert(Strings.something_went_wrong_please_try_again)
-        }
 
-        if (isStudentPresent && apiStatus.progress==false) {
+        if (isStudentPresent) {
             const isSheetScanned = typeof (scanedData) === 'object' && scanedData.data.length > 0 && scanedData.data.filter((o) => o.studentId == data.studentId && o.studentAvailability === true && o.marksInfo.length > 0)
 
             if (isSheetScanned.length > 0 || isStudentScannedInLocal.length > 0) {
@@ -72,7 +69,7 @@ const StudentsDataComponent = ({
                 setIsPresent(false)
                 checkStdAbsPrst(data, chkPresent, filteredData, false)
             }
-        } else if (data.studentAvailability == false && apiStatus.progress==false) {
+        } else if (data.studentAvailability == false) {
             data.studentAvailability = true
             setIsPresent(true)
             checkStdAbsPrst(data, chkPresent, filteredData, true)
