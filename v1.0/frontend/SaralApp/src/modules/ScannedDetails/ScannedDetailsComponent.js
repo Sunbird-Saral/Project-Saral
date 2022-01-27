@@ -654,9 +654,6 @@ const ScannedDetailsComponent = ({
             ocrLocalResponse.layout.cells.forEach(element => {
                 if (element.cellId == value.cellId) {
                     element.consolidatedPrediction = text
-                    if (multiPage > 0) {
-                        element.rois[index].result.prediction = text
-                    }
 
                 }
             });
@@ -874,7 +871,13 @@ const ScannedDetailsComponent = ({
     }
 
     const goBackPage = () => {
-        if (currentIndex - 1 >= 1) {
+         if (!studentValid && !toggleCheckBox) {
+            showErrorMessage(Strings.please_correct_student_id)
+        }
+        else if(isStudentValid){
+            showErrorMessage(Strings.student_id_should_be_same)
+        }
+       else if (currentIndex - 1 >= 1) {
             setNextBtn(`Scan Page#${currentIndex}`)
             const elements = neglectData;
             let filterDataAccordingPage = ocrLocalResponse.layout.cells.filter((element) => {
@@ -917,7 +920,9 @@ const ScannedDetailsComponent = ({
                 "predictionConfidence": loginData.data.school.storeTrainingData ? e.consolidatedPrediction != e.predictedMarks ? e.predictionConfidence : '' : '',
             }
 
-            let putTrainingData = loginData.data.school.storeTrainingData && e.hasOwnProperty("trainingDataSet") ? data.trainingData = e.consolidatedPrediction != e.predictedMarks ? e.trainingDataSet : [] : []
+            if (loginData.data.school.storeTrainingData && e.hasOwnProperty("trainingDataSet")) {
+                data.trainingData = e.consolidatedPrediction != e.predictedMarks ? e.trainingDataSet : []
+            }
             objects.push(data)
         })
 
@@ -1006,7 +1011,9 @@ const ScannedDetailsComponent = ({
                 marks = marks + cells[i].rois[j].result.prediction,
                     predictionConfidenceArray.push(cells[i].rois[j].result.confidence)
             }
-            roisData.layout.cells[i].consolidatedPrediction = marks
+            if (roiData.data.layout.hasOwnProperty("pages") && cells[i].page == currentIndex + 1 || roisData.layout.cells[i].format.value === neglectData[0] || roisData.layout.cells[i].format.name.length - 3 == neglectData[0].length) {
+                roisData.layout.cells[i].consolidatedPrediction = marks
+            }
             roisData.layout.cells[i].predictionConfidence = predictionConfidenceArray
             if (roisData.layout.cells[i].format.value === neglectData[0] || roisData.layout.cells[i].format.name.length - 3 == neglectData[0].length) {
                 roisData.layout.cells[i].studentIdPrediction = marks
