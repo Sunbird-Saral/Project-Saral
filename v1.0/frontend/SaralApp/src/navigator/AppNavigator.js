@@ -217,7 +217,7 @@ setInterval(() => {
         }
     }
     //timer for 10 min
-}, 10000);
+}, 600000);
 
 
 const AppNavigation = createSwitchNavigator(

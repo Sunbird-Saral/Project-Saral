@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, Text, View, BackHandler, Image, TouchableOpacity, Linking, Share } from 'react-native';
+import { FlatList, Text, View, BackHandler, Image, TouchableOpacity, Linking, Share, Alert} from 'react-native';
 
 //redux
 import { connect } from 'react-redux';
@@ -64,12 +64,15 @@ useEffect(
                     // shared with activity type of result.activityType
                 } else {
                     // shared
+                    Alert.alert(Strings.shareDataExceed)
                 }
             } else if (result.action === Share.dismissedAction) {
                 // dismissed
             }
         } catch (error) {
             console.log(error.message);
+            Alert.alert(Strings.shareDataExceed)
+            alert(error.message);
         }
     };
     
