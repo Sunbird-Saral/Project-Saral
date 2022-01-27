@@ -227,10 +227,15 @@ useEffect(() => {
 
         setStudentsExamData(stud)
 
-        let dataPayload = absentPresentStatus
-        let apiObj = new SaveScanData(dataPayload, token)
-        setIsLoading(true)
-        saveStudentData(apiObj)
+        if (absentPresentStatus.studentsMarkInfo.length == 0) {
+            setPresentAbsentStudent(allStudentData)
+            navigation.push('ScanHistory');
+        } else {
+            let dataPayload = absentPresentStatus
+            let apiObj = new SaveScanData(dataPayload, token)
+            setIsLoading(true)
+            saveStudentData(apiObj)
+        }
     }
 
     const saveStudentData = (api) => {
