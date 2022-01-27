@@ -973,7 +973,7 @@ const ScannedDetailsComponent = ({
             saveObj.studentsMarkInfo[0].obtainedMarksConfidence = maxObtainedTrainingData[1].predictedMarks != sumOfAllMarks ? maxObtainedTrainingData[1].predictionConfidence : []
         }
 
-        let putTrainingData = loginData.data.school.storeTrainingData ? saveObj.studentsMarkInfo[0].studentIdTrainingData = storeTrainingData.length > 0 ? storeTrainingData[0].consolidatedPrediction != studentId || (storeTrainingData[0].studentIdPrediction != studentId && multiPage > 0) ? storeTrainingData[0].trainingDataSet : [] : [] : ''
+        let putTrainingData = loginData.data.school.storeTrainingData ? saveObj.studentsMarkInfo[0].studentIdTrainingData = storeTrainingData.length > 0 ? storeTrainingData[0].studentIdPrediction != studentId || (storeTrainingData[0].studentIdPrediction != studentId && multiPage > 0) ? storeTrainingData[0].trainingDataSet : [] : [] : ''
         if (toggleCheckBox) {
             saveObj.studentsMarkInfo = []
         }
