@@ -30427,7 +30427,7 @@
                       }
                   },
                   {
-                      "cellId": "15",
+                      "cellId": "16",
                       "page": "3",
                       "rois": [
                           {
@@ -36653,7 +36653,7 @@
                     },
                     "format": {
                         "name": "QUESTION24",
-                        "value": "QUESTION 124"
+                        "value": "QUESTION 24"
                     },
                     "validate": {
                         "regExp": ""
