@@ -122,6 +122,7 @@ const ScannedDetailsComponent = ({
                 setStdErr(Strings.student_id_should_be_same)
                 setStudentDATA([])
             }   else if (a.length == 0) {
+                setIsStudentValid(true)
                 setStdErr(Strings.please_correct_student_id)
             } else {
                 setIsStudentValid(false)
@@ -871,27 +872,29 @@ const ScannedDetailsComponent = ({
     }
 
     const goBackPage = () => {
-         if (!studentValid && !toggleCheckBox) {
-            showErrorMessage(Strings.please_correct_student_id)
-        }
-        else if(isStudentValid){
-            showErrorMessage(Strings.student_id_should_be_same)
-        }
-       else if (currentIndex - 1 >= 1) {
-            setNextBtn(`Scan Page#${currentIndex}`)
-            const elements = neglectData;
-            let filterDataAccordingPage = ocrLocalResponse.layout.cells.filter((element) => {
-                if (element.format.name == elements[0] || element.format.name == elements[1] || element.format.name == elements[4] || element.page != currentIndex - 1) {
-                    return false
+        
+        if (currentIndex - 1 >= 1) {
+            if (!studentValid && !toggleCheckBox) {
+                showErrorMessage(Strings.please_correct_student_id)
+            }
+            else if (isStudentValid){
+                showErrorMessage(Strings.student_id_should_be_same)
+            } else {
+                setNextBtn(`Scan Page#${currentIndex}`)
+                const elements = neglectData;
+                let filterDataAccordingPage = ocrLocalResponse.layout.cells.filter((element) => {
+                    if (element.format.name == elements[0] || element.format.name == elements[1] || element.format.name == elements[4] || element.page != currentIndex - 1) {
+                        return false
+                    }
+                    else {
+                        return true
+                    }
+                })
+                setNewArrayValue(filterDataAccordingPage)
+                setCurrentIndex(currentIndex - 1)
+                if (currentIndex - 1 == 1) {
+                    setBtnName(Strings.cancel_text)
                 }
-                else {
-                    return true
-                }
-            })
-            setNewArrayValue(filterDataAccordingPage)
-            setCurrentIndex(currentIndex - 1)
-            if (currentIndex - 1 == 1) {
-                setBtnName(Strings.cancel_text)
             }
         } else {
             onBackButtonClick()
