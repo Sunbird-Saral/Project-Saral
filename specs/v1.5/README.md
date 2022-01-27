@@ -1,16 +1,16 @@
-# Project-Saral
-Project Saral should be viewed as an OCR-plus application that is capable of doing OCR and can also understand the structure of the physical input.
+# Saral v1 spec and ROI layout Generation #
+## Jupyter Notebook to transform Raw VoTT Json to v1 ROI Layout Json ##
+* Change Directory to ./jupyter-notebook from terminal
+* Execute below command to open Jupyter notebook
+ >>  `jupyter notebook`
+* Above command opens up http://localhost:8889/tree in browser.
 
-# Schema
-- /specs/saral_ocr_schema.yml
+* Refer `transform_sat_odisha_voot_to_roi.ipynb` in the notebook for Odisha SAT Exam transformation. It generates all the elements in ROI layout except validate regExp which needs to be hand coded. Any additional manual tweaks can be done to generated json as needed.
 
-# Sample
-- /specs/samples/saral_ocr_odisha_sample.yml
+* Use Microsoft VoTT (Visual Object Tagging Tool) to tag all the ROI sections to be recognized with proper tag pattern and generate Raw VoTT Json.
 
-# Saral OCR Odisha sample Layout
+* Feed the generated raw VoTT Json to `transform_sat_odisha_voot_to_roi.ipynb` notebook as input file to generte ROI configuration.
 
-![Alt text](https://github.com/project-anuvaad/Project-Saral/blob/feature/v1.5/specs/v1.5/images/saral_ocr_layout.png "Saral OCR Layout")
+* Use transformed Json output from jupyter notebook and use it for backend ROI configuration.
 
-# Saral OCR-plus draft Architecture v1.0
-
-![Alt text](https://github.com/project-anuvaad/Project-Saral/blob/feature/v1.5/specs/v1.5/images/saral_v1.0_architecture-view-point1.jpg "Saral OCR Architecture")
+* Use above process to generate roi layouts configuration for required layout sheets.

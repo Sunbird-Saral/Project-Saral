@@ -1,0 +1,377 @@
+swagger: "2.0"
+info:
+  description: "Saral APIs"
+  version: "1.0.0"
+  title: "Saral APIs"
+host: "store.swagger.io"
+basePath: "/v2.0"
+tags:
+- name: "Organisations"
+- name: "Users"
+- name: "Participants"
+- name: "Scans"
+- name: "Layouts"
+- name: "Frontend API"
+- name: "Maintenance API"
+
+securityDefinitions:
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header
+
+    basicAuth:
+      type: basic
+schemes:
+  - "https"
+  - "http"
+
+paths:
+  /organisations:
+    get:
+      tags:
+      - "Organisations"
+      - "Frontend API"
+      summary: "Get Organisations"
+      description: "should return list of Organisations"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Organisation"
+        "400":
+          description: "unsuccessful operation"
+    post:
+      tags:
+      - "Organisations"
+      - "Maintenance API"
+      summary: "Create Organisation"
+      description: "Create Organisation"
+      parameters:
+      - name : body
+        in: body
+        schema:
+          $ref: "#/definitions/Organisation"
+      responses:
+        "201":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Organisation"
+        "401":
+          description: "Organisation Id already exist"
+        "400":
+          description: "unsuccessful operation"
+
+  /organisations/{id}:
+    put:
+      tags:
+      - "Organisations"
+      - "Maintenance API"
+      summary: "Update Organisation"
+      description: "Update Organisation"
+      parameters:
+      - in: path
+        name: id
+        type: string
+        required: true
+      - name : body
+        in: body
+        schema:
+          $ref: "#/definitions/Organisation"
+      responses:
+        "201":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Organisation"
+        "404":
+          description: "Organisation does not exist."
+        "400":
+          description: "unsuccessful operation"
+    delete:
+      tags:
+      - "Organisations"
+      - "Maintenance API"
+      summary: "Delete Organisation"
+      description: "Delete Organisation"      
+      responses:
+        "200": 
+          description: "Organisation has been deleted"
+        "404":
+          description: "Organisation does not exist."
+        "400":
+          description: "unsuccessful operation"
+
+  /organisations/login:
+    post:
+      tags:
+      - "Frontend API"
+      summary: "Login API"
+      description: "Login API"
+      produces:
+      - "application/json"
+      parameters:
+        - name: body
+          in: body
+          schema:
+            $ref: "#/definitions/LoginOrgReqBody"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Organisation"
+        "422":
+          description: "User Id or Password is not correct."      
+
+  # /organisations/{id}/users:
+  #   get:
+  #     tags:
+  #     - "Users"
+  #     summary: "Get Users of organisation"
+  #     description: "should return list of users of organisation"
+  #     responses:
+  #       "200":
+  #         description: "successful operation"
+  #         schema:
+  #           type: "array"
+  #           items:
+  #             $ref: "#/definitions/User"
+  #       "400":
+  #         description: "unsuccessful operation"
+
+definitions:
+  Organisation:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Organisation Id
+        example: "12000"
+      name:
+        type: string
+        description: Organisation Name
+        example: Apollo Pharmacy
+      type:
+        type: string
+        description: Organization Type
+        example: Pharmacy
+      state:
+        type: string
+        example: "up" 
+      district:
+        type: string
+        example: "delhi"
+      block:
+        type: string
+        example: "haldwani"
+      pointOfContact:
+        type: string
+        example: "Prateek"
+      noOfParticipants:
+        type: string
+        example: "100"
+      storeTrainingData:
+        type: boolean
+        default: false
+        description: "If this is set to true frontend application will return base 64 encoded images of predictions."
+        example: true
+      createdAt: 
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+      # users:
+      #   type: array
+      #   items:
+      #     $ref: '#/definitions/User'
+      # participants:
+      #   type: array
+      #   items:
+      #     $ref: '#/definitions/Participant'          
+      # scans:
+      #   type: array
+      #   items:
+      #     $ref: '#/definitions/Scan'
+
+  LoginOrgReqBody:
+    type: object
+    required:
+       - userId
+       - password
+    properties:
+      userId:
+        type: string
+        example: "eksteps.admin.user1"
+      password:
+        type: string
+        example: "eksteps.changeit"
+
+  User:
+    type: object
+    properties:
+      firstName:
+        type: string
+        description: First Name of User
+        example: Praveen
+      lastName:
+        type: string
+        description: Last Name of User
+        example: Chand
+      password:
+        type: string
+        description: User Password in encrypted format
+        example: $2a$08$uYCG9.pkye9AwGt0oMfPlev.5E45LWJ/bBYmI0tTL1MGOFs73.WJS
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+
+  Scan:
+    type: object
+    properties:
+      id:
+        type: number
+        description: Scan ID
+        example: 1000
+      type:
+        type: string
+        description: Scan Type
+        example: staff_attendance
+      name:
+        type: string
+        description: Scan Name
+        example : Staff Attendance for EKSteps Quorum Office
+      date:
+        type: string
+        format: date
+        example: "2017-01-01"
+      participants:
+        type: array
+        items:
+          $ref: '#/definitions/Participant'
+
+  Participant:
+    type: object
+    properties:
+      type:
+        type: string
+        description: Participant Type
+        example: EmployeeID
+      participantId:
+        type: string
+        description: Participant ID
+        example: 1020112
+      name:
+        type: string
+        description: Name of Participant
+        example: Praveen Chand
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+
+  ScanPredictions:
+    type: object
+    properties:
+      scanId:
+        type: number
+        description: Scan ID
+        example: 1000
+      participantId:
+        type: string
+        description: Participant ID
+        example: 1020112
+      predictionItems:
+        type: array
+        description: Array of Prediction Items
+        items:
+          type: object
+          properties:
+            name:
+              type: string
+              description: Prediction Item Name
+              example: Hindi Question 1
+            value:
+              type: string
+              description: Prediction Item Value
+              example: 25
+            tags:
+              type: array
+              description: Tag for each prediction Items.
+              items:
+                type: string        
+
+  Layout:
+    type: object
+    properties:
+      scanType:
+        type: string
+      rois:
+        type: object
+        properties:
+          layout:
+            type: object
+            properties:
+              version: 
+                type: string
+              name:
+                type: string
+              cells:
+                $ref: '#/definitions/cells'
+
+  cells:
+    type: array
+    items:
+      type: object
+      properties:
+        cellId:
+          type: string
+        rois:
+          $ref: '#/definitions/roi'
+
+  roi:
+    type: array
+    items:
+      type: object
+      properties:
+        annotationId:
+          type: string
+        annotationTags:
+          type: string
+        extractionMethod:
+          type: string
+          enum: ["NUMERIC_CLASSIFICATION", "CELL_OMR","QR_CODE","HANDWRITTEN_TEXT","BLOCK_TEXT"]
+        roiId:
+          type: string
+        index:
+          type: string
+        rect:
+          $ref: '#/definitions/rect'
+
+  rect:
+    type: object
+    description: rectangular area on the image frame
+    required:
+      - top
+      - left
+      - bottom
+      - right
+    properties:
+      top:
+        type: number
+        description: x-coordinate of the ROI on the image
+      left:
+        type: number
+        description: y-coordinate of the ROI on the image
+      bottom:
+        type: number
+        description: x-coordinate of the ROI on the image
+      right:
+        type: number
+        description: y-coordinate of the ROI on the image
