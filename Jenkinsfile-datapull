@@ -1,0 +1,27 @@
+#!groovy
+
+node('saral-poc') {
+
+try {
+
+   stage('Checkout'){
+      checkout scm
+	}
+	
+		
+	stage('Docker-compose')
+withCredentials([usernamePassword(credentialsId: 'anuvaad-docker-hub-credentials', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+	       sh '''
+
+		environment=$(echo "$JOB_BASE_NAME" | rev | cut -d'-' -f 1 | rev)
+        sudo mongoexport --db=saralv1db --collection=marks --type=json --host=172.31.51.8  --pretty > marks_devserver_latest.json
+        sudo scp ubuntu@saral-dev-api.anuvaad.org:/home/ubuntu/marks_devserver_latest.json ./marks_devserver_latest.json
+
+		'''
+		}   
+ }
+catch (err) {
+    currentBuild.result = "FAILURE"
+    throw err
+ }
+}
