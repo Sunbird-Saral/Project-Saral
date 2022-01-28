@@ -7,19 +7,16 @@ try {
    stage('Checkout'){
       checkout scm
 	}
-	
-		
-	stage('Docker-compose')
-withCredentials([usernamePassword(credentialsId: 'anuvaad-docker-hub-credentials', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
-	       sh '''
+	sh '''
 
 		environment=$(echo "$JOB_BASE_NAME" | rev | cut -d'-' -f 1 | rev)
-        sudo mongoexport --db=saralv1db --collection=marks --type=json --host=172.31.51.8  --pretty > marks_devserver_latest.json
-        sudo scp ubuntu@saral-dev-api.anuvaad.org:/home/ubuntu/marks_devserver_latest.json ./marks_devserver_latest.json
-
-		'''
-		}   
- }
+        collection_name=$(echo "$collection_name")
+		db=$(echo "$db")
+        query=$(echo "$query")
+        sudo mongoexport --db=$db --collection=$collection_name --type=json --query=$query --host=172.31.51.8  --pretty > devserver_sara_data.json
+        cat ./devserver_sara_data.json
+		'''	
+		
 catch (err) {
     currentBuild.result = "FAILURE"
     throw err
