@@ -16,7 +16,7 @@ try {
         sudo mongoexport --db=$db --collection=$collection_name --type=json --query=$query --host=172.31.51.8  --pretty > devserver_sara_data.json
         cat ./devserver_sara_data.json
 		'''	
-		
+}		
 catch (err) {
     currentBuild.result = "FAILURE"
     throw err
