@@ -1,20 +1,24 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, Image, TouchableOpacity, Platform, PermissionsAndroid, Alert, BackHandler } from 'react-native';
+import { View, ScrollView, Text, Image, TouchableOpacity, Platform, PermissionsAndroid, Alert, BackHandler, LogBox,Share} from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { StackActions, NavigationActions } from 'react-navigation';
 import SystemSetting from 'react-native-system-setting'
-import RNOpenCvCameraModel from '../../utils/RNOpenCvCamera';
 import Strings from '../../utils/Strings';
 import AppTheme from '../../utils/AppTheme';
 import Spinner from '../common/components/loadingIndicator';
 import { OcrLocalResponseAction } from '../../flux/actions/apis/OcrLocalResponseAction'
 import { apkVersion } from '../../configs/config';
-import HeaderComponent from '../common/components/HeaderComponent';
-import { SCAN_TYPES } from '../../utils/CommonUtils';
 import ScanHistoryCard from '../ScanHistory/ScanHistoryCard';
-
 import SaralSDK from '../../../SaralSDK'
+import { getScannedDataFromLocal,getErrorMessage } from '../../utils/StorageUtils';
+import ButtonComponent from '../common/components/ButtonComponent';
+import { neglectData } from '../../utils/CommonUtils';
+import ShareComponent from '../common/components/Share';
+import MultibrandLabels from '../common/components/multibrandlabels';
+import { Assets } from '../../assets';
+
+LogBox.ignoreAllLogs()
 
 class MyScanComponent extends Component {
     constructor(props) {
@@ -25,15 +29,27 @@ class MyScanComponent extends Component {
             oldBrightness: null,
             activityOpen: false,
             isLoading: false,
+            scanStatusData:false,
         }
         this.onBack = this.onBack.bind(this)
+        this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
     }
 
+
+    componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
+    }
+
+    handleBackButtonClick =()=> {
+        this.props.navigation.navigate('ScanHistory');
+        return true;
+    }
     componentDidMount() {
+        BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
         const { navigation, scanedData } = this.props
         const { params } = navigation.state
         navigation.addListener('willFocus', payload => {
-
+            this.sumOfLocalData()
             BackHandler.addEventListener('hardwareBackPress', this.onBack)
             if (params && params.from_screen && params.from_screen == 'scanDetails') {
                 this.setState({
@@ -50,6 +66,34 @@ class MyScanComponent extends Component {
         this.willBlur = navigation.addListener('willBlur', payload =>
             BackHandler.removeEventListener('hardwareBackPress', this.onBack)
         );
+    }
+
+    //functions
+    sumOfLocalData = async () => {
+        const { filteredData } = this.props
+        const data = await getScannedDataFromLocal()
+        let len = 0
+        if (data != null) {
+            let filter = data.filter((e) => {
+                let findSection = false
+                findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.section)
+
+                if (filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject && findSection) {
+                    return true
+                }
+            })
+
+            filter.forEach((element, index) => {
+                len = len + element.studentsMarkInfo.length
+            });
+            this.setState({
+                scanStatusData: len
+            })
+        } else {
+            this.setState({
+                scanStatusData: 0
+            })
+        }
     }
 
     onBack = () => {
@@ -69,7 +113,7 @@ class MyScanComponent extends Component {
                         index: 0,
                         actions: [NavigationActions.navigate({ routeName: 'myScan', params: { from_screen: 'cameraActivity' } })],
                     });
-                    this.props.navigation.dispatch(resetAction);
+                     this.props.navigation.dispatch(resetAction);
                     return true
                 }
             })
@@ -79,7 +123,7 @@ class MyScanComponent extends Component {
             const { navigation } = this.props
             const { params } = navigation.state
             if (params && params.from_screen && params.from_screen == 'cameraActivity') {
-                this.props.navigation.navigate('selectDetails', { from_screen: 'cameraActivity' })
+                this.props.navigation.navigate('ScanHistory', { from_screen: 'cameraActivity' })
                 return true
             }
         }
@@ -149,58 +193,80 @@ class MyScanComponent extends Component {
                 }
             );
             if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-                console.log("Camera permission granted, launching now ..");
                 this.setState({
                     activityOpen: true
                 })
-                console.log("roiData", this.props.roiData.data);
-                SaralSDK.startCamera(JSON.stringify(this.props.roiData.data)).then(res => {
-                    console.log("UPSAT", res);
+                let totalPages = this.props.roiData.data.layout.hasOwnProperty("pages") && this.props.roiData.data.layout.pages
+                let pageNumber = totalPages || totalPages > 0 ? "1" : null
+                SaralSDK.startCamera(JSON.stringify(this.props.roiData.data), pageNumber).then(res => {
                     let roisData = JSON.parse(res);
                     let cells = roisData.layout.cells;
                     this.consolidatePrediction(cells, roisData)
 
                 }).catch((code, message) => {
-                    console.log(message)
                 })
             } else {
-                console.log("Camera permission denied");
             }
         } catch (err) {
-            console.warn(err);
         }
     };
 
     consolidatePrediction(cells, roisData) {
         var marks = "";
+        var predictionConfidenceArray = []
+        var studentIdPrediction = ""
         for (let i = 0; i < cells.length; i++) {
             marks = ""
+            predictionConfidenceArray = []
             for (let j = 0; j < cells[i].rois.length; j++) {
-
-                marks = marks + cells[i].rois[j].result.prediction
+                if (cells[i].rois[j].hasOwnProperty("result")) {
+                    marks = marks + cells[i].rois[j].result.prediction,
+                        predictionConfidenceArray.push(cells[i].rois[j].result.confidence)
+                    // roisData.layout.cells[i].predictionConfidence = cells[i].rois[j].result.confidence
+                } else {
+                    let resultProperty = {
+                            "prediction": "0",
+                            "confidence": 0
+                        }
+                    
+                    roisData.layout.cells[i].rois[j].result = resultProperty
+                }
 
             }
             roisData.layout.cells[i].consolidatedPrediction = marks
+            roisData.layout.cells[i].predictionConfidence = predictionConfidenceArray
+            if (roisData.layout.cells[i].format.value === neglectData[0] || roisData.layout.cells[i].format.name.length-3 == neglectData[0].length) {
+                roisData.layout.cells[i].studentIdPrediction = marks
+            } else {
+                roisData.layout.cells[i].predictedMarks = marks
+            }
+
 
         }
-        // console.log("JSON",JSON.stringify(roisData));
         this.props.OcrLocalResponseAction(JSON.parse(JSON.stringify(roisData)))
         this.props.navigation.navigate('ScannedDetailsComponent', { oldBrightness: this.state.oldBrightness })
     }
-
     render() {
         const { isLoading } = this.state;
-        const { loginData } = this.props
+        const { loginData,multiBrandingData } = this.props
+        const BrandLabel = multiBrandingData&&multiBrandingData.screenLabels&&multiBrandingData.screenLabels.myScan[0]
         return (
 
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
-                {/* <HeaderComponent
-                    title={Strings.up_saralData}
-                /> */}
-                {
+                 <ShareComponent
+                 navigation={this.props.navigation}
+                 />
+               <View>
+               {( BrandLabel) ?
+                <MultibrandLabels
+                Label1={BrandLabel.School}
+                Label2={BrandLabel.SchoolId}
+                School ={loginData.data.school.name}
+                SchoolId={loginData.data.school.schoolId}
+                />:
                     (loginData && loginData.data)
                     &&
-                    <View style={{ marginVertical: '2%' }}>
+                    <View style={{ width:'60%' }}>
                         <Text
                             style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}
                         >
@@ -217,9 +283,6 @@ class MyScanComponent extends Component {
                                 {loginData.data.school.schoolId}
                             </Text>
                         </Text>
-                    </View>
-                }
-
                 <Text
                     style={{ fontSize: AppTheme.FONT_SIZE_REGULAR - 3, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', marginBottom: '4%' }}
                 >
@@ -228,27 +291,36 @@ class MyScanComponent extends Component {
                         {apkVersion}
                     </Text>
                 </Text>
-                <ScrollView
-                    contentContainerStyle={{ paddingTop: '5%', paddingBottom: '35%' }}
-                    showsVerticalScrollIndicator={false}
-                    bounces={false}
-                    keyboardShouldPersistTaps={'handled'}
-                >
-                    <View style={styles.onGoingContainer}>
-                        <Text style={styles.header1TextStyle}>
-                            {Strings.ongoing_scan}
-                        </Text>
                     </View>
-
-                    <ScanHistoryCard
+                }
+                
+                </View> 
+                <ScrollView scrollEnabled>
+                <View style={styles.container1}>
+                <Text style={[styles.header1TextStyle, { borderColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE, backgroundColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE }]}>
+                    {Strings.ongoing_scan}
+                </Text>
+            </View>
+                <ScanHistoryCard
+                        scanstatusbutton ={true}
+                        themeColor1={this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE}
                         showButtons={false}
+                        scanStatusData={this.state.scanStatusData}
+                         navigation={this.props.navigation}
                     />
 
+                <View>
+                    <ButtonComponent
+                        customBtnStyle={[styles.nxtBtnStyle, { backgroundColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+                        customBtnTextStyle={{ fontSize: 15 }}
+                        btnText={Strings.backToDashboard}
+                        activeOpacity={0.8}
+                        onPress={() => this.props.navigation.navigate('selectDetails')}
+                    />
+                </View>
                 </ScrollView>
                 <View style={styles.bottomTabStyle}>
-                </View>
-
-                <View style={[styles.bottomTabStyle, { height: 135, width: '50%', marginHorizontal: '25%', backgroundColor: 'transparent', justifyContent: 'center' }]}>
+                <View style={[{elevation:10,  backgroundColor: 'transparent', justifyContent: 'center',alignItems:'center' }]}>
                     <TouchableOpacity style={[styles.subTabContainerStyle]}
                         onPress={this.onScanClick}
                     >
@@ -256,19 +328,21 @@ class MyScanComponent extends Component {
                             style={[styles.scanTabContainerStyle,]}
                         >
                             <TouchableOpacity
-                                style={styles.scanSubTabContainerStyle}
+                                style={[styles.scanSubTabContainerStyle, { backgroundColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE }]}
                             >
                                 <Image
-                                    source={require('../../assets/images/scanIcon.jpeg')}
+                                    source={Assets.ScanButton}
                                     style={styles.tabIconStyle}
                                     resizeMode={'contain'}
                                 />
                             </TouchableOpacity>
                         </TouchableOpacity>
-                        <Text style={[styles.tabLabelStyle, { paddingTop: '71%' }]}>
+                        <Text style={styles.tabLabelStyle}>
                             {Strings.scan_text}
                         </Text>
+
                     </TouchableOpacity>
+                </View>
                 </View>
                 {
                     isLoading
@@ -285,14 +359,14 @@ class MyScanComponent extends Component {
 
 const styles = {
     container1: {
-        flex: 1,
-        marginHorizontal: '6%',
-        alignItems: 'center'
+        marginHorizontal: '4%',
+        alignItems: 'center',
+         marginTop:10,
     },
     onGoingContainer: {
         marginHorizontal: '4%',
         alignItems: 'center',
-        paddingVertical: '4%'
+        paddingVertical: '3%'
     },
     header1TextStyle: {
         backgroundColor: AppTheme.LIGHT_BLUE,
@@ -310,17 +384,16 @@ const styles = {
         position: 'absolute',
         flexDirection: 'row',
         bottom: 0,
-        height: 90,
+        height: 50,
         left: 0,
         right: 0,
         backgroundColor: AppTheme.WHITE,
         elevation: 10,
-        paddingLeft: '5%',
-        paddingRight: '5%',
-        justifyContent: 'space-between'
+        justifyContent:'center',
+        alignItems:'center'
+        
     },
     subTabContainerStyle: {
-        height: 100,
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -328,7 +401,18 @@ const styles = {
         width: 40,
         height: 40
     },
+    Backbutton: {
+        width: 200,
+        lineHeight: 40,
+        textAlign: 'center',
+        fontSize: AppTheme.FONT_SIZE_LARGE,
+        color: AppTheme.BLACK,
+        letterSpacing: 1,
+        fontWeight: 'bold'
+
+    },
     tabLabelStyle: {
+        height: 70,
         lineHeight: 40,
         textAlign: 'center',
         fontSize: AppTheme.FONT_SIZE_SMALL,
@@ -337,21 +421,35 @@ const styles = {
         fontWeight: 'bold'
     },
     scanTabContainerStyle: {
-        width: 85,
-        height: 85,
-        backgroundColor: AppTheme.WHITE,
+        width: 80,
+        height: 80,
         position: 'absolute',
-        borderRadius: 45,
+        borderRadius: 40,
         justifyContent: 'center',
         alignItems: 'center'
     },
     scanSubTabContainerStyle: {
         width: '90%',
         height: '90%',
+        marginBottom: 30,
         backgroundColor: AppTheme.BLUE,
         borderRadius: 45,
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    nxtBtnStyle:{ marginHorizontal: 40,marginTop:8,marginBottom:20, borderRadius: 10 },
+   
+    nxtBtnStyle1: {
+        marginTop:15,
+        width:'45%',
+        marginHorizontal: 5,
+        marginBottom: 20,
+        borderRadius: 10
+    },
+    viewnxtBtnStyle1 : {
+        flexDirection:'row',
+        justifyContent:'center',
+        alignItems:'center'
     }
 }
 
@@ -359,16 +457,18 @@ const mapStateToProps = (state) => {
     return {
         ocrLocalResponse: state.ocrLocalResponse,
         loginData: state.loginData,
-        filteredData: state.filteredData,
+        filteredData: state.filteredData.response,
         scanTypeData: state.scanTypeData.response,
         scanedData: state.scanedData,
-        roiData: state.roiData.response
+        roiData: state.roiData.response,
+        multiBrandingData: state.multiBrandingData.response.data,
+        apiStatus: state.apiStatus
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        OcrLocalResponseAction: OcrLocalResponseAction,
+        OcrLocalResponseAction: OcrLocalResponseAction
     }, dispatch)
 }
 

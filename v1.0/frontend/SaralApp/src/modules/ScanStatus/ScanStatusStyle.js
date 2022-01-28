@@ -6,10 +6,6 @@ export const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'white'
     },
-    schoolCon: {
-        // flexDirection: 'row',
-        // justifyContent: 'space-between'
-    },
     schoolName: {
         fontSize: AppTheme.FONT_SIZE_REGULAR,
         color: AppTheme.BLACK,

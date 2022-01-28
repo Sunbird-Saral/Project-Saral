@@ -1,9 +1,8 @@
 import { StyleSheet } from "react-native";
 import AppTheme from "../../utils/AppTheme";
-
 export const styles = StyleSheet.create({
     container: {
-        backgroundColor: AppTheme.BLUE,
+        backgroundColor:AppTheme.BLUE,
         width: '80%',
         borderRadius: 8,
         marginTop: 20,
@@ -32,7 +31,7 @@ export const styles = StyleSheet.create({
         paddingHorizontal: '2%',
     },
     scanLabelStyle: {
-        padding: '3%',
+        padding: '2.4%',
         borderTopWidth: 1,
         borderColor: AppTheme.BLACK
     },
@@ -47,6 +46,6 @@ export const styles = StyleSheet.create({
         backgroundColor: AppTheme.WHITE,
         borderLeftWidth: .5,
         borderRightWidth: 1,
-    }
+    },
 
 });

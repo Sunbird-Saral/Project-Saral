@@ -9,6 +9,10 @@ import roiDataReducer from './roiDataReducer';
 import scanedDataReducer from './scanedDataReducer'
 import saveAbsentStudentReducer from './saveAbsentStudentReducer';
 import absentStudentReducer from './absentStudentReducer';
+import multiBrandingReducer from './multiBrandingReducer';
+import defaultBrandReducer from './defaultBrandReducer';
+import bgFlag from './bgFlag';
+import multiPageReducer from './multiPageReducer';
 
 export default {
     apiStatus: apiStatus,
@@ -22,4 +26,10 @@ export default {
     scanedData: scanedDataReducer,
     saveAbsentStudent: saveAbsentStudentReducer,
     absentStudentDataResponse: absentStudentReducer,
+    multiBrandingData:multiBrandingReducer,
+    defaultBrandingdata:defaultBrandReducer,
+    bgFlag: bgFlag,
+    multiPage: multiPageReducer
+
+
 }

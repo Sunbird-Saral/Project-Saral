@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, BackHandler, Alert, TouchableOpacity } from 'react-native';
+import { View, ScrollView, Text, BackHandler, Alert, TouchableOpacity, Share } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -9,21 +9,24 @@ import Strings from '../../utils/Strings';
 import AppTheme from '../../utils/AppTheme';
 import Spinner from '../common/components/loadingIndicator';
 import { apkVersion } from '../../configs/config';
-import HeaderComponent from '../common/components/HeaderComponent';
+import HeaderComponents from '../common/components/HeaderComponents';
 import DropDownMenu from '../common/components/DropDownComponent';
-import TextField from '../common/components/TextField';
 import ButtonComponent from '../common/components/ButtonComponent';
-import { getLoginData, setStudentsExamData, getStudentsExamData, getLoginCred, setLoginData } from '../../utils/StorageUtils'
+import { getLoginData, setStudentsExamData, getStudentsExamData, getLoginCred, setLoginData, getErrorMessage, eraseErrorLogs } from '../../utils/StorageUtils'
 import { OcrLocalResponseAction } from '../../flux/actions/apis/OcrLocalResponseAction'
 import { GetStudentsAndExamData } from '../../flux/actions/apis/getStudentsAndExamData';
 import { FilteredDataAction } from '../../flux/actions/apis/filteredDataActions';
 import APITransport from '../../flux/actions/transport/apitransport';
 import { cryptoText, SCAN_TYPES, validateToken } from '../../utils/CommonUtils';
-import { StackActions, NavigationActions } from 'react-navigation';
 import { ROIAction } from '../StudentsList/ROIAction';
 import { GetAbsentStudentData } from '../../flux/actions/apis/getAbsentStudentData';
 import { LoginAction } from '../../flux/actions/apis/LoginAction';
-
+import { LogoutAction } from '../../flux/actions/apis/LogoutAction';
+import { getScannedDataFromLocal } from '../../utils/StorageUtils';
+import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
+import C from '../../flux/actions/constants';
+import ShareComponent from '../common/components/Share';
+import MultibrandLabels from '../common/components/multibrandlabels';
 
 const clearState = {
     defaultSelected: Strings.select_text,
@@ -57,7 +60,7 @@ const clearState = {
     calledAbsentStatus: false,
     calledScanStaus: false,
     absentStatusPayload: null,
-    subjectsData:[]
+    subjectsData: []
 }
 
 class SelectDetailsComponent extends Component {
@@ -98,14 +101,20 @@ class SelectDetailsComponent extends Component {
             examDate: [],
             calledAbsentStatus: false,
             absentStatusPayload: null,
-            subjectsData:[]
+            subjectsData: [],
+            filterdataid: [],
+            isHidden: false,
         }
+        this.onPress = this.onPress.bind(this);
         this.onBack = this.onBack.bind(this)
     }
 
+    onPress() {
+        this.setState({isHidden: !this.state.isHidden})
+      }
+
     componentDidMount() {
         const { navigation, scanTypeData } = this.props
-
         navigation.addListener('willFocus', async payload => {
             BackHandler.addEventListener('hardwareBackPress', this.onBack)
 
@@ -116,8 +125,6 @@ class SelectDetailsComponent extends Component {
                     scanType: scanTypeData.scanType
                 })
             }
-            // console.log("Helo");
-            // this.loginAgain()
 
             let loginDetails = await getLoginData()
             if (loginDetails) {
@@ -141,22 +148,12 @@ class SelectDetailsComponent extends Component {
 
     onBack = () => {
         const { navigation } = this.props;
-        // BackHandler.exitApp()
-        navigation.goBack();
+        BackHandler.exitApp()
+        // navigation.goBack();
         return true
     }
 
-    onLogoutClick = async () => {
-        Alert.alert(Strings.message_text, Strings.are_you_sure_you_want_to_logout, [
-            { 'text': Strings.no_text, style: 'cancel' },
-            {
-                'text': Strings.yes_text, onPress: async () => {
-                    await AsyncStorage.clear();
-                    this.props.navigation.navigate('auth')
-                }
-            }
-        ])
-    }
+
 
     loader = (flag) => {
         this.setState({
@@ -169,10 +166,8 @@ class SelectDetailsComponent extends Component {
         if (type == 'class') {
             if (value != selectedClass) {
                 const sections = [...classesArr[index].sections]
-                // let sectionListArr = ['All']
                 let sectionListArr = []
                 _.forEach(sections, (sectionData) => sectionListArr.push(sectionData.section))
-                // sectionListArr.push('NA')
                 this.setState({
                     sectionList: sectionListArr,
                     sectionListIndex: 0,
@@ -187,23 +182,16 @@ class SelectDetailsComponent extends Component {
                             classId: classesArr[index].classId,
                             section: sectionListArr[0],
                         }
-                        // if(sectionListArr[0] == 'All') {
-                        //     payload.section = "0"
-                        // }
+
                         this.loader(true)
                         this.setState({
                             dataPayload: payload
                         }, () => {
-                            console.log("LoginDetailexpire", loginDetails);
+
                             // let isTokenValid = validateToken(loginDetails.expiresOn)                                 
                             // if(isTokenValid) {
                             this.callStudentsData(loginDetails.token)
-                            // }
-                            // else if(!isTokenValid) {
-                            //     this.setState({
-                            //         callApi: 'callStudentsData'
-                            //     }, () => this.loginAgain())
-                            // }
+
                         })
                     }
                 })
@@ -249,15 +237,8 @@ class SelectDetailsComponent extends Component {
                     this.setState({
                         dataPayload: payload
                     }, () => {
-                        // let isTokenValid = validateToken(loginDetails.expiresOn)     
-                        // if(isTokenValid) {
+
                         this.callStudentsData(loginDetails.token)
-                        // }
-                        // else if(!isTokenValid) {
-                        //     this.setState({
-                        //         callApi: 'callStudentsData'
-                        //     }, () =>  this.loginAgain())
-                        // }
                     })
                 }
             })
@@ -277,7 +258,6 @@ class SelectDetailsComponent extends Component {
                 subIndex: Number(index),
                 selectedSubject: value
             })
-            // this.validateAbsentStatusApi()
         }
     }
 
@@ -294,12 +274,9 @@ class SelectDetailsComponent extends Component {
 
     validateAbsentStatusApi = () => {
         const { selectedClassId, selectedExam, selectedSection, loginDetails } = this.state
-        // const { loginDetails } = this.props
         let schoolId = loginDetails.school.schoolId
-        console.log("seelceted", selectedClassId, selectedSection);
         let payload = {
             schoolId: schoolId,
-            // examCode: selectedExam,
             classId: selectedClassId,
             section: selectedSection == 'All' ? 0 : selectedSection,
         }
@@ -307,25 +284,15 @@ class SelectDetailsComponent extends Component {
         this.setState({
             absentStatusPayload: payload
         }, () => {
-            // let isTokenValid = validateToken(loginDetails.expiresOn)
 
-            // if (isTokenValid) {
             this.callAbsentStatus(payload, loginDetails.jwtToken)
-            // }
-            // else if (!isTokenValid) {
-            //     this.setState({
-            //         callApi: 'callAbsentStatus'
-            //     })
-            //     this.loginAgain()
-            // }
+
         })
     }
 
     loginAgain = async () => {
-        console.log("hello");
         let loginCred = await getLoginCred()
         if (loginCred) {
-            console.log("hellologincred", loginCred);
             this.setState({
                 isLoading: true,
                 username: loginCred.schoolId,
@@ -348,13 +315,11 @@ class SelectDetailsComponent extends Component {
             isLoading: true,
             calledLogin: true
         }, () => {
-            console.log("this", this.state.password, this.state.username);
             let encPass = cryptoText(this.state.password)
             let loginObj = {
                 "schoolId": this.state.username,
                 "password": this.state.password
             }
-            console.log("LoGiNOBJ", loginObj);
             let apiObj = new LoginAction(loginObj);
             this.props.APITransport(apiObj);
 
@@ -366,7 +331,6 @@ class SelectDetailsComponent extends Component {
             isLoading: true,
             calledAbsentStatus: true
         }, () => {
-            console.log("callAbsentStatus", payload);
             let apiObj = new GetAbsentStudentData(payload, token);
             this.props.APITransport(apiObj)
         })
@@ -419,6 +383,7 @@ class SelectDetailsComponent extends Component {
 
     async componentDidUpdate(prevProps) {
         if (prevProps != this.props) {
+
             const { apiStatus, studentsAndExamData, absentStudentDataResponse, getScanStatusData, loginData } = this.props
             const { calledStudentsData, calledAbsentStatus, selectedClass, selectedSection, selectedClassId, calledScanStaus, calledLogin, callApi, absentStatusPayload } = this.state
             if (apiStatus && prevProps.apiStatus != apiStatus && apiStatus.error) {
@@ -481,9 +446,9 @@ class SelectDetailsComponent extends Component {
                                     let subArr = []
                                     let testID = []
                                     let examDates = []
-                                    let subjects=[]
+                                    let subjects = []
                                     _.filter(studentsAndExamData.data.exams, function (o) {
-                                        subArr.push(o.subject+" "+o.examDate)
+                                        subArr.push(o.subject + " " + o.examDate)
                                         testID.push(o.examId)
                                         examDates.push(o.examDate)
                                         subjects.push(o.subject)
@@ -533,7 +498,6 @@ class SelectDetailsComponent extends Component {
                         if (loginData.status && loginData.status == 200) {
                             let loginSaved = await setLoginData(loginData.data)
                             this.setLoginDataLocally(loginData.data)
-                            console.log("callApi", callApi);
                             if (loginSaved) {
                                 if (callApi == 'callScanStatus') {
                                     this.callScanStatus(scanStatusPayload, loginData.data.jwtToken)
@@ -541,7 +505,6 @@ class SelectDetailsComponent extends Component {
                                 else if (callApi == 'callStudentsData') {
                                     this.callStudentsData(loginData.data.jwtToken)
                                 } else if (callApi == 'callAbsentStatus') {
-                                    console.log("helloLogin");
 
                                     this.callAbsentStatus(absentStatusPayload, loginData.data.jwtToken)
                                 }
@@ -570,7 +533,6 @@ class SelectDetailsComponent extends Component {
                     this.setState({ calledScanStaus: false, callApi: '' })
                     if (getScanStatusData.status && getScanStatusData.status == 200) {
                         this.validateAbsentStatusApi()
-                        // this.props.navigation.navigate('AbsentUi')
                     }
                     else {
                         this.setState({
@@ -609,7 +571,7 @@ class SelectDetailsComponent extends Component {
     }
 
     validateFields = () => {
-        const { classListIndex, subIndex, sectionListIndex, sectionValid, selectedDate } = this.state
+        const { classListIndex, subIndex, sectionListIndex, sectionValid } = this.state
         const { scanTypeData } = this.props
         if (classListIndex == -1) {
             this.setState({
@@ -639,34 +601,22 @@ class SelectDetailsComponent extends Component {
             })
             return false
         }
-        else if (scanTypeData.scanType == SCAN_TYPES.PAT_TYPE) {
-            if (subIndex == -1) {
-                this.setState({
-                    errClass: '',
-                    errSection: '',
-                    errSub: Strings.please_select_sub,
-                    errDate: ''
-                })
-                return false
-            }
-            // else if (selectedDate.length == 0) {
-            //     console.log("Subjectsss",selectedDate);
-            //     this.setState({
-            //         errClass: '',
-            //         errSection: '',
-            //         errSub: '',
-            //         errDate: Strings.please_select_date
-            //     })
-            //     return false
-            // }
-            return true
+        if (subIndex == -1) {
+            this.setState({
+                errClass: '',
+                errSection: '',
+                errSub: Strings.please_select_sub,
+                errDate: ''
+            })
+            return false
         }
+
         return true
     }
 
     onSubmitClick = () => {
-        const { selectedClass, selectedClassId, selectedDate, selectedSection, selectedSubject, examTestID, subIndex, examDate, subjectsData } = this.state
-        const { loginData, apiStatus, scanTypeData } = this.props
+        const { selectedClass, selectedClassId, selectedSection, examTestID, subIndex, examDate, subjectsData } = this.state
+        const { loginData } = this.props
         this.setState({
             errClass: '',
             errSub: '',
@@ -704,7 +654,7 @@ class SelectDetailsComponent extends Component {
         this.setState({
             isLoading: false
         })
-        this.props.navigation.navigate('StudentsList')
+        this.props.navigation.push('StudentsList')
     }
 
     setDate = date => {
@@ -738,20 +688,31 @@ class SelectDetailsComponent extends Component {
         }
     }
 
-    render() {
-        const { isLoading, defaultSelected, classList, classListIndex, selectedClass, sectionList, sectionListIndex, selectedSection, pickerDate, selectedDate, subArr, selectedSubject, subIndex, errClass, errSub, errDate, errSection, sectionValid, dateVisible, examTestID } = this.state
-        const { loginData, scanTypeData } = this.props
-        return (
 
+    render() {
+        const { navigation, isLoading, defaultSelected, classList, classListIndex, selectedClass, sectionList, sectionListIndex, selectedSection, pickerDate, selectedDate, subArr, selectedSubject, subIndex, errClass, errSub, errDate, errSection, sectionValid, dateVisible, examTestID } = this.state
+        const { loginData, multiBrandingData } = this.props
+        const BrandLabel = multiBrandingData&&multiBrandingData.screenLabels&&multiBrandingData.screenLabels.selectDetails[0]
+
+        return (
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
-                {/* <HeaderComponent
-                    title={Strings.up_saralData}
-                    logoutHeaderText={Strings.logout_text}
-                    customLogoutTextStyle={{ color: AppTheme.GREY }}
-                    onLogoutClick={this.onLogoutClick}
-                /> */}
-                {(loginData && loginData.data) &&
-                    <View style={{ marginTop: 20 }}>
+                <ShareComponent
+                    navigation={this.props.navigation}
+                    message={this.state.logmessage ? JSON.stringify(this.state.logmessage, null, 2) : ''}
+
+                />
+                {BrandLabel?
+                    <MultibrandLabels
+                         Label1={BrandLabel.School}
+                         Label2={BrandLabel.SchoolId}
+                         School={loginData.data.school.name}
+                         SchoolId={loginData.data.school.schoolId}
+                    />
+
+                    :
+
+                    (loginData && loginData.data) &&
+                    <View style={{ marginTop: 20, width: '60%' }}>
                         <Text
                             style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}
                         >
@@ -768,15 +729,16 @@ class SelectDetailsComponent extends Component {
                                 {loginData.data.school.schoolId}
                             </Text>
                         </Text>
+                        <Text
+                            style={{ fontSize: AppTheme.FONT_SIZE_REGULAR - 3, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', marginBottom: '4%' }}
+                        >
+                            {Strings.version_text + ' : '}
+                            <Text style={{ fontWeight: 'normal' }}>
+                                {apkVersion}
+                            </Text>
+                        </Text>
                     </View>}
-                <Text
-                    style={{ fontSize: AppTheme.FONT_SIZE_REGULAR - 3, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', marginBottom: '4%' }}
-                >
-                    {Strings.version_text + ' : '}
-                    <Text style={{ fontWeight: 'normal' }}>
-                        {apkVersion}
-                    </Text>
-                </Text>
+
                 <ScrollView
                     contentContainerStyle={{ paddingTop: '5%', paddingBottom: '35%' }}
                     showsVerticalScrollIndicator={false}
@@ -790,7 +752,9 @@ class SelectDetailsComponent extends Component {
                         <View style={{ backgroundColor: 'white', paddingHorizontal: '5%', minWidth: '100%', paddingVertical: '10%', borderRadius: 4 }}>
                             <View style={[styles.fieldContainerStyle, { paddingBottom: classListIndex != -1 ? 0 : '10%' }]}>
                                 <View style={{ flexDirection: 'row' }}>
-                                    <Text style={[styles.labelTextStyle]}>{Strings.class_text}</Text>
+                                   
+                                        <Text style={[styles.labelTextStyle]}>{BrandLabel&&BrandLabel.Class ? BrandLabel.Class : Strings.class_text }</Text> 
+                                       
                                     {errClass != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 1, width: '60%', textAlign: 'right', fontWeight: 'normal' }]}>{errClass}</Text>}
                                 </View>
                                 <DropDownMenu
@@ -805,7 +769,9 @@ class SelectDetailsComponent extends Component {
                             {classListIndex != -1 &&
                                 <View style={[styles.fieldContainerStyle, { paddingBottom: sectionListIndex != -1 && sectionValid ? 0 : '10%' }]}>
                                     <View style={{ flexDirection: 'row' }}>
-                                        <Text style={[styles.labelTextStyle]}>{Strings.section}</Text>
+                                       
+                                            <Text style={[styles.labelTextStyle]}>{BrandLabel && BrandLabel.Section ? BrandLabel.Section:Strings.section}</Text> 
+                                        
                                         {errSection != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 1, width: '60%', textAlign: 'right', fontWeight: 'normal' }]}>{errSection}</Text>}
                                     </View>
                                     <DropDownMenu
@@ -818,11 +784,10 @@ class SelectDetailsComponent extends Component {
                                     />
                                 </View>}
                             {
-                                // scanTypeData.scanType == SCAN_TYPES.PAT_TYPE &&
                                 sectionListIndex != -1 && sectionValid &&
                                 <View style={[styles.fieldContainerStyle, { paddingBottom: subIndex != -1 ? '10%' : '10%' }]}>
                                     <View style={{ flexDirection: 'row' }}>
-                                        <Text style={[[styles.labelTextStyle, { width: '50%' }]]}>{Strings.subject}</Text>
+                                    <Text style={[styles.labelTextStyle]}>{BrandLabel && BrandLabel.Subject ? BrandLabel.Subject:Strings.subject}</Text> 
                                         {errSub != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 1, width: '50%', textAlign: 'right', fontWeight: 'normal' }]}>{errSub}</Text>}
                                     </View>
                                     <DropDownMenu
@@ -835,27 +800,19 @@ class SelectDetailsComponent extends Component {
                                     />
                                 </View>
                             }
-                            {/* {
-                            (subIndex != -1 &&  sectionValid)
-                             &&
-                                    <TextField
-                                        customContainerStyle={{ marginHorizontal: 0, paddingBottom: '10%', paddingVertical: '0%', }}
-                                        labelText={Strings.test_id}
-                                        errorField={errDate != ''}
-                                        errorText={errDate}
-                                        value={examTestID[subIndex]}
-                                        editable={false}
-                                        placeholder={Strings.please_select_date}
-                                    />
-                                } */}
-                            <ButtonComponent
-                                customBtnStyle={styles.nxtBtnStyle}
-                                btnText={Strings.submit_text}
-                                onPress={this.onSubmitClick}
-                            />
+
                         </View>
+
                     </View>
+
                 </ScrollView>
+                <View style={styles.btnContainer}>
+                    <ButtonComponent
+                        customBtnStyle={[styles.nxtBtnStyle, { backgroundColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+                        btnText={Strings.submit_text}
+                        onPress={this.onSubmitClick}
+                    />
+                </View>
                 {dateVisible && (
                     <DateTimePicker
                         display="default"
@@ -877,11 +834,14 @@ const styles = {
         marginHorizontal: '6%',
         alignItems: 'center'
     },
+    btnContainer: {
+        paddingVertical: '15%',
+        alignItems: 'center',
+        paddingHorizontal: 10
+    },
     header1TextStyle: {
-        // backgroundColor: AppTheme.WHITE_OPACITY,
         lineHeight: 40,
         borderRadius: 4,
-        // borderWidth: 1,
         borderColor: AppTheme.LIGHT_GREY,
         width: '100%',
         textAlign: 'center',
@@ -902,8 +862,24 @@ const styles = {
         lineHeight: 35
     },
     nxtBtnStyle: {
-        marginHorizontal: '10%',
-    }
+    },
+    imageViewContainer: {
+
+        alignItems: 'flex-end',
+        backgroundColor: '#fff'
+        // justifyContent:'center'
+    },
+    imageContainerStyle: {
+        padding: 5,
+        marginRight: 10,
+        height: 50,
+        width: 50,
+        borderRadius: 45,
+        borderWidth: 1,
+        borderColor: AppTheme.TAB_BORDER,
+        justifyContent: 'center',
+        backgroundColor: AppTheme.TAB_BORDER
+    },
 }
 
 const mapStateToProps = (state) => {
@@ -915,7 +891,9 @@ const mapStateToProps = (state) => {
         apiStatus: state.apiStatus,
         roiData: state.roiData,
         absentStudentDataResponse: state.absentStudentDataResponse,
-        getScanStatusData: state.getScanStatusData
+        getScanStatusData: state.getScanStatusData,
+        multiBrandingData: state.multiBrandingData.response.data,
+        bgFlag: state.bgFlag
     }
 }
 
@@ -923,7 +901,8 @@ const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
         APITransport: APITransport,
         OcrLocalResponseAction: OcrLocalResponseAction,
-        FilteredDataAction: FilteredDataAction
+        FilteredDataAction: FilteredDataAction,
+        LogoutAction: LogoutAction
     }, dispatch)
 }
 

@@ -7,6 +7,7 @@ const Exam = require('../src/models/exams')
 const Marks = require('../src/models/marks')
 const ROI = require('../src/models/roi')
 const Counter = require('../src/models/counter')
+const Brand = require('../src/models/brand')
 
 const dotenv = require('dotenv');
 dotenv.config({ path: './config/dev.env' });
@@ -32,6 +33,7 @@ const exam = JSON.parse(fs.readFileSync(`${__dirname}/exams.json`, 'utf-8'));
 const marks = JSON.parse(fs.readFileSync(`${__dirname}/marks.json`, 'utf-8'));
 const roi = JSON.parse(fs.readFileSync(`${__dirname}/rois.json`, 'utf-8'));
 const counter = JSON.parse(fs.readFileSync(`${__dirname}/counters.json`, 'utf-8'));
+const brand = JSON.parse(fs.readFileSync(`${__dirname}/brands.json`, 'utf-8'));
 
 const importData = async () => {
   try {
@@ -39,9 +41,10 @@ const importData = async () => {
     await ClassModel.create(classes);
     await Student.create(student);
     await Exam.create(exam);
-    await Marks.create(marks);
+    // await Marks.create(marks);
     await ROI.create(roi);
     await Counter.create(counter)
+    await Brand.create(brand)
 
     console.log('Data successfully added');
   } catch (err) {
@@ -58,6 +61,7 @@ const deleteData = async () => {
     await Marks.deleteMany();
     await ROI.deleteMany();
     await Counter.deleteMany()
+    await Brand.deleteMany()
     console.log('Data successfully deleted');
   } catch (err) {
     console.log(err);

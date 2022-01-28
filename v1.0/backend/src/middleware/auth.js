@@ -25,7 +25,7 @@ const basicAuth = async (req, res, next) => {
         basicAuthHeader = (Buffer.from(basicAuthHeader, 'base64')).toString('utf8')
         let loginInfo = basicAuthHeader.split(':'); 
         
-        const school = await School.findByCredentials(loginInfo[0], loginInfo[1])
+        const school = await School.findByCredentials(loginInfo[0].toLowerCase(), loginInfo[1])
         req.school = school
         next()
     } catch (e) {

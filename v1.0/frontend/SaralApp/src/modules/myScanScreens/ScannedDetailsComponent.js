@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 const ScannedDetailsComponent = ({
     ocrLocalResponse
 }) => {
-    console.log("ocrLocalResponse",ocrLocalResponse);
     return (
         <View>
             <Text>ScannedDetailsComponent</Text>
@@ -21,10 +20,5 @@ const mapStateToProps = (state) => {
     }
 }
 
-// const mapDispatchToProps = (dispatch) => {
-//     return bindActionCreators({
-//         OcrLocalResponseAction: OcrLocalResponseAction,
-//     }, dispatch)
-// }
 
 export default (connect(mapStateToProps, null)(ScannedDetailsComponent));

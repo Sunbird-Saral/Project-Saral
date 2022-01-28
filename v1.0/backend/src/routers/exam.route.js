@@ -5,12 +5,13 @@ const { getSubjectCode } = require('../utils/commonUtils')
 const Counter = require('../models/counter')
 const router = new express.Router()
 
-router.post('/addExamsByClass', auth, async (req, res) => {
+router.post('/exam', auth, async (req, res) => {
     const body = [...req.body]
     const exams = []
     let schoolId = req.school.schoolId
 
     for (let i = 0; i < body.length; i++) {
+        body[i].type = body[i].type.toUpperCase()
         let examExist = await Exam.find({ schoolId, classId: body[i].classId, examDate: body[i].examDate, subject: body[i].subject })
         if (examExist.length) continue
         let examId = await Counter.getValueForNextSequence("examId")
@@ -35,7 +36,7 @@ router.post('/addExamsByClass', auth, async (req, res) => {
 })
 
 
-router.get('/getExamsByClas/:classId', auth, async (req, res) => {
+router.get('/examByClass/:classId', auth, async (req, res) => {
     const match = {
         schoolId: req.school.schoolId,
         classId: req.params.classId
@@ -52,7 +53,7 @@ router.get('/getExamsByClas/:classId', auth, async (req, res) => {
         const exams = await Exam.find(match, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 }).lean()
 
         if (!exams.length) {
-            res.status(404).send({ "message": `Exam dose not exist for ${req.params.classId}` })
+            return res.status(404).send({ "message": `Exam dose not exist for ${req.params.classId}` })
         }
         res.send(exams)
     }
@@ -62,14 +63,15 @@ router.get('/getExamsByClas/:classId', auth, async (req, res) => {
     }
 })
 
-router.delete('/deleteExamByExamIdAndClassId/:examId', auth, async (req, res) => {
+router.delete('/exam/:examId', auth, async (req, res) => {
     try {
         const exam = await Exam.findOneAndDelete({ examId: req.params.examId }).lean()
 
-        if (!exam) {
+        if (exam) {
+            res.status(200).send({ "message": "Exam has been deleted successfully." })
+        }else{
             res.status(404).send({ "message": 'Exam Id does not exist.' })
         }
-        res.status(200).send({ "message": "Exam has been deleted successfully." })
     }
     catch (e) {
         console.log(e);
@@ -78,7 +80,7 @@ router.delete('/deleteExamByExamIdAndClassId/:examId', auth, async (req, res) =>
 
 })
 
-router.patch('/updateExam/:examId', auth, async (req, res) => {
+router.patch('/exam/:examId', auth, async (req, res) => {
     try {
         const updates = Object.keys(req.body)
         const allowedUpdates = ['subject', 'examLO', 'examDate', 'totalMarks', 'questions']

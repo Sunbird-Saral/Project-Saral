@@ -3,8 +3,6 @@ import { View, Text, TextInput } from 'react-native';
 import AppTheme from '../../utils/AppTheme';
 import Strings from '../../utils/Strings'
 import TextField from '../common/components/TextField'
-
-
 const NumeracyScanCard = ({
     studentIndex,
     rollNumber,

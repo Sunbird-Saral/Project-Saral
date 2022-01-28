@@ -1,77 +1,176 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, View,BackHandler } from 'react-native';
 
 //redux
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 //constant
 import AppTheme from '../../utils/AppTheme';
+import { getScannedDataFromLocal,getErrorMessage } from '../../utils/StorageUtils';
 import Strings from '../../utils/Strings';
 
 //component
-import HeaderComponent from '../common/components/HeaderComponent';
+import Spinner from '../common/components/loadingIndicator';
 import ScanHistoryCard from './ScanHistoryCard';
+import ButtonComponent from '../common/components/ButtonComponent';
+import ShareComponent from '../common/components/Share';
+import APITransport from '../../flux/actions/transport/apitransport';
+import { collectErrorLogs } from '../CollectErrorLogs';
+import MultibrandLabels from '../common/components/multibrandlabels';
 
+import { ScrollView } from 'react-native-gesture-handler';
 const ScanHistory = ({
     loginData,
-    navigation
+    navigation,
+    apiStatus,
+    multiBrandingData,
+    filteredData
 }) => {
+
+    //Hooks
+    const [isLoading, setIsLoading] = useState(false)
+    const [scanStatusData, setScanStatusData] = useState(false)
+    const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.scanHistory[0]
+    //functions
+        useEffect(() => {
+        sumOfLocalData()
+    }, [])
+
+    const sumOfLocalData = async () => {
+        const data = await getScannedDataFromLocal()
+
+        if (data != null) {
+            let filter = data.filter((e) => {
+                let findSection = false
+                findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.section)
+
+                if (filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject && findSection) {
+                    return true
+                } else {
+                    return false
+                }
+            })
+
+
+            let len = 0
+
+            filter.forEach((element, index) => {
+                len = len + element.studentsMarkInfo.length
+            });
+            setScanStatusData(len)
+        } else {
+            setScanStatusData(0)
+        }
+    }
+
+    useEffect(
+        React.useCallback(() => {
+            const onBackPress = () => {
+                navigation.navigate('');
+                return true;
+            };
+            BackHandler.addEventListener('hardwareBackPress', onBackPress);
+            return () =>
+                BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+        }, []),
+    );
 
     return (
         <View style={styles.container}>
-            {/* <HeaderComponent
-                title={Strings.up_saralData}
-                customLogoutTextStyle={{ color: AppTheme.GREY }}
-                versionText={apkVersion}
-            /> */}
-
-            {
-                (loginData && loginData.data)
-                &&
-                <View style={{ marginTop: 20 }}>
-                    <Text
-                        style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}>
-                        {Strings.school_name + ' Name : '}
-                        <Text style={{ fontWeight: 'normal' }}>
-                            {loginData.data.school.name}
+              <ShareComponent
+                 navigation={navigation}
+                 />
+            
+                 <View>
+                 {( BrandLabel) ?
+                <MultibrandLabels
+                Label1={BrandLabel.School}
+                Label2={BrandLabel.SchoolId}
+                School ={loginData.data.school.name}
+                SchoolId={loginData.data.school.schoolId}
+                />:
+                    (loginData && loginData.data)
+                    &&
+                    <View style={{ width:'60%' }}>
+                        <Text
+                            style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}
+                        >
+                            {Strings.school_name + ' : '}
+                            <Text style={{ fontWeight: 'normal' }}>
+                                {loginData.data.school.name}
+                            </Text>
                         </Text>
-                    </Text>
+                        <Text
+                            style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}>
+                        </Text>
+                    </View>
+                }
                 </View>
-            }
-
-
+            <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styles.container1}>
-                <Text style={styles.header1TextStyle}>
+                <Text style={[styles.header1TextStyle, { borderColor: multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE, backgroundColor: multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE }]}>
                     {Strings.ongoing_scan}
                 </Text>
             </View>
+            {
+                apiStatus.unauthorized
+                &&
+                <Text style={{ color: AppTheme.ERROR_RED, marginLeft: 40, fontWeight: 'bold' }}>Roi Doesn't Exist</Text>
+            }
 
             <ScanHistoryCard
-                showButtons={true}
+                showButtons={apiStatus.unauthorized ? false : true}
+                scanstatusbutton={false}
                 navigation={navigation}
+                themeColor1={multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}
+                isLoading={isLoading}
+                setIsLoading={setIsLoading}
+                scanStatusData={scanStatusData}
+                setScanStatusData={setScanStatusData}
             />
+            
+            <ButtonComponent
+                customBtnStyle={[styles.nxtBtnStyle, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+                btnText={Strings.Back.toUpperCase()}
+                activeOpacity={0.8}
+                onPress={() => navigation.push('StudentsList')}
+            />
+            </ScrollView>
+
+
+            {isLoading && <Spinner animating={isLoading} />}
 
         </View>
     );
 }
 const mapStateToProps = (state) => {
     return {
-        filteredData: state.filteredData,
-        loginData: state.loginData
+        filteredData: state.filteredData.response,
+        loginData: state.loginData,
+        apiStatus: state.apiStatus,
+        roiData: state.roiData.response,
+        multiBrandingData: state.multiBrandingData.response.data
     }
 }
 
-export default connect(mapStateToProps, null)(ScanHistory);
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({
+        collectErrorLogs: collectErrorLogs
+    }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ScanHistory);
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white'
+        backgroundColor: AppTheme.WHITE_OPACITY
     },
     container1: {
         marginHorizontal: '4%',
         alignItems: 'center',
-        paddingVertical: '4%'
+        // marginTop:30
     },
     header1TextStyle: {
         backgroundColor: AppTheme.LIGHT_BLUE,
@@ -85,4 +184,5 @@ const styles = StyleSheet.create({
         color: AppTheme.BLACK,
         letterSpacing: 1
     },
+    nxtBtnStyle:{ marginHorizontal: 40, marginTop: 20, borderRadius: 10, }
 });

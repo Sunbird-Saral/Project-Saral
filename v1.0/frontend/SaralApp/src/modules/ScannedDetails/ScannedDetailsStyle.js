@@ -7,7 +7,6 @@ export const styles = {
         marginHorizontal: '5%',
         justifyContent: 'center',
         alignItems: 'center',
-        // backgroundColor: 'yellow'
     },
     header1TextStyle: {
         padding: '5%',
@@ -16,12 +15,14 @@ export const styles = {
         color: AppTheme.BLACK,
         letterSpacing: 1,
     },
+    row: {
+        flexDirection: 'row'
+    },
     container2: {
         flex: 1,
         borderRadius: 4,
         elevation: 4,
         marginHorizontal: '5%',
-        // paddingBottom: '5%',
         backgroundColor: AppTheme.WHITE,
     },
     cancelBtnStyle: {
@@ -51,7 +52,6 @@ export const styles = {
         backgroundColor: 'transparent',
         width: '60%',
         borderWidth: 1,
-        borderColor: AppTheme.BLUE
     },
     nxtBtnTextStyle: {
         color: AppTheme.BLUE
@@ -72,12 +72,11 @@ export const styles = {
         width: '90%',
         borderBottomWidth: 1,
         borderBottomColor: AppTheme.LIGHT_GREY,
-        paddingBottom:10
+        paddingBottom: 10
     },
     imageViewContainer: {
         width: '30%',
         height: '100%',
-        // paddingTop: '4%',
         marginRight: '1%'
     },
     imageContainerStyle: {
@@ -92,8 +91,6 @@ export const styles = {
     imageStyle: {
         height: '90%',
         width: '90%',
-
-        // borderRadius: 45
     },
     deatilsViewContainer: {
         width: '70%',
@@ -126,4 +123,48 @@ export const styles = {
         letterSpacing: 1,
         lineHeight: 35
     },
+    viewnxtBtnStyle1: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    nxtBtnStyle1: {
+        width: '45%',
+        marginHorizontal: 5,
+        marginBottom: 20,
+        borderRadius: 10
+    },
+    tabLabelStyle: {
+        height: 70,
+        lineHeight: 20,
+        fontSize: AppTheme.FONT_SIZE_SMALL,
+        color: AppTheme.BLACK,
+        letterSpacing: 1,
+        fontWeight: 'bold'
+    },
+    subTabContainerStyle: {
+        marginBottom: -60,
+        paddingHorizontal: 20,
+        paddingTop: 20,
+        height: 90,
+        borderRadius: 100,
+        margin: 10
+    },
+    scanTabContainerStyle: {
+        width: 80,
+        height: 80,
+        position: 'absolute',
+        borderRadius: 40,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    scanSubTabContainerStyle: {
+        width: '90%',
+        height: '90%',
+        marginBottom: 30,
+        backgroundColor: AppTheme.BLUE,
+        borderRadius: 45,
+        justifyContent: 'center',
+        alignItems: 'center'
+    }
 }

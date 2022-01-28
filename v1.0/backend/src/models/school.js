@@ -25,43 +25,21 @@ const schoolSchema = new mongoose.Schema({
             }
         }
     },
-    udiseCode: {
-        type: String,
-        required: true,
-        trim: true,
-    },
     state:{
         type: String,
         required: true,
         trim: true
     },
-    district: {
-        type: String,
-        required: true,
-        trim: true
+    storeTrainingData:{
+        type: Boolean,
+        default: false,
     },
-    block: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    hmName: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    hmMobileNo: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    noOfStudents: {
-        type: String,
-        required: true,
-        trim: true
+    autoSync:{
+        type: Boolean,
+        required:false
     }
 }, {
-    timestamps: true
+    timestamps: false
 })
 
 //instance method
@@ -87,7 +65,7 @@ schoolSchema.methods.toJSON = function () {
 //model method created
 schoolSchema.statics.findByCredentials = async (schoolId, password) => {
     
-    const school = await School.findOne({ schoolId })
+    const school = await School.findOne({ schoolId },{__v: 0})
     
     if(!school) {
         throw new Error('School Id or Password is not correct.')

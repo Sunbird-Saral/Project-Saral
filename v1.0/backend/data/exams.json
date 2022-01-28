@@ -4,6 +4,7 @@
   "classId": "2",
   "examDate": "23/09/2021",
   "totalMarks": 20,
+  "type": "hindi_4s_20q_omr",
   "questions": [
     {
       "questionId": "1",
@@ -104,66 +105,17 @@
       "questionId": "20",
       "indicatorTitle": "L0-20",
       "questionMarks": "1"
-    },
-    {
-      "questionId": "21",
-      "indicatorTitle": "L0-21",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "22",
-      "indicatorTitle": "L0-22",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "23",
-      "indicatorTitle": "L0-23",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "24",
-      "indicatorTitle": "L0-24",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "25",
-      "indicatorTitle": "L0-25",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "26",
-      "indicatorTitle": "L0-26",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "27",
-      "indicatorTitle": "L0-27",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "28",
-      "indicatorTitle": "L0-28",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "29",
-      "indicatorTitle": "L0-29",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "30",
-      "indicatorTitle": "L0-30",
-      "questionMarks": "1"
     }
   ],
   "examId": 1,
-  "schoolId": "1"
+  "schoolId": "u001"
 },{
   "subject": "Hindi",
   "examLO": "Hindi",
   "classId": "3",
   "examDate": "24/09/2021",
   "totalMarks": 20,
+  "type": "hindi_3s_30q_omr",
   "questions": [
     {
       "questionId": "1",
@@ -317,653 +269,275 @@
     }
   ],
   "examId": 2,
-  "schoolId": "1"
+  "schoolId": "u001"
 },{
-  "subject": "Maths",
-  "examLO": "Maths",
-  "classId": "3",
-  "examDate": "25/09/2021",
-  "totalMarks": 20,
-  "questions": [
-    {
-      "questionId": "1",
-      "indicatorTitle": "L0-1",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "2",
-      "indicatorTitle": "L0-2",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "3",
-      "indicatorTitle": "L0-3",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "4",
-      "indicatorTitle": "L0-4",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "5",
-      "indicatorTitle": "L0-5",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "6",
-      "indicatorTitle": "L0-6",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "7",
-      "indicatorTitle": "L0-7",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "8",
-      "indicatorTitle": "L0-8",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "9",
-      "indicatorTitle": "L0-9",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "10",
-      "indicatorTitle": "L0-10",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "11",
-      "indicatorTitle": "L0-11",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "12",
-      "indicatorTitle": "L0-12",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "13",
-      "indicatorTitle": "L0-13",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "14",
-      "indicatorTitle": "L0-14",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "15",
-      "indicatorTitle": "L0-15",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "16",
-      "indicatorTitle": "L0-16",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "17",
-      "indicatorTitle": "L0-17",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "18",
-      "indicatorTitle": "L0-18",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "19",
-      "indicatorTitle": "L0-19",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "20",
-      "indicatorTitle": "L0-20",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "21",
-      "indicatorTitle": "L0-21",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "22",
-      "indicatorTitle": "L0-22",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "23",
-      "indicatorTitle": "L0-23",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "24",
-      "indicatorTitle": "L0-24",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "25",
-      "indicatorTitle": "L0-25",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "26",
-      "indicatorTitle": "L0-26",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "27",
-      "indicatorTitle": "L0-27",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "28",
-      "indicatorTitle": "L0-28",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "29",
-      "indicatorTitle": "L0-29",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "30",
-      "indicatorTitle": "L0-30",
-      "questionMarks": "1"
-    }
-  ],
-  "examId": 3,
-  "schoolId": "1"
-},{
-  "subject": "Maths",
-  "examLO": "Maths",
-  "classId": "4",
-  "examDate": "26/09/2021",
-  "totalMarks": 20,
-  "questions": [
-    {
-      "questionId": "1",
-      "indicatorTitle": "L0-1",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "2",
-      "indicatorTitle": "L0-2",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "3",
-      "indicatorTitle": "L0-3",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "4",
-      "indicatorTitle": "L0-4",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "5",
-      "indicatorTitle": "L0-5",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "6",
-      "indicatorTitle": "L0-6",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "7",
-      "indicatorTitle": "L0-7",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "8",
-      "indicatorTitle": "L0-8",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "9",
-      "indicatorTitle": "L0-9",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "10",
-      "indicatorTitle": "L0-10",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "11",
-      "indicatorTitle": "L0-11",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "12",
-      "indicatorTitle": "L0-12",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "13",
-      "indicatorTitle": "L0-13",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "14",
-      "indicatorTitle": "L0-14",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "15",
-      "indicatorTitle": "L0-15",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "16",
-      "indicatorTitle": "L0-16",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "17",
-      "indicatorTitle": "L0-17",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "18",
-      "indicatorTitle": "L0-18",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "19",
-      "indicatorTitle": "L0-19",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "20",
-      "indicatorTitle": "L0-20",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "21",
-      "indicatorTitle": "L0-21",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "22",
-      "indicatorTitle": "L0-22",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "23",
-      "indicatorTitle": "L0-23",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "24",
-      "indicatorTitle": "L0-24",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "25",
-      "indicatorTitle": "L0-25",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "26",
-      "indicatorTitle": "L0-26",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "27",
-      "indicatorTitle": "L0-27",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "28",
-      "indicatorTitle": "L0-28",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "29",
-      "indicatorTitle": "L0-29",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "30",
-      "indicatorTitle": "L0-30",
-      "questionMarks": "1"
-    }
-  ],
-  "examId": 4,
-  "schoolId": "1"
-},{
-  "subject": "Maths",
-  "examLO": "Maths",
-  "classId": "5",
-  "examDate": "27/09/2021",
-  "totalMarks": 20,
-  "questions": [
-    {
-      "questionId": "1",
-      "indicatorTitle": "L0-1",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "2",
-      "indicatorTitle": "L0-2",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "3",
-      "indicatorTitle": "L0-3",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "4",
-      "indicatorTitle": "L0-4",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "5",
-      "indicatorTitle": "L0-5",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "6",
-      "indicatorTitle": "L0-6",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "7",
-      "indicatorTitle": "L0-7",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "8",
-      "indicatorTitle": "L0-8",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "9",
-      "indicatorTitle": "L0-9",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "10",
-      "indicatorTitle": "L0-10",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "11",
-      "indicatorTitle": "L0-11",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "12",
-      "indicatorTitle": "L0-12",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "13",
-      "indicatorTitle": "L0-13",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "14",
-      "indicatorTitle": "L0-14",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "15",
-      "indicatorTitle": "L0-15",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "16",
-      "indicatorTitle": "L0-16",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "17",
-      "indicatorTitle": "L0-17",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "18",
-      "indicatorTitle": "L0-18",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "19",
-      "indicatorTitle": "L0-19",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "20",
-      "indicatorTitle": "L0-20",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "21",
-      "indicatorTitle": "L0-21",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "22",
-      "indicatorTitle": "L0-22",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "23",
-      "indicatorTitle": "L0-23",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "24",
-      "indicatorTitle": "L0-24",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "25",
-      "indicatorTitle": "L0-25",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "26",
-      "indicatorTitle": "L0-26",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "27",
-      "indicatorTitle": "L0-27",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "28",
-      "indicatorTitle": "L0-28",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "29",
-      "indicatorTitle": "L0-29",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "30",
-      "indicatorTitle": "L0-30",
-      "questionMarks": "1"
-    }
-  ],
-  "examId": 5,
-  "schoolId": "1"
-},{
-  "subject": "Hindi",
-  "examLO": "Hindi",
+  "subject": "Multi-Subject",
+  "examLO": "Multi-Subject",
   "classId": "4",
   "examDate": "28/09/2021",
   "totalMarks": 20,
+  "type": "multisubject_1s_10q",
   "questions": [
     {
       "questionId": "1",
-      "indicatorTitle": "L0-1",
-      "questionMarks": "1"
+      "indicatorTitle": "HINDI-L0-1",
+      "questionMarks": "5"
     },
     {
       "questionId": "2",
-      "indicatorTitle": "L0-2",
-      "questionMarks": "1"
+      "indicatorTitle": "HINDI-L0-2",
+      "questionMarks": "5"
     },
     {
       "questionId": "3",
-      "indicatorTitle": "L0-3",
-      "questionMarks": "1"
+      "indicatorTitle": "HINDI-L0-3",
+      "questionMarks": "5"
     },
     {
       "questionId": "4",
-      "indicatorTitle": "L0-4",
-      "questionMarks": "1"
+      "indicatorTitle": "HINDI-L0-4",
+      "questionMarks": "5"
     },
     {
       "questionId": "5",
-      "indicatorTitle": "L0-5",
-      "questionMarks": "1"
+      "indicatorTitle": "HINDI-L0-5",
+      "questionMarks": "5"
     },
     {
       "questionId": "6",
-      "indicatorTitle": "L0-6",
-      "questionMarks": "1"
+      "indicatorTitle": "HINDI-L0-6",
+      "questionMarks": "5"
     },
     {
       "questionId": "7",
-      "indicatorTitle": "L0-7",
-      "questionMarks": "1"
+      "indicatorTitle": "HINDI-L0-7",
+      "questionMarks": "5"
     },
     {
       "questionId": "8",
-      "indicatorTitle": "L0-8",
-      "questionMarks": "1"
+      "indicatorTitle": "HINDI-L0-8",
+      "questionMarks": "5"
     },
     {
       "questionId": "9",
-      "indicatorTitle": "L0-9",
-      "questionMarks": "1"
+      "indicatorTitle": "HINDI-L0-9",
+      "questionMarks": "5"
     },
     {
       "questionId": "10",
-      "indicatorTitle": "L0-10",
-      "questionMarks": "1"
+      "indicatorTitle": "HINDI-L0-10",
+      "questionMarks": "5"
     },
     {
       "questionId": "11",
-      "indicatorTitle": "L0-11",
-      "questionMarks": "1"
+      "indicatorTitle": "ENGLISH-L0-11",
+      "questionMarks": "5"
     },
     {
       "questionId": "12",
-      "indicatorTitle": "L0-12",
-      "questionMarks": "1"
+      "indicatorTitle": "ENGLISH-L0-12",
+      "questionMarks": "5"
     },
     {
       "questionId": "13",
-      "indicatorTitle": "L0-13",
-      "questionMarks": "1"
+      "indicatorTitle": "ENGLISH-L0-13",
+      "questionMarks": "5"
     },
     {
       "questionId": "14",
-      "indicatorTitle": "L0-14",
-      "questionMarks": "1"
+      "indicatorTitle": "ENGLISH-L0-14",
+      "questionMarks": "5"
     },
     {
       "questionId": "15",
-      "indicatorTitle": "L0-15",
-      "questionMarks": "1"
+      "indicatorTitle": "ENGLISH-L0-15",
+      "questionMarks": "5"
     },
     {
       "questionId": "16",
-      "indicatorTitle": "L0-16",
-      "questionMarks": "1"
+      "indicatorTitle": "ENGLISH-L0-16",
+      "questionMarks": "5"
     },
     {
       "questionId": "17",
-      "indicatorTitle": "L0-17",
-      "questionMarks": "1"
+      "indicatorTitle": "ENGLISH-L0-17",
+      "questionMarks": "5"
     },
     {
       "questionId": "18",
-      "indicatorTitle": "L0-18",
-      "questionMarks": "1"
+      "indicatorTitle": "ENGLISH-L0-18",
+      "questionMarks": "5"
     },
     {
       "questionId": "19",
-      "indicatorTitle": "L0-19",
-      "questionMarks": "1"
+      "indicatorTitle": "ENGLISH-L0-19",
+      "questionMarks": "5"
     },
     {
       "questionId": "20",
-      "indicatorTitle": "L0-20",
-      "questionMarks": "1"
+      "indicatorTitle": "ENGLISH-L0-20",
+      "questionMarks": "5"
     },
     {
       "questionId": "21",
-      "indicatorTitle": "L0-21",
-      "questionMarks": "1"
+      "indicatorTitle": "MATHS-L0-21",
+      "questionMarks": "5"
     },
     {
       "questionId": "22",
-      "indicatorTitle": "L0-22",
-      "questionMarks": "1"
+      "indicatorTitle": "MATHS-L0-22",
+      "questionMarks": "5"
     },
     {
       "questionId": "23",
-      "indicatorTitle": "L0-23",
-      "questionMarks": "1"
+      "indicatorTitle": "MATHS-L0-23",
+      "questionMarks": "5"
     },
     {
       "questionId": "24",
-      "indicatorTitle": "L0-24",
-      "questionMarks": "1"
+      "indicatorTitle": "MATHS-L0-24",
+      "questionMarks": "5"
     },
     {
       "questionId": "25",
-      "indicatorTitle": "L0-25",
-      "questionMarks": "1"
+      "indicatorTitle": "MATHS-L0-25",
+      "questionMarks": "5"
     },
     {
       "questionId": "26",
-      "indicatorTitle": "L0-26",
-      "questionMarks": "1"
+      "indicatorTitle": "MATHS-L0-26",
+      "questionMarks": "5"
     },
     {
       "questionId": "27",
-      "indicatorTitle": "L0-27",
-      "questionMarks": "1"
+      "indicatorTitle": "MATHS-L0-27",
+      "questionMarks": "5"
     },
     {
       "questionId": "28",
-      "indicatorTitle": "L0-28",
-      "questionMarks": "1"
+      "indicatorTitle": "MATHS-L0-28",
+      "questionMarks": "5"
     },
     {
       "questionId": "29",
-      "indicatorTitle": "L0-29",
-      "questionMarks": "1"
+      "indicatorTitle": "MATHS-L0-29",
+      "questionMarks": "5"
     },
     {
       "questionId": "30",
-      "indicatorTitle": "L0-30",
-      "questionMarks": "1"
+      "indicatorTitle": "MATHS-L0-30",
+      "questionMarks": "5"
+    },
+    {
+      "questionId": "31",
+      "indicatorTitle": "EVS-L0-31",
+      "questionMarks": "5"
+    },
+    {
+      "questionId": "32",
+      "indicatorTitle": "EVS-L0-32",
+      "questionMarks": "5"
+    },
+    {
+      "questionId": "33",
+      "indicatorTitle": "EVS-L0-33",
+      "questionMarks": "5"
+    },
+    {
+      "questionId": "34",
+      "indicatorTitle": "EVS-L0-34",
+      "questionMarks": "5"
+    },
+    {
+      "questionId": "35",
+      "indicatorTitle": "EVS-L0-35",
+      "questionMarks": "5"
+    },
+    {
+      "questionId": "36",
+      "indicatorTitle": "EVS-L0-36",
+      "questionMarks": "5"
+    },
+    {
+      "questionId": "37",
+      "indicatorTitle": "EVS-L0-37",
+      "questionMarks": "5"
+    },
+    {
+      "questionId": "38",
+      "indicatorTitle": "EVS-L0-38",
+      "questionMarks": "5"
+    },
+    {
+      "questionId": "39",
+      "indicatorTitle": "EVS-L0-39",
+      "questionMarks": "5"
+    },
+    {
+      "questionId": "40",
+      "indicatorTitle": "EVS-L0-40",
+      "questionMarks": "5"
+    },
+    {
+      "questionId": "41",
+      "indicatorTitle": "SCIENCE-L0-41",
+      "questionMarks": "5"
+    },
+    {
+      "questionId": "42",
+      "indicatorTitle": "SCIENCE-L0-42",
+      "questionMarks": "5"
+    },
+    {
+      "questionId": "43",
+      "indicatorTitle": "SCIENCE-L0-43",
+      "questionMarks": "5"
+    },
+    {
+      "questionId": "44",
+      "indicatorTitle": "SCIENCE-L0-44",
+      "questionMarks": "5"
+    },
+    {
+      "questionId": "45",
+      "indicatorTitle": "SCIENCE-L0-45",
+      "questionMarks": "5"
+    },
+    {
+      "questionId": "46",
+      "indicatorTitle": "SCIENCE-L0-46",
+      "questionMarks": "5"
+    },
+    {
+      "questionId": "47",
+      "indicatorTitle": "SCIENCE-L0-47",
+      "questionMarks": "5"
+    },
+    {
+      "questionId": "48",
+      "indicatorTitle": "SCIENCE-L0-48",
+      "questionMarks": "5"
+    },
+    {
+      "questionId": "49",
+      "indicatorTitle": "SCIENCE-L0-49",
+      "questionMarks": "5"
+    },
+    {
+      "questionId": "50",
+      "indicatorTitle": "SCIENCE-L0-50",
+      "questionMarks": "5"
     }
   ],
-  "examId": 6,
-  "schoolId": "1"
+  "examId": 3,
+  "schoolId": "u001"
 },{
   "subject": "Hindi",
   "examLO": "Hindi",
   "classId": "5",
   "examDate": "29/09/2021",
   "totalMarks": 20,
+  "type": "hindi_4s_20q_omr",
   "questions": [
     {
       "questionId": "1",
@@ -1064,66 +638,17 @@
       "questionId": "20",
       "indicatorTitle": "L0-20",
       "questionMarks": "1"
-    },
-    {
-      "questionId": "21",
-      "indicatorTitle": "L0-21",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "22",
-      "indicatorTitle": "L0-22",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "23",
-      "indicatorTitle": "L0-23",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "24",
-      "indicatorTitle": "L0-24",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "25",
-      "indicatorTitle": "L0-25",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "26",
-      "indicatorTitle": "L0-26",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "27",
-      "indicatorTitle": "L0-27",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "28",
-      "indicatorTitle": "L0-28",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "29",
-      "indicatorTitle": "L0-29",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "30",
-      "indicatorTitle": "L0-30",
-      "questionMarks": "1"
     }
   ],
-  "examId": 7,
-  "schoolId": "1"
+  "examId": 4,
+  "schoolId": "u001"
 },{
   "subject": "Hindi",
   "examLO": "Hindi",
   "classId": "6",
   "examDate": "28/09/2021",
   "totalMarks": 20,
+  "type": "hindi_4s_20q_omr",
   "questions": [
     {
       "questionId": "1",
@@ -1224,66 +749,17 @@
       "questionId": "20",
       "indicatorTitle": "L0-20",
       "questionMarks": "1"
-    },
-    {
-      "questionId": "21",
-      "indicatorTitle": "L0-21",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "22",
-      "indicatorTitle": "L0-22",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "23",
-      "indicatorTitle": "L0-23",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "24",
-      "indicatorTitle": "L0-24",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "25",
-      "indicatorTitle": "L0-25",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "26",
-      "indicatorTitle": "L0-26",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "27",
-      "indicatorTitle": "L0-27",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "28",
-      "indicatorTitle": "L0-28",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "29",
-      "indicatorTitle": "L0-29",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "30",
-      "indicatorTitle": "L0-30",
-      "questionMarks": "1"
     }
   ],
-  "examId": 8,
-  "schoolId": "1"
+  "examId": 5,
+  "schoolId": "u001"
 },{
   "subject": "Hindi",
   "examLO": "Hindi",
   "classId": "7",
   "examDate": "29/09/2021",
   "totalMarks": 20,
+  "type": "hindi_4s_20q_omr",
   "questions": [
     {
       "questionId": "1",
@@ -1384,700 +860,604 @@
       "questionId": "20",
       "indicatorTitle": "L0-20",
       "questionMarks": "1"
-    },
-    {
-      "questionId": "21",
-      "indicatorTitle": "L0-21",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "22",
-      "indicatorTitle": "L0-22",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "23",
-      "indicatorTitle": "L0-23",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "24",
-      "indicatorTitle": "L0-24",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "25",
-      "indicatorTitle": "L0-25",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "26",
-      "indicatorTitle": "L0-26",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "27",
-      "indicatorTitle": "L0-27",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "28",
-      "indicatorTitle": "L0-28",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "29",
-      "indicatorTitle": "L0-29",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "30",
-      "indicatorTitle": "L0-30",
-      "questionMarks": "1"
     }
   ],
-  "examId": 9,
-  "schoolId": "1"
+  "examId": 6,
+  "schoolId": "u001"
 },{
-  "subject": "Hindi",
-  "examLO": "Hindi",
+  "subject": "Multi-Subject",
+  "examLO": "Multi-Subject",
   "classId": "8",
   "examDate": "29/09/2021",
   "totalMarks": 20,
+  "type": "multisubject_1s_10q",
   "questions": [
     {
       "questionId": "1",
-      "indicatorTitle": "L0-1",
-      "questionMarks": "1"
+      "indicatorTitle": "HINDI-L0-1",
+      "questionMarks": "5"
     },
     {
       "questionId": "2",
-      "indicatorTitle": "L0-2",
-      "questionMarks": "1"
+      "indicatorTitle": "HINDI-L0-2",
+      "questionMarks": "5"
     },
     {
       "questionId": "3",
-      "indicatorTitle": "L0-3",
-      "questionMarks": "1"
+      "indicatorTitle": "HINDI-L0-3",
+      "questionMarks": "5"
     },
     {
       "questionId": "4",
-      "indicatorTitle": "L0-4",
-      "questionMarks": "1"
+      "indicatorTitle": "HINDI-L0-4",
+      "questionMarks": "5"
     },
     {
       "questionId": "5",
-      "indicatorTitle": "L0-5",
-      "questionMarks": "1"
+      "indicatorTitle": "HINDI-L0-5",
+      "questionMarks": "5"
     },
     {
       "questionId": "6",
-      "indicatorTitle": "L0-6",
-      "questionMarks": "1"
+      "indicatorTitle": "HINDI-L0-6",
+      "questionMarks": "5"
     },
     {
       "questionId": "7",
-      "indicatorTitle": "L0-7",
-      "questionMarks": "1"
+      "indicatorTitle": "HINDI-L0-7",
+      "questionMarks": "5"
     },
     {
       "questionId": "8",
-      "indicatorTitle": "L0-8",
-      "questionMarks": "1"
+      "indicatorTitle": "HINDI-L0-8",
+      "questionMarks": "5"
     },
     {
       "questionId": "9",
-      "indicatorTitle": "L0-9",
-      "questionMarks": "1"
+      "indicatorTitle": "HINDI-L0-9",
+      "questionMarks": "5"
     },
     {
       "questionId": "10",
-      "indicatorTitle": "L0-10",
-      "questionMarks": "1"
+      "indicatorTitle": "HINDI-L0-10",
+      "questionMarks": "5"
     },
     {
       "questionId": "11",
-      "indicatorTitle": "L0-11",
-      "questionMarks": "1"
+      "indicatorTitle": "ENGLISH-L0-11",
+      "questionMarks": "5"
     },
     {
       "questionId": "12",
-      "indicatorTitle": "L0-12",
-      "questionMarks": "1"
+      "indicatorTitle": "ENGLISH-L0-12",
+      "questionMarks": "5"
     },
     {
       "questionId": "13",
-      "indicatorTitle": "L0-13",
-      "questionMarks": "1"
+      "indicatorTitle": "ENGLISH-L0-13",
+      "questionMarks": "5"
     },
     {
       "questionId": "14",
-      "indicatorTitle": "L0-14",
-      "questionMarks": "1"
+      "indicatorTitle": "ENGLISH-L0-14",
+      "questionMarks": "5"
     },
     {
       "questionId": "15",
-      "indicatorTitle": "L0-15",
-      "questionMarks": "1"
+      "indicatorTitle": "ENGLISH-L0-15",
+      "questionMarks": "5"
     },
     {
       "questionId": "16",
-      "indicatorTitle": "L0-16",
-      "questionMarks": "1"
+      "indicatorTitle": "ENGLISH-L0-16",
+      "questionMarks": "5"
     },
     {
       "questionId": "17",
-      "indicatorTitle": "L0-17",
-      "questionMarks": "1"
+      "indicatorTitle": "ENGLISH-L0-17",
+      "questionMarks": "5"
     },
     {
       "questionId": "18",
-      "indicatorTitle": "L0-18",
-      "questionMarks": "1"
+      "indicatorTitle": "ENGLISH-L0-18",
+      "questionMarks": "5"
     },
     {
       "questionId": "19",
-      "indicatorTitle": "L0-19",
-      "questionMarks": "1"
+      "indicatorTitle": "ENGLISH-L0-19",
+      "questionMarks": "5"
     },
     {
       "questionId": "20",
-      "indicatorTitle": "L0-20",
-      "questionMarks": "1"
+      "indicatorTitle": "ENGLISH-L0-20",
+      "questionMarks": "5"
     },
     {
       "questionId": "21",
-      "indicatorTitle": "L0-21",
-      "questionMarks": "1"
+      "indicatorTitle": "MATHS-L0-21",
+      "questionMarks": "5"
     },
     {
       "questionId": "22",
-      "indicatorTitle": "L0-22",
-      "questionMarks": "1"
+      "indicatorTitle": "MATHS-L0-22",
+      "questionMarks": "5"
     },
     {
       "questionId": "23",
-      "indicatorTitle": "L0-23",
-      "questionMarks": "1"
+      "indicatorTitle": "MATHS-L0-23",
+      "questionMarks": "5"
     },
     {
       "questionId": "24",
-      "indicatorTitle": "L0-24",
-      "questionMarks": "1"
+      "indicatorTitle": "MATHS-L0-24",
+      "questionMarks": "5"
     },
     {
       "questionId": "25",
-      "indicatorTitle": "L0-25",
-      "questionMarks": "1"
+      "indicatorTitle": "MATHS-L0-25",
+      "questionMarks": "5"
     },
     {
       "questionId": "26",
-      "indicatorTitle": "L0-26",
-      "questionMarks": "1"
+      "indicatorTitle": "MATHS-L0-26",
+      "questionMarks": "5"
     },
     {
       "questionId": "27",
-      "indicatorTitle": "L0-27",
-      "questionMarks": "1"
+      "indicatorTitle": "MATHS-L0-27",
+      "questionMarks": "5"
     },
     {
       "questionId": "28",
-      "indicatorTitle": "L0-28",
-      "questionMarks": "1"
+      "indicatorTitle": "MATHS-L0-28",
+      "questionMarks": "5"
     },
     {
       "questionId": "29",
-      "indicatorTitle": "L0-29",
-      "questionMarks": "1"
+      "indicatorTitle": "MATHS-L0-29",
+      "questionMarks": "5"
     },
     {
       "questionId": "30",
-      "indicatorTitle": "L0-30",
-      "questionMarks": "1"
+      "indicatorTitle": "MATHS-L0-30",
+      "questionMarks": "5"
+    },
+    {
+      "questionId": "31",
+      "indicatorTitle": "EVS-L0-31",
+      "questionMarks": "5"
+    },
+    {
+      "questionId": "32",
+      "indicatorTitle": "EVS-L0-32",
+      "questionMarks": "5"
+    },
+    {
+      "questionId": "33",
+      "indicatorTitle": "EVS-L0-33",
+      "questionMarks": "5"
+    },
+    {
+      "questionId": "34",
+      "indicatorTitle": "EVS-L0-34",
+      "questionMarks": "5"
+    },
+    {
+      "questionId": "35",
+      "indicatorTitle": "EVS-L0-35",
+      "questionMarks": "5"
+    },
+    {
+      "questionId": "36",
+      "indicatorTitle": "EVS-L0-36",
+      "questionMarks": "5"
+    },
+    {
+      "questionId": "37",
+      "indicatorTitle": "EVS-L0-37",
+      "questionMarks": "5"
+    },
+    {
+      "questionId": "38",
+      "indicatorTitle": "EVS-L0-38",
+      "questionMarks": "5"
+    },
+    {
+      "questionId": "39",
+      "indicatorTitle": "EVS-L0-39",
+      "questionMarks": "5"
+    },
+    {
+      "questionId": "40",
+      "indicatorTitle": "EVS-L0-40",
+      "questionMarks": "5"
+    },
+    {
+      "questionId": "41",
+      "indicatorTitle": "SCIENCE-L0-41",
+      "questionMarks": "5"
+    },
+    {
+      "questionId": "42",
+      "indicatorTitle": "SCIENCE-L0-42",
+      "questionMarks": "5"
+    },
+    {
+      "questionId": "43",
+      "indicatorTitle": "SCIENCE-L0-43",
+      "questionMarks": "5"
+    },
+    {
+      "questionId": "44",
+      "indicatorTitle": "SCIENCE-L0-44",
+      "questionMarks": "5"
+    },
+    {
+      "questionId": "45",
+      "indicatorTitle": "SCIENCE-L0-45",
+      "questionMarks": "5"
+    },
+    {
+      "questionId": "46",
+      "indicatorTitle": "SCIENCE-L0-46",
+      "questionMarks": "5"
+    },
+    {
+      "questionId": "47",
+      "indicatorTitle": "SCIENCE-L0-47",
+      "questionMarks": "5"
+    },
+    {
+      "questionId": "48",
+      "indicatorTitle": "SCIENCE-L0-48",
+      "questionMarks": "5"
+    },
+    {
+      "questionId": "49",
+      "indicatorTitle": "SCIENCE-L0-49",
+      "questionMarks": "5"
+    },
+    {
+      "questionId": "50",
+      "indicatorTitle": "SCIENCE-L0-50",
+      "questionMarks": "5"
     }
   ],
-  "examId": 10,
-  "schoolId": "1"
+  "examId": 7,
+  "schoolId": "u001"
 },{
   "subject": "Hindi",
   "examLO": "Hindi",
   "classId": "2",
   "examDate": "01/10/2021",
   "totalMarks": 20,
+  "type": "any_1s_20q",
   "questions": [
     {
       "questionId": "1",
       "indicatorTitle": "L0-1",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "2",
       "indicatorTitle": "L0-2",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "3",
       "indicatorTitle": "L0-3",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "4",
       "indicatorTitle": "L0-4",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "5",
       "indicatorTitle": "L0-5",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "6",
       "indicatorTitle": "L0-6",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "7",
       "indicatorTitle": "L0-7",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "8",
       "indicatorTitle": "L0-8",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "9",
       "indicatorTitle": "L0-9",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "10",
       "indicatorTitle": "L0-10",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "11",
       "indicatorTitle": "L0-11",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "12",
       "indicatorTitle": "L0-12",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "13",
       "indicatorTitle": "L0-13",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "14",
       "indicatorTitle": "L0-14",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "15",
       "indicatorTitle": "L0-15",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "16",
       "indicatorTitle": "L0-16",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "17",
       "indicatorTitle": "L0-17",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "18",
       "indicatorTitle": "L0-18",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "19",
       "indicatorTitle": "L0-19",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "20",
       "indicatorTitle": "L0-20",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "21",
-      "indicatorTitle": "L0-21",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "22",
-      "indicatorTitle": "L0-22",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "23",
-      "indicatorTitle": "L0-23",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "24",
-      "indicatorTitle": "L0-24",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "25",
-      "indicatorTitle": "L0-25",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "26",
-      "indicatorTitle": "L0-26",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "27",
-      "indicatorTitle": "L0-27",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "28",
-      "indicatorTitle": "L0-28",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "29",
-      "indicatorTitle": "L0-29",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "30",
-      "indicatorTitle": "L0-30",
-      "questionMarks": "1"
+      "questionMarks": "20"
     }
   ],
-  "examId": 11,
-  "schoolId": "2"
+  "examId": 8,
+  "schoolId": "od001"
 },{
   "subject": "Hindi",
   "examLO": "Hindi",
   "classId": "3",
   "examDate": "24/09/2021",
   "totalMarks": 20,
+  "type": "any_1s_20q",
   "questions": [
     {
       "questionId": "1",
       "indicatorTitle": "L0-1",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "2",
       "indicatorTitle": "L0-2",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "3",
       "indicatorTitle": "L0-3",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "4",
       "indicatorTitle": "L0-4",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "5",
       "indicatorTitle": "L0-5",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "6",
       "indicatorTitle": "L0-6",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "7",
       "indicatorTitle": "L0-7",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "8",
       "indicatorTitle": "L0-8",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "9",
       "indicatorTitle": "L0-9",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "10",
       "indicatorTitle": "L0-10",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "11",
       "indicatorTitle": "L0-11",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "12",
       "indicatorTitle": "L0-12",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "13",
       "indicatorTitle": "L0-13",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "14",
       "indicatorTitle": "L0-14",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "15",
       "indicatorTitle": "L0-15",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "16",
       "indicatorTitle": "L0-16",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "17",
       "indicatorTitle": "L0-17",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "18",
       "indicatorTitle": "L0-18",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "19",
       "indicatorTitle": "L0-19",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "20",
       "indicatorTitle": "L0-20",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "21",
-      "indicatorTitle": "L0-21",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "22",
-      "indicatorTitle": "L0-22",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "23",
-      "indicatorTitle": "L0-23",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "24",
-      "indicatorTitle": "L0-24",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "25",
-      "indicatorTitle": "L0-25",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "26",
-      "indicatorTitle": "L0-26",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "27",
-      "indicatorTitle": "L0-27",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "28",
-      "indicatorTitle": "L0-28",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "29",
-      "indicatorTitle": "L0-29",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "30",
-      "indicatorTitle": "L0-30",
-      "questionMarks": "1"
+      "questionMarks": "20"
     }
   ],
-  "examId": 12,
-  "schoolId": "2"
+  "examId": 9,
+  "schoolId": "od001"
 },{
-  "subject": "Math",
-  "examLO": "Math",
+  "subject": "Maths",
+  "examLO": "Maths",
   "classId": "2",
   "examDate": "02/10/2021",
   "totalMarks": 20,
+  "type": "any_1s_20q",
   "questions": [
     {
       "questionId": "1",
       "indicatorTitle": "L0-1",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "2",
       "indicatorTitle": "L0-2",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "3",
       "indicatorTitle": "L0-3",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "4",
       "indicatorTitle": "L0-4",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "5",
       "indicatorTitle": "L0-5",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "6",
       "indicatorTitle": "L0-6",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "7",
       "indicatorTitle": "L0-7",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "8",
       "indicatorTitle": "L0-8",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "9",
       "indicatorTitle": "L0-9",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "10",
       "indicatorTitle": "L0-10",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "11",
       "indicatorTitle": "L0-11",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "12",
       "indicatorTitle": "L0-12",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "13",
       "indicatorTitle": "L0-13",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "14",
       "indicatorTitle": "L0-14",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "15",
       "indicatorTitle": "L0-15",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "16",
       "indicatorTitle": "L0-16",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "17",
       "indicatorTitle": "L0-17",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "18",
       "indicatorTitle": "L0-18",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "19",
       "indicatorTitle": "L0-19",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "20",
       "indicatorTitle": "L0-20",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "21",
-      "indicatorTitle": "L0-21",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "22",
-      "indicatorTitle": "L0-22",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "23",
-      "indicatorTitle": "L0-23",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "24",
-      "indicatorTitle": "L0-24",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "25",
-      "indicatorTitle": "L0-25",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "26",
-      "indicatorTitle": "L0-26",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "27",
-      "indicatorTitle": "L0-27",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "28",
-      "indicatorTitle": "L0-28",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "29",
-      "indicatorTitle": "L0-29",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "30",
-      "indicatorTitle": "L0-30",
-      "questionMarks": "1"
+      "questionMarks": "20"
     }
   ],
-  "examId": 13,
-  "schoolId": "2"
+  "examId": 10,
+  "schoolId": "od001"
 },
 {
   "subject": "Hindi",
@@ -2085,480 +1465,543 @@
   "classId": "3",
   "examDate": "05/10/2021",
   "totalMarks": 20,
+  "type": "any_1s_34q",
   "questions": [
     {
       "questionId": "1",
       "indicatorTitle": "L0-1",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "2",
       "indicatorTitle": "L0-2",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "3",
       "indicatorTitle": "L0-3",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "4",
       "indicatorTitle": "L0-4",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "5",
       "indicatorTitle": "L0-5",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "6",
       "indicatorTitle": "L0-6",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "7",
       "indicatorTitle": "L0-7",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "8",
       "indicatorTitle": "L0-8",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "9",
       "indicatorTitle": "L0-9",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "10",
       "indicatorTitle": "L0-10",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "11",
       "indicatorTitle": "L0-11",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "12",
       "indicatorTitle": "L0-12",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "13",
       "indicatorTitle": "L0-13",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "14",
       "indicatorTitle": "L0-14",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "15",
       "indicatorTitle": "L0-15",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "16",
       "indicatorTitle": "L0-16",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "17",
       "indicatorTitle": "L0-17",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "18",
       "indicatorTitle": "L0-18",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "19",
       "indicatorTitle": "L0-19",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "20",
       "indicatorTitle": "L0-20",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "21",
       "indicatorTitle": "L0-21",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "22",
       "indicatorTitle": "L0-22",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "23",
       "indicatorTitle": "L0-23",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "24",
       "indicatorTitle": "L0-24",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "25",
       "indicatorTitle": "L0-25",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "26",
       "indicatorTitle": "L0-26",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "27",
       "indicatorTitle": "L0-27",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "28",
       "indicatorTitle": "L0-28",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "29",
       "indicatorTitle": "L0-29",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "30",
       "indicatorTitle": "L0-30",
-      "questionMarks": "1"
+      "questionMarks": "20"
+    },
+    {
+      "questionId": "31",
+      "indicatorTitle": "L0-30",
+      "questionMarks": "20"
+    },
+    {
+      "questionId": "32",
+      "indicatorTitle": "L0-30",
+      "questionMarks": "20"
+    },
+    {
+      "questionId": "33",
+      "indicatorTitle": "L0-30",
+      "questionMarks": "20"
+    },
+    {
+      "questionId": "34",
+      "indicatorTitle": "L0-30",
+      "questionMarks": "20"
     }
   ],
-  "examId": 14,
-  "schoolId": "3"
+  "examId": 11,
+  "schoolId": "demouser"
 },{
   "subject": "Maths",
   "examLO": "Maths",
   "classId": "3",
   "examDate": "06/10/2021",
   "totalMarks": 20,
+  "type": "any_1s_34q",
   "questions": [
     {
       "questionId": "1",
       "indicatorTitle": "L0-1",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "2",
       "indicatorTitle": "L0-2",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "3",
       "indicatorTitle": "L0-3",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "4",
       "indicatorTitle": "L0-4",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "5",
       "indicatorTitle": "L0-5",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "6",
       "indicatorTitle": "L0-6",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "7",
       "indicatorTitle": "L0-7",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "8",
       "indicatorTitle": "L0-8",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "9",
       "indicatorTitle": "L0-9",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "10",
       "indicatorTitle": "L0-10",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "11",
       "indicatorTitle": "L0-11",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "12",
       "indicatorTitle": "L0-12",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "13",
       "indicatorTitle": "L0-13",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "14",
       "indicatorTitle": "L0-14",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "15",
       "indicatorTitle": "L0-15",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "16",
       "indicatorTitle": "L0-16",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "17",
       "indicatorTitle": "L0-17",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "18",
       "indicatorTitle": "L0-18",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "19",
       "indicatorTitle": "L0-19",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "20",
       "indicatorTitle": "L0-20",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "21",
       "indicatorTitle": "L0-21",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "22",
       "indicatorTitle": "L0-22",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "23",
       "indicatorTitle": "L0-23",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "24",
       "indicatorTitle": "L0-24",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "25",
       "indicatorTitle": "L0-25",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "26",
       "indicatorTitle": "L0-26",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "27",
       "indicatorTitle": "L0-27",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "28",
       "indicatorTitle": "L0-28",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "29",
       "indicatorTitle": "L0-29",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "30",
       "indicatorTitle": "L0-30",
-      "questionMarks": "1"
+      "questionMarks": "20"
+    },
+    {
+      "questionId": "31",
+      "indicatorTitle": "L0-30",
+      "questionMarks": "20"
+    },
+    {
+      "questionId": "32",
+      "indicatorTitle": "L0-30",
+      "questionMarks": "20"
+    },
+    {
+      "questionId": "33",
+      "indicatorTitle": "L0-30",
+      "questionMarks": "20"
+    },
+    {
+      "questionId": "34",
+      "indicatorTitle": "L0-30",
+      "questionMarks": "20"
     }
   ],
-  "examId": 15,
-  "schoolId": "3"
+  "examId": 12,
+  "schoolId": "demouser"
 },{
   "subject": "English",
   "examLO": "English",
   "classId": "3",
   "examDate": "07/10/2021",
   "totalMarks": 20,
+  "type": "any_1s_34q",
   "questions": [
     {
       "questionId": "1",
       "indicatorTitle": "L0-1",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "2",
       "indicatorTitle": "L0-2",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "3",
       "indicatorTitle": "L0-3",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "4",
       "indicatorTitle": "L0-4",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "5",
       "indicatorTitle": "L0-5",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "6",
       "indicatorTitle": "L0-6",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "7",
       "indicatorTitle": "L0-7",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "8",
       "indicatorTitle": "L0-8",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "9",
       "indicatorTitle": "L0-9",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "10",
       "indicatorTitle": "L0-10",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "11",
       "indicatorTitle": "L0-11",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "12",
       "indicatorTitle": "L0-12",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "13",
       "indicatorTitle": "L0-13",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "14",
       "indicatorTitle": "L0-14",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "15",
       "indicatorTitle": "L0-15",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "16",
       "indicatorTitle": "L0-16",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "17",
       "indicatorTitle": "L0-17",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "18",
       "indicatorTitle": "L0-18",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "19",
       "indicatorTitle": "L0-19",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "20",
       "indicatorTitle": "L0-20",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "21",
       "indicatorTitle": "L0-21",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "22",
       "indicatorTitle": "L0-22",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "23",
       "indicatorTitle": "L0-23",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "24",
       "indicatorTitle": "L0-24",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "25",
       "indicatorTitle": "L0-25",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "26",
       "indicatorTitle": "L0-26",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "27",
       "indicatorTitle": "L0-27",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "28",
       "indicatorTitle": "L0-28",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "29",
       "indicatorTitle": "L0-29",
-      "questionMarks": "1"
+      "questionMarks": "20"
     },
     {
       "questionId": "30",
       "indicatorTitle": "L0-30",
-      "questionMarks": "1"
+      "questionMarks": "20"
+    },
+    {
+      "questionId": "31",
+      "indicatorTitle": "L0-30",
+      "questionMarks": "20"
+    },
+    {
+      "questionId": "32",
+      "indicatorTitle": "L0-30",
+      "questionMarks": "20"
+    },
+    {
+      "questionId": "33",
+      "indicatorTitle": "L0-30",
+      "questionMarks": "20"
+    },
+    {
+      "questionId": "34",
+      "indicatorTitle": "L0-30",
+      "questionMarks": "20"
     }
   ],
-  "examId": 16,
-  "schoolId": "3"
+  "examId": 13,
+  "schoolId": "demouser"
 },
 {
   "subject": "Hindi",
@@ -2566,6 +2009,7 @@
   "classId": "2",
   "examDate": "11/10/2021",
   "totalMarks": 20,
+  "type": "hindi_8s_13q_omr",
   "questions": [
     {
       "questionId": "1",
@@ -2619,113 +2063,29 @@
     },
     {
       "questionId": "11",
-      "indicatorTitle": "L0-11",
+      "indicatorTitle": "L0-10",
       "questionMarks": "1"
     },
     {
       "questionId": "12",
-      "indicatorTitle": "L0-12",
+      "indicatorTitle": "L0-10",
       "questionMarks": "1"
     },
     {
       "questionId": "13",
-      "indicatorTitle": "L0-13",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "14",
-      "indicatorTitle": "L0-14",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "15",
-      "indicatorTitle": "L0-15",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "16",
-      "indicatorTitle": "L0-16",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "17",
-      "indicatorTitle": "L0-17",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "18",
-      "indicatorTitle": "L0-18",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "19",
-      "indicatorTitle": "L0-19",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "20",
-      "indicatorTitle": "L0-20",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "21",
-      "indicatorTitle": "L0-21",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "22",
-      "indicatorTitle": "L0-22",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "23",
-      "indicatorTitle": "L0-23",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "24",
-      "indicatorTitle": "L0-24",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "25",
-      "indicatorTitle": "L0-25",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "26",
-      "indicatorTitle": "L0-26",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "27",
-      "indicatorTitle": "L0-27",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "28",
-      "indicatorTitle": "L0-28",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "29",
-      "indicatorTitle": "L0-29",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "30",
-      "indicatorTitle": "L0-30",
+      "indicatorTitle": "L0-10",
       "questionMarks": "1"
     }
   ],
-  "examId": 17,
-  "schoolId": "4"
+  "examId": 14,
+  "schoolId": "u002"
 },{
   "subject": "Maths",
   "examLO": "Maths",
   "classId": "2",
   "examDate": "12/10/2021",
   "totalMarks": 20,
+  "type": "hindi_8s_13q_omr",
   "questions": [
     {
       "questionId": "1",
@@ -2779,113 +2139,29 @@
     },
     {
       "questionId": "11",
-      "indicatorTitle": "L0-11",
+      "indicatorTitle": "L0-10",
       "questionMarks": "1"
     },
     {
       "questionId": "12",
-      "indicatorTitle": "L0-12",
+      "indicatorTitle": "L0-10",
       "questionMarks": "1"
     },
     {
       "questionId": "13",
-      "indicatorTitle": "L0-13",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "14",
-      "indicatorTitle": "L0-14",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "15",
-      "indicatorTitle": "L0-15",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "16",
-      "indicatorTitle": "L0-16",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "17",
-      "indicatorTitle": "L0-17",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "18",
-      "indicatorTitle": "L0-18",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "19",
-      "indicatorTitle": "L0-19",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "20",
-      "indicatorTitle": "L0-20",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "21",
-      "indicatorTitle": "L0-21",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "22",
-      "indicatorTitle": "L0-22",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "23",
-      "indicatorTitle": "L0-23",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "24",
-      "indicatorTitle": "L0-24",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "25",
-      "indicatorTitle": "L0-25",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "26",
-      "indicatorTitle": "L0-26",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "27",
-      "indicatorTitle": "L0-27",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "28",
-      "indicatorTitle": "L0-28",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "29",
-      "indicatorTitle": "L0-29",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "30",
-      "indicatorTitle": "L0-30",
+      "indicatorTitle": "L0-10",
       "questionMarks": "1"
     }
   ],
-  "examId": 18,
-  "schoolId": "4"
+  "examId": 15,
+  "schoolId": "u002"
 },{
   "subject": "English",
   "examLO": "English",
   "classId": "2",
   "examDate": "13/10/2021",
   "totalMarks": 20,
+  "type": "hindi_8s_13q_omr",
   "questions": [
     {
       "questionId": "1",
@@ -2939,113 +2215,29 @@
     },
     {
       "questionId": "11",
-      "indicatorTitle": "L0-11",
+      "indicatorTitle": "L0-10",
       "questionMarks": "1"
     },
     {
       "questionId": "12",
-      "indicatorTitle": "L0-12",
+      "indicatorTitle": "L0-10",
       "questionMarks": "1"
     },
     {
       "questionId": "13",
-      "indicatorTitle": "L0-13",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "14",
-      "indicatorTitle": "L0-14",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "15",
-      "indicatorTitle": "L0-15",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "16",
-      "indicatorTitle": "L0-16",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "17",
-      "indicatorTitle": "L0-17",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "18",
-      "indicatorTitle": "L0-18",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "19",
-      "indicatorTitle": "L0-19",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "20",
-      "indicatorTitle": "L0-20",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "21",
-      "indicatorTitle": "L0-21",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "22",
-      "indicatorTitle": "L0-22",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "23",
-      "indicatorTitle": "L0-23",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "24",
-      "indicatorTitle": "L0-24",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "25",
-      "indicatorTitle": "L0-25",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "26",
-      "indicatorTitle": "L0-26",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "27",
-      "indicatorTitle": "L0-27",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "28",
-      "indicatorTitle": "L0-28",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "29",
-      "indicatorTitle": "L0-29",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "30",
-      "indicatorTitle": "L0-30",
+      "indicatorTitle": "L0-10",
       "questionMarks": "1"
     }
   ],
-  "examId": 19,
-  "schoolId": "4"
+  "examId": 16,
+  "schoolId": "u002"
 },{
   "subject": "Maths",
   "examLO": "Maths",
   "classId": "3",
   "examDate": "14/10/2021",
   "totalMarks": 20,
+  "type": "hindi_8s_13q_omr",
   "questions": [
     {
       "questionId": "1",
@@ -3075,6 +2267,349 @@
     {
       "questionId": "6",
       "indicatorTitle": "L0-6",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "7",
+      "indicatorTitle": "L0-7",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "8",
+      "indicatorTitle": "L0-8",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "9",
+      "indicatorTitle": "L0-9",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "10",
+      "indicatorTitle": "L0-10",
+      "questionMarks": "1"
+    },
+      {
+      "questionId": "11",
+      "indicatorTitle": "L0-10",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "12",
+      "indicatorTitle": "L0-10",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "13",
+      "indicatorTitle": "L0-10",
+      "questionMarks": "1"
+    }
+  ],
+  "examId": 17,
+  "schoolId": "u002"
+},{
+  "subject": "Hindi",
+  "examLO": "Hindi",
+  "classId": "4",
+  "examDate": "05/10/2021",
+  "totalMarks": 20,
+  "type": "any_1s_12q ",
+  "questions": [
+    {
+      "questionId": "1",
+      "indicatorTitle": "L0-1",
+      "questionMarks": "20"
+    },
+    {
+      "questionId": "2",
+      "indicatorTitle": "L0-2",
+      "questionMarks": "20"
+    },
+    {
+      "questionId": "3",
+      "indicatorTitle": "L0-3",
+      "questionMarks": "20"
+    },
+    {
+      "questionId": "4",
+      "indicatorTitle": "L0-4",
+      "questionMarks": "20"
+    },
+    {
+      "questionId": "5",
+      "indicatorTitle": "L0-5",
+      "questionMarks": "20"
+    },
+    {
+      "questionId": "6",
+      "indicatorTitle": "L0-6",
+      "questionMarks": "20"
+    },
+    {
+      "questionId": "7",
+      "indicatorTitle": "L0-7",
+      "questionMarks": "20"
+    },
+    {
+      "questionId": "8",
+      "indicatorTitle": "L0-8",
+      "questionMarks": "20"
+    },
+    {
+      "questionId": "9",
+      "indicatorTitle": "L0-9",
+      "questionMarks": "20"
+    },
+    {
+      "questionId": "10",
+      "indicatorTitle": "L0-10",
+      "questionMarks": "20"
+    },
+    {
+      "questionId": "11",
+      "indicatorTitle": "L0-11",
+      "questionMarks": "20"
+    },
+    {
+      "questionId": "12",
+      "indicatorTitle": "L0-12",
+      "questionMarks": "20"
+    }
+  ],
+  "examId": 18,
+  "schoolId": "demouser"
+},
+{
+  "subject": "Hindi",
+  "examLO": "Hindi",
+  "classId": "5",
+  "examDate": "05/10/2021",
+  "totalMarks": 20,
+  "type": "any_1s_5q_multichoice",
+  "questions": [
+    {
+      "questionId": "1",
+      "indicatorTitle": "L0-1",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "2",
+      "indicatorTitle": "L0-2",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "3",
+      "indicatorTitle": "L0-3",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "4",
+      "indicatorTitle": "L0-4",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "5",
+      "indicatorTitle": "L0-5",
+      "questionMarks": "1"
+    } 
+  ],
+  "examId": 19,
+  "schoolId": "demouser"
+},
+{
+  "subject": "Carpentary Assesment",
+  "examLO": "Carpentary Assesment",
+  "classId": "5",
+  "examDate": "05/10/2021",
+  "totalMarks": 20,
+  "type": "any_1s_5q_multichoice",
+  "questions": [
+    {
+      "questionId": "1",
+      "indicatorTitle": "L0-1",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "2",
+      "indicatorTitle": "L0-2",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "3",
+      "indicatorTitle": "L0-3",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "4",
+      "indicatorTitle": "L0-4",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "5",
+      "indicatorTitle": "L0-5",
+      "questionMarks": "1"
+    }
+  ],
+  "examId": 20,
+  "schoolId": "skill001"
+},
+{
+  "subject": "Hindi",
+  "examLO": "Hindi",
+  "classId": "6",
+  "examDate": "05/10/2021",
+  "totalMarks": 10,
+  "type": "any_1s_15q_multipage",
+  "questions": [
+    {
+      "questionId": "1",
+      "indicatorTitle": "L0-1",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "2",
+      "indicatorTitle": "L0-2",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "3",
+      "indicatorTitle": "L0-3",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "4",
+      "indicatorTitle": "L0-4",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "5",
+      "indicatorTitle": "L0-5",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "6",
+      "indicatorTitle": "L0-1",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "7",
+      "indicatorTitle": "L0-7",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "8",
+      "indicatorTitle": "L0-8",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "9",
+      "indicatorTitle": "L0-9",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "10",
+      "indicatorTitle": "L0-10",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "11",
+      "indicatorTitle": "L0-11",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "12",
+      "indicatorTitle": "L0-12",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "13",
+      "indicatorTitle": "L0-13",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "14",
+      "indicatorTitle": "L0-14",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "15",
+      "indicatorTitle": "L0-15",
+      "questionMarks": "1"
+    }  
+  ],
+  "examId": 21,
+  "schoolId": "demouser"
+},
+{
+  "subject": "midday-meal",
+  "examLO": "midday-meal",
+  "classId": "2",
+  "examDate": "07/01/2022",
+  "totalMarks": 20,
+  "type": "any_20s_midday_meal",
+  "questions": [
+    {
+      "questionId": "1",
+      "indicatorTitle": "L0-1",
+      "questionMarks": "1"
+    }
+  ],
+  "examId": 22,
+  "schoolId": "u002"
+},
+{
+  "subject": "section-attendance",
+  "examLO": "section-attendance",
+  "classId": "2",
+  "examDate": "08/01/2022",
+  "totalMarks": 20,
+  "type": "any_20s_attendance",
+  "questions": [
+    {
+      "questionId": "1",
+      "indicatorTitle": "L0-1",
+      "questionMarks": "1"
+    }
+  ],
+  "examId": 23,
+  "schoolId": "u002"
+},
+{
+  "subject": "Hindi",
+  "examLO": "Hindi",
+  "classId": "7",
+  "examDate": "19/01/2022",
+  "totalMarks": 24,
+  "type": "any_1s_24q_multipage",
+  "questions": [
+    {
+      "questionId": "1",
+      "indicatorTitle": "L0-1",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "2",
+      "indicatorTitle": "L0-2",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "3",
+      "indicatorTitle": "L0-3",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "4",
+      "indicatorTitle": "L0-4",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "5",
+      "indicatorTitle": "L0-5",
+      "questionMarks": "1"
+    },
+    {
+      "questionId": "6",
+      "indicatorTitle": "L0-1",
       "questionMarks": "1"
     },
     {
@@ -3166,39 +2701,9 @@
       "questionId": "24",
       "indicatorTitle": "L0-24",
       "questionMarks": "1"
-    },
-    {
-      "questionId": "25",
-      "indicatorTitle": "L0-25",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "26",
-      "indicatorTitle": "L0-26",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "27",
-      "indicatorTitle": "L0-27",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "28",
-      "indicatorTitle": "L0-28",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "29",
-      "indicatorTitle": "L0-29",
-      "questionMarks": "1"
-    },
-    {
-      "questionId": "30",
-      "indicatorTitle": "L0-30",
-      "questionMarks": "1"
     }
   ],
-  "examId": 20,
-  "schoolId": "4"
+  "examId": 24,
+  "schoolId": "demouser"
 }
 ]

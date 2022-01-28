@@ -96,7 +96,7 @@ def enableSeparateBuildPerCPUArchitecture = false
 /**
  * Run Proguard to shrink the Java bytecode in release builds.
  */
-def enableProguardInReleaseBuilds = false
+def enableProguardInReleaseBuilds = true
 
 /**
  * The preferred build flavor of JavaScriptCore.
@@ -141,7 +141,18 @@ android {
         }
     }
     signingConfigs {
-        debug {
+    release {
+        if (project.hasProperty('MYAPP_RELEASE_STORE_FILE')) {
+            storeFile file(MYAPP_RELEASE_STORE_FILE)
+            storePassword MYAPP_RELEASE_STORE_PASSWORD
+            keyAlias MYAPP_RELEASE_KEY_ALIAS
+            keyPassword MYAPP_RELEASE_KEY_PASSWORD
+            // Optional, specify signing versions used
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
+        debug { 
             storeFile file('debug.keystore')
             storePassword 'android'
             keyAlias 'androiddebugkey'
@@ -155,9 +166,22 @@ android {
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
+
+            //println project.hasProperty('MYAPP_RELEASE_STORE_FILE')
+            //println signingConfigs.release
+
+            //signingConfig signingConfigs.release
+            //signingConfig signingConfigs.debug
+      
+            // shrinkResources enableProguardInReleaseBuilds
+            // zipAlignEnabled enableProguardInReleaseBuilds
+            // useProguard enableProguardInReleaseBuilds
+
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            debug {
+                debuggable true
+            }
         }
     }
 
@@ -186,6 +210,8 @@ dependencies {
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 
     compile project(':react-native-system-setting')
+
+    implementation project(':react-native-push-notification')
 
     // SaralSDK use OpenCV and SaralSDK code, make them as dependencies here
     implementation project(path: ':saralsdk')

@@ -41,8 +41,8 @@ const ROISchema = new mongoose.Schema({
         trim: true
     },
     type:{
-        type: String,
-        enum: ["SAT","PAT"]
+        type: String
+        // enum: ["SAT","PAT"]
     },
     state:{
         type: String,

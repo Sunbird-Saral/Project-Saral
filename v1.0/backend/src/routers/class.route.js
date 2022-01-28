@@ -8,7 +8,7 @@ const Exam = require('../models/exams')
 const Mark = require('../models/marks')
 const router = new express.Router()
 
-router.post('/addClasses', auth, async (req, res) => {
+router.post('/classes', auth, async (req, res) => {
 
     const body = [...req.body]
     const classModel = []
@@ -32,12 +32,29 @@ router.post('/addClasses', auth, async (req, res) => {
             let dataExists = await ClassModel.findOne(match);
             if (!dataExists) {
                 await doc.save()
-                finalUpdatedData.push(doc)
+                let response = {
+                    sections: doc.sections,
+                    classId: doc.classId,
+                    className: doc.className,
+                    schoolId: doc.schoolId,
+                    createdAt: doc.createdAt,
+                    updatedAt: doc.updatedAt
+                }
+                finalUpdatedData.push(response)
             } else {
                 let updatedSections = dataExists['sections'] ? dataExists['sections'].concat(doc['sections']) : doc['sections']
                 dataExists['sections'] = _.uniqBy(updatedSections, 'section');
+                
                 await dataExists.save()
-                finalUpdatedData.push(dataExists)
+                let response = {
+                    sections: doc.sections,
+                    classId: doc.classId,
+                    className: doc.className,
+                    schoolId: doc.schoolId,
+                    createdAt: doc.createdAt,
+                    updatedAt: doc.updatedAt
+                }
+                finalUpdatedData.push(response)
             }
         }).then(() => {
             res.status(201).send(finalUpdatedData)
@@ -50,7 +67,7 @@ router.post('/addClasses', auth, async (req, res) => {
     }
 })
 
-router.post('/updateClass', auth, async (req, res) => {
+router.put('/classes', auth, async (req, res) => {
     const updates = Object.keys(req.body)
     const allowedUpdates = ['sections', 'classId']
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
@@ -76,16 +93,35 @@ router.post('/updateClass', auth, async (req, res) => {
 
             try {
                 await classModel.save()
-                res.status(201).send(classModel)
+                let response = {
+                    sections: classModel.sections,
+                    classId: classModel.classId,
+                    className: classModel.className,
+                    schoolId: classModel.schoolId,
+                    createdAt: classModel.createdAt,
+                    updatedAt: classModel.updatedAt
+                }
+                
+                res.status(201).send(response)
             } catch (e) {
                 console.log(e);
                 res.status(400).send(e)
             }
         } else {
+            
             let updatedSections = classData['sections'] ? classData['sections'].concat(req.body['sections']) : req.body['sections']
             classData['sections'] = _.uniqBy(updatedSections, 'section');
             await classData.save()
-            res.send(classData)
+            let response = {
+                sections: classData.sections,
+                classId: classData.classId,
+                className: classData.className,
+                schoolId: classData.schoolId,
+                createdAt: classData.createdAt,
+                updatedAt: classData.updatedAt
+            }
+            
+            res.send(response)
         }
     }
     catch (e) {
@@ -94,15 +130,15 @@ router.post('/updateClass', auth, async (req, res) => {
     }
 })
 
-router.delete('/deleteClass', auth, async (req, res) => {
-    if (Object.keys(req.body).length === 0) res.status(400).send({ message: 'Validation error.' })
-    const inputKeys = Object.keys(req.body)
-    const allowedUpdates = ['classId']
-    const isValidOperation = inputKeys.every((update) => allowedUpdates.includes(update))
+router.delete('/classes', auth, async (req, res) => {
+    if (Object.keys(req.body) != "classId") return res.status(400).send({ message: 'Validation error.' })
+    // const inputKeys = Object.keys(req.body)
+    // const allowedUpdates = ['classId']
+    // const isValidOperation = inputKeys.every((update) => allowedUpdates.includes(update))
 
-    if (!isValidOperation) {
-        return res.status(400).send({ error: 'Invalid delete opration' })
-    }
+    // if (!isValidOperation) {
+    //     return res.status(400).send({ error: 'Invalid delete opration' })
+    // }
 
     const match = {
         schoolId: req.school.schoolId,

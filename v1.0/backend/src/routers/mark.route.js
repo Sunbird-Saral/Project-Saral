@@ -13,9 +13,8 @@ const fs = require('fs');
 
 const fromTime = "T00:00:00"
 const toTime = "T23:59:59"
-router.post('/saveMarks', auth, async (req, res) => {
+router.put('/saveMarks', auth, async (req, res) => {
     const marks = []
-    // const examId = req.body.examId
     const subject = req.body.subject
     const examDate = req.body.examDate
     const schoolId = req.school.schoolId
@@ -33,9 +32,41 @@ router.post('/saveMarks', auth, async (req, res) => {
         })
         marks.push(marksData)
     });
-
     try {
-        await Mark.insertMany(marks)
+        for (let data of marks) {
+         
+            let studentMarksExist = await Mark.findOne({ schoolId:data.schoolId,studentId: data.studentId,classId:data.classId,subject: data.subject, examDate: data.examDate })
+            if (!studentMarksExist) {
+                await Mark.create(data)
+            } else {
+                if (data.schoolId == studentMarksExist.schoolId && data.studentId == studentMarksExist.studentId && data.classId == studentMarksExist.classId && data.subject == studentMarksExist.subject && data.examDate  == studentMarksExist.examDate) {
+                    let lookup = {
+                        studentId: data.studentId
+                    }
+                    let update = { $set: { studentIdTrainingData: data.studentIdTrainingData,predictedStudentId: data.predictedStudentId,studentAvailability: data.studentAvailability, marksInfo: data.marksInfo ,maxMarksTrainingData: data.maxMarksTrainingData,maxMarksPredicted: data.maxMarksPredicted, securedMarks: data.securedMarks, totalMarks: data.totalMarks,obtainedMarksTrainingData: data.obtainedMarksTrainingData,obtainedMarksPredicted: data.obtainedMarksPredicted  } }
+                    await Mark.update(lookup, update)
+                }
+            }
+        }
+        // let studentIds = marks.map(id => id.studentId)
+        // let marksExist = await Mark.StudentsMark(studentIds)
+
+        // if(!marksExist.length){
+        // await Mark.insertMany(marks)
+        // }else{
+        // for(let data of marks){
+        //     for(let mark of marksExist){
+        //         if(data.studentId === mark.studentId){
+        //             let lookup = {
+        //                 studentId: data.studentId
+        //             }
+        //             let update = { $set: {studentAvailability: data.studentAvailability, marksInfo: data.marksInfo
+        //             }}
+        //             await Mark.update(lookup ,update)
+        //         }
+        //     }
+        // }
+        // }
         res.status(200).send({ message: 'Data Saved Successfully' })
     } catch (e) {
         console.log(e);
@@ -86,30 +117,26 @@ const fetchSavedData = async (req) => {
     }
 
     try {
-        const { limit = 10, page = 1 } = req.body
-
-        if (parseInt(page) < 0 || parseInt(page) === 0) {
-            return { "error": true, "message": "invalid page number, should start with 1" }
-        }
-
         const count = await Mark.countDocuments(match)
-
-        let totalPages = count ? Math.ceil(count / parseInt(limit)) : 0
-
-        if (totalPages == 0) {
-            return { data: [], totalPages }
-        } else if (parseInt(page) > totalPages) {
-            return { "error": true, totalPages, "message": "invalid page number, can not be more than Total pages" }
+        // let totalPages;
+        if (req.body.page) {
+            req.body.limit = 10;
+            req.body.page = 1;
+            // totalPages = count ? Math.ceil(count / parseInt(req.body.limit)) : 0
+        }else{
+            req.body.limit = 0;
+            req.body.page = 1;
+            // totalPages = 1
         }
 
         const savedScan = await Mark.find(match, { _id: 0, __v: 0 })
-            .limit(parseInt(limit) * 1)
-            .skip((parseInt(parseInt(page)) - 1) * parseInt(parseInt(limit)))
+            .limit(parseInt(req.body.limit) * 1)
+            .skip((parseInt(parseInt(req.body.page)) - 1) * parseInt(parseInt(req.body.limit)))
 
         return {
             data: savedScan,
-            totalPages,
-            currentPage: totalPages != 0 ? parseInt(page) : 0
+            // totalPages: totalPages,
+            // currentPage: totalPages != 0 ? parseInt(req.body.page) : 0
         }
     }
     catch (e) {
@@ -143,6 +170,10 @@ const fetchSavedData = async (req) => {
 
 router.post('/getSavedScan', basicAuth, async (req, res) => {
     try {
+        if(req.body.schoolId){
+            req.body.schoolId = req.body.schoolId.toLowerCase()
+        }
+        
         const resposne = await fetchSavedData(req)
         if (resposne && resposne.error) {
             return res.status(404).send(resposne)
@@ -336,3 +367,32 @@ router.get('/downloadSchoolList', async (req, res) => {
 
 
 module.exports = router
+
+
+
+
+// const { limit = 10, page = 1 } = req.body
+
+// if (parseInt(page) < 0 || parseInt(page) === 0) {
+//     return { "error": true, "message": "invalid page number, should start with 1" }
+// }
+
+// const count = await Mark.countDocuments(match)
+
+// let totalPages = count ? Math.ceil(count / parseInt(limit)) : 0
+
+// if (totalPages == 0) {
+//     return { data: [], totalPages }
+// } else if (parseInt(page) > totalPages) {
+//     return { "error": true, totalPages, "message": "invalid page number, can not be more than Total pages" }
+// }
+
+// const savedScan = await Mark.find(match, { _id: 0, __v: 0 })
+//     .limit(parseInt(limit) * 1)
+//     .skip((parseInt(parseInt(page)) - 1) * parseInt(parseInt(limit)))
+
+// return {
+//     data: savedScan,
+//     totalPages,
+//     currentPage: totalPages != 0 ? parseInt(page) : 0
+// }

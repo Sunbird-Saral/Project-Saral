@@ -3,17 +3,25 @@ import { StyleSheet, Text, View } from 'react-native';
 import AppTheme from '../../utils/AppTheme';
 
 const ScanStatusList = ({
+    themeColor1,
     id,
-    subject
+    studentList
 }) => {
+
+    let studentName = studentList.filter((e) => {
+        if (id == e.studentId) {
+            return true
+        }
+    })
+    
     return (
-        <View style={[styles.container, { backgroundColor:  AppTheme.GREEN }]}>
+        <View style={[styles.container, { backgroundColor: themeColor1 ? themeColor1 : AppTheme.GREEN }]}>
             <View style={styles.childCon}>
-                <Text style={styles.align}>{subject}</Text>
+                <Text style={styles.align}>{studentName.length > 0 && studentName[0].name}</Text>
                 <View style={styles.line} />
                 <Text style={styles.align}>{id}</Text>
                 <View style={styles.line} />
-                <Text style={styles.align}>{`Saved` }</Text>
+                <Text style={styles.align}>{`Saved`}</Text>
             </View>
         </View>
     );
