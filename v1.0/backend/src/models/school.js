@@ -35,14 +35,13 @@ const schoolSchema = new mongoose.Schema({
         default: false,
     },
     autoSync: { 
-        enable: {
             type: Boolean,
             required: false
         },
-        frequency: {
+    autoSyncFrequency: {
             type: String,
-            required: false
-        }
+        required: false,
+        default: 600000
     }
 }, {
     timestamps: false

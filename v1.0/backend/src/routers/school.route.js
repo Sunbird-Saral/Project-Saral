@@ -13,12 +13,8 @@ router.post('/schools/create', async (req, res) => {
         school.state = req.body.state.toLowerCase()
         school.schoolId = req.body.schoolId.toLowerCase()
 
-        if (req.body.autoSync.enable === true) {
-            school.autoSync.enable = req.body.autoSync.enable
-            school.autoSync.frequency = 100000
-        } else {
-            school.autoSync.enable = req.body.autoSync.enable
-        }
+        if (req.body.autoSync) school.autoSync = req.body.autoSync
+        if(req.body.autoSyncFrequency)   school.autoSyncFrequency = req.body.autoSyncFrequency
 
         await school.save()
         let schools = {
