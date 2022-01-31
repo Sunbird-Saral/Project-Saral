@@ -7,6 +7,11 @@
       "layout": {
           "version": "1.0",
           "name": "HINDI4S20QOMR Exam Sheet Form",
+          "threshold": {
+            "minWidth" : 500,
+            "minHeight": 330
+        },  
+         
           "cells": [
               {
                   "cellId": "1",
@@ -104,7 +109,8 @@
                       "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401"
                   },
                   "validate": {
-                      "regExp": ""
+                      "regExp": "",
+                      "errorMsg":"id can not be greater then 7 digit"
                   }
               },
               {
@@ -131,7 +137,8 @@
                       "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q1 "
                   },
                   "validate": {
-                      "regExp": ""
+                      "regExp": "",
+                      "errorMsg":"Omr mark should be 1 or 0"
                   }
               },
               {
@@ -158,7 +165,8 @@
                       "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q2"
                   },
                   "validate": {
-                      "regExp": ""
+                      "regExp": "",
+                      "errorMsg":"Omr mark should be 1 or 0"
                   }
               },
               {
@@ -185,7 +193,8 @@
                       "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q3 "
                   },
                   "validate": {
-                      "regExp": ""
+                      "regExp": "",
+                      "errorMsg":"Omr mark should be 1 or 0"
                   }
               },
               {
@@ -212,7 +221,8 @@
                       "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q4"
                   },
                   "validate": {
-                      "regExp": ""
+                      "regExp": "",
+                      "errorMsg":"Omr mark should be 1 or 0"
                   }
               },
               {
@@ -239,7 +249,8 @@
                       "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q5"
                   },
                   "validate": {
-                      "regExp": ""
+                      "regExp": "",
+                      "errorMsg":"Omr mark should be 1 or 0"
                   }
               },
               {
@@ -266,7 +277,8 @@
                       "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q6"
                   },
                   "validate": {
-                      "regExp": ""
+                      "regExp": "",
+                      "errorMsg":"Omr mark should be 1 or 0"
                   }
               },
               {
@@ -293,7 +305,8 @@
                       "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q7"
                   },
                   "validate": {
-                      "regExp": ""
+                      "regExp": "",
+                      "errorMsg":"Omr mark should be 1 or 0"
                   }
               },
               {
@@ -320,7 +333,8 @@
                       "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q8"
                   },
                   "validate": {
-                      "regExp": ""
+                      "regExp": "",
+                      "errorMsg":"Omr mark should be 1 or 0"
                   }
               },
               {
@@ -347,7 +361,8 @@
                       "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q9"
                   },
                   "validate": {
-                      "regExp": ""
+                      "regExp": "",
+                      "errorMsg":"Omr mark should be 1 or 0"
                   }
               },
               {
@@ -374,7 +389,8 @@
                       "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q10"
                   },
                   "validate": {
-                      "regExp": ""
+                      "regExp": "",
+                      "errorMsg":"Omr mark should be 1 or 0"
                   }
               },
               {
@@ -401,7 +417,8 @@
                       "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q11"
                   },
                   "validate": {
-                      "regExp": ""
+                      "regExp": "",
+                      "errorMsg":"Omr mark should be 1 or 0"
                   }
               },
               {
@@ -428,7 +445,8 @@
                       "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q12"
                   },
                   "validate": {
-                      "regExp": ""
+                      "regExp": "",
+                      "errorMsg":"Omr mark should be 1 or 0"
                   }
               },
               {
@@ -455,7 +473,8 @@
                       "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q13"
                   },
                   "validate": {
-                      "regExp": ""
+                      "regExp": "",
+                      "errorMsg":"Omr mark should be 1 or 0"
                   }
               },
               {
@@ -482,7 +501,8 @@
                       "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q14 "
                   },
                   "validate": {
-                      "regExp": ""
+                      "regExp": "",
+                      "errorMsg":"Omr mark should be 1 or 0"
                   }
               },
               {
@@ -509,7 +529,8 @@
                       "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q15"
                   },
                   "validate": {
-                      "regExp": ""
+                      "regExp": "",
+                      "errorMsg":"Omr mark should be 1 or 0"
                   }
               },
               {
@@ -536,7 +557,8 @@
                       "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q16"
                   },
                   "validate": {
-                      "regExp": ""
+                      "regExp": "",
+                      "errorMsg":"Omr mark should be 1 or 0"
                   }
               },
               {
@@ -563,7 +585,8 @@
                       "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q17"
                   },
                   "validate": {
-                      "regExp": ""
+                      "regExp": "",
+                      "errorMsg":"Omr mark should be 1 or 0"
                   }
               },
               {
@@ -590,7 +613,8 @@
                       "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q18"
                   },
                   "validate": {
-                      "regExp": ""
+                      "regExp": "",
+                      "errorMsg":"Omr mark should be 1 or 0"
                   }
               },
               {
@@ -617,7 +641,8 @@
                       "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q19"
                   },
                   "validate": {
-                      "regExp": ""
+                      "regExp": "",
+                      "errorMsg":"Omr mark should be 1 or 0"
                   }
               },
               {
@@ -644,7 +669,8 @@
                       "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q20"
                   },
                   "validate": {
-                      "regExp": ""
+                      "regExp": "",
+                      "errorMsg":"Omr mark should be 1 or 0"
                   }
               },
               {
@@ -2577,6 +2603,10 @@
       "layout": {
           "version": "1.0",
           "name": "HINDI3S30QOMR Exam Sheet Form",
+          "threshold": {
+            "minWidth" : 500,
+            "minHeight": 400
+        },  
           "cells": [
               {
                   "cellId": "1",
@@ -5318,6 +5348,10 @@
       "layout": {
           "version": "1.0",
           "name": "UP SAT Exam Sheet Form",
+          "threshold": {
+            "minWidth" : 500,
+            "minHeight": 400
+        },  
           "cells": [
               {
                   "cellId": "1",
@@ -6734,6 +6768,10 @@
       "layout": {
           "version": "1.0",
           "name": "HINDI4S20QOMR Exam Sheet Form",
+          "threshold": {
+            "minWidth" : 500,
+            "minHeight": 400
+        },  
           "cells": [
               {
                   "cellId": "1",
@@ -9304,6 +9342,10 @@
       "layout": {
           "version": "1.0",
           "name": "HINDI4S20Q Exam Sheet Form",
+          "threshold": {
+            "minWidth" : 500,
+            "minHeight": 400
+        },  
           "cells": [
               {
                   "cellId": "1",
@@ -11874,6 +11916,10 @@
       "layout": {
           "version": "1.0",
           "name": "HINDI4S20Q Exam Sheet Form",
+          "threshold": {
+            "minWidth" : 500,
+            "minHeight": 200
+        },  
           "cells": [
               {
                   "cellId": "1",
@@ -14444,6 +14490,10 @@
       "layout": {
           "version": "1.0",
           "name": "MULTISUBJECT1S10Q Exam Sheet Form",
+          "threshold": {
+            "minWidth" : 500,
+            "minHeight": 200
+        },  
           "cells": [
               {
                   "cellId": "1",
@@ -15860,6 +15910,10 @@
       "layout": {
           "version": "1.0",
           "name": "ANY1S10Q SAT Exam Sheet Form",
+          "threshold": {
+            "minWidth" : 500,
+            "minHeight": 350
+        },  
           "cells": [
               {
                   "cellId": "1",
@@ -16963,6 +17017,10 @@
       "layout": {
           "version": "1.0",
           "name": "ANY1S10Q SAT Exam Sheet Form",
+          "threshold": {
+            "minWidth" : 500,
+            "minHeight": 200
+        },  
           "cells": [
               {
                   "cellId": "1",
@@ -18066,6 +18124,10 @@
       "layout": {
           "version": "1.0",
           "name": "ANY1S10Q SAT Exam Sheet Form",
+          "threshold": {
+            "minWidth" : 500,
+            "minHeight": 200
+        },  
           "cells": [
               {
                   "cellId": "1",
@@ -19170,6 +19232,10 @@
           "layout": {
               "version": "1.0",
               "name": "ANY1S34Q PAT Exam Sheet Form",
+              "threshold": {
+                "minWidth" : 500,
+                "minHeight": 200
+            },  
               "cells": [
                   {
                       "cellId": "1",
@@ -20711,6 +20777,10 @@
           "layout": {
               "version": "1.0",
               "name": "GUJRAT PAT Exam Sheet Form",
+              "threshold": {
+                "minWidth" : 500,
+                "minHeight": 200
+            },  
               "cells": [
                   {
                       "cellId": "1",
@@ -22252,6 +22322,10 @@
           "layout": {
               "version": "1.0",
               "name": "GUJRAT PAT Exam Sheet Form",
+              "threshold": {
+                "minWidth" : 500,
+                "minHeight": 200
+            },  
               "cells": [
                   {
                       "cellId": "1",
@@ -27413,6 +27487,10 @@
           "layout": {
               "version": "1.0",
               "name": "ANY1S12Q Exam Sheet Form",
+              "threshold": {
+                "minWidth" : 500,
+                "minHeight": 200
+            },  
               "cells": [
                   {
                       "cellId": "1",
@@ -27995,6 +28073,10 @@
           "layout": {
               "version": "1.0",
               "name": "ANY1S5QMULTICHOICE Exam Sheet Form",
+              "threshold": {
+                "minWidth" : 500,
+                "minHeight": 200
+            },  
               "cells": [
                   {
                       "cellId": "1",
@@ -28544,6 +28626,10 @@
           "layout": {
               "version": "1.0",
               "name": "ANY1S5QMULTICHOICE Exam Sheet Form",
+              "threshold": {
+                "minWidth" : 500,
+                "minHeight": 200
+            },  
               "cells": [
                   {
                       "cellId": "1",
@@ -29094,6 +29180,10 @@
               "version": "1.0",
               "name": "ANY1S15QMULTIPAGE Exam Sheet Form",
               "pages": "3",
+              "threshold": {
+                "minWidth" : 500,
+                "minHeight": 200
+            },  
               "cells": [
                   {
                       "cellId": "1",
@@ -30528,6 +30618,10 @@
         "layout": {
             "version": "1.0",
             "name": "ANY20QATTENDANCE Exam Sheet Form",
+            "threshold": {
+                "minWidth" : 500,
+                "minHeight": 200
+            },  
             "cells": [
                 {
                     "cellId": "1",
@@ -33063,6 +33157,10 @@
         "layout": {
             "version": "1.0",
             "name": "ANY20QMIDDAYMEAL Exam Sheet Form",
+            "threshold": {
+                "minWidth" : 500,
+                "minHeight": 200
+            },  
             "cells": [
                 {
                     "cellId": "1",
@@ -35599,6 +35697,10 @@
             "version": "1.0",
             "name": "ANY1S24Q Exam Sheet Form",
             "pages": 2,
+            "threshold": {
+                "minWidth" : 500,
+                "minHeight": 200
+            },  
             "cells": [
                 {
                     "cellId": "1",

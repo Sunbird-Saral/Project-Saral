@@ -10,7 +10,8 @@ const MarksHeaderTable = ({
     onChangeText,
     rowBorderColor,
     keyboardType,
-    maxLength
+    maxLength,
+    errorValidation
 }) => {
     return (
         <View style={[styles.container, customRowStyle, { borderColor: rowBorderColor }]}>
@@ -29,6 +30,7 @@ const MarksHeaderTable = ({
                     onChangeText={onChangeText}
                     keyboardType={keyboardType}
                     maxLength={maxLength}
+                    errorValidation={errorValidation}
                 />
             }
         </View>

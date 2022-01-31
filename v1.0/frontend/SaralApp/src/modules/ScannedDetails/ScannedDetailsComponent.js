@@ -40,9 +40,9 @@ const ScannedDetailsComponent = ({
     loginData,
     bgFlag,
     roiData,
-    multiPageReducer
+    multiPageReducer,
 }) => {
-
+   
 
     //Hookes
     const [summary, setSummary] = useState(false)
@@ -76,8 +76,10 @@ const ScannedDetailsComponent = ({
     const [logmessage, setLogmessage] = useState()
     const [multiPage, setMultiPage] = useState(0)
     const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.scannedDetailComponent[0]
-
-
+    
+const errorMsgId =ocrLocalResponse.layout &&ocrLocalResponse.layout.cells[0] && ocrLocalResponse.layout.cells[0].validate.errorMsg
+ const errorMarkserror = ocrLocalResponse.layout && ocrLocalResponse.layout.cells[1]
+ const errorMarks = errorMarkserror.validate.errorMsg
 
     const inputRef = React.createRef();
     const dispatch = useDispatch()
@@ -123,7 +125,7 @@ const ScannedDetailsComponent = ({
                 setStudentDATA([])
             }   else if (a.length == 0) {
                 setIsStudentValid(true)
-                setStdErr(Strings.please_correct_student_id)
+                setStdErr(errorMsgId ? errorMsgId:Strings.please_correct_student_id)
             } else {
                 setIsStudentValid(false)
                 setStudentValid(true)
@@ -157,7 +159,7 @@ const ScannedDetailsComponent = ({
             }
         }
         else if (!toggleCheckBox) {
-            setStdErr(Strings.please_correct_student_id)
+            setStdErr(errorMsgId ? errorMsgId: Strings.please_correct_student_id)
             setStudentDATA([])
             setStudentValid(false)
         } else {
@@ -286,7 +288,7 @@ const ScannedDetailsComponent = ({
         })
     }
 
-
+  
     const goNextFrame = () => {
 
         let validCell = false
@@ -296,12 +298,14 @@ const ScannedDetailsComponent = ({
                 validCell = true
             }
             else if (newArrayValue[i].consolidatedPrediction === 0) {
-                omrMark = true
+                showErrorMessage(newArrayValue[i].validate.errorMsg ? newArrayValue[i].validate.errorMsg : Strings.omr_mark_should_be)
+                 omrMark = true
             }
         }
         let duplication = false
 
         let cellOmrValidation = validateCellOMR(true)
+       
         const duplicate = checkStdRollDuplicate.some((item) => studentId == item)
 
         if (duplicate) {
@@ -309,8 +313,10 @@ const ScannedDetailsComponent = ({
         } else {
             duplication = false
         }
+        
+            
         if (omrMark) {
-            showErrorMessage(Strings.omr_mark_should_be)
+            //    showErrorMessage( Strings.omr_mark_should_be)
         }
         else if (cellOmrValidation[0]) {
             showErrorMessage(`omr value should be 0 to ${cellOmrValidation[1] + 1}`)
@@ -319,14 +325,14 @@ const ScannedDetailsComponent = ({
             Alert.alert(Strings.Student_ID_Shouldnt_be_duplicated)
         }
         else if (disable) {
-            showErrorMessage(Strings.please_correct_marks_data)
+          showErrorMessage( Strings.please_correct_marks_data)
         }
         else if (validCell) {
-            showErrorMessage(Strings.please_correct_marks_data)
+             showErrorMessage( Strings.please_correct_marks_data)
         }
         else if (!studentValid && !toggleCheckBox) {
-            showErrorMessage(Strings.please_correct_student_id)
-            setStdErr(Strings.please_correct_student_id)
+            showErrorMessage(errorMsgId ? errorMsgId: Strings.please_correct_student_id)
+            setStdErr(errorMsgId ? errorMsgId: Strings.please_correct_student_id)
         }
         else {
             if (currentIndex + 1 <= stdRollArray.length - 1) {
@@ -612,8 +618,8 @@ const ScannedDetailsComponent = ({
     }
 
 
-    const handleTextChange = (text, index, array, value) => {
-
+    const handleTextChange = (text, index, array, value,element) => {
+          console.log('araaaaaaaaaaaaaaa',array)
         if (isMultipleStudent) {
             let len = text.length
             setDisabled(len == 0 ? true : false)
@@ -731,13 +737,13 @@ const ScannedDetailsComponent = ({
 
 
         if (disable || validCell) {
-            showErrorMessage(Strings.please_correct_marks_data)
+             showErrorMessage(Strings.please_correct_marks_data)
         }
         else if (cellOmrValidation[0]) {
             showErrorMessage(`omr value should be 0 to ${cellOmrValidation[1]}`)
         }
         else if (!studentValid && !toggleCheckBox) {
-            showErrorMessage(Strings.please_correct_student_id)
+            showErrorMessage(errorMsgId ? errorMsgId: Strings.please_correct_student_id)
         }
         else if(isStudentValid){
             showErrorMessage(Strings.student_id_should_be_same)
@@ -875,7 +881,7 @@ const ScannedDetailsComponent = ({
         
         if (currentIndex - 1 >= 1) {
             if (!studentValid && !toggleCheckBox) {
-                showErrorMessage(Strings.please_correct_student_id)
+                showErrorMessage(errorMsgId ? errorMsgId:Strings.please_correct_student_id)
             }
             else if (isStudentValid){
                 showErrorMessage(Strings.student_id_should_be_same)
@@ -1077,7 +1083,6 @@ const ScannedDetailsComponent = ({
                                                     <TextField
                                                         labelText={BrandLabel && BrandLabel.StudentId ? BrandLabel.StudentId : Strings.student_id}
                                                         errorField={stdErr != '' || isNaN(studentId)}
-                                                        // errorText={BrandLabel && BrandLabel.CorrectId ? stdErr != '' ? stdErr : BrandLabel.CorrectId : stdErr != '' ? stdErr : Strings.please_correct_student_id}
                                                         errorText={ stdErr != '' ? stdErr : Strings.please_correct_student_id}
                                                         onChangeText={(text) => {
                                                             setStudentID(text)
