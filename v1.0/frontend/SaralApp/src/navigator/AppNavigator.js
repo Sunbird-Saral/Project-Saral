@@ -200,9 +200,10 @@ function dispatchAPIAsync(apiObj) {
         payload: apiObj.getPayload()
     }
 }
+const loginData = storeFactory.getState().loginData
+const autoSyncFrequency = loginData.data && loginData.data.school && loginData.data.school.autoSyncFrequency
 
 setInterval(() => {
-
     const loginData = storeFactory.getState().loginData
     const hasAutoSync = Object.keys(loginData).length > 0  && loginData.data.school.hasOwnProperty("autoSync") && loginData.data.school.autoSync ? true : false
     
@@ -216,8 +217,9 @@ setInterval(() => {
             }
         }
     }
+// },600000)
     //timer for 10 min
-}, 600000);
+}, autoSyncFrequency);
 
 
 const AppNavigation = createSwitchNavigator(
