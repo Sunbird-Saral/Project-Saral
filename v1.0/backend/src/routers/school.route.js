@@ -67,7 +67,8 @@ router.post('/schools/login', async (req, res) => {
             name: schools.name,
             schoolId: schools.schoolId,
             state: schools.state,
-            autoSync: schools.autoSync
+            autoSync: schools.autoSync,
+            autoSyncFrequency: schools.autoSyncFrequency
         }
 
         let response = {
@@ -125,7 +126,7 @@ router.patch('/schools/:schoolId', async (req, res) => {
     try {
         if (Object.keys(req.body).length === 0) res.status(400).send({ message: 'Validation error.' })
         const updates = Object.keys(req.body)
-        const allowedUpdates = ['name', 'state', 'udisceCode', 'storeTrainingData', 'autoSync']
+        const allowedUpdates = ['name', 'state', 'udisceCode', 'storeTrainingData', 'autoSync', 'autoSyncFrequency']
         const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
 
         if (!isValidOperation) {
