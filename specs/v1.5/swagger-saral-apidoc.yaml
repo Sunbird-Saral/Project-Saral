@@ -675,7 +675,7 @@ definitions:
             example: true
           autoSyncFrequency:
             type: string
-            description: "It should be in millisecond"
+            description: "Auto Sync frequency in milli-seconds. Saral App uses syncs data in local storage to backend based on this frequency value"
             default: 600000
             example: 900000
           storeTrainingData:
@@ -754,7 +754,7 @@ definitions:
         example: true
       autoSyncFrequency:
           type: string
-          description: "It should be in millisecond"
+          description: "Auto Sync frequency in milli-seconds. Saral App uses syncs data in local storage to backend based on this frequency value"
           example: 900000
       storeTrainingData:
         type: boolean
@@ -798,7 +798,7 @@ definitions:
         example: true
       autoSyncFrequency:
         type: string
-        description: "It should be in millisecond"
+        description: "Auto Sync frequency in milli-seconds. Saral App uses syncs data in local storage to backend based on this frequency value"
         example: 900000
       storeTrainingData:  
         type: boolean

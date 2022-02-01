@@ -35,11 +35,11 @@ const schoolSchema = new mongoose.Schema({
         default: false,
     },
     autoSync: { 
-            type: Boolean,
-            required: false
-        },
+        type: Boolean,
+        required: false
+    },
     autoSyncFrequency: {
-            type: String,
+        type: Number,
         required: false,
         default: 600000
     }
