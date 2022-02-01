@@ -675,6 +675,7 @@ definitions:
             example: true
           autoSyncFrequency:
             type: string
+            description: "It should be in millisecond"
             default: 600000
             example: 900000
           storeTrainingData:
@@ -753,6 +754,7 @@ definitions:
         example: true
       autoSyncFrequency:
           type: string
+          description: "It should be in millisecond"
           example: 900000
       storeTrainingData:
         type: boolean
@@ -796,6 +798,7 @@ definitions:
         example: true
       autoSyncFrequency:
         type: string
+        description: "It should be in millisecond"
         example: 900000
       storeTrainingData:  
         type: boolean
