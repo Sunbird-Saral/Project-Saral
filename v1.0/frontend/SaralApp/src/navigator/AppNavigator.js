@@ -201,11 +201,12 @@ function dispatchAPIAsync(apiObj) {
     }
 }
 const loginData = storeFactory.getState().loginData
-const autoSyncFrequency = Object.keys(loginData).length > 0 ? loginData.data.school.hasOwnProperty("autoSyncFrequency") && loginData.data.school.autoSyncFrequency ? loginData.data.school.autoSyncFrequency : 1000 : 1000
+let autoSyncFrequency = Object.keys(loginData).length > 0 ? loginData.data.school.hasOwnProperty("autoSyncFrequency") && loginData.data.school.autoSyncFrequency ? loginData.data.school.autoSyncFrequency : 600000 : 600000
 
 setInterval(() => {
     const loginData = storeFactory.getState().loginData
-    const hasAutoSync = Object.keys(loginData).length > 0  && loginData.data.school.hasOwnProperty("autoSync") && loginData.data.school.autoSync ? true : false
+    const hasAutoSync = Object.keys(loginData).length > 0 && loginData.data.school.hasOwnProperty("autoSync") && loginData.data.school.autoSync ? true : false
+    autoSyncFrequency = Object.keys(loginData).length > 0 ? loginData.data.school.hasOwnProperty("autoSyncFrequency") && loginData.data.school.autoSyncFrequency ? loginData.data.school.autoSyncFrequency : 600000 : 600000
     
     if (hasAutoSync) {
         //get redux value 
