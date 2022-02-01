@@ -201,7 +201,7 @@ function dispatchAPIAsync(apiObj) {
     }
 }
 const loginData = storeFactory.getState().loginData
-const autoSyncFrequency = loginData.data && loginData.data.school && loginData.data.school.autoSyncFrequency
+const autoSyncFrequency = Object.keys(loginData).length > 0 ? loginData.data.school.hasOwnProperty("autoSyncFrequency") && loginData.data.school.autoSyncFrequency ? loginData.data.school.autoSyncFrequency : 1000 : 1000
 
 setInterval(() => {
     const loginData = storeFactory.getState().loginData
