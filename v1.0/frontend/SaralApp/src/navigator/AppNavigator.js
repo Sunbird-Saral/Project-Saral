@@ -212,7 +212,7 @@ setInterval(() => {
         if (isLogin.status == 200) {
             storeFactory.dispatch(flagAction(true))
             if (checkNetworkConnectivity()) {
-                saveDataInDB()
+                // saveDataInDB()
             }
         }
     }
