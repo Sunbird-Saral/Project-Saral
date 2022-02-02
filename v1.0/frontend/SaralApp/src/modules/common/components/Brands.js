@@ -158,7 +158,7 @@ class Brands extends PureComponent {
                 }
             }
             //timer for 10 min
-        }, 600000);
+        }, bgTimer);
       }
     
     render() {
