@@ -3,7 +3,8 @@
   "schoolId": "u001",
   "password": "tarento@123",
   "state": "up",
-  "autoSync": true,
+  "autoSync": false,
+  "autoSyncFrequency": 600000,
   "storeTrainingData": true
 },
 {
@@ -12,6 +13,7 @@
   "password": "tarento@123",
   "state": "odisha",
   "autoSync": false,
+  "autoSyncFrequency": 600000,
   "storeTrainingData": true
 },
 {
@@ -20,6 +22,7 @@
   "password": "Demo@123",
   "state": "gujrat",
   "autoSync": false,
+  "autoSyncFrequency": 600000,
   "storeTrainingData": true
 },
 {
@@ -27,6 +30,7 @@
 "schoolId": "u002",
 "password": "tarento@123",
 "autoSync": true,
+"autoSyncFrequency": 900000,
 "state": "up",
 "storeTrainingData": true
 },
@@ -35,6 +39,7 @@
   "schoolId": "skill001",
   "password": "skill@123",
   "state": "karnataka",
+  "autoSyncFrequency": 600000,
   "storeTrainingData": true
   }
 ]

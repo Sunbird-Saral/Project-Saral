@@ -673,6 +673,11 @@ definitions:
             type: boolean
             default: false
             example: true
+          autoSyncFrequency:
+            type: number
+            description: "Auto Sync frequency in milli-seconds. Saral App uses syncs data in local storage to backend based on this frequency value"
+            default: 600000
+            example: 900000
           storeTrainingData:
             type: boolean
             description: "If this is set to true frontend application will return base 64 encoded images . In savesMarksAPI and getSavedScanAPI these APIs will get data and value of encoded images will be stored in these fields studentIdTrainingData and trainningData, studentIdTrainingData field will contain base 64 encoded images of rollnumber and trainningData field will contain base 64 encoded images for marks. "
@@ -747,6 +752,10 @@ definitions:
       autoSync:
         type: boolean
         example: true
+      autoSyncFrequency:
+          type: number
+          description: "Auto Sync frequency in milli-seconds. Saral App uses syncs data in local storage to backend based on this frequency value"
+          example: 900000
       storeTrainingData:
         type: boolean
         default: false
@@ -787,6 +796,10 @@ definitions:
       autoSync:
         type: boolean
         example: true
+      autoSyncFrequency:
+        type: number
+        description: "Auto Sync frequency in milli-seconds. Saral App uses syncs data in local storage to backend based on this frequency value"
+        example: 900000
       storeTrainingData:  
         type: boolean
         default: false
@@ -1648,4 +1661,3 @@ definitions:
        
   
         
-
