@@ -67,6 +67,7 @@ const StudentsList = ({
     const BrandLabel = multiBrandingData&&multiBrandingData.screenLabels&&multiBrandingData.screenLabels.studentList[0]
 
 useEffect(() => {
+    getRoi()
     studentData()
 }, []);
 
@@ -90,6 +91,7 @@ useEffect(() => {
 
 
     const callScanStatusData = async () => {
+        setIsLoading(true)
         let loginCred = await getLoginCred()
 
         let dataPayload = {
@@ -122,12 +124,14 @@ useEffect(() => {
                 }
             })
                 .then(function (res) {
+                    setIsLoading(false)
                     apiResponse = res
                     clearTimeout(id)
                     api.processResponse(res)
                     dispatch(dispatchAPIAsync(api));
                 })
                 .catch(function (err) {
+                    setIsLoading(false)
                     collectErrorLogs("StudentList.js","FetchSavedScannedData",api.apiEndPoint(),err,false)
                     clearTimeout(id)
                 });
@@ -150,8 +154,7 @@ useEffect(() => {
         })
         setTotalStudent(filterStudentsData[0].data ? filterStudentsData[0].data.students : []);
         setAllStudentData(filterStudentsData[0].data.students)
-        getRoi()
-        callScanStatusData()
+        
     }
 
 
@@ -300,6 +303,7 @@ useEffect(() => {
         let token = loginData.data.token
         let apiObj = new ROIAction(payload, token);
         dispatch(APITransport(apiObj))
+        callScanStatusData()
     }
 
 
