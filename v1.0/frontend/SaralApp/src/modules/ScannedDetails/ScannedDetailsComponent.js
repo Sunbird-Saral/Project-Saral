@@ -300,7 +300,6 @@ const ScannedDetailsComponent = ({
             let result = regex.test(number);
             setRegexResult(result)
             setValidateMsg(regexErrormsg)
-            console.log(regexResult)
         }
 
 
@@ -334,7 +333,7 @@ const ScannedDetailsComponent = ({
             }
 
             if (omrMark) {
-                showErrorMessage(validateMsg ? validateMsg :defaultValidateError)
+                showErrorMessage(validateMsg ? validateMsg :defaultValidateError || Strings.omr_mark_should_be)
             }
             else if (cellOmrValidation[0]) {
                 showErrorMessage(`omr value should be 0 to ${cellOmrValidation[1] + 1}`)
@@ -416,7 +415,7 @@ const ScannedDetailsComponent = ({
             }
         }
         else {
-            showErrorMessage(validateMsg ? validateMsg : defaultValidateError)
+            showErrorMessage(validateMsg ? validateMsg : defaultValidateError ||Strings.omr_mark_should_be)
         }
     }
   
@@ -763,7 +762,7 @@ const ScannedDetailsComponent = ({
                 }
             }
             if (omrMark) {
-                showErrorMessage(validateMsg ? validateMsg : defaultValidateError )
+                showErrorMessage(validateMsg ? validateMsg : defaultValidateError || Strings.omr_mark_should_be )
                 //  showErrorMessage( Strings.omr_mark_should_be)
             }
             let cellOmrValidation = validateCellOMR(false)
@@ -774,7 +773,7 @@ const ScannedDetailsComponent = ({
             }
 
             else if (cellOmrValidation[0]) {
-                 showErrorMessage(validateMsg)
+                 showErrorMessage(validateMsg ? validateMsg :  `omr value should be 0 to ${cellOmrValidation[1]}`)
                 // showErrorMessage(`omr value should be 0 to ${cellOmrValidation[1]}`)
             }
             else if (!studentValid && !toggleCheckBox) {
