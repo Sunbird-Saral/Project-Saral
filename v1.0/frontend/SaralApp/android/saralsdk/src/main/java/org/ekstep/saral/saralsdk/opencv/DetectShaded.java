@@ -58,34 +58,13 @@ public class DetectShaded {
     public boolean isOMRFilled(Mat imageMat)
     {
         boolean isOMRFilled = false;
-        byte _BLACK_PIXEL_THRESHOLD = 100;
         byte _OMR_FILLED_THRESHOULD = 100;
         Mat gray  = new Mat();
         Imgproc.cvtColor(imageMat, gray, Imgproc.COLOR_BGR2GRAY);
         Imgproc.GaussianBlur(gray, gray, new Size(3, 3), 0);
         Mat threshInv= new Mat();
         double otsu_thresh_val =Imgproc.threshold(gray, threshInv, 0, 255, Imgproc.THRESH_BINARY_INV + Imgproc.THRESH_OTSU);
-        otsu_thresh_val =Imgproc.threshold(threshInv, threshInv, otsu_thresh_val-50 , 255, Imgproc.THRESH_BINARY_INV);
-
-//        int width = threshInv.width();
-//        int height = threshInv.height();
-//        int num_pixels = (int) threshInv.total();
-//        int darkPixelCount =0;
-//        double [] pixel = new double[3];
-//
-//        for (int row = 0; row < height; row++) {
-//            for (int column = 0; column < width; column++) {
-//                pixel = threshInv.get(row,column);
-//                if(pixel[0]<= otsu_thresh_val )
-//                {
-//                    darkPixelCount++;
-//                }
-//            }
-//        }
-        //if (DEBUG) {
-            //Log.d(TAG, "OMR Dark Pixels Count:: "+darkPixelCount+" num_pixels:: "+num_pixels);
-        //}
-        Log.d(TAG, "Core.countNonZero(threshInv) "+Core.countNonZero(threshInv));
+        otsu_thresh_val =Imgproc.threshold(gray, threshInv, otsu_thresh_val-50 , 255, Imgproc.THRESH_BINARY_INV);
         isOMRFilled = Core.countNonZero(threshInv) >= _OMR_FILLED_THRESHOULD;
         return isOMRFilled;
     }
