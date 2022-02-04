@@ -217,7 +217,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
         double DARKNESS_THRESHOLD   = 80.0;
         mStartTime                  = SystemClock.uptimeMillis();
         loadLayoutConfiguration();
-        Mat tableMat                = mTableCornerDetection.processMat(image,layoutMinWidth,layoutMinHeight);
+        Mat tableMat                = mTableCornerDetection.processMat(image,layoutMinWidth,layoutMinHeight,detectionRadius);
         if(isMultiChoiceOMRLayout)
         {
             DARKNESS_THRESHOLD = 70.0;
@@ -252,8 +252,8 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                         // if (percent > DARKNESS_THRESHOLD) {
                         //     answer = 1;
                         // }
-                        // Alternative logic
-                        if (mDetectShaded.isOMRFilled(omrROI,detectionRadius)) {
+                        // New Logic
+                        if (mDetectShaded.isOMRFilled(omrROI)) { 
                             answer = 1;
                         }
                         mRoiMatBase64.put(roiId,createBase64FromMat(omrROI));
