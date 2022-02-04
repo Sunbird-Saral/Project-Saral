@@ -48,7 +48,7 @@ public class TableCornerCirclesDetection {
         DEBUG = debug;
     }
 
-    public Mat processMat(Mat image,int minWidth,int minHeight) {
+    public Mat processMat(Mat image,int minWidth,int minHeight,int detectionRadius) {
 
         Mat gray        = new Mat();
         Imgproc.cvtColor(image, gray, Imgproc.COLOR_BGR2GRAY);
@@ -68,7 +68,7 @@ public class TableCornerCirclesDetection {
             Point bottomLeft, bottomRight;
 
             List<Point> points = CVOperations.getCirclesPoint(circles);
-            if(!hasLayoutDetectionCircles(image, circles))
+            if(detectionRadius > 0 && !hasLayoutDetectionCircles(image, circles,detectionRadius))
             {
                 showFocusAlert(image);
                 return null;
@@ -154,7 +154,7 @@ public class TableCornerCirclesDetection {
         Imgproc.putText(image, text, position, font, scale, color, thickness);
     }
 
-    private final boolean hasLayoutDetectionCircles(Mat src, Mat circles) {
+    private final boolean hasLayoutDetectionCircles(Mat src, Mat circles,int detectionRadius) {
         boolean isValid= true;
         if (circles.cols() > 0) {
             for (int x = 0; x < circles.cols(); x++) {
@@ -162,7 +162,7 @@ public class TableCornerCirclesDetection {
                 Point center = new Point(Math.round(c[0]), Math.round(c[1]));
                 // circle outline
                 int radius = (int) Math.round(c[2]);
-                if(radius < 19){ // Detection circle radius is 19
+                if(radius < detectionRadius){ // Detection circle radius is 19
                     isValid= false;
                     break;
                 }

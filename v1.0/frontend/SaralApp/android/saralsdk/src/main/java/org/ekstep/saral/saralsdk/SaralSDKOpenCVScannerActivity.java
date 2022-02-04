@@ -72,6 +72,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
     private boolean isMultiChoiceOMRLayout = false;
     private int layoutMinWidth = 0;
     private int layoutMinHeight = 0;
+    private int detectionRadius = 0;
 
     public SaralSDKOpenCVScannerActivity() {
         Log.i(TAG, "Instantiated new " + this.getClass());
@@ -252,7 +253,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                         //     answer = 1;
                         // }
                         // Alternative logic
-                        if (mDetectShaded.isOMRFilled(omrROI)) {
+                        if (mDetectShaded.isOMRFilled(omrROI,detectionRadius)) {
                             answer = 1;
                         }
                         mRoiMatBase64.put(roiId,createBase64FromMat(omrROI));
@@ -338,8 +339,15 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
             JSONObject layoutObject     = layoutConfigs.getJSONObject("layout");
             if(layoutObject.has("threshold")){
                 JSONObject threshold = layoutObject.getJSONObject("threshold");
-                layoutMinWidth=Integer.parseInt(threshold.getString("minWidth"));
-                layoutMinHeight=Integer.parseInt(threshold.getString("minHeight"));
+                if(threshold.getString("minWidth")!=null){
+                    layoutMinWidth=Integer.parseInt(threshold.getString("minWidth"));
+                }
+                if(threshold.getString("minHeight")!=null){
+                    layoutMinHeight=Integer.parseInt(threshold.getString("minHeight"));
+                }
+                if(threshold.getString("detectionRadius")!=null){
+                    detectionRadius=Integer.parseInt(threshold.getString("detectionRadius"));
+                }                
             }
             JSONArray  cells            = layoutObject.getJSONArray("cells");
             for (int i = 0; i < cells.length(); i++) { 
