@@ -29,7 +29,6 @@ import { Assets } from '../../assets';
 import SaralSDK from '../../../SaralSDK'
 //npm
 import CheckBox from '@react-native-community/checkbox';
-import { result } from 'lodash';
 
 
 const ScannedDetailsComponent = ({
@@ -1141,7 +1140,6 @@ const ScannedDetailsComponent = ({
                                                     <TextField
                                                         labelText={BrandLabel && BrandLabel.StudentId ? BrandLabel.StudentId : Strings.student_id}
                                                         errorField={stdErr != '' || isNaN(studentId)}
-                                                        //   maxLength ={7}
                                                         errorText={stdErr != '' ? stdErr : Strings.please_correct_student_id}
                                                         onChangeText={(text) => {
                                                             setStudentID(text)
