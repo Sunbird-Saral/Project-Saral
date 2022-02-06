@@ -78,7 +78,7 @@ const ScannedDetailsComponent = ({
     const [multiPage, setMultiPage] = useState(0)
 
     const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.scannedDetailComponent[0]
-     const defaultValidateError= ocrLocalResponse.layout &&ocrLocalResponse.layout.resultValidation&& ocrLocalResponse.layout.resultValidation.validate.errorMsg
+    const defaultValidateError = ocrLocalResponse.layout && ocrLocalResponse.layout.resultValidation&& ocrLocalResponse.layout.resultValidation.validate.errorMsg
     const inputRef = React.createRef();
     const dispatch = useDispatch()
 
@@ -123,7 +123,7 @@ const ScannedDetailsComponent = ({
                 setStudentDATA([])
             } else if (a.length == 0) {
                 setIsStudentValid(true)
-                setStdErr( Strings.please_correct_student_id)
+                setStdErr(Strings.please_correct_student_id)
             } else {
                 setIsStudentValid(false)
                 setStudentValid(true)
@@ -157,7 +157,7 @@ const ScannedDetailsComponent = ({
             }
         }
         else if (!toggleCheckBox) {
-            setStdErr( Strings.please_correct_student_id)
+            setStdErr(Strings.please_correct_student_id)
             setStudentDATA([])
             setStudentValid(false)
         } else {
@@ -285,140 +285,135 @@ const ScannedDetailsComponent = ({
             })
         })
     }
-    const [regexResult, setRegexResult] = useState()
-    const [validateMsg, setValidateMsg] = useState()
-    useEffect(() => {
-        regxValidation(newArrayValue)
-    }, [newArrayValue])
-    const regxValidation = () => {
-        for (let i = 0; i < newArrayValue.length; i++) {
-            let regexErrormsg =newArrayValue&&newArrayValue[i]&& newArrayValue[i].validate.errorMsg
-            let consolidated = newArrayValue[i].consolidatedPrediction
-            let re =newArrayValue[i]&& newArrayValue[i].validate.regExp
-            let number = consolidated;
-            let regex = new RegExp(re)
-            let result = regex.test(number);
-            setRegexResult(result)
-            setValidateMsg(regexErrormsg)
+    const [omrResult,setOmrResult] = useState()
+    const regxValidation = (cellId) => {
+        let result
+        let regexErrormsg
+        for (let i = 0; i < ocrLocalResponse.layout.cells.length; i++) {
+            if(ocrLocalResponse.layout.cells[i].cellId == cellId){
+                let consolidated = ocrLocalResponse.layout.cells[i].consolidatedPrediction
+                regexErrormsg = ocrLocalResponse.layout.cells[i]&& ocrLocalResponse.layout.cells[i].validate.errorMsg
+                let re = ocrLocalResponse.layout.cells[i].validate.regExp
+                let number = consolidated;
+                let regex = new RegExp(re)
+                result = regex.test(number);
+                setOmrResult(regexErrormsg)
+            }
         }
-
-
+        return [result, regexErrormsg]
     }
+
 
     const goNextFrame = () => {
         let validCell = false
         let omrMark = false
-        if (regexResult == true) {
-            
-            for (let i = 0; i < newArrayValue.length; i++) {
-             
-                if (newArrayValue[i].consolidatedPrediction === '') {
-                    validCell = true
-                }
-                else if (newArrayValue[i].consolidatedPrediction === 0 && regexResult === true) {
-                    omrMark = true
-                }
+
+        for (let i = 0; i < newArrayValue.length; i++) {
+
+            if (newArrayValue[i].consolidatedPrediction === '') {
+                validCell = true
             }
 
-            let duplication = false
-
-            let cellOmrValidation = validateCellOMR(true)
-
-            const duplicate = checkStdRollDuplicate.some((item) => studentId == item)
-
-            if (duplicate) {
-                duplication = true
-            } else {
-                duplication = false
+            else if (newArrayValue[i].consolidatedPrediction === 0) {
+                omrMark = true
             }
+        }
 
-            if (omrMark) {
-                showErrorMessage(validateMsg ? validateMsg :defaultValidateError || Strings.omr_mark_should_be)
-            }
-            else if (cellOmrValidation[0]) {
-                showErrorMessage(`omr value should be 0 to ${cellOmrValidation[1] + 1}`)
-            }
+        let duplication = false
 
-            else if (duplication) {
-                Alert.alert(Strings.Student_ID_Shouldnt_be_duplicated)
-            }
-            else if (disable) {
-                showErrorMessage(Strings.please_correct_marks_data)
-            }
-            else if (validCell) {
-                showErrorMessage(Strings.please_correct_marks_data)
-            }
-            else if (!studentValid && !toggleCheckBox) {
-                showErrorMessage(Strings.please_correct_student_id)
-                setStdErr(Strings.please_correct_student_id)
-            }
-            else {
-                if (currentIndex + 1 <= stdRollArray.length - 1) {
+        let cellOmrValidation = validateCellOMR(true)
 
-                    let toggle = structureList[currentIndex + 1].hasOwnProperty("isNotAbleToSave") ? structureList[currentIndex + 1].isNotAbleToSave : false
-                    setToggleCheckBox(toggle)
+        const duplicate = checkStdRollDuplicate.some((item) => studentId == item)
 
-                    //for student validataion
+        if (duplicate) {
+            duplication = true
+        } else {
+            duplication = false
+        }
 
-                    ocrLocalResponse.layout.cells.forEach(element => {
+        if (omrMark) {
+            showErrorMessage(omrResult ? omrResult : defaultValidateError || Strings.omr_mark_should_be)
+        }
+        else if (cellOmrValidation[0]) {
+            showErrorMessage(`omr value should be 0 to ${cellOmrValidation[1] + 1}`)
+        }
 
-                        if (element.cellId == stdRollArray[currentIndex].cellId) {
-                            element.consolidatedPrediction = studentId
-
-                            structureList.forEach((el, index) => {
-                                if (currentIndex == index) {
-                                    el.RollNo = studentId,
-                                        el.isNotAbleToSave = toggleCheckBox ? toggleCheckBox : false
-                                }
-                            });
-
-                        }
-                    });
-                    //save validated student
-                    dispatch(OcrLocalResponseAction(JSON.parse(JSON.stringify(ocrLocalResponse))))
-                    setCheckStdRollDuplicate([...checkStdRollDuplicate, studentId])
-                    validCell = false
-                    setNewArrayValue(structureList[currentIndex + 1].data)
-                    setStudentID(structureList[currentIndex + 1].RollNo)
-                    setCurrentIndex(currentIndex + 1)
-                    setBtnName('Back')
-                    if (currentIndex + 1 == stdRollArray.length - 1) {
-                        setNextBtn(Strings.submit_text)
-                    }
-                } else {
-                    let chkSkip = 0
-                    ocrLocalResponse.layout.cells.forEach(element => {
-
-                        if (element.cellId == stdRollArray[currentIndex].cellId) {
-                            element.consolidatedPrediction = studentId
-
-                            structureList.forEach((el, index) => {
-                                if (currentIndex == index) {
-                                    el.RollNo = studentId
-                                    el.isNotAbleToSave = toggleCheckBox
-                                }
-                                if (el.isNotAbleToSave) {
-                                    chkSkip = chkSkip + 1
-                                }
-                            });
-
-                        }
-                    });
-                    if (chkSkip == structureList.length) {
-                        showErrorMessage(Strings.please_select_at_least_one_student)
-                    } else {
-                        dispatch(OcrLocalResponseAction(JSON.parse(JSON.stringify(ocrLocalResponse))))
-                        saveMultipleStudentDataSheet()
-
-                    }
-                }
-            }
+        else if (duplication) {
+            Alert.alert(Strings.Student_ID_Shouldnt_be_duplicated)
+        }
+        else if (disable) {
+            showErrorMessage(Strings.please_correct_marks_data)
+        }
+        else if (validCell) {
+            showErrorMessage(Strings.please_correct_marks_data)
+        }
+        else if (!studentValid && !toggleCheckBox) {
+            showErrorMessage(Strings.please_correct_student_id)
+            setStdErr(Strings.please_correct_student_id)
         }
         else {
-            showErrorMessage(validateMsg ? validateMsg : defaultValidateError ||Strings.omr_mark_should_be)
+            if (currentIndex + 1 <= stdRollArray.length - 1) {
+
+                let toggle = structureList[currentIndex + 1].hasOwnProperty("isNotAbleToSave") ? structureList[currentIndex + 1].isNotAbleToSave : false
+                setToggleCheckBox(toggle)
+
+                //for student validataion
+
+                ocrLocalResponse.layout.cells.forEach(element => {
+
+                    if (element.cellId == stdRollArray[currentIndex].cellId) {
+                        element.consolidatedPrediction = studentId
+
+                        structureList.forEach((el, index) => {
+                            if (currentIndex == index) {
+                                el.RollNo = studentId,
+                                    el.isNotAbleToSave = toggleCheckBox ? toggleCheckBox : false
+                            }
+                        });
+
+                    }
+                });
+                //save validated student
+                dispatch(OcrLocalResponseAction(JSON.parse(JSON.stringify(ocrLocalResponse))))
+                setCheckStdRollDuplicate([...checkStdRollDuplicate, studentId])
+                validCell = false
+                setNewArrayValue(structureList[currentIndex + 1].data)
+                setStudentID(structureList[currentIndex + 1].RollNo)
+                setCurrentIndex(currentIndex + 1)
+                setBtnName('Back')
+                if (currentIndex + 1 == stdRollArray.length - 1) {
+                    setNextBtn(Strings.submit_text)
+                }
+            } else {
+                let chkSkip = 0
+                ocrLocalResponse.layout.cells.forEach(element => {
+
+                    if (element.cellId == stdRollArray[currentIndex].cellId) {
+                        element.consolidatedPrediction = studentId
+
+                        structureList.forEach((el, index) => {
+                            if (currentIndex == index) {
+                                el.RollNo = studentId
+                                el.isNotAbleToSave = toggleCheckBox
+                            }
+                            if (el.isNotAbleToSave) {
+                                chkSkip = chkSkip + 1
+                            }
+                        });
+
+                    }
+                });
+                if (chkSkip == structureList.length) {
+                    showErrorMessage(Strings.please_select_at_least_one_student)
+                } else {
+                    dispatch(OcrLocalResponseAction(JSON.parse(JSON.stringify(ocrLocalResponse))))
+                    saveMultipleStudentDataSheet()
+
+                }
+            }
         }
     }
-  
+
     const saveMultipleStudentDataSheet = () => {
         if (isMultipleStudent && nextBtn === Strings.submit_text) {
             saveMultiData()
@@ -629,7 +624,6 @@ const ScannedDetailsComponent = ({
     }
 
     const lengthAccordingSheet = (element) => {
-        // if(regexResult == true){
         if (isMultipleStudent) {
             return 2
         } else if (element.format.name === neglectData[2] || element.format.name === neglectData[3]) {
@@ -637,15 +631,13 @@ const ScannedDetailsComponent = ({
         } else {
             return 2
         }
-        //  }else{
-        //     showErrorMessage(validateMsg)
-        //  }
     }
 
 
     const handleTextChange = (text, index, array, value) => {
 
         if (isMultipleStudent) {
+        
             let len = text.length
             setDisabled(len == 0 ? true : false)
             if (text > 1) {
@@ -653,7 +645,6 @@ const ScannedDetailsComponent = ({
             } else {
                 setValid(false)
             }
-
             let newArray = JSON.parse(JSON.stringify(array))
             newArray[index].consolidatedPrediction = text > 1 ? 0 : text
             setNewArrayValue(newArray)
@@ -663,7 +654,8 @@ const ScannedDetailsComponent = ({
                 if (element.cellId == value.cellId) {
                     structureList.forEach(Datas => {
                         //this'll add into OCRLocal
-                        element.consolidatedPrediction = text > 1 ? 0 : text
+                        //  element.consolidatedPrediction = text > 1 ? 0 : text
+                         element.consolidatedPrediction = text < 1 ? 0 : text
                         //this'll add in  structurelist
                         Datas.data.forEach((el, index) => {
                             if (el.cellId === value.cellId) {
@@ -675,6 +667,15 @@ const ScannedDetailsComponent = ({
                 }
             });
             dispatch(OcrLocalResponseAction(ocrLocalResponse))
+            let regexValue = regxValidation(value.cellId)
+            ocrLocalResponse.layout.cells.forEach(element => {
+                if (element.cellId == value.cellId) {
+                    if (!regexValue[0]) {
+                        showErrorMessage(regexValue[1] ? regexValue[1] : defaultValidateError )
+                    }
+
+                }
+            });
 
         } else {
             let len = text.length
@@ -683,15 +684,23 @@ const ScannedDetailsComponent = ({
             newArray[index].consolidatedPrediction = isMultipleStudent ? text > 1 ? 0 : text : text
             setNewArrayValue(newArray)
 
+
             ocrLocalResponse.layout.cells.forEach(element => {
                 if (element.cellId == value.cellId) {
                     element.consolidatedPrediction = text
+                }
+
+            });
+            dispatch(OcrLocalResponseAction(ocrLocalResponse))
+            let regexValue = regxValidation(value.cellId)
+            ocrLocalResponse.layout.cells.forEach(element => {
+                if (element.cellId == value.cellId) {
+                    if (!regexValue[0]) {
+                        showErrorMessage(regexValue[1])
+                    }
 
                 }
             });
-            dispatch(OcrLocalResponseAction(ocrLocalResponse))
-
-
             newArray.map((e) => {
                 if (e.format.name == neglectData[3]) {
                     setMaxMarksTotal(e.consolidatedPrediction)
@@ -749,89 +758,88 @@ const ScannedDetailsComponent = ({
         return [validationCellOmr, totalRois]
     }
 
+
     const onSubmitClick = async () => {
         let validCell = false
         let omrMark = false
-        if (regexResult == true) {
-            for (let i = 0; i < newArrayValue.length; i++) {
-                if (newArrayValue[i].consolidatedPrediction === '') {
-                    validCell = true
-                }
-                else if (newArrayValue[i].consolidatedPrediction === 0 && regexResult === true) {
-                    omrMark = true
-                }
+        let resultMark = false
+        let regexErrormsglist
+        for (let i = 0; i < newArrayValue.length; i++) {
+ 
+            let consolidatedlist = newArrayValue[i].consolidatedPrediction
+             regexErrormsglist = newArrayValue[i] && newArrayValue[i].validate.errorMsg
+            let regexlist = newArrayValue[i].validate.regExp
+            let number = consolidatedlist;
+            let regexvalue = new RegExp(regexlist)
+            let resultlist = regexvalue.test(number);
+
+            if (newArrayValue[i].consolidatedPrediction === '') {
+                validCell = true
             }
-            if (omrMark) {
-                showErrorMessage(validateMsg ? validateMsg : defaultValidateError || Strings.omr_mark_should_be )
-                //  showErrorMessage( Strings.omr_mark_should_be)
+            else if (newArrayValue[i].consolidatedPrediction === 0) {
+                omrMark = true
             }
-            let cellOmrValidation = validateCellOMR(false)
+            else if (resultlist === false) {
+                resultMark = true
+            }
+        }
+
+        let cellOmrValidation = validateCellOMR(false)
 
 
-            if (disable || validCell) {
-                showErrorMessage(Strings.please_correct_marks_data)
-            }
+        if (disable || validCell) {
+            showErrorMessage(Strings.please_correct_marks_data)
+        }
+        else if (resultMark) {
+            showErrorMessage(Strings.please_correct_marks_data)
+        }
+        else if (cellOmrValidation[0]) {
+            showErrorMessage(`omr value should be 0 to ${cellOmrValidation[1]}`)
+            // showErrorMessage(`omr value should be 0 to ${cellOmrValidation[1]}`)
+        }
+        else if (!studentValid && !toggleCheckBox) {
+            showErrorMessage(Strings.please_correct_student_id)
+        }
+        else if (isStudentValid) {
+            showErrorMessage(Strings.student_id_should_be_same)
+        }
 
-            else if (cellOmrValidation[0]) {
-                 showErrorMessage(validateMsg ? validateMsg :  `omr value should be 0 to ${cellOmrValidation[1]}`)
-                // showErrorMessage(`omr value should be 0 to ${cellOmrValidation[1]}`)
-            }
-            else if (!studentValid && !toggleCheckBox) {
-                showErrorMessage(Strings.please_correct_student_id)
-            }
-            else if (isStudentValid) {
-                showErrorMessage(Strings.student_id_should_be_same)
-            }
+        else {
+            if (sumOfObtainedMarks > 0) {
 
-            else {
-                if (sumOfObtainedMarks > 0) {
+                let elements = neglectData
 
-                    let elements = neglectData
-
-                    //remove maxMark and Obtained marks from the newArrayValue
-                    let extract_MAX_OBTAINED_MARKS = newArrayValue.filter((e) => {
-                        if (e.format.name == elements[2]) {
-                            return
-                        }
-                        if (e.format.name == elements[3]) {
-                            return
-                        }
-                        else {
-                            return true
-                        }
-                    })
-                    //DO summ of all result from extract_MAX_OBTAINED_MARKS except max marks and obtained marks
-                    let maximum = 0;
-                    let sum = extract_MAX_OBTAINED_MARKS.forEach((e) => {
-                        maximum = parseInt(maximum) + parseInt(e.consolidatedPrediction)
-                        return maximum
-                    });
-                    console.log("sumOfObtained", maximum);
-                    if (maximum != totalMarkSecured) {
-                        setObtnMarkErr(true)
-                        showErrorMessage("Sum Of All obtained marks should be equal to marksObtained")
+                //remove maxMark and Obtained marks from the newArrayValue
+                let extract_MAX_OBTAINED_MARKS = newArrayValue.filter((e) => {
+                    if (e.format.name == elements[2]) {
+                        return
                     }
-                    else if (maxMarksTotal < maximum) {
-                        setObtnMarkErr(false)
-                        showErrorMessage("Total mark should be less than or equal to Maximum marks")
-                        setMaxMarkErr(true)
+                    if (e.format.name == elements[3]) {
+                        return
                     }
                     else {
-                        setMaxMarkErr(false)
-                        setObtnMarkErr(false)
-                        if (multiPage > 0) {
-                            let isAbleToGoNextPage = currentIndex + 1 <= multiPage;
-                            if (isAbleToGoNextPage) {
-                                openCameraActivity();
-                            } else {
-                                saveMultiPageIntoLocalStorage();
-                            }
-                        } else {
-                            saveData(maximum)
-                        }
+                        return true
                     }
-                } else {
-                    //without MAX & OBTAINED MARKS
+                })
+                //DO summ of all result from extract_MAX_OBTAINED_MARKS except max marks and obtained marks
+                let maximum = 0;
+                let sum = extract_MAX_OBTAINED_MARKS.forEach((e) => {
+                    maximum = parseInt(maximum) + parseInt(e.consolidatedPrediction)
+                    return maximum
+                });
+                console.log("sumOfObtained", maximum);
+                if (maximum != totalMarkSecured) {
+                    setObtnMarkErr(true)
+                    showErrorMessage("Sum Of All obtained marks should be equal to marksObtained")
+                }
+                else if (maxMarksTotal < maximum) {
+                    setObtnMarkErr(false)
+                    showErrorMessage("Total mark should be less than or equal to Maximum marks")
+                    setMaxMarkErr(true)
+                }
+                else {
+                    setMaxMarkErr(false)
+                    setObtnMarkErr(false)
                     if (multiPage > 0) {
                         let isAbleToGoNextPage = currentIndex + 1 <= multiPage;
                         if (isAbleToGoNextPage) {
@@ -840,13 +848,24 @@ const ScannedDetailsComponent = ({
                             saveMultiPageIntoLocalStorage();
                         }
                     } else {
-                        saveData(0)
+                        saveData(maximum)
                     }
                 }
+            } else {
+                //without MAX & OBTAINED MARKS
+                if (multiPage > 0) {
+                    let isAbleToGoNextPage = currentIndex + 1 <= multiPage;
+                    if (isAbleToGoNextPage) {
+                        openCameraActivity();
+                    } else {
+                        saveMultiPageIntoLocalStorage();
+                    }
+                } else {
+                    saveData(0)
+                }
             }
-        } else {
-            showErrorMessage(validateMsg)
         }
+
     }
 
 
@@ -1224,7 +1243,7 @@ const ScannedDetailsComponent = ({
                                                             rowBorderColor={markBorderOnCell(element)}
                                                             editable={true}
                                                             keyboardType={'number-pad'}
-                                                            maxLength={lengthAccordingSheet(element)}
+                                                             maxLength={lengthAccordingSheet(element)}
                                                             onChangeText={(text) => {
                                                                 handleTextChange(text.trim(), index, newArrayValue, element)
                                                             }}
