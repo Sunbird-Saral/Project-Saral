@@ -23797,7 +23797,7 @@
               "threshold": {
                   "minWidth" : 500,
                   "minHeight": 200 ,
-                  "detectionRadius": 15
+                  "detectionRadius": 12
               },            
               "cells": [
                   {
