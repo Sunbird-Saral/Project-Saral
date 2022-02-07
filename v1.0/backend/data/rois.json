@@ -19210,6 +19210,10 @@
           "layout": {
               "version": "1.0",
               "name": "ANY1S34Q PAT Exam Sheet Form",
+              "threshold": {
+                "minWidth" : 714,
+                "minHeight": 568
+            },   
               "cells": [
                   {
                       "cellId": "1",
@@ -20751,6 +20755,10 @@
           "layout": {
               "version": "1.0",
               "name": "GUJRAT PAT Exam Sheet Form",
+              "threshold": {
+                "minWidth" : 714,
+                "minHeight": 568
+            },   
               "cells": [
                   {
                       "cellId": "1",
@@ -22292,6 +22300,10 @@
           "layout": {
               "version": "1.0",
               "name": "GUJRAT PAT Exam Sheet Form",
+              "threshold": {
+                "minWidth" : 714,
+                "minHeight": 568
+            },   
               "cells": [
                   {
                       "cellId": "1",
@@ -27453,6 +27465,10 @@
           "layout": {
               "version": "1.0",
               "name": "ANY1S12Q Exam Sheet Form",
+              "threshold": {
+                "minWidth" : 714,
+                "minHeight": 568
+            },   
               "cells": [
                   {
                       "cellId": "1",
@@ -28035,6 +28051,10 @@
           "layout": {
               "version": "1.0",
               "name": "ANY1S5QMULTICHOICE Exam Sheet Form",
+              "threshold": {
+                "minWidth" : 416,
+                "minHeight": 289
+            },   
               "cells": [
                   {
                       "cellId": "1",
@@ -28584,6 +28604,10 @@
           "layout": {
               "version": "1.0",
               "name": "ANY1S5QMULTICHOICE Exam Sheet Form",
+              "threshold": {
+                "minWidth" : 416,
+                "minHeight": 289
+            }, 
               "cells": [
                   {
                       "cellId": "1",
@@ -30568,6 +30592,10 @@
         "layout": {
             "version": "1.0",
             "name": "ANY20QATTENDANCE Exam Sheet Form",
+            "threshold": {
+                "minWidth" : 588,
+                "minHeight": 502
+            }, 
             "cells": [
                 {
                     "cellId": "1",
@@ -33103,6 +33131,10 @@
         "layout": {
             "version": "1.0",
             "name": "ANY20QMIDDAYMEAL Exam Sheet Form",
+            "threshold": {
+                "minWidth" : 588,
+                "minHeight": 502
+            }, 
             "cells": [
                 {
                     "cellId": "1",
