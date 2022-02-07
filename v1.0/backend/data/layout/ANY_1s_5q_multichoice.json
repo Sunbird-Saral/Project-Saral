@@ -2,6 +2,12 @@
     "layout": {
         "version": "1.0",
         "name": "ANY1S5QMULTICHOICE Exam Sheet Form",
+        "resultValidation": {
+            "validate": {
+                "regExp": "[0-5]",
+                "errorMsg": "Omr result should be between 0 to 5"
+            }
+        },
         "cells": [
             {
                 "cellId": "1",
@@ -186,7 +192,8 @@
                     "value": "QUESTION 1"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "[0-5]",
+                    "errorMsg": "Omr result should be between 0 to 5"
                 }
             },
             {
@@ -273,7 +280,8 @@
                     "value": "QUESTION 2"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "[0-5]",
+                    "errorMsg": "Omr result should be between 0 to 5"
                 }
             },
             {
@@ -360,7 +368,8 @@
                     "value": "QUESTION 3"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "[0-5]",
+                    "errorMsg": "Omr result should be between 0 to 5"
                 }
             },
             {
@@ -447,7 +456,8 @@
                     "value": "QUESTION 4"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "[0-5]",
+                    "errorMsg": "Omr result should be between 0 to 5"
                 }
             },
             {
@@ -534,9 +544,9 @@
                     "value": "QUESTION 5"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "[0-5]",
+                    "errorMsg": "Omr result should be between 0 to 5"
                 }
             }
         ]
     }
-}

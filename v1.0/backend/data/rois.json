@@ -6920,6 +6920,12 @@
             "layout": {
                 "version": "1.0",
                 "name": "HINDI4S20QOMR Exam Sheet Form",
+                "resultValidation": {
+                    "validate": {
+                        "regExp": "[0-1]",
+                        "errorMsg": "Omr result should be 1 or 0"
+                    }
+                },
                 "cells": [
                     {
                         "cellId": "1",
@@ -7017,7 +7023,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "^[0-9]{7,7}$",
+                            "errorMsg": "plz correct Id"
                         }
                     },
                     {
@@ -7044,7 +7051,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q1 "
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -7071,7 +7079,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q2"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -7098,7 +7107,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q3 "
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -7125,7 +7135,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q4"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -7152,7 +7163,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q5"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -7179,7 +7191,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q6"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -7206,7 +7219,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q7"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -7233,7 +7247,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q8"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -7260,7 +7275,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q9"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -7287,7 +7303,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q10"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -7314,7 +7331,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q11"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -7341,7 +7359,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q12"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -7368,7 +7387,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q13"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -7395,7 +7415,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q14 "
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -7422,7 +7443,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q15"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -7449,7 +7471,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q16"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -7476,7 +7499,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q17"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -7503,7 +7527,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q18"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -7530,7 +7555,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q19"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -7557,7 +7583,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q20"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -7683,7 +7710,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q1"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -7710,7 +7738,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q2"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -7737,7 +7766,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q3"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -7764,7 +7794,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q4"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -7791,7 +7822,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q5"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -7818,7 +7850,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q6"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -7845,7 +7878,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q7"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -7872,7 +7906,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q8"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -7899,7 +7934,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q9"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -7926,7 +7962,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q10"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -7953,7 +7990,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q11"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -7980,7 +8018,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q12"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -8007,7 +8046,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q13"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -8034,7 +8074,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q14 "
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -8061,7 +8102,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q15"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -8088,7 +8130,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q16"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -8115,7 +8158,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q17"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -8142,7 +8186,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q18"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -8169,7 +8214,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q19"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -8196,7 +8242,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q20"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -8322,7 +8369,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q1"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -8349,7 +8397,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q2"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -8376,7 +8425,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q3"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -8403,7 +8453,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q4"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -8430,7 +8481,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q5"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -8457,7 +8509,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q6"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -8484,7 +8537,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q7"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -8511,7 +8565,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q8"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -8538,7 +8593,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q9"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -8565,7 +8621,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q10"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -8592,7 +8649,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q11"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -8619,7 +8677,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q12"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -8646,7 +8705,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q13"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -8673,7 +8733,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q14 "
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -8700,7 +8761,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q15"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -8727,7 +8789,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q16"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -8754,7 +8817,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q17"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -8781,7 +8845,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q18"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -8808,7 +8873,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q19"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -8835,7 +8901,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q20"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -8961,7 +9028,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q1"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -8988,7 +9056,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q2"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -9015,7 +9084,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q3"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -9042,7 +9112,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q4"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -9069,7 +9140,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q5"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -9096,7 +9168,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q6"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -9123,7 +9196,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q7"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -9150,7 +9224,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q8"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -9177,7 +9252,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q9"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -9204,7 +9280,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q10"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -9231,7 +9308,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q11"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -9258,7 +9336,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q12"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -9285,7 +9364,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q13"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -9312,7 +9392,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q14 "
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -9339,7 +9420,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q15"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -9366,7 +9448,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q16"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -9393,7 +9476,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q17"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -9420,7 +9504,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q18"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -9447,7 +9532,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q19"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -9474,7 +9560,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q20"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     }
                 ]
@@ -9490,7 +9577,13 @@
         "roi": {
             "layout": {
                 "version": "1.0",
-                "name": "HINDI4S20Q Exam Sheet Form",
+                "name": "HINDI4S20QOMR Exam Sheet Form",
+                "resultValidation": {
+                    "validate": {
+                        "regExp": "[0-1]",
+                        "errorMsg": "Omr result should be 1 or 0"
+                    }
+                },
                 "cells": [
                     {
                         "cellId": "1",
@@ -9588,7 +9681,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "^[0-9]{7,7}$",
+                            "errorMsg": "plz correct Id"
                         }
                     },
                     {
@@ -9615,7 +9709,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q1 "
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -9642,7 +9737,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q2"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -9669,7 +9765,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q3 "
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -9696,7 +9793,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q4"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -9723,7 +9821,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q5"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -9750,7 +9849,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q6"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -9777,7 +9877,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q7"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -9804,7 +9905,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q8"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -9831,7 +9933,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q9"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -9858,7 +9961,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q10"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -9885,7 +9989,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q11"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -9912,7 +10017,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q12"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -9939,7 +10045,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q13"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -9966,7 +10073,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q14 "
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -9993,7 +10101,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q15"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -10020,7 +10129,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q16"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -10047,7 +10157,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q17"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -10074,7 +10185,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q18"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -10101,7 +10213,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q19"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -10128,7 +10241,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q20"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -10254,7 +10368,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q1"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -10281,7 +10396,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q2"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -10308,7 +10424,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q3"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -10335,7 +10452,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q4"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -10362,7 +10480,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q5"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -10389,7 +10508,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q6"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -10416,7 +10536,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q7"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -10443,7 +10564,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q8"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -10470,7 +10592,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q9"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -10497,7 +10620,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q10"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -10524,7 +10648,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q11"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -10551,7 +10676,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q12"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -10578,7 +10704,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q13"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -10605,7 +10732,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q14 "
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -10632,7 +10760,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q15"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -10659,7 +10788,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q16"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -10686,7 +10816,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q17"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -10713,7 +10844,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q18"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -10740,7 +10872,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q19"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -10767,7 +10900,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q20"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -10893,7 +11027,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q1"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -10920,7 +11055,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q2"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -10947,7 +11083,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q3"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -10974,7 +11111,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q4"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -11001,7 +11139,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q5"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -11028,7 +11167,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q6"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -11055,7 +11195,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q7"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -11082,7 +11223,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q8"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -11109,7 +11251,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q9"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -11136,7 +11279,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q10"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -11163,7 +11307,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q11"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -11190,7 +11335,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q12"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -11217,7 +11363,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q13"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -11244,7 +11391,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q14 "
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -11271,7 +11419,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q15"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -11298,7 +11447,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q16"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -11325,7 +11475,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q17"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -11352,7 +11503,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q18"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -11379,7 +11531,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q19"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -11406,7 +11559,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q20"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -11532,7 +11686,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q1"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -11559,7 +11714,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q2"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -11586,7 +11742,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q3"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -11613,7 +11770,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q4"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -11640,7 +11798,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q5"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -11667,7 +11826,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q6"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -11694,7 +11854,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q7"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -11721,7 +11882,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q8"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -11748,7 +11910,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q9"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -11775,7 +11938,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q10"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -11802,7 +11966,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q11"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -11829,7 +11994,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q12"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -11856,7 +12022,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q13"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -11883,7 +12050,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q14 "
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -11910,7 +12078,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q15"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -11937,7 +12106,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q16"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -11964,7 +12134,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q17"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -11991,7 +12162,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q18"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -12018,7 +12190,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q19"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -12045,7 +12218,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q20"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     }
                 ]
@@ -12061,7 +12235,13 @@
         "roi": {
             "layout": {
                 "version": "1.0",
-                "name": "HINDI4S20Q Exam Sheet Form",
+                "name": "HINDI4S20QOMR Exam Sheet Form",
+                "resultValidation": {
+                    "validate": {
+                        "regExp": "[0-1]",
+                        "errorMsg": "Omr result should be 1 or 0"
+                    }
+                },
                 "cells": [
                     {
                         "cellId": "1",
@@ -12159,7 +12339,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "^[0-9]{7,7}$",
+                            "errorMsg": "plz correct Id"
                         }
                     },
                     {
@@ -12186,7 +12367,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q1 "
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -12213,7 +12395,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q2"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -12240,7 +12423,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q3 "
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -12267,7 +12451,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q4"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -12294,7 +12479,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q5"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -12321,7 +12507,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q6"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -12348,7 +12535,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q7"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -12375,7 +12563,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q8"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -12402,7 +12591,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q9"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -12429,7 +12619,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q10"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -12456,7 +12647,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q11"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -12483,7 +12675,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q12"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -12510,7 +12703,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q13"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -12537,7 +12731,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q14 "
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -12564,7 +12759,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q15"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -12591,7 +12787,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q16"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -12618,7 +12815,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q17"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -12645,7 +12843,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q18"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -12672,7 +12871,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q19"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -12699,7 +12899,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q20"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -12825,7 +13026,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q1"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -12852,7 +13054,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q2"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -12879,7 +13082,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q3"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -12906,7 +13110,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q4"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -12933,7 +13138,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q5"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -12960,7 +13166,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q6"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -12987,7 +13194,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q7"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -13014,7 +13222,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q8"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -13041,7 +13250,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q9"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -13068,7 +13278,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q10"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -13095,7 +13306,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q11"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -13122,7 +13334,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q12"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -13149,7 +13362,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q13"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -13176,7 +13390,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q14 "
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -13203,7 +13418,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q15"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -13230,7 +13446,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q16"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -13257,7 +13474,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q17"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -13284,7 +13502,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q18"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -13311,7 +13530,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q19"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -13338,7 +13558,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q20"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -13464,7 +13685,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q1"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -13491,7 +13713,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q2"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -13518,7 +13741,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q3"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -13545,7 +13769,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q4"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -13572,7 +13797,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q5"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -13599,7 +13825,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q6"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -13626,7 +13853,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q7"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -13653,7 +13881,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q8"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -13680,7 +13909,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q9"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -13707,7 +13937,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q10"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -13734,7 +13965,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q11"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -13761,7 +13993,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q12"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -13788,7 +14021,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q13"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -13815,7 +14049,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q14 "
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -13842,7 +14077,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q15"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -13869,7 +14105,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q16"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -13896,7 +14133,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q17"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -13923,7 +14161,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q18"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -13950,7 +14189,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q19"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -13977,7 +14217,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q20"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -14103,7 +14344,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q1"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -14130,7 +14372,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q2"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -14157,7 +14400,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q3"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -14184,7 +14428,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q4"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -14211,7 +14456,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q5"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -14238,7 +14484,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q6"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -14265,7 +14512,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q7"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -14292,7 +14540,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q8"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -14319,7 +14568,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q9"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -14346,7 +14596,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q10"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -14373,7 +14624,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q11"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -14400,7 +14652,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q12"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -14427,7 +14680,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q13"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -14454,7 +14708,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q14 "
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -14481,7 +14736,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q15"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -14508,7 +14764,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q16"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -14535,7 +14792,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q17"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -14562,7 +14820,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q18"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -14589,7 +14848,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q19"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     },
                     {
@@ -14616,7 +14876,8 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q20"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-1]",
+                            "errorMsg": "Omr result should be 1 or 0"
                         }
                     }
                 ]
@@ -28357,6 +28618,12 @@
             "layout": {
                 "version": "1.0",
                 "name": "ANY1S5QMULTICHOICE Exam Sheet Form",
+                "resultValidation": {
+                    "validate": {
+                        "regExp": "[0-5]",
+                        "errorMsg": "Omr result should be between 0 to 5"
+                    }
+                },
                 "cells": [
                     {
                         "cellId": "1",
@@ -28541,7 +28808,8 @@
                             "value": "QUESTION 1"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-5]",
+                            "errorMsg": "Omr result should be between 0 to 5"
                         }
                     },
                     {
@@ -28628,7 +28896,8 @@
                             "value": "QUESTION 2"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-5]",
+                            "errorMsg": "Omr result should be between 0 to 5"
                         }
                     },
                     {
@@ -28715,7 +28984,8 @@
                             "value": "QUESTION 3"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-5]",
+                            "errorMsg": "Omr result should be between 0 to 5"
                         }
                     },
                     {
@@ -28802,7 +29072,8 @@
                             "value": "QUESTION 4"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-5]",
+                            "errorMsg": "Omr result should be between 0 to 5"
                         }
                     },
                     {
@@ -28889,7 +29160,8 @@
                             "value": "QUESTION 5"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-5]",
+                            "errorMsg": "Omr result should be between 0 to 5"
                         }
                     }
                 ]
@@ -28906,6 +29178,12 @@
             "layout": {
                 "version": "1.0",
                 "name": "ANY1S5QMULTICHOICE Exam Sheet Form",
+                "resultValidation": {
+                    "validate": {
+                        "regExp": "[0-5]",
+                        "errorMsg": "Omr result should be between 0 to 5"
+                    }
+                },
                 "cells": [
                     {
                         "cellId": "1",
@@ -29090,7 +29368,8 @@
                             "value": "Measuring Skills"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-5]",
+                            "errorMsg": "Omr result should be between 0 to 5"
                         }
                     },
                     {
@@ -29177,7 +29456,8 @@
                             "value": "Carpentary Skills"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-5]",
+                            "errorMsg": "Omr result should be between 0 to 5"
                         }
                     },
                     {
@@ -29264,7 +29544,8 @@
                             "value": "Plumbing Skills"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-5]",
+                            "errorMsg": "Omr result should be between 0 to 5"
                         }
                     },
                     {
@@ -29351,7 +29632,8 @@
                             "value": "Cleaning Skills"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-5]",
+                            "errorMsg": "Omr result should be between 0 to 5"
                         }
                     },
                     {
@@ -29438,7 +29720,8 @@
                             "value": "Learning Skills"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "[0-5]",
+                            "errorMsg": "Omr result should be between 0 to 5"
                         }
                     }
                 ]
