@@ -26,7 +26,9 @@ class HeaderComponents extends Component {
             customLogoutTextStyle,
             versionText,
             supportTeamText,
-            onSupportClick
+            onSupportClick,
+            aboutMenu,
+            helpMenu
         } = this.props
         return (
             <View style={{flex:1}}>
@@ -34,7 +36,7 @@ class HeaderComponents extends Component {
                     <View style={styles.imageContainerStyle}>
                         
                         <TouchableOpacity
-                        style={styles.imageContainerViewstyle}
+                        style={[styles.imageContainerViewstyle,{marginTop:10}]}
                         onPress={onSupportClick}
                         > 
                          <Image style={{width:15,height:15,top:5}}  source={Assets.Support}/>
@@ -50,8 +52,25 @@ class HeaderComponents extends Component {
                                 <Text style={[styles.headerTitleTextStyle, customLogoutTextStyle]}>{logoutHeaderText}</Text>
                             </TouchableOpacity>}
 
+                        <TouchableOpacity
+                        style={styles.imageContainerViewstyle}
+                        onPress={aboutMenu}
+                        > 
+                         <Image style={{width:15,height:15,top:5}}  source={Assets.About}/>
+                            <Text style={[styles.headerTitleTextStyle, customLogoutTextStyle]}>{Strings.about_menu}</Text>
+                        </TouchableOpacity>
+                        
+                        <TouchableOpacity
+                        style={[styles.imageContainerViewstyle]}
+                        onPress={helpMenu}
+                        > 
+                         <Image style={{width:15,height:15,top:5}}  source={Assets.Help}/>
+                            <Text style={[styles.headerTitleTextStyle, customLogoutTextStyle]}>{Strings.help_menu}</Text>
+                        </TouchableOpacity>
+                        
                     </View>
                 </View>
+
                 {versionText && versionText.length > 0 &&
                     <Text style={[styles.versionTxtStyle]}>{`${Strings.version_text}: ${versionText}`}</Text>}
                 {headerButton && <TouchableOpacity
@@ -122,14 +141,15 @@ const styles = {
     imageContainerStyle: {
         padding: 10,
         marginRight: 10,
-        height:60,
+        height:120,
         elevation: 10,
-         justifyContent: 'center',
+        justifyContent: 'center',
         backgroundColor: AppTheme.WHITE
     },
     imageContainerViewstyle:{
         flexDirection:'row',
-        marginVertical:5,
+        marginVertical:2,
+        marginBottom: 10
     }
 }
 export default HeaderComponents;

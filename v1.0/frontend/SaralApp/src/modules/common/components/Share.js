@@ -1,16 +1,31 @@
 import React, { Component, useCallback, useState, useEffect } from 'react';
-import { Share, Alert, View, TouchableOpacity, Text, Modal } from 'react-native';
-import Strings from '../../../utils/Strings';
-import AppTheme from '../../../utils/AppTheme';
+import { Share, Alert, View, TouchableOpacity, Text, Modal, Linking } from 'react-native';
+
+//redux
 import { connect, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
+
+//component
+import Strings from '../../../utils/Strings';
 import HeaderComponents from './HeaderComponents';
+import AppTheme from '../../../utils/AppTheme';
+import { collectErrorLogs } from '../../CollectErrorLogs';
+import saralAppInfo from '../../../../saralAppInfo.json'
+
+//Api action
 import { SaveScanData } from '../../../flux/actions/apis/saveScanDataAction';
 import APITransport from '../../../flux/actions/transport/apitransport';
 import { LogoutAction } from '../../../flux/actions/apis/LogoutAction';
-import { getScannedDataFromLocal, eraseErrorLogs, getErrorMessage } from '../../../utils/StorageUtils';
+
+//npm
 import axios from 'axios';
-import { collectErrorLogs } from '../../CollectErrorLogs';
+
+//local storage
+import { getScannedDataFromLocal, eraseErrorLogs, getErrorMessage } from '../../../utils/StorageUtils';
+
+//constant
+import C from '../../../flux/actions/constants'
+
 
 const ShareComponent = ({
   loginData,
@@ -99,6 +114,28 @@ const ShareComponent = ({
     }
   }
 
+  const dispatchModalStatus = (value) => {
+    return({
+      type: C.MODAL_STATUS,
+      payload : value
+    })
+  }
+
+  const dispatchModalMessage = (value) => {
+    return({
+      type: C.MODAL_MESSAGE,
+      payload : value
+    })
+  }
+
+  const aboutMenu = () => {
+    dispatch(dispatchModalStatus(true))
+    dispatch(dispatchModalMessage(saralAppInfo))
+  }
+  const helpMenu = () => {
+    Linking.openURL("https://saral.sunbird.org/learn/features")
+  }
+
  const showModal = () => {
     setIshidden(!ishidden);
     setTimeout(() => {
@@ -124,6 +161,8 @@ const ShareComponent = ({
           customLogoutTextStyle={{ color: AppTheme.BLACK, }}
           onSupportClick={ShareCompo}
           onLogoutClick={Logoutcall}
+          aboutMenu={aboutMenu}
+          helpMenu={helpMenu}
         />
         : null}
     </View>
