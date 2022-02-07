@@ -7,6 +7,10 @@
       "layout": {
           "version": "1.0",
           "name": "HINDI4S20QOMR Exam Sheet Form",
+          "threshold": {
+            "minWidth" : 900,
+            "minHeight": 560
+        },   
           "cells": [
               {
                   "cellId": "1",
@@ -2577,6 +2581,10 @@
       "layout": {
           "version": "1.0",
           "name": "HINDI3S30QOMR Exam Sheet Form",
+          "threshold": {
+            "minWidth" : 885,
+            "minHeight": 515
+        },   
           "cells": [
               {
                   "cellId": "1",
@@ -15860,6 +15868,10 @@
       "layout": {
           "version": "1.0",
           "name": "ANY1S10Q SAT Exam Sheet Form",
+          "threshold": {
+            "minWidth" : 655,
+            "minHeight": 580
+        },   
           "cells": [
               {
                   "cellId": "1",
@@ -16963,6 +16975,10 @@
       "layout": {
           "version": "1.0",
           "name": "ANY1S10Q SAT Exam Sheet Form",
+          "threshold": {
+            "minWidth" : 555,
+            "minHeight": 500
+        },   
           "cells": [
               {
                   "cellId": "1",
@@ -18066,6 +18082,10 @@
       "layout": {
           "version": "1.0",
           "name": "ANY1S10Q SAT Exam Sheet Form",
+          "threshold": {
+            "minWidth" : 655,
+            "minHeight": 580
+        },   
           "cells": [
               {
                   "cellId": "1",
