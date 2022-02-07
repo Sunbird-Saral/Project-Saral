@@ -110,8 +110,7 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401"
                         },
                         "validate": {
-                            "regExp": "^[0-9]{7,7}$",
-                            "errorMsg": "plz correct Id"
+                            "regExp": ""
                         }
                     },
                     {
@@ -2768,8 +2767,7 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401"
                         },
                         "validate": {
-                            "regExp": "[0-1]",
-                            "errorMsg": "Omr result should be 1 or 0"
+                            "regExp": ""
                         }
                     },
                     {
@@ -7019,8 +7017,7 @@
                             "index": 1
                         },
                         "format": {
-                            "name": "ROLLNUMBERID1",
-                            "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401"
+                            "name": ""
                         },
                         "validate": {
                             "regExp": "^[0-9]{7,7}$",
@@ -7051,8 +7048,7 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q1 "
                         },
                         "validate": {
-                            "regExp": "[0-1]",
-                            "errorMsg": "Omr result should be 1 or 0"
+                            "regExp": ""
                         }
                     },
                     {
@@ -9681,8 +9677,7 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401"
                         },
                         "validate": {
-                            "regExp": "^[0-9]{7,7}$",
-                            "errorMsg": "plz correct Id"
+                            "regExp": ""
                         }
                     },
                     {
@@ -12339,8 +12334,7 @@
                             "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401"
                         },
                         "validate": {
-                            "regExp": "^[0-9]{7,7}$",
-                            "errorMsg": "plz correct Id"
+                            "regExp": ""
                         }
                     },
                     {

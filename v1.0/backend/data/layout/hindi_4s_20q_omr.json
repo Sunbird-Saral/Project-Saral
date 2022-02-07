@@ -105,8 +105,7 @@
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401"
                 },
                 "validate": {
-                    "regExp": "^[0-9]{7,7}$",
-                    "errorMsg": "plz correct Id"
+                    "regExp": ""
                 }
             },
             {
@@ -2648,3 +2647,4 @@
             }
         ]
     }
+}
