@@ -2,12 +2,6 @@
     "layout": {
         "version": "1.0",
         "name": "HINDI3S30QOMR Exam Sheet Form",
-        "resultValidation": {
-            "validate": {
-                "regExp": "[0-1]",
-                "errorMsg": "Omr result should be 1 or 0"
-            }
-        },
         "cells": [
             {
                 "cellId": "1",
@@ -105,7 +99,8 @@
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "",
+                    "errorMsg":""
                 }
             },
             {
@@ -1044,7 +1039,8 @@
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "",
+                    "errorMsg":""
                 }
             },
             {
@@ -1983,7 +1979,8 @@
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "",
+                    "errorMsg":""
                 }
             },
             {

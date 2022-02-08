@@ -6,12 +6,6 @@
             "minWidth": 500,
             "minHeight": 200
         },
-        "resultValidation": {
-            "validate": {
-                "regExp": "[0-1]",
-                "errorMsg": "Omr result should be 1 or 0"
-            }
-        },
         "cells": [
             {
                 "cellId": "1",
@@ -572,7 +566,8 @@
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "",
+                    "errorMsg": ""
                 }
             },
             {
@@ -1035,7 +1030,8 @@
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "",
+                    "errorMsg":""
                 }
             },
             {
@@ -1498,7 +1494,8 @@
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "",
+                    "errorMsg":""
                 }
             },
             {
@@ -1961,7 +1958,8 @@
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09405"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "",
+                    "errorMsg":""
                 }
             },
             {
@@ -2424,7 +2422,8 @@
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09406"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "",
+                    "errorMsg":""
                 }
             },
             {
@@ -2887,7 +2886,8 @@
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u09217\u0940"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "",
+                    "errorMsg":""
                 }
             },
             {
@@ -3350,7 +3350,8 @@
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09408"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "",
+                    "errorMsg":""
                 }
             },
             {

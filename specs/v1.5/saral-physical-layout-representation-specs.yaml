@@ -37,14 +37,14 @@ components:
               description: Minimum height of layout for detection
         resultValidation: 
           type: object
-          description: validate errorneous resultData and show error message when resultData does not match with regular expression .
+          description: validate erroneous resultData and show error message when resultData does not match with regular expression .
           properties:
             validate:  
             type: object
             properties:
               regExp:
               type: string
-              description: regular expression to detect errorneous resultData
+              description: regular expression to detect erroneous resultData
               errorMsg:
               type: string
               description: error message shows when resultData does not match with regular expression.
@@ -118,7 +118,7 @@ components:
       properties:
         regExp:
           type: string
-          description: regular expression to detect errorneous resultData
+          description: regular expression to detect erroneous resultData
         errorMsg:
           type: string
           description: error message shows when resultData does not match with regular expression.
