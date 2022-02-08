@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, StyleSheet, Text, View } from 'react-native';
+import { Linking, Modal, StyleSheet, Text, View } from 'react-native';
 
 //constant
 import C from '../../../flux/actions/constants';
@@ -47,7 +47,9 @@ const modalView = ({
             <Text>{modalMessage['saral.info']}</Text>
 
             <Text style={[styles.version,{marginTop:10}]}>saral documentation link</Text>
-            <Text>{modalMessage['saral.documentation.link']}</Text>
+            <Text 
+            style={{color:'blue'}} 
+            onPress={()=>Linking.openURL((modalMessage['saral.documentation.link']))}>{modalMessage['saral.documentation.link']}</Text>
 
           </View>
         </View>
