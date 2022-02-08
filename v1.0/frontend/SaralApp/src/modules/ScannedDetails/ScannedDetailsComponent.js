@@ -699,7 +699,7 @@ const ScannedDetailsComponent = ({
             ocrLocalResponse.layout.cells.forEach(element => {
                 if (element.cellId == value.cellId) {
                     if (!regexValue[0]) {
-                        showErrorMessage(regexValue[1])
+                        showErrorMessage(regexValue[1] ? regexValue[1] : defaultValidateError )
                     }
 
                 }
@@ -768,21 +768,19 @@ const ScannedDetailsComponent = ({
         let resultMark = false
         let regexErrormsglist
         for (let i = 0; i < newArrayValue.length; i++) {
- 
             let consolidatedlist = newArrayValue[i].consolidatedPrediction
-             regexErrormsglist = newArrayValue[i] && newArrayValue[i].validate.errorMsg
-            let regexlist = newArrayValue[i].validate.regExp
+             regexErrormsglist = newArrayValue[i] && newArrayValue[i].validate && newArrayValue[i].validate.errorMsg
+            let regexlist = newArrayValue[i].validate && newArrayValue[i].validate.regExp
             let number = consolidatedlist;
             let regexvalue = new RegExp(regexlist)
             let resultlist = regexvalue.test(number);
-
             if (newArrayValue[i].consolidatedPrediction === '') {
                 validCell = true
             }
             else if (newArrayValue[i].consolidatedPrediction === 0) {
                 omrMark = true
             }
-            else if (resultlist === false) {
+            else if (resultlist === true) {
                 resultMark = true
             }
         }
@@ -791,9 +789,6 @@ const ScannedDetailsComponent = ({
 
 
         if (disable || validCell) {
-            showErrorMessage(Strings.please_correct_marks_data)
-        }
-        else if (resultMark) {
             showErrorMessage(Strings.please_correct_marks_data)
         }
         else if (cellOmrValidation[0]) {
@@ -806,6 +801,11 @@ const ScannedDetailsComponent = ({
         else if (isStudentValid) {
             showErrorMessage(Strings.student_id_should_be_same)
         }
+        else if (resultMark ===false) {
+            showErrorMessage(Strings.please_correct_marks_data)
+        }
+
+
 
         else {
             if (sumOfObtainedMarks > 0) {
