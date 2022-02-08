@@ -29158,6 +29158,10 @@
           "layout": {
               "version": "1.0",
               "name": "ANY1S15QMULTIPAGE Exam Sheet Form",
+              "threshold": {
+                "minWidth" : 416,
+                "minHeight": 289
+            },   
               "pages": "3",
               "cells": [
                   {
