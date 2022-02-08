@@ -78,6 +78,7 @@ const ScannedDetailsComponent = ({
 
     const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.scannedDetailComponent[0]
     const defaultValidateError = ocrLocalResponse.layout && ocrLocalResponse.layout.resultValidation&& ocrLocalResponse.layout.resultValidation.validate.errorMsg
+    const defaultValidateExp = ocrLocalResponse.layout && ocrLocalResponse.layout.resultValidation && ocrLocalResponse.layout.resultValidation.validate.regExp
     const inputRef = React.createRef();
     const dispatch = useDispatch()
 
@@ -284,19 +285,22 @@ const ScannedDetailsComponent = ({
             })
         })
     }
-    const [omrResult,setOmrResult] = useState()
+    const [omrResultErr,setOmrResult] = useState()
     const regxValidation = (cellId) => {
         let result
         let regexErrormsg
         for (let i = 0; i < ocrLocalResponse.layout.cells.length; i++) {
             if(ocrLocalResponse.layout.cells[i].cellId == cellId){
                 let consolidated = ocrLocalResponse.layout.cells[i].consolidatedPrediction
-                regexErrormsg = ocrLocalResponse.layout.cells[i]&& ocrLocalResponse.layout.cells[i].validate.errorMsg
-                let re = ocrLocalResponse.layout.cells[i].validate.regExp
+                let ocrcells = ocrLocalResponse.layout.cells[i]
+                regexErrormsg = ocrcells && ocrcells.validate && ocrcells.validate.errorMsg
+                let regexExp = ocrcells&& ocrcells.validate&&ocrcells.validate.regExp ? ocrcells.validate.regExp : defaultValidateExp         
                 let number = consolidated;
-                let regex = new RegExp(re)
+                let regex = new RegExp(regexExp)
                 result = regex.test(number);
-                setOmrResult(regexErrormsg)
+                // setOmrResult(regexErrormsg)
+                setOmrResult(defaultValidateError)
+
             }
         }
         return [result, regexErrormsg]
@@ -331,7 +335,7 @@ const ScannedDetailsComponent = ({
         }
 
         if (omrMark) {
-            showErrorMessage(omrResult ? omrResult : defaultValidateError || Strings.omr_mark_should_be)
+            showErrorMessage(omrResultErr ? omrResultErr : defaultValidateError || Strings.omr_mark_should_be)
         }
         else if (cellOmrValidation[0]) {
             showErrorMessage(`omr value should be 0 to ${cellOmrValidation[1] + 1}`)

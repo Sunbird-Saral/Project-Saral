@@ -103,9 +103,6 @@
                 "format": {
                     "name": "ROLLNUMBERID1",
                     "value": "ROLLNUMBERID1"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -130,10 +127,6 @@
                 "format": {
                     "name": "ROLLNUMBER1_Q1",
                     "value": "Attendance"
-                },
-                "validate": {
-                    "regExp": "[0-1]",
-                    "errorMsg": "Omr result should be 1 or 0"
                 }
             },
             {
@@ -230,10 +223,6 @@
                 "format": {
                     "name": "ROLLNUMBERID2",
                     "value": "ROLLNUMBERID2"
-                },
-                "validate": {
-                    "regExp": "[0-1]",
-                    "errorMsg": "Omr result should be 1 or 0"
                 }
             },
             {
@@ -258,10 +247,6 @@
                 "format": {
                     "name": "ROLLNUMBER2_Q1",
                     "value": "Attendance"
-                },
-                "validate": {
-                    "regExp": "[0-1]",
-                    "errorMsg": "Omr result should be 1 or 0"
                 }
             },
             {
@@ -358,10 +343,6 @@
                 "format": {
                     "name": "ROLLNUMBERID3",
                     "value": "ROLLNUMBERID3"
-                },
-                "validate": {
-                    "regExp": "[0-1]",
-                    "errorMsg": "Omr result should be 1 or 0"
                 }
             },
             {
@@ -386,10 +367,6 @@
                 "format": {
                     "name": "ROLLNUMBER3_Q1",
                     "value": "Attendance"
-                },
-                "validate": {
-                    "regExp": "[0-1]",
-                    "errorMsg": "Omr result should be 1 or 0"
                 }
             },
             {
@@ -486,10 +463,6 @@
                 "format": {
                     "name": "ROLLNUMBERID4",
                     "value": "ROLLNUMBERID4"
-                },
-                "validate": {
-                    "regExp": "[0-1]",
-                    "errorMsg": "Omr result should be 1 or 0"
                 }
             },
             {
@@ -514,10 +487,6 @@
                 "format": {
                     "name": "ROLLNUMBER4_Q1",
                     "value": "Attendance"
-                },
-                "validate": {
-                    "regExp": "[0-1]",
-                    "errorMsg": "Omr result should be 1 or 0"
                 }
             },
             {
@@ -614,10 +583,6 @@
                 "format": {
                     "name": "ROLLNUMBERID5",
                     "value": "ROLLNUMBERID5"
-                },
-                "validate": {
-                    "regExp": "[0-1]",
-                    "errorMsg": "Omr result should be 1 or 0"
                 }
             },
             {
@@ -642,10 +607,6 @@
                 "format": {
                     "name": "ROLLNUMBER5_Q1",
                     "value": "Attendance"
-                },
-                "validate": {
-                    "regExp": "[0-1]",
-                    "errorMsg": "Omr result should be 1 or 0"
                 }
             },
             {
@@ -742,10 +703,6 @@
                 "format": {
                     "name": "ROLLNUMBERID6",
                     "value": "ROLLNUMBERID6"
-                },
-                "validate": {
-                    "regExp": "[0-1]",
-                    "errorMsg": "Omr result should be 1 or 0"
                 }
             },
             {
@@ -770,10 +727,6 @@
                 "format": {
                     "name": "ROLLNUMBER6_Q1",
                     "value": "Attendance"
-                },
-                "validate": {
-                    "regExp": "[0-1]",
-                    "errorMsg": "Omr result should be 1 or 0"
                 }
             },
             {
@@ -870,10 +823,6 @@
                 "format": {
                     "name": "ROLLNUMBERID7",
                     "value": "ROLLNUMBERID7"
-                },
-                "validate": {
-                    "regExp": "[0-1]",
-                    "errorMsg": "Omr result should be 1 or 0"
                 }
             },
             {
@@ -898,10 +847,6 @@
                 "format": {
                     "name": "ROLLNUMBER7_Q1",
                     "value": "Attendance"
-                },
-                "validate": {
-                    "regExp": "[0-1]",
-                    "errorMsg": "Omr result should be 1 or 0"
                 }
             },
             {
@@ -998,10 +943,6 @@
                 "format": {
                     "name": "ROLLNUMBERID8",
                     "value": "ROLLNUMBERID8"
-                },
-                "validate": {
-                    "regExp": "[0-1]",
-                    "errorMsg": "Omr result should be 1 or 0"
                 }
             },
             {
@@ -1026,10 +967,6 @@
                 "format": {
                     "name": "ROLLNUMBER8_Q1",
                     "value": "Attendance"
-                },
-                "validate": {
-                    "regExp": "[0-1]",
-                    "errorMsg": "Omr result should be 1 or 0"
                 }
             },
             {
@@ -1126,10 +1063,6 @@
                 "format": {
                     "name": "ROLLNUMBERID9",
                     "value": "ROLLNUMBERID9"
-                },
-                "validate": {
-                    "regExp": "[0-1]",
-                    "errorMsg": "Omr result should be 1 or 0"
                 }
             },
             {
@@ -1154,10 +1087,6 @@
                 "format": {
                     "name": "ROLLNUMBER9_Q1",
                     "value": "Attendance"
-                },
-                "validate": {
-                    "regExp": "[0-1]",
-                    "errorMsg": "Omr result should be 1 or 0"
                 }
             },
             {
@@ -1254,10 +1183,6 @@
                 "format": {
                     "name": "ROLLNUMBERID10",
                     "value": "ROLLNUMBERID10"
-                },
-                "validate": {
-                    "regExp": "[0-1]",
-                    "errorMsg": "Omr result should be 1 or 0"
                 }
             },
             {
@@ -1282,10 +1207,6 @@
                 "format": {
                     "name": "ROLLNUMBER10_Q1",
                     "value": "Attendance"
-                },
-                "validate": {
-                    "regExp": "[0-1]",
-                    "errorMsg": "Omr result should be 1 or 0"
                 }
             },
             {
@@ -1382,10 +1303,6 @@
                 "format": {
                     "name": "ROLLNUMBERID11",
                     "value": "ROLLNUMBERID11"
-                },
-                "validate": {
-                    "regExp": "[0-1]",
-                    "errorMsg": "Omr result should be 1 or 0"
                 }
             },
             {
@@ -1410,10 +1327,6 @@
                 "format": {
                     "name": "ROLLNUMBER11_Q1",
                     "value": "Attendance"
-                },
-                "validate": {
-                    "regExp": "[0-1]",
-                    "errorMsg": "Omr result should be 1 or 0"
                 }
             },
             {
@@ -1510,10 +1423,6 @@
                 "format": {
                     "name": "ROLLNUMBERID12",
                     "value": "ROLLNUMBERID12"
-                },
-                "validate": {
-                    "regExp": "[0-1]",
-                    "errorMsg": "Omr result should be 1 or 0"
                 }
             },
             {
@@ -1538,10 +1447,6 @@
                 "format": {
                     "name": "ROLLNUMBER12_Q1",
                     "value": "Attendance"
-                },
-                "validate": {
-                    "regExp": "[0-1]",
-                    "errorMsg": "Omr result should be 1 or 0"
                 }
             },
             {
@@ -1638,10 +1543,6 @@
                 "format": {
                     "name": "ROLLNUMBERID13",
                     "value": "ROLLNUMBERID13"
-                },
-                "validate": {
-                    "regExp": "[0-1]",
-                    "errorMsg": "Omr result should be 1 or 0"
                 }
             },
             {
@@ -1666,10 +1567,6 @@
                 "format": {
                     "name": "ROLLNUMBER13_Q1",
                     "value": "Attendance"
-                },
-                "validate": {
-                    "regExp": "[0-1]",
-                    "errorMsg": "Omr result should be 1 or 0"
                 }
             },
             {
@@ -1766,10 +1663,6 @@
                 "format": {
                     "name": "ROLLNUMBERID14",
                     "value": "ROLLNUMBERID14"
-                },
-                "validate": {
-                    "regExp": "[0-1]",
-                    "errorMsg": "Omr result should be 1 or 0"
                 }
             },
             {
@@ -1794,10 +1687,6 @@
                 "format": {
                     "name": "ROLLNUMBER14_Q1",
                     "value": "Attendance"
-                },
-                "validate": {
-                    "regExp": "[0-1]",
-                    "errorMsg": "Omr result should be 1 or 0"
                 }
             },
             {
@@ -1894,10 +1783,6 @@
                 "format": {
                     "name": "ROLLNUMBERID15",
                     "value": "ROLLNUMBERID15"
-                },
-                "validate": {
-                    "regExp": "[0-1]",
-                    "errorMsg": "Omr result should be 1 or 0"
                 }
             },
             {
@@ -1922,10 +1807,6 @@
                 "format": {
                     "name": "ROLLNUMBER15_Q1",
                     "value": "Attendance"
-                },
-                "validate": {
-                    "regExp": "[0-1]",
-                    "errorMsg": "Omr result should be 1 or 0"
                 }
             },
             {
@@ -2022,10 +1903,6 @@
                 "format": {
                     "name": "ROLLNUMBERID16",
                     "value": "ROLLNUMBERID16"
-                },
-                "validate": {
-                    "regExp": "[0-1]",
-                    "errorMsg": "Omr result should be 1 or 0"
                 }
             },
             {
@@ -2050,10 +1927,6 @@
                 "format": {
                     "name": "ROLLNUMBER16_Q1",
                     "value": "Attendance"
-                },
-                "validate": {
-                    "regExp": "[0-1]",
-                    "errorMsg": "Omr result should be 1 or 0"
                 }
             },
             {
@@ -2150,10 +2023,6 @@
                 "format": {
                     "name": "ROLLNUMBERID17",
                     "value": "ROLLNUMBERID17"
-                },
-                "validate": {
-                    "regExp": "[0-1]",
-                    "errorMsg": "Omr result should be 1 or 0"
                 }
             },
             {
@@ -2178,10 +2047,6 @@
                 "format": {
                     "name": "ROLLNUMBER17_Q1",
                     "value": "Attendance"
-                },
-                "validate": {
-                    "regExp": "[0-1]",
-                    "errorMsg": "Omr result should be 1 or 0"
                 }
             },
             {
@@ -2278,10 +2143,6 @@
                 "format": {
                     "name": "ROLLNUMBERID18",
                     "value": "ROLLNUMBERID18"
-                },
-                "validate": {
-                    "regExp": "[0-1]",
-                    "errorMsg": "Omr result should be 1 or 0"
                 }
             },
             {
@@ -2306,10 +2167,6 @@
                 "format": {
                     "name": "ROLLNUMBER18_Q1",
                     "value": "Attendance"
-                },
-                "validate": {
-                    "regExp": "[0-1]",
-                    "errorMsg": "Omr result should be 1 or 0"
                 }
             },
             {
@@ -2406,10 +2263,6 @@
                 "format": {
                     "name": "ROLLNUMBERID19",
                     "value": "ROLLNUMBERID19"
-                },
-                "validate": {
-                    "regExp": "[0-1]",
-                    "errorMsg": "Omr result should be 1 or 0"
                 }
             },
             {
@@ -2434,10 +2287,6 @@
                 "format": {
                     "name": "ROLLNUMBER19_Q1",
                     "value": "Attendance"
-                },
-                "validate": {
-                    "regExp": "[0-1]",
-                    "errorMsg": "Omr result should be 1 or 0"
                 }
             },
             {
@@ -2534,10 +2383,6 @@
                 "format": {
                     "name": "ROLLNUMBERID20",
                     "value": "ROLLNUMBERID20"
-                },
-                "validate": {
-                    "regExp": "[0-1]",
-                    "errorMsg": "Omr result should be 1 or 0"
                 }
             },
             {
@@ -2562,10 +2407,6 @@
                 "format": {
                     "name": "ROLLNUMBER20_Q1",
                     "value": "Attendance"
-                },
-                "validate": {
-                    "regExp": "[0-1]",
-                    "errorMsg": "Omr result should be 1 or 0"
                 }
             }
         ]
