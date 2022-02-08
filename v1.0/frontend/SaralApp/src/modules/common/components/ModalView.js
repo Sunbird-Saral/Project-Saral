@@ -37,19 +37,23 @@ const modalView = ({
       >
         <View style={styles.centeredView}>
           <View style={[styles.cardView,]}>
-            <View style={styles.row}>
-            <Text style={styles.version}>Saral Release Version</Text>
-            <Text>{modalMessage['saral.release.version']}</Text>
-            </View>
 
             
-            <Text style={[styles.version,{marginTop:10}]}>Saral Info</Text>
+            <Text style={[styles.version,{marginTop:10}]}>About</Text>
             <Text>{modalMessage['saral.info']}</Text>
 
-            <Text style={[styles.version,{marginTop:10}]}>saral documentation link</Text>
+            <Text style={[styles.version,{marginTop:10}]}>Documentation</Text>
             <Text 
             style={{color:'blue'}} 
             onPress={()=>Linking.openURL((modalMessage['saral.documentation.link']))}>{modalMessage['saral.documentation.link']}</Text>
+           
+            <View style={styles.row}>
+            <Text style={styles.version}>Release Version</Text>
+            <Text 
+            style={{color:'blue'}}
+            onPress={()=> Linking.openURL(modalMessage['release.link'])}
+            >{modalMessage['saral.release.version']}</Text>
+            </View>
 
           </View>
         </View>
