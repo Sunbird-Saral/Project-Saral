@@ -205,10 +205,6 @@
                 "format": {
                     "name": "ROLLNUMBER",
                     "value": "ROLLNUMBER"
-                },
-                "validate": {
-                    "regExp": "",
-                    "errorMsg": ""
                 }
             },
             {
@@ -245,10 +241,6 @@
                 "format": {
                     "name": "QUESTION1",
                     "value": "QUESTION 1"
-                },
-                "validate": {
-                    "regExp": "",
-                    "errorMsg": ""
                 }
             },
             {
@@ -285,10 +277,6 @@
                 "format": {
                     "name": "QUESTION2",
                     "value": "QUESTION 2"
-                },
-                "validate": {
-                    "regExp": "",
-                    "errorMsg": ""
                 }
             },
             {
@@ -325,10 +313,6 @@
                 "format": {
                     "name": "QUESTION3",
                     "value": "QUESTION 3"
-                },
-                "validate": {
-                    "regExp": "",
-                    "errorMsg": ""
                 }
             },
             {
@@ -365,10 +349,6 @@
                 "format": {
                     "name": "QUESTION4",
                     "value": "QUESTION 4"
-                },
-                "validate": {
-                    "regExp": "",
-                    "errorMsg": ""
                 }
             },
             {
@@ -405,10 +385,6 @@
                 "format": {
                     "name": "QUESTION5",
                     "value": "QUESTION 5"
-                },
-                "validate": {
-                    "regExp": "",
-                    "errorMsg": ""
                 }
             },
             {
@@ -445,10 +421,6 @@
                 "format": {
                     "name": "QUESTION6",
                     "value": "QUESTION 6"
-                },
-                "validate": {
-                    "regExp": "",
-                    "errorMsg": ""
                 }
             },
             {
@@ -485,10 +457,6 @@
                 "format": {
                     "name": "QUESTION7",
                     "value": "QUESTION 7"
-                },
-                "validate": {
-                    "regExp": "",
-                    "errorMsg": ""
                 }
             },
             {
@@ -525,10 +493,6 @@
                 "format": {
                     "name": "QUESTION8",
                     "value": "QUESTION 8"
-                },
-                "validate": {
-                    "regExp": "",
-                    "errorMsg": ""
                 }
             },
             {
@@ -565,10 +529,6 @@
                 "format": {
                     "name": "QUESTION9",
                     "value": "QUESTION 9"
-                },
-                "validate": {
-                    "regExp": "",
-                    "errorMsg": ""
                 }
             },
             {
@@ -605,10 +565,6 @@
                 "format": {
                     "name": "QUESTION10",
                     "value": "QUESTION 10"
-                },
-                "validate": {
-                    "regExp": "",
-                    "errorMsg": ""
                 }
             },
             {
@@ -645,10 +601,6 @@
                 "format": {
                     "name": "QUESTION11",
                     "value": "QUESTION 11"
-                },
-                "validate": {
-                    "regExp": "",
-                    "errorMsg": ""
                 }
             },
             {
@@ -685,10 +637,6 @@
                 "format": {
                     "name": "QUESTION12",
                     "value": "QUESTION 12"
-                },
-                "validate": {
-                    "regExp": "",
-                    "errorMsg": ""
                 }
             },
             {
@@ -725,10 +673,6 @@
                 "format": {
                     "name": "QUESTION13",
                     "value": "QUESTION 13"
-                },
-                "validate": {
-                    "regExp": "",
-                    "errorMsg": ""
                 }
             },
             {
@@ -765,10 +709,6 @@
                 "format": {
                     "name": "QUESTION14",
                     "value": "QUESTION 14"
-                },
-                "validate": {
-                    "regExp": "",
-                    "errorMsg": ""
                 }
             },
             {
@@ -805,10 +745,6 @@
                 "format": {
                     "name": "QUESTION15",
                     "value": "QUESTION 15"
-                },
-                "validate": {
-                    "regExp": "",
-                    "errorMsg": ""
                 }
             },
             {
@@ -845,10 +781,6 @@
                 "format": {
                     "name": "QUESTION16",
                     "value": "QUESTION 16"
-                },
-                "validate": {
-                    "regExp": "",
-                    "errorMsg": ""
                 }
             },
             {
@@ -885,10 +817,6 @@
                 "format": {
                     "name": "QUESTION17",
                     "value": "QUESTION 17"
-                },
-                "validate": {
-                    "regExp": "",
-                    "errorMsg": ""
                 }
             },
             {
@@ -925,10 +853,6 @@
                 "format": {
                     "name": "QUESTION18",
                     "value": "QUESTION 18"
-                },
-                "validate": {
-                    "regExp": "",
-                    "errorMsg": ""
                 }
             },
             {
@@ -965,10 +889,6 @@
                 "format": {
                     "name": "QUESTION19",
                     "value": "QUESTION 19"
-                },
-                "validate": {
-                    "regExp": "",
-                    "errorMsg": ""
                 }
             },
             {
@@ -1005,10 +925,6 @@
                 "format": {
                     "name": "QUESTION20",
                     "value": "QUESTION 20"
-                },
-                "validate": {
-                    "regExp": "",
-                    "errorMsg": ""
                 }
             },
             {
@@ -1057,10 +973,6 @@
                 "format": {
                     "name": "MAX_MARKS",
                     "value": "MAX MARKS"
-                },
-                "validate": {
-                    "regExp": "",
-                    "errorMsg": ""
                 }
             },
             {
@@ -1109,11 +1021,8 @@
                 "format": {
                     "name": "MARKS_OBTAINED",
                     "value": "MARKS OBTAINED"
-                },
-                "validate": {
-                    "regExp": "",
-                    "errorMsg": ""
                 }
             }
         ]
     }
+}

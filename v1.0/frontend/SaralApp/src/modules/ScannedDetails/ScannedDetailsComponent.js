@@ -77,7 +77,7 @@ const ScannedDetailsComponent = ({
     const [multiPage, setMultiPage] = useState(0)
 
     const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.scannedDetailComponent[0]
-    const defaultValidateError = ocrLocalResponse.layout && ocrLocalResponse.layout.resultValidation&& ocrLocalResponse.layout.resultValidation.validate.errorMsg
+    const defaultValidateError = ocrLocalResponse.layout && ocrLocalResponse.layout.resultValidation && ocrLocalResponse.layout.resultValidation.validate.errorMsg
     const defaultValidateExp = ocrLocalResponse.layout && ocrLocalResponse.layout.resultValidation && ocrLocalResponse.layout.resultValidation.validate.regExp
     const inputRef = React.createRef();
     const dispatch = useDispatch()
@@ -285,16 +285,16 @@ const ScannedDetailsComponent = ({
             })
         })
     }
-    const [omrResultErr,setOmrResult] = useState()
+    const [omrResultErr, setOmrResult] = useState()
     const regxValidation = (cellId) => {
         let result
         let regexErrormsg
         for (let i = 0; i < ocrLocalResponse.layout.cells.length; i++) {
-            if(ocrLocalResponse.layout.cells[i].cellId == cellId){
+            if (ocrLocalResponse.layout.cells[i].cellId == cellId) {
                 let consolidated = ocrLocalResponse.layout.cells[i].consolidatedPrediction
                 let ocrcells = ocrLocalResponse.layout.cells[i]
                 regexErrormsg = ocrcells && ocrcells.validate && ocrcells.validate.errorMsg
-                let regexExp = ocrcells&& ocrcells.validate&&ocrcells.validate.regExp ? ocrcells.validate.regExp : defaultValidateExp         
+                let regexExp = ocrcells && ocrcells.validate && ocrcells.validate.regExp ? ocrcells.validate.regExp : defaultValidateExp
                 let number = consolidated;
                 let regex = new RegExp(regexExp)
                 result = regex.test(number);
@@ -640,7 +640,7 @@ const ScannedDetailsComponent = ({
     const handleTextChange = (text, index, array, value) => {
 
         if (isMultipleStudent) {
-        
+
             let len = text.length
             setDisabled(len == 0 ? true : false)
             if (text > 1) {
@@ -658,7 +658,7 @@ const ScannedDetailsComponent = ({
                     structureList.forEach(Datas => {
                         //this'll add into OCRLocal
                         //  element.consolidatedPrediction = text > 1 ? 0 : text
-                         element.consolidatedPrediction = text < 1 ? 0 : text
+                        element.consolidatedPrediction = text < 1 ? 0 : text
                         //this'll add in  structurelist
                         Datas.data.forEach((el, index) => {
                             if (el.cellId === value.cellId) {
@@ -674,7 +674,7 @@ const ScannedDetailsComponent = ({
             ocrLocalResponse.layout.cells.forEach(element => {
                 if (element.cellId == value.cellId) {
                     if (!regexValue[0]) {
-                        showErrorMessage(regexValue[1] ? regexValue[1] : defaultValidateError )
+                        showErrorMessage(regexValue[1] ? regexValue[1] : defaultValidateError)
                     }
 
                 }
@@ -942,7 +942,7 @@ const ScannedDetailsComponent = ({
 
         if (currentIndex - 1 >= 1) {
             if (!studentValid && !toggleCheckBox) {
-                showErrorMessage( Strings.please_correct_student_id)
+                showErrorMessage(Strings.please_correct_student_id)
             }
             else if (isStudentValid) {
                 showErrorMessage(Strings.student_id_should_be_same)
@@ -1245,7 +1245,7 @@ const ScannedDetailsComponent = ({
                                                             rowBorderColor={markBorderOnCell(element)}
                                                             editable={true}
                                                             keyboardType={'number-pad'}
-                                                             maxLength={lengthAccordingSheet(element)}
+                                                            maxLength={lengthAccordingSheet(element)}
                                                             onChangeText={(text) => {
                                                                 handleTextChange(text.trim(), index, newArrayValue, element)
                                                             }}
