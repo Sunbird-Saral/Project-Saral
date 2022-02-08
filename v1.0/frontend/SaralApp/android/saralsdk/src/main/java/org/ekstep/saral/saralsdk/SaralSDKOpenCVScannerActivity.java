@@ -72,6 +72,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
     private boolean isMultiChoiceOMRLayout = false;
     private int layoutMinWidth = 0;
     private int layoutMinHeight = 0;
+    private int detectionRadius = 0;
 
     public SaralSDKOpenCVScannerActivity() {
         Log.i(TAG, "Instantiated new " + this.getClass());
@@ -216,7 +217,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
         double DARKNESS_THRESHOLD   = 80.0;
         mStartTime                  = SystemClock.uptimeMillis();
         loadLayoutConfiguration();
-        Mat tableMat                = mTableCornerDetection.processMat(image,layoutMinWidth,layoutMinHeight);
+        Mat tableMat                = mTableCornerDetection.processMat(image,layoutMinWidth,layoutMinHeight,detectionRadius);
         if(isMultiChoiceOMRLayout)
         {
             DARKNESS_THRESHOLD = 70.0;
@@ -245,19 +246,19 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                         String roiId        = roiConfig.getString("roiId");
                         JSONObject rect      = roiConfig.getJSONObject("rect");
 
-                        double percent      = mDetectShaded.getShadedPercentage(tableMat, rect.getInt("top"), rect.getInt("left"), rect.getInt("bottom"), rect.getInt("right"),isMultiChoiceOMRLayout);
-                        Mat omrROI        = mDetectShaded.getROIMat(tableMat, rect.getInt("top"), rect.getInt("left"), rect.getInt("bottom"), rect.getInt("right"));                   
+                        //double percent      = mDetectShaded.getShadedPercentage(tableMat, rect.getInt("top"), rect.getInt("left"), rect.getInt("bottom"), rect.getInt("right"),isMultiChoiceOMRLayout);
+                        Mat omrROI        = mDetectShaded.getROIMat(tableMat, rect.getInt("top"), rect.getInt("left"), rect.getInt("bottom"), rect.getInt("right"));
                         Integer answer      = 0;
-                        if (percent > DARKNESS_THRESHOLD) {
-                            answer = 1;
-                        }
-                        // Alternative logic
-                        // if (mDetectShaded.isOMRFilled(omrROI, rect.getInt("top"), rect.getInt("left"), rect.getInt("bottom"), rect.getInt("right"))) {
+                        // if (percent > DARKNESS_THRESHOLD) {
                         //     answer = 1;
                         // }
+                        // New Logic
+                        if (mDetectShaded.isOMRFilled(omrROI)) { 
+                            answer = 1;
+                        }
                         mRoiMatBase64.put(roiId,createBase64FromMat(omrROI));
                         mPredictedOMRs.put(roiId, answer.toString());
-                        Log.d(TAG, "key: " + roiId + " answer: " + answer.toString()+" percent "+percent);
+                        Log.d(TAG, "key: " + roiId + " answer: " + answer.toString());
                     }
 
                     if (roiConfig.getString("extractionMethod").equals("NUMERIC_CLASSIFICATION")) {
@@ -338,8 +339,15 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
             JSONObject layoutObject     = layoutConfigs.getJSONObject("layout");
             if(layoutObject.has("threshold")){
                 JSONObject threshold = layoutObject.getJSONObject("threshold");
-                layoutMinWidth=Integer.parseInt(threshold.getString("minWidth"));
-                layoutMinHeight=Integer.parseInt(threshold.getString("minHeight"));
+                if(threshold.getString("minWidth")!=null){
+                    layoutMinWidth=Integer.parseInt(threshold.getString("minWidth"));
+                }
+                if(threshold.getString("minHeight")!=null){
+                    layoutMinHeight=Integer.parseInt(threshold.getString("minHeight"));
+                }
+                if(threshold.getString("detectionRadius")!=null){
+                    detectionRadius=Integer.parseInt(threshold.getString("detectionRadius"));
+                }                
             }
             JSONArray  cells            = layoutObject.getJSONArray("cells");
             for (int i = 0; i < cells.length(); i++) { 
