@@ -35,6 +35,19 @@ components:
             minHeight:
               type: positiveInteger
               description: Minimum height of layout for detection
+        resultValidation: 
+          type: object
+          description: validate erroneous resultData and show error message when resultData does not match with regular expression .
+          properties:
+            validate:  
+            type: object
+            properties:
+              regExp:
+              type: string
+              description: regular expression to detect erroneous resultData
+              errorMsg:
+              type: string
+              description: error message shows when resultData does not match with regular expression.
         pages:
           type: positiveInteger
           description: number of pages supported by layout. Optional feild , to be used for multi-page layouts.
@@ -105,7 +118,10 @@ components:
       properties:
         regExp:
           type: string
-          description: regular expression to detect errorneous resultData
+          description: regular expression to detect erroneous resultData
+        errorMsg:
+          type: string
+          description: error message shows when resultData does not match with regular expression.
   
     rois:
       type: array
