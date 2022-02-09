@@ -136,35 +136,47 @@ const ShareComponent = ({
     Linking.openURL("https://saral.sunbird.org/learn/features")
   }
 
- const showModal = () => {
+  const showModal = () => {
     setIshidden(!ishidden);
-    setTimeout(() => {
-      setIshidden(ishidden);
-    }, 3000);
   };
   return (
     <View style={{ width: '-10%' }}>
 
       <View style={styles.imageViewContainer}>
 
-        <TouchableOpacity onPress={()=> showModal()}>
+        <TouchableOpacity onPress={() => showModal()}>
           <View style={[styles.imageContainerStyle, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE }]}>
             <Text style={{ textAlign: 'center', fontSize: AppTheme.HEADER_FONT_SIZE_LARGE }}>{loginData.data.school.name.charAt(0)}</Text>
           </View>
         </TouchableOpacity>
       </View>
 
-      {ishidden ?
-        <HeaderComponents
-          supportTeamText={'Support'}
-          logoutHeaderText={Strings.logout_text}
-          customLogoutTextStyle={{ color: AppTheme.BLACK, }}
-          onSupportClick={ShareCompo}
-          onLogoutClick={Logoutcall}
-          aboutMenu={aboutMenu}
-          helpMenu={helpMenu}
-        />
-        : null}
+
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={ishidden}
+        onRequestClose={() => {
+          setIshidden(false)
+        }}>
+        <TouchableOpacity
+          onPress={() => setIshidden(false)}
+          style={styles.bgContainer}
+          activeOpacity={1}
+        >
+
+            <HeaderComponents
+              supportTeamText={'Support'}
+              logoutHeaderText={Strings.logout_text}
+              customLogoutTextStyle={{ color: AppTheme.BLACK, }}
+              onSupportClick={ShareCompo}
+              onLogoutClick={Logoutcall}
+              aboutMenu={aboutMenu}
+              helpMenu={helpMenu}
+            />
+
+        </TouchableOpacity>
+      </Modal>
     </View>
   )
 }
@@ -211,6 +223,10 @@ const styles = {
     justifyContent: 'center',
     backgroundColor: AppTheme.TAB_BORDER
   },
+  bgContainer: {
+    backgroundColor: '#ffffff1A',
+    flex: 1,
+  }
 }
 
 export default (connect(mapStateToProps, mapDispatchToProps)(ShareComponent));
