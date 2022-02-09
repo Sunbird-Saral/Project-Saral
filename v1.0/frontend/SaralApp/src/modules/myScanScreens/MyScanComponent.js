@@ -248,7 +248,7 @@ class MyScanComponent extends Component {
     }
     render() {
         const { isLoading } = this.state;
-        const { loginData,multiBrandingData } = this.props
+        const { loginData,multiBrandingData} = this.props
         const BrandLabel = multiBrandingData&&multiBrandingData.screenLabels&&multiBrandingData.screenLabels.myScan[0]
         return (
 

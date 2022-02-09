@@ -49,9 +49,6 @@
                 "format": {
                     "name": "ROLLNUMBER",
                     "value": "ROLLNUMBER"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -76,9 +73,6 @@
                 "format": {
                     "name": "HINDIID1",
                     "value": "HINDI 1"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -103,9 +97,6 @@
                 "format": {
                     "name": "HINDIID2",
                     "value": "HINDI 2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -130,9 +121,6 @@
                 "format": {
                     "name": "HINDIID3",
                     "value": "HINDI 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -157,9 +145,6 @@
                 "format": {
                     "name": "HINDIID4",
                     "value": "HINDI 4"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -184,9 +169,6 @@
                 "format": {
                     "name": "HINDIID5",
                     "value": "HINDI 5"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -211,9 +193,6 @@
                 "format": {
                     "name": "HINDIID6",
                     "value": "HINDI 6"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -238,9 +217,6 @@
                 "format": {
                     "name": "HINDIID7",
                     "value": "HINDI 7"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -265,9 +241,6 @@
                 "format": {
                     "name": "HINDIID8",
                     "value": "HINDI 8"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -292,9 +265,6 @@
                 "format": {
                     "name": "HINDIID9",
                     "value": "HINDI 9"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -319,9 +289,6 @@
                 "format": {
                     "name": "HINDIID10",
                     "value": "HINDI 10"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -346,9 +313,6 @@
                 "format": {
                     "name": "ENGLISHID1",
                     "value": "ENGLISH 1"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -373,9 +337,6 @@
                 "format": {
                     "name": "ENGLISHID2",
                     "value": "ENGLISH 2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -400,9 +361,6 @@
                 "format": {
                     "name": "ENGLISHID3",
                     "value": "ENGLISH 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -427,9 +385,6 @@
                 "format": {
                     "name": "ENGLISHID4",
                     "value": "ENGLISH 4"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -454,9 +409,6 @@
                 "format": {
                     "name": "ENGLISHID5",
                     "value": "ENGLISH 5"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -481,9 +433,6 @@
                 "format": {
                     "name": "ENGLISHID6",
                     "value": "ENGLISH 6"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -508,9 +457,6 @@
                 "format": {
                     "name": "ENGLISHID7",
                     "value": "ENGLISH 7"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -535,9 +481,6 @@
                 "format": {
                     "name": "ENGLISHID8",
                     "value": "ENGLISH 8"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -562,9 +505,6 @@
                 "format": {
                     "name": "ENGLISHID9",
                     "value": "ENGLISH 9"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -589,9 +529,6 @@
                 "format": {
                     "name": "ENGLISHID10",
                     "value": "ENGLISH 10"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -616,9 +553,6 @@
                 "format": {
                     "name": "MATHSID1",
                     "value": "MATHS 1"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -643,9 +577,6 @@
                 "format": {
                     "name": "MATHSID2",
                     "value": "MATHS 2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -670,9 +601,6 @@
                 "format": {
                     "name": "MATHSID3",
                     "value": "MATHS 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -697,9 +625,6 @@
                 "format": {
                     "name": "MATHSID4",
                     "value": "MATHS 4"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -724,9 +649,6 @@
                 "format": {
                     "name": "MATHSID5",
                     "value": "MATHS 5"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -751,9 +673,6 @@
                 "format": {
                     "name": "MATHSID6",
                     "value": "MATHS 6"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -778,9 +697,6 @@
                 "format": {
                     "name": "MATHSID7",
                     "value": "MATHS 7"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -805,9 +721,6 @@
                 "format": {
                     "name": "MATHSID8",
                     "value": "MATHS 8"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -832,9 +745,6 @@
                 "format": {
                     "name": "MATHSID9",
                     "value": "MATHS 9"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -859,9 +769,6 @@
                 "format": {
                     "name": "MATHSID10",
                     "value": "MATHS 10"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -886,9 +793,6 @@
                 "format": {
                     "name": "EVSID1",
                     "value": "EVS 1"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -913,9 +817,6 @@
                 "format": {
                     "name": "EVSID2",
                     "value": "EVS 2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -940,9 +841,6 @@
                 "format": {
                     "name": "EVSID3",
                     "value": "EVS 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -967,9 +865,6 @@
                 "format": {
                     "name": "EVSID4",
                     "value": "EVS 4"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -994,9 +889,6 @@
                 "format": {
                     "name": "EVSID5",
                     "value": "EVS 5"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1021,9 +913,6 @@
                 "format": {
                     "name": "EVSID6",
                     "value": "EVS 6"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1048,9 +937,6 @@
                 "format": {
                     "name": "EVSID7",
                     "value": "EVS 7"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1075,9 +961,6 @@
                 "format": {
                     "name": "EVSID8",
                     "value": "EVS 8"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1102,9 +985,6 @@
                 "format": {
                     "name": "EVSID9",
                     "value": "EVS 9"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1129,9 +1009,6 @@
                 "format": {
                     "name": "EVSID10",
                     "value": "EVS 10"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1156,9 +1033,6 @@
                 "format": {
                     "name": "SCIENCEID1",
                     "value": "SCIENCE 1"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1183,9 +1057,6 @@
                 "format": {
                     "name": "SCIENCEID2",
                     "value": "SCIENCE 2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1210,9 +1081,6 @@
                 "format": {
                     "name": "SCIENCEID3",
                     "value": "SCIENCE 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1237,9 +1105,6 @@
                 "format": {
                     "name": "SCIENCEID4",
                     "value": "SCIENCE 4"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1264,9 +1129,6 @@
                 "format": {
                     "name": "SCIENCEID5",
                     "value": "SCIENCE 5"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1291,9 +1153,6 @@
                 "format": {
                     "name": "SCIENCEID6",
                     "value": "SCIENCE 6"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1318,9 +1177,6 @@
                 "format": {
                     "name": "SCIENCEID7",
                     "value": "SCIENCE 7"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1345,9 +1201,6 @@
                 "format": {
                     "name": "SCIENCEID8",
                     "value": "SCIENCE 8"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1372,9 +1225,6 @@
                 "format": {
                     "name": "SCIENCEID9",
                     "value": "SCIENCE 9"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1399,9 +1249,6 @@
                 "format": {
                     "name": "SCIENCEID10",
                     "value": "SCIENCE 10"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             }
         ]
