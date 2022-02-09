@@ -1,16 +1,31 @@
 import React, { Component, useCallback, useState, useEffect } from 'react';
-import { Share, Alert, View, TouchableOpacity, Text, Modal } from 'react-native';
-import Strings from '../../../utils/Strings';
-import AppTheme from '../../../utils/AppTheme';
+import { Share, Alert, View, TouchableOpacity, Text, Modal, Linking } from 'react-native';
+
+//redux
 import { connect, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
+
+//component
+import Strings from '../../../utils/Strings';
 import HeaderComponents from './HeaderComponents';
+import AppTheme from '../../../utils/AppTheme';
+import { collectErrorLogs } from '../../CollectErrorLogs';
+import saralAppInfo from '../../../../saralAppInfo.json'
+
+//Api action
 import { SaveScanData } from '../../../flux/actions/apis/saveScanDataAction';
 import APITransport from '../../../flux/actions/transport/apitransport';
 import { LogoutAction } from '../../../flux/actions/apis/LogoutAction';
-import { getScannedDataFromLocal, eraseErrorLogs, getErrorMessage } from '../../../utils/StorageUtils';
+
+//npm
 import axios from 'axios';
-import { collectErrorLogs } from '../../CollectErrorLogs';
+
+//local storage
+import { getScannedDataFromLocal, eraseErrorLogs, getErrorMessage } from '../../../utils/StorageUtils';
+
+//constant
+import C from '../../../flux/actions/constants'
+
 
 const ShareComponent = ({
   loginData,
@@ -99,33 +114,69 @@ const ShareComponent = ({
     }
   }
 
- const showModal = () => {
+  const dispatchModalStatus = (value) => {
+    return({
+      type: C.MODAL_STATUS,
+      payload : value
+    })
+  }
+
+  const dispatchModalMessage = (value) => {
+    return({
+      type: C.MODAL_MESSAGE,
+      payload : value
+    })
+  }
+
+  const aboutMenu = () => {
+    dispatch(dispatchModalStatus(true))
+    dispatch(dispatchModalMessage(saralAppInfo))
+  }
+  const helpMenu = () => {
+    Linking.openURL("https://saral.sunbird.org/learn/features")
+  }
+
+  const showModal = () => {
     setIshidden(!ishidden);
-    setTimeout(() => {
-      setIshidden(ishidden);
-    }, 3000);
   };
   return (
     <View style={{ width: '-10%' }}>
 
       <View style={styles.imageViewContainer}>
 
-        <TouchableOpacity onPress={()=> showModal()}>
+        <TouchableOpacity onPress={() => showModal()}>
           <View style={[styles.imageContainerStyle, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE }]}>
             <Text style={{ textAlign: 'center', fontSize: AppTheme.HEADER_FONT_SIZE_LARGE }}>{loginData.data.school.name.charAt(0)}</Text>
           </View>
         </TouchableOpacity>
       </View>
 
-      {ishidden ?
-        <HeaderComponents
-          supportTeamText={'Support'}
-          logoutHeaderText={Strings.logout_text}
-          customLogoutTextStyle={{ color: AppTheme.BLACK, }}
-          onSupportClick={ShareCompo}
-          onLogoutClick={Logoutcall}
-        />
-        : null}
+
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={ishidden}
+        onRequestClose={() => {
+          setIshidden(false)
+        }}>
+        <TouchableOpacity
+          onPress={() => setIshidden(false)}
+          style={styles.bgContainer}
+          activeOpacity={1}
+        >
+
+            <HeaderComponents
+              supportTeamText={'Support'}
+              logoutHeaderText={Strings.logout_text}
+              customLogoutTextStyle={{ color: AppTheme.BLACK, }}
+              onSupportClick={ShareCompo}
+              onLogoutClick={Logoutcall}
+              aboutMenu={aboutMenu}
+              helpMenu={helpMenu}
+            />
+
+        </TouchableOpacity>
+      </Modal>
     </View>
   )
 }
@@ -172,6 +223,10 @@ const styles = {
     justifyContent: 'center',
     backgroundColor: AppTheme.TAB_BORDER
   },
+  bgContainer: {
+    backgroundColor: '#ffffff1A',
+    flex: 1,
+  }
 }
 
 export default (connect(mapStateToProps, mapDispatchToProps)(ShareComponent));

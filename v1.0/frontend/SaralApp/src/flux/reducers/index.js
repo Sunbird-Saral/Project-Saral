@@ -13,6 +13,8 @@ import multiBrandingReducer from './multiBrandingReducer';
 import defaultBrandReducer from './defaultBrandReducer';
 import bgFlag from './bgFlag';
 import multiPageReducer from './multiPageReducer';
+import modalStatus from './modalStatus';
+import ModalMessage from './ModalMessage';
 
 export default {
     apiStatus: apiStatus,
@@ -29,7 +31,9 @@ export default {
     multiBrandingData:multiBrandingReducer,
     defaultBrandingdata:defaultBrandReducer,
     bgFlag: bgFlag,
-    multiPage: multiPageReducer
+    multiPage: multiPageReducer,
+    modalStatus: modalStatus,
+    modalMessage: ModalMessage
 
 
 }

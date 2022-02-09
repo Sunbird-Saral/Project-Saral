@@ -102,6 +102,8 @@ export default strings = new LocalizedStrings({
         back: 'BACK',
         student_id_should_be_same: 'ID should be same',
         Student_ID_Shouldnt_be_duplicated : "ID Shouldn't be duplicated",
-        Sum_Of_All_obtained_marks: "Sum Of All obtained result should be equal to result Obtained"
+        Sum_Of_All_obtained_marks: "Sum Of All obtained result should be equal to result Obtained",
+        help_menu: 'Help',
+        about_menu: 'About'
     }
 })
