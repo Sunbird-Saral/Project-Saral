@@ -40,7 +40,7 @@ const ScannedDetailsComponent = ({
     loginData,
     bgFlag,
     roiData,
-    multiPageReducer
+    multiPageReducer,
 }) => {
 
 
@@ -75,10 +75,10 @@ const ScannedDetailsComponent = ({
     const [toggleCheckBox, setToggleCheckBox] = useState(false)
     const [logmessage, setLogmessage] = useState()
     const [multiPage, setMultiPage] = useState(0)
+
     const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.scannedDetailComponent[0]
-
-
-
+    const defaultValidateError = ocrLocalResponse.layout && ocrLocalResponse.layout.resultValidation && ocrLocalResponse.layout.resultValidation.validate.errorMsg
+    const defaultValidateExp = ocrLocalResponse.layout && ocrLocalResponse.layout.resultValidation && ocrLocalResponse.layout.resultValidation.validate.regExp
     const inputRef = React.createRef();
     const dispatch = useDispatch()
 
@@ -121,7 +121,7 @@ const ScannedDetailsComponent = ({
                 setIsStudentValid(true)
                 setStdErr(Strings.student_id_should_be_same)
                 setStudentDATA([])
-            }   else if (a.length == 0) {
+            } else if (a.length == 0) {
                 setIsStudentValid(true)
                 setStdErr(Strings.please_correct_student_id)
             } else {
@@ -171,7 +171,7 @@ const ScannedDetailsComponent = ({
             let withNoDigits = e.format.name.replace(/[0-9]/g, '');
             let wordLen = withNoDigits.length;
             let multiple = 0
-            if (wordLen === multipleStudent[0].length  && withNoDigits === multipleStudent[0]) {
+            if (wordLen === multipleStudent[0].length && withNoDigits === multipleStudent[0]) {
                 multiple = multiple + 1
             }
             return multiple
@@ -285,23 +285,47 @@ const ScannedDetailsComponent = ({
             })
         })
     }
+    const [omrResultErr, setOmrResult] = useState()
+    const regxValidation = (cellId) => {
+        let result
+        let regexErrormsg
+        for (let i = 0; i < ocrLocalResponse.layout.cells.length; i++) {
+            if (ocrLocalResponse.layout.cells[i].cellId == cellId) {
+                let consolidated = ocrLocalResponse.layout.cells[i].consolidatedPrediction
+                let ocrcells = ocrLocalResponse.layout.cells[i]
+                regexErrormsg = ocrcells && ocrcells.validate && ocrcells.validate.errorMsg
+                let regexExp = ocrcells && ocrcells.validate && ocrcells.validate.regExp ? ocrcells.validate.regExp : defaultValidateExp
+                let number = consolidated;
+                let regex = new RegExp(regexExp)
+                result = regex.test(number);
+                // setOmrResult(regexErrormsg)
+                setOmrResult(defaultValidateError)
+
+            }
+        }
+        return [result, regexErrormsg]
+    }
 
 
     const goNextFrame = () => {
-
         let validCell = false
         let omrMark = false
+
         for (let i = 0; i < newArrayValue.length; i++) {
+
             if (newArrayValue[i].consolidatedPrediction === '') {
                 validCell = true
             }
+
             else if (newArrayValue[i].consolidatedPrediction === 0) {
                 omrMark = true
             }
         }
+
         let duplication = false
 
         let cellOmrValidation = validateCellOMR(true)
+
         const duplicate = checkStdRollDuplicate.some((item) => studentId == item)
 
         if (duplicate) {
@@ -309,12 +333,14 @@ const ScannedDetailsComponent = ({
         } else {
             duplication = false
         }
+
         if (omrMark) {
-            showErrorMessage(Strings.omr_mark_should_be)
+            showErrorMessage(omrResultErr ? omrResultErr : defaultValidateError || Strings.omr_mark_should_be)
         }
         else if (cellOmrValidation[0]) {
             showErrorMessage(`omr value should be 0 to ${cellOmrValidation[1] + 1}`)
         }
+
         else if (duplication) {
             Alert.alert(Strings.Student_ID_Shouldnt_be_duplicated)
         }
@@ -390,7 +416,6 @@ const ScannedDetailsComponent = ({
             }
         }
     }
-
 
     const saveMultipleStudentDataSheet = () => {
         if (isMultipleStudent && nextBtn === Strings.submit_text) {
@@ -615,6 +640,7 @@ const ScannedDetailsComponent = ({
     const handleTextChange = (text, index, array, value) => {
 
         if (isMultipleStudent) {
+
             let len = text.length
             setDisabled(len == 0 ? true : false)
             if (text > 1) {
@@ -622,7 +648,6 @@ const ScannedDetailsComponent = ({
             } else {
                 setValid(false)
             }
-
             let newArray = JSON.parse(JSON.stringify(array))
             newArray[index].consolidatedPrediction = text > 1 ? 0 : text
             setNewArrayValue(newArray)
@@ -632,7 +657,8 @@ const ScannedDetailsComponent = ({
                 if (element.cellId == value.cellId) {
                     structureList.forEach(Datas => {
                         //this'll add into OCRLocal
-                        element.consolidatedPrediction = text > 1 ? 0 : text
+                        //  element.consolidatedPrediction = text > 1 ? 0 : text
+                        element.consolidatedPrediction = text < 1 ? 0 : text
                         //this'll add in  structurelist
                         Datas.data.forEach((el, index) => {
                             if (el.cellId === value.cellId) {
@@ -644,6 +670,15 @@ const ScannedDetailsComponent = ({
                 }
             });
             dispatch(OcrLocalResponseAction(ocrLocalResponse))
+            let regexValue = regxValidation(value.cellId)
+            ocrLocalResponse.layout.cells.forEach(element => {
+                if (element.cellId == value.cellId) {
+                    if (!regexValue[0]) {
+                        showErrorMessage(regexValue[1] ? regexValue[1] : defaultValidateError)
+                    }
+
+                }
+            });
 
         } else {
             let len = text.length
@@ -652,15 +687,23 @@ const ScannedDetailsComponent = ({
             newArray[index].consolidatedPrediction = isMultipleStudent ? text > 1 ? 0 : text : text
             setNewArrayValue(newArray)
 
+
             ocrLocalResponse.layout.cells.forEach(element => {
                 if (element.cellId == value.cellId) {
                     element.consolidatedPrediction = text
+                }
+
+            });
+            dispatch(OcrLocalResponseAction(ocrLocalResponse))
+            let regexValue = regxValidation(value.cellId)
+            ocrLocalResponse.layout.cells.forEach(element => {
+                if (element.cellId == value.cellId) {
+                    if (!regexValue[0]) {
+                        showErrorMessage(regexValue[1] ? regexValue[1] : defaultValidateError )
+                    }
 
                 }
             });
-            dispatch(OcrLocalResponseAction(ocrLocalResponse))
-
-
             newArray.map((e) => {
                 if (e.format.name == neglectData[3]) {
                     setMaxMarksTotal(e.consolidatedPrediction)
@@ -721,9 +764,24 @@ const ScannedDetailsComponent = ({
 
     const onSubmitClick = async () => {
         let validCell = false
+        let omrMark = false
+        let resultMark = false
+        let regexErrormsglist
         for (let i = 0; i < newArrayValue.length; i++) {
+            let consolidatedlist = newArrayValue[i].consolidatedPrediction
+             regexErrormsglist = newArrayValue[i] && newArrayValue[i].validate && newArrayValue[i].validate.errorMsg
+            let regexlist = newArrayValue[i].validate && newArrayValue[i].validate.regExp
+            let number = consolidatedlist;
+            let regexvalue = new RegExp(regexlist)
+            let resultlist = regexvalue.test(number);
             if (newArrayValue[i].consolidatedPrediction === '') {
                 validCell = true
+            }
+            else if (newArrayValue[i].consolidatedPrediction === 0) {
+                omrMark = true
+            }
+            else if (resultlist === true) {
+                resultMark = true
             }
         }
 
@@ -735,13 +793,20 @@ const ScannedDetailsComponent = ({
         }
         else if (cellOmrValidation[0]) {
             showErrorMessage(`omr value should be 0 to ${cellOmrValidation[1]}`)
+            // showErrorMessage(`omr value should be 0 to ${cellOmrValidation[1]}`)
         }
         else if (!studentValid && !toggleCheckBox) {
             showErrorMessage(Strings.please_correct_student_id)
         }
-        else if(isStudentValid){
+        else if (isStudentValid) {
             showErrorMessage(Strings.student_id_should_be_same)
         }
+        else if (resultMark ===false) {
+            showErrorMessage(Strings.please_correct_marks_data)
+        }
+
+
+
         else {
             if (sumOfObtainedMarks > 0) {
 
@@ -803,7 +868,9 @@ const ScannedDetailsComponent = ({
                 }
             }
         }
+
     }
+
 
     const goNextPage = () => {
         onSubmitClick()
@@ -872,12 +939,12 @@ const ScannedDetailsComponent = ({
     }
 
     const goBackPage = () => {
-        
+
         if (currentIndex - 1 >= 1) {
             if (!studentValid && !toggleCheckBox) {
                 showErrorMessage(Strings.please_correct_student_id)
             }
-            else if (isStudentValid){
+            else if (isStudentValid) {
                 showErrorMessage(Strings.student_id_should_be_same)
             } else {
                 setNextBtn(`Scan Page#${currentIndex}`)
@@ -1031,7 +1098,7 @@ const ScannedDetailsComponent = ({
             setStudentID(rollNumber);
             scanNextSheet(roisData);
             setIsStudentValid(true);
-        }else {
+        } else {
             setStudentID(rollNumber)
             setStdErr("");
             scanNextSheet(roisData);
@@ -1077,8 +1144,7 @@ const ScannedDetailsComponent = ({
                                                     <TextField
                                                         labelText={BrandLabel && BrandLabel.StudentId ? BrandLabel.StudentId : Strings.student_id}
                                                         errorField={stdErr != '' || isNaN(studentId)}
-                                                        // errorText={BrandLabel && BrandLabel.CorrectId ? stdErr != '' ? stdErr : BrandLabel.CorrectId : stdErr != '' ? stdErr : Strings.please_correct_student_id}
-                                                        errorText={ stdErr != '' ? stdErr : Strings.please_correct_student_id}
+                                                        errorText={stdErr != '' ? stdErr : Strings.please_correct_student_id}
                                                         onChangeText={(text) => {
                                                             setStudentID(text)
                                                             if (currentIndex == 1 && multiPage > 0) {
@@ -1125,85 +1191,85 @@ const ScannedDetailsComponent = ({
                                         </View>
 
 
-                                            <View style={{ flexDirection: 'row', marginTop: 20 }}>
-                                                {
-                                                    BrandLabel && BrandLabel.ListTableHeading[0] ?
-                                                        BrandLabel.ListTableHeading.map((data) => {
-                                                            return (
-                                                                <MarksHeaderTable
-                                                                    customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
-                                                                    key={data}
-                                                                    rowTitle={data}
-                                                                    rowBorderColor={AppTheme.TAB_BORDER}
-                                                                    editable={false}
-                                                                />
-                                                            )
-                                                        })
-                                                        :
-                                                        TABLE_HEADER.map((data) => {
-                                                            return (
-                                                                <MarksHeaderTable
-                                                                    customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
-                                                                    key={data}
-                                                                    rowTitle={data}
-                                                                    rowBorderColor={AppTheme.TAB_BORDER}
-                                                                    editable={false}
-                                                                />
-                                                            )
-                                                        })
-                                                }
-                                            </View>
-
+                                        <View style={{ flexDirection: 'row', marginTop: 20 }}>
                                             {
-                                                newArrayValue.map((element, index) => {
-                                                    return (
-                                                        <View element={element} key={index} style={{ flexDirection: 'row' }}>
-
+                                                BrandLabel && BrandLabel.ListTableHeading[0] ?
+                                                    BrandLabel.ListTableHeading.map((data) => {
+                                                        return (
                                                             <MarksHeaderTable
-                                                                customRowStyle={{ width: '30%', }}
-                                                                rowTitle={renderSRNo(element, index)}
-                                                                rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
+                                                                customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
+                                                                key={data}
+                                                                rowTitle={data}
+                                                                rowBorderColor={AppTheme.TAB_BORDER}
                                                                 editable={false}
-                                                                keyboardType={'number-pad'}
                                                             />
+                                                        )
+                                                    })
+                                                    :
+                                                    TABLE_HEADER.map((data) => {
+                                                        return (
                                                             <MarksHeaderTable
-                                                                customRowStyle={{ width: '30%', }}
-                                                                rowTitle={element.format.value}
-                                                                rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
+                                                                customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
+                                                                key={data}
+                                                                rowTitle={data}
+                                                                rowBorderColor={AppTheme.TAB_BORDER}
                                                                 editable={false}
-                                                                keyboardType={'number-pad'}
                                                             />
-                                                            <MarksHeaderTable
-                                                                customRowStyle={{ width: '30%', }}
-                                                                rowTitle={element.consolidatedPrediction}
-                                                                rowBorderColor={markBorderOnCell(element)}
-                                                                editable={true}
-                                                                keyboardType={'number-pad'}
-                                                                maxLength={lengthAccordingSheet(element)}
-                                                                onChangeText={(text) => {
-                                                                    handleTextChange(text.trim(), index, newArrayValue, element)
-                                                                }}
-
-                                                            />
-
-                                                        </View>
-                                                    )
-                                                    // }
-                                                })
+                                                        )
+                                                    })
                                             }
+                                        </View>
 
-                                            <View style={[styles.viewnxtBtnStyle1, { paddingTop: '7%' }]}>
-                                                <ButtonComponent
-                                                    customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE, marginTop: '5%' }]}
-                                                    btnText={btnName.toUpperCase()}
-                                                    onPress={() => isMultipleStudent ? goBackFrame() : multiPage > 0 ? goBackPage() : onBackButtonClick()}
-                                                />
-                                                <ButtonComponent
-                                                    customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE, marginTop: '5%' }]}
-                                                    btnText={nextBtn.toUpperCase()}
-                                                    onPress={() => isMultipleStudent ? goNextFrame() : multiPage > 0 ? goNextPage() : onSubmitClick()}
-                                                />
-                                            </View>
+                                        {
+                                            newArrayValue.map((element, index) => {
+                                                return (
+                                                    <View element={element} key={index} style={{ flexDirection: 'row' }}>
+
+                                                        <MarksHeaderTable
+                                                            customRowStyle={{ width: '30%', }}
+                                                            rowTitle={renderSRNo(element, index)}
+                                                            rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
+                                                            editable={false}
+                                                            keyboardType={'number-pad'}
+                                                        />
+                                                        <MarksHeaderTable
+                                                            customRowStyle={{ width: '30%', }}
+                                                            rowTitle={element.format.value}
+                                                            rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
+                                                            editable={false}
+                                                            keyboardType={'number-pad'}
+                                                        />
+                                                        <MarksHeaderTable
+                                                            customRowStyle={{ width: '30%', }}
+                                                            rowTitle={element.consolidatedPrediction}
+                                                            rowBorderColor={markBorderOnCell(element)}
+                                                            editable={true}
+                                                            keyboardType={'number-pad'}
+                                                            maxLength={lengthAccordingSheet(element)}
+                                                            onChangeText={(text) => {
+                                                                handleTextChange(text.trim(), index, newArrayValue, element)
+                                                            }}
+
+                                                        />
+
+                                                    </View>
+                                                )
+                                                // }
+                                            })
+                                        }
+
+                                        <View style={[styles.viewnxtBtnStyle1, { paddingTop: '7%' }]}>
+                                            <ButtonComponent
+                                                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE, marginTop: '5%' }]}
+                                                btnText={btnName.toUpperCase()}
+                                                onPress={() => isMultipleStudent ? goBackFrame() : multiPage > 0 ? goBackPage() : onBackButtonClick()}
+                                            />
+                                            <ButtonComponent
+                                                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE, marginTop: '5%' }]}
+                                                btnText={nextBtn.toUpperCase()}
+                                                onPress={() => isMultipleStudent ? goNextFrame() : multiPage > 0 ? goNextPage() : onSubmitClick()}
+                                            />
+                                        </View>
                                     </ScrollView>
                                 </View>
 
