@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Text, View, ScrollView, ToastAndroid, Alert, Image, TouchableOpacity, PermissionsAndroid } from 'react-native';
 import { connect, useDispatch } from 'react-redux';
 import AppTheme from '../../utils/AppTheme';
-import { CELL_OMR, extractionMethod, multipleStudent, neglectData, SCAN_TYPES, studentLimitSaveInLocal, student_ID, TABLE_HEADER } from '../../utils/CommonUtils';
+import { CELL_OMR, extractionMethod, multipleStudent, MULTIPLE_TAG_DATAS, neglectData, SCAN_TYPES, studentLimitSaveInLocal, student_ID, TABLE_HEADER, TABLE_HEADER_WITH_TAG } from '../../utils/CommonUtils';
 import Strings from '../../utils/Strings';
 import ShareComponent from '../common/components/Share';
 
@@ -29,6 +29,7 @@ import { Assets } from '../../assets';
 import SaralSDK from '../../../SaralSDK'
 //npm
 import CheckBox from '@react-native-community/checkbox';
+import TaggingModal from '../common/TaggingModal';
 
 
 const ScannedDetailsComponent = ({
@@ -75,6 +76,8 @@ const ScannedDetailsComponent = ({
     const [toggleCheckBox, setToggleCheckBox] = useState(false)
     const [logmessage, setLogmessage] = useState()
     const [multiPage, setMultiPage] = useState(0)
+    const [isModalVisible ,setIsModalVisible] = useState(false)
+
     const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.scannedDetailComponent[0]
 
 
@@ -1140,10 +1143,10 @@ const ScannedDetailsComponent = ({
                                                             )
                                                         })
                                                         :
-                                                        TABLE_HEADER.map((data) => {
+                                                        TABLE_HEADER_WITH_TAG.map((data) => {
                                                             return (
                                                                 <MarksHeaderTable
-                                                                    customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
+                                                                    customRowStyle={{ width: '25%', backgroundColor: AppTheme.TABLE_HEADER }}
                                                                     key={data}
                                                                     rowTitle={data}
                                                                     rowBorderColor={AppTheme.TAB_BORDER}
@@ -1160,21 +1163,21 @@ const ScannedDetailsComponent = ({
                                                         <View element={element} key={index} style={{ flexDirection: 'row' }}>
 
                                                             <MarksHeaderTable
-                                                                customRowStyle={{ width: '30%', }}
+                                                                customRowStyle={{ width: '25%', }}
                                                                 rowTitle={renderSRNo(element, index)}
                                                                 rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                                                 editable={false}
                                                                 keyboardType={'number-pad'}
                                                             />
                                                             <MarksHeaderTable
-                                                                customRowStyle={{ width: '30%', }}
+                                                                customRowStyle={{ width: '25%', }}
                                                                 rowTitle={element.format.value}
                                                                 rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                                                 editable={false}
                                                                 keyboardType={'number-pad'}
                                                             />
                                                             <MarksHeaderTable
-                                                                customRowStyle={{ width: '30%', }}
+                                                                customRowStyle={{ width: '25%', }}
                                                                 rowTitle={element.consolidatedPrediction}
                                                                 rowBorderColor={markBorderOnCell(element)}
                                                                 editable={true}
@@ -1184,6 +1187,13 @@ const ScannedDetailsComponent = ({
                                                                     handleTextChange(text.trim(), index, newArrayValue, element)
                                                                 }}
 
+                                                            />
+                                                            <MarksHeaderTable
+                                                                customRowStyle={{ width: '25%', }}
+                                                                rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
+                                                                editable={false}
+                                                                icon={true}
+                                                                setIsModalVisible={setIsModalVisible}
                                                             />
 
                                                         </View>
@@ -1214,6 +1224,7 @@ const ScannedDetailsComponent = ({
 
 
                     {isLoading && <Spinner animating={isLoading} iconShow={false} />}
+                    <TaggingModal setIsModalVisible={setIsModalVisible} isModalVisible={isModalVisible} data = {MULTIPLE_TAG_DATAS} />
                 </ScrollView>
             </View>
         </View>
