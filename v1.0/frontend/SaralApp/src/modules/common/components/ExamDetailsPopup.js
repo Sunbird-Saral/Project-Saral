@@ -17,9 +17,12 @@ const  ExamDetailsPopup = ({
                     resizeMode={'contain'}
                 />
                 :
-                <View>
-                    <Text style={styles.titleTextStyle}>{rowTitle}</Text>
-                </View>
+                <TextInput
+                style={styles.titleTextStyle}
+                value={rowTitle}
+                multiline={true}
+                editable={false}
+            />
                 
                
             }
