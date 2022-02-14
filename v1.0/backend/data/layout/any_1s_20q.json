@@ -2,6 +2,11 @@
     "layout": {
         "version": "1.0",
         "name": "ANY1S20Q SAT Exam Sheet Form",
+        "threshold": {
+            "minWidth" : 490,
+            "minHeight": 430,
+            "detectionRadius": 12
+        }, 
         "cells": [
             {
                 "cellId": "1",

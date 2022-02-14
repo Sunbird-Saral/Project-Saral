@@ -2,6 +2,11 @@
     "layout": {
         "version": "1.0",
         "name": "ANY1S5QMULTICHOICE Exam Sheet Form",
+        "threshold": {
+            "minWidth" : 416,
+            "minHeight": 289,
+            "detectionRadius":12
+        },   
         "resultValidation": {
             "validate": {
                 "regExp": "[0-5]",

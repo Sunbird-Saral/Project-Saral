@@ -4,7 +4,8 @@
         "name": "HINDI8S13QOMR Exam Sheet Form",
         "threshold": {
             "minWidth": 500,
-            "minHeight": 200
+            "minHeight": 200,
+            "detectionRadius":12
         },
         "resultValidation": {
             "validate": {
