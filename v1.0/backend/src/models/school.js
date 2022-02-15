@@ -42,6 +42,10 @@ const schoolSchema = new mongoose.Schema({
         type: Number,
         required: false,
         default: 600000
+    },
+    tags: { 
+        type: Boolean,
+        required: false
     }
 }, {
     timestamps: false
