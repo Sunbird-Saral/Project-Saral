@@ -2,6 +2,11 @@
     "layout": {
         "version": "1.0",
         "name": "ANY1S12Q Exam Sheet Form",
+        "threshold": {
+            "minWidth" : 515,
+            "minHeight": 420,
+            "detectionRadius":12
+        },  
         "cells": [
             {
                 "cellId": "1",
@@ -97,9 +102,6 @@
                 "format": {
                     "name": "ROLLNUMBER",
                     "value": "ROLLNUMBER"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -136,9 +138,6 @@
                 "format": {
                     "name": "QUESTION1",
                     "value": "QUESTION 1"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -175,9 +174,6 @@
                 "format": {
                     "name": "QUESTION2",
                     "value": "QUESTION 2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -214,9 +210,6 @@
                 "format": {
                     "name": "QUESTION3",
                     "value": "QUESTION 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -253,9 +246,6 @@
                 "format": {
                     "name": "QUESTION4",
                     "value": "QUESTION 4"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -292,9 +282,6 @@
                 "format": {
                     "name": "QUESTION5",
                     "value": "QUESTION 5"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -331,9 +318,6 @@
                 "format": {
                     "name": "QUESTION6",
                     "value": "QUESTION 6"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -370,9 +354,6 @@
                 "format": {
                     "name": "QUESTION7",
                     "value": "QUESTION 7"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -409,9 +390,6 @@
                 "format": {
                     "name": "QUESTION8",
                     "value": "QUESTION 8"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -448,9 +426,6 @@
                 "format": {
                     "name": "QUESTION9",
                     "value": "QUESTION 9"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -487,9 +462,6 @@
                 "format": {
                     "name": "QUESTION10",
                     "value": "QUESTION 10"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -526,9 +498,6 @@
                 "format": {
                     "name": "QUESTION11",
                     "value": "QUESTION 11"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -565,9 +534,6 @@
                 "format": {
                     "name": "QUESTION12",
                     "value": "QUESTION 12"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             }
         ]
