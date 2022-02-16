@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, Modal, TouchableOpacity, TextInput, Button } from 'react-native';
+import { Text, View, Modal, TouchableOpacity, TextInput, Button, Image } from 'react-native';
+import { Assets } from '../../assets';
 
 const TaggingModal = ({
     params,
@@ -7,7 +8,9 @@ const TaggingModal = ({
     setIsModalVisible,
     tagData,
     setTagData,
-    bgColor
+    bgColor,
+    studentsAndExamData,
+    questionIdData
 }) => {
 
     const [newTag, setNewTag] = useState()
@@ -21,6 +24,19 @@ const TaggingModal = ({
         }
         let updatedValue = renderData.slice(0, renderData.length)
         setTagData(updatedValue);
+    }
+
+    const removeTagFromArray = (tag, questionId) => {
+        
+        const filteredTag = tagData.filter((item) => item.tagName !== tag);
+        setTagData(filteredTag);
+
+        studentsAndExamData.data.exams[0].questions.forEach(element => {
+            if (questionId == element.questionId) {
+                const index = element.tags.findIndex(item => item.tagName == tag)
+                element.tags.splice(index, 1)
+            }
+        });
     }
 
     return (
@@ -47,9 +63,8 @@ const TaggingModal = ({
                         title='Add'
                         onPress={() => {
                             if (newTag.length > 0) {
-                                tagData.push({ tagName: newTag, selected: false })
-                                let updatedValue = tagData.slice(0, tagData.length)
-                                setTagData(updatedValue)
+                                tagData.push({ tagName: newTag, selected: false, questionId: questionIdData })
+                                setTagData(tagData)
                                 setNewTag('')
                             }
                         }}
@@ -59,25 +74,33 @@ const TaggingModal = ({
                             padding: 8
                         }}
                     >
-                        <Text style={{ color: 'white', fontWeight: 'bold' }}>Add Tag</Text>
+                        <Text style={styles.tagText}>Add Tag</Text>
                     </TouchableOpacity>
                 </View>
 
-                <View style={{ backgroundColor: 'white', flexDirection: 'row', flexWrap: 'wrap' }}>
+                <View style={styles.tagsCon}>
                     {
                         tagData.map((item, index) => {
                             return (
                                 <TouchableOpacity
-                                    style={{
-                                        borderRadius: 8,
-                                        backgroundColor: item.selected ? bgColor : '#808080',
-                                        margin: 15,
-                                    }}
+                                    style={[styles.selectionCon, { backgroundColor: item.selected ? bgColor : '#808080', }]}
                                     activeOpacity={0.8}
                                     onPress={() => onPressHandler(item.tagName)}
                                     key={`${index.toString()}`}
                                 >
                                     <Text style={styles.item}>{item.tagName}</Text>
+
+                                    <TouchableOpacity
+                                        onPress={() => {
+                                            removeTagFromArray(item.tagName, item.questionId);
+                                        }}
+                                    >
+                                        <Image
+                                            source={Assets.crossImage}
+                                        />
+                                    </TouchableOpacity>
+
+
                                 </TouchableOpacity>
                             )
                         })
@@ -107,6 +130,22 @@ const styles = {
         padding: 10,
         borderRadius: 8,
         width: 200,
+    },
+    selectionCon: {
+        borderRadius: 8,
+        margin: 15,
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingRight: 6
+    },
+    tagsCon: {
+        backgroundColor: 'white',
+        flexDirection: 'row',
+        flexWrap: 'wrap'
+    },
+    tagText: {
+        color: 'white',
+        fontWeight: 'bold'
     }
 };
 

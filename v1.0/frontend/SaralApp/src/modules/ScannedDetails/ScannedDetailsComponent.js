@@ -78,6 +78,7 @@ const ScannedDetailsComponent = ({
     const [multiPage, setMultiPage] = useState(0)
     const [isModalVisible ,setIsModalVisible] = useState(false)
     const [tagData ,setTagData] = useState([])
+    const [questionIdData ,setQuestionIdData] = useState()
 
     const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.scannedDetailComponent[0]
 
@@ -1222,6 +1223,7 @@ const ScannedDetailsComponent = ({
                                                                 index={index}
                                                                 rowTitle={element.format.name}
                                                                 studentsAndExamData={studentsAndExamData}
+                                                                setQuestionIdData={setQuestionIdData}
                                                             />
                                                         }
 
@@ -1260,6 +1262,7 @@ const ScannedDetailsComponent = ({
                         setTagData={setTagData}
                         studentsAndExamData={studentsAndExamData}
                         bgColor={multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}
+                        questionIdData={questionIdData}
                     />
                 </ScrollView>
             </View>

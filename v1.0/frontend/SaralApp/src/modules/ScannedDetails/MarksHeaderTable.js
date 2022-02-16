@@ -16,15 +16,18 @@ const MarksHeaderTable = ({
     setIsModalVisible,
     setTagData,
     studentsAndExamData,
-    index
+    index,
+    setQuestionIdData
 }) => {
 
     const setDataIntoModal = (value) => {
         studentsAndExamData.data.exams[0].questions.forEach((element,i) => {
             if (element.questionId.toString() == value.toString() || index == i) {
-                // console.log("BEFOREelement.questionId",element.questionId ,"rowTitle", value," boolean" , element.questionId == value,"INDEX",index,i );
-                element.tags[0].questionId = element.questionId
+                element.tags.forEach((data,i)=>{
+                    data.questionId = element.questionId
+                })
                 setTagData(element.tags)
+                setQuestionIdData(element.questionId)
             }
         });
     }
