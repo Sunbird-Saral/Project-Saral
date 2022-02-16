@@ -37,7 +37,6 @@ import { LoginAction } from '../../flux/actions/apis/LoginAction';
 
 import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction'
 import { collectErrorLogs } from '../CollectErrorLogs';
-import { ExamAction } from '../../flux/actions/apis/getExamByClassId';
 
 
 const StudentsList = ({
@@ -70,7 +69,6 @@ const StudentsList = ({
 useEffect(() => {
     getRoi()
     studentData()
-    callExamByClassId()
 }, []);
 
 
@@ -308,16 +306,6 @@ useEffect(() => {
         callScanStatusData()
     }
 
-    const callExamByClassId = () => {
-
-        let payload = {
-            "classId": filteredData.class,
-            "subject": filteredData.subject,
-        }
-        let token = loginData.data.token
-        let apiObj = new ExamAction(payload,token);
-        dispatch(APITransport(apiObj));
-    }
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>

@@ -15,7 +15,6 @@ import bgFlag from './bgFlag';
 import multiPageReducer from './multiPageReducer';
 import modalStatus from './modalStatus';
 import ModalMessage from './ModalMessage';
-import examDataReducer from './examDataReducer';
 
 export default {
     apiStatus: apiStatus,
@@ -34,7 +33,6 @@ export default {
     bgFlag: bgFlag,
     multiPage: multiPageReducer,
     modalStatus: modalStatus,
-    examData: examDataReducer,
     modalMessage: ModalMessage
 
 

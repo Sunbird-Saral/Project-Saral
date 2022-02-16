@@ -145,7 +145,7 @@ class Brands extends PureComponent {
         const { loginData, dispatch } = this.props;
 
         const bgTimer = Object.keys(loginData).length > 0  && loginData.data.school.hasOwnProperty("autoSyncFrequency") ? loginData.data.school.autoSyncFrequency : 600000
-        console.log("bgTimer",bgTimer);
+
         setInterval(() => {
             const hasAutoSync = Object.keys(loginData).length > 0  && loginData.data.school.hasOwnProperty("autoSync") && loginData.data.school.autoSync ? true : false
             if (hasAutoSync) {

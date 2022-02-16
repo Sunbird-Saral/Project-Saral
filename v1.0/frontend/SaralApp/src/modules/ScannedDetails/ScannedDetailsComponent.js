@@ -41,7 +41,7 @@ const ScannedDetailsComponent = ({
     loginData,
     bgFlag,
     roiData,
-    multiPageReducer
+    studentsAndExamData
 }) => {
 
 
@@ -77,6 +77,7 @@ const ScannedDetailsComponent = ({
     const [logmessage, setLogmessage] = useState()
     const [multiPage, setMultiPage] = useState(0)
     const [isModalVisible ,setIsModalVisible] = useState(false)
+    const [tagData ,setTagData] = useState([])
 
     const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.scannedDetailComponent[0]
 
@@ -401,6 +402,19 @@ const ScannedDetailsComponent = ({
         }
     }
 
+    const callTagArrayData = (formatName) =>{
+        let tagArray = []
+        studentsAndExamData.data.exams[0].questions.filter((element,i) => {
+            element.tags.filter((value)=>{
+                if (value.questionId == formatName && value.selected) {
+                    tagArray.push(value.tagName)
+                    value.selected = false
+                }
+            })
+        });
+        return tagArray
+    }
+
     const saveMultiData = async () => {
 
         let storeTrainingData = ocrLocalResponse.layout.cells.filter((element) => {
@@ -432,11 +446,15 @@ const ScannedDetailsComponent = ({
                 let stdMarks_info = []
 
                 el.data.forEach((value, i) => {
+
+                    let tagArrayData = callTagArrayData(value.format.name)
+
                     let marks_data = {
                         "questionId": '',
                         "obtainedMarks": '',
                         "predictedMarks": loginData.data.school.storeTrainingData ? value.predictedMarks : "",
-                        "predictionConfidence": loginData.data.school.storeTrainingData ? value.predictionConfidence : ""
+                        "predictionConfidence": loginData.data.school.storeTrainingData ? value.predictionConfidence : "",
+                        "tags": tagArrayData
                     }
                     let putTrainingData = loginData.data.school.storeTrainingData ? marks_data.trainingData = value.consolidatedPrediction != value.predictedMarks ? value.trainingDataSet : [] : ''
                     marks_data.questionId = value.format.name,
@@ -460,7 +478,8 @@ const ScannedDetailsComponent = ({
             "subject": filteredData.subject,
             "studentsMarkInfo": stdMarkInfo
         }
-        saveAndFetchFromLocalStorag(saveObj)
+        console.log("saveObje",saveObj);
+        // saveAndFetchFromLocalStorag(saveObj)
     }
 
 
@@ -919,11 +938,13 @@ const ScannedDetailsComponent = ({
         let objects = []
 
         data.map((e) => {
+            let tagArray = callTagArrayData(e.format.name)
             let data = {
                 "questionId": e.format.name,
                 "obtainedMarks": e.consolidatedPrediction,
                 "predictedMarks": loginData.data.school.storeTrainingData ? e.predictedMarks : '',
                 "predictionConfidence": loginData.data.school.storeTrainingData ? e.consolidatedPrediction != e.predictedMarks ? e.predictionConfidence : '' : '',
+                "tags": tagArray
             }
 
             if (loginData.data.school.storeTrainingData && e.hasOwnProperty("trainingDataSet")) {
@@ -1163,21 +1184,21 @@ const ScannedDetailsComponent = ({
                                                         <View element={element} key={index} style={{ flexDirection: 'row' }}>
 
                                                             <MarksHeaderTable
-                                                                customRowStyle={{ width: '25%', }}
+                                                                customRowStyle={{ width: loginData.data.school.tags ? '25%' : '30%', }}
                                                                 rowTitle={renderSRNo(element, index)}
                                                                 rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                                                 editable={false}
                                                                 keyboardType={'number-pad'}
                                                             />
                                                             <MarksHeaderTable
-                                                                customRowStyle={{ width: '25%', }}
+                                                                customRowStyle={{ width: loginData.data.school.tags ? '25%' : '30%', }}
                                                                 rowTitle={element.format.value}
                                                                 rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                                                 editable={false}
                                                                 keyboardType={'number-pad'}
                                                             />
                                                             <MarksHeaderTable
-                                                                customRowStyle={{ width: '25%', }}
+                                                                customRowStyle={{ width: loginData.data.school.tags ? '25%' : '30%', }}
                                                                 rowTitle={element.consolidatedPrediction}
                                                                 rowBorderColor={markBorderOnCell(element)}
                                                                 editable={true}
@@ -1188,13 +1209,21 @@ const ScannedDetailsComponent = ({
                                                                 }}
 
                                                             />
+                                                        {
+                                                            loginData.data.school.tags
+                                                            &&
                                                             <MarksHeaderTable
                                                                 customRowStyle={{ width: '25%', }}
                                                                 rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                                                 editable={false}
                                                                 icon={true}
                                                                 setIsModalVisible={setIsModalVisible}
+                                                                setTagData={setTagData}
+                                                                index={index}
+                                                                rowTitle={element.format.name}
+                                                                studentsAndExamData={studentsAndExamData}
                                                             />
+                                                        }
 
                                                         </View>
                                                     )
@@ -1224,7 +1253,14 @@ const ScannedDetailsComponent = ({
 
 
                     {isLoading && <Spinner animating={isLoading} iconShow={false} />}
-                    <TaggingModal setIsModalVisible={setIsModalVisible} isModalVisible={isModalVisible} data = {MULTIPLE_TAG_DATAS} />
+                    <TaggingModal 
+                        setIsModalVisible={setIsModalVisible} 
+                        isModalVisible={isModalVisible} 
+                        tagData={tagData} 
+                        setTagData={setTagData}
+                        studentsAndExamData={studentsAndExamData}
+                        bgColor={multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}
+                    />
                 </ScrollView>
             </View>
         </View>
@@ -1240,7 +1276,8 @@ const mapStateToProps = (state) => {
         multiBrandingData: state.multiBrandingData.response.data,
         scanedData: state.scanedData.response,
         bgFlag: state.bgFlag,
-        multiPageReducer: state.multiPage.response
+        multiPageReducer: state.multiPage.response,
+        studentsAndExamData: state.studentsAndExamData
     }
 }
 

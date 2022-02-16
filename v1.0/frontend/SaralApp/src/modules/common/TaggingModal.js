@@ -1,24 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, Modal, TouchableOpacity } from 'react-native';
+import { Text, View, Modal, TouchableOpacity, TextInput, Button } from 'react-native';
 
 const TaggingModal = ({
     params,
     isModalVisible,
     setIsModalVisible,
-    data
+    tagData,
+    setTagData,
+    bgColor
 }) => {
 
-    const [tagData, setTagData] = useState(data);
+    const [newTag, setNewTag] = useState()
 
     const onPressHandler = (value) => {
-        let renderData = data;
+        let renderData = tagData;
         for (let data of renderData) {
-            if (data.name == value) {
+            if (data.tagName == value) {
                 data.selected = (data.selected == null) ? true : !data.selected;
             }
         }
-        let updateValue = renderData.slice(0,renderData.length)
-        setTagData(updateValue);
+        let updatedValue = renderData.slice(0, renderData.length)
+        setTagData(updatedValue);
     }
 
     return (
@@ -28,9 +30,38 @@ const TaggingModal = ({
             visible={isModalVisible}
             onRequestClose={() => {
                 setIsModalVisible(!isModalVisible);
+                setNewTag('')
             }}
         >
             <View style={styles.viewContainer}>
+
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <TextInput
+                        style={styles.input}
+                        onChangeText={setNewTag}
+                        value={newTag}
+                        placeholder="Add New Tag"
+                        keyboardType="default"
+                    />
+                    <TouchableOpacity
+                        title='Add'
+                        onPress={() => {
+                            if (newTag.length > 0) {
+                                tagData.push({ tagName: newTag, selected: false })
+                                let updatedValue = tagData.slice(0, tagData.length)
+                                setTagData(updatedValue)
+                                setNewTag('')
+                            }
+                        }}
+                        style={{
+                            backgroundColor: bgColor,
+                            borderRadius: 8,
+                            padding: 8
+                        }}
+                    >
+                        <Text style={{ color: 'white', fontWeight: 'bold' }}>Add Tag</Text>
+                    </TouchableOpacity>
+                </View>
 
                 <View style={{ backgroundColor: 'white', flexDirection: 'row', flexWrap: 'wrap' }}>
                     {
@@ -39,14 +70,14 @@ const TaggingModal = ({
                                 <TouchableOpacity
                                     style={{
                                         borderRadius: 8,
-                                        backgroundColor: item.selected ? 'blue' : '#808080',
-                                        margin: 15
-
+                                        backgroundColor: item.selected ? bgColor : '#808080',
+                                        margin: 15,
                                     }}
                                     activeOpacity={0.8}
-                                    onPress={() => onPressHandler(item.name)}
+                                    onPress={() => onPressHandler(item.tagName)}
+                                    key={`${index.toString()}`}
                                 >
-                                    <Text style={styles.item}>{item.name}</Text>
+                                    <Text style={styles.item}>{item.tagName}</Text>
                                 </TouchableOpacity>
                             )
                         })
@@ -68,6 +99,14 @@ const styles = {
         backgroundColor: 'white',
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    input: {
+        height: 40,
+        margin: 12,
+        borderWidth: 1,
+        padding: 10,
+        borderRadius: 8,
+        width: 200,
     }
 };
 

@@ -13,14 +13,31 @@ const MarksHeaderTable = ({
     rowBorderColor,
     keyboardType,
     maxLength,
-    setIsModalVisible
+    setIsModalVisible,
+    setTagData,
+    studentsAndExamData,
+    index
 }) => {
+
+    const setDataIntoModal = (value) => {
+        studentsAndExamData.data.exams[0].questions.forEach((element,i) => {
+            if (element.questionId.toString() == value.toString() || index == i) {
+                // console.log("BEFOREelement.questionId",element.questionId ,"rowTitle", value," boolean" , element.questionId == value,"INDEX",index,i );
+                element.tags[0].questionId = element.questionId
+                setTagData(element.tags)
+            }
+        });
+    }
+
     return (
         <View style={[styles.container, customRowStyle, { borderColor: rowBorderColor }]}>
             {
             icon ?
             <TouchableOpacity
-            onPress={()=>setIsModalVisible(true)}
+            onPress={() => {
+                setDataIntoModal(rowTitle)
+                setIsModalVisible(true)
+            }}
             >
                 <Image style={{width:25,height:25}}  source={Assets.Tagging}/>
                 </TouchableOpacity>
