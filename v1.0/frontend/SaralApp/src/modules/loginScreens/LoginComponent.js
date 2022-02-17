@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, TextInput, Image, AppState, ActivityIndicator } from 'react-native';
+import { View, ScrollView, Text, TextInput, Image, AppState, ActivityIndicator, Switch } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Strings from '../../utils/Strings';
@@ -9,8 +9,11 @@ import Spinner from '../common/components/loadingIndicator';
 import APITransport from '../../flux/actions/transport/apitransport';
 import { LoginAction } from '../../flux/actions/apis/LoginAction';
 import { DefaultBrandAction } from '../../flux/actions/apis/defaultBrandAction';
-import { setLoginData, setLoginCred, getLoginCred } from '../../utils/StorageUtils'
+import {
+    setLoginData, setLoginCred, getLoginCred, setRememberUser, getRememberedUser, forgetUser, setRememberPassword, getRememberedPassword, forgetUserpass
+} from '../../utils/StorageUtils'
 import { Assets } from '../../assets/index'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 class LoginComponent extends Component {
     constructor(props) {
@@ -18,7 +21,7 @@ class LoginComponent extends Component {
 
         this.state = {
             Loading: true,
-            isLoading:true,
+            isLoading: true,
             errUsername: '',
             errPassword: '',
             errCommon: '',
@@ -27,11 +30,24 @@ class LoginComponent extends Component {
             calledLogin: false,
             appState: AppState.currentState,
             text: '',
+            rememberMe: false,
+            rememberMe1: false,
+
 
         }
     }
 
-    componentDidMount() {
+
+    async componentDidMount() {
+        const schollId = await this.rememberMeSchoolId();
+        const password = await this.rememberMePassword();
+        this.setState({
+            schoolId: schollId || "",
+            password: password || "",
+            rememberMe: schollId ? true : false,
+            rememberMe: password ? true : false
+        });
+
         this.timerState = setTimeout(() => { this.setState({ Loading: false }) }, 5000)
         this.callDefaultbrandingData()
         this.props.navigation.addListener('willFocus', async payload => {
@@ -39,8 +55,8 @@ class LoginComponent extends Component {
             this.componentMountCall()
         })
     }
-    componentWillUnmount(){
-        clearTimeout(this.timerState)    
+    componentWillUnmount() {
+        clearTimeout(this.timerState)
     }
 
     handleAppStateChange = (nextAppState) => {
@@ -126,9 +142,58 @@ class LoginComponent extends Component {
 
     }
 
+    toggleRememberMe = (value) => {
+        this.setState({ rememberMe: value })
+        if (value === true) {
+            //user wants to be remembered.
+            this.rememberUserfunction();
+        } else {
+            this.forgetUserfunction();
+        }
+    }
+
+    rememberUserfunction = async () => {
+        try {
+            await setRememberUser(this.state.schoolId)
+            await setRememberPassword(this.state.password)
+        } catch (error) {
+            alert('error setItem', error)
+        }
+    };
+
+    rememberMeSchoolId = async () => {
+        try {
+            const schoolId = await getRememberedUser()
+            if (schoolId !== null) {
+                return schoolId;
+            }
+        } catch (error) {
+        }
+    };
+
+    rememberMePassword = async () => {
+        try {
+            const password = await getRememberedPassword()
+            if (password !== null) {
+                return password;
+            }
+        } catch (error) {
+        }
+    };
+
+    forgetUserfunction = async () => {
+        // await forgetUser()
+        try {
+            await forgetUser('Longtail-user')
+            await forgetUserpass('Longtail-user')
+        } catch (error) {
+            // Error removing
+        }
+    };
+
+
     componentDidUpdate(prevProps) {
         if (prevProps != this.props) {
-
             const { apiStatus, loginData, navigation } = this.props
             const { schoolId, password, calledLogin } = this.state
             if (apiStatus && prevProps.apiStatus != apiStatus && apiStatus.error) {
@@ -150,36 +215,21 @@ class LoginComponent extends Component {
                     }
                 }
             }
-            if (calledLogin) {
-                if (loginData && prevProps.loginData != loginData) {
-                    this.setState({
-                        isLoading: false,
-                        calledLogin: false
-                    }, async () => {
-                        if (loginData.status && loginData.status == 200) {
-                            let loginCredObj = {
-                                schoolId: schoolId,
-                                password: password
-                            }
-                            let loginCred = await setLoginCred(loginCredObj)
-                            let loginSaved = await setLoginData(loginData.data)
-                            if (loginCred && loginSaved) {
-                                navigation.navigate('mainMenu')
-                            }
-                            else {
-                                this.setState({
-                                    errUsername: '',
-                                    errPassword: '',
-                                    errCommon: Strings.something_went_wrong_please_try_again
-                                })
-                            }
+
+            if (loginData && prevProps.loginData != loginData) {
+                this.setState({
+                    isLoading: false,
+                    calledLogin: false
+                }, async () => {
+                    if (loginData.status && loginData.status == 200) {
+                        let loginCredObj = {
+                            schoolId: schoolId,
+                            password: password
                         }
-                        else if (loginData.status && loginData.status == 422) {
-                            this.setState({
-                                errUsername: '',
-                                errPassword: '',
-                                errCommon: Strings.schoolid_password_doesnot_match
-                            })
+                        let loginCred = await setLoginCred(loginCredObj)
+                        let loginSaved = await setLoginData(loginData.data)
+                        if (loginCred && loginSaved) {
+                            navigation.navigate('mainMenu')
                         }
                         else {
                             this.setState({
@@ -188,9 +238,24 @@ class LoginComponent extends Component {
                                 errCommon: Strings.something_went_wrong_please_try_again
                             })
                         }
-                    })
-                }
+                    }
+                    else if (loginData.status && loginData.status == 422) {
+                        this.setState({
+                            errUsername: '',
+                            errPassword: '',
+                            errCommon: Strings.schoolid_password_doesnot_match
+                        })
+                    }
+                    else {
+                        this.setState({
+                            errUsername: '',
+                            errPassword: '',
+                            errCommon: Strings.something_went_wrong_please_try_again
+                        })
+                    }
+                })
             }
+
         }
     }
 
@@ -200,11 +265,9 @@ class LoginComponent extends Component {
         this.setState({ [type]: text })
     }
 
-
     render() {
         const { password, isLoading, Loading, errUsername, errPassword, errCommon } = this.state;
         const { defaultBrandingdata } = this.props
-       
         if (defaultBrandingdata === undefined || defaultBrandingdata === null) {
             return <View style={styles.container}>
                 <ScrollView
@@ -247,6 +310,7 @@ class LoginComponent extends Component {
                                     placeholder={Strings.schoolId_text}
                                     placeholderTextColor={AppTheme.BLACK_OPACITY_30}
                                     autoCapitalize={'none'}
+                                    importantForAutofill="yes"
                                 />
 
                             </View>
@@ -263,17 +327,28 @@ class LoginComponent extends Component {
                                     placeholder={Strings.password_text}
                                     placeholderTextColor={AppTheme.BLACK_OPACITY_30}
                                     secureTextEntry
+
                                 />
                                 <View style={styles.btnContainer}>
                                     {Loading ?
                                         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                                             <Text style={{ fontSize: 12, fontWeight: 'bold', fontFamily: 'sans-serif-condensed' }}>Loading Branding ...</Text>
                                         </View> :
-                                        <ButtonComponent
-                                            btnText={Strings.login_text.toUpperCase()}
-                                            onPress={this.onSubmit}
-                                            themeColor1={{ backgroundColor: AppTheme.BLUE }}
-                                        />}
+                                        <View>
+                                            <View style={{ flexDirection: 'row', paddingTop: 10 }}>
+                                                <Switch
+                                                    trackColor={{ true: '#111', false: '#111' }}
+                                                    thumbColor={AppTheme.GREY}
+                                                    value={this.state.rememberMe}
+                                                    onValueChange={(value) => this.toggleRememberMe(value)} />
+                                                <Text>Remember Me</Text>
+                                            </View>
+                                            <View style={styles.btnContainer}>
+                                            <ButtonComponent
+                                                btnText={Strings.login_text.toUpperCase()}
+                                                onPress={this.onSubmit}
+                                                themeColor1={{ backgroundColor: AppTheme.BLUE }}
+                                            /></View></View>}
                                 </View>
                             </View>
                         </View>
@@ -336,6 +411,14 @@ class LoginComponent extends Component {
                                     placeholderTextColor={AppTheme.BLACK_OPACITY_30}
                                     secureTextEntry
                                 />
+                                <View style={{ flexDirection: 'row', paddingTop: 10 }}>
+                                    <Switch
+                                        trackColor={{ true: '#111', false: '#111' }}
+                                        thumbColor={defaultBrandingdata && defaultBrandingdata.themeColor1}
+                                        value={this.state.rememberMe}
+                                        onValueChange={(value) => this.toggleRememberMe(value)} />
+                                    <Text>Remember Me</Text>
+                                </View>
                                 <View style={styles.btnContainer}>
                                     <ButtonComponent
                                         btnText={Strings.login_text.toUpperCase()}
@@ -427,7 +510,8 @@ const mapStateToProps = (state) => {
     return {
         apiStatus: state.apiStatus,
         loginData: state.loginData,
-        defaultBrandingdata: state.defaultBrandingdata.response.data
+        defaultBrandingdata: state.defaultBrandingdata.response.data,
+        multiBrandingData: state.multiBrandingData.response.data
     }
 }
 
