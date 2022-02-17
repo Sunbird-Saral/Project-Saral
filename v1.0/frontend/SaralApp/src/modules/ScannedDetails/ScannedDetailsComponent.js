@@ -407,7 +407,7 @@ const ScannedDetailsComponent = ({
         let tagArray = []
         studentsAndExamData.data.exams[0].questions.filter((element,i) => {
             element.tags.filter((value)=>{
-                if (value.questionId == formatName && value.selected) {
+                if (value.hasOwnProperty("questionId") && value.questionId.trim() == formatName.trim() && value.selected) {
                     tagArray.push(value.tagName)
                     value.selected = false
                 }
@@ -448,14 +448,19 @@ const ScannedDetailsComponent = ({
 
                 el.data.forEach((value, i) => {
 
-                    let tagArrayData = callTagArrayData(value.format.name)
+                    let tagArrayData = ''
+                    if ( loginData.data.school.hasOwnProperty("tags") && loginData.data.school.tags) {
+                         tagArrayData = callTagArrayData(value.format.name)
+                    }
 
                     let marks_data = {
                         "questionId": '',
                         "obtainedMarks": '',
                         "predictedMarks": loginData.data.school.storeTrainingData ? value.predictedMarks : "",
                         "predictionConfidence": loginData.data.school.storeTrainingData ? value.predictionConfidence : "",
-                        "tags": tagArrayData
+                    }
+                    if (loginData.data.school.hasOwnProperty("tags") && loginData.data.school.tags) {
+                        marks_data.tags = tagArrayData
                     }
                     let putTrainingData = loginData.data.school.storeTrainingData ? marks_data.trainingData = value.consolidatedPrediction != value.predictedMarks ? value.trainingDataSet : [] : ''
                     marks_data.questionId = value.format.name,
@@ -479,8 +484,7 @@ const ScannedDetailsComponent = ({
             "subject": filteredData.subject,
             "studentsMarkInfo": stdMarkInfo
         }
-        console.log("saveObje",saveObj);
-        // saveAndFetchFromLocalStorag(saveObj)
+        saveAndFetchFromLocalStorag(saveObj)
     }
 
 
@@ -939,13 +943,23 @@ const ScannedDetailsComponent = ({
         let objects = []
 
         data.map((e) => {
-            let tagArray = callTagArrayData(e.format.name)
+            if (loginData.data.school) {
+                
+            }
+            let tagArrayData = ''
+            if ( loginData.data.school.hasOwnProperty("tags") && loginData.data.school.tags) {
+                tagArrayData = callTagArrayData(e.format.name)
+            }
             let data = {
                 "questionId": e.format.name,
                 "obtainedMarks": e.consolidatedPrediction,
                 "predictedMarks": loginData.data.school.storeTrainingData ? e.predictedMarks : '',
                 "predictionConfidence": loginData.data.school.storeTrainingData ? e.consolidatedPrediction != e.predictedMarks ? e.predictionConfidence : '' : '',
-                "tags": tagArray
+                
+            }
+
+            if (loginData.data.school.hasOwnProperty("tags") && loginData.data.school.tags) {
+                data.tags = tagArrayData
             }
 
             if (loginData.data.school.storeTrainingData && e.hasOwnProperty("trainingDataSet")) {
@@ -1165,10 +1179,24 @@ const ScannedDetailsComponent = ({
                                                             )
                                                         })
                                                         :
+                                                        loginData.data.school.tags
+                                                        ?
                                                         TABLE_HEADER_WITH_TAG.map((data) => {
                                                             return (
                                                                 <MarksHeaderTable
                                                                     customRowStyle={{ width: '25%', backgroundColor: AppTheme.TABLE_HEADER }}
+                                                                    key={data}
+                                                                    rowTitle={data}
+                                                                    rowBorderColor={AppTheme.TAB_BORDER}
+                                                                    editable={false}
+                                                                />
+                                                            )
+                                                        })
+                                                        : 
+                                                        TABLE_HEADER.map((data) => {
+                                                            return (
+                                                                <MarksHeaderTable
+                                                                    customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
                                                                     key={data}
                                                                     rowTitle={data}
                                                                     rowBorderColor={AppTheme.TAB_BORDER}

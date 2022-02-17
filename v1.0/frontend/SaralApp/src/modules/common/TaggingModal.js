@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, Modal, TouchableOpacity, TextInput, Button, Image } from 'react-native';
+import { Text, View, Modal, TouchableOpacity, TextInput, Image, ToastAndroid } from 'react-native';
 import { Assets } from '../../assets';
 
 const TaggingModal = ({
@@ -13,7 +13,7 @@ const TaggingModal = ({
     questionIdData
 }) => {
 
-    const [newTag, setNewTag] = useState()
+    const [newTag, setNewTag] = useState('')
 
     const onPressHandler = (value) => {
         let renderData = tagData;
@@ -27,14 +27,22 @@ const TaggingModal = ({
     }
 
     const removeTagFromArray = (tag, questionId) => {
-        
-        const filteredTag = tagData.filter((item) => item.tagName !== tag);
+        const filteredTag = tagData.filter((item) => item.tagName != tag);
         setTagData(filteredTag);
 
+        //remove from ExamObject
         studentsAndExamData.data.exams[0].questions.forEach(element => {
             if (questionId == element.questionId) {
                 const index = element.tags.findIndex(item => item.tagName == tag)
                 element.tags.splice(index, 1)
+            }
+        });
+    }
+
+    const addIntoExamObject = (data) => {
+        studentsAndExamData.data.exams[0].questions.forEach(element => {
+            if (questionIdData.trim() == (element.hasOwnProperty("questionId") && element.questionId.trim())) {
+                element.tags.push(data)
             }
         });
     }
@@ -62,10 +70,12 @@ const TaggingModal = ({
                     <TouchableOpacity
                         title='Add'
                         onPress={() => {
-                            if (newTag.length > 0) {
-                                tagData.push({ tagName: newTag, selected: false, questionId: questionIdData })
-                                setTagData(tagData)
-                                setNewTag('')
+                            const isPresent = tagData.length > 0 && tagData.filter((item) => item.tagName == newTag);
+                            if (newTag.length > 0 && !isPresent.length > 0) {
+                                setNewTag('');
+                                addIntoExamObject({ tagName: newTag, selected: false, questionId: questionIdData });
+                            } else {
+                                ToastAndroid.show(`${newTag} is already in list.`,ToastAndroid.SHORT);
                             }
                         }}
                         style={{
@@ -149,4 +159,4 @@ const styles = {
     }
 };
 
-export default TaggingModal;
+export default React.memo(TaggingModal);

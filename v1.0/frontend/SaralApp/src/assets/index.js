@@ -4,6 +4,6 @@ export const Assets ={
     Support :  require('./images/support.png'),
     Share :  require('./images/share.png'),
     ScanButton:require('./images/scanIcon.jpeg'),
-    Tagging:require('./images/plus_icon.png'),
-    crossImage:require('./images/icons8-multiplication-26.png')
+    Tagging:require('./images/icons8-tag-64.png'),
+    crossImage:require('./images/icons8-multiplication-26.png'),
 }

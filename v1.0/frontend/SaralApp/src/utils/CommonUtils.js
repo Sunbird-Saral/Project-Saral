@@ -40,50 +40,7 @@ export const TABLE_HEADER = [
 ]
 
 export const TABLE_HEADER_WITH_TAG = [
-    "Sr No", "Questions", "Marks", "Tagging"
-]
-
-export const MULTIPLE_TAG_DATAS = [
-    {
-        name: "REact native",
-        selected: false
-    },
-    {
-        name: "DevOps",
-        selected: false
-    },
-    {
-        name: "Ruby",
-        selected: false
-    },
-    {
-        name: "C++",
-        selected: false
-    },
-    {
-        name: "Java",
-        selected: false
-    },
-    {
-        name: "JavaScript",
-        selected: false
-    },
-    {
-        name: "TypeScript",
-        selected: false
-    },
-    {
-        name: "Alaska",
-        selected: false
-    },
-    {
-        name: "Go",
-        selected: false
-    },
-    {
-        name: "Lang",
-        selected: false
-    }
+    "Sr No", "Questions", "Marks", "Tags"
 ]
 
 export const Exam_QuestionHeader = [
