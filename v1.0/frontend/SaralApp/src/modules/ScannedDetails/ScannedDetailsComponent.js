@@ -1173,6 +1173,7 @@ const ScannedDetailsComponent = ({
                                                         <View style={styles.row}>
                                                             <Text style={styles.nameTextStyle}>{Strings.skip}</Text>
                                                             <CheckBox
+                                                                tintColors={{ true: '#000', false: '#000' }}
                                                                 disabled={false}
                                                                 value={toggleCheckBox}
                                                                 onValueChange={(newValue) => {
