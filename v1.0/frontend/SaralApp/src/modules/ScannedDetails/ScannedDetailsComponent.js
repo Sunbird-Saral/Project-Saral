@@ -943,9 +943,7 @@ const ScannedDetailsComponent = ({
         let objects = []
 
         data.map((e) => {
-            if (loginData.data.school) {
-                
-            }
+            
             let tagArrayData = ''
             if ( loginData.data.school.hasOwnProperty("tags") && loginData.data.school.tags) {
                 tagArrayData = callTagArrayData(e.format.name)

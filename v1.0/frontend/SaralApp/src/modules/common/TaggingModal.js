@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Text, View, Modal, TouchableOpacity, TextInput, Image, ToastAndroid } from 'react-native';
 import { Assets } from '../../assets';
+import Strings from '../../utils/Strings';
 
 const TaggingModal = ({
-    params,
     isModalVisible,
     setIsModalVisible,
     tagData,
@@ -20,6 +20,7 @@ const TaggingModal = ({
         for (let data of renderData) {
             if (data.tagName == value) {
                 data.selected = (data.selected == null) ? true : !data.selected;
+                break;
             }
         }
         let updatedValue = renderData.slice(0, renderData.length)
@@ -30,21 +31,25 @@ const TaggingModal = ({
         const filteredTag = tagData.filter((item) => item.tagName != tag);
         setTagData(filteredTag);
 
-        //remove from ExamObject
-        studentsAndExamData.data.exams[0].questions.forEach(element => {
+        //remove tag from ExamObject
+        for (const element of studentsAndExamData.data.exams[0].questions) {
             if (questionId == element.questionId) {
                 const index = element.tags.findIndex(item => item.tagName == tag)
                 element.tags.splice(index, 1)
+                break;
             }
-        });
+        }
     }
 
     const addIntoExamObject = (data) => {
-        studentsAndExamData.data.exams[0].questions.forEach(element => {
+        for (const element of studentsAndExamData.data.exams[0].questions) {
             if (questionIdData.trim() == (element.hasOwnProperty("questionId") && element.questionId.trim())) {
-                element.tags.push(data)
+                element.tags.push(data);
+                setNewTag('');
+                setTagData(element.tags)
+                break;
             }
-        });
+        }
     }
 
     return (
@@ -59,23 +64,28 @@ const TaggingModal = ({
         >
             <View style={styles.viewContainer}>
 
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <View style={styles.txtCon}>
+                    <Text style={styles.txt}>{questionIdData}</Text>
+                </View>
+
+
+                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
                     <TextInput
                         style={styles.input}
                         onChangeText={setNewTag}
                         value={newTag}
-                        placeholder="Add New Tag"
+                        placeholder={Strings.add_new_tag}
                         keyboardType="default"
                     />
                     <TouchableOpacity
-                        title='Add'
                         onPress={() => {
                             const isPresent = tagData.length > 0 && tagData.filter((item) => item.tagName == newTag);
                             if (newTag.length > 0 && !isPresent.length > 0) {
-                                setNewTag('');
+
                                 addIntoExamObject({ tagName: newTag, selected: false, questionId: questionIdData });
-                            } else {
-                                ToastAndroid.show(`${newTag} is already in list.`,ToastAndroid.SHORT);
+                            }
+                            if (isPresent.length > 0) {
+                                ToastAndroid.show(`${newTag} is already in list.`, ToastAndroid.SHORT);
                             }
                         }}
                         style={{
@@ -84,7 +94,7 @@ const TaggingModal = ({
                             padding: 8
                         }}
                     >
-                        <Text style={styles.tagText}>Add Tag</Text>
+                        <Text style={styles.tagText}>{Strings.add_tag}</Text>
                     </TouchableOpacity>
                 </View>
 
@@ -96,7 +106,7 @@ const TaggingModal = ({
                                     style={[styles.selectionCon, { backgroundColor: item.selected ? bgColor : '#808080', }]}
                                     activeOpacity={0.8}
                                     onPress={() => onPressHandler(item.tagName)}
-                                    key={`${index.toString()}`}
+                                    key={item.tagName.toString()}
                                 >
                                     <Text style={styles.item}>{item.tagName}</Text>
 
@@ -130,8 +140,6 @@ const styles = {
     viewContainer: {
         flex: 1,
         backgroundColor: 'white',
-        alignItems: 'center',
-        justifyContent: 'center',
     },
     input: {
         height: 40,
@@ -151,10 +159,23 @@ const styles = {
     tagsCon: {
         backgroundColor: 'white',
         flexDirection: 'row',
-        flexWrap: 'wrap'
+        flexWrap: 'wrap',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     tagText: {
         color: 'white',
+        fontWeight: 'bold'
+    },
+    txtCon: {
+        padding: 10,
+        margin: 20,
+        borderRadius: 10,
+        alignItems: 'center',
+        backgroundColor: 'black',
+    },
+    txt: {
+        color: "white",
         fontWeight: 'bold'
     }
 };
