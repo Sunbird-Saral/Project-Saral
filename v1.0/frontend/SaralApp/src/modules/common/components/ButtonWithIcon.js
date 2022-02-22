@@ -1,6 +1,7 @@
 import React from 'react';
 import { TouchableOpacity, Text, Image } from 'react-native'
 import AppTheme from '../../../utils/AppTheme';
+import { monospace_FF } from '../../../utils/CommonUtils';
 
 
 const ButtonWithIcon = ({
@@ -51,7 +52,8 @@ const styles = {
         fontSize: AppTheme.FONT_SIZE_LARGE,
         fontWeight: 'bold',
         letterSpacing: 1,
-        color: AppTheme.WHITE
+        color: AppTheme.WHITE,
+        fontFamily : monospace_FF
     }
 }
 export default ButtonWithIcon;

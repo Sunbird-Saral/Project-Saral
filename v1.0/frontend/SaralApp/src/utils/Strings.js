@@ -103,7 +103,11 @@ export default strings = new LocalizedStrings({
         student_id_should_be_same: 'ID should be same',
         Student_ID_Shouldnt_be_duplicated : "ID Shouldn't be duplicated",
         Sum_Of_All_obtained_marks: "Sum Of All obtained result should be equal to result Obtained",
+        process_failed_try_again : 'Process failed try again later ',
         help_menu: 'Help',
-        about_menu: 'About'
+        about_menu: 'About',
+        ok_button: "OK",
+        cancel_button: 'Cancel',
+        error_message: "Error"
     }
 })

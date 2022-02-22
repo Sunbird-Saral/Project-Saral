@@ -23,6 +23,7 @@ import { getPresentAbsentStudent, getScannedDataFromLocal,getErrorMessage } from
 import { Assets } from '../../assets';
 import ShareComponent from '../common/components/Share';
 import MultibrandLabels from '../common/components/multibrandlabels';
+import { monospace_FF } from '../../utils/CommonUtils';
 
 
 const ScanStatusLocal = ({
@@ -89,7 +90,7 @@ useEffect(
     const renderEmptyData = ({ item }) => {
         return (
             <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
-                <Text>No Data Available</Text>
+                <Text style={{fontFamily : monospace_FF}}>No Data Available</Text>
             </View>
         )
     }
@@ -161,11 +162,11 @@ useEffect(
                         style={styles.schoolName}
                     >
                         {Strings.school_name + ' Name : '}
-                        <Text style={{ fontWeight: 'normal' }}>{loginData.data.school.name}</Text>
+                        <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>{loginData.data.school.name}</Text>
                     </Text>
                     <Text style={[styles.schoolId, { marginLeft: 5 }]}>
                         {Strings.schoolId_text + ' : '}
-                        <Text style={{ fontWeight: 'normal', }}>
+                        <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
                             {loginData.data.school.schoolId}
                         </Text>
                     </Text>

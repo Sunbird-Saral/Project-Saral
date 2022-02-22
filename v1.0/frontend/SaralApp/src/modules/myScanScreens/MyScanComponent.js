@@ -13,7 +13,7 @@ import ScanHistoryCard from '../ScanHistory/ScanHistoryCard';
 import SaralSDK from '../../../SaralSDK'
 import { getScannedDataFromLocal,getErrorMessage } from '../../utils/StorageUtils';
 import ButtonComponent from '../common/components/ButtonComponent';
-import { neglectData } from '../../utils/CommonUtils';
+import { monospace_FF, neglectData } from '../../utils/CommonUtils';
 import ShareComponent from '../common/components/Share';
 import MultibrandLabels from '../common/components/multibrandlabels';
 import { Assets } from '../../assets';
@@ -268,26 +268,26 @@ class MyScanComponent extends Component {
                     &&
                     <View style={{ width:'60%' }}>
                         <Text
-                            style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}
+                            style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%',fontFamily : monospace_FF }}
                         >
                             {Strings.school_name + ' : '}
-                            <Text style={{ fontWeight: 'normal' }}>
+                            <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
                                 {loginData.data.school.name}
                             </Text>
                         </Text>
                         <Text
-                            style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}
+                            style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%',fontFamily : monospace_FF }}
                         >
                             {Strings.schoolId_text + ' : '}
-                            <Text style={{ fontWeight: 'normal' }}>
+                            <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
                                 {loginData.data.school.schoolId}
                             </Text>
                         </Text>
                 <Text
-                    style={{ fontSize: AppTheme.FONT_SIZE_REGULAR - 3, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', marginBottom: '4%' }}
+                    style={{ fontSize: AppTheme.FONT_SIZE_REGULAR - 3, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', marginBottom: '4%',fontFamily : monospace_FF }}
                 >
                     {Strings.version_text + ' : '}
-                    <Text style={{ fontWeight: 'normal' }}>
+                    <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
                         {apkVersion}
                     </Text>
                 </Text>
@@ -297,7 +297,7 @@ class MyScanComponent extends Component {
                 </View> 
                 <ScrollView scrollEnabled>
                 <View style={styles.container1}>
-                <Text style={[styles.header1TextStyle, { borderColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE, backgroundColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE }]}>
+                <Text style={[styles.header1TextStyle, { borderColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE, backgroundColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE,fontFamily : monospace_FF }]}>
                     {Strings.ongoing_scan}
                 </Text>
             </View>
@@ -418,7 +418,8 @@ const styles = {
         fontSize: AppTheme.FONT_SIZE_SMALL,
         color: AppTheme.BLACK,
         letterSpacing: 1,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        fontFamily : monospace_FF
     },
     scanTabContainerStyle: {
         width: 80,

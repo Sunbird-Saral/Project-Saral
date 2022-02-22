@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { View, Text, TouchableHighlight } from 'react-native';
 import AppTheme from '../../../utils/AppTheme';
+import { monospace_FF } from '../../../utils/CommonUtils';
 
 export const HighlightButton = ({
     onBtnPress,
@@ -45,7 +46,8 @@ const styles = {
     btnTextStyle: {
         color: AppTheme.BLACK, 
         fontWeight: 'bold', 
-        fontSize: AppTheme.FONT_SIZE_LARGE
+        fontSize: AppTheme.FONT_SIZE_LARGE,
+        fontFamily : monospace_FF
     },
     btnTextPress: {
         color: AppTheme.WHITE

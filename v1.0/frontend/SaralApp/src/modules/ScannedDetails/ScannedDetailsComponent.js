@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Text, View, ScrollView, ToastAndroid, Alert, Image, TouchableOpacity, PermissionsAndroid } from 'react-native';
 import { connect, useDispatch } from 'react-redux';
 import AppTheme from '../../utils/AppTheme';
-import { CELL_OMR, extractionMethod, multipleStudent, neglectData, SCAN_TYPES, studentLimitSaveInLocal, student_ID, TABLE_HEADER } from '../../utils/CommonUtils';
+import { CELL_OMR, dispatchModalMessage, dispatchModalStatus, extractionMethod, monospace_FF, multipleStudent, neglectData, SCAN_TYPES, studentLimitSaveInLocal, student_ID, TABLE_HEADER } from '../../utils/CommonUtils';
 import Strings from '../../utils/Strings';
 import ShareComponent from '../common/components/Share';
 
@@ -224,6 +224,16 @@ const ScannedDetailsComponent = ({
 
     }
 
+    const callCustomModal = (title, message, isAvailable) => {
+        let data = {
+            title: title,
+            message: message,
+            isOkAvailable: false
+        }
+        dispatch(dispatchModalStatus(true));
+        dispatch(dispatchModalMessage(data));
+    }
+
     const callSingleStudentSheetData = () => {
         let data = ''
         let elements = neglectData;
@@ -342,7 +352,7 @@ const ScannedDetailsComponent = ({
         }
 
         else if (duplication) {
-            Alert.alert(Strings.Student_ID_Shouldnt_be_duplicated)
+            callCustomModal(Strings.message_text, Strings.Student_ID_Shouldnt_be_duplicated, false);
         }
         else if (disable) {
             showErrorMessage(Strings.please_correct_marks_data)
@@ -569,14 +579,14 @@ const ScannedDetailsComponent = ({
 
                         });
                         if (bgFlag) {
-                            Alert.alert(Strings.auto_sync_in_progress_please_wait)
+                            callCustomModal(Strings.message_text, Strings.auto_sync_in_progress_please_wait, false);
                         } else {
                             setScannedDataIntoLocal(getDataFromLocal)
                             goToMyScanScreen()
                         }
                     }
                 } else {
-                    Alert.alert(Strings.you_can_save_only_limited_student_In_Order_to_continue_have_to_save_first)
+                    callCustomModal(Strings.message_text, Strings.you_can_save_only_limited_student_In_Order_to_continue_have_to_save_first, false);
                 }
 
             } else if (saveObj.studentsMarkInfo.length <= studentLimitSaveInLocal) {
@@ -589,7 +599,7 @@ const ScannedDetailsComponent = ({
             setScannedDataIntoLocal([saveObj])
             goToMyScanScreen()
         } else {
-            Alert.alert(Strings.you_can_save_only_limited_student_In_Order_to_continue_have_to_save_first)
+            callCustomModal(Strings.message_text, Strings.you_can_save_only_limited_student_In_Order_to_continue_have_to_save_first, false);
         }
     }
 
@@ -699,7 +709,7 @@ const ScannedDetailsComponent = ({
             ocrLocalResponse.layout.cells.forEach(element => {
                 if (element.cellId == value.cellId) {
                     if (!regexValue[0]) {
-                        showErrorMessage(regexValue[1] ? regexValue[1] : defaultValidateError )
+                        showErrorMessage(regexValue[1] ? regexValue[1] : defaultValidateError)
                     }
 
                 }
@@ -742,7 +752,7 @@ const ScannedDetailsComponent = ({
 
 
     const showErrorMessage = (message) => {
-        Alert.alert(message)
+        callCustomModal(Strings.message_text, message, false);
     }
 
     const validateCellOMR = (isMultiple) => {
@@ -769,7 +779,7 @@ const ScannedDetailsComponent = ({
         let regexErrormsglist
         for (let i = 0; i < newArrayValue.length; i++) {
             let consolidatedlist = newArrayValue[i].consolidatedPrediction
-             regexErrormsglist = newArrayValue[i] && newArrayValue[i].validate && newArrayValue[i].validate.errorMsg
+            regexErrormsglist = newArrayValue[i] && newArrayValue[i].validate && newArrayValue[i].validate.errorMsg
             let regexlist = newArrayValue[i].validate && newArrayValue[i].validate.regExp
             let number = consolidatedlist;
             let regexvalue = new RegExp(regexlist)
@@ -801,7 +811,7 @@ const ScannedDetailsComponent = ({
         else if (isStudentValid) {
             showErrorMessage(Strings.student_id_should_be_same)
         }
-        else if (resultMark ===false) {
+        else if (resultMark === false) {
             showErrorMessage(Strings.please_correct_marks_data)
         }
 
@@ -1135,12 +1145,12 @@ const ScannedDetailsComponent = ({
                                         <View style={styles.studentContainer}>
                                             <View style={styles.imageViewContainer}>
                                                 <View style={styles.imageContainerStyle}>
-                                                    <Text style={{ textAlign: 'center', fontSize: AppTheme.HEADER_FONT_SIZE_LARGE }}>{studentData.length > 0 && studentData[0].name.charAt(0)}</Text>
+                                                    <Text style={{ textAlign: 'center', fontSize: AppTheme.HEADER_FONT_SIZE_LARGE,fontFamily : monospace_FF }}>{studentData.length > 0 && studentData[0].name.charAt(0)}</Text>
                                                 </View>
                                             </View>
                                             <View style={styles.deatilsViewContainer}>
                                                 <View style={styles.detailsSubContainerStyle}>
-                                                    <Text style={[styles.nameTextStyle, { fontWeight: 'bold', color: AppTheme.BLACK, fontSize: AppTheme.FONT_SIZE_LARGE }]}>{studentData.length > 0 && studentData[0].name}</Text>
+                                                    <Text style={[styles.nameTextStyle, { fontWeight: 'bold', color: AppTheme.BLACK, fontSize: AppTheme.FONT_SIZE_LARGE,fontFamily : monospace_FF }]}>{studentData.length > 0 && studentData[0].name}</Text>
                                                     <TextField
                                                         labelText={BrandLabel && BrandLabel.StudentId ? BrandLabel.StudentId : Strings.student_id}
                                                         errorField={stdErr != '' || isNaN(studentId)}

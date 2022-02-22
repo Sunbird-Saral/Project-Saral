@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
 import AppTheme from '../../utils/AppTheme';
 import { getErrorMessage, getLoginCred, getScanData, getScannedDataFromLocal, setErrorMessage, setScannedDataIntoLocal } from '../../utils/StorageUtils';
-import { Exam_QuestionHeader } from '../../utils/CommonUtils';
+import { Exam_QuestionHeader, monospace_FF } from '../../utils/CommonUtils';
 import ExamDetailsPopup from '../common/components/ExamDetailsPopup';
 import ButtonComponent from '../common/components/ButtonComponent';
 import Strings from '../../utils/Strings';
@@ -219,79 +219,79 @@ const ScanHistoryCard = ({
                     <View>
                         <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                                <Text>{BrandLabel&&BrandLabel.Class ? BrandLabel.Class : Strings.class_text}</Text>
+                                <Text style={{fontFamily : monospace_FF}}>{BrandLabel&&BrandLabel.Class ? BrandLabel.Class : Strings.class_text}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
-                                <Text>{filteredData.response.className}</Text>
+                                <Text style={{fontFamily : monospace_FF}} >{filteredData.response.className}</Text>
                             </View>
                         </View>
                         <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                                <Text>{BrandLabel && BrandLabel.Section ? BrandLabel.Section:Strings.section}</Text>
+                                <Text style={{fontFamily : monospace_FF}} >{BrandLabel && BrandLabel.Section ? BrandLabel.Section:Strings.section}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
-                                <Text>{filteredData.response.section}</Text>
+                                <Text style={{fontFamily : monospace_FF}} >{filteredData.response.section}</Text>
                             </View>
                         </View>
                         <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                            <Text>{BrandLabel&&BrandLabel.ExamDate ? BrandLabel.ExamDate:Strings.exam_date}</Text>
+                            <Text style={{fontFamily : monospace_FF}} >{BrandLabel&&BrandLabel.ExamDate ? BrandLabel.ExamDate:Strings.exam_date}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
-                                <Text>{filteredData.response.examDate}</Text>
+                                <Text style={{fontFamily : monospace_FF}} >{filteredData.response.examDate}</Text>
                             </View>
                         </View>
                         <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                                <Text>{BrandLabel&&BrandLabel.Subject ? BrandLabel.Subject:Strings.subject}</Text>
+                                <Text style={{fontFamily : monospace_FF}} >{BrandLabel&&BrandLabel.Subject ? BrandLabel.Subject:Strings.subject}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
-                                <Text>{filteredData.response.subject}</Text>
+                                <Text style={{fontFamily : monospace_FF}} >{filteredData.response.subject}</Text>
                             </View>
                         </View>
                         <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle,]}>
-                            <Text>{BrandLabel&&BrandLabel.ExamType ? BrandLabel.ExamType:Strings.Exam_Type}</Text>
+                            <Text style={{fontFamily : monospace_FF}} >{BrandLabel&&BrandLabel.ExamType ? BrandLabel.ExamType:Strings.Exam_Type}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle,]}>
                                 {Examtypedata.map((item) =>
                                     <View key={item}>
-                                        <Text>{item.type}</Text>
+                                        <Text style={{fontFamily : monospace_FF}} >{item.type}</Text>
                                     </View>
                                 )}
                             </View>
                         </View>
                         <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                            <Text>{BrandLabel && BrandLabel.ExamId ? BrandLabel.ExamId:Strings.exam_id}</Text>
+                            <Text style={{fontFamily : monospace_FF}} >{BrandLabel && BrandLabel.ExamId ? BrandLabel.ExamId:Strings.exam_id}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
-                                <Text>{filteredData.response.examTestID}</Text>
+                                <Text style={{fontFamily : monospace_FF}} >{filteredData.response.examTestID}</Text>
                             </View>
                         </View>
                         <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                            <Text>{BrandLabel && BrandLabel.ExamDetail ? BrandLabel.ExamDetail:Strings.exam_details}</Text>
+                            <Text style={{fontFamily : monospace_FF}} >{BrandLabel && BrandLabel.ExamDetail ? BrandLabel.ExamDetail:Strings.exam_details}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
-                                <Text  onPress={() => setIsModalVisible(!isModalVisible)} style={{textDecorationLine:'underline',color:'blue'}}>{BrandLabel && BrandLabel.Details ? BrandLabel.Details: Strings.details}</Text>
+                                <Text style={{fontFamily : monospace_FF}}   onPress={() => setIsModalVisible(!isModalVisible)} style={{textDecorationLine:'underline',color:'blue'}}>{BrandLabel && BrandLabel.Details ? BrandLabel.Details: Strings.details}</Text>
                             </View>
                         </View>
                         <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle,]}>
-                                <Text>{Strings.scan_status}</Text>
+                                <Text style={{fontFamily : monospace_FF}} >{Strings.scan_status}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle,]}>
-                                <Text>{scanStatusData}</Text>
+                                <Text style={{fontFamily : monospace_FF}} >{scanStatusData}</Text>
                             </View>
                         </View>
                         <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle, { borderBottomWidth: 1 }]}>
-                                <Text>{Strings.save_status}</Text>
+                                <Text style={{fontFamily : monospace_FF}} >{Strings.save_status}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle, { borderBottomWidth: 1 }]}>
                                 {loading ?
-                                    <Text>{getSaveCount()}</Text> : <View style={{ alignItems: 'flex-start' }}><ActivityIndicator size={'small'} color={'grey'} /></View>}
+                                    <Text style={{fontFamily : monospace_FF}} >{getSaveCount()}</Text> : <View style={{ alignItems: 'flex-start' }}><ActivityIndicator size={'small'} color={'grey'} /></View>}
                             </View>
                         </View>
                     </View>
@@ -313,7 +313,7 @@ const ScanHistoryCard = ({
                                 }}
                                 onPress={onPressStatus}
                             >
-                                <Text>{Strings.save_status}</Text>
+                                <Text  style={{fontFamily : monospace_FF}}>{Strings.save_status}</Text>
                             </TouchableOpacity>
                         }
                         {
@@ -328,7 +328,7 @@ const ScanHistoryCard = ({
                                 }}
                                 onPress={onPressSaveInDB}
                             >
-                                <Text style={{ color: AppTheme.BLACK }}>{Strings.save_scan}</Text>
+                                <Text  style={{fontFamily : monospace_FF}} style={{ color: AppTheme.BLACK }}>{Strings.save_scan}</Text>
                             </TouchableOpacity>}
                     </View>
                 </View>
@@ -342,7 +342,7 @@ const ScanHistoryCard = ({
                                 style={{ backgroundColor: AppTheme.GREY, borderRadius: 4, width: '80%', alignItems: 'center', justifyContent: 'center', elevation: 8, paddingVertical: 4 }}
                                 onPress={onPressContinue}
                             >
-                                <Text style={{ color: AppTheme.WHITE }}>{Strings.continue_scan}</Text>
+                                <Text  style={{fontFamily : monospace_FF}} style={{ color: AppTheme.WHITE }}>{Strings.continue_scan}</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -356,7 +356,7 @@ const ScanHistoryCard = ({
                                 style={{ backgroundColor: AppTheme.GREY, borderRadius: 4, width: '80%', alignItems: 'center', justifyContent: 'center', elevation: 8, paddingVertical: 4 }}
                                  onPress={onPressScanStatus}
                             >
-                                <Text style={{ color: AppTheme.WHITE }}>{Strings.scan_status}</Text>
+                                <Text  style={{fontFamily : monospace_FF}} style={{ color: AppTheme.WHITE }}>{Strings.scan_status}</Text>
                             </TouchableOpacity>
                         </View>
                     </View>

@@ -1,4 +1,5 @@
 import moment from 'moment'
+import C from '../flux/actions/constants'
 
 export const validateToken = (expireTime) => {
     let expireArr = expireTime.replace(/-/g, '/').split('/')
@@ -30,6 +31,20 @@ export const cryptoText = (text) => {
     return encText
 }
 
+export const dispatchModalMessage = (value) => {
+    return ({
+        type: C.MODAL_MESSAGE,
+        payload: value
+    })
+}
+
+export const dispatchModalStatus = (value) => {
+    return ({
+        type: C.CUSTOM_MODAL_STATUS,
+        payload: value
+    })
+}
+
 export const SCAN_TYPES = {
     SAT_TYPE: 'sat',
     PAT_TYPE: 'pat'
@@ -39,16 +54,18 @@ export const TABLE_HEADER = [
     "Sr No", "Questions", "Marks"
 ]
 
-export const Exam_QuestionHeader =[
-    "Question Id","Indicator Title","Question Marks"
+export const Exam_QuestionHeader = [
+    "Question Id", "Indicator Title", "Question Marks"
 ]
 
 export const neglectData = ["ROLLNUMBER", "STUDENTID", "MARKS_OBTAINED", "MAX_MARKS", "ROLLID"];
 
-export const student_ID = ["ROLLNUMBER", "STUDENTID","ROLLID"]
+export const student_ID = ["ROLLNUMBER", "STUDENTID", "ROLLID"]
 
 export const multipleStudent = ["ROLLNUMBERID"]
 
 export const CELL_OMR = "CELL_OMR"
 
 export const studentLimitSaveInLocal = 50
+
+export const monospace_FF = 'serif'

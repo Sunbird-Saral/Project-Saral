@@ -25,6 +25,7 @@ import { getScannedDataFromLocal, eraseErrorLogs, getErrorMessage } from '../../
 
 //constant
 import C from '../../../flux/actions/constants'
+import { monospace_FF } from '../../../utils/CommonUtils';
 
 
 const ShareComponent = ({
@@ -37,11 +38,20 @@ const ShareComponent = ({
   const [ishidden, setIshidden] = useState(false)
   const dispatch = useDispatch()
 
+  const callCustomModal = (title, message, isAvailable) => {
+    let data = {
+        title: title,
+        message: message,
+        isOkAvailable: isAvailable
+    }
+    dispatch(dispatchModalStatus(true));
+    dispatch(dispatchModalMessage(data));
+}
 
   const Logoutcall = async () => {
     let data = await getScannedDataFromLocal();
     if (bgFlag) {
-      Alert.alert(Strings.auto_sync_in_progress_please_wait)
+      callCustomModal(Strings.message_text,Strings.auto_sync_in_progress_please_wait,false);
     } else {
       Alert.alert(Strings.message_text, Strings.are_you_sure_you_want_to_logout, [
         { 'text': Strings.no_text, style: 'cancel' },
@@ -83,7 +93,7 @@ const ShareComponent = ({
         })
         .catch(function (err) {
           collectErrorLogs("Share.js", "saveStudentData", api.apiEndPoint(), err, false)
-          Alert.alert(Strings.something_went_wrong_please_try_again)
+          callCustomModal(Strings.message_text,Strings.something_went_wrong_please_try_again,false);
           clearTimeout(id)
         });
     }
@@ -105,7 +115,7 @@ const ShareComponent = ({
           // shared with activity type of result.activityType
 
         } else {
-          Alert.alert(Strings.shareDataExceed)
+          callCustomModal(Strings.message_text,Strings.shareDataExceed,false);
           // shared
         }
       }
@@ -146,7 +156,7 @@ const ShareComponent = ({
 
         <TouchableOpacity onPress={() => showModal()}>
           <View style={[styles.imageContainerStyle, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE }]}>
-            <Text style={{ textAlign: 'center', fontSize: AppTheme.HEADER_FONT_SIZE_LARGE }}>{loginData.data.school.name.charAt(0)}</Text>
+            <Text style={{ textAlign: 'center', fontSize: AppTheme.HEADER_FONT_SIZE_LARGE,fontFamily : monospace_FF }}>{loginData.data.school.name.charAt(0)}</Text>
           </View>
         </TouchableOpacity>
       </View>

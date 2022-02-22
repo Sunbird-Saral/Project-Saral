@@ -9,7 +9,7 @@ import AppTheme from '../../utils/AppTheme';
 import { apkVersion } from '../../configs/config';
 import HeaderComponent from '../common/components/HeaderComponent';
 import { HighlightButton } from '../common/components/HighlightButton';
-import { SCAN_TYPES } from '../../utils/CommonUtils';
+import { monospace_FF, SCAN_TYPES } from '../../utils/CommonUtils';
 import { ScantypeAction } from '../../flux/actions/apis/scanTypeAction'
 
 class DashboardComponent extends Component {
@@ -72,27 +72,27 @@ class DashboardComponent extends Component {
                  {(loginData && loginData.data) && 
                     <View>
                         <Text 
-                            style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold',  paddingHorizontal: '5%', paddingVertical: '2%' }}
+                            style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold',  paddingHorizontal: '5%', paddingVertical: '2%',fontFamily : monospace_FF }}
                         >
                             {Strings.school_name+' : '}
-                            <Text style={{ fontWeight: 'normal'}}>
+                            <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF}}>
                                 {loginData.data.school.name}
                             </Text>
                         </Text>
                         <Text 
-                            style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}
+                            style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%',fontFamily : monospace_FF }}
                         >
                             {Strings.schoolId_text+' : '}
-                            <Text style={{ fontWeight: 'normal'}}>
+                            <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF}}>
                                 {loginData.data.school.schoolId}
                             </Text>
                         </Text>
                     </View>}
                     <Text 
-                        style={{ fontSize: AppTheme.FONT_SIZE_REGULAR-3, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', marginBottom: '4%' }}
+                        style={{ fontSize: AppTheme.FONT_SIZE_REGULAR-3, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', marginBottom: '4%',fontFamily : monospace_FF }}
                     >
                         {Strings.version_text+' : '}
-                        <Text style={{ fontWeight: 'normal'}}>
+                        <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF}}>
                             {apkVersion}
                         </Text>
                     </Text>

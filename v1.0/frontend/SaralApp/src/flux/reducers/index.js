@@ -15,6 +15,7 @@ import bgFlag from './bgFlag';
 import multiPageReducer from './multiPageReducer';
 import modalStatus from './modalStatus';
 import ModalMessage from './ModalMessage';
+import customModalStatus from './customModalStatus';
 
 export default {
     apiStatus: apiStatus,
@@ -33,6 +34,7 @@ export default {
     bgFlag: bgFlag,
     multiPage: multiPageReducer,
     modalStatus: modalStatus,
+    customModalStatus: customModalStatus,
     modalMessage: ModalMessage
 
 

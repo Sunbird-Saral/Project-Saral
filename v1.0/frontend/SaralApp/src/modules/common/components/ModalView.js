@@ -6,6 +6,7 @@ import C from '../../../flux/actions/constants';
 
 //redux
 import {  useDispatch } from 'react-redux';
+import { monospace_FF } from '../../../utils/CommonUtils';
 
 const modalView = ({
   modalVisible,
@@ -40,17 +41,17 @@ const modalView = ({
 
             
             <Text style={[styles.version,{marginTop:10}]}>About</Text>
-            <Text>{modalMessage['saral.info']}</Text>
+            <Text style={{fontFamily : monospace_FF}}>{modalMessage['saral.info']}</Text>
 
             <Text style={[styles.version,{marginTop:10}]}>Documentation</Text>
             <Text 
-            style={{color:'blue'}} 
+            style={{color:'blue',fontFamily : monospace_FF}} 
             onPress={()=>Linking.openURL((modalMessage['saral.documentation.link']))}>{modalMessage['saral.documentation.link']}</Text>
            
             <View style={styles.row}>
             <Text style={styles.version}>Release Version</Text>
             <Text 
-            style={{color:'blue'}}
+            style={{color:'blue',fontFamily : monospace_FF}}
             onPress={()=> Linking.openURL(modalMessage['release.link'])}
             >{modalMessage['saral.release.version']}</Text>
             </View>
@@ -83,7 +84,8 @@ const styles = StyleSheet.create({
   },
   version:{
     fontWeight: 'bold',
-    fontSize: 18
+    fontSize: 18,
+    fontFamily : monospace_FF
   }
 });
 export default modalView;
