@@ -112,6 +112,11 @@ const ScannedDetailsComponent = ({
 
         let absent = datas.filter((item) => item.studentId == studentId & item.studentAvailability == false)
 
+        if(studentId == 0){
+            setToggleCheckBox(true)
+        }else{
+            setToggleCheckBox(false)
+        }
         if (absent.length > 0) {
             setStdErr("Student is Absent")
             setStudentValid(false)
