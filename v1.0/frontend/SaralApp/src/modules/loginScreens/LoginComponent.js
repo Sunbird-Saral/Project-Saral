@@ -41,11 +41,14 @@ class LoginComponent extends Component {
     async componentDidMount() {
         const schollId = await this.rememberMeSchoolId();
         const password = await this.rememberMePassword();
+        const logindata = this.props.loginData&&this.props.loginData.data&&this.props.loginData.data.school.schoolId
+        const locallogindata =schollId == logindata  ? schollId : ""
+        const localpassdata =schollId == logindata  ? password : ""
         this.setState({
-            schoolId: schollId || "",
-            password: password || "",
-            rememberMe: schollId ? true : false,
-            rememberMe: password ? true : false
+            schoolId: locallogindata || "" ,
+            password: localpassdata || "" ,
+            rememberMe: locallogindata && localpassdata ? true : false,
+          
         });
 
         this.timerState = setTimeout(() => { this.setState({ Loading: false }) }, 5000)

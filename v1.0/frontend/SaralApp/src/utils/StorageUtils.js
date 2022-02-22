@@ -256,7 +256,6 @@ export const setMultiBranding = async (data) => {
 export const getMultiBranding = async () => {
     let multibrandData = await AsyncStorage.getItem(MULTIBRAND_KEY);
     if (multibrandData != null) {
-        console.log('MULTIBRAND_KEY////////', multibrandData)
         return multibrandData
     } else {
         return
@@ -266,7 +265,6 @@ export const getMultiBranding = async () => {
 export const removeMultiBranding = async () => {
     try {
         await AsyncStorage.removeItem(MULTIBRAND_KEY);
-        console.log('removeItem???????????????????')
     } catch (error) {
         // Error removing
         console.log('error',error)
