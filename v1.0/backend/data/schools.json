@@ -5,7 +5,8 @@
   "state": "up",
   "autoSync": false,
   "autoSyncFrequency": 600000,
-  "storeTrainingData": true
+  "storeTrainingData": true,
+  "tags": true
 },
 {
   "name": "Dummy school 2",
@@ -14,7 +15,8 @@
   "state": "odisha",
   "autoSync": false,
   "autoSyncFrequency": 600000,
-  "storeTrainingData": true
+  "storeTrainingData": true,
+  "tags": false
 },
 {
   "name": "Dummy school 3",
@@ -23,7 +25,8 @@
   "state": "gujrat",
   "autoSync": false,
   "autoSyncFrequency": 600000,
-  "storeTrainingData": true
+  "storeTrainingData": true,
+  "tags": false
 },
 {
 "name": "Dummy school 4",
@@ -32,7 +35,8 @@
 "autoSync": true,
 "autoSyncFrequency": 900000,
 "state": "up",
-"storeTrainingData": true
+"storeTrainingData": true,
+"tags": true
 },
 {
   "name": "Dummy Skill School",
@@ -40,6 +44,7 @@
   "password": "skill@123",
   "state": "karnataka",
   "autoSyncFrequency": 600000,
-  "storeTrainingData": true
+  "storeTrainingData": true,
+  "tags": false
   }
 ]
