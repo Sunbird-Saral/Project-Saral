@@ -117,6 +117,9 @@ const ScannedDetailsComponent = ({
 
         let absent = datas.filter((item) => item.studentId == studentId & item.studentAvailability == false)
 
+        if(studentId == 0 && studentId != ''){
+            setToggleCheckBox(true)
+        }
         if (absent.length > 0) {
             setStdErr("Student is Absent")
             setStudentValid(false)
@@ -605,7 +608,6 @@ const ScannedDetailsComponent = ({
                 checkStdRollDuplicate.splice(index, 1);
             }
             setCheckStdRollDuplicate(checkStdRollDuplicate)
-
             setToggleCheckBox(toggle)
             setNewArrayValue(structureList[currentIndex - 1].data)
             setStudentID(structureList[currentIndex - 1].RollNo)
@@ -1144,6 +1146,7 @@ const ScannedDetailsComponent = ({
                                                         <View style={styles.row}>
                                                             <Text style={styles.nameTextStyle}>{Strings.skip}</Text>
                                                             <CheckBox
+                                                                tintColors={{ true: '#000', false: '#000' }}
                                                                 disabled={false}
                                                                 value={toggleCheckBox}
                                                                 onValueChange={(newValue) => {
