@@ -45,9 +45,9 @@ class LoginComponent extends Component {
         const locallogindata =schollId == logindata  ? schollId : ""
         const localpassdata =schollId == logindata  ? password : ""
         this.setState({
-            schoolId: locallogindata || "" ,
-            password: localpassdata || "" ,
-            rememberMe: locallogindata && localpassdata ? true : false,
+            schoolId: schollId || "" ,
+            password: password || "" ,
+            rememberMe: schollId && password ? true : false,
           
         });
 
@@ -153,6 +153,11 @@ class LoginComponent extends Component {
         } else {
             this.forgetUserfunction();
         }
+    }
+
+    onLoginDetailsChange = (text, type,value) => {
+        this.setState({ [type]: text })
+        this.toggleRememberMe()
     }
 
     rememberUserfunction = async () => {
@@ -264,9 +269,7 @@ class LoginComponent extends Component {
 
 
 
-    onLoginDetailsChange = (text, type) => {
-        this.setState({ [type]: text })
-    }
+  
 
     render() {
         const { password, isLoading, Loading, errUsername, errPassword, errCommon } = this.state;
