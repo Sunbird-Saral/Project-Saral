@@ -68,4 +68,4 @@ export const CELL_OMR = "CELL_OMR"
 
 export const studentLimitSaveInLocal = 50
 
-export const monospace_FF = 'serif'
+export const monospace_FF = 'notoserif'

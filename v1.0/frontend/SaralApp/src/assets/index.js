@@ -5,5 +5,6 @@ export const Assets ={
     Share :  require('./images/share.png'),
     ScanButton:require('./images/scanIcon.jpeg'),
     About :require('./images/about_icon.png'),
-    Help :require('./images/help.png')
+    Help :require('./images/help.png'),
+    MessageIcon :require('./images/box.png')
 }

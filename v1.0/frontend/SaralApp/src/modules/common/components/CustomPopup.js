@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { ScrollView, View, Text, Modal, TouchableOpacity, Dimensions } from 'react-native';
+import { ScrollView, View, Text, Modal, TouchableOpacity, Dimensions, Image } from 'react-native';
 import { connect, useDispatch } from 'react-redux';
 import AppTheme from '../../../utils/AppTheme';
 const { width } = Dimensions.get('window');
 import C from '../../../flux/actions/constants';
 import Strings from '../../../utils/Strings';
 import { monospace_FF } from '../../../utils/CommonUtils';
+import { Assets } from '../../../assets';
 
 const CustomPopup = ({
     params,
@@ -77,8 +78,14 @@ const CustomPopup = ({
                             padding: 14
 
                         }, customPopStyle]}>
-                        <Text style={[styles.titleTextStyle, customTitleTextStyle]}>{customModalMessage.title}</Text>
-                        <Text style={[styles.messageTextStyle, customMessageTxtStyle]}>{customModalMessage.message}</Text>
+                        <View style={{ flexDirection: 'row',alignItems:'center' }}>
+                            <View style={{backgroundColor: "#FFFF00E6",borderRadius:60,width:30,height:30,alignItems:'center',justifyContent: 'center',}}>
+                                <Image style={{width: 25,height:25}} source={Assets.MessageIcon} />
+                            </View>
+                            <Text style={[styles.titleTextStyle, customTitleTextStyle,{marginLeft: 8}]}>{customModalMessage.title}</Text>
+
+                        </View>
+                        <Text style={[styles.messageTextStyle, customMessageTxtStyle,{marginLeft: 32}]}>{customModalMessage.message}</Text>
                         <View
                             style={{
                                 flexDirection: 'row',
@@ -94,9 +101,9 @@ const CustomPopup = ({
                                     style={{
                                         paddingHorizontal: width * .03,
                                         justifyContent: "center",
-                                        marginRight:10
+                                        marginRight: 10
                                     }}>
-                                    <Text style={[styles.TextStyle,{color:'black'}]}> {Strings.cancel_button} </Text>
+                                    <Text style={[styles.TextStyle, { color: 'black' }]}> {Strings.cancel_button} </Text>
                                 </TouchableOpacity> : null}
 
                             {ok_button ?
@@ -137,7 +144,7 @@ const styles = {
         fontWeight: 'bold',
         textAlign: 'left',
         marginVertical: '2%',
-        fontFamily: 'monospace'
+        fontFamily: monospace_FF
     },
 
     messageTextStyle: {
@@ -148,7 +155,7 @@ const styles = {
         textAlign: 'left',
         marginVertical: '.5%',
         marginBottom: 10,
-        fontFamily: 'monospace'
+        fontFamily: monospace_FF
     },
 
     TextStyle: {
