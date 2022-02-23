@@ -35,15 +35,21 @@ const examSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    type:{
+    type: {
         type: String,
         required: true
     },
     questions: [{
         _id: false,
-        questionId: {type: String},
-        indicatorTitle: {type: String},
-        questionMarks: {type: String}
+        questionId: { type: String },
+        indicatorTitle: { type: String },
+        tags: [{
+            _id: false,
+            tagName: { type: String },
+            selected: { type: Boolean }
+        }
+        ],
+        questionMarks: { type: String }
     }]
 }, {
     timestamps: true
