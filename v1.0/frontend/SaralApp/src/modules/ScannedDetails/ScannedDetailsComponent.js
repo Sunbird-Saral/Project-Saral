@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Text, View, ScrollView, ToastAndroid, Alert, Image, TouchableOpacity, PermissionsAndroid } from 'react-native';
 import { connect, useDispatch } from 'react-redux';
 import AppTheme from '../../utils/AppTheme';
-import { CELL_OMR, extractionMethod, multipleStudent, neglectData, SCAN_TYPES, studentLimitSaveInLocal, student_ID, TABLE_HEADER } from '../../utils/CommonUtils';
+import { CELL_OMR, extractionMethod, multipleStudent, MULTIPLE_TAG_DATAS, neglectData, SCAN_TYPES, studentLimitSaveInLocal, student_ID, TABLE_HEADER, TABLE_HEADER_WITH_TAG } from '../../utils/CommonUtils';
 import Strings from '../../utils/Strings';
 import ShareComponent from '../common/components/Share';
 
@@ -29,6 +29,7 @@ import { Assets } from '../../assets';
 import SaralSDK from '../../../SaralSDK'
 //npm
 import CheckBox from '@react-native-community/checkbox';
+import TaggingModal from '../common/TaggingModal';
 
 
 const ScannedDetailsComponent = ({
@@ -40,7 +41,7 @@ const ScannedDetailsComponent = ({
     loginData,
     bgFlag,
     roiData,
-    multiPageReducer,
+    studentsAndExamData
 }) => {
 
 
@@ -75,10 +76,14 @@ const ScannedDetailsComponent = ({
     const [toggleCheckBox, setToggleCheckBox] = useState(false)
     const [logmessage, setLogmessage] = useState()
     const [multiPage, setMultiPage] = useState(0)
+    const [isModalVisible ,setIsModalVisible] = useState(false)
+    const [tagData ,setTagData] = useState([])
+    const [questionIdData ,setQuestionIdData] = useState()
 
     const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.scannedDetailComponent[0]
-    const defaultValidateError = ocrLocalResponse.layout && ocrLocalResponse.layout.resultValidation && ocrLocalResponse.layout.resultValidation.validate.errorMsg
-    const defaultValidateExp = ocrLocalResponse.layout && ocrLocalResponse.layout.resultValidation && ocrLocalResponse.layout.resultValidation.validate.regExp
+
+
+
     const inputRef = React.createRef();
     const dispatch = useDispatch()
 
@@ -127,7 +132,7 @@ const ScannedDetailsComponent = ({
                 setIsStudentValid(true)
                 setStdErr(Strings.student_id_should_be_same)
                 setStudentDATA([])
-            } else if (a.length == 0) {
+            }   else if (a.length == 0) {
                 setIsStudentValid(true)
                 setStdErr(Strings.please_correct_student_id)
             } else {
@@ -177,7 +182,7 @@ const ScannedDetailsComponent = ({
             let withNoDigits = e.format.name.replace(/[0-9]/g, '');
             let wordLen = withNoDigits.length;
             let multiple = 0
-            if (wordLen === multipleStudent[0].length && withNoDigits === multipleStudent[0]) {
+            if (wordLen === multipleStudent[0].length  && withNoDigits === multipleStudent[0]) {
                 multiple = multiple + 1
             }
             return multiple
@@ -291,47 +296,23 @@ const ScannedDetailsComponent = ({
             })
         })
     }
-    const [omrResultErr, setOmrResult] = useState()
-    const regxValidation = (cellId) => {
-        let result
-        let regexErrormsg
-        for (let i = 0; i < ocrLocalResponse.layout.cells.length; i++) {
-            if (ocrLocalResponse.layout.cells[i].cellId == cellId) {
-                let consolidated = ocrLocalResponse.layout.cells[i].consolidatedPrediction
-                let ocrcells = ocrLocalResponse.layout.cells[i]
-                regexErrormsg = ocrcells && ocrcells.validate && ocrcells.validate.errorMsg
-                let regexExp = ocrcells && ocrcells.validate && ocrcells.validate.regExp ? ocrcells.validate.regExp : defaultValidateExp
-                let number = consolidated;
-                let regex = new RegExp(regexExp)
-                result = regex.test(number);
-                // setOmrResult(regexErrormsg)
-                setOmrResult(defaultValidateError)
-
-            }
-        }
-        return [result, regexErrormsg]
-    }
 
 
     const goNextFrame = () => {
+
         let validCell = false
         let omrMark = false
-
         for (let i = 0; i < newArrayValue.length; i++) {
-
             if (newArrayValue[i].consolidatedPrediction === '') {
                 validCell = true
             }
-
             else if (newArrayValue[i].consolidatedPrediction === 0) {
                 omrMark = true
             }
         }
-
         let duplication = false
 
         let cellOmrValidation = validateCellOMR(true)
-
         const duplicate = checkStdRollDuplicate.some((item) => studentId == item)
 
         if (duplicate) {
@@ -339,14 +320,12 @@ const ScannedDetailsComponent = ({
         } else {
             duplication = false
         }
-
         if (omrMark) {
-            showErrorMessage(omrResultErr ? omrResultErr : defaultValidateError || Strings.omr_mark_should_be)
+            showErrorMessage(Strings.omr_mark_should_be)
         }
         else if (cellOmrValidation[0]) {
             showErrorMessage(`omr value should be 0 to ${cellOmrValidation[1] + 1}`)
         }
-
         else if (duplication) {
             Alert.alert(Strings.Student_ID_Shouldnt_be_duplicated)
         }
@@ -423,10 +402,24 @@ const ScannedDetailsComponent = ({
         }
     }
 
+
     const saveMultipleStudentDataSheet = () => {
         if (isMultipleStudent && nextBtn === Strings.submit_text) {
             saveMultiData()
         }
+    }
+
+    const callTagArrayData = (formatName) =>{
+        let tagArray = []
+        studentsAndExamData.data.exams[0].questions.filter((element,i) => {
+            element.tags.filter((value)=>{
+                if (value.hasOwnProperty("questionId") && value.questionId.trim() == formatName.trim() && value.selected) {
+                    tagArray.push(value.tagName)
+                    value.selected = false
+                }
+            })
+        });
+        return tagArray
     }
 
     const saveMultiData = async () => {
@@ -460,11 +453,20 @@ const ScannedDetailsComponent = ({
                 let stdMarks_info = []
 
                 el.data.forEach((value, i) => {
+
+                    let tagArrayData = ''
+                    if ( loginData.data.school.hasOwnProperty("tags") && loginData.data.school.tags) {
+                         tagArrayData = callTagArrayData(value.format.name)
+                    }
+
                     let marks_data = {
                         "questionId": '',
                         "obtainedMarks": '',
                         "predictedMarks": loginData.data.school.storeTrainingData ? value.predictedMarks : "",
-                        "predictionConfidence": loginData.data.school.storeTrainingData ? value.predictionConfidence : ""
+                        "predictionConfidence": loginData.data.school.storeTrainingData ? value.predictionConfidence : "",
+                    }
+                    if (loginData.data.school.hasOwnProperty("tags") && loginData.data.school.tags) {
+                        marks_data.tags = tagArrayData
                     }
                     let putTrainingData = loginData.data.school.storeTrainingData ? marks_data.trainingData = value.consolidatedPrediction != value.predictedMarks ? value.trainingDataSet : [] : ''
                     marks_data.questionId = value.format.name,
@@ -646,7 +648,6 @@ const ScannedDetailsComponent = ({
     const handleTextChange = (text, index, array, value) => {
 
         if (isMultipleStudent) {
-
             let len = text.length
             setDisabled(len == 0 ? true : false)
             if (text > 1) {
@@ -654,6 +655,7 @@ const ScannedDetailsComponent = ({
             } else {
                 setValid(false)
             }
+
             let newArray = JSON.parse(JSON.stringify(array))
             newArray[index].consolidatedPrediction = text > 1 ? 0 : text
             setNewArrayValue(newArray)
@@ -663,8 +665,7 @@ const ScannedDetailsComponent = ({
                 if (element.cellId == value.cellId) {
                     structureList.forEach(Datas => {
                         //this'll add into OCRLocal
-                        //  element.consolidatedPrediction = text > 1 ? 0 : text
-                        element.consolidatedPrediction = text < 1 ? 0 : text
+                        element.consolidatedPrediction = text > 1 ? 0 : text
                         //this'll add in  structurelist
                         Datas.data.forEach((el, index) => {
                             if (el.cellId === value.cellId) {
@@ -676,15 +677,6 @@ const ScannedDetailsComponent = ({
                 }
             });
             dispatch(OcrLocalResponseAction(ocrLocalResponse))
-            let regexValue = regxValidation(value.cellId)
-            ocrLocalResponse.layout.cells.forEach(element => {
-                if (element.cellId == value.cellId) {
-                    if (!regexValue[0]) {
-                        showErrorMessage(regexValue[1] ? regexValue[1] : defaultValidateError)
-                    }
-
-                }
-            });
 
         } else {
             let len = text.length
@@ -693,23 +685,15 @@ const ScannedDetailsComponent = ({
             newArray[index].consolidatedPrediction = isMultipleStudent ? text > 1 ? 0 : text : text
             setNewArrayValue(newArray)
 
-
             ocrLocalResponse.layout.cells.forEach(element => {
                 if (element.cellId == value.cellId) {
                     element.consolidatedPrediction = text
-                }
 
+                }
             });
             dispatch(OcrLocalResponseAction(ocrLocalResponse))
-            let regexValue = regxValidation(value.cellId)
-            ocrLocalResponse.layout.cells.forEach(element => {
-                if (element.cellId == value.cellId) {
-                    if (!regexValue[0]) {
-                        showErrorMessage(regexValue[1] ? regexValue[1] : defaultValidateError )
-                    }
 
-                }
-            });
+
             newArray.map((e) => {
                 if (e.format.name == neglectData[3]) {
                     setMaxMarksTotal(e.consolidatedPrediction)
@@ -770,24 +754,9 @@ const ScannedDetailsComponent = ({
 
     const onSubmitClick = async () => {
         let validCell = false
-        let omrMark = false
-        let resultMark = false
-        let regexErrormsglist
         for (let i = 0; i < newArrayValue.length; i++) {
-            let consolidatedlist = newArrayValue[i].consolidatedPrediction
-             regexErrormsglist = newArrayValue[i] && newArrayValue[i].validate && newArrayValue[i].validate.errorMsg
-            let regexlist = newArrayValue[i].validate && newArrayValue[i].validate.regExp
-            let number = consolidatedlist;
-            let regexvalue = new RegExp(regexlist)
-            let resultlist = regexvalue.test(number);
             if (newArrayValue[i].consolidatedPrediction === '') {
                 validCell = true
-            }
-            else if (newArrayValue[i].consolidatedPrediction === 0) {
-                omrMark = true
-            }
-            else if (resultlist === true) {
-                resultMark = true
             }
         }
 
@@ -799,20 +768,13 @@ const ScannedDetailsComponent = ({
         }
         else if (cellOmrValidation[0]) {
             showErrorMessage(`omr value should be 0 to ${cellOmrValidation[1]}`)
-            // showErrorMessage(`omr value should be 0 to ${cellOmrValidation[1]}`)
         }
         else if (!studentValid && !toggleCheckBox) {
             showErrorMessage(Strings.please_correct_student_id)
         }
-        else if (isStudentValid) {
+        else if(isStudentValid){
             showErrorMessage(Strings.student_id_should_be_same)
         }
-        else if (resultMark ===false) {
-            showErrorMessage(Strings.please_correct_marks_data)
-        }
-
-
-
         else {
             if (sumOfObtainedMarks > 0) {
 
@@ -874,9 +836,7 @@ const ScannedDetailsComponent = ({
                 }
             }
         }
-
     }
-
 
     const goNextPage = () => {
         onSubmitClick()
@@ -945,12 +905,12 @@ const ScannedDetailsComponent = ({
     }
 
     const goBackPage = () => {
-
+        
         if (currentIndex - 1 >= 1) {
             if (!studentValid && !toggleCheckBox) {
                 showErrorMessage(Strings.please_correct_student_id)
             }
-            else if (isStudentValid) {
+            else if (isStudentValid){
                 showErrorMessage(Strings.student_id_should_be_same)
             } else {
                 setNextBtn(`Scan Page#${currentIndex}`)
@@ -989,11 +949,21 @@ const ScannedDetailsComponent = ({
         let objects = []
 
         data.map((e) => {
+            
+            let tagArrayData = ''
+            if ( loginData.data.school.hasOwnProperty("tags") && loginData.data.school.tags) {
+                tagArrayData = callTagArrayData(e.format.name)
+            }
             let data = {
                 "questionId": e.format.name,
                 "obtainedMarks": e.consolidatedPrediction,
                 "predictedMarks": loginData.data.school.storeTrainingData ? e.predictedMarks : '',
                 "predictionConfidence": loginData.data.school.storeTrainingData ? e.consolidatedPrediction != e.predictedMarks ? e.predictionConfidence : '' : '',
+                
+            }
+
+            if (loginData.data.school.hasOwnProperty("tags") && loginData.data.school.tags) {
+                data.tags = tagArrayData
             }
 
             if (loginData.data.school.storeTrainingData && e.hasOwnProperty("trainingDataSet")) {
@@ -1104,7 +1074,7 @@ const ScannedDetailsComponent = ({
             setStudentID(rollNumber);
             scanNextSheet(roisData);
             setIsStudentValid(true);
-        } else {
+        }else {
             setStudentID(rollNumber)
             setStdErr("");
             scanNextSheet(roisData);
@@ -1150,7 +1120,8 @@ const ScannedDetailsComponent = ({
                                                     <TextField
                                                         labelText={BrandLabel && BrandLabel.StudentId ? BrandLabel.StudentId : Strings.student_id}
                                                         errorField={stdErr != '' || isNaN(studentId)}
-                                                        errorText={stdErr != '' ? stdErr : Strings.please_correct_student_id}
+                                                        // errorText={BrandLabel && BrandLabel.CorrectId ? stdErr != '' ? stdErr : BrandLabel.CorrectId : stdErr != '' ? stdErr : Strings.please_correct_student_id}
+                                                        errorText={ stdErr != '' ? stdErr : Strings.please_correct_student_id}
                                                         onChangeText={(text) => {
                                                             setStudentID(text)
                                                             if (currentIndex == 1 && multiPage > 0) {
@@ -1198,85 +1169,115 @@ const ScannedDetailsComponent = ({
                                         </View>
 
 
-                                        <View style={{ flexDirection: 'row', marginTop: 20 }}>
+                                            <View style={{ flexDirection: 'row', marginTop: 20 }}>
+                                                {
+                                                    BrandLabel && BrandLabel.ListTableHeading[0] ?
+                                                        BrandLabel.ListTableHeading.map((data) => {
+                                                            return (
+                                                                <MarksHeaderTable
+                                                                    customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
+                                                                    key={data}
+                                                                    rowTitle={data}
+                                                                    rowBorderColor={AppTheme.TAB_BORDER}
+                                                                    editable={false}
+                                                                />
+                                                            )
+                                                        })
+                                                        :
+                                                        loginData.data.school.tags
+                                                        ?
+                                                        TABLE_HEADER_WITH_TAG.map((data) => {
+                                                            return (
+                                                                <MarksHeaderTable
+                                                                    customRowStyle={{ width: '25%', backgroundColor: AppTheme.TABLE_HEADER }}
+                                                                    key={data}
+                                                                    rowTitle={data}
+                                                                    rowBorderColor={AppTheme.TAB_BORDER}
+                                                                    editable={false}
+                                                                />
+                                                            )
+                                                        })
+                                                        : 
+                                                        TABLE_HEADER.map((data) => {
+                                                            return (
+                                                                <MarksHeaderTable
+                                                                    customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
+                                                                    key={data}
+                                                                    rowTitle={data}
+                                                                    rowBorderColor={AppTheme.TAB_BORDER}
+                                                                    editable={false}
+                                                                />
+                                                            )
+                                                        })
+                                                }
+                                            </View>
+
                                             {
-                                                BrandLabel && BrandLabel.ListTableHeading[0] ?
-                                                    BrandLabel.ListTableHeading.map((data) => {
-                                                        return (
+                                                newArrayValue.map((element, index) => {
+                                                    return (
+                                                        <View element={element} key={index} style={{ flexDirection: 'row' }}>
+
                                                             <MarksHeaderTable
-                                                                customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
-                                                                key={data}
-                                                                rowTitle={data}
-                                                                rowBorderColor={AppTheme.TAB_BORDER}
+                                                                customRowStyle={{ width: loginData.data.school.tags ? '25%' : '30%', }}
+                                                                rowTitle={renderSRNo(element, index)}
+                                                                rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                                                 editable={false}
+                                                                keyboardType={'number-pad'}
                                                             />
-                                                        )
-                                                    })
-                                                    :
-                                                    TABLE_HEADER.map((data) => {
-                                                        return (
                                                             <MarksHeaderTable
-                                                                customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
-                                                                key={data}
-                                                                rowTitle={data}
-                                                                rowBorderColor={AppTheme.TAB_BORDER}
+                                                                customRowStyle={{ width: loginData.data.school.tags ? '25%' : '30%', }}
+                                                                rowTitle={element.format.value}
+                                                                rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                                                 editable={false}
+                                                                keyboardType={'number-pad'}
                                                             />
-                                                        )
-                                                    })
+                                                            <MarksHeaderTable
+                                                                customRowStyle={{ width: loginData.data.school.tags ? '25%' : '30%', }}
+                                                                rowTitle={element.consolidatedPrediction}
+                                                                rowBorderColor={markBorderOnCell(element)}
+                                                                editable={true}
+                                                                keyboardType={'number-pad'}
+                                                                maxLength={lengthAccordingSheet(element)}
+                                                                onChangeText={(text) => {
+                                                                    handleTextChange(text.trim(), index, newArrayValue, element)
+                                                                }}
+
+                                                            />
+                                                        {
+                                                            loginData.data.school.tags
+                                                            &&
+                                                            <MarksHeaderTable
+                                                                customRowStyle={{ width: '25%', }}
+                                                                rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
+                                                                editable={false}
+                                                                icon={true}
+                                                                setIsModalVisible={setIsModalVisible}
+                                                                setTagData={setTagData}
+                                                                index={index}
+                                                                rowTitle={element.format.name}
+                                                                studentsAndExamData={studentsAndExamData}
+                                                                setQuestionIdData={setQuestionIdData}
+                                                            />
+                                                        }
+
+                                                        </View>
+                                                    )
+                                                    // }
+                                                })
                                             }
-                                        </View>
 
-                                        {
-                                            newArrayValue.map((element, index) => {
-                                                return (
-                                                    <View element={element} key={index} style={{ flexDirection: 'row' }}>
-
-                                                        <MarksHeaderTable
-                                                            customRowStyle={{ width: '30%', }}
-                                                            rowTitle={renderSRNo(element, index)}
-                                                            rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
-                                                            editable={false}
-                                                            keyboardType={'number-pad'}
-                                                        />
-                                                        <MarksHeaderTable
-                                                            customRowStyle={{ width: '30%', }}
-                                                            rowTitle={element.format.value}
-                                                            rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
-                                                            editable={false}
-                                                            keyboardType={'number-pad'}
-                                                        />
-                                                        <MarksHeaderTable
-                                                            customRowStyle={{ width: '30%', }}
-                                                            rowTitle={element.consolidatedPrediction}
-                                                            rowBorderColor={markBorderOnCell(element)}
-                                                            editable={true}
-                                                            keyboardType={'number-pad'}
-                                                            maxLength={lengthAccordingSheet(element)}
-                                                            onChangeText={(text) => {
-                                                                handleTextChange(text.trim(), index, newArrayValue, element)
-                                                            }}
-
-                                                        />
-
-                                                    </View>
-                                                )
-                                                // }
-                                            })
-                                        }
-
-                                        <View style={[styles.viewnxtBtnStyle1, { paddingTop: '7%' }]}>
-                                            <ButtonComponent
-                                                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE, marginTop: '5%' }]}
-                                                btnText={btnName.toUpperCase()}
-                                                onPress={() => isMultipleStudent ? goBackFrame() : multiPage > 0 ? goBackPage() : onBackButtonClick()}
-                                            />
-                                            <ButtonComponent
-                                                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE, marginTop: '5%' }]}
-                                                btnText={nextBtn.toUpperCase()}
-                                                onPress={() => isMultipleStudent ? goNextFrame() : multiPage > 0 ? goNextPage() : onSubmitClick()}
-                                            />
-                                        </View>
+                                            <View style={[styles.viewnxtBtnStyle1, { paddingTop: '7%' }]}>
+                                                <ButtonComponent
+                                                    customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE, marginTop: '5%' }]}
+                                                    btnText={btnName.toUpperCase()}
+                                                    onPress={() => isMultipleStudent ? goBackFrame() : multiPage > 0 ? goBackPage() : onBackButtonClick()}
+                                                />
+                                                <ButtonComponent
+                                                    customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE, marginTop: '5%' }]}
+                                                    btnText={nextBtn.toUpperCase()}
+                                                    onPress={() => isMultipleStudent ? goNextFrame() : multiPage > 0 ? goNextPage() : onSubmitClick()}
+                                                />
+                                            </View>
                                     </ScrollView>
                                 </View>
 
@@ -1287,6 +1288,15 @@ const ScannedDetailsComponent = ({
 
 
                     {isLoading && <Spinner animating={isLoading} iconShow={false} />}
+                    <TaggingModal 
+                        setIsModalVisible={setIsModalVisible} 
+                        isModalVisible={isModalVisible} 
+                        tagData={tagData} 
+                        setTagData={setTagData}
+                        studentsAndExamData={studentsAndExamData}
+                        bgColor={multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}
+                        questionIdData={questionIdData}
+                    />
                 </ScrollView>
             </View>
         </View>
@@ -1302,7 +1312,8 @@ const mapStateToProps = (state) => {
         multiBrandingData: state.multiBrandingData.response.data,
         scanedData: state.scanedData.response,
         bgFlag: state.bgFlag,
-        multiPageReducer: state.multiPage.response
+        multiPageReducer: state.multiPage.response,
+        studentsAndExamData: state.studentsAndExamData
     }
 }
 

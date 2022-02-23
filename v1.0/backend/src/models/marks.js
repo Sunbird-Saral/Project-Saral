@@ -56,6 +56,7 @@ const marksSchema = new mongoose.Schema({
             questionId: { type: String, required: true },
             predictedMarks: {type: String,required: false},
             predictionConfidence: {type: Array,required: false},
+            tags: {type: Array,required: false},
             obtainedMarks: { type: String, required: true  },
             trainingData: {type: Array,required: false}
           }

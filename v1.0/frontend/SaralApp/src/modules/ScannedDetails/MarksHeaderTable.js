@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, TextInput, Image } from 'react-native';
 import AppTheme from '../../utils/AppTheme';
+import { Assets } from '../../assets';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const MarksHeaderTable = ({
     customRowStyle,
@@ -10,16 +12,38 @@ const MarksHeaderTable = ({
     onChangeText,
     rowBorderColor,
     keyboardType,
-    maxLength
+    maxLength,
+    setIsModalVisible,
+    setTagData,
+    studentsAndExamData,
+    index,
+    setQuestionIdData
 }) => {
+
+    const setDataIntoModal = (value) => {
+        studentsAndExamData.data.exams[0].questions.forEach((element,i) => {
+            if (element.questionId.toString() == value.toString() || index == i) {
+                element.tags.forEach((data,i)=>{
+                    data.questionId = element.questionId
+                })
+                setTagData(element.tags)
+                setQuestionIdData(element.questionId)
+            }
+        });
+    }
+
     return (
         <View style={[styles.container, customRowStyle, { borderColor: rowBorderColor }]}>
-            {icon ?
-                <Image
-                    style={{ height: 20, width: 20 }}
-                    source={rowTitle == 'Passed' ? require('../../assets/images/pass.png') : require('../../assets/images/fail.png')}
-                    resizeMode={'contain'}
-                />
+            {
+            icon ?
+            <TouchableOpacity
+            onPress={() => {
+                setDataIntoModal(rowTitle)
+                setIsModalVisible(true)
+            }}
+            >
+                <Image style={{width:25,height:25}}  source={Assets.Tagging}/>
+                </TouchableOpacity>
                 :
                 <TextInput
                     style={styles.titleTextStyle}
