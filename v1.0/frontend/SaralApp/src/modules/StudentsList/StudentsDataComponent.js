@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Alert, Text, TouchableOpacity, View } from 'react-native';
 import AppTheme from '../../utils/AppTheme';
-import { dispatchModalMessage, dispatchModalStatus, monospace_FF } from '../../utils/CommonUtils';
+import { dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF } from '../../utils/CommonUtils';
 import { getScannedDataFromLocal } from '../../utils/StorageUtils';
 import Strings from '../../utils/Strings';
 import { styles } from './StudentsDataStyle';
@@ -69,8 +69,8 @@ const StudentsDataComponent = ({
                     message : Strings.student_cant_be_mark_as_absent_once_scanned,
                     isOkAvailable : false
                 }
-                dispatch(dispatchModalStatus(true));
-                dispatch(dispatchModalMessage(data));
+                dispatch(dispatchCustomModalStatus(true));
+                dispatch(dispatchCustomModalMessage(data));
             } else {
                 data.studentAvailability = false
                 setIsPresent(false)

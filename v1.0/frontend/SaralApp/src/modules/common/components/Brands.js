@@ -22,7 +22,7 @@ import axios from 'axios';
 
 import { getScannedDataFromLocal, setScannedDataIntoLocal } from '../../../utils/StorageUtils';
 import { collectErrorLogs } from '../../CollectErrorLogs';
-import { dispatchModalMessage, dispatchModalStatus, monospace_FF } from '../../../utils/CommonUtils';
+import { dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF } from '../../../utils/CommonUtils';
 
 class Brands extends PureComponent {
     constructor() {
@@ -136,9 +136,10 @@ class Brands extends PureComponent {
                                 title : Strings.message_text,
                                 message : "Something went wrong with background process, please contact Admin",
                                 isOkAvailable : false,
+                                isCancel : false
                             }
-                            dispatch(dispatchModalStatus(true));
-                            dispatch(dispatchModalMessage(data));
+                            dispatch(dispatchCustomModalStatus(true));
+                            dispatch(dispatchCustomModalMessage(data));
                             storeFactory.dispatch(self.flagAction(false))
                         });
                 });

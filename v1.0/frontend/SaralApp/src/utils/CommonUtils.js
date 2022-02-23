@@ -31,14 +31,14 @@ export const cryptoText = (text) => {
     return encText
 }
 
-export const dispatchModalMessage = (value) => {
+export const dispatchCustomModalMessage = (value) => {
     return ({
-        type: C.MODAL_MESSAGE,
+        type: C.CUSTOM_MODAL_MESSAGE,
         payload: value
     })
 }
 
-export const dispatchModalStatus = (value) => {
+export const dispatchCustomModalStatus = (value) => {
     return ({
         type: C.CUSTOM_MODAL_STATUS,
         payload: value

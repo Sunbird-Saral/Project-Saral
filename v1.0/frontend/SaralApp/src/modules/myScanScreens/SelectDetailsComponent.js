@@ -17,13 +17,11 @@ import { OcrLocalResponseAction } from '../../flux/actions/apis/OcrLocalResponse
 import { GetStudentsAndExamData } from '../../flux/actions/apis/getStudentsAndExamData';
 import { FilteredDataAction } from '../../flux/actions/apis/filteredDataActions';
 import APITransport from '../../flux/actions/transport/apitransport';
-import { cryptoText, monospace_FF, SCAN_TYPES, validateToken } from '../../utils/CommonUtils';
+import { cryptoText, dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF, SCAN_TYPES, validateToken } from '../../utils/CommonUtils';
 import { ROIAction } from '../StudentsList/ROIAction';
 import { GetAbsentStudentData } from '../../flux/actions/apis/getAbsentStudentData';
 import { LoginAction } from '../../flux/actions/apis/LoginAction';
 import { LogoutAction } from '../../flux/actions/apis/LogoutAction';
-import { getScannedDataFromLocal } from '../../utils/StorageUtils';
-import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
 
 //components
 import ShareComponent from '../common/components/Share';
@@ -32,7 +30,6 @@ import ModalView from '../common/components/ModalView';
 import CustomPopup from '../common/components/CustomPopup';
 
 //redux
-import { dispatchModalMessage , dispatchModalStatus}  from '../../utils/CommonUtils'
 
 const clearState = {
     defaultSelected: Strings.select_text,
@@ -296,15 +293,16 @@ class SelectDetailsComponent extends Component {
         })
     }
 
-     callCustomModal = (title, message, isAvailable,okFunction) => {
+     callCustomModal = (title, message, isAvailable,okFunction,cancel) => {
         let data = {
             title: title,
             message: message,
             isOkAvailable: isAvailable,
-            okFunc : okFunction
+            okFunc : okFunction,
+            isCancel : cancel
         }
-        dispatch(dispatchModalStatus(true));
-        dispatch(dispatchModalMessage(data));
+        dispatch(dispatchCustomModalStatus(true));
+        dispatch(dispatchCustomModalMessage(data));
     }
 
     loginAgain = async () => {
@@ -322,7 +320,7 @@ class SelectDetailsComponent extends Component {
             })
         }
         else {
-            this.callCustomModal(Strings.message_text,Strings.please_try_again,true,this.loginAgain)
+            this.callCustomModal(Strings.message_text,Strings.please_try_again,true,this.loginAgain,true)
         }
     }
 
@@ -414,9 +412,9 @@ class SelectDetailsComponent extends Component {
                         pickerDate: new Date()
                     }, () => {
                         if (apiStatus && apiStatus.message) {
-                            this.callCustomModal(Strings.message_text,Strings.please_try_again,false);
+                            this.callCustomModal(Strings.message_text,Strings.please_try_again,false,false);
                         } else {
-                            this.callCustomModal(Strings.message_text,Strings.please_try_again,false);
+                            this.callCustomModal(Strings.message_text,Strings.please_try_again,false,false);
                         }
                     })
                 }

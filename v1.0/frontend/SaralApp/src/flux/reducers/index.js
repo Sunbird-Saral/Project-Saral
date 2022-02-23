@@ -16,6 +16,7 @@ import multiPageReducer from './multiPageReducer';
 import modalStatus from './modalStatus';
 import ModalMessage from './ModalMessage';
 import customModalStatus from './customModalStatus';
+import customModalMessage from './customModalMessage';
 
 export default {
     apiStatus: apiStatus,
@@ -35,7 +36,8 @@ export default {
     multiPage: multiPageReducer,
     modalStatus: modalStatus,
     customModalStatus: customModalStatus,
-    modalMessage: ModalMessage
+    modalMessage: ModalMessage,
+    customModalMessage: customModalMessage
 
 
 }

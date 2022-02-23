@@ -35,6 +35,7 @@ const modalView = ({
         onRequestClose={() => {
           setModalVisible()
         }}
+        statusBarTranslucent={true}
       >
         <View style={styles.centeredView}>
           <View style={[styles.cardView,]}>

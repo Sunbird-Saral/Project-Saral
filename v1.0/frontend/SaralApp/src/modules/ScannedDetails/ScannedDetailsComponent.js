@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, ScrollView, ToastAndroid, Alert, Image, TouchableOpacity, PermissionsAndroid } from 'react-native';
+import { Text, View, ScrollView } from 'react-native';
 import { connect, useDispatch } from 'react-redux';
 import AppTheme from '../../utils/AppTheme';
-import { CELL_OMR, dispatchModalMessage, dispatchModalStatus, extractionMethod, monospace_FF, multipleStudent, neglectData, SCAN_TYPES, studentLimitSaveInLocal, student_ID, TABLE_HEADER } from '../../utils/CommonUtils';
+import { CELL_OMR, dispatchCustomModalMessage, dispatchCustomModalStatus,  monospace_FF, multipleStudent, neglectData, SCAN_TYPES, studentLimitSaveInLocal, student_ID, TABLE_HEADER } from '../../utils/CommonUtils';
 import Strings from '../../utils/Strings';
 import ShareComponent from '../common/components/Share';
 
@@ -224,14 +224,15 @@ const ScannedDetailsComponent = ({
 
     }
 
-    const callCustomModal = (title, message, isAvailable) => {
+    const callCustomModal = (title, message, isAvailable, cancel) => {
         let data = {
             title: title,
             message: message,
-            isOkAvailable: false
+            isOkAvailable: isAvailable,
+            isCancel : cancel
         }
-        dispatch(dispatchModalStatus(true));
-        dispatch(dispatchModalMessage(data));
+        dispatch(dispatchCustomModalStatus(true));
+        dispatch(dispatchCustomModalMessage(data));
     }
 
     const callSingleStudentSheetData = () => {
@@ -352,7 +353,7 @@ const ScannedDetailsComponent = ({
         }
 
         else if (duplication) {
-            callCustomModal(Strings.message_text, Strings.Student_ID_Shouldnt_be_duplicated, false);
+            callCustomModal(Strings.message_text, Strings.Student_ID_Shouldnt_be_duplicated, false,false);
         }
         else if (disable) {
             showErrorMessage(Strings.please_correct_marks_data)
@@ -579,14 +580,14 @@ const ScannedDetailsComponent = ({
 
                         });
                         if (bgFlag) {
-                            callCustomModal(Strings.message_text, Strings.auto_sync_in_progress_please_wait, false);
+                            callCustomModal(Strings.message_text, Strings.auto_sync_in_progress_please_wait, false,false);
                         } else {
                             setScannedDataIntoLocal(getDataFromLocal)
                             goToMyScanScreen()
                         }
                     }
                 } else {
-                    callCustomModal(Strings.message_text, Strings.you_can_save_only_limited_student_In_Order_to_continue_have_to_save_first, false);
+                    callCustomModal(Strings.message_text, Strings.you_can_save_only_limited_student_In_Order_to_continue_have_to_save_first, false,false);
                 }
 
             } else if (saveObj.studentsMarkInfo.length <= studentLimitSaveInLocal) {
@@ -599,7 +600,7 @@ const ScannedDetailsComponent = ({
             setScannedDataIntoLocal([saveObj])
             goToMyScanScreen()
         } else {
-            callCustomModal(Strings.message_text, Strings.you_can_save_only_limited_student_In_Order_to_continue_have_to_save_first, false);
+            callCustomModal(Strings.message_text, Strings.you_can_save_only_limited_student_In_Order_to_continue_have_to_save_first, false,false);
         }
     }
 
@@ -752,7 +753,7 @@ const ScannedDetailsComponent = ({
 
 
     const showErrorMessage = (message) => {
-        callCustomModal(Strings.message_text, message, false);
+        callCustomModal(Strings.message_text, message, false,false);
     }
 
     const validateCellOMR = (isMultiple) => {

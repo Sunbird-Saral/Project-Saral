@@ -32,12 +32,11 @@ import axios from 'axios';
 //components
 import { scanStatusDataAction } from '../../modules/ScanStatus/scanStatusDataAction';
 import Spinner from '../common/components/loadingIndicator';
-import { cryptoText, monospace_FF, validateToken } from '../../utils/CommonUtils';
+import { cryptoText, dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF, validateToken } from '../../utils/CommonUtils';
 import { LoginAction } from '../../flux/actions/apis/LoginAction';
 
 import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction'
 import { collectErrorLogs } from '../CollectErrorLogs';
-import CustomPopup from '../common/components/CustomPopup';
 
 
 const StudentsList = ({
@@ -269,8 +268,8 @@ useEffect(() => {
                         message : Strings.something_went_wrong_please_try_again,
                         isOkAvailable : false
                     }
-                    dispatch(dispatchModalStatus(true))
-                    dispatch(dispatchModalMessage(data));
+                    dispatch(dispatchCustomModalStatus(true))
+                    dispatch(dispatchCustomModalMessage(data));
                     setIsLoading(false)
                     clearTimeout(id)
                 });
@@ -302,8 +301,8 @@ useEffect(() => {
                 isOkAvailable : true,
                 okFunc : loginAgain()
             }
-            dispatch(dispatchModalStatus(true));
-            dispatch(dispatchModalMessage(data));
+            dispatch(dispatchCustomModalStatus(true));
+            dispatch(dispatchCustomModalMessage(data));
         }
     }
 

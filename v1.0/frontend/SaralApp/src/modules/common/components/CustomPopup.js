@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { ScrollView, View, Text, Modal, TouchableOpacity, Dimensions } from 'react-native';
 import { connect, useDispatch } from 'react-redux';
 import AppTheme from '../../../utils/AppTheme';
-const {  width } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 import C from '../../../flux/actions/constants';
 import Strings from '../../../utils/Strings';
 import { monospace_FF } from '../../../utils/CommonUtils';
@@ -15,12 +15,14 @@ const CustomPopup = ({
     customStyle,
     customPopStyle,
     cancel_button,
-    ok_button=true,
+    ok_button = true,
     customTitleTextStyle,
     customMessageTxtStyle,
     bgColor,
-    modalMessage
+    customModalMessage
 }) => {
+
+    console.log("customModalMessage", customModalMessage);
 
     //Hooks
     const dispatch = useDispatch();
@@ -41,6 +43,8 @@ const CustomPopup = ({
     const onOkBtnPress = () => {
         dispatch(dispatchModalStatus(false));
     }
+
+    console.log("customMOdalMessage", customModalMessage);
 
     return (
         <Modal
@@ -73,8 +77,8 @@ const CustomPopup = ({
                             padding: 14
 
                         }, customPopStyle]}>
-                        <Text style={[styles.titleTextStyle, customTitleTextStyle]}>{modalMessage.title}</Text>
-                        <Text style={[styles.messageTextStyle, customMessageTxtStyle]}>{modalMessage.message}</Text>
+                        <Text style={[styles.titleTextStyle, customTitleTextStyle]}>{customModalMessage.title}</Text>
+                        <Text style={[styles.messageTextStyle, customMessageTxtStyle]}>{customModalMessage.message}</Text>
                         <View
                             style={{
                                 flexDirection: 'row',
@@ -83,20 +87,29 @@ const CustomPopup = ({
                                 marginRight: width * .04,
                                 marginTop: 20
                             }}>
-                            {cancel_button ?
+                            {customModalMessage.hasOwnProperty("isCancel") && customModalMessage.isCancel ?
                                 <TouchableOpacity
-                                    onPress={onCancelPress}
+                                    onPress={onOkBtnPress}
                                     activeOpacity={0.7}
                                     style={{
                                         paddingHorizontal: width * .03,
-                                        justifyContent: "center"
+                                        justifyContent: "center",
+                                        marginRight:10
                                     }}>
-                                    <Text style={[styles.TextStyle]}> {Strings.cancel_button} </Text>
+                                    <Text style={[styles.TextStyle,{color:'black'}]}> {Strings.cancel_button} </Text>
                                 </TouchableOpacity> : null}
 
                             {ok_button ?
                                 <TouchableOpacity
-                                    onPress={modalMessage.isOkAvailable ? modalMessage.okFunc : onOkBtnPress}
+                                    onPress={() => {
+                                        if (customModalMessage.isOkAvailable) {
+                                            customModalMessage.okFunc();
+                                            onOkBtnPress();
+
+                                        } else {
+                                            onOkBtnPress()
+                                        }
+                                    }}
                                     style={{
                                         paddingHorizontal: "6%",
                                         justifyContent: "center",
@@ -143,7 +156,7 @@ const styles = {
         textAlign: 'center',
         fontSize: AppTheme.FONT_SIZE_REGULAR,
         fontWeight: "bold",
-        fontFamily : monospace_FF
+        fontFamily: monospace_FF
     }
 
 };
@@ -151,10 +164,10 @@ const styles = {
 const mapStateToProps = (state) => {
     return {
         customModalStatus: state.customModalStatus,
-        modalMessage: state.modalMessage
+        customModalMessage: state.customModalMessage
     }
 }
 
 
 
-export default (connect(mapStateToProps, null)(CustomPopup));
+export default React.memo((connect(mapStateToProps, null)(CustomPopup)));
