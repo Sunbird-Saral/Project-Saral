@@ -54,6 +54,10 @@ export const TABLE_HEADER = [
     "Sr No", "Questions", "Marks"
 ]
 
+export const TABLE_HEADER_WITH_TAG = [
+    "Sr No", "Questions", "Marks", "Tags"
+]
+
 export const Exam_QuestionHeader = [
     "Question Id", "Indicator Title", "Question Marks"
 ]

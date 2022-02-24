@@ -109,6 +109,8 @@ export default strings = new LocalizedStrings({
         about_menu: 'About',
         ok_button: "OK",
         cancel_button: 'Cancel',
-        error_message: "Error"
+        error_message: "Error",
+        add_new_tag: "Add New Tag",
+        add_tag: 'Add Tag'
     }
 })
