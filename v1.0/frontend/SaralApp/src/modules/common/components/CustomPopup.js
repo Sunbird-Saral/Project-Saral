@@ -23,7 +23,6 @@ const CustomPopup = ({
     customModalMessage
 }) => {
 
-    console.log("customModalMessage", customModalMessage);
 
     //Hooks
     const dispatch = useDispatch();
@@ -45,7 +44,6 @@ const CustomPopup = ({
         dispatch(dispatchModalStatus(false));
     }
 
-    console.log("customMOdalMessage", customModalMessage);
 
     return (
         <Modal
