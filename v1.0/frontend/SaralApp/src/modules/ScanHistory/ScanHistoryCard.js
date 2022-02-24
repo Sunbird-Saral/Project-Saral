@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
 import AppTheme from '../../utils/AppTheme';
 import { getErrorMessage, getLoginCred, getScanData, getScannedDataFromLocal, setErrorMessage, setScannedDataIntoLocal } from '../../utils/StorageUtils';
-import { Exam_QuestionHeader, monospace_FF } from '../../utils/CommonUtils';
+import { dispatchCustomModalMessage, dispatchCustomModalStatus, Exam_QuestionHeader, monospace_FF } from '../../utils/CommonUtils';
 import ExamDetailsPopup from '../common/components/ExamDetailsPopup';
 import ButtonComponent from '../common/components/ButtonComponent';
 import Strings from '../../utils/Strings';
@@ -77,6 +77,18 @@ const ScanHistoryCard = ({
     }
     const dispatch = useDispatch()
 
+    const callCustomModal = (title, message, isAvailable, func, cancel) => {
+        let data = {
+            title: title,
+            message: message,
+            isOkAvailable: isAvailable,
+            okFunc: func,
+            isCancel : cancel
+        }
+        dispatch(dispatchCustomModalStatus(true));
+        dispatch(dispatchCustomModalMessage(data));
+    }
+
     const onPressSaveInDB = async () => {
         const data = await getScannedDataFromLocal();
         const { subject, examDate } = filteredData.response
@@ -117,7 +129,7 @@ const ScanHistoryCard = ({
 
                 if (apiStatus && apiStatus.error && apiStatus.message != null) {
 
-                    Alert.alert(Strings.contactAdmin)
+                    callCustomModal(Strings.message_text,Strings.contactAdmin,false);
                     setIsLoading(false)
 
                 } else {
@@ -127,17 +139,17 @@ const ScanHistoryCard = ({
 
                 }
             } else {
-                Alert.alert('There is no data!')
+                callCustomModal(Strings.message_text,Strings.there_is_no_data,false);
                 setIsLoading(false)
             }
         }else{
-            Alert.alert(Strings.auto_sync_in_progress_please_wait)
+            callCustomModal(Strings.message_text,Strings.auto_sync_in_progress_please_wait,false);
         }
-
-        }
-        else {
-            setIsLoading(false)
-            Alert.alert('There is no data!')
+        
+    }
+    else {
+        setIsLoading(false)
+        callCustomModal(Strings.message_text,Strings.there_is_no_data,false);
         }
     }
 
@@ -174,10 +186,7 @@ const ScanHistoryCard = ({
                 }
             })
                 .then(function (res) {
-                    Alert.alert(Strings.message_text, Strings.saved_successfully, [{
-                        text: Strings.ok_text, onPress: () => {
-                        }
-                    }])
+                    callCustomModal(Strings.message_text,Strings.saved_successfully,false);
                     apiResponse = res
                     clearTimeout(id)
                     api.processResponse(res)
@@ -190,7 +199,7 @@ const ScanHistoryCard = ({
                     collectErrorLogs("ScanHistoryCard.js","FetchSavedScannedData",api.apiEndPoint(),err,false)
                     console.warn("Error", err);
                     console.warn("Error", err.response);
-                    Alert.alert("Something Went Wrong")
+                    callCustomModal(Strings.message_text,Strings.something_went_wrong_please_try_again,false);
                     setIsLoading(false)
                     clearTimeout(id)
                 });

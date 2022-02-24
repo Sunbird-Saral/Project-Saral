@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { FlatList, Text, View, BackHandler, Image, TouchableOpacity, Linking, Share, Alert} from 'react-native';
 
 //redux
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 
 //constant
 import Strings from '../../utils/Strings';
@@ -23,7 +23,7 @@ import { getPresentAbsentStudent, getScannedDataFromLocal,getErrorMessage } from
 import { Assets } from '../../assets';
 import ShareComponent from '../common/components/Share';
 import MultibrandLabels from '../common/components/multibrandlabels';
-import { monospace_FF } from '../../utils/CommonUtils';
+import { dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF } from '../../utils/CommonUtils';
 
 
 const ScanStatusLocal = ({
@@ -39,7 +39,7 @@ const ScanStatusLocal = ({
     const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.scanHistory[0]
     
     const data =(JSON.stringify(loacalstutlist[0],null, 2))
-   
+    const dispatch = useDispatch()
 
 
 useEffect(
@@ -53,6 +53,18 @@ useEffect(
     }, []),
 );
 
+const callCustomModal = (title, message, isAvailable, func, cancel) => {
+    let data = {
+        title: title,
+        message: message,
+        isOkAvailable: isAvailable,
+        okFunc: func,
+        isCancel : cancel
+    }
+    dispatch(dispatchCustomModalStatus(true));
+    dispatch(dispatchCustomModalMessage(data));
+}
+
     const onShare = async () => {
         try {
             const result = await Share.share({
@@ -65,14 +77,14 @@ useEffect(
                     // shared with activity type of result.activityType
                 } else {
                     // shared
-                    Alert.alert(Strings.shareDataExceed)
+                    callCustomModal(Strings.message_text,Strings.shareDataExceed,false);
                 }
             } else if (result.action === Share.dismissedAction) {
                 // dismissed
             }
         } catch (error) {
             console.log(error.message);
-            Alert.alert(Strings.shareDataExceed)
+            callCustomModal(Strings.message_text,Strings.shareDataExceed,false);
             alert(error.message);
         }
     };

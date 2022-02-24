@@ -104,6 +104,7 @@ export default strings = new LocalizedStrings({
         Student_ID_Shouldnt_be_duplicated : "ID Shouldn't be duplicated",
         Sum_Of_All_obtained_marks: "Sum Of All obtained result should be equal to result Obtained",
         process_failed_try_again : 'Process failed try again later ',
+        there_is_no_data: 'There is no data!',
         help_menu: 'Help',
         about_menu: 'About',
         ok_button: "OK",
