@@ -360,6 +360,7 @@ class LoginComponent extends Component {
                         </View>
                     </View>
                 </ScrollView>
+                {Loading && <Spinner animating={Loading} />}
             </View>
         }
         return (
@@ -435,6 +436,7 @@ class LoginComponent extends Component {
                         </View>
                     </View>
                 </ScrollView>
+                {Loading && <Spinner animating={Loading} />}
             </View>
         );
     }
