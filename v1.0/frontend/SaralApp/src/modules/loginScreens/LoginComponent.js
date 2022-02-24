@@ -41,13 +41,11 @@ class LoginComponent extends Component {
     async componentDidMount() {
         const schollId = await this.rememberMeSchoolId();
         const password = await this.rememberMePassword();
-        const logindata = this.props.loginData&&this.props.loginData.data&&this.props.loginData.data.school.schoolId
-        const locallogindata =schollId == logindata  ? schollId : ""
-        const localpassdata =schollId == logindata  ? password : ""
         this.setState({
             schoolId: schollId || "" ,
             password: password || "" ,
             rememberMe: schollId && password ? true : false,
+            isLoading:false,
           
         });
 
@@ -140,6 +138,7 @@ class LoginComponent extends Component {
                 password: password,
             }, () => {
                 this.callLogin()
+        
             })
         }
 
@@ -157,7 +156,7 @@ class LoginComponent extends Component {
 
     onLoginDetailsChange = (text, type,value) => {
         this.setState({ [type]: text })
-        this.toggleRememberMe()
+         this.toggleRememberMe()
     }
 
     rememberUserfunction = async () => {
@@ -360,7 +359,7 @@ class LoginComponent extends Component {
                         </View>
                     </View>
                 </ScrollView>
-                {Loading && <Spinner animating={Loading} />}
+                {isLoading && <Spinner animating={isLoading} />}
             </View>
         }
         return (
@@ -436,7 +435,7 @@ class LoginComponent extends Component {
                         </View>
                     </View>
                 </ScrollView>
-                {Loading && <Spinner animating={Loading} />}
+                {isLoading && <Spinner animating={isLoading} />}
             </View>
         );
     }
