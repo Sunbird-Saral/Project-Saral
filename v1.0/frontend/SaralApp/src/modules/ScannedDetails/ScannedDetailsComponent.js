@@ -428,14 +428,20 @@ const ScannedDetailsComponent = ({
 
     const callTagArrayData = (formatName) =>{
         let tagArray = []
-        studentsAndExamData.data.exams[0].questions.filter((element,i) => {
-            element.tags.filter((value)=>{
-                if (value.hasOwnProperty("questionId") && value.questionId.trim() == formatName.trim() && value.selected) {
-                    tagArray.push(value.tagName)
-                    value.selected = false
+        for(const element of studentsAndExamData.data.exams){
+            if (filteredData.subject === element.subject) {
+                for(const _el of element.questions) {
+                    _el.tags.filter((value) => {
+                        if (value.hasOwnProperty("questionId") && value.questionId.trim() == formatName.trim() && value.selected) {
+                            tagArray.push(value.tagName)
+                            value.selected = false
+                        }
+                    })
+
                 }
-            })
-        });
+                break;
+                }
+            }
         return tagArray
     }
 
@@ -1307,6 +1313,7 @@ const ScannedDetailsComponent = ({
                                                                 rowTitle={element.format.name}
                                                                 studentsAndExamData={studentsAndExamData}
                                                                 setQuestionIdData={setQuestionIdData}
+                                                                subject={filteredData.subject}
                                                             />
                                                         }
 
@@ -1346,6 +1353,7 @@ const ScannedDetailsComponent = ({
                         studentsAndExamData={studentsAndExamData}
                         bgColor={multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}
                         questionIdData={questionIdData}
+                        subject={filteredData.subject}
                     />
                 </ScrollView>
             </View>
