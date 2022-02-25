@@ -59,7 +59,7 @@ const CustomPopup = ({
                 flex: 1,
                 shadowColor: "black",
                 shadowOpacity: .2,
-                backgroundColor: "#000000A6",
+                backgroundColor: "#00000080",
                 shadowOffset: { height: 3, width: 3 },
                 shadowRadius: 10,
 

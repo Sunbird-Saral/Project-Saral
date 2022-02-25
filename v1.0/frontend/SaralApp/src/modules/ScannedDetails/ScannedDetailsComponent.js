@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, ScrollView } from 'react-native';
+import { Text, View, ScrollView, ToastAndroid, Alert, Image, TouchableOpacity, PermissionsAndroid } from 'react-native';
 import { connect, useDispatch } from 'react-redux';
 import AppTheme from '../../utils/AppTheme';
-import { CELL_OMR, dispatchCustomModalMessage, dispatchCustomModalStatus,  monospace_FF, multipleStudent, neglectData, SCAN_TYPES, studentLimitSaveInLocal, student_ID, TABLE_HEADER } from '../../utils/CommonUtils';
+import { CELL_OMR, extractionMethod, multipleStudent, MULTIPLE_TAG_DATAS,dispatchCustomModalMessage, dispatchCustomModalStatus,monospace_FF , neglectData, SCAN_TYPES, studentLimitSaveInLocal, student_ID, TABLE_HEADER, TABLE_HEADER_WITH_TAG } from '../../utils/CommonUtils';
 import Strings from '../../utils/Strings';
 import ShareComponent from '../common/components/Share';
 
@@ -79,11 +79,11 @@ const ScannedDetailsComponent = ({
     const [isModalVisible ,setIsModalVisible] = useState(false)
     const [tagData ,setTagData] = useState([])
     const [questionIdData ,setQuestionIdData] = useState()
+    const [omrResultErr, setOmrResult] = useState()
 
     const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.scannedDetailComponent[0]
-
-
-
+    const defaultValidateError = ocrLocalResponse.layout && ocrLocalResponse.layout.resultValidation && ocrLocalResponse.layout.resultValidation.validate.errorMsg
+    const defaultValidateExp = ocrLocalResponse.layout && ocrLocalResponse.layout.resultValidation && ocrLocalResponse.layout.resultValidation.validate.regExp
     const inputRef = React.createRef();
     const dispatch = useDispatch()
 
@@ -305,6 +305,26 @@ const ScannedDetailsComponent = ({
         })
     }
 
+    const regxValidation = (cellId) => {
+        let result
+        let regexErrormsg
+        for (let i = 0; i < ocrLocalResponse.layout.cells.length; i++) {
+            if (ocrLocalResponse.layout.cells[i].cellId == cellId) {
+                let consolidated = ocrLocalResponse.layout.cells[i].consolidatedPrediction
+                let ocrcells = ocrLocalResponse.layout.cells[i]
+                regexErrormsg = ocrcells && ocrcells.validate && ocrcells.validate.errorMsg
+                let regexExp = ocrcells && ocrcells.validate && ocrcells.validate.regExp ? ocrcells.validate.regExp : defaultValidateExp
+                let number = consolidated;
+                let regex = new RegExp(regexExp)
+                result = regex.test(number);
+                // setOmrResult(regexErrormsg)
+                setOmrResult(defaultValidateError)
+
+            }
+        }
+        return [result, regexErrormsg]
+    }
+
 
     const goNextFrame = () => {
 
@@ -329,13 +349,13 @@ const ScannedDetailsComponent = ({
             duplication = false
         }
         if (omrMark) {
-            showErrorMessage(Strings.omr_mark_should_be)
+            showErrorMessage(omrResultErr ? omrResultErr : defaultValidateError || Strings.omr_mark_should_be)
         }
         else if (cellOmrValidation[0]) {
             showErrorMessage(`omr value should be 0 to ${cellOmrValidation[1] + 1}`)
         }
         else if (duplication) {
-            callCustomModal(Strings.message_text, Strings.Student_ID_Shouldnt_be_duplicated, false,false);
+            callCustomModal(Strings.message_text, Strings.Student_ID_Shouldnt_be_duplicated,false);
         }
         else if (disable) {
             showErrorMessage(Strings.please_correct_marks_data)
@@ -585,7 +605,7 @@ const ScannedDetailsComponent = ({
 
                         });
                         if (bgFlag) {
-                            callCustomModal(Strings.message_text, Strings.auto_sync_in_progress_please_wait, false,false);
+                            callCustomModal(Strings.message_text, Strings.auto_sync_in_progress_please_wait, false,false)
                         } else {
                             setScannedDataIntoLocal(getDataFromLocal)
                             goToMyScanScreen()
@@ -605,7 +625,7 @@ const ScannedDetailsComponent = ({
             setScannedDataIntoLocal([saveObj])
             goToMyScanScreen()
         } else {
-            callCustomModal(Strings.message_text, Strings.you_can_save_only_limited_student_In_Order_to_continue_have_to_save_first, false,false);
+            Alert.alert(Strings.you_can_save_only_limited_student_In_Order_to_continue_have_to_save_first)
         }
     }
 
@@ -672,7 +692,7 @@ const ScannedDetailsComponent = ({
                 if (element.cellId == value.cellId) {
                     structureList.forEach(Datas => {
                         //this'll add into OCRLocal
-                        element.consolidatedPrediction = text > 1 ? 0 : text
+                        element.consolidatedPrediction = text < 1 ? 0 : text
                         //this'll add in  structurelist
                         Datas.data.forEach((el, index) => {
                             if (el.cellId === value.cellId) {
@@ -684,6 +704,15 @@ const ScannedDetailsComponent = ({
                 }
             });
             dispatch(OcrLocalResponseAction(ocrLocalResponse))
+            let regexValue = regxValidation(value.cellId)
+            ocrLocalResponse.layout.cells.forEach(element => {
+                if (element.cellId == value.cellId) {
+                    if (!regexValue[0]) {
+                        showErrorMessage(regexValue[1] ? regexValue[1] : defaultValidateError)
+                    }
+
+                }
+            });
 
         } else {
             let len = text.length
@@ -703,9 +732,10 @@ const ScannedDetailsComponent = ({
             ocrLocalResponse.layout.cells.forEach(element => {
                 if (element.cellId == value.cellId) {
                     if (!regexValue[0]) {
-                        showErrorMessage(regexValue[1] ? regexValue[1] : defaultValidateError)
+                        showErrorMessage(regexValue[1] ? regexValue[1] : defaultValidateError )
                     }
-                }})
+                }
+            });
 
             newArray.map((e) => {
                 if (e.format.name == neglectData[3]) {
@@ -745,7 +775,7 @@ const ScannedDetailsComponent = ({
 
 
     const showErrorMessage = (message) => {
-        callCustomModal(Strings.message_text, message, false,false);
+        callCustomModal(Strings.message_text, message, false,false)
     }
 
     const validateCellOMR = (isMultiple) => {
@@ -767,15 +797,24 @@ const ScannedDetailsComponent = ({
 
     const onSubmitClick = async () => {
         let validCell = false
+        let omrMark = false
+        let resultMark = false
+        let regexErrormsglist
         for (let i = 0; i < newArrayValue.length; i++) {
             let consolidatedlist = newArrayValue[i].consolidatedPrediction
-            regexErrormsglist = newArrayValue[i] && newArrayValue[i].validate && newArrayValue[i].validate.errorMsg
+             regexErrormsglist = newArrayValue[i] && newArrayValue[i].validate && newArrayValue[i].validate.errorMsg
             let regexlist = newArrayValue[i].validate && newArrayValue[i].validate.regExp
             let number = consolidatedlist;
             let regexvalue = new RegExp(regexlist)
             let resultlist = regexvalue.test(number);
             if (newArrayValue[i].consolidatedPrediction === '') {
                 validCell = true
+            }
+            else if (newArrayValue[i].consolidatedPrediction === 0) {
+                omrMark = true
+            }
+            else if (resultlist === true) {
+                resultMark = true
             }
         }
 
@@ -791,15 +830,12 @@ const ScannedDetailsComponent = ({
         else if (!studentValid && !toggleCheckBox) {
             showErrorMessage(Strings.please_correct_student_id)
         }
-        else if(isStudentValid){
+        else if (isStudentValid) {
             showErrorMessage(Strings.student_id_should_be_same)
         }
-        else if (resultMark === false) {
+        else if (resultMark ===false) {
             showErrorMessage(Strings.please_correct_marks_data)
         }
-
-
-
         else {
             if (sumOfObtainedMarks > 0) {
 
@@ -826,7 +862,7 @@ const ScannedDetailsComponent = ({
                 console.log("sumOfObtained", maximum);
                 if (maximum != totalMarkSecured) {
                     setObtnMarkErr(true)
-                    showErrorMessage("Sum Of All obtained marks should be equal to marksObtained")
+                    showErrorMessage(`Sum of all obtained marks should be equal to marks obtained \n\nSummation Of Obtained Marks : ${maximum}`)
                 }
                 else if (maxMarksTotal < maximum) {
                     setObtnMarkErr(false)
@@ -1136,12 +1172,12 @@ const ScannedDetailsComponent = ({
                                         <View style={styles.studentContainer}>
                                             <View style={styles.imageViewContainer}>
                                                 <View style={styles.imageContainerStyle}>
-                                                    <Text style={{ textAlign: 'center', fontSize: AppTheme.HEADER_FONT_SIZE_LARGE,fontFamily : monospace_FF }}>{studentData.length > 0 && studentData[0].name.charAt(0)}</Text>
+                                                    <Text style={{ textAlign: 'center', fontSize: AppTheme.HEADER_FONT_SIZE_LARGE,fontFamily:monospace_FF }}>{studentData.length > 0 && studentData[0].name.charAt(0)}</Text>
                                                 </View>
                                             </View>
                                             <View style={styles.deatilsViewContainer}>
                                                 <View style={styles.detailsSubContainerStyle}>
-                                                    <Text style={[styles.nameTextStyle, { fontWeight: 'bold', color: AppTheme.BLACK, fontSize: AppTheme.FONT_SIZE_LARGE,fontFamily : monospace_FF }]}>{studentData.length > 0 && studentData[0].name}</Text>
+                                                    <Text style={[styles.nameTextStyle, { fontWeight: 'bold', color: AppTheme.BLACK, fontSize: AppTheme.FONT_SIZE_LARGE }]}>{studentData.length > 0 && studentData[0].name}</Text>
                                                     <TextField
                                                         labelText={BrandLabel && BrandLabel.StudentId ? BrandLabel.StudentId : Strings.student_id}
                                                         errorField={stdErr != '' || isNaN(studentId)}
@@ -1214,10 +1250,10 @@ const ScannedDetailsComponent = ({
                                                         TABLE_HEADER_WITH_TAG.map((data) => {
                                                             return (
                                                                 <MarksHeaderTable
-                                                                    customRowStyle={{ width: '25%', backgroundColor: AppTheme.TABLE_HEADER }}
-                                                                    key={data}
-                                                                    rowTitle={data}
-                                                                    rowBorderColor={AppTheme.TAB_BORDER}
+                                                                customRowStyle={{ width: '25%', backgroundColor: AppTheme.TABLE_HEADER }}
+                                                                key={data}
+                                                                rowTitle={data}
+                                                                rowBorderColor={AppTheme.TAB_BORDER}
                                                                     editable={false}
                                                                 />
                                                             )
@@ -1226,17 +1262,17 @@ const ScannedDetailsComponent = ({
                                                         TABLE_HEADER.map((data) => {
                                                             return (
                                                                 <MarksHeaderTable
-                                                                    customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
-                                                                    key={data}
-                                                                    rowTitle={data}
-                                                                    rowBorderColor={AppTheme.TAB_BORDER}
+                                                                customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
+                                                                key={data}
+                                                                rowTitle={data}
+                                                                rowBorderColor={AppTheme.TAB_BORDER}
                                                                     editable={false}
                                                                 />
                                                             )
                                                         })
                                                 }
                                             </View>
-
+                                          
                                             {
                                                 newArrayValue.map((element, index) => {
                                                     return (

@@ -17,6 +17,7 @@ import { monospace_FF, neglectData } from '../../utils/CommonUtils';
 import ShareComponent from '../common/components/Share';
 import MultibrandLabels from '../common/components/multibrandlabels';
 import { Assets } from '../../assets';
+import CustomPopup from '../common/components/CustomPopup';
 
 LogBox.ignoreAllLogs()
 
@@ -352,6 +353,11 @@ class MyScanComponent extends Component {
                         customContainer={{ opacity: 0.9, elevation: 15 }}
                     />
                 }
+                <CustomPopup
+                title={"Message"}
+                ok_button={"Ok"}
+                bgColor={multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}
+            />
             </View>
         );
     }

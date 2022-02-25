@@ -294,6 +294,7 @@ class SelectDetailsComponent extends Component {
     }
 
      callCustomModal = (title, message, isAvailable,okFunction,cancel) => {
+         const { dispatch } = this.props
         let data = {
             title: title,
             message: message,
