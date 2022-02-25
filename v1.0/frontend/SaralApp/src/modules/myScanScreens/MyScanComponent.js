@@ -13,7 +13,7 @@ import ScanHistoryCard from '../ScanHistory/ScanHistoryCard';
 import SaralSDK from '../../../SaralSDK'
 import { getScannedDataFromLocal,getErrorMessage } from '../../utils/StorageUtils';
 import ButtonComponent from '../common/components/ButtonComponent';
-import { neglectData } from '../../utils/CommonUtils';
+import { multipleStudent, neglectData } from '../../utils/CommonUtils';
 import ShareComponent from '../common/components/Share';
 import MultibrandLabels from '../common/components/multibrandlabels';
 import { Assets } from '../../assets';
@@ -235,9 +235,8 @@ class MyScanComponent extends Component {
             }
             roisData.layout.cells[i].consolidatedPrediction = marks
             roisData.layout.cells[i].predictionConfidence = predictionConfidenceArray
-            let withNoDigits = roisData.layout.cells[i].format.value.replace(/[0-9]/g, '');
-            let rollNumber = withNoDigits.slice(0,10);
-            if (rollNumber === neglectData[0] && rollNumber.length == neglectData[0].length) {
+            let rollNumber = roisData.layout.cells[i].format.name.replace(/[0-9]/g, '');
+            if ((rollNumber === neglectData[0] && rollNumber.length == neglectData[0].length) || (rollNumber.trim() === multipleStudent[0])) {
                 roisData.layout.cells[i].studentIdPrediction = marks
             } else {
                 roisData.layout.cells[i].predictedMarks = marks

@@ -1245,7 +1245,7 @@ const ScannedDetailsComponent = ({
                                                         TABLE_HEADER_WITH_TAG.map((data) => {
                                                             return (
                                                                 <MarksHeaderTable
-                                                                customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
+                                                                customRowStyle={{ width: '25%', backgroundColor: AppTheme.TABLE_HEADER }}
                                                                 key={data}
                                                                 rowTitle={data}
                                                                 rowBorderColor={AppTheme.TAB_BORDER}
