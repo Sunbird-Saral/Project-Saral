@@ -85,6 +85,7 @@ const TaggingModal = ({
                         value={newTag}
                         placeholder={Strings.add_new_tag}
                         keyboardType="default"
+                        placeholderTextColor="grey"
                     />
                     <TouchableOpacity
                         onPress={() => {
@@ -157,6 +158,7 @@ const styles = {
         padding: 10,
         borderRadius: 8,
         width: 200,
+        color:'#000'
     },
     selectionCon: {
         borderRadius: 8,

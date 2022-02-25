@@ -7,7 +7,7 @@ import C from '../../../flux/actions/constants';
 //redux
 import {  useDispatch } from 'react-redux';
 
-const modalView = ({
+const ModalView = ({
   modalVisible,
   modalMessage
 }) => {
@@ -86,4 +86,4 @@ const styles = StyleSheet.create({
     fontSize: 18
   }
 });
-export default modalView;
+export default ModalView;
