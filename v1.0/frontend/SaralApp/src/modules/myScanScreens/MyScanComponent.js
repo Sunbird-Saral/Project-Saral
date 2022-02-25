@@ -235,7 +235,9 @@ class MyScanComponent extends Component {
             }
             roisData.layout.cells[i].consolidatedPrediction = marks
             roisData.layout.cells[i].predictionConfidence = predictionConfidenceArray
-            if (roisData.layout.cells[i].format.value === neglectData[0] || roisData.layout.cells[i].format.name.length-3 == neglectData[0].length) {
+            let withNoDigits = roisData.layout.cells[i].format.value.replace(/[0-9]/g, '');
+            let rollNumber = withNoDigits.slice(0,10);
+            if (rollNumber === neglectData[0] && rollNumber.length == neglectData[0].length) {
                 roisData.layout.cells[i].studentIdPrediction = marks
             } else {
                 roisData.layout.cells[i].predictedMarks = marks
