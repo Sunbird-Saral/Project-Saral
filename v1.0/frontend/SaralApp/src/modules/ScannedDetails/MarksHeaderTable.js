@@ -17,17 +17,25 @@ const MarksHeaderTable = ({
     setTagData,
     studentsAndExamData,
     index,
-    setQuestionIdData
+    setQuestionIdData,
+    subject
 }) => {
 
     const setDataIntoModal = (value) => {
-        studentsAndExamData.data.exams[0].questions.forEach((element,i) => {
-            if (element.questionId.toString() == value.toString() || index == i) {
-                element.tags.forEach((data,i)=>{
-                    data.questionId = element.questionId
+        let filterExam = studentsAndExamData.data.exams.filter((data)=> data.subject === subject)
+        
+        studentsAndExamData.data.exams.forEach((element) => {
+            if (element.subject == subject) {
+                element.questions.forEach((_el,i)=>{
+                    if (_el.questionId.toString() == value.toString() || index == i) {
+                        _el.tags.forEach((data,i)=>{
+                            data.questionId = _el.questionId
+                        })
+                        setTagData(_el.tags)
+                        setQuestionIdData(_el.questionId)
+                    }
                 })
-                setTagData(element.tags)
-                setQuestionIdData(element.questionId)
+
             }
         });
     }
