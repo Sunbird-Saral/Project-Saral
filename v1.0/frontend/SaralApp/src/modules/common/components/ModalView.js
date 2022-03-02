@@ -8,7 +8,7 @@ import C from '../../../flux/actions/constants';
 import {  useDispatch } from 'react-redux';
 import { monospace_FF } from '../../../utils/CommonUtils';
 
-const modalView = ({
+const ModalView = ({
   modalVisible,
   modalMessage
 }) => {
@@ -89,4 +89,4 @@ const styles = StyleSheet.create({
     fontFamily : monospace_FF
   }
 });
-export default modalView;
+export default ModalView;

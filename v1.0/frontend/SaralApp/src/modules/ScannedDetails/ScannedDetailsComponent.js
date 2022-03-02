@@ -43,8 +43,6 @@ const ScannedDetailsComponent = ({
     roiData,
     studentsAndExamData
 }) => {
-
-
     //Hookes
     const [summary, setSummary] = useState(false)
     const [newArrayValue, setNewArrayValue] = useState([])
@@ -117,7 +115,7 @@ const ScannedDetailsComponent = ({
 
         let absent = datas.filter((item) => item.studentId == studentId & item.studentAvailability == false)
 
-        if(studentId == 0 && studentId != ''){
+        if(studentId == 0 && studentId != '' && isMultipleStudent){
             setToggleCheckBox(true)
         }
         if (absent.length > 0) {
@@ -184,6 +182,8 @@ const ScannedDetailsComponent = ({
             }
             return multiple
         })
+
+     
         if (ocrLocalResponse.layout.hasOwnProperty("pages") && ocrLocalResponse.layout.pages > 0) {
             setMultiPage(ocrLocalResponse.layout.pages)
             setNextBtn("SCAN PAGE #2")
@@ -439,14 +439,20 @@ const ScannedDetailsComponent = ({
 
     const callTagArrayData = (formatName) =>{
         let tagArray = []
-        studentsAndExamData.data.exams[0].questions.filter((element,i) => {
-            element.tags.filter((value)=>{
-                if (value.hasOwnProperty("questionId") && value.questionId.trim() == formatName.trim() && value.selected) {
-                    tagArray.push(value.tagName)
-                    value.selected = false
+        for(const element of studentsAndExamData.data.exams){
+            if (filteredData.subject === element.subject) {
+                for(const _el of element.questions) {
+                    _el.tags.filter((value) => {
+                        if (value.hasOwnProperty("questionId") && value.questionId.trim() == formatName.trim() && value.selected) {
+                            tagArray.push(value.tagName)
+                            value.selected = false
+                        }
+                    })
+
                 }
-            })
-        });
+                break;
+                }
+            }
         return tagArray
     }
 
@@ -1318,6 +1324,7 @@ const ScannedDetailsComponent = ({
                                                                 rowTitle={element.format.name}
                                                                 studentsAndExamData={studentsAndExamData}
                                                                 setQuestionIdData={setQuestionIdData}
+                                                                subject={filteredData.subject}
                                                             />
                                                         }
 
@@ -1357,6 +1364,7 @@ const ScannedDetailsComponent = ({
                         studentsAndExamData={studentsAndExamData}
                         bgColor={multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}
                         questionIdData={questionIdData}
+                        subject={filteredData.subject}
                     />
                 </ScrollView>
             </View>

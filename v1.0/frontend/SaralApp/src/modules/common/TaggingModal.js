@@ -10,7 +10,8 @@ const TaggingModal = ({
     setTagData,
     bgColor,
     studentsAndExamData,
-    questionIdData
+    questionIdData,
+    subject
 }) => {
 
     const [newTag, setNewTag] = useState('')
@@ -32,22 +33,30 @@ const TaggingModal = ({
         setTagData(filteredTag);
 
         //remove tag from ExamObject
-        for (const element of studentsAndExamData.data.exams[0].questions) {
-            if (questionId == element.questionId) {
-                const index = element.tags.findIndex(item => item.tagName == tag)
-                element.tags.splice(index, 1)
-                break;
+        for (const element of studentsAndExamData.data.exams) {
+            if (element.subject == subject) {
+                for (const _el of element.questions) {
+                    if (questionId == _el.questionId) {
+                        const index = _el.tags.findIndex(item => item.tagName == tag)
+                        _el.tags.splice(index, 1)
+                        break;
+                    }
+                }
             }
         }
     }
 
     const addIntoExamObject = (data) => {
-        for (const element of studentsAndExamData.data.exams[0].questions) {
-            if (questionIdData.trim() == (element.hasOwnProperty("questionId") && element.questionId.trim())) {
-                element.tags.push(data);
-                setNewTag('');
-                setTagData(element.tags)
-                break;
+        for (const element of studentsAndExamData.data.exams) {
+            if (element.subject == subject) {
+                for (const _el of element.questions) {
+                    if (questionIdData.trim() == (_el.hasOwnProperty("questionId") && _el.questionId.trim())) {
+                        _el.tags.push(data);
+                        setNewTag('');
+                        setTagData(_el.tags)
+                        break;
+                    }
+                }
             }
         }
     }
@@ -76,6 +85,7 @@ const TaggingModal = ({
                         value={newTag}
                         placeholder={Strings.add_new_tag}
                         keyboardType="default"
+                        placeholderTextColor="grey"
                     />
                     <TouchableOpacity
                         onPress={() => {
@@ -148,6 +158,7 @@ const styles = {
         padding: 10,
         borderRadius: 8,
         width: 200,
+        color:'#000'
     },
     selectionCon: {
         borderRadius: 8,

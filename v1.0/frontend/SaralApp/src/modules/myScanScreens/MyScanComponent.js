@@ -18,6 +18,7 @@ import ShareComponent from '../common/components/Share';
 import MultibrandLabels from '../common/components/multibrandlabels';
 import { Assets } from '../../assets';
 import CustomPopup from '../common/components/CustomPopup';
+import ModalView from '../common/components/ModalView';
 
 LogBox.ignoreAllLogs()
 
@@ -236,7 +237,8 @@ class MyScanComponent extends Component {
             }
             roisData.layout.cells[i].consolidatedPrediction = marks
             roisData.layout.cells[i].predictionConfidence = predictionConfidenceArray
-            if (roisData.layout.cells[i].format.value === neglectData[0] || roisData.layout.cells[i].format.name.length-3 == neglectData[0].length) {
+            let rollNumber = roisData.layout.cells[i].format.name.replace(/[0-9]/g, '');
+            if ((rollNumber === neglectData[0] && rollNumber.length == neglectData[0].length) || (rollNumber.trim() === multipleStudent[0])) {
                 roisData.layout.cells[i].studentIdPrediction = marks
             } else {
                 roisData.layout.cells[i].predictedMarks = marks
@@ -249,7 +251,7 @@ class MyScanComponent extends Component {
     }
     render() {
         const { isLoading } = this.state;
-        const { loginData,multiBrandingData} = this.props
+        const { loginData,multiBrandingData, modalMessage, modalStatus} = this.props
         const BrandLabel = multiBrandingData&&multiBrandingData.screenLabels&&multiBrandingData.screenLabels.myScan[0]
         return (
 
@@ -358,6 +360,7 @@ class MyScanComponent extends Component {
                 ok_button={"Ok"}
                 bgColor={multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}
             />
+                <ModalView modalVisible={modalStatus} modalMessage={modalMessage} />
             </View>
         );
     }
@@ -469,7 +472,9 @@ const mapStateToProps = (state) => {
         scanedData: state.scanedData,
         roiData: state.roiData.response,
         multiBrandingData: state.multiBrandingData.response.data,
-        apiStatus: state.apiStatus
+        apiStatus: state.apiStatus,
+        modalStatus: state.modalStatus,
+        modalMessage: state.modalMessage
     }
 }
 
