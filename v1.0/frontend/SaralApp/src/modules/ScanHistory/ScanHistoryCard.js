@@ -343,7 +343,7 @@ const ScanHistoryCard = ({
                                 }}
                                 onPress={onPressSaveInDB}
                             >
-                                <Text  style={{fontFamily : monospace_FF}} style={{ color: AppTheme.BLACK }}>{Strings.save_scan}</Text>
+                                <Text  style={{fontFamily : monospace_FF, color: AppTheme.BLACK}}>{Strings.save_scan}</Text>
                             </TouchableOpacity>}
                     </View>
                 </View>
