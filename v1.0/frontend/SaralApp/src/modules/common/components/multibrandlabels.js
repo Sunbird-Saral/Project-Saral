@@ -12,7 +12,7 @@ const  MultibrandLabels = ({
     Label2
 }) => {
     return (
-        <View style={{ marginTop: 10,width:'100%' }}>
+        <View style={{ marginTop: 10,width:'62%' }}>
         <Text
             style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%',fontFamily : monospace_FF }}
         >
