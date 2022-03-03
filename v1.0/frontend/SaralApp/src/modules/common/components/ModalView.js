@@ -29,7 +29,7 @@ const ModalView = ({
   return (
     <View>
       <Modal
-        animationType="slide"
+        animationType="fade"
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => {
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 10,
     padding: 10,
-    margin: 40
+    margin: 20
   },
   row: {
     flexDirection:'row',
