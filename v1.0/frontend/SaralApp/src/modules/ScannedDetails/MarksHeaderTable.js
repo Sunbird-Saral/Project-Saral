@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, TextInput, Image,TouchableOpacity } from 'react-native';
+import { Assets } from '../../assets';
 import AppTheme from '../../utils/AppTheme';
 import { monospace_FF } from '../../utils/CommonUtils';
 
