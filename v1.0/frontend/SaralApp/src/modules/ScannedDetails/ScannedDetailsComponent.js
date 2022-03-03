@@ -82,6 +82,11 @@ const ScannedDetailsComponent = ({
     const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.scannedDetailComponent[0]
     const defaultValidateError = ocrLocalResponse.layout && ocrLocalResponse.layout.resultValidation && ocrLocalResponse.layout.resultValidation.validate.errorMsg
     const defaultValidateExp = ocrLocalResponse.layout && ocrLocalResponse.layout.resultValidation && ocrLocalResponse.layout.resultValidation.validate.regExp
+    const idValidateExp = ocrLocalResponse.layout && ocrLocalResponse.layout.idValidation && ocrLocalResponse.layout.idValidation.validate.regExp
+    const studentIdErrorMsg = ocrLocalResponse.layout && ocrLocalResponse.layout.idValidation && ocrLocalResponse.layout.idValidation.validate.errorMsg
+    let consolidated = ocrLocalResponse.layout.cells[0].consolidatedPrediction.length
+    const studentIdLength = consolidated+1
+
     const inputRef = React.createRef();
     const dispatch = useDispatch()
 
@@ -114,6 +119,12 @@ const ScannedDetailsComponent = ({
         let datas = absentPresentStudent.length > 0 ? absentPresentStudent : []
 
         let absent = datas.filter((item) => item.studentId == studentId & item.studentAvailability == false)
+
+        if (studentId.length > consolidated) {
+            showErrorMessage(studentIdErrorMsg ? studentIdErrorMsg : Strings.StudentId_limit_exceeds)
+
+        }
+
 
         if(studentId == 0 && studentId != '' && isMultipleStudent){
             setToggleCheckBox(true)
@@ -1187,6 +1198,7 @@ const ScannedDetailsComponent = ({
                                                         value={studentId}
                                                         editable={edit}
                                                         keyboardType={'numeric'}
+                                                        maxLength={studentIdLength}
                                                     />
                                                     <Text style={styles.nameTextStyle}>{BrandLabel && BrandLabel.Exam ? BrandLabel.Exam : Strings.Exam} : {filteredData.subject} {filteredData.examDate} ({filteredData.examTestID})</Text>
                                                     {
