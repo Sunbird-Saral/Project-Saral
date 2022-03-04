@@ -872,7 +872,7 @@ const ScannedDetailsComponent = ({
                 }
                 else if (maxMarksTotal < maximum) {
                     setObtnMarkErr(false)
-                    showErrorMessage("Total mark should be less than or equal to Maximum marks.")
+                    showErrorMessage("Total Obtained marks should be less than or equal to Maximum marks.")
                     setMaxMarkErr(true)
                 }
                 else {
