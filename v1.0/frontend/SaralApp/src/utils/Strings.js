@@ -107,6 +107,6 @@ export default strings = new LocalizedStrings({
         about_menu: 'About',
         add_new_tag: "Add New Tag",
         add_tag: 'Add Tag',
-        StudentId_limit_exceeds:"Student I'd exceeds the limit"
+        StudentId_limit_exceeds:"Student Id exceeds the limit"
     }
 })
