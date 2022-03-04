@@ -868,11 +868,11 @@ const ScannedDetailsComponent = ({
                 console.log("sumOfObtained", maximum);
                 if (maximum != totalMarkSecured) {
                     setObtnMarkErr(true)
-                    showErrorMessage(`Sum of all obtained marks should be equal to marks obtained \n\nSummation Of Obtained Marks : ${maximum}`)
+                    showErrorMessage(`Sum of all obtained marks should be equal to marks obtained. \n\nSummation Of Obtained Marks : ${maximum}`)
                 }
                 else if (maxMarksTotal < maximum) {
                     setObtnMarkErr(false)
-                    showErrorMessage("Total mark should be less than or equal to Maximum marks")
+                    showErrorMessage("Total mark should be less than or equal to Maximum marks.")
                     setMaxMarkErr(true)
                 }
                 else {
