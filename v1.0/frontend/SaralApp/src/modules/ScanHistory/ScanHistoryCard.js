@@ -416,7 +416,7 @@ const ScanHistoryCard = ({
                             }
                         </View>
                         <View style={styles1.container1}>
-                            {ExamQuesDetail[0].questions.map((stu) => {
+                            { ExamQuesDetail[0] && ExamQuesDetail[0].questions.map((stu) => {
                                 return (
                                     <View key={stu} style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
 

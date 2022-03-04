@@ -294,7 +294,6 @@ class SelectDetailsComponent extends Component {
     }
 
      callCustomModal = (title, message, isAvailable,okFunction,cancel) => {
-         const { dispatch } = this.props
         let data = {
             title: title,
             message: message,
@@ -302,12 +301,11 @@ class SelectDetailsComponent extends Component {
             okFunc : okFunction,
             isCancel : cancel
         }
-        dispatch(dispatchCustomModalStatus(true));
-        dispatch(dispatchCustomModalMessage(data));
+        this.props.dispatchCustomModalStatus(true)
+        this.props.dispatchCustomModalMessage(data)
     }
 
     loginAgain = async () => {
-        const { dispatch } = this.props;
         let loginCred = await getLoginCred()
         if (loginCred) {
             this.setState({
@@ -924,7 +922,9 @@ const mapDispatchToProps = (dispatch) => {
         APITransport: APITransport,
         OcrLocalResponseAction: OcrLocalResponseAction,
         FilteredDataAction: FilteredDataAction,
-        LogoutAction: LogoutAction
+        LogoutAction: LogoutAction,
+        dispatchCustomModalStatus: dispatchCustomModalStatus,
+        dispatchCustomModalMessage: dispatchCustomModalMessage
     }, dispatch)
 }
 

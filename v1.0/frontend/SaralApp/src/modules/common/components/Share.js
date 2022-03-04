@@ -117,15 +117,15 @@ const ShareComponent = ({
         if (result.activityType) {
           setIshidden(false);
           // shared with activity type of result.activityType
-
+          
         } else {
           setIshidden(false);
-          callCustomModal(Strings.message_text,Strings.shareDataExceed,false,false);
           // shared
         }
       }
     } catch (error) {
-      alert(error.message);
+      callCustomModal(Strings.message_text,Strings.shareDataExceed,false,false);
+      // alert(error.message);
     }
   }
 

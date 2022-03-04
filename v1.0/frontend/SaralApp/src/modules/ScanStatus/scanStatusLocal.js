@@ -38,7 +38,7 @@ const ScanStatusLocal = ({
     const [presentStudentList, setPresentStudentList] = useState([])
     const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.scanHistory[0]
     
-    const data =(JSON.stringify(loacalstutlist[0],null, 2))
+    const data =(JSON.stringify(presentStudentList[0],null, 2))
     const dispatch = useDispatch()
 
 
@@ -77,7 +77,6 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
                     // shared with activity type of result.activityType
                 } else {
                     // shared
-                    callCustomModal(Strings.message_text,Strings.shareDataExceed,false);
                 }
             } else if (result.action === Share.dismissedAction) {
                 // dismissed
@@ -85,7 +84,7 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
         } catch (error) {
             console.log(error.message);
             callCustomModal(Strings.message_text,Strings.shareDataExceed,false);
-            alert(error.message);
+            // alert(error.message);
         }
     };
     
@@ -110,8 +109,7 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
     useEffect(() => {
         getDataFromLocal()
         getStudentList()
-        getPresentStudentList()
-    },[loacalstutlist])
+    },[])
     
     const getStudentList = async () => {
         let data = await getPresentAbsentStudent()
@@ -129,12 +127,12 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
                     return true
                 }   
             })
-            setLoacalstutlist(filterscandata)
+            getPresentStudentList(filterscandata)
         }
     }
 
 
-    const getPresentStudentList = ()=>{
+    const getPresentStudentList = (loacalstutlist)=>{
       
         let data =typeof (loacalstutlist) === "object"
             ?
@@ -158,7 +156,7 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
              <ShareComponent
                  navigation={navigation}
                  />
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+            <View style={{ flexDirection:'row',justifyContent: 'space-between' }}>
             {(multiBrandingData && BrandLabel) ?
                 <MultibrandLabels
                 Label1={BrandLabel.School}
@@ -184,17 +182,18 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
                     </Text>
                 </View>
             }
-            {loacalstutlist[0] ?
-            <TouchableOpacity onPress={onShare}>
+            {presentStudentList.length > 0 &&
+            
+            <TouchableOpacity onPress={()=>onShare()} style={{width:40,height:40,marginRight:20,marginTop:10}}>
                     <Image style={{ height: 25, width: 25, marginHorizontal: 15, marginVertical: 20 }} source={Assets.Share} />
-                </TouchableOpacity>:
-                null}
+                </TouchableOpacity>
+                }
             </View>
 
             <Text style={styles.scanStatus}>{Strings.scan_status}</Text>
         
             <FlatList
-                data={ loacalstutlist && presentStudentList}
+                data={ presentStudentList && presentStudentList}
                 renderItem={renderItem}
                 ListEmptyComponent={renderEmptyData}
             keyExtractor={(item, index) => `${index.toString()}`}
