@@ -141,7 +141,7 @@ const ScanStatus = ({
             }
             </View>
 
-            <Text style={styles.scanStatus}>{Strings.scan_status}</Text>
+            <Text style={styles.scanStatus}>{Strings.save_status}</Text>
 
             <FlatList
                 data={scanedData && presentStudentList}
