@@ -1877,5 +1877,41 @@
   "name": "Durgesh",
   "studentId": "4000008",
   "schoolId": "skill001"
+},
+{
+  "studentClass": [
+    {
+      "classId": "2",
+      "className": "Class-2"
+    }
+  ],
+  "section": "A",
+  "name": "Hema Bakuni",
+  "studentId": "543210",
+  "schoolId": "a001"
+},
+{
+  "studentClass": [
+    {
+      "classId": "2",
+      "className": "Class-2"
+    }
+  ],
+  "section": "A",
+  "name": "Meenu Manral",
+  "studentId": "543211",
+  "schoolId": "a001"
+},
+{
+  "studentClass": [
+    {
+      "classId": "2",
+      "className": "Class-2"
+    }
+  ],
+  "section": "A",
+  "name": "Anju Garia",
+  "studentId": "543212",
+  "schoolId": "a001"
 }
 ]
