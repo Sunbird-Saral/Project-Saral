@@ -340,14 +340,6 @@ useEffect(() => {
                             {loginData.data.school.schoolId}
                         </Text>
                     </Text>
-                    <Text
-                style={{ fontSize: AppTheme.FONT_SIZE_REGULAR - 3, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', marginBottom: '4%' }}
-            >
-                {Strings.version_text + ' : '}
-                <Text style={{ fontWeight: 'normal' }}>
-                    {apkVersion}
-                </Text>
-            </Text>
                 </View>
 
             }
