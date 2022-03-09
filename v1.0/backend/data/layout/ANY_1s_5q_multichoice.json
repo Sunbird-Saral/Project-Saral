@@ -7,12 +7,6 @@
             "minHeight": 289,
             "detectionRadius":12
         },   
-        "resultValidation": {
-            "validate": {
-                "regExp": "[0-5]",
-                "errorMsg": "Omr result should be between 0 to 5"
-            }
-        },
         "cells": [
             {
                 "cellId": "1",
