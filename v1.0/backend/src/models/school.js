@@ -34,9 +34,18 @@ const schoolSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
-    autoSync:{
+    autoSync: { 
         type: Boolean,
-        required:false
+        required: false
+    },
+    autoSyncFrequency: {
+        type: Number,
+        required: false,
+        default: 600000
+    },
+    tags: { 
+        type: Boolean,
+        required: false
     }
 }, {
     timestamps: false

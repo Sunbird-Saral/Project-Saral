@@ -1,0 +1,23 @@
+#!groovy
+
+node('saral-poc') {
+
+try {
+
+   stage('Checkout'){
+      checkout scm
+	}
+	sh '''
+
+		environment=$(echo "$JOB_BASE_NAME" | rev | cut -d'-' -f 1 | rev)
+        collection_name=$(echo "$collection_name")
+		db=$(echo "$db")
+        query=$(echo "$query")
+        sudo mongoexport --db=$db --collection=$collection_name --type=json --query="$query" --host=172.31.51.8  --pretty
+		'''	
+}		
+catch (err) {
+    currentBuild.result = "FAILURE"
+    throw err
+ }
+}

@@ -27,6 +27,7 @@ import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
 import C from '../../flux/actions/constants';
 import ShareComponent from '../common/components/Share';
 import MultibrandLabels from '../common/components/multibrandlabels';
+import ModalView from '../common/components/ModalView';
 
 const clearState = {
     defaultSelected: Strings.select_text,
@@ -691,9 +692,8 @@ class SelectDetailsComponent extends Component {
 
     render() {
         const { navigation, isLoading, defaultSelected, classList, classListIndex, selectedClass, sectionList, sectionListIndex, selectedSection, pickerDate, selectedDate, subArr, selectedSubject, subIndex, errClass, errSub, errDate, errSection, sectionValid, dateVisible, examTestID } = this.state
-        const { loginData, multiBrandingData } = this.props
+        const { loginData, multiBrandingData, modalStatus, modalMessage } = this.props
         const BrandLabel = multiBrandingData&&multiBrandingData.screenLabels&&multiBrandingData.screenLabels.selectDetails[0]
-
         return (
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
                 <ShareComponent
@@ -823,6 +823,7 @@ class SelectDetailsComponent extends Component {
                     />
                 )}
                 {isLoading && <Spinner animating={isLoading} />}
+                <ModalView modalVisible={modalStatus} modalMessage={modalMessage} />
             </View>
         );
     }
@@ -893,7 +894,9 @@ const mapStateToProps = (state) => {
         absentStudentDataResponse: state.absentStudentDataResponse,
         getScanStatusData: state.getScanStatusData,
         multiBrandingData: state.multiBrandingData.response.data,
-        bgFlag: state.bgFlag
+        bgFlag: state.bgFlag,
+        modalStatus: state.modalStatus,
+        modalMessage: state.modalMessage
     }
 }
 

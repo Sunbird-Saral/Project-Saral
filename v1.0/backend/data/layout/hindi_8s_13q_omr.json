@@ -2,6 +2,17 @@
     "layout": {
         "version": "1.0",
         "name": "HINDI8S13QOMR Exam Sheet Form",
+        "threshold": {
+            "minWidth": 500,
+            "minHeight": 200,
+            "detectionRadius":12
+        },
+        "resultValidation": {
+            "validate": {
+                "regExp": "[0-1]",
+                "errorMsg": "Omr result should be 1 or 0"
+            }
+        },
         "cells": [
             {
                 "cellId": "1",
@@ -97,9 +108,6 @@
                 "format": {
                     "name": "ROLLNUMBERID1",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -124,9 +132,6 @@
                 "format": {
                     "name": "ROLLNUMBER1_Q1_1",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q1 1"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -151,9 +156,6 @@
                 "format": {
                     "name": "ROLLNUMBER1_Q2_1",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q2 1"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -178,9 +180,6 @@
                 "format": {
                     "name": "ROLLNUMBER1_Q3_1",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q3 1"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -205,9 +204,6 @@
                 "format": {
                     "name": "ROLLNUMBER1_Q4_2",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q4 2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -232,9 +228,6 @@
                 "format": {
                     "name": "ROLLNUMBER1_Q5_2",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q5 2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -259,9 +252,6 @@
                 "format": {
                     "name": "ROLLNUMBER1_Q6_2",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q6 2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -286,9 +276,6 @@
                 "format": {
                     "name": "ROLLNUMBER1_Q7_2",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q7 2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -313,9 +300,6 @@
                 "format": {
                     "name": "ROLLNUMBER1_Q8_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q8 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -340,9 +324,6 @@
                 "format": {
                     "name": "ROLLNUMBER1_Q9_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q9 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -367,9 +348,6 @@
                 "format": {
                     "name": "ROLLNUMBER1_Q10_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q10 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -394,9 +372,6 @@
                 "format": {
                     "name": "ROLLNUMBER1_Q11_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q11 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -421,9 +396,6 @@
                 "format": {
                     "name": "ROLLNUMBER1_Q12_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q12 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -448,9 +420,6 @@
                 "format": {
                     "name": "ROLLNUMBER1_Q13_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09401 Q13 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -547,9 +516,6 @@
                 "format": {
                     "name": "ROLLNUMBERID2",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -574,9 +540,6 @@
                 "format": {
                     "name": "ROLLNUMBER2_Q1_1",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q1 1"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -601,9 +564,6 @@
                 "format": {
                     "name": "ROLLNUMBER2_Q2_1",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q2 1"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -628,9 +588,6 @@
                 "format": {
                     "name": "ROLLNUMBER2_Q3_1",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q3 1"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -655,9 +612,6 @@
                 "format": {
                     "name": "ROLLNUMBER2_Q4_2",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q4 2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -682,9 +636,6 @@
                 "format": {
                     "name": "ROLLNUMBER2_Q5_2",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q5 2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -709,9 +660,6 @@
                 "format": {
                     "name": "ROLLNUMBER2_Q6_2",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q6 2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -736,9 +684,6 @@
                 "format": {
                     "name": "ROLLNUMBER2_Q7_2",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q7 2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -763,9 +708,6 @@
                 "format": {
                     "name": "ROLLNUMBER2_Q8_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q8 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -790,9 +732,6 @@
                 "format": {
                     "name": "ROLLNUMBER2_Q9_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q9 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -817,9 +756,6 @@
                 "format": {
                     "name": "ROLLNUMBER2_Q10_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q10 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -844,9 +780,6 @@
                 "format": {
                     "name": "ROLLNUMBER2_Q11_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q11 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -871,9 +804,6 @@
                 "format": {
                     "name": "ROLLNUMBER2_Q12_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q12 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -898,9 +828,6 @@
                 "format": {
                     "name": "ROLLNUMBER2_Q13_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09402 Q13 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -997,9 +924,6 @@
                 "format": {
                     "name": "ROLLNUMBERID3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1024,9 +948,6 @@
                 "format": {
                     "name": "ROLLNUMBER3_Q1_1",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q1 1"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1051,9 +972,6 @@
                 "format": {
                     "name": "ROLLNUMBER3_Q2_1",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q2 1"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1078,9 +996,6 @@
                 "format": {
                     "name": "ROLLNUMBER3_Q3_1",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q3 1"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1105,9 +1020,6 @@
                 "format": {
                     "name": "ROLLNUMBER3_Q4_2",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q4 2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1132,9 +1044,6 @@
                 "format": {
                     "name": "ROLLNUMBER3_Q5_2",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q5 2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1159,9 +1068,6 @@
                 "format": {
                     "name": "ROLLNUMBER3_Q6_2",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q6 2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1186,9 +1092,6 @@
                 "format": {
                     "name": "ROLLNUMBER3_Q7_2",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q7 2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1213,9 +1116,6 @@
                 "format": {
                     "name": "ROLLNUMBER3_Q8_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q8 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1240,9 +1140,6 @@
                 "format": {
                     "name": "ROLLNUMBER3_Q9_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q9 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1267,9 +1164,6 @@
                 "format": {
                     "name": "ROLLNUMBER3_Q10_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q10 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1294,9 +1188,6 @@
                 "format": {
                     "name": "ROLLNUMBER3_Q11_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q11 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1321,9 +1212,6 @@
                 "format": {
                     "name": "ROLLNUMBER3_Q12_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q12 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1348,9 +1236,6 @@
                 "format": {
                     "name": "ROLLNUMBER3_Q13_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q13 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1447,9 +1332,6 @@
                 "format": {
                     "name": "ROLLNUMBERID4",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1474,9 +1356,6 @@
                 "format": {
                     "name": "ROLLNUMBER4_Q1_1",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q1 1"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1501,9 +1380,6 @@
                 "format": {
                     "name": "ROLLNUMBER4_Q2_1",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q2 1"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1528,9 +1404,6 @@
                 "format": {
                     "name": "ROLLNUMBER4_Q3_1",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q3 1"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1555,9 +1428,6 @@
                 "format": {
                     "name": "ROLLNUMBER4_Q4_2",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q4 2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1582,9 +1452,6 @@
                 "format": {
                     "name": "ROLLNUMBER4_Q5_2",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q5 2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1609,9 +1476,6 @@
                 "format": {
                     "name": "ROLLNUMBER4_Q6_2",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q6 2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1636,9 +1500,6 @@
                 "format": {
                     "name": "ROLLNUMBER4_Q7_2",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q7 2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1663,9 +1524,6 @@
                 "format": {
                     "name": "ROLLNUMBER4_Q8_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q8 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1690,9 +1548,6 @@
                 "format": {
                     "name": "ROLLNUMBER4_Q9_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q9 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1717,9 +1572,6 @@
                 "format": {
                     "name": "ROLLNUMBER4_Q10_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q10 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1744,9 +1596,6 @@
                 "format": {
                     "name": "ROLLNUMBER4_Q11_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q11 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1771,9 +1620,6 @@
                 "format": {
                     "name": "ROLLNUMBER4_Q12_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q12 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1798,9 +1644,6 @@
                 "format": {
                     "name": "ROLLNUMBER4_Q13_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09404 Q13 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1897,9 +1740,6 @@
                 "format": {
                     "name": "ROLLNUMBERID5",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09405"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1924,9 +1764,6 @@
                 "format": {
                     "name": "ROLLNUMBER5_Q1_1",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09405 Q1 1"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1951,9 +1788,6 @@
                 "format": {
                     "name": "ROLLNUMBER5_Q2_1",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09405 Q2 1"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1978,9 +1812,6 @@
                 "format": {
                     "name": "ROLLNUMBER5_Q3_1",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09405 Q3 1"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2005,9 +1836,6 @@
                 "format": {
                     "name": "ROLLNUMBER5_Q4_2",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09405 Q4 2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2032,9 +1860,6 @@
                 "format": {
                     "name": "ROLLNUMBER5_Q5_2",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09405 Q5 2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2059,9 +1884,6 @@
                 "format": {
                     "name": "ROLLNUMBER5_Q6_2",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09405 Q6 2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2086,9 +1908,6 @@
                 "format": {
                     "name": "ROLLNUMBER5_Q7_2",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09405 Q7 2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2113,9 +1932,6 @@
                 "format": {
                     "name": "ROLLNUMBER5_Q8_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09405 Q8 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2140,9 +1956,6 @@
                 "format": {
                     "name": "ROLLNUMBER5_Q9_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09405 Q9 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2167,9 +1980,6 @@
                 "format": {
                     "name": "ROLLNUMBER5_Q10_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09405 Q10 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2194,9 +2004,6 @@
                 "format": {
                     "name": "ROLLNUMBER5_Q11_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09405 Q11 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2221,9 +2028,6 @@
                 "format": {
                     "name": "ROLLNUMBER5_Q12_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09405 Q12 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2248,9 +2052,6 @@
                 "format": {
                     "name": "ROLLNUMBER5_Q13_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09405 Q13 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2347,9 +2148,6 @@
                 "format": {
                     "name": "ROLLNUMBERID6",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09406"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2374,9 +2172,6 @@
                 "format": {
                     "name": "ROLLNUMBER6_Q1_1",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09406 Q1 1"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2401,9 +2196,6 @@
                 "format": {
                     "name": "ROLLNUMBER6_Q2_1",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09406 Q2 1"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2428,9 +2220,6 @@
                 "format": {
                     "name": "ROLLNUMBER6_Q3_1",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09406 Q3 1"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2455,9 +2244,6 @@
                 "format": {
                     "name": "ROLLNUMBER6_Q4_2",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09406 Q4 2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2482,9 +2268,6 @@
                 "format": {
                     "name": "ROLLNUMBER6_Q5_2",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09406 Q5 2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2509,9 +2292,6 @@
                 "format": {
                     "name": "ROLLNUMBER6_Q6_2",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09406 Q6 2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2536,9 +2316,6 @@
                 "format": {
                     "name": "ROLLNUMBER6_Q7_2",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09406 Q7 2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2563,9 +2340,6 @@
                 "format": {
                     "name": "ROLLNUMBER6_Q8_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09406 Q8 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2590,9 +2364,6 @@
                 "format": {
                     "name": "ROLLNUMBER6_Q9_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09406 Q9 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2617,9 +2388,6 @@
                 "format": {
                     "name": "ROLLNUMBER6_Q10_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09406 Q10 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2644,9 +2412,6 @@
                 "format": {
                     "name": "ROLLNUMBER6_Q11_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09406 Q11 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2671,9 +2436,6 @@
                 "format": {
                     "name": "ROLLNUMBER6_Q12_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09406 Q12 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2698,9 +2460,6 @@
                 "format": {
                     "name": "ROLLNUMBER6_Q13_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09406 Q13 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2797,9 +2556,6 @@
                 "format": {
                     "name": "ROLLNUMBERID7",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u09217\u0940"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2824,9 +2580,6 @@
                 "format": {
                     "name": "ROLLNUMBER7_Q1_1",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09407 Q1 1"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2851,9 +2604,6 @@
                 "format": {
                     "name": "ROLLNUMBER7_Q2_1",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09407 Q2 1"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2878,9 +2628,6 @@
                 "format": {
                     "name": "ROLLNUMBER7_Q3_1",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09407 Q3 1"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2905,9 +2652,6 @@
                 "format": {
                     "name": "ROLLNUMBER7_Q4_2",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09407 Q4 2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2932,9 +2676,6 @@
                 "format": {
                     "name": "ROLLNUMBER7_Q5_2",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09407 Q5 2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2959,9 +2700,6 @@
                 "format": {
                     "name": "ROLLNUMBER7_Q6_2",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09407 Q6 2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2986,9 +2724,6 @@
                 "format": {
                     "name": "ROLLNUMBER7_Q7_2",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09407 Q7 2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -3013,9 +2748,6 @@
                 "format": {
                     "name": "ROLLNUMBER7_Q8_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09407 Q8 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -3040,9 +2772,6 @@
                 "format": {
                     "name": "ROLLNUMBER7_Q9_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09407 Q9 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -3067,9 +2796,6 @@
                 "format": {
                     "name": "ROLLNUMBER7_Q10_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09407 Q10 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -3094,9 +2820,6 @@
                 "format": {
                     "name": "ROLLNUMBER7_Q11_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09407 Q11 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -3121,9 +2844,6 @@
                 "format": {
                     "name": "ROLLNUMBER7_Q12_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09407 Q12 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -3148,9 +2868,6 @@
                 "format": {
                     "name": "ROLLNUMBER7_Q13_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09407 Q13 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -3247,9 +2964,6 @@
                 "format": {
                     "name": "ROLLNUMBERID8",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09408"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -3274,9 +2988,6 @@
                 "format": {
                     "name": "ROLLNUMBER8_Q1_1",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09408 Q1 1"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -3301,9 +3012,6 @@
                 "format": {
                     "name": "ROLLNUMBER8_Q2_1",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09408 Q2 1"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -3328,9 +3036,6 @@
                 "format": {
                     "name": "ROLLNUMBER8_Q3_1",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09408 Q3 1"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -3355,9 +3060,6 @@
                 "format": {
                     "name": "ROLLNUMBER8_Q4_2",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09408 Q4 2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -3382,9 +3084,6 @@
                 "format": {
                     "name": "ROLLNUMBER8_Q5_2",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09408 Q5 2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -3409,9 +3108,6 @@
                 "format": {
                     "name": "ROLLNUMBER8_Q6_2",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09408 Q6 2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -3436,9 +3132,6 @@
                 "format": {
                     "name": "ROLLNUMBER8_Q7_2",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09408 Q7 2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -3463,9 +3156,6 @@
                 "format": {
                     "name": "ROLLNUMBER8_Q8_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09408 Q8 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -3490,9 +3180,6 @@
                 "format": {
                     "name": "ROLLNUMBER8_Q9_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09408 Q9 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -3517,9 +3204,6 @@
                 "format": {
                     "name": "ROLLNUMBER8_Q10_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09408 Q10 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -3544,9 +3228,6 @@
                 "format": {
                     "name": "ROLLNUMBER8_Q11_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09408 Q11 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -3571,9 +3252,6 @@
                 "format": {
                     "name": "ROLLNUMBER8_Q12_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09408 Q12 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -3598,9 +3276,6 @@
                 "format": {
                     "name": "ROLLNUMBER8_Q13_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09408 Q13 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             }
         ]

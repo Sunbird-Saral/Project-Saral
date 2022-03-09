@@ -12,10 +12,10 @@ router.post('/schools/create', async (req, res) => {
     try {
         school.state = req.body.state.toLowerCase()
         school.schoolId = req.body.schoolId.toLowerCase()
-       
-        if(req.body.autoSync){
-            school.autoSync = req.body.autoSync
-        }
+
+        if (req.body.autoSync) school.autoSync = req.body.autoSync
+        if(req.body.autoSyncFrequency)   school.autoSyncFrequency = req.body.autoSyncFrequency
+        if(req.body.tags) school.tags = req.body.tags
         await school.save()
         let schools = {
             storeTrainingData: school.storeTrainingData,
@@ -29,8 +29,8 @@ router.post('/schools/create', async (req, res) => {
         if (e.message.includes(' duplicate key error')) {
             let key = Object.keys(e.keyValue)
             res.status(401).send({ error: `${key[0]}: ${e.keyValue[key[0]]} already exist` })
-        }else{
-        res.status(400).send(e)
+        } else {
+            res.status(400).send(e)
         }
     }
 })
@@ -67,9 +67,11 @@ router.post('/schools/login', async (req, res) => {
             name: schools.name,
             schoolId: schools.schoolId,
             state: schools.state,
-            autoSync: schools.autoSync
+            autoSync: schools.autoSync,
+            autoSyncFrequency: schools.autoSyncFrequency,
+            tags: schools.tags
         }
-   
+
         let response = {
             school,
             token
@@ -105,7 +107,7 @@ router.post('/schools/login', async (req, res) => {
 router.delete('/schools/:schoolId', async (req, res) => {
     try {
         const school = await School.findOne({ schoolId: req.params.schoolId.toLowerCase() })
-        if(!school) return res.status(404).send({ message: 'School Id does not exist.' })
+        if (!school) return res.status(404).send({ message: 'School Id does not exist.' })
         let lookup = {
             schoolId: school.schoolId
         }
@@ -125,7 +127,7 @@ router.patch('/schools/:schoolId', async (req, res) => {
     try {
         if (Object.keys(req.body).length === 0) res.status(400).send({ message: 'Validation error.' })
         const updates = Object.keys(req.body)
-        const allowedUpdates = ['name', 'state', 'udisceCode','storeTrainingData','autoSync']
+        const allowedUpdates = ['name', 'state', 'udisceCode', 'storeTrainingData', 'autoSync', 'autoSyncFrequency','tags']
         const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
 
         if (!isValidOperation) {

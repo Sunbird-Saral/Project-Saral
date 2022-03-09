@@ -2,56 +2,67 @@
     "layout": {
         "version": "1.0",
         "name": "ANY1S5QMULTICHOICE Exam Sheet Form",
+        "threshold": {
+            "minWidth" : 416,
+            "minHeight": 289,
+            "detectionRadius":12
+        },   
+        "resultValidation": {
+            "validate": {
+                "regExp": "[0-5]",
+                "errorMsg": "Omr result should be between 0 to 5"
+            }
+        },
         "cells": [
             {
                 "cellId": "1",
                 "rois": [
                     {
-                        "annotationTags": "ROLLNUMBER1",
+                        "annotationTags": "ROLLNUMBER_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "1",
                         "index": 0,
                         "rect": {
-                            "top": 33,
-                            "left": 220,
-                            "bottom": 63,
-                            "right": 243
+                            "top": 38,
+                            "left": 274,
+                            "bottom": 77,
+                            "right": 302
                         }
                     },
                     {
-                        "annotationTags": "ROLLNUMBER2",
+                        "annotationTags": "ROLLNUMBER_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "2",
                         "index": 1,
                         "rect": {
-                            "top": 32,
-                            "left": 245,
-                            "bottom": 64,
-                            "right": 269
+                            "top": 36,
+                            "left": 311,
+                            "bottom": 76,
+                            "right": 339
                         }
                     },
                     {
-                        "annotationTags": "ROLLNUMBER3",
+                        "annotationTags": "ROLLNUMBER_3",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "3",
                         "index": 2,
                         "rect": {
-                            "top": 32,
-                            "left": 271,
-                            "bottom": 63,
-                            "right": 293
+                            "top": 36,
+                            "left": 347,
+                            "bottom": 76,
+                            "right": 379
                         }
                     },
                     {
-                        "annotationTags": "ROLLNUMBER4",
+                        "annotationTags": "ROLLNUMBER_4",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "4",
                         "index": 3,
                         "rect": {
-                            "top": 33,
-                            "left": 294,
-                            "bottom": 63,
-                            "right": 316
+                            "top": 36,
+                            "left": 385,
+                            "bottom": 79,
+                            "right": 416
                         }
                     },
                     {
@@ -60,10 +71,10 @@
                         "roiId": "5",
                         "index": 4,
                         "rect": {
-                            "top": 33,
-                            "left": 317,
-                            "bottom": 63,
-                            "right": 342
+                            "top": 36,
+                            "left": 423,
+                            "bottom": 80,
+                            "right": 455
                         }
                     },
                     {
@@ -72,10 +83,10 @@
                         "roiId": "6",
                         "index": 5,
                         "rect": {
-                            "top": 34,
-                            "left": 343,
-                            "bottom": 63,
-                            "right": 365
+                            "top": 36,
+                            "left": 460,
+                            "bottom": 79,
+                            "right": 492
                         }
                     },
                     {
@@ -84,10 +95,10 @@
                         "roiId": "7",
                         "index": 6,
                         "rect": {
-                            "top": 33,
-                            "left": 367,
-                            "bottom": 64,
-                            "right": 391
+                            "top": 35,
+                            "left": 498,
+                            "bottom": 79,
+                            "right": 529
                         }
                     }
                 ],
@@ -97,9 +108,6 @@
                 "format": {
                     "name": "ROLLNUMBER",
                     "value": "ROLLNUMBER"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -107,74 +115,74 @@
                 "rois": [
                     {
                         "annotationTags": "QUESTION1_0",
-                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "8",
                         "index": 0,
                         "rect": {
-                            "top": 130,
-                            "left": 221,
-                            "bottom": 159,
-                            "right": 244
+                            "top": 165,
+                            "left": 275,
+                            "bottom": 194,
+                            "right": 300
                         }
                     },
                     {
                         "annotationTags": "QUESTION1_1",
-                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "9",
                         "index": 1,
                         "rect": {
-                            "top": 131,
-                            "left": 246,
-                            "bottom": 160,
-                            "right": 268
+                            "top": 165,
+                            "left": 311,
+                            "bottom": 194,
+                            "right": 335
                         }
                     },
                     {
                         "annotationTags": "QUESTION1_2",
-                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "10",
                         "index": 2,
                         "rect": {
-                            "top": 131,
-                            "left": 271,
-                            "bottom": 160,
-                            "right": 293
+                            "top": 165,
+                            "left": 349,
+                            "bottom": 195,
+                            "right": 373
                         }
                     },
                     {
                         "annotationTags": "QUESTION1_3",
-                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "11",
                         "index": 3,
                         "rect": {
-                            "top": 131,
-                            "left": 294,
-                            "bottom": 158,
-                            "right": 316
+                            "top": 165,
+                            "left": 385,
+                            "bottom": 195,
+                            "right": 409
                         }
                     },
                     {
                         "annotationTags": "QUESTION1_4",
-                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "12",
                         "index": 4,
                         "rect": {
-                            "top": 132,
-                            "left": 320,
-                            "bottom": 159,
-                            "right": 340
+                            "top": 165,
+                            "left": 423,
+                            "bottom": 193,
+                            "right": 447
                         }
                     },
                     {
                         "annotationTags": "QUESTION1_5",
-                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "13",
                         "index": 5,
                         "rect": {
-                            "top": 131,
-                            "left": 344,
-                            "bottom": 157,
-                            "right": 365
+                            "top": 165,
+                            "left": 460,
+                            "bottom": 193,
+                            "right": 483
                         }
                     }
                 ],
@@ -184,9 +192,6 @@
                 "format": {
                     "name": "QUESTION1",
                     "value": "QUESTION 1"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -194,74 +199,74 @@
                 "rois": [
                     {
                         "annotationTags": "QUESTION2_0",
-                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "14",
                         "index": 0,
                         "rect": {
-                            "top": 179,
-                            "left": 222,
-                            "bottom": 205,
-                            "right": 243
+                            "top": 225,
+                            "left": 275,
+                            "bottom": 254,
+                            "right": 298
                         }
                     },
                     {
                         "annotationTags": "QUESTION2_1",
-                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "15",
                         "index": 1,
                         "rect": {
-                            "top": 179,
-                            "left": 246,
-                            "bottom": 206,
-                            "right": 267
+                            "top": 224,
+                            "left": 311,
+                            "bottom": 253,
+                            "right": 335
                         }
                     },
                     {
                         "annotationTags": "QUESTION2_2",
-                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "16",
                         "index": 2,
                         "rect": {
-                            "top": 179,
-                            "left": 271,
-                            "bottom": 206,
-                            "right": 290
+                            "top": 224,
+                            "left": 347,
+                            "bottom": 252,
+                            "right": 372
                         }
                     },
                     {
                         "annotationTags": "QUESTION2_3",
-                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "17",
                         "index": 3,
                         "rect": {
-                            "top": 179,
-                            "left": 294,
-                            "bottom": 207,
-                            "right": 316
+                            "top": 225,
+                            "left": 386,
+                            "bottom": 253,
+                            "right": 410
                         }
                     },
                     {
                         "annotationTags": "QUESTION2_4",
-                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "18",
                         "index": 4,
                         "rect": {
-                            "top": 180,
-                            "left": 319,
-                            "bottom": 206,
-                            "right": 340
+                            "top": 225,
+                            "left": 422,
+                            "bottom": 254,
+                            "right": 446
                         }
                     },
                     {
                         "annotationTags": "QUESTION2_5",
-                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "19",
                         "index": 5,
                         "rect": {
-                            "top": 179,
-                            "left": 344,
-                            "bottom": 206,
-                            "right": 364
+                            "top": 224,
+                            "left": 459,
+                            "bottom": 253,
+                            "right": 483
                         }
                     }
                 ],
@@ -271,9 +276,6 @@
                 "format": {
                     "name": "QUESTION2",
                     "value": "QUESTION 2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -281,74 +283,74 @@
                 "rois": [
                     {
                         "annotationTags": "QUESTION3_0",
-                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "20",
                         "index": 0,
                         "rect": {
-                            "top": 228,
-                            "left": 222,
-                            "bottom": 253,
-                            "right": 243
+                            "top": 284,
+                            "left": 275,
+                            "bottom": 312,
+                            "right": 299
                         }
                     },
                     {
                         "annotationTags": "QUESTION3_1",
-                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "21",
                         "index": 1,
                         "rect": {
-                            "top": 227,
-                            "left": 246,
-                            "bottom": 253,
-                            "right": 267
+                            "top": 284,
+                            "left": 310,
+                            "bottom": 313,
+                            "right": 335
                         }
                     },
                     {
                         "annotationTags": "QUESTION3_2",
-                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "22",
                         "index": 2,
                         "rect": {
-                            "top": 228,
-                            "left": 271,
-                            "bottom": 254,
-                            "right": 292
+                            "top": 284,
+                            "left": 348,
+                            "bottom": 311,
+                            "right": 372
                         }
                     },
                     {
                         "annotationTags": "QUESTION3_3",
-                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "23",
                         "index": 3,
                         "rect": {
-                            "top": 227,
-                            "left": 296,
-                            "bottom": 255,
-                            "right": 317
+                            "top": 283,
+                            "left": 385,
+                            "bottom": 312,
+                            "right": 409
                         }
                     },
                     {
                         "annotationTags": "QUESTION3_4",
-                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "24",
                         "index": 4,
                         "rect": {
-                            "top": 228,
-                            "left": 320,
-                            "bottom": 255,
-                            "right": 340
+                            "top": 282,
+                            "left": 422,
+                            "bottom": 312,
+                            "right": 446
                         }
                     },
                     {
                         "annotationTags": "QUESTION3_5",
-                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "25",
                         "index": 5,
                         "rect": {
-                            "top": 228,
-                            "left": 345,
-                            "bottom": 255,
-                            "right": 365
+                            "top": 283,
+                            "left": 459,
+                            "bottom": 311,
+                            "right": 483
                         }
                     }
                 ],
@@ -358,9 +360,6 @@
                 "format": {
                     "name": "QUESTION3",
                     "value": "QUESTION 3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -368,74 +367,74 @@
                 "rois": [
                     {
                         "annotationTags": "QUESTION4_0",
-                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "26",
                         "index": 0,
                         "rect": {
-                            "top": 275,
-                            "left": 222,
-                            "bottom": 301,
-                            "right": 243
+                            "top": 342,
+                            "left": 274,
+                            "bottom": 371,
+                            "right": 298
                         }
                     },
                     {
                         "annotationTags": "QUESTION4_1",
-                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "27",
                         "index": 1,
                         "rect": {
-                            "top": 275,
-                            "left": 247,
-                            "bottom": 301,
-                            "right": 267
+                            "top": 343,
+                            "left": 311,
+                            "bottom": 371,
+                            "right": 335
                         }
                     },
                     {
                         "annotationTags": "QUESTION4_2",
-                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "28",
                         "index": 2,
                         "rect": {
-                            "top": 275,
-                            "left": 271,
-                            "bottom": 301,
-                            "right": 292
+                            "top": 343,
+                            "left": 348,
+                            "bottom": 371,
+                            "right": 372
                         }
                     },
                     {
                         "annotationTags": "QUESTION4_3",
-                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "29",
                         "index": 3,
                         "rect": {
-                            "top": 275,
-                            "left": 295,
-                            "bottom": 301,
-                            "right": 317
+                            "top": 342,
+                            "left": 384,
+                            "bottom": 371,
+                            "right": 409
                         }
                     },
                     {
                         "annotationTags": "QUESTION4_4",
-                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "30",
                         "index": 4,
                         "rect": {
-                            "top": 275,
-                            "left": 320,
-                            "bottom": 302,
-                            "right": 342
+                            "top": 342,
+                            "left": 422,
+                            "bottom": 370,
+                            "right": 445
                         }
                     },
                     {
                         "annotationTags": "QUESTION4_5",
-                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "31",
                         "index": 5,
                         "rect": {
-                            "top": 276,
-                            "left": 345,
-                            "bottom": 302,
-                            "right": 365
+                            "top": 342,
+                            "left": 459,
+                            "bottom": 371,
+                            "right": 483
                         }
                     }
                 ],
@@ -445,9 +444,6 @@
                 "format": {
                     "name": "QUESTION4",
                     "value": "QUESTION 4"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -455,74 +451,74 @@
                 "rois": [
                     {
                         "annotationTags": "QUESTION5_0",
-                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "32",
                         "index": 0,
                         "rect": {
-                            "top": 323,
-                            "left": 222,
-                            "bottom": 348,
-                            "right": 243
+                            "top": 401,
+                            "left": 274,
+                            "bottom": 430,
+                            "right": 299
                         }
                     },
                     {
                         "annotationTags": "QUESTION5_1",
-                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "33",
                         "index": 1,
                         "rect": {
-                            "top": 323,
-                            "left": 246,
-                            "bottom": 349,
-                            "right": 267
+                            "top": 400,
+                            "left": 310,
+                            "bottom": 430,
+                            "right": 335
                         }
                     },
                     {
                         "annotationTags": "QUESTION5_2",
-                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "34",
                         "index": 2,
                         "rect": {
-                            "top": 323,
-                            "left": 271,
-                            "bottom": 349,
-                            "right": 292
+                            "top": 400,
+                            "left": 348,
+                            "bottom": 430,
+                            "right": 372
                         }
                     },
                     {
                         "annotationTags": "QUESTION5_3",
-                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "35",
                         "index": 3,
                         "rect": {
-                            "top": 322,
-                            "left": 295,
-                            "bottom": 349,
-                            "right": 315
+                            "top": 401,
+                            "left": 385,
+                            "bottom": 429,
+                            "right": 409
                         }
                     },
                     {
                         "annotationTags": "QUESTION5_4",
-                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "36",
                         "index": 4,
                         "rect": {
-                            "top": 323,
-                            "left": 320,
-                            "bottom": 349,
-                            "right": 341
+                            "top": 401,
+                            "left": 422,
+                            "bottom": 430,
+                            "right": 447
                         }
                     },
                     {
                         "annotationTags": "QUESTION5_5",
-                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "extractionMethod": "CELL_OMR",
                         "roiId": "37",
                         "index": 5,
                         "rect": {
-                            "top": 323,
-                            "left": 344,
-                            "bottom": 349,
-                            "right": 365
+                            "top": 400,
+                            "left": 458,
+                            "bottom": 430,
+                            "right": 482
                         }
                     }
                 ],
@@ -532,9 +528,6 @@
                 "format": {
                     "name": "QUESTION5",
                     "value": "QUESTION 5"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             }
         ]

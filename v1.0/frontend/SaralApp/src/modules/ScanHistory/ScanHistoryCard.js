@@ -208,6 +208,12 @@ const ScanHistoryCard = ({
     Examtypedata = studentsAndExamData.data.exams.filter(function (item) {
         return item.subject == filteredData.response.subject;
     }).map(({ type }) => ({ type }));
+
+    
+    let ExamQuesDetail = studentsAndExamData.data.exams
+    ExamQuesDetail = studentsAndExamData.data.exams.filter(function (item) {
+        return item.subject == filteredData.response.subject;
+    })
     return (
         <View>
             <TouchableOpacity
@@ -401,7 +407,7 @@ const ScanHistoryCard = ({
                             }
                         </View>
                         <View style={styles1.container1}>
-                            {studentsAndExamData.data.exams[0].questions.map((stu) => {
+                            {ExamQuesDetail[0] && ExamQuesDetail[0].questions.map((stu) => {
                                 return (
                                     <View key={stu} style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
 

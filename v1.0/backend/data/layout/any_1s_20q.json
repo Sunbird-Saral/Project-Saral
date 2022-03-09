@@ -1,7 +1,12 @@
 {
     "layout": {
         "version": "1.0",
-        "name": "ANY1S10Q SAT Exam Sheet Form",
+        "name": "ANY1S20Q SAT Exam Sheet Form",
+        "threshold": {
+            "minWidth" : 490,
+            "minHeight": 430,
+            "detectionRadius": 12
+        }, 
         "cells": [
             {
                 "cellId": "1",
@@ -207,7 +212,8 @@
                     "value": "ROLLNUMBER"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "",
+                    "errorMsg": ""
                 }
             },
             {
@@ -246,7 +252,8 @@
                     "value": "QUESTION 1"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "",
+                    "errorMsg": ""
                 }
             },
             {
@@ -285,7 +292,8 @@
                     "value": "QUESTION 2"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "",
+                    "errorMsg": ""
                 }
             },
             {
@@ -324,7 +332,8 @@
                     "value": "QUESTION 3"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "",
+                    "errorMsg": ""
                 }
             },
             {
@@ -363,7 +372,8 @@
                     "value": "QUESTION 4"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "",
+                    "errorMsg": ""
                 }
             },
             {
@@ -402,7 +412,8 @@
                     "value": "QUESTION 5"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "",
+                    "errorMsg": ""
                 }
             },
             {
@@ -441,7 +452,8 @@
                     "value": "QUESTION 6"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "",
+                    "errorMsg": ""
                 }
             },
             {
@@ -480,7 +492,8 @@
                     "value": "QUESTION 7"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "",
+                    "errorMsg": ""
                 }
             },
             {
@@ -519,7 +532,8 @@
                     "value": "QUESTION 8"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "",
+                    "errorMsg": ""
                 }
             },
             {
@@ -558,7 +572,8 @@
                     "value": "QUESTION 9"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "",
+                    "errorMsg": ""
                 }
             },
             {
@@ -597,7 +612,8 @@
                     "value": "QUESTION 10"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "",
+                    "errorMsg": ""
                 }
             },
             {
@@ -636,7 +652,8 @@
                     "value": "QUESTION 11"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "",
+                    "errorMsg": ""
                 }
             },
             {
@@ -675,7 +692,8 @@
                     "value": "QUESTION 12"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "",
+                    "errorMsg": ""
                 }
             },
             {
@@ -714,7 +732,8 @@
                     "value": "QUESTION 13"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "",
+                    "errorMsg": ""
                 }
             },
             {
@@ -753,7 +772,8 @@
                     "value": "QUESTION 14"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "",
+                    "errorMsg": ""
                 }
             },
             {
@@ -792,7 +812,8 @@
                     "value": "QUESTION 15"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "",
+                    "errorMsg": ""
                 }
             },
             {
@@ -831,7 +852,8 @@
                     "value": "QUESTION 16"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "",
+                    "errorMsg": ""
                 }
             },
             {
@@ -870,7 +892,8 @@
                     "value": "QUESTION 17"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "",
+                    "errorMsg": ""
                 }
             },
             {
@@ -909,7 +932,8 @@
                     "value": "QUESTION 18"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "",
+                    "errorMsg": ""
                 }
             },
             {
@@ -948,7 +972,8 @@
                     "value": "QUESTION 19"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "",
+                    "errorMsg": ""
                 }
             },
             {
@@ -987,7 +1012,8 @@
                     "value": "QUESTION 20"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "",
+                    "errorMsg": ""
                 }
             },
             {
@@ -1038,7 +1064,8 @@
                     "value": "MAX MARKS"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "",
+                    "errorMsg": ""
                 }
             },
             {
@@ -1089,7 +1116,8 @@
                     "value": "MARKS OBTAINED"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "",
+                    "errorMsg": ""
                 }
             }
         ]
