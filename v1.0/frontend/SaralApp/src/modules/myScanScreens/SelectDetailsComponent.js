@@ -8,7 +8,6 @@ import DateTimePicker from '@react-native-community/datetimepicker'
 import Strings from '../../utils/Strings';
 import AppTheme from '../../utils/AppTheme';
 import Spinner from '../common/components/loadingIndicator';
-import { apkVersion } from '../../configs/config';
 import HeaderComponents from '../common/components/HeaderComponents';
 import DropDownMenu from '../common/components/DropDownComponent';
 import ButtonComponent from '../common/components/ButtonComponent';
@@ -727,14 +726,6 @@ class SelectDetailsComponent extends Component {
                             {Strings.schoolId_text + ' : '}
                             <Text style={{ fontWeight: 'normal' }}>
                                 {loginData.data.school.schoolId}
-                            </Text>
-                        </Text>
-                        <Text
-                            style={{ fontSize: AppTheme.FONT_SIZE_REGULAR - 3, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', marginBottom: '4%' }}
-                        >
-                            {Strings.version_text + ' : '}
-                            <Text style={{ fontWeight: 'normal' }}>
-                                {apkVersion}
                             </Text>
                         </Text>
                     </View>}
