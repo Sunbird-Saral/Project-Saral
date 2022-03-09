@@ -22,7 +22,6 @@ import { styles } from './StudentsDataStyle';
 //constant
 import Strings from '../../utils/Strings';
 import AppTheme from '../../utils/AppTheme';
-import { apkVersion } from '../../configs/config';
 import { ROIAction } from './ROIAction';
 
 //npm
