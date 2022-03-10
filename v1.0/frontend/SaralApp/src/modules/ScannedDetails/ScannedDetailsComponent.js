@@ -796,7 +796,7 @@ const ScannedDetailsComponent = ({
         newArrayValue.forEach((element, index) => {
             element.rois.forEach((data) => {
                 if (data.extractionMethod == CELL_OMR) {
-                    totalRois = isMultiple ? element.rois.length : element.rois.length - 1
+                    totalRois = isMultiple ? element.rois.length : !isMultipleStudent && element.rois.length == 1 ? element.rois.length : element.rois.length - 1
                     if (totalRois < element.consolidatedPrediction) {
                         validationCellOmr = true
                     }

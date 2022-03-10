@@ -8,7 +8,6 @@ import Strings from '../../utils/Strings';
 import AppTheme from '../../utils/AppTheme';
 import Spinner from '../common/components/loadingIndicator';
 import { OcrLocalResponseAction } from '../../flux/actions/apis/OcrLocalResponseAction'
-import { apkVersion } from '../../configs/config';
 import ScanHistoryCard from '../ScanHistory/ScanHistoryCard';
 import SaralSDK from '../../../SaralSDK'
 import { getScannedDataFromLocal,getErrorMessage } from '../../utils/StorageUtils';
@@ -285,14 +284,6 @@ class MyScanComponent extends Component {
                                 {loginData.data.school.schoolId}
                             </Text>
                         </Text>
-                <Text
-                    style={{ fontSize: AppTheme.FONT_SIZE_REGULAR - 3, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', marginBottom: '4%' }}
-                >
-                    {Strings.version_text + ' : '}
-                    <Text style={{ fontWeight: 'normal' }}>
-                        {apkVersion}
-                    </Text>
-                </Text>
                     </View>
                 }
                 

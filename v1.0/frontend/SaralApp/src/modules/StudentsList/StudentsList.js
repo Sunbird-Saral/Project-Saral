@@ -22,7 +22,6 @@ import { styles } from './StudentsDataStyle';
 //constant
 import Strings from '../../utils/Strings';
 import AppTheme from '../../utils/AppTheme';
-import { apkVersion } from '../../configs/config';
 import { ROIAction } from './ROIAction';
 
 //npm
@@ -340,14 +339,6 @@ useEffect(() => {
                             {loginData.data.school.schoolId}
                         </Text>
                     </Text>
-                    <Text
-                style={{ fontSize: AppTheme.FONT_SIZE_REGULAR - 3, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', marginBottom: '4%' }}
-            >
-                {Strings.version_text + ' : '}
-                <Text style={{ fontWeight: 'normal' }}>
-                    {apkVersion}
-                </Text>
-            </Text>
                 </View>
 
             }

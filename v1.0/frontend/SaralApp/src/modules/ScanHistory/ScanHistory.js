@@ -103,7 +103,11 @@ const ScanHistory = ({
                         </Text>
                         <Text
                             style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}>
-                        </Text>
+                                { Strings.schoolId_text + ' : '}
+                            <Text style={{ fontWeight: 'normal' }}>
+                                {loginData.data.school.schoolId}
+                                </Text>
+                                </Text>
                     </View>
                 }
                 </View>
