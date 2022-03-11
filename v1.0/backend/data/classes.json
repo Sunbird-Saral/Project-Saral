@@ -296,5 +296,18 @@
   "classId": "5",
   "className": "HouseHold",
   "schoolId": "skill001"
+},
+{
+  "sections": [
+    {
+      "section": "A"
+    },
+    {
+      "section": "B"
+    }
+  ],
+  "classId": "2",
+  "className": "Class-2",
+  "schoolId": "a001"
 }
 ]

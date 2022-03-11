@@ -2,11 +2,6 @@
     "layout": {
         "version": "1.0",
         "name": "ANY1S34Q PAT Exam Sheet Form",
-        "threshold": {
-            "minWidth" : 550,
-            "minHeight": 430,
-            "detectionRadius":12
-        },   
         "cells": [
             {
                 "cellId": "1",
