@@ -127,19 +127,8 @@ const ScanHistoryCard = ({
                 })
 
                 let apiObj = new SaveScanData(filterData[0], loginData.data.token);
-                dispatch(APITransport(apiObj))
+                saveScanData(apiObj, filterDataLen, setIntolocalAfterFilter);
 
-                if (apiStatus && apiStatus.error && apiStatus.message != null) {
-
-                    callCustomModal(Strings.message_text,Strings.contactAdmin,false);
-                    setIsLoading(false)
-
-                } else {
-                    setTimeout(function () {
-                        callScanStatusData(filterDataLen, setIntolocalAfterFilter)
-                    }, 2000);
-
-                }
             } else {
                 callCustomModal(Strings.message_text,Strings.there_is_no_data,false);
                 setIsLoading(false)
@@ -152,6 +141,33 @@ const ScanHistoryCard = ({
     else {
         setIsLoading(false)
         callCustomModal(Strings.message_text,Strings.there_is_no_data,false);
+        }
+    }
+    
+    const saveScanData = async(api, filteredDatalen, localScanData) => {
+
+        if (api.method === 'PUT') {
+            let apiResponse = null;
+            const source = axios.CancelToken.source();
+            const id = setTimeout(() => {
+                if (apiResponse === null) {
+                    source.cancel('The request timed out.');
+                }
+            }, 60000);
+            axios.put(api.apiEndPoint(), api.getBody(), { headers: api.getHeaders(), cancelToken: source.token },)
+                .then(function (res) {
+                    apiResponse = res;
+                    clearTimeout(id);
+                    api.processResponse(res);
+                    dispatch(dispatchAPIAsync(api));
+                    callScanStatusData(filteredDatalen, localScanData)
+                })
+                .catch(function (err) {
+                    collectErrorLogs("ScanHistoryCard.js","saveScanData",api.apiEndPoint(),err,false);
+                    callCustomModal(Strings.message_text,Strings.contactAdmin,false);
+                    clearTimeout(id);
+                    setIsLoading(false);
+                });
         }
     }
 
