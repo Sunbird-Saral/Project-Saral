@@ -103,8 +103,13 @@ export default strings = new LocalizedStrings({
         student_id_should_be_same: 'ID should be same',
         Student_ID_Shouldnt_be_duplicated : "ID Shouldn't be duplicated",
         Sum_Of_All_obtained_marks: "Sum Of All obtained result should be equal to result Obtained",
+        process_failed_try_again : 'Process failed try again later ',
+        there_is_no_data: 'There is no data!',
         help_menu: 'Help',
         about_menu: 'About',
+        ok_button: "OK",
+        cancel_button: 'Cancel',
+        error_message: "Error",
         add_new_tag: "Add New Tag",
         add_tag: 'Add Tag',
         StudentId_limit_exceeds:"Student Id exceeds the limit"

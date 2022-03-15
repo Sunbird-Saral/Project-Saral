@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, TouchableOpacity, Text, Image } from 'react-native';
 import AppTheme from '../../utils/AppTheme';
+import { monospace_FF } from '../../utils/CommonUtils';
 
 const TabHeader = ({
     tabIndex,
@@ -18,7 +19,7 @@ const TabHeader = ({
                 onPress={onPressTab1}
             >
                 {tabIndex == 1 ? <View style={[styles.tabNumberStyle, tabIndex == 1 ? styles.activeTabNumberStyle : styles.inactiveTabNumberStyle]}>
-                    <Text style={[styles.tabNumberTextStyle, { color: tabIndex == 1 ? AppTheme.BLUE_BORDER : AppTheme.INACTIVE_BTN_TEXT}]}>
+                    <Text style={[styles.tabNumberTextStyle, { color: tabIndex == 1 ? AppTheme.BLUE_BORDER : AppTheme.INACTIVE_BTN_TEXT,fontFamily : monospace_FF}]}>
                         {'1'}
                     </Text>
                 </View> : 
@@ -28,7 +29,7 @@ const TabHeader = ({
                     resizeMode={'contain'}
                 />
                 }
-                <Text style={[styles.tabLabelStyle, {color: tabIndex == 1 ? AppTheme.BLACK : AppTheme.GREEN}]}>
+                <Text style={[styles.tabLabelStyle, {color: tabIndex == 1 ? AppTheme.BLACK : AppTheme.GREEN,fontFamily : monospace_FF}]}>
                     {tabLabel1}
                 </Text>
             </TouchableOpacity>
@@ -39,11 +40,11 @@ const TabHeader = ({
                 onPress={onPressTab2}
             >
                 <View style={[styles.tabNumberStyle, tabIndex == 2 ? styles.activeTabNumberStyle : styles.inactiveTabNumberStyle]}>
-                    <Text style={[styles.tabNumberTextStyle, { color: tabIndex == 2 ? AppTheme.BLUE_BORDER : AppTheme.INACTIVE_BTN_TEXT}]}>
+                    <Text style={[styles.tabNumberTextStyle, { color: tabIndex == 2 ? AppTheme.BLUE_BORDER : AppTheme.INACTIVE_BTN_TEXT,fontFamily : monospace_FF}]}>
                         {'2'}
                     </Text>
                 </View>
-                <Text style={[styles.tabLabelStyle, {color: tabIndex == 2 ? AppTheme.BLACK : AppTheme.INACTIVE_BTN_TEXT}]}>
+                <Text style={[styles.tabLabelStyle, {color: tabIndex == 2 ? AppTheme.BLACK : AppTheme.INACTIVE_BTN_TEXT,fontFamily : monospace_FF}]}>
                     {tabLabel2}
                 </Text>
             </TouchableOpacity>

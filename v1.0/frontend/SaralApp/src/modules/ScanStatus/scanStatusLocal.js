@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { FlatList, Text, View, BackHandler, Image, TouchableOpacity, Linking, Share, Alert} from 'react-native';
 
 //redux
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 
 //constant
 import Strings from '../../utils/Strings';
@@ -23,6 +23,7 @@ import { getPresentAbsentStudent, getScannedDataFromLocal,getErrorMessage } from
 import { Assets } from '../../assets';
 import ShareComponent from '../common/components/Share';
 import MultibrandLabels from '../common/components/multibrandlabels';
+import { dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF } from '../../utils/CommonUtils';
 
 
 const ScanStatusLocal = ({
@@ -37,8 +38,8 @@ const ScanStatusLocal = ({
     const [presentStudentList, setPresentStudentList] = useState([])
     const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.scanHistory[0]
     
-    const data =(JSON.stringify(loacalstutlist[0],null, 2))
-   
+    const data =(JSON.stringify(presentStudentList[0],null, 2))
+    const dispatch = useDispatch()
 
 
 useEffect(
@@ -52,6 +53,18 @@ useEffect(
     }, []),
 );
 
+const callCustomModal = (title, message, isAvailable, func, cancel) => {
+    let data = {
+        title: title,
+        message: message,
+        isOkAvailable: isAvailable,
+        okFunc: func,
+        isCancel : cancel
+    }
+    dispatch(dispatchCustomModalStatus(true));
+    dispatch(dispatchCustomModalMessage(data));
+}
+
     const onShare = async () => {
         try {
             const result = await Share.share({
@@ -64,15 +77,14 @@ useEffect(
                     // shared with activity type of result.activityType
                 } else {
                     // shared
-                    Alert.alert(Strings.shareDataExceed)
                 }
             } else if (result.action === Share.dismissedAction) {
                 // dismissed
             }
         } catch (error) {
             console.log(error.message);
-            Alert.alert(Strings.shareDataExceed)
-            alert(error.message);
+            callCustomModal(Strings.message_text,Strings.shareDataExceed,false);
+            // alert(error.message);
         }
     };
     
@@ -89,7 +101,7 @@ useEffect(
     const renderEmptyData = ({ item }) => {
         return (
             <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
-                <Text>No Data Available</Text>
+                <Text style={{fontFamily : monospace_FF}}>No Data Available</Text>
             </View>
         )
     }
@@ -97,8 +109,7 @@ useEffect(
     useEffect(() => {
         getDataFromLocal()
         getStudentList()
-        getPresentStudentList()
-    },[loacalstutlist])
+    },[])
     
     const getStudentList = async () => {
         let data = await getPresentAbsentStudent()
@@ -116,12 +127,12 @@ useEffect(
                     return true
                 }   
             })
-            setLoacalstutlist(filterscandata)
+            getPresentStudentList(filterscandata)
         }
     }
 
 
-    const getPresentStudentList = ()=>{
+    const getPresentStudentList = (loacalstutlist)=>{
       
         let data =typeof (loacalstutlist) === "object"
             ?
@@ -145,7 +156,7 @@ useEffect(
              <ShareComponent
                  navigation={navigation}
                  />
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+            <View style={{ flexDirection:'row',justifyContent: 'space-between' }}>
             {(multiBrandingData && BrandLabel) ?
                 <MultibrandLabels
                 Label1={BrandLabel.School}
@@ -161,27 +172,28 @@ useEffect(
                         style={styles.schoolName}
                     >
                         {Strings.school_name + ' Name : '}
-                        <Text style={{ fontWeight: 'normal' }}>{loginData.data.school.name}</Text>
+                        <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>{loginData.data.school.name}</Text>
                     </Text>
                     <Text style={[styles.schoolId, { marginLeft: 5 }]}>
                         {Strings.schoolId_text + ' : '}
-                        <Text style={{ fontWeight: 'normal', }}>
+                        <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
                             {loginData.data.school.schoolId}
                         </Text>
                     </Text>
                 </View>
             }
-            {loacalstutlist[0] ?
-            <TouchableOpacity onPress={onShare}>
+            {presentStudentList.length > 0 &&
+            
+            <TouchableOpacity onPress={()=>onShare()} style={{width:40,height:40,marginRight:20,marginTop:10}}>
                     <Image style={{ height: 25, width: 25, marginHorizontal: 15, marginVertical: 20 }} source={Assets.Share} />
-                </TouchableOpacity>:
-                null}
+                </TouchableOpacity>
+                }
             </View>
 
             <Text style={styles.scanStatus}>{Strings.scan_status}</Text>
         
             <FlatList
-                data={ loacalstutlist && presentStudentList}
+                data={ presentStudentList && presentStudentList}
                 renderItem={renderItem}
                 ListEmptyComponent={renderEmptyData}
             keyExtractor={(item, index) => `${index.toString()}`}

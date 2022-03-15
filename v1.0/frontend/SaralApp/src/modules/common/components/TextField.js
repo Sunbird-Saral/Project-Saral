@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, TextInput } from 'react-native';
 import AppTheme from '../../../utils/AppTheme';
+import { monospace_FF } from '../../../utils/CommonUtils';
 
 const TextField = React.forwardRef(({
     labelText,
@@ -60,7 +61,8 @@ const styles = {
         color: AppTheme.BLACK,
         fontWeight: '700',
         letterSpacing: 1,
-        lineHeight: 35
+        lineHeight: 35,
+        fontFamily : monospace_FF
     },
     errorViewStyle: {
         justifyContent: 'flex-end',
@@ -72,7 +74,8 @@ const styles = {
         color: AppTheme.ERROR_RED,
         fontWeight: '600',
         letterSpacing: .7,
-        lineHeight: 35
+        lineHeight: 35,
+        fontFamily : monospace_FF
     },
     inputStyle: {
         borderWidth: 1,

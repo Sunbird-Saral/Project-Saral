@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import AppTheme from '../../../utils/AppTheme';
+import { monospace_FF } from '../../../utils/CommonUtils';
 import Strings from '../../../utils/Strings';
 
 
@@ -66,7 +67,8 @@ const styles = {
         color: AppTheme.BLUE,
         textAlign: 'left',
         fontWeight: 'bold',
-        letterSpacing: 1
+        letterSpacing: 1,
+        fontFamily : monospace_FF
     },
     btnStyle: {
         height: 36,
@@ -87,7 +89,8 @@ const styles = {
         color: AppTheme.WHITE,
         textAlign: 'left',
         fontWeight: 'bold',
-        letterSpacing: 1
+        letterSpacing: 1,
+        fontFamily : monospace_FF
     },
     versionTxtStyle: {
         paddingHorizontal: '5%',
@@ -95,7 +98,8 @@ const styles = {
         color: AppTheme.BLACK,
         textAlign: 'left',
         fontWeight: 'bold',
-        letterSpacing: 1
+        letterSpacing: 1,
+        fontFamily : monospace_FF
     }
 }
 export default HeaderComponent;

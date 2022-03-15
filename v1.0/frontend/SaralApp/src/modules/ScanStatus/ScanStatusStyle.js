@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import AppTheme from "../../utils/AppTheme";
+import { monospace_FF } from "../../utils/CommonUtils";
 
 export const styles = StyleSheet.create({
     container: {
@@ -11,7 +12,8 @@ export const styles = StyleSheet.create({
         color: AppTheme.BLACK,
         fontWeight: 'bold',
         paddingHorizontal: '5%',
-        paddingVertical: '2%'
+        paddingVertical: '2%',
+        fontFamily : monospace_FF
     },
     schoolId:
     {
@@ -25,7 +27,8 @@ export const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginTop: 15,
         textAlign: 'center',
-        paddingBottom: 10
+        paddingBottom: 10,
+        fontFamily : monospace_FF
     },
     content: {
         paddingBottom: 20,
