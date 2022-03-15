@@ -111,6 +111,7 @@ export default strings = new LocalizedStrings({
         cancel_button: 'Cancel',
         error_message: "Error",
         add_new_tag: "Add New Tag",
-        add_tag: 'Add Tag'
+        add_tag: 'Add Tag',
+        absent_status: 'Absent Status'
     }
 })
