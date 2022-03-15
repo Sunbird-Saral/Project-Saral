@@ -10,6 +10,7 @@ import APITransport from '../../flux/actions/transport/apitransport';
 import Brands from '../common/components/Brands';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Assets } from '../../assets';
+import { monospace_FF } from '../../utils/CommonUtils';
 
 class HomeComponent extends Component {
     constructor(props) {
@@ -43,7 +44,7 @@ class HomeComponent extends Component {
 
                 this.state.isLoading ?
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={{ fontSize: 12, fontWeight: 'bold', fontFamily: 'sans-serif-condensed' }}>Loading Branding ...</Text>
+                        <Text style={{ fontSize: 12, fontWeight: 'bold', fontFamily : monospace_FF }}>Loading Branding ...</Text>
                     </View> :
                         <Brands
                             Image1={Assets.AppLogo}

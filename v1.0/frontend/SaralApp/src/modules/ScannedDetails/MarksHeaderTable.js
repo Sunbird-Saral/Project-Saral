@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, TextInput, Image } from 'react-native';
-import AppTheme from '../../utils/AppTheme';
+import { View, TextInput, Image,TouchableOpacity } from 'react-native';
 import { Assets } from '../../assets';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import AppTheme from '../../utils/AppTheme';
+import { monospace_FF } from '../../utils/CommonUtils';
 
 const MarksHeaderTable = ({
     customRowStyle,
@@ -82,7 +82,8 @@ const styles = {
         fontWeight: 'bold',
         letterSpacing: 1,
         fontSize: AppTheme.FONT_SIZE_SMALL,
-        textAlign: 'center'
+        textAlign: 'center',
+        fontFamily : monospace_FF
     }
 }
 
