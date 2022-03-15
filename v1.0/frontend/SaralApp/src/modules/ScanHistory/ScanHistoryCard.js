@@ -4,7 +4,7 @@ import { connect, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
 import AppTheme from '../../utils/AppTheme';
-import { getErrorMessage, getLoginCred, getScanData, getScannedDataFromLocal, setErrorMessage, setScannedDataIntoLocal } from '../../utils/StorageUtils';
+import { getErrorMessage, getLoginCred, getPresentAbsentStudent, getScanData, getScannedDataFromLocal, setErrorMessage, setScannedDataIntoLocal } from '../../utils/StorageUtils';
 import { dispatchCustomModalMessage, dispatchCustomModalStatus, Exam_QuestionHeader, monospace_FF } from '../../utils/CommonUtils';
 import ExamDetailsPopup from '../common/components/ExamDetailsPopup';
 import ButtonComponent from '../common/components/ButtonComponent';
@@ -38,6 +38,7 @@ const ScanHistoryCard = ({
 }) => {
     const [loading, setLoading] = useState(false)
     const [isModalVisible, setIsModalVisible] = useState(false)
+    const [studentCount, setStudentCount] = useState({ absentCount: 0, totalCount: 0 })
     const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.scanHistoryCard[0]
     const ExamDetaildata = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.examDetailsPopup
     
@@ -45,6 +46,7 @@ const ScanHistoryCard = ({
     useEffect(() => {
         setTimeout(() => { setLoading(!loading) }, 3000)
         getSaveCount()
+        getStudentList()
     }, [])
     const getSaveCount = () => {
         let data =
@@ -212,6 +214,17 @@ const ScanHistoryCard = ({
             payload: api.getPayload()
         }
     }
+
+    const getStudentList = async () => {
+        let studentList = await getPresentAbsentStudent();
+        let absentStudent = studentList.filter((item) => { 
+            if (item.studentAvailability == false) {
+                return true
+            }
+        })
+        setStudentCount({ absentCount: absentStudent.length , totalCount: studentList.length})
+    }
+
     // for exam type
     let Examtypedata = studentsAndExamData.data.exams
     Examtypedata = studentsAndExamData.data.exams.filter(function (item) {
@@ -289,7 +302,7 @@ const ScanHistoryCard = ({
                             <Text style={{fontFamily : monospace_FF}} >{BrandLabel && BrandLabel.ExamDetail ? BrandLabel.ExamDetail:Strings.exam_details}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
-                                <Text style={{fontFamily : monospace_FF}}   onPress={() => setIsModalVisible(!isModalVisible)} style={{textDecorationLine:'underline',color:'blue'}}>{BrandLabel && BrandLabel.Details ? BrandLabel.Details: Strings.details}</Text>
+                                <Text style={{fontFamily : monospace_FF,textDecorationLine:'underline',color:'blue'}}   onPress={() => setIsModalVisible(!isModalVisible)} >{BrandLabel && BrandLabel.Details ? BrandLabel.Details: Strings.details}</Text>
                             </View>
                         </View>
                         <View style={styles.scanCardStyle}>
@@ -309,6 +322,16 @@ const ScanHistoryCard = ({
                                     <Text style={{fontFamily : monospace_FF}} >{getSaveCount()}</Text> : <View style={{ alignItems: 'flex-start' }}><ActivityIndicator size={'small'} color={'grey'} /></View>}
                             </View>
                         </View>
+
+                        <View style={styles.scanCardStyle}>
+                            <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle, { borderBottomWidth: 1, borderTopWidth: 0 }]}>
+                                <Text>{Strings.absent_status}</Text>
+                            </View>
+                            <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle, { borderBottomWidth: 1, borderTopWidth: 0 }]}>
+                                <Text>{studentCount.absentCount} of {studentCount.totalCount}</Text>
+                            </View>
+                        </View>
+
                     </View>
                 </View>
 
@@ -357,7 +380,7 @@ const ScanHistoryCard = ({
                                 style={{ backgroundColor: AppTheme.GREY, borderRadius: 4, width: '80%', alignItems: 'center', justifyContent: 'center', elevation: 8, paddingVertical: 4 }}
                                 onPress={onPressContinue}
                             >
-                                <Text  style={{fontFamily : monospace_FF}} style={{ color: AppTheme.WHITE }}>{Strings.continue_scan}</Text>
+                                <Text  style={{fontFamily : monospace_FF,color : AppTheme.WHITE}} >{Strings.continue_scan}</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -371,7 +394,7 @@ const ScanHistoryCard = ({
                                 style={{ backgroundColor: AppTheme.GREY, borderRadius: 4, width: '80%', alignItems: 'center', justifyContent: 'center', elevation: 8, paddingVertical: 4 }}
                                  onPress={onPressScanStatus}
                             >
-                                <Text  style={{fontFamily : monospace_FF}} style={{ color: AppTheme.WHITE }}>{Strings.scan_status}</Text>
+                                <Text  style={{fontFamily : monospace_FF, color : AppTheme.WHITE}}>{Strings.scan_status}</Text>
                             </TouchableOpacity>
                         </View>
                     </View>

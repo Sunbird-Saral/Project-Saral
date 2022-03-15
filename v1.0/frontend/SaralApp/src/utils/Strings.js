@@ -112,6 +112,7 @@ export default strings = new LocalizedStrings({
         error_message: "Error",
         add_new_tag: "Add New Tag",
         add_tag: 'Add Tag',
-        StudentId_limit_exceeds:"Student Id exceeds the limit"
+        StudentId_limit_exceeds:"Student Id exceeds the limit",
+        absent_status: 'Absent Status'
     }
 })
