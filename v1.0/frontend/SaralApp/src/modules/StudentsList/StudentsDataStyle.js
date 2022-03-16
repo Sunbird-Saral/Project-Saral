@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import AppTheme from "../../utils/AppTheme";
+import { monospace_FF } from "../../utils/CommonUtils";
 
 export const styles = StyleSheet.create({
     container: {
@@ -44,7 +45,8 @@ export const styles = StyleSheet.create({
     },
     aadhar: {
         padding: 10,
-        textAlign: 'center'
+        textAlign: 'center',
+        fontFamily : monospace_FF
     },
     markasAbsent: {
         color: '#ffffff',

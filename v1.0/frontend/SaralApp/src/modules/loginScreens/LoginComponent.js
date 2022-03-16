@@ -13,6 +13,7 @@ import {
     setLoginData, setLoginCred, getLoginCred, setRememberUser, getRememberedUser, forgetUser, setRememberPassword, getRememberedPassword, forgetUserpass
 } from '../../utils/StorageUtils'
 import { Assets } from '../../assets/index'
+import { monospace_FF } from '../../utils/CommonUtils';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 class LoginComponent extends Component {
@@ -283,7 +284,7 @@ class LoginComponent extends Component {
                 >
                     {Loading ?
                         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                            <Text style={{ fontSize: 12, fontWeight: 'bold', fontFamily: 'sans-serif-condensed' }}>Loading Branding ...</Text>
+                            <Text style={{ fontSize: 12, fontWeight: 'bold',fontFamily : monospace_FF }}>Loading Branding ...</Text>
                         </View> :
 
                         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -294,16 +295,16 @@ class LoginComponent extends Component {
 
                     <View style={styles.container2}>
                         <View style={styles.loginContainer}>
-                            <Text style={[styles.header1TextStyle, { paddingTop: '5%' }]}>
+                            <Text style={[styles.header1TextStyle, { paddingTop: '5%',fontFamily : monospace_FF }]}>
                                 {Strings.login_text.toUpperCase()}
                             </Text>
                             <View style={{ flexDirection: 'row' }}>
-                                {errCommon != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 2, width: '100%', fontWeight: 'normal', textAlign: 'center' }]}>{errCommon}</Text>}
+                                {errCommon != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 2, width: '100%', fontWeight: 'normal', textAlign: 'center',fontFamily : monospace_FF }]}>{errCommon}</Text>}
                             </View>
                             <View style={styles.fieldContainerStyle}>
                                 <View style={{ flexDirection: 'row' }}>
-                                    <Text style={[styles.labelTextStyle, { width: errUsername != '' ? '55%' : '100%' }]}>{Strings.enter_username}</Text>
-                                    {errUsername != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 1, width: '45%', textAlign: 'right', fontWeight: 'normal', }]}>{errUsername}</Text>}
+                                    <Text style={[styles.labelTextStyle, { width: errUsername != '' ? '55%' : '100%',fontFamily : monospace_FF }]}>{Strings.enter_username}</Text>
+                                    {errUsername != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 1, width: '45%', textAlign: 'right', fontWeight: 'normal',fontFamily : monospace_FF }]}>{errUsername}</Text>}
                                 </View>
                                 <TextInput
                                     ref="schoolId"
@@ -321,8 +322,8 @@ class LoginComponent extends Component {
                             </View>
                             <View style={styles.fieldContainerStyle}>
                                 <View style={{ flexDirection: 'row' }}>
-                                    <Text style={[styles.labelTextStyle, { width: errPassword != '' ? '50%' : '100%' }]}>{Strings.enter_password}</Text>
-                                    {errPassword != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 1, width: '50%', textAlign: 'right', fontWeight: 'normal' }]}>{errPassword}</Text>}
+                                    <Text style={[styles.labelTextStyle, { width: errPassword != '' ? '50%' : '100%',fontFamily : monospace_FF }]}>{Strings.enter_password}</Text>
+                                    {errPassword != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 1, width: '50%', textAlign: 'right', fontWeight: 'normal',fontFamily : monospace_FF }]}>{errPassword}</Text>}
                                 </View>
                                 <TextInput
                                     ref="password"
@@ -337,7 +338,7 @@ class LoginComponent extends Component {
                                 <View style={styles.btnContainer}>
                                     {Loading ?
                                         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                            <Text style={{ fontSize: 12, fontWeight: 'bold', fontFamily: 'sans-serif-condensed' }}>Loading Branding ...</Text>
+                                            <Text style={{ fontSize: 12, fontWeight: 'bold', fontFamily : monospace_FF }}>Loading Branding ...</Text>
                                         </View> :
                                         <View>
                                             <View style={{ flexDirection: 'row', paddingTop: 10 }}>
@@ -378,16 +379,16 @@ class LoginComponent extends Component {
 
                     <View style={styles.container2}>
                         <View style={styles.loginContainer}>
-                            <Text style={[styles.header1TextStyle, { paddingTop: '5%' }]}>
+                            <Text style={[styles.header1TextStyle, { paddingTop: '5%',fontFamily : monospace_FF }]}>
                                 {Strings.login_text.toUpperCase()}
                             </Text>
                             <View style={{ flexDirection: 'row' }}>
-                                {errCommon != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 2, width: '100%', fontWeight: 'normal', textAlign: 'center' }]}>{errCommon}</Text>}
+                                {errCommon != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 2, width: '100%', fontWeight: 'normal', textAlign: 'center',fontFamily : monospace_FF }]}>{errCommon}</Text>}
                             </View>
                             <View style={styles.fieldContainerStyle}>
                                 <View style={{ flexDirection: 'row' }}>
-                                    <Text style={[styles.labelTextStyle, { width: errUsername != '' ? '55%' : '100%' }]}>{Strings.enter_username}</Text>
-                                    {errUsername != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 1, width: '45%', textAlign: 'right', fontWeight: 'normal', }]}>{errUsername}</Text>}
+                                    <Text style={[styles.labelTextStyle, { width: errUsername != '' ? '55%' : '100%',fontFamily : monospace_FF }]}>{Strings.enter_username}</Text>
+                                    {errUsername != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 1, width: '45%', textAlign: 'right', fontWeight: 'normal',fontFamily : monospace_FF }]}>{errUsername}</Text>}
                                 </View>
                                 <TextInput
                                     ref="schoolId"
@@ -404,8 +405,8 @@ class LoginComponent extends Component {
                             </View>
                             <View style={styles.fieldContainerStyle}>
                                 <View style={{ flexDirection: 'row' }}>
-                                    <Text style={[styles.labelTextStyle, { width: errPassword != '' ? '50%' : '100%' }]}>{Strings.enter_password}</Text>
-                                    {errPassword != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 1, width: '50%', textAlign: 'right', fontWeight: 'normal' }]}>{errPassword}</Text>}
+                                    <Text style={[styles.labelTextStyle, { width: errPassword != '' ? '50%' : '100%',fontFamily : monospace_FF }]}>{Strings.enter_password}</Text>
+                                    {errPassword != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 1, width: '50%', textAlign: 'right', fontWeight: 'normal',fontFamily : monospace_FF }]}>{errPassword}</Text>}
                                 </View>
                                 <TextInput
                                     ref="password"

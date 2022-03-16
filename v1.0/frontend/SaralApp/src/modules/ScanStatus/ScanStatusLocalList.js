@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import AppTheme from '../../utils/AppTheme';
+import { monospace_FF } from '../../utils/CommonUtils';
 
 const ScanStatusLocalList = ({
     themeColor1,
@@ -40,7 +41,8 @@ const styles = StyleSheet.create({
     },
     align: {
         textAlign: 'center',
-        padding: 8
+        padding: 8,
+        fontFamily : monospace_FF
     },
     line: {
         height: 1,
