@@ -8,12 +8,6 @@
                 "errorMsg": "Omr result should be 1 or 0"
             }
         },
-        "idValidation": {
-            "validate": {
-                "regExp": "^[0-9]{7}$",
-                "errorMsg": "Student I'd exceeds the limit"
-            }
-        },
         "cells": [
             {
                 "cellId": "1",
