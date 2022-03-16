@@ -20,6 +20,7 @@ import { collectErrorLogs } from '../CollectErrorLogs';
 import MultibrandLabels from '../common/components/multibrandlabels';
 
 import { ScrollView } from 'react-native-gesture-handler';
+import { monospace_FF } from '../../utils/CommonUtils';
 const ScanHistory = ({
     loginData,
     navigation,
@@ -94,7 +95,7 @@ const ScanHistory = ({
                     &&
                     <View style={{ width:'60%' }}>
                         <Text
-                            style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}
+                            style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%',fontFamily : monospace_FF }}
                         >
                             {Strings.school_name + ' : '}
                             <Text style={{ fontWeight: 'normal' }}>
@@ -103,20 +104,24 @@ const ScanHistory = ({
                         </Text>
                         <Text
                             style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}>
-                        </Text>
+                                { Strings.schoolId_text + ' : '}
+                            <Text style={{ fontWeight: 'normal' }}>
+                                {loginData.data.school.schoolId}
+                                </Text>
+                                </Text>
                     </View>
                 }
                 </View>
             <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styles.container1}>
-                <Text style={[styles.header1TextStyle, { borderColor: multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE, backgroundColor: multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE }]}>
+                <Text style={[styles.header1TextStyle, { borderColor: multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE, backgroundColor: multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE,fontFamily : monospace_FF }]}>
                     {Strings.ongoing_scan}
                 </Text>
             </View>
             {
                 apiStatus.unauthorized
                 &&
-                <Text style={{ color: AppTheme.ERROR_RED, marginLeft: 40, fontWeight: 'bold' }}>Roi Doesn't Exist</Text>
+                <Text style={{ color: AppTheme.ERROR_RED, marginLeft: 40, fontWeight: 'bold',fontFamily : monospace_FF }}>Roi Doesn't Exist</Text>
             }
 
             <ScanHistoryCard

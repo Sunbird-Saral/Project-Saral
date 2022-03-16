@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Image, Text, StyleSheet } from 'react-native';
 import ModalDropdown from 'react-native-modal-dropdown';
 import AppTheme from '../../../utils/AppTheme';
+import { monospace_FF } from '../../../utils/CommonUtils';
 
 
 const DropDownMenu = ({
@@ -31,7 +32,7 @@ const DropDownMenu = ({
             
             >
                 <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', }}>
-                    <Text style={[styles.dropDownTextLabelStyle, {color: defaultIndex == -1 ? AppTheme.BLACK_OPACITY_30: AppTheme.BLACK}]}>
+                    <Text style={[styles.dropDownTextLabelStyle, {color: defaultIndex == -1 ? AppTheme.BLACK_OPACITY_30: AppTheme.BLACK,fontFamily : monospace_FF}]}>
                         {defaultIndex == -1 ? defaultData: selectedData}
                     </Text>
                     {icon &&
@@ -60,7 +61,8 @@ const styles = {
     dropDownTextStyle: {
         fontSize: AppTheme.FONT_SIZE_SMALL,
         color: AppTheme.GREY,
-        lineHeight: 25
+        lineHeight: 25,
+        fontFamily : monospace_FF
     },
     dropDownSelectedTextStyle: {
         fontSize: AppTheme.FONT_SIZE_SMALL,
@@ -70,7 +72,8 @@ const styles = {
     },
     dropDownTextLabelStyle: {
         fontSize: AppTheme.FONT_SIZE_REGULAR,
-        fontWeight: '600'
+        fontWeight: '600',
+        fontFamily : monospace_FF
     },
 }
 export default DropDownMenu;

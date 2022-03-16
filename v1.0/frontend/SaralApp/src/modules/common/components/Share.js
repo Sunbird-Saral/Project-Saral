@@ -4,6 +4,7 @@ import { Share, Alert, View, TouchableOpacity, Text, Modal, Linking } from 'reac
 //redux
 import { connect, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { dispatchCustomModalMessage, dispatchCustomModalStatus } from '../../../utils/CommonUtils'
 
 //component
 import Strings from '../../../utils/Strings';
@@ -25,6 +26,7 @@ import { getScannedDataFromLocal, eraseErrorLogs, getErrorMessage } from '../../
 
 //constant
 import C from '../../../flux/actions/constants'
+import { monospace_FF } from '../../../utils/CommonUtils';
 
 
 const ShareComponent = ({
@@ -37,29 +39,40 @@ const ShareComponent = ({
   const [ishidden, setIshidden] = useState(false)
   const dispatch = useDispatch()
 
+  const callCustomModal = (title, message, isAvailable, doLogout, cancel) => {
+    let data = {
+        title: title,
+        message: message,
+        isOkAvailable: isAvailable,
+        okFunc: doLogout,
+        isCancel : cancel
+    }
+    dispatch(dispatchCustomModalStatus(true));
+    dispatch(dispatchCustomModalMessage(data));
+}
 
   const Logoutcall = async () => {
     let data = await getScannedDataFromLocal();
+    setIshidden(false);
     if (bgFlag) {
-      Alert.alert(Strings.auto_sync_in_progress_please_wait)
+      callCustomModal(Strings.message_text,Strings.auto_sync_in_progress_please_wait,false,false);
     } else {
-      Alert.alert(Strings.message_text, Strings.are_you_sure_you_want_to_logout, [
-        { 'text': Strings.no_text, style: 'cancel' },
-        {
-          'text': Strings.yes_text, onPress: async () => {
-            if (data != null && data.length > 0) {
-              for (const value of data) {
-                let apiObj = new SaveScanData(value, loginData.data.token);
-                saveStudentData(apiObj)
-              }
-            } else {
-              await eraseErrorLogs()
-              dispatch(LogoutAction())
-              navigation.navigate('auth')
-            }
+
+      const doLogout = async () => {
+        if (data != null && data.length > 0) {
+          for (const value of data) {
+            let apiObj = new SaveScanData(value, loginData.data.token);
+            saveStudentData(apiObj)
           }
+        } else {
+          await eraseErrorLogs()
+          dispatch(LogoutAction())
+          navigation.navigate('auth')
         }
-      ])
+      }
+
+      callCustomModal(Strings.message_text, Strings.are_you_sure_you_want_to_logout, true , doLogout, true)
+
     }
   }
 
@@ -83,7 +96,7 @@ const ShareComponent = ({
         })
         .catch(function (err) {
           collectErrorLogs("Share.js", "saveStudentData", api.apiEndPoint(), err, false)
-          Alert.alert(Strings.something_went_wrong_please_try_again)
+          callCustomModal(Strings.message_text,Strings.something_went_wrong_please_try_again,false,false);
           clearTimeout(id)
         });
     }
@@ -102,15 +115,17 @@ const ShareComponent = ({
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
+          setIshidden(false);
           // shared with activity type of result.activityType
-
+          
         } else {
-          Alert.alert(Strings.shareDataExceed)
+          setIshidden(false);
           // shared
         }
       }
     } catch (error) {
-      alert(error.message);
+      callCustomModal(Strings.message_text,Strings.shareDataExceed,false,false);
+      // alert(error.message);
     }
   }
 
@@ -129,10 +144,12 @@ const ShareComponent = ({
   }
 
   const aboutMenu = () => {
+    setIshidden(false);
     dispatch(dispatchModalStatus(true))
     dispatch(dispatchModalMessage(saralAppInfo))
   }
   const helpMenu = () => {
+    setIshidden(false);
     Linking.openURL("https://saral.sunbird.org/learn/features")
   }
 
@@ -146,7 +163,7 @@ const ShareComponent = ({
 
         <TouchableOpacity onPress={() => showModal()}>
           <View style={[styles.imageContainerStyle, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE }]}>
-            <Text style={{ textAlign: 'center', fontSize: AppTheme.HEADER_FONT_SIZE_LARGE }}>{loginData.data.school.name.charAt(0)}</Text>
+            <Text style={{ textAlign: 'center', fontSize: AppTheme.HEADER_FONT_SIZE_LARGE,fontFamily : monospace_FF }}>{loginData.data.school.name.charAt(0)}</Text>
           </View>
         </TouchableOpacity>
       </View>

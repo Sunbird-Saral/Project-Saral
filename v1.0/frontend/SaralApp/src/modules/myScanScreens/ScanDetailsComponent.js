@@ -15,7 +15,7 @@ import ButtonWithIcon from '../common/components/ButtonWithIcon';
 import NumeracyScanCard from './NumeracyScanCard';
 import StudentsSummaryCard from './StudentsSummaryCard';
 import APITransport from '../../flux/actions/transport/apitransport';
-import { SCAN_TYPES } from '../../utils/CommonUtils';
+import { monospace_FF, SCAN_TYPES } from '../../utils/CommonUtils';
 import DataCard from './DataCard';
 import TextField from '../common/components/TextField';
 import { callScanStatusDataConst } from '../callScanStatusDataConst';
@@ -532,7 +532,8 @@ const styles = {
         fontSize: AppTheme.FONT_SIZE_REGULAR,
         color: AppTheme.BLACK,
         letterSpacing: 1,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        fontFamily : monospace_FF
     },
     container3: {
         flexDirection: 'row',
@@ -567,7 +568,8 @@ const styles = {
         paddingHorizontal: '5%',
         fontWeight: 'bold',
         letterSpacing: 1,
-        lineHeight: 30
+        lineHeight: 30,
+        fontFamily : monospace_FF
     },
     editBtnStyle: {
         width: '35%',

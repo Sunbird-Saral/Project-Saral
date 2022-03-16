@@ -2,11 +2,6 @@
     "layout": {
         "version": "1.0",
         "name": "ANY20QATTENDANCE Exam Sheet Form",
-        "threshold": {
-            "minWidth" : 540,
-            "minHeight": 450,
-            "detectionRadius":12
-        }, 
         "resultValidation": {
             "validate": {
                 "regExp": "[0-1]",
