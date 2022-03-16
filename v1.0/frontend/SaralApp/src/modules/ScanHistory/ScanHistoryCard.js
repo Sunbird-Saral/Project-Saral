@@ -67,7 +67,7 @@ const ScanHistoryCard = ({
 
     const SAVED_SCANNED_DATA_INTO_LOCAL = 'saved_scanned_data_into_local'
     const onPressContinue = () => {
-        navigation.navigate('myScan')
+        navigation.push('myScan')
     }
 
     const onPressStatus = () => {
