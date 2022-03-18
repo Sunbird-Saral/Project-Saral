@@ -327,7 +327,6 @@ const ScannedDetailsComponent = ({
 
 
     const goNextFrame = () => {
-
         let validCell = false
         let omrMark = false
         for (let i = 0; i < newArrayValue.length; i++) {
@@ -343,7 +342,7 @@ const ScannedDetailsComponent = ({
         let cellOmrValidation = validateCellOMR(true)
         const duplicate = checkStdRollDuplicate.some((item) => studentId == item)
 
-        if (duplicate) {
+        if (duplicate && !toggleCheckBox) {
             duplication = true
         } else {
             duplication = false
@@ -802,6 +801,9 @@ const ScannedDetailsComponent = ({
 
 
     const onSubmitClick = async () => {
+        if(studentId == 0 && studentId != '' && isMultipleStudent){
+            setToggleCheckBox(true)
+        }
         let validCell = false
         let omrMark = false
         let resultMark = false
