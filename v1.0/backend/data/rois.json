@@ -2338,8 +2338,8 @@
                 "version": "1.0",
                 "name": "HINDI3S30QOMR Exam Sheet Form",
                 "threshold": {
-                    "minWidth" : 730,
-                    "minHeight": 430,
+                    "minWidth" : 690,
+                    "minHeight": 390,
                     "detectionRadius": 12
                 },   
                 "resultValidation": {
