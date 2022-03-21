@@ -2,6 +2,11 @@
     "layout": {
         "version": "1.0",
         "name": "MULTISUBJECT1S10Q Exam Sheet Form",
+        "threshold": {
+            "minWidth" : 740,
+            "minHeight": 440,
+            "detectionRadius": 12
+        },   
         "cells": [
             {
                 "cellId": "1",
