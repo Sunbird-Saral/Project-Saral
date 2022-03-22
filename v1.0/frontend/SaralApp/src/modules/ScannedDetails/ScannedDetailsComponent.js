@@ -138,7 +138,7 @@ const ScannedDetailsComponent = ({
                 //set student Id
                 ocrLocalResponse.layout.cells.forEach((element) => {
                     student_ID.forEach((e) => {
-                        if (element.format.name == e) {
+                        if (element.format.name == e ) {
                             element.consolidatedPrediction = value
                             setMultipageStdId(element.consolidatedPrediction)
                         }
@@ -188,10 +188,11 @@ const ScannedDetailsComponent = ({
             setMultiPage(ocrLocalResponse.layout.pages)
             setNextBtn("SCAN PAGE #2")
         }
+        const uniqStudentId=  [...checkIsStudentMultipleSingle.reduce((map, obj)=>map.set(obj.consolidatedPrediction, obj),new Map()).values()];
 
-        if (checkIsStudentMultipleSingle.length > 0) {
+        if (uniqStudentId.length > 0) {
             setNextBtn("NEXT")
-            setStdRollArray(checkIsStudentMultipleSingle)
+            setStdRollArray(uniqStudentId)
             setIsmultipleStudent(true)
             callMultipleStudentSheetData(checkIsStudentMultipleSingle)
         } else {
@@ -224,9 +225,13 @@ const ScannedDetailsComponent = ({
                 })
             }
         });
-        setStudentID(marTemp[0].RollNo)
-        setNewArrayValue(marTemp[0].data)
-        setStructureList(marTemp)
+        const uniqelement=  [...marTemp.reduce((map, obj)=>map.set(obj.RollNo, obj),new Map()).values()];
+        console.log('uniqelemenettt',uniqelement)
+        //  console.log('uniqelementuniqelement',uniqelement)
+        console.log('marTemp',marTemp)
+        setStudentID(uniqelement[0].RollNo)
+        setNewArrayValue(uniqelement[0].data)
+        setStructureList(uniqelement)
 
 
 
@@ -327,6 +332,9 @@ const ScannedDetailsComponent = ({
 
 
     const goNextFrame = () => {
+        if(studentId == 0 && studentId != '' && isMultipleStudent){
+            setToggleCheckBox(true)
+        }
         let validCell = false
         let omrMark = false
         for (let i = 0; i < newArrayValue.length; i++) {
@@ -908,6 +916,9 @@ const ScannedDetailsComponent = ({
     }
 
     const goNextPage = () => {
+        if(studentId == 0 && studentId != '' && isMultipleStudent){
+            setToggleCheckBox(true)
+        }
         onSubmitClick()
     }
 
