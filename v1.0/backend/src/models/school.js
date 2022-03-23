@@ -49,8 +49,7 @@ const schoolSchema = new mongoose.Schema({
     },
     autoSyncBatchSize:{
         type: Number,
-        required: false,
-        default: 10
+        required: false
     },
 }, {
     timestamps: false
