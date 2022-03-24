@@ -360,7 +360,7 @@ const ScannedDetailsComponent = ({
         let cellOmrValidation = validateCellOMR(true)
         const duplicate = checkStdRollDuplicate.some((item) => studentId == item)
 
-        if (duplicate) {
+        if (duplicate && !toggleCheckBox) {
             duplication = true
         } else {
             duplication = false

@@ -2,6 +2,11 @@
     "layout": {
         "version": "1.0",
         "name": "ANY1S10Q Exam Sheet Form",
+        "threshold": {
+            "minWidth" : 540,
+            "minHeight": 375,
+            "detectionRadius": 12
+        },   
         "cells": [
             {
                 "cellId": "1",
@@ -148,15 +153,15 @@
                 "cellId": "4",
                 "rois": [
                     {
-                        "annotationTags": "QUESTION2",
+                        "annotationTags": "QUESTION3",
                         "extractionMethod": "CELL_OMR",
                         "roiId": "9",
                         "index": 0,
                         "rect": {
-                            "top": 267,
-                            "left": 207,
-                            "bottom": 287,
-                            "right": 222
+                            "top": 317,
+                            "left": 206,
+                            "bottom": 334,
+                            "right": 223
                         }
                     }
                 ],
@@ -164,8 +169,8 @@
                     "index": 4
                 },
                 "format": {
-                    "name": "QUESTION2",
-                    "value": "QUESTION 2"
+                    "name": "QUESTION3",
+                    "value": "QUESTION 3"
                 },
                 "validate": {
                     "regExp": ""

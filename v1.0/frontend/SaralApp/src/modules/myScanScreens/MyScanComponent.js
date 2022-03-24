@@ -42,7 +42,7 @@ class MyScanComponent extends Component {
     }
 
     handleBackButtonClick =()=> {
-        this.props.navigation.navigate('ScanHistory');
+        this.props.navigation.push('ScanHistory');
         return true;
     }
     componentDidMount() {
