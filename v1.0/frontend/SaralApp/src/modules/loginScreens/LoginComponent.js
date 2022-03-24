@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, TextInput, Image, AppState, ActivityIndicator, Switch } from 'react-native';
+import { View, ScrollView, Text, TextInput, Image, AppState, ActivityIndicator, Switch,TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Strings from '../../utils/Strings';
@@ -32,12 +32,15 @@ class LoginComponent extends Component {
             text: '',
             rememberMe: false,
             rememberMe1: false,
+            hidePassword:true
 
 
         }
     }
 
-
+    setPasswordVisibility = () => {
+        this.setState({ hidePassword: !this.state.hidePassword });
+      }
     async componentDidMount() {
         const schollId = await this.rememberMeSchoolId();
         const password = await this.rememberMePassword();
@@ -324,16 +327,20 @@ class LoginComponent extends Component {
                                     <Text style={[styles.labelTextStyle, { width: errPassword != '' ? '50%' : '100%' }]}>{Strings.enter_password}</Text>
                                     {errPassword != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 1, width: '50%', textAlign: 'right', fontWeight: 'normal' }]}>{errPassword}</Text>}
                                 </View>
-                                <TextInput
-                                    ref="password"
-                                    style={styles.inputStyle}
-                                    onChangeText={(text) => this.onLoginDetailsChange(text, 'password')}
-                                    value={password}
-                                    placeholder={Strings.password_text}
-                                    placeholderTextColor={AppTheme.BLACK_OPACITY_30}
-                                    secureTextEntry
-
-                                />
+                                <View style={styles.textBoxContainer}>
+                                    <TextInput
+                                        ref="password"
+                                        style={styles.inputStyle}
+                                        onChangeText={(text) => this.onLoginDetailsChange(text, 'password')}
+                                        value={password}
+                                        placeholder={Strings.password_text}
+                                        placeholderTextColor={AppTheme.BLACK_OPACITY_30}
+                                        secureTextEntry={this.state.hidePassword}
+                                    />
+                                    <TouchableOpacity activeOpacity={0.8} style={styles.touachableButton} onPress={this.setPasswordVisibility}>
+                                        <Image source={(this.state.hidePassword) ? Assets.closeEye : Assets.openEye} style={styles.buttonImage} />
+                                    </TouchableOpacity>
+                                </View>
                                 <View style={styles.btnContainer}>
                                     {Loading ?
                                         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -407,15 +414,20 @@ class LoginComponent extends Component {
                                     <Text style={[styles.labelTextStyle, { width: errPassword != '' ? '50%' : '100%' }]}>{Strings.enter_password}</Text>
                                     {errPassword != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 1, width: '50%', textAlign: 'right', fontWeight: 'normal' }]}>{errPassword}</Text>}
                                 </View>
-                                <TextInput
-                                    ref="password"
-                                    style={styles.inputStyle}
-                                    onChangeText={(text) => this.onLoginDetailsChange(text, 'password')}
-                                    value={password}
-                                    placeholder={Strings.password_text}
-                                    placeholderTextColor={AppTheme.BLACK_OPACITY_30}
-                                    secureTextEntry
-                                />
+                                <View style={styles.textBoxContainer}>
+                                    <TextInput
+                                        ref="password"
+                                        style={styles.inputStyle}
+                                        onChangeText={(text) => this.onLoginDetailsChange(text, 'password')}
+                                        value={password}
+                                        placeholder={Strings.password_text}
+                                        placeholderTextColor={AppTheme.BLACK_OPACITY_30}
+                                        secureTextEntry={this.state.hidePassword}
+                                    />
+                                    <TouchableOpacity activeOpacity={0.8} style={styles.touachableButton} onPress={this.setPasswordVisibility}>
+                                        <Image source={(this.state.hidePassword) ? Assets.closeEye : Assets.openEye} style={styles.buttonImage} />
+                                    </TouchableOpacity>
+                                </View>
                                 <View style={{ flexDirection: 'row', paddingTop: 10 }}>
                                     <Switch
                                         trackColor={{ true: '#111', false: '#111' }}
@@ -508,8 +520,26 @@ const styles = {
     },
     btnContainer: {
         paddingVertical: '5%'
-    }
+    },
+    buttonImage: {
+        width: 30, height: 30
+    },
+    textBoxContainer: {
+        position: 'relative',
+        alignSelf: 'stretch',
+        justifyContent: 'center',
+
+    },
+  
+    touachableButton: {
+        position: 'absolute',
+        right: 3,
+        height: 40,
+        width: 35,
+        padding: 2
+    },
 }
+
 
 const mapStateToProps = (state) => {
     return {
