@@ -22,6 +22,7 @@ import axios from 'axios';
 
 import { getScannedDataFromLocal, setScannedDataIntoLocal } from '../../../utils/StorageUtils';
 import { collectErrorLogs } from '../../CollectErrorLogs';
+import { dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF } from '../../../utils/CommonUtils';
 
 class Brands extends PureComponent {
     constructor() {
@@ -85,7 +86,7 @@ class Brands extends PureComponent {
 
     saveDataInDB = async () => {
 
-        const { loginData } = this.props
+        const { loginData, dispatch } = this.props
 
         const data = await getScannedDataFromLocal();
         storeFactory.dispatch(this.flagAction(false))
@@ -131,7 +132,14 @@ class Brands extends PureComponent {
                         .catch(function (err) {
                             collectErrorLogs("Brand.js","backgroundJob",apiObj.apiEndPoint(),err,false)
                             clearTimeout(id)
-                            Alert.alert("Something went wrong with background process, please contact Admin")
+                            let data = {
+                                title : Strings.message_text,
+                                message : "Something went wrong with background process, please contact Admin",
+                                isOkAvailable : false,
+                                isCancel : false
+                            }
+                            dispatch(dispatchCustomModalStatus(true));
+                            dispatch(dispatchCustomModalMessage(data));
                             storeFactory.dispatch(self.flagAction(false))
                         });
                 });
@@ -145,7 +153,6 @@ class Brands extends PureComponent {
         const { loginData, dispatch } = this.props;
 
         const bgTimer = Object.keys(loginData).length > 0  && loginData.data.school.hasOwnProperty("autoSyncFrequency") ? loginData.data.school.autoSyncFrequency : 600000
-
         setInterval(() => {
             const hasAutoSync = Object.keys(loginData).length > 0  && loginData.data.school.hasOwnProperty("autoSync") && loginData.data.school.autoSync ? true : false
             if (hasAutoSync) {
@@ -195,7 +202,7 @@ const styles = {
     btnContainer: {
         paddingVertical: '5%'
     },
-    welcometext: { textAlign: 'center', marginBottom: 5, fontSize: 15, color: '#00000033', fontWeight: 'bold' },
+    welcometext: { textAlign: 'center', marginBottom: 5, fontSize: 15, color: '#00000033', fontWeight: 'bold',fontFamily:monospace_FF },
     nxtBtnStyle: {
         width: 250,
         marginBottom: 15

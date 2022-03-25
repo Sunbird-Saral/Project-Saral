@@ -12,10 +12,11 @@ import ScanHistoryCard from '../ScanHistory/ScanHistoryCard';
 import SaralSDK from '../../../SaralSDK'
 import { getScannedDataFromLocal,getErrorMessage } from '../../utils/StorageUtils';
 import ButtonComponent from '../common/components/ButtonComponent';
-import { multipleStudent, neglectData } from '../../utils/CommonUtils';
+import { monospace_FF, multipleStudent, neglectData } from '../../utils/CommonUtils';
 import ShareComponent from '../common/components/Share';
 import MultibrandLabels from '../common/components/multibrandlabels';
 import { Assets } from '../../assets';
+import CustomPopup from '../common/components/CustomPopup';
 import ModalView from '../common/components/ModalView';
 
 LogBox.ignoreAllLogs()
@@ -41,7 +42,7 @@ class MyScanComponent extends Component {
     }
 
     handleBackButtonClick =()=> {
-        this.props.navigation.navigate('ScanHistory');
+        this.props.navigation.push('ScanHistory');
         return true;
     }
     componentDidMount() {
@@ -269,18 +270,18 @@ class MyScanComponent extends Component {
                     &&
                     <View style={{ width:'60%' }}>
                         <Text
-                            style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}
+                            style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%',fontFamily : monospace_FF }}
                         >
                             {Strings.school_name + ' : '}
-                            <Text style={{ fontWeight: 'normal' }}>
+                            <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
                                 {loginData.data.school.name}
                             </Text>
                         </Text>
                         <Text
-                            style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}
+                            style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%',fontFamily : monospace_FF }}
                         >
                             {Strings.schoolId_text + ' : '}
-                            <Text style={{ fontWeight: 'normal' }}>
+                            <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
                                 {loginData.data.school.schoolId}
                             </Text>
                         </Text>
@@ -290,7 +291,7 @@ class MyScanComponent extends Component {
                 </View> 
                 <ScrollView scrollEnabled>
                 <View style={styles.container1}>
-                <Text style={[styles.header1TextStyle, { borderColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE, backgroundColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE }]}>
+                <Text style={[styles.header1TextStyle, { borderColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE, backgroundColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE,fontFamily : monospace_FF }]}>
                     {Strings.ongoing_scan}
                 </Text>
             </View>
@@ -345,6 +346,11 @@ class MyScanComponent extends Component {
                         customContainer={{ opacity: 0.9, elevation: 15 }}
                     />
                 }
+                <CustomPopup
+                title={"Message"}
+                ok_button={"Ok"}
+                bgColor={multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}
+            />
                 <ModalView modalVisible={modalStatus} modalMessage={modalMessage} />
             </View>
         );
@@ -412,7 +418,8 @@ const styles = {
         fontSize: AppTheme.FONT_SIZE_SMALL,
         color: AppTheme.BLACK,
         letterSpacing: 1,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        fontFamily : monospace_FF
     },
     scanTabContainerStyle: {
         width: 80,

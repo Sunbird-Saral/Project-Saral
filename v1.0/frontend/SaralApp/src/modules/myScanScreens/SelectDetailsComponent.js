@@ -16,17 +16,19 @@ import { OcrLocalResponseAction } from '../../flux/actions/apis/OcrLocalResponse
 import { GetStudentsAndExamData } from '../../flux/actions/apis/getStudentsAndExamData';
 import { FilteredDataAction } from '../../flux/actions/apis/filteredDataActions';
 import APITransport from '../../flux/actions/transport/apitransport';
-import { cryptoText, SCAN_TYPES, validateToken } from '../../utils/CommonUtils';
+import { cryptoText, dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF, SCAN_TYPES, validateToken } from '../../utils/CommonUtils';
 import { ROIAction } from '../StudentsList/ROIAction';
 import { GetAbsentStudentData } from '../../flux/actions/apis/getAbsentStudentData';
 import { LoginAction } from '../../flux/actions/apis/LoginAction';
 import { LogoutAction } from '../../flux/actions/apis/LogoutAction';
-import { getScannedDataFromLocal } from '../../utils/StorageUtils';
-import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
-import C from '../../flux/actions/constants';
+
+//components
 import ShareComponent from '../common/components/Share';
 import MultibrandLabels from '../common/components/multibrandlabels';
 import ModalView from '../common/components/ModalView';
+import CustomPopup from '../common/components/CustomPopup';
+
+//redux
 
 const clearState = {
     defaultSelected: Strings.select_text,
@@ -290,6 +292,18 @@ class SelectDetailsComponent extends Component {
         })
     }
 
+     callCustomModal = (title, message, isAvailable,okFunction,cancel) => {
+        let data = {
+            title: title,
+            message: message,
+            isOkAvailable: isAvailable,
+            okFunc : okFunction,
+            isCancel : cancel
+        }
+        this.props.dispatchCustomModalStatus(true)
+        this.props.dispatchCustomModalMessage(data)
+    }
+
     loginAgain = async () => {
         let loginCred = await getLoginCred()
         if (loginCred) {
@@ -304,9 +318,7 @@ class SelectDetailsComponent extends Component {
             })
         }
         else {
-            Alert.alert(Strings.message_text, Strings.please_try_again, [
-                { 'text': Strings.ok_text, onPress: () => this.loginAgain() }
-            ])
+            this.callCustomModal(Strings.message_text,Strings.please_try_again,true,this.loginAgain,true)
         }
     }
 
@@ -398,13 +410,9 @@ class SelectDetailsComponent extends Component {
                         pickerDate: new Date()
                     }, () => {
                         if (apiStatus && apiStatus.message) {
-                            Alert.alert(Strings.message_text, apiStatus.message, [{
-                                text: Strings.ok_text
-                            }])
+                            this.callCustomModal(Strings.message_text,Strings.please_try_again,false,false);
                         } else {
-                            Alert.alert(Strings.message_text, Strings.please_try_again, [{
-                                text: Strings.ok_text
-                            }])
+                            this.callCustomModal(Strings.message_text,Strings.please_try_again,false,false);
                         }
                     })
                 }
@@ -713,18 +721,18 @@ class SelectDetailsComponent extends Component {
                     (loginData && loginData.data) &&
                     <View style={{ marginTop: 20, width: '60%' }}>
                         <Text
-                            style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}
+                            style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%',fontFamily : monospace_FF }}
                         >
                             {Strings.school_name + ' : '}
-                            <Text style={{ fontWeight: 'normal' }}>
+                            <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
                                 {loginData.data.school.name}
                             </Text>
                         </Text>
                         <Text
-                            style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}
+                            style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%',fontFamily : monospace_FF }}
                         >
                             {Strings.schoolId_text + ' : '}
-                            <Text style={{ fontWeight: 'normal' }}>
+                            <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
                                 {loginData.data.school.schoolId}
                             </Text>
                         </Text>
@@ -815,6 +823,13 @@ class SelectDetailsComponent extends Component {
                 )}
                 {isLoading && <Spinner animating={isLoading} />}
                 <ModalView modalVisible={modalStatus} modalMessage={modalMessage} />
+
+                <CustomPopup 
+                visible={true} 
+                title={"Messagess"}
+                ok_button={"Ok"}
+                bgColor={this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE}
+                />
             </View>
         );
     }
@@ -840,7 +855,8 @@ const styles = {
         fontSize: AppTheme.FONT_SIZE_SMALL + 2,
         color: AppTheme.BLACK,
         letterSpacing: 1,
-        marginBottom: '5%'
+        marginBottom: '5%',
+        fontFamily : monospace_FF
     },
     fieldContainerStyle: {
         paddingVertical: '2.5%'
@@ -851,7 +867,8 @@ const styles = {
         color: AppTheme.BLACK,
         fontWeight: 'bold',
         letterSpacing: 1,
-        lineHeight: 35
+        lineHeight: 35,
+        fontFamily : monospace_FF
     },
     nxtBtnStyle: {
     },
@@ -896,7 +913,9 @@ const mapDispatchToProps = (dispatch) => {
         APITransport: APITransport,
         OcrLocalResponseAction: OcrLocalResponseAction,
         FilteredDataAction: FilteredDataAction,
-        LogoutAction: LogoutAction
+        LogoutAction: LogoutAction,
+        dispatchCustomModalStatus: dispatchCustomModalStatus,
+        dispatchCustomModalMessage: dispatchCustomModalMessage
     }, dispatch)
 }
 

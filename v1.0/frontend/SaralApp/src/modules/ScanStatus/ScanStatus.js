@@ -22,6 +22,7 @@ import AppTheme from '../../utils/AppTheme';
 import { getPresentAbsentStudent, getScannedDataFromLocal,getErrorMessage } from '../../utils/StorageUtils';
 import ShareComponent from '../common/components/Share';
 import MultibrandLabels from '../common/components/multibrandlabels';
+import { monospace_FF } from '../../utils/CommonUtils';
 
 
 const ScanStatus = ({
@@ -52,7 +53,7 @@ const ScanStatus = ({
     const renderEmptyData = ({ item }) => {
         return (
             <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
-                <Text>No Data Available</Text>
+                <Text style={{fontFamily : monospace_FF}}>No Data Available</Text>
             </View>
         )
     }
@@ -61,7 +62,7 @@ const ScanStatus = ({
     useEffect(
         React.useCallback(() => {
             const onBackPress = () => {
-                navigation.navigate('ScanHistory');
+                navigation.push('ScanHistory');
             };
             BackHandler.addEventListener('hardwareBackPress', onBackPress);
             return () =>
@@ -128,11 +129,11 @@ const ScanStatus = ({
                         style={styles.schoolName}
                     >
                         {Strings.school_name + '  : '}
-                        <Text style={{ fontWeight: 'normal' }}>{loginData.data.school.name}</Text>
+                        <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>{loginData.data.school.name}</Text>
                     </Text>
                     <Text style={styles.schoolId}>
                         {Strings.schoolId_text + ' : '}
-                        <Text style={{ fontWeight: 'normal' }}>
+                        <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
                             {loginData.data.school.schoolId}
                         </Text>
                     </Text>
@@ -140,7 +141,7 @@ const ScanStatus = ({
             }
             </View>
 
-            <Text style={styles.scanStatus}>{Strings.scan_status}</Text>
+            <Text style={styles.scanStatus}>{Strings.save_status}</Text>
 
             <FlatList
                 data={scanedData && presentStudentList}

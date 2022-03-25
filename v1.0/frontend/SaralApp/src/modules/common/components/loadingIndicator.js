@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, ActivityIndicator, Text, Image } from 'react-native';
 import AppTheme from '../../../utils/AppTheme';
+import { monospace_FF } from '../../../utils/CommonUtils';
 
 
 class Spinner extends Component {
@@ -60,7 +61,8 @@ const styles = {
     color: AppTheme.WHITE, 
     fontSize: AppTheme.HEADER_FONT_SIZE_REGULAR, 
     fontWeight: 'bold', 
-    paddingHorizontal: '15%'
+    paddingHorizontal: '15%',
+    fontFamily : monospace_FF
   }
 };
 

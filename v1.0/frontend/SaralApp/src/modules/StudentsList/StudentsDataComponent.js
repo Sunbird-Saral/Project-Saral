@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Alert, Text, TouchableOpacity, View } from 'react-native';
 import AppTheme from '../../utils/AppTheme';
+import { dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF } from '../../utils/CommonUtils';
 import { getScannedDataFromLocal } from '../../utils/StorageUtils';
 import Strings from '../../utils/Strings';
 import { styles } from './StudentsDataStyle';
@@ -14,7 +15,7 @@ const StudentsDataComponent = ({
     scanedData,
     setStdArray,
     filteredData,
-    apiStatus
+    dispatch
 }) => {
     const [isPresent, setIsPresent] = useState(pabsent)
 
@@ -63,7 +64,13 @@ const StudentsDataComponent = ({
             const isSheetScanned = typeof (scanedData) === 'object' && scanedData.data.length > 0 && scanedData.data.filter((o) => o.studentId == data.studentId && o.studentAvailability === true && o.marksInfo.length > 0)
 
             if (isSheetScanned.length > 0 || isStudentScannedInLocal.length > 0) {
-                Alert.alert(Strings.student_cant_be_mark_as_absent_once_scanned)
+                let data = {
+                    title : Strings.message_text,
+                    message : Strings.student_cant_be_mark_as_absent_once_scanned,
+                    isOkAvailable : false
+                }
+                dispatch(dispatchCustomModalStatus(true));
+                dispatch(dispatchCustomModalMessage(data));
             } else {
                 data.studentAvailability = false
                 setIsPresent(false)
@@ -96,9 +103,9 @@ const StudentsDataComponent = ({
                     {
                         isPresent
                             ?
-                            <Text style={[styles.markasAbsent, { backgroundColor: themeColor1 ? themeColor1 : AppTheme.LIGHT_BLUE }]}>Mark as Absent</Text>
+                            <Text style={[styles.markasAbsent, { backgroundColor: themeColor1 ? themeColor1 : AppTheme.LIGHT_BLUE,fontFamily : monospace_FF }]}>Mark as Absent</Text>
                             :
-                            <Text style={[styles.markasPresent, { backgroundColor: themeColor2 ? themeColor2 : AppTheme.LIGHT_BLUE }]}>Mark as Present</Text>
+                            <Text style={[styles.markasPresent, { backgroundColor: themeColor2 ? themeColor2 : AppTheme.LIGHT_BLUE,fontFamily : monospace_FF }]}>Mark as Present</Text>
                     }
                 </TouchableOpacity>
 

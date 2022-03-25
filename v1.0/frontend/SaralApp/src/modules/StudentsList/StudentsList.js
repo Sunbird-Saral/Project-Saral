@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Text, View, FlatList, Alert, SafeAreaView, BackHandler } from 'react-native';
+import { Text, View, FlatList, SafeAreaView, BackHandler } from 'react-native';
 
 //redux
 import { connect, useDispatch } from 'react-redux';
@@ -31,7 +31,7 @@ import axios from 'axios';
 //components
 import { scanStatusDataAction } from '../../modules/ScanStatus/scanStatusDataAction';
 import Spinner from '../common/components/loadingIndicator';
-import { cryptoText, validateToken } from '../../utils/CommonUtils';
+import { cryptoText, dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF, validateToken } from '../../utils/CommonUtils';
 import { LoginAction } from '../../flux/actions/apis/LoginAction';
 
 import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction'
@@ -171,6 +171,7 @@ useEffect(() => {
                 setStdArray={setStdArray}
                 stdArray={stdArray}
                 apiStatus={apiStatus}
+                dispatch={dispatch}
             />
         )
     }
@@ -178,7 +179,7 @@ useEffect(() => {
     const renderEmptyList = () => {
         return (
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                <Text>No Students Available</Text>
+                <Text style={{fontFamily : monospace_FF}}>No Students Available</Text>
             </View>
         )
     }
@@ -260,8 +261,14 @@ useEffect(() => {
                     dispatch(dispatchAPIAsync(api));
                 })
                 .catch(function (err) {
-                    collectErrorLogs("StrudentList.js","saveStudentData",api.apiEndPoint(),err,false)
-                    Alert.alert(Strings.something_went_wrong_please_try_again)
+                    collectErrorLogs("StudentList.js","saveStudentData",api.apiEndPoint(),err,false)
+                    let data = {
+                        title : Strings.error_message,
+                        message : Strings.something_went_wrong_please_try_again,
+                        isOkAvailable : false
+                    }
+                    dispatch(dispatchCustomModalStatus(true))
+                    dispatch(dispatchCustomModalMessage(data));
                     setIsLoading(false)
                     clearTimeout(id)
                 });
@@ -287,9 +294,14 @@ useEffect(() => {
             APITransport(apiObj);
         }
         else {
-            Alert.alert(Strings.message_text, Strings.please_try_again, [
-                { 'text': Strings.ok_text, onPress: () => loginAgain() }
-            ])
+            let data = {
+                title : Strings.message_text,
+                message : Strings.please_try_again,
+                isOkAvailable : true,
+                okFunc : loginAgain()
+            }
+            dispatch(dispatchCustomModalStatus(true));
+            dispatch(dispatchCustomModalMessage(data));
         }
     }
 
@@ -324,18 +336,18 @@ useEffect(() => {
             (loginData && loginData.data) &&
                 <View style={{width:'60%'}}>
                     <Text
-                        style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingTop: '4%' }}
+                        style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingTop: '4%',fontFamily : monospace_FF }}
                     >
                         {Strings.school_name + ' : '}
-                        <Text style={{ fontWeight: 'normal' }}>
+                        <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
                             {loginData.data.school.name}
                         </Text>
                     </Text>
                     <Text
-                        style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '1%' }}
+                        style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '1%',fontFamily : monospace_FF }}
                     >
                         {Strings.schoolId_text + ' : '}
-                        <Text style={{ fontWeight: 'normal' }}>
+                        <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
                             {loginData.data.school.schoolId}
                         </Text>
                     </Text>

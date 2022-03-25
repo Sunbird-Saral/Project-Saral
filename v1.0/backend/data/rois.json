@@ -7,6 +7,11 @@
             "layout": {
                 "version": "1.0",
                 "name": "HINDI4S20QOMR Exam Sheet Form",
+                "threshold": {
+                    "minWidth": 690,
+                    "minHeight": 390,
+                    "detectionRadius": 12
+                },
                 "resultValidation": {
                     "validate": {
                         "regExp": "[0-1]",
@@ -2332,6 +2337,11 @@
             "layout": {
                 "version": "1.0",
                 "name": "HINDI3S30QOMR Exam Sheet Form",
+                "threshold": {
+                    "minWidth": 690,
+                    "minHeight": 390,
+                    "detectionRadius": 12
+                },
                 "resultValidation": {
                     "validate": {
                         "regExp": "[0-1]",
@@ -4801,6 +4811,11 @@
             "layout": {
                 "version": "1.0",
                 "name": "MULTISUBJECT1S10Q Exam Sheet Form",
+                "threshold": {
+                    "minWidth": 740,
+                    "minHeight": 440,
+                    "detectionRadius": 12
+                },
                 "cells": [
                     {
                         "cellId": "1",
@@ -6064,6 +6079,11 @@
             "layout": {
                 "version": "1.0",
                 "name": "HINDI4S20QOMR Exam Sheet Form",
+                "threshold": {
+                    "minWidth": 690,
+                    "minHeight": 390,
+                    "detectionRadius": 12
+                },
                 "resultValidation": {
                     "validate": {
                         "regExp": "[0-1]",
@@ -8389,6 +8409,11 @@
             "layout": {
                 "version": "1.0",
                 "name": "HINDI4S20QOMR Exam Sheet Form",
+                "threshold": {
+                    "minWidth": 690,
+                    "minHeight": 390,
+                    "detectionRadius": 12
+                },
                 "resultValidation": {
                     "validate": {
                         "regExp": "[0-1]",
@@ -10714,6 +10739,11 @@
             "layout": {
                 "version": "1.0",
                 "name": "HINDI4S20QOMR Exam Sheet Form",
+                "threshold": {
+                    "minWidth": 690,
+                    "minHeight": 390,
+                    "detectionRadius": 12
+                },
                 "resultValidation": {
                     "validate": {
                         "regExp": "[0-1]",
@@ -13039,6 +13069,11 @@
             "layout": {
                 "version": "1.0",
                 "name": "MULTISUBJECT1S10Q Exam Sheet Form",
+                "threshold": {
+                    "minWidth": 740,
+                    "minHeight": 440,
+                    "detectionRadius": 12
+                },
                 "cells": [
                     {
                         "cellId": "1",
@@ -14302,6 +14337,11 @@
             "layout": {
                 "version": "1.0",
                 "name": "ANY1S20Q SAT Exam Sheet Form",
+                "threshold": {
+                    "minWidth": 480,
+                    "minHeight": 420,
+                    "detectionRadius": 12
+                },
                 "cells": [
                     {
                         "cellId": "1",
@@ -15337,6 +15377,11 @@
             "layout": {
                 "version": "1.0",
                 "name": "ANY1S20Q SAT Exam Sheet Form",
+                "threshold": {
+                    "minWidth": 480,
+                    "minHeight": 420,
+                    "detectionRadius": 12
+                },
                 "cells": [
                     {
                         "cellId": "1",
@@ -16464,6 +16509,11 @@
             "layout": {
                 "version": "1.0",
                 "name": "ANY1S20Q SAT Exam Sheet Form",
+                "threshold": {
+                    "minWidth": 480,
+                    "minHeight": 420,
+                    "detectionRadius": 12
+                },
                 "cells": [
                     {
                         "cellId": "1",
@@ -17591,6 +17641,11 @@
             "layout": {
                 "version": "1.0",
                 "name": "ANY1S34Q PAT Exam Sheet Form",
+                "threshold": {
+                    "minWidth": 540,
+                    "minHeight": 420,
+                    "detectionRadius": 12
+                },
                 "cells": [
                     {
                         "cellId": "1",
@@ -19022,6 +19077,11 @@
             "layout": {
                 "version": "1.0",
                 "name": "ANY1S34Q PAT Exam Sheet Form",
+                "threshold": {
+                    "minWidth": 540,
+                    "minHeight": 420,
+                    "detectionRadius": 12
+                },
                 "cells": [
                     {
                         "cellId": "1",
@@ -20601,6 +20661,11 @@
             "layout": {
                 "version": "1.0",
                 "name": "ANY1S34Q PAT Exam Sheet Form",
+                "threshold": {
+                    "minWidth": 540,
+                    "minHeight": 420,
+                    "detectionRadius": 12
+                },
                 "cells": [
                     {
                         "cellId": "1",
@@ -25470,6 +25535,11 @@
             "layout": {
                 "version": "1.0",
                 "name": "ANY1S12Q Exam Sheet Form",
+                "threshold": {
+                    "minWidth": 510,
+                    "minHeight": 410,
+                    "detectionRadius": 12
+                },
                 "cells": [
                     {
                         "cellId": "1",
@@ -26013,6 +26083,11 @@
             "layout": {
                 "version": "1.0",
                 "name": "ANY1S5QMULTICHOICE Exam Sheet Form",
+                "threshold": {
+                    "minWidth": 410,
+                    "minHeight": 280,
+                    "detectionRadius": 12
+                },
                 "resultValidation": {
                     "validate": {
                         "regExp": "[0-5]",
@@ -26550,6 +26625,11 @@
             "layout": {
                 "version": "1.0",
                 "name": "ANY1S5QMULTICHOICE Exam Sheet Form",
+                "threshold": {
+                    "minWidth": 410,
+                    "minHeight": 280,
+                    "detectionRadius": 12
+                },
                 "resultValidation": {
                     "validate": {
                         "regExp": "[0-5]",
@@ -27110,6 +27190,11 @@
             "layout": {
                 "version": "1.0",
                 "name": "ANY1S15QMULTIPAGE Exam Sheet Form",
+                "threshold": {
+                    "minWidth": 410,
+                    "minHeight": 280,
+                    "detectionRadius": 12
+                },
                 "pages": "3",
                 "resultValidation": {
                     "validate": {
@@ -28503,6 +28588,11 @@
             "layout": {
                 "version": "1.0",
                 "name": "ANY20QATTENDANCE Exam Sheet Form",
+                "threshold": {
+                    "minWidth": 530,
+                    "minHeight": 440,
+                    "detectionRadius": 12
+                },
                 "resultValidation": {
                     "validate": {
                         "regExp": "[0-1]",
@@ -30924,6 +31014,11 @@
             "layout": {
                 "version": "1.0",
                 "name": "ANY20QMIDDAYMEAL Exam Sheet Form",
+                "threshold": {
+                    "minWidth": 530,
+                    "minHeight": 440,
+                    "detectionRadius": 12
+                },
                 "resultValidation": {
                     "validate": {
                         "regExp": "[0-1]",
@@ -33345,6 +33440,11 @@
             "layout": {
                 "version": "1.0",
                 "name": "ANY1S24Q Exam Sheet Form",
+                "threshold": {
+                    "minWidth": 510,
+                    "minHeight": 410,
+                    "detectionRadius": 12
+                },
                 "pages": 2,
                 "cells": [
                     {
@@ -34566,15 +34666,15 @@
                         "cellId": "4",
                         "rois": [
                             {
-                                "annotationTags": "QUESTION2",
+                                "annotationTags": "QUESTION3",
                                 "extractionMethod": "CELL_OMR",
                                 "roiId": "9",
                                 "index": 0,
                                 "rect": {
-                                    "top": 267,
-                                    "left": 207,
-                                    "bottom": 287,
-                                    "right": 222
+                                    "top": 317,
+                                    "left": 206,
+                                    "bottom": 334,
+                                    "right": 223
                                 }
                             }
                         ],
@@ -34582,8 +34682,8 @@
                             "index": 4
                         },
                         "format": {
-                            "name": "QUESTION2",
-                            "value": "QUESTION 2"
+                            "name": "QUESTION3",
+                            "value": "QUESTION 3"
                         },
                         "validate": {
                             "regExp": ""
@@ -34792,6 +34892,11 @@
             "layout": {
                 "version": "1.0",
                 "name": "HINDI4S20QOMR Exam Sheet Form",
+                "threshold": {
+                    "minWidth": 690,
+                    "minHeight": 390,
+                    "detectionRadius": 12
+                },
                 "resultValidation": {
                     "validate": {
                         "regExp": "[0-1]",

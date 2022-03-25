@@ -1,4 +1,5 @@
 import AppTheme from "../../utils/AppTheme";
+import { monospace_FF } from "../../utils/CommonUtils";
 
 export const styles = {
     container1: {
@@ -14,6 +15,7 @@ export const styles = {
         fontSize: AppTheme.FONT_SIZE_MEDIUM_SMALL,
         color: AppTheme.BLACK,
         letterSpacing: 1,
+        fontFamily : monospace_FF
     },
     row: {
         flexDirection: 'row'
@@ -63,7 +65,8 @@ export const styles = {
         paddingTop: '8%',
         paddingBottom: '8%',
         fontWeight: 'bold',
-        letterSpacing: 1
+        letterSpacing: 1,
+        fontFamily : monospace_FF
     },
     studentContainer: {
         // flex: 1,
@@ -106,7 +109,8 @@ export const styles = {
         fontSize: AppTheme.FONT_SIZE_SMALL,
         fontWeight: '500',
         color: AppTheme.GREY_TEXT,
-        letterSpacing: 1
+        letterSpacing: 1,
+        fontFamily : monospace_FF
     },
     submitBtnStyle: {
         width: '60%',
