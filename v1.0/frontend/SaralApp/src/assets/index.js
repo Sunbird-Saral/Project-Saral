@@ -7,7 +7,7 @@ export const Assets = {
     Tagging: require('./images/icons8-tag-64.png'),
     About: require('./images/about_icon.png'),
     Help: require('./images/help.png'),
-    crossImage: require('./images/icons8-multiplication-26.png'),
+    MessageIcon :require('./images/box.png'),
     crossImage: require('./images/icons8-multiplication-26.png'),
     openEye: require('./images/openeye.png'),
     closeEye: require('./images/closeeye.png')
