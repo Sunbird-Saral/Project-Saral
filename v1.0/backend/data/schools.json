@@ -36,7 +36,8 @@
 "autoSyncFrequency": 900000,
 "state": "up",
 "storeTrainingData": true,
-"tags": true
+"tags": true,
+"autoSyncBatchSize": 10
 },
 {
   "name": "Dummy Skill School",

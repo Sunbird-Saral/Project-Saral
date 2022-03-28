@@ -683,6 +683,9 @@ definitions:
             description: "If this is set to true frontend application will return base 64 encoded images . In savesMarksAPI and getSavedScanAPI these APIs will get data and value of encoded images will be stored in these fields studentIdTrainingData and trainningData, studentIdTrainingData field will contain base 64 encoded images of rollnumber and trainningData field will contain base 64 encoded images for marks. "
             default: false
             example: true
+          tags:
+            type: boolean
+            example: true
           
       classes:
             $ref: '#/definitions/classResponse'
@@ -761,6 +764,13 @@ definitions:
         default: false
         description: "If this is set to true frontend application will return base 64 encoded images . In savesMarksAPI and getSavedScanAPI these APIs will get data and value of encoded images will be stored in these fields studentIdTrainingData and trainningData, studentIdTrainingData field will contain base 64 encoded images of rollnumber and trainningData field will contain base 64 encoded images for marks. "
         example: true
+      tags:
+        type: boolean
+        example: true
+      autoSyncBatchSize:
+        type: number
+        description:  "Limit of student records to be stored in local storage before we push to backend."
+        example: 10
         
   CreateSchoolResponse:
     type: object
@@ -805,6 +815,13 @@ definitions:
         default: false
         example: true
         description: "If this is set to true frontend application will return base 64 encoded images . In savesMarksAPI and getSavedScanAPI these APIs will get data and value of encoded images will be stored in these fields studentIdTrainingData and trainningData, studentIdTrainingData field will contain base 64 encoded images of rollnumber and trainningData field will contain base 64 encoded images for marks. "
+      tags:
+        type: boolean
+        example: false
+      autoSyncBatchSize:
+        type: number
+        description:  "Limit of student records to be stored in local storage before we push to backend."
+        example: 10
         
   UpdateStudentBody:
     type: object
@@ -1255,6 +1272,18 @@ definitions:
           type: string
           description: "Question Id"
           example: "1"
+        tags: 
+          type: array
+          items:
+            type: object
+            properties:
+              tagName:
+                type: string
+                example: "Historic"
+              selected:
+                type: boolean
+                default: false
+                example: false
         indicatorTitle:
           type: string
           description: "Indicator Title"

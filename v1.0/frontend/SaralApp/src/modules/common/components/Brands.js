@@ -87,6 +87,7 @@ class Brands extends PureComponent {
     saveDataInDB = async () => {
 
         const { loginData, dispatch } = this.props
+        const autoSyncBatchSize = Object.keys(loginData).length > 0  && loginData.data.school.hasOwnProperty("autoSyncBatchSize") ? loginData.data.school.autoSyncBatchSize : 10
 
         const data = await getScannedDataFromLocal();
         storeFactory.dispatch(this.flagAction(false))
@@ -96,8 +97,7 @@ class Brands extends PureComponent {
                 len = len + element.studentsMarkInfo.length
             });
     
-    
-            if (len >= 10) {
+            if (len >= autoSyncBatchSize) {
     
                 storeFactory.dispatch(this.flagAction(true))
                 this.hitPushNotification("Uploading•••", Strings.auto_sync_in_progress_please_wait)
