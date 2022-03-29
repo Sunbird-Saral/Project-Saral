@@ -9,8 +9,6 @@ basePath: "/v1.5"
 tags:
 - name: "School"
 - name: "Student"
-- name: "Class"
-- name: "Exam"
 - name: "Marks"
 - name: "ROI"
 - name: "Brand"
@@ -31,24 +29,6 @@ schemes:
 
 paths:
   
-  /schools:
-    get:
-      tags:
-      - School
-      summary: "Get School List"
-      description: "should return list of school"
-      responses:
-        "200":
-          description: "successful operation"
-          schema:
-            type: object
-            properties:
-              schools: 
-                $ref: "#/definitions/Schools"
-              
-        "400":
-          description: "unsuccessful operation"
-          
   /schools/login:        
     post:
       tags:
@@ -186,27 +166,7 @@ paths:
 
 
 definitions:
-  Schools:
-      type: array
-      items:
-        type: object
-        properties:
-          name:
-            type: string
-            example: "Dummy school 1"   
-          schoolId:
-            type: string
-            example: "up001"
-          state:
-            type: string
-            example: "up" 
-          storeTrainingData:
-            type: boolean
-            default: false
-            example: true
-            description: "If this is set to true frontend application will return base 64 encoded images . In savesMarksAPI and getSavedScanAPI these APIs will get data and value of encoded images will be stored in these fields studentIdTrainingData and trainningData, studentIdTrainingData field will contain base 64 encoded images of rollnumber and trainningData field will contain base 64 encoded images for marks. "
-  
-        
+
   LoginSchool:
     type: object
     properties:
@@ -285,105 +245,6 @@ definitions:
         default: true
         example: "true"
     
-  CreateSchoolBody:
-    type: object
-    required:
-      - name
-      - schoolId
-      - password
-      - state
-    properties:
-      name:
-        type: string
-        example: "dummy school 1"
-      schoolId:
-        type: string
-        example: "u001"
-      password: 
-        type: string
-        example: "abc"
-      state:
-        type: string
-        example: "up"
-      autoSync:
-        type: boolean
-        example: true
-      autoSyncFrequency:
-          type: number
-          description: "Auto Sync frequency in milli-seconds. Saral App uses syncs data in local storage to backend based on this frequency value"
-          example: 900000
-      storeTrainingData:
-        type: boolean
-        default: false
-        description: "If this is set to true frontend application will return base 64 encoded images . In savesMarksAPI and getSavedScanAPI these APIs will get data and value of encoded images will be stored in these fields studentIdTrainingData and trainningData, studentIdTrainingData field will contain base 64 encoded images of rollnumber and trainningData field will contain base 64 encoded images for marks. "
-        example: true
-      tags:
-        type: boolean
-        example: true
-      autoSyncBatchSize:
-        type: number
-        description:  "Limit of student records to be stored in local storage before we push to backend."
-        example: 10
-        
-  CreateSchoolResponse:
-    type: object
-    properties:
-      schools:
-        type: object
-        properties:
-          name: 
-            type: string
-            example: "dummy school 1"
-          schoolId:
-            type: string
-            example: "u001"
-          state:
-            type: string
-            example: "up"
-      token:
-        type: object
-        example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTMwOWQyYjJlNzEyMzAyZGY5NmM3NjEiLCJpYXQiOjE2MzA1NzU5MTV9.FCt2Q4R_sN1ctdOfoOPzBzfdUohAPA-TlLFtJJEeTBE"
-        
-  UpdateSchoolBody:
-    type: object
-    properties:
-      name:
-        type: string
-        example: "Dummy school 1"
-      state:
-        type: string
-        example: "up"
-      udisceCode:
-        type: string
-        example: "1"
-      autoSync:
-        type: boolean
-        example: true
-      autoSyncFrequency:
-        type: number
-        description: "Auto Sync frequency in milli-seconds. Saral App uses syncs data in local storage to backend based on this frequency value"
-        example: 900000
-      storeTrainingData:  
-        type: boolean
-        default: false
-        example: true
-        description: "If this is set to true frontend application will return base 64 encoded images . In savesMarksAPI and getSavedScanAPI these APIs will get data and value of encoded images will be stored in these fields studentIdTrainingData and trainningData, studentIdTrainingData field will contain base 64 encoded images of rollnumber and trainningData field will contain base 64 encoded images for marks. "
-      tags:
-        type: boolean
-        example: false
-      autoSyncBatchSize:
-        type: number
-        description:  "Limit of student records to be stored in local storage before we push to backend."
-        example: 10
-        
-  UpdateStudentBody:
-    type: object
-    required:
-      - name
-    properties:
-      name: 
-        type: string
-        example: "1210001"
         
   GetSavedScanBody:
     type: object
@@ -565,45 +426,6 @@ definitions:
             type: string
             description: "It contains base 64 encoded images for marks"
             example: "/9j/4AAQSkZJRgABAQAAAQABAAD/4gIoSUNDX1BST0ZJTEUAAQEAAAIYAAAAAAIQAABtbnRyUkdC\nIFhZWiAAAAAAAAAAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAA\nAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlk\nZXNjAAAA8AAAAHRyWFlaAAABZAAAABRnWFlaAAABeAAAABRiWFlaAAABjAAAABRyVFJDAAABoAAA\nAChnVFJDAAABoAAAAChiVFJDAAABoAAAACh3dHB0AAAByAAAABRjcHJ0AAAB3AAAADxtbHVjAAAA\nAAAAAAEAAAAMZW5VUwAAAFgAAAAcAHMAUgBHAEIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFhZWiAA\nAAAAAABvogAAOPUAAAOQWFlaIAAAAAAAAGKZAAC3hQAAGNpYWVogAAAAAAAAJKAAAA+EAAC2z3Bh\ncmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABYWVogAAAAAAAA9tYAAQAAAADT\nLW1sdWMAAAAAAAAAAQAAAAxlblVTAAAAIAAAABwARwBvAG8AZwBsAGUAIABJAG4AYwAuACAAMgAw\nADEANv/bAEMAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEB\nAQEBAQEBAQEBAQEBAQEBAf/bAEMBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEB\nAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAf/AABEIABwAHAMBIgACEQEDEQH/xAAaAAACAgMA\nAAAAAAAAAAAAAAAFBgQHAQIK/8QALBAAAgEDAwIFAwUBAAAAAAAAAQIRAwQFACExBhIHExQiUTJh\ngSNBYnGRsf/EABcBAQEBAQAAAAAAAAAAAAAAAAMFAgT/xAAnEQACAQMDAwMFAAAAAAAAAAABEQIh\nQVEAEjEDIoEEE5EyUmGx8f/aAAwDAQACEQMRAD8A7SxbWQooGsUVCY7WA7Y54gfnU23xWId09RjL\ndqTICCaasoE8qRMEfM8/GhXWF16Lorq7IDuovY9M5u8ouDPbUt8dc1VcGVIKlZHEGN9IPgNd5G98\nKelLvI3T3l1kFu7xqtZyzslW4YIJMwqqsD8j76iT6Z9n3pSkBu27U6qEiHREPkAft0Q+aMNol8Mk\nu2M35WrTucRiWEJaKlBSCEVQFJBkyOP2+J+x1u+J6ebsIsqS+wAghZJkyTInfRkQaYpNT7W7RB2O\n3PMDkf5zrBsLOoFapXZX7YKxxBPG421yheMnbZUrev8AdII9tvqqTHigpUeRfOkzxBsbi+6F63x2\nNpNeXmV6Yy2Ms7ekfdVuL6zq26BdiZJqEDYneNLHhN09kekvDDoPD5e2e0yOPw/k3ts/10a/qrkh\nGJAk+V5Z3AO+rUy1ZratbrSVFDqgYdu3u5gSN/g6D5i4q0aAZDBUFhO4BaCdpj4j+hpet6hRHp9o\nMQQWeWRHCpQfA/OshwBmZE9oQsFUGxzfRhGSDUn3AyJPAEcjiBtsCd9Ra13Q7/1atBGgbFoMbwYg\n/wDdJtbMXqNQVWpxUSmW9h3LCSfq20dNc1UpO9OkzNSUklDJ3b+WiBMSCUe0JhqoVGMZ8F6OfVkn\n91Vb4821/9k=\n"
-          
-  CreateStudentBody:
-    type: object
-    required:
-       - name
-       - studentId
-    properties:
-      name:
-        type: string
-        description: "Student Name"
-        example: "ram"
-      section:
-        type: string
-        description: "Class Section"
-        example: "A"
-      studentId:
-        type: string
-        description: "Student ID"
-        example: "1210001"
-      studentClass:
-        $ref: '#/definitions/StudentClass'
-        
-  FetchStudentsByQueryResponse:
-    type: object
-    properties:
-      studentClass:
-        $ref: '#/definitions/StudentClassName'
-      section:
-        type: string
-        example: "D"
-      name:
-        type: string
-        example: "2"
-      studentId:
-        type: string
-        example: "1210001"
-      schoolId:
-        type: string
-        example: "u001"
         
   FetchStudentsByQueryAndExamResponse:
     type: array
@@ -627,34 +449,7 @@ definitions:
         studentAvailability:
           type: boolean
           example: true
-      
-  CreateStudentResponse:
-    type: object
-    properties:
-      studentClass: 
-        $ref: '#/definitions/StudentClassName' 
-      section:
-        type: string
-        description: "Class Section"
-        example: "D"
-      name:
-        type: string
-        description: "Student Name"
-        example: "Ram"
-      studentId:
-        type: string
-        description: "Student Id"
-        example: "1210001"
-      schoolId:
-        type: string
-        description: "School Id"
-        example: "u001"
-      createdAt:
-        type: string
-        format: date-time
-      updatedAt:
-        type: string
-        format: date-time
+    
         
   StudentClass:
     type: array
@@ -680,70 +475,6 @@ definitions:
           description: "class Name"
           example: "Class-2"
           
-  CreateExamBodyResponse:
-      type: object
-      properties:
-        _id:
-          type: string
-          description: "Unique Id"
-          example: "61922ebd5d6f484c78e8513f"
-        subject:
-          type: string
-          example: "Maths"
-        examLo:
-          type: string
-          example: "Maths"
-        classId:
-          type: string
-          description: "Class Id"
-          example: "2"
-        examDate:
-          type: string
-          description: "Exam Of Date"
-          example: "24-12-2021"
-        totalMarks:
-          type: number
-          description: "Total Marks"
-          example: 20
-        type:
-          type: string
-          description: "exam type"
-          example: "uphindi1s"
-        questions:
-          $ref: '#/definitions/Questions' 
-        examId:
-          type: number
-          description: "Exam Id"
-          example: 1
-        schoolId:
-          type: string
-          description: "School Id"
-          example: "u001"
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-          
-  UpdateExamBody:
-    type: object
-    properties:
-      subject:
-        type: string
-        example: "Maths"
-      examLO:
-        type: string
-        example: "Maths"
-      examDate:
-        type: string
-        example: "24-12-2021"
-      totalMarks:
-        type: number
-        example: 20
-      questions: 
-        $ref: '#/definitions/Questions' 
-        
   GetExamByClassResponse:
     type: array
     items:
@@ -783,38 +514,6 @@ definitions:
           type: string
           description: "Unique Id"
           example: "u001"
-
-  CreateExamBody:
-    type: array
-    required:
-      - subject
-      - classId
-      - examDate
-      - type
-    items:
-      type: object
-      properties:
-        subject:
-          type: string
-          example: "Maths"
-        examLo:
-          type: string
-          example: "Maths"
-        classId:
-          type: string
-          example: "24-12-2021"
-        schoolId:
-          type: string
-          example: "u001"
-        examDate:
-          type: string
-          example: "24-12-2021"
-        type:
-          type: string
-          description: "exam type"
-          example: "uphindi1s"
-        questions:
-          $ref: '#/definitions/Questions' 
     
   Questions:
     type: array
@@ -940,54 +639,7 @@ definitions:
             example: "UP SAT Exam Sheet Form"
           cells:
             $ref: '#/definitions/cells' 
-      
-  
-  CreateROIBody:
-    type: object
-    required:
-      - subject
-      - classId
-      - type
-      - roi
-    properties:
-      subject:
-        type: string
-        example: "Maths"
-      classId:
-        type: string
-        example: "2"
-      type: 
-        type: string
-        example: "uphindi1s"
-      roi:
-        $ref: '#/definitions/rois'
-          
-  CreateROIResponse:
-    type: object
-    properties:
-      roiId:
-        type: number
-        example: 1
-      classId:
-        type: string
-        example: "2"
-      subject:
-        type: string
-        example: "Maths"
-      state:
-        type: string
-        example: "up"
-      createdAt:
-        type: string
-        format: date-time
-        
-  UpdateRoiBody:
-    type: object
-    required:
-      - roi
-    properties:
-      roi:
-        $ref: "#/definitions/rois"
+
         
   sections:
     type: array
@@ -998,73 +650,6 @@ definitions:
           type: string
           example: "B"
         
-  addClassesBody:
-    type: array
-    required:
-      - classId
-    items:
-      type: object
-      properties: 
-        classId:
-          type: string
-          example: "2"
-        sections:
-          $ref: "#/definitions/sections"
-          
-  addClassesResponse:
-    type: array
-    items:
-      type: object
-      properties:
-        sections:
-          $ref: "#/definitions/sections"
-        classId:
-          type: string
-          example: "2"
-        className:
-          type: string
-          example: "Class-2"
-        schoolId:
-          type: string
-          example: "u001"
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-          
-  updateClassBody:
-    type: object
-    required:
-       - classId
-    properties:
-      classId:
-        type: string
-        example: "2"
-      sections: 
-          $ref: "#/definitions/sections"
-          
-  updateClassResponse:
-    type: object
-    properties:
-      sections:
-        $ref: "#/definitions/sections"
-      classId:
-        type: string
-        example: "2"
-      className:
-        type: string
-        example: "Class-2"
-      schoolId:
-        type: string
-        example: "u001"
-      createdAt:
-        type: string
-        format: date-time
-      updatedAt:
-        type: string
-        format: date-time
         
   DefaultBrand:
     type: object

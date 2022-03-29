@@ -28,6 +28,24 @@ schemes:
 
 
 paths:
+
+  /schools:
+    get:
+      tags:
+      - School
+      summary: "Get School List"
+      description: "should return list of school"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: object
+            properties:
+              schools: 
+                $ref: "#/definitions/Schools"
+              
+        "400":
+          description: "unsuccessful operation"
   
   /schools/create:
     post:
@@ -448,6 +466,27 @@ paths:
           
 
 definitions:
+
+  
+  Schools:
+      type: array
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+            example: "Dummy school 1"   
+          schoolId:
+            type: string
+            example: "up001"
+          state:
+            type: string
+            example: "up" 
+          storeTrainingData:
+            type: boolean
+            default: false
+            example: true
+            description: "If this is set to true frontend application will return base 64 encoded images . In savesMarksAPI and getSavedScanAPI these APIs will get data and value of encoded images will be stored in these fields studentIdTrainingData and trainningData, studentIdTrainingData field will contain base 64 encoded images of rollnumber and trainningData field will contain base 64 encoded images for marks. "
         
     
   CreateSchoolBody:
