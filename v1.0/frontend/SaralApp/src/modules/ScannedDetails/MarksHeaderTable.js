@@ -80,7 +80,7 @@ const styles = {
         width: '100%',
         color: AppTheme.BLACK,
         fontWeight: 'bold',
-        letterSpacing: 1,
+        // letterSpacing: 1,
         fontSize: AppTheme.FONT_SIZE_SMALL,
         textAlign: 'center',
         fontFamily : monospace_FF
