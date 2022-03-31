@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Text, View, ScrollView, ToastAndroid, Alert, Image, TouchableOpacity, PermissionsAndroid } from 'react-native';
 import { connect, useDispatch } from 'react-redux';
 import AppTheme from '../../utils/AppTheme';
-import { CELL_OMR, extractionMethod, multipleStudent, MULTIPLE_TAG_DATAS,dispatchCustomModalMessage, dispatchCustomModalStatus,monospace_FF , neglectData, SCAN_TYPES, studentLimitSaveInLocal, student_ID, TABLE_HEADER, TABLE_HEADER_WITH_TAG } from '../../utils/CommonUtils';
+import { CELL_OMR, extractionMethod, multipleStudent, MULTIPLE_TAG_DATAS, dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF, neglectData, SCAN_TYPES, studentLimitSaveInLocal, student_ID, TABLE_HEADER, TABLE_HEADER_WITH_TAG } from '../../utils/CommonUtils';
 import Strings from '../../utils/Strings';
 import ShareComponent from '../common/components/Share';
 
@@ -74,9 +74,9 @@ const ScannedDetailsComponent = ({
     const [toggleCheckBox, setToggleCheckBox] = useState(false)
     const [logmessage, setLogmessage] = useState()
     const [multiPage, setMultiPage] = useState(0)
-    const [isModalVisible ,setIsModalVisible] = useState(false)
-    const [tagData ,setTagData] = useState([])
-    const [questionIdData ,setQuestionIdData] = useState()
+    const [isModalVisible, setIsModalVisible] = useState(false)
+    const [tagData, setTagData] = useState([])
+    const [questionIdData, setQuestionIdData] = useState()
     const [omrResultErr, setOmrResult] = useState()
 
     const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.scannedDetailComponent[0]
@@ -115,7 +115,7 @@ const ScannedDetailsComponent = ({
 
         let absent = datas.filter((item) => item.studentId == studentId & item.studentAvailability == false)
 
-        if(studentId == 0 && studentId != '' && isMultipleStudent){
+        if (studentId == 0 && studentId != '' && isMultipleStudent) {
             setToggleCheckBox(true)
         }
         if (absent.length > 0) {
@@ -127,7 +127,7 @@ const ScannedDetailsComponent = ({
                 setIsStudentValid(true)
                 setStdErr(Strings.student_id_should_be_same)
                 setStudentDATA([])
-            }   else if (a.length == 0) {
+            } else if (a.length == 0) {
                 setIsStudentValid(true)
                 setStdErr(Strings.please_correct_student_id)
             } else {
@@ -138,7 +138,7 @@ const ScannedDetailsComponent = ({
                 //set student Id
                 ocrLocalResponse.layout.cells.forEach((element) => {
                     student_ID.forEach((e) => {
-                        if (element.format.name == e ) {
+                        if (element.format.name == e) {
                             element.consolidatedPrediction = value
                             setMultipageStdId(element.consolidatedPrediction)
                         }
@@ -177,39 +177,52 @@ const ScannedDetailsComponent = ({
             let withNoDigits = e.format.name.replace(/[0-9]/g, '');
             let wordLen = withNoDigits.length;
             let multiple = 0
-            if (wordLen === multipleStudent[0].length  && withNoDigits === multipleStudent[0]) {
+            if (wordLen === multipleStudent[0].length && withNoDigits === multipleStudent[0]) {
                 multiple = multiple + 1
             }
             return multiple
         })
 
-     
+
         if (ocrLocalResponse.layout.hasOwnProperty("pages") && ocrLocalResponse.layout.pages > 0) {
             setMultiPage(ocrLocalResponse.layout.pages)
             setNextBtn("SCAN PAGE #2")
         }
-        const uniqStudentId=  [...checkIsStudentMultipleSingle.reduce((map, obj)=>map.set(obj.consolidatedPrediction, obj),new Map()).values()];
 
-        if (uniqStudentId.length > 0) {
+        // const uniqStudentId = [...checkIsStudentMultipleSingle.reduce((map, obj) => map.set(obj.consolidatedPrediction, obj), new Map()).values()];
+        const items2 = checkIsStudentMultipleSingle.map(item=>item)
+        let removedAllZeroId = items2.filter(number => number.consolidatedPrediction !== '0000000');
+        let onlyZeroId = items2.filter(number => number.consolidatedPrediction == '0000000');
+         let spliceZeroId = onlyZeroId.splice(0,1)
+
+         let pusharray = [...removedAllZeroId,...spliceZeroId]
+          console.log('items',items2)
+       
+          console.log('pushearray',pusharray);
+
+
+        if (pusharray.length > 0) {
             setNextBtn("NEXT")
-            setStdRollArray(uniqStudentId)
+            setStdRollArray(pusharray)
             setIsmultipleStudent(true)
-            callMultipleStudentSheetData(checkIsStudentMultipleSingle)
+            callMultipleStudentSheetData(pusharray)
         } else {
             callSingleStudentSheetData()
         }
     }, []);
 
-    const callMultipleStudentSheetData = (checkIsStudentMultipleSingle) => {
+    const callMultipleStudentSheetData = (pusharray) => {
 
         let marTemp = []
         let dummy = []
-
+        
+         console.log('marTempdata????????//',marTemp)
         let len = ocrLocalResponse.layout.cells.length;
+        
 
         ocrLocalResponse.layout.cells.forEach((element, index) => {
-            checkIsStudentMultipleSingle.forEach((e, i) => {
-                if (element.format.name === e.format.name) {
+            pusharray.forEach((e, i) => {
+                if (element.format.name === e.format.name ) {
                     dummy.push(index)
                 }
             });
@@ -225,13 +238,12 @@ const ScannedDetailsComponent = ({
                 })
             }
         });
-        const uniqelement=  [...marTemp.reduce((map, obj)=>map.set(obj.RollNo, obj),new Map()).values()];
-        console.log('uniqelemenettt',uniqelement)
-        //  console.log('uniqelementuniqelement',uniqelement)
-        console.log('marTemp',marTemp)
-        setStudentID(uniqelement[0].RollNo)
-        setNewArrayValue(uniqelement[0].data)
-        setStructureList(uniqelement)
+
+        
+        
+        setStudentID(marTemp[0].RollNo)
+        setNewArrayValue(marTemp[0].data)
+        setStructureList(marTemp)
 
 
 
@@ -242,7 +254,7 @@ const ScannedDetailsComponent = ({
             title: title,
             message: message,
             isOkAvailable: isAvailable,
-            isCancel : cancel
+            isCancel: cancel
         }
         dispatch(dispatchCustomModalStatus(true));
         dispatch(dispatchCustomModalMessage(data));
@@ -332,9 +344,10 @@ const ScannedDetailsComponent = ({
 
 
     const goNextFrame = () => {
-        if(studentId == 0 && studentId != '' && isMultipleStudent){
+        if (studentId == 0 && studentId != '' && isMultipleStudent) {
             setToggleCheckBox(true)
         }
+        console.log('newArrayValue',newArrayValue)
         let validCell = false
         let omrMark = false
         for (let i = 0; i < newArrayValue.length; i++) {
@@ -362,7 +375,7 @@ const ScannedDetailsComponent = ({
             showErrorMessage(`omr value should be 0 to ${cellOmrValidation[1] + 1}`)
         }
         else if (duplication) {
-            callCustomModal(Strings.message_text, Strings.Student_ID_Shouldnt_be_duplicated,false);
+            callCustomModal(Strings.message_text, Strings.Student_ID_Shouldnt_be_duplicated, false);
         }
         else if (disable) {
             showErrorMessage(Strings.please_correct_marks_data)
@@ -444,11 +457,11 @@ const ScannedDetailsComponent = ({
         }
     }
 
-    const callTagArrayData = (formatName) =>{
+    const callTagArrayData = (formatName) => {
         let tagArray = []
-        for(const element of studentsAndExamData.data.exams){
+        for (const element of studentsAndExamData.data.exams) {
             if (filteredData.subject === element.subject) {
-                for(const _el of element.questions) {
+                for (const _el of element.questions) {
                     _el.tags.filter((value) => {
                         if (value.hasOwnProperty("questionId") && value.questionId.trim() == formatName.trim() && value.selected) {
                             tagArray.push(value.tagName)
@@ -458,8 +471,8 @@ const ScannedDetailsComponent = ({
 
                 }
                 break;
-                }
             }
+        }
         return tagArray
     }
 
@@ -496,8 +509,8 @@ const ScannedDetailsComponent = ({
                 el.data.forEach((value, i) => {
 
                     let tagArrayData = ''
-                    if ( loginData.data.school.hasOwnProperty("tags") && loginData.data.school.tags) {
-                         tagArrayData = callTagArrayData(value.format.name)
+                    if (loginData.data.school.hasOwnProperty("tags") && loginData.data.school.tags) {
+                        tagArrayData = callTagArrayData(value.format.name)
                     }
 
                     let marks_data = {
@@ -618,14 +631,14 @@ const ScannedDetailsComponent = ({
 
                         });
                         if (bgFlag) {
-                            callCustomModal(Strings.message_text, Strings.auto_sync_in_progress_please_wait, false,false)
+                            callCustomModal(Strings.message_text, Strings.auto_sync_in_progress_please_wait, false, false)
                         } else {
                             setScannedDataIntoLocal(getDataFromLocal)
                             goToMyScanScreen()
                         }
                     }
                 } else {
-                    callCustomModal(Strings.message_text, Strings.you_can_save_only_limited_student_In_Order_to_continue_have_to_save_first, false,false);
+                    callCustomModal(Strings.message_text, Strings.you_can_save_only_limited_student_In_Order_to_continue_have_to_save_first, false, false);
                 }
 
             } else if (saveObj.studentsMarkInfo.length <= studentLimitSaveInLocal) {
@@ -745,7 +758,7 @@ const ScannedDetailsComponent = ({
             ocrLocalResponse.layout.cells.forEach(element => {
                 if (element.cellId == value.cellId) {
                     if (!regexValue[0]) {
-                        showErrorMessage(regexValue[1] ? regexValue[1] : defaultValidateError )
+                        showErrorMessage(regexValue[1] ? regexValue[1] : defaultValidateError)
                     }
                 }
             });
@@ -788,7 +801,7 @@ const ScannedDetailsComponent = ({
 
 
     const showErrorMessage = (message) => {
-        callCustomModal(Strings.message_text, message, false,false)
+        callCustomModal(Strings.message_text, message, false, false)
     }
 
     const validateCellOMR = (isMultiple) => {
@@ -809,7 +822,7 @@ const ScannedDetailsComponent = ({
 
 
     const onSubmitClick = async () => {
-        if(studentId == 0 && studentId != '' && isMultipleStudent){
+        if (studentId == 0 && studentId != '' && isMultipleStudent) {
             setToggleCheckBox(true)
         }
         let validCell = false
@@ -818,7 +831,7 @@ const ScannedDetailsComponent = ({
         let regexErrormsglist
         for (let i = 0; i < newArrayValue.length; i++) {
             let consolidatedlist = newArrayValue[i].consolidatedPrediction
-             regexErrormsglist = newArrayValue[i] && newArrayValue[i].validate && newArrayValue[i].validate.errorMsg
+            regexErrormsglist = newArrayValue[i] && newArrayValue[i].validate && newArrayValue[i].validate.errorMsg
             let regexlist = newArrayValue[i].validate && newArrayValue[i].validate.regExp
             let number = consolidatedlist;
             let regexvalue = new RegExp(regexlist)
@@ -849,7 +862,7 @@ const ScannedDetailsComponent = ({
         else if (isStudentValid) {
             showErrorMessage(Strings.student_id_should_be_same)
         }
-        else if (resultMark ===false) {
+        else if (resultMark === false) {
             showErrorMessage(Strings.please_correct_marks_data)
         }
         else {
@@ -916,7 +929,7 @@ const ScannedDetailsComponent = ({
     }
 
     const goNextPage = () => {
-        if(studentId == 0 && studentId != '' && isMultipleStudent){
+        if (studentId == 0 && studentId != '' && isMultipleStudent) {
             setToggleCheckBox(true)
         }
         onSubmitClick()
@@ -985,12 +998,12 @@ const ScannedDetailsComponent = ({
     }
 
     const goBackPage = () => {
-        
+
         if (currentIndex - 1 >= 1) {
             if (!studentValid && !toggleCheckBox) {
                 showErrorMessage(Strings.please_correct_student_id)
             }
-            else if (isStudentValid){
+            else if (isStudentValid) {
                 showErrorMessage(Strings.student_id_should_be_same)
             } else {
                 setNextBtn(`Scan Page#${currentIndex}`)
@@ -1029,9 +1042,9 @@ const ScannedDetailsComponent = ({
         let objects = []
 
         data.map((e) => {
-            
+
             let tagArrayData = ''
-            if ( loginData.data.school.hasOwnProperty("tags") && loginData.data.school.tags) {
+            if (loginData.data.school.hasOwnProperty("tags") && loginData.data.school.tags) {
                 tagArrayData = callTagArrayData(e.format.name)
             }
             let data = {
@@ -1039,7 +1052,7 @@ const ScannedDetailsComponent = ({
                 "obtainedMarks": e.consolidatedPrediction,
                 "predictedMarks": loginData.data.school.storeTrainingData ? e.predictedMarks : '',
                 "predictionConfidence": loginData.data.school.storeTrainingData ? e.consolidatedPrediction != e.predictedMarks ? e.predictionConfidence : '' : '',
-                
+
             }
 
             if (loginData.data.school.hasOwnProperty("tags") && loginData.data.school.tags) {
@@ -1154,7 +1167,7 @@ const ScannedDetailsComponent = ({
             setStudentID(rollNumber);
             scanNextSheet(roisData);
             setIsStudentValid(true);
-        }else {
+        } else {
             setStudentID(rollNumber)
             setStdErr("");
             scanNextSheet(roisData);
@@ -1191,7 +1204,7 @@ const ScannedDetailsComponent = ({
                                         <View style={styles.studentContainer}>
                                             <View style={styles.imageViewContainer}>
                                                 <View style={styles.imageContainerStyle}>
-                                                    <Text style={{ textAlign: 'center', fontSize: AppTheme.HEADER_FONT_SIZE_LARGE,fontFamily:monospace_FF }}>{studentData.length > 0 && studentData[0].name.charAt(0)}</Text>
+                                                    <Text style={{ textAlign: 'center', fontSize: AppTheme.HEADER_FONT_SIZE_LARGE, fontFamily: monospace_FF }}>{studentData.length > 0 && studentData[0].name.charAt(0)}</Text>
                                                 </View>
                                             </View>
                                             <View style={styles.deatilsViewContainer}>
@@ -1201,7 +1214,7 @@ const ScannedDetailsComponent = ({
                                                         labelText={BrandLabel && BrandLabel.StudentId ? BrandLabel.StudentId : Strings.student_id}
                                                         errorField={stdErr != '' || isNaN(studentId)}
                                                         // errorText={BrandLabel && BrandLabel.CorrectId ? stdErr != '' ? stdErr : BrandLabel.CorrectId : stdErr != '' ? stdErr : Strings.please_correct_student_id}
-                                                        errorText={ stdErr != '' ? stdErr : Strings.please_correct_student_id}
+                                                        errorText={stdErr != '' ? stdErr : Strings.please_correct_student_id}
                                                         onChangeText={(text) => {
                                                             setStudentID(text)
                                                             if (currentIndex == 1 && multiPage > 0) {
@@ -1249,10 +1262,36 @@ const ScannedDetailsComponent = ({
                                         </View>
 
 
-                                            <View style={{ flexDirection: 'row', marginTop: 20 }}>
-                                                {
-                                                    BrandLabel && BrandLabel.ListTableHeading[0] ?
-                                                        BrandLabel.ListTableHeading.map((data) => {
+                                        <View style={{ flexDirection: 'row', marginTop: 20 }}>
+                                            {
+                                                BrandLabel && BrandLabel.ListTableHeading[0] ?
+                                                    BrandLabel.ListTableHeading.map((data) => {
+                                                        return (
+                                                            <MarksHeaderTable
+                                                                customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
+                                                                key={data}
+                                                                rowTitle={data}
+                                                                rowBorderColor={AppTheme.TAB_BORDER}
+                                                                editable={false}
+                                                            />
+                                                        )
+                                                    })
+                                                    :
+                                                    loginData.data.school.tags
+                                                        ?
+                                                        TABLE_HEADER_WITH_TAG.map((data) => {
+                                                            return (
+                                                                <MarksHeaderTable
+                                                                    customRowStyle={{ width: '25%', backgroundColor: AppTheme.TABLE_HEADER }}
+                                                                    key={data}
+                                                                    rowTitle={data}
+                                                                    rowBorderColor={AppTheme.TAB_BORDER}
+                                                                    editable={false}
+                                                                />
+                                                            )
+                                                        })
+                                                        :
+                                                        TABLE_HEADER.map((data) => {
                                                             return (
                                                                 <MarksHeaderTable
                                                                     customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
@@ -1263,66 +1302,40 @@ const ScannedDetailsComponent = ({
                                                                 />
                                                             )
                                                         })
-                                                        :
-                                                        loginData.data.school.tags
-                                                        ?
-                                                        TABLE_HEADER_WITH_TAG.map((data) => {
-                                                            return (
-                                                                <MarksHeaderTable
-                                                                customRowStyle={{ width: '25%', backgroundColor: AppTheme.TABLE_HEADER }}
-                                                                key={data}
-                                                                rowTitle={data}
-                                                                rowBorderColor={AppTheme.TAB_BORDER}
-                                                                    editable={false}
-                                                                />
-                                                            )
-                                                        })
-                                                        : 
-                                                        TABLE_HEADER.map((data) => {
-                                                            return (
-                                                                <MarksHeaderTable
-                                                                customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
-                                                                key={data}
-                                                                rowTitle={data}
-                                                                rowBorderColor={AppTheme.TAB_BORDER}
-                                                                    editable={false}
-                                                                />
-                                                            )
-                                                        })
-                                                }
-                                            </View>
-                                          
-                                            {
-                                                newArrayValue.map((element, index) => {
-                                                    return (
-                                                        <View element={element} key={index} style={{ flexDirection: 'row' }}>
+                                            }
+                                        </View>
 
-                                                            <MarksHeaderTable
-                                                                customRowStyle={{ width: loginData.data.school.tags ? '25%' : '30%', }}
-                                                                rowTitle={renderSRNo(element, index)}
-                                                                rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
-                                                                editable={false}
-                                                                keyboardType={'number-pad'}
-                                                            />
-                                                            <MarksHeaderTable
-                                                                customRowStyle={{ width: loginData.data.school.tags ? '25%' : '30%', }}
-                                                                rowTitle={element.format.value}
-                                                                rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
-                                                                editable={false}
-                                                                keyboardType={'number-pad'}
-                                                            />
-                                                            <MarksHeaderTable
-                                                                customRowStyle={{ width: loginData.data.school.tags ? '25%' : '30%', }}
-                                                                rowTitle={element.consolidatedPrediction}
-                                                                rowBorderColor={markBorderOnCell(element)}
-                                                                editable={true}
-                                                                keyboardType={'number-pad'}
-                                                                maxLength={lengthAccordingSheet(element)}
-                                                                onChangeText={(text) => {
-                                                                    handleTextChange(text.trim(), index, newArrayValue, element)
-                                                                }}
+                                        {
+                                            newArrayValue.map((element, index) => {
+                                                return (
+                                                    <View element={element} key={index} style={{ flexDirection: 'row' }}>
 
-                                                            />
+                                                        <MarksHeaderTable
+                                                            customRowStyle={{ width: loginData.data.school.tags ? '25%' : '30%', }}
+                                                            rowTitle={renderSRNo(element, index)}
+                                                            rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
+                                                            editable={false}
+                                                            keyboardType={'number-pad'}
+                                                        />
+                                                        <MarksHeaderTable
+                                                            customRowStyle={{ width: loginData.data.school.tags ? '25%' : '30%', }}
+                                                            rowTitle={element.format.value}
+                                                            rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
+                                                            editable={false}
+                                                            keyboardType={'number-pad'}
+                                                        />
+                                                        <MarksHeaderTable
+                                                            customRowStyle={{ width: loginData.data.school.tags ? '25%' : '30%', }}
+                                                            rowTitle={element.consolidatedPrediction}
+                                                            rowBorderColor={markBorderOnCell(element)}
+                                                            editable={true}
+                                                            keyboardType={'number-pad'}
+                                                            maxLength={lengthAccordingSheet(element)}
+                                                            onChangeText={(text) => {
+                                                                handleTextChange(text.trim(), index, newArrayValue, element)
+                                                            }}
+
+                                                        />
                                                         {
                                                             loginData.data.school.tags
                                                             &&
@@ -1341,24 +1354,24 @@ const ScannedDetailsComponent = ({
                                                             />
                                                         }
 
-                                                        </View>
-                                                    )
-                                                    // }
-                                                })
-                                            }
+                                                    </View>
+                                                )
+                                                // }
+                                            })
+                                        }
 
-                                            <View style={[styles.viewnxtBtnStyle1, { paddingTop: '7%' }]}>
-                                                <ButtonComponent
-                                                    customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE, marginTop: '5%' }]}
-                                                    btnText={btnName.toUpperCase()}
-                                                    onPress={() => isMultipleStudent ? goBackFrame() : multiPage > 0 ? goBackPage() : onBackButtonClick()}
-                                                />
-                                                <ButtonComponent
-                                                    customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE, marginTop: '5%' }]}
-                                                    btnText={nextBtn.toUpperCase()}
-                                                    onPress={() => isMultipleStudent ? goNextFrame() : multiPage > 0 ? goNextPage() : onSubmitClick()}
-                                                />
-                                            </View>
+                                        <View style={[styles.viewnxtBtnStyle1, { paddingTop: '7%' }]}>
+                                            <ButtonComponent
+                                                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE, marginTop: '5%' }]}
+                                                btnText={btnName.toUpperCase()}
+                                                onPress={() => isMultipleStudent ? goBackFrame() : multiPage > 0 ? goBackPage() : onBackButtonClick()}
+                                            />
+                                            <ButtonComponent
+                                                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE, marginTop: '5%' }]}
+                                                btnText={nextBtn.toUpperCase()}
+                                                onPress={() => isMultipleStudent ? goNextFrame() : multiPage > 0 ? goNextPage() : onSubmitClick()}
+                                            />
+                                        </View>
                                     </ScrollView>
                                 </View>
 
@@ -1369,10 +1382,10 @@ const ScannedDetailsComponent = ({
 
 
                     {isLoading && <Spinner animating={isLoading} iconShow={false} />}
-                    <TaggingModal 
-                        setIsModalVisible={setIsModalVisible} 
-                        isModalVisible={isModalVisible} 
-                        tagData={tagData} 
+                    <TaggingModal
+                        setIsModalVisible={setIsModalVisible}
+                        isModalVisible={isModalVisible}
+                        tagData={tagData}
                         setTagData={setTagData}
                         studentsAndExamData={studentsAndExamData}
                         bgColor={multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}
