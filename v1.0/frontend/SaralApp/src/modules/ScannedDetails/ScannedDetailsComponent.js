@@ -82,6 +82,17 @@ const ScannedDetailsComponent = ({
     const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.scannedDetailComponent[0]
     const defaultValidateError = ocrLocalResponse.layout && ocrLocalResponse.layout.resultValidation && ocrLocalResponse.layout.resultValidation.validate.errorMsg
     const defaultValidateExp = ocrLocalResponse.layout && ocrLocalResponse.layout.resultValidation && ocrLocalResponse.layout.resultValidation.validate.regExp
+    const studentIdErrorMsg = ocrLocalResponse.layout && ocrLocalResponse.layout.idValidation && ocrLocalResponse.layout.idValidation.validate.errorMsg
+    let consolidated =ocrLocalResponse.layout.cells[0]&& ocrLocalResponse.layout.cells[0].consolidatedPrediction.length
+    const idValidateExp = ocrLocalResponse.layout && ocrLocalResponse.layout.idValidation && ocrLocalResponse.layout.idValidation.validate.regExp
+    
+    let regexExp = idValidateExp
+    let number = studentId;
+    let regex = new RegExp(regexExp)
+    let result = regex.test(number);
+
+    const studentIdLength = consolidated+1
+
     const inputRef = React.createRef();
     const dispatch = useDispatch()
 
@@ -115,7 +126,13 @@ const ScannedDetailsComponent = ({
 
         let absent = datas.filter((item) => item.studentId == studentId & item.studentAvailability == false)
 
-        if (studentId == 0 && studentId != '' && isMultipleStudent) {
+        if (result == false && studentId.length > consolidated) {
+            showErrorMessage(studentIdErrorMsg)
+
+        }
+
+
+        if(studentId == 0 && studentId != '' && isMultipleStudent){
             setToggleCheckBox(true)
         }
         if (absent.length > 0) {
@@ -1224,7 +1241,7 @@ const ScannedDetailsComponent = ({
                                                         value={studentId}
                                                         editable={edit}
                                                         keyboardType={'numeric'}
-                                                    />
+                                                        />
                                                     <Text style={styles.nameTextStyle}>{BrandLabel && BrandLabel.Exam ? BrandLabel.Exam : Strings.Exam} : {filteredData.subject} {filteredData.examDate} ({filteredData.examTestID})</Text>
                                                     {
                                                         isMultipleStudent
