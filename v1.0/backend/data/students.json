@@ -1913,5 +1913,125 @@
   "name": "Anju Garia",
   "studentId": "543212",
   "schoolId": "a001"
+},
+{
+  "studentClass": [
+    {
+      "classId": "3",
+      "className": "Class-3"
+    }
+  ],
+  "section": "A",
+  "name": "Rahul",
+  "studentId": "543213",
+  "schoolId": "a001"
+},
+{
+  "studentClass": [
+    {
+      "classId": "3",
+      "className": "Class-3"
+    }
+  ],
+  "section": "A",
+  "name": "Geeta",
+  "studentId": "543214",
+  "schoolId": "a001"
+},
+{
+  "studentClass": [
+    {
+      "classId": "3",
+      "className": "Class-3"
+    }
+  ],
+  "section": "A",
+  "name": "Kajol Agarwal",
+  "studentId": "543215",
+  "schoolId": "a001"
+},
+{
+  "studentClass": [
+    {
+      "classId": "3",
+      "className": "Class-3"
+    }
+  ],
+  "section": "A",
+  "name": "Shruthi Gupta",
+  "studentId": "543216",
+  "schoolId": "a001"
+},
+{
+  "studentClass": [
+    {
+      "classId": "3",
+      "className": "Class-3"
+    }
+  ],
+  "section": "A",
+  "name": "Sumit Sharma",
+  "studentId": "543217",
+  "schoolId": "a001"
+},
+{
+  "studentClass": [
+    {
+      "classId": "3",
+      "className": "Class-3"
+    }
+  ],
+  "section": "A",
+  "name": "Ajit kumar",
+  "studentId": "543218",
+  "schoolId": "a001"
+},
+{
+  "studentClass": [
+    {
+      "classId": "3",
+      "className": "Class-3"
+    }
+  ],
+  "section": "A",
+  "name": "Sachin Pal",
+  "studentId": "543219",
+  "schoolId": "a001"
+},
+{
+  "studentClass": [
+    {
+      "classId": "3",
+      "className": "Class-3"
+    }
+  ],
+  "section": "A",
+  "name": "Navin Nahar",
+  "studentId": "543220",
+  "schoolId": "a001"
+},
+{
+  "studentClass": [
+    {
+      "classId": "3",
+      "className": "Class-3"
+    }
+  ],
+  "section": "A",
+  "name": "Apurva Bisht",
+  "studentId": "543222",
+  "schoolId": "a001"
+},
+{
+  "studentClass": [
+    {
+      "classId": "3",
+      "className": "Class-3"
+    }
+  ],
+  "section": "A",
+  "name": "Sanjeev Bhatiya",
+  "studentId": "543223",
+  "schoolId": "a001"
 }
 ]
