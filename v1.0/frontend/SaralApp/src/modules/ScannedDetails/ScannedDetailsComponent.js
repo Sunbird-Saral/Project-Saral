@@ -235,15 +235,22 @@ const ScannedDetailsComponent = ({
         dummy.forEach((el, index) => {
             if (dummy.length > index + 1) {
                 let data = ocrLocalResponse.layout.cells.slice(dummy[index], dummy[index + 1])
-                marTemp.push({
-                    RollNo: data[0].consolidatedPrediction,
-                    data: data.slice(1, data.length)
-                })
+                if (!(parseInt(data[0].consolidatePrediction) === '0')) {
+                    marTemp.push({
+                        RollNo: data[0].consolidatedPrediction,
+                        data: data.slice(1, data.length)
+                    })
+                } 
             }
         });
-        setStudentID(marTemp[0].RollNo)
-        setNewArrayValue(marTemp[0].data)
-        setStructureList(marTemp)
+        if (marTemp.length != 0) {
+            setStudentID(marTemp[0].RollNo)
+            setNewArrayValue(marTemp[0].data)
+            setStructureList(marTemp)
+        } else {
+            goToMyScanScreen()
+            callCustomModal(Strings.message_text, Strings.student_id_should_not_blank,false);
+        }
 
 
 
