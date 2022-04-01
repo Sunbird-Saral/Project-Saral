@@ -38497,8 +38497,8 @@
                 "version": "1.0",
                 "name": "ANY10S10QOMR Exam Sheet Form",
                 "threshold": {
-                    "minWidth": 590,
-                    "minHeight": 464,
+                    "minWidth": 580,
+                    "minHeight": 454,
                     "detectionRadius": 12
                 },
                 "cells": [
