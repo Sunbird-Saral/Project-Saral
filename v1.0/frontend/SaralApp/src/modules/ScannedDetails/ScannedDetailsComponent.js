@@ -194,7 +194,7 @@ const ScannedDetailsComponent = ({
             let withNoDigits = e.format.name.replace(/[0-9]/g, '');
             let wordLen = withNoDigits.length;
             let multiple = 0
-            if (wordLen === multipleStudent[0].length  && withNoDigits === multipleStudent[0]) {
+            if (wordLen === multipleStudent[0].length && withNoDigits === multipleStudent[0]) {
                 multiple = multiple + 1
             }
             return multiple
@@ -207,8 +207,18 @@ const ScannedDetailsComponent = ({
         }
 
         if (checkIsStudentMultipleSingle.length > 0) {
+            let findNonZeroRollStd = ocrLocalResponse.layout.cells.filter((e) => {
+                let withNoDigits = e.format.name.replace(/[0-9]/g, '');
+                let wordLen = withNoDigits.length;
+                let multiple = 0
+                if (wordLen === multipleStudent[0].length && withNoDigits === multipleStudent[0] && (parseInt(e.consolidatedPrediction) != 0)) {
+                    multiple = multiple + 1
+                }
+                return multiple
+            })
+
             setNextBtn("NEXT")
-            setStdRollArray(checkIsStudentMultipleSingle)
+            setStdRollArray(findNonZeroRollStd)
             setIsmultipleStudent(true)
             callMultipleStudentSheetData(checkIsStudentMultipleSingle)
         } else {
@@ -235,18 +245,23 @@ const ScannedDetailsComponent = ({
         dummy.forEach((el, index) => {
             if (dummy.length > index + 1) {
                 let data = ocrLocalResponse.layout.cells.slice(dummy[index], dummy[index + 1])
-                if (!(parseInt(data[0].consolidatePrediction) === '0')) {
                     marTemp.push({
                         RollNo: data[0].consolidatedPrediction,
                         data: data.slice(1, data.length)
                     })
-                } 
             }
         });
-        if (marTemp.length != 0) {
-            setStudentID(marTemp[0].RollNo)
-            setNewArrayValue(marTemp[0].data)
-            setStructureList(marTemp)
+
+       let removeZeroRollStd = marTemp.filter((data, i) => { 
+            if (parseInt(data.RollNo) != 0) {
+                return true
+            }
+        })
+
+        if (removeZeroRollStd.length != 0) {
+            setStudentID(removeZeroRollStd[0].RollNo)
+            setNewArrayValue(removeZeroRollStd[0].data)
+            setStructureList(removeZeroRollStd)
         } else {
             goToMyScanScreen()
             callCustomModal(Strings.message_text, Strings.student_id_should_not_blank,false);
