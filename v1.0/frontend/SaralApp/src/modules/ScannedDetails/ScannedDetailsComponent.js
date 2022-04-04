@@ -264,7 +264,9 @@ const ScannedDetailsComponent = ({
             setStructureList(removeZeroRollStd)
         } else {
             goToMyScanScreen()
-            callCustomModal(Strings.message_text, Strings.student_id_should_not_blank,false);
+            setTimeout(() => {
+                callCustomModal(Strings.message_text, Strings.student_id_should_not_blank,false);
+            }, 1000);
         }
 
 
