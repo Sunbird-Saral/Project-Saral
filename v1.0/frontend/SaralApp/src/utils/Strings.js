@@ -113,6 +113,7 @@ export default strings = new LocalizedStrings({
         add_new_tag: "Add New Tag",
         add_tag: 'Add Tag',
         StudentId_limit_exceeds:"Student Id exceeds the limit",
-        absent_status: 'Absent Status'
+        absent_status: 'Absent Status',
+        student_id_should_not_blank: "Student Id Shouldn't be blank"
     }
 })
