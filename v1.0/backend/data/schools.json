@@ -56,5 +56,16 @@
     "autoSyncFrequency": 600000,
     "storeTrainingData": true,
     "tags": false
+  },
+  {
+    "name": "Dummy school 6",
+    "schoolId": "minimal",
+    "password": "Minimal@123",
+    "state": "gujrat",
+    "autoSync": false,
+    "autoSyncFrequency": 600000,
+    "storeTrainingData": true,
+    "tags": false,
+    "minimal" : true
   }
 ]
