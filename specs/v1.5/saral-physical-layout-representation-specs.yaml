@@ -58,6 +58,23 @@ components:
             $ref: '#/components/schemas/cell'
             minItems: 1
     
+        idValidation: 
+          type: object
+          description: validate erroneous resultData and show error message when resultData does not match with regular expression .
+          properties:
+            validate: 
+              type: object
+              properties:
+                regExp:
+                  type: string
+                  description: regular expression to detect erroneous resultData
+                  example: "^[0-9]{7}$"
+                errorMsg: 
+                  type: string
+                  description: error message shows when resultData does not match with regular expression.
+                  example: "Student I'd exceeds the limit"
+
+    
     cell:
       type: object
       description: each logical area on the layout that needs to be scanned
