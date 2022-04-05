@@ -109,10 +109,6 @@ router.delete('/roi/:examId', auth, async (req, res) => {
 
 router.get('/roi/:examId',auth, async (req, res) => {
     try {
-        if(req.params.examId == 0){
-            let roi = await ROI.find().lean()
-            res.status(200).send(roi)
-        }
        
         const examExist = await Exam.findOne({examId: req.params.examId}).lean()
         if(examExist){
@@ -135,7 +131,12 @@ router.get('/roi/:examId',auth, async (req, res) => {
                 res.status(404).send({"message": "ROI does not exist"})
             }
         }else{
+            if(req.params.examId == 0){
+                let roi = await ROI.find().lean()
+                res.status(200).send(roi)
+            }else{
             res.status(404).send({"message": "Exam Id does not exist"})
+            }
         }
     } catch (e){   
         res.status(400).send(e)
