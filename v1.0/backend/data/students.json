@@ -1790,7 +1790,7 @@
     }
   ],
   "section": "Carpentry",
-  "name": "Radha",
+  "name": "Student1",
   "studentId": "4000001",
   "schoolId": "skill001"
 },
@@ -1802,7 +1802,7 @@
     }
   ],
   "section": "Carpentry",
-  "name": "Meera",
+  "name": "Student2",
   "studentId": "4000002",
   "schoolId": "skill001"
 },
@@ -1814,7 +1814,7 @@
     }
   ],
   "section": "Carpentry",
-  "name": "Sweta",
+  "name": "Student3",
   "studentId": "4000003",
   "schoolId": "skill001"
 },
@@ -1826,7 +1826,7 @@
     }
   ],
   "section": "Carpentry",
-  "name": "Alpesh",
+  "name": "Student4",
   "studentId": "4000004",
   "schoolId": "skill001"
 },
@@ -1838,7 +1838,7 @@
     }
   ],
   "section": "Carpentry",
-  "name": "Mukesh",
+  "name": "Student5",
   "studentId": "4000005",
   "schoolId": "skill001"
 },
@@ -1850,7 +1850,7 @@
     }
   ],
   "section": "Carpentry",
-  "name": "Divyansh",
+  "name": "Student6",
   "studentId": "4000006",
   "schoolId": "skill001"
 },
@@ -1862,7 +1862,7 @@
     }
   ],
   "section": "Carpentry",
-  "name": "Shreya",
+  "name": "Student7",
   "studentId": "4000007",
   "schoolId": "skill001"
 },
@@ -1874,7 +1874,7 @@
     }
   ],
   "section": "Carpentry",
-  "name": "Durgesh",
+  "name": "Student8",
   "studentId": "4000008",
   "schoolId": "skill001"
 },
