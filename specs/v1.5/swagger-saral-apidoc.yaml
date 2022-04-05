@@ -36,7 +36,7 @@ paths:
   /schools:
     get:
       tags:
-      - Frontend API
+      - Maintenance API
       - School
       summary: "Get School List"
       description: "should return list of school"
