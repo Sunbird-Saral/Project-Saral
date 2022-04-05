@@ -40,27 +40,27 @@ components:
           description: validate erroneous resultData and show error message when resultData does not match with regular expression .
           properties:
             validate:  
-            type: object
-            properties:
-              regExp:
-              type: string
-              description: regular expression to detect erroneous resultData
-              errorMsg:
-              type: string
-              description: error message shows when resultData does not match with regular expression.
-        pages:
-          type: positiveInteger
-          description: number of pages supported by layout. Optional feild , to be used for multi-page layouts.
-          example: 3
-        cells:
-          type: array
-          items:
-            $ref: '#/components/schemas/cell'
-            minItems: 1
+              type: object
+              properties:
+                regExp:
+                  type: string
+                  description: regular expression to detect erroneous resultData
+                errorMsg:
+                  type: string
+                  description: error message shows when resultData does not match with regular expression.
+                pages:
+                  type: positiveInteger
+                  description: number of pages supported by layout. Optional feild , to be used for multi-page layouts.
+                  example: 3
+                cells:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/cell'
+                  minItems: 1
     
         idValidation: 
           type: object
-          description: validate erroneous resultData and show error message when resultData does not match with regular expression .
+          description: validate erroneous Id and show an error message when the predicted Id does not match with the regular expression.
           properties:
             validate: 
               type: object
