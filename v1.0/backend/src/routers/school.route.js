@@ -71,7 +71,8 @@ router.post('/schools/login', async (req, res) => {
             autoSync: schools.autoSync,
             autoSyncFrequency: schools.autoSyncFrequency,
             tags: schools.tags,
-            autoSyncBatchSize: schools.autoSyncBatchSize
+            autoSyncBatchSize: schools.autoSyncBatchSize,
+            supportEmail: schools.supportEmail
         }
 
         let response = {

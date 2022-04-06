@@ -686,6 +686,9 @@ definitions:
           tags:
             type: boolean
             example: true
+          supportEmail:
+            type: string
+            example: "abc@gmail.com"
           
       classes:
             $ref: '#/definitions/classResponse'

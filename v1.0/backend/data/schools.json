@@ -6,7 +6,8 @@
   "autoSync": false,
   "autoSyncFrequency": 600000,
   "storeTrainingData": true,
-  "tags": true
+  "tags": true,
+  "supportEmail": "apurva.bisht@tarento.com"
 },
 {
   "name": "Dummy school 2",
@@ -16,7 +17,8 @@
   "autoSync": false,
   "autoSyncFrequency": 600000,
   "storeTrainingData": true,
-  "tags": false
+  "tags": false,
+  "supportEmail": "navin.nahar@tarento.com"
 },
 {
   "name": "Dummy school 3",
