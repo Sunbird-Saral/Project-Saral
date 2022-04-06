@@ -29,6 +29,7 @@
     "react-native-responsive-dimensions": "^3.1.1",
     "react-native-safe-area-context": "^3.1.9",
     "react-native-screens": "^2.16.1",
+    "react-native-share": "^7.3.7",
     "react-native-system-setting": "^1.7.6",
     "react-native-uuid": "^1.4.9",
     "react-navigation": "^4.4.3",
