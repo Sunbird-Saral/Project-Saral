@@ -59,9 +59,9 @@
   },
   {
     "name": "Dummy school 6",
-    "schoolId": "minimal",
-    "password": "Minimal@123",
-    "state": "gujrat",
+    "schoolId": "u003",
+    "password": "tarento@123",
+    "state": "up",
     "autoSync": false,
     "autoSyncFrequency": 600000,
     "storeTrainingData": true,
