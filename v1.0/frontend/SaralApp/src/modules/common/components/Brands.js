@@ -23,6 +23,7 @@ import axios from 'axios';
 import { getScannedDataFromLocal, setScannedDataIntoLocal } from '../../../utils/StorageUtils';
 import { collectErrorLogs } from '../../CollectErrorLogs';
 import { dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF } from '../../../utils/CommonUtils';
+import { ROIAction } from '../../StudentsList/ROIAction';
 
 class Brands extends PureComponent {
     constructor() {
@@ -148,9 +149,18 @@ class Brands extends PureComponent {
         }
     }
 
+    minimalFlagAction (payload){
+        return {
+            type: Constant.MINIMAL_FLAG,
+            payload
+        }
+    }
+
     componentDidMount() {
 
         const { loginData, dispatch } = this.props;
+
+        const { loginData: { data: { school } } } = this.props
 
         const bgTimer = Object.keys(loginData).length > 0  && loginData.data.school.hasOwnProperty("autoSyncFrequency") ? loginData.data.school.autoSyncFrequency : 600000
         setInterval(() => {
@@ -166,7 +176,23 @@ class Brands extends PureComponent {
             }
             //timer for 10 min
         }, bgTimer);
+
+        //set minimal Flag
+        storeFactory.dispatch(this.minimalFlagAction(school.hasOwnProperty("minimal") ? school.minimal : false));
+        if (school.minimal) {
+          this.getRoi();
+        }
       }
+
+     getRoi = () => {
+
+        let payload = {
+            "examId": 0,
+        }
+        let token = this.props.loginData.data.token
+        let apiObj = new ROIAction(payload, token);
+        this.props.APITransport(apiObj);
+    }
     
     render() {
         return (
@@ -213,7 +239,8 @@ const styles = {
 const mapStateToProps = (state) => {
     return {
         loginData: state.loginData,
-        bgFlag: state.bgFlag
+        bgFlag: state.bgFlag,
+        minimalFlag: state.minimalFlag
     }
 }
 

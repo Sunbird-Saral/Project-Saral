@@ -41,7 +41,8 @@ const ScannedDetailsComponent = ({
     loginData,
     bgFlag,
     roiData,
-    studentsAndExamData
+    studentsAndExamData,
+    minimalFlag
 }) => {
     //Hookes
     const [summary, setSummary] = useState(false)
@@ -1219,12 +1220,12 @@ const ScannedDetailsComponent = ({
                                         <View style={styles.studentContainer}>
                                             <View style={styles.imageViewContainer}>
                                                 <View style={styles.imageContainerStyle}>
-                                                    <Text style={{ textAlign: 'center', fontSize: AppTheme.HEADER_FONT_SIZE_LARGE,fontFamily:monospace_FF }}>{studentData.length > 0 && studentData[0].name.charAt(0)}</Text>
+                                                    <Text style={{ textAlign: 'center', fontSize: AppTheme.HEADER_FONT_SIZE_LARGE,fontFamily:monospace_FF }}>{minimalFlag ? loginData.data.school.name.charAt(0) : studentData.length > 0 && studentData[0].name.charAt(0)}</Text>
                                                 </View>
                                             </View>
                                             <View style={styles.deatilsViewContainer}>
                                                 <View style={styles.detailsSubContainerStyle}>
-                                                    <Text style={[styles.nameTextStyle, { fontWeight: 'bold', color: AppTheme.BLACK, fontSize: AppTheme.FONT_SIZE_LARGE }]}>{studentData.length > 0 && studentData[0].name}</Text>
+                                                    <Text style={[styles.nameTextStyle, { fontWeight: 'bold', color: AppTheme.BLACK, fontSize: AppTheme.FONT_SIZE_LARGE }]}>{minimalFlag ? loginData.data.school.name : studentData.length > 0 && studentData[0].name}</Text>
                                                     <TextField
                                                         labelText={BrandLabel && BrandLabel.StudentId ? BrandLabel.StudentId : Strings.student_id}
                                                         errorField={stdErr != '' || isNaN(studentId)}
@@ -1240,7 +1241,12 @@ const ScannedDetailsComponent = ({
                                                         editable={edit}
                                                         keyboardType={'numeric'}
                                                         />
-                                                    <Text style={styles.nameTextStyle}>{BrandLabel && BrandLabel.Exam ? BrandLabel.Exam : Strings.Exam} : {filteredData.subject} {filteredData.examDate} ({filteredData.examTestID})</Text>
+                                                        {
+                                                            !minimalFlag
+                                                            &&
+                                                            <Text style={styles.nameTextStyle}>{BrandLabel && BrandLabel.Exam ? BrandLabel.Exam : Strings.Exam} : {filteredData.subject} {filteredData.examDate} ({filteredData.examTestID})</Text>
+
+                                                        }
                                                     {
                                                         isMultipleStudent
                                                             ?
@@ -1423,7 +1429,8 @@ const mapStateToProps = (state) => {
         scanedData: state.scanedData.response,
         bgFlag: state.bgFlag,
         multiPageReducer: state.multiPage.response,
-        studentsAndExamData: state.studentsAndExamData
+        studentsAndExamData: state.studentsAndExamData,
+        minimalFlag: state.minimalFlag
     }
 }
 
