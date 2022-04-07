@@ -104,7 +104,11 @@ const ScannedDetailsComponent = ({
 
 
     useEffect(() => {
-        validateStudentId(studentId)
+        if (!minimalFlag) {
+            validateStudentId(studentId)
+        }else{
+            setStudentValid(true)
+        }
     }, [studentId])
 
     const validateStudentId = async (value) => {
@@ -1096,14 +1100,14 @@ const ScannedDetailsComponent = ({
         let Studentmarks = objects;
 
         let saveObj = {
-            "classId": filteredData.class,
-            "examDate": filteredData.examDate,
-            "subject": filteredData.subject,
+            "classId": minimalFlag ? 0 : filteredData.class,
+            "examDate": minimalFlag ? 0 : filteredData.examDate,
+            "subject": minimalFlag ? 0 : filteredData.subject,
             "studentsMarkInfo": [
                 {
                     "predictedStudentId": loginData.data.school.storeTrainingData ? storeTrainingData[0].studentIdPrediction : '',
                     "predictionConfidence": loginData.data.school.storeTrainingData ? storeTrainingData[0].studentIdPrediction != studentId ? storeTrainingData[0].predictionConfidence : [] : [],
-                    "section": filteredData.section,
+                    "section": minimalFlag ? 0 : filteredData.section,
                     "studentId": studentId,
                     "securedMarks": sumOfAllMarks > 0 ? sumOfAllMarks : 0,
                     "totalMarks": maxMarksTotal > 0 ? maxMarksTotal : 0,

@@ -78,9 +78,12 @@ class MyScanComponent extends Component {
 
         if (this.props.minimalFlag) {
             let roi = []
-            this.props.roiData.data.map((el) => {
-                roi.push(el.type)
-            })
+            // // this.props.roiData
+            // this.props.roiData.data.map((el) => {
+                if (this.props.roiData.data.layout.name) {
+                    roi.push(this.props.roiData.data.layout.name)
+                }
+            // })
             this.setState({
                 roiDataList: roi
             })
@@ -288,13 +291,19 @@ class MyScanComponent extends Component {
     }
 
     onDropDownSelect(idx, value) {
-        for (const el of this.props.roiData.data) {
-            if (el.type == value) {
-                this.setState({
-                    selectedRoiLayoutData: el.roi
-                })
-                break;
-            }
+        // for (const el of this.props.roiData.data) {
+        //     if (el.type == value) {
+        //         this.setState({
+        //             selectedRoiLayoutData: el.roi
+        //         })
+        //         break;
+        //     }
+        // }
+        console.log("this",this.props.roiData);
+        if (value == this.props.roiData.data.layout.name) {
+            this.setState({
+                selectedRoiLayoutData: this.props.roiData.data
+            })
         }
         this.setState({
             roiIndex: idx,
