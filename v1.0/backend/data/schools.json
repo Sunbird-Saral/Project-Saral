@@ -58,10 +58,10 @@
     "tags": false
   },
   {
-    "name": "Dummy school 6",
-    "schoolId": "u003",
+    "name": "Dummy Organization",
+    "schoolId": "m001",
     "password": "tarento@123",
-    "state": "up",
+    "state": "mp",
     "autoSync": false,
     "autoSyncFrequency": 600000,
     "storeTrainingData": true,
