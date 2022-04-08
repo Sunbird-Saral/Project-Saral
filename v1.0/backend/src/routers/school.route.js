@@ -16,6 +16,7 @@ router.post('/schools/create', async (req, res) => {
         if (req.body.autoSync) school.autoSync = req.body.autoSync
         if(req.body.autoSyncFrequency)   school.autoSyncFrequency = req.body.autoSyncFrequency
         if(req.body.tags) school.tags = req.body.tags
+        if(req.body.autoSyncBatchSize)   school.autoSyncBatchSize = req.body.autoSyncBatchSize
         await school.save()
         let schools = {
             storeTrainingData: school.storeTrainingData,
@@ -69,7 +70,9 @@ router.post('/schools/login', async (req, res) => {
             state: schools.state,
             autoSync: schools.autoSync,
             autoSyncFrequency: schools.autoSyncFrequency,
-            tags: schools.tags
+            tags: schools.tags,
+            autoSyncBatchSize: schools.autoSyncBatchSize,
+            supportEmail: schools.supportEmail
         }
 
         let response = {
@@ -127,7 +130,7 @@ router.patch('/schools/:schoolId', async (req, res) => {
     try {
         if (Object.keys(req.body).length === 0) res.status(400).send({ message: 'Validation error.' })
         const updates = Object.keys(req.body)
-        const allowedUpdates = ['name', 'state', 'udisceCode', 'storeTrainingData', 'autoSync', 'autoSyncFrequency','tags']
+        const allowedUpdates = ['name', 'state', 'udisceCode', 'storeTrainingData', 'autoSync', 'autoSyncFrequency','tags','autoSyncBatchSize']
         const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
 
         if (!isValidOperation) {
