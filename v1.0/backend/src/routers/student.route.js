@@ -88,7 +88,11 @@ router.post('/fetchStudentsandExamsByQuery', auth, async (req, res) => {
         examMatch.classId = studentClassObj.classId
         examMatch.schoolId = req.school.schoolId
     } else {
+        if (req.school.minimal == true) {
+            examMatch.schoolId = req.school.schoolId
+        } else {
         return res.status(404).send({ message: 'Please send classId' })
+    }
     }
 
     if (req.body.section && req.body.section != "0") {
