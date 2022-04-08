@@ -12203,7 +12203,7 @@
         "questionMarks": "1"
       }
     ],
-    "examId": 0,
+    "examId": 27,
     "schoolId": "mp"
   },
   {
@@ -12275,7 +12275,7 @@
         "questionMarks": "1"
       }
     ],
-    "examId": 27,
+    "examId": 28,
     "schoolId": "mp"
   },
   {
@@ -12284,7 +12284,7 @@
     "classId": "0",
     "examDate": "0",
     "totalMarks": 20,
-    "type": "power_level ",
+    "type": "any_1s_5q_multichoice ",
     "questions": [
       {
         "questionId": "METER1",
@@ -12347,7 +12347,7 @@
         "questionMarks": "1"
       }
     ],
-    "examId": 28,
+    "examId": 29,
     "schoolId": "mp"
   }
 ]
