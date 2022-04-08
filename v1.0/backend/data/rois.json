@@ -42081,7 +42081,7 @@
     {
         "subject": "0",
         "classId": "0",
-        "type": "water_level ",
+        "type": "any_1s_12q ",
         "roi": {
             "layout": {
                 "version": "1.0",

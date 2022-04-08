@@ -12140,7 +12140,7 @@
     "classId": "0",
     "examDate": "0",
     "totalMarks": 20,
-    "type": "water_level ",
+    "type": "any_1s_12q ",
     "questions": [
       {
         "questionId": "METER1",
@@ -12204,7 +12204,7 @@
       }
     ],
     "examId": 27,
-    "schoolId": "mp"
+    "schoolId": "m001"
   },
   {
     "subject": "0",
@@ -12276,7 +12276,7 @@
       }
     ],
     "examId": 28,
-    "schoolId": "mp"
+    "schoolId": "m001"
   },
   {
     "subject": "0",
@@ -12348,6 +12348,6 @@
       }
     ],
     "examId": 29,
-    "schoolId": "mp"
+    "schoolId": "m001"
   }
 ]
