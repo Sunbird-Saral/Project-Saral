@@ -51,6 +51,10 @@ const schoolSchema = new mongoose.Schema({
         type: Number,
         required: false
     },
+    supportEmail:{
+        type: String,
+        required: false
+    }
 }, {
     timestamps: false
 })

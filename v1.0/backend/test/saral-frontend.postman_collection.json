@@ -73,15 +73,15 @@
 								},
 								{
 									"key": "Content-Length",
-									"value": "462"
+									"value": "565"
 								},
 								{
 									"key": "ETag",
-									"value": "W/\"1ce-cGfpQGcpYc+cbG3vO6H2HP+s1t4\""
+									"value": "W/\"235-Q5O5fZYCKm75hDaZNRYUM6ImZ9Q\""
 								},
 								{
 									"key": "Date",
-									"value": "Tue, 29 Mar 2022 04:46:42 GMT"
+									"value": "Wed, 06 Apr 2022 04:20:43 GMT"
 								},
 								{
 									"key": "Connection",
@@ -93,7 +93,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"school\": {\n        \"storeTrainingData\": true,\n        \"name\": \"Dummy school 2\",\n        \"schoolId\": \"od001\",\n        \"state\": \"odisha\",\n        \"autoSync\": false,\n        \"autoSyncFrequency\": 5000,\n        \"tags\": false,\n        \"autoSyncBatchSize\": 12\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjQyNzdiOTZjZjQxZTI1ZDBjNjFkMzUiLCJpYXQiOjE2NDg1MjkyMDJ9.cKmhDs5VrH6fPLryUDV3jnViWoVnyQ7qomwoAehGXQ0\",\n    \"classes\": [\n        {\n            \"sections\": [\n                {\n                    \"section\": \"D\"\n                },\n                {\n                    \"section\": \"B\"\n                },\n                {\n                    \"section\": \"C\"\n                },\n                {\n                    \"section\": \"G\"\n                }\n            ],\n            \"classId\": \"3\",\n            \"className\": \"Class-3\"\n        }\n    ]\n}"
+							"body": "{\n    \"school\": {\n        \"storeTrainingData\": true,\n        \"name\": \"Dummy school 2\",\n        \"schoolId\": \"od001\",\n        \"state\": \"odisha\",\n        \"autoSync\": false,\n        \"autoSyncFrequency\": 600000,\n        \"tags\": false,\n        \"supportEmail\": \"navin.nahar@tarento.com\"\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjRkMTUxMzY0NjcyOTQ5ODgzODBkZjkiLCJpYXQiOjE2NDkyMTg4NDJ9.q2n9dVllrkErOqCat3_bP8myhNC9GCY4hRjUmGUrgfY\",\n    \"classes\": [\n        {\n            \"sections\": [\n                {\n                    \"section\": \"D\"\n                },\n                {\n                    \"section\": \"B\"\n                },\n                {\n                    \"section\": \"C\"\n                }\n            ],\n            \"classId\": \"2\",\n            \"className\": \"Class-2\"\n        },\n        {\n            \"sections\": [\n                {\n                    \"section\": \"D\"\n                },\n                {\n                    \"section\": \"B\"\n                },\n                {\n                    \"section\": \"C\"\n                }\n            ],\n            \"classId\": \"3\",\n            \"className\": \"Class-3\"\n        }\n    ]\n}"
 						}
 					]
 				},

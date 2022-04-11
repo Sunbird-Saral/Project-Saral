@@ -6796,6 +6796,11 @@
   "resolved" "https://registry.npmjs.org/react-native-screens/-/react-native-screens-2.18.1.tgz"
   "version" "2.18.1"
 
+"react-native-share@^7.3.7":
+  "integrity" "sha512-WYXAqyNZeKKk3Kvsv4N3tJuLNw8k+HM+ymKnWFRomoSerD5syJqmBHgw1HwED8iV3zH11lXJw3rha9+H80XUHQ=="
+  "resolved" "https://registry.npmjs.org/react-native-share/-/react-native-share-7.3.7.tgz"
+  "version" "7.3.7"
+
 "react-native-system-setting@^1.7.6":
   "integrity" "sha512-nBnIK5Xnyu8XRRA3BMzRI54oYlSBKc0oOTQdZOCEeOvn4ltS1nk2shj/vtMQe6khXvuhai3vIc+g7DcsOcr5+w=="
   "resolved" "https://registry.npmjs.org/react-native-system-setting/-/react-native-system-setting-1.7.6.tgz"
