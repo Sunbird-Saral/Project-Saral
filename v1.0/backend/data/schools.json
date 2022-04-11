@@ -56,5 +56,16 @@
     "autoSyncFrequency": 600000,
     "storeTrainingData": true,
     "tags": false
+  },
+  {
+    "name": "Dummy Organization",
+    "schoolId": "m001",
+    "password": "tarento@123",
+    "state": "mp",
+    "autoSync": false,
+    "autoSyncFrequency": 600000,
+    "storeTrainingData": true,
+    "tags": false,
+    "minimal" : true
   }
 ]

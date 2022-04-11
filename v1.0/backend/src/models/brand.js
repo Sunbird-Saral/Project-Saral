@@ -67,6 +67,15 @@ const BrandSchema = new mongoose.Schema({
             },
             SchoolId: {
                 type: String
+            },
+            SelectRoi: {
+                type: String
+            },
+            SaveCount: {
+                type: String
+            },
+            ScanCount: {
+                type: String
             }
         }],
         scanStatus: [{
