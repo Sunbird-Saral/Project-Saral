@@ -590,14 +590,29 @@ const ScannedDetailsComponent = ({
         let len = 0
         if (getDataFromLocal != null) {
 
-            let filterData = getDataFromLocal.filter((e) => {
-                let findSection = false
-                findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.section)
+            var filterData = ''
+            if (!minimalFlag) {
+                filterData = getDataFromLocal.filter((e) => {
+                   let findSection = false
+                   findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.section)
+   
+                   if (filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject && findSection) {
+                       return true
+                   }
+               })
+            } else {
+                
+                 filterData = getDataFromLocal.filter((e) => {
+    
+                    //In minimal mode need to find organization id as we kept studentId
+                    let findOrgID = e.studentsMarkInfo.some((item) => item.studentId == studentId);
+                    if (findOrgID) {
+                        return true
+                    }
+                })
 
-                if (filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject && findSection) {
-                    return true
-                }
-            })
+            }
+
 
 
             if (filterData.length > 0) {
@@ -623,7 +638,10 @@ const ScannedDetailsComponent = ({
                             let findSection = false
                             findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.section)
 
-                            if (filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject && findSection) {
+                            //In minimal mode need to find organization id as we kept studentId
+                            let findOrgID = e.studentsMarkInfo.some((item) => item.studentId == studentId);
+                            let checkDataExistence = !minimalFlag ? filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject : false
+                            if (checkDataExistence && findSection || findOrgID) {
 
 
                                 e.studentsMarkInfo.forEach((element, i) => {

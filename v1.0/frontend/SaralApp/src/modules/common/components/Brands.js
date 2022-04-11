@@ -24,6 +24,7 @@ import { getScannedDataFromLocal, setScannedDataIntoLocal } from '../../../utils
 import { collectErrorLogs } from '../../CollectErrorLogs';
 import { dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF } from '../../../utils/CommonUtils';
 import { ROIAction } from '../../StudentsList/ROIAction';
+import { GetStudentsAndExamData } from '../../../flux/actions/apis/getStudentsAndExamData'
 
 class Brands extends PureComponent {
     constructor() {
@@ -179,10 +180,21 @@ class Brands extends PureComponent {
 
         //set minimal Flag
         storeFactory.dispatch(this.minimalFlagAction(school.hasOwnProperty("minimal") ? school.minimal : false));
-        if (school.minimal) {
-          this.getRoi();
-        }
+
+        //calling students and exam api
+        this.callStudentsData(loginData.data.token)
+
       }
+
+     callStudentsData = (token) => {
+
+         let dataPayload = {
+            "classId": "0",
+            "section": "0"
+          }
+            let apiObj = new GetStudentsAndExamData(dataPayload, token);
+            this.props.APITransport(apiObj)
+    }
 
      getRoi = () => {
 
