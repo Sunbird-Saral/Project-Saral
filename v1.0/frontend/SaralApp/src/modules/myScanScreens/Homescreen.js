@@ -62,7 +62,7 @@ class HomeComponent extends Component {
                                 Image={this.props.multiBrandingData && 'data:image/png;base64,' + this.props.multiBrandingData.logoImage}
                                 appName={this.props.multiBrandingData && this.props.multiBrandingData.appName}
                                 themeColor={this.props.multiBrandingData && this.props.multiBrandingData.themeColor1}
-                                onPress={() => this.props.navigation.navigate('selectDetails')}
+                                onPress={() => this.props.minimalFlag ? this.props.navigation.navigate("myScan") : this.props.navigation.navigate('selectDetails')}
                             /> 
             </View>
         );
@@ -73,7 +73,8 @@ class HomeComponent extends Component {
 const mapStateToProps = (state) => {
     return {
         loginData: state.loginData,
-        multiBrandingData: state.multiBrandingData.response.data
+        multiBrandingData: state.multiBrandingData.response.data,
+        minimalFlag: state.minimalFlag
     }
 }
 const mapDispatchToProps = (dispatch) => {

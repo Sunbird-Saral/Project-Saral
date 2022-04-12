@@ -10,14 +10,21 @@ import Spinner from '../common/components/loadingIndicator';
 import { OcrLocalResponseAction } from '../../flux/actions/apis/OcrLocalResponseAction'
 import ScanHistoryCard from '../ScanHistory/ScanHistoryCard';
 import SaralSDK from '../../../SaralSDK'
-import { getScannedDataFromLocal,getErrorMessage } from '../../utils/StorageUtils';
+import { getScannedDataFromLocal,getErrorMessage, getLoginCred, setScannedDataIntoLocal } from '../../utils/StorageUtils';
 import ButtonComponent from '../common/components/ButtonComponent';
-import { monospace_FF, multipleStudent, neglectData } from '../../utils/CommonUtils';
+import { dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF, multipleStudent, neglectData } from '../../utils/CommonUtils';
 import ShareComponent from '../common/components/Share';
 import MultibrandLabels from '../common/components/multibrandlabels';
 import { Assets } from '../../assets';
 import CustomPopup from '../common/components/CustomPopup';
 import ModalView from '../common/components/ModalView';
+import DropDownMenu from '../common/components/DropDownComponent';
+import { ROIAction } from '../StudentsList/ROIAction';
+import APITransport from '../../flux/actions/transport/apitransport'
+import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
+import axios from 'axios';
+import { scanStatusDataAction } from '../ScanStatus/scanStatusDataAction';
+import { collectErrorLogs } from '../CollectErrorLogs';
 
 LogBox.ignoreAllLogs()
 
@@ -30,7 +37,12 @@ class MyScanComponent extends Component {
             oldBrightness: null,
             activityOpen: false,
             isLoading: false,
-            scanStatusData:false,
+            scanStatusData:0,
+            roiDataList: [],
+            selectedRoiLayoutData: '',
+            roiIndex: -1,
+            calledRoiData: false,
+            saveStatusData: 0
         }
         this.onBack = this.onBack.bind(this)
         this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
@@ -42,15 +54,36 @@ class MyScanComponent extends Component {
     }
 
     handleBackButtonClick =()=> {
-        this.props.navigation.push('ScanHistory');
+        if (this.props.minimalFlag) {
+            this.props.navigation.navigate('Home');
+        } else {
+            this.props.navigation.push('ScanHistory');
+        }
         return true;
     }
-    componentDidMount() {
+
+    componentDidUpdate(prevProps) {
+        const { calledRoiData } = this.state;
+        const { roiData } = this.props
+        if (calledRoiData) {
+            if (roiData && prevProps.roiData != roiData) {
+                this.setState({ calledRoiData: false, callApi: '' })
+                if (roiData.status && roiData.status == 200) {
+                    this.setState({
+                        isLoading: false
+                    })
+                }
+            }
+        }
+    }
+
+   async componentDidMount() {
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
         const { navigation, scanedData } = this.props
         const { params } = navigation.state
         navigation.addListener('willFocus', payload => {
-            this.sumOfLocalData()
+            this.sumOfLocalData();
+            this.callScanStatusData(false)
             BackHandler.addEventListener('hardwareBackPress', this.onBack)
             if (params && params.from_screen && params.from_screen == 'scanDetails') {
                 this.setState({
@@ -67,19 +100,46 @@ class MyScanComponent extends Component {
         this.willBlur = navigation.addListener('willBlur', payload =>
             BackHandler.removeEventListener('hardwareBackPress', this.onBack)
         );
+
+        if (this.props.minimalFlag) {
+            let examList = []
+            
+            this.props.studentsAndExamData
+            ?
+            this.props.studentsAndExamData.data
+            ?
+            this.props.studentsAndExamData.data.exams
+            ?
+            this.props.studentsAndExamData.data.exams.map((el) => {
+                examList.push(el.type)
+            })
+            :
+            []
+            :
+            []
+            :
+            []
+
+            this.setState({
+                roiDataList: examList
+            })
+        }
+
+        let data = await getScannedDataFromLocal();
     }
 
     //functions
     sumOfLocalData = async () => {
         const { filteredData } = this.props
         const data = await getScannedDataFromLocal()
+        const loginCred = await getLoginCred()
         let len = 0
         if (data != null) {
             let filter = data.filter((e) => {
                 let findSection = false
-                findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.section)
-
-                if (filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject && findSection) {
+                findSection = e.studentsMarkInfo.some((item) => !this.props.minimalFlag ? item.section == filteredData.section : item.studentId == loginCred.schoolId)
+                let checkDataExistence = !this.props.minimalFlag ? filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject && findSection : false
+                if (checkDataExistence || findSection) {
                     return true
                 }
             })
@@ -123,11 +183,26 @@ class MyScanComponent extends Component {
         else {
             const { navigation } = this.props
             const { params } = navigation.state
-            if (params && params.from_screen && params.from_screen == 'cameraActivity') {
+            if (!this.props.minimalFlag && params && params.from_screen && params.from_screen == 'cameraActivity') {
                 this.props.navigation.navigate('ScanHistory', { from_screen: 'cameraActivity' })
                 return true
+            } else {
+                this.props.navigation.navigate('Home', { from_screen: 'cameraActivity' })
+                return true
+
             }
         }
+    }
+
+    callCustomModal(title, message, isAvailable, cancel) {
+        let data = {
+            title: title,
+            message: message,
+            isOkAvailable: isAvailable,
+            isCancel : cancel
+        }
+        this.props.dispatchCustomModalStatus(true);
+        this.props.dispatchCustomModalMessage(data);
     }
 
 
@@ -142,7 +217,11 @@ class MyScanComponent extends Component {
             const grantedCamera = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.CAMERA)
 
             if (grantedRead && grantedWrite && grantedCamera) {
-                this.openCameraActivity()
+                if (this.state.roiIndex != -1) {
+                    this.openCameraActivity()
+                } else {
+                    this.callCustomModal("Warning","Please select Layout",false,false)
+                }
             }
             else {
                 PermissionsAndroid.requestMultiple(
@@ -161,7 +240,11 @@ class MyScanComponent extends Component {
                         permRes['android.permission.WRITE_EXTERNAL_STORAGE'] === PermissionsAndroid.RESULTS.GRANTED &&
                         permRes['android.permission.CAMERA'] === PermissionsAndroid.RESULTS.GRANTED
                     ) {
-                        this.openCameraActivity()
+                        if (this.state.selectedRoiLayoutData.hasOwnProperty("layout")) {
+                            this.openCameraActivity()
+                        } else {
+                            this.callCustomModal("Warning","Please Select Roi",false,false)
+                        }
                     } else if (permRes['android.permission.READ_EXTERNAL_STORAGE'] == 'never_ask_again' ||
                         permRes['android.permission.WRITE_EXTERNAL_STORAGE'] == 'never_ask_again' ||
                         permRes['android.permission.CAMERA'] == 'never_ask_again') {
@@ -197,9 +280,10 @@ class MyScanComponent extends Component {
                 this.setState({
                     activityOpen: true
                 })
-                let totalPages = this.props.roiData.data.layout.hasOwnProperty("pages") && this.props.roiData.data.layout.pages
+                let totalPages =  this.props.roiData.data.layout.hasOwnProperty("pages") && this.props.roiData.data.layout.pages
                 let pageNumber = totalPages || totalPages > 0 ? "1" : null
-                SaralSDK.startCamera(JSON.stringify(this.props.roiData.data), pageNumber).then(res => {
+                let jsonRoiData = this.props.roiData.data
+                SaralSDK.startCamera(JSON.stringify(jsonRoiData), pageNumber).then(res => {
                     let roisData = JSON.parse(res);
                     let cells = roisData.layout.cells;
                     this.consolidatePrediction(cells, roisData)
@@ -248,8 +332,182 @@ class MyScanComponent extends Component {
         this.props.OcrLocalResponseAction(JSON.parse(JSON.stringify(roisData)))
         this.props.navigation.navigate('ScannedDetailsComponent', { oldBrightness: this.state.oldBrightness })
     }
+
+    onDropDownSelect(idx, value) {
+        for (const el of this.props.studentsAndExamData.data.exams) {
+            if (el.type == value) {
+                this.setState({
+                    calledRoiData: true,
+                    isLoading: true
+                }, () => {
+                    let payload = {
+                        "examId": el.examId,
+                    }
+                    let token = this.props.loginData.data.token
+                    let apiObj = new ROIAction(payload, token);
+                    this.props.APITransport(apiObj);
+                })
+                break;
+            }
+        }
+        this.setState({
+            roiIndex: idx,
+            selectedRoi: value
+        })
+    }
+
+    onPressSaveInDB = async () => {
+        const data = await getScannedDataFromLocal();
+        const loginCred = await getLoginCred();
+
+        if (data) {
+            if (!this.props.bgFlag) {
+            const filterData = data.filter((e) => {
+                let findOrgID = e.studentsMarkInfo.some((item) => item.studentId == loginCred.schoolId)
+
+                if (findOrgID) {
+                    return true
+                } else {
+                    return false
+                }
+            })
+
+            this.setState({
+               isLoading: true
+            })
+            let filterDataLen = 0
+
+            let setIntolocalAfterFilter = ''
+            if (filterData.length != 0) {
+                filterData.filter((f) => {
+
+                    let findOrgID = f.studentsMarkInfo.some((item) => item.studentId == loginCred.schoolId)
+
+                    setIntolocalAfterFilter = data.filter((e) => {
+                        if (findOrgID) {
+                            return false
+                        } else {
+                            return true
+                        }
+                    })
+                })
+
+                let apiObj = new SaveScanData(filterData[0], this.props.loginData.data.token);
+                this.saveScanData(apiObj, filterDataLen, setIntolocalAfterFilter);
+
+            } else {
+                this.callCustomModal(Strings.message_text,Strings.there_is_no_data,false);
+                this.setState({
+                    isLoading: false
+                 })
+            }
+        }else{
+            this.callCustomModal(Strings.message_text,Strings.auto_sync_in_progress_please_wait,false);
+        }
+        
+    }
+    else {
+        this.setState({
+            isLoading: false
+         })
+        this.callCustomModal(Strings.message_text,Strings.there_is_no_data,false);
+        }
+    }
+
+    saveScanData = async(api, filteredDatalen, localScanData) => {
+        var obj = this
+        if (api.method === 'PUT') {
+            let apiResponse = null;
+            const source = axios.CancelToken.source();
+            const id = setTimeout(() => {
+                if (apiResponse === null) {
+                    source.cancel('The request timed out.');
+                }
+            }, 60000);
+            axios.put(api.apiEndPoint(), api.getBody(), { headers: api.getHeaders(), cancelToken: source.token },)
+                .then(function (res) {
+                    apiResponse = res;
+                    clearTimeout(id);
+                    api.processResponse(res);
+                    obj.callScanStatusData(true, filteredDatalen, localScanData)
+                })
+                .catch(function (err) {
+                    collectErrorLogs("MyScanComponent.js","saveScanData",api.apiEndPoint(),err,false);
+                    obj.callCustomModal(Strings.message_text,Strings.contactAdmin,false);
+                    clearTimeout(id);
+                    obj.setState({
+                        isLoading: true
+                     })
+                });
+        }
+    }
+
+    callScanStatusData = async (isApiCalled, filteredDatalen, localScanData) => {
+        let loginCred = await getLoginCred()
+
+        let dataPayload = {
+            "classId": 0,
+            "subject": 0,
+            "section": 0,
+            "fromDate": 0,
+            "page": 0,
+            "schoolId": loginCred.schoolId,
+            "downloadRes": false
+        }
+        this.setState({
+            isLoading: true
+        })
+        let apiObj = new scanStatusDataAction(dataPayload);
+        this.FetchSavedScannedData(isApiCalled, apiObj, loginCred.schoolId, loginCred.password, filteredDatalen, localScanData)
+    }
+
+    FetchSavedScannedData = async(isApiCalled, api, uname, pass, filterDataLen, localScanData) => {
+        var obj = this
+        if (api.method === 'POST') {
+            let apiResponse = null
+            const source = axios.CancelToken.source()
+            const id = setTimeout(() => {
+                if (apiResponse === null) {
+                    source.cancel('The request timed out.');
+                }
+            }, 60000);
+            axios.post(api.apiEndPoint(), api.getBody(), {
+                auth: {
+                    username: uname,
+                    password: pass
+                }
+            })
+                .then(function (res) {
+                    if (isApiCalled) {
+                        obj.callCustomModal(Strings.message_text,Strings.saved_successfully,false);
+                    }
+                    apiResponse = res
+                    clearTimeout(id)
+                    api.processResponse(res)
+                    if (isApiCalled) {
+                        obj.setState({
+                            scanStatusData: filterDataLen
+                        })
+                        setScannedDataIntoLocal(localScanData)
+                    }
+                    obj.setState({
+                        saveStatusData: res.data.data.length,
+                        isLoading: false
+                    })
+                })
+                .catch(function (err) {
+                    collectErrorLogs("MyScanComponent.js","FetchSavedScannedData",api.apiEndPoint(),err,false)
+                    obj.callCustomModal(Strings.message_text,Strings.something_went_wrong_please_try_again,false);
+                    obj.setState({
+                        isLoading: false
+                    })
+                    clearTimeout(id)
+                });
+        }
+    }
+    
     render() {
-        const { isLoading } = this.state;
+        const { isLoading, saveStatusData, scanStatusData } = this.state;
         const { loginData,multiBrandingData, modalMessage, modalStatus} = this.props
         const BrandLabel = multiBrandingData&&multiBrandingData.screenLabels&&multiBrandingData.screenLabels.myScan[0]
         return (
@@ -265,6 +523,7 @@ class MyScanComponent extends Component {
                 Label2={BrandLabel.SchoolId}
                 School ={loginData.data.school.name}
                 SchoolId={loginData.data.school.schoolId}
+                minimalFlag={this.props.minimalFlag}
                 />:
                     (loginData && loginData.data)
                     &&
@@ -288,8 +547,12 @@ class MyScanComponent extends Component {
                     </View>
                 }
                 
-                </View> 
-                <ScrollView scrollEnabled>
+                </View>
+                
+                {
+                    !this.props.minimalFlag
+                        ?
+                        <ScrollView scrollEnabled>
                 <View style={styles.container1}>
                 <Text style={[styles.header1TextStyle, { borderColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE, backgroundColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE,fontFamily : monospace_FF }]}>
                     {Strings.ongoing_scan}
@@ -312,7 +575,55 @@ class MyScanComponent extends Component {
                         onPress={() => this.props.navigation.navigate('selectDetails')}
                     />
                 </View>
-                </ScrollView>
+                        </ScrollView>
+                        :
+                
+                        <View style={{ marginHorizontal:20, marginTop: 30, marginBottom: 40 }}>
+                            <DropDownMenu
+                                options={this.state.roiDataList}
+                                onSelect={(idx, value) => this.onDropDownSelect(idx, value)}
+                                defaultData={BrandLabel ? BrandLabel.SelectRoi : "Select Roi"}
+                                defaultIndex={this.state.roiIndex}
+                                selectedData={this.state.selectedRoi}
+                                icon={require('../../assets/images/arrow_down.png')}
+                        />
+                        </View>
+                }
+
+                {
+                    this.props.minimalFlag
+                    &&
+                    <View style={{backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE, marginHorizontal:20, padding:6, borderRadius:10, paddingBottom:16, paddingTop:14}}>
+                        <View style={styles.scanCardStyle}>
+                            <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle,{padding:"3.4%"}]}>
+                                <Text style={{fontFamily : monospace_FF}}>{BrandLabel&&BrandLabel.ScanCount ? BrandLabel.ScanCount : Strings.scan_status}</Text>
+                            </View>
+                            <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle,{padding:"3.4%"}]}>
+                                <Text style={{fontFamily : monospace_FF}} >{scanStatusData}</Text>
+                            </View>
+                        </View>
+
+                        <View style={styles.scanCardStyle}>
+                            <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle,{padding:"3.4%",borderBottomWidth:1}]}>
+                                <Text style={{fontFamily : monospace_FF}}>{BrandLabel&&BrandLabel.SaveCount ? BrandLabel.SaveCount : Strings.class_text}</Text>
+                            </View>
+                            <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle,{padding:"3.4%",borderBottomWidth:1}]}>
+                                <Text style={{fontFamily : monospace_FF}} >{saveStatusData}</Text>
+                            </View>
+                        </View>
+
+                             <View style={{alignItems:'center'}}>
+                            <ButtonComponent
+                                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: "#A9A9A9",height:30,width:"90%",marginHorizontal:0 }]}
+                                btnText={Strings.save_all_scan.toUpperCase()}
+                                activeOpacity={0.8}
+                                customBtnTextStyle={{fontSize: 12}}
+                                onPress={this.onPressSaveInDB}
+                            />
+                              </View>
+                        </View>
+                }
+
                 <View style={styles.bottomTabStyle}>
                 <View style={[{elevation:10,  backgroundColor: 'transparent', justifyContent: 'center',alignItems:'center' }]}>
                     <TouchableOpacity style={[styles.subTabContainerStyle]}
@@ -343,7 +654,7 @@ class MyScanComponent extends Component {
                     &&
                     <Spinner
                         animating={isLoading}
-                        customContainer={{ opacity: 0.9, elevation: 15 }}
+                        customContainer={{ opacity: 0.6, elevation: 15 }}
                     />
                 }
                 <CustomPopup
@@ -442,15 +753,33 @@ const styles = {
    
     nxtBtnStyle1: {
         marginTop:15,
-        width:'45%',
-        marginHorizontal: 5,
-        marginBottom: 20,
         borderRadius: 10
     },
     viewnxtBtnStyle1 : {
         flexDirection:'row',
         justifyContent:'center',
         alignItems:'center'
+    },
+    scanCardStyle: {
+        flexDirection: 'row',
+        paddingHorizontal: '2%',
+    },
+    scanLabelStyle: {
+        padding: '2.4%',
+        borderTopWidth: 1,
+        borderColor: AppTheme.BLACK
+    },
+    scanLabelKeyStyle: {
+        width: '40%',
+        backgroundColor: AppTheme.TAB_BORDER,
+        borderLeftWidth: 1,
+        borderRightWidth: .5,
+    },
+    scanLabelValueStyle: {
+        width: '60%',
+        backgroundColor: AppTheme.WHITE,
+        borderLeftWidth: .5,
+        borderRightWidth: 1
     }
 }
 
@@ -465,13 +794,19 @@ const mapStateToProps = (state) => {
         multiBrandingData: state.multiBrandingData.response.data,
         apiStatus: state.apiStatus,
         modalStatus: state.modalStatus,
-        modalMessage: state.modalMessage
+        modalMessage: state.modalMessage,
+        minimalFlag: state.minimalFlag,
+        studentsAndExamData: state.studentsAndExamData,
+        bgFlag: state.bgFlag,
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        OcrLocalResponseAction: OcrLocalResponseAction
+        OcrLocalResponseAction: OcrLocalResponseAction,
+        dispatchCustomModalStatus: dispatchCustomModalStatus,
+        dispatchCustomModalMessage: dispatchCustomModalMessage,
+        APITransport: APITransport
     }, dispatch)
 }
 

@@ -9,10 +9,11 @@ const  MultibrandLabels = ({
     SchoolId,
     Label,
     Label1,
-    Label2
+    Label2,
+    minimalFlag = false
 }) => {
     return (
-        <View style={{ marginTop: 10,width:'62%' }}>
+        <View style={{ marginTop: 10,width: minimalFlag ? '100%' : '62%' }}>
         <Text
             style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%',fontFamily : monospace_FF }}
         >
