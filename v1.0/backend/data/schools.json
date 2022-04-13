@@ -66,6 +66,6 @@
     "autoSyncFrequency": 600000,
     "storeTrainingData": true,
     "tags": false,
-    "minimal" : true
+    "isMinimalMode" : true
   }
 ]
