@@ -303,15 +303,21 @@ class MyScanComponent extends Component {
                          navigation={this.props.navigation}
                     />
 
-                <View>
-                    <ButtonComponent
-                        customBtnStyle={[styles.nxtBtnStyle, { backgroundColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE }]}
-                        customBtnTextStyle={{ fontSize: 15 }}
-                        btnText={Strings.backToDashboard}
-                        activeOpacity={0.8}
-                        onPress={() => this.props.navigation.navigate('selectDetails')}
-                    />
-                </View>
+                <View style={styles.viewnxtBtnStyle1}>
+                <ButtonComponent
+                    customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+                    btnText={Strings.backToDashboard.toUpperCase()}
+                    activeOpacity={0.8}
+                    onPress={() => this.props.navigation.navigate('selectDetails')}
+                />
+
+                <ButtonComponent
+                    customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+                    btnText={Strings.Back.toUpperCase()}
+                    activeOpacity={0.8}
+                    onPress={() => this.props.navigation.navigate('ScanHistory')}
+                />
+            </View>
                 </ScrollView>
                 <View style={styles.bottomTabStyle}>
                 <View style={[{elevation:10,  backgroundColor: 'transparent', justifyContent: 'center',alignItems:'center' }]}>
@@ -384,7 +390,7 @@ const styles = {
         position: 'absolute',
         flexDirection: 'row',
         bottom: 0,
-        height: 50,
+        height:35,
         left: 0,
         right: 0,
         backgroundColor: AppTheme.WHITE,
@@ -442,9 +448,10 @@ const styles = {
    
     nxtBtnStyle1: {
         marginTop:15,
-        width:'45%',
+        width:'40%',
+        height:52,
         marginHorizontal: 5,
-        marginBottom: 20,
+        bottom: 10,
         borderRadius: 10
     },
     viewnxtBtnStyle1 : {
