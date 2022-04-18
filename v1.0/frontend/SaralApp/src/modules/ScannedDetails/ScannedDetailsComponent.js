@@ -1121,6 +1121,7 @@ const ScannedDetailsComponent = ({
             "classId": minimalFlag ? 0 : filteredData.class,
             "examDate": minimalFlag ? 0 : filteredData.examDate,
             "subject": minimalFlag ? 0 : filteredData.subject,
+            "roiId": ocrLocalResponse.roiId,
             "studentsMarkInfo": [
                 {
                     "predictedStudentId": loginData.data.school.storeTrainingData ? storeTrainingData[0].studentIdPrediction : '',

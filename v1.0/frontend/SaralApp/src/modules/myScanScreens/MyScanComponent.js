@@ -62,16 +62,15 @@ class MyScanComponent extends Component {
         return true;
     }
 
-    componentDidUpdate(prevProps) {
-        const { calledRoiData } = this.state;
+   async componentDidUpdate(prevProps) {
+        const { calledRoiData} = this.state;
         const { roiData } = this.props
         if (calledRoiData) {
-            if (roiData && prevProps.roiData != roiData) {
+            if (roiData && prevProps.roiData != roiData && this.props.minimalFlag) {
                 this.setState({ calledRoiData: false, callApi: '' })
                 if (roiData.status && roiData.status == 200) {
-                    this.setState({
-                        isLoading: false
-                    })
+                   let total =  await this.sumOfLocalData();
+                   this.callScanStatusData(true, total, 0);
                 }
             }
         }
@@ -79,11 +78,12 @@ class MyScanComponent extends Component {
 
    async componentDidMount() {
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
-        const { navigation, scanedData } = this.props
+        const { navigation, minimalFlag } = this.props
         const { params } = navigation.state
         navigation.addListener('willFocus', payload => {
-            this.sumOfLocalData();
-            this.callScanStatusData(false)
+            if (!minimalFlag) {
+                this.sumOfLocalData();
+            }
             BackHandler.addEventListener('hardwareBackPress', this.onBack)
             if (params && params.from_screen && params.from_screen == 'scanDetails') {
                 this.setState({
@@ -124,21 +124,19 @@ class MyScanComponent extends Component {
                 roiDataList: examList
             })
         }
-
-        let data = await getScannedDataFromLocal();
     }
 
     //functions
     sumOfLocalData = async () => {
-        const { filteredData } = this.props
+        const { filteredData, roiData } = this.props
         const data = await getScannedDataFromLocal()
         const loginCred = await getLoginCred()
         let len = 0
         if (data != null) {
             let filter = data.filter((e) => {
                 let findSection = false
-                findSection = e.studentsMarkInfo.some((item) => !this.props.minimalFlag ? item.section == filteredData.section : item.studentId == loginCred.schoolId)
-                let checkDataExistence = !this.props.minimalFlag ? filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject && findSection : false
+                findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.section)
+                let checkDataExistence = !this.props.minimalFlag ? filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject && findSection : e.roiId == roiData.data.roiId
                 if (checkDataExistence || findSection) {
                     return true
                 }
@@ -155,6 +153,7 @@ class MyScanComponent extends Component {
                 scanStatusData: 0
             })
         }
+        return len;
     }
 
     onBack = () => {
@@ -359,11 +358,12 @@ class MyScanComponent extends Component {
     onPressSaveInDB = async () => {
         const data = await getScannedDataFromLocal();
         const loginCred = await getLoginCred();
+        if (this.props.minimalFlag && this.state.roiIndex != -1) {
 
         if (data) {
             if (!this.props.bgFlag) {
             const filterData = data.filter((e) => {
-                let findOrgID = e.studentsMarkInfo.some((item) => item.studentId == loginCred.schoolId)
+                let findOrgID = e.roiId == this.props.roiData.data.roiId;
 
                 if (findOrgID) {
                     return true
@@ -381,7 +381,7 @@ class MyScanComponent extends Component {
             if (filterData.length != 0) {
                 filterData.filter((f) => {
 
-                    let findOrgID = f.studentsMarkInfo.some((item) => item.studentId == loginCred.schoolId)
+                    let findOrgID = f.roiId == this.props.roiData.data.roiId;
 
                     setIntolocalAfterFilter = data.filter((e) => {
                         if (findOrgID) {
@@ -413,6 +413,10 @@ class MyScanComponent extends Component {
         this.callCustomModal(Strings.message_text,Strings.there_is_no_data,false);
         }
     }
+    else { 
+        this.callCustomModal("Message","Please selcet roi layout",false,true)
+    }
+}
 
     saveScanData = async(api, filteredDatalen, localScanData) => {
         var obj = this
@@ -429,7 +433,7 @@ class MyScanComponent extends Component {
                     apiResponse = res;
                     clearTimeout(id);
                     api.processResponse(res);
-                    obj.callScanStatusData(true, filteredDatalen, localScanData)
+                    obj.callScanStatusData(false, filteredDatalen, localScanData)
                 })
                 .catch(function (err) {
                     collectErrorLogs("MyScanComponent.js","saveScanData",api.apiEndPoint(),err,false);
@@ -451,12 +455,10 @@ class MyScanComponent extends Component {
             "section": 0,
             "fromDate": 0,
             "page": 0,
-            "schoolId": loginCred.schoolId,
             "downloadRes": false
         }
-        this.setState({
-            isLoading: true
-        })
+        let roiId = this.props.roiData && this.props.roiData.data.roiId;
+        dataPayload.roiId = roiId;
         let apiObj = new scanStatusDataAction(dataPayload);
         this.FetchSavedScannedData(isApiCalled, apiObj, loginCred.schoolId, loginCred.password, filteredDatalen, localScanData)
     }
@@ -478,19 +480,15 @@ class MyScanComponent extends Component {
                 }
             })
                 .then(function (res) {
-                    if (isApiCalled) {
-                        obj.callCustomModal(Strings.message_text,Strings.saved_successfully,false);
-                    }
                     apiResponse = res
                     clearTimeout(id)
                     api.processResponse(res)
-                    if (isApiCalled) {
-                        obj.setState({
-                            scanStatusData: filterDataLen
-                        })
+                    if (!isApiCalled) {
+                        obj.callCustomModal(Strings.message_text,Strings.saved_successfully,false);
                         setScannedDataIntoLocal(localScanData)
                     }
                     obj.setState({
+                        scanStatusData: filterDataLen,
                         saveStatusData: res.data.data.length,
                         isLoading: false
                     })
