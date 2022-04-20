@@ -12140,7 +12140,7 @@
     "classId": "0",
     "examDate": "0",
     "totalMarks": 20,
-    "type": "any_1s_12q ",
+    "type": "water_level ",
     "questions": [
       {
         "questionId": "METER1",
@@ -12284,7 +12284,7 @@
     "classId": "0",
     "examDate": "0",
     "totalMarks": 20,
-    "type": "any_1s_5q_multichoice ",
+    "type": "plumber_level ",
     "questions": [
       {
         "questionId": "METER1",
