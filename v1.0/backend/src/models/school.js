@@ -52,7 +52,7 @@ const schoolSchema = new mongoose.Schema({
         required: false
     },
     
-    minimal: { 
+    isMinimalMode: { 
         type: Boolean,
         required: false
     },
