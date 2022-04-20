@@ -137,7 +137,7 @@ class MyScanComponent extends Component {
                 let findSection = false
                 findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.section)
                 let checkDataExistence = !this.props.minimalFlag ? filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject && findSection : e.roiId == roiData.data.roiId
-                if (checkDataExistence || findSection) {
+                if (checkDataExistence) {
                     return true
                 }
             })
@@ -216,10 +216,13 @@ class MyScanComponent extends Component {
             const grantedCamera = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.CAMERA)
 
             if (grantedRead && grantedWrite && grantedCamera) {
-                if (this.state.roiIndex != -1) {
+                if (this.props.minimalFlag && this.state.roiIndex != -1) {
                     this.openCameraActivity()
-                } else {
-                    this.callCustomModal("Warning","Please select Layout",false,false)
+                } else if (!this.props.minimalFlag ) {
+                    this.openCameraActivity()
+                }
+                 else {
+                    this.callCustomModal(Strings.message_text,Strings.please_select_roi_layout,false,false)
                 }
             }
             else {
@@ -358,7 +361,7 @@ class MyScanComponent extends Component {
     onPressSaveInDB = async () => {
         const data = await getScannedDataFromLocal();
         const loginCred = await getLoginCred();
-        if (this.props.minimalFlag && this.state.roiIndex != -1) {
+        if (this.state.roiIndex != -1) {
 
         if (data) {
             if (!this.props.bgFlag) {
@@ -381,9 +384,8 @@ class MyScanComponent extends Component {
             if (filterData.length != 0) {
                 filterData.filter((f) => {
 
-                    let findOrgID = f.roiId == this.props.roiData.data.roiId;
-
                     setIntolocalAfterFilter = data.filter((e) => {
+                        let findOrgID = e.roiId == this.props.roiData.data.roiId;
                         if (findOrgID) {
                             return false
                         } else {
@@ -414,7 +416,7 @@ class MyScanComponent extends Component {
         }
     }
     else { 
-        this.callCustomModal("Message","Please selcet roi layout",false,true)
+        this.callCustomModal(Strings.message_text,Strings.please_select_roi_layout,false,true)
     }
 }
 
