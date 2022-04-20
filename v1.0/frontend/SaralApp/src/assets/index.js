@@ -10,6 +10,9 @@ export const Assets = {
     MessageIcon :require('./images/box.png'),
     crossImage: require('./images/icons8-multiplication-26.png'),
     openEye: require('./images/openeye.png'),
-    closeEye: require('./images/closeeye.png')
+    closeEye: require('./images/closeeye.png'),
+    upArrow: require('./images/up_arrow.png'),
+    downArrow: require('./images/down_arrow.png')
+
 }
 
