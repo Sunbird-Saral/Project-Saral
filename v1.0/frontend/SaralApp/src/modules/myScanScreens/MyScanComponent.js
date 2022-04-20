@@ -695,7 +695,7 @@ const styles = {
         position: 'absolute',
         flexDirection: 'row',
         bottom: 0,
-        height: 50,
+        height:35,
         left: 0,
         right: 0,
         backgroundColor: AppTheme.WHITE,
@@ -753,6 +753,10 @@ const styles = {
    
     nxtBtnStyle1: {
         marginTop:15,
+        width:'40%',
+        height:52,
+        marginHorizontal: 5,
+        bottom: 10,
         borderRadius: 10
     },
     viewnxtBtnStyle1 : {

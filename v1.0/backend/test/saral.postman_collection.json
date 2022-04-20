@@ -216,7 +216,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"schoolId\": \"od001\",\n    \"password\": \"tarento@123\",\n    \"classes\": true \n}"
+							"raw": "{\n    \"schoolId\": \"u001\",\n    \"password\": \"tarento@123\",\n    \"classes\": true \n}"
 						},
 						"url": {
 							"raw": "{{url}}/schools/login",
@@ -243,7 +243,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"schoolId\": \"od001\",\n    \"password\": \"tarento@123\",\n    \"classes\": true \n}"
+									"raw": "{\n    \"schoolId\": \"u001\",\n    \"password\": \"tarento@123\",\n    \"classes\": true \n}"
 								},
 								"url": {
 									"raw": "{{url}}/schools/login",
@@ -270,15 +270,15 @@
 								},
 								{
 									"key": "Content-Length",
-									"value": "524"
+									"value": "1055"
 								},
 								{
 									"key": "ETag",
-									"value": "W/\"20c-1ityijlTVmnZxvcOxI8um6U/mgg\""
+									"value": "W/\"41f-uQg55NcjEwaHzoSHdY4qT5TDpkU\""
 								},
 								{
 									"key": "Date",
-									"value": "Tue, 15 Feb 2022 08:00:51 GMT"
+									"value": "Wed, 06 Apr 2022 04:18:57 GMT"
 								},
 								{
 									"key": "Connection",
@@ -290,7 +290,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"school\": {\n        \"storeTrainingData\": true,\n        \"name\": \"Dummy school 2\",\n        \"schoolId\": \"od001\",\n        \"state\": \"odisha\",\n        \"autoSync\": false,\n        \"autoSyncFrequency\": 600000,\n        \"tags\": false\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjBiNWRhNjc0NTg1MjFmY2M0N2YzMGIiLCJpYXQiOjE2NDQ5MTIwNTF9._Lht3IecfbcmjO_f3hd4wkyvm55swLD_0GTmW2xgW9o\",\n    \"classes\": [\n        {\n            \"sections\": [\n                {\n                    \"section\": \"D\"\n                },\n                {\n                    \"section\": \"B\"\n                },\n                {\n                    \"section\": \"C\"\n                }\n            ],\n            \"classId\": \"2\",\n            \"className\": \"Class-2\"\n        },\n        {\n            \"sections\": [\n                {\n                    \"section\": \"D\"\n                },\n                {\n                    \"section\": \"B\"\n                },\n                {\n                    \"section\": \"C\"\n                }\n            ],\n            \"classId\": \"3\",\n            \"className\": \"Class-3\"\n        }\n    ]\n}"
+							"body": "{\n    \"school\": {\n        \"storeTrainingData\": true,\n        \"name\": \"Dummy school 1\",\n        \"schoolId\": \"u001\",\n        \"state\": \"up\",\n        \"autoSync\": false,\n        \"autoSyncFrequency\": 600000,\n        \"tags\": true,\n        \"supportEmail\": \"apurva.bisht@tarento.com\"\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjRkMTE2Y2ZhOWE5NjI4ODBhMjlmOWYiLCJpYXQiOjE2NDkyMTg3Mzd9._4vpOhVeWkjI24K2GaJEEwEJhDNQCNhSg3xAOwXW1Hk\",\n    \"classes\": [\n        {\n            \"sections\": [\n                {\n                    \"section\": \"D\"\n                },\n                {\n                    \"section\": \"B\"\n                },\n                {\n                    \"section\": \"C\"\n                }\n            ],\n            \"classId\": \"2\",\n            \"className\": \"Class-2\"\n        },\n        {\n            \"sections\": [\n                {\n                    \"section\": \"D\"\n                },\n                {\n                    \"section\": \"B\"\n                },\n                {\n                    \"section\": \"C\"\n                }\n            ],\n            \"classId\": \"3\",\n            \"className\": \"Class-3\"\n        },\n        {\n            \"sections\": [\n                {\n                    \"section\": \"D\"\n                },\n                {\n                    \"section\": \"B\"\n                },\n                {\n                    \"section\": \"C\"\n                }\n            ],\n            \"classId\": \"4\",\n            \"className\": \"Class-4\"\n        },\n        {\n            \"sections\": [\n                {\n                    \"section\": \"D\"\n                },\n                {\n                    \"section\": \"B\"\n                },\n                {\n                    \"section\": \"C\"\n                }\n            ],\n            \"classId\": \"5\",\n            \"className\": \"Class-5\"\n        },\n        {\n            \"sections\": [\n                {\n                    \"section\": \"D\"\n                },\n                {\n                    \"section\": \"B\"\n                },\n                {\n                    \"section\": \"C\"\n                }\n            ],\n            \"classId\": \"6\",\n            \"className\": \"Class-6\"\n        },\n        {\n            \"sections\": [\n                {\n                    \"section\": \"D\"\n                },\n                {\n                    \"section\": \"B\"\n                },\n                {\n                    \"section\": \"C\"\n                }\n            ],\n            \"classId\": \"7\",\n            \"className\": \"Class-7\"\n        },\n        {\n            \"sections\": [\n                {\n                    \"section\": \"D\"\n                },\n                {\n                    \"section\": \"B\"\n                },\n                {\n                    \"section\": \"C\"\n                }\n            ],\n            \"classId\": \"8\",\n            \"className\": \"Class-8\"\n        }\n    ]\n}"
 						}
 					]
 				},
@@ -1686,110 +1686,6 @@
 		{
 			"name": "marks",
 			"item": [
-				{
-					"name": "Get Saved Scan",
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "username",
-									"value": "DemoUser",
-									"type": "string"
-								},
-								{
-									"key": "password",
-									"value": "Demo@123",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"classId\": \"5\",\n    \"section\": \"D\",\n    \"subject\": \"hindi\",\n    \"schoolId\": \"DemoUser\",\n    \"downloadRes\": false\n}"
-						},
-						"url": {
-							"raw": "{{url}}/getSavedScan",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"getSavedScan"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "Get Saved Scan",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"classId\": \"5\",\n    \"section\": \"D\",\n    \"subject\": \"hindi\",\n    \"schoolId\": \"DemoUser\",\n    \"downloadRes\": false\n}"
-								},
-								"url": {
-									"raw": "{{url}}/getSavedScan",
-									"host": [
-										"{{url}}"
-									],
-									"path": [
-										"getSavedScan"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "6092"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"17cc-I5k19d7MsN0xvuiykVzg14O8Ex4\""
-								},
-								{
-									"key": "Date",
-									"value": "Tue, 04 Jan 2022 07:38:06 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"data\": [\n        {\n            \"studentIdTrainingData\": [],\n            \"predictionConfidence\": [],\n            \"studentAvailability\": true,\n            \"maxMarksTrainingData\": [],\n            \"maxMarksConfidence\": [],\n            \"obtainedMarksTrainingData\": [],\n            \"obtainedMarksConfidence\": [],\n            \"createdOn\": \"1641279609146\",\n            \"predictedStudentId\": \"124\",\n            \"section\": \"D\",\n            \"studentId\": \"124\",\n            \"securedMarks\": 0,\n            \"totalMarks\": 0,\n            \"marksInfo\": [\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"HINDIID1\",\n                    \"obtainedMarks\": \"5\",\n                    \"predictedMarks\": \"5\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"HINDIID2\",\n                    \"obtainedMarks\": \"1\",\n                    \"predictedMarks\": \"1\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"HINDIID3\",\n                    \"obtainedMarks\": \"6\",\n                    \"predictedMarks\": \"6\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"HINDIID4\",\n                    \"obtainedMarks\": \"7\",\n                    \"predictedMarks\": \"7\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"HINDIID5\",\n                    \"obtainedMarks\": \"0\",\n                    \"predictedMarks\": \"0\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"HINDIID6\",\n                    \"obtainedMarks\": \"9\",\n                    \"predictedMarks\": \"9\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"HINDIID7\",\n                    \"obtainedMarks\": \"3\",\n                    \"predictedMarks\": \"3\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"HINDIID8\",\n                    \"obtainedMarks\": \"4\",\n                    \"predictedMarks\": \"4\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"HINDIID9\",\n                    \"obtainedMarks\": \"2\",\n                    \"predictedMarks\": \"2\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"HINDIID10\",\n                    \"obtainedMarks\": \"2\",\n                    \"predictedMarks\": \"2\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"ENGLISHID1\",\n                    \"obtainedMarks\": \"6\",\n                    \"predictedMarks\": \"6\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"ENGLISHID2\",\n                    \"obtainedMarks\": \"2\",\n                    \"predictedMarks\": \"2\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"ENGLISHID3\",\n                    \"obtainedMarks\": \"7\",\n                    \"predictedMarks\": \"7\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"ENGLISHID4\",\n                    \"obtainedMarks\": \"5\",\n                    \"predictedMarks\": \"5\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"ENGLISHID5\",\n                    \"obtainedMarks\": \"6\",\n                    \"predictedMarks\": \"6\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"ENGLISHID6\",\n                    \"obtainedMarks\": \"7\",\n                    \"predictedMarks\": \"7\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"ENGLISHID7\",\n                    \"obtainedMarks\": \"8\",\n                    \"predictedMarks\": \"8\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"ENGLISHID8\",\n                    \"obtainedMarks\": \"9\",\n                    \"predictedMarks\": \"9\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"ENGLISHID9\",\n                    \"obtainedMarks\": \"1\",\n                    \"predictedMarks\": \"1\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"ENGLISHID10\",\n                    \"obtainedMarks\": \"0\",\n                    \"predictedMarks\": \"0\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"MATHSID1\",\n                    \"obtainedMarks\": \"9\",\n                    \"predictedMarks\": \"9\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"MATHSID2\",\n                    \"obtainedMarks\": \"3\",\n                    \"predictedMarks\": \"3\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"MATHSID3\",\n                    \"obtainedMarks\": \"8\",\n                    \"predictedMarks\": \"8\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"MATHSID4\",\n                    \"obtainedMarks\": \"0\",\n                    \"predictedMarks\": \"0\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"MATHSID5\",\n                    \"obtainedMarks\": \"0\",\n                    \"predictedMarks\": \"0\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"MATHSID6\",\n                    \"obtainedMarks\": \"2\",\n                    \"predictedMarks\": \"2\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"MATHSID7\",\n                    \"obtainedMarks\": \"2\",\n                    \"predictedMarks\": \"2\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"MATHSID8\",\n                    \"obtainedMarks\": \"5\",\n                    \"predictedMarks\": \"5\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"MATHSID9\",\n                    \"obtainedMarks\": \"7\",\n                    \"predictedMarks\": \"7\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"MATHSID10\",\n                    \"obtainedMarks\": \"7\",\n                    \"predictedMarks\": \"7\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"EVSID1\",\n                    \"obtainedMarks\": \"7\",\n                    \"predictedMarks\": \"7\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"EVSID2\",\n                    \"obtainedMarks\": \"4\",\n                    \"predictedMarks\": \"4\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"EVSID3\",\n                    \"obtainedMarks\": \"9\",\n                    \"predictedMarks\": \"9\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"EVSID4\",\n                    \"obtainedMarks\": \"7\",\n                    \"predictedMarks\": \"7\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"EVSID5\",\n                    \"obtainedMarks\": \"7\",\n                    \"predictedMarks\": \"7\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"EVSID6\",\n                    \"obtainedMarks\": \"7\",\n                    \"predictedMarks\": \"7\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"EVSID7\",\n                    \"obtainedMarks\": \"7\",\n                    \"predictedMarks\": \"7\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"EVSID8\",\n                    \"obtainedMarks\": \"7\",\n                    \"predictedMarks\": \"7\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"EVSID9\",\n                    \"obtainedMarks\": \"7\",\n                    \"predictedMarks\": \"7\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"EVSID10\",\n                    \"obtainedMarks\": \"7\",\n                    \"predictedMarks\": \"7\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"SCIENCEID1\",\n                    \"obtainedMarks\": \"3\",\n                    \"predictedMarks\": \"3\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"SCIENCEID2\",\n                    \"obtainedMarks\": \"5\",\n                    \"predictedMarks\": \"5\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"SCIENCEID3\",\n                    \"obtainedMarks\": \"1\",\n                    \"predictedMarks\": \"1\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"SCIENCEID4\",\n                    \"obtainedMarks\": \"0\",\n                    \"predictedMarks\": \"0\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"SCIENCEID5\",\n                    \"obtainedMarks\": \"0\",\n                    \"predictedMarks\": \"0\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"SCIENCEID6\",\n                    \"obtainedMarks\": \"0\",\n                    \"predictedMarks\": \"0\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"SCIENCEID7\",\n                    \"obtainedMarks\": \"0\",\n                    \"predictedMarks\": \"0\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"SCIENCEID8\",\n                    \"obtainedMarks\": \"0\",\n                    \"predictedMarks\": \"0\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"SCIENCEID9\",\n                    \"obtainedMarks\": \"0\",\n                    \"predictedMarks\": \"0\"\n                },\n                {\n                    \"predictionConfidence\": [\n                        \"\"\n                    ],\n                    \"trainingData\": [],\n                    \"questionId\": \"SCIENCEID10\",\n                    \"obtainedMarks\": \"0\",\n                    \"predictedMarks\": \"0\"\n                }\n            ],\n            \"schoolId\": \"u001\",\n            \"examDate\": \"28/09/2021\",\n            \"subject\": \"Multi-Subject\",\n            \"classId\": \"4\"\n        }\n    ]\n}"
-						}
-					]
-				},
 				{
 					"name": "Save Marks",
 					"request": {
