@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View,Text } from 'react-native';
+import { View,Text, BackHandler } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash'
@@ -18,12 +18,22 @@ class HomeComponent extends Component {
         this.state = {
             isLoading: true,
         }
+        this.onBack = this.onBack.bind(this)
     }
     componentDidMount() {
+        const { navigation } = this.props;
         setTimeout(
             () => this.setState(prevState => ({ isLoading: !prevState.isLoading })),
             5000,
         );
+        if (this.props.minimalFlag) {
+            navigation.addListener('willFocus', async payload => {
+                BackHandler.addEventListener('hardwareBackPress', this.onBack)
+            })
+            this.willBlur = navigation.addListener('willBlur', payload =>
+                BackHandler.removeEventListener('hardwareBackPress', this.onBack)
+            );
+        }
         
         this.callMultiBrandingActiondata()
     }
@@ -34,6 +44,13 @@ class HomeComponent extends Component {
         let apiObj = new MultiBrandingAction(payload, token);
         this.props.APITransport(apiObj)
 
+    }
+
+    onBack = () => {
+        const { navigation } = this.props;
+        BackHandler.exitApp()
+        // navigation.goBack();
+        return true
     }
 
     render() {
