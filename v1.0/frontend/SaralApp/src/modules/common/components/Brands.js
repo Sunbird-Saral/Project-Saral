@@ -179,10 +179,13 @@ class Brands extends PureComponent {
         }, bgTimer);
 
         //set minimal Flag
-        storeFactory.dispatch(this.minimalFlagAction(school.hasOwnProperty("isMinimalMode") ? school.isMinimalMode : false));
+        let isMinimalMode = school.hasOwnProperty("isMinimalMode") ? school.isMinimalMode : false
+        storeFactory.dispatch(this.minimalFlagAction(isMinimalMode));
 
-        //calling students and exam api
-        this.callStudentsData(loginData.data.token)
+        //calling students and exam api if minimal mode true
+        if (isMinimalMode) {
+            this.callStudentsData(loginData.data.token)
+        }
 
       }
 
@@ -192,18 +195,20 @@ class Brands extends PureComponent {
             "classId": "0",
             "section": "0"
           }
+          this.setState({
+                isLoading: true,
+          })
             let apiObj = new GetStudentsAndExamData(dataPayload, token);
             this.props.APITransport(apiObj)
     }
 
-     getRoi = () => {
-
-        let payload = {
-            "examId": 0,
+    componentDidUpdate(prevProps) {
+        const { studentsAndExamData }  = this.props;
+        if (studentsAndExamData &&  prevProps.studentsAndExamData != studentsAndExamData ) {
+            if (studentsAndExamData.status && studentsAndExamData.status == 200) {
+                this.setState({isLoading : false})
+            }
         }
-        let token = this.props.loginData.data.token
-        let apiObj = new ROIAction(payload, token);
-        this.props.APITransport(apiObj);
     }
     
     render() {
@@ -252,7 +257,8 @@ const mapStateToProps = (state) => {
     return {
         loginData: state.loginData,
         bgFlag: state.bgFlag,
-        minimalFlag: state.minimalFlag
+        minimalFlag: state.minimalFlag,
+        studentsAndExamData: state.studentsAndExamData
     }
 }
 

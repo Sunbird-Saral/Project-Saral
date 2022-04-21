@@ -11,6 +11,7 @@ import Brands from '../common/components/Brands';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Assets } from '../../assets';
 import { monospace_FF } from '../../utils/CommonUtils';
+import Spinner from '../common/components/loadingIndicator';
 
 class HomeComponent extends Component {
     constructor(props) {
@@ -54,6 +55,7 @@ class HomeComponent extends Component {
     }
 
     render() {
+        const { isLoading } = this.state;
         if(this.props.multiBrandingData === undefined || this.props.multiBrandingData === null){
            
             return <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
@@ -81,6 +83,14 @@ class HomeComponent extends Component {
                                 themeColor={this.props.multiBrandingData && this.props.multiBrandingData.themeColor1}
                                 onPress={() => this.props.minimalFlag ? this.props.navigation.navigate("myScan") : this.props.navigation.navigate('selectDetails')}
                             /> 
+                            {
+                    isLoading
+                    &&
+                    <Spinner
+                        animating={isLoading}
+                        customContainer={{ opacity: 0.6, elevation: 15 }}
+                    />
+                }
             </View>
         );
     }
