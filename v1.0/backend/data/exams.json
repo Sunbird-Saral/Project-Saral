@@ -12140,7 +12140,7 @@
     "classId": "0",
     "examDate": "0",
     "totalMarks": 20,
-    "type": "water_level ",
+    "type": "water level",
     "questions": [
       {
         "questionId": "METER1",
@@ -12212,7 +12212,7 @@
     "classId": "0",
     "examDate": "0",
     "totalMarks": 20,
-    "type": "electric_level ",
+    "type": "electricity reading",
     "questions": [
       {
         "questionId": "METER1",
@@ -12284,7 +12284,7 @@
     "classId": "0",
     "examDate": "0",
     "totalMarks": 20,
-    "type": "plumber_level ",
+    "type": "feedback",
     "questions": [
       {
         "questionId": "METER1",

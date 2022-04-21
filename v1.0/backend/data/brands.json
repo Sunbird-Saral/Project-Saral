@@ -138,7 +138,7 @@
       "myScan": [{
         "School": "Organization Name",
         "SchoolId": "Organization Id",
-        "SelectRoi": "Select Roi",
+        "SelectRoi": "Select Layout",
         "ScanCount": "Scan Count",
         "SaveCount": "Save Count"
       }],
@@ -169,7 +169,7 @@
       ],
       "scannedDetailComponent": [{
         "Subject": "Skill Assesment",
-        "StudentId":"Organization ID",
+        "StudentId":"ID",
         "Exam": "Assesment",
         "StudentDetail": "Details",
         "CorrectId": "please correct employe id",
