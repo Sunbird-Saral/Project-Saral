@@ -42081,11 +42081,11 @@
     {
         "subject": "0",
         "classId": "0",
-        "type": "water_level ",
+        "type": "water level",
         "roi": {
             "layout": {
                 "version": "1.0",
-                "name": "ANY1S12Q Exam Sheet Form",
+                "name": "Water Level Exam Sheet Form",
                 "threshold": {
                     "minWidth": 510,
                     "minHeight": 410,
@@ -42629,11 +42629,11 @@
     {
     "subject": "0",
     "classId": "0",
-    "type": "electric_level ",
+    "type": "electricity reading",
     "roi": {
         "layout": {
             "version": "1.0",
-            "name": "ANY1S12Q Exam Sheet Form",
+            "name": "Electricity reading Exam Sheet Form",
             "threshold": {
                 "minWidth": 510,
                 "minHeight": 410,
@@ -43177,11 +43177,11 @@
 {
     "subject": "0",
     "classId": "0",
-    "type": "plumber_level ",
+    "type": "feedback",
     "roi": {
         "layout": {
             "version": "1.0",
-            "name": "ANY1S5QMULTICHOICE Exam Sheet Form",
+            "name": "Feedback Exam Sheet Form",
             "threshold": {
                 "minWidth": 410,
                 "minHeight": 280,
