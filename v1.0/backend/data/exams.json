@@ -12212,7 +12212,7 @@
     "classId": "0",
     "examDate": "0",
     "totalMarks": 20,
-    "type": "electricity reading ",
+    "type": "electricity reading",
     "questions": [
       {
         "questionId": "METER1",
