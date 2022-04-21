@@ -132,8 +132,10 @@ const ScannedDetailsComponent = ({
         }
 
 
-        if(studentId == 0 && studentId != '' && isMultipleStudent){
+        if(studentId == 0 || studentId == '' && isMultipleStudent){
             setToggleCheckBox(true)
+        }else{
+            setToggleCheckBox(false)
         }
         if (absent.length > 0) {
             setStdErr("Student is Absent")
@@ -163,7 +165,7 @@ const ScannedDetailsComponent = ({
                 })
             }
         }
-        else if (a.length > 0 && !toggleCheckBox) {
+        else if (a.length > 0 ) {
             setStudentValid(true)
             setStdErr('')
             setStudentDATA(a)
