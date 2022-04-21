@@ -36,7 +36,7 @@ class HeaderComponents extends Component {
         return (
             <View style={{flex:1,marginTop: '10%',marginRight:'5%'}}>
                 <View style={styles.imageViewContainer}>
-                    <View style={[styles.imageContainerStyle,{height: minimalFlag ? 160 : 140}]}>
+                    <View style={[styles.imageContainerStyle,{height:  160 }]}>
                         
                         <TouchableOpacity
                         style={[styles.imageContainerViewstyle,{marginTop:10}]}
@@ -72,16 +72,16 @@ class HeaderComponents extends Component {
                         </TouchableOpacity>
                         
                         <TouchableOpacity
-                        style={[styles.imageContainerViewstyle]}
+                        style={{marginHorizontal:"0%",marginBottom: 8}}
+                        activeOpacity={1}
                         > 
                         {
                             minimalFlag
                             ?
-                            <Image style={{width:15,height:15,top:5}}  source={Assets.downArrow}/>
+                            <Text style={[styles.headerTitleTextStyle, customLogoutTextStyle,{color:'grey'}]}>{Strings.minimal_mode}</Text>
                             :
-                            <Image style={{width:15,height:15,top:5}}  source={Assets.upArrow}/>
+                            <Text style={[styles.headerTitleTextStyle, customLogoutTextStyle]}>{Strings.regular_mode}</Text>
                         }
-                            <Text style={[styles.headerTitleTextStyle, customLogoutTextStyle]}>{Strings.mode}</Text>
                         </TouchableOpacity>
 
                     </View>

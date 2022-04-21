@@ -117,6 +117,7 @@ export default strings = new LocalizedStrings({
         student_id_should_not_blank: "Student Id Shouldn't be blank",
         save_all_scan: 'Save All Scan',
         please_select_roi_layout: "Please selcet layout",
-        mode: "Mode"
+        minimal_mode: "Minimal Mode",
+        regular_mode: "Regular Mode"
     }
 })
