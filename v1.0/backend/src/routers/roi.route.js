@@ -123,7 +123,12 @@ router.get('/roi/:examId',auth, async (req, res) => {
                 }
                 let roi = await ROI.find(lookup,{_id: 0,__v: 0 }).lean()
                 if(roi.length){
-                res.status(200).send(roi[0].roi)
+                    let resultObj = {}
+                    for(let data of roi){
+                        resultObj.layout = data.roi.layout,
+                        resultObj.roiId = data.roiId
+                    }
+                res.status(200).send(resultObj)
                 }else{
                     res.status(404).send({"message": "ROI does not exist"})              
                 }

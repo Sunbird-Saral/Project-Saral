@@ -169,7 +169,7 @@
       ],
       "scannedDetailComponent": [{
         "Subject": "Skill Assesment",
-        "StudentId":"Organization ID",
+        "StudentId":"ID",
         "Exam": "Assesment",
         "StudentDetail": "Details",
         "CorrectId": "please correct employe id",
