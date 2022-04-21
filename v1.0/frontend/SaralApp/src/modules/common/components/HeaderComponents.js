@@ -31,7 +31,8 @@ class HeaderComponents extends Component {
             onSupportClick,
             aboutMenu,
             helpMenu,
-            minimalFlag
+            minimalFlag,
+            multiBrandingData
         } = this.props
         return (
             <View style={{flex:1,marginTop: '10%',marginRight:'5%'}}>
@@ -78,9 +79,9 @@ class HeaderComponents extends Component {
                         {
                             minimalFlag
                             ?
-                            <Text style={[styles.headerTitleTextStyle, customLogoutTextStyle,{color:'grey'}]}>{Strings.minimal_mode}</Text>
+                            <Text style={[styles.headerTitleTextStyle, customLogoutTextStyle,{color: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE,fontWeight: 'bold'}]}>{Strings.minimal_mode}</Text>
                             :
-                            <Text style={[styles.headerTitleTextStyle, customLogoutTextStyle]}>{Strings.regular_mode}</Text>
+                            <Text style={[styles.headerTitleTextStyle, customLogoutTextStyle,{color: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE,fontWeight: 'bold'}]}>{Strings.regular_mode}</Text>
                         }
                         </TouchableOpacity>
 
@@ -107,7 +108,8 @@ class HeaderComponents extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        minimalFlag: state.minimalFlag
+        minimalFlag: state.minimalFlag,
+        multiBrandingData: state.multiBrandingData.response.data
     }
   }
 
