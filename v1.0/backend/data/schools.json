@@ -6,7 +6,8 @@
   "autoSync": false,
   "autoSyncFrequency": 600000,
   "storeTrainingData": true,
-  "tags": true
+  "tags": true,
+  "supportEmail": "abc@gmail.com , xyz@gmail.com"
 },
 {
   "name": "Dummy school 2",
@@ -16,7 +17,8 @@
   "autoSync": false,
   "autoSyncFrequency": 600000,
   "storeTrainingData": true,
-  "tags": false
+  "tags": false,
+  "supportEmail": "abc@gmail.com"
 },
 {
   "name": "Dummy school 3",

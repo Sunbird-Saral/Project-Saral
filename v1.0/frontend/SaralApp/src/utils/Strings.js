@@ -92,7 +92,7 @@ export default strings = new LocalizedStrings({
         student_roll_length_error: 'RollNo. should be 7 digit',
         sat_string: 'SAT',
         pat_string: 'PAT',
-        backToDashboard:'Go Back To Dashboard',
+        backToDashboard:'Dashboard',
         contactAdmin:'Something went wrong , contact Admin',
         student_cant_be_mark_as_absent_once_scanned:"can't be mark as absent once scanned !",
         shareDataExceed:'Data limit exceeded,Extract from backend',
@@ -115,6 +115,7 @@ export default strings = new LocalizedStrings({
         StudentId_limit_exceeds:"Student Id exceeds the limit",
         absent_status: 'Absent Status',
         student_id_should_not_blank: "Student Id Shouldn't be blank",
-        save_all_scan: 'Save All Scan'
+        save_all_scan: 'Save All Scan',
+        please_select_roi_layout: "Please selcet layout"
     }
 })

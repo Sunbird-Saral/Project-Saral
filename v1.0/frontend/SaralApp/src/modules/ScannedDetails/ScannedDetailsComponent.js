@@ -605,8 +605,7 @@ const ScannedDetailsComponent = ({
                  filterData = getDataFromLocal.filter((e) => {
     
                     //In minimal mode need to find organization id as we kept studentId
-                    let findOrgID = e.studentsMarkInfo.some((item) => item.studentId == studentId);
-                    if (findOrgID) {
+                    if (e.roiId == roiData.data.roiId) {
                         return true
                     }
                 })
@@ -639,9 +638,9 @@ const ScannedDetailsComponent = ({
                             findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.section)
 
                             //In minimal mode need to find organization id as we kept studentId
-                            let findOrgID = e.studentsMarkInfo.some((item) => item.studentId == studentId);
+                            let findRoiID =  e.roiId == roiData.data.roiId;
                             let checkDataExistence = !minimalFlag ? filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject : false
-                            if (checkDataExistence && findSection || findOrgID) {
+                            if (checkDataExistence && findSection || findRoiID) {
 
 
                                 e.studentsMarkInfo.forEach((element, i) => {
@@ -1135,6 +1134,9 @@ const ScannedDetailsComponent = ({
             ]
         }
 
+        if (minimalFlag) {
+            saveObj.roiId = ocrLocalResponse.roiId
+        }
         if (maxObtainedTrainingData.length > 0 && loginData.data.school.storeTrainingData && maxObtainedTrainingData[0].format.name == elements[3]) {
             saveObj.studentsMarkInfo[0].maxMarksTrainingData = maxObtainedTrainingData[0].predictedMarks != maxMarksTotal ? maxObtainedTrainingData[0].trainingDataSet : []
             saveObj.studentsMarkInfo[0].maxMarksPredicted = maxObtainedTrainingData[0].predictedMarks,

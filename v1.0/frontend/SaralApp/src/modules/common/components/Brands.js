@@ -179,7 +179,7 @@ class Brands extends PureComponent {
         }, bgTimer);
 
         //set minimal Flag
-        storeFactory.dispatch(this.minimalFlagAction(school.hasOwnProperty("minimal") ? school.minimal : false));
+        storeFactory.dispatch(this.minimalFlagAction(school.hasOwnProperty("isMinimalMode") ? school.isMinimalMode : false));
 
         //calling students and exam api
         this.callStudentsData(loginData.data.token)
