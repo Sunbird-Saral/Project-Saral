@@ -12,6 +12,9 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Assets } from '../../assets';
 import { monospace_FF } from '../../utils/CommonUtils';
 import Spinner from '../common/components/loadingIndicator';
+import { storeFactory } from '../../flux/store/store';
+import constants from '../../flux/actions/constants';
+import { GetStudentsAndExamData } from '../../flux/actions/apis/getStudentsAndExamData';
 
 class HomeComponent extends Component {
     constructor(props) {
@@ -23,10 +26,6 @@ class HomeComponent extends Component {
     }
     componentDidMount() {
         const { navigation } = this.props;
-        setTimeout(
-            () => this.setState(prevState => ({ isLoading: !prevState.isLoading })),
-            5000,
-        );
         if (this.props.minimalFlag) {
             navigation.addListener('willFocus', async payload => {
                 BackHandler.addEventListener('hardwareBackPress', this.onBack)
@@ -38,6 +37,56 @@ class HomeComponent extends Component {
         
         this.callMultiBrandingActiondata()
     }
+
+    componentDidUpdate(prevProps) {
+        const { studentsAndExamData, multiBranding }  = this.props;
+
+        const { loginData: { data: { school } } } = this.props;
+        
+        if (multiBranding && prevProps.multiBranding != multiBranding) {
+            if (multiBranding.status && multiBranding.status == 200) {
+
+                //set minimal Flag
+                let isMinimalMode = school.hasOwnProperty("isMinimalMode") ? school.isMinimalMode : false
+                storeFactory.dispatch(this.minimalFlagAction(isMinimalMode));
+                //calling students and exam api if minimal mode true
+                if (isMinimalMode) {
+                    this.callStudentsData(this.props.loginData.data.token)
+                } else {
+                    this.setState({isLoading : false})
+                }
+                
+            }
+            
+        }
+
+        if (studentsAndExamData &&  prevProps.studentsAndExamData != studentsAndExamData ) {
+            if (studentsAndExamData.status && studentsAndExamData.status == 200) {
+                this.setState({isLoading : false})
+            }
+        }
+    }
+    
+
+    callStudentsData = (token) => {
+
+        let dataPayload = {
+           "classId": "0",
+           "section": "0"
+         }
+         this.setState({
+               isLoading: true,
+         })
+           let apiObj = new GetStudentsAndExamData(dataPayload, token);
+           this.props.APITransport(apiObj)
+   }
+
+   minimalFlagAction (payload){
+    return {
+        type: constants.MINIMAL_FLAG,
+        payload
+    }
+}
 
     callMultiBrandingActiondata() {
         let payload = this.props.multiBrandingData
@@ -56,7 +105,7 @@ class HomeComponent extends Component {
 
     render() {
         const { isLoading } = this.state;
-        if(this.props.multiBrandingData === undefined || this.props.multiBrandingData === null){
+        if(this.props.multiBrandingData === undefined || this.props.multiBrandingData === null || this.state.isLoading){
            
             return <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
             {
@@ -101,7 +150,9 @@ const mapStateToProps = (state) => {
     return {
         loginData: state.loginData,
         multiBrandingData: state.multiBrandingData.response.data,
-        minimalFlag: state.minimalFlag
+        multiBranding: state.multiBrandingData.response,
+        minimalFlag: state.minimalFlag,
+        studentsAndExamData: state.studentsAndExamData
     }
 }
 const mapDispatchToProps = (dispatch) => {

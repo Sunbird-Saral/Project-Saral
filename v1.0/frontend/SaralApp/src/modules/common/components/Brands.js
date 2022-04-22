@@ -23,8 +23,6 @@ import axios from 'axios';
 import { getScannedDataFromLocal, setScannedDataIntoLocal } from '../../../utils/StorageUtils';
 import { collectErrorLogs } from '../../CollectErrorLogs';
 import { dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF } from '../../../utils/CommonUtils';
-import { ROIAction } from '../../StudentsList/ROIAction';
-import { GetStudentsAndExamData } from '../../../flux/actions/apis/getStudentsAndExamData'
 
 class Brands extends PureComponent {
     constructor() {
@@ -150,18 +148,13 @@ class Brands extends PureComponent {
         }
     }
 
-    minimalFlagAction (payload){
-        return {
-            type: Constant.MINIMAL_FLAG,
-            payload
-        }
-    }
+
 
     componentDidMount() {
 
         const { loginData, dispatch } = this.props;
 
-        const { loginData: { data: { school } } } = this.props
+ 
 
         const bgTimer = Object.keys(loginData).length > 0  && loginData.data.school.hasOwnProperty("autoSyncFrequency") ? loginData.data.school.autoSyncFrequency : 600000
         setInterval(() => {
@@ -178,38 +171,10 @@ class Brands extends PureComponent {
             //timer for 10 min
         }, bgTimer);
 
-        //set minimal Flag
-        let isMinimalMode = school.hasOwnProperty("isMinimalMode") ? school.isMinimalMode : false
-        storeFactory.dispatch(this.minimalFlagAction(isMinimalMode));
-
-        //calling students and exam api if minimal mode true
-        if (isMinimalMode) {
-            this.callStudentsData(loginData.data.token)
-        }
-
       }
 
-     callStudentsData = (token) => {
 
-         let dataPayload = {
-            "classId": "0",
-            "section": "0"
-          }
-          this.setState({
-                isLoading: true,
-          })
-            let apiObj = new GetStudentsAndExamData(dataPayload, token);
-            this.props.APITransport(apiObj)
-    }
 
-    componentDidUpdate(prevProps) {
-        const { studentsAndExamData }  = this.props;
-        if (studentsAndExamData &&  prevProps.studentsAndExamData != studentsAndExamData ) {
-            if (studentsAndExamData.status && studentsAndExamData.status == 200) {
-                this.setState({isLoading : false})
-            }
-        }
-    }
     
     render() {
         return (
@@ -257,8 +222,8 @@ const mapStateToProps = (state) => {
     return {
         loginData: state.loginData,
         bgFlag: state.bgFlag,
-        minimalFlag: state.minimalFlag,
-        studentsAndExamData: state.studentsAndExamData
+        minimalFlag: state.minimalFlag
+        
     }
 }
 

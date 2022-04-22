@@ -44,23 +44,10 @@ class MyScanComponent extends Component {
             calledRoiData: false,
             saveStatusData: 0
         }
-        this.onBack = this.onBack.bind(this)
-        this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
     }
 
 
-    componentWillUnmount() {
-        BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
-    }
 
-    handleBackButtonClick =()=> {
-        if (this.props.minimalFlag) {
-            this.props.navigation.navigate('Home');
-        } else {
-            this.props.navigation.push('ScanHistory');
-        }
-        return true;
-    }
 
    async componentDidUpdate(prevProps) {
         const { calledRoiData} = this.state;
@@ -77,14 +64,12 @@ class MyScanComponent extends Component {
     }
 
    async componentDidMount() {
-        BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
         const { navigation, minimalFlag } = this.props
         const { params } = navigation.state
         navigation.addListener('willFocus', payload => {
             if (!minimalFlag) {
                 this.sumOfLocalData();
             }
-            BackHandler.addEventListener('hardwareBackPress', this.onBack)
             if (params && params.from_screen && params.from_screen == 'scanDetails') {
                 this.setState({
                     showFooter: false
@@ -97,9 +82,6 @@ class MyScanComponent extends Component {
                 })
             }
         })
-        this.willBlur = navigation.addListener('willBlur', payload =>
-            BackHandler.removeEventListener('hardwareBackPress', this.onBack)
-        );
 
         if (this.props.minimalFlag) {
             let examList = []
@@ -562,19 +544,25 @@ class MyScanComponent extends Component {
                          navigation={this.props.navigation}
                     />
 
-                <View>
-                    <ButtonComponent
-                        customBtnStyle={[styles.nxtBtnStyle, { backgroundColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE }]}
-                        customBtnTextStyle={{ fontSize: 15 }}
-                        btnText={Strings.backToDashboard}
-                        activeOpacity={0.8}
-                        onPress={() => this.props.navigation.navigate('selectDetails')}
-                    />
-                </View>
-                        </ScrollView>
-                        :
-                
-                        <View style={{ marginHorizontal:20, marginTop: 30, marginBottom: 40 }}>
+                        <View style={styles.viewnxtBtnStyle1}>
+                            <ButtonComponent
+                            customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+                            btnText={Strings.backToDashboard.toUpperCase()}
+                            activeOpacity={0.8}
+                            onPress={() => this.props.navigation.navigate('selectDetails')}
+                            />
+                            
+                            <ButtonComponent
+                            customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+                            btnText={Strings.Back.toUpperCase()}
+                            activeOpacity={0.8}
+                            onPress={() => this.props.navigation.push('ScanHistory')}
+                            />
+                            </View>
+                            </ScrollView>
+                            :
+                            
+                            <View style={{ marginHorizontal:20, marginTop: 30, marginBottom: 40 }}>
                             <DropDownMenu
                                 options={this.state.roiDataList}
                                 onSelect={(idx, value) => this.onDropDownSelect(idx, value)}
