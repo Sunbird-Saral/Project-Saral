@@ -242,11 +242,7 @@ class MyScanComponent extends Component {
                         permRes['android.permission.WRITE_EXTERNAL_STORAGE'] === PermissionsAndroid.RESULTS.GRANTED &&
                         permRes['android.permission.CAMERA'] === PermissionsAndroid.RESULTS.GRANTED
                     ) {
-                        if (this.state.selectedRoiLayoutData.hasOwnProperty("layout")) {
                             this.openCameraActivity()
-                        } else {
-                            this.callCustomModal("Warning","Please Select Roi",false,false)
-                        }
                     } else if (permRes['android.permission.READ_EXTERNAL_STORAGE'] == 'never_ask_again' ||
                         permRes['android.permission.WRITE_EXTERNAL_STORAGE'] == 'never_ask_again' ||
                         permRes['android.permission.CAMERA'] == 'never_ask_again') {
