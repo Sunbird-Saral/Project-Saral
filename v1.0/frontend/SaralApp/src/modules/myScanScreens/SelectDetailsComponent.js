@@ -112,8 +112,8 @@ class SelectDetailsComponent extends Component {
     }
 
     onPress() {
-        this.setState({isHidden: !this.state.isHidden})
-      }
+        this.setState({ isHidden: !this.state.isHidden })
+    }
 
     componentDidMount() {
         const { navigation, scanTypeData } = this.props
@@ -235,23 +235,29 @@ class SelectDetailsComponent extends Component {
                     if (value == 'All') {
                         payload.section = 0
                     }
-                    this.loader(true)
-                    this.setState({
-                        dataPayload: payload
-                    }, () => {
-
-                        this.callStudentsData(loginDetails.token)
-                    })
                 }
             })
         }
         else if (type == 'sub') {
             if (value != selectedSubject) {
+                let payload = {
+                    classId: selectedClassId,
+                    section: selectedSection,
+                    subject: value
+                }
+                this.loader(true)
+                this.setState({
+                    dataPayload: payload
+                }, () => {
+
+                    this.callStudentsData(loginDetails.token)
+                })
                 this.setState({
                     pickerDate: new Date(),
                     selectedDate: ''
                 })
             }
+            
             this.setState({
                 errClass: '',
                 errSection: '',
@@ -265,6 +271,7 @@ class SelectDetailsComponent extends Component {
 
     callStudentsData = (token) => {
         const { dataPayload } = this.state
+      
         this.setState({
             calledStudentsData: true,
         }, () => {
@@ -292,13 +299,13 @@ class SelectDetailsComponent extends Component {
         })
     }
 
-     callCustomModal = (title, message, isAvailable,okFunction,cancel) => {
+    callCustomModal = (title, message, isAvailable, okFunction, cancel) => {
         let data = {
             title: title,
             message: message,
             isOkAvailable: isAvailable,
-            okFunc : okFunction,
-            isCancel : cancel
+            okFunc: okFunction,
+            isCancel: cancel
         }
         this.props.dispatchCustomModalStatus(true)
         this.props.dispatchCustomModalMessage(data)
@@ -318,7 +325,7 @@ class SelectDetailsComponent extends Component {
             })
         }
         else {
-            this.callCustomModal(Strings.message_text,Strings.please_try_again,true,this.loginAgain,true)
+            this.callCustomModal(Strings.message_text, Strings.please_try_again, true, this.loginAgain, true)
         }
     }
 
@@ -410,9 +417,9 @@ class SelectDetailsComponent extends Component {
                         pickerDate: new Date()
                     }, () => {
                         if (apiStatus && apiStatus.message) {
-                            this.callCustomModal(Strings.message_text,Strings.please_try_again,false,false);
+                            this.callCustomModal(Strings.message_text, Strings.please_try_again, false, false);
                         } else {
-                            this.callCustomModal(Strings.message_text,Strings.please_try_again,false,false);
+                            this.callCustomModal(Strings.message_text, Strings.please_try_again, false, false);
                         }
                     })
                 }
@@ -637,14 +644,14 @@ class SelectDetailsComponent extends Component {
                 let obj = {
                     className: selectedClass,
                     class: selectedClassId,
-                    examDate: examDate[subIndex],
+                    examDate: examDate[0],
                     section: selectedSection,
-                    subject: subjectsData[subIndex],
-                    examTestID: examTestID[subIndex],
+                    subject: subjectsData[0],
+                    examTestID: examTestID[0],
                 }
                 this.props.FilteredDataAction(obj)
                 let payload = {
-                    "examId": examTestID[subIndex],
+                    "examId": examTestID[0],
                 }
                 this.callROIData(payload, loginData.data.token)
             } else {
@@ -700,7 +707,7 @@ class SelectDetailsComponent extends Component {
     render() {
         const { navigation, isLoading, defaultSelected, classList, classListIndex, selectedClass, sectionList, sectionListIndex, selectedSection, pickerDate, selectedDate, subArr, selectedSubject, subIndex, errClass, errSub, errDate, errSection, sectionValid, dateVisible, examTestID } = this.state
         const { loginData, multiBrandingData, modalStatus, modalMessage } = this.props
-        const BrandLabel = multiBrandingData&&multiBrandingData.screenLabels&&multiBrandingData.screenLabels.selectDetails[0]
+        const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.selectDetails[0]
         return (
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
                 <ShareComponent
@@ -708,12 +715,12 @@ class SelectDetailsComponent extends Component {
                     message={this.state.logmessage ? JSON.stringify(this.state.logmessage, null, 2) : ''}
 
                 />
-                {BrandLabel?
+                {BrandLabel ?
                     <MultibrandLabels
-                         Label1={BrandLabel.School}
-                         Label2={BrandLabel.SchoolId}
-                         School={loginData.data.school.name}
-                         SchoolId={loginData.data.school.schoolId}
+                        Label1={BrandLabel.School}
+                        Label2={BrandLabel.SchoolId}
+                        School={loginData.data.school.name}
+                        SchoolId={loginData.data.school.schoolId}
                     />
 
                     :
@@ -721,18 +728,18 @@ class SelectDetailsComponent extends Component {
                     (loginData && loginData.data) &&
                     <View style={{ marginTop: 20, width: '60%' }}>
                         <Text
-                            style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%',fontFamily : monospace_FF }}
+                            style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%', fontFamily: monospace_FF }}
                         >
                             {Strings.school_name + ' : '}
-                            <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
+                            <Text style={{ fontWeight: 'normal', fontFamily: monospace_FF }}>
                                 {loginData.data.school.name}
                             </Text>
                         </Text>
                         <Text
-                            style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%',fontFamily : monospace_FF }}
+                            style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%', fontFamily: monospace_FF }}
                         >
                             {Strings.schoolId_text + ' : '}
-                            <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
+                            <Text style={{ fontWeight: 'normal', fontFamily: monospace_FF }}>
                                 {loginData.data.school.schoolId}
                             </Text>
                         </Text>
@@ -751,9 +758,9 @@ class SelectDetailsComponent extends Component {
                         <View style={{ backgroundColor: 'white', paddingHorizontal: '5%', minWidth: '100%', paddingVertical: '10%', borderRadius: 4 }}>
                             <View style={[styles.fieldContainerStyle, { paddingBottom: classListIndex != -1 ? 0 : '10%' }]}>
                                 <View style={{ flexDirection: 'row' }}>
-                                   
-                                        <Text style={[styles.labelTextStyle]}>{BrandLabel&&BrandLabel.Class ? BrandLabel.Class : Strings.class_text }</Text> 
-                                       
+
+                                    <Text style={[styles.labelTextStyle]}>{BrandLabel && BrandLabel.Class ? BrandLabel.Class : Strings.class_text}</Text>
+
                                     {errClass != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 1, width: '60%', textAlign: 'right', fontWeight: 'normal' }]}>{errClass}</Text>}
                                 </View>
                                 <DropDownMenu
@@ -768,9 +775,9 @@ class SelectDetailsComponent extends Component {
                             {classListIndex != -1 &&
                                 <View style={[styles.fieldContainerStyle, { paddingBottom: sectionListIndex != -1 && sectionValid ? 0 : '10%' }]}>
                                     <View style={{ flexDirection: 'row' }}>
-                                       
-                                            <Text style={[styles.labelTextStyle]}>{BrandLabel && BrandLabel.Section ? BrandLabel.Section:Strings.section}</Text> 
-                                        
+
+                                        <Text style={[styles.labelTextStyle]}>{BrandLabel && BrandLabel.Section ? BrandLabel.Section : Strings.section}</Text>
+
                                         {errSection != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 1, width: '60%', textAlign: 'right', fontWeight: 'normal' }]}>{errSection}</Text>}
                                     </View>
                                     <DropDownMenu
@@ -786,7 +793,7 @@ class SelectDetailsComponent extends Component {
                                 sectionListIndex != -1 && sectionValid &&
                                 <View style={[styles.fieldContainerStyle, { paddingBottom: subIndex != -1 ? '10%' : '10%' }]}>
                                     <View style={{ flexDirection: 'row' }}>
-                                    <Text style={[styles.labelTextStyle]}>{BrandLabel && BrandLabel.Subject ? BrandLabel.Subject:Strings.subject}</Text> 
+                                        <Text style={[styles.labelTextStyle]}>{BrandLabel && BrandLabel.Subject ? BrandLabel.Subject : Strings.subject}</Text>
                                         {errSub != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 1, width: '50%', textAlign: 'right', fontWeight: 'normal' }]}>{errSub}</Text>}
                                     </View>
                                     <DropDownMenu
@@ -824,11 +831,11 @@ class SelectDetailsComponent extends Component {
                 {isLoading && <Spinner animating={isLoading} />}
                 <ModalView modalVisible={modalStatus} modalMessage={modalMessage} />
 
-                <CustomPopup 
-                visible={true} 
-                title={"Messagess"}
-                ok_button={"Ok"}
-                bgColor={this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE}
+                <CustomPopup
+                    visible={true}
+                    title={"Messagess"}
+                    ok_button={"Ok"}
+                    bgColor={this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE}
                 />
             </View>
         );
@@ -856,7 +863,7 @@ const styles = {
         color: AppTheme.BLACK,
         letterSpacing: 1,
         marginBottom: '5%',
-        fontFamily : monospace_FF
+        fontFamily: monospace_FF
     },
     fieldContainerStyle: {
         paddingVertical: '2.5%'
@@ -868,7 +875,7 @@ const styles = {
         fontWeight: 'bold',
         letterSpacing: 1,
         lineHeight: 35,
-        fontFamily : monospace_FF
+        fontFamily: monospace_FF
     },
     nxtBtnStyle: {
     },
