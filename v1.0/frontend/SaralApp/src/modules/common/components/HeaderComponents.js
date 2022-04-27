@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, Image, Share } from 'react-native';
+import { connect } from 'react-redux';
 import { Assets } from '../../../assets';
 import AppTheme from '../../../utils/AppTheme';
 import { monospace_FF } from '../../../utils/CommonUtils';
@@ -29,12 +30,14 @@ class HeaderComponents extends Component {
             supportTeamText,
             onSupportClick,
             aboutMenu,
-            helpMenu
+            helpMenu,
+            minimalFlag,
+            multiBrandingData
         } = this.props
         return (
             <View style={{flex:1,marginTop: '10%',marginRight:'5%'}}>
                 <View style={styles.imageViewContainer}>
-                    <View style={styles.imageContainerStyle}>
+                    <View style={[styles.imageContainerStyle,{height:  160 }]}>
                         
                         <TouchableOpacity
                         style={[styles.imageContainerViewstyle,{marginTop:10}]}
@@ -69,6 +72,19 @@ class HeaderComponents extends Component {
                             <Text style={[styles.headerTitleTextStyle, customLogoutTextStyle]}>{Strings.help_menu}</Text>
                         </TouchableOpacity>
                         
+                        <TouchableOpacity
+                        style={{marginHorizontal:"0%",marginBottom: 8}}
+                        activeOpacity={1}
+                        > 
+                        {
+                            minimalFlag
+                            ?
+                            <Text style={[styles.headerTitleTextStyle, customLogoutTextStyle,{color: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE,fontWeight: 'bold'}]}>{Strings.minimal_mode}</Text>
+                            :
+                            <Text style={[styles.headerTitleTextStyle, customLogoutTextStyle,{color: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE,fontWeight: 'bold'}]}>{Strings.regular_mode}</Text>
+                        }
+                        </TouchableOpacity>
+
                     </View>
                 </View>
 
@@ -89,6 +105,13 @@ class HeaderComponents extends Component {
         );
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        minimalFlag: state.minimalFlag,
+        multiBrandingData: state.multiBrandingData.response.data
+    }
+  }
 
 const styles = {
     mainHeaderContainerStyle: {
@@ -156,4 +179,7 @@ const styles = {
         marginBottom: 10
     }
 }
-export default HeaderComponents;
+
+
+
+export default (connect(mapStateToProps, null)(HeaderComponents));

@@ -41,7 +41,8 @@ const ScannedDetailsComponent = ({
     loginData,
     bgFlag,
     roiData,
-    studentsAndExamData
+    studentsAndExamData,
+    minimalFlag
 }) => {
     //Hookes
     const [summary, setSummary] = useState(false)
@@ -103,7 +104,11 @@ const ScannedDetailsComponent = ({
 
 
     useEffect(() => {
-        validateStudentId(studentId)
+        if (!minimalFlag) {
+            validateStudentId(studentId)
+        }else{
+            setStudentValid(true)
+        }
     }, [studentId])
 
     const validateStudentId = async (value) => {
@@ -587,14 +592,28 @@ const ScannedDetailsComponent = ({
         let len = 0
         if (getDataFromLocal != null) {
 
-            let filterData = getDataFromLocal.filter((e) => {
-                let findSection = false
-                findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.section)
+            var filterData = ''
+            if (!minimalFlag) {
+                filterData = getDataFromLocal.filter((e) => {
+                   let findSection = false
+                   findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.section)
+   
+                   if (filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject && findSection) {
+                       return true
+                   }
+               })
+            } else {
+                
+                 filterData = getDataFromLocal.filter((e) => {
+    
+                    //In minimal mode need to find organization id as we kept studentId
+                    if (e.roiId == roiData.data.roiId) {
+                        return true
+                    }
+                })
 
-                if (filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject && findSection) {
-                    return true
-                }
-            })
+            }
+
 
 
             if (filterData.length > 0) {
@@ -620,7 +639,10 @@ const ScannedDetailsComponent = ({
                             let findSection = false
                             findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.section)
 
-                            if (filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject && findSection) {
+                            //In minimal mode need to find organization id as we kept studentId
+                            let findRoiID =  e.roiId == roiData.data.roiId;
+                            let checkDataExistence = !minimalFlag ? filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject : false
+                            if (checkDataExistence && findSection || findRoiID) {
 
 
                                 e.studentsMarkInfo.forEach((element, i) => {
@@ -1097,14 +1119,14 @@ const ScannedDetailsComponent = ({
         let Studentmarks = objects;
 
         let saveObj = {
-            "classId": filteredData.class,
-            "examDate": filteredData.examDate,
-            "subject": filteredData.subject,
+            "classId": minimalFlag ? 0 : filteredData.class,
+            "examDate": minimalFlag ? 0 : filteredData.examDate,
+            "subject": minimalFlag ? 0 : filteredData.subject,
             "studentsMarkInfo": [
                 {
                     "predictedStudentId": loginData.data.school.storeTrainingData ? storeTrainingData[0].studentIdPrediction : '',
                     "predictionConfidence": loginData.data.school.storeTrainingData ? storeTrainingData[0].studentIdPrediction != studentId ? storeTrainingData[0].predictionConfidence : [] : [],
-                    "section": filteredData.section,
+                    "section": minimalFlag ? 0 : filteredData.section,
                     "studentId": studentId,
                     "securedMarks": sumOfAllMarks > 0 ? sumOfAllMarks : 0,
                     "totalMarks": maxMarksTotal > 0 ? maxMarksTotal : 0,
@@ -1114,6 +1136,9 @@ const ScannedDetailsComponent = ({
             ]
         }
 
+        if (minimalFlag) {
+            saveObj.roiId = ocrLocalResponse.roiId
+        }
         if (maxObtainedTrainingData.length > 0 && loginData.data.school.storeTrainingData && maxObtainedTrainingData[0].format.name == elements[3]) {
             saveObj.studentsMarkInfo[0].maxMarksTrainingData = maxObtainedTrainingData[0].predictedMarks != maxMarksTotal ? maxObtainedTrainingData[0].trainingDataSet : []
             saveObj.studentsMarkInfo[0].maxMarksPredicted = maxObtainedTrainingData[0].predictedMarks,
@@ -1221,12 +1246,12 @@ const ScannedDetailsComponent = ({
                                         <View style={styles.studentContainer}>
                                             <View style={styles.imageViewContainer}>
                                                 <View style={styles.imageContainerStyle}>
-                                                    <Text style={{ textAlign: 'center', fontSize: AppTheme.HEADER_FONT_SIZE_LARGE,fontFamily:monospace_FF }}>{studentData.length > 0 && studentData[0].name.charAt(0)}</Text>
+                                                    <Text style={{ textAlign: 'center', fontSize: AppTheme.HEADER_FONT_SIZE_LARGE,fontFamily:monospace_FF }}>{minimalFlag ? loginData.data.school.name.charAt(0) : studentData.length > 0 && studentData[0].name.charAt(0)}</Text>
                                                 </View>
                                             </View>
                                             <View style={styles.deatilsViewContainer}>
                                                 <View style={styles.detailsSubContainerStyle}>
-                                                    <Text style={[styles.nameTextStyle, { fontWeight: 'bold', color: AppTheme.BLACK, fontSize: AppTheme.FONT_SIZE_LARGE }]}>{studentData.length > 0 && studentData[0].name}</Text>
+                                                    <Text style={[styles.nameTextStyle, { fontWeight: 'bold', color: AppTheme.BLACK, fontSize: AppTheme.FONT_SIZE_LARGE }]}>{minimalFlag ? loginData.data.school.name : studentData.length > 0 && studentData[0].name}</Text>
                                                     <TextField
                                                         labelText={BrandLabel && BrandLabel.StudentId ? BrandLabel.StudentId : Strings.student_id}
                                                         errorField={stdErr != '' || isNaN(studentId)}
@@ -1242,7 +1267,12 @@ const ScannedDetailsComponent = ({
                                                         editable={edit}
                                                         keyboardType={'numeric'}
                                                         />
-                                                    <Text style={styles.nameTextStyle}>{BrandLabel && BrandLabel.Exam ? BrandLabel.Exam : Strings.Exam} : {filteredData.subject} {filteredData.examDate} ({filteredData.examTestID})</Text>
+                                                        {
+                                                            !minimalFlag
+                                                            &&
+                                                            <Text style={styles.nameTextStyle}>{BrandLabel && BrandLabel.Exam ? BrandLabel.Exam : Strings.Exam} : {filteredData.subject} {filteredData.examDate} ({filteredData.examTestID})</Text>
+
+                                                        }
                                                     {
                                                         isMultipleStudent
                                                             ?
@@ -1425,7 +1455,8 @@ const mapStateToProps = (state) => {
         scanedData: state.scanedData.response,
         bgFlag: state.bgFlag,
         multiPageReducer: state.multiPage.response,
-        studentsAndExamData: state.studentsAndExamData
+        studentsAndExamData: state.studentsAndExamData,
+        minimalFlag: state.minimalFlag
     }
 }
 

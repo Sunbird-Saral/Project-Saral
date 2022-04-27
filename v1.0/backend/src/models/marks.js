@@ -50,6 +50,11 @@ const marksSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
+    roiId: {
+        type: String,
+        required: false,
+        trim: true
+    },
     marksInfo: [
         {
             _id: false,

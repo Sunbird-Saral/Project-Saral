@@ -148,9 +148,13 @@ class Brands extends PureComponent {
         }
     }
 
+
+
     componentDidMount() {
 
         const { loginData, dispatch } = this.props;
+
+ 
 
         const bgTimer = Object.keys(loginData).length > 0  && loginData.data.school.hasOwnProperty("autoSyncFrequency") ? loginData.data.school.autoSyncFrequency : 600000
         setInterval(() => {
@@ -166,7 +170,11 @@ class Brands extends PureComponent {
             }
             //timer for 10 min
         }, bgTimer);
+
       }
+
+
+
     
     render() {
         return (
@@ -213,7 +221,9 @@ const styles = {
 const mapStateToProps = (state) => {
     return {
         loginData: state.loginData,
-        bgFlag: state.bgFlag
+        bgFlag: state.bgFlag,
+        minimalFlag: state.minimalFlag
+        
     }
 }
 

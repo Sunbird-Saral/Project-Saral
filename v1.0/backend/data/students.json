@@ -2033,5 +2033,29 @@
   "name": "Student10",
   "studentId": "543223",
   "schoolId": "a001"
+},
+{
+  "studentClass": [
+    {
+      "classId": "0",
+      "className": "Class-0"
+    }
+  ],
+  "section": "0",
+  "name": "Priya Sood",
+  "studentId": "3302014",
+  "schoolId": "m001"
+},
+{
+  "studentClass": [
+    {
+      "classId": "0",
+      "className": "Class-0"
+    }
+  ],
+  "section": "0",
+  "name": "Ram Kapoor",
+  "studentId": "3302015",
+  "schoolId": "m001"
 }
 ]
