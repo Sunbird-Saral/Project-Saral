@@ -240,7 +240,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjQyOTVjYjVjMjMyYTA5NTQxNWU5ODYiLCJpYXQiOjE2NDg1MzA5NDh9.wE7DO_2YqKd7GINhCqnIGipFyKsUTkuyrJwoul4xM9k",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjYyMTY3NmI2ODc1ZjRlNmMwMDkzMTkiLCJpYXQiOjE2NTA2MjkwODV9.viEOqLuVHtPsEf2154KNbkG2QM9MZpXvHtl8MTxHTq8",
 									"type": "string"
 								}
 							]
@@ -249,7 +249,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{   \r\n    \"classId\": \"2\",\r\n    \"section\":\"D\"\r\n}",
+							"raw": "{   \r\n    \"classId\": \"2\",\r\n    \"section\":\"D\",\r\n    \"subject\": \"Hindi 11/10/2021\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -274,7 +274,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{   \r\n    \"classId\": \"2\",\r\n    \"section\":\"D\"\r\n}",
+									"raw": "{   \r\n    \"classId\": \"2\",\r\n    \"section\":\"D\",\r\n    \"subject\": \"Hindi 11/02/2021\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"

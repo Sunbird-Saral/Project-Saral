@@ -69,6 +69,9 @@ paths:
               section:
                 type: string
                 example: "D"
+              subject:
+                type: string
+                example: "Hindi 11/02/2021"
       responses:
         "200":
           description: "successful operation"
