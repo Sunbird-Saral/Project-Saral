@@ -118,6 +118,8 @@ export default strings = new LocalizedStrings({
         save_all_scan: 'Save All Scan',
         please_select_roi_layout: "Please selcet layout",
         minimal_mode: "Minimal Mode",
-        regular_mode: "Regular Mode"
+        regular_mode: "Regular Mode",
+        saved_data: "Saved Data",
+        scan_data: "Scan Data"
     }
 })
