@@ -477,6 +477,9 @@ class MyScanComponent extends Component {
                     if (!isApiCalled) {
                         obj.callCustomModal(Strings.message_text, Strings.saved_successfully, false);
                         setScannedDataIntoLocal(localScanData)
+                        obj.setState({
+                            localScanedData: []
+                        })
                     }
                     obj.setState({
                         scanStatusData: filterDataLen,
@@ -702,6 +705,7 @@ class MyScanComponent extends Component {
                     localstutlist={passDataToModal}
                     minimalFlag={this.props.minimalFlag}
                     savingStatus={savingStatus}
+                    bgColor={this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1: AppTheme.BLUE}
                 />
             </View>
         );

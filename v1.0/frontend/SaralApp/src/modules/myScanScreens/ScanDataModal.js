@@ -6,6 +6,7 @@ import { getPresentAbsentStudent } from '../../utils/StorageUtils';
 import ScanStatusLocalList from '../ScanStatus/ScanStatusLocalList';
 
 const ScanDataModal = ({
+    bgColor,
     minimalFlag,
     modalVisible,
     savingStatus,
@@ -50,7 +51,7 @@ const ScanDataModal = ({
         return <ScanStatusLocalList
             id={item.studentId}
             loacalstutlist={unsavedstudentList}
-            themeColor1={AppTheme.BLUE}
+            themeColor1={bgColor}
             status={savingStatus == 'scan' ? `Scanned` : `Saved`}
             minimalFlag={minimalFlag}
         />
