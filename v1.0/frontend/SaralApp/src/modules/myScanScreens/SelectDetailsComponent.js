@@ -235,23 +235,19 @@ class SelectDetailsComponent extends Component {
                     if (value == 'All') {
                         payload.section = 0
                     }
+                    this.loader(true)
+                    this.setState({
+                        dataPayload: payload
+                    }, () => {
+
+                        this.callStudentsData(loginDetails.token)
+                    })
                 }
             })
         }
         else if (type == 'sub') {
             if (value != selectedSubject) {
-                let payload = {
-                    classId: selectedClassId,
-                    section: selectedSection,
-                    subject: value
-                }
-                this.loader(true)
-                this.setState({
-                    dataPayload: payload
-                }, () => {
-
-                    this.callStudentsData(loginDetails.token)
-                })
+               
                 this.setState({
                     pickerDate: new Date(),
                     selectedDate: ''
