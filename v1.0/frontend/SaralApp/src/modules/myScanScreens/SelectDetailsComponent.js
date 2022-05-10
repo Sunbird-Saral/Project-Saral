@@ -62,7 +62,8 @@ const clearState = {
     calledAbsentStatus: false,
     calledScanStaus: false,
     absentStatusPayload: null,
-    subjectsData: []
+    subjectsData: [],
+    callStudentApi: false
 }
 
 class SelectDetailsComponent extends Component {
@@ -106,6 +107,7 @@ class SelectDetailsComponent extends Component {
             subjectsData: [],
             filterdataid: [],
             isHidden: false,
+            callStudentApi: false
         }
         this.onPress = this.onPress.bind(this);
         this.onBack = this.onBack.bind(this)
@@ -400,7 +402,7 @@ class SelectDetailsComponent extends Component {
         if (prevProps != this.props) {
 
             const { apiStatus, studentsAndExamData, absentStudentDataResponse, getScanStatusData, loginData } = this.props
-            const { calledStudentsData, calledAbsentStatus, selectedClass, selectedSection, selectedClassId, calledScanStaus, calledLogin, callApi, absentStatusPayload } = this.state
+            const { calledStudentsData, calledAbsentStatus, selectedClass, selectedSection, selectedClassId, calledScanStaus, calledLogin, callApi, absentStatusPayload, callStudentApi } = this.state
             if (apiStatus && prevProps.apiStatus != apiStatus && apiStatus.error) {
                 if (calledStudentsData) {
                     this.loader(false)
@@ -578,6 +580,28 @@ class SelectDetailsComponent extends Component {
                     }
                 }
             }
+
+            if (callStudentApi) {
+                const {  selectedSection, selectedSubject, loginDetails } = this.state;
+                const { studentsAndExamData} = this.props;
+                this.setState({ callStudentApi: false, callApi: '' })
+                let payload = {
+                    classId: selectedClassId,
+                    section: selectedSection,
+                    subject: selectedSubject
+                }
+                this.setState({
+                    dataPayload: payload,
+                }, () => {
+                    this.callStudentsData(loginDetails.token)
+                })
+                if (studentsAndExamData && studentsAndExamData.status && studentsAndExamData.status == 200) {
+                    this.setState({
+                        isLoading: false
+                    })
+                    this.props.navigation.push('StudentsList')
+                }
+            }
         }
     }
 
@@ -663,9 +687,9 @@ class SelectDetailsComponent extends Component {
         let apiObj = new ROIAction(dataPayload, token);
         this.props.APITransport(apiObj)
         this.setState({
-            isLoading: false
+            callStudentApi: true,
+            isLoading: true
         })
-        this.props.navigation.push('StudentsList')
     }
 
     setDate = date => {
