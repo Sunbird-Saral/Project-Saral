@@ -2057,5 +2057,125 @@
   "name": "Ram Kapoor",
   "studentId": "3302015",
   "schoolId": "m001"
+},
+{
+  "studentClass": [
+    {
+      "classId": "4",
+      "className": "Class-4"
+    }
+  ],
+  "section": "A",
+  "name": "Student1",
+  "studentId": "3302115",
+  "schoolId": "a001"
+},
+{
+  "studentClass": [
+    {
+      "classId": "4",
+      "className": "Class-4"
+    }
+  ],
+  "section": "A",
+  "name": "Student2",
+  "studentId": "4402115",
+  "schoolId": "a001"
+},
+{
+  "studentClass": [
+    {
+      "classId": "4",
+      "className": "Class-4"
+    }
+  ],
+  "section": "A",
+  "name": "Student3",
+  "studentId": "4402114",
+  "schoolId": "a001"
+},
+{
+  "studentClass": [
+    {
+      "classId": "4",
+      "className": "Class-4"
+    }
+  ],
+  "section": "A",
+  "name": "Student4",
+  "studentId": "4402116",
+  "schoolId": "a001"
+},
+{
+  "studentClass": [
+    {
+      "classId": "4",
+      "className": "Class-4"
+    }
+  ],
+  "section": "A",
+  "name": "Student5",
+  "studentId": "4402117",
+  "schoolId": "a001"
+},
+{
+  "studentClass": [
+    {
+      "classId": "4",
+      "className": "Class-4"
+    }
+  ],
+  "section": "A",
+  "name": "Student6",
+  "studentId": "4402118",
+  "schoolId": "a001"
+},
+{
+  "studentClass": [
+    {
+      "classId": "4",
+      "className": "Class-4"
+    }
+  ],
+  "section": "A",
+  "name": "Student7",
+  "studentId": "4402119",
+  "schoolId": "a001"
+},
+{
+  "studentClass": [
+    {
+      "classId": "4",
+      "className": "Class-4"
+    }
+  ],
+  "section": "A",
+  "name": "Student8",
+  "studentId": "4402120",
+  "schoolId": "a001"
+},
+{
+  "studentClass": [
+    {
+      "classId": "4",
+      "className": "Class-4"
+    }
+  ],
+  "section": "A",
+  "name": "Student9",
+  "studentId": "4402121",
+  "schoolId": "a001"
+},
+{
+  "studentClass": [
+    {
+      "classId": "4",
+      "className": "Class-4"
+    }
+  ],
+  "section": "A",
+  "name": "Student10",
+  "studentId": "4402122",
+  "schoolId": "a001"
 }
 ]
