@@ -678,10 +678,10 @@ class SelectDetailsComponent extends Component {
                 let obj = {
                     className: selectedClass,
                     class: selectedClassId,
-                    examDate: examDate[0],
+                    examDate: examDate[subIndex],
                     section: selectedSection,
-                    subject: subjectsData[0],
-                    examTestID: examTestID[0],
+                    subject: subjectsData[subIndex],
+                    examTestID: examTestID[subIndex],
                 }
                 this.props.FilteredDataAction(obj)
                 let payload = {
