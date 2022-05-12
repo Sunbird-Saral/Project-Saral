@@ -62,7 +62,8 @@ const clearState = {
     calledAbsentStatus: false,
     calledScanStaus: false,
     absentStatusPayload: null,
-    subjectsData: []
+    subjectsData: [],
+    isCalledStudentAndExam: false
 }
 
 class SelectDetailsComponent extends Component {
@@ -106,6 +107,7 @@ class SelectDetailsComponent extends Component {
             subjectsData: [],
             filterdataid: [],
             isHidden: false,
+            isCalledStudentAndExam: false
         }
         this.onPress = this.onPress.bind(this);
         this.onBack = this.onBack.bind(this)
@@ -235,23 +237,19 @@ class SelectDetailsComponent extends Component {
                     if (value == 'All') {
                         payload.section = 0
                     }
+                    this.loader(true)
+                    this.setState({
+                        dataPayload: payload
+                    }, () => {
+
+                        this.callStudentsData(loginDetails.token)
+                    })
                 }
             })
         }
         else if (type == 'sub') {
             if (value != selectedSubject) {
-                let payload = {
-                    classId: selectedClassId,
-                    section: selectedSection,
-                    subject: value
-                }
-                this.loader(true)
-                this.setState({
-                    dataPayload: payload
-                }, () => {
-
-                    this.callStudentsData(loginDetails.token)
-                })
+               
                 this.setState({
                     pickerDate: new Date(),
                     selectedDate: ''
@@ -404,7 +402,7 @@ class SelectDetailsComponent extends Component {
         if (prevProps != this.props) {
 
             const { apiStatus, studentsAndExamData, absentStudentDataResponse, getScanStatusData, loginData } = this.props
-            const { calledStudentsData, calledAbsentStatus, selectedClass, selectedSection, selectedClassId, calledScanStaus, calledLogin, callApi, absentStatusPayload } = this.state
+            const { calledStudentsData, calledAbsentStatus, selectedClass, selectedSection, selectedClassId, calledScanStaus, calledLogin, callApi, absentStatusPayload, isCalledStudentAndExam } = this.state
             if (apiStatus && prevProps.apiStatus != apiStatus && apiStatus.error) {
                 if (calledStudentsData) {
                     this.loader(false)
@@ -582,6 +580,42 @@ class SelectDetailsComponent extends Component {
                     }
                 }
             }
+
+            if (isCalledStudentAndExam) {
+                let data = JSON.parse(studentsAndExamData.config.data)
+                if (studentsAndExamData && data.hasOwnProperty("subject")) {
+
+                    this.setState({isCalledStudentAndExam: false, isLoading: false})                    
+                    
+                    if (studentsAndExamData && studentsAndExamData.status && studentsAndExamData.status == 200) {
+                        let obj = {
+                            class: selectedClass,
+                            classId: selectedClassId,
+                            section: selectedSection,
+                            data: studentsAndExamData.data
+                        }
+    
+                        let studentsAndExamArr = await getStudentsExamData()
+                        let finalStudentsAndExamArr = []
+                        if (studentsAndExamArr != null) {
+                            studentsAndExamArr.forEach(element => {
+                                finalStudentsAndExamArr.push(element)
+                            });
+                        }
+                        finalStudentsAndExamArr.forEach((data, index) => {
+                            if (data && data.class == obj.class && studentsAndExamData.data) {
+                                data.data = studentsAndExamData.data
+                            }
+                            if (data.class == obj.class && data.section == obj.section) {
+                                finalStudentsAndExamArr.splice(index, 1)
+                            }
+                        })
+                        finalStudentsAndExamArr.push(obj)
+                        let studentsExamDataSaved = await setStudentsExamData(finalStudentsAndExamArr)
+                        this.props.navigation.push('StudentsList');
+                    }
+                }
+            }
         }
     }
 
@@ -644,22 +678,38 @@ class SelectDetailsComponent extends Component {
                 let obj = {
                     className: selectedClass,
                     class: selectedClassId,
-                    examDate: examDate[0],
+                    examDate: examDate[subIndex],
                     section: selectedSection,
-                    subject: subjectsData[0],
-                    examTestID: examTestID[0],
+                    subject: subjectsData[subIndex],
+                    examTestID: examTestID[subIndex],
                 }
                 this.props.FilteredDataAction(obj)
                 let payload = {
                     "examId": examTestID[0],
                 }
-                this.callROIData(payload, loginData.data.token)
+                this.callExamAndStudentData(loginData.data.token)
             } else {
                 this.setState({
                     isLoading: false
                 })
             }
         })
+    }
+
+    callExamAndStudentData(token){
+        let dataPayload = {
+            classId: this.state.selectedClassId,
+            section: this.state.selectedSection,
+            subject: this.state.selectedSubject
+        }
+        let apiObj = new GetStudentsAndExamData(dataPayload, token);
+        this.props.APITransport(apiObj)
+        
+        this.setState({
+            isLoading: false,
+            isCalledStudentAndExam: true
+        })
+
     }
 
     callROIData = (dataPayload, token) => {
@@ -669,7 +719,8 @@ class SelectDetailsComponent extends Component {
         this.setState({
             isLoading: false
         })
-        this.props.navigation.push('StudentsList')
+
+        // this.props.navigation.push('StudentsList')
     }
 
     setDate = date => {

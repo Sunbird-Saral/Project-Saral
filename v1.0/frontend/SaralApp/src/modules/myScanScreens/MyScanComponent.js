@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, Image, TouchableOpacity, Platform, PermissionsAndroid, Alert, BackHandler, LogBox,Share} from 'react-native';
+import { View, ScrollView, Text, Image, TouchableOpacity, Platform, PermissionsAndroid, Alert, BackHandler, LogBox, Share } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { StackActions, NavigationActions } from 'react-navigation';
@@ -10,7 +10,7 @@ import Spinner from '../common/components/loadingIndicator';
 import { OcrLocalResponseAction } from '../../flux/actions/apis/OcrLocalResponseAction'
 import ScanHistoryCard from '../ScanHistory/ScanHistoryCard';
 import SaralSDK from '../../../SaralSDK'
-import { getScannedDataFromLocal,getErrorMessage, getLoginCred, setScannedDataIntoLocal } from '../../utils/StorageUtils';
+import { getScannedDataFromLocal, getErrorMessage, getLoginCred, setScannedDataIntoLocal } from '../../utils/StorageUtils';
 import ButtonComponent from '../common/components/ButtonComponent';
 import { dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF, multipleStudent, neglectData } from '../../utils/CommonUtils';
 import ShareComponent from '../common/components/Share';
@@ -25,6 +25,7 @@ import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
 import axios from 'axios';
 import { scanStatusDataAction } from '../ScanStatus/scanStatusDataAction';
 import { collectErrorLogs } from '../CollectErrorLogs';
+import ScanDataModal from './ScanDataModal';
 
 LogBox.ignoreAllLogs()
 
@@ -37,12 +38,17 @@ class MyScanComponent extends Component {
             oldBrightness: null,
             activityOpen: false,
             isLoading: false,
-            scanStatusData:0,
+            scanStatusData: 0,
             roiDataList: [],
             selectedRoiLayoutData: '',
             roiIndex: -1,
             calledRoiData: false,
-            saveStatusData: 0
+            saveStatusData: 0,
+            localScanedData: [],
+            dbScanSavedData: [],
+            scanModalDataVisible: false,
+            passDataToModal: [],
+            savingStatus: ''
         }
     }
 
@@ -127,6 +133,11 @@ class MyScanComponent extends Component {
             filter.forEach((element, index) => {
                 len = len + element.studentsMarkInfo.length
             });
+
+            if (this.props.minimalFlag) {
+                this.setState({ localScanedData: filter })
+            }
+
             this.setState({
                 scanStatusData: len
             })
@@ -260,7 +271,7 @@ class MyScanComponent extends Component {
                 this.setState({
                     activityOpen: true
                 })
-                let totalPages =  this.props.roiData.data.layout.hasOwnProperty("pages") && this.props.roiData.data.layout.pages
+                let totalPages = this.props.roiData.data.layout.hasOwnProperty("pages") && this.props.roiData.data.layout.pages
                 let pageNumber = totalPages || totalPages > 0 ? "1" : null
                 let jsonRoiData = this.props.roiData.data
                 SaralSDK.startCamera(JSON.stringify(jsonRoiData), pageNumber).then(res => {
@@ -290,10 +301,10 @@ class MyScanComponent extends Component {
                     // roisData.layout.cells[i].predictionConfidence = cells[i].rois[j].result.confidence
                 } else {
                     let resultProperty = {
-                            "prediction": "0",
-                            "confidence": 0
-                        }
-                    
+                        "prediction": "0",
+                        "confidence": 0
+                    }
+
                     roisData.layout.cells[i].rois[j].result = resultProperty
                 }
 
@@ -341,64 +352,64 @@ class MyScanComponent extends Component {
         const loginCred = await getLoginCred();
         if (this.state.roiIndex != -1) {
 
-        if (data) {
-            if (!this.props.bgFlag) {
-            const filterData = data.filter((e) => {
-                let findOrgID = e.roiId == this.props.roiData.data.roiId;
-
-                if (findOrgID) {
-                    return true
-                } else {
-                    return false
-                }
-            })
-
-            this.setState({
-               isLoading: true
-            })
-            let filterDataLen = 0
-
-            let setIntolocalAfterFilter = ''
-            if (filterData.length != 0) {
-                filterData.filter((f) => {
-
-                    setIntolocalAfterFilter = data.filter((e) => {
+            if (data) {
+                if (!this.props.bgFlag) {
+                    const filterData = data.filter((e) => {
                         let findOrgID = e.roiId == this.props.roiData.data.roiId;
+
                         if (findOrgID) {
-                            return false
-                        } else {
                             return true
+                        } else {
+                            return false
                         }
                     })
-                })
 
-                let apiObj = new SaveScanData(filterData[0], this.props.loginData.data.token);
-                this.saveScanData(apiObj, filterDataLen, setIntolocalAfterFilter);
+                    this.setState({
+                        isLoading: true
+                    })
+                    let filterDataLen = 0
 
-            } else {
-                this.callCustomModal(Strings.message_text,Strings.there_is_no_data,false);
+                    let setIntolocalAfterFilter = ''
+                    if (filterData.length != 0) {
+                        filterData.filter((f) => {
+
+                            setIntolocalAfterFilter = data.filter((e) => {
+                                let findOrgID = e.roiId == this.props.roiData.data.roiId;
+                                if (findOrgID) {
+                                    return false
+                                } else {
+                                    return true
+                                }
+                            })
+                        })
+
+                        let apiObj = new SaveScanData(filterData[0], this.props.loginData.data.token);
+                        this.saveScanData(apiObj, filterDataLen, setIntolocalAfterFilter);
+
+                    } else {
+                        this.callCustomModal(Strings.message_text, Strings.there_is_no_data, false);
+                        this.setState({
+                            isLoading: false
+                        })
+                    }
+                } else {
+                    this.callCustomModal(Strings.message_text, Strings.auto_sync_in_progress_please_wait, false);
+                }
+
+            }
+            else {
                 this.setState({
                     isLoading: false
-                 })
+                })
+                this.callCustomModal(Strings.message_text, Strings.there_is_no_data, false);
             }
-        }else{
-            this.callCustomModal(Strings.message_text,Strings.auto_sync_in_progress_please_wait,false);
         }
-        
-    }
-    else {
-        this.setState({
-            isLoading: false
-         })
-        this.callCustomModal(Strings.message_text,Strings.there_is_no_data,false);
+        else {
+            this.callCustomModal(Strings.message_text, Strings.please_select_roi_layout, false, true)
         }
     }
-    else { 
-        this.callCustomModal(Strings.message_text,Strings.please_select_roi_layout,false,true)
-    }
-}
 
-    saveScanData = async(api, filteredDatalen, localScanData) => {
+    saveScanData = async (api, filteredDatalen, localScanData) => {
         var obj = this
         if (api.method === 'PUT') {
             let apiResponse = null;
@@ -416,12 +427,12 @@ class MyScanComponent extends Component {
                     obj.callScanStatusData(false, filteredDatalen, localScanData)
                 })
                 .catch(function (err) {
-                    collectErrorLogs("MyScanComponent.js","saveScanData",api.apiEndPoint(),err,false);
-                    obj.callCustomModal(Strings.message_text,Strings.contactAdmin,false);
+                    collectErrorLogs("MyScanComponent.js", "saveScanData", api.apiEndPoint(), err, false);
+                    obj.callCustomModal(Strings.message_text, Strings.contactAdmin, false);
                     clearTimeout(id);
                     obj.setState({
                         isLoading: true
-                     })
+                    })
                 });
         }
     }
@@ -443,7 +454,7 @@ class MyScanComponent extends Component {
         this.FetchSavedScannedData(isApiCalled, apiObj, loginCred.schoolId, loginCred.password, filteredDatalen, localScanData)
     }
 
-    FetchSavedScannedData = async(isApiCalled, api, uname, pass, filterDataLen, localScanData) => {
+    FetchSavedScannedData = async (isApiCalled, api, uname, pass, filterDataLen, localScanData) => {
         var obj = this
         if (api.method === 'POST') {
             let apiResponse = null
@@ -464,18 +475,22 @@ class MyScanComponent extends Component {
                     clearTimeout(id)
                     api.processResponse(res)
                     if (!isApiCalled) {
-                        obj.callCustomModal(Strings.message_text,Strings.saved_successfully,false);
+                        obj.callCustomModal(Strings.message_text, Strings.saved_successfully, false);
                         setScannedDataIntoLocal(localScanData)
+                        obj.setState({
+                            localScanedData: []
+                        })
                     }
                     obj.setState({
                         scanStatusData: filterDataLen,
                         saveStatusData: res.data.data.length,
-                        isLoading: false
+                        isLoading: false,
+                        dbScanSavedData: res.data.data
                     })
                 })
                 .catch(function (err) {
-                    collectErrorLogs("MyScanComponent.js","FetchSavedScannedData",api.apiEndPoint(),err,false)
-                    obj.callCustomModal(Strings.message_text,Strings.something_went_wrong_please_try_again,false);
+                    collectErrorLogs("MyScanComponent.js", "FetchSavedScannedData", api.apiEndPoint(), err, false)
+                    obj.callCustomModal(Strings.message_text, Strings.something_went_wrong_please_try_again, false);
                     obj.setState({
                         isLoading: false
                     })
@@ -483,86 +498,108 @@ class MyScanComponent extends Component {
                 });
         }
     }
-    
+
+    setScanModalDataVisible() {
+        const { scanModalDataVisible } = this.state;
+        this.setState({
+            scanModalDataVisible: false
+        })
+    }
+
+    openScanModal(data) {
+        const { localScanedData, dbScanSavedData, scanModalDataVisible } = this.state;
+        const { roiIndex } = this.props;
+        if (this.state.roiIndex != -1) {
+            if (data == "scan") {
+                this.setState({ passDataToModal: localScanedData, scanModalDataVisible: !scanModalDataVisible, savingStatus: 'scan' })
+            } else {
+                this.setState({ passDataToModal: dbScanSavedData, scanModalDataVisible: !scanModalDataVisible, savingStatus: 'save' })
+            }
+        }
+        else {
+            this.callCustomModal(Strings.message_text, Strings.please_select_roi_layout, false, false)
+        }
+    }
+
     render() {
-        const { isLoading, saveStatusData, scanStatusData } = this.state;
-        const { loginData,multiBrandingData, modalMessage, modalStatus} = this.props
-        const BrandLabel = multiBrandingData&&multiBrandingData.screenLabels&&multiBrandingData.screenLabels.myScan[0]
+        const { isLoading, saveStatusData, scanStatusData, scanModalDataVisible, passDataToModal, savingStatus } = this.state;
+        const { loginData, multiBrandingData, modalMessage, modalStatus } = this.props
+        const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.myScan[0]
         return (
 
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
-                 <ShareComponent
-                 navigation={this.props.navigation}
-                 />
-               <View>
-               {( BrandLabel) ?
-                <MultibrandLabels
-                Label1={BrandLabel.School}
-                Label2={BrandLabel.SchoolId}
-                School ={loginData.data.school.name}
-                SchoolId={loginData.data.school.schoolId}
-                minimalFlag={this.props.minimalFlag}
-                />:
-                    (loginData && loginData.data)
-                    &&
-                    <View style={{ width:'60%' }}>
-                        <Text
-                            style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%',fontFamily : monospace_FF }}
-                        >
-                            {Strings.school_name + ' : '}
-                            <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
-                                {loginData.data.school.name}
+                <ShareComponent
+                    navigation={this.props.navigation}
+                />
+                <View>
+                    {(BrandLabel) ?
+                        <MultibrandLabels
+                            Label1={BrandLabel.School}
+                            Label2={BrandLabel.SchoolId}
+                            School={loginData.data.school.name}
+                            SchoolId={loginData.data.school.schoolId}
+                            minimalFlag={this.props.minimalFlag}
+                        /> :
+                        (loginData && loginData.data)
+                        &&
+                        <View style={{ width: '60%' }}>
+                            <Text
+                                style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%', fontFamily: monospace_FF }}
+                            >
+                                {Strings.school_name + ' : '}
+                                <Text style={{ fontWeight: 'normal', fontFamily: monospace_FF }}>
+                                    {loginData.data.school.name}
+                                </Text>
                             </Text>
-                        </Text>
-                        <Text
-                            style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%',fontFamily : monospace_FF }}
-                        >
-                            {Strings.schoolId_text + ' : '}
-                            <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
-                                {loginData.data.school.schoolId}
+                            <Text
+                                style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%', fontFamily: monospace_FF }}
+                            >
+                                {Strings.schoolId_text + ' : '}
+                                <Text style={{ fontWeight: 'normal', fontFamily: monospace_FF }}>
+                                    {loginData.data.school.schoolId}
+                                </Text>
                             </Text>
-                        </Text>
-                    </View>
-                }
-                
+                        </View>
+                    }
+
                 </View>
-                
+
                 {
                     !this.props.minimalFlag
                         ?
                         <ScrollView scrollEnabled>
-                <View style={styles.container1}>
-                <Text style={[styles.header1TextStyle, { borderColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE, backgroundColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE,fontFamily : monospace_FF }]}>
-                    {Strings.ongoing_scan}
-                </Text>
-            </View>
-                <ScanHistoryCard
-                        scanstatusbutton ={true}
-                        themeColor1={this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE}
-                        showButtons={false}
-                        scanStatusData={this.state.scanStatusData}
-                         navigation={this.props.navigation}
-                    />
-
-                        <View style={styles.viewnxtBtnStyle1}>
-                            <ButtonComponent
-                            customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
-                            btnText={Strings.backToDashboard.toUpperCase()}
-                            activeOpacity={0.8}
-                            onPress={() => this.props.navigation.navigate('selectDetails')}
-                            />
-                            
-                            <ButtonComponent
-                            customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
-                            btnText={Strings.Back.toUpperCase()}
-                            activeOpacity={0.8}
-                            onPress={() => this.props.navigation.push('ScanHistory')}
-                            />
+                            <View style={styles.container1}>
+                                <Text style={[styles.header1TextStyle, { borderColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE, backgroundColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE, fontFamily: monospace_FF }]}>
+                                    {Strings.ongoing_scan}
+                                </Text>
                             </View>
-                            </ScrollView>
-                            :
-                            
-                            <View style={{ marginHorizontal:20, marginTop: 30, marginBottom: 40 }}>
+                            <ScanHistoryCard
+                                scanstatusbutton={true}
+                                themeColor1={this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE}
+                                showButtons={false}
+                                scanStatusData={this.state.scanStatusData}
+                                navigation={this.props.navigation}
+                            />
+
+                            <View style={styles.viewnxtBtnStyle1}>
+                                <ButtonComponent
+                                    customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+                                    btnText={Strings.backToDashboard.toUpperCase()}
+                                    activeOpacity={0.8}
+                                    onPress={() => this.props.navigation.navigate('selectDetails')}
+                                />
+
+                                <ButtonComponent
+                                    customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+                                    btnText={Strings.Back.toUpperCase()}
+                                    activeOpacity={0.8}
+                                    onPress={() => this.props.navigation.push('ScanHistory')}
+                                />
+                            </View>
+                        </ScrollView>
+                        :
+
+                        <View style={{ marginHorizontal: 20, marginTop: 30, marginBottom: 40 }}>
                             <DropDownMenu
                                 options={this.state.roiDataList}
                                 onSelect={(idx, value) => this.onDropDownSelect(idx, value)}
@@ -570,68 +607,85 @@ class MyScanComponent extends Component {
                                 defaultIndex={this.state.roiIndex}
                                 selectedData={this.state.selectedRoi}
                                 icon={require('../../assets/images/arrow_down.png')}
-                        />
+                            />
                         </View>
                 }
 
                 {
                     this.props.minimalFlag
                     &&
-                    <View style={{backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE, marginHorizontal:20, padding:6, borderRadius:10, paddingBottom:16, paddingTop:14}}>
+                    <View style={{ backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE, marginHorizontal: 20, padding: 6, borderRadius: 10, paddingBottom: 16, paddingTop: 14 }}>
                         <View style={styles.scanCardStyle}>
-                            <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle,{padding:"3.4%"}]}>
-                                <Text style={{fontFamily : monospace_FF}}>{BrandLabel&&BrandLabel.ScanCount ? BrandLabel.ScanCount : Strings.scan_status}</Text>
+                            <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle, { padding: "3.4%" }]}>
+                                <Text style={{ fontFamily: monospace_FF }}>{BrandLabel && BrandLabel.ScanCount ? BrandLabel.ScanCount : Strings.scan_status}</Text>
                             </View>
-                            <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle,{padding:"3.4%"}]}>
-                                <Text style={{fontFamily : monospace_FF}} >{scanStatusData}</Text>
+                            <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle, { padding: "3.4%" }]}>
+                                <Text style={{ fontFamily: monospace_FF }} >{scanStatusData}</Text>
                             </View>
                         </View>
 
                         <View style={styles.scanCardStyle}>
-                            <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle,{padding:"3.4%",borderBottomWidth:1}]}>
-                                <Text style={{fontFamily : monospace_FF}}>{BrandLabel&&BrandLabel.SaveCount ? BrandLabel.SaveCount : Strings.class_text}</Text>
+                            <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle, { padding: "3.4%", borderBottomWidth: 1 }]}>
+                                <Text style={{ fontFamily: monospace_FF }}>{BrandLabel && BrandLabel.SaveCount ? BrandLabel.SaveCount : Strings.class_text}</Text>
                             </View>
-                            <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle,{padding:"3.4%",borderBottomWidth:1}]}>
-                                <Text style={{fontFamily : monospace_FF}} >{saveStatusData}</Text>
+                            <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle, { padding: "3.4%", borderBottomWidth: 1 }]}>
+                                <Text style={{ fontFamily: monospace_FF }} >{saveStatusData}</Text>
                             </View>
                         </View>
 
-                             <View style={{alignItems:'center'}}>
+                        <View style={{ flexWrap: "wrap", flexDirection: "row", width: "100%", alignItems: "center", justifyContent: 'center', marginTop: 10 }}>
                             <ButtonComponent
-                                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: "#A9A9A9",height:30,width:"90%",marginHorizontal:0 }]}
+                                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: "#A9A9A9", height: 30, width: "45%", marginHorizontal: 0, marginRight: 10 }]}
+                                btnText={Strings.saved_data.toUpperCase()}
+                                activeOpacity={0.8}
+                                customBtnTextStyle={{ fontSize: 12 }}
+                                onPress={() => this.openScanModal("save")}
+                            />
+
+                            <ButtonComponent
+                                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: "#A9A9A9", height: 30, width: "45%", marginHorizontal: 0 }]}
                                 btnText={Strings.save_all_scan.toUpperCase()}
                                 activeOpacity={0.8}
-                                customBtnTextStyle={{fontSize: 12}}
+                                customBtnTextStyle={{ fontSize: 12 }}
                                 onPress={this.onPressSaveInDB}
                             />
-                              </View>
+
+                            <ButtonComponent
+                                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: "#A9A9A9", height: 30, width: "50%", marginHorizontal: 0 }]}
+                                btnText={Strings.scan_data.toUpperCase()}
+                                activeOpacity={0.8}
+                                customBtnTextStyle={{ fontSize: 12 }}
+                                onPress={() => this.openScanModal("scan")}
+                            />
                         </View>
+
+                    </View>
                 }
 
                 <View style={styles.bottomTabStyle}>
-                <View style={[{elevation:10,  backgroundColor: 'transparent', justifyContent: 'center',alignItems:'center' }]}>
-                    <TouchableOpacity style={[styles.subTabContainerStyle]}
-                        onPress={this.onScanClick}
-                    >
-                        <TouchableOpacity
-                            style={[styles.scanTabContainerStyle,]}
+                    <View style={[{ elevation: 10, backgroundColor: 'transparent', justifyContent: 'center', alignItems: 'center' }]}>
+                        <TouchableOpacity style={[styles.subTabContainerStyle]}
+                            onPress={this.onScanClick}
                         >
                             <TouchableOpacity
-                                style={[styles.scanSubTabContainerStyle, { backgroundColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+                                style={[styles.scanTabContainerStyle,]}
                             >
-                                <Image
-                                    source={Assets.ScanButton}
-                                    style={styles.tabIconStyle}
-                                    resizeMode={'contain'}
-                                />
+                                <TouchableOpacity
+                                    style={[styles.scanSubTabContainerStyle, { backgroundColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+                                >
+                                    <Image
+                                        source={Assets.ScanButton}
+                                        style={styles.tabIconStyle}
+                                        resizeMode={'contain'}
+                                    />
+                                </TouchableOpacity>
                             </TouchableOpacity>
-                        </TouchableOpacity>
-                        <Text style={styles.tabLabelStyle}>
-                            {Strings.scan_text}
-                        </Text>
+                            <Text style={styles.tabLabelStyle}>
+                                {Strings.scan_text}
+                            </Text>
 
-                    </TouchableOpacity>
-                </View>
+                        </TouchableOpacity>
+                    </View>
                 </View>
                 {
                     isLoading
@@ -642,11 +696,17 @@ class MyScanComponent extends Component {
                     />
                 }
                 <CustomPopup
-                title={"Message"}
-                ok_button={"Ok"}
-                bgColor={multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}
-            />
+                    title={"Message"}
+                    ok_button={"Ok"}
+                    bgColor={multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}
+                />
                 <ModalView modalVisible={modalStatus} modalMessage={modalMessage} />
+                <ScanDataModal setModalVisible={() => this.setScanModalDataVisible()} modalVisible={scanModalDataVisible}
+                    localstutlist={passDataToModal}
+                    minimalFlag={this.props.minimalFlag}
+                    savingStatus={savingStatus}
+                    bgColor={this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1: AppTheme.BLUE}
+                />
             </View>
         );
     }
@@ -656,7 +716,7 @@ const styles = {
     container1: {
         marginHorizontal: '4%',
         alignItems: 'center',
-         marginTop:10,
+        marginTop: 10,
     },
     onGoingContainer: {
         marginHorizontal: '4%',
@@ -679,14 +739,14 @@ const styles = {
         position: 'absolute',
         flexDirection: 'row',
         bottom: 0,
-        height:35,
+        height: 35,
         left: 0,
         right: 0,
         backgroundColor: AppTheme.WHITE,
         elevation: 10,
-        justifyContent:'center',
-        alignItems:'center'
-        
+        justifyContent: 'center',
+        alignItems: 'center'
+
     },
     subTabContainerStyle: {
         justifyContent: 'center',
@@ -714,7 +774,7 @@ const styles = {
         color: AppTheme.BLACK,
         letterSpacing: 1,
         fontWeight: 'bold',
-        fontFamily : monospace_FF
+        fontFamily: monospace_FF
     },
     scanTabContainerStyle: {
         width: 80,
@@ -733,20 +793,20 @@ const styles = {
         justifyContent: 'center',
         alignItems: 'center'
     },
-    nxtBtnStyle:{ marginHorizontal: 40,marginTop:8,marginBottom:20, borderRadius: 10 },
-   
+    nxtBtnStyle: { marginHorizontal: 40, marginTop: 8, marginBottom: 20, borderRadius: 10 },
+
     nxtBtnStyle1: {
-        marginTop:15,
-        width:'40%',
-        height:52,
+        marginTop: 15,
+        width: '40%',
+        height: 52,
         marginHorizontal: 5,
         bottom: 10,
         borderRadius: 10
     },
-    viewnxtBtnStyle1 : {
-        flexDirection:'row',
-        justifyContent:'center',
-        alignItems:'center'
+    viewnxtBtnStyle1: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     scanCardStyle: {
         flexDirection: 'row',
