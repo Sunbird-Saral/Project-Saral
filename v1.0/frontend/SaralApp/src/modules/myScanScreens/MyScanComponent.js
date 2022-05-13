@@ -707,7 +707,8 @@ class MyScanComponent extends Component {
                     minimalFlag={this.props.minimalFlag}
                     savingStatus={savingStatus}
                     bgColor={this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1: AppTheme.BLUE}
-                />
+                    navigation={this.props.navigation}
+              />
             </View>
         );
     }
