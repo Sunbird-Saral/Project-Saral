@@ -15,6 +15,7 @@ import { connect, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import APITransport from '../../flux/actions/transport/apitransport'
 import { dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF } from '../../utils/CommonUtils';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const ScanDataModal = ({
     bgColor,
@@ -179,14 +180,14 @@ const ScanDataModal = ({
             savingStatus == 'scan' ?
             <Text style={styles.scanStatus}>{Strings.scan_data}</Text>:
             <Text style={styles.scanStatus}>{Strings.saved_data}</Text>}
-
+              <ScrollView showsVerticalScrollIndicator ={false} >
                     <FlatList
                         data={presentStudentList}
                         renderItem={renderItem}
                         ListEmptyComponent={renderEmptyList}
-                        contentContainerStyle={{ marginTop: 30, flex: 1 }}
+                        contentContainerStyle={{ marginTop: 30, flex: 1,bottom:30 }}
                     />
-                
+                </ScrollView>
 
             </View>
 
