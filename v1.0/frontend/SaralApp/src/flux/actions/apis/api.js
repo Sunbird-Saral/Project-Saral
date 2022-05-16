@@ -2,6 +2,7 @@
  * base class for API object
  */
 import CONFIGS from '../../../configs/config';
+import { baseUrlConfigure } from '../../../configs/config';
 
 export default class API {
     constructor(method = 'POST', timeout = 30000, auth = false) {
@@ -18,7 +19,9 @@ export default class API {
     }
 
     apiEndPoint() {
-        return CONFIGS.BASE_URL;
+        // console.log('baseUrlConfigure>>>>>>>>>>>>>',baseUrlConfigure('Base_Url1'))
+        return baseUrlConfigure('Base_Url1')
+        
     }
     processResponse(res) {
         this.code       = res.code;
