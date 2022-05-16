@@ -82,7 +82,7 @@ const ScanDataModal = ({
 
     const renderEmptyList = () => { 
         return(
-            <View style={{justifyContent: 'center', alignItems:'center',flexGrow:1}}>
+            <View style={{justifyContent: 'center', alignItems:'center',flex:1}}>
                 <Text>No Data Available</Text>
             </View>
         )
@@ -135,7 +135,7 @@ const ScanDataModal = ({
                         data={presentStudentList}
                         renderItem={renderItem}
                         ListEmptyComponent={renderEmptyList}
-                        contentContainerStyle={{ marginTop: 30, flex: 1 }}
+                        contentContainerStyle={{  flexGrow: 1, paddingBottom: 40}}
                     />
                 
 
