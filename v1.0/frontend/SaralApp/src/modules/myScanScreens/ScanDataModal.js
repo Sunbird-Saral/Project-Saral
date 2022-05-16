@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, Modal, StyleSheet, Text, View ,TouchableOpacity,Image} from 'react-native';
+import { FlatList, Modal, StyleSheet, Text, View ,TouchableOpacity,Image,Share} from 'react-native';
 import AppTheme from '../../utils/AppTheme';
-import { monospace_FF } from '../../utils/CommonUtils';
 import { Assets } from '../../assets';
 import { getPresentAbsentStudent } from '../../utils/StorageUtils';
 import ScanStatusLocalList from '../ScanStatus/ScanStatusLocalList';
@@ -15,6 +14,8 @@ import { connect, useDispatch } from 'react-redux';
 //Redux
 import { bindActionCreators } from 'redux';
 import APITransport from '../../flux/actions/transport/apitransport'
+import { dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF } from '../../utils/CommonUtils';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const ScanDataModal = ({
     bgColor,
@@ -32,7 +33,9 @@ const ScanDataModal = ({
     const [presentStudentList, setPresentStudentList] = useState([]);
     const [unsavedstudentList, setUnsavedstudentList] = useState([]);
     const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.myScan[0]
-
+   
+    const data =(JSON.stringify(presentStudentList,null, 2))
+    const dispatch = useDispatch()
     useEffect(() => {
 
         if (savingStatus == 'scan') {
@@ -61,6 +64,41 @@ const ScanDataModal = ({
         setPresentStudentList(data)
     }
 
+    const callCustomModal = (title, message, isAvailable, func, cancel) => {
+        let data = {
+            title: title,
+            message: message,
+            isOkAvailable: isAvailable,
+            okFunc: func,
+            isCancel : cancel
+        }
+        dispatch(dispatchCustomModalStatus(true));
+        dispatch(dispatchCustomModalMessage(data));
+    }
+
+    const onShare = async () => {
+        try {
+          const result = await Share.share({
+            title: `Saral App v1.0 Marks JSON - Organization Id : ${loginData.data.school.schoolId} `,
+            message:
+                 `${(data ? data : '')}`
+          });
+          if (result.action === Share.sharedAction) {
+            if (result.activityType) {
+              // shared with activity type of result.activityType
+            } else {
+              // shared
+            }
+          } else if (result.action === Share.dismissedAction) {
+            // dismissed
+          }
+        } catch (error) {
+            console.log(error.message);
+            callCustomModal(Strings.message_text,Strings.shareDataExceed,false);
+        //   alert(error.message);
+        }
+      };
+   
 
     const renderItem = ({ item, index }) => {
         return <ScanStatusLocalList
@@ -128,16 +166,28 @@ const ScanDataModal = ({
                     </Text>
                 </View>
             }
-           
+
+          {presentStudentList.length > 0 && savingStatus == 'scan' &&
+            <View>
+            <TouchableOpacity onPress={()=>onShare()} style={{width:40,height:40,marginRight:20,marginTop:10}}>
+                    <Image style={{ height: 25, width: 25, marginHorizontal: 15, marginVertical: 20 }} source={Assets.Share} />
+                </TouchableOpacity>
+                 
+                  </View>
+                }
             </View>
-                
+            {
+            savingStatus == 'scan' ?
+            <Text style={styles.scanStatus}>{Strings.scan_data}</Text>:
+            <Text style={styles.scanStatus}>{Strings.saved_data}</Text>}
+              <ScrollView showsVerticalScrollIndicator ={false} >
                     <FlatList
                         data={presentStudentList}
                         renderItem={renderItem}
                         ListEmptyComponent={renderEmptyList}
-                        contentContainerStyle={{ marginTop: 30, flex: 1 }}
+                        contentContainerStyle={{ marginTop: 30, flex: 1,bottom:30 }}
                     />
-                
+                </ScrollView>
 
             </View>
 
@@ -166,5 +216,13 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'white',
         top:30
-    }
+    },
+    scanStatus: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        marginTop: 15,
+        textAlign: 'center',
+        paddingBottom: 10,
+        fontFamily : monospace_FF
+    },
 });
