@@ -427,8 +427,8 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                             //Handling Multi Choice OMR Layout predictions
                             String prediction =mPredictedOMRs.get(roiId);
                             if(prediction!=null && prediction.equals("1")){
-                                if (cell.has("mcqOptions")) {
-                                   JSONArray mcqArray = cells.getJSONObject(i).getJSONArray("mcqOptions");
+                                if (cell.has("omrOptions")) {
+                                   JSONArray mcqArray = cells.getJSONObject(i).getJSONArray("omrOptions");
                                     result.put("prediction", mcqArray.getString(j));
                                     result.put("confidence", new Double(1.00));
                                     countOMRChoice++;
