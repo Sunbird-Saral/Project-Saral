@@ -47629,10 +47629,10 @@
                         "value": "QUESTION 1"
                     },
                     "validate": {
-                        "regExp": "[0-5]",
-                        "errorMsg": "Omr result should be between 0 to 5"
+                        "regExp": "[A-Za-z]",
+                        "errorMsg": "Please enter proper alphabet..."
                     },
-                    "mcqOptions": ["A","B","C","D","E","F"]
+                    "omrOptions": ["A","B","C","D","E","F"]
                 },
                 {
                     "cellId": "3",
@@ -47718,10 +47718,10 @@
                         "value": "QUESTION 2"
                     },
                     "validate": {
-                        "regExp": "[0-5]",
-                        "errorMsg": "Omr result should be between 0 to 5"
+                        "regExp": "[A-Za-z]",
+                        "errorMsg": "Please enter proper alphabet..."
                     },
-                    "mcqOptions": ["A","B","C","D","E","F"]
+                    "omrOptions": ["A","B","C","D","E","F"]
                 },
                 {
                     "cellId": "4",
@@ -47807,10 +47807,10 @@
                         "value": "QUESTION 3"
                     },
                     "validate": {
-                        "regExp": "[0-5]",
-                        "errorMsg": "Omr result should be between 0 to 5"
+                        "regExp": "[A-Za-z]",
+                        "errorMsg": "Please enter proper alphabet..."
                     },
-                    "mcqOptions": ["A","B","C","D","E","F"]
+                    "omrOptions": ["A","B","C","D","E","F"]
                 },
                 {
                     "cellId": "5",
@@ -47896,10 +47896,10 @@
                         "value": "QUESTION 4"
                     },
                     "validate": {
-                        "regExp": "[0-5]",
-                        "errorMsg": "Omr result should be between 0 to 5"
+                        "regExp": "[A-Za-z]",
+                        "errorMsg": "Please enter proper alphabet..."
                     },
-                    "mcqOptions": ["A","B","C","D","E","F"]
+                    "omrOptions": ["A","B","C","D","E","F"]
                 },
                 {
                     "cellId": "6",
@@ -47985,10 +47985,10 @@
                         "value": "QUESTION 5"
                     },
                     "validate": {
-                        "regExp": "[0-5]",
-                        "errorMsg": "Omr result should be between 0 to 5"
+                        "regExp": "[A-Za-z]",
+                        "errorMsg": "Please enter proper alphabet..."
                     },
-                    "mcqOptions": ["A","B","C","D","E","F"]
+                    "omrOptions": ["A","B","C","D","E","F"]
                 }
             ]
         }
