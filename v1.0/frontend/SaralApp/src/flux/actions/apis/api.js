@@ -19,9 +19,8 @@ export default class API {
     }
 
     apiEndPoint() {
-        // console.log('baseUrlConfigure>>>>>>>>>>>>>',baseUrlConfigure('Base_Url1'))
-        return baseUrlConfigure('Base_Url1')
-        
+          return baseUrlConfigure('Base_Url1')
+   
     }
     processResponse(res) {
         this.code       = res.code;
