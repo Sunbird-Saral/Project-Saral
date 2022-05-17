@@ -778,7 +778,7 @@ const ScannedDetailsComponent = ({
             let regexValue = regxValidation(value.cellId)
             ocrLocalResponse.layout.cells.forEach(element => {
                 if (element.cellId == value.cellId) {
-                    if (!regexValue[0]) {
+                    if (!regexValue[0] && text.length > 0) {
                         showErrorMessage(regexValue[1] ? regexValue[1] : defaultValidateError)
                     }
 
@@ -802,7 +802,7 @@ const ScannedDetailsComponent = ({
             let regexValue = regxValidation(value.cellId)
             ocrLocalResponse.layout.cells.forEach(element => {
                 if (element.cellId == value.cellId) {
-                    if (!regexValue[0]) {
+                    if (!regexValue[0] && text.length > 0) {
                         showErrorMessage(regexValue[1] ? regexValue[1] : defaultValidateError )
                     }
                 }
@@ -856,8 +856,12 @@ const ScannedDetailsComponent = ({
             element.rois.forEach((data) => {
                 if (data.extractionMethod == CELL_OMR) {
                     totalRois = isMultiple ? element.rois.length : !isMultipleStudent && element.rois.length == 1 ? element.rois.length : element.rois.length - 1
+                    let regexValue = regxValidation(element.cellId)
                     if (totalRois < element.consolidatedPrediction) {
                         validationCellOmr = true
+                    } else if(element.hasOwnProperty("omrOptions") && !regexValue[0]){
+                        validationCellOmr = true
+                        totalRois = regexValue[1]
                     }
                 }
             })
@@ -896,7 +900,11 @@ const ScannedDetailsComponent = ({
             showErrorMessage(Strings.please_correct_marks_data)
         }
         else if (cellOmrValidation[0]) {
-            showErrorMessage(`omr value should be 0 to ${cellOmrValidation[1]}`)
+            if (typeof(cellOmrValidation[1]) == 'number') {
+                showErrorMessage(`omr value should be 0 to ${cellOmrValidation[1]}`)
+            } else {
+                showErrorMessage(`${cellOmrValidation[1]}`)
+            }
         }
         else if (!studentValid && !toggleCheckBox) {
             showErrorMessage(Strings.please_correct_student_id)
@@ -1376,7 +1384,7 @@ const ScannedDetailsComponent = ({
                                                                 rowTitle={element.consolidatedPrediction}
                                                                 rowBorderColor={markBorderOnCell(element)}
                                                                 editable={true}
-                                                                keyboardType={'number-pad'}
+                                                                keyboardType={element.hasOwnProperty("omrOptions") ?  'name' : 'number-pad'}
                                                                 maxLength={lengthAccordingSheet(element)}
                                                                 onChangeText={(text) => {
                                                                     handleTextChange(text.trim(), index, newArrayValue, element)
