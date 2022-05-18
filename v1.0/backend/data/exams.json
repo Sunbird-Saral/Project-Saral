@@ -12411,5 +12411,42 @@
     ],
     "examId": 30,
     "schoolId": "a001"
+  },
+  {
+    "subject": "Hindi",
+    "examLO": "Hindi",
+    "classId": "8",
+    "examDate": "16/05/2022",
+    "totalMarks": 20,
+    "type": "omr options",
+    "questions": [
+      {
+        "questionId": "QUESTION1",
+        "indicatorTitle": "L0-1",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION2",
+        "indicatorTitle": "L0-2",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION3",
+        "indicatorTitle": "L0-3",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION4",
+        "indicatorTitle": "L0-4",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION5",
+        "indicatorTitle": "L0-5",
+        "questionMarks": "1"
+      }
+    ],
+    "examId": 31,
+    "schoolId": "demouser"
   }
 ]
