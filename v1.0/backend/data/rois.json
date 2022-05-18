@@ -47429,7 +47429,7 @@
 {
     "subject": "Hindi",
     "classId": "8",
-    "type": "mcq options",
+    "type": "omr options",
     "roi": {
         "layout": {
             "version": "1.0",
@@ -47629,8 +47629,8 @@
                         "value": "QUESTION 1"
                     },
                     "validate": {
-                        "regExp": "[A-Za-z]",
-                        "errorMsg": "Please enter proper alphabet..."
+                        "regExp": "[A-Z]",
+                        "errorMsg": "Please enter valid option (A B C D E F)"
                     },
                     "omrOptions": ["A","B","C","D","E","F"]
                 },
@@ -47718,8 +47718,8 @@
                         "value": "QUESTION 2"
                     },
                     "validate": {
-                        "regExp": "[A-Za-z]",
-                        "errorMsg": "Please enter proper alphabet..."
+                        "regExp": "[A-Z]",
+                        "errorMsg": "Please enter valid option (A B C D E F)"
                     },
                     "omrOptions": ["A","B","C","D","E","F"]
                 },
@@ -47807,8 +47807,8 @@
                         "value": "QUESTION 3"
                     },
                     "validate": {
-                        "regExp": "[A-Za-z]",
-                        "errorMsg": "Please enter proper alphabet..."
+                        "regExp": "[A-Z]",
+                        "errorMsg": "Please enter valid option (A B C D E F)"
                     },
                     "omrOptions": ["A","B","C","D","E","F"]
                 },
@@ -47896,8 +47896,8 @@
                         "value": "QUESTION 4"
                     },
                     "validate": {
-                        "regExp": "[A-Za-z]",
-                        "errorMsg": "Please enter proper alphabet..."
+                        "regExp": "[A-Z]",
+                        "errorMsg": "Please enter valid option (A B C D E F)"
                     },
                     "omrOptions": ["A","B","C","D","E","F"]
                 },
@@ -47985,8 +47985,8 @@
                         "value": "QUESTION 5"
                     },
                     "validate": {
-                        "regExp": "[A-Za-z]",
-                        "errorMsg": "Please enter proper alphabet..."
+                        "regExp": "[A-Z]",
+                        "errorMsg": "Please enter valid option (A B C D E F)"
                     },
                     "omrOptions": ["A","B","C","D","E","F"]
                 }

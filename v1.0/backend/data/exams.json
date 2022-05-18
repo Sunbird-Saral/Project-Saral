@@ -12418,7 +12418,7 @@
     "classId": "8",
     "examDate": "16/05/2022",
     "totalMarks": 20,
-    "type": "mcq options",
+    "type": "omr options",
     "questions": [
       {
         "questionId": "QUESTION1",
