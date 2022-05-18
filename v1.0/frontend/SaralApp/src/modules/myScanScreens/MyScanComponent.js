@@ -642,13 +642,6 @@ class MyScanComponent extends Component {
                                 onPress={() => this.openScanModal("save")}
                             />
 
-                            <ButtonComponent
-                                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: "#A9A9A9", height: 30, width: "45%", marginHorizontal: 0 }]}
-                                btnText={Strings.save_all_scan.toUpperCase()}
-                                activeOpacity={0.8}
-                                customBtnTextStyle={{ fontSize: 12 }}
-                                onPress={this.onPressSaveInDB}
-                            />
 
                             <ButtonComponent
                                 customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: "#A9A9A9", height: 30, width: "50%", marginHorizontal: 0 }]}
@@ -656,6 +649,14 @@ class MyScanComponent extends Component {
                                 activeOpacity={0.8}
                                 customBtnTextStyle={{ fontSize: 12 }}
                                 onPress={() => this.openScanModal("scan")}
+                            />
+
+                        <ButtonComponent
+                                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: "#A9A9A9", height: 30, width: "45%", marginHorizontal: 0 }]}
+                                btnText={Strings.save_all_scan.toUpperCase()}
+                                activeOpacity={0.8}
+                                customBtnTextStyle={{ fontSize: 12 }}
+                                onPress={this.onPressSaveInDB}
                             />
                         </View>
 
@@ -706,7 +707,8 @@ class MyScanComponent extends Component {
                     minimalFlag={this.props.minimalFlag}
                     savingStatus={savingStatus}
                     bgColor={this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1: AppTheme.BLUE}
-                />
+                    navigation={this.props.navigation}
+              />
             </View>
         );
     }
