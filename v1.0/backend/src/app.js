@@ -10,7 +10,8 @@ const roiRouter = require('./routers/roi.route')
 const brandRouter = require('./routers/brand.route')
 
 const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./swagger-saral-frontend');
+const swaggerDocument = require('./swagger-saral-frontend.json');
+const swaggerDocument2 = require('./swagger-saral-maintenance.json')
 
 const app = express()
 
@@ -32,6 +33,6 @@ app.use(examRouter)
 app.use(markRouter)
 app.use(roiRouter)
 app.use(brandRouter)
-app.use('/api-docs/saral/frontend',swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
+app.use("/api-docs/saral/frontend", swaggerUi.serve, (...args) => swaggerUi.setup(swaggerDocument)(...args));
+app.use("/api-docs/saral/maintenance", swaggerUi.serve, (...args) => swaggerUi.setup(swaggerDocument2)(...args));
 module.exports = app
