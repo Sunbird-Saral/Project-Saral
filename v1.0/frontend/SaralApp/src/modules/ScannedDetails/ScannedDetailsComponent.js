@@ -859,8 +859,8 @@ const ScannedDetailsComponent = ({
                     let regexValue = regxValidation(element.cellId)
                     if (totalRois < element.consolidatedPrediction) {
                         validationCellOmr = true
-                    } else if(element.hasOwnProperty("omrOptions") && !regexValue[0]){
-                        validationCellOmr = true
+                    } else if(element.hasOwnProperty("omrOptions")){
+                        validationCellOmr = !regexValue[0]
                         totalRois = regexValue[1]
                     }
                 }
