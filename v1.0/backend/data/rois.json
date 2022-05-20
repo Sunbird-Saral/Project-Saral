@@ -42566,8 +42566,10 @@
                             "value": "QUESTION 5"
                         },
                         "validate": {
-                            "regExp": ""
-                        }
+                            "regExp": "[A-Z]",
+                            "errorMsg": "Please enter valid option (A B C D E F G)"
+                        },
+                        "omrOptions": ["A","B","C","D","E","F","G"]
                     },
                     {
                         "cellId": "7",
