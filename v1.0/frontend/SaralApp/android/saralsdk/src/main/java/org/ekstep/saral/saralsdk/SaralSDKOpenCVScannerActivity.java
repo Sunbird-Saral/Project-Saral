@@ -428,8 +428,8 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                             String prediction =mPredictedOMRs.get(roiId);
                             if(prediction!=null && prediction.equals("1")){
                                 if (cell.has("omrOptions")) {
-                                   JSONArray mcqArray = cells.getJSONObject(i).getJSONArray("omrOptions");
-                                    result.put("prediction", mcqArray.getString(j));
+                                   JSONArray omrOption = cells.getJSONObject(i).getJSONArray("omrOptions");
+                                    result.put("prediction", omrOption.getString(j));
                                     result.put("confidence", new Double(1.00));
                                     countOMRChoice++;
                                     
