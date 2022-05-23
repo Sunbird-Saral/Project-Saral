@@ -42082,6 +42082,11 @@
         "subject": "0",
         "classId": "0",
         "type": "water level",
+        "threshold": {
+            "minWidth": 900,
+            "minHeight": 600,
+            "detectionRadius": 12
+        },
         "roi": {
             "layout": {
                 "version": "1.0",
