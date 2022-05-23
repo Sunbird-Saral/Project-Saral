@@ -170,7 +170,7 @@ android {
             //println project.hasProperty('MYAPP_RELEASE_STORE_FILE')
             //println signingConfigs.release
 
-            //signingConfig signingConfigs.release
+            signingConfig signingConfigs.release
             //signingConfig signingConfigs.debug
       
             // shrinkResources enableProguardInReleaseBuilds
