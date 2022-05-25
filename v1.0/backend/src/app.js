@@ -1,6 +1,9 @@
 const express = require('express')
 require('./db/mongoose')
 var path = require('path');
+const fs = require('fs')
+const yaml = require('js-yaml');
+const swaggerUi = require('swagger-ui-express');
 const schoolRouter = require('./routers/school.route')
 const studentRouter = require('./routers/student.route')
 const classRouter = require('./routers/class.route')
@@ -9,10 +12,11 @@ const markRouter = require('./routers/mark.route')
 const roiRouter = require('./routers/roi.route')
 const brandRouter = require('./routers/brand.route')
 
-const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./swagger-saral-frontend.json');
-const swaggerDocument2 = require('./swagger-saral-maintenance.json')
+const spec = fs.readFileSync(`${__dirname}/swagger-saral-frontend.yaml`, 'utf-8');
+const spec2 = fs.readFileSync(`${__dirname}/swagger-saral-maintenance.yaml`, 'utf-8');
 
+const swaggerDocument = yaml.load(spec);
+const swaggerDocument2 = yaml.load(spec2);
 const app = express()
 
 const loggerMiddleware = (req, res, next) => {
