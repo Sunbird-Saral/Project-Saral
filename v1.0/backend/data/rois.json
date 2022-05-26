@@ -42087,8 +42087,6 @@
                 "version": "1.0",
                 "name": "ANY1S30QMULTICHOICE Exam Sheet Form",
                 "threshold": {
-                    "minWidth" : 890,
-                    "minHeight": 710,
                     "detectionRadius":12
                 },
                 "cells": [
