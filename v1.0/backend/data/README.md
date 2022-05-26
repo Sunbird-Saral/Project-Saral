@@ -9,6 +9,10 @@ First you need to come under docker container
 for deleting current data in database
 *  node ./data/import-data.js --delete
 
+# swagger documentation
+$BASE_URL/api-docs/saral/frontend/
+$BASE_URL/api-docs/saral/maintenance/
+
 # state:- UP
 
 ## schoolId:u001
