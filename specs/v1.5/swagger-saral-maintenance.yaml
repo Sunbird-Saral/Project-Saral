@@ -4,8 +4,6 @@ info:
   description: "Store School information"
   version: "1.0.0"
   title: "SARAL APIs "
-host: "store.swagger.io"
-basePath: "/v1.5"
 tags:
 - name: "School"
 - name: "Student"
