@@ -13,6 +13,11 @@ for deleting current data in database
 $BASE_URL/api-docs/saral/frontend/
 $BASE_URL/api-docs/saral/maintenance/
 
+Below steps to be executed before running docker build command in Jenkinsfile-backend                                  
+cp ../../specs/v1.5/swagger-saral-maintenance.yaml .
+cp ../../specs/v1.5/swagger-saral-frontend.yaml .
+cp ../../specs/v1.5/swagger-saral-apidoc.yaml .
+
 # state:- UP
 
 ## schoolId:u001
