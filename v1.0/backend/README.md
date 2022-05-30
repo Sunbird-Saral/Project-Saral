@@ -1,3 +1,9 @@
+# Below steps to be executed before running docker build command in Jenkinsfile-backend   
+
+>> cp ../../specs/v1.5/swagger-saral-maintenance.yaml ./src
+>> cp ../../specs/v1.5/swagger-saral-frontend.yaml ./src
+>> cp ../../specs/v1.5/swagger-saral-apidoc.yaml ./src
+
 # Saral Backend APIs Build #
 
 * docker build . -t saral-backend:1.0-latest
@@ -51,3 +57,7 @@
 
 >> `node ./data/import-data.js --delete`
 >> `node ./data/import-data.js --import`
+
+# swagger documentation
+$BASE_URL/api-docs/saral/frontend/
+$BASE_URL/api-docs/saral/maintenance/
