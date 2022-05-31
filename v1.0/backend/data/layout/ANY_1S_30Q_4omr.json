@@ -1,0 +1,1998 @@
+{
+    "layout": {
+        "version": "1.0",
+        "name": "ANY1S30QOMRMULTICHOICE Exam Sheet Form",
+        "cells": [
+            {
+                "cellId": "1",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "1",
+                        "index": 0,
+                        "rect": {
+                            "top": 27,
+                            "left": 108,
+                            "bottom": 55,
+                            "right": 137
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBER1_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "2",
+                        "index": 1,
+                        "rect": {
+                            "top": 27,
+                            "left": 138,
+                            "bottom": 54,
+                            "right": 167
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBER1_3",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "3",
+                        "index": 2,
+                        "rect": {
+                            "top": 27,
+                            "left": 168,
+                            "bottom": 54,
+                            "right": 195
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBER1_4",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "4",
+                        "index": 3,
+                        "rect": {
+                            "top": 27,
+                            "left": 196,
+                            "bottom": 53,
+                            "right": 224
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBER1_5",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "5",
+                        "index": 4,
+                        "rect": {
+                            "top": 28,
+                            "left": 225,
+                            "bottom": 54,
+                            "right": 254
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBER1_6",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "6",
+                        "index": 5,
+                        "rect": {
+                            "top": 27,
+                            "left": 256,
+                            "bottom": 54,
+                            "right": 282
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBER1_7",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "7",
+                        "index": 6,
+                        "rect": {
+                            "top": 27,
+                            "left": 284,
+                            "bottom": 54,
+                            "right": 311
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 1
+                },
+                "format": {
+                    "name": "ROLLNUMBER",
+                    "value": "ROLLNUMBER"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "2",
+                "rois": [
+                    {
+                        "annotationTags": "QUESTION1_1",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "8",
+                        "index": 0,
+                        "rect": {
+                            "top": 129,
+                            "left": 98,
+                            "bottom": 143,
+                            "right": 113
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION1_2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "9",
+                        "index": 1,
+                        "rect": {
+                            "top": 129,
+                            "left": 130,
+                            "bottom": 144,
+                            "right": 145
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION1_3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "10",
+                        "index": 2,
+                        "rect": {
+                            "top": 129,
+                            "left": 161,
+                            "bottom": 144,
+                            "right": 177
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION1_4",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "11",
+                        "index": 3,
+                        "rect": {
+                            "top": 129,
+                            "left": 195,
+                            "bottom": 144,
+                            "right": 209
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 2
+                },
+                "format": {
+                    "name": "QUESTION1",
+                    "value": "QUESTION 1"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "3",
+                "rois": [
+                    {
+                        "annotationTags": "QUESTION2_1",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "12",
+                        "index": 0,
+                        "rect": {
+                            "top": 163,
+                            "left": 98,
+                            "bottom": 177,
+                            "right": 112
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION2_2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "13",
+                        "index": 1,
+                        "rect": {
+                            "top": 163,
+                            "left": 130,
+                            "bottom": 178,
+                            "right": 145
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION2_3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "14",
+                        "index": 2,
+                        "rect": {
+                            "top": 163,
+                            "left": 162,
+                            "bottom": 178,
+                            "right": 177
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION2_4",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "15",
+                        "index": 3,
+                        "rect": {
+                            "top": 162,
+                            "left": 194,
+                            "bottom": 178,
+                            "right": 210
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 3
+                },
+                "format": {
+                    "name": "QUESTION2",
+                    "value": "QUESTION 2"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "4",
+                "rois": [
+                    {
+                        "annotationTags": "QUESTION3_1",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "16",
+                        "index": 0,
+                        "rect": {
+                            "top": 197,
+                            "left": 97,
+                            "bottom": 211,
+                            "right": 113
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION3_2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "17",
+                        "index": 1,
+                        "rect": {
+                            "top": 197,
+                            "left": 130,
+                            "bottom": 212,
+                            "right": 145
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION3_3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "18",
+                        "index": 2,
+                        "rect": {
+                            "top": 197,
+                            "left": 163,
+                            "bottom": 213,
+                            "right": 178
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION3_4",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "19",
+                        "index": 3,
+                        "rect": {
+                            "top": 197,
+                            "left": 194,
+                            "bottom": 212,
+                            "right": 209
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 4
+                },
+                "format": {
+                    "name": "QUESTION3",
+                    "value": "QUESTION 3"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "5",
+                "rois": [
+                    {
+                        "annotationTags": "QUESTION4_1",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "20",
+                        "index": 0,
+                        "rect": {
+                            "top": 232,
+                            "left": 97,
+                            "bottom": 245,
+                            "right": 113
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION4_2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "21",
+                        "index": 1,
+                        "rect": {
+                            "top": 232,
+                            "left": 130,
+                            "bottom": 246,
+                            "right": 144
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION4_3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "22",
+                        "index": 2,
+                        "rect": {
+                            "top": 231,
+                            "left": 162,
+                            "bottom": 246,
+                            "right": 176
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION4_4",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "23",
+                        "index": 3,
+                        "rect": {
+                            "top": 231,
+                            "left": 195,
+                            "bottom": 247,
+                            "right": 209
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 5
+                },
+                "format": {
+                    "name": "QUESTION4",
+                    "value": "QUESTION 4"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "6",
+                "rois": [
+                    {
+                        "annotationTags": "QUESTION5_1",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "24",
+                        "index": 0,
+                        "rect": {
+                            "top": 265,
+                            "left": 98,
+                            "bottom": 280,
+                            "right": 113
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION5_2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "25",
+                        "index": 1,
+                        "rect": {
+                            "top": 264,
+                            "left": 130,
+                            "bottom": 280,
+                            "right": 145
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION5_3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "26",
+                        "index": 2,
+                        "rect": {
+                            "top": 264,
+                            "left": 162,
+                            "bottom": 280,
+                            "right": 176
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION5_4",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "27",
+                        "index": 3,
+                        "rect": {
+                            "top": 265,
+                            "left": 194,
+                            "bottom": 281,
+                            "right": 209
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 6
+                },
+                "format": {
+                    "name": "QUESTION5",
+                    "value": "QUESTION 5"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "7",
+                "rois": [
+                    {
+                        "annotationTags": "QUESTION6_1",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "28",
+                        "index": 0,
+                        "rect": {
+                            "top": 299,
+                            "left": 97,
+                            "bottom": 314,
+                            "right": 113
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION6_2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "29",
+                        "index": 1,
+                        "rect": {
+                            "top": 298,
+                            "left": 130,
+                            "bottom": 314,
+                            "right": 145
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION6_3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "30",
+                        "index": 2,
+                        "rect": {
+                            "top": 299,
+                            "left": 162,
+                            "bottom": 314,
+                            "right": 178
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION6_4",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "31",
+                        "index": 3,
+                        "rect": {
+                            "top": 299,
+                            "left": 194,
+                            "bottom": 314,
+                            "right": 209
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 7
+                },
+                "format": {
+                    "name": "QUESTION6",
+                    "value": "QUESTION 6"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "8",
+                "rois": [
+                    {
+                        "annotationTags": "QUESTION7_1",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "32",
+                        "index": 0,
+                        "rect": {
+                            "top": 333,
+                            "left": 99,
+                            "bottom": 347,
+                            "right": 113
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION7_2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "33",
+                        "index": 1,
+                        "rect": {
+                            "top": 334,
+                            "left": 131,
+                            "bottom": 348,
+                            "right": 145
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION7_3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "34",
+                        "index": 2,
+                        "rect": {
+                            "top": 334,
+                            "left": 163,
+                            "bottom": 349,
+                            "right": 177
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION7_4",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "35",
+                        "index": 3,
+                        "rect": {
+                            "top": 334,
+                            "left": 195,
+                            "bottom": 350,
+                            "right": 209
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 8
+                },
+                "format": {
+                    "name": "QUESTION7",
+                    "value": "QUESTION 7"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "9",
+                "rois": [
+                    {
+                        "annotationTags": "QUESTION8_1",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "36",
+                        "index": 0,
+                        "rect": {
+                            "top": 368,
+                            "left": 98,
+                            "bottom": 382,
+                            "right": 114
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION8_2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "37",
+                        "index": 1,
+                        "rect": {
+                            "top": 368,
+                            "left": 131,
+                            "bottom": 382,
+                            "right": 145
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION8_3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "38",
+                        "index": 2,
+                        "rect": {
+                            "top": 368,
+                            "left": 163,
+                            "bottom": 383,
+                            "right": 177
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION8_4",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "39",
+                        "index": 3,
+                        "rect": {
+                            "top": 367,
+                            "left": 195,
+                            "bottom": 382,
+                            "right": 210
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 9
+                },
+                "format": {
+                    "name": "QUESTION8",
+                    "value": "QUESTION 8"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "10",
+                "rois": [
+                    {
+                        "annotationTags": "QUESTION9_1",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "40",
+                        "index": 0,
+                        "rect": {
+                            "top": 402,
+                            "left": 99,
+                            "bottom": 417,
+                            "right": 113
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION9_2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "41",
+                        "index": 1,
+                        "rect": {
+                            "top": 402,
+                            "left": 131,
+                            "bottom": 417,
+                            "right": 145
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION9_3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "42",
+                        "index": 2,
+                        "rect": {
+                            "top": 402,
+                            "left": 163,
+                            "bottom": 418,
+                            "right": 178
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION9_4",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "43",
+                        "index": 3,
+                        "rect": {
+                            "top": 402,
+                            "left": 195,
+                            "bottom": 417,
+                            "right": 209
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 10
+                },
+                "format": {
+                    "name": "QUESTION9",
+                    "value": "QUESTION 9"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "11",
+                "rois": [
+                    {
+                        "annotationTags": "QUESTION10_1",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "44",
+                        "index": 0,
+                        "rect": {
+                            "top": 437,
+                            "left": 99,
+                            "bottom": 451,
+                            "right": 113
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION10_2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "45",
+                        "index": 1,
+                        "rect": {
+                            "top": 437,
+                            "left": 131,
+                            "bottom": 452,
+                            "right": 145
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION10_3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "46",
+                        "index": 2,
+                        "rect": {
+                            "top": 437,
+                            "left": 164,
+                            "bottom": 453,
+                            "right": 177
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION10_4",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "47",
+                        "index": 3,
+                        "rect": {
+                            "top": 435,
+                            "left": 195,
+                            "bottom": 451,
+                            "right": 210
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 11
+                },
+                "format": {
+                    "name": "QUESTION10",
+                    "value": "QUESTION 10"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "12",
+                "rois": [
+                    {
+                        "annotationTags": "QUESTION11_1",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "48",
+                        "index": 0,
+                        "rect": {
+                            "top": 128,
+                            "left": 299,
+                            "bottom": 143,
+                            "right": 312
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION11_2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "49",
+                        "index": 1,
+                        "rect": {
+                            "top": 128,
+                            "left": 331,
+                            "bottom": 144,
+                            "right": 345
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION11_3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "50",
+                        "index": 2,
+                        "rect": {
+                            "top": 128,
+                            "left": 364,
+                            "bottom": 144,
+                            "right": 377
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION11_4",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "51",
+                        "index": 3,
+                        "rect": {
+                            "top": 128,
+                            "left": 396,
+                            "bottom": 144,
+                            "right": 410
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 12
+                },
+                "format": {
+                    "name": "QUESTION11",
+                    "value": "QUESTION 11"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "13",
+                "rois": [
+                    {
+                        "annotationTags": "QUESTION12_1",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "52",
+                        "index": 0,
+                        "rect": {
+                            "top": 163,
+                            "left": 299,
+                            "bottom": 177,
+                            "right": 313
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION12_2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "53",
+                        "index": 1,
+                        "rect": {
+                            "top": 164,
+                            "left": 330,
+                            "bottom": 179,
+                            "right": 346
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION12_3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "54",
+                        "index": 2,
+                        "rect": {
+                            "top": 164,
+                            "left": 363,
+                            "bottom": 178,
+                            "right": 379
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION12_4",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "55",
+                        "index": 3,
+                        "rect": {
+                            "top": 164,
+                            "left": 396,
+                            "bottom": 178,
+                            "right": 410
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 13
+                },
+                "format": {
+                    "name": "QUESTION12",
+                    "value": "QUESTION 12"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "14",
+                "rois": [
+                    {
+                        "annotationTags": "QUESTION13_1",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "56",
+                        "index": 0,
+                        "rect": {
+                            "top": 197,
+                            "left": 299,
+                            "bottom": 212,
+                            "right": 313
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION13_2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "57",
+                        "index": 1,
+                        "rect": {
+                            "top": 196,
+                            "left": 331,
+                            "bottom": 212,
+                            "right": 345
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION13_3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "58",
+                        "index": 2,
+                        "rect": {
+                            "top": 197,
+                            "left": 363,
+                            "bottom": 212,
+                            "right": 379
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION13_4",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "59",
+                        "index": 3,
+                        "rect": {
+                            "top": 198,
+                            "left": 395,
+                            "bottom": 212,
+                            "right": 410
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 14
+                },
+                "format": {
+                    "name": "QUESTION13",
+                    "value": "QUESTION 13"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "15",
+                "rois": [
+                    {
+                        "annotationTags": "QUESTION14_1",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "60",
+                        "index": 0,
+                        "rect": {
+                            "top": 232,
+                            "left": 298,
+                            "bottom": 246,
+                            "right": 313
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION14_2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "61",
+                        "index": 1,
+                        "rect": {
+                            "top": 231,
+                            "left": 331,
+                            "bottom": 245,
+                            "right": 346
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION14_3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "62",
+                        "index": 2,
+                        "rect": {
+                            "top": 232,
+                            "left": 363,
+                            "bottom": 246,
+                            "right": 378
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION14_4",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "63",
+                        "index": 3,
+                        "rect": {
+                            "top": 232,
+                            "left": 395,
+                            "bottom": 246,
+                            "right": 410
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 15
+                },
+                "format": {
+                    "name": "QUESTION14",
+                    "value": "QUESTION 14"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "16",
+                "rois": [
+                    {
+                        "annotationTags": "QUESTION15_1",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "64",
+                        "index": 0,
+                        "rect": {
+                            "top": 266,
+                            "left": 299,
+                            "bottom": 281,
+                            "right": 313
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION15_2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "65",
+                        "index": 1,
+                        "rect": {
+                            "top": 266,
+                            "left": 330,
+                            "bottom": 280,
+                            "right": 344
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION15_3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "66",
+                        "index": 2,
+                        "rect": {
+                            "top": 265,
+                            "left": 362,
+                            "bottom": 280,
+                            "right": 377
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION15_4",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "67",
+                        "index": 3,
+                        "rect": {
+                            "top": 265,
+                            "left": 394,
+                            "bottom": 280,
+                            "right": 409
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 16
+                },
+                "format": {
+                    "name": "QUESTION15",
+                    "value": "QUESTION 15"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "17",
+                "rois": [
+                    {
+                        "annotationTags": "QUESTION16_1",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "68",
+                        "index": 0,
+                        "rect": {
+                            "top": 299,
+                            "left": 297,
+                            "bottom": 314,
+                            "right": 312
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION16_2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "69",
+                        "index": 1,
+                        "rect": {
+                            "top": 299,
+                            "left": 331,
+                            "bottom": 315,
+                            "right": 345
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION16_3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "70",
+                        "index": 2,
+                        "rect": {
+                            "top": 298,
+                            "left": 363,
+                            "bottom": 315,
+                            "right": 377
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION16_4",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "71",
+                        "index": 3,
+                        "rect": {
+                            "top": 299,
+                            "left": 395,
+                            "bottom": 314,
+                            "right": 410
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 17
+                },
+                "format": {
+                    "name": "QUESTION16",
+                    "value": "QUESTION 16"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "18",
+                "rois": [
+                    {
+                        "annotationTags": "QUESTION17_1",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "72",
+                        "index": 0,
+                        "rect": {
+                            "top": 334,
+                            "left": 299,
+                            "bottom": 348,
+                            "right": 314
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION17_2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "73",
+                        "index": 1,
+                        "rect": {
+                            "top": 334,
+                            "left": 331,
+                            "bottom": 348,
+                            "right": 345
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION17_3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "74",
+                        "index": 2,
+                        "rect": {
+                            "top": 333,
+                            "left": 362,
+                            "bottom": 348,
+                            "right": 378
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION17_4",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "75",
+                        "index": 3,
+                        "rect": {
+                            "top": 333,
+                            "left": 395,
+                            "bottom": 348,
+                            "right": 410
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 18
+                },
+                "format": {
+                    "name": "QUESTION17",
+                    "value": "QUESTION 17"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "19",
+                "rois": [
+                    {
+                        "annotationTags": "QUESTION18_1",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "76",
+                        "index": 0,
+                        "rect": {
+                            "top": 368,
+                            "left": 299,
+                            "bottom": 382,
+                            "right": 313
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION18_2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "77",
+                        "index": 1,
+                        "rect": {
+                            "top": 368,
+                            "left": 330,
+                            "bottom": 382,
+                            "right": 345
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION18_3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "78",
+                        "index": 2,
+                        "rect": {
+                            "top": 368,
+                            "left": 363,
+                            "bottom": 382,
+                            "right": 378
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION18_4",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "79",
+                        "index": 3,
+                        "rect": {
+                            "top": 368,
+                            "left": 396,
+                            "bottom": 382,
+                            "right": 410
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 19
+                },
+                "format": {
+                    "name": "QUESTION18",
+                    "value": "QUESTION 18"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "20",
+                "rois": [
+                    {
+                        "annotationTags": "QUESTION19_1",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "80",
+                        "index": 0,
+                        "rect": {
+                            "top": 401,
+                            "left": 299,
+                            "bottom": 416,
+                            "right": 314
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION19_2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "81",
+                        "index": 1,
+                        "rect": {
+                            "top": 401,
+                            "left": 330,
+                            "bottom": 416,
+                            "right": 346
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION19_3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "82",
+                        "index": 2,
+                        "rect": {
+                            "top": 401,
+                            "left": 363,
+                            "bottom": 416,
+                            "right": 379
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION19_4",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "83",
+                        "index": 3,
+                        "rect": {
+                            "top": 401,
+                            "left": 396,
+                            "bottom": 416,
+                            "right": 410
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 20
+                },
+                "format": {
+                    "name": "QUESTION19",
+                    "value": "QUESTION 19"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "21",
+                "rois": [
+                    {
+                        "annotationTags": "QUESTION20_1",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "84",
+                        "index": 0,
+                        "rect": {
+                            "top": 435,
+                            "left": 299,
+                            "bottom": 451,
+                            "right": 314
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION20_2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "85",
+                        "index": 1,
+                        "rect": {
+                            "top": 436,
+                            "left": 330,
+                            "bottom": 451,
+                            "right": 345
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION20_3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "86",
+                        "index": 2,
+                        "rect": {
+                            "top": 435,
+                            "left": 363,
+                            "bottom": 451,
+                            "right": 378
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION20_4",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "87",
+                        "index": 3,
+                        "rect": {
+                            "top": 434,
+                            "left": 396,
+                            "bottom": 450,
+                            "right": 410
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 21
+                },
+                "format": {
+                    "name": "QUESTION20",
+                    "value": "QUESTION 20"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "22",
+                "rois": [
+                    {
+                        "annotationTags": "QUESTION21_1",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "88",
+                        "index": 0,
+                        "rect": {
+                            "top": 129,
+                            "left": 500,
+                            "bottom": 143,
+                            "right": 515
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION21_2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "89",
+                        "index": 1,
+                        "rect": {
+                            "top": 128,
+                            "left": 530,
+                            "bottom": 143,
+                            "right": 545
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION21_3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "90",
+                        "index": 2,
+                        "rect": {
+                            "top": 129,
+                            "left": 565,
+                            "bottom": 144,
+                            "right": 580
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION21_4",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "91",
+                        "index": 3,
+                        "rect": {
+                            "top": 128,
+                            "left": 598,
+                            "bottom": 144,
+                            "right": 612
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 22
+                },
+                "format": {
+                    "name": "QUESTION21",
+                    "value": "QUESTION 21"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "23",
+                "rois": [
+                    {
+                        "annotationTags": "QUESTION22_1",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "92",
+                        "index": 0,
+                        "rect": {
+                            "top": 162,
+                            "left": 501,
+                            "bottom": 177,
+                            "right": 515
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION22_2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "93",
+                        "index": 1,
+                        "rect": {
+                            "top": 163,
+                            "left": 533,
+                            "bottom": 178,
+                            "right": 547
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION22_3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "94",
+                        "index": 2,
+                        "rect": {
+                            "top": 163,
+                            "left": 565,
+                            "bottom": 178,
+                            "right": 580
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION22_4",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "95",
+                        "index": 3,
+                        "rect": {
+                            "top": 162,
+                            "left": 597,
+                            "bottom": 177,
+                            "right": 612
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 23
+                },
+                "format": {
+                    "name": "QUESTION22",
+                    "value": "QUESTION 22"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "24",
+                "rois": [
+                    {
+                        "annotationTags": "QUESTION23_1",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "96",
+                        "index": 0,
+                        "rect": {
+                            "top": 197,
+                            "left": 500,
+                            "bottom": 212,
+                            "right": 514
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION23_2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "97",
+                        "index": 1,
+                        "rect": {
+                            "top": 197,
+                            "left": 534,
+                            "bottom": 212,
+                            "right": 547
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION23_3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "98",
+                        "index": 2,
+                        "rect": {
+                            "top": 197,
+                            "left": 566,
+                            "bottom": 211,
+                            "right": 581
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION23_4",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "99",
+                        "index": 3,
+                        "rect": {
+                            "top": 196,
+                            "left": 597,
+                            "bottom": 211,
+                            "right": 612
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 24
+                },
+                "format": {
+                    "name": "QUESTION23",
+                    "value": "QUESTION 23"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "25",
+                "rois": [
+                    {
+                        "annotationTags": "QUESTION24_1",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "100",
+                        "index": 0,
+                        "rect": {
+                            "top": 232,
+                            "left": 501,
+                            "bottom": 246,
+                            "right": 514
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION24_2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "101",
+                        "index": 1,
+                        "rect": {
+                            "top": 232,
+                            "left": 533,
+                            "bottom": 246,
+                            "right": 547
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION24_3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "102",
+                        "index": 2,
+                        "rect": {
+                            "top": 232,
+                            "left": 566,
+                            "bottom": 246,
+                            "right": 580
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION24_4",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "103",
+                        "index": 3,
+                        "rect": {
+                            "top": 232,
+                            "left": 596,
+                            "bottom": 246,
+                            "right": 611
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 25
+                },
+                "format": {
+                    "name": "QUESTION24",
+                    "value": "QUESTION 24"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "26",
+                "rois": [
+                    {
+                        "annotationTags": "QUESTION25_1",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "104",
+                        "index": 0,
+                        "rect": {
+                            "top": 266,
+                            "left": 500,
+                            "bottom": 280,
+                            "right": 515
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION25_2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "105",
+                        "index": 1,
+                        "rect": {
+                            "top": 266,
+                            "left": 533,
+                            "bottom": 280,
+                            "right": 548
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION25_3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "106",
+                        "index": 2,
+                        "rect": {
+                            "top": 266,
+                            "left": 565,
+                            "bottom": 280,
+                            "right": 579
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION25_4",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "107",
+                        "index": 3,
+                        "rect": {
+                            "top": 265,
+                            "left": 597,
+                            "bottom": 280,
+                            "right": 611
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 26
+                },
+                "format": {
+                    "name": "QUESTION25",
+                    "value": "QUESTION 25"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "27",
+                "rois": [
+                    {
+                        "annotationTags": "QUESTION26_1",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "108",
+                        "index": 0,
+                        "rect": {
+                            "top": 301,
+                            "left": 500,
+                            "bottom": 315,
+                            "right": 514
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION26_2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "109",
+                        "index": 1,
+                        "rect": {
+                            "top": 300,
+                            "left": 533,
+                            "bottom": 315,
+                            "right": 547
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION26_3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "110",
+                        "index": 2,
+                        "rect": {
+                            "top": 300,
+                            "left": 564,
+                            "bottom": 315,
+                            "right": 580
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION26_4",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "111",
+                        "index": 3,
+                        "rect": {
+                            "top": 300,
+                            "left": 595,
+                            "bottom": 315,
+                            "right": 611
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 27
+                },
+                "format": {
+                    "name": "QUESTION26",
+                    "value": "QUESTION 26"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "28",
+                "rois": [
+                    {
+                        "annotationTags": "QUESTION27_1",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "112",
+                        "index": 0,
+                        "rect": {
+                            "top": 334,
+                            "left": 500,
+                            "bottom": 349,
+                            "right": 514
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION27_2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "113",
+                        "index": 1,
+                        "rect": {
+                            "top": 333,
+                            "left": 533,
+                            "bottom": 349,
+                            "right": 547
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION27_3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "114",
+                        "index": 2,
+                        "rect": {
+                            "top": 335,
+                            "left": 565,
+                            "bottom": 350,
+                            "right": 580
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION27_4",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "115",
+                        "index": 3,
+                        "rect": {
+                            "top": 334,
+                            "left": 596,
+                            "bottom": 349,
+                            "right": 611
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 28
+                },
+                "format": {
+                    "name": "QUESTION27",
+                    "value": "QUESTION 27"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "29",
+                "rois": [
+                    {
+                        "annotationTags": "QUESTION28_1",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "116",
+                        "index": 0,
+                        "rect": {
+                            "top": 367,
+                            "left": 499,
+                            "bottom": 382,
+                            "right": 514
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION28_2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "117",
+                        "index": 1,
+                        "rect": {
+                            "top": 367,
+                            "left": 532,
+                            "bottom": 383,
+                            "right": 547
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION28_3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "118",
+                        "index": 2,
+                        "rect": {
+                            "top": 368,
+                            "left": 564,
+                            "bottom": 384,
+                            "right": 579
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION28_4",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "119",
+                        "index": 3,
+                        "rect": {
+                            "top": 368,
+                            "left": 597,
+                            "bottom": 383,
+                            "right": 611
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 29
+                },
+                "format": {
+                    "name": "QUESTION28",
+                    "value": "QUESTION 28"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "30",
+                "rois": [
+                    {
+                        "annotationTags": "QUESTION29_1",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "120",
+                        "index": 0,
+                        "rect": {
+                            "top": 402,
+                            "left": 500,
+                            "bottom": 416,
+                            "right": 514
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION29_2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "121",
+                        "index": 1,
+                        "rect": {
+                            "top": 401,
+                            "left": 533,
+                            "bottom": 417,
+                            "right": 547
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION29_4",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "122",
+                        "index": 2,
+                        "rect": {
+                            "top": 402,
+                            "left": 564,
+                            "bottom": 417,
+                            "right": 579
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION29_3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "123",
+                        "index": 3,
+                        "rect": {
+                            "top": 402,
+                            "left": 598,
+                            "bottom": 417,
+                            "right": 612
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 30
+                },
+                "format": {
+                    "name": "QUESTION29",
+                    "value": "QUESTION 29"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "31",
+                "rois": [
+                    {
+                        "annotationTags": "QUESTION30_1",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "124",
+                        "index": 0,
+                        "rect": {
+                            "top": 437,
+                            "left": 500,
+                            "bottom": 451,
+                            "right": 515
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION30_2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "125",
+                        "index": 1,
+                        "rect": {
+                            "top": 438,
+                            "left": 532,
+                            "bottom": 451,
+                            "right": 547
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION30_3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "126",
+                        "index": 2,
+                        "rect": {
+                            "top": 437,
+                            "left": 565,
+                            "bottom": 451,
+                            "right": 580
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION30_4",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "127",
+                        "index": 3,
+                        "rect": {
+                            "top": 437,
+                            "left": 597,
+                            "bottom": 451,
+                            "right": 610
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 31
+                },
+                "format": {
+                    "name": "QUESTION 30",
+                    "value": "QUESTION 30"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            }
+        ]
+    }
+}
+

@@ -2225,5 +2225,41 @@
   "name": "Student4",
   "studentId": "9876546",
   "schoolId": "demouser"
+},
+{
+  "studentClass": [
+    {
+      "classId": "9",
+      "className": "Class-9"
+    }
+  ],
+  "section": "B",
+  "name": "Student1",
+  "studentId": "7654321",
+  "schoolId": "u001"
+},
+{
+  "studentClass": [
+    {
+      "classId": "9",
+      "className": "Class-9"
+    }
+  ],
+  "section": "B",
+  "name": "Student2",
+  "studentId": "7684321",
+  "schoolId": "u001"
+},
+{
+  "studentClass": [
+    {
+      "classId": "9",
+      "className": "Class-9"
+    }
+  ],
+  "section": "B",
+  "name": "Student3",
+  "studentId": "7694321",
+  "schoolId": "u001"
 }
 ]
