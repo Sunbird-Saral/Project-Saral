@@ -339,13 +339,13 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
             JSONObject layoutObject     = layoutConfigs.getJSONObject("layout");
             if(layoutObject.has("threshold")){
                 JSONObject threshold = layoutObject.getJSONObject("threshold");
-                if(threshold.getString("minWidth")!=null){
+                if(threshold.has("minWidth") && threshold.getString("minWidth")!=null){
                     layoutMinWidth=Integer.parseInt(threshold.getString("minWidth"));
                 }
-                if(threshold.getString("minHeight")!=null){
+                if(threshold.has("minHeight") && threshold.getString("minHeight")!=null){
                     layoutMinHeight=Integer.parseInt(threshold.getString("minHeight"));
                 }
-                if(threshold.getString("detectionRadius")!=null){
+                if(threshold.has("minHeight") && threshold.getString("detectionRadius")!=null){
                     detectionRadius=Integer.parseInt(threshold.getString("detectionRadius"));
                 }                
             }
