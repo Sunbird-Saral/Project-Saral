@@ -48930,10 +48930,10 @@
                 "version": "1.0",
                 "name": "ANY1S30QOMRMULTICHOICE Exam Sheet Form",          
                 "threshold": {
-                  "minWidth": 709,
-                  "minHeight": 566,
-                  "detectionRadius": 12
-            },
+                    "minWidth": 685,
+                    "minHeight": 560,
+                    "detectionRadius": 12
+                },
                 "cells": [
                     {
                         "cellId": "1",
