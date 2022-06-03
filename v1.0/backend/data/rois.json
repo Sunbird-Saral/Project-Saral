@@ -48928,12 +48928,12 @@
     "roi": {
             "layout": {
                 "version": "1.0",
-                "name": "ANY1S30QOMRMULTICHOICE Exam Sheet Form",          
+                "name": "ANY1S30QOMRMULTICHOICE Exam Sheet Form",
                 "threshold": {
-                    "minWidth": 685,
-                    "minHeight": 560,
+                    "minWidth": 690,
+                    "minHeight": 390,
                     "detectionRadius": 12
-                },
+                },          
                 "cells": [
                     {
                         "cellId": "1",
