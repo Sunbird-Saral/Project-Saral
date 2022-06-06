@@ -18,7 +18,7 @@ export default class API {
     }
 
     apiEndPoint() {
-          return CONFIGS.BASE_URL;
+        return CONFIGS.BASE_URL;
    
     }
     processResponse(res) {
