@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View,Text } from 'react-native';
+import { View,Text, BackHandler } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash'
@@ -11,6 +11,10 @@ import Brands from '../common/components/Brands';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Assets } from '../../assets';
 import { monospace_FF } from '../../utils/CommonUtils';
+import Spinner from '../common/components/loadingIndicator';
+import { storeFactory } from '../../flux/store/store';
+import constants from '../../flux/actions/constants';
+import { GetStudentsAndExamData } from '../../flux/actions/apis/getStudentsAndExamData';
 
 class HomeComponent extends Component {
     constructor(props) {
@@ -18,15 +22,71 @@ class HomeComponent extends Component {
         this.state = {
             isLoading: true,
         }
+        this.onBack = this.onBack.bind(this)
     }
     componentDidMount() {
-        setTimeout(
-            () => this.setState(prevState => ({ isLoading: !prevState.isLoading })),
-            5000,
-        );
+        const { navigation } = this.props;
+        if (this.props.minimalFlag) {
+            navigation.addListener('willFocus', async payload => {
+                BackHandler.addEventListener('hardwareBackPress', this.onBack)
+            })
+            this.willBlur = navigation.addListener('willBlur', payload =>
+                BackHandler.removeEventListener('hardwareBackPress', this.onBack)
+            );
+        }
         
         this.callMultiBrandingActiondata()
     }
+
+    componentDidUpdate(prevProps) {
+        const { studentsAndExamData, multiBranding }  = this.props;
+
+        const { loginData: { data: { school } } } = this.props;
+        
+        if (multiBranding && prevProps.multiBranding != multiBranding) {
+            if (multiBranding.status && multiBranding.status == 200) {
+
+                //set minimal Flag
+                let isMinimalMode = school.hasOwnProperty("isMinimalMode") ? school.isMinimalMode : false
+                storeFactory.dispatch(this.minimalFlagAction(isMinimalMode));
+                //calling students and exam api if minimal mode true
+                if (isMinimalMode) {
+                    this.callStudentsData(this.props.loginData.data.token)
+                } else {
+                    this.setState({isLoading : false})
+                }
+                
+            }
+            
+        }
+
+        if (studentsAndExamData &&  prevProps.studentsAndExamData != studentsAndExamData ) {
+            if (studentsAndExamData.status && studentsAndExamData.status == 200) {
+                this.setState({isLoading : false})
+            }
+        }
+    }
+    
+
+    callStudentsData = (token) => {
+
+        let dataPayload = {
+           "classId": "0",
+           "section": "0"
+         }
+         this.setState({
+               isLoading: true,
+         })
+           let apiObj = new GetStudentsAndExamData(dataPayload, token);
+           this.props.APITransport(apiObj)
+   }
+
+   minimalFlagAction (payload){
+    return {
+        type: constants.MINIMAL_FLAG,
+        payload
+    }
+}
 
     callMultiBrandingActiondata() {
         let payload = this.props.multiBrandingData
@@ -36,8 +96,16 @@ class HomeComponent extends Component {
 
     }
 
+    onBack = () => {
+        const { navigation } = this.props;
+        BackHandler.exitApp()
+        // navigation.goBack();
+        return true
+    }
+
     render() {
-        if(this.props.multiBrandingData === undefined || this.props.multiBrandingData === null){
+        const { isLoading } = this.state;
+        if(this.props.multiBrandingData === undefined || this.props.multiBrandingData === null || this.state.isLoading){
            
             return <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
             {
@@ -62,8 +130,16 @@ class HomeComponent extends Component {
                                 Image={this.props.multiBrandingData && 'data:image/png;base64,' + this.props.multiBrandingData.logoImage}
                                 appName={this.props.multiBrandingData && this.props.multiBrandingData.appName}
                                 themeColor={this.props.multiBrandingData && this.props.multiBrandingData.themeColor1}
-                                onPress={() => this.props.navigation.navigate('selectDetails')}
+                                onPress={() => this.props.minimalFlag ? this.props.navigation.navigate("myScan") : this.props.navigation.navigate('selectDetails')}
                             /> 
+                            {
+                    isLoading
+                    &&
+                    <Spinner
+                        animating={isLoading}
+                        customContainer={{ opacity: 0.6, elevation: 15 }}
+                    />
+                }
             </View>
         );
     }
@@ -73,7 +149,10 @@ class HomeComponent extends Component {
 const mapStateToProps = (state) => {
     return {
         loginData: state.loginData,
-        multiBrandingData: state.multiBrandingData.response.data
+        multiBrandingData: state.multiBrandingData.response.data,
+        multiBranding: state.multiBrandingData.response,
+        minimalFlag: state.minimalFlag,
+        studentsAndExamData: state.studentsAndExamData
     }
 }
 const mapDispatchToProps = (dispatch) => {

@@ -322,5 +322,18 @@
   "classId": "3",
   "className": "Class-3",
   "schoolId": "a001"
+},
+{
+  "sections": [
+    {
+      "section": "A"
+    },
+    {
+      "section": "B"
+    }
+  ],
+  "classId": "4",
+  "className": "Class-4",
+  "schoolId": "a001"
 }
 ]

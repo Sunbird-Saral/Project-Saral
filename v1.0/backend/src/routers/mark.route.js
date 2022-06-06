@@ -20,6 +20,7 @@ router.put('/saveMarks', auth, async (req, res) => {
     const schoolId = req.school.schoolId
     const classId = req.body.classId
     const createdOn = new Date().getTime()
+    const roiId = req.body.roiId
 
     req.body.studentsMarkInfo.forEach(studentsData => {
         const marksData = new Mark({
@@ -28,14 +29,15 @@ router.put('/saveMarks', auth, async (req, res) => {
             examDate,
             subject,
             classId,
-            createdOn
+            createdOn,
+            roiId
         })
         marks.push(marksData)
     });
     try {
         for (let data of marks) {
          
-            let studentMarksExist = await Mark.findOne({ schoolId:data.schoolId,studentId: data.studentId,classId:data.classId,subject: data.subject, examDate: data.examDate })
+            let studentMarksExist = await Mark.findOne({ schoolId:data.schoolId,studentId: data.studentId,classId:data.classId,subject: data.subject, examDate: data.examDate, roiId: data.roiId  })
             if (!studentMarksExist) {
                 await Mark.create(data)
             } else {
@@ -75,7 +77,7 @@ router.put('/saveMarks', auth, async (req, res) => {
 })
 
 const fetchSavedData = async (req) => {
-    const { schoolId, classId, section, subject, fromDate, toDate } = req.body
+    const { schoolId, classId, section, subject, fromDate, toDate, roiId } = req.body
     const match = {}
     if (schoolId) {
         match.schoolId = schoolId
@@ -86,6 +88,9 @@ const fetchSavedData = async (req) => {
 
     if (section && section != "0") {
         match.section = section
+    }
+    if (roiId) {
+        match.roiId = roiId
     }
 
     // if(req.body.examId) {
