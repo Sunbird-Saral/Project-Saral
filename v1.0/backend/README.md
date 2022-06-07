@@ -1,7 +1,9 @@
 # Below steps to be executed before running docker build command  
 
 >> `cp ../../specs/v1.5/swagger-saral-maintenance.yaml ./src`
+
 >> `cp ../../specs/v1.5/swagger-saral-frontend.yaml ./src`
+
 >> `cp ../../specs/v1.5/swagger-saral-apidoc.yaml ./src`
 
 # Saral Backend APIs Build #
