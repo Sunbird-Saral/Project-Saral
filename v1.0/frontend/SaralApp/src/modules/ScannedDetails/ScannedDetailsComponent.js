@@ -856,15 +856,12 @@ const ScannedDetailsComponent = ({
             element.rois.forEach((data) => {
                 if (data.extractionMethod == CELL_OMR) {
                     totalRois = isMultiple ? element.rois.length : !isMultipleStudent && element.rois.length == 1 ? element.rois.length : element.rois.length - 1
-                    let regexValue = regxValidation(element.cellId)
+                    // let regexValue = regxValidation(element.cellId)
                     if (totalRois < element.consolidatedPrediction) {
                         validationCellOmr = true
                     } else if(element.hasOwnProperty("omrOptions")){
-                        if (!regexValue[0]) {
-                            validationCellOmr = true
-                            totalRois = regexValue[1]
-                            showErrorMessage(regexValue[1] ? regexValue[1] : defaultValidateError )
-                        }
+                        // validationCellOmr = !regexValue[0]
+                        // totalRois = regexValue[1]
                     }
                 }
             })
@@ -896,19 +893,36 @@ const ScannedDetailsComponent = ({
             }
         }
 
+        var result
+        var regexErrormsg
+        for (let j = 0; j < newArrayValue.length; j++) {
+        for (let i = 0; i < ocrLocalResponse.layout.cells.length; i++) {
+            if (ocrLocalResponse.layout.cells[i].hasOwnProperty("omrOptions") && ocrLocalResponse.layout.cells[i].cellId == newArrayValue[j].cellId) {
+                let consolidated = ocrLocalResponse.layout.cells[i].consolidatedPrediction
+                let ocrcells = ocrLocalResponse.layout.cells[i]
+                regexErrormsg = ocrcells && ocrcells.validate && ocrcells.validate.errorMsg
+                let regexExp = ocrcells && ocrcells.validate && ocrcells.validate.regExp ? ocrcells.validate.regExp : defaultValidateExp
+                let number = consolidated;
+                let regex = new RegExp(regexExp)
+                result = regex.test(number);
+                if (!result) {
+                    showErrorMessage(`${regexErrormsg}`)
+                }
+                
+            }
+        }
+    }
+
         let cellOmrValidation = validateCellOMR(false)
-
-
         if (disable || validCell) {
             showErrorMessage(Strings.please_correct_marks_data)
+        }
+        else if(!result){
         }
         else if (cellOmrValidation[0]) {
             if (typeof(cellOmrValidation[1]) == 'number') {
                 showErrorMessage(`omr value should be 0 to ${cellOmrValidation[1]}`)
             } 
-            // else {
-            //     showErrorMessage(`${cellOmrValidation[1]}`)
-            // }
         }
         else if (!studentValid && !toggleCheckBox) {
             showErrorMessage(Strings.please_correct_student_id)
