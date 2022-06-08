@@ -905,9 +905,10 @@ const ScannedDetailsComponent = ({
         else if (cellOmrValidation[0]) {
             if (typeof(cellOmrValidation[1]) == 'number') {
                 showErrorMessage(`omr value should be 0 to ${cellOmrValidation[1]}`)
-            } else {
-                showErrorMessage(`${cellOmrValidation[1]}`)
-            }
+            } 
+            // else {
+            //     showErrorMessage(`${cellOmrValidation[1]}`)
+            // }
         }
         else if (!studentValid && !toggleCheckBox) {
             showErrorMessage(Strings.please_correct_student_id)
