@@ -42333,7 +42333,7 @@
                             "value": "QUESTION 1"
                         },
                         "validate": {
-                            "regExp": "[A-Z]",
+                            "regExp": "[A-G]",
                             "errorMsg": "Please enter valid option (A B C D E F G)"
                         },
                         "omrOptions": ["A","B","C","D","E","F","G"]
@@ -42812,7 +42812,7 @@
                             "value": "QUESTION 8"
                         },
                         "validate": {
-                            "regExp": "[A-Z]",
+                            "regExp": "[A-G]",
                             "errorMsg": "Please enter valid option (A B C D E F G)"
                         },
                         "omrOptions": ["A","B","C","D","E","F","G"]

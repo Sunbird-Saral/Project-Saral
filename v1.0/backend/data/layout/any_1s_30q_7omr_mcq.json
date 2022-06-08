@@ -249,7 +249,7 @@
                     "value": "QUESTION 1"
                 },
                 "validate": {
-                    "regExp": "[A-Z]",
+                    "regExp": "[A-G]",
                     "errorMsg": "Please enter valid option (A B C D E F G)"
                 },
                 "omrOptions": ["A","B","C","D","E","F","G"]
@@ -728,7 +728,7 @@
                     "value": "QUESTION 8"
                 },
                 "validate": {
-                    "regExp": "[A-Z]",
+                    "regExp": "[A-G]",
                     "errorMsg": "Please enter valid option (A B C D E F G)"
                 },
                 "omrOptions": ["A","B","C","D","E","F","G"]
@@ -834,10 +834,10 @@
                     "value": "QUESTION 10"
                 },
                 "validate": {
-                    "regExp": "[A]",
-                    "errorMsg": "Please enter valid option (A)"
+                    "regExp": "[Y,N]",
+                    "errorMsg": "Please enter valid option (Y N)"
                 },
-                "omrOptions": ["A"]
+                "omrOptions": ["Y","N"]
             },
             {
                 "cellId": "12",
@@ -863,10 +863,10 @@
                     "value": "QUESTION 11"
                 },
                 "validate": {
-                    "regExp": "[A]",
-                    "errorMsg": "Please enter valid option (A)"
+                    "regExp": "[Y,N]",
+                    "errorMsg": "Please enter valid option (Y N)"
                 },
-                "omrOptions": ["A"]
+                "omrOptions": ["Y","N"]
             },
             {
                 "cellId": "13",
@@ -1287,10 +1287,10 @@
                     "value": "QUESTION 19"
                 },
                 "validate": {
-                    "regExp": "[A]",
-                    "errorMsg": "Please enter valid option (A)"
+                    "regExp": "[Y,N]",
+                    "errorMsg": "Please enter valid option (Y N)"
                 },
-                "omrOptions": ["A"]
+                "omrOptions": ["Y","N"]
             },
             {
                 "cellId": "21",
