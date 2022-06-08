@@ -438,7 +438,13 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                                     result.put("confidence", new Double(1.00));
                                     countOMRChoice++;
                                 }
-                            }else{
+                            }
+                            else if(cellROIs.length() == 1 && cell.has("omrOptions")){
+                                    JSONArray omrOption = cells.getJSONObject(i).getJSONArray("omrOptions");
+                                    result.put("prediction", omrOption.getString(1));
+                                    result.put("confidence", new Double(1.00));
+                            }
+                            else{
                                 result.put("prediction", "");
                                 result.put("confidence", new Double(0.0));
                             }
