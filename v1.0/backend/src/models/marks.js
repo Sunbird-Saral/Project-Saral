@@ -14,8 +14,7 @@ const marksSchema = new mongoose.Schema({
     },
     examDate: {
         type: String,
-        required: true,
-        trim: true
+        default: null
     },
     section: {
         type: String,
