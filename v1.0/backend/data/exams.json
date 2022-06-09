@@ -12138,7 +12138,7 @@
     "subject": "0",
     "examLO": "0",
     "classId": "0",
-    "examDate": "null",
+    "examDate": null,
     "totalMarks": 20,
     "type": "water level",
     "questions": [
@@ -12210,7 +12210,7 @@
     "subject": "0",
     "examLO": "0",
     "classId": "0",
-    "examDate": "null",
+    "examDate": null,
     "totalMarks": 20,
     "type": "electricity reading",
     "questions": [
@@ -12282,7 +12282,7 @@
     "subject": "0",
     "examLO": "0",
     "classId": "0",
-    "examDate": "null",
+    "examDate": null,
     "totalMarks": 20,
     "type": "feedback",
     "questions": [
