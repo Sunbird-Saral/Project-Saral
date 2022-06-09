@@ -18,7 +18,7 @@ const examSchema = new mongoose.Schema({
     },
     examDate: {
         type: String,
-        default: null,
+        required: true,
         trim: true
     },
     classId: {
