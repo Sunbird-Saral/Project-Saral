@@ -1155,7 +1155,7 @@ const ScannedDetailsComponent = ({
 
         let saveObj = {
             "classId": minimalFlag ? 0 : filteredData.class,
-            "examDate": minimalFlag ? 0 : filteredData.examDate,
+            "examDate": minimalFlag ? null : filteredData.examDate,
             "subject": minimalFlag ? 0 : filteredData.subject,
             "studentsMarkInfo": [
                 {
