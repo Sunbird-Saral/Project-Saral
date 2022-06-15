@@ -214,7 +214,7 @@ router.post('/getSavedScan', basicAuth, async (req, res) => {
     }
 })
 
-router.post('/getMarksReport',async (req, res) => {
+router.get('/getMarksReport',async (req, res) => {
     try {
 
         const resposne = await fetchAllSavedData(req)
