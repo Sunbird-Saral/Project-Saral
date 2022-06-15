@@ -23,6 +23,7 @@ import { getPresentAbsentStudent, getScannedDataFromLocal,getErrorMessage } from
 import ShareComponent from '../common/components/Share';
 import MultibrandLabels from '../common/components/multibrandlabels';
 import { monospace_FF } from '../../utils/CommonUtils';
+import ButtonComponent from '../common/components/ButtonComponent';
 
 
 const ScanStatus = ({
@@ -150,6 +151,12 @@ const ScanStatus = ({
                 keyExtractor={(item, index) => `${index.toString()}`}
                 contentContainerStyle={styles.content}
             />
+
+            <ButtonComponent 
+                btnText={"CLOSE"}
+                onPress={()=>navigation.push('ScanHistory')}
+                customBtnStyle={{backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE, marginHorizontal: 40, height:40,marginBottom:20,marginTop:20}}
+                />
 
         </View>
     );

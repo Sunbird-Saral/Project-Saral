@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Text, View, Modal, TouchableOpacity, TextInput, Image, ToastAndroid } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import { Assets } from '../../assets';
 import Strings from '../../utils/Strings';
+import ButtonComponent from './components/ButtonComponent';
 
 const TaggingModal = ({
     isModalVisible,
@@ -108,7 +110,7 @@ const TaggingModal = ({
                     </TouchableOpacity>
                 </View>
 
-                <View style={styles.tagsCon}>
+                <ScrollView contentContainerStyle={[styles.tagsCon,{flexGrow:1,marginBottom:20}]}>
                     {
                         tagData.map((item, index) => {
                             return (
@@ -135,7 +137,13 @@ const TaggingModal = ({
                             )
                         })
                     }
-                </View>
+                </ScrollView>
+
+                <ButtonComponent 
+                btnText={"CLOSE"}
+                onPress={()=>setIsModalVisible(!isModalVisible)}
+                customBtnStyle={{backgroundColor: bgColor, marginHorizontal: 40, height:40,marginBottom:20}}
+                />
 
             </View>
         </Modal>

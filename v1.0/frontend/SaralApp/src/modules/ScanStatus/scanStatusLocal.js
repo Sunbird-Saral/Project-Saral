@@ -24,6 +24,7 @@ import { Assets } from '../../assets';
 import ShareComponent from '../common/components/Share';
 import MultibrandLabels from '../common/components/multibrandlabels';
 import { dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF } from '../../utils/CommonUtils';
+import ButtonComponent from '../common/components/ButtonComponent';
 
 
 const ScanStatusLocal = ({
@@ -200,6 +201,12 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
             keyExtractor={(item, index) => `${index.toString()}`}
             contentContainerStyle={styles.content}
             />
+
+            <ButtonComponent 
+                btnText={"CLOSE"}
+                onPress={()=>navigation.navigate('myScan')}
+                customBtnStyle={{backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE, marginHorizontal: 40, height:40,marginBottom:20,marginTop:20}}
+                />
 
         </View>
     );
