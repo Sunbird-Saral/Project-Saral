@@ -150,6 +150,20 @@ const fetchSavedData = async (req) => {
     }
 }
 
+const fetchAllSavedData = async (req) => {
+    try {
+        const count = await Mark.countDocuments("{}")
+        const savedScan = await Mark.find({})
+        return {
+            data: savedScan,
+        }
+    }
+    catch (e) {
+        console.log(e);
+        return { "error": true, e }
+    }
+}
+
 // router.get('/getSavedScan?', basicAuth, async (req, res) => {
 //     try {
 //         const resposne = await fetchSavedData(req)
@@ -194,6 +208,20 @@ router.post('/getSavedScan', basicAuth, async (req, res) => {
         } else {
             res.send(resposne)
         }
+    } catch (e) {
+        console.log(e);
+        res.status(400).send({ "error": true, e })
+    }
+})
+
+router.post('/getMarksReport',async (req, res) => {
+    try {
+
+        const resposne = await fetchAllSavedData(req)
+        if (resposne && resposne.error) {
+            return res.status(404).send(resposne)
+        }
+        res.send(resposne)
     } catch (e) {
         console.log(e);
         res.status(400).send({ "error": true, e })
