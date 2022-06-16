@@ -10,331 +10,61 @@
       "section": "C"
     }
   ],
-  "classId": "2",
-  "className": "Class-2",
+  "classId": "5",
+  "className": "Class-5",
   "schoolId": "u001"
-},{
+},
+{
   "sections": [
     {
       "section": "D"
     },
     {
       "section": "B"
+    }
+  ],
+  "classId": "2",
+  "className": "Class-2",
+  "schoolId": "u001"
+},
+{
+  "sections": [
+    {
+      "section": "A"
     },
     {
-      "section": "C"
+      "section": "B"
     }
   ],
   "classId": "3",
   "className": "Class-3",
   "schoolId": "u001"
-},{
+},
+{
   "sections": [
     {
-      "section": "D"
+      "section": "A"
     },
     {
       "section": "B"
-    },
-    {
-      "section": "C"
-    }
-  ],
-  "classId": "4",
-  "className": "Class-4",
-  "schoolId": "u001"
-},{
-  "sections": [
-    {
-      "section": "D"
-    },
-    {
-      "section": "B"
-    },
-    {
-      "section": "C"
-    }
-  ],
-  "classId": "5",
-  "className": "Class-5",
-  "schoolId": "u001"
-},{
-  "sections": [
-    {
-      "section": "D"
-    },
-    {
-      "section": "B"
-    },
-    {
-      "section": "C"
     }
   ],
   "classId": "6",
   "className": "Class-6",
   "schoolId": "u001"
-},{
+},
+{
   "sections": [
     {
-      "section": "D"
+      "section": "A"
     },
     {
       "section": "B"
-    },
-    {
-      "section": "C"
     }
   ],
   "classId": "7",
   "className": "Class-7",
   "schoolId": "u001"
-},{
-  "sections": [
-    {
-      "section": "D"
-    },
-    {
-      "section": "B"
-    },
-    {
-      "section": "C"
-    }
-  ],
-  "classId": "8",
-  "className": "Class-8",
-  "schoolId": "u001"
-},
-{
-  "sections": [
-    {
-      "section": "D"
-    },
-    {
-      "section": "B"
-    },
-    {
-      "section": "C"
-    }
-  ],
-  "classId": "2",
-  "className": "Class-2",
-  "schoolId": "od001"
-},
-{
-  "sections": [
-    {
-      "section": "D"
-    },
-    {
-      "section": "B"
-    },
-    {
-      "section": "C"
-    }
-  ],
-  "classId": "3",
-  "className": "Class-3",
-  "schoolId": "od001"
-},
-  {
-    "sections": [
-      {
-        "section": "D"
-      },
-      {
-        "section": "B"
-      },
-      {
-        "section": "C"
-      }
-    ],
-    "classId": "3",
-    "className": "Class-3",
-    "schoolId": "demouser"
-  },
-  {
-    "sections": [
-      {
-        "section": "D"
-      },
-      {
-        "section": "B"
-      },
-      {
-        "section": "C"
-      }
-    ],
-    "classId": "4",
-    "className": "Class-4",
-    "schoolId": "demouser"
-  },
-  {
-    "sections": [
-      {
-        "section": "D"
-      },
-      {
-        "section": "B"
-      },
-      {
-        "section": "C"
-      },
-      {
-        "section": "A"
-      }
-    ],
-    "classId": "5",
-    "className": "Class-5",
-    "schoolId": "demouser"
-},
-{
-  "sections": [
-    {
-      "section": "D"
-    },
-    {
-      "section": "B"
-    },
-    {
-      "section": "C"
-    }
-  ],
-  "classId": "6",
-  "className": "Class-6",
-  "schoolId": "demouser"
-},
-{
-"sections": [
-  {
-    "section": "D"
-  },
-  {
-    "section": "B"
-  },
-  {
-    "section": "C"
-  }
-],
-"classId": "7",
-"className": "Class-7",
-"schoolId": "demouser"
-},
-{
-  "sections": [
-    {
-      "section": "D"
-    },
-    {
-      "section": "B"
-    },
-    {
-      "section": "C"
-    }
-  ],
-  "classId": "2",
-  "className": "Class-2",
-  "schoolId": "u002"
-},
-{
-  "sections": [
-    {
-      "section": "D"
-    },
-    {
-      "section": "B"
-    },
-    {
-      "section": "C"
-    }
-  ],
-  "classId": "3",
-  "className": "Class-3",
-  "schoolId": "u002"
-},{
-  "sections": [
-    {
-      "section": "D"
-    },
-    {
-      "section": "B"
-    },
-    {
-      "section": "C"
-    }
-  ],
-  "classId": "4",
-  "className": "Class-4",
-  "schoolId": "u002"
-},{
-  "sections": [
-    {
-      "section": "D"
-    },
-    {
-      "section": "B"
-    },
-    {
-      "section": "C"
-    }
-  ],
-  "classId": "5",
-  "className": "Class-5",
-  "schoolId": "u002"
-},
-{
-  "sections": [
-    {
-      "section": "Carpentry"
-    },
-    {
-      "section": "Plumbing"
-    },
-    {
-      "section": "Cleaning"
-    }
-  ],
-  "classId": "5",
-  "className": "HouseHold",
-  "schoolId": "skill001"
-},
-{
-  "sections": [
-    {
-      "section": "A"
-    },
-    {
-      "section": "B"
-    }
-  ],
-  "classId": "2",
-  "className": "Class-2",
-  "schoolId": "a001"
-},
-{
-  "sections": [
-    {
-      "section": "A"
-    },
-    {
-      "section": "B"
-    }
-  ],
-  "classId": "3",
-  "className": "Class-3",
-  "schoolId": "a001"
-},
-{
-  "sections": [
-    {
-      "section": "A"
-    },
-    {
-      "section": "B"
-    }
-  ],
-  "classId": "4",
-  "className": "Class-4",
-  "schoolId": "a001"
 },
 {
   "sections": [
@@ -347,35 +77,6 @@
   ],
   "classId": "8",
   "className": "Class-8",
-  "schoolId": "demouser"
-},
-{
-  "sections": [
-    {
-      "section": "A"
-    },
-    {
-      "section": "B"
-    }
-  ],
-  "classId": "9",
-  "className": "Class-9",
   "schoolId": "u001"
-},
-{
-  "sections": [
-    {
-      "section": "D"
-    },
-    {
-      "section": "B"
-    },
-    {
-      "section": "C"
-    }
-  ],
-  "classId": "6",
-  "className": "Class-6",
-  "schoolId": "u002"
 }
 ]
