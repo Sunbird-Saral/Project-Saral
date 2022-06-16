@@ -2261,5 +2261,98 @@
   "name": "Student3",
   "studentId": "7694321",
   "schoolId": "u001"
-}
+},
+{
+  "studentClass": [
+    {
+      "classId": "6",
+      "className": "Class-6"
+    }
+  ],
+  "section": "D",
+  "name": "Student1",
+  "studentId": "4204062",
+  "schoolId": "u002"
+},{
+    "studentClass": [
+      {
+        "classId": "6",
+        "className": "Class-6"
+      }
+    ],
+    "section": "D",
+    "name": "Student2",
+    "studentId": "4204063",
+    "schoolId": "u002"
+  },
+  {
+    "studentClass": [
+      {
+        "classId": "6",
+        "className": "Class-6"
+      }
+    ],
+    "section": "D",
+    "name": "Student3",
+    "studentId": "4204064",
+    "schoolId": "u002"
+  },{
+      "studentClass": [
+        {
+          "classId": "6",
+          "className": "Class-6"
+        }
+      ],
+      "section": "D",
+      "name": "Student4",
+      "studentId": "4204065",
+      "schoolId": "u002"
+    },
+    {
+      "studentClass": [
+        {
+          "classId": "6",
+          "className": "Class-6"
+        }
+      ],
+      "section": "D",
+      "name": "Student5",
+      "studentId": "4204066",
+      "schoolId": "u002"
+    },{
+        "studentClass": [
+          {
+            "classId": "6",
+            "className": "Class-6"
+          }
+        ],
+        "section": "D",
+        "name": "Student6",
+        "studentId": "4204067",
+        "schoolId": "u002"
+      },
+      {
+        "studentClass": [
+          {
+            "classId": "6",
+            "className": "Class-6"
+          }
+        ],
+        "section": "D",
+        "name": "Student7",
+        "studentId": "4204068",
+        "schoolId": "u002"
+      },
+      {
+        "studentClass": [
+          {
+            "classId": "6",
+            "className": "Class-6"
+          }
+        ],
+        "section": "D",
+        "name": "Student8",
+        "studentId": "4204069",
+        "schoolId": "u002"
+      }
 ]

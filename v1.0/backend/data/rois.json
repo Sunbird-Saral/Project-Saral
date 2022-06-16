@@ -53029,8 +53029,8 @@
     "roiId": "32"
 },
 {
-    "subject": "0",
-    "classId": "0",
+    "subject": "hindi",
+    "classId": "6",
     "type": "book distribution",
     "roi": {
         "layout": {
@@ -56315,7 +56315,7 @@
             ]
         }
     },
-    "state": "mp",
+    "state": "up",
     "roiId": "33"
 }
 ]

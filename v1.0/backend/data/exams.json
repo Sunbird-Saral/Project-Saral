@@ -13782,10 +13782,10 @@
     "schoolId": "u001"
   },
   {
-    "subject": "0",
-    "examLO": "0",
-    "classId": "0",
-    "examDate": null,
+    "subject": "hindi",
+    "examLO": "hindi",
+    "classId": "6",
+    "examDate": "17/06/2022",
     "totalMarks": 20,
     "type": "book distribution",
     "questions": [
@@ -14935,6 +14935,6 @@
       }
     ],
     "examId": 33,
-    "schoolId": "m001"
+    "schoolId": "u002"
   }
 ]
