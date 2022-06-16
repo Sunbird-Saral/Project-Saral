@@ -299,7 +299,7 @@ class LoginComponent extends Component {
                     <View style={styles.container2}>
                         <View style={styles.loginContainer}>
                             <Text style={[styles.header1TextStyle, { paddingTop: '5%',fontFamily : monospace_FF }]}>
-                                {Strings.login_text.toUpperCase()}
+                                {Strings.login_texts.toUpperCase()}
                             </Text>
                             <View style={{ flexDirection: 'row' }}>
                                 {errCommon != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 2, width: '100%', fontWeight: 'normal', textAlign: 'center',fontFamily : monospace_FF }]}>{errCommon}</Text>}
@@ -387,7 +387,7 @@ class LoginComponent extends Component {
                     <View style={styles.container2}>
                         <View style={styles.loginContainer}>
                             <Text style={[styles.header1TextStyle, { paddingTop: '5%',fontFamily : monospace_FF }]}>
-                                {Strings.login_text.toUpperCase()}
+                            {Strings.login_texts.toUpperCase()}
                             </Text>
                             <View style={{ flexDirection: 'row' }}>
                                 {errCommon != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 2, width: '100%', fontWeight: 'normal', textAlign: 'center',fontFamily : monospace_FF }]}>{errCommon}</Text>}
