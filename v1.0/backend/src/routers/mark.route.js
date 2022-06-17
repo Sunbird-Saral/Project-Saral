@@ -76,6 +76,51 @@ router.put('/saveMarks', auth, async (req, res) => {
     }
 })
 
+
+router.put('/saveMarks/2.0', auth, async (req, res) => {
+    const marks = []
+    const subject = req.body.subject
+    const examDate = req.body.examDate
+    const schoolId = req.school.schoolId
+    const classId = req.body.classId
+    const createdOn = new Date().getTime()
+    const roiId = req.body.roiId
+
+    req.body.studentsMarkInfo.forEach(studentsData => {
+        const marksData = new Mark({
+            ...studentsData,
+            schoolId,
+            examDate,
+            subject,
+            classId,
+            createdOn,
+            roiId
+        })
+        marks.push(marksData)
+    });
+    try {
+        for (let data of marks) {
+         
+            let studentMarksExist = await Mark.findOne({ schoolId:data.schoolId,studentId: data.studentId,classId:data.classId,subject: data.subject, examDate: data.examDate, roiId: data.roiId  })
+            if (!studentMarksExist) {
+                await Mark.create(data)
+            } else {
+                if (data.schoolId == studentMarksExist.schoolId && data.studentId == studentMarksExist.studentId && data.classId == studentMarksExist.classId && data.subject == studentMarksExist.subject && data.examDate  == studentMarksExist.examDate) {
+                    let lookup = {
+                        studentId: data.studentId
+                    }
+                    let update = { $set: { studentIdTrainingData: data.studentIdTrainingData,predictedStudentId: data.predictedStudentId,studentAvailability: data.studentAvailability, marksInfo: data.marksInfo ,maxMarksTrainingData: data.maxMarksTrainingData,maxMarksPredicted: data.maxMarksPredicted, securedMarks: data.securedMarks, totalMarks: data.totalMarks,obtainedMarksTrainingData: data.obtainedMarksTrainingData,obtainedMarksPredicted: data.obtainedMarksPredicted  } }
+                    await Mark.update(lookup, update)
+                }
+            }
+        }
+        res.status(200).send({ message: 'Data Saved Successfully' })
+    } catch (e) {
+        console.log(e);
+        res.status(400).send({ e })
+    }
+})
+
 const fetchSavedData = async (req) => {
     const { schoolId, classId, section, subject, fromDate, toDate, roiId } = req.body
     const match = {}
