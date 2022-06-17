@@ -422,6 +422,19 @@
         "section": "B"
       }
     ],
+    "classId": "4",
+    "className": "Class-4",
+    "schoolId": "ecdemo"
+  },
+  {
+    "sections": [
+      {
+        "section": "A"
+      },
+      {
+        "section": "B"
+      }
+    ],
     "classId": "6",
     "className": "Class-6",
     "schoolId": "ecdemo"
