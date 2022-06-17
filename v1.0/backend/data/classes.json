@@ -374,13 +374,7 @@
   {
     "sections": [
       {
-        "section": "D"
-      },
-      {
         "section": "B"
-      },
-      {
-        "section": "C"
       }
     ],
     "classId": "5",
@@ -389,9 +383,6 @@
   },
   {
     "sections": [
-      {
-        "section": "D"
-      },
       {
         "section": "B"
       }
@@ -404,9 +395,6 @@
     "sections": [
       {
         "section": "A"
-      },
-      {
-        "section": "B"
       }
     ],
     "classId": "3",
@@ -415,9 +403,6 @@
   },
   {
     "sections": [
-      {
-        "section": "A"
-      },
       {
         "section": "B"
       }
@@ -430,9 +415,6 @@
     "sections": [
       {
         "section": "A"
-      },
-      {
-        "section": "B"
       }
     ],
     "classId": "6",
@@ -441,9 +423,6 @@
   },
   {
     "sections": [
-      {
-        "section": "A"
-      },
       {
         "section": "B"
       }
@@ -454,9 +433,6 @@
   },
   {
     "sections": [
-      {
-        "section": "A"
-      },
       {
         "section": "B"
       }

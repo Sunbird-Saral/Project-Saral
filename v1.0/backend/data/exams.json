@@ -15773,8 +15773,8 @@
     "schoolId": "ecdemo"
   },
   {
-    "subject": "book distribution",
-    "examLO": "book distribution",
+    "subject": "book-distribution",
+    "examLO": "book-distribution",
     "classId": "4",
     "examDate": "14/10/2022",
     "totalMarks": 20,

@@ -113,7 +113,7 @@ router.post('/fetchStudentsandExamsByQuery', auth, async (req, res) => {
                 student["studentAvailability"] = true
                 }
                 }
-
+console.log("heyyyy",examMatch)
         const exams = await Exam.find(examMatch, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 }).lean()
         res.send({ students, exams })
     } catch (e) {
