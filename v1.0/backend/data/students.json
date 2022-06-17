@@ -2402,6 +2402,54 @@
   {
     "studentClass": [
       {
+        "classId": "2",
+        "className": "Class-2"
+      }
+    ],
+    "section": "B",
+    "name": "Student2",
+    "studentId": "130403",
+    "schoolId": "09670702901"
+  },
+  {
+    "studentClass": [
+      {
+        "classId": "2",
+        "className": "Class-2"
+      }
+    ],
+    "section": "B",
+    "name": "Student3",
+    "studentId": "130404",
+    "schoolId": "09670702901"
+  },
+  {
+    "studentClass": [
+      {
+        "classId": "2",
+        "className": "Class-2"
+      }
+    ],
+    "section": "B",
+    "name": "Student4",
+    "studentId": "130405",
+    "schoolId": "09670702901"
+  },
+  {
+    "studentClass": [
+      {
+        "classId": "2",
+        "className": "Class-2"
+      }
+    ],
+    "section": "B",
+    "name": "Student5",
+    "studentId": "130406",
+    "schoolId": "09670702901"
+  },
+  {
+    "studentClass": [
+      {
         "classId": "3",
         "className": "Class-3"
       }
@@ -2414,6 +2462,54 @@
   {
     "studentClass": [
       {
+        "classId": "3",
+        "className": "Class-3"
+      }
+    ],
+    "section": "A",
+    "name": "Student2",
+    "studentId": "5500231006789701",
+    "schoolId": "09670702901"
+  },
+  {
+    "studentClass": [
+      {
+        "classId": "3",
+        "className": "Class-3"
+      }
+    ],
+    "section": "A",
+    "name": "Student3",
+    "studentId": "5900231006789401",
+    "schoolId": "09670702901"
+  },
+  {
+    "studentClass": [
+      {
+        "classId": "3",
+        "className": "Class-3"
+      }
+    ],
+    "section": "A",
+    "name": "Student4",
+    "studentId": "5500231006589401",
+    "schoolId": "09670702901"
+  },
+  {
+    "studentClass": [
+      {
+        "classId": "3",
+        "className": "Class-3"
+      }
+    ],
+    "section": "A",
+    "name": "Student5",
+    "studentId": "5506231006789401",
+    "schoolId": "09670702901"
+  },
+  {
+    "studentClass": [
+      {
         "classId": "6",
         "className": "Class-6"
       }
@@ -2421,6 +2517,54 @@
     "section": "A",
     "name": "Student1",
     "studentId": "2403456",
+    "schoolId": "09670702901"
+  },
+  {
+    "studentClass": [
+      {
+        "classId": "6",
+        "className": "Class-6"
+      }
+    ],
+    "section": "A",
+    "name": "Student2",
+    "studentId": "2403457",
+    "schoolId": "09670702901"
+  },
+  {
+    "studentClass": [
+      {
+        "classId": "6",
+        "className": "Class-6"
+      }
+    ],
+    "section": "A",
+    "name": "Student3",
+    "studentId": "2403458",
+    "schoolId": "09670702901"
+  },
+  {
+    "studentClass": [
+      {
+        "classId": "6",
+        "className": "Class-6"
+      }
+    ],
+    "section": "A",
+    "name": "Student4",
+    "studentId": "2403459",
+    "schoolId": "09670702901"
+  },
+  {
+    "studentClass": [
+      {
+        "classId": "6",
+        "className": "Class-6"
+      }
+    ],
+    "section": "A",
+    "name": "Student5",
+    "studentId": "2405458",
     "schoolId": "09670702901"
   },
   {
@@ -2503,7 +2647,7 @@
       }
     ],
     "section": "B",
-    "name": "Student4",
+    "name": "Student8",
     "studentId": "2200108",
     "schoolId": "09670702901"
   },
@@ -2515,7 +2659,7 @@
       }
     ],
     "section": "B",
-    "name": "Student4",
+    "name": "Student9",
     "studentId": "2200109",
     "schoolId": "09670702901"
   },
@@ -2527,7 +2671,7 @@
       }
     ],
     "section": "B",
-    "name": "Student4",
+    "name": "Student10",
     "studentId": "2200110",
     "schoolId": "09670702901"
   },
@@ -2539,7 +2683,7 @@
       }
     ],
     "section": "B",
-    "name": "Student2",
+    "name": "Student11",
     "studentId": "2200111",
     "schoolId": "09670702901"
   },
@@ -2551,7 +2695,7 @@
       }
     ],
     "section": "B",
-    "name": "Student3",
+    "name": "Student12",
     "studentId": "2200112",
     "schoolId": "09670702901"
   },
@@ -2563,7 +2707,7 @@
       }
     ],
     "section": "B",
-    "name": "Student4",
+    "name": "Student13",
     "studentId": "2200113",
     "schoolId": "09670702901"
   },
@@ -2575,7 +2719,7 @@
       }
     ],
     "section": "B",
-    "name": "Student5",
+    "name": "Student14",
     "studentId": "2200114",
     "schoolId": "09670702901"
   },
@@ -2587,7 +2731,7 @@
       }
     ],
     "section": "B",
-    "name": "Student6",
+    "name": "Student15",
     "studentId": "2200115",
     "schoolId": "09670702901"
   },
@@ -2599,7 +2743,7 @@
       }
     ],
     "section": "B",
-    "name": "Student4",
+    "name": "Student16",
     "studentId": "2200116",
     "schoolId": "09670702901"
   },
@@ -2611,7 +2755,7 @@
       }
     ],
     "section": "B",
-    "name": "Student4",
+    "name": "Student17",
     "studentId": "2200117",
     "schoolId": "09670702901"
   },
@@ -2623,7 +2767,7 @@
       }
     ],
     "section": "B",
-    "name": "Student4",
+    "name": "Student18",
     "studentId": "2200118",
     "schoolId": "09670702901"
   },
@@ -2635,7 +2779,7 @@
       }
     ],
     "section": "B",
-    "name": "Student4",
+    "name": "Student19",
     "studentId": "2200119",
     "schoolId": "09670702901"
   },
@@ -2647,7 +2791,7 @@
       }
     ],
     "section": "B",
-    "name": "Student4",
+    "name": "Student20",
     "studentId": "2200120",
     "schoolId": "09670702901"
   },
@@ -2659,7 +2803,7 @@
       }
     ],
     "section": "B",
-    "name": "Student4",
+    "name": "Student21",
     "studentId": "2200121",
     "schoolId": "09670702901"
   },
@@ -2671,8 +2815,56 @@
       }
     ],
     "section": "B",
-    "name": "Student4",
+    "name": "Student1",
     "studentId": "8171061",
+    "schoolId": "09670702901"
+  },
+  {
+    "studentClass": [
+      {
+        "classId": "8",
+        "className": "Class-8"
+      }
+    ],
+    "section": "B",
+    "name": "Student2",
+    "studentId": "8171062",
+    "schoolId": "09670702901"
+  },
+  {
+    "studentClass": [
+      {
+        "classId": "8",
+        "className": "Class-8"
+      }
+    ],
+    "section": "B",
+    "name": "Student3",
+    "studentId": "8171063",
+    "schoolId": "09670702901"
+  },
+  {
+    "studentClass": [
+      {
+        "classId": "8",
+        "className": "Class-8"
+      }
+    ],
+    "section": "B",
+    "name": "Student4",
+    "studentId": "8171064",
+    "schoolId": "09670702901"
+  },
+  {
+    "studentClass": [
+      {
+        "classId": "8",
+        "className": "Class-8"
+      }
+    ],
+    "section": "B",
+    "name": "Student5",
+    "studentId": "8171065",
     "schoolId": "09670702901"
   },
   {
