@@ -72,14 +72,25 @@
     "isMinimalMode": true
   },
   {
-    "name": "Experience Centre School",
-    "schoolId": "ecdemo",
+    "name": "Ps Vishnupura",
+    "schoolId": "09670702901",
     "password": "tarento@123",
     "state": "up",
     "autoSync": false,
     "autoSyncFrequency": 600000,
     "storeTrainingData": true,
-    "tags": true,
+    "tags": false,
+    "supportEmail": "abc@gmail.com , xyz@gmail.com"
+  },
+  {
+    "name": "Ps Phoolpur",
+    "schoolId": "09670703101",
+    "password": "tarento@123",
+    "state": "up",
+    "autoSync": false,
+    "autoSyncFrequency": 600000,
+    "storeTrainingData": true,
+    "tags": false,
     "supportEmail": "abc@gmail.com , xyz@gmail.com"
   }
 ]

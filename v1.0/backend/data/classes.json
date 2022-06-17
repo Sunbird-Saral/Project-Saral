@@ -374,12 +374,12 @@
   {
     "sections": [
       {
-        "section": "B"
+        "section": "A"
       }
     ],
     "classId": "5",
     "className": "Class-5",
-    "schoolId": "ecdemo"
+    "schoolId": "09670702901"
   },
   {
     "sections": [
@@ -389,7 +389,7 @@
     ],
     "classId": "2",
     "className": "Class-2",
-    "schoolId": "ecdemo"
+    "schoolId": "09670702901"
   },
   {
     "sections": [
@@ -399,7 +399,7 @@
     ],
     "classId": "3",
     "className": "Class-3",
-    "schoolId": "ecdemo"
+    "schoolId": "09670702901"
   },
   {
     "sections": [
@@ -409,7 +409,7 @@
     ],
     "classId": "4",
     "className": "Class-4",
-    "schoolId": "ecdemo"
+    "schoolId": "09670702901"
   },
   {
     "sections": [
@@ -419,7 +419,7 @@
     ],
     "classId": "6",
     "className": "Class-6",
-    "schoolId": "ecdemo"
+    "schoolId": "09670702901"
   },
   {
     "sections": [
@@ -429,7 +429,7 @@
     ],
     "classId": "7",
     "className": "Class-7",
-    "schoolId": "ecdemo"
+    "schoolId": "09670702901"
   },
   {
     "sections": [
@@ -439,6 +439,16 @@
     ],
     "classId": "8",
     "className": "Class-8",
-    "schoolId": "ecdemo"
+    "schoolId": "09670702901"
+  },
+  {
+    "sections": [
+      {
+        "section": "A"
+      }
+    ],
+    "classId": "5",
+    "className": "Class-5",
+    "schoolId": "09670703101"
   }
 ]
