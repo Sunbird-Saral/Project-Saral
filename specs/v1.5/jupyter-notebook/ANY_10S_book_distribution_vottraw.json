@@ -16,7 +16,7 @@
             "id": "QSGrGJO1V",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBERID1_1"
+                "ROLLNUMBERID1"
             ],
             "boundingBox": {
                 "height": 24.949164956302965,
@@ -233,7 +233,7 @@
             "id": "eOPWCb9Rk",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER1_Q1_1"
+                "ROLLNUMBER1_Q1"
             ],
             "boundingBox": {
                 "height": 16.813571735963983,
@@ -264,7 +264,7 @@
             "id": "IoiiKXg7W",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER1_Q2_1"
+                "ROLLNUMBER1_Q2"
             ],
             "boundingBox": {
                 "height": 16.271186440677965,
@@ -295,7 +295,7 @@
             "id": "X6DQKUauw",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER1_Q3_1"
+                "ROLLNUMBER1_Q3"
             ],
             "boundingBox": {
                 "height": 15.728801145391948,
@@ -326,7 +326,7 @@
             "id": "dnQPvH_Go",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER1_Q4_1"
+                "ROLLNUMBER1_Q4"
             ],
             "boundingBox": {
                 "height": 15.728801145391948,
@@ -357,7 +357,7 @@
             "id": "P2XdnKfKI",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER1_Q5_1"
+                "ROLLNUMBER1_Q5"
             ],
             "boundingBox": {
                 "height": 16.271186440677965,
@@ -388,7 +388,7 @@
             "id": "GZ-CM-P7O",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER1_Q6_1"
+                "ROLLNUMBER1_Q6"
             ],
             "boundingBox": {
                 "height": 16.271186440677965,
@@ -419,7 +419,7 @@
             "id": "ziLpoAHdd",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER1_Q7_1"
+                "ROLLNUMBER1_Q7"
             ],
             "boundingBox": {
                 "height": 15.728821835275424,
@@ -450,7 +450,7 @@
             "id": "_fKrQn04w",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER1_Q8_1"
+                "ROLLNUMBER1_Q8"
             ],
             "boundingBox": {
                 "height": 15.728801145391948,
@@ -481,7 +481,7 @@
             "id": "l1NGD6cNH",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER1_Q9_1"
+                "ROLLNUMBER1_Q9"
             ],
             "boundingBox": {
                 "height": 14.644071934586863,
@@ -512,7 +512,7 @@
             "id": "xUbPHw9xs",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER1_QTEN_1"
+                "ROLLNUMBER1_QTEN"
             ],
             "boundingBox": {
                 "height": 14.644071934586863,
@@ -543,7 +543,7 @@
             "id": "yldCO1Nsa",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBERID2_1"
+                "ROLLNUMBERID2"
             ],
             "boundingBox": {
                 "height": 22.77964446504237,
@@ -760,7 +760,7 @@
             "id": "SBMqtfRsj",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER2_Q1_1"
+                "ROLLNUMBER2_Q1"
             ],
             "boundingBox": {
                 "height": 14.644071934586863,
@@ -791,7 +791,7 @@
             "id": "USRNnKWYy",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER2_Q2_1"
+                "ROLLNUMBER2_Q2"
             ],
             "boundingBox": {
                 "height": 14.644071934586863,
@@ -822,7 +822,7 @@
             "id": "p98mrspf4",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER2_Q3_1"
+                "ROLLNUMBER2_Q3"
             ],
             "boundingBox": {
                 "height": 14.101686639300846,
@@ -853,7 +853,7 @@
             "id": "ryCx92emx",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER2_Q4_1"
+                "ROLLNUMBER2_Q4"
             ],
             "boundingBox": {
                 "height": 14.101686639300846,
@@ -884,7 +884,7 @@
             "id": "kPfhQEVQG",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER2_Q5_1"
+                "ROLLNUMBER2_Q5"
             ],
             "boundingBox": {
                 "height": 14.101686639300846,
@@ -915,7 +915,7 @@
             "id": "ckJxG77lm",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER2_Q6_1"
+                "ROLLNUMBER2_Q6"
             ],
             "boundingBox": {
                 "height": 15.186436539989407,
@@ -946,7 +946,7 @@
             "id": "SQ8QIl9am",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER2_Q7_1"
+                "ROLLNUMBER2_Q7"
             ],
             "boundingBox": {
                 "height": 15.728801145391948,
@@ -977,7 +977,7 @@
             "id": "qmaEzBZBO",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER2_Q8_1"
+                "ROLLNUMBER2_Q8"
             ],
             "boundingBox": {
                 "height": 15.186436539989407,
@@ -1008,7 +1008,7 @@
             "id": "NWkhTvHeh",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER2_Q9_1"
+                "ROLLNUMBER2_Q9"
             ],
             "boundingBox": {
                 "height": 15.186436539989407,
@@ -1039,7 +1039,7 @@
             "id": "VNxnc-mPv",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER2_QTEN_1"
+                "ROLLNUMBER2_QTEN"
             ],
             "boundingBox": {
                 "height": 15.18645722987288,
@@ -1070,7 +1070,7 @@
             "id": "g9YU2aOHg",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBERID3_1"
+                "ROLLNUMBERID3"
             ],
             "boundingBox": {
                 "height": 23.86439436573093,
@@ -1287,7 +1287,7 @@
             "id": "YMAWPBvsR",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER3_Q1_1"
+                "ROLLNUMBER3_Q1"
             ],
             "boundingBox": {
                 "height": 15.728801145391948,
@@ -1318,7 +1318,7 @@
             "id": "KHd8vCV6F",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER3_Q2_1"
+                "ROLLNUMBER3_Q2"
             ],
             "boundingBox": {
                 "height": 15.186436539989407,
@@ -1349,7 +1349,7 @@
             "id": "vSUiM6Rh5",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER3_Q3_1"
+                "ROLLNUMBER3_Q3"
             ],
             "boundingBox": {
                 "height": 15.728821835275424,
@@ -1380,7 +1380,7 @@
             "id": "PYGY0OEW-",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER3_Q4_1"
+                "ROLLNUMBER3_Q4"
             ],
             "boundingBox": {
                 "height": 14.101686639300846,
@@ -1411,7 +1411,7 @@
             "id": "laypyDBtg",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER3_Q5_1"
+                "ROLLNUMBER3_Q5"
             ],
             "boundingBox": {
                 "height": 15.186436539989407,
@@ -1442,7 +1442,7 @@
             "id": "hYX2xKDWw",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER3_Q6_1"
+                "ROLLNUMBER3_Q6"
             ],
             "boundingBox": {
                 "height": 15.728821835275424,
@@ -1473,7 +1473,7 @@
             "id": "DrtYCgwB0",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER3_Q7_1"
+                "ROLLNUMBER3_Q7"
             ],
             "boundingBox": {
                 "height": 15.728821835275424,
@@ -1504,7 +1504,7 @@
             "id": "Hmu0OqbuX",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER3_Q8_1"
+                "ROLLNUMBER3_Q8"
             ],
             "boundingBox": {
                 "height": 15.728821835275424,
@@ -1535,7 +1535,7 @@
             "id": "-wTsEoVxn",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER3_Q9_1"
+                "ROLLNUMBER3_Q9"
             ],
             "boundingBox": {
                 "height": 14.64405124470339,
@@ -1566,7 +1566,7 @@
             "id": "ZOgF_dJN1",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER3_QTEN_1"
+                "ROLLNUMBER3_QTEN"
             ],
             "boundingBox": {
                 "height": 16.271186440677965,
@@ -1597,7 +1597,7 @@
             "id": "zLFi-xJp4",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBERID4_1"
+                "ROLLNUMBERID4"
             ],
             "boundingBox": {
                 "height": 23.864415055614405,
@@ -1814,7 +1814,7 @@
             "id": "mxBzOyJni",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER4_Q1_1"
+                "ROLLNUMBER4_Q1"
             ],
             "boundingBox": {
                 "height": 15.728821835275424,
@@ -1845,7 +1845,7 @@
             "id": "BxTkiVTVn",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER4_Q2_1"
+                "ROLLNUMBER4_Q2"
             ],
             "boundingBox": {
                 "height": 16.271186440677965,
@@ -1876,7 +1876,7 @@
             "id": "lM_HB9Fwv",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER4_Q3_1"
+                "ROLLNUMBER4_Q3"
             ],
             "boundingBox": {
                 "height": 14.644071934586863,
@@ -1907,7 +1907,7 @@
             "id": "eoK9wBaB_",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER4_Q4_1"
+                "ROLLNUMBER4_Q4"
             ],
             "boundingBox": {
                 "height": 15.186436539989407,
@@ -1938,7 +1938,7 @@
             "id": "B_dZ8RgC0",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER4_Q5_1"
+                "ROLLNUMBER4_Q5"
             ],
             "boundingBox": {
                 "height": 15.728821835275424,
@@ -1969,7 +1969,7 @@
             "id": "dgZgxsiYT",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER4_Q6_1"
+                "ROLLNUMBER4_Q6"
             ],
             "boundingBox": {
                 "height": 15.728821835275424,
@@ -2000,7 +2000,7 @@
             "id": "Bv8ubq07n",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER4_Q7_1"
+                "ROLLNUMBER4_Q7"
             ],
             "boundingBox": {
                 "height": 14.644071934586863,
@@ -2031,7 +2031,7 @@
             "id": "G9BQnh9sa",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER4_Q8_1"
+                "ROLLNUMBER4_Q8"
             ],
             "boundingBox": {
                 "height": 15.728801145391948,
@@ -2062,7 +2062,7 @@
             "id": "7n5wF72mo",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER4_Q9_1"
+                "ROLLNUMBER4_Q9"
             ],
             "boundingBox": {
                 "height": 14.101686639300846,
@@ -2093,7 +2093,7 @@
             "id": "tquv_48j2",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER4_QTEN_1"
+                "ROLLNUMBER4_QTEN"
             ],
             "boundingBox": {
                 "height": 15.728821835275424,
@@ -2124,7 +2124,7 @@
             "id": "50IIaFNBK",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBERID5_1"
+                "ROLLNUMBERID5"
             ],
             "boundingBox": {
                 "height": 24.406779661016948,
@@ -2341,7 +2341,7 @@
             "id": "Ns9tivGqV",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER5_Q5_1"
+                "ROLLNUMBER5_Q1"
             ],
             "boundingBox": {
                 "height": 14.644071934586863,
@@ -2372,7 +2372,7 @@
             "id": "aoVq3VWEk",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER5_Q2_1"
+                "ROLLNUMBER5_Q2"
             ],
             "boundingBox": {
                 "height": 15.186436539989407,
@@ -2403,7 +2403,7 @@
             "id": "-E9aMIh8e",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER5_Q3_1"
+                "ROLLNUMBER5_Q3"
             ],
             "boundingBox": {
                 "height": 15.728821835275424,
@@ -2434,7 +2434,7 @@
             "id": "HK4rm_TNh",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER5_Q4_1"
+                "ROLLNUMBER5_Q4"
             ],
             "boundingBox": {
                 "height": 15.18645722987288,
@@ -2465,7 +2465,7 @@
             "id": "ZvcWBPlra",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER5_Q5_1"
+                "ROLLNUMBER5_Q5"
             ],
             "boundingBox": {
                 "height": 15.186436539989407,
@@ -2496,7 +2496,7 @@
             "id": "EtCE4QvrB",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER5_Q6_1"
+                "ROLLNUMBER5_Q6"
             ],
             "boundingBox": {
                 "height": 14.644071934586863,
@@ -2527,7 +2527,7 @@
             "id": "ENxIdhuLL",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER5_Q7_1"
+                "ROLLNUMBER5_Q7"
             ],
             "boundingBox": {
                 "height": 15.728801145391948,
@@ -2558,7 +2558,7 @@
             "id": "2E3UOjI50",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER5_Q8_1"
+                "ROLLNUMBER5_Q8"
             ],
             "boundingBox": {
                 "height": 14.644071934586863,
@@ -2589,7 +2589,7 @@
             "id": "Zvlb56qLF",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER5_Q9_1"
+                "ROLLNUMBER5_Q9"
             ],
             "boundingBox": {
                 "height": 15.728821835275424,
@@ -2620,7 +2620,7 @@
             "id": "zWRGROPq4",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER5_QTEN_1"
+                "ROLLNUMBER5_QTEN"
             ],
             "boundingBox": {
                 "height": 15.728821835275424,
@@ -2651,7 +2651,7 @@
             "id": "Sq8XaNGhs",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBERID6_1"
+                "ROLLNUMBERID6"
             ],
             "boundingBox": {
                 "height": 24.94914426641949,
@@ -2868,7 +2868,7 @@
             "id": "1sjs2-K4c",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER6_Q1_1"
+                "ROLLNUMBER6_Q1"
             ],
             "boundingBox": {
                 "height": 15.18645722987288,
@@ -2899,7 +2899,7 @@
             "id": "LrrFZeH1B",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER6_Q2_1"
+                "ROLLNUMBER6_Q2"
             ],
             "boundingBox": {
                 "height": 15.18641585010593,
@@ -2930,7 +2930,7 @@
             "id": "cyCDn28bT",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER6_Q3_1"
+                "ROLLNUMBER6_Q3"
             ],
             "boundingBox": {
                 "height": 14.101686639300846,
@@ -2961,7 +2961,7 @@
             "id": "5jQ8NDLVN",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER6_Q4_1"
+                "ROLLNUMBER6_Q4"
             ],
             "boundingBox": {
                 "height": 14.101686639300846,
@@ -2992,7 +2992,7 @@
             "id": "miUH9Q7Bd",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER6_Q4_1"
+                "ROLLNUMBER6_Q5"
             ],
             "boundingBox": {
                 "height": 14.64405124470339,
@@ -3023,7 +3023,7 @@
             "id": "U2JM9Itvi",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER6_Q6_1"
+                "ROLLNUMBER6_Q6"
             ],
             "boundingBox": {
                 "height": 14.64405124470339,
@@ -3054,7 +3054,7 @@
             "id": "fk1Vib9wO",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER6_Q7_1"
+                "ROLLNUMBER6_Q7"
             ],
             "boundingBox": {
                 "height": 14.64405124470339,
@@ -3085,7 +3085,7 @@
             "id": "aTKBiIa89",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER6_Q8_1"
+                "ROLLNUMBER6_Q8"
             ],
             "boundingBox": {
                 "height": 15.18641585010593,
@@ -3116,7 +3116,7 @@
             "id": "i9pATkqQF",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER6_Q9_1"
+                "ROLLNUMBER6_Q9"
             ],
             "boundingBox": {
                 "height": 15.18645722987288,
@@ -3147,7 +3147,7 @@
             "id": "ucg5bZ_fV",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER6_QTEN_1"
+                "ROLLNUMBER6_QTEN"
             ],
             "boundingBox": {
                 "height": 15.728780455508474,
@@ -3178,7 +3178,7 @@
             "id": "neNmwT_dQ",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBERID7_1"
+                "ROLLNUMBERID7"
             ],
             "boundingBox": {
                 "height": 23.322009070444913,
@@ -3395,7 +3395,7 @@
             "id": "aQKyueJkk",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER7_Q1_1"
+                "ROLLNUMBER7_Q1"
             ],
             "boundingBox": {
                 "height": 14.64405124470339,
@@ -3426,7 +3426,7 @@
             "id": "tmuOkOTq_",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER7_Q2_1"
+                "ROLLNUMBER7_Q2"
             ],
             "boundingBox": {
                 "height": 14.101686639300846,
@@ -3457,7 +3457,7 @@
             "id": "zClNzuYPe",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER7_Q3_1"
+                "ROLLNUMBER7_Q3"
             ],
             "boundingBox": {
                 "height": 13.559322033898304,
@@ -3488,7 +3488,7 @@
             "id": "BLtpXdRM9",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER7_Q4_1"
+                "ROLLNUMBER7_Q4"
             ],
             "boundingBox": {
                 "height": 14.101686639300846,
@@ -3519,7 +3519,7 @@
             "id": "zFbeR5u1g",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER7_Q5_1"
+                "ROLLNUMBER7_Q5"
             ],
             "boundingBox": {
                 "height": 14.101728019067796,
@@ -3550,7 +3550,7 @@
             "id": "6sRqXtgk8",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER7_Q6_1"
+                "ROLLNUMBER7_Q6"
             ],
             "boundingBox": {
                 "height": 15.18645722987288,
@@ -3581,7 +3581,7 @@
             "id": "9H0ssrUs-",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER7_Q7_1"
+                "ROLLNUMBER7_Q7"
             ],
             "boundingBox": {
                 "height": 15.18641585010593,
@@ -3612,7 +3612,7 @@
             "id": "NZYBWAQIq",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER7_Q8_1"
+                "ROLLNUMBER7_Q8"
             ],
             "boundingBox": {
                 "height": 15.728821835275424,
@@ -3643,7 +3643,7 @@
             "id": "Q-Ad3S3yV",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER7_Q9_1"
+                "ROLLNUMBER7_Q9"
             ],
             "boundingBox": {
                 "height": 15.18645722987288,
@@ -3674,7 +3674,7 @@
             "id": "iiOEfNXGL",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER7_QTEN_1"
+                "ROLLNUMBER7_QTEN"
             ],
             "boundingBox": {
                 "height": 16.271186440677965,
@@ -3705,7 +3705,7 @@
             "id": "8QL7Hos7F",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBERID8_1"
+                "ROLLNUMBERID8"
             ],
             "boundingBox": {
                 "height": 23.864415055614405,
@@ -3922,7 +3922,7 @@
             "id": "9Df4kVc2l",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER8_Q1_1"
+                "ROLLNUMBER8_Q1"
             ],
             "boundingBox": {
                 "height": 14.101728019067796,
@@ -3953,7 +3953,7 @@
             "id": "aL7erjTng",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER8_Q2_1"
+                "ROLLNUMBER8_Q2"
             ],
             "boundingBox": {
                 "height": 16.271186440677965,
@@ -3984,7 +3984,7 @@
             "id": "OYvBxkYJv",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER8_Q3_1"
+                "ROLLNUMBER8_Q3"
             ],
             "boundingBox": {
                 "height": 16.81355104608051,
@@ -4015,7 +4015,7 @@
             "id": "nZhxFzOvN",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER8_Q4_1"
+                "ROLLNUMBER8_Q4"
             ],
             "boundingBox": {
                 "height": 15.18641585010593,
@@ -4046,7 +4046,7 @@
             "id": "O3GQfXgtZ",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER8_Q5_1"
+                "ROLLNUMBER8_Q5"
             ],
             "boundingBox": {
                 "height": 15.18645722987288,
@@ -4077,7 +4077,7 @@
             "id": "K40o1cc79",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER8_Q6_1"
+                "ROLLNUMBER8_Q6"
             ],
             "boundingBox": {
                 "height": 14.644092624470339,
@@ -4108,7 +4108,7 @@
             "id": "LShu90JAz",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER8_Q7_1"
+                "ROLLNUMBER8_Q7"
             ],
             "boundingBox": {
                 "height": 14.644092624470339,
@@ -4139,7 +4139,7 @@
             "id": "f10Hkf66Q",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER8_Q8_1"
+                "ROLLNUMBER8_Q8"
             ],
             "boundingBox": {
                 "height": 15.18645722987288,
@@ -4170,7 +4170,7 @@
             "id": "p6YYRtv5k",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER8_Q9_1"
+                "ROLLNUMBER8_Q9"
             ],
             "boundingBox": {
                 "height": 15.18645722987288,
@@ -4201,7 +4201,7 @@
             "id": "2iWsZSIop",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER8_QTEN_1"
+                "ROLLNUMBER8_QTEN"
             ],
             "boundingBox": {
                 "height": 15.728821835275424,
@@ -4232,7 +4232,7 @@
             "id": "_Pzod5Xwh",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBERID9_1"
+                "ROLLNUMBERID9"
             ],
             "boundingBox": {
                 "height": 24.94914426641949,
@@ -4449,7 +4449,7 @@
             "id": "4rbeTTyeM",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER9_Q1_1"
+                "ROLLNUMBER9_Q1"
             ],
             "boundingBox": {
                 "height": 14.64405124470339,
@@ -4480,7 +4480,7 @@
             "id": "Fqi1rMIRA",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER9_Q2_1"
+                "ROLLNUMBER9_Q2"
             ],
             "boundingBox": {
                 "height": 14.644092624470339,
@@ -4511,7 +4511,7 @@
             "id": "6Uhnl9114",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER9_Q3_1"
+                "ROLLNUMBER9_Q3"
             ],
             "boundingBox": {
                 "height": 14.101686639300846,
@@ -4542,7 +4542,7 @@
             "id": "QzgGn2EEV",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER9_Q4_1"
+                "ROLLNUMBER9_Q4"
             ],
             "boundingBox": {
                 "height": 15.18645722987288,
@@ -4573,7 +4573,7 @@
             "id": "d0cRicYW7",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER9_Q5_1"
+                "ROLLNUMBER9_Q5"
             ],
             "boundingBox": {
                 "height": 14.101728019067796,
@@ -4604,7 +4604,7 @@
             "id": "hBDLGuKJI",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER9_Q6_1"
+                "ROLLNUMBER9_Q6"
             ],
             "boundingBox": {
                 "height": 15.728821835275424,
@@ -4635,7 +4635,7 @@
             "id": "GN9JtqBkd",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER9_Q7_1"
+                "ROLLNUMBER9_Q7"
             ],
             "boundingBox": {
                 "height": 15.18645722987288,
@@ -4666,7 +4666,7 @@
             "id": "TblXjof3t",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER9_Q8_1"
+                "ROLLNUMBER9_Q8"
             ],
             "boundingBox": {
                 "height": 16.271186440677965,
@@ -4697,7 +4697,7 @@
             "id": "nPKJDihen",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER9_Q9_1"
+                "ROLLNUMBER9_Q9"
             ],
             "boundingBox": {
                 "height": 15.728821835275424,
@@ -4728,7 +4728,7 @@
             "id": "r9XxjjkaU",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBER9_QTEN_1"
+                "ROLLNUMBER9_QTEN"
             ],
             "boundingBox": {
                 "height": 16.271186440677965,
@@ -4759,7 +4759,7 @@
             "id": "aDLf63NKJ",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBERIDTEN_1"
+                "ROLLNUMBERIDTEN"
             ],
             "boundingBox": {
                 "height": 24.94914426641949,
@@ -4976,7 +4976,7 @@
             "id": "Pazz8BUl1",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBERTEN_Q1_1"
+                "ROLLNUMBERTEN_Q1"
             ],
             "boundingBox": {
                 "height": 14.644092624470339,
@@ -5007,7 +5007,7 @@
             "id": "QNuvUKfS4",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBERTEN_Q2_1"
+                "ROLLNUMBERTEN_Q2"
             ],
             "boundingBox": {
                 "height": 15.18641585010593,
@@ -5038,7 +5038,7 @@
             "id": "tgPu1QAUU",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBERTEN_Q3_1"
+                "ROLLNUMBERTEN_Q3"
             ],
             "boundingBox": {
                 "height": 14.644092624470339,
@@ -5069,7 +5069,7 @@
             "id": "re4wdauHc",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBERTEN_Q4_1"
+                "ROLLNUMBERTEN_Q4"
             ],
             "boundingBox": {
                 "height": 16.81355104608051,
@@ -5100,7 +5100,7 @@
             "id": "FxRiHTxzJ",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBERTEN_Q5_1"
+                "ROLLNUMBERTEN_Q5"
             ],
             "boundingBox": {
                 "height": 15.728821835275424,
@@ -5131,7 +5131,7 @@
             "id": "XDSLgOPLZ",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBERTEN_Q6_1"
+                "ROLLNUMBERTEN_Q6"
             ],
             "boundingBox": {
                 "height": 14.915254237288135,
@@ -5162,7 +5162,7 @@
             "id": "oFSbtjMan",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBERTEN_Q7_1"
+                "ROLLNUMBERTEN_Q7"
             ],
             "boundingBox": {
                 "height": 15.728780455508474,
@@ -5193,7 +5193,7 @@
             "id": "h50x59XGO",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBERTEN_Q8_1"
+                "ROLLNUMBERTEN_Q8"
             ],
             "boundingBox": {
                 "height": 15.728821835275424,
@@ -5224,7 +5224,7 @@
             "id": "WK-umeB_o",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBERTEN_Q9_1"
+                "ROLLNUMBERTEN_Q9"
             ],
             "boundingBox": {
                 "height": 14.101728019067796,
@@ -5255,7 +5255,7 @@
             "id": "IyvYqNMRz",
             "type": "RECTANGLE",
             "tags": [
-                "ROLLNUMBERTEN_QTEN_1"
+                "ROLLNUMBERTEN_QTEN"
             ],
             "boundingBox": {
                 "height": 15.18645722987288,
