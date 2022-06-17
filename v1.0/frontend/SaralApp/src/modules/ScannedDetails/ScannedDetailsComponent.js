@@ -916,7 +916,6 @@ const ScannedDetailsComponent = ({
         }
 
         let regexValidation
-        console.log("isOmroptions",isOmrOptions);
         if (isOmrOptions) {
             regexValidation = omrValidation();
         }
@@ -1102,8 +1101,85 @@ const ScannedDetailsComponent = ({
         }
     }
 
+    const saveRawJson = async() => {
+
+        let getDataFromLocal = await getScannedDataFromLocal();
+
+        let rawJsonData = {
+            rawJson: ocrLocalResponse
+        }
+
+        let hasMinimalMode = loginData.data.school.hasOwnProperty("isMinimalMode") && loginData.data.school.isMinimalMode;
+        
+        if (!hasMinimalMode) {
+            rawJsonData.organizationId    =    loginData.data.school.schoolId,
+            rawJsonData.class             =    filteredData.class,
+            rawJsonData.examDate          =    filteredData.examDate,
+            rawJsonData.subject           =    filteredData.subject,
+            rawJsonData.section           =    filteredData.section
+        } else {
+            rawJsonData.roiId             =    ocrLocalResponse.roiId
+        }
+        if (getDataFromLocal != null & getDataFromLocal.length > 0) {            
+            var filterData = ''
+            if (!minimalFlag) {
+                filterData = getDataFromLocal.filter((e) => {   
+                   if (filteredData.class == e.class && e.examDate == filteredData.examDate && e.subject == filteredData.subject & e.organizationId == loginData.data.school.schoolId && filteredData.section == e.section) {
+                       return true
+                   }
+               })
+            } else {                
+                 filterData = getDataFromLocal.filter((e) => {
+                    if (e.roiId == roiData.data.roiId) {
+                        return true
+                    }
+                })
+            }
+
+            if (filterData.length > 0) {
+                getDataFromLocal.forEach((e, index) => {
+                    // let findRoiID = e.roiId == roiData.data.roiId;
+
+                    let checkDataExistence = !minimalFlag ? filteredData.class == e.class && e.examDate == filteredData.examDate && e.subject == filteredData.subject && e.organizationId == loginData.data.school.schoolId && filteredData.section == e.section : true
+                    
+                    if (checkDataExistence) {
+                        if (e.rawJson.roiId == roiData.data.roiId) {
+                            e.rawJson = rawJsonData.rawJson
+                        } else {
+                            getDataFromLocal.push(rawJsonData)
+                        }
+                    }
+                });
+
+                if (bgFlag) {
+                    callCustomModal(Strings.message_text, Strings.auto_sync_in_progress_please_wait, false,false)
+                } else {
+                    setScannedDataIntoLocal(getDataFromLocal)
+                    goToMyScanScreen()
+                }
+
+            } else {
+                getDataFromLocal.push(rawJsonData)
+                setScannedDataIntoLocal(getDataFromLocal)
+                goToMyScanScreen()
+            }
+            
+        } else {
+            setScannedDataIntoLocal([rawJsonData])
+            goToMyScanScreen()
+        }
+
+
+    }
+
 
     const saveData = async (sumOfAllMarks) => {
+
+        let hasRawPrediction = loginData.data.school.hasOwnProperty("storeRawPrediction") && loginData.data.school.storeRawPrediction;
+        if (hasRawPrediction) {
+            saveRawJson();
+        } else {
+
         let elements = neglectData;
         let data = ocrLocalResponse.layout.cells.filter((element) => {
             if (element.format.name == elements[0] || element.format.name == elements[1] || element.format.name == elements[2] || element.format.name == elements[3]) {
@@ -1192,6 +1268,7 @@ const ScannedDetailsComponent = ({
         }
         saveAndFetchFromLocalStorag(saveObj)
     }
+}
 
     const goToMyScanScreen = () => {
         const resetAction = StackActions.reset({
