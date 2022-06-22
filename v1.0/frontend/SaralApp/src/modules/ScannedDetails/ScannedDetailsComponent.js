@@ -295,8 +295,9 @@ const ScannedDetailsComponent = ({
     const callSingleStudentSheetData = () => {
         let data = ''
         let elements = neglectData;
+        let checkRoLLNumberExist = ocrLocalResponse.layout.hasOwnProperty("identifierPrefix") ? ocrLocalResponse.layout.identifierPrefix : neglectData[0]
         data = ocrLocalResponse.layout.cells.filter((element) => {
-            if (element.format.name == elements[0] || element.format.name == elements[1] || element.format.name == elements[4] || element.page && element.page != 1) {
+            if (element.format.name == checkRoLLNumberExist || element.format.name == elements[1] || element.format.name == elements[4] || element.page && element.page != 1) {
                 return false
             }
             else {
@@ -345,12 +346,10 @@ const ScannedDetailsComponent = ({
 
         //get student Id
         ocrLocalResponse.layout.cells.filter((element) => {
-            student_ID.forEach((e) => {
-                if (element.format.name == e) {
-                    setStudentID(element.consolidatedPrediction)
-                    setMultipageStdId(element.consolidatedPrediction)
-                }
-            })
+            if (element.format.name == checkRoLLNumberExist) {
+                setStudentID(element.consolidatedPrediction)
+                setMultipageStdId(element.consolidatedPrediction)
+            }
         })
     }
 
@@ -981,7 +980,8 @@ const ScannedDetailsComponent = ({
         const elements = neglectData;
 
         let filterDataAccordingPage = roisData.layout.cells.filter((element) => {
-            if (element.format.name == elements[0] || element.format.name == elements[1] || element.format.name == elements[4] || element.page != currentIndex + 1) {
+            let checkIdentifierExist = ocrLocalResponse.layout.hasOwnProperty("identifierPrefix") ? ocrLocalResponse.layout.identifierPrefix : neglectData[0]
+            if (element.format.name == checkIdentifierExist || element.format.name == elements[1] || element.format.name == elements[4] || element.page != currentIndex + 1) {
                 return false
             }
             else {
@@ -1016,7 +1016,8 @@ const ScannedDetailsComponent = ({
         const elements = neglectData
 
         let extract_MAX_OBTAINED_MARKS = ocrLocalResponse.layout.cells.filter((e) => {
-            if (e.format.name == elements[0]) {
+            let checkIdentifierExist = ocrLocalResponse.layout.hasOwnProperty("identifierPrefix") ? ocrLocalResponse.layout.identifierPrefix : neglectData[0]
+            if (e.format.name == checkIdentifierExist) {
                 return
             }
             if (e.format.name == elements[2]) {
@@ -1050,8 +1051,9 @@ const ScannedDetailsComponent = ({
             } else {
                 setNextBtn(`Scan Page#${currentIndex}`)
                 const elements = neglectData;
+                let checkIdentifierExist = ocrLocalResponse.layout.hasOwnProperty("identifierPrefix") ? ocrLocalResponse.layout.identifierPrefix : neglectData[0]
                 let filterDataAccordingPage = ocrLocalResponse.layout.cells.filter((element) => {
-                    if (element.format.name == elements[0] || element.format.name == elements[1] || element.format.name == elements[4] || element.page != currentIndex - 1) {
+                    if (element.format.name == checkIdentifierExist || element.format.name == elements[1] || element.format.name == elements[4] || element.page != currentIndex - 1) {
                         return false
                     }
                     else {
@@ -1073,8 +1075,9 @@ const ScannedDetailsComponent = ({
 
     const saveData = async (sumOfAllMarks) => {
         let elements = neglectData;
+        let checkIdentifierExist = ocrLocalResponse.layout.hasOwnProperty("identifierPrefix") ? ocrLocalResponse.layout.identifierPrefix : neglectData[0]
         let data = ocrLocalResponse.layout.cells.filter((element) => {
-            if (element.format.name == elements[0] || element.format.name == elements[1] || element.format.name == elements[2] || element.format.name == elements[3]) {
+            if (element.format.name == checkIdentifierExist || element.format.name == elements[1] || element.format.name == elements[2] || element.format.name == elements[3]) {
             }
             else {
                 return true
@@ -1108,7 +1111,7 @@ const ScannedDetailsComponent = ({
         })
 
         let storeTrainingData = ocrLocalResponse.layout.cells.filter((element) => {
-            if (element.format.name == elements[0]) {
+            if (element.format.name == checkIdentifierExist) {
                 return true
             }
         })
