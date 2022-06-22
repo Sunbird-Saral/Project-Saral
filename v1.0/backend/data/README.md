@@ -9,6 +9,7 @@ First you need to come under docker container
 for deleting current data in database
 *  node ./data/import-data.js --delete
 
+
 # state:- UP
 
 ## schoolId:u001

@@ -30,7 +30,6 @@ const school = JSON.parse(fs.readFileSync(`${__dirname}/schools.json`, 'utf-8'))
 const student = JSON.parse(fs.readFileSync(`${__dirname}/students.json`, 'utf-8'));
 const classes = JSON.parse(fs.readFileSync(`${__dirname}/classes.json`, 'utf-8'));
 const exam = JSON.parse(fs.readFileSync(`${__dirname}/exams.json`, 'utf-8'));
-const marks = JSON.parse(fs.readFileSync(`${__dirname}/marks.json`, 'utf-8'));
 const roi = JSON.parse(fs.readFileSync(`${__dirname}/rois.json`, 'utf-8'));
 const counter = JSON.parse(fs.readFileSync(`${__dirname}/counters.json`, 'utf-8'));
 const brand = JSON.parse(fs.readFileSync(`${__dirname}/brands.json`, 'utf-8'));

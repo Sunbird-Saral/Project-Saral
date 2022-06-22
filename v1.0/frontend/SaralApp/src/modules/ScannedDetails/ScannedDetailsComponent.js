@@ -79,6 +79,7 @@ const ScannedDetailsComponent = ({
     const [tagData ,setTagData] = useState([])
     const [questionIdData ,setQuestionIdData] = useState()
     const [omrResultErr, setOmrResult] = useState()
+    const [isOmrOptions, setOmrOptions] = useState(false)
 
     const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.scannedDetailComponent[0]
     const defaultValidateError = ocrLocalResponse.layout && ocrLocalResponse.layout.resultValidation && ocrLocalResponse.layout.resultValidation.validate.errorMsg
@@ -230,6 +231,8 @@ const ScannedDetailsComponent = ({
             setIsmultipleStudent(true)
             callMultipleStudentSheetData(checkIsStudentMultipleSingle)
         } else {
+            let checkIsOmrOption = ocrLocalResponse.layout.cells[1].hasOwnProperty("omrOptions") ? true : false
+            setOmrOptions(checkIsOmrOption)
             callSingleStudentSheetData()
         }
     }, []);
@@ -780,7 +783,7 @@ const ScannedDetailsComponent = ({
             let regexValue = regxValidation(value.cellId)
             ocrLocalResponse.layout.cells.forEach(element => {
                 if (element.cellId == value.cellId) {
-                    if (!regexValue[0]) {
+                    if (!regexValue[0] && text.length > 0) {
                         showErrorMessage(regexValue[1] ? regexValue[1] : defaultValidateError)
                     }
 
@@ -804,7 +807,7 @@ const ScannedDetailsComponent = ({
             let regexValue = regxValidation(value.cellId)
             ocrLocalResponse.layout.cells.forEach(element => {
                 if (element.cellId == value.cellId) {
-                    if (!regexValue[0]) {
+                    if (!regexValue[0] && text.length > 0) {
                         showErrorMessage(regexValue[1] ? regexValue[1] : defaultValidateError )
                     }
                 }
@@ -858,6 +861,7 @@ const ScannedDetailsComponent = ({
             element.rois.forEach((data) => {
                 if (data.extractionMethod == CELL_OMR) {
                     totalRois = isMultiple ? element.rois.length : !isMultipleStudent && element.rois.length == 1 ? element.rois.length : element.rois.length - 1
+                    let regexValue = regxValidation(element.cellId)
                     if (totalRois < element.consolidatedPrediction) {
                         validationCellOmr = true
                     }
@@ -867,6 +871,28 @@ const ScannedDetailsComponent = ({
         return [validationCellOmr, totalRois]
     }
 
+    const omrValidation = () =>{
+        var result = false
+        var regexErrormsg
+        var regextResult = false
+            for (let j = 0; j < newArrayValue.length; j++) {
+                let filter = ocrLocalResponse.layout.cells.filter((el)=> el.cellId == newArrayValue[j].cellId);
+                if (filter[0].hasOwnProperty("omrOptions")) {   
+                    let consolidated = filter[0].consolidatedPrediction
+                    regexErrormsg = filter && filter[0].validate && filter[0].validate.errorMsg
+                    let regexExp = filter[0] && filter[0].validate && filter[0].validate.regExp ? filter[0].validate.regExp : defaultValidateExp
+                    let number = consolidated;
+                    let regex = new RegExp(regexExp)
+                    result = regex.test(number);
+                    
+                    if (!result) {
+                        regextResult = !result
+                        showErrorMessage(`${regexErrormsg}`)
+                    }
+                }
+        }
+    return regextResult
+    }
 
     const onSubmitClick = async () => {
         let validCell = false
@@ -891,14 +917,23 @@ const ScannedDetailsComponent = ({
             }
         }
 
+        let regexValidation
+        console.log("isOmroptions",isOmrOptions);
+        if (isOmrOptions) {
+            regexValidation = omrValidation();
+        }
+
+
         let cellOmrValidation = validateCellOMR(false)
-
-
         if (disable || validCell) {
             showErrorMessage(Strings.please_correct_marks_data)
         }
+        else if(regexValidation){
+        }
         else if (cellOmrValidation[0]) {
-            showErrorMessage(`omr value should be 0 to ${cellOmrValidation[1]}`)
+            if (typeof(cellOmrValidation[1]) == 'number') {
+                showErrorMessage(`omr value should be 0 to ${cellOmrValidation[1]}`)
+            } 
         }
         else if (!studentValid && !toggleCheckBox) {
             showErrorMessage(Strings.please_correct_student_id)
@@ -1126,7 +1161,7 @@ const ScannedDetailsComponent = ({
 
         let saveObj = {
             "classId": minimalFlag ? 0 : filteredData.class,
-            "examDate": minimalFlag ? 0 : filteredData.examDate,
+            "examDate": minimalFlag ? null : filteredData.examDate,
             "subject": minimalFlag ? 0 : filteredData.subject,
             "studentsMarkInfo": [
                 {
@@ -1382,7 +1417,7 @@ const ScannedDetailsComponent = ({
                                                                 rowTitle={element.consolidatedPrediction}
                                                                 rowBorderColor={markBorderOnCell(element)}
                                                                 editable={true}
-                                                                keyboardType={'number-pad'}
+                                                                keyboardType={element.hasOwnProperty("omrOptions") ?  'name' : 'number-pad'}
                                                                 maxLength={lengthAccordingSheet(element)}
                                                                 onChangeText={(text) => {
                                                                     handleTextChange(text.trim(), index, newArrayValue, element)
