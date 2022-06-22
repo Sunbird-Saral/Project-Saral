@@ -23,14 +23,8 @@ exports.config = {
     // will be called from there.
     //
     specs: [
-        [
-        // './test/specs/guj_1student_5question.js',
-        //  './test/specs/guj_1student_12question.js',
-        //  './test/specs/multi_Subject.js',
-         './test/specs/up_3student_30question.js',
-        // './test/specs/up_4student_20question.js',
-        // './test/specs/up_8student_13question.js',
-        ]
+        './specs/guj_1student_5question.js'
+        
     ],
     // Patterns to exclude.
     exclude: [
@@ -64,9 +58,8 @@ exports.config = {
         "appium:deviceName": "OPPO A74 5G",
         "appium:automationName": "UIAutomator2",
         // "appium:app":path.join(process.cwd(), "./src/js/demoApp/app/android/ApiDemos-debug.apk")
-        "appium:app": path.join(process.cwd(), "./SaralApp/android/app/build/outputs/apk/release/app-release.apk"),
+        "appium:app": path.join(process.cwd(), "./../SaralApp/android/app/build/outputs/apk/release/app-release.apk"),
         "appium:autoGrantPermissions": true
-  
     }],
     //
     // ===================

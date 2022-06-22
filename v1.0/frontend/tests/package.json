@@ -1,11 +1,18 @@
 {
-  "name": "frontend",
+  "name": "tests",
   "version": "1.0.0",
-  "description": "",
-  "main": ".eslintrc.js",
+  "description": "***\r ## NODE\r Install [Node v16](https://nodejs.org/en/). Not the latest version,as that is not compatible as of now with WebdriverIO & Appium.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [
+    "webdriverIO",
+    "appium"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
