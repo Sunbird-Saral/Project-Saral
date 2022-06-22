@@ -23,8 +23,16 @@ exports.config = {
     // will be called from there.
     //
     specs: [
-        './specs/guj_1student_5question.js'
-        
+        './specs/guj_1student_5question.js',
+        './specs/guj_1student_12question.js',
+        './specs/up_4student_20question.js',
+        './specs/up_8student_13question.js',
+        './specs/up_3student_30question.js',
+        './specs/multi_Subject.js',
+
+
+
+
     ],
     // Patterns to exclude.
     exclude: [
@@ -131,9 +139,6 @@ exports.config = {
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
     reporters: ['spec'],
-
-
-    
     //
     // Options to be passed to Mocha.
     // See the full list at http://mochajs.org/
