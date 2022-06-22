@@ -197,11 +197,12 @@ const ScannedDetailsComponent = ({
     }
 
     useEffect(() => {
+        let checkRoLLNumberExist = ocrLocalResponse.layout.hasOwnProperty("identifierPrefix") ? ocrLocalResponse.layout.identifierPrefix : multipleStudent[0]
         let checkIsStudentMultipleSingle = ocrLocalResponse.layout.cells.filter((e) => {
             let withNoDigits = e.format.name.replace(/[0-9]/g, '');
             let wordLen = withNoDigits.length;
             let multiple = 0
-            if (wordLen === multipleStudent[0].length && withNoDigits === multipleStudent[0]) {
+            if (wordLen === checkRoLLNumberExist.length && withNoDigits === checkRoLLNumberExist) {
                 multiple = multiple + 1
             }
             return multiple
@@ -213,12 +214,12 @@ const ScannedDetailsComponent = ({
             setNextBtn("SCAN PAGE #2")
         }
 
-        if (checkIsStudentMultipleSingle.length > 0) {
+        if (checkIsStudentMultipleSingle.length > 1) {
             let findNonZeroRollStd = ocrLocalResponse.layout.cells.filter((e) => {
                 let withNoDigits = e.format.name.replace(/[0-9]/g, '');
                 let wordLen = withNoDigits.length;
                 let multiple = 0
-                if (wordLen === multipleStudent[0].length && withNoDigits === multipleStudent[0] && (parseInt(e.consolidatedPrediction) != 0)) {
+                if (wordLen === checkRoLLNumberExist.length && withNoDigits === checkRoLLNumberExist && (parseInt(e.consolidatedPrediction) != 0)) {
                     multiple = multiple + 1
                 }
                 return multiple
@@ -506,8 +507,10 @@ const ScannedDetailsComponent = ({
 
     const saveMultiData = async () => {
 
+        let checkRoLLNumberExist = ocrLocalResponse.layout.hasOwnProperty("identifierPrefix") ? ocrLocalResponse.layout.identifierPrefix : multipleStudent[0]
         let storeTrainingData = ocrLocalResponse.layout.cells.filter((element) => {
-            if (element.format.name.slice(0, multipleStudent[0].length) == multipleStudent[0]) {
+
+            if (element.format.name.slice(0, checkRoLLNumberExist.length) == checkRoLLNumberExist) {
                 return true
             }
         })
