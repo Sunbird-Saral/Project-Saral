@@ -7,6 +7,7 @@
             "minHeight": 390,
             "detectionRadius": 12
         }, 
+        "identifierPrefix": "ROLLNUMBERID",
         "resultValidation": {
             "validate": {
                 "regExp": "[0-1]",
