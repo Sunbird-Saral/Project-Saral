@@ -86,6 +86,12 @@ components:
           type: positiveInteger
           description: page number this cell belongs to. This field is added to support Multi-Page layouts.
           example: 2
+        omrOptions:
+          type: array
+          description: list of values for omr selection in the cell. When multiple omr's present in a cell these values are 
+            used in the order of index. If single omr present , two values for unselected omr and selected omr respectively.
+            This is optional element. If not present index of omr will be used a value.
+          example: ['A','B','C','D','E','F']
         rois:
           $ref: '#/components/schemas/rois'
         render:

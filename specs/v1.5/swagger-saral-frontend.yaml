@@ -4,8 +4,6 @@ info:
   description: "Store School information"
   version: "1.0.0"
   title: "SARAL APIs "
-host: "store.swagger.io"
-basePath: "/v1.5"
 tags:
 - name: "School"
 - name: "Student"
@@ -69,6 +67,9 @@ paths:
               section:
                 type: string
                 example: "D"
+              subject:
+                type: string
+                example: "Hindi 11/02/2021"
       responses:
         "200":
           description: "successful operation"
@@ -202,6 +203,11 @@ definitions:
           supportEmail:
             type: string
             example: "abc&gmail.com ,xyz@gmail.com"
+          isMinimalMode:
+            type: boolean
+            description: "If this is set to true frontend application will have minimal screens in ui. In savesMarksAPI and getSavedScan we are using roiId as our unique key and fetching data from this key ."
+            default: false
+            example: true
           
       classes:
             $ref: '#/definitions/classResponse'
@@ -279,6 +285,10 @@ definitions:
         type: boolean
         example: false
         description: "Download Result. Currently this parameter is always set to false by Saral App ."
+      roiId:
+        type: string
+        description: roiId field is optional field . It is available when minimal mode is enable.
+        example: "28"
         
   GetSavedScanResponse:
     type: object
@@ -323,6 +333,10 @@ definitions:
             subject:
               type: string
               example: Maths
+            roiId:
+              type: string
+              description: roiId field is optional field . It is available when minimal mode is enable.
+              example: "28"
   
   fetchStudentsandExamsByQuery:
     type: object
@@ -355,6 +369,10 @@ definitions:
         example: "Maths"
       studentsMarkInfo:
         $ref: '#/definitions/StudentMarkInfo'
+      roiId: 
+          type: string
+          description: roiId field is optional field . It is available when minimal mode is enable.
+          example: "28"
         
   StudentMarkInfo:
     type: array
@@ -399,6 +417,7 @@ definitions:
           example: 5
         marksInfo:
           $ref: '#/definitions/MarksInfo'  
+
           
   MarksInfo:
     type: array

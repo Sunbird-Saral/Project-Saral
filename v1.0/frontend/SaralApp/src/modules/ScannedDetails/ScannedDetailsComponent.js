@@ -41,7 +41,8 @@ const ScannedDetailsComponent = ({
     loginData,
     bgFlag,
     roiData,
-    studentsAndExamData
+    studentsAndExamData,
+    minimalFlag
 }) => {
     //Hookes
     const [summary, setSummary] = useState(false)
@@ -78,6 +79,7 @@ const ScannedDetailsComponent = ({
     const [tagData ,setTagData] = useState([])
     const [questionIdData ,setQuestionIdData] = useState()
     const [omrResultErr, setOmrResult] = useState()
+    const [isOmrOptions, setOmrOptions] = useState(false)
 
     const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.scannedDetailComponent[0]
     const defaultValidateError = ocrLocalResponse.layout && ocrLocalResponse.layout.resultValidation && ocrLocalResponse.layout.resultValidation.validate.errorMsg
@@ -103,7 +105,11 @@ const ScannedDetailsComponent = ({
 
 
     useEffect(() => {
-        validateStudentId(studentId)
+        if (!minimalFlag) {
+            validateStudentId(studentId)
+        }else{
+            setStudentValid(true)
+        }
     }, [studentId])
 
     const validateStudentId = async (value) => {
@@ -132,8 +138,10 @@ const ScannedDetailsComponent = ({
         }
 
 
-        if(studentId == 0 && studentId != '' && isMultipleStudent){
+        if(studentId == 0 || studentId == '' && isMultipleStudent){
             setToggleCheckBox(true)
+        }else{
+            setToggleCheckBox(false)
         }
         if (absent.length > 0) {
             setStdErr("Student is Absent")
@@ -163,7 +171,7 @@ const ScannedDetailsComponent = ({
                 })
             }
         }
-        else if (a.length > 0 && !toggleCheckBox) {
+        else if (a.length > 0 ) {
             setStudentValid(true)
             setStdErr('')
             setStudentDATA(a)
@@ -222,6 +230,8 @@ const ScannedDetailsComponent = ({
             setIsmultipleStudent(true)
             callMultipleStudentSheetData(checkIsStudentMultipleSingle)
         } else {
+            let checkIsOmrOption = ocrLocalResponse.layout.cells[1].hasOwnProperty("omrOptions") ? true : false
+            setOmrOptions(checkIsOmrOption)
             callSingleStudentSheetData()
         }
     }, []);
@@ -585,14 +595,28 @@ const ScannedDetailsComponent = ({
         let len = 0
         if (getDataFromLocal != null) {
 
-            let filterData = getDataFromLocal.filter((e) => {
-                let findSection = false
-                findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.section)
+            var filterData = ''
+            if (!minimalFlag) {
+                filterData = getDataFromLocal.filter((e) => {
+                   let findSection = false
+                   findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.section)
+   
+                   if (filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject && findSection) {
+                       return true
+                   }
+               })
+            } else {
+                
+                 filterData = getDataFromLocal.filter((e) => {
+    
+                    //In minimal mode need to find organization id as we kept studentId
+                    if (e.roiId == roiData.data.roiId) {
+                        return true
+                    }
+                })
 
-                if (filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject && findSection) {
-                    return true
-                }
-            })
+            }
+
 
 
             if (filterData.length > 0) {
@@ -618,7 +642,10 @@ const ScannedDetailsComponent = ({
                             let findSection = false
                             findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.section)
 
-                            if (filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject && findSection) {
+                            //In minimal mode need to find organization id as we kept studentId
+                            let findRoiID =  e.roiId == roiData.data.roiId;
+                            let checkDataExistence = !minimalFlag ? filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject : false
+                            if (checkDataExistence && findSection || findRoiID) {
 
 
                                 e.studentsMarkInfo.forEach((element, i) => {
@@ -754,7 +781,7 @@ const ScannedDetailsComponent = ({
             let regexValue = regxValidation(value.cellId)
             ocrLocalResponse.layout.cells.forEach(element => {
                 if (element.cellId == value.cellId) {
-                    if (!regexValue[0]) {
+                    if (!regexValue[0] && text.length > 0) {
                         showErrorMessage(regexValue[1] ? regexValue[1] : defaultValidateError)
                     }
 
@@ -778,7 +805,7 @@ const ScannedDetailsComponent = ({
             let regexValue = regxValidation(value.cellId)
             ocrLocalResponse.layout.cells.forEach(element => {
                 if (element.cellId == value.cellId) {
-                    if (!regexValue[0]) {
+                    if (!regexValue[0] && text.length > 0) {
                         showErrorMessage(regexValue[1] ? regexValue[1] : defaultValidateError )
                     }
                 }
@@ -832,6 +859,7 @@ const ScannedDetailsComponent = ({
             element.rois.forEach((data) => {
                 if (data.extractionMethod == CELL_OMR) {
                     totalRois = isMultiple ? element.rois.length : !isMultipleStudent && element.rois.length == 1 ? element.rois.length : element.rois.length - 1
+                    let regexValue = regxValidation(element.cellId)
                     if (totalRois < element.consolidatedPrediction) {
                         validationCellOmr = true
                     }
@@ -841,6 +869,28 @@ const ScannedDetailsComponent = ({
         return [validationCellOmr, totalRois]
     }
 
+    const omrValidation = () =>{
+        var result = false
+        var regexErrormsg
+        var regextResult = false
+            for (let j = 0; j < newArrayValue.length; j++) {
+                let filter = ocrLocalResponse.layout.cells.filter((el)=> el.cellId == newArrayValue[j].cellId);
+                if (filter[0].hasOwnProperty("omrOptions")) {   
+                    let consolidated = filter[0].consolidatedPrediction
+                    regexErrormsg = filter && filter[0].validate && filter[0].validate.errorMsg
+                    let regexExp = filter[0] && filter[0].validate && filter[0].validate.regExp ? filter[0].validate.regExp : defaultValidateExp
+                    let number = consolidated;
+                    let regex = new RegExp(regexExp)
+                    result = regex.test(number);
+                    
+                    if (!result) {
+                        regextResult = !result
+                        showErrorMessage(`${regexErrormsg}`)
+                    }
+                }
+        }
+    return regextResult
+    }
 
     const onSubmitClick = async () => {
         let validCell = false
@@ -865,14 +915,23 @@ const ScannedDetailsComponent = ({
             }
         }
 
+        let regexValidation
+        console.log("isOmroptions",isOmrOptions);
+        if (isOmrOptions) {
+            regexValidation = omrValidation();
+        }
+
+
         let cellOmrValidation = validateCellOMR(false)
-
-
         if (disable || validCell) {
             showErrorMessage(Strings.please_correct_marks_data)
         }
+        else if(regexValidation){
+        }
         else if (cellOmrValidation[0]) {
-            showErrorMessage(`omr value should be 0 to ${cellOmrValidation[1]}`)
+            if (typeof(cellOmrValidation[1]) == 'number') {
+                showErrorMessage(`omr value should be 0 to ${cellOmrValidation[1]}`)
+            } 
         }
         else if (!studentValid && !toggleCheckBox) {
             showErrorMessage(Strings.please_correct_student_id)
@@ -1095,14 +1154,14 @@ const ScannedDetailsComponent = ({
         let Studentmarks = objects;
 
         let saveObj = {
-            "classId": filteredData.class,
-            "examDate": filteredData.examDate,
-            "subject": filteredData.subject,
+            "classId": minimalFlag ? 0 : filteredData.class,
+            "examDate": minimalFlag ? null : filteredData.examDate,
+            "subject": minimalFlag ? 0 : filteredData.subject,
             "studentsMarkInfo": [
                 {
                     "predictedStudentId": loginData.data.school.storeTrainingData ? storeTrainingData[0].studentIdPrediction : '',
                     "predictionConfidence": loginData.data.school.storeTrainingData ? storeTrainingData[0].studentIdPrediction != studentId ? storeTrainingData[0].predictionConfidence : [] : [],
-                    "section": filteredData.section,
+                    "section": minimalFlag ? 0 : filteredData.section,
                     "studentId": studentId,
                     "securedMarks": sumOfAllMarks > 0 ? sumOfAllMarks : 0,
                     "totalMarks": maxMarksTotal > 0 ? maxMarksTotal : 0,
@@ -1112,6 +1171,9 @@ const ScannedDetailsComponent = ({
             ]
         }
 
+        if (minimalFlag) {
+            saveObj.roiId = ocrLocalResponse.roiId
+        }
         if (maxObtainedTrainingData.length > 0 && loginData.data.school.storeTrainingData && maxObtainedTrainingData[0].format.name == elements[3]) {
             saveObj.studentsMarkInfo[0].maxMarksTrainingData = maxObtainedTrainingData[0].predictedMarks != maxMarksTotal ? maxObtainedTrainingData[0].trainingDataSet : []
             saveObj.studentsMarkInfo[0].maxMarksPredicted = maxObtainedTrainingData[0].predictedMarks,
@@ -1219,12 +1281,12 @@ const ScannedDetailsComponent = ({
                                         <View style={styles.studentContainer}>
                                             <View style={styles.imageViewContainer}>
                                                 <View style={styles.imageContainerStyle}>
-                                                    <Text style={{ textAlign: 'center', fontSize: AppTheme.HEADER_FONT_SIZE_LARGE,fontFamily:monospace_FF }}>{studentData.length > 0 && studentData[0].name.charAt(0)}</Text>
+                                                    <Text style={{ textAlign: 'center', fontSize: AppTheme.HEADER_FONT_SIZE_LARGE,fontFamily:monospace_FF }}>{minimalFlag ? loginData.data.school.name.charAt(0) : studentData.length > 0 && studentData[0].name.charAt(0)}</Text>
                                                 </View>
                                             </View>
                                             <View style={styles.deatilsViewContainer}>
                                                 <View style={styles.detailsSubContainerStyle}>
-                                                    <Text style={[styles.nameTextStyle, { fontWeight: 'bold', color: AppTheme.BLACK, fontSize: AppTheme.FONT_SIZE_LARGE }]}>{studentData.length > 0 && studentData[0].name}</Text>
+                                                    <Text style={[styles.nameTextStyle, { fontWeight: 'bold', color: AppTheme.BLACK, fontSize: AppTheme.FONT_SIZE_LARGE }]}>{minimalFlag ? loginData.data.school.name : studentData.length > 0 && studentData[0].name}</Text>
                                                     <TextField
                                                         labelText={BrandLabel && BrandLabel.StudentId ? BrandLabel.StudentId : Strings.student_id}
                                                         errorField={stdErr != '' || isNaN(studentId)}
@@ -1240,7 +1302,12 @@ const ScannedDetailsComponent = ({
                                                         editable={edit}
                                                         keyboardType={'numeric'}
                                                         />
-                                                    <Text style={styles.nameTextStyle}>{BrandLabel && BrandLabel.Exam ? BrandLabel.Exam : Strings.Exam} : {filteredData.subject} {filteredData.examDate} ({filteredData.examTestID})</Text>
+                                                        {
+                                                            !minimalFlag
+                                                            &&
+                                                            <Text style={styles.nameTextStyle}>{BrandLabel && BrandLabel.Exam ? BrandLabel.Exam : Strings.Exam} : {filteredData.subject} {filteredData.examDate} ({filteredData.examTestID})</Text>
+
+                                                        }
                                                     {
                                                         isMultipleStudent
                                                             ?
@@ -1344,7 +1411,7 @@ const ScannedDetailsComponent = ({
                                                                 rowTitle={element.consolidatedPrediction}
                                                                 rowBorderColor={markBorderOnCell(element)}
                                                                 editable={true}
-                                                                keyboardType={'number-pad'}
+                                                                keyboardType={element.hasOwnProperty("omrOptions") ?  'name' : 'number-pad'}
                                                                 maxLength={lengthAccordingSheet(element)}
                                                                 onChangeText={(text) => {
                                                                     handleTextChange(text.trim(), index, newArrayValue, element)
@@ -1423,7 +1490,8 @@ const mapStateToProps = (state) => {
         scanedData: state.scanedData.response,
         bgFlag: state.bgFlag,
         multiPageReducer: state.multiPage.response,
-        studentsAndExamData: state.studentsAndExamData
+        studentsAndExamData: state.studentsAndExamData,
+        minimalFlag: state.minimalFlag
     }
 }
 

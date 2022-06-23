@@ -6,7 +6,9 @@ import { monospace_FF } from '../../utils/CommonUtils';
 const ScanStatusLocalList = ({
     themeColor1,
     id,
-    loacalstutlist
+    loacalstutlist,
+    status="Saved",
+    minimalFlag=false
 }) => {
     
     let studentName = loacalstutlist.filter((e) => {
@@ -17,11 +19,17 @@ const ScanStatusLocalList = ({
     return (
         <View style={[styles.container, { backgroundColor: themeColor1 ? themeColor1 : AppTheme.GREEN }]}>
             <View style={styles.childCon}>
-                <Text style={styles.align}>{studentName.length > 0 && studentName[0].name}</Text>
+                {
+                    !minimalFlag
+                    &&
+                    <>
+                    <Text style={styles.align}>{studentName.length > 0 && studentName[0].name}</Text>
                 <View style={styles.line} />
+                </>
+                }
                 <Text style={styles.align}>{id}</Text>
                 <View style={styles.line} />
-                <Text style={styles.align}>{`Saved`}</Text>
+                <Text style={styles.align}>{status}</Text>
             </View>
         </View>
     );

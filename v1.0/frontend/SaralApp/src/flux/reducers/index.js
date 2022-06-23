@@ -17,6 +17,7 @@ import modalStatus from './modalStatus';
 import ModalMessage from './ModalMessage';
 import customModalStatus from './customModalStatus';
 import customModalMessage from './customModalMessage';
+import minimalFlag from './minimalFlag';
 
 export default {
     apiStatus: apiStatus,
@@ -33,6 +34,7 @@ export default {
     multiBrandingData:multiBrandingReducer,
     defaultBrandingdata:defaultBrandReducer,
     bgFlag: bgFlag,
+    minimalFlag: minimalFlag,
     multiPage: multiPageReducer,
     modalStatus: modalStatus,
     customModalStatus: customModalStatus,

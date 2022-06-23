@@ -88,18 +88,26 @@ router.post('/fetchStudentsandExamsByQuery', auth, async (req, res) => {
         examMatch.classId = studentClassObj.classId
         examMatch.schoolId = req.school.schoolId
     } else {
+        if (req.school.minimal == true) {
+            examMatch.schoolId = req.school.schoolId
+        } else {
         return res.status(404).send({ message: 'Please send classId' })
+    }
     }
 
     if (req.body.section && req.body.section != "0") {
         match.section = req.body.section
     }
 
+    if (req.body.hasOwnProperty('subject')) {
+        let subject = req.body.subject.split(' ')
+        examMatch.examDate = subject[1]
+    }
     try {
         const students = await Student.find(match, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 }).lean()
         for(let student of students){
-            let marks = await Marks.findOne({"studentId": student.studentId}) 
-            if(marks){
+            let marks = await Marks.findOne({"studentId": student.studentId, "examDate": examMatch.examDate}) 
+            if(marks && typeof marks == "object" && marks.examDate == examMatch.examDate){
                 student["studentAvailability"] = marks.studentAvailability
             }else{
                 student["studentAvailability"] = true
