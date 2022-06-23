@@ -132,7 +132,7 @@ const ScannedDetailsComponent = ({
 
         let absent = datas.filter((item) => item.studentId == studentId & item.studentAvailability == false)
 
-        if (result == false && studentId.length > consolidated) {
+        if (result == false && studentId != undefined && studentId.length > consolidated) {
             showErrorMessage(studentIdErrorMsg)
 
         }
