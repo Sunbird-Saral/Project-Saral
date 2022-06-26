@@ -2,14 +2,14 @@ const assert = require("assert")
 const AppObject = require("./screenObjects/android/appObjectScreen");
 const LOGIN = require("./screenObjects/android/loginScreen-function");
 
-describe('up_4s_20question', () => {
+describe('saral app test', () => {
     beforeEach('test case passed',()=>{
         console.log('test case passed succesfully')
     })
   it('find elements', async () => {
     // schoolId and password
     await driver.pause(5000);
-    LOGIN.loginIds("u001", "tarento@123");
+    LOGIN.loginIds("09670702901", "tarento@123");
 
 
     await driver.pause(2000);
@@ -22,27 +22,31 @@ describe('up_4s_20question', () => {
     assert.equal(await displayStartButton.isDisplayed(), true)
     await displayStartButton.click();
 
-
+    // const openClassDropdown = await AppObject.class_dropdown[0]
+    // await openClassDropdown.waitForDisplayed()
+    // assert.equal(await openClassDropdown.isDisplayed(), true)
+    // await openClassDropdown.click();
      await driver.pause(3000)
     const openClassDropdown = await AppObject.class_dropdown
     await openClassDropdown.click();
    
     
-    const class2 = await AppObject.selectClass_2
-    await class2.waitForDisplayed()
-    assert.equal(await class2.isDisplayed(), true)
-    await class2.click();
+    const class4 = await AppObject.selectClass_4
+    await class4.waitForDisplayed()
+    assert.equal(await class4.isDisplayed(), true)
+    await class4.click();
 
-
+   await driver.pause(2000)
     const openSubjectDropdown = await AppObject.sectionSubject_dropdown[2]
     await openSubjectDropdown.waitForDisplayed();
     assert.equal(await openSubjectDropdown.isDisplayed(), true)
     await openSubjectDropdown.click();
+    await AppObject.selectSubject_2B_Book.click();
 
-    const subject =  await AppObject.selectSubject_2D_UP
-    await subject.waitForDisplayed();
-    assert.equal(await subject.isDisplayed(), true)
-    await subject.click();
+    // const subject =  await AppObject.selectSubject_2B_Book
+    // await subject.waitForDisplayed();
+    // assert.equal(await subject.isDisplayed(), true)
+    // await subject.click();
 
 
     await AppObject.submitBtn.click();
@@ -69,47 +73,21 @@ describe('up_4s_20question', () => {
 });
 
 it('page1 validation test', async () => {
-    const tagImage = await AppObject.tagImage[2]
-    await tagImage.waitForDisplayed()
-    await tagImage.click();
-    await driver.pause(3000);
-    await AppObject.tagField.addValue('historics');
-    await AppObject.addTagButton.click();
-    await driver.back()
     await driver.pause(3000);
     await AppObject.scrollView
-
-    await AppObject.predictedMarks.clearValue();
-
-    await AppObject.scrollView
     await AppObject.nextBtn.click();
-
-    const editCorrectMsg = await AppObject.editAndCorrectMsg
-    await editCorrectMsg.waitForDisplayed();
-    assert.equal(await editCorrectMsg.isDisplayed(), true)
-    await AppObject.ok.click();
-   
-    
-    await AppObject.inputMarks.addValue('6');
-    const regexMsg = await AppObject.regexValidationMsg0_1
-    await regexMsg.waitForDisplayed();
-    assert.equal(await regexMsg.isDisplayed(), true)
-    await AppObject.ok.click();
-    
-
-    await driver.pause(5000);
-    await AppObject.clearInputMarks.clearValue()
-    await AppObject.inputMarks.addValue('0');
-    await AppObject.scrollView
-    await AppObject.nextBtn.click();
-   
+  
 });
 
 it('page_2 validation test', async () => {
     await driver.pause(3000);
     await AppObject.nextBtn.click();
-   const scrolling = await AppObject.checkbox.scrollIntoView();
-    console.log('in view port >>>>>>>>>>>>>>>>>>',await scrolling.isDisplayed)
+    await AppObject.nextBtn.click();
+    await AppObject.nextBtn.click();
+    await AppObject.nextBtn.click();
+    await AppObject.nextBtn.click();
+    await AppObject.nextBtn.click();
+    await AppObject.nextBtn.click();
     await AppObject.nextBtn.click();
     await AppObject.SUBMIT.click();
 
@@ -145,7 +123,7 @@ it('page_2 validation test', async () => {
     await driver.back();
 
 
-    const displayprofileIcon = await AppObject.profileIcon
+    const displayprofileIcon = await AppObject.profileIcon_P
     await displayprofileIcon.waitForDisplayed({ timeout: 5000 });
     assert.equal(await displayprofileIcon.isDisplayed(), true)
     await displayprofileIcon.click();

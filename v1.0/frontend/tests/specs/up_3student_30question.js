@@ -40,6 +40,8 @@ describe('up_4s_20question', () => {
         await openSubjectDropdown.click();
 
         const subject = await AppObject.selectSubject_3D
+        await subject.waitForDisplayed();
+        assert.equal(await subject.isDisplayed(), true)
         await subject.click();
 
 

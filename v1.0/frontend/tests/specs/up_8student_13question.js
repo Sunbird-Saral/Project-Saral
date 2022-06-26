@@ -1,65 +1,58 @@
-const assert = require("assert")
+
 const AppObject = require("./screenObjects/android/appObjectScreen");
 const LOGIN = require("./screenObjects/android/loginScreen-function");
+const assert = require("assert")
 
 describe('saral app test', () => {
     beforeEach('test case passed',()=>{
         console.log('test case passed succesfully')
     })
-  it('find elements', async () => {
-    // schoolId and password
-    await driver.pause(5000);
-    LOGIN.loginIds("u002", "tarento@123");
-
-
-    await driver.pause(2000);
-    const displayLoginButton = await AppObject.loginBtn[1]
-    await displayLoginButton.click();
-
-
-    const displayStartButton = await AppObject.getStartedBtn
-    await displayStartButton.waitForDisplayed()
-    assert.equal(await displayStartButton.isDisplayed(), true)
-    await displayStartButton.click();
-
-    // const openClassDropdown = await AppObject.class_dropdown[0]
-    // await openClassDropdown.waitForDisplayed()
-    // assert.equal(await openClassDropdown.isDisplayed(), true)
-    // await openClassDropdown.click();
-     await driver.pause(3000)
-    const openClassDropdown = await AppObject.class_dropdown
-    await openClassDropdown.click();
-   
-    
-    const class2 = await AppObject.selectClass_2
-    await class2.waitForDisplayed()
-    assert.equal(await class2.isDisplayed(), true)
-    await class2.click();
-
-
-    const openSubjectDropdown = await AppObject.sectionSubject_dropdown[2]
-    await openSubjectDropdown.waitForDisplayed();
-    assert.equal(await openSubjectDropdown.isDisplayed(), true)
-    await openSubjectDropdown.click();
-
-    const subject =  await AppObject.selectSubject_2D
-    await subject.waitForDisplayed();
-    assert.equal(await subject.isDisplayed(), true)
-    await subject.click();
-
-
-    await AppObject.submitBtn.click();
-    await driver.pause(5000);
-    await AppObject.nextBtn.click();
-
-
-    const displaySaveAllBtn = await AppObject.saveAllBtn
-    await displaySaveAllBtn.waitForDisplayed();
-    assert.equal(await displaySaveAllBtn.isDisplayed(), true)
-    await displaySaveAllBtn.click();
-    await AppObject.ok.click();
-
-  });
+    it('find elements', async () => {
+      // schoolId and password
+      await driver.pause(5000);
+      LOGIN.loginIds("u002", "tarento@123");
+  
+  
+      await driver.pause(2000);
+      const displayLoginButton = await AppObject.loginBtn[1]
+      await displayLoginButton.click();
+  
+  
+      const displayStartButton = await AppObject.getStartedBtn
+      await displayStartButton.waitForDisplayed()
+      assert.equal(await displayStartButton.isDisplayed(), true)
+      await displayStartButton.click();
+  
+      await driver.pause(3000)
+      const openClassDropdown = await AppObject.class_dropdown
+      await openClassDropdown.click();
+     
+      
+      const class2 = await AppObject.selectClass_2
+      await class2.waitForDisplayed()
+      assert.equal(await class2.isDisplayed(), true)
+      await class2.click();
+  
+      await driver.pause(2000)
+      const openSubjectDropdown = await AppObject.sectionSubject_dropdown[2]
+      await openSubjectDropdown.waitForDisplayed();
+      assert.equal(await openSubjectDropdown.isDisplayed(), true)
+      await openSubjectDropdown.click();
+      await AppObject.selectSubject_2D.click();
+  
+  
+      await AppObject.submitBtn.click();
+      await driver.pause(5000);
+      await AppObject.nextBtn.click();
+  
+  
+      const displaySaveAllBtn = await AppObject.saveAllBtn
+      await displaySaveAllBtn.waitForDisplayed();
+      assert.equal(await displaySaveAllBtn.isDisplayed(), true)
+      await displaySaveAllBtn.click();
+      await AppObject.ok.click();
+  
+    });
 
 
   it('studend deatil and after scan test', async () => {

@@ -35,6 +35,10 @@ class AppObject {
         return $('//*[@text="D"]');
     }
 
+    get profileIcon_P() {
+        return $('//*[@text="P"]');
+    }
+
     get aboutTxt() {
         return $('//*[@text="About"]');
     }
@@ -79,7 +83,7 @@ class AppObject {
         return $("//android.widget.TextView[@text='B']");
     }
 
-    get selectSubject() {
+    get selectSubject_2D_UP() {
         return $("//android.widget.TextView[@text='Hindi 23/09/2021']");
     }
 
@@ -99,6 +103,10 @@ class AppObject {
         return $("//android.widget.TextView[@text='Hindi 24/09/2021']");
     }
 
+    get selectSubject_2D_od() {
+        return $("//android.widget.TextView[@text='Hindi 01/10/2021']");
+    }
+
     get selectSubject_4D_multi() {
         return $("//android.widget.TextView[@text='Multi-Subject 28/09/2021']");
     }
@@ -106,6 +114,23 @@ class AppObject {
     get selectSubject_2D_midday() {
         return $("//android.widget.TextView[@text='midday-meal 07/01/2022']");
     }
+  
+    get selectSubject_2A_assam() {
+        return $("//android.widget.TextView[@text='Hindi 07/03/2022']");
+    }
+
+    get selectSubject_4A_assam() {
+        return $("//android.widget.TextView[@text='Hindi 05/05/2022']");
+    }
+
+    get selectSubject_2B_Book() {
+        return $("//android.widget.TextView[@text='book-distribution 20/06/2022']");
+    }
+
+    get selectSchool() {
+        return $("//android.widget.TextView[@text='school evaluation']");
+    }
+
 
     get scrollView() {
         return  $('android=new UiScrollable(new UiSelector().scrollable(true)).scrollToEnd(1,5)');
@@ -154,6 +179,10 @@ class AppObject {
         return $("android.widget.ImageView");
     }
 
+    get scanButton() {
+        return $$("android.widget.ImageView");
+    }
+
     get scanSetTime() {
         return driver.pause(20000)
     }
@@ -161,6 +190,11 @@ class AppObject {
     get studentDetailText(){
         return $("//android.widget.TextView[@text='Student Details']");
     }
+
+    get details(){
+        return $("//android.widget.TextView[@text='Details']");
+    }
+
 
    
     get SUBMIT() {
@@ -188,6 +222,10 @@ class AppObject {
    get inputValue() {
         return $('//android.widget.EditText[@text = "3309001"]');
    }
+
+   get studentinputValue() {
+    return $('//android.widget.EditText[@text = "1210001"]');
+}
 
    get predictedMarks() {
     return $('//android.widget.EditText[@text = "0"]');
@@ -234,9 +272,22 @@ get scanStatus() {
     return $$("//android.widget.TextView[@text='Scan Status']")
 }
 
+get scanData() {
+    return $("//android.widget.TextView[@text='SCAN DATA']")
+}
+
 get saveStatus() {
     return $$("//android.widget.TextView[@text='Save Status']")
 }
+
+get savedData() {
+    return $("//android.widget.TextView[@text='SAVED DATA']")
+}
+
+get saveAllScan() {
+    return $("//android.widget.TextView[@text='SAVED ALL SCAN']")
+}
+
 
 get tagImage() {
     return $$("android.widget.ImageView");
