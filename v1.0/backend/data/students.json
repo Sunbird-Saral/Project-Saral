@@ -2270,6 +2270,54 @@
   {
     "studentClass": [
       {
+        "classId": "9",
+        "className": "Class-9"
+      }
+    ],
+    "section": "C",
+    "name": "Student1",
+    "studentId": "095123467",
+    "schoolId": "u001"
+  },
+  {
+    "studentClass": [
+      {
+        "classId": "9",
+        "className": "Class-9"
+      }
+    ],
+    "section": "C",
+    "name": "Student2",
+    "studentId": "095123468",
+    "schoolId": "u001"
+  },
+  {
+    "studentClass": [
+      {
+        "classId": "9",
+        "className": "Class-9"
+      }
+    ],
+    "section": "C",
+    "name": "Student2",
+    "studentId": "095123469",
+    "schoolId": "u001"
+  },
+  {
+    "studentClass": [
+      {
+        "classId": "9",
+        "className": "Class-9"
+      }
+    ],
+    "section": "C",
+    "name": "Student2",
+    "studentId": "095123470",
+    "schoolId": "u001"
+  },
+  {
+    "studentClass": [
+      {
         "classId": "5",
         "className": "Class-5"
       }
