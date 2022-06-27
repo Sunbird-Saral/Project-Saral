@@ -186,8 +186,15 @@
                     "value": "QUESTION 1"
                 },
                 "validate": {
-                    "regExp": ""
-                }
+                    "regExp": "[A-D]",
+                    "errorMsg": "Please enter valid option (A B C D )"
+                },
+                "omrOptions": [
+                    "A",
+                    "B",
+                    "C",
+                    "D"
+                ]
             },
             {
                 "cellId": "3",
@@ -249,8 +256,15 @@
                     "value": "QUESTION 2"
                 },
                 "validate": {
-                    "regExp": ""
-                }
+                    "regExp": "[A-D]",
+                    "errorMsg": "Please enter valid option (A B C D )"
+                },
+                "omrOptions": [
+                    "A",
+                    "B",
+                    "C",
+                    "D"
+                ]
             },
             {
                 "cellId": "4",
@@ -312,8 +326,15 @@
                     "value": "QUESTION 3"
                 },
                 "validate": {
-                    "regExp": ""
-                }
+                    "regExp": "[A-D]",
+                    "errorMsg": "Please enter valid option (A B C D )"
+                },
+                "omrOptions": [
+                    "A",
+                    "B",
+                    "C",
+                    "D"
+                ]
             },
             {
                 "cellId": "5",
@@ -375,8 +396,15 @@
                     "value": "QUESTION 4"
                 },
                 "validate": {
-                    "regExp": ""
-                }
+                    "regExp": "[A-D]",
+                    "errorMsg": "Please enter valid option (A B C D )"
+                },
+                "omrOptions": [
+                    "A",
+                    "B",
+                    "C",
+                    "D"
+                ]
             },
             {
                 "cellId": "6",
@@ -438,8 +466,15 @@
                     "value": "QUESTION 5"
                 },
                 "validate": {
-                    "regExp": ""
-                }
+                    "regExp": "[A-D]",
+                    "errorMsg": "Please enter valid option (A B C D )"
+                },
+                "omrOptions": [
+                    "A",
+                    "B",
+                    "C",
+                    "D"
+                ]
             },
             {
                 "cellId": "7",
@@ -501,8 +536,15 @@
                     "value": "QUESTION 6"
                 },
                 "validate": {
-                    "regExp": ""
-                }
+                    "regExp": "[A-D]",
+                    "errorMsg": "Please enter valid option (A B C D )"
+                },
+                "omrOptions": [
+                    "A",
+                    "B",
+                    "C",
+                    "D"
+                ]
             },
             {
                 "cellId": "8",
@@ -564,8 +606,15 @@
                     "value": "QUESTION 7"
                 },
                 "validate": {
-                    "regExp": ""
-                }
+                    "regExp": "[A-D]",
+                    "errorMsg": "Please enter valid option (A B C D )"
+                },
+                "omrOptions": [
+                    "A",
+                    "B",
+                    "C",
+                    "D"
+                ]
             },
             {
                 "cellId": "9",
@@ -627,8 +676,15 @@
                     "value": "QUESTION 8"
                 },
                 "validate": {
-                    "regExp": ""
-                }
+                    "regExp": "[A-D]",
+                    "errorMsg": "Please enter valid option (A B C D )"
+                },
+                "omrOptions": [
+                    "A",
+                    "B",
+                    "C",
+                    "D"
+                ]
             },
             {
                 "cellId": "10",
@@ -690,8 +746,15 @@
                     "value": "QUESTION 9"
                 },
                 "validate": {
-                    "regExp": ""
-                }
+                    "regExp": "[A-D]",
+                    "errorMsg": "Please enter valid option (A B C D )"
+                },
+                "omrOptions": [
+                    "A",
+                    "B",
+                    "C",
+                    "D"
+                ]
             },
             {
                 "cellId": "11",
@@ -753,8 +816,15 @@
                     "value": "QUESTION 10"
                 },
                 "validate": {
-                    "regExp": ""
-                }
+                    "regExp": "[A-D]",
+                    "errorMsg": "Please enter valid option (A B C D )"
+                },
+                "omrOptions": [
+                    "A",
+                    "B",
+                    "C",
+                    "D"
+                ]
             },
             {
                 "cellId": "12",
@@ -816,8 +886,15 @@
                     "value": "QUESTION 11"
                 },
                 "validate": {
-                    "regExp": ""
-                }
+                    "regExp": "[A-D]",
+                    "errorMsg": "Please enter valid option (A B C D )"
+                },
+                "omrOptions": [
+                    "A",
+                    "B",
+                    "C",
+                    "D"
+                ]
             },
             {
                 "cellId": "13",
@@ -879,8 +956,15 @@
                     "value": "QUESTION 12"
                 },
                 "validate": {
-                    "regExp": ""
-                }
+                    "regExp": "[A-D]",
+                    "errorMsg": "Please enter valid option (A B C D )"
+                },
+                "omrOptions": [
+                    "A",
+                    "B",
+                    "C",
+                    "D"
+                ]
             },
             {
                 "cellId": "14",
@@ -942,8 +1026,15 @@
                     "value": "QUESTION 13"
                 },
                 "validate": {
-                    "regExp": ""
-                }
+                    "regExp": "[A-D]",
+                    "errorMsg": "Please enter valid option (A B C D )"
+                },
+                "omrOptions": [
+                    "A",
+                    "B",
+                    "C",
+                    "D"
+                ]
             },
             {
                 "cellId": "15",
@@ -1005,8 +1096,15 @@
                     "value": "QUESTION 14"
                 },
                 "validate": {
-                    "regExp": ""
-                }
+                    "regExp": "[A-D]",
+                    "errorMsg": "Please enter valid option (A B C D )"
+                },
+                "omrOptions": [
+                    "A",
+                    "B",
+                    "C",
+                    "D"
+                ]
             },
             {
                 "cellId": "16",
@@ -1068,8 +1166,15 @@
                     "value": "QUESTION 15"
                 },
                 "validate": {
-                    "regExp": ""
-                }
+                    "regExp": "[A-D]",
+                    "errorMsg": "Please enter valid option (A B C D )"
+                },
+                "omrOptions": [
+                    "A",
+                    "B",
+                    "C",
+                    "D"
+                ]
             },
             {
                 "cellId": "17",
@@ -1131,8 +1236,15 @@
                     "value": "QUESTION 16"
                 },
                 "validate": {
-                    "regExp": ""
-                }
+                    "regExp": "[A-D]",
+                    "errorMsg": "Please enter valid option (A B C D )"
+                },
+                "omrOptions": [
+                    "A",
+                    "B",
+                    "C",
+                    "D"
+                ]
             },
             {
                 "cellId": "18",
@@ -1194,8 +1306,15 @@
                     "value": "QUESTION 17"
                 },
                 "validate": {
-                    "regExp": ""
-                }
+                    "regExp": "[A-D]",
+                    "errorMsg": "Please enter valid option (A B C D )"
+                },
+                "omrOptions": [
+                    "A",
+                    "B",
+                    "C",
+                    "D"
+                ]
             },
             {
                 "cellId": "19",
@@ -1257,8 +1376,15 @@
                     "value": "QUESTION 18"
                 },
                 "validate": {
-                    "regExp": ""
-                }
+                    "regExp": "[A-D]",
+                    "errorMsg": "Please enter valid option (A B C D )"
+                },
+                "omrOptions": [
+                    "A",
+                    "B",
+                    "C",
+                    "D"
+                ]
             },
             {
                 "cellId": "20",
@@ -1320,8 +1446,15 @@
                     "value": "QUESTION 19"
                 },
                 "validate": {
-                    "regExp": ""
-                }
+                    "regExp": "[A-D]",
+                    "errorMsg": "Please enter valid option (A B C D )"
+                },
+                "omrOptions": [
+                    "A",
+                    "B",
+                    "C",
+                    "D"
+                ]
             },
             {
                 "cellId": "21",
@@ -1383,8 +1516,15 @@
                     "value": "QUESTION 20"
                 },
                 "validate": {
-                    "regExp": ""
-                }
+                    "regExp": "[A-D]",
+                    "errorMsg": "Please enter valid option (A B C D )"
+                },
+                "omrOptions": [
+                    "A",
+                    "B",
+                    "C",
+                    "D"
+                ]
             },
             {
                 "cellId": "22",
@@ -1446,8 +1586,15 @@
                     "value": "QUESTION 21"
                 },
                 "validate": {
-                    "regExp": ""
-                }
+                    "regExp": "[A-D]",
+                    "errorMsg": "Please enter valid option (A B C D )"
+                },
+                "omrOptions": [
+                    "A",
+                    "B",
+                    "C",
+                    "D"
+                ]
             },
             {
                 "cellId": "23",
@@ -1509,8 +1656,15 @@
                     "value": "QUESTION 22"
                 },
                 "validate": {
-                    "regExp": ""
-                }
+                    "regExp": "[A-D]",
+                    "errorMsg": "Please enter valid option (A B C D )"
+                },
+                "omrOptions": [
+                    "A",
+                    "B",
+                    "C",
+                    "D"
+                ]
             },
             {
                 "cellId": "24",
@@ -1572,8 +1726,15 @@
                     "value": "QUESTION 23"
                 },
                 "validate": {
-                    "regExp": ""
-                }
+                    "regExp": "[A-D]",
+                    "errorMsg": "Please enter valid option (A B C D )"
+                },
+                "omrOptions": [
+                    "A",
+                    "B",
+                    "C",
+                    "D"
+                ]
             },
             {
                 "cellId": "25",
@@ -1635,8 +1796,15 @@
                     "value": "QUESTION 24"
                 },
                 "validate": {
-                    "regExp": ""
-                }
+                    "regExp": "[A-D]",
+                    "errorMsg": "Please enter valid option (A B C D )"
+                },
+                "omrOptions": [
+                    "A",
+                    "B",
+                    "C",
+                    "D"
+                ]
             },
             {
                 "cellId": "26",
@@ -1698,8 +1866,15 @@
                     "value": "QUESTION 25"
                 },
                 "validate": {
-                    "regExp": ""
-                }
+                    "regExp": "[A-D]",
+                    "errorMsg": "Please enter valid option (A B C D )"
+                },
+                "omrOptions": [
+                    "A",
+                    "B",
+                    "C",
+                    "D"
+                ]
             },
             {
                 "cellId": "27",
@@ -1761,8 +1936,15 @@
                     "value": "QUESTION 26"
                 },
                 "validate": {
-                    "regExp": ""
-                }
+                    "regExp": "[A-D]",
+                    "errorMsg": "Please enter valid option (A B C D )"
+                },
+                "omrOptions": [
+                    "A",
+                    "B",
+                    "C",
+                    "D"
+                ]
             },
             {
                 "cellId": "28",
@@ -1824,8 +2006,15 @@
                     "value": "QUESTION 27"
                 },
                 "validate": {
-                    "regExp": ""
-                }
+                    "regExp": "[A-D]",
+                    "errorMsg": "Please enter valid option (A B C D )"
+                },
+                "omrOptions": [
+                    "A",
+                    "B",
+                    "C",
+                    "D"
+                ]
             },
             {
                 "cellId": "29",
@@ -1887,8 +2076,15 @@
                     "value": "QUESTION 28"
                 },
                 "validate": {
-                    "regExp": ""
-                }
+                    "regExp": "[A-D]",
+                    "errorMsg": "Please enter valid option (A B C D )"
+                },
+                "omrOptions": [
+                    "A",
+                    "B",
+                    "C",
+                    "D"
+                ]
             },
             {
                 "cellId": "30",
@@ -1950,8 +2146,15 @@
                     "value": "QUESTION 29"
                 },
                 "validate": {
-                    "regExp": ""
-                }
+                    "regExp": "[A-D]",
+                    "errorMsg": "Please enter valid option (A B C D )"
+                },
+                "omrOptions": [
+                    "A",
+                    "B",
+                    "C",
+                    "D"
+                ]
             },
             {
                 "cellId": "31",
@@ -2013,8 +2216,15 @@
                     "value": "QUESTION 30"
                 },
                 "validate": {
-                    "regExp": ""
-                }
+                    "regExp": "[A-D]",
+                    "errorMsg": "Please enter valid option (A B C D )"
+                },
+                "omrOptions": [
+                    "A",
+                    "B",
+                    "C",
+                    "D"
+                ]
             }
         ]
     }
