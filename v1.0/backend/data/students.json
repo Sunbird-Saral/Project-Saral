@@ -3106,5 +3106,65 @@
     "name": "Khushboo",
     "studentId": "1210888",
     "schoolId": "09670703101"
+  },
+  {
+    "studentClass": [
+      {
+        "classId": "3",
+        "className": "Class-3"
+      }
+    ],
+    "section": "A",
+    "name": "Student1",
+    "studentId": "121088801",
+    "schoolId": "u002"
+  },
+  {
+    "studentClass": [
+      {
+        "classId": "3",
+        "className": "Class-3"
+      }
+    ],
+    "section": "A",
+    "name": "Student2",
+    "studentId": "121088802",
+    "schoolId": "u002"
+  },
+  {
+    "studentClass": [
+      {
+        "classId": "3",
+        "className": "Class-3"
+      }
+    ],
+    "section": "A",
+    "name": "Student3",
+    "studentId": "121088803",
+    "schoolId": "u002"
+  },
+  {
+    "studentClass": [
+      {
+        "classId": "3",
+        "className": "Class-3"
+      }
+    ],
+    "section": "A",
+    "name": "Student4",
+    "studentId": "121088804",
+    "schoolId": "u002"
+  },
+  {
+    "studentClass": [
+      {
+        "classId": "3",
+        "className": "Class-3"
+      }
+    ],
+    "section": "A",
+    "name": "Student5",
+    "studentId": "121088805",
+    "schoolId": "u002"
   }
 ]
