@@ -41,4 +41,7 @@ app.use(markRouter)
 app.use(roiRouter)
 app.use(brandRouter)
 app.use(resultRouter)
+
+app.use("/api-docs/saral/frontend", swaggerUi.serve, (...args) => swaggerUi.setup(frontendSpec)(...args));
+app.use("/api-docs/saral/maintenance", swaggerUi.serve, (...args) => swaggerUi.setup(maintenanceSpec)(...args));
 module.exports = app
