@@ -21,7 +21,7 @@ const resultSchema = new mongoose.Schema({
     },
     date: {
         type: String,
-        default: null
+        required: false
     },
     identifier: {
         type: String,
