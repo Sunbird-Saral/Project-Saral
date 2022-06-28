@@ -11,7 +11,7 @@ describe('saral app test', () => {
     it('find elements', async () => {
       // schoolId and password
       await driver.pause(5000);
-      LOGIN.loginIds("u001", "tarento@123");
+      LOGIN.loginIds("u002", "tarento@123");
   
   
       await driver.pause(2000);
@@ -29,7 +29,7 @@ describe('saral app test', () => {
       await openClassDropdown.click();
      
       await AppObject.scrollView
-      const class2 = await AppObject.selectClass_9
+      const class2 = await AppObject.selectClass_3
       await class2.waitForDisplayed()
       assert.equal(await class2.isDisplayed(), true)
       await class2.click();
@@ -40,14 +40,14 @@ describe('saral app test', () => {
     await openSectionDropdown.waitForDisplayed();
     assert.equal(await openSectionDropdown.isDisplayed(), true)
     await openSectionDropdown.click();
-    await AppObject.selectSection_C.click();
+    await AppObject.selectSection_A.click();
 
  await driver.pause(2000)
       const openSubjectDropdown = await AppObject.sectionSubject_dropdown[2]
       await openSubjectDropdown.waitForDisplayed();
       assert.equal(await openSubjectDropdown.isDisplayed(), true)
       await openSubjectDropdown.click();
-      await AppObject.selectSubject_9C.click();
+      await AppObject.selectSubject_3A.click();
   
   
       await AppObject.submitBtn.click();
@@ -87,38 +87,12 @@ it('page1 validation test', async () => {
     // await AppObject.predictedMarks.clearValue();
 
     await AppObject.scrollView
-    await AppObject.nextBtn.click();
-
-    // const editCorrectMsg = await AppObject.editAndCorrectMsg
-    // await editCorrectMsg.waitForDisplayed();
-    // assert.equal(await editCorrectMsg.isDisplayed(), true)
-    // await AppObject.ok.click();
-   
     
-    // await AppObject.inputMarks.addValue('6');
-    // const regexMsg = await AppObject.regexValidationMsg0_1
-    // await regexMsg.waitForDisplayed();
-    // assert.equal(await regexMsg.isDisplayed(), true)
-    // await AppObject.ok.click();
-    
-
-    // await driver.pause(5000);
-    // await AppObject.clearInputMarks.clearValue()
-    // await AppObject.inputMarks.addValue('0');
-    // await AppObject.scrollView
-    // await AppObject.nextBtn.click();
-
    
 });
 
 it('page_2 validation test', async () => {
     await driver.pause(3000);
-    await AppObject.nextBtn.click();
-    await AppObject.nextBtn.click();
-    await AppObject.nextBtn.click();
-    await AppObject.nextBtn.click();
-    await AppObject.nextBtn.click();
-    await AppObject.nextBtn.click();
     await AppObject.SUBMIT.click();
 
 });

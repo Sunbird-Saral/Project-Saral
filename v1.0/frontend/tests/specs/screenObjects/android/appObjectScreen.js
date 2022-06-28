@@ -77,10 +77,22 @@ class AppObject {
     get selectClass_5() {
         return $("//android.widget.TextView[@text='Class-5']");
     }
+
+    get selectClass_9() {
+        return $("//android.widget.TextView[@text='Class-9']");
+    }
    
   
     get selectSection_B(){
         return $("//android.widget.TextView[@text='B']");
+    }
+
+    get selectSection_C(){
+        return $("//android.widget.TextView[@text='C']");
+    }
+
+    get selectSection_A(){
+        return $("//android.widget.TextView[@text='A']");
     }
 
     get selectSubject_2D_UP() {
@@ -125,6 +137,13 @@ class AppObject {
 
     get selectSubject_2B_Book() {
         return $("//android.widget.TextView[@text='book-distribution 20/06/2022']");
+    }
+
+    get selectSubject_9C() {
+        return $("//android.widget.TextView[@text='Hindi 1/07/2022']");
+    }
+    get selectSubject_3A() {
+        return $("//android.widget.TextView[@text='Maths 24/10/2022']");
     }
 
     get selectSchool() {

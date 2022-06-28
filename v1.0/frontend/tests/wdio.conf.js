@@ -36,9 +36,9 @@ exports.config = {
         './specs/any_10student_10q_omr(book distribution).js',
         './specs/midDay_meal.js',
         './specs/od_1student_20question.js',
+        './specs/hindi_8s_13q_9d_omr.js',
+        './specs/ANY_1S_9D_30Q_4omr_mcq.js'
         
-
-
         ]
 
     ],
