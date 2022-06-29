@@ -10445,7 +10445,7 @@
     "classId": "5",
     "examDate": "05/10/2021",
     "totalMarks": 20,
-    "type": "any_1s_5q_multichoice_village",
+    "type": "any_1s_5q_multichoice",
     "questions": [
       {
         "questionId": "QUESTION1",

@@ -26628,7 +26628,7 @@
     {
         "subject": "Hindi",
         "classId": "5",
-        "type": "any_1s_5q_multichoice_village",
+        "type": "any_1s_5q_multichoice",
         "roi": {
             "layout": {
                 "version": "1.0",
