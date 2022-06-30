@@ -100,6 +100,12 @@ const marksSchema = new mongoose.Schema({
     createdOn: { 
         type: String, 
         default: defaultTimeStamp
+    },
+    examId: {
+        type: Number,
+        required: true,
+        unique: true,
+        trim: true,
     }
 })
 
