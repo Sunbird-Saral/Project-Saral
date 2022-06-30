@@ -1,13 +1,15 @@
 
-const LOGIN = require("./loginScreen-function"); 
+// const LOGIN = require("./loginScreen-function"); 
+import LOGIN from "./loginScreen-function";
 class CredentialInput {
-    async up_u001() {
-        await LOGIN.loginIds("u001", "tarento@123");
-     }
-
+   
     async up_u002() {
        await LOGIN.loginIds("u002", "tarento@123");
     }
+
+    async up_u001() {
+      await LOGIN.loginIds("u001", "tarento@123");
+   }
 
     async demoUser() {
         await LOGIN.loginIds("demouser", "Demo@123");
@@ -29,5 +31,5 @@ class CredentialInput {
         await LOGIN.loginIds("09670702901", "tarento@123");
      }
 }
-
-module.exports = new CredentialInput();
+export default new CredentialInput();
+// module.exports = new CredentialInput();

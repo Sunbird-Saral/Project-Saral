@@ -1,6 +1,5 @@
-
-const AppObject = require("./screenObjects/android/appObjectScreen");
-const LOGININPUT = require("./screenObjects/android/loginInput")
+import LOGININPUT from "./screenObjects/android/loginInput";
+import AppObject from "./screenObjects/android/appObjectScreen";
 const assert = require("assert");
 
 

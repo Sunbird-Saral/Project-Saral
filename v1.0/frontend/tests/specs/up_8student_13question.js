@@ -1,6 +1,6 @@
 
-  const AppObject = require("./screenObjects/android/appObjectScreen");
-  const LOGININPUT = require("./screenObjects/android/loginInput")
+  import LOGININPUT from "./screenObjects/android/loginInput";
+  import AppObject from "./screenObjects/android/appObjectScreen";
 const assert = require("assert")
 
 describe('saral app test', () => {
@@ -10,7 +10,7 @@ describe('saral app test', () => {
     it('find elements', async () => {
       // schoolId and password
       await driver.pause(5000);
-      LOGININPUT.up_u002();
+       LOGININPUT.up_u002();
   
   
       await driver.pause(2000);

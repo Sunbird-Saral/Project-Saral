@@ -323,5 +323,4 @@ get scrollToDetails() {
     return $('android=new UiScrollable(new UiSelector().scrollable(true)).scrollTextIntoView("Student Details")');
 }
 }
-
-module.exports = new AppObject();
+export default new AppObject();
