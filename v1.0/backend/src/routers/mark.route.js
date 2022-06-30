@@ -36,6 +36,9 @@ router.put('/saveMarks', auth, async (req, res) => {
     });
     try {
         for (let data of marks) {
+            if(!data.examDate && data.examDate == undefined){
+                data.examDate = new Date().toLocaleDateString()
+            }
          
             let studentMarksExist = await Mark.findOne({ schoolId:data.schoolId,studentId: data.studentId,classId:data.classId,subject: data.subject, examDate: data.examDate, roiId: data.roiId  })
             if (!studentMarksExist) {
