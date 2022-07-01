@@ -10,7 +10,7 @@ describe('saral app test', () => {
     it('find elements', async () => {
       // schoolId and password
       await driver.pause(5000);
-      LOGININPUT.up_u002();
+      LOGININPUT.u002();
   
   
       await driver.pause(2000);

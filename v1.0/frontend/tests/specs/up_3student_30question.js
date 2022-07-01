@@ -9,7 +9,7 @@ describe('up_4s_20question', () => {
     it('find elements', async () => {
         // schoolId and password
         await driver.pause(5000);
-        LOGININPUT.up_u001();
+        LOGININPUT.u001();
 
 
         await driver.pause(2000);
