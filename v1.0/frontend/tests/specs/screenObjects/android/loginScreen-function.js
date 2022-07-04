@@ -1,8 +1,8 @@
 
-const AppObject = require("./appObjectScreen");
+
+import AppObject from "./appObjectScreen";
 class CredentialScreen {
     async loginIds(schoolId, password) {
-        // await driver.pause(5000);
         await AppObject.schoolId.addValue(schoolId);
         await AppObject.password.addValue(password);
     }

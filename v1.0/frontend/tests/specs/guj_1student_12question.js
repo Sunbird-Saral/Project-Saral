@@ -1,12 +1,12 @@
 const assert = require("assert")
-const AppObject = require("./screenObjects/android/appObjectScreen");
-const LOGIN = require("./screenObjects/android/loginScreen-function");
+import LOGININPUT from "./screenObjects/android/loginInput";
+import AppObject from "./screenObjects/android/appObjectScreen";
 
 describe('saral app test', () => {
   it('find elements', async () => {
     // schoolId and password
     await driver.pause(5000);
-    LOGIN.loginIds("demouser", "Demo@123");
+    LOGININPUT.demoUser();
 
 
     await driver.pause(2000);

@@ -1,6 +1,6 @@
 const assert = require("assert")
-const AppObject = require("./screenObjects/android/appObjectScreen");
-const LOGIN = require("./screenObjects/android/loginScreen-function");
+import LOGININPUT from "./screenObjects/android/loginInput";
+import AppObject from "./screenObjects/android/appObjectScreen";
 
 describe('up_4s_20question', () => {
     beforeEach('test case passed', () => {
@@ -9,7 +9,7 @@ describe('up_4s_20question', () => {
     it('find elements', async () => {
         // schoolId and password
         await driver.pause(5000);
-        LOGIN.loginIds("u001", "tarento@123");
+        LOGININPUT.u001();
 
 
         await driver.pause(2000);
