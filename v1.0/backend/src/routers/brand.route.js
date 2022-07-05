@@ -16,13 +16,14 @@ router.post('/brand?', auth, async (req, res) => {
                 schoolId: req.school.schoolId
             }      
             let school = await School.findOne(lookup)
-            brandExist = await Brand.find({ state: school.state })
+            brandExist = await Brand.find({ state: school.state,schoolId: school.schoolId })
                 req.body.state = school.state
+                req.body.schoolId = school.schoolId
         } else {
             let defaultBrand = await Brand.find()
             brandExist = defaultBrand.filter((brand) => !brand.state);
         }
-    
+       
         if (brandExist.length < 1) {
                 await Brand.create(req.body)
             res.status(201).send({ message: "Brand has been created successfully ." })
@@ -38,7 +39,7 @@ router.get('/brand', auth, async (req, res) => {
     try { 
 
         const school = await School.findOne({ schoolId: req.school.schoolId })
-        const brand = await Brand.findOne({ state: school.state }, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0, state: 0 })
+        const brand = await Brand.findOne({ state: school.state,schoolId: school.schoolId }, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0, state: 0 })
         if (brand) {
             res.status(200).send(brand)
         } else {
