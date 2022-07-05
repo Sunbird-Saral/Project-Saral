@@ -41,8 +41,8 @@ const ScanHistoryCard = ({
     const [studentCount, setStudentCount] = useState({ absentCount: 0, totalCount: 0 })
     const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.scanHistoryCard[0]
     const ExamDetaildata = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.examDetailsPopup
-    
-    
+
+
     useEffect(() => {
         setTimeout(() => { setLoading(!loading) }, 3000)
         getSaveCount()
@@ -85,7 +85,7 @@ const ScanHistoryCard = ({
             message: message,
             isOkAvailable: isAvailable,
             okFunc: func,
-            isCancel : cancel
+            isCancel: cancel
         }
         dispatch(dispatchCustomModalStatus(true));
         dispatch(dispatchCustomModalMessage(data));
@@ -97,54 +97,54 @@ const ScanHistoryCard = ({
 
         if (data) {
             if (!bgFlag) {
-            const filterData = data.filter((e) => {
+                const filterData = data.filter((e) => {
 
-                let findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.response.section)
+                    let findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.response.section)
 
-                if (e.classId == filteredData.response.class && e.subject == subject && e.examDate == examDate && findSection) {
-                    return true
-                } else {
-                    return false
-                }
-            })
-
-            setIsLoading(true)
-            let filterDataLen = 0
-
-            let setIntolocalAfterFilter = ''
-            if (filterData.length != 0) {
-                filterData.filter((f) => {
-
-                    let findSection = f.studentsMarkInfo.some((item) => item.section == filteredData.response.section)
-
-                    setIntolocalAfterFilter = data.filter((e) => {
-                        if (e.classId == f.classId && e.subject == f.subject && e.examDate == f.examDate && findSection) {
-                            return false
-                        } else {
-                            return true
-                        }
-                    })
+                    if (e.classId == filteredData.response.class && e.subject == subject && e.examDate == examDate && findSection) {
+                        return true
+                    } else {
+                        return false
+                    }
                 })
 
-                let apiObj = new SaveScanData(filterData[0], loginData.data.token);
-                saveScanData(apiObj, filterDataLen, setIntolocalAfterFilter);
+                setIsLoading(true)
+                let filterDataLen = 0
 
+                let setIntolocalAfterFilter = ''
+                if (filterData.length != 0) {
+                    filterData.filter((f) => {
+
+                        let findSection = f.studentsMarkInfo.some((item) => item.section == filteredData.response.section)
+
+                        setIntolocalAfterFilter = data.filter((e) => {
+                            if (e.classId == f.classId && e.subject == f.subject && e.examDate == f.examDate && findSection) {
+                                return false
+                            } else {
+                                return true
+                            }
+                        })
+                    })
+
+                    let apiObj = new SaveScanData(filterData[0], loginData.data.token);
+                    saveScanData(apiObj, filterDataLen, setIntolocalAfterFilter);
+
+                } else {
+                    callCustomModal(Strings.message_text, Strings.there_is_no_data, false);
+                    setIsLoading(false)
+                }
             } else {
-                callCustomModal(Strings.message_text,Strings.there_is_no_data,false);
-                setIsLoading(false)
+                callCustomModal(Strings.message_text, Strings.auto_sync_in_progress_please_wait, false);
             }
-        }else{
-            callCustomModal(Strings.message_text,Strings.auto_sync_in_progress_please_wait,false);
+
         }
-        
-    }
-    else {
-        setIsLoading(false)
-        callCustomModal(Strings.message_text,Strings.there_is_no_data,false);
+        else {
+            setIsLoading(false)
+            callCustomModal(Strings.message_text, Strings.there_is_no_data, false);
         }
     }
-    
-    const saveScanData = async(api, filteredDatalen, localScanData) => {
+
+    const saveScanData = async (api, filteredDatalen, localScanData) => {
 
         if (api.method === 'PUT') {
             let apiResponse = null;
@@ -163,8 +163,8 @@ const ScanHistoryCard = ({
                     callScanStatusData(filteredDatalen, localScanData)
                 })
                 .catch(function (err) {
-                    collectErrorLogs("ScanHistoryCard.js","saveScanData",api.apiEndPoint(),err,false);
-                    callCustomModal(Strings.message_text,Strings.contactAdmin,false);
+                    collectErrorLogs("ScanHistoryCard.js", "saveScanData", api.apiEndPoint(), err, false);
+                    callCustomModal(Strings.message_text, Strings.contactAdmin, false);
                     clearTimeout(id);
                     setIsLoading(false);
                 });
@@ -187,7 +187,7 @@ const ScanHistoryCard = ({
         FetchSavedScannedData(apiObj, loginCred.schoolId, loginCred.password, filteredDatalen, localScanData)
     }
 
-    const FetchSavedScannedData = async(api, uname, pass, filterDataLen, localScanData) => {
+    const FetchSavedScannedData = async (api, uname, pass, filterDataLen, localScanData) => {
 
         if (api.method === 'POST') {
             let apiResponse = null
@@ -204,7 +204,7 @@ const ScanHistoryCard = ({
                 }
             })
                 .then(function (res) {
-                    callCustomModal(Strings.message_text,Strings.saved_successfully,false);
+                    callCustomModal(Strings.message_text, Strings.saved_successfully, false);
                     apiResponse = res
                     clearTimeout(id)
                     api.processResponse(res)
@@ -214,10 +214,10 @@ const ScanHistoryCard = ({
                     setIsLoading(false)
                 })
                 .catch(function (err) {
-                    collectErrorLogs("ScanHistoryCard.js","FetchSavedScannedData",api.apiEndPoint(),err,false)
+                    collectErrorLogs("ScanHistoryCard.js", "FetchSavedScannedData", api.apiEndPoint(), err, false)
                     console.warn("Error", err);
                     console.warn("Error", err.response);
-                    callCustomModal(Strings.message_text,Strings.something_went_wrong_please_try_again,false);
+                    callCustomModal(Strings.message_text, Strings.something_went_wrong_please_try_again, false);
                     setIsLoading(false)
                     clearTimeout(id)
                 });
@@ -233,12 +233,12 @@ const ScanHistoryCard = ({
 
     const getStudentList = async () => {
         let studentList = await getPresentAbsentStudent();
-        let absentStudent = studentList.filter((item) => { 
+        let absentStudent = studentList.filter((item) => {
             if (item.studentAvailability == false) {
                 return true
             }
         })
-        setStudentCount({ absentCount: absentStudent.length , totalCount: studentList.length})
+        setStudentCount({ absentCount: absentStudent.length, totalCount: studentList.length })
     }
 
     // for exam type
@@ -247,11 +247,12 @@ const ScanHistoryCard = ({
         return item.subject == filteredData.response.subject;
     }).map(({ type }) => ({ type }));
 
-    
+
     let ExamQuesDetail = studentsAndExamData.data.exams
     ExamQuesDetail = studentsAndExamData.data.exams.filter(function (item) {
         return item.subject == filteredData.response.subject;
     })
+    // console.log('ExamQuesDetail',ExamQuesDetail[0])
     return (
         <View>
             <TouchableOpacity
@@ -259,83 +260,83 @@ const ScanHistoryCard = ({
                 disabled
 
             >
-                <View style={{ flexDirection: 'row', width: '100%', alignItems: 'center', paddingTop: '3%', paddingLeft: '1%', paddingRight: '1%', marginBottom:10}}>
+                <View style={{ flexDirection: 'row', width: '100%', alignItems: 'center', paddingTop: '3%', paddingLeft: '1%', paddingRight: '1%', marginBottom: 10 }}>
                     <View>
                         <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                                <Text style={{fontFamily : monospace_FF}}>{BrandLabel&&BrandLabel.Class ? BrandLabel.Class : Strings.class_text}</Text>
+                                <Text style={{ fontFamily: monospace_FF }}>{BrandLabel && BrandLabel.Class ? BrandLabel.Class : Strings.class_text}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
-                                <Text style={{fontFamily : monospace_FF}} >{filteredData.response.className}</Text>
+                                <Text style={{ fontFamily: monospace_FF }} >{filteredData.response.className}</Text>
                             </View>
                         </View>
                         <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                                <Text style={{fontFamily : monospace_FF}} >{BrandLabel && BrandLabel.Section ? BrandLabel.Section:Strings.section}</Text>
+                                <Text style={{ fontFamily: monospace_FF }} >{BrandLabel && BrandLabel.Section ? BrandLabel.Section : Strings.section}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
-                                <Text style={{fontFamily : monospace_FF}} >{filteredData.response.section}</Text>
+                                <Text style={{ fontFamily: monospace_FF }} >{filteredData.response.section}</Text>
                             </View>
                         </View>
                         <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                            <Text style={{fontFamily : monospace_FF}} >{BrandLabel&&BrandLabel.ExamDate ? BrandLabel.ExamDate:Strings.exam_date}</Text>
+                                <Text style={{ fontFamily: monospace_FF }} >{BrandLabel && BrandLabel.ExamDate ? BrandLabel.ExamDate : Strings.exam_date}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
-                                <Text style={{fontFamily : monospace_FF}} >{filteredData.response.examDate}</Text>
+                                <Text style={{ fontFamily: monospace_FF }} >{filteredData.response.examDate}</Text>
                             </View>
                         </View>
                         <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                                <Text style={{fontFamily : monospace_FF}} >{BrandLabel&&BrandLabel.Subject ? BrandLabel.Subject:Strings.subject}</Text>
+                                <Text style={{ fontFamily: monospace_FF }} >{BrandLabel && BrandLabel.Subject ? BrandLabel.Subject : Strings.subject}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
-                                <Text style={{fontFamily : monospace_FF}} >{filteredData.response.subject}</Text>
+                                <Text style={{ fontFamily: monospace_FF }} >{filteredData.response.subject}</Text>
                             </View>
                         </View>
                         <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle,]}>
-                            <Text style={{fontFamily : monospace_FF}} >{BrandLabel&&BrandLabel.ExamType ? BrandLabel.ExamType:Strings.Exam_Type}</Text>
+                                <Text style={{ fontFamily: monospace_FF }} >{BrandLabel && BrandLabel.ExamType ? BrandLabel.ExamType : Strings.Exam_Type}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle,]}>
                                 {Examtypedata.map((item) =>
                                     <View key={item}>
-                                        <Text style={{fontFamily : monospace_FF}} >{item.type}</Text>
+                                        <Text style={{ fontFamily: monospace_FF }} >{item.type}</Text>
                                     </View>
                                 )}
                             </View>
                         </View>
                         <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                            <Text style={{fontFamily : monospace_FF}} >{BrandLabel && BrandLabel.ExamId ? BrandLabel.ExamId:Strings.exam_id}</Text>
+                                <Text style={{ fontFamily: monospace_FF }} >{BrandLabel && BrandLabel.ExamId ? BrandLabel.ExamId : Strings.exam_id}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
-                                <Text style={{fontFamily : monospace_FF}} >{filteredData.response.examTestID}</Text>
+                                <Text style={{ fontFamily: monospace_FF }} >{filteredData.response.examTestID}</Text>
                             </View>
                         </View>
                         <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                            <Text style={{fontFamily : monospace_FF}} >{BrandLabel && BrandLabel.ExamDetail ? BrandLabel.ExamDetail:Strings.exam_details}</Text>
+                                <Text style={{ fontFamily: monospace_FF }} >{BrandLabel && BrandLabel.ExamDetail ? BrandLabel.ExamDetail : Strings.exam_details}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
-                                <Text style={{fontFamily : monospace_FF,textDecorationLine:'underline',color:'blue'}}   onPress={() => setIsModalVisible(!isModalVisible)} >{BrandLabel && BrandLabel.Details ? BrandLabel.Details: Strings.details}</Text>
+                                <Text style={{ fontFamily: monospace_FF, textDecorationLine: 'underline', color: 'blue' }} onPress={() => setIsModalVisible(!isModalVisible)} >{BrandLabel && BrandLabel.Details ? BrandLabel.Details : Strings.details}</Text>
                             </View>
                         </View>
                         <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle,]}>
-                                <Text style={{fontFamily : monospace_FF}} >{Strings.scan_status}</Text>
+                                <Text style={{ fontFamily: monospace_FF }} >{Strings.scan_status}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle,]}>
-                                <Text style={{fontFamily : monospace_FF}} >{scanStatusData}</Text>
+                                <Text style={{ fontFamily: monospace_FF }} >{scanStatusData}</Text>
                             </View>
                         </View>
                         <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle, { borderBottomWidth: 1 }]}>
-                                <Text style={{fontFamily : monospace_FF}} >{Strings.save_status}</Text>
+                                <Text style={{ fontFamily: monospace_FF }} >{Strings.save_status}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle, { borderBottomWidth: 1 }]}>
                                 {loading ?
-                                    <Text style={{fontFamily : monospace_FF}} >{getSaveCount()}</Text> : <View style={{ alignItems: 'flex-start' }}><ActivityIndicator size={'small'} color={'grey'} /></View>}
+                                    <Text style={{ fontFamily: monospace_FF }} >{getSaveCount()}</Text> : <View style={{ alignItems: 'flex-start' }}><ActivityIndicator size={'small'} color={'grey'} /></View>}
                             </View>
                         </View>
 
@@ -367,7 +368,7 @@ const ScanHistoryCard = ({
                                 }}
                                 onPress={onPressStatus}
                             >
-                                <Text  style={{fontFamily : monospace_FF}}>{Strings.save_status}</Text>
+                                <Text style={{ fontFamily: monospace_FF }}>{Strings.save_status}</Text>
                             </TouchableOpacity>
                         }
                         {
@@ -382,7 +383,7 @@ const ScanHistoryCard = ({
                                 }}
                                 onPress={onPressSaveInDB}
                             >
-                                <Text  style={{fontFamily : monospace_FF, color: AppTheme.BLACK}}>{Strings.save_scan}</Text>
+                                <Text style={{ fontFamily: monospace_FF, color: AppTheme.BLACK }}>{Strings.save_scan}</Text>
                             </TouchableOpacity>}
                     </View>
                 </View>
@@ -396,21 +397,21 @@ const ScanHistoryCard = ({
                                 style={{ backgroundColor: AppTheme.GREY, borderRadius: 4, width: '80%', alignItems: 'center', justifyContent: 'center', elevation: 8, paddingVertical: 4 }}
                                 onPress={onPressContinue}
                             >
-                                <Text  style={{fontFamily : monospace_FF,color : AppTheme.WHITE}} >{Strings.continue_scan}</Text>
+                                <Text style={{ fontFamily: monospace_FF, color: AppTheme.WHITE }} >{Strings.continue_scan}</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
                 }
-                 {
+                {
                     scanstatusbutton
                     &&
-                    <View style={{bottom:10,  width: '100%', alignItems: 'center' }}>
+                    <View style={{ bottom: 10, width: '100%', alignItems: 'center' }}>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', width: '100%' }}>
                             <TouchableOpacity
                                 style={{ backgroundColor: AppTheme.GREY, borderRadius: 4, width: '80%', alignItems: 'center', justifyContent: 'center', elevation: 8, paddingVertical: 4 }}
-                                 onPress={onPressScanStatus}
+                                onPress={onPressScanStatus}
                             >
-                                <Text  style={{fontFamily : monospace_FF, color : AppTheme.WHITE}}>{Strings.scan_status}</Text>
+                                <Text style={{ fontFamily: monospace_FF, color: AppTheme.WHITE }}>{Strings.scan_status}</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -428,55 +429,57 @@ const ScanHistoryCard = ({
                         <View style={[styles1.container1, { flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 20 }]}>
                             {
                                 ExamDetaildata && ExamDetaildata.length > 0 ?
-                                ExamDetaildata.map((data) => {
-                                    return (
-                                        <ExamDetailsPopup
-                                            customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
-                                            key={data}
-                                            rowTitle={data}
-                                            rowBorderColor={AppTheme.TAB_BORDER}
+                                    ExamDetaildata.map((data) => {
+                                        return (
+                                            <ExamDetailsPopup
+                                                customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
+                                                key={data}
+                                                rowTitle={data}
+                                                rowBorderColor={AppTheme.TAB_BORDER}
 
-                                        />
-                                    )
-                                })
-                                :
+                                            />
+                                        )
+                                    })
+                                    :
 
-                                Exam_QuestionHeader.map((data) => {
-                                    return (
-                                        <ExamDetailsPopup
-                                            customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
-                                            key={data}
-                                            rowTitle={data}
-                                            rowBorderColor={AppTheme.TAB_BORDER}
+                                    Exam_QuestionHeader.map((data) => {
+                                        return (
+                                            <ExamDetailsPopup
+                                                customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
+                                                key={data}
+                                                rowTitle={data}
+                                                rowBorderColor={AppTheme.TAB_BORDER}
 
-                                        />
-                                    )
-                                })
+                                            />
+                                        )
+                                    })
                             }
                         </View>
                         <View style={styles1.container1}>
-                            {ExamQuesDetail[0] && ExamQuesDetail[0].questions.map((stu) => {
-                                return (
-                                    <View key={stu} style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
 
-                                        <ExamDetailsPopup
-                                            customRowStyle={{ width: '30%', }}
-                                            rowTitle={ stu.questionId}
-                                            rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
-                                        />
-                                        <ExamDetailsPopup
-                                            customRowStyle={{ width: '30%', }}
-                                            rowTitle={stu.indicatorTitle}
-                                            rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
-                                        />
-                                        <ExamDetailsPopup
-                                            customRowStyle={{ width: '30%', }}
-                                            rowTitle={stu.questionMarks}
-                                            rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
-                                        />
-                                    </View>
-                                )
-                            })}
+                            {ExamQuesDetail[0].questions != undefined && ExamQuesDetail[0].questions != [] &&
+                                ExamQuesDetail[0].questions != '' ?
+                                ExamQuesDetail[0].questions.map((stu) => {
+                                    return (
+                                        <View key={stu} style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                                            <ExamDetailsPopup
+                                                customRowStyle={{ width: '30%', }}
+                                                rowTitle={stu.questionId}
+                                                rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
+                                            />
+                                            <ExamDetailsPopup
+                                                customRowStyle={{ width: '30%', }}
+                                                rowTitle={stu.indicatorTitle}
+                                                rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
+                                            />
+                                            <ExamDetailsPopup
+                                                customRowStyle={{ width: '30%', }}
+                                                rowTitle={stu.questionMarks}
+                                                rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
+                                            />
+                                        </View>
+                                    )
+                                }) : <View style={{ alignItems: 'center', marginTop: 80 }}><Text>Data not found</Text></View>}
                         </View>
                     </ScrollView>
                     <View >
@@ -499,7 +502,7 @@ const mapStateToProps = (state) => {
         filteredData: state.filteredData,
         scanedData: state.scanedData,
         loginData: state.loginData,
-        studentsAndExamData : state.studentsAndExamData,
+        studentsAndExamData: state.studentsAndExamData,
         apiStatus: state.apiStatus,
         bgFlag: state.bgFlag,
         studentsAndExamData: state.studentsAndExamData,
@@ -516,7 +519,7 @@ const mapDispatchToProps = (dispatch) => {
 const styles1 = StyleSheet.create({
     container1: { flex: 1, backgroundColor: '#fff', },
     container: {
-        top:-40,
+        top: -40,
         padding: 25,
         flex: 1,
         alignItems: 'center',
@@ -528,7 +531,7 @@ const styles1 = StyleSheet.create({
         padding: 10, backgroundColor: '#fff',
         borderRadius: 10
     },
-    nxtBtnStyle:{marginTop:10,marginHorizontal:40, marginBottom: 20, borderRadius: 10, }
+    nxtBtnStyle: { marginTop: 10, marginHorizontal: 40, marginBottom: 20, borderRadius: 10, }
 })
 
 
