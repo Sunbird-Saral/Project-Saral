@@ -455,7 +455,9 @@ const ScanHistoryCard = ({
                             }
                         </View>
                         <View style={styles1.container1}>
-                            {ExamQuesDetail[0] && ExamQuesDetail[0].questions.map((stu) => {
+                            {ExamQuesDetail[0].questions != undefined && 
+                                ExamQuesDetail[0].questions != "" ?
+                                ExamQuesDetail[0] && ExamQuesDetail[0].questions.map((stu) => {
                                 return (
                                     <View key={stu} style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
 
@@ -476,7 +478,7 @@ const ScanHistoryCard = ({
                                         />
                                     </View>
                                 )
-                            })}
+                            }): <View style={{ alignItems: 'center', marginTop: 80 }}><Text>Data not found</Text></View>}
                         </View>
                     </ScrollView>
                     <View >
