@@ -31,7 +31,7 @@ public class HWBlockLettersClassifier {
      * Name of the model file hosted with Firebase.
      */
     private static final String HOSTED_MODEL_NAME = null;
-    private static final String LOCAL_MODEL_ASSET = "letters_model_v1.0.tflite";
+    private static final String LOCAL_MODEL_ASSET = "hw_recog_digit_leter_tmp_10_epoch2.tflite";
 
     /**
      * Dimensions of inputs.
@@ -80,7 +80,7 @@ public class HWBlockLettersClassifier {
 
     public void initialize(HWBlockLettersClassifierStatusListener listener) {
         int[] inputDims = {DIM_BATCH_SIZE, DIM_IMG_SIZE_X, DIM_IMG_SIZE_Y, DIM_PIXEL_SIZE};
-        int[] outputDims = {DIM_BATCH_SIZE, 27};
+        int[] outputDims = {DIM_BATCH_SIZE, 37};
         try {
             int firebaseModelDataType = FirebaseModelDataType.FLOAT32;
             mDataOptions =

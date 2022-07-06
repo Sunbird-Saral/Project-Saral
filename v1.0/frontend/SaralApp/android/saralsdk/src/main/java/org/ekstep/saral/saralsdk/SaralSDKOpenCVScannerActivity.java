@@ -66,6 +66,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
     private long                            mStartPredictTime;
 
     private int     mTotalClassifiedCount               = 0;
+    private int     blockTotalClassifiedCount           = 0;
     private boolean mIsClassifierRequestSubmitted       = false;
     private HashMap<String, String> mPredictedDigits    = new HashMap<>();
     private HashMap<String, String> mPredictedOMRs      = new HashMap<>();
@@ -179,33 +180,40 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
             public void OnPredictionSuccess(int digit, float confidence, String id) {
                 Log.d(TAG, "predicted digit:" + digit + " unique id:" + id + " confidence:" + confidence);
                 Map<Integer,String> lettersMap = new HashMap<>();
-                int index=1;
+                int index=0;
+                for(int i=0;i<=9;i++)
+                {
+                    lettersMap.put(index,String.valueOf(i));
+                    index++;                  
+                }
+                lettersMap.put(index,"");
+                index++;
                 for(char c = 'A'; c <= 'Z'; ++c)
                 {
                     lettersMap.put(index,c+"");
                     index++;
                 }
-                mTotalClassifiedCount++;
+                blockTotalClassifiedCount++;
                     try {
                         JSONObject result = new JSONObject();
-                        if(digit != 26 && lettersMap.get(digit)!=null) {
+                        if(digit != 36 && lettersMap.get(digit)!=null) {
                             result.put("prediction", lettersMap.get(digit));
                             result.put("confidence", new Double(confidence));
                         }else{
                             // if classifier is 10 , assigning prediction as 0
-                            result.put("prediction", new Integer(0));
+                            result.put("prediction", "");
                             result.put("confidence", new Double(0));
                         }
                         mPredictedDigits.put(id, result.toString());
                     } catch (JSONException e) {
                         Log.e(TAG, "unable to create prediction object");
                     }
-                if (mIsClassifierRequestSubmitted && mTotalClassifiedCount >= mPredictedDigits.size()) {
+                if (mIsClassifierRequestSubmitted && blockTotalClassifiedCount >= mPredictedDigits.size()) {
                     mIsScanningComplete     = true;
                 }
 
                 if (mIsScanningComplete) {
-                    Log.d(TAG, "Scaning completed, classification count " + mTotalClassifiedCount);
+                    Log.d(TAG, "Scaning completed, classification count " + blockTotalClassifiedCount);
                     processScanningCompleted();
                 }
           
@@ -214,7 +222,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
             @Override
             public void OnPredictionFailed(String error, String id) {
                 Log.e(TAG, "Model prediction failed");
-                mTotalClassifiedCount++;
+                blockTotalClassifiedCount++;
                 try {
                     JSONObject result = new JSONObject();
                     result.put("prediction", new Integer(0));
@@ -224,12 +232,12 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                     Log.e(TAG, "unable to create prediction object");
                 }
 
-                if (mIsClassifierRequestSubmitted && mTotalClassifiedCount >= mPredictedDigits.size()) {
+                if (mIsClassifierRequestSubmitted && blockTotalClassifiedCount >= mPredictedDigits.size()) {
                     mIsScanningComplete     = true;
                 }
 
                 if (mIsScanningComplete) {
-                    Log.d(TAG, "Scaning completed, classification count " + mTotalClassifiedCount);
+                    Log.d(TAG, "Scaning completed, classification count " + blockTotalClassifiedCount);
                     processScanningCompleted();
                 }
             }
