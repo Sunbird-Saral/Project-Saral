@@ -2,6 +2,11 @@
     "layout": {
         "version": "1.0",
         "name": "ANY10S10QOMR Exam Sheet Form",
+        "threshold": {
+            "minWidth": 0,
+            "minHeight": 0,
+            "detectionRadius": 12
+        },
         "cells": [
             {
                 "cellId": "1",
