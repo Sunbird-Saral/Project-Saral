@@ -1,10 +1,10 @@
 [
   {
-    "subject": "Hindi",
+    "category3": "Hindi",
     "examLO": "Hindi",
-    "classId": "2",
-    "examDate": "23/09/2021",
-    "totalMarks": 20,
+    "category1": "2",
+    "date": "23/09/2021",
+    "totalResults": 20,
     "type": "hindi_4s_20q_omr",
     "questions": [
       {
@@ -889,14 +889,14 @@
       }
     ],
     "examId": 1,
-    "schoolId": "u001"
+    "orgId": "u001"
   },
   {
-    "subject": "Hindi",
+    "category3": "Hindi",
     "examLO": "Hindi",
-    "classId": "3",
-    "examDate": "24/09/2021",
-    "totalMarks": 20,
+    "category1": "3",
+    "date": "24/09/2021",
+    "totalResults": 20,
     "type": "hindi_3s_30q_omr",
     "questions": [
       {
@@ -1885,15 +1885,15 @@
       }
     ],
     "examId": 2,
-    "schoolId": "u001"
+    "orgId": "u001"
   },
   {
-    "subject": "Multi-Subject",
+    "category3": "Multi-Subject",
     "examLO": "Multi-Subject",
-    "classId": "4",
-    "examDate": "28/09/2021",
-    "totalMarks": 20,
-    "type": "multisubject_1s_10q",
+    "category1": "4",
+    "date": "28/09/2021",
+    "totalResults": 20,
+    "type": "multicategory3_1s_10q",
     "questions": [
       {
         "questionId": "HINDIID1",
@@ -2441,14 +2441,14 @@
       }
     ],
     "examId": 3,
-    "schoolId": "u001"
+    "orgId": "u001"
   },
   {
-    "subject": "Hindi",
+    "category3": "Hindi",
     "examLO": "Hindi",
-    "classId": "5",
-    "examDate": "29/09/2021",
-    "totalMarks": 20,
+    "category1": "5",
+    "date": "29/09/2021",
+    "totalResults": 20,
     "type": "hindi_4s_20q_omr",
     "questions": [
       {
@@ -3333,14 +3333,14 @@
       }
     ],
     "examId": 4,
-    "schoolId": "u001"
+    "orgId": "u001"
   },
   {
-    "subject": "Hindi",
+    "category3": "Hindi",
     "examLO": "Hindi",
-    "classId": "6",
-    "examDate": "28/09/2021",
-    "totalMarks": 20,
+    "category1": "6",
+    "date": "28/09/2021",
+    "totalResults": 20,
     "type": "hindi_4s_20q_omr",
     "questions": [
       {
@@ -4225,14 +4225,14 @@
       }
     ],
     "examId": 5,
-    "schoolId": "u001"
+    "orgId": "u001"
   },
   {
-    "subject": "Hindi",
+    "category3": "Hindi",
     "examLO": "Hindi",
-    "classId": "7",
-    "examDate": "29/09/2021",
-    "totalMarks": 20,
+    "category1": "7",
+    "date": "29/09/2021",
+    "totalResults": 20,
     "type": "hindi_4s_20q_omr",
     "questions": [
       {
@@ -5117,15 +5117,15 @@
       }
     ],
     "examId": 6,
-    "schoolId": "u001"
+    "orgId": "u001"
   },
   {
-    "subject": "Multi-Subject",
+    "category3": "Multi-Subject",
     "examLO": "Multi-Subject",
-    "classId": "8",
-    "examDate": "29/09/2021",
-    "totalMarks": 20,
-    "type": "multisubject_1s_10q",
+    "category1": "8",
+    "date": "29/09/2021",
+    "totalResults": 20,
+    "type": "multicategory3_1s_10q",
     "questions": [
       {
         "questionId": "HINDIID1",
@@ -5673,14 +5673,14 @@
       }
     ],
     "examId": 7,
-    "schoolId": "u001"
+    "orgId": "u001"
   },
   {
-    "subject": "Hindi",
+    "category3": "Hindi",
     "examLO": "Hindi",
-    "classId": "2",
-    "examDate": "01/10/2021",
-    "totalMarks": 20,
+    "category1": "2",
+    "date": "01/10/2021",
+    "totalResults": 20,
     "type": "any_1s_20q",
     "questions": [
       {
@@ -5785,14 +5785,14 @@
       }
     ],
     "examId": 8,
-    "schoolId": "od001"
+    "orgId": "od001"
   },
   {
-    "subject": "Hindi",
+    "category3": "Hindi",
     "examLO": "Hindi",
-    "classId": "3",
-    "examDate": "24/09/2021",
-    "totalMarks": 20,
+    "category1": "3",
+    "date": "24/09/2021",
+    "totalResults": 20,
     "type": "any_1s_20q",
     "questions": [
       {
@@ -5897,14 +5897,14 @@
       }
     ],
     "examId": 9,
-    "schoolId": "od001"
+    "orgId": "od001"
   },
   {
-    "subject": "Maths",
+    "category3": "Maths",
     "examLO": "Maths",
-    "classId": "2",
-    "examDate": "02/10/2021",
-    "totalMarks": 20,
+    "category1": "2",
+    "date": "02/10/2021",
+    "totalResults": 20,
     "type": "any_1s_20q",
     "questions": [
       {
@@ -6009,14 +6009,14 @@
       }
     ],
     "examId": 10,
-    "schoolId": "od001"
+    "orgId": "od001"
   },
   {
-    "subject": "Hindi",
+    "category3": "Hindi",
     "examLO": "Hindi",
-    "classId": "3",
-    "examDate": "05/10/2021",
-    "totalMarks": 20,
+    "category1": "3",
+    "date": "05/10/2021",
+    "totalResults": 20,
     "type": "any_1s_34q",
     "questions": [
       {
@@ -6191,14 +6191,14 @@
       }
     ],
     "examId": 11,
-    "schoolId": "demouser"
+    "orgId": "demouser"
   },
   {
-    "subject": "Maths",
+    "category3": "Maths",
     "examLO": "Maths",
-    "classId": "3",
-    "examDate": "06/10/2021",
-    "totalMarks": 20,
+    "category1": "3",
+    "date": "06/10/2021",
+    "totalResults": 20,
     "type": "any_1s_34q",
     "questions": [
       {
@@ -6373,14 +6373,14 @@
       }
     ],
     "examId": 12,
-    "schoolId": "demouser"
+    "orgId": "demouser"
   },
   {
-    "subject": "English",
+    "category3": "English",
     "examLO": "English",
-    "classId": "3",
-    "examDate": "07/10/2021",
-    "totalMarks": 20,
+    "category1": "3",
+    "date": "07/10/2021",
+    "totalResults": 20,
     "type": "any_1s_34q",
     "questions": [
       {
@@ -6555,14 +6555,14 @@
       }
     ],
     "examId": 13,
-    "schoolId": "demouser"
+    "orgId": "demouser"
   },
   {
-    "subject": "Hindi",
+    "category3": "Hindi",
     "examLO": "Hindi",
-    "classId": "2",
-    "examDate": "11/10/2021",
-    "totalMarks": 20,
+    "category1": "2",
+    "date": "11/10/2021",
+    "totalResults": 20,
     "type": "hindi_8s_13q_omr",
     "questions": [
       {
@@ -7711,14 +7711,14 @@
       }
     ],
     "examId": 14,
-    "schoolId": "u002"
+    "orgId": "u002"
   },
   {
-    "subject": "Maths",
+    "category3": "Maths",
     "examLO": "Maths",
-    "classId": "2",
-    "examDate": "12/10/2021",
-    "totalMarks": 20,
+    "category1": "2",
+    "date": "12/10/2021",
+    "totalResults": 20,
     "type": "hindi_8s_13q_omr",
     "questions": [
       {
@@ -8867,14 +8867,14 @@
       }
     ],
     "examId": 15,
-    "schoolId": "u002"
+    "orgId": "u002"
   },
   {
-    "subject": "English",
+    "category3": "English",
     "examLO": "English",
-    "classId": "2",
-    "examDate": "13/10/2021",
-    "totalMarks": 20,
+    "category1": "2",
+    "date": "13/10/2021",
+    "totalResults": 20,
     "type": "hindi_8s_13q_omr",
     "questions": [
       {
@@ -10023,14 +10023,14 @@
       }
     ],
     "examId": 16,
-    "schoolId": "u002"
+    "orgId": "u002"
   },
   {
-    "subject": "Maths",
+    "category3": "Maths",
     "examLO": "Maths",
-    "classId": "3",
-    "examDate": "24/10/2022",
-    "totalMarks": 30,
+    "category1": "3",
+    "date": "24/10/2022",
+    "totalResults": 30,
     "type": "hindi_1s_9d_30q_omr",
     "questions": [
       {
@@ -10365,14 +10365,14 @@
       }
     ],
     "examId": 17,
-    "schoolId": "u002"
+    "orgId": "u002"
   },
   {
-    "subject": "Hindi",
+    "category3": "Hindi",
     "examLO": "Hindi",
-    "classId": "4",
-    "examDate": "05/10/2021",
-    "totalMarks": 20,
+    "category1": "4",
+    "date": "05/10/2021",
+    "totalResults": 20,
     "type": "any_1s_12q ",
     "questions": [
       {
@@ -10437,14 +10437,14 @@
       }
     ],
     "examId": 18,
-    "schoolId": "demouser"
+    "orgId": "demouser"
   },
   {
-    "subject": "Hindi",
+    "category3": "Hindi",
     "examLO": "Hindi",
-    "classId": "5",
-    "examDate": "05/10/2021",
-    "totalMarks": 20,
+    "category1": "5",
+    "date": "05/10/2021",
+    "totalResults": 20,
     "type": "any_1s_5q_multichoice",
     "questions": [
       {
@@ -10474,14 +10474,14 @@
       }
     ],
     "examId": 19,
-    "schoolId": "demouser"
+    "orgId": "demouser"
   },
   {
-    "subject": "Carpentary Assesment",
+    "category3": "Carpentary Assesment",
     "examLO": "Carpentary Assesment",
-    "classId": "5",
-    "examDate": "05/10/2021",
-    "totalMarks": 20,
+    "category1": "5",
+    "date": "05/10/2021",
+    "totalResults": 20,
     "type": "any_1s_5q_multichoice",
     "questions": [
       {
@@ -10511,14 +10511,14 @@
       }
     ],
     "examId": 20,
-    "schoolId": "skill001"
+    "orgId": "skill001"
   },
   {
-    "subject": "Hindi",
+    "category3": "Hindi",
     "examLO": "Hindi",
-    "classId": "6",
-    "examDate": "05/10/2021",
-    "totalMarks": 10,
+    "category1": "6",
+    "date": "05/10/2021",
+    "totalResults": 10,
     "type": "any_1s_15q_multipage",
     "questions": [
       {
@@ -10598,14 +10598,14 @@
       }
     ],
     "examId": 21,
-    "schoolId": "demouser"
+    "orgId": "demouser"
   },
   {
-    "subject": "midday-meal",
+    "category3": "midday-meal",
     "examLO": "midday-meal",
-    "classId": "2",
-    "examDate": "07/01/2022",
-    "totalMarks": 20,
+    "category1": "2",
+    "date": "07/01/2022",
+    "totalResults": 20,
     "type": "any_20s_midday_meal",
     "questions": [
       {
@@ -10830,14 +10830,14 @@
       }
     ],
     "examId": 22,
-    "schoolId": "u002"
+    "orgId": "u002"
   },
   {
-    "subject": "section-attendance",
+    "category3": "section-attendance",
     "examLO": "section-attendance",
-    "classId": "2",
-    "examDate": "08/01/2022",
-    "totalMarks": 20,
+    "category1": "2",
+    "date": "08/01/2022",
+    "totalResults": 20,
     "type": "any_20s_attendance",
     "questions": [
       {
@@ -11062,14 +11062,14 @@
       }
     ],
     "examId": 23,
-    "schoolId": "u002"
+    "orgId": "u002"
   },
   {
-    "subject": "Hindi",
+    "category3": "Hindi",
     "examLO": "Hindi",
-    "classId": "7",
-    "examDate": "19/01/2022",
-    "totalMarks": 24,
+    "category1": "7",
+    "date": "19/01/2022",
+    "totalResults": 24,
     "type": "any_1s_24q_multipage",
     "questions": [
       {
@@ -11194,14 +11194,14 @@
       }
     ],
     "examId": 24,
-    "schoolId": "demouser"
+    "orgId": "demouser"
   },
   {
-    "subject": "Hindi",
+    "category3": "Hindi",
     "examLO": "Hindi",
-    "classId": "2",
-    "examDate": "07/03/2022",
-    "totalMarks": 10,
+    "category1": "2",
+    "date": "07/03/2022",
+    "totalResults": 10,
     "type": "any_1s_10q",
     "questions": [
       {
@@ -11256,14 +11256,14 @@
       }
     ],
     "examId": 25,
-    "schoolId": "a001"
+    "orgId": "a001"
   },
   {
-    "subject": "Hindi",
+    "category3": "Hindi",
     "examLO": "Hindi",
-    "classId": "3",
-    "examDate": "30/03/2022",
-    "totalMarks": 10,
+    "category1": "3",
+    "date": "30/03/2022",
+    "totalResults": 10,
     "type": "any_10s_10q",
     "questions": [
       {
@@ -11318,14 +11318,14 @@
       }
     ],
     "examId": 26,
-    "schoolId": "a001"
+    "orgId": "a001"
   },
   {
-    "subject": "0",
+    "category3": "0",
     "examLO": "0",
-    "classId": "0",
-    "examDate": null,
-    "totalMarks": 20,
+    "category1": "0",
+    "date": null,
+    "totalResults": 20,
     "type": "school evaluation",
     "questions": [
       {
@@ -11390,14 +11390,14 @@
       }
     ],
     "examId": 27,
-    "schoolId": "m001"
+    "orgId": "m001"
   },
   {
-    "subject": "0",
+    "category3": "0",
     "examLO": "0",
-    "classId": "0",
-    "examDate": null,
-    "totalMarks": 20,
+    "category1": "0",
+    "date": null,
+    "totalResults": 20,
     "type": "electricity reading",
     "questions": [
       {
@@ -11462,14 +11462,14 @@
       }
     ],
     "examId": 28,
-    "schoolId": "m001"
+    "orgId": "m001"
   },
   {
-    "subject": "0",
+    "category3": "0",
     "examLO": "0",
-    "classId": "0",
-    "examDate": null,
-    "totalMarks": 20,
+    "category1": "0",
+    "date": null,
+    "totalResults": 20,
     "type": "feedback",
     "questions": [
       {
@@ -11534,14 +11534,14 @@
       }
     ],
     "examId": 29,
-    "schoolId": "m001"
+    "orgId": "m001"
   },
   {
-    "subject": "Hindi",
+    "category3": "Hindi",
     "examLO": "Hindi",
-    "classId": "4",
-    "examDate": "05/05/2022",
-    "totalMarks": 10,
+    "category1": "4",
+    "date": "05/05/2022",
+    "totalResults": 10,
     "type": "any_10s_10q_7d",
     "questions": [
       {
@@ -11596,14 +11596,14 @@
       }
     ],
     "examId": 30,
-    "schoolId": "a001"
+    "orgId": "a001"
   },
   {
-    "subject": "Hindi",
+    "category3": "Hindi",
     "examLO": "Hindi",
-    "classId": "8",
-    "examDate": "16/05/2022",
-    "totalMarks": 20,
+    "category1": "8",
+    "date": "16/05/2022",
+    "totalResults": 20,
     "type": "omr options",
     "questions": [
       {
@@ -11633,14 +11633,14 @@
       }
     ],
     "examId": 31,
-    "schoolId": "demouser"
+    "orgId": "demouser"
   },
   {
-    "subject": "Hindi",
+    "category3": "Hindi",
     "examLO": "Hindi",
-    "classId": "9",
-    "examDate": "24/10/2022",
-    "totalMarks": 30,
+    "category1": "9",
+    "date": "24/10/2022",
+    "totalResults": 30,
     "type": "hindi_1s_30q_omr",
     "questions": [
       {
@@ -12965,14 +12965,14 @@
       }
     ],
     "examId": 32,
-    "schoolId": "u001"
+    "orgId": "u001"
   },
   {
-    "subject": "hindi",
+    "category3": "hindi",
     "examLO": "hindi",
-    "classId": "5",
-    "examDate": "14/10/2022",
-    "totalMarks": 20,
+    "category1": "5",
+    "date": "14/10/2022",
+    "totalResults": 20,
     "type": "any_8s_13q_omr",
     "questions": [
       {
@@ -14121,14 +14121,14 @@
       }
     ],
     "examId": 33,
-    "schoolId": "09670702901"
+    "orgId": "09670702901"
   },
   {
-    "subject": "Hindi",
+    "category3": "Hindi",
     "examLO": "Hindi",
-    "classId": "8",
-    "examDate": "05/10/2022",
-    "totalMarks": 10,
+    "category1": "8",
+    "date": "05/10/2022",
+    "totalResults": 10,
     "type": "any_1s_15q_multipage",
     "questions": [
       {
@@ -14208,14 +14208,14 @@
       }
     ],
     "examId": 34,
-    "schoolId": "09670702901"
+    "orgId": "09670702901"
   },
   {
-    "subject": "Hindi",
+    "category3": "Hindi",
     "examLO": "Hindi",
-    "classId": "2",
-    "examDate": "07/08/2022",
-    "totalMarks": 10,
+    "category1": "2",
+    "date": "07/08/2022",
+    "totalResults": 10,
     "type": "any_1s_10q",
     "questions": [
       {
@@ -14270,14 +14270,14 @@
       }
     ],
     "examId": 35,
-    "schoolId": "09670702901"
+    "orgId": "09670702901"
   },
   {
-    "subject": "Hindi",
+    "category3": "Hindi",
     "examLO": "Hindi",
-    "classId": "3",
-    "examDate": "01/10/2022",
-    "totalMarks": 20,
+    "category1": "3",
+    "date": "01/10/2022",
+    "totalResults": 20,
     "type": "any_1s_20q",
     "questions": [
       {
@@ -14382,14 +14382,14 @@
       }
     ],
     "examId": 36,
-    "schoolId": "09670702901"
+    "orgId": "09670702901"
   },
   {
-    "subject": "Hindi",
+    "category3": "Hindi",
     "examLO": "Hindi",
-    "classId": "6",
-    "examDate": "24/10/2022",
-    "totalMarks": 30,
+    "category1": "6",
+    "date": "24/10/2022",
+    "totalResults": 30,
     "type": "hindi_1s_30q_omr",
     "questions": [
       {
@@ -14724,14 +14724,14 @@
       }
     ],
     "examId": 37,
-    "schoolId": "09670702901"
+    "orgId": "09670702901"
   },
   {
-    "subject": "section-attendance",
+    "category3": "section-attendance",
     "examLO": "section-attendance",
-    "classId": "7",
-    "examDate": "08/01/2022",
-    "totalMarks": 20,
+    "category1": "7",
+    "date": "08/01/2022",
+    "totalResults": 20,
     "type": "any_20s_attendance",
     "questions": [
       {
@@ -14956,14 +14956,14 @@
       }
     ],
     "examId": 38,
-    "schoolId": "09670702901"
+    "orgId": "09670702901"
   },
   {
-    "subject": "book-distribution",
+    "category3": "book-distribution",
     "examLO": "book-distribution",
-    "classId": "4",
-    "examDate": "20/06/2022",
-    "totalMarks": 20,
+    "category1": "4",
+    "date": "20/06/2022",
+    "totalResults": 20,
     "type": "any_10s_10q_omr",
     "questions": [
       {
@@ -16112,14 +16112,14 @@
       }
     ],
     "examId": 39,
-    "schoolId": "09670702901"
+    "orgId": "09670702901"
   },
   {
-    "subject": "hindi",
+    "category3": "hindi",
     "examLO": "hindi",
-    "classId": "5",
-    "examDate": "14/10/2022",
-    "totalMarks": 20,
+    "category1": "5",
+    "date": "14/10/2022",
+    "totalResults": 20,
     "type": "any_8s_13q_omr",
     "questions": [
       {
@@ -17268,14 +17268,14 @@
       }
     ],
     "examId": 40,
-    "schoolId": "09670703101"
+    "orgId": "09670703101"
   },
   {
-    "subject": "Hindi",
+    "category3": "Hindi",
     "examLO": "Hindi",
-    "classId": "9",
-    "examDate": "1/07/2022",
-    "totalMarks": 13,
+    "category1": "9",
+    "date": "1/07/2022",
+    "totalResults": 13,
     "type": "hindi_8s_13q_9D_omr",
     "questions": [
       {
@@ -18424,6 +18424,6 @@
       }
     ],
     "examId": 41,
-    "schoolId": "u001"
+    "orgId": "u001"
   }
 ]

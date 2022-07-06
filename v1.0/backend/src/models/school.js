@@ -8,7 +8,7 @@ const schoolSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    schoolId: {
+    orgId: {
         type: String,
         unique: true,
         required: true,
@@ -85,10 +85,10 @@ schoolSchema.methods.toJSON = function () {
 }
 
 //model method created
-schoolSchema.statics.findByCredentials = async (schoolId, password) => {
+schoolSchema.statics.findByCredentials = async (orgId, password) => {
     
-    const school = await School.findOne({ schoolId },{__v: 0})
-    
+    const school = await School.findOne({ orgId },{__v: 0})
+
     if(!school) {
         throw new Error('School Id or Password is not correct.')
     }

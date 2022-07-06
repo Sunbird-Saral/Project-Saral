@@ -10,33 +10,33 @@ const router = new express.Router()
 
 router.post('/student', auth, async (req, res) => {
     try {
-        if(!req.body.studentId)  return res.status(400).send({ error: "Student Id is required." })
+        if(!req.body.identifier)  return res.status(400).send({ error: "Student Id is required." })
         // let commonDigit = "0000000"
-        const classId = req.body.studentClass && req.body.studentClass.length > 0 ? req.body.studentClass[0].classId : "2"
-        const section = req.body.section ? req.body.section : "A"
-        // const studentsCount = await Student.getStudentsCountByClassAndSection(req.school.schoolId, classId, section)
+        const category1 = req.body.studentClass && req.body.studentClass.length > 0 ? req.body.studentClass[0].category1 : "2"
+        const category2 = req.body.category2 ? req.body.category2 : "A"
+        // const studentsCount = await Student.getStudentsCountByClassAndSection(req.school.orgId, category1, category2)
 
         // const newStudentCount = String(studentsCount + 1)
         // const newStudentLastSevenDigit = commonDigit.slice(0, - newStudentCount.length) + newStudentCount
-        // const sectionCode = getSectionCode(section)
+        // const category2Code = getSectionCode(category2)
     
         const studentClass = req.body.studentClass && req.body.studentClass.length > 0 && [{
-            classId: req.body.studentClass[0].classId,
-            className: `Class-${req.body.studentClass[0].classId}`
+            category1: req.body.studentClass[0].category1,
+            className: `Class-${req.body.studentClass[0].category1}`
         }]
         const students = new Student({
             ...req.body,
             studentClass,
-            schoolId: req.school.schoolId
+            orgId: req.school.orgId
         })
 
         await students.save()
         let response = {
             studentClass: students.studentClass,
-            section: students.section,
+            category2: students.category2,
             name: students.name,
-            studentId: students.studentId,
-            schoolId: students.schoolId,
+            identifier: students.identifier,
+            orgId: students.orgId,
             createdAt: students.createdAt,
             updatedAt: students.updatedAt
         }
@@ -50,18 +50,18 @@ router.post('/student', auth, async (req, res) => {
 
 router.post('/fetchStudentsByQuery', auth, async (req, res) => {
     const match = {}
-    match.schoolId = req.school.schoolId
-    if (req.body.classId) {
+    match.orgId = req.school.orgId
+    if (req.body.category1) {
         let studentClassObj = {
-            classId: req.body.classId,
-            className: `Class-${req.body.classId}`
+            category1: req.body.category1,
+            className: `Class-${req.body.category1}`
         }
         let studentClass = [studentClassObj]
         match.studentClass = studentClass
     }
 
-    if (req.body.section && req.body.section != "0") {
-        match.section = req.body.section
+    if (req.body.category2 && req.body.category2 != "0") {
+        match.category2 = req.body.category2
     }
 
     try {
@@ -76,27 +76,27 @@ router.post('/fetchStudentsByQuery', auth, async (req, res) => {
 router.post('/fetchStudentsandExamsByQuery', auth, async (req, res) => {
     const match = {}
     const examMatch = {}
-    match.schoolId = req.school.schoolId
+    match.orgId = req.school.orgId
 
-    if (req.body.classId) {
+    if (req.body.category1) {
         let studentClassObj = {
-            classId: req.body.classId,
-            className: `Class-${req.body.classId}`
+            category1: req.body.category1,
+            className: `Class-${req.body.category1}`
         }
         let studentClass = [studentClassObj]
         match.studentClass = studentClass
-        examMatch.classId = studentClassObj.classId
-        examMatch.schoolId = req.school.schoolId
+        examMatch.category1 = studentClassObj.category1
+        examMatch.orgId = req.school.orgId
     } else {
         if (req.school.minimal == true) {
-            examMatch.schoolId = req.school.schoolId
+            examMatch.orgId = req.school.orgId
         } else {
-        return res.status(404).send({ message: 'Please send classId' })
+        return res.status(404).send({ message: 'Please send category1' })
     }
     }
 
-    if (req.body.section && req.body.section != "0") {
-        match.section = req.body.section
+    if (req.body.category2 && req.body.category2 != "0") {
+        match.category2 = req.body.category2
     }
 
     if (req.body.hasOwnProperty('subject')) {
@@ -106,7 +106,7 @@ router.post('/fetchStudentsandExamsByQuery', auth, async (req, res) => {
     try {
         const students = await Student.find(match, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 }).lean()
         for(let student of students){
-            let marks = await Marks.findOne({"studentId": student.studentId, "examDate": examMatch.examDate}) 
+            let marks = await Marks.findOne({"identifier": student.identifier, "examDate": examMatch.examDate}) 
             if(marks && typeof marks == "object" && marks.examDate == examMatch.examDate){
                 student["studentAvailability"] = marks.studentAvailability
             }else{
@@ -122,12 +122,12 @@ router.post('/fetchStudentsandExamsByQuery', auth, async (req, res) => {
     }
 })
 
-router.delete('/student/:studentId', async (req, res) => {
+router.delete('/student/:identifier', async (req, res) => {
     try {
-        const student = await Student.findOne({ studentId: req.params.studentId })
+        const student = await Student.findOne({ identifier: req.params.identifier })
         if (!student) return res.status(404).send({ message: 'Student Id does not exist.' })
         let lookup = {
-            studentId: student.studentId
+            identifier: student.identifier
         }
         await Student.deleteOne(lookup).lean()
         await Marks.findOneAndRemove(lookup).lean()
@@ -140,7 +140,7 @@ router.delete('/student/:studentId', async (req, res) => {
 
 })
 
-router.patch('/student/:studentId', async (req, res) => {
+router.patch('/student/:identifier', async (req, res) => {
     if (Object.keys(req.body).length === 0) res.status(400).send({ message: 'Validation error.' })
     const inputKey = Object.keys(req.body)
     const allowedUpdates = ['name', 'studentClass']
@@ -149,7 +149,7 @@ router.patch('/student/:studentId', async (req, res) => {
         return res.status(400).send({ message: 'Invaid Updates' })
     }
     let lookup = {
-        studentId: req.params.studentId
+        identifier: req.params.identifier
     }
     try {
         let updateData = {}
@@ -159,8 +159,8 @@ router.patch('/student/:studentId', async (req, res) => {
 
         if (inputKey.includes("studentClass")) {
             const studentClass = req.body.studentClass && req.body.studentClass.length > 0 && [{
-                classId: req.body.studentClass[0].classId,
-                className: `Class-${req.body.studentClass[0].classId}`
+                category1: req.body.studentClass[0].category1,
+                className: `Class-${req.body.studentClass[0].category1}`
             }]
             updateData["studentClass"] = studentClass
         }

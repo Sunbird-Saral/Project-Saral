@@ -9,16 +9,16 @@ const classSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    classId: {
+    category1: {
         type: String,
         required: true,
         trim: true,
     },
-    sections: {
+    category2: {
         type: Array,
         default: defaultSection
     },
-    schoolId: {
+    orgId: {
         type: String,
         // unique: true,
         required: true,
@@ -29,9 +29,9 @@ const classSchema = new mongoose.Schema({
 })
 
 //model method created
-classSchema.statics.findClassesBySchools = async (schoolId) => {    
-    const classes = await ClassModel.find({ schoolId })
+classSchema.statics.findClassesBySchools = async (orgId) => {   
     
+    const classes = await ClassModel.find({ orgId })
     if(!classes) {
         throw new Error('No Classes')
     }

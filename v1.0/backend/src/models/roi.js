@@ -30,12 +30,12 @@ const ROISchema = new mongoose.Schema({
     //     type: String,
     //     enum: ["NUMERIC_CLASSIFICATION","CELL_OMR"]
     // },
-    classId:{
+    category1:{
         type: String,
         required: true,
         trim: true
     },
-    subject:{
+    category3:{
         type: String,
         required: true,
         trim: true

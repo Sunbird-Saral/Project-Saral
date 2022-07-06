@@ -11,7 +11,7 @@ const Counter = require('../models/counter')
 router.post('/roi', auth, async (req, res) => {
     try {
         const inputKeys = Object.keys(req.body)
-        const allowedUpdates = ['subject', 'classId', 'type', 'roi']
+        const allowedUpdates = ['category3', 'category1', 'type', 'roi']
         const isValidOperation = inputKeys.every((input) => allowedUpdates.includes(input))
 
         if (!isValidOperation) {
@@ -19,24 +19,24 @@ router.post('/roi', auth, async (req, res) => {
         }
 
         let lookup = {
-            schoolId: req.school.schoolId,
-            subject: req.body.subject,
-            classId: req.body.classId
+            orgId: req.school.orgId,
+            category3: req.body.category3,
+            category1: req.body.category1
         }
         const examExist = await Exam.findOne(lookup)
         if (examExist) {
-            const school = await School.findOne({ schoolId: examExist.schoolId })
+            const school = await School.findOne({ orgId: examExist.orgId })
             req.body.type = req.body.type.toUpperCase()
-            const roiExist = await ROI.findOne({ classId: req.body.classId, subject: req.body.subject, state: school.state, type: req.body.type })
+            const roiExist = await ROI.findOne({ category1: req.body.category1, category3: req.body.category3, state: school.state, type: req.body.type })
             if (!roiExist) {
-                // const school = await School.findOne({schoolId:examExist.schoolId})
+                // const school = await School.findOne({orgId:examExist.orgId})
                 req.body.state = school.state
                 req.body.roiId = await Counter.getValueForNextSequence("roiId")
                 let roi = await ROI.create(req.body)
                 let roiResponse = {
                     roiId: roi.roiId,
-                    classId: roi.classId,
-                    subject: roi.subject,
+                    category1: roi.category1,
+                    category3: roi.category3,
                     state: roi.state.toLowerCase(),
                     createdAt: roi.createdAt
                 }
@@ -59,10 +59,10 @@ router.patch('/roi/:examId', auth, async (req, res) => {
 
         const examExist = await Exam.findOne({ examId: req.params.examId }).lean()
         if (examExist) {
-            const school = await School.findOne({ schoolId: req.school.schoolId })
+            const school = await School.findOne({ orgId: req.school.orgId })
             let lookup = {
-                classId: examExist.classId,
-                subject: examExist.subject,
+                category1: examExist.category1,
+                category3: examExist.category3,
                 state: school.state
             }
 
@@ -87,10 +87,10 @@ router.delete('/roi/:examId', auth, async (req, res) => {
     try {
         const examExist = await Exam.findOne({ examId: req.params.examId }).lean()
         if (examExist) {
-            const school = await School.findOne({ schoolId: req.school.schoolId })
+            const school = await School.findOne({ orgId: req.school.orgId })
             let lookup = {
-                classId: examExist.classId,
-                subject: examExist.subject,
+                category1: examExist.category1,
+                category3: examExist.category3,
                 state: school.state
             }
             const roiExist = await ROI.findOne(lookup).lean()
@@ -112,12 +112,12 @@ router.get('/roi/:examId',auth, async (req, res) => {
        
         const examExist = await Exam.findOne({examId: req.params.examId}).lean()
         if(examExist){
-            const school = await School.findOne({schoolId: req.school.schoolId})
-            const roiExist = await ROI.findOne({ classId: examExist.classId, subject: examExist.subject,state: school.state}).lean()
+            const school = await School.findOne({orgId: req.school.orgId})
+            const roiExist = await ROI.findOne({ category1: examExist.category1, category3: examExist.category3,state: school.state}).lean()
             if(roiExist){
                 let lookup = {
-                    classId: examExist.classId,
-                    subject: examExist.subject,
+                    category1: examExist.category1,
+                    category3: examExist.category3,
                     state: school.state,
                     type: examExist.type
                 }

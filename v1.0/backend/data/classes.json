@@ -1,457 +1,457 @@
 [
   {
-    "sections": [
+    "category2": [
       {
-        "section": "D"
+        "category2": "D"
       },
       {
-        "section": "B"
+        "category2": "B"
       },
       {
-        "section": "C"
+        "category2": "C"
       }
     ],
-    "classId": "2",
+    "category1": "2",
     "className": "Class-2",
-    "schoolId": "u001"
+    "orgId": "u001"
   },
   {
-    "sections": [
+    "category2": [
       {
-        "section": "D"
+        "category2": "D"
       },
       {
-        "section": "B"
+        "category2": "B"
       },
       {
-        "section": "C"
+        "category2": "C"
       }
     ],
-    "classId": "3",
+    "category1": "3",
     "className": "Class-3",
-    "schoolId": "u001"
+    "orgId": "u001"
   },
   {
-    "sections": [
+    "category2": [
       {
-        "section": "D"
+        "category2": "D"
       },
       {
-        "section": "B"
+        "category2": "B"
       },
       {
-        "section": "C"
+        "category2": "C"
       }
     ],
-    "classId": "4",
+    "category1": "4",
     "className": "Class-4",
-    "schoolId": "u001"
+    "orgId": "u001"
   },
   {
-    "sections": [
+    "category2": [
       {
-        "section": "D"
+        "category2": "D"
       },
       {
-        "section": "B"
+        "category2": "B"
       },
       {
-        "section": "C"
+        "category2": "C"
       }
     ],
-    "classId": "5",
+    "category1": "5",
     "className": "Class-5",
-    "schoolId": "u001"
+    "orgId": "u001"
   },
   {
-    "sections": [
+    "category2": [
       {
-        "section": "D"
+        "category2": "D"
       },
       {
-        "section": "B"
+        "category2": "B"
       },
       {
-        "section": "C"
+        "category2": "C"
       }
     ],
-    "classId": "6",
+    "category1": "6",
     "className": "Class-6",
-    "schoolId": "u001"
+    "orgId": "u001"
   },
   {
-    "sections": [
+    "category2": [
       {
-        "section": "D"
+        "category2": "D"
       },
       {
-        "section": "B"
+        "category2": "B"
       },
       {
-        "section": "C"
+        "category2": "C"
       }
     ],
-    "classId": "7",
+    "category1": "7",
     "className": "Class-7",
-    "schoolId": "u001"
+    "orgId": "u001"
   },
   {
-    "sections": [
+    "category2": [
       {
-        "section": "D"
+        "category2": "D"
       },
       {
-        "section": "B"
+        "category2": "B"
       },
       {
-        "section": "C"
+        "category2": "C"
       }
     ],
-    "classId": "8",
+    "category1": "8",
     "className": "Class-8",
-    "schoolId": "u001"
+    "orgId": "u001"
   },
   {
-    "sections": [
+    "category2": [
       {
-        "section": "D"
+        "category2": "D"
       },
       {
-        "section": "B"
+        "category2": "B"
       },
       {
-        "section": "C"
+        "category2": "C"
       }
     ],
-    "classId": "2",
+    "category1": "2",
     "className": "Class-2",
-    "schoolId": "od001"
+    "orgId": "od001"
   },
   {
-    "sections": [
+    "category2": [
       {
-        "section": "D"
+        "category2": "D"
       },
       {
-        "section": "B"
+        "category2": "B"
       },
       {
-        "section": "C"
+        "category2": "C"
       }
     ],
-    "classId": "3",
+    "category1": "3",
     "className": "Class-3",
-    "schoolId": "od001"
+    "orgId": "od001"
   },
   {
-    "sections": [
+    "category2": [
       {
-        "section": "D"
+        "category2": "D"
       },
       {
-        "section": "B"
+        "category2": "B"
       },
       {
-        "section": "C"
+        "category2": "C"
       }
     ],
-    "classId": "3",
+    "category1": "3",
     "className": "Class-3",
-    "schoolId": "demouser"
+    "orgId": "demouser"
   },
   {
-    "sections": [
+    "category2": [
       {
-        "section": "D"
+        "category2": "D"
       },
       {
-        "section": "B"
+        "category2": "B"
       },
       {
-        "section": "C"
+        "category2": "C"
       }
     ],
-    "classId": "4",
+    "category1": "4",
     "className": "Class-4",
-    "schoolId": "demouser"
+    "orgId": "demouser"
   },
   {
-    "sections": [
+    "category2": [
       {
-        "section": "D"
+        "category2": "D"
       },
       {
-        "section": "B"
+        "category2": "B"
       },
       {
-        "section": "C"
+        "category2": "C"
       },
       {
-        "section": "A"
+        "category2": "A"
       }
     ],
-    "classId": "5",
+    "category1": "5",
     "className": "Class-5",
-    "schoolId": "demouser"
+    "orgId": "demouser"
   },
   {
-    "sections": [
+    "category2": [
       {
-        "section": "D"
+        "category2": "D"
       },
       {
-        "section": "B"
+        "category2": "B"
       },
       {
-        "section": "C"
+        "category2": "C"
       }
     ],
-    "classId": "6",
+    "category1": "6",
     "className": "Class-6",
-    "schoolId": "demouser"
+    "orgId": "demouser"
   },
   {
-    "sections": [
+    "category2": [
       {
-        "section": "D"
+        "category2": "D"
       },
       {
-        "section": "B"
+        "category2": "B"
       },
       {
-        "section": "C"
+        "category2": "C"
       }
     ],
-    "classId": "7",
+    "category1": "7",
     "className": "Class-7",
-    "schoolId": "demouser"
+    "orgId": "demouser"
   },
   {
-    "sections": [
+    "category2": [
       {
-        "section": "D"
+        "category2": "D"
       },
       {
-        "section": "B"
+        "category2": "B"
       },
       {
-        "section": "C"
+        "category2": "C"
       }
     ],
-    "classId": "2",
+    "category1": "2",
     "className": "Class-2",
-    "schoolId": "u002"
+    "orgId": "u002"
   },
   {
-    "sections": [
+    "category2": [
       {
-        "section": "D"
+        "category2": "D"
       },
       {
-        "section": "B"
+        "category2": "B"
       },
       {
-        "section": "A"
+        "category2": "A"
       }
     ],
-    "classId": "3",
+    "category1": "3",
     "className": "Class-3",
-    "schoolId": "u002"
+    "orgId": "u002"
   },
   {
-    "sections": [
+    "category2": [
       {
-        "section": "D"
+        "category2": "D"
       },
       {
-        "section": "B"
+        "category2": "B"
       },
       {
-        "section": "C"
+        "category2": "C"
       }
     ],
-    "classId": "4",
+    "category1": "4",
     "className": "Class-4",
-    "schoolId": "u002"
+    "orgId": "u002"
   },
   {
-    "sections": [
+    "category2": [
       {
-        "section": "D"
+        "category2": "D"
       },
       {
-        "section": "B"
+        "category2": "B"
       },
       {
-        "section": "C"
+        "category2": "C"
       }
     ],
-    "classId": "5",
+    "category1": "5",
     "className": "Class-5",
-    "schoolId": "u002"
+    "orgId": "u002"
   },
   {
-    "sections": [
+    "category2": [
       {
-        "section": "Carpentry"
+        "category2": "Carpentry"
       },
       {
-        "section": "Plumbing"
+        "category2": "Plumbing"
       },
       {
-        "section": "Cleaning"
+        "category2": "Cleaning"
       }
     ],
-    "classId": "5",
+    "category1": "5",
     "className": "HouseHold",
-    "schoolId": "skill001"
+    "orgId": "skill001"
   },
   {
-    "sections": [
+    "category2": [
       {
-        "section": "A"
+        "category2": "A"
       },
       {
-        "section": "B"
+        "category2": "B"
       }
     ],
-    "classId": "2",
+    "category1": "2",
     "className": "Class-2",
-    "schoolId": "a001"
+    "orgId": "a001"
   },
   {
-    "sections": [
+    "category2": [
       {
-        "section": "A"
+        "category2": "A"
       },
       {
-        "section": "B"
+        "category2": "B"
       }
     ],
-    "classId": "3",
+    "category1": "3",
     "className": "Class-3",
-    "schoolId": "a001"
+    "orgId": "a001"
   },
   {
-    "sections": [
+    "category2": [
       {
-        "section": "A"
+        "category2": "A"
       },
       {
-        "section": "B"
+        "category2": "B"
       }
     ],
-    "classId": "4",
+    "category1": "4",
     "className": "Class-4",
-    "schoolId": "a001"
+    "orgId": "a001"
   },
   {
-    "sections": [
+    "category2": [
       {
-        "section": "A"
+        "category2": "A"
       },
       {
-        "section": "B"
+        "category2": "B"
       }
     ],
-    "classId": "8",
+    "category1": "8",
     "className": "Class-8",
-    "schoolId": "demouser"
+    "orgId": "demouser"
   },
   {
-    "sections": [
+    "category2": [
       {
-        "section": "A"
+        "category2": "A"
       },
       {
-        "section": "B"
+        "category2": "B"
       },
       {
-        "section": "C"
+        "category2": "C"
       }
     ],
-    "classId": "9",
+    "category1": "9",
     "className": "Class-9",
-    "schoolId": "u001"
+    "orgId": "u001"
   },
   {
-    "sections": [
+    "category2": [
       {
-        "section": "A"
+        "category2": "A"
       }
     ],
-    "classId": "5",
+    "category1": "5",
     "className": "Class-5",
-    "schoolId": "09670702901"
+    "orgId": "09670702901"
   },
   {
-    "sections": [
+    "category2": [
       {
-        "section": "B"
+        "category2": "B"
       }
     ],
-    "classId": "2",
+    "category1": "2",
     "className": "Class-2",
-    "schoolId": "09670702901"
+    "orgId": "09670702901"
   },
   {
-    "sections": [
+    "category2": [
       {
-        "section": "A"
+        "category2": "A"
       }
     ],
-    "classId": "3",
+    "category1": "3",
     "className": "Class-3",
-    "schoolId": "09670702901"
+    "orgId": "09670702901"
   },
   {
-    "sections": [
+    "category2": [
       {
-        "section": "B"
+        "category2": "B"
       }
     ],
-    "classId": "4",
+    "category1": "4",
     "className": "Class-4",
-    "schoolId": "09670702901"
+    "orgId": "09670702901"
   },
   {
-    "sections": [
+    "category2": [
       {
-        "section": "A"
+        "category2": "A"
       }
     ],
-    "classId": "6",
+    "category1": "6",
     "className": "Class-6",
-    "schoolId": "09670702901"
+    "orgId": "09670702901"
   },
   {
-    "sections": [
+    "category2": [
       {
-        "section": "B"
+        "category2": "B"
       }
     ],
-    "classId": "7",
+    "category1": "7",
     "className": "Class-7",
-    "schoolId": "09670702901"
+    "orgId": "09670702901"
   },
   {
-    "sections": [
+    "category2": [
       {
-        "section": "B"
+        "category2": "B"
       }
     ],
-    "classId": "8",
+    "category1": "8",
     "className": "Class-8",
-    "schoolId": "09670702901"
+    "orgId": "09670702901"
   },
   {
-    "sections": [
+    "category2": [
       {
-        "section": "A"
+        "category2": "A"
       }
     ],
-    "classId": "5",
+    "category1": "5",
     "className": "Class-5",
-    "schoolId": "09670703101"
+    "orgId": "09670703101"
   }
 ]

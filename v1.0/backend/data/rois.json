@@ -1,7 +1,7 @@
 [
     {
-        "subject": "Hindi",
-        "classId": "2",
+        "category3": "Hindi",
+        "category1": "2",
         "type": "hindi_4s_20q_omr",
         "roi": {
             "layout": {
@@ -2337,8 +2337,8 @@
         "roiId": "1"
     },
     {
-        "subject": "Hindi",
-        "classId": "3",
+        "category3": "Hindi",
+        "category1": "3",
         "type": "hindi_3s_30q_omr",
         "roi": {
             "layout": {
@@ -4811,9 +4811,9 @@
         "roiId": "2"
     },
     {
-        "subject": "Multi-Subject",
-        "classId": "4",
-        "type": "multisubject_1s_10q",
+        "category3": "Multi-Subject",
+        "category1": "4",
+        "type": "multicategory3_1s_10q",
         "roi": {
             "layout": {
                 "version": "1.0",
@@ -6079,8 +6079,8 @@
         "roiId": "3"
     },
     {
-        "subject": "Hindi",
-        "classId": "5",
+        "category3": "Hindi",
+        "category1": "5",
         "type": "hindi_4s_20q_omr",
         "roi": {
             "layout": {
@@ -8409,8 +8409,8 @@
         "roiId": "4"
     },
     {
-        "subject": "Hindi",
-        "classId": "6",
+        "category3": "Hindi",
+        "category1": "6",
         "type": "hindi_4s_20q_omr",
         "roi": {
             "layout": {
@@ -10739,8 +10739,8 @@
         "roiId": "5"
     },
     {
-        "subject": "Hindi",
-        "classId": "7",
+        "category3": "Hindi",
+        "category1": "7",
         "type": "hindi_4s_20q_omr",
         "roi": {
             "layout": {
@@ -13069,9 +13069,9 @@
         "roiId": "6"
     },
     {
-        "subject": "Multi-Subject",
-        "classId": "8",
-        "type": "multisubject_1s_10q",
+        "category3": "Multi-Subject",
+        "category1": "8",
+        "type": "multicategory3_1s_10q",
         "roi": {
             "layout": {
                 "version": "1.0",
@@ -14337,8 +14337,8 @@
         "roiId": "7"
     },
     {
-        "subject": "Hindi",
-        "classId": "2",
+        "category3": "Hindi",
+        "category1": "2",
         "type": "any_1s_20q",
         "roi": {
             "layout": {
@@ -15377,8 +15377,8 @@
         "roiId": "8"
     },
     {
-        "subject": "Hindi",
-        "classId": "3",
+        "category3": "Hindi",
+        "category1": "3",
         "type": "any_1s_20q",
         "roi": {
             "layout": {
@@ -16509,8 +16509,8 @@
         "roiId": "9"
     },
     {
-        "subject": "Maths",
-        "classId": "2",
+        "category3": "Maths",
+        "category1": "2",
         "type": "any_1s_20q",
         "roi": {
             "layout": {
@@ -17641,8 +17641,8 @@
         "roiId": "10"
     },
     {
-        "subject": "Hindi",
-        "classId": "3",
+        "category3": "Hindi",
+        "category1": "3",
         "type": "any_1s_34q",
         "roi": {
             "layout": {
@@ -19077,8 +19077,8 @@
         "roiId": "11"
     },
     {
-        "subject": "Maths",
-        "classId": "3",
+        "category3": "Maths",
+        "category1": "3",
         "type": "any_1s_34q",
         "roi": {
             "layout": {
@@ -20661,8 +20661,8 @@
         "roiId": "12"
     },
     {
-        "subject": "English",
-        "classId": "3",
+        "category3": "English",
+        "category1": "3",
         "type": "any_1s_34q",
         "roi": {
             "layout": {
@@ -22245,8 +22245,8 @@
         "roiId": "13"
     },
     {
-        "subject": "Hindi",
-        "classId": "2",
+        "category3": "Hindi",
+        "category1": "2",
         "type": "hindi_8s_13q_omr",
         "roi": {
             "layout": {
@@ -25535,8 +25535,8 @@
         "roiId": "14"
     },
     {
-        "subject": "Hindi",
-        "classId": "4",
+        "category3": "Hindi",
+        "category1": "4",
         "type": "any_1s_12q ",
         "roi": {
             "layout": {
@@ -26083,8 +26083,8 @@
         "roiId": "15"
     },
     {
-        "subject": "Hindi",
-        "classId": "5",
+        "category3": "Hindi",
+        "category1": "5",
         "type": "any_1s_5q_multichoice",
         "roi": {
             "layout": {
@@ -26626,551 +26626,8 @@
         "roiId": "16"
     },
     {
-        "subject": "Hindi",
-        "classId": "5",
-        "type": "any_1s_5q_multichoice",
-        "roi": {
-            "layout": {
-                "version": "1.0",
-                "name": "ANY1S5QMULTICHOICE Exam Sheet Form",
-                "threshold": {
-                    "minWidth": 410,
-                    "minHeight": 280,
-                    "detectionRadius": 12
-                },
-                "resultValidation": {
-                    "validate": {
-                        "regExp": "[0-5]",
-                        "errorMsg": "Omr result should be between 0 to 5"
-                    }
-                },
-                "identifierPrefix": "VILLAGEID",
-                "cells": [
-                    {
-                        "cellId": "1",
-                        "rois": [
-                            {
-                                "annotationTags": "VILLAGEID1",
-                                "extractionMethod": "NUMERIC_CLASSIFICATION",
-                                "roiId": "1",
-                                "index": 0,
-                                "rect": {
-                                    "top": 38,
-                                    "left": 274,
-                                    "bottom": 77,
-                                    "right": 302
-                                }
-                            },
-                            {
-                                "annotationTags": "VILLAGEID2",
-                                "extractionMethod": "NUMERIC_CLASSIFICATION",
-                                "roiId": "2",
-                                "index": 1,
-                                "rect": {
-                                    "top": 36,
-                                    "left": 311,
-                                    "bottom": 76,
-                                    "right": 339
-                                }
-                            },
-                            {
-                                "annotationTags": "VILLAGEID3",
-                                "extractionMethod": "NUMERIC_CLASSIFICATION",
-                                "roiId": "3",
-                                "index": 2,
-                                "rect": {
-                                    "top": 36,
-                                    "left": 347,
-                                    "bottom": 76,
-                                    "right": 379
-                                }
-                            },
-                            {
-                                "annotationTags": "VILLAGEID4",
-                                "extractionMethod": "NUMERIC_CLASSIFICATION",
-                                "roiId": "4",
-                                "index": 3,
-                                "rect": {
-                                    "top": 36,
-                                    "left": 385,
-                                    "bottom": 79,
-                                    "right": 416
-                                }
-                            },
-                            {
-                                "annotationTags": "VILLAGEID5",
-                                "extractionMethod": "NUMERIC_CLASSIFICATION",
-                                "roiId": "5",
-                                "index": 4,
-                                "rect": {
-                                    "top": 36,
-                                    "left": 423,
-                                    "bottom": 80,
-                                    "right": 455
-                                }
-                            },
-                            {
-                                "annotationTags": "VILLAGEID6",
-                                "extractionMethod": "NUMERIC_CLASSIFICATION",
-                                "roiId": "6",
-                                "index": 5,
-                                "rect": {
-                                    "top": 36,
-                                    "left": 460,
-                                    "bottom": 79,
-                                    "right": 492
-                                }
-                            },
-                            {
-                                "annotationTags": "VILLAGEID7",
-                                "extractionMethod": "NUMERIC_CLASSIFICATION",
-                                "roiId": "7",
-                                "index": 6,
-                                "rect": {
-                                    "top": 35,
-                                    "left": 498,
-                                    "bottom": 79,
-                                    "right": 529
-                                }
-                            }
-                        ],
-                        "render": {
-                            "index": 1
-                        },
-                        "format": {
-                            "name": "VILLAGEID",
-                            "value": "VILLAGEID"
-                        }
-                    },
-                    {
-                        "cellId": "2",
-                        "rois": [
-                            {
-                                "annotationTags": "QUESTION1_0",
-                                "extractionMethod": "CELL_OMR",
-                                "roiId": "8",
-                                "index": 0,
-                                "rect": {
-                                    "top": 165,
-                                    "left": 275,
-                                    "bottom": 194,
-                                    "right": 300
-                                }
-                            },
-                            {
-                                "annotationTags": "QUESTION1_1",
-                                "extractionMethod": "CELL_OMR",
-                                "roiId": "9",
-                                "index": 1,
-                                "rect": {
-                                    "top": 165,
-                                    "left": 311,
-                                    "bottom": 194,
-                                    "right": 335
-                                }
-                            },
-                            {
-                                "annotationTags": "QUESTION1_2",
-                                "extractionMethod": "CELL_OMR",
-                                "roiId": "10",
-                                "index": 2,
-                                "rect": {
-                                    "top": 165,
-                                    "left": 349,
-                                    "bottom": 195,
-                                    "right": 373
-                                }
-                            },
-                            {
-                                "annotationTags": "QUESTION1_3",
-                                "extractionMethod": "CELL_OMR",
-                                "roiId": "11",
-                                "index": 3,
-                                "rect": {
-                                    "top": 165,
-                                    "left": 385,
-                                    "bottom": 195,
-                                    "right": 409
-                                }
-                            },
-                            {
-                                "annotationTags": "QUESTION1_4",
-                                "extractionMethod": "CELL_OMR",
-                                "roiId": "12",
-                                "index": 4,
-                                "rect": {
-                                    "top": 165,
-                                    "left": 423,
-                                    "bottom": 193,
-                                    "right": 447
-                                }
-                            },
-                            {
-                                "annotationTags": "QUESTION1_5",
-                                "extractionMethod": "CELL_OMR",
-                                "roiId": "13",
-                                "index": 5,
-                                "rect": {
-                                    "top": 165,
-                                    "left": 460,
-                                    "bottom": 193,
-                                    "right": 483
-                                }
-                            }
-                        ],
-                        "render": {
-                            "index": 2
-                        },
-                        "format": {
-                            "name": "QUESTION1",
-                            "value": "QUESTION 1"
-                        }
-                    },
-                    {
-                        "cellId": "3",
-                        "rois": [
-                            {
-                                "annotationTags": "QUESTION2_0",
-                                "extractionMethod": "CELL_OMR",
-                                "roiId": "14",
-                                "index": 0,
-                                "rect": {
-                                    "top": 225,
-                                    "left": 275,
-                                    "bottom": 254,
-                                    "right": 298
-                                }
-                            },
-                            {
-                                "annotationTags": "QUESTION2_1",
-                                "extractionMethod": "CELL_OMR",
-                                "roiId": "15",
-                                "index": 1,
-                                "rect": {
-                                    "top": 224,
-                                    "left": 311,
-                                    "bottom": 253,
-                                    "right": 335
-                                }
-                            },
-                            {
-                                "annotationTags": "QUESTION2_2",
-                                "extractionMethod": "CELL_OMR",
-                                "roiId": "16",
-                                "index": 2,
-                                "rect": {
-                                    "top": 224,
-                                    "left": 347,
-                                    "bottom": 252,
-                                    "right": 372
-                                }
-                            },
-                            {
-                                "annotationTags": "QUESTION2_3",
-                                "extractionMethod": "CELL_OMR",
-                                "roiId": "17",
-                                "index": 3,
-                                "rect": {
-                                    "top": 225,
-                                    "left": 386,
-                                    "bottom": 253,
-                                    "right": 410
-                                }
-                            },
-                            {
-                                "annotationTags": "QUESTION2_4",
-                                "extractionMethod": "CELL_OMR",
-                                "roiId": "18",
-                                "index": 4,
-                                "rect": {
-                                    "top": 225,
-                                    "left": 422,
-                                    "bottom": 254,
-                                    "right": 446
-                                }
-                            },
-                            {
-                                "annotationTags": "QUESTION2_5",
-                                "extractionMethod": "CELL_OMR",
-                                "roiId": "19",
-                                "index": 5,
-                                "rect": {
-                                    "top": 224,
-                                    "left": 459,
-                                    "bottom": 253,
-                                    "right": 483
-                                }
-                            }
-                        ],
-                        "render": {
-                            "index": 3
-                        },
-                        "format": {
-                            "name": "QUESTION2",
-                            "value": "QUESTION 2"
-                        }
-                    },
-                    {
-                        "cellId": "4",
-                        "rois": [
-                            {
-                                "annotationTags": "QUESTION3_0",
-                                "extractionMethod": "CELL_OMR",
-                                "roiId": "20",
-                                "index": 0,
-                                "rect": {
-                                    "top": 284,
-                                    "left": 275,
-                                    "bottom": 312,
-                                    "right": 299
-                                }
-                            },
-                            {
-                                "annotationTags": "QUESTION3_1",
-                                "extractionMethod": "CELL_OMR",
-                                "roiId": "21",
-                                "index": 1,
-                                "rect": {
-                                    "top": 284,
-                                    "left": 310,
-                                    "bottom": 313,
-                                    "right": 335
-                                }
-                            },
-                            {
-                                "annotationTags": "QUESTION3_2",
-                                "extractionMethod": "CELL_OMR",
-                                "roiId": "22",
-                                "index": 2,
-                                "rect": {
-                                    "top": 284,
-                                    "left": 348,
-                                    "bottom": 311,
-                                    "right": 372
-                                }
-                            },
-                            {
-                                "annotationTags": "QUESTION3_3",
-                                "extractionMethod": "CELL_OMR",
-                                "roiId": "23",
-                                "index": 3,
-                                "rect": {
-                                    "top": 283,
-                                    "left": 385,
-                                    "bottom": 312,
-                                    "right": 409
-                                }
-                            },
-                            {
-                                "annotationTags": "QUESTION3_4",
-                                "extractionMethod": "CELL_OMR",
-                                "roiId": "24",
-                                "index": 4,
-                                "rect": {
-                                    "top": 282,
-                                    "left": 422,
-                                    "bottom": 312,
-                                    "right": 446
-                                }
-                            },
-                            {
-                                "annotationTags": "QUESTION3_5",
-                                "extractionMethod": "CELL_OMR",
-                                "roiId": "25",
-                                "index": 5,
-                                "rect": {
-                                    "top": 283,
-                                    "left": 459,
-                                    "bottom": 311,
-                                    "right": 483
-                                }
-                            }
-                        ],
-                        "render": {
-                            "index": 4
-                        },
-                        "format": {
-                            "name": "QUESTION3",
-                            "value": "QUESTION 3"
-                        }
-                    },
-                    {
-                        "cellId": "5",
-                        "rois": [
-                            {
-                                "annotationTags": "QUESTION4_0",
-                                "extractionMethod": "CELL_OMR",
-                                "roiId": "26",
-                                "index": 0,
-                                "rect": {
-                                    "top": 342,
-                                    "left": 274,
-                                    "bottom": 371,
-                                    "right": 298
-                                }
-                            },
-                            {
-                                "annotationTags": "QUESTION4_1",
-                                "extractionMethod": "CELL_OMR",
-                                "roiId": "27",
-                                "index": 1,
-                                "rect": {
-                                    "top": 343,
-                                    "left": 311,
-                                    "bottom": 371,
-                                    "right": 335
-                                }
-                            },
-                            {
-                                "annotationTags": "QUESTION4_2",
-                                "extractionMethod": "CELL_OMR",
-                                "roiId": "28",
-                                "index": 2,
-                                "rect": {
-                                    "top": 343,
-                                    "left": 348,
-                                    "bottom": 371,
-                                    "right": 372
-                                }
-                            },
-                            {
-                                "annotationTags": "QUESTION4_3",
-                                "extractionMethod": "CELL_OMR",
-                                "roiId": "29",
-                                "index": 3,
-                                "rect": {
-                                    "top": 342,
-                                    "left": 384,
-                                    "bottom": 371,
-                                    "right": 409
-                                }
-                            },
-                            {
-                                "annotationTags": "QUESTION4_4",
-                                "extractionMethod": "CELL_OMR",
-                                "roiId": "30",
-                                "index": 4,
-                                "rect": {
-                                    "top": 342,
-                                    "left": 422,
-                                    "bottom": 370,
-                                    "right": 445
-                                }
-                            },
-                            {
-                                "annotationTags": "QUESTION4_5",
-                                "extractionMethod": "CELL_OMR",
-                                "roiId": "31",
-                                "index": 5,
-                                "rect": {
-                                    "top": 342,
-                                    "left": 459,
-                                    "bottom": 371,
-                                    "right": 483
-                                }
-                            }
-                        ],
-                        "render": {
-                            "index": 5
-                        },
-                        "format": {
-                            "name": "QUESTION4",
-                            "value": "QUESTION 4"
-                        }
-                    },
-                    {
-                        "cellId": "6",
-                        "rois": [
-                            {
-                                "annotationTags": "QUESTION5_0",
-                                "extractionMethod": "CELL_OMR",
-                                "roiId": "32",
-                                "index": 0,
-                                "rect": {
-                                    "top": 401,
-                                    "left": 274,
-                                    "bottom": 430,
-                                    "right": 299
-                                }
-                            },
-                            {
-                                "annotationTags": "QUESTION5_1",
-                                "extractionMethod": "CELL_OMR",
-                                "roiId": "33",
-                                "index": 1,
-                                "rect": {
-                                    "top": 400,
-                                    "left": 310,
-                                    "bottom": 430,
-                                    "right": 335
-                                }
-                            },
-                            {
-                                "annotationTags": "QUESTION5_2",
-                                "extractionMethod": "CELL_OMR",
-                                "roiId": "34",
-                                "index": 2,
-                                "rect": {
-                                    "top": 400,
-                                    "left": 348,
-                                    "bottom": 430,
-                                    "right": 372
-                                }
-                            },
-                            {
-                                "annotationTags": "QUESTION5_3",
-                                "extractionMethod": "CELL_OMR",
-                                "roiId": "35",
-                                "index": 3,
-                                "rect": {
-                                    "top": 401,
-                                    "left": 385,
-                                    "bottom": 429,
-                                    "right": 409
-                                }
-                            },
-                            {
-                                "annotationTags": "QUESTION5_4",
-                                "extractionMethod": "CELL_OMR",
-                                "roiId": "36",
-                                "index": 4,
-                                "rect": {
-                                    "top": 401,
-                                    "left": 422,
-                                    "bottom": 430,
-                                    "right": 447
-                                }
-                            },
-                            {
-                                "annotationTags": "QUESTION5_5",
-                                "extractionMethod": "CELL_OMR",
-                                "roiId": "37",
-                                "index": 5,
-                                "rect": {
-                                    "top": 400,
-                                    "left": 458,
-                                    "bottom": 430,
-                                    "right": 482
-                                }
-                            }
-                        ],
-                        "render": {
-                            "index": 6
-                        },
-                        "format": {
-                            "name": "QUESTION5",
-                            "value": "QUESTION 5"
-                        }
-                    }
-                ]
-            }
-        },
-        "state": "gujrat",
-        "roiId": "171"
-    },
-    {
-        "subject": "Carpentary Assesment",
-        "classId": "5",
+        "category3": "Carpentary Assesment",
+        "category1": "5",
         "type": "any_1s_5q_multichoice",
         "roi": {
             "layout": {
@@ -27734,8 +27191,8 @@
         "roiId": "17"
     },
     {
-        "subject": "Hindi",
-        "classId": "6",
+        "category3": "Hindi",
+        "category1": "6",
         "type": "any_1s_15q_multipage",
         "roi": {
             "layout": {
@@ -29132,8 +28589,8 @@
         "roiId": "18"
     },
     {
-        "subject": "section-attendance",
-        "classId": "2",
+        "category3": "section-attendance",
+        "category1": "2",
         "type": "any_20s_attendance",
         "roi": {
             "layout": {
@@ -31558,8 +31015,8 @@
         "roiId": "19"
     },
     {
-        "subject": "midday-meal",
-        "classId": "2",
+        "category3": "midday-meal",
+        "category1": "2",
         "type": "any_20s_midday_meal",
         "roi": {
             "layout": {
@@ -33984,8 +33441,8 @@
         "roiId": "20"
     },
     {
-        "subject": "Hindi",
-        "classId": "7",
+        "category3": "Hindi",
+        "category1": "7",
         "type": "any_1s_24q_multipage",
         "roi": {
             "layout": {
@@ -35064,8 +34521,8 @@
         "roiId": "21"
     },
     {
-        "subject": "Hindi",
-        "classId": "2",
+        "category3": "Hindi",
+        "category1": "2",
         "type": "any_1s_10q",
         "roi": {
             "layout": {
@@ -35441,8 +34898,8 @@
         "roiId": "22"
     },
     {
-        "subject": "Maths",
-        "classId": "2",
+        "category3": "Maths",
+        "category1": "2",
         "type": "hindi_4s_20q_omr",
         "roi": {
             "layout": {
@@ -37775,9 +37232,9 @@
         "roiId": "24"
     },
     {
-        "subject": "Hindi-Subject",
-        "classId": "4",
-        "type": "multisubject_1s_10q",
+        "category3": "Hindi-Subject",
+        "category1": "4",
+        "type": "multicategory3_1s_10q",
         "roi": {
             "layout": {
                 "version": "1.0",
@@ -39038,8 +38495,8 @@
         "roiId": "25"
     },
     {
-        "subject": "Hindi",
-        "classId": "3",
+        "category3": "Hindi",
+        "category1": "3",
         "type": "any_10s_10q",
         "roi": {
             "layout": {
@@ -42628,8 +42085,8 @@
         "roiId": "26"
     },
     {
-        "subject": "0",
-        "classId": "0",
+        "category3": "0",
+        "category1": "0",
         "type": "school evaluation",
         "roi": {
             "layout": {
@@ -44820,8 +44277,8 @@
         "roiId": "27"
     },
     {
-        "subject": "0",
-        "classId": "0",
+        "category3": "0",
+        "category1": "0",
         "type": "electricity reading",
         "roi": {
             "layout": {
@@ -45368,8 +44825,8 @@
         "roiId": "28"
     },
     {
-        "subject": "0",
-        "classId": "0",
+        "category3": "0",
+        "category1": "0",
         "type": "feedback",
         "roi": {
             "layout": {
@@ -45910,8 +45367,8 @@
         "roiId": "29"
     },
     {
-        "subject": "Hindi",
-        "classId": "4",
+        "category3": "Hindi",
+        "category1": "4",
         "type": "any_10s_10q_7d",
         "roi": {
             "layout": {
@@ -49620,8 +49077,8 @@
         "roiId": "30"
     },
     {
-        "subject": "Hindi",
-        "classId": "9",
+        "category3": "Hindi",
+        "category1": "9",
         "type": "hindi_1s_30q_omr",
         "roi": {
             "layout": {
@@ -51839,8 +51296,8 @@
         "roiId": "31"
     },
     {
-        "subject": "Hindi",
-        "classId": "8",
+        "category3": "Hindi",
+        "category1": "8",
         "type": "omr options",
         "roi": {
             "layout": {
@@ -54023,8 +53480,8 @@
         "roiId": "32"
     },
     {
-        "subject": "hindi",
-        "classId": "5",
+        "category3": "hindi",
+        "category1": "5",
         "type": "any_8s_13q_omr",
         "roi": {
             "layout": {
@@ -57313,8 +56770,8 @@
         "roiId": "33"
     },
     {
-        "subject": "Hindi",
-        "classId": "8",
+        "category3": "Hindi",
+        "category1": "8",
         "type": "any_1s_15q_multipage",
         "roi": {
             "layout": {
@@ -58711,8 +58168,8 @@
         "roiId": "34"
     },
     {
-        "subject": "Hindi",
-        "classId": "2",
+        "category3": "Hindi",
+        "category1": "2",
         "type": "any_1s_10q",
         "roi": {
             "layout": {
@@ -59088,8 +58545,8 @@
         "roiId": "35"
     },
     {
-        "subject": "Hindi",
-        "classId": "3",
+        "category3": "Hindi",
+        "category1": "3",
         "type": "any_1s_20q",
         "roi": {
             "layout": {
@@ -60128,8 +59585,8 @@
         "roiId": "36"
     },
     {
-        "subject": "Hindi",
-        "classId": "6",
+        "category3": "Hindi",
+        "category1": "6",
         "type": "hindi_1s_30q_omr",
         "roi": {
             "layout": {
@@ -62345,8 +61802,8 @@
         "roiId": "37"
     },
     {
-        "subject": "section-attendance",
-        "classId": "7",
+        "category3": "section-attendance",
+        "category1": "7",
         "type": "any_20s_attendance",
         "roi": {
             "layout": {
@@ -64771,8 +64228,8 @@
         "roiId": "38"
     },
     {
-        "subject": "book-distribution",
-        "classId": "4",
+        "category3": "book-distribution",
+        "category1": "4",
         "type": "any_10s_10q_omr",
         "roi": {
             "layout": {
@@ -68481,8 +67938,8 @@
         "roiId": "39"
     },
     {
-        "subject": "hindi",
-        "classId": "5",
+        "category3": "hindi",
+        "category1": "5",
         "type": "any_8s_13q_omr",
         "roi": {
             "layout": {
@@ -71771,8 +71228,8 @@
         "roiId": "40"
     },
     {
-        "subject": "Hindi",
-        "classId": "9",
+        "category3": "Hindi",
+        "category1": "9",
         "type": "hindi_8s_13q_9D_omr",
         "roi": {
                 "layout": {
@@ -75583,8 +75040,8 @@
         "roiId": "41"
     },
     {
-        "subject": "Maths",
-        "classId": "3",
+        "category3": "Maths",
+        "category1": "3",
         "type": "hindi_1s_9d_30q_omr",
         "roi": {
             "layout": {

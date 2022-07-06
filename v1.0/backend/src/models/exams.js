@@ -6,7 +6,7 @@ const examSchema = new mongoose.Schema({
         unique: true,
         trim: true,
     },
-    schoolId: {
+    orgId: {
         type: String,
         required: true,
         trim: true,
@@ -16,20 +16,20 @@ const examSchema = new mongoose.Schema({
         required: true,
         trim: true,
     },
-    examDate: {
+    date: {
         type: String,
         required: false
     },
-    classId: {
+    category1: {
         type: String,
         required: true
     },
-    subject: {
+    category3: {
         type: String,
         required: true,
         trim: true
     },
-    totalMarks: {
+    totalResults: {
         type: Number,
         required: true,
         trim: true
