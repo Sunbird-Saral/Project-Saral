@@ -103,8 +103,7 @@ const marksSchema = new mongoose.Schema({
     },
     examId: {
         type: Number,
-        required: true,
-        unique: true,
+        required: false,
         trim: true,
     }
 })
