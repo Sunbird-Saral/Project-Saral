@@ -904,15 +904,6 @@ const ScannedDetailsComponent = ({
             let number = consolidatedlist;
             let regexvalue = new RegExp(regexlist)
             let resultlist = regexvalue.test(number);
-            if (newArrayValue[i].consolidatedPrediction === '') {
-                validCell = true
-            }
-            else if (newArrayValue[i].consolidatedPrediction === 0) {
-                omrMark = true
-            }
-            else if (resultlist === true) {
-                resultMark = true
-            }
         }
 
         let regexValidation
@@ -923,10 +914,8 @@ const ScannedDetailsComponent = ({
 
 
         let cellOmrValidation = validateCellOMR(false)
-        if (disable || validCell) {
-            showErrorMessage(Strings.please_correct_marks_data)
-        }
-        else if(regexValidation){
+    
+        if(regexValidation){
         }
         else if (cellOmrValidation[0]) {
             if (typeof(cellOmrValidation[1]) == 'number') {
@@ -939,9 +928,7 @@ const ScannedDetailsComponent = ({
         else if (isStudentValid) {
             showErrorMessage(Strings.student_id_should_be_same)
         }
-        else if (resultMark ===false) {
-            showErrorMessage(Strings.please_correct_marks_data)
-        }
+
         else {
             if (sumOfObtainedMarks > 0) {
 
@@ -962,7 +949,8 @@ const ScannedDetailsComponent = ({
                 //DO summ of all result from extract_MAX_OBTAINED_MARKS except max marks and obtained marks
                 let maximum = 0;
                 let sum = extract_MAX_OBTAINED_MARKS.forEach((e) => {
-                    maximum = parseInt(maximum) + parseInt(e.consolidatedPrediction)
+                    let consMark = e.consolidatedPrediction == '' ? 0 : e.consolidatedPrediction
+                    maximum = parseInt(maximum) + parseInt(consMark)
                     return maximum
                 });
                 console.log("sumOfObtained", maximum);
