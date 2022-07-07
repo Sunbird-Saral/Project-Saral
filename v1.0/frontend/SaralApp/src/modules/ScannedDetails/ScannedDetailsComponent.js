@@ -907,15 +907,7 @@ const ScannedDetailsComponent = ({
             let number = consolidatedlist;
             let regexvalue = new RegExp(regexlist)
             let resultlist = regexvalue.test(number);
-            if (newArrayValue[i].consolidatedPrediction === '') {
-                validCell = true
-            }
-            else if (newArrayValue[i].consolidatedPrediction === 0) {
-                omrMark = true
-            }
-            else if (resultlist === true) {
-                resultMark = true
-            }
+         
         }
 
         let regexValidation
@@ -926,10 +918,8 @@ const ScannedDetailsComponent = ({
 
 
         let cellOmrValidation = validateCellOMR(false)
-        if (disable || validCell) {
-            showErrorMessage(Strings.please_correct_marks_data)
-        }
-        else if(regexValidation){
+
+        if(regexValidation){
         }
         else if (cellOmrValidation[0]) {
             if (typeof(cellOmrValidation[1]) == 'number') {
@@ -941,9 +931,6 @@ const ScannedDetailsComponent = ({
         }
         else if (isStudentValid) {
             showErrorMessage(Strings.student_id_should_be_same)
-        }
-        else if (resultMark ===false) {
-            showErrorMessage(Strings.please_correct_marks_data)
         }
         else {
             if (sumOfObtainedMarks > 0) {
