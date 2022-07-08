@@ -279,9 +279,6 @@ const ScannedDetailsComponent = ({
                 callCustomModal(Strings.message_text, Strings.student_id_should_not_blank,false);
             }, 1000);
         }
-
-
-
     }
 
     const callCustomModal = (title, message, isAvailable, cancel) => {
@@ -364,12 +361,15 @@ const ScannedDetailsComponent = ({
                 let consolidated = ocrLocalResponse.layout.cells[i].consolidatedPrediction
                 let ocrcells = ocrLocalResponse.layout.cells[i]
                 regexErrormsg = ocrcells && ocrcells.validate && ocrcells.validate.errorMsg
-                let regexExp = ocrcells && ocrcells.validate && ocrcells.validate.regExp ? ocrcells.validate.regExp : defaultValidateExp
+                 let regexExp = ocrcells && ocrcells.validate && ocrcells.validate.regExp ? ocrcells.validate.regExp : defaultValidateExp
+            //    let regexExp = /^$|[0-1]/
                 let number = consolidated;
                 let regex = new RegExp(regexExp)
                 result = regex.test(number);
                 // setOmrResult(regexErrormsg)
                 setOmrResult(defaultValidateError)
+                console.log('number????????',number)
+                console.log('result??????',result)
 
             }
         }
@@ -378,20 +378,22 @@ const ScannedDetailsComponent = ({
 
 
     const goNextFrame = () => {
-
         let validCell = false
         let omrMark = false
         for (let i = 0; i < newArrayValue.length; i++) {
-            if (newArrayValue[i].consolidatedPrediction === '') {
-                validCell = true
-            }
-            else if (newArrayValue[i].consolidatedPrediction === 0) {
-                omrMark = true
+            // if (newArrayValue[i].consolidatedPrediction === '') {
+            //     validCell = true
+            //     omrMark = true
+            // }
+             if (newArrayValue[i].consolidatedPrediction === 0) {
+                  validCell = true
+                  omrMark = true
             }
         }
         let duplication = false
 
         let cellOmrValidation = validateCellOMR(true)
+        // console.log('cellOmrValidation///',cellOmrValidation)
         const duplicate = checkStdRollDuplicate.some((item) => studentId == item)
 
         if (duplicate && !toggleCheckBox) {
@@ -399,27 +401,28 @@ const ScannedDetailsComponent = ({
         } else {
             duplication = false
         }
-        if (omrMark) {
+        console.log('omrMArk>>>>>>>>>>',omrMark)
+        if (omrMark) {  
             showErrorMessage(omrResultErr ? omrResultErr : defaultValidateError || Strings.omr_mark_should_be)
         }
-        else if (cellOmrValidation[0]) {
-            showErrorMessage(`omr value should be 0 to ${cellOmrValidation[1] + 1}`)
-        }
+        // else if (cellOmrValidation[0]) {
+        //     showErrorMessage(`omr value should be 0 to ${cellOmrValidation[1] + 1}`)
+        // }
         else if (duplication) {
             callCustomModal(Strings.message_text, Strings.Student_ID_Shouldnt_be_duplicated,false);
         }
-        else if (disable) {
-            showErrorMessage(Strings.please_correct_marks_data)
-        }
-        else if (validCell) {
-            showErrorMessage(Strings.please_correct_marks_data)
-        }
+        // else if (disable) {
+        //     showErrorMessage(Strings.please_correct_marks_data)
+        // }
+        // else if (validCell) {
+        //     showErrorMessage(Strings.please_correct_marks_data)
+        // }
         else if (!studentValid && !toggleCheckBox) {
             showErrorMessage(Strings.please_correct_student_id)
             setStdErr(Strings.please_correct_student_id)
         }
         else {
-            if (currentIndex + 1 <= stdRollArray.length - 1) {
+            if (currentIndex  <= stdRollArray.length - 1) {
 
                 let toggle = structureList[currentIndex + 1].hasOwnProperty("isNotAbleToSave") ? structureList[currentIndex + 1].isNotAbleToSave : false
                 setToggleCheckBox(toggle)
@@ -863,6 +866,7 @@ const ScannedDetailsComponent = ({
                 if (data.extractionMethod == CELL_OMR) {
                     totalRois = isMultiple ? element.rois.length : !isMultipleStudent && element.rois.length == 1 ? element.rois.length : element.rois.length - 1
                     let regexValue = regxValidation(element.cellId)
+                    // console.log('regexValueregexValueregexValueregexValue',regexValue)
                     if (totalRois < element.consolidatedPrediction) {
                         validationCellOmr = true
                     }
@@ -926,10 +930,10 @@ const ScannedDetailsComponent = ({
 
 
         let cellOmrValidation = validateCellOMR(false)
-        if (disable || validCell) {
-            showErrorMessage(Strings.please_correct_marks_data)
-        }
-        else if(regexValidation){
+        // if (disable || validCell) {
+        //     showErrorMessage(Strings.please_correct_marks_data)
+        // }
+         if(regexValidation){
         }
         else if (cellOmrValidation[0]) {
             if (typeof(cellOmrValidation[1]) == 'number') {
@@ -942,9 +946,9 @@ const ScannedDetailsComponent = ({
         else if (isStudentValid) {
             showErrorMessage(Strings.student_id_should_be_same)
         }
-        else if (resultMark ===false) {
-            showErrorMessage(Strings.please_correct_marks_data)
-        }
+        // else if (resultMark ===false) {
+        //     showErrorMessage(Strings.please_correct_marks_data)
+        // }
         else {
             if (sumOfObtainedMarks > 0) {
 
