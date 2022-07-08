@@ -911,7 +911,6 @@ const ScannedDetailsComponent = ({
         }
 
         let regexValidation
-        console.log("isOmroptions",isOmrOptions);
         if (isOmrOptions) {
             regexValidation = omrValidation();
         }
