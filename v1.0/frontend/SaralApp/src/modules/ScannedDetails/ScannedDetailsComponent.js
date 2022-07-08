@@ -952,7 +952,8 @@ const ScannedDetailsComponent = ({
                 //DO summ of all result from extract_MAX_OBTAINED_MARKS except max marks and obtained marks
                 let maximum = 0;
                 let sum = extract_MAX_OBTAINED_MARKS.forEach((e) => {
-                    maximum = parseInt(maximum) + parseInt(e.consolidatedPrediction)
+                    let consMark = e.consolidatedPrediction == '' ? 0 : e.consolidatedPrediction
+                    maximum = parseInt(maximum) + parseInt(consMark)
                     return maximum
                 });
                 console.log("sumOfObtained", maximum);
