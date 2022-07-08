@@ -251,7 +251,7 @@
         "section": "B"
       },
       {
-        "section": "C"
+        "section": "A"
       }
     ],
     "classId": "3",
@@ -365,6 +365,9 @@
       },
       {
         "section": "B"
+      },
+      {
+        "section": "C"
       }
     ],
     "classId": "9",
