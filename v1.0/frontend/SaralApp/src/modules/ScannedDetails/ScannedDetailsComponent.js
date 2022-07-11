@@ -902,14 +902,15 @@ const ScannedDetailsComponent = ({
         let regexErrormsglist
         for (let i = 0; i < newArrayValue.length; i++) {
             let consolidatedlist = newArrayValue[i].consolidatedPrediction
-             regexErrormsglist = newArrayValue[i] && newArrayValue[i].validate && newArrayValue[i].validate.errorMsg
-            let regexlist = newArrayValue[i].validate && newArrayValue[i].validate.regExp
+             regexErrormsglist = newArrayValue[i] && newArrayValue[i].validate && newArrayValue[i].validate.errorMsg ? newArrayValue[i].validate.errorMsg : defaultValidateError
+            let regexlist = newArrayValue[i].validate && newArrayValue[i].validate.regExp ? newArrayValue[i].validate.regExp : defaultValidateExp
             let number = consolidatedlist;
             let regexvalue = new RegExp(regexlist)
             let resultlist = regexvalue.test(number);
-         
+             if (resultlist == false) {
+                resultMark = true
+            }
         }
-
         let regexValidation
         if (isOmrOptions) {
             regexValidation = omrValidation();
@@ -922,7 +923,7 @@ const ScannedDetailsComponent = ({
         }
         else if (cellOmrValidation[0]) {
             if (typeof(cellOmrValidation[1]) == 'number') {
-                showErrorMessage(`omr value should be 0 to ${cellOmrValidation[1]}`)
+                showErrorMessage(`${regexErrormsglist}`)
             } 
         }
         else if (!studentValid && !toggleCheckBox) {
@@ -930,6 +931,9 @@ const ScannedDetailsComponent = ({
         }
         else if (isStudentValid) {
             showErrorMessage(Strings.student_id_should_be_same)
+        }
+        else if (resultMark) {
+            showErrorMessage(`${regexErrormsglist}`)
         }
         else {
             if (sumOfObtainedMarks > 0) {
