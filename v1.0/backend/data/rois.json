@@ -15,7 +15,7 @@
                 },
                 "resultValidation": {
                     "validate": {
-                        "regExp": "[0-1]",
+                        "regExp": "^[0-1]{0,1}$",
                         "errorMsg": "Omr result should be 1 or 0"
                     }
                 },
@@ -6093,7 +6093,7 @@
                 },
                 "resultValidation": {
                     "validate": {
-                        "regExp": "[0-1]",
+                        "regExp": "^[0-1]{0,1}$",
                         "errorMsg": "Omr result should be 1 or 0"
                     }
                 },
@@ -8423,7 +8423,7 @@
                 },
                 "resultValidation": {
                     "validate": {
-                        "regExp": "[0-1]",
+                        "regExp": "^[0-1]{0,1}$",
                         "errorMsg": "Omr result should be 1 or 0"
                     }
                 },
@@ -10753,7 +10753,7 @@
                 },
                 "resultValidation": {
                     "validate": {
-                        "regExp": "[0-1]",
+                        "regExp": "^[0-1]{0,1}$",
                         "errorMsg": "Omr result should be 1 or 0"
                     }
                 },
@@ -35455,7 +35455,7 @@
                 },
                 "resultValidation": {
                     "validate": {
-                        "regExp": "[0-1]",
+                        "regExp": "^[0-1]{0,1}$",
                         "errorMsg": "Omr result should be 1 or 0"
                     }
                 },
@@ -69598,6 +69598,12 @@
                         "minWidth": 0,
                         "minHeight": 0,
                         "detectionRadius": 12
+                    },
+                    "resultValidation": {
+                        "validate": {
+                            "regExp": "^[0-1]{0,1}$",
+                            "errorMsg": "Omr result should be 1 or 0"
+                        }
                     },
                     "cells": [
                         {

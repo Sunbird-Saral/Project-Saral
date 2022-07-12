@@ -368,8 +368,7 @@ const ScannedDetailsComponent = ({
                 let number = consolidated;
                 let regex = new RegExp(regexExp)
                 result = regex.test(number);
-                // setOmrResult(regexErrormsg)
-                setOmrResult(defaultValidateError)
+                setOmrResult(regexErrormsg)
 
             }
         }
@@ -382,12 +381,10 @@ const ScannedDetailsComponent = ({
         let validCell = false
         let omrMark = false
         for (let i = 0; i < newArrayValue.length; i++) {
-            if (newArrayValue[i].consolidatedPrediction === '') {
+            if (newArrayValue[i].consolidatedPrediction === 0) {
                 validCell = true
-            }
-            else if (newArrayValue[i].consolidatedPrediction === 0) {
                 omrMark = true
-            }
+          }
         }
         let duplication = false
 
@@ -400,20 +397,15 @@ const ScannedDetailsComponent = ({
             duplication = false
         }
         if (omrMark) {
-            showErrorMessage(omrResultErr ? omrResultErr : defaultValidateError || Strings.omr_mark_should_be)
+            showErrorMessage(omrResultErr ? omrResultErr : defaultValidateError)
         }
         else if (cellOmrValidation[0]) {
-            showErrorMessage(`omr value should be 0 to ${cellOmrValidation[1] + 1}`)
+             showErrorMessage(omrResultErr ? omrResultErr : defaultValidateError)
         }
         else if (duplication) {
             callCustomModal(Strings.message_text, Strings.Student_ID_Shouldnt_be_duplicated,false);
         }
-        else if (disable) {
-            showErrorMessage(Strings.please_correct_marks_data)
-        }
-        else if (validCell) {
-            showErrorMessage(Strings.please_correct_marks_data)
-        }
+       
         else if (!studentValid && !toggleCheckBox) {
             showErrorMessage(Strings.please_correct_student_id)
             setStdErr(Strings.please_correct_student_id)
@@ -557,7 +549,7 @@ const ScannedDetailsComponent = ({
                     }
                     let putTrainingData = loginData.data.school.storeTrainingData ? marks_data.trainingData = value.consolidatedPrediction != value.predictedMarks ? value.trainingDataSet : [] : ''
                     marks_data.questionId = value.format.name,
-                        marks_data.obtainedMarks = value.consolidatedPrediction
+                    marks_data.obtainedMarks = value.consolidatedPrediction ? value.consolidatedPrediction : ""
                     stdTotalMarks = Number(stdTotalMarks) + Number(value.consolidatedPrediction)
                     stdMarks_info.push(marks_data)
 
