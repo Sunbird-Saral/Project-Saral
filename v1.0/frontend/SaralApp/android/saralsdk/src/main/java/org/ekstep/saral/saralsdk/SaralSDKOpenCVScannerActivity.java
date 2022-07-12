@@ -66,7 +66,6 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
     private long                            mStartPredictTime;
 
     private int     mTotalClassifiedCount               = 0;
-    private int     blockTotalClassifiedCount           = 0;
     private boolean mIsClassifierRequestSubmitted       = false;
     private HashMap<String, String> mPredictedDigits    = new HashMap<>();
     private HashMap<String, String> mPredictedOMRs      = new HashMap<>();
@@ -193,7 +192,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                     lettersMap.put(index,c+"");
                     index++;
                 }
-                blockTotalClassifiedCount++;
+                mTotalClassifiedCount++;
                     try {
                         JSONObject result = new JSONObject();
                         if(digit != 36 && lettersMap.get(digit)!=null) {
@@ -208,12 +207,12 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                     } catch (JSONException e) {
                         Log.e(TAG, "unable to create prediction object");
                     }
-                if (mIsClassifierRequestSubmitted && blockTotalClassifiedCount >= mPredictedDigits.size()) {
+                if (mIsClassifierRequestSubmitted && mTotalClassifiedCount >= mPredictedDigits.size()) {
                     mIsScanningComplete     = true;
                 }
 
                 if (mIsScanningComplete) {
-                    Log.d(TAG, "Scaning completed, classification count " + blockTotalClassifiedCount);
+                    Log.d(TAG, "Scaning completed, classification count " + mTotalClassifiedCount);
                     processScanningCompleted();
                 }
           
@@ -222,7 +221,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
             @Override
             public void OnPredictionFailed(String error, String id) {
                 Log.e(TAG, "Model prediction failed");
-                blockTotalClassifiedCount++;
+                mTotalClassifiedCount++;
                 try {
                     JSONObject result = new JSONObject();
                     result.put("prediction", new Integer(0));
@@ -232,12 +231,12 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                     Log.e(TAG, "unable to create prediction object");
                 }
 
-                if (mIsClassifierRequestSubmitted && blockTotalClassifiedCount >= mPredictedDigits.size()) {
+                if (mIsClassifierRequestSubmitted && mTotalClassifiedCount >= mPredictedDigits.size()) {
                     mIsScanningComplete     = true;
                 }
 
                 if (mIsScanningComplete) {
-                    Log.d(TAG, "Scaning completed, classification count " + blockTotalClassifiedCount);
+                    Log.d(TAG, "Scaning completed, classification count " + mTotalClassifiedCount);
                     processScanningCompleted();
                 }
             }

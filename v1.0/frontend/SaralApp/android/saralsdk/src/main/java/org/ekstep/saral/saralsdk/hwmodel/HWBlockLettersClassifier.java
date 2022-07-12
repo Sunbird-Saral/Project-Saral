@@ -31,7 +31,7 @@ public class HWBlockLettersClassifier {
      * Name of the model file hosted with Firebase.
      */
     private static final String HOSTED_MODEL_NAME = null;
-    private static final String LOCAL_MODEL_ASSET = "trained_resnet_model_letter_digit_v0_24_epoch_tflite.tflite";
+    private static final String LOCAL_MODEL_ASSET = "model_letter_digits_finetune_12_07_22_8_tflite.tflite";
 
     /**
      * Dimensions of inputs.
