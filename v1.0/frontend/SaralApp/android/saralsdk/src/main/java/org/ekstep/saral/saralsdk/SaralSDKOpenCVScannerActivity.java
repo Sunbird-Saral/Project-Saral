@@ -279,7 +279,11 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
             processCameraFrame(mRgba, mframeCount);
             mframeCount ++;
         } else {
-            showProcessingInformation(mRgba);
+            //showProcessingInformation(mRgba);
+            Mat rgba = inputFrame.rgba();
+            Mat mat = rgba;
+            //some opengl code.
+            return null;
         }
         return mRgba;
     }
