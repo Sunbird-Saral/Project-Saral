@@ -335,7 +335,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                         Log.d(TAG, "key: " + roiId + " answer: " + answer.toString());
                     }
 
-                    if (roiConfig.getString("extractionMethod").equals("BLOCK_LETTERS_CLASSIFICATION")) { //NUMERIC_CLASSIFICATION
+                    if (roiConfig.getString("extractionMethod").equals("NUMERIC_CLASSIFICATION")) {
                         String roiId        = roiConfig.getString("roiId");
                         JSONObject rect      = roiConfig.getJSONObject("rect");
 
@@ -348,16 +348,16 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                         }
                     }
 
-                    if (roiConfig.getString("extractionMethod").equals("NUMERIC_CLASSIFICATION")) { //BLOCK_LETTERS_CLASSIFICATION
+                    if (roiConfig.getString("extractionMethod").equals("BLOCK_ALPHANUMERIC_CLASSIFICATION")) {
                         String roiId        = roiConfig.getString("roiId");
                         JSONObject rect      = roiConfig.getJSONObject("rect");
 
                         mPredictedDigits.put(roiId, "0");
-                        Mat digitROI        = mDetectShaded.getROIMat(tableMat, rect.getInt("top"), rect.getInt("left"), rect.getInt("bottom"), rect.getInt("right"));
-                        mRoiMatBase64.put(roiId,createBase64FromMat(digitROI));
+                        Mat alphaNumericROI        = mDetectShaded.getROIMat(tableMat, rect.getInt("top"), rect.getInt("left"), rect.getInt("bottom"), rect.getInt("right"));
+                        mRoiMatBase64.put(roiId,createBase64FromMat(alphaNumericROI));
                         if(HWBlockLettersClassifier.getInstance().isInitialized() == true) {
                             Log.d(TAG, "Requesting prediction for: " + roiId);
-                            HWBlockLettersClassifier.getInstance().classifyMat(digitROI, roiId);
+                            HWBlockLettersClassifier.getInstance().classifyMat(alphaNumericROI, roiId);
                         }
                     }
 
