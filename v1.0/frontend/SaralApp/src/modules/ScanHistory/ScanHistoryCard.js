@@ -455,7 +455,7 @@ const ScanHistoryCard = ({
                             }
                         </View>
                         <View style={styles1.container1}>
-                            {ExamQuesDetail[0].questions != undefined && 
+                            {ExamQuesDetail[0]&&ExamQuesDetail[0].questions != undefined && 
                                 ExamQuesDetail[0].questions != "" ?
                                 ExamQuesDetail[0] && ExamQuesDetail[0].questions.map((stu) => {
                                 return (
