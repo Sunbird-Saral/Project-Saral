@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, Image, Share } from 'react-native';
+import { View, Text, TouchableOpacity, Image, Share, Switch } from 'react-native';
 import { NavigationActions, StackActions } from 'react-navigation';
 import { connect } from 'react-redux';
 import { Assets } from '../../../assets';
@@ -102,9 +102,19 @@ class HeaderComponents extends Component {
                             <Text style={[styles.headerTitleTextStyle, customLogoutTextStyle]}>{Strings.help_menu}</Text>
                         </TouchableOpacity>
                         
+                        <View 
+                        style={{flexDirection: 'row', marginBottom: 10}}
+                        >
+                            <Switch
+                            trackColor={{ true: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE, false: '#000' }}
+                            thumbColor={ !minimalFlag ? multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE: AppTheme.GREY}
+                            value={!minimalFlag}
+                            onValueChange={()=>  changeMinimalMode() }
+                            />
+                            
                         <TouchableOpacity
                         style={{marginHorizontal:"0%",marginBottom: 8}}
-                        onPress={()=> changeMinimalMode()}
+                        activeOpacity={1}
                         > 
                         {
                             minimalFlag
@@ -114,7 +124,8 @@ class HeaderComponents extends Component {
                             <Text style={[styles.headerTitleTextStyle, customLogoutTextStyle,{color: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE,fontWeight: 'bold'}]}>{Strings.regular_mode}</Text>
                         }
                         </TouchableOpacity>
-
+                        
+                        </View>
                     </View>
                 </View>
 
