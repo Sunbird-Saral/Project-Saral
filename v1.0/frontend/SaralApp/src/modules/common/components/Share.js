@@ -187,6 +187,7 @@ const ShareComponent = ({
             onLogoutClick={Logoutcall}
             aboutMenu={aboutMenu}
             helpMenu={helpMenu}
+            navigation={navigation}
           />
 
         </TouchableOpacity>

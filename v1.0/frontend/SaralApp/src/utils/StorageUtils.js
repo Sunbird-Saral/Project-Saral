@@ -9,6 +9,7 @@ const FETCH_SCAN_KEY = 'fetch_scan_key'
 const SAVE_ABSENT_DATA_INTO_LOCAL = 'save_absent_data_into_local'
 const SAVE_TOTAL_STUDENT = 'save_total_student'
 const SAVED_SCANNED_DATA_INTO_LOCAL = 'saved_scanned_data_into_local'
+const SAVE_MINIMAL_VALUE = 'save_minimal_value'
 const SET_PRESENT_ABSENT_DATA = 'set_present_absent_data'
 const SET_ERROR_MESSAGE = 'set_error_message'
 const REMEMBERME_KEY = 'remember_key'
@@ -269,6 +270,22 @@ export const removeMultiBranding = async () => {
         // Error removing
         console.log('error',error)
     }
+}
+
+export const setMinimalValue = async (data) => {
+    const value = JSON.stringify(data);
+    const saved = await AsyncStorage.setItem(SAVE_MINIMAL_VALUE, value);
+    if (saved) {
+        return true
+    } else {
+        return false
+    }
+}
+
+export const getMinimalValue = async () => {
+    let value =  await AsyncStorage.getItem(SAVE_MINIMAL_VALUE);
+    let jsonValue = JSON.parse(value)
+    return jsonValue     
 }
 
 export const erasesetTotalStudent = async () => {

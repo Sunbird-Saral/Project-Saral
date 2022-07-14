@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, Image, Share } from 'react-native';
+import { NavigationActions, StackActions } from 'react-navigation';
 import { connect } from 'react-redux';
 import { Assets } from '../../../assets';
+import constants from '../../../flux/actions/constants';
+import { storeFactory } from '../../../flux/store/store';
 import AppTheme from '../../../utils/AppTheme';
 import { monospace_FF } from '../../../utils/CommonUtils';
+import { setMinimalValue } from '../../../utils/StorageUtils';
 import Strings from '../../../utils/Strings';
 
 
@@ -32,8 +36,34 @@ class HeaderComponents extends Component {
             aboutMenu,
             helpMenu,
             minimalFlag,
-            multiBrandingData
+            multiBrandingData,
+            navigation
         } = this.props
+
+        async function changeMinimalMode() {
+            storeFactory.dispatch(minimalFlagAction(!minimalFlag));
+            let saved = await setMinimalValue(!minimalFlag);
+            console.log("saved",saved);
+            goToMyScanScreen();
+        }
+
+        function minimalFlagAction (payload) {
+            return {
+                type: constants.MINIMAL_FLAG,
+                payload
+            }
+        }
+
+        function goToMyScanScreen() {
+            console.log("navigation",navigation);
+            const resetAction = StackActions.reset({
+                index: 0,
+                actions: [NavigationActions.navigate({ routeName: 'Home' })],
+            });
+            navigation.dispatch(resetAction);
+            return true
+        }
+
         return (
             <View style={{flex:1,marginTop: '10%',marginRight:'5%'}}>
                 <View style={styles.imageViewContainer}>
@@ -74,7 +104,7 @@ class HeaderComponents extends Component {
                         
                         <TouchableOpacity
                         style={{marginHorizontal:"0%",marginBottom: 8}}
-                        activeOpacity={1}
+                        onPress={()=> changeMinimalMode()}
                         > 
                         {
                             minimalFlag
