@@ -1,5 +1,6 @@
 const configs = {
-  BASE_URL: 'TO_BE_REPLACED'
+  BASE_URL: 'http://192.168.0.105:3000'
+  // BASE_URL: 'TO_BE_REPLACED'
 }
 
 export default configs;

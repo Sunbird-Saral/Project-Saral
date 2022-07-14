@@ -33,5 +33,10 @@ export const styles = StyleSheet.create({
     content: {
         paddingBottom: 20,
         flexGrow:1
-    }
+    },
+    nxtBtnStyle1: {
+        width:'90%',
+        borderRadius: 10,
+        marginBottom: 20
+    },
 });
