@@ -25,7 +25,7 @@ const MarksHeaderTable = ({
         let filterExam = studentsAndExamData.data.exams.filter((data)=> data.subject === subject)
         
         studentsAndExamData.data.exams.forEach((element) => {
-            if (element.subject == subject) {
+            if (element.subject == subject && element.questions != null) {
                 element.questions.forEach((_el,i)=>{
                     if (_el.questionId.toString() == value.toString() || index == i) {
                         _el.tags.forEach((data,i)=>{
