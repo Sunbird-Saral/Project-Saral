@@ -214,7 +214,7 @@ definitions:
 
       token:
         type: object
-        example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTMwOWQyYjJlNzEyMzAyZGY5NmM3NjEiLCJpYXQiOjE2MzA1NzU5MTV9.FCt2Q4R_sN1ctdOfoOPzBzfdUohAPA-TlLFtJJEeTBE"
+        example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJvZDAwMSIsImlhdCI6MTY1NzU0MDkwMX0.tMDeXo5PjsBo6i5y55sWMUqBDaVI3OghY9AFWqsFuFc"
   
   classResponse:
         type: array
