@@ -6,7 +6,7 @@ import API from '../apis/api';
 import C from '../constants';
 import {eraseErrorLogs,erasesetTotalStudent,erasesetAbsentStudentDataIntoAsync,erasesetLoginCred,erasesetLoginData,erasesetScanData,
     erasesetStudentsExamData,erasesetFetchedScanData,erasesetScannedDataIntoLocal,
-    erasegetPresentAbsentStudent,forgetUser,forgetUserpass,erasesetData,removeMultiBranding} from './../../../utils/StorageUtils'
+    erasegetPresentAbsentStudent,forgetUser,forgetUserpass,erasesetData,removeMultiBranding, setMinimalValue} from './../../../utils/StorageUtils'
 
 
 export function LogoutAction(payload) {
@@ -24,7 +24,8 @@ export function LogoutAction(payload) {
                  await erasesetStudentsExamData()
                  await erasesetFetchedScanData()
                  await erasesetScannedDataIntoLocal()
-                 await erasegetPresentAbsentStudent()    
+                 await erasegetPresentAbsentStudent()
+                 await setMinimalValue(false)    
             dispatch({ type: C.LOGOUT_PROCESS, payload: payload })
             dispatch({ type: C.MULTI_BRANDING_CLEANUP })
             return dispatch({ type: C.LOGOUT_PROCESS });
