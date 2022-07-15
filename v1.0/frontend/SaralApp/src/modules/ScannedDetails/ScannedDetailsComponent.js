@@ -483,7 +483,7 @@ const ScannedDetailsComponent = ({
     const callTagArrayData = (formatName) =>{
         let tagArray = []
         for(const element of studentsAndExamData.data.exams){
-            if (filteredData.subject === element.subject) {
+            if (filteredData.subject === element.subject && element.questions !=null) {
                 for(const _el of element.questions) {
                     _el.tags.filter((value) => {
                         if (value.hasOwnProperty("questionId") && value.questionId.trim() == formatName.trim() && value.selected) {
