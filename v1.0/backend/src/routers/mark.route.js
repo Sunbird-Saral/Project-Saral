@@ -17,6 +17,7 @@ router.put('/saveMarks', auth, async (req, res) => {
     const marks = []
     const subject = req.body.subject
     const examDate = req.body.examDate
+    const examId = req.body.examId
     const schoolId = req.school.schoolId
     const classId = req.body.classId
     const createdOn = new Date().getTime()
@@ -30,12 +31,16 @@ router.put('/saveMarks', auth, async (req, res) => {
             subject,
             classId,
             createdOn,
-            roiId
+            roiId,
+            examId
         })
         marks.push(marksData)
     });
     try {
         for (let data of marks) {
+            if(!data.examDate && data.examDate == undefined){
+                data.examDate = new Date().toLocaleDateString()
+            }
          
             let studentMarksExist = await Mark.findOne({ schoolId:data.schoolId,studentId: data.studentId,classId:data.classId,subject: data.subject, examDate: data.examDate, roiId: data.roiId  })
             if (!studentMarksExist) {
