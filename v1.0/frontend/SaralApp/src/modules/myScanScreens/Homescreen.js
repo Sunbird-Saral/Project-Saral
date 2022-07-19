@@ -15,6 +15,7 @@ import Spinner from '../common/components/loadingIndicator';
 import { storeFactory } from '../../flux/store/store';
 import constants from '../../flux/actions/constants';
 import { GetStudentsAndExamData } from '../../flux/actions/apis/getStudentsAndExamData';
+import { getMinimalValue } from '../../utils/StorageUtils';
 
 class HomeComponent extends Component {
     constructor(props) {
@@ -38,7 +39,7 @@ class HomeComponent extends Component {
         this.callMultiBrandingActiondata()
     }
 
-    componentDidUpdate(prevProps) {
+   async componentDidUpdate(prevProps) {
         const { studentsAndExamData, multiBranding }  = this.props;
 
         const { loginData: { data: { school } } } = this.props;
@@ -47,8 +48,9 @@ class HomeComponent extends Component {
             if (multiBranding.status && multiBranding.status == 200) {
 
                 //set minimal Flag
-                let isMinimalMode = school.hasOwnProperty("isMinimalMode") ? school.isMinimalMode : false
-                storeFactory.dispatch(this.minimalFlagAction(isMinimalMode));
+                let isMinimalMode = await getMinimalValue();
+                storeFactory.dispatch(this.minimalFlagAction( isMinimalMode == null ? false : isMinimalMode));
+
                 //calling students and exam api if minimal mode true
                 if (isMinimalMode) {
                     this.callStudentsData(this.props.loginData.data.token)

@@ -16,6 +16,7 @@ import { bindActionCreators } from 'redux';
 import APITransport from '../../flux/actions/transport/apitransport'
 import { dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF } from '../../utils/CommonUtils';
 import { ScrollView } from 'react-native-gesture-handler';
+import ButtonComponent from '../common/components/ButtonComponent';
 
 const ScanDataModal = ({
     bgColor,
@@ -132,7 +133,7 @@ const ScanDataModal = ({
             transparent={true}
             visible={modalVisible}
             onRequestClose={() => {
-                setModalVisible()
+                // setModalVisible()
             }}
             statusBarTranslucent={true}
         >
@@ -189,6 +190,15 @@ const ScanDataModal = ({
                     />
                 </ScrollView>
 
+                <View style={{alignItems:'center'}}>
+            <ButtonComponent
+                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+                btnText={Strings.close.toUpperCase()}
+                activeOpacity={0.8}
+                onPress={()=> setModalVisible()}
+                />
+                </View>
+
             </View>
 
         </Modal>
@@ -225,4 +235,9 @@ const styles = StyleSheet.create({
         paddingBottom: 10,
         fontFamily : monospace_FF
     },
+    nxtBtnStyle1: {
+        width:'90%',
+        borderRadius: 10,
+        marginBottom: 50
+    }
 });
