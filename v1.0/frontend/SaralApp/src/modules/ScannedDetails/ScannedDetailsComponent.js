@@ -368,7 +368,9 @@ const ScannedDetailsComponent = ({
                 let number = consolidated;
                 let regex = new RegExp(regexExp)
                 result = regex.test(number);
-                setOmrResult(regexErrormsg)
+                // setOmrResult(regexErrormsg)
+                  setOmrResult(defaultValidateError)
+                  
 
             }
         }
@@ -376,19 +378,10 @@ const ScannedDetailsComponent = ({
     }
 
 
-    const goNextFrame = () => {
-
-        let validCell = false
-        let omrMark = false
-        for (let i = 0; i < newArrayValue.length; i++) {
-            if (newArrayValue[i].consolidatedPrediction === 0) {
-                validCell = true
-                omrMark = true
-          }
-        }
+    const goNextFrame = () => {  
+        let regexvalidate = omrValidation()
+    
         let duplication = false
-
-        let cellOmrValidation = validateCellOMR(true)
         const duplicate = checkStdRollDuplicate.some((item) => studentId == item)
 
         if (duplicate && !toggleCheckBox) {
@@ -396,12 +389,10 @@ const ScannedDetailsComponent = ({
         } else {
             duplication = false
         }
-        if (omrMark) {
+        if (regexvalidate) {
             showErrorMessage(omrResultErr ? omrResultErr : defaultValidateError)
         }
-        else if (cellOmrValidation[0]) {
-             showErrorMessage(omrResultErr ? omrResultErr : defaultValidateError)
-        }
+        
         else if (duplication) {
             callCustomModal(Strings.message_text, Strings.Student_ID_Shouldnt_be_duplicated,false);
         }
@@ -435,7 +426,6 @@ const ScannedDetailsComponent = ({
                 //save validated student
                 dispatch(OcrLocalResponseAction(JSON.parse(JSON.stringify(ocrLocalResponse))))
                 setCheckStdRollDuplicate([...checkStdRollDuplicate, studentId])
-                validCell = false
                 setNewArrayValue(structureList[currentIndex + 1].data)
                 setStudentID(structureList[currentIndex + 1].RollNo)
                 setCurrentIndex(currentIndex + 1)
@@ -549,7 +539,7 @@ const ScannedDetailsComponent = ({
                     }
                     let putTrainingData = loginData.data.school.storeTrainingData ? marks_data.trainingData = value.consolidatedPrediction != value.predictedMarks ? value.trainingDataSet : [] : ''
                     marks_data.questionId = value.format.name,
-                    marks_data.obtainedMarks = value.consolidatedPrediction ? value.consolidatedPrediction : ""
+                    marks_data.obtainedMarks = value.consolidatedPrediction? value.consolidatedPrediction : ""
                     stdTotalMarks = Number(stdTotalMarks) + Number(value.consolidatedPrediction)
                     stdMarks_info.push(marks_data)
 
@@ -753,7 +743,7 @@ const ScannedDetailsComponent = ({
             }
 
             let newArray = JSON.parse(JSON.stringify(array))
-            newArray[index].consolidatedPrediction = text > 1 ? 0 : text
+            newArray[index].consolidatedPrediction = text.length>0&& text > 1 ? 0 : text
             setNewArrayValue(newArray)
 
             ocrLocalResponse.layout.cells.forEach(element => {
@@ -761,11 +751,11 @@ const ScannedDetailsComponent = ({
                 if (element.cellId == value.cellId) {
                     structureList.forEach(Datas => {
                         //this'll add into OCRLocal
-                        element.consolidatedPrediction = text < 1 ? 0 : text
+                        element.consolidatedPrediction = text.length<0&&text < 1 ? 0 : text
                         //this'll add in  structurelist
                         Datas.data.forEach((el, index) => {
                             if (el.cellId === value.cellId) {
-                                el.consolidatedPrediction = text > 1 ? 0 : text
+                                el.consolidatedPrediction = text.length>0&&text > 1 ? 0 : text
                             }
                         });
 
@@ -870,7 +860,6 @@ const ScannedDetailsComponent = ({
         var regextResult = false
             for (let j = 0; j < newArrayValue.length; j++) {
                 let filter = ocrLocalResponse.layout.cells.filter((el)=> el.cellId == newArrayValue[j].cellId);
-                if (filter[0].hasOwnProperty("omrOptions")) {   
                     let consolidated = filter[0].consolidatedPrediction
                     regexErrormsg = filter && filter[0].validate && filter[0].validate.errorMsg
                     let regexExp = filter[0] && filter[0].validate && filter[0].validate.regExp ? filter[0].validate.regExp : defaultValidateExp
@@ -880,8 +869,7 @@ const ScannedDetailsComponent = ({
                     
                     if (!result) {
                         regextResult = !result
-                        showErrorMessage(`${regexErrormsg}`)
-                    }
+
                 }
         }
     return regextResult
@@ -904,9 +892,6 @@ const ScannedDetailsComponent = ({
             }
         }
         let regexValidation
-        if (isOmrOptions) {
-            regexValidation = omrValidation();
-        }
 
 
         let cellOmrValidation = validateCellOMR(false)
