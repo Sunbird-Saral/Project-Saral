@@ -24,6 +24,7 @@ import { Assets } from '../../assets';
 import ShareComponent from '../common/components/Share';
 import MultibrandLabels from '../common/components/multibrandlabels';
 import { dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF } from '../../utils/CommonUtils';
+import ButtonComponent from '../common/components/ButtonComponent';
 
 
 const ScanStatusLocal = ({
@@ -42,17 +43,18 @@ const ScanStatusLocal = ({
     const dispatch = useDispatch()
 
 
-useEffect(
-    React.useCallback(() => {
-        const onBackPress = () => {
-            navigation.navigate('myScan');
-            return true;
-        };
-        BackHandler.addEventListener('hardwareBackPress', onBackPress);
-        return () =>
-            BackHandler.removeEventListener('hardwareBackPress', onBackPress);
-    }, []),
-);
+// useEffect(
+//     React.useCallback(() => {
+//         BackHandler.addEventListener('hardwareBackPress', onBackPress);
+//         return () =>
+//         BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+//     }, []),
+//     );
+
+    const onBackPress = () => {
+        navigation.navigate('myScan');
+        return true;
+    };
 
 const callCustomModal = (title, message, isAvailable, func, cancel) => {
     let data = {
@@ -200,6 +202,15 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
             keyExtractor={(item, index) => `${index.toString()}`}
             contentContainerStyle={styles.content}
             />
+
+          <View style={{alignItems:'center'}}>
+            <ButtonComponent
+                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+                btnText={Strings.close.toUpperCase()}
+                activeOpacity={0.8}
+                onPress={()=> onBackPress()}
+                />
+                </View>
 
         </View>
     );
