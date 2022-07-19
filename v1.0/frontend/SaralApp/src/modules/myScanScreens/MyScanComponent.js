@@ -617,7 +617,7 @@ class MyScanComponent extends Component {
                     <View style={{ backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE, marginHorizontal: 20, padding: 6, borderRadius: 10, paddingBottom: 16, paddingTop: 14 }}>
                         <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle, { padding: "3.4%" }]}>
-                                <Text style={{ fontFamily: monospace_FF }}>{BrandLabel && BrandLabel.ScanCount ? BrandLabel.ScanCount : Strings.scan_status}</Text>
+                                <Text style={{ fontFamily: monospace_FF }}>{BrandLabel && BrandLabel.ScanCount ? BrandLabel.ScanCount : Strings.scan_count}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle, { padding: "3.4%" }]}>
                                 <Text style={{ fontFamily: monospace_FF }} >{scanStatusData}</Text>
@@ -626,7 +626,7 @@ class MyScanComponent extends Component {
 
                         <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle, { padding: "3.4%", borderBottomWidth: 1 }]}>
-                                <Text style={{ fontFamily: monospace_FF }}>{BrandLabel && BrandLabel.SaveCount ? BrandLabel.SaveCount : Strings.class_text}</Text>
+                                <Text style={{ fontFamily: monospace_FF }}>{BrandLabel && BrandLabel.SaveCount ? BrandLabel.SaveCount : Strings.save_count}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle, { padding: "3.4%", borderBottomWidth: 1 }]}>
                                 <Text style={{ fontFamily: monospace_FF }} >{saveStatusData}</Text>

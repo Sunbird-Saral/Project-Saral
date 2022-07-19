@@ -120,6 +120,8 @@ export default strings = new LocalizedStrings({
         minimal_mode: "Minimal Mode",
         regular_mode: "Regular Mode",
         saved_data: "Saved Data",
-        scan_data: "Scan Data"
+        scan_data: "Scan Data",
+        scan_count: "Scan Count",
+        save_count: "Save Count"
     }
 })
