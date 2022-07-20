@@ -264,7 +264,7 @@ const ScannedDetailsComponent = ({
         });
 
        let removeZeroRollStd = marTemp.filter((data, i) => { 
-            if (parseInt(data.RollNo) != 0) {
+            if ((data.RollNo) != 0) {
                 return true
             }
         })
