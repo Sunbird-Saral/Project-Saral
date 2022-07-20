@@ -15,7 +15,7 @@
                 },
                 "resultValidation": {
                     "validate": {
-                        "regExp": "[0-1]",
+                        "regExp": "^[0-1]{0,1}$",
                         "errorMsg": "Omr result should be 1 or 0"
                     }
                 },
@@ -6093,7 +6093,7 @@
                 },
                 "resultValidation": {
                     "validate": {
-                        "regExp": "[0-1]",
+                        "regExp": "^[0-1]{0,1}$",
                         "errorMsg": "Omr result should be 1 or 0"
                     }
                 },
@@ -8423,7 +8423,7 @@
                 },
                 "resultValidation": {
                     "validate": {
-                        "regExp": "[0-1]",
+                        "regExp": "^[0-1]{0,1}$",
                         "errorMsg": "Omr result should be 1 or 0"
                     }
                 },
@@ -10753,7 +10753,7 @@
                 },
                 "resultValidation": {
                     "validate": {
-                        "regExp": "[0-1]",
+                        "regExp": "^[0-1]{0,1}$",
                         "errorMsg": "Omr result should be 1 or 0"
                     }
                 },
@@ -22259,7 +22259,7 @@
                 },
                 "resultValidation": {
                     "validate": {
-                        "regExp": "[0-1]",
+                        "regExp": "^[0-1]{0,1}$",
                         "errorMsg": "Omr result should be 1 or 0"
                     }
                 },
@@ -35455,7 +35455,7 @@
                 },
                 "resultValidation": {
                     "validate": {
-                        "regExp": "[0-1]",
+                        "regExp": "^[0-1]{0,1}$",
                         "errorMsg": "Omr result should be 1 or 0"
                     }
                 },
@@ -42884,7 +42884,7 @@
                             "value": "QUESTION 1"
                         },
                         "validate": {
-                            "regExp": "[A-G]",
+                            "regExp": "^[A-G]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D E F G)"
                         },
                         "omrOptions": [
@@ -42945,7 +42945,7 @@
                             "value": "QUESTION 2"
                         },
                         "validate": {
-                            "regExp": "[A-C]",
+                            "regExp": "^[A-C]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C)"
                         },
                         "omrOptions": [
@@ -43014,7 +43014,7 @@
                             "value": "QUESTION 3"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D)"
                         },
                         "omrOptions": [
@@ -43084,7 +43084,7 @@
                             "value": "QUESTION 4"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D)"
                         },
                         "omrOptions": [
@@ -43142,7 +43142,7 @@
                             "value": "QUESTION 5"
                         },
                         "validate": {
-                            "regExp": "[A-C]",
+                            "regExp": "^[A-C]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C)"
                         },
                         "omrOptions": [
@@ -43223,7 +43223,7 @@
                             "value": "QUESTION 6"
                         },
                         "validate": {
-                            "regExp": "[A-E]",
+                            "regExp": "^[A-E]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D E)"
                         },
                         "omrOptions": [
@@ -43294,7 +43294,7 @@
                             "value": "QUESTION 7"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D)"
                         },
                         "omrOptions": [
@@ -43400,7 +43400,7 @@
                             "value": "QUESTION 8"
                         },
                         "validate": {
-                            "regExp": "[A-G]",
+                            "regExp": "^[A-G]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D E F G)"
                         },
                         "omrOptions": [
@@ -43485,7 +43485,7 @@
                             "value": "QUESTION 9"
                         },
                         "validate": {
-                            "regExp": "[A-E]",
+                            "regExp": "^[A-E]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D E)"
                         },
                         "omrOptions": [
@@ -43520,7 +43520,7 @@
                             "value": "QUESTION 10"
                         },
                         "validate": {
-                            "regExp": "[Y,N]",
+                            "regExp": "^[N-Y]{0,1}$",
                             "errorMsg": "Please enter valid option (Y N)"
                         },
                         "omrOptions": [
@@ -43552,7 +43552,7 @@
                             "value": "QUESTION 11"
                         },
                         "validate": {
-                            "regExp": "[Y,N]",
+                            "regExp": "^[N-Y]{0,1}$",
                             "errorMsg": "Please enter valid option (Y N)"
                         },
                         "omrOptions": [
@@ -43596,7 +43596,7 @@
                             "value": "QUESTION 12"
                         },
                         "validate": {
-                            "regExp": "[A-B]",
+                            "regExp": "^[A-B]{0,1}$",
                             "errorMsg": "Please enter valid option (A B)"
                         },
                         "omrOptions": [
@@ -43652,7 +43652,7 @@
                             "value": "QUESTION 13"
                         },
                         "validate": {
-                            "regExp": "[A-C]",
+                            "regExp": "^[A-C]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C)"
                         },
                         "omrOptions": [
@@ -43733,7 +43733,7 @@
                             "value": "QUESTION 14"
                         },
                         "validate": {
-                            "regExp": "[A-E]",
+                            "regExp": "^[A-E]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D E)"
                         },
                         "omrOptions": [
@@ -43804,7 +43804,7 @@
                             "value": "QUESTION 15"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D)"
                         },
                         "omrOptions": [
@@ -43886,7 +43886,7 @@
                             "value": "QUESTION 16"
                         },
                         "validate": {
-                            "regExp": "[A-E]",
+                            "regExp": "^[A-E]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D E)"
                         },
                         "omrOptions": [
@@ -43933,7 +43933,7 @@
                             "value": "QUESTION 17"
                         },
                         "validate": {
-                            "regExp": "[A-B]",
+                            "regExp": "^[A-B]{0,1}$",
                             "errorMsg": "Please enter valid option (A B)"
                         },
                         "omrOptions": [
@@ -43977,7 +43977,7 @@
                             "value": "QUESTION 18"
                         },
                         "validate": {
-                            "regExp": "[A-B]",
+                            "regExp": "^[A-B]{0,1}$",
                             "errorMsg": "Please enter valid option (A B)"
                         },
                         "omrOptions": [
@@ -44009,7 +44009,7 @@
                             "value": "QUESTION 19"
                         },
                         "validate": {
-                            "regExp": "[Y,N]",
+                            "regExp": "^[N-Y]{0,1}$",
                             "errorMsg": "Please enter valid option (Y N)"
                         },
                         "omrOptions": [
@@ -44089,7 +44089,7 @@
                             "value": "QUESTION 20"
                         },
                         "validate": {
-                            "regExp": "[A-E]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -44160,7 +44160,7 @@
                             "value": "QUESTION 21"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D)"
                         },
                         "omrOptions": [
@@ -44242,7 +44242,7 @@
                             "value": "QUESTION 22"
                         },
                         "validate": {
-                            "regExp": "[A-E]",
+                            "regExp": "^[A-E]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D E)"
                         },
                         "omrOptions": [
@@ -44337,7 +44337,7 @@
                             "value": "QUESTION 23"
                         },
                         "validate": {
-                            "regExp": "[A-F]",
+                            "regExp": "^[A-F]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D E F)"
                         },
                         "omrOptions": [
@@ -44397,7 +44397,7 @@
                             "value": "QUESTION 24"
                         },
                         "validate": {
-                            "regExp": "[A-C]",
+                            "regExp": "^[A-C]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C)"
                         },
                         "omrOptions": [
@@ -44490,7 +44490,7 @@
                             "value": "QUESTION 25"
                         },
                         "validate": {
-                            "regExp": "[A-F]",
+                            "regExp": "^[A-F]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D E F)"
                         },
                         "omrOptions": [
@@ -44574,7 +44574,7 @@
                             "value": "QUESTION 26"
                         },
                         "validate": {
-                            "regExp": "[A-E]",
+                            "regExp": "^[A-E]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D E)"
                         },
                         "omrOptions": [
@@ -44633,7 +44633,7 @@
                             "value": "QUESTION 27"
                         },
                         "validate": {
-                            "regExp": "[A-C]",
+                            "regExp": "^[A-C]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C)"
                         },
                         "omrOptions": [
@@ -44714,7 +44714,7 @@
                             "value": "QUESTION 28"
                         },
                         "validate": {
-                            "regExp": "[A-E]",
+                            "regExp": "^[A-E]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D E)"
                         },
                         "omrOptions": [
@@ -44761,7 +44761,7 @@
                             "value": "QUESTION 29"
                         },
                         "validate": {
-                            "regExp": "[A-B]",
+                            "regExp": "^[A-B]{0,1}$",
                             "errorMsg": "Please enter valid option (A B)"
                         },
                         "omrOptions": [
@@ -44805,7 +44805,7 @@
                             "value": "QUESTION 30"
                         },
                         "validate": {
-                            "regExp": "[A-B]",
+                            "regExp": "^[A-B]{0,1}$",
                             "errorMsg": "Please enter valid option (A B)"
                         },
                         "omrOptions": [
@@ -49792,7 +49792,7 @@
                             "value": "QUESTION 1"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -49862,7 +49862,7 @@
                             "value": "QUESTION 2"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -49932,7 +49932,7 @@
                             "value": "QUESTION 3"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -50002,7 +50002,7 @@
                             "value": "QUESTION 4"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -50072,7 +50072,7 @@
                             "value": "QUESTION 5"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -50142,7 +50142,7 @@
                             "value": "QUESTION 6"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -50212,7 +50212,7 @@
                             "value": "QUESTION 7"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -50282,7 +50282,7 @@
                             "value": "QUESTION 8"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -50352,7 +50352,7 @@
                             "value": "QUESTION 9"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -50422,7 +50422,7 @@
                             "value": "QUESTION 10"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -50492,7 +50492,7 @@
                             "value": "QUESTION 11"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -50562,7 +50562,7 @@
                             "value": "QUESTION 12"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -50632,7 +50632,7 @@
                             "value": "QUESTION 13"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -50702,7 +50702,7 @@
                             "value": "QUESTION 14"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -50772,7 +50772,7 @@
                             "value": "QUESTION 15"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -50842,7 +50842,7 @@
                             "value": "QUESTION 16"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -50912,7 +50912,7 @@
                             "value": "QUESTION 17"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -50982,7 +50982,7 @@
                             "value": "QUESTION 18"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -51052,7 +51052,7 @@
                             "value": "QUESTION 19"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -51122,7 +51122,7 @@
                             "value": "QUESTION 20"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -51192,7 +51192,7 @@
                             "value": "QUESTION 21"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -51262,7 +51262,7 @@
                             "value": "QUESTION 22"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -51332,7 +51332,7 @@
                             "value": "QUESTION 23"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -51402,7 +51402,7 @@
                             "value": "QUESTION 24"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -51472,7 +51472,7 @@
                             "value": "QUESTION 25"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -51542,7 +51542,7 @@
                             "value": "QUESTION 26"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -51612,7 +51612,7 @@
                             "value": "QUESTION 27"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -51682,7 +51682,7 @@
                             "value": "QUESTION 28"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -51752,7 +51752,7 @@
                             "value": "QUESTION 29"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -51822,7 +51822,7 @@
                             "value": "QUESTION 30"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -69599,6 +69599,12 @@
                         "minHeight": 0,
                         "detectionRadius": 12
                     },
+                    "resultValidation": {
+                        "validate": {
+                            "regExp": "^[0-1]{0,1}$",
+                            "errorMsg": "Omr result should be 1 or 0"
+                        }
+                    },
                     "cells": [
                         {
                             "cellId": "1",
@@ -73595,7 +73601,7 @@
                             "value": "QUESTION 1"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -73665,7 +73671,7 @@
                             "value": "QUESTION 2"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -73735,7 +73741,7 @@
                             "value": "QUESTION 3"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -73805,7 +73811,7 @@
                             "value": "QUESTION 4"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -73875,7 +73881,7 @@
                             "value": "QUESTION 5"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -73945,7 +73951,7 @@
                             "value": "QUESTION 6"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -74015,7 +74021,7 @@
                             "value": "QUESTION 7"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -74085,7 +74091,7 @@
                             "value": "QUESTION 8"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -74155,7 +74161,7 @@
                             "value": "QUESTION 9"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -74225,7 +74231,7 @@
                             "value": "QUESTION 10"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -74295,7 +74301,7 @@
                             "value": "QUESTION 11"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -74365,7 +74371,7 @@
                             "value": "QUESTION 12"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -74435,7 +74441,7 @@
                             "value": "QUESTION 13"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -74505,7 +74511,7 @@
                             "value": "QUESTION 14"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -74575,7 +74581,7 @@
                             "value": "QUESTION 15"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -74645,7 +74651,7 @@
                             "value": "QUESTION 16"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -74715,7 +74721,7 @@
                             "value": "QUESTION 17"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -74785,7 +74791,7 @@
                             "value": "QUESTION 18"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -74855,7 +74861,7 @@
                             "value": "QUESTION 19"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -74925,7 +74931,7 @@
                             "value": "QUESTION 20"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -74995,7 +75001,7 @@
                             "value": "QUESTION 21"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -75065,7 +75071,7 @@
                             "value": "QUESTION 22"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -75135,7 +75141,7 @@
                             "value": "QUESTION 23"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -75205,7 +75211,7 @@
                             "value": "QUESTION 24"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -75275,7 +75281,7 @@
                             "value": "QUESTION 25"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -75345,7 +75351,7 @@
                             "value": "QUESTION 26"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -75415,7 +75421,7 @@
                             "value": "QUESTION 27"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -75485,7 +75491,7 @@
                             "value": "QUESTION 28"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -75555,7 +75561,7 @@
                             "value": "QUESTION 29"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
@@ -75625,7 +75631,7 @@
                             "value": "QUESTION 30"
                         },
                         "validate": {
-                            "regExp": "[A-D]",
+                            "regExp": "^[A-D]{0,1}$",
                             "errorMsg": "Please enter valid option (A B C D )"
                         },
                         "omrOptions": [
