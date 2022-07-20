@@ -170,21 +170,24 @@ android {
             //println project.hasProperty('MYAPP_RELEASE_STORE_FILE')
             //println signingConfigs.release
 
-            //signingConfig signingConfigs.release
-            //signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
+            // signingConfig signingConfigs.debug
       
-            // shrinkResources enableProguardInReleaseBuilds
-            // zipAlignEnabled enableProguardInReleaseBuilds
-            // useProguard enableProguardInReleaseBuilds
+            shrinkResources enableProguardInReleaseBuilds
+            zipAlignEnabled enableProguardInReleaseBuilds
+            useProguard enableProguardInReleaseBuilds
 
             minifyEnabled enableProguardInReleaseBuilds
-            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             debug {
                 debuggable true
             }
         }
     }
 
+    packagingOptions {
+        jniLibs.useLegacyPackaging = true
+    }
     // applicationVariants are e.g. debug, release
     applicationVariants.all { variant ->
         variant.outputs.each { output ->
