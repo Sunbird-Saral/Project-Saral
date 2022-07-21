@@ -220,7 +220,7 @@ const ScannedDetailsComponent = ({
                 let withNoDigits = e.format.name.replace(/[0-9]/g, '');
                 let wordLen = withNoDigits.length;
                 let multiple = 0
-                if (wordLen === checkRoLLNumberExist.length && withNoDigits === checkRoLLNumberExist && (parseInt(e.consolidatedPrediction) != 0)) {
+                if (wordLen === checkRoLLNumberExist.length && withNoDigits === checkRoLLNumberExist && (e.consolidatedPrediction) != 0) {
                     multiple = multiple + 1
                 }
                 return multiple
