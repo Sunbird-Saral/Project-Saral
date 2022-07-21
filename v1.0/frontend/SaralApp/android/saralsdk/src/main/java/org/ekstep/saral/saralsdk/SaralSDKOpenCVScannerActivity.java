@@ -21,6 +21,7 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.ReactContext;
 
 import org.ekstep.saral.saralsdk.hwmodel.HWClassifier;
+import org.ekstep.saral.saralsdk.hwmodel.HWBlockLettersClassifier;
 import org.ekstep.saral.saralsdk.hwmodel.PredictionListener;
 import org.ekstep.saral.saralsdk.opencv.DetectShaded;
 import org.ekstep.saral.saralsdk.opencv.TableCornerCirclesDetection;
@@ -41,6 +42,7 @@ import org.opencv.imgproc.Imgproc;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.List;
 
 public class SaralSDKOpenCVScannerActivity extends ReactActivity implements CameraBridgeViewBase.CvCameraViewListener2 {
@@ -171,6 +173,74 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                 }
             }
         });
+
+        HWBlockLettersClassifier.getInstance().setPredictionListener(new PredictionListener() {
+            @Override
+            public void OnPredictionSuccess(int digit, float confidence, String id) {
+                Log.d(TAG, "predicted digit:" + digit + " unique id:" + id + " confidence:" + confidence);
+                Map<Integer,String> lettersMap = new HashMap<>();
+                int index=0;
+                for(int i=0;i<=9;i++)
+                {
+                    lettersMap.put(index,String.valueOf(i));
+                    index++;                  
+                }
+                lettersMap.put(index,"");
+                index++;
+                for(char c = 'A'; c <= 'Z'; ++c)
+                {
+                    lettersMap.put(index,c+"");
+                    index++;
+                }
+                mTotalClassifiedCount++;
+                    try {
+                        JSONObject result = new JSONObject();
+                        if(digit != 36 && lettersMap.get(digit)!=null) {
+                            result.put("prediction", lettersMap.get(digit));
+                            result.put("confidence", new Double(confidence));
+                        }else{
+                            // if classifier is 10 , assigning prediction as 0
+                            result.put("prediction", "");
+                            result.put("confidence", new Double(0));
+                        }
+                        mPredictedDigits.put(id, result.toString());
+                    } catch (JSONException e) {
+                        Log.e(TAG, "unable to create prediction object");
+                    }
+                if (mIsClassifierRequestSubmitted && mTotalClassifiedCount >= mPredictedDigits.size()) {
+                    mIsScanningComplete     = true;
+                }
+
+                if (mIsScanningComplete) {
+                    Log.d(TAG, "Scaning completed, classification count " + mTotalClassifiedCount);
+                    processScanningCompleted();
+                }
+          
+            }
+
+            @Override
+            public void OnPredictionFailed(String error, String id) {
+                Log.e(TAG, "Model prediction failed");
+                mTotalClassifiedCount++;
+                try {
+                    JSONObject result = new JSONObject();
+                    result.put("prediction", new Integer(0));
+                    result.put("confidence", new Double(0.0));
+                    mPredictedDigits.put(id, result.toString());
+                } catch (JSONException e) {
+                    Log.e(TAG, "unable to create prediction object");
+                }
+
+                if (mIsClassifierRequestSubmitted && mTotalClassifiedCount >= mPredictedDigits.size()) {
+                    mIsScanningComplete     = true;
+                }
+
+                if (mIsScanningComplete) {
+                    Log.d(TAG, "Scaning completed, classification count " + mTotalClassifiedCount);
+                    processScanningCompleted();
+                }
+            }
+        });        
     }
 
     public void onDestroy() {
@@ -212,7 +282,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
         }
         return mRgba;
     }
-
+    
     private void processCameraFrame(Mat image, long frameCount) {
         double DARKNESS_THRESHOLD   = 80.0;
         mStartTime                  = SystemClock.uptimeMillis();
@@ -273,6 +343,20 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                             HWClassifier.getInstance().classifyMat(digitROI, roiId);
                         }
                     }
+
+                    if (roiConfig.getString("extractionMethod").equals("BLOCK_ALPHANUMERIC_CLASSIFICATION")) {
+                        String roiId        = roiConfig.getString("roiId");
+                        JSONObject rect      = roiConfig.getJSONObject("rect");
+
+                        mPredictedDigits.put(roiId, "0");
+                        Mat alphaNumericROI        = mDetectShaded.getROIMat(tableMat, rect.getInt("top"), rect.getInt("left"), rect.getInt("bottom"), rect.getInt("right"));
+                        mRoiMatBase64.put(roiId,createBase64FromMat(alphaNumericROI));
+                        if(HWBlockLettersClassifier.getInstance().isInitialized() == true) {
+                            Log.d(TAG, "Requesting prediction for: " + roiId);
+                            HWBlockLettersClassifier.getInstance().classifyMat(alphaNumericROI, roiId);
+                        }
+                    }
+
                 }
                 mIsClassifierRequestSubmitted = true;
                 Log.d(TAG, "Detected OMR count: " + mPredictedOMRs.size() + " classifier count: " + mPredictedDigits.size());
@@ -411,7 +495,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                 for (int j = 0; j < cellROIs.length(); j++) {
                     JSONObject roi      = cellROIs.getJSONObject(j);
                     String roiId = roi.getString("roiId");
-                    if (roi.getString("extractionMethod").equals("NUMERIC_CLASSIFICATION")) {
+                    if (roi.getString("extractionMethod").equals("NUMERIC_CLASSIFICATION") || roi.getString("extractionMethod").equals("BLOCK_ALPHANUMERIC_CLASSIFICATION")) {
                         JSONObject result  = new JSONObject(mPredictedDigits.get(roiId));
                         roi.put("result", result);
                         if(mRoiMatBase64.get(roiId)!=null)

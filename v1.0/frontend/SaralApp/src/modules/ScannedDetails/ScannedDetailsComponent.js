@@ -264,7 +264,7 @@ const ScannedDetailsComponent = ({
         });
 
        let removeZeroRollStd = marTemp.filter((data, i) => { 
-            if (parseInt(data.RollNo) != 0) {
+            if ((data.RollNo) != 0) {
                 return true
             }
         })
@@ -1265,7 +1265,7 @@ const ScannedDetailsComponent = ({
                                                     <Text style={[styles.nameTextStyle, { fontWeight: 'bold', color: AppTheme.BLACK, fontSize: AppTheme.FONT_SIZE_LARGE }]}>{minimalFlag ? loginData.data.school.name : studentData.length > 0 && studentData[0].name}</Text>
                                                     <TextField
                                                         labelText={BrandLabel && BrandLabel.StudentId ? BrandLabel.StudentId : Strings.student_id}
-                                                        errorField={stdErr != '' || isNaN(studentId)}
+                                                        errorField={stdErr != ''}
                                                         // errorText={BrandLabel && BrandLabel.CorrectId ? stdErr != '' ? stdErr : BrandLabel.CorrectId : stdErr != '' ? stdErr : Strings.please_correct_student_id}
                                                         errorText={ stdErr != '' ? stdErr : Strings.please_correct_student_id}
                                                         onChangeText={(text) => {
@@ -1276,7 +1276,7 @@ const ScannedDetailsComponent = ({
                                                         }}
                                                         value={studentId}
                                                         editable={edit}
-                                                        keyboardType={'numeric'}
+                                
                                                         />
                                                         {
                                                             !minimalFlag
