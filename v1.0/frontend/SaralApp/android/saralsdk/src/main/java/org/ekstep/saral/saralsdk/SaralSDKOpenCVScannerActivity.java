@@ -1,5 +1,11 @@
 package org.ekstep.saral.saralsdk;
 
+import androidx.appcompat.app.AppCompatActivity;
+import org.ekstep.saral.saralsdk.R;
+import android.os.Bundle;
+import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -42,18 +48,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
-
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import org.opencv.core.Core;
-import org.opencv.core.MatOfByte;
 import org.opencv.imgcodecs.Imgcodecs;
-// import javax.swing.*;
+
+
+
+
+
 
 
 public class SaralSDKOpenCVScannerActivity extends ReactActivity implements CameraBridgeViewBase.CvCameraViewListener2 {
@@ -86,8 +86,14 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
     private int layoutMinWidth = 0;
     private int layoutMinHeight = 0;
     private int detectionRadius = 0;
+    // private int width = 963;
+    // private int height=640;
+    // private BufferedImage image= null;
     // private ImageIcon image;
     // private JLabel label1;
+
+    
+   
 
     public SaralSDKOpenCVScannerActivity() {
         Log.i(TAG, "Instantiated new " + this.getClass());
@@ -221,23 +227,13 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
             processCameraFrame(mRgba, mframeCount);
             mframeCount++;
         } else {
-            Log.d(TAG, "showProcessingInformation");
-            // showProcessingInformation(mRgba);
-            System.loadLibrary( Core.NATIVE_LIBRARY_NAME ); 
-            String f = ""; 
-            Mat img = Imgcodecs.imread(f); 
-            MatOfByte mat = new MatOfByte();       
-            Imgcodecs.imencode("", img, mat); 
-            byte[] byteArray = mat.toArray(); 
-            InputStream in = new ByteArrayInputStream(byteArray); 
-            BufferedImage buf = ImageIO.read(in); 
-            JFrame fr = new JFrame(); 
-            fr.getContentPane().add(new JLabel(new ImageIcon(buf))); 
-            fr.pack(); 
-            fr.setVisible(true);
-            
-            System.out.println("Image Loaded");     
+            // Log.d(TAG, "showProcessingInformation");
+           
+           
+         showProcessingInformation(mRgba);
+                
         }
+    
         return mRgba;
     }
 
@@ -423,7 +419,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
     }
 
     private JSONObject getScanResult() {
-
+        
         try {
             JSONObject layoutConfigs = new JSONObject(mlayoutConfigs);
             JSONObject layoutObject = layoutConfigs.getJSONObject("layout");
@@ -508,49 +504,40 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
             return null;
         }
     }
-
+     private void showProcessingInformation(Mat image) {
+        // System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+        Imgcodecs imageCodecs = new Imgcodecs();     
+        String file     = "C:/Users/test/Desktop/Saralproject/Project-Saral/v1.0/frontend/SaralApp/android/saralsdk/download.png";
+        Mat matrix = imageCodecs.imread(file);
+         Log.d(TAG,"matrixxxx" + image);
+         
+         Point position  = new Point(image.width()/5, image.height() / 2);
+         Scalar color    = new Scalar(0, 0, 255);
+         int font        = Imgproc.COLOR_BGR2GRAY;
+         int scale       = 1;
+         int thickness   = 3;
+         Imgproc.putText(image, file, position, font, scale, color, thickness);
+          
+                    // Imgcodecs imageCodecs = new Imgcodecs(); 
+                    // String file ="C:/Users/test/Desktop/Saralproject/Project-Saral/v1.0/frontend/SaralApp/android/saralsdk/download.png";   
+                    // Mat matrix = imageCodecs.imread(file); 
+                    // // String file2 = "C:/EXAMPLES/OpenCV/sample_resaved.jpg"; 
+                    // Point position  = new Point(image.width()/5, image.height() / 2);
+                    // // Scalar color    = new Scalar(0, 0, 255);
+                    // int font        = Imgproc.COLOR_BGR2GRAY;
+                    // int scale       = 1;
+                    // int thickness   = 3;
+                    // Log.d(TAG, "matriximages" + matrix);
+                    // // return file;
+                    //  Imgproc.putText(image, matrix, file ,position , font, scale);
+         }
+            
+        // }
+        
    
-    // private ImageIcon image2;
-    // private JLabel label2;
-
-    // private void showProcessingInformation(){
-    //     setLayout(new FlowLayout());
-
-    //     image1 =new ImageIcon(getClass().getResource("download.png"));
-    //     label1 = new JLabel(image1);
-    //     add(label1);
-
-    //     // image2 =new ImageIcon(getClass().getResource("download1.png"));
-    //     // label2 = new JLabel(image2);
-    //     // add(label2);
-    // }
-    // public static void main (String args[]){
-    //     showProcessingInformation gui = new showProcessingInformation();
-    //     // gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    //     gui.setVisible(true);
-    //     gui.pack();
-    //     gui.setTitle("Image program");
-    // }
-
-    // private String showProcessingInformation() {
-    //    public class showProcessingInformation {
-    //         public void main(String args[]) throws Exception { 
-    //            System.loadLibrary( Core.NATIVE_LIBRARY_NAME ); 
-    //            String f = ""; 
-    //            Mat img = Imgcodecs.imread(f); 
-    //            MatOfByte mat = new MatOfByte();       
-    //            Imgcodecs.imencode("", img, mat); 
-    //            byte[] byteArray = mat.toArray(); 
-    //            InputStream in = new ByteArrayInputStream(byteArray); 
-    //            BufferedImage buf = ImageIO.read(in); 
-    //            JFrame fr = new JFrame(); 
-    //            fr.getContentPane().add(new JLabel(new ImageIcon(buf))); 
-    //            fr.pack(); 
-    //            fr.setVisible(true);
-               
-    //            System.out.println("Image Loaded");     
-    //         } 
-    //      }
+//  }
+ 
+       
     private String createBase64FromMat(Mat image) {
         Bitmap resultBitmap = Bitmap.createBitmap(image.cols(), image.rows(), Bitmap.Config.ARGB_8888);
         Utils.matToBitmap(image, resultBitmap);
