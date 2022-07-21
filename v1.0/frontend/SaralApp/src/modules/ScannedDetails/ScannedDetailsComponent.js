@@ -264,7 +264,7 @@ const ScannedDetailsComponent = ({
         });
 
        let removeZeroRollStd = marTemp.filter((data, i) => { 
-            if (parseInt(data.RollNo) != 0) {
+            if ((data.RollNo) != 0) {
                 return true
             }
         })
@@ -369,7 +369,8 @@ const ScannedDetailsComponent = ({
                 let regex = new RegExp(regexExp)
                 result = regex.test(number);
                 // setOmrResult(regexErrormsg)
-                setOmrResult(defaultValidateError)
+                  setOmrResult(defaultValidateError)
+                  
 
             }
         }
@@ -377,21 +378,10 @@ const ScannedDetailsComponent = ({
     }
 
 
-    const goNextFrame = () => {
-
-        let validCell = false
-        let omrMark = false
-        for (let i = 0; i < newArrayValue.length; i++) {
-            if (newArrayValue[i].consolidatedPrediction === '') {
-                validCell = true
-            }
-            else if (newArrayValue[i].consolidatedPrediction === 0) {
-                omrMark = true
-            }
-        }
+    const goNextFrame = () => {  
+        let regexvalidate = omrValidation()
+    
         let duplication = false
-
-        let cellOmrValidation = validateCellOMR(true)
         const duplicate = checkStdRollDuplicate.some((item) => studentId == item)
 
         if (duplicate && !toggleCheckBox) {
@@ -399,21 +389,14 @@ const ScannedDetailsComponent = ({
         } else {
             duplication = false
         }
-        if (omrMark) {
-            showErrorMessage(omrResultErr ? omrResultErr : defaultValidateError || Strings.omr_mark_should_be)
+        if (regexvalidate) {
+            showErrorMessage(omrResultErr ? omrResultErr : defaultValidateError)
         }
-        else if (cellOmrValidation[0]) {
-            showErrorMessage(`omr value should be 0 to ${cellOmrValidation[1] + 1}`)
-        }
+        
         else if (duplication) {
             callCustomModal(Strings.message_text, Strings.Student_ID_Shouldnt_be_duplicated,false);
         }
-        else if (disable) {
-            showErrorMessage(Strings.please_correct_marks_data)
-        }
-        else if (validCell) {
-            showErrorMessage(Strings.please_correct_marks_data)
-        }
+       
         else if (!studentValid && !toggleCheckBox) {
             showErrorMessage(Strings.please_correct_student_id)
             setStdErr(Strings.please_correct_student_id)
@@ -443,7 +426,6 @@ const ScannedDetailsComponent = ({
                 //save validated student
                 dispatch(OcrLocalResponseAction(JSON.parse(JSON.stringify(ocrLocalResponse))))
                 setCheckStdRollDuplicate([...checkStdRollDuplicate, studentId])
-                validCell = false
                 setNewArrayValue(structureList[currentIndex + 1].data)
                 setStudentID(structureList[currentIndex + 1].RollNo)
                 setCurrentIndex(currentIndex + 1)
@@ -557,7 +539,7 @@ const ScannedDetailsComponent = ({
                     }
                     let putTrainingData = loginData.data.school.storeTrainingData ? marks_data.trainingData = value.consolidatedPrediction != value.predictedMarks ? value.trainingDataSet : [] : ''
                     marks_data.questionId = value.format.name,
-                        marks_data.obtainedMarks = value.consolidatedPrediction
+                    marks_data.obtainedMarks = value.consolidatedPrediction? value.consolidatedPrediction : ""
                     stdTotalMarks = Number(stdTotalMarks) + Number(value.consolidatedPrediction)
                     stdMarks_info.push(marks_data)
 
@@ -761,7 +743,7 @@ const ScannedDetailsComponent = ({
             }
 
             let newArray = JSON.parse(JSON.stringify(array))
-            newArray[index].consolidatedPrediction = text > 1 ? 0 : text
+            newArray[index].consolidatedPrediction = text.length>0&& text > 1 ? 0 : text
             setNewArrayValue(newArray)
 
             ocrLocalResponse.layout.cells.forEach(element => {
@@ -769,11 +751,11 @@ const ScannedDetailsComponent = ({
                 if (element.cellId == value.cellId) {
                     structureList.forEach(Datas => {
                         //this'll add into OCRLocal
-                        element.consolidatedPrediction = text < 1 ? 0 : text
+                        element.consolidatedPrediction = text.length<0&&text < 1 ? 0 : text
                         //this'll add in  structurelist
                         Datas.data.forEach((el, index) => {
                             if (el.cellId === value.cellId) {
-                                el.consolidatedPrediction = text > 1 ? 0 : text
+                                el.consolidatedPrediction = text.length>0&&text > 1 ? 0 : text
                             }
                         });
 
@@ -878,7 +860,6 @@ const ScannedDetailsComponent = ({
         var regextResult = false
             for (let j = 0; j < newArrayValue.length; j++) {
                 let filter = ocrLocalResponse.layout.cells.filter((el)=> el.cellId == newArrayValue[j].cellId);
-                if (filter[0].hasOwnProperty("omrOptions")) {   
                     let consolidated = filter[0].consolidatedPrediction
                     regexErrormsg = filter && filter[0].validate && filter[0].validate.errorMsg
                     let regexExp = filter[0] && filter[0].validate && filter[0].validate.regExp ? filter[0].validate.regExp : defaultValidateExp
@@ -888,8 +869,7 @@ const ScannedDetailsComponent = ({
                     
                     if (!result) {
                         regextResult = !result
-                        showErrorMessage(`${regexErrormsg}`)
-                    }
+
                 }
         }
     return regextResult
@@ -902,38 +882,25 @@ const ScannedDetailsComponent = ({
         let regexErrormsglist
         for (let i = 0; i < newArrayValue.length; i++) {
             let consolidatedlist = newArrayValue[i].consolidatedPrediction
-             regexErrormsglist = newArrayValue[i] && newArrayValue[i].validate && newArrayValue[i].validate.errorMsg
-            let regexlist = newArrayValue[i].validate && newArrayValue[i].validate.regExp
+             regexErrormsglist = newArrayValue[i] && newArrayValue[i].validate && newArrayValue[i].validate.errorMsg ? newArrayValue[i].validate.errorMsg : defaultValidateError
+            let regexlist = newArrayValue[i].validate && newArrayValue[i].validate.regExp ? newArrayValue[i].validate.regExp : defaultValidateExp
             let number = consolidatedlist;
             let regexvalue = new RegExp(regexlist)
             let resultlist = regexvalue.test(number);
-            if (newArrayValue[i].consolidatedPrediction === '') {
-                validCell = true
-            }
-            else if (newArrayValue[i].consolidatedPrediction === 0) {
-                omrMark = true
-            }
-            else if (resultlist === true) {
+             if (resultlist == false) {
                 resultMark = true
             }
         }
-
         let regexValidation
-        console.log("isOmroptions",isOmrOptions);
-        if (isOmrOptions) {
-            regexValidation = omrValidation();
-        }
 
 
         let cellOmrValidation = validateCellOMR(false)
-        if (disable || validCell) {
-            showErrorMessage(Strings.please_correct_marks_data)
-        }
-        else if(regexValidation){
+
+        if(regexValidation){
         }
         else if (cellOmrValidation[0]) {
             if (typeof(cellOmrValidation[1]) == 'number') {
-                showErrorMessage(`omr value should be 0 to ${cellOmrValidation[1]}`)
+                showErrorMessage(`${regexErrormsglist}`)
             } 
         }
         else if (!studentValid && !toggleCheckBox) {
@@ -942,8 +909,8 @@ const ScannedDetailsComponent = ({
         else if (isStudentValid) {
             showErrorMessage(Strings.student_id_should_be_same)
         }
-        else if (resultMark ===false) {
-            showErrorMessage(Strings.please_correct_marks_data)
+        else if (resultMark) {
+            showErrorMessage(`${regexErrormsglist}`)
         }
         else {
             if (sumOfObtainedMarks > 0) {
@@ -965,7 +932,8 @@ const ScannedDetailsComponent = ({
                 //DO summ of all result from extract_MAX_OBTAINED_MARKS except max marks and obtained marks
                 let maximum = 0;
                 let sum = extract_MAX_OBTAINED_MARKS.forEach((e) => {
-                    maximum = parseInt(maximum) + parseInt(e.consolidatedPrediction)
+                    let consMark = e.consolidatedPrediction == '' ? 0 : e.consolidatedPrediction
+                    maximum = parseInt(maximum) + parseInt(consMark)
                     return maximum
                 });
                 console.log("sumOfObtained", maximum);
@@ -1297,7 +1265,7 @@ const ScannedDetailsComponent = ({
                                                     <Text style={[styles.nameTextStyle, { fontWeight: 'bold', color: AppTheme.BLACK, fontSize: AppTheme.FONT_SIZE_LARGE }]}>{minimalFlag ? loginData.data.school.name : studentData.length > 0 && studentData[0].name}</Text>
                                                     <TextField
                                                         labelText={BrandLabel && BrandLabel.StudentId ? BrandLabel.StudentId : Strings.student_id}
-                                                        errorField={stdErr != '' || isNaN(studentId)}
+                                                        errorField={stdErr != ''}
                                                         // errorText={BrandLabel && BrandLabel.CorrectId ? stdErr != '' ? stdErr : BrandLabel.CorrectId : stdErr != '' ? stdErr : Strings.please_correct_student_id}
                                                         errorText={ stdErr != '' ? stdErr : Strings.please_correct_student_id}
                                                         onChangeText={(text) => {
@@ -1308,7 +1276,7 @@ const ScannedDetailsComponent = ({
                                                         }}
                                                         value={studentId}
                                                         editable={edit}
-                                                        keyboardType={'numeric'}
+                                
                                                         />
                                                         {
                                                             !minimalFlag

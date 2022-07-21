@@ -177,6 +177,7 @@ components:
           enum:
             - NUMERIC_CLASSIFICATION
             - CELL_OMR
+            - BLOCK_ALPHANUMERIC_CLASSIFICATION
         rect:
           $ref: '#/components/schemas/rect'
         result:
