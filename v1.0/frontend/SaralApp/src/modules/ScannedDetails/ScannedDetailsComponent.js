@@ -494,7 +494,7 @@ const ScannedDetailsComponent = ({
         let checkRoLLNumberExist = ocrLocalResponse.layout.hasOwnProperty("identifierPrefix") ? ocrLocalResponse.layout.identifierPrefix : multipleStudent[0]
         let storeTrainingData = ocrLocalResponse.layout.cells.filter((element) => {
 
-            if (element.format.name.slice(0, checkRoLLNumberExist.length) == checkRoLLNumberExist) {
+            if (element.format.name.slice(0, checkRoLLNumberExist.length) == checkRoLLNumberExist && element.consolidatedPrediction != 0) {
                 return true
             }
         })

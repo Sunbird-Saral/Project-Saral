@@ -312,9 +312,12 @@ class MyScanComponent extends Component {
             roisData.layout.cells[i].consolidatedPrediction = marks
             roisData.layout.cells[i].predictionConfidence = predictionConfidenceArray
             let rollNumber = roisData.layout.cells[i].format.name.replace(/[0-9]/g, '');
-            if ((rollNumber === neglectData[0] && rollNumber.length == neglectData[0].length) || (rollNumber.trim() === multipleStudent[0])) {
+            if ((rollNumber === neglectData[0] && rollNumber.length == neglectData[0].length)) {
                 roisData.layout.cells[i].studentIdPrediction = marks
-            } else {
+            } else if((rollNumber.trim() === multipleStudent[0] && rollNumber != 0)){
+                roisData.layout.cells[i].studentIdPrediction = marks
+            }
+            else {
                 roisData.layout.cells[i].predictedMarks = marks
             }
 
