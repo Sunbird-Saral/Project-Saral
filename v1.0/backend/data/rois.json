@@ -27282,9 +27282,6 @@
                         "format": {
                             "name": "ROLLNUMBER",
                             "value": "ROLLNUMBER"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
