@@ -310,7 +310,16 @@ class MyScanComponent extends Component {
             roisData.layout.cells[i].consolidatedPrediction = marks
             roisData.layout.cells[i].predictionConfidence = predictionConfidenceArray
             let rollNumber = roisData.layout.cells[i].format.name.replace(/[0-9]/g, '');
-            let checkRoLLNumberExist = roisData.layout.hasOwnProperty("identifierPrefix") ? roisData.layout.identifierPrefix : multipleStudent[0]
+            let checkRoLLNumberExist = '';
+
+            if (roisData.layout.hasOwnProperty("identifierPrefix")) {
+                checkRoLLNumberExist = roisData.layout.identifierPrefix
+            } else if (rollNumber == neglectData[0]) {
+                checkRoLLNumberExist = rollNumber
+            } else {
+               checkRoLLNumberExist = multipleStudent[0]
+            }
+
             if ((rollNumber === checkRoLLNumberExist && rollNumber.length == checkRoLLNumberExist.length)) {
                 roisData.layout.cells[i].studentIdPrediction = marks
             } else if((rollNumber.trim() === checkRoLLNumberExist && rollNumber != 0)){
