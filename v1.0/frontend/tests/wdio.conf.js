@@ -24,20 +24,22 @@ exports.config = {
     //
     specs: [
         [
-            './specs/guj_1student_5question.js',
-            './specs/guj_1student_12question.js',
-            './specs/up_4student_20question.js',
-            './specs/up_8student_13question.js',
-            './specs/up_3student_30question.js',
-            './specs/multi_Subject.js',
-            './specs/1_student_10question.js',
-            './specs/10_student_10question_7d.js',
-            './specs/30Q_school_evaluation.js',
-            './specs/any_10student_10q_omr(book distribution).js',
-            './specs/midDay_meal.js',
-            './specs/od_1student_20question.js',
-            './specs/hindi_8s_13q_9d_omr.js',
-            './specs/ANY_1S_9D_30Q_4omr_mcq.js'
+            // './specs/guj_1student_5question.js',
+            // './specs/guj_1student_12question.js',
+            // './specs/up_4student_20question.js',
+            // './specs/up_8student_13question.js',
+            // './specs/up_3student_30question.js',
+            // './specs/multi_Subject.js',
+            //  './specs/1_student_10question.js',
+            // './specs/10_student_10question_7d.js',
+            // './specs/30Q_school_evaluation.js',
+            // './specs/any_10student_10q_omr(book distribution).js',
+            // './specs/midDay_meal.js',
+            // './specs/od_1student_20question.js',
+            // './specs/hindi_8s_13q_9d_omr.js',
+            // './specs/ANY_1S_9D_30Q_4omr_mcq.js',
+            './specs/ANY_1S_30QMCQ_School_evaluation.js'
+           
 
         ]
 

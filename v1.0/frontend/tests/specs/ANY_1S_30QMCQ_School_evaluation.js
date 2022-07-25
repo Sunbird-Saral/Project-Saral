@@ -9,7 +9,7 @@ describe('up_4s_20question', () => {
   it('find elements', async () => {
     // schoolId and password
     await driver.pause(5000);
-    LOGININPUT.u001();
+    LOGININPUT.u002();
 
 
     await driver.pause(2000);
@@ -28,18 +28,25 @@ describe('up_4s_20question', () => {
     await openClassDropdown.click();
    
     
-    const class2 = await AppObject.selectClass_2
+    const class2 = await AppObject.selectClass_3
     await class2.waitForDisplayed()
     assert.equal(await class2.isDisplayed(), true)
     await class2.click();
 
+    await driver.pause(2000)
+    const openSectionDropdown = await AppObject.sectionSubject_dropdown[1]
+    await openSectionDropdown.waitForDisplayed();
+    assert.equal(await openSectionDropdown.isDisplayed(), true)
+    await openSectionDropdown.click();
+    await AppObject.selectSection_A.click();
 
+    await driver.pause(2000)
     const openSubjectDropdown = await AppObject.sectionSubject_dropdown[2]
     await openSubjectDropdown.waitForDisplayed();
     assert.equal(await openSubjectDropdown.isDisplayed(), true)
     await openSubjectDropdown.click();
 
-    const subject =  await AppObject.selectSubject_2D_UP
+    const subject =  await AppObject.selectSubject_3A
     await subject.waitForDisplayed();
     assert.equal(await subject.isDisplayed(), true)
     await subject.click();
@@ -47,10 +54,6 @@ describe('up_4s_20question', () => {
 
     await AppObject.submitBtn.click();
     await driver.pause(5000);
-    await AppObject.scrollView
-    await driver.pause(2000);
-    await $('android=new UiScrollable(new UiSelector().scrollable(true)).scrollTextIntoView("1210001")');
-    await driver.pause(2000);
     await AppObject.scrollView
     await AppObject.nextBtn.click();
 
@@ -84,34 +87,21 @@ it('page1 validation test', async () => {
     await driver.pause(3000);
      await AppObject.scrollView
 
-    await AppObject.predictedMarks.clearValue();
-    await AppObject.scrollView
-    await AppObject.nextBtn.click();
-    await AppObject.ok.click();
-   
+    await AppObject.predictedAlphabet.clearValue();
+    
     await AppObject.scrollScanPage
-    await AppObject.inputMarks.addValue('6');
-    const regexMsg = await AppObject.regexValidationMsg0_1
-    await regexMsg.waitForDisplayed();
-    assert.equal(await regexMsg.isDisplayed(), true)
+    await AppObject.inputMarks.addValue('I');
     await AppObject.ok.click();
     
 
     await driver.pause(5000);
-    await AppObject.clearInputMarks.clearValue()
-    await AppObject.inputMarks.addValue('0');
+    await AppObject.clearAlphabet.clearValue()
+    await AppObject.inputMarks.addValue('A');
     await AppObject.scrollView
-    await AppObject.nextBtn.click();
+    await AppObject.SUBMIT.click();
    
 });
 
-it('page_2 validation test', async () => {
-    await driver.pause(3000);
-    await AppObject.nextBtn.click();
-    await AppObject.nextBtn.click();
-    await AppObject.SUBMIT.click();
-
-});
 
   it('after scan test cases', async () =>{
     await driver.pause(3000);

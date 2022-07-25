@@ -1,6 +1,6 @@
 class AppObject {
     get waitFiveSecond() {
-        return driver.pause(5000)  
+        return driver.pause(5000)
     }
     get schoolId() {
         return $('//*[@text="School Id"]');
@@ -56,11 +56,11 @@ class AppObject {
     }
 
     get class_dropdown() {
-        return $("android.widget.ImageView");  
+        return $("android.widget.ImageView");
     }
 
     get sectionSubject_dropdown() {
-        return $$("android.widget.ImageView");  
+        return $$("android.widget.ImageView");
     }
 
     get selectClass_2() {
@@ -81,17 +81,17 @@ class AppObject {
     get selectClass_9() {
         return $("//android.widget.TextView[@text='Class-9']");
     }
-   
-  
-    get selectSection_B(){
+
+
+    get selectSection_B() {
         return $("//android.widget.TextView[@text='B']");
     }
 
-    get selectSection_C(){
+    get selectSection_C() {
         return $("//android.widget.TextView[@text='C']");
     }
 
-    get selectSection_A(){
+    get selectSection_A() {
         return $("//android.widget.TextView[@text='A']");
     }
 
@@ -126,7 +126,7 @@ class AppObject {
     get selectSubject_2D_midday() {
         return $("//android.widget.TextView[@text='midday-meal 07/01/2022']");
     }
-  
+
     get selectSubject_2A_assam() {
         return $("//android.widget.TextView[@text='Hindi 07/03/2022']");
     }
@@ -151,14 +151,11 @@ class AppObject {
     }
 
 
-    get scrollView() {
-        return  $('android=new UiScrollable(new UiSelector().scrollable(true)).scrollToEnd(1,5)');
-    }
 
-  
-    
+
+
     get submitSetTime() {
-       return driver.pause(5000)
+        return driver.pause(5000)
     }
 
     get submitBtn() {
@@ -179,7 +176,7 @@ class AppObject {
 
     get closeBtn() {
         return $("//android.widget.TextView[@text='CLOSE']");
-        
+
     }
 
     get saveAllBtn() {
@@ -206,22 +203,22 @@ class AppObject {
         return driver.pause(20000)
     }
 
-    get studentDetailText(){
+    get studentDetailText() {
         return $("//android.widget.TextView[@text='Student Details']");
     }
 
-    get details(){
+    get details() {
         return $("//android.widget.TextView[@text='Details']");
     }
 
 
-   
+
     get SUBMIT() {
         return $("//android.widget.TextView[@text='SUBMIT']");
     }
 
     get checkbox() {
-        return  $("android.widget.CheckBox");
+        return $("android.widget.CheckBox");
     }
 
     get logoutTxt() {
@@ -234,93 +231,113 @@ class AppObject {
 
     get goDashboard() {
         return $('//android.widget.TextView[@text="Go Back To Dashboard"]');
-   }
-   get editInput() {
-    return $('//android.widget.EditText[@text = ""]');
-}
-   get inputValue() {
+    }
+    get editInput() {
+        return $('//android.widget.EditText[@text = ""]');
+    }
+    get inputValue() {
         return $('//android.widget.EditText[@text = "3309001"]');
-   }
+    }
 
-   get studentinputValue() {
-    return $('//android.widget.EditText[@text = "1210001"]');
-}
+    get studentinputValue() {
+        return $('//android.widget.EditText[@text = "1210001"]');
+    }
 
-   get predictedMarks() {
-    return $('//android.widget.EditText[@text = "0"]');
-   }
+    get predictedMarks() {
+        return $('//android.widget.EditText[@text = "0"]');
+    }
 
-   get inputMarks() {
-    return $('//android.widget.EditText[@text = ""]');
-   }
-   
-   get clearInputMarks() {
-    return $('//android.widget.EditText[@text = "6"]');
-   }
+    get inputMarks() {
+        return $('//android.widget.EditText[@text = ""]');
+    }
 
-
-   get Back() {
-    return $('//android.widget.TextView[@text = "BACK"]');
-   }
-
-   get openDropdown_minimal() {
-    return $('//android.widget.ImageView[@text = "Select Layout"]');  
-}
-   
-get selectMinimalOption() {
-    return $("//android.widget.TextView[@text='electricity reading']");  
-}
-
-get regexValidationMsg(){
-    return $("//android.widget.TextView[@text='Omr result should be between 0 to 5']");  
-}
-
-get regexValidationMsg0_1(){
-    return $("//android.widget.TextView[@text='Omr result should be 1 or 0']");  
-}
-
-get editAndCorrectMsg() {
-    return $("//android.widget.TextView[@text='Please edit and correct result data.']")
-}
-
-get saveSuccessInDB() {
-    return $("//android.widget.TextView[@text='Saved Successfully']")
-}
-
-get scanStatus() {
-    return $$("//android.widget.TextView[@text='Scan Status']")
-}
-
-get scanData() {
-    return $("//android.widget.TextView[@text='SCAN DATA']")
-}
-
-get saveStatus() {
-    return $$("//android.widget.TextView[@text='Save Status']")
-}
-
-get savedData() {
-    return $("//android.widget.TextView[@text='SAVED DATA']")
-}
-
-get saveAllScan() {
-    return $("//android.widget.TextView[@text='SAVED ALL SCAN']")
-}
+    get clearInputMarks() {
+        return $('//android.widget.EditText[@text = "6"]');
+    }
 
 
-get tagImage() {
-    return $$("android.widget.ImageView");
-}
+    get Back() {
+        return $('//android.widget.TextView[@text = "BACK"]');
+    }
 
-get tagField() {
-    return $("//android.widget.EditText[@text='Add New Tag']")
-}
+    get openDropdown_minimal() {
+        return $('//android.widget.ImageView[@text = "Select Layout"]');
+    }
 
-get addTagButton() {
-    return $("//android.widget.TextView[@text='Add Tag']")
-}
-get scrollToDetails() {
-    return $('android=new UiScrollable(new UiSelector().scrollable(true)).scrollTextIntoView("Student Details")');
-}
+    get selectMinimalOption() {
+        return $("//android.widget.TextView[@text='electricity reading']");
+    }
+
+    get regexValidationMsg() {
+        return $("//android.widget.TextView[@text='Omr result should be between 0 to 5']");
+    }
+
+    get regexValidationMsg0_1() {
+        return $("//android.widget.TextView[@text='Omr result should be 1 or 0']");
+    }
+
+    get editAndCorrectMsg() {
+        return $("//android.widget.TextView[@text='Please edit and correct result data.']")
+    }
+
+    get saveSuccessInDB() {
+        return $("//android.widget.TextView[@text='Saved Successfully']")
+    }
+
+    get scanStatus() {
+        return $$("//android.widget.TextView[@text='Scan Status']")
+    }
+
+    get scanData() {
+        return $("//android.widget.TextView[@text='SCAN DATA']")
+    }
+
+    get saveStatus() {
+        return $$("//android.widget.TextView[@text='Save Status']")
+    }
+
+    get savedData() {
+        return $("//android.widget.TextView[@text='SAVED DATA']")
+    }
+
+    get saveAllScan() {
+        return $("//android.widget.TextView[@text='SAVED ALL SCAN']")
+    }
+
+
+    get tagImage() {
+        return $$("android.widget.ImageView");
+    }
+
+    get tagField() {
+        return $("//android.widget.EditText[@text='Add New Tag']")
+    }
+
+    get addTagButton() {
+        return $("//android.widget.TextView[@text='Add Tag']")
+
+    }
+
+    get predictedAlphabet() {
+        return $('//android.widget.EditText[@text = "A"]');
+    }
+
+    get clearAlphabet() {
+        return $('//android.widget.EditText[@text = "I"]');
+    }
+
+    // scrollable element 
+
+    get scrollView() {
+        return $('android=new UiScrollable(new UiSelector().scrollable(true)).scrollToEnd(1,5)');
+    }
+
+    get scrollScanPage() {
+        return $('android=new UiScrollable(new UiSelector().scrollable(true)).scrollTextIntoView("")');
+    }
+
+    get scrollToDetails() {
+        return $('android=new UiScrollable(new UiSelector().scrollable(true)).scrollTextIntoView("Student Details")');
+    }
 }
 export default new AppObject();
