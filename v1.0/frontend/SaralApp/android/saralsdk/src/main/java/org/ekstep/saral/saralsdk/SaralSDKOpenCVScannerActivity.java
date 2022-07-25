@@ -1,11 +1,5 @@
 package org.ekstep.saral.saralsdk;
 
-import androidx.appcompat.app.AppCompatActivity;
-import org.ekstep.saral.saralsdk.R;
-import android.os.Bundle;
-import android.widget.ImageView;
-
-import com.squareup.picasso.Picasso;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -50,12 +44,6 @@ import java.util.HashMap;
 import java.util.List;
 import org.opencv.imgcodecs.Imgcodecs;
 
-
-
-
-
-
-
 public class SaralSDKOpenCVScannerActivity extends ReactActivity implements CameraBridgeViewBase.CvCameraViewListener2 {
     private static final String TAG = "SrlSDK::Scanner";
     private static long mframeCount = 0;
@@ -91,9 +79,6 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
     // private BufferedImage image= null;
     // private ImageIcon image;
     // private JLabel label1;
-
-    
-   
 
     public SaralSDKOpenCVScannerActivity() {
         Log.i(TAG, "Instantiated new " + this.getClass());
@@ -227,13 +212,13 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
             processCameraFrame(mRgba, mframeCount);
             mframeCount++;
         } else {
-            // Log.d(TAG, "showProcessingInformation");
+            Log.d(TAG, "showProcessingInformation");
            
-           
-         showProcessingInformation(mRgba);
-                
+
+             showProcessingInformation(mRgba);
+
         }
-    
+
         return mRgba;
     }
 
@@ -504,40 +489,19 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
             return null;
         }
     }
-     private void showProcessingInformation(Mat image) {
-        // System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-        Imgcodecs imageCodecs = new Imgcodecs();     
-        String file     = "C:/Users/test/Desktop/Saralproject/Project-Saral/v1.0/frontend/SaralApp/android/saralsdk/download.png";
-        Mat matrix = imageCodecs.imread(file);
-         Log.d(TAG,"matrixxxx" + image);
-         
-         Point position  = new Point(image.width()/5, image.height() / 2);
-         Scalar color    = new Scalar(0, 0, 255);
-         int font        = Imgproc.COLOR_BGR2GRAY;
-         int scale       = 1;
-         int thickness   = 3;
-         Imgproc.putText(image, file, position, font, scale, color, thickness);
-          
-                    // Imgcodecs imageCodecs = new Imgcodecs(); 
-                    // String file ="C:/Users/test/Desktop/Saralproject/Project-Saral/v1.0/frontend/SaralApp/android/saralsdk/download.png";   
-                    // Mat matrix = imageCodecs.imread(file); 
-                    // // String file2 = "C:/EXAMPLES/OpenCV/sample_resaved.jpg"; 
-                    // Point position  = new Point(image.width()/5, image.height() / 2);
-                    // // Scalar color    = new Scalar(0, 0, 255);
-                    // int font        = Imgproc.COLOR_BGR2GRAY;
-                    // int scale       = 1;
-                    // int thickness   = 3;
-                    // Log.d(TAG, "matriximages" + matrix);
-                    // // return file;
-                    //  Imgproc.putText(image, matrix, file ,position , font, scale);
-         }
-            
-        // }
-        
-   
-//  }
- 
-       
+
+    private void showProcessingInformation(Mat image) {
+        Imgcodecs imageCodecs = new Imgcodecs();
+        String image_location = "download.png";
+        Mat matrix = imageCodecs.imread(image_location);
+        Log.d(TAG, "matrixxxx" + matrix);
+        // return matrix;
+    }
+
+    // }
+
+    // }
+
     private String createBase64FromMat(Mat image) {
         Bitmap resultBitmap = Bitmap.createBitmap(image.cols(), image.rows(), Bitmap.Config.ARGB_8888);
         Utils.matToBitmap(image, resultBitmap);
