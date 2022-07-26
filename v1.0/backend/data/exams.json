@@ -19832,5 +19832,16 @@
     ],
     "examId": 46,
     "schoolId": "od001"
+  },
+  {
+    "subject": "0",
+    "examLO": "0",
+    "classId": "0",
+    "examDate": "05/10/2022",
+    "totalMarks": 0,
+    "type": "alphanumeric",
+    "questions": null,
+    "examId": 47,
+    "schoolId": "od001"
   }
 ]
