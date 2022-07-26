@@ -210,7 +210,7 @@ const ScannedDetailsComponent = ({
             return multiple
         })
 
-        if(ocrLocalResponse.layout.cells[1].extractionMethod == "BLOCK_ALPHANUMERIC_CLASSIFICATION"){
+        if(ocrLocalResponse.layout.cells[1].rois[0].extractionMethod == "BLOCK_ALPHANUMERIC_CLASSIFICATION"){
             setIsAlphaNumeric(true)
         }
      
@@ -1353,10 +1353,10 @@ const ScannedDetailsComponent = ({
                                                             )
                                                         })
                                                         : 
-                                                        TABLE_HEADER.map((data) => {
+                                                        TABLE_HEADER.map((data,index) => {
                                                             return (
                                                                 <MarksHeaderTable
-                                                                customRowStyle={{ width: isAlphaNumeric &  index == 2 ? '55%' : '25%', backgroundColor: AppTheme.TABLE_HEADER }}
+                                                                customRowStyle={{ width: isAlphaNumeric &  index == 2 ? '55%' : '30%', backgroundColor: AppTheme.TABLE_HEADER }}
                                                                 key={data}
                                                                 rowTitle={data}
                                                                 rowBorderColor={AppTheme.TAB_BORDER}
@@ -1373,21 +1373,21 @@ const ScannedDetailsComponent = ({
                                                         <View element={element} key={index} style={{ flexDirection: 'row' }}>
 
                                                             <MarksHeaderTable
-                                                                customRowStyle={{ width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '25%' : '25%', }}
+                                                                customRowStyle={{ width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '25%' : '30%', }}
                                                                 rowTitle={renderSRNo(element, index)}
                                                                 rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                                                 editable={false}
                                                                 keyboardType={'number-pad'}
                                                             />
                                                             <MarksHeaderTable
-                                                                customRowStyle={{ width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '25%' : '25%', }}
+                                                                customRowStyle={{ width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '25%' : '30%', }}
                                                                 rowTitle={element.format.value}
                                                                 rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                                                 editable={false}
                                                                 keyboardType={'number-pad'}
                                                             />
                                                             <MarksHeaderTable
-                                                                customRowStyle={{ width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '50%' : '25%', }}
+                                                                customRowStyle={{ width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '50%' : '30%', }}
                                                                 rowTitle={element.consolidatedPrediction}
                                                                 rowBorderColor={markBorderOnCell(element)}
                                                                 editable={true}
