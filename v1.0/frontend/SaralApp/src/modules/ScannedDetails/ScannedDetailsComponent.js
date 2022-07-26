@@ -726,7 +726,7 @@ const ScannedDetailsComponent = ({
         } else if (element.format.name === neglectData[2] || element.format.name === neglectData[3]) {
             return 4
         } else {
-            return 2
+            return 100
         }
     }
 
@@ -1352,7 +1352,7 @@ const ScannedDetailsComponent = ({
                                                         TABLE_HEADER.map((data) => {
                                                             return (
                                                                 <MarksHeaderTable
-                                                                customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
+                                                                customRowStyle={{ width: '20%', backgroundColor: AppTheme.TABLE_HEADER }}
                                                                 key={data}
                                                                 rowTitle={data}
                                                                 rowBorderColor={AppTheme.TAB_BORDER}
@@ -1369,25 +1369,25 @@ const ScannedDetailsComponent = ({
                                                         <View element={element} key={index} style={{ flexDirection: 'row' }}>
 
                                                             <MarksHeaderTable
-                                                                customRowStyle={{ width: loginData.data.school.tags ? '25%' : '30%', }}
+                                                                customRowStyle={{ width: loginData.data.school.tags ? '25%' : '20%', }}
                                                                 rowTitle={renderSRNo(element, index)}
                                                                 rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                                                 editable={false}
                                                                 keyboardType={'number-pad'}
                                                             />
                                                             <MarksHeaderTable
-                                                                customRowStyle={{ width: loginData.data.school.tags ? '25%' : '30%', }}
+                                                                customRowStyle={{ width: loginData.data.school.tags ? '25%' : '20%', }}
                                                                 rowTitle={element.format.value}
                                                                 rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                                                 editable={false}
                                                                 keyboardType={'number-pad'}
                                                             />
                                                             <MarksHeaderTable
-                                                                customRowStyle={{ width: loginData.data.school.tags ? '25%' : '30%', }}
+                                                                customRowStyle={{ width: loginData.data.school.tags ? '25%' : '50%', }}
                                                                 rowTitle={element.consolidatedPrediction}
                                                                 rowBorderColor={markBorderOnCell(element)}
                                                                 editable={true}
-                                                                keyboardType={element.hasOwnProperty("omrOptions") ?  'name' : 'number-pad'}
+                                                                keyboardType={element.hasOwnProperty("omrOptions") ?  'name' : 'name'}
                                                                 maxLength={lengthAccordingSheet(element)}
                                                                 onChangeText={(text) => {
                                                                     handleTextChange(text.trim(), index, newArrayValue, element)
