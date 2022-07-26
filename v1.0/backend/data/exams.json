@@ -19839,9 +19839,9 @@
     "classId": "0",
     "examDate": "05/10/2022",
     "totalMarks": 0,
-    "type": "alphanumeric",
+    "type": "personal-details",
     "questions": null,
     "examId": 47,
-    "schoolId": "od001"
+    "schoolId": "m001"
   }
 ]
