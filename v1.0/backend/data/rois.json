@@ -82757,9 +82757,9 @@
                     "detectionRadius": 12
                 },   
                 "resultScreenLabels":[
-                    "sr no",
-                    "fields",
-                    "value"
+                    "Sr No",
+                    "Fields",
+                    "Value"
                   ],   
                   "cells": [
                     {

@@ -87,7 +87,8 @@ const ScannedDetailsComponent = ({
     const studentIdErrorMsg = ocrLocalResponse.layout && ocrLocalResponse.layout.idValidation && ocrLocalResponse.layout.idValidation.validate.errorMsg
     let consolidated =ocrLocalResponse.layout.cells[0]&& ocrLocalResponse.layout.cells[0].consolidatedPrediction.length
     const idValidateExp = ocrLocalResponse.layout && ocrLocalResponse.layout.idValidation && ocrLocalResponse.layout.idValidation.validate.regExp
-    
+    const jsonResultLabels = ocrLocalResponse.layout && ocrLocalResponse.layout.resultScreenLabels
+
     let regexExp = idValidateExp
     let number = studentId;
     let regex = new RegExp(regexExp)
@@ -1322,6 +1323,19 @@ const ScannedDetailsComponent = ({
 
                                             <View style={{ flexDirection: 'row', marginTop: 20 }}>
                                                 {
+                                                    jsonResultLabels && jsonResultLabels[0] ?
+                                                     jsonResultLabels.map((data) => {
+                                                          return (
+                                                              <MarksHeaderTable
+                                                                  customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
+                                                                  key={data}
+                                                                  rowTitle={data}
+                                                                  rowBorderColor={AppTheme.TAB_BORDER}
+                                                                  editable={false}
+                                                              />
+                                                          )
+                                                      })
+                                                      :
                                                     BrandLabel && BrandLabel.ListTableHeading[0] ?
                                                         BrandLabel.ListTableHeading.map((data) => {
                                                             return (
