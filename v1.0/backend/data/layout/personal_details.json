@@ -2,7 +2,17 @@
     "layout": {
         "version": "1.0",
         "name": "Personal Details Sheet Form",
-        "identifierPrefix": "IDENTIFIERID",
+        "identifierPrefix": "IDENTIFIERID1",
+        "threshold": {
+            "minWidth" : 0,
+            "minHeight": 0,
+            "detectionRadius": 12
+        },
+        "resultScreenLabels":[
+            "sr no",
+            "fields",
+            "value"
+          ],   
         "cells": [
             {
                 "cellId": "1",
