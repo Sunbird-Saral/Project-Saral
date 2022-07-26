@@ -82761,7 +82761,7 @@
                     "fields",
                     "value"
                   ],   
-                "cells": [
+                  "cells": [
                     {
                         "cellId": "1",
                         "rois": [
@@ -82915,7 +82915,7 @@
                         },
                         "format": {
                             "name": "IDENTIFIERID1",
-                            "value": "IDENTIFIERID1"
+                            "value": "IDENTIFIERID"
                         },
                         "validate": {
                             "regExp": ""
@@ -83110,7 +83110,7 @@
                         },
                         "format": {
                             "name": "NAME1",
-                            "value": "NAME1"
+                            "value": "NAME"
                         },
                         "validate": {
                             "regExp": ""
@@ -83725,7 +83725,7 @@
                         },
                         "format": {
                             "name": "ADDRESS1",
-                            "value": "ADDRESS1"
+                            "value": "ADDRESS"
                         },
                         "validate": {
                             "regExp": ""
@@ -83812,7 +83812,7 @@
                         },
                         "format": {
                             "name": "PINCODE1",
-                            "value": "PINCODE1"
+                            "value": "PINCODE"
                         },
                         "validate": {
                             "regExp": ""
@@ -83947,7 +83947,7 @@
                         },
                         "format": {
                             "name": "CONTACTNO1",
-                            "value": "CONTACTNO1"
+                            "value": "CONTACTNO"
                         },
                         "validate": {
                             "regExp": ""
