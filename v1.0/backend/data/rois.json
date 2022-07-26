@@ -82918,7 +82918,8 @@
                             "value": "IDENTIFIERID"
                         },
                         "validate": {
-                            "regExp": ""
+                            "regExp": "^[0-9]{12}$",
+                            "errorMsg": "ID exceeds the limit"
                         }
                     },
                     {
