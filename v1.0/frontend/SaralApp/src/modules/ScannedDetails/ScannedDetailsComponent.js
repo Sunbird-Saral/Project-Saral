@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Text, View, ScrollView, ToastAndroid, Alert, Image, TouchableOpacity, PermissionsAndroid } from 'react-native';
 import { connect, useDispatch } from 'react-redux';
 import AppTheme from '../../utils/AppTheme';
-import { CELL_OMR, extractionMethod, multipleStudent, MULTIPLE_TAG_DATAS,dispatchCustomModalMessage, dispatchCustomModalStatus,monospace_FF , neglectData, SCAN_TYPES, studentLimitSaveInLocal, student_ID, TABLE_HEADER, TABLE_HEADER_WITH_TAG } from '../../utils/CommonUtils';
+import { CELL_OMR, extractionMethod, multipleStudent, MULTIPLE_TAG_DATAS,dispatchCustomModalMessage, dispatchCustomModalStatus,monospace_FF , neglectData, SCAN_TYPES, studentLimitSaveInLocal, student_ID, TABLE_HEADER, TABLE_HEADER_WITH_TAG,defaultHeaderTable } from '../../utils/CommonUtils';
 import Strings from '../../utils/Strings';
 import ShareComponent from '../common/components/Share';
 
@@ -88,7 +88,9 @@ const ScannedDetailsComponent = ({
     const studentIdErrorMsg = ocrLocalResponse.layout && ocrLocalResponse.layout.idValidation && ocrLocalResponse.layout.idValidation.validate.errorMsg
     let consolidated =ocrLocalResponse.layout.cells[0]&& ocrLocalResponse.layout.cells[0].consolidatedPrediction.length
     const idValidateExp = ocrLocalResponse.layout && ocrLocalResponse.layout.idValidation && ocrLocalResponse.layout.idValidation.validate.regExp
-    
+    const jsonLabels = ocrLocalResponse.layout && ocrLocalResponse.layout.resultScreenLabels
+    const listbrandlabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.scannedDetailComponent[0] && multiBrandingData.screenLabels.scannedDetailComponent[0].ListTableHeading[0]
+
     let regexExp = idValidateExp
     let number = studentId;
     let regex = new RegExp(regexExp)
@@ -1324,48 +1326,58 @@ const ScannedDetailsComponent = ({
                                         </View>
 
 
-                                            <View style={{ flexDirection: 'row', marginTop: 20 }}>
-                                                {
-                                                    BrandLabel && BrandLabel.ListTableHeading[0] ?
-                                                        BrandLabel.ListTableHeading.map((data,index) => {
-                                                            return (
-                                                                <MarksHeaderTable
-                                                                    customRowStyle={{ width: isAlphaNumeric & index == 2 ? '55%' : '25%', backgroundColor: AppTheme.TABLE_HEADER }}
-                                                                    key={data}
-                                                                    rowTitle={data}
-                                                                    rowBorderColor={AppTheme.TAB_BORDER}
-                                                                    editable={false}
-                                                                />
-                                                            )
-                                                        })
-                                                        :
-                                                        loginData.data.school.tags
-                                                        ?
-                                                        TABLE_HEADER_WITH_TAG.map((data) => {
-                                                            return (
-                                                                <MarksHeaderTable
-                                                                customRowStyle={{ width: '25%', backgroundColor: AppTheme.TABLE_HEADER }}
-                                                                key={data}
-                                                                rowTitle={data}
-                                                                rowBorderColor={AppTheme.TAB_BORDER}
-                                                                    editable={false}
-                                                                />
-                                                            )
-                                                        })
-                                                        : 
-                                                        TABLE_HEADER.map((data,index) => {
-                                                            return (
-                                                                <MarksHeaderTable
-                                                                customRowStyle={{ width: isAlphaNumeric &  index == 2 ? '55%' : '30%', backgroundColor: AppTheme.TABLE_HEADER }}
-                                                                key={data}
-                                                                rowTitle={data}
-                                                                rowBorderColor={AppTheme.TAB_BORDER}
-                                                                    editable={false}
-                                                                />
-                                                            )
-                                                        })
-                                                }
-                                            </View>
+                                        <View style={{ flexDirection: 'row', marginTop: 20 }}>
+                      {
+                        jsonLabels || listbrandlabel && defaultHeaderTable ?
+                          <View style={{ flexDirection: 'row', width: '100%' }}>
+                            <MarksHeaderTable
+                              customRowStyle={{ width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '25%' : '30%', backgroundColor: AppTheme.TABLE_HEADER}}
+                              rowTitle={jsonLabels && jsonLabels.sr_no || listbrandlabel && listbrandlabel.sr_no || defaultHeaderTable.sr_no}
+                              rowBorderColor={AppTheme.TAB_BORDER}
+                              editable={false}
+                            />
+                            <MarksHeaderTable
+                              customRowStyle={{ width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '25%' : '30%', backgroundColor: AppTheme.TABLE_HEADER}}
+                              rowTitle={jsonLabels && jsonLabels.questions || listbrandlabel && listbrandlabel.questions || defaultHeaderTable.questions}
+                              rowBorderColor={AppTheme.TAB_BORDER}
+                              editable={false}
+                            />
+                            <MarksHeaderTable
+                              customRowStyle={{ width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '55%' : '30%', backgroundColor: AppTheme.TABLE_HEADER}}
+                              rowTitle={jsonLabels && jsonLabels.marks || listbrandlabel && listbrandlabel.marks || defaultHeaderTable.marks}
+                              rowBorderColor={AppTheme.TAB_BORDER}
+                              editable={false}
+                            />
+                          </View>
+                          :
+                          loginData.data.school.tags
+                            ?
+                            TABLE_HEADER_WITH_TAG.map((data) => {
+                              return (
+                                <MarksHeaderTable
+                                  customRowStyle={{ width: '25%', backgroundColor: AppTheme.TABLE_HEADER }}
+                                  key={data}
+                                  rowTitle={data}
+                                  rowBorderColor={AppTheme.TAB_BORDER}
+                                  editable={false}
+                                />
+                              )
+                            })
+                            :
+                            TABLE_HEADER.map((data) => {
+                              return (
+                                <MarksHeaderTable
+                                  customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
+                                  key={data}
+                                  rowTitle={data}
+                                  rowBorderColor={AppTheme.TAB_BORDER}
+                                  editable={false}
+                                />
+                              )
+                            })
+                      }
+                    </View>
+
                                           
                                             {
                                                 newArrayValue.map((element, index) => {

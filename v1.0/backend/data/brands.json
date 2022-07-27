@@ -143,11 +143,12 @@
         "Exam": "Assesment",
         "StudentDetail": "Details",
         "CorrectId": "please correct employe id",
-        "ListTableHeading" : [
-          "Sr No",
-           "Items",
-          "Results"
-        ]
+        "ListTableHeading":{
+          "id": "Identifier",
+          "sr_no": "Sr No",
+          "questions":"Items",
+          "marks" :"Result"
+      }
       }]
     },
     "state": "mp",

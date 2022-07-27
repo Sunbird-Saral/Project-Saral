@@ -54,6 +54,13 @@ export const TABLE_HEADER = [
     "Sr No", "Questions", "Marks"
 ]
 
+export const defaultHeaderTable = {
+    "id": "Identifier",
+    "sr_no": "Sr No",
+    "questions":"Questions",
+    "marks":"Marks"  
+}
+
 export const TABLE_HEADER_WITH_TAG = [
     "Sr No", "Questions", "Marks", "Tags"
 ]
