@@ -4,16 +4,16 @@
         "name": "Personal Details Sheet Form",
         "identifierPrefix": "IDENTIFIERID1",
         "threshold": {
-            "minWidth" : 0,
+            "minWidth": 0,
             "minHeight": 0,
             "detectionRadius": 12
-        },   
-        "resultScreenLabels":[
+        },
+        "resultScreenLabels": [
             "sr no",
             "fields",
             "value"
-          ],   
-          "cells": [
+        ],
+        "cells": [
             {
                 "cellId": "1",
                 "rois": [
@@ -170,7 +170,8 @@
                     "value": "IDENTIFIERID"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "^[0-9]{12}$",
+                    "errorMsg": "ID exceeds the limit"
                 }
             },
             {
@@ -365,7 +366,8 @@
                     "value": "NAME"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "[A-Z]",
+                    "errorMsg": "NAME exceeds the limit"
                 }
             },
             {
@@ -980,7 +982,8 @@
                     "value": "ADDRESS"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "[A-Z0-9]",
+                    "errorMsg": "Address exceeds the limit"
                 }
             },
             {
@@ -1067,7 +1070,8 @@
                     "value": "PINCODE"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "^[0-9]{6}$",
+                    "errorMsg": "Pincode exceeds the limit"
                 }
             },
             {
@@ -1202,7 +1206,8 @@
                     "value": "CONTACTNO"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "^[0-9]{10}$",
+                    "errorMsg": "contact number should be 10 digit"
                 }
             }
         ]
