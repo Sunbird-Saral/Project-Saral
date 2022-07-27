@@ -83115,8 +83115,8 @@
                             "value": "NAME"
                         },
                         "validate": {
-                            "regExp": "[A-Z]",
-                            "errorMsg": "NAME exceeds the limit"
+                            "regExp": "^[A-Z\\s]{0,15}$",
+                            "errorMsg": "Please enter valid values (A-Z or space) and length should be <= 15"
                         }
                     },
                     {
@@ -83731,8 +83731,8 @@
                             "value": "ADDRESS"
                         },
                         "validate": {
-                            "regExp": "[A-Z0-9]",
-                            "errorMsg": "Address exceeds the limit"
+                            "regExp": "^[A-Z0-9\\s]{0,51}$",
+                            "errorMsg": "Please enter valid values (A-Z ,0-9 or space) and length should be <= 51"
                         }
                     },
                     {
@@ -83820,7 +83820,7 @@
                         },
                         "validate": {
                             "regExp": "^[0-9]{6}$",
-                            "errorMsg": "Pincode exceeds the limit"
+                            "errorMsg": "Pincode should contain 6 digits."
                         }
                     },
                     {
@@ -83956,7 +83956,7 @@
                         },
                         "validate": {
                             "regExp": "^[0-9]{10}$",
-                            "errorMsg": "contact number should be 10 digit"
+                            "errorMsg": "Contact Number should have 10 digits."
                         }
                     }
                 ]
