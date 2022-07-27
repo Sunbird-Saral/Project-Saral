@@ -83114,7 +83114,7 @@
                             "value": "NAME"
                         },
                         "validate": {
-                            "regExp": "^[A-Z]{15}$",
+                            "regExp": "[A-Z]",
                             "errorMsg": "NAME exceeds the limit"
                         }
                     },
@@ -83730,7 +83730,7 @@
                             "value": "ADDRESS"
                         },
                         "validate": {
-                            "regExp": "^[A-Z][0-9]{51}$",
+                            "regExp": "[A-Z0-9]",
                             "errorMsg": "Address exceeds the limit"
                         }
                     },
@@ -83955,7 +83955,7 @@
                         },
                         "validate": {
                             "regExp": "^[0-9]{10}$",
-                            "errorMsg": "Contact No exceeds the limit"
+                            "errorMsg": "contact number should be 10 digit"
                         }
                     }
                 ]
