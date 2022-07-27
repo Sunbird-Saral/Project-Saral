@@ -395,8 +395,8 @@ const ScannedDetailsComponent = ({
         } else {
             duplication = false
         }
-        if (regexvalidate) {
-            showErrorMessage(omrResultErr ? omrResultErr : defaultValidateError)
+        if (regexvalidate[0]) {
+            showErrorMessage(regexvalidate[1] ? `${regexvalidate[1]}`: defaultValidateError )
         }
         
         else if (duplication) {
@@ -793,14 +793,6 @@ const ScannedDetailsComponent = ({
                 }
             });
             dispatch(OcrLocalResponseAction(ocrLocalResponse))
-            let regexValue = regxValidation(value.cellId)
-            ocrLocalResponse.layout.cells.forEach(element => {
-                if (element.cellId == value.cellId) {
-                    if (!regexValue[0] && text.length > 0) {
-                        showErrorMessage(regexValue[1] ? regexValue[1] : defaultValidateError )
-                    }
-                }
-            });
 
             newArray.map((e) => {
                 if (e.format.name == neglectData[3]) {
@@ -863,6 +855,7 @@ const ScannedDetailsComponent = ({
     const omrValidation = () =>{
         var result = false
         var regexErrormsg
+        var errorMesaage = ""
         var regextResult = false
             for (let j = 0; j < newArrayValue.length; j++) {
                 let filter = ocrLocalResponse.layout.cells.filter((el)=> el.cellId == newArrayValue[j].cellId);
@@ -875,48 +868,23 @@ const ScannedDetailsComponent = ({
                     
                     if (!result) {
                         regextResult = !result
-
+                errorMesaage = regexErrormsg
                 }
         }
-    return regextResult
+        return [regextResult, errorMesaage]
     }
 
     const onSubmitClick = async () => {
-        let validCell = false
-        let omrMark = false
-        let resultMark = false
-        let regexErrormsglist
-        for (let i = 0; i < newArrayValue.length; i++) {
-            let consolidatedlist = newArrayValue[i].consolidatedPrediction
-             regexErrormsglist = newArrayValue[i] && newArrayValue[i].validate && newArrayValue[i].validate.errorMsg ? newArrayValue[i].validate.errorMsg : defaultValidateError
-            let regexlist = newArrayValue[i].validate && newArrayValue[i].validate.regExp ? newArrayValue[i].validate.regExp : defaultValidateExp
-            let number = consolidatedlist;
-            let regexvalue = new RegExp(regexlist)
-            let resultlist = regexvalue.test(number);
-             if (resultlist == false) {
-                resultMark = true
-            }
-        }
-        let regexValidation
+        let regexvalidate = omrValidation()
 
-
-        let cellOmrValidation = validateCellOMR(false)
-
-        if(regexValidation){
-        }
-        else if (cellOmrValidation[0]) {
-            if (typeof(cellOmrValidation[1]) == 'number') {
-                showErrorMessage(`${regexErrormsglist}`)
-            } 
-        }
-        else if (!studentValid && !toggleCheckBox) {
+        if (!studentValid && !toggleCheckBox) {
             showErrorMessage(Strings.please_correct_student_id)
         }
         else if (isStudentValid) {
             showErrorMessage(Strings.student_id_should_be_same)
         }
-        else if (resultMark) {
-            showErrorMessage(`${regexErrormsglist}`)
+        else if (regexvalidate[0]) {
+            showErrorMessage(regexvalidate[1] ? `${regexvalidate[1]}`: defaultValidateError )
         }
         else {
             if (sumOfObtainedMarks > 0) {
