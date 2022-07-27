@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Text, View, ScrollView, ToastAndroid, Alert, Image, TouchableOpacity, PermissionsAndroid } from 'react-native';
 import { connect, useDispatch } from 'react-redux';
 import AppTheme from '../../utils/AppTheme';
@@ -81,6 +81,7 @@ const ScannedDetailsComponent = ({
     const [omrResultErr, setOmrResult] = useState()
     const [isOmrOptions, setOmrOptions] = useState(false)
     const [isAlphaNumeric, setIsAlphaNumeric] = useState(false)
+    const inputElement = useRef(null);
 
     const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.scannedDetailComponent[0]
     const defaultValidateError = ocrLocalResponse.layout && ocrLocalResponse.layout.resultValidation && ocrLocalResponse.layout.resultValidation.validate.errorMsg
@@ -467,6 +468,19 @@ const ScannedDetailsComponent = ({
                 }
             }
         }
+
+    }
+
+    const showRegexErrorMessage = (value) => {
+            let regexValue = regxValidation(value.cellId)
+            console.log("regexValue",regexValue)
+            ocrLocalResponse.layout.cells.forEach(element => {
+                if (element.cellId == value.cellId) {
+                    if (!regexValue[0]) {
+                        showErrorMessage(regexValue[1] ? regexValue[1] : defaultValidateError )
+                    }
+                }
+            })
     }
 
 
@@ -1376,7 +1390,8 @@ const ScannedDetailsComponent = ({
                                                                 onChangeText={(text) => {
                                                                     handleTextChange(text.trim(), index, newArrayValue, element)
                                                                 }}
-
+                                                            onBlur={()=> showRegexErrorMessage(element)}
+                                                            ref = {inputElement}
                                                             />
                                                         {
                                                             loginData.data.school.tags
