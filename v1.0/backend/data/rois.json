@@ -82756,11 +82756,12 @@
                     "minHeight": 0,
                     "detectionRadius": 12
                 },
-                "resultScreenLabels": [
-                    "sr no",
-                    "fields",
-                    "value"
-                ],
+                "resultScreenLabels":{
+                    "id": "Identifier",
+                    "sr_no": "Sr No",
+                    "questions":"Fields",
+                    "marks" :"Values"
+                },
                 "cells": [
                     {
                         "cellId": "1",

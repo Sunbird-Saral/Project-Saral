@@ -1331,19 +1331,19 @@ const ScannedDetailsComponent = ({
                         jsonLabels || listbrandlabel && defaultHeaderTable ?
                           <View style={{ flexDirection: 'row', width: '100%' }}>
                             <MarksHeaderTable
-                              customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
+                              customRowStyle={{ width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '25%' : '30%', backgroundColor: AppTheme.TABLE_HEADER}}
                               rowTitle={jsonLabels && jsonLabels.sr_no || listbrandlabel && listbrandlabel.sr_no || defaultHeaderTable.sr_no}
                               rowBorderColor={AppTheme.TAB_BORDER}
                               editable={false}
                             />
                             <MarksHeaderTable
-                              customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
+                              customRowStyle={{ width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '25%' : '30%', backgroundColor: AppTheme.TABLE_HEADER}}
                               rowTitle={jsonLabels && jsonLabels.questions || listbrandlabel && listbrandlabel.questions || defaultHeaderTable.questions}
                               rowBorderColor={AppTheme.TAB_BORDER}
                               editable={false}
                             />
                             <MarksHeaderTable
-                              customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
+                              customRowStyle={{ width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '55%' : '30%', backgroundColor: AppTheme.TABLE_HEADER}}
                               rowTitle={jsonLabels && jsonLabels.marks || listbrandlabel && listbrandlabel.marks || defaultHeaderTable.marks}
                               rowBorderColor={AppTheme.TAB_BORDER}
                               editable={false}
