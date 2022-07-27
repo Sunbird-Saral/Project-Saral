@@ -185,7 +185,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                     lettersMap.put(index,String.valueOf(i));
                     index++;                  
                 }
-                lettersMap.put(index,"");
+                lettersMap.put(index," ");
                 index++;
                 for(char c = 'A'; c <= 'Z'; ++c)
                 {
