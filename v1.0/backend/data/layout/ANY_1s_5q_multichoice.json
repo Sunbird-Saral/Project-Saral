@@ -6,6 +6,12 @@
             "minWidth" : 410,
             "minHeight": 280,
             "detectionRadius":12
+        },
+        "resultValidation": {
+            "validate": {
+                "regExp": "^[0-5]$",
+                "errorMsg": "Omr result should be between 0 to 5"
+            }
         },      
         "cells": [
             {

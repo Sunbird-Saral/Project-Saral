@@ -185,7 +185,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                     lettersMap.put(index,String.valueOf(i));
                     index++;                  
                 }
-                lettersMap.put(index,"");
+                lettersMap.put(index," ");
                 index++;
                 for(char c = 'A'; c <= 'Z'; ++c)
                 {
@@ -200,7 +200,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                             result.put("confidence", new Double(confidence));
                         }else{
                             // if classifier is 10 , assigning prediction as 0
-                            result.put("prediction", "");
+                            result.put("prediction", " ");
                             result.put("confidence", new Double(0));
                         }
                         mPredictedDigits.put(id, result.toString());

@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Text, View, ScrollView, ToastAndroid, Alert, Image, TouchableOpacity, PermissionsAndroid } from 'react-native';
 import { connect, useDispatch } from 'react-redux';
 import AppTheme from '../../utils/AppTheme';
-import { CELL_OMR, extractionMethod, multipleStudent, MULTIPLE_TAG_DATAS,dispatchCustomModalMessage, dispatchCustomModalStatus,monospace_FF , neglectData, SCAN_TYPES, studentLimitSaveInLocal, student_ID, TABLE_HEADER, TABLE_HEADER_WITH_TAG } from '../../utils/CommonUtils';
+import { CELL_OMR, extractionMethod, multipleStudent, MULTIPLE_TAG_DATAS,dispatchCustomModalMessage, dispatchCustomModalStatus,monospace_FF , neglectData, SCAN_TYPES, studentLimitSaveInLocal, student_ID, TABLE_HEADER, TABLE_HEADER_WITH_TAG,defaultHeaderTable } from '../../utils/CommonUtils';
 import Strings from '../../utils/Strings';
 import ShareComponent from '../common/components/Share';
 
@@ -80,6 +80,8 @@ const ScannedDetailsComponent = ({
     const [questionIdData ,setQuestionIdData] = useState()
     const [omrResultErr, setOmrResult] = useState()
     const [isOmrOptions, setOmrOptions] = useState(false)
+    const [isAlphaNumeric, setIsAlphaNumeric] = useState(false)
+    
 
     const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.scannedDetailComponent[0]
     const defaultValidateError = ocrLocalResponse.layout && ocrLocalResponse.layout.resultValidation && ocrLocalResponse.layout.resultValidation.validate.errorMsg
@@ -87,7 +89,9 @@ const ScannedDetailsComponent = ({
     const studentIdErrorMsg = ocrLocalResponse.layout && ocrLocalResponse.layout.idValidation && ocrLocalResponse.layout.idValidation.validate.errorMsg
     let consolidated =ocrLocalResponse.layout.cells[0]&& ocrLocalResponse.layout.cells[0].consolidatedPrediction.length
     const idValidateExp = ocrLocalResponse.layout && ocrLocalResponse.layout.idValidation && ocrLocalResponse.layout.idValidation.validate.regExp
-    
+    const jsonLabels = ocrLocalResponse.layout && ocrLocalResponse.layout.resultScreenLabels
+    const listbrandlabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.scannedDetailComponent[0] && multiBrandingData.screenLabels.scannedDetailComponent[0].ListTableHeading[0]
+
     let regexExp = idValidateExp
     let number = studentId;
     let regex = new RegExp(regexExp)
@@ -209,6 +213,9 @@ const ScannedDetailsComponent = ({
             return multiple
         })
 
+        if(ocrLocalResponse.layout.cells[1].rois[0].extractionMethod == "BLOCK_ALPHANUMERIC_CLASSIFICATION"){
+            setIsAlphaNumeric(true)
+        }
      
         if (ocrLocalResponse.layout.hasOwnProperty("pages") && ocrLocalResponse.layout.pages > 0) {
             setMultiPage(ocrLocalResponse.layout.pages)
@@ -389,8 +396,8 @@ const ScannedDetailsComponent = ({
         } else {
             duplication = false
         }
-        if (regexvalidate) {
-            showErrorMessage(omrResultErr ? omrResultErr : defaultValidateError)
+        if (regexvalidate[0]) {
+            showErrorMessage(regexvalidate[1] ? `${regexvalidate[1]}`: defaultValidateError )
         }
         
         else if (duplication) {
@@ -461,6 +468,18 @@ const ScannedDetailsComponent = ({
                 }
             }
         }
+
+    }
+
+    const showRegexErrorMessage = (value) => {
+            let regexValue = regxValidation(value.cellId)
+            ocrLocalResponse.layout.cells.forEach(element => {
+                if (element.cellId == value.cellId) {
+                    if (!regexValue[0]) {
+                        showErrorMessage(regexValue[1] ? regexValue[1] : defaultValidateError )
+                    }
+                }
+            })
     }
 
 
@@ -726,7 +745,7 @@ const ScannedDetailsComponent = ({
         } else if (element.format.name === neglectData[2] || element.format.name === neglectData[3]) {
             return 4
         } else {
-            return 2
+            return 100
         }
     }
 
@@ -787,14 +806,6 @@ const ScannedDetailsComponent = ({
                 }
             });
             dispatch(OcrLocalResponseAction(ocrLocalResponse))
-            let regexValue = regxValidation(value.cellId)
-            ocrLocalResponse.layout.cells.forEach(element => {
-                if (element.cellId == value.cellId) {
-                    if (!regexValue[0] && text.length > 0) {
-                        showErrorMessage(regexValue[1] ? regexValue[1] : defaultValidateError )
-                    }
-                }
-            });
 
             newArray.map((e) => {
                 if (e.format.name == neglectData[3]) {
@@ -810,12 +821,15 @@ const ScannedDetailsComponent = ({
     }
 
     const markBorderOnCell = (element) => {
-        if (element.consolidatedPrediction.length == 0) {
+        const regexValidate = omrValidation()
+        if (element.consolidatedPrediction.length == 0 ) {
             return AppTheme.ERROR_RED
         }
         else if (element.format.name == neglectData[2] && obtnmarkErr) {
             return AppTheme.ERROR_RED
         } else if (element.format.name == neglectData[3] && maxmarkErr) {
+            return AppTheme.ERROR_RED
+        }else if (element.cellId == regexValidate[2]) {
             return AppTheme.ERROR_RED
         }
         else {
@@ -857,7 +871,9 @@ const ScannedDetailsComponent = ({
     const omrValidation = () =>{
         var result = false
         var regexErrormsg
+        var errorMesaage = ""
         var regextResult = false
+        var cellId = ""
             for (let j = 0; j < newArrayValue.length; j++) {
                 let filter = ocrLocalResponse.layout.cells.filter((el)=> el.cellId == newArrayValue[j].cellId);
                     let consolidated = filter[0].consolidatedPrediction
@@ -869,48 +885,25 @@ const ScannedDetailsComponent = ({
                     
                     if (!result) {
                         regextResult = !result
-
+                errorMesaage = regexErrormsg
+                cellId = newArrayValue[j].cellId
+                break;
                 }
         }
-    return regextResult
+        return [regextResult, errorMesaage, cellId]
     }
 
     const onSubmitClick = async () => {
-        let validCell = false
-        let omrMark = false
-        let resultMark = false
-        let regexErrormsglist
-        for (let i = 0; i < newArrayValue.length; i++) {
-            let consolidatedlist = newArrayValue[i].consolidatedPrediction
-             regexErrormsglist = newArrayValue[i] && newArrayValue[i].validate && newArrayValue[i].validate.errorMsg ? newArrayValue[i].validate.errorMsg : defaultValidateError
-            let regexlist = newArrayValue[i].validate && newArrayValue[i].validate.regExp ? newArrayValue[i].validate.regExp : defaultValidateExp
-            let number = consolidatedlist;
-            let regexvalue = new RegExp(regexlist)
-            let resultlist = regexvalue.test(number);
-             if (resultlist == false) {
-                resultMark = true
-            }
-        }
-        let regexValidation
+        let regexvalidate = omrValidation()
 
-
-        let cellOmrValidation = validateCellOMR(false)
-
-        if(regexValidation){
-        }
-        else if (cellOmrValidation[0]) {
-            if (typeof(cellOmrValidation[1]) == 'number') {
-                showErrorMessage(`${regexErrormsglist}`)
-            } 
-        }
-        else if (!studentValid && !toggleCheckBox) {
+        if (!studentValid && !toggleCheckBox) {
             showErrorMessage(Strings.please_correct_student_id)
         }
         else if (isStudentValid) {
             showErrorMessage(Strings.student_id_should_be_same)
         }
-        else if (resultMark) {
-            showErrorMessage(`${regexErrormsglist}`)
+        else if (regexvalidate[0]) {
+            showErrorMessage(regexvalidate[1] ? `${regexvalidate[1]}`: defaultValidateError )
         }
         else {
             if (sumOfObtainedMarks > 0) {
@@ -1320,48 +1313,58 @@ const ScannedDetailsComponent = ({
                                         </View>
 
 
-                                            <View style={{ flexDirection: 'row', marginTop: 20 }}>
-                                                {
-                                                    BrandLabel && BrandLabel.ListTableHeading[0] ?
-                                                        BrandLabel.ListTableHeading.map((data) => {
-                                                            return (
-                                                                <MarksHeaderTable
-                                                                    customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
-                                                                    key={data}
-                                                                    rowTitle={data}
-                                                                    rowBorderColor={AppTheme.TAB_BORDER}
-                                                                    editable={false}
-                                                                />
-                                                            )
-                                                        })
-                                                        :
-                                                        loginData.data.school.tags
-                                                        ?
-                                                        TABLE_HEADER_WITH_TAG.map((data) => {
-                                                            return (
-                                                                <MarksHeaderTable
-                                                                customRowStyle={{ width: '25%', backgroundColor: AppTheme.TABLE_HEADER }}
-                                                                key={data}
-                                                                rowTitle={data}
-                                                                rowBorderColor={AppTheme.TAB_BORDER}
-                                                                    editable={false}
-                                                                />
-                                                            )
-                                                        })
-                                                        : 
-                                                        TABLE_HEADER.map((data) => {
-                                                            return (
-                                                                <MarksHeaderTable
-                                                                customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
-                                                                key={data}
-                                                                rowTitle={data}
-                                                                rowBorderColor={AppTheme.TAB_BORDER}
-                                                                    editable={false}
-                                                                />
-                                                            )
-                                                        })
-                                                }
-                                            </View>
+                                        <View style={{ flexDirection: 'row', marginTop: 20 }}>
+                      {
+                        jsonLabels || listbrandlabel && defaultHeaderTable ?
+                          <View style={{ flexDirection: 'row', width: '100%' }}>
+                            <MarksHeaderTable
+                              customRowStyle={{ width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '25%' : '30%', backgroundColor: AppTheme.TABLE_HEADER}}
+                              rowTitle={jsonLabels && jsonLabels.sr_no || listbrandlabel && listbrandlabel.sr_no || defaultHeaderTable.sr_no}
+                              rowBorderColor={AppTheme.TAB_BORDER}
+                              editable={false}
+                            />
+                            <MarksHeaderTable
+                              customRowStyle={{ width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '25%' : '30%', backgroundColor: AppTheme.TABLE_HEADER}}
+                              rowTitle={jsonLabels && jsonLabels.questions || listbrandlabel && listbrandlabel.questions || defaultHeaderTable.questions}
+                              rowBorderColor={AppTheme.TAB_BORDER}
+                              editable={false}
+                            />
+                            <MarksHeaderTable
+                              customRowStyle={{ width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '55%' : '30%', backgroundColor: AppTheme.TABLE_HEADER}}
+                              rowTitle={jsonLabels && jsonLabels.marks || listbrandlabel && listbrandlabel.marks || defaultHeaderTable.marks}
+                              rowBorderColor={AppTheme.TAB_BORDER}
+                              editable={false}
+                            />
+                          </View>
+                          :
+                          loginData.data.school.tags
+                            ?
+                            TABLE_HEADER_WITH_TAG.map((data) => {
+                              return (
+                                <MarksHeaderTable
+                                  customRowStyle={{ width: '25%', backgroundColor: AppTheme.TABLE_HEADER }}
+                                  key={data}
+                                  rowTitle={data}
+                                  rowBorderColor={AppTheme.TAB_BORDER}
+                                  editable={false}
+                                />
+                              )
+                            })
+                            :
+                            TABLE_HEADER.map((data) => {
+                              return (
+                                <MarksHeaderTable
+                                  customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
+                                  key={data}
+                                  rowTitle={data}
+                                  rowBorderColor={AppTheme.TAB_BORDER}
+                                  editable={false}
+                                />
+                              )
+                            })
+                      }
+                    </View>
+
                                           
                                             {
                                                 newArrayValue.map((element, index) => {
@@ -1369,30 +1372,31 @@ const ScannedDetailsComponent = ({
                                                         <View element={element} key={index} style={{ flexDirection: 'row' }}>
 
                                                             <MarksHeaderTable
-                                                                customRowStyle={{ width: loginData.data.school.tags ? '25%' : '30%', }}
+                                                                customRowStyle={{ width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '25%' : '30%', }}
                                                                 rowTitle={renderSRNo(element, index)}
                                                                 rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                                                 editable={false}
                                                                 keyboardType={'number-pad'}
                                                             />
                                                             <MarksHeaderTable
-                                                                customRowStyle={{ width: loginData.data.school.tags ? '25%' : '30%', }}
+                                                                customRowStyle={{ width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '25%' : '30%', }}
                                                                 rowTitle={element.format.value}
                                                                 rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                                                 editable={false}
                                                                 keyboardType={'number-pad'}
                                                             />
                                                             <MarksHeaderTable
-                                                                customRowStyle={{ width: loginData.data.school.tags ? '25%' : '30%', }}
+                                                                customRowStyle={{ width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '50%' : '30%', }}
                                                                 rowTitle={element.consolidatedPrediction}
                                                                 rowBorderColor={markBorderOnCell(element)}
                                                                 editable={true}
-                                                                keyboardType={element.hasOwnProperty("omrOptions") ?  'name' : 'number-pad'}
+                                                                keyboardType={element.hasOwnProperty("omrOptions") ?  'name' : 'name'}
                                                                 maxLength={lengthAccordingSheet(element)}
                                                                 onChangeText={(text) => {
                                                                     handleTextChange(text.trim(), index, newArrayValue, element)
                                                                 }}
-
+                                                            onBlur={()=> showRegexErrorMessage(element)}
+                                                            isBlur={true}
                                                             />
                                                         {
                                                             loginData.data.school.tags

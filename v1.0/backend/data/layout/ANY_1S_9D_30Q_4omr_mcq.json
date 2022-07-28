@@ -7,6 +7,7 @@
             "minHeight": 0,
             "detectionRadius": 12
         },
+        
         "cells": [
             {
                 "cellId": "1",
