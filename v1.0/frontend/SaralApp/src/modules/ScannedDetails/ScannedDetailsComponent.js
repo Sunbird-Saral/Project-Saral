@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Text, View, ScrollView, ToastAndroid, Alert, Image, TouchableOpacity, PermissionsAndroid } from 'react-native';
 import { connect, useDispatch } from 'react-redux';
 import AppTheme from '../../utils/AppTheme';
@@ -81,6 +81,7 @@ const ScannedDetailsComponent = ({
     const [omrResultErr, setOmrResult] = useState()
     const [isOmrOptions, setOmrOptions] = useState(false)
     const [isAlphaNumeric, setIsAlphaNumeric] = useState(false)
+    
 
     const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.scannedDetailComponent[0]
     const defaultValidateError = ocrLocalResponse.layout && ocrLocalResponse.layout.resultValidation && ocrLocalResponse.layout.resultValidation.validate.errorMsg
@@ -467,6 +468,18 @@ const ScannedDetailsComponent = ({
                 }
             }
         }
+
+    }
+
+    const showRegexErrorMessage = (value) => {
+            let regexValue = regxValidation(value.cellId)
+            ocrLocalResponse.layout.cells.forEach(element => {
+                if (element.cellId == value.cellId) {
+                    if (!regexValue[0]) {
+                        showErrorMessage(regexValue[1] ? regexValue[1] : defaultValidateError )
+                    }
+                }
+            })
     }
 
 
@@ -808,12 +821,15 @@ const ScannedDetailsComponent = ({
     }
 
     const markBorderOnCell = (element) => {
-        if (element.consolidatedPrediction.length == 0) {
+        const regexValidate = omrValidation()
+        if (element.consolidatedPrediction.length == 0 ) {
             return AppTheme.ERROR_RED
         }
         else if (element.format.name == neglectData[2] && obtnmarkErr) {
             return AppTheme.ERROR_RED
         } else if (element.format.name == neglectData[3] && maxmarkErr) {
+            return AppTheme.ERROR_RED
+        }else if (element.cellId == regexValidate[2]) {
             return AppTheme.ERROR_RED
         }
         else {
@@ -857,6 +873,7 @@ const ScannedDetailsComponent = ({
         var regexErrormsg
         var errorMesaage = ""
         var regextResult = false
+        var cellId = ""
             for (let j = 0; j < newArrayValue.length; j++) {
                 let filter = ocrLocalResponse.layout.cells.filter((el)=> el.cellId == newArrayValue[j].cellId);
                     let consolidated = filter[0].consolidatedPrediction
@@ -869,9 +886,11 @@ const ScannedDetailsComponent = ({
                     if (!result) {
                         regextResult = !result
                 errorMesaage = regexErrormsg
+                cellId = newArrayValue[j].cellId
+                break;
                 }
         }
-        return [regextResult, errorMesaage]
+        return [regextResult, errorMesaage, cellId]
     }
 
     const onSubmitClick = async () => {
@@ -1376,7 +1395,8 @@ const ScannedDetailsComponent = ({
                                                                 onChangeText={(text) => {
                                                                     handleTextChange(text.trim(), index, newArrayValue, element)
                                                                 }}
-
+                                                            onBlur={()=> showRegexErrorMessage(element)}
+                                                            isBlur={true}
                                                             />
                                                         {
                                                             loginData.data.school.tags
