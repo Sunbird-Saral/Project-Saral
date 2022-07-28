@@ -10034,7 +10034,7 @@
     "type": "hindi_1s_9d_30q_omr",
     "questions": [
       {
-        "questionId": "QUESTION1_Q1",
+        "questionId": "QUESTION1",
         "tags": [
           {
             "tagName": "poetry",
@@ -10045,7 +10045,7 @@
         "questionMarks": "1"
       },
       {
-        "questionId": "QUESTION1_Q2",
+        "questionId": "QUESTION2",
         "tags": [
           {
             "tagName": "poetry",
@@ -10056,7 +10056,7 @@
         "questionMarks": "1"
       },
       {
-        "questionId": "QUESTION1_Q3",
+        "questionId": "QUESTION3",
         "tags": [
           {
             "tagName": "poetry",
@@ -10067,7 +10067,7 @@
         "questionMarks": "1"
       },
       {
-        "questionId": "QUESTION1_Q4",
+        "questionId": "QUESTION4",
         "tags": [
           {
             "tagName": "poetry",
@@ -10078,7 +10078,7 @@
         "questionMarks": "1"
       },
       {
-        "questionId": "QUESTION2_Q1",
+        "questionId": "QUESTION5",
         "tags": [
           {
             "tagName": "poetry",
@@ -10089,7 +10089,7 @@
         "questionMarks": "1"
       },
       {
-        "questionId": "QUESTION2_Q2",
+        "questionId": "QUESTION6",
         "tags": [
           {
             "tagName": "poetry",
@@ -10100,7 +10100,7 @@
         "questionMarks": "1"
       },
       {
-        "questionId": "QUESTION2_Q3",
+        "questionId": "QUESTION7",
         "tags": [
           {
             "tagName": "poetry",
@@ -10111,7 +10111,7 @@
         "questionMarks": "1"
       },
       {
-        "questionId": "QUESTION2_Q4",
+        "questionId": "QUESTION8",
         "tags": [
           {
             "tagName": "poetry",
@@ -10122,7 +10122,7 @@
         "questionMarks": "1"
       },
       {
-        "questionId": "QUESTION3_Q1",
+        "questionId": "QUESTION9",
         "tags": [
           {
             "tagName": "poetry",
@@ -10133,7 +10133,7 @@
         "questionMarks": "1"
       },
       {
-        "questionId": "QUESTION3_Q2",
+        "questionId": "QUESTION10",
         "tags": [
           {
             "tagName": "poetry",
@@ -10144,7 +10144,7 @@
         "questionMarks": "1"
       },
       {
-        "questionId": "QUESTION3_Q3",
+        "questionId": "QUESTION11",
         "tags": [
           {
             "tagName": "poetry",
@@ -10155,7 +10155,7 @@
         "questionMarks": "1"
       },
       {
-        "questionId": "QUESTION3_Q4",
+        "questionId": "QUESTION12",
         "tags": [
           {
             "tagName": "poetry",
@@ -10166,7 +10166,7 @@
         "questionMarks": "1"
       },
       {
-        "questionId": "QUESTION4_Q1",
+        "questionId": "QUESTION13",
         "tags": [
           {
             "tagName": "poetry",
@@ -10177,7 +10177,7 @@
         "questionMarks": "1"
       },
       {
-        "questionId": "QUESTION4_Q2",
+        "questionId": "QUESTION14",
         "tags": [
           {
             "tagName": "poetry",
@@ -10188,7 +10188,7 @@
         "questionMarks": "1"
       },
       {
-        "questionId": "QUESTION4_Q3",
+        "questionId": "QUESTION15",
         "tags": [
           {
             "tagName": "poetry",
@@ -10199,7 +10199,7 @@
         "questionMarks": "1"
       },
       {
-        "questionId": "QUESTION4_Q4",
+        "questionId": "QUESTION16",
         "tags": [
           {
             "tagName": "poetry",
@@ -10210,7 +10210,7 @@
         "questionMarks": "1"
       },
       {
-        "questionId": "QUESTION5_Q1",
+        "questionId": "QUESTION17",
         "tags": [
           {
             "tagName": "poetry",
@@ -10221,7 +10221,7 @@
         "questionMarks": "1"
       },
       {
-        "questionId": "QUESTION5_Q2",
+        "questionId": "QUESTION18",
         "tags": [
           {
             "tagName": "poetry",
@@ -10232,7 +10232,7 @@
         "questionMarks": "1"
       },
       {
-        "questionId": "QUESTION5_Q3",
+        "questionId": "QUESTION19",
         "tags": [
           {
             "tagName": "poetry",
@@ -10243,7 +10243,7 @@
         "questionMarks": "1"
       },
       {
-        "questionId": "QUESTION5_Q4",
+        "questionId": "QUESTION20",
         "tags": [
           {
             "tagName": "poetry",
@@ -10254,7 +10254,7 @@
         "questionMarks": "1"
       },
       {
-        "questionId": "QUESTION6_Q1",
+        "questionId": "QUESTION21",
         "tags": [
           {
             "tagName": "poetry",
@@ -10265,7 +10265,7 @@
         "questionMarks": "1"
       },
       {
-        "questionId": "QUESTION6_Q2",
+        "questionId": "QUESTION22",
         "tags": [
           {
             "tagName": "poetry",
@@ -10276,7 +10276,7 @@
         "questionMarks": "1"
       },
       {
-        "questionId": "QUESTION6_Q3",
+        "questionId": "QUESTION23",
         "tags": [
           {
             "tagName": "poetry",
@@ -10287,7 +10287,7 @@
         "questionMarks": "1"
       },
       {
-        "questionId": "QUESTION6_Q4",
+        "questionId": "QUESTION24",
         "tags": [
           {
             "tagName": "poetry",
@@ -10298,7 +10298,7 @@
         "questionMarks": "1"
       },
       {
-        "questionId": "QUESTION7_Q1",
+        "questionId": "QUESTION25",
         "tags": [
           {
             "tagName": "poetry",
@@ -10309,7 +10309,7 @@
         "questionMarks": "1"
       },
       {
-        "questionId": "QUESTION7_Q2",
+        "questionId": "QUESTION26",
         "tags": [
           {
             "tagName": "poetry",
@@ -10320,7 +10320,7 @@
         "questionMarks": "1"
       },
       {
-        "questionId": "QUESTION7_Q3",
+        "questionId": "QUESTION27",
         "tags": [
           {
             "tagName": "poetry",
@@ -10331,7 +10331,7 @@
         "questionMarks": "1"
       },
       {
-        "questionId": "QUESTION7_Q4",
+        "questionId": "QUESTION28",
         "tags": [
           {
             "tagName": "poetry",
@@ -10342,7 +10342,7 @@
         "questionMarks": "1"
       },
       {
-        "questionId": "QUESTION8_Q1",
+        "questionId": "QUESTION29",
         "tags": [
           {
             "tagName": "poetry",
@@ -10353,7 +10353,7 @@
         "questionMarks": "1"
       },
       {
-        "questionId": "QUESTION8_Q2",
+        "questionId": "QUESTION30",
         "tags": [
           {
             "tagName": "poetry",
