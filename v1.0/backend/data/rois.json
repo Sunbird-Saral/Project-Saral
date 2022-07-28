@@ -75655,6 +75655,17 @@
             "layout": {
                 "version": "1.0",
                 "name": "HINDI8S13_9DQOMR Exam Sheet Form",
+                "threshold": {
+                    "minWidth": 0,
+                    "minHeight": 0,
+                    "detectionRadius": 12
+                },
+                "resultValidation": {
+                    "validate": {
+                        "regExp": "^[0-1]$",
+                        "errorMsg": "Omr result should be 1 or 0"
+                    }
+                },
                 "cells": [
                     {
                         "cellId": "1",
