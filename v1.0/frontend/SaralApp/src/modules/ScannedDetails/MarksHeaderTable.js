@@ -20,7 +20,7 @@ const MarksHeaderTable = ({
     setQuestionIdData,
     subject,
     onBlur,
-    ref
+    isBlur=false
 }) => {
 
     const setDataIntoModal = (value) => {
@@ -72,7 +72,7 @@ const MarksHeaderTable = ({
                     keyboardType={keyboardType}
                     maxLength={maxLength}
                     onBlur={onBlur}
-                    ref={ref}
+                    blurOnSubmit={isBlur}
                 />
             }
         </View>
