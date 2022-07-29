@@ -887,7 +887,7 @@
                     "value": "QUESTION 10"
                 },
                 "validate": {
-                    "regExp": "^[N-Y]{0,1}$",
+                    "regExp": "^(?:Y|N)$",
                     "errorMsg": "Please enter valid option (Y N)"
                 },
                 "omrOptions": [
@@ -919,7 +919,7 @@
                     "value": "QUESTION 11"
                 },
                 "validate": {
-                    "regExp": "^[N-Y]{0,1}$",
+                    "regExp": "^(?:Y|N)$",
                     "errorMsg": "Please enter valid option (Y N)"
                 },
                 "omrOptions": [
@@ -1376,7 +1376,7 @@
                     "value": "QUESTION 19"
                 },
                 "validate": {
-                    "regExp": "^[N-Y]{0,1}$",
+                    "regExp": "^(?:Y|N)$",
                     "errorMsg": "Please enter valid option (Y N)"
                 },
                 "omrOptions": [
@@ -1456,8 +1456,8 @@
                     "value": "QUESTION 20"
                 },
                 "validate": {
-                    "regExp": "^[A-D]{0,1}$",
-                    "errorMsg": "Please enter valid option (A B C D )"
+                    "regExp": "^[A-E]{0,1}$",
+                    "errorMsg": "Please enter valid option (A B C D E)"
                 },
                 "omrOptions": [
                     "A",
