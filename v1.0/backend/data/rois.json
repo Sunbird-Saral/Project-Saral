@@ -35072,10 +35072,16 @@
                 "version": "1.0",
                 "name": "ANY1S10Q Exam Sheet Form",
                 "threshold": {
-                    "minWidth": 540,
+                    "minWidth" : 540,
                     "minHeight": 375,
                     "detectionRadius": 12
-                },
+                },  
+                "resultValidation": {
+                    "validate": {
+                        "regExp": "^[0-1]$",
+                        "errorMsg": "Omr result should be 1 or 0"
+                    }
+                }, 
                 "cells": [
                     {
                         "cellId": "1",
@@ -35159,9 +35165,6 @@
                         "format": {
                             "name": "ROLLNUMBER",
                             "value": "ROLLNUMBER"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -35186,9 +35189,6 @@
                         "format": {
                             "name": "QUESTION1",
                             "value": "QUESTION 1"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -35213,9 +35213,6 @@
                         "format": {
                             "name": "QUESTION2",
                             "value": "QUESTION 2"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -35240,9 +35237,6 @@
                         "format": {
                             "name": "QUESTION3",
                             "value": "QUESTION 3"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -35267,9 +35261,6 @@
                         "format": {
                             "name": "QUESTION4",
                             "value": "QUESTION 4"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -35294,9 +35285,6 @@
                         "format": {
                             "name": "QUESTION5",
                             "value": "QUESTION 5"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -35321,9 +35309,6 @@
                         "format": {
                             "name": "QUESTION6",
                             "value": "QUESTION 6"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -35348,9 +35333,6 @@
                         "format": {
                             "name": "QUESTION7",
                             "value": "QUESTION 7"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -35375,9 +35357,6 @@
                         "format": {
                             "name": "QUESTION8",
                             "value": "QUESTION 8"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -35402,9 +35381,6 @@
                         "format": {
                             "name": "QUESTION9",
                             "value": "QUESTION 9"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -35429,9 +35405,6 @@
                         "format": {
                             "name": "QUESTION10",
                             "value": "QUESTION 10"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     }
                 ]
@@ -45922,6 +45895,12 @@
                     "minHeight": 480,
                     "detectionRadius": 12
                 },
+                "resultValidation": {
+                    "validate": {
+                        "regExp": "^[0-1]$",
+                        "errorMsg": "Omr result should be 1 or 0"
+                    }
+                },
                 "cells": [
                     {
                         "cellId": "1",
@@ -46017,9 +45996,6 @@
                         "format": {
                             "name": "ROLLNUMBERID1",
                             "value": "ROLLNUMBERID1"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -46044,9 +46020,6 @@
                         "format": {
                             "name": "ROLLNUMBER1_Q1",
                             "value": "ROLLNUMBER1 Q1"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -46071,9 +46044,6 @@
                         "format": {
                             "name": "ROLLNUMBER1_Q2",
                             "value": "ROLLNUMBER1 Q2"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -46098,9 +46068,6 @@
                         "format": {
                             "name": "ROLLNUMBER1_Q3",
                             "value": "ROLLNUMBER1 Q3"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -46125,9 +46092,6 @@
                         "format": {
                             "name": "ROLLNUMBER1_Q4",
                             "value": "ROLLNUMBER1 Q4"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -46152,9 +46116,6 @@
                         "format": {
                             "name": "ROLLNUMBER1_Q5",
                             "value": "ROLLNUMBER1 Q5"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -46179,9 +46140,6 @@
                         "format": {
                             "name": "ROLLNUMBER1_Q6",
                             "value": "ROLLNUMBER1 Q6"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -46206,9 +46164,6 @@
                         "format": {
                             "name": "ROLLNUMBER1_Q7",
                             "value": "ROLLNUMBER1 Q7"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -46233,9 +46188,6 @@
                         "format": {
                             "name": "ROLLNUMBER1_Q8",
                             "value": "ROLLNUMBER1 Q8"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -46260,9 +46212,6 @@
                         "format": {
                             "name": "ROLLNUMBER1_Q9",
                             "value": "ROLLNUMBER1 Q9"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -46287,9 +46236,6 @@
                         "format": {
                             "name": "ROLLNUMBER1_Q10",
                             "value": "ROLLNUMBER1 Q10"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -46386,9 +46332,6 @@
                         "format": {
                             "name": "ROLLNUMBERID2",
                             "value": "ROLLNUMBERID2"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -46413,9 +46356,6 @@
                         "format": {
                             "name": "ROLLNUMBER2_Q1",
                             "value": "ROLLNUMBER2 Q1"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -46440,9 +46380,6 @@
                         "format": {
                             "name": "ROLLNUMBER2_Q2",
                             "value": "ROLLNUMBER2 Q2"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -46467,9 +46404,6 @@
                         "format": {
                             "name": "ROLLNUMBER2_Q3",
                             "value": "ROLLNUMBER2 Q3"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -46494,9 +46428,6 @@
                         "format": {
                             "name": "ROLLNUMBER2_Q4",
                             "value": "ROLLNUMBER2 Q4"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -46521,9 +46452,6 @@
                         "format": {
                             "name": "ROLLNUMBER2_Q5",
                             "value": "ROLLNUMBER2 Q5"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -46548,9 +46476,6 @@
                         "format": {
                             "name": "ROLLNUMBER2_Q6",
                             "value": "ROLLNUMBER2 Q6"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -46575,9 +46500,6 @@
                         "format": {
                             "name": "ROLLNUMBER2_Q7",
                             "value": "ROLLNUMBER2 Q7"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -46602,9 +46524,6 @@
                         "format": {
                             "name": "ROLLNUMBER2_Q8",
                             "value": "ROLLNUMBER2 Q8"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -46629,9 +46548,6 @@
                         "format": {
                             "name": "ROLLNUMBER2_Q9",
                             "value": "ROLLNUMBER2 Q9"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -46656,9 +46572,6 @@
                         "format": {
                             "name": "ROLLNUMBER2_Q10",
                             "value": "ROLLNUMBER2 Q10"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -46755,9 +46668,6 @@
                         "format": {
                             "name": "ROLLNUMBERID3",
                             "value": "ROLLNUMBERID3"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -46782,9 +46692,6 @@
                         "format": {
                             "name": "ROLLNUMBER3_Q1",
                             "value": "ROLLNUMBER3 Q1"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -46809,9 +46716,6 @@
                         "format": {
                             "name": "ROLLNUMBER3_Q2",
                             "value": "ROLLNUMBER3 Q2"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -46836,9 +46740,6 @@
                         "format": {
                             "name": "ROLLNUMBER3_Q3",
                             "value": "ROLLNUMBER3 Q3"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -46863,9 +46764,6 @@
                         "format": {
                             "name": "ROLLNUMBER3_Q4",
                             "value": "ROLLNUMBER3 Q4"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -46890,9 +46788,6 @@
                         "format": {
                             "name": "ROLLNUMBER3_Q5",
                             "value": "ROLLNUMBER3 Q5"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -46917,9 +46812,6 @@
                         "format": {
                             "name": "ROLLNUMBER3_Q6",
                             "value": "ROLLNUMBER3 Q6"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -46944,9 +46836,6 @@
                         "format": {
                             "name": "ROLLNUMBER3_Q7",
                             "value": "ROLLNUMBER3 Q7"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -46971,9 +46860,6 @@
                         "format": {
                             "name": "ROLLNUMBER3_Q8",
                             "value": "ROLLNUMBER3 Q8"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -46998,9 +46884,6 @@
                         "format": {
                             "name": "ROLLNUMBER3_Q9",
                             "value": "ROLLNUMBER3 Q9"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -47025,9 +46908,6 @@
                         "format": {
                             "name": "ROLLNUMBER3_Q10",
                             "value": "ROLLNUMBER3 Q10"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -47124,9 +47004,6 @@
                         "format": {
                             "name": "ROLLNUMBERID4",
                             "value": "ROLLNUMBERID4"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -47151,9 +47028,6 @@
                         "format": {
                             "name": "ROLLNUMBER4_Q1",
                             "value": "ROLLNUMBER4 Q1"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -47178,9 +47052,6 @@
                         "format": {
                             "name": "ROLLNUMBER4_Q2",
                             "value": "ROLLNUMBER4 Q2"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -47205,9 +47076,6 @@
                         "format": {
                             "name": "ROLLNUMBER4_Q3",
                             "value": "ROLLNUMBER4 Q3"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -47232,9 +47100,6 @@
                         "format": {
                             "name": "ROLLNUMBER4_Q4",
                             "value": "ROLLNUMBER4 Q4"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -47259,9 +47124,6 @@
                         "format": {
                             "name": "ROLLNUMBER4_Q5",
                             "value": "ROLLNUMBER4 Q5"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -47286,9 +47148,6 @@
                         "format": {
                             "name": "ROLLNUMBER4_Q6",
                             "value": "ROLLNUMBER4 Q6"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -47313,9 +47172,6 @@
                         "format": {
                             "name": "ROLLNUMBER4_Q7",
                             "value": "ROLLNUMBER4 Q7"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -47340,9 +47196,6 @@
                         "format": {
                             "name": "ROLLNUMBER4_Q8",
                             "value": "ROLLNUMBER4 Q8"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -47367,9 +47220,6 @@
                         "format": {
                             "name": "ROLLNUMBER4_Q9",
                             "value": "ROLLNUMBER4 Q9"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -47394,9 +47244,6 @@
                         "format": {
                             "name": "ROLLNUMBER4_Q10",
                             "value": "ROLLNUMBER4 Q10"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -47493,9 +47340,6 @@
                         "format": {
                             "name": "ROLLNUMBERID5",
                             "value": "ROLLNUMBERID5"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -47520,9 +47364,6 @@
                         "format": {
                             "name": "ROLLNUMBER5_Q1",
                             "value": "ROLLNUMBER5 Q1"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -47547,9 +47388,6 @@
                         "format": {
                             "name": "ROLLNUMBER5_Q2",
                             "value": "ROLLNUMBER5 Q2"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -47574,9 +47412,6 @@
                         "format": {
                             "name": "ROLLNUMBER5_Q3",
                             "value": "ROLLNUMBER5 Q3"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -47601,9 +47436,6 @@
                         "format": {
                             "name": "ROLLNUMBER5_Q4",
                             "value": "ROLLNUMBER5 Q4"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -47628,9 +47460,6 @@
                         "format": {
                             "name": "ROLLNUMBER5_Q5",
                             "value": "ROLLNUMBER5 Q5"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -47655,9 +47484,6 @@
                         "format": {
                             "name": "ROLLNUMBER5_Q6",
                             "value": "ROLLNUMBER5 Q6"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -47682,9 +47508,6 @@
                         "format": {
                             "name": "ROLLNUMBER5_Q7",
                             "value": "ROLLNUMBER5 Q7"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -47709,9 +47532,6 @@
                         "format": {
                             "name": "ROLLNUMBER5_Q8",
                             "value": "ROLLNUMBER5 Q8"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -47736,9 +47556,6 @@
                         "format": {
                             "name": "ROLLNUMBER5_Q9",
                             "value": "ROLLNUMBER5 Q9"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -47763,9 +47580,6 @@
                         "format": {
                             "name": "ROLLNUMBER5_Q10",
                             "value": "ROLLNUMBER5 Q10"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -47862,9 +47676,6 @@
                         "format": {
                             "name": "ROLLNUMBERID6",
                             "value": "ROLLNUMBERID6"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -47889,9 +47700,6 @@
                         "format": {
                             "name": "ROLLNUMBER6_Q1",
                             "value": "ROLLNUMBER6 Q1"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -47916,9 +47724,6 @@
                         "format": {
                             "name": "ROLLNUMBER6_Q2",
                             "value": "ROLLNUMBER6 Q2"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -47943,9 +47748,6 @@
                         "format": {
                             "name": "ROLLNUMBER6_Q3",
                             "value": "ROLLNUMBER6 Q3"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -47970,9 +47772,6 @@
                         "format": {
                             "name": "ROLLNUMBER6_Q4",
                             "value": "ROLLNUMBER6 Q4"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -47997,9 +47796,6 @@
                         "format": {
                             "name": "ROLLNUMBER6_Q5",
                             "value": "ROLLNUMBER6 Q5"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -48024,9 +47820,6 @@
                         "format": {
                             "name": "ROLLNUMBER6_Q6",
                             "value": "ROLLNUMBER6 Q6"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -48051,9 +47844,6 @@
                         "format": {
                             "name": "ROLLNUMBER6_Q7",
                             "value": "ROLLNUMBER6 Q7"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -48078,9 +47868,6 @@
                         "format": {
                             "name": "ROLLNUMBER6_Q8",
                             "value": "ROLLNUMBER6 Q8"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -48105,9 +47892,6 @@
                         "format": {
                             "name": "ROLLNUMBER6_Q9",
                             "value": "ROLLNUMBER6 Q9"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -48132,9 +47916,6 @@
                         "format": {
                             "name": "ROLLNUMBER6_Q10",
                             "value": "ROLLNUMBER6 Q10"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -48231,9 +48012,6 @@
                         "format": {
                             "name": "ROLLNUMBERID7",
                             "value": "ROLLNUMBERID7"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -48258,9 +48036,6 @@
                         "format": {
                             "name": "ROLLNUMBER7_Q1",
                             "value": "ROLLNUMBER7 Q1"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -48285,9 +48060,6 @@
                         "format": {
                             "name": "ROLLNUMBER7_Q2",
                             "value": "ROLLNUMBER7 Q2"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -48312,9 +48084,6 @@
                         "format": {
                             "name": "ROLLNUMBER7_Q3",
                             "value": "ROLLNUMBER7 Q3"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -48339,9 +48108,6 @@
                         "format": {
                             "name": "ROLLNUMBER7_Q4",
                             "value": "ROLLNUMBER7 Q4"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -48366,9 +48132,6 @@
                         "format": {
                             "name": "ROLLNUMBER7_Q5",
                             "value": "ROLLNUMBER7 Q5"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -48393,9 +48156,6 @@
                         "format": {
                             "name": "ROLLNUMBER7_Q6",
                             "value": "ROLLNUMBER7 Q6"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -48420,9 +48180,6 @@
                         "format": {
                             "name": "ROLLNUMBER7_Q7",
                             "value": "ROLLNUMBER7 Q7"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -48447,9 +48204,6 @@
                         "format": {
                             "name": "ROLLNUMBER7_Q8",
                             "value": "ROLLNUMBER7 Q8"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -48474,9 +48228,6 @@
                         "format": {
                             "name": "ROLLNUMBER7_Q9",
                             "value": "ROLLNUMBER7 Q9"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -48501,9 +48252,6 @@
                         "format": {
                             "name": "ROLLNUMBER7_Q10",
                             "value": "ROLLNUMBER7 Q10"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -48600,9 +48348,6 @@
                         "format": {
                             "name": "ROLLNUMBERID8",
                             "value": "ROLLNUMBERID8"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -48627,9 +48372,6 @@
                         "format": {
                             "name": "ROLLNUMBER8_Q1",
                             "value": "ROLLNUMBER8 Q1"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -48654,9 +48396,6 @@
                         "format": {
                             "name": "ROLLNUMBER8_Q2",
                             "value": "ROLLNUMBER8 Q2"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -48681,9 +48420,6 @@
                         "format": {
                             "name": "ROLLNUMBER8_Q3",
                             "value": "ROLLNUMBER8 Q3"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -48708,9 +48444,6 @@
                         "format": {
                             "name": "ROLLNUMBER8_Q4",
                             "value": "ROLLNUMBER8 Q4"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -48735,9 +48468,6 @@
                         "format": {
                             "name": "ROLLNUMBER8_Q5",
                             "value": "ROLLNUMBER8 Q5"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -48762,9 +48492,6 @@
                         "format": {
                             "name": "ROLLNUMBER8_Q6",
                             "value": "ROLLNUMBER8 Q6"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -48789,9 +48516,6 @@
                         "format": {
                             "name": "ROLLNUMBER8_Q7",
                             "value": "ROLLNUMBER8 Q7"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -48816,9 +48540,6 @@
                         "format": {
                             "name": "ROLLNUMBER8_Q8",
                             "value": "ROLLNUMBER8 Q8"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -48843,9 +48564,6 @@
                         "format": {
                             "name": "ROLLNUMBER8_Q9",
                             "value": "ROLLNUMBER8 Q9"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -48870,9 +48588,6 @@
                         "format": {
                             "name": "ROLLNUMBER8_Q10",
                             "value": "ROLLNUMBER8 Q10"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -48969,9 +48684,6 @@
                         "format": {
                             "name": "ROLLNUMBERID9",
                             "value": "ROLLNUMBERID9"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -48996,9 +48708,6 @@
                         "format": {
                             "name": "ROLLNUMBER9_Q1",
                             "value": "ROLLNUMBER9 Q1"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -49023,9 +48732,6 @@
                         "format": {
                             "name": "ROLLNUMBER9_Q2",
                             "value": "ROLLNUMBER9 Q2"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -49050,9 +48756,6 @@
                         "format": {
                             "name": "ROLLNUMBER9_Q3",
                             "value": "ROLLNUMBER9 Q3"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -49077,9 +48780,6 @@
                         "format": {
                             "name": "ROLLNUMBER9_Q4",
                             "value": "ROLLNUMBER9 Q4"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -49104,9 +48804,6 @@
                         "format": {
                             "name": "ROLLNUMBER9_Q5",
                             "value": "ROLLNUMBER9 Q5"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -49131,9 +48828,6 @@
                         "format": {
                             "name": "ROLLNUMBER9_Q6",
                             "value": "ROLLNUMBER9 Q6"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -49158,9 +48852,6 @@
                         "format": {
                             "name": "ROLLNUMBER9_Q7",
                             "value": "ROLLNUMBER9 Q7"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -49185,9 +48876,6 @@
                         "format": {
                             "name": "ROLLNUMBER9_Q8",
                             "value": "ROLLNUMBER9 Q8"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -49212,9 +48900,6 @@
                         "format": {
                             "name": "ROLLNUMBER9_Q9",
                             "value": "ROLLNUMBER9 Q9"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -49239,9 +48924,6 @@
                         "format": {
                             "name": "ROLLNUMBER9_Q10",
                             "value": "ROLLNUMBER9 Q10"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -49338,9 +49020,6 @@
                         "format": {
                             "name": "ROLLNUMBERID10",
                             "value": "ROLLNUMBERID10"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -49365,9 +49044,6 @@
                         "format": {
                             "name": "ROLLNUMBER10_Q1",
                             "value": "ROLLNUMBER10 Q1"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -49392,9 +49068,6 @@
                         "format": {
                             "name": "ROLLNUMBER10_Q2",
                             "value": "ROLLNUMBER10 Q2"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -49419,9 +49092,6 @@
                         "format": {
                             "name": "ROLLNUMBER10_Q3",
                             "value": "ROLLNUMBER10 Q3"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -49446,9 +49116,6 @@
                         "format": {
                             "name": "ROLLNUMBER10_Q4",
                             "value": "ROLLNUMBER10 Q4"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -49473,9 +49140,6 @@
                         "format": {
                             "name": "ROLLNUMBER10_Q5",
                             "value": "ROLLNUMBER10 Q5"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -49500,9 +49164,6 @@
                         "format": {
                             "name": "ROLLNUMBER10_Q6",
                             "value": "ROLLNUMBER10 Q6"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -49527,9 +49188,6 @@
                         "format": {
                             "name": "ROLLNUMBER10_Q7",
                             "value": "ROLLNUMBER10 Q7"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -49554,9 +49212,6 @@
                         "format": {
                             "name": "ROLLNUMBER10_Q8",
                             "value": "ROLLNUMBER10 Q8"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -49581,9 +49236,6 @@
                         "format": {
                             "name": "ROLLNUMBER10_Q9",
                             "value": "ROLLNUMBER10 Q9"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     },
                     {
@@ -49608,9 +49260,6 @@
                         "format": {
                             "name": "ROLLNUMBER10_Q10",
                             "value": "ROLLNUMBER10 Q10"
-                        },
-                        "validate": {
-                            "regExp": ""
                         }
                     }
                 ]
