@@ -5,7 +5,6 @@ import org.ekstep.saral.saralsdk.R;
 import android.os.Bundle;
 import android.widget.ImageView;
 
-import com.squareup.picasso.Picasso;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
