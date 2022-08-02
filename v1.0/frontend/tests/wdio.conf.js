@@ -39,8 +39,8 @@ exports.config = {
             //  './specs/hindi_8s_13q_9d_omr.js',
             // './specs/ANY_1S_9D_30Q_4omr_mcq.js',
             // './specs/ANY_1S_30QMCQ_School_evaluation.js'
-            //   './specs/personal_details.js'
-            './specs/sheetTestCase/autoSkip.js'
+               './specs/personal_details.js'
+            // './specs/sheetTestCase/autoSkip.js'
            
 
         ]

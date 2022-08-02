@@ -32,7 +32,7 @@ class AppObject {
     }
 
     get profileIcon() {
-        return $('//*[@text="D"]');
+        return $('//android.widget.TextView[@text="D"]');
     }
 
     get profileIcon_P() {
@@ -338,6 +338,18 @@ class AppObject {
 
     get scrollToDetails() {
         return $('android=new UiScrollable(new UiSelector().scrollable(true)).scrollTextIntoView("Student Details")');
+    }
+
+    get modeSwitch() {
+        return $('android.widget.Switch');
+    }
+
+    get select_layout() {
+        return $("//android.widget.TextView[@text='personal-details']");
+    }
+
+    get detailText() {
+        return $("//android.widget.TextView[@text='Details']");
     }
 }
 export default new AppObject();
