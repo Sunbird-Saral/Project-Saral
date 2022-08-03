@@ -69,6 +69,28 @@ public class DetectShaded {
         return isOMRFilled;
     }
 
+    public boolean isOMRFilledWitExperimentalOMR(Mat imageMat)
+    {
+        boolean isOMRFilled = false;
+        byte _OMR_FILLED_THRESHOULD = 100;
+        Mat gray  = new Mat();
+        Imgproc.cvtColor(imageMat, gray, Imgproc.COLOR_BGR2GRAY);
+        Imgproc.GaussianBlur(gray, gray, new Size(3, 3), 0);
+        Mat threshInv= new Mat();
+        double otsu_thresh_val =Imgproc.threshold(gray, threshInv, 0, 255, Imgproc.THRESH_BINARY_INV + Imgproc.THRESH_OTSU);
+        Imgproc.threshold(gray, threshInv, otsu_thresh_val-17 , 255, Imgproc.THRESH_BINARY_INV);
+
+        
+        Mat kernel = Mat.ones(3,3, CvType.CV_32F);
+        Mat morpho_close = Imgproc.morphologyEx(imageMat, threshInv, Imgproc.MORPH_CLOSE, kernel);
+        Mat  final_thresh =  Imgproc.dilate(imageMat, morpho_close, kernel);
+        Log.d(TAG,"morpho_close==> " + morpho_close);
+        Log.d(TAG,"final_thresh==> " + final_thresh);
+
+        // isOMRFilled = Core.countNonZero(138.0) >= _OMR_FILLED_THRESHOULD;
+        return isOMRFilled = true;
+    }
+
     public Mat getROIMat(Mat image, int top, int left, int bottom, int right) {
         Rect rect           = new Rect(left, top, right - left, bottom - top);
         Mat croppedImage    = new Mat(image.clone(), rect);
