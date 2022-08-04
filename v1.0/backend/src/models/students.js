@@ -6,7 +6,7 @@ const studentSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    studentId: {
+    identifier: {
         type: String,
         unique: true,
         required: true,
@@ -15,17 +15,17 @@ const studentSchema = new mongoose.Schema({
     studentClass: {
         type: Array,
         default: {
-            classId: "2",
-            className: 'Class-2'
+            category1: "2",
+            categoryName: 'Class-2'
         }
     },
-    section: {
+    category2: {
         type: String,
         trim: true,
         uppercase: true,
         default: "A"
     },
-    schoolId: {
+    orgId: {
         type: String,
         required: true,
         ref: 'School'
@@ -35,19 +35,19 @@ const studentSchema = new mongoose.Schema({
 })
 
 //model method created
-studentSchema.statics.getStudentsCountByClassAndSection = async (schoolId, classId, section) => {
-    const match = { schoolId }
-    if(classId) {
+studentSchema.statics.getStudentsCountByClassAndSection = async (orgId, category1, category2) => {
+    const match = { orgId }
+    if(category1) {
         let studentClassObj = {
-            classId: classId, 
-            className: `Class-${classId}`
+            category1: category1, 
+            categoryName: `Class-${category1}`
         }    
         let studentClass = [studentClassObj]
         match.studentClass = studentClass
     }
 
-    if(section) {
-        match.section = section
+    if(category2) {
+        match.category2 = category2
     }
     
     try {
