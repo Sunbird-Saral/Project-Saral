@@ -61,6 +61,23 @@ components:
                   items:
                     $ref: '#/components/schemas/cell'
                   minItems: 1
+
+        resultScreenLabels:
+          type: object
+          description: Result screen labels display table heading of layout.
+          properties:
+            id:
+              type: string
+              description: Identifier of layout .
+            sr_no:
+              type: string
+              description: Sequence Number .
+            questions:
+              type: string
+              description: It displays the field of layout .
+            marks:
+              type: string
+              description:  It displays the value of layout .
     
         idValidation: 
           type: object
