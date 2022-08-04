@@ -15,10 +15,9 @@ router.post('/classes', auth, async (req, res) => {
     body.forEach(data => {
         const classData = new ClassModel({
             ...data,
-            className: `Class-${data.classId}`,
-            schoolId: req.school.schoolId
+            categoryName: `Class-${data.category1}`,
+            orgId: req.school.orgId
         })
-        console.log(classData)
         classModel.push(classData)
     });
     try {
@@ -26,31 +25,31 @@ router.post('/classes', auth, async (req, res) => {
         let finalUpdatedData = []
         Promise.map(classModel, async doc => {
             let match = {
-                schoolId: doc.schoolId,
-                classId: doc.classId
+                orgId: doc.orgId,
+                category1: doc.category1
             }
             let dataExists = await ClassModel.findOne(match);
             if (!dataExists) {
                 await doc.save()
                 let response = {
-                    sections: doc.sections,
-                    classId: doc.classId,
-                    className: doc.className,
-                    schoolId: doc.schoolId,
+                    categories: doc.categories,
+                    category1: doc.category1,
+                    categoryName: doc.categoryName,
+                    orgId: doc.orgId,
                     createdAt: doc.createdAt,
                     updatedAt: doc.updatedAt
                 }
                 finalUpdatedData.push(response)
             } else {
-                let updatedSections = dataExists['sections'] ? dataExists['sections'].concat(doc['sections']) : doc['sections']
-                dataExists['sections'] = _.uniqBy(updatedSections, 'section');
+                let updatedSections = dataExists['categories'] ? dataExists['categories'].concat(doc['categories']) : doc['categories']
+                dataExists['categories'] = _.uniqBy(updatedSections, 'category2');
                 
                 await dataExists.save()
                 let response = {
-                    sections: doc.sections,
-                    classId: doc.classId,
-                    className: doc.className,
-                    schoolId: doc.schoolId,
+                    categories: doc.categories,
+                    category1: doc.category1,
+                    categoryName: doc.categoryName,
+                    orgId: doc.orgId,
                     createdAt: doc.createdAt,
                     updatedAt: doc.updatedAt
                 }
@@ -69,7 +68,7 @@ router.post('/classes', auth, async (req, res) => {
 
 router.put('/classes', auth, async (req, res) => {
     const updates = Object.keys(req.body)
-    const allowedUpdates = ['sections', 'classId']
+    const allowedUpdates = ['categories', 'category1']
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
 
     if (!isValidOperation) {
@@ -77,8 +76,8 @@ router.put('/classes', auth, async (req, res) => {
     }
 
     const match = {
-        schoolId: req.school.schoolId,
-        classId: req.body.classId
+        orgId: req.school.orgId,
+        category1: req.body.category1
     }
 
     try {
@@ -87,17 +86,17 @@ router.put('/classes', auth, async (req, res) => {
         if (!classData || (classData && classData.length == 0)) {
             const classModel = new ClassModel({
                 ...req.body,
-                className: `Class-${req.body.classId}`,
-                schoolId: req.school.schoolId
+                categoryName: `Class-${req.body.category1}`,
+                orgId: req.school.orgId
             })
 
             try {
                 await classModel.save()
                 let response = {
-                    sections: classModel.sections,
-                    classId: classModel.classId,
-                    className: classModel.className,
-                    schoolId: classModel.schoolId,
+                    categories: classModel.categories,
+                    category1: classModel.category1,
+                    categoryName: classModel.categoryName,
+                    orgId: classModel.orgId,
                     createdAt: classModel.createdAt,
                     updatedAt: classModel.updatedAt
                 }
@@ -109,14 +108,15 @@ router.put('/classes', auth, async (req, res) => {
             }
         } else {
             
-            let updatedSections = classData['sections'] ? classData['sections'].concat(req.body['sections']) : req.body['sections']
-            classData['sections'] = _.uniqBy(updatedSections, 'section');
+            let updatedSections = classData['categories'] ? classData['categories'].concat(req.body['categories']) : req.body['categories']
+            classData['categories'] = _.uniqBy(updatedSections, 'category2');
+            
             await classData.save()
             let response = {
-                sections: classData.sections,
-                classId: classData.classId,
-                className: classData.className,
-                schoolId: classData.schoolId,
+                categories: classData.categories,
+                category1: classData.category1,
+                categoryName: classData.categoryName,
+                orgId: classData.orgId,
                 createdAt: classData.createdAt,
                 updatedAt: classData.updatedAt
             }
@@ -131,9 +131,9 @@ router.put('/classes', auth, async (req, res) => {
 })
 
 router.delete('/classes', auth, async (req, res) => {
-    if (Object.keys(req.body) != "classId") return res.status(400).send({ message: 'Validation error.' })
+    if (Object.keys(req.body) != "category1") return res.status(400).send({ message: 'Validation error.' })
     // const inputKeys = Object.keys(req.body)
-    // const allowedUpdates = ['classId']
+    // const allowedUpdates = ['category1']
     // const isValidOperation = inputKeys.every((update) => allowedUpdates.includes(update))
 
     // if (!isValidOperation) {
@@ -141,8 +141,8 @@ router.delete('/classes', auth, async (req, res) => {
     // }
 
     const match = {
-        schoolId: req.school.schoolId,
-        classId: req.body.classId
+        orgId: req.school.orgId,
+        category1: req.body.category1
     }
 
     try {
@@ -150,13 +150,13 @@ router.delete('/classes', auth, async (req, res) => {
         if (classData) {
             await ClassModel.deleteOne(match)
             let lookup = {
-                schoolId: req.school.schoolId,
-                studentClass: { $elemMatch: { classId: req.body.classId } }
+                orgId: req.school.orgId,
+                studentClass: { $elemMatch: { category1: req.body.category1 } }
             }
             let students = await Student.find(lookup).lean()
             if (students.length) {
                 for (let student of students) {
-                    await Mark.deleteMany({ schoolId: req.school.schoolId, studentId: student.studentId })
+                    await Mark.deleteMany({ orgId: req.school.orgId, studentId: student.studentId })
                 }
                 await Student.deleteMany(lookup).lean()
             }
