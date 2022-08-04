@@ -23,7 +23,7 @@ const BrandSchema = new mongoose.Schema({
         // required: true,
         trim: true
     },
-    schoolId: {
+    orgId: {
         type: String,
         unique: true,
         // required: true,
@@ -35,7 +35,7 @@ const BrandSchema = new mongoose.Schema({
             School: {
                 type: String
             },
-            SchoolId: {
+            orgId: {
                 type: String
             },
             Class: {
@@ -53,7 +53,7 @@ const BrandSchema = new mongoose.Schema({
            School: {
               type: String
         },
-           SchoolId: {
+           orgId: {
               type: String
         }
         }],
@@ -62,7 +62,7 @@ const BrandSchema = new mongoose.Schema({
             School: {
                 type: String
             },
-            SchoolId: {
+            orgId: {
                 type: String
             }
         }],
@@ -71,7 +71,7 @@ const BrandSchema = new mongoose.Schema({
             School: {
                 type: String
             },
-            SchoolId: {
+            orgId: {
                 type: String
             },
             SelectRoi: {
@@ -89,7 +89,7 @@ const BrandSchema = new mongoose.Schema({
             School: {
                 type: String
             },
-            SchoolId: {
+            orgId: {
                 type: String
             }
         }],
@@ -98,7 +98,7 @@ const BrandSchema = new mongoose.Schema({
             School: {
                 type: String
             },
-            SchoolId: {
+            orgId: {
                 type:String
             }
         }],
@@ -107,7 +107,7 @@ const BrandSchema = new mongoose.Schema({
             School: {
                 type: String
             },
-            SchoolId: {
+            orgId: {
                 type: String
             },
             Class: {
