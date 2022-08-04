@@ -195,7 +195,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                 mTotalClassifiedCount++;
                     try {
                         JSONObject result = new JSONObject();
-                        if(digit != 36 && lettersMap.get(digit)!=null) {
+                        if(digit != 37 && lettersMap.get(digit)!=null) {
                             result.put("prediction", lettersMap.get(digit));
                             result.put("confidence", new Double(confidence));
                         }else{
