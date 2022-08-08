@@ -64,32 +64,51 @@ public class DetectShaded {
         Imgproc.GaussianBlur(gray, gray, new Size(3, 3), 0);
         Mat threshInv= new Mat();
         double otsu_thresh_val =Imgproc.threshold(gray, threshInv, 0, 255, Imgproc.THRESH_BINARY_INV + Imgproc.THRESH_OTSU);
-        otsu_thresh_val =Imgproc.threshold(gray, threshInv, otsu_thresh_val-50 , 255, Imgproc.THRESH_BINARY_INV);
-        isOMRFilled = Core.countNonZero(threshInv) >= _OMR_FILLED_THRESHOULD;
+        Imgproc.threshold(gray, threshInv, otsu_thresh_val-17 , 255, Imgproc.THRESH_BINARY_INV);
+        // isOMRFilled = Core.countNonZero(threshInv) >= _OMR_FILLED_THRESHOULD;
+       
+
+        Mat kernel = Mat.ones(3,3, CvType.CV_32F);
+        
+        Mat morph_close = new Mat();
+        
+        Imgproc.morphologyEx(threshInv, morph_close, Imgproc.MORPH_CLOSE, kernel);
+        
+        Mat morph_dilate = new Mat();
+        
+        Imgproc.dilate(morph_close, morph_dilate, kernel);
+
+        isOMRFilled = Core.countNonZero(morph_dilate) >= _OMR_FILLED_THRESHOULD;
+        
         return isOMRFilled;
     }
 
-    public boolean isOMRFilledWitExperimentalOMR(Mat imageMat)
-    {
-        boolean isOMRFilled = false;
-        byte _OMR_FILLED_THRESHOULD = 100;
-        Mat gray  = new Mat();
-        Imgproc.cvtColor(imageMat, gray, Imgproc.COLOR_BGR2GRAY);
-        Imgproc.GaussianBlur(gray, gray, new Size(3, 3), 0);
-        Mat threshInv= new Mat();
-        double otsu_thresh_val =Imgproc.threshold(gray, threshInv, 0, 255, Imgproc.THRESH_BINARY_INV + Imgproc.THRESH_OTSU);
-        Imgproc.threshold(gray, threshInv, otsu_thresh_val-17 , 255, Imgproc.THRESH_BINARY_INV);
+    // public boolean isOMRFilledWitExperimentalOMR(Mat imageMat)
+    // {
+    //     boolean isOMRFilled = false;
+    //     byte _OMR_FILLED_THRESHOULD = 100;
+    //     Mat gray  = new Mat();
+    //     Imgproc.cvtColor(imageMat, gray, Imgproc.COLOR_BGR2GRAY);
+    //     Imgproc.GaussianBlur(gray, gray, new Size(3, 3), 0);
+    //     Mat threshInv= new Mat();
+    //     double otsu_thresh_val =Imgproc.threshold(gray, threshInv, 0, 255, Imgproc.THRESH_BINARY_INV + Imgproc.THRESH_OTSU);
+    //     Imgproc.threshold(gray, threshInv, otsu_thresh_val-17 , 255, Imgproc.THRESH_BINARY_INV);
 
         
-        Mat kernel = Mat.ones(3,3, CvType.CV_32F);
-        Mat morpho_close = Imgproc.morphologyEx(imageMat, threshInv, Imgproc.MORPH_CLOSE, kernel);
-        Mat  final_thresh =  Imgproc.dilate(imageMat, morpho_close, kernel);
-        Log.d(TAG,"morpho_close==> " + morpho_close);
-        Log.d(TAG,"final_thresh==> " + final_thresh);
+    //   Mat kernel = Mat.ones(3,3, CvType.CV_32F);
+        
+    //     Mat morph_close = new Mat();
+        
+    //     Imgproc.morphologyEx(threshInv, morph_close, Imgproc.MORPH_CLOSE, kernel);
+        
+    //     Mat morph_dilate = new Mat();
+        
+    //     Imgproc.dilate(morph_close, morph_dilate, kernel);
 
-        // isOMRFilled = Core.countNonZero(138.0) >= _OMR_FILLED_THRESHOULD;
-        return isOMRFilled = true;
-    }
+    //     isOMRFilled = Core.countNonZero(morph_dilate) >= _OMR_FILLED_THRESHOULD;
+        
+    //     return isOMRFilled;
+    // }
 
     public Mat getROIMat(Mat image, int top, int left, int bottom, int right) {
         Rect rect           = new Rect(left, top, right - left, bottom - top);
