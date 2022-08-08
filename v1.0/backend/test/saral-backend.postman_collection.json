@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "5c55ac3c-95fc-4f09-bb90-278cf88dccc0",
+		"_postman_id": "5587c872-e26a-4f71-9f3e-332cfaa50f7c",
 		"name": "saral-backend",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Dummy school 2\",\r\n    \"schoolId\": \"od001\",\r\n    \"password\": \"tarento@123\",\r\n    \"state\": \"odisha\",\r\n    \"storeTrainingData\": true,\r\n    \"autoSync\": false,\r\n    \"autoSyncFrequency\": \"5000\",\r\n    \"autoSyncBatchSize\": 12,\r\n    \"tags\": false\r\n}",
+							"raw": "{\r\n    \"name\": \"Dummy school 2\",\r\n    \"schoolId\": \"od001\",\r\n    \"password\": \"tarento@123\",\r\n    \"state\": \"odisha\",\r\n    \"storeTrainingData\": true,\r\n    \"autoSync\": false,\r\n    \"autoSyncFrequency\": \"5000\",\r\n    \"autoSyncBatchSize\": 12,\r\n    \"tags\": false,\r\n    \"experimentalOMRDetection\": false\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -686,7 +686,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "[\r\n    {\r\n        \"classId\": \"3\",\r\n         \"sections\": [\r\n        {\r\n            \"section\": \"D\"\r\n        },\r\n         {\r\n            \"section\": \"B\"\r\n        },{\r\n            \"section\": \"C\"\r\n        }\r\n    ]\r\n    }\r\n]",
+							"raw": "[\r\n    {\r\n        \"classId\": \"31\",\r\n         \"sections\": [\r\n        {\r\n            \"section\": \"D\"\r\n        },\r\n         {\r\n            \"section\": \"B\"\r\n        },{\r\n            \"section\": \"C\"\r\n        }\r\n    ]\r\n    }\r\n]",
 							"options": {
 								"raw": {
 									"language": "json"

@@ -17,6 +17,7 @@ router.post('/schools/create', async (req, res) => {
         if(req.body.autoSyncFrequency)   school.autoSyncFrequency = req.body.autoSyncFrequency
         if(req.body.tags) school.tags = req.body.tags
         if(req.body.autoSyncBatchSize)   school.autoSyncBatchSize = req.body.autoSyncBatchSize
+        if(req.body.experimentalOMRDetection)   school.experimentalOMRDetection = req.body.experimentalOMRDetection
         await school.save()
         let schools = {
             storeTrainingData: school.storeTrainingData,
@@ -73,7 +74,8 @@ router.post('/schools/login', async (req, res) => {
             tags: schools.tags,
             autoSyncBatchSize: schools.autoSyncBatchSize,
             isMinimalMode: schools.isMinimalMode,
-            supportEmail: schools.supportEmail
+            supportEmail: schools.supportEmail,
+            experimentalOMRDetection: schools.experimentalOMRDetection
         }
 
         let response = {
