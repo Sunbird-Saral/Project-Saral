@@ -572,11 +572,11 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
     }
 
     private void showProcessingInformation(Mat image) {
-        String text     = "Please wait, scanning is in progress !!";
-        Point position  = new Point(image.width()/5, image.height() / 2);
-        Scalar color    = new Scalar(0, 0, 255);
-        int font        = Imgproc.COLOR_BGR2GRAY;
-        int scale       = 1;
+        String text     = "Layout image captured, processing for results !!";
+        Point position  = new Point(image.width()/6, image.height() / 2);
+        Scalar color    = new Scalar(0,100,0);
+        int font        = Imgproc.COLOR_BGR5652GRAY;
+        int scale       = 2;
         int thickness   = 3;
         Imgproc.putText(image, text, position, font, scale, color, thickness);
     }
