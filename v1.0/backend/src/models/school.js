@@ -59,10 +59,6 @@ const schoolSchema = new mongoose.Schema({
     supportEmail:{
         type: String,
         required: false
-    },
-    experimentalOMRDetection:{
-        type: Boolean,
-        required: false
     }
 }, {
     timestamps: false

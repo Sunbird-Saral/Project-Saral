@@ -8,8 +8,7 @@
     "autoSyncFrequency": 600000,
     "storeTrainingData": true,
     "tags": true,
-    "supportEmail": "abc@gmail.com , xyz@gmail.com",
-    "experimentalOMRDetection": true
+    "supportEmail": "abc@gmail.com , xyz@gmail.com"
   },
   {
     "name": "Dummy school 2",
@@ -20,8 +19,7 @@
     "autoSyncFrequency": 600000,
     "storeTrainingData": true,
     "tags": false,
-    "supportEmail": "abc@gmail.com",
-    "experimentalOMRDetection": false
+    "supportEmail": "abc@gmail.com"
   },
   {
     "name": "Dummy school 3",
@@ -31,8 +29,7 @@
     "autoSync": false,
     "autoSyncFrequency": 600000,
     "storeTrainingData": true,
-    "tags": false,
-    "experimentalOMRDetection": false
+    "tags": false
   },
   {
     "name": "Dummy school 4",
@@ -43,8 +40,7 @@
     "state": "up",
     "storeTrainingData": true,
     "tags": true,
-    "autoSyncBatchSize": 10,
-    "experimentalOMRDetection": true
+    "autoSyncBatchSize": 10
   },
   {
     "name": "Dummy Skill School",
@@ -53,8 +49,7 @@
     "state": "karnataka",
     "autoSyncFrequency": 600000,
     "storeTrainingData": true,
-    "tags": false,
-    "experimentalOMRDetection": false
+    "tags": false
   },
   {
     "name": "Dummy school 5",
@@ -63,8 +58,7 @@
     "state": "assam",
     "autoSyncFrequency": 600000,
     "storeTrainingData": true,
-    "tags": false,
-    "experimentalOMRDetection": false
+    "tags": false
   },
   {
     "name": "Dummy Organization",
@@ -75,8 +69,7 @@
     "autoSyncFrequency": 600000,
     "storeTrainingData": true,
     "tags": false,
-    "isMinimalMode": true,
-    "experimentalOMRDetection": false
+    "isMinimalMode": true
   },
   {
     "name": "Ps Vishnupura",
@@ -87,8 +80,7 @@
     "autoSyncFrequency": 600000,
     "storeTrainingData": true,
     "tags": false,
-    "supportEmail": "abc@gmail.com , xyz@gmail.com",
-    "experimentalOMRDetection": true
+    "supportEmail": "abc@gmail.com , xyz@gmail.com"
   },
   {
     "name": "Ps Phoolpur",
@@ -99,7 +91,6 @@
     "autoSyncFrequency": 600000,
     "storeTrainingData": true,
     "tags": false,
-    "supportEmail": "abc@gmail.com , xyz@gmail.com",
-    "experimentalOMRDetection": true
+    "supportEmail": "abc@gmail.com , xyz@gmail.com"
   }
 ]

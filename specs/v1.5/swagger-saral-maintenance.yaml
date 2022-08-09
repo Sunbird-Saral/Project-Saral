@@ -782,9 +782,6 @@ definitions:
         type: number
         description:  "Limit of student records to be stored in local storage before we push to backend."
         example: 10
-      experimentalOMRDetection:
-        type: boolean
-        description: "When this flag is enabled then pencil filed omr detections can be predicted ."
         
   CreateSchoolResponse:
     type: object
