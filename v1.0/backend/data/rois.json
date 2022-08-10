@@ -26638,8 +26638,7 @@
                 "threshold": {
                     "minWidth": 410,
                     "minHeight": 280,
-                    "detectionRadius": 12,
-                    "experimentalOMRDetection": true
+                    "detectionRadius": 12
                 },
                 "resultValidation": {
                     "validate": {
