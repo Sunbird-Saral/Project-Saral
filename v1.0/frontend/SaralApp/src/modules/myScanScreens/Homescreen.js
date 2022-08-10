@@ -107,7 +107,9 @@ class HomeComponent extends Component {
 
     render() {
         const { isLoading } = this.state;
-        if(this.props.multiBrandingData === undefined || this.props.multiBrandingData === null || this.state.isLoading){
+       const isMinimalModedata = this.props.loginData&&this.props.loginData.data.school.isMinimalMode
+       const  Mode = isMinimalModedata ? !this.props.minimalFlag : this.props.minimalFlag
+       if(this.props.multiBrandingData === undefined || this.props.multiBrandingData === null || this.state.isLoading){
            
             return <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
             {
@@ -132,8 +134,8 @@ class HomeComponent extends Component {
                                 Image={this.props.multiBrandingData && 'data:image/png;base64,' + this.props.multiBrandingData.logoImage}
                                 appName={this.props.multiBrandingData && this.props.multiBrandingData.appName}
                                 themeColor={this.props.multiBrandingData && this.props.multiBrandingData.themeColor1}
-                                onPress={() => this.props.minimalFlag ? this.props.navigation.navigate("myScan") : this.props.navigation.navigate('selectDetails')}
-                            /> 
+                                onPress={() => Mode ? this.props.navigation.navigate("myScan") : this.props.navigation.navigate('selectDetails')}
+                            />
                             {
                     isLoading
                     &&
