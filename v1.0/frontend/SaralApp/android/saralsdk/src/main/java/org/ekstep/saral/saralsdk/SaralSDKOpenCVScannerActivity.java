@@ -312,8 +312,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                 JSONObject layoutConfigs = new JSONObject(mlayoutConfigs);
                 JSONObject layoutObject = layoutConfigs.getJSONObject("layout");
                 JSONObject threshold = layoutObject.getJSONObject("threshold");
-                Boolean hasExperimentalOmr = threshold.has("experimentalOMRDetection");
-                Log.d(TAG, "hasExperimentalOmr " + hasExperimentalOmr);
+                Boolean hasExperimentalOmr = threshold.has("experimentalOMRDetection") ? threshold.getBoolean("experimentalOMRDetection")? true :false:false;
                 for (int i = 0; i < rois.length(); i++) {
                     JSONObject roiConfig  = rois.getJSONObject(i);
 
@@ -331,7 +330,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                         if (hasExperimentalOmr) {
                             if (mDetectShaded.isOMRFilledWitExperimentalOMR(omrROI)) {
                                 answer = 1;
-                                // Log.d(TAG, "Received Table layoutObject " + answer);
+    
                             }
                         } else {
                             if (mDetectShaded.isOMRFilled(omrROI)) {
