@@ -89,7 +89,9 @@ class MyScanComponent extends Component {
             }
         })
 
-        if (this.props.loginData.data.school.isMinimalMode?!this.props.minimalFlag:this.props.minimalFlag) {
+
+        let hasMinimalFlag = this.props.loginData && this.props.loginData.data && this.props.loginData.data.school && this.props.loginData.data.school.isMinimalMode
+        if (hasMinimalFlag?!this.props.minimalFlag:this.props.minimalFlag) {
             let examList = []
             
             this.props.studentsAndExamData
@@ -117,7 +119,6 @@ class MyScanComponent extends Component {
     //functions
     sumOfLocalData = async () => {
         const { filteredData, roiData } = this.props
-        const loginmode = this.props.loginData.data.school.isMinimalMode
         const data = await getScannedDataFromLocal()
         const loginCred = await getLoginCred()
         let len = 0
@@ -535,7 +536,7 @@ class MyScanComponent extends Component {
         const { isLoading, saveStatusData, scanStatusData, scanModalDataVisible, passDataToModal, savingStatus } = this.state;
         const { loginData, multiBrandingData, modalMessage, modalStatus } = this.props
         const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.myScan[0]
-        const isMinimalModedata = this.props.loginData&&this.props.loginData.data&&this.props.loginData.data.school&&this.props.loginData.data.school.isMinimalMode
+        const isMinimalModedata = this.props.loginData && this.props.loginData.data && this.props.loginData.data.school && this.props.loginData.data.school.isMinimalMode
         const  Mode = isMinimalModedata ? !this.props.minimalFlag : this.props.minimalFlag
         return (
 

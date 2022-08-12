@@ -49,10 +49,11 @@ class HomeComponent extends Component {
 
                 //set minimal Flag
                 let isMinimalMode = await getMinimalValue();
+                const isMinimalModedata = this.props.loginData && this.props.loginData.data && this.props.loginData.data.school && this.props.loginData.data.school.isMinimalMode
                 storeFactory.dispatch(this.minimalFlagAction( isMinimalMode == null ? false : isMinimalMode));
 
                 //calling students and exam api if minimal mode true
-                if (isMinimalMode) {
+                if (isMinimalModedata?!isMinimalMode:isMinimalMode) {
                     this.callStudentsData(this.props.loginData.data.token)
                 } else {
                     this.setState({isLoading : false})
@@ -107,7 +108,7 @@ class HomeComponent extends Component {
 
     render() {
         const { isLoading } = this.state;
-       const isMinimalModedata = this.props.loginData&&this.props.loginData.data.school.isMinimalMode
+       const isMinimalModedata = this.props.loginData && this.props.loginData.data && this.props.loginData.data.school && this.props.loginData.data.school.isMinimalMode
        const  Mode = isMinimalModedata ? !this.props.minimalFlag : this.props.minimalFlag
        if(this.props.multiBrandingData === undefined || this.props.multiBrandingData === null || this.state.isLoading){
            

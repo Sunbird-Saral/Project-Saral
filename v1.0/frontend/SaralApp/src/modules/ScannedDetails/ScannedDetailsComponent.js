@@ -91,7 +91,8 @@ const ScannedDetailsComponent = ({
     const idValidateExp = ocrLocalResponse.layout && ocrLocalResponse.layout.idValidation && ocrLocalResponse.layout.idValidation.validate.regExp
     const jsonLabels = ocrLocalResponse.layout && ocrLocalResponse.layout.resultScreenLabels
     const listbrandlabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.scannedDetailComponent[0] && multiBrandingData.screenLabels.scannedDetailComponent[0].ListTableHeading[0]
-
+    const hasMinimalFlag = loginData && loginData.data && loginData.data.school && loginData.data.school.isMinimalMode
+    const hasMinimalFlagdata = hasMinimalFlag ? !minimalFlag : minimalFlag
     let regexExp = idValidateExp
     let number = studentId;
     let regex = new RegExp(regexExp)
@@ -109,7 +110,7 @@ const ScannedDetailsComponent = ({
 
 
     useEffect(() => {
-        if (!minimalFlag) {
+        if (!hasMinimalFlag) {
             validateStudentId(studentId)
         }else{
             setStudentValid(true)
@@ -1250,12 +1251,12 @@ const ScannedDetailsComponent = ({
                                         <View style={styles.studentContainer}>
                                             <View style={styles.imageViewContainer}>
                                                 <View style={styles.imageContainerStyle}>
-                                                    <Text style={{ textAlign: 'center', fontSize: AppTheme.HEADER_FONT_SIZE_LARGE,fontFamily:monospace_FF }}>{minimalFlag ? loginData.data.school.name.charAt(0) : studentData.length > 0 && studentData[0].name.charAt(0)}</Text>
+                                                    <Text style={{ textAlign: 'center', fontSize: AppTheme.HEADER_FONT_SIZE_LARGE,fontFamily:monospace_FF }}>{hasMinimalFlagdata ? loginData.data.school.name.charAt(0) : studentData.length > 0 && studentData[0].name.charAt(0)}</Text>
                                                 </View>
                                             </View>
                                             <View style={styles.deatilsViewContainer}>
                                                 <View style={styles.detailsSubContainerStyle}>
-                                                    <Text style={[styles.nameTextStyle, { fontWeight: 'bold', color: AppTheme.BLACK, fontSize: AppTheme.FONT_SIZE_LARGE }]}>{minimalFlag ? loginData.data.school.name : studentData.length > 0 && studentData[0].name}</Text>
+                                                    <Text style={[styles.nameTextStyle, { fontWeight: 'bold', color: AppTheme.BLACK, fontSize: AppTheme.FONT_SIZE_LARGE }]}>{hasMinimalFlagdata ? loginData.data.school.name : studentData.length > 0 && studentData[0].name}</Text>
                                                     <TextField
                                                         labelText={BrandLabel && BrandLabel.StudentId ? BrandLabel.StudentId : Strings.student_id}
                                                         errorField={stdErr != ''}
@@ -1272,7 +1273,7 @@ const ScannedDetailsComponent = ({
                                 
                                                         />
                                                         {
-                                                            !minimalFlag
+                                                            !hasMinimalFlagdata
                                                             &&
                                                             <Text style={styles.nameTextStyle}>{BrandLabel && BrandLabel.Exam ? BrandLabel.Exam : Strings.Exam} : {filteredData.subject} {filteredData.examDate} ({filteredData.examTestID})</Text>
 
