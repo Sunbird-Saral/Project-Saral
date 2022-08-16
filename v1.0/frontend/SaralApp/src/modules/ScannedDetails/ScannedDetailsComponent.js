@@ -91,8 +91,7 @@ const ScannedDetailsComponent = ({
     const idValidateExp = ocrLocalResponse.layout && ocrLocalResponse.layout.idValidation && ocrLocalResponse.layout.idValidation.validate.regExp
     const jsonLabels = ocrLocalResponse.layout && ocrLocalResponse.layout.resultScreenLabels
     const listbrandlabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.scannedDetailComponent[0] && multiBrandingData.screenLabels.scannedDetailComponent[0].ListTableHeading[0]
-    const hasMinimalFlag = loginData && loginData.data && loginData.data.school && loginData.data.school.isMinimalMode
-    const hasMinimalFlagdata = hasMinimalFlag ? !minimalFlag : minimalFlag
+    
     let regexExp = idValidateExp
     let number = studentId;
     let regex = new RegExp(regexExp)

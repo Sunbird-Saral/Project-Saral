@@ -53,7 +53,6 @@ class HomeComponent extends Component {
                let hasminimal = false
               
                if(isMinimalMode === false || isMinimalMode){
-                console.log("hbhdfvdn");
                 hasminimal = isMinimalMode
                }else if(isMinimalModedata){
                   hasminimal = isMinimalModedata
@@ -146,7 +145,7 @@ class HomeComponent extends Component {
                                 appName={this.props.multiBrandingData && this.props.multiBrandingData.appName}
                                 themeColor={this.props.multiBrandingData && this.props.multiBrandingData.themeColor1}
                                 onPress={() => this.props.minimalFlag ? this.props.navigation.navigate("myScan") : this.props.navigation.navigate('selectDetails')}
-                            />
+                            /> 
                             {
                     isLoading
                     &&

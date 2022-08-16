@@ -543,8 +543,7 @@ class MyScanComponent extends Component {
         const { isLoading, saveStatusData, scanStatusData, scanModalDataVisible, passDataToModal, savingStatus } = this.state;
         const { loginData, multiBrandingData, modalMessage, modalStatus } = this.props
         const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.myScan[0]
-        const isMinimalModedata = this.props.loginData && this.props.loginData.data && this.props.loginData.data.school && this.props.loginData.data.school.isMinimalMode
-        const  Mode = isMinimalModedata ? !this.props.minimalFlag : this.props.minimalFlag
+        
         return (
 
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
