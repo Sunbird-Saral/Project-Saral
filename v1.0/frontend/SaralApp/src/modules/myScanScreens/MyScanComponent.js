@@ -59,7 +59,7 @@ class MyScanComponent extends Component {
         const { calledRoiData} = this.state;
         const { roiData } = this.props
         if (calledRoiData) {
-            if (roiData && prevProps.roiData != roiData && this.props.loginData.data.school.isMinimalMode?!this.props.minimalFlag:this.props.minimalFlag) {
+            if (roiData && prevProps.roiData != roiData && this.props.minimalFlag) {
                 this.setState({ calledRoiData: false, callApi: '' })
                 if (roiData.status && roiData.status == 200) {
                    let total =  await this.sumOfLocalData();
@@ -90,8 +90,8 @@ class MyScanComponent extends Component {
         })
 
 
-        let hasMinimalFlag = this.props.loginData && this.props.loginData.data && this.props.loginData.data.school && this.props.loginData.data.school.isMinimalMode
-        if (hasMinimalFlag?!this.props.minimalFlag:this.props.minimalFlag) {
+
+        if (this.props.minimalFlag) {
             let examList = []
             
             this.props.studentsAndExamData
@@ -237,7 +237,14 @@ class MyScanComponent extends Component {
                         permRes['android.permission.WRITE_EXTERNAL_STORAGE'] === PermissionsAndroid.RESULTS.GRANTED &&
                         permRes['android.permission.CAMERA'] === PermissionsAndroid.RESULTS.GRANTED
                     ) {
+                        if (this.props.minimalFlag && this.state.roiIndex != -1) {
                             this.openCameraActivity()
+                        } else if (!this.props.minimalFlag ) {
+                            this.openCameraActivity()
+                        }
+                         else {
+                            this.callCustomModal(Strings.message_text,Strings.please_select_roi_layout,false,false)
+                        }
                     } else if (permRes['android.permission.READ_EXTERNAL_STORAGE'] == 'never_ask_again' ||
                         permRes['android.permission.WRITE_EXTERNAL_STORAGE'] == 'never_ask_again' ||
                         permRes['android.permission.CAMERA'] == 'never_ask_again') {
@@ -578,7 +585,7 @@ class MyScanComponent extends Component {
                 </View>
 
                 {
-                     !Mode
+                     !this.props.minimalFlag
                         ?
                         <ScrollView scrollEnabled>
                             <View style={styles.container1}>
@@ -625,7 +632,7 @@ class MyScanComponent extends Component {
                 }
 
                 {
-                     Mode
+                     this.props.minimalFlag
                     &&
                     <View style={{ backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE, marginHorizontal: 20, padding: 6, borderRadius: 10, paddingBottom: 16, paddingTop: 14 }}>
                         <View style={styles.scanCardStyle}>
@@ -717,7 +724,7 @@ class MyScanComponent extends Component {
                 <ModalView modalVisible={modalStatus} modalMessage={modalMessage} />
                 <ScanDataModal setModalVisible={() => this.setScanModalDataVisible()} modalVisible={scanModalDataVisible}
                     localstutlist={passDataToModal}
-                    minimalFlag={Mode}
+                    minimalFlag={this.props.minimalFlag}
                     savingStatus={savingStatus}
                     bgColor={this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1: AppTheme.BLUE}
                     navigation={this.props.navigation}

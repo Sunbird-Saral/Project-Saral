@@ -50,10 +50,20 @@ class HomeComponent extends Component {
                 //set minimal Flag
                 let isMinimalMode = await getMinimalValue();
                 const isMinimalModedata = this.props.loginData && this.props.loginData.data && this.props.loginData.data.school && this.props.loginData.data.school.isMinimalMode
-                storeFactory.dispatch(this.minimalFlagAction( isMinimalMode == null ? false : isMinimalMode));
+               let hasminimal = false
+              
+               if(isMinimalMode === false || isMinimalMode){
+                console.log("hbhdfvdn");
+                hasminimal = isMinimalMode
+               }else if(isMinimalModedata){
+                  hasminimal = isMinimalModedata
+               }else{
+                hasminimal = false
+               }
+                storeFactory.dispatch(this.minimalFlagAction(hasminimal));
 
                 //calling students and exam api if minimal mode true
-                if (isMinimalModedata?!isMinimalMode:isMinimalMode) {
+                if (hasminimal) {
                     this.callStudentsData(this.props.loginData.data.token)
                 } else {
                     this.setState({isLoading : false})
@@ -135,7 +145,7 @@ class HomeComponent extends Component {
                                 Image={this.props.multiBrandingData && 'data:image/png;base64,' + this.props.multiBrandingData.logoImage}
                                 appName={this.props.multiBrandingData && this.props.multiBrandingData.appName}
                                 themeColor={this.props.multiBrandingData && this.props.multiBrandingData.themeColor1}
-                                onPress={() => Mode ? this.props.navigation.navigate("myScan") : this.props.navigation.navigate('selectDetails')}
+                                onPress={() => this.props.minimalFlag ? this.props.navigation.navigate("myScan") : this.props.navigation.navigate('selectDetails')}
                             />
                             {
                     isLoading
