@@ -87,3 +87,6 @@ optional arguments:
 ```
 #### ResNet Implementation
 - [ResNet Author's Implementation](https://github.com/KaimingHe/resnet-1k-layers/blob/master/resnet-pre-act.lua)
+
+#### Training pipeline and Data Generation reference
+   [https://github.com/project-anuvaad/ocr-toolkit/tree/ocr_toolkit](https://github.com/project-anuvaad/ocr-toolkit/tree/ocr_toolkit)
