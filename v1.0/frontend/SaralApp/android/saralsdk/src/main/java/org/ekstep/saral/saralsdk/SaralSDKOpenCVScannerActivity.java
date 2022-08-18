@@ -309,6 +309,10 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
             sound.play(MediaActionSound.FOCUS_COMPLETE);
 
             try {
+                JSONObject layoutConfigs = new JSONObject(mlayoutConfigs);
+                JSONObject layoutObject = layoutConfigs.getJSONObject("layout");
+                JSONObject threshold = layoutObject.getJSONObject("threshold");
+                Boolean hasExperimentalOmr = threshold.has("experimentalOMRDetection") ? threshold.getBoolean("experimentalOMRDetection")? true :false:false;
                 for (int i = 0; i < rois.length(); i++) {
                     JSONObject roiConfig  = rois.getJSONObject(i);
 
@@ -323,8 +327,15 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                         //     answer = 1;
                         // }
                         // New Logic
-                        if (mDetectShaded.isOMRFilled(omrROI)) { 
-                            answer = 1;
+                        if (hasExperimentalOmr) {
+                            if (mDetectShaded.isOMRFilledWitExperimentalOMR(omrROI)) {
+                                answer = 1;
+    
+                            }
+                        } else {
+                            if (mDetectShaded.isOMRFilled(omrROI)) {
+                                answer = 1;
+                            }
                         }
                         mRoiMatBase64.put(roiId,createBase64FromMat(omrROI));
                         mPredictedOMRs.put(roiId, answer.toString());
