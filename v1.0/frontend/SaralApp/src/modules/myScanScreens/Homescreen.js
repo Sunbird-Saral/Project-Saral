@@ -49,10 +49,20 @@ class HomeComponent extends Component {
 
                 //set minimal Flag
                 let isMinimalMode = await getMinimalValue();
-                storeFactory.dispatch(this.minimalFlagAction( isMinimalMode == null ? false : isMinimalMode));
+                const isMinimalModedata = this.props.loginData && this.props.loginData.data && this.props.loginData.data.school && this.props.loginData.data.school.isMinimalMode
+               let hasminimal = false
+              
+               if(isMinimalMode === false || isMinimalMode){
+                hasminimal = isMinimalMode
+               }else if(isMinimalModedata){
+                  hasminimal = isMinimalModedata
+               }else{
+                hasminimal = false
+               }
+                storeFactory.dispatch(this.minimalFlagAction(hasminimal));
 
                 //calling students and exam api if minimal mode true
-                if (isMinimalMode) {
+                if (hasminimal) {
                     this.callStudentsData(this.props.loginData.data.token)
                 } else {
                     this.setState({isLoading : false})
@@ -107,7 +117,7 @@ class HomeComponent extends Component {
 
     render() {
         const { isLoading } = this.state;
-       const isMinimalModedata = this.props.loginData&&this.props.loginData.data.school.isMinimalMode
+       const isMinimalModedata = this.props.loginData && this.props.loginData.data && this.props.loginData.data.school && this.props.loginData.data.school.isMinimalMode
        const  Mode = isMinimalModedata ? !this.props.minimalFlag : this.props.minimalFlag
        if(this.props.multiBrandingData === undefined || this.props.multiBrandingData === null || this.state.isLoading){
            
@@ -134,8 +144,8 @@ class HomeComponent extends Component {
                                 Image={this.props.multiBrandingData && 'data:image/png;base64,' + this.props.multiBrandingData.logoImage}
                                 appName={this.props.multiBrandingData && this.props.multiBrandingData.appName}
                                 themeColor={this.props.multiBrandingData && this.props.multiBrandingData.themeColor1}
-                                onPress={() => Mode ? this.props.navigation.navigate("myScan") : this.props.navigation.navigate('selectDetails')}
-                            />
+                                onPress={() => this.props.minimalFlag ? this.props.navigation.navigate("myScan") : this.props.navigation.navigate('selectDetails')}
+                            /> 
                             {
                     isLoading
                     &&
