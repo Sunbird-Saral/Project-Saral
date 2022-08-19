@@ -875,6 +875,7 @@ definitions:
         roiId:
           type: number
           example: 1
+          description: RoiId field is global across school
         index:
           type: string
           example: 0
@@ -984,6 +985,7 @@ definitions:
       roiId:
         type: number
         example: 1
+        description: RoiId field is global across school
       classId:
         type: string
         example: "2"
