@@ -25,7 +25,7 @@ export function LogoutAction(payload) {
                  await erasesetFetchedScanData()
                  await erasesetScannedDataIntoLocal()
                  await erasegetPresentAbsentStudent()
-                 await setMinimalValue(false)    
+                 await setMinimalValue(null)
             dispatch({ type: C.LOGOUT_PROCESS, payload: payload })
             dispatch({ type: C.MULTI_BRANDING_CLEANUP })
             return dispatch({ type: C.LOGOUT_PROCESS });
