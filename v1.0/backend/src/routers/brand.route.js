@@ -13,12 +13,12 @@ router.post('/brand?', auth, async (req, res) => {
         
         if (!req.query.default) {
             let lookup = {
-                schoolId: req.school.schoolId
+                orgId: req.school.orgId
             }      
             let school = await School.findOne(lookup)
-            brandExist = await Brand.find({ state: school.state,schoolId: school.schoolId })
+            brandExist = await Brand.find({ state: school.state,orgId: school.orgId })
                 req.body.state = school.state
-                req.body.schoolId = school.schoolId
+                req.body.orgId = school.orgId
         } else {
             let defaultBrand = await Brand.find()
             brandExist = defaultBrand.filter((brand) => !brand.state);
@@ -38,8 +38,8 @@ router.post('/brand?', auth, async (req, res) => {
 router.get('/brand', auth, async (req, res) => {
     try { 
 
-        const school = await School.findOne({ schoolId: req.school.schoolId })
-        const brand = await Brand.findOne({ state: school.state,schoolId: school.schoolId }, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0, state: 0 })
+        const school = await School.findOne({ orgId: req.school.orgId })
+        const brand = await Brand.findOne({ state: school.state,orgId: school.orgId }, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0, state: 0 })
         if (brand) {
             res.status(200).send(brand)
         } else {
@@ -90,7 +90,7 @@ router.get('/brand/default', async (req, res) => {
 
 router.delete('/brand',auth, async (req, res) => {
     try { 
-        const school = await School.findOne({schoolId: req.school.schoolId})
+        const school = await School.findOne({orgId: req.school.orgId})
         const brand = await Brand.deleteOne({state: school.state},{ _id: 0, __v: 0, createdAt: 0, updatedAt: 0 ,state:0 })
         if(brand.deletedCount > 0){
             res.status(200).send({message: "Brand has been deleted successfully."})
@@ -113,7 +113,7 @@ router.put('/brand',auth, async (req, res) => {
             return res.status(400).send({ error: 'Invaid Input' })
         }
        
-        const school = await School.findOne({schoolId: req.school.schoolId})
+        const school = await School.findOne({orgId: req.school.orgId})
         let update = req.body
         const updateBrand = await Brand.update({state: school.state},update)
 

@@ -8,22 +8,22 @@ const router = new express.Router()
 router.post('/exam', auth, async (req, res) => {
     const body = [...req.body]
     const exams = []
-    let schoolId = req.school.schoolId
+    let orgId = req.school.orgId
 
     for (let i = 0; i < body.length; i++) {
 
-        if(!body[i].examDate && body[i].examDate == undefined){
-            body[i].examDate = new Date().toLocaleDateString()
+        if(!body[i].date && body[i].date == undefined){
+            body[i].date = new Date().toLocaleDateString()
         }
  
         body[i].type = body[i].type.toUpperCase()
-        let examExist = await Exam.find({ schoolId, classId: body[i].classId, examDate: body[i].examDate, subject: body[i].subject })
+        let examExist = await Exam.find({ orgId, category1: body[i].category1, date: body[i].date, category3: body[i].category3 })
         if (examExist.length) continue
         let examId = await Counter.getValueForNextSequence("examId")
         const examData = new Exam({
             ...body[i],
             examId,
-            schoolId
+            orgId
         })
         exams.push(examData)
     }
@@ -41,24 +41,24 @@ router.post('/exam', auth, async (req, res) => {
 })
 
 
-router.get('/examByClass/:classId', auth, async (req, res) => {
+router.get('/examByClass/:category1', auth, async (req, res) => {
     const match = {
-        schoolId: req.school.schoolId,
-        classId: req.params.classId
+        orgId: req.school.orgId,
+        category1: req.params.category1
     }
 
-    if (req.query.subject) {
-        match.subject = req.query.subject
+    if (req.query.category3) {
+        match.category3 = req.query.category3
     }
-    if (req.query.examDate) {
-        match.examDate = req.query.examDate
+    if (req.query.date) {
+        match.date = req.query.date
     }
 
     try {
         const exams = await Exam.find(match, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 }).lean()
 
         if (!exams.length) {
-            return res.status(404).send({ "message": `Exam dose not exist for ${req.params.classId}` })
+            return res.status(404).send({ "message": `Exam dose not exist for ${req.params.category1}` })
         }
         res.send(exams)
     }
@@ -88,7 +88,7 @@ router.delete('/exam/:examId', auth, async (req, res) => {
 router.patch('/exam/:examId', auth, async (req, res) => {
     try {
         const updates = Object.keys(req.body)
-        const allowedUpdates = ['subject', 'examLO', 'examDate', 'totalMarks', 'questions']
+        const allowedUpdates = ['category3', 'examLO', 'date', 'totalResults', 'questions']
         const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
 
         if (!isValidOperation) {
@@ -96,7 +96,7 @@ router.patch('/exam/:examId', auth, async (req, res) => {
         }
         let match = {
             examId: req.params.examId,
-            schoolId: req.school.schoolId
+            orgId: req.school.orgId
         }
         let update = { $set: req.body }
         const exam = await Exam.find(match).lean()
@@ -124,15 +124,15 @@ module.exports = router
 //     const body = [...req.body]
 //     const exams = []
 //     for(let data of body){
-//         let schoolId = req.school.schoolId   
-//         let examExist = await Exam.find({schoolId, classId: data.classId,examDate: data.examDate,subject: data.subject})
+//         let orgId = req.school.orgId   
+//         let examExist = await Exam.find({orgId, category1: data.category1,date: data.date,category3: data.category3})
 //         console.log(examExist.length)
 //         if(!examExist.length){
 //         // let examId = await Counter.getValueForNextSequence("examId")
 //         const examData = new Exam({
 //             ...data,
 //             examId: await Counter.getValueForNextSequence("examId"),
-//             schoolId
+//             orgId
 //         })
 //         exams.push(examData)
 //         console.log(exams.length)

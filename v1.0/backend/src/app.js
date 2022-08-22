@@ -11,6 +11,7 @@ const examRouter = require('./routers/exam.route')
 const markRouter = require('./routers/mark.route')
 const roiRouter = require('./routers/roi.route')
 const brandRouter = require('./routers/brand.route')
+const resultRouter = require('./routers/result.route')
 var cors = require('cors');
 
 const spec = fs.readFileSync(`${__dirname}/swagger-saral-frontend.yaml`, 'utf-8');
@@ -39,6 +40,8 @@ app.use(examRouter)
 app.use(markRouter)
 app.use(roiRouter)
 app.use(brandRouter)
+app.use(resultRouter)
+
 app.use("/api-docs/saral/frontend", swaggerUi.serve, (...args) => swaggerUi.setup(frontendSpec)(...args));
 app.use("/api-docs/saral/maintenance", swaggerUi.serve, (...args) => swaggerUi.setup(maintenanceSpec)(...args));
 module.exports = app

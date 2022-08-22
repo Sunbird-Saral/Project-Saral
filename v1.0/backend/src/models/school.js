@@ -8,7 +8,7 @@ const schoolSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    schoolId: {
+    orgId: {
         type: String,
         unique: true,
         required: true,
@@ -67,7 +67,7 @@ const schoolSchema = new mongoose.Schema({
 //instance method
 schoolSchema.methods.generateAuthToken = async function () {
     const school = this
-    const token = jwt.sign({ userId: school.schoolId.toString() }, process.env.JWT_SECRET)
+    const token = jwt.sign({ userId: school.orgId.toString() }, process.env.JWT_SECRET)
 
     await school.save()
     return token
@@ -85,9 +85,9 @@ schoolSchema.methods.toJSON = function () {
 }
 
 //model method created
-schoolSchema.statics.findByCredentials = async (schoolId, password) => {
+schoolSchema.statics.findByCredentials = async (orgId, password) => {
     
-    const school = await School.findOne({ schoolId },{__v: 0})
+    const school = await School.findOne({ orgId },{__v: 0})
     
     if(!school) {
         throw new Error('School Id or Password is not correct.')

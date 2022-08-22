@@ -1,7 +1,7 @@
 [
     {
-        "subject": "Hindi",
-        "classId": "2",
+        "category3": "Hindi",
+        "category1": "2",
         "type": "hindi_4s_20q_omr",
         "roi": {
             "layout": {
@@ -2338,8 +2338,8 @@
         "roiId": "1"
     },
     {
-        "subject": "Hindi",
-        "classId": "3",
+        "category3": "Hindi",
+        "category1": "3",
         "type": "hindi_3s_30q_omr",
         "roi": {
             "layout": {
@@ -4812,9 +4812,9 @@
         "roiId": "2"
     },
     {
-        "subject": "Multi-Subject",
-        "classId": "4",
-        "type": "multisubject_1s_10q",
+        "category3": "Multi-Subject",
+        "category1": "4",
+        "type": "multicategory3_1s_10q",
         "roi": {
             "layout": {
                 "version": "1.0",
@@ -6080,8 +6080,8 @@
         "roiId": "3"
     },
     {
-        "subject": "Hindi",
-        "classId": "5",
+        "category3": "Hindi",
+        "category1": "5",
         "type": "hindi_4s_20q_omr",
         "roi": {
             "layout": {
@@ -8410,8 +8410,8 @@
         "roiId": "4"
     },
     {
-        "subject": "Hindi",
-        "classId": "6",
+        "category3": "Hindi",
+        "category1": "6",
         "type": "hindi_4s_20q_omr",
         "roi": {
             "layout": {
@@ -10740,8 +10740,8 @@
         "roiId": "5"
     },
     {
-        "subject": "Hindi",
-        "classId": "7",
+        "category3": "Hindi",
+        "category1": "7",
         "type": "hindi_4s_20q_omr",
         "roi": {
             "layout": {
@@ -13070,9 +13070,9 @@
         "roiId": "6"
     },
     {
-        "subject": "Multi-Subject",
-        "classId": "8",
-        "type": "multisubject_1s_10q",
+        "category3": "Multi-Subject",
+        "category1": "8",
+        "type": "multicategory3_1s_10q",
         "roi": {
             "layout": {
                 "version": "1.0",
@@ -14338,8 +14338,8 @@
         "roiId": "7"
     },
     {
-        "subject": "Hindi",
-        "classId": "2",
+        "category3": "Hindi",
+        "category1": "2",
         "type": "any_1s_20q",
         "roi": {
             "layout": {
@@ -15378,8 +15378,8 @@
         "roiId": "8"
     },
     {
-        "subject": "Hindi",
-        "classId": "3",
+        "category3": "Hindi",
+        "category1": "3",
         "type": "any_1s_20q",
         "roi": {
             "layout": {
@@ -16510,8 +16510,8 @@
         "roiId": "9"
     },
     {
-        "subject": "Maths",
-        "classId": "2",
+        "category3": "Maths",
+        "category1": "2",
         "type": "any_1s_20q",
         "roi": {
             "layout": {
@@ -17642,8 +17642,8 @@
         "roiId": "10"
     },
     {
-        "subject": "Hindi",
-        "classId": "3",
+        "category3": "Hindi",
+        "category1": "3",
         "type": "any_1s_34q",
         "roi": {
             "layout": {
@@ -19078,8 +19078,8 @@
         "roiId": "11"
     },
     {
-        "subject": "Maths",
-        "classId": "3",
+        "category3": "Maths",
+        "category1": "3",
         "type": "any_1s_34q",
         "roi": {
             "layout": {
@@ -20662,8 +20662,8 @@
         "roiId": "12"
     },
     {
-        "subject": "English",
-        "classId": "3",
+        "category3": "English",
+        "category1": "3",
         "type": "any_1s_34q",
         "roi": {
             "layout": {
@@ -22246,8 +22246,8 @@
         "roiId": "13"
     },
     {
-        "subject": "Hindi",
-        "classId": "2",
+        "category3": "Hindi",
+        "category1": "2",
         "type": "hindi_8s_13q_omr",
         "roi": {
             "layout": {
@@ -25536,8 +25536,8 @@
         "roiId": "14"
     },
     {
-        "subject": "Hindi",
-        "classId": "4",
+        "category3": "Hindi",
+        "category1": "4",
         "type": "any_1s_12q ",
         "roi": {
             "layout": {
@@ -26084,8 +26084,8 @@
         "roiId": "15"
     },
     {
-        "subject": "Hindi",
-        "classId": "5",
+        "category3": "Hindi",
+        "category1": "5",
         "type": "any_1s_5q_multichoice",
         "roi": {
             "layout": {
@@ -26627,8 +26627,8 @@
         "roiId": "16"
     },
     {
-        "subject": "Hindi",
-        "classId": "5",
+        "category3": "Hindi",
+        "category1": "5",
         "type": "any_1s_5q_multichoice",
         "roi": {
             "layout": {
@@ -27170,8 +27170,8 @@
         "roiId": "171"
     },
     {
-        "subject": "Carpentary Assesment",
-        "classId": "5",
+        "category3": "Carpentary Assesment",
+        "category1": "5",
         "type": "any_1s_5q_multichoice",
         "roi": {
             "layout": {
@@ -27735,8 +27735,8 @@
         "roiId": "17"
     },
     {
-        "subject": "Hindi",
-        "classId": "6",
+        "category3": "Hindi",
+        "category1": "6",
         "type": "any_1s_15q_multipage",
         "roi": {
             "layout": {
@@ -29133,8 +29133,8 @@
         "roiId": "18"
     },
     {
-        "subject": "section-attendance",
-        "classId": "2",
+        "category3": "section-attendance",
+        "category1": "2",
         "type": "any_20s_attendance",
         "roi": {
             "layout": {
@@ -31559,8 +31559,8 @@
         "roiId": "19"
     },
     {
-        "subject": "midday-meal",
-        "classId": "2",
+        "category3": "midday-meal",
+        "category1": "2",
         "type": "any_20s_midday_meal",
         "roi": {
             "layout": {
@@ -33985,8 +33985,8 @@
         "roiId": "20"
     },
     {
-        "subject": "Hindi",
-        "classId": "7",
+        "category3": "Hindi",
+        "category1": "7",
         "type": "any_1s_24q_multipage",
         "roi": {
             "layout": {
@@ -35065,8 +35065,8 @@
         "roiId": "21"
     },
     {
-        "subject": "Hindi",
-        "classId": "2",
+        "category3": "Hindi",
+        "category1": "2",
         "type": "any_1s_10q",
         "roi": {
             "layout": {
@@ -35415,8 +35415,8 @@
         "roiId": "22"
     },
     {
-        "subject": "Maths",
-        "classId": "2",
+        "category3": "Maths",
+        "category1": "2",
         "type": "hindi_4s_20q_omr",
         "roi": {
             "layout": {
@@ -37749,9 +37749,9 @@
         "roiId": "24"
     },
     {
-        "subject": "Hindi-Subject",
-        "classId": "4",
-        "type": "multisubject_1s_10q",
+        "category3": "Hindi-Subject",
+        "category1": "4",
+        "type": "multicategory3_1s_10q",
         "roi": {
             "layout": {
                 "version": "1.0",
@@ -39012,8 +39012,8 @@
         "roiId": "25"
     },
     {
-        "subject": "Hindi",
-        "classId": "3",
+        "category3": "Hindi",
+        "category1": "3",
         "type": "any_10s_10q",
         "roi": {
             "layout": {
@@ -42602,8 +42602,8 @@
         "roiId": "26"
     },
     {
-        "subject": "0",
-        "classId": "0",
+        "category3": "0",
+        "category1": "0",
         "type": "school evaluation",
         "roi": {
             "layout": {
@@ -44794,8 +44794,8 @@
         "roiId": "27"
     },
     {
-        "subject": "0",
-        "classId": "0",
+        "category3": "0",
+        "category1": "0",
         "type": "electricity reading",
         "roi": {
             "layout": {
@@ -45342,8 +45342,8 @@
         "roiId": "28"
     },
     {
-        "subject": "0",
-        "classId": "0",
+        "category3": "0",
+        "category1": "0",
         "type": "feedback",
         "roi": {
             "layout": {
@@ -45884,8 +45884,8 @@
         "roiId": "29"
     },
     {
-        "subject": "Hindi",
-        "classId": "4",
+        "category3": "Hindi",
+        "category1": "4",
         "type": "any_10s_10q_7d",
         "roi": {
             "layout": {
@@ -49270,8 +49270,8 @@
         "roiId": "30"
     },
     {
-        "subject": "Hindi",
-        "classId": "9",
+        "category3": "Hindi",
+        "category1": "9",
         "type": "hindi_1s_30q_omr",
         "roi": {
             "layout": {
@@ -51489,8 +51489,8 @@
         "roiId": "31"
     },
     {
-        "subject": "hindi",
-        "classId": "5",
+        "category3": "hindi",
+        "category1": "5",
         "type": "any_8s_13q_omr",
         "roi": {
             "layout": {
@@ -54779,8 +54779,8 @@
         "roiId": "33"
     },
     {
-        "subject": "Hindi",
-        "classId": "8",
+        "category3": "Hindi",
+        "category1": "8",
         "type": "any_1s_15q_multipage",
         "roi": {
             "layout": {
@@ -56177,8 +56177,8 @@
         "roiId": "34"
     },
     {
-        "subject": "Hindi",
-        "classId": "2",
+        "category3": "Hindi",
+        "category1": "2",
         "type": "any_1s_10q",
         "roi": {
             "layout": {
@@ -56554,8 +56554,8 @@
         "roiId": "35"
     },
     {
-        "subject": "Hindi",
-        "classId": "3",
+        "category3": "Hindi",
+        "category1": "3",
         "type": "any_1s_20q",
         "roi": {
             "layout": {
@@ -57594,8 +57594,8 @@
         "roiId": "36"
     },
     {
-        "subject": "Hindi",
-        "classId": "6",
+        "category3": "Hindi",
+        "category1": "6",
         "type": "hindi_1s_30q_omr",
         "roi": {
             "layout": {
@@ -59811,8 +59811,8 @@
         "roiId": "37"
     },
     {
-        "subject": "section-attendance",
-        "classId": "7",
+        "category3": "section-attendance",
+        "category1": "7",
         "type": "any_20s_attendance",
         "roi": {
             "layout": {
@@ -62237,8 +62237,8 @@
         "roiId": "38"
     },
     {
-        "subject": "book-distribution",
-        "classId": "4",
+        "category3": "book-distribution",
+        "category1": "4",
         "type": "any_10s_10q_omr",
         "roi": {
             "layout": {
@@ -65623,8 +65623,8 @@
         "roiId": "39"
     },
     {
-        "subject": "hindi",
-        "classId": "5",
+        "category3": "hindi",
+        "category1": "5",
         "type": "any_8s_13q_omr",
         "roi": {
             "layout": {
@@ -68913,8 +68913,8 @@
         "roiId": "40"
     },
     {
-        "subject": "Hindi",
-        "classId": "9",
+        "category3": "Hindi",
+        "category1": "9",
         "type": "hindi_8s_13q_9D_omr",
         "roi": {
             "layout": {
@@ -72731,8 +72731,8 @@
         "roiId": "41"
     },
     {
-        "subject": "Maths",
-        "classId": "3",
+        "category3": "Maths",
+        "category1": "3",
         "type": "hindi_1s_9d_30q_omr",
         "roi": {
             "layout": {
@@ -74974,8 +74974,8 @@
         "roiId": "42"
     },
     {
-        "subject": "Hindi",
-        "classId": "1",
+        "category3": "Hindi",
+        "category1": "1",
         "type": "hindi_8s_13q_9D_omr",
         "roi": {
             "layout": {
@@ -78792,8 +78792,8 @@
         "roiId": "43"
     },
     {
-        "subject": "0",
-        "classId": "0",
+        "category3": "0",
+        "category1": "0",
         "type": "school evaluation",
         "roi": {
             "layout": {
@@ -80984,8 +80984,8 @@
         "roiId": "44"
     },
     {
-        "subject": "0",
-        "classId": "0",
+        "category3": "0",
+        "category1": "0",
         "type": "any_1s_12q ",
         "roi": {
             "layout": {
@@ -81532,8 +81532,8 @@
         "roiId": "45"
     },
     {
-        "subject": "0",
-        "classId": "0",
+        "category3": "0",
+        "category1": "0",
         "type": "any_1s_12q ",
         "roi": {
             "layout": {
@@ -82080,8 +82080,8 @@
         "roiId": "46"
     },
     {
-        "subject": "0",
-        "classId": "0",
+        "category3": "0",
+        "category1": "0",
         "type": "personal-details",
         "roi": {
             "layout": {
