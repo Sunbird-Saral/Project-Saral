@@ -1451,6 +1451,24 @@ definitions:
           name:
             type: string
             example: "UP SAT Exam Sheet Form"
+          threshold:
+            type: object
+            properties:
+              minWidth:
+                type: number
+                example: 690
+                description: Minimum width of layout for detection
+              minHeight:
+                type: number
+                example: 390
+                description: Minimum height of layout for detection
+              detectionRadius:
+                type: number
+                example: 12
+              experimentalOMRDetection:
+                type: boolean
+                example: true
+                description: when this field is true then pencil omr detection is also possible. 
           cells:
             $ref: '#/definitions/cells' 
       
