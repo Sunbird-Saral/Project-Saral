@@ -12,7 +12,7 @@ import ScanHistoryCard from '../ScanHistory/ScanHistoryCard';
 import SaralSDK from '../../../SaralSDK'
 import { getScannedDataFromLocal, getErrorMessage, getLoginCred, setScannedDataIntoLocal } from '../../utils/StorageUtils';
 import ButtonComponent from '../common/components/ButtonComponent';
-import { dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF, multipleStudent, neglectData } from '../../utils/CommonUtils';
+import { checkNetworkConnectivity, dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF, multipleStudent, neglectData } from '../../utils/CommonUtils';
 import ShareComponent from '../common/components/Share';
 import MultibrandLabels from '../common/components/multibrandlabels';
 import { Assets } from '../../assets';
@@ -26,6 +26,9 @@ import axios from 'axios';
 import { scanStatusDataAction } from '../ScanStatus/scanStatusDataAction';
 import { collectErrorLogs } from '../CollectErrorLogs';
 import ScanDataModal from './ScanDataModal';
+import { getRoiDataApi, setRoiDataApi } from '../../utils/offlineStorageUtils';
+import constants from '../../flux/actions/constants';
+import { storeFactory } from '../../flux/store/store';
 
 LogBox.ignoreAllLogs()
 
@@ -48,7 +51,8 @@ class MyScanComponent extends Component {
             dbScanSavedData: [],
             scanModalDataVisible: false,
             passDataToModal: [],
-            savingStatus: ''
+            savingStatus: '',
+            examId: ''
         }
     }
 
@@ -57,13 +61,16 @@ class MyScanComponent extends Component {
 
    async componentDidUpdate(prevProps) {
         const { calledRoiData} = this.state;
-        const { roiData } = this.props
+        const { roiData, minimalFlag } = this.props
         if (calledRoiData) {
             if (roiData && prevProps.roiData != roiData && this.props.minimalFlag) {
                 this.setState({ calledRoiData: false, callApi: '' })
                 if (roiData.status && roiData.status == 200) {
                    let total =  await this.sumOfLocalData();
                    this.callScanStatusData(true, total, 0);
+                   if (minimalFlag) {
+                    this.setRoiCache();
+                   }
                 }
             }
         }
@@ -195,6 +202,26 @@ class MyScanComponent extends Component {
         }
         this.props.dispatchCustomModalStatus(true);
         this.props.dispatchCustomModalMessage(data);
+    }
+
+    setRoiCache = async (roiData) => {
+        let payload = {
+            examId: this.state.examId,
+            data: roiData
+        }
+        let roi = await getRoiDataApi(this.state.examId)
+        if (roi != null) {
+            roi.forEach((e) => {
+                if (e.examId == this.state.examId) {
+                    e.data = roiData
+                } else { 
+                    roi.push(payload)
+                    await setRoiDataApi(roi)
+                }
+            })
+        } else {
+            await setRoiDataApi([payload])
+        }
     }
 
 
@@ -336,6 +363,17 @@ class MyScanComponent extends Component {
     onDropDownSelect(idx, value) {
         for (const el of this.props.studentsAndExamData.data.exams) {
             if (el.type == value) {
+
+                let hasNetwork = await checkNetworkConnectivity();
+                if (!hasNetwork) {
+                    let hasCacheData = await getRoiDataApi(this.state.examId);
+                    if (hasCacheData) {
+                        storeFactory.dispatch(this.dispatchroiData(hasCacheData))
+                        } else {
+                            //Alert message show message "something went wrong or u don't have cache in local"
+                        }
+                    } else {
+                        
                 this.setState({
                     calledRoiData: true,
                     isLoading: true
@@ -347,6 +385,7 @@ class MyScanComponent extends Component {
                     let apiObj = new ROIAction(payload, token);
                     this.props.APITransport(apiObj);
                 })
+            }
                 break;
             }
         }
@@ -354,6 +393,13 @@ class MyScanComponent extends Component {
             roiIndex: idx,
             selectedRoi: value
         })
+    }
+
+    dispatchroiData (payload){
+        return {
+            type: constants.ROI_DATA,
+            payload
+        }
     }
 
     onPressSaveInDB = async () => {

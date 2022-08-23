@@ -1,5 +1,7 @@
 import moment from 'moment'
 import C from '../flux/actions/constants'
+import NetInfo from "@react-native-community/netinfo";
+
 
 export const validateToken = (expireTime) => {
     let expireArr = expireTime.replace(/-/g, '/').split('/')
@@ -44,6 +46,15 @@ export const dispatchCustomModalStatus = (value) => {
         payload: value
     })
 }
+
+export const checkNetworkConnectivity = async () => {
+    let subscribe = false
+   await NetInfo.fetch().then(state => {
+        subscribe = state.isConnected;
+    });
+    return subscribe
+}
+
 
 export const SCAN_TYPES = {
     SAT_TYPE: 'sat',

@@ -13,8 +13,11 @@ import {
     setLoginData, setLoginCred, getLoginCred, setRememberUser, getRememberedUser, forgetUser, setRememberPassword, getRememberedPassword, forgetUserpass
 } from '../../utils/StorageUtils'
 import { Assets } from '../../assets/index'
-import { monospace_FF } from '../../utils/CommonUtils';
+import { checkNetworkConnectivity, monospace_FF } from '../../utils/CommonUtils';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getLoginApi, setLoginApi } from '../../utils/offlineStorageUtils';
+import { storeFactory } from '../../flux/store/store';
+import constants from '../../flux/actions/constants';
 
 class LoginComponent extends Component {
     constructor(props) {
@@ -53,8 +56,12 @@ class LoginComponent extends Component {
           
         });
 
+        let hasNetwork = await checkNetworkConnectivity();
+
         this.timerState = setTimeout(() => { this.setState({ Loading: false }) }, 5000)
-        this.callDefaultbrandingData()
+        if (hasNetwork) {
+            this.callDefaultbrandingData()
+        }
         this.props.navigation.addListener('willFocus', async payload => {
             AppState.addEventListener('change', this.handleAppStateChange);
             this.componentMountCall()
@@ -102,20 +109,43 @@ class LoginComponent extends Component {
         }
     }
 
-    callLogin = () => {
+    callLogin = async () => {
         const { schoolId, password } = this.state
-        this.setState({
-            isLoading: true,
-            calledLogin: true
-        }, () => {
-            let loginCredObj = {
-                "schoolId": schoolId,
-                "password": password
-            }
 
-            let apiObj = new LoginAction(loginCredObj);
-            this.props.APITransport(apiObj);
-        })
+        let hasNetwork = await checkNetworkConnectivity();
+
+
+        if (!hasNetwork) {
+            let hasCacheData = await getLoginApi();
+            if (hasCacheData) {
+                storeFactory.dispatch(this.dispatchLoginData(hasCacheData))
+                this.props.navigation.navigate('mainMenu')
+            } else {
+                this.setState({
+                    errCommon: Strings.you_seem_to_be_offline_please_check_your_internet_connection
+                })            
+            }
+        } else {
+            this.setState({
+                isLoading: true,
+                calledLogin: true
+            }, () => {
+                let loginCredObj = {
+                    "schoolId": schoolId,
+                    "password": password
+                }
+    
+                let apiObj = new LoginAction(loginCredObj);
+                this.props.APITransport(apiObj);
+            })
+        }
+    }
+
+    dispatchLoginData(payload) {
+        return {
+            type: constants.LOGIN_PROCESS,
+            payload
+        }
     }
 
     onSubmit = () => {
@@ -239,6 +269,9 @@ class LoginComponent extends Component {
                         }
                         let loginCred = await setLoginCred(loginCredObj)
                         let loginSaved = await setLoginData(loginData.data)
+                        if (loginData.data.school.hasOwnProperty("offline") && loginData.data.school.offline) {
+                            await setLoginApi(loginData)
+                        }
                         if (loginCred && loginSaved) {
                             navigation.navigate('mainMenu')
                         }
