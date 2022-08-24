@@ -4149,7 +4149,7 @@
                 "cellId": "110",
                 "rois": [
                     {
-                        "annotationTags": "ROLLNUMBER10_QTEN",
+                        "annotationTags": "ROLLNUMBER10_Q10",
                         "extractionMethod": "CELL_OMR",
                         "roiId": "210",
                         "index": 0,
