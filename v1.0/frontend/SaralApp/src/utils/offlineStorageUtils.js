@@ -85,7 +85,59 @@ export const getRoiDataApi = async (examId) => {
     }
 }
 
+export const setScanDataApi = async (data) => {
+    //GET LOGIN CREDENTIAL
+    let loginCred = await getLoginData('login_data_key');
+    let ROI_API_KEY = `${loginCred.school.schoolId}00000false`
+    let json = JSON.stringify(data);
+    let saved = await setData(ROI_API_KEY, json)
+    if (saved) {
+        return true
+    }
+    else {
+        return false
+    }
+}
 
+export const getScanDataApi = async () => {
+    //GET LOGIN CREDENTIAL
+    let loginCred = await getLoginData('login_data_key');
+    if (loginCred) {
+        let SCAN_API_KEY = `${loginCred.school.schoolId}00000false`
+        let scanData = await getData(SCAN_API_KEY)
+        return JSON.parse(scanData)
+    } else {
+        return JSON.parse(loginCred)
+        
+    }
+}
+
+export const setBrandingDataApi = async (data) => {
+    //GET LOGIN CREDENTIAL
+    let loginCred = await getLoginData('login_data_key');
+    let BRANDING_API_KEY = `${loginCred.school.schoolId}brands`
+    let json = JSON.stringify(data);
+    let saved = await setData(BRANDING_API_KEY, json)
+    if (saved) {
+        return true
+    }
+    else {
+        return false
+    }
+}
+
+export const getBrandingDataApi = async (brands) => {
+    //GET LOGIN CREDENTIAL
+    let loginCred = await getLoginData('login_data_key');
+    if (loginCred) {
+        let BRANDING_API_KEY = `${loginCred.school.schoolId}${brands}`
+        let brandingData = await getData(BRANDING_API_KEY)
+        return JSON.parse(brandingData)
+    } else {
+        return JSON.parse(loginCred)
+        
+    }
+}
 
 export const setData = async (key, value) => {
     await AsyncStorage.setItem(key, value);

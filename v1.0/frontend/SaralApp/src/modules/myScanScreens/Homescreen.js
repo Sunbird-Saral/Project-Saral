@@ -16,7 +16,7 @@ import { storeFactory } from '../../flux/store/store';
 import constants from '../../flux/actions/constants';
 import { GetStudentsAndExamData } from '../../flux/actions/apis/getStudentsAndExamData';
 import { getMinimalValue } from '../../utils/StorageUtils';
-import { getStudentExamApi, setStudentExamApi } from '../../utils/offlineStorageUtils';
+import { getBrandingDataApi, getStudentExamApi, setBrandingDataApi, setStudentExamApi } from '../../utils/offlineStorageUtils';
 
 class HomeComponent extends Component {
     constructor(props) {
@@ -59,6 +59,9 @@ class HomeComponent extends Component {
                     this.setState({isLoading : false})
                 }
                 
+                if (loginData.data.school.hasOwnProperty("offline") && loginData.data.school.offline) {
+                   await setBrandingDataApi(multiBranding)
+                }
             }
             
         }
@@ -113,12 +116,28 @@ class HomeComponent extends Component {
     }
 }
 
-    callMultiBrandingActiondata() {
+   async callMultiBrandingActiondata() {
+        let hasNetwork = await checkNetworkConnectivity();
+        if (!hasNetwork) {
+            let hasCacheData = await getBrandingDataApi(`brands`);
+            if (hasCacheData) {
+                storeFactory.dispatch(this.dispatchScanDataApi(hasCacheData))
+            } else {
+                //Alert message show message "something went wrong or u don't have cache in local"
+            }
+        } else {
         let payload = this.props.multiBrandingData
         let token = this.props.loginData.data.token
         let apiObj = new MultiBrandingAction(payload, token);
         this.props.APITransport(apiObj)
+    }
+}
 
+dispatchScanDataApi(payload) {
+    return {
+        type: constants.MULTI_BRANDING,
+        payload
+    }
     }
 
     onBack = () => {
