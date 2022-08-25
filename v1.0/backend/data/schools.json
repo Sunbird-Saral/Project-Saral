@@ -94,5 +94,16 @@
     "storeTrainingData": true,
     "tags": false,
     "supportEmail": "abc@gmail.com , xyz@gmail.com"
+  },
+  {
+    "name": "Dummy school 5",
+    "schoolId": "jk001",
+    "password": "tarento@123",
+    "state": "jharakhand",
+    "autoSync": false,
+    "autoSyncFrequency": 600000,
+    "storeTrainingData": true,
+    "tags": false,
+    "supportEmail": "abc@gmail.com , xyz@gmail.com"
   }
 ]
