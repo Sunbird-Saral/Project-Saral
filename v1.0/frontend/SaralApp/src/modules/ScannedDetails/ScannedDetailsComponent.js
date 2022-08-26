@@ -396,7 +396,7 @@ const ScannedDetailsComponent = ({
         } else {
             duplication = false
         }
-        if (regexvalidate[0]) {
+        if (!toggleCheckBox &&  regexvalidate[0]) {
             showErrorMessage(regexvalidate[1] ? `${regexvalidate[1]}`: defaultValidateError )
         }
         
