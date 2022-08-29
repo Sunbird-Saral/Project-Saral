@@ -61,7 +61,7 @@ export const getStudentExamApi = async (classData, section) => {
 export const setRoiDataApi = async (data, examId) => {
     //GET LOGIN CREDENTIAL
     let loginCred = await getLoginData('login_data_key');
-    let ROI_API_KEY = `${loginCred.school.schoolId}${examId}`
+    let ROI_API_KEY = `${loginCred.school.schoolId}exam`
     let json = JSON.stringify(data);
     let saved = await setData(ROI_API_KEY, json)
     if (saved) {
@@ -72,11 +72,11 @@ export const setRoiDataApi = async (data, examId) => {
     }
 }
 
-export const getRoiDataApi = async (examId) => {
+export const getRoiDataApi = async () => {
     //GET LOGIN CREDENTIAL
     let loginCred = await getLoginData('login_data_key');
     if (loginCred) {
-        let ROI_API_KEY = `${loginCred.school.schoolId}${examId}`
+        let ROI_API_KEY = `${loginCred.school.schoolId}exam`
         let roiData = await getData(ROI_API_KEY)
         return JSON.parse(roiData)
     } else {
@@ -147,4 +147,37 @@ export const setData = async (key, value) => {
 export const getData = async (key) => {
     let data = await AsyncStorage.getItem(key);
     return data
+}
+
+export const removeLoginApiData = async () => {
+    let loginCred = await getLoginData('login_data_key');
+    let LOGIN_API_KEY = `${loginCred.school.schoolId}`
+    await AsyncStorage.removeItem(LOGIN_API_KEY)
+}
+
+export const removeBrandingApiData = async () => {
+    let loginCred = await getLoginData('login_data_key');
+    let BRANDING_API_KEY = `${loginCred.school.schoolId}brands`
+    await AsyncStorage.removeItem(BRANDING_API_KEY)
+}
+
+export const removeStudenExamApiData = async () => {
+    let loginCred = await getLoginData('login_data_key');
+    let EXAM_API_KEY = `${loginCred.school.schoolId}${classData}${section}`
+    await AsyncStorage.removeItem(EXAM_API_KEY)
+}
+
+export const removeScanDataApiData = async () => {
+    let loginCred = await getLoginData('login_data_key');
+    let SCAN_API_KEY= `${loginCred.school.schoolId}00000false`
+    await AsyncStorage.removeItem(SCAN_API_KEY)
+}
+export const removeRoiDataApiData = async () => {
+    let loginCred = await getLoginData('login_data_key');
+    let ROI_API_KEY = `${loginCred.school.schoolId}exam`
+    await AsyncStorage.removeItem(ROI_API_KEY)
+}
+
+export const removeAllCache = async() => {
+    await AsyncStorage.clear()
 }

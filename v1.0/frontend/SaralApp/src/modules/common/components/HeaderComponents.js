@@ -6,7 +6,8 @@ import { Assets } from '../../../assets';
 import constants from '../../../flux/actions/constants';
 import { storeFactory } from '../../../flux/store/store';
 import AppTheme from '../../../utils/AppTheme';
-import { monospace_FF } from '../../../utils/CommonUtils';
+import { dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF } from '../../../utils/CommonUtils';
+import { removeAllCache, removeBrandingApiData, removeLoginApiData, removeRoiDataApiData, removeScanDataApiData, removeStudenExamApiData } from '../../../utils/offlineStorageUtils';
 import { setMinimalValue } from '../../../utils/StorageUtils';
 import Strings from '../../../utils/Strings';
 
@@ -64,10 +65,36 @@ class HeaderComponents extends Component {
             return true
         }
 
+        async function removeLocalCache() {
+            await removeLoginApiData();
+            await removeBrandingApiData();
+            await removeStudenExamApiData();
+            await removeRoiDataApiData();
+            await removeScanDataApiData();
+            this.props.navigation.navigate('mainMenu');
+        }
+
+        async function removeGlobalCache(){
+            await removeAllCache();
+            this.props.navigation.navigate('mainMenu');
+        }
+
+        const callCustomModal = (title, message, isAvailable, doLogout, cancel) => {
+            let data = {
+              title: title,
+              message: message,
+              isOkAvailable: isAvailable,
+              okFunc: doLogout,
+              isCancel: cancel
+            }
+            storeFactory.dispatch(dispatchCustomModalStatus(true));
+            storeFactory.dispatch(dispatchCustomModalMessage(data));
+          }
+
         return (
             <View style={{flex:1,marginTop: '10%',marginRight:'5%'}}>
                 <View style={styles.imageViewContainer}>
-                    <View style={[styles.imageContainerStyle,{height:  160 }]}>
+                    <View style={[styles.imageContainerStyle,{height:  200 }]}>
                         
                         <TouchableOpacity
                         style={[styles.imageContainerViewstyle,{marginTop:10}]}
@@ -101,6 +128,27 @@ class HeaderComponents extends Component {
                          <Image style={{width:15,height:15,top:5}}  source={Assets.Help}/>
                             <Text style={[styles.headerTitleTextStyle, customLogoutTextStyle]}>{Strings.help_menu}</Text>
                         </TouchableOpacity>
+
+                        
+                            <TouchableOpacity
+                               style={styles.imageContainerViewstyle}
+                                onPress={()=>{
+                                    callCustomModal(Strings.message_text, Strings.are_you_sure_you_want_to_clear_local_cache, true, removeLocalCache, true)
+                                }}
+                                >
+                                 <Image style={{width:15,height:25}}  source={Assets.Logout}/>
+                                <Text style={[styles.headerTitleTextStyle, customLogoutTextStyle]}>{Strings.logout_local_cache}</Text>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity
+                               style={styles.imageContainerViewstyle}
+                               onPress={()=>{
+                                   callCustomModal(Strings.message_text, Strings.are_you_sure_you_want_to_clear_global_cache, true, removeGlobalCache, true)
+                               }}
+                            >
+                                 <Image style={{width:15,height:25}}  source={Assets.Logout}/>
+                                <Text style={[styles.headerTitleTextStyle, customLogoutTextStyle]}>{Strings.logout_global_cache}</Text>
+                            </TouchableOpacity>
                         
                         <View 
                         style={{flexDirection: 'row', marginBottom: 10}}
@@ -124,6 +172,8 @@ class HeaderComponents extends Component {
                             <Text style={[styles.headerTitleTextStyle, customLogoutTextStyle,{color: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE,fontWeight: 'bold'}]}>{Strings.regular_mode}</Text>
                         }
                         </TouchableOpacity>
+
+                        
                         
                         </View>
                     </View>

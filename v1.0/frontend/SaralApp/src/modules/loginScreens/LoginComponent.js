@@ -10,7 +10,7 @@ import APITransport from '../../flux/actions/transport/apitransport';
 import { LoginAction } from '../../flux/actions/apis/LoginAction';
 import { DefaultBrandAction } from '../../flux/actions/apis/defaultBrandAction';
 import {
-    setLoginData, setLoginCred, getLoginCred, setRememberUser, getRememberedUser, forgetUser, setRememberPassword, getRememberedPassword, forgetUserpass
+    setLoginData, setLoginCred, getLoginCred, setRememberUser, getRememberedUser, forgetUser, setRememberPassword, getRememberedPassword, forgetUserpass, getLoginData
 } from '../../utils/StorageUtils'
 import { Assets } from '../../assets/index'
 import { checkNetworkConnectivity, monospace_FF } from '../../utils/CommonUtils';
@@ -111,6 +111,7 @@ class LoginComponent extends Component {
 
     callLogin = async () => {
         const { schoolId, password } = this.state
+        const { loginData } = this.props
 
         let hasNetwork = await checkNetworkConnectivity();
 
@@ -118,7 +119,14 @@ class LoginComponent extends Component {
         if (!hasNetwork) {
             let hasCacheData = await getLoginApi();
             if (hasCacheData) {
-                storeFactory.dispatch(this.dispatchLoginData(hasCacheData))
+                let loginCred = await getLoginData('login_data_key');
+                let loginUser = `${loginCred.school.schoolId}`
+                let cacheFilterData =  hasCacheData.filter((element)=>{
+                    if (element.key == loginUser) {
+                        return true
+                    }
+                });
+                storeFactory.dispatch(this.dispatchLoginData(cacheFilterData[0].data))
                 this.props.navigation.navigate('mainMenu')
             } else {
                 this.setState({
@@ -270,7 +278,35 @@ class LoginComponent extends Component {
                         let loginCred = await setLoginCred(loginCredObj)
                         let loginSaved = await setLoginData(loginData.data)
                         if (loginData.data.school.hasOwnProperty("offline") && loginData.data.school.offline) {
-                            await setLoginApi(loginData)
+                            let getLoginCache = await getLoginApi();
+                            if (getLoginCache != null) {
+
+                                getLoginCache.forEach((element) => {
+                                    let data = getLoginCache.filter((e)=> {
+                                        if (e.key == loginData.data.school.schoolId) {
+                                            return true
+                                        }
+                                    });
+
+                                    if (data.length > 0) {
+                                        return element.data = loginData
+                                    } else {
+                                        let payload = {
+                                            key: `${loginData.data.school.schoolId}`,
+                                            data: loginData
+                                        }
+                                        getLoginCache.push(payload);
+                                    }
+                                });
+                                await setLoginApi(getLoginCache);
+                                
+                            } else {
+                                let payload = {
+                                    key: `${loginData.data.school.schoolId}`,
+                                    data: loginData
+                                }
+                                await setLoginApi([payload])
+                            }
                         }
                         if (loginCred && loginSaved) {
                             navigation.navigate('mainMenu')

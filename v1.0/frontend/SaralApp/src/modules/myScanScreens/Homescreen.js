@@ -60,17 +60,66 @@ class HomeComponent extends Component {
                 }
                 
                 if (loginData.data.school.hasOwnProperty("offline") && loginData.data.school.offline) {
-                   await setBrandingDataApi(multiBranding)
+                    let getBrandingCache = await getBrandingDataApi();
+                    if (getBrandingCache != null) {
+                        getBrandingCache.forEach((element) => {
+                            let data = getBrandingCache.filter((e)=> {
+                                if (e.key == loginData.data.school.schoolId) {
+                                    return true
+                                }
+                            });
+                            if (data.length > 0) {
+                                return element.data = multiBranding
+                            } else {
+                                let payload = {
+                                    key: `${loginData.data.school.schoolId}`,
+                                    data: multiBranding
+                                }
+                                getBrandingCache.push(payload);
+                            }
+                        });
+                        await setLoginApi(getBrandingCache);
+                    } else {
+                        let payload = {
+                            key: `${loginData.data.school.schoolId}`,
+                            data: multiBranding
+                        }
+                        await setBrandingDataApi([payload])
+                    }
                 }
             }
-            
         }
 
         if (studentsAndExamData &&  prevProps.studentsAndExamData != studentsAndExamData ) {
             if (studentsAndExamData.status && studentsAndExamData.status == 200) {
                 this.setState({isLoading : false})
                 if (loginData.data.school.hasOwnProperty("offline") && loginData.data.school.offline && minimalFlag) {
-                    await setStudentExamApi(studentsAndExamData, 0, 0);
+                    let getStudentExamCache = await getStudentExamApi(0,0);
+                    if (getStudentExamCache != null) {
+                        getStudentExamCache.forEach((element) => {
+                            let data = getStudentExamCache.filter((e)=> {
+                                if (e.key == loginData.data.school.schoolId) {
+                                    return true
+                                }
+                            });
+                            if (data.length > 0) {
+                                return element.data = studentsAndExamData
+                            } else {
+                                let payload = {
+                                    key: `${loginData.data.school.schoolId}`,
+                                    data: studentsAndExamData
+                                }
+                                getStudentExamCache.push(payload);
+                            }
+                        });
+                        await setStudentExamApi([getStudentExamCache], 0, 0);
+                    } else {
+                        let payload = {
+                            key: `${loginData.data.school.schoolId}`,
+                            data: studentsAndExamData
+                        }
+                        await setStudentExamApi([payload], 0, 0);
+                        }
                 }
             }
         }
@@ -85,7 +134,12 @@ class HomeComponent extends Component {
         if (!hasNetwork) {
             let hasCacheData = await getStudentExamApi(0,0);
             if (hasCacheData) {
-                storeFactory.dispatch(this.dispatchStudentExamData(hasCacheData))
+                let cacheFilterData =  hasCacheData.filter((element)=>{
+                    if (element.key == this.props.loginData.data.school.schoolId) {
+                        return true
+                    }
+                });
+                storeFactory.dispatch(this.dispatchStudentExamData(cacheFilterData[0].data))
             } else {
                 //Alert message show message "something went wrong or u don't have cache in local"            
             }
@@ -121,7 +175,12 @@ class HomeComponent extends Component {
         if (!hasNetwork) {
             let hasCacheData = await getBrandingDataApi(`brands`);
             if (hasCacheData) {
-                storeFactory.dispatch(this.dispatchScanDataApi(hasCacheData))
+            let cacheFilterData =  hasCacheData.filter((element)=>{
+                if (element.key == this.props.loginData.data.school.schoolId) {
+                    return true
+                }
+            });
+                storeFactory.dispatch(this.dispatchScanDataApi(cacheFilterData[0].data))
             } else {
                 //Alert message show message "something went wrong or u don't have cache in local"
             }

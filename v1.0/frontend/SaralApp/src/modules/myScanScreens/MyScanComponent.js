@@ -214,42 +214,43 @@ class MyScanComponent extends Component {
     setRoiCache = async (roiData) => {
         let payload = {
             examId: this.state.examId,
-            data: roiData
+            data: roiData,
+            key: `${this.props.loginData.data.school.schoolId}`
         }
-        let roi = await getRoiDataApi(this.state.examId)
+        let roi = await getRoiDataApi()
         if (roi != null) {
             roi.forEach( async(e) => {
-                if (e.examId == this.state.examId) {
+                if (e.examId == this.state.examId && e.key == this.props.loginData.data.school.schoolId) {
                     e.data = roiData
                 } else { 
                     roi.push(payload)
-                    await setRoiDataApi(roi, this.state.examId)
                 }
-            })
+            });
+            await setRoiDataApi(roi)
         } else {
-            await setRoiDataApi([payload], this.state.examId)
+            await setRoiDataApi([payload])
         }
     }
 
     setScanDataCache = async (scanedData) => {
         let payload = {
             examId: this.state.examId,
-            data: scanedData
+            data: scanedData,
+            key: this.props.loginData.data.school.schoolId
         }
         let scaned = await getScanDataApi()
         if (scaned != null) {
              scaned.forEach(async (e)=>{
                 let data = scaned.filter((value)=> {
-                    if (e.examId == this.state.examId) {
-                     return true   
+                    if (value.examId == this.state.examId && value.key == this.props.loginData.data.school.schoolId) {
+                        return true
                     }
                 });
                 if (data.length > 0) {
                    return e.data = scanedData
                     
                 } else { 
-                    scaned.push(payload)
-                    await setScanDataApi(scaned)
+                    scaned.push(payload);
                 }
             });
             await setScanDataApi(scaned)
@@ -401,10 +402,10 @@ class MyScanComponent extends Component {
 
                 let hasNetwork = await checkNetworkConnectivity();
                 if (!hasNetwork) {
-                    let hasCacheData = await getRoiDataApi(el.examId);
+                    let hasCacheData = await getRoiDataApi();
                     if (hasCacheData) {
                        let filterData = hasCacheData.filter((value)=> {
-                            if (value.examId == el.examId) {
+                            if (value.examId == el.examId && value.key == this.props.loginData.data.school.schoolId) {
                                 this.setState({
                                     examId: el.examId
                                 })
@@ -649,7 +650,7 @@ class MyScanComponent extends Component {
                     let data = []
                     if (scaned != null) {
                         data = scaned.filter( async(e) => {
-                            if (e.examId == this.state.examId) {
+                            if (e.examId == this.state.examId && e.key == this.props.loginData.data.school.schoolId) {
                                 return true
                             }
                         });
