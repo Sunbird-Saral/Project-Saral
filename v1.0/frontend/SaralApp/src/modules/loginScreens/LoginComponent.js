@@ -119,10 +119,8 @@ class LoginComponent extends Component {
         if (!hasNetwork) {
             let hasCacheData = await getLoginApi();
             if (hasCacheData) {
-                let loginCred = await getLoginData('login_data_key');
-                let loginUser = `${loginCred.school.schoolId}`
                 let cacheFilterData =  hasCacheData.filter((element)=>{
-                    if (element.key == loginUser) {
+                    if (element.key == schoolId) {
                         return true
                     }
                 });
@@ -130,7 +128,8 @@ class LoginComponent extends Component {
                 this.props.navigation.navigate('mainMenu')
             } else {
                 this.setState({
-                    errCommon: Strings.you_seem_to_be_offline_please_check_your_internet_connection
+                    errCommon: Strings.you_seem_to_be_offline_please_check_your_internet_connection,
+                    isLoading: false
                 })            
             }
         } else {
@@ -277,27 +276,29 @@ class LoginComponent extends Component {
                         }
                         let loginCred = await setLoginCred(loginCredObj)
                         let loginSaved = await setLoginData(loginData.data)
-                        if (loginData.data.school.hasOwnProperty("offline") && loginData.data.school.offline) {
+                        let hasNetwork = await checkNetworkConnectivity();
+                        if (loginData.data.school.hasOwnProperty("offline") && loginData.data.school.offline && hasNetwork) {
                             let getLoginCache = await getLoginApi();
+                            let loginCred = await getLoginCred();
+                            let loginUser = `${loginCred.schoolId}`
                             if (getLoginCache != null) {
 
-                                getLoginCache.forEach((element) => {
-                                    let data = getLoginCache.filter((e)=> {
-                                        if (e.key == loginData.data.school.schoolId) {
-                                            return true
-                                        }
-                                    });
+                                const result = getLoginCache.filter(_element => _element.key === loginUser);
 
-                                    if (data.length > 0) {
-                                        return element.data = loginData
-                                    } else {
-                                        let payload = {
-                                            key: `${loginData.data.school.schoolId}`,
-                                            data: loginData
+                                if (result.length > 0) {
+                                    for (let element of getLoginCache) {
+                                        if (element.key == result[0].key) {
+                                            element.data = loginData
+                                            break;
                                         }
-                                        getLoginCache.push(payload);
+                                    };
+                                } else {
+                                    let payload = {
+                                        key: `${loginData.data.school.schoolId}`,
+                                        data: loginData
                                     }
-                                });
+                                    getLoginCache.push(payload);
+                                }
                                 await setLoginApi(getLoginCache);
                                 
                             } else {

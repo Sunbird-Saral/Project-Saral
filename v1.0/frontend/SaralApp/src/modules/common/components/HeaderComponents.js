@@ -38,7 +38,8 @@ class HeaderComponents extends Component {
             helpMenu,
             minimalFlag,
             multiBrandingData,
-            navigation
+            navigation,
+            loginData
         } = this.props
 
         async function changeMinimalMode() {
@@ -71,12 +72,12 @@ class HeaderComponents extends Component {
             await removeStudenExamApiData();
             await removeRoiDataApiData();
             await removeScanDataApiData();
-            this.props.navigation.navigate('mainMenu');
+            navigation.navigate('auth')
         }
 
         async function removeGlobalCache(){
             await removeAllCache();
-            this.props.navigation.navigate('mainMenu');
+            navigation.navigate('auth')
         }
 
         const callCustomModal = (title, message, isAvailable, doLogout, cancel) => {
@@ -94,7 +95,7 @@ class HeaderComponents extends Component {
         return (
             <View style={{flex:1,marginTop: '10%',marginRight:'5%'}}>
                 <View style={styles.imageViewContainer}>
-                    <View style={[styles.imageContainerStyle,{height:  200 }]}>
+                    <View style={[styles.imageContainerStyle,{height: loginData.data.school.hasOwnProperty("offline") && loginData.data.school.offline ? 240 : 180}]}>
                         
                         <TouchableOpacity
                         style={[styles.imageContainerViewstyle,{marginTop:10}]}
@@ -129,26 +130,34 @@ class HeaderComponents extends Component {
                             <Text style={[styles.headerTitleTextStyle, customLogoutTextStyle]}>{Strings.help_menu}</Text>
                         </TouchableOpacity>
 
-                        
+                        {
+                            loginData.data.school.hasOwnProperty("offline") && loginData.data.school.offline 
+                            &&
                             <TouchableOpacity
                                style={styles.imageContainerViewstyle}
                                 onPress={()=>{
                                     callCustomModal(Strings.message_text, Strings.are_you_sure_you_want_to_clear_local_cache, true, removeLocalCache, true)
                                 }}
                                 >
-                                 <Image style={{width:15,height:25}}  source={Assets.Logout}/>
-                                <Text style={[styles.headerTitleTextStyle, customLogoutTextStyle]}>{Strings.logout_local_cache}</Text>
+                                 <Image style={{width:10,height:20}}  source={Assets.delete}/>
+                                <Text style={[styles.headerTitleTextStyle, customLogoutTextStyle]}>{Strings.clear_local_cache}</Text>
                             </TouchableOpacity>
-
+                        }
+                            
+                        {
+                            loginData.data.school.hasOwnProperty("offline") && loginData.data.school.offline 
+                            &&
                             <TouchableOpacity
-                               style={styles.imageContainerViewstyle}
-                               onPress={()=>{
-                                   callCustomModal(Strings.message_text, Strings.are_you_sure_you_want_to_clear_global_cache, true, removeGlobalCache, true)
-                               }}
+                            style={styles.imageContainerViewstyle}
+                            onPress={()=>{
+                                callCustomModal(Strings.message_text, Strings.are_you_sure_you_want_to_clear_global_cache, true, removeGlobalCache, true)
+                            }}
                             >
-                                 <Image style={{width:15,height:25}}  source={Assets.Logout}/>
-                                <Text style={[styles.headerTitleTextStyle, customLogoutTextStyle]}>{Strings.logout_global_cache}</Text>
+                                 <Image style={{width:10,height:20}}  source={Assets.delete}/>
+                                <Text style={[styles.headerTitleTextStyle, customLogoutTextStyle]}>{Strings.clear_global_cache}</Text>
                             </TouchableOpacity>
+                        }
+                            
                         
                         <View 
                         style={{flexDirection: 'row', marginBottom: 10}}
@@ -200,7 +209,8 @@ class HeaderComponents extends Component {
 const mapStateToProps = (state) => {
     return {
         minimalFlag: state.minimalFlag,
-        multiBrandingData: state.multiBrandingData.response.data
+        multiBrandingData: state.multiBrandingData.response.data,
+        loginData: state.loginData,
     }
   }
 

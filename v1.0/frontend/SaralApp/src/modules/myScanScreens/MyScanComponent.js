@@ -219,13 +219,26 @@ class MyScanComponent extends Component {
         }
         let roi = await getRoiDataApi()
         if (roi != null) {
-            roi.forEach( async(e) => {
-                if (e.examId == this.state.examId && e.key == this.props.loginData.data.school.schoolId) {
-                    e.data = roiData
-                } else { 
-                    roi.push(payload)
+
+            let data = roi.filter((e)=> {
+                if (e.key == this.props.loginData.data.school.schoolId) {
+                    return true
                 }
             });
+            if (data.length > 0) {
+                for (let element of roi) {
+                    if (element.key == data[0].key & e.examId == this.state.examId) {
+                        element.data = roiData
+                        break;
+                    }
+                };
+            } else {
+                let payload = {
+                    key: `${this.props.loginData.data.school.schoolId}`,
+                    data: roiData
+                }
+                roi.push(payload);
+            }
             await setRoiDataApi(roi)
         } else {
             await setRoiDataApi([payload])
@@ -240,19 +253,23 @@ class MyScanComponent extends Component {
         }
         let scaned = await getScanDataApi()
         if (scaned != null) {
-             scaned.forEach(async (e)=>{
-                let data = scaned.filter((value)=> {
-                    if (value.examId == this.state.examId && value.key == this.props.loginData.data.school.schoolId) {
-                        return true
-                    }
-                });
-                if (data.length > 0) {
-                   return e.data = scanedData
-                    
-                } else { 
-                    scaned.push(payload);
+
+            let data = scaned.filter((value)=> {
+                if (value.examId == this.state.examId && value.key == this.props.loginData.data.school.schoolId) {
+                    return true
                 }
             });
+
+            if (data.length > 0) {
+                for (let element of scaned) {
+                    if (element.key == data[0].key) {
+                        element.data = scanedData
+                        break;
+                    }
+                };
+            } else {
+                scaned.push(payload);
+            }
             await setScanDataApi(scaned)
 
         } else {

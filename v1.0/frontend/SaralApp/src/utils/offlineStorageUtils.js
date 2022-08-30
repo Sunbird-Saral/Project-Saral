@@ -1,11 +1,13 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getLoginData } from './StorageUtils';
 
+const LOGIN_API_KEY = `LOGIN_API_KEY`
+const EXAM_API_KEY = `EXAM_API_KEY`
+const ROI_API_KEY = `ROI_API_KEY`
+const SAVED_API_KEY = `SAVED_API_KEY`
+const BRANDING_API_KEY = `BRANDING_API_KEY`
 
 export const setLoginApi = async (data) => {
-    //GET LOGIN CREDENTIAL
-    let loginCred = await getLoginData('login_data_key');
-    let LOGIN_API_KEY = `${loginCred.school.schoolId}`
     let json = JSON.stringify(data);
     let saved = await setData(LOGIN_API_KEY, json)
     if (saved) {
@@ -18,22 +20,13 @@ export const setLoginApi = async (data) => {
 
 export const getLoginApi = async () => {
     //GET LOGIN CREDENTIAL
-    let loginCred = await getLoginData('login_data_key');
-    if (loginCred) {
-        let LOGIN_API_KEY = `${loginCred.school.schoolId}`
         let loginData = await getData(LOGIN_API_KEY)
         return JSON.parse(loginData)
-    } else {
-        return JSON.parse(loginCred)
-        
-    }
 }
 
 
-export const setStudentExamApi = async (data, classData, section) => {
+export const setStudentExamApi = async (data) => {
     //GET LOGIN CREDENTIAL
-    let loginCred = await getLoginData('login_data_key');
-    let EXAM_API_KEY = `${loginCred.school.schoolId}${classData}${section}`
     let json = JSON.stringify(data);
     let saved = await setData(EXAM_API_KEY, json)
     if (saved) {
@@ -44,24 +37,13 @@ export const setStudentExamApi = async (data, classData, section) => {
     }
 }
 
-export const getStudentExamApi = async (classData, section) => {
-    //GET LOGIN CREDENTIAL
-    let loginCred = await getLoginData('login_data_key');
-    if (loginCred) {
-        let EXAM_API_KEY = `${loginCred.school.schoolId}${classData}${section}`
+export const getStudentExamApi = async () => {
         let examData = await getData(EXAM_API_KEY)
         return JSON.parse(examData)
-    } else {
-        return JSON.parse(loginCred)
-        
-    }
 }
 
 
-export const setRoiDataApi = async (data, examId) => {
-    //GET LOGIN CREDENTIAL
-    let loginCred = await getLoginData('login_data_key');
-    let ROI_API_KEY = `${loginCred.school.schoolId}exam`
+export const setRoiDataApi = async (data) => {
     let json = JSON.stringify(data);
     let saved = await setData(ROI_API_KEY, json)
     if (saved) {
@@ -73,24 +55,13 @@ export const setRoiDataApi = async (data, examId) => {
 }
 
 export const getRoiDataApi = async () => {
-    //GET LOGIN CREDENTIAL
-    let loginCred = await getLoginData('login_data_key');
-    if (loginCred) {
-        let ROI_API_KEY = `${loginCred.school.schoolId}exam`
         let roiData = await getData(ROI_API_KEY)
         return JSON.parse(roiData)
-    } else {
-        return JSON.parse(loginCred)
-        
-    }
 }
 
 export const setScanDataApi = async (data) => {
-    //GET LOGIN CREDENTIAL
-    let loginCred = await getLoginData('login_data_key');
-    let ROI_API_KEY = `${loginCred.school.schoolId}00000false`
     let json = JSON.stringify(data);
-    let saved = await setData(ROI_API_KEY, json)
+    let saved = await setData(SAVED_API_KEY, json)
     if (saved) {
         return true
     }
@@ -100,22 +71,11 @@ export const setScanDataApi = async (data) => {
 }
 
 export const getScanDataApi = async () => {
-    //GET LOGIN CREDENTIAL
-    let loginCred = await getLoginData('login_data_key');
-    if (loginCred) {
-        let SCAN_API_KEY = `${loginCred.school.schoolId}00000false`
-        let scanData = await getData(SCAN_API_KEY)
+        let scanData = await getData(SAVED_API_KEY)
         return JSON.parse(scanData)
-    } else {
-        return JSON.parse(loginCred)
-        
-    }
 }
 
 export const setBrandingDataApi = async (data) => {
-    //GET LOGIN CREDENTIAL
-    let loginCred = await getLoginData('login_data_key');
-    let BRANDING_API_KEY = `${loginCred.school.schoolId}brands`
     let json = JSON.stringify(data);
     let saved = await setData(BRANDING_API_KEY, json)
     if (saved) {
@@ -126,18 +86,10 @@ export const setBrandingDataApi = async (data) => {
     }
 }
 
-export const getBrandingDataApi = async (brands) => {
-    //GET LOGIN CREDENTIAL
-    let loginCred = await getLoginData('login_data_key');
-    if (loginCred) {
-        let BRANDING_API_KEY = `${loginCred.school.schoolId}${brands}`
+export const getBrandingDataApi = async () => {
         let brandingData = await getData(BRANDING_API_KEY)
         return JSON.parse(brandingData)
-    } else {
-        return JSON.parse(loginCred)
-        
     }
-}
 
 export const setData = async (key, value) => {
     await AsyncStorage.setItem(key, value);
@@ -150,34 +102,42 @@ export const getData = async (key) => {
 }
 
 export const removeLoginApiData = async () => {
-    let loginCred = await getLoginData('login_data_key');
-    let LOGIN_API_KEY = `${loginCred.school.schoolId}`
     await AsyncStorage.removeItem(LOGIN_API_KEY)
 }
 
 export const removeBrandingApiData = async () => {
-    let loginCred = await getLoginData('login_data_key');
-    let BRANDING_API_KEY = `${loginCred.school.schoolId}brands`
     await AsyncStorage.removeItem(BRANDING_API_KEY)
 }
 
 export const removeStudenExamApiData = async () => {
-    let loginCred = await getLoginData('login_data_key');
-    let EXAM_API_KEY = `${loginCred.school.schoolId}${classData}${section}`
     await AsyncStorage.removeItem(EXAM_API_KEY)
 }
 
 export const removeScanDataApiData = async () => {
-    let loginCred = await getLoginData('login_data_key');
-    let SCAN_API_KEY= `${loginCred.school.schoolId}00000false`
     await AsyncStorage.removeItem(SCAN_API_KEY)
 }
 export const removeRoiDataApiData = async () => {
-    let loginCred = await getLoginData('login_data_key');
-    let ROI_API_KEY = `${loginCred.school.schoolId}exam`
     await AsyncStorage.removeItem(ROI_API_KEY)
 }
 
 export const removeAllCache = async() => {
-    await AsyncStorage.clear()
+    //remove all user login data
+    let login = JSON.stringify(null);
+     await setData(LOGIN_API_KEY, login)
+
+     //remove all user branding data
+     let brand = JSON.stringify(null);
+     await setData(BRANDING_API_KEY, brand)
+
+     //remove all user studnetexam data
+     let exam = JSON.stringify(null);
+     await setData(EXAM_API_KEY, exam)
+
+     //remove all user roi data
+     let roi = JSON.stringify(null);
+     await setData(ROI_API_KEY, roi)
+
+     //remove all user db saved data
+     let json = JSON.stringify(null);
+     await setData(SCANNED_API_KEY, json)
 }

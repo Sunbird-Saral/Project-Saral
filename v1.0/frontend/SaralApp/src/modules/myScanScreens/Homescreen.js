@@ -44,6 +44,7 @@ class HomeComponent extends Component {
         const { studentsAndExamData, multiBranding, loginData, minimalFlag }  = this.props;
 
         const { loginData: { data: { school } } } = this.props;
+        let hasNetwork = await checkNetworkConnectivity();
         
         if (multiBranding && prevProps.multiBranding != multiBranding) {
             if (multiBranding.status && multiBranding.status == 200) {
@@ -59,17 +60,23 @@ class HomeComponent extends Component {
                     this.setState({isLoading : false})
                 }
                 
-                if (loginData.data.school.hasOwnProperty("offline") && loginData.data.school.offline) {
+                if (loginData.data.school.hasOwnProperty("offline") && loginData.data.school.offline && hasNetwork & minimalFlag ) {
                     let getBrandingCache = await getBrandingDataApi();
                     if (getBrandingCache != null) {
-                        getBrandingCache.forEach((element) => {
-                            let data = getBrandingCache.filter((e)=> {
-                                if (e.key == loginData.data.school.schoolId) {
-                                    return true
-                                }
-                            });
+
+                        let data = getBrandingCache.filter((e)=> {
+                            if (e.key == loginData.data.school.schoolId) {
+                                return true
+                            }
+                        });
+
                             if (data.length > 0) {
-                                return element.data = multiBranding
+                                for (let element of getBrandingCache) {
+                                    if (element.key == data[0].key) {
+                                        element.data = multiBranding
+                                        break;
+                                    }
+                                };
                             } else {
                                 let payload = {
                                     key: `${loginData.data.school.schoolId}`,
@@ -77,8 +84,7 @@ class HomeComponent extends Component {
                                 }
                                 getBrandingCache.push(payload);
                             }
-                        });
-                        await setLoginApi(getBrandingCache);
+                        await setBrandingDataApi(getBrandingCache);
                     } else {
                         let payload = {
                             key: `${loginData.data.school.schoolId}`,
@@ -93,26 +99,30 @@ class HomeComponent extends Component {
         if (studentsAndExamData &&  prevProps.studentsAndExamData != studentsAndExamData ) {
             if (studentsAndExamData.status && studentsAndExamData.status == 200) {
                 this.setState({isLoading : false})
-                if (loginData.data.school.hasOwnProperty("offline") && loginData.data.school.offline && minimalFlag) {
+                if (loginData.data.school.hasOwnProperty("offline") && loginData.data.school.offline && minimalFlag && hasNetwork) {
                     let getStudentExamCache = await getStudentExamApi(0,0);
                     if (getStudentExamCache != null) {
-                        getStudentExamCache.forEach((element) => {
-                            let data = getStudentExamCache.filter((e)=> {
-                                if (e.key == loginData.data.school.schoolId) {
-                                    return true
-                                }
-                            });
-                            if (data.length > 0) {
-                                return element.data = studentsAndExamData
-                            } else {
-                                let payload = {
-                                    key: `${loginData.data.school.schoolId}`,
-                                    data: studentsAndExamData
-                                }
-                                getStudentExamCache.push(payload);
+
+                        let data = getStudentExamCache.filter((e)=> {
+                            if (e.key == loginData.data.school.schoolId) {
+                                return true
                             }
                         });
-                        await setStudentExamApi([getStudentExamCache], 0, 0);
+                        if (data.length > 0) {
+                            for (let element of getStudentExamCache) {
+                                if (element.key == data[0].key) {
+                                    element.data = studentsAndExamData
+                                    break;
+                                }
+                            };
+                        } else {
+                            let payload = {
+                                key: `${loginData.data.school.schoolId}`,
+                                data: studentsAndExamData
+                            }
+                            getStudentExamCache.push(payload);
+                        }
+                        await setStudentExamApi(getStudentExamCache, 0, 0);
                     } else {
                         let payload = {
                             key: `${loginData.data.school.schoolId}`,
@@ -173,7 +183,7 @@ class HomeComponent extends Component {
    async callMultiBrandingActiondata() {
         let hasNetwork = await checkNetworkConnectivity();
         if (!hasNetwork) {
-            let hasCacheData = await getBrandingDataApi(`brands`);
+            let hasCacheData = await getBrandingDataApi();
             if (hasCacheData) {
             let cacheFilterData =  hasCacheData.filter((element)=>{
                 if (element.key == this.props.loginData.data.school.schoolId) {

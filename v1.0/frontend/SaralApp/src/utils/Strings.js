@@ -123,8 +123,8 @@ export default strings = new LocalizedStrings({
         scan_data: "Scan Data",
         scan_count: "Scan Count",
         save_count: "Save Count",
-        logout_local_cache: "Logout Local Cache",
-        logout_global_cache: "Logout Global Cache",
+        clear_local_cache: "Clear Local Cache",
+        clear_global_cache: "Clear Global Cache",
         are_you_sure_you_want_to_clear_local_cache: "Are you sure you want to clear local cache ?",
         are_you_sure_you_want_to_clear_global_cache: "Are you sure you want to clear global cache ?"
     }
