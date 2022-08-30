@@ -1,7 +1,7 @@
 {
     "layout": {
         "version": "1.0",
-        "name": "BENEFICIARY DETAILS FROM",
+        "name": "BENEFICIARY DETAILS FORM",
         "identifierPrefix": "CHILDID",
         "threshold": {
             "minWidth": 0,
@@ -261,7 +261,8 @@
                     "value": "CHILDID"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "^[0-9]{20}$",
+                    "errorMsg": "ID exceeds the limit"
                 }
             },
             {
@@ -516,7 +517,8 @@
                     "value": "CHILDFIRSTNAME"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "^[A-Z\\s]{0,20}$",
+                    "errorMsg": "Please enter valid values (A-Z or space) and length should be <= 20"
                 }
             },
             {
@@ -771,7 +773,8 @@
                     "value": "CHILDLASTNAME"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "^[A-Z\\s]{0,20}$",
+                    "errorMsg": "Please enter valid values (A-Z or space) and length should be <= 20"
                 }
             },
             {
@@ -1026,7 +1029,8 @@
                     "value": "MOTHERFIRSTNAME"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "^[A-Z\\s]{0,20}$",
+                    "errorMsg": "Please enter valid values (A-Z or space) and length should be <= 20"
                 }
             },
             {
@@ -1281,7 +1285,8 @@
                     "value": "MOTHERLASTNAME"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "^[A-Z\\s]{0,20}$",
+                    "errorMsg": "Please enter valid values (A-Z or space) and length should be <= 20"
                 }
             },
             {
@@ -1536,7 +1541,8 @@
                     "value": "FATHERFIRSTNAME"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "^[A-Z\\s]{0,20}$",
+                    "errorMsg": "Please enter valid values (A-Z or space) and length should be <= 20"
                 }
             },
             {
@@ -1791,7 +1797,8 @@
                     "value": "FATHERLASTNAME"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "^[A-Z\\s]{0,20}$",
+                    "errorMsg": "Please enter valid values (A-Z or space) and length should be <= 20"
                 }
             },
             {
@@ -1950,7 +1957,8 @@
                     "value": "CHILDADHAARID"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "^[0-9]{12}$",
+                    "errorMsg": "ADHAR ID exceeds the limit"
                 }
             },
             {
@@ -2037,7 +2045,8 @@
                     "value": "DOB"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "^[0-9]{6}$",
+                    "errorMsg": "DOB exceeds the limit"
                 }
             },
             {
@@ -2064,7 +2073,8 @@
                     "value": "CASTE"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "^[0-3]$",
+                    "errorMsg": "Value should be between 0 to 3"
                 }
             },
             {
@@ -2091,7 +2101,8 @@
                     "value": "RELIGION"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "^[0-3]$",
+                    "errorMsg": "Value should be between 0 to 3"
                 }
             },
             {
@@ -2118,7 +2129,8 @@
                     "value": "GENDER"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "^[0-2]$",
+                    "errorMsg": "Value should be between 0 to 2"
                 }
             },
             {
@@ -2145,7 +2157,8 @@
                     "value": "DISABILITY"
                 },
                 "validate": {
-                    "regExp": ""
+                    "regExp": "^[0-5]$",
+                    "errorMsg": "Value should be between 0 to 5"
                 }
             }
         ]
