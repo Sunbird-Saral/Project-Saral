@@ -44,6 +44,8 @@ import java.util.HashMap;
 import java.util.List;
 import org.opencv.imgcodecs.Imgcodecs;
 
+import org.opencv.core.Core;
+
 public class SaralSDKOpenCVScannerActivity extends ReactActivity implements CameraBridgeViewBase.CvCameraViewListener2 {
     private static final String TAG = "SrlSDK::Scanner";
     private static long mframeCount = 0;
@@ -491,13 +493,22 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
     }
 
     private void showProcessingInformation(Mat image) {
-        String text     = "Layout image captured, processing for results !!";
-        Point position  = new Point(image.width()/6, image.height() / 2);
-        Scalar color    = new Scalar(0,100,0);
-        int font        = Imgproc.COLOR_BGR5652GRAY;
-        int scale       = 2;
-        int thickness   = 3;
-        Imgproc.putText(image, text, position, font, scale, color, thickness);
+        //  System.loadLibrary( Core.NATIVE_LIBRARY_NAME ); 
+        //    //Instantiating the Imagecodecs class 
+         Imgcodecs imageCodecs = new Imgcodecs(); 
+
+        //  //Reading the Image from the file  
+         String file ="C:/Users/test/Desktop/Saralproject/Project-Saral/v1.0/frontend/SaralApp/android/saralsdk/src/main/java/org/ekstep/saral/saralsdk/download.png"; 
+         Mat matrix = imageCodecs.imread(file); 
+         Log.d(TAG, "matrix" + matrix);
+         Log.d(TAG, "file" + file);
+        // String text     = "Layout image captured, processing for results !!";
+        // Point position  = new Point(image.width()/6, image.height() / 2);
+        // Scalar color    = new Scalar(0,100,0);
+        // int font        = Imgproc.COLOR_BGR5652GRAY;
+        // int scale       = 2;
+        // int thickness   = 3;
+        // Imgproc.putText(image, text, position, font, scale, color, thickness);
     }
 
     // }
