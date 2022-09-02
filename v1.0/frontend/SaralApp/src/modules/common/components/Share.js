@@ -4,7 +4,7 @@ import { Alert, View, TouchableOpacity, Text, Modal, Linking } from 'react-nativ
 //redux
 import { connect, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { dispatchCustomModalMessage, dispatchCustomModalStatus } from '../../../utils/CommonUtils'
+import { checkNetworkConnectivity, dispatchCustomModalMessage, dispatchCustomModalStatus } from '../../../utils/CommonUtils'
 
 //component
 import Strings from '../../../utils/Strings';
@@ -22,7 +22,7 @@ import { LogoutAction } from '../../../flux/actions/apis/LogoutAction';
 import axios from 'axios';
 
 //local storage
-import { getScannedDataFromLocal, eraseErrorLogs, getErrorMessage } from '../../../utils/StorageUtils';
+import { getScannedDataFromLocal, eraseErrorLogs, getErrorMessage, erasesetLoginCred } from '../../../utils/StorageUtils';
 
 //constant
 import C from '../../../flux/actions/constants'
@@ -54,10 +54,18 @@ const ShareComponent = ({
 
   const Logoutcall = async () => {
     let data = await getScannedDataFromLocal();
+    let hasNetwork = await checkNetworkConnectivity();
     setIshidden(false);
     if (bgFlag) {
       callCustomModal(Strings.message_text, Strings.auto_sync_in_progress_please_wait, false, false);
-    } else {
+    } 
+    else if (loginData.data.school.hasOwnProperty("offline") && loginData.data.school.offline && !hasNetwork) {
+      const logout = async()=> {
+        navigation.navigate('auth')
+      }
+      callCustomModal(Strings.message_text, Strings.are_you_sure_you_want_to_logout, true, logout, true)
+    }
+    else {
 
       const doLogout = async () => {
         if (data != null && data.length > 0) {

@@ -10,12 +10,13 @@ import APITransport from '../../flux/actions/transport/apitransport';
 import Brands from '../common/components/Brands';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Assets } from '../../assets';
-import { monospace_FF } from '../../utils/CommonUtils';
+import { checkNetworkConnectivity, monospace_FF } from '../../utils/CommonUtils';
 import Spinner from '../common/components/loadingIndicator';
 import { storeFactory } from '../../flux/store/store';
 import constants from '../../flux/actions/constants';
 import { GetStudentsAndExamData } from '../../flux/actions/apis/getStudentsAndExamData';
 import { getMinimalValue } from '../../utils/StorageUtils';
+import { getBrandingDataApi, getStudentExamApi, setBrandingDataApi, setStudentExamApi } from '../../utils/offlineStorageUtils';
 
 class HomeComponent extends Component {
     constructor(props) {
@@ -40,9 +41,10 @@ class HomeComponent extends Component {
     }
 
    async componentDidUpdate(prevProps) {
-        const { studentsAndExamData, multiBranding }  = this.props;
+        const { studentsAndExamData, multiBranding, loginData, minimalFlag }  = this.props;
 
         const { loginData: { data: { school } } } = this.props;
+        let hasNetwork = await checkNetworkConnectivity();
         
         if (multiBranding && prevProps.multiBranding != multiBranding) {
             if (multiBranding.status && multiBranding.status == 200) {
@@ -58,30 +60,118 @@ class HomeComponent extends Component {
                     this.setState({isLoading : false})
                 }
                 
+                if (loginData.data.school.hasOwnProperty("offline") && loginData.data.school.offline && hasNetwork & minimalFlag ) {
+                    let getBrandingCache = await getBrandingDataApi();
+                    if (getBrandingCache != null) {
+
+                        let data = getBrandingCache.filter((e)=> {
+                            if (e.key == loginData.data.school.schoolId) {
+                                return true
+                            }
+                        });
+
+                            if (data.length > 0) {
+                                for (let element of getBrandingCache) {
+                                    if (element.key == data[0].key) {
+                                        element.data = multiBranding
+                                        break;
+                                    }
+                                };
+                            } else {
+                                let payload = {
+                                    key: `${loginData.data.school.schoolId}`,
+                                    data: multiBranding
+                                }
+                                getBrandingCache.push(payload);
+                            }
+                        await setBrandingDataApi(getBrandingCache);
+                    } else {
+                        let payload = {
+                            key: `${loginData.data.school.schoolId}`,
+                            data: multiBranding
+                        }
+                        await setBrandingDataApi([payload])
+                    }
+                }
             }
-            
         }
 
         if (studentsAndExamData &&  prevProps.studentsAndExamData != studentsAndExamData ) {
             if (studentsAndExamData.status && studentsAndExamData.status == 200) {
                 this.setState({isLoading : false})
+                if (loginData.data.school.hasOwnProperty("offline") && loginData.data.school.offline && minimalFlag && hasNetwork) {
+                    let getStudentExamCache = await getStudentExamApi(0,0);
+                    if (getStudentExamCache != null) {
+
+                        let data = getStudentExamCache.filter((e)=> {
+                            if (e.key == loginData.data.school.schoolId) {
+                                return true
+                            }
+                        });
+                        if (data.length > 0) {
+                            for (let element of getStudentExamCache) {
+                                if (element.key == data[0].key) {
+                                    element.data = studentsAndExamData
+                                    break;
+                                }
+                            };
+                        } else {
+                            let payload = {
+                                key: `${loginData.data.school.schoolId}`,
+                                data: studentsAndExamData
+                            }
+                            getStudentExamCache.push(payload);
+                        }
+                        await setStudentExamApi(getStudentExamCache, 0, 0);
+                    } else {
+                        let payload = {
+                            key: `${loginData.data.school.schoolId}`,
+                            data: studentsAndExamData
+                        }
+                        await setStudentExamApi([payload], 0, 0);
+                        }
+                }
             }
         }
     }
     
 
-    callStudentsData = (token) => {
+    callStudentsData = async (token) => {
 
-        let dataPayload = {
-           "classId": "0",
-           "section": "0"
-         }
-         this.setState({
-               isLoading: true,
-         })
-           let apiObj = new GetStudentsAndExamData(dataPayload, token);
-           this.props.APITransport(apiObj)
-   }
+        let hasNetwork = await checkNetworkConnectivity();
+
+
+        if (!hasNetwork) {
+            let hasCacheData = await getStudentExamApi(0,0);
+            if (hasCacheData) {
+                let cacheFilterData =  hasCacheData.filter((element)=>{
+                    if (element.key == this.props.loginData.data.school.schoolId) {
+                        return true
+                    }
+                });
+                storeFactory.dispatch(this.dispatchStudentExamData(cacheFilterData[0].data))
+            } else {
+                //Alert message show message "something went wrong or u don't have cache in local"            
+            }
+        } else {
+            let dataPayload = {
+                "classId": "0",
+                "section": "0"
+            }
+            this.setState({
+                isLoading: true,
+            })
+            let apiObj = new GetStudentsAndExamData(dataPayload, token);
+            this.props.APITransport(apiObj)
+        }
+    }
+
+    dispatchStudentExamData(payload){
+        return {
+            type: constants.GET_STUDENTS_EXAMS_LIST,
+            payload
+        }
+    }
 
    minimalFlagAction (payload){
     return {
@@ -90,12 +180,33 @@ class HomeComponent extends Component {
     }
 }
 
-    callMultiBrandingActiondata() {
+   async callMultiBrandingActiondata() {
+        let hasNetwork = await checkNetworkConnectivity();
+        if (!hasNetwork) {
+            let hasCacheData = await getBrandingDataApi();
+            if (hasCacheData) {
+            let cacheFilterData =  hasCacheData.filter((element)=>{
+                if (element.key == this.props.loginData.data.school.schoolId) {
+                    return true
+                }
+            });
+                storeFactory.dispatch(this.dispatchScanDataApi(cacheFilterData[0].data))
+            } else {
+                //Alert message show message "something went wrong or u don't have cache in local"
+            }
+        } else {
         let payload = this.props.multiBrandingData
         let token = this.props.loginData.data.token
         let apiObj = new MultiBrandingAction(payload, token);
         this.props.APITransport(apiObj)
+    }
+}
 
+dispatchScanDataApi(payload) {
+    return {
+        type: constants.MULTI_BRANDING,
+        payload
+    }
     }
 
     onBack = () => {
