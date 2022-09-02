@@ -20,7 +20,8 @@
     "autoSyncFrequency": 600000,
     "storeTrainingData": true,
     "tags": false,
-    "supportEmail": "abc@gmail.com"
+    "supportEmail": "abc@gmail.com",
+    "offline": true
   },
   {
     "name": "Dummy school 3",
@@ -42,7 +43,8 @@
     "state": "up",
     "storeTrainingData": true,
     "tags": true,
-    "autoSyncBatchSize": 10
+    "autoSyncBatchSize": 10,
+    "offline": true
   },
   {
     "name": "Dummy Skill School",
