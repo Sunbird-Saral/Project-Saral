@@ -42,7 +42,8 @@
     "state": "up",
     "storeTrainingData": true,
     "tags": true,
-    "autoSyncBatchSize": 10
+    "autoSyncBatchSize": 10,
+    "offline": true
   },
   {
     "name": "Dummy Skill School",
