@@ -1,0 +1,861 @@
+{
+    "name": "benificiary growth monitoring1",
+    "securityToken": "benificiary growth monitoring1 Token",
+    "sourceConnection": {
+        "name": "beneficiary growth monitoring1",
+        "providerType": "localFileSystemProxy",
+        "providerOptions": {
+            "encrypted": "eyJjaXBoZXJ0ZXh0IjoiZWQxNjI1N2Y0NThmNGFiZTFjYTUyYTA5ZWQ5NWZmYmE3YThlZGQyNGQzNjY4OTRlYjZkN2Q4NDk2YzJlNGVhMjMxZmQyYjg4YmQ1MzAyNzhiNTRhYjU2OWMxNWI5YjdlYzUzYmZkN2MwY2ZiZmIwMjcyOWM2ZGM3NDgyNjBjNzIiLCJpdiI6IjY3OTQ2YjViYTJmMDAxNTM1MmE5MDg0M2NlN2U1OGRmMzI1YzVjYzA5OGViMTJmYiJ9"
+        },
+        "id": "K9xUYPOxn"
+    },
+    "targetConnection": {
+        "name": "beneficiary growth monitoring1",
+        "providerType": "localFileSystemProxy",
+        "providerOptions": {
+            "encrypted": "eyJjaXBoZXJ0ZXh0IjoiZWZhN2MyOTBkZWM2MDMxZWIwOWRhMTM0YTUzMDAyOGMxN2IxYTY4MmJhMDg4ZTc3NTViMzU2NWIzNWQzMmU0YmNkZmFiYjM0NjVjOGE0NmU1YTc2ZTMyMTQ0ZDY2MTQyZDllNzM2MzA2N2JhODA2NDJiZGUyYmQ4ZDFjZDgyOWMiLCJpdiI6ImI3MmFlMzQyNDlhMTcwZjUzNWZkOWYwMzk3YTU3MjRiMmI4NmJmYjFhYzNlZTNhYiJ9"
+        },
+        "id": "-R9m5JvJY"
+    },
+    "videoSettings": {
+        "frameExtractionRate": 15
+    },
+    "tags": [
+        {
+            "name": "CHILDID1_1",
+            "color": "#5db300"
+        },
+        {
+            "name": "CHILDID1_2",
+            "color": "#e81123"
+        },
+        {
+            "name": "CHILDID1_3",
+            "color": "#6917aa"
+        },
+        {
+            "name": "CHILDID1_4",
+            "color": "#015cda"
+        },
+        {
+            "name": "CHILDID1_5",
+            "color": "#4894fe"
+        },
+        {
+            "name": "CHILDID1_6",
+            "color": "#6b849c"
+        },
+        {
+            "name": "CHILDID1_7",
+            "color": "#70c400"
+        },
+        {
+            "name": "CHILDID1_8",
+            "color": "#f7929a"
+        },
+        {
+            "name": "CHILDID1_9",
+            "color": "#257ffe"
+        },
+        {
+            "name": "CHILDID1_TEN",
+            "color": "#ddabe9"
+        },
+        {
+            "name": "CHILDID1_ELEVEN",
+            "color": "#ff8c00"
+        },
+        {
+            "name": "CHILDID1_TWELVE",
+            "color": "#386300"
+        },
+        {
+            "name": "CHILDID1_THERTEEN",
+            "color": "#b40e1b"
+        },
+        {
+            "name": "CHILDID1_FOURTEEN",
+            "color": "#68217a"
+        },
+        {
+            "name": "CHILDID1_FIFTEEN",
+            "color": "#33cccc"
+        },
+        {
+            "name": "AIM0_HEIGHT1_1",
+            "color": "#016afe"
+        },
+        {
+            "name": "AIM0_HEIGHT1_2",
+            "color": "#595959"
+        },
+        {
+            "name": "AIM0_HEIGHT1_3",
+            "color": "#808080"
+        },
+        {
+            "name": "AIM0_HEIGHT2_1",
+            "color": "#990066"
+        },
+        {
+            "name": "AIM0_WEIGHT1_1",
+            "color": "#00bcf2"
+        },
+        {
+            "name": "AIM0_WEIGHT1_2",
+            "color": "#5db300"
+        },
+        {
+            "name": "AIM0_WEIGHT2_1",
+            "color": "#e81123"
+        },
+        {
+            "name": "AIM0_WEIGHT2_2",
+            "color": "#6917aa"
+        },
+        {
+            "name": "AIM0_WEIGHT2_3",
+            "color": "#015cda"
+        },
+        {
+            "name": "AIM0_DOM1_1",
+            "color": "#4894fe"
+        },
+        {
+            "name": "AIM0_DOM2_1",
+            "color": "#6b849c"
+        },
+        {
+            "name": "AIM0_DOM3_1",
+            "color": "#70c400"
+        },
+        {
+            "name": "AIM0_DOM4_1",
+            "color": "#f7929a"
+        },
+        {
+            "name": "AIM0_DOM5_1",
+            "color": "#257ffe"
+        },
+        {
+            "name": "AIM0_DOM6_1",
+            "color": "#ddabe9"
+        },
+        {
+            "name": "AIM0_STUNTED1_1",
+            "color": "#ff8c00"
+        },
+        {
+            "name": "AIM0_WASTED1_1",
+            "color": "#386300"
+        },
+        {
+            "name": "AIM0_UNDERWEIGHT1_1",
+            "color": "#b40e1b"
+        },
+        {
+            "name": "AIM0_EDEMA1_1",
+            "color": "#68217a"
+        },
+        {
+            "name": "AIM0_ELIGIBLE_SUPPLIMNTRY1_1",
+            "color": "#33cccc"
+        },
+        {
+            "name": "AIM0_ELIGIBLE_REFRAL1_1",
+            "color": "#016afe"
+        },
+        {
+            "name": "AIM0_REASON_REFRAL1_1",
+            "color": "#595959"
+        },
+        {
+            "name": "AIM0_PARENTS_STATUS1_1",
+            "color": "#808080"
+        },
+        {
+            "name": "AIM1_HEIGHT1_1",
+            "color": "#990066"
+        },
+        {
+            "name": "AIM1_HEIGHT1_2",
+            "color": "#00bcf2"
+        },
+        {
+            "name": "AIM1_HEIGHT1_3",
+            "color": "#5db300"
+        },
+        {
+            "name": "AIM1_HEIGHT2_1",
+            "color": "#e81123"
+        },
+        {
+            "name": "AIM1_WEIGHT1_1",
+            "color": "#6917aa"
+        },
+        {
+            "name": "AIM1_WEIGHT1_2",
+            "color": "#015cda"
+        },
+        {
+            "name": "AIM1_WEIGHT2_1",
+            "color": "#4894fe"
+        },
+        {
+            "name": "AIM1_WEIGHT2_2",
+            "color": "#6b849c"
+        },
+        {
+            "name": "AIM1_WEIGHT2_3",
+            "color": "#70c400"
+        },
+        {
+            "name": "AIM1_DOM1_1",
+            "color": "#f7929a"
+        },
+        {
+            "name": "AIM1_DOM2_1",
+            "color": "#257ffe"
+        },
+        {
+            "name": "AIM1_DOM3_1",
+            "color": "#ddabe9"
+        },
+        {
+            "name": "AIM1_DOM4_1",
+            "color": "#ff8c00"
+        },
+        {
+            "name": "AIM1_DOM5_1",
+            "color": "#386300"
+        },
+        {
+            "name": "AIM1_DOM6_1",
+            "color": "#b40e1b"
+        },
+        {
+            "name": "AIM1_STUNTED1_1",
+            "color": "#68217a"
+        },
+        {
+            "name": "AIM1_WASTED1_1",
+            "color": "#33cccc"
+        },
+        {
+            "name": "AIM1_UNDERWEIGHT1_1",
+            "color": "#016afe"
+        },
+        {
+            "name": "AIM1_EDEMA1_1",
+            "color": "#595959"
+        },
+        {
+            "name": "AIM1_ELIGIBLE_SUPPLIMNTRY1_1",
+            "color": "#808080"
+        },
+        {
+            "name": "AIM1_ELIGIBLE_REFRAL1_1",
+            "color": "#990066"
+        },
+        {
+            "name": "AIM1_REASON_REFRAL1_1",
+            "color": "#00bcf2"
+        },
+        {
+            "name": "AIM1_PARENTS_STATUS1_1",
+            "color": "#5db300"
+        },
+        {
+            "name": "AIM2_HEIGHT1_1",
+            "color": "#e81123"
+        },
+        {
+            "name": "AIM2_HEIGHT1_2",
+            "color": "#6917aa"
+        },
+        {
+            "name": "AIM2_HEIGHT1_3",
+            "color": "#015cda"
+        },
+        {
+            "name": "AIM2_HEIGHT2_1",
+            "color": "#4894fe"
+        },
+        {
+            "name": "AIM2_WEIGHT1_1",
+            "color": "#6b849c"
+        },
+        {
+            "name": "AIM2_WEIGHT1_2",
+            "color": "#70c400"
+        },
+        {
+            "name": "AIM2_WEIGHT2_1",
+            "color": "#f7929a"
+        },
+        {
+            "name": "AIM2_WEIGHT2_2",
+            "color": "#257ffe"
+        },
+        {
+            "name": "AIM2_WEIGHT2_3",
+            "color": "#ddabe9"
+        },
+        {
+            "name": "AIM2_DOM1_1",
+            "color": "#ff8c00"
+        },
+        {
+            "name": "AIM2_DOM2_1",
+            "color": "#386300"
+        },
+        {
+            "name": "AIM2_DOM3_1",
+            "color": "#b40e1b"
+        },
+        {
+            "name": "AIM2_DOM4_1",
+            "color": "#68217a"
+        },
+        {
+            "name": "AIM2_DOM5_1",
+            "color": "#33cccc"
+        },
+        {
+            "name": "AIM2_DOM6_1",
+            "color": "#016afe"
+        },
+        {
+            "name": "AIM2_STUNTED1_1",
+            "color": "#595959"
+        },
+        {
+            "name": "AIM2_WASTED1_1",
+            "color": "#808080"
+        },
+        {
+            "name": "AIM2_UNDERWEIGHT1_1",
+            "color": "#990066"
+        },
+        {
+            "name": "AIM2_EDEMA1_1",
+            "color": "#00bcf2"
+        },
+        {
+            "name": "AIM2_ELIGIBLE_SUPPLIMNTRY1_1",
+            "color": "#5db300"
+        },
+        {
+            "name": "AIM2_ELIGIBLE_REFRAL1_1",
+            "color": "#e81123"
+        },
+        {
+            "name": "AIM2_REASON_REFRAL1_1",
+            "color": "#6917aa"
+        },
+        {
+            "name": "AIM2_PARENTS_STATUS1_1",
+            "color": "#015cda"
+        },
+        {
+            "name": "AIM3_HEIGHT1_1",
+            "color": "#4894fe"
+        },
+        {
+            "name": "AIM3_HEIGHT1_2",
+            "color": "#6b849c"
+        },
+        {
+            "name": "AIM3_HEIGHT1_3",
+            "color": "#70c400"
+        },
+        {
+            "name": "AIM3_HEIGHT2_1",
+            "color": "#f7929a"
+        },
+        {
+            "name": "AIM3_WEIGHT1_1",
+            "color": "#257ffe"
+        },
+        {
+            "name": "AIM3_WEIGHT1_2",
+            "color": "#ddabe9"
+        },
+        {
+            "name": "AIM3_WEIGHT2_1",
+            "color": "#ff8c00"
+        },
+        {
+            "name": "AIM3_WEIGHT2_2",
+            "color": "#386300"
+        },
+        {
+            "name": "AIM3_WEIGHT2_3",
+            "color": "#b40e1b"
+        },
+        {
+            "name": "AIM3_DOM1_1",
+            "color": "#68217a"
+        },
+        {
+            "name": "AIM3_DOM2_1",
+            "color": "#33cccc"
+        },
+        {
+            "name": "AIM3_DOM3_1",
+            "color": "#016afe"
+        },
+        {
+            "name": "AIM3_DOM4_1",
+            "color": "#595959"
+        },
+        {
+            "name": "AIM3_DOM5_1",
+            "color": "#808080"
+        },
+        {
+            "name": "AIM3_DOM6_1",
+            "color": "#990066"
+        },
+        {
+            "name": "AIM3_STUNTED1_1",
+            "color": "#00bcf2"
+        },
+        {
+            "name": "AIM3_WASTED1_1",
+            "color": "#5db300"
+        },
+        {
+            "name": "AIM3_UNDERWEIGHT1_1",
+            "color": "#e81123"
+        },
+        {
+            "name": "AIM3_EDEMA1_1",
+            "color": "#6917aa"
+        },
+        {
+            "name": "AIM3_ELIGIBLE_SUPPLIMNTRY1_1",
+            "color": "#015cda"
+        },
+        {
+            "name": "AIM3_ELIGIBLE_REFRAL1_1",
+            "color": "#4894fe"
+        },
+        {
+            "name": "AIM3_REASON_REFRAL1_1",
+            "color": "#6b849c"
+        },
+        {
+            "name": "AIM3_PARENTS_STATUS1_1",
+            "color": "#70c400"
+        },
+        {
+            "name": "AIM4_HEIGHT1_1",
+            "color": "#f7929a"
+        },
+        {
+            "name": "AIM4_HEIGHT1_2",
+            "color": "#257ffe"
+        },
+        {
+            "name": "AIM4_HEIGHT1_3",
+            "color": "#ddabe9"
+        },
+        {
+            "name": "AIM4_HEIGHT2_1",
+            "color": "#ff8c00"
+        },
+        {
+            "name": "AIM4_WEIGHT1_1",
+            "color": "#386300"
+        },
+        {
+            "name": "AIM4_WEIGHT1_2",
+            "color": "#b40e1b"
+        },
+        {
+            "name": "AIM4_WEIGHT2_1",
+            "color": "#68217a"
+        },
+        {
+            "name": "AIM4_WEIGHT2_2",
+            "color": "#33cccc"
+        },
+        {
+            "name": "AIM4_WEIGHT2_3",
+            "color": "#016afe"
+        },
+        {
+            "name": "AIM4_DOM1_1",
+            "color": "#595959"
+        },
+        {
+            "name": "AIM4_DOM2_1",
+            "color": "#808080"
+        },
+        {
+            "name": "AIM4_DOM3_1",
+            "color": "#990066"
+        },
+        {
+            "name": "AIM4_DOM4_1",
+            "color": "#00bcf2"
+        },
+        {
+            "name": "AIM4_DOM5_1",
+            "color": "#5db300"
+        },
+        {
+            "name": "AIM4_DOM6_1",
+            "color": "#e81123"
+        },
+        {
+            "name": "AIM4_STUNTED1_1",
+            "color": "#6917aa"
+        },
+        {
+            "name": "AIM4_WASTED1_1",
+            "color": "#015cda"
+        },
+        {
+            "name": "AIM4_UNDERWEIGHT1_1",
+            "color": "#4894fe"
+        },
+        {
+            "name": "AIM4_EDEMA1_1",
+            "color": "#6b849c"
+        },
+        {
+            "name": "AIM4_ELIGIBLE_SUPPLIMNTRY1_1",
+            "color": "#70c400"
+        },
+        {
+            "name": "AIM4_ELIGIBLE_REFRAL1_1",
+            "color": "#f7929a"
+        },
+        {
+            "name": "AIM4_REASON_REFRAL1_1",
+            "color": "#257ffe"
+        },
+        {
+            "name": "AIM4_PARENTS_STATUS1_1",
+            "color": "#ddabe9"
+        },
+        {
+            "name": "AIM5_HEIGHT1_1",
+            "color": "#ff8c00"
+        },
+        {
+            "name": "AIM5_HEIGHT1_2",
+            "color": "#386300"
+        },
+        {
+            "name": "AIM5_HEIGHT1_3",
+            "color": "#b40e1b"
+        },
+        {
+            "name": "AIM5_HEIGHT2_1",
+            "color": "#68217a"
+        },
+        {
+            "name": "AIM5_WEIGHT1_1",
+            "color": "#33cccc"
+        },
+        {
+            "name": "AIM5_WEIGHT1_2",
+            "color": "#016afe"
+        },
+        {
+            "name": "AIM5_WEIGHT2_1",
+            "color": "#595959"
+        },
+        {
+            "name": "AIM5_WEIGHT2_2",
+            "color": "#808080"
+        },
+        {
+            "name": "AIM5_WEIGHT2_3",
+            "color": "#990066"
+        },
+        {
+            "name": "AIM5_DOM1_1",
+            "color": "#00bcf2"
+        },
+        {
+            "name": "AIM5_DOM2_1",
+            "color": "#5db300"
+        },
+        {
+            "name": "AIM5_DOM3_1",
+            "color": "#e81123"
+        },
+        {
+            "name": "AIM5_DOM4_1",
+            "color": "#6917aa"
+        },
+        {
+            "name": "AIM5_DOM5_1",
+            "color": "#015cda"
+        },
+        {
+            "name": "AIM5_DOM6_1",
+            "color": "#4894fe"
+        },
+        {
+            "name": "AIM5_STUNTED1_1",
+            "color": "#6b849c"
+        },
+        {
+            "name": "AIM5_WASTED1_1",
+            "color": "#70c400"
+        },
+        {
+            "name": "AIM5_UNDERWEIGHT1_1",
+            "color": "#f7929a"
+        },
+        {
+            "name": "AIM5_EDEMA1_1",
+            "color": "#257ffe"
+        },
+        {
+            "name": "AIM5_ELIGIBLE_SUPPLIMNTRY1_1",
+            "color": "#ddabe9"
+        },
+        {
+            "name": "AIM5_ELIGIBLE_REFRAL1_1",
+            "color": "#ff8c00"
+        },
+        {
+            "name": "AIM5_REASON_REFRAL1_1",
+            "color": "#386300"
+        },
+        {
+            "name": "AIM5_PARENTS_STATUS1_1",
+            "color": "#b40e1b"
+        },
+        {
+            "name": "AIM6_HEIGHT1_1",
+            "color": "#68217a"
+        },
+        {
+            "name": "AIM6_HEIGHT1_2",
+            "color": "#33cccc"
+        },
+        {
+            "name": "AIM6_HEIGHT1_3",
+            "color": "#016afe"
+        },
+        {
+            "name": "AIM6_HEIGHT2_1",
+            "color": "#595959"
+        },
+        {
+            "name": "AIM6_WEIGHT1_1",
+            "color": "#808080"
+        },
+        {
+            "name": "AIM6_WEIGHT1_2",
+            "color": "#990066"
+        },
+        {
+            "name": "AIM6_WEIGHT2_1",
+            "color": "#00bcf2"
+        },
+        {
+            "name": "AIM6_WEIGHT2_2",
+            "color": "#5db300"
+        },
+        {
+            "name": "AIM6_WEIGHT2_3",
+            "color": "#e81123"
+        },
+        {
+            "name": "AIM6_DOM1_1",
+            "color": "#6917aa"
+        },
+        {
+            "name": "AIM6_DOM2_1",
+            "color": "#015cda"
+        },
+        {
+            "name": "AIM6_DOM3_1",
+            "color": "#4894fe"
+        },
+        {
+            "name": "AIM6_DOM4_1",
+            "color": "#6b849c"
+        },
+        {
+            "name": "AIM6_DOM5_1",
+            "color": "#70c400"
+        },
+        {
+            "name": "AIM6_DOM6_1",
+            "color": "#f7929a"
+        },
+        {
+            "name": "AIM6_STUNTED1_1",
+            "color": "#257ffe"
+        },
+        {
+            "name": "AIM6_WASTED1_1",
+            "color": "#ddabe9"
+        },
+        {
+            "name": "AIM6_UNDERWEIGHT1_1",
+            "color": "#ff8c00"
+        },
+        {
+            "name": "AIM6_EDEMA1_1",
+            "color": "#386300"
+        },
+        {
+            "name": "AIM6_ELIGIBLE_SUPPLIMNTRY1_1",
+            "color": "#b40e1b"
+        },
+        {
+            "name": "AIM6_ELIGIBLE_REFRAL1_1",
+            "color": "#68217a"
+        },
+        {
+            "name": "AIM6_REASON_REFRAL1_1",
+            "color": "#33cccc"
+        },
+        {
+            "name": "AIM6_PARENTS_STATUS1_1",
+            "color": "#016afe"
+        },
+        {
+            "name": "AIM7_HEIGHT1_1",
+            "color": "#595959"
+        },
+        {
+            "name": "AIM7_HEIGHT1_2",
+            "color": "#808080"
+        },
+        {
+            "name": "AIM7_HEIGHT1_3",
+            "color": "#990066"
+        },
+        {
+            "name": "AIM7_HEIGHT2_1",
+            "color": "#00bcf2"
+        },
+        {
+            "name": "AIM7_WEIGHT1_1",
+            "color": "#5db300"
+        },
+        {
+            "name": "AIM7_WEIGHT1_2",
+            "color": "#e81123"
+        },
+        {
+            "name": "AIM7_WEIGHT2_1",
+            "color": "#6917aa"
+        },
+        {
+            "name": "AIM7_WEIGHT2_2",
+            "color": "#015cda"
+        },
+        {
+            "name": "AIM7_WEIGHT2_3",
+            "color": "#4894fe"
+        },
+        {
+            "name": "AIM7_DOM1_1",
+            "color": "#6b849c"
+        },
+        {
+            "name": "AIM7_DOM2_1",
+            "color": "#70c400"
+        },
+        {
+            "name": "AIM7_DOM3_1",
+            "color": "#f7929a"
+        },
+        {
+            "name": "AIM7_DOM4_1",
+            "color": "#257ffe"
+        },
+        {
+            "name": "AIM7_DOM5_1",
+            "color": "#ddabe9"
+        },
+        {
+            "name": "AIM7_DOM6_1",
+            "color": "#ff8c00"
+        },
+        {
+            "name": "AIM7_STUNTED1_1",
+            "color": "#386300"
+        },
+        {
+            "name": "AIM7_WASTED1_1",
+            "color": "#b40e1b"
+        },
+        {
+            "name": "AIM7_UNDERWEIGHT1_1",
+            "color": "#68217a"
+        },
+        {
+            "name": "AIM7_EDEMA1_1",
+            "color": "#33cccc"
+        },
+        {
+            "name": "AIM7_ELIGIBLE_SUPPLIMNTRY1_1",
+            "color": "#016afe"
+        },
+        {
+            "name": "AIM7_ELIGIBLE_REFRAL1_1",
+            "color": "#595959"
+        },
+        {
+            "name": "AIM7_REASON_REFRAL1_1",
+            "color": "#808080"
+        },
+        {
+            "name": "AIM7_PARENTS_STATUS1_1",
+            "color": "#990066"
+        }
+    ],
+    "id": "sc6GN-HN_",
+    "activeLearningSettings": {
+        "autoDetect": false,
+        "predictTag": true,
+        "modelPathType": "coco"
+    },
+    "exportFormat": {
+        "providerType": "vottJson",
+        "providerOptions": {
+            "encrypted": "eyJjaXBoZXJ0ZXh0IjoiN2ZkNjljMjkyZmZlNTgzNjU3ZDYzMDJlZGQwMjRhN2VmMDIwZmM0NTdmNjRkNzg5YzQ2NDNjZDFkNWQyNTFhNWZmNDI1MTQ0Y2NmMDI2YjE0MjRjZjJhYjIxYjFhODQ4IiwiaXYiOiI4ZWU5NDVkODRmODE1NjZkYmNhYTUzMzI1YTQ3MGY3OTQxNmNmZjM2ZDFkN2EyYzkifQ=="
+        }
+    },
+    "version": "2.2.0",
+    "lastVisitedAssetId": "a25b1d4c556fbab667de70f0f400c385",
+    "assets": {
+        "7dc989c4b542b7b416de2be7982b035d": {
+            "format": "jpg",
+            "id": "7dc989c4b542b7b416de2be7982b035d",
+            "name": "1651832960064.jpg",
+            "path": "file:C:/Users/test/Desktop/input/1651832960064.jpg",
+            "size": {
+                "width": 640,
+                "height": 480
+            },
+            "state": 1,
+            "type": 1
+        },
+        "a25b1d4c556fbab667de70f0f400c385": {
+            "format": "jpg",
+            "id": "a25b1d4c556fbab667de70f0f400c385",
+            "name": "beneficiary_growth.jpg",
+            "path": "file:C:/Users/test/Desktop/input/beneficiary_growth.jpg",
+            "size": {
+                "width": 640,
+                "height": 480
+            },
+            "state": 2,
+            "type": 1
+        }
+    }
+}
