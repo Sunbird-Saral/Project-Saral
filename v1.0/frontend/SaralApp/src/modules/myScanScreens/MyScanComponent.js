@@ -138,11 +138,18 @@ class MyScanComponent extends Component {
             let filter = data.filter((e) => {
                 let findSection = false
                 findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.section)
-                let checkDataExistence = !this.props.minimalFlag ? filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject && findSection : e.roiId == roiData.data.roiId
-                if (checkDataExistence) {
-                    return true
+                let checkDataExistence = false
+                if (!this.props.minimalFlag) {
+                   return checkDataExistence = filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject && findSection
+                
+                } else if(this.props.loginData.data.school.hasOwnProperty("offline") & this.props.loginData.data.school.offline & this.props.minimalFlag) {
+                  return checkDataExistence =  e.roiId == roiData.data.roiId && e.key == this.props.loginData.data.school.schoolId
                 }
-            })
+                else {
+                   return checkDataExistence = e.roiId == roiData.data.roiId
+                }
+            });
+
 
             filter.forEach((element, index) => {
                 len = len + element.studentsMarkInfo.length
@@ -215,7 +222,8 @@ class MyScanComponent extends Component {
         let payload = {
             examId: this.state.examId,
             data: roiData,
-            key: `${this.props.loginData.data.school.schoolId}`
+            key: `${this.props.loginData.data.school.schoolId}`,
+            roiId: roiData.data.roiId
         }
         let roi = await getRoiDataApi()
         if (roi != null) {
@@ -227,7 +235,7 @@ class MyScanComponent extends Component {
             });
             if (data.length > 0) {
                 for (let element of roi) {
-                    if (element.key == data[0].key & e.examId == this.state.examId) {
+                    if (element.key == data[0].key & element.examId == this.state.examId) {
                         element.data = roiData
                         break;
                     }
@@ -235,7 +243,9 @@ class MyScanComponent extends Component {
             } else {
                 let payload = {
                     key: `${this.props.loginData.data.school.schoolId}`,
-                    data: roiData
+                    data: roiData,
+                    examId: this.state.examId,
+                    roiId: roiData.data.roiId
                 }
                 roi.push(payload);
             }
@@ -468,6 +478,8 @@ class MyScanComponent extends Component {
     onPressSaveInDB = async () => {
         const data = await getScannedDataFromLocal();
         const loginCred = await getLoginCred();
+        const hasNetwork = await checkNetworkConnectivity();
+        if (hasNetwork) {
         if (this.state.roiIndex != -1) {
 
             if (data) {
@@ -525,6 +537,10 @@ class MyScanComponent extends Component {
         else {
             this.callCustomModal(Strings.message_text, Strings.please_select_roi_layout, false, true)
         }
+    }else{
+        this.callCustomModal(Strings.message_text, Strings.please_try_again_later_network_is_not_available, false, true)
+    }
+        
     }
 
     saveScanData = async (api, filteredDatalen, localScanData) => {

@@ -124,8 +124,15 @@ class LoginComponent extends Component {
                         return true
                     }
                 });
-                storeFactory.dispatch(this.dispatchLoginData(cacheFilterData[0].data))
-                this.props.navigation.navigate('mainMenu')
+                if (cacheFilterData.length > 0) {
+                    storeFactory.dispatch(this.dispatchLoginData(cacheFilterData[0].data))
+                    this.props.navigation.navigate('mainMenu')
+                } else {
+                    this.setState({
+                        errCommon: Strings.you_dont_have_cache,
+                        isLoading: false
+                    })    
+                }
             } else {
                 this.setState({
                     errCommon: Strings.you_seem_to_be_offline_please_check_your_internet_connection,

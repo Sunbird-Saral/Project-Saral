@@ -190,7 +190,7 @@ class HomeComponent extends Component {
                     return true
                 }
             });
-                storeFactory.dispatch(this.dispatchScanDataApi(cacheFilterData[0].data))
+                storeFactory.dispatch(this.dispatchBrandingDataApi(cacheFilterData[0].data))
             } else {
                 //Alert message show message "something went wrong or u don't have cache in local"
             }
@@ -202,7 +202,7 @@ class HomeComponent extends Component {
     }
 }
 
-dispatchScanDataApi(payload) {
+dispatchBrandingDataApi(payload) {
     return {
         type: constants.MULTI_BRANDING,
         payload

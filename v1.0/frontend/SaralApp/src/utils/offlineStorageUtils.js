@@ -1,11 +1,12 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { getLoginData } from './StorageUtils';
+import { getLoginCred } from './StorageUtils';
 
 const LOGIN_API_KEY = `LOGIN_API_KEY`
 const EXAM_API_KEY = `EXAM_API_KEY`
 const ROI_API_KEY = `ROI_API_KEY`
 const SAVED_API_KEY = `SAVED_API_KEY`
 const BRANDING_API_KEY = `BRANDING_API_KEY`
+const LOGIN_CRED_KEY = 'login_cred_key'
 
 export const setLoginApi = async (data) => {
     let json = JSON.stringify(data);
@@ -102,22 +103,92 @@ export const getData = async (key) => {
 }
 
 export const removeLoginApiData = async () => {
-    await AsyncStorage.removeItem(LOGIN_API_KEY)
+    let loginData = await getLoginApi(LOGIN_API_KEY);
+    let loginCred = await getLoginCred(LOGIN_CRED_KEY);
+
+   let filterLoginData =  loginData.filter((element)=> {
+        if (element.key == loginCred.schoolId) {
+            return false
+        } else {
+            return true
+        }
+    });
+    if (filterLoginData.length > 0) {
+        await setLoginApi(filterLoginData)
+    } else {
+        await setLoginApi(null)
+    }
 }
 
 export const removeBrandingApiData = async () => {
-    await AsyncStorage.removeItem(BRANDING_API_KEY)
+    let branding = await getBrandingDataApi();
+    let loginCred = await getLoginCred(LOGIN_CRED_KEY);
+
+    let filterBrandingData =  branding.filter((element)=> {
+        if (element.key == loginCred.schoolId) {
+            return false
+        } else {
+            return true
+        }
+    });
+    if (filterBrandingData.length > 0) {
+        await setBrandingDataApi(filterBrandingData)
+    } else {
+        await setBrandingDataApi(null)
+    }
 }
 
 export const removeStudenExamApiData = async () => {
-    await AsyncStorage.removeItem(EXAM_API_KEY)
+    let examApi = await getStudentExamApi();
+    let loginCred = await getLoginCred(LOGIN_CRED_KEY);
+
+    let filterExamData =  examApi.filter((element)=> {
+        if (element.key == loginCred.schoolId) {
+            return false
+        } else {
+            return true
+        }
+    });
+    if (filterExamData.length > 0) {
+        await setStudentExamApi(filterExamData)
+    } else {
+        await setStudentExamApi(null)
+    }
 }
 
 export const removeScanDataApiData = async () => {
-    await AsyncStorage.removeItem(SCAN_API_KEY)
+    let scanData = await getScanDataApi();
+    let loginCred = await getLoginCred(LOGIN_CRED_KEY);
+
+    let filterScanData =  scanData.filter((element)=> {
+        if (element.key == loginCred.schoolId) {
+            return false
+        } else {
+            return true
+        }
+    });
+    if (filterScanData.length > 0) {
+        await setScanDataApi(filterScanData)
+    } else {
+        await setScanDataApi(null)
+    }
 }
 export const removeRoiDataApiData = async () => {
-    await AsyncStorage.removeItem(ROI_API_KEY)
+    let roiData = await getRoiDataApi();
+    let loginCred = await getLoginCred(LOGIN_CRED_KEY);
+
+    let filterRoiData =  roiData.filter((element)=> {
+        if (element.key == loginCred.schoolId) {
+            return false
+        } else {
+            return true
+        }
+    });
+    if (filterRoiData.length > 0) {
+        await setRoiDataApi(filterRoiData)
+    } else {
+        await setRoiDataApi(null)
+    }
 }
 
 export const removeAllCache = async() => {
@@ -139,5 +210,5 @@ export const removeAllCache = async() => {
 
      //remove all user db saved data
      let json = JSON.stringify(null);
-     await setData(SCANNED_API_KEY, json)
+     await setData(SAVED_API_KEY, json)
 }

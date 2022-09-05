@@ -166,7 +166,7 @@ class HeaderComponents extends Component {
                             trackColor={{ true: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE, false: '#000' }}
                             thumbColor={ !minimalFlag ? multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE: AppTheme.GREY}
                             value={!minimalFlag}
-                            onValueChange={()=>  changeMinimalMode() }
+                            onValueChange={async()=>  await changeMinimalMode() }
                             />
                             
                         <TouchableOpacity
