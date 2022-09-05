@@ -261,8 +261,7 @@
                     "value": "CHILDID"
                 },
                 "validate": {
-                    "regExp": "^[0-9]{20}$",
-                    "errorMsg": "ID exceeds the limit"
+                    "regExp": ""
                 }
             },
             {
@@ -514,7 +513,7 @@
                 },
                 "format": {
                     "name": "CHILDFIRSTNAME",
-                    "value": "CHILDFIRSTNAME"
+                    "value": "CHILD FIRST NAME"
                 },
                 "validate": {
                     "regExp": "^[A-Z\\s]{0,20}$",
@@ -770,7 +769,7 @@
                 },
                 "format": {
                     "name": "CHILDLASTNAME",
-                    "value": "CHILDLASTNAME"
+                    "value": "CHILD LAST NAME"
                 },
                 "validate": {
                     "regExp": "^[A-Z\\s]{0,20}$",
@@ -1026,7 +1025,7 @@
                 },
                 "format": {
                     "name": "MOTHERFIRSTNAME",
-                    "value": "MOTHERFIRSTNAME"
+                    "value": "MOTHER FIRST NAME"
                 },
                 "validate": {
                     "regExp": "^[A-Z\\s]{0,20}$",
@@ -1282,7 +1281,7 @@
                 },
                 "format": {
                     "name": "MOTHERLASTNAME",
-                    "value": "MOTHERLASTNAME"
+                    "value": "MOTHER LAST NAME"
                 },
                 "validate": {
                     "regExp": "^[A-Z\\s]{0,20}$",
@@ -1538,7 +1537,7 @@
                 },
                 "format": {
                     "name": "FATHERFIRSTNAME",
-                    "value": "FATHERFIRSTNAME"
+                    "value": "FATHER FIRST NAME"
                 },
                 "validate": {
                     "regExp": "^[A-Z\\s]{0,20}$",
@@ -1794,7 +1793,7 @@
                 },
                 "format": {
                     "name": "FATHERLASTNAME",
-                    "value": "FATHERLASTNAME"
+                    "value": "FATHER LAST NAME"
                 },
                 "validate": {
                     "regExp": "^[A-Z\\s]{0,20}$",
@@ -1954,11 +1953,11 @@
                 },
                 "format": {
                     "name": "CHILDADHAARID",
-                    "value": "CHILDADHAARID"
+                    "value": "ADHAAR CARD ID"
                 },
                 "validate": {
                     "regExp": "^[0-9]{12}$",
-                    "errorMsg": "ADHAR ID exceeds the limit"
+                    "errorMsg": "ADHAAR ID exceeds the limit"
                 }
             },
             {

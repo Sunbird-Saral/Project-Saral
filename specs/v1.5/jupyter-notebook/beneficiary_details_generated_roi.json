@@ -507,7 +507,7 @@
                 },
                 "format": {
                     "name": "CHILDFIRSTNAME",
-                    "value": "CHILDFIRSTNAME"
+                    "value": "CHILD FIRST NAME"
                 },
                 "validate": {
                     "regExp": ""
@@ -762,7 +762,7 @@
                 },
                 "format": {
                     "name": "CHILDLASTNAME",
-                    "value": "CHILDLASTNAME"
+                    "value": "CHILD LAST NAME"
                 },
                 "validate": {
                     "regExp": ""
@@ -1017,7 +1017,7 @@
                 },
                 "format": {
                     "name": "MOTHERFIRSTNAME",
-                    "value": "MOTHERFIRSTNAME"
+                    "value": "MOTHER FIRST NAME"
                 },
                 "validate": {
                     "regExp": ""
@@ -1272,7 +1272,7 @@
                 },
                 "format": {
                     "name": "MOTHERLASTNAME",
-                    "value": "MOTHERLASTNAME"
+                    "value": "MOTHER LAST NAME"
                 },
                 "validate": {
                     "regExp": ""
@@ -1527,7 +1527,7 @@
                 },
                 "format": {
                     "name": "FATHERFIRSTNAME",
-                    "value": "FATHERFIRSTNAME"
+                    "value": "FATHER FIRST NAME"
                 },
                 "validate": {
                     "regExp": ""
@@ -1782,7 +1782,7 @@
                 },
                 "format": {
                     "name": "FATHERLASTNAME",
-                    "value": "FATHERLASTNAME"
+                    "value": "FATHER LAST NAME"
                 },
                 "validate": {
                     "regExp": ""
@@ -1941,7 +1941,7 @@
                 },
                 "format": {
                     "name": "CHILDADHAARID",
-                    "value": "CHILDADHAARID"
+                    "value": "ADHAAR CARD ID"
                 },
                 "validate": {
                     "regExp": ""
