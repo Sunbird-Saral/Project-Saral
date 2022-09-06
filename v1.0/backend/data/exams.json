@@ -19843,5 +19843,317 @@
     "questions": null,
     "examId": 47,
     "schoolId": "m001"
+  },
+  {
+    "subject": "hindi",
+    "examLO": "hindi",
+    "classId": "3",
+    "examDate": "05/10/2022",
+    "totalMarks": 60,
+    "type": "benificiary-growth-monitoring-details",
+    "questions": [
+      {
+        "questionId": "QUESTION1",
+        "indicatorTitle": "L0-1",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION2",
+        "indicatorTitle": "L0-2",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION3",
+        "indicatorTitle": "L0-3",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION4",
+        "indicatorTitle": "L0-4",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION5",
+        "indicatorTitle": "L0-5",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION6",
+        "indicatorTitle": "L0-6",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION7",
+        "indicatorTitle": "L0-7",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION8",
+        "indicatorTitle": "L0-8",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION9",
+        "indicatorTitle": "L0-9",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION10",
+        "indicatorTitle": "L0-10",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION11",
+        "indicatorTitle": "L0-11",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION12",
+        "indicatorTitle": "L0-12",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION13",
+        "indicatorTitle": "L0-1",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION14",
+        "indicatorTitle": "L0-2",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION15",
+        "indicatorTitle": "L0-3",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION16",
+        "indicatorTitle": "L0-4",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION17",
+        "indicatorTitle": "L0-5",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION18",
+        "indicatorTitle": "L0-6",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION19",
+        "indicatorTitle": "L0-7",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION20",
+        "indicatorTitle": "L0-8",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION21",
+        "indicatorTitle": "L0-9",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION22",
+        "indicatorTitle": "L0-10",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION23",
+        "indicatorTitle": "L0-11",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION24",
+        "indicatorTitle": "L0-12",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION25",
+        "indicatorTitle": "L0-1",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION26",
+        "indicatorTitle": "L0-2",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION27",
+        "indicatorTitle": "L0-3",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION28",
+        "indicatorTitle": "L0-4",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION29",
+        "indicatorTitle": "L0-5",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION30",
+        "indicatorTitle": "L0-6",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION31",
+        "indicatorTitle": "L0-7",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION32",
+        "indicatorTitle": "L0-8",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION33",
+        "indicatorTitle": "L0-9",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION34",
+        "indicatorTitle": "L0-10",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION35",
+        "indicatorTitle": "L0-11",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION36",
+        "indicatorTitle": "L0-12",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION37",
+        "indicatorTitle": "L0-1",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION38",
+        "indicatorTitle": "L0-2",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION39",
+        "indicatorTitle": "L0-3",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION40",
+        "indicatorTitle": "L0-4",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION41",
+        "indicatorTitle": "L0-5",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION42",
+        "indicatorTitle": "L0-6",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION43",
+        "indicatorTitle": "L0-7",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION44",
+        "indicatorTitle": "L0-8",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION45",
+        "indicatorTitle": "L0-9",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION46",
+        "indicatorTitle": "L0-10",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION47",
+        "indicatorTitle": "L0-11",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION48",
+        "indicatorTitle": "L0-12",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION49",
+        "indicatorTitle": "L0-9",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION50",
+        "indicatorTitle": "L0-10",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION51",
+        "indicatorTitle": "L0-11",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION52",
+        "indicatorTitle": "L0-12",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION53",
+        "indicatorTitle": "L0-9",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION54",
+        "indicatorTitle": "L0-10",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION55",
+        "indicatorTitle": "L0-11",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION56",
+        "indicatorTitle": "L0-12",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION57",
+        "indicatorTitle": "L0-9",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION58",
+        "indicatorTitle": "L0-10",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION59",
+        "indicatorTitle": "L0-11",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION60",
+        "indicatorTitle": "L0-12",
+        "questionMarks": "1"
+      }
+    ],
+    "examId": 48,
+    "schoolId": "jk001"
   }
 ]
