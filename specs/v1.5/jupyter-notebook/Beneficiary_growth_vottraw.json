@@ -1,861 +1,575 @@
 {
-    "name": "benificiary growth monitoring1",
-    "securityToken": "benificiary growth monitoring1 Token",
-    "sourceConnection": {
-        "name": "beneficiary growth monitoring1",
-        "providerType": "localFileSystemProxy",
-        "providerOptions": {
-            "encrypted": "eyJjaXBoZXJ0ZXh0IjoiZWQxNjI1N2Y0NThmNGFiZTFjYTUyYTA5ZWQ5NWZmYmE3YThlZGQyNGQzNjY4OTRlYjZkN2Q4NDk2YzJlNGVhMjMxZmQyYjg4YmQ1MzAyNzhiNTRhYjU2OWMxNWI5YjdlYzUzYmZkN2MwY2ZiZmIwMjcyOWM2ZGM3NDgyNjBjNzIiLCJpdiI6IjY3OTQ2YjViYTJmMDAxNTM1MmE5MDg0M2NlN2U1OGRmMzI1YzVjYzA5OGViMTJmYiJ9"
+    "asset": {
+        "format": "jpg",
+        "id": "a25b1d4c556fbab667de70f0f400c385",
+        "name": "beneficiary_growth.jpg",
+        "path": "file:C:/Users/test/Desktop/input/beneficiary_growth.jpg",
+        "size": {
+            "width": 640,
+            "height": 480
         },
-        "id": "K9xUYPOxn"
+        "state": 2,
+        "type": 1
     },
-    "targetConnection": {
-        "name": "beneficiary growth monitoring1",
-        "providerType": "localFileSystemProxy",
-        "providerOptions": {
-            "encrypted": "eyJjaXBoZXJ0ZXh0IjoiZWZhN2MyOTBkZWM2MDMxZWIwOWRhMTM0YTUzMDAyOGMxN2IxYTY4MmJhMDg4ZTc3NTViMzU2NWIzNWQzMmU0YmNkZmFiYjM0NjVjOGE0NmU1YTc2ZTMyMTQ0ZDY2MTQyZDllNzM2MzA2N2JhODA2NDJiZGUyYmQ4ZDFjZDgyOWMiLCJpdiI6ImI3MmFlMzQyNDlhMTcwZjUzNWZkOWYwMzk3YTU3MjRiMmI4NmJmYjFhYzNlZTNhYiJ9"
-        },
-        "id": "-R9m5JvJY"
-    },
-    "videoSettings": {
-        "frameExtractionRate": 15
-    },
-    "tags": [
-        {
-            "name": "CHILDID1_1",
-            "color": "#5db300"
-        },
-        {
-            "name": "CHILDID1_2",
-            "color": "#e81123"
-        },
-        {
-            "name": "CHILDID1_3",
-            "color": "#6917aa"
-        },
-        {
-            "name": "CHILDID1_4",
-            "color": "#015cda"
-        },
-        {
-            "name": "CHILDID1_5",
-            "color": "#4894fe"
-        },
-        {
-            "name": "CHILDID1_6",
-            "color": "#6b849c"
-        },
-        {
-            "name": "CHILDID1_7",
-            "color": "#70c400"
-        },
-        {
-            "name": "CHILDID1_8",
-            "color": "#f7929a"
-        },
-        {
-            "name": "CHILDID1_9",
-            "color": "#257ffe"
-        },
-        {
-            "name": "CHILDID1_TEN",
-            "color": "#ddabe9"
-        },
-        {
-            "name": "CHILDID1_ELEVEN",
-            "color": "#ff8c00"
-        },
-        {
-            "name": "CHILDID1_TWELVE",
-            "color": "#386300"
-        },
-        {
-            "name": "CHILDID1_THERTEEN",
-            "color": "#b40e1b"
-        },
-        {
-            "name": "CHILDID1_FOURTEEN",
-            "color": "#68217a"
-        },
-        {
-            "name": "CHILDID1_FIFTEEN",
-            "color": "#33cccc"
-        },
-        {
-            "name": "AIM0_HEIGHT1_1",
-            "color": "#016afe"
-        },
-        {
-            "name": "AIM0_HEIGHT1_2",
-            "color": "#595959"
-        },
-        {
-            "name": "AIM0_HEIGHT1_3",
-            "color": "#808080"
-        },
-        {
-            "name": "AIM0_HEIGHT2_1",
-            "color": "#990066"
-        },
-        {
-            "name": "AIM0_WEIGHT1_1",
-            "color": "#00bcf2"
-        },
-        {
-            "name": "AIM0_WEIGHT1_2",
-            "color": "#5db300"
-        },
-        {
-            "name": "AIM0_WEIGHT2_1",
-            "color": "#e81123"
-        },
-        {
-            "name": "AIM0_WEIGHT2_2",
-            "color": "#6917aa"
-        },
-        {
-            "name": "AIM0_WEIGHT2_3",
-            "color": "#015cda"
-        },
-        {
-            "name": "AIM0_DOM1_1",
-            "color": "#4894fe"
-        },
-        {
-            "name": "AIM0_DOM2_1",
-            "color": "#6b849c"
-        },
-        {
-            "name": "AIM0_DOM3_1",
-            "color": "#70c400"
-        },
-        {
-            "name": "AIM0_DOM4_1",
-            "color": "#f7929a"
-        },
-        {
-            "name": "AIM0_DOM5_1",
-            "color": "#257ffe"
-        },
-        {
-            "name": "AIM0_DOM6_1",
-            "color": "#ddabe9"
-        },
-        {
-            "name": "AIM0_STUNTED1_1",
-            "color": "#ff8c00"
-        },
-        {
-            "name": "AIM0_WASTED1_1",
-            "color": "#386300"
-        },
-        {
-            "name": "AIM0_UNDERWEIGHT1_1",
-            "color": "#b40e1b"
-        },
-        {
-            "name": "AIM0_EDEMA1_1",
-            "color": "#68217a"
-        },
-        {
-            "name": "AIM0_ELIGIBLE_SUPPLIMNTRY1_1",
-            "color": "#33cccc"
-        },
-        {
-            "name": "AIM0_ELIGIBLE_REFRAL1_1",
-            "color": "#016afe"
-        },
-        {
-            "name": "AIM0_REASON_REFRAL1_1",
-            "color": "#595959"
-        },
-        {
-            "name": "AIM0_PARENTS_STATUS1_1",
-            "color": "#808080"
-        },
-        {
-            "name": "AIM1_HEIGHT1_1",
-            "color": "#990066"
-        },
-        {
-            "name": "AIM1_HEIGHT1_2",
-            "color": "#00bcf2"
-        },
-        {
-            "name": "AIM1_HEIGHT1_3",
-            "color": "#5db300"
-        },
-        {
-            "name": "AIM1_HEIGHT2_1",
-            "color": "#e81123"
-        },
-        {
-            "name": "AIM1_WEIGHT1_1",
-            "color": "#6917aa"
-        },
-        {
-            "name": "AIM1_WEIGHT1_2",
-            "color": "#015cda"
-        },
-        {
-            "name": "AIM1_WEIGHT2_1",
-            "color": "#4894fe"
-        },
-        {
-            "name": "AIM1_WEIGHT2_2",
-            "color": "#6b849c"
-        },
-        {
-            "name": "AIM1_WEIGHT2_3",
-            "color": "#70c400"
-        },
-        {
-            "name": "AIM1_DOM1_1",
-            "color": "#f7929a"
-        },
-        {
-            "name": "AIM1_DOM2_1",
-            "color": "#257ffe"
-        },
-        {
-            "name": "AIM1_DOM3_1",
-            "color": "#ddabe9"
-        },
-        {
-            "name": "AIM1_DOM4_1",
-            "color": "#ff8c00"
-        },
-        {
-            "name": "AIM1_DOM5_1",
-            "color": "#386300"
-        },
-        {
-            "name": "AIM1_DOM6_1",
-            "color": "#b40e1b"
-        },
-        {
-            "name": "AIM1_STUNTED1_1",
-            "color": "#68217a"
-        },
-        {
-            "name": "AIM1_WASTED1_1",
-            "color": "#33cccc"
-        },
-        {
-            "name": "AIM1_UNDERWEIGHT1_1",
-            "color": "#016afe"
-        },
-        {
-            "name": "AIM1_EDEMA1_1",
-            "color": "#595959"
-        },
-        {
-            "name": "AIM1_ELIGIBLE_SUPPLIMNTRY1_1",
-            "color": "#808080"
-        },
-        {
-            "name": "AIM1_ELIGIBLE_REFRAL1_1",
-            "color": "#990066"
-        },
-        {
-            "name": "AIM1_REASON_REFRAL1_1",
-            "color": "#00bcf2"
-        },
-        {
-            "name": "AIM1_PARENTS_STATUS1_1",
-            "color": "#5db300"
-        },
-        {
-            "name": "AIM2_HEIGHT1_1",
-            "color": "#e81123"
-        },
-        {
-            "name": "AIM2_HEIGHT1_2",
-            "color": "#6917aa"
-        },
-        {
-            "name": "AIM2_HEIGHT1_3",
-            "color": "#015cda"
-        },
-        {
-            "name": "AIM2_HEIGHT2_1",
-            "color": "#4894fe"
-        },
-        {
-            "name": "AIM2_WEIGHT1_1",
-            "color": "#6b849c"
-        },
-        {
-            "name": "AIM2_WEIGHT1_2",
-            "color": "#70c400"
-        },
-        {
-            "name": "AIM2_WEIGHT2_1",
-            "color": "#f7929a"
-        },
-        {
-            "name": "AIM2_WEIGHT2_2",
-            "color": "#257ffe"
-        },
-        {
-            "name": "AIM2_WEIGHT2_3",
-            "color": "#ddabe9"
-        },
-        {
-            "name": "AIM2_DOM1_1",
-            "color": "#ff8c00"
-        },
-        {
-            "name": "AIM2_DOM2_1",
-            "color": "#386300"
-        },
-        {
-            "name": "AIM2_DOM3_1",
-            "color": "#b40e1b"
-        },
-        {
-            "name": "AIM2_DOM4_1",
-            "color": "#68217a"
-        },
-        {
-            "name": "AIM2_DOM5_1",
-            "color": "#33cccc"
-        },
-        {
-            "name": "AIM2_DOM6_1",
-            "color": "#016afe"
-        },
-        {
-            "name": "AIM2_STUNTED1_1",
-            "color": "#595959"
-        },
-        {
-            "name": "AIM2_WASTED1_1",
-            "color": "#808080"
-        },
-        {
-            "name": "AIM2_UNDERWEIGHT1_1",
-            "color": "#990066"
-        },
-        {
-            "name": "AIM2_EDEMA1_1",
-            "color": "#00bcf2"
-        },
-        {
-            "name": "AIM2_ELIGIBLE_SUPPLIMNTRY1_1",
-            "color": "#5db300"
-        },
-        {
-            "name": "AIM2_ELIGIBLE_REFRAL1_1",
-            "color": "#e81123"
-        },
-        {
-            "name": "AIM2_REASON_REFRAL1_1",
-            "color": "#6917aa"
-        },
-        {
-            "name": "AIM2_PARENTS_STATUS1_1",
-            "color": "#015cda"
-        },
-        {
-            "name": "AIM3_HEIGHT1_1",
-            "color": "#4894fe"
-        },
-        {
-            "name": "AIM3_HEIGHT1_2",
-            "color": "#6b849c"
-        },
-        {
-            "name": "AIM3_HEIGHT1_3",
-            "color": "#70c400"
-        },
-        {
-            "name": "AIM3_HEIGHT2_1",
-            "color": "#f7929a"
-        },
-        {
-            "name": "AIM3_WEIGHT1_1",
-            "color": "#257ffe"
-        },
-        {
-            "name": "AIM3_WEIGHT1_2",
-            "color": "#ddabe9"
-        },
-        {
-            "name": "AIM3_WEIGHT2_1",
-            "color": "#ff8c00"
-        },
-        {
-            "name": "AIM3_WEIGHT2_2",
-            "color": "#386300"
-        },
-        {
-            "name": "AIM3_WEIGHT2_3",
-            "color": "#b40e1b"
-        },
-        {
-            "name": "AIM3_DOM1_1",
-            "color": "#68217a"
-        },
-        {
-            "name": "AIM3_DOM2_1",
-            "color": "#33cccc"
-        },
-        {
-            "name": "AIM3_DOM3_1",
-            "color": "#016afe"
-        },
-        {
-            "name": "AIM3_DOM4_1",
-            "color": "#595959"
-        },
-        {
-            "name": "AIM3_DOM5_1",
-            "color": "#808080"
-        },
-        {
-            "name": "AIM3_DOM6_1",
-            "color": "#990066"
-        },
-        {
-            "name": "AIM3_STUNTED1_1",
-            "color": "#00bcf2"
-        },
-        {
-            "name": "AIM3_WASTED1_1",
-            "color": "#5db300"
-        },
-        {
-            "name": "AIM3_UNDERWEIGHT1_1",
-            "color": "#e81123"
-        },
-        {
-            "name": "AIM3_EDEMA1_1",
-            "color": "#6917aa"
-        },
-        {
-            "name": "AIM3_ELIGIBLE_SUPPLIMNTRY1_1",
-            "color": "#015cda"
-        },
-        {
-            "name": "AIM3_ELIGIBLE_REFRAL1_1",
-            "color": "#4894fe"
-        },
-        {
-            "name": "AIM3_REASON_REFRAL1_1",
-            "color": "#6b849c"
-        },
-        {
-            "name": "AIM3_PARENTS_STATUS1_1",
-            "color": "#70c400"
-        },
-        {
-            "name": "AIM4_HEIGHT1_1",
-            "color": "#f7929a"
-        },
-        {
-            "name": "AIM4_HEIGHT1_2",
-            "color": "#257ffe"
-        },
-        {
-            "name": "AIM4_HEIGHT1_3",
-            "color": "#ddabe9"
-        },
-        {
-            "name": "AIM4_HEIGHT2_1",
-            "color": "#ff8c00"
-        },
-        {
-            "name": "AIM4_WEIGHT1_1",
-            "color": "#386300"
-        },
-        {
-            "name": "AIM4_WEIGHT1_2",
-            "color": "#b40e1b"
-        },
-        {
-            "name": "AIM4_WEIGHT2_1",
-            "color": "#68217a"
-        },
-        {
-            "name": "AIM4_WEIGHT2_2",
-            "color": "#33cccc"
-        },
-        {
-            "name": "AIM4_WEIGHT2_3",
-            "color": "#016afe"
-        },
-        {
-            "name": "AIM4_DOM1_1",
-            "color": "#595959"
-        },
-        {
-            "name": "AIM4_DOM2_1",
-            "color": "#808080"
-        },
-        {
-            "name": "AIM4_DOM3_1",
-            "color": "#990066"
-        },
-        {
-            "name": "AIM4_DOM4_1",
-            "color": "#00bcf2"
-        },
-        {
-            "name": "AIM4_DOM5_1",
-            "color": "#5db300"
-        },
-        {
-            "name": "AIM4_DOM6_1",
-            "color": "#e81123"
-        },
-        {
-            "name": "AIM4_STUNTED1_1",
-            "color": "#6917aa"
-        },
-        {
-            "name": "AIM4_WASTED1_1",
-            "color": "#015cda"
-        },
-        {
-            "name": "AIM4_UNDERWEIGHT1_1",
-            "color": "#4894fe"
-        },
-        {
-            "name": "AIM4_EDEMA1_1",
-            "color": "#6b849c"
-        },
-        {
-            "name": "AIM4_ELIGIBLE_SUPPLIMNTRY1_1",
-            "color": "#70c400"
-        },
-        {
-            "name": "AIM4_ELIGIBLE_REFRAL1_1",
-            "color": "#f7929a"
-        },
-        {
-            "name": "AIM4_REASON_REFRAL1_1",
-            "color": "#257ffe"
-        },
-        {
-            "name": "AIM4_PARENTS_STATUS1_1",
-            "color": "#ddabe9"
-        },
-        {
-            "name": "AIM5_HEIGHT1_1",
-            "color": "#ff8c00"
-        },
-        {
-            "name": "AIM5_HEIGHT1_2",
-            "color": "#386300"
-        },
-        {
-            "name": "AIM5_HEIGHT1_3",
-            "color": "#b40e1b"
-        },
-        {
-            "name": "AIM5_HEIGHT2_1",
-            "color": "#68217a"
-        },
-        {
-            "name": "AIM5_WEIGHT1_1",
-            "color": "#33cccc"
-        },
-        {
-            "name": "AIM5_WEIGHT1_2",
-            "color": "#016afe"
-        },
-        {
-            "name": "AIM5_WEIGHT2_1",
-            "color": "#595959"
-        },
-        {
-            "name": "AIM5_WEIGHT2_2",
-            "color": "#808080"
-        },
-        {
-            "name": "AIM5_WEIGHT2_3",
-            "color": "#990066"
-        },
-        {
-            "name": "AIM5_DOM1_1",
-            "color": "#00bcf2"
-        },
-        {
-            "name": "AIM5_DOM2_1",
-            "color": "#5db300"
-        },
-        {
-            "name": "AIM5_DOM3_1",
-            "color": "#e81123"
-        },
-        {
-            "name": "AIM5_DOM4_1",
-            "color": "#6917aa"
-        },
-        {
-            "name": "AIM5_DOM5_1",
-            "color": "#015cda"
-        },
-        {
-            "name": "AIM5_DOM6_1",
-            "color": "#4894fe"
-        },
-        {
-            "name": "AIM5_STUNTED1_1",
-            "color": "#6b849c"
-        },
-        {
-            "name": "AIM5_WASTED1_1",
-            "color": "#70c400"
-        },
-        {
-            "name": "AIM5_UNDERWEIGHT1_1",
-            "color": "#f7929a"
-        },
-        {
-            "name": "AIM5_EDEMA1_1",
-            "color": "#257ffe"
-        },
-        {
-            "name": "AIM5_ELIGIBLE_SUPPLIMNTRY1_1",
-            "color": "#ddabe9"
-        },
-        {
-            "name": "AIM5_ELIGIBLE_REFRAL1_1",
-            "color": "#ff8c00"
-        },
-        {
-            "name": "AIM5_REASON_REFRAL1_1",
-            "color": "#386300"
-        },
-        {
-            "name": "AIM5_PARENTS_STATUS1_1",
-            "color": "#b40e1b"
-        },
-        {
-            "name": "AIM6_HEIGHT1_1",
-            "color": "#68217a"
-        },
-        {
-            "name": "AIM6_HEIGHT1_2",
-            "color": "#33cccc"
-        },
-        {
-            "name": "AIM6_HEIGHT1_3",
-            "color": "#016afe"
-        },
-        {
-            "name": "AIM6_HEIGHT2_1",
-            "color": "#595959"
-        },
-        {
-            "name": "AIM6_WEIGHT1_1",
-            "color": "#808080"
-        },
-        {
-            "name": "AIM6_WEIGHT1_2",
-            "color": "#990066"
-        },
-        {
-            "name": "AIM6_WEIGHT2_1",
-            "color": "#00bcf2"
-        },
-        {
-            "name": "AIM6_WEIGHT2_2",
-            "color": "#5db300"
-        },
-        {
-            "name": "AIM6_WEIGHT2_3",
-            "color": "#e81123"
-        },
-        {
-            "name": "AIM6_DOM1_1",
-            "color": "#6917aa"
-        },
-        {
-            "name": "AIM6_DOM2_1",
-            "color": "#015cda"
-        },
-        {
-            "name": "AIM6_DOM3_1",
-            "color": "#4894fe"
-        },
-        {
-            "name": "AIM6_DOM4_1",
-            "color": "#6b849c"
-        },
-        {
-            "name": "AIM6_DOM5_1",
-            "color": "#70c400"
-        },
-        {
-            "name": "AIM6_DOM6_1",
-            "color": "#f7929a"
-        },
-        {
-            "name": "AIM6_STUNTED1_1",
-            "color": "#257ffe"
-        },
-        {
-            "name": "AIM6_WASTED1_1",
-            "color": "#ddabe9"
-        },
-        {
-            "name": "AIM6_UNDERWEIGHT1_1",
-            "color": "#ff8c00"
-        },
-        {
-            "name": "AIM6_EDEMA1_1",
-            "color": "#386300"
-        },
-        {
-            "name": "AIM6_ELIGIBLE_SUPPLIMNTRY1_1",
-            "color": "#b40e1b"
-        },
-        {
-            "name": "AIM6_ELIGIBLE_REFRAL1_1",
-            "color": "#68217a"
-        },
-        {
-            "name": "AIM6_REASON_REFRAL1_1",
-            "color": "#33cccc"
-        },
-        {
-            "name": "AIM6_PARENTS_STATUS1_1",
-            "color": "#016afe"
-        },
-        {
-            "name": "AIM7_HEIGHT1_1",
-            "color": "#595959"
-        },
-        {
-            "name": "AIM7_HEIGHT1_2",
-            "color": "#808080"
-        },
-        {
-            "name": "AIM7_HEIGHT1_3",
-            "color": "#990066"
-        },
-        {
-            "name": "AIM7_HEIGHT2_1",
-            "color": "#00bcf2"
-        },
-        {
-            "name": "AIM7_WEIGHT1_1",
-            "color": "#5db300"
-        },
-        {
-            "name": "AIM7_WEIGHT1_2",
-            "color": "#e81123"
-        },
-        {
-            "name": "AIM7_WEIGHT2_1",
-            "color": "#6917aa"
-        },
-        {
-            "name": "AIM7_WEIGHT2_2",
-            "color": "#015cda"
-        },
-        {
-            "name": "AIM7_WEIGHT2_3",
-            "color": "#4894fe"
-        },
-        {
-            "name": "AIM7_DOM1_1",
-            "color": "#6b849c"
-        },
-        {
-            "name": "AIM7_DOM2_1",
-            "color": "#70c400"
-        },
-        {
-            "name": "AIM7_DOM3_1",
-            "color": "#f7929a"
-        },
-        {
-            "name": "AIM7_DOM4_1",
-            "color": "#257ffe"
-        },
-        {
-            "name": "AIM7_DOM5_1",
-            "color": "#ddabe9"
-        },
-        {
-            "name": "AIM7_DOM6_1",
-            "color": "#ff8c00"
-        },
-        {
-            "name": "AIM7_STUNTED1_1",
-            "color": "#386300"
-        },
-        {
-            "name": "AIM7_WASTED1_1",
-            "color": "#b40e1b"
-        },
-        {
-            "name": "AIM7_UNDERWEIGHT1_1",
-            "color": "#68217a"
-        },
-        {
-            "name": "AIM7_EDEMA1_1",
-            "color": "#33cccc"
-        },
-        {
-            "name": "AIM7_ELIGIBLE_SUPPLIMNTRY1_1",
-            "color": "#016afe"
-        },
-        {
-            "name": "AIM7_ELIGIBLE_REFRAL1_1",
-            "color": "#595959"
-        },
-        {
-            "name": "AIM7_REASON_REFRAL1_1",
-            "color": "#808080"
-        },
-        {
-            "name": "AIM7_PARENTS_STATUS1_1",
-            "color": "#990066"
+    "regions": [
+        {
+            "id": "WR-R652xU",
+            "type": "RECTANGLE",
+            "tags": [
+                "CHILDID1_1"
+            ],
+            "boundingBox": {
+                "height": 31.268575613839285,
+                "width": 24.119922711456102,
+                "left": 268.7280430273019,
+                "top": 25.234287806919642
+            },
+            "points": [
+                {
+                    "x": 268.7280430273019,
+                    "y": 25.234287806919642
+                },
+                {
+                    "x": 292.84796573875803,
+                    "y": 25.234287806919642
+                },
+                {
+                    "x": 292.84796573875803,
+                    "y": 56.50286342075893
+                },
+                {
+                    "x": 268.7280430273019,
+                    "y": 56.50286342075893
+                }
+            ]
+        },
+        {
+            "id": "mGVmByCb5",
+            "type": "RECTANGLE",
+            "tags": [
+                "CHILDID1_2"
+            ],
+            "boundingBox": {
+                "height": 33.46285400390625,
+                "width": 20.830810024089935,
+                "left": 294.4925220824411,
+                "top": 23.588572474888394
+            },
+            "points": [
+                {
+                    "x": 294.4925220824411,
+                    "y": 23.588572474888394
+                },
+                {
+                    "x": 315.32333210653104,
+                    "y": 23.588572474888394
+                },
+                {
+                    "x": 315.32333210653104,
+                    "y": 57.051426478794646
+                },
+                {
+                    "x": 294.4925220824411,
+                    "y": 57.051426478794646
+                }
+            ]
+        },
+        {
+            "id": "5Du41Avdl",
+            "type": "RECTANGLE",
+            "tags": [
+                "CHILDID1_3"
+            ],
+            "boundingBox": {
+                "height": 33.462859235491074,
+                "width": 20.28268033993576,
+                "left": 318.0642314641327,
+                "top": 24.685714285714287
+            },
+            "points": [
+                {
+                    "x": 318.0642314641327,
+                    "y": 24.685714285714287
+                },
+                {
+                    "x": 338.3469118040685,
+                    "y": 24.685714285714287
+                },
+                {
+                    "x": 338.3469118040685,
+                    "y": 58.14857352120536
+                },
+                {
+                    "x": 318.0642314641327,
+                    "y": 58.14857352120536
+                }
+            ]
+        },
+        {
+            "id": "lvVJXhxax",
+            "type": "RECTANGLE",
+            "tags": [
+                "CHILDID1_4"
+            ],
+            "boundingBox": {
+                "height": 32.91428571428571,
+                "width": 22.475408190578158,
+                "left": 340.5395978319058,
+                "top": 25.782861328125
+            },
+            "points": [
+                {
+                    "x": 340.5395978319058,
+                    "y": 25.782861328125
+                },
+                {
+                    "x": 363.01500602248393,
+                    "y": 25.782861328125
+                },
+                {
+                    "x": 363.01500602248393,
+                    "y": 58.69714704241071
+                },
+                {
+                    "x": 340.5395978319058,
+                    "y": 58.69714704241071
+                }
+            ]
+        },
+        {
+            "id": "Xlw86rhmS",
+            "type": "RECTANGLE",
+            "tags": [
+                "CHILDID1_5"
+            ],
+            "boundingBox": {
+                "height": 30.17142857142857,
+                "width": 22.475366367773017,
+                "left": 364.65952054336185,
+                "top": 26.87999790736607
+            },
+            "points": [
+                {
+                    "x": 364.65952054336185,
+                    "y": 26.87999790736607
+                },
+                {
+                    "x": 387.13488691113486,
+                    "y": 26.87999790736607
+                },
+                {
+                    "x": 387.13488691113486,
+                    "y": 57.051426478794646
+                },
+                {
+                    "x": 364.65952054336185,
+                    "y": 57.051426478794646
+                }
+            ]
+        },
+        {
+            "id": "NbcvBwV5I",
+            "type": "RECTANGLE",
+            "tags": [
+                "CHILDID1_6"
+            ],
+            "boundingBox": {
+                "height": 31.268575613839285,
+                "width": 22.475366367773017,
+                "left": 386.58671540417555,
+                "top": 25.234287806919642
+            },
+            "points": [
+                {
+                    "x": 386.58671540417555,
+                    "y": 25.234287806919642
+                },
+                {
+                    "x": 409.06208177194856,
+                    "y": 25.234287806919642
+                },
+                {
+                    "x": 409.06208177194856,
+                    "y": 56.50286342075893
+                },
+                {
+                    "x": 386.58671540417555,
+                    "y": 56.50286342075893
+                }
+            ]
+        },
+        {
+            "id": "wZDO5Ud8B",
+            "type": "RECTANGLE",
+            "tags": [
+                "CHILDID1_7"
+            ],
+            "boundingBox": {
+                "height": 30.72000209263393,
+                "width": 21.37902335385439,
+                "left": 411.254809622591,
+                "top": 25.782861328125
+            },
+            "points": [
+                {
+                    "x": 411.254809622591,
+                    "y": 25.782861328125
+                },
+                {
+                    "x": 432.6338329764454,
+                    "y": 25.782861328125
+                },
+                {
+                    "x": 432.6338329764454,
+                    "y": 56.50286342075893
+                },
+                {
+                    "x": 411.254809622591,
+                    "y": 56.50286342075893
+                }
+            ]
+        },
+        {
+            "id": "EaP9EpHdm",
+            "type": "RECTANGLE",
+            "tags": [
+                "CHILDID1_8"
+            ],
+            "boundingBox": {
+                "height": 32.365712193080356,
+                "width": 21.37902335385439,
+                "left": 433.730175990364,
+                "top": 25.234287806919642
+            },
+            "points": [
+                {
+                    "x": 433.730175990364,
+                    "y": 25.234287806919642
+                },
+                {
+                    "x": 455.1091993442184,
+                    "y": 25.234287806919642
+                },
+                {
+                    "x": 455.1091993442184,
+                    "y": 57.6
+                },
+                {
+                    "x": 433.730175990364,
+                    "y": 57.6
+                }
+            ]
+        },
+        {
+            "id": "BJtdu6VGc",
+            "type": "RECTANGLE",
+            "tags": [
+                "CHILDID1_9"
+            ],
+            "boundingBox": {
+                "height": 32.91429094587053,
+                "width": 22.475366367773017,
+                "left": 458.9464835385439,
+                "top": 23.039998953683035
+            },
+            "points": [
+                {
+                    "x": 458.9464835385439,
+                    "y": 23.039998953683035
+                },
+                {
+                    "x": 481.4218499063169,
+                    "y": 23.039998953683035
+                },
+                {
+                    "x": 481.4218499063169,
+                    "y": 55.95428989955357
+                },
+                {
+                    "x": 458.9464835385439,
+                    "y": 55.95428989955357
+                }
+            ]
+        },
+        {
+            "id": "Fwmx8qysJ",
+            "type": "RECTANGLE",
+            "tags": [
+                "CHILDID1_TEN"
+            ],
+            "boundingBox": {
+                "height": 32.91429094587053,
+                "width": 20.830851846895072,
+                "left": 482.5181929202355,
+                "top": 23.039998953683035
+            },
+            "points": [
+                {
+                    "x": 482.5181929202355,
+                    "y": 23.039998953683035
+                },
+                {
+                    "x": 503.3490447671306,
+                    "y": 23.039998953683035
+                },
+                {
+                    "x": 503.3490447671306,
+                    "y": 55.95428989955357
+                },
+                {
+                    "x": 482.5181929202355,
+                    "y": 55.95428989955357
+                }
+            ]
+        },
+        {
+            "id": "S-kwjOfbV",
+            "type": "RECTANGLE",
+            "tags": [
+                "CHILDID1_ELEVEN"
+            ],
+            "boundingBox": {
+                "height": 32.91428571428571,
+                "width": 21.927194860813703,
+                "left": 506.0899441247323,
+                "top": 22.4914306640625
+            },
+            "points": [
+                {
+                    "x": 506.0899441247323,
+                    "y": 22.4914306640625
+                },
+                {
+                    "x": 528.017138985546,
+                    "y": 22.4914306640625
+                },
+                {
+                    "x": 528.017138985546,
+                    "y": 55.40571637834822
+                },
+                {
+                    "x": 506.0899441247323,
+                    "y": 55.40571637834822
+                }
+            ]
+        },
+        {
+            "id": "szO0VPOvU",
+            "type": "RECTANGLE",
+            "tags": [
+                "CHILDID1_TWELVE"
+            ],
+            "boundingBox": {
+                "height": 33.46285400390625,
+                "width": 23.571751204496785,
+                "left": 529.6616953292291,
+                "top": 21.394288853236606
+            },
+            "points": [
+                {
+                    "x": 529.6616953292291,
+                    "y": 21.394288853236606
+                },
+                {
+                    "x": 553.2334465337259,
+                    "y": 21.394288853236606
+                },
+                {
+                    "x": 553.2334465337259,
+                    "y": 54.85714285714286
+                },
+                {
+                    "x": 529.6616953292291,
+                    "y": 54.85714285714286
+                }
+            ]
+        },
+        {
+            "id": "D-lKbLAOG",
+            "type": "RECTANGLE",
+            "tags": [
+                "CHILDID1_THERTEEN"
+            ],
+            "boundingBox": {
+                "height": 34.01142752511161,
+                "width": 21.927194860813703,
+                "left": 553.78157621788,
+                "top": 21.394288853236606
+            },
+            "points": [
+                {
+                    "x": 553.78157621788,
+                    "y": 21.394288853236606
+                },
+                {
+                    "x": 575.7087710786938,
+                    "y": 21.394288853236606
+                },
+                {
+                    "x": 575.7087710786938,
+                    "y": 55.40571637834822
+                },
+                {
+                    "x": 553.78157621788,
+                    "y": 55.40571637834822
+                }
+            ]
+        },
+        {
+            "id": "Fhq81a_Zw",
+            "type": "RECTANGLE",
+            "tags": [
+                "CHILDID1_FOURTEEN"
+            ],
+            "boundingBox": {
+                "height": 34.01142752511161,
+                "width": 23.023537874732334,
+                "left": 577.3533274223769,
+                "top": 20.29714181082589
+            },
+            "points": [
+                {
+                    "x": 577.3533274223769,
+                    "y": 20.29714181082589
+                },
+                {
+                    "x": 600.3768652971091,
+                    "y": 20.29714181082589
+                },
+                {
+                    "x": 600.3768652971091,
+                    "y": 54.3085693359375
+                },
+                {
+                    "x": 577.3533274223769,
+                    "y": 54.3085693359375
+                }
+            ]
+        },
+        {
+            "id": "zMrcoDdEo",
+            "type": "RECTANGLE",
+            "tags": [
+                "CHILDID1_FIFTEEN"
+            ],
+            "boundingBox": {
+                "height": 34.01142752511161,
+                "width": 22.475408190578158,
+                "left": 602.0214216407923,
+                "top": 20.29714181082589
+            },
+            "points": [
+                {
+                    "x": 602.0214216407923,
+                    "y": 20.29714181082589
+                },
+                {
+                    "x": 624.4968298313704,
+                    "y": 20.29714181082589
+                },
+                {
+                    "x": 624.4968298313704,
+                    "y": 54.3085693359375
+                },
+                {
+                    "x": 602.0214216407923,
+                    "y": 54.3085693359375
+                }
+            ]
+        },
+        {
+            "id": "QiipBjxLw",
+            "type": "RECTANGLE",
+            "tags": [
+                "AIM0_HEIGHT1_1"
+            ],
+            "boundingBox": {
+                "height": 34.56001674107143,
+                "width": 24.668094218415415,
+                "left": 42.87793177864025,
+                "top": 215.58856724330357
+            },
+            "points": [
+                {
+                    "x": 42.87793177864025,
+                    "y": 215.58856724330357
+                },
+                {
+                    "x": 67.54602599705566,
+                    "y": 215.58856724330357
+                },
+                {
+                    "x": 67.54602599705566,
+                    "y": 250.148583984375
+                },
+                {
+                    "x": 42.87793177864025,
+                    "y": 250.148583984375
+                }
+            ]
+        },
+        {
+            "id": "Rxtv_2xhr",
+            "type": "RECTANGLE",
+            "tags": [
+                "AIM0_HEIGHT1_2"
+            ],
+            "boundingBox": {
+                "height": 32.36572265625,
+                "width": 24.668094218415415,
+                "left": 68.09421841541756,
+                "top": 217.782861328125
+            },
+            "points": [
+                {
+                    "x": 68.09421841541756,
+                    "y": 217.782861328125
+                },
+                {
+                    "x": 92.76231263383298,
+                    "y": 217.782861328125
+                },
+                {
+                    "x": 92.76231263383298,
+                    "y": 250.148583984375
+                },
+                {
+                    "x": 68.09421841541756,
+                    "y": 250.148583984375
+                }
+            ]
+        },
+        {
+            "id": "hm0TMTF0D",
+            "type": "RECTANGLE",
+            "tags": [
+                "AIM0_HEIGHT1_3"
+            ],
+            "boundingBox": {
+                "height": 33.46286969866072,
+                "width": 23.571751204496785,
+                "left": 94.9550195730728,
+                "top": 216.68571428571428
+            },
+            "points": [
+                {
+                    "x": 94.9550195730728,
+                    "y": 216.68571428571428
+                },
+                {
+                    "x": 118.52677077756958,
+                    "y": 216.68571428571428
+                },
+                {
+                    "x": 118.52677077756958,
+                    "y": 250.148583984375
+                },
+                {
+                    "x": 94.9550195730728,
+                    "y": 250.148583984375
+                }
+            ]
         }
     ],
-    "id": "sc6GN-HN_",
-    "activeLearningSettings": {
-        "autoDetect": false,
-        "predictTag": true,
-        "modelPathType": "coco"
-    },
-    "exportFormat": {
-        "providerType": "vottJson",
-        "providerOptions": {
-            "encrypted": "eyJjaXBoZXJ0ZXh0IjoiN2ZkNjljMjkyZmZlNTgzNjU3ZDYzMDJlZGQwMjRhN2VmMDIwZmM0NTdmNjRkNzg5YzQ2NDNjZDFkNWQyNTFhNWZmNDI1MTQ0Y2NmMDI2YjE0MjRjZjJhYjIxYjFhODQ4IiwiaXYiOiI4ZWU5NDVkODRmODE1NjZkYmNhYTUzMzI1YTQ3MGY3OTQxNmNmZjM2ZDFkN2EyYzkifQ=="
-        }
-    },
-    "version": "2.2.0",
-    "lastVisitedAssetId": "a25b1d4c556fbab667de70f0f400c385",
-    "assets": {
-        "7dc989c4b542b7b416de2be7982b035d": {
-            "format": "jpg",
-            "id": "7dc989c4b542b7b416de2be7982b035d",
-            "name": "1651832960064.jpg",
-            "path": "file:C:/Users/test/Desktop/input/1651832960064.jpg",
-            "size": {
-                "width": 640,
-                "height": 480
-            },
-            "state": 1,
-            "type": 1
-        },
-        "a25b1d4c556fbab667de70f0f400c385": {
-            "format": "jpg",
-            "id": "a25b1d4c556fbab667de70f0f400c385",
-            "name": "beneficiary_growth.jpg",
-            "path": "file:C:/Users/test/Desktop/input/beneficiary_growth.jpg",
-            "size": {
-                "width": 640,
-                "height": 480
-            },
-            "state": 2,
-            "type": 1
-        }
-    }
+    "version": "2.2.0"
 }
