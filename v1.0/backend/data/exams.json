@@ -19845,9 +19845,9 @@
     "schoolId": "m001"
   },
   {
-    "subject": "hindi",
-    "examLO": "hindi",
-    "classId": "3",
+    "subject": "0",
+    "examLO": "0",
+    "classId": "0",
     "examDate": "05/10/2022",
     "totalMarks": 10,
     "type": "benificiary-growth-monitoring-details",
@@ -19904,6 +19904,6 @@
       }
     ],
     "examId": 48,
-    "schoolId": "jk001"
+    "schoolId": "m001"
   }
 ]
