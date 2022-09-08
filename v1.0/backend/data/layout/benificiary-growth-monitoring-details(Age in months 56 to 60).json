@@ -260,7 +260,7 @@
                 "cellId": "3",
                 "rois": [
                     {
-                        "annotationTags": "AIM56_HEIGHTINMM1",
+                        "annotationTags": "AIM56_HEIGHTINMM2_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "19",
                         "index": 0,
@@ -744,7 +744,7 @@
                 "cellId": "16",
                 "rois": [
                     {
-                        "annotationTags": "AIM57_HEIGHTINMM1",
+                        "annotationTags": "AIM57_HEIGHTINMM2_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "42",
                         "index": 0,
@@ -1228,7 +1228,7 @@
                 "cellId": "29",
                 "rois": [
                     {
-                        "annotationTags": "AIM58_HEIGHTINMM1",
+                        "annotationTags": "AIM58_HEIGHTINMM2_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "65",
                         "index": 0,
@@ -1763,7 +1763,7 @@
                 "cellId": "43",
                 "rois": [
                     {
-                        "annotationTags": "AIM59_HEIGHTINMM1",
+                        "annotationTags": "AIM59_HEIGHTINMM2_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "91",
                         "index": 0,
@@ -2247,7 +2247,7 @@
                 "cellId": "56",
                 "rois": [
                     {
-                        "annotationTags": "AIM60_HEIGHTINMM1",
+                        "annotationTags": "AIM60_HEIGHTINMM2_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "114",
                         "index": 0,
