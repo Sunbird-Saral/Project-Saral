@@ -31,11 +31,13 @@ import axios from 'axios';
 //components
 import { scanStatusDataAction } from '../../modules/ScanStatus/scanStatusDataAction';
 import Spinner from '../common/components/loadingIndicator';
-import { cryptoText, dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF, validateToken } from '../../utils/CommonUtils';
+import { checkNetworkConnectivity, cryptoText, dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF, validateToken } from '../../utils/CommonUtils';
 import { LoginAction } from '../../flux/actions/apis/LoginAction';
 
 import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction'
 import { collectErrorLogs } from '../CollectErrorLogs';
+import { getRegularRoipi, setRegularRoiApi } from '../../utils/offlineStorageUtils';
+import constants from '../../flux/actions/constants';
 
 
 const StudentsList = ({
@@ -45,7 +47,8 @@ const StudentsList = ({
     saveAbsentStudent,
     multiBrandingData,
     scanedData,
-    apiStatus
+    apiStatus,
+    roiData
 }) => {
 
 
@@ -83,6 +86,36 @@ useEffect(() => {
         }, []),
     );
 
+    useEffect(async () => {
+        const hasNetwork = await checkNetworkConnectivity();
+        if (roiData && roiData.status && roiData.status == 200) {
+            if (loginData.data.school.hasOwnProperty("offline") && loginData.data.school.offline && hasNetwork) {
+
+                let getRoiCache = await getRegularRoipi();
+                if (getRoiCache != null) {
+                    let result = getRoiCache.findIndex((e)=> e.key == loginData.data.school.schoolId && e.examId == filteredData.examTestID)
+                    if (result > -1) {
+                        getRoiCache[result].data = roiData 
+                    } else {
+                        let payload = {
+                            key :`${loginData.data.school.schoolId}`,
+                            examId: filteredData.examTestID,
+                            data: roiData
+                        }
+                        getRoiCache.push(payload);
+                    }
+                    await setRegularRoiApi(getRoiCache);
+                } else {
+                    let payload = {
+                        key :`${loginData.data.school.schoolId}`,
+                        examId: filteredData.examTestID,
+                        data: roiData
+                    }
+                    await setRegularRoiApi([payload]);
+                }
+            }
+        }
+    }, [roiData])
 
     const dispatch = useDispatch();
 
@@ -281,6 +314,7 @@ useEffect(() => {
         }
     }
     const navigateToBack = () => {
+        dispatch(dispatchroiData([]));
         navigation.navigate('selectDetails')
     }
     
@@ -317,6 +351,12 @@ useEffect(() => {
         callScanStatusData()
     }
 
+    const dispatchroiData = (payload) => {
+        return {
+            type: constants.ROI_DATA,
+            payload
+        }
+    }
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
@@ -397,7 +437,7 @@ const mapStateToProps = (state) => {
     return {
         filteredData: state.filteredData.response,
         loginData: state.loginData,
-        roiData: state.roiData,
+        roiData: state.roiData.response,
         scanTypeData: state.scanTypeData.response,
         saveAbsentStudent: state.saveAbsentStudent,
         absentStudentDataResponse: state.absentStudentDataResponse,

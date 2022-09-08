@@ -16,7 +16,7 @@ import { OcrLocalResponseAction } from '../../flux/actions/apis/OcrLocalResponse
 import { GetStudentsAndExamData } from '../../flux/actions/apis/getStudentsAndExamData';
 import { FilteredDataAction } from '../../flux/actions/apis/filteredDataActions';
 import APITransport from '../../flux/actions/transport/apitransport';
-import { cryptoText, dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF, SCAN_TYPES, validateToken } from '../../utils/CommonUtils';
+import { checkNetworkConnectivity, cryptoText, dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF, SCAN_TYPES, validateToken } from '../../utils/CommonUtils';
 import { ROIAction } from '../StudentsList/ROIAction';
 import { GetAbsentStudentData } from '../../flux/actions/apis/getAbsentStudentData';
 import { LoginAction } from '../../flux/actions/apis/LoginAction';
@@ -27,6 +27,9 @@ import ShareComponent from '../common/components/Share';
 import MultibrandLabels from '../common/components/multibrandlabels';
 import ModalView from '../common/components/ModalView';
 import CustomPopup from '../common/components/CustomPopup';
+import { getRegularStudentExamApi, setRegularStudentExamApi } from '../../utils/offlineStorageUtils';
+import constants from '../../flux/actions/constants';
+import { storeFactory } from '../../flux/store/store';
 
 //redux
 
@@ -267,9 +270,29 @@ class SelectDetailsComponent extends Component {
         }
     }
 
-    callStudentsData = (token) => {
-        const { dataPayload } = this.state
-      
+    callStudentsData = async (token) => {
+        const { dataPayload, selectedClass, selectedSection } = this.state
+        let hasNetwork = await checkNetworkConnectivity();
+
+
+        if (!hasNetwork) {
+            let hasCacheData = await getRegularStudentExamApi();
+            if (hasCacheData) {
+                let cacheFilterData =  hasCacheData.filter((element)=>{
+                    if (element.key == this.props.loginData.data.school.schoolId && element.class == selectedClass && element.section == selectedSection) {
+                        return true
+                    }
+                });
+                if (cacheFilterData.length > 0) {
+                    this.setState({isLoading: false, calledStudentsData: true})
+                    storeFactory.dispatch(this.dispatchStudentExamData(cacheFilterData[0].data))
+                } else {
+                    this.setState({isLoading: false})
+                }
+            } else {
+                //Alert message show message "something went wrong or u don't have cache in local"            
+            }
+        } else {      
         this.setState({
             calledStudentsData: true,
         }, () => {
@@ -278,6 +301,14 @@ class SelectDetailsComponent extends Component {
 
         })
     }
+}
+
+dispatchStudentExamData(payload){
+    return {
+        type: constants.GET_STUDENTS_EXAMS_LIST,
+        payload
+    }
+}
 
     validateAbsentStatusApi = () => {
         const { selectedClassId, selectedExam, selectedSection, loginDetails } = this.state
@@ -487,6 +518,37 @@ class SelectDetailsComponent extends Component {
                                     pickerDate: new Date()
                                 })
                             }
+                            if (studentsAndExamData && studentsAndExamData.status && studentsAndExamData.status == 200) {
+                                const hasNetwork = await checkNetworkConnectivity();
+                                if (loginData.data.school.hasOwnProperty("offline") && loginData.data.school.offline && hasNetwork) {
+                                    let getStudentExamCache = await getRegularStudentExamApi();
+                                    if (getStudentExamCache != null) {
+                                        
+                                        let result = getStudentExamCache.findIndex((e)=>e.key == loginData.data.school.schoolId && e.class == selectedClass && e.section == selectedSection)
+                                        if (result > -1) {
+                                            getStudentExamCache[result].data = studentsAndExamData 
+                                        } else {
+                                            let payload = {
+                                                key :`${loginData.data.school.schoolId}`,
+                                                class : selectedClass,
+                                                section: selectedSection,
+                                                data: studentsAndExamData
+                                            }
+                                            getStudentExamCache.push(payload);
+                                        }
+                                        await setRegularStudentExamApi(getStudentExamCache);
+                                    } else {
+                                        let payload = {
+                                            key :`${loginData.data.school.schoolId}`,
+                                            class : selectedClass,
+                                            section: selectedSection,
+                                            data: studentsAndExamData
+                                        }
+                                        await setRegularStudentExamApi([payload]);
+                                    }
+
+                                }
+                            }
 
                         }
                         else {
@@ -586,8 +648,24 @@ class SelectDetailsComponent extends Component {
                 if (studentsAndExamData && data.hasOwnProperty("subject")) {
 
                     this.setState({isCalledStudentAndExam: false, isLoading: false})                    
-                    
+                    const hasNetwork = await checkNetworkConnectivity();
                     if (studentsAndExamData && studentsAndExamData.status && studentsAndExamData.status == 200) {
+                        if (loginData.data.school.hasOwnProperty("offline") && loginData.data.school.offline && hasNetwork) {
+                            let getStudentExamCache = await getRegularStudentExamApi();
+                            if (getStudentExamCache != null) {
+                                let result = getStudentExamCache.findIndex((e)=> e.key == loginData.data.school.schoolId && e.class == selectedClass && e.section == selectedSection && e.hasOwnProperty("subject") ? e.subject == this.state.selectedSubject : false)
+                                let resultDataIndex = getStudentExamCache.findIndex((e)=> e.key == loginData.data.school.schoolId && e.class == selectedClass && e.section == selectedSection)
+
+                                if (result > -1) {
+                                    getStudentExamCache[result].data = studentsAndExamData
+                                } else if(resultDataIndex > -1){
+                                    getStudentExamCache[resultDataIndex].subject = this.state.selectedSubject
+                                    getStudentExamCache[resultDataIndex].data = studentsAndExamData
+                                }
+
+                                await setRegularStudentExamApi(getStudentExamCache)
+                            }
+                        }
                         let obj = {
                             class: selectedClass,
                             classId: selectedClassId,
@@ -696,7 +774,29 @@ class SelectDetailsComponent extends Component {
         })
     }
 
-    callExamAndStudentData(token){
+  async  callExamAndStudentData(token){
+
+        let hasNetwork = await checkNetworkConnectivity();
+
+
+        if (!hasNetwork) {
+            let hasCacheData = await getRegularStudentExamApi();
+            if (hasCacheData) {
+                let cacheFilterData =  hasCacheData.filter((element)=>{
+                    if (element.key == this.props.loginData.data.school.schoolId && element.class == this.state.selectedClass && element.section == this.state.selectedSection && element.subject == this.state.selectedSubject) {
+                        return true
+                    }
+                });
+                if (cacheFilterData.length > 0) {
+                    this.setState({isCalledStudentAndExam: true, isLoading: false})
+                    storeFactory.dispatch(this.dispatchStudentExamData(cacheFilterData[0].data))
+                } else {
+                    this.setState({isLoading: false})
+                }
+            } else {
+                //Alert message show message "something went wrong or u don't have cache in local"            
+            }
+        } else {
         let dataPayload = {
             classId: this.state.selectedClassId,
             section: this.state.selectedSection,
@@ -711,6 +811,7 @@ class SelectDetailsComponent extends Component {
         })
 
     }
+}
 
     callROIData = (dataPayload, token) => {
         const { apiStatus } = this.props;

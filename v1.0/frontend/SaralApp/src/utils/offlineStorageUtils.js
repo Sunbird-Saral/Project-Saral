@@ -8,6 +8,11 @@ const SAVED_API_KEY = `SAVED_API_KEY`
 const BRANDING_API_KEY = `BRANDING_API_KEY`
 const LOGIN_CRED_KEY = 'login_cred_key'
 
+const REGULAR_EXAM_API_KEY = 'REGULAR_EXAM_API_KEY'
+const REGULAR_ROI_API_KEY = 'REGULAR_ROI_API_KEY'
+const REGULAR_SAVED_SCAN_API_KEY = 'REGULAR_SAVED_SCAN_API_KEY'
+
+//For Minimal mode
 export const setLoginApi = async (data) => {
     let json = JSON.stringify(data);
     let saved = await setData(LOGIN_API_KEY, json)
@@ -211,4 +216,57 @@ export const removeAllCache = async() => {
      //remove all user db saved data
      let json = JSON.stringify(null);
      await setData(SAVED_API_KEY, json)
+}
+
+//For Regular Mode
+export const setRegularStudentExamApi = async (data) => {
+    //GET LOGIN CREDENTIAL
+    let json = JSON.stringify(data);
+    let saved = await setData(REGULAR_EXAM_API_KEY, json)
+    if (saved) {
+        return true
+    }
+    else {
+        return false
+    }
+}
+
+export const getRegularStudentExamApi = async () => {
+        let examData = await getData(REGULAR_EXAM_API_KEY)
+        return JSON.parse(examData)
+}
+
+export const setRegularRoiApi = async (data) => {
+    //GET LOGIN CREDENTIAL
+    let json = JSON.stringify(data);
+    let saved = await setData(REGULAR_ROI_API_KEY, json)
+    if (saved) {
+        return true
+    }
+    else {
+        return false
+    }
+}
+
+export const getRegularRoipi = async () => {
+        let examData = await getData(REGULAR_ROI_API_KEY)
+        return JSON.parse(examData)
+}
+
+
+export const setRegularSavedScanApi = async (data) => {
+    //GET LOGIN CREDENTIAL
+    let json = JSON.stringify(data);
+    let saved = await setData(REGULAR_SAVED_SCAN_API_KEY, json)
+    if (saved) {
+        return true
+    }
+    else {
+        return false
+    }
+}
+
+export const getRegularSavedScanpi = async () => {
+        let examData = await getData(REGULAR_SAVED_SCAN_API_KEY)
+        return JSON.parse(examData)
 }

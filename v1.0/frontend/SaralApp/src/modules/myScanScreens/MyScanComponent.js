@@ -302,7 +302,12 @@ class MyScanComponent extends Component {
                 if (this.props.minimalFlag && this.state.roiIndex != -1) {
                     this.openCameraActivity()
                 } else if (!this.props.minimalFlag ) {
-                    this.openCameraActivity()
+                    let hasEmpty = this.props.roiData.hasOwnProperty("config") ? true : this.props.roiData.length > 0
+                    if (this.props.loginData.data.school.hasOwnProperty("offline") && this.props.loginData.data.school.offline && hasEmpty) {
+                        this.openCameraActivity()
+                    }else{
+                        this.callCustomModal(Strings.message_text,Strings.roi_cache_not_available,false,false)
+                    }
                 }
                  else {
                     this.callCustomModal(Strings.message_text,Strings.please_select_roi_layout,false,false)
