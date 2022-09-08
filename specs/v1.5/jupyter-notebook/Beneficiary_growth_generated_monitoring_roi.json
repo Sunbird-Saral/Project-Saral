@@ -253,7 +253,7 @@
                 "cellId": "3",
                 "rois": [
                     {
-                        "annotationTags": "AIM0_HEIGHTINMM1",
+                        "annotationTags": "AIM0_HEIGHTINMM2_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "19",
                         "index": 0,
@@ -724,7 +724,7 @@
                 "cellId": "16",
                 "rois": [
                     {
-                        "annotationTags": "AIM1_HEIGHTINMM1",
+                        "annotationTags": "AIM1_HEIGHTINMM2_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "42",
                         "index": 0,
@@ -1195,7 +1195,7 @@
                 "cellId": "29",
                 "rois": [
                     {
-                        "annotationTags": "AIM2_HEIGHTINMM1",
+                        "annotationTags": "AIM2_HEIGHTINMM2_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "65",
                         "index": 0,
@@ -1717,7 +1717,7 @@
                 "cellId": "43",
                 "rois": [
                     {
-                        "annotationTags": "AIM3_HEIGHTINMM1",
+                        "annotationTags": "AIM3_HEIGHTINMM2_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "91",
                         "index": 0,
@@ -2188,7 +2188,7 @@
                 "cellId": "56",
                 "rois": [
                     {
-                        "annotationTags": "AIM4_HEIGHTINMM1",
+                        "annotationTags": "AIM4_HEIGHTINMM2_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "114",
                         "index": 0,
@@ -2659,7 +2659,7 @@
                 "cellId": "69",
                 "rois": [
                     {
-                        "annotationTags": "AIM5_HEIGHTINMM1",
+                        "annotationTags": "AIM5_HEIGHTINMM2_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "137",
                         "index": 0,
@@ -3130,7 +3130,7 @@
                 "cellId": "82",
                 "rois": [
                     {
-                        "annotationTags": "AIM6_HEIGHTINMM1",
+                        "annotationTags": "AIM6_HEIGHTINMM2_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "160",
                         "index": 0,
