@@ -20401,5 +20401,16 @@
     ],
     "examId": 56,
     "schoolId": "m001"
+  },
+  {
+    "subject": "0",
+    "examLO": "0",
+    "classId": "0",
+    "examDate": "05/12/2022",
+    "totalMarks": 0,
+    "type": "beneficiary-details",
+    "questions": null,
+    "examId": 57,
+    "schoolId": "m001"
   }
 ]
