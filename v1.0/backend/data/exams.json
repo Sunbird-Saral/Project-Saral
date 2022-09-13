@@ -19850,7 +19850,7 @@
     "classId": "0",
     "examDate": "05/10/2022",
     "totalMarks": 10,
-    "type": "benificiary-growth-monitoring-details(Age in months 0 to 6)",
+    "type": "beneficiary-growth-monitoring-details(Age in months 0 to 6)",
     "questions": [
       {
         "questionId": "QUESTION1",
@@ -19912,7 +19912,7 @@
     "classId": "0",
     "examDate": "05/10/2022",
     "totalMarks": 10,
-    "type": "benificiary-growth-monitoring-details(Age in months 7 to 13)",
+    "type": "beneficiary-growth-monitoring-details(Age in months 7 to 13)",
     "questions": [
       {
         "questionId": "QUESTION1",
@@ -19974,7 +19974,7 @@
     "classId": "0",
     "examDate": "05/10/2022",
     "totalMarks": 10,
-    "type": "benificiary-growth-monitoring-details(Age in months 14 to 20)",
+    "type": "beneficiary-growth-monitoring-details(Age in months 14 to 20)",
     "questions": [
       {
         "questionId": "QUESTION1",
@@ -20036,7 +20036,7 @@
     "classId": "0",
     "examDate": "05/10/2022",
     "totalMarks": 10,
-    "type": "benificiary-growth-monitoring-details(Age in months 21 to 27)",
+    "type": "beneficiary-growth-monitoring-details(Age in months 21 to 27)",
     "questions": [
       {
         "questionId": "QUESTION1",
@@ -20098,7 +20098,7 @@
     "classId": "0",
     "examDate": "05/10/2022",
     "totalMarks": 10,
-    "type": "benificiary-growth-monitoring-details(Age in months 28 to 34)",
+    "type": "beneficiary-growth-monitoring-details(Age in months 28 to 34)",
     "questions": [
       {
         "questionId": "QUESTION1",
@@ -20160,7 +20160,7 @@
     "classId": "0",
     "examDate": "05/10/2022",
     "totalMarks": 10,
-    "type": "benificiary-growth-monitoring-details(Age in months 35 to 41)",
+    "type": "beneficiary-growth-monitoring-details(Age in months 35 to 41)",
     "questions": [
       {
         "questionId": "QUESTION1",
@@ -20222,7 +20222,7 @@
     "classId": "0",
     "examDate": "05/10/2022",
     "totalMarks": 10,
-    "type": "benificiary-growth-monitoring-details(Age in months 42 to 48)",
+    "type": "beneficiary-growth-monitoring-details(Age in months 42 to 48)",
     "questions": [
       {
         "questionId": "QUESTION1",
@@ -20284,7 +20284,7 @@
     "classId": "0",
     "examDate": "05/10/2022",
     "totalMarks": 10,
-    "type": "benificiary-growth-monitoring-details(Age in months 49 to 55)",
+    "type": "beneficiary-growth-monitoring-details(Age in months 49 to 55)",
     "questions": [
       {
         "questionId": "QUESTION1",
@@ -20346,7 +20346,7 @@
     "classId": "0",
     "examDate": "05/10/2022",
     "totalMarks": 10,
-    "type": "benificiary-growth-monitoring-details(Age in months 56 to 60)",
+    "type": "beneficiary-growth-monitoring-details(Age in months 56 to 60)",
     "questions": [
       {
         "questionId": "QUESTION1",

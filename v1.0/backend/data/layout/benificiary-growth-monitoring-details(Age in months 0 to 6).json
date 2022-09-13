@@ -131,66 +131,6 @@
                             "bottom": 53,
                             "right": 503
                         }
-                    },
-                    {
-                        "annotationTags": "CHILDID1_11",
-                        "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "11",
-                        "index": 10,
-                        "rect": {
-                            "top": 24,
-                            "left": 506,
-                            "bottom": 55,
-                            "right": 529
-                        }
-                    },
-                    {
-                        "annotationTags": "CHILDID1_12",
-                        "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "12",
-                        "index": 11,
-                        "rect": {
-                            "top": 21,
-                            "left": 529,
-                            "bottom": 51,
-                            "right": 554
-                        }
-                    },
-                    {
-                        "annotationTags": "CHILDID1_13",
-                        "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "13",
-                        "index": 12,
-                        "rect": {
-                            "top": 22,
-                            "left": 553,
-                            "bottom": 52,
-                            "right": 575
-                        }
-                    },
-                    {
-                        "annotationTags": "CHILDID1_14",
-                        "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "14",
-                        "index": 13,
-                        "rect": {
-                            "top": 21,
-                            "left": 578,
-                            "bottom": 51,
-                            "right": 600
-                        }
-                    },
-                    {
-                        "annotationTags": "CHILDID1_15",
-                        "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "15",
-                        "index": 14,
-                        "rect": {
-                            "top": 21,
-                            "left": 601,
-                            "bottom": 51,
-                            "right": 624
-                        }
                     }
                 ],
                 "render": {
