@@ -320,7 +320,7 @@ useEffect(() => {
         })
 
 
-        setStudentsExamData(stud)
+       await setStudentsExamData(stud)
 
         if (absentPresentStatus.studentsMarkInfo.length == 0) {
             setPresentAbsentStudent(allStudentData)

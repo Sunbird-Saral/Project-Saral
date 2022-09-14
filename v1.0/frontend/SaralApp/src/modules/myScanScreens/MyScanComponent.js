@@ -647,7 +647,7 @@ class MyScanComponent extends Component {
                         })
                     }
                     if (loginData.data.school.hasOwnProperty("offline") && loginData.data.school.offline) {
-                        obj.setScanDataCache(res);
+                        obj.setScanDataCache(res.data);
                     }
                     obj.setState({
                         scanStatusData: filterDataLen,
