@@ -264,6 +264,7 @@ useEffect(() => {
                 stdArray={stdArray}
                 apiStatus={apiStatus}
                 dispatch={dispatch}
+                loginData={loginData}
             />
         )
     }
@@ -305,6 +306,7 @@ useEffect(() => {
         absentPresentStatus.studentsMarkInfo = stdPstAbsArray
 
         let stud = await getStudentsExamData();
+        const hasNetwork = await checkNetworkConnectivity();
 
         stud.forEach((e, i) => {
             if (e.class == filteredData.className && e.section == filteredData.section) {
@@ -325,7 +327,7 @@ useEffect(() => {
         if (absentPresentStatus.studentsMarkInfo.length == 0) {
             setPresentAbsentStudent(allStudentData)
             navigation.push('ScanHistory');
-        } else {
+        } else if(hasNetwork) {
             let dataPayload = absentPresentStatus
             let apiObj = new SaveScanData(dataPayload, token)
             setIsLoading(true)

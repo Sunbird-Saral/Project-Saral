@@ -57,7 +57,11 @@ const ScanHistory = ({
             let len = 0
 
             filter.forEach((element, index) => {
-                len = len + element.studentsMarkInfo.length
+                element.studentsMarkInfo.forEach((val) => {
+                    if ((val.studentAvailability == true)) {
+                        len = len + 1
+                    }
+                })
             });
             setScanStatusData(len)
         } else {
