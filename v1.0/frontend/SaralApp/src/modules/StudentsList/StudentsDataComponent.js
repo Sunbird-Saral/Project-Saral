@@ -44,6 +44,7 @@ const StudentsDataComponent = ({
         let isStudentPresent = data.studentAvailability
 
         let stdData = await getScannedDataFromLocal()
+
         const hasNetwork = await checkNetworkConnectivity()
         let isStudentScannedInLocal = ''
         let filterStdData           = ''
@@ -63,9 +64,8 @@ const StudentsDataComponent = ({
             }
         }
 
+        const isSheetScanned = typeof (scanedData) === 'object' && scanedData.data.length > 0 && scanedData.data.filter((o) => o.studentId == data.studentId && o.studentAvailability === true && o.marksInfo.length > 0)
         if (isStudentPresent) {
-            const isSheetScanned = typeof (scanedData) === 'object' && scanedData.data.length > 0 && scanedData.data.filter((o) => o.studentId == data.studentId && o.studentAvailability === true && o.marksInfo.length > 0)
-
             if (isSheetScanned.length > 0 || isStudentScannedInLocal.length > 0) {
                 let data = {
                     title : Strings.message_text,
@@ -114,7 +114,7 @@ const StudentsDataComponent = ({
                 filterStdData[0].studentsMarkInfo[chkStdPresent] = stdObj;
             } 
             else {
-                filterStdData[0].studentsMarkInfo.push(stdData);
+                filterStdData[0].studentsMarkInfo.push(stdObj);
             }
             
             let findIndex = localStdData.findIndex((el)=> {
@@ -131,7 +131,7 @@ const StudentsDataComponent = ({
                 "classId": filteredData.class,
                 "examDate": filteredData.examDate,
                 "subject": filteredData.subject,
-                "studentsMarkInfo": stdObj,
+                "studentsMarkInfo": [stdObj],
                 "examId": filteredData.examTestID,
             }
             await setScannedDataIntoLocal([saveObj])

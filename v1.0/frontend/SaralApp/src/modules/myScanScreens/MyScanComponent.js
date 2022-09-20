@@ -153,7 +153,7 @@ class MyScanComponent extends Component {
 
             filter.forEach((element, index) => {
                 element.studentsMarkInfo.forEach((val) => {
-                    if (val.studentAvailability == true) {
+                    if (val.studentAvailability == true && val.marksInfo.length > 0) {
                         len = len + 1
                     }
                 })

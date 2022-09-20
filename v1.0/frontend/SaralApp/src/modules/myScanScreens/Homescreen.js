@@ -60,7 +60,7 @@ class HomeComponent extends Component {
                     this.setState({isLoading : false})
                 }
                 
-                if (loginData.data.school.hasOwnProperty("offline") && loginData.data.school.offline && hasNetwork & minimalFlag ) {
+                if (loginData.data.school.hasOwnProperty("offline") && loginData.data.school.offline && hasNetwork) {
                     let getBrandingCache = await getBrandingDataApi();
                     if (getBrandingCache != null) {
 

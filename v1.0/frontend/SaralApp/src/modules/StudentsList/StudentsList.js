@@ -36,7 +36,7 @@ import { LoginAction } from '../../flux/actions/apis/LoginAction';
 
 import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction'
 import { collectErrorLogs } from '../CollectErrorLogs';
-import { getRegularRoipi, getRegularSavedScanpi, setRegularRoiApi, setRegularSavedScanApi } from '../../utils/offlineStorageUtils';
+import { getRegularRoipi, getRegularSavedScanpi, getRegularStudentExamApi, setRegularRoiApi, setRegularSavedScanApi, setRegularStudentExamApi } from '../../utils/offlineStorageUtils';
 import constants from '../../flux/actions/constants';
 import { storeFactory } from '../../flux/store/store';
 
@@ -332,7 +332,29 @@ useEffect(() => {
             let apiObj = new SaveScanData(dataPayload, token)
             setIsLoading(true)
             saveStudentData(apiObj)
+        } else if (absentPresentStatus.studentsMarkInfo.length > 0 && !hasNetwork) {
+            await setDataIntoRegularStudentExamApi()
         }
+    }
+
+    const setDataIntoRegularStudentExamApi = async() => {
+        let getStudentExamCache = await getRegularStudentExamApi();
+        for (const e of getStudentExamCache) {
+            if (e.class == filteredData.className && e.section == filteredData.section && `${filteredData.subject + ' ' + filteredData.examDate}` == e.subject && e.key == loginData.data.school.schoolId) {
+                let studentArrayData = e.data.data.students.length > 0 ? e.data.data.students : []
+                for (const element of studentArrayData) {
+                    allStudentData.forEach((o) => {
+                        if (element.studentId == o.studentId) {
+                            element.studentAvailability = o.studentAvailability
+                        }
+                    });
+                }
+                break;
+            }
+        }
+        await setRegularStudentExamApi(getStudentExamCache);
+        await setPresentAbsentStudent(allStudentData)
+        navigation.push('ScanHistory');
     }
 
     const saveStudentData = (api) => {
