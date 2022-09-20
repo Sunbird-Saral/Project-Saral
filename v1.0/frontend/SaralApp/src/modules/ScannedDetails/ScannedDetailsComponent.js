@@ -764,11 +764,7 @@ const ScannedDetailsComponent = ({
     }
 
     const renderSRNo = (element, index) => {
-        if (isMultipleStudent) {
             return `${index + 1}`
-        } else {
-            return `${element.render.index - 1}`
-        }
     }
 
     const lengthAccordingSheet = (element) => {
