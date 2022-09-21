@@ -126,7 +126,7 @@ const StudentsDataComponent = ({
             localStdData[findIndex].studentsMarkInfo = filterStdData[0].studentsMarkInfo;
             await setScannedDataIntoLocal(localStdData)
 
-        } else if(localStdData == null || filterStdData.length == 0){
+        } else {
             let saveObj = {
                 "classId": filteredData.class,
                 "examDate": filteredData.examDate,
@@ -134,7 +134,12 @@ const StudentsDataComponent = ({
                 "studentsMarkInfo": [stdObj],
                 "examId": filteredData.examTestID,
             }
-            await setScannedDataIntoLocal([saveObj])
+            if (filterStdData.length == 0 && localStdData != null) {
+                localStdData.push(saveObj);
+                await setScannedDataIntoLocal(localStdData);
+            } else if(localStdData == null){
+                await setScannedDataIntoLocal([saveObj]);
+            }
         }
     }
 
