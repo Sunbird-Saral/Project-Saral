@@ -2,7 +2,6 @@
     "layout": {
         "version": "1.0",
         "name": "HINDI8S13_9DQOMR Exam Sheet Form",
-        "identifierPrefix": "ROLLNUMBERID",
         "threshold": {
             "minWidth": 0,
             "minHeight": 0,

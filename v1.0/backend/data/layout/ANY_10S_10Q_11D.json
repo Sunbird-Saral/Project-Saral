@@ -2,7 +2,6 @@
     "layout": {
         "version": "1.0",
         "name": "ANY10S10Q11DOMR Exam Sheet Form",
-        "identifierPrefix": "ROLLNUMBERID",
         "threshold": {
             "minWidth": 0,
             "minHeight": 0,

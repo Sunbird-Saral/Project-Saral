@@ -2,7 +2,6 @@
     "layout": {
         "version": "1.0",
         "name": "HINDI3S30QOMR Exam Sheet Form",
-        "identifierPrefix": "ROLLNUMBERID",
         "threshold": {
             "minWidth" : 690,
             "minHeight": 390,

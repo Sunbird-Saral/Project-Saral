@@ -2,7 +2,6 @@
     "layout": {
         "version": "1.0",
         "name": "MULTISUBJECT1S10Q Exam Sheet Form",
-        "identifierPrefix": "ROLLNUMBER",
         "threshold": {
             "minWidth" : 740,
             "minHeight": 440,
