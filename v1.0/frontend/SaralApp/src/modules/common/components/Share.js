@@ -69,9 +69,9 @@ const ShareComponent = ({
 
       const doLogout = async () => {
         if (data != null && data.length > 0) {
-          for (const value of data) {
-            let apiObj = new SaveScanData(value, loginData.data.token);
-            saveStudentData(apiObj)
+          for (let i = 0; i < data.length; i++) {
+            let apiObj = new SaveScanData(data[i], loginData.data.token);
+            await saveStudentData(apiObj, i, data.length)
           }
         } else {
           await eraseErrorLogs()
@@ -86,7 +86,7 @@ const ShareComponent = ({
   }
 
 
-  const saveStudentData = async (api) => {
+  const saveStudentData = async (api, i, len) => {
     if (api.method === 'PUT') {
       let apiResponse = null
       const source = axios.CancelToken.source()
@@ -97,8 +97,10 @@ const ShareComponent = ({
       }, 60000);
       axios.put(api.apiEndPoint(), api.getBody(), { headers: api.getHeaders(), cancelToken: source.token },)
         .then(function (res) {
-          dispatch(LogoutAction())
-          navigation.navigate('auth')
+          if (i == len - 1) {
+            dispatch(LogoutAction())
+            navigation.navigate('auth')
+          }
           apiResponse = res
           clearTimeout(id)
           api.processResponse(res)

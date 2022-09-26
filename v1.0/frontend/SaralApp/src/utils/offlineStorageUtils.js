@@ -147,13 +147,16 @@ export const removeStudenExamApiData = async () => {
     let examApi = await getStudentExamApi();
     let loginCred = await getLoginCred(LOGIN_CRED_KEY);
 
-    let filterExamData =  examApi.filter((element)=> {
+    let filterExamData = examApi != null ? examApi.filter((element)=> {
         if (element.key == loginCred.schoolId) {
             return false
         } else {
             return true
         }
-    });
+    })
+    :
+    []
+    
     if (filterExamData.length > 0) {
         await setStudentExamApi(filterExamData)
     } else {
@@ -165,13 +168,16 @@ export const removeScanDataApiData = async () => {
     let scanData = await getScanDataApi();
     let loginCred = await getLoginCred(LOGIN_CRED_KEY);
 
-    let filterScanData =  scanData.filter((element)=> {
+    let filterScanData = scanData != null ?  scanData.filter((element)=> {
         if (element.key == loginCred.schoolId) {
             return false
         } else {
             return true
         }
-    });
+    }) 
+    :
+    []
+
     if (filterScanData.length > 0) {
         await setScanDataApi(filterScanData)
     } else {
@@ -182,13 +188,16 @@ export const removeRoiDataApiData = async () => {
     let roiData = await getRoiDataApi();
     let loginCred = await getLoginCred(LOGIN_CRED_KEY);
 
-    let filterRoiData =  roiData.filter((element)=> {
+    let filterRoiData = roiData != null ?  roiData.filter((element)=> {
         if (element.key == loginCred.schoolId) {
             return false
         } else {
             return true
         }
-    });
+    })
+    :
+    []
+    
     if (filterRoiData.length > 0) {
         await setRoiDataApi(filterRoiData)
     } else {

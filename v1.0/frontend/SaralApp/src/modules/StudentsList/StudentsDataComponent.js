@@ -54,13 +54,13 @@ const StudentsDataComponent = ({
 
                 let findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.section)
 
-                if (e.classId === filteredData.class && e.subject === filteredData.subject && findSection) {
+                if (e.classId === filteredData.class && e.subject === filteredData.subject && findSection && e.examDate == filteredData.examDate) {
                     return e
                 }
             })
 
             if (filterStdData.length > 0) {
-                isStudentScannedInLocal = filterStdData[0].studentsMarkInfo.filter((o) => o.studentId == data.studentId && o.studentAvailability === true && o.marksInfo.length > 0)
+                isStudentScannedInLocal = filterStdData[0].studentsMarkInfo.filter((o) => { return o.studentId == data.studentId && o.studentAvailability === true && o.marksInfo.length > 0})
             }
         }
 

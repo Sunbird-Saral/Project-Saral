@@ -285,7 +285,7 @@ class SelectDetailsComponent extends Component {
                 });
                 if (cacheFilterData.length > 0) {
                     this.setState({isLoading: false, calledStudentsData: true})
-                    storeFactory.dispatch(this.dispatchStudentExamData(cacheFilterData[0].data))
+                    storeFactory.dispatch(this.dispatchStudentExamData(cacheFilterData[0].data2))
                 } else {
                     this.setState({isLoading: false})
                 }
@@ -532,7 +532,8 @@ dispatchStudentExamData(payload){
                                                 key :`${loginData.data.school.schoolId}`,
                                                 class : selectedClass,
                                                 section: selectedSection,
-                                                data: studentsAndExamData
+                                                data: studentsAndExamData,
+                                                data2: studentsAndExamData
                                             }
                                             getStudentExamCache.push(payload);
                                         }
@@ -542,7 +543,8 @@ dispatchStudentExamData(payload){
                                             key :`${loginData.data.school.schoolId}`,
                                             class : selectedClass,
                                             section: selectedSection,
-                                            data: studentsAndExamData
+                                            data: studentsAndExamData,
+                                            data2: studentsAndExamData
                                         }
                                         await setRegularStudentExamApi([payload]);
                                     }
@@ -654,11 +656,23 @@ dispatchStudentExamData(payload){
                             let getStudentExamCache = await getRegularStudentExamApi();
                             if (getStudentExamCache != null) {
                                 let result = getStudentExamCache.findIndex((e)=> e.key == loginData.data.school.schoolId && e.class == selectedClass && e.section == selectedSection && e.hasOwnProperty("subject") ? e.subject == this.state.selectedSubject : false)
+                                let hasSubject = getStudentExamCache.findIndex((e)=> e.key == loginData.data.school.schoolId && e.class == selectedClass && e.section == selectedSection && e.hasOwnProperty("subject"))
                                 let resultDataIndex = getStudentExamCache.findIndex((e)=> e.key == loginData.data.school.schoolId && e.class == selectedClass && e.section == selectedSection)
 
                                 if (result > -1) {
                                     getStudentExamCache[result].data = studentsAndExamData
-                                } else if(resultDataIndex > -1){
+                                } else  {
+                                    let payload = {
+                                        key :`${loginData.data.school.schoolId}`,
+                                        class : selectedClass,
+                                        section: selectedSection,
+                                        data: studentsAndExamData,
+                                        data2: studentsAndExamData,
+                                        subject: this.state.selectedSubject
+                                    }
+                                    getStudentExamCache.push(payload);
+                                }
+                                if(result == -1 && resultDataIndex > -1 && !hasSubject){
                                     getStudentExamCache[resultDataIndex].subject = this.state.selectedSubject
                                     getStudentExamCache[resultDataIndex].data = studentsAndExamData
                                 }
@@ -792,9 +806,12 @@ dispatchStudentExamData(payload){
                     storeFactory.dispatch(this.dispatchStudentExamData(cacheFilterData[0].data))
                 } else {
                     this.setState({isLoading: false})
+                    this.callCustomModal(Strings.message_text, Strings.you_dont_have_cache, false)
                 }
             } else {
-                //Alert message show message "something went wrong or u don't have cache in local"            
+                //Alert message show message "something went wrong or u don't have cache in local"
+                this.setState({isLoading: false})
+                this.callCustomModal(Strings.message_text, Strings.you_dont_have_cache, false)
             }
         } else {
         let dataPayload = {
