@@ -214,6 +214,17 @@ const ScannedDetailsComponent = ({
             return multiple
         })
 
+        let filterWithZeroStudentData = ocrLocalResponse.layout.cells.filter((e) => {
+            let withNoDigits = e.format.name.replace(/[0-9]/g, '');
+            let wordLen = withNoDigits.length;
+            let multiple = 0
+            if (wordLen === checkRoLLNumberExist.length && withNoDigits === checkRoLLNumberExist) {
+                multiple = multiple + 1
+            }
+            return multiple
+        })
+
+
         if(ocrLocalResponse.layout.cells[1].rois[0].extractionMethod == "BLOCK_ALPHANUMERIC_CLASSIFICATION"){
             setIsAlphaNumeric(true)
         }
@@ -237,7 +248,7 @@ const ScannedDetailsComponent = ({
             setNextBtn("NEXT")
             setStdRollArray(findNonZeroRollStd)
             setIsmultipleStudent(true)
-            callMultipleStudentSheetData(checkIsStudentMultipleSingle)
+            callMultipleStudentSheetData(filterWithZeroStudentData)
         } else {
             let checkIsOmrOption = ocrLocalResponse.layout.cells[1].hasOwnProperty("omrOptions") ? true : false
             setOmrOptions(checkIsOmrOption)
@@ -246,7 +257,6 @@ const ScannedDetailsComponent = ({
     }, []);
 
     const callMultipleStudentSheetData = (checkIsStudentMultipleSingle) => {
-
         let marTemp = []
         let dummy = []
 
