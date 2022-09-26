@@ -8,7 +8,6 @@
             "detectionRadius": 12,
             "experimentalOMRDetection": true
         }, 
-        "identifierPrefix": "ROLLNUMBERID",
         "resultValidation": {
             "validate": {
                 "regExp": "^[0-1]$",
