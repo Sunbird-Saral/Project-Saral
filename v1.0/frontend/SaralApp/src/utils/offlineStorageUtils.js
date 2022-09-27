@@ -26,8 +26,8 @@ export const setLoginApi = async (data) => {
 
 export const getLoginApi = async () => {
     //GET LOGIN CREDENTIAL
-        let loginData = await getData(LOGIN_API_KEY)
-        return JSON.parse(loginData)
+    let loginData = await getData(LOGIN_API_KEY)
+    return JSON.parse(loginData)
 }
 
 
@@ -107,124 +107,13 @@ export const getData = async (key) => {
     return data
 }
 
-export const removeLoginApiData = async () => {
-    let loginData = await getLoginApi(LOGIN_API_KEY);
-    let loginCred = await getLoginCred(LOGIN_CRED_KEY);
+export const removeAllCache = async () => {
+    let emptyJson = JSON.stringify(null);
+    let keyArray = [LOGIN_API_KEY, EXAM_API_KEY, ROI_API_KEY, SAVED_API_KEY, BRANDING_API_KEY, REGULAR_EXAM_API_KEY, REGULAR_ROI_API_KEY, REGULAR_SAVED_SCAN_API_KEY ]
 
-   let filterLoginData =  loginData.filter((element)=> {
-        if (element.key == loginCred.schoolId) {
-            return false
-        } else {
-            return true
-        }
+    keyArray.map(async (el) => {
+        await setData(el, emptyJson)
     });
-    if (filterLoginData.length > 0) {
-        await setLoginApi(filterLoginData)
-    } else {
-        await setLoginApi(null)
-    }
-}
-
-export const removeBrandingApiData = async () => {
-    let branding = await getBrandingDataApi();
-    let loginCred = await getLoginCred(LOGIN_CRED_KEY);
-
-    let filterBrandingData =  branding.filter((element)=> {
-        if (element.key == loginCred.schoolId) {
-            return false
-        } else {
-            return true
-        }
-    });
-    if (filterBrandingData.length > 0) {
-        await setBrandingDataApi(filterBrandingData)
-    } else {
-        await setBrandingDataApi(null)
-    }
-}
-
-export const removeStudenExamApiData = async () => {
-    let examApi = await getStudentExamApi();
-    let loginCred = await getLoginCred(LOGIN_CRED_KEY);
-
-    let filterExamData = examApi != null ? examApi.filter((element)=> {
-        if (element.key == loginCred.schoolId) {
-            return false
-        } else {
-            return true
-        }
-    })
-    :
-    []
-    
-    if (filterExamData.length > 0) {
-        await setStudentExamApi(filterExamData)
-    } else {
-        await setStudentExamApi(null)
-    }
-}
-
-export const removeScanDataApiData = async () => {
-    let scanData = await getScanDataApi();
-    let loginCred = await getLoginCred(LOGIN_CRED_KEY);
-
-    let filterScanData = scanData != null ?  scanData.filter((element)=> {
-        if (element.key == loginCred.schoolId) {
-            return false
-        } else {
-            return true
-        }
-    }) 
-    :
-    []
-
-    if (filterScanData.length > 0) {
-        await setScanDataApi(filterScanData)
-    } else {
-        await setScanDataApi(null)
-    }
-}
-export const removeRoiDataApiData = async () => {
-    let roiData = await getRoiDataApi();
-    let loginCred = await getLoginCred(LOGIN_CRED_KEY);
-
-    let filterRoiData = roiData != null ?  roiData.filter((element)=> {
-        if (element.key == loginCred.schoolId) {
-            return false
-        } else {
-            return true
-        }
-    })
-    :
-    []
-    
-    if (filterRoiData.length > 0) {
-        await setRoiDataApi(filterRoiData)
-    } else {
-        await setRoiDataApi(null)
-    }
-}
-
-export const removeAllCache = async() => {
-    //remove all user login data
-    let login = JSON.stringify(null);
-     await setData(LOGIN_API_KEY, login)
-
-     //remove all user branding data
-     let brand = JSON.stringify(null);
-     await setData(BRANDING_API_KEY, brand)
-
-     //remove all user studnetexam data
-     let exam = JSON.stringify(null);
-     await setData(EXAM_API_KEY, exam)
-
-     //remove all user roi data
-     let roi = JSON.stringify(null);
-     await setData(ROI_API_KEY, roi)
-
-     //remove all user db saved data
-     let json = JSON.stringify(null);
-     await setData(SAVED_API_KEY, json)
 }
 
 //For Regular Mode
@@ -278,4 +167,45 @@ export const setRegularSavedScanApi = async (data) => {
 export const getRegularSavedScanpi = async () => {
         let examData = await getData(REGULAR_SAVED_SCAN_API_KEY)
         return JSON.parse(examData)
+}
+
+
+export const removeRegularUserDataCacheByKey = async (key) => {
+    let loginCred = await getLoginCred(LOGIN_CRED_KEY);
+    let json = await getData(key);
+    let jsonData = JSON.parse(json);
+
+    let filterData = jsonData != null ? jsonData.filter((element) => {
+        if (element.key == loginCred.schoolId) {
+            return false
+        } else {
+            return true
+        }
+    })
+        :
+        []
+
+    if (filterData.length > 0) {
+        await setData(key, JSON.stringify(filterData))
+    } else {
+        await setData(key, JSON.stringify(null))
+    }
+}
+
+export const removeRegularUserCache = async () => {
+    let array = [REGULAR_EXAM_API_KEY, REGULAR_ROI_API_KEY, REGULAR_SAVED_SCAN_API_KEY, BRANDING_API_KEY, LOGIN_API_KEY];
+
+    array.map(async (el) => {
+        await removeRegularUserDataCacheByKey(el);
+    });
+
+}
+
+export const removeMinimalUserCache = async () => {
+    let array = [EXAM_API_KEY, ROI_API_KEY, SAVED_API_KEY, BRANDING_API_KEY, LOGIN_API_KEY];
+
+    array.map(async (el) => {
+        await removeRegularUserDataCacheByKey(el);
+    });
+
 }

@@ -116,10 +116,9 @@ const StudentsDataComponent = ({
             else {
                 filterStdData[0].studentsMarkInfo.push(stdObj);
             }
-            
             let findIndex = localStdData.findIndex((el)=> {
-                let findSection = el.studentsMarkInfo.some((item) => item.section == filteredData.section)
-                if (el.classId === filteredData.class && el.subject === filteredData.subject && findSection) {
+                let findSection = el.studentsMarkInfo.some((item) => item.section == filteredData.section )
+                if (el.classId === filteredData.class && el.subject === filteredData.subject && findSection && el.examDate == filteredData.examDate && el.examId == filteredData.examTestID) {
                     return true
                 }
             });

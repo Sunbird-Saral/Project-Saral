@@ -290,6 +290,8 @@ class SelectDetailsComponent extends Component {
                     this.setState({isLoading: false})
                 }
             } else {
+                this.setState({isLoading: false})
+                this.callCustomModal(Strings.message_text, Strings.you_dont_have_cache, false);
                 //Alert message show message "something went wrong or u don't have cache in local"            
             }
         } else {      
@@ -520,7 +522,7 @@ dispatchStudentExamData(payload){
                             }
                             if (studentsAndExamData && studentsAndExamData.status && studentsAndExamData.status == 200) {
                                 const hasNetwork = await checkNetworkConnectivity();
-                                if (loginData.data.school.hasOwnProperty("offline") && loginData.data.school.offline && hasNetwork) {
+                                if (loginData.data.school.hasOwnProperty("offline") && loginData.data.school.offline && hasNetwork && this.state.sectionValid == true) {
                                     let getStudentExamCache = await getRegularStudentExamApi();
                                     if (getStudentExamCache != null) {
                                         
@@ -538,6 +540,7 @@ dispatchStudentExamData(payload){
                                             getStudentExamCache.push(payload);
                                         }
                                         await setRegularStudentExamApi(getStudentExamCache);
+                                        console.log("last updated getStudentExamCache",getStudentExamCache);
                                     } else {
                                         let payload = {
                                             key :`${loginData.data.school.schoolId}`,
@@ -646,6 +649,7 @@ dispatchStudentExamData(payload){
             }
 
             if (isCalledStudentAndExam) {
+                const hasNetworkData = await checkNetworkConnectivity()
                 let data = JSON.parse(studentsAndExamData.config.data)
                 if (studentsAndExamData && data.hasOwnProperty("subject")) {
 
@@ -658,10 +662,16 @@ dispatchStudentExamData(payload){
                                 let result = getStudentExamCache.findIndex((e)=> e.key == loginData.data.school.schoolId && e.class == selectedClass && e.section == selectedSection && e.hasOwnProperty("subject") ? e.subject == this.state.selectedSubject : false)
                                 let hasSubject = getStudentExamCache.findIndex((e)=> e.key == loginData.data.school.schoolId && e.class == selectedClass && e.section == selectedSection && e.hasOwnProperty("subject"))
                                 let resultDataIndex = getStudentExamCache.findIndex((e)=> e.key == loginData.data.school.schoolId && e.class == selectedClass && e.section == selectedSection)
+                                
+                                let subjBool = hasSubject >= 0 ? true : false;
 
-                                if (result > -1) {
+
+                                if(resultDataIndex > -1 && subjBool == false){
+                                    getStudentExamCache[resultDataIndex].subject = this.state.selectedSubject
+                                    getStudentExamCache[resultDataIndex].data = studentsAndExamData
+                                } else if (result > -1) {
                                     getStudentExamCache[result].data = studentsAndExamData
-                                } else  {
+                                } else {
                                     let payload = {
                                         key :`${loginData.data.school.schoolId}`,
                                         class : selectedClass,
@@ -671,10 +681,6 @@ dispatchStudentExamData(payload){
                                         subject: this.state.selectedSubject
                                     }
                                     getStudentExamCache.push(payload);
-                                }
-                                if(result == -1 && resultDataIndex > -1 && !hasSubject){
-                                    getStudentExamCache[resultDataIndex].subject = this.state.selectedSubject
-                                    getStudentExamCache[resultDataIndex].data = studentsAndExamData
                                 }
 
                                 await setRegularStudentExamApi(getStudentExamCache)
@@ -706,6 +712,8 @@ dispatchStudentExamData(payload){
                         let studentsExamDataSaved = await setStudentsExamData(finalStudentsAndExamArr)
                         this.props.navigation.push('StudentsList');
                     }
+                } else if (!hasNetworkData) {
+                    this.callCustomModal(Strings.message_text, Strings.you_dont_have_cache, false);
                 }
             }
         }

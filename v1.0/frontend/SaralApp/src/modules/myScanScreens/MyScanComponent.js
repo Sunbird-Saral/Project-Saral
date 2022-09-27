@@ -592,7 +592,7 @@ class MyScanComponent extends Component {
                 })
                 storeFactory.dispatch(this.dispatchScanDataApi(filterData[0].data))
                 this.setState({
-                    saveStatusData: filterData[0].data.data.data.length
+                    saveStatusData: filterData[0].data.data.length > 0 ? filterData[0].data.data.data.length : 0
                 })
             } else {
                 //Alert message show message "something went wrong or u don't have cache in local"

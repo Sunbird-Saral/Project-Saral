@@ -246,7 +246,7 @@ const ScanHistoryCard = ({
         })
         :
         []
-        setStudentCount({ absentCount: absentStudent.length , totalCount: studentList.length})
+        setStudentCount({ absentCount: absentStudent.length , totalCount: studentList!=null ? studentList.length : 0})
     }
 
     // for exam type
