@@ -2450,6 +2450,7 @@
     "examDate": "29/09/2021",
     "totalMarks": 20,
     "type": "hindi_4s_20q_omr",
+    "set":"A",
     "questions": [
       {
         "questionId": "ROLLNUMBER1_Q1",
