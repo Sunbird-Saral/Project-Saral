@@ -122,6 +122,7 @@ export default strings = new LocalizedStrings({
         saved_data: "Saved Data",
         scan_data: "Scan Data",
         scan_count: "Scan Count",
-        save_count: "Save Count"
+        save_count: "Save Count",
+        set_text:'set'
     }
 })

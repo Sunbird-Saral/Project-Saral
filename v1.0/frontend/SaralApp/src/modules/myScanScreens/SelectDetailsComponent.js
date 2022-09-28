@@ -27,6 +27,7 @@ import ShareComponent from '../common/components/Share';
 import MultibrandLabels from '../common/components/multibrandlabels';
 import ModalView from '../common/components/ModalView';
 import CustomPopup from '../common/components/CustomPopup';
+import { indexOf } from 'lodash';
 
 //redux
 
@@ -38,15 +39,19 @@ const clearState = {
     selectedClass: '',
     sectionList: [],
     sectionListIndex: -1,
+    setIndex:-1,
     selectedSection: '',
     pickerDate: new Date(),
     selectedDate: '',
     subArr: [],
     examTestID: [],
+    selectSet: '',
+    setArr: [],
     subIndex: -1,
     selectedSubject: '',
     errClass: '',
     errSub: '',
+    errSet: '',
     errDate: '',
     errSection: '',
     selectedClassId: '',
@@ -63,7 +68,9 @@ const clearState = {
     calledScanStaus: false,
     absentStatusPayload: null,
     subjectsData: [],
-    isCalledStudentAndExam: false
+    isCalledStudentAndExam: false,
+    set:[],
+    ExamSetArray:[]
 }
 
 class SelectDetailsComponent extends Component {
@@ -80,6 +87,7 @@ class SelectDetailsComponent extends Component {
             selectedClass: '',
             sectionList: [],
             sectionListIndex: -1,
+            setIndex:-1,
             selectedSection: '',
             pickerDate: new Date(),
             selectedDate: '',
@@ -87,8 +95,11 @@ class SelectDetailsComponent extends Component {
             examTestID: [],
             subIndex: -1,
             selectedSubject: '',
+            selectSet: '',
+            setArr: [],
             errClass: '',
             errSub: '',
+            errSet: '',
             errDate: '',
             errSection: '',
             selectedClassId: '',
@@ -107,7 +118,9 @@ class SelectDetailsComponent extends Component {
             subjectsData: [],
             filterdataid: [],
             isHidden: false,
-            isCalledStudentAndExam: false
+            isCalledStudentAndExam: false,
+            set:[],
+            ExamSetArray:[]
         }
         this.onPress = this.onPress.bind(this);
         this.onBack = this.onBack.bind(this)
@@ -131,6 +144,7 @@ class SelectDetailsComponent extends Component {
             }
 
             let loginDetails = await getLoginData()
+            // console.log('loginDetails',loginDetails);
             if (loginDetails) {
                 let classesArr = [...loginDetails.classes]
                 let classes = []
@@ -177,6 +191,7 @@ class SelectDetailsComponent extends Component {
                     sectionListIndex: 0,
                     selectedSection: sectionListArr[0],
                     subIndex: -1,
+                    setIndex:-1,
                     selectedSubject: '',
                     selectedDate: '',
                     pickerDate: new Date()
@@ -262,7 +277,27 @@ class SelectDetailsComponent extends Component {
                 errSub: '',
                 errDate: '',
                 subIndex: Number(index),
-                selectedSubject: value
+                selectedSubject: value,
+                ExamSetArray : this.state.set
+            })
+        }
+         
+        else if (type == 'set') {
+            if (value != selectSet) {
+               
+                this.setState({
+                    pickerDate: new Date(),
+                    selectedDate: ''
+                })
+            }
+            
+            this.setState({
+                errClass: '',
+                errSection: '',
+                errSub: '',
+                errDate: '',
+                setIndex: Number(index),
+                selectSet: value
             })
         }
     }
@@ -460,19 +495,26 @@ class SelectDetailsComponent extends Component {
                                     let testID = []
                                     let examDates = []
                                     let subjects = []
+                                    let set =[]
                                     _.filter(studentsAndExamData.data.exams, function (o) {
                                         subArr.push(o.subject + " " + o.examDate)
                                         testID.push(o.examId)
                                         examDates.push(o.examDate)
                                         subjects.push(o.subject)
+                                        set.push(o.set)
+                                        
                                     })
+                    
+
+                                    
                                     this.setState({
                                         errSection: '',
                                         sectionValid: true,
                                         subArr: subArr,
                                         examTestID: testID,
                                         examDate: examDates,
-                                        subjectsData: subjects
+                                        subjectsData: subjects,
+                                        set:set
 
                                     })
                                 }
@@ -482,6 +524,7 @@ class SelectDetailsComponent extends Component {
                                     errSection: Strings.please_select_valid_section,
                                     sectionValid: false,
                                     subIndex: -1,
+                                    setIndex:-1,
                                     selectedSubject: '',
                                     selectedDate: '',
                                     pickerDate: new Date()
@@ -620,7 +663,7 @@ class SelectDetailsComponent extends Component {
     }
 
     validateFields = () => {
-        const { classListIndex, subIndex, sectionListIndex, sectionValid } = this.state
+        const { classListIndex, subIndex, sectionListIndex, sectionValid ,setIndex} = this.state
         const { scanTypeData } = this.props
         if (classListIndex == -1) {
             this.setState({
@@ -650,7 +693,7 @@ class SelectDetailsComponent extends Component {
             })
             return false
         }
-        if (subIndex == -1) {
+       else if (subIndex == -1) {
             this.setState({
                 errClass: '',
                 errSection: '',
@@ -659,18 +702,27 @@ class SelectDetailsComponent extends Component {
             })
             return false
         }
+        // if (setIndex == -1) {
+        //     this.setState({
+        //         errClass: '',
+        //         errSection: '',
+        //         errSub: '',
+        //         errSet: Strings.please_select_sub,
+        //         errDate: ''
+        //     })
+        //     return false
+        // }
 
         return true
     }
 
     onSubmitClick = () => {
-        const { selectedClass, selectedClassId, selectedSection, examTestID, subIndex, examDate, subjectsData } = this.state
+        const { selectedClass, selectedClassId, selectedSection, examTestID, subIndex, examDate, subjectsData ,selectSet,setIndex} = this.state
         const { loginData } = this.props
         this.setState({
             errClass: '',
             errSub: '',
             errSection: '',
-            errSub: '',
             isLoading: true
         }, () => {
             let valid = this.validateFields()
@@ -681,6 +733,7 @@ class SelectDetailsComponent extends Component {
                     examDate: examDate[subIndex],
                     section: selectedSection,
                     subject: subjectsData[subIndex],
+                    // set:selectSet[subIndex],
                     examTestID: examTestID[subIndex],
                 }
                 this.props.FilteredDataAction(obj)
@@ -700,7 +753,8 @@ class SelectDetailsComponent extends Component {
         let dataPayload = {
             classId: this.state.selectedClassId,
             section: this.state.selectedSection,
-            subject: this.state.selectedSubject
+            subject: this.state.selectedSubject,
+            // set: this.state.selectSet
         }
         let apiObj = new GetStudentsAndExamData(dataPayload, token);
         this.props.APITransport(apiObj)
@@ -753,11 +807,12 @@ class SelectDetailsComponent extends Component {
             this.setState({ dateVisible: false })
         }
     }
-
+    
+     
 
     render() {
-        const { navigation, isLoading, defaultSelected, classList, classListIndex, selectedClass, sectionList, sectionListIndex, selectedSection, pickerDate, selectedDate, subArr, selectedSubject, subIndex, errClass, errSub, errDate, errSection, sectionValid, dateVisible, examTestID } = this.state
-        const { loginData, multiBrandingData, modalStatus, modalMessage } = this.props
+        const { navigation, isLoading, defaultSelected, classList, classListIndex, selectedClass, sectionList,setIndex,set,ExamSetArray, sectionListIndex, selectedSection, pickerDate, selectedDate, subArr, selectedSubject,selectSet, subIndex, errClass, errSub,errSet, errDate, errSection, sectionValid, dateVisible, examTestID,examSetData } = this.state
+        const { loginData, multiBrandingData, modalStatus, modalMessage ,studentsAndExamData} = this.props
         const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.selectDetails[0]
         return (
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
@@ -847,12 +902,34 @@ class SelectDetailsComponent extends Component {
                                         <Text style={[styles.labelTextStyle]}>{BrandLabel && BrandLabel.Subject ? BrandLabel.Subject : Strings.subject}</Text>
                                         {errSub != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 1, width: '50%', textAlign: 'right', fontWeight: 'normal' }]}>{errSub}</Text>}
                                     </View>
+                                    {/* {console.log('subArr',subArr)} */}
                                     <DropDownMenu
                                         options={subArr && subArr}
                                         onSelect={(idx, value) => this.onDropDownSelect(idx, value, 'sub')}
                                         defaultData={defaultSelected}
                                         defaultIndex={subIndex}
                                         selectedData={selectedSubject}
+                                        icon={require('../../assets/images/arrow_down.png')}
+                                    />
+                                </View>
+                            }
+
+                      {
+                             ExamSetArray[subIndex] != null && ExamSetArray[subIndex] != '' &&  subIndex != -1 &&
+                                <View style={[styles.fieldContainerStyle, {bottom:25, paddingBottom: subIndex != -1 ? '10%' : '10%' }]}>
+                                    <View style={{ flexDirection: 'row' }}>
+                                        <Text style={[styles.labelTextStyle]}>{BrandLabel && BrandLabel.Set ? BrandLabel.Set : Strings.set_text}</Text>
+                                        {errSub != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 1, width: '50%', textAlign: 'right', fontWeight: 'normal' }]}>{errSub}</Text>}
+                                    </View>
+                                    {
+                                        console.log('ExamSetArray[subIndex]',ExamSetArray[subIndex])
+                                    }
+                                    <DropDownMenu
+                                        options={ExamSetArray[subIndex]}
+                                        onSelect={(idx, value) => this.onDropDownSelect(idx, value, 'set')}
+                                        defaultData={defaultSelected}
+                                        defaultIndex={setIndex}
+                                        selectedData={selectSet}
                                         icon={require('../../assets/images/arrow_down.png')}
                                     />
                                 </View>
