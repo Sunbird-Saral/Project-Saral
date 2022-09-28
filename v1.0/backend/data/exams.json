@@ -7721,7 +7721,6 @@
     "examDate": "11/10/2021",
     "totalMarks": 20,
     "type": "hindi_8s_13q_omr",
-    "set": ["A","B","C"],
     "questions": [
       {
         "questionId": "ROLLNUMBER1_Q1_1",
@@ -8878,7 +8877,6 @@
     "examDate": "11/10/2021",
     "totalMarks": 20,
     "type": "hindi_8s_13q_omr",
-    "set": ["A","B","C"],
     "questions": [
       {
         "questionId": "ROLLNUMBER1_Q1_1",
