@@ -93,15 +93,15 @@ const ScanHistoryCard = ({
 
     const onPressSaveInDB = async () => {
         const data = await getScannedDataFromLocal();
-        const { subject, examDate } = filteredData.response
-
+        const { subject, examDate, set } = filteredData.response
+         console.log('data>>>>',data , set)
         if (data) {
             if (!bgFlag) {
             const filterData = data.filter((e) => {
 
                 let findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.response.section)
-
-                if (e.classId == filteredData.response.class && e.subject == subject && e.examDate == examDate && findSection) {
+                // console.log('e.set == set',e.set,set)
+                if (e.classId == filteredData.response.class && e.subject == subject && e.examDate == examDate && e.set == set && findSection) {
                     return true
                 } else {
                     return false
@@ -118,7 +118,8 @@ const ScanHistoryCard = ({
                     let findSection = f.studentsMarkInfo.some((item) => item.section == filteredData.response.section)
 
                     setIntolocalAfterFilter = data.filter((e) => {
-                        if (e.classId == f.classId && e.subject == f.subject && e.examDate == f.examDate && findSection) {
+                        // console.log('e.set == f.set',e.set,f.set);
+                        if (e.classId == f.classId && e.subject == f.subject && e.examDate == f.examDate && e.set == f.set && findSection) {
                             return false
                         } else {
                             return true
@@ -128,6 +129,7 @@ const ScanHistoryCard = ({
 
                 let apiObj = new SaveScanData(filterData[0], loginData.data.token);
                 saveScanData(apiObj, filterDataLen, setIntolocalAfterFilter);
+                // console.log('apiObj>>>',apiObj);
 
             } else {
                 callCustomModal(Strings.message_text,Strings.there_is_no_data,false);
@@ -179,11 +181,13 @@ const ScanHistoryCard = ({
             "subject": filteredData.response.subject,
             "section": filteredData.response.section,
             "fromDate": filteredData.response.examDate,
+            "set": filteredData.response.set,
             "page": 0,
             "schoolId": loginCred.schoolId,
             "downloadRes": false
         }
         let apiObj = new scanStatusDataAction(dataPayload);
+        console.log('apiObj>>>>>>>',apiObj)
         FetchSavedScannedData(apiObj, loginCred.schoolId, loginCred.password, filteredDatalen, localScanData)
     }
 

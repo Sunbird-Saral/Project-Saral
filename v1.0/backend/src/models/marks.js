@@ -107,7 +107,7 @@ const marksSchema = new mongoose.Schema({
         trim: true,
     },
     set:{
-        type: String,
+        type: Array,
         required: false
     }
 })

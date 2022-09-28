@@ -180,7 +180,8 @@ class SelectDetailsComponent extends Component {
     }
 
     onDropDownSelect = (index, value, type) => {
-        const { loginDetails, classesArr, selectedClass, selectedClassId, selectedSection, selectedSubject } = this.state
+        // console.log('value',index);
+        const { loginDetails, classesArr, selectedClass, selectedClassId, selectedSection, selectedSubject,selectSet } = this.state
         if (type == 'class') {
             if (value != selectedClass) {
                 const sections = [...classesArr[index].sections]
@@ -263,6 +264,7 @@ class SelectDetailsComponent extends Component {
             })
         }
         else if (type == 'sub') {
+            let setData = []
             if (value != selectedSubject) {
                
                 this.setState({
@@ -270,7 +272,13 @@ class SelectDetailsComponent extends Component {
                     selectedDate: ''
                 })
             }
-            
+            // setData = this.props.studentsAndExamData.data.exams.map(item=>{
+            //     if(item.hasOwnProperty('set')){
+            //     return true
+            //     }
+            //  })
+            //  console.log('data>>>>>>>', setData.indexOf('false'))
+        
             this.setState({
                 errClass: '',
                 errSection: '',
@@ -502,7 +510,7 @@ class SelectDetailsComponent extends Component {
                                         examDates.push(o.examDate)
                                         subjects.push(o.subject)
                                         set.push(o.set)
-                                        
+                                        console.log('o>>>>>>',o);
                                     })
                     
 
@@ -702,16 +710,7 @@ class SelectDetailsComponent extends Component {
             })
             return false
         }
-        // if (setIndex == -1) {
-        //     this.setState({
-        //         errClass: '',
-        //         errSection: '',
-        //         errSub: '',
-        //         errSet: Strings.please_select_sub,
-        //         errDate: ''
-        //     })
-        //     return false
-        // }
+     
 
         return true
     }
@@ -719,6 +718,8 @@ class SelectDetailsComponent extends Component {
     onSubmitClick = () => {
         const { selectedClass, selectedClassId, selectedSection, examTestID, subIndex, examDate, subjectsData ,selectSet,setIndex} = this.state
         const { loginData } = this.props
+        console.log(selectSet[subIndex]);
+        console.log(subjectsData[subIndex]);
         this.setState({
             errClass: '',
             errSub: '',
@@ -733,7 +734,7 @@ class SelectDetailsComponent extends Component {
                     examDate: examDate[subIndex],
                     section: selectedSection,
                     subject: subjectsData[subIndex],
-                    // set:selectSet[subIndex],
+                    set:selectSet[subIndex],
                     examTestID: examTestID[subIndex],
                 }
                 this.props.FilteredDataAction(obj)
@@ -814,6 +815,8 @@ class SelectDetailsComponent extends Component {
         const { navigation, isLoading, defaultSelected, classList, classListIndex, selectedClass, sectionList,setIndex,set,ExamSetArray, sectionListIndex, selectedSection, pickerDate, selectedDate, subArr, selectedSubject,selectSet, subIndex, errClass, errSub,errSet, errDate, errSection, sectionValid, dateVisible, examTestID,examSetData } = this.state
         const { loginData, multiBrandingData, modalStatus, modalMessage ,studentsAndExamData} = this.props
         const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.selectDetails[0]
+        // console.log('ExamSetArray??????>>>>>>>>',ExamSetArray)
+    //    console.log('examSetData',setArr);
         return (
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
                 <ShareComponent
@@ -862,6 +865,8 @@ class SelectDetailsComponent extends Component {
                             {Strings.please_select_below_details}
                         </Text>
                         <View style={{ backgroundColor: 'white', paddingHorizontal: '5%', minWidth: '100%', paddingVertical: '10%', borderRadius: 4 }}>
+                       
+                           
                             <View style={[styles.fieldContainerStyle, { paddingBottom: classListIndex != -1 ? 0 : '10%' }]}>
                                 <View style={{ flexDirection: 'row' }}>
 
