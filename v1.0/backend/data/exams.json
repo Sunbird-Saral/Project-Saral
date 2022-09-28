@@ -7715,8 +7715,8 @@
     "schoolId": "u002"
   },
   {
-    "subject": "Hindi",
-    "examLO": "Hindi",
+    "subject": "Maths",
+    "examLO": "Maths",
     "classId": "2",
     "examDate": "11/10/2021",
     "totalMarks": 20,
@@ -8872,8 +8872,8 @@
     "schoolId": "u002"
   },
   {
-    "subject": "Hindi",
-    "examLO": "Hindi",
+    "subject": "English",
+    "examLO": "English",
     "classId": "2",
     "examDate": "11/10/2021",
     "totalMarks": 20,
