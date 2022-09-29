@@ -15,7 +15,7 @@ import {
 import { Assets } from '../../assets/index'
 import { checkNetworkConnectivity, monospace_FF } from '../../utils/CommonUtils';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { getLoginApi, setLoginApi } from '../../utils/offlineStorageUtils';
+import { getBrandingDataApi, getLoginApi, setLoginApi } from '../../utils/offlineStorageUtils';
 import { storeFactory } from '../../flux/store/store';
 import constants from '../../flux/actions/constants';
 
@@ -61,12 +61,36 @@ class LoginComponent extends Component {
         this.timerState = setTimeout(() => { this.setState({ Loading: false }) }, 5000)
         if (hasNetwork) {
             this.callDefaultbrandingData()
+        } else {
+           await this.callBrandingCache(schollId)
         }
         this.props.navigation.addListener('willFocus', async payload => {
             AppState.addEventListener('change', this.handleAppStateChange);
             this.componentMountCall()
         })
     }
+
+    async callBrandingCache(key) {
+        let hasCacheData = await getBrandingDataApi();
+        if (hasCacheData) {
+            let cacheFilterData = hasCacheData.filter((element) => {
+                if (element.key == key) {
+                    return true
+                }
+            });
+            storeFactory.dispatch(this.dispatchBrandingDataApi(cacheFilterData.length > 0 ? cacheFilterData[0].data : []))
+        } else {
+            //Alert message show message "something went wrong or u don't have cache in local"
+        }
+    }
+
+    dispatchBrandingDataApi(payload) {
+        return {
+            type: constants.DEFAULT_BRAND,
+            payload
+        }
+    }
+
     componentWillUnmount() {
         clearTimeout(this.timerState)
     }
@@ -203,6 +227,7 @@ class LoginComponent extends Component {
     }
 
     onLoginDetailsChange = (text, type,value) => {
+        this.callBrandingCache(text)
         this.setState({ [type]: text })
          this.toggleRememberMe()
     }
