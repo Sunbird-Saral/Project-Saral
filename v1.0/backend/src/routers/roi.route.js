@@ -120,8 +120,8 @@ router.get('/roi/:examId',auth, async (req, res) => {
                         classId: examExist.classId,
                         subject: examExist.subject,
                         state: school.state,
-                        type: examExist.type
-                        // set: examExist.set
+                        type: examExist.type,
+                        set: examExist.set
                     }
                     roi = await ROI.find(examSetLookupExist,{_id: 0,__v: 0 }).lean()
                 }else{

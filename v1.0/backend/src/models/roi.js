@@ -41,7 +41,7 @@ const ROISchema = new mongoose.Schema({
         trim: true
     },
     set:{
-        type: Array,
+        type: String,
         required: false
     },
     type:{

@@ -6564,7 +6564,7 @@
     "examDate": "11/10/2021",
     "totalMarks": 20,
     "type": "hindi_8s_13q_omr",
-    "set": ["A","B","C"],
+    "set": "A",
     "questions": [
       {
         "questionId": "ROLLNUMBER1_Q1_1",
@@ -7715,12 +7715,13 @@
     "schoolId": "u002"
   },
   {
-    "subject": "Maths",
-    "examLO": "Maths",
+    "subject": "Hindi",
+    "examLO": "Hindi",
     "classId": "2",
     "examDate": "11/10/2021",
     "totalMarks": 20,
     "type": "hindi_8s_13q_omr",
+    "set": "B",
     "questions": [
       {
         "questionId": "ROLLNUMBER1_Q1_1",
@@ -8877,6 +8878,7 @@
     "examDate": "11/10/2021",
     "totalMarks": 20,
     "type": "hindi_8s_13q_omr",
+    "set": "C",
     "questions": [
       {
         "questionId": "ROLLNUMBER1_Q1_1",
