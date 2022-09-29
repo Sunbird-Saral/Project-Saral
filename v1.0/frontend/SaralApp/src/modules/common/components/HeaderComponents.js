@@ -7,7 +7,7 @@ import constants from '../../../flux/actions/constants';
 import { storeFactory } from '../../../flux/store/store';
 import AppTheme from '../../../utils/AppTheme';
 import { dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF } from '../../../utils/CommonUtils';
-import { removeAllCache, removeBrandingApiData, removeLoginApiData, removeRoiDataApiData, removeScanDataApiData, removeStudenExamApiData } from '../../../utils/offlineStorageUtils';
+import { removeAllCache, removeRegularUserCache } from '../../../utils/offlineStorageUtils';
 import { setMinimalValue } from '../../../utils/StorageUtils';
 import Strings from '../../../utils/Strings';
 
@@ -67,16 +67,16 @@ class HeaderComponents extends Component {
         }
 
         async function removeLocalCache() {
-            await removeLoginApiData();
-            await removeBrandingApiData();
-            await removeStudenExamApiData();
-            await removeRoiDataApiData();
-            await removeScanDataApiData();
-            navigation.navigate('auth')
+            if (minimalFlag) {
+                await removeMinimalUserCache();
+            } else {
+                await removeRegularUserCache();
+            }
+            navigation.navigate('auth');
         }
 
         async function removeGlobalCache(){
-            await removeAllCache();
+            await removeAllCache();q
             navigation.navigate('auth')
         }
 

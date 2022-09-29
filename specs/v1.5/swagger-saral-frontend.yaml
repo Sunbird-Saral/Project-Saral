@@ -287,7 +287,7 @@ definitions:
         description: "Download Result. Currently this parameter is always set to false by Saral App ."
       roiId:
         type: string
-        description: roiId field is optional field . It is available when minimal mode is enable.
+        description: roiId field is optional field . It is available when minimal mode is enable.RoiId field is global across school or organisation .
         example: "28"
         
   GetSavedScanResponse:
@@ -317,10 +317,43 @@ definitions:
               example: "D"
             studentId:
               type: string
+              description: student ID which is stored in backend .
               example: "1210001"
+            predictedstudentId:
+              type: string
+              description: student ID which is predicted from layout .
+              example: "1210001"
+            predictionConfidence:
+              type: array
+              description: accuracy of getting predicted student Id.
+              items:
+                type: string
+                example: "89.8"
             securedMarks:
               type: number
               example: 3
+            obtainedMarksTrainingData:
+              type: array
+              description: It contains base 64 encoded images of obtained marks .
+              items:
+                type: string
+            obtainedMarksConfidence:
+              type: array
+              description: accuracy of getting predicted obtained marks.
+              items:
+                type: string
+                example: "89.8"
+            maxMarksTrainingData:
+              type: array
+              description: It contains base 64 encoded images of max marks .
+              items:
+                type: string
+            maxMarksConfidence:
+              type: array
+              description: accuracy of getting predicted max marks.
+              items:
+                type: string
+                example: "89.8"
             totalMarks:
               type: number
               example: 5
@@ -335,8 +368,14 @@ definitions:
               example: Maths
             roiId:
               type: string
-              description: roiId field is optional field . It is available when minimal mode is enable.
+              description: roiId field is optional field . It is available when minimal mode is enable. RoiId field is global across school or organisation.
               example: "28"
+            examId:
+              type: string
+              example: "18"
+            createdOn:
+              type: string
+              example: "121088802"
   
   fetchStudentsandExamsByQuery:
     type: object
@@ -371,7 +410,7 @@ definitions:
         $ref: '#/definitions/StudentMarkInfo'
       roiId: 
           type: string
-          description: roiId field is optional field . It is available when minimal mode is enable.
+          description: roiId field is optional field . It is available when minimal mode is enable. RoiId field is global across school or organisation.
           example: "28"
         
   StudentMarkInfo:
@@ -442,6 +481,12 @@ definitions:
           items:
             type: string
             example: "22.99"
+        tags:
+          type: array
+          description: tags will only be visible in UI and saved in db when in login API tags will be true.
+          items:
+            type: string
+            example: "poetry"
         trainingData:
           type: array
           items:
@@ -598,6 +643,7 @@ definitions:
         roiId:
           type: number
           example: 1
+          description: RoiId field is global across school or organisation.
         index:
           type: string
           example: 0
@@ -659,6 +705,24 @@ definitions:
           name:
             type: string
             example: "UP SAT Exam Sheet Form"
+          threshold:
+            type: object
+            properties:
+              minWidth:
+                type: number
+                example: 690
+                description: Minimum width of layout for detection
+              minHeight:
+                type: number
+                example: 390
+                description: Minimum height of layout for detection
+              detectionRadius:
+                type: number
+                example: 12
+              experimentalOMRDetection:
+                type: boolean
+                example: true
+                description: when this field is true then pencil omr detection is also possible. 
           cells:
             $ref: '#/definitions/cells' 
 

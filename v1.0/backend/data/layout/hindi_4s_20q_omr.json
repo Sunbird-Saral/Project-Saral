@@ -5,9 +5,9 @@
         "threshold": {
             "minWidth" : 690,
             "minHeight": 390,
-            "detectionRadius": 12
+            "detectionRadius": 12,
+            "experimentalOMRDetection": true
         }, 
-        "identifierPrefix": "ROLLNUMBERID",
         "resultValidation": {
             "validate": {
                 "regExp": "^[0-1]$",

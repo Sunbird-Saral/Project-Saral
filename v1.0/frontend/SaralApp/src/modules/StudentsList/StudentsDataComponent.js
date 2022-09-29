@@ -54,13 +54,13 @@ const StudentsDataComponent = ({
 
                 let findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.section)
 
-                if (e.classId === filteredData.class && e.subject === filteredData.subject && findSection) {
+                if (e.classId === filteredData.class && e.subject === filteredData.subject && findSection && e.examDate == filteredData.examDate) {
                     return e
                 }
             })
 
             if (filterStdData.length > 0) {
-                isStudentScannedInLocal = filterStdData[0].studentsMarkInfo.filter((o) => o.studentId == data.studentId && o.studentAvailability === true && o.marksInfo.length > 0)
+                isStudentScannedInLocal = filterStdData[0].studentsMarkInfo.filter((o) => { return o.studentId == data.studentId && o.studentAvailability === true && o.marksInfo.length > 0})
             }
         }
 
@@ -116,10 +116,9 @@ const StudentsDataComponent = ({
             else {
                 filterStdData[0].studentsMarkInfo.push(stdObj);
             }
-            
             let findIndex = localStdData.findIndex((el)=> {
-                let findSection = el.studentsMarkInfo.some((item) => item.section == filteredData.section)
-                if (el.classId === filteredData.class && el.subject === filteredData.subject && findSection) {
+                let findSection = el.studentsMarkInfo.some((item) => item.section == filteredData.section )
+                if (el.classId === filteredData.class && el.subject === filteredData.subject && findSection && el.examDate == filteredData.examDate && el.examId == filteredData.examTestID) {
                     return true
                 }
             });
@@ -133,6 +132,7 @@ const StudentsDataComponent = ({
                 "subject": filteredData.subject,
                 "studentsMarkInfo": [stdObj],
                 "examId": filteredData.examTestID,
+                "userId": loginData.data.school.schoolId
             }
             if (filterStdData.length == 0 && localStdData != null) {
                 localStdData.push(saveObj);

@@ -150,18 +150,19 @@ class Brands extends PureComponent {
 
 
 
-    componentDidMount() {
+   async componentDidMount() {
 
         const { loginData, dispatch } = this.props;
 
  
 
         const bgTimer = Object.keys(loginData).length > 0  && loginData.data.school.hasOwnProperty("autoSyncFrequency") ? loginData.data.school.autoSyncFrequency : 600000
-        setInterval(() => {
+        setInterval(async() => {
             const hasAutoSync = Object.keys(loginData).length > 0  && loginData.data.school.hasOwnProperty("autoSync") && loginData.data.school.autoSync ? true : false
+            const hasNetwork = await this.checkNetworkConnectivity();
             if (hasAutoSync) {
                 const isLogin = loginData.status
-                if (isLogin == 200) {
+                if (isLogin == 200 & hasNetwork) {
                     storeFactory.dispatch( this.flagAction(true))
                     if (this.checkNetworkConnectivity()) {
                         this.saveDataInDB()
