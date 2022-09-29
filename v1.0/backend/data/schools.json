@@ -20,7 +20,8 @@
     "autoSyncFrequency": 600000,
     "storeTrainingData": true,
     "tags": false,
-    "supportEmail": "abc@gmail.com"
+    "supportEmail": "abc@gmail.com",
+    "offline": true
   },
   {
     "name": "Dummy school 3",
@@ -90,6 +91,17 @@
     "schoolId": "09670703101",
     "password": "tarento@123",
     "state": "up",
+    "autoSync": false,
+    "autoSyncFrequency": 600000,
+    "storeTrainingData": true,
+    "tags": false,
+    "supportEmail": "abc@gmail.com , xyz@gmail.com"
+  },
+  {
+    "name": "Dummy school 5",
+    "schoolId": "jk001",
+    "password": "tarento@123",
+    "state": "jharakhand",
     "autoSync": false,
     "autoSyncFrequency": 600000,
     "storeTrainingData": true,

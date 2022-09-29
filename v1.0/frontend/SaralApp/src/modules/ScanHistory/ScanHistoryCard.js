@@ -250,14 +250,14 @@ const ScanHistoryCard = ({
     }
 
     // for exam type
-    let Examtypedata = studentsAndExamData.data.exams
-    Examtypedata = studentsAndExamData.data.exams.filter(function (item) {
+    let Examtypedata = studentsAndExamData.data&&studentsAndExamData.data.exams
+    Examtypedata = studentsAndExamData.data&&studentsAndExamData.data.exams.filter(function (item) {
         return item.subject == filteredData.response.subject;
     }).map(({ type }) => ({ type }));
 
     
-    let ExamQuesDetail = studentsAndExamData.data.exams
-    ExamQuesDetail = studentsAndExamData.data.exams.filter(function (item) {
+    let ExamQuesDetail = studentsAndExamData.data&&studentsAndExamData.data.exams
+    ExamQuesDetail = studentsAndExamData.data&&studentsAndExamData.data.exams.filter(function (item) {
         return item.subject == filteredData.response.subject;
     })
     return (
@@ -306,7 +306,7 @@ const ScanHistoryCard = ({
                             <Text style={{fontFamily : monospace_FF}} >{BrandLabel&&BrandLabel.ExamType ? BrandLabel.ExamType:Strings.Exam_Type}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle,]}>
-                                {Examtypedata.map((item) =>
+                                {Examtypedata&&Examtypedata.map((item) =>
                                     <View key={item}>
                                         <Text style={{fontFamily : monospace_FF}} >{item.type}</Text>
                                     </View>
@@ -463,7 +463,7 @@ const ScanHistoryCard = ({
                             }
                         </View>
                         <View style={styles1.container1}>
-                            {ExamQuesDetail[0]&&ExamQuesDetail[0].questions != undefined && 
+                            {ExamQuesDetail&&ExamQuesDetail[0]&&ExamQuesDetail[0].questions != undefined && 
                                 ExamQuesDetail[0].questions != "" ?
                                 ExamQuesDetail[0] && ExamQuesDetail[0].questions.map((stu) => {
                                 return (

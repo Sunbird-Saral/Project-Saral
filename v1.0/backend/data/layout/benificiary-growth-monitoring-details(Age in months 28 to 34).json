@@ -1,0 +1,3537 @@
+{
+    "layout": {
+        "version": "1.0",
+        "name": "beneficiary growth monitoring Sheet Form",
+        "threshold": {
+            "minWidth": 0,
+            "minHeight": 0,
+            "detectionRadius": 12
+        },
+        "identifierPrefix": "CHILDID",
+        "cells": [
+            {
+                "cellId": "1",
+                "rois": [
+                    {
+                        "annotationTags": "CHILDID1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "1",
+                        "index": 0,
+                        "rect": {
+                            "top": 22,
+                            "left": 270,
+                            "bottom": 55,
+                            "right": 292
+                        }
+                    },
+                    {
+                        "annotationTags": "CHILDID2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "2",
+                        "index": 1,
+                        "rect": {
+                            "top": 22,
+                            "left": 294,
+                            "bottom": 55,
+                            "right": 315
+                        }
+                    },
+                    {
+                        "annotationTags": "CHILDID3",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "3",
+                        "index": 2,
+                        "rect": {
+                            "top": 22,
+                            "left": 317,
+                            "bottom": 55,
+                            "right": 339
+                        }
+                    },
+                    {
+                        "annotationTags": "CHILDID4",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "4",
+                        "index": 3,
+                        "rect": {
+                            "top": 22,
+                            "left": 341,
+                            "bottom": 53,
+                            "right": 363
+                        }
+                    },
+                    {
+                        "annotationTags": "CHILDID5",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "5",
+                        "index": 4,
+                        "rect": {
+                            "top": 22,
+                            "left": 364,
+                            "bottom": 54,
+                            "right": 387
+                        }
+                    },
+                    {
+                        "annotationTags": "CHILDID6",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "6",
+                        "index": 5,
+                        "rect": {
+                            "top": 22,
+                            "left": 388,
+                            "bottom": 55,
+                            "right": 410
+                        }
+                    },
+                    {
+                        "annotationTags": "CHILDID7",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "7",
+                        "index": 6,
+                        "rect": {
+                            "top": 22,
+                            "left": 413,
+                            "bottom": 53,
+                            "right": 435
+                        }
+                    },
+                    {
+                        "annotationTags": "CHILDID8",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "8",
+                        "index": 7,
+                        "rect": {
+                            "top": 22,
+                            "left": 436,
+                            "bottom": 53,
+                            "right": 459
+                        }
+                    },
+                    {
+                        "annotationTags": "CHILDID9",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "9",
+                        "index": 8,
+                        "rect": {
+                            "top": 22,
+                            "left": 460,
+                            "bottom": 55,
+                            "right": 481
+                        }
+                    },
+                    {
+                        "annotationTags": "CHILDID10",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "10",
+                        "index": 9,
+                        "rect": {
+                            "top": 23,
+                            "left": 483,
+                            "bottom": 56,
+                            "right": 505
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 1
+                },
+                "format": {
+                    "name": "CHILDID",
+                    "value": "CHILDID"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "2",
+                "rois": [
+                    {
+                        "annotationTags": "AIM28_HEIGHTINCM1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "11",
+                        "index": 0,
+                        "rect": {
+                            "top": 221,
+                            "left": 80,
+                            "bottom": 253,
+                            "right": 101
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM28_HEIGHTINCM1_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "12",
+                        "index": 1,
+                        "rect": {
+                            "top": 222,
+                            "left": 104,
+                            "bottom": 254,
+                            "right": 125
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM28_HEIGHTINCM1_3",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "13",
+                        "index": 2,
+                        "rect": {
+                            "top": 221,
+                            "left": 127,
+                            "bottom": 254,
+                            "right": 149
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 2
+                },
+                "format": {
+                    "name": "AIM28_HEIGHTINCM",
+                    "value": "AIM28 HEIGHTINCM"
+                },
+                "validate": {
+                    "regExp": "^[0-9]{3}$",
+                    "errorMsg": "Please enter valid values (0-9)"
+                }
+            },
+            {
+                "cellId": "3",
+                "rois": [
+                    {
+                        "annotationTags": "AIM28_HEIGHTINMM2_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "14",
+                        "index": 0,
+                        "rect": {
+                            "top": 222,
+                            "left": 150,
+                            "bottom": 254,
+                            "right": 173
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 3
+                },
+                "format": {
+                    "name": "AIM28_HEIGHTINMM",
+                    "value": "AIM28 HEIGHTINMM"
+                },
+                "validate": {
+                    "regExp": "^[0-9]{1}$",
+                    "errorMsg": "Please enter valid values (0-9)"
+                }
+            },
+            {
+                "cellId": "4",
+                "rois": [
+                    {
+                        "annotationTags": "AIM28_WEIGHTINKG1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "15",
+                        "index": 0,
+                        "rect": {
+                            "top": 221,
+                            "left": 175,
+                            "bottom": 253,
+                            "right": 197
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM28_WEIGHTINKG1_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "16",
+                        "index": 1,
+                        "rect": {
+                            "top": 222,
+                            "left": 199,
+                            "bottom": 255,
+                            "right": 221
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 4
+                },
+                "format": {
+                    "name": "AIM28_WEIGHTINKG",
+                    "value": "AIM28 WEIGHTINKG"
+                },
+                "validate": {
+                    "regExp": "^[0-9]{2}$",
+                    "errorMsg": "Please enter valid values (0-9)"
+                }
+            },
+            {
+                "cellId": "5",
+                "rois": [
+                    {
+                        "annotationTags": "AIM28_WEIGHTINMG2_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "17",
+                        "index": 0,
+                        "rect": {
+                            "top": 222,
+                            "left": 222,
+                            "bottom": 254,
+                            "right": 244
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM28_WEIGHTINMG2_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "18",
+                        "index": 1,
+                        "rect": {
+                            "top": 222,
+                            "left": 247,
+                            "bottom": 254,
+                            "right": 268
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM28_WEIGHTINMG2_3",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "19",
+                        "index": 2,
+                        "rect": {
+                            "top": 222,
+                            "left": 269,
+                            "bottom": 254,
+                            "right": 291
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 5
+                },
+                "format": {
+                    "name": "AIM28_WEIGHTINMG",
+                    "value": "AIM28 WEIGHTINMG"
+                },
+                "validate": {
+                    "regExp": "^[0-9]{3}$",
+                    "errorMsg": "Please enter valid values (0-9)"
+                }
+            },
+            {
+                "cellId": "6",
+                "rois": [
+                    {
+                        "annotationTags": "AIM28_DOM1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "20",
+                        "index": 0,
+                        "rect": {
+                            "top": 222,
+                            "left": 292,
+                            "bottom": 254,
+                            "right": 315
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM28_DOM1_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "21",
+                        "index": 1,
+                        "rect": {
+                            "top": 223,
+                            "left": 317,
+                            "bottom": 253,
+                            "right": 339
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM28_DOM1_3",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "22",
+                        "index": 2,
+                        "rect": {
+                            "top": 222,
+                            "left": 341,
+                            "bottom": 253,
+                            "right": 362
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM28_DOM1_4",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "23",
+                        "index": 3,
+                        "rect": {
+                            "top": 223,
+                            "left": 364,
+                            "bottom": 255,
+                            "right": 387
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM28_DOM1_5",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "24",
+                        "index": 4,
+                        "rect": {
+                            "top": 222,
+                            "left": 388,
+                            "bottom": 254,
+                            "right": 409
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM28_DOM1_6",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "25",
+                        "index": 5,
+                        "rect": {
+                            "top": 221,
+                            "left": 412,
+                            "bottom": 254,
+                            "right": 434
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 6
+                },
+                "format": {
+                    "name": "AIM28_DOM",
+                    "value": "AIM28 DOM"
+                },
+                "validate": {
+                    "regExp": "^[0-9]{6}$",
+                    "errorMsg": "Please enter valid values (0-9)"
+                }
+            },
+            {
+                "cellId": "7",
+                "rois": [
+                    {
+                        "annotationTags": "AIM28_STUNTED1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "26",
+                        "index": 0,
+                        "rect": {
+                            "top": 221,
+                            "left": 436,
+                            "bottom": 252,
+                            "right": 457
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 7
+                },
+                "format": {
+                    "name": "AIM28_STUNTED",
+                    "value": "AIM28 STUNTED"
+                },
+                "validate": {
+                    "regExp": "^[0-2]{1}$",
+                    "errorMsg": "Please enter valid values (0-2)"
+                }
+            },
+            {
+                "cellId": "8",
+                "rois": [
+                    {
+                        "annotationTags": "AIM28_WASTED1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "27",
+                        "index": 0,
+                        "rect": {
+                            "top": 221,
+                            "left": 459,
+                            "bottom": 254,
+                            "right": 480
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 8
+                },
+                "format": {
+                    "name": "AIM28_WASTED",
+                    "value": "AIM28 WASTED"
+                },
+                "validate": {
+                    "regExp": "^[0-2]{1}$",
+                    "errorMsg": "Please enter valid values (0-2)"
+                }
+            },
+            {
+                "cellId": "9",
+                "rois": [
+                    {
+                        "annotationTags": "AIM28_UNDERWEIGHT1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "28",
+                        "index": 0,
+                        "rect": {
+                            "top": 221,
+                            "left": 483,
+                            "bottom": 254,
+                            "right": 504
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 9
+                },
+                "format": {
+                    "name": "AIM28_UNDERWEIGHT",
+                    "value": "AIM28 UNDERWEIGHT"
+                },
+                "validate": {
+                    "regExp": "^[0-2]{1}$",
+                    "errorMsg": "Please enter valid values (0-2)"
+                }
+            },
+            {
+                "cellId": "10",
+                "rois": [
+                    {
+                        "annotationTags": "AIM28_EDEMA1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "29",
+                        "index": 0,
+                        "rect": {
+                            "top": 222,
+                            "left": 506,
+                            "bottom": 253,
+                            "right": 528
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 10
+                },
+                "format": {
+                    "name": "AIM28_EDEMA",
+                    "value": "AIM28 EDEMA"
+                },
+                "validate": {
+                    "regExp": "^[0-1]{1}$",
+                    "errorMsg": "Please enter valid values (0-1)"
+                }
+            },
+            {
+                "cellId": "11",
+                "rois": [
+                    {
+                        "annotationTags": "AIM28_ELIGIBLE_SUPPLIMNTRY1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "30",
+                        "index": 0,
+                        "rect": {
+                            "top": 221,
+                            "left": 529,
+                            "bottom": 254,
+                            "right": 552
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 11
+                },
+                "format": {
+                    "name": "AIM28_ELIGIBLE_SUPPLIMNTRY",
+                    "value": "AIM28 ELIGIBLE SUPPLIMNTRY"
+                },
+                "validate": {
+                    "regExp": "^[0-1]{1}$",
+                    "errorMsg": "Please enter valid values (0-1)"
+                }
+            },
+            {
+                "cellId": "12",
+                "rois": [
+                    {
+                        "annotationTags": "AIM28_ELIGIBLE_REFRAL1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "31",
+                        "index": 0,
+                        "rect": {
+                            "top": 222,
+                            "left": 553,
+                            "bottom": 254,
+                            "right": 576
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 12
+                },
+                "format": {
+                    "name": "AIM28_ELIGIBLE_REFRAL",
+                    "value": "AIM28 ELIGIBLE REFRAL"
+                },
+                "validate": {
+                    "regExp": "^[0-3]{1}$",
+                    "errorMsg": "Please enter valid values (0-3)"
+                }
+            },
+            {
+                "cellId": "13",
+                "rois": [
+                    {
+                        "annotationTags": "AIM28_REASON_REFRAL1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "32",
+                        "index": 0,
+                        "rect": {
+                            "top": 222,
+                            "left": 578,
+                            "bottom": 255,
+                            "right": 600
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 13
+                },
+                "format": {
+                    "name": "AIM28_REASON_REFRAL",
+                    "value": "AIM28 REASON REFRAL"
+                },
+                "validate": {
+                    "regExp": "^[0-4]{1}$",
+                    "errorMsg": "Please enter valid values (0-4)"
+                }
+            },
+            {
+                "cellId": "14",
+                "rois": [
+                    {
+                        "annotationTags": "AIM28_PARENTS_STATUS1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "33",
+                        "index": 0,
+                        "rect": {
+                            "top": 221,
+                            "left": 601,
+                            "bottom": 254,
+                            "right": 623
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 14
+                },
+                "format": {
+                    "name": "AIM28_PARENTS_STATUS",
+                    "value": "AIM28 PARENTS STATUS"
+                },
+                "validate": {
+                    "regExp": "^[0-1]{1}$",
+                    "errorMsg": "Please enter valid values (0-1)"
+                }
+            },
+            {
+                "cellId": "15",
+                "rois": [
+                    {
+                        "annotationTags": "AIM29_HEIGHTINCM1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "34",
+                        "index": 0,
+                        "rect": {
+                            "top": 258,
+                            "left": 81,
+                            "bottom": 286,
+                            "right": 99
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM29_HEIGHTINCM1_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "35",
+                        "index": 1,
+                        "rect": {
+                            "top": 258,
+                            "left": 105,
+                            "bottom": 285,
+                            "right": 123
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM29_HEIGHTINCM1_3",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "36",
+                        "index": 2,
+                        "rect": {
+                            "top": 257,
+                            "left": 129,
+                            "bottom": 285,
+                            "right": 148
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 15
+                },
+                "format": {
+                    "name": "AIM29_HEIGHTINCM",
+                    "value": "AIM29 HEIGHTINCM"
+                },
+                "validate": {
+                    "regExp": "^[0-9]{3}$",
+                    "errorMsg": "Please enter valid values (0-9)"
+                }
+            },
+            {
+                "cellId": "16",
+                "rois": [
+                    {
+                        "annotationTags": "AIM29_HEIGHTINMM2_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "37",
+                        "index": 0,
+                        "rect": {
+                            "top": 258,
+                            "left": 152,
+                            "bottom": 284,
+                            "right": 169
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 16
+                },
+                "format": {
+                    "name": "AIM29_HEIGHTINMM",
+                    "value": "AIM29 HEIGHTINMM"
+                },
+                "validate": {
+                    "regExp": "^[0-9]{1}$",
+                    "errorMsg": "Please enter valid values (0-9)"
+                }
+            },
+            {
+                "cellId": "17",
+                "rois": [
+                    {
+                        "annotationTags": "AIM29_WEIGHTINKG1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "38",
+                        "index": 0,
+                        "rect": {
+                            "top": 258,
+                            "left": 176,
+                            "bottom": 285,
+                            "right": 193
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM29_WEIGHTINKG1_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "39",
+                        "index": 1,
+                        "rect": {
+                            "top": 258,
+                            "left": 201,
+                            "bottom": 284,
+                            "right": 218
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 17
+                },
+                "format": {
+                    "name": "AIM29_WEIGHTINKG",
+                    "value": "AIM29 WEIGHTINKG"
+                },
+                "validate": {
+                    "regExp": "^[0-9]{2}$",
+                    "errorMsg": "Please enter valid values (0-9)"
+                }
+            },
+            {
+                "cellId": "18",
+                "rois": [
+                    {
+                        "annotationTags": "AIM29_WEIGHTINMG2_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "40",
+                        "index": 0,
+                        "rect": {
+                            "top": 258,
+                            "left": 224,
+                            "bottom": 285,
+                            "right": 241
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM29_WEIGHTINMG2_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "41",
+                        "index": 1,
+                        "rect": {
+                            "top": 258,
+                            "left": 247,
+                            "bottom": 284,
+                            "right": 264
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM29_WEIGHTINMG2_3",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "42",
+                        "index": 2,
+                        "rect": {
+                            "top": 258,
+                            "left": 271,
+                            "bottom": 285,
+                            "right": 289
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 18
+                },
+                "format": {
+                    "name": "AIM29_WEIGHTINMG",
+                    "value": "AIM29 WEIGHTINMG"
+                },
+                "validate": {
+                    "regExp": "^[0-9]{3}$",
+                    "errorMsg": "Please enter valid values (0-9)"
+                }
+            },
+            {
+                "cellId": "19",
+                "rois": [
+                    {
+                        "annotationTags": "AIM29_DOM1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "43",
+                        "index": 0,
+                        "rect": {
+                            "top": 258,
+                            "left": 293,
+                            "bottom": 285,
+                            "right": 311
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM29_DOM1_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "44",
+                        "index": 1,
+                        "rect": {
+                            "top": 258,
+                            "left": 319,
+                            "bottom": 285,
+                            "right": 336
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM29_DOM1_3",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "45",
+                        "index": 2,
+                        "rect": {
+                            "top": 258,
+                            "left": 342,
+                            "bottom": 285,
+                            "right": 360
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM29_DOM1_4",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "46",
+                        "index": 3,
+                        "rect": {
+                            "top": 259,
+                            "left": 367,
+                            "bottom": 285,
+                            "right": 384
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM29_DOM1_5",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "47",
+                        "index": 4,
+                        "rect": {
+                            "top": 259,
+                            "left": 389,
+                            "bottom": 283,
+                            "right": 406
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM29_DOM1_6",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "48",
+                        "index": 5,
+                        "rect": {
+                            "top": 258,
+                            "left": 414,
+                            "bottom": 284,
+                            "right": 430
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 19
+                },
+                "format": {
+                    "name": "AIM29_DOM",
+                    "value": "AIM29 DOM"
+                },
+                "validate": {
+                    "regExp": "^[0-9]{6}$",
+                    "errorMsg": "Please enter valid values (0-9)"
+                }
+            },
+            {
+                "cellId": "20",
+                "rois": [
+                    {
+                        "annotationTags": "AIM29_STUNTED1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "49",
+                        "index": 0,
+                        "rect": {
+                            "top": 258,
+                            "left": 437,
+                            "bottom": 282,
+                            "right": 453
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 20
+                },
+                "format": {
+                    "name": "AIM29_STUNTED",
+                    "value": "AIM29 STUNTED"
+                },
+                "validate": {
+                    "regExp": "^[0-2]{1}$",
+                    "errorMsg": "Please enter valid values (0-2)"
+                }
+            },
+            {
+                "cellId": "21",
+                "rois": [
+                    {
+                        "annotationTags": "AIM29_WASTED1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "50",
+                        "index": 0,
+                        "rect": {
+                            "top": 258,
+                            "left": 462,
+                            "bottom": 284,
+                            "right": 477
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 21
+                },
+                "format": {
+                    "name": "AIM29_WASTED",
+                    "value": "AIM29 WASTED"
+                },
+                "validate": {
+                    "regExp": "^[0-2]{1}$",
+                    "errorMsg": "Please enter valid values (0-2)"
+                }
+            },
+            {
+                "cellId": "22",
+                "rois": [
+                    {
+                        "annotationTags": "AIM29_UNDERWEIGHT1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "51",
+                        "index": 0,
+                        "rect": {
+                            "top": 259,
+                            "left": 485,
+                            "bottom": 284,
+                            "right": 502
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 22
+                },
+                "format": {
+                    "name": "AIM29_UNDERWEIGHT",
+                    "value": "AIM29 UNDERWEIGHT"
+                },
+                "validate": {
+                    "regExp": "^[0-2]{1}$",
+                    "errorMsg": "Please enter valid values (0-2)"
+                }
+            },
+            {
+                "cellId": "23",
+                "rois": [
+                    {
+                        "annotationTags": "AIM29_EDEMA1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "52",
+                        "index": 0,
+                        "rect": {
+                            "top": 259,
+                            "left": 508,
+                            "bottom": 285,
+                            "right": 525
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 23
+                },
+                "format": {
+                    "name": "AIM29_EDEMA",
+                    "value": "AIM29 EDEMA"
+                },
+                "validate": {
+                    "regExp": "^[0-1]{1}$",
+                    "errorMsg": "Please enter valid values (0-1)"
+                }
+            },
+            {
+                "cellId": "24",
+                "rois": [
+                    {
+                        "annotationTags": "AIM29_ELIGIBLE_SUPPLIMNTRY1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "53",
+                        "index": 0,
+                        "rect": {
+                            "top": 258,
+                            "left": 531,
+                            "bottom": 285,
+                            "right": 548
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 24
+                },
+                "format": {
+                    "name": "AIM29_ELIGIBLE_SUPPLIMNTRY",
+                    "value": "AIM29 ELIGIBLE SUPPLIMNTRY"
+                },
+                "validate": {
+                    "regExp": "^[0-1]{1}$",
+                    "errorMsg": "Please enter valid values (0-1)"
+                }
+            },
+            {
+                "cellId": "25",
+                "rois": [
+                    {
+                        "annotationTags": "AIM29_ELIGIBLE_REFRAL1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "54",
+                        "index": 0,
+                        "rect": {
+                            "top": 258,
+                            "left": 555,
+                            "bottom": 285,
+                            "right": 574
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 25
+                },
+                "format": {
+                    "name": "AIM29_ELIGIBLE_REFRAL",
+                    "value": "AIM29 ELIGIBLE REFRAL"
+                },
+                "validate": {
+                    "regExp": "^[0-3]{1}$",
+                    "errorMsg": "Please enter valid values (0-3)"
+                }
+            },
+            {
+                "cellId": "26",
+                "rois": [
+                    {
+                        "annotationTags": "AIM29_REASON_REFRAL1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "55",
+                        "index": 0,
+                        "rect": {
+                            "top": 258,
+                            "left": 579,
+                            "bottom": 286,
+                            "right": 597
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 26
+                },
+                "format": {
+                    "name": "AIM29_REASON_REFRAL",
+                    "value": "AIM29 REASON REFRAL"
+                },
+                "validate": {
+                    "regExp": "^[0-4]{1}$",
+                    "errorMsg": "Please enter valid values (0-4)"
+                }
+            },
+            {
+                "cellId": "27",
+                "rois": [
+                    {
+                        "annotationTags": "AIM29_PARENTS_STATUS1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "56",
+                        "index": 0,
+                        "rect": {
+                            "top": 257,
+                            "left": 603,
+                            "bottom": 285,
+                            "right": 622
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 27
+                },
+                "format": {
+                    "name": "AIM29_PARENTS_STATUS",
+                    "value": "AIM29 PARENTS STATUS"
+                },
+                "validate": {
+                    "regExp": "^[0-1]{1}$",
+                    "errorMsg": "Please enter valid values (0-1)"
+                }
+            },
+            {
+                "cellId": "28",
+                "rois": [
+                    {
+                        "annotationTags": "AIM30_HEIGHTINCM1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "57",
+                        "index": 0,
+                        "rect": {
+                            "top": 292,
+                            "left": 81,
+                            "bottom": 319,
+                            "right": 99
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM30_HEIGHTINCM1_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "58",
+                        "index": 1,
+                        "rect": {
+                            "top": 291,
+                            "left": 105,
+                            "bottom": 319,
+                            "right": 123
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM30_HEIGHTINCM1_3",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "59",
+                        "index": 2,
+                        "rect": {
+                            "top": 292,
+                            "left": 129,
+                            "bottom": 319,
+                            "right": 147
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 28
+                },
+                "format": {
+                    "name": "AIM30_HEIGHTINCM",
+                    "value": "AIM30 HEIGHTINCM"
+                },
+                "validate": {
+                    "regExp": "^[0-9]{3}$",
+                    "errorMsg": "Please enter valid values (0-9)"
+                }
+            },
+            {
+                "cellId": "29",
+                "rois": [
+                    {
+                        "annotationTags": "AIM30_HEIGHTINMM2_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "60",
+                        "index": 0,
+                        "rect": {
+                            "top": 291,
+                            "left": 152,
+                            "bottom": 318,
+                            "right": 170
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 29
+                },
+                "format": {
+                    "name": "AIM30_HEIGHTINMM",
+                    "value": "AIM30 HEIGHTINMM"
+                },
+                "validate": {
+                    "regExp": "^[0-9]{1}$",
+                    "errorMsg": "Please enter valid values (0-9)"
+                }
+            },
+            {
+                "cellId": "30",
+                "rois": [
+                    {
+                        "annotationTags": "AIM30_WEIGHTINKG1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "61",
+                        "index": 0,
+                        "rect": {
+                            "top": 292,
+                            "left": 176,
+                            "bottom": 319,
+                            "right": 195
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM30_WEIGHTINKG1_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "62",
+                        "index": 1,
+                        "rect": {
+                            "top": 291,
+                            "left": 200,
+                            "bottom": 319,
+                            "right": 219
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 30
+                },
+                "format": {
+                    "name": "AIM30_WEIGHTINKG",
+                    "value": "AIM30 WEIGHTINKG"
+                },
+                "validate": {
+                    "regExp": "^[0-9]{2}$",
+                    "errorMsg": "Please enter valid values (0-9)"
+                }
+            },
+            {
+                "cellId": "31",
+                "rois": [
+                    {
+                        "annotationTags": "AIM30_WEIGHTINMG2_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "63",
+                        "index": 0,
+                        "rect": {
+                            "top": 292,
+                            "left": 224,
+                            "bottom": 319,
+                            "right": 242
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM30_WEIGHTINMG2_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "64",
+                        "index": 1,
+                        "rect": {
+                            "top": 291,
+                            "left": 248,
+                            "bottom": 319,
+                            "right": 265
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM30_WEIGHTINMG2_3",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "65",
+                        "index": 2,
+                        "rect": {
+                            "top": 291,
+                            "left": 272,
+                            "bottom": 319,
+                            "right": 289
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 31
+                },
+                "format": {
+                    "name": "AIM30_WEIGHTINMG",
+                    "value": "AIM30 WEIGHTINMG"
+                },
+                "validate": {
+                    "regExp": "^[0-9]{3}$",
+                    "errorMsg": "Please enter valid values (0-9)"
+                }
+            },
+            {
+                "cellId": "32",
+                "rois": [
+                    {
+                        "annotationTags": "AIM30_DOM2_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "66",
+                        "index": 0,
+                        "rect": {
+                            "top": 291,
+                            "left": 296,
+                            "bottom": 319,
+                            "right": 313
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM30_DOM2_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "67",
+                        "index": 1,
+                        "rect": {
+                            "top": 291,
+                            "left": 319,
+                            "bottom": 319,
+                            "right": 336
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM30_DOM2_3",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "68",
+                        "index": 2,
+                        "rect": {
+                            "top": 292,
+                            "left": 342,
+                            "bottom": 319,
+                            "right": 359
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM30_DOM2_4",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "69",
+                        "index": 3,
+                        "rect": {
+                            "top": 292,
+                            "left": 366,
+                            "bottom": 319,
+                            "right": 384
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM30_DOM2_5",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "70",
+                        "index": 4,
+                        "rect": {
+                            "top": 292,
+                            "left": 390,
+                            "bottom": 319,
+                            "right": 407
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM30_DOM2_6",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "71",
+                        "index": 5,
+                        "rect": {
+                            "top": 292,
+                            "left": 414,
+                            "bottom": 319,
+                            "right": 431
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 32
+                },
+                "format": {
+                    "name": "AIM30_DOM",
+                    "value": "AIM30 DOM"
+                },
+                "validate": {
+                    "regExp": "^[0-9]{6}$",
+                    "errorMsg": "Please enter valid values (0-9)"
+                }
+            },
+            {
+                "cellId": "33",
+                "rois": [
+                    {
+                        "annotationTags": "AIM30_STUNTED1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "72",
+                        "index": 0,
+                        "rect": {
+                            "top": 292,
+                            "left": 437,
+                            "bottom": 319,
+                            "right": 454
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 33
+                },
+                "format": {
+                    "name": "AIM30_STUNTED",
+                    "value": "AIM30 STUNTED"
+                },
+                "validate": {
+                    "regExp": "^[0-2]{1}$",
+                    "errorMsg": "Please enter valid values (0-2)"
+                }
+            },
+            {
+                "cellId": "34",
+                "rois": [
+                    {
+                        "annotationTags": "AIM30_WASTED1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "73",
+                        "index": 0,
+                        "rect": {
+                            "top": 291,
+                            "left": 460,
+                            "bottom": 319,
+                            "right": 478
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 34
+                },
+                "format": {
+                    "name": "AIM30_WASTED",
+                    "value": "AIM30 WASTED"
+                },
+                "validate": {
+                    "regExp": "^[0-2]{1}$",
+                    "errorMsg": "Please enter valid values (0-2)"
+                }
+            },
+            {
+                "cellId": "35",
+                "rois": [
+                    {
+                        "annotationTags": "AIM30_UNDERWEIGHT1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "74",
+                        "index": 0,
+                        "rect": {
+                            "top": 292,
+                            "left": 484,
+                            "bottom": 319,
+                            "right": 502
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 35
+                },
+                "format": {
+                    "name": "AIM30_UNDERWEIGHT",
+                    "value": "AIM30 UNDERWEIGHT"
+                },
+                "validate": {
+                    "regExp": "^[0-2]{1}$",
+                    "errorMsg": "Please enter valid values (0-2)"
+                }
+            },
+            {
+                "cellId": "36",
+                "rois": [
+                    {
+                        "annotationTags": "AIM30_EDEMA1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "75",
+                        "index": 0,
+                        "rect": {
+                            "top": 291,
+                            "left": 508,
+                            "bottom": 318,
+                            "right": 525
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 36
+                },
+                "format": {
+                    "name": "AIM30_EDEMA",
+                    "value": "AIM30 EDEMA"
+                },
+                "validate": {
+                    "regExp": "^[0-1]{1}$",
+                    "errorMsg": "Please enter valid values (0-1)"
+                }
+            },
+            {
+                "cellId": "37",
+                "rois": [
+                    {
+                        "annotationTags": "AIM30_ELIGIBLE_SUPPLIMNTRY1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "76",
+                        "index": 0,
+                        "rect": {
+                            "top": 291,
+                            "left": 532,
+                            "bottom": 319,
+                            "right": 549
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 37
+                },
+                "format": {
+                    "name": "AIM30_ELIGIBLE_SUPPLIMNTRY",
+                    "value": "AIM30 ELIGIBLE SUPPLIMNTRY"
+                },
+                "validate": {
+                    "regExp": "^[0-1]{1}$",
+                    "errorMsg": "Please enter valid values (0-1)"
+                }
+            },
+            {
+                "cellId": "38",
+                "rois": [
+                    {
+                        "annotationTags": "AIM30_ELIGIBLE_REFRAL1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "77",
+                        "index": 0,
+                        "rect": {
+                            "top": 292,
+                            "left": 555,
+                            "bottom": 319,
+                            "right": 573
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 38
+                },
+                "format": {
+                    "name": "AIM30_ELIGIBLE_REFRAL",
+                    "value": "AIM30 ELIGIBLE REFRAL"
+                },
+                "validate": {
+                    "regExp": "^[0-3]{1}$",
+                    "errorMsg": "Please enter valid values (0-3)"
+                }
+            },
+            {
+                "cellId": "39",
+                "rois": [
+                    {
+                        "annotationTags": "AIM30_REASON_REFRAL1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "78",
+                        "index": 0,
+                        "rect": {
+                            "top": 292,
+                            "left": 579,
+                            "bottom": 318,
+                            "right": 597
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 39
+                },
+                "format": {
+                    "name": "AIM30_REASON_REFRAL",
+                    "value": "AIM30 REASON REFRAL"
+                },
+                "validate": {
+                    "regExp": "^[0-4]{1}$",
+                    "errorMsg": "Please enter valid values (0-4)"
+                }
+            },
+            {
+                "cellId": "40",
+                "rois": [
+                    {
+                        "annotationTags": "AIM30_PARENTS_STATUS1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "79",
+                        "index": 0,
+                        "rect": {
+                            "top": 293,
+                            "left": 604,
+                            "bottom": 319,
+                            "right": 621
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 40
+                },
+                "format": {
+                    "name": "AIM30_PARENTS_STATUS",
+                    "value": "AIM30 PARENTS STATUS"
+                },
+                "validate": {
+                    "regExp": "^[0-1]{1}$",
+                    "errorMsg": "Please enter valid values (0-1)"
+                }
+            },
+            {
+                "cellId": "41",
+                "rois": [
+                    {
+                        "annotationTags": "AIM31_HEIGHTINCM1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "80",
+                        "index": 0,
+                        "rect": {
+                            "top": 327,
+                            "left": 81,
+                            "bottom": 353,
+                            "right": 99
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM31_HEIGHTINCM1_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "81",
+                        "index": 1,
+                        "rect": {
+                            "top": 326,
+                            "left": 106,
+                            "bottom": 352,
+                            "right": 123
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM31_HEIGHTINCM1_3",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "82",
+                        "index": 2,
+                        "rect": {
+                            "top": 327,
+                            "left": 129,
+                            "bottom": 353,
+                            "right": 147
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 41
+                },
+                "format": {
+                    "name": "AIM31_HEIGHTINCM",
+                    "value": "AIM31 HEIGHTINCM"
+                },
+                "validate": {
+                    "regExp": "^[0-9]{3}$",
+                    "errorMsg": "Please enter valid values (0-9)"
+                }
+            },
+            {
+                "cellId": "42",
+                "rois": [
+                    {
+                        "annotationTags": "AIM31_HEIGHTINMM2_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "83",
+                        "index": 0,
+                        "rect": {
+                            "top": 327,
+                            "left": 153,
+                            "bottom": 352,
+                            "right": 171
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 42
+                },
+                "format": {
+                    "name": "AIM31_HEIGHTINMM",
+                    "value": "AIM31 HEIGHTINMM"
+                },
+                "validate": {
+                    "regExp": "^[0-9]{1}$",
+                    "errorMsg": "Please enter valid values (0-9)"
+                }
+            },
+            {
+                "cellId": "43",
+                "rois": [
+                    {
+                        "annotationTags": "AIM31_WEIGHTINKG1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "84",
+                        "index": 0,
+                        "rect": {
+                            "top": 326,
+                            "left": 177,
+                            "bottom": 352,
+                            "right": 194
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM31_WEIGHTINKG1_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "85",
+                        "index": 1,
+                        "rect": {
+                            "top": 326,
+                            "left": 201,
+                            "bottom": 351,
+                            "right": 218
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 43
+                },
+                "format": {
+                    "name": "AIM31_WEIGHTINKG",
+                    "value": "AIM31 WEIGHTINKG"
+                },
+                "validate": {
+                    "regExp": "^[0-9]{2}$",
+                    "errorMsg": "Please enter valid values (0-9)"
+                }
+            },
+            {
+                "cellId": "44",
+                "rois": [
+                    {
+                        "annotationTags": "AIM31_WEIGHTINMG2_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "86",
+                        "index": 0,
+                        "rect": {
+                            "top": 326,
+                            "left": 224,
+                            "bottom": 352,
+                            "right": 242
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM31_WEIGHTINMG2_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "87",
+                        "index": 1,
+                        "rect": {
+                            "top": 325,
+                            "left": 248,
+                            "bottom": 352,
+                            "right": 265
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM31_WEIGHTINMG2_3",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "88",
+                        "index": 2,
+                        "rect": {
+                            "top": 326,
+                            "left": 273,
+                            "bottom": 352,
+                            "right": 289
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 44
+                },
+                "format": {
+                    "name": "AIM31_WEIGHTINMG",
+                    "value": "AIM31 WEIGHTINMG"
+                },
+                "validate": {
+                    "regExp": "^[0-9]{3}$",
+                    "errorMsg": "Please enter valid values (0-9)"
+                }
+            },
+            {
+                "cellId": "45",
+                "rois": [
+                    {
+                        "annotationTags": "AIM31_DOM1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "89",
+                        "index": 0,
+                        "rect": {
+                            "top": 327,
+                            "left": 295,
+                            "bottom": 353,
+                            "right": 313
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM31_DOM1_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "90",
+                        "index": 1,
+                        "rect": {
+                            "top": 326,
+                            "left": 318,
+                            "bottom": 353,
+                            "right": 336
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM31_DOM1_3",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "91",
+                        "index": 2,
+                        "rect": {
+                            "top": 327,
+                            "left": 343,
+                            "bottom": 352,
+                            "right": 360
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM31_DOM1_4",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "92",
+                        "index": 3,
+                        "rect": {
+                            "top": 326,
+                            "left": 366,
+                            "bottom": 352,
+                            "right": 384
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM31_DOM1_5",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "93",
+                        "index": 4,
+                        "rect": {
+                            "top": 327,
+                            "left": 390,
+                            "bottom": 352,
+                            "right": 407
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM31_DOM1_6",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "94",
+                        "index": 5,
+                        "rect": {
+                            "top": 327,
+                            "left": 414,
+                            "bottom": 353,
+                            "right": 431
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 45
+                },
+                "format": {
+                    "name": "AIM31_DOM",
+                    "value": "AIM31 DOM"
+                },
+                "validate": {
+                    "regExp": "^[0-9]{6}$",
+                    "errorMsg": "Please enter valid values (0-9)"
+                }
+            },
+            {
+                "cellId": "46",
+                "rois": [
+                    {
+                        "annotationTags": "AIM31_STUNTED1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "95",
+                        "index": 0,
+                        "rect": {
+                            "top": 327,
+                            "left": 438,
+                            "bottom": 353,
+                            "right": 455
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 46
+                },
+                "format": {
+                    "name": "AIM31_STUNTED",
+                    "value": "AIM31 STUNTED"
+                },
+                "validate": {
+                    "regExp": "^[0-2]{1}$",
+                    "errorMsg": "Please enter valid values (0-2)"
+                }
+            },
+            {
+                "cellId": "47",
+                "rois": [
+                    {
+                        "annotationTags": "AIM31_WASTED1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "96",
+                        "index": 0,
+                        "rect": {
+                            "top": 326,
+                            "left": 461,
+                            "bottom": 353,
+                            "right": 478
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 47
+                },
+                "format": {
+                    "name": "AIM31_WASTED",
+                    "value": "AIM31 WASTED"
+                },
+                "validate": {
+                    "regExp": "^[0-2]{1}$",
+                    "errorMsg": "Please enter valid values (0-2)"
+                }
+            },
+            {
+                "cellId": "48",
+                "rois": [
+                    {
+                        "annotationTags": "AIM31_UNDERWEIGHT1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "97",
+                        "index": 0,
+                        "rect": {
+                            "top": 328,
+                            "left": 484,
+                            "bottom": 352,
+                            "right": 501
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 48
+                },
+                "format": {
+                    "name": "AIM31_UNDERWEIGHT",
+                    "value": "AIM31 UNDERWEIGHT"
+                },
+                "validate": {
+                    "regExp": "^[0-2]{1}$",
+                    "errorMsg": "Please enter valid values (0-2)"
+                }
+            },
+            {
+                "cellId": "49",
+                "rois": [
+                    {
+                        "annotationTags": "AIM31_EDEMA1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "98",
+                        "index": 0,
+                        "rect": {
+                            "top": 328,
+                            "left": 510,
+                            "bottom": 352,
+                            "right": 525
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 49
+                },
+                "format": {
+                    "name": "AIM31_EDEMA",
+                    "value": "AIM31 EDEMA"
+                },
+                "validate": {
+                    "regExp": "^[0-1]{1}$",
+                    "errorMsg": "Please enter valid values (0-1)"
+                }
+            },
+            {
+                "cellId": "50",
+                "rois": [
+                    {
+                        "annotationTags": "AIM31_ELIGIBLE_SUPPLIMNTRY1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "99",
+                        "index": 0,
+                        "rect": {
+                            "top": 326,
+                            "left": 532,
+                            "bottom": 352,
+                            "right": 548
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 50
+                },
+                "format": {
+                    "name": "AIM31_ELIGIBLE_SUPPLIMNTRY",
+                    "value": "AIM31 ELIGIBLE SUPPLIMNTRY"
+                },
+                "validate": {
+                    "regExp": "^[0-1]{1}$",
+                    "errorMsg": "Please enter valid values (0-1)"
+                }
+            },
+            {
+                "cellId": "51",
+                "rois": [
+                    {
+                        "annotationTags": "AIM31_ELIGIBLE_REFRAL1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "100",
+                        "index": 0,
+                        "rect": {
+                            "top": 327,
+                            "left": 556,
+                            "bottom": 353,
+                            "right": 572
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 51
+                },
+                "format": {
+                    "name": "AIM31_ELIGIBLE_REFRAL",
+                    "value": "AIM31 ELIGIBLE REFRAL"
+                },
+                "validate": {
+                    "regExp": "^[0-3]{1}$",
+                    "errorMsg": "Please enter valid values (0-3)"
+                }
+            },
+            {
+                "cellId": "52",
+                "rois": [
+                    {
+                        "annotationTags": "AIM31_REASON_REFRAL1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "101",
+                        "index": 0,
+                        "rect": {
+                            "top": 327,
+                            "left": 580,
+                            "bottom": 352,
+                            "right": 597
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 52
+                },
+                "format": {
+                    "name": "AIM31_REASON_REFRAL",
+                    "value": "AIM31 REASON REFRAL"
+                },
+                "validate": {
+                    "regExp": "^[0-4]{1}$",
+                    "errorMsg": "Please enter valid values (0-4)"
+                }
+            },
+            {
+                "cellId": "53",
+                "rois": [
+                    {
+                        "annotationTags": "AIM31_PARENTS_STATUS1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "102",
+                        "index": 0,
+                        "rect": {
+                            "top": 328,
+                            "left": 604,
+                            "bottom": 353,
+                            "right": 621
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 53
+                },
+                "format": {
+                    "name": "AIM31_PARENTS_STATUS",
+                    "value": "AIM31 PARENTS STATUS"
+                },
+                "validate": {
+                    "regExp": "^[0-1]{1}$",
+                    "errorMsg": "Please enter valid values (0-1)"
+                }
+            },
+            {
+                "cellId": "54",
+                "rois": [
+                    {
+                        "annotationTags": "AIM32_HEIGHTINCM1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "103",
+                        "index": 0,
+                        "rect": {
+                            "top": 359,
+                            "left": 81,
+                            "bottom": 386,
+                            "right": 99
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM32_HEIGHTINCM1_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "104",
+                        "index": 1,
+                        "rect": {
+                            "top": 359,
+                            "left": 106,
+                            "bottom": 386,
+                            "right": 123
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM32_HEIGHTINCM1_3",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "105",
+                        "index": 2,
+                        "rect": {
+                            "top": 359,
+                            "left": 129,
+                            "bottom": 386,
+                            "right": 146
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 54
+                },
+                "format": {
+                    "name": "AIM32_HEIGHTINCM",
+                    "value": "AIM32 HEIGHTINCM"
+                },
+                "validate": {
+                    "regExp": "^[0-9]{3}$",
+                    "errorMsg": "Please enter valid values (0-9)"
+                }
+            },
+            {
+                "cellId": "55",
+                "rois": [
+                    {
+                        "annotationTags": "AIM32_HEIGHTINMM2_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "106",
+                        "index": 0,
+                        "rect": {
+                            "top": 360,
+                            "left": 153,
+                            "bottom": 385,
+                            "right": 171
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 55
+                },
+                "format": {
+                    "name": "AIM32_HEIGHTINMM",
+                    "value": "AIM32 HEIGHTINMM"
+                },
+                "validate": {
+                    "regExp": "^[0-9]{1}$",
+                    "errorMsg": "Please enter valid values (0-9)"
+                }
+            },
+            {
+                "cellId": "56",
+                "rois": [
+                    {
+                        "annotationTags": "AIM32_WEIGHTINKG1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "107",
+                        "index": 0,
+                        "rect": {
+                            "top": 360,
+                            "left": 177,
+                            "bottom": 387,
+                            "right": 195
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM32_WEIGHTINKG1_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "108",
+                        "index": 1,
+                        "rect": {
+                            "top": 359,
+                            "left": 201,
+                            "bottom": 386,
+                            "right": 218
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 56
+                },
+                "format": {
+                    "name": "AIM32_WEIGHTINKG",
+                    "value": "AIM32 WEIGHTINKG"
+                },
+                "validate": {
+                    "regExp": "^[0-9]{2}$",
+                    "errorMsg": "Please enter valid values (0-9)"
+                }
+            },
+            {
+                "cellId": "57",
+                "rois": [
+                    {
+                        "annotationTags": "AIM32_WEIGHTINMG2_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "109",
+                        "index": 0,
+                        "rect": {
+                            "top": 360,
+                            "left": 225,
+                            "bottom": 386,
+                            "right": 242
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM32_WEIGHTINMG2_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "110",
+                        "index": 1,
+                        "rect": {
+                            "top": 360,
+                            "left": 248,
+                            "bottom": 386,
+                            "right": 265
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM32_WEIGHTINMG2_3",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "111",
+                        "index": 2,
+                        "rect": {
+                            "top": 360,
+                            "left": 272,
+                            "bottom": 386,
+                            "right": 290
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 57
+                },
+                "format": {
+                    "name": "AIM32_WEIGHTINMG",
+                    "value": "AIM32 WEIGHTINMG"
+                },
+                "validate": {
+                    "regExp": "^[0-9]{3}$",
+                    "errorMsg": "Please enter valid values (0-9)"
+                }
+            },
+            {
+                "cellId": "58",
+                "rois": [
+                    {
+                        "annotationTags": "AIM32_DOM1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "112",
+                        "index": 0,
+                        "rect": {
+                            "top": 361,
+                            "left": 296,
+                            "bottom": 387,
+                            "right": 313
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM32_DOM1_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "113",
+                        "index": 1,
+                        "rect": {
+                            "top": 360,
+                            "left": 320,
+                            "bottom": 387,
+                            "right": 336
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM32_DOM1_3",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "114",
+                        "index": 2,
+                        "rect": {
+                            "top": 360,
+                            "left": 343,
+                            "bottom": 387,
+                            "right": 360
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM32_DOM1_4",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "115",
+                        "index": 3,
+                        "rect": {
+                            "top": 361,
+                            "left": 368,
+                            "bottom": 387,
+                            "right": 384
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM32_DOM1_5",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "116",
+                        "index": 4,
+                        "rect": {
+                            "top": 360,
+                            "left": 390,
+                            "bottom": 386,
+                            "right": 408
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM32_DOM1_6",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "117",
+                        "index": 5,
+                        "rect": {
+                            "top": 360,
+                            "left": 414,
+                            "bottom": 387,
+                            "right": 430
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 58
+                },
+                "format": {
+                    "name": "AIM32_DOM",
+                    "value": "AIM32 DOM"
+                },
+                "validate": {
+                    "regExp": "^[0-9]{6}$",
+                    "errorMsg": "Please enter valid values (0-9)"
+                }
+            },
+            {
+                "cellId": "59",
+                "rois": [
+                    {
+                        "annotationTags": "AIM32_STUNTED1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "118",
+                        "index": 0,
+                        "rect": {
+                            "top": 360,
+                            "left": 438,
+                            "bottom": 386,
+                            "right": 455
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 59
+                },
+                "format": {
+                    "name": "AIM32_STUNTED",
+                    "value": "AIM32 STUNTED"
+                },
+                "validate": {
+                    "regExp": "^[0-2]{1}$",
+                    "errorMsg": "Please enter valid values (0-2)"
+                }
+            },
+            {
+                "cellId": "60",
+                "rois": [
+                    {
+                        "annotationTags": "AIM32_WASTED1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "119",
+                        "index": 0,
+                        "rect": {
+                            "top": 361,
+                            "left": 460,
+                            "bottom": 386,
+                            "right": 478
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 60
+                },
+                "format": {
+                    "name": "AIM32_WASTED",
+                    "value": "AIM32 WASTED"
+                },
+                "validate": {
+                    "regExp": "^[0-2]{1}$",
+                    "errorMsg": "Please enter valid values (0-2)"
+                }
+            },
+            {
+                "cellId": "61",
+                "rois": [
+                    {
+                        "annotationTags": "AIM32_UNDERWEIGHT1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "120",
+                        "index": 0,
+                        "rect": {
+                            "top": 359,
+                            "left": 485,
+                            "bottom": 386,
+                            "right": 502
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 61
+                },
+                "format": {
+                    "name": "AIM32_UNDERWEIGHT",
+                    "value": "AIM32 UNDERWEIGHT"
+                },
+                "validate": {
+                    "regExp": "^[0-2]{1}$",
+                    "errorMsg": "Please enter valid values (0-2)"
+                }
+            },
+            {
+                "cellId": "62",
+                "rois": [
+                    {
+                        "annotationTags": "AIM32_EDEMA1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "121",
+                        "index": 0,
+                        "rect": {
+                            "top": 360,
+                            "left": 509,
+                            "bottom": 386,
+                            "right": 525
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 62
+                },
+                "format": {
+                    "name": "AIM32_EDEMA",
+                    "value": "AIM32 EDEMA"
+                },
+                "validate": {
+                    "regExp": "^[0-1]{1}$",
+                    "errorMsg": "Please enter valid values (0-1)"
+                }
+            },
+            {
+                "cellId": "63",
+                "rois": [
+                    {
+                        "annotationTags": "AIM32_ELIGIBLE_SUPPLIMNTRY1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "122",
+                        "index": 0,
+                        "rect": {
+                            "top": 359,
+                            "left": 533,
+                            "bottom": 387,
+                            "right": 549
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 63
+                },
+                "format": {
+                    "name": "AIM32_ELIGIBLE_SUPPLIMNTRY",
+                    "value": "AIM32 ELIGIBLE SUPPLIMNTRY"
+                },
+                "validate": {
+                    "regExp": "^[0-1]{1}$",
+                    "errorMsg": "Please enter valid values (0-1)"
+                }
+            },
+            {
+                "cellId": "64",
+                "rois": [
+                    {
+                        "annotationTags": "AIM32_ELIGIBLE_REFRAL1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "123",
+                        "index": 0,
+                        "rect": {
+                            "top": 360,
+                            "left": 555,
+                            "bottom": 386,
+                            "right": 572
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 64
+                },
+                "format": {
+                    "name": "AIM32_ELIGIBLE_REFRAL",
+                    "value": "AIM32 ELIGIBLE REFRAL"
+                },
+                "validate": {
+                    "regExp": "^[0-3]{1}$",
+                    "errorMsg": "Please enter valid values (0-3)"
+                }
+            },
+            {
+                "cellId": "65",
+                "rois": [
+                    {
+                        "annotationTags": "AIM32_REASON_REFRAL1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "124",
+                        "index": 0,
+                        "rect": {
+                            "top": 360,
+                            "left": 579,
+                            "bottom": 386,
+                            "right": 597
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 65
+                },
+                "format": {
+                    "name": "AIM32_REASON_REFRAL",
+                    "value": "AIM32 REASON REFRAL"
+                },
+                "validate": {
+                    "regExp": "^[0-4]{1}$",
+                    "errorMsg": "Please enter valid values (0-4)"
+                }
+            },
+            {
+                "cellId": "66",
+                "rois": [
+                    {
+                        "annotationTags": "AIM32_PARENTS_STATUS1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "125",
+                        "index": 0,
+                        "rect": {
+                            "top": 361,
+                            "left": 604,
+                            "bottom": 386,
+                            "right": 621
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 66
+                },
+                "format": {
+                    "name": "AIM32_PARENTS_STATUS",
+                    "value": "AIM32 PARENTS STATUS"
+                },
+                "validate": {
+                    "regExp": "^[0-1]{1}$",
+                    "errorMsg": "Please enter valid values (0-1)"
+                }
+            },
+            {
+                "cellId": "67",
+                "rois": [
+                    {
+                        "annotationTags": "AIM33_HEIGHTINCM1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "126",
+                        "index": 0,
+                        "rect": {
+                            "top": 394,
+                            "left": 82,
+                            "bottom": 421,
+                            "right": 99
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM33_HEIGHTINCM1_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "127",
+                        "index": 1,
+                        "rect": {
+                            "top": 394,
+                            "left": 106,
+                            "bottom": 420,
+                            "right": 123
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM33_HEIGHTINCM1_3",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "128",
+                        "index": 2,
+                        "rect": {
+                            "top": 394,
+                            "left": 130,
+                            "bottom": 420,
+                            "right": 146
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 67
+                },
+                "format": {
+                    "name": "AIM33_HEIGHTINCM",
+                    "value": "AIM33 HEIGHTINCM"
+                },
+                "validate": {
+                    "regExp": "^[0-9]{3}$",
+                    "errorMsg": "Please enter valid values (0-9)"
+                }
+            },
+            {
+                "cellId": "68",
+                "rois": [
+                    {
+                        "annotationTags": "AIM33_HEIGHTINMM2_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "129",
+                        "index": 0,
+                        "rect": {
+                            "top": 394,
+                            "left": 153,
+                            "bottom": 420,
+                            "right": 170
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 68
+                },
+                "format": {
+                    "name": "AIM33_HEIGHTINMM",
+                    "value": "AIM33 HEIGHTINMM"
+                },
+                "validate": {
+                    "regExp": "^[0-9]{1}$",
+                    "errorMsg": "Please enter valid values (0-9)"
+                }
+            },
+            {
+                "cellId": "69",
+                "rois": [
+                    {
+                        "annotationTags": "AIM33_WEIGHTINKG1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "130",
+                        "index": 0,
+                        "rect": {
+                            "top": 393,
+                            "left": 177,
+                            "bottom": 420,
+                            "right": 194
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM33_WEIGHTINKG1_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "131",
+                        "index": 1,
+                        "rect": {
+                            "top": 394,
+                            "left": 201,
+                            "bottom": 420,
+                            "right": 219
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 69
+                },
+                "format": {
+                    "name": "AIM33_WEIGHTINKG",
+                    "value": "AIM33 WEIGHTINKG"
+                },
+                "validate": {
+                    "regExp": "^[0-9]{2}$",
+                    "errorMsg": "Please enter valid values (0-9)"
+                }
+            },
+            {
+                "cellId": "70",
+                "rois": [
+                    {
+                        "annotationTags": "AIM33_WEIGHTINMG2_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "132",
+                        "index": 0,
+                        "rect": {
+                            "top": 392,
+                            "left": 224,
+                            "bottom": 419,
+                            "right": 242
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM33_WEIGHTINMG2_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "133",
+                        "index": 1,
+                        "rect": {
+                            "top": 394,
+                            "left": 248,
+                            "bottom": 420,
+                            "right": 265
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM33_WEIGHTINMG2_3",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "134",
+                        "index": 2,
+                        "rect": {
+                            "top": 393,
+                            "left": 272,
+                            "bottom": 421,
+                            "right": 288
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 70
+                },
+                "format": {
+                    "name": "AIM33_WEIGHTINMG",
+                    "value": "AIM33 WEIGHTINMG"
+                },
+                "validate": {
+                    "regExp": "^[0-9]{3}$",
+                    "errorMsg": "Please enter valid values (0-9)"
+                }
+            },
+            {
+                "cellId": "71",
+                "rois": [
+                    {
+                        "annotationTags": "AIM33_DOM1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "135",
+                        "index": 0,
+                        "rect": {
+                            "top": 394,
+                            "left": 296,
+                            "bottom": 421,
+                            "right": 313
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM33_DOM1_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "136",
+                        "index": 1,
+                        "rect": {
+                            "top": 395,
+                            "left": 319,
+                            "bottom": 420,
+                            "right": 337
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM33_DOM1_3",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "137",
+                        "index": 2,
+                        "rect": {
+                            "top": 394,
+                            "left": 343,
+                            "bottom": 421,
+                            "right": 360
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM33_DOM1_4",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "138",
+                        "index": 3,
+                        "rect": {
+                            "top": 395,
+                            "left": 367,
+                            "bottom": 421,
+                            "right": 384
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM33_DOM1_5",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "139",
+                        "index": 4,
+                        "rect": {
+                            "top": 394,
+                            "left": 391,
+                            "bottom": 421,
+                            "right": 408
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM33_DOM1_6",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "140",
+                        "index": 5,
+                        "rect": {
+                            "top": 394,
+                            "left": 414,
+                            "bottom": 422,
+                            "right": 432
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 71
+                },
+                "format": {
+                    "name": "AIM33_DOM",
+                    "value": "AIM33 DOM"
+                },
+                "validate": {
+                    "regExp": "^[0-9]{6}$",
+                    "errorMsg": "Please enter valid values (0-9)"
+                }
+            },
+            {
+                "cellId": "72",
+                "rois": [
+                    {
+                        "annotationTags": "AIM33_STUNTED1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "141",
+                        "index": 0,
+                        "rect": {
+                            "top": 394,
+                            "left": 438,
+                            "bottom": 420,
+                            "right": 454
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 72
+                },
+                "format": {
+                    "name": "AIM33_STUNTED",
+                    "value": "AIM33 STUNTED"
+                },
+                "validate": {
+                    "regExp": "^[0-2]{1}$",
+                    "errorMsg": "Please enter valid values (0-2)"
+                }
+            },
+            {
+                "cellId": "73",
+                "rois": [
+                    {
+                        "annotationTags": "AIM33_WASTED1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "142",
+                        "index": 0,
+                        "rect": {
+                            "top": 394,
+                            "left": 461,
+                            "bottom": 420,
+                            "right": 478
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 73
+                },
+                "format": {
+                    "name": "AIM33_WASTED",
+                    "value": "AIM33 WASTED"
+                },
+                "validate": {
+                    "regExp": "^[0-2]{1}$",
+                    "errorMsg": "Please enter valid values (0-2)"
+                }
+            },
+            {
+                "cellId": "74",
+                "rois": [
+                    {
+                        "annotationTags": "AIM33_UNDERWEIGHT1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "143",
+                        "index": 0,
+                        "rect": {
+                            "top": 393,
+                            "left": 485,
+                            "bottom": 420,
+                            "right": 502
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 74
+                },
+                "format": {
+                    "name": "AIM33_UNDERWEIGHT",
+                    "value": "AIM33 UNDERWEIGHT"
+                },
+                "validate": {
+                    "regExp": "^[0-2]{1}$",
+                    "errorMsg": "Please enter valid values (0-2)"
+                }
+            },
+            {
+                "cellId": "75",
+                "rois": [
+                    {
+                        "annotationTags": "AIM33_EDEMA1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "144",
+                        "index": 0,
+                        "rect": {
+                            "top": 394,
+                            "left": 509,
+                            "bottom": 418,
+                            "right": 525
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 75
+                },
+                "format": {
+                    "name": "AIM33_EDEMA",
+                    "value": "AIM33 EDEMA"
+                },
+                "validate": {
+                    "regExp": "^[0-1]{1}$",
+                    "errorMsg": "Please enter valid values (0-1)"
+                }
+            },
+            {
+                "cellId": "76",
+                "rois": [
+                    {
+                        "annotationTags": "AIM33_ELIGIBLE_SUPPLIMNTRY1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "145",
+                        "index": 0,
+                        "rect": {
+                            "top": 394,
+                            "left": 532,
+                            "bottom": 419,
+                            "right": 550
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 76
+                },
+                "format": {
+                    "name": "AIM33_ELIGIBLE_SUPPLIMNTRY",
+                    "value": "AIM33 ELIGIBLE SUPPLIMNTRY"
+                },
+                "validate": {
+                    "regExp": "^[0-1]{1}$",
+                    "errorMsg": "Please enter valid values (0-1)"
+                }
+            },
+            {
+                "cellId": "77",
+                "rois": [
+                    {
+                        "annotationTags": "AIM33_ELIGIBLE_REFRAL1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "146",
+                        "index": 0,
+                        "rect": {
+                            "top": 394,
+                            "left": 556,
+                            "bottom": 418,
+                            "right": 573
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 77
+                },
+                "format": {
+                    "name": "AIM33_ELIGIBLE_REFRAL",
+                    "value": "AIM33 ELIGIBLE REFRAL"
+                },
+                "validate": {
+                    "regExp": "^[0-3]{1}$",
+                    "errorMsg": "Please enter valid values (0-3)"
+                }
+            },
+            {
+                "cellId": "78",
+                "rois": [
+                    {
+                        "annotationTags": "AIM33_REASON_REFRAL1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "147",
+                        "index": 0,
+                        "rect": {
+                            "top": 393,
+                            "left": 580,
+                            "bottom": 420,
+                            "right": 597
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 78
+                },
+                "format": {
+                    "name": "AIM33_REASON_REFRAL",
+                    "value": "AIM33 REASON REFRAL"
+                },
+                "validate": {
+                    "regExp": "^[0-4]{1}$",
+                    "errorMsg": "Please enter valid values (0-4)"
+                }
+            },
+            {
+                "cellId": "79",
+                "rois": [
+                    {
+                        "annotationTags": "AIM33_PARENTS_STATUS1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "148",
+                        "index": 0,
+                        "rect": {
+                            "top": 393,
+                            "left": 604,
+                            "bottom": 419,
+                            "right": 621
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 79
+                },
+                "format": {
+                    "name": "AIM33_PARENTS_STATUS",
+                    "value": "AIM33 PARENTS STATUS"
+                },
+                "validate": {
+                    "regExp": "^[0-1]{1}$",
+                    "errorMsg": "Please enter valid values (0-1)"
+                }
+            },
+            {
+                "cellId": "80",
+                "rois": [
+                    {
+                        "annotationTags": "AIM34_HEIGHTINCM1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "149",
+                        "index": 0,
+                        "rect": {
+                            "top": 427,
+                            "left": 81,
+                            "bottom": 455,
+                            "right": 100
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM34_HEIGHTINCM1_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "150",
+                        "index": 1,
+                        "rect": {
+                            "top": 427,
+                            "left": 106,
+                            "bottom": 455,
+                            "right": 123
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM34_HEIGHTINCM1_3",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "151",
+                        "index": 2,
+                        "rect": {
+                            "top": 427,
+                            "left": 129,
+                            "bottom": 454,
+                            "right": 147
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 80
+                },
+                "format": {
+                    "name": "AIM34_HEIGHTINCM",
+                    "value": "AIM34 HEIGHTINCM"
+                },
+                "validate": {
+                    "regExp": "^[0-9]{3}$",
+                    "errorMsg": "Please enter valid values (0-9)"
+                }
+            },
+            {
+                "cellId": "81",
+                "rois": [
+                    {
+                        "annotationTags": "AIM34_HEIGHTINMM2_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "152",
+                        "index": 0,
+                        "rect": {
+                            "top": 427,
+                            "left": 153,
+                            "bottom": 454,
+                            "right": 171
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 81
+                },
+                "format": {
+                    "name": "AIM34_HEIGHTINMM",
+                    "value": "AIM34 HEIGHTINMM"
+                },
+                "validate": {
+                    "regExp": "^[0-9]{1}$",
+                    "errorMsg": "Please enter valid values (0-9)"
+                }
+            },
+            {
+                "cellId": "82",
+                "rois": [
+                    {
+                        "annotationTags": "AIM34_WEIGHTINKG1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "153",
+                        "index": 0,
+                        "rect": {
+                            "top": 427,
+                            "left": 177,
+                            "bottom": 454,
+                            "right": 195
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM34_WEIGHTINKG1_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "154",
+                        "index": 1,
+                        "rect": {
+                            "top": 428,
+                            "left": 201,
+                            "bottom": 454,
+                            "right": 218
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 82
+                },
+                "format": {
+                    "name": "AIM34_WEIGHTINKG",
+                    "value": "AIM34 WEIGHTINKG"
+                },
+                "validate": {
+                    "regExp": "^[0-9]{2}$",
+                    "errorMsg": "Please enter valid values (0-9)"
+                }
+            },
+            {
+                "cellId": "83",
+                "rois": [
+                    {
+                        "annotationTags": "AIM34_WEIGHTINMG2_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "155",
+                        "index": 0,
+                        "rect": {
+                            "top": 425,
+                            "left": 225,
+                            "bottom": 453,
+                            "right": 242
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM34_WEIGHTINMG2_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "156",
+                        "index": 1,
+                        "rect": {
+                            "top": 427,
+                            "left": 249,
+                            "bottom": 454,
+                            "right": 265
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM34_WEIGHTINMG2_3",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "157",
+                        "index": 2,
+                        "rect": {
+                            "top": 429,
+                            "left": 273,
+                            "bottom": 455,
+                            "right": 289
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 83
+                },
+                "format": {
+                    "name": "AIM34_WEIGHTINMG",
+                    "value": "AIM34 WEIGHTINMG"
+                },
+                "validate": {
+                    "regExp": "^[0-9]{3}$",
+                    "errorMsg": "Please enter valid values (0-9)"
+                }
+            },
+            {
+                "cellId": "84",
+                "rois": [
+                    {
+                        "annotationTags": "AIM34_DOM1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "158",
+                        "index": 0,
+                        "rect": {
+                            "top": 429,
+                            "left": 296,
+                            "bottom": 455,
+                            "right": 314
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM34_DOM1_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "159",
+                        "index": 1,
+                        "rect": {
+                            "top": 428,
+                            "left": 319,
+                            "bottom": 455,
+                            "right": 338
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM34_DOM1_3",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "160",
+                        "index": 2,
+                        "rect": {
+                            "top": 429,
+                            "left": 342,
+                            "bottom": 455,
+                            "right": 361
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM34_DOM1_4",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "161",
+                        "index": 3,
+                        "rect": {
+                            "top": 428,
+                            "left": 367,
+                            "bottom": 454,
+                            "right": 384
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM34_DOM1_5",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "162",
+                        "index": 4,
+                        "rect": {
+                            "top": 429,
+                            "left": 390,
+                            "bottom": 454,
+                            "right": 407
+                        }
+                    },
+                    {
+                        "annotationTags": "AIM34_DOM1_6",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "163",
+                        "index": 5,
+                        "rect": {
+                            "top": 427,
+                            "left": 414,
+                            "bottom": 453,
+                            "right": 431
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 84
+                },
+                "format": {
+                    "name": "AIM34_DOM",
+                    "value": "AIM34 DOM"
+                },
+                "validate": {
+                    "regExp": "^[0-9]{6}$",
+                    "errorMsg": "Please enter valid values (0-9)"
+                }
+            },
+            {
+                "cellId": "85",
+                "rois": [
+                    {
+                        "annotationTags": "AIM34_STUNTED1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "164",
+                        "index": 0,
+                        "rect": {
+                            "top": 427,
+                            "left": 438,
+                            "bottom": 454,
+                            "right": 454
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 85
+                },
+                "format": {
+                    "name": "AIM34_STUNTED",
+                    "value": "AIM34 STUNTED"
+                },
+                "validate": {
+                    "regExp": "^[0-2]{1}$",
+                    "errorMsg": "Please enter valid values (0-2)"
+                }
+            },
+            {
+                "cellId": "86",
+                "rois": [
+                    {
+                        "annotationTags": "AIM34_WASTED1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "165",
+                        "index": 0,
+                        "rect": {
+                            "top": 427,
+                            "left": 463,
+                            "bottom": 454,
+                            "right": 479
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 86
+                },
+                "format": {
+                    "name": "AIM34_WASTED",
+                    "value": "AIM34 WASTED"
+                },
+                "validate": {
+                    "regExp": "^[0-2]{1}$",
+                    "errorMsg": "Please enter valid values (0-2)"
+                }
+            },
+            {
+                "cellId": "87",
+                "rois": [
+                    {
+                        "annotationTags": "AIM34_UNDERWEIGHT1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "166",
+                        "index": 0,
+                        "rect": {
+                            "top": 427,
+                            "left": 485,
+                            "bottom": 454,
+                            "right": 502
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 87
+                },
+                "format": {
+                    "name": "AIM34_UNDERWEIGHT",
+                    "value": "AIM34 UNDERWEIGHT"
+                },
+                "validate": {
+                    "regExp": "^[0-2]{1}$",
+                    "errorMsg": "Please enter valid values (0-2)"
+                }
+            },
+            {
+                "cellId": "88",
+                "rois": [
+                    {
+                        "annotationTags": "AIM34_EDEMA1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "167",
+                        "index": 0,
+                        "rect": {
+                            "top": 426,
+                            "left": 509,
+                            "bottom": 454,
+                            "right": 525
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 88
+                },
+                "format": {
+                    "name": "AIM34_EDEMA",
+                    "value": "AIM34 EDEMA"
+                },
+                "validate": {
+                    "regExp": "^[0-1]{1}$",
+                    "errorMsg": "Please enter valid values (0-1)"
+                }
+            },
+            {
+                "cellId": "89",
+                "rois": [
+                    {
+                        "annotationTags": "AIM34_ELIGIBLE_SUPPLIMNTRY1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "168",
+                        "index": 0,
+                        "rect": {
+                            "top": 426,
+                            "left": 533,
+                            "bottom": 454,
+                            "right": 550
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 89
+                },
+                "format": {
+                    "name": "AIM34_ELIGIBLE_SUPPLIMNTRY",
+                    "value": "AIM34 ELIGIBLE SUPPLIMNTRY"
+                },
+                "validate": {
+                    "regExp": "^[0-1]{1}$",
+                    "errorMsg": "Please enter valid values (0-1)"
+                }
+            },
+            {
+                "cellId": "90",
+                "rois": [
+                    {
+                        "annotationTags": "AIM34_ELIGIBLE_REFRAL1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "169",
+                        "index": 0,
+                        "rect": {
+                            "top": 427,
+                            "left": 556,
+                            "bottom": 454,
+                            "right": 574
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 90
+                },
+                "format": {
+                    "name": "AIM34_ELIGIBLE_REFRAL",
+                    "value": "AIM34 ELIGIBLE REFRAL"
+                },
+                "validate": {
+                    "regExp": "^[0-3]{1}$",
+                    "errorMsg": "Please enter valid values (0-3)"
+                }
+            },
+            {
+                "cellId": "91",
+                "rois": [
+                    {
+                        "annotationTags": "AIM34_REASON_REFRAL1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "170",
+                        "index": 0,
+                        "rect": {
+                            "top": 427,
+                            "left": 581,
+                            "bottom": 453,
+                            "right": 597
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 91
+                },
+                "format": {
+                    "name": "AIM34_REASON_REFRAL",
+                    "value": "AIM34 REASON REFRAL"
+                },
+                "validate": {
+                    "regExp": "^[0-4]{1}$",
+                    "errorMsg": "Please enter valid values (0-4)"
+                }
+            },
+            {
+                "cellId": "92",
+                "rois": [
+                    {
+                        "annotationTags": "AIM34_PARENTS_STATUS1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "171",
+                        "index": 0,
+                        "rect": {
+                            "top": 428,
+                            "left": 604,
+                            "bottom": 454,
+                            "right": 621
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 92
+                },
+                "format": {
+                    "name": "AIM34_PARENTS_STATUS",
+                    "value": "AIM34 PARENTS STATUS"
+                },
+                "validate": {
+                    "regExp": "^[0-1]{1}$",
+                    "errorMsg": "Please enter valid values (0-1)"
+                }
+            }
+        ]
+    }
+}
