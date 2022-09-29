@@ -20,7 +20,8 @@
     "autoSyncFrequency": 600000,
     "storeTrainingData": true,
     "tags": false,
-    "supportEmail": "abc@gmail.com"
+    "supportEmail": "abc@gmail.com",
+    "offline": true
   },
   {
     "name": "Dummy school 3",
@@ -61,7 +62,8 @@
     "state": "assam",
     "autoSyncFrequency": 600000,
     "storeTrainingData": true,
-    "tags": false
+    "tags": false,
+    "offline": true
   },
   {
     "name": "Dummy Organization",
