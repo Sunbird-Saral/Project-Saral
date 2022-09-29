@@ -126,7 +126,7 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
         if (data) {
           let filterscandata =  data.filter((item)=>{
             let findSection = item.studentsMarkInfo.some((item) => item.section == filteredData.section)
-                if( filteredData.class == item.classId &&  filteredData.examDate == item.examDate &&  filteredData.subject == item.subject && findSection   ){
+                if( filteredData.class == item.classId &&  filteredData.examDate == item.examDate &&  filteredData.subject == item.subject && filteredData.set == item.set && filteredData.examTestID==item.examId && findSection   ){
                     return true
                 }   
             })

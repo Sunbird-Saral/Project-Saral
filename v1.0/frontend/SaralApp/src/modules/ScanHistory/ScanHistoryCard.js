@@ -248,13 +248,13 @@ const ScanHistoryCard = ({
     // for exam type
     let Examtypedata = studentsAndExamData.data&&studentsAndExamData.data.exams
     Examtypedata = studentsAndExamData.data&&studentsAndExamData.data.exams.filter(function (item) {
-        return item.subject == filteredData.response.subject;
+        return item.subject == filteredData.response.subject && item.examId == filteredData.response.examTestID;
     }).map(({ type }) => ({ type }));
 
     
     let ExamQuesDetail = studentsAndExamData.data&&studentsAndExamData.data.exams
     ExamQuesDetail = studentsAndExamData.data&&studentsAndExamData.data.exams.filter(function (item) {
-        return item.subject == filteredData.response.subject;
+        return item.subject == filteredData.response.subject && item.examId == filteredData.response.examTestID;
     })
     return (
         <View>

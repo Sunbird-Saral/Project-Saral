@@ -126,7 +126,7 @@ class MyScanComponent extends Component {
             let filter = data.filter((e) => {
                 let findSection = false
                 findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.section)
-                let checkDataExistence = !this.props.minimalFlag ? filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject && findSection : e.roiId == roiData.data.roiId
+                let checkDataExistence = !this.props.minimalFlag ? filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject && e.set == filteredData.set && e.examId == filteredData.examTestID && findSection : e.roiId == roiData.data.roiId
                 if (checkDataExistence) {
                     return true
                 }

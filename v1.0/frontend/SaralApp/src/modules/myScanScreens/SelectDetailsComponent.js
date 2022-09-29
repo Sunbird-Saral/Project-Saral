@@ -443,7 +443,7 @@ class SelectDetailsComponent extends Component {
         if (prevProps != this.props) {
 
             const { apiStatus, studentsAndExamData, absentStudentDataResponse, getScanStatusData, loginData } = this.props
-            const { calledStudentsData, calledAbsentStatus, selectedClass, selectedSection, selectedClassId, calledScanStaus, calledLogin, callApi, absentStatusPayload, isCalledStudentAndExam } = this.state
+            const { calledStudentsData, calledAbsentStatus, selectedClass, selectedSection, selectSet, selectedClassId, calledScanStaus, calledLogin, callApi, absentStatusPayload, isCalledStudentAndExam } = this.state
             if (apiStatus && prevProps.apiStatus != apiStatus && apiStatus.error) {
                 if (calledStudentsData) {
                     this.loader(false)
@@ -476,6 +476,7 @@ class SelectDetailsComponent extends Component {
                                     class: selectedClass,
                                     classId: selectedClassId,
                                     section: selectedSection,
+                                    set: selectSet ,
                                     data: studentsAndExamData.data
                                 }
 
@@ -641,6 +642,7 @@ class SelectDetailsComponent extends Component {
                             class: selectedClass,
                             classId: selectedClassId,
                             section: selectedSection,
+                            set: selectSet ,
                             data: studentsAndExamData.data
                         }
     
@@ -708,15 +710,6 @@ class SelectDetailsComponent extends Component {
             })
             return false
         }
-        else if (setIndex == -1) {
-            this.setState({
-                errClass: '',
-                errSection: '',
-                errSub: Strings.please_select_sub,
-                errDate: ''
-            })
-            return false
-        }
      
 
         return true
@@ -730,7 +723,7 @@ class SelectDetailsComponent extends Component {
             errClass: '',
             errSub: '',
             errSection: '',
-            errSet: '',
+            // errSet: '',
             isLoading: true
         }, () => {
             let valid = this.validateFields()
@@ -745,7 +738,7 @@ class SelectDetailsComponent extends Component {
                     examDate: examDate[subIndex],
                     section: selectedSection,
                     subject: subjectsData[subIndex],
-                    set:selectSet,
+                    set:selectSet[subIndex],
                     examTestID: examTestID[subIndex],
                 }
                 this.props.FilteredDataAction(obj)
