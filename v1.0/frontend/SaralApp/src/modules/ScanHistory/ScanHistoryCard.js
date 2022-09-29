@@ -94,7 +94,7 @@ const ScanHistoryCard = ({
     const onPressSaveInDB = async () => {
         const data = await getScannedDataFromLocal();
         const { subject, examDate, set } = filteredData.response
-         console.log('data>>>>',data , set)
+        
         if (data) {
             if (!bgFlag) {
             const filterData = data.filter((e) => {
@@ -118,7 +118,7 @@ const ScanHistoryCard = ({
                     let findSection = f.studentsMarkInfo.some((item) => item.section == filteredData.response.section)
 
                     setIntolocalAfterFilter = data.filter((e) => {
-                        // console.log('e.set == f.set',e.set,f.set);
+                     
                         if (e.classId == f.classId && e.subject == f.subject && e.examDate == f.examDate && e.set == f.set && findSection) {
                             return false
                         } else {

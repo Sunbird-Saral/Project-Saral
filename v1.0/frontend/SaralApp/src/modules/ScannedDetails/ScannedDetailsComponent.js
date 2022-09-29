@@ -573,7 +573,8 @@ const ScannedDetailsComponent = ({
                     "marksInfo": '',
                     "securedMarks": stdTotalMarks,
                     "totalMarks": 0,
-                    "studentAvailability": true
+                    "studentAvailability": true,
+                    "set": filteredData.set,
                 }
 
                 stdData.studentId = el.RollNo
@@ -649,7 +650,7 @@ const ScannedDetailsComponent = ({
                    let findSection = false
                    findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.section)
    
-                   if (filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject && e.set == filteredData.set && findSection) {
+                   if (filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject && e.set == filteredData.set  && findSection) {
                        return true
                    }
                })
@@ -692,7 +693,7 @@ const ScannedDetailsComponent = ({
 
                             //In minimal mode need to find organization id as we kept studentId
                             let findRoiID =  e.roiId == roiData.data.roiId;
-                            let checkDataExistence = !minimalFlag ? filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject && e.set == filteredData.set : false
+                            let checkDataExistence = !minimalFlag ? filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject && e.set == filteredData.set   : false
                             if (checkDataExistence && findSection || findRoiID) {
 
 
@@ -1166,7 +1167,7 @@ const ScannedDetailsComponent = ({
             "examDate": minimalFlag ? null : filteredData.examDate,
             "subject": minimalFlag ? 0 : filteredData.subject,
             "examId": minimalFlag ? 0 : filteredData.examTestID,
-            "set": minimalFlag ? 0 : filteredData.set,
+
             "studentsMarkInfo": [
                 {
                     "predictedStudentId": loginData.data.school.storeTrainingData ? storeTrainingData[0].studentIdPrediction : '',
@@ -1176,6 +1177,7 @@ const ScannedDetailsComponent = ({
                     "securedMarks": sumOfAllMarks > 0 ? sumOfAllMarks : 0,
                     "totalMarks": maxMarksTotal > 0 ? maxMarksTotal : 0,
                     "marksInfo": Studentmarks,
+                    "set": minimalFlag ? 0 : filteredData.set ,
                     "studentAvailability": true,
                 }
             ]

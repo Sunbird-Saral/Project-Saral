@@ -144,7 +144,6 @@ class SelectDetailsComponent extends Component {
             }
 
             let loginDetails = await getLoginData()
-            // console.log('loginDetails',loginDetails);
             if (loginDetails) {
                 let classesArr = [...loginDetails.classes]
                 let classes = []
@@ -180,7 +179,6 @@ class SelectDetailsComponent extends Component {
     }
 
     onDropDownSelect = (index, value, type) => {
-        // console.log('value',index);
         const { loginDetails, classesArr, selectedClass, selectedClassId, selectedSection, selectedSubject,selectSet } = this.state
         if (type == 'class') {
             if (value != selectedClass) {
@@ -277,7 +275,7 @@ class SelectDetailsComponent extends Component {
             //     return true
             //     }
             //  })
-            //  console.log('data>>>>>>>', setData.indexOf('false'))
+            
         
             this.setState({
                 errClass: '',
@@ -510,7 +508,7 @@ class SelectDetailsComponent extends Component {
                                         examDates.push(o.examDate)
                                         subjects.push(o.subject)
                                         set.push(o.set)
-                                        console.log('o>>>>>>',o);
+                            
                                     })
                     
 
@@ -710,6 +708,15 @@ class SelectDetailsComponent extends Component {
             })
             return false
         }
+        else if (setIndex == -1) {
+            this.setState({
+                errClass: '',
+                errSection: '',
+                errSub: Strings.please_select_sub,
+                errDate: ''
+            })
+            return false
+        }
      
 
         return true
@@ -718,23 +725,27 @@ class SelectDetailsComponent extends Component {
     onSubmitClick = () => {
         const { selectedClass, selectedClassId, selectedSection, examTestID, subIndex, examDate, subjectsData ,selectSet,setIndex} = this.state
         const { loginData } = this.props
-        console.log(selectSet[subIndex]);
-        console.log(subjectsData[subIndex]);
+       
         this.setState({
             errClass: '',
             errSub: '',
             errSection: '',
+            errSet: '',
             isLoading: true
         }, () => {
             let valid = this.validateFields()
+           
             if (valid) {
+                let selectedset = []
+                selectedset.push(selectSet)
+                
                 let obj = {
                     className: selectedClass,
                     class: selectedClassId,
                     examDate: examDate[subIndex],
                     section: selectedSection,
                     subject: subjectsData[subIndex],
-                    set:selectSet[subIndex],
+                    set:selectSet,
                     examTestID: examTestID[subIndex],
                 }
                 this.props.FilteredDataAction(obj)
@@ -755,7 +766,7 @@ class SelectDetailsComponent extends Component {
             classId: this.state.selectedClassId,
             section: this.state.selectedSection,
             subject: this.state.selectedSubject,
-            // set: this.state.selectSet
+            set: this.state.selectSet
         }
         let apiObj = new GetStudentsAndExamData(dataPayload, token);
         this.props.APITransport(apiObj)
@@ -815,7 +826,7 @@ class SelectDetailsComponent extends Component {
         const { navigation, isLoading, defaultSelected, classList, classListIndex, selectedClass, sectionList,setIndex,set,ExamSetArray, sectionListIndex, selectedSection, pickerDate, selectedDate, subArr, selectedSubject,selectSet, subIndex, errClass, errSub,errSet, errDate, errSection, sectionValid, dateVisible, examTestID,examSetData } = this.state
         const { loginData, multiBrandingData, modalStatus, modalMessage ,studentsAndExamData} = this.props
         const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.selectDetails[0]
-        // console.log('ExamSetArray??????>>>>>>>>',ExamSetArray)
+    //    console.log('set??????>>>>>>>>',this.state.set)
     //    console.log('examSetData',setArr);
         return (
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
@@ -926,9 +937,7 @@ class SelectDetailsComponent extends Component {
                                         <Text style={[styles.labelTextStyle]}>{BrandLabel && BrandLabel.Set ? BrandLabel.Set : Strings.set_text}</Text>
                                         {errSub != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 1, width: '50%', textAlign: 'right', fontWeight: 'normal' }]}>{errSub}</Text>}
                                     </View>
-                                    {
-                                        console.log('ExamSetArray[subIndex]',ExamSetArray[subIndex])
-                                    }
+    
                                     <DropDownMenu
                                         options={ExamSetArray[subIndex]}
                                         onSelect={(idx, value) => this.onDropDownSelect(idx, value, 'set')}
