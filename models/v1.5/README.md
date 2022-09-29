@@ -83,7 +83,10 @@ optional arguments:
 ├── resnet164.py
 ├── training.py # training script
    
-    
+
 ```
 #### ResNet Implementation
 - [ResNet Author's Implementation](https://github.com/KaimingHe/resnet-1k-layers/blob/master/resnet-pre-act.lua)
+
+#### Latest training pipelines for Numeric, AplhaNumeric(Block Letters only)
+   [Handwritten-Recognition toolkit](https://github.com/project-anuvaad/ocr-toolkit/tree/ocr_toolkit/Handwritten-Recognition)
