@@ -23,7 +23,6 @@ export function LogoutAction(payload) {
                  await erasesetScanData()
                  await erasesetStudentsExamData()
                  await erasesetFetchedScanData()
-                 await erasesetScannedDataIntoLocal()
                  await erasegetPresentAbsentStudent()
                  await setMinimalValue(false)    
                  await eraseErrorLogs()

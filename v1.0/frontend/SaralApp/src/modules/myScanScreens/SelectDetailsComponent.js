@@ -527,9 +527,10 @@ dispatchStudentExamData(payload){
                                     if (getStudentExamCache != null) {
                                         
                                         let result = getStudentExamCache.findIndex((e)=>e.key == loginData.data.school.schoolId && e.class == selectedClass && e.section == selectedSection)
-                                        if (result > -1) {
+                                        let hasSubject = getStudentExamCache.findIndex((e)=> e.key == loginData.data.school.schoolId && e.class == selectedClass && e.section == selectedSection && e.hasOwnProperty("subject"))
+                                        if (result > -1 && hasSubject == -1) {
                                             getStudentExamCache[result].data = studentsAndExamData 
-                                        } else {
+                                        } else if(hasSubject == -1){
                                             let payload = {
                                                 key :`${loginData.data.school.schoolId}`,
                                                 class : selectedClass,
@@ -540,7 +541,6 @@ dispatchStudentExamData(payload){
                                             getStudentExamCache.push(payload);
                                         }
                                         await setRegularStudentExamApi(getStudentExamCache);
-                                        console.log("last updated getStudentExamCache",getStudentExamCache);
                                     } else {
                                         let payload = {
                                             key :`${loginData.data.school.schoolId}`,

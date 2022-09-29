@@ -7,7 +7,7 @@ import constants from '../../../flux/actions/constants';
 import { storeFactory } from '../../../flux/store/store';
 import AppTheme from '../../../utils/AppTheme';
 import { dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF } from '../../../utils/CommonUtils';
-import { removeAllCache } from '../../../utils/offlineStorageUtils';
+import { removeAllCache, removeRegularUserCache } from '../../../utils/offlineStorageUtils';
 import { setMinimalValue } from '../../../utils/StorageUtils';
 import Strings from '../../../utils/Strings';
 
@@ -76,7 +76,7 @@ class HeaderComponents extends Component {
         }
 
         async function removeGlobalCache(){
-            await removeAllCache();
+            await removeAllCache();q
             navigation.navigate('auth')
         }
 

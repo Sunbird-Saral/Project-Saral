@@ -285,7 +285,8 @@ useEffect(() => {
             "classId": filteredData.class,
             "examDate": filteredData.examDate,
             "subject": filteredData.subject,
-            "studentsMarkInfo": stdPstAbsArray
+            "studentsMarkInfo": stdPstAbsArray,
+            "userId": loginData.data.school.schoolId
         }
 
         stdArray.forEach((element, index) => {

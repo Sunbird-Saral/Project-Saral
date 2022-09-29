@@ -132,6 +132,7 @@ const StudentsDataComponent = ({
                 "subject": filteredData.subject,
                 "studentsMarkInfo": [stdObj],
                 "examId": filteredData.examTestID,
+                "userId": loginData.data.school.schoolId
             }
             if (filterStdData.length == 0 && localStdData != null) {
                 localStdData.push(saveObj);

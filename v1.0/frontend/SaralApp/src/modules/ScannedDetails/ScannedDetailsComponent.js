@@ -578,6 +578,7 @@ const ScannedDetailsComponent = ({
             "subject": filteredData.subject,
             "studentsMarkInfo": stdMarkInfo,
             "examId": filteredData.examTestID,
+            "userId": loginData.data.school.schoolId
         }
         saveAndFetchFromLocalStorag(saveObj)
     }
@@ -1139,6 +1140,7 @@ const ScannedDetailsComponent = ({
             "examDate": minimalFlag ? null : filteredData.examDate,
             "subject": minimalFlag ? 0 : filteredData.subject,
             "examId": minimalFlag ? 0 : filteredData.examTestID,
+            "userId": loginData.data.school.schoolId,
             "studentsMarkInfo": [
                 {
                     "predictedStudentId": loginData.data.school.storeTrainingData ? storeTrainingData[0].studentIdPrediction : '',

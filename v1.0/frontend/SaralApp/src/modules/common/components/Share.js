@@ -22,7 +22,7 @@ import { LogoutAction } from '../../../flux/actions/apis/LogoutAction';
 import axios from 'axios';
 
 //local storage
-import { getScannedDataFromLocal, eraseErrorLogs, getErrorMessage, erasesetLoginCred } from '../../../utils/StorageUtils';
+import { getScannedDataFromLocal, eraseErrorLogs, getErrorMessage, erasesetLoginCred, setScannedDataIntoLocal } from '../../../utils/StorageUtils';
 
 //constant
 import C from '../../../flux/actions/constants'
@@ -68,11 +68,16 @@ const ShareComponent = ({
     else {
 
       const doLogout = async () => {
-        if (data != null && data.length > 0) {
-          for (let i = 0; i < data.length; i++) {
-            let apiObj = new SaveScanData(data[i], loginData.data.token);
-            await saveStudentData(apiObj, i, data.length)
-          }
+        let filterCurrentSchool = data != null ? data.filter((e)=> { return e.userId == loginData.data.school.schoolId}) : []
+        if (data != null && data.length > 0 & filterCurrentSchool.length > 0) {
+          let filterOtherSchool = data.filter((e)=> { return e.userId != loginData.data.school.schoolId});
+
+          filterCurrentSchool.forEach(async(element, i) => {
+            if (element.userId == loginData.data.school.schoolId) {
+              let apiObj = new SaveScanData(element, loginData.data.token);
+              await saveStudentData(apiObj, i, filterCurrentSchool.length, filterOtherSchool)
+            }
+          });
         } else {
           await eraseErrorLogs()
           dispatch(LogoutAction())
@@ -86,7 +91,7 @@ const ShareComponent = ({
   }
 
 
-  const saveStudentData = async (api, i, len) => {
+  const saveStudentData = async (api, i, len, filterOtherSchool) => {
     if (api.method === 'PUT') {
       let apiResponse = null
       const source = axios.CancelToken.source()
@@ -98,6 +103,7 @@ const ShareComponent = ({
       axios.put(api.apiEndPoint(), api.getBody(), { headers: api.getHeaders(), cancelToken: source.token },)
         .then(function (res) {
           if (i == len - 1) {
+            setScannedDataIntoLocal(filterOtherSchool)
             dispatch(LogoutAction())
             navigation.navigate('auth')
           }
