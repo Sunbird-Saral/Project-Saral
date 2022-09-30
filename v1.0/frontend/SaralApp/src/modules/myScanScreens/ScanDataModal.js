@@ -27,7 +27,8 @@ const ScanDataModal = ({
     localstutlist,
     multiBrandingData,
     loginData,
-    navigation
+    navigation,
+    filteredData
 }) => {
 
     //Hooks
@@ -43,18 +44,25 @@ const ScanDataModal = ({
             getPresentStudentList(localstutlist)
             getStudentList()
         } else {
-            setPresentStudentList(localstutlist)
+            let hasSet = filteredData.hasOwnProperty("set") & filteredData.set.length > 0 ? filteredData.set : ''
+            if (hasSet.length > 0) {
+                getPresentStudentList(localstutlist)
+            } else {
+                setPresentStudentList(localstutlist)
+            }
         }
     }, [localstutlist])
 
     //functions
     const getPresentStudentList = (loacalstutlist) => {
+        let hasSet = filteredData.hasOwnProperty("set") & filteredData.set.length > 0 ? filteredData.set : ''
         let data = typeof (loacalstutlist) === "object"
             ?
             loacalstutlist[0]
                 ?
                 loacalstutlist[0].studentsMarkInfo.filter((o, index) => {
-                    if (o.studentAvailability && o.marksInfo.length > 0) {
+                    let stdCondition = hasSet.length > 0 ? o.studentAvailability && o.marksInfo.length > 0 && o.set == hasSet : o.studentAvailability && o.marksInfo.length > 0
+                    if (stdCondition) {
                         return true
                     }
                 })

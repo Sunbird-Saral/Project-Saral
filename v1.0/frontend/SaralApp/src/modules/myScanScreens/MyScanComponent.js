@@ -126,11 +126,24 @@ class MyScanComponent extends Component {
             let filter = data.filter((e) => {
                 let findSection = false
                 findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.section)
-                let checkDataExistence = !this.props.minimalFlag ? filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject && e.set == filteredData.set && e.examId == filteredData.examTestID && findSection : e.roiId == roiData.data.roiId
+                let checkDataExistence = !this.props.minimalFlag ? filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject && e.examId == filteredData.examTestID && findSection : e.roiId == roiData.data.roiId
                 if (checkDataExistence) {
                     return true
                 }
-            })
+            });
+
+
+            let hasSet = filteredData.hasOwnProperty("set") & filteredData.set.length > 0 ? filteredData.set : ''
+            if (hasSet.length > 0 && filter.length > 0) {
+                let findSetStudent = filter.length > 0 ? filter[0].studentsMarkInfo.filter((item) => {
+                    if (hasSet.length > 0) {
+                        return item.set == filteredData.set;
+                    }
+                })
+                :
+                []
+                filter[0].studentsMarkInfo = findSetStudent
+            }
 
             filter.forEach((element, index) => {
                 len = len + element.studentsMarkInfo.length

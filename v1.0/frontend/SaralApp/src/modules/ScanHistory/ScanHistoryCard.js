@@ -49,11 +49,13 @@ const ScanHistoryCard = ({
         getStudentList()
     }, [])
     const getSaveCount = () => {
+        let hasSet = filteredData.response.hasOwnProperty("set") & filteredData.response.set.length > 0 ? filteredData.response.set : ''
         let data =
             typeof (scanedData.response) === "object" ?
                 scanedData.response.data ?
                     scanedData.response.data.filter((o, index) => {
-                        if (o.studentAvailability && o.marksInfo.length > 0) {
+                        let stdCondition = hasSet.length > 0 ? o.studentAvailability && o.marksInfo.length > 0 && hasSet == o.set : o.studentAvailability && o.marksInfo.length > 0 
+                        if (stdCondition) {
                             return true
                         }
                     })
@@ -101,7 +103,7 @@ const ScanHistoryCard = ({
 
                 let findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.response.section)
                 // console.log('e.set == set',e.set,set)
-                if (e.classId == filteredData.response.class && e.subject == subject && e.examDate == examDate && e.set == set && findSection) {
+                if (e.classId == filteredData.response.class && e.subject == subject && e.examDate == examDate &&findSection) {
                     return true
                 } else {
                     return false
@@ -119,7 +121,7 @@ const ScanHistoryCard = ({
 
                     setIntolocalAfterFilter = data.filter((e) => {
                      
-                        if (e.classId == f.classId && e.subject == f.subject && e.examDate == f.examDate && e.set == f.set && findSection) {
+                        if (e.classId == f.classId && e.subject == f.subject && e.examDate == f.examDate && findSection) {
                             return false
                         } else {
                             return true

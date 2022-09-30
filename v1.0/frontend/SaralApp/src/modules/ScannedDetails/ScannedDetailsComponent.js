@@ -650,7 +650,7 @@ const ScannedDetailsComponent = ({
                    let findSection = false
                    findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.section)
    
-                   if (filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject && e.set == filteredData.set  && findSection) {
+                   if (filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject && findSection) {
                        return true
                    }
                })
@@ -693,7 +693,7 @@ const ScannedDetailsComponent = ({
 
                             //In minimal mode need to find organization id as we kept studentId
                             let findRoiID =  e.roiId == roiData.data.roiId;
-                            let checkDataExistence = !minimalFlag ? filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject && e.set == filteredData.set   : false
+                            let checkDataExistence = !minimalFlag ? filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject : false
                             if (checkDataExistence && findSection || findRoiID) {
 
 

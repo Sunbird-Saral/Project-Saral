@@ -39,7 +39,7 @@ const clearState = {
     selectedClass: '',
     sectionList: [],
     sectionListIndex: -1,
-    setIndex:-1,
+    setIndex: 0,
     selectedSection: '',
     pickerDate: new Date(),
     selectedDate: '',
@@ -87,7 +87,7 @@ class SelectDetailsComponent extends Component {
             selectedClass: '',
             sectionList: [],
             sectionListIndex: -1,
-            setIndex:-1,
+            setIndex: 0,
             selectedSection: '',
             pickerDate: new Date(),
             selectedDate: '',
@@ -190,7 +190,6 @@ class SelectDetailsComponent extends Component {
                     sectionListIndex: 0,
                     selectedSection: sectionListArr[0],
                     subIndex: -1,
-                    setIndex:-1,
                     selectedSubject: '',
                     selectedDate: '',
                     pickerDate: new Date()
@@ -263,6 +262,7 @@ class SelectDetailsComponent extends Component {
         }
         else if (type == 'sub') {
             let setData = []
+            let hasSetData = this.state.set.length > 0 ? this.state.set[Number(index)] ? this.state.set[Number(index)].length > 0 ? -1 : 0 : 0 : 0
             if (value != selectedSubject) {
                
                 this.setState({
@@ -282,9 +282,11 @@ class SelectDetailsComponent extends Component {
                 errSection: '',
                 errSub: '',
                 errDate: '',
+                errSet: '',
                 subIndex: Number(index),
                 selectedSubject: value,
-                ExamSetArray : this.state.set
+                ExamSetArray : this.state.set,
+                setIndex: hasSetData
             })
         }
          
@@ -302,6 +304,7 @@ class SelectDetailsComponent extends Component {
                 errSection: '',
                 errSub: '',
                 errDate: '',
+                errSet: '',
                 setIndex: Number(index),
                 selectSet: value
             })
@@ -508,7 +511,7 @@ class SelectDetailsComponent extends Component {
                                         testID.push(o.examId)
                                         examDates.push(o.examDate)
                                         subjects.push(o.subject)
-                                        set.push(o.set)
+                                        set.push(o.hasOwnProperty("set") && o.set.length > 0 ? o.set : [])
                             
                                     })
                     
@@ -710,6 +713,16 @@ class SelectDetailsComponent extends Component {
             })
             return false
         }
+       else if (setIndex == -1) {
+            this.setState({
+                errClass: '',
+                errSection: '',
+                errSub: '',
+                errDate: '',
+                errSet: Strings.please_select_valid_section
+            })
+            return false
+        }
      
 
         return true
@@ -738,7 +751,7 @@ class SelectDetailsComponent extends Component {
                     examDate: examDate[subIndex],
                     section: selectedSection,
                     subject: subjectsData[subIndex],
-                    set:selectSet[subIndex],
+                    set: selectSet[subIndex],
                     examTestID: examTestID[subIndex],
                 }
                 this.props.FilteredDataAction(obj)
@@ -924,11 +937,11 @@ class SelectDetailsComponent extends Component {
                             }
 
                       {
-                             ExamSetArray[subIndex] != null && ExamSetArray[subIndex] != '' &&  subIndex != -1 &&
+                            ExamSetArray && ExamSetArray.length > 0 && ExamSetArray[subIndex] != null && ExamSetArray[subIndex] != '' &&  subIndex != -1 &&
                                 <View style={[styles.fieldContainerStyle, {bottom:25, paddingBottom: subIndex != -1 ? '10%' : '10%' }]}>
                                     <View style={{ flexDirection: 'row' }}>
                                         <Text style={[styles.labelTextStyle]}>{BrandLabel && BrandLabel.Set ? BrandLabel.Set : Strings.set_text}</Text>
-                                        {errSub != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 1, width: '50%', textAlign: 'right', fontWeight: 'normal' }]}>{errSub}</Text>}
+                                        {errSet != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 1, width: '50%', textAlign: 'right', fontWeight: 'normal' }]}>{errSet}</Text>}
                                     </View>
     
                                     <DropDownMenu
