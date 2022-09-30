@@ -95,7 +95,7 @@ class HeaderComponents extends Component {
         return (
             <View style={{flex:1,marginTop: '10%',marginRight:'5%'}}>
                 <View style={styles.imageViewContainer}>
-                    <View style={[styles.imageContainerStyle,{height: loginData.data.school.hasOwnProperty("offline") && loginData.data.school.offline ? 240 : 180}]}>
+                    <View style={[styles.imageContainerStyle,{height: loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode ? 240 : 180}]}>
                         
                         <TouchableOpacity
                         style={[styles.imageContainerViewstyle,{marginTop:10}]}
@@ -131,7 +131,7 @@ class HeaderComponents extends Component {
                         </TouchableOpacity>
 
                         {
-                            loginData.data.school.hasOwnProperty("offline") && loginData.data.school.offline 
+                            loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode 
                             &&
                             <TouchableOpacity
                                style={styles.imageContainerViewstyle}
@@ -145,7 +145,7 @@ class HeaderComponents extends Component {
                         }
                             
                         {
-                            loginData.data.school.hasOwnProperty("offline") && loginData.data.school.offline 
+                            loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode 
                             &&
                             <TouchableOpacity
                             style={styles.imageContainerViewstyle}

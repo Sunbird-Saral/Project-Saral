@@ -657,7 +657,7 @@ const ScannedDetailsComponent = ({
                  filterData = getDataFromLocal.filter((e) => {
     
                     //In minimal mode need to find organization id as we kept studentId
-                    if (e.roiId == roiData.data.roiId && loginData.data.school.hasOwnProperty("offline") & loginData.data.school.offline) {
+                    if (e.roiId == roiData.data.roiId && loginData.data.school.hasOwnProperty("offlineMode") & loginData.data.school.offlineMode) {
                         if (loginData.data.school.schoolId == e.key) {
                             return true
                         } else {
@@ -698,7 +698,7 @@ const ScannedDetailsComponent = ({
 
                             //In minimal mode need to find organization id as we kept studentId
                             let findRoiID =  false;
-                            if (minimalFlag & loginData.data.school.hasOwnProperty("offline") && loginData.data.school.offline) {
+                            if (minimalFlag & loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode) {
                                 findRoiID = loginData.data.school.schoolId == e.key && e.roiId == roiData.data.roiId
                             } else {
                                 findRoiID = e.roiId == roiData.data.roiId
@@ -1207,7 +1207,7 @@ const ScannedDetailsComponent = ({
             saveObj.studentsMarkInfo[0].obtainedMarksPredicted = maxObtainedTrainingData[1].predictedMarks
             saveObj.studentsMarkInfo[0].obtainedMarksConfidence = maxObtainedTrainingData[1].predictedMarks != sumOfAllMarks ? maxObtainedTrainingData[1].predictionConfidence : []
         }
-        if ((loginData.data.school.hasOwnProperty("offline") && loginData.data.school.offline) && minimalFlag) {
+        if ((loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode) && minimalFlag) {
             saveObj.key = loginData.data.school.schoolId
         }
 

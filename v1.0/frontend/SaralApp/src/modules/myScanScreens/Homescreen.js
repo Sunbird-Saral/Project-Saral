@@ -70,7 +70,7 @@ class HomeComponent extends Component {
                     this.setState({isLoading : false})
                 }
                 
-                if (loginData.data.school.hasOwnProperty("offline") && loginData.data.school.offline && hasNetwork) {
+                if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode && hasNetwork) {
                     let getBrandingCache = await getBrandingDataApi();
                     if (getBrandingCache != null) {
 
@@ -109,7 +109,7 @@ class HomeComponent extends Component {
         if (studentsAndExamData &&  prevProps.studentsAndExamData != studentsAndExamData ) {
             if (studentsAndExamData.status && studentsAndExamData.status == 200) {
                 this.setState({isLoading : false})
-                if (loginData.data.school.hasOwnProperty("offline") && loginData.data.school.offline && minimalFlag && hasNetwork) {
+                if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode && minimalFlag && hasNetwork) {
                     let getStudentExamCache = await getStudentExamApi(0,0);
                     if (getStudentExamCache != null) {
 

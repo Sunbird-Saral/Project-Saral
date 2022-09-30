@@ -59,7 +59,7 @@ const ShareComponent = ({
     if (bgFlag) {
       callCustomModal(Strings.message_text, Strings.auto_sync_in_progress_please_wait, false, false);
     } 
-    else if (loginData.data.school.hasOwnProperty("offline") && loginData.data.school.offline && !hasNetwork) {
+    else if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode && !hasNetwork) {
       const logout = async()=> {
         navigation.navigate('auth')
       }

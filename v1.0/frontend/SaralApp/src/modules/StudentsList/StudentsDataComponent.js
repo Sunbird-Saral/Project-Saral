@@ -79,14 +79,14 @@ const StudentsDataComponent = ({
                 setIsPresent(false)
                 checkStdAbsPrst(data, chkPresent, filteredData, false)
             }
-            if (loginData.data.school.hasOwnProperty("offline") && loginData.data.school.offline && !hasNetwork & (isSheetScanned.length == 0 || isStudentScannedInLocal.length == 0)) {
+            if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode && !hasNetwork & (isSheetScanned.length == 0 || isStudentScannedInLocal.length == 0)) {
                 saveStudentIntoLocalStorage(data.studentId, isStudentPresent, filterStdData, stdData)
             } 
         } else if (data.studentAvailability == false) {
             data.studentAvailability = true
             setIsPresent(true)
             checkStdAbsPrst(data, chkPresent, filteredData, true)
-            if (loginData.data.school.hasOwnProperty("offline") && loginData.data.school.offline && !hasNetwork & (isSheetScanned.length == 0 || isStudentScannedInLocal.length == 0)) {
+            if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode && !hasNetwork & (isSheetScanned.length == 0 || isStudentScannedInLocal.length == 0)) {
                 saveStudentIntoLocalStorage(data.studentId, false, filterStdData, stdData)
             } 
         }

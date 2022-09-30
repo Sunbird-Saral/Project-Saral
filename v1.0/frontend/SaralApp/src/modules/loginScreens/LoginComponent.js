@@ -309,7 +309,7 @@ class LoginComponent extends Component {
                         let loginCred = await setLoginCred(loginCredObj)
                         let loginSaved = await setLoginData(loginData.data)
                         let hasNetwork = await checkNetworkConnectivity();
-                        if (loginData.data.school.hasOwnProperty("offline") && loginData.data.school.offline && hasNetwork) {
+                        if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode && hasNetwork) {
                             let getLoginCache = await getLoginApi();
                             let loginCred = await getLoginCred();
                             let loginUser = `${loginCred.schoolId}`

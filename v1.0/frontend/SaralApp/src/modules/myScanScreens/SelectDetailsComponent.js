@@ -522,7 +522,7 @@ dispatchStudentExamData(payload){
                             }
                             if (studentsAndExamData && studentsAndExamData.status && studentsAndExamData.status == 200) {
                                 const hasNetwork = await checkNetworkConnectivity();
-                                if (loginData.data.school.hasOwnProperty("offline") && loginData.data.school.offline && hasNetwork && this.state.sectionValid == true) {
+                                if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode && hasNetwork && this.state.sectionValid == true) {
                                     let getStudentExamCache = await getRegularStudentExamApi();
                                     if (getStudentExamCache != null) {
                                         
@@ -656,7 +656,7 @@ dispatchStudentExamData(payload){
                     this.setState({isCalledStudentAndExam: false, isLoading: false})                    
                     const hasNetwork = await checkNetworkConnectivity();
                     if (studentsAndExamData && studentsAndExamData.status && studentsAndExamData.status == 200) {
-                        if (loginData.data.school.hasOwnProperty("offline") && loginData.data.school.offline && hasNetwork) {
+                        if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode && hasNetwork) {
                             let getStudentExamCache = await getRegularStudentExamApi();
                             if (getStudentExamCache != null) {
                                 let result = getStudentExamCache.findIndex((e)=> e.key == loginData.data.school.schoolId && e.class == selectedClass && e.section == selectedSection && e.hasOwnProperty("subject") ? e.subject == this.state.selectedSubject : false)

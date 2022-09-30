@@ -90,7 +90,7 @@ useEffect(() => {
     useEffect(async () => {
         const hasNetwork = await checkNetworkConnectivity();
         if (roiData && roiData.status && roiData.status == 200) {
-            if (loginData.data.school.hasOwnProperty("offline") && loginData.data.school.offline && hasNetwork) {
+            if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode && hasNetwork) {
 
                 let getRoiCache = await getRegularRoipi();
                 if (getRoiCache != null) {
@@ -205,7 +205,7 @@ useEffect(() => {
                 }
             })
                 .then(function (res) {
-                    if (loginData.data.school.hasOwnProperty("offline") && loginData.data.school.offline) {
+                    if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode) {
                         getSavedScanApiCache(res.data)
                     }
                     setIsLoading(false)

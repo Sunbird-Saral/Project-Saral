@@ -68,7 +68,7 @@ class MyScanComponent extends Component {
                 if (roiData.status && roiData.status == 200) {
                    let total =  await this.sumOfLocalData();
                    this.callScanStatusData(true, total, 0);
-                   if (loginData.data.school.hasOwnProperty("offline") && loginData.data.school.offline) {
+                   if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode) {
                    await this.setRoiCache(roiData);
                    }
                 }
@@ -144,7 +144,7 @@ class MyScanComponent extends Component {
                 if (!this.props.minimalFlag) {
                    return checkDataExistence = filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject && findSection
                 
-                } else if(this.props.loginData.data.school.hasOwnProperty("offline") & this.props.loginData.data.school.offline & this.props.minimalFlag) {
+                } else if(this.props.loginData.data.school.hasOwnProperty("offlineMode") & this.props.loginData.data.school.offlineMode & this.props.minimalFlag) {
                   return checkDataExistence =  e.roiId == roiData.data.roiId && e.key == this.props.loginData.data.school.schoolId
                 }
                 else {
@@ -309,7 +309,7 @@ class MyScanComponent extends Component {
                     this.openCameraActivity()
                 } else if (!this.props.minimalFlag ) {
                     let hasEmpty = this.props.roiData.hasOwnProperty("config") ? true : this.props.roiData.length > 0
-                    if (this.props.loginData.data.school.hasOwnProperty("offline") && this.props.loginData.data.school.offline && hasEmpty) {
+                    if (this.props.loginData.data.school.hasOwnProperty("offlineMode") && this.props.loginData.data.school.offlineMode && hasEmpty) {
                         this.openCameraActivity()
                     }else{
                         this.callCustomModal(Strings.message_text,Strings.roi_cache_not_available,false,false)
@@ -659,7 +659,7 @@ class MyScanComponent extends Component {
                             localScanedData: []
                         })
                     }
-                    if (loginData.data.school.hasOwnProperty("offline") && loginData.data.school.offline) {
+                    if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode) {
                         obj.setScanDataCache(res.data);
                     }
                     obj.setState({
@@ -696,7 +696,7 @@ class MyScanComponent extends Component {
                 this.setState({ passDataToModal: localScanedData, scanModalDataVisible: !scanModalDataVisible, savingStatus: 'scan' })
             } else {
                 const hasNetwork = await checkNetworkConnectivity()
-                if (loginData.data.school.hasOwnProperty("offline") && loginData.data.school.offline & !hasNetwork) {
+                if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode & !hasNetwork) {
                     let scaned = await getScanDataApi()
                     let data = []
                     if (scaned != null) {
