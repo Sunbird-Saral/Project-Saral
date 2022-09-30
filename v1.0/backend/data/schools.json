@@ -62,7 +62,8 @@
     "state": "assam",
     "autoSyncFrequency": 600000,
     "storeTrainingData": true,
-    "tags": false
+    "tags": false,
+    "offline": true
   },
   {
     "name": "Dummy Organization",
