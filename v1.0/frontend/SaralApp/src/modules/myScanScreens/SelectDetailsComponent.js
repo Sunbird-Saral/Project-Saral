@@ -744,14 +744,14 @@ class SelectDetailsComponent extends Component {
             if (valid) {
                 let selectedset = []
                 selectedset.push(selectSet)
-                
+                let setValue = selectSet.length > 0 ? selectSet[subIndex].length > 0 ? selectSet[subIndex] : '' : ''
                 let obj = {
                     className: selectedClass,
                     class: selectedClassId,
                     examDate: examDate[subIndex],
                     section: selectedSection,
                     subject: subjectsData[subIndex],
-                    set: selectSet[subIndex],
+                    set: setValue,
                     examTestID: examTestID[subIndex],
                 }
                 this.props.FilteredDataAction(obj)
