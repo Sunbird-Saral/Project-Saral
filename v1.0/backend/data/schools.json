@@ -74,7 +74,8 @@
     "autoSyncFrequency": 600000,
     "storeTrainingData": true,
     "tags": false,
-    "isMinimalMode": true
+    "isMinimalMode": true,
+    "offlineMode": true
   },
   {
     "name": "Ps Vishnupura",
