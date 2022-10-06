@@ -235,7 +235,7 @@ class MyScanComponent extends Component {
         if (roi != null) {
 
             let data = roi.filter((e)=> {
-                if (e.key == this.props.loginData.data.school.schoolId) {
+                if (e.key == this.props.loginData.data.school.schoolId & e.examId == this.state.examId) {
                     return true
                 }
             });
@@ -305,13 +305,17 @@ class MyScanComponent extends Component {
             const grantedCamera = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.CAMERA)
 
             if (grantedRead && grantedWrite && grantedCamera) {
+                let hasEmpty = this.props.roiData.hasOwnProperty("config") ? true : this.props.roiData.length > 0
                 if (this.props.minimalFlag && this.state.roiIndex != -1) {
-                    this.openCameraActivity()
+                    if (!hasEmpty) {
+                        this.callCustomModal(Strings.message_text, Strings.roi_cache_not_available,false,false)
+                    } else {
+                        this.openCameraActivity()
+                    }
                 } else if (!this.props.minimalFlag ) {
-                    let hasEmpty = this.props.roiData.hasOwnProperty("config") ? true : this.props.roiData.length > 0
                     if (this.props.loginData.data.school.hasOwnProperty("offlineMode") && this.props.loginData.data.school.offlineMode && hasEmpty) {
                         this.openCameraActivity()
-                    }else{
+                    } else {
                         this.callCustomModal(Strings.message_text,Strings.roi_cache_not_available,false,false)
                     }
                 }
@@ -456,10 +460,19 @@ class MyScanComponent extends Component {
                                 })
                                 return value.data
                             }
-                        })
-                        storeFactory.dispatch(this.dispatchroiData(filterData[0].data))
-                        this.setState({calledRoiData: true})
+                        });
+                        if (filterData.length > 0) {
+                            storeFactory.dispatch(this.dispatchroiData(filterData[0].data))
+                            this.setState({calledRoiData: true})
                         } else {
+                            storeFactory.dispatch(this.dispatchroiData({}))
+                            this.callCustomModal(Strings.message_text, Strings.you_dont_have_cache, false)
+                            this.setState({isLoading: false})
+                        }
+                    } else {
+                            storeFactory.dispatch(this.dispatchroiData({}))
+                            this.callCustomModal(Strings.message_text, Strings.you_dont_have_cache, false)
+                            this.setState({isLoading: false})
                             //Alert message show message "something went wrong or u don't have cache in local"
                         }
                     } else {
@@ -599,11 +612,18 @@ class MyScanComponent extends Component {
                         return value.data
                     }
                 })
-                storeFactory.dispatch(this.dispatchScanDataApi(filterData[0].data))
-                this.setState({
-                    saveStatusData: filterData[0].data.data.length > 0 ? filterData[0].data.data.data.length : 0
-                })
+                if (filterData.length > 0) {
+                    storeFactory.dispatch(this.dispatchScanDataApi(filterData[0].data))
+                    this.setState({
+                        saveStatusData: filterData[0].data.data.length > 0 ? filterData[0].data.data.data.length : 0
+                    })
+                } else {
+                    this.setState({isLoading: false})
+                    this.callCustomModal(Strings.message_text, Strings.you_dont_have_cache, false)
+                }
             } else {
+                this.setState({isLoading: false})
+                this.callCustomModal(Strings.message_text, Strings.you_dont_have_cache, false)
                 //Alert message show message "something went wrong or u don't have cache in local"
             }
         } else {

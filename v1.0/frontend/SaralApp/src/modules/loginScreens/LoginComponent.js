@@ -62,7 +62,7 @@ class LoginComponent extends Component {
         if (hasNetwork) {
             this.callDefaultbrandingData()
         } else {
-           await this.callBrandingCache(schollId)
+           await this.callBrandingCache(schollId, "")
         }
         this.props.navigation.addListener('willFocus', async payload => {
             AppState.addEventListener('change', this.handleAppStateChange);
@@ -70,15 +70,28 @@ class LoginComponent extends Component {
         })
     }
 
-    async callBrandingCache(key) {
+    async callBrandingCache(key, type) {
         let hasCacheData = await getBrandingDataApi();
-        if (hasCacheData) {
+        let hasNetwork = await checkNetworkConnectivity();
+        if (hasCacheData && !hasNetwork && type == 'schoolId') {
             let cacheFilterData = hasCacheData.filter((element) => {
                 if (element.key == key) {
                     return true
                 }
             });
-            storeFactory.dispatch(this.dispatchBrandingDataApi(cacheFilterData.length > 0 ? cacheFilterData[0].data : []))
+
+            if (cacheFilterData.length > 0) {
+                storeFactory.dispatch(this.dispatchBrandingDataApi(cacheFilterData.length > 0 ? cacheFilterData[0].data : []))
+                this.setState({
+                    errCommon: '',
+                    isLoading: false
+                })  
+            } else {
+                this.setState({
+                    errCommon: Strings.you_dont_have_cache,
+                    isLoading: false
+                })  
+            }
         } else {
             //Alert message show message "something went wrong or u don't have cache in local"
         }
@@ -227,7 +240,7 @@ class LoginComponent extends Component {
     }
 
     onLoginDetailsChange = (text, type,value) => {
-        this.callBrandingCache(text)
+        this.callBrandingCache(text, type)
         this.setState({ [type]: text })
          this.toggleRememberMe()
     }

@@ -10,13 +10,14 @@ import APITransport from '../../flux/actions/transport/apitransport';
 import Brands from '../common/components/Brands';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Assets } from '../../assets';
-import { checkNetworkConnectivity, monospace_FF } from '../../utils/CommonUtils';
+import { checkNetworkConnectivity, dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF } from '../../utils/CommonUtils';
 import Spinner from '../common/components/loadingIndicator';
 import { storeFactory } from '../../flux/store/store';
 import constants from '../../flux/actions/constants';
 import { GetStudentsAndExamData } from '../../flux/actions/apis/getStudentsAndExamData';
 import { getMinimalValue } from '../../utils/StorageUtils';
 import { getBrandingDataApi, getStudentExamApi, setBrandingDataApi, setStudentExamApi } from '../../utils/offlineStorageUtils';
+import Strings from '../../utils/Strings';
 
 class HomeComponent extends Component {
     constructor(props) {
@@ -159,8 +160,16 @@ class HomeComponent extends Component {
                         return true
                     }
                 });
-                storeFactory.dispatch(this.dispatchStudentExamData(cacheFilterData[0].data))
+                if (cacheFilterData.length > 0) {
+                    storeFactory.dispatch(this.dispatchStudentExamData(cacheFilterData[0].data))
+                    this.setState({isLoading: false})
+                } else {
+                    this.callCustomModal(Strings.message_text, Strings.you_dont_have_cache, false)
+                    this.setState({isLoading: false})
+                }
             } else {
+                this.callCustomModal(Strings.message_text, Strings.you_dont_have_cache, false)
+                this.setState({isLoading: false})
                 //Alert message show message "something went wrong or u don't have cache in local"            
             }
         } else {
@@ -174,6 +183,17 @@ class HomeComponent extends Component {
             let apiObj = new GetStudentsAndExamData(dataPayload, token);
             this.props.APITransport(apiObj)
         }
+    }
+
+    callCustomModal(title, message, isAvailable, cancel) {
+        let data = {
+            title: title,
+            message: message,
+            isOkAvailable: isAvailable,
+            isCancel : cancel
+        }
+        this.props.dispatchCustomModalStatus(true);
+        this.props.dispatchCustomModalMessage(data);
     }
 
     dispatchStudentExamData(payload){
@@ -283,7 +303,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
         APITransport: APITransport,
-        LogoutAction: LogoutAction
+        LogoutAction: LogoutAction,
+        dispatchCustomModalStatus: dispatchCustomModalStatus,
+        dispatchCustomModalMessage: dispatchCustomModalMessage,
     }, dispatch)
 }
 
