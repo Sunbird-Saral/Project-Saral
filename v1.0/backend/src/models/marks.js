@@ -105,6 +105,10 @@ const marksSchema = new mongoose.Schema({
         type: Number,
         required: false,
         trim: true,
+    },
+    set:{
+        type: String,
+        required: false
     }
 })
 

@@ -53,6 +53,17 @@ const ScanHistory = ({
                 }
             })
 
+            let hasSet = filteredData.hasOwnProperty("set") & filteredData.set.length > 0 ? filteredData.set : ''
+            if (hasSet.length > 0 && filter.length > 0) {
+                let findSetStudent = filter.length > 0 ? filter[0].studentsMarkInfo.filter((item) => {
+                    if (hasSet.length > 0) {
+                        return item.set == hasSet;
+                    }
+                })
+                :
+                []
+                filter[0].studentsMarkInfo = findSetStudent
+            }
 
             let len = 0
 

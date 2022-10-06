@@ -29,6 +29,10 @@ const examSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
+    set:{
+        type: Array,
+        required: false
+    },
     totalMarks: {
         type: Number,
         required: true,

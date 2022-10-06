@@ -23,7 +23,13 @@
     }
 
     apiEndPoint() {
-        return `${super.apiEndPoint()}/roi/${this.payload.examId}`;
+        let url = ''
+        if (this.payload.hasOwnProperty('set')) {
+            url = `${super.apiEndPoint()}/roi/${this.payload.examId}${this.payload.set}`;
+        } else {
+            url = `${super.apiEndPoint()}/roi/${this.payload.examId}`;
+        }
+        return url
     }
 
     getHeaders() {

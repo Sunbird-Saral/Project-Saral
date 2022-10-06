@@ -40,6 +40,10 @@ const ROISchema = new mongoose.Schema({
         required: true,
         trim: true
     },
+    set:{
+        type: String,
+        required: false
+    },
     type:{
         type: String
         // enum: ["SAT","PAT"]

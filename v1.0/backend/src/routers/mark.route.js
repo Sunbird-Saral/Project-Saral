@@ -50,7 +50,7 @@ router.put('/saveMarks', auth, async (req, res) => {
                     let lookup = {
                         studentId: data.studentId
                     }
-                    let update = { $set: { studentIdTrainingData: data.studentIdTrainingData,predictedStudentId: data.predictedStudentId,studentAvailability: data.studentAvailability, marksInfo: data.marksInfo ,maxMarksTrainingData: data.maxMarksTrainingData,maxMarksPredicted: data.maxMarksPredicted, securedMarks: data.securedMarks, totalMarks: data.totalMarks,obtainedMarksTrainingData: data.obtainedMarksTrainingData,obtainedMarksPredicted: data.obtainedMarksPredicted  } }
+                    let update = { $set: { studentIdTrainingData: data.studentIdTrainingData,predictedStudentId: data.predictedStudentId,studentAvailability: data.studentAvailability, marksInfo: data.marksInfo ,maxMarksTrainingData: data.maxMarksTrainingData,maxMarksPredicted: data.maxMarksPredicted, securedMarks: data.securedMarks, totalMarks: data.totalMarks,obtainedMarksTrainingData: data.obtainedMarksTrainingData,obtainedMarksPredicted: data.obtainedMarksPredicted,set: data.set} }
                     await Mark.update(lookup, update)
                 }
             }
