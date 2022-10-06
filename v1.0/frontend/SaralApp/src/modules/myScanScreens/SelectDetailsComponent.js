@@ -270,12 +270,6 @@ class SelectDetailsComponent extends Component {
                     selectedDate: ''
                 })
             }
-            // setData = this.props.studentsAndExamData.data.exams.map(item=>{
-            //     if(item.hasOwnProperty('set')){
-            //     return true
-            //     }
-            //  })
-            
         
             this.setState({
                 errClass: '',
