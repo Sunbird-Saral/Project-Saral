@@ -74,7 +74,7 @@ router.post('/schools/login', async (req, res) => {
             autoSyncBatchSize: schools.autoSyncBatchSize,
             isMinimalMode: schools.isMinimalMode,
             supportEmail: schools.supportEmail,
-            offline: schools.offline
+            offlineMode: schools.offlineMode
         }
 
         let response = {
