@@ -102,7 +102,7 @@ const ScanHistoryCard = ({
             const filterData = data.filter((e) => {
 
                 let findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.response.section)
-                // console.log('e.set == set',e.set,set)
+        
                 if (e.classId == filteredData.response.class && e.subject == subject && e.examDate == examDate &&findSection) {
                     return true
                 } else {
@@ -131,7 +131,7 @@ const ScanHistoryCard = ({
 
                 let apiObj = new SaveScanData(filterData[0], loginData.data.token);
                 saveScanData(apiObj, filterDataLen, setIntolocalAfterFilter);
-                // console.log('apiObj>>>',apiObj);
+               
 
             } else {
                 callCustomModal(Strings.message_text,Strings.there_is_no_data,false);
@@ -189,7 +189,6 @@ const ScanHistoryCard = ({
             "downloadRes": false
         }
         let apiObj = new scanStatusDataAction(dataPayload);
-        console.log('apiObj>>>>>>>',apiObj)
         FetchSavedScannedData(apiObj, loginCred.schoolId, loginCred.password, filteredDatalen, localScanData)
     }
 

@@ -623,7 +623,6 @@ const ScannedDetailsComponent = ({
             "examId": filteredData.examTestID,
             "set": filteredData.set,
         }
-        console.log('saveObj///////////',saveObj);
         saveAndFetchFromLocalStorag(saveObj)
     }
 
