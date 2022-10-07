@@ -573,7 +573,8 @@ const ScannedDetailsComponent = ({
                     "marksInfo": '',
                     "securedMarks": stdTotalMarks,
                     "totalMarks": 0,
-                    "studentAvailability": true
+                    "studentAvailability": true,
+                    "set": filteredData.set,
                 }
 
                 stdData.studentId = el.RollNo
@@ -620,7 +621,8 @@ const ScannedDetailsComponent = ({
             "subject": filteredData.subject,
             "studentsMarkInfo": stdMarkInfo,
             "examId": filteredData.examTestID,
-            "userId": loginData.data.school.schoolId
+            "userId": loginData.data.school.schoolId,
+            "set": filteredData.set,
         }
         saveAndFetchFromLocalStorag(saveObj)
     }
@@ -1188,7 +1190,8 @@ const ScannedDetailsComponent = ({
                     "securedMarks": sumOfAllMarks > 0 ? sumOfAllMarks : 0,
                     "totalMarks": maxMarksTotal > 0 ? maxMarksTotal : 0,
                     "marksInfo": Studentmarks,
-                    "studentAvailability": true
+                    "set": minimalFlag ? 0 : filteredData.set ,
+                    "studentAvailability": true,
                 }
             ]
         }

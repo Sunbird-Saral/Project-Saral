@@ -49,11 +49,13 @@ const ScanHistoryCard = ({
         getStudentList()
     }, [])
     const getSaveCount = () => {
+        let hasSet = filteredData.response.hasOwnProperty("set") & filteredData.response.set.length > 0 ? filteredData.response.set : ''
         let data =
             typeof (scanedData.response) === "object" ?
                 scanedData.response.data ?
                     scanedData.response.data.filter((o, index) => {
-                        if (o.studentAvailability && o.marksInfo.length > 0) {
+                        let stdCondition = hasSet.length > 0 ? o.studentAvailability && o.marksInfo.length > 0 && hasSet == o.set : o.studentAvailability && o.marksInfo.length > 0 && o.examDate == filteredData.response.examDate
+                        if (stdCondition) {
                             return true
                         }
                     })
@@ -103,8 +105,8 @@ const ScanHistoryCard = ({
             const filterData = data.filter((e) => {
 
                 let findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.response.section)
-
-                if (e.classId == filteredData.response.class && e.subject == subject && e.examDate == examDate && findSection) {
+        
+                if (e.classId == filteredData.response.class && e.subject == subject && e.examDate == examDate &&findSection) {
                     return true
                 } else {
                     return false
@@ -121,6 +123,7 @@ const ScanHistoryCard = ({
                     let findSection = f.studentsMarkInfo.some((item) => item.section == filteredData.response.section)
 
                     setIntolocalAfterFilter = data.filter((e) => {
+                     
                         if (e.classId == f.classId && e.subject == f.subject && e.examDate == f.examDate && findSection) {
                             return false
                         } else {
@@ -131,6 +134,7 @@ const ScanHistoryCard = ({
 
                 let apiObj = new SaveScanData(filterData[0], loginData.data.token);
                 saveScanData(apiObj, filterDataLen, setIntolocalAfterFilter);
+               
 
             } else {
                 callCustomModal(Strings.message_text,Strings.there_is_no_data,false);
@@ -185,6 +189,7 @@ const ScanHistoryCard = ({
             "subject": filteredData.response.subject,
             "section": filteredData.response.section,
             "fromDate": filteredData.response.examDate,
+            "set": filteredData.response.set,
             "page": 0,
             "schoolId": loginCred.schoolId,
             "downloadRes": false
@@ -252,13 +257,13 @@ const ScanHistoryCard = ({
     // for exam type
     let Examtypedata = studentsAndExamData.data&&studentsAndExamData.data.exams
     Examtypedata = studentsAndExamData.data&&studentsAndExamData.data.exams.filter(function (item) {
-        return item.subject == filteredData.response.subject;
+        return item.subject == filteredData.response.subject && item.examId == filteredData.response.examTestID;
     }).map(({ type }) => ({ type }));
 
     
     let ExamQuesDetail = studentsAndExamData.data&&studentsAndExamData.data.exams
     ExamQuesDetail = studentsAndExamData.data&&studentsAndExamData.data.exams.filter(function (item) {
-        return item.subject == filteredData.response.subject;
+        return item.subject == filteredData.response.subject && item.examId == filteredData.response.examTestID;
     })
     return (
         <View>

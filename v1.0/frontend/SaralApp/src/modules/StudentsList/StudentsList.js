@@ -444,9 +444,13 @@ useEffect(() => {
                 //Alert message show message "something went wrong or u don't have cache in local"            
             }
         } else {
+        let hasSet = filteredData.hasOwnProperty("set") && filteredData.set.length > 0 ? `?set=${filteredData.set}` : ''
         let payload =
         {
             "examId": filteredData.examTestID,
+        }
+        if (hasSet.length > 0) {
+            payload.set = hasSet
         }
         let token = loginData.data.token
         let apiObj = new ROIAction(payload, token);

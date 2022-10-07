@@ -129,6 +129,7 @@ export default strings = new LocalizedStrings({
         are_you_sure_you_want_to_clear_global_cache: "Are you sure you want to clear global cache ?",
         you_dont_have_cache: "You don't have cache",
         please_try_again_later_network_is_not_available: "Please try again later network isn't available",
-        roi_cache_not_available: "Roi cache not available"
+        roi_cache_not_available: "Roi cache not available",
+        set_text:'set'
     }
 })

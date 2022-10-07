@@ -84,12 +84,14 @@ const ScanStatus = ({
     }
 
     const getPresentStudentList = ()=>{
+        let hasSet = filteredData.hasOwnProperty("set") & filteredData.set.length > 0 ? filteredData.set : ''
         let data = typeof (scanedData) === "object"
         ?
         scanedData.data
             ?
             scanedData.data.filter((o, index) => {
-                if (o.studentAvailability && o.marksInfo.length > 0) {
+                let stdCondition = hasSet.length > 0 ? o.studentAvailability && o.marksInfo.length > 0 && hasSet == o.set : o.studentAvailability && o.marksInfo.length > 0 & o.examDate == filteredData.examDate
+                if (stdCondition) {
                     return true
                 }
             })

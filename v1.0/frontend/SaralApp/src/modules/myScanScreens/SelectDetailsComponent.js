@@ -30,6 +30,7 @@ import CustomPopup from '../common/components/CustomPopup';
 import { getRegularStudentExamApi, setRegularStudentExamApi } from '../../utils/offlineStorageUtils';
 import constants from '../../flux/actions/constants';
 import { storeFactory } from '../../flux/store/store';
+import { indexOf } from 'lodash';
 
 //redux
 
@@ -41,15 +42,19 @@ const clearState = {
     selectedClass: '',
     sectionList: [],
     sectionListIndex: -1,
+    setIndex: 0,
     selectedSection: '',
     pickerDate: new Date(),
     selectedDate: '',
     subArr: [],
     examTestID: [],
+    selectSet: '',
+    setArr: [],
     subIndex: -1,
     selectedSubject: '',
     errClass: '',
     errSub: '',
+    errSet: '',
     errDate: '',
     errSection: '',
     selectedClassId: '',
@@ -66,7 +71,9 @@ const clearState = {
     calledScanStaus: false,
     absentStatusPayload: null,
     subjectsData: [],
-    isCalledStudentAndExam: false
+    isCalledStudentAndExam: false,
+    set:[],
+    ExamSetArray:[]
 }
 
 class SelectDetailsComponent extends Component {
@@ -83,6 +90,7 @@ class SelectDetailsComponent extends Component {
             selectedClass: '',
             sectionList: [],
             sectionListIndex: -1,
+            setIndex: 0,
             selectedSection: '',
             pickerDate: new Date(),
             selectedDate: '',
@@ -90,8 +98,11 @@ class SelectDetailsComponent extends Component {
             examTestID: [],
             subIndex: -1,
             selectedSubject: '',
+            selectSet: '',
+            setArr: [],
             errClass: '',
             errSub: '',
+            errSet: '',
             errDate: '',
             errSection: '',
             selectedClassId: '',
@@ -110,7 +121,9 @@ class SelectDetailsComponent extends Component {
             subjectsData: [],
             filterdataid: [],
             isHidden: false,
-            isCalledStudentAndExam: false
+            isCalledStudentAndExam: false,
+            set:[],
+            ExamSetArray:[]
         }
         this.onPress = this.onPress.bind(this);
         this.onBack = this.onBack.bind(this)
@@ -169,7 +182,7 @@ class SelectDetailsComponent extends Component {
     }
 
     onDropDownSelect = (index, value, type) => {
-        const { loginDetails, classesArr, selectedClass, selectedClassId, selectedSection, selectedSubject } = this.state
+        const { loginDetails, classesArr, selectedClass, selectedClassId, selectedSection, selectedSubject,selectSet } = this.state
         if (type == 'class') {
             if (value != selectedClass) {
                 const sections = [...classesArr[index].sections]
@@ -251,7 +264,31 @@ class SelectDetailsComponent extends Component {
             })
         }
         else if (type == 'sub') {
+            let setData = []
+            let hasSetData = this.state.set.length > 0 ? this.state.set[Number(index)] ? this.state.set[Number(index)].length > 0 ? -1 : 0 : 0 : 0
             if (value != selectedSubject) {
+               
+                this.setState({
+                    pickerDate: new Date(),
+                    selectedDate: ''
+                })
+            }
+        
+            this.setState({
+                errClass: '',
+                errSection: '',
+                errSub: '',
+                errDate: '',
+                errSet: '',
+                subIndex: Number(index),
+                selectedSubject: value,
+                ExamSetArray : this.state.set,
+                setIndex: hasSetData
+            })
+        }
+         
+        else if (type == 'set') {
+            if (value != selectSet) {
                
                 this.setState({
                     pickerDate: new Date(),
@@ -264,8 +301,9 @@ class SelectDetailsComponent extends Component {
                 errSection: '',
                 errSub: '',
                 errDate: '',
-                subIndex: Number(index),
-                selectedSubject: value
+                errSet: '',
+                setIndex: Number(index),
+                selectSet: value
             })
         }
     }
@@ -435,7 +473,7 @@ dispatchStudentExamData(payload){
         if (prevProps != this.props) {
 
             const { apiStatus, studentsAndExamData, absentStudentDataResponse, getScanStatusData, loginData } = this.props
-            const { calledStudentsData, calledAbsentStatus, selectedClass, selectedSection, selectedClassId, calledScanStaus, calledLogin, callApi, absentStatusPayload, isCalledStudentAndExam } = this.state
+            const { calledStudentsData, calledAbsentStatus, selectedClass, selectedSection, selectSet, selectedClassId, calledScanStaus, calledLogin, callApi, absentStatusPayload, isCalledStudentAndExam } = this.state
             if (apiStatus && prevProps.apiStatus != apiStatus && apiStatus.error) {
                 if (calledStudentsData) {
                     this.loader(false)
@@ -468,6 +506,7 @@ dispatchStudentExamData(payload){
                                     class: selectedClass,
                                     classId: selectedClassId,
                                     section: selectedSection,
+                                    set: selectSet ,
                                     data: studentsAndExamData.data
                                 }
 
@@ -493,19 +532,26 @@ dispatchStudentExamData(payload){
                                     let testID = []
                                     let examDates = []
                                     let subjects = []
+                                    let set =[]
                                     _.filter(studentsAndExamData.data.exams, function (o) {
                                         subArr.push(o.subject + " " + o.examDate)
                                         testID.push(o.examId)
                                         examDates.push(o.examDate)
                                         subjects.push(o.subject)
+                                        set.push(o.hasOwnProperty("set") && o.set.length > 0 ? o.set : [])
+                            
                                     })
+                    
+
+                                    
                                     this.setState({
                                         errSection: '',
                                         sectionValid: true,
                                         subArr: subArr,
                                         examTestID: testID,
                                         examDate: examDates,
-                                        subjectsData: subjects
+                                        subjectsData: subjects,
+                                        set:set
 
                                     })
                                 }
@@ -515,6 +561,7 @@ dispatchStudentExamData(payload){
                                     errSection: Strings.please_select_valid_section,
                                     sectionValid: false,
                                     subIndex: -1,
+                                    setIndex:-1,
                                     selectedSubject: '',
                                     selectedDate: '',
                                     pickerDate: new Date()
@@ -690,6 +737,7 @@ dispatchStudentExamData(payload){
                             class: selectedClass,
                             classId: selectedClassId,
                             section: selectedSection,
+                            set: selectSet ,
                             data: studentsAndExamData.data
                         }
     
@@ -720,7 +768,7 @@ dispatchStudentExamData(payload){
     }
 
     validateFields = () => {
-        const { classListIndex, subIndex, sectionListIndex, sectionValid } = this.state
+        const { classListIndex, subIndex, sectionListIndex, sectionValid ,setIndex} = this.state
         const { scanTypeData } = this.props
         if (classListIndex == -1) {
             this.setState({
@@ -750,7 +798,7 @@ dispatchStudentExamData(payload){
             })
             return false
         }
-        if (subIndex == -1) {
+       else if (subIndex == -1) {
             this.setState({
                 errClass: '',
                 errSection: '',
@@ -759,28 +807,45 @@ dispatchStudentExamData(payload){
             })
             return false
         }
+       else if (setIndex == -1) {
+            this.setState({
+                errClass: '',
+                errSection: '',
+                errSub: '',
+                errDate: '',
+                errSet: Strings.please_select_valid_section
+            })
+            return false
+        }
+     
 
         return true
     }
 
     onSubmitClick = () => {
-        const { selectedClass, selectedClassId, selectedSection, examTestID, subIndex, examDate, subjectsData } = this.state
+        const { selectedClass, selectedClassId, selectedSection, examTestID, subIndex, examDate, subjectsData ,selectSet,setIndex} = this.state
         const { loginData } = this.props
+       
         this.setState({
             errClass: '',
             errSub: '',
             errSection: '',
-            errSub: '',
+            // errSet: '',
             isLoading: true
         }, () => {
             let valid = this.validateFields()
+           
             if (valid) {
+                let selectedset = []
+                selectedset.push(selectSet)
+                let setValue = selectSet.length > 0 ? selectSet[subIndex].length > 0 ? selectSet[subIndex] : '' : ''
                 let obj = {
                     className: selectedClass,
                     class: selectedClassId,
                     examDate: examDate[subIndex],
                     section: selectedSection,
                     subject: subjectsData[subIndex],
+                    set: setValue,
                     examTestID: examTestID[subIndex],
                 }
                 this.props.FilteredDataAction(obj)
@@ -825,7 +890,8 @@ dispatchStudentExamData(payload){
         let dataPayload = {
             classId: this.state.selectedClassId,
             section: this.state.selectedSection,
-            subject: this.state.selectedSubject
+            subject: this.state.selectedSubject,
+            set: this.state.selectSet
         }
         let apiObj = new GetStudentsAndExamData(dataPayload, token);
         this.props.APITransport(apiObj)
@@ -879,11 +945,12 @@ dispatchStudentExamData(payload){
             this.setState({ dateVisible: false })
         }
     }
-
+    
+     
 
     render() {
-        const { navigation, isLoading, defaultSelected, classList, classListIndex, selectedClass, sectionList, sectionListIndex, selectedSection, pickerDate, selectedDate, subArr, selectedSubject, subIndex, errClass, errSub, errDate, errSection, sectionValid, dateVisible, examTestID } = this.state
-        const { loginData, multiBrandingData, modalStatus, modalMessage } = this.props
+        const { navigation, isLoading, defaultSelected, classList, classListIndex, selectedClass, sectionList,setIndex,set,ExamSetArray, sectionListIndex, selectedSection, pickerDate, selectedDate, subArr, selectedSubject,selectSet, subIndex, errClass, errSub,errSet, errDate, errSection, sectionValid, dateVisible, examTestID,examSetData } = this.state
+        const { loginData, multiBrandingData, modalStatus, modalMessage ,studentsAndExamData} = this.props
         const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.selectDetails[0]
         return (
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
@@ -933,6 +1000,8 @@ dispatchStudentExamData(payload){
                             {Strings.please_select_below_details}
                         </Text>
                         <View style={{ backgroundColor: 'white', paddingHorizontal: '5%', minWidth: '100%', paddingVertical: '10%', borderRadius: 4 }}>
+                       
+                           
                             <View style={[styles.fieldContainerStyle, { paddingBottom: classListIndex != -1 ? 0 : '10%' }]}>
                                 <View style={{ flexDirection: 'row' }}>
 
@@ -979,6 +1048,25 @@ dispatchStudentExamData(payload){
                                         defaultData={defaultSelected}
                                         defaultIndex={subIndex}
                                         selectedData={selectedSubject}
+                                        icon={require('../../assets/images/arrow_down.png')}
+                                    />
+                                </View>
+                            }
+
+                      {
+                            ExamSetArray && ExamSetArray.length > 0 && ExamSetArray[subIndex] != null && ExamSetArray[subIndex] != '' &&  subIndex != -1 &&
+                                <View style={[styles.fieldContainerStyle, {bottom:25, paddingBottom: subIndex != -1 ? '10%' : '10%' }]}>
+                                    <View style={{ flexDirection: 'row' }}>
+                                        <Text style={[styles.labelTextStyle]}>{BrandLabel && BrandLabel.Set ? BrandLabel.Set : Strings.set_text}</Text>
+                                        {errSet != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 1, width: '50%', textAlign: 'right', fontWeight: 'normal' }]}>{errSet}</Text>}
+                                    </View>
+    
+                                    <DropDownMenu
+                                        options={ExamSetArray[subIndex]}
+                                        onSelect={(idx, value) => this.onDropDownSelect(idx, value, 'set')}
+                                        defaultData={defaultSelected}
+                                        defaultIndex={setIndex}
+                                        selectedData={selectSet}
                                         icon={require('../../assets/images/arrow_down.png')}
                                     />
                                 </View>
