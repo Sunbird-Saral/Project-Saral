@@ -84,7 +84,7 @@ const ScanStatus = ({
     }
 
     const getPresentStudentList = ()=>{
-        let hasSet = filteredData.hasOwnProperty("set") & filteredData.set.length > 0 ? filteredData.set : ''
+        let hasSet = filteredData.hasOwnProperty("set") ? filteredData.set.length > 0 ? filteredData.set : '' : ''
         let data = typeof (scanedData) === "object"
         ?
         scanedData.data

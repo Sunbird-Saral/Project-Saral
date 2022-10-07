@@ -340,6 +340,7 @@ useEffect(() => {
 
     const setDataIntoRegularStudentExamApi = async() => {
         let getStudentExamCache = await getRegularStudentExamApi();
+        if (getStudentExamCache != null) {
         for (const e of getStudentExamCache) {
             if (e.class == filteredData.className && e.section == filteredData.section && `${filteredData.subject + ' ' + filteredData.examDate}` == e.subject && e.key == loginData.data.school.schoolId) {
                 let studentArrayData = e.data.data.students.length > 0 ? e.data.data.students : []
@@ -353,6 +354,7 @@ useEffect(() => {
                 break;
             }
         }
+    }
         await setRegularStudentExamApi(getStudentExamCache);
         await setPresentAbsentStudent(allStudentData)
         navigation.push('ScanHistory');
@@ -372,6 +374,7 @@ useEffect(() => {
                     setIsLoading(false)
                     setPresentAbsentStudent(allStudentData)
                     navigation.push('ScanHistory');
+                    setDataIntoRegularStudentExamApi()
                     apiResponse = res
                     clearTimeout(id)
                     api.processResponse(res)
@@ -444,7 +447,7 @@ useEffect(() => {
                 //Alert message show message "something went wrong or u don't have cache in local"            
             }
         } else {
-        let hasSet = filteredData.hasOwnProperty("set") && filteredData.set.length > 0 ? `?set=${filteredData.set}` : ''
+        let hasSet = filteredData.hasOwnProperty("set") ? filteredData.set.length > 0 ? `?set=${filteredData.set}` : '' : ''
         let payload =
         {
             "examId": filteredData.examTestID,

@@ -44,7 +44,7 @@ const ScanDataModal = ({
             getPresentStudentList(localstutlist)
             getStudentList()
         } else {
-            let hasSet = filteredData.hasOwnProperty("set") & filteredData.set.length > 0 ? filteredData.set : ''
+            let hasSet = filteredData.hasOwnProperty("set") ?   filteredData.set.length > 0 ? filteredData.set : '' : ''
             if (hasSet.length > 0) {
                 getPresentStudentList(localstutlist)
             } else {
@@ -55,7 +55,7 @@ const ScanDataModal = ({
 
     //functions
     const getPresentStudentList = (loacalstutlist) => {
-        let hasSet = filteredData.hasOwnProperty("set") & filteredData.set.length > 0 ? filteredData.set : ''
+        let hasSet = filteredData.hasOwnProperty("set") ?  filteredData.set.length > 0 ? filteredData.set : '' : ''
         let data = typeof (loacalstutlist) === "object"
             ?
             loacalstutlist[0]

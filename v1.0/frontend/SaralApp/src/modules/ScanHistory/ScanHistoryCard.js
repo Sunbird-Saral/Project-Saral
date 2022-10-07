@@ -49,7 +49,7 @@ const ScanHistoryCard = ({
         getStudentList()
     }, [])
     const getSaveCount = () => {
-        let hasSet = filteredData.response.hasOwnProperty("set") & filteredData.response.set.length > 0 ? filteredData.response.set : ''
+        let hasSet = filteredData.response.hasOwnProperty("set") ? filteredData.response.set.length > 0 ? filteredData.response.set : '' : ''
         let data =
             typeof (scanedData.response) === "object" ?
                 scanedData.response.data ?
