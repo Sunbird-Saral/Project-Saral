@@ -208,6 +208,10 @@ definitions:
             description: "If this is set to true frontend application will have minimal screens in ui. In savesMarksAPI and getSavedScan we are using roiId as our unique key and fetching data from this key ."
             default: false
             example: true
+          offline:
+            type: boolean
+            example: true
+            description: "If this is set to true we can run app when mobile data is off "
           
       classes:
             $ref: '#/definitions/classResponse'
