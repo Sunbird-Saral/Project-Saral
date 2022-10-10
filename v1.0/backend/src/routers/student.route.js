@@ -76,6 +76,8 @@ router.post('/fetchStudentsByQuery', auth, async (req, res) => {
 router.post('/fetchStudentsandExamsByQuery', auth, async (req, res) => {
     const match = {}
     const examMatch = {}
+    let setMatch = {}
+
     match.schoolId = req.school.schoolId
 
     if (req.body.classId) {
@@ -101,12 +103,18 @@ router.post('/fetchStudentsandExamsByQuery', auth, async (req, res) => {
 
     if (req.body.hasOwnProperty('subject')) {
         let subject = req.body.subject.split(' ')
+        examMatch.subject = subject[0]
         examMatch.examDate = subject[1]
     }
+
+    if (req.body.hasOwnProperty('set')) {
+        setMatch = req.body.set
+    }
+    
     try {
         const students = await Student.find(match, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 }).lean()
         for(let student of students){
-            let marks = await Marks.findOne({"studentId": student.studentId, "examDate": examMatch.examDate}) 
+            let marks = await Marks.findOne({"studentId": student.studentId, "subject":examMatch.subject, "examDate": examMatch.examDate , "set": examMatch.set }) 
             if(marks && typeof marks == "object" && marks.examDate == examMatch.examDate){
                 student["studentAvailability"] = marks.studentAvailability
             }else{

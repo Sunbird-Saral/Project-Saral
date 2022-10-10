@@ -298,7 +298,10 @@ useEffect(() => {
                 "securedMarks": 0,
                 "totalMarks": 0
             }
-
+            let hasSet = filteredData.hasOwnProperty("set") ? filteredData.set.length > 0 ? filteredData.set : '' : '' 
+            if(hasSet.length > 0){
+                stdPstAbs.set = hasSet
+            }
             stdPstAbs.studentAvailability = element.studentAvailability
             stdPstAbs.studentId = element.studentId
             stdPstAbsArray.push(stdPstAbs)
