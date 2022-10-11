@@ -114,7 +114,7 @@ router.post('/fetchStudentsandExamsByQuery', auth, async (req, res) => {
     try {
         const students = await Student.find(match, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 }).lean()
         for(let student of students){
-            let marks = await Marks.findOne({"studentId": student.studentId, "subject":examMatch.subject, "examDate": examMatch.examDate , "set": examMatch.set }) 
+            let marks = await Marks.findOne({"studentId": student.studentId, "subject":examMatch.subject, "examDate": examMatch.examDate , "set": setMatch.set }) 
             if(marks && typeof marks == "object" && marks.examDate == examMatch.examDate){
                 student["studentAvailability"] = marks.studentAvailability
             }else{
