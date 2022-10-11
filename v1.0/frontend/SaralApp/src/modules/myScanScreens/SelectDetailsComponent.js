@@ -891,7 +891,9 @@ dispatchStudentExamData(payload){
             let hasCacheData = await getRegularStudentExamApi();
             if (hasCacheData) {
                 let cacheFilterData =  hasCacheData.filter((element)=>{
-                    let conditionSwitch = setValue.length > 0  ? element.key == this.props.loginData.data.school.schoolId && element.class == this.state.selectedClass && element.section == this.state.selectedSection && element.subject == this.state.selectedSubject && setValue.length > 0 && element.set == setValue : element.key == this.props.loginData.data.school.schoolId && element.class == this.state.selectedClass && element.section == this.state.selectedSection && element.subject == this.state.selectedSubject && setValue.length > 0
+                    let conditionSwitch = setValue.length > 0  ? element.key == this.props.loginData.data.school.schoolId && element.class == this.state.selectedClass && element.section == this.state.selectedSection && element.subject == this.state.selectedSubject &&  element.set == setValue 
+                    :
+                     element.key == this.props.loginData.data.school.schoolId && element.class == this.state.selectedClass && element.section == this.state.selectedSection && element.subject == this.state.selectedSubject
                     if (conditionSwitch) {
                         return true
                     }
