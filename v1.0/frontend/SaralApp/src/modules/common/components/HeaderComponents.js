@@ -76,7 +76,7 @@ class HeaderComponents extends Component {
         }
 
         async function removeGlobalCache(){
-            await removeAllCache();q
+            await removeAllCache();
             navigation.navigate('auth')
         }
 

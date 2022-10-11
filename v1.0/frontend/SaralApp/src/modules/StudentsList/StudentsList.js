@@ -93,15 +93,33 @@ useEffect(() => {
             if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode && hasNetwork) {
 
                 let getRoiCache = await getRegularRoipi();
+                let setValue = filteredData.hasOwnProperty("set")  ? filteredData.set.length> 0 ? filteredData.set : '' : ''
+
                 if (getRoiCache != null) {
-                    let result = getRoiCache.findIndex((e)=> e.key == loginData.data.school.schoolId && e.examId == filteredData.examTestID)
+                    let result = getRoiCache.findIndex((e)=> {
+                       return setValue.length > 0 ? e.key == loginData.data.school.schoolId && e.examId == filteredData.examTestID && filteredData.set == e.set : e.key == loginData.data.school.schoolId && e.examId == filteredData.examTestID
+                    });
+                    
                     if (result > -1) {
-                        getRoiCache[result].data = roiData 
-                    } else {
+                        getRoiCache[result].data = roiData
+                    } else if (setValue.length > 0) {
+                        
+                        let payload = {
+                            key :`${loginData.data.school.schoolId}`,
+                            examId: filteredData.examTestID,
+                            data: roiData,
+                            set: setValue
+                        }
+                        getRoiCache.push(payload);
+                    } 
+                    else {
                         let payload = {
                             key :`${loginData.data.school.schoolId}`,
                             examId: filteredData.examTestID,
                             data: roiData
+                        }
+                        if (setValue.length > 0) {
+                            payload.set = setValue
                         }
                         getRoiCache.push(payload);
                     }
@@ -111,6 +129,9 @@ useEffect(() => {
                         key :`${loginData.data.school.schoolId}`,
                         examId: filteredData.examTestID,
                         data: roiData
+                    }
+                    if (setValue.length > 0) {
+                        payload.set = setValue
                     }
                     await setRegularRoiApi([payload]);
                 }
@@ -124,10 +145,17 @@ useEffect(() => {
 
     const getSavedScanApiCache = async (savedScanData) => {
         let getSavedScanCache = await getRegularSavedScanpi();
+        let setValue = filteredData.hasOwnProperty("set")  ? filteredData.set.length> 0 ? filteredData.set : '' : ''
+
         if (getSavedScanCache != null) {
-            let result = getSavedScanCache.findIndex((e)=> e.key == loginData.data.school.schoolId && e.classId == filteredData.class && e.subject == filteredData.subject && e.section == filteredData.section && e.fromDate == filteredData.examDate)
+            let result = getSavedScanCache.findIndex((e)=> {
+                return setValue.length > 0 ? e.key == loginData.data.school.schoolId && e.classId == filteredData.class && e.subject == filteredData.subject && e.section == filteredData.section && e.fromDate == filteredData.examDate && filteredData.set == e.set : e.key == loginData.data.school.schoolId && e.classId == filteredData.class && e.subject == filteredData.subject && e.section == filteredData.section && e.fromDate == filteredData.examDate
+            });
             if (result > -1) {
                 getSavedScanCache[result].data = savedScanData
+                if (setValue.length > 0) {
+                    getSavedScanCache[result].set = setValue
+                }
             } else {
                 let payload = {
                     key :`${loginData.data.school.schoolId}`,
@@ -136,6 +164,9 @@ useEffect(() => {
                     section: filteredData.section,
                     fromDate: filteredData.examDate,
                     data: savedScanData
+                }
+                if (setValue.length > 0) {
+                    payload.set = setValue
                 }
                 getSavedScanCache.push(payload);
             }
@@ -149,6 +180,9 @@ useEffect(() => {
                 fromDate: filteredData.examDate,
                 data: savedScanData
             }
+            if (setValue.length > 0) {
+                payload.set = setValue
+            }
             await setRegularSavedScanApi([payload]);
         }
     }
@@ -158,9 +192,11 @@ useEffect(() => {
 
         if (!hasNetwork) {
             let hasCacheData = await getRegularSavedScanpi();
+            let setValue = filteredData.hasOwnProperty("set")  ? filteredData.set.length> 0 ? filteredData.set : '' : ''
             if (hasCacheData) {
                 let cacheFilterData =  hasCacheData.filter((element)=>{
-                    if (element.key == loginData.data.school.schoolId && element.classId == filteredData.class && element.subject == filteredData.subject && element.section == filteredData.section && element.fromDate == filteredData.examDate) {
+                    let conditionSwitch = setValue.length ? element.key == loginData.data.school.schoolId && element.classId == filteredData.class && element.subject == filteredData.subject && element.section == filteredData.section && element.fromDate == filteredData.examDate && filteredData.set == element.set : element.key == loginData.data.school.schoolId && element.classId == filteredData.class && element.subject == filteredData.subject && element.section == filteredData.section && element.fromDate == filteredData.examDate
+                    if (conditionSwitch) {
                         return true
                     }
                 });
@@ -432,13 +468,14 @@ useEffect(() => {
     const getRoi = async() => {
 
         let hasNetwork = await checkNetworkConnectivity();
-
+        let setValue = filteredData.hasOwnProperty("set") > 0 ? filteredData.set.length > 0 ? filteredData.set : '' : ''
 
         if (!hasNetwork) {
             let hasCacheData = await getRegularRoipi();
             if (hasCacheData) {
                 let cacheFilterData =  hasCacheData.filter((element)=>{
-                    if (element.key == loginData.data.school.schoolId && element.examId == filteredData.examTestID) {
+                    let conditionSwitch = setValue.length > 0 ? element.key == loginData.data.school.schoolId && element.examId == filteredData.examTestID && element.set == filteredData.set : element.key == loginData.data.school.schoolId && element.examId == filteredData.examTestID
+                    if (conditionSwitch) {
                         return true
                     }
                 });

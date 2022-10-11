@@ -280,10 +280,12 @@ class MyScanComponent extends Component {
             key: this.props.loginData.data.school.schoolId
         }
         let scaned = await getScanDataApi()
+        let setValue = this.props.filteredData.hasOwnProperty("set")  ? this.props.filteredData.set.length> 0 ? this.props.filteredData.set : '' : ''
         if (scaned != null) {
 
             let data = scaned.filter((value)=> {
-                if (value.examId == this.state.examId && value.key == this.props.loginData.data.school.schoolId) {
+                let conditionSwitch = setValue.length > 0 ? value.examId == this.state.examId && value.key == this.props.loginData.data.school.schoolId && filteredData.set == value.set : value.examId == this.state.examId && value.key == this.props.loginData.data.school.schoolId
+                if (conditionSwitch) {
                     return true
                 }
             });
@@ -296,11 +298,17 @@ class MyScanComponent extends Component {
                     }
                 };
             } else {
+                if (setValue.length > 0) {
+                    payload.set = setValue
+                }
                 scaned.push(payload);
             }
             await setScanDataApi(scaned)
-
+            
         } else {
+            if (setValue.length > 0) {
+                payload.set = setValue
+            }
             await setScanDataApi([payload])
         }
     }
@@ -721,7 +729,7 @@ class MyScanComponent extends Component {
 
   async  openScanModal(data) {
         const { localScanedData, dbScanSavedData, scanModalDataVisible } = this.state;
-        const { roiIndex, loginData } = this.props;
+        const { roiIndex, loginData, filteredData } = this.props;
 
         if (this.state.roiIndex != -1) {
             if (data == "scan") {
@@ -730,10 +738,12 @@ class MyScanComponent extends Component {
                 const hasNetwork = await checkNetworkConnectivity()
                 if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode & !hasNetwork) {
                     let scaned = await getScanDataApi()
+                    let setValue = filteredData.hasOwnProperty("set")  ? filteredData.set.length> 0 ? filteredData.set : '' : ''
                     let data = []
                     if (scaned != null) {
                         data = scaned.filter( async(e) => {
-                            if (e.examId == this.state.examId && e.key == this.props.loginData.data.school.schoolId) {
+                            let conditionSwitch = setValue.length > 0 ? e.examId == this.state.examId && e.key == this.props.loginData.data.school.schoolId && filteredData.set == e.set : e.examId == this.state.examId && e.key == this.props.loginData.data.school.schoolId
+                            if (conditionSwitch) {
                                 return true
                             }
                         });
