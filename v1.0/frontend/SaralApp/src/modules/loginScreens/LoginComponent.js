@@ -10,11 +10,14 @@ import APITransport from '../../flux/actions/transport/apitransport';
 import { LoginAction } from '../../flux/actions/apis/LoginAction';
 import { DefaultBrandAction } from '../../flux/actions/apis/defaultBrandAction';
 import {
-    setLoginData, setLoginCred, getLoginCred, setRememberUser, getRememberedUser, forgetUser, setRememberPassword, getRememberedPassword, forgetUserpass
+    setLoginData, setLoginCred, getLoginCred, setRememberUser, getRememberedUser, forgetUser, setRememberPassword, getRememberedPassword, forgetUserpass, getLoginData
 } from '../../utils/StorageUtils'
 import { Assets } from '../../assets/index'
-import { monospace_FF } from '../../utils/CommonUtils';
+import { checkNetworkConnectivity, monospace_FF } from '../../utils/CommonUtils';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getBrandingDataApi, getLoginApi, setLoginApi } from '../../utils/offlineStorageUtils';
+import { storeFactory } from '../../flux/store/store';
+import constants from '../../flux/actions/constants';
 
 class LoginComponent extends Component {
     constructor(props) {
@@ -53,13 +56,54 @@ class LoginComponent extends Component {
           
         });
 
+        let hasNetwork = await checkNetworkConnectivity();
+
         this.timerState = setTimeout(() => { this.setState({ Loading: false }) }, 5000)
-        this.callDefaultbrandingData()
+        if (hasNetwork) {
+            this.callDefaultbrandingData()
+        } else {
+           await this.callBrandingCache(schollId, "")
+        }
         this.props.navigation.addListener('willFocus', async payload => {
             AppState.addEventListener('change', this.handleAppStateChange);
             this.componentMountCall()
         })
     }
+
+    async callBrandingCache(key, type) {
+        let hasCacheData = await getBrandingDataApi();
+        let hasNetwork = await checkNetworkConnectivity();
+        if (hasCacheData && !hasNetwork && type == 'schoolId') {
+            let cacheFilterData = hasCacheData.filter((element) => {
+                if (element.key == key) {
+                    return true
+                }
+            });
+
+            if (cacheFilterData.length > 0) {
+                storeFactory.dispatch(this.dispatchBrandingDataApi(cacheFilterData.length > 0 ? cacheFilterData[0].data : []))
+                this.setState({
+                    errCommon: '',
+                    isLoading: false
+                })  
+            } else {
+                this.setState({
+                    errCommon: Strings.you_dont_have_cache,
+                    isLoading: false
+                })  
+            }
+        } else {
+            //Alert message show message "something went wrong or u don't have cache in local"
+        }
+    }
+
+    dispatchBrandingDataApi(payload) {
+        return {
+            type: constants.DEFAULT_BRAND,
+            payload
+        }
+    }
+
     componentWillUnmount() {
         clearTimeout(this.timerState)
     }
@@ -102,20 +146,57 @@ class LoginComponent extends Component {
         }
     }
 
-    callLogin = () => {
+    callLogin = async () => {
         const { schoolId, password } = this.state
-        this.setState({
-            isLoading: true,
-            calledLogin: true
-        }, () => {
-            let loginCredObj = {
-                "schoolId": schoolId,
-                "password": password
-            }
+        const { loginData } = this.props
 
-            let apiObj = new LoginAction(loginCredObj);
-            this.props.APITransport(apiObj);
-        })
+        let hasNetwork = await checkNetworkConnectivity();
+
+
+        if (!hasNetwork) {
+            let hasCacheData = await getLoginApi();
+            if (hasCacheData) {
+                let cacheFilterData =  hasCacheData.filter((element)=>{
+                    if (element.key == schoolId) {
+                        return true
+                    }
+                });
+                if (cacheFilterData.length > 0) {
+                    storeFactory.dispatch(this.dispatchLoginData(cacheFilterData[0].data))
+                    this.props.navigation.navigate('mainMenu')
+                } else {
+                    this.setState({
+                        errCommon: Strings.you_dont_have_cache,
+                        isLoading: false
+                    })    
+                }
+            } else {
+                this.setState({
+                    errCommon: Strings.you_seem_to_be_offline_please_check_your_internet_connection,
+                    isLoading: false
+                })            
+            }
+        } else {
+            this.setState({
+                isLoading: true,
+                calledLogin: true
+            }, () => {
+                let loginCredObj = {
+                    "schoolId": schoolId,
+                    "password": password
+                }
+    
+                let apiObj = new LoginAction(loginCredObj);
+                this.props.APITransport(apiObj);
+            })
+        }
+    }
+
+    dispatchLoginData(payload) {
+        return {
+            type: constants.LOGIN_PROCESS,
+            payload
+        }
     }
 
     onSubmit = () => {
@@ -159,6 +240,7 @@ class LoginComponent extends Component {
     }
 
     onLoginDetailsChange = (text, type,value) => {
+        this.callBrandingCache(text, type)
         this.setState({ [type]: text })
          this.toggleRememberMe()
     }
@@ -239,6 +321,39 @@ class LoginComponent extends Component {
                         }
                         let loginCred = await setLoginCred(loginCredObj)
                         let loginSaved = await setLoginData(loginData.data)
+                        let hasNetwork = await checkNetworkConnectivity();
+                        if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode && hasNetwork) {
+                            let getLoginCache = await getLoginApi();
+                            let loginCred = await getLoginCred();
+                            let loginUser = `${loginCred.schoolId}`
+                            if (getLoginCache != null) {
+
+                                const result = getLoginCache.filter(_element => _element.key === loginUser);
+
+                                if (result.length > 0) {
+                                    for (let element of getLoginCache) {
+                                        if (element.key == result[0].key) {
+                                            element.data = loginData
+                                            break;
+                                        }
+                                    };
+                                } else {
+                                    let payload = {
+                                        key: `${loginData.data.school.schoolId}`,
+                                        data: loginData
+                                    }
+                                    getLoginCache.push(payload);
+                                }
+                                await setLoginApi(getLoginCache);
+                                
+                            } else {
+                                let payload = {
+                                    key: `${loginData.data.school.schoolId}`,
+                                    data: loginData
+                                }
+                                await setLoginApi([payload])
+                            }
+                        }
                         if (loginCred && loginSaved) {
                             navigation.navigate('mainMenu')
                         }

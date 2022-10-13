@@ -60,7 +60,7 @@ const schoolSchema = new mongoose.Schema({
         type: String,
         required: false
     },
-    offline: { 
+    offlineMode: { 
         type: Boolean,
         required: false
     }

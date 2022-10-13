@@ -12,7 +12,8 @@ export const Assets = {
     openEye: require('./images/openeye.png'),
     closeEye: require('./images/closeeye.png'),
     upArrow: require('./images/up_arrow.png'),
-    downArrow: require('./images/down_arrow.png')
+    downArrow: require('./images/down_arrow.png'),
+    delete: require('./images/remove.png')
 
 }
 

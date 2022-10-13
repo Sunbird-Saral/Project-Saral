@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
 import AppTheme from '../../utils/AppTheme';
 import { getErrorMessage, getLoginCred, getPresentAbsentStudent, getScanData, getScannedDataFromLocal, setErrorMessage, setScannedDataIntoLocal } from '../../utils/StorageUtils';
-import { dispatchCustomModalMessage, dispatchCustomModalStatus, Exam_QuestionHeader, monospace_FF } from '../../utils/CommonUtils';
+import { checkNetworkConnectivity, dispatchCustomModalMessage, dispatchCustomModalStatus, Exam_QuestionHeader, monospace_FF } from '../../utils/CommonUtils';
 import ExamDetailsPopup from '../common/components/ExamDetailsPopup';
 import ButtonComponent from '../common/components/ButtonComponent';
 import Strings from '../../utils/Strings';
@@ -49,7 +49,7 @@ const ScanHistoryCard = ({
         getStudentList()
     }, [])
     const getSaveCount = () => {
-        let hasSet = filteredData.response.hasOwnProperty("set") & filteredData.response.set.length > 0 ? filteredData.response.set : ''
+        let hasSet = filteredData.response.hasOwnProperty("set") ? filteredData.response.set.length > 0 ? filteredData.response.set : '' : ''
         let data =
             typeof (scanedData.response) === "object" ?
                 scanedData.response.data ?
@@ -95,10 +95,13 @@ const ScanHistoryCard = ({
 
     const onPressSaveInDB = async () => {
         const data = await getScannedDataFromLocal();
-        const { subject, examDate, set } = filteredData.response
-        
-        if (data) {
-            if (!bgFlag) {
+        const hasNetwork = await checkNetworkConnectivity();
+        const { subject, examDate } = filteredData.response
+
+        if (hasNetwork) {
+            if (data) {
+                if (!bgFlag) {
+                    
             const filterData = data.filter((e) => {
 
                 let findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.response.section)
@@ -146,7 +149,10 @@ const ScanHistoryCard = ({
         setIsLoading(false)
         callCustomModal(Strings.message_text,Strings.there_is_no_data,false);
         }
+    } else {
+        callCustomModal(Strings.message_text, Strings.please_try_again_later_network_is_not_available, false, true)
     }
+}
     
     const saveScanData = async(api, filteredDatalen, localScanData) => {
 
@@ -238,12 +244,14 @@ const ScanHistoryCard = ({
 
     const getStudentList = async () => {
         let studentList = await getPresentAbsentStudent();
-        let absentStudent = studentList.filter((item) => { 
+        let absentStudent = studentList != null ? studentList.filter((item) => { 
             if (item.studentAvailability == false) {
                 return true
             }
         })
-        setStudentCount({ absentCount: absentStudent.length , totalCount: studentList.length})
+        :
+        []
+        setStudentCount({ absentCount: absentStudent.length , totalCount: studentList!=null ? studentList.length : 0})
     }
 
     // for exam type

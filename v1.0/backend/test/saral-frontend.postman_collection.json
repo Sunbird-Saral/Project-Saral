@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"schoolId\": \"u001\",\r\n    \"password\": \"tarento@123\",\r\n    \"classes\": true \r\n}",
+							"raw": "{\r\n    \"schoolId\": \"od001\",\r\n    \"password\": \"tarento@123\",\r\n    \"classes\": true \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -138,15 +138,15 @@
 								},
 								{
 									"key": "Content-Length",
-									"value": "534"
+									"value": "553"
 								},
 								{
 									"key": "ETag",
-									"value": "W/\"216-sSfnyIgGQjGO+vtXYHdyNDTmZmM\""
+									"value": "W/\"229-4eVJg6joJtMvCzs3I0m5Ox3hKpk\""
 								},
 								{
 									"key": "Date",
-									"value": "Mon, 11 Jul 2022 12:01:41 GMT"
+									"value": "Mon, 10 Oct 2022 09:48:40 GMT"
 								},
 								{
 									"key": "Connection",
@@ -158,7 +158,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"school\": {\n        \"storeTrainingData\": true,\n        \"name\": \"Dummy school 2\",\n        \"schoolId\": \"od001\",\n        \"state\": \"odisha\",\n        \"autoSync\": false,\n        \"autoSyncFrequency\": 600000,\n        \"tags\": false,\n        \"supportEmail\": \"abc@gmail.com\"\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJvZDAwMSIsImlhdCI6MTY1NzU0MDkwMX0.tMDeXo5PjsBo6i5y55sWMUqBDaVI3OghY9AFWqsFuFc\",\n    \"classes\": [\n        {\n            \"sections\": [\n                {\n                    \"section\": \"D\"\n                },\n                {\n                    \"section\": \"B\"\n                },\n                {\n                    \"section\": \"C\"\n                }\n            ],\n            \"classId\": \"2\",\n            \"className\": \"Class-2\"\n        },\n        {\n            \"sections\": [\n                {\n                    \"section\": \"D\"\n                },\n                {\n                    \"section\": \"B\"\n                },\n                {\n                    \"section\": \"C\"\n                }\n            ],\n            \"classId\": \"3\",\n            \"className\": \"Class-3\"\n        }\n    ]\n}"
+							"body": "{\n    \"school\": {\n        \"storeTrainingData\": true,\n        \"name\": \"Dummy school 2\",\n        \"schoolId\": \"od001\",\n        \"state\": \"odisha\",\n        \"autoSync\": false,\n        \"autoSyncFrequency\": 600000,\n        \"tags\": false,\n        \"supportEmail\": \"abc@gmail.com\",\n        \"offlineMode\": true\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJvZDAwMSIsImlhdCI6MTY2NTM5NTMyMH0.Wq4H3K6DeN1C9_wzPm9Pv5K5wIulCjR-ECkQcSWReq8\",\n    \"classes\": [\n        {\n            \"sections\": [\n                {\n                    \"section\": \"D\"\n                },\n                {\n                    \"section\": \"B\"\n                },\n                {\n                    \"section\": \"C\"\n                }\n            ],\n            \"classId\": \"2\",\n            \"className\": \"Class-2\"\n        },\n        {\n            \"sections\": [\n                {\n                    \"section\": \"D\"\n                },\n                {\n                    \"section\": \"B\"\n                },\n                {\n                    \"section\": \"C\"\n                }\n            ],\n            \"classId\": \"3\",\n            \"className\": \"Class-3\"\n        }\n    ]\n}"
 						}
 					]
 				},

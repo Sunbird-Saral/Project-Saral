@@ -12,7 +12,7 @@ import ScanHistoryCard from '../ScanHistory/ScanHistoryCard';
 import SaralSDK from '../../../SaralSDK'
 import { getScannedDataFromLocal, getErrorMessage, getLoginCred, setScannedDataIntoLocal } from '../../utils/StorageUtils';
 import ButtonComponent from '../common/components/ButtonComponent';
-import { dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF, multipleStudent, neglectData } from '../../utils/CommonUtils';
+import { checkNetworkConnectivity, dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF, multipleStudent, neglectData } from '../../utils/CommonUtils';
 import ShareComponent from '../common/components/Share';
 import MultibrandLabels from '../common/components/multibrandlabels';
 import { Assets } from '../../assets';
@@ -26,6 +26,9 @@ import axios from 'axios';
 import { scanStatusDataAction } from '../ScanStatus/scanStatusDataAction';
 import { collectErrorLogs } from '../CollectErrorLogs';
 import ScanDataModal from './ScanDataModal';
+import { getRoiDataApi, getScanDataApi, setRoiDataApi, setScanDataApi } from '../../utils/offlineStorageUtils';
+import constants from '../../flux/actions/constants';
+import { storeFactory } from '../../flux/store/store';
 
 LogBox.ignoreAllLogs()
 
@@ -48,7 +51,8 @@ class MyScanComponent extends Component {
             dbScanSavedData: [],
             scanModalDataVisible: false,
             passDataToModal: [],
-            savingStatus: ''
+            savingStatus: '',
+            examId: ''
         }
     }
 
@@ -57,14 +61,24 @@ class MyScanComponent extends Component {
 
    async componentDidUpdate(prevProps) {
         const { calledRoiData} = this.state;
-        const { roiData } = this.props
+        const { roiData, minimalFlag, loginData } = this.props
         if (calledRoiData) {
             if (roiData && prevProps.roiData != roiData && this.props.minimalFlag) {
                 this.setState({ calledRoiData: false, callApi: '' })
                 if (roiData.status && roiData.status == 200) {
                    let total =  await this.sumOfLocalData();
                    this.callScanStatusData(true, total, 0);
+                   if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode) {
+                   await this.setRoiCache(roiData);
+                   }
                 }
+            }
+
+            const hasNetwork = await checkNetworkConnectivity();
+            if (calledRoiData & this.props.minimalFlag & !hasNetwork) {
+                this.setState({calledRoiData: false})
+                let total =  await this.sumOfLocalData();
+                this.callScanStatusData(true, total, 0);
             }
         }
     }
@@ -126,14 +140,19 @@ class MyScanComponent extends Component {
             let filter = data.filter((e) => {
                 let findSection = false
                 findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.section)
-                let checkDataExistence = !this.props.minimalFlag ? filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject && e.examId == filteredData.examTestID && findSection : e.roiId == roiData.data.roiId
-                if (checkDataExistence) {
-                    return true
+                let checkDataExistence = false
+                if (!this.props.minimalFlag) {
+                   return checkDataExistence = filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject && findSection
+                
+                } else if(this.props.loginData.data.school.hasOwnProperty("offlineMode") & this.props.loginData.data.school.offlineMode & this.props.minimalFlag) {
+                  return checkDataExistence =  e.roiId == roiData.data.roiId && e.key == this.props.loginData.data.school.schoolId
+                }
+                else {
+                   return checkDataExistence = e.roiId == roiData.data.roiId
                 }
             });
 
-
-            let hasSet = filteredData.hasOwnProperty("set") & filteredData.set.length > 0 ? filteredData.set : ''
+            let hasSet = filteredData.hasOwnProperty("set") ? filteredData.set.length > 0 ? filteredData.set : '' : ''
             if (hasSet.length > 0 && filter.length > 0) {
                 let findSetStudent = filter.length > 0 ? filter[0].studentsMarkInfo.filter((item) => {
                     if (hasSet.length > 0) {
@@ -145,8 +164,13 @@ class MyScanComponent extends Component {
                 filter[0].studentsMarkInfo = findSetStudent
             }
 
+
             filter.forEach((element, index) => {
-                len = len + element.studentsMarkInfo.length
+                element.studentsMarkInfo.forEach((val) => {
+                    if (val.studentAvailability == true && val.marksInfo.length > 0) {
+                        len = len + 1
+                    }
+                })
             });
 
             if (this.props.minimalFlag) {
@@ -212,6 +236,83 @@ class MyScanComponent extends Component {
         this.props.dispatchCustomModalMessage(data);
     }
 
+    setRoiCache = async (roiData) => {
+        let payload = {
+            examId: this.state.examId,
+            data: roiData,
+            key: `${this.props.loginData.data.school.schoolId}`,
+            roiId: roiData.data.roiId
+        }
+        let roi = await getRoiDataApi()
+        if (roi != null) {
+
+            let data = roi.filter((e)=> {
+                if (e.key == this.props.loginData.data.school.schoolId & e.examId == this.state.examId) {
+                    return true
+                }
+            });
+            if (data.length > 0) {
+                for (let element of roi) {
+                    if (element.key == data[0].key & element.examId == this.state.examId) {
+                        element.data = roiData
+                        break;
+                    }
+                };
+            } else {
+                let payload = {
+                    key: `${this.props.loginData.data.school.schoolId}`,
+                    data: roiData,
+                    examId: this.state.examId,
+                    roiId: roiData.data.roiId
+                }
+                roi.push(payload);
+            }
+            await setRoiDataApi(roi)
+        } else {
+            await setRoiDataApi([payload])
+        }
+    }
+
+    setScanDataCache = async (scanedData) => {
+        let payload = {
+            examId: this.state.examId,
+            data: scanedData,
+            key: this.props.loginData.data.school.schoolId
+        }
+        let scaned = await getScanDataApi()
+        let setValue = this.props.filteredData.hasOwnProperty("set")  ? this.props.filteredData.set.length> 0 ? this.props.filteredData.set : '' : ''
+        if (scaned != null) {
+
+            let data = scaned.filter((value)=> {
+                let conditionSwitch = setValue.length > 0 ? value.examId == this.state.examId && value.key == this.props.loginData.data.school.schoolId && filteredData.set == value.set : value.examId == this.state.examId && value.key == this.props.loginData.data.school.schoolId
+                if (conditionSwitch) {
+                    return true
+                }
+            });
+
+            if (data.length > 0) {
+                for (let element of scaned) {
+                    if (element.key == data[0].key) {
+                        element.data = scanedData
+                        break;
+                    }
+                };
+            } else {
+                if (setValue.length > 0) {
+                    payload.set = setValue
+                }
+                scaned.push(payload);
+            }
+            await setScanDataApi(scaned)
+            
+        } else {
+            if (setValue.length > 0) {
+                payload.set = setValue
+            }
+            await setScanDataApi([payload])
+        }
+    }
+
 
     onScanClick = async () => {
         SystemSetting.getBrightness().then((brightness) => {
@@ -224,10 +325,19 @@ class MyScanComponent extends Component {
             const grantedCamera = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.CAMERA)
 
             if (grantedRead && grantedWrite && grantedCamera) {
+                let hasEmpty = this.props.roiData.hasOwnProperty("config") ? true : this.props.roiData.length > 0
                 if (this.props.minimalFlag && this.state.roiIndex != -1) {
-                    this.openCameraActivity()
+                    if (!hasEmpty) {
+                        this.callCustomModal(Strings.message_text, Strings.roi_cache_not_available,false,false)
+                    } else {
+                        this.openCameraActivity()
+                    }
                 } else if (!this.props.minimalFlag ) {
-                    this.openCameraActivity()
+                    if (this.props.loginData.data.school.hasOwnProperty("offlineMode") && this.props.loginData.data.school.offlineMode && hasEmpty) {
+                        this.openCameraActivity()
+                    } else {
+                        this.callCustomModal(Strings.message_text,Strings.roi_cache_not_available,false,false)
+                    }
                 }
                  else {
                     this.callCustomModal(Strings.message_text,Strings.please_select_roi_layout,false,false)
@@ -355,12 +465,42 @@ class MyScanComponent extends Component {
         this.props.navigation.navigate('ScannedDetailsComponent', { oldBrightness: this.state.oldBrightness })
     }
 
-    onDropDownSelect(idx, value) {
+  async  onDropDownSelect(idx, value) {
         for (const el of this.props.studentsAndExamData.data.exams) {
             if (el.type == value) {
+
+                let hasNetwork = await checkNetworkConnectivity();
+                if (!hasNetwork) {
+                    let hasCacheData = await getRoiDataApi();
+                    if (hasCacheData) {
+                       let filterData = hasCacheData.filter((value)=> {
+                            if (value.examId == el.examId && value.key == this.props.loginData.data.school.schoolId) {
+                                this.setState({
+                                    examId: el.examId
+                                })
+                                return value.data
+                            }
+                        });
+                        if (filterData.length > 0) {
+                            storeFactory.dispatch(this.dispatchroiData(filterData[0].data))
+                            this.setState({calledRoiData: true})
+                        } else {
+                            storeFactory.dispatch(this.dispatchroiData({}))
+                            this.callCustomModal(Strings.message_text, Strings.you_dont_have_cache, false)
+                            this.setState({isLoading: false})
+                        }
+                    } else {
+                            storeFactory.dispatch(this.dispatchroiData({}))
+                            this.callCustomModal(Strings.message_text, Strings.you_dont_have_cache, false)
+                            this.setState({isLoading: false})
+                            //Alert message show message "something went wrong or u don't have cache in local"
+                        }
+                    } else {
+                        
                 this.setState({
                     calledRoiData: true,
-                    isLoading: true
+                    isLoading: true,
+                    examId: el.examId
                 }, () => {
                     let payload = {
                         "examId": el.examId,
@@ -369,6 +509,7 @@ class MyScanComponent extends Component {
                     let apiObj = new ROIAction(payload, token);
                     this.props.APITransport(apiObj);
                 })
+            }
                 break;
             }
         }
@@ -378,9 +519,18 @@ class MyScanComponent extends Component {
         })
     }
 
+    dispatchroiData (payload){
+        return {
+            type: constants.ROI_DATA,
+            payload
+        }
+    }
+
     onPressSaveInDB = async () => {
         const data = await getScannedDataFromLocal();
         const loginCred = await getLoginCred();
+        const hasNetwork = await checkNetworkConnectivity();
+        if (hasNetwork) {
         if (this.state.roiIndex != -1) {
 
             if (data) {
@@ -438,6 +588,10 @@ class MyScanComponent extends Component {
         else {
             this.callCustomModal(Strings.message_text, Strings.please_select_roi_layout, false, true)
         }
+    }else{
+        this.callCustomModal(Strings.message_text, Strings.please_try_again_later_network_is_not_available, false, true)
+    }
+        
     }
 
     saveScanData = async (api, filteredDatalen, localScanData) => {
@@ -469,23 +623,56 @@ class MyScanComponent extends Component {
     }
 
     callScanStatusData = async (isApiCalled, filteredDatalen, localScanData) => {
-        let loginCred = await getLoginCred()
+        let hasNetwork = await checkNetworkConnectivity();
+        if (!hasNetwork) {
+            let hasCacheData = await getScanDataApi();
+            if (hasCacheData) {
+                let filterData = hasCacheData.filter((value)=> {
+                    if (value.examId == this.state.examId) {
+                        return value.data
+                    }
+                })
+                if (filterData.length > 0) {
+                    storeFactory.dispatch(this.dispatchScanDataApi(filterData[0].data))
+                    this.setState({
+                        saveStatusData: filterData[0].data.data.length > 0 ? filterData[0].data.data.data.length : 0
+                    })
+                } else {
+                    this.setState({isLoading: false})
+                    this.callCustomModal(Strings.message_text, Strings.you_dont_have_cache, false)
+                }
+            } else {
+                this.setState({isLoading: false})
+                this.callCustomModal(Strings.message_text, Strings.you_dont_have_cache, false)
+                //Alert message show message "something went wrong or u don't have cache in local"
+            }
+        } else {
+            let loginCred = await getLoginCred()
 
-        let dataPayload = {
-            "classId": 0,
-            "subject": 0,
-            "section": 0,
-            "fromDate": 0,
-            "page": 0,
-            "downloadRes": false
+            let dataPayload = {
+                "classId": 0,
+                "subject": 0,
+                "section": 0,
+                "fromDate": 0,
+                "page": 0,
+                "downloadRes": false
+            }
+            let roiId = this.props.roiData && this.props.roiData.data.roiId;
+            dataPayload.roiId = roiId;
+            let apiObj = new scanStatusDataAction(dataPayload);
+            this.FetchSavedScannedData(isApiCalled, apiObj, loginCred.schoolId, loginCred.password, filteredDatalen, localScanData)
         }
-        let roiId = this.props.roiData && this.props.roiData.data.roiId;
-        dataPayload.roiId = roiId;
-        let apiObj = new scanStatusDataAction(dataPayload);
-        this.FetchSavedScannedData(isApiCalled, apiObj, loginCred.schoolId, loginCred.password, filteredDatalen, localScanData)
+    }
+
+    dispatchScanDataApi(payload) {
+        return {
+            type: constants.SCANNED_DATA,
+            payload
+        }
     }
 
     FetchSavedScannedData = async (isApiCalled, api, uname, pass, filterDataLen, localScanData) => {
+        const { loginData } = this.props;
         var obj = this
         if (api.method === 'POST') {
             let apiResponse = null
@@ -512,6 +699,9 @@ class MyScanComponent extends Component {
                             localScanedData: []
                         })
                     }
+                    if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode) {
+                        obj.setScanDataCache(res.data);
+                    }
                     obj.setState({
                         scanStatusData: filterDataLen,
                         saveStatusData: res.data.data.length,
@@ -537,14 +727,32 @@ class MyScanComponent extends Component {
         })
     }
 
-    openScanModal(data) {
+  async  openScanModal(data) {
         const { localScanedData, dbScanSavedData, scanModalDataVisible } = this.state;
-        const { roiIndex } = this.props;
+        const { roiIndex, loginData, filteredData } = this.props;
+
         if (this.state.roiIndex != -1) {
             if (data == "scan") {
                 this.setState({ passDataToModal: localScanedData, scanModalDataVisible: !scanModalDataVisible, savingStatus: 'scan' })
             } else {
-                this.setState({ passDataToModal: dbScanSavedData, scanModalDataVisible: !scanModalDataVisible, savingStatus: 'save' })
+                const hasNetwork = await checkNetworkConnectivity()
+                if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode & !hasNetwork) {
+                    let scaned = await getScanDataApi()
+                    let setValue = filteredData.hasOwnProperty("set")  ? filteredData.set.length> 0 ? filteredData.set : '' : ''
+                    let data = []
+                    if (scaned != null) {
+                        data = scaned.filter( async(e) => {
+                            let conditionSwitch = setValue.length > 0 ? e.examId == this.state.examId && e.key == this.props.loginData.data.school.schoolId && filteredData.set == e.set : e.examId == this.state.examId && e.key == this.props.loginData.data.school.schoolId
+                            if (conditionSwitch) {
+                                return true
+                            }
+                        });
+                        let scannedData = data.length > 0 ? data[0].data.data.data : []
+                        this.setState({ passDataToModal: scannedData, scanModalDataVisible: !scanModalDataVisible, savingStatus: 'save' })
+                    }
+                } else {
+                    this.setState({ passDataToModal: dbScanSavedData, scanModalDataVisible: !scanModalDataVisible, savingStatus: 'save' })
+                }
             }
         }
         else {
@@ -634,7 +842,7 @@ class MyScanComponent extends Component {
                         <View style={{ marginHorizontal: 20, marginTop: 30, marginBottom: 40 }}>
                             <DropDownMenu
                                 options={this.state.roiDataList}
-                                onSelect={(idx, value) => this.onDropDownSelect(idx, value)}
+                                onSelect={async(idx, value) => await this.onDropDownSelect(idx, value)}
                                 defaultData={BrandLabel ? BrandLabel.SelectRoi : "Select Roi"}
                                 defaultIndex={this.state.roiIndex}
                                 selectedData={this.state.selectedRoi}

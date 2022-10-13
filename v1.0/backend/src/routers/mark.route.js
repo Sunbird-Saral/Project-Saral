@@ -48,9 +48,15 @@ router.put('/saveMarks', auth, async (req, res) => {
             } else {
                 if (data.schoolId == studentMarksExist.schoolId && data.studentId == studentMarksExist.studentId && data.classId == studentMarksExist.classId && data.subject == studentMarksExist.subject && data.examDate  == studentMarksExist.examDate) {
                     let lookup = {
-                        studentId: data.studentId
+                        studentId: data.studentId,
+                        subject: data.subject,
+                        examDate: data.examDate
                     }
-                    let update = { $set: { studentIdTrainingData: data.studentIdTrainingData,predictedStudentId: data.predictedStudentId,studentAvailability: data.studentAvailability, marksInfo: data.marksInfo ,maxMarksTrainingData: data.maxMarksTrainingData,maxMarksPredicted: data.maxMarksPredicted, securedMarks: data.securedMarks, totalMarks: data.totalMarks,obtainedMarksTrainingData: data.obtainedMarksTrainingData,obtainedMarksPredicted: data.obtainedMarksPredicted,set: data.set} }
+                    if(data.set){
+                        lookup.set = data.set
+                    }
+                    
+                    let update = { $set: { studentIdTrainingData: data.studentIdTrainingData,predictedStudentId: data.predictedStudentId,studentAvailability: data.studentAvailability, marksInfo: data.marksInfo ,maxMarksTrainingData: data.maxMarksTrainingData,maxMarksPredicted: data.maxMarksPredicted, securedMarks: data.securedMarks, totalMarks: data.totalMarks,obtainedMarksTrainingData: data.obtainedMarksTrainingData,obtainedMarksPredicted: data.obtainedMarksPredicted} }
                     await Mark.update(lookup, update)
                 }
             }
