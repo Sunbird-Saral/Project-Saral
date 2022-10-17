@@ -1022,6 +1022,7 @@ const ScannedDetailsComponent = ({
             }
         }
     }
+    
 
     const goNextPage = () => {
         onSubmitClick()
