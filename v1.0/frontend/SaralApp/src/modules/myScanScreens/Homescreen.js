@@ -52,8 +52,9 @@ class HomeComponent extends Component {
 
                 //set minimal Flag
                 let isMinimalMode = await getMinimalValue();
-                const isMinimalModedata = this.props.loginData && this.props.loginData.data && this.props.loginData.data.school && this.props.loginData.data.school.isMinimalMode
-               let hasminimal = false
+                const isMinimalModedata = this.props.loginData && this.props.loginData.data && this.props.loginData.data.school && this.props.loginData.data.school.hasOwnProperty("isMinimalMode") ? this.props.loginData.data.school.isMinimalMode : null
+               
+                let hasminimal = false
               
                if(isMinimalMode === false || isMinimalMode){
                 hasminimal = isMinimalMode

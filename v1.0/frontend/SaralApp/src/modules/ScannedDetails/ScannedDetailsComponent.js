@@ -621,6 +621,7 @@ const ScannedDetailsComponent = ({
             "subject": filteredData.subject,
             "studentsMarkInfo": stdMarkInfo,
             "examId": filteredData.examTestID,
+            "userId": loginData.data.school.schoolId,
             "set": filteredData.set,
         }
         saveAndFetchFromLocalStorag(saveObj)
@@ -658,8 +659,15 @@ const ScannedDetailsComponent = ({
                  filterData = getDataFromLocal.filter((e) => {
     
                     //In minimal mode need to find organization id as we kept studentId
-                    if (e.roiId == roiData.data.roiId) {
-                        return true
+                    if (e.roiId == roiData.data.roiId && loginData.data.school.hasOwnProperty("offlineMode") & loginData.data.school.offlineMode) {
+                        if (loginData.data.school.schoolId == e.key) {
+                            return true
+                        } else {
+                            return false
+                            
+                        }
+                    } else if (e.roiId == roiData.data.roiId) {
+                        return true   
                     }
                 })
 
@@ -691,7 +699,12 @@ const ScannedDetailsComponent = ({
                             findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.section)
 
                             //In minimal mode need to find organization id as we kept studentId
-                            let findRoiID =  e.roiId == roiData.data.roiId;
+                            let findRoiID =  false;
+                            if (minimalFlag & loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode) {
+                                findRoiID = loginData.data.school.schoolId == e.key && e.roiId == roiData.data.roiId
+                            } else {
+                                findRoiID = e.roiId == roiData.data.roiId
+                            }
                             let checkDataExistence = !minimalFlag ? filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject : false
                             if (checkDataExistence && findSection || findRoiID) {
 
@@ -705,10 +718,11 @@ const ScannedDetailsComponent = ({
                                             }
                                         }
                                     })
+                                    let findIndex = !isMultipleStudent && e.studentsMarkInfo.findIndex((o)=> i < saveObj.studentsMarkInfo.length & o.studentId == studentId)
 
 
                                     if (!isMultipleStudent && findStudent.length > 0 && saveObj.studentsMarkInfo.length > 0) {
-                                        getDataFromLocal[index].studentsMarkInfo[i] = saveObj.studentsMarkInfo[0]
+                                        getDataFromLocal[index].studentsMarkInfo[findIndex] = saveObj.studentsMarkInfo[0]
                                     }
                                     else if (isMultipleStudent) {
 
@@ -1166,7 +1180,7 @@ const ScannedDetailsComponent = ({
             "examDate": minimalFlag ? null : filteredData.examDate,
             "subject": minimalFlag ? 0 : filteredData.subject,
             "examId": minimalFlag ? 0 : filteredData.examTestID,
-
+            "userId": loginData.data.school.schoolId,
             "studentsMarkInfo": [
                 {
                     "predictedStudentId": loginData.data.school.storeTrainingData ? storeTrainingData[0].studentIdPrediction : '',
@@ -1195,6 +1209,9 @@ const ScannedDetailsComponent = ({
             saveObj.studentsMarkInfo[0].obtainedMarksTrainingData = maxObtainedTrainingData[1].predictedMarks != sumOfAllMarks ? maxObtainedTrainingData[1].trainingDataSet : []
             saveObj.studentsMarkInfo[0].obtainedMarksPredicted = maxObtainedTrainingData[1].predictedMarks
             saveObj.studentsMarkInfo[0].obtainedMarksConfidence = maxObtainedTrainingData[1].predictedMarks != sumOfAllMarks ? maxObtainedTrainingData[1].predictionConfidence : []
+        }
+        if ((loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode) && minimalFlag) {
+            saveObj.key = loginData.data.school.schoolId
         }
 
         let putTrainingData = loginData.data.school.storeTrainingData ? saveObj.studentsMarkInfo[0].studentIdTrainingData = storeTrainingData.length > 0 ? storeTrainingData[0].studentIdPrediction != studentId || (storeTrainingData[0].studentIdPrediction != studentId && multiPage > 0) ? storeTrainingData[0].trainingDataSet : [] : [] : ''
