@@ -677,6 +677,9 @@ definitions:
       regExp:
         type: string
         example: ""
+      errorMsg:
+        type: string
+        example: ""
           
   cells:
     type: array
@@ -709,6 +712,10 @@ definitions:
           name:
             type: string
             example: "UP SAT Exam Sheet Form"
+          identifierPrefix:
+            description: indetifier prefix field is used as an indentifier for ID .
+            type: string
+            example: ROLLNUMBERID
           threshold:
             type: object
             properties:
