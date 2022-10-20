@@ -130,6 +130,7 @@ export default strings = new LocalizedStrings({
         you_dont_have_cache: "You don't have cache",
         please_try_again_later_network_is_not_available: "Please try again later network isn't available",
         roi_cache_not_available: "Roi cache not available",
-        set_text:'set'
+        set_text:'set',
+        you_dont_have_cache_for_save_count: "You don't have cache for save count"
     }
 })

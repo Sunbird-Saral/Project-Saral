@@ -57,12 +57,13 @@ class LoginComponent extends Component {
         });
 
         let hasNetwork = await checkNetworkConnectivity();
+        let hasCacheData = await getBrandingDataApi();
 
         this.timerState = setTimeout(() => { this.setState({ Loading: false }) }, 5000)
-        if (hasNetwork) {
+        if (hasCacheData) {
+            await this.callBrandingCache(schollId, "")
+        } else if (hasNetwork) {
             this.callDefaultbrandingData()
-        } else {
-           await this.callBrandingCache(schollId, "")
         }
         this.props.navigation.addListener('willFocus', async payload => {
             AppState.addEventListener('change', this.handleAppStateChange);
@@ -73,27 +74,30 @@ class LoginComponent extends Component {
     async callBrandingCache(key, type) {
         let hasCacheData = await getBrandingDataApi();
         let hasNetwork = await checkNetworkConnectivity();
-        if (hasCacheData && !hasNetwork && type == 'schoolId') {
-            let cacheFilterData = hasCacheData.filter((element) => {
-                if (element.key == key) {
-                    return true
-                }
-            });
-
-            if (cacheFilterData.length > 0) {
-                storeFactory.dispatch(this.dispatchBrandingDataApi(cacheFilterData.length > 0 ? cacheFilterData[0].data : []))
-                this.setState({
-                    errCommon: '',
-                    isLoading: false
-                })  
-            } else {
-                this.setState({
-                    errCommon: Strings.you_dont_have_cache,
-                    isLoading: false
-                })  
+        
+        let cacheFilterData = hasCacheData != null
+        ?
+         hasCacheData.filter((element) => {
+            if (element.key == key) {
+                return true
             }
-        } else {
-            //Alert message show message "something went wrong or u don't have cache in local"
+        })
+        :
+        []
+
+        if (hasCacheData &&  type == 'schoolId' && cacheFilterData.length > 0) {
+            storeFactory.dispatch(this.dispatchBrandingDataApi(cacheFilterData.length > 0 ? cacheFilterData[0].data : []))
+            this.setState({
+                errCommon: '',
+                isLoading: false
+            })
+        } else if (hasNetwork) {
+            this.callDefaultbrandingData()
+        } else if(type == 'schoolId'){
+            this.setState({
+                errCommon: Strings.you_dont_have_cache,
+                isLoading: false
+            })
         }
     }
 
@@ -153,30 +157,26 @@ class LoginComponent extends Component {
         let hasNetwork = await checkNetworkConnectivity();
 
 
-        if (!hasNetwork) {
-            let hasCacheData = await getLoginApi();
-            if (hasCacheData) {
-                let cacheFilterData =  hasCacheData.filter((element)=>{
-                    if (element.key == schoolId) {
-                        return true
-                    }
-                });
-                if (cacheFilterData.length > 0) {
-                    storeFactory.dispatch(this.dispatchLoginData(cacheFilterData[0].data))
-                    this.props.navigation.navigate('mainMenu')
-                } else {
-                    this.setState({
-                        errCommon: Strings.you_dont_have_cache,
-                        isLoading: false
-                    })    
+
+        
+        let hasCacheData = await getLoginApi();
+        
+        let cacheFilterData = hasCacheData != null
+            ?
+            hasCacheData.filter((element)=>{
+                if (element.key == schoolId) {
+                    return true
                 }
-            } else {
-                this.setState({
-                    errCommon: Strings.you_seem_to_be_offline_please_check_your_internet_connection,
-                    isLoading: false
-                })            
+            })
+            :
+            []
+        
+        if (hasCacheData != null && cacheFilterData.length > 0) {
+            if (cacheFilterData.length > 0) {
+                storeFactory.dispatch(this.dispatchLoginData(cacheFilterData[0].data))
+                this.props.navigation.navigate('mainMenu')
             }
-        } else {
+        } else if (hasNetwork){
             this.setState({
                 isLoading: true,
                 calledLogin: true
@@ -189,6 +189,17 @@ class LoginComponent extends Component {
                 let apiObj = new LoginAction(loginCredObj);
                 this.props.APITransport(apiObj);
             })
+        } else if(!hasNetwork) {
+            this.setState({
+                errCommon: Strings.you_dont_have_cache,
+                isLoading: false
+            })    
+        }
+         else {
+            this.setState({
+                errCommon: Strings.you_seem_to_be_offline_please_check_your_internet_connection,
+                isLoading: false
+            })            
         }
     }
 

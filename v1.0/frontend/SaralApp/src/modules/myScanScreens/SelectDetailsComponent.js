@@ -313,34 +313,30 @@ class SelectDetailsComponent extends Component {
         let hasNetwork = await checkNetworkConnectivity();
 
 
-        if (!hasNetwork) {
-            let hasCacheData = await getRegularStudentExamApi();
-            if (hasCacheData) {
-                let cacheFilterData =  hasCacheData.filter((element)=>{
-                    if (element.key == this.props.loginData.data.school.schoolId && element.class == selectedClass && element.section == selectedSection) {
-                        return true
-                    }
-                });
-                if (cacheFilterData.length > 0) {
-                    this.setState({isLoading: false, calledStudentsData: true})
-                    storeFactory.dispatch(this.dispatchStudentExamData(cacheFilterData[0].data2))
-                } else {
-                    this.setState({isLoading: false})
-                }
-            } else {
-                this.setState({isLoading: false})
-                this.callCustomModal(Strings.message_text, Strings.you_dont_have_cache, false);
-                //Alert message show message "something went wrong or u don't have cache in local"            
+        let hasCacheData = await getRegularStudentExamApi();
+        
+        let cacheFilterData = hasCacheData != null ?  hasCacheData.filter((element)=>{
+            if (element.key == this.props.loginData.data.school.schoolId && element.class == selectedClass && element.section == selectedSection) {
+                return true
             }
-        } else {      
+        })
+        :
+        []
+
+        if (hasCacheData && cacheFilterData.length > 0) {
+            this.setState({isLoading: false, calledStudentsData: true})
+            storeFactory.dispatch(this.dispatchStudentExamData(cacheFilterData[0].data2))
+            this.setState({isLoading: false})
+        } else if(hasNetwork){      
         this.setState({
             calledStudentsData: true,
         }, () => {
             let apiObj = new GetStudentsAndExamData(dataPayload, token);
-            this.props.APITransport(apiObj)
-
-        })
-    }
+            this.props.APITransport(apiObj)})
+        } else {
+            this.setState({isLoading: false})
+            this.callCustomModal(Strings.message_text, Strings.you_dont_have_cache, false);
+        }
 }
 
 dispatchStudentExamData(payload){
@@ -887,48 +883,44 @@ dispatchStudentExamData(payload){
         let setValue = this.state.selectSet.length > 0 ? this.state.selectSet[this.state.subIndex].length > 0 ? this.state.selectSet[this.state.subIndex] : '' : ''
 
 
-        if (!hasNetwork) {
             let hasCacheData = await getRegularStudentExamApi();
-            if (hasCacheData) {
-                let cacheFilterData =  hasCacheData.filter((element)=>{
-                    let conditionSwitch = setValue.length > 0  ? element.key == this.props.loginData.data.school.schoolId && element.class == this.state.selectedClass && element.section == this.state.selectedSection && element.subject == this.state.selectedSubject &&  element.set == setValue 
-                    :
-                     element.key == this.props.loginData.data.school.schoolId && element.class == this.state.selectedClass && element.section == this.state.selectedSection && element.subject == this.state.selectedSubject
-                    if (conditionSwitch) {
-                        return true
-                    }
-                });
-                if (cacheFilterData.length > 0) {
-                    this.setState({isCalledStudentAndExam: true, isLoading: false})
-                    storeFactory.dispatch(this.dispatchStudentExamData(cacheFilterData[0].data))
-                } else {
-                    this.setState({isLoading: false})
-                    this.callCustomModal(Strings.message_text, Strings.you_dont_have_cache, false)
+            let cacheFilterData = hasCacheData != null 
+            ?
+            hasCacheData.filter((element)=>{
+                let conditionSwitch = setValue.length > 0  ? element.key == this.props.loginData.data.school.schoolId && element.class == this.state.selectedClass && element.section == this.state.selectedSection && element.subject == this.state.selectedSubject &&  element.set == setValue 
+                :
+                 element.key == this.props.loginData.data.school.schoolId && element.class == this.state.selectedClass && element.section == this.state.selectedSection && element.subject == this.state.selectedSubject
+                if (conditionSwitch) {
+                    return true
                 }
-            } else {
-                //Alert message show message "something went wrong or u don't have cache in local"
-                this.setState({isLoading: false})
-                this.callCustomModal(Strings.message_text, Strings.you_dont_have_cache, false)
-            }
-        } else {
-        let dataPayload = {
-            classId: this.state.selectedClassId,
-            section: this.state.selectedSection,
-            subject: this.state.selectedSubject,
-        }
-        if (setValue.length > 0) {
-            dataPayload.set = setValue
-        }
-        let apiObj = new GetStudentsAndExamData(dataPayload, token);
-        this.props.APITransport(apiObj)
-        
-        this.setState({
-            isLoading: false,
-            isCalledStudentAndExam: true
-        })
+            })
+            :
+            []
 
+        if (hasCacheData && cacheFilterData.length > 0) {
+            this.setState({isCalledStudentAndExam: true, isLoading: false})
+            storeFactory.dispatch(this.dispatchStudentExamData(cacheFilterData[0].data))
+        }
+        else if(hasNetwork){
+            let dataPayload = {
+                classId: this.state.selectedClassId,
+                section: this.state.selectedSection,
+                subject: this.state.selectedSubject,
+            }
+            if (setValue.length > 0) {
+                dataPayload.set = setValue
+            }
+            let apiObj = new GetStudentsAndExamData(dataPayload, token);
+            this.props.APITransport(apiObj)
+            this.setState({
+                isLoading: false,
+                isCalledStudentAndExam: true
+            })
+        } else {
+            this.setState({isLoading: false})
+            this.callCustomModal(Strings.message_text, Strings.you_dont_have_cache, false)
+        }
     }
-}
 
     callROIData = (dataPayload, token) => {
         const { apiStatus } = this.props;

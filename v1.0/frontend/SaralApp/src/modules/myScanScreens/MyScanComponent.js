@@ -470,34 +470,24 @@ class MyScanComponent extends Component {
             if (el.type == value) {
 
                 let hasNetwork = await checkNetworkConnectivity();
-                if (!hasNetwork) {
-                    let hasCacheData = await getRoiDataApi();
-                    if (hasCacheData) {
-                       let filterData = hasCacheData.filter((value)=> {
-                            if (value.examId == el.examId && value.key == this.props.loginData.data.school.schoolId) {
-                                this.setState({
-                                    examId: el.examId
-                                })
-                                return value.data
-                            }
-                        });
-                        if (filterData.length > 0) {
-                            storeFactory.dispatch(this.dispatchroiData(filterData[0].data))
-                            this.setState({calledRoiData: true})
-                        } else {
-                            storeFactory.dispatch(this.dispatchroiData({}))
-                            this.callCustomModal(Strings.message_text, Strings.you_dont_have_cache, false)
-                            this.setState({isLoading: false})
-                        }
-                    } else {
-                            storeFactory.dispatch(this.dispatchroiData({}))
-                            this.callCustomModal(Strings.message_text, Strings.you_dont_have_cache, false)
-                            this.setState({isLoading: false})
-                            //Alert message show message "something went wrong or u don't have cache in local"
-                        }
-                    } else {
-                        
-                this.setState({
+                let hasCacheData = await getRoiDataApi();
+                let filterData = hasCacheData != null ?  hasCacheData.filter((value)=> {
+                     if (value.examId == el.examId && value.key == this.props.loginData.data.school.schoolId) {
+                         this.setState({
+                             examId: el.examId,
+                             isLoading: true,
+                         })
+                         return value.data
+                     }
+                 })
+                 :
+                 []
+
+                if (hasCacheData && filterData.length > 0) {
+                    this.setState({calledRoiData: true})
+                    storeFactory.dispatch(this.dispatchroiData(filterData[0].data))
+                } else if(hasNetwork){
+                    this.setState({
                     calledRoiData: true,
                     isLoading: true,
                     examId: el.examId
@@ -509,6 +499,11 @@ class MyScanComponent extends Component {
                     let apiObj = new ROIAction(payload, token);
                     this.props.APITransport(apiObj);
                 })
+            } else {
+                storeFactory.dispatch(this.dispatchroiData({}))
+                this.callCustomModal(Strings.message_text, Strings.you_dont_have_cache, false)
+                this.setState({isLoading: false})
+                //Alert message show message "something went wrong or u don't have cache in local"
             }
                 break;
             }
