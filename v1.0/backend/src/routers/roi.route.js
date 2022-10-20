@@ -11,7 +11,7 @@ const Counter = require('../models/counter')
 router.post('/roi', auth, async (req, res) => {
     try {
         const inputKeys = Object.keys(req.body)
-        const allowedUpdates = ['subject', 'classId', 'type', 'roi']
+        const allowedUpdates = ['subject', 'classId', 'type', 'roi','set']
         const isValidOperation = inputKeys.every((input) => allowedUpdates.includes(input))
 
         if (!isValidOperation) {
