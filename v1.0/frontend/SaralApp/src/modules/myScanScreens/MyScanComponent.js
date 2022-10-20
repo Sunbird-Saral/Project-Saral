@@ -335,7 +335,7 @@ class MyScanComponent extends Component {
                 } else if (!this.props.minimalFlag ) {
                     if (this.props.loginData.data.school.hasOwnProperty("offlineMode") && this.props.loginData.data.school.offlineMode && hasEmpty) {
                         this.openCameraActivity()
-                    } else if(this.props.loginData.data.school.hasOwnProperty("offlineMode") == false && hasEmpty){
+                    } else if(this.props.loginData.data.school.hasOwnProperty("offlineMode") == false || this.props.loginData.data.school.offlineMode == false && hasEmpty){
                         this.openCameraActivity()
                     } else {
                         this.callCustomModal(Strings.message_text,Strings.roi_cache_not_available,false,false)
