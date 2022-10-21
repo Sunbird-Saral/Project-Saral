@@ -74,10 +74,11 @@ class HomeComponent extends Component {
                 
                 if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode && hasNetwork) {
                     let getBrandingCache = await getBrandingDataApi();
+                    let userId = JSON.parse(loginData.config.data)
                     if (getBrandingCache != null) {
 
                         let data = getBrandingCache.filter((e)=> {
-                            if (e.key == loginData.data.school.schoolId) {
+                            if (e.key == userId.schoolId) {
                                 return true
                             }
                         });
@@ -91,7 +92,7 @@ class HomeComponent extends Component {
                                 };
                             } else {
                                 let payload = {
-                                    key: `${loginData.data.school.schoolId}`,
+                                    key: `${userId.schoolId}`,
                                     data: multiBranding
                                 }
                                 getBrandingCache.push(payload);
@@ -99,7 +100,7 @@ class HomeComponent extends Component {
                         await setBrandingDataApi(getBrandingCache);
                     } else {
                         let payload = {
-                            key: `${loginData.data.school.schoolId}`,
+                            key: `${userId.schoolId}`,
                             data: multiBranding
                         }
                         await setBrandingDataApi([payload])
@@ -211,7 +212,8 @@ class HomeComponent extends Component {
         let hasCacheData = await getBrandingDataApi();
 
         let cacheFilterData =  hasCacheData != null ? hasCacheData.filter((element)=>{
-            if (element.key == this.props.loginData.data.school.schoolId) {
+            let userId = JSON.parse(this.props.loginData.config.data)
+            if (element.key == userId.schoolId) {
                 return true
             }
         })

@@ -61,7 +61,7 @@ class LoginComponent extends Component {
 
         this.timerState = setTimeout(() => { this.setState({ Loading: false }) }, 5000)
         if (hasCacheData) {
-            await this.callBrandingCache(schollId, "")
+            await this.callBrandingCache(schollId, "schoolId")
         } else if (hasNetwork) {
             this.callDefaultbrandingData()
         }
@@ -164,7 +164,8 @@ class LoginComponent extends Component {
         let cacheFilterData = hasCacheData != null
             ?
             hasCacheData.filter((element)=>{
-                if (element.key == schoolId) {
+                let userId = JSON.parse(element.data.config.data)
+                if (userId.schoolId == schoolId) {
                     return true
                 }
             })
