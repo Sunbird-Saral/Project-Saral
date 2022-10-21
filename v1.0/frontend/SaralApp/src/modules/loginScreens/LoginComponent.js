@@ -93,7 +93,8 @@ class LoginComponent extends Component {
             })
         } else if (hasNetwork) {
             this.callDefaultbrandingData()
-        } else if(type == 'schoolId'){
+        } else if(type == 'schoolId' && key.length > 0){
+            storeFactory.dispatch(this.dispatchBrandingDataApi({}))
             this.setState({
                 errCommon: Strings.you_dont_have_cache,
                 isLoading: false
@@ -190,7 +191,7 @@ class LoginComponent extends Component {
                 let apiObj = new LoginAction(loginCredObj);
                 this.props.APITransport(apiObj);
             })
-        } else if(!hasNetwork) {
+        } else if(!hasNetwork && schoolId.length > 0) {
             this.setState({
                 errCommon: Strings.you_dont_have_cache,
                 isLoading: false
