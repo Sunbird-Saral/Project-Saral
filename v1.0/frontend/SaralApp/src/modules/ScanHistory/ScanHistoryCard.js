@@ -174,7 +174,7 @@ const ScanHistoryCard = ({
                 })
                 .catch(function (err) {
                     collectErrorLogs("ScanHistoryCard.js","saveScanData",api.apiEndPoint(),err,false);
-                    callCustomModal(Strings.message_text,Strings.contactAdmin,false);
+                    callCustomModal(Strings.message_text,err.message ? err.message = "locked for scanning error" : Strings.contactAdmin,false);
                     clearTimeout(id);
                     setIsLoading(false);
                 });
