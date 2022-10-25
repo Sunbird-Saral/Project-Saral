@@ -470,36 +470,39 @@ useEffect(() => {
         let hasNetwork = await checkNetworkConnectivity();
         let setValue = filteredData.hasOwnProperty("set") > 0 ? filteredData.set.length > 0 ? filteredData.set : '' : ''
 
-        if (!hasNetwork) {
-            let hasCacheData = await getRegularRoipi();
-            if (hasCacheData) {
-                let cacheFilterData =  hasCacheData.filter((element)=>{
-                    let conditionSwitch = setValue.length > 0 ? element.key == loginData.data.school.schoolId && element.examId == filteredData.examTestID && element.set == filteredData.set : element.key == loginData.data.school.schoolId && element.examId == filteredData.examTestID
-                    if (conditionSwitch) {
-                        return true
-                    }
-                });
-                if (cacheFilterData.length > 0) {
-                    storeFactory.dispatch(dispatchroiData(cacheFilterData[0].data))
-                    callScanStatusData()
+        let hasCacheData = await getRegularRoipi();
+
+        let cacheFilterData = hasCacheData != null 
+            ?
+            hasCacheData.filter((element)=>{
+                let conditionSwitch = setValue.length > 0 ? element.key == loginData.data.school.schoolId && element.examId == filteredData.examTestID && element.set == filteredData.set : element.key == loginData.data.school.schoolId && element.examId == filteredData.examTestID
+                if (conditionSwitch) {
+                    return true
                 }
-            } else {
-                //Alert message show message "something went wrong or u don't have cache in local"            
-            }
-        } else {
-        let hasSet = filteredData.hasOwnProperty("set") ? filteredData.set.length > 0 ? `?set=${filteredData.set}` : '' : ''
-        let payload =
-        {
+            })
+            :
+            []
+            
+        if (cacheFilterData.length > 0) {
+            storeFactory.dispatch(dispatchroiData(cacheFilterData[0].data))
+            callScanStatusData()
+            
+        } else if (hasNetwork) {
+            let hasSet = filteredData.hasOwnProperty("set") ? filteredData.set.length > 0 ? `?set=${filteredData.set}` : '' : ''
+            let payload =
+            {
             "examId": filteredData.examTestID,
-        }
-        if (hasSet.length > 0) {
+            }
+            if (hasSet.length > 0) {
             payload.set = hasSet
+            }
+            let token = loginData.data.token
+            let apiObj = new ROIAction(payload, token);
+            dispatch(APITransport(apiObj))
+            callScanStatusData()
+        } else {
+            this.callCustomModal(Strings.message_text, Strings.roi_cache_not_available, false)
         }
-        let token = loginData.data.token
-        let apiObj = new ROIAction(payload, token);
-        dispatch(APITransport(apiObj))
-        callScanStatusData()
-    }
 }
 
     const dispatchroiData = (payload) => {

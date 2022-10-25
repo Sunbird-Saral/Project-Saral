@@ -74,10 +74,11 @@ class HomeComponent extends Component {
                 
                 if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode && hasNetwork) {
                     let getBrandingCache = await getBrandingDataApi();
+                    let userId = JSON.parse(loginData.config.data)
                     if (getBrandingCache != null) {
 
                         let data = getBrandingCache.filter((e)=> {
-                            if (e.key == loginData.data.school.schoolId) {
+                            if (e.key == userId.schoolId) {
                                 return true
                             }
                         });
@@ -91,7 +92,7 @@ class HomeComponent extends Component {
                                 };
                             } else {
                                 let payload = {
-                                    key: `${loginData.data.school.schoolId}`,
+                                    key: `${userId.schoolId}`,
                                     data: multiBranding
                                 }
                                 getBrandingCache.push(payload);
@@ -99,7 +100,7 @@ class HomeComponent extends Component {
                         await setBrandingDataApi(getBrandingCache);
                     } else {
                         let payload = {
-                            key: `${loginData.data.school.schoolId}`,
+                            key: `${userId.schoolId}`,
                             data: multiBranding
                         }
                         await setBrandingDataApi([payload])
@@ -151,29 +152,20 @@ class HomeComponent extends Component {
     callStudentsData = async (token) => {
 
         let hasNetwork = await checkNetworkConnectivity();
+        let hasCacheData = await getStudentExamApi(0,0);
 
-
-        if (!hasNetwork) {
-            let hasCacheData = await getStudentExamApi(0,0);
-            if (hasCacheData) {
-                let cacheFilterData =  hasCacheData.filter((element)=>{
-                    if (element.key == this.props.loginData.data.school.schoolId) {
-                        return true
-                    }
-                });
-                if (cacheFilterData.length > 0) {
-                    storeFactory.dispatch(this.dispatchStudentExamData(cacheFilterData[0].data))
-                    this.setState({isLoading: false})
-                } else {
-                    this.callCustomModal(Strings.message_text, Strings.you_dont_have_cache, false)
-                    this.setState({isLoading: false})
-                }
-            } else {
-                this.callCustomModal(Strings.message_text, Strings.you_dont_have_cache, false)
-                this.setState({isLoading: false})
-                //Alert message show message "something went wrong or u don't have cache in local"            
+        let cacheFilterData =  hasCacheData != null ? hasCacheData.filter((element)=>{
+            if (element.key == this.props.loginData.data.school.schoolId) {
+                return true
             }
-        } else {
+        })
+        :
+        []
+
+        if (hasCacheData && cacheFilterData.length > 0) {
+            storeFactory.dispatch(this.dispatchStudentExamData(cacheFilterData[0].data))
+            this.setState({isLoading: false})
+        } else if(hasNetwork) {
             let dataPayload = {
                 "classId": "0",
                 "section": "0"
@@ -183,7 +175,11 @@ class HomeComponent extends Component {
             })
             let apiObj = new GetStudentsAndExamData(dataPayload, token);
             this.props.APITransport(apiObj)
-        }
+        }  else {
+            this.callCustomModal(Strings.message_text, Strings.you_dont_have_cache, false)
+            this.setState({isLoading: false})
+            //Alert message show message "something went wrong or u don't have cache in local"            
+        } 
     }
 
     callCustomModal(title, message, isAvailable, cancel) {
@@ -213,24 +209,29 @@ class HomeComponent extends Component {
 
    async callMultiBrandingActiondata() {
         let hasNetwork = await checkNetworkConnectivity();
-        if (!hasNetwork) {
-            let hasCacheData = await getBrandingDataApi();
-            if (hasCacheData) {
-            let cacheFilterData =  hasCacheData.filter((element)=>{
-                if (element.key == this.props.loginData.data.school.schoolId) {
-                    return true
-                }
-            });
-                storeFactory.dispatch(this.dispatchBrandingDataApi(cacheFilterData[0].data))
-            } else {
-                //Alert message show message "something went wrong or u don't have cache in local"
+        let hasCacheData = await getBrandingDataApi();
+
+        let cacheFilterData =  hasCacheData != null ? hasCacheData.filter((element)=>{
+            let userId = JSON.parse(this.props.loginData.config.data)
+            if (element.key == userId.schoolId) {
+                return true
             }
-        } else {
-        let payload = this.props.multiBrandingData
-        let token = this.props.loginData.data.token
-        let apiObj = new MultiBrandingAction(payload, token);
-        this.props.APITransport(apiObj)
-    }
+        })
+        :
+        []
+
+        if (hasCacheData && cacheFilterData.length > 0) {
+            storeFactory.dispatch(this.dispatchBrandingDataApi(cacheFilterData[0].data))
+        } else if(hasNetwork) {
+            let payload = this.props.multiBrandingData
+            let token = this.props.loginData.data.token
+            let apiObj = new MultiBrandingAction(payload, token);
+            this.props.APITransport(apiObj)
+        }  else {
+            this.callCustomModal(Strings.message_text, Strings.you_dont_have_cache, false)
+            this.setState({isLoading: false})
+            //Alert message show message "something went wrong or u don't have cache in local"            
+        } 
 }
 
 dispatchBrandingDataApi(payload) {
