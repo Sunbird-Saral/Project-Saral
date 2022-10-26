@@ -82,8 +82,8 @@ router.put('/saveMarks', auth, async (req, res) => {
         // }
         res.status(200).send({ message: 'Data Saved Successfully' })
     } catch (e) {
-        return res.status(500).send({ message : "Locked For Scanning Error" })
-
+        console.log(e);
+        res.status(400).send({ e })
     }
 })
 
