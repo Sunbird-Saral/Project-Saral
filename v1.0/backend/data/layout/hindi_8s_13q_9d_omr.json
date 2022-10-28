@@ -1413,7 +1413,7 @@
                 "cellId": "42",
                 "rois": [
                     {
-                        "annotationTags": "ROLLNUMBER3",
+                        "annotationTags": "ROLLNUMBER3_Q13",
                         "extractionMethod": "CELL_OMR",
                         "roiId": "66",
                         "index": 0,
@@ -1429,7 +1429,7 @@
                     "index": 42
                 },
                 "format": {
-                    "name": "ROLLNUMBER3",
+                    "name": "ROLLNUMBER3_Q13",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q13"
                 },
                 "validate": {
@@ -2835,7 +2835,7 @@
                 "cellId": "84",
                 "rois": [
                     {
-                        "annotationTags": "ROLLNUMBER6_Q13_3",
+                        "annotationTags": "ROLLNUMBER6_Q13",
                         "extractionMethod": "CELL_OMR",
                         "roiId": "132",
                         "index": 0,
@@ -2851,7 +2851,7 @@
                     "index": 84
                 },
                 "format": {
-                    "name": "ROLLNUMBER6_Q13_3",
+                    "name": "ROLLNUMBER6_Q13",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09406 Q13"
                 },
                 "validate": {
