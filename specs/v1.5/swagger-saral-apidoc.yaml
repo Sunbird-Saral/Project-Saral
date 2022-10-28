@@ -365,6 +365,8 @@ paths:
       responses:
         "200":
           description: "Data Saved Successfully"
+        "400":
+          description: "Custom message can be set to message about the error or failure"
 
             
   /exam:
