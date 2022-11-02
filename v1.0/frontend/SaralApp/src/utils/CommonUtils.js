@@ -88,6 +88,6 @@ export const multipleStudent = ["ROLLNUMBERID"]
 
 export const CELL_OMR = "CELL_OMR"
 
-export const studentLimitSaveInLocal = 50
+export const studentLimitSaveInLocal = 500
 
 export const monospace_FF = 'sans-serif-medium'
