@@ -15,6 +15,11 @@ const fromTime = "T00:00:00"
 const toTime = "T23:59:59"
 router.put('/saveMarks', auth, async (req, res) => {
     const marks = []
+    
+    if( req.header('X-App-Version')){
+        console.log("APP VERSION", req.get('X-App-Version'))
+    }
+
     const subject = req.body.subject
     const examDate = req.body.examDate
     const examId = req.body.examId
