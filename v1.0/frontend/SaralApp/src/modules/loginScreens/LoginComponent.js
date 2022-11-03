@@ -338,7 +338,7 @@ class LoginComponent extends Component {
                         if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode && hasNetwork) {
                             let getLoginCache = await getLoginApi();
                             let loginCred = await getLoginCred();
-                            let loginUser = `${loginData.data.school.schoolId}`
+                            let loginUser = `${loginCred.schoolId}`
                             if (getLoginCache != null) {
 
                                 const result = getLoginCache.filter(_element => _element.key === loginUser);
@@ -352,7 +352,7 @@ class LoginComponent extends Component {
                                     };
                                 } else {
                                     let payload = {
-                                        key: `${loginData.data.school.schoolId}`,
+                                        key: `${loginUser}`,
                                         data: loginData
                                     }
                                     getLoginCache.push(payload);
@@ -361,7 +361,7 @@ class LoginComponent extends Component {
                                 
                             } else {
                                 let payload = {
-                                    key: `${loginData.data.school.schoolId}`,
+                                    key: `${loginUser}`,
                                     data: loginData
                                 }
                                 await setLoginApi([payload])

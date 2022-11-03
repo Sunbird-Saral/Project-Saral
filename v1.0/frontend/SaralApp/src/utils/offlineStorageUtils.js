@@ -171,7 +171,6 @@ export const getRegularSavedScanpi = async () => {
 
 
 export const removeRegularUserDataCacheByKey = async (key, schollId) => {
-    let loginCred = await getLoginCred(LOGIN_CRED_KEY);
     let json = await getData(key);
     let jsonData = JSON.parse(json);
 
@@ -193,19 +192,29 @@ export const removeRegularUserDataCacheByKey = async (key, schollId) => {
 }
 
 export const removeRegularUserCache = async (schoolId) => {
+    let loginCred = await getLoginCred(LOGIN_CRED_KEY);
     let array = [REGULAR_EXAM_API_KEY, REGULAR_ROI_API_KEY, REGULAR_SAVED_SCAN_API_KEY, BRANDING_API_KEY, LOGIN_API_KEY];
 
     array.map(async (el) => {
-        await removeRegularUserDataCacheByKey(el, schoolId);
+        if (el == BRANDING_API_KEY || el == LOGIN_API_KEY) {
+            await removeRegularUserDataCacheByKey(el, loginCred.schoolId);
+        } else {
+            await removeRegularUserDataCacheByKey(el, schoolId);
+        }
     });
 
 }
 
 export const removeMinimalUserCache = async (schoolId) => {
+    let loginCred = await getLoginCred(LOGIN_CRED_KEY);
     let array = [EXAM_API_KEY, ROI_API_KEY, SAVED_API_KEY, BRANDING_API_KEY, LOGIN_API_KEY];
 
     array.map(async (el) => {
-        await removeRegularUserDataCacheByKey(el, schoolId);
+        if (el == BRANDING_API_KEY || el == LOGIN_API_KEY) {
+            await removeRegularUserDataCacheByKey(el, loginCred.schoolId);
+        } else {
+            await removeRegularUserDataCacheByKey(el, schoolId);
+        }
     });
 
 }
