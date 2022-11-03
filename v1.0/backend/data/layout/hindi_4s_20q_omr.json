@@ -5,11 +5,12 @@
         "threshold": {
             "minWidth" : 690,
             "minHeight": 390,
-            "detectionRadius": 12
+            "detectionRadius": 12,
+            "experimentalOMRDetection": true
         }, 
         "resultValidation": {
             "validate": {
-                "regExp": "[0-1]",
+                "regExp": "^[0-1]$",
                 "errorMsg": "Omr result should be 1 or 0"
             }
         },

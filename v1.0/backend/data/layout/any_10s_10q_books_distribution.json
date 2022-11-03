@@ -2,6 +2,17 @@
     "layout": {
         "version": "1.0",
         "name": "ANY10S10QOMR Exam Sheet Form",
+        "threshold": {
+            "minWidth": 0,
+            "minHeight": 0,
+            "detectionRadius": 12
+        },
+        "resultValidation": {
+            "validate": {
+                "regExp": "^[0-1]$",
+                "errorMsg": "Omr result should be 1 or 0"
+            }
+        }, 
         "cells": [
             {
                 "cellId": "1",
@@ -97,9 +108,6 @@
                 "format": {
                     "name": "ROLLNUMBERID1",
                     "value": "ROLLNUMBER1"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -124,9 +132,6 @@
                 "format": {
                     "name": "ROLLNUMBER1_MATHS",
                     "value": "Maths"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -151,9 +156,6 @@
                 "format": {
                     "name": "ROLLNUMBER1_SCIENCE",
                     "value": "Science"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -178,9 +180,6 @@
                 "format": {
                     "name": "ROLLNUMBER1_ENGLISH",
                     "value": "English"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -205,9 +204,6 @@
                 "format": {
                     "name": "ROLLNUMBER1_SST",
                     "value": "SST"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -232,9 +228,6 @@
                 "format": {
                     "name": "ROLLNUMBER1_2ndLanguage",
                     "value": "2nd Language"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -259,9 +252,6 @@
                 "format": {
                     "name": "ROLLNUMBER1_3rdLanguage",
                     "value": "3rd Language"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -286,9 +276,6 @@
                 "format": {
                     "name": "ROLLNUMBER1_Computers",
                     "value": "Computers"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -313,9 +300,6 @@
                 "format": {
                     "name": "ROLLNUMBER1_General_Knowledge",
                     "value": "General Knowledge"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -340,9 +324,6 @@
                 "format": {
                     "name": "ROLLNUMBER1_Notebook1",
                     "value": "Notebook1"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -367,9 +348,6 @@
                 "format": {
                     "name": "ROLLNUMBER1_Notebook2",
                     "value": "Notebook2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -466,9 +444,6 @@
                 "format": {
                     "name": "ROLLNUMBERID2",
                     "value": "ROLLNUMBER2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -493,9 +468,6 @@
                 "format": {
                     "name": "ROLLNUMBER2_MATHS",
                     "value": "Maths"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -520,9 +492,6 @@
                 "format": {
                     "name": "ROLLNUMBER2_SCIENCE",
                     "value": "Science"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -547,9 +516,6 @@
                 "format": {
                     "name": "ROLLNUMBER2_ENGLISH",
                     "value": "English"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -574,9 +540,6 @@
                 "format": {
                     "name": "ROLLNUMBER2_SST",
                     "value": "SST"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -601,9 +564,6 @@
                 "format": {
                     "name": "ROLLNUMBER2_2ndLanguage",
                     "value": "2nd Language"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -628,9 +588,6 @@
                 "format": {
                     "name": "ROLLNUMBER2_3rdLanguage",
                     "value": "3rd Language"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -655,9 +612,6 @@
                 "format": {
                     "name": "ROLLNUMBER2_Computers",
                     "value": "Computer"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -682,9 +636,6 @@
                 "format": {
                     "name": "ROLLNUMBER2_General_Knowledge",
                     "value": "General Knowledge"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -709,9 +660,6 @@
                 "format": {
                     "name": "ROLLNUMBER2_Notebook1",
                     "value": "Notebook1"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -736,9 +684,6 @@
                 "format": {
                     "name": "ROLLNUMBER2_Notebook2",
                     "value": "Notebook2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -835,9 +780,6 @@
                 "format": {
                     "name": "ROLLNUMBERID3",
                     "value": "ROLLNUMBER3"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -862,9 +804,6 @@
                 "format": {
                     "name": "ROLLNUMBER3_MATHS",
                     "value": "Maths"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -889,9 +828,6 @@
                 "format": {
                     "name": "ROLLNUMBER3_SCIENCE",
                     "value": "Science"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -916,9 +852,6 @@
                 "format": {
                     "name": "ROLLNUMBER3_ENGLISH",
                     "value": "English"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -943,9 +876,6 @@
                 "format": {
                     "name": "ROLLNUMBER3_SST",
                     "value": "SST"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -970,9 +900,6 @@
                 "format": {
                     "name": "ROLLNUMBER3_2ndLanguage",
                     "value": "2nd Language"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -997,9 +924,6 @@
                 "format": {
                     "name": "ROLLNUMBER3_3rdLanguage",
                     "value": "3rdL Language"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1024,9 +948,6 @@
                 "format": {
                     "name": "ROLLNUMBER3_Computers",
                     "value": "Computers"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1051,9 +972,6 @@
                 "format": {
                     "name": "ROLLNUMBER3_General_Knowledge",
                     "value": "General Knowledge"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1078,9 +996,6 @@
                 "format": {
                     "name": "ROLLNUMBER3_Notebook1",
                     "value": "Notebook1"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1105,9 +1020,6 @@
                 "format": {
                     "name": "ROLLNUMBER3_Notebook2",
                     "value": "Notebook2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1204,9 +1116,6 @@
                 "format": {
                     "name": "ROLLNUMBERID4",
                     "value": "ROLLNUMBER4"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1231,9 +1140,6 @@
                 "format": {
                     "name": "ROLLNUMBER4_MATHS",
                     "value": "Maths"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1258,9 +1164,6 @@
                 "format": {
                     "name": "ROLLNUMBER4_SCIENCE",
                     "value": "Science"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1285,9 +1188,6 @@
                 "format": {
                     "name": "ROLLNUMBER4_ENGLISH",
                     "value": "English"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1312,9 +1212,6 @@
                 "format": {
                     "name": "ROLLNUMBER4_SST",
                     "value": "SST"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1339,9 +1236,6 @@
                 "format": {
                     "name": "ROLLNUMBER4_2ndLanguage",
                     "value": "2nd Language"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1366,9 +1260,6 @@
                 "format": {
                     "name": "ROLLNUMBER4_3rdLanguage",
                     "value": "3rd Langauage"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1393,9 +1284,6 @@
                 "format": {
                     "name": "ROLLNUMBER4_Computers",
                     "value": "Computers"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1420,9 +1308,6 @@
                 "format": {
                     "name": "ROLLNUMBER4_General_Knowledge",
                     "value": "General Knowledge"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1447,9 +1332,6 @@
                 "format": {
                     "name": "ROLLNUMBER4_Notebook1",
                     "value": "Notebook1"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1474,9 +1356,6 @@
                 "format": {
                     "name": "ROLLNUMBER4_Notebook2",
                     "value": "Notebook2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1573,9 +1452,6 @@
                 "format": {
                     "name": "ROLLNUMBERID5",
                     "value": "ROLLNUMBER5"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1600,9 +1476,6 @@
                 "format": {
                     "name": "ROLLNUMBER5_MATHS",
                     "value": "Maths"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1627,9 +1500,6 @@
                 "format": {
                     "name": "ROLLNUMBER5_SCIENCE",
                     "value": "Science"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1654,9 +1524,6 @@
                 "format": {
                     "name": "ROLLNUMBER5_ENGLISH",
                     "value": "English"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1681,9 +1548,6 @@
                 "format": {
                     "name": "ROLLNUMBER5_SST",
                     "value": "SST"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1708,9 +1572,6 @@
                 "format": {
                     "name": "ROLLNUMBER5_2ndLanguage",
                     "value": "2nd Language"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1735,9 +1596,6 @@
                 "format": {
                     "name": "ROLLNUMBER5_3rdLanguage",
                     "value": "3rd Language"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1762,9 +1620,6 @@
                 "format": {
                     "name": "ROLLNUMBER5_Computers",
                     "value": "Computers"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1789,9 +1644,6 @@
                 "format": {
                     "name": "ROLLNUMBER5_General_Knowledge",
                     "value": "General Knowledge"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1816,9 +1668,6 @@
                 "format": {
                     "name": "ROLLNUMBER5_Notebook1",
                     "value": "Notebook1"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1843,9 +1692,6 @@
                 "format": {
                     "name": "ROLLNUMBER5_Notebook2",
                     "value": "Notebook2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1942,9 +1788,6 @@
                 "format": {
                     "name": "ROLLNUMBERID6",
                     "value": "ROLLNUMBER6"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1969,9 +1812,6 @@
                 "format": {
                     "name": "ROLLNUMBER6_MATHS",
                     "value": "Maths"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -1996,9 +1836,6 @@
                 "format": {
                     "name": "ROLLNUMBER6_SCIENCE",
                     "value": "Science"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2023,9 +1860,6 @@
                 "format": {
                     "name": "ROLLNUMBER6_ENGLISH",
                     "value": "English"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2050,9 +1884,6 @@
                 "format": {
                     "name": "ROLLNUMBER6_SST",
                     "value": "SST"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2077,9 +1908,6 @@
                 "format": {
                     "name": "ROLLNUMBER6_2ndLanguage",
                     "value": "2nd Language"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2104,9 +1932,6 @@
                 "format": {
                     "name": "ROLLNUMBER6_3rdLanguage",
                     "value": "3rd Language"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2131,9 +1956,6 @@
                 "format": {
                     "name": "ROLLNUMBER6_Computers",
                     "value": "Computers"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2158,9 +1980,6 @@
                 "format": {
                     "name": "ROLLNUMBER6_General_Knowledge",
                     "value": "General Knowledge"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2185,9 +2004,6 @@
                 "format": {
                     "name": "ROLLNUMBER6_Notebook1",
                     "value": "Notebook1"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2212,9 +2028,6 @@
                 "format": {
                     "name": "ROLLNUMBER6_Notebook2",
                     "value": "Notebook2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2311,9 +2124,6 @@
                 "format": {
                     "name": "ROLLNUMBERID7",
                     "value": "ROLLNUMBER7"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2338,9 +2148,6 @@
                 "format": {
                     "name": "ROLLNUMBER7_MATHS",
                     "value": "Maths"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2365,9 +2172,6 @@
                 "format": {
                     "name": "ROLLNUMBER7_SCIENCE",
                     "value": "Science"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2392,9 +2196,6 @@
                 "format": {
                     "name": "ROLLNUMBER7_ENGLISH",
                     "value": "English"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2419,9 +2220,6 @@
                 "format": {
                     "name": "ROLLNUMBER7_SST",
                     "value": "SST"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2446,9 +2244,6 @@
                 "format": {
                     "name": "ROLLNUMBER7_2ndLanguage",
                     "value": "2nd Language"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2473,9 +2268,6 @@
                 "format": {
                     "name": "ROLLNUMBER7_3rdLanguage",
                     "value": "3rd Language"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2500,9 +2292,6 @@
                 "format": {
                     "name": "ROLLNUMBER7_Computers",
                     "value": "Computers"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2527,9 +2316,6 @@
                 "format": {
                     "name": "ROLLNUMBER7_General_Knowledge",
                     "value": "General Knowledge"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2554,9 +2340,6 @@
                 "format": {
                     "name": "ROLLNUMBER7_Notebook1",
                     "value": "Notebook1"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2581,9 +2364,6 @@
                 "format": {
                     "name": "ROLLNUMBER7_Notebook2",
                     "value": "Notebook2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2680,9 +2460,6 @@
                 "format": {
                     "name": "ROLLNUMBERID8",
                     "value": "ROLLNUMBER8"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2707,9 +2484,6 @@
                 "format": {
                     "name": "ROLLNUMBER8_MATHS",
                     "value": "Maths"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2734,9 +2508,6 @@
                 "format": {
                     "name": "ROLLNUMBER8_SCIENCE",
                     "value": "Science"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2761,9 +2532,6 @@
                 "format": {
                     "name": "ROLLNUMBER8_ENGLISH",
                     "value": "English"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2788,9 +2556,6 @@
                 "format": {
                     "name": "ROLLNUMBER8_SST",
                     "value": "SST"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2815,9 +2580,6 @@
                 "format": {
                     "name": "ROLLNUMBER8_2ndLanguage",
                     "value": "2nd Language"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2842,9 +2604,6 @@
                 "format": {
                     "name": "ROLLNUMBER8_3rdLanguage",
                     "value": "3rd Language"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2869,9 +2628,6 @@
                 "format": {
                     "name": "ROLLNUMBER8_Computers",
                     "value": "Computers"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2896,9 +2652,6 @@
                 "format": {
                     "name": "ROLLNUMBER8_General_Knowledge",
                     "value": "General Knowledge"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2923,9 +2676,6 @@
                 "format": {
                     "name": "ROLLNUMBER8_Notebook1",
                     "value": "Notebook1"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -2950,9 +2700,6 @@
                 "format": {
                     "name": "ROLLNUMBER8_Notebook2",
                     "value": "Notebook2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -3049,9 +2796,6 @@
                 "format": {
                     "name": "ROLLNUMBERID9",
                     "value": "ROLLNUMBER9"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -3076,9 +2820,6 @@
                 "format": {
                     "name": "ROLLNUMBER9_MATHS",
                     "value": "Maths"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -3103,9 +2844,6 @@
                 "format": {
                     "name": "ROLLNUMBER9_SCIENCE",
                     "value": "Science"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -3130,9 +2868,6 @@
                 "format": {
                     "name": "ROLLNUMBER9_ENGLISH",
                     "value": "English"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -3157,9 +2892,6 @@
                 "format": {
                     "name": "ROLLNUMBER9_SST",
                     "value": "SST"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -3184,9 +2916,6 @@
                 "format": {
                     "name": "ROLLNUMBER9_2ndLanguage",
                     "value": "2nd Language"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -3211,9 +2940,6 @@
                 "format": {
                     "name": "ROLLNUMBER9_3rdLanguage",
                     "value": "3rs Language"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -3238,9 +2964,6 @@
                 "format": {
                     "name": "ROLLNUMBER9_Computers",
                     "value": "Computers"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -3265,9 +2988,6 @@
                 "format": {
                     "name": "ROLLNUMBER9_General_Knowledge",
                     "value": "General Knowledge"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -3292,9 +3012,6 @@
                 "format": {
                     "name": "ROLLNUMBER9_Notebook1",
                     "value": "Notebook1"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -3319,9 +3036,6 @@
                 "format": {
                     "name": "ROLLNUMBER9_Notebook2",
                     "value": "Notebook2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -3418,9 +3132,6 @@
                 "format": {
                     "name": "ROLLNUMBERID10",
                     "value": "ROLLNUMBER10"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -3445,9 +3156,6 @@
                 "format": {
                     "name": "ROLLNUMBER10_MATHS",
                     "value": "Maths"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -3472,9 +3180,6 @@
                 "format": {
                     "name": "ROLLNUMBER10_SCIENCE",
                     "value": "Science"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -3499,9 +3204,6 @@
                 "format": {
                     "name": "ROLLNUMBER10_ENGLISH",
                     "value": "English"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -3526,9 +3228,6 @@
                 "format": {
                     "name": "ROLLNUMBER10_SST",
                     "value": "SST"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -3553,9 +3252,6 @@
                 "format": {
                     "name": "ROLLNUMBE10_2ndLanguage",
                     "value": "2nd Language"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -3580,9 +3276,6 @@
                 "format": {
                     "name": "ROLLNUMBER10_3rdLanguage",
                     "value": "3rd Language"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -3607,9 +3300,6 @@
                 "format": {
                     "name": "ROLLNUMBER10_Computers",
                     "value": "Computers"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -3634,9 +3324,6 @@
                 "format": {
                     "name": "ROLLNUMBER10_General_Knowledge",
                     "value": "General Knowledge"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -3661,9 +3348,6 @@
                 "format": {
                     "name": "ROLLNUMBER10_Notebook1",
                     "value": "Notebook1"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             },
             {
@@ -3688,9 +3372,6 @@
                 "format": {
                     "name": "ROLLNUMBE10_Notebook2",
                     "value": "Notebook2"
-                },
-                "validate": {
-                    "regExp": ""
                 }
             }
         ]

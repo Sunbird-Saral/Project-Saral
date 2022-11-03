@@ -18,14 +18,16 @@ const MarksHeaderTable = ({
     studentsAndExamData,
     index,
     setQuestionIdData,
-    subject
+    subject,
+    onBlur,
+    isBlur=false
 }) => {
 
     const setDataIntoModal = (value) => {
         let filterExam = studentsAndExamData.data.exams.filter((data)=> data.subject === subject)
         
         studentsAndExamData.data.exams.forEach((element) => {
-            if (element.subject == subject) {
+            if (element.subject == subject && element.questions != null) {
                 element.questions.forEach((_el,i)=>{
                     if (_el.questionId.toString() == value.toString() || index == i) {
                         _el.tags.forEach((data,i)=>{
@@ -40,14 +42,22 @@ const MarksHeaderTable = ({
         });
     }
 
+    let filterExamquesdata = studentsAndExamData && studentsAndExamData.data.exams.filter((data)=> data.subject === subject)
     return (
         <View style={[styles.container, customRowStyle, { borderColor: rowBorderColor }]}>
             {
             icon ?
             <TouchableOpacity
             onPress={() => {
-                setDataIntoModal(rowTitle)
-                setIsModalVisible(true)
+                if(filterExamquesdata &&filterExamquesdata[0].questions!= undefined && filterExamquesdata &&filterExamquesdata[0].questions!= "" ){
+                    setDataIntoModal(rowTitle)
+                    setIsModalVisible(true)
+                }else{
+                    setDataIntoModal(rowTitle)
+                    setIsModalVisible(false)
+                }
+                
+                 
             }}
             >
                 <Image style={{width:25,height:25}}  source={Assets.Tagging}/>
@@ -61,6 +71,8 @@ const MarksHeaderTable = ({
                     onChangeText={onChangeText}
                     keyboardType={keyboardType}
                     maxLength={maxLength}
+                    onBlur={onBlur}
+                    blurOnSubmit={isBlur}
                 />
             }
         </View>

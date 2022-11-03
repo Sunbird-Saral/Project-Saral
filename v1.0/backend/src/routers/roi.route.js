@@ -11,7 +11,7 @@ const Counter = require('../models/counter')
 router.post('/roi', auth, async (req, res) => {
     try {
         const inputKeys = Object.keys(req.body)
-        const allowedUpdates = ['subject', 'classId', 'type', 'roi']
+        const allowedUpdates = ['subject', 'classId', 'type', 'roi','set']
         const isValidOperation = inputKeys.every((input) => allowedUpdates.includes(input))
 
         if (!isValidOperation) {
@@ -107,21 +107,33 @@ router.delete('/roi/:examId', auth, async (req, res) => {
     }
 })
 
-router.get('/roi/:examId',auth, async (req, res) => {
+router.get('/roi/:examId?',auth, async (req, res) => {
     try {
-       
+    
         const examExist = await Exam.findOne({examId: req.params.examId}).lean()
         if(examExist){
             const school = await School.findOne({schoolId: req.school.schoolId})
-            const roiExist = await ROI.findOne({ classId: examExist.classId, subject: examExist.subject,state: school.state}).lean()
+            const roiExist = await ROI.findOne({ classId: examExist.classId, subject: examExist.subject,state: school.state, type:examExist.type}).lean()
+            
             if(roiExist){
-                let lookup = {
-                    classId: examExist.classId,
-                    subject: examExist.subject,
-                    state: school.state,
-                    type: examExist.type
+                if(req.query.set && examExist && typeof examExist == "object" && examExist.set){
+                    let examSetLookupExist = {
+                        classId: examExist.classId,
+                        subject: examExist.subject,
+                        state: school.state,
+                        type: examExist.type,
+                        set: req.query.set
+                    }
+                    roi = await ROI.find(examSetLookupExist,{_id: 0,__v: 0 }).lean()
+                }else{
+                    let lookup = {
+                        classId: examExist.classId,
+                        subject: examExist.subject,
+                        state: school.state,
+                        type: examExist.type
+                    }
+                    roi = await ROI.find(lookup,{_id: 0,__v: 0 }).lean()
                 }
-                let roi = await ROI.find(lookup,{_id: 0,__v: 0 }).lean()
                 if(roi.length){
                     let resultObj = {}
                     for(let data of roi){

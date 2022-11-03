@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, Image, Share } from 'react-native';
+import { View, Text, TouchableOpacity, Image, Share, Switch } from 'react-native';
+import { NavigationActions, StackActions } from 'react-navigation';
 import { connect } from 'react-redux';
 import { Assets } from '../../../assets';
+import constants from '../../../flux/actions/constants';
+import { storeFactory } from '../../../flux/store/store';
 import AppTheme from '../../../utils/AppTheme';
-import { monospace_FF } from '../../../utils/CommonUtils';
+import { dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF } from '../../../utils/CommonUtils';
+import { removeAllCache, removeRegularUserCache } from '../../../utils/offlineStorageUtils';
+import { setMinimalValue } from '../../../utils/StorageUtils';
 import Strings from '../../../utils/Strings';
 
 
@@ -32,12 +37,65 @@ class HeaderComponents extends Component {
             aboutMenu,
             helpMenu,
             minimalFlag,
-            multiBrandingData
+            multiBrandingData,
+            navigation,
+            loginData
         } = this.props
+
+        async function changeMinimalMode() {
+            storeFactory.dispatch(minimalFlagAction(!minimalFlag));
+            let saved = await setMinimalValue(!minimalFlag);
+            console.log("saved",saved);
+            goToMyScanScreen();
+        }
+
+        function minimalFlagAction (payload) {
+            return {
+                type: constants.MINIMAL_FLAG,
+                payload
+            }
+        }
+
+        function goToMyScanScreen() {
+            console.log("navigation",navigation);
+            const resetAction = StackActions.reset({
+                index: 0,
+                actions: [NavigationActions.navigate({ routeName: 'Home' })],
+            });
+            navigation.dispatch(resetAction);
+            return true
+        }
+
+        async function removeLocalCache() {
+            if (minimalFlag) {
+                await removeMinimalUserCache();
+            } else {
+                await removeRegularUserCache();
+            }
+            navigation.navigate('auth');
+        }
+
+        async function removeGlobalCache(){
+            await removeAllCache();
+            navigation.navigate('auth')
+        }
+
+        const callCustomModal = (title, message, isAvailable, doLogout, cancel) => {
+            let data = {
+              title: title,
+              message: message,
+              isOkAvailable: isAvailable,
+              okFunc: doLogout,
+              isCancel: cancel
+            }
+            storeFactory.dispatch(dispatchCustomModalStatus(true));
+            storeFactory.dispatch(dispatchCustomModalMessage(data));
+          }
+
         return (
             <View style={{flex:1,marginTop: '10%',marginRight:'5%'}}>
                 <View style={styles.imageViewContainer}>
-                    <View style={[styles.imageContainerStyle,{height:  160 }]}>
+                    <View style={[styles.imageContainerStyle,{height: loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode ? 240 : 180}]}>
                         
                         <TouchableOpacity
                         style={[styles.imageContainerViewstyle,{marginTop:10}]}
@@ -71,7 +129,46 @@ class HeaderComponents extends Component {
                          <Image style={{width:15,height:15,top:5}}  source={Assets.Help}/>
                             <Text style={[styles.headerTitleTextStyle, customLogoutTextStyle]}>{Strings.help_menu}</Text>
                         </TouchableOpacity>
+
+                        {
+                            loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode 
+                            &&
+                            <TouchableOpacity
+                               style={styles.imageContainerViewstyle}
+                                onPress={()=>{
+                                    callCustomModal(Strings.message_text, Strings.are_you_sure_you_want_to_clear_local_cache, true, removeLocalCache, true)
+                                }}
+                                >
+                                 <Image style={{width:10,height:20}}  source={Assets.delete}/>
+                                <Text style={[styles.headerTitleTextStyle, customLogoutTextStyle]}>{Strings.clear_local_cache}</Text>
+                            </TouchableOpacity>
+                        }
+                            
+                        {
+                            loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode 
+                            &&
+                            <TouchableOpacity
+                            style={styles.imageContainerViewstyle}
+                            onPress={()=>{
+                                callCustomModal(Strings.message_text, Strings.are_you_sure_you_want_to_clear_global_cache, true, removeGlobalCache, true)
+                            }}
+                            >
+                                 <Image style={{width:10,height:20}}  source={Assets.delete}/>
+                                <Text style={[styles.headerTitleTextStyle, customLogoutTextStyle]}>{Strings.clear_global_cache}</Text>
+                            </TouchableOpacity>
+                        }
+                            
                         
+                        <View 
+                        style={{flexDirection: 'row', marginBottom: 10}}
+                        >
+                            <Switch
+                            trackColor={{ true: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE, false: '#000' }}
+                            thumbColor={ !minimalFlag ? multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE: AppTheme.GREY}
+                            value={!minimalFlag}
+                            onValueChange={async()=>  await changeMinimalMode() }
+                            />
+                            
                         <TouchableOpacity
                         style={{marginHorizontal:"0%",marginBottom: 8}}
                         activeOpacity={1}
@@ -85,6 +182,9 @@ class HeaderComponents extends Component {
                         }
                         </TouchableOpacity>
 
+                        
+                        
+                        </View>
                     </View>
                 </View>
 
@@ -109,7 +209,8 @@ class HeaderComponents extends Component {
 const mapStateToProps = (state) => {
     return {
         minimalFlag: state.minimalFlag,
-        multiBrandingData: state.multiBrandingData.response.data
+        multiBrandingData: state.multiBrandingData.response.data,
+        loginData: state.loginData,
     }
   }
 

@@ -15,6 +15,8 @@ import com.facebook.react.bridge.ReactMethod;
 import org.ekstep.saral.saralsdk.commons.FileOps;
 import org.ekstep.saral.saralsdk.hwmodel.HWClassifier;
 import org.ekstep.saral.saralsdk.hwmodel.HWClassifierStatusListener;
+import org.ekstep.saral.saralsdk.hwmodel.HWBlockLettersClassifier;
+import org.ekstep.saral.saralsdk.hwmodel.HWBlockLettersClassifierStatusListener;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.opencv.android.BaseLoaderCallback;
@@ -68,6 +70,21 @@ public class SaralSDKModule extends ReactContextBaseJavaModule implements Activi
                 Log.d(TAG, "HWClassifer model cannot be loaded :" + message);
             }
         });
+
+        HWBlockLettersClassifier.getInstance();
+        Log.d(TAG, "Loading HWBlockLettersClassifier models");
+        HWBlockLettersClassifier.getInstance().initialize(new HWBlockLettersClassifierStatusListener() {
+            @Override
+            public void OnModelLoadSuccess(String message) {
+                Log.d(TAG, "HWBlockLettersClassifier model loaded : " + message);
+            }
+
+            @Override
+            public void OnModelLoadError(String message) {
+                Log.d(TAG, "HWBlockLettersClassifier model cannot be loaded :" + message);
+            }
+        });
+
     }
 
     @Override

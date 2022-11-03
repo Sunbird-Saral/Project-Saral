@@ -15,8 +15,14 @@ const fromTime = "T00:00:00"
 const toTime = "T23:59:59"
 router.put('/saveMarks', auth, async (req, res) => {
     const marks = []
+    
+    if( req.header('X-App-Version')){
+        console.log("APP VERSION", req.get('X-App-Version'))
+    }
+
     const subject = req.body.subject
     const examDate = req.body.examDate
+    const examId = req.body.examId
     const schoolId = req.school.schoolId
     const classId = req.body.classId
     const createdOn = new Date().getTime()
@@ -30,12 +36,16 @@ router.put('/saveMarks', auth, async (req, res) => {
             subject,
             classId,
             createdOn,
-            roiId
+            roiId,
+            examId
         })
         marks.push(marksData)
     });
     try {
         for (let data of marks) {
+            if(!data.examDate && data.examDate == undefined){
+                data.examDate = new Date().toLocaleDateString()
+            }
          
             let studentMarksExist = await Mark.findOne({ schoolId:data.schoolId,studentId: data.studentId,classId:data.classId,subject: data.subject, examDate: data.examDate, roiId: data.roiId  })
             if (!studentMarksExist) {
@@ -43,9 +53,15 @@ router.put('/saveMarks', auth, async (req, res) => {
             } else {
                 if (data.schoolId == studentMarksExist.schoolId && data.studentId == studentMarksExist.studentId && data.classId == studentMarksExist.classId && data.subject == studentMarksExist.subject && data.examDate  == studentMarksExist.examDate) {
                     let lookup = {
-                        studentId: data.studentId
+                        studentId: data.studentId,
+                        subject: data.subject,
+                        examDate: data.examDate
                     }
-                    let update = { $set: { studentIdTrainingData: data.studentIdTrainingData,predictedStudentId: data.predictedStudentId,studentAvailability: data.studentAvailability, marksInfo: data.marksInfo ,maxMarksTrainingData: data.maxMarksTrainingData,maxMarksPredicted: data.maxMarksPredicted, securedMarks: data.securedMarks, totalMarks: data.totalMarks,obtainedMarksTrainingData: data.obtainedMarksTrainingData,obtainedMarksPredicted: data.obtainedMarksPredicted  } }
+                    if(data.set){
+                        lookup.set = data.set
+                    }
+                    
+                    let update = { $set: { studentIdTrainingData: data.studentIdTrainingData,predictedStudentId: data.predictedStudentId,studentAvailability: data.studentAvailability, marksInfo: data.marksInfo ,maxMarksTrainingData: data.maxMarksTrainingData,maxMarksPredicted: data.maxMarksPredicted, securedMarks: data.securedMarks, totalMarks: data.totalMarks,obtainedMarksTrainingData: data.obtainedMarksTrainingData,obtainedMarksPredicted: data.obtainedMarksPredicted} }
                     await Mark.update(lookup, update)
                 }
             }

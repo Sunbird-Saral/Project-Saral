@@ -16,7 +16,7 @@ import { OcrLocalResponseAction } from '../../flux/actions/apis/OcrLocalResponse
 import { GetStudentsAndExamData } from '../../flux/actions/apis/getStudentsAndExamData';
 import { FilteredDataAction } from '../../flux/actions/apis/filteredDataActions';
 import APITransport from '../../flux/actions/transport/apitransport';
-import { cryptoText, dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF, SCAN_TYPES, validateToken } from '../../utils/CommonUtils';
+import { checkNetworkConnectivity, cryptoText, dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF, SCAN_TYPES, validateToken } from '../../utils/CommonUtils';
 import { ROIAction } from '../StudentsList/ROIAction';
 import { GetAbsentStudentData } from '../../flux/actions/apis/getAbsentStudentData';
 import { LoginAction } from '../../flux/actions/apis/LoginAction';
@@ -27,6 +27,10 @@ import ShareComponent from '../common/components/Share';
 import MultibrandLabels from '../common/components/multibrandlabels';
 import ModalView from '../common/components/ModalView';
 import CustomPopup from '../common/components/CustomPopup';
+import { getRegularStudentExamApi, setRegularStudentExamApi } from '../../utils/offlineStorageUtils';
+import constants from '../../flux/actions/constants';
+import { storeFactory } from '../../flux/store/store';
+import { indexOf } from 'lodash';
 
 //redux
 
@@ -38,15 +42,19 @@ const clearState = {
     selectedClass: '',
     sectionList: [],
     sectionListIndex: -1,
+    setIndex: 0,
     selectedSection: '',
     pickerDate: new Date(),
     selectedDate: '',
     subArr: [],
     examTestID: [],
+    selectSet: '',
+    setArr: [],
     subIndex: -1,
     selectedSubject: '',
     errClass: '',
     errSub: '',
+    errSet: '',
     errDate: '',
     errSection: '',
     selectedClassId: '',
@@ -63,7 +71,9 @@ const clearState = {
     calledScanStaus: false,
     absentStatusPayload: null,
     subjectsData: [],
-    isCalledStudentAndExam: false
+    isCalledStudentAndExam: false,
+    set:[],
+    ExamSetArray:[]
 }
 
 class SelectDetailsComponent extends Component {
@@ -80,6 +90,7 @@ class SelectDetailsComponent extends Component {
             selectedClass: '',
             sectionList: [],
             sectionListIndex: -1,
+            setIndex: 0,
             selectedSection: '',
             pickerDate: new Date(),
             selectedDate: '',
@@ -87,8 +98,11 @@ class SelectDetailsComponent extends Component {
             examTestID: [],
             subIndex: -1,
             selectedSubject: '',
+            selectSet: '',
+            setArr: [],
             errClass: '',
             errSub: '',
+            errSet: '',
             errDate: '',
             errSection: '',
             selectedClassId: '',
@@ -107,7 +121,9 @@ class SelectDetailsComponent extends Component {
             subjectsData: [],
             filterdataid: [],
             isHidden: false,
-            isCalledStudentAndExam: false
+            isCalledStudentAndExam: false,
+            set:[],
+            ExamSetArray:[]
         }
         this.onPress = this.onPress.bind(this);
         this.onBack = this.onBack.bind(this)
@@ -166,7 +182,7 @@ class SelectDetailsComponent extends Component {
     }
 
     onDropDownSelect = (index, value, type) => {
-        const { loginDetails, classesArr, selectedClass, selectedClassId, selectedSection, selectedSubject } = this.state
+        const { loginDetails, classesArr, selectedClass, selectedClassId, selectedSection, selectedSubject,selectSet } = this.state
         if (type == 'class') {
             if (value != selectedClass) {
                 const sections = [...classesArr[index].sections]
@@ -248,7 +264,31 @@ class SelectDetailsComponent extends Component {
             })
         }
         else if (type == 'sub') {
+            let setData = []
+            let hasSetData = this.state.set.length > 0 ? this.state.set[Number(index)] ? this.state.set[Number(index)].length > 0 ? -1 : 0 : 0 : 0
             if (value != selectedSubject) {
+               
+                this.setState({
+                    pickerDate: new Date(),
+                    selectedDate: ''
+                })
+            }
+        
+            this.setState({
+                errClass: '',
+                errSection: '',
+                errSub: '',
+                errDate: '',
+                errSet: '',
+                subIndex: Number(index),
+                selectedSubject: value,
+                ExamSetArray : this.state.set,
+                setIndex: hasSetData
+            })
+        }
+         
+        else if (type == 'set') {
+            if (value != selectSet) {
                
                 this.setState({
                     pickerDate: new Date(),
@@ -261,23 +301,50 @@ class SelectDetailsComponent extends Component {
                 errSection: '',
                 errSub: '',
                 errDate: '',
-                subIndex: Number(index),
-                selectedSubject: value
+                errSet: '',
+                setIndex: Number(index),
+                selectSet: value
             })
         }
     }
 
-    callStudentsData = (token) => {
-        const { dataPayload } = this.state
-      
+    callStudentsData = async (token) => {
+        const { dataPayload, selectedClass, selectedSection } = this.state
+        let hasNetwork = await checkNetworkConnectivity();
+
+
+        let hasCacheData = await getRegularStudentExamApi();
+        
+        let cacheFilterData = hasCacheData != null ?  hasCacheData.filter((element)=>{
+            if (element.key == this.props.loginData.data.school.schoolId && element.class == selectedClass && element.section == selectedSection) {
+                return true
+            }
+        })
+        :
+        []
+
+        if (hasCacheData && cacheFilterData.length > 0) {
+            this.setState({isLoading: false, calledStudentsData: true})
+            storeFactory.dispatch(this.dispatchStudentExamData(cacheFilterData[0].data2))
+            this.setState({isLoading: false})
+        } else if(hasNetwork){      
         this.setState({
             calledStudentsData: true,
         }, () => {
             let apiObj = new GetStudentsAndExamData(dataPayload, token);
-            this.props.APITransport(apiObj)
+            this.props.APITransport(apiObj)})
+        } else {
+            this.setState({isLoading: false})
+            this.callCustomModal(Strings.message_text, Strings.you_dont_have_cache, false);
+        }
+}
 
-        })
+dispatchStudentExamData(payload){
+    return {
+        type: constants.GET_STUDENTS_EXAMS_LIST,
+        payload
     }
+}
 
     validateAbsentStatusApi = () => {
         const { selectedClassId, selectedExam, selectedSection, loginDetails } = this.state
@@ -402,7 +469,7 @@ class SelectDetailsComponent extends Component {
         if (prevProps != this.props) {
 
             const { apiStatus, studentsAndExamData, absentStudentDataResponse, getScanStatusData, loginData } = this.props
-            const { calledStudentsData, calledAbsentStatus, selectedClass, selectedSection, selectedClassId, calledScanStaus, calledLogin, callApi, absentStatusPayload, isCalledStudentAndExam } = this.state
+            const { calledStudentsData, calledAbsentStatus, selectedClass, selectedSection, selectSet, selectedClassId, calledScanStaus, calledLogin, callApi, absentStatusPayload, isCalledStudentAndExam, subIndex } = this.state
             if (apiStatus && prevProps.apiStatus != apiStatus && apiStatus.error) {
                 if (calledStudentsData) {
                     this.loader(false)
@@ -435,6 +502,7 @@ class SelectDetailsComponent extends Component {
                                     class: selectedClass,
                                     classId: selectedClassId,
                                     section: selectedSection,
+                                    set: selectSet ,
                                     data: studentsAndExamData.data
                                 }
 
@@ -460,19 +528,26 @@ class SelectDetailsComponent extends Component {
                                     let testID = []
                                     let examDates = []
                                     let subjects = []
+                                    let set =[]
                                     _.filter(studentsAndExamData.data.exams, function (o) {
                                         subArr.push(o.subject + " " + o.examDate)
                                         testID.push(o.examId)
                                         examDates.push(o.examDate)
                                         subjects.push(o.subject)
+                                        set.push(o.hasOwnProperty("set") && o.set.length > 0 ? o.set : [])
+                            
                                     })
+                    
+
+                                    
                                     this.setState({
                                         errSection: '',
                                         sectionValid: true,
                                         subArr: subArr,
                                         examTestID: testID,
                                         examDate: examDates,
-                                        subjectsData: subjects
+                                        subjectsData: subjects,
+                                        set:set
 
                                     })
                                 }
@@ -482,10 +557,45 @@ class SelectDetailsComponent extends Component {
                                     errSection: Strings.please_select_valid_section,
                                     sectionValid: false,
                                     subIndex: -1,
+                                    setIndex:-1,
                                     selectedSubject: '',
                                     selectedDate: '',
                                     pickerDate: new Date()
                                 })
+                            }
+                            if (studentsAndExamData && studentsAndExamData.status && studentsAndExamData.status == 200) {
+                                const hasNetwork = await checkNetworkConnectivity();
+                                if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode && hasNetwork && this.state.sectionValid == true) {
+                                    let getStudentExamCache = await getRegularStudentExamApi();
+                                    if (getStudentExamCache != null) {
+                                        
+                                        let result = getStudentExamCache.findIndex((e)=>e.key == loginData.data.school.schoolId && e.class == selectedClass && e.section == selectedSection)
+                                        let hasSubject = getStudentExamCache.findIndex((e)=> e.key == loginData.data.school.schoolId && e.class == selectedClass && e.section == selectedSection && e.hasOwnProperty("subject"))
+                                        if (result > -1 && hasSubject == -1) {
+                                            getStudentExamCache[result].data = studentsAndExamData 
+                                        } else if(hasSubject == -1){
+                                            let payload = {
+                                                key :`${loginData.data.school.schoolId}`,
+                                                class : selectedClass,
+                                                section: selectedSection,
+                                                data: studentsAndExamData,
+                                                data2: studentsAndExamData
+                                            }
+                                            getStudentExamCache.push(payload);
+                                        }
+                                        await setRegularStudentExamApi(getStudentExamCache);
+                                    } else {
+                                        let payload = {
+                                            key :`${loginData.data.school.schoolId}`,
+                                            class : selectedClass,
+                                            section: selectedSection,
+                                            data: studentsAndExamData,
+                                            data2: studentsAndExamData
+                                        }
+                                        await setRegularStudentExamApi([payload]);
+                                    }
+
+                                }
                             }
 
                         }
@@ -582,16 +692,68 @@ class SelectDetailsComponent extends Component {
             }
 
             if (isCalledStudentAndExam) {
+                const hasNetworkData = await checkNetworkConnectivity()
                 let data = JSON.parse(studentsAndExamData.config.data)
                 if (studentsAndExamData && data.hasOwnProperty("subject")) {
 
                     this.setState({isCalledStudentAndExam: false, isLoading: false})                    
-                    
+                    const hasNetwork = await checkNetworkConnectivity();
                     if (studentsAndExamData && studentsAndExamData.status && studentsAndExamData.status == 200) {
+                        if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode && hasNetwork) {
+                            let setValue = selectSet.length > 0 ? selectSet[subIndex].length > 0 ? selectSet[subIndex] : '' : ''
+                            let getStudentExamCache = await getRegularStudentExamApi();
+                            if (getStudentExamCache != null) {
+                                let result = getStudentExamCache.findIndex((e)=> e.key == loginData.data.school.schoolId && e.class == selectedClass && e.section == selectedSection && e.hasOwnProperty("subject") ? e.subject == this.state.selectedSubject : false)
+                                let hasSubject = getStudentExamCache.findIndex((e)=> e.key == loginData.data.school.schoolId && e.class == selectedClass && e.section == selectedSection && e.hasOwnProperty("subject"))
+                                let resultDataIndex = getStudentExamCache.findIndex((e)=> e.key == loginData.data.school.schoolId && e.class == selectedClass && e.section == selectedSection)
+                                let hasSetValue = getStudentExamCache.findIndex((e)=> e.key == loginData.data.school.schoolId && e.class == selectedClass && e.section == selectedSection && e.hasOwnProperty("subject") && e.hasOwnProperty("set") ? e.set == setValue : false)
+                                
+                                let subjBool = hasSubject >= 0 ? true : false;
+
+
+                                if(resultDataIndex > -1 && subjBool == false){
+                                    getStudentExamCache[resultDataIndex].subject = this.state.selectedSubject
+                                    getStudentExamCache[resultDataIndex].data = studentsAndExamData
+                                    if (hasSetValue) {
+                                        getStudentExamCache[resultDataIndex].set = setValue
+                                    }
+                                } else if (setValue.length > 0 && hasSetValue == -1) {
+                                    let payload = {
+                                        key :`${loginData.data.school.schoolId}`,
+                                        class : selectedClass,
+                                        section: selectedSection,
+                                        data: studentsAndExamData,
+                                        data2: studentsAndExamData,
+                                        subject: this.state.selectedSubject,
+                                        set: setValue
+                                    }
+                                    getStudentExamCache.push(payload);
+                                    
+                                } else if (result > -1) {
+                                    getStudentExamCache[result].data = studentsAndExamData
+                                } else {
+                                    let payload = {
+                                        key :`${loginData.data.school.schoolId}`,
+                                        class : selectedClass,
+                                        section: selectedSection,
+                                        data: studentsAndExamData,
+                                        data2: studentsAndExamData,
+                                        subject: this.state.selectedSubject
+                                    }
+                                    if (hasSetValue.length > 0) {
+                                        payload.set = hasSetValue
+                                    }
+                                    getStudentExamCache.push(payload);
+                                }
+
+                                await setRegularStudentExamApi(getStudentExamCache)
+                            }
+                        }
                         let obj = {
                             class: selectedClass,
                             classId: selectedClassId,
                             section: selectedSection,
+                            set: selectSet ,
                             data: studentsAndExamData.data
                         }
     
@@ -614,13 +776,15 @@ class SelectDetailsComponent extends Component {
                         let studentsExamDataSaved = await setStudentsExamData(finalStudentsAndExamArr)
                         this.props.navigation.push('StudentsList');
                     }
+                } else if (!hasNetworkData) {
+                    this.callCustomModal(Strings.message_text, Strings.you_dont_have_cache, false);
                 }
             }
         }
     }
 
     validateFields = () => {
-        const { classListIndex, subIndex, sectionListIndex, sectionValid } = this.state
+        const { classListIndex, subIndex, sectionListIndex, sectionValid ,setIndex} = this.state
         const { scanTypeData } = this.props
         if (classListIndex == -1) {
             this.setState({
@@ -650,7 +814,7 @@ class SelectDetailsComponent extends Component {
             })
             return false
         }
-        if (subIndex == -1) {
+       else if (subIndex == -1) {
             this.setState({
                 errClass: '',
                 errSection: '',
@@ -659,28 +823,45 @@ class SelectDetailsComponent extends Component {
             })
             return false
         }
+       else if (setIndex == -1) {
+            this.setState({
+                errClass: '',
+                errSection: '',
+                errSub: '',
+                errDate: '',
+                errSet: Strings.please_select_valid_section
+            })
+            return false
+        }
+     
 
         return true
     }
 
     onSubmitClick = () => {
-        const { selectedClass, selectedClassId, selectedSection, examTestID, subIndex, examDate, subjectsData } = this.state
+        const { selectedClass, selectedClassId, selectedSection, examTestID, subIndex, examDate, subjectsData ,selectSet,setIndex} = this.state
         const { loginData } = this.props
+       
         this.setState({
             errClass: '',
             errSub: '',
             errSection: '',
-            errSub: '',
+            // errSet: '',
             isLoading: true
         }, () => {
             let valid = this.validateFields()
+           
             if (valid) {
+                let selectedset = []
+                selectedset.push(selectSet)
+                let setValue = selectSet.length > 0 ? selectSet[subIndex].length > 0 ? selectSet[subIndex] : '' : ''
                 let obj = {
                     className: selectedClass,
                     class: selectedClassId,
                     examDate: examDate[subIndex],
                     section: selectedSection,
                     subject: subjectsData[subIndex],
+                    set: setValue,
                     examTestID: examTestID[subIndex],
                 }
                 this.props.FilteredDataAction(obj)
@@ -696,20 +877,49 @@ class SelectDetailsComponent extends Component {
         })
     }
 
-    callExamAndStudentData(token){
-        let dataPayload = {
-            classId: this.state.selectedClassId,
-            section: this.state.selectedSection,
-            subject: this.state.selectedSubject
-        }
-        let apiObj = new GetStudentsAndExamData(dataPayload, token);
-        this.props.APITransport(apiObj)
-        
-        this.setState({
-            isLoading: false,
-            isCalledStudentAndExam: true
-        })
+  async  callExamAndStudentData(token){
 
+        let hasNetwork = await checkNetworkConnectivity();
+        let setValue = this.state.selectSet.length > 0 ? this.state.selectSet[this.state.subIndex].length > 0 ? this.state.selectSet[this.state.subIndex] : '' : ''
+
+
+            let hasCacheData = await getRegularStudentExamApi();
+            let cacheFilterData = hasCacheData != null 
+            ?
+            hasCacheData.filter((element)=>{
+                let conditionSwitch = setValue.length > 0  ? element.key == this.props.loginData.data.school.schoolId && element.class == this.state.selectedClass && element.section == this.state.selectedSection && element.subject == this.state.selectedSubject &&  element.set == setValue 
+                :
+                 element.key == this.props.loginData.data.school.schoolId && element.class == this.state.selectedClass && element.section == this.state.selectedSection && element.subject == this.state.selectedSubject
+                if (conditionSwitch) {
+                    return true
+                }
+            })
+            :
+            []
+
+        if (hasCacheData && cacheFilterData.length > 0) {
+            this.setState({isCalledStudentAndExam: true, isLoading: false})
+            storeFactory.dispatch(this.dispatchStudentExamData(cacheFilterData[0].data))
+        }
+        else if(hasNetwork){
+            let dataPayload = {
+                classId: this.state.selectedClassId,
+                section: this.state.selectedSection,
+                subject: this.state.selectedSubject,
+            }
+            if (setValue.length > 0) {
+                dataPayload.set = setValue
+            }
+            let apiObj = new GetStudentsAndExamData(dataPayload, token);
+            this.props.APITransport(apiObj)
+            this.setState({
+                isLoading: false,
+                isCalledStudentAndExam: true
+            })
+        } else {
+            this.setState({isLoading: false})
+            this.callCustomModal(Strings.message_text, Strings.you_dont_have_cache, false)
+        }
     }
 
     callROIData = (dataPayload, token) => {
@@ -753,11 +963,12 @@ class SelectDetailsComponent extends Component {
             this.setState({ dateVisible: false })
         }
     }
-
+    
+     
 
     render() {
-        const { navigation, isLoading, defaultSelected, classList, classListIndex, selectedClass, sectionList, sectionListIndex, selectedSection, pickerDate, selectedDate, subArr, selectedSubject, subIndex, errClass, errSub, errDate, errSection, sectionValid, dateVisible, examTestID } = this.state
-        const { loginData, multiBrandingData, modalStatus, modalMessage } = this.props
+        const { navigation, isLoading, defaultSelected, classList, classListIndex, selectedClass, sectionList,setIndex,set,ExamSetArray, sectionListIndex, selectedSection, pickerDate, selectedDate, subArr, selectedSubject,selectSet, subIndex, errClass, errSub,errSet, errDate, errSection, sectionValid, dateVisible, examTestID,examSetData } = this.state
+        const { loginData, multiBrandingData, modalStatus, modalMessage ,studentsAndExamData} = this.props
         const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.selectDetails[0]
         return (
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
@@ -807,6 +1018,8 @@ class SelectDetailsComponent extends Component {
                             {Strings.please_select_below_details}
                         </Text>
                         <View style={{ backgroundColor: 'white', paddingHorizontal: '5%', minWidth: '100%', paddingVertical: '10%', borderRadius: 4 }}>
+                       
+                           
                             <View style={[styles.fieldContainerStyle, { paddingBottom: classListIndex != -1 ? 0 : '10%' }]}>
                                 <View style={{ flexDirection: 'row' }}>
 
@@ -853,6 +1066,25 @@ class SelectDetailsComponent extends Component {
                                         defaultData={defaultSelected}
                                         defaultIndex={subIndex}
                                         selectedData={selectedSubject}
+                                        icon={require('../../assets/images/arrow_down.png')}
+                                    />
+                                </View>
+                            }
+
+                      {
+                            ExamSetArray && ExamSetArray.length > 0 && ExamSetArray[subIndex] != null && ExamSetArray[subIndex] != '' &&  subIndex != -1 &&
+                                <View style={[styles.fieldContainerStyle, {bottom:25, paddingBottom: subIndex != -1 ? '10%' : '10%' }]}>
+                                    <View style={{ flexDirection: 'row' }}>
+                                        <Text style={[styles.labelTextStyle]}>{BrandLabel && BrandLabel.Set ? BrandLabel.Set : Strings.set_text}</Text>
+                                        {errSet != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 1, width: '50%', textAlign: 'right', fontWeight: 'normal' }]}>{errSet}</Text>}
+                                    </View>
+    
+                                    <DropDownMenu
+                                        options={ExamSetArray[subIndex]}
+                                        onSelect={(idx, value) => this.onDropDownSelect(idx, value, 'set')}
+                                        defaultData={defaultSelected}
+                                        defaultIndex={setIndex}
+                                        selectedData={selectSet}
                                         icon={require('../../assets/images/arrow_down.png')}
                                     />
                                 </View>

@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
 import AppTheme from '../../utils/AppTheme';
 import { getErrorMessage, getLoginCred, getPresentAbsentStudent, getScanData, getScannedDataFromLocal, setErrorMessage, setScannedDataIntoLocal } from '../../utils/StorageUtils';
-import { dispatchCustomModalMessage, dispatchCustomModalStatus, Exam_QuestionHeader, monospace_FF } from '../../utils/CommonUtils';
+import { checkNetworkConnectivity, dispatchCustomModalMessage, dispatchCustomModalStatus, Exam_QuestionHeader, monospace_FF } from '../../utils/CommonUtils';
 import ExamDetailsPopup from '../common/components/ExamDetailsPopup';
 import ButtonComponent from '../common/components/ButtonComponent';
 import Strings from '../../utils/Strings';
@@ -49,11 +49,13 @@ const ScanHistoryCard = ({
         getStudentList()
     }, [])
     const getSaveCount = () => {
+        let hasSet = filteredData.response.hasOwnProperty("set") ? filteredData.response.set.length > 0 ? filteredData.response.set : '' : ''
         let data =
             typeof (scanedData.response) === "object" ?
                 scanedData.response.data ?
                     scanedData.response.data.filter((o, index) => {
-                        if (o.studentAvailability && o.marksInfo.length > 0) {
+                        let stdCondition = hasSet.length > 0 ? o.studentAvailability && o.marksInfo.length > 0 && hasSet == o.set : o.studentAvailability && o.marksInfo.length > 0 && o.examDate == filteredData.response.examDate
+                        if (stdCondition) {
                             return true
                         }
                     })
@@ -93,15 +95,18 @@ const ScanHistoryCard = ({
 
     const onPressSaveInDB = async () => {
         const data = await getScannedDataFromLocal();
+        const hasNetwork = await checkNetworkConnectivity();
         const { subject, examDate } = filteredData.response
 
-        if (data) {
-            if (!bgFlag) {
+        if (hasNetwork) {
+            if (data) {
+                if (!bgFlag) {
+                    
             const filterData = data.filter((e) => {
 
                 let findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.response.section)
-
-                if (e.classId == filteredData.response.class && e.subject == subject && e.examDate == examDate && findSection) {
+        
+                if (e.classId == filteredData.response.class && e.subject == subject && e.examDate == examDate &&findSection) {
                     return true
                 } else {
                     return false
@@ -118,6 +123,7 @@ const ScanHistoryCard = ({
                     let findSection = f.studentsMarkInfo.some((item) => item.section == filteredData.response.section)
 
                     setIntolocalAfterFilter = data.filter((e) => {
+                     
                         if (e.classId == f.classId && e.subject == f.subject && e.examDate == f.examDate && findSection) {
                             return false
                         } else {
@@ -128,6 +134,7 @@ const ScanHistoryCard = ({
 
                 let apiObj = new SaveScanData(filterData[0], loginData.data.token);
                 saveScanData(apiObj, filterDataLen, setIntolocalAfterFilter);
+               
 
             } else {
                 callCustomModal(Strings.message_text,Strings.there_is_no_data,false);
@@ -142,7 +149,10 @@ const ScanHistoryCard = ({
         setIsLoading(false)
         callCustomModal(Strings.message_text,Strings.there_is_no_data,false);
         }
+    } else {
+        callCustomModal(Strings.message_text, Strings.please_try_again_later_network_is_not_available, false, true)
     }
+}
     
     const saveScanData = async(api, filteredDatalen, localScanData) => {
 
@@ -164,7 +174,7 @@ const ScanHistoryCard = ({
                 })
                 .catch(function (err) {
                     collectErrorLogs("ScanHistoryCard.js","saveScanData",api.apiEndPoint(),err,false);
-                    callCustomModal(Strings.message_text,Strings.contactAdmin,false);
+                    callCustomModal(Strings.message_text,err.response.data && err.response.data.message ? err.response.data.message  : Strings.contactAdmin,false);
                     clearTimeout(id);
                     setIsLoading(false);
                 });
@@ -179,6 +189,7 @@ const ScanHistoryCard = ({
             "subject": filteredData.response.subject,
             "section": filteredData.response.section,
             "fromDate": filteredData.response.examDate,
+            "set": filteredData.response.set,
             "page": 0,
             "schoolId": loginCred.schoolId,
             "downloadRes": false
@@ -233,24 +244,26 @@ const ScanHistoryCard = ({
 
     const getStudentList = async () => {
         let studentList = await getPresentAbsentStudent();
-        let absentStudent = studentList.filter((item) => { 
+        let absentStudent = studentList != null ? studentList.filter((item) => { 
             if (item.studentAvailability == false) {
                 return true
             }
         })
-        setStudentCount({ absentCount: absentStudent.length , totalCount: studentList.length})
+        :
+        []
+        setStudentCount({ absentCount: absentStudent.length , totalCount: studentList!=null ? studentList.length : 0})
     }
 
     // for exam type
-    let Examtypedata = studentsAndExamData.data.exams
-    Examtypedata = studentsAndExamData.data.exams.filter(function (item) {
-        return item.subject == filteredData.response.subject;
+    let Examtypedata = studentsAndExamData.data&&studentsAndExamData.data.exams
+    Examtypedata = studentsAndExamData.data&&studentsAndExamData.data.exams.filter(function (item) {
+        return item.subject == filteredData.response.subject && item.examId == filteredData.response.examTestID;
     }).map(({ type }) => ({ type }));
 
     
-    let ExamQuesDetail = studentsAndExamData.data.exams
-    ExamQuesDetail = studentsAndExamData.data.exams.filter(function (item) {
-        return item.subject == filteredData.response.subject;
+    let ExamQuesDetail = studentsAndExamData.data&&studentsAndExamData.data.exams
+    ExamQuesDetail = studentsAndExamData.data&&studentsAndExamData.data.exams.filter(function (item) {
+        return item.subject == filteredData.response.subject && item.examId == filteredData.response.examTestID;
     })
     return (
         <View>
@@ -298,7 +311,7 @@ const ScanHistoryCard = ({
                             <Text style={{fontFamily : monospace_FF}} >{BrandLabel&&BrandLabel.ExamType ? BrandLabel.ExamType:Strings.Exam_Type}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle,]}>
-                                {Examtypedata.map((item) =>
+                                {Examtypedata&&Examtypedata.map((item) =>
                                     <View key={item}>
                                         <Text style={{fontFamily : monospace_FF}} >{item.type}</Text>
                                     </View>
@@ -455,7 +468,9 @@ const ScanHistoryCard = ({
                             }
                         </View>
                         <View style={styles1.container1}>
-                            {ExamQuesDetail[0] && ExamQuesDetail[0].questions.map((stu) => {
+                            {ExamQuesDetail&&ExamQuesDetail[0]&&ExamQuesDetail[0].questions != undefined && 
+                                ExamQuesDetail[0].questions != "" ?
+                                ExamQuesDetail[0] && ExamQuesDetail[0].questions.map((stu) => {
                                 return (
                                     <View key={stu} style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
 
@@ -476,7 +491,7 @@ const ScanHistoryCard = ({
                                         />
                                     </View>
                                 )
-                            })}
+                            }): <View style={{ alignItems: 'center', marginTop: 80 }}><Text>Data not found</Text></View>}
                         </View>
                     </ScrollView>
                     <View >

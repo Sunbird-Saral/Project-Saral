@@ -1,6 +1,7 @@
 /**
  * Save Scan Data
  */
+import { apkVersion } from '../../../configs/config';
 import API from '../apis/api';
 import C from '../constants';
 
@@ -31,7 +32,8 @@ export class SaveScanData extends API {
     getHeaders() {
         return {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${this.token}`
+            'Authorization': `Bearer ${this.token}`,
+            'X-App-Version': apkVersion
         }
     }
 

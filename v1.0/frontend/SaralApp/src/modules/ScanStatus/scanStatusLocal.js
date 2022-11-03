@@ -24,6 +24,7 @@ import { Assets } from '../../assets';
 import ShareComponent from '../common/components/Share';
 import MultibrandLabels from '../common/components/multibrandlabels';
 import { dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF } from '../../utils/CommonUtils';
+import ButtonComponent from '../common/components/ButtonComponent';
 
 
 const ScanStatusLocal = ({
@@ -42,17 +43,18 @@ const ScanStatusLocal = ({
     const dispatch = useDispatch()
 
 
-useEffect(
-    React.useCallback(() => {
-        const onBackPress = () => {
-            navigation.navigate('myScan');
-            return true;
-        };
-        BackHandler.addEventListener('hardwareBackPress', onBackPress);
-        return () =>
-            BackHandler.removeEventListener('hardwareBackPress', onBackPress);
-    }, []),
-);
+// useEffect(
+//     React.useCallback(() => {
+//         BackHandler.addEventListener('hardwareBackPress', onBackPress);
+//         return () =>
+//         BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+//     }, []),
+//     );
+
+    const onBackPress = () => {
+        navigation.navigate('myScan');
+        return true;
+    };
 
 const callCustomModal = (title, message, isAvailable, func, cancel) => {
     let data = {
@@ -124,10 +126,23 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
         if (data) {
           let filterscandata =  data.filter((item)=>{
             let findSection = item.studentsMarkInfo.some((item) => item.section == filteredData.section)
-                if( filteredData.class == item.classId &&  filteredData.examDate == item.examDate &&  filteredData.subject == item.subject && findSection   ){
+                if( filteredData.class == item.classId &&  filteredData.examDate == item.examDate &&  filteredData.subject == item.subject && filteredData.examTestID==item.examId && findSection   ){
                     return true
                 }   
             })
+
+            let hasSet = filteredData.hasOwnProperty("set") ? filteredData.set.length > 0 ? filteredData.set : '' : ''
+            if (hasSet.length > 0) {
+                let findSetStudent = filterscandata.length > 0 ? filterscandata[0].studentsMarkInfo.filter((item) => {
+                    if (hasSet.length > 0) {
+                        return item.set == hasSet;
+                    }
+                })
+                :
+                []
+                filterscandata[0].studentsMarkInfo = findSetStudent
+            }
+
             getPresentStudentList(filterscandata)
         }
     }
@@ -200,6 +215,15 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
             keyExtractor={(item, index) => `${index.toString()}`}
             contentContainerStyle={styles.content}
             />
+
+          <View style={{alignItems:'center'}}>
+            <ButtonComponent
+                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+                btnText={Strings.close.toUpperCase()}
+                activeOpacity={0.8}
+                onPress={()=> onBackPress()}
+                />
+                </View>
 
         </View>
     );

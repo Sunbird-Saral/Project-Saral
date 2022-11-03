@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Text, View, ScrollView, ToastAndroid, Alert, Image, TouchableOpacity, PermissionsAndroid } from 'react-native';
 import { connect, useDispatch } from 'react-redux';
 import AppTheme from '../../utils/AppTheme';
-import { CELL_OMR, extractionMethod, multipleStudent, MULTIPLE_TAG_DATAS,dispatchCustomModalMessage, dispatchCustomModalStatus,monospace_FF , neglectData, SCAN_TYPES, studentLimitSaveInLocal, student_ID, TABLE_HEADER, TABLE_HEADER_WITH_TAG } from '../../utils/CommonUtils';
+import { CELL_OMR, extractionMethod, multipleStudent, MULTIPLE_TAG_DATAS,dispatchCustomModalMessage, dispatchCustomModalStatus,monospace_FF , neglectData, SCAN_TYPES, studentLimitSaveInLocal, student_ID, TABLE_HEADER, TABLE_HEADER_WITH_TAG,defaultHeaderTable } from '../../utils/CommonUtils';
 import Strings from '../../utils/Strings';
 import ShareComponent from '../common/components/Share';
 
@@ -80,6 +80,9 @@ const ScannedDetailsComponent = ({
     const [questionIdData ,setQuestionIdData] = useState()
     const [omrResultErr, setOmrResult] = useState()
     const [isOmrOptions, setOmrOptions] = useState(false)
+    const [isAlphaNumeric, setIsAlphaNumeric] = useState(false)
+    const [filterData, setFilterData] = useState({data: [], len: 0})
+    
 
     const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.scannedDetailComponent[0]
     const defaultValidateError = ocrLocalResponse.layout && ocrLocalResponse.layout.resultValidation && ocrLocalResponse.layout.resultValidation.validate.errorMsg
@@ -87,6 +90,8 @@ const ScannedDetailsComponent = ({
     const studentIdErrorMsg = ocrLocalResponse.layout && ocrLocalResponse.layout.idValidation && ocrLocalResponse.layout.idValidation.validate.errorMsg
     let consolidated =ocrLocalResponse.layout.cells[0]&& ocrLocalResponse.layout.cells[0].consolidatedPrediction.length
     const idValidateExp = ocrLocalResponse.layout && ocrLocalResponse.layout.idValidation && ocrLocalResponse.layout.idValidation.validate.regExp
+    const jsonLabels = ocrLocalResponse.layout && ocrLocalResponse.layout.resultScreenLabels
+    const listbrandlabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.scannedDetailComponent[0] && multiBrandingData.screenLabels.scannedDetailComponent[0].ListTableHeading[0]
     
     let regexExp = idValidateExp
     let number = studentId;
@@ -132,7 +137,7 @@ const ScannedDetailsComponent = ({
 
         let absent = datas.filter((item) => item.studentId == studentId & item.studentAvailability == false)
 
-        if (result == false && studentId.length > consolidated) {
+        if (result == false && studentId != undefined && studentId.length > consolidated) {
             showErrorMessage(studentIdErrorMsg)
 
         }
@@ -163,7 +168,7 @@ const ScannedDetailsComponent = ({
                 //set student Id
                 ocrLocalResponse.layout.cells.forEach((element) => {
                     student_ID.forEach((e) => {
-                        if (element.format.name == e) {
+                        if (element.format.name.replace(/[0-9]/g, '') == e) {
                             element.consolidatedPrediction = value
                             setMultipageStdId(element.consolidatedPrediction)
                         }
@@ -179,7 +184,7 @@ const ScannedDetailsComponent = ({
                 //set student Id
                 ocrLocalResponse.layout.cells.forEach((element) => {
                     student_ID.forEach((e) => {
-                        if (element.format.name == e) {
+                        if (element.format.name.replace(/[0-9]/g, '') == e) {
                             element.consolidatedPrediction = value
                             setMultipageStdId(element.consolidatedPrediction)
                         }
@@ -198,28 +203,43 @@ const ScannedDetailsComponent = ({
     }
 
     useEffect(() => {
+        let checkRoLLNumberExist = ocrLocalResponse.layout.hasOwnProperty("identifierPrefix") ? ocrLocalResponse.layout.identifierPrefix : ocrLocalResponse.layout.cells[0].format.name.replace(/[0-9]/g, '') == multipleStudent[0] ? multipleStudent[0] : neglectData[0]
         let checkIsStudentMultipleSingle = ocrLocalResponse.layout.cells.filter((e) => {
             let withNoDigits = e.format.name.replace(/[0-9]/g, '');
             let wordLen = withNoDigits.length;
             let multiple = 0
-            if (wordLen === multipleStudent[0].length && withNoDigits === multipleStudent[0]) {
+            if (wordLen === checkRoLLNumberExist.length && withNoDigits === checkRoLLNumberExist && (e.consolidatedPrediction) != 0) {
                 multiple = multiple + 1
             }
             return multiple
         })
 
+        let filterWithZeroStudentData = ocrLocalResponse.layout.cells.filter((e) => {
+            let withNoDigits = e.format.name.replace(/[0-9]/g, '');
+            let wordLen = withNoDigits.length;
+            let multiple = 0
+            if (wordLen === checkRoLLNumberExist.length && withNoDigits === checkRoLLNumberExist) {
+                multiple = multiple + 1
+            }
+            return multiple
+        })
+
+
+        if(ocrLocalResponse.layout.cells[1].rois[0].extractionMethod == "BLOCK_ALPHANUMERIC_CLASSIFICATION"){
+            setIsAlphaNumeric(true)
+        }
      
         if (ocrLocalResponse.layout.hasOwnProperty("pages") && ocrLocalResponse.layout.pages > 0) {
             setMultiPage(ocrLocalResponse.layout.pages)
             setNextBtn("SCAN PAGE #2")
         }
 
-        if (checkIsStudentMultipleSingle.length > 0) {
+        if (checkIsStudentMultipleSingle.length > 1) {
             let findNonZeroRollStd = ocrLocalResponse.layout.cells.filter((e) => {
                 let withNoDigits = e.format.name.replace(/[0-9]/g, '');
                 let wordLen = withNoDigits.length;
                 let multiple = 0
-                if (wordLen === multipleStudent[0].length && withNoDigits === multipleStudent[0] && (parseInt(e.consolidatedPrediction) != 0)) {
+                if (wordLen === checkRoLLNumberExist.length && withNoDigits === checkRoLLNumberExist && (e.consolidatedPrediction) != 0) {
                     multiple = multiple + 1
                 }
                 return multiple
@@ -228,7 +248,7 @@ const ScannedDetailsComponent = ({
             setNextBtn("NEXT")
             setStdRollArray(findNonZeroRollStd)
             setIsmultipleStudent(true)
-            callMultipleStudentSheetData(checkIsStudentMultipleSingle)
+            callMultipleStudentSheetData(filterWithZeroStudentData)
         } else {
             let checkIsOmrOption = ocrLocalResponse.layout.cells[1].hasOwnProperty("omrOptions") ? true : false
             setOmrOptions(checkIsOmrOption)
@@ -237,7 +257,6 @@ const ScannedDetailsComponent = ({
     }, []);
 
     const callMultipleStudentSheetData = (checkIsStudentMultipleSingle) => {
-
         let marTemp = []
         let dummy = []
 
@@ -263,7 +282,7 @@ const ScannedDetailsComponent = ({
         });
 
        let removeZeroRollStd = marTemp.filter((data, i) => { 
-            if (parseInt(data.RollNo) != 0) {
+            if ((data.RollNo) != 0) {
                 return true
             }
         })
@@ -297,17 +316,48 @@ const ScannedDetailsComponent = ({
     const callSingleStudentSheetData = () => {
         let data = ''
         let elements = neglectData;
-        data = ocrLocalResponse.layout.cells.filter((element) => {
-            if (element.format.name == elements[0] || element.format.name == elements[1] || element.format.name == elements[4] || element.page && element.page != 1) {
-                return false
+        let indexArray = [];
+
+        let checkRoLLNumberExist = ocrLocalResponse.layout.hasOwnProperty("identifierPrefix") ? ocrLocalResponse.layout.identifierPrefix : ocrLocalResponse.layout.cells[0].format.name.replace(/[0-9]/g, '') == multipleStudent[0] ? multipleStudent[0] : neglectData[0]
+        let checkIsStudentMultipleSingle = ocrLocalResponse.layout.cells.filter((e) => {
+            let withNoDigits = e.format.name.replace(/[0-9]/g, '');
+            let wordLen = withNoDigits.length;
+            let multiple = 0
+            if (wordLen === checkRoLLNumberExist.length && withNoDigits === checkRoLLNumberExist) {
+                multiple = multiple + 1
             }
-            else {
+            return multiple
+        });
+
+        if (checkIsStudentMultipleSingle.length == 1) {
+            data = ocrLocalResponse.layout.cells.filter((element) => {
+                if (element.format.name.replace(/[0-9]/g, '') == checkRoLLNumberExist || element.format.name == elements[1] || element.format.name == elements[4] || element.page && element.page != 1) {
+                    return false
+                } else {
                 if (element.page > 0) {
                     setCurrentIndex(currentIndex + 1)
                 }
                 return true
             }
         })
+        } else {
+            var hasNonZeroStdId = false;
+            ocrLocalResponse.layout.cells.forEach((element, index) => {
+                checkIsStudentMultipleSingle.forEach((e, i) => {
+                    if (element.format.name === e.format.name) {
+                        if (e.consolidatedPrediction != 0) {
+                            hasNonZeroStdId = true
+                            indexArray.push(index + 1)
+                        } else if (hasNonZeroStdId) {
+                            indexArray.push(index)
+                            hasNonZeroStdId = false
+                        }
+                    }
+                });
+            });
+            data = ocrLocalResponse.layout.cells.slice(indexArray[0], indexArray[1])
+            setFilterData({ data: data, len: checkIsStudentMultipleSingle.length })
+        }
 
         //check value marksObtained and maxMarks is present in array or not
         let marksObtained = data.some(item => item.format.name === elements[2])
@@ -346,14 +396,13 @@ const ScannedDetailsComponent = ({
         }
 
         //get student Id
-        ocrLocalResponse.layout.cells.filter((element) => {
-            student_ID.forEach((e) => {
-                if (element.format.name == e) {
-                    setStudentID(element.consolidatedPrediction)
-                    setMultipageStdId(element.consolidatedPrediction)
-                }
-            })
-        })
+        for (const element of ocrLocalResponse.layout.cells) {
+            if (element.format.name.replace(/[0-9]/g, '') == checkRoLLNumberExist && element.consolidatedPrediction != 0) {
+                setStudentID(element.consolidatedPrediction)
+                setMultipageStdId(element.consolidatedPrediction)
+                break
+            }
+        }
     }
 
     const regxValidation = (cellId) => {
@@ -369,7 +418,8 @@ const ScannedDetailsComponent = ({
                 let regex = new RegExp(regexExp)
                 result = regex.test(number);
                 // setOmrResult(regexErrormsg)
-                setOmrResult(defaultValidateError)
+                  setOmrResult(defaultValidateError)
+                  
 
             }
         }
@@ -377,21 +427,10 @@ const ScannedDetailsComponent = ({
     }
 
 
-    const goNextFrame = () => {
-
-        let validCell = false
-        let omrMark = false
-        for (let i = 0; i < newArrayValue.length; i++) {
-            if (newArrayValue[i].consolidatedPrediction === '') {
-                validCell = true
-            }
-            else if (newArrayValue[i].consolidatedPrediction === 0) {
-                omrMark = true
-            }
-        }
+    const goNextFrame = () => {  
+        let regexvalidate = omrValidation()
+    
         let duplication = false
-
-        let cellOmrValidation = validateCellOMR(true)
         const duplicate = checkStdRollDuplicate.some((item) => studentId == item)
 
         if (duplicate && !toggleCheckBox) {
@@ -399,21 +438,14 @@ const ScannedDetailsComponent = ({
         } else {
             duplication = false
         }
-        if (omrMark) {
-            showErrorMessage(omrResultErr ? omrResultErr : defaultValidateError || Strings.omr_mark_should_be)
+        if (!toggleCheckBox &&  regexvalidate[0]) {
+            showErrorMessage(regexvalidate[1] ? `${regexvalidate[1]}`: defaultValidateError )
         }
-        else if (cellOmrValidation[0]) {
-            showErrorMessage(`omr value should be 0 to ${cellOmrValidation[1] + 1}`)
-        }
+        
         else if (duplication) {
             callCustomModal(Strings.message_text, Strings.Student_ID_Shouldnt_be_duplicated,false);
         }
-        else if (disable) {
-            showErrorMessage(Strings.please_correct_marks_data)
-        }
-        else if (validCell) {
-            showErrorMessage(Strings.please_correct_marks_data)
-        }
+       
         else if (!studentValid && !toggleCheckBox) {
             showErrorMessage(Strings.please_correct_student_id)
             setStdErr(Strings.please_correct_student_id)
@@ -443,7 +475,6 @@ const ScannedDetailsComponent = ({
                 //save validated student
                 dispatch(OcrLocalResponseAction(JSON.parse(JSON.stringify(ocrLocalResponse))))
                 setCheckStdRollDuplicate([...checkStdRollDuplicate, studentId])
-                validCell = false
                 setNewArrayValue(structureList[currentIndex + 1].data)
                 setStudentID(structureList[currentIndex + 1].RollNo)
                 setCurrentIndex(currentIndex + 1)
@@ -479,6 +510,18 @@ const ScannedDetailsComponent = ({
                 }
             }
         }
+
+    }
+
+    const showRegexErrorMessage = (value) => {
+            let regexValue = regxValidation(value.cellId)
+            ocrLocalResponse.layout.cells.forEach(element => {
+                if (element.cellId == value.cellId) {
+                    if (!regexValue[0]) {
+                        showErrorMessage(regexValue[1] ? regexValue[1] : defaultValidateError )
+                    }
+                }
+            })
     }
 
 
@@ -491,7 +534,7 @@ const ScannedDetailsComponent = ({
     const callTagArrayData = (formatName) =>{
         let tagArray = []
         for(const element of studentsAndExamData.data.exams){
-            if (filteredData.subject === element.subject) {
+            if (filteredData.subject === element.subject && element.questions !=null) {
                 for(const _el of element.questions) {
                     _el.tags.filter((value) => {
                         if (value.hasOwnProperty("questionId") && value.questionId.trim() == formatName.trim() && value.selected) {
@@ -509,8 +552,10 @@ const ScannedDetailsComponent = ({
 
     const saveMultiData = async () => {
 
+        let checkRoLLNumberExist = ocrLocalResponse.layout.hasOwnProperty("identifierPrefix") ? ocrLocalResponse.layout.identifierPrefix : ocrLocalResponse.layout.cells[0].format.name.replace(/[0-9]/g, '') == multipleStudent[0] ? multipleStudent[0] : neglectData[0]
         let storeTrainingData = ocrLocalResponse.layout.cells.filter((element) => {
-            if (element.format.name.slice(0, multipleStudent[0].length) == multipleStudent[0]) {
+
+            if (element.format.name.slice(0, checkRoLLNumberExist.length) == checkRoLLNumberExist && element.consolidatedPrediction != 0) {
                 return true
             }
         })
@@ -528,7 +573,8 @@ const ScannedDetailsComponent = ({
                     "marksInfo": '',
                     "securedMarks": stdTotalMarks,
                     "totalMarks": 0,
-                    "studentAvailability": true
+                    "studentAvailability": true,
+                    "set": filteredData.set,
                 }
 
                 stdData.studentId = el.RollNo
@@ -555,7 +601,7 @@ const ScannedDetailsComponent = ({
                     }
                     let putTrainingData = loginData.data.school.storeTrainingData ? marks_data.trainingData = value.consolidatedPrediction != value.predictedMarks ? value.trainingDataSet : [] : ''
                     marks_data.questionId = value.format.name,
-                        marks_data.obtainedMarks = value.consolidatedPrediction
+                    marks_data.obtainedMarks = value.consolidatedPrediction? value.consolidatedPrediction : ""
                     stdTotalMarks = Number(stdTotalMarks) + Number(value.consolidatedPrediction)
                     stdMarks_info.push(marks_data)
 
@@ -573,7 +619,10 @@ const ScannedDetailsComponent = ({
             "classId": filteredData.class,
             "examDate": filteredData.examDate,
             "subject": filteredData.subject,
-            "studentsMarkInfo": stdMarkInfo
+            "studentsMarkInfo": stdMarkInfo,
+            "examId": filteredData.examTestID,
+            "userId": loginData.data.school.schoolId,
+            "set": filteredData.set,
         }
         saveAndFetchFromLocalStorag(saveObj)
     }
@@ -610,8 +659,15 @@ const ScannedDetailsComponent = ({
                  filterData = getDataFromLocal.filter((e) => {
     
                     //In minimal mode need to find organization id as we kept studentId
-                    if (e.roiId == roiData.data.roiId) {
-                        return true
+                    if (e.roiId == roiData.data.roiId && loginData.data.school.hasOwnProperty("offlineMode") & loginData.data.school.offlineMode) {
+                        if (loginData.data.school.schoolId == e.key) {
+                            return true
+                        } else {
+                            return false
+                            
+                        }
+                    } else if (e.roiId == roiData.data.roiId) {
+                        return true   
                     }
                 })
 
@@ -643,7 +699,12 @@ const ScannedDetailsComponent = ({
                             findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.section)
 
                             //In minimal mode need to find organization id as we kept studentId
-                            let findRoiID =  e.roiId == roiData.data.roiId;
+                            let findRoiID =  false;
+                            if (minimalFlag & loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode) {
+                                findRoiID = loginData.data.school.schoolId == e.key && e.roiId == roiData.data.roiId
+                            } else {
+                                findRoiID = e.roiId == roiData.data.roiId
+                            }
                             let checkDataExistence = !minimalFlag ? filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject : false
                             if (checkDataExistence && findSection || findRoiID) {
 
@@ -657,10 +718,11 @@ const ScannedDetailsComponent = ({
                                             }
                                         }
                                     })
+                                    let findIndex = !isMultipleStudent && e.studentsMarkInfo.findIndex((o)=> i < saveObj.studentsMarkInfo.length & o.studentId == studentId)
 
 
                                     if (!isMultipleStudent && findStudent.length > 0 && saveObj.studentsMarkInfo.length > 0) {
-                                        getDataFromLocal[index].studentsMarkInfo[i] = saveObj.studentsMarkInfo[0]
+                                        getDataFromLocal[index].studentsMarkInfo[findIndex] = saveObj.studentsMarkInfo[0]
                                     }
                                     else if (isMultipleStudent) {
 
@@ -728,11 +790,7 @@ const ScannedDetailsComponent = ({
     }
 
     const renderSRNo = (element, index) => {
-        if (isMultipleStudent) {
             return `${index + 1}`
-        } else {
-            return `${element.render.index - 1}`
-        }
     }
 
     const lengthAccordingSheet = (element) => {
@@ -741,7 +799,7 @@ const ScannedDetailsComponent = ({
         } else if (element.format.name === neglectData[2] || element.format.name === neglectData[3]) {
             return 4
         } else {
-            return 2
+            return 100
         }
     }
 
@@ -758,7 +816,7 @@ const ScannedDetailsComponent = ({
             }
 
             let newArray = JSON.parse(JSON.stringify(array))
-            newArray[index].consolidatedPrediction = text > 1 ? 0 : text
+            newArray[index].consolidatedPrediction = text.length>0&& text > 1 ? 0 : text
             setNewArrayValue(newArray)
 
             ocrLocalResponse.layout.cells.forEach(element => {
@@ -766,11 +824,11 @@ const ScannedDetailsComponent = ({
                 if (element.cellId == value.cellId) {
                     structureList.forEach(Datas => {
                         //this'll add into OCRLocal
-                        element.consolidatedPrediction = text < 1 ? 0 : text
+                        element.consolidatedPrediction = text.length<0&&text < 1 ? 0 : text
                         //this'll add in  structurelist
                         Datas.data.forEach((el, index) => {
                             if (el.cellId === value.cellId) {
-                                el.consolidatedPrediction = text > 1 ? 0 : text
+                                el.consolidatedPrediction = text.length>0&&text > 1 ? 0 : text
                             }
                         });
 
@@ -802,14 +860,6 @@ const ScannedDetailsComponent = ({
                 }
             });
             dispatch(OcrLocalResponseAction(ocrLocalResponse))
-            let regexValue = regxValidation(value.cellId)
-            ocrLocalResponse.layout.cells.forEach(element => {
-                if (element.cellId == value.cellId) {
-                    if (!regexValue[0] && text.length > 0) {
-                        showErrorMessage(regexValue[1] ? regexValue[1] : defaultValidateError )
-                    }
-                }
-            });
 
             newArray.map((e) => {
                 if (e.format.name == neglectData[3]) {
@@ -825,12 +875,15 @@ const ScannedDetailsComponent = ({
     }
 
     const markBorderOnCell = (element) => {
-        if (element.consolidatedPrediction.length == 0) {
+        const regexValidate = omrValidation()
+        if (element.consolidatedPrediction.length == 0 ) {
             return AppTheme.ERROR_RED
         }
         else if (element.format.name == neglectData[2] && obtnmarkErr) {
             return AppTheme.ERROR_RED
         } else if (element.format.name == neglectData[3] && maxmarkErr) {
+            return AppTheme.ERROR_RED
+        }else if (element.cellId == regexValidate[2]) {
             return AppTheme.ERROR_RED
         }
         else {
@@ -872,10 +925,11 @@ const ScannedDetailsComponent = ({
     const omrValidation = () =>{
         var result = false
         var regexErrormsg
+        var errorMesaage = ""
         var regextResult = false
+        var cellId = ""
             for (let j = 0; j < newArrayValue.length; j++) {
                 let filter = ocrLocalResponse.layout.cells.filter((el)=> el.cellId == newArrayValue[j].cellId);
-                if (filter[0].hasOwnProperty("omrOptions")) {   
                     let consolidated = filter[0].consolidatedPrediction
                     regexErrormsg = filter && filter[0].validate && filter[0].validate.errorMsg
                     let regexExp = filter[0] && filter[0].validate && filter[0].validate.regExp ? filter[0].validate.regExp : defaultValidateExp
@@ -885,50 +939,26 @@ const ScannedDetailsComponent = ({
                     
                     if (!result) {
                         regextResult = !result
-                        showErrorMessage(`${regexErrormsg}`)
-                    }
+                errorMesaage = regexErrormsg
+                cellId = newArrayValue[j].cellId
+                break;
                 }
         }
-    return regextResult
+        return [regextResult, errorMesaage, cellId]
     }
 
     const onSubmitClick = async () => {
-        let validCell = false
-        let omrMark = false
-        let resultMark = false
-        let regexErrormsglist
-        for (let i = 0; i < newArrayValue.length; i++) {
-            let consolidatedlist = newArrayValue[i].consolidatedPrediction
-             regexErrormsglist = newArrayValue[i] && newArrayValue[i].validate && newArrayValue[i].validate.errorMsg
-            let regexlist = newArrayValue[i].validate && newArrayValue[i].validate.regExp
-            let number = consolidatedlist;
-            let regexvalue = new RegExp(regexlist)
-            let resultlist = regexvalue.test(number);
-        }
+        let regexvalidate = omrValidation()
 
-        let regexValidation
-        console.log("isOmroptions",isOmrOptions);
-        if (isOmrOptions) {
-            regexValidation = omrValidation();
-        }
-
-
-        let cellOmrValidation = validateCellOMR(false)
-    
-        if(regexValidation){
-        }
-        else if (cellOmrValidation[0]) {
-            if (typeof(cellOmrValidation[1]) == 'number') {
-                showErrorMessage(`omr value should be 0 to ${cellOmrValidation[1]}`)
-            } 
-        }
-        else if (!studentValid && !toggleCheckBox) {
+        if (!studentValid && !toggleCheckBox) {
             showErrorMessage(Strings.please_correct_student_id)
         }
         else if (isStudentValid) {
             showErrorMessage(Strings.student_id_should_be_same)
         }
-
+        else if (regexvalidate[0]) {
+            showErrorMessage(regexvalidate[1] ? `${regexvalidate[1]}`: defaultValidateError )
+        }
         else {
             if (sumOfObtainedMarks > 0) {
 
@@ -1001,7 +1031,8 @@ const ScannedDetailsComponent = ({
         const elements = neglectData;
 
         let filterDataAccordingPage = roisData.layout.cells.filter((element) => {
-            if (element.format.name == elements[0] || element.format.name == elements[1] || element.format.name == elements[4] || element.page != currentIndex + 1) {
+            let checkIdentifierExist = ocrLocalResponse.layout.hasOwnProperty("identifierPrefix") ? ocrLocalResponse.layout.identifierPrefix : ocrLocalResponse.layout.cells[0].format.name.replace(/[0-9]/g, '') == multipleStudent[0] ? multipleStudent[0] : neglectData[0]
+            if (element.format.name == checkIdentifierExist || element.format.name == elements[1] || element.format.name == elements[4] || element.page != currentIndex + 1) {
                 return false
             }
             else {
@@ -1036,7 +1067,8 @@ const ScannedDetailsComponent = ({
         const elements = neglectData
 
         let extract_MAX_OBTAINED_MARKS = ocrLocalResponse.layout.cells.filter((e) => {
-            if (e.format.name == elements[0]) {
+            let checkIdentifierExist = ocrLocalResponse.layout.hasOwnProperty("identifierPrefix") ? ocrLocalResponse.layout.identifierPrefix : ocrLocalResponse.layout.cells[0].format.name.replace(/[0-9]/g, '') == multipleStudent[0] ? multipleStudent[0] : neglectData[0]
+            if (e.format.name == checkIdentifierExist) {
                 return
             }
             if (e.format.name == elements[2]) {
@@ -1070,8 +1102,9 @@ const ScannedDetailsComponent = ({
             } else {
                 setNextBtn(`Scan Page#${currentIndex}`)
                 const elements = neglectData;
+                let checkIdentifierExist = ocrLocalResponse.layout.hasOwnProperty("identifierPrefix") ? ocrLocalResponse.layout.identifierPrefix : ocrLocalResponse.layout.cells[0].format.name.replace(/[0-9]/g, '') == multipleStudent[0] ? multipleStudent[0] : neglectData[0]
                 let filterDataAccordingPage = ocrLocalResponse.layout.cells.filter((element) => {
-                    if (element.format.name == elements[0] || element.format.name == elements[1] || element.format.name == elements[4] || element.page != currentIndex - 1) {
+                    if (element.format.name == checkIdentifierExist || element.format.name == elements[1] || element.format.name == elements[4] || element.page != currentIndex - 1) {
                         return false
                     }
                     else {
@@ -1093,8 +1126,9 @@ const ScannedDetailsComponent = ({
 
     const saveData = async (sumOfAllMarks) => {
         let elements = neglectData;
+        let checkIdentifierExist = ocrLocalResponse.layout.hasOwnProperty("identifierPrefix") ? ocrLocalResponse.layout.identifierPrefix : ocrLocalResponse.layout.cells[0].format.name.replace(/[0-9]/g, '') == multipleStudent[0] ? multipleStudent[0] : neglectData[0]
         let data = ocrLocalResponse.layout.cells.filter((element) => {
-            if (element.format.name == elements[0] || element.format.name == elements[1] || element.format.name == elements[2] || element.format.name == elements[3]) {
+            if (element.format.name.replace(/[0-9]/g, '') == checkIdentifierExist || element.format.name.replace(/[0-9]/g, '') == elements[1] || element.format.name.replace(/[0-9]/g, '') == elements[2] || element.format.name.replace(/[0-9]/g, '') == elements[3]) {
             }
             else {
                 return true
@@ -1102,7 +1136,7 @@ const ScannedDetailsComponent = ({
         })
 
         let objects = []
-
+        data = filterData.len > 0 ? filterData.data : data
         data.map((e) => {
             
             let tagArrayData = ''
@@ -1128,13 +1162,13 @@ const ScannedDetailsComponent = ({
         })
 
         let storeTrainingData = ocrLocalResponse.layout.cells.filter((element) => {
-            if (element.format.name == elements[0]) {
+            if (element.format.name.replace(/[0-9]/g, '') == checkIdentifierExist && element.consolidatedPrediction != 0) {
                 return true
             }
         })
 
         let maxObtainedTrainingData = ocrLocalResponse.layout.cells.filter((element) => {
-            if (element.format.name === elements[2] || element.format.name === elements[3]) {
+            if (element.format.name.replace(/[0-9]/g, '') === elements[2] || element.format.name.replace(/[0-9]/g, '') === elements[3]) {
                 return true
             }
         })
@@ -1145,6 +1179,8 @@ const ScannedDetailsComponent = ({
             "classId": minimalFlag ? 0 : filteredData.class,
             "examDate": minimalFlag ? null : filteredData.examDate,
             "subject": minimalFlag ? 0 : filteredData.subject,
+            "examId": minimalFlag ? 0 : filteredData.examTestID,
+            "userId": loginData.data.school.schoolId,
             "studentsMarkInfo": [
                 {
                     "predictedStudentId": loginData.data.school.storeTrainingData ? storeTrainingData[0].studentIdPrediction : '',
@@ -1154,7 +1190,8 @@ const ScannedDetailsComponent = ({
                     "securedMarks": sumOfAllMarks > 0 ? sumOfAllMarks : 0,
                     "totalMarks": maxMarksTotal > 0 ? maxMarksTotal : 0,
                     "marksInfo": Studentmarks,
-                    "studentAvailability": true
+                    "set": minimalFlag ? 0 : filteredData.set ,
+                    "studentAvailability": true,
                 }
             ]
         }
@@ -1172,6 +1209,9 @@ const ScannedDetailsComponent = ({
             saveObj.studentsMarkInfo[0].obtainedMarksTrainingData = maxObtainedTrainingData[1].predictedMarks != sumOfAllMarks ? maxObtainedTrainingData[1].trainingDataSet : []
             saveObj.studentsMarkInfo[0].obtainedMarksPredicted = maxObtainedTrainingData[1].predictedMarks
             saveObj.studentsMarkInfo[0].obtainedMarksConfidence = maxObtainedTrainingData[1].predictedMarks != sumOfAllMarks ? maxObtainedTrainingData[1].predictionConfidence : []
+        }
+        if ((loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode) && minimalFlag) {
+            saveObj.key = loginData.data.school.schoolId
         }
 
         let putTrainingData = loginData.data.school.storeTrainingData ? saveObj.studentsMarkInfo[0].studentIdTrainingData = storeTrainingData.length > 0 ? storeTrainingData[0].studentIdPrediction != studentId || (storeTrainingData[0].studentIdPrediction != studentId && multiPage > 0) ? storeTrainingData[0].trainingDataSet : [] : [] : ''
@@ -1277,7 +1317,7 @@ const ScannedDetailsComponent = ({
                                                     <Text style={[styles.nameTextStyle, { fontWeight: 'bold', color: AppTheme.BLACK, fontSize: AppTheme.FONT_SIZE_LARGE }]}>{minimalFlag ? loginData.data.school.name : studentData.length > 0 && studentData[0].name}</Text>
                                                     <TextField
                                                         labelText={BrandLabel && BrandLabel.StudentId ? BrandLabel.StudentId : Strings.student_id}
-                                                        errorField={stdErr != '' || isNaN(studentId)}
+                                                        errorField={stdErr != ''}
                                                         // errorText={BrandLabel && BrandLabel.CorrectId ? stdErr != '' ? stdErr : BrandLabel.CorrectId : stdErr != '' ? stdErr : Strings.please_correct_student_id}
                                                         errorText={ stdErr != '' ? stdErr : Strings.please_correct_student_id}
                                                         onChangeText={(text) => {
@@ -1288,7 +1328,7 @@ const ScannedDetailsComponent = ({
                                                         }}
                                                         value={studentId}
                                                         editable={edit}
-                                                        keyboardType={'numeric'}
+                                
                                                         />
                                                         {
                                                             !minimalFlag
@@ -1332,48 +1372,58 @@ const ScannedDetailsComponent = ({
                                         </View>
 
 
-                                            <View style={{ flexDirection: 'row', marginTop: 20 }}>
-                                                {
-                                                    BrandLabel && BrandLabel.ListTableHeading[0] ?
-                                                        BrandLabel.ListTableHeading.map((data) => {
-                                                            return (
-                                                                <MarksHeaderTable
-                                                                    customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
-                                                                    key={data}
-                                                                    rowTitle={data}
-                                                                    rowBorderColor={AppTheme.TAB_BORDER}
-                                                                    editable={false}
-                                                                />
-                                                            )
-                                                        })
-                                                        :
-                                                        loginData.data.school.tags
-                                                        ?
-                                                        TABLE_HEADER_WITH_TAG.map((data) => {
-                                                            return (
-                                                                <MarksHeaderTable
-                                                                customRowStyle={{ width: '25%', backgroundColor: AppTheme.TABLE_HEADER }}
-                                                                key={data}
-                                                                rowTitle={data}
-                                                                rowBorderColor={AppTheme.TAB_BORDER}
-                                                                    editable={false}
-                                                                />
-                                                            )
-                                                        })
-                                                        : 
-                                                        TABLE_HEADER.map((data) => {
-                                                            return (
-                                                                <MarksHeaderTable
-                                                                customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
-                                                                key={data}
-                                                                rowTitle={data}
-                                                                rowBorderColor={AppTheme.TAB_BORDER}
-                                                                    editable={false}
-                                                                />
-                                                            )
-                                                        })
-                                                }
-                                            </View>
+                                        <View style={{ flexDirection: 'row', marginTop: 20 }}>
+                      {
+                        jsonLabels || listbrandlabel && defaultHeaderTable ?
+                          <View style={{ flexDirection: 'row', width: '100%' }}>
+                            <MarksHeaderTable
+                              customRowStyle={{ width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '25%' : '30%', backgroundColor: AppTheme.TABLE_HEADER}}
+                              rowTitle={jsonLabels && jsonLabels.sr_no || listbrandlabel && listbrandlabel.sr_no || defaultHeaderTable.sr_no}
+                              rowBorderColor={AppTheme.TAB_BORDER}
+                              editable={false}
+                            />
+                            <MarksHeaderTable
+                              customRowStyle={{ width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '25%' : '30%', backgroundColor: AppTheme.TABLE_HEADER}}
+                              rowTitle={jsonLabels && jsonLabels.questions || listbrandlabel && listbrandlabel.questions || defaultHeaderTable.questions}
+                              rowBorderColor={AppTheme.TAB_BORDER}
+                              editable={false}
+                            />
+                            <MarksHeaderTable
+                              customRowStyle={{ width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '55%' : '30%', backgroundColor: AppTheme.TABLE_HEADER}}
+                              rowTitle={jsonLabels && jsonLabels.marks || listbrandlabel && listbrandlabel.marks || defaultHeaderTable.marks}
+                              rowBorderColor={AppTheme.TAB_BORDER}
+                              editable={false}
+                            />
+                          </View>
+                          :
+                          loginData.data.school.tags
+                            ?
+                            TABLE_HEADER_WITH_TAG.map((data) => {
+                              return (
+                                <MarksHeaderTable
+                                  customRowStyle={{ width: '25%', backgroundColor: AppTheme.TABLE_HEADER }}
+                                  key={data}
+                                  rowTitle={data}
+                                  rowBorderColor={AppTheme.TAB_BORDER}
+                                  editable={false}
+                                />
+                              )
+                            })
+                            :
+                            TABLE_HEADER.map((data) => {
+                              return (
+                                <MarksHeaderTable
+                                  customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
+                                  key={data}
+                                  rowTitle={data}
+                                  rowBorderColor={AppTheme.TAB_BORDER}
+                                  editable={false}
+                                />
+                              )
+                            })
+                      }
+                    </View>
+
                                           
                                             {
                                                 newArrayValue.map((element, index) => {
@@ -1381,30 +1431,31 @@ const ScannedDetailsComponent = ({
                                                         <View element={element} key={index} style={{ flexDirection: 'row' }}>
 
                                                             <MarksHeaderTable
-                                                                customRowStyle={{ width: loginData.data.school.tags ? '25%' : '30%', }}
+                                                                customRowStyle={{ width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '25%' : '30%', }}
                                                                 rowTitle={renderSRNo(element, index)}
                                                                 rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                                                 editable={false}
                                                                 keyboardType={'number-pad'}
                                                             />
                                                             <MarksHeaderTable
-                                                                customRowStyle={{ width: loginData.data.school.tags ? '25%' : '30%', }}
+                                                                customRowStyle={{ width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '25%' : '30%', }}
                                                                 rowTitle={element.format.value}
                                                                 rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                                                 editable={false}
                                                                 keyboardType={'number-pad'}
                                                             />
                                                             <MarksHeaderTable
-                                                                customRowStyle={{ width: loginData.data.school.tags ? '25%' : '30%', }}
+                                                                customRowStyle={{ width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '50%' : '30%', }}
                                                                 rowTitle={element.consolidatedPrediction}
                                                                 rowBorderColor={markBorderOnCell(element)}
                                                                 editable={true}
-                                                                keyboardType={element.hasOwnProperty("omrOptions") ?  'name' : 'number-pad'}
+                                                                keyboardType={element.hasOwnProperty("omrOptions") ?  'name' : 'name'}
                                                                 maxLength={lengthAccordingSheet(element)}
                                                                 onChangeText={(text) => {
                                                                     handleTextChange(text.trim(), index, newArrayValue, element)
                                                                 }}
-
+                                                            onBlur={()=> showRegexErrorMessage(element)}
+                                                            isBlur={true}
                                                             />
                                                         {
                                                             loginData.data.school.tags

@@ -8,7 +8,8 @@
     "autoSyncFrequency": 600000,
     "storeTrainingData": true,
     "tags": true,
-    "supportEmail": "abc@gmail.com , xyz@gmail.com"
+    "supportEmail": "abc@gmail.com , xyz@gmail.com",
+    "offlineMode": true
   },
   {
     "name": "Dummy school 2",
@@ -19,7 +20,8 @@
     "autoSyncFrequency": 600000,
     "storeTrainingData": true,
     "tags": false,
-    "supportEmail": "abc@gmail.com"
+    "supportEmail": "abc@gmail.com",
+    "offlineMode": true
   },
   {
     "name": "Dummy school 3",
@@ -29,7 +31,8 @@
     "autoSync": false,
     "autoSyncFrequency": 600000,
     "storeTrainingData": true,
-    "tags": false
+    "tags": false,
+    "offlineMode": true
   },
   {
     "name": "Dummy school 4",
@@ -40,7 +43,8 @@
     "state": "up",
     "storeTrainingData": true,
     "tags": true,
-    "autoSyncBatchSize": 10
+    "autoSyncBatchSize": 10,
+    "offlineMode": true
   },
   {
     "name": "Dummy Skill School",
@@ -58,7 +62,8 @@
     "state": "assam",
     "autoSyncFrequency": 600000,
     "storeTrainingData": true,
-    "tags": false
+    "tags": false,
+    "offlineMode": true
   },
   {
     "name": "Dummy Organization",
@@ -69,7 +74,8 @@
     "autoSyncFrequency": 600000,
     "storeTrainingData": true,
     "tags": false,
-    "isMinimalMode": true
+    "isMinimalMode": true,
+    "offlineMode": true
   },
   {
     "name": "Ps Vishnupura",
@@ -87,6 +93,17 @@
     "schoolId": "09670703101",
     "password": "tarento@123",
     "state": "up",
+    "autoSync": false,
+    "autoSyncFrequency": 600000,
+    "storeTrainingData": true,
+    "tags": false,
+    "supportEmail": "abc@gmail.com , xyz@gmail.com"
+  },
+  {
+    "name": "Dummy school 5",
+    "schoolId": "jk001",
+    "password": "tarento@123",
+    "state": "jharakhand",
     "autoSync": false,
     "autoSyncFrequency": 600000,
     "storeTrainingData": true,

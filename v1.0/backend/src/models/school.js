@@ -59,6 +59,10 @@ const schoolSchema = new mongoose.Schema({
     supportEmail:{
         type: String,
         required: false
+    },
+    offlineMode: { 
+        type: Boolean,
+        required: false
     }
 }, {
     timestamps: false
@@ -67,7 +71,7 @@ const schoolSchema = new mongoose.Schema({
 //instance method
 schoolSchema.methods.generateAuthToken = async function () {
     const school = this
-    const token = jwt.sign({ _id: school._id.toString() }, process.env.JWT_SECRET)
+    const token = jwt.sign({ userId: school.schoolId.toString() }, process.env.JWT_SECRET)
 
     await school.save()
     return token

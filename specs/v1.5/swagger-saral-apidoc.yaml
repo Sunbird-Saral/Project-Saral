@@ -365,6 +365,8 @@ paths:
       responses:
         "200":
           description: "Data Saved Successfully"
+        "400":
+          description: "Custom message can be set to message about the error or failure"
 
             
   /exam:
@@ -696,14 +698,19 @@ definitions:
             type: boolean
             description: "If this is set to true frontend application will have minimal screens in ui. In savesMarksAPI and getSavedScan we are using roiId as our unique key and fetching data from this key ."
             default: false
-            example: true         
+            example: true  
+          offlineMode:
+            type: boolean
+            description: "If this is set to true , app can operate in offline mode after frist navigation ."
+            example: true
+          
           
       classes:
             $ref: '#/definitions/classResponse'
 
       token:
         type: object
-        example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTMwOWQyYjJlNzEyMzAyZGY5NmM3NjEiLCJpYXQiOjE2MzA1NzU5MTV9.FCt2Q4R_sN1ctdOfoOPzBzfdUohAPA-TlLFtJJEeTBE"
+        example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJvZDAwMSIsImlhdCI6MTY1NzU0MDkwMX0.tMDeXo5PjsBo6i5y55sWMUqBDaVI3OghY9AFWqsFuFc"
   
   classResponse:
         type: array
@@ -907,10 +914,43 @@ definitions:
               example: "D"
             studentId:
               type: string
+              description: student ID which is stored in backend .
               example: "1210001"
+            predictedstudentId:
+              type: string
+              description: student ID which is predicted from layout .
+              example: "1210001"
+            predictionConfidence:
+              type: array
+              description: accuracy of getting predicted student Id.
+              items:
+                type: string
+                example: "89.8"
             securedMarks:
               type: number
               example: 3
+            obtainedMarksTrainingData:
+              type: array
+              description: It contains base 64 encoded images of obtained marks .
+              items:
+                type: string
+            obtainedMarksConfidence:
+              type: array
+              description: accuracy of getting predicted obtained marks.
+              items:
+                type: string
+                example: "89.8"
+            maxMarksTrainingData:
+              type: array
+              description: It contains base 64 encoded images of max marks .
+              items:
+                type: string
+            maxMarksConfidence:
+              type: array
+              description: accuracy of getting predicted max marks.
+              items:
+                type: string
+                example: "89.8"
             totalMarks:
               type: number
               example: 5
@@ -924,9 +964,15 @@ definitions:
               type: string
               example: Maths
             roiId:
-             type: string
-             description: roiId field is optional field . It is available when minimal mode is enable.
-             example: "28"
+              type: string
+              description: roiId field is optional field . It is available when minimal mode is enable.
+              example: "28"
+            examId:
+              type: string
+              example: "18"
+            createdOn:
+              type: string
+              example: "121088802"
 
 
   
@@ -1380,6 +1426,9 @@ definitions:
       regExp:
         type: string
         example: ""
+      errorMsg:
+        type: string
+        example: ""
           
   cells:
     type: array
@@ -1412,6 +1461,28 @@ definitions:
           name:
             type: string
             example: "UP SAT Exam Sheet Form"
+          identifierPrefix:
+            description: indetifier prefix field is used as an indentifier for ID .
+            type: string
+            example: ROLLNUMBERID
+          threshold:
+            type: object
+            properties:
+              minWidth:
+                type: number
+                example: 690
+                description: Minimum width of layout for detection
+              minHeight:
+                type: number
+                example: 390
+                description: Minimum height of layout for detection
+              detectionRadius:
+                type: number
+                example: 12
+              experimentalOMRDetection:
+                type: boolean
+                example: true
+                description: when this field is true then pencil omr detection is also possible. 
           cells:
             $ref: '#/definitions/cells' 
       

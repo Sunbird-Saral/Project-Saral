@@ -23,6 +23,7 @@ import { getPresentAbsentStudent, getScannedDataFromLocal,getErrorMessage } from
 import ShareComponent from '../common/components/Share';
 import MultibrandLabels from '../common/components/multibrandlabels';
 import { monospace_FF } from '../../utils/CommonUtils';
+import ButtonComponent from '../common/components/ButtonComponent';
 
 
 const ScanStatus = ({
@@ -58,23 +59,15 @@ const ScanStatus = ({
         )
     }
 
+    const onBackPress = () => {
+        navigation.push('ScanHistory');
+    };
 
-    useEffect(
-        React.useCallback(() => {
-            const onBackPress = () => {
-                navigation.push('ScanHistory');
-            };
-            BackHandler.addEventListener('hardwareBackPress', onBackPress);
-            return () =>
-                BackHandler.removeEventListener('hardwareBackPress', onBackPress);
-        }, []),
-    );
-  
-    useEffect(() => {
-        getDataFromLocal()
-        getStudentList()
-        getPresentStudentList()
-    }, [])
+        useEffect(() => {
+            getDataFromLocal()
+            getStudentList()
+            getPresentStudentList()
+        }, [])
 
     const getStudentList = async () => {
         let data = await getPresentAbsentStudent()
@@ -91,12 +84,14 @@ const ScanStatus = ({
     }
 
     const getPresentStudentList = ()=>{
+        let hasSet = filteredData.hasOwnProperty("set") ? filteredData.set.length > 0 ? filteredData.set : '' : ''
         let data = typeof (scanedData) === "object"
         ?
         scanedData.data
             ?
             scanedData.data.filter((o, index) => {
-                if (o.studentAvailability && o.marksInfo.length > 0) {
+                let stdCondition = hasSet.length > 0 ? o.studentAvailability && o.marksInfo.length > 0 && hasSet == o.set : o.studentAvailability && o.marksInfo.length > 0 & o.examDate == filteredData.examDate
+                if (stdCondition) {
                     return true
                 }
             })
@@ -150,6 +145,15 @@ const ScanStatus = ({
                 keyExtractor={(item, index) => `${index.toString()}`}
                 contentContainerStyle={styles.content}
             />
+
+           <View style={{alignItems:'center'}}>
+            <ButtonComponent
+                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+                btnText={Strings.close.toUpperCase()}
+                activeOpacity={0.8}
+                onPress={()=> onBackPress()}
+                />
+                </View>
 
         </View>
     );

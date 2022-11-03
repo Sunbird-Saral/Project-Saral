@@ -771,6 +771,11 @@ definitions:
           type: string
           description: "type of Exam"
           example: "uphindi1s"
+        set:
+          type: array
+          items:
+            type: string
+            example: A,B
         questions:
           $ref: '#/definitions/Questions'  
         examId:
@@ -801,6 +806,11 @@ definitions:
         classId:
           type: string
           example: "24-12-2021"
+        set:
+          type: array
+          items:
+            type: string
+            example: A,B
         schoolId:
           type: string
           example: "u001"
@@ -875,6 +885,7 @@ definitions:
         roiId:
           type: number
           example: 1
+          description: RoiId field is global across school or organisation.
         index:
           type: string
           example: 0
@@ -936,6 +947,27 @@ definitions:
           name:
             type: string
             example: "UP SAT Exam Sheet Form"
+          identifierPrefix:
+            type: string
+            example: ROLLNUMBERID
+          threshold:
+            type: object
+            properties:
+              minWidth:
+                type: number
+                example: 690
+                description: Minimum widht of layout for detection
+              minHeight:
+                type: number
+                example: 390
+                description: Minimum height of layout for detection
+              detectionRadius:
+                type: number
+                example: 12
+              experimentalOMRDetection:
+                type: boolean
+                example: true
+                description: when this flag is true pencil detection of layout will be predicted .
           cells:
             $ref: '#/definitions/cells' 
       
@@ -954,6 +986,9 @@ definitions:
       classId:
         type: string
         example: "2"
+      set:
+        type: string
+        example: A
       type: 
         type: string
         example: "uphindi1s"
@@ -966,6 +1001,7 @@ definitions:
       roiId:
         type: number
         example: 1
+        description: RoiId field is global across school or organisation.
       classId:
         type: string
         example: "2"
