@@ -170,13 +170,13 @@ export const getRegularSavedScanpi = async () => {
 }
 
 
-export const removeRegularUserDataCacheByKey = async (key) => {
+export const removeRegularUserDataCacheByKey = async (key, schollId) => {
     let loginCred = await getLoginCred(LOGIN_CRED_KEY);
     let json = await getData(key);
     let jsonData = JSON.parse(json);
 
     let filterData = jsonData != null ? jsonData.filter((element) => {
-        if (element.key == loginCred.schoolId) {
+        if (element.key == schollId) {
             return false
         } else {
             return true
@@ -192,20 +192,20 @@ export const removeRegularUserDataCacheByKey = async (key) => {
     }
 }
 
-export const removeRegularUserCache = async () => {
+export const removeRegularUserCache = async (schoolId) => {
     let array = [REGULAR_EXAM_API_KEY, REGULAR_ROI_API_KEY, REGULAR_SAVED_SCAN_API_KEY, BRANDING_API_KEY, LOGIN_API_KEY];
 
     array.map(async (el) => {
-        await removeRegularUserDataCacheByKey(el);
+        await removeRegularUserDataCacheByKey(el, schoolId);
     });
 
 }
 
-export const removeMinimalUserCache = async () => {
+export const removeMinimalUserCache = async (schoolId) => {
     let array = [EXAM_API_KEY, ROI_API_KEY, SAVED_API_KEY, BRANDING_API_KEY, LOGIN_API_KEY];
 
     array.map(async (el) => {
-        await removeRegularUserDataCacheByKey(el);
+        await removeRegularUserDataCacheByKey(el, schoolId);
     });
 
 }

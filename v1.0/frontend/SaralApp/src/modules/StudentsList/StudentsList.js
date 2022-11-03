@@ -215,12 +215,12 @@ useEffect(() => {
             "subject": filteredData.subject,
             "section": filteredData.section,
             "fromDate": filteredData.examDate,
-            "schoolId": loginCred.schoolId,
+            "schoolId": loginData.data.school.schoolId,
             "page": 0,
             "downloadRes": false
         }
         let apiObj = new scanStatusDataAction(dataPayload);
-        FetchSavedScannedData(apiObj, loginCred.schoolId, loginCred.password)
+        FetchSavedScannedData(apiObj, loginData.data.school.schoolId, loginCred.password)
     }
 }
 

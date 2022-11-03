@@ -618,6 +618,7 @@ class MyScanComponent extends Component {
 
     callScanStatusData = async (isApiCalled, filteredDatalen, localScanData) => {
         let hasNetwork = await checkNetworkConnectivity();
+        const { loginData } = this.props;
         if (!hasNetwork) {
             let hasCacheData = await getScanDataApi();
             if (hasCacheData) {
@@ -654,7 +655,7 @@ class MyScanComponent extends Component {
             let roiId = this.props.roiData && this.props.roiData.data.roiId;
             dataPayload.roiId = roiId;
             let apiObj = new scanStatusDataAction(dataPayload);
-            this.FetchSavedScannedData(isApiCalled, apiObj, loginCred.schoolId, loginCred.password, filteredDatalen, localScanData)
+            this.FetchSavedScannedData(isApiCalled, apiObj, loginData.data.school.schoolId, loginCred.password, filteredDatalen, localScanData)
         }
     }
 

@@ -338,7 +338,7 @@ class LoginComponent extends Component {
                         if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode && hasNetwork) {
                             let getLoginCache = await getLoginApi();
                             let loginCred = await getLoginCred();
-                            let loginUser = `${loginCred.schoolId}`
+                            let loginUser = `${loginData.data.school.schoolId}`
                             if (getLoginCache != null) {
 
                                 const result = getLoginCache.filter(_element => _element.key === loginUser);
