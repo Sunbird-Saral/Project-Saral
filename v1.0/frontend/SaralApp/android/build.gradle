@@ -39,5 +39,26 @@ allprojects {
 
         google()
         maven { url 'https://www.jitpack.io' }
+
+       
+    }
+}
+task doSomeOperation{
+    group "myCustomTasks"
+    doLast{
+        println "this is operation 1"
+    }
+}
+
+// doSomeOperation1.onlyIf {
+//     project.hasProperty('doOperation')
+// }
+
+
+task deleteOtherAssets(type: Delete) {
+    description = 'Deleting non $projectName assets'
+    delete fileTree("src").matching {
+        exclude "**/model_letter_digits_finetune_18_07_22_epoch_15.tflite*/**"
+        include "**/trained_resnet_real_synthetic_v2_20.tflite*/**"
     }
 }
