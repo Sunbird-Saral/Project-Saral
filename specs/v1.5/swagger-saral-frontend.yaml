@@ -440,7 +440,7 @@ definitions:
           example: "1210001"
         set:
           type: string
-          description: "It is an optional field ."
+          description: "Exam set of the student.It is an optional field ."
           example: A
         predictedStudentId:
           type: string
