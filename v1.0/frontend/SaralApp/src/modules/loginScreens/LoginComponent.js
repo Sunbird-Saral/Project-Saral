@@ -352,7 +352,7 @@ class LoginComponent extends Component {
                                     };
                                 } else {
                                     let payload = {
-                                        key: `${loginData.data.school.schoolId}`,
+                                        key: `${loginUser}`,
                                         data: loginData
                                     }
                                     getLoginCache.push(payload);
@@ -361,7 +361,7 @@ class LoginComponent extends Component {
                                 
                             } else {
                                 let payload = {
-                                    key: `${loginData.data.school.schoolId}`,
+                                    key: `${loginUser}`,
                                     data: loginData
                                 }
                                 await setLoginApi([payload])
