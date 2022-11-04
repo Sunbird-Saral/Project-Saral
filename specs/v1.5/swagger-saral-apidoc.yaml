@@ -362,6 +362,7 @@ paths:
           in: body
           schema:
             $ref: "#/definitions/SaveMarksBody"
+          description: Create marks for students .Application may send "X-App-Version" in header.
       responses:
         "200":
           description: "Data Saved Successfully"
@@ -401,6 +402,7 @@ paths:
           name: examId
           type: number
           required: true
+
       responses:
         "200":
           description: "Exam has been deleted successfully."
@@ -541,6 +543,11 @@ paths:
         type: number
         description: examId is required for fetching rois 
         required: true
+        
+      - in: query
+        name: set
+        type: string
+        required: false
 
       responses:
         "200":
@@ -1025,6 +1032,10 @@ definitions:
           type: string
           description: "Student Id"
           example: "1210001"
+        set:
+          type: string
+          description: "It is an optional field ."
+          example: A
         predictedStudentId:
           type: string
           description: "Predicted Student Id which we are getting after scan ."
@@ -1485,7 +1496,9 @@ definitions:
                 description: when this field is true then pencil omr detection is also possible. 
           cells:
             $ref: '#/definitions/cells' 
-      
+      roiId:
+        type: number
+        example: 1
   
   CreateROIBody:
     type: object
