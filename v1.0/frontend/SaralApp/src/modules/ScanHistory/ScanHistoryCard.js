@@ -195,7 +195,7 @@ const ScanHistoryCard = ({
             "downloadRes": false
         }
         let apiObj = new scanStatusDataAction(dataPayload);
-        FetchSavedScannedData(apiObj, loginData.data.school.schoolId, loginCred.password, filteredDatalen, localScanData)
+        FetchSavedScannedData(apiObj, loginCred.schoolId, loginCred.password, filteredDatalen, localScanData)
     }
 
     const FetchSavedScannedData = async(api, uname, pass, filterDataLen, localScanData) => {
