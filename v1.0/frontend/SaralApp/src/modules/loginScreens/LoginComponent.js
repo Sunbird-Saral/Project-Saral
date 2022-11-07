@@ -15,7 +15,7 @@ import {
 import { Assets } from '../../assets/index'
 import { checkNetworkConnectivity, monospace_FF } from '../../utils/CommonUtils';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { getBrandingDataApi, getLoginApi, setLoginApi } from '../../utils/offlineStorageUtils';
+import { getBrandingDataApi, getLoginApi, setLoginApi,setBrandingDataApi } from '../../utils/offlineStorageUtils';
 import { storeFactory } from '../../flux/store/store';
 import constants from '../../flux/actions/constants';
 
@@ -78,7 +78,7 @@ class LoginComponent extends Component {
         let cacheFilterData = hasCacheData != null
         ?
          hasCacheData.filter((element) => {
-            if (element.key == key) {
+            if (element.key == "global") {
                 return true
             }
         })
@@ -93,7 +93,7 @@ class LoginComponent extends Component {
             })
         } else if (hasNetwork) {
             this.callDefaultbrandingData()
-        } else if(type == 'schoolId' && key.length > 0){
+        } else if(type == "schoolId" && key != undefined && key.length > 0 ) {
             storeFactory.dispatch(this.dispatchBrandingDataApi({}))
             this.setState({
                 errCommon: Strings.you_dont_have_cache,
@@ -253,7 +253,7 @@ class LoginComponent extends Component {
     }
 
     onLoginDetailsChange = (text, type,value) => {
-        this.callBrandingCache(text, type)
+         this.callBrandingCache(text, type)
         this.setState({ [type]: text })
          this.toggleRememberMe()
     }
@@ -298,7 +298,7 @@ class LoginComponent extends Component {
     };
 
 
-    componentDidUpdate(prevProps) {
+   async componentDidUpdate(prevProps) {
         if (prevProps != this.props) {
             const { apiStatus, loginData, navigation } = this.props
             const { schoolId, password, calledLogin } = this.state
@@ -395,6 +395,42 @@ class LoginComponent extends Component {
                 })
             }
 
+        }
+        let hasNetwork = await checkNetworkConnectivity();
+        if (this.props.defaultBrandingApidata && this.props.defaultBrandingApidata.status&& this.props.defaultBrandingApidata.status == 200 &&  hasNetwork) {
+           const {defaultBrandingApidata} = this.props
+            let getBrandingCache = await getBrandingDataApi();
+            
+            if (getBrandingCache != null) {
+
+                let data = getBrandingCache.filter((e)=> {
+                    if (e.key == 'global') {
+                        return true
+                    }
+                });
+
+                    if (data.length > 0) {
+                        for (let element of getBrandingCache) {
+                            if (element.key == data[0].key) {
+                                element.data = defaultBrandingApidata
+                                break;
+                            }
+                        };
+                    } else {
+                        let payload = {
+                            key: `global`,
+                            data: defaultBrandingApidata
+                        }
+                        getBrandingCache.push(payload);
+                    }
+                await setBrandingDataApi(getBrandingCache);
+            } else {
+                let payload = {
+                    key: `global`,
+                    data: defaultBrandingApidata
+                }
+                await setBrandingDataApi([payload])
+            }
         }
     }
 
@@ -674,6 +710,7 @@ const mapStateToProps = (state) => {
     return {
         apiStatus: state.apiStatus,
         loginData: state.loginData,
+        defaultBrandingApidata: state.defaultBrandingdata.response,
         defaultBrandingdata: state.defaultBrandingdata.response.data,
         multiBrandingData: state.multiBrandingData.response.data
     }
