@@ -220,7 +220,7 @@ useEffect(() => {
             "downloadRes": false
         }
         let apiObj = new scanStatusDataAction(dataPayload);
-        FetchSavedScannedData(apiObj, loginData.data.school.schoolId, loginCred.password)
+        FetchSavedScannedData(apiObj, loginCred.schoolId, loginCred.password)
     }
 }
 
