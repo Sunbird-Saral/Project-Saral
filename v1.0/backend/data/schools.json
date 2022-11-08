@@ -9,7 +9,7 @@
     "storeTrainingData": true,
     "tags": true,
     "supportEmail": "abc@gmail.com , xyz@gmail.com",
-    "offline": true
+    "offlineMode": true
   },
   {
     "name": "Dummy school 2",
@@ -21,7 +21,7 @@
     "storeTrainingData": true,
     "tags": false,
     "supportEmail": "abc@gmail.com",
-    "offline": true
+    "offlineMode": true
   },
   {
     "name": "Dummy school 3",
@@ -32,7 +32,7 @@
     "autoSyncFrequency": 600000,
     "storeTrainingData": true,
     "tags": false,
-    "offline": true
+    "offlineMode": true
   },
   {
     "name": "Dummy school 4",
@@ -44,7 +44,7 @@
     "storeTrainingData": true,
     "tags": true,
     "autoSyncBatchSize": 10,
-    "offline": true
+    "offlineMode": true
   },
   {
     "name": "Dummy Skill School",
@@ -62,7 +62,8 @@
     "state": "assam",
     "autoSyncFrequency": 600000,
     "storeTrainingData": true,
-    "tags": false
+    "tags": false,
+    "offlineMode": true
   },
   {
     "name": "Dummy Organization",
@@ -73,7 +74,8 @@
     "autoSyncFrequency": 600000,
     "storeTrainingData": true,
     "tags": false,
-    "isMinimalMode": true
+    "isMinimalMode": true,
+    "offlineMode": true
   },
   {
     "name": "Ps Vishnupura",

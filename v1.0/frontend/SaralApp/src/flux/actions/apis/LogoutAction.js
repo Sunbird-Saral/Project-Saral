@@ -13,8 +13,8 @@ export function LogoutAction(payload) {
     return async dispatch => {
         try {
                 // await AsyncStorage.clear();
-                 await removeMultiBranding()
-                  await erasesetData()
+                //  await removeMultiBranding()
+                //   await erasesetData()
                  await eraseErrorLogs()
                  await erasesetTotalStudent()
                  await erasesetAbsentStudentDataIntoAsync()
@@ -23,7 +23,6 @@ export function LogoutAction(payload) {
                  await erasesetScanData()
                  await erasesetStudentsExamData()
                  await erasesetFetchedScanData()
-                 await erasesetScannedDataIntoLocal()
                  await erasegetPresentAbsentStudent()
                  await setMinimalValue(null)
             dispatch({ type: C.LOGOUT_PROCESS, payload: payload })

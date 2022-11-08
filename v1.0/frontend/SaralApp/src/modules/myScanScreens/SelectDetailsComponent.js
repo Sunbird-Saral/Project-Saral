@@ -16,7 +16,7 @@ import { OcrLocalResponseAction } from '../../flux/actions/apis/OcrLocalResponse
 import { GetStudentsAndExamData } from '../../flux/actions/apis/getStudentsAndExamData';
 import { FilteredDataAction } from '../../flux/actions/apis/filteredDataActions';
 import APITransport from '../../flux/actions/transport/apitransport';
-import { cryptoText, dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF, SCAN_TYPES, validateToken } from '../../utils/CommonUtils';
+import { checkNetworkConnectivity, cryptoText, dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF, SCAN_TYPES, validateToken } from '../../utils/CommonUtils';
 import { ROIAction } from '../StudentsList/ROIAction';
 import { GetAbsentStudentData } from '../../flux/actions/apis/getAbsentStudentData';
 import { LoginAction } from '../../flux/actions/apis/LoginAction';
@@ -27,6 +27,9 @@ import ShareComponent from '../common/components/Share';
 import MultibrandLabels from '../common/components/multibrandlabels';
 import ModalView from '../common/components/ModalView';
 import CustomPopup from '../common/components/CustomPopup';
+import { getRegularStudentExamApi, setRegularStudentExamApi } from '../../utils/offlineStorageUtils';
+import constants from '../../flux/actions/constants';
+import { storeFactory } from '../../flux/store/store';
 import { indexOf } from 'lodash';
 
 //redux
@@ -305,17 +308,43 @@ class SelectDetailsComponent extends Component {
         }
     }
 
-    callStudentsData = (token) => {
-        const { dataPayload } = this.state
-      
+    callStudentsData = async (token) => {
+        const { dataPayload, selectedClass, selectedSection } = this.state
+        let hasNetwork = await checkNetworkConnectivity();
+
+
+        let hasCacheData = await getRegularStudentExamApi();
+        
+        let cacheFilterData = hasCacheData != null ?  hasCacheData.filter((element)=>{
+            if (element.key == this.props.loginData.data.school.schoolId && element.class == selectedClass && element.section == selectedSection) {
+                return true
+            }
+        })
+        :
+        []
+
+        if (hasCacheData && cacheFilterData.length > 0) {
+            this.setState({isLoading: false, calledStudentsData: true})
+            storeFactory.dispatch(this.dispatchStudentExamData(cacheFilterData[0].data2))
+            this.setState({isLoading: false})
+        } else if(hasNetwork){      
         this.setState({
             calledStudentsData: true,
         }, () => {
             let apiObj = new GetStudentsAndExamData(dataPayload, token);
-            this.props.APITransport(apiObj)
+            this.props.APITransport(apiObj)})
+        } else {
+            this.setState({isLoading: false})
+            this.callCustomModal(Strings.message_text, Strings.you_dont_have_cache, false);
+        }
+}
 
-        })
+dispatchStudentExamData(payload){
+    return {
+        type: constants.GET_STUDENTS_EXAMS_LIST,
+        payload
     }
+}
 
     validateAbsentStatusApi = () => {
         const { selectedClassId, selectedExam, selectedSection, loginDetails } = this.state
@@ -440,7 +469,7 @@ class SelectDetailsComponent extends Component {
         if (prevProps != this.props) {
 
             const { apiStatus, studentsAndExamData, absentStudentDataResponse, getScanStatusData, loginData } = this.props
-            const { calledStudentsData, calledAbsentStatus, selectedClass, selectedSection, selectSet, selectedClassId, calledScanStaus, calledLogin, callApi, absentStatusPayload, isCalledStudentAndExam } = this.state
+            const { calledStudentsData, calledAbsentStatus, selectedClass, selectedSection, selectSet, selectedClassId, calledScanStaus, calledLogin, callApi, absentStatusPayload, isCalledStudentAndExam, subIndex } = this.state
             if (apiStatus && prevProps.apiStatus != apiStatus && apiStatus.error) {
                 if (calledStudentsData) {
                     this.loader(false)
@@ -533,6 +562,40 @@ class SelectDetailsComponent extends Component {
                                     selectedDate: '',
                                     pickerDate: new Date()
                                 })
+                            }
+                            if (studentsAndExamData && studentsAndExamData.status && studentsAndExamData.status == 200) {
+                                const hasNetwork = await checkNetworkConnectivity();
+                                if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode && hasNetwork && this.state.sectionValid == true) {
+                                    let getStudentExamCache = await getRegularStudentExamApi();
+                                    if (getStudentExamCache != null) {
+                                        
+                                        let result = getStudentExamCache.findIndex((e)=>e.key == loginData.data.school.schoolId && e.class == selectedClass && e.section == selectedSection)
+                                        let hasSubject = getStudentExamCache.findIndex((e)=> e.key == loginData.data.school.schoolId && e.class == selectedClass && e.section == selectedSection && e.hasOwnProperty("subject"))
+                                        if (result > -1 && hasSubject == -1) {
+                                            getStudentExamCache[result].data = studentsAndExamData 
+                                        } else if(hasSubject == -1){
+                                            let payload = {
+                                                key :`${loginData.data.school.schoolId}`,
+                                                class : selectedClass,
+                                                section: selectedSection,
+                                                data: studentsAndExamData,
+                                                data2: studentsAndExamData
+                                            }
+                                            getStudentExamCache.push(payload);
+                                        }
+                                        await setRegularStudentExamApi(getStudentExamCache);
+                                    } else {
+                                        let payload = {
+                                            key :`${loginData.data.school.schoolId}`,
+                                            class : selectedClass,
+                                            section: selectedSection,
+                                            data: studentsAndExamData,
+                                            data2: studentsAndExamData
+                                        }
+                                        await setRegularStudentExamApi([payload]);
+                                    }
+
+                                }
                             }
 
                         }
@@ -629,12 +692,63 @@ class SelectDetailsComponent extends Component {
             }
 
             if (isCalledStudentAndExam) {
+                const hasNetworkData = await checkNetworkConnectivity()
                 let data = JSON.parse(studentsAndExamData.config.data)
                 if (studentsAndExamData && data.hasOwnProperty("subject")) {
 
                     this.setState({isCalledStudentAndExam: false, isLoading: false})                    
-                    
+                    const hasNetwork = await checkNetworkConnectivity();
                     if (studentsAndExamData && studentsAndExamData.status && studentsAndExamData.status == 200) {
+                        if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode && hasNetwork) {
+                            let setValue = selectSet.length > 0 ? selectSet[subIndex].length > 0 ? selectSet[subIndex] : '' : ''
+                            let getStudentExamCache = await getRegularStudentExamApi();
+                            if (getStudentExamCache != null) {
+                                let result = getStudentExamCache.findIndex((e)=> e.key == loginData.data.school.schoolId && e.class == selectedClass && e.section == selectedSection && e.hasOwnProperty("subject") ? e.subject == this.state.selectedSubject : false)
+                                let hasSubject = getStudentExamCache.findIndex((e)=> e.key == loginData.data.school.schoolId && e.class == selectedClass && e.section == selectedSection && e.hasOwnProperty("subject"))
+                                let resultDataIndex = getStudentExamCache.findIndex((e)=> e.key == loginData.data.school.schoolId && e.class == selectedClass && e.section == selectedSection)
+                                let hasSetValue = getStudentExamCache.findIndex((e)=> e.key == loginData.data.school.schoolId && e.class == selectedClass && e.section == selectedSection && e.hasOwnProperty("subject") && e.hasOwnProperty("set") ? e.set == setValue : false)
+                                
+                                let subjBool = hasSubject >= 0 ? true : false;
+
+
+                                if(resultDataIndex > -1 && subjBool == false){
+                                    getStudentExamCache[resultDataIndex].subject = this.state.selectedSubject
+                                    getStudentExamCache[resultDataIndex].data = studentsAndExamData
+                                    if (hasSetValue) {
+                                        getStudentExamCache[resultDataIndex].set = setValue
+                                    }
+                                } else if (setValue.length > 0 && hasSetValue == -1) {
+                                    let payload = {
+                                        key :`${loginData.data.school.schoolId}`,
+                                        class : selectedClass,
+                                        section: selectedSection,
+                                        data: studentsAndExamData,
+                                        data2: studentsAndExamData,
+                                        subject: this.state.selectedSubject,
+                                        set: setValue
+                                    }
+                                    getStudentExamCache.push(payload);
+                                    
+                                } else if (result > -1) {
+                                    getStudentExamCache[result].data = studentsAndExamData
+                                } else {
+                                    let payload = {
+                                        key :`${loginData.data.school.schoolId}`,
+                                        class : selectedClass,
+                                        section: selectedSection,
+                                        data: studentsAndExamData,
+                                        data2: studentsAndExamData,
+                                        subject: this.state.selectedSubject
+                                    }
+                                    if (hasSetValue.length > 0) {
+                                        payload.set = hasSetValue
+                                    }
+                                    getStudentExamCache.push(payload);
+                                }
+
+                                await setRegularStudentExamApi(getStudentExamCache)
+                            }
+                        }
                         let obj = {
                             class: selectedClass,
                             classId: selectedClassId,
@@ -662,6 +776,8 @@ class SelectDetailsComponent extends Component {
                         let studentsExamDataSaved = await setStudentsExamData(finalStudentsAndExamArr)
                         this.props.navigation.push('StudentsList');
                     }
+                } else if (!hasNetworkData) {
+                    this.callCustomModal(Strings.message_text, Strings.you_dont_have_cache, false);
                 }
             }
         }
@@ -761,21 +877,49 @@ class SelectDetailsComponent extends Component {
         })
     }
 
-    callExamAndStudentData(token){
-        let dataPayload = {
-            classId: this.state.selectedClassId,
-            section: this.state.selectedSection,
-            subject: this.state.selectedSubject,
-            set: this.state.selectSet
-        }
-        let apiObj = new GetStudentsAndExamData(dataPayload, token);
-        this.props.APITransport(apiObj)
-        
-        this.setState({
-            isLoading: false,
-            isCalledStudentAndExam: true
-        })
+  async  callExamAndStudentData(token){
 
+        let hasNetwork = await checkNetworkConnectivity();
+        let setValue = this.state.selectSet.length > 0 ? this.state.selectSet[this.state.subIndex].length > 0 ? this.state.selectSet[this.state.subIndex] : '' : ''
+
+
+            let hasCacheData = await getRegularStudentExamApi();
+            let cacheFilterData = hasCacheData != null 
+            ?
+            hasCacheData.filter((element)=>{
+                let conditionSwitch = setValue.length > 0  ? element.key == this.props.loginData.data.school.schoolId && element.class == this.state.selectedClass && element.section == this.state.selectedSection && element.subject == this.state.selectedSubject &&  element.set == setValue 
+                :
+                 element.key == this.props.loginData.data.school.schoolId && element.class == this.state.selectedClass && element.section == this.state.selectedSection && element.subject == this.state.selectedSubject
+                if (conditionSwitch) {
+                    return true
+                }
+            })
+            :
+            []
+
+        if (hasCacheData && cacheFilterData.length > 0) {
+            this.setState({isCalledStudentAndExam: true, isLoading: false})
+            storeFactory.dispatch(this.dispatchStudentExamData(cacheFilterData[0].data))
+        }
+        else if(hasNetwork){
+            let dataPayload = {
+                classId: this.state.selectedClassId,
+                section: this.state.selectedSection,
+                subject: this.state.selectedSubject,
+            }
+            if (setValue.length > 0) {
+                dataPayload.set = setValue
+            }
+            let apiObj = new GetStudentsAndExamData(dataPayload, token);
+            this.props.APITransport(apiObj)
+            this.setState({
+                isLoading: false,
+                isCalledStudentAndExam: true
+            })
+        } else {
+            this.setState({isLoading: false})
+            this.callCustomModal(Strings.message_text, Strings.you_dont_have_cache, false)
+        }
     }
 
     callROIData = (dataPayload, token) => {

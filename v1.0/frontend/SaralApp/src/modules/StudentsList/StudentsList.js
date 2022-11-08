@@ -31,11 +31,14 @@ import axios from 'axios';
 //components
 import { scanStatusDataAction } from '../../modules/ScanStatus/scanStatusDataAction';
 import Spinner from '../common/components/loadingIndicator';
-import { cryptoText, dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF, validateToken } from '../../utils/CommonUtils';
+import { checkNetworkConnectivity, cryptoText, dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF, validateToken } from '../../utils/CommonUtils';
 import { LoginAction } from '../../flux/actions/apis/LoginAction';
 
 import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction'
 import { collectErrorLogs } from '../CollectErrorLogs';
+import { getRegularRoipi, getRegularSavedScanpi, getRegularStudentExamApi, setRegularRoiApi, setRegularSavedScanApi, setRegularStudentExamApi } from '../../utils/offlineStorageUtils';
+import constants from '../../flux/actions/constants';
+import { storeFactory } from '../../flux/store/store';
 
 
 const StudentsList = ({
@@ -45,7 +48,8 @@ const StudentsList = ({
     saveAbsentStudent,
     multiBrandingData,
     scanedData,
-    apiStatus
+    apiStatus,
+    roiData
 }) => {
 
 
@@ -83,13 +87,126 @@ useEffect(() => {
         }, []),
     );
 
+    useEffect(async () => {
+        const hasNetwork = await checkNetworkConnectivity();
+        if (roiData && roiData.status && roiData.status == 200) {
+            if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode && hasNetwork) {
+
+                let getRoiCache = await getRegularRoipi();
+                let setValue = filteredData.hasOwnProperty("set")  ? filteredData.set.length> 0 ? filteredData.set : '' : ''
+
+                if (getRoiCache != null) {
+                    let result = getRoiCache.findIndex((e)=> {
+                       return setValue.length > 0 ? e.key == loginData.data.school.schoolId && e.examId == filteredData.examTestID && filteredData.set == e.set : e.key == loginData.data.school.schoolId && e.examId == filteredData.examTestID
+                    });
+                    
+                    if (result > -1) {
+                        getRoiCache[result].data = roiData
+                    } else if (setValue.length > 0) {
+                        
+                        let payload = {
+                            key :`${loginData.data.school.schoolId}`,
+                            examId: filteredData.examTestID,
+                            data: roiData,
+                            set: setValue
+                        }
+                        getRoiCache.push(payload);
+                    } 
+                    else {
+                        let payload = {
+                            key :`${loginData.data.school.schoolId}`,
+                            examId: filteredData.examTestID,
+                            data: roiData
+                        }
+                        if (setValue.length > 0) {
+                            payload.set = setValue
+                        }
+                        getRoiCache.push(payload);
+                    }
+                    await setRegularRoiApi(getRoiCache);
+                } else {
+                    let payload = {
+                        key :`${loginData.data.school.schoolId}`,
+                        examId: filteredData.examTestID,
+                        data: roiData
+                    }
+                    if (setValue.length > 0) {
+                        payload.set = setValue
+                    }
+                    await setRegularRoiApi([payload]);
+                }
+            }
+        }
+    }, [roiData])
 
     const dispatch = useDispatch();
 
     //function
 
+    const getSavedScanApiCache = async (savedScanData) => {
+        let getSavedScanCache = await getRegularSavedScanpi();
+        let setValue = filteredData.hasOwnProperty("set")  ? filteredData.set.length> 0 ? filteredData.set : '' : ''
+
+        if (getSavedScanCache != null) {
+            let result = getSavedScanCache.findIndex((e)=> {
+                return setValue.length > 0 ? e.key == loginData.data.school.schoolId && e.classId == filteredData.class && e.subject == filteredData.subject && e.section == filteredData.section && e.fromDate == filteredData.examDate && filteredData.set == e.set : e.key == loginData.data.school.schoolId && e.classId == filteredData.class && e.subject == filteredData.subject && e.section == filteredData.section && e.fromDate == filteredData.examDate
+            });
+            if (result > -1) {
+                getSavedScanCache[result].data = savedScanData
+                if (setValue.length > 0) {
+                    getSavedScanCache[result].set = setValue
+                }
+            } else {
+                let payload = {
+                    key :`${loginData.data.school.schoolId}`,
+                    classId: filteredData.class,
+                    subject: filteredData.subject,
+                    section: filteredData.section,
+                    fromDate: filteredData.examDate,
+                    data: savedScanData
+                }
+                if (setValue.length > 0) {
+                    payload.set = setValue
+                }
+                getSavedScanCache.push(payload);
+            }
+            await setRegularSavedScanApi(getSavedScanCache);
+        } else {
+            let payload = {
+                key :`${loginData.data.school.schoolId}`,
+                classId: filteredData.class,
+                subject: filteredData.subject,
+                section: filteredData.section,
+                fromDate: filteredData.examDate,
+                data: savedScanData
+            }
+            if (setValue.length > 0) {
+                payload.set = setValue
+            }
+            await setRegularSavedScanApi([payload]);
+        }
+    }
 
     const callScanStatusData = async () => {
+        let hasNetwork = await checkNetworkConnectivity();
+
+        if (!hasNetwork) {
+            let hasCacheData = await getRegularSavedScanpi();
+            let setValue = filteredData.hasOwnProperty("set")  ? filteredData.set.length> 0 ? filteredData.set : '' : ''
+            if (hasCacheData) {
+                let cacheFilterData =  hasCacheData.filter((element)=>{
+                    let conditionSwitch = setValue.length ? element.key == loginData.data.school.schoolId && element.classId == filteredData.class && element.subject == filteredData.subject && element.section == filteredData.section && element.fromDate == filteredData.examDate && filteredData.set == element.set : element.key == loginData.data.school.schoolId && element.classId == filteredData.class && element.subject == filteredData.subject && element.section == filteredData.section && element.fromDate == filteredData.examDate
+                    if (conditionSwitch) {
+                        return true
+                    }
+                });
+                if (cacheFilterData.length > 0) {
+                    storeFactory.dispatch(dispatchSavedScanData(cacheFilterData[0].data))
+                }
+            } else {
+                //Alert message show message "something went wrong or u don't have cache in local"            
+            }
+        } else {
         setIsLoading(true)
         let loginCred = await getLoginCred()
 
@@ -105,6 +222,7 @@ useEffect(() => {
         let apiObj = new scanStatusDataAction(dataPayload);
         FetchSavedScannedData(apiObj, loginCred.schoolId, loginCred.password)
     }
+}
 
     const FetchSavedScannedData = (api, uname, pass) => {
 
@@ -123,6 +241,9 @@ useEffect(() => {
                 }
             })
                 .then(function (res) {
+                    if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode) {
+                        getSavedScanApiCache(res.data)
+                    }
                     setIsLoading(false)
                     apiResponse = res
                     clearTimeout(id)
@@ -134,6 +255,13 @@ useEffect(() => {
                     collectErrorLogs("StudentList.js","FetchSavedScannedData",api.apiEndPoint(),err,false)
                     clearTimeout(id)
                 });
+        }
+    }
+
+    const dispatchSavedScanData = (payload) => {
+        return {
+            type: constants.SCANNED_DATA,
+            payload
         }
     }
 
@@ -172,6 +300,7 @@ useEffect(() => {
                 stdArray={stdArray}
                 apiStatus={apiStatus}
                 dispatch={dispatch}
+                loginData={loginData}
             />
         )
     }
@@ -192,7 +321,8 @@ useEffect(() => {
             "classId": filteredData.class,
             "examDate": filteredData.examDate,
             "subject": filteredData.subject,
-            "studentsMarkInfo": stdPstAbsArray
+            "studentsMarkInfo": stdPstAbsArray,
+            "userId": loginData.data.school.schoolId
         }
 
         stdArray.forEach((element, index) => {
@@ -204,7 +334,10 @@ useEffect(() => {
                 "securedMarks": 0,
                 "totalMarks": 0
             }
-
+            let hasSet = filteredData.hasOwnProperty("set") ? filteredData.set.length > 0 ? filteredData.set : '' : '' 
+            if(hasSet.length > 0){
+                stdPstAbs.set = hasSet
+            }
             stdPstAbs.studentAvailability = element.studentAvailability
             stdPstAbs.studentId = element.studentId
             stdPstAbsArray.push(stdPstAbs)
@@ -213,6 +346,7 @@ useEffect(() => {
         absentPresentStatus.studentsMarkInfo = stdPstAbsArray
 
         let stud = await getStudentsExamData();
+        const hasNetwork = await checkNetworkConnectivity();
 
         stud.forEach((e, i) => {
             if (e.class == filteredData.className && e.section == filteredData.section) {
@@ -228,17 +362,41 @@ useEffect(() => {
         })
 
 
-        setStudentsExamData(stud)
+       await setStudentsExamData(stud)
 
         if (absentPresentStatus.studentsMarkInfo.length == 0) {
             setPresentAbsentStudent(allStudentData)
             navigation.push('ScanHistory');
-        } else {
+        } else if(hasNetwork) {
             let dataPayload = absentPresentStatus
             let apiObj = new SaveScanData(dataPayload, token)
             setIsLoading(true)
             saveStudentData(apiObj)
+        } else if (absentPresentStatus.studentsMarkInfo.length > 0 && !hasNetwork) {
+            await setDataIntoRegularStudentExamApi()
         }
+    }
+
+    const setDataIntoRegularStudentExamApi = async() => {
+        let getStudentExamCache = await getRegularStudentExamApi();
+        if (getStudentExamCache != null) {
+        for (const e of getStudentExamCache) {
+            if (e.class == filteredData.className && e.section == filteredData.section && `${filteredData.subject + ' ' + filteredData.examDate}` == e.subject && e.key == loginData.data.school.schoolId) {
+                let studentArrayData = e.data.data.students.length > 0 ? e.data.data.students : []
+                for (const element of studentArrayData) {
+                    allStudentData.forEach((o) => {
+                        if (element.studentId == o.studentId) {
+                            element.studentAvailability = o.studentAvailability
+                        }
+                    });
+                }
+                break;
+            }
+        }
+    }
+        await setRegularStudentExamApi(getStudentExamCache);
+        await setPresentAbsentStudent(allStudentData)
+        navigation.push('ScanHistory');
     }
 
     const saveStudentData = (api) => {
@@ -255,6 +413,7 @@ useEffect(() => {
                     setIsLoading(false)
                     setPresentAbsentStudent(allStudentData)
                     navigation.push('ScanHistory');
+                    setDataIntoRegularStudentExamApi()
                     apiResponse = res
                     clearTimeout(id)
                     api.processResponse(res)
@@ -281,6 +440,7 @@ useEffect(() => {
         }
     }
     const navigateToBack = () => {
+        dispatch(dispatchroiData([]));
         navigation.navigate('selectDetails')
     }
     
@@ -305,22 +465,52 @@ useEffect(() => {
         }
     }
 
-    const getRoi = () => {
+    const getRoi = async() => {
 
-        let hasSet = filteredData.hasOwnProperty("set") && filteredData.set.length > 0 ? `?set=${filteredData.set}` : ''
-        let payload =
-        {
+        let hasNetwork = await checkNetworkConnectivity();
+        let setValue = filteredData.hasOwnProperty("set") > 0 ? filteredData.set.length > 0 ? filteredData.set : '' : ''
+
+        let hasCacheData = await getRegularRoipi();
+
+        let cacheFilterData = hasCacheData != null 
+            ?
+            hasCacheData.filter((element)=>{
+                let conditionSwitch = setValue.length > 0 ? element.key == loginData.data.school.schoolId && element.examId == filteredData.examTestID && element.set == filteredData.set : element.key == loginData.data.school.schoolId && element.examId == filteredData.examTestID
+                if (conditionSwitch) {
+                    return true
+                }
+            })
+            :
+            []
+            
+        if (cacheFilterData.length > 0) {
+            storeFactory.dispatch(dispatchroiData(cacheFilterData[0].data))
+            callScanStatusData()
+            
+        } else if (hasNetwork) {
+            let hasSet = filteredData.hasOwnProperty("set") ? filteredData.set.length > 0 ? `?set=${filteredData.set}` : '' : ''
+            let payload =
+            {
             "examId": filteredData.examTestID,
-        }
-        if (hasSet.length > 0) {
+            }
+            if (hasSet.length > 0) {
             payload.set = hasSet
+            }
+            let token = loginData.data.token
+            let apiObj = new ROIAction(payload, token);
+            dispatch(APITransport(apiObj))
+            callScanStatusData()
+        } else {
+            this.callCustomModal(Strings.message_text, Strings.roi_cache_not_available, false)
         }
-        let token = loginData.data.token
-        let apiObj = new ROIAction(payload, token);
-        dispatch(APITransport(apiObj))
-        callScanStatusData()
-    }
+}
 
+    const dispatchroiData = (payload) => {
+        return {
+            type: constants.ROI_DATA,
+            payload
+        }
+    }
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
@@ -401,7 +591,7 @@ const mapStateToProps = (state) => {
     return {
         filteredData: state.filteredData.response,
         loginData: state.loginData,
-        roiData: state.roiData,
+        roiData: state.roiData.response,
         scanTypeData: state.scanTypeData.response,
         saveAbsentStudent: state.saveAbsentStudent,
         absentStudentDataResponse: state.absentStudentDataResponse,

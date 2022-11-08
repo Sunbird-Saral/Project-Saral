@@ -6,7 +6,8 @@ import { Assets } from '../../../assets';
 import constants from '../../../flux/actions/constants';
 import { storeFactory } from '../../../flux/store/store';
 import AppTheme from '../../../utils/AppTheme';
-import { monospace_FF } from '../../../utils/CommonUtils';
+import { dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF } from '../../../utils/CommonUtils';
+import { removeAllCache, removeRegularUserCache } from '../../../utils/offlineStorageUtils';
 import { setMinimalValue } from '../../../utils/StorageUtils';
 import Strings from '../../../utils/Strings';
 
@@ -37,7 +38,8 @@ class HeaderComponents extends Component {
             helpMenu,
             minimalFlag,
             multiBrandingData,
-            navigation
+            navigation,
+            loginData
         } = this.props
 
         async function changeMinimalMode() {
@@ -64,10 +66,36 @@ class HeaderComponents extends Component {
             return true
         }
 
+        async function removeLocalCache() {
+            if (minimalFlag) {
+                await removeMinimalUserCache();
+            } else {
+                await removeRegularUserCache();
+            }
+            navigation.navigate('auth');
+        }
+
+        async function removeGlobalCache(){
+            await removeAllCache();
+            navigation.navigate('auth')
+        }
+
+        const callCustomModal = (title, message, isAvailable, doLogout, cancel) => {
+            let data = {
+              title: title,
+              message: message,
+              isOkAvailable: isAvailable,
+              okFunc: doLogout,
+              isCancel: cancel
+            }
+            storeFactory.dispatch(dispatchCustomModalStatus(true));
+            storeFactory.dispatch(dispatchCustomModalMessage(data));
+          }
+
         return (
             <View style={{flex:1,marginTop: '10%',marginRight:'5%'}}>
                 <View style={styles.imageViewContainer}>
-                    <View style={[styles.imageContainerStyle,{height:  160 }]}>
+                    <View style={[styles.imageContainerStyle,{height: loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode ? 240 : 180}]}>
                         
                         <TouchableOpacity
                         style={[styles.imageContainerViewstyle,{marginTop:10}]}
@@ -101,6 +129,35 @@ class HeaderComponents extends Component {
                          <Image style={{width:15,height:15,top:5}}  source={Assets.Help}/>
                             <Text style={[styles.headerTitleTextStyle, customLogoutTextStyle]}>{Strings.help_menu}</Text>
                         </TouchableOpacity>
+
+                        {
+                            loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode 
+                            &&
+                            <TouchableOpacity
+                               style={styles.imageContainerViewstyle}
+                                onPress={()=>{
+                                    callCustomModal(Strings.message_text, Strings.are_you_sure_you_want_to_clear_local_cache, true, removeLocalCache, true)
+                                }}
+                                >
+                                 <Image style={{width:10,height:20}}  source={Assets.delete}/>
+                                <Text style={[styles.headerTitleTextStyle, customLogoutTextStyle]}>{Strings.clear_local_cache}</Text>
+                            </TouchableOpacity>
+                        }
+                            
+                        {
+                            loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode 
+                            &&
+                            <TouchableOpacity
+                            style={styles.imageContainerViewstyle}
+                            onPress={()=>{
+                                callCustomModal(Strings.message_text, Strings.are_you_sure_you_want_to_clear_global_cache, true, removeGlobalCache, true)
+                            }}
+                            >
+                                 <Image style={{width:10,height:20}}  source={Assets.delete}/>
+                                <Text style={[styles.headerTitleTextStyle, customLogoutTextStyle]}>{Strings.clear_global_cache}</Text>
+                            </TouchableOpacity>
+                        }
+                            
                         
                         <View 
                         style={{flexDirection: 'row', marginBottom: 10}}
@@ -109,7 +166,7 @@ class HeaderComponents extends Component {
                             trackColor={{ true: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE, false: '#000' }}
                             thumbColor={ !minimalFlag ? multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE: AppTheme.GREY}
                             value={!minimalFlag}
-                            onValueChange={()=>  changeMinimalMode() }
+                            onValueChange={async()=>  await changeMinimalMode() }
                             />
                             
                         <TouchableOpacity
@@ -124,6 +181,8 @@ class HeaderComponents extends Component {
                             <Text style={[styles.headerTitleTextStyle, customLogoutTextStyle,{color: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE,fontWeight: 'bold'}]}>{Strings.regular_mode}</Text>
                         }
                         </TouchableOpacity>
+
+                        
                         
                         </View>
                     </View>
@@ -150,7 +209,8 @@ class HeaderComponents extends Component {
 const mapStateToProps = (state) => {
     return {
         minimalFlag: state.minimalFlag,
-        multiBrandingData: state.multiBrandingData.response.data
+        multiBrandingData: state.multiBrandingData.response.data,
+        loginData: state.loginData,
     }
   }
 

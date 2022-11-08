@@ -522,10 +522,22 @@ definitions:
       tags:
         type: boolean
         example: true
+      isMinimalMode:
+        type: boolean
+        description: "if isminimalmode is true then app will not show all the pages it will show minimal pages"
+        example: false
       autoSyncBatchSize:
         type: number
         description:  "Limit of student records to be stored in local storage before we push to backend."
         example: 10
+      supportEmail:
+        type: string
+        example: "xyz@gmail.com"
+      offlineMode:
+        type: boolean
+        description: "offline mode is true then it is possible app can run without internet also. "
+        example: false
+
         
   CreateSchoolResponse:
     type: object
@@ -771,6 +783,11 @@ definitions:
           type: string
           description: "type of Exam"
           example: "uphindi1s"
+        set:
+          type: array
+          items:
+            type: string
+            example: A,B
         questions:
           $ref: '#/definitions/Questions'  
         examId:
@@ -801,6 +818,11 @@ definitions:
         classId:
           type: string
           example: "24-12-2021"
+        set:
+          type: array
+          items:
+            type: string
+            example: A,B
         schoolId:
           type: string
           example: "u001"
@@ -937,6 +959,9 @@ definitions:
           name:
             type: string
             example: "UP SAT Exam Sheet Form"
+          identifierPrefix:
+            type: string
+            example: ROLLNUMBERID
           threshold:
             type: object
             properties:
@@ -973,6 +998,9 @@ definitions:
       classId:
         type: string
         example: "2"
+      set:
+        type: string
+        example: A
       type: 
         type: string
         example: "uphindi1s"

@@ -110,9 +110,13 @@ paths:
           in: body
           schema:
             $ref: "#/definitions/SaveMarksBody"
+          description: Create marks for students .Application may send  "X-App-Version" in header.
+
       responses:
         "200":
           description: "Data Saved Successfully"
+        "400":
+          description: "Custom message can be set to message about the error or failure"
     
   /roi/{examId}:
     get:
@@ -127,6 +131,10 @@ paths:
         type: number
         description: examId is required for fetching rois 
         required: true
+      - in: query
+        name: set
+        type: string
+        required: false
 
       responses:
         "200":
@@ -208,6 +216,10 @@ definitions:
             description: "If this is set to true frontend application will have minimal screens in ui. In savesMarksAPI and getSavedScan we are using roiId as our unique key and fetching data from this key ."
             default: false
             example: true
+          offlineMode:
+            type: boolean
+            example: true
+            description: "If this is set to true , app can operate in offline mode after frist navigation ."
           
       classes:
             $ref: '#/definitions/classResponse'
@@ -426,6 +438,10 @@ definitions:
           type: string
           description: "Student Id"
           example: "1210001"
+        set:
+          type: string
+          description: "Exam set of the student.It is an optional field ."
+          example: A
         predictedStudentId:
           type: string
           description: "Predicted Student Id which we are getting after scan ."
@@ -673,6 +689,9 @@ definitions:
       regExp:
         type: string
         example: ""
+      errorMsg:
+        type: string
+        example: ""
           
   cells:
     type: array
@@ -705,6 +724,10 @@ definitions:
           name:
             type: string
             example: "UP SAT Exam Sheet Form"
+          identifierPrefix:
+            description: indetifier prefix field is used as an indentifier for ID .
+            type: string
+            example: ROLLNUMBERID
           threshold:
             type: object
             properties:
@@ -725,7 +748,9 @@ definitions:
                 description: when this field is true then pencil omr detection is also possible. 
           cells:
             $ref: '#/definitions/cells' 
-
+      roiId:
+        type: number
+        example: 1
         
   sections:
     type: array

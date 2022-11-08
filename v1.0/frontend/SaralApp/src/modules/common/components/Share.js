@@ -4,7 +4,7 @@ import { Alert, View, TouchableOpacity, Text, Modal, Linking } from 'react-nativ
 //redux
 import { connect, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { dispatchCustomModalMessage, dispatchCustomModalStatus } from '../../../utils/CommonUtils'
+import { checkNetworkConnectivity, dispatchCustomModalMessage, dispatchCustomModalStatus } from '../../../utils/CommonUtils'
 
 //component
 import Strings from '../../../utils/Strings';
@@ -22,7 +22,7 @@ import { LogoutAction } from '../../../flux/actions/apis/LogoutAction';
 import axios from 'axios';
 
 //local storage
-import { getScannedDataFromLocal, eraseErrorLogs, getErrorMessage } from '../../../utils/StorageUtils';
+import { getScannedDataFromLocal, eraseErrorLogs, getErrorMessage, erasesetLoginCred, setScannedDataIntoLocal } from '../../../utils/StorageUtils';
 
 //constant
 import C from '../../../flux/actions/constants'
@@ -54,17 +54,30 @@ const ShareComponent = ({
 
   const Logoutcall = async () => {
     let data = await getScannedDataFromLocal();
+    let hasNetwork = await checkNetworkConnectivity();
     setIshidden(false);
     if (bgFlag) {
       callCustomModal(Strings.message_text, Strings.auto_sync_in_progress_please_wait, false, false);
-    } else {
+    } 
+    else if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode && !hasNetwork) {
+      const logout = async()=> {
+        navigation.navigate('auth')
+      }
+      callCustomModal(Strings.message_text, Strings.are_you_sure_you_want_to_logout, true, logout, true)
+    }
+    else {
 
       const doLogout = async () => {
-        if (data != null && data.length > 0) {
-          for (const value of data) {
-            let apiObj = new SaveScanData(value, loginData.data.token);
-            saveStudentData(apiObj)
-          }
+        let filterCurrentSchool = data != null ? data.filter((e)=> { return e.userId == loginData.data.school.schoolId}) : []
+        if (data != null && data.length > 0 & filterCurrentSchool.length > 0) {
+          let filterOtherSchool = data.filter((e)=> { return e.userId != loginData.data.school.schoolId});
+
+          filterCurrentSchool.forEach(async(element, i) => {
+            if (element.userId == loginData.data.school.schoolId) {
+              let apiObj = new SaveScanData(element, loginData.data.token);
+              await saveStudentData(apiObj, i, filterCurrentSchool.length, filterOtherSchool)
+            }
+          });
         } else {
           await eraseErrorLogs()
           dispatch(LogoutAction())
@@ -78,7 +91,7 @@ const ShareComponent = ({
   }
 
 
-  const saveStudentData = async (api) => {
+  const saveStudentData = async (api, i, len, filterOtherSchool) => {
     if (api.method === 'PUT') {
       let apiResponse = null
       const source = axios.CancelToken.source()
@@ -89,8 +102,11 @@ const ShareComponent = ({
       }, 60000);
       axios.put(api.apiEndPoint(), api.getBody(), { headers: api.getHeaders(), cancelToken: source.token },)
         .then(function (res) {
-          dispatch(LogoutAction())
-          navigation.navigate('auth')
+          if (i == len - 1) {
+            setScannedDataIntoLocal(filterOtherSchool)
+            dispatch(LogoutAction())
+            navigation.navigate('auth')
+          }
           apiResponse = res
           clearTimeout(id)
           api.processResponse(res)
