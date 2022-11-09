@@ -45,14 +45,6 @@ const ScanStatusLocal = ({
     const dispatch = useDispatch()
 
 
-// useEffect(
-//     React.useCallback(() => {
-//         BackHandler.addEventListener('hardwareBackPress', onBackPress);
-//         return () =>
-//         BackHandler.removeEventListener('hardwareBackPress', onBackPress);
-//     }, []),
-//     );
-
     const onBackPress = () => {
         navigation.navigate('myScan');
         return true;
