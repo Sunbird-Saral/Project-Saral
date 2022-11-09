@@ -39,7 +39,9 @@ const ScanStatusLocal = ({
     const [presentStudentList, setPresentStudentList] = useState([])
     const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.scanHistory[0]
     
-    const data =(JSON.stringify(presentStudentList[0],null, 2))
+
+
+    const dataForShare =(`${JSON.stringify(presentStudentList,null, 2)}`.replace(/[\[\]]+/g,''))
     const dispatch = useDispatch()
 
 
@@ -73,7 +75,7 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
             const result = await Share.share({
                 title: `Saral App v1.0 Marks JSON - SchoolId:${loginData.data.school.schoolId} & Exam Id:${filteredData.examTestID}`,
                 message:
-                    `${(data ? data : '')}`
+                    `${(dataForShare ? dataForShare : '')}`
             });
             if (result.action === Share.sharedAction) {
                 if (result.activityType) {
