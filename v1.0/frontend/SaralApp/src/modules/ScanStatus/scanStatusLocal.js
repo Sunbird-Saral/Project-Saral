@@ -41,7 +41,7 @@ const ScanStatusLocal = ({
     
 
 
-    const dataForShare =(`${JSON.stringify(presentStudentList,null, 2)}`.replace(/[\[\]]+/g,''))
+    const dataForShare =(`${JSON.stringify(presentStudentList,null, 2)}`)
     const dispatch = useDispatch()
 
 
