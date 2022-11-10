@@ -173,7 +173,7 @@ export const getRegularSavedScanpi = async () => {
 export const removeRegularUserDataCacheByKey = async (key, schollId) => {
     let json = await getData(key);
     let jsonData = JSON.parse(json);
-    let cloneData = structuredClone(jsonData);
+    let cloneData = jsonData != null ? [...jsonData] : [] ;
 
     let filterData = jsonData != null ? jsonData.filter((element) => {
         if (element.key == schollId || (element.key == "global" && cloneData.length == 2)) {
