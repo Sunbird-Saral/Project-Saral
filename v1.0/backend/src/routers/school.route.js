@@ -5,6 +5,7 @@ const Student = require('../models/students')
 const Mark = require('../models/marks')
 const { auth } = require('../middleware/auth')
 const router = new express.Router()
+const Lock  = require('../models/lock')
 
 
 router.post('/schools/create', async (req, res) => {
@@ -17,6 +18,15 @@ router.post('/schools/create', async (req, res) => {
         if(req.body.autoSyncFrequency)   school.autoSyncFrequency = req.body.autoSyncFrequency
         if(req.body.tags) school.tags = req.body.tags
         if(req.body.autoSyncBatchSize)   school.autoSyncBatchSize = req.body.autoSyncBatchSize
+       
+        if(req.body.lock){
+            let data = {
+                lock: req.body.lock,
+                schoolId: req.body.schoolId
+            }
+            await Lock.create(data)
+        }
+        
         await school.save()
         let schools = {
             storeTrainingData: school.storeTrainingData,
