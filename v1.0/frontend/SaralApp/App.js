@@ -24,7 +24,8 @@ import { setCustomText, setCustomTextInput, setCustomTouchableOpacity } from 're
 
 //npm
 import checkVersion from 'react-native-store-version';
-import { apkVersion } from './src/configs/config';
+import { apkURL, apkVersionId } from './src/configs/config';
+import { getLoginData } from './src/utils/StorageUtils';
 
 const customTextProps = {
   allowFontScaling: false,
@@ -45,23 +46,28 @@ setCustomTouchableOpacity(customTouchableOpacityProps);
 
 const App = () => {
   
-  useEffect(() => {
+  useEffect(async() => {
+    let hasAppForceEnable = await getLoginData();
     // RNBootSplash.hide({ duration: 50 });
     StatusBar.setBackgroundColor('#FFF')
-    checkAppVersion();
+    if (hasAppForceEnable != null) {
+      if (hasAppForceEnable.school.hasOwnProperty("isAppForceUpdateEnabled") && hasAppForceEnable.school.isAppForceUpdateEnabled) {
+        checkAppVersion();
+      }
+    }
   },[])
 
   const checkAppVersion = async () => {
     try {
 
       const check = await checkVersion({
-        version: apkVersion, // app local version
+        version: apkVersionId, // app local version
         iosStoreURL: 'ios app store url',
-        androidStoreURL: 'https://play.google.com/store/apps/details?id=com.up_saralapp',
+        androidStoreURL: apkURL,
         country: 'IN', // default value is 'jp'
       });
 
-      if (check.result === 'old' || check.result == 'new') {
+      if (check.result == 'new') {
         Alert.alert(
           'Please Update',
           'You will have to update your app to the latest verstion to continue using.',
@@ -70,7 +76,7 @@ const App = () => {
               text : 'Update',
               onPress: () => {
                 BackHandler.exitApp();
-                Linking.openURL("https://play.google.com/store/apps/details?id=com.up_saralapp")
+                Linking.openURL(apkURL)
               },
             },
           ],
