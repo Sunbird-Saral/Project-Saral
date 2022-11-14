@@ -9,7 +9,8 @@
     "storeTrainingData": true,
     "tags": true,
     "supportEmail": "abc@gmail.com , xyz@gmail.com",
-    "offlineMode": true
+    "offlineMode": true,
+    "lock":true
   },
   {
     "name": "Dummy school 2",
@@ -63,7 +64,8 @@
     "autoSyncFrequency": 600000,
     "storeTrainingData": true,
     "tags": false,
-    "offlineMode": true
+    "offlineMode": true,
+    "lock": true
   },
   {
     "name": "Dummy Organization",

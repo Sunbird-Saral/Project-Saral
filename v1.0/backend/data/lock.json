@@ -1,0 +1,10 @@
+[
+    { 
+      "lockType": "schoolId",
+      "lockId": "u001"
+    },
+    {
+      "lockType": "state",
+      "lockId": "assam"
+    }
+  ]

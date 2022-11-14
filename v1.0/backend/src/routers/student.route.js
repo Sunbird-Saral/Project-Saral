@@ -2,6 +2,7 @@ const express = require('express')
 const Student = require('../models/students')
 const Exam = require('../models/exams')
 const Marks = require('../models/marks')
+const Lock = require('../models/lock')
 const { auth } = require('../middleware/auth')
 const { getSectionCode } = require('../utils/commonUtils')
 const router = new express.Router()
@@ -111,6 +112,32 @@ router.post('/fetchStudentsandExamsByQuery', auth, async (req, res) => {
         setMatch = req.body.set ? req.body.set : '' 
     }
     
+    if (req.school.lock && req.school.lock == true) {
+        const locks = await Lock.find().lean()
+        for (let lock of locks) {
+            let lockType = lock.lockType;
+
+            switch (lockType) {
+                case "schoolId":
+                    if (req.school["schoolId"] == lock.lockId) {
+                        res.status(500).send({ message: "School is locked for scanning." });
+                    }
+                    break;
+                case "state":
+                    if (req.school["state"] == lock.lockId) {
+                        res.status(500).send({ message: "School is locked for scanning." });
+                    }
+                    break;
+                case "district":
+                    if (req.school["district"] == lock.lockId) {
+                        res.status(500).send({ message: "School is locked for scanning." });
+                    }
+                    break;
+                default:
+            }
+        }
+    }
+
     try {
         const students = await Student.find(match, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 }).lean()
         for(let student of students){

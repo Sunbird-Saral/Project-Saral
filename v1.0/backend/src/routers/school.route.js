@@ -5,7 +5,6 @@ const Student = require('../models/students')
 const Mark = require('../models/marks')
 const { auth } = require('../middleware/auth')
 const router = new express.Router()
-const Lock  = require('../models/lock')
 
 
 router.post('/schools/create', async (req, res) => {
@@ -19,13 +18,6 @@ router.post('/schools/create', async (req, res) => {
         if(req.body.tags) school.tags = req.body.tags
         if(req.body.autoSyncBatchSize)   school.autoSyncBatchSize = req.body.autoSyncBatchSize
        
-        if(req.body.lock){
-            let data = {
-                lock: req.body.lock,
-                schoolId: req.body.schoolId
-            }
-            await Lock.create(data)
-        }
         
         await school.save()
         let schools = {
@@ -71,6 +63,9 @@ router.get('/schools', async (req, res) => {
 router.post('/schools/login', async (req, res) => {
     try {
         const schools = await School.findByCredentials(req.body.schoolId.toLowerCase(), req.body.password)
+        if (schools.lock && schools.lock == true) {
+            res.status(500).send({ message: "school is locked for scanning." });
+        }
         const token = await schools.generateAuthToken()
         let classes = []
         let school = {

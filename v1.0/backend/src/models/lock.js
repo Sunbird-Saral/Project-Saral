@@ -1,13 +1,14 @@
 const mongoose = require('mongoose')
 const lockSchema = new mongoose.Schema({
-    lock: {
-        type: Boolean,
-        required: false
-    },
-    schoolId: {
+    lockType : {
         type: String,
         required: true,
-        trim: true,
+        trim: true
+    },
+    lockId:{
+        type: String,
+        required: true,
+        trim: true
     }
 }, {
     timestamps: true

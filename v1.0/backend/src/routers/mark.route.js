@@ -4,6 +4,7 @@ const Mark = require('../models/marks')
 const School = require('../models/school')
 const Exams = require('../models/exams')
 const Class = require('../models/classModel')
+const Lock = require('../models/lock')
 const { auth, basicAuth } = require('../middleware/auth')
 const excel = require('exceljs');
 const { getFilePath, deleteAllfilesFromReports } = require('../utils/commonUtils')
@@ -16,8 +17,34 @@ const toTime = "T23:59:59"
 router.put('/saveMarks', auth, async (req, res) => {
     const marks = []
     
-    if( req.header('X-App-Version')){
+    if (req.header('X-App-Version')) {
         console.log("APP VERSION", req.get('X-App-Version'))
+    }
+
+    if (req.school.lock && req.school.lock == true) {
+        const locks = await Lock.find().lean()
+        for (let lock of locks) {
+            let lockType = lock.lockType;
+
+            switch (lockType) {
+                case "schoolId":
+                    if (req.school["schoolId"] == lock.lockId) {
+                        res.status(500).send({ message: "School is locked for scanning." });
+                    }
+                    break;
+                case "state":
+                    if (req.school["state"] == lock.lockId) {
+                        res.status(500).send({ message: "School is locked for scanning." });
+                    }
+                    break;
+                case "district":
+                    if (req.school["district"] == lock.lockId) {
+                        res.status(500).send({ message: "School is locked for scanning." });
+                    }
+                    break;
+                default:
+            }
+        }
     }
 
     const subject = req.body.subject
