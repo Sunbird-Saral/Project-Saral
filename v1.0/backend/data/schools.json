@@ -9,7 +9,9 @@
     "storeTrainingData": true,
     "tags": true,
     "supportEmail": "abc@gmail.com , xyz@gmail.com",
-    "offlineMode": true
+    "offlineMode": true,
+    "isAppForceUpdateEnabled": true
+
   },
   {
     "name": "Dummy school 2",
@@ -44,7 +46,8 @@
     "storeTrainingData": true,
     "tags": true,
     "autoSyncBatchSize": 10,
-    "offlineMode": true
+    "offlineMode": true,
+    "isAppForceUpdateEnabled": true
   },
   {
     "name": "Dummy Skill School",
