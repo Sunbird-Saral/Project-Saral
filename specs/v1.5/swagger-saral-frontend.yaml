@@ -220,7 +220,12 @@ definitions:
             type: boolean
             example: true
             description: "If this is set to true , app can operate in offline mode after frist navigation ."
-          
+          lock:
+            type: boolean
+            example: true
+            default: false
+            description: " When lock is true in login API then user will not allow for login to app as that school is locked for scanning."
+            
       classes:
             $ref: '#/definitions/classResponse'
 

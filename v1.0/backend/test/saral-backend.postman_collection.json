@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Dummy school 1\",\r\n    \"schoolId\": \"od001\",\r\n    \"password\": \"tarento@123\",\r\n    \"state\": \"up\",\r\n    \"autoSync\": false,\r\n    \"autoSyncFrequency\": 600000,\r\n    \"storeTrainingData\": true,\r\n    \"tags\": true,\r\n    \"supportEmail\": \"abc@gmail.com , xyz@gmail.com\",\r\n    \"offlineMode\": true\r\n  }",
+							"raw": "{\r\n    \"name\": \"Dummy school 1\",\r\n    \"schoolId\": \"od001\",\r\n    \"password\": \"tarento@123\",\r\n    \"state\": \"up\",\r\n    \"autoSync\": false,\r\n    \"autoSyncFrequency\": 600000,\r\n    \"storeTrainingData\": true,\r\n    \"tags\": true,\r\n    \"supportEmail\": \"abc@gmail.com , xyz@gmail.com\",\r\n    \"offlineMode\": true,\r\n    \"lock\":true\r\n  }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -41,7 +41,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"Dummy school 1\",\r\n    \"schoolId\": \"od001\",\r\n    \"password\": \"tarento@123\",\r\n    \"state\": \"up\",\r\n    \"autoSync\": false,\r\n    \"autoSyncFrequency\": 600000,\r\n    \"storeTrainingData\": true,\r\n    \"tags\": true,\r\n    \"supportEmail\": \"abc@gmail.com , xyz@gmail.com\",\r\n    \"offlineMode\": true\r\n  }",
+									"raw": "{\r\n    \"name\": \"Dummy school 1\",\r\n    \"schoolId\": \"od001\",\r\n    \"password\": \"tarento@123\",\r\n    \"state\": \"up\",\r\n    \"autoSync\": false,\r\n    \"autoSyncFrequency\": 600000,\r\n    \"storeTrainingData\": true,\r\n    \"tags\": true,\r\n    \"supportEmail\": \"abc@gmail.com , xyz@gmail.com\",\r\n    \"offlineMode\": true,\r\n    \"lock\":true\r\n  }",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -81,11 +81,11 @@
 								},
 								{
 									"key": "ETag",
-									"value": "W/\"e9-590wVVXgXgrOiJKFY70jSfP/m9E\""
+									"value": "W/\"e9-RPBcvhG0dcFaDuR/Gs8v4/yp1I0\""
 								},
 								{
 									"key": "Date",
-									"value": "Fri, 04 Nov 2022 08:23:33 GMT"
+									"value": "Tue, 15 Nov 2022 03:41:37 GMT"
 								},
 								{
 									"key": "Connection",
@@ -97,7 +97,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"schools\": {\n        \"storeTrainingData\": true,\n        \"name\": \"Dummy school 1\",\n        \"schoolId\": \"od001\",\n        \"state\": \"up\"\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJvZDAwMSIsImlhdCI6MTY2NzU1MDIxM30.mVMqo-WksZ-oJyApUJqfRkq6mVs3fK1cmwMIjuU1oik\"\n}"
+							"body": "{\n    \"schools\": {\n        \"storeTrainingData\": true,\n        \"name\": \"Dummy school 1\",\n        \"schoolId\": \"od001\",\n        \"state\": \"up\"\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJvZDAwMSIsImlhdCI6MTY2ODQ4MzY5N30.480s6zzVOJktzDoIi8Fsfre3nE27rtBVDon19d8fvi8\"\n}"
 						}
 					]
 				},
