@@ -26,6 +26,7 @@ import { setCustomText, setCustomTextInput, setCustomTouchableOpacity } from 're
 import checkVersion from 'react-native-store-version';
 import { apkURL, apkVersionId } from './src/configs/config';
 import { getLoginData } from './src/utils/StorageUtils';
+import { collectErrorLogs } from './src/modules/CollectErrorLogs';
 
 const customTextProps = {
   allowFontScaling: false,
@@ -83,7 +84,9 @@ const App = () => {
           {cancelable: false}
         );
       }
-    } catch (error) {}
+    } catch (error) {
+      collectErrorLogs("App.js","checkAppVersion MEthod", apkURL, error, false)
+    }
 }
 
   return (
