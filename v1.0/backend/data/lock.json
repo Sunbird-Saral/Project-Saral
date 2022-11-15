@@ -1,10 +1,10 @@
 [
     { 
       "lockType": "schoolId",
-      "lockId": "u001"
+      "lockId": "demouser"
     },
     {
       "lockType": "state",
-      "lockId": "assam"
+      "lockId": "up"
     }
   ]

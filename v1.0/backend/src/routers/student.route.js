@@ -120,17 +120,17 @@ router.post('/fetchStudentsandExamsByQuery', auth, async (req, res) => {
             switch (lockType) {
                 case "schoolId":
                     if (req.school["schoolId"] == lock.lockId) {
-                        res.status(500).send({ message: "School is locked for scanning." });
+                        res.status(500).send({ message: "School is locked for scanning" });
                     }
                     break;
                 case "state":
                     if (req.school["state"] == lock.lockId) {
-                        res.status(500).send({ message: "School is locked for scanning." });
+                        res.status(500).send({ message: "School is locked for scanning" });
                     }
                     break;
                 case "district":
                     if (req.school["district"] == lock.lockId) {
-                        res.status(500).send({ message: "School is locked for scanning." });
+                        res.status(500).send({ message: "School is locked for scanning" });
                     }
                     break;
                 default:
