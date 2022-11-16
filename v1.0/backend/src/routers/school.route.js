@@ -64,8 +64,9 @@ router.post('/schools/login', async (req, res) => {
     try {
         const schools = await School.findByCredentials(req.body.schoolId.toLowerCase(), req.body.password)
         if (schools.lock && schools.lock == true) {
-            res.status(500).send({ message: "School is locked for scanning" });
+            throw new Error("School is locked for scanning")
         }
+        
         const token = await schools.generateAuthToken()
         let classes = []
         let school = {
@@ -105,9 +106,11 @@ router.post('/schools/login', async (req, res) => {
 
         res.send(response)
     } catch (e) {
-
         if (e && e.message == 'School Id or Password is not correct.') {
             res.status(422).send({ error: e.message })
+        }
+        else if(e && e.message == 'School is locked for scanning'){
+            res.status(500).send({ error: e.message })
         }
         else {
             res.status(400).send(e)
