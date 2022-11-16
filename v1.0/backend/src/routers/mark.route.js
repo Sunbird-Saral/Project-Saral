@@ -21,32 +21,6 @@ router.put('/saveMarks', auth, async (req, res) => {
         console.log("APP VERSION", req.get('X-App-Version'))
     }
 
-    if (req.school.lock && req.school.lock == true) {
-        const locks = await Lock.find().lean()
-        for (let lock of locks) {
-            let lockType = lock.lockType;
-
-            switch (lockType) {
-                case "schoolId":
-                    if (req.school["schoolId"] == lock.lockId) {
-                        res.status(500).send({ message: "School is locked for scanning" });
-                    }
-                    break;
-                case "state":
-                    if (req.school["state"] == lock.lockId) {
-                        res.status(500).send({ message: "School is locked for scanning" });
-                    }
-                    break;
-                case "district":
-                    if (req.school["district"] == lock.lockId) {
-                        res.status(500).send({ message: "School is locked for scanning" });
-                    }
-                    break;
-                default:
-            }
-        }
-    }
-
     const subject = req.body.subject
     const examDate = req.body.examDate
     const examId = req.body.examId
@@ -69,6 +43,32 @@ router.put('/saveMarks', auth, async (req, res) => {
         marks.push(marksData)
     });
     try {
+
+        if (req.school.lock && req.school.lock == true) {
+            const locks = await Lock.find().lean()
+
+            for (let lockData of locks) {
+                let lockType = lockData.lockType;
+                switch (lockType) {
+                    case "schoolId":
+                        if (req.school["schoolId"] == lockData.lockId) {
+                            throw new Error("School is locked for scanning");
+                        }
+                        break;
+                    case "state":
+                        if (req.school["state"] == lockData.lockId)
+                            throw new Error("School is locked for scanning");
+                        break;
+                    case "district":
+                        if (req.school["district"] == lockData.lockId) {
+                            throw new Error("School is locked for scanning");
+                        }
+                        break;
+                    default:
+                }
+            }
+        }
+        
         for (let data of marks) {
             if(!data.examDate && data.examDate == undefined){
                 data.examDate = new Date().toLocaleDateString()
@@ -115,7 +115,12 @@ router.put('/saveMarks', auth, async (req, res) => {
         res.status(200).send({ message: 'Data Saved Successfully' })
     } catch (e) {
         console.log(e);
-        res.status(400).send({ e })
+        if (e && e.message == 'School is locked for scanning') {
+            res.status(500).send({ error: e.message })
+        }
+        else {
+            res.status(400).send(e)
+        }
     }
 })
 

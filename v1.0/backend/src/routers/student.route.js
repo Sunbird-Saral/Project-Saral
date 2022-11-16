@@ -112,25 +112,26 @@ router.post('/fetchStudentsandExamsByQuery', auth, async (req, res) => {
         setMatch = req.body.set ? req.body.set : '' 
     }
     
+    try {
+
     if (req.school.lock && req.school.lock == true) {
         const locks = await Lock.find().lean()
-        for (let lock of locks) {
-            let lockType = lock.lockType;
 
+            for (let lockData of locks) {
+                let lockType = lockData.lockType;
             switch (lockType) {
                 case "schoolId":
-                    if (req.school["schoolId"] == lock.lockId) {
-                        res.status(500).send({ message: "School is locked for scanning" });
+                        if (req.school["schoolId"] == lockData.lockId) {
+                            throw new Error("School is locked for scanning");
                     }
                     break;
                 case "state":
-                    if (req.school["state"] == lock.lockId) {
-                        res.status(500).send({ message: "School is locked for scanning" });
-                    }
+                        if (req.school["state"] == lockData.lockId)
+                            throw new Error("School is locked for scanning");
                     break;
                 case "district":
-                    if (req.school["district"] == lock.lockId) {
-                        res.status(500).send({ message: "School is locked for scanning" });
+                        if (req.school["district"] == lockData.lockId) {
+                            throw new Error("School is locked for scanning");
                     }
                     break;
                 default:
@@ -138,10 +139,9 @@ router.post('/fetchStudentsandExamsByQuery', auth, async (req, res) => {
         }
     }
 
-    try {
         const students = await Student.find(match, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 }).lean()
-        for(let student of students){
-            let lookup ={
+        for (let student of students) {
+            let lookup = {
                 studentId: student.studentId,
                 subject: examMatch.subject,
                 examDate: examMatch.examDate
@@ -164,7 +164,7 @@ router.post('/fetchStudentsandExamsByQuery', auth, async (req, res) => {
         res.send({ students, exams })
     } catch (e) {
         console.log(e);
-        res.status(500).send()
+        res.status(500).send({ error: e.message })
     }
 })
 
