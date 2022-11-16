@@ -78,7 +78,8 @@
     "storeTrainingData": true,
     "tags": false,
     "isMinimalMode": true,
-    "offlineMode": true
+    "offlineMode": true,
+    "lock": true
   },
   {
     "name": "Ps Vishnupura",

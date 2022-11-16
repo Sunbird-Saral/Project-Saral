@@ -6,5 +6,9 @@
     {
       "lockType": "state",
       "lockId": "up"
+    },
+    {
+      "lockType": "schoolId",
+      "lockId": "m001"
     }
   ]
