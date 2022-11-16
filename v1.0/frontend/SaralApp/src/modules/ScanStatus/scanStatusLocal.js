@@ -78,7 +78,6 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
             await Share.open(customOptions);
         } catch (err) {
             console.log(err);
-            callCustomModal(Strings.message_text, Strings.shareDataExceed, false);
         }
     };
     
