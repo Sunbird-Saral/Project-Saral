@@ -7,7 +7,8 @@ const Class = require('../models/classModel')
 const Lock = require('../models/lock')
 const { auth, basicAuth } = require('../middleware/auth')
 const excel = require('exceljs');
-const { getFilePath, deleteAllfilesFromReports } = require('../utils/commonUtils')
+const { getFilePath, deleteAllfilesFromReports, stringObject } = require('../utils/commonUtils')
+const Helper = require('../middleware/helper')
 const router = new express.Router()
 const _ = require('lodash')
 const fs = require('fs');
@@ -44,30 +45,7 @@ router.put('/saveMarks', auth, async (req, res) => {
     });
     try {
 
-        if (req.school.lock && req.school.lock == true) {
-            const locks = await Lock.find().lean()
-
-            for (let lockData of locks) {
-                let lockType = lockData.lockType;
-                switch (lockType) {
-                    case "schoolId":
-                        if (req.school["schoolId"] == lockData.lockId) {
-                            throw new Error("School is locked for scanning");
-                        }
-                        break;
-                    case "state":
-                        if (req.school["state"] == lockData.lockId)
-                            throw new Error("School is locked for scanning");
-                        break;
-                    case "district":
-                        if (req.school["district"] == lockData.lockId) {
-                            throw new Error("School is locked for scanning");
-                        }
-                        break;
-                    default:
-                }
-            }
-        }
+        await Helper.lockScreenValidator(req.school)
         
         for (let data of marks) {
             if(!data.examDate && data.examDate == undefined){
@@ -115,7 +93,7 @@ router.put('/saveMarks', auth, async (req, res) => {
         res.status(200).send({ message: 'Data Saved Successfully' })
     } catch (e) {
         console.log(e);
-        if (e && e.message == 'School is locked for scanning') {
+        if (e && e.message == stringObject().lockScreen) {
             res.status(500).send({ error: e.message })
         }
         else {

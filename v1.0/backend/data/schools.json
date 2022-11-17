@@ -46,8 +46,7 @@
     "storeTrainingData": true,
     "tags": true,
     "autoSyncBatchSize": 10,
-    "offlineMode": true,
-    "lock": true
+    "offlineMode": true
   },
   {
     "name": "Dummy Skill School",
@@ -78,8 +77,7 @@
     "storeTrainingData": true,
     "tags": false,
     "isMinimalMode": true,
-    "offlineMode": true,
-    "lock": true
+    "offlineMode": true
   },
   {
     "name": "Ps Vishnupura",

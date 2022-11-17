@@ -41,7 +41,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"Dummy school 1\",\r\n    \"schoolId\": \"od001\",\r\n    \"password\": \"tarento@123\",\r\n    \"state\": \"up\",\r\n    \"autoSync\": false,\r\n    \"autoSyncFrequency\": 600000,\r\n    \"storeTrainingData\": true,\r\n    \"tags\": true,\r\n    \"supportEmail\": \"abc@gmail.com , xyz@gmail.com\",\r\n    \"offlineMode\": true,\r\n    \"lock\":true\r\n  }",
+									"raw": "{\r\n    \"name\": \"Dummy school 1\",\r\n    \"schoolId\": \"od001\",\r\n    \"password\": \"tarento@123\",\r\n    \"state\": \"up\",\r\n    \"autoSync\": false,\r\n    \"autoSyncFrequency\": 600000,\r\n    \"storeTrainingData\": true,\r\n    \"tags\": true,\r\n    \"supportEmail\": \"abc@gmail.com , xyz@gmail.com\",\r\n    \"offlineMode\": true\r\n  }",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -81,11 +81,11 @@
 								},
 								{
 									"key": "ETag",
-									"value": "W/\"e9-RPBcvhG0dcFaDuR/Gs8v4/yp1I0\""
+									"value": "W/\"e9-JyQuOjfXNM49Gn8DJuIaRMxa/+Y\""
 								},
 								{
 									"key": "Date",
-									"value": "Tue, 15 Nov 2022 03:41:37 GMT"
+									"value": "Thu, 17 Nov 2022 08:34:31 GMT"
 								},
 								{
 									"key": "Connection",
@@ -97,7 +97,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"schools\": {\n        \"storeTrainingData\": true,\n        \"name\": \"Dummy school 1\",\n        \"schoolId\": \"od001\",\n        \"state\": \"up\"\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJvZDAwMSIsImlhdCI6MTY2ODQ4MzY5N30.480s6zzVOJktzDoIi8Fsfre3nE27rtBVDon19d8fvi8\"\n}"
+							"body": "{\n    \"schools\": {\n        \"storeTrainingData\": true,\n        \"name\": \"Dummy school 1\",\n        \"schoolId\": \"od001\",\n        \"state\": \"up\"\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJvZDAwMSIsImlhdCI6MTY2ODY3NDA3MX0.JGepYuOnWFhqKOV2ADQUSk-8hf6SpYOuXXBaDbCCiEs\"\n}"
 						}
 					]
 				},

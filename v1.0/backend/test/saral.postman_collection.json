@@ -133,7 +133,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"name\": \"Dummy school 2\",\n    \"schoolId\": \"od00122\",\n    \"password\": \"tarento@123\",\n    \"state\": \"odisha\",\n    \"storeTrainingData\": true,\n    \"autoSync\": false,\n    \"autoSyncFrequency\": \"5000\",\n    \"autoSyncBatchSize\": 12,\n    \"tags\": false,\n    \"lock\":true\n}"
+									"raw": "{\n    \"name\": \"Dummy school 2\",\n    \"schoolId\": \"od001\",\n    \"password\": \"tarento@123\",\n    \"state\": \"odisha\",\n    \"storeTrainingData\": true,\n    \"autoSync\": false,\n    \"autoSyncFrequency\": \"5000\",\n    \"autoSyncBatchSize\": 12,\n    \"tags\": false\n}"
 								},
 								"url": {
 									"raw": "{{url}}/schools/create",
@@ -164,15 +164,15 @@
 								},
 								{
 									"key": "Content-Length",
-									"value": "242"
+									"value": "237"
 								},
 								{
 									"key": "ETag",
-									"value": "W/\"f2-e65uH5yAd0Uu/pSnWXqoPuIgKns\""
+									"value": "W/\"ed-2Ltmhv5CaRhHust0fYlHtk5wWHg\""
 								},
 								{
 									"key": "Date",
-									"value": "Tue, 15 Nov 2022 03:51:08 GMT"
+									"value": "Thu, 17 Nov 2022 08:35:49 GMT"
 								},
 								{
 									"key": "Connection",
@@ -184,7 +184,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"schools\": {\n        \"storeTrainingData\": true,\n        \"name\": \"Dummy school 2\",\n        \"schoolId\": \"od00122\",\n        \"state\": \"odisha\"\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJvZDAwMTIyIiwiaWF0IjoxNjY4NDg0MjY4fQ.3AwqMh4ADIx8A4hab4q89-oaeRK0rvIHXFNYrxMAPns\"\n}"
+							"body": "{\n    \"schools\": {\n        \"storeTrainingData\": true,\n        \"name\": \"Dummy school 2\",\n        \"schoolId\": \"od001\",\n        \"state\": \"odisha\"\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJvZDAwMSIsImlhdCI6MTY2ODY3NDE0OX0.rcodP3Bh0L1CPfR3ReVXilczBKtW6-ykyiSMhXqVAu8\"\n}"
 						}
 					]
 				},

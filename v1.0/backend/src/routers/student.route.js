@@ -2,9 +2,9 @@ const express = require('express')
 const Student = require('../models/students')
 const Exam = require('../models/exams')
 const Marks = require('../models/marks')
-const Lock = require('../models/lock')
 const { auth } = require('../middleware/auth')
 const { getSectionCode } = require('../utils/commonUtils')
+const Helper = require('../middleware/helper')
 const router = new express.Router()
 
 
@@ -77,7 +77,6 @@ router.post('/fetchStudentsByQuery', auth, async (req, res) => {
 router.post('/fetchStudentsandExamsByQuery', auth, async (req, res) => {
     const match = {}
     const examMatch = {}
-    let setMatch = {}
 
     match.schoolId = req.school.schoolId
 
@@ -114,31 +113,8 @@ router.post('/fetchStudentsandExamsByQuery', auth, async (req, res) => {
     
     try {
 
-    if (req.school.lock && req.school.lock == true) {
-        const locks = await Lock.find().lean()
-
-            for (let lockData of locks) {
-                let lockType = lockData.lockType;
-            switch (lockType) {
-                case "schoolId":
-                        if (req.school["schoolId"] == lockData.lockId) {
-                            throw new Error("School is locked for scanning");
-                    }
-                    break;
-                case "state":
-                        if (req.school["state"] == lockData.lockId)
-                            throw new Error("School is locked for scanning");
-                    break;
-                case "district":
-                        if (req.school["district"] == lockData.lockId) {
-                            throw new Error("School is locked for scanning");
-                    }
-                    break;
-                default:
-            }
-        }
-    }
-
+        // await Helper.lockScreenValidator(req.school)
+        
         const students = await Student.find(match, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 }).lean()
         for (let student of students) {
             let lookup = {

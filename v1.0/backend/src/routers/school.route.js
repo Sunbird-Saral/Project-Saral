@@ -4,6 +4,8 @@ const ClassModel = require('../models/classModel')
 const Student = require('../models/students')
 const Mark = require('../models/marks')
 const { auth } = require('../middleware/auth')
+const { stringObject } = require('../utils/commonUtils')
+const Helper = require('../middleware/helper')
 const router = new express.Router()
 
 
@@ -63,10 +65,8 @@ router.get('/schools', async (req, res) => {
 router.post('/schools/login', async (req, res) => {
     try {
         const schools = await School.findByCredentials(req.body.schoolId.toLowerCase(), req.body.password)
-        if (schools.lock && schools.lock == true) {
-            throw new Error("School is locked for scanning")
-        }
         
+        await Helper.lockScreenValidator(schools)
         const token = await schools.generateAuthToken()
         let classes = []
         let school = {
@@ -109,7 +109,7 @@ router.post('/schools/login', async (req, res) => {
         if (e && e.message == 'School Id or Password is not correct.') {
             res.status(422).send({ error: e.message })
         }
-        else if(e && e.message == 'School is locked for scanning'){
+        else if(e && e.message == stringObject().lockScreen){
             res.status(500).send({ error: e.message })
         }
         else {
