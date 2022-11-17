@@ -113,7 +113,7 @@ router.post('/fetchStudentsandExamsByQuery', auth, async (req, res) => {
     
     try {
 
-        // await Helper.lockScreenValidator(req.school)
+        await Helper.lockScreenValidator(req.school)
         
         const students = await Student.find(match, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 }).lean()
         for (let student of students) {
