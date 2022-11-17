@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, Text, View, BackHandler, Image, TouchableOpacity, Linking, Alert } from 'react-native';
+import { FlatList, Text, View, BackHandler, Image, TouchableOpacity, Linking, Alert,Platform } from 'react-native';
 
 //redux
 import { connect, useDispatch } from 'react-redux';
@@ -41,6 +41,7 @@ const ScanStatusLocal = ({
     const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.scanHistory[0]
     
 
+    const OsVer = Platform.constants['Release'];
 
     const dataForShare =(`${JSON.stringify(presentStudentList,null, 2)}`)
     const dispatch = useDispatch()
@@ -188,12 +189,14 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
                     </Text>
                 </View>
             }
-            {presentStudentList.length > 0 && presentStudentList.length < 10 &&
-            
+            {presentStudentList.length > 0 && presentStudentList.length < 8 && OsVer <=10  ?
             <TouchableOpacity onPress={()=>onShare()} style={{width:40,height:40,marginRight:20,marginTop:10}}>
                     <Image style={{ height: 25, width: 25, marginHorizontal: 15, marginVertical: 20 }} source={Assets.Share} />
-                </TouchableOpacity>
-                }
+                </TouchableOpacity> :
+                 presentStudentList.length > 0 && presentStudentList.length <= 15 && OsVer > 10 && <TouchableOpacity onPress={()=>onShare()} style={{width:40,height:40,marginRight:20,marginTop:10}}>
+                 <Image style={{ height: 25, width: 25, marginHorizontal: 15, marginVertical: 20 }} source={Assets.Share} />
+             </TouchableOpacity>
+            }
             </View>
 
             <Text style={styles.scanStatus}>{Strings.scan_status}</Text>
