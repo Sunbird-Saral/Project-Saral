@@ -74,7 +74,7 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
     };
 
     const onShare = async (customOptions = options) => {
-       if(presentStudentList.length <= 20 && OsVer > 10){
+       if(presentStudentList.length <= 25 && OsVer > 10){
         try {
             await Share.open(customOptions);
         } catch (err) {
