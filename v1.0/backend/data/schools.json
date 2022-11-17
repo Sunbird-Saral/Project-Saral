@@ -10,7 +10,7 @@
     "tags": true,
     "supportEmail": "abc@gmail.com , xyz@gmail.com",
     "offlineMode": true,
-    "isAppForceUpdateEnabled": false
+    "isAppForceUpdateEnabled": true
 
   },
   {
@@ -47,7 +47,7 @@
     "tags": true,
     "autoSyncBatchSize": 10,
     "offlineMode": true,
-    "isAppForceUpdateEnabled": false
+    "isAppForceUpdateEnabled": true
   },
   {
     "name": "Dummy Skill School",
