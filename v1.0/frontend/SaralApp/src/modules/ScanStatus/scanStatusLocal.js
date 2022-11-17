@@ -71,15 +71,26 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
     const options = {
         message,
         subject,
-        // failOnCancel : false
     };
 
     const onShare = async (customOptions = options) => {
+       if(presentStudentList.length <= 20 && OsVer > 10){
         try {
             await Share.open(customOptions);
         } catch (err) {
             console.log(err);
         }
+
+       }else if(presentStudentList.length < 8 && OsVer <=10 ){
+        try {
+            await Share.open(customOptions);
+        } catch (err) {
+            console.log(err);
+        }
+       }else{
+        callCustomModal(Strings.message_text,Strings.shareDataExceed,false);
+       }
+        
     };
     
 
@@ -189,15 +200,11 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
                     </Text>
                 </View>
             }
-            {presentStudentList.length > 0  && OsVer <= 10  ?
-            <TouchableOpacity disabled={presentStudentList.length < 8 ? false:true} onPress={()=>onShare()} style={{width:40,height:40,marginRight:20,marginTop:10}}>
+
+            <TouchableOpacity  onPress={()=>onShare()} style={{width:40,height:40,marginRight:20,marginTop:10}}>
                     <Image style={{ height: 25, width: 25, marginHorizontal: 15, marginVertical: 20 }} source={Assets.Share} />
-                </TouchableOpacity> :
-                 presentStudentList.length > 0  && OsVer > 10 && <TouchableOpacity disabled={presentStudentList.length <= 20 ? false:true} 
-                 onPress={()=>onShare()} style={{ width:40,height:40,marginRight:20,marginTop:10}}>
-                 <Image style={{ height: 25, width: 25, marginHorizontal: 15, marginVertical: 20 }} source={Assets.Share} />
-             </TouchableOpacity>
-            }
+            </TouchableOpacity> 
+            
             </View>
 
             <Text style={styles.scanStatus}>{Strings.scan_status}</Text>
