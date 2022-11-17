@@ -188,7 +188,7 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
                     </Text>
                 </View>
             }
-            {presentStudentList.length > 0 &&
+            {presentStudentList.length > 0 && presentStudentList.length < 10 &&
             
             <TouchableOpacity onPress={()=>onShare()} style={{width:40,height:40,marginRight:20,marginTop:10}}>
                     <Image style={{ height: 25, width: 25, marginHorizontal: 15, marginVertical: 20 }} source={Assets.Share} />
