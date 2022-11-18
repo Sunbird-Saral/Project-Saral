@@ -47,7 +47,7 @@
     "tags": true,
     "autoSyncBatchSize": 10,
     "offlineMode": true,
-    "isAppForceUpdateEnabled": true
+    "isAppForceUpdateEnabled": false
   },
   {
     "name": "Dummy Skill School",
