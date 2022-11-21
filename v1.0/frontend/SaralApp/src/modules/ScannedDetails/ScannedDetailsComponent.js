@@ -431,8 +431,8 @@ const ScannedDetailsComponent = ({
         let regexvalidate = omrValidation()
     
         let duplication = false
-        const duplicate = checkStdRollDuplicate.some((item) => studentId == item)
-
+        const duplicate = checkStdRollDuplicate.some((item) => studentId == item);
+        const hasSkip = structureList.some((item) => studentId == item.RollNo && item.hasOwnProperty("isNotAbleToSave") && item.isNotAbleToSave);
         if (duplicate && !toggleCheckBox) {
             duplication = true
         } else {
@@ -442,7 +442,7 @@ const ScannedDetailsComponent = ({
             showErrorMessage(regexvalidate[1] ? `${regexvalidate[1]}`: defaultValidateError )
         }
         
-        else if (duplication) {
+        else if (duplication && !hasSkip) {
             callCustomModal(Strings.message_text, Strings.Student_ID_Shouldnt_be_duplicated,false);
         }
        
