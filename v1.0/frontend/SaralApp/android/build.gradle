@@ -74,21 +74,20 @@ allprojects {
     }
 }
 task doSomeOperation{
-    group "myCustomTasks"
+   onlyIf { true }
     doLast{
-        println "this is operation 1"
+         exclude $"android/saralsdk/src/main/java/org/ekstep/saral/saralsdk/hwmodel/HWBlockLettersClassifier.java/**"
+         println "this is operation 1"
     }
 }
 
-// doSomeOperation1.onlyIf {
-//     project.hasProperty('doOperation')
+
+
+
+// task deleteOtherAssets(type: Delete) {
+//     description = 'Deleting non $projectName assets'
+//     delete fileTree("src").matching {
+//         exclude "**/model_letter_digits_finetune_18_07_22_epoch_15.tflite*/**"
+//         include "**/trained_resnet_real_synthetic_v2_20.tflite*/**"
+//     }
 // }
-
-
-task deleteOtherAssets(type: Delete) {
-    description = 'Deleting non $projectName assets'
-    delete fileTree("src").matching {
-        exclude "**/model_letter_digits_finetune_18_07_22_epoch_15.tflite*/**"
-        include "**/trained_resnet_real_synthetic_v2_20.tflite*/**"
-    }
-}
