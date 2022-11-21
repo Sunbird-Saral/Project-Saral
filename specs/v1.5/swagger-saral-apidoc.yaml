@@ -93,6 +93,8 @@ paths:
             $ref: "#/definitions/LoginSchool"
         "422":
           description: "School Id or Password is not correct."
+        "500":
+          description: "Server error or State/district/school is locked for scanning"
   
   /schools/{schoolId}:
     delete:
@@ -286,7 +288,7 @@ paths:
         "404":
           description: "Please send classId"
         "500":
-          description: "unsuccessful operation"
+          description: "Server error or State/district/school is locked for scanning"
           
   /student/{studentId}:
     delete:
@@ -368,6 +370,8 @@ paths:
           description: "Data Saved Successfully"
         "400":
           description: "Custom message can be set to message about the error or failure"
+        "500":
+          description: "Server error or State/district/school is locked for scanning"
 
             
   /exam:

@@ -64,7 +64,7 @@ const generateString = (length) => {
 
 let stringObject = () => {
     return {
-      lockScreen: "School is locked for scanning" 
+      lockScreen: "State/district/school is locked for scanning" 
     };
   };
 

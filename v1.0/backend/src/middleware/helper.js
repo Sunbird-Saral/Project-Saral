@@ -9,11 +9,6 @@ const commonHelperFunctions = {
             for (let lockData of locks) {
                 let lockType = lockData.lockType;
                 switch (lockType) {
-                    case "schoolId":
-                        if (schoolData["schoolId"] == lockData.lockId) {
-                            throw new Error(stringObject().lockScreen);
-                        }
-                        break;
                     case "state":
                         if (schoolData["state"] == lockData.lockId) {
                             throw new Error(stringObject().lockScreen);
@@ -21,6 +16,11 @@ const commonHelperFunctions = {
                         break;
                     case "district":
                         if (schoolData["district"] == lockData.lockId) {
+                            throw new Error(stringObject().lockScreen);
+                        }
+                        break;
+                    case "schoolId":
+                        if (schoolData["schoolId"] == lockData.lockId) {
                             throw new Error(stringObject().lockScreen);
                         }
                         break;

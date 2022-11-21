@@ -364,7 +364,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"message\": \"school is locked for scanning.\"\n}"
+							"body": "{\n    \"message\": \"State/district/school is locked for scanning.\"\n}"
 						},
 						{
 							"name": "school Login",
@@ -955,7 +955,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"message\": \"School is locked for scanning.\"\n}"
+							"body": "{\n    \"message\": \"State/district/school is locked for scanning.\"\n}"
 						}
 					]
 				},
@@ -2053,7 +2053,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"message\": \"School is locked for scanning.\"\n}"
+							"body": "{\n    \"message\": \"State/district/school is locked for scanning.\"\n}"
 						}
 					]
 				}
