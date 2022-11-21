@@ -618,6 +618,7 @@ class MyScanComponent extends Component {
 
     callScanStatusData = async (isApiCalled, filteredDatalen, localScanData) => {
         let hasNetwork = await checkNetworkConnectivity();
+        const { loginData } = this.props;
         if (!hasNetwork) {
             let hasCacheData = await getScanDataApi();
             if (hasCacheData) {

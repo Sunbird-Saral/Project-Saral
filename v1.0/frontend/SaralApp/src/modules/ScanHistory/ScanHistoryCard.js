@@ -191,7 +191,7 @@ const ScanHistoryCard = ({
             "fromDate": filteredData.response.examDate,
             "set": filteredData.response.set,
             "page": 0,
-            "schoolId": loginCred.schoolId,
+            "schoolId": loginData.data.school.schoolId,
             "downloadRes": false
         }
         let apiObj = new scanStatusDataAction(dataPayload);

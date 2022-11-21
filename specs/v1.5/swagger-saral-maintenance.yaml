@@ -522,10 +522,22 @@ definitions:
       tags:
         type: boolean
         example: true
+      isMinimalMode:
+        type: boolean
+        description: "if isminimalmode is true then app will not show all the pages it will show minimal pages"
+        example: false
       autoSyncBatchSize:
         type: number
         description:  "Limit of student records to be stored in local storage before we push to backend."
         example: 10
+      supportEmail:
+        type: string
+        example: "xyz@gmail.com"
+      offlineMode:
+        type: boolean
+        description: "offline mode is true then it is possible app can run without internet also. "
+        example: false
+
         
   CreateSchoolResponse:
     type: object
