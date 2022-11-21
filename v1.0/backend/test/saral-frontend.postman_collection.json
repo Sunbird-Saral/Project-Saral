@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"schoolId\": \"od001\",\r\n    \"password\": \"tarento@123\",\r\n    \"classes\": true \r\n}",
+							"raw": "{\r\n    \"schoolId\": \"u001\",\r\n    \"password\": \"tarento@123\",\r\n    \"classes\": true \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -34,71 +34,6 @@
 						}
 					},
 					"response": [
-						{
-							"name": "School Login",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"schoolId\": \"od001\",\r\n    \"password\": \"tarento@123\",\r\n    \"classes\": true \r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{url}}/schools/login",
-									"host": [
-										"{{url}}"
-									],
-									"path": [
-										"schools",
-										"login"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Access-Control-Allow-Origin",
-									"value": "*"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "553"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"229-4eVJg6joJtMvCzs3I0m5Ox3hKpk\""
-								},
-								{
-									"key": "Date",
-									"value": "Mon, 10 Oct 2022 09:48:40 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"school\": {\n        \"storeTrainingData\": true,\n        \"name\": \"Dummy school 2\",\n        \"schoolId\": \"od001\",\n        \"state\": \"odisha\",\n        \"autoSync\": false,\n        \"autoSyncFrequency\": 600000,\n        \"tags\": false,\n        \"supportEmail\": \"abc@gmail.com\",\n        \"offlineMode\": true\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJvZDAwMSIsImlhdCI6MTY2NTM5NTMyMH0.Wq4H3K6DeN1C9_wzPm9Pv5K5wIulCjR-ECkQcSWReq8\",\n    \"classes\": [\n        {\n            \"sections\": [\n                {\n                    \"section\": \"D\"\n                },\n                {\n                    \"section\": \"B\"\n                },\n                {\n                    \"section\": \"C\"\n                }\n            ],\n            \"classId\": \"2\",\n            \"className\": \"Class-2\"\n        },\n        {\n            \"sections\": [\n                {\n                    \"section\": \"D\"\n                },\n                {\n                    \"section\": \"B\"\n                },\n                {\n                    \"section\": \"C\"\n                }\n            ],\n            \"classId\": \"3\",\n            \"className\": \"Class-3\"\n        }\n    ]\n}"
-						},
 						{
 							"name": "Minimal School Login",
 							"originalRequest": {
@@ -228,37 +163,29 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"error\": \"State/district/school is locked for scanning\"\n}"
-						}
-					]
-				},
-				{
-					"name": "Get school",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/schools",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"schools"
-							]
-						}
-					},
-					"response": [
+						},
 						{
-							"name": "Get school",
+							"name": "School Login",
 							"originalRequest": {
-								"method": "GET",
+								"method": "POST",
 								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"schoolId\": \"u001\",\r\n    \"password\": \"tarento@123\",\r\n    \"classes\": true \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
 								"url": {
-									"raw": "{{url}}/schools",
+									"raw": "{{url}}/schools/login",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"schools"
+										"schools",
+										"login"
 									]
 								}
 							},
@@ -271,20 +198,24 @@
 									"value": "Express"
 								},
 								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
 									"key": "Content-Type",
 									"value": "application/json; charset=utf-8"
 								},
 								{
 									"key": "Content-Length",
-									"value": "189"
+									"value": "1246"
 								},
 								{
 									"key": "ETag",
-									"value": "W/\"bd-bT/pE9d/QEuZToRpQWFIjGkz/fs\""
+									"value": "W/\"4de-MLzylhwXDq0wwtXgc8f1aYj+wPQ\""
 								},
 								{
 									"key": "Date",
-									"value": "Tue, 29 Mar 2022 04:48:35 GMT"
+									"value": "Mon, 21 Nov 2022 08:06:25 GMT"
 								},
 								{
 									"key": "Connection",
@@ -296,7 +227,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"schools\": [\n        {\n            \"name\": \"Dummy school 2\",\n            \"schoolId\": \"od00122\",\n            \"state\": \"odisha\",\n            \"storeTrainingData\": true\n        },\n        {\n            \"name\": \"Dummy school 2\",\n            \"schoolId\": \"od001\",\n            \"state\": \"odisha\",\n            \"storeTrainingData\": true\n        }\n    ]\n}"
+							"body": "{\n    \"school\": {\n        \"storeTrainingData\": true,\n        \"name\": \"Dummy school 1\",\n        \"schoolId\": \"u001\",\n        \"state\": \"up\",\n        \"district\": \"district1\",\n        \"autoSync\": false,\n        \"autoSyncFrequency\": 600000,\n        \"tags\": true,\n        \"supportEmail\": \"abc@gmail.com , xyz@gmail.com\",\n        \"offlineMode\": true\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1MDAxIiwiaWF0IjoxNjY5MDE3OTg1fQ.SULkiiu1dxmxL_-KwlPArOEw5xsA0FGxRQPich-LlIQ\",\n    \"classes\": [\n        {\n            \"sections\": [\n                {\n                    \"section\": \"A\"\n                }\n            ],\n            \"classId\": \"1\",\n            \"className\": \"Class-1\"\n        },\n        {\n            \"sections\": [\n                {\n                    \"section\": \"D\"\n                },\n                {\n                    \"section\": \"B\"\n                },\n                {\n                    \"section\": \"C\"\n                }\n            ],\n            \"classId\": \"2\",\n            \"className\": \"Class-2\"\n        },\n        {\n            \"sections\": [\n                {\n                    \"section\": \"D\"\n                },\n                {\n                    \"section\": \"B\"\n                },\n                {\n                    \"section\": \"C\"\n                }\n            ],\n            \"classId\": \"3\",\n            \"className\": \"Class-3\"\n        },\n        {\n            \"sections\": [\n                {\n                    \"section\": \"D\"\n                },\n                {\n                    \"section\": \"B\"\n                },\n                {\n                    \"section\": \"C\"\n                }\n            ],\n            \"classId\": \"4\",\n            \"className\": \"Class-4\"\n        },\n        {\n            \"sections\": [\n                {\n                    \"section\": \"D\"\n                },\n                {\n                    \"section\": \"B\"\n                },\n                {\n                    \"section\": \"C\"\n                }\n            ],\n            \"classId\": \"5\",\n            \"className\": \"Class-5\"\n        },\n        {\n            \"sections\": [\n                {\n                    \"section\": \"D\"\n                },\n                {\n                    \"section\": \"B\"\n                },\n                {\n                    \"section\": \"C\"\n                }\n            ],\n            \"classId\": \"6\",\n            \"className\": \"Class-6\"\n        },\n        {\n            \"sections\": [\n                {\n                    \"section\": \"D\"\n                },\n                {\n                    \"section\": \"B\"\n                },\n                {\n                    \"section\": \"C\"\n                }\n            ],\n            \"classId\": \"7\",\n            \"className\": \"Class-7\"\n        },\n        {\n            \"sections\": [\n                {\n                    \"section\": \"D\"\n                },\n                {\n                    \"section\": \"B\"\n                },\n                {\n                    \"section\": \"C\"\n                }\n            ],\n            \"classId\": \"8\",\n            \"className\": \"Class-8\"\n        },\n        {\n            \"sections\": [\n                {\n                    \"section\": \"A\"\n                },\n                {\n                    \"section\": \"B\"\n                },\n                {\n                    \"section\": \"C\"\n                }\n            ],\n            \"classId\": \"9\",\n            \"className\": \"Class-9\"\n        }\n    ]\n}"
 						}
 					]
 				}

@@ -132,6 +132,6 @@ export default strings = new LocalizedStrings({
         roi_cache_not_available: "Roi cache not available",
         set_text:'set',
         you_dont_have_cache_for_save_count: "You don't have cache for save count",
-        lock_screen: "School is locked for scanning" 
+        lock_screen: "State/District/School is locked for scanning" 
     }
 })

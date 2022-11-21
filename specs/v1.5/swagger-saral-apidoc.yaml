@@ -94,7 +94,7 @@ paths:
         "422":
           description: "School Id or Password is not correct."
         "500":
-          description: "Server error or State/district/school is locked for scanning"
+          description: "Server error or State/District/School is locked for scanning"
   
   /schools/{schoolId}:
     delete:
@@ -288,7 +288,7 @@ paths:
         "404":
           description: "Please send classId"
         "500":
-          description: "Server error or State/district/school is locked for scanning"
+          description: "Server error or State/District/School is locked for scanning"
           
   /student/{studentId}:
     delete:
@@ -371,7 +371,7 @@ paths:
         "400":
           description: "Custom message can be set to message about the error or failure"
         "500":
-          description: "Server error or State/district/school is locked for scanning"
+          description: "Server error or State/District/School is locked for scanning"
 
             
   /exam:
@@ -668,6 +668,9 @@ definitions:
             default: false
             example: true
             description: "If this is set to true frontend application will return base 64 encoded images . In savesMarksAPI and getSavedScanAPI these APIs will get data and value of encoded images will be stored in these fields studentIdTrainingData and trainningData, studentIdTrainingData field will contain base 64 encoded images of rollnumber and trainningData field will contain base 64 encoded images for marks. "
+          district:
+            type: string
+            example: "district 1"
   
         
   LoginSchool:
@@ -685,6 +688,9 @@ definitions:
           state:
             type: string
             example: "up"
+          district:
+            type: string
+            example: "district 1"
           autoSync:
             type: boolean
             default: false
@@ -780,6 +786,9 @@ definitions:
       state:
         type: string
         example: "up"
+      district:
+        type: string
+        example: "district 1"
       autoSync:
         type: boolean
         example: true
@@ -799,6 +808,7 @@ definitions:
         type: number
         description:  "Limit of student records to be stored in local storage before we push to backend."
         example: 10
+
         
   CreateSchoolResponse:
     type: object
@@ -815,6 +825,9 @@ definitions:
           state:
             type: string
             example: "up"
+          district:
+            type: string
+            example:" district 1"
       token:
         type: object
         example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTMwOWQyYjJlNzEyMzAyZGY5NmM3NjEiLCJpYXQiOjE2MzA1NzU5MTV9.FCt2Q4R_sN1ctdOfoOPzBzfdUohAPA-TlLFtJJEeTBE"
@@ -850,6 +863,9 @@ definitions:
         type: number
         description:  "Limit of student records to be stored in local storage before we push to backend."
         example: 10
+          district:
+            type: string
+            example:" district 1"
         
   UpdateStudentBody:
     type: object

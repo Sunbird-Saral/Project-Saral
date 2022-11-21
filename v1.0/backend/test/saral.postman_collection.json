@@ -48,20 +48,24 @@
 									"value": "Express"
 								},
 								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
 									"key": "Content-Type",
 									"value": "application/json; charset=utf-8"
 								},
 								{
 									"key": "Content-Length",
-									"value": "354"
+									"value": "1117"
 								},
 								{
 									"key": "ETag",
-									"value": "W/\"162-tH9qQwemr9JjUUmPeGHrto7X3ag\""
+									"value": "W/\"45d-h80bxVVTWBNbV2drPyWzREbcSi8\""
 								},
 								{
 									"key": "Date",
-									"value": "Tue, 04 Jan 2022 07:02:34 GMT"
+									"value": "Mon, 21 Nov 2022 08:17:45 GMT"
 								},
 								{
 									"key": "Connection",
@@ -73,7 +77,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"schools\": [\n        {\n            \"name\": \"Dummy school 1\",\n            \"schoolId\": \"u001\",\n            \"state\": \"up\",\n            \"storeTrainingData\": true\n        },\n        {\n            \"name\": \"Dummy school 2\",\n            \"schoolId\": \"od001\",\n            \"state\": \"odisha\",\n            \"storeTrainingData\": true\n        },\n        {\n            \"name\": \"Dummy school 3\",\n            \"schoolId\": \"demouser\",\n            \"state\": \"gujrat\",\n            \"storeTrainingData\": true\n        },\n        {\n            \"name\": \"Dummy school 4\",\n            \"schoolId\": \"u002\",\n            \"state\": \"up\",\n            \"storeTrainingData\": true\n        }\n    ]\n}"
+							"body": "{\n    \"schools\": [\n        {\n            \"name\": \"Dummy school 1\",\n            \"schoolId\": \"u001\",\n            \"state\": \"up\",\n            \"district\": \"district1\",\n            \"storeTrainingData\": true\n        },\n        {\n            \"name\": \"Dummy school 2\",\n            \"schoolId\": \"od001\",\n            \"state\": \"odisha\",\n            \"district\": \"district2\",\n            \"storeTrainingData\": true\n        },\n        {\n            \"name\": \"Dummy school 3\",\n            \"schoolId\": \"demouser\",\n            \"state\": \"gujrat\",\n            \"district\": \"district3\",\n            \"storeTrainingData\": true\n        },\n        {\n            \"name\": \"Dummy school 4\",\n            \"schoolId\": \"u002\",\n            \"state\": \"up\",\n            \"district\": \"district1\",\n            \"storeTrainingData\": true\n        },\n        {\n            \"name\": \"Dummy Skill School\",\n            \"schoolId\": \"skill001\",\n            \"state\": \"karnataka\",\n            \"district\": \"district4\",\n            \"storeTrainingData\": true\n        },\n        {\n            \"name\": \"Dummy school 5\",\n            \"schoolId\": \"a001\",\n            \"state\": \"assam\",\n            \"district\": \"district5\",\n            \"storeTrainingData\": true\n        },\n        {\n            \"name\": \"Dummy Organization\",\n            \"schoolId\": \"m001\",\n            \"state\": \"mp\",\n            \"district\": \"district6\",\n            \"storeTrainingData\": true\n        },\n        {\n            \"name\": \"Ps Vishnupura\",\n            \"schoolId\": \"09670702901\",\n            \"state\": \"up\",\n            \"district\": \"district1\",\n            \"storeTrainingData\": true\n        },\n        {\n            \"name\": \"Ps Phoolpur\",\n            \"schoolId\": \"09670703101\",\n            \"state\": \"up\",\n            \"district\": \"district1\",\n            \"storeTrainingData\": true\n        },\n        {\n            \"name\": \"Dummy school 5\",\n            \"schoolId\": \"jk001\",\n            \"state\": \"jharakhand\",\n            \"district\": \"district7\",\n            \"storeTrainingData\": true\n        }\n    ]\n}"
 						}
 					]
 				},
@@ -106,7 +110,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Dummy school 2\",\n    \"schoolId\": \"od001\",\n    \"password\": \"tarento@123\",\n    \"state\": \"odisha\",\n    \"storeTrainingData\": true,\n    \"autoSync\": false,\n    \"autoSyncFrequency\": \"5000\",\n    \"autoSyncBatchSize\": 12,\n    \"tags\": false,\n    \"lock\":true\n}"
+							"raw": "{\n    \"name\": \"Dummy school 2\",\n    \"schoolId\": \"od001\",\n    \"password\": \"tarento@123\",\n    \"state\": \"odisha\",\n    \"storeTrainingData\": true,\n    \"autoSync\": false,\n    \"autoSyncFrequency\": \"5000\",\n    \"autoSyncBatchSize\": 12,\n    \"tags\": false,\n    \"district\": \"districtnew\"\n}"
 						},
 						"url": {
 							"raw": "{{url}}/schools/create",
@@ -133,7 +137,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"name\": \"Dummy school 2\",\n    \"schoolId\": \"od001\",\n    \"password\": \"tarento@123\",\n    \"state\": \"odisha\",\n    \"storeTrainingData\": true,\n    \"autoSync\": false,\n    \"autoSyncFrequency\": \"5000\",\n    \"autoSyncBatchSize\": 12,\n    \"tags\": false\n}"
+									"raw": "{\n    \"name\": \"Dummy school 2\",\n    \"schoolId\": \"od001\",\n    \"password\": \"tarento@123\",\n    \"state\": \"odisha\",\n    \"storeTrainingData\": true,\n    \"autoSync\": false,\n    \"autoSyncFrequency\": \"5000\",\n    \"autoSyncBatchSize\": 12,\n    \"tags\": false,\n    \"district\": \"districtnew\"\n}"
 								},
 								"url": {
 									"raw": "{{url}}/schools/create",
@@ -164,15 +168,15 @@
 								},
 								{
 									"key": "Content-Length",
-									"value": "237"
+									"value": "262"
 								},
 								{
 									"key": "ETag",
-									"value": "W/\"ed-2Ltmhv5CaRhHust0fYlHtk5wWHg\""
+									"value": "W/\"106-7hsB2aZUOu9yIOBOj6wvEflpjuM\""
 								},
 								{
 									"key": "Date",
-									"value": "Thu, 17 Nov 2022 08:35:49 GMT"
+									"value": "Mon, 21 Nov 2022 08:16:54 GMT"
 								},
 								{
 									"key": "Connection",
@@ -184,7 +188,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"schools\": {\n        \"storeTrainingData\": true,\n        \"name\": \"Dummy school 2\",\n        \"schoolId\": \"od001\",\n        \"state\": \"odisha\"\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJvZDAwMSIsImlhdCI6MTY2ODY3NDE0OX0.rcodP3Bh0L1CPfR3ReVXilczBKtW6-ykyiSMhXqVAu8\"\n}"
+							"body": "{\n    \"schools\": {\n        \"storeTrainingData\": true,\n        \"name\": \"Dummy school 2\",\n        \"schoolId\": \"od001\",\n        \"state\": \"odisha\",\n        \"district\": \"districtnew\"\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJvZDAwMSIsImlhdCI6MTY2OTAxODYxNH0.u83oNdkwkk0kXCdDbVY1G6EdzOHL-i9P3Km0aKltJlI\"\n}"
 						}
 					]
 				},
@@ -220,7 +224,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"schoolId\": \"od001\",\n    \"password\": \"tarento@123\",\n    \"classes\": true \n}"
+							"raw": "{\n    \"schoolId\": \"m001\",\n    \"password\": \"tarento@123\",\n    \"classes\": true \n}"
 						},
 						"url": {
 							"raw": "{{url}}/schools/login",
@@ -234,72 +238,6 @@
 						}
 					},
 					"response": [
-						{
-							"name": "Minimal UP Login",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"schoolId\": \"m001\",\n    \"password\": \"tarento@123\",\n    \"classes\": true \n}"
-								},
-								"url": {
-									"raw": "{{url}}/schools/login",
-									"host": [
-										"{{url}}"
-									],
-									"path": [
-										"schools",
-										"login"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Server",
-									"value": "nginx/1.21.3"
-								},
-								{
-									"key": "Date",
-									"value": "Thu, 20 Oct 2022 05:41:26 GMT"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "344"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Access-Control-Allow-Origin",
-									"value": "*"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"158-7Uf0ouvIhMazmRyS+eb+CCKj1HM\""
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"school\": {\n        \"storeTrainingData\": true,\n        \"name\": \"Dummy Organization\",\n        \"schoolId\": \"m001\",\n        \"state\": \"mp\",\n        \"autoSync\": false,\n        \"autoSyncFrequency\": 600000,\n        \"tags\": false,\n        \"isMinimalMode\": true,\n        \"offlineMode\": true\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJtMDAxIiwiaWF0IjoxNjY2MjQ0NDg2fQ.y8XNI4K2ap2q6xck6Hn1KQa2cv-CFyV9xWEvZxTajas\",\n    \"classes\": []\n}"
-						},
 						{
 							"name": "lock school Login",
 							"originalRequest": {
@@ -367,7 +305,7 @@
 							"body": "{\n    \"message\": \"State/district/school is locked for scanning.\"\n}"
 						},
 						{
-							"name": "school Login",
+							"name": "School Login",
 							"originalRequest": {
 								"method": "POST",
 								"header": [
@@ -410,15 +348,15 @@
 								},
 								{
 									"key": "Content-Length",
-									"value": "327"
+									"value": "576"
 								},
 								{
 									"key": "ETag",
-									"value": "W/\"147-z3N8henKhAlZiVcpxlgPVL+EKWw\""
+									"value": "W/\"240-ElM6UmoJPjqgpkqYd6Wtb5/glZY\""
 								},
 								{
 									"key": "Date",
-									"value": "Tue, 15 Nov 2022 03:54:11 GMT"
+									"value": "Mon, 21 Nov 2022 08:18:02 GMT"
 								},
 								{
 									"key": "Connection",
@@ -430,7 +368,73 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"school\": {\n        \"storeTrainingData\": true,\n        \"name\": \"Dummy school 2\",\n        \"schoolId\": \"od001\",\n        \"state\": \"odisha\",\n        \"autoSync\": false,\n        \"autoSyncFrequency\": 5000,\n        \"tags\": false,\n        \"autoSyncBatchSize\": 12\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJvZDAwMSIsImlhdCI6MTY2ODQ4NDQ1MX0.cz7hHgmwZjr1Ub0K2OHVBjjrGsN5riF2yDf_y7lvXLk\",\n    \"classes\": []\n}"
+							"body": "{\n    \"school\": {\n        \"storeTrainingData\": true,\n        \"name\": \"Dummy school 2\",\n        \"schoolId\": \"od001\",\n        \"state\": \"odisha\",\n        \"district\": \"district2\",\n        \"autoSync\": false,\n        \"autoSyncFrequency\": 600000,\n        \"tags\": false,\n        \"supportEmail\": \"abc@gmail.com\",\n        \"offlineMode\": true\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJvZDAwMSIsImlhdCI6MTY2OTAxODY4Mn0.scJZSCjEvWXTiuivXCHjpB4DmcRpMiWsMhcw1xaM64g\",\n    \"classes\": [\n        {\n            \"sections\": [\n                {\n                    \"section\": \"D\"\n                },\n                {\n                    \"section\": \"B\"\n                },\n                {\n                    \"section\": \"C\"\n                }\n            ],\n            \"classId\": \"2\",\n            \"className\": \"Class-2\"\n        },\n        {\n            \"sections\": [\n                {\n                    \"section\": \"D\"\n                },\n                {\n                    \"section\": \"B\"\n                },\n                {\n                    \"section\": \"C\"\n                }\n            ],\n            \"classId\": \"3\",\n            \"className\": \"Class-3\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Minimal School Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"schoolId\": \"m001\",\n    \"password\": \"tarento@123\",\n    \"classes\": true \n}"
+								},
+								"url": {
+									"raw": "{{url}}/schools/login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"schools",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "367"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"16f-2npmay/rOu3Wu49vQAFNW9HN/H4\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 21 Nov 2022 08:19:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"school\": {\n        \"storeTrainingData\": true,\n        \"name\": \"Dummy Organization\",\n        \"schoolId\": \"m001\",\n        \"state\": \"mp\",\n        \"district\": \"district6\",\n        \"autoSync\": false,\n        \"autoSyncFrequency\": 600000,\n        \"tags\": false,\n        \"isMinimalMode\": true,\n        \"offlineMode\": true\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJtMDAxIiwiaWF0IjoxNjY5MDE4NzU1fQ.ha1mCWEwKfDS9FKdB5m5ypMxjxd6ACLv8RBUjDvmHOo\",\n    \"classes\": []\n}"
 						}
 					]
 				},

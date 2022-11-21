@@ -26,7 +26,8 @@ router.post('/schools/create', async (req, res) => {
             storeTrainingData: school.storeTrainingData,
             name: school.name,
             schoolId: school.schoolId,
-            state: school.state
+            state: school.state,
+            district: school.district
         }
         const token = await school.generateAuthToken()
         res.status(201).send({ schools, token })
@@ -51,6 +52,7 @@ router.get('/schools', async (req, res) => {
                     name: element.name,
                     schoolId: element.schoolId,
                     state: element.state,
+                    district: element.district,
                     storeTrainingData: element.storeTrainingData
                 }
                 schools.push(obj)
@@ -74,6 +76,7 @@ router.post('/schools/login', async (req, res) => {
             name: schools.name,
             schoolId: schools.schoolId,
             state: schools.state,
+            district: schools.district,
             autoSync: schools.autoSync,
             autoSyncFrequency: schools.autoSyncFrequency,
             tags: schools.tags,
@@ -141,7 +144,7 @@ router.patch('/schools/:schoolId', async (req, res) => {
     try {
         if (Object.keys(req.body).length === 0) res.status(400).send({ message: 'Validation error.' })
         const updates = Object.keys(req.body)
-        const allowedUpdates = ['name', 'state', 'udisceCode', 'storeTrainingData', 'autoSync', 'autoSyncFrequency','tags','autoSyncBatchSize']
+        const allowedUpdates = ['name', 'state', 'district','udisceCode', 'storeTrainingData', 'autoSync', 'autoSyncFrequency','tags','autoSyncBatchSize']
         const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
 
         if (!isValidOperation) {

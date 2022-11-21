@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Dummy school 1\",\r\n    \"schoolId\": \"od001\",\r\n    \"password\": \"tarento@123\",\r\n    \"state\": \"up\",\r\n    \"autoSync\": false,\r\n    \"autoSyncFrequency\": 600000,\r\n    \"storeTrainingData\": true,\r\n    \"tags\": true,\r\n    \"supportEmail\": \"abc@gmail.com , xyz@gmail.com\",\r\n    \"offlineMode\": true,\r\n    \"lock\":true\r\n  }",
+							"raw": "{\r\n    \"name\": \"Dummy school 1\",\r\n    \"schoolId\": \"od001\",\r\n    \"password\": \"tarento@123\",\r\n    \"state\": \"up\",\r\n    \"autoSync\": false,\r\n    \"autoSyncFrequency\": 600000,\r\n    \"storeTrainingData\": true,\r\n    \"tags\": true,\r\n    \"supportEmail\": \"abc@gmail.com , xyz@gmail.com\",\r\n    \"offlineMode\": true,\r\n    \"lock\":true,\r\n    \"district\": \"district2\"\r\n  }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -41,7 +41,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"Dummy school 1\",\r\n    \"schoolId\": \"od001\",\r\n    \"password\": \"tarento@123\",\r\n    \"state\": \"up\",\r\n    \"autoSync\": false,\r\n    \"autoSyncFrequency\": 600000,\r\n    \"storeTrainingData\": true,\r\n    \"tags\": true,\r\n    \"supportEmail\": \"abc@gmail.com , xyz@gmail.com\",\r\n    \"offlineMode\": true\r\n  }",
+									"raw": "{\r\n    \"name\": \"Dummy school 1\",\r\n    \"schoolId\": \"od001\",\r\n    \"password\": \"tarento@123\",\r\n    \"state\": \"up\",\r\n    \"autoSync\": false,\r\n    \"autoSyncFrequency\": 600000,\r\n    \"storeTrainingData\": true,\r\n    \"tags\": true,\r\n    \"supportEmail\": \"abc@gmail.com , xyz@gmail.com\",\r\n    \"offlineMode\": true,\r\n    \"lock\":true,\r\n    \"district\": \"district2\"\r\n  }",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -77,15 +77,15 @@
 								},
 								{
 									"key": "Content-Length",
-									"value": "233"
+									"value": "256"
 								},
 								{
 									"key": "ETag",
-									"value": "W/\"e9-JyQuOjfXNM49Gn8DJuIaRMxa/+Y\""
+									"value": "W/\"100-8dqHhni6+N5W6C2katy/W1P57N0\""
 								},
 								{
 									"key": "Date",
-									"value": "Thu, 17 Nov 2022 08:34:31 GMT"
+									"value": "Mon, 21 Nov 2022 08:13:05 GMT"
 								},
 								{
 									"key": "Connection",
@@ -97,7 +97,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"schools\": {\n        \"storeTrainingData\": true,\n        \"name\": \"Dummy school 1\",\n        \"schoolId\": \"od001\",\n        \"state\": \"up\"\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJvZDAwMSIsImlhdCI6MTY2ODY3NDA3MX0.JGepYuOnWFhqKOV2ADQUSk-8hf6SpYOuXXBaDbCCiEs\"\n}"
+							"body": "{\n    \"schools\": {\n        \"storeTrainingData\": true,\n        \"name\": \"Dummy school 1\",\n        \"schoolId\": \"od001\",\n        \"state\": \"up\",\n        \"district\": \"district2\"\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJvZDAwMSIsImlhdCI6MTY2OTAxODM4NX0.Tw7vqhwoS38lWq2B0jGMYootBmbZcwytAd7hrGWxD8M\"\n}"
 						}
 					]
 				},
@@ -108,7 +108,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Karnavati Public School\",\r\n    \"state\": \"odisha\",\r\n    \"storeTrainingData\": true,\r\n    \"autoSync\": true,\r\n    \"autoSyncFrequency\": \"90000\",\r\n    \"tags\": true,\r\n    \"autoSyncBatchSize\": 10\r\n}",
+							"raw": "{\r\n    \"name\": \"Karnavati Public School\",\r\n    \"state\": \"odisha\",\r\n    \"storeTrainingData\": true,\r\n    \"autoSync\": true,\r\n    \"autoSyncFrequency\": \"90000\",\r\n    \"tags\": true,\r\n    \"autoSyncBatchSize\": 10,\r\n    \"district\": \"districtnew\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -140,7 +140,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"Karnavati Public School\",\r\n    \"state\": \"odisha\",\r\n    \"storeTrainingData\": true,\r\n    \"autoSync\": true,\r\n    \"autoSyncFrequency\": \"90000\",\r\n    \"tags\": true,\r\n    \"autoSyncBatchSize\": 10\r\n}",
+									"raw": "{\r\n    \"name\": \"Karnavati Public School\",\r\n    \"state\": \"odisha\",\r\n    \"storeTrainingData\": true,\r\n    \"autoSync\": true,\r\n    \"autoSyncFrequency\": \"90000\",\r\n    \"tags\": true,\r\n    \"autoSyncBatchSize\": 10,\r\n    \"district\": \"districtnew\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -173,6 +173,10 @@
 									"value": "Express"
 								},
 								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
 									"key": "Content-Type",
 									"value": "application/json; charset=utf-8"
 								},
@@ -186,7 +190,7 @@
 								},
 								{
 									"key": "Date",
-									"value": "Tue, 29 Mar 2022 02:56:58 GMT"
+									"value": "Mon, 21 Nov 2022 08:14:39 GMT"
 								},
 								{
 									"key": "Connection",
