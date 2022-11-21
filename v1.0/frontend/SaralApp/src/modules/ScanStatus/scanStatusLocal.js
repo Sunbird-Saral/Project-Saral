@@ -43,7 +43,7 @@ const ScanStatusLocal = ({
 
     const OsVer = Platform.constants['Release'];
 
-    const dataForShare =(`${JSON.stringify(presentStudentList,null, 2)}`)
+    const dataForShare =(`${JSON.stringify(loacalstutlist[0],null, 2)}`)
     const dispatch = useDispatch()
 
 
@@ -166,6 +166,7 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
             :
            []
         setPresentStudentList(data)
+        setLoacalstutlist(loacalstutlist)
         
     }
 
