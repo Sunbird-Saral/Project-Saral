@@ -429,11 +429,20 @@ const ScannedDetailsComponent = ({
     const goNextFrame = () => {  
         let regexvalidate = omrValidation()
     
-        const addedStd = stdAddRollData.some((item) => studentId == item);
+        const addedStd = stdAddRollData.indexOf(studentId);
+        var duplication = false;
+
+        if (addedStd > -1 && !toggleCheckBox) {
+            duplication = true
+        } else {
+            duplication = false
+            
+        }
+
         if (!toggleCheckBox &&  regexvalidate[0]) {
             showErrorMessage(regexvalidate[1] ? `${regexvalidate[1]}`: defaultValidateError )
         }
-        else if (addedStd) {
+        else if (duplication) {
             callCustomModal(Strings.message_text, Strings.Student_ID_Shouldnt_be_duplicated,false);
         }
        
@@ -464,8 +473,10 @@ const ScannedDetailsComponent = ({
                     }
                 });
                 //save validated student
+                if (toggleCheckBox == false) {
+                    setStdAddRollData([...stdAddRollData, studentId])
+                }
                 dispatch(OcrLocalResponseAction(JSON.parse(JSON.stringify(ocrLocalResponse))))
-                setStdAddRollData([...stdAddRollData, toggleCheckBox == false ? studentId : ''  ])
                 setNewArrayValue(structureList[currentIndex + 1].data)
                 setStudentID(structureList[currentIndex + 1].RollNo)
                 setCurrentIndex(currentIndex + 1)
@@ -763,12 +774,14 @@ const ScannedDetailsComponent = ({
             let toggle = structureList[currentIndex - 1].isNotAbleToSave
             const indexStd = stdAddRollData.indexOf(std);
 
-            if (indexStd > -1) {
+            if (indexStd > -1 & !toggle) {
                 stdAddRollData.splice(indexStd, 1);
+            }
+            if (!toggle) {
+                setStdAddRollData(stdAddRollData)
             }
             setCheckStdRollDuplicate(checkStdRollDuplicate)
             setToggleCheckBox(toggle)
-            setStdAddRollData(stdAddRollData)
             setNewArrayValue(structureList[currentIndex - 1].data)
             setStudentID(structureList[currentIndex - 1].RollNo)
             setCurrentIndex(currentIndex - 1)
