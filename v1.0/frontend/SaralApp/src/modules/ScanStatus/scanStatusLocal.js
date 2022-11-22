@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, Text, View, BackHandler, Image, TouchableOpacity, Linking, Share, Alert} from 'react-native';
+import { FlatList, Text, View, BackHandler, Image, TouchableOpacity, Linking, Alert,Platform } from 'react-native';
 
 //redux
 import { connect, useDispatch } from 'react-redux';
@@ -25,6 +25,7 @@ import ShareComponent from '../common/components/Share';
 import MultibrandLabels from '../common/components/multibrandlabels';
 import { dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF } from '../../utils/CommonUtils';
 import ButtonComponent from '../common/components/ButtonComponent';
+import Share from "react-native-share";
 
 
 const ScanStatusLocal = ({
@@ -39,17 +40,12 @@ const ScanStatusLocal = ({
     const [presentStudentList, setPresentStudentList] = useState([])
     const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.scanHistory[0]
     
-    const data =(JSON.stringify(presentStudentList[0],null, 2))
+
+    const OsVer = Platform.constants['Release'];
+
+    const dataForShare =(`${JSON.stringify(loacalstutlist[0],null, 2)}`)
     const dispatch = useDispatch()
 
-
-// useEffect(
-//     React.useCallback(() => {
-//         BackHandler.addEventListener('hardwareBackPress', onBackPress);
-//         return () =>
-//         BackHandler.removeEventListener('hardwareBackPress', onBackPress);
-//     }, []),
-//     );
 
     const onBackPress = () => {
         navigation.navigate('myScan');
@@ -68,27 +64,33 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
     dispatch(dispatchCustomModalMessage(data));
 }
 
-    const onShare = async () => {
+
+    const subject = `Saral App v1.0 Marks JSON - SchoolId:${loginData.data.school.schoolId} & Exam Id:${filteredData.examTestID}`
+    const message = `${(dataForShare ? dataForShare : '')}`;
+
+    const options = {
+        message,
+        subject,
+    };
+
+    const onShare = async (customOptions = options) => {
+       if(presentStudentList.length <= 25 && OsVer > 10){
         try {
-            const result = await Share.share({
-                title: `Saral App v1.0 Marks JSON - SchoolId:${loginData.data.school.schoolId} & Exam Id:${filteredData.examTestID}`,
-                message:
-                    `${(data ? data : '')}`
-            });
-            if (result.action === Share.sharedAction) {
-                if (result.activityType) {
-                    // shared with activity type of result.activityType
-                } else {
-                    // shared
-                }
-            } else if (result.action === Share.dismissedAction) {
-                // dismissed
-            }
-        } catch (error) {
-            console.log(error.message);
-            callCustomModal(Strings.message_text,Strings.shareDataExceed,false);
-            // alert(error.message);
+            await Share.open(customOptions);
+        } catch (err) {
+            console.log(err);
         }
+
+       }else if(presentStudentList.length < 8 && OsVer <=10 ){
+        try {
+            await Share.open(customOptions);
+        } catch (err) {
+            console.log(err);
+        }
+       }else{
+        callCustomModal(Strings.message_text,Strings.shareDataExceed,false);
+       }
+        
     };
     
 
@@ -164,6 +166,7 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
             :
            []
         setPresentStudentList(data)
+        setLoacalstutlist(loacalstutlist)
         
     }
 
@@ -198,12 +201,13 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
                     </Text>
                 </View>
             }
+
             {presentStudentList.length > 0 &&
-            
-            <TouchableOpacity onPress={()=>onShare()} style={{width:40,height:40,marginRight:20,marginTop:10}}>
+            <TouchableOpacity  onPress={()=>onShare()} style={{width:40,height:40,marginRight:20,marginTop:10}}>
                     <Image style={{ height: 25, width: 25, marginHorizontal: 15, marginVertical: 20 }} source={Assets.Share} />
-                </TouchableOpacity>
-                }
+            </TouchableOpacity> 
+            }
+            
             </View>
 
             <Text style={styles.scanStatus}>{Strings.scan_status}</Text>
