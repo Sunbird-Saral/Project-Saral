@@ -12,7 +12,7 @@ import ScanHistoryCard from '../ScanHistory/ScanHistoryCard';
 import SaralSDK from '../../../SaralSDK'
 import { getScannedDataFromLocal, getErrorMessage, getLoginCred, setScannedDataIntoLocal } from '../../utils/StorageUtils';
 import ButtonComponent from '../common/components/ButtonComponent';
-import { checkNetworkConnectivity, dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF, multipleStudent, neglectData } from '../../utils/CommonUtils';
+import { checkAppVersion, checkNetworkConnectivity, dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF, multipleStudent, neglectData } from '../../utils/CommonUtils';
 import ShareComponent from '../common/components/Share';
 import MultibrandLabels from '../common/components/multibrandlabels';
 import { Assets } from '../../assets';
@@ -315,6 +315,8 @@ class MyScanComponent extends Component {
 
 
     onScanClick = async () => {
+        let hasUpdate = await checkAppVersion();
+        if (!hasUpdate) {
         SystemSetting.getBrightness().then((brightness) => {
             this.setState({ oldBrightness: brightness })
         });
@@ -383,6 +385,7 @@ class MyScanComponent extends Component {
                 });
             }
         }
+    }
     }
 
     openCameraActivity = async () => {

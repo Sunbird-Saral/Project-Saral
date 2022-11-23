@@ -1,6 +1,11 @@
 import moment from 'moment'
 import C from '../flux/actions/constants'
 import NetInfo from "@react-native-community/netinfo";
+import { getLoginData } from './StorageUtils';
+import checkVersion from 'react-native-store-version';
+import { apkURL, apkVersionId } from '../configs/config';
+import { Alert, BackHandler, Linking } from 'react-native';
+import { collectErrorLogs } from '../modules/CollectErrorLogs';
 
 
 export const validateToken = (expireTime) => {
@@ -53,6 +58,46 @@ export const checkNetworkConnectivity = async () => {
         subscribe = state.isConnected;
     });
     return subscribe
+}
+
+export const checkAppVersion = async () => {
+    let hasAppForceEnable = await getLoginData();
+    let hasUpdate = false;
+    if (hasAppForceEnable != null) {
+        if (hasAppForceEnable.school.hasOwnProperty("isAppForceUpdateEnabled") && hasAppForceEnable.school.isAppForceUpdateEnabled) {
+            try {
+                const check = await checkVersion({
+                  version: apkVersionId, // app local version
+                  iosStoreURL: 'ios app store url',
+                  androidStoreURL: apkURL,
+                  country: 'IN', // default value is 'jp'
+                });
+          
+                if (check.result == 'new') {
+                 hasUpdate = true
+                  Alert.alert(
+                    'Please Update',
+                    'You will have to update your app to the latest verstion to continue using.',
+                    [
+                      {
+                        text : 'Update',
+                        onPress: () => {
+                          BackHandler.exitApp();
+                          Linking.openURL(apkURL)
+                        },
+                      },
+                    ],
+                    {cancelable: false}
+                  );
+                }
+              } catch (error) {
+                collectErrorLogs("CommonUtils.js","checkAppVersion MEthod", apkURL, error, false)
+                hasUpdate = false
+              }
+        }
+    }
+    
+    return hasUpdate;
 }
 
 
