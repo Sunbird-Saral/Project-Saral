@@ -62,9 +62,16 @@ const generateString = (length) => {
     return result;
 }
 
+let stringObject = () => {
+    return {
+      lockScreen: "State/District/School is locked for scanning" 
+    };
+  };
+
 module.exports = {
     getSectionCode,
     getSubjectCode,
     getFilePath,
-    deleteAllfilesFromReports
+    deleteAllfilesFromReports,
+    stringObject
 }

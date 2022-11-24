@@ -10,8 +10,8 @@
     "tags": true,
     "supportEmail": "abc@gmail.com , xyz@gmail.com",
     "offlineMode": true,
-    "isAppForceUpdateEnabled": true
-
+    "isAppForceUpdateEnabled": true,
+    "district": "district1"
   },
   {
     "name": "Dummy school 2",
@@ -23,7 +23,8 @@
     "storeTrainingData": true,
     "tags": false,
     "supportEmail": "abc@gmail.com",
-    "offlineMode": true
+    "offlineMode": true,
+    "district": "district2"
   },
   {
     "name": "Dummy school 3",
@@ -34,7 +35,8 @@
     "autoSyncFrequency": 600000,
     "storeTrainingData": true,
     "tags": false,
-    "offlineMode": true
+    "offlineMode": true,
+    "district": "district3"
   },
   {
     "name": "Dummy school 4",
@@ -47,7 +49,8 @@
     "tags": true,
     "autoSyncBatchSize": 10,
     "offlineMode": true,
-    "isAppForceUpdateEnabled": false
+    "isAppForceUpdateEnabled": false,
+    "district": "district1"
   },
   {
     "name": "Dummy Skill School",
@@ -56,7 +59,8 @@
     "state": "karnataka",
     "autoSyncFrequency": 600000,
     "storeTrainingData": true,
-    "tags": false
+    "tags": false,
+    "district": "district4"
   },
   {
     "name": "Dummy school 5",
@@ -66,7 +70,8 @@
     "autoSyncFrequency": 600000,
     "storeTrainingData": true,
     "tags": false,
-    "offlineMode": true
+    "offlineMode": true,
+    "district": "district5"
   },
   {
     "name": "Dummy Organization",
@@ -78,7 +83,8 @@
     "storeTrainingData": true,
     "tags": false,
     "isMinimalMode": true,
-    "offlineMode": true
+    "offlineMode": true,
+    "district": "district6"
   },
   {
     "name": "Ps Vishnupura",
@@ -89,7 +95,8 @@
     "autoSyncFrequency": 600000,
     "storeTrainingData": true,
     "tags": false,
-    "supportEmail": "abc@gmail.com , xyz@gmail.com"
+    "supportEmail": "abc@gmail.com , xyz@gmail.com",
+    "district": "district1"
   },
   {
     "name": "Ps Phoolpur",
@@ -100,7 +107,8 @@
     "autoSyncFrequency": 600000,
     "storeTrainingData": true,
     "tags": false,
-    "supportEmail": "abc@gmail.com , xyz@gmail.com"
+    "supportEmail": "abc@gmail.com , xyz@gmail.com",
+    "district": "district1"
   },
   {
     "name": "Dummy school 5",
@@ -111,6 +119,7 @@
     "autoSyncFrequency": 600000,
     "storeTrainingData": true,
     "tags": false,
-    "supportEmail": "abc@gmail.com , xyz@gmail.com"
+    "supportEmail": "abc@gmail.com , xyz@gmail.com",
+    "district": "district7"
   }
 ]
