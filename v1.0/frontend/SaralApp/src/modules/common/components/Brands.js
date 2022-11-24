@@ -22,7 +22,7 @@ import axios from 'axios';
 
 import { getScannedDataFromLocal, setScannedDataIntoLocal } from '../../../utils/StorageUtils';
 import { collectErrorLogs } from '../../CollectErrorLogs';
-import { dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF } from '../../../utils/CommonUtils';
+import { checkNetworkConnectivity,dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF } from '../../../utils/CommonUtils';
 
 class Brands extends PureComponent {
     constructor() {
@@ -39,13 +39,6 @@ class Brands extends PureComponent {
         }
     }
 
-    checkNetworkConnectivity = async () => {
-        var subscribe = false
-        NetInfo.fetch().then(state => {
-            subscribe = state.isConnected;
-        });
-        return subscribe
-    }
 
     hitPushNotification = (title, msg) => {
 
@@ -157,16 +150,17 @@ class Brands extends PureComponent {
  
 
         const bgTimer = Object.keys(loginData).length > 0  && loginData.data.school.hasOwnProperty("autoSyncFrequency") ? loginData.data.school.autoSyncFrequency : 600000
+        
         setInterval(async() => {
             const hasAutoSync = Object.keys(loginData).length > 0  && loginData.data.school.hasOwnProperty("autoSync") && loginData.data.school.autoSync ? true : false
-            const hasNetwork = await this.checkNetworkConnectivity();
+            
+            const hasNetwork = await checkNetworkConnectivity();
+        
             if (hasAutoSync) {
                 const isLogin = loginData.status
                 if (isLogin == 200 & hasNetwork) {
                     storeFactory.dispatch( this.flagAction(true))
-                    if (this.checkNetworkConnectivity()) {
                         this.saveDataInDB()
-                    }
                 }
             }
             //timer for 10 min

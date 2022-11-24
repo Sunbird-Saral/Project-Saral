@@ -63,6 +63,10 @@ const schoolSchema = new mongoose.Schema({
     offlineMode: { 
         type: Boolean,
         required: false
+    },
+    district:{
+        type: String,
+        required: true
     }
 }, {
     timestamps: false
