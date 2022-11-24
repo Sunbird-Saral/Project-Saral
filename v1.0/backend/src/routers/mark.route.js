@@ -4,9 +4,11 @@ const Mark = require('../models/marks')
 const School = require('../models/school')
 const Exams = require('../models/exams')
 const Class = require('../models/classModel')
+const Lock = require('../models/lock')
 const { auth, basicAuth } = require('../middleware/auth')
 const excel = require('exceljs');
-const { getFilePath, deleteAllfilesFromReports } = require('../utils/commonUtils')
+const { getFilePath, deleteAllfilesFromReports, stringObject } = require('../utils/commonUtils')
+const Helper = require('../middleware/helper')
 const router = new express.Router()
 const _ = require('lodash')
 const fs = require('fs');
@@ -16,7 +18,7 @@ const toTime = "T23:59:59"
 router.put('/saveMarks', auth, async (req, res) => {
     const marks = []
     
-    if( req.header('X-App-Version')){
+    if (req.header('X-App-Version')) {
         console.log("APP VERSION", req.get('X-App-Version'))
     }
 
@@ -42,6 +44,9 @@ router.put('/saveMarks', auth, async (req, res) => {
         marks.push(marksData)
     });
     try {
+
+        await Helper.lockScreenValidator(req.school)
+        
         for (let data of marks) {
             if(!data.examDate && data.examDate == undefined){
                 data.examDate = new Date().toLocaleDateString()
@@ -88,7 +93,12 @@ router.put('/saveMarks', auth, async (req, res) => {
         res.status(200).send({ message: 'Data Saved Successfully' })
     } catch (e) {
         console.log(e);
-        res.status(400).send({ e })
+        if (e && e.message == stringObject().lockScreen) {
+            res.status(500).send({ error: e.message })
+        }
+        else {
+            res.status(400).send(e)
+        }
     }
 })
 
