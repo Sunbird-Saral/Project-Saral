@@ -97,6 +97,7 @@ public class HWBlockLettersClassifier {
                     new FirebaseModelInterpreterOptions.Builder(localSource).build();
             mInterpreter = FirebaseModelInterpreter.getInstance(options);
             listener.OnModelLoadSuccess("model loading successful");
+            Log.d(TAG, "HOSTED_MODEL_NAME" + HOSTED_MODEL_NAME);
         } catch (FirebaseMLException e) {
             listener.OnModelLoadError("model loading failed");
             e.printStackTrace();

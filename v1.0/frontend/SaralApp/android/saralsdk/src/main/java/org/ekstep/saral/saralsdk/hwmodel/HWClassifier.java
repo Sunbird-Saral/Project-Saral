@@ -97,7 +97,9 @@ public class HWClassifier {
                     new FirebaseModelInterpreterOptions.Builder(localSource).build();
             mInterpreter = FirebaseModelInterpreter.getInstance(options);
             listener.OnModelLoadSuccess("model loading successful");
+            Log.d(TAG, "LOCAL_MODEL_ASSET?????" + LOCAL_MODEL_ASSET);
         } catch (FirebaseMLException e) {
+            Log.d(TAG, "LOCAL_MODEL_ASSET_failed" + e);
             listener.OnModelLoadError("model loading failed");
             e.printStackTrace();
         }

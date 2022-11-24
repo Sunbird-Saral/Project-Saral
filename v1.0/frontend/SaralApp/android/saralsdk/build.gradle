@@ -3,6 +3,19 @@ plugins {
 }
 
 android {
+//       packagingOptions {
+//     // exclude '**/whatever.txt'
+//      sourceSets.main.assets.filter.exclude 'model_letter_digits_finetune_18_07_22_epoch_15.tflite'
+// }
+
+//  sourceSets {
+//             main {
+//                     java.exclude('**/model_letter_digits_finetune_18_07_22_epoch_15.tflite')
+//             java {
+//               srcDir 'main'
+//             }
+//           }
+//  }
     compileSdk 31
 
     defaultConfig {
@@ -43,3 +56,23 @@ dependencies {
     implementation 'com.google.firebase:firebase-ml-model-interpreter:22.0.1'
     implementation 'org.tensorflow:tensorflow-lite:1.13.1@aar'
 }
+    
+
+
+
+// task deleteOtherAssets(type: Delete) {
+//     description = 'Deleting non $projectName assets'
+//     delete fileTree("src").matching {
+//         exclude "**/model_letter_digits_finetune_18_07_22_epoch_15.tflite*/**"
+//         include "**/trained_resnet_real_synthetic_v2_20.tflite*/**"
+//     }
+// }
+
+// task myTask {
+//     doLast {
+//         println 'hello world'
+//     }
+// }
+
+// myTask.onlyIf { project.hasProperty('android/saralsdk/src/main/assets/trained_resnet_real_synthetic_v2_20.tflite') }
+

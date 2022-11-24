@@ -73,13 +73,20 @@ allprojects {
        
     }
 }
-task doSomeOperation{
-   onlyIf { true }
-    doLast{
-         exclude $"android/saralsdk/src/main/java/org/ekstep/saral/saralsdk/hwmodel/HWBlockLettersClassifier.java/**"
-         println "this is operation 1"
-    }
-}
+
+// task deleteRemainingJarAfterRename(type: Delete) {
+//         delete fileTree('android/saralsdk/src/main/assets').matching {
+//             include '**/model_letter_digits_finetune_18_07_22_epoch_15.tflite'
+//             exclude '**/trained_resnet_real_synthetic_v2_20.tflite.tflite'
+//         }
+// }
+// task doSomeOperation{
+//    onlyIf { true }
+//     doLast{
+//          exclude $"android/saralsdk/src/main/java/org/ekstep/saral/saralsdk/hwmodel/HWBlockLettersClassifier.java/**"
+//          println "this is operation 1"
+//     }
+// }
 
 
 
@@ -91,3 +98,11 @@ task doSomeOperation{
 //         include "**/trained_resnet_real_synthetic_v2_20.tflite*/**"
 //     }
 // }
+
+// task myTask {
+//     doLast {
+//         println 'hello world'
+//     }
+// }
+
+// myTask.onlyIf { !project.hasProperty('android/saralsdk/src/main/assets/trained_resnet_real_synthetic_v2_20.tflite') }
