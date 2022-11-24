@@ -72,6 +72,7 @@ const ScannedDetailsComponent = ({
 
     const [nextBtn, setNextBtn] = useState('SUBMIT')
     const [checkStdRollDuplicate, setCheckStdRollDuplicate] = useState([])
+    const [stdAddRollData, setStdAddRollData] = useState([])
     const [toggleCheckBox, setToggleCheckBox] = useState(false)
     const [logmessage, setLogmessage] = useState()
     const [multiPage, setMultiPage] = useState(0)
@@ -145,8 +146,6 @@ const ScannedDetailsComponent = ({
 
         if(studentId == 0 || studentId == '' && isMultipleStudent){
             setToggleCheckBox(true)
-        }else{
-            setToggleCheckBox(false)
         }
         if (absent.length > 0) {
             setStdErr("Student is Absent")
@@ -430,18 +429,19 @@ const ScannedDetailsComponent = ({
     const goNextFrame = () => {  
         let regexvalidate = omrValidation()
     
-        let duplication = false
-        const duplicate = checkStdRollDuplicate.some((item) => studentId == item)
+        const addedStd = stdAddRollData.indexOf(studentId);
+        var duplication = false;
 
-        if (duplicate && !toggleCheckBox) {
+        if (addedStd > -1 && !toggleCheckBox) {
             duplication = true
         } else {
             duplication = false
+            
         }
+
         if (!toggleCheckBox &&  regexvalidate[0]) {
             showErrorMessage(regexvalidate[1] ? `${regexvalidate[1]}`: defaultValidateError )
         }
-        
         else if (duplication) {
             callCustomModal(Strings.message_text, Strings.Student_ID_Shouldnt_be_duplicated,false);
         }
@@ -473,8 +473,10 @@ const ScannedDetailsComponent = ({
                     }
                 });
                 //save validated student
+                if (toggleCheckBox == false) {
+                    setStdAddRollData([...stdAddRollData, studentId])
+                }
                 dispatch(OcrLocalResponseAction(JSON.parse(JSON.stringify(ocrLocalResponse))))
-                setCheckStdRollDuplicate([...checkStdRollDuplicate, studentId])
                 setNewArrayValue(structureList[currentIndex + 1].data)
                 setStudentID(structureList[currentIndex + 1].RollNo)
                 setCurrentIndex(currentIndex + 1)
@@ -770,9 +772,13 @@ const ScannedDetailsComponent = ({
         if (currentIndex - 1 >= 0) {
             let std = structureList[currentIndex - 1].RollNo
             let toggle = structureList[currentIndex - 1].isNotAbleToSave
-            const index = checkStdRollDuplicate.indexOf(std);
-            if (index > -1) {
-                checkStdRollDuplicate.splice(index, 1);
+            const indexStd = stdAddRollData.indexOf(std);
+
+            if (indexStd > -1 & !toggle) {
+                stdAddRollData.splice(indexStd, 1);
+            }
+            if (!toggle) {
+                setStdAddRollData(stdAddRollData)
             }
             setCheckStdRollDuplicate(checkStdRollDuplicate)
             setToggleCheckBox(toggle)
