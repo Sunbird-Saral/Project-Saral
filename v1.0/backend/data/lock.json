@@ -1,14 +1,6 @@
 [
     {
-      "lockType": "state",
-      "lockId": "up"
-    },
-    {
       "lockType": "schoolId",
       "lockId": "m001"
-    },
-    {
-      "lockType": "district",
-      "lockId": "district7"
     }
   ]
