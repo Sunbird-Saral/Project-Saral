@@ -3,6 +3,7 @@ const School = require('../models/school')
 const ClassModel = require('../models/classModel')
 const Student = require('../models/students')
 const Mark = require('../models/marks')
+const User = require('../models/users')
 const { auth } = require('../middleware/auth')
 const { stringObject } = require('../utils/commonUtils')
 const Helper = require('../middleware/helper')
@@ -66,10 +67,11 @@ router.get('/schools', async (req, res) => {
 
 router.post('/schools/login', async (req, res) => {
     try {
-        const schools = await School.findByCredentials(req.body.schoolId.toLowerCase(), req.body.password)
+        const users = await User.findByCredentials(req.body.userId.toLowerCase(), req.body.password)
+        const schools = await School.findOne({schoolId:users.schoolId})
         
         await Helper.lockScreenValidator(schools)
-        const token = await schools.generateAuthToken()
+        const token = await users.generateAuthToken()
         let classes = []
         let school = {
             storeTrainingData: schools.storeTrainingData,
@@ -84,7 +86,8 @@ router.post('/schools/login', async (req, res) => {
             isMinimalMode: schools.isMinimalMode,
             supportEmail: schools.supportEmail,
             offlineMode: schools.offlineMode,
-            lock: schools.lock
+            lock: schools.lock,
+            user: users.userId
         }
 
         let response = {

@@ -1,0 +1,62 @@
+[
+    {
+        "name": "user1",
+        "userId": "98616789",
+        "schoolId": "u001",
+        "password": "tarento@123"
+    },
+    {
+        "name": "user2",
+        "userId": "99897896",
+        "schoolId": "u002",
+        "password": "tarento@123"
+    },
+    {
+        "name": "user3",
+        "userId": "70702901",
+        "schoolId": "09670702901",
+        "password": "tarento@123"
+    },
+    {
+        "name": "user4",
+        "userId": "99997896",
+        "schoolId": "09670703101",
+        "password": "tarento@123"
+    },
+    {
+        "name": "user5",
+        "userId": "97807896",
+        "schoolId": "Demo",
+        "password": "Demo@123"
+    },
+    {
+        "name": "user6",
+        "userId": "97897896",
+        "schoolId": "jk001",
+        "password": "tarento@123"
+    },
+    {
+        "name": "user7",
+        "userId": "9747896",
+        "schoolId": "a001",
+        "password": "tarento@123"
+    },
+    {
+        "name": "user8",
+        "userId": "9457896",
+        "schoolId": "od001",
+        "password": "tarento@123"
+    },
+    {
+        "name": "user9",
+        "userId": "9457856",
+        "schoolId": "m001",
+        "password": "tarento@123"
+    },
+    {
+        "name": "user10",
+        "userId": "9417856",
+        "schoolId": "skill001",
+        "password": "skill@123"
+    }
+]
