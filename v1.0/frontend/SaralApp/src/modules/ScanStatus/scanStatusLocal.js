@@ -96,7 +96,8 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
 
     const renderItem = ({ item, index }) => {
         return <ScanStatusLocalList
-            id={item.studentId}
+            loacalstutlistdata={loacalstutlist}
+            id={item}
             loacalstutlist={unsavedstudentList}
             themeColor1={multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}
         />
