@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, Text, View, BackHandler, Image, TouchableOpacity, Linking, Alert,Platform } from 'react-native';
+import { FlatList, Text, View, Image, TouchableOpacity,Platform } from 'react-native';
 
 //redux
 import { connect, useDispatch } from 'react-redux';
@@ -32,14 +32,14 @@ const ScanStatusLocal = ({
     loginData,
     filteredData,
     multiBrandingData,
-    navigation,
+    navigation
 }) => {
 
     const [unsavedstudentList, setUnsavedstudentList] = useState([])
     const [loacalstutlist, setLoacalstutlist] = useState([])
     const [presentStudentList, setPresentStudentList] = useState([])
-    const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.scanHistory[0]
-    
+    const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.scanStatusLocal[0]
+
 
     const OsVer = Platform.constants['Release'];
 
@@ -96,10 +96,11 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
 
     const renderItem = ({ item, index }) => {
         return <ScanStatusLocalList
-            loacalstutlistdata={loacalstutlist}
-            id={item}
+            scanitemdata={item} 
+            id={item.studentId}
             loacalstutlist={unsavedstudentList}
             themeColor1={multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}
+            BrandLabel={BrandLabel}
         />
 
     }
