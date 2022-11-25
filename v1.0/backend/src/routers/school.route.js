@@ -87,7 +87,7 @@ router.post('/schools/login', async (req, res) => {
             supportEmail: schools.supportEmail,
             offlineMode: schools.offlineMode,
             lock: schools.lock,
-            user: users.userId
+            userId: users.userId
         }
 
         let response = {
