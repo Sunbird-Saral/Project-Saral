@@ -58,7 +58,7 @@ const ScanDataModal = ({
     //functions
     const getPresentStudentList = (loacalstutlist) => {
         let hasSet = filteredData.hasOwnProperty("set") ?  filteredData.set.length > 0 ? filteredData.set : '' : ''
-        let data = typeof (loacalstutlist) === "object"
+        let data = typeof(loacalstutlist) === "object"
             ?
             loacalstutlist[0]
                 ?
@@ -168,20 +168,20 @@ const ScanDataModal = ({
                      :
                 (loginData && loginData.data)
                 &&
-                <View>
-                    <Text
-                        style={styles.schoolName}
-                    >
-                        {Strings.school_name + ' Name : '}
-                        <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>{loginData.data.school.name}</Text>
+                <View style={{width:'60%'}}>
+                <Text
+                    style={styles.schoolName}
+                >
+                    {Strings.school_name + '  : '}
+                    <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>{loginData.data.school.name}</Text>
+                </Text>
+                <Text style={styles.schoolName}>
+                    {Strings.schoolId_text + ' : '}
+                    <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
+                        {loginData.data.school.schoolId}
                     </Text>
-                    <Text style={[styles.schoolId, { marginLeft: 5 }]}>
-                        {Strings.schoolId_text + ' : '}
-                        <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
-                            {loginData.data.school.schoolId}
-                        </Text>
-                    </Text>
-                </View>
+                </Text>
+            </View>
             }
 
           {presentStudentList.length > 0 && savingStatus == 'scan' &&
@@ -255,5 +255,13 @@ const styles = StyleSheet.create({
         width:'90%',
         borderRadius: 10,
         marginBottom: 50
-    }
+    },
+    schoolName: {
+        fontSize: AppTheme.FONT_SIZE_REGULAR,
+        color: AppTheme.BLACK,
+        fontWeight: 'bold',
+        paddingHorizontal: '5%',
+        paddingVertical: '2%',
+        fontFamily : monospace_FF
+    },
 });
