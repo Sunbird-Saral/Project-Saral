@@ -70,5 +70,65 @@
         "userId": "98561674",
         "schoolId": "u001",
         "password": "tarento@123"
+    },
+    {
+        "name": "user13",
+        "userId": "u001",
+        "schoolId": "u001",
+        "password": "tarento@123"
+    },
+    {
+        "name": "user14",
+        "userId": "u002",
+        "schoolId": "u002",
+        "password": "tarento@123"
+    },
+    {
+        "name": "user15",
+        "userId": "09670702901",
+        "schoolId": "09670702901",
+        "password": "tarento@123"
+    },
+    {
+        "name": "user16",
+        "userId": "09670703101",
+        "schoolId": "09670703101",
+        "password": "tarento@123"
+    },
+    {
+        "name": "user17",
+        "userId": "Demo",
+        "schoolId": "Demo",
+        "password": "Demo@123"
+    },
+    {
+        "name": "user18",
+        "userId": "jk001",
+        "schoolId": "jk001",
+        "password": "tarento@123"
+    },
+    {
+        "name": "user19",
+        "userId": "a001",
+        "schoolId": "a001",
+        "password": "tarento@123"
+    },
+    {
+        "name": "user20",
+        "userId": "od001",
+        "schoolId": "od001",
+        "password": "tarento@123"
+    },
+    {
+        "name": "user21",
+        "userId": "m001",
+        "schoolId": "m001",
+        "password": "tarento@123"
+    },
+    {
+        "name": "user10",
+        "userId": "skill001",
+        "schoolId": "skill001",
+        "password": "skill@123"
     }
 ]
