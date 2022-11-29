@@ -77,7 +77,7 @@ export const checkAppVersion = async () => {
                  hasUpdate = true
                   Alert.alert(
                     'Please Update',
-                    'You will have to update your app to the latest verstion to continue using.',
+                    'You will have to update your app to the latest version to continue using.',
                     [
                       {
                         text : 'Update',
