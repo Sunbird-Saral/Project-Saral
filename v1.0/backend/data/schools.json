@@ -26,7 +26,6 @@
   {
     "name": "Dummy school 3",
     "schoolId": "demouser",
-    "password": "Demo@123",
     "state": "gujrat",
     "autoSync": false,
     "autoSyncFrequency": 600000,
@@ -50,7 +49,6 @@
   {
     "name": "Dummy Skill School",
     "schoolId": "skill001",
-    "password": "skill@123",
     "state": "karnataka",
     "autoSyncFrequency": 600000,
     "storeTrainingData": true,

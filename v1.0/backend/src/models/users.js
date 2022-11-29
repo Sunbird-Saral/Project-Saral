@@ -40,13 +40,13 @@ userSchema.statics.findByCredentials = async (userId, password) => {
     const user = await User.findOne({ userId },{__v: 0})
     
     if(!user) {
-        throw new Error('User Id or Password is not correct.')
+        throw new Error('School Id or Password is not correct.')
     }
 
     const isMatch = await bcrypt.compare(password, user.password)
     
     if(!isMatch) {
-        throw new Error('User Id or Password is not correct.')
+        throw new Error('School Id or Password is not correct.')
     }
     
     return user
