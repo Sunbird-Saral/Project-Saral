@@ -63,12 +63,12 @@ const ScanStatusLocalList = ({
                 themeColor1={themeColor1}
                 borderCutomStyle={[styles.borderStyle, { borderColor: themeColor1 ? themeColor1 : AppTheme.GREEN }]}
                 data={
-                    <View style={{ marginVertical: 0 }}>
-                        <Text style={styles.textStyle}>{`studentId : ${scanitemdata&&scanitemdata.studentId}`}</Text>
-                        <Text style={styles.textStyle}>{`predictedStudentId : ${scanitemdata&&scanitemdata.predictedStudentId}`}</Text>
-                        <Text style={styles.textStyle}>{`section : ${scanitemdata&&scanitemdata.section}`}</Text>
-                        <Text style={styles.textStyle}>{`studentAvailability : ${scanitemdata&&scanitemdata.studentAvailability}`}</Text>
-                        <Text style={styles.textStyle}>{`marksInfo`} :</Text>
+                    <View style={{  }}>
+                        <Text style={styles.textStyle}>{`studentId : `}<Text style={{fontWeight:'normal',fontFamily : monospace_FF}}>{`${scanitemdata&&scanitemdata.studentId}`}</Text></Text>
+                        <Text style={styles.textStyle}>{`predictedStudentId : ` }<Text style={{fontWeight:'normal',fontFamily : monospace_FF}}>{`${scanitemdata&&scanitemdata.predictedStudentId}`}</Text></Text>
+                        <Text style={styles.textStyle}>{`section : ` }<Text style={{fontWeight:'normal',fontFamily : monospace_FF}}>{`${scanitemdata&&scanitemdata.section}`}</Text></Text>
+                        <Text style={styles.textStyle}>{`studentAvailability ` }<Text style={{fontWeight:'normal',fontFamily : monospace_FF}}>{`${scanitemdata&&scanitemdata.studentAvailability}`}</Text></Text>
+                        <Text style={styles.textStyle}>{`marksInfo : `}</Text>
 
                         <View style={{ flexDirection: 'row', marginTop: 20 }}>
                             {
@@ -184,8 +184,11 @@ const styles = StyleSheet.create({
     },
     textStyle: {
         fontSize: 15,
-        fontWeight: '600',
-        color: "#000"
+        color: AppTheme.BLACK,
+        fontWeight: 'bold',
+        paddingHorizontal: '5%',
+        paddingVertical: '2%',
+        fontFamily : monospace_FF
     },
     borderStyle: {
         borderWidth: 5,
