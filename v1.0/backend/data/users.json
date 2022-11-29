@@ -58,5 +58,17 @@
         "userId": "9417856",
         "schoolId": "skill001",
         "password": "skill@123"
+    },
+    {
+        "name": "user11",
+        "userId": "98616749",
+        "schoolId": "u001",
+        "password": "tarento@123"
+    },
+    {
+        "name": "user12",
+        "userId": "98561674",
+        "schoolId": "u001",
+        "password": "tarento@123"
     }
 ]

@@ -67,7 +67,12 @@ router.get('/schools', async (req, res) => {
 
 router.post('/schools/login', async (req, res) => {
     try {
-        const users = await User.findByCredentials(req.body.userId.toLowerCase(), req.body.password)
+        let userId = {}
+        if(req.body.schoolId){
+            userId = req.body.schoolId.toLowerCase()
+        }
+        const users = await User.findByCredentials(userId, req.body.password)
+       
         const schools = await School.findOne({schoolId:users.schoolId})
         
         await Helper.lockScreenValidator(schools)
@@ -86,7 +91,6 @@ router.post('/schools/login', async (req, res) => {
             isMinimalMode: schools.isMinimalMode,
             supportEmail: schools.supportEmail,
             offlineMode: schools.offlineMode,
-            lock: schools.lock,
             userId: users.userId
         }
 
