@@ -106,6 +106,20 @@ export const SCAN_TYPES = {
     PAT_TYPE: 'pat'
 }
 
+export const MARKS_INFO = {
+    "sr_no":"Sr No",
+    "questionId":"question Id",
+    "obtainedMarks":"obtained Marks",
+    "predictedMarks":"predicted Marks"
+}
+
+export const MARKS_INFO_DEFAULT = [
+    "Sr No",
+    "question Id",
+    "obtained Marks",
+    "predicted Marks"
+]
+
 export const TABLE_HEADER = [
     "Sr No", "Questions", "Marks"
 ]
