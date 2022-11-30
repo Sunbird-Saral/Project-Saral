@@ -36,17 +36,18 @@ const ScanStatus = ({
 
     const [studentList, setStudentList] = useState([])
     const [presentStudentList, setPresentStudentList] = useState([])
-    const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.scanHistory[0]
-    
+    const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.scanStatus[0]
 
     //function
     const renderItem = ({ item, index }) => {
         return (
             <ScanStatusList
                 themeColor1={multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}
+                scanitemdata={item} 
                 id={item.studentId}
                 subject={item.subject}
                 studentList={studentList}
+                BrandLabel={BrandLabel}
             />
         )
     }

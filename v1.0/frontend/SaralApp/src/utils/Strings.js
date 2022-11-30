@@ -131,6 +131,7 @@ export default strings = new LocalizedStrings({
         please_try_again_later_network_is_not_available: "Please try again later network isn't available",
         roi_cache_not_available: "Roi cache not available",
         set_text:'set',
-        you_dont_have_cache_for_save_count: "You don't have cache for save count"
+        you_dont_have_cache_for_save_count: "You don't have cache for save count",
+        lock_screen: "State/District/School is locked for scanning" 
     }
 })

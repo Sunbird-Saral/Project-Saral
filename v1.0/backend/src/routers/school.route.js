@@ -4,6 +4,8 @@ const ClassModel = require('../models/classModel')
 const Student = require('../models/students')
 const Mark = require('../models/marks')
 const { auth } = require('../middleware/auth')
+const { stringObject } = require('../utils/commonUtils')
+const Helper = require('../middleware/helper')
 const router = new express.Router()
 
 
@@ -17,12 +19,15 @@ router.post('/schools/create', async (req, res) => {
         if(req.body.autoSyncFrequency)   school.autoSyncFrequency = req.body.autoSyncFrequency
         if(req.body.tags) school.tags = req.body.tags
         if(req.body.autoSyncBatchSize)   school.autoSyncBatchSize = req.body.autoSyncBatchSize
+       
+        
         await school.save()
         let schools = {
             storeTrainingData: school.storeTrainingData,
             name: school.name,
             schoolId: school.schoolId,
-            state: school.state
+            state: school.state,
+            district: school.district
         }
         const token = await school.generateAuthToken()
         res.status(201).send({ schools, token })
@@ -47,6 +52,7 @@ router.get('/schools', async (req, res) => {
                     name: element.name,
                     schoolId: element.schoolId,
                     state: element.state,
+                    district: element.district,
                     storeTrainingData: element.storeTrainingData
                 }
                 schools.push(obj)
@@ -61,6 +67,8 @@ router.get('/schools', async (req, res) => {
 router.post('/schools/login', async (req, res) => {
     try {
         const schools = await School.findByCredentials(req.body.schoolId.toLowerCase(), req.body.password)
+        
+        await Helper.lockScreenValidator(schools)
         const token = await schools.generateAuthToken()
         let classes = []
         let school = {
@@ -68,13 +76,15 @@ router.post('/schools/login', async (req, res) => {
             name: schools.name,
             schoolId: schools.schoolId,
             state: schools.state,
+            district: schools.district,
             autoSync: schools.autoSync,
             autoSyncFrequency: schools.autoSyncFrequency,
             tags: schools.tags,
             autoSyncBatchSize: schools.autoSyncBatchSize,
             isMinimalMode: schools.isMinimalMode,
             supportEmail: schools.supportEmail,
-            offlineMode: schools.offlineMode
+            offlineMode: schools.offlineMode,
+            lock: schools.lock
         }
 
         let response = {
@@ -99,9 +109,11 @@ router.post('/schools/login', async (req, res) => {
 
         res.send(response)
     } catch (e) {
-
         if (e && e.message == 'School Id or Password is not correct.') {
             res.status(422).send({ error: e.message })
+        }
+        else if(e && e.message == stringObject().lockScreen){
+            res.status(500).send({ error: e.message })
         }
         else {
             res.status(400).send(e)
@@ -132,7 +144,7 @@ router.patch('/schools/:schoolId', async (req, res) => {
     try {
         if (Object.keys(req.body).length === 0) res.status(400).send({ message: 'Validation error.' })
         const updates = Object.keys(req.body)
-        const allowedUpdates = ['name', 'state', 'udisceCode', 'storeTrainingData', 'autoSync', 'autoSyncFrequency','tags','autoSyncBatchSize']
+        const allowedUpdates = ['name', 'state', 'district','udisceCode', 'storeTrainingData', 'autoSync', 'autoSyncFrequency','tags','autoSyncBatchSize']
         const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
 
         if (!isValidOperation) {

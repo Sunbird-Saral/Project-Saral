@@ -485,6 +485,9 @@ definitions:
             default: false
             example: true
             description: "If this is set to true frontend application will return base 64 encoded images . In savesMarksAPI and getSavedScanAPI these APIs will get data and value of encoded images will be stored in these fields studentIdTrainingData and trainningData, studentIdTrainingData field will contain base 64 encoded images of rollnumber and trainningData field will contain base 64 encoded images for marks. "
+          district: 
+            type: string
+            example: "District 1"
         
     
   CreateSchoolBody:
@@ -537,6 +540,9 @@ definitions:
         type: boolean
         description: "offline mode is true then it is possible app can run without internet also. "
         example: false
+      district:
+        type: string
+        example: "district 1"
 
         
   CreateSchoolResponse:
@@ -554,6 +560,9 @@ definitions:
           state:
             type: string
             example: "up"
+          district:
+            type: string
+            example: "district 1"
       token:
         type: object
         example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTMwOWQyYjJlNzEyMzAyZGY5NmM3NjEiLCJpYXQiOjE2MzA1NzU5MTV9.FCt2Q4R_sN1ctdOfoOPzBzfdUohAPA-TlLFtJJEeTBE"
@@ -589,6 +598,9 @@ definitions:
         type: number
         description:  "Limit of student records to be stored in local storage before we push to backend."
         example: 10
+      district:
+        type: string
+        example: "district 1"
         
   UpdateStudentBody:
     type: object

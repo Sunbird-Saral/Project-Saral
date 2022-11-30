@@ -78,8 +78,11 @@ export default function dispatchAPI(api) {
                         else if (err && err.message == 'Network Error') {
                             dispatch(apiStatusAsync(false, true, Strings.you_seem_to_be_offline_please_check_your_internet_connection, null, err && err.response && err.response.status && err.response.status === 401 ? true : false))
                         }
-                        else if (api.type == 'login_process') {
+                        else if (api.type == 'login_process' && err.response.status != 500) {
                             dispatch(apiStatusAsync(false, true, err && err.response && err.response.status && err.response.status === 422 ? Strings.schoolid_password_doesnot_match : Strings.something_went_wrong_please_try_again, null, err && err.response && err.response.status && err.response.status === 401 ? true : false))
+                        }
+                        else if (err && err.response.status == 500) {
+                            dispatch(apiStatusAsync(false, true, err && err.response && err.response.data && err.response.data.error == Strings.lock_screen ? Strings.lock_screen : Strings.something_went_wrong_please_try_again))
                         }
                         else {
                             dispatch(apiStatusAsync(false, true, Strings.something_went_wrong_please_try_again, null, err && err.response && err.response.status && err.response.status === 401 ? true : false))

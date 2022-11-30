@@ -606,12 +606,17 @@ class MyScanComponent extends Component {
                     obj.callScanStatusData(false, filteredDatalen, localScanData)
                 })
                 .catch(function (err) {
+                    if (err && err.response.status == 500) {
+                        obj.callCustomModal(Strings.message_text, Strings.lock_screen, false);
+                      }else{
                     collectErrorLogs("MyScanComponent.js", "saveScanData", api.apiEndPoint(), err, false);
                     obj.callCustomModal(Strings.message_text, Strings.contactAdmin, false);
                     clearTimeout(id);
                     obj.setState({
-                        isLoading: true
+                            isLoading: false
                     })
+                      }
+               
                 });
         }
     }

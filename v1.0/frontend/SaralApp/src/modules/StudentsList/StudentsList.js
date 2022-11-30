@@ -367,12 +367,7 @@ useEffect(() => {
         if (absentPresentStatus.studentsMarkInfo.length == 0) {
             setPresentAbsentStudent(allStudentData)
             navigation.push('ScanHistory');
-        } else if(hasNetwork) {
-            let dataPayload = absentPresentStatus
-            let apiObj = new SaveScanData(dataPayload, token)
-            setIsLoading(true)
-            saveStudentData(apiObj)
-        } else if (absentPresentStatus.studentsMarkInfo.length > 0 && !hasNetwork) {
+        }else if (absentPresentStatus.studentsMarkInfo.length > 0) {
             await setDataIntoRegularStudentExamApi()
         }
     }
