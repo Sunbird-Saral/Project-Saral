@@ -400,6 +400,10 @@ definitions:
             createdOn:
               type: string
               example: "121088802"
+            userId:
+              type: string
+              description: "school user id"
+              example: "9417856"
   
   fetchStudentsandExamsByQuery:
     type: object
