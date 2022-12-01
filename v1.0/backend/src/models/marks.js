@@ -109,7 +109,12 @@ const marksSchema = new mongoose.Schema({
     set:{
         type: String,
         required: false
-    }
+    },
+    userId: {
+        type: String,
+        required: true,
+        trim: true,
+    },
 })
 
 marksSchema.statics.StudentsMark = async (studentIds) => {   
