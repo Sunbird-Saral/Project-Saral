@@ -1,12 +1,12 @@
 const jwt = require('jsonwebtoken')
-const School = require('../models/school')
+const User = require('../models/users')
 
 const auth  = async (req, res, next) => {
     try {
         const token = req.header('Authorization').replace('Bearer ', '')
         const decoded = jwt.verify(token, process.env.JWT_SECRET)
         
-        const school = await School.findOne({ schoolId: decoded.userId })
+        const school = await User.findOne({ userId: decoded.userId })
         
         if(!school) {
             throw new Error()
@@ -21,12 +21,12 @@ const auth  = async (req, res, next) => {
 }
 
 const basicAuth = async (req, res, next) => {
-    try {       
+    try {  
         let basicAuthHeader = req.header('Authorization').replace(/^Basic/, '')
         basicAuthHeader = (Buffer.from(basicAuthHeader, 'base64')).toString('utf8')
         let loginInfo = basicAuthHeader.split(':'); 
         
-        const school = await School.findByCredentials(loginInfo[0].toLowerCase(), loginInfo[1])
+        const school = await User.findByCredentials(loginInfo[0].toLowerCase(), loginInfo[1])
         req.school = school
         next()
     } catch (e) {
