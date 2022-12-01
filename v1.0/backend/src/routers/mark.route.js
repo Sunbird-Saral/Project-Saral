@@ -215,7 +215,11 @@ const fetchAllSavedData = async (req) => {
 
 router.post('/getSavedScan', basicAuth, async (req, res) => {
     try {
-        req.body.schoolId = req.school.schoolId
+        if(req.body.schoolId){
+            req.body.schoolId = req.body.schoolId.toLowerCase()
+        }else{
+            req.body.schoolId = req.school.schoolId
+        }
         
         const resposne = await fetchSavedData(req)
         if (resposne && resposne.error) {
