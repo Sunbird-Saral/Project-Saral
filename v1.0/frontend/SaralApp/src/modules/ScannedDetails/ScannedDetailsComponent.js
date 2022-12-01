@@ -143,10 +143,11 @@ const ScannedDetailsComponent = ({
 
         }
 
-
-        // if(studentId == 0 || studentId == '' && isMultipleStudent){
-        //     setToggleCheckBox(true)
-        // }
+        if(studentId == 0 || studentId == '' && isMultipleStudent){
+            setToggleCheckBox(true)
+        }else{
+            setToggleCheckBox(false)
+        }
         if (absent.length > 0) {
             setStdErr("Student is Absent")
             setStudentValid(false)
@@ -207,7 +208,7 @@ const ScannedDetailsComponent = ({
             let withNoDigits = e.format.name.replace(/[0-9]/g, '');
             let wordLen = withNoDigits.length;
             let multiple = 0
-            if (wordLen === checkRoLLNumberExist.length && withNoDigits === checkRoLLNumberExist && (e.consolidatedPrediction) != 0) {
+            if (wordLen === checkRoLLNumberExist.length && withNoDigits === checkRoLLNumberExist) {
                 multiple = multiple + 1
             }
             return multiple
