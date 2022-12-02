@@ -2,7 +2,6 @@
   {
     "name": "Dummy school 1",
     "schoolId": "u001",
-    "password": "tarento@123",
     "state": "up",
     "autoSync": false,
     "autoSyncFrequency": 600000,
@@ -14,8 +13,7 @@
   },
   {
     "name": "Dummy school 2",
-    "schoolId": "od001",
-    "password": "tarento@123",
+    "schoolId": "od001", 
     "state": "odisha",
     "autoSync": false,
     "autoSyncFrequency": 600000,
@@ -28,7 +26,6 @@
   {
     "name": "Dummy school 3",
     "schoolId": "demouser",
-    "password": "Demo@123",
     "state": "gujrat",
     "autoSync": false,
     "autoSyncFrequency": 600000,
@@ -40,7 +37,6 @@
   {
     "name": "Dummy school 4",
     "schoolId": "u002",
-    "password": "tarento@123",
     "autoSync": true,
     "autoSyncFrequency": 900000,
     "state": "up",
@@ -53,7 +49,6 @@
   {
     "name": "Dummy Skill School",
     "schoolId": "skill001",
-    "password": "skill@123",
     "state": "karnataka",
     "autoSyncFrequency": 600000,
     "storeTrainingData": true,
@@ -63,7 +58,6 @@
   {
     "name": "Dummy school 5",
     "schoolId": "a001",
-    "password": "tarento@123",
     "state": "assam",
     "autoSyncFrequency": 600000,
     "storeTrainingData": true,
@@ -74,7 +68,6 @@
   {
     "name": "Dummy Organization",
     "schoolId": "m001",
-    "password": "tarento@123",
     "state": "mp",
     "autoSync": false,
     "autoSyncFrequency": 600000,
@@ -87,7 +80,6 @@
   {
     "name": "Ps Vishnupura",
     "schoolId": "09670702901",
-    "password": "tarento@123",
     "state": "up",
     "autoSync": false,
     "autoSyncFrequency": 600000,
@@ -99,7 +91,6 @@
   {
     "name": "Ps Phoolpur",
     "schoolId": "09670703101",
-    "password": "tarento@123",
     "state": "up",
     "autoSync": false,
     "autoSyncFrequency": 600000,
@@ -111,7 +102,6 @@
   {
     "name": "Dummy school 5",
     "schoolId": "jk001",
-    "password": "tarento@123",
     "state": "jharakhand",
     "autoSync": false,
     "autoSyncFrequency": 600000,

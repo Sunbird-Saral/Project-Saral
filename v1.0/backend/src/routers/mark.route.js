@@ -27,6 +27,7 @@ router.put('/saveMarks', auth, async (req, res) => {
     const examId = req.body.examId
     const schoolId = req.school.schoolId
     const classId = req.body.classId
+    const userId = req.school.userId
     const createdOn = new Date().getTime()
     const roiId = req.body.roiId
 
@@ -39,7 +40,8 @@ router.put('/saveMarks', auth, async (req, res) => {
             classId,
             createdOn,
             roiId,
-            examId
+            examId,
+            userId
         })
         marks.push(marksData)
     });
@@ -103,11 +105,16 @@ router.put('/saveMarks', auth, async (req, res) => {
 })
 
 const fetchSavedData = async (req) => {
-    const { schoolId, classId, section, subject, fromDate, toDate, roiId } = req.body
+    const { schoolId, classId, section, subject, fromDate, toDate, roiId,userId } = req.body
     const match = {}
     if (schoolId) {
         match.schoolId = schoolId
     }
+
+    if(userId){
+        match.userId = userId
+    }
+
     if (classId) {
         match.classId = classId
     }
@@ -216,9 +223,11 @@ const fetchAllSavedData = async (req) => {
 router.post('/getSavedScan', basicAuth, async (req, res) => {
     try {
         if(req.body.schoolId){
+            req.body.userId = req.school.userId.toLowerCase()
             req.body.schoolId = req.body.schoolId.toLowerCase()
         }else{
-            req.body.schoolId = req.school.schoolId
+            req.body.userId = req.school.userId.toLowerCase()
+            req.body.schoolId = req.school.schoolId.toLowerCase()
         }
         
         const resposne = await fetchSavedData(req)
