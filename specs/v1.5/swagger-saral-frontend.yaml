@@ -227,6 +227,10 @@ definitions:
           district:
             type: string
             example: "district 1"
+          userId:
+            type: string
+            description: "school user id"
+            example: "9417856"
             
       classes:
             $ref: '#/definitions/classResponse'
@@ -264,6 +268,7 @@ definitions:
     properties:
       schoolId:
         type: string
+        description: "It can be school id or school user id"
         example: "u001"
       password:
         type: string
@@ -395,6 +400,10 @@ definitions:
             createdOn:
               type: string
               example: "121088802"
+            userId:
+              type: string
+              description: "school user id"
+              example: "9417856"
   
   fetchStudentsandExamsByQuery:
     type: object
