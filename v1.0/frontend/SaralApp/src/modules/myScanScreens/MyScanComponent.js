@@ -151,8 +151,8 @@ class MyScanComponent extends Component {
                    return checkDataExistence = e.roiId == roiData.data.roiId
                 }
             });
+            let hasSet = filteredData.set && filteredData.set.length > 0 ? filteredData.set.length : ''
 
-            let hasSet = filteredData.hasOwnProperty("set") ? filteredData.set.length > 0 ? filteredData.set : '' : ''
             if (hasSet.length > 0 && filter.length > 0) {
                 let findSetStudent = filter.length > 0 ? filter[0].studentsMarkInfo.filter((item) => {
                     if (hasSet.length > 0) {
@@ -284,7 +284,7 @@ class MyScanComponent extends Component {
         if (scaned != null) {
 
             let data = scaned.filter((value)=> {
-                let conditionSwitch = setValue.length > 0 ? value.examId == this.state.examId && value.key == this.props.loginData.data.school.schoolId && filteredData.set == value.set : value.examId == this.state.examId && value.key == this.props.loginData.data.school.schoolId
+                let conditionSwitch = setValue.length > 0 ? value.examId == this.state.examId && value.key == this.props.loginData.data.school.schoolId && this.props.filteredData.set == value.set : value.examId == this.state.examId && value.key == this.props.loginData.data.school.schoolId
                 if (conditionSwitch) {
                     return true
                 }
@@ -464,7 +464,7 @@ class MyScanComponent extends Component {
         this.props.navigation.navigate('ScannedDetailsComponent', { oldBrightness: this.state.oldBrightness })
     }
 
-  async  onDropDownSelect(idx, value) {
+  async onDropDownSelect(idx, value) {
         for (const el of this.props.studentsAndExamData.data.exams) {
             if (el.type == value) {
 
@@ -727,7 +727,7 @@ class MyScanComponent extends Component {
         })
     }
 
-  async  openScanModal(data) {
+  async openScanModal(data) {
         const { localScanedData, dbScanSavedData, scanModalDataVisible } = this.state;
         const { roiIndex, loginData, filteredData } = this.props;
 
