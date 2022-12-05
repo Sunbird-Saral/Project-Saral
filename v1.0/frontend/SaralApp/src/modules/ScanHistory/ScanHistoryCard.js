@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
 import AppTheme from '../../utils/AppTheme';
 import { getErrorMessage, getLoginCred, getPresentAbsentStudent, getScanData, getScannedDataFromLocal, setErrorMessage, setScannedDataIntoLocal } from '../../utils/StorageUtils';
-import { checkNetworkConnectivity, dispatchCustomModalMessage, dispatchCustomModalStatus, Exam_QuestionHeader, monospace_FF } from '../../utils/CommonUtils';
+import { checkAppVersion, checkNetworkConnectivity, dispatchCustomModalMessage, dispatchCustomModalStatus, Exam_QuestionHeader, monospace_FF } from '../../utils/CommonUtils';
 import ExamDetailsPopup from '../common/components/ExamDetailsPopup';
 import ButtonComponent from '../common/components/ButtonComponent';
 import Strings from '../../utils/Strings';
@@ -96,63 +96,54 @@ const ScanHistoryCard = ({
     const onPressSaveInDB = async () => {
         const data = await getScannedDataFromLocal();
         const hasNetwork = await checkNetworkConnectivity();
+        let hasUpdate = await checkAppVersion();
         const { subject, examDate } = filteredData.response
 
-        if (hasNetwork) {
-            if (data) {
-                if (!bgFlag) {
-                    
-            const filterData = data.filter((e) => {
-
-                let findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.response.section)
-        
-                if (e.classId == filteredData.response.class && e.subject == subject && e.examDate == examDate &&findSection) {
-                    return true
-                } else {
-                    return false
-                }
-            })
-
-            setIsLoading(true)
-            let filterDataLen = 0
-
-            let setIntolocalAfterFilter = ''
-            if (filterData.length != 0) {
-                filterData.filter((f) => {
-
-                    let findSection = f.studentsMarkInfo.some((item) => item.section == filteredData.response.section)
-
-                    setIntolocalAfterFilter = data.filter((e) => {
-                     
-                        if (e.classId == f.classId && e.subject == f.subject && e.examDate == f.examDate && findSection) {
-                            return false
+        if (!hasUpdate) {
+            if (hasNetwork) {
+                if (data) {
+                    if (!bgFlag) {
+                        const filterData = data.filter((e) => {
+                            let findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.response.section)
+                            if (e.classId == filteredData.response.class && e.subject == subject && e.examDate == examDate &&findSection) {
+                                return true
+                            } else {
+                                return false
+                            }
+                        })
+                        setIsLoading(true)
+                        let filterDataLen = 0
+                        let setIntolocalAfterFilter = ''
+                        if (filterData.length != 0) {
+                            filterData.filter((f) => {
+                                let findSection = f.studentsMarkInfo.some((item) => item.section == filteredData.response.section)
+                                setIntolocalAfterFilter = data.filter((e) => {
+                                    if (e.classId == f.classId && e.subject == f.subject && e.examDate == f.examDate && findSection) {
+                                        return false
+                                    } else {
+                                        return true
+                                    }
+                                })
+                            })
+                            let apiObj = new SaveScanData(filterData[0], loginData.data.token);
+                            saveScanData(apiObj, filterDataLen, setIntolocalAfterFilter);
                         } else {
-                            return true
+                            callCustomModal(Strings.message_text,Strings.there_is_no_data,false);
+                            setIsLoading(false)
                         }
-                    })
-                })
-
-                let apiObj = new SaveScanData(filterData[0], loginData.data.token);
-                saveScanData(apiObj, filterDataLen, setIntolocalAfterFilter);
-               
-
+                    }else{
+                        callCustomModal(Strings.message_text,Strings.auto_sync_in_progress_please_wait,false);
+                    }
+                }
+                else {
+                    setIsLoading(false)
+                    callCustomModal(Strings.message_text,Strings.there_is_no_data,false);
+                }
             } else {
-                callCustomModal(Strings.message_text,Strings.there_is_no_data,false);
-                setIsLoading(false)
+                callCustomModal(Strings.message_text, Strings.please_try_again_later_network_is_not_available, false, true)
             }
-        }else{
-            callCustomModal(Strings.message_text,Strings.auto_sync_in_progress_please_wait,false);
         }
-        
     }
-    else {
-        setIsLoading(false)
-        callCustomModal(Strings.message_text,Strings.there_is_no_data,false);
-        }
-    } else {
-        callCustomModal(Strings.message_text, Strings.please_try_again_later_network_is_not_available, false, true)
-    }
-}
     
     const saveScanData = async(api, filteredDatalen, localScanData) => {
 

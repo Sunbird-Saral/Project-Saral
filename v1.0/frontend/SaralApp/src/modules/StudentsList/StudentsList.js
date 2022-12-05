@@ -31,7 +31,7 @@ import axios from 'axios';
 //components
 import { scanStatusDataAction } from '../../modules/ScanStatus/scanStatusDataAction';
 import Spinner from '../common/components/loadingIndicator';
-import { checkNetworkConnectivity, cryptoText, dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF, validateToken } from '../../utils/CommonUtils';
+import { checkAppVersion, checkNetworkConnectivity, cryptoText, dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF, validateToken } from '../../utils/CommonUtils';
 import { LoginAction } from '../../flux/actions/apis/LoginAction';
 
 import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction'
@@ -429,10 +429,13 @@ useEffect(() => {
         }
     }
 
-    const navigateToNext = () => {
+    const navigateToNext = async() => {
+        let hasUpdate = await checkAppVersion();
+        if (!hasUpdate) {
         if (allStudentData.length > 0) {
             saveAbsentPresentDetails(loginData.data.token)
         }
+    }
     }
     const navigateToBack = () => {
         dispatch(dispatchroiData([]));

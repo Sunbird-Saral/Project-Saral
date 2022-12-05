@@ -91,6 +91,8 @@ router.post('/schools/login', async (req, res) => {
             isMinimalMode: schools.isMinimalMode,
             supportEmail: schools.supportEmail,
             offlineMode: schools.offlineMode,
+            isAppForceUpdateEnabled: schools.isAppForceUpdateEnabled,
+            lock: schools.lock,
             userId: users.userId
         }
 

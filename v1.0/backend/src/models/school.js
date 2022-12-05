@@ -53,6 +53,10 @@ const schoolSchema = new mongoose.Schema({
         type: Boolean,
         required: false
     },
+    isAppForceUpdateEnabled: { 
+        type: Boolean,
+        required: false
+    },
     district:{
         type: String,
         required: true

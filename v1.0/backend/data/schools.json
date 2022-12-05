@@ -9,6 +9,7 @@
     "tags": true,
     "supportEmail": "abc@gmail.com , xyz@gmail.com",
     "offlineMode": true,
+    "isAppForceUpdateEnabled": true,
     "district": "district1"
   },
   {
@@ -44,6 +45,7 @@
     "tags": true,
     "autoSyncBatchSize": 10,
     "offlineMode": true,
+    "isAppForceUpdateEnabled": false,
     "district": "district1"
   },
   {
