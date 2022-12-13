@@ -51,7 +51,7 @@ export default strings = new LocalizedStrings({
         omr_mark_should_be: 'Omr mark should be 1 or 0',
         login_text: 'Login',
         up_saralData: 'UP Saraldata',
-        schoolId_text: 'School Id',
+        schoolId_text: 'User Id',
         password_text: 'Password',
         schoolid_password_doesnot_match: 'School Id or Password does not match',
         subject:'Subject',
