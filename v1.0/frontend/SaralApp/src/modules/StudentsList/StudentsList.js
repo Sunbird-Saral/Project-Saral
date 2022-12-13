@@ -31,7 +31,7 @@ import axios from 'axios';
 //components
 import { scanStatusDataAction } from '../../modules/ScanStatus/scanStatusDataAction';
 import Spinner from '../common/components/loadingIndicator';
-import { checkNetworkConnectivity, cryptoText, dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF, validateToken } from '../../utils/CommonUtils';
+import { checkAppVersion, checkNetworkConnectivity, cryptoText, dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF, validateToken } from '../../utils/CommonUtils';
 import { LoginAction } from '../../flux/actions/apis/LoginAction';
 
 import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction'
@@ -367,12 +367,7 @@ useEffect(() => {
         if (absentPresentStatus.studentsMarkInfo.length == 0) {
             setPresentAbsentStudent(allStudentData)
             navigation.push('ScanHistory');
-        } else if(hasNetwork) {
-            let dataPayload = absentPresentStatus
-            let apiObj = new SaveScanData(dataPayload, token)
-            setIsLoading(true)
-            saveStudentData(apiObj)
-        } else if (absentPresentStatus.studentsMarkInfo.length > 0 && !hasNetwork) {
+        }else if (absentPresentStatus.studentsMarkInfo.length > 0) {
             await setDataIntoRegularStudentExamApi()
         }
     }
@@ -434,10 +429,13 @@ useEffect(() => {
         }
     }
 
-    const navigateToNext = () => {
+    const navigateToNext = async() => {
+        let hasUpdate = await checkAppVersion();
+        if (!hasUpdate) {
         if (allStudentData.length > 0) {
             saveAbsentPresentDetails(loginData.data.token)
         }
+    }
     }
     const navigateToBack = () => {
         dispatch(dispatchroiData([]));

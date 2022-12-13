@@ -12,7 +12,7 @@ import ScanHistoryCard from '../ScanHistory/ScanHistoryCard';
 import SaralSDK from '../../../SaralSDK'
 import { getScannedDataFromLocal, getErrorMessage, getLoginCred, setScannedDataIntoLocal } from '../../utils/StorageUtils';
 import ButtonComponent from '../common/components/ButtonComponent';
-import { checkNetworkConnectivity, dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF, multipleStudent, neglectData } from '../../utils/CommonUtils';
+import { checkAppVersion, checkNetworkConnectivity, dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF, multipleStudent, neglectData } from '../../utils/CommonUtils';
 import ShareComponent from '../common/components/Share';
 import MultibrandLabels from '../common/components/multibrandlabels';
 import { Assets } from '../../assets';
@@ -152,7 +152,7 @@ class MyScanComponent extends Component {
                 }
             });
 
-            let hasSet = filteredData.hasOwnProperty("set") ? filteredData.set.length > 0 ? filteredData.set : '' : ''
+            let hasSet = filteredData.set && filteredData.set.length > 0 ? filteredData.set.length : ''
             if (hasSet.length > 0 && filter.length > 0) {
                 let findSetStudent = filter.length > 0 ? filter[0].studentsMarkInfo.filter((item) => {
                     if (hasSet.length > 0) {
@@ -284,7 +284,7 @@ class MyScanComponent extends Component {
         if (scaned != null) {
 
             let data = scaned.filter((value)=> {
-                let conditionSwitch = setValue.length > 0 ? value.examId == this.state.examId && value.key == this.props.loginData.data.school.schoolId && filteredData.set == value.set : value.examId == this.state.examId && value.key == this.props.loginData.data.school.schoolId
+                let conditionSwitch = setValue.length > 0 ? value.examId == this.state.examId && value.key == this.props.loginData.data.school.schoolId && this.props.filteredData.set == value.set : value.examId == this.state.examId && value.key == this.props.loginData.data.school.schoolId
                 if (conditionSwitch) {
                     return true
                 }
@@ -315,6 +315,8 @@ class MyScanComponent extends Component {
 
 
     onScanClick = async () => {
+        let hasUpdate = await checkAppVersion();
+        if (!hasUpdate) {
         SystemSetting.getBrightness().then((brightness) => {
             this.setState({ oldBrightness: brightness })
         });
@@ -383,6 +385,7 @@ class MyScanComponent extends Component {
                 });
             }
         }
+    }
     }
 
     openCameraActivity = async () => {
@@ -464,7 +467,7 @@ class MyScanComponent extends Component {
         this.props.navigation.navigate('ScannedDetailsComponent', { oldBrightness: this.state.oldBrightness })
     }
 
-  async  onDropDownSelect(idx, value) {
+  async onDropDownSelect(idx, value) {
         for (const el of this.props.studentsAndExamData.data.exams) {
             if (el.type == value) {
 
@@ -606,12 +609,17 @@ class MyScanComponent extends Component {
                     obj.callScanStatusData(false, filteredDatalen, localScanData)
                 })
                 .catch(function (err) {
+                    if (err && err.response.status == 500) {
+                        obj.callCustomModal(Strings.message_text, Strings.lock_screen, false);
+                      }else{
                     collectErrorLogs("MyScanComponent.js", "saveScanData", api.apiEndPoint(), err, false);
                     obj.callCustomModal(Strings.message_text, Strings.contactAdmin, false);
                     clearTimeout(id);
                     obj.setState({
-                        isLoading: true
+                            isLoading: false
                     })
+                      }
+               
                 });
         }
     }
@@ -722,7 +730,7 @@ class MyScanComponent extends Component {
         })
     }
 
-  async  openScanModal(data) {
+  async openScanModal(data) {
         const { localScanedData, dbScanSavedData, scanModalDataVisible } = this.state;
         const { roiIndex, loginData, filteredData } = this.props;
 

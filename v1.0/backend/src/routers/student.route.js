@@ -4,6 +4,7 @@ const Exam = require('../models/exams')
 const Marks = require('../models/marks')
 const { auth } = require('../middleware/auth')
 const { getSectionCode } = require('../utils/commonUtils')
+const Helper = require('../middleware/helper')
 const router = new express.Router()
 
 
@@ -76,7 +77,6 @@ router.post('/fetchStudentsByQuery', auth, async (req, res) => {
 router.post('/fetchStudentsandExamsByQuery', auth, async (req, res) => {
     const match = {}
     const examMatch = {}
-    let setMatch = {}
 
     match.schoolId = req.school.schoolId
 
@@ -112,9 +112,12 @@ router.post('/fetchStudentsandExamsByQuery', auth, async (req, res) => {
     }
     
     try {
+
+        await Helper.lockScreenValidator(req.school)
+        
         const students = await Student.find(match, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 }).lean()
-        for(let student of students){
-            let lookup ={
+        for (let student of students) {
+            let lookup = {
                 studentId: student.studentId,
                 subject: examMatch.subject,
                 examDate: examMatch.examDate
@@ -137,7 +140,7 @@ router.post('/fetchStudentsandExamsByQuery', auth, async (req, res) => {
         res.send({ students, exams })
     } catch (e) {
         console.log(e);
-        res.status(500).send()
+        res.status(500).send({ error: e.message })
     }
 })
 

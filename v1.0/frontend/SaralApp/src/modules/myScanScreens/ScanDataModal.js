@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, Modal, StyleSheet, Text, View ,TouchableOpacity,Image,Share} from 'react-native';
+import { FlatList, Modal, StyleSheet, Text, View ,TouchableOpacity,Image,Platform} from 'react-native';
 import AppTheme from '../../utils/AppTheme';
 import { Assets } from '../../assets';
 import { getPresentAbsentStudent } from '../../utils/StorageUtils';
@@ -17,6 +17,7 @@ import APITransport from '../../flux/actions/transport/apitransport'
 import { dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF } from '../../utils/CommonUtils';
 import { ScrollView } from 'react-native-gesture-handler';
 import ButtonComponent from '../common/components/ButtonComponent';
+import Share from "react-native-share";
 
 const ScanDataModal = ({
     bgColor,
@@ -35,8 +36,9 @@ const ScanDataModal = ({
     const [presentStudentList, setPresentStudentList] = useState([]);
     const [unsavedstudentList, setUnsavedstudentList] = useState([]);
     const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.myScan[0]
-   
-    const data =(JSON.stringify(presentStudentList,null, 2))
+    const OsVer = Platform.constants['Release'];
+    const dataForShare =(`${JSON.stringify(localstutlist[0],null, 2)}`)
+
     const dispatch = useDispatch()
     useEffect(() => {
 
@@ -44,7 +46,7 @@ const ScanDataModal = ({
             getPresentStudentList(localstutlist)
             getStudentList()
         } else {
-            let hasSet = filteredData.hasOwnProperty("set") ?   filteredData.set.length > 0 ? filteredData.set : '' : ''
+            let hasSet = filteredData.set && filteredData.set.length > 0 ? filteredData.set.length : ''
             if (hasSet.length > 0) {
                 getPresentStudentList(localstutlist)
             } else {
@@ -55,8 +57,8 @@ const ScanDataModal = ({
 
     //functions
     const getPresentStudentList = (loacalstutlist) => {
-        let hasSet = filteredData.hasOwnProperty("set") ?  filteredData.set.length > 0 ? filteredData.set : '' : ''
-        let data = typeof (loacalstutlist) === "object"
+        let hasSet = filteredData.set && filteredData.set.length > 0 ? filteredData.set.length : ''
+        let data = typeof(loacalstutlist) === "object"
             ?
             loacalstutlist[0]
                 ?
@@ -84,33 +86,39 @@ const ScanDataModal = ({
         dispatch(dispatchCustomModalStatus(true));
         dispatch(dispatchCustomModalMessage(data));
     }
+    const subject = `Saral App v1.0 Marks JSON - SchoolId:${loginData.data.school.schoolId} & Exam Id:${filteredData.examTestID}`
+    const message = `${(dataForShare ? dataForShare : '')}`;
 
-    const onShare = async () => {
-        try {
-          const result = await Share.share({
-            title: `Saral App v1.0 Marks JSON - Organization Id : ${loginData.data.school.schoolId} `,
-            message:
-                 `${(data ? data : '')}`
-          });
-          if (result.action === Share.sharedAction) {
-            if (result.activityType) {
-              // shared with activity type of result.activityType
-            } else {
-              // shared
-            }
-          } else if (result.action === Share.dismissedAction) {
-            // dismissed
-          }
-        } catch (error) {
-            console.log(error.message);
-            callCustomModal(Strings.message_text,Strings.shareDataExceed,false);
-        //   alert(error.message);
+   
+    const options = {
+        message,
+        subject,
+    };
+      
+    const onShare = async (customOptions = options) => {
+        if(presentStudentList.length <= 25 && OsVer > 10){
+         try {
+             await Share.open(customOptions);
+         } catch (err) {
+             console.log(err);
+         }
+ 
+        }else if(presentStudentList.length < 8 && OsVer <=10 ){
+         try {
+             await Share.open(customOptions);
+         } catch (err) {
+             console.log(err);
+         }
+        }else{
+         callCustomModal(Strings.message_text,Strings.shareDataExceed,false);
         }
-      };
+         
+     };
    
 
     const renderItem = ({ item, index }) => {
         return <ScanStatusLocalList
+            scanitemdata={item} 
             id={item.studentId}
             loacalstutlist={unsavedstudentList}
             themeColor1={bgColor}
@@ -160,20 +168,20 @@ const ScanDataModal = ({
                      :
                 (loginData && loginData.data)
                 &&
-                <View>
-                    <Text
-                        style={styles.schoolName}
-                    >
-                        {Strings.school_name + ' Name : '}
-                        <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>{loginData.data.school.name}</Text>
+                <View style={{width:'60%'}}>
+                <Text
+                    style={styles.schoolName}
+                >
+                    {Strings.school_name + '  : '}
+                    <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>{loginData.data.school.name}</Text>
+                </Text>
+                <Text style={styles.schoolName}>
+                    {Strings.schoolId_text + ' : '}
+                    <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
+                        {loginData.data.school.schoolId}
                     </Text>
-                    <Text style={[styles.schoolId, { marginLeft: 5 }]}>
-                        {Strings.schoolId_text + ' : '}
-                        <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
-                            {loginData.data.school.schoolId}
-                        </Text>
-                    </Text>
-                </View>
+                </Text>
+            </View>
             }
 
           {presentStudentList.length > 0 && savingStatus == 'scan' &&
@@ -247,5 +255,13 @@ const styles = StyleSheet.create({
         width:'90%',
         borderRadius: 10,
         marginBottom: 50
-    }
+    },
+    schoolName: {
+        fontSize: AppTheme.FONT_SIZE_REGULAR,
+        color: AppTheme.BLACK,
+        fontWeight: 'bold',
+        paddingHorizontal: '5%',
+        paddingVertical: '2%',
+        fontFamily : monospace_FF
+    },
 });

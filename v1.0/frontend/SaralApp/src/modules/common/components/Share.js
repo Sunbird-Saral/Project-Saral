@@ -112,9 +112,13 @@ const ShareComponent = ({
           api.processResponse(res)
         })
         .catch(function (err) {
-          collectErrorLogs("Share.js", "saveStudentData", api.apiEndPoint(), err, false)
-          callCustomModal(Strings.message_text, Strings.something_went_wrong_please_try_again, false, false);
-          clearTimeout(id)
+          if (err && err.response.status == 500) {
+            callCustomModal(Strings.message_text, Strings.lock_screen, false);
+          }else{
+            collectErrorLogs("Share.js", "saveStudentData", api.apiEndPoint(), err, false)
+            callCustomModal(Strings.message_text, Strings.something_went_wrong_please_try_again, false, false);
+            clearTimeout(id)
+          }
         });
     }
   }

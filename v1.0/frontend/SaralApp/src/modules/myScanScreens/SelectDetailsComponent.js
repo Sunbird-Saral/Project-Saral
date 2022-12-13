@@ -481,8 +481,8 @@ dispatchStudentExamData(payload){
                         selectedDate: '',
                         pickerDate: new Date()
                     }, () => {
-                        if (apiStatus && apiStatus.message) {
-                            this.callCustomModal(Strings.message_text, Strings.please_try_again, false, false);
+                        if (apiStatus && apiStatus.message == Strings.lock_screen) {
+                            this.callCustomModal(Strings.message_text, Strings.lock_screen, false, false);
                         } else {
                             this.callCustomModal(Strings.message_text, Strings.please_try_again, false, false);
                         }
