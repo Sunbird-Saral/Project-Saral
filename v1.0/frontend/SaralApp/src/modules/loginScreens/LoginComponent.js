@@ -480,7 +480,7 @@ class LoginComponent extends Component {
                                         this.onLoginDetailsChange(text, 'schoolId')
                                     }}
                                     value={this.state.schoolId}
-                                    placeholder={Strings.schoolId_text}
+                                    placeholder={Strings.userId_text}
                                     placeholderTextColor={AppTheme.BLACK_OPACITY_30}
                                     autoCapitalize={'none'}
                                     importantForAutofill="yes"
@@ -568,7 +568,7 @@ class LoginComponent extends Component {
                                         this.onLoginDetailsChange(text, 'schoolId')
                                     }}
                                     value={this.state.schoolId}
-                                    placeholder={Strings.schoolId_text}
+                                    placeholder={Strings.userId_text}
                                     placeholderTextColor={AppTheme.BLACK_OPACITY_30}
                                     autoCapitalize={'none'}
                                 />
