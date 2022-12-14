@@ -119,14 +119,14 @@ const ScanStatusLocalList = ({
                                     <View M={M} key={i} style={{ flexDirection: 'row' }}>
 
                                         <MarksHeaderTable
-                                            customRowStyle={{width:width/4.5 }}
+                                            customRowStyle={{height:height/12,width:width/4.5 }}
                                             rowTitle={renderSRNo(M, i)}
                                             rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                             editable={false}
                                             keyboardType={'number-pad'}
                                         />
                                         <MarksHeaderTable
-                                            customRowStyle={{ width:width/4.5 }}
+                                            customRowStyle={{height:height/12, width:width/4.5 }}
                                             rowTitle={M.questionId}
                                             rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                             editable={false}
@@ -134,14 +134,14 @@ const ScanStatusLocalList = ({
                             
                                         />
                                         <MarksHeaderTable
-                                            customRowStyle={{width:width/4.5 }}
+                                            customRowStyle={{height:height/12,width:width/4.5 }}
                                             rowTitle={M.obtainedMarks}
                                             rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                             editable={false}
                                             keyboardType={'number-pad'}
                                         />
                                         <MarksHeaderTable
-                                            customRowStyle={{width:width/4.5 }}
+                                            customRowStyle={{height:height/12,width:width/4.5 }}
                                             rowTitle={M.predictedMarks}
                                             rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                             editable={false}
