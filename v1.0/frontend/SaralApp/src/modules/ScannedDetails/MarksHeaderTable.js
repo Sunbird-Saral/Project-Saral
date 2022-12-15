@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, TextInput, Image,TouchableOpacity } from 'react-native';
+import { View, TextInput, Image,TouchableOpacity,Dimensions } from 'react-native';
 import { Assets } from '../../assets';
 import AppTheme from '../../utils/AppTheme';
 import { monospace_FF } from '../../utils/CommonUtils';
-
+const { width, height } = Dimensions.get('window')
 const MarksHeaderTable = ({
     customRowStyle,
     rowTitle,
@@ -81,7 +81,7 @@ const MarksHeaderTable = ({
 
 const styles = {
     container: {
-        height: 60,
+        height:60,
         borderWidth: 1,
         borderColor: AppTheme.TAB_BORDER,
         backgroundColor: AppTheme.WHITE,
@@ -90,6 +90,7 @@ const styles = {
     },
     titleTextStyle: {
         width: '100%',
+        height:height/9,
         color: AppTheme.BLACK,
         fontWeight: 'bold',
         // letterSpacing: 1,

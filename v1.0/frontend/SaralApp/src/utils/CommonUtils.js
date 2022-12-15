@@ -115,9 +115,9 @@ export const MARKS_INFO = {
 
 export const MARKS_INFO_DEFAULT = [
     "Sr No",
-    "question Id",
-    "obtained Marks",
-    "predicted Marks"
+    "Question",
+    "Obtained Marks",
+    "Predicted Marks"
 ]
 
 export const TABLE_HEADER = [

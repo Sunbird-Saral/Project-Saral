@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Text, View, ScrollView, ToastAndroid, Alert, Image, TouchableOpacity, PermissionsAndroid } from 'react-native';
+import { Text, View, ScrollView, ToastAndroid, Alert, Image, TouchableOpacity, PermissionsAndroid,Dimensions } from 'react-native';
 import { connect, useDispatch } from 'react-redux';
 import AppTheme from '../../utils/AppTheme';
 import { CELL_OMR, extractionMethod, multipleStudent, MULTIPLE_TAG_DATAS,dispatchCustomModalMessage, dispatchCustomModalStatus,monospace_FF , neglectData, SCAN_TYPES, studentLimitSaveInLocal, student_ID, TABLE_HEADER, TABLE_HEADER_WITH_TAG,defaultHeaderTable } from '../../utils/CommonUtils';
@@ -31,7 +31,7 @@ import SaralSDK from '../../../SaralSDK'
 import CheckBox from '@react-native-community/checkbox';
 import TaggingModal from '../common/TaggingModal';
 
-
+const { width, height } = Dimensions.get('window')
 const ScannedDetailsComponent = ({
     navigation,
     filteredData,
@@ -1438,21 +1438,21 @@ const ScannedDetailsComponent = ({
                                                         <View element={element} key={index} style={{ flexDirection: 'row' }}>
 
                                                             <MarksHeaderTable
-                                                                customRowStyle={{ width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '25%' : '30%', }}
+                                                                customRowStyle={{height:height/12, width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '25%' : '30%', }}
                                                                 rowTitle={renderSRNo(element, index)}
                                                                 rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                                                 editable={false}
                                                                 keyboardType={'number-pad'}
                                                             />
                                                             <MarksHeaderTable
-                                                                customRowStyle={{ width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '25%' : '30%', }}
+                                                                customRowStyle={{height:height/12, width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '25%' : '30%', }}
                                                                 rowTitle={element.format.value}
                                                                 rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                                                 editable={false}
                                                                 keyboardType={'number-pad'}
                                                             />
                                                             <MarksHeaderTable
-                                                                customRowStyle={{ width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '50%' : '30%', }}
+                                                                customRowStyle={{height:height/12, width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '50%' : '30%', }}
                                                                 rowTitle={element.consolidatedPrediction}
                                                                 rowBorderColor={markBorderOnCell(element)}
                                                                 editable={true}
@@ -1468,7 +1468,7 @@ const ScannedDetailsComponent = ({
                                                             loginData.data.school.tags
                                                             &&
                                                             <MarksHeaderTable
-                                                                customRowStyle={{ width: '25%', }}
+                                                                customRowStyle={{height:height/12, width: '25%', }}
                                                                 rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                                                 editable={false}
                                                                 icon={true}

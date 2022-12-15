@@ -5,7 +5,8 @@
         "threshold": {
             "minWidth": 0,
             "minHeight": 0,
-            "detectionRadius": 12
+            "detectionRadius": 12,
+            "experimentalOMRDetection": true
         },
         "resultValidation": {
             "validate": {
