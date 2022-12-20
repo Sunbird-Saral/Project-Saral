@@ -174,14 +174,11 @@ const ShareComponent = ({
     setIshidden(!ishidden);
   };
   return (
-    <View style={{ width: '-10%' }}>
+    <View>
 
       <View style={styles.imageViewContainer}>
-
-        <TouchableOpacity onPress={() => showModal()}>
-          <View style={[styles.imageContainerStyle, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE }]}>
-            <Text style={{ textAlign: 'center', fontSize: AppTheme.HEADER_FONT_SIZE_LARGE, fontFamily: monospace_FF }}>{loginData.data.school.name.charAt(0)}</Text>
-          </View>
+        <TouchableOpacity onPress={() => showModal()} style={[styles.imageContainerStyle, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE }]}>
+            <Text style={{  fontSize: AppTheme.HEADER_FONT_SIZE_LARGE, fontFamily: monospace_FF }}>{loginData.data.school.name.charAt(0)}</Text>
         </TouchableOpacity>
       </View>
 
@@ -245,18 +242,18 @@ const styles = {
 
     alignItems: 'flex-end',
     backgroundColor: '#fff'
-    // justifyContent:'center'
   },
   imageContainerStyle: {
-    padding: 5,
-    marginRight: 10,
-    height: 50,
-    width: 50,
-    borderRadius: 45,
-    borderWidth: 1,
-    borderColor: AppTheme.TAB_BORDER,
-    justifyContent: 'center',
-    backgroundColor: AppTheme.TAB_BORDER
+     marginRight: 10,
+     height: 50,
+     width: 50,
+     borderRadius: 45,
+     borderWidth: 1,
+     borderColor: AppTheme.TAB_BORDER,
+     backgroundColor: AppTheme.TAB_BORDER,
+     justifyContent:'center',
+     alignItems:'center'
+     
   },
   bgContainer: {
     backgroundColor: '#ffffff1A',

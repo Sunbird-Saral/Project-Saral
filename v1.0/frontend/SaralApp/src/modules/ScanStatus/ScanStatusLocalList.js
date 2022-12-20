@@ -198,6 +198,7 @@ const styles = StyleSheet.create({
     nxtBtnStyle1: {
         padding: 5, marginVertical: 5, height: 35, width: 150
     },
+    nxtBtnStyle:{marginHorizontal:20, borderRadius: 10,height: 40, width: width/1.5,padding: 5, marginTop:10 },
     buttonText: {
         fontSize: 14
     }
