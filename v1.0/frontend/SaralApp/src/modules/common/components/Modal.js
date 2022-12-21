@@ -3,6 +3,7 @@ import { Text, View, StyleSheet, Pressable, ScrollView,Modal } from 'react-nativ
 import ButtonComponent from './ButtonComponent';
 import AppTheme from '../../../utils/AppTheme';
 import { monospace_FF } from '../../../utils/CommonUtils';
+import Strings from '../../../utils/Strings';
 
 const ModalPopup = ({
     visible,
@@ -31,6 +32,13 @@ const ModalPopup = ({
           <View style={borderCutomStyle}>
             <Text style={[styles.modalText]}>{data}</Text>
             </View>
+            <Pressable
+              style={[styles.nxtBtnStyle,{ backgroundColor: themeColor1 ? themeColor1 : AppTheme.BLUE,marginBottom: 10 }]}
+              onPress={onPress}
+              activeOpacity={0.8}    
+            >
+              <Text style={styles.btnTextStyle}>{Strings.saved_data}</Text>
+            </Pressable>
             <Pressable
               style={[styles.nxtBtnStyle,{ backgroundColor: themeColor1 ? themeColor1 : AppTheme.BLUE }]}
               onPress={onPress}
