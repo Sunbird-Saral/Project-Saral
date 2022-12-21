@@ -77,9 +77,9 @@ describe('login school', () => {
     }
 
     User.findByCredentials = jest.fn().mockImplementationOnce(() => ({ select: jest.fn().mockResolvedValueOnce(mockSignInUser) }));
-
-    await schoolController.loginSchool(req, res)
     User.generateAuthToken  = jest.fn().mockResolvedValue(token)
+    await schoolController.loginSchool(req, res)
+    
     expect(User.findByCredentials).toHaveBeenCalledTimes(1)
     expect(User.generateAuthToken ).toHaveBeenCalledTimes(1)
     // expect(School.find).toHaveBeenCalledTimes(1)
