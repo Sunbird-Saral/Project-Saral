@@ -5,7 +5,7 @@ const schoolController = require('../controller/schoolController')
 const AppError = require('../utils/appError')
 
 const loginMockData = require("./mock-data/login.json")
-const schoolMockData = require("./mock-data/school.json")
+const mockSchoolData = require("./mock-data/school.json")
 const mockGetAllSchool = require("./mock-data/getAllSchool.json")
 const mockSignInUser = require("./mock-data/signInUserData.json")
 
@@ -46,21 +46,6 @@ describe('get school', () => {
 
 const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1MDAxIiwic2Nob29sSWQiOiJ1MDAxIiwiaWF0IjoxNjcxMTY4OTY3fQ.jwx3xxTTP3dtJwJFUD4QAUsuBT8uemzyTpiKEIRhzKg"
 
-const mockSchoolData = {
-  storeTrainingData: true,
-  autoSyncFrequency: 600000,
-  _id: '6398237bf70601390c357ad8',
-  name: 'Dummy school 1',
-  schoolId: 'u001',
-  state: 'up',
-  autoSync: false,
-  tags: true,
-  supportEmail: 'abc@gmail.com , xyz@gmail.com',
-  offlineMode: true,
-  isAppForceUpdateEnabled: true,
-  district: 'district1',
-  __v: 0
-}
 
 describe('login school', () => {
   beforeEach(() => {
@@ -72,17 +57,18 @@ describe('login school', () => {
     const req = mockRequest();
     const res = mockResponse()
     req.body = {
-      "schoolId": "u001",
+      "userId": "u001",
       "password": "tarento@123"
     }
 
     User.findByCredentials = jest.fn().mockImplementationOnce(() => ({ select: jest.fn().mockResolvedValueOnce(mockSignInUser) }));
+    School.findOne  = jest.fn().mockResolvedValue(mockSchoolData)
     User.generateAuthToken  = jest.fn().mockResolvedValue(token)
     await schoolController.loginSchool(req, res)
     
     expect(User.findByCredentials).toHaveBeenCalledTimes(1)
     expect(User.generateAuthToken ).toHaveBeenCalledTimes(1)
-    // expect(School.find).toHaveBeenCalledTimes(1)
+    expect(School.findOne).toHaveBeenCalledTimes(1)
 
   });
 

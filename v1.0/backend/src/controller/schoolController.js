@@ -33,12 +33,12 @@ exports.loginSchool = async (req, res, next) => {
       userId = req.body.schoolId.toLowerCase()
     }
     const users = await User.findByCredentials(userId, req.body.password)
-    // const schools = await School.findOne({ schoolId: users.schoolId })
-    
-    // await Helper.lockScreenValidator(schools)
+    const schools = await School.findOne({ schoolId: users.schoolId })
+
+    await Helper.lockScreenValidator(schools)
+
     const token = await User.generateAuthToken()
-    console.log("token",token)
-    
+
     let classes = []
     let school = {
       storeTrainingData: schools.storeTrainingData,
@@ -63,7 +63,6 @@ exports.loginSchool = async (req, res, next) => {
       token
     }
     if (req.body.classes) {
-      console.log("inside")
       const classData = await ClassModel.findClassesBySchools(schools.schoolId)
 
       classData.forEach(data => {
@@ -87,13 +86,13 @@ exports.loginSchool = async (req, res, next) => {
     if (e && e.message == 'School Id or Password is not correct.') {
       res.status(422).json({
         status: 'fail',
-        error: e.message 
+        error: e.message
       })
     }
     else if (e && e.message == stringObject().lockScreen) {
       res.status(500).json({
         status: 'fail',
-        error: e.message 
+        error: e.message
       })
     }
     else {

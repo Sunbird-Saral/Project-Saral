@@ -1,6 +1,7 @@
 {
     "storeTrainingData": true,
     "autoSyncFrequency": 600000,
+    "_id": "6398237bf70601390c357ad8",
     "name": "Dummy school 1",
     "schoolId": "u001",
     "state": "up",
@@ -9,5 +10,6 @@
     "supportEmail": "abc@gmail.com , xyz@gmail.com",
     "offlineMode": true,
     "isAppForceUpdateEnabled": true,
-    "district": "district1"
+    "district": "district1",
+    "__v": 0
   }
