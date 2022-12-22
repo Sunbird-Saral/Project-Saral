@@ -3,6 +3,7 @@ const School = require("../models/school")
 const auth = require("../utils/commonUtils")
 const schoolController = require('../controller/schoolController')
 const AppError = require('../utils/appError')
+const Helper = require('../middleware/helper')
 
 const loginMockData = require("./mock-data/login.json")
 const mockSchoolData = require("./mock-data/school.json")
@@ -63,13 +64,15 @@ describe('login school', () => {
 
     User.findByCredentials = jest.fn().mockImplementationOnce(() => ({ select: jest.fn().mockResolvedValueOnce(mockSignInUser) }));
     School.findOne  = jest.fn().mockResolvedValue(mockSchoolData)
+    Helper.lockScreenValidator  = jest.fn().mockResolvedValue(undefined)
+    
     User.generateAuthToken  = jest.fn().mockResolvedValue(token)
     await schoolController.loginSchool(req, res)
     
     expect(User.findByCredentials).toHaveBeenCalledTimes(1)
-    expect(User.generateAuthToken ).toHaveBeenCalledTimes(1)
     expect(School.findOne).toHaveBeenCalledTimes(1)
-
+    expect(Helper.lockScreenValidator ).toHaveBeenCalledTimes(1)
+    expect(User.generateAuthToken).toHaveBeenCalledTimes(1)
   });
 
   it("should not login when password is not correct ", async () => {
