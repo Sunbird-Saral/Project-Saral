@@ -219,6 +219,12 @@ dependencies {
 
     implementation project(':react-native-push-notification')
 
+    // implementation platform('com.google.firebase:firebase-bom:26.8.0')
+    // implementation 'com.google.firebase:firebase-analytics'
+    // implementation 'com.google.firebase:firebase-ml-modeldownloader'
+    // implementation 'org.tensorflow:tensorflow-lite:1.13.1@aar'
+
+
     // SaralSDK use OpenCV and SaralSDK code, make them as dependencies here
     implementation project(path: ':saralsdk')
 
