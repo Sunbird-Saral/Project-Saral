@@ -8,25 +8,33 @@ const { stringObject } = require('../utils/commonUtils');
 const { auth } = require('../middleware/auth');
 
 exports.GetSchoolsDetail = async (req, res, next) => {
-  let schools = []
-  const school = await School.find({})
-
-  if (school) {
-    for (i = 0; i <= school.length - 1; i++) {
-      let obj = {
-        name: school[i].name,
-        schoolId: school[i].schoolId,
-        state: school[i].state,
-        district: school[i].district,
-        storeTrainingData: school[i].storeTrainingData
+  try{
+    let schools = []
+    const school = await School.find({})
+  
+    if (school) {
+      for (i = 0; i <= school.length - 1; i++) {
+        let obj = {
+          name: school[i].name,
+          schoolId: school[i].schoolId,
+          state: school[i].state,
+          district: school[i].district,
+          storeTrainingData: school[i].storeTrainingData
+        }
+        schools.push(obj)
       }
-      schools.push(obj)
     }
+    res.status(200).json({
+      status: 'success',
+      schools
+    });
+  }catch(e){
+    res.status(400).json({
+      status: 'fail',
+      e
+    });
   }
-  res.status(200).json({
-    status: 'success',
-    schools
-  });
+
 };
 
 exports.loginSchool = async (req, res, next) => {
@@ -153,24 +161,25 @@ exports.createSchool = async (req, res, next) => {
 
 exports.deleteSchool = async (req, res, next) => {
   try {
+
     const school = await School.findOne({ schoolId: req.params.schoolId.toLowerCase() })
 
     if (!school) return res.status(404).send({ message: 'School Id does not exist.' })
 
     let lookup = {
-      schoolId: school.schoolId
+      schoolId: req.params.schoolId
     }
 
-
-    await School.deleteOne(lookup).lean()
-    await ClassModel.findOneAndRemove(lookup).lean()
-    await Student.findOneAndRemove(lookup).lean()
-    await Mark.findOneAndRemove(lookup).lean()
+    await School.deleteOne(lookup)
+    await ClassModel.findOneAndRemove(lookup)
+    await Student.findOneAndRemove(lookup)
+    await Mark.findOneAndRemove(lookup)
     res.status(200).json({
       status: 'success',
       message: 'School has been deleted.'
     });
   } catch (e) {
+    console.log(e)
     res.status(400).json({
       status: 'fail',
       e
@@ -191,15 +200,18 @@ exports.updateSchool = async (req, res, next) => {
     let lookup = {
       schoolId: req.params.schoolId.toLowerCase()
     }
+
     let update = req.body
 
-    const school = await School.findOne(lookup).lean();
+    const school = await School.findOne(lookup);
     if (!school) return res.status(404).send({ message: 'School Id does not exist.' })
 
-    await School.updateOne(lookup, update).lean().exec();
-    res.status(200).send({ message: 'School has been updated.' })
-
+    await School.updateOne(lookup, update);
+   
+    res.status(200).json({ message: 'School has been updated.' })
+    
   } catch (e) {
+    console.log(e)
     res.status(400).json({
       status: 'fail',
       e
