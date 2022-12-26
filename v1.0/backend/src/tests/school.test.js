@@ -8,11 +8,11 @@ const schoolController = require('../controller/schoolController')
 const AppError = require('../utils/appError')
 const Helper = require('../middleware/helper')
 
-const mockClassData = require("./mock-data/mockClassData.json")
+
 const mockSchoolData = require("./mock-data/school.json")
 const mockGetAllSchool = require("./mock-data/getAllSchool.json")
 const mockSignInUser = require("./mock-data/signInUserData.json");
-const mockStudentData = require("../tests/mock-data/mockStudentData.json")
+const createSchoolData = require("./mock-data/createSchoolData.json")
 
 
 
@@ -31,6 +31,7 @@ const mockResponse = () => {
   return res
 }
 
+
 describe('get school', () => {
   beforeEach(() => {
     jest.useFakeTimers()
@@ -45,8 +46,10 @@ describe('get school', () => {
     School.find = jest.fn().mockResolvedValue(mockGetAllSchool)
 
     await schoolController.GetSchoolsDetail(req, res)
+   
     expect(School.find).toHaveBeenCalledTimes(1)
     expect(res.status).toHaveBeenCalledWith(200);
+    expect(res.json({ status: 'success' }).status(200));
   });
 });
 
