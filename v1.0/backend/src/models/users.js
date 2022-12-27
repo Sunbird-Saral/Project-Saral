@@ -52,11 +52,11 @@ userSchema.statics.findByCredentials = async (userId, password) => {
     return user
 }
 
-userSchema.methods.generateAuthToken = async function () {
-    const user = this
+userSchema.statics.generateAuthToken = async function (user) {
+    // const user = this
     const token = jwt.sign({ userId: user.userId.toString() ,schoolId: user.schoolId}, process.env.JWT_SECRET)
-    
-    await user.save()
+
+    // await user.save()
     return token
     
 }
