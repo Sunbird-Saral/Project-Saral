@@ -12,7 +12,7 @@ const Helper = require('../middleware/helper')
 const mockSchoolData = require("./mock-data/school.json")
 const mockGetAllSchool = require("./mock-data/getAllSchool.json")
 const mockSignInUser = require("./mock-data/signInUserData.json");
-const createSchoolData = require("./mock-data/createSchoolData.json")
+const mockClassData = require("./mock-data/classes.json")
 
 
 
@@ -175,7 +175,8 @@ describe('login school', () => {
     const res = mockResponse()
     req.body = {
       "userId": "u001",
-      "password": "tarento@123"
+      "password": "tarento@123",
+      "classes": true
     }
 
     User.findByCredentials = jest.fn().mockImplementationOnce(() => ({ select: jest.fn().mockResolvedValueOnce(mockSignInUser) }));
@@ -183,12 +184,17 @@ describe('login school', () => {
     Helper.lockScreenValidator = jest.fn().mockResolvedValue(undefined)
 
     User.generateAuthToken = jest.fn().mockResolvedValue(token)
+    ClassModel.findClassesBySchools = jest.fn().mockResolvedValue(mockClassData)
+    
     await schoolController.loginSchool(req, res)
 
     expect(User.findByCredentials).toHaveBeenCalledTimes(1)
     expect(School.findOne).toHaveBeenCalledTimes(1)
     expect(Helper.lockScreenValidator).toHaveBeenCalledTimes(1)
     expect(User.generateAuthToken).toHaveBeenCalledTimes(1)
+    expect(ClassModel.findClassesBySchools).toHaveBeenCalledTimes(1)
+    expect(res.status).toHaveBeenCalledWith(200);
+    expect(res.json({ status: 'success' }).status(200));
   });
 
   it("should not login when password is not correct ", async () => {
@@ -201,8 +207,8 @@ describe('login school', () => {
     User.findByCredentials = jest.fn().mockImplementationOnce(() => ({ select: jest.fn().mockResolvedValueOnce(null) }));
 
     await schoolController.loginSchool(req, res)
-    let error = new AppError('School Id or Password is not correct.', 422);
-    expect(error.statusCode).toBe(422);
+    let error = new AppError('School Id or Password is not correct.', 401);
+    expect(error.statusCode).toBe(401);
     expect(error.status).toBe('fail');
   });
 });
