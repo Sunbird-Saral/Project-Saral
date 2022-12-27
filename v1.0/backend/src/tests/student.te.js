@@ -1,6 +1,6 @@
 const Student = require("../models/students")
 const studentController = require('../controller/studentController')
-const studentMockdata = require('../tests/mock-data/student.json')
+const studentMockdata = require('./mock-data/student.json')
 const AppError = require('../utils/appError')
 const Helper = require('../middleware/helper')
 
