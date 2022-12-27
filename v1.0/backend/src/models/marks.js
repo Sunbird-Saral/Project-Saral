@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const defaultTimeStamp = new Date(2021, 02, 25, 10, 00, 00, 0).getTime()
+// const defaultTimeStamp = new Date(2021, 02, 25, 10, 00, 00, 0).getTime()
 const marksSchema = new mongoose.Schema({
     classId: {
         type: String,
@@ -98,8 +98,7 @@ const marksSchema = new mongoose.Schema({
         required: false
     },
     createdOn: { 
-        type: String, 
-        default: defaultTimeStamp
+        type: String
     },
     examId: {
         type: Number,

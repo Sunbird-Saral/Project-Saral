@@ -3,9 +3,11 @@ const User = require('../models/users')
 
 const auth  = async (req, res, next) => {
     try {
-        const token = req.header('Authorization').replace('Bearer ', '')
-        const decoded = jwt.verify(token, process.env.JWT_SECRET)
         
+        const token = req.header('Authorization').replace('Bearer ', '')
+        console.log("tokennnnnnnnnnnnnnnn",token)
+        const decoded = jwt.verify(token, 'UP_SARALDATA_NODE')
+        console.log("heyyyy",token)
         const school = await User.findOne({ userId: decoded.userId })
         
         if(!school) {
