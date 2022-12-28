@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.util.Log;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.ml.common.FirebaseMLException;
 import com.google.firebase.ml.custom.FirebaseCustomLocalModel;
 import com.google.firebase.ml.custom.FirebaseModelDataType;
@@ -12,6 +13,10 @@ import com.google.firebase.ml.custom.FirebaseModelInputOutputOptions;
 import com.google.firebase.ml.custom.FirebaseModelInputs;
 import com.google.firebase.ml.custom.FirebaseModelInterpreter;
 import com.google.firebase.ml.custom.FirebaseModelInterpreterOptions;
+import com.google.firebase.ml.modeldownloader.CustomModel;
+import com.google.firebase.ml.modeldownloader.CustomModelDownloadConditions;
+import com.google.firebase.ml.modeldownloader.DownloadType;
+import com.google.firebase.ml.modeldownloader.FirebaseModelDownloader;
 
 import org.opencv.android.Utils;
 import org.opencv.core.Core;
@@ -19,6 +24,7 @@ import org.opencv.core.Mat;
 import org.opencv.core.MatOfDouble;
 import org.opencv.imgproc.Imgproc;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -102,6 +108,35 @@ public class HWClassifier {
             e.printStackTrace();
         }
     }
+
+    public void downloadModel() {
+        try {
+            CustomModelDownloadConditions conditions = new CustomModelDownloadConditions.Builder()
+            .requireWifi()
+            .build();
+            FirebaseModelDownloader.getInstance()
+            .getModel("Letter_Digit_Model", DownloadType.LOCAL_MODEL, conditions)
+            .addOnSuccessListener(new OnSuccessListener<CustomModel>() {
+                @Override
+                public void onSuccess(CustomModel model) {
+                    // Download complete. Depending on your app, you could enable the ML
+                    // feature, or switch from the local model to the remote model, etc.
+                    // The CustomModel object contains the local path of the model file,
+                    // which you can use to instantiate a TensorFlow Lite interpreter.
+                    File modelFile = model.getFile();
+                    Log.d(TAG,"Hello MOdel===> " + modelFile);
+                    if (modelFile != null) {
+                    Log.d(TAG,"Hello MOdel===> " + modelFile);
+//                        interpreter = new Interpreter(modelFile);
+                    }
+                }
+            });
+        } catch (Exception e) {
+            // listener.OnModelLoadError("model loading failed");
+            e.printStackTrace();
+        }
+    }
+
 
     public void classifyMat(Mat mat, String id) {
         if(mInterpreter != null) {
