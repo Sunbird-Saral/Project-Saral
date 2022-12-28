@@ -19,20 +19,26 @@ import { bindActionCreators } from 'redux';
 //api
 import APITransport from '../../flux/actions/transport/apitransport'
 import AppTheme from '../../utils/AppTheme';
-import { getPresentAbsentStudent, getScannedDataFromLocal,getErrorMessage } from '../../utils/StorageUtils';
+import { getPresentAbsentStudent, getScannedDataFromLocal,getErrorMessage, getLoginCred, setScannedDataIntoLocal } from '../../utils/StorageUtils';
 import { Assets } from '../../assets';
 import ShareComponent from '../common/components/Share';
 import MultibrandLabels from '../common/components/multibrandlabels';
-import { dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF } from '../../utils/CommonUtils';
+import { checkAppVersion, checkNetworkConnectivity, dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF } from '../../utils/CommonUtils';
 import ButtonComponent from '../common/components/ButtonComponent';
 import Share from "react-native-share";
+import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
+import axios from 'axios';
+import { collectErrorLogs } from '../CollectErrorLogs';
+import { scanStatusDataAction } from './scanStatusDataAction';
 
 
 const ScanStatusLocal = ({
     loginData,
     filteredData,
     multiBrandingData,
-    navigation
+    navigation,
+    bgFlag,
+    roiData
 }) => {
 
     const [unsavedstudentList, setUnsavedstudentList] = useState([])
@@ -172,6 +178,156 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
         
     }
 
+    const onPressSaveInDB = async () => {
+        const data = await getScannedDataFromLocal();
+        const hasNetwork = await checkNetworkConnectivity();
+        let hasUpdate = await checkAppVersion();
+
+        if (!hasUpdate) {
+            if (hasNetwork) {
+                if (data) {
+                    if (!bgFlag) {
+                        const filterData = data.filter((e) => {
+                            let findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.section)
+                            if (e.classId == filteredData.class && e.subject == filteredData.subject && e.examDate == filteredData.examDate &&findSection) {
+                                return true
+                            } else {
+                                return false
+                            }
+                        })
+                        // setIsLoading(true)
+                        let filterDataLen = 0
+                        let setIntolocalAfterFilter = ''
+                        if (filterData.length != 0) {
+                            filterData.filter((f) => {
+                                let findSection = f.studentsMarkInfo.some((item) => item.section == filteredData.section)
+                                setIntolocalAfterFilter = data.filter((e) => {
+                                    if (e.classId == f.classId && e.subject == f.subject && e.examDate == f.examDate && findSection) {
+                                        return false
+                                    } else {
+                                        return true
+                                    }
+                                })
+                            })
+                            let apiObj = new SaveScanData(filterData[0], loginData.data.token);
+                            console.log("setIntolocal",setIntolocalAfterFilter);
+                            saveScanData(apiObj, filterDataLen, setIntolocalAfterFilter);
+                        } else {
+                            callCustomModal(Strings.message_text,Strings.there_is_no_data,false);
+                            // setIsLoading(false)
+                        }
+                    }else{
+                        callCustomModal(Strings.message_text,Strings.auto_sync_in_progress_please_wait,false);
+                    }
+                }
+                else {
+                    // setIsLoading(false)
+                    callCustomModal(Strings.message_text,Strings.there_is_no_data,false);
+                }
+            } else {
+                callCustomModal(Strings.message_text, Strings.please_try_again_later_network_is_not_available, false, true)
+            }
+        }
+    }
+
+  const  saveScanData = async (api, filteredDatalen, localScanData) => {
+    console.log("saveScanData localScanData",localScanData);
+        if (api.method === 'PUT') {
+            let apiResponse = null;
+            const source = axios.CancelToken.source();
+            const id = setTimeout(() => {
+                if (apiResponse === null) {
+                    source.cancel('The request timed out.');
+                }
+            }, 60000);
+            axios.put(api.apiEndPoint(), api.getBody(), { headers: api.getHeaders(), cancelToken: source.token },)
+                .then(function (res) {
+                    console.log("respurce", res);
+                    apiResponse = res;
+                    clearTimeout(id);
+                    api.processResponse(res);
+                    callScanStatusData(false, filteredDatalen, localScanData)
+                })
+                .catch(function (err) {
+                    console.log("err",err);
+                    if (err && err.response.status == 500) {
+                        callCustomModal(Strings.message_text, Strings.lock_screen, false);
+                      }else{
+                    collectErrorLogs("scanStatusLocal.js", "saveScanData", api.apiEndPoint(), err, false);
+                    callCustomModal(Strings.message_text, Strings.contactAdmin, false);
+                    clearTimeout(id);
+                    // obj.setState({
+                    //         isLoading: false
+                    // })
+                      }
+               
+                });
+        }
+    }
+
+    const callScanStatusData = async (bool,filteredDatalen, localScanData) => {
+        console.log("callScanStatusData localscandata",localScanData);
+        let loginCred = await getLoginCred()
+
+        let dataPayload = {
+            "classId": filteredData.class,
+            "subject": filteredData.subject,
+            "section": filteredData.section,
+            "fromDate": filteredData.examDate,
+            "set": filteredData.set,
+            "page": 0,
+            "schoolId": loginData.data.school.schoolId,
+            "downloadRes": false
+        }
+        let apiObj = new scanStatusDataAction(dataPayload);
+        FetchSavedScannedData(apiObj, loginCred.schoolId, loginCred.password, filteredDatalen, localScanData)
+    }
+
+    const FetchSavedScannedData = async(api, uname, pass, filterDataLen, localScanData) => {
+
+        if (api.method === 'POST') {
+            let apiResponse = null
+            const source = axios.CancelToken.source()
+            const id = setTimeout(() => {
+                if (apiResponse === null) {
+                    source.cancel('The request timed out.');
+                }
+            }, 60000);
+            axios.post(api.apiEndPoint(), api.getBody(), {
+                auth: {
+                    username: uname,
+                    password: pass
+                }
+            })
+                .then(function (res) {
+                    callCustomModal(Strings.message_text,Strings.saved_successfully,false);
+                    apiResponse = res
+                    clearTimeout(id)
+                    api.processResponse(res)
+                    dispatch(dispatchAPIAsync(api));
+                    // setScanStatusData(filterDataLen)
+                    console.log("localScanData",localScanData);
+                    setScannedDataIntoLocal(localScanData)
+                    // setIsLoading(false)
+                })
+                .catch(function (err) {
+                    collectErrorLogs("ScanHistoryCard.js","FetchSavedScannedData",api.apiEndPoint(),err,false)
+                    console.warn("Error", err);
+                    console.warn("Error", err.response);
+                    callCustomModal(Strings.message_text,Strings.something_went_wrong_please_try_again,false);
+                    // setIsLoading(false)
+                    clearTimeout(id)
+                });
+        }
+    }
+
+    function dispatchAPIAsync(api) {
+        return {
+            type: api.type,
+            payload: api.getPayload()
+        }
+    }
+
     return (
         <View style={styles.container}>
              <ShareComponent
@@ -225,6 +381,12 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
           <View style={{alignItems:'center'}}>
             <ButtonComponent
                 customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+                btnText={Strings.saved_data.toUpperCase()}
+                activeOpacity={0.8}
+                onPress={()=> onPressSaveInDB()}
+                />
+            <ButtonComponent
+                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
                 btnText={Strings.close.toUpperCase()}
                 activeOpacity={0.8}
                 onPress={()=> onBackPress()}
@@ -240,6 +402,8 @@ const mapStateToProps = (state) => {
         filteredData: state.filteredData.response,
         scanedData: state.scanedData.response,
         multiBrandingData: state.multiBrandingData.response.data,
+        bgFlag: state.bgFlag,
+        roiData: state.roiData.response,
     }
 }
 
