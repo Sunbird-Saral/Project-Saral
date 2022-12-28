@@ -13,7 +13,8 @@ const mockSchoolData = require("./mock-data/school.json")
 const mockGetAllSchool = require("./mock-data/getAllSchool.json")
 const mockSignInUser = require("./mock-data/signInUserData.json");
 const mockClassData = require("./mock-data/classes.json")
-
+const mockCreateSchoolData = require("./mock-data/createSchool.json")
+const mockCreateSchoolResponseData = require("./mock-data/mockCreateSchoolResponse.json")
 
 
 
@@ -31,6 +32,48 @@ const mockResponse = () => {
   return res
 }
 
+describe('create school', () => {
+  beforeEach(() => {
+    jest.useFakeTimers()
+  })
+
+    it("should  be able to create school", async () => {
+      const req = mockRequest();
+      const res = mockResponse()
+      req.body = mockCreateSchoolData
+
+      School.create = jest.fn().mockImplementationOnce(() => ({ select: jest.fn().mockResolvedValueOnce(mockCreateSchoolResponseData) }));
+
+      await schoolController.createSchool(req, res)
+
+      expect(School.create).toHaveBeenCalledTimes(1)
+      expect(res.json({ status: 'success' }).status(201));
+      expect(res.json({
+        schools: {
+          "storeTrainingData": true,
+          "name": "Dummy school 1",
+          "schoolId": "od001",
+          "state": "up",
+          "district": "district2"
+        }
+      }));
+    })
+
+  it("should not be able to create school when schoolID already exists", async () => {
+    const req = mockRequest();
+    const res = mockResponse()
+    req.body = mockCreateSchoolData
+
+    School.create = jest.fn().mockImplementationOnce(() => ({ select: jest.fn().mockResolvedValueOnce(null) }));
+
+    await schoolController.createSchool(req, res)
+
+    expect(School.create).toHaveBeenCalledTimes(1)
+    let error = new AppError("schoolId: 898989 already exist", 400);
+    expect(error.statusCode).toBe(400);
+    expect(res.json({ status: 'fail' }).status(400));
+  });
+});
 
 describe('get school', () => {
   beforeEach(() => {
@@ -46,7 +89,7 @@ describe('get school', () => {
     School.find = jest.fn().mockResolvedValue(mockGetAllSchool)
 
     await schoolController.GetSchoolsDetail(req, res)
-   
+
     expect(School.find).toHaveBeenCalledTimes(1)
     expect(res.status).toHaveBeenCalledWith(200);
     expect(res.json({ status: 'success' }).status(200));
@@ -89,8 +132,8 @@ describe('delete school', () => {
     School.findOne = jest.fn().mockImplementationOnce(() => ({ select: jest.fn().mockResolvedValueOnce(null) }));
 
     await schoolController.deleteSchool(req, res)
-    let error = new AppError('School Id does not exist.', 400);
-    expect(error.statusCode).toBe(400);
+    let error = new AppError('School Id does not exist.', 404);
+    expect(error.statusCode).toBe(404);
     expect(error.status).toBe('fail');
     expect(School.findOne).toHaveBeenCalledTimes(1)
   });
@@ -100,21 +143,6 @@ describe('update school', () => {
   beforeEach(() => {
     jest.useFakeTimers()
   })
-
-  //   it("should throw 400 error if id is empty string'", async () => {
-  //   const req = mockRequest();
-  //   const res = mockResponse()
-  //   req.params.schoolId = ''
-  //   req.body = {
-  //     "name": "xyz"
-  //   }
-
-  //   School.findOne = jest.fn().mockImplementationOnce(() => ({ select: jest.fn().mockResolvedValueOnce(null) }));
-  //   await schoolController.updateSchool(req, res)
-  //   let error = new AppError('School Id does not exist.', 404);
-  //   expect(error.statusCode).toBe(404);
-  //   expect(error.status).toBe('fail');
-  // });
 
   it("should throw 400 error if body is undefined", async () => {
     const req = mockRequest();
@@ -140,6 +168,19 @@ describe('update school', () => {
     expect(error.status).toBe('fail');
   });
 
+  it("should not be able to update when id is empty string", async () => {
+    const req = mockRequest();
+    const res = mockResponse()
+    req.params.schoolId = ""
+
+    School.findOne = jest.fn().mockImplementationOnce(() => ({ select: jest.fn().mockResolvedValueOnce(null) }));
+
+    await schoolController.updateSchool(req, res)
+    let error = new AppError('School Id does not exist.', 404);
+    expect(error.statusCode).toBe(404);
+    expect(error.status).toBe('fail');
+  });
+
 
   it("should update data when id is correct", async () => {
     const req = mockRequest();
@@ -154,7 +195,7 @@ describe('update school', () => {
       { n: 1, nModified: 1, ok: 1 })
 
     await schoolController.updateSchool(req, res)
-    
+
     expect(School.findOne).toHaveBeenCalledTimes(1);
     expect(School.updateOne).toHaveBeenCalledTimes(1);
     expect(res.status).toBeCalledWith(200);
@@ -185,7 +226,7 @@ describe('login school', () => {
 
     User.generateAuthToken = jest.fn().mockResolvedValue(token)
     ClassModel.findClassesBySchools = jest.fn().mockResolvedValue(mockClassData)
-    
+
     await schoolController.loginSchool(req, res)
 
     expect(User.findByCredentials).toHaveBeenCalledTimes(1)

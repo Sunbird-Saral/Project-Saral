@@ -118,8 +118,9 @@ exports.loginSchool = async (req, res, next) => {
 };
 
 exports.createSchool = async (req, res, next) => {
-  const school = new School({ ...req.body })
   try {
+    const school = { ...req.body }
+    
     school.state = req.body.state.toLowerCase()
     school.schoolId = req.body.schoolId.toLowerCase()
 
@@ -127,15 +128,15 @@ exports.createSchool = async (req, res, next) => {
     if (req.body.autoSyncFrequency) school.autoSyncFrequency = req.body.autoSyncFrequency
     if (req.body.tags) school.tags = req.body.tags
     if (req.body.autoSyncBatchSize) school.autoSyncBatchSize = req.body.autoSyncBatchSize
-
-
-    await school.save()
+    
+    const schoolData = await School.create(req.body);
+    
     let schools = {
-      storeTrainingData: school.storeTrainingData,
-      name: school.name,
-      schoolId: school.schoolId,
-      state: school.state,
-      district: school.district
+      storeTrainingData: schoolData.storeTrainingData,
+      name: schoolData.name,
+      schoolId: schoolData.schoolId,
+      state: schoolData.state,
+      district: schoolData.district
     }
 
     res.status(201).json({
@@ -162,9 +163,9 @@ exports.createSchool = async (req, res, next) => {
 exports.deleteSchool = async (req, res, next) => {
   try {
 
-    const school = await School.findOne({ schoolId: req.params.schoolId.toLowerCase() })
+    const school = await School.findOne({ schoolId: req.params.schoolId})
 
-    if (!school) return res.status(404).send({ message: 'School Id does not exist.' })
+    if (!school) return res.status(404).json({ message: 'School Id does not exist.' })
 
     let lookup = {
       schoolId: req.params.schoolId
@@ -189,24 +190,23 @@ exports.deleteSchool = async (req, res, next) => {
 
 exports.updateSchool = async (req, res, next) => {
   try {
-    if (Object.keys(req.body).length === 0) res.status(400).send({ message: 'Validation error.' })
+    if (Object.keys(req.body).length === 0) res.status(400).json({ message: 'Validation error.' })
     const updates = Object.keys(req.body)
     const allowedUpdates = ['name', 'state', 'district', 'udisceCode', 'storeTrainingData', 'autoSync', 'autoSyncFrequency', 'tags', 'autoSyncBatchSize']
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
 
     if (!isValidOperation) {
-      return res.status(400).send({ error: 'Invaid Updates' })
+      return res.status(400).json({ error: 'Invaid Updates' })
     }
-    let lookup = {
-      schoolId: req.params.schoolId.toLowerCase()
-    }
+  
 
     let update = req.body
 
-    const school = await School.findOne(lookup);
-    if (!school) return res.status(404).send({ message: 'School Id does not exist.' })
+    const school = await School.findOne({schoolId: req.params.schoolId});
+   
+    if (!school) return res.status(404).json({ message: 'School Id does not exist.' })
 
-    await School.updateOne(lookup, update);
+    await School.updateOne({schoolId: req.params.schoolId}, update);
    
     res.status(200).json({ message: 'School has been updated.' })
     
