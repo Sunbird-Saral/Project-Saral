@@ -8,6 +8,7 @@ ENV JWT_SECRET=SARALDATA_NODE
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
+RUN npm run test
 COPY . .
 
 RUN echo JWT_SECRET=$JWT_SECRET
