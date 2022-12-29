@@ -7,7 +7,7 @@ ENV MONGODB_URL=mongodb://docker.for.mac.localhost:27017/saralnew
 ENV JWT_SECRET=SARALDATA_NODE
 WORKDIR /app
 COPY package*.json ./
-RUN npm install
+RUN npm install -g jest
 RUN npm run test
 COPY . .
 
