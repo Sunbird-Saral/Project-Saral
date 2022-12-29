@@ -1098,7 +1098,7 @@ dispatchStudentExamData(payload){
                 <View style={styles.btnContainer}>
                     <ButtonComponent
                         customBtnStyle={[styles.nxtBtnStyle, { backgroundColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE }]}
-                        btnText={Strings.submit_text}
+                        btnText={Strings.submit_text.toUpperCase()}
                         onPress={this.onSubmitClick}
                     />
                 </View>
