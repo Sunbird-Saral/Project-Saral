@@ -23,6 +23,8 @@ node('server_build_slave') {
                                           cp ../../specs/v1.5/swagger-saral-maintenance.yaml ./src
                                           cp ../../specs/v1.5/swagger-saral-frontend.yaml ./src
                                           cp ../../specs/v1.5/swagger-saral-apidoc.yaml ./src
+                                          npm run tests
+
                                           docker build -t anuvaadio/$image_name:$image_tag .
                                           docker login -u $dockerhub_user -p $dockerhub_pass
                                           docker push anuvaadio/$image_name:$image_tag
