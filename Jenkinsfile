@@ -3,6 +3,8 @@ pipeline {
         label 'docker' 
    }
 
+  tools {nodejs "nodejs"}
+  
   stages {
     stage("build-backend") {
       agent{
