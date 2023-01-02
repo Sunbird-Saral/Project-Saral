@@ -52,7 +52,8 @@ class MyScanComponent extends Component {
             scanModalDataVisible: false,
             passDataToModal: [],
             savingStatus: '',
-            examId: ''
+            examId: '',
+            setIsLoading:false
         }
     }
 
@@ -821,7 +822,10 @@ class MyScanComponent extends Component {
                                 themeColor1={this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE}
                                 showButtons={false}
                                 scanStatusData={this.state.scanStatusData}
+                                setScanStatusData={()=>this.setState({scanStatusData:0})}
                                 navigation={this.props.navigation}
+                                // isLoading={isLoading}
+                                setIsLoading={()=>this.setState({isLoading:false})}
                             />
 
                             <View style={styles.viewnxtBtnStyle1}>
