@@ -534,7 +534,7 @@ dispatchStudentExamData(payload){
                                         testID.push(o.examId)
                                         examDates.push(o.examDate)
                                         subjects.push(o.subject)
-                                        set.push(o.hasOwnProperty("set") && o.set.length > 0 ? o.set : [])
+                                        set.push(o.hasOwnProperty("set") && o.set.length > 0 ? o.set : ["None"])
                             
                                     })
                     
