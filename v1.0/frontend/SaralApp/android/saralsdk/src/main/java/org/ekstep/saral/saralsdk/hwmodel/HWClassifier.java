@@ -136,7 +136,7 @@ public class HWClassifier {
                         } catch (FirebaseMLException e) {
                             e.printStackTrace();
                         }
-                        listener.OnModelLoadSuccess("model loading successful");
+                        listener.OnModelLoadSuccess("From Firebase model download successful");
                     // /data/user/0/com.saralapp/no_backup/com.google.firebase.ml.custom.models/W0RFRkFVTFRd+MTo5MTIzNDAyMjI0MzY6YW5kcm9pZDoxMTgwNzgzYThiY2EwZGRjOWM0N2Yx/Letter_Digit_Model/0
                     }
                 }
@@ -151,10 +151,10 @@ public class HWClassifier {
                             new FirebaseModelInterpreterOptions.Builder(localSource).build();
                     try {
                         mInterpreter = FirebaseModelInterpreter.getInstance(options);
+                        listener.OnModelLoadSuccess("model loading Failed");
                     } catch (FirebaseMLException firebaseMLException) {
                         firebaseMLException.printStackTrace();
                     }
-                    listener.OnModelLoadSuccess("model loading successful");
                 }
             });
         }
