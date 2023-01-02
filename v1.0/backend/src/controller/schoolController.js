@@ -8,27 +8,15 @@ const { stringObject } = require('../utils/commonUtils');
 const { auth } = require('../middleware/auth');
 
 exports.GetSchoolsDetail = async (req, res, next) => {
-  try{
-    let schools = []
-    const school = await School.find({})
-  
-    if (school) {
-      for (i = 0; i <= school.length - 1; i++) {
-        let obj = {
-          name: school[i].name,
-          schoolId: school[i].schoolId,
-          state: school[i].state,
-          district: school[i].district,
-          storeTrainingData: school[i].storeTrainingData
-        }
-        schools.push(obj)
-      }
-    }
+  try {
+    
+    const school = await School.find({}, { name: 1, schoolId: 1, state: 1, district: 1, storeTrainingData: 1, _id: 0 })
+
     res.status(200).json({
       status: 'success',
-      schools
+      school
     });
-  }catch(e){
+  } catch (e) {
     res.status(400).json({
       status: 'fail',
       e
@@ -43,7 +31,9 @@ exports.loginSchool = async (req, res, next) => {
     if (req.body.schoolId) {
       userId = req.body.schoolId.toLowerCase()
     }
-    const users = await User.findByCredentials(userId, req.body.password)
+  
+    const users = await Helper.findByCredentials(userId, req.body.password)
+    
     const schools = await School.findOne({ schoolId: users.schoolId })
 
     await Helper.lockScreenValidator(schools)
@@ -95,7 +85,6 @@ exports.loginSchool = async (req, res, next) => {
       data
     });
   } catch (e) {
-    console.log(e)
     if (e && e.message == 'School Id or Password is not correct.') {
       res.status(401).json({
         status: 'fail',
@@ -120,7 +109,7 @@ exports.loginSchool = async (req, res, next) => {
 exports.createSchool = async (req, res, next) => {
   try {
     const school = { ...req.body }
-    
+
     school.state = req.body.state.toLowerCase()
     school.schoolId = req.body.schoolId.toLowerCase()
 
@@ -128,9 +117,9 @@ exports.createSchool = async (req, res, next) => {
     if (req.body.autoSyncFrequency) school.autoSyncFrequency = req.body.autoSyncFrequency
     if (req.body.tags) school.tags = req.body.tags
     if (req.body.autoSyncBatchSize) school.autoSyncBatchSize = req.body.autoSyncBatchSize
-    
+
     const schoolData = await School.create(req.body);
-    
+
     let schools = {
       storeTrainingData: schoolData.storeTrainingData,
       name: schoolData.name,
@@ -163,7 +152,7 @@ exports.createSchool = async (req, res, next) => {
 exports.deleteSchool = async (req, res, next) => {
   try {
 
-    const school = await School.findOne({ schoolId: req.params.schoolId})
+    const school = await School.findOne({ schoolId: req.params.schoolId })
 
     if (!school) return res.status(404).json({ message: 'School Id does not exist.' })
 
@@ -198,18 +187,18 @@ exports.updateSchool = async (req, res, next) => {
     if (!isValidOperation) {
       return res.status(400).json({ error: 'Invaid Updates' })
     }
-  
+
 
     let update = req.body
 
-    const school = await School.findOne({schoolId: req.params.schoolId});
-   
+    const school = await School.findOne({ schoolId: req.params.schoolId });
+
     if (!school) return res.status(404).json({ message: 'School Id does not exist.' })
 
-    await School.updateOne({schoolId: req.params.schoolId}, update);
-   
+    await School.updateOne({ schoolId: req.params.schoolId }, update);
+
     res.status(200).json({ message: 'School has been updated.' })
-    
+
   } catch (e) {
     console.log(e)
     res.status(400).json({
