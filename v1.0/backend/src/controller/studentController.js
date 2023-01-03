@@ -24,7 +24,7 @@ exports.fetchStudentsandExams = async (req, res, next) => {
         if (req.school.minimal == true) {
             examMatch.schoolId = req.school.schoolId
         } else {
-            return res.status(404).send({ message: 'Please send classId' })
+            return res.status(404).json({ message: 'Please send classId' })
         }
     }
 
@@ -45,15 +45,14 @@ exports.fetchStudentsandExams = async (req, res, next) => {
 
         await Helper.lockScreenValidator(req.school)
 
-        const students = await Student.find(match, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 }).lean()
+        const students = await Student.find(match, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 })
 
-        for (let student of students) {
+        for (let i = 0; i < students.length; i++) {
             let lookup = {
-                studentId: student.studentId,
+                studentId: students[i].studentId,
                 subject: examMatch.subject,
                 examDate: examMatch.examDate
             }
-
             if (req.body.set) {
                 lookup.set = req.body.set
             }
@@ -61,14 +60,18 @@ exports.fetchStudentsandExams = async (req, res, next) => {
             let marks = await Marks.findOne(lookup)
 
             if (marks && typeof marks == "object") {
-                student["studentAvailability"] = marks.studentAvailability
+                students["studentAvailability"] = marks.studentAvailability
             } else {
-                student["studentAvailability"] = true
+                students["studentAvailability"] = true
             }
         }
 
-        const exams = await Exam.find(examMatch, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 }).lean()
-        res.send({ students, exams })
+        const exams = await Exam.find(examMatch, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 })
+        
+        res.status(200).json({
+            status: 'success',
+            students,exams
+          });
     } catch (e) {
         console.log(e)
         res.status(400).json({

@@ -1,9 +1,10 @@
 const Student = require("../models/students")
+const Exam = require("../models/exams")
 const studentController = require('../controller/studentController')
 const studentMockdata = require('./mock-data/student.json')
 const AppError = require('../utils/appError')
 const Helper = require('../middleware/helper')
-
+const mockFetchExamData = require('./mock-data/mockFetchExam.json')
 
 
 const mockRequest = () => {
@@ -29,6 +30,27 @@ describe('fetch student and exam data ', () => {
     jest.useFakeTimers()
   })
 
+  it("should throw 404 error if body doesnot have data ", async () => {
+    const req = mockRequest();
+    const res = mockResponse()
+    req.school = {
+      "_id": "63aa81d2d33aca650009c946",
+      "name": "user13",
+      "userId": "u001",
+      "schoolId": "u001",
+      "password": "$2a$08$fCagseJwhdNd3SEd8EB.oO6n990WLmDr4ptUpzJxLp2nvMFSZGpjG",
+      "createdAt": "2022-12-27T05:25:38.298Z",
+      "updatedAt": "2022-12-27T05:25:38.298Z",
+      __v: 0
+    }
+   
+    await studentController.fetchStudentsandExams(req, res)
+    
+    let error = new AppError('Please send classId', 404);
+    expect(error.statusCode).toBe(404);
+    expect(error.status).toBe('fail');
+   
+  });
 
   it("should able to get student data  ", async () => {
     const req = mockRequest();
@@ -36,9 +58,9 @@ describe('fetch student and exam data ', () => {
     req.school = {
       "_id": "63aa81d2d33aca650009c946",
       "name": "user13",
-      "userId": 'u001',
-      "schoolId: 'u001',
-      "password": '$2a$08$fCagseJwhdNd3SEd8EB.oO6n990WLmDr4ptUpzJxLp2nvMFSZGpjG',
+      "userId": "u001",
+      "schoolId": "u001",
+      "password": "$2a$08$fCagseJwhdNd3SEd8EB.oO6n990WLmDr4ptUpzJxLp2nvMFSZGpjG",
       "createdAt": "2022-12-27T05:25:38.298Z",
       "updatedAt": "2022-12-27T05:25:38.298Z",
       __v: 0
@@ -49,12 +71,15 @@ describe('fetch student and exam data ', () => {
 
     Helper.lockScreenValidator  = jest.fn().mockResolvedValue(undefined)
     Student.find = jest.fn().mockImplementationOnce(() => ({ select: jest.fn().mockResolvedValueOnce(studentMockdata)}));
-   
+    Exam.find = jest.fn().mockResolvedValue(mockFetchExamData)
     await studentController.fetchStudentsandExams(req, res)
-    
+
+    expect(req.body.classId).toEqual('2');
     expect(Helper.lockScreenValidator ).toHaveBeenCalledTimes(1)
     expect(Student.find).toHaveBeenCalledTimes(1)
-   
+    expect(Exam.find).toHaveBeenCalledTimes(1)
+    expect(res.status).toHaveBeenCalledWith(200);
+    expect(res.json({ status: 'success' }).status(200));
   });
 
 });

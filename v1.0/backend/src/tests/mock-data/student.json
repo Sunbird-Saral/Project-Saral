@@ -10,17 +10,5 @@
         "name": "Student1",
         "studentId": "1210001",
         "schoolId": "u001"
-    },
-    {
-        "studentClass": [
-            {
-                "classId": "2",
-                "className": "Class-2"
-            }
-        ],
-        "section": "D",
-        "name": "Student1",
-        "studentId": "1210002",
-        "schoolId": "u001"
     }
 ]
