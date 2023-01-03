@@ -534,7 +534,7 @@ dispatchStudentExamData(payload){
                                         testID.push(o.examId)
                                         examDates.push(o.examDate)
                                         subjects.push(o.subject)
-                                        set.push(o.hasOwnProperty("set") && o.set.length > 0 ? o.set : ["None"])
+                                        set.push(o.hasOwnProperty("set") && o.set.length > 0 ? o.set : ["NONE"])
                             
                                     })
                     
@@ -854,7 +854,7 @@ dispatchStudentExamData(payload){
             if (valid) {
                 let selectedset = []
                 selectedset.push(selectSet)
-                let setValue = selectSet.length > 0 ? selectSet[subIndex].length > 0 ? selectSet[subIndex] : '' : ''
+                let setValue = selectedset.length > 0 ? selectedset[subIndex].length > 0 ? selectedset[subIndex] : '' : ''
                 let obj = {
                     className: selectedClass,
                     class: selectedClassId,
@@ -1072,7 +1072,7 @@ dispatchStudentExamData(payload){
                             }
 
                       {
-                            ExamSetArray && ExamSetArray.length > 0 && ExamSetArray[subIndex] != null && ExamSetArray[subIndex] != '' &&  subIndex != -1 &&
+                            ExamSetArray && ExamSetArray.length > 0 && ExamSetArray[subIndex] != null &&
                                 <View style={[styles.fieldContainerStyle, {bottom:25, paddingBottom: subIndex != -1 ? '10%' : '10%' }]}>
                                     <View style={{ flexDirection: 'row' }}>
                                         <Text style={[styles.labelTextStyle]}>{BrandLabel && BrandLabel.Set ? BrandLabel.Set : Strings.set_text}</Text>
