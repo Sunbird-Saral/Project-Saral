@@ -1072,7 +1072,7 @@ dispatchStudentExamData(payload){
                             }
 
                       {
-                            ExamSetArray && ExamSetArray.length > 0 && ExamSetArray[subIndex] != null &&
+                            ExamSetArray && ExamSetArray.length > 0 && ExamSetArray[subIndex] != null && ExamSetArray[subIndex] != '' &&  subIndex != -1 &&
                                 <View style={[styles.fieldContainerStyle, {bottom:25, paddingBottom: subIndex != -1 ? '10%' : '10%' }]}>
                                     <View style={{ flexDirection: 'row' }}>
                                         <Text style={[styles.labelTextStyle]}>{BrandLabel && BrandLabel.Set ? BrandLabel.Set : Strings.set_text}</Text>
