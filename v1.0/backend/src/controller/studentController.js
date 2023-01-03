@@ -67,11 +67,11 @@ exports.fetchStudentsandExams = async (req, res, next) => {
         }
 
         const exams = await Exam.find(examMatch, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 })
-        
+
         res.status(200).json({
             status: 'success',
-            students,exams
-          });
+            students, exams
+        });
     } catch (e) {
         console.log(e)
         res.status(400).json({
@@ -129,6 +129,8 @@ exports.fetchStudentsData = async (req, res, next) => {
         }
         let studentClass = [studentClassObj]
         match.studentClass = studentClass
+    } else {
+        return res.status(404).json({ message: 'Please send classId' })
     }
 
     if (req.body.section && req.body.section != "0") {
@@ -138,7 +140,6 @@ exports.fetchStudentsData = async (req, res, next) => {
     try {
 
         const students = await Student.find(match, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 })
-
         res.status(200).json({
             status: 'success',
             students
@@ -154,7 +155,7 @@ exports.fetchStudentsData = async (req, res, next) => {
 exports.deleteStudent = async (req, res, next) => {
     try {
         const student = await Student.findOne({ studentId: req.params.studentId })
-        if (!student) return res.status(404).send({ message: 'Student Id does not exist.' })
+        if (!student) return res.status(404).json({ message: 'Student Id does not exist.' })
         let lookup = {
             studentId: student.studentId
         }
@@ -175,12 +176,12 @@ exports.deleteStudent = async (req, res, next) => {
 }
 
 exports.updateStudent = async (req, res, next) => {
-    if (Object.keys(req.body).length === 0) res.status(400).send({ message: 'Validation error.' })
+    if (Object.keys(req.body).length === 0) res.status(400).json({ message: 'Validation error.' })
     const inputKey = Object.keys(req.body)
     const allowedUpdates = ['name', 'studentClass']
     const isValidOperation = inputKey.every((update) => allowedUpdates.includes(update))
     if (!isValidOperation) {
-        return res.status(400).send({ message: 'Invaid Updates' })
+        return res.status(400).json({ message: 'Invaid Updates' })
     }
     let lookup = {
         studentId: req.params.studentId

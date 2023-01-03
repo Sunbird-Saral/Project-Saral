@@ -1,5 +1,6 @@
 const Student = require("../models/students")
 const Exam = require("../models/exams")
+const Marks = require("../models/marks")
 const studentController = require('../controller/studentController')
 const studentMockdata = require('./mock-data/student.json')
 const AppError = require('../utils/appError')
@@ -66,10 +67,13 @@ describe('fetch student and exam data ', () => {
       __v: 0
     }
     req.body = {
-      "classId": "2"
+      "classId": "2",
+      "section":"D",
+      "subject": "Hindi 23/09/2021"
     }
 
     Helper.lockScreenValidator  = jest.fn().mockResolvedValue(undefined)
+    Marks.findOne = jest.fn().mockResolvedValue(null)
     Student.find = jest.fn().mockImplementationOnce(() => ({ select: jest.fn().mockResolvedValueOnce(studentMockdata)}));
     Exam.find = jest.fn().mockResolvedValue(mockFetchExamData)
     await studentController.fetchStudentsandExams(req, res)
