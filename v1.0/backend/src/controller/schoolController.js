@@ -82,7 +82,7 @@ exports.loginSchool = async (req, res, next) => {
 
     res.status(200).json({
       status: 'success',
-      data
+      ... data
     });
   } catch (e) {
     if (e && e.message == 'School Id or Password is not correct.') {

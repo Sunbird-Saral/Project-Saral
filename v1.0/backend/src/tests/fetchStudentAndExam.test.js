@@ -74,7 +74,8 @@ describe('fetch student and exam data ', () => {
 
     Helper.lockScreenValidator  = jest.fn().mockResolvedValue(undefined)
     Marks.findOne = jest.fn().mockResolvedValue(null)
-    Student.find = jest.fn().mockImplementationOnce(() => ({ select: jest.fn().mockResolvedValueOnce(studentMockdata)}));
+    Student.find = jest.fn().mockReturnValue({ lean: () => studentMockdata })
+    // Student.find = jest.fn().mockImplementationOnce(() => ({ select: jest.fn().mockResolvedValueOnce(studentMockdata)}));
     Exam.find = jest.fn().mockResolvedValue(mockFetchExamData)
     await studentController.fetchStudentsandExams(req, res)
 
