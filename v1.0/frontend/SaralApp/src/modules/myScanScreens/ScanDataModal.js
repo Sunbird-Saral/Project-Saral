@@ -29,7 +29,8 @@ const ScanDataModal = ({
     multiBrandingData,
     loginData,
     navigation,
-    filteredData
+    filteredData,
+    saveData
 }) => {
 
     //Hooks
@@ -207,6 +208,19 @@ const ScanDataModal = ({
                 </ScrollView>
 
                 <View style={{alignItems:'center'}}>
+                { 
+                savingStatus == 'scan' &&
+                <ButtonComponent
+                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE, marginBottom:10 }]}
+                btnText={Strings.save_all_scan.toUpperCase()}
+                activeOpacity={0.8}
+                onPress={()=> {
+                    setModalVisible()
+                    saveData()
+                } }
+                />
+}
+
             <ButtonComponent
                 customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
                 btnText={Strings.close.toUpperCase()}

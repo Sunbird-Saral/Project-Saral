@@ -30,6 +30,7 @@ import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
 import axios from 'axios';
 import { collectErrorLogs } from '../CollectErrorLogs';
 import { scanStatusDataAction } from './scanStatusDataAction';
+import Spinner from '../common/components/loadingIndicator';
 
 
 const ScanStatusLocal = ({
@@ -44,6 +45,7 @@ const ScanStatusLocal = ({
     const [unsavedstudentList, setUnsavedstudentList] = useState([])
     const [loacalstutlist, setLoacalstutlist] = useState([])
     const [presentStudentList, setPresentStudentList] = useState([])
+    const [isLoading, setIsLoading] = useState(false)
     const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.scanStatusLocal[0]
 
 
@@ -195,7 +197,7 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
                                 return false
                             }
                         })
-                        // setIsLoading(true)
+                        setIsLoading(true)
                         let filterDataLen = 0
                         let setIntolocalAfterFilter = ''
                         if (filterData.length != 0) {
@@ -210,18 +212,18 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
                                 })
                             })
                             let apiObj = new SaveScanData(filterData[0], loginData.data.token);
-                            console.log("setIntolocal",setIntolocalAfterFilter);
                             saveScanData(apiObj, filterDataLen, setIntolocalAfterFilter);
                         } else {
                             callCustomModal(Strings.message_text,Strings.there_is_no_data,false);
-                            // setIsLoading(false)
+                            setIsLoading(false)
                         }
                     }else{
+                        setIsLoading(false)
                         callCustomModal(Strings.message_text,Strings.auto_sync_in_progress_please_wait,false);
                     }
                 }
                 else {
-                    // setIsLoading(false)
+                    setIsLoading(false)
                     callCustomModal(Strings.message_text,Strings.there_is_no_data,false);
                 }
             } else {
@@ -231,7 +233,6 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
     }
 
   const  saveScanData = async (api, filteredDatalen, localScanData) => {
-    console.log("saveScanData localScanData",localScanData);
         if (api.method === 'PUT') {
             let apiResponse = null;
             const source = axios.CancelToken.source();
@@ -242,31 +243,26 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
             }, 60000);
             axios.put(api.apiEndPoint(), api.getBody(), { headers: api.getHeaders(), cancelToken: source.token },)
                 .then(function (res) {
-                    console.log("respurce", res);
                     apiResponse = res;
                     clearTimeout(id);
                     api.processResponse(res);
                     callScanStatusData(false, filteredDatalen, localScanData)
+                    setIsLoading(false)
                 })
                 .catch(function (err) {
-                    console.log("err",err);
-                    if (err && err.response.status == 500) {
+                    if (err && err.response && err.response.status == 500) {
                         callCustomModal(Strings.message_text, Strings.lock_screen, false);
                       }else{
                     collectErrorLogs("scanStatusLocal.js", "saveScanData", api.apiEndPoint(), err, false);
                     callCustomModal(Strings.message_text, Strings.contactAdmin, false);
                     clearTimeout(id);
-                    // obj.setState({
-                    //         isLoading: false
-                    // })
-                      }
-               
-                });
+                    setIsLoading(false)
+                }
+            });
         }
     }
 
     const callScanStatusData = async (bool,filteredDatalen, localScanData) => {
-        console.log("callScanStatusData localscandata",localScanData);
         let loginCred = await getLoginCred()
 
         let dataPayload = {
@@ -305,17 +301,12 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
                     clearTimeout(id)
                     api.processResponse(res)
                     dispatch(dispatchAPIAsync(api));
-                    // setScanStatusData(filterDataLen)
-                    console.log("localScanData",localScanData);
                     setScannedDataIntoLocal(localScanData)
-                    // setIsLoading(false)
+                    onBackPress();
                 })
                 .catch(function (err) {
                     collectErrorLogs("ScanHistoryCard.js","FetchSavedScannedData",api.apiEndPoint(),err,false)
-                    console.warn("Error", err);
-                    console.warn("Error", err.response);
                     callCustomModal(Strings.message_text,Strings.something_went_wrong_please_try_again,false);
-                    // setIsLoading(false)
                     clearTimeout(id)
                 });
         }
@@ -381,7 +372,7 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
           <View style={{alignItems:'center'}}>
             <ButtonComponent
                 customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
-                btnText={Strings.saved_data.toUpperCase()}
+                btnText={Strings.save_all_scan.toUpperCase()}
                 activeOpacity={0.8}
                 onPress={()=> onPressSaveInDB()}
                 />
@@ -392,6 +383,15 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
                 onPress={()=> onBackPress()}
                 />
                 </View>
+
+                {
+                    isLoading
+                    &&
+                    <Spinner
+                        animating={isLoading}
+                        customContainer={{ opacity: 0.6, elevation: 15 }}
+                    />
+                }
 
         </View>
     );

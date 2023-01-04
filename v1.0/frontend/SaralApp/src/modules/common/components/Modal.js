@@ -33,13 +33,6 @@ const ModalPopup = ({
             <Text style={[styles.modalText]}>{data}</Text>
             </View>
             <Pressable
-              style={[styles.nxtBtnStyle,{ backgroundColor: themeColor1 ? themeColor1 : AppTheme.BLUE,marginBottom: 10 }]}
-              onPress={onPress}
-              activeOpacity={0.8}    
-            >
-              <Text style={styles.btnTextStyle}>{Strings.saved_data}</Text>
-            </Pressable>
-            <Pressable
               style={[styles.nxtBtnStyle,{ backgroundColor: themeColor1 ? themeColor1 : AppTheme.BLUE }]}
               onPress={onPress}
               activeOpacity={0.8}    
