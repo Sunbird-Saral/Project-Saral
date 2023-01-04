@@ -883,26 +883,26 @@ class MyScanComponent extends Component {
                         <View style={{ flexWrap: "wrap", flexDirection: "row", width: "100%", alignItems: "center", justifyContent: 'center', marginTop: 10 }}>
                             <ButtonComponent
                                 customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: AppTheme.WHITE, height: 30, width: "45%", marginHorizontal: 0, marginRight: 10 }]}
-                                btnText={Strings.saved_data.toUpperCase()}
+                                btnText={Strings.saved_data}
                                 activeOpacity={0.8}
-                                customBtnTextStyle={{ fontSize: 12, color: AppTheme.BLACK}}
+                                customBtnTextStyle={{fontFamily: monospace_FF, fontSize: 13, color: AppTheme.BLACK}}
                                 onPress={() => this.openScanModal("save")}
                             />
 
 
                             <ButtonComponent
                                 customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor:AppTheme.WHITE, height: 30, width: "50%", marginHorizontal: 0 }]}
-                                btnText={Strings.scan_data.toUpperCase()}
+                                btnText={Strings.scan_data}
                                 activeOpacity={0.8}
-                                customBtnTextStyle={{ fontSize: 12, color: AppTheme.BLACK }}
+                                customBtnTextStyle={{fontFamily: monospace_FF, fontSize: 13, color: AppTheme.BLACK }}
                                 onPress={() => this.openScanModal("scan")}
                             />
 
                         <ButtonComponent
                                 customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor:AppTheme.WHITE, height: 30, width: "45%", marginHorizontal: 0 }]}
-                                btnText={Strings.save_all_scan.toUpperCase()}
+                                btnText={Strings.save_all_scan}
                                 activeOpacity={0.8}
-                                customBtnTextStyle={{ fontSize: 12, color: AppTheme.BLACK }}
+                                customBtnTextStyle={{fontFamily: monospace_FF, fontSize: 13, color: AppTheme.BLACK }}
                                 onPress={this.onPressSaveInDB}
                             />
                         </View>
