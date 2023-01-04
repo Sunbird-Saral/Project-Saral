@@ -265,7 +265,7 @@ class SelectDetailsComponent extends Component {
         }
         else if (type == 'sub') {
             let setData = []
-            let hasSetData = this.state.set.length > 0 ? this.state.set[Number(index)] ? this.state.set[Number(index)].length > 0 ? -1 : 0 : 0 : 0
+            let hasSetData = this.state.set.length > 0 ? this.state.set[Number(index)] ? this.state.set[Number(index)].length >= 0 ? -1 : 0 : 0 : 0
             if (value != selectedSubject) {
                
                 this.setState({
@@ -534,12 +534,10 @@ dispatchStudentExamData(payload){
                                         testID.push(o.examId)
                                         examDates.push(o.examDate)
                                         subjects.push(o.subject)
-                                        set.push(o.hasOwnProperty("set") && o.set.length > 0 ? o.set : ["NONE"])
+                                        set.push(o.hasOwnProperty("set") && o.set.length > 0 ? o.set && o.set  : [])
                             
                                     })
                     
-
-                                    
                                     this.setState({
                                         errSection: '',
                                         sectionValid: true,
@@ -861,7 +859,7 @@ dispatchStudentExamData(payload){
                     examDate: examDate[subIndex],
                     section: selectedSection,
                     subject: subjectsData[subIndex],
-                    set: setValue,
+                    set: setValue =="NONE" ? "" : setValue,
                     examTestID: examTestID[subIndex],
                 }
                 this.props.FilteredDataAction(obj)
@@ -1072,7 +1070,7 @@ dispatchStudentExamData(payload){
                             }
 
                       {
-                            ExamSetArray && ExamSetArray.length > 0 && ExamSetArray[subIndex] != null && ExamSetArray[subIndex] != '' &&  subIndex != -1 &&
+                            ExamSetArray && ExamSetArray.length > 0 && ExamSetArray[subIndex] != null &&
                                 <View style={[styles.fieldContainerStyle, {bottom:25, paddingBottom: subIndex != -1 ? '10%' : '10%' }]}>
                                     <View style={{ flexDirection: 'row' }}>
                                         <Text style={[styles.labelTextStyle]}>{BrandLabel && BrandLabel.Set ? BrandLabel.Set : Strings.set_text}</Text>
@@ -1080,7 +1078,7 @@ dispatchStudentExamData(payload){
                                     </View>
     
                                     <DropDownMenu
-                                        options={ExamSetArray[subIndex]}
+                                        options={(["NONE"]).concat(ExamSetArray[subIndex])}
                                         onSelect={(idx, value) => this.onDropDownSelect(idx, value, 'set')}
                                         defaultData={defaultSelected}
                                         defaultIndex={setIndex}
