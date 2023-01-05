@@ -54,11 +54,12 @@ router.put('/saveMarks', auth, async (req, res) => {
                 data.examDate = new Date().toLocaleDateString()
             }
          
-            let studentMarksExist = await Mark.findOne({ schoolId:data.schoolId,studentId: data.studentId,classId:data.classId,subject: data.subject, examDate: data.examDate, roiId: data.roiId  })
+            let studentMarksExist = await Mark.findOne({ schoolId: data.schoolId, studentId: data.studentId, classId: data.classId, subject: data.subject, examDate: data.examDate, roiId: data.roiId, set: data.set })
+
             if (!studentMarksExist) {
                 await Mark.create(data)
             } else {
-                if (data.schoolId == studentMarksExist.schoolId && data.studentId == studentMarksExist.studentId && data.classId == studentMarksExist.classId && data.subject == studentMarksExist.subject && data.examDate  == studentMarksExist.examDate) {
+                if (data.schoolId == studentMarksExist.schoolId && data.studentId == studentMarksExist.studentId && data.classId == studentMarksExist.classId && data.subject == studentMarksExist.subject && data.examDate == studentMarksExist.examDate && data.set == studentMarksExist.set) {
                     let lookup = {
                         studentId: data.studentId,
                         subject: data.subject,
