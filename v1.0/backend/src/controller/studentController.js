@@ -200,7 +200,7 @@ exports.updateStudent = async (req, res, next) => {
             }]
             updateData["studentClass"] = studentClass
         }
-        const school = await Student.findOne(lookup).lean();
+        const school = await Student.findOne(lookup)
         if (!school) return res.status(404).send({ message: 'Student Id does not exist.' })
 
         await Student.updateOne(lookup, updateData).lean().exec();

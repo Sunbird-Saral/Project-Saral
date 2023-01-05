@@ -2,7 +2,7 @@ const Student = require("../models/students")
 const Marks = require("../models/marks")
 const studentController = require('../controller/studentController')
 const mockStudentdata = require('./mock-data/student.json')
-
+const mockDeleteRespose = require('./mock-data/deleteOneResponse.json')
 
 
 
@@ -32,8 +32,8 @@ describe('delete student', () => {
 
         Student.findOne = jest.fn().mockImplementationOnce(() => ({ select: jest.fn().mockResolvedValueOnce(mockStudentdata) }));
 
-        Student.deleteOne = jest.fn().mockResolvedValue({ n: 1, ok: 1, deletedCount: 1 })
-        Marks.findOneAndRemove = jest.fn().mockResolvedValue(null)
+        Student.deleteOne = jest.fn().mockReturnValue({ lean: () => mockDeleteRespose })
+        Marks.findOneAndRemove = jest.fn().mockReturnValue({ lean: () => null })
 
         await studentController.deleteStudent(req, res)
 
