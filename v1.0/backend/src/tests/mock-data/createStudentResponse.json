@@ -1,0 +1,11 @@
+{
+    "studentClass": [ { "classId": "2", "className": "Class-2" } ],
+    "section": "D",
+    "_id": "63b6ba53380d1b23e45c189d",
+    "name": "Student1",
+    "studentId": "1289808y7",
+    "schoolId": "u001",
+    "createdAt": "2023-01-05T11:53:55.598Z",
+    "updatedAt": "2023-01-05T11:53:55.598Z",
+    "__v": 0
+  }

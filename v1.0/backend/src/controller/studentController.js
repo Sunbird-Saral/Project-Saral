@@ -47,7 +47,7 @@ exports.fetchStudentsandExams = async (req, res, next) => {
         await Helper.lockScreenValidator(req.school)
 
         const students = await Student.find(match, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 }).lean()
-        
+
         for (let i = 0; i < students.length; i++) {
             let lookup = {
                 studentId: students[i].studentId,
@@ -85,19 +85,20 @@ exports.fetchStudentsandExams = async (req, res, next) => {
 
 exports.createStudent = async (req, res, next) => {
     try {
-        if (!req.body.studentId) return res.status(400).send({ error: "Student Id is required." })
+        if (!req.body.studentId) return res.status(400).json({ error: "Student Id is required." })
 
         const studentClass = req.body.studentClass && req.body.studentClass.length > 0 && [{
             classId: req.body.studentClass[0].classId,
             className: `Class-${req.body.studentClass[0].classId}`
         }]
-        const students = new Student({
+        const student = new Student({
             ...req.body,
             studentClass,
             schoolId: req.school.schoolId
         })
 
-        await students.save()
+        let students = await Student.create(student)
+        
         let response = {
             studentClass: students.studentClass,
             section: students.section,
@@ -107,7 +108,7 @@ exports.createStudent = async (req, res, next) => {
             createdAt: students.createdAt,
             updatedAt: students.updatedAt
         }
-        res.status(200).json({
+        res.status(201).json({
             status: 'success',
             response
         });
@@ -181,12 +182,15 @@ exports.updateStudent = async (req, res, next) => {
     const inputKey = Object.keys(req.body)
     const allowedUpdates = ['name', 'studentClass']
     const isValidOperation = inputKey.every((update) => allowedUpdates.includes(update))
+
     if (!isValidOperation) {
         return res.status(400).json({ message: 'Invaid Updates' })
     }
+
     let lookup = {
         studentId: req.params.studentId
     }
+
     try {
         let updateData = {}
         if (inputKey.includes("name"))
@@ -203,7 +207,7 @@ exports.updateStudent = async (req, res, next) => {
         const school = await Student.findOne(lookup)
         if (!school) return res.status(404).send({ message: 'Student Id does not exist.' })
 
-        await Student.updateOne(lookup, updateData).lean().exec();
+        await Student.updateOne(lookup, updateData).lean();
 
         res.status(200).json({
             status: 'success',

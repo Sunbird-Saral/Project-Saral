@@ -1,5 +1,4 @@
 const Student = require("../models/students")
-const Marks = require("../models/marks")
 const studentController = require('../controller/studentController')
 const mockStudentdata = require('./mock-data/student.json')
 const AppError = require('../utils/appError')
@@ -63,19 +62,22 @@ describe('update student', () => {
         expect(error.status).toBe('fail');
     });
 
-    // it("should be able to update when id is correct", async () => {
-    //     const req = mockRequest();
-    //     const res = mockResponse()
-    //     req.params.schoolId = "1210001"
+    it("should be able to update when id is correct", async () => {
+        const req = mockRequest();
+        const res = mockResponse()
+        req.params.studentId = "1210001"
+        req.body = {
+                "name": "Ajay chamyal"
+        }
 
-    //     Student.findOne = jest.fn().mockImplementationOnce(() => ({ select: jest.fn().mockResolvedValueOnce(mockStudentdata) }));
-    //     Student.updateOne = jest.fn().mockReturnValue({ lean: () => null })
-    //     await studentController.updateStudent(req, res)
+        Student.findOne = jest.fn().mockImplementationOnce(() => ({ select: jest.fn().mockResolvedValueOnce(mockStudentdata) }));
+        Student.updateOne = jest.fn().mockReturnValue({ lean: () => null })
+        await studentController.updateStudent(req, res)
 
-    //     // expect(Student.findOne).toHaveBeenCalledTimes(1);
-    //     // expect(Student.updateOne).toHaveBeenCalledTimes(1);
-    //     expect(res.status).toBeCalledWith(200);
-    //     expect(res.json({ message: "Student has been updated." }).status(200));
-    // });
+        expect(Student.findOne).toHaveBeenCalledTimes(1);
+        expect(Student.updateOne).toHaveBeenCalledTimes(1);
+        expect(res.status).toBeCalledWith(200);
+        expect(res.json({ message: "Student has been updated." }).status(200));
+    });
 
 });

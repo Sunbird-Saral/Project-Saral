@@ -1,5 +1,6 @@
 const Student = require("../models/students")
 const Marks = require("../models/marks")
+const AppError = require('../utils/appError')
 const studentController = require('../controller/studentController')
 const mockStudentdata = require('./mock-data/student.json')
 const mockDeleteRespose = require('./mock-data/deleteOneResponse.json')
@@ -39,9 +40,24 @@ describe('delete student', () => {
 
         expect(Student.findOne).toHaveBeenCalledTimes(1)
         expect(Student.deleteOne).toHaveBeenCalledTimes(1)
-        // expect(Marks.findOneAndRemove).toHaveBeenCalledTimes(1)
+        expect(Marks.findOneAndRemove).toHaveBeenCalledTimes(1)
         expect(res.status).toBeCalledWith(200);
         expect(res.json({ message: "Student has been deleted." }).status(200));
     });
+
+    it("should not be able to delete when id is empty string", async () => {
+        const req = mockRequest();
+        const res = mockResponse()
+        req.params.studentId = ""
+
+        Student.findOne = jest.fn().mockImplementationOnce(() => ({ select: jest.fn().mockResolvedValueOnce(null) }));
+
+        await studentController.deleteStudent(req, res)
+        let error = new AppError('Student Id does not exist.', 404);
+        expect(error.statusCode).toBe(404);
+        expect(error.status).toBe('fail');
+    });
+
+  
 
 });
