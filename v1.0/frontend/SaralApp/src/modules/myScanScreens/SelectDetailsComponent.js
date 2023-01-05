@@ -536,7 +536,7 @@ dispatchStudentExamData(payload){
                                         testID.push(o.examId)
                                         examDates.push(o.examDate)
                                         subjects.push(o.subject)
-                                        set.push(o.hasOwnProperty("set") && o.set.length > 0 ? o.set && o.set  : [])
+                                        set.push(o.hasOwnProperty("set") && o.set.length > 0 ? o.set  : [])
                             
                                     })
                     
@@ -823,7 +823,7 @@ dispatchStudentExamData(payload){
             })
             return false
         }
-       else if (setIndex == -1 && ExamSetArray != "") {
+       else if (setIndex == -1 && ExamSetArray[subIndex] != "") {
             this.setState({
                 errClass: '',
                 errSection: '',
@@ -854,14 +854,14 @@ dispatchStudentExamData(payload){
             if (valid) {
                 let selectedset = []
                 selectedset.push(selectSet)
-                let setValue = selectedset.length > 0 ? selectedset[subIndex].length > 0 ? selectedset[subIndex] : '' : ''
+                let setValue = selectSet.length > 0 ? selectSet[subIndex].length > 0 ? selectSet[subIndex] : '' : ''
                 let obj = {
                     className: selectedClass,
                     class: selectedClassId,
                     examDate: examDate[subIndex],
                     section: selectedSection,
                     subject: subjectsData[subIndex],
-                    set: setValue =="NONE" ? "" : setValue,
+                    set: selectSet =="NONE" ? "" : setValue,
                     examTestID: examTestID[subIndex],
                 }
                 this.props.FilteredDataAction(obj)
@@ -1082,10 +1082,10 @@ dispatchStudentExamData(payload){
                                     <DropDownMenu
                                         options={(["NONE"]).concat(ExamSetArray[subIndex])}
                                         onSelect={(idx, value) => this.onDropDownSelect(idx, value, 'set')}
-                                        defaultData={ExamSetArray && ExamSetArray[0] =="" ? "NONE" : defaultSelected}
+                                        defaultData={ExamSetArray &&  ExamSetArray[subIndex] =="" ? ["NONE"] : defaultSelected}
                                         defaultIndex={setIndex}
                                         selectedData={selectSet}
-                                        disabled = {ExamSetArray && ExamSetArray[0] =="" ? !disabled : disabled}
+                                        disabled = {ExamSetArray &&  ExamSetArray[subIndex] =="" ? !disabled : disabled}
                                         icon={require('../../assets/images/arrow_down.png')}
                                     />
                                 </View>
