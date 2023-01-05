@@ -73,7 +73,8 @@ const clearState = {
     subjectsData: [],
     isCalledStudentAndExam: false,
     set:[],
-    ExamSetArray:[]
+    ExamSetArray:[],
+    disabled:false
 }
 
 class SelectDetailsComponent extends Component {
@@ -123,7 +124,8 @@ class SelectDetailsComponent extends Component {
             isHidden: false,
             isCalledStudentAndExam: false,
             set:[],
-            ExamSetArray:[]
+            ExamSetArray:[],
+            disabled:false
         }
         this.onPress = this.onPress.bind(this);
         this.onBack = this.onBack.bind(this)
@@ -782,7 +784,7 @@ dispatchStudentExamData(payload){
     }
 
     validateFields = () => {
-        const { classListIndex, subIndex, sectionListIndex, sectionValid ,setIndex} = this.state
+        const { classListIndex, subIndex, sectionListIndex, sectionValid ,setIndex,ExamSetArray} = this.state
         const { scanTypeData } = this.props
         if (classListIndex == -1) {
             this.setState({
@@ -821,7 +823,7 @@ dispatchStudentExamData(payload){
             })
             return false
         }
-       else if (setIndex == -1) {
+       else if (setIndex == -1 && ExamSetArray != "") {
             this.setState({
                 errClass: '',
                 errSection: '',
@@ -965,7 +967,7 @@ dispatchStudentExamData(payload){
      
 
     render() {
-        const { navigation, isLoading, defaultSelected, classList, classListIndex, selectedClass, sectionList,setIndex,set,ExamSetArray, sectionListIndex, selectedSection, pickerDate, selectedDate, subArr, selectedSubject,selectSet, subIndex, errClass, errSub,errSet, errDate, errSection, sectionValid, dateVisible, examTestID,examSetData } = this.state
+        const { navigation, isLoading, defaultSelected, classList, classListIndex, selectedClass, sectionList,setIndex,set,ExamSetArray, sectionListIndex, selectedSection, pickerDate, selectedDate, subArr, selectedSubject,selectSet, subIndex, errClass, errSub,errSet, errDate, errSection, sectionValid, dateVisible, examTestID,examSetData,disabled } = this.state
         const { loginData, multiBrandingData, modalStatus, modalMessage ,studentsAndExamData} = this.props
         const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.selectDetails[0]
         return (
@@ -1080,9 +1082,10 @@ dispatchStudentExamData(payload){
                                     <DropDownMenu
                                         options={(["NONE"]).concat(ExamSetArray[subIndex])}
                                         onSelect={(idx, value) => this.onDropDownSelect(idx, value, 'set')}
-                                        defaultData={defaultSelected}
+                                        defaultData={ExamSetArray && ExamSetArray[0] =="" ? "NONE" : defaultSelected}
                                         defaultIndex={setIndex}
                                         selectedData={selectSet}
+                                        disabled = {ExamSetArray && ExamSetArray[0] =="" ? !disabled : disabled}
                                         icon={require('../../assets/images/arrow_down.png')}
                                     />
                                 </View>
