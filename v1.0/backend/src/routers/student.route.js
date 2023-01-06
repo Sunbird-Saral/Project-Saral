@@ -107,10 +107,6 @@ router.post('/fetchStudentsandExamsByQuery', auth, async (req, res) => {
         examMatch.examDate = subject[1]
     }
 
-    if (req.body.set) {
-        setMatch = req.body.set ? req.body.set : '' 
-    }
-    
     try {
 
         await Helper.lockScreenValidator(req.school)

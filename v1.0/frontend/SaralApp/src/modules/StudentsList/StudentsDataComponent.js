@@ -48,7 +48,7 @@ const StudentsDataComponent = ({
         const hasNetwork = await checkNetworkConnectivity()
         let isStudentScannedInLocal = ''
         let filterStdData           = ''
-
+        let hasSet = filteredData.hasOwnProperty("set") ? filteredData.set.length >= 0 ? filteredData.set : '' : ''
         if (stdData != null) {
              filterStdData = stdData.filter((e, i) => {
 
@@ -60,11 +60,13 @@ const StudentsDataComponent = ({
             })
 
             if (filterStdData.length > 0) {
-                isStudentScannedInLocal = filterStdData[0].studentsMarkInfo.filter((o) => { return o.studentId == data.studentId && o.studentAvailability === true && o.marksInfo.length > 0})
+                isStudentScannedInLocal = filterStdData[0].studentsMarkInfo.filter((o) => { 
+                    return o.studentId == data.studentId && o.studentAvailability === true && o.marksInfo.length > 0 && hasSet == o.set})
             }
         }
 
-        const isSheetScanned = typeof (scanedData) === 'object' && scanedData.hasOwnProperty("data") ? scanedData.data.length > 0 && scanedData.data.filter((o) => o.studentId == data.studentId && o.studentAvailability === true && o.marksInfo.length > 0) : []
+        const isSheetScanned = typeof (scanedData) === 'object' && scanedData.hasOwnProperty("data") ? scanedData.data.length > 0 && scanedData.data.filter((o) => o.studentId == data.studentId && o.studentAvailability === true && o.marksInfo.length > 0 && hasSet == o.set) : []
+        
         if (isStudentPresent) {
             if (isSheetScanned.length > 0 || isStudentScannedInLocal.length > 0) {
                 let data = {
