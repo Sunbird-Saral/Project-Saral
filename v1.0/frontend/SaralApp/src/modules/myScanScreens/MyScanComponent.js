@@ -153,10 +153,10 @@ class MyScanComponent extends Component {
                 }
             });
 
-            let hasSet = filteredData.set && filteredData.set.length > 0 ? filteredData.set.length : ''
-            if (hasSet.length > 0 && filter.length > 0) {
+            let hasSet = filteredData.set && filteredData.set.length >= 0 ? filteredData.set.length : ''
+            if (hasSet.length >= 0 && filter.length > 0) {
                 let findSetStudent = filter.length > 0 ? filter[0].studentsMarkInfo.filter((item) => {
-                    if (hasSet.length > 0) {
+                    if (hasSet.length >= 0) {
                         return item.set == filteredData.set;
                     }
                 })
