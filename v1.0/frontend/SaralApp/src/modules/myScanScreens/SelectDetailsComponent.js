@@ -714,22 +714,7 @@ dispatchStudentExamData(payload){
                                 if(resultDataIndex > -1 && subjBool == false){
                                     getStudentExamCache[resultDataIndex].subject = this.state.selectedSubject
                                     getStudentExamCache[resultDataIndex].data = studentsAndExamData
-                                    if (hasSetValue) {
-                                        getStudentExamCache[resultDataIndex].set = setValue
-                                    }
-                                } else if (setValue.length > 0 && hasSetValue == -1) {
-                                    let payload = {
-                                        key :`${loginData.data.school.schoolId}`,
-                                        class : selectedClass,
-                                        section: selectedSection,
-                                        data: studentsAndExamData,
-                                        data2: studentsAndExamData,
-                                        subject: this.state.selectedSubject,
-                                        set: setValue
-                                    }
-                                    getStudentExamCache.push(payload);
-                                    
-                                } else if (result > -1) {
+                                }else if (result > -1) {
                                     getStudentExamCache[result].data = studentsAndExamData
                                 } else {
                                     let payload = {
@@ -739,9 +724,6 @@ dispatchStudentExamData(payload){
                                         data: studentsAndExamData,
                                         data2: studentsAndExamData,
                                         subject: this.state.selectedSubject
-                                    }
-                                    if (hasSetValue.length > 0) {
-                                        payload.set = hasSetValue
                                     }
                                     getStudentExamCache.push(payload);
                                 }
@@ -880,15 +862,13 @@ dispatchStudentExamData(payload){
   async  callExamAndStudentData(token){
 
         let hasNetwork = await checkNetworkConnectivity();
-        let setValue = this.state.selectSet.length > 0 ? this.state.selectSet[this.state.subIndex].length > 0 ? this.state.selectSet[this.state.subIndex] : '' : ''
 
 
             let hasCacheData = await getRegularStudentExamApi();
             let cacheFilterData = hasCacheData != null 
             ?
             hasCacheData.filter((element)=>{
-                let conditionSwitch = setValue.length > 0  ? element.key == this.props.loginData.data.school.schoolId && element.class == this.state.selectedClass && element.section == this.state.selectedSection && element.subject == this.state.selectedSubject &&  element.set == setValue 
-                :
+                let conditionSwitch =
                  element.key == this.props.loginData.data.school.schoolId && element.class == this.state.selectedClass && element.section == this.state.selectedSection && element.subject == this.state.selectedSubject
                 if (conditionSwitch) {
                     return true
@@ -906,9 +886,6 @@ dispatchStudentExamData(payload){
                 classId: this.state.selectedClassId,
                 section: this.state.selectedSection,
                 subject: this.state.selectedSubject,
-            }
-            if (setValue.length > 0) {
-                dataPayload.set = setValue
             }
             let apiObj = new GetStudentsAndExamData(dataPayload, token);
             this.props.APITransport(apiObj)
