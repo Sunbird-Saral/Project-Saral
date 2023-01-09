@@ -1346,11 +1346,11 @@ const ScannedDetailsComponent = ({
                                                     {
                                                         isMultipleStudent
                                                             ?
-                                                            <Text style={styles.nameTextStyle}>{Strings.page_no + ': ' + (currentIndex + 1)}</Text>
+                                                            <Text style={styles.nameTextStyle}>{BrandLabel && BrandLabel.Record_no ? BrandLabel.Record_no:Strings.Record_no + ': ' + (currentIndex + 1)}</Text>
                                                             :
                                                             ocrLocalResponse.layout.pages > 0
                                                                 ?
-                                                                <Text style={styles.nameTextStyle}>{Strings.page_no + ': ' + (currentIndex)}</Text>
+                                                                <Text style={styles.nameTextStyle}>{BrandLabel && BrandLabel.Record_no ? BrandLabel.Record_no:Strings.Record_no + ': ' + (currentIndex)}</Text>
                                                                 :
                                                                 null
                                                     }

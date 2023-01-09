@@ -135,10 +135,10 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
                 }   
             })
 
-            let hasSet = filteredData.hasOwnProperty("set") ? filteredData.set.length > 0 ? filteredData.set : '' : ''
-            if (hasSet.length > 0) {
+            let hasSet = filteredData.hasOwnProperty("set") ? filteredData.set.length >= 0 ? filteredData.set : '' : ''
+            if (hasSet.length >= 0) {
                 let findSetStudent = filterscandata.length > 0 ? filterscandata[0].studentsMarkInfo.filter((item) => {
-                    if (hasSet.length > 0) {
+                    if (hasSet.length >= 0) {
                         return item.set == hasSet;
                     }
                 })

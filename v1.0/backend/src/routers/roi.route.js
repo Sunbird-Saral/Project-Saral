@@ -107,50 +107,52 @@ router.delete('/roi/:examId', auth, async (req, res) => {
     }
 })
 
-router.get('/roi/:examId?',auth, async (req, res) => {
+router.get('/roi/:examId?', auth, async (req, res) => {
     try {
+        const examExist = await Exam.findOne({ examId: req.params.examId }).lean()
     
-        const examExist = await Exam.findOne({examId: req.params.examId}).lean()
-        if(examExist){
-            const school = await School.findOne({schoolId: req.school.schoolId})
-            const roiExist = await ROI.findOne({ classId: examExist.classId, subject: examExist.subject,state: school.state, type:examExist.type}).lean()
+        if (examExist) {
+            const school = await School.findOne({ schoolId: req.school.schoolId })
+            const roiExist = await ROI.findOne({ classId: examExist.classId, subject: examExist.subject, state: school.state, type: examExist.type }).lean()
+            let examSetLookupExist = {}
             
-            if(roiExist){
-                if(req.query.set && examExist && typeof examExist == "object" && examExist.set){
-                    let examSetLookupExist = {
+            if (roiExist) {
+
+                if (req.query.set && examExist && typeof examExist == "object" && examExist.set) {
+
+                    examSetLookupExist = {
                         classId: examExist.classId,
                         subject: examExist.subject,
                         state: school.state,
                         type: examExist.type,
                         set: req.query.set
                     }
-                    roi = await ROI.find(examSetLookupExist,{_id: 0,__v: 0 }).lean()
-                }else{
-                    let lookup = {
+                } else {
+                    examSetLookupExist = {
                         classId: examExist.classId,
                         subject: examExist.subject,
                         state: school.state,
                         type: examExist.type
                     }
-                    roi = await ROI.find(lookup,{_id: 0,__v: 0 }).lean()
                 }
-                if(roi.length){
+                let roi = await ROI.find(examSetLookupExist, { _id: 0, __v: 0 }).lean()
+                if (roi.length) {
                     let resultObj = {}
-                    for(let data of roi){
+                    for (let data of roi) {
                         resultObj.layout = data.roi.layout,
                         resultObj.roiId = data.roiId
                     }
                 res.status(200).send(resultObj)
-                }else{
-                    res.status(404).send({"message": "ROI does not exist"})              
+                } else {
+                    res.status(404).send({ "message": "ROI does not exist" })
                 }
-            }else{
-                res.status(404).send({"message": "ROI does not exist"})
+            } else {
+                res.status(404).send({ "message": "ROI does not exist" })
             }
-        }else{
-            res.status(404).send({"message": "Exam Id does not exist"})
+        } else {
+            res.status(404).send({ "message": "Exam Id does not exist" })
         }
-    } catch (e){   
+    } catch (e) {
         res.status(400).send(e)
     }
 })

@@ -22,6 +22,7 @@ const HEIGHT = Dimensions.get('window').height;
 const HEIGHT_MODAL = 150;
 const ScanHistoryCard = ({
     showButtons = true,
+    showButtons1 = true,
     scanstatusbutton = true,
     navigation,
     filteredData,
@@ -49,12 +50,13 @@ const ScanHistoryCard = ({
         getStudentList()
     }, [])
     const getSaveCount = () => {
-        let hasSet = filteredData.response.hasOwnProperty("set") ? filteredData.response.set.length > 0 ? filteredData.response.set : '' : ''
+        let hasSet = filteredData.response.hasOwnProperty("set") ? filteredData.response.set.length >= 0 ? filteredData.response.set : '' : ''
+       
         let data =
             typeof (scanedData.response) === "object" ?
                 scanedData.response.data ?
                     scanedData.response.data.filter((o, index) => {
-                        let stdCondition = hasSet.length > 0 ? o.studentAvailability && o.marksInfo.length > 0 && hasSet == o.set : o.studentAvailability && o.marksInfo.length > 0 && o.examDate == filteredData.response.examDate
+                        let stdCondition = hasSet.length >= 0 ? o.studentAvailability && o.marksInfo.length > 0 && hasSet == o.set : o.studentAvailability && o.marksInfo.length > 0 && o.examDate == filteredData.response.examDate
                         if (stdCondition) {
                             return true
                         }
@@ -397,28 +399,61 @@ const ScanHistoryCard = ({
                     <View style={{ marginBottom: '5%', marginTop: '2%', width: '100%', alignItems: 'center' }}>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', width: '100%' }}>
                             <TouchableOpacity
-                                style={{ backgroundColor: AppTheme.GREY, borderRadius: 4, width: '80%', alignItems: 'center', justifyContent: 'center', elevation: 8, paddingVertical: 4 }}
+                                style={{
+                                    backgroundColor: AppTheme.WHITE, borderRadius: 4,
+
+                                    width: true ? '45%' : '80%',
+                                    alignItems: 'center', justifyContent: 'center', elevation: 8, paddingVertical: 4,
+                                    marginLeft: 5,
+                                    marginRight: 5
+                                }}
                                 onPress={onPressContinue}
                             >
-                                <Text  style={{fontFamily : monospace_FF,color : AppTheme.WHITE}} >{Strings.continue_scan}</Text>
+                                <Text style={{ fontFamily: monospace_FF, color: AppTheme.BLACK }} >{Strings.continue_scan}</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
                 }
-                 {
-                    scanstatusbutton
-                    &&
-                    <View style={{bottom:10,  width: '100%', alignItems: 'center' }}>
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', width: '100%' }}>
+
+                <View style={{ marginBottom: '3%', width: '100%', alignItems: 'center' }}>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', width: '100%' }}>
+                        {
+                            scanstatusbutton
+                            &&
+
                             <TouchableOpacity
-                                style={{ backgroundColor: AppTheme.GREY, borderRadius: 4, width: '80%', alignItems: 'center', justifyContent: 'center', elevation: 8, paddingVertical: 4 }}
-                                 onPress={onPressScanStatus}
+                                style={{
+                                    backgroundColor: AppTheme.WHITE, borderRadius: 4,
+
+                                    width: true ? '45%' : '80%',
+                                    alignItems: 'center', justifyContent: 'center', elevation: 8, paddingVertical: 4,
+                                    marginLeft: 5,
+                                    marginRight: 5
+                                }}
+                                onPress={onPressScanStatus}
                             >
-                                <Text  style={{fontFamily : monospace_FF, color : AppTheme.WHITE}}>{Strings.scan_status}</Text>
+                                <Text style={{ fontFamily: monospace_FF, color: AppTheme.BLACK }}>{Strings.scan_status}</Text>
                             </TouchableOpacity>
-                        </View>
+
+                        }
+                        {
+                            scanstatusbutton
+                            &&
+                            <TouchableOpacity
+                                style={{
+                                    backgroundColor: AppTheme.WHITE, borderRadius: 4, width: '45%',
+                                    alignItems: 'center', justifyContent: 'center', elevation: 8, paddingVertical: 4,
+                                    marginLeft: 5,
+                                    marginRight: 5
+                                }}
+                                onPress={onPressSaveInDB}
+                            >
+                                <Text style={{ fontFamily: monospace_FF, color: AppTheme.BLACK }}>{Strings.save_scan}</Text>
+                            </TouchableOpacity>}
                     </View>
-                }
+                </View>
+
+
 
             </TouchableOpacity>
 

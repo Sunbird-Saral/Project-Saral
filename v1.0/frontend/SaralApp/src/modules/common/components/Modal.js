@@ -20,13 +20,9 @@ const ModalPopup = ({
         animationType="slide"
         transparent={true}
         visible={visible}
-        onRequestClose= {
-        //   Alert.alert("Modal has been closed.");
-          onRequestClose
-        //   setModalVisible(!modalVisible);
-        }
+        onRequestClose= {onRequestClose}
       >
-       <View style={{ backgroundColor: '#fff', flex: 1 }}>
+       <View style={{ backgroundColor: '#fff', flex: 1,bottom:5 }}>
         <ScrollView scrollEnabled showsVerticalScrollIndicator={false}>
           <View style={borderCutomStyle}>
             <Text style={[styles.modalText]}>{data}</Text>
