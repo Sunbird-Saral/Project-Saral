@@ -63,11 +63,5 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <queries>
-        <package android:name="com.example.store" />
-        <package android:name="com.example.services" />
-    </queries>
-
-
     </application>
 </manifest>
