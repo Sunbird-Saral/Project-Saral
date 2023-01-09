@@ -110,6 +110,12 @@ const StudentsDataComponent = ({
             "totalMarks": 0,
             "studentAvailability": !studentAvailability
         }
+
+        let hasSet = filteredData.hasOwnProperty("set") ? filteredData.set.length >= 0 ? filteredData.set : '' : '' 
+        if(hasSet.length >= 0){
+            stdObj.set = hasSet
+        }
+
         if (filterStdData.length > 0) {
             let chkStdPresent = filterStdData[0].studentsMarkInfo.findIndex((val) => val.studentId == studentId && val.marksInfo.length == 0);
             if (chkStdPresent > -1) {
