@@ -170,16 +170,14 @@ android {
             //println project.hasProperty('MYAPP_RELEASE_STORE_FILE')
             //println signingConfigs.release
 
-            //signingConfig signingConfigs.release
+            signingConfig signingConfigs.release
             //signingConfig signingConfigs.debug
       
-            // shrinkResources enableProguardInReleaseBuilds
-            // zipAlignEnabled enableProguardInReleaseBuilds
-            // useProguard enableProguardInReleaseBuilds
+            shrinkResources enableProguardInReleaseBuilds
+            zipAlignEnabled enableProguardInReleaseBuilds
+            useProguard enableProguardInReleaseBuilds
 
-            // minifyEnabled enableProguardInReleaseBuilds
-            minifyEnabled true
-            shrinkResources true
+            minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
             debug {
                 debuggable true

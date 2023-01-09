@@ -52,7 +52,8 @@ class MyScanComponent extends Component {
             scanModalDataVisible: false,
             passDataToModal: [],
             savingStatus: '',
-            examId: ''
+            examId: '',
+            setIsLoading:false
         }
     }
 
@@ -152,10 +153,10 @@ class MyScanComponent extends Component {
                 }
             });
 
-            let hasSet = filteredData.set && filteredData.set.length > 0 ? filteredData.set.length : ''
-            if (hasSet.length > 0 && filter.length > 0) {
+            let hasSet = filteredData.set && filteredData.set.length >= 0 ? filteredData.set : ''
+            if (hasSet.length >= 0 && filter.length > 0) {
                 let findSetStudent = filter.length > 0 ? filter[0].studentsMarkInfo.filter((item) => {
-                    if (hasSet.length > 0) {
+                    if (hasSet.length >= 0) {
                         return item.set == filteredData.set;
                     }
                 })
@@ -821,7 +822,10 @@ class MyScanComponent extends Component {
                                 themeColor1={this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE}
                                 showButtons={false}
                                 scanStatusData={this.state.scanStatusData}
+                                setScanStatusData={()=>this.setState({scanStatusData:0})}
                                 navigation={this.props.navigation}
+                                // isLoading={isLoading}
+                                setIsLoading={()=>this.setState({isLoading:false})}
                             />
 
                             <View style={styles.viewnxtBtnStyle1}>
@@ -878,27 +882,27 @@ class MyScanComponent extends Component {
 
                         <View style={{ flexWrap: "wrap", flexDirection: "row", width: "100%", alignItems: "center", justifyContent: 'center', marginTop: 10 }}>
                             <ButtonComponent
-                                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: "#A9A9A9", height: 30, width: "45%", marginHorizontal: 0, marginRight: 10 }]}
-                                btnText={Strings.saved_data.toUpperCase()}
+                                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: AppTheme.WHITE, height: 30, width: "45%", marginHorizontal: 0, marginRight: 10 }]}
+                                btnText={Strings.saved_data}
                                 activeOpacity={0.8}
-                                customBtnTextStyle={{ fontSize: 12 }}
+                                customBtnTextStyle={{fontFamily: monospace_FF, fontSize: 13, color: AppTheme.BLACK}}
                                 onPress={() => this.openScanModal("save")}
                             />
 
 
                             <ButtonComponent
-                                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: "#A9A9A9", height: 30, width: "50%", marginHorizontal: 0 }]}
-                                btnText={Strings.scan_data.toUpperCase()}
+                                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor:AppTheme.WHITE, height: 30, width: "50%", marginHorizontal: 0 }]}
+                                btnText={Strings.scan_data}
                                 activeOpacity={0.8}
-                                customBtnTextStyle={{ fontSize: 12 }}
+                                customBtnTextStyle={{fontFamily: monospace_FF, fontSize: 13, color: AppTheme.BLACK }}
                                 onPress={() => this.openScanModal("scan")}
                             />
 
                         <ButtonComponent
-                                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: "#A9A9A9", height: 30, width: "45%", marginHorizontal: 0 }]}
-                                btnText={Strings.save_all_scan.toUpperCase()}
+                                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor:AppTheme.WHITE, height: 30, width: "45%", marginHorizontal: 0 }]}
+                                btnText={Strings.save_all_scan}
                                 activeOpacity={0.8}
-                                customBtnTextStyle={{ fontSize: 12 }}
+                                customBtnTextStyle={{fontFamily: monospace_FF, fontSize: 13, color: AppTheme.BLACK }}
                                 onPress={this.onPressSaveInDB}
                             />
                         </View>

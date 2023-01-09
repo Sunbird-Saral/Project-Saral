@@ -83,7 +83,8 @@
           "Sr No",
            "Questions",
           "Rating"
-        ]
+        ],
+        "Record_no":"Record Number"
       }]
     },
     "state": "karnataka",
@@ -149,7 +150,8 @@
           "questions":"Items",
           "marks" :"Result"
       }
-      }]
+      }],
+      "Record_no":"Record Number"
     },
     "state": "mp",
     "schoolId":"m001"

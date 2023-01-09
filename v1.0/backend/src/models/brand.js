@@ -157,6 +157,9 @@ const BrandSchema = new mongoose.Schema({
             },
            ListTableHeading:{
                type:Array
+            },
+            Record_no:{
+                type: String
             }
         }]
     }   

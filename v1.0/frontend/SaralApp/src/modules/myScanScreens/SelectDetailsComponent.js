@@ -73,7 +73,8 @@ const clearState = {
     subjectsData: [],
     isCalledStudentAndExam: false,
     set:[],
-    ExamSetArray:[]
+    ExamSetArray:[],
+    disabled:false
 }
 
 class SelectDetailsComponent extends Component {
@@ -123,7 +124,8 @@ class SelectDetailsComponent extends Component {
             isHidden: false,
             isCalledStudentAndExam: false,
             set:[],
-            ExamSetArray:[]
+            ExamSetArray:[],
+            disabled:false
         }
         this.onPress = this.onPress.bind(this);
         this.onBack = this.onBack.bind(this)
@@ -265,7 +267,7 @@ class SelectDetailsComponent extends Component {
         }
         else if (type == 'sub') {
             let setData = []
-            let hasSetData = this.state.set.length > 0 ? this.state.set[Number(index)] ? this.state.set[Number(index)].length > 0 ? -1 : 0 : 0 : 0
+            let hasSetData = this.state.set.length > 0 ? this.state.set[Number(index)] ? this.state.set[Number(index)].length >= 0 ? -1 : 0 : 0 : 0
             if (value != selectedSubject) {
                
                 this.setState({
@@ -534,12 +536,10 @@ dispatchStudentExamData(payload){
                                         testID.push(o.examId)
                                         examDates.push(o.examDate)
                                         subjects.push(o.subject)
-                                        set.push(o.hasOwnProperty("set") && o.set.length > 0 ? o.set : [])
+                                        set.push(o.hasOwnProperty("set") && o.set.length > 0 ? o.set  : [])
                             
                                     })
                     
-
-                                    
                                     this.setState({
                                         errSection: '',
                                         sectionValid: true,
@@ -714,22 +714,7 @@ dispatchStudentExamData(payload){
                                 if(resultDataIndex > -1 && subjBool == false){
                                     getStudentExamCache[resultDataIndex].subject = this.state.selectedSubject
                                     getStudentExamCache[resultDataIndex].data = studentsAndExamData
-                                    if (hasSetValue) {
-                                        getStudentExamCache[resultDataIndex].set = setValue
-                                    }
-                                } else if (setValue.length > 0 && hasSetValue == -1) {
-                                    let payload = {
-                                        key :`${loginData.data.school.schoolId}`,
-                                        class : selectedClass,
-                                        section: selectedSection,
-                                        data: studentsAndExamData,
-                                        data2: studentsAndExamData,
-                                        subject: this.state.selectedSubject,
-                                        set: setValue
-                                    }
-                                    getStudentExamCache.push(payload);
-                                    
-                                } else if (result > -1) {
+                                }else if (result > -1) {
                                     getStudentExamCache[result].data = studentsAndExamData
                                 } else {
                                     let payload = {
@@ -739,9 +724,6 @@ dispatchStudentExamData(payload){
                                         data: studentsAndExamData,
                                         data2: studentsAndExamData,
                                         subject: this.state.selectedSubject
-                                    }
-                                    if (hasSetValue.length > 0) {
-                                        payload.set = hasSetValue
                                     }
                                     getStudentExamCache.push(payload);
                                 }
@@ -784,7 +766,7 @@ dispatchStudentExamData(payload){
     }
 
     validateFields = () => {
-        const { classListIndex, subIndex, sectionListIndex, sectionValid ,setIndex} = this.state
+        const { classListIndex, subIndex, sectionListIndex, sectionValid ,setIndex,ExamSetArray} = this.state
         const { scanTypeData } = this.props
         if (classListIndex == -1) {
             this.setState({
@@ -823,7 +805,7 @@ dispatchStudentExamData(payload){
             })
             return false
         }
-       else if (setIndex == -1) {
+       else if (setIndex == -1 && ExamSetArray[subIndex] != "") {
             this.setState({
                 errClass: '',
                 errSection: '',
@@ -861,7 +843,7 @@ dispatchStudentExamData(payload){
                     examDate: examDate[subIndex],
                     section: selectedSection,
                     subject: subjectsData[subIndex],
-                    set: setValue,
+                    set: selectSet =="NONE" ? "" : setValue,
                     examTestID: examTestID[subIndex],
                 }
                 this.props.FilteredDataAction(obj)
@@ -880,15 +862,13 @@ dispatchStudentExamData(payload){
   async  callExamAndStudentData(token){
 
         let hasNetwork = await checkNetworkConnectivity();
-        let setValue = this.state.selectSet.length > 0 ? this.state.selectSet[this.state.subIndex].length > 0 ? this.state.selectSet[this.state.subIndex] : '' : ''
 
 
             let hasCacheData = await getRegularStudentExamApi();
             let cacheFilterData = hasCacheData != null 
             ?
             hasCacheData.filter((element)=>{
-                let conditionSwitch = setValue.length > 0  ? element.key == this.props.loginData.data.school.schoolId && element.class == this.state.selectedClass && element.section == this.state.selectedSection && element.subject == this.state.selectedSubject &&  element.set == setValue 
-                :
+                let conditionSwitch =
                  element.key == this.props.loginData.data.school.schoolId && element.class == this.state.selectedClass && element.section == this.state.selectedSection && element.subject == this.state.selectedSubject
                 if (conditionSwitch) {
                     return true
@@ -906,9 +886,6 @@ dispatchStudentExamData(payload){
                 classId: this.state.selectedClassId,
                 section: this.state.selectedSection,
                 subject: this.state.selectedSubject,
-            }
-            if (setValue.length > 0) {
-                dataPayload.set = setValue
             }
             let apiObj = new GetStudentsAndExamData(dataPayload, token);
             this.props.APITransport(apiObj)
@@ -967,7 +944,7 @@ dispatchStudentExamData(payload){
      
 
     render() {
-        const { navigation, isLoading, defaultSelected, classList, classListIndex, selectedClass, sectionList,setIndex,set,ExamSetArray, sectionListIndex, selectedSection, pickerDate, selectedDate, subArr, selectedSubject,selectSet, subIndex, errClass, errSub,errSet, errDate, errSection, sectionValid, dateVisible, examTestID,examSetData } = this.state
+        const { navigation, isLoading, defaultSelected, classList, classListIndex, selectedClass, sectionList,setIndex,set,ExamSetArray, sectionListIndex, selectedSection, pickerDate, selectedDate, subArr, selectedSubject,selectSet, subIndex, errClass, errSub,errSet, errDate, errSection, sectionValid, dateVisible, examTestID,examSetData,disabled } = this.state
         const { loginData, multiBrandingData, modalStatus, modalMessage ,studentsAndExamData} = this.props
         const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.selectDetails[0]
         return (
@@ -1072,7 +1049,7 @@ dispatchStudentExamData(payload){
                             }
 
                       {
-                            ExamSetArray && ExamSetArray.length > 0 && ExamSetArray[subIndex] != null && ExamSetArray[subIndex] != '' &&  subIndex != -1 &&
+                            ExamSetArray && ExamSetArray.length > 0 && ExamSetArray[subIndex] != null &&
                                 <View style={[styles.fieldContainerStyle, {bottom:25, paddingBottom: subIndex != -1 ? '10%' : '10%' }]}>
                                     <View style={{ flexDirection: 'row' }}>
                                         <Text style={[styles.labelTextStyle]}>{BrandLabel && BrandLabel.Set ? BrandLabel.Set : Strings.set_text}</Text>
@@ -1080,11 +1057,12 @@ dispatchStudentExamData(payload){
                                     </View>
     
                                     <DropDownMenu
-                                        options={ExamSetArray[subIndex]}
+                                        options={(["NONE"]).concat(ExamSetArray[subIndex])}
                                         onSelect={(idx, value) => this.onDropDownSelect(idx, value, 'set')}
-                                        defaultData={defaultSelected}
+                                        defaultData={ExamSetArray &&  ExamSetArray[subIndex] =="" ? ["NONE"] : defaultSelected}
                                         defaultIndex={setIndex}
                                         selectedData={selectSet}
+                                        disabled = {ExamSetArray &&  ExamSetArray[subIndex] =="" ? !disabled : disabled}
                                         icon={require('../../assets/images/arrow_down.png')}
                                     />
                                 </View>
@@ -1098,7 +1076,7 @@ dispatchStudentExamData(payload){
                 <View style={styles.btnContainer}>
                     <ButtonComponent
                         customBtnStyle={[styles.nxtBtnStyle, { backgroundColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE }]}
-                        btnText={Strings.submit_text}
+                        btnText={Strings.submit_text.toUpperCase()}
                         onPress={this.onSubmitClick}
                     />
                 </View>
