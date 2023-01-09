@@ -133,10 +133,11 @@ const ShareComponent = ({
       subject: `Saral App v1.0 logs collection`,
       message: `${errorMessage ? errorMessage : ''}`,
       email: loginEmail ? loginEmail : '',  
+      social: Share.Social.EMAIL,
     };
 
     try {
-      const ShareResponse = await Share.open(shareOptions)
+      const ShareResponse = await Share.shareSingle(shareOptions)
       console.log('ShareResponse', JSON.stringify(ShareResponse))
     } catch (error) {
       console.log(error);
