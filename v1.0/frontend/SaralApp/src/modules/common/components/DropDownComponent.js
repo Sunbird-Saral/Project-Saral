@@ -32,7 +32,7 @@ const DropDownMenu = ({
             
             >
                 <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', }}>
-                    <Text style={[styles.dropDownTextLabelStyle, {color: defaultIndex == -1 ? AppTheme.BLACK_OPACITY_30: AppTheme.BLACK,fontFamily : monospace_FF}]}>
+                    <Text style={[styles.dropDownTextLabelStyle, {color: defaultIndex == -1 && !disabled ? AppTheme.BLACK_OPACITY_30: AppTheme.BLACK,fontFamily : monospace_FF}]}>
                         {defaultIndex == -1 ? defaultData: selectedData}
                     </Text>
                     {icon &&

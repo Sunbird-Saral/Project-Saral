@@ -334,8 +334,8 @@ useEffect(() => {
                 "securedMarks": 0,
                 "totalMarks": 0
             }
-            let hasSet = filteredData.hasOwnProperty("set") ? filteredData.set.length > 0 ? filteredData.set : '' : '' 
-            if(hasSet.length > 0){
+            let hasSet = filteredData.hasOwnProperty("set") ? filteredData.set.length >= 0 ? filteredData.set : '' : '' 
+            if(hasSet.length >= 0){
                 stdPstAbs.set = hasSet
             }
             stdPstAbs.studentAvailability = element.studentAvailability
@@ -486,12 +486,12 @@ useEffect(() => {
             callScanStatusData()
             
         } else if (hasNetwork) {
-            let hasSet = filteredData.hasOwnProperty("set") ? filteredData.set.length > 0 ? `?set=${filteredData.set}` : '' : ''
+            let hasSet = filteredData.hasOwnProperty("set") ? filteredData.set.length >= 0 ? `?set=${filteredData.set}` : '' : ''
             let payload =
             {
             "examId": filteredData.examTestID,
             }
-            if (hasSet.length > 0) {
+            if (hasSet.length >= 0) {
             payload.set = hasSet
             }
             let token = loginData.data.token
