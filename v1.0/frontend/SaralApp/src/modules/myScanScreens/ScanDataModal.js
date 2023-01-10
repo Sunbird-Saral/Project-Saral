@@ -209,6 +209,13 @@ const ScanDataModal = ({
                 </ScrollView>
 
                 <View style={{alignItems:'center',flexDirection:'row',justifyContent: 'space-between'}}>
+                    
+            <ButtonComponent
+                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+                btnText={Strings.close}
+                activeOpacity={0.8}
+                onPress={()=> setModalVisible()}
+                />
                 { 
                 savingStatus == 'scan' &&
                 <ButtonComponent
@@ -221,13 +228,6 @@ const ScanDataModal = ({
                 } }
                 />
 }
-
-            <ButtonComponent
-                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
-                btnText={Strings.close}
-                activeOpacity={0.8}
-                onPress={()=> setModalVisible()}
-                />
                 </View>
 
             </View>
