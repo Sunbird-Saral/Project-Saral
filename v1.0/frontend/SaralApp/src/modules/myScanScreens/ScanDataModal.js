@@ -29,7 +29,8 @@ const ScanDataModal = ({
     multiBrandingData,
     loginData,
     navigation,
-    filteredData
+    filteredData,
+    saveData
 }) => {
 
     //Hooks
@@ -46,8 +47,8 @@ const ScanDataModal = ({
             getPresentStudentList(localstutlist)
             getStudentList()
         } else {
-            let hasSet = filteredData.set && filteredData.set.length > 0 ? filteredData.set.length : ''
-            if (hasSet.length > 0) {
+            let hasSet = filteredData.set && filteredData.set.length >= 0 ? filteredData.set.length : ''
+            if (hasSet.length >= 0) {
                 getPresentStudentList(localstutlist)
             } else {
                 setPresentStudentList(localstutlist)
@@ -57,13 +58,13 @@ const ScanDataModal = ({
 
     //functions
     const getPresentStudentList = (loacalstutlist) => {
-        let hasSet = filteredData.set && filteredData.set.length > 0 ? filteredData.set.length : ''
+        let hasSet = filteredData.set && filteredData.set.length >= 0 ? filteredData.set.length : ''
         let data = typeof(loacalstutlist) === "object"
             ?
             loacalstutlist[0]
                 ?
                 loacalstutlist[0].studentsMarkInfo.filter((o, index) => {
-                    let stdCondition = hasSet.length > 0 ? o.studentAvailability && o.marksInfo.length > 0 && o.set == hasSet : o.studentAvailability && o.marksInfo.length > 0
+                    let stdCondition = hasSet.length >= 0 ? o.studentAvailability && o.marksInfo.length > 0 && o.set == hasSet : o.studentAvailability && o.marksInfo.length > 0
                     if (stdCondition) {
                         return true
                     }
@@ -207,6 +208,19 @@ const ScanDataModal = ({
                 </ScrollView>
 
                 <View style={{alignItems:'center'}}>
+                { 
+                savingStatus == 'scan' &&
+                <ButtonComponent
+                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE, marginBottom:10 }]}
+                btnText={Strings.save_all_scan.toUpperCase()}
+                activeOpacity={0.8}
+                onPress={()=> {
+                    setModalVisible()
+                    saveData()
+                } }
+                />
+}
+
             <ButtonComponent
                 customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
                 btnText={Strings.close.toUpperCase()}

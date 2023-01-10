@@ -3,6 +3,7 @@ import { Text, View, StyleSheet, Pressable, ScrollView,Modal } from 'react-nativ
 import ButtonComponent from './ButtonComponent';
 import AppTheme from '../../../utils/AppTheme';
 import { monospace_FF } from '../../../utils/CommonUtils';
+import Strings from '../../../utils/Strings';
 
 const ModalPopup = ({
     visible,
