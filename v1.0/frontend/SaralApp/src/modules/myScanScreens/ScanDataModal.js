@@ -47,7 +47,7 @@ const ScanDataModal = ({
             getPresentStudentList(localstutlist)
             getStudentList()
         } else {
-            let hasSet = filteredData.set && filteredData.set.length >= 0 ? filteredData.set.length : ''
+            let hasSet = filteredData ? filteredData.set ? filteredData.set.length >= 0 ? filteredData.set : "" : "" : ""
             if (hasSet.length >= 0) {
                 getPresentStudentList(localstutlist)
             } else {
@@ -58,12 +58,13 @@ const ScanDataModal = ({
 
     //functions
     const getPresentStudentList = (loacalstutlist) => {
-        let hasSet = filteredData.set && filteredData.set.length >= 0 ? filteredData.set.length : ''
+        let hasSet = filteredData ? filteredData.set ? filteredData.set.length >= 0 ? filteredData.set : "" : "" : ""
+        let dataList = savingStatus == 'scan' ? typeof(loacalstutlist) === "object" ? localstutlist[0] ? loacalstutlist[0].studentsMarkInfo : [] : [] : loacalstutlist;
         let data = typeof(loacalstutlist) === "object"
             ?
             loacalstutlist[0]
                 ?
-                loacalstutlist[0].studentsMarkInfo.filter((o, index) => {
+                dataList.filter((o, index) => {
                     let stdCondition = hasSet.length >= 0 ? o.studentAvailability && o.marksInfo.length > 0 && o.set == hasSet : o.studentAvailability && o.marksInfo.length > 0
                     if (stdCondition) {
                         return true
@@ -207,12 +208,19 @@ const ScanDataModal = ({
                     />
                 </ScrollView>
 
-                <View style={{alignItems:'center'}}>
+                <View style={{alignItems:'center',flexDirection:'row',justifyContent: 'space-between'}}>
+                    
+            <ButtonComponent
+                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+                btnText={Strings.close}
+                activeOpacity={0.8}
+                onPress={()=> setModalVisible()}
+                />
                 { 
                 savingStatus == 'scan' &&
                 <ButtonComponent
-                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE, marginBottom:10 }]}
-                btnText={Strings.save_all_scan.toUpperCase()}
+                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}]}
+                btnText={Strings.save_scan}
                 activeOpacity={0.8}
                 onPress={()=> {
                     setModalVisible()
@@ -220,13 +228,6 @@ const ScanDataModal = ({
                 } }
                 />
 }
-
-            <ButtonComponent
-                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
-                btnText={Strings.close.toUpperCase()}
-                activeOpacity={0.8}
-                onPress={()=> setModalVisible()}
-                />
                 </View>
 
             </View>
@@ -266,9 +267,10 @@ const styles = StyleSheet.create({
         fontFamily : monospace_FF
     },
     nxtBtnStyle1: {
-        width:'90%',
+        flex: 1,
         borderRadius: 10,
-        marginBottom: 50
+        marginBottom: 50,
+        marginHorizontal: 10
     },
     schoolName: {
         fontSize: AppTheme.FONT_SIZE_REGULAR,

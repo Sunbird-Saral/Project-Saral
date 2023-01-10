@@ -369,18 +369,19 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
             contentContainerStyle={styles.content}
             />
 
-          <View style={{alignItems:'center'}}>
-            <ButtonComponent
+          <View style={{justifyContent:'space-between',flexDirection:'row'}}>
+          <ButtonComponent
                 customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
-                btnText={Strings.save_all_scan.toUpperCase()}
-                activeOpacity={0.8}
-                onPress={()=> onPressSaveInDB()}
-                />
-            <ButtonComponent
-                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
-                btnText={Strings.close.toUpperCase()}
+                btnText={Strings.close}
                 activeOpacity={0.8}
                 onPress={()=> onBackPress()}
+                />
+
+            <ButtonComponent
+                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+                btnText={Strings.save_scan}
+                activeOpacity={0.8}
+                onPress={()=> onPressSaveInDB()}
                 />
                 </View>
 

@@ -79,12 +79,12 @@
         "Exam": "Assesment",
         "StudentDetail": "Employee Details",
         "CorrectId": "please correct employe id",
+        "RecordNo":"Record Number",
         "ListTableHeading" : [
           "Sr No",
            "Questions",
           "Rating"
-        ],
-        "Record_no":"Record Number"
+        ]
       }]
     },
     "state": "karnataka",
@@ -144,14 +144,14 @@
         "Exam": "Assesment",
         "StudentDetail": "Details",
         "CorrectId": "please correct employe id",
+        "RecordNo":"Record Number",
         "ListTableHeading":{
           "id": "Identifier",
           "sr_no": "Sr No",
           "questions":"Items",
           "marks" :"Result"
       }
-      }],
-      "Record_no":"Record Number"
+      }]
     },
     "state": "mp",
     "schoolId":"m001"

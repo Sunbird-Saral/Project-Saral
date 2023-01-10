@@ -155,11 +155,11 @@ const BrandSchema = new mongoose.Schema({
            CorrectId:{
                type: String
             },
+            RecordNo:{
+                type: String
+            },
            ListTableHeading:{
                type:Array
-            },
-            Record_no:{
-                type: String
             }
         }]
     }   
