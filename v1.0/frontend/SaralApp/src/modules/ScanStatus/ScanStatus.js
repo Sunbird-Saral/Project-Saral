@@ -149,7 +149,7 @@ const ScanStatus = ({
 
            <View style={{alignItems:'center'}}>
             <ButtonComponent
-                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+               customBtnStyle={[styles.nxtBtnStyle1, {flex:0, width: '90%', backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
                 btnText={Strings.close.toUpperCase()}
                 activeOpacity={0.8}
                 onPress={()=> onBackPress()}
