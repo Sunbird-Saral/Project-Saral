@@ -955,6 +955,8 @@ class MyScanComponent extends Component {
                     savingStatus={savingStatus}
                     bgColor={this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1: AppTheme.BLUE}
                     navigation={this.props.navigation}
+                    saveData={this.onPressSaveInDB}
+
               />
             </View>
         );
