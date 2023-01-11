@@ -625,7 +625,7 @@ const ScannedDetailsComponent = ({
             "studentsMarkInfo": stdMarkInfo,
             "examId": filteredData.examTestID,
             "userId": loginData.data.school.schoolId,
-            "set": filteredData.set,
+            "set": filteredData.hasOwnProperty("set") ? filteredData.set : ""
         }
         saveAndFetchFromLocalStorag(saveObj)
     }
@@ -1197,7 +1197,7 @@ const ScannedDetailsComponent = ({
                     "securedMarks": sumOfAllMarks > 0 ? sumOfAllMarks : 0,
                     "totalMarks": maxMarksTotal > 0 ? maxMarksTotal : 0,
                     "marksInfo": Studentmarks,
-                    "set": minimalFlag ? 0 : filteredData.set ,
+                    "set": minimalFlag ? "" : filteredData.set ,
                     "studentAvailability": true,
                 }
             ]
@@ -1346,11 +1346,11 @@ const ScannedDetailsComponent = ({
                                                     {
                                                         isMultipleStudent
                                                             ?
-                                                            <Text style={styles.nameTextStyle}>{Strings.page_no + ': ' + (currentIndex + 1)}</Text>
+                                                            <Text style={styles.nameTextStyle}>{BrandLabel && BrandLabel.Record_no ? BrandLabel.Record_no:Strings.Record_no + ': ' + (currentIndex + 1)}</Text>
                                                             :
                                                             ocrLocalResponse.layout.pages > 0
                                                                 ?
-                                                                <Text style={styles.nameTextStyle}>{Strings.page_no + ': ' + (currentIndex)}</Text>
+                                                                <Text style={styles.nameTextStyle}>{BrandLabel && BrandLabel.Record_no ? BrandLabel.Record_no:Strings.Record_no + ': ' + (currentIndex)}</Text>
                                                                 :
                                                                 null
                                                     }

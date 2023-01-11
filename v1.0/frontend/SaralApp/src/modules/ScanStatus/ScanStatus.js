@@ -85,13 +85,13 @@ const ScanStatus = ({
     }
 
     const getPresentStudentList = ()=>{
-        let hasSet = filteredData.hasOwnProperty("set") ? filteredData.set.length > 0 ? filteredData.set : '' : ''
+        let hasSet = filteredData.hasOwnProperty("set") ? filteredData.set.length >= 0 ? filteredData.set : '' : ''
         let data = typeof (scanedData) === "object"
         ?
         scanedData.data
             ?
             scanedData.data.filter((o, index) => {
-                let stdCondition = hasSet.length > 0 ? o.studentAvailability && o.marksInfo.length > 0 && hasSet == o.set : o.studentAvailability && o.marksInfo.length > 0 & o.examDate == filteredData.examDate
+                let stdCondition = hasSet.length >= 0 ? o.studentAvailability && o.marksInfo.length > 0 && hasSet == o.set : o.studentAvailability && o.marksInfo.length > 0 & o.examDate == filteredData.examDate
                 if (stdCondition) {
                     return true
                 }
@@ -149,7 +149,7 @@ const ScanStatus = ({
 
            <View style={{alignItems:'center'}}>
             <ButtonComponent
-                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+               customBtnStyle={[styles.nxtBtnStyle1, {flex:0, width: '90%', backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
                 btnText={Strings.close.toUpperCase()}
                 activeOpacity={0.8}
                 onPress={()=> onBackPress()}

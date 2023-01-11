@@ -3,6 +3,7 @@ import { Text, View, StyleSheet, Pressable, ScrollView,Modal } from 'react-nativ
 import ButtonComponent from './ButtonComponent';
 import AppTheme from '../../../utils/AppTheme';
 import { monospace_FF } from '../../../utils/CommonUtils';
+import Strings from '../../../utils/Strings';
 
 const ModalPopup = ({
     visible,
@@ -20,13 +21,9 @@ const ModalPopup = ({
         animationType="slide"
         transparent={true}
         visible={visible}
-        onRequestClose= {
-        //   Alert.alert("Modal has been closed.");
-          onRequestClose
-        //   setModalVisible(!modalVisible);
-        }
+        onRequestClose= {onRequestClose}
       >
-       <View style={{ backgroundColor: '#fff', flex: 1 }}>
+       <View style={{ backgroundColor: '#fff', flex: 1,bottom:5 }}>
         <ScrollView scrollEnabled showsVerticalScrollIndicator={false}>
           <View style={borderCutomStyle}>
             <Text style={[styles.modalText]}>{data}</Text>

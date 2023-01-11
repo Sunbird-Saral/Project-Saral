@@ -31,8 +31,8 @@ public class HWClassifier {
      * Name of the model file hosted with Firebase.
      */
     private static final String HOSTED_MODEL_NAME = null;
-    private static final String LOCAL_MODEL_ASSET = "trained_resnet_real_synthetic_v2_20.tflite";
-
+    //private static final String LOCAL_MODEL_ASSET = "trained_resnet_real_synthetic_v2_20.tflite";
+    private static final String LOCAL_MODEL_ASSET = "saral_hwd_model_itr3.tflite";
     /**
      * Dimensions of inputs.
      */

@@ -35,8 +35,9 @@ export const styles = StyleSheet.create({
         flexGrow:1
     },
     nxtBtnStyle1: {
-        width:'90%',
+        flex:1,
         borderRadius: 10,
-        marginBottom: 20
+        marginBottom: 20,
+        marginHorizontal: 10,
     },
 });

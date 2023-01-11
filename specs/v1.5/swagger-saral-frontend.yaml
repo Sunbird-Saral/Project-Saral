@@ -932,6 +932,9 @@ definitions:
                 CorrectId:
                   type: string
                   example: "please correct employe id"
+                RecordNo:
+                  type: string
+                  example: "Record No"
                 ListTableHeading:
                   type: array
                   example: ["Sr No", "Questions", "Rating"]

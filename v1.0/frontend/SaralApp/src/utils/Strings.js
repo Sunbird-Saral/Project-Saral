@@ -8,7 +8,7 @@ export default strings = new LocalizedStrings({
         ok_text: 'Ok',
         submit_text: 'SUBMIT',
         Back :'Back',
-        close:'close',
+        close:'Close',
         get_start: 'GET STARTED',
         permission_deny: 'Permission Deny',
         you_have_no_permission_to_change_settings: 'You have no permission to change settings',
@@ -25,6 +25,7 @@ export default strings = new LocalizedStrings({
         no_text: 'No',
         version_text: 'Version',
         page_no:'Page Number',
+        Record_no:'Record Number',
         skip:'Skip',
         give_permission_from_settings: 'Please give permission from Settings to use app',
         optional_update_available: 'A new update is available of App. Do you want to update now?',
@@ -133,6 +134,8 @@ export default strings = new LocalizedStrings({
         roi_cache_not_available: "Roi cache not available",
         set_text:'set',
         you_dont_have_cache_for_save_count: "You don't have cache for save count",
-        lock_screen: "State/District/School is locked for scanning" 
+        lock_screen: "State/District/School is locked for scanning" ,
+        Mark_Absent:"Please Mark Student Absent",
+        Mark_Present:"Please Mark Student Present"
     }
 })
