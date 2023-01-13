@@ -254,13 +254,11 @@ apply from: file("../../node_modules/@react-native-community/cli-platform-androi
 apply plugin: 'com.google.gms.google-services'
 
 
-//   rootDir ==  C:\Users\test\Desktop\saral\Project-Saral\v1.0\frontend\SaralApp\android
-
 def modelDir = "$rootDir/saralsdk/src/models"
 def hwAlphaNumeric = "model_letter_digits_finetune_18_07_22_epoch_15.tflite"
 def hwDigit = "saral_hwd_model_itr3.tflite"
 
-task copyModels(type: Copy) {
+task copyModelAssets(type: Copy) {
     from("$modelDir") {
           include "**/*$hwAlphaNumeric"
           exclude "**/*$hwDigit"
