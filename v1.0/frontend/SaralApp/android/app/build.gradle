@@ -252,3 +252,16 @@ task copyDownloadableDepsToLibs(type: Copy) {
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
 // SaralSDK uses Firebase library to load and make model prediction
 apply plugin: 'com.google.gms.google-services'
+
+
+def modelDir = "$rootDir/saralsdk/src/models"
+def hwAlphaNumeric = "model_letter_digits_finetune_18_07_22_epoch_15.tflite"
+def hwDigit = "saral_hwd_model_itr3.tflite"
+
+task copyModelAssets(type: Copy) {
+    from("$modelDir") {
+          include "**/*$hwAlphaNumeric"
+          exclude "**/*$hwDigit"
+    }
+    into '../saralsdk/src/main/assets'
+}
