@@ -255,13 +255,13 @@ apply plugin: 'com.google.gms.google-services'
 
 
 def modelDir = "$rootDir/saralsdk/src/models"
-def hwAlphaNumeric = "model_letter_digits_finetune_18_07_22_epoch_15.tflite"
-def hwDigit = "saral_hwd_model_itr3.tflite"
+def hwAlphaNumeric = "**/*model_letter_digits_finetune_18_07_22_epoch_15.tflite"
+def hwDigit = "**/*saral_hwd_model_itr3.tflite"
 
 task copyModelAssets(type: Copy) {
-    from("$modelDir") {
-          include "**/*$hwAlphaNumeric"
-          exclude "**/*$hwDigit"
+    from(modelDir) {
+          include hwDigit
+          exclude hwAlphaNumeric
     }
     into '../saralsdk/src/main/assets'
 }
