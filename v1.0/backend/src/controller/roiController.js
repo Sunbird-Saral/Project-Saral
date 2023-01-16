@@ -30,17 +30,13 @@ exports.getRoiData = async (req, res, next) => {
                         type: examExist.type
                     }
                 }
-                let roi = await ROI.find(examSetLookupExist, {_id: 0, __v: 0 }).lean()
-                
+                let roi = await ROI.find(examSetLookupExist, { roiId: 1,roi:1 }).lean()
+           
                 if (roi.length) {
-                    let resultObj = {}
-                    for (let data of roi) {
-                        resultObj.layout = data.roi.layout,
-                        resultObj.roiId = data.roiId
-                    }
                     res.status(200).json({
                         status: 'success',
-                        ... resultObj
+                        layout : roi[0].roi.layout,
+                        roiId : roi[0].roiId
                     });
                 } else {
                     res.status(404).json({ "message": "ROI does not exist" })
@@ -52,7 +48,6 @@ exports.getRoiData = async (req, res, next) => {
             res.status(404).json({ "message": "Exam Id does not exist" })
         }
     } catch (e) {
-        console.log("error",e)
         res.status(400).json(e)
     }
 }
