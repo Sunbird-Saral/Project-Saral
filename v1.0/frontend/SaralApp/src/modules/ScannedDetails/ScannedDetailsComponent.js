@@ -790,6 +790,7 @@ const ScannedDetailsComponent = ({
                 setBtnName('cancel')
             }
             setNextBtn(Strings.next_text)
+            goToTop()
         }
         else {
             onBackButtonClick()
