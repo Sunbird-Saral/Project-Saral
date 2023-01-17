@@ -456,7 +456,7 @@ const ScannedDetailsComponent = ({
 
                 let toggle = structureList[currentIndex + 1].hasOwnProperty("isNotAbleToSave") ? structureList[currentIndex + 1].isNotAbleToSave : false
                 setToggleCheckBox(toggle)
-
+                goToTop()
                 //for student validataion
 
                 ocrLocalResponse.layout.cells.forEach(element => {
@@ -1287,6 +1287,14 @@ const ScannedDetailsComponent = ({
         }
     }
 
+    const scrollRef = useRef();
+    const goToTop = () => {
+    scrollRef.current?.scrollTo({
+    y: 0,
+    animated: true,
+    });
+   }
+
     return (
         <View style={{ flex: 1 }}>
 
@@ -1296,6 +1304,7 @@ const ScannedDetailsComponent = ({
                     showsVerticalScrollIndicator={false}
                     bounces={false}
                     keyboardShouldPersistTaps={'handled'}
+                    ref={scrollRef}
                 >
                     <ShareComponent
                         navigation={navigation}
