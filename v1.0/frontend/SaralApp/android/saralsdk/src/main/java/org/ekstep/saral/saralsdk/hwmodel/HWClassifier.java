@@ -7,10 +7,15 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.ml.common.FirebaseMLException;
+import com.google.firebase.ml.common.modeldownload.FirebaseModelDownloadConditions;
+import com.google.firebase.ml.common.modeldownload.FirebaseModelManager;
 import com.google.firebase.ml.custom.FirebaseCustomLocalModel;
+import com.google.firebase.ml.custom.FirebaseCustomRemoteModel;
 import com.google.firebase.ml.custom.FirebaseModelDataType;
 import com.google.firebase.ml.custom.FirebaseModelInputOutputOptions;
 import com.google.firebase.ml.custom.FirebaseModelInputs;
@@ -27,6 +32,7 @@ import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfDouble;
 import org.opencv.imgproc.Imgproc;
+import org.tensorflow.lite.Interpreter;
 
 import java.io.File;
 import java.io.IOException;
@@ -54,7 +60,9 @@ public class HWClassifier {
     /**
      * An instance of the driver class to run model inference with Firebase.
      */
-    private FirebaseModelInterpreter                mInterpreter;
+    private FirebaseModelInterpreter                mInterpreter,downloadInterpreter;
+    Interpreter.Options options = new Interpreter.Options();
+
 
     /**
      * Data configuration of input & output data of model.
@@ -112,52 +120,53 @@ public class HWClassifier {
                         new FirebaseModelInterpreterOptions.Builder(localSource).build();
                 mInterpreter = FirebaseModelInterpreter.getInstance(options);
                 listener.OnModelLoadSuccess("model loading successful");
-                
+
             } else {
-                
-                CustomModelDownloadConditions conditions = new CustomModelDownloadConditions.Builder()
-            .requireWifi()
-            .build();
-            FirebaseModelDownloader.getInstance()
-            .getModel("Letter_Digit_Model", DownloadType.LOCAL_MODEL, conditions)
-            .addOnSuccessListener(new OnSuccessListener<CustomModel>() {
-                @Override
-                public void onSuccess(CustomModel model) {
-                    File modelFile = model.getFile();
-                    if (modelFile != null) {
-                        FirebaseCustomLocalModel  downloadSource = new FirebaseCustomLocalModel.Builder()
-                                .setAssetFilePath(String.valueOf(modelFile))
-                                .build();
 
-                        FirebaseModelInterpreterOptions options =
-                                new FirebaseModelInterpreterOptions.Builder(downloadSource).build();
-                        try {
-                            mInterpreter = FirebaseModelInterpreter.getInstance(options);
-                        } catch (FirebaseMLException e) {
-                            e.printStackTrace();
-                        }
-                        listener.OnModelLoadSuccess("From Firebase model download successful");
-                    // /data/user/0/com.saralapp/no_backup/com.google.firebase.ml.custom.models/W0RFRkFVTFRd+MTo5MTIzNDAyMjI0MzY6YW5kcm9pZDoxMTgwNzgzYThiY2EwZGRjOWM0N2Yx/Letter_Digit_Model/0
-                    }
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull @NotNull Exception e) {
-                    FirebaseCustomLocalModel localSource = new FirebaseCustomLocalModel.Builder()
-                            .setAssetFilePath(LOCAL_MODEL_ASSET)
-                            .build();
+                // remote model instance
+                FirebaseCustomRemoteModel remoteModel =
+                        new FirebaseCustomRemoteModel.Builder("Letter_Digit_Model").build();
 
-                    FirebaseModelInterpreterOptions options =
-                            new FirebaseModelInterpreterOptions.Builder(localSource).build();
-                    try {
-                        mInterpreter = FirebaseModelInterpreter.getInstance(options);
-                        listener.OnModelLoadSuccess("model loading Failed");
-                    } catch (FirebaseMLException firebaseMLException) {
-                        firebaseMLException.printStackTrace();
-                    }
-                }
-            });
-        }
+                FirebaseModelDownloadConditions conditionss = new FirebaseModelDownloadConditions.Builder()
+                        .requireWifi()
+                        .build();
+                FirebaseModelManager.getInstance().download(remoteModel, conditionss)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+
+
+                                FirebaseModelManager.getInstance().getLatestModelFile(remoteModel)
+                                        .addOnCompleteListener(new OnCompleteListener<File>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<File> task) {
+                                                File modelFile = task.getResult();
+
+                                                if (modelFile != null) {
+                                                    Log.d(TAG, "onComplete: modelFile "+ modelFile);
+//                                    mInterpreter = new Interpreter(modelFile);
+                                                    FirebaseCustomLocalModel  localSource = new FirebaseCustomLocalModel.Builder()
+                                                            .setAssetFilePath(String.valueOf(modelFile) + String.valueOf("/Letter_Digit_Model.tflite"))
+                                                            .build();
+//
+                                                    FirebaseModelInterpreterOptions options =
+                                                            new FirebaseModelInterpreterOptions.Builder(localSource).build();
+
+
+                                                    try {
+                                                        downloadInterpreter = FirebaseModelInterpreter.getInstance(options);
+                                                    } catch (FirebaseMLException e) {
+                                                        e.printStackTrace();
+                                                    }
+
+                                                    listener.OnModelLoadSuccess("model loading successful");
+                                                }
+                                            }
+                                        });
+                                
+                            }
+                        });
+            }
         } catch (FirebaseMLException e) {
             listener.OnModelLoadError("model loading failed");
             e.printStackTrace();
@@ -166,7 +175,7 @@ public class HWClassifier {
 
 
     public void classifyMat(Mat mat, String id) {
-        if(mInterpreter != null) {
+        if(mInterpreter != null || downloadInterpreter != null) {
             Mat processedMat    = preprocessMatForModel(mat);
             runInference(convertMattoTfLiteInput(processedMat), id);
         }
@@ -189,7 +198,7 @@ public class HWClassifier {
         //Core.subtract(gray_img, mu, meanMat);
         Mat matFinal        = new Mat();
         //  Core.divide(meanMat, sigma, matFinal);
-       Core.divide(gray_img, sigma, matFinal);
+        Core.divide(gray_img, sigma, matFinal);
         return matFinal;
     }
 
