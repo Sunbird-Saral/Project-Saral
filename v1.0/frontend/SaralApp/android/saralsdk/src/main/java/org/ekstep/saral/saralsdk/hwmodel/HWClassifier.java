@@ -94,18 +94,17 @@ public class HWClassifier {
         Boolean downloadFromFB = true;
 
         try {
-            if (!downloadFromFB) {
             int firebaseModelDataType = FirebaseModelDataType.FLOAT32;
             mDataOptions =
                     new FirebaseModelInputOutputOptions.Builder()
                             .setInputFormat(0, firebaseModelDataType, inputDims)
                             .setOutputFormat(0, firebaseModelDataType, outputDims)
                             .build();
+            if (!downloadFromFB) {
 
             FirebaseCustomLocalModel localSource = new FirebaseCustomLocalModel.Builder()
                     .setAssetFilePath(LOCAL_MODEL_ASSET)
                     .build();
-
             FirebaseModelInterpreterOptions options =
                     new FirebaseModelInterpreterOptions.Builder(localSource).build();
             mInterpreter = FirebaseModelInterpreter.getInstance(options);
