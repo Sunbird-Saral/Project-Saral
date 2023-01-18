@@ -114,7 +114,7 @@ public class HWClassifier {
 
                 // remote model instance
                 FirebaseCustomRemoteModel remoteModel =
-                        new FirebaseCustomRemoteModel.Builder("Letter_Digit_Model").build();
+                        new FirebaseCustomRemoteModel.Builder("saral_hwd_model").build();
 
                 FirebaseModelDownloadConditions conditionss = new FirebaseModelDownloadConditions.Builder()
                         .requireWifi()
@@ -135,7 +135,7 @@ public class HWClassifier {
                                                     Log.d(TAG, "onComplete: modelFile "+ modelFile);
 //                                    mInterpreter = new Interpreter(modelFile);
                                                     FirebaseCustomLocalModel  localSource = new FirebaseCustomLocalModel.Builder()
-                                                            .setAssetFilePath(String.valueOf(modelFile) + String.valueOf("/Letter_Digit_Model.tflite"))
+                                                            .setAssetFilePath(String.valueOf(modelFile) + String.valueOf("/saral_hwd_model.tflite"))
                                                             .build();
 //
                                                     FirebaseModelInterpreterOptions options =
