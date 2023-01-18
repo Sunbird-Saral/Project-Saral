@@ -6,10 +6,8 @@ const brandController = require("../controller/brandController")
 const School = require('../models/school')
 const Brand = require('../models/brand')
 
-
-
+router.get('/brand/default',brandController.fetchDefaultBrandData)
 router.get('/brand',auth,brandController.fetchBrandData)
-router.get('/brand/default',auth,brandController.fetchDefaultBrandData)
 
 router.post('/brand?', auth, async (req, res) => {
     try { 
@@ -76,4 +74,5 @@ router.put('/brand',auth, async (req, res) => {
         res.status(400).send(e)
     }
 })
+
 module.exports = router
