@@ -73,7 +73,7 @@ public class HWClassifier {
     }
 
     public boolean isInitialized() {
-        if (mInterpreter != null) {
+        if (mInterpreter != null || downloadInterpreter!=null) {
             return true;
         }
         return false;
