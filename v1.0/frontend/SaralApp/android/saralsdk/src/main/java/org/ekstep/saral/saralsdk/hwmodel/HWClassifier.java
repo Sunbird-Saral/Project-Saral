@@ -21,6 +21,7 @@ import com.google.firebase.ml.custom.FirebaseModelInputs;
 import com.google.firebase.ml.custom.FirebaseModelInterpreter;
 import com.google.firebase.ml.custom.FirebaseModelInterpreterOptions;
 
+import org.jetbrains.annotations.NotNull;
 import org.opencv.android.Utils;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
@@ -133,17 +134,19 @@ public class HWClassifier {
                                                 if (modelFile != null) {
                                                     Log.d(TAG, "onComplete: modelFile "+ modelFile);
 //                                    mInterpreter = new Interpreter(modelFile);
-                                                    FirebaseCustomLocalModel  localSource = new FirebaseCustomLocalModel.Builder()
-                                                            .setAssetFilePath(String.valueOf(modelFile) + String.valueOf("/saral_hwd_model.tflite"))
-                                                            .build();
+//                                                    FirebaseCustomLocalModel  localSource = new FirebaseCustomLocalModel.Builder()
+//                                                            .setAssetFilePath(String.valueOf(modelFile))
+//                                                            .build();
 //
                                                     FirebaseModelInterpreterOptions options =
-                                                            new FirebaseModelInterpreterOptions.Builder(localSource).build();
+                                                            new FirebaseModelInterpreterOptions.Builder(remoteModel).build();
 
 
                                                     try {
                                                         downloadInterpreter = FirebaseModelInterpreter.getInstance(options);
+                                                        Log.d(TAG, "onComplete: downloadInterpreter" + downloadInterpreter);
                                                     } catch (FirebaseMLException e) {
+                                                        Log.d(TAG, "onComplete: downloadInterpreter failed" + e);
                                                         e.printStackTrace();
                                                     }
 
@@ -163,12 +166,16 @@ public class HWClassifier {
 
     public void classifyMat(Mat mat, String id) {
         if(mInterpreter != null || downloadInterpreter != null) {
+            Log.d(TAG, "classifyMat: " +downloadInterpreter);
+            Log.d(TAG, "classifyMat: "+mInterpreter);
             FirebaseModelInterpreter finalInterpreter = downloadInterpreter != null ? downloadInterpreter : mInterpreter;
             Mat processedMat    = preprocessMatForModel(mat);
+            Log.d(TAG, "classifyMat: finalInterpreter" + finalInterpreter);
             runInference(convertMattoTfLiteInput(processedMat), id, finalInterpreter);
         }
     }
 
+    @NotNull
     private Mat preprocessMatForModel(Mat mat) {
         //  Mat rotatedMat = rotateMat(mat);
 
@@ -218,15 +225,19 @@ public class HWClassifier {
 
     private void runInference(ByteBuffer data, String id, FirebaseModelInterpreter interpreter) {
 
+        Log.d(TAG, "runInference: interpreter" + interpreter);
         if (interpreter !=  null) {
             try {
                 FirebaseModelInputs inputs          = new FirebaseModelInputs.Builder().add(data).build();
+                Log.d(TAG, "runInference: inputs"+inputs);
                 interpreter.run(inputs, mDataOptions)
                         .addOnSuccessListener(result -> {
+                            Log.d(TAG, "runInference: results" + result);
                             float[][] output        = result.getOutput(0);
                             float[] probabilities   = output[0];
                             int digit               = getMarksValue(probabilities);
-                            predictionListener.OnPredictionSuccess(digit, probabilities[digit], id);
+                            predictionListener.OnPredictionSuccess(digit, probabilities[digit], "prediction id" + id);
+                            Log.d(TAG, "runInference: digit" + digit);
                         })
                         .addOnFailureListener(e -> {
                             e.printStackTrace();

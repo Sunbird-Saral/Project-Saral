@@ -138,8 +138,15 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                         mPredictedDigits.put(id, result.toString());
                     } catch (JSONException e) {
                         Log.e(TAG, "unable to create prediction object");
+                        Log.e(TAG, "unable to create prediction object" + e);
                     }
+                Log.d(TAG, "OnPredictionSuccess: mIsClassifierRequestSubmitted" + mIsClassifierRequestSubmitted);
+                Log.d(TAG, "OnPredictionSuccess: mTotalClassifiedCount" + mTotalClassifiedCount);
+                Log.d(TAG, "OnPredictionSuccess: mPredictedDigits.size()" + mPredictedDigits.size());
+
+
                 if (mIsClassifierRequestSubmitted && mTotalClassifiedCount >= mPredictedDigits.size()) {
+                    Log.d(TAG, "OnPredictionSuccess: hello");
                     mIsScanningComplete     = true;
                 }
 
@@ -278,20 +285,24 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
             processCameraFrame(mRgba, mframeCount);
             mframeCount ++;
         } else {
+            Log.d(TAG, "onCameraFrame: mrgba");
             showProcessingInformation(mRgba);
         }
         return mRgba;
     }
     
     private void processCameraFrame(Mat image, long frameCount) {
+        Log.d(TAG, "processCameraFrame: hello" );
         double DARKNESS_THRESHOLD   = 80.0;
         mStartTime                  = SystemClock.uptimeMillis();
         loadLayoutConfiguration();
         Mat tableMat                = mTableCornerDetection.processMat(image,layoutMinWidth,layoutMinHeight,detectionRadius);
+        Log.d(TAG, "processCameraFrame: isMultiChoiceOMRLayout" + isMultiChoiceOMRLayout);
         if(isMultiChoiceOMRLayout)
         {
             DARKNESS_THRESHOLD = 70.0;
         }
+        Log.d(TAG, "processCameraFrame: tableMat" + tableMat + "isHWClassiferAvailable" + isHWClassiferAvailable);
         if (tableMat != null && isHWClassiferAvailable) {
             if (mIgnoreFrameCount < START_PROCESSING_COUNT) {
                 mIgnoreFrameCount ++;
@@ -313,6 +324,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                 JSONObject layoutObject = layoutConfigs.getJSONObject("layout");
                 JSONObject threshold = layoutObject.getJSONObject("threshold");
                 Boolean hasExperimentalOmr = threshold.has("experimentalOMRDetection") ? threshold.getBoolean("experimentalOMRDetection")? true :false:false;
+                Log.d(TAG, "processCameraFrame: hasExperimentalOmr" + hasExperimentalOmr);
                 for (int i = 0; i < rois.length(); i++) {
                     JSONObject roiConfig  = rois.getJSONObject(i);
 
@@ -349,6 +361,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                         mPredictedDigits.put(roiId, "0");
                         Mat digitROI        = mDetectShaded.getROIMat(tableMat, rect.getInt("top"), rect.getInt("left"), rect.getInt("bottom"), rect.getInt("right"));
                         mRoiMatBase64.put(roiId,createBase64FromMat(digitROI));
+                        Log.d(TAG, "processCameraFrame: isInitialized"+ HWClassifier.getInstance().isInitialized());
                         if(HWClassifier.getInstance().isInitialized() == true) {
                             Log.d(TAG, "Requesting prediction for: " + roiId);
                             HWClassifier.getInstance().classifyMat(digitROI, roiId);
