@@ -12,98 +12,102 @@ const Helper = require('../middleware/helper')
 const router = new express.Router()
 const _ = require('lodash')
 const fs = require('fs');
+const marksController = require("../controller/marksController")
 
 const fromTime = "T00:00:00"
 const toTime = "T23:59:59"
-router.put('/saveMarks', auth, async (req, res) => {
-    const marks = []
+
+router.put('/saveMarks',auth,marksController.saveMarks)
+
+// router.put('/saveMarks', auth, async (req, res) => {
+//     const marks = []
     
-    if (req.header('X-App-Version')) {
-        console.log("APP VERSION", req.get('X-App-Version'))
-    }
+//     if (req.header('X-App-Version')) {
+//         console.log("APP VERSION", req.get('X-App-Version'))
+//     }
 
-    const subject = req.body.subject
-    const examDate = req.body.examDate
-    const examId = req.body.examId
-    const schoolId = req.school.schoolId
-    const classId = req.body.classId
-    const userId = req.school.userId
-    const createdOn = new Date().getTime()
-    const roiId = req.body.roiId
-    let set = {}
+//     const subject = req.body.subject
+//     const examDate = req.body.examDate
+//     const examId = req.body.examId
+//     const schoolId = req.school.schoolId
+//     const classId = req.body.classId
+//     const userId = req.school.userId
+//     const createdOn = new Date().getTime()
+//     const roiId = req.body.roiId
+//     let set = {}
 
-    if (req.body.set) set = req.body.set
+//     if (req.body.set) set = req.body.set
 
-    req.body.studentsMarkInfo.forEach(studentsData => {
-        const marksData = new Mark({
-            ...studentsData,
-            schoolId,
-            examDate,
-            subject,
-            classId,
-            createdOn,
-            roiId,
-            examId,
-            userId
-        })
-        marks.push(marksData)
-    });
-    try {
+//     req.body.studentsMarkInfo.forEach(studentsData => {
+//         const marksData = new Mark({
+//             ...studentsData,
+//             schoolId,
+//             examDate,
+//             subject,
+//             classId,
+//             createdOn,
+//             roiId,
+//             examId,
+//             userId
+//         })
+//         marks.push(marksData)
+//     });
+//     try {
 
-        await Helper.lockScreenValidator(req.school)
+//         await Helper.lockScreenValidator(req.school)
         
-        for (let data of marks) {
-            if (!data.examDate && data.examDate == undefined) {
-                data.examDate = new Date().toLocaleDateString()
-            }
+//         for (let data of marks) {
+//             if (!data.examDate && data.examDate == undefined) {
+//                 data.examDate = new Date().toLocaleDateString()
+//             }
          
-            let studentMarksExist = await Mark.findOne({ schoolId: data.schoolId, studentId: data.studentId, classId: data.classId, subject: data.subject, examDate: data.examDate, roiId: data.roiId })
+//             let studentMarksExist = await Mark.findOne({ schoolId: data.schoolId, studentId: data.studentId, classId: data.classId, subject: data.subject, examDate: data.examDate, roiId: data.roiId })
 
-            if (!studentMarksExist) {
-                await Mark.create(data)
-            } else {
-                if (data.schoolId == studentMarksExist.schoolId && data.studentId == studentMarksExist.studentId && data.classId == studentMarksExist.classId && data.subject == studentMarksExist.subject && data.examDate == studentMarksExist.examDate) {
-                    let lookup = {
-                        studentId: data.studentId,
-                        subject: data.subject,
-                        examDate: data.examDate
-                    }
+//             if (!studentMarksExist) {
+//                 await Mark.create(data)
+//             } else {
+//                 if (data.schoolId == studentMarksExist.schoolId && data.studentId == studentMarksExist.studentId && data.classId == studentMarksExist.classId && data.subject == studentMarksExist.subject && data.examDate == studentMarksExist.examDate) {
+//                     let lookup = {
+//                         studentId: data.studentId,
+//                         subject: data.subject,
+//                         examDate: data.examDate
+//                     }
                     
-                    let update = { $set: { studentIdTrainingData: data.studentIdTrainingData, predictedStudentId: data.predictedStudentId, studentAvailability: data.studentAvailability, marksInfo: data.marksInfo, maxMarksTrainingData: data.maxMarksTrainingData, maxMarksPredicted: data.maxMarksPredicted, securedMarks: data.securedMarks, totalMarks: data.totalMarks, obtainedMarksTrainingData: data.obtainedMarksTrainingData, obtainedMarksPredicted: data.obtainedMarksPredicted, set: data.set } }
-                    await Mark.update(lookup, update)
-                }
-            }
-        }
-        // let studentIds = marks.map(id => id.studentId)
-        // let marksExist = await Mark.StudentsMark(studentIds)
+//                     let update = { $set: { studentIdTrainingData: data.studentIdTrainingData, predictedStudentId: data.predictedStudentId, studentAvailability: data.studentAvailability, marksInfo: data.marksInfo, maxMarksTrainingData: data.maxMarksTrainingData, maxMarksPredicted: data.maxMarksPredicted, securedMarks: data.securedMarks, totalMarks: data.totalMarks, obtainedMarksTrainingData: data.obtainedMarksTrainingData, obtainedMarksPredicted: data.obtainedMarksPredicted, set: data.set } }
+//                     await Mark.update(lookup, update)
+//                 }
+//             }
+//         }
+//         // let studentIds = marks.map(id => id.studentId)
+//         // let marksExist = await Mark.StudentsMark(studentIds)
 
-        // if(!marksExist.length){
-        // await Mark.insertMany(marks)
-        // }else{
-        // for(let data of marks){
-        //     for(let mark of marksExist){
-        //         if(data.studentId === mark.studentId){
-        //             let lookup = {
-        //                 studentId: data.studentId
-        //             }
-        //             let update = { $set: {studentAvailability: data.studentAvailability, marksInfo: data.marksInfo
-        //             }}
-        //             await Mark.update(lookup ,update)
-        //         }
-        //     }
-        // }
-        // }
-        res.status(200).send({ message: 'Data Saved Successfully' })
-    } catch (e) {
-        console.log(e);
-        if (e && e.message == stringObject().lockScreen) {
-            res.status(500).send({ error: e.message })
-        }
-        else {
-            res.status(400).send(e)
-        }
-    }
-})
+//         // if(!marksExist.length){
+//         // await Mark.insertMany(marks)
+//         // }else{
+//         // for(let data of marks){
+//         //     for(let mark of marksExist){
+//         //         if(data.studentId === mark.studentId){
+//         //             let lookup = {
+//         //                 studentId: data.studentId
+//         //             }
+//         //             let update = { $set: {studentAvailability: data.studentAvailability, marksInfo: data.marksInfo
+//         //             }}
+//         //             await Mark.update(lookup ,update)
+//         //         }
+//         //     }
+//         // }
+//         // }
+//         res.status(200).send({ message: 'Data Saved Successfully' })
+//     } catch (e) {
+//         console.log(e);
+//         if (e && e.message == stringObject().lockScreen) {
+//             res.status(500).send({ error: e.message })
+//         }
+//         else {
+//             res.status(400).send(e)
+//         }
+//     }
+// })
 
 const fetchSavedData = async (req) => {
     const { schoolId, classId, section, subject, fromDate, toDate, roiId,userId } = req.body
