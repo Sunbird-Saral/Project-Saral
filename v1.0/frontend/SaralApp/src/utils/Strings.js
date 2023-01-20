@@ -132,10 +132,10 @@ export default strings = new LocalizedStrings({
         you_dont_have_cache: "You don't have cache",
         please_try_again_later_network_is_not_available: "Please try again later network isn't available",
         roi_cache_not_available: "Roi cache not available",
-        set_text:'set',
+        set_text:'Set',
         you_dont_have_cache_for_save_count: "You don't have cache for save count",
         lock_screen: "State/District/School is locked for scanning" ,
-        Mark_Absent:"Please Mark Student Absent",
-        Mark_Present:"Please Mark Student Present"
+        Mark_Absent:"Mark as Absent",
+        Mark_Present:"Mark as Present"
     }
 })
