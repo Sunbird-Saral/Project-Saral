@@ -6,6 +6,7 @@ const studentMockdata = require('./mock-data/student.json')
 const AppError = require('../utils/appError')
 const Helper = require('../middleware/helper')
 const mockFetchExamData = require('./mock-data/mockFetchExam.json')
+const mockMarksData = require('./mock-data/mockMarksData.json')
 
 
 const mockRequest = () => {
@@ -69,7 +70,78 @@ describe('fetch student and exam data ', () => {
     req.body = {
       "classId": "2",
       "section":"D",
-      "subject": "Hindi 23/09/2021"
+      "subject": "Hindi 23/09/2021",
+      "set": "A"
+    }
+
+    Helper.lockScreenValidator  = jest.fn().mockResolvedValue(undefined)
+    Marks.findOne = jest.fn().mockResolvedValue(null)
+    Student.find = jest.fn().mockReturnValue({ lean: () => studentMockdata })
+    // Student.find = jest.fn().mockImplementationOnce(() => ({ select: jest.fn().mockResolvedValueOnce(studentMockdata)}));
+    Exam.find = jest.fn().mockResolvedValue(mockFetchExamData)
+    await studentController.fetchStudentsandExams(req, res)
+
+    expect(req.body.classId).toEqual('2');
+    expect(Helper.lockScreenValidator ).toHaveBeenCalledTimes(1)
+    expect(Student.find).toHaveBeenCalledTimes(1)
+    expect(Exam.find).toHaveBeenCalledTimes(1)
+    expect(res.status).toHaveBeenCalledWith(200);
+    expect(res.json({ status: 'success' }).status(200));
+  });
+
+  it("should able to mark student absent/present", async () => {
+    const req = mockRequest();
+    const res = mockResponse()
+    req.school = {
+      "_id": "63aa81d2d33aca650009c946",
+      "name": "user13",
+      "userId": "u001",
+      "schoolId": "u001",
+      "password": "$2a$08$fCagseJwhdNd3SEd8EB.oO6n990WLmDr4ptUpzJxLp2nvMFSZGpjG",
+      "createdAt": "2022-12-27T05:25:38.298Z",
+      "updatedAt": "2022-12-27T05:25:38.298Z",
+      __v: 0
+    }
+    req.body = {
+      "classId": "2",
+      "section":"D",
+      "subject": "Hindi 23/09/2021",
+      "set": "A"
+    }
+
+    Helper.lockScreenValidator  = jest.fn().mockResolvedValue(undefined)
+    Marks.findOne = jest.fn().mockResolvedValue(mockMarksData)
+    Student.find = jest.fn().mockReturnValue({ lean: () => studentMockdata })
+    // Student.find = jest.fn().mockImplementationOnce(() => ({ select: jest.fn().mockResolvedValueOnce(studentMockdata)}));
+    Exam.find = jest.fn().mockResolvedValue(mockFetchExamData)
+    await studentController.fetchStudentsandExams(req, res)
+
+    expect(req.body.classId).toEqual('2');
+    expect(Helper.lockScreenValidator ).toHaveBeenCalledTimes(1)
+    expect(Student.find).toHaveBeenCalledTimes(1)
+    expect(Exam.find).toHaveBeenCalledTimes(1)
+    expect(res.status).toHaveBeenCalledWith(200);
+    expect(res.json({ status: 'success' }).status(200));
+  });
+
+  it("should able to get student data when minimal mode is true ", async () => {
+    const req = mockRequest();
+    const res = mockResponse()
+    req.school = {
+      "_id": "63aa81d2d33aca650009c946",
+      "name": "user13",
+      "userId": "u001",
+      "schoolId": "u001",
+      "password": "$2a$08$fCagseJwhdNd3SEd8EB.oO6n990WLmDr4ptUpzJxLp2nvMFSZGpjG",
+      "createdAt": "2022-12-27T05:25:38.298Z",
+      "updatedAt": "2022-12-27T05:25:38.298Z",
+      __v: 0
+    }
+    req.body = {
+      "classId": "2",
+      "section":"D",
+      "subject": "Hindi 23/09/2021",
+      "set": "A"
     }
 
     Helper.lockScreenValidator  = jest.fn().mockResolvedValue(undefined)

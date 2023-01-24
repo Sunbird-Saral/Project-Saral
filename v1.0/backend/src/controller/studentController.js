@@ -11,7 +11,6 @@ exports.fetchStudentsandExams = async (req, res, next) => {
     const examMatch = {}
 
     match.schoolId = req.school.schoolId
-
     if (req.body.classId) {
         let studentClassObj = {
             classId: req.body.classId,
@@ -22,11 +21,7 @@ exports.fetchStudentsandExams = async (req, res, next) => {
         examMatch.classId = studentClassObj.classId
         examMatch.schoolId = req.school.schoolId
     } else {
-        if (req.school.minimal == true) {
-            examMatch.schoolId = req.school.schoolId
-        } else {
             return res.status(404).json({ message: 'Please send classId' })
-        }
     }
 
     if (req.body.section && req.body.section != "0") {
@@ -74,7 +69,6 @@ exports.fetchStudentsandExams = async (req, res, next) => {
             students, exams
         });
     } catch (e) {
-        console.log(e)
         res.status(400).json({
             status: 'fail',
             e

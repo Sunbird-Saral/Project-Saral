@@ -10,7 +10,7 @@ exports.saveMarks = async (req, res, next) => {
     const marks = []
 
     if (req.header('X-App-Version')) {
-        // console.log("APP VERSION", req.get('X-App-Version'))
+        console.log("APP VERSION", req.get('X-App-Version'))
     }
 
     const subject = req.body.subject

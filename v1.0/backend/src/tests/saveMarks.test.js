@@ -3,6 +3,7 @@ const marksController = require('../controller/marksController')
 const mockSaveMarksBody = require("./mock-data/mockSaveMarksBody.json")
 const mockSaveMarksResponse = require("./mock-data/mockSaveMarksResponse.json")
 const mockStudentMarksExist = require("./mock-data/mockStudentMarksExist.json")
+const mockUpdateMarksBody = require("./mock-data/mockUpdateSaveMarks.json")
 const Helper = require('../middleware/helper')
 const AppError = require('../utils/appError')
 
@@ -74,7 +75,7 @@ const mockRequest = () => {
             "updatedAt": "2022-12-27T05:25:38.298Z",
             __v: 0
         }
-        req.body = mockSaveMarksBody
+        req.body = mockUpdateMarksBody
 
         Helper.lockScreenValidator  = jest.fn().mockResolvedValue(undefined)
         Marks.findOne = jest.fn().mockResolvedValue(mockStudentMarksExist);
@@ -113,4 +114,5 @@ const mockRequest = () => {
 
       
     });
+
 });
