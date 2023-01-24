@@ -9,7 +9,7 @@ const ROI = require('../src/models/roi')
 const Counter = require('../src/models/counter')
 const Brand = require('../src/models/brand')
 const User = require('../src/models/users')
-const Lock = require('../src/models/lock')
+// const Lock = require('../src/models/lock')
 
 
 const dotenv = require('dotenv');
@@ -37,7 +37,7 @@ const roi = JSON.parse(fs.readFileSync(`${__dirname}/rois.json`, 'utf-8'));
 const counter = JSON.parse(fs.readFileSync(`${__dirname}/counters.json`, 'utf-8'));
 const brand = JSON.parse(fs.readFileSync(`${__dirname}/brands.json`, 'utf-8'));
 const user = JSON.parse(fs.readFileSync(`${__dirname}/users.json`, 'utf-8'));
-const lock = JSON.parse(fs.readFileSync(`${__dirname}/lock.json`,'utf-8'));
+// const lock = JSON.parse(fs.readFileSync(`${__dirname}/lock.json`,'utf-8'));
 
 const importData = async () => {
   try {
@@ -50,7 +50,7 @@ const importData = async () => {
     await Counter.create(counter)
     await Brand.create(brand)
     await User.create(user)
-    await Lock.create(lock)
+    // await Lock.create(lock)
 
     console.log('Data successfully added');
   } catch (err) {
@@ -69,7 +69,7 @@ const deleteData = async () => {
     await Counter.deleteMany()
     await Brand.deleteMany()
     await User.deleteMany()
-    await Lock.deleteMany()
+    // await Lock.deleteMany()
 
     console.log('Data successfully deleted');
   } catch (err) {
