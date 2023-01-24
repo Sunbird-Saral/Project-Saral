@@ -34,47 +34,11 @@ describe('login school', () => {
     jest.useFakeTimers()
   })
 
-  
-  it("should not login when password is not correct ", async () => {
-    const req = mockRequest();
-    const res = mockResponse()
-    req.body = {
-      "schoolId": "",
-      "password": "tarento"
-    }
-    Helper.findByCredentials = jest.fn().mockResolvedValue(undefined)
-    await schoolController.loginSchool(req, res)
-
-    let error = new AppError('School Id or Password is not correct.', 401);
-    expect(Helper.findByCredentials).toHaveBeenCalledTimes(1)
-    expect(error.statusCode).toBe(401);
-    expect(error.status).toBe('fail');
-  });
-
-  it("should not login when school is locked ", async () => {
-    const req = mockRequest();
-    const res = mockResponse()
-    req.body = {
-      "schoolId": "u001",
-      "password": "tarento@123"
-    }
-    Helper.findByCredentials = jest.fn().mockImplementationOnce(() => ({ select: jest.fn().mockResolvedValueOnce(mockSignInUser) }));
-    School.findOne = jest.fn().mockResolvedValue(mockSchoolData)
-    Helper.lockScreenValidator = jest.fn().mockResolvedValue(undefined)
-
-    await schoolController.loginSchool(req, res)
-
-    let error = new AppError("State/District/School is locked for scanning" , 500);
-    expect(Helper.findByCredentials).toHaveBeenCalledTimes(1)
-    expect(School.findOne).toHaveBeenCalledTimes(1)
-    expect(error.statusCode).toBe(500);
-  });
-
   it("should able to login to school  ", async () => {
     const req = mockRequest();
     const res = mockResponse()
     req.body = {
-      "userId": "u001",
+      "schoolId": "u001",
       "password": "tarento@123",
       "classes": true
     }
@@ -96,6 +60,44 @@ describe('login school', () => {
     expect(res.status).toHaveBeenCalledWith(200);
     expect(res.json({ status: 'success' }).status(200));
   });
+
+
+  it("should not login when password is not correct ", async () => {
+    const req = mockRequest();
+    const res = mockResponse()
+    req.body = {
+      "schoolId": "u001",
+      "password": "tarento"
+    }
+    Helper.findByCredentials = jest.fn().mockResolvedValue(undefined)
+    await schoolController.loginSchool(req, res)
+
+    let error = new AppError('School Id or Password is not correct.', 401);
+    expect(Helper.findByCredentials).toHaveBeenCalledTimes(1)
+    expect(error.statusCode).toBe(401);
+    expect(error.status).toBe('fail');
+  });
+
+  it("should not login when school is locked ", async () => {
+    const req = mockRequest();
+    const res = mockResponse()
+    req.body = {
+      "schoolId": "u001",
+      "password": "tarento@123"
+    }
+    Helper.findByCredentials = jest.fn().mockImplementationOnce(() => ({ select: jest.fn().mockResolvedValueOnce(mockSignInUser) }));
+    School.findOne = jest.fn().mockResolvedValue(mockSchoolData)
+    Helper.lockScreenValidator = jest.fn().mockResolvedValue()
+
+    await schoolController.loginSchool(req, res)
+
+    let error = new AppError("State/District/School is locked for scanning" , 500);
+    expect(Helper.findByCredentials).toHaveBeenCalledTimes(1)
+    expect(School.findOne).toHaveBeenCalledTimes(1)
+    expect(error.statusCode).toBe(500);
+  });
+
+
 
 });
 

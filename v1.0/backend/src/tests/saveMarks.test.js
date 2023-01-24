@@ -105,7 +105,7 @@ const mockRequest = () => {
         }
         req.body = mockSaveMarksBody
 
-        Helper.lockScreenValidator  = jest.fn().mockResolvedValue("State/District/School is locked for scanning")
+        Helper.lockScreenValidator  = jest.fn().mockResolvedValue()
       
         await marksController.saveMarks(req, res)
 

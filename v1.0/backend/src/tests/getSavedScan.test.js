@@ -44,7 +44,9 @@ describe('saved scan data ', () => {
             "section": "C",
             "subject": "Hindi",
             "schoolId": "u001",
-            "downloadRes": false
+            "downloadRes": false,
+            "limit": 10,
+            "page": 1
         }
 
         Mark.find = jest.fn().mockImplementationOnce(() => ({
