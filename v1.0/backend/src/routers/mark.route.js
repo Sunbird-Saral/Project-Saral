@@ -18,6 +18,7 @@ const fromTime = "T00:00:00"
 const toTime = "T23:59:59"
 
 router.put('/saveMarks',auth,marksController.saveMarks)
+router.post('/getSavedScan', basicAuth,marksController.getSaveScan) 
 
 // router.put('/saveMarks', auth, async (req, res) => {
 //     const marks = []
@@ -109,84 +110,84 @@ router.put('/saveMarks',auth,marksController.saveMarks)
 //     }
 // })
 
-const fetchSavedData = async (req) => {
-    const { schoolId, classId, section, subject, fromDate, toDate, roiId,userId } = req.body
-    const match = {}
-    if (schoolId) {
-        match.schoolId = schoolId
-    }
+// const fetchSavedData = async (req) => {
+//     const { schoolId, classId, section, subject, fromDate, toDate, roiId,userId } = req.body
+//     const match = {}
+//     if (schoolId) {
+//         match.schoolId = schoolId
+//     }
 
-    if(userId){
-        match.userId = userId
-    }
+//     if(userId){
+//         match.userId = userId
+//     }
 
-    if (classId) {
-        match.classId = classId
-    }
+//     if (classId) {
+//         match.classId = classId
+//     }
 
-    if (section && section != "0") {
-        match.section = section
-    }
-    if (roiId) {
-        match.roiId = roiId
-    }
+//     if (section && section != "0") {
+//         match.section = section
+//     }
+//     if (roiId) {
+//         match.roiId = roiId
+//     }
 
-    // if(req.body.examId) {
-    //     match.examId = req.body.examId
-    // } 
-    // else {
-    //     res.status(404).send({ error: 'Please send examId' })
-    // }
-    if (subject && subject != 'Subject') {
-        match.subject = new RegExp(`^${subject}$`, 'i')
-    }
+//     // if(req.body.examId) {
+//     //     match.examId = req.body.examId
+//     // } 
+//     // else {
+//     //     res.status(404).send({ error: 'Please send examId' })
+//     // }
+//     if (subject && subject != 'Subject') {
+//         match.subject = new RegExp(`^${subject}$`, 'i')
+//     }
 
-    let startTime = new Date(fromDate + fromTime).getTime()
-    let endTime = new Date(toDate + toTime).getTime()
+//     let startTime = new Date(fromDate + fromTime).getTime()
+//     let endTime = new Date(toDate + toTime).getTime()
 
-    if (startTime && !endTime) {
-        match.createdOn = {
-            $gte: startTime
-        }
-    } else if (!startTime && endTime) {
-        match.createdOn = {
-            $lte: endTime
-        }
-    } else if (startTime && endTime) {
-        match.createdOn = {
-            $gte: startTime,
-            $lte: endTime
-        }
-    }
+//     if (startTime && !endTime) {
+//         match.createdOn = {
+//             $gte: startTime
+//         }
+//     } else if (!startTime && endTime) {
+//         match.createdOn = {
+//             $lte: endTime
+//         }
+//     } else if (startTime && endTime) {
+//         match.createdOn = {
+//             $gte: startTime,
+//             $lte: endTime
+//         }
+//     }
 
-    try {
-        const count = await Mark.countDocuments(match)
-        // let totalPages;
-        if (req.body.page) {
-            req.body.limit = 10;
-            req.body.page = 1;
-            // totalPages = count ? Math.ceil(count / parseInt(req.body.limit)) : 0
-        }else{
-            req.body.limit = 0;
-            req.body.page = 1;
-            // totalPages = 1
-        }
+//     try {
+//         const count = await Mark.countDocuments(match)
+//         // let totalPages;
+//         if (req.body.page) {
+//             req.body.limit = 10;
+//             req.body.page = 1;
+//             // totalPages = count ? Math.ceil(count / parseInt(req.body.limit)) : 0
+//         }else{
+//             req.body.limit = 0;
+//             req.body.page = 1;
+//             // totalPages = 1
+//         }
 
-        const savedScan = await Mark.find(match, { _id: 0, __v: 0 })
-            .limit(parseInt(req.body.limit) * 1)
-            .skip((parseInt(parseInt(req.body.page)) - 1) * parseInt(parseInt(req.body.limit)))
+//         const savedScan = await Mark.find(match, { _id: 0, __v: 0 })
+//             .limit(parseInt(req.body.limit) * 1)
+//             .skip((parseInt(parseInt(req.body.page)) - 1) * parseInt(parseInt(req.body.limit)))
 
-        return {
-            data: savedScan,
-            // totalPages: totalPages,
-            // currentPage: totalPages != 0 ? parseInt(req.body.page) : 0
-        }
-    }
-    catch (e) {
-        console.log(e);
-        return { "error": true, e }
-    }
-}
+//         return {
+//             data: savedScan,
+//             // totalPages: totalPages,
+//             // currentPage: totalPages != 0 ? parseInt(req.body.page) : 0
+//         }
+//     }
+//     catch (e) {
+//         console.log(e);
+//         return { "error": true, e }
+//     }
+// }
 
 const fetchAllSavedData = async (req) => {
     try {
@@ -225,36 +226,36 @@ const fetchAllSavedData = async (req) => {
 //     }
 // })
 
-router.post('/getSavedScan', basicAuth, async (req, res) => {
-    try {
-        if(req.body.schoolId){
-            req.body.userId = req.school.userId.toLowerCase()
-            req.body.schoolId = req.body.schoolId.toLowerCase()
-        }else{
-            req.body.userId = req.school.userId.toLowerCase()
-            req.body.schoolId = req.school.schoolId.toLowerCase()
-        }
+// router.post('/getSavedScan', basicAuth, async (req, res) => {
+//     try {
+//         if(req.body.schoolId){
+//             req.body.userId = req.school.userId.toLowerCase()
+//             req.body.schoolId = req.body.schoolId.toLowerCase()
+//         }else{
+//             req.body.userId = req.school.userId.toLowerCase()
+//             req.body.schoolId = req.school.schoolId.toLowerCase()
+//         }
         
-        const resposne = await fetchSavedData(req)
-        if (resposne && resposne.error) {
-            return res.status(404).send(resposne)
-        }
-        const { downloadRes = false, subject } = req.body
-        if (downloadRes) {
-            deleteAllfilesFromReports()
-            let filePath = getFilePath(subject, 'json')
-            fs.writeFile(filePath, JSON.stringify(resposne), (err) => {
-                if (err) throw err;
-                res.download(filePath)
-            });
-        } else {
-            res.send(resposne)
-        }
-    } catch (e) {
-        console.log(e);
-        res.status(400).send({ "error": true, e })
-    }
-})
+//         const resposne = await fetchSavedData(req)
+//         if (resposne && resposne.error) {
+//             return res.status(404).send(resposne)
+//         }
+//         const { downloadRes = false, subject } = req.body
+//         if (downloadRes) {
+//             deleteAllfilesFromReports()
+//             let filePath = getFilePath(subject, 'json')
+//             fs.writeFile(filePath, JSON.stringify(resposne), (err) => {
+//                 if (err) throw err;
+//                 res.download(filePath)
+//             });
+//         } else {
+//             res.send(resposne)
+//         }
+//     } catch (e) {
+//         console.log(e);
+//         res.status(400).send({ "error": true, e })
+//     }
+// })
 
 router.get('/getMarksReport',async (req, res) => {
     try {

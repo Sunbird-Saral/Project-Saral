@@ -2,6 +2,9 @@ const Mark = require('../models/marks')
 const Helper = require('../middleware/helper')
 const { stringObject } = require('../utils/commonUtils')
 
+const fromTime = "T00:00:00"
+const toTime = "T23:59:59"
+
 
 exports.saveMarks = async (req, res, next) => {
     const marks = []
@@ -71,5 +74,79 @@ exports.saveMarks = async (req, res, next) => {
         else {
             res.status(400).json({ status: "fail", e })
         }
+    }
+}
+
+exports.getSaveScan = async (req, res, next) => {
+    try {
+        if (req.body.schoolId) {
+            req.body.userId = req.school.userId.toLowerCase()
+            req.body.schoolId = req.body.schoolId.toLowerCase()
+        } else {
+            req.body.userId = req.school.userId.toLowerCase()
+            req.body.schoolId = req.school.schoolId.toLowerCase()
+        }
+
+        const { schoolId, classId, section, subject, fromDate, toDate, roiId, userId } = req.body
+
+        const match = {}
+        if (schoolId) {
+            match.schoolId = schoolId
+        }
+
+        if (userId) {
+            match.userId = userId
+        }
+
+        if (classId) {
+            match.classId = classId
+        }
+
+        if (section && section != "0") {
+            match.section = section
+        }
+        if (roiId) {
+            match.roiId = roiId
+        }
+
+        if (subject && subject != 'Subject') {
+            match.subject = new RegExp(`^${subject}$`, 'i')
+        }
+
+        let startTime = new Date(fromDate + fromTime).getTime()
+        let endTime = new Date(toDate + toTime).getTime()
+
+        if (startTime && !endTime) {
+            match.createdOn = {
+                $gte: startTime
+            }
+        } else if (!startTime && endTime) {
+            match.createdOn = {
+                $lte: endTime
+            }
+        } else if (startTime && endTime) {
+            match.createdOn = {
+                $gte: startTime,
+                $lte: endTime
+            }
+        }
+
+        if (req.body.page) {
+            req.body.limit = 10;
+            req.body.page = 1;
+        } else {
+            req.body.limit = 0;
+            req.body.page = 1;
+        }
+
+        const savedScan = await Mark.find(match, { _id: 0, __v: 0 })
+            .limit(parseInt(req.body.limit) * 1)
+            .skip((parseInt(parseInt(req.body.page)) - 1) * parseInt(parseInt(req.body.limit)))
+
+
+        res.status(200).json({ data: savedScan })
+    } catch (e) {
+        console.log(e);
+        res.status(400).json({ "error": true, e })
     }
 }
