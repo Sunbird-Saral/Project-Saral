@@ -153,11 +153,11 @@ class MyScanComponent extends Component {
                 }
             });
 
-            let hasSet = filteredData.set && filteredData.set.length >= 0 ? filteredData.set : ''
+            let hasSet = filteredData ? filteredData.set ? filteredData.set.length >= 0 ? filteredData.set : "" : "" : ""
             if (hasSet.length >= 0 && filter.length > 0) {
                 let findSetStudent = filter.length > 0 ? filter[0].studentsMarkInfo.filter((item) => {
                     if (hasSet.length >= 0) {
-                        return item.set == filteredData.set;
+                        return item.set == hasSet;
                     }
                 })
                 :
@@ -955,6 +955,8 @@ class MyScanComponent extends Component {
                     savingStatus={savingStatus}
                     bgColor={this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1: AppTheme.BLUE}
                     navigation={this.props.navigation}
+                    saveData={this.onPressSaveInDB}
+
               />
             </View>
         );
