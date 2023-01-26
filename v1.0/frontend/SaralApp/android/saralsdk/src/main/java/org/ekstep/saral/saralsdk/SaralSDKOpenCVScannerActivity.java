@@ -19,6 +19,7 @@ import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.ReactContext;
+import com.facebook.react.modules.core.DeviceEventManagerModule;
 
 import org.ekstep.saral.saralsdk.hwmodel.HWClassifier;
 import org.ekstep.saral.saralsdk.hwmodel.HWBlockLettersClassifier;
@@ -95,6 +96,45 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
             Log.d(TAG, "Scanner type: " + mlayoutConfigs);
             Log.d(TAG, "Page Number" + pageNumber);
         }
+
+        boolean hwdNotAVailable           = HWClassifier.getInstance().isModelAvailable() == false;
+        boolean hwBlockLetterNotAVailable = HWBlockLettersClassifier.getInstance().isModelAvailable() == false;
+        boolean isDigitLayout             = false, isBlockLetterLayout = false;
+
+        ReactInstanceManager mReactInstanceManager  = getReactNativeHost().getReactInstanceManager();
+        ReactContext reactContext                   = mReactInstanceManager.getCurrentReactContext();
+        reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("message","Model Not Available");
+        Intent intent                               = new Intent(reactContext, SaralSDKOpenCVScannerActivity.class);
+
+        try {
+            JSONObject layoutConfigs        =  new JSONObject(mlayoutConfigs);
+            JSONObject  layoutObject        = layoutConfigs.getJSONObject("layout");
+            JSONArray   cells               = layoutObject.getJSONArray("cells");
+            JSONObject  cell                = cells.getJSONObject(0);
+            Log.d(TAG, "onCreate: roi" + cell);
+            JSONArray   cellROIs            = cell.getJSONArray("rois");
+            Log.d(TAG, "onCreate: cellROIs" + cellROIs);
+//            Log.d(TAG, "onCreate: cellROIs" + cellROIs);
+            JSONObject  roi                 = cellROIs.getJSONObject(0);
+            Log.d(TAG, "onCreate: roisss" + roi);
+            isDigitLayout                   = roi.getString("extractionMethod").equals("NUMERIC_CLASSIFICATION");
+            isBlockLetterLayout             = roi.getString("extractionMethod").equals("BLOCK_ALPHANUMERIC_CLASSIFICATION");
+
+        } catch (Exception e) {
+            Log.d(TAG, "onCreate: eeee=>" + e);
+        }
+        Log.d(TAG, "onCreate: isDigitLayout" + isDigitLayout);
+        Log.d(TAG, "onCreate: isDigitLayout" + isBlockLetterLayout + "hwdNotAVailable && isDigitLayout)" + hwdNotAVailable + hwBlockLetterNotAVailable);
+
+        if (hwdNotAVailable && isDigitLayout){
+            intent.putExtra("isModelAvailable","Digit Model Is Not Available");
+            mReactInstanceManager.onActivityResult(this, 2, 2, intent);
+            finish();
+        } else if (hwBlockLetterNotAVailable && isBlockLetterLayout){
+            finish();intent.putExtra("isModelAvailable","Alpha Numeric Model Is Not Available");
+            mReactInstanceManager.onActivityResult(this, 2, 2, intent);
+            finish();
+        }else
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_scanner);

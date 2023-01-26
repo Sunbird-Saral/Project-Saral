@@ -1,13 +1,17 @@
 package org.ekstep.saral.saralsdk.hwmodel;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.ml.common.FirebaseMLException;
@@ -33,6 +37,8 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
+import static androidx.core.content.ContextCompat.getSystemService;
+
 public class HWClassifier {
     private static final String TAG             = "SrlSDK::HWClassify";
     private static HWClassifier mInstance       = null;
@@ -41,8 +47,8 @@ public class HWClassifier {
      * Name of the model file hosted with Firebase.
      */
     private static final String HOSTED_MODEL_NAME = null;
-    //private static final String LOCAL_MODEL_ASSET = "trained_resnet_real_synthetic_v2_20.tflite";
-    private static final String LOCAL_MODEL_ASSET = "saral_hwd_model_itr3.tflite";
+    private static final String LOCAL_MODEL_ASSET = "trained_resnet_real_thetic_v2_20.tflite";
+//    private static final String LOCAL_MODEL_ASSET = "saral_hwd_model_itr3.tflite";
     /**
      * Dimensions of inputs.
      */
@@ -80,6 +86,15 @@ public class HWClassifier {
         return false;
     }
 
+    public boolean isModelAvailable() {
+        Log.d(TAG, "isModelAvailable: mInterpreter "+mInterpreter);
+        Log.d(TAG, "isModelAvailable: mInterpreter "+downloadInterpreter);
+        if (mInterpreter == null && downloadInterpreter == null) {
+            return false;
+        }
+        return true;
+    }
+
     public void HWClassifierCallback(PredictionListener listener) throws IOException {
         predictionListener  = listener;
     }
@@ -88,11 +103,22 @@ public class HWClassifier {
         predictionListener  = listener;
     }
 
-    public void initialize(HWClassifierStatusListener listener) {
+    public void localModelAsset (HWClassifierStatusListener listener) throws FirebaseMLException {
+        FirebaseCustomLocalModel localSource = new FirebaseCustomLocalModel.Builder()
+                .setAssetFilePath(LOCAL_MODEL_ASSET)
+                .build();
+        FirebaseModelInterpreterOptions options =
+                new FirebaseModelInterpreterOptions.Builder(localSource).build();
+        mInterpreter = FirebaseModelInterpreter.getInstance(options);
+        listener.OnModelLoadSuccess("model loading successful");
+    }
+
+    public void initialize(HWClassifierStatusListener listener, boolean isFBDownloadEnable ,Context context) {
         int[] inputDims = {DIM_BATCH_SIZE, DIM_IMG_SIZE_X, DIM_IMG_SIZE_Y, DIM_PIXEL_SIZE};
         int[] outputDims = {DIM_BATCH_SIZE, 11};
-        
-        Boolean downloadFromFB = true;
+
+        Log.d(TAG, "initialize: isFbDownloadEnable " +isFBDownloadEnable);
+        boolean hasNetwork = isNetworkAvailable(context);
 
         try {
             int firebaseModelDataType = FirebaseModelDataType.FLOAT32;
@@ -101,41 +127,52 @@ public class HWClassifier {
                             .setInputFormat(0, firebaseModelDataType, inputDims)
                             .setOutputFormat(0, firebaseModelDataType, outputDims)
                             .build();
-            if (!downloadFromFB) {
+            // if (!isFBDownloadEnable || !hasNetwork) {
+            if (true) {
 
-            FirebaseCustomLocalModel localSource = new FirebaseCustomLocalModel.Builder()
+                FirebaseCustomLocalModel localSource = new FirebaseCustomLocalModel.Builder()
                     .setAssetFilePath(LOCAL_MODEL_ASSET)
                     .build();
+
             FirebaseModelInterpreterOptions options =
                     new FirebaseModelInterpreterOptions.Builder(localSource).build();
             mInterpreter = FirebaseModelInterpreter.getInstance(options);
+                Log.d(TAG, "initialize: minterpreter mInterpreter" + mInterpreter);
+                Log.d(TAG, "initialize: minterpreter options" + options);
             listener.OnModelLoadSuccess("model loading successful");
+
             } else {
 
                 // remote model instance
                 FirebaseCustomRemoteModel remoteModel =
                         new FirebaseCustomRemoteModel.Builder("saral_hwd_model").build();
 
-                FirebaseModelDownloadConditions conditionss = new FirebaseModelDownloadConditions.Builder()
-                        .requireWifi()
-                        .build();
-                FirebaseModelManager.getInstance().download(remoteModel, conditionss)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                FirebaseModelManager.getInstance().getLatestModelFile(remoteModel)
+                        .addOnCompleteListener(new OnCompleteListener<File>() {
                             @Override
-                            public void onSuccess(Void unused) {
+                            public void onComplete(@NonNull Task<File> task) {
+                                File modelFile = task.getResult();
+                                if (modelFile != null) {
+                                    FirebaseModelInterpreterOptions options =
+                                            new FirebaseModelInterpreterOptions.Builder(remoteModel).build();
+                                    try {
+                                        downloadInterpreter = FirebaseModelInterpreter.getInstance(options);
+                                    } catch (FirebaseMLException e) {
+                                        Log.d(TAG, "onComplete: hello");
+                                        e.printStackTrace();
+                                    }
+                                    listener.OnModelLoadSuccess("model loading successful");
+                                } else if(hasNetwork){
 
-
-                                FirebaseModelManager.getInstance().getLatestModelFile(remoteModel)
-                                        .addOnCompleteListener(new OnCompleteListener<File>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<File> task) {
-                                                File modelFile = task.getResult();
-
-                                                if (modelFile != null) {
+                                    FirebaseModelDownloadConditions conditions = new FirebaseModelDownloadConditions.Builder()
+                                            .requireWifi()
+                                            .build();
+                                    FirebaseModelManager.getInstance().download(remoteModel, conditions)
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void unused) {
                                                     FirebaseModelInterpreterOptions options =
                                                             new FirebaseModelInterpreterOptions.Builder(remoteModel).build();
-
-
                                                     try {
                                                         downloadInterpreter = FirebaseModelInterpreter.getInstance(options);
                                                     } catch (FirebaseMLException e) {
@@ -143,16 +180,68 @@ public class HWClassifier {
                                                     }
                                                     listener.OnModelLoadSuccess("model loading successful");
                                                 }
+                                            }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull @NotNull Exception e) {
+                                            try {
+                                                localModelAsset(listener);
+                                            } catch (FirebaseMLException firebaseMLException) {
+                                                firebaseMLException.printStackTrace();
                                             }
-                                        });
-                                
+                                        }
+                                    });
+                                }
                             }
                         });
+//                FirebaseModelDownloadConditions conditionss = new FirebaseModelDownloadConditions.Builder()
+//                        .requireWifi()
+//                        .build();
+//                FirebaseModelManager.getInstance().download(remoteModel, conditionss)
+//                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                            @Override
+//                            public void onSuccess(Void unused) {
+//
+//
+//                                FirebaseModelManager.getInstance().getLatestModelFile(remoteModel)
+//                                        .addOnCompleteListener(new OnCompleteListener<File>() {
+//                                            @Override
+//                                            public void onComplete(@NonNull Task<File> task) {
+//                                                File modelFile = task.getResult();
+//
+//                                                if (modelFile != null) {
+//                                                    FirebaseModelInterpreterOptions options =
+//                                                            new FirebaseModelInterpreterOptions.Builder(remoteModel).build();
+//                                                    try {
+//                                                        downloadInterpreter = FirebaseModelInterpreter.getInstance(options);
+//                                                    } catch (FirebaseMLException e) {
+//                                                        e.printStackTrace();
+//                                                    }
+//                                                    listener.OnModelLoadSuccess("model loading successful");
+//                                                } else {
+//                                                    try {
+//                                                        localModelAsset(listener);
+//                                                    } catch (FirebaseMLException e) {
+//                                                        e.printStackTrace();
+//                                                    }
+//                                                }
+//                                            }
+//                                        });
+//
+//                            }
+//                        });
             }
         } catch (FirebaseMLException e) {
             listener.OnModelLoadError("model loading failed");
             e.printStackTrace();
         }
+    }
+
+    private boolean isNetworkAvailable(Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        // Initialize network info
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        Log.d(TAG, "isNetworkAvailable: networkinfo" + networkInfo.isConnected());
+        return networkInfo.isConnected();
     }
 
     public void classifyMat(Mat mat, String id) {

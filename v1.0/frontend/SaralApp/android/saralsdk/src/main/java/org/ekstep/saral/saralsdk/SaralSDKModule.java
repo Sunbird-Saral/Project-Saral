@@ -69,7 +69,7 @@ public class SaralSDKModule extends ReactContextBaseJavaModule implements Activi
             public void OnModelLoadError(String message) {
                 Log.d(TAG, "HWClassifer model cannot be loaded :" + message);
             }
-        });
+        },true, context);
 
         HWBlockLettersClassifier.getInstance();
         Log.d(TAG, "Loading HWBlockLettersClassifier models");
@@ -122,6 +122,9 @@ public class SaralSDKModule extends ReactContextBaseJavaModule implements Activi
         if (requestCode == 1) {
             Log.d(TAG, "Response: " + data.getStringExtra("layoutConfigsResult"));
             this.mPromise.resolve(data.getStringExtra("layoutConfigsResult"));
+        } else if (requestCode == 2) {
+            Log.d(TAG, "Response: " + data.getStringExtra("isModelAvailable"));
+            this.mPromise.resolve(data.getStringExtra("isModelAvailable"));
         }
     }
 
