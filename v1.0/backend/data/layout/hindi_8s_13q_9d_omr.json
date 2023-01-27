@@ -1045,9 +1045,9 @@
                         "index": 6,
                         "rect": {
                             "top": 232,
-                            "left": 156,
-                            "bottom": 257,
-                            "right": 172
+                            "left": 152,
+                            "bottom": 253,
+                            "right": 165
                         }
                     },
                     {
@@ -1414,7 +1414,7 @@
                 "cellId": "42",
                 "rois": [
                     {
-                        "annotationTags": "ROLLNUMBER3_Q13",
+                        "annotationTags": "ROLLNUMBER3",
                         "extractionMethod": "CELL_OMR",
                         "roiId": "66",
                         "index": 0,
@@ -1430,7 +1430,7 @@
                     "index": 42
                 },
                 "format": {
-                    "name": "ROLLNUMBER3_Q13",
+                    "name": "ROLLNUMBER3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09403 Q13"
                 },
                 "validate": {
@@ -2478,10 +2478,10 @@
                         "roiId": "118",
                         "index": 7,
                         "rect": {
-                            "top": 348,
-                            "left": 172,
+                            "top": 346,
+                            "left": 168,
                             "bottom": 374,
-                            "right": 188
+                            "right": 183
                         }
                     },
                     {
@@ -2836,7 +2836,7 @@
                 "cellId": "84",
                 "rois": [
                     {
-                        "annotationTags": "ROLLNUMBER6_Q13",
+                        "annotationTags": "ROLLNUMBER6_Q13_3",
                         "extractionMethod": "CELL_OMR",
                         "roiId": "132",
                         "index": 0,
@@ -2852,7 +2852,7 @@
                     "index": 84
                 },
                 "format": {
-                    "name": "ROLLNUMBER6_Q13",
+                    "name": "ROLLNUMBER6_Q13_3",
                     "value": "\u091b\u093e\u0924\u094d\u0930 \u0906\u0908\u0921\u09406 Q13"
                 },
                 "validate": {
@@ -2892,10 +2892,10 @@
                         "roiId": "135",
                         "index": 2,
                         "rect": {
-                            "top": 386,
-                            "left": 91,
-                            "bottom": 413,
-                            "right": 106
+                            "top": 387,
+                            "left": 89,
+                            "bottom": 410,
+                            "right": 99
                         }
                     },
                     {
@@ -2923,22 +2923,10 @@
                         }
                     },
                     {
-                        "annotationTags": "ROLLNUMBERID7_6",
+                        "annotationTags": "ROLLNUMBERID7_7",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "138",
                         "index": 5,
-                        "rect": {
-                            "top": 387,
-                            "left": 139,
-                            "bottom": 411,
-                            "right": 154
-                        }
-                    },
-                    {
-                        "annotationTags": "ROLLNUMBERID7_7",
-                        "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "139",
-                        "index": 6,
                         "rect": {
                             "top": 387,
                             "left": 155,
@@ -2949,8 +2937,8 @@
                     {
                         "annotationTags": "ROLLNUMBERID7_8",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "140",
-                        "index": 7,
+                        "roiId": "139",
+                        "index": 6,
                         "rect": {
                             "top": 386,
                             "left": 172,
@@ -2961,8 +2949,8 @@
                     {
                         "annotationTags": "ROLLNUMBERID7_9",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
-                        "roiId": "141",
-                        "index": 8,
+                        "roiId": "140",
+                        "index": 7,
                         "rect": {
                             "top": 387,
                             "left": 188,
@@ -2988,7 +2976,7 @@
                     {
                         "annotationTags": "ROLLNUMBER7_Q1",
                         "extractionMethod": "CELL_OMR",
-                        "roiId": "142",
+                        "roiId": "141",
                         "index": 0,
                         "rect": {
                             "top": 391,
@@ -3015,7 +3003,7 @@
                     {
                         "annotationTags": "ROLLNUMBER7_Q2",
                         "extractionMethod": "CELL_OMR",
-                        "roiId": "143",
+                        "roiId": "142",
                         "index": 0,
                         "rect": {
                             "top": 391,
@@ -3042,7 +3030,7 @@
                     {
                         "annotationTags": "ROLLNUMBER7_Q3",
                         "extractionMethod": "CELL_OMR",
-                        "roiId": "144",
+                        "roiId": "143",
                         "index": 0,
                         "rect": {
                             "top": 390,
@@ -3069,7 +3057,7 @@
                     {
                         "annotationTags": "ROLLNUMBER7_Q4",
                         "extractionMethod": "CELL_OMR",
-                        "roiId": "145",
+                        "roiId": "144",
                         "index": 0,
                         "rect": {
                             "top": 390,
@@ -3096,7 +3084,7 @@
                     {
                         "annotationTags": "ROLLNUMBER7_Q5",
                         "extractionMethod": "CELL_OMR",
-                        "roiId": "146",
+                        "roiId": "145",
                         "index": 0,
                         "rect": {
                             "top": 390,
@@ -3123,7 +3111,7 @@
                     {
                         "annotationTags": "ROLLNUMBER7_Q6",
                         "extractionMethod": "CELL_OMR",
-                        "roiId": "147",
+                        "roiId": "146",
                         "index": 0,
                         "rect": {
                             "top": 391,
@@ -3150,7 +3138,7 @@
                     {
                         "annotationTags": "ROLLNUMBER7_Q7",
                         "extractionMethod": "CELL_OMR",
-                        "roiId": "148",
+                        "roiId": "147",
                         "index": 0,
                         "rect": {
                             "top": 390,
@@ -3177,7 +3165,7 @@
                     {
                         "annotationTags": "ROLLNUMBER7_Q8",
                         "extractionMethod": "CELL_OMR",
-                        "roiId": "149",
+                        "roiId": "148",
                         "index": 0,
                         "rect": {
                             "top": 391,
@@ -3204,7 +3192,7 @@
                     {
                         "annotationTags": "ROLLNUMBER7_Q9",
                         "extractionMethod": "CELL_OMR",
-                        "roiId": "150",
+                        "roiId": "149",
                         "index": 0,
                         "rect": {
                             "top": 391,
@@ -3231,7 +3219,7 @@
                     {
                         "annotationTags": "ROLLNUMBER7_Q10",
                         "extractionMethod": "CELL_OMR",
-                        "roiId": "151",
+                        "roiId": "150",
                         "index": 0,
                         "rect": {
                             "top": 391,
@@ -3258,7 +3246,7 @@
                     {
                         "annotationTags": "ROLLNUMBER7_Q11",
                         "extractionMethod": "CELL_OMR",
-                        "roiId": "152",
+                        "roiId": "151",
                         "index": 0,
                         "rect": {
                             "top": 391,
@@ -3285,7 +3273,7 @@
                     {
                         "annotationTags": "ROLLNUMBER7_Q12",
                         "extractionMethod": "CELL_OMR",
-                        "roiId": "153",
+                        "roiId": "152",
                         "index": 0,
                         "rect": {
                             "top": 393,
@@ -3312,7 +3300,7 @@
                     {
                         "annotationTags": "ROLLNUMBER7_Q13",
                         "extractionMethod": "CELL_OMR",
-                        "roiId": "154",
+                        "roiId": "153",
                         "index": 0,
                         "rect": {
                             "top": 391,
@@ -3337,10 +3325,22 @@
                 "cellId": "99",
                 "rois": [
                     {
+                        "annotationTags": "ROLLNUMBERID8_6",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "154",
+                        "index": 0,
+                        "rect": {
+                            "top": 426,
+                            "left": 137,
+                            "bottom": 449,
+                            "right": 150
+                        }
+                    },
+                    {
                         "annotationTags": "ROLLNUMBERID8_1",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "155",
-                        "index": 0,
+                        "index": 1,
                         "rect": {
                             "top": 427,
                             "left": 56,
@@ -3352,7 +3352,7 @@
                         "annotationTags": "ROLLNUMBERID8_2",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "156",
-                        "index": 1,
+                        "index": 2,
                         "rect": {
                             "top": 426,
                             "left": 73,
@@ -3364,7 +3364,7 @@
                         "annotationTags": "ROLLNUMBERID8_3",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "157",
-                        "index": 2,
+                        "index": 3,
                         "rect": {
                             "top": 425,
                             "left": 89,
@@ -3376,7 +3376,7 @@
                         "annotationTags": "ROLLNUMBERID8_4",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "158",
-                        "index": 3,
+                        "index": 4,
                         "rect": {
                             "top": 426,
                             "left": 106,
@@ -3388,7 +3388,7 @@
                         "annotationTags": "ROLLNUMBERID8_5",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "159",
-                        "index": 4,
+                        "index": 5,
                         "rect": {
                             "top": 426,
                             "left": 122,
@@ -3400,7 +3400,7 @@
                         "annotationTags": "ROLLNUMBERID8_6",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "160",
-                        "index": 5,
+                        "index": 6,
                         "rect": {
                             "top": 426,
                             "left": 139,
@@ -3412,7 +3412,7 @@
                         "annotationTags": "ROLLNUMBERID8_7",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "161",
-                        "index": 6,
+                        "index": 7,
                         "rect": {
                             "top": 427,
                             "left": 156,
@@ -3424,7 +3424,7 @@
                         "annotationTags": "ROLLNUMBERID8_8",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "162",
-                        "index": 7,
+                        "index": 8,
                         "rect": {
                             "top": 427,
                             "left": 172,
@@ -3436,7 +3436,7 @@
                         "annotationTags": "ROLLNUMBERID8_9",
                         "extractionMethod": "NUMERIC_CLASSIFICATION",
                         "roiId": "163",
-                        "index": 8,
+                        "index": 9,
                         "rect": {
                             "top": 426,
                             "left": 189,
@@ -3808,6 +3808,5 @@
                 }
             }
         ]
-    },
-    "roiId": "26"
+    }
 }
