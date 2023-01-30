@@ -17,18 +17,18 @@ const mockRequest = () => {
     req.header = jest.fn().mockReturnValue(req)
     req.get = jest.fn().mockReturnValue(req)
     return req
-  }
-  
-  const mockResponse = () => {
+}
+
+const mockResponse = () => {
     const res = {}
     res.status = jest.fn().mockReturnValue(res);
     res.json = jest.fn().mockReturnValue(res);
     return res
-  }
-  
-  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1MDAxIiwic2Nob29sSWQiOiJ1MDAxIiwiaWF0IjoxNjcxMTY4OTY3fQ.jwx3xxTTP3dtJwJFUD4QAUsuBT8uemzyTpiKEIRhzKg"
+}
 
-  describe('save marks data ', () => {
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1MDAxIiwic2Nob29sSWQiOiJ1MDAxIiwiaWF0IjoxNjcxMTY4OTY3fQ.jwx3xxTTP3dtJwJFUD4QAUsuBT8uemzyTpiKEIRhzKg"
+
+describe('save marks data ', () => {
     beforeEach(() => {
         jest.useFakeTimers()
     })
@@ -48,16 +48,16 @@ const mockRequest = () => {
         }
         req.body = mockSaveMarksBody
 
-        Helper.lockScreenValidator  = jest.fn().mockResolvedValue(undefined)
-        Marks.findOne =  jest.fn().mockReturnValue( null)
+        Helper.lockScreenValidator = jest.fn().mockResolvedValue(undefined)
+        Marks.findOne = jest.fn().mockReturnValue(null)
         Marks.create = jest.fn().mockResolvedValue(mockSaveMarksResponse)
-      
+
         await marksController.saveMarks(req, res)
 
-        expect(Helper.lockScreenValidator ).toHaveBeenCalledTimes(1)
+        expect(Helper.lockScreenValidator).toHaveBeenCalledTimes(1)
         expect(Marks.findOne).toHaveBeenCalledTimes(1)
         expect(Marks.create).toHaveBeenCalledTimes(1)
-        expect(res.json({message:"Data Saved Successfully"}))
+        expect(res.json({ message: "Data Saved Successfully" }))
         expect(res.json({ status: 'success' }).status(200))
     });
 
@@ -77,16 +77,16 @@ const mockRequest = () => {
         }
         req.body = mockUpdateMarksBody
 
-        Helper.lockScreenValidator  = jest.fn().mockResolvedValue(undefined)
+        Helper.lockScreenValidator = jest.fn().mockResolvedValue(undefined)
         Marks.findOne = jest.fn().mockResolvedValue(mockStudentMarksExist);
         Marks.update = jest.fn().mockResolvedValue({ n: 1, nModified: 1, ok: 1 })
-      
+
         await marksController.saveMarks(req, res)
 
-        expect(Helper.lockScreenValidator ).toHaveBeenCalledTimes(1)
+        expect(Helper.lockScreenValidator).toHaveBeenCalledTimes(1)
         expect(Marks.findOne).toHaveBeenCalledTimes(1)
         expect(Marks.update).toHaveBeenCalledTimes(1)
-        expect(res.json({message:"Data Saved Successfully"}))
+        expect(res.json({ message: "Data Saved Successfully" }))
         expect(res.json({ status: 'success' }).status(200))
     });
 
@@ -105,14 +105,16 @@ const mockRequest = () => {
         }
         req.body = mockSaveMarksBody
 
-        Helper.lockScreenValidator  = jest.fn().mockResolvedValue()
-      
+        Helper.lockScreenValidator = jest.fn().mockImplementation(() => {
+            throw new Error('State/District/School is locked for scanning')
+        });
+
         await marksController.saveMarks(req, res)
 
-        let error = new AppError("State/District/School is locked for scanning" , 500);
-        expect(error.statusCode).toBe(500);
+        expect(res.status).toHaveBeenCalledWith(500);
+        expect(res.json({ status: 'fail' }));
 
-      
+
     });
 
 });

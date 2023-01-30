@@ -146,7 +146,6 @@ exports.getSaveScan = async (req, res, next) => {
 
         res.status(200).json({ data: savedScan })
     } catch (e) {
-        console.log(e);
         res.status(400).json({ "error": true, e })
     }
 }
