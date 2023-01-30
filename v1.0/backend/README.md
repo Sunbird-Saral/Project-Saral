@@ -63,3 +63,7 @@
 # swagger documentation
 $BASE_URL/api-docs/saral/frontend/
 $BASE_URL/api-docs/saral/maintenance/
+
+# Below command to be executed for unit test case .
+
+>> `npm run test`
