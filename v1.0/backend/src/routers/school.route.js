@@ -1,28 +1,33 @@
 const express = require('express')
+const router = express.Router({ mergeParams: true });
 const School = require('../models/school')
-const ClassModel = require('../models/classModel')
-const Student = require('../models/students')
-const Mark = require('../models/marks')
 const User = require('../models/users')
-const { auth } = require('../middleware/auth')
-const { stringObject } = require('../utils/commonUtils')
+const ClassModel = require("../models/classModel")
+const Student = require("../models/students")
+const Mark = require("../models/marks")
 const Helper = require('../middleware/helper')
-const router = new express.Router()
+const schoolController = require("../controller/schoolController")
+const { stringObject } = require('../utils/commonUtils');
+const { auth } = require('../middleware/auth');
+
+
+router.route('/schools/login').post(schoolController.loginSchool)
 
 
 router.post('/schools/create', async (req, res) => {
     const school = new School({ ...req.body })
     try {
+
         school.state = req.body.state.toLowerCase()
         school.schoolId = req.body.schoolId.toLowerCase()
 
         if (req.body.autoSync) school.autoSync = req.body.autoSync
-        if(req.body.autoSyncFrequency)   school.autoSyncFrequency = req.body.autoSyncFrequency
-        if(req.body.tags) school.tags = req.body.tags
-        if(req.body.autoSyncBatchSize)   school.autoSyncBatchSize = req.body.autoSyncBatchSize
-       
-        
+        if (req.body.autoSyncFrequency) school.autoSyncFrequency = req.body.autoSyncFrequency
+        if (req.body.tags) school.tags = req.body.tags
+        if (req.body.autoSyncBatchSize) school.autoSyncBatchSize = req.body.autoSyncBatchSize
+
         await school.save()
+
         let schools = {
             storeTrainingData: school.storeTrainingData,
             name: school.name,
@@ -30,8 +35,8 @@ router.post('/schools/create', async (req, res) => {
             state: school.state,
             district: school.district
         }
-        const token = await school.generateAuthToken()
-        res.status(201).send({ schools, token })
+
+        res.status(201).send({ schools })
     } catch (e) {
         if (e.message.includes(' duplicate key error')) {
             let key = Object.keys(e.keyValue)
@@ -41,7 +46,6 @@ router.post('/schools/create', async (req, res) => {
         }
     }
 })
-
 
 router.get('/schools', async (req, res) => {
     try {
@@ -62,71 +66,6 @@ router.get('/schools', async (req, res) => {
         res.send({ schools })
     } catch (e) {
         res.send(e)
-    }
-})
-
-router.post('/schools/login', async (req, res) => {
-    try {
-        let userId = {}
-        if(req.body.schoolId){
-            userId = req.body.schoolId.toLowerCase()
-        }
-        const users = await User.findByCredentials(userId, req.body.password)
-       
-        const schools = await School.findOne({schoolId:users.schoolId})
-        
-        await Helper.lockScreenValidator(schools)
-        const token = await users.generateAuthToken()
-        let classes = []
-        let school = {
-            storeTrainingData: schools.storeTrainingData,
-            name: schools.name,
-            schoolId: schools.schoolId,
-            state: schools.state,
-            district: schools.district,
-            autoSync: schools.autoSync,
-            autoSyncFrequency: schools.autoSyncFrequency,
-            tags: schools.tags,
-            autoSyncBatchSize: schools.autoSyncBatchSize,
-            isMinimalMode: schools.isMinimalMode,
-            supportEmail: schools.supportEmail,
-            offlineMode: schools.offlineMode,
-            isAppForceUpdateEnabled: schools.isAppForceUpdateEnabled,
-            lock: schools.lock,
-            userId: users.userId
-        }
-
-        let response = {
-            school,
-            token
-        }
-        if (req.body.classes) {
-            const classData = await ClassModel.findClassesBySchools(schools.schoolId)
-
-            classData.forEach(data => {
-                const { sections, classId, className } = data
-                let obj = {
-                    sections,
-                    classId,
-                    className
-                }
-                classes.push(obj)
-            });
-            classes.sort((a, b) => a.classId.trim().localeCompare(b.classId.trim()))
-            response.classes = classes
-        }
-
-        res.send(response)
-    } catch (e) {
-        if (e && e.message == 'School Id or Password is not correct.') {
-            res.status(422).send({ error: e.message })
-        }
-        else if(e && e.message == stringObject().lockScreen){
-            res.status(500).send({ error: e.message })
-        }
-        else {
-            res.status(400).send(e)
-        }
     }
 })
 
@@ -153,7 +92,7 @@ router.patch('/schools/:schoolId', async (req, res) => {
     try {
         if (Object.keys(req.body).length === 0) res.status(400).send({ message: 'Validation error.' })
         const updates = Object.keys(req.body)
-        const allowedUpdates = ['name', 'state', 'district','udisceCode', 'storeTrainingData', 'autoSync', 'autoSyncFrequency','tags','autoSyncBatchSize']
+        const allowedUpdates = ['name', 'state', 'district', 'udisceCode', 'storeTrainingData', 'autoSync', 'autoSyncFrequency', 'tags', 'autoSyncBatchSize']
         const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
 
         if (!isValidOperation) {

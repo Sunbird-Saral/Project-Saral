@@ -36,27 +36,27 @@ const userSchema = new mongoose.Schema({
 
 userSchema.index({userId: -1})
 
-userSchema.statics.findByCredentials = async (userId, password) => {
-    const user = await User.findOne({ userId },{__v: 0})
+// userSchema.statics.findByCredentials = async (userId, password) => {
+//     const user = await User.findOne({ userId },{__v: 0})
     
-    if(!user) {
-        throw new Error('School Id or Password is not correct.')
-    }
+//     if(!user) {
+//         throw new Error('School Id or Password is not correct.')
+//     }
 
-    const isMatch = await bcrypt.compare(password, user.password)
+//     const isMatch = await bcrypt.compare(password, user.password)
     
-    if(!isMatch) {
-        throw new Error('School Id or Password is not correct.')
-    }
+//     if(!isMatch) {
+//         throw new Error('School Id or Password is not correct.')
+//     }
     
-    return user
-}
+//     return user
+// }
 
-userSchema.methods.generateAuthToken = async function () {
-    const user = this
+userSchema.statics.generateAuthToken = async function (user) {
+    // const user = this
     const token = jwt.sign({ userId: user.userId.toString() ,schoolId: user.schoolId}, process.env.JWT_SECRET)
-    
-    await user.save()
+
+    // await user.save()
     return token
     
 }
