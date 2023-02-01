@@ -1,0 +1,21 @@
+{
+    "classId": "9",
+    "subject": "Hindi",
+    "studentsMarkInfo": [
+      {
+        "studentId": "121456787",
+        "predictedStudentId": "121456787",
+        "predictionConfidence": [],
+        "section": "C",
+        "marksInfo": [],
+        "securedMarks": 5,
+        "totalMarks": 0,
+        "studentAvailability": true,
+        "set": "",
+        "studentIdTrainingData": []
+      }
+    ],
+    "examId": 41,
+    "userId": "u001",
+    "set": ""
+  }

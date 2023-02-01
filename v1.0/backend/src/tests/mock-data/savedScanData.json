@@ -1,0 +1,23 @@
+{
+    "examDate": "1/07/2022",
+    "studentIdTrainingData": [],
+    "predictionConfidence": [],
+    "studentAvailability": false,
+    "maxMarksTrainingData": [],
+    "maxMarksConfidence": [],
+    "obtainedMarksTrainingData": [],
+    "obtainedMarksConfidence": [],
+    "createdOn": "1674135636603",
+    "studentId": "123456789",
+    "predictedStudentId": "",
+    "section": "C",
+    "marksInfo": [],
+    "securedMarks": 0,
+    "totalMarks": 0,
+    "set": "",
+    "schoolId": "u001",
+    "subject": "Hindi",
+    "classId": "9",
+    "examId": 41,
+    "userId": "u001"
+  }

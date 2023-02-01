@@ -1,5 +1,7 @@
 const { stringObject } = require('../utils/commonUtils')
 const Lock = require('../models/lock')
+const User = require("../models/users")
+const bcrypt = require('bcryptjs')
 
 
 const commonHelperFunctions = {
@@ -33,6 +35,30 @@ const commonHelperFunctions = {
             throw error;
         }
     },
+
+    findByCredentials: async function (userId, password) {
+        try {    
+            const user = await User.findOne({
+                userId: userId,
+                __v: 0
+            })
+          
+            if (!user) {
+                throw new Error('School Id or Password is not correct.')
+            }
+
+            const isMatch = await bcrypt.compare(password, user.password)
+
+            if (!isMatch) {
+                throw new Error('School Id or Password is not correct.')
+            }
+
+            return user
+
+        } catch (error) {
+            throw error
+        }
+    }
 }
 
 module.exports = commonHelperFunctions;
