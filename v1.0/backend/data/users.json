@@ -126,9 +126,15 @@
         "password": "tarento@123"
     },
     {
-        "name": "user10",
+        "name": "user22",
         "userId": "skill001",
         "schoolId": "skill001",
         "password": "skill@123"
+    },
+    {
+        "name": "user23",
+        "userId": "dummy001",
+        "schoolId": "dummy001",
+        "password": "tarento@123"
     }
 ]
