@@ -136,6 +136,8 @@ export default strings = new LocalizedStrings({
         you_dont_have_cache_for_save_count: "You don't have cache for save count",
         lock_screen: "State/District/School is locked for scanning" ,
         Mark_Absent:"Mark as Absent",
-        Mark_Present:"Mark as Present"
+        Mark_Present:"Mark as Present",
+        Digit_model_is_not_availaible: "Digit model is not availaible",
+        Alpha_numeric_model_is_not_availaible: "Alpha numeric model is not availaible"
     }
 })

@@ -93,8 +93,6 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
         if(b != null) {
             mlayoutConfigs = b.getString("layoutConfigs");
             pageNumber     = b.getString("page");
-            Log.d(TAG, "Scanner type: " + mlayoutConfigs);
-            Log.d(TAG, "Page Number" + pageNumber);
         }
 
         boolean hwdNotAVailable           = HWClassifier.getInstance().isModelAvailable() == false;
@@ -111,29 +109,33 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
             JSONObject  layoutObject        = layoutConfigs.getJSONObject("layout");
             JSONArray   cells               = layoutObject.getJSONArray("cells");
             JSONObject  cell                = cells.getJSONObject(0);
-            Log.d(TAG, "onCreate: roi" + cell);
             JSONArray   cellROIs            = cell.getJSONArray("rois");
-            Log.d(TAG, "onCreate: cellROIs" + cellROIs);
-//            Log.d(TAG, "onCreate: cellROIs" + cellROIs);
             JSONObject  roi                 = cellROIs.getJSONObject(0);
-            Log.d(TAG, "onCreate: roisss" + roi);
             isDigitLayout                   = roi.getString("extractionMethod").equals("NUMERIC_CLASSIFICATION");
             isBlockLetterLayout             = roi.getString("extractionMethod").equals("BLOCK_ALPHANUMERIC_CLASSIFICATION");
-
         } catch (Exception e) {
-            Log.d(TAG, "onCreate: eeee=>" + e);
         }
-        Log.d(TAG, "onCreate: isDigitLayout" + isDigitLayout);
-        Log.d(TAG, "onCreate: isDigitLayout" + isBlockLetterLayout + "hwdNotAVailable && isDigitLayout)" + hwdNotAVailable + hwBlockLetterNotAVailable);
 
         if (hwdNotAVailable && isDigitLayout){
-            intent.putExtra("isModelAvailable","Digit Model Is Not Available");
-            mReactInstanceManager.onActivityResult(this, 2, 2, intent);
-            finish();
+            try {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("hwDigitModel", true);
+                intent.putExtra("isModelAvailable",  jsonObject.toString());
+                mReactInstanceManager.onActivityResult(this, 2, 2, intent);
+                finish();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         } else if (hwBlockLetterNotAVailable && isBlockLetterLayout){
-            finish();intent.putExtra("isModelAvailable","Alpha Numeric Model Is Not Available");
-            mReactInstanceManager.onActivityResult(this, 2, 2, intent);
-            finish();
+            try {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("blockLetterModel", true);
+                intent.putExtra("isModelAvailable", jsonObject.toString());
+                mReactInstanceManager.onActivityResult(this, 2, 2, intent);
+                finish();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }else
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);

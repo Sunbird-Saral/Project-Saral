@@ -83,7 +83,7 @@ public class SaralSDKModule extends ReactContextBaseJavaModule implements Activi
             public void OnModelLoadError(String message) {
                 Log.d(TAG, "HWBlockLettersClassifier model cannot be loaded :" + message);
             }
-        });
+        }, true,context);
 
     }
 

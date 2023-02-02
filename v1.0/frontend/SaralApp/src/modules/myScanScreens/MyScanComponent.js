@@ -410,10 +410,16 @@ class MyScanComponent extends Component {
                 let pageNumber = totalPages || totalPages > 0 ? "1" : null
                 let jsonRoiData = this.props.roiData.data
                 SaralSDK.startCamera(JSON.stringify(jsonRoiData), pageNumber).then(res => {
-                    if (typeof res == "string") {
-                        this.callCustomModal(Strings.message_text, res, false);
+                    
+                    let roisData = JSON.parse(res);
+
+                    if (roisData.hasOwnProperty("hwDigitModel") && roisData.hwDigitModel) {
+                        this.callCustomModal(Strings.message_text, Strings.Digit_model_is_not_availaible, false);
+                    
+                    } else if (roisData.hasOwnProperty("blockLetterModel") && roisData.blockLetterModel) {
+                        this.callCustomModal(Strings.message_text, Strings.Alpha_numeric_model_is_not_availaible, false);
+                    
                     } else {
-                        let roisData = JSON.parse(res);
                         let cells = roisData.layout.cells;
                         this.consolidatePrediction(cells, roisData)
                     }

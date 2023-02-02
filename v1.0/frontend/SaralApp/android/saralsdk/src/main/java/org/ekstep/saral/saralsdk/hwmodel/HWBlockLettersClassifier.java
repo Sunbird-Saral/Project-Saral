@@ -1,6 +1,8 @@
 package org.ekstep.saral.saralsdk.hwmodel;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.util.Log;
@@ -8,6 +10,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.ml.common.FirebaseMLException;
@@ -30,6 +33,7 @@ import org.opencv.imgproc.Imgproc;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
@@ -95,11 +99,10 @@ public class HWBlockLettersClassifier {
         predictionListener  = listener;
     }
 
-    public void initialize(HWBlockLettersClassifierStatusListener listener) {
+    public void initialize(HWBlockLettersClassifierStatusListener listener, boolean isFBDownloadEnable,Context context) {
         int[] inputDims = {DIM_BATCH_SIZE, DIM_IMG_SIZE_X, DIM_IMG_SIZE_Y, DIM_PIXEL_SIZE};
         int[] outputDims = {DIM_BATCH_SIZE, 37};
 
-        Boolean downloadFromFB = true;
 
         try {
             int firebaseModelDataType = FirebaseModelDataType.FLOAT32;
@@ -109,33 +112,36 @@ public class HWBlockLettersClassifier {
                             .setOutputFormat(0, firebaseModelDataType, outputDims)
                             .build();
                             
-            if (true) {
-                FirebaseCustomLocalModel localSource = new FirebaseCustomLocalModel.Builder()
-                .setAssetFilePath(LOCAL_MODEL_ASSET)
-                .build();
-
-                FirebaseModelInterpreterOptions options =
-                    new FirebaseModelInterpreterOptions.Builder(localSource).build();
-                    mInterpreter = FirebaseModelInterpreter.getInstance(options);
-                Log.d(TAG, "initialize: " + mInterpreter);
-                    listener.OnModelLoadSuccess("model loading successful");
+            if (!isFBDownloadEnable) {
+                localModelAsset(listener,context);
                 }else {
                     FirebaseCustomRemoteModel remoteModel =
                         new FirebaseCustomRemoteModel.Builder("Alpha_Numeric_Model").build();
-                FirebaseModelDownloadConditions conditions = new FirebaseModelDownloadConditions.Builder()
-                        .requireWifi()
-                        .build();
-                FirebaseModelManager.getInstance().download(remoteModel, conditions)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+
+                FirebaseModelManager.getInstance().getLatestModelFile(remoteModel)
+                        .addOnCompleteListener(new OnCompleteListener<File>() {
                             @Override
-                            public void onSuccess(Void unused) {
-                                FirebaseModelManager.getInstance().getLatestModelFile(remoteModel)
-                                        .addOnCompleteListener(new OnCompleteListener<File>() {
-                                            @Override
-                                            public void onComplete(@NonNull @NotNull Task<File> task) {
-                                                File modelFile = task.getResult();
-                                                if (modelFile != null){
-                                                    FirebaseModelInterpreterOptions options = new FirebaseModelInterpreterOptions.Builder(remoteModel).build();
+                            public void onComplete(@NonNull Task<File> task) {
+                                File modelFile = task.getResult();
+                                if (modelFile != null) {
+                                    FirebaseModelInterpreterOptions options =
+                                            new FirebaseModelInterpreterOptions.Builder(remoteModel).build();
+                                    try {
+                                        downloadInterpreter = FirebaseModelInterpreter.getInstance(options);
+                                    } catch (FirebaseMLException e) {
+                                        e.printStackTrace();
+                                    }
+                                    listener.OnModelLoadSuccess("model loading successful");
+                                } else {
+                                    FirebaseModelDownloadConditions conditions = new FirebaseModelDownloadConditions.Builder()
+                                            .requireWifi()
+                                            .build();
+                                    FirebaseModelManager.getInstance().download(remoteModel, conditions)
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void unused) {
+                                                    FirebaseModelInterpreterOptions options =
+                                                            new FirebaseModelInterpreterOptions.Builder(remoteModel).build();
                                                     try {
                                                         downloadInterpreter = FirebaseModelInterpreter.getInstance(options);
                                                     } catch (FirebaseMLException e) {
@@ -143,8 +149,18 @@ public class HWBlockLettersClassifier {
                                                     }
                                                     listener.OnModelLoadSuccess("model loading successful");
                                                 }
+                                            }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull @NotNull Exception e) {
+                                            try {
+                                                localModelAsset(listener,context);
+
+                                            } catch (FirebaseMLException firebaseMLException) {
+                                                firebaseMLException.printStackTrace();
                                             }
-                                        });
+                                        }
+                                    });
+                                }
                             }
                         });
                 }
@@ -152,6 +168,36 @@ public class HWBlockLettersClassifier {
             listener.OnModelLoadError("model loading failed");
             e.printStackTrace();
         }
+    }
+
+    public void localModelAsset (HWBlockLettersClassifierStatusListener listener, Context context) throws FirebaseMLException {
+
+        boolean hasFile = isAssetExists(LOCAL_MODEL_ASSET,context);
+
+        if (hasFile){
+            FirebaseCustomLocalModel localSource = new FirebaseCustomLocalModel.Builder()
+                    .setAssetFilePath(LOCAL_MODEL_ASSET)
+                    .build();
+            FirebaseModelInterpreterOptions options =
+                    new FirebaseModelInterpreterOptions.Builder(localSource).build();
+            mInterpreter = FirebaseModelInterpreter.getInstance(options);
+            listener.OnModelLoadSuccess("model loading successful");
+        }
+    }
+
+    private boolean isAssetExists(String pathInAssetsDir, Context context){
+        AssetManager assetManager = context.getAssets();
+        InputStream inputStream = null;
+        try {
+            inputStream = assetManager.open(pathInAssetsDir);
+            Log.d(TAG, "isAssetExists: inputStream" + inputStream);
+            if(null != inputStream ) {
+                return true;
+            }
+        }  catch(IOException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     public void classifyMat(Mat mat, String id) {
