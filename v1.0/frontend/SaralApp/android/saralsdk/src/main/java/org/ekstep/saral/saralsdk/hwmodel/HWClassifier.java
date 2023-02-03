@@ -50,7 +50,7 @@ public class HWClassifier {
      */
     private static final String HOSTED_MODEL_NAME = null;
     //private static final String LOCAL_MODEL_ASSET = "trained_resnet_real_synthetic_v2_20.tflite";
-    private static final String LOCAL_MODEL_ASSET = "saral_hwd_m.tflite";
+    private static final String LOCAL_MODEL_ASSET = "saral_hwd_model.tflite";
     /**
      * Dimensions of inputs.
      */
@@ -137,7 +137,7 @@ public class HWClassifier {
 
                 // remote model instance
                 FirebaseCustomRemoteModel remoteModel =
-                        new FirebaseCustomRemoteModel.Builder("saral_hwd_mol").build();
+                        new FirebaseCustomRemoteModel.Builder("saral_hwd_model").build();
 
                 FirebaseModelManager.getInstance().getLatestModelFile(remoteModel)
                         .addOnCompleteListener(new OnCompleteListener<File>() {
