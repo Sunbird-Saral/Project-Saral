@@ -3550,5 +3550,65 @@
     "name": "Student10",
     "studentId": "45678901240",
     "schoolId": "jk001"
+  },
+  {
+    "studentClass": [
+      {
+        "classId": "4",
+        "className": "Class-4"
+      }
+    ],
+    "section": "A",
+    "name": "Student1",
+    "studentId": "8765432",
+    "schoolId": "u002"
+  },
+  {
+    "studentClass": [
+      {
+        "classId": "4",
+        "className": "Class-4"
+      }
+    ],
+    "section": "A",
+    "name": "Student2",
+    "studentId": "9876543",
+    "schoolId": "u002"
+  },
+  {
+    "studentClass": [
+      {
+        "classId": "4",
+        "className": "Class-4"
+      }
+    ],
+    "section": "A",
+    "name": "Student3",
+    "studentId": "1876543",
+    "schoolId": "u002"
+  },
+  {
+    "studentClass": [
+      {
+        "classId": "4",
+        "className": "Class-4"
+      }
+    ],
+    "section": "A",
+    "name": "Student4",
+    "studentId": "2876543",
+    "schoolId": "u002"
+  },
+  {
+    "studentClass": [
+      {
+        "classId": "4",
+        "className": "Class-4"
+      }
+    ],
+    "section": "A",
+    "name": "Student5",
+    "studentId": "9876543",
+    "schoolId": "u002"
   }
 ]
