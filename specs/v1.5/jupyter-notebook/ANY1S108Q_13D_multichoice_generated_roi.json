@@ -1,18 +1,12 @@
 {
     "layout": {
         "version": "1.0",
-        "name": "ANY1S100Q13DOMR Exam Sheet Form",
+        "name": "ANY1S108Q13DOMR Exam Sheet Form",
         "threshold": {
             "minWidth": 0,
             "minHeight": 0,
             "detectionRadius": 12
         },
-        "resultValidation": {
-            "validate": {
-                "regExp": "^[0-4]$",
-                "errorMsg": "Omr result should be between 0 to 4"
-            }
-        }, 
         "cells": [
             {
                 "cellId": "1",

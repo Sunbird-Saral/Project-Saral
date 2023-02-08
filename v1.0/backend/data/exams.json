@@ -19326,7 +19326,7 @@
     "classId": "9",
     "examDate": "03/03/2023",
     "totalMarks": 20,
-    "type": "any_1s_100q_13d_omr",
+    "type": "any_1s_108q_13d_multichoice",
     "questions": [
       {
         "questionId": "QUESTION1",
@@ -19826,6 +19826,46 @@
       {
         "questionId": "QUESTION100",
         "indicatorTitle": "L0-100",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION101",
+        "indicatorTitle": "L0-101",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION102",
+        "indicatorTitle": "L0-102",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION103a",
+        "indicatorTitle": "L0-103a",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION103b",
+        "indicatorTitle": "L0-103b",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION103c",
+        "indicatorTitle": "L0-103c",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION103d",
+        "indicatorTitle": "L0-103d",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION104",
+        "indicatorTitle": "L0-104",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "QUESTION105",
+        "indicatorTitle": "L0-105",
         "questionMarks": "1"
       }
     ],
