@@ -3608,7 +3608,19 @@
     ],
     "section": "A",
     "name": "Student5",
-    "studentId": "9876543",
+    "studentId": "9076543",
+    "schoolId": "u002"
+  },
+  {
+    "studentClass": [
+      {
+        "classId": "4",
+        "className": "Class-4"
+      }
+    ],
+    "section": "A",
+    "name": "Student6",
+    "studentId": "9006543",
     "schoolId": "u002"
   }
 ]
