@@ -111,5 +111,16 @@
     "tags": false,
     "supportEmail": "abc@gmail.com , xyz@gmail.com",
     "district": "district7"
+  },
+  {
+    "name": "Dummy school 5",
+    "schoolId": "dummy001",
+    "state": "jharakhand",
+    "autoSync": false,
+    "autoSyncFrequency": 600000,
+    "storeTrainingData": true,
+    "tags": false,
+    "supportEmail": "abc@gmail.com",
+    "district": "district8"
   }
 ]
