@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux';
 
 //constant
 import AppTheme from '../../utils/AppTheme';
-import { getScannedDataFromLocal,getErrorMessage } from '../../utils/StorageUtils';
+import { getScannedDataFromLocal } from '../../utils/StorageUtils';
 import Strings from '../../utils/Strings';
 
 //component
@@ -15,7 +15,6 @@ import Spinner from '../common/components/loadingIndicator';
 import ScanHistoryCard from './ScanHistoryCard';
 import ButtonComponent from '../common/components/ButtonComponent';
 import ShareComponent from '../common/components/Share';
-import APITransport from '../../flux/actions/transport/apitransport';
 import { collectErrorLogs } from '../CollectErrorLogs';
 import MultibrandLabels from '../common/components/multibrandlabels';
 

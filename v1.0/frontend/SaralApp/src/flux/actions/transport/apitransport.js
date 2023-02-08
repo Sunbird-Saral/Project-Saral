@@ -6,8 +6,6 @@ import { collectErrorLogs } from '../../../modules/CollectErrorLogs';
 
 
 export default function dispatchAPI(api) {    
-
-
     if (api.reqType === 'MULTIPART') {
         return  dispatch => {
             dispatch(apiStatusAsync(true, false, ''))
