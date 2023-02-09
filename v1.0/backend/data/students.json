@@ -3622,5 +3622,17 @@
     "name": "Student6",
     "studentId": "9006543",
     "schoolId": "u002"
+  },
+  {
+    "studentClass": [
+      {
+        "classId": "9",
+        "className": "Class-9"
+      }
+    ],
+    "section": "A",
+    "name": "Student1",
+    "studentId": "1210003456789",
+    "schoolId": "u002"
   }
 ]
