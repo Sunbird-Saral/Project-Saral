@@ -11,12 +11,14 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 
 import org.ekstep.saral.saralsdk.commons.FileOps;
 import org.ekstep.saral.saralsdk.hwmodel.HWClassifier;
 import org.ekstep.saral.saralsdk.hwmodel.HWClassifierStatusListener;
 import org.ekstep.saral.saralsdk.hwmodel.HWBlockLettersClassifier;
 import org.ekstep.saral.saralsdk.hwmodel.HWBlockLettersClassifierStatusListener;
+import org.ekstep.saral.saralsdk.hwmodel.RemoteConfig;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.opencv.android.BaseLoaderCallback;
@@ -48,6 +50,9 @@ public class SaralSDKModule extends ReactContextBaseJavaModule implements Activi
 
         context.addActivityEventListener(this);
         FileOps.getInstance().initialize(context);
+        RemoteConfig remoteConfig = new RemoteConfig();
+        remoteConfig.fetchRemoteTitle();
+        
 
         Log.d(TAG, "SaralSDKModule loaded, trying to load OpenCV libs & Models");
         if (!OpenCVLoader.initDebug()) {
