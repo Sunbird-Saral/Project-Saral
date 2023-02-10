@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
-import android.net.NetworkInfo;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -49,8 +48,8 @@ public class HWClassifier {
      * Name of the model file hosted with Firebase.
      */
     private static final String HOSTED_MODEL_NAME = null;
-    //private static final String LOCAL_MODEL_ASSET = "trained_resnet_real_synthetic_v2_20.tflite";
     private static final String LOCAL_MODEL_ASSET = "saral_hwd_model.tflite";
+    private static final String FB_REMOTE_MODEL   = "saral_hwd_model";
     /**
      * Dimensions of inputs.
      */
@@ -137,7 +136,7 @@ public class HWClassifier {
 
                 // remote model instance
                 FirebaseCustomRemoteModel remoteModel =
-                        new FirebaseCustomRemoteModel.Builder("saral_hwd_model").build();
+                        new FirebaseCustomRemoteModel.Builder(FB_REMOTE_MODEL).build();
 
                 FirebaseModelManager.getInstance().getLatestModelFile(remoteModel)
                         .addOnCompleteListener(new OnCompleteListener<File>() {
@@ -152,7 +151,7 @@ public class HWClassifier {
                                     } catch (FirebaseMLException e) {
                                         e.printStackTrace();
                                     }
-                                    listener.OnModelLoadSuccess("model loading successful");
+                                    listener.OnModelLoadSuccess("firebase model loaded from local successful");
                                 } else {
 
                                     FirebaseModelDownloadConditions conditions = new FirebaseModelDownloadConditions.Builder()
@@ -169,7 +168,7 @@ public class HWClassifier {
                                                     } catch (FirebaseMLException e) {
                                                         e.printStackTrace();
                                                     }
-                                                    listener.OnModelLoadSuccess("model loading successful");
+                                                    listener.OnModelLoadSuccess("model loaded from firebase successful");
                                                 }
                                             }).addOnFailureListener(new OnFailureListener() {
                                         @Override

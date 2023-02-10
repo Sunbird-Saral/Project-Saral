@@ -50,8 +50,9 @@ public class SaralSDKModule extends ReactContextBaseJavaModule implements Activi
 
         context.addActivityEventListener(this);
         FileOps.getInstance().initialize(context);
+
         RemoteConfig remoteConfig = new RemoteConfig();
-        remoteConfig.fetchRemoteTitle();
+        boolean isFBDownloadModelEnable = remoteConfig.isFBDownloadModelEnable(context);
         
 
         Log.d(TAG, "SaralSDKModule loaded, trying to load OpenCV libs & Models");
@@ -74,7 +75,7 @@ public class SaralSDKModule extends ReactContextBaseJavaModule implements Activi
             public void OnModelLoadError(String message) {
                 Log.d(TAG, "HWClassifer model cannot be loaded :" + message);
             }
-        },true, context);
+        },isFBDownloadModelEnable, context);
 
         HWBlockLettersClassifier.getInstance();
         Log.d(TAG, "Loading HWBlockLettersClassifier models");
@@ -88,7 +89,7 @@ public class SaralSDKModule extends ReactContextBaseJavaModule implements Activi
             public void OnModelLoadError(String message) {
                 Log.d(TAG, "HWBlockLettersClassifier model cannot be loaded :" + message);
             }
-        }, true,context);
+        }, isFBDownloadModelEnable,context);
 
     }
 
