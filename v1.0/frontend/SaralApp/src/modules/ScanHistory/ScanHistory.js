@@ -37,25 +37,25 @@ const ScanHistory = ({
         sumOfLocalData()
     }, [])
 
-    const sumOfLocalData = async () => {
+    const sumOfLocalData = async ()=>{
         const data = await getScannedDataFromLocal()
 
-        if (data != null) {
+        if(data != null) {
             let filter = data.filter((e) => {
                 let findSection = false
                 findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.section)
 
-                if (filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject && findSection) {
+                if(filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject && findSection) {
                     return true
-                } else {
+                }else {
                     return false
                 }
             })
 
             let hasSet = filteredData.hasOwnProperty("set") ?  filteredData.set.length >= 0 ? filteredData.set : '' : ''
-            if (hasSet.length >= 0 && filter.length > 0) {
+            if(hasSet.length >= 0 && filter.length > 0) {
                 let findSetStudent = filter.length > 0 ? filter[0].studentsMarkInfo.filter((item) => {
-                    if (hasSet.length >= 0) {
+                    if(hasSet.length >= 0) {
                         return item.set == hasSet;
                     }
                 })
@@ -74,7 +74,7 @@ const ScanHistory = ({
                 })
             });
             setScanStatusData(len)
-        } else {
+        } else{
             setScanStatusData(0)
         }
     }

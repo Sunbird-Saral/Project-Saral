@@ -14,7 +14,7 @@ import { OcrLocalResponseAction } from '../../flux/actions/apis/OcrLocalResponse
 import { GetStudentsAndExamData } from '../../flux/actions/apis/getStudentsAndExamData';
 import { FilteredDataAction } from '../../flux/actions/apis/filteredDataActions';
 import APITransport from '../../flux/actions/transport/apitransport';
-import { checkNetworkConnectivity, cryptoText, dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF, SCAN_TYPES, validateToken } from '../../utils/CommonUtils';
+import { checkNetworkConnectivity, dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF, SCAN_TYPES, validateToken } from '../../utils/CommonUtils';
 import { ROIAction } from '../StudentsList/ROIAction';
 import { GetAbsentStudentData } from '../../flux/actions/apis/getAbsentStudentData';
 import { LoginAction } from '../../flux/actions/apis/LoginAction';
@@ -390,7 +390,6 @@ dispatchStudentExamData(payload){
             isLoading: true,
             calledLogin: true
         }, () => {
-            // let encPass = cryptoText(this.state.password)
             let loginObj = {
                 "schoolId": this.state.username,
                 "password": this.state.password
