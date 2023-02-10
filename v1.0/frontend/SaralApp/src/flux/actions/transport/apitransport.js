@@ -6,7 +6,7 @@ import { collectErrorLogs } from '../../../modules/CollectErrorLogs';
 
 
 export default function dispatchAPI(api) {    
-    if (api.reqType === 'MULTIPART') {
+    if(api.reqType === 'MULTIPART') {
         return  dispatch => {
             dispatch(apiStatusAsync(true, false, ''))
             axios.post(api.apiEndPoint(), api.getFormData(), api.getHeaders())
@@ -14,7 +14,7 @@ export default function dispatchAPI(api) {
                     api.processResponse(res.data)
                     dispatch(apiStatusAsync(false, false, null, res.data))
                     dispatch(dispatchAPIAsync(api));
-                    if (typeof api.getNextStep === 'function' && res.data && (res.status == 200 || res.status == 201))
+                    if(typeof api.getNextStep === 'function' && res.data && (res.status == 200 || res.status == 201))
                         dispatch(api.getNextStep())
                 })
                 .catch(function (err) {
@@ -23,7 +23,7 @@ export default function dispatchAPI(api) {
                 });
         }
     }
-    else {
+    else{
         // if (api.method === 'POST' && api.type == "file_upload") {
         //     return dispatch => {
         //         dispatch(apiStatusAsync(true, false, ''))
@@ -47,13 +47,13 @@ export default function dispatchAPI(api) {
 
         // }
         // else 
-        if (api.method === 'POST') {
+        if(api.method === 'POST') {
             return  dispatch => {
                 dispatch(apiStatusAsync(true, false, ''))
                 let apiResponse = null
                 const source = axios.CancelToken.source()
                 const id = setTimeout(() => {
-                    if (apiResponse === null) {
+                    if(apiResponse === null) {
                         source.cancel('The request timed out.');
                     }
                 }, 60000);
@@ -64,37 +64,37 @@ export default function dispatchAPI(api) {
                         api.processResponse(res)
                         dispatch(apiStatusAsync(false, false, null, res.data))
                         dispatch(dispatchAPIAsync(api));
-                        if (typeof api.getNextStep === 'function' && res.data && (res.status == 200 || res.status == 201))
+                        if(typeof api.getNextStep === 'function' && res.data && (res.status == 200 || res.status == 201))
                             dispatch(api.getNextStep())
                     })
                     .catch(function (err) {
                         collectErrorLogs("apitransport.js","POST MEthod", api.apiEndPoint(), err, true)
                         clearTimeout(id)
-                        if (err && err.message == 'The request timed out.') {
+                        if(err && err.message == 'The request timed out.') {
                             dispatch(apiStatusAsync(false, true, Strings.request_timeout_custom_message, null, err && err.response && err.response.status && err.response.status === 401 ? true : false))
                         }
-                        else if (err && err.message == 'Network Error') {
+                        else if(err && err.message == 'Network Error') {
                             dispatch(apiStatusAsync(false, true, Strings.you_seem_to_be_offline_please_check_your_internet_connection, null, err && err.response && err.response.status && err.response.status === 401 ? true : false))
                         }
-                        else if (api.type == 'login_process' && err.response.status != 500) {
+                        else if(api.type == 'login_process' && err.response.status != 500) {
                             dispatch(apiStatusAsync(false, true, err && err.response && err.response.status && err.response.status === 422 ? Strings.schoolid_password_doesnot_match : Strings.something_went_wrong_please_try_again, null, err && err.response && err.response.status && err.response.status === 401 ? true : false))
                         }
-                        else if (err && err.response.status == 500) {
+                        else if(err && err.response.status == 500) {
                             dispatch(apiStatusAsync(false, true, err && err.response && err.response.data && err.response.data.error == Strings.lock_screen ? Strings.lock_screen : Strings.something_went_wrong_please_try_again))
                         }
-                        else {
+                        else{
                             dispatch(apiStatusAsync(false, true, Strings.something_went_wrong_please_try_again, null, err && err.response && err.response.status && err.response.status === 401 ? true : false))
                         }
                     });
             }
         }
-        else if (api.method === "PUT") {
+        else if(api.method === "PUT") {
             return  dispatch => {
                 dispatch(apiStatusAsync(true, false, ''))
                 let apiResponse = null
                 const source = axios.CancelToken.source()
                 const id = setTimeout(() => {
-                    if (apiResponse === null) {
+                    if(apiResponse === null) {
                         source.cancel('The request timed out.');
                     }
                 }, 60000);
@@ -114,13 +114,13 @@ export default function dispatchAPI(api) {
                         if (err && err.message == 'The request timed out.') {
                             dispatch(apiStatusAsync(false, true, Strings.request_timeout_custom_message, null, err && err.response && err.response.status && err.response.status === 401 ? true : false))
                         }
-                        else if (err && err.message == 'Network Error') {
+                        else if(err && err.message == 'Network Error') {
                             dispatch(apiStatusAsync(false, true, Strings.you_seem_to_be_offline_please_check_your_internet_connection, null, err && err.response && err.response.status && err.response.status === 401 ? true : false))
                         }
-                        else if (api.type == 'login_process') {
+                        else if(api.type == 'login_process') {
                             dispatch(apiStatusAsync(false, true, err && err.response && err.response.status && err.response.status === 422 ? Strings.schoolid_password_doesnot_match : Strings.something_went_wrong_please_try_again, null, err && err.response && err.response.status && err.response.status === 401 ? true : false))
                         }
-                        else {
+                        else{
                             dispatch(apiStatusAsync(false, true, Strings.something_went_wrong_please_try_again, null, err && err.response && err.response.status && err.response.status === 401 ? true : false))
                         }
                     });
@@ -128,7 +128,7 @@ export default function dispatchAPI(api) {
 
         }
 
-        else if (api.method === 'DELETE') {
+        else if(api.method === 'DELETE') {
             return  dispatch => {
                 dispatch(apiStatusAsync(true, false, ''))
                 axios.delete(api.apiEndPoint(), api.getHeaders())
@@ -136,7 +136,7 @@ export default function dispatchAPI(api) {
                         api.processResponse(res.data)
                         dispatch(apiStatusAsync(false, false, null, res.data))
                         dispatch(dispatchAPIAsync(api));
-                        if (typeof api.getNextStep === 'function' && res.data && (res.status == 200 || res.status == 201))
+                        if(typeof api.getNextStep === 'function' && res.data && (res.status == 200 || res.status == 201))
                             dispatch(api.getNextStep())
                     })
                     .catch(function (err) {
@@ -144,13 +144,13 @@ export default function dispatchAPI(api) {
                         dispatch(apiStatusAsync(false, true, Strings.something_went_wrong_please_try_again, null, err && err.response && err.response.status && err.response.status === 401 ? true : false))
                     });
             }
-        } else {
+        } else{
             return dispatch => {
                 dispatch(apiStatusAsync(true, false, ''))
                 let apiResponse = null
                 const source = axios.CancelToken.source()
                 const id = setTimeout(() => {
-                    if (apiResponse === null) {
+                    if(apiResponse === null) {
                         source.cancel('The request timed out.');
                     }
                 }, 60000);
@@ -183,7 +183,7 @@ function dispatchAPIAsync(api) {
 }
 
 function apiStatusAsync(progress, error, message, res = null, unauthorized = false) {
-    if (res === null || !(res.status && res.status.statusCode && res.status.statusCode !== 200 && res.status.statusCode !== 201)) {
+    if(res === null || !(res.status && res.status.statusCode && res.status.statusCode !== 200 && res.status.statusCode !== 201)) {
         return {
             type: C.APISTATUS,
             payload: {
@@ -194,7 +194,7 @@ function apiStatusAsync(progress, error, message, res = null, unauthorized = fal
             }
         }
     }
-    else {
+    else{
         return {
             type: C.APISTATUS,
             payload: {

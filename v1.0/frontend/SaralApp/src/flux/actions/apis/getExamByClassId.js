@@ -34,9 +34,6 @@
          }
      }
  
-     getBody() {
-     }
- 
      getPayload() {
          return this.examData
          

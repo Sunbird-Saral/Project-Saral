@@ -158,7 +158,7 @@ class Brands extends PureComponent {
         
             if (hasAutoSync) {
                 const isLogin = loginData.status
-                if (isLogin == 200 & hasNetwork) {
+                if (isLogin == 200 && hasNetwork) {
                     storeFactory.dispatch( this.flagAction(true))
                         this.saveDataInDB()
                 }

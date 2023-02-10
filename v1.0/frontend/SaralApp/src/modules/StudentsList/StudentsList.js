@@ -352,7 +352,7 @@ useEffect(() => {
             if (e.class == filteredData.className && e.section == filteredData.section) {
                 e.data.students.forEach((element) => {
 
-                    const updated = allStudentData.filter((o) => {
+                    const updated = allStudentData.filter((o)=>{
                         if (element.studentId == o.studentId) {
                             element.studentAvailability = o.studentAvailability
                         }
