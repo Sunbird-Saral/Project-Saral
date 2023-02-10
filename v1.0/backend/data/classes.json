@@ -245,13 +245,7 @@
   {
     "sections": [
       {
-        "section": "D"
-      },
-      {
-        "section": "B"
-      },
-      {
-        "section": "C"
+        "section": "A"
       }
     ],
     "classId": "4",
@@ -444,5 +438,15 @@
     "classId": "2",
     "className": "Class-2",
     "schoolId": "jk001"
+  },
+  {
+    "sections": [
+      {
+        "section": "A"
+      }
+    ],
+    "classId": "9",
+    "className": "Class-9",
+    "schoolId": "u002"
   }
 ]
