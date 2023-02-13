@@ -117,34 +117,3 @@ router.patch('/exam/:examId', auth, async (req, res) => {
 
 
 module.exports = router
-
-
-// router.post('/addExamsByClass', auth,async (req, res) => {
-//     try {
-//     const body = [...req.body]
-//     const exams = []
-//     for(let data of body){
-//         let schoolId = req.school.schoolId   
-//         let examExist = await Exam.find({schoolId, classId: data.classId,examDate: data.examDate,subject: data.subject})
-//         console.log(examExist.length)
-//         if(!examExist.length){
-//         // let examId = await Counter.getValueForNextSequence("examId")
-//         const examData = new Exam({
-//             ...data,
-//             examId: await Counter.getValueForNextSequence("examId"),
-//             schoolId
-//         })
-//         exams.push(examData)
-//         console.log(exams.length)
-//             let examResult = await Exam.insertMany(exams)
-//             console.log(examResult)
-//             res.status(201).send(examResult)
-//     }else{
-//         res.status(400).send({"message": "Exam Id should be unique."})
-//     }
-//     }
-//     } catch (e) {
-//         console.log(e);
-//         res.status(400).send(e)
-//     }
-// })

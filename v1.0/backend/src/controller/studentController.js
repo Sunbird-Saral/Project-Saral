@@ -34,9 +34,6 @@ exports.fetchStudentsandExams = async (req, res, next) => {
         examMatch.examDate = subject[1]
     }
 
-    if (req.body.set) {
-        setMatch = req.body.set ? req.body.set : ''
-    }
     try {
 
         await Helper.lockScreenValidator(req.school)
