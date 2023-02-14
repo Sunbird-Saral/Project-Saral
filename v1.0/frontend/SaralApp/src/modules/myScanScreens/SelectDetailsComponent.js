@@ -947,7 +947,24 @@ dispatchStudentExamData(payload){
         const { navigation, isLoading, defaultSelected, classList, classListIndex, selectedClass, sectionList,setIndex,set,ExamSetArray, sectionListIndex, selectedSection, pickerDate, selectedDate, subArr, selectedSubject,selectSet, subIndex, errClass, errSub,errSet, errDate, errSection, sectionValid, dateVisible, examTestID,examSetData,disabled } = this.state
         const { loginData, multiBrandingData, modalStatus, modalMessage ,studentsAndExamData} = this.props
         const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.selectDetails[0]
-        const sortAlphaNum = (a, b) => a.localeCompare(b, 'en', { numeric: true })
+        const alphaNumericSort = () => {
+            const sorter = (a, b) => {
+                const isNumber = (v) => (+v).toString() === v;
+                const aPart = a.match(/\d+|\D+/g);
+                const bPart = b.match(/\d+|\D+/g);
+                let i = 0; let len = Math.min(aPart.length, bPart.length);
+                while (i < len && aPart[i] === bPart[i]) { i++; };
+                if (i === len) {
+                    return aPart.length - bPart.length;
+                };
+                if (isNumber(aPart[i]) && isNumber(bPart[i])) {
+                    return aPart[i] - bPart[i];
+                };
+                return aPart[i].localeCompare(bPart[i]);
+            };
+            classList.sort(sorter);
+        };
+        alphaNumericSort(classList);
         return (
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
                 <ShareComponent
