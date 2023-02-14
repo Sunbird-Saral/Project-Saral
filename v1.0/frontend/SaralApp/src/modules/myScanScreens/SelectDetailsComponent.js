@@ -1023,7 +1023,7 @@ dispatchStudentExamData(payload){
                                     {errClass != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 1, width: '60%', textAlign: 'right', fontWeight: 'normal' }]}>{errClass}</Text>}
                                 </View>
                                 <DropDownMenu
-                                    options={classList && classList.sort(sortAlphaNum)}
+                                    options={classList && classList}
                                     onSelect={(idx, value) => this.onDropDownSelect(idx, value, 'class')}
                                     defaultData={defaultSelected}
                                     defaultIndex={classListIndex}
