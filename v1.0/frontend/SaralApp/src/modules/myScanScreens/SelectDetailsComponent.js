@@ -947,6 +947,7 @@ dispatchStudentExamData(payload){
         const { navigation, isLoading, defaultSelected, classList, classListIndex, selectedClass, sectionList,setIndex,set,ExamSetArray, sectionListIndex, selectedSection, pickerDate, selectedDate, subArr, selectedSubject,selectSet, subIndex, errClass, errSub,errSet, errDate, errSection, sectionValid, dateVisible, examTestID,examSetData,disabled } = this.state
         const { loginData, multiBrandingData, modalStatus, modalMessage ,studentsAndExamData} = this.props
         const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.selectDetails[0]
+        const sortAlphaNum = (a, b) => a.localeCompare(b, 'en', { numeric: true })
         return (
             <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
                 <ShareComponent
@@ -1005,7 +1006,7 @@ dispatchStudentExamData(payload){
                                     {errClass != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 1, width: '60%', textAlign: 'right', fontWeight: 'normal' }]}>{errClass}</Text>}
                                 </View>
                                 <DropDownMenu
-                                    options={classList && classList}
+                                    options={classList && classList.sort(sortAlphaNum)}
                                     onSelect={(idx, value) => this.onDropDownSelect(idx, value, 'class')}
                                     defaultData={defaultSelected}
                                     defaultIndex={classListIndex}
