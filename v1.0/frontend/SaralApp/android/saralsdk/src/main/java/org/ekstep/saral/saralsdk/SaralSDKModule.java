@@ -25,6 +25,8 @@ import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 public class SaralSDKModule extends ReactContextBaseJavaModule implements ActivityEventListener {
     private static final String TAG             = "SrlSDK::Module";
     Promise mPromise                            = null;
@@ -55,7 +57,7 @@ public class SaralSDKModule extends ReactContextBaseJavaModule implements Activi
         boolean isFBDownloadModelEnable = remoteConfig.isFBDownloadModelEnable(context);
         
 
-        Log.d(TAG, "SaralSDKModule loaded, trying to load OpenCV libs & Models");
+        Log.d(TAG, "SaralSDKModule loaded, trying to load OpenCV libs & Models isFBDownloadModelEnable"+isFBDownloadModelEnable);
         if (!OpenCVLoader.initDebug()) {
             Log.d(TAG, "Internal OpenCV library not found. Using OpenCV Manager for initialization");
             OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION, getReactApplicationContext(), mLoaderCallback);

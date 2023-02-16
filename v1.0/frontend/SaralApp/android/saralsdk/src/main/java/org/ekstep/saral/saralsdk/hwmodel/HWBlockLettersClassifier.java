@@ -36,6 +36,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class HWBlockLettersClassifier {
     private static final String TAG             = "SrlSDK::HWBlockLetters";
@@ -99,7 +100,7 @@ public class HWBlockLettersClassifier {
         predictionListener  = listener;
     }
 
-    public void initialize(HWBlockLettersClassifierStatusListener listener, boolean isFBDownloadEnable,Context context) {
+    public void initialize(HWBlockLettersClassifierStatusListener listener, boolean isFBDownloadEnable, Context context) {
         int[] inputDims = {DIM_BATCH_SIZE, DIM_IMG_SIZE_X, DIM_IMG_SIZE_Y, DIM_PIXEL_SIZE};
         int[] outputDims = {DIM_BATCH_SIZE, 37};
 

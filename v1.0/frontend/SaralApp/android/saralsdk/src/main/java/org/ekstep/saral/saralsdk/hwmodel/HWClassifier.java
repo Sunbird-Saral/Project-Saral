@@ -37,6 +37,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import static androidx.core.content.ContextCompat.getSystemService;
 
@@ -117,7 +118,7 @@ public class HWClassifier {
         }
     }
 
-    public void initialize(HWClassifierStatusListener listener, boolean isFBDownloadEnable ,Context context) {
+    public void initialize(HWClassifierStatusListener listener, boolean isFBDownloadEnable , Context context) {
         int[] inputDims = {DIM_BATCH_SIZE, DIM_IMG_SIZE_X, DIM_IMG_SIZE_Y, DIM_PIXEL_SIZE};
         int[] outputDims = {DIM_BATCH_SIZE, 11};
 

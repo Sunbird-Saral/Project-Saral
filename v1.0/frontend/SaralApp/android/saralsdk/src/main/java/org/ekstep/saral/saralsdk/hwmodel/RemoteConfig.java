@@ -5,7 +5,6 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
-import static androidx.core.content.ContextCompat.getSystemService;
 
 import org.jetbrains.annotations.NotNull;
 import androidx.annotation.NonNull;
@@ -14,50 +13,58 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 
 public class RemoteConfig {
     private static final String TAG             = "RemoteConfig::";
-    private static boolean isFBDownloadModel    = false ;
+    private static AtomicBoolean isFBDownloadModel = new AtomicBoolean(false);
 
 
 
-    public static boolean  isFBDownloadModelEnable(Context context) {
+    public static boolean isFBDownloadModelEnable(Context context) {
 
         boolean networkAvailable = isNetworkAvailable(context);
-        if(networkAvailable){
-            FirebaseRemoteConfig mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
+        FirebaseRemoteConfig mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
+
+        if (networkAvailable) {
             FirebaseRemoteConfigSettings configSettings = new FirebaseRemoteConfigSettings.Builder()
-                    .setMinimumFetchIntervalInSeconds(10)
+                    .setMinimumFetchIntervalInSeconds(100)
                     .build();
             mFirebaseRemoteConfig.setConfigSettingsAsync(configSettings);
 
             mFirebaseRemoteConfig.fetchAndActivate()
-                    .addOnCompleteListener( new OnCompleteListener<Boolean>() {
+                    .addOnCompleteListener(new OnCompleteListener<Boolean>() {
                         @Override
                         public void onComplete(@NonNull Task<Boolean> task) {
                             if (task.isSuccessful()) {
                                 boolean value = task.getResult();
                                 Log.d(TAG, "onComplete: value " + value);
                             } else {
-                                Log.d(TAG, "onComplete: else" +task);
+                                Log.d(TAG, "onComplete: else" + task);
                             }
-                            boolean hasValue = mFirebaseRemoteConfig.getBoolean("isFBDownloadEnable");
-                            isFBDownloadModel = hasValue;
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull @NotNull Exception e) {
-                    Log.d(TAG, "onFailure: failed"+e);
+                    Log.d(TAG, "onFailure: failed" + e);
                 }
             });
+
+
         }
-        return isFBDownloadModel;
+            boolean hasValue = mFirebaseRemoteConfig.getBoolean("isFBDownloadEnable");
+            isFBDownloadModel.set(hasValue);
+            return isFBDownloadModel.get();
     }
 
     private static boolean isNetworkAvailable(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-        return networkInfo != null & networkInfo.isConnected();
+        boolean connected= networkInfo != null ? networkInfo.isConnected() : false;
+        Log.d(TAG, "isNetworkAvailable: " + connected);
+        return connected;
     }
+
 }
 
