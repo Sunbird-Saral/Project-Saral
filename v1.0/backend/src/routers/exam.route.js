@@ -10,18 +10,18 @@ router.post('/exam', auth, async (req, res) => {
     const exams = []
     let schoolId = req.school.schoolId
 
-    for (let i = 0; i < body.length; i++) {
+    for (let input of body) {
 
-        if(!body[i].examDate && body[i].examDate == undefined){
-            body[i].examDate = new Date().toLocaleDateString()
+        if(input.examDate && input.examDate == undefined){
+            input.examDate = new Date().toLocaleDateString()
         }
  
-        body[i].type = body[i].type.toUpperCase()
-        let examExist = await Exam.find({ schoolId, classId: body[i].classId, examDate: body[i].examDate, subject: body[i].subject })
+        input.type = input.type.toUpperCase()
+        let examExist = await Exam.find({ schoolId, classId: input.classId, examDate: input.examDate, subject: input.subject })
         if (examExist.length) continue
         let examId = await Counter.getValueForNextSequence("examId")
         const examData = new Exam({
-            ...body[i],
+            ...input,
             examId,
             schoolId
         })

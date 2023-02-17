@@ -14,16 +14,12 @@ const _ = require('lodash')
 const fs = require('fs');
 const marksController = require("../controller/marksController")
 
-const fromTime = "T00:00:00"
-const toTime = "T23:59:59"
 
 router.put('/saveMarks',auth,marksController.saveMarks)
 router.post('/getSavedScan', basicAuth,marksController.getSaveScan) 
 
-
 const fetchAllSavedData = async (req) => {
     try {
-        const count = await Mark.countDocuments("{}")
         const savedScan = await Mark.find({})
         return {
             data: savedScan,
@@ -34,7 +30,6 @@ const fetchAllSavedData = async (req) => {
         return { "error": true, e }
     }
 }
-
 
 router.get('/getMarksReport',async (req, res) => {
     try {
@@ -222,4 +217,3 @@ router.get('/downloadSchoolList', async (req, res) => {
 
 
 module.exports = router
-

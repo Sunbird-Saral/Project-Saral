@@ -21,7 +21,7 @@ exports.fetchStudentsandExams = async (req, res, next) => {
         examMatch.classId = studentClassObj.classId
         examMatch.schoolId = req.school.schoolId
     } else {
-            return res.status(404).json({ message: 'Please send classId' })
+        return res.status(404).json({ message: 'Please send classId' })
     }
 
     if (req.body.section && req.body.section != "0") {
@@ -60,6 +60,7 @@ exports.fetchStudentsandExams = async (req, res, next) => {
                 student["studentAvailability"] = true
                 }
                 }
+
 
         const exams = await Exam.find(examMatch, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 })
 
