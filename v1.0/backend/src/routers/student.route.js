@@ -11,14 +11,6 @@ router.post('/fetchStudentsandExamsByQuery',auth,studentController.fetchStudents
 router.post('/student', auth, async (req, res) => {
     try {
         if(!req.body.studentId)  return res.status(400).send({ error: "Student Id is required." })
-        // let commonDigit = "0000000"
-        const classId = req.body.studentClass && req.body.studentClass.length > 0 ? req.body.studentClass[0].classId : "2"
-        const section = req.body.section ? req.body.section : "A"
-        // const studentsCount = await Student.getStudentsCountByClassAndSection(req.school.schoolId, classId, section)
-
-        // const newStudentCount = String(studentsCount + 1)
-        // const newStudentLastSevenDigit = commonDigit.slice(0, - newStudentCount.length) + newStudentCount
-        // const sectionCode = getSectionCode(section)
     
         const studentClass = req.body.studentClass && req.body.studentClass.length > 0 && [{
             classId: req.body.studentClass[0].classId,

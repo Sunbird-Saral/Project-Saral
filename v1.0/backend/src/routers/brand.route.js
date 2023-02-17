@@ -11,8 +11,6 @@ router.get('/brand',auth,brandController.fetchBrandData)
 
 router.post('/brand?', auth, async (req, res) => {
     try { 
-        const inputKeys = Object.keys(req.body)
-        
         let brandExist = {}
         
         if (!req.query.default) {
@@ -66,7 +64,7 @@ router.put('/brand',auth, async (req, res) => {
        
         const school = await School.findOne({schoolId: req.school.schoolId})
         let update = req.body
-        const updateBrand = await Brand.update({state: school.state},update)
+        await Brand.update({state: school.state},update)
 
         res.status(200).send({message: "Brand has been updated successfully."})
     
