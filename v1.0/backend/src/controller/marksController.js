@@ -21,9 +21,7 @@ exports.saveMarks = async (req, res, next) => {
     const userId = req.school.userId
     const createdOn = new Date().getTime()
     const roiId = req.body.roiId
-    let set = {}
 
-    if (req.body.set) set = req.body.set
 
     req.body.studentsMarkInfo.forEach(studentsData => {
         const marksData = new Mark({
@@ -49,7 +47,8 @@ exports.saveMarks = async (req, res, next) => {
                 data.examDate = new Date().toLocaleDateString()
             }
 
-            let studentMarksExist = await Mark.findOne({ schoolId: data.schoolId, studentId: data.studentId, classId: data.classId, subject: data.subject, examDate: data.examDate, roiId: data.roiId })
+            let studentMarksExist = await Mark.findOne({ schoolId: data.schoolId, userId: data.userId, studentId: data.studentId, classId: data.classId, subject: data.subject, examDate: data.examDate, roiId: data.roiId })
+            
             if (!studentMarksExist) {
                 await Mark.create(data)
             } else {
@@ -80,14 +79,14 @@ exports.saveMarks = async (req, res, next) => {
 exports.getSaveScan = async (req, res, next) => {
     try {
         if (req.body.schoolId) {
-            req.body.userId = req.school.userId.toLowerCase()
             req.body.schoolId = req.body.schoolId.toLowerCase()
-        } else {
-            req.body.userId = req.school.userId.toLowerCase()
-            req.body.schoolId = req.school.schoolId.toLowerCase()
         }
 
-        const { schoolId, classId, section, subject, fromDate, toDate, roiId, userId } = req.body
+        if (req.body.userId) {
+            req.body.userId = req.body.userId.toLowerCase()
+        }
+
+        const { schoolId, classId, section, subject, fromDate, roiId, userId } = req.body
 
         const match = {}
         if (schoolId) {
@@ -96,6 +95,10 @@ exports.getSaveScan = async (req, res, next) => {
 
         if (userId) {
             match.userId = userId
+        }
+
+        if(fromDate){
+            match.examDate = fromDate
         }
 
         if (classId) {
@@ -113,24 +116,6 @@ exports.getSaveScan = async (req, res, next) => {
             match.subject = new RegExp(`^${subject}$`, 'i')
         }
 
-        let startTime = new Date(fromDate + fromTime).getTime()
-        let endTime = new Date(toDate + toTime).getTime()
-
-        if (startTime && !endTime) {
-            match.createdOn = {
-                $gte: startTime
-            }
-        } else if (!startTime && endTime) {
-            match.createdOn = {
-                $lte: endTime
-            }
-        } else if (startTime && endTime) {
-            match.createdOn = {
-                $gte: startTime,
-                $lte: endTime
-            }
-        }
-
         if (req.body.page) {
             req.body.limit = 10;
             req.body.page = 1;
@@ -138,7 +123,7 @@ exports.getSaveScan = async (req, res, next) => {
             req.body.limit = 0;
             req.body.page = 1;
         }
-
+        console.log("match", match)
         const savedScan = await Mark.find(match, { _id: 0, __v: 0 })
             .limit(parseInt(req.body.limit) * 1)
             .skip((parseInt(parseInt(req.body.page)) - 1) * parseInt(parseInt(req.body.limit)))

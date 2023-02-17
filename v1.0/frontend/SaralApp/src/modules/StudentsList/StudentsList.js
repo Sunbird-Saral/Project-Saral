@@ -216,6 +216,7 @@ useEffect(() => {
             "section": filteredData.section,
             "fromDate": filteredData.examDate,
             "schoolId": loginData.data.school.schoolId,
+            "userId": loginData.data.school.userId,
             "page": 0,
             "downloadRes": false
         }
