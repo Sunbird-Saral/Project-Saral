@@ -2,6 +2,7 @@
   package="com.saralapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -63,5 +64,12 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+         <!-- make sure to provide unique authorities if apply to multiple apps on the same device -->
+  <provider
+     android:name="com.newrelic.agent.android.rum.contentprovider.NewRelicAppContentProvider"
+     android:authorities="com.newrelic.android.agent.nrprovider.${applicationId}"
+     android:initOrder="200"
+     android:exported="false"/>
     </application>
 </manifest>

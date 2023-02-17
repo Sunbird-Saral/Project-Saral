@@ -1,5 +1,6 @@
 apply plugin: "com.android.application"
-
+apply plugin: 'android'
+apply plugin: 'newrelic'
 import com.android.build.OutputFile
 
 /**
@@ -203,6 +204,7 @@ android {
 }
 
 dependencies {
+     implementation "com.newrelic.agent.android:android-agent:6.+"
     implementation 'com.github.bumptech.glide:glide:4.13.2'
   
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.2'
