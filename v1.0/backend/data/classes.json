@@ -492,15 +492,5 @@
     "classId": "9",
     "className": "Class-9",
     "schoolId": "u002"
-  },
-  {
-    "sections": [
-      {
-        "section": "A"
-      }
-    ],
-    "classId": "10",
-    "className": "Class-10",
-    "schoolId": "u002"
   }
 ]
