@@ -273,6 +273,7 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
             "set": filteredData.set,
             "page": 0,
             "schoolId": loginData.data.school.schoolId,
+            "userId": loginData.data.school.userId,
             "downloadRes": false
         }
         let apiObj = new scanStatusDataAction(dataPayload);
