@@ -55,6 +55,7 @@ exports.saveMarks = async (req, res, next) => {
                 if (data.schoolId == studentMarksExist.schoolId && data.studentId == studentMarksExist.studentId && data.classId == studentMarksExist.classId && data.subject == studentMarksExist.subject && data.examDate == studentMarksExist.examDate) {
 
                     let lookup = {
+                        userId: data.userId,
                         studentId: data.studentId,
                         subject: data.subject,
                         examDate: data.examDate
