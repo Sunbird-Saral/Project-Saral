@@ -152,9 +152,16 @@ class SelectDetailsComponent extends Component {
                 _.forEach(classesArr, (data, index) => {
                     classes.push(data.className)
                 })
-
+               
+                classesArr.sort((a, b) => {
+                    return a.classId - b.classId;
+                });
+                let sortclassdata = []
+                classesArr.forEach((e) => {
+                sortclassdata.push(`${e.className}`)
+                });
                 this.setState({
-                    classList: classes,
+                    classList: sortclassdata,
                     classesArr: classesArr,
                     loginDetails: loginDetails
                 })

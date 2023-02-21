@@ -229,6 +229,16 @@
   {
     "sections": [
       {
+        "section": "A"
+      }
+    ],
+    "classId": "1",
+    "className": "Class-1",
+    "schoolId": "u002"
+  },
+  {
+    "sections": [
+      {
         "section": "D"
       },
       {
@@ -248,6 +258,16 @@
         "section": "A"
       }
     ],
+    "classId": "3",
+    "className": "Class-3",
+    "schoolId": "u002"
+  },
+  {
+    "sections": [
+      {
+        "section": "A"
+      }
+    ],
     "classId": "4",
     "className": "Class-4",
     "schoolId": "u002"
@@ -255,13 +275,7 @@
   {
     "sections": [
       {
-        "section": "D"
-      },
-      {
-        "section": "B"
-      },
-      {
-        "section": "C"
+        "section": "A"
       }
     ],
     "classId": "5",
@@ -438,6 +452,36 @@
     "classId": "2",
     "className": "Class-2",
     "schoolId": "jk001"
+  },
+  {
+    "sections": [
+      {
+        "section": "A"
+      }
+    ],
+    "classId": "6",
+    "className": "Class-6",
+    "schoolId": "u002"
+  },
+  {
+    "sections": [
+      {
+        "section": "A"
+      }
+    ],
+    "classId": "7",
+    "className": "Class-7",
+    "schoolId": "u002"
+  },
+  {
+    "sections": [
+      {
+        "section": "A"
+      }
+    ],
+    "classId": "8",
+    "className": "Class-8",
+    "schoolId": "u002"
   },
   {
     "sections": [
