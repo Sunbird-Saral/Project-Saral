@@ -456,7 +456,7 @@ const ScannedDetailsComponent = ({
 
                 let toggle = structureList[currentIndex + 1].hasOwnProperty("isNotAbleToSave") ? structureList[currentIndex + 1].isNotAbleToSave : false
                 setToggleCheckBox(toggle)
-
+                goToTop()
                 //for student validataion
 
                 ocrLocalResponse.layout.cells.forEach(element => {
@@ -625,7 +625,7 @@ const ScannedDetailsComponent = ({
             "studentsMarkInfo": stdMarkInfo,
             "examId": filteredData.examTestID,
             "userId": loginData.data.school.schoolId,
-            "set": filteredData.set,
+            "set": filteredData.hasOwnProperty("set") ? filteredData.set : ""
         }
         saveAndFetchFromLocalStorag(saveObj)
     }
@@ -790,6 +790,7 @@ const ScannedDetailsComponent = ({
                 setBtnName('cancel')
             }
             setNextBtn(Strings.next_text)
+            goToTop()
         }
         else {
             onBackButtonClick()
@@ -1197,7 +1198,7 @@ const ScannedDetailsComponent = ({
                     "securedMarks": sumOfAllMarks > 0 ? sumOfAllMarks : 0,
                     "totalMarks": maxMarksTotal > 0 ? maxMarksTotal : 0,
                     "marksInfo": Studentmarks,
-                    "set": minimalFlag ? 0 : filteredData.set ,
+                    "set": minimalFlag ? "" : filteredData.set ,
                     "studentAvailability": true,
                 }
             ]
@@ -1287,6 +1288,14 @@ const ScannedDetailsComponent = ({
         }
     }
 
+    const scrollRef = useRef();
+    const goToTop = () => {
+    scrollRef.current?.scrollTo({
+    y: 0,
+    animated: true,
+    });
+   }
+
     return (
         <View style={{ flex: 1 }}>
 
@@ -1296,6 +1305,7 @@ const ScannedDetailsComponent = ({
                     showsVerticalScrollIndicator={false}
                     bounces={false}
                     keyboardShouldPersistTaps={'handled'}
+                    ref={scrollRef}
                 >
                     <ShareComponent
                         navigation={navigation}
@@ -1346,11 +1356,11 @@ const ScannedDetailsComponent = ({
                                                     {
                                                         isMultipleStudent
                                                             ?
-                                                            <Text style={styles.nameTextStyle}>{Strings.page_no + ': ' + (currentIndex + 1)}</Text>
+                                                            <Text style={styles.nameTextStyle}>{BrandLabel && BrandLabel.Record_no ? BrandLabel.Record_no:Strings.Record_no + ': ' + (currentIndex + 1)}</Text>
                                                             :
                                                             ocrLocalResponse.layout.pages > 0
                                                                 ?
-                                                                <Text style={styles.nameTextStyle}>{Strings.page_no + ': ' + (currentIndex)}</Text>
+                                                                <Text style={styles.nameTextStyle}>{BrandLabel && BrandLabel.Record_no ? BrandLabel.Record_no:Strings.Record_no + ': ' + (currentIndex)}</Text>
                                                                 :
                                                                 null
                                                     }

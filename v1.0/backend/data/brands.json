@@ -79,6 +79,7 @@
         "Exam": "Assesment",
         "StudentDetail": "Employee Details",
         "CorrectId": "please correct employe id",
+        "RecordNo":"Record Number",
         "ListTableHeading" : [
           "Sr No",
            "Questions",
@@ -143,6 +144,7 @@
         "Exam": "Assesment",
         "StudentDetail": "Details",
         "CorrectId": "please correct employe id",
+        "RecordNo":"Record Number",
         "ListTableHeading":{
           "id": "Identifier",
           "sr_no": "Sr No",

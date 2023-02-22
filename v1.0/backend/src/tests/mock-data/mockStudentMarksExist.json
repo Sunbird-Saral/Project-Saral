@@ -1,0 +1,44 @@
+{
+    "examDate": "1/07/2022",
+    "studentIdTrainingData": [],
+    "predictionConfidence": [],
+    "studentAvailability": true,
+    "maxMarksTrainingData": [],
+    "maxMarksConfidence": [],
+    "obtainedMarksTrainingData": [],
+    "obtainedMarksConfidence": [],
+    "_id": "63c90cc1de31865928f72b95",
+    "studentId": "121456787",
+    "predictedStudentId": "121456787",
+    "section": "C",
+    "marksInfo": [
+      {
+        "predictionConfidence": [],
+        "tags": [],
+        "trainingData": [],
+        "questionId": "ROLLNUMBER1_Q7",
+        "obtainedMarks": "0",
+        "predictedMarks": "1"
+      },
+      {
+        "predictionConfidence": [],
+        "tags": [],
+        "trainingData": [],
+        "questionId": "ROLLNUMBER1_Q13",
+        "obtainedMarks": "0",
+        "predictedMarks": "1"
+      }
+    ],
+    "securedMarks": 11,
+    "totalMarks": 0,
+    "set": "",
+    "schoolId": "u001",
+    "subject": "Hindi",
+    "classId": "9",
+    "createdOn": "1674120385753",
+    "examId": 41,
+    "userId": "u001",
+    "__v": 0,
+    "maxMarksPredicted": null,
+    "obtainedMarksPredicted": null
+  }

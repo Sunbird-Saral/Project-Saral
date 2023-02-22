@@ -1,0 +1,27 @@
+[
+    {
+      "examDate": "24/1/2023",
+      "studentIdTrainingData": [],
+      "predictionConfidence": [],
+      "studentAvailability": true,
+      "maxMarksTrainingData": [],
+      "maxMarksConfidence": [],
+      "obtainedMarksTrainingData": [],
+      "obtainedMarksConfidence": [],
+      "predictedStudentId": "52130467810",
+      "section": "0",
+      "studentId": "52130467810",
+      "securedMarks": 0,
+      "totalMarks": 0,
+      "marksInfo": [
+      ],
+      "set": "",
+      "schoolId": "u001",
+      "subject": "0",
+      "classId": "0",
+      "createdOn": "1674547372474",
+      "roiId": "44",
+      "examId": 0,
+      "userId": "u001"
+    }
+  ]

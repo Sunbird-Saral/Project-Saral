@@ -1,13 +1,12 @@
 const express = require('express')
-const Student = require('../models/students')
-const Exam = require('../models/exams')
-const Marks = require('../models/marks')
+const router = express.Router();
 const { auth } = require('../middleware/auth')
-const { getSectionCode } = require('../utils/commonUtils')
-const Helper = require('../middleware/helper')
-const router = new express.Router()
+const Student = require("../models/students")
+const Marks = require("../models/marks")
 
+const studentController = require('../controller/studentController')
 
+router.post('/fetchStudentsandExamsByQuery',auth,studentController.fetchStudentsandExams)
 
 router.post('/student', auth, async (req, res) => {
     try {
@@ -71,76 +70,6 @@ router.post('/fetchStudentsByQuery', auth, async (req, res) => {
     } catch (e) {
         console.log(e);
         res.status(500).send()
-    }
-})
-
-router.post('/fetchStudentsandExamsByQuery', auth, async (req, res) => {
-    const match = {}
-    const examMatch = {}
-
-    match.schoolId = req.school.schoolId
-
-    if (req.body.classId) {
-        let studentClassObj = {
-            classId: req.body.classId,
-            className: `Class-${req.body.classId}`
-        }
-        let studentClass = [studentClassObj]
-        match.studentClass = studentClass
-        examMatch.classId = studentClassObj.classId
-        examMatch.schoolId = req.school.schoolId
-    } else {
-        if (req.school.minimal == true) {
-            examMatch.schoolId = req.school.schoolId
-        } else {
-        return res.status(404).send({ message: 'Please send classId' })
-    }
-    }
-
-    if (req.body.section && req.body.section != "0") {
-        match.section = req.body.section
-    }
-
-    if (req.body.hasOwnProperty('subject')) {
-        let subject = req.body.subject.split(' ')
-        examMatch.subject = subject[0]
-        examMatch.examDate = subject[1]
-    }
-
-    if (req.body.set) {
-        setMatch = req.body.set ? req.body.set : '' 
-    }
-    
-    try {
-
-        await Helper.lockScreenValidator(req.school)
-        
-        const students = await Student.find(match, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 }).lean()
-        for (let student of students) {
-            let lookup = {
-                studentId: student.studentId,
-                subject: examMatch.subject,
-                examDate: examMatch.examDate
-            }
-
-            if(req.body.set){
-                lookup.set = req.body.set 
-            }
-        
-            let marks = await Marks.findOne(lookup) 
-
-            if(marks && typeof marks == "object" ){
-                student["studentAvailability"] = marks.studentAvailability
-            }else{
-                student["studentAvailability"] = true
-                }
-                }
-
-        const exams = await Exam.find(examMatch, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 }).lean()
-        res.send({ students, exams })
-    } catch (e) {
-        console.log(e);
-        res.status(500).send({ error: e.message })
     }
 })
 

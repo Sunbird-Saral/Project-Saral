@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken')
 const User = require('../models/users')
+const Helper = require('../middleware/helper')
 
 const auth  = async (req, res, next) => {
     try {
@@ -25,8 +26,7 @@ const basicAuth = async (req, res, next) => {
         let basicAuthHeader = req.header('Authorization').replace(/^Basic/, '')
         basicAuthHeader = (Buffer.from(basicAuthHeader, 'base64')).toString('utf8')
         let loginInfo = basicAuthHeader.split(':'); 
-        
-        const school = await User.findByCredentials(loginInfo[0].toLowerCase(), loginInfo[1])
+        const school = await Helper.findByCredentials(loginInfo[0].toLowerCase(), loginInfo[1])
         req.school = school
         next()
     } catch (e) {
