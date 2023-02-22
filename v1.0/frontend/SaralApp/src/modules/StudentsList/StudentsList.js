@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Text, View, FlatList, SafeAreaView, BackHandler } from 'react-native';
+import { Text, View, FlatList, SafeAreaView, BackHandler,Button } from 'react-native';
 
 //redux
 import { connect, useDispatch } from 'react-redux';
@@ -39,7 +39,7 @@ import { collectErrorLogs } from '../CollectErrorLogs';
 import { getRegularRoipi, getRegularSavedScanpi, getRegularStudentExamApi, setRegularRoiApi, setRegularSavedScanApi, setRegularStudentExamApi } from '../../utils/offlineStorageUtils';
 import constants from '../../flux/actions/constants';
 import { storeFactory } from '../../flux/store/store';
-
+import analytics from '@react-native-firebase/analytics';
 
 const StudentsList = ({
     filteredData,
@@ -546,7 +546,26 @@ useEffect(() => {
                 </View>
 
             }
-         
+         <Button
+        title="custom event"
+        onPress={async () =>
+          await analytics().logEvent('basket', {
+            id: 3745092,
+            item: 'mens grey t-shirt',
+            description: ['round neck', 'long sleeved'],
+            size: 'L',
+          })
+        }
+      />
+
+<Button
+        title="predefined event"
+        onPress={async () =>
+            await analytics().logLogin({
+            method:'facebook'
+           })
+        }
+      />
             <FlatList
                 data={allStudentData}
                 renderItem={renderStudentData}

@@ -207,6 +207,12 @@ dependencies {
      implementation "com.newrelic.agent.android:android-agent:6.+"
     implementation 'com.github.bumptech.glide:glide:4.13.2'
   
+    implementation 'com.google.firebase:firebase-messaging:23.1.1'
+    implementation 'com.google.firebase:firebase-messaging:22.0.0'
+implementation ('com.google.firebase:firebase-iid:21.1.0') {
+    transitive = true
+}
+    implementation "com.google.firebase:firebase-iid:21.1.0"
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.2'
 
     implementation fileTree(dir: "libs", include: ["*.jar"])
@@ -216,11 +222,14 @@ dependencies {
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 
     compile project(':react-native-system-setting')
+    compile 'com.github.bumptech.glide:glide:4.0.0'
 
     implementation project(':react-native-push-notification')
 
     // SaralSDK use OpenCV and SaralSDK code, make them as dependencies here
     implementation project(path: ':saralsdk')
+    //   new code
+       implementation "com.google.firebase:firebase-bom:31.2.2"
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
       exclude group:'com.facebook.fbjni'

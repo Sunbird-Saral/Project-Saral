@@ -27,7 +27,8 @@ import checkVersion from 'react-native-store-version';
 import { apkURL, apkVersionId } from './src/configs/config';
 import { getLoginData } from './src/utils/StorageUtils';
 import { collectErrorLogs } from './src/modules/CollectErrorLogs';
-
+import analytics from '@react-native-firebase/analytics';
+import NewRelic from 'newrelic-react-native-agent'
 const customTextProps = {
   allowFontScaling: false,
 };
@@ -44,6 +45,7 @@ const customTouchableOpacityProps = {
 setCustomText(customTextProps);
 setCustomTextInput(customTextInputProps);
 setCustomTouchableOpacity(customTouchableOpacityProps);
+
 
 const App = () => {
   
@@ -88,13 +90,42 @@ const App = () => {
       collectErrorLogs("App.js","checkAppVersion MEthod", apkURL, error, false)
     }
 }
+function getActiveRouteName(navigationState) {
+  if (!navigationState) {
+    return null;
+  }
+  const route = navigationState.routes[navigationState.index];
+  // dive into nested navigators
+  if (route.routes) {
+    return getActiveRouteName(route);
+  }
+  return route.routeName;
+}
 
+// const AppNavigator = createStackNavigator(AppRouteConfigs);
+// const AppContainer = createAppContainer(AppNavigator);
   return (
     <>
       <Provider store={storeFactory}>
           {Platform.os !== 'ios' &&  <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />}
           <SafeAreaView style={{ flex: 1, backgroundColor: '#ffffff' }}>
-            <AppNavigator />
+            <AppNavigator 
+            // onNavigationStateChange={ NewRelic.onNavigationStateChange  }  
+             onNavigationStateChange={async (prevState, currentState) => {
+              const currentRouteName = getActiveRouteName(currentState);
+              const previousRouteName = getActiveRouteName(prevState);
+        
+              if (previousRouteName !== currentRouteName) {
+                // the line below uses the @react-native-firebase/analytics tracker
+                // change the tracker here to use other Mobile analytics SDK.
+                //  alert(currentRouteName)
+                await analytics().logScreenView({
+                  screen_name: currentRouteName,
+                  screen_class: currentRouteName
+                });
+              }
+            }} 
+            />
           </SafeAreaView>
       </Provider>
     </>

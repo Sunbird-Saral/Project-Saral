@@ -1,34 +1,41 @@
 {
   "project_info": {
-    "project_number": "2733844998",
-    "firebase_url": "https://ocrapp-3da24.firebaseio.com",
-    "project_id": "ocrapp-3da24",
-    "storage_bucket": "ocrapp-3da24.appspot.com"
+    "project_number": "388979771754",
+    "project_id": "appmonitor-4790f",
+    "storage_bucket": "appmonitor-4790f.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:2733844998:android:2988d17ff95b46545ab187",
+        "mobilesdk_app_id": "1:388979771754:android:8f173609d360e08aa73d13",
         "android_client_info": {
           "package_name": "com.saralapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "2733844998-u2rof1lb62nf2kg1r9lr39mtashqp81s.apps.googleusercontent.com",
+          "client_id": "388979771754-mi203uaa2bladsnq22b9bg4p9f78pscc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.saralapp",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "388979771754-du8vjrq8upip4f884mj07sbacp113v6a.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "ABzaSyD478Ivfz0uvMFARJIJSeyqnwFOBdC20zs"
+          "current_key": "AIzaSyAvWbEaJZLGuhavZ5SgHE8XWnvqJXM-6ig"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "2733844998-u2rof1lb62nf2kg1r9lr39mtashqp81s.apps.googleusercontent.com",
+              "client_id": "388979771754-du8vjrq8upip4f884mj07sbacp113v6a.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
