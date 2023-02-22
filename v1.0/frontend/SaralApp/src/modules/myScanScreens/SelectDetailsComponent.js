@@ -750,7 +750,7 @@ dispatchStudentExamData(payload){
                             }
                         })
                         finalStudentsAndExamArr.push(obj)
-                        // let studentsExamDataSaved = await setStudentsExamData(finalStudentsAndExamArr)
+                         let studentsExamDataSaved = await setStudentsExamData(finalStudentsAndExamArr)
                         this.props.navigation.push('StudentsList');
                     }
                 } else if (!hasNetworkData) {
@@ -841,6 +841,9 @@ dispatchStudentExamData(payload){
                     examTestID: examTestID[subIndex],
                 }
                 this.props.FilteredDataAction(obj)
+                let payload = {
+                    "examId": examTestID[0],
+                }
                 this.callExamAndStudentData(loginData.data.token)
             } else {
                 this.setState({
