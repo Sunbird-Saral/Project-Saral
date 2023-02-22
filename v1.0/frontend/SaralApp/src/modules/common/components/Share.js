@@ -69,7 +69,7 @@ const ShareComponent = ({
 
       const doLogout = async () => {
         let filterCurrentSchool = data != null ? data.filter((e)=> { return e.userId == loginData.data.school.schoolId}) : []
-        if (data != null && data.length > 0 && filterCurrentSchool.length > 0) {
+        if (data != null && data.length > 0 & filterCurrentSchool.length > 0) {
           let filterOtherSchool = data.filter((e)=> { return e.userId != loginData.data.school.schoolId});
 
           filterCurrentSchool.forEach(async(element, i) => {
