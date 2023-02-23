@@ -9,7 +9,7 @@
     "uat": "env-cmd ./config/uat.env nodemon src/index.js -e js,pug",
     "prod": "env-cmd ./config/prod.env nodemon src/index.js -e js,pug",
     "test": "jest --collectCoverage=true",
-    "coverage" : "jest --coverage"
+    "coverage": "jest --coverage"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -40,6 +40,7 @@
     "lodash": "^4.17.20",
     "mongodb": "^3.6.3",
     "mongoose": "^5.11.5",
+    "prom-client": "^14.1.1",
     "pug": "^3.0.0",
     "swagger-ui-express": "^4.4.0",
     "uuidv1": "^1.6.14",

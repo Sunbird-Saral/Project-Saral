@@ -11,6 +11,9 @@ const examRouter = require('./routers/exam.route')
 const markRouter = require('./routers/mark.route')
 const roiRouter = require('./routers/roi.route')
 const brandRouter = require('./routers/brand.route')
+const http = require('http')
+const url = require('url')
+const client = require('prom-client')
 var cors = require('cors');
 
 const spec = fs.readFileSync(`${__dirname}/swagger-saral-frontend.yaml`, 'utf-8');
@@ -30,6 +33,26 @@ app.use(express.json())
 app.use(cors());
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+
+// Create a Registry which registers the metrics
+const register = new client.Registry()
+
+// Add a default label which is added to all metrics
+register.setDefaultLabels({
+  app: 'saral-backend-app'
+})
+
+// Enable the collection of default metrics
+client.collectDefaultMetrics({ register })
+
+// Expose metrics endpoint
+app.get('/metrics', async function (req, res) {
+    // Return all metrics the Prometheus exposition format
+    res.set('Content-Type', register.contentType);
+    let metrics = await register.metrics();
+    res.send(metrics);
+})
+
 // Register the function as middleware for the application
 app.use(loggerMiddleware)
 app.use(schoolRouter)
