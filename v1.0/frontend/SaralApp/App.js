@@ -19,7 +19,6 @@ import {
 import AppNavigator from './src/navigator/AppNavigator'
 import { Provider } from 'react-redux';
 import { storeFactory } from './src/flux/store/store';
-// import RNBootSplash from "react-native-bootsplash";
 import { setCustomText, setCustomTextInput, setCustomTouchableOpacity } from 'react-native-global-props';
 
 //npm
@@ -51,7 +50,6 @@ const App = () => {
   
   useEffect(async() => {
     let hasAppForceEnable = await getLoginData();
-    // RNBootSplash.hide({ duration: 50 });
     StatusBar.setBackgroundColor('#FFF')
     if (hasAppForceEnable != null) {
       if (hasAppForceEnable.school.hasOwnProperty("isAppForceUpdateEnabled") && hasAppForceEnable.school.isAppForceUpdateEnabled) {

@@ -149,7 +149,8 @@ useEffect(() => {
 
         if (getSavedScanCache != null) {
             let result = getSavedScanCache.findIndex((e)=> {
-                return setValue.length > 0 ? e.key == loginData.data.school.schoolId && e.classId == filteredData.class && e.subject == filteredData.subject && e.section == filteredData.section && e.fromDate == filteredData.examDate && filteredData.set == e.set : e.key == loginData.data.school.schoolId && e.classId == filteredData.class && e.subject == filteredData.subject && e.section == filteredData.section && e.fromDate == filteredData.examDate
+                return setValue.length > 0 ?
+                 e.key == loginData.data.school.userId && e.classId == filteredData.class && e.subject == filteredData.subject && e.section == filteredData.section && e.fromDate == filteredData.examDate && filteredData.set == e.set : e.key == loginData.data.school.userId && e.classId == filteredData.class && e.subject == filteredData.subject && e.section == filteredData.section && e.fromDate == filteredData.examDate
             });
             if (result > -1) {
                 getSavedScanCache[result].data = savedScanData
@@ -158,7 +159,7 @@ useEffect(() => {
                 }
             } else {
                 let payload = {
-                    key :`${loginData.data.school.schoolId}`,
+                    key :`${loginData.data.school.userId}`,
                     classId: filteredData.class,
                     subject: filteredData.subject,
                     section: filteredData.section,
@@ -173,7 +174,7 @@ useEffect(() => {
             await setRegularSavedScanApi(getSavedScanCache);
         } else {
             let payload = {
-                key :`${loginData.data.school.schoolId}`,
+                key :`${loginData.data.school.userId}`,
                 classId: filteredData.class,
                 subject: filteredData.subject,
                 section: filteredData.section,
@@ -195,7 +196,7 @@ useEffect(() => {
             let setValue = filteredData.hasOwnProperty("set")  ? filteredData.set.length> 0 ? filteredData.set : '' : ''
             if (hasCacheData) {
                 let cacheFilterData =  hasCacheData.filter((element)=>{
-                    let conditionSwitch = setValue.length ? element.key == loginData.data.school.schoolId && element.classId == filteredData.class && element.subject == filteredData.subject && element.section == filteredData.section && element.fromDate == filteredData.examDate && filteredData.set == element.set : element.key == loginData.data.school.schoolId && element.classId == filteredData.class && element.subject == filteredData.subject && element.section == filteredData.section && element.fromDate == filteredData.examDate
+                    let conditionSwitch = setValue.length ? element.key == loginData.data.school.userId && element.classId == filteredData.class && element.subject == filteredData.subject && element.section == filteredData.section && element.fromDate == filteredData.examDate && filteredData.set == element.set : element.key == loginData.data.school.userId && element.classId == filteredData.class && element.subject == filteredData.subject && element.section == filteredData.section && element.fromDate == filteredData.examDate
                     if (conditionSwitch) {
                         return true
                     }
@@ -216,6 +217,7 @@ useEffect(() => {
             "section": filteredData.section,
             "fromDate": filteredData.examDate,
             "schoolId": loginData.data.school.schoolId,
+            "userId": loginData.data.school.userId,
             "page": 0,
             "downloadRes": false
         }
@@ -352,7 +354,7 @@ useEffect(() => {
             if (e.class == filteredData.className && e.section == filteredData.section) {
                 e.data.students.forEach((element) => {
 
-                    const updated = allStudentData.filter((o) => {
+                    const updated = allStudentData.filter((o)=>{
                         if (element.studentId == o.studentId) {
                             element.studentAvailability = o.studentAvailability
                         }

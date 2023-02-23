@@ -76,7 +76,6 @@ export default strings = new LocalizedStrings({
         exam_taken_at: 'exam taken at',
         exam_date: 'Exam Date',
         test_date: 'Test Date',
-        submit_text: 'Submit',
         please_select_valid_section: 'Please select valid Option',
         please_select_class: 'Please select valid Option',
         please_select_section: 'Please select Section',
