@@ -30,16 +30,16 @@ const classSchema = new mongoose.Schema({
 
 //model method created
 classSchema.statics.findClassesBySchools = async (schoolId) => {    
-    const classes = await ClassModel.find({ schoolId })
+    const localClasses = await classes.find({ schoolId })
     
     if(!classes) {
         throw new Error('No Classes')
     }
     
-    return classes
+    return localClasses
 }
 
 
-const ClassModel = mongoose.model('Class', classSchema)
+const classes = mongoose.model('Class', classSchema)
 
-module.exports = ClassModel
+module.exports = classes

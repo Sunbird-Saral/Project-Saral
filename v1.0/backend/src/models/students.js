@@ -51,7 +51,7 @@ studentSchema.statics.getStudentsCountByClassAndSection = async (schoolId, class
     }
     
     try {
-        const students = await Student.find(match)
+        const students = await students.find(match)
         
         let count = students.length
         return count
@@ -62,6 +62,6 @@ studentSchema.statics.getStudentsCountByClassAndSection = async (schoolId, class
 }
 
 
-const Student = mongoose.model('Student', studentSchema)
+const students = mongoose.model('Student', studentSchema)
 
-module.exports = Student
+module.exports = students
