@@ -51,9 +51,9 @@ studentSchema.statics.getStudentsCountByClassAndSection = async (schoolId, class
     }
     
     try {
-        const students = await students.find(match)
+        const localStudents = await students.find(match)
         
-        let count = students.length
+        let count = localStudents.length
         return count
     } catch (e) {
         console.log(e);
