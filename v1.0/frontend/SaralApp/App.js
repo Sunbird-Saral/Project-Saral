@@ -27,7 +27,6 @@ import { apkURL, apkVersionId } from './src/configs/config';
 import { getLoginData } from './src/utils/StorageUtils';
 import { collectErrorLogs } from './src/modules/CollectErrorLogs';
 import analytics from '@react-native-firebase/analytics';
-import NewRelic from 'newrelic-react-native-agent'
 const customTextProps = {
   allowFontScaling: false,
 };
@@ -99,9 +98,6 @@ function getActiveRouteName(navigationState) {
   }
   return route.routeName;
 }
-
-// const AppNavigator = createStackNavigator(AppRouteConfigs);
-// const AppContainer = createAppContainer(AppNavigator);
   return (
     <>
       <Provider store={storeFactory}>

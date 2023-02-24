@@ -13,7 +13,6 @@ import com.facebook.soloader.SoLoader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import org.ekstep.saral.saralsdk.SaralSDKPackage;
-import com.newrelic.agent.android.NewRelic;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -51,9 +50,6 @@ public class MainApplication extends Application implements ReactApplication {
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
     initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
-    NewRelic.withApplicationToken(
-"AAa4f98b48afc14ae704f5a29f4950f1e65a90a3e7-NRMA"
-).start(this.getApplicationContext());
   }
 
   /**

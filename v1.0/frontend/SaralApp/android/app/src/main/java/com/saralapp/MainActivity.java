@@ -5,7 +5,6 @@ import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.ReactRootView;
 import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;
 import android.os.Bundle;
-import com.newrelic.agent.android.NewRelic;
 public class MainActivity extends ReactActivity {
 
   /**
@@ -28,9 +27,6 @@ public class MainActivity extends ReactActivity {
 
    @Override
    protected void onCreate(Bundle savedInstanceState) {
-    NewRelic.withApplicationToken(
-"AAa4f98b48afc14ae704f5a29f4950f1e65a90a3e7-NRMA"
-).start(this.getApplicationContext());
    super.onCreate(null);
 }
 }
