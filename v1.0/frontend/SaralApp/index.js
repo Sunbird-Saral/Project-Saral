@@ -45,6 +45,7 @@ PushNotification.configure({
     requestPermissions: true,
 });
 
+AppRegistry.registerComponent(appName, () => App);
 
 if (!global.btoa) {
     global.btoa = encode;
