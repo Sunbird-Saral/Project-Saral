@@ -64,8 +64,5 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
-         <!-- make sure to provide unique authorities if apply to multiple apps on the same device
-  
     </application>
 </manifest>
