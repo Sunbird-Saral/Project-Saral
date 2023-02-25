@@ -411,6 +411,7 @@ class MyScanComponent extends Component {
                 let jsonRoiData = this.props.roiData.data
                 SaralSDK.startCamera(JSON.stringify(jsonRoiData), pageNumber).then(res => {
                     let roisData = JSON.parse(res);
+                    console.log("roisData",roisData);
                     let cells = roisData.layout.cells;
                     this.consolidatePrediction(cells, roisData)
 
