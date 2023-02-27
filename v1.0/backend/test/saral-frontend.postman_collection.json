@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "05e18fc2-a8e4-4ee0-972e-fcced9bde482",
+		"_postman_id": "61d74c75-cb28-48b0-90c4-08c949964f29",
 		"name": "saral-frontend",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -346,15 +346,6 @@
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
 								"url": {
 									"raw": "{{url}}/roi/:examId",
 									"host": [
@@ -710,7 +701,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"status\": \"success\",\n    \"message\": \"Data Saved Successfully\"\n}"
+							"body": "{\n    \"message\": \"Data Saved Successfully\"\n}"
 						},
 						{
 							"name": "Minimal Save marks",
@@ -781,7 +772,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"status\": \"success\",\n    \"message\": \"Data Saved Successfully\"\n}"
+							"body": "{\n    \"message\": \"Data Saved Successfully\"\n}"
 						}
 					]
 				},
