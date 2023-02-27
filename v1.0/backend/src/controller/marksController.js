@@ -87,15 +87,19 @@ exports.getSaveScan = async (req, res, next) => {
             req.body.userId = req.body.userId.toLowerCase()
         }
 
+
         const { schoolId, classId, section, subject, fromDate, roiId, userId } = req.body
 
         const match = {}
-        if (schoolId) {
-            match.schoolId = schoolId
-        }
 
         if (userId) {
             match.userId = userId
+        }
+    
+        if (schoolId && !userId) {
+            match.userId = schoolId
+        }else{
+            match.schoolId = schoolId
         }
 
         if(fromDate){
@@ -124,11 +128,11 @@ exports.getSaveScan = async (req, res, next) => {
             req.body.limit = 0;
             req.body.page = 1;
         }
-        
+       
         const savedScan = await Mark.find(match, { _id: 0, __v: 0 })
             .limit(parseInt(req.body.limit) * 1)
             .skip((parseInt(parseInt(req.body.page)) - 1) * parseInt(parseInt(req.body.limit)))
-
+     
 
         res.status(200).json({ data: savedScan })
     } catch (e) {
