@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, Text, View, BackHandler } from 'react-native';
+import { FlatList, Text, View } from 'react-native';
 
 //redux
 import { connect } from 'react-redux';
@@ -19,7 +19,7 @@ import { bindActionCreators } from 'redux';
 //api
 import APITransport from '../../flux/actions/transport/apitransport'
 import AppTheme from '../../utils/AppTheme';
-import { getPresentAbsentStudent, getScannedDataFromLocal,getErrorMessage } from '../../utils/StorageUtils';
+import { getPresentAbsentStudent, getScannedDataFromLocal } from '../../utils/StorageUtils';
 import ShareComponent from '../common/components/Share';
 import MultibrandLabels from '../common/components/multibrandlabels';
 import { monospace_FF } from '../../utils/CommonUtils';

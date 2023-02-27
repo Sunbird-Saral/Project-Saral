@@ -108,7 +108,6 @@ class MyScanComponent extends Component {
 
         if (this.props.minimalFlag) {
             let examList = []
-            
             this.props.studentsAndExamData
             ?
             this.props.studentsAndExamData.data
@@ -441,7 +440,7 @@ class MyScanComponent extends Component {
             predictionConfidenceArray = []
             for (let j = 0; j < cells[i].rois.length; j++) {
                 if (cells[i].rois[j].hasOwnProperty("result")) {
-                    marks = marks + cells[i].rois[j].result.prediction,
+                    marks = marks + cells[i].rois[j].result.prediction
                         predictionConfidenceArray.push(cells[i].rois[j].result.confidence)
                     // roisData.layout.cells[i].predictionConfidence = cells[i].rois[j].result.confidence
                 } else {
