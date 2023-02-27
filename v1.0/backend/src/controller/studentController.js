@@ -65,12 +65,10 @@ exports.fetchStudentsandExams = async (req, res, next) => {
         const exams = await Exam.find(examMatch, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 })
 
         res.status(200).json({
-            status: 'success',
             students, exams
         });
     } catch (e) {
         res.status(400).json({
-            status: 'fail',
             e
         });
     }
