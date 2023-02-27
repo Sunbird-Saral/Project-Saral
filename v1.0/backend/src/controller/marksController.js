@@ -65,13 +65,13 @@ exports.saveMarks = async (req, res, next) => {
                 }
             }
         }
-        res.status(200).json({ status: 'success', message: 'Data Saved Successfully' })
+        res.status(200).json({ message: 'Data Saved Successfully' })
     } catch (e) {
         if (e && e.message == stringObject().lockScreen) {
-            res.status(500).json({ status: "fail", error: e.message })
+            res.status(500).json({ error: e.message })
         }
         else {
-            res.status(400).json({ status: "fail", e })
+            res.status(400).json({ e })
         }
     }
 }

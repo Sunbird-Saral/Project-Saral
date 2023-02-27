@@ -19,7 +19,7 @@ import { bindActionCreators } from 'redux';
 //api
 import APITransport from '../../flux/actions/transport/apitransport'
 import AppTheme from '../../utils/AppTheme';
-import { getPresentAbsentStudent, getScannedDataFromLocal,getErrorMessage, getLoginCred, setScannedDataIntoLocal } from '../../utils/StorageUtils';
+import { getPresentAbsentStudent, getScannedDataFromLocal, getLoginCred, setScannedDataIntoLocal } from '../../utils/StorageUtils';
 import { Assets } from '../../assets';
 import ShareComponent from '../common/components/Share';
 import MultibrandLabels from '../common/components/multibrandlabels';
@@ -363,7 +363,7 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
             <Text style={styles.scanStatus}>{Strings.scan_status}</Text>
         
             <FlatList
-                data={ presentStudentList && presentStudentList}
+                data={ presentStudentList}
                 renderItem={renderItem}
                 ListEmptyComponent={renderEmptyData}
             keyExtractor={(item, index) => `${index.toString()}`}

@@ -37,10 +37,6 @@
      }
  
      getBody() {
-         // let params = {
-         //     SCHOOLiD: this.schoolId,
-         // }
-         
          const data = Object.keys(this.payload).map(key =>
              encodeURIComponent(key) + '=' + encodeURIComponent(this.payload[key]))
              .join('&');

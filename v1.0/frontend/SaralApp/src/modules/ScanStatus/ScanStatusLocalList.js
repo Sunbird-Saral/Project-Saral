@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, BackHandler, Pressable, Dimensions } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import AppTheme from '../../utils/AppTheme';
 import { monospace_FF, MARKS_INFO,MARKS_INFO_DEFAULT} from '../../utils/CommonUtils';
 import ModalPopup from '../common/components/Modal';

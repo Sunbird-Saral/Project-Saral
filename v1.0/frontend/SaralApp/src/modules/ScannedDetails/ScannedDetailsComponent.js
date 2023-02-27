@@ -417,7 +417,6 @@ const ScannedDetailsComponent = ({
                 let number = consolidated;
                 let regex = new RegExp(regexExp)
                 result = regex.test(number);
-                // setOmrResult(regexErrormsg)
                   setOmrResult(defaultValidateError)
                   
 
@@ -1259,7 +1258,6 @@ const ScannedDetailsComponent = ({
             marks = ""
             predictionConfidenceArray = []
             for (let j = 0; j < cells[i].rois.length; j++) {
-
                 marks = marks + cells[i].rois[j].result.prediction,
                     predictionConfidenceArray.push(cells[i].rois[j].result.confidence)
             }
@@ -1466,7 +1464,7 @@ const ScannedDetailsComponent = ({
                                                                 rowTitle={element.consolidatedPrediction}
                                                                 rowBorderColor={markBorderOnCell(element)}
                                                                 editable={true}
-                                                                keyboardType={element.hasOwnProperty("omrOptions") ?  'name' : 'name'}
+                                                                keyboardType={element.hasOwnProperty("omrOptions") ?  'name' : ''}
                                                                 maxLength={lengthAccordingSheet(element)}
                                                                 onChangeText={(text) => {
                                                                     handleTextChange(text.trim(), index, newArrayValue, element)
