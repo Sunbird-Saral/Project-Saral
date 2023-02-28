@@ -1,10 +1,10 @@
 import React, { memo, useEffect, useState } from 'react';
-import { ActivityIndicator, Alert, Text, TouchableOpacity, View, Modal, StyleSheet, Dimensions } from 'react-native';
+import { ActivityIndicator, Text, TouchableOpacity, View, Modal, StyleSheet, Dimensions } from 'react-native';
 import { connect, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
 import AppTheme from '../../utils/AppTheme';
-import { getErrorMessage, getLoginCred, getPresentAbsentStudent, getScanData, getScannedDataFromLocal, setErrorMessage, setScannedDataIntoLocal } from '../../utils/StorageUtils';
+import { getLoginCred, getPresentAbsentStudent, getScannedDataFromLocal, setScannedDataIntoLocal } from '../../utils/StorageUtils';
 import { checkAppVersion, checkNetworkConnectivity, dispatchCustomModalMessage, dispatchCustomModalStatus, Exam_QuestionHeader, monospace_FF } from '../../utils/CommonUtils';
 import ExamDetailsPopup from '../common/components/ExamDetailsPopup';
 import ButtonComponent from '../common/components/ButtonComponent';
@@ -69,8 +69,7 @@ const ScanHistoryCard = ({
         return data.length;
     }
 
-    const SAVED_SCANNED_DATA_INTO_LOCAL = 'saved_scanned_data_into_local'
-    const onPressContinue = () => {
+        const onPressContinue = () => {
         navigation.push('myScan')
     }
 
@@ -185,6 +184,7 @@ const ScanHistoryCard = ({
             "set": filteredData.response.set,
             "page": 0,
             "schoolId": loginData.data.school.schoolId,
+            "userId": loginData.data.school.userId,
             "downloadRes": false
         }
         let apiObj = new scanStatusDataAction(dataPayload);
@@ -543,8 +543,6 @@ const mapStateToProps = (state) => {
         studentsAndExamData : state.studentsAndExamData,
         apiStatus: state.apiStatus,
         bgFlag: state.bgFlag,
-        studentsAndExamData: state.studentsAndExamData,
-        apiStatus: state.apiStatus,
         multiBrandingData: state.multiBrandingData.response.data
     }
 }

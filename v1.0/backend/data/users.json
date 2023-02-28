@@ -136,5 +136,41 @@
         "userId": "dummy001",
         "schoolId": "dummy001",
         "password": "tarento@123"
+    },
+    {
+        "name": "user24",
+        "userId": "79897896",
+        "schoolId": "u002",
+        "password": "tarento@123"
+    },
+    {
+        "name": "user25",
+        "userId": "78897896",
+        "schoolId": "u002",
+        "password": "tarento@123"
+    },
+    {
+        "name": "user26",
+        "userId": "67897896",
+        "schoolId": "u002",
+        "password": "tarento@123"
+    },
+    {
+        "name": "user27",
+        "userId": "59897896",
+        "schoolId": "u002",
+        "password": "tarento@123"
+    },
+    {
+        "name": "user28",
+        "userId": "39897896",
+        "schoolId": "u002",
+        "password": "tarento@123"
+    },
+    {
+        "name": "user29",
+        "userId": "49897896",
+        "schoolId": "u002",
+        "password": "tarento@123"
     }
 ]

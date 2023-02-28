@@ -27,6 +27,8 @@ public class RemoteConfig {
         boolean networkAvailable = isNetworkAvailable(context);
         FirebaseRemoteConfig mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
 
+        Log.d(TAG, "isFBDownloadModelEnable: networkAvailable"+networkAvailable);
+
         if (networkAvailable) {
             FirebaseRemoteConfigSettings configSettings = new FirebaseRemoteConfigSettings.Builder()
                     .setMinimumFetchIntervalInSeconds(100)
