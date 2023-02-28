@@ -66,13 +66,13 @@ exports.saveMarks = async (req, res, next) => {
                 }
             }
         }
-        res.status(200).json({ status: 'success', message: 'Data Saved Successfully' })
+        res.status(200).json({ message: 'Data Saved Successfully' })
     } catch (e) {
         if (e && e.message == stringObject().lockScreen) {
-            res.status(500).json({ status: "fail", error: e.message })
+            res.status(500).json({ error: e.message })
         }
         else {
-            res.status(400).json({ status: "fail", e })
+            res.status(400).json({ e })
         }
     }
 }
@@ -87,15 +87,19 @@ exports.getSaveScan = async (req, res, next) => {
             req.body.userId = req.body.userId.toLowerCase()
         }
 
+
         const { schoolId, classId, section, subject, fromDate, roiId, userId } = req.body
 
         const match = {}
-        if (schoolId) {
-            match.schoolId = schoolId
-        }
 
         if (userId) {
             match.userId = userId
+        }
+    
+        if (schoolId && !userId) {
+            match.userId = schoolId
+        }else{
+            match.schoolId = schoolId
         }
 
         if(fromDate){
@@ -124,11 +128,11 @@ exports.getSaveScan = async (req, res, next) => {
             req.body.limit = 0;
             req.body.page = 1;
         }
-        
+       
         const savedScan = await Mark.find(match, { _id: 0, __v: 0 })
             .limit(parseInt(req.body.limit) * 1)
             .skip((parseInt(parseInt(req.body.page)) - 1) * parseInt(parseInt(req.body.limit)))
-
+     
 
         res.status(200).json({ data: savedScan })
     } catch (e) {

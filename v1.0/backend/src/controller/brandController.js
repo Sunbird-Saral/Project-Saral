@@ -15,12 +15,10 @@ exports.fetchBrandData = async (req, res, next) => {
             if (defaultBrand && defaultBrand.length) {
                 let resultObj = defaultBrand[0]
                 res.status(200).json({
-                    status: 'success',
                     ...resultObj
                 });
             } else {
                 res.status(404).json({
-                    status: "fail",
                     error: "Brand does not exist."
                 })
             }
@@ -28,7 +26,6 @@ exports.fetchBrandData = async (req, res, next) => {
 
     } catch (e) {
         res.status(400).json({
-            status: 'fail',
             e
         });
     }
@@ -39,18 +36,16 @@ exports.fetchDefaultBrandData = async (req, res, next) => {
         const brand = await Brand.find({ state: { $exists: false } }, { appName: 1, themeColor1: 1, themeColor2: 1, logoImage: 1, _id: 0 }).lean()
         if (brand.length) {
             let resultObj = brand[0]
-            res.status(200).json({ status: 'success', ...resultObj })
+            res.status(200).json({ ...resultObj })
 
         } else {
             res.status(404).json({
-                status: "fail",
                 error: "Brand does not exist."
             })
         }
 
     } catch (e) {
         res.status(400).json({
-            status: 'fail',
             e
         });
     }

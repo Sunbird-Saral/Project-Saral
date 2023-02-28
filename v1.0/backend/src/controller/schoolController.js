@@ -86,19 +86,16 @@ exports.loginSchool = async (req, res, next) => {
   } catch (e) {
     if (e && e.message == 'School Id or Password is not correct.') {
       res.status(401).json({
-        status: 'fail',
         error: e.message
       })
     }
     else if (e && e.message == stringObject().lockScreen) {
       res.status(500).json({
-        status: 'fail',
         error: e.message
       })
     }
     else {
       res.status(400).json({
-        status: 'fail',
         e
       });
     }
