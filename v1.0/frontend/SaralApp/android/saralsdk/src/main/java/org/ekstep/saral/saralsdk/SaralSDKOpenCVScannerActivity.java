@@ -171,7 +171,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                 if (mIsClassifierRequestSubmitted && mTotalClassifiedCount >= mPredictedDigits.size()) {
                     mIsScanningComplete     = true;
                 } else {
-                    setDefaulValue();
+                    timerTask();
                 }
 
                 if (mIsScanningComplete) {
@@ -217,7 +217,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                 if (mIsClassifierRequestSubmitted && mTotalClassifiedCount >= mPredictedDigits.size()) {
                     mIsScanningComplete     = true;
                 } else {
-                    setDefaulValue();
+                    timerTask();
                 }
 
                 if (mIsScanningComplete) {
@@ -243,7 +243,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                 if (mIsClassifierRequestSubmitted && mTotalClassifiedCount >= mPredictedDigits.size()) {
                     mIsScanningComplete     = true;
                 } else {
-                    setDefaulValue();
+                    timerTask();
                 }
 
                 if (mIsScanningComplete) {
@@ -501,9 +501,10 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                 new Runnable() {
                     public void run() {
                         Log.i("tag", "This'll run 300 milliseconds later");
+                        setDefaulValue();
                     }
                 },
-                5000);
+                1000);
     }
 
     private void processScanningCompleted() {
