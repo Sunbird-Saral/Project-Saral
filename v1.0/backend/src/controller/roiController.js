@@ -34,7 +34,6 @@ exports.getRoiData = async (req, res, next) => {
            
                 if (roi.length) {
                     res.status(200).json({
-                        status: 'success',
                         layout : roi[0].roi.layout,
                         roiId : roi[0].roiId
                     });
