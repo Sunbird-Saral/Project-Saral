@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Text, View, FlatList, SafeAreaView, BackHandler,Button } from 'react-native';
+import { Text, View, FlatList, SafeAreaView, BackHandler } from 'react-native';
 
 //redux
 import { connect, useDispatch } from 'react-redux';
@@ -548,26 +548,6 @@ useEffect(() => {
                 </View>
 
             }
-         <Button
-        title="custom event"
-        onPress={async () =>
-          await analytics().logEvent('basket', {
-            id: 3745092,
-            item: 'mens grey t-shirt',
-            description: ['round neck', 'long sleeved'],
-            size: 'L',
-          })
-        }
-      />
-
-<Button
-        title="predefined event"
-        onPress={async () =>
-            await analytics().logLogin({
-            method:'facebook'
-           })
-        }
-      />
             <FlatList
                 data={allStudentData}
                 renderItem={renderStudentData}

@@ -27,6 +27,8 @@ import { apkURL, apkVersionId } from './src/configs/config';
 import { getLoginData } from './src/utils/StorageUtils';
 import { collectErrorLogs } from './src/modules/CollectErrorLogs';
 import analytics from '@react-native-firebase/analytics';
+import crashlytics from '@react-native-firebase/crashlytics';
+import { firebase } from '@react-native-firebase/perf';
 const customTextProps = {
   allowFontScaling: false,
 };
@@ -87,6 +89,8 @@ const App = () => {
       collectErrorLogs("App.js","checkAppVersion MEthod", apkURL, error, false)
     }
 }
+
+
 function getActiveRouteName(navigationState) {
   if (!navigationState) {
     return null;
@@ -98,6 +102,11 @@ function getActiveRouteName(navigationState) {
   }
   return route.routeName;
 }
+
+useEffect(async() => {
+      // crashlytics().log('App mounted.');
+      await firebase.perf().setPerformanceCollectionEnabled(true);
+    }, []);
   return (
     <>
       <Provider store={storeFactory}>
@@ -112,7 +121,7 @@ function getActiveRouteName(navigationState) {
               if (previousRouteName !== currentRouteName) {
                 // the line below uses the @react-native-firebase/analytics tracker
                 // change the tracker here to use other Mobile analytics SDK.
-                //  alert(currentRouteName)
+                  // alert(currentRouteName)
                 await analytics().logScreenView({
                   screen_name: currentRouteName,
                   screen_class: currentRouteName
@@ -127,3 +136,46 @@ function getActiveRouteName(navigationState) {
 };
 
 export default App;
+
+
+
+// import React, { useEffect } from 'react';
+// import { View, Button } from 'react-native';
+// import crashlytics from '@react-native-firebase/crashlytics';
+
+// async function onSignIn(user) {
+//   crashlytics().log('User signed in.');
+//   await Promise.all([
+//     crashlytics().setUserId(user.uid),
+//     crashlytics().setAttribute('credits', String(user.credits)),
+//     crashlytics().setAttributes({
+//       role: 'admin',
+//       followers: '13',
+//       email: user.email,
+//       username: user.username,
+//     }),
+//   ]);
+// }
+
+// export default function App() {
+//   useEffect(() => {
+//     crashlytics().log('App mounted.');
+//   }, []);
+
+//   return (
+//     <View>
+//       <Button
+//         title="Sign In"
+//         onPress={() =>
+//           onSignIn({
+//             uid: 'Aa0Bb1Cc2Dd3Ee4Ff5Gg6Hh7Ii8Jj9',
+//             username: 'Joaquin Phoenix',
+//             email: 'phoenix@example.com',
+//             credits: 42,
+//           })
+//         }
+//       />
+//       <Button title="Test Crash" onPress={() => crashlytics().crash()} />
+//     </View>
+//   );
+// }

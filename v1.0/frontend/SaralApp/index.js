@@ -8,7 +8,6 @@ import {name as appName} from './app.json';
 import {decode, encode} from 'base-64'
 import PushNotification from "react-native-push-notification";
 import Strings from './src/utils/Strings';
-
 import {Platform} from 'react-native';
 import * as appVersion from './package.json';
 console.log('Platform',Platform);

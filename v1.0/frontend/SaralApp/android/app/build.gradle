@@ -2,6 +2,7 @@ apply plugin: "com.android.application"
 apply plugin: 'android'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
+// apply plugin: 'com.google.firebase.firebase-perf'
 
 // apply plugin: 'newrelic'
 import com.android.build.OutputFile
@@ -173,11 +174,6 @@ android {
 
             //println project.hasProperty('MYAPP_RELEASE_STORE_FILE')
             //println signingConfigs.release
-            firebaseCrashlytics {
-            nativeSymbolUploadEnabled true
-            strippedNativeLibsDir 'build/intermediates/stripped_native_libs/release/out/lib'
-            unstrippedNativeLibsDir 'build/intermediates/merged_native_libs/release/out/lib'
-           }
             signingConfig signingConfigs.release
             //signingConfig signingConfigs.debug
       
@@ -190,6 +186,12 @@ android {
             debug {
                 debuggable true
             }
+
+             firebaseCrashlytics {
+            nativeSymbolUploadEnabled true
+            strippedNativeLibsDir 'build/intermediates/stripped_native_libs/release/out/lib'
+            unstrippedNativeLibsDir 'build/intermediates/merged_native_libs/release/out/lib'
+           }
         }
     }
 
@@ -232,6 +234,8 @@ dependencies {
 implementation ('com.google.firebase:firebase-iid:21.1.0') {
     transitive = true
 }
+
+// implementation 'com.google.firebase:firebase-perf'
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
       exclude group:'com.facebook.fbjni'
