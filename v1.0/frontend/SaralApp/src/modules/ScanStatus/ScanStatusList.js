@@ -55,7 +55,7 @@ const ScanStatusList = ({
                 data={
                     <View style={{ marginVertical: 0 }}>
                          <Text style={styles.textStyle}>{`studentId : ` }<Text style={{fontWeight:'normal',fontFamily : monospace_FF}}>{`${scanitemdata&&scanitemdata.studentId}`}</Text></Text>
-                        <Text style={styles.textStyle}>{`predictedStudentId : ` }<Text style={{fontWeight:'normal',fontFamily : monospace_FF}}>{`${scanitemdata&&scanitemdata.predictedStudentId}`}</Text></Text>
+                        <Text style={styles.textStyle}>{`predictedStudentId : ` }<Text style={{fontWeight:'normal',fontFamily : monospace_FF}}>{`${scanitemdata&&scanitemdata.predictedStudentId ? scanitemdata.predictedStudentId: ''}`}</Text></Text>
                         <Text style={styles.textStyle}>{`section :` }<Text style={{fontWeight:'normal',fontFamily : monospace_FF}}>{`${scanitemdata&&scanitemdata.section}`}</Text></Text>
                         <Text style={styles.textStyle}>{`studentAvailability : ` }<Text style={{fontWeight:'normal',fontFamily : monospace_FF}}>{`${scanitemdata&&scanitemdata.studentAvailability}`}</Text></Text>
                         <Text style={styles.textStyle}>{`marksInfo : `}</Text>
