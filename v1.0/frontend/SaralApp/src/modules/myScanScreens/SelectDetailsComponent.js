@@ -837,8 +837,10 @@ dispatchStudentExamData(payload){
                     examDate: examDate[subIndex],
                     section: selectedSection,
                     subject: subjectsData[subIndex],
-                    set: selectSet =="NONE" ? "" : setValue,
                     examTestID: examTestID[subIndex],
+                }
+                if(setValue.length>0){
+                    obj.set=  selectSet =="NONE" ? "" : setValue
                 }
                 this.props.FilteredDataAction(obj)
                 let payload = {
