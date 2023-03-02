@@ -608,7 +608,7 @@ class MyScanComponent extends Component {
                     apiResponse = res;
                     clearTimeout(id);
                     api.processResponse(res);
-                    obj.callScanStatusData(false, filteredDatalen, localScanData)
+                    obj.callScanStatusData(false, filteredDatalen, localScanData, res)
                 })
                 .catch(function (err) {
                     if (err && err.response.status == 500) {
@@ -626,7 +626,7 @@ class MyScanComponent extends Component {
         }
     }
 
-    callScanStatusData = async (isApiCalled, filteredDatalen, localScanData) => {
+    callScanStatusData = async (isApiCalled, filteredDatalen, localScanData, res) => {
         let hasNetwork = await checkNetworkConnectivity();
         const { loginData } = this.props;
         if (!hasNetwork) {
@@ -652,20 +652,24 @@ class MyScanComponent extends Component {
                 //Alert message show message "something went wrong or u don't have cache in local"
             }
         } else {
-            let loginCred = await getLoginCred()
 
-            let dataPayload = {
-                "classId": 0,
-                "subject": 0,
-                "section": 0,
-                "fromDate": 0,
-                "page": 0,
-                "downloadRes": false
+            if (!isApiCalled) {
+                obj.callCustomModal(Strings.message_text, Strings.saved_successfully, false);
+                setScannedDataIntoLocal(localScanData)
+                this.dispatchScanDataApi(res.data)
+                this.setState({
+                    localScanedData: []
+                })
             }
-            let roiId = this.props.roiData && this.props.roiData.data.roiId;
-            dataPayload.roiId = roiId;
-            let apiObj = new scanStatusDataAction(dataPayload);
-            this.FetchSavedScannedData(isApiCalled, apiObj, loginCred.schoolId, loginCred.password, filteredDatalen, localScanData)
+            if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode) {
+                this.setScanDataCache(res.data);
+            }
+            this.setState({
+                scanStatusData: filteredDatalen,
+                saveStatusData: res.data.data.length,
+                isLoading: false,
+                dbScanSavedData: res.data.data
+            })
         }
     }
 
@@ -673,55 +677,6 @@ class MyScanComponent extends Component {
         return {
             type: constants.SCANNED_DATA,
             payload
-        }
-    }
-
-    FetchSavedScannedData = async (isApiCalled, api, uname, pass, filterDataLen, localScanData) => {
-        const { loginData } = this.props;
-        var obj = this
-        if (api.method === 'POST') {
-            let apiResponse = null
-            const source = axios.CancelToken.source()
-            const id = setTimeout(() => {
-                if (apiResponse === null) {
-                    source.cancel('The request timed out.');
-                }
-            }, 60000);
-            axios.post(api.apiEndPoint(), api.getBody(), {
-                auth: {
-                    username: uname,
-                    password: pass
-                }
-            })
-                .then(function (res) {
-                    apiResponse = res
-                    clearTimeout(id)
-                    api.processResponse(res)
-                    if (!isApiCalled) {
-                        obj.callCustomModal(Strings.message_text, Strings.saved_successfully, false);
-                        setScannedDataIntoLocal(localScanData)
-                        obj.setState({
-                            localScanedData: []
-                        })
-                    }
-                    if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode) {
-                        obj.setScanDataCache(res.data);
-                    }
-                    obj.setState({
-                        scanStatusData: filterDataLen,
-                        saveStatusData: res.data.data.length,
-                        isLoading: false,
-                        dbScanSavedData: res.data.data
-                    })
-                })
-                .catch(function (err) {
-                    collectErrorLogs("MyScanComponent.js", "FetchSavedScannedData", api.apiEndPoint(), err, false)
-                    obj.callCustomModal(Strings.message_text, Strings.something_went_wrong_please_try_again, false);
-                    obj.setState({
-                        isLoading: false
-                    })
-                    clearTimeout(id)
-                });
         }
     }
 

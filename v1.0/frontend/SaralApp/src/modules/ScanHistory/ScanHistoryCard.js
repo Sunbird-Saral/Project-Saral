@@ -17,6 +17,8 @@ import { scanStatusDataAction } from '../ScanStatus/scanStatusDataAction';
 import axios from 'axios';
 import { ScrollView } from 'react-native-gesture-handler';
 import { collectErrorLogs } from '../CollectErrorLogs';
+import Constant from '../../flux/actions/constants';
+
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
 const HEIGHT_MODAL = 150;
@@ -62,6 +64,7 @@ const ScanHistoryCard = ({
                           hasSet.length >= 0 ? o.studentAvailability && o.marksInfo.length > 0 && hasSet == o.set 
                          :
                           false
+
                         if (stdCondition) {
                             return true
                         }
@@ -165,77 +168,30 @@ const ScanHistoryCard = ({
                 .then(function (res) {
                     apiResponse = res;
                     clearTimeout(id);
-                    api.processResponse(res);
-                    dispatch(dispatchAPIAsync(api));
-                    callScanStatusData(filteredDatalen, localScanData)
+                
+                    dispatch(dispatchAPIAsync(res.data));
+                    setScanStatusData(filteredDatalen);
+                    setScannedDataIntoLocal(localScanData);
+                    setIsLoading(false);
+                    callCustomModal(Strings.message_text,Strings.saved_successfully,false);
                 })
                 .catch(function (err) {
                     collectErrorLogs("ScanHistoryCard.js","saveScanData",api.apiEndPoint(),err,false);
-                    callCustomModal(Strings.message_text,err.response.data && err.response.data.error ? err.response.data.error  : Strings.contactAdmin,false);
+                    callCustomModal(Strings.message_text,err && err.response && err.response.data && err.response.data.error ? err.response.data.error  : Strings.contactAdmin,false);
                     clearTimeout(id);
                     setIsLoading(false);
                 });
         }
     }
 
-    const callScanStatusData = async (filteredDatalen, localScanData) => {
-        let loginCred = await getLoginCred()
 
-        let dataPayload = {
-            "classId": filteredData.response.class,
-            "subject": filteredData.response.subject,
-            "section": filteredData.response.section,
-            "fromDate": filteredData.response.examDate,
-            "set": filteredData.response.set,
-            "page": 0,
-            "schoolId": loginData.data.school.schoolId,
-            "downloadRes": false
-        }
-        let apiObj = new scanStatusDataAction(dataPayload);
-        FetchSavedScannedData(apiObj, loginCred.schoolId, loginCred.password, filteredDatalen, localScanData)
-    }
 
-    const FetchSavedScannedData = async(api, uname, pass, filterDataLen, localScanData) => {
 
-        if (api.method === 'POST') {
-            let apiResponse = null
-            const source = axios.CancelToken.source()
-            const id = setTimeout(() => {
-                if (apiResponse === null) {
-                    source.cancel('The request timed out.');
-                }
-            }, 60000);
-            axios.post(api.apiEndPoint(), api.getBody(), {
-                auth: {
-                    username: uname,
-                    password: pass
-                }
-            })
-                .then(function (res) {
-                    callCustomModal(Strings.message_text,Strings.saved_successfully,false);
-                    apiResponse = res
-                    clearTimeout(id)
-                    api.processResponse(res)
-                    dispatch(dispatchAPIAsync(api));
-                    setScanStatusData(filterDataLen)
-                    setScannedDataIntoLocal(localScanData)
-                    setIsLoading(false)
-                })
-                .catch(function (err) {
-                    collectErrorLogs("ScanHistoryCard.js","FetchSavedScannedData",api.apiEndPoint(),err,false)
-                    console.warn("Error", err);
-                    console.warn("Error", err.response);
-                    callCustomModal(Strings.message_text,Strings.something_went_wrong_please_try_again,false);
-                    setIsLoading(false)
-                    clearTimeout(id)
-                });
-        }
-    }
 
-    function dispatchAPIAsync(api) {
+    function dispatchAPIAsync(res) {
         return {
-            type: api.type,
-            payload: api.getPayload()
+            type: Constant.SCANNED_DATA,
+            payload: res
         }
     }
 

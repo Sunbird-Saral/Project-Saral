@@ -31,6 +31,7 @@ import axios from 'axios';
 import { collectErrorLogs } from '../CollectErrorLogs';
 import { scanStatusDataAction } from './scanStatusDataAction';
 import Spinner from '../common/components/loadingIndicator';
+import constants from '../../flux/actions/constants';
 
 
 const ScanStatusLocal = ({
@@ -246,8 +247,11 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
                     apiResponse = res;
                     clearTimeout(id);
                     api.processResponse(res);
-                    callScanStatusData(false, filteredDatalen, localScanData)
+                    
+                    dispatch(dispatchAPIAsync(res.data));
+                    setScannedDataIntoLocal(localScanData)
                     setIsLoading(false)
+                    onBackPress();
                 })
                 .catch(function (err) {
                     if (err && err.response && err.response.status == 500) {
@@ -262,60 +266,10 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
         }
     }
 
-    const callScanStatusData = async (bool,filteredDatalen, localScanData) => {
-        let loginCred = await getLoginCred()
-
-        let dataPayload = {
-            "classId": filteredData.class,
-            "subject": filteredData.subject,
-            "section": filteredData.section,
-            "fromDate": filteredData.examDate,
-            "set": filteredData.set,
-            "page": 0,
-            "schoolId": loginData.data.school.schoolId,
-            "downloadRes": false
-        }
-        let apiObj = new scanStatusDataAction(dataPayload);
-        FetchSavedScannedData(apiObj, loginCred.schoolId, loginCred.password, filteredDatalen, localScanData)
-    }
-
-    const FetchSavedScannedData = async(api, uname, pass, filterDataLen, localScanData) => {
-
-        if (api.method === 'POST') {
-            let apiResponse = null
-            const source = axios.CancelToken.source()
-            const id = setTimeout(() => {
-                if (apiResponse === null) {
-                    source.cancel('The request timed out.');
-                }
-            }, 60000);
-            axios.post(api.apiEndPoint(), api.getBody(), {
-                auth: {
-                    username: uname,
-                    password: pass
-                }
-            })
-                .then(function (res) {
-                    callCustomModal(Strings.message_text,Strings.saved_successfully,false);
-                    apiResponse = res
-                    clearTimeout(id)
-                    api.processResponse(res)
-                    dispatch(dispatchAPIAsync(api));
-                    setScannedDataIntoLocal(localScanData)
-                    onBackPress();
-                })
-                .catch(function (err) {
-                    collectErrorLogs("ScanHistoryCard.js","FetchSavedScannedData",api.apiEndPoint(),err,false)
-                    callCustomModal(Strings.message_text,Strings.something_went_wrong_please_try_again,false);
-                    clearTimeout(id)
-                });
-        }
-    }
-
-    function dispatchAPIAsync(api) {
+    function dispatchAPIAsync(res) {
         return {
-            type: api.type,
-            payload: api.getPayload()
+            type: constants.SCANNED_DATA,
+            payload: res
         }
     }
 
