@@ -1,4 +1,5 @@
 const Mark = require('../models/marks')
+const User = require('../models/users')
 const Helper = require('../middleware/helper')
 const { stringObject } = require('../utils/commonUtils')
 
@@ -82,19 +83,19 @@ exports.getSaveScan = async (req, res, next) => {
             req.body.schoolId = req.body.schoolId.toLowerCase()
         }
 
-        if (req.body.userId) {
+        const match = {}
+
+        if (req.body.userId && !req.body.schoolId) {
             req.body.userId = req.body.userId.toLowerCase()
+            const userData = await User.findOne({userId: req.body.userId})
+            match.schoolId = userData.schoolId
         }
 
-        const { schoolId, classId, section, subject, fromDate, roiId, userId } = req.body
 
-        const match = {}
+        const { schoolId, classId, section, subject, fromDate, roiId } = req.body
+    
         if (schoolId) {
             match.schoolId = schoolId
-        }
-
-        if (userId) {
-            match.userId = userId
         }
 
         if(fromDate){
@@ -123,11 +124,11 @@ exports.getSaveScan = async (req, res, next) => {
             req.body.limit = 0;
             req.body.page = 1;
         }
-        
+       
         const savedScan = await Mark.find(match, { _id: 0, __v: 0 })
             .limit(parseInt(req.body.limit) * 1)
             .skip((parseInt(parseInt(req.body.page)) - 1) * parseInt(parseInt(req.body.limit)))
-
+     
 
         res.status(200).json({ data: savedScan })
     } catch (e) {
