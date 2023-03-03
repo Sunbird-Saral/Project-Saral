@@ -1,5 +1,5 @@
 const configs = {
-  BASE_URL: 'TO_BE_REPLACED'
+  BASE_URL: 'TO_BEREPLACED'
 }
 
 export default configs;
