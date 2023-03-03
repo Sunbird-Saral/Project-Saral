@@ -168,12 +168,18 @@ const ScanHistoryCard = ({
                 .then(function (res) {
                     apiResponse = res;
                     clearTimeout(id);
-                
-                    dispatch(dispatchAPIAsync(res.data));
-                    setScanStatusData(filteredDatalen);
-                    setScannedDataIntoLocal(localScanData);
-                    setIsLoading(false);
-                    callCustomModal(Strings.message_text,Strings.saved_successfully,false);
+                    let hasMessage = res ? typeof res.data == "string" ? true : false : false
+                    if (hasMessage) {
+                        api.processResponse(res);
+                        callScanStatusData(filteredDatalen, localScanData)
+                        
+                    } else {
+                        dispatch(dispatchAPIAsync(res.data));
+                        setScanStatusData(filteredDatalen);
+                        setScannedDataIntoLocal(localScanData);
+                        callCustomModal(Strings.message_text,Strings.saved_successfully,false);
+                        setIsLoading(false);
+                    }
                 })
                 .catch(function (err) {
                     collectErrorLogs("ScanHistoryCard.js","saveScanData",api.apiEndPoint(),err,false);
@@ -184,14 +190,71 @@ const ScanHistoryCard = ({
         }
     }
 
+    const callScanStatusData = async (filteredDatalen, localScanData) => {
+        let loginCred = await getLoginCred()
 
+        let dataPayload = {
+            "classId": filteredData.response.class,
+            "subject": filteredData.response.subject,
+            "section": filteredData.response.section,
+            "fromDate": filteredData.response.examDate,
+            "set": filteredData.response.set,
+            "page": 0,
+            "schoolId": loginData.data.school.schoolId,
+            "downloadRes": false
+        }
+        let apiObj = new scanStatusDataAction(dataPayload);
+        FetchSavedScannedData(apiObj, loginCred.schoolId, loginCred.password, filteredDatalen, localScanData)
+    }
 
+    const FetchSavedScannedData = async(api, uname, pass, filterDataLen, localScanData) => {
 
+        if (api.method === 'POST') {
+            let apiResponse = null
+            const source = axios.CancelToken.source()
+            const id = setTimeout(() => {
+                if (apiResponse === null) {
+                    source.cancel('The request timed out.');
+                }
+            }, 60000);
+            axios.post(api.apiEndPoint(), api.getBody(), {
+                auth: {
+                    username: uname,
+                    password: pass
+                }
+            })
+                .then(function (res) {
+                    callCustomModal(Strings.message_text,Strings.saved_successfully,false);
+                    apiResponse = res
+                    clearTimeout(id)
+                    api.processResponse(res)
+                    dispatch(dispatchAPIAsyncSavedData(api));
+                    setScanStatusData(filterDataLen)
+                    setScannedDataIntoLocal(localScanData)
+                    setIsLoading(false)
+                })
+                .catch(function (err) {
+                    collectErrorLogs("ScanHistoryCard.js","FetchSavedScannedData",api.apiEndPoint(),err,false)
+                    console.warn("Error", err);
+                    console.warn("Error", err.response);
+                    callCustomModal(Strings.message_text,Strings.something_went_wrong_please_try_again,false);
+                    setIsLoading(false)
+                    clearTimeout(id)
+                });
+        }
+    }
 
     function dispatchAPIAsync(res) {
         return {
             type: Constant.SCANNED_DATA,
             payload: res
+        }
+    }
+
+    function dispatchAPIAsyncSavedData(api) {
+        return {
+            type: api.type,
+            payload: api.getPayload()
         }
     }
 
