@@ -143,8 +143,8 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
                 }   
             })
 
-            let hasSet = filteredData.hasOwnProperty("set") ? filteredData.set.length >= 0 ? filteredData.set : '' : ''
-            if (hasSet.length >= 0) {
+            let hasSet = filteredData.hasOwnProperty("set") ? filteredData.set.length >= 0 ? filteredData.set : '' : null
+            if (hasSet != null && hasSet != undefined &&  hasSet.length >= 0) {
                 let findSetStudent = filterscandata.length > 0 ? filterscandata[0].studentsMarkInfo.filter((item) => {
                     if (hasSet.length >= 0) {
                         return item.set == hasSet;
@@ -273,7 +273,6 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
             "set": filteredData.set,
             "page": 0,
             "schoolId": loginData.data.school.schoolId,
-            "userId": loginData.data.school.userId,
             "downloadRes": false
         }
         let apiObj = new scanStatusDataAction(dataPayload);

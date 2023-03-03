@@ -134,10 +134,10 @@ class MyScanComponent extends Component {
     //functions
     sumOfLocalData = async () => {
         const { filteredData, roiData } = this.props
-        const data = await getScannedDataFromLocal()
+         const data =  await getScannedDataFromLocal();
         const loginCred = await getLoginCred()
         let len = 0
-        if (data != null) {
+        if (data) {
             let filter = data.filter((e) => {
                 let findSection = false
                 findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.section)
@@ -153,8 +153,11 @@ class MyScanComponent extends Component {
                 }
             });
 
-            let hasSet = filteredData ? filteredData.set ? filteredData.set.length >= 0 ? filteredData.set : "" : "" : ""
-            if (hasSet.length >= 0 && filter.length > 0) {
+
+            let hasSet = filteredData 
+            ?
+             filteredData.hasOwnProperty('set') ? filteredData.set.length >= 0 ? filteredData.set : "" : null : ""
+            if (hasSet != null && hasSet != undefined && hasSet.length >= 0 && filter.length > 0) {
                 let findSetStudent = filter.length > 0 ? filter[0].studentsMarkInfo.filter((item) => {
                     if (hasSet.length >= 0) {
                         return item.set == hasSet;

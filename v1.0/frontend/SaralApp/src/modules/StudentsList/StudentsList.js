@@ -149,8 +149,7 @@ useEffect(() => {
 
         if (getSavedScanCache != null) {
             let result = getSavedScanCache.findIndex((e)=> {
-                return setValue.length > 0 ?
-                 e.key == loginData.data.school.userId && e.classId == filteredData.class && e.subject == filteredData.subject && e.section == filteredData.section && e.fromDate == filteredData.examDate && filteredData.set == e.set : e.key == loginData.data.school.userId && e.classId == filteredData.class && e.subject == filteredData.subject && e.section == filteredData.section && e.fromDate == filteredData.examDate
+                return setValue.length > 0 ? e.key == loginData.data.school.schoolId && e.classId == filteredData.class && e.subject == filteredData.subject && e.section == filteredData.section && e.fromDate == filteredData.examDate && filteredData.set == e.set : e.key == loginData.data.school.schoolId && e.classId == filteredData.class && e.subject == filteredData.subject && e.section == filteredData.section && e.fromDate == filteredData.examDate
             });
             if (result > -1) {
                 getSavedScanCache[result].data = savedScanData
@@ -159,7 +158,7 @@ useEffect(() => {
                 }
             } else {
                 let payload = {
-                    key :`${loginData.data.school.userId}`,
+                    key :`${loginData.data.school.schoolId}`,
                     classId: filteredData.class,
                     subject: filteredData.subject,
                     section: filteredData.section,
