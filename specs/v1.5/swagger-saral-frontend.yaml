@@ -115,8 +115,10 @@ paths:
           description: Create marks for students .Application may send  "X-App-Version" in header.
 
       responses:
-        "200":
-          description: "Data Saved Successfully"
+        "201":
+          description: "successful operation"
+          schema: 
+            $ref: "#/definitions/GetSavedScanResponse"
         "400":
           description: "Custom message can be set to message about the error or failure"
         "500":
