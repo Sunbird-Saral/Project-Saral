@@ -286,6 +286,9 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
             "schoolId": loginData.data.school.schoolId,
             "downloadRes": false
         }
+        if (filteredData.hasOwnProperty("set")) {
+            dataPayload.set = filteredData.set
+        }
         let apiObj = new scanStatusDataAction(dataPayload);
         FetchSavedScannedData(apiObj, loginCred.schoolId, loginCred.password, filteredDatalen, localScanData)
     }
@@ -310,6 +313,7 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
                     callCustomModal(Strings.message_text,Strings.saved_successfully,false);
                     apiResponse = res
                     clearTimeout(id)
+                    setIsLoading(false)
                     api.processResponse(res)
                     dispatch(dispatchAPIAsync(api));
                     setScannedDataIntoLocal(localScanData)
