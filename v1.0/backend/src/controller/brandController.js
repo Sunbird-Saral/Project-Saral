@@ -5,7 +5,7 @@ const Brand = require('../models/brand')
 exports.fetchBrandData = async (req, res, next) => {
     try {
         const school = await School.findOne({ schoolId: req.school.schoolId })
-        const brand = await Brand.findOne({ state: "jk", schoolId: school.schoolId }, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0, state: 0 })
+        const brand = await Brand.findOne({ state: school.state, schoolId: school.schoolId }, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0, state: 0 })
 
         if (brand && typeof brand == "object") {
             res.status(200).json(brand)
