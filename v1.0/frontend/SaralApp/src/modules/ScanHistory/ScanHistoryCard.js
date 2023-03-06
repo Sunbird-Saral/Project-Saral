@@ -50,13 +50,18 @@ const ScanHistoryCard = ({
         getStudentList()
     }, [])
     const getSaveCount = () => {
-        let hasSet = filteredData.response.hasOwnProperty("set") ? filteredData.response.set.length >= 0 ? filteredData.response.set : '' : ''
+        let hasSet = filteredData.response.hasOwnProperty("set") ? filteredData.response.set.length >= 0 ? filteredData.response.set : '' : null
        
         let data =
             typeof (scanedData.response) === "object" ?
                 scanedData.response.data ?
                     scanedData.response.data.filter((o, index) => {
-                        let stdCondition = hasSet.length >= 0 ? o.studentAvailability && o.marksInfo.length > 0 && hasSet == o.set : o.studentAvailability && o.marksInfo.length > 0 && o.examDate == filteredData.response.examDate
+                        let stdCondition = hasSet == null ? 
+                         o.studentAvailability && o.marksInfo.length > 0 && o.examDate == filteredData.response.examDate
+                         :
+                          hasSet.length >= 0 ? o.studentAvailability && o.marksInfo.length > 0 && hasSet == o.set 
+                         :
+                          false
                         if (stdCondition) {
                             return true
                         }
@@ -184,7 +189,6 @@ const ScanHistoryCard = ({
             "set": filteredData.response.set,
             "page": 0,
             "schoolId": loginData.data.school.schoolId,
-            "userId": loginData.data.school.userId,
             "downloadRes": false
         }
         let apiObj = new scanStatusDataAction(dataPayload);
