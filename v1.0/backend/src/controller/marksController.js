@@ -68,7 +68,6 @@ exports.saveMarks = async (req, res, next) => {
                 schoolId: data.schoolId,
                 classId: data.classId,
                 section: data.section,
-                studentId: data.studentId,
                 subject: data.subject,
                 examDate: data.examDate
         }
