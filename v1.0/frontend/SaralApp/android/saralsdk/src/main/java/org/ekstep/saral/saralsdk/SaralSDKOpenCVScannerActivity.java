@@ -144,8 +144,6 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                     }
                 if (mIsClassifierRequestSubmitted && mTotalClassifiedCount >= mPredictedDigits.size()) {
                     mIsScanningComplete     = true;
-                } else {
-                    timerTask();
                 }
 
                 if (mIsScanningComplete) {
@@ -170,8 +168,6 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
 
                 if (mIsClassifierRequestSubmitted && mTotalClassifiedCount >= mPredictedDigits.size()) {
                     mIsScanningComplete     = true;
-                } else {
-                    timerTask();
                 }
 
                 if (mIsScanningComplete) {
@@ -216,8 +212,6 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                     }
                 if (mIsClassifierRequestSubmitted && mTotalClassifiedCount >= mPredictedDigits.size()) {
                     mIsScanningComplete     = true;
-                } else {
-                    timerTask();
                 }
 
                 if (mIsScanningComplete) {
@@ -242,8 +236,6 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
 
                 if (mIsClassifierRequestSubmitted && mTotalClassifiedCount >= mPredictedDigits.size()) {
                     mIsScanningComplete     = true;
-                } else {
-                    timerTask();
                 }
 
                 if (mIsScanningComplete) {
@@ -413,98 +405,6 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
             Log.e(TAG, "unable to parse LayoutConfigs object");
             return null;
         }
-    }
-
-    private void setDefaulValue(){
-        try {
-            JSONObject layoutConfigs    = new JSONObject(mlayoutConfigs);
-            JSONObject layoutObject     = layoutConfigs.getJSONObject("layout");
-            JSONArray  cells            = layoutObject.getJSONArray("cells");
-
-
-            for (int i = 0; i < cells.length(); i++) {
-                JSONArray cellROIs      = cells.getJSONObject(i).getJSONArray("rois");
-                JSONObject cell = cells.getJSONObject(i);
-                boolean includeRois = (cell.has("page") && pageNumber!=null && cell.getString("page").equals(pageNumber)) || (!cell.has("page"));
-                if (includeRois) {
-                    for (int j = 0; j < cellROIs.length(); j++) {
-                        JSONObject roi      = cellROIs.getJSONObject(j);
-
-                        if (roi.getString("extractionMethod").equals("CELL_OMR")) {
-                            JSONObject result  = new JSONObject();
-                                result.put("prediction", 0);
-                                result.put("confidence", new Double(1.00));
-
-                            if(!roi.has("result")){
-                                roi.put("result", result);
-                            }else{
-                                JSONObject resultObj = roi.getJSONObject("result");
-                                if(resultObj.getString("prediction") != null){
-                                    roi.put("result", result);
-                                }
-                            }
-                        }
-
-                        if (roi.getString("extractionMethod").equals("NUMERIC_CLASSIFICATION")){
-                            JSONObject result  = new JSONObject();
-                            result.put("prediction", 1);
-                            result.put("confidence", new Double(1.00));
-
-                            if(!roi.has("result")){
-                                roi.put("result", result);
-                            }else{
-                                JSONObject resultObj = roi.getJSONObject("result");
-                                if(resultObj.getString("prediction") != null){
-                                    roi.put("result", result);
-                                }
-                            }
-                        }
-
-                        if (roi.get("extractionMethod").equals("BLOCK_ALPHANUMERIC_CLASSIFICATION")){
-                            JSONObject result  = new JSONObject();
-                            result.put("prediction", "A");
-                            result.put("confidence", new Double(1.00));
-
-                            if(!roi.has("result")){
-                                roi.put("result", result);
-                            }else{
-                                JSONObject resultObj = roi.getJSONObject("result");
-                                if(resultObj.getString("prediction") != null){
-                                    roi.put("result", result);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-
-
-            //media sound
-            MediaActionSound sound  = new MediaActionSound();
-            sound.play(MediaActionSound.SHUTTER_CLICK);
-
-            ReactInstanceManager mReactInstanceManager  = getReactNativeHost().getReactInstanceManager();
-            ReactContext reactContext                   = mReactInstanceManager.getCurrentReactContext();
-            Intent intent                               = new Intent(reactContext, SaralSDKOpenCVScannerActivity.class);
-            intent.putExtra("layoutConfigsResult", layoutConfigs.toString());
-            mReactInstanceManager.onActivityResult(this, 1, 2, intent);
-            finish();
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void timerTask(){
-        new android.os.Handler(Looper.getMainLooper()).postDelayed(
-                new Runnable() {
-                    public void run() {
-                        Log.i("tag", "This'll run 300 milliseconds later");
-                        setDefaulValue();
-                    }
-                },
-                1000);
     }
 
     private void processScanningCompleted() {
