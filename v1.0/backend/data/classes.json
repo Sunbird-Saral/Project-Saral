@@ -2,13 +2,13 @@
   {
     "sections": [
       {
-        "section": "D"
-      },
-      {
         "section": "B"
       },
       {
         "section": "C"
+      },
+      {
+        "section": "D"
       }
     ],
     "classId": "2",
@@ -18,13 +18,13 @@
   {
     "sections": [
       {
-        "section": "D"
-      },
-      {
         "section": "B"
       },
       {
         "section": "C"
+      },
+      {
+        "section": "D"
       }
     ],
     "classId": "3",
@@ -34,13 +34,13 @@
   {
     "sections": [
       {
-        "section": "D"
-      },
-      {
         "section": "B"
       },
       {
         "section": "C"
+      },
+      {
+        "section": "D"
       }
     ],
     "classId": "4",
@@ -50,13 +50,13 @@
   {
     "sections": [
       {
-        "section": "D"
-      },
-      {
         "section": "B"
       },
       {
         "section": "C"
+      },
+      {
+        "section": "D"
       }
     ],
     "classId": "5",
@@ -66,13 +66,13 @@
   {
     "sections": [
       {
-        "section": "D"
-      },
-      {
         "section": "B"
       },
       {
         "section": "C"
+      },
+      {
+        "section": "D"
       }
     ],
     "classId": "6",
@@ -82,13 +82,13 @@
   {
     "sections": [
       {
-        "section": "D"
-      },
-      {
         "section": "B"
       },
       {
         "section": "C"
+      },
+      {
+        "section": "D"
       }
     ],
     "classId": "7",
@@ -98,13 +98,13 @@
   {
     "sections": [
       {
-        "section": "D"
-      },
-      {
         "section": "B"
       },
       {
         "section": "C"
+      },
+      {
+        "section": "D"
       }
     ],
     "classId": "8",
@@ -114,13 +114,13 @@
   {
     "sections": [
       {
-        "section": "D"
-      },
-      {
         "section": "B"
       },
       {
         "section": "C"
+      },
+      {
+        "section": "D"
       }
     ],
     "classId": "2",
@@ -130,13 +130,13 @@
   {
     "sections": [
       {
-        "section": "D"
-      },
-      {
         "section": "B"
       },
       {
         "section": "C"
+      },
+      {
+        "section": "D"
       }
     ],
     "classId": "3",
@@ -146,13 +146,13 @@
   {
     "sections": [
       {
-        "section": "D"
-      },
-      {
         "section": "B"
       },
       {
         "section": "C"
+      },
+      {
+        "section": "D"
       }
     ],
     "classId": "3",
@@ -162,13 +162,13 @@
   {
     "sections": [
       {
-        "section": "D"
-      },
-      {
         "section": "B"
       },
       {
         "section": "C"
+      },
+      {
+        "section": "D"
       }
     ],
     "classId": "4",
@@ -178,7 +178,7 @@
   {
     "sections": [
       {
-        "section": "D"
+        "section": "A"
       },
       {
         "section": "B"
@@ -187,7 +187,7 @@
         "section": "C"
       },
       {
-        "section": "A"
+        "section": "D"
       }
     ],
     "classId": "5",
@@ -197,13 +197,13 @@
   {
     "sections": [
       {
-        "section": "D"
-      },
-      {
         "section": "B"
       },
       {
         "section": "C"
+      },
+      {
+        "section": "D"
       }
     ],
     "classId": "6",
@@ -213,13 +213,13 @@
   {
     "sections": [
       {
-        "section": "D"
-      },
-      {
         "section": "B"
       },
       {
         "section": "C"
+      },
+      {
+        "section": "D"
       }
     ],
     "classId": "7",
@@ -239,13 +239,13 @@
   {
     "sections": [
       {
-        "section": "D"
-      },
-      {
         "section": "B"
       },
       {
         "section": "C"
+      },
+      {
+        "section": "D"
       }
     ],
     "classId": "2",

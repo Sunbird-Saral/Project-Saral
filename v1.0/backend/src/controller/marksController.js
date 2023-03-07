@@ -19,7 +19,6 @@ exports.saveMarks = async (req, res, next) => {
     const createdOn = new Date().getTime()
     const roiId = req.body.roiId
 
-
     req.body.studentsMarkInfo.forEach(studentsData => {
         const marksData = new Mark({
             ...studentsData,
