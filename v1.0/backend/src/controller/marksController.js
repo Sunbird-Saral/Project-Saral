@@ -3,10 +3,6 @@ const User = require('../models/users')
 const Helper = require('../middleware/helper')
 const { stringObject } = require('../utils/commonUtils')
 
-const fromTime = "T00:00:00"
-const toTime = "T23:59:59"
-
-
 exports.saveMarks = async (req, res, next) => {
     const marks = []
 
@@ -42,30 +38,58 @@ exports.saveMarks = async (req, res, next) => {
 
         await Helper.lockScreenValidator(req.school)
         
+        // for (let data of marks) {
+        //     if (!data.examDate && data.examDate == undefined) {
+        //         data.examDate = new Date().toLocaleDateString()
+        //     }
 
-        for (let data of marks) {
-            if (!data.examDate && data.examDate == undefined) {
-                data.examDate = new Date().toLocaleDateString()
-            }
+        //     let studentMarksExist = await Mark.findOne({ schoolId: data.schoolId, studentId: data.studentId, classId: data.classId, subject: data.subject, examDate: data.examDate, roiId: data.roiId })
 
-            let studentMarksExist = await Mark.findOne({ schoolId: data.schoolId, studentId: data.studentId, classId: data.classId, subject: data.subject, examDate: data.examDate, roiId: data.roiId })
+        //     if (!studentMarksExist) {
+        //         await Mark.create(data)
+        //     } else {
+        //         if (data.schoolId == studentMarksExist.schoolId && data.studentId == studentMarksExist.studentId && data.classId == studentMarksExist.classId && data.subject == studentMarksExist.subject && data.examDate == studentMarksExist.examDate) {
             
-            if (!studentMarksExist) {
-                await Mark.create(data)
-            } else {
-                if (data.schoolId == studentMarksExist.schoolId && data.studentId == studentMarksExist.studentId && data.classId == studentMarksExist.classId && data.subject == studentMarksExist.subject && data.examDate == studentMarksExist.examDate) {
+        //             let lookup = {
+        //                 studentId: data.studentId,
+        //                 subject: data.subject,
+        //                 examDate: data.examDate
+        //             }
+        //             let update = { $set: { studentIdTrainingData: data.studentIdTrainingData, predictedStudentId: data.predictedStudentId, studentAvailability: data.studentAvailability, marksInfo: data.marksInfo, maxMarksTrainingData: data.maxMarksTrainingData, maxMarksPredicted: data.maxMarksPredicted, securedMarks: data.securedMarks, totalMarks: data.totalMarks, obtainedMarksTrainingData: data.obtainedMarksTrainingData, obtainedMarksPredicted: data.obtainedMarksPredicted, set: data.set, userId: data.userId } }
+        //             await Mark.update(lookup, update)
+        //         }
+        //     }
+        // }
 
-                    let lookup = {
-                        studentId: data.studentId,
-                        subject: data.subject,
-                        examDate: data.examDate
+        let updates = [];
+        for (let i = 0; i < marks.length; i++) {
+
+            updates.push({
+                updateOne: {
+                    filter: {
+                        studentId: marks[i].studentId,
+                        subject: marks[i].subject,
+                        examDate: marks[i].examDate
+                    },
+                    update: { $set: { studentIdTrainingData: marks[i].studentIdTrainingData, studentId: marks[i].studentId, predictionConfidence: marks[i].predictionConfidence, schoolId: marks[i].schoolId, examDate: marks[i].examDate, predictedStudentId: marks[i].predictedStudentId, studentAvailability: marks[i].studentAvailability, marksInfo: marks[i].marksInfo, maxMarksTrainingData: marks[i].maxMarksTrainingData, maxMarksPredicted: marks[i].maxMarksPredicted, securedMarks: marks[i].securedMarks, totalMarks: marks[i].totalMarks, obtainedMarksTrainingData: marks[i].obtainedMarksTrainingData, obtainedMarksPredicted: marks[i].obtainedMarksPredicted, set: marks[i].set, subject: marks[i].subject, classId: marks[i].classId, section: marks[i].section, subject: marks[i].subject, examId: marks[i].examId, userId: marks[i].userId } },
+                    upsert: true
                     }
-                    let update = { $set: { studentIdTrainingData: data.studentIdTrainingData, predictedStudentId: data.predictedStudentId, studentAvailability: data.studentAvailability, marksInfo: data.marksInfo, maxMarksTrainingData: data.maxMarksTrainingData, maxMarksPredicted: data.maxMarksPredicted, securedMarks: data.securedMarks, totalMarks: data.totalMarks, obtainedMarksTrainingData: data.obtainedMarksTrainingData, obtainedMarksPredicted: data.obtainedMarksPredicted, set: data.set, userId: data.userId } }
-                    await Mark.update(lookup, update)
+
+            })
                 }
+
+        await Mark.bulkWrite(updates);
+
+        let match = {
+            schoolId: marks[0].schoolId,
+            classId: marks[0].classId,
+            section: marks[0].section,
+            examDate: marks[0].examDate,
+            subject: marks[0].subject
             }
-        }
-        res.status(200).json({ message: 'Data Saved Successfully' })
+
+        let marksData = await Mark.find(match, { _id: 0, __v: 0 })
+        res.status(200).json({ data: marksData })
     } catch (e) {
         if (e && e.message == stringObject().lockScreen) {
             res.status(500).json({ error: e.message })
