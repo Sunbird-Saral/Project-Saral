@@ -31,6 +31,7 @@ import axios from 'axios';
 import { collectErrorLogs } from '../CollectErrorLogs';
 import { scanStatusDataAction } from './scanStatusDataAction';
 import Spinner from '../common/components/loadingIndicator';
+import constants from '../../flux/actions/constants';
 
 
 const ScanStatusLocal = ({
@@ -245,9 +246,20 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
                 .then(function (res) {
                     apiResponse = res;
                     clearTimeout(id);
-                    api.processResponse(res);
-                    callScanStatusData(false, filteredDatalen, localScanData)
-                    setIsLoading(false)
+
+                    let hasMessage = res ? typeof res.data == "string" ? true : false : false
+                    if (hasMessage) {
+                        api.processResponse(res);
+                        callScanStatusData(false, filteredDatalen, localScanData)
+
+                    } else {
+                        dispatch(dispatchAPIAsyncSavedData(res.data));
+                        setScannedDataIntoLocal(localScanData)
+                        setIsLoading(false)
+                        onBackPress();
+                        callCustomModal(Strings.message_text,Strings.saved_successfully,false);
+                    }
+
                 })
                 .catch(function (err) {
                     if (err && err.response && err.response.status == 500) {
@@ -270,10 +282,12 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
             "subject": filteredData.subject,
             "section": filteredData.section,
             "fromDate": filteredData.examDate,
-            "set": filteredData.set,
             "page": 0,
             "schoolId": loginData.data.school.schoolId,
             "downloadRes": false
+        }
+        if (filteredData.hasOwnProperty("set")) {
+            dataPayload.set = filteredData.set
         }
         let apiObj = new scanStatusDataAction(dataPayload);
         FetchSavedScannedData(apiObj, loginCred.schoolId, loginCred.password, filteredDatalen, localScanData)
@@ -299,6 +313,7 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
                     callCustomModal(Strings.message_text,Strings.saved_successfully,false);
                     apiResponse = res
                     clearTimeout(id)
+                    setIsLoading(false)
                     api.processResponse(res)
                     dispatch(dispatchAPIAsync(api));
                     setScannedDataIntoLocal(localScanData)
@@ -318,6 +333,13 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
             payload: api.getPayload()
         }
     }
+    
+    function dispatchAPIAsyncSavedData(res) {
+            return {
+                type: constants.SCANNED_DATA,
+                payload: res
+            }
+        }
 
     return (
         <View style={styles.container}>

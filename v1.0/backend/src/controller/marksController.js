@@ -41,7 +41,6 @@ exports.saveMarks = async (req, res, next) => {
     try {
 
         await Helper.lockScreenValidator(req.school)
-        
 
         for (let data of marks) {
             if (!data.examDate && data.examDate == undefined) {
@@ -49,7 +48,7 @@ exports.saveMarks = async (req, res, next) => {
             }
 
             let studentMarksExist = await Mark.findOne({ schoolId: data.schoolId, studentId: data.studentId, classId: data.classId, subject: data.subject, examDate: data.examDate, roiId: data.roiId })
-            
+
             if (!studentMarksExist) {
                 await Mark.create(data)
             } else {
@@ -65,13 +64,23 @@ exports.saveMarks = async (req, res, next) => {
                 }
             }
         }
-        res.status(200).json({ status: 'success', message: 'Data Saved Successfully' })
+
+        let match = {
+            schoolId: marks[0].schoolId,
+            classId: marks[0].classId,
+            section: marks[0].section,
+            examDate: marks[0].examDate,
+            subject: marks[0].subject
+        }
+
+        let marksData = await Mark.find(match, { _id: 0, __v: 0 })
+        res.status(200).json({ data: marksData })
     } catch (e) {
         if (e && e.message == stringObject().lockScreen) {
-            res.status(500).json({ status: "fail", error: e.message })
+            res.status(500).json({ error: e.message })
         }
         else {
-            res.status(400).json({ status: "fail", e })
+            res.status(400).json({ e })
         }
     }
 }
@@ -86,18 +95,18 @@ exports.getSaveScan = async (req, res, next) => {
 
         if (req.body.userId && !req.body.schoolId) {
             req.body.userId = req.body.userId.toLowerCase()
-            const userData = await User.findOne({userId: req.body.userId})
+            const userData = await User.findOne({ userId: req.body.userId })
             match.schoolId = userData.schoolId
         }
 
 
         const { schoolId, classId, section, subject, fromDate, roiId } = req.body
-    
+
         if (schoolId) {
             match.schoolId = schoolId
         }
 
-        if(fromDate){
+        if (fromDate) {
             match.examDate = fromDate
         }
 
@@ -123,11 +132,11 @@ exports.getSaveScan = async (req, res, next) => {
             req.body.limit = 0;
             req.body.page = 1;
         }
-       
+
         const savedScan = await Mark.find(match, { _id: 0, __v: 0 })
             .limit(parseInt(req.body.limit) * 1)
             .skip((parseInt(parseInt(req.body.page)) - 1) * parseInt(parseInt(req.body.limit)))
-     
+
 
         res.status(200).json({ data: savedScan })
     } catch (e) {
