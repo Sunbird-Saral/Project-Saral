@@ -1,11 +1,8 @@
-const School = require('../models/school')
-const User = require('../models/users')
-const ClassModel = require("../models/classModel")
-const Student = require("../models/students")
-const Mark = require("../models/marks")
+const Schools = require('../models/school')
+const Users = require('../models/users')
+const Classes = require("../models/classModel")
 const Helper = require('../middleware/helper')
 const { stringObject } = require('../utils/commonUtils');
-const { auth } = require('../middleware/auth');
 
 exports.loginSchool = async (req, res, next) => {
   try {
@@ -16,11 +13,11 @@ exports.loginSchool = async (req, res, next) => {
   
     const users = await Helper.findByCredentials(userId, req.body.password)
     
-    const schools = await School.findOne({ schoolId: users.schoolId })
+    const schools = await Schools.findOne({ schoolId: users.schoolId })
 
     await Helper.lockScreenValidator(schools)
 
-    const token = await User.generateAuthToken(users)
+    const token = await Users.generateAuthToken(users)
 
     let classes = []
     let school = {
@@ -47,7 +44,7 @@ exports.loginSchool = async (req, res, next) => {
     }
 
     if (req.body.classes) {
-      const classData = await ClassModel.findClassesBySchools(schools.schoolId)
+      const classData = await Classes.findClassesBySchools(schools.schoolId)
 
       classData.forEach(data => {
         const { sections, classId, className } = data

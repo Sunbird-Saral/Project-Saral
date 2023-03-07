@@ -1,14 +1,12 @@
 const express = require('express')
 const path = require('path')
-const Mark = require('../models/marks')
-const School = require('../models/school')
+const Marks = require('../models/marks')
+const Schools = require('../models/school')
 const Exams = require('../models/exams')
-const Class = require('../models/classModel')
-const Lock = require('../models/lock')
+const Classes = require('../models/classModel')
 const { auth, basicAuth } = require('../middleware/auth')
 const excel = require('exceljs');
 const { getFilePath, deleteAllfilesFromReports, stringObject } = require('../utils/commonUtils')
-const Helper = require('../middleware/helper')
 const router = new express.Router()
 const _ = require('lodash')
 const fs = require('fs');
@@ -20,7 +18,7 @@ router.post('/getSavedScan', basicAuth,marksController.getSaveScan)
 
 const fetchAllSavedData = async (req) => {
     try {
-        const savedScan = await Mark.find({})
+        const savedScan = await Marks.find({})
         return {
             data: savedScan,
         }
@@ -48,8 +46,8 @@ router.get('/getMarksReport',async (req, res) => {
 router.get('/createReport', async (req, res) => {
     try {
         let exams = await Exams.find({})
-        let classes = await Class.find({})
-        let schools = await School.find({})
+        let classes = await Classes.find({})
+        let schools = await Schools.find({})
         if (exams && classes && schools) {
             let examsGroupByName = _.groupBy(exams, 'examName')
             let classesGroupById = _.groupBy(classes, 'classId')
@@ -93,7 +91,7 @@ router.get('/generateReport', async (req, res) => {
 
 
     try {
-        const savedScan = await Mark.find(match)
+        const savedScan = await Marks.find(match)
         if (!savedScan || savedScan.length == 0) {
             res.render('index', { "message": "No data available. Please try again" });
             return
@@ -167,7 +165,7 @@ router.get('/downloadReport', (req, res) => {
 router.get('/downloadSchoolList', async (req, res) => {
     deleteAllfilesFromReports()
     try {
-        const school = await School.find({})
+        const school = await Schools.find({})
         if (!school || school.length == 0) {
             res.render('index', { "message": "No data available. Please try again" });
             return

@@ -1,9 +1,7 @@
-const School = require('../models/school')
-const Student = require("../models/students")
+const Students = require("../models/students")
 const Marks = require("../models/marks")
-const Exam = require('../models/exams')
+const Exams = require('../models/exams')
 const Helper = require('../middleware/helper')
-const { stringObject } = require('../utils/commonUtils');
 
 
 exports.fetchStudentsandExams = async (req, res, next) => {
@@ -38,7 +36,7 @@ exports.fetchStudentsandExams = async (req, res, next) => {
 
         await Helper.lockScreenValidator(req.school)
 
-        const students = await Student.find(match, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 }).lean()
+        const students = await Students.find(match, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 }).lean()
 
 
         for (let student of students) {
@@ -62,7 +60,7 @@ exports.fetchStudentsandExams = async (req, res, next) => {
                 }
 
 
-        const exams = await Exam.find(examMatch, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 })
+        const exams = await Exams.find(examMatch, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 })
 
         res.status(200).json({
             students, exams
