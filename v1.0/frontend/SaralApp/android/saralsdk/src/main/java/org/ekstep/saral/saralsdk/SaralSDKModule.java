@@ -31,7 +31,6 @@ import org.opencv.android.OpenCVLoader;
 public class SaralSDKModule extends ReactContextBaseJavaModule implements ActivityEventListener {
     private static final String TAG             = "SrlSDK::Module";
     Promise mPromise                            = null;
-    int     timeInMiliSecond                        = 10000;
 
     private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(getReactApplicationContext()) {
         @Override
@@ -93,98 +92,6 @@ public class SaralSDKModule extends ReactContextBaseJavaModule implements Activi
 
     }
 
-    private void timerTask(String layoutSchema, String pageNumber){
-        new android.os.Handler(Looper.getMainLooper()).postDelayed(
-                new Runnable() {
-                    public void run() {
-                        new AlertDialog.Builder(getCurrentActivity())
-                                .setTitle("Message")
-                                .setMessage("Do you want to contiue with manual edit screen ?")
-                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        setDefaultValue(layoutSchema, pageNumber);
-                                    }
-                                })
-                                .setNegativeButton("No",null)
-                                .show();
-                    }
-                },
-                timeInMiliSecond);
-    }
-
-    private void setDefaultValue(String mlayoutConfigs, String pageNumber){
-        try {
-            JSONObject layoutConfigs    = new JSONObject(mlayoutConfigs);
-            JSONObject layoutObject     = layoutConfigs.getJSONObject("layout");
-            JSONArray  cells            = layoutObject.getJSONArray("cells");
-
-            for (int i = 0; i < cells.length(); i++) {
-                JSONArray cellROIs      = cells.getJSONObject(i).getJSONArray("rois");
-                JSONObject cell = cells.getJSONObject(i);
-                boolean includeRois = (cell.has("page") && pageNumber!=null && cell.getString("page").equals(pageNumber)) || (!cell.has("page"));
-                if (includeRois) {
-                    for (int j = 0; j < cellROIs.length(); j++) {
-                        JSONObject roi      = cellROIs.getJSONObject(j);
-
-                        if (roi.getString("extractionMethod").equals("CELL_OMR")) {
-                            JSONObject result  = new JSONObject();
-                            result.put("prediction", 0);
-                            result.put("confidence", new Double(1.00));
-
-                            if(!roi.has("result")){
-                                roi.put("result", result);
-                            }else{
-                                JSONObject resultObj = roi.getJSONObject("result");
-                                if(resultObj.getString("prediction") != null){
-                                    roi.put("result", result);
-                                }
-                            }
-                        }
-
-                        if (roi.getString("extractionMethod").equals("NUMERIC_CLASSIFICATION")){
-                            JSONObject result  = new JSONObject();
-                            result.put("prediction", 1);
-                            result.put("confidence", new Double(1.00));
-
-                            if(!roi.has("result")){
-                                roi.put("result", result);
-                            }else{
-                                JSONObject resultObj = roi.getJSONObject("result");
-                                if(resultObj.getString("prediction") != null){
-                                    roi.put("result", result);
-                                }
-                            }
-                        }
-
-                        if (roi.get("extractionMethod").equals("BLOCK_ALPHANUMERIC_CLASSIFICATION")){
-                            JSONObject result  = new JSONObject();
-                            result.put("prediction", "A");
-                            result.put("confidence", new Double(1.00));
-
-                            if(!roi.has("result")){
-                                roi.put("result", result);
-                            }else{
-                                JSONObject resultObj = roi.getJSONObject("result");
-                                if(resultObj.getString("prediction") != null){
-                                    roi.put("result", result);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            final Activity activity     = getCurrentActivity();
-            Intent intent               = new Intent(activity, SaralSDKOpenCVScannerActivity.class);
-            intent.putExtra("layoutConfigsResult", layoutConfigs.toString());
-            onActivityResult(activity, 1, 2, intent);
-            activity.finish();
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-
     @Override
     public String getName() {
         return "SaralSDKModule";
@@ -199,7 +106,6 @@ public class SaralSDKModule extends ReactContextBaseJavaModule implements Activi
 
         ReactApplicationContext context = getReactApplicationContext();
         Activity currentActivity        = getCurrentActivity();
-        timerTask(layoutSchema, page);
 
         Intent intent                   = new Intent(currentActivity, SaralSDKOpenCVScannerActivity.class);
         intent.putExtra("layoutConfigs", layoutSchema);
