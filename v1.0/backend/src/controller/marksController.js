@@ -42,7 +42,6 @@ exports.saveMarks = async (req, res, next) => {
 
         await Helper.lockScreenValidator(req.school)
         
-
         for (let data of marks) {
             if (!data.examDate && data.examDate == undefined) {
                 data.examDate = new Date().toLocaleDateString()
@@ -65,7 +64,17 @@ exports.saveMarks = async (req, res, next) => {
                 }
             }
         }
-        res.status(200).json({ message: 'Data Saved Successfully' })
+
+            let match = {
+            schoolId: marks[0].schoolId,
+            classId: marks[0].classId,
+            section: marks[0].section,
+            examDate: marks[0].examDate,
+            subject: marks[0].subject
+        }
+
+            let marksData = await Mark.find(match, { _id: 0, __v: 0 })
+        res.status(200).json({ data: marksData })
     } catch (e) {
         if (e && e.message == stringObject().lockScreen) {
             res.status(500).json({ error: e.message })
