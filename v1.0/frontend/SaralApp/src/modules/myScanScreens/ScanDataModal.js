@@ -47,8 +47,8 @@ const ScanDataModal = ({
             getPresentStudentList(localstutlist)
             getStudentList()
         } else {
-            let hasSet = filteredData ? filteredData.hasOwnProperty("set") ? filteredData.set.length >= 0 ? filteredData.set : "" : null : ""
-            if (setValue != null && hasSet.length >= 0) {
+            let hasSet = filteredData ? filteredData.hasOwnProperty("set") ? filteredData.set.length >= 0 ? filteredData.set : "" : null : null
+            if (hasSet != null && hasSet.length >= 0) {
                 getPresentStudentList(localstutlist)
             } else {
                 setPresentStudentList(localstutlist)
