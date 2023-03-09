@@ -44,6 +44,17 @@ describe('fetch User By credentials ', () => {
         expect(bcrypt.compare).toHaveBeenCalledTimes(1)
     });
 
-
+    it("should not able to get user data  ", async () => {
+        const req = mockRequest();
+        const res = mockResponse()
+        req.params = {
+            userId: "u00",
+            password: "tarento@123"
+        }
+        User.findOne = jest.fn().mockResolvedValue(null)
+        await Helper.findByCredentials(req, res)
+    
+        expect(User.findOne).toThrow(new TypeError('School Id or Password is not correct.'))
+    }); 
 
 });
