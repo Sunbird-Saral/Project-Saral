@@ -36,9 +36,11 @@ exports.saveMarks = async (req, res, next) => {
     try {
 
         await Helper.lockScreenValidator(req.school)
-
-        let updates = [];
-        for (let i = 0; i < marks.length; i++) {
+        
+        for (let data of marks) {
+            if (!data.examDate && data.examDate == undefined) {
+                data.examDate = new Date().toLocaleDateString()
+            }
 
             updates.push({
                 updateOne: {
