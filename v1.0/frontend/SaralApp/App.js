@@ -103,17 +103,12 @@ function getActiveRouteName(navigationState) {
   return route.routeName;
 }
 
-useEffect(async() => {
-      // crashlytics().log('App mounted.');
-      await firebase.perf().setPerformanceCollectionEnabled(true);
-    }, []);
   return (
     <>
       <Provider store={storeFactory}>
           {Platform.os !== 'ios' &&  <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />}
           <SafeAreaView style={{ flex: 1, backgroundColor: '#ffffff' }}>
             <AppNavigator 
-            // onNavigationStateChange={ NewRelic.onNavigationStateChange  }  
              onNavigationStateChange={async (prevState, currentState) => {
               const currentRouteName = getActiveRouteName(currentState);
               const previousRouteName = getActiveRouteName(prevState);
