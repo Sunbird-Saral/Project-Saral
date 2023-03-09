@@ -4,6 +4,7 @@ const mockSaveMarksBody = require("./mock-data/mockSaveMarksBody.json")
 const mockSaveMarksResponse = require("./mock-data/mockSaveMarksResponse.json")
 const mockStudentMarksExist = require("./mock-data/mockStudentMarksExist.json")
 const mockUpdateMarksBody = require("./mock-data/mockUpdateSaveMarks.json")
+const mockSavedData = require("./mock-data/savedScanData.json")
 const Helper = require('../middleware/helper')
 const AppError = require('../utils/appError')
 
@@ -51,13 +52,14 @@ describe('save marks data ', () => {
         Helper.lockScreenValidator = jest.fn().mockResolvedValue(undefined)
         Marks.findOne = jest.fn().mockReturnValue(null)
         Marks.create = jest.fn().mockResolvedValue(mockSaveMarksResponse)
+        Marks.find = jest.fn().mockResolvedValue(mockSavedData)
 
         await marksController.saveMarks(req, res)
 
         expect(Helper.lockScreenValidator).toHaveBeenCalledTimes(1)
         expect(Marks.findOne).toHaveBeenCalledTimes(1)
         expect(Marks.create).toHaveBeenCalledTimes(1)
-        expect(res.json({ message: "Data Saved Successfully" }))
+        expect(Marks.find).toHaveBeenCalledTimes(1)
         expect(res.json({ status: 'success' }).status(200))
     });
 
@@ -80,13 +82,14 @@ describe('save marks data ', () => {
         Helper.lockScreenValidator = jest.fn().mockResolvedValue(undefined)
         Marks.findOne = jest.fn().mockResolvedValue(mockStudentMarksExist);
         Marks.update = jest.fn().mockResolvedValue({ n: 1, nModified: 1, ok: 1 })
+        Marks.find = jest.fn().mockResolvedValue(mockSavedData)
 
         await marksController.saveMarks(req, res)
 
         expect(Helper.lockScreenValidator).toHaveBeenCalledTimes(1)
         expect(Marks.findOne).toHaveBeenCalledTimes(1)
         expect(Marks.update).toHaveBeenCalledTimes(1)
-        expect(res.json({ message: "Data Saved Successfully" }))
+        expect(Marks.find).toHaveBeenCalledTimes(1)
         expect(res.json({ status: 'success' }).status(200))
     });
 
