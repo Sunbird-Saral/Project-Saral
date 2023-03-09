@@ -45,7 +45,6 @@ const importData = async () => {
     await ClassModel.create(classes);
     await Student.create(student);
     await Exam.create(exam);
-    // await Marks.create(marks);
     await ROI.create(roi);
     await Counter.create(counter)
     await Brand.create(brand)
