@@ -576,7 +576,9 @@ const ScannedDetailsComponent = ({
                     "securedMarks": stdTotalMarks,
                     "totalMarks": 0,
                     "studentAvailability": true,
-                    "set": filteredData.set,
+                }
+                if(filteredData.hasOwnProperty("set")){
+                    stdData.set = filteredData.set
                 }
 
                 stdData.studentId = el.RollNo
@@ -624,8 +626,12 @@ const ScannedDetailsComponent = ({
             "studentsMarkInfo": stdMarkInfo,
             "examId": filteredData.examTestID,
             "userId": loginData.data.school.schoolId,
-            "set": filteredData.hasOwnProperty("set") ? filteredData.set : ""
+
         }
+        if(filteredData.hasOwnProperty("set")){
+            saveObj.set = filteredData.hasOwnProperty("set") ? filteredData.set : ""
+        }
+
         saveAndFetchFromLocalStorag(saveObj)
     }
 
@@ -1197,10 +1203,13 @@ const ScannedDetailsComponent = ({
                     "securedMarks": sumOfAllMarks > 0 ? sumOfAllMarks : 0,
                     "totalMarks": maxMarksTotal > 0 ? maxMarksTotal : 0,
                     "marksInfo": Studentmarks,
-                    "set": minimalFlag ? "" : filteredData.set ,
                     "studentAvailability": true,
                 }
             ]
+            
+        }
+        if(filteredData.hasOwnProperty("set")){
+            saveObj.studentsMarkInfo[0].set = minimalFlag ? "" : filteredData.set
         }
 
         if (minimalFlag) {
