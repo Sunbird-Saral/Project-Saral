@@ -9,7 +9,6 @@
          super('GET', timeout, false);
          
          this.requestBody = '';
-        //  this.token = token;
          this.type = C.DEFAULT_BRAND;
      }
  

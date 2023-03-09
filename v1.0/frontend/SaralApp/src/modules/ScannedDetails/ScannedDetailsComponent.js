@@ -417,7 +417,6 @@ const ScannedDetailsComponent = ({
                 let number = consolidated;
                 let regex = new RegExp(regexExp)
                 result = regex.test(number);
-                // setOmrResult(regexErrormsg)
                   setOmrResult(defaultValidateError)
                   
 
@@ -577,7 +576,9 @@ const ScannedDetailsComponent = ({
                     "securedMarks": stdTotalMarks,
                     "totalMarks": 0,
                     "studentAvailability": true,
-                    "set": filteredData.set,
+                }
+                if(filteredData.hasOwnProperty("set")){
+                    stdData.set = filteredData.set
                 }
 
                 stdData.studentId = el.RollNo
@@ -625,8 +626,12 @@ const ScannedDetailsComponent = ({
             "studentsMarkInfo": stdMarkInfo,
             "examId": filteredData.examTestID,
             "userId": loginData.data.school.schoolId,
-            "set": filteredData.hasOwnProperty("set") ? filteredData.set : ""
+
         }
+        if(filteredData.hasOwnProperty("set")){
+            saveObj.set = filteredData.hasOwnProperty("set") ? filteredData.set : ""
+        }
+
         saveAndFetchFromLocalStorag(saveObj)
     }
 
@@ -1198,10 +1203,13 @@ const ScannedDetailsComponent = ({
                     "securedMarks": sumOfAllMarks > 0 ? sumOfAllMarks : 0,
                     "totalMarks": maxMarksTotal > 0 ? maxMarksTotal : 0,
                     "marksInfo": Studentmarks,
-                    "set": minimalFlag ? "" : filteredData.set ,
                     "studentAvailability": true,
                 }
             ]
+            
+        }
+        if(filteredData.hasOwnProperty("set")){
+            saveObj.studentsMarkInfo[0].set = minimalFlag ? "" : filteredData.set
         }
 
         if (minimalFlag) {
@@ -1259,7 +1267,6 @@ const ScannedDetailsComponent = ({
             marks = ""
             predictionConfidenceArray = []
             for (let j = 0; j < cells[i].rois.length; j++) {
-
                 marks = marks + cells[i].rois[j].result.prediction,
                     predictionConfidenceArray.push(cells[i].rois[j].result.confidence)
             }
@@ -1466,7 +1473,7 @@ const ScannedDetailsComponent = ({
                                                                 rowTitle={element.consolidatedPrediction}
                                                                 rowBorderColor={markBorderOnCell(element)}
                                                                 editable={true}
-                                                                keyboardType={element.hasOwnProperty("omrOptions") ?  'name' : 'name'}
+                                                                keyboardType={element.hasOwnProperty("omrOptions") ?  'name' : ''}
                                                                 maxLength={lengthAccordingSheet(element)}
                                                                 onChangeText={(text) => {
                                                                     handleTextChange(text.trim(), index, newArrayValue, element)

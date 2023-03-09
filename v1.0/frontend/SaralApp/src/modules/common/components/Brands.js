@@ -145,7 +145,7 @@ class Brands extends PureComponent {
 
    async componentDidMount() {
 
-        const { loginData, dispatch } = this.props;
+        const { loginData } = this.props;
 
  
 

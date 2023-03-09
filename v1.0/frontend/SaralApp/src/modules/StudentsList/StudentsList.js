@@ -93,16 +93,16 @@ useEffect(() => {
             if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode && hasNetwork) {
 
                 let getRoiCache = await getRegularRoipi();
-                let setValue = filteredData.hasOwnProperty("set")  ? filteredData.set.length> 0 ? filteredData.set : '' : ''
+                let setValue = filteredData.hasOwnProperty("set")  ? filteredData.set.length> 0 ? filteredData.set : '' : null
 
                 if (getRoiCache != null) {
                     let result = getRoiCache.findIndex((e)=> {
-                       return setValue.length > 0 ? e.key == loginData.data.school.schoolId && e.examId == filteredData.examTestID && filteredData.set == e.set : e.key == loginData.data.school.schoolId && e.examId == filteredData.examTestID
+                       return setValue != null && setValue.length > 0 ? e.key == loginData.data.school.schoolId && e.examId == filteredData.examTestID && filteredData.set == e.set : e.key == loginData.data.school.schoolId && e.examId == filteredData.examTestID
                     });
                     
                     if (result > -1) {
                         getRoiCache[result].data = roiData
-                    } else if (setValue.length > 0) {
+                    } else if (setValue != null && setValue.length > 0) {
                         
                         let payload = {
                             key :`${loginData.data.school.schoolId}`,
@@ -118,7 +118,7 @@ useEffect(() => {
                             examId: filteredData.examTestID,
                             data: roiData
                         }
-                        if (setValue.length > 0) {
+                        if (setValue != null && setValue.length > 0) {
                             payload.set = setValue
                         }
                         getRoiCache.push(payload);
@@ -130,7 +130,7 @@ useEffect(() => {
                         examId: filteredData.examTestID,
                         data: roiData
                     }
-                    if (setValue.length > 0) {
+                    if (setValue != null && setValue.length > 0) {
                         payload.set = setValue
                     }
                     await setRegularRoiApi([payload]);
@@ -145,28 +145,27 @@ useEffect(() => {
 
     const getSavedScanApiCache = async (savedScanData) => {
         let getSavedScanCache = await getRegularSavedScanpi();
-        let setValue = filteredData.hasOwnProperty("set")  ? filteredData.set.length> 0 ? filteredData.set : '' : ''
+        let setValue = filteredData.hasOwnProperty("set")  ? filteredData.set.length> 0 ? filteredData.set : '' : null
 
         if (getSavedScanCache != null) {
             let result = getSavedScanCache.findIndex((e)=> {
-                return setValue.length > 0 ?
-                 e.key == loginData.data.school.userId && e.classId == filteredData.class && e.subject == filteredData.subject && e.section == filteredData.section && e.fromDate == filteredData.examDate && filteredData.set == e.set : e.key == loginData.data.school.userId && e.classId == filteredData.class && e.subject == filteredData.subject && e.section == filteredData.section && e.fromDate == filteredData.examDate
+                return setValue != null && setValue.length >= 0 ? e.key == loginData.data.school.schoolId && e.classId == filteredData.class && e.subject == filteredData.subject && e.section == filteredData.section && e.fromDate == filteredData.examDate && filteredData.set == e.set : e.key == loginData.data.school.schoolId && e.classId == filteredData.class && e.subject == filteredData.subject && e.section == filteredData.section && e.fromDate == filteredData.examDate
             });
             if (result > -1) {
                 getSavedScanCache[result].data = savedScanData
-                if (setValue.length > 0) {
+                if (setValue != null && setValue.length > 0) {
                     getSavedScanCache[result].set = setValue
                 }
             } else {
                 let payload = {
-                    key :`${loginData.data.school.userId}`,
+                    key :`${loginData.data.school.schoolId}`,
                     classId: filteredData.class,
                     subject: filteredData.subject,
                     section: filteredData.section,
                     fromDate: filteredData.examDate,
                     data: savedScanData
                 }
-                if (setValue.length > 0) {
+                if (setValue != null && setValue.length > 0) {
                     payload.set = setValue
                 }
                 getSavedScanCache.push(payload);
@@ -181,7 +180,7 @@ useEffect(() => {
                 fromDate: filteredData.examDate,
                 data: savedScanData
             }
-            if (setValue.length > 0) {
+            if (setValue != null && setValue.length > 0) {
                 payload.set = setValue
             }
             await setRegularSavedScanApi([payload]);
@@ -193,10 +192,10 @@ useEffect(() => {
 
         if (!hasNetwork) {
             let hasCacheData = await getRegularSavedScanpi();
-            let setValue = filteredData.hasOwnProperty("set")  ? filteredData.set.length> 0 ? filteredData.set : '' : ''
+            let setValue = filteredData.hasOwnProperty("set")  ? filteredData.set.length> 0 ? filteredData.set : '' : null
             if (hasCacheData) {
                 let cacheFilterData =  hasCacheData.filter((element)=>{
-                    let conditionSwitch = setValue.length ? element.key == loginData.data.school.userId && element.classId == filteredData.class && element.subject == filteredData.subject && element.section == filteredData.section && element.fromDate == filteredData.examDate && filteredData.set == element.set : element.key == loginData.data.school.userId && element.classId == filteredData.class && element.subject == filteredData.subject && element.section == filteredData.section && element.fromDate == filteredData.examDate
+                    let conditionSwitch = setValue != null && setValue.length >=0 ? element.key == loginData.data.school.userId && element.classId == filteredData.class && element.subject == filteredData.subject && element.section == filteredData.section && element.fromDate == filteredData.examDate && filteredData.set == element.set : element.key == loginData.data.school.userId && element.classId == filteredData.class && element.subject == filteredData.subject && element.section == filteredData.section && element.fromDate == filteredData.examDate
                     if (conditionSwitch) {
                         return true
                     }
@@ -354,7 +353,7 @@ useEffect(() => {
             if (e.class == filteredData.className && e.section == filteredData.section) {
                 e.data.students.forEach((element) => {
 
-                    const updated = allStudentData.filter((o) => {
+                    const updated = allStudentData.filter((o)=>{
                         if (element.studentId == o.studentId) {
                             element.studentAvailability = o.studentAvailability
                         }
@@ -468,14 +467,14 @@ useEffect(() => {
     const getRoi = async() => {
 
         let hasNetwork = await checkNetworkConnectivity();
-        let setValue = filteredData.hasOwnProperty("set") > 0 ? filteredData.set.length > 0 ? filteredData.set : '' : ''
+        let setValue = filteredData.hasOwnProperty("set") > 0 ? filteredData.set.length > 0 ? filteredData.set : '' : null
 
         let hasCacheData = await getRegularRoipi();
 
         let cacheFilterData = hasCacheData != null 
             ?
             hasCacheData.filter((element)=>{
-                let conditionSwitch = setValue.length > 0 ? element.key == loginData.data.school.schoolId && element.examId == filteredData.examTestID && element.set == filteredData.set : element.key == loginData.data.school.schoolId && element.examId == filteredData.examTestID
+                let conditionSwitch = setValue != null && setValue.length >= 0 ? element.key == loginData.data.school.schoolId && element.examId == filteredData.examTestID && element.set == filteredData.set : element.key == loginData.data.school.schoolId && element.examId == filteredData.examTestID
                 if (conditionSwitch) {
                     return true
                 }

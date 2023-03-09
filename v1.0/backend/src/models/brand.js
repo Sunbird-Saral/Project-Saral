@@ -20,13 +20,11 @@ const BrandSchema = new mongoose.Schema({
     },
     state:{
         type: String,
-        // required: true,
         trim: true
     },
     schoolId: {
         type: String,
         unique: true,
-        // required: true,
         trim: true,
     },
     screenLabels: {
