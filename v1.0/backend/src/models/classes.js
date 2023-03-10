@@ -40,6 +40,6 @@ classSchema.statics.findClassesBySchools = async (schoolId) => {
 }
 
 
-const ClassModel = mongoose.model('Class', classSchema)
+const Classes = mongoose.model('Class', classSchema)
 
-module.exports = ClassModel
+module.exports = Classes

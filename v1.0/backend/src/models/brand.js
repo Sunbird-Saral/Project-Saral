@@ -166,6 +166,6 @@ const BrandSchema = new mongoose.Schema({
 })
 
 
-const Brand = mongoose.model('Brand', BrandSchema)
+const Brands = mongoose.model('Brand', BrandSchema)
 
-module.exports = Brand
+module.exports = Brands

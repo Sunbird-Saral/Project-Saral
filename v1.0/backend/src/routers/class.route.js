@@ -1,5 +1,5 @@
 const express = require('express')
-const Classes = require('../models/classModel')
+const Classes = require('../models/classes')
 const { auth } = require('../middleware/auth')
 const _ = require('lodash')
 const Promise = require('bluebird')

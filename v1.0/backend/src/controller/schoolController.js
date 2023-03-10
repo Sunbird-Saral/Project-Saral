@@ -1,5 +1,5 @@
 const Schools = require('../models/school')
-const Classes = require("../models/classModel")
+const Classes = require("../models/classes")
 const Users = require("../models/users")
 const Helper = require('../middleware/helper')
 const { stringObject } = require('../utils/commonUtils');
