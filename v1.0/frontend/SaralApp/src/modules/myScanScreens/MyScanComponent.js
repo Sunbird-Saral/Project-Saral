@@ -68,7 +68,7 @@ class MyScanComponent extends Component {
                 this.setState({ calledRoiData: false, callApi: '' })
                 if (roiData.status && roiData.status == 200) {
                    let total =  await this.sumOfLocalData();
-                   this.callScanStatusData(true, total, 0);
+                   this.callScanStatusData(true, total, 0, null);
                    if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode) {
                    await this.setRoiCache(roiData);
                    }
@@ -79,7 +79,7 @@ class MyScanComponent extends Component {
             if (calledRoiData & this.props.minimalFlag & !hasNetwork) {
                 this.setState({calledRoiData: false})
                 let total =  await this.sumOfLocalData();
-                this.callScanStatusData(true, total, 0);
+                this.callScanStatusData(true, total, 0, null);
             }
         }
     }
@@ -652,16 +652,15 @@ class MyScanComponent extends Component {
                 //Alert message show message "something went wrong or u don't have cache in local"
             }
         } else {
-            let hasMessage = res ? typeof res.data == "string" ? true : false : false
-            if (hasMessage) {
-                if (!isApiCalled) {
-                    obj.callCustomModal(Strings.message_text, Strings.saved_successfully, false);
+            let hasMessage = res ? typeof res.data == "string" ? true : false : null
+            if (hasMessage != null && !hasMessage) {
+                    this.callCustomModal(Strings.message_text, Strings.saved_successfully, false);
                     setScannedDataIntoLocal(localScanData)
                     this.dispatchScanDataApi(res.data)
                     this.setState({
                         localScanedData: []
                     })
-                }
+                 
                 if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode) {
                     this.setScanDataCache(res.data);
                 }
@@ -673,7 +672,6 @@ class MyScanComponent extends Component {
                 })
                 
             } else {
-                console.log("hellolllllllllllllllllllllllll");
                 let loginCred = await getLoginCred()
                 let dataPayload = {
                     "classId": 0,

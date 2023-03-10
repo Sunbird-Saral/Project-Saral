@@ -22,6 +22,6 @@ counterSchema.statics.getValueForNextSequence = async (counterOfName) => {
 }
 
 
-const Counter = mongoose.model('counter', counterSchema)
+const Counters = mongoose.model('counter', counterSchema)
 
-module.exports = Counter
+module.exports = Counters

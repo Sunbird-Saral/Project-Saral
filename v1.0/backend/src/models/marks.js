@@ -126,6 +126,6 @@ marksSchema.statics.StudentsMark = async (studentIds) => {
     return marks
 }
 
-const Mark = mongoose.model('Mark', marksSchema)
+const Marks = mongoose.model('Mark', marksSchema)
 
-module.exports = Mark
+module.exports = Marks

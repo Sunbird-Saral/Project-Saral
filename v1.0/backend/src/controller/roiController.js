@@ -1,15 +1,15 @@
-const Exam = require('../models/exams')
-const ROI = require('../models/roi')
-const School = require('../models/school')
+const Exams = require('../models/exams')
+const Rois = require('../models/roi')
+const Schools = require('../models/school')
 
 
 exports.getRoiData = async (req, res, next) => {
     try {
-        const examExist = await Exam.findOne({ examId: req.params.examId }).lean()
+        const examExist = await Exams.findOne({ examId: req.params.examId }).lean()
  
         if (examExist) {
-            const school = await School.findOne({ schoolId: req.school.schoolId })  
-            const roiExist = await ROI.findOne({ classId: examExist.classId, subject: examExist.subject, state: school.state, type: examExist.type }).lean()
+            const school = await Schools.findOne({ schoolId: req.school.schoolId })  
+            const roiExist = await Rois.findOne({ classId: examExist.classId, subject: examExist.subject, state: school.state, type: examExist.type }).lean()
             let examSetLookupExist = {}
             
             if (roiExist) {
@@ -30,7 +30,7 @@ exports.getRoiData = async (req, res, next) => {
                         type: examExist.type
                     }
                 }
-                let roi = await ROI.find(examSetLookupExist, { roiId: 1,roi:1 }).lean()
+                let roi = await Rois.find(examSetLookupExist, { roiId: 1,roi:1 }).lean()
            
                 if (roi.length) {
                     res.status(200).json({

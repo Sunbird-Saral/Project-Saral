@@ -58,6 +58,6 @@ const ROISchema = new mongoose.Schema({
 })
 
 
-const ROI = mongoose.model('ROI', ROISchema)
+const Rois = mongoose.model('ROI', ROISchema)
 
-module.exports = ROI
+module.exports = Rois
