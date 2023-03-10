@@ -19,7 +19,7 @@ import { bindActionCreators } from 'redux';
 //api
 import APITransport from '../../flux/actions/transport/apitransport'
 import AppTheme from '../../utils/AppTheme';
-import { getPresentAbsentStudent, getScannedDataFromLocal,getErrorMessage, getLoginCred, setScannedDataIntoLocal } from '../../utils/StorageUtils';
+import { getPresentAbsentStudent, getScannedDataFromLocal, getLoginCred, setScannedDataIntoLocal } from '../../utils/StorageUtils';
 import { Assets } from '../../assets';
 import ShareComponent from '../common/components/Share';
 import MultibrandLabels from '../common/components/multibrandlabels';
@@ -31,6 +31,7 @@ import axios from 'axios';
 import { collectErrorLogs } from '../CollectErrorLogs';
 import { scanStatusDataAction } from './scanStatusDataAction';
 import Spinner from '../common/components/loadingIndicator';
+import constants from '../../flux/actions/constants';
 
 
 const ScanStatusLocal = ({
@@ -39,7 +40,8 @@ const ScanStatusLocal = ({
     multiBrandingData,
     navigation,
     bgFlag,
-    roiData
+    roiData,
+    minimalFlag
 }) => {
 
     const [unsavedstudentList, setUnsavedstudentList] = useState([])
@@ -73,7 +75,7 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
 }
 
 
-    const subject = `Saral App v1.0 Marks JSON - SchoolId:${loginData.data.school.schoolId} & Exam Id:${filteredData.examTestID}`
+    const subject = `Saral App v1.0 Marks JSON - SchoolId:${loginData.data.school.schoolId} ${!minimalFlag ? ` & Exam Id:${filteredData.examTestID}` : "" }`
     const message = `${(dataForShare ? dataForShare : '')}`;
 
     const options = {
@@ -143,8 +145,8 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
                 }   
             })
 
-            let hasSet = filteredData.hasOwnProperty("set") ? filteredData.set.length >= 0 ? filteredData.set : '' : ''
-            if (hasSet.length >= 0) {
+            let hasSet = filteredData.hasOwnProperty("set") ? filteredData.set.length >= 0 ? filteredData.set : '' : null
+            if (hasSet != null && hasSet != undefined &&  hasSet.length >= 0) {
                 let findSetStudent = filterscandata.length > 0 ? filterscandata[0].studentsMarkInfo.filter((item) => {
                     if (hasSet.length >= 0) {
                         return item.set == hasSet;
@@ -245,9 +247,19 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
                 .then(function (res) {
                     apiResponse = res;
                     clearTimeout(id);
-                    api.processResponse(res);
-                    callScanStatusData(false, filteredDatalen, localScanData)
-                    setIsLoading(false)
+
+                    let hasMessage = res ? typeof res.data == "string" ? true : false : false
+                    if (hasMessage) {
+                        api.processResponse(res);
+                        callScanStatusData(false, filteredDatalen, localScanData)
+                        
+                    } else {
+                        dispatch(dispatchAPIAsyncSavedData(res.data));
+                        setScannedDataIntoLocal(localScanData)
+                        setIsLoading(false)
+                        onBackPress();
+                        callCustomModal(Strings.message_text,Strings.saved_successfully,false);
+                    }
                 })
                 .catch(function (err) {
                     if (err && err.response && err.response.status == 500) {
@@ -261,7 +273,7 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
             });
         }
     }
-
+    
     const callScanStatusData = async (bool,filteredDatalen, localScanData) => {
         let loginCred = await getLoginCred()
 
@@ -273,8 +285,10 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
             "set": filteredData.set,
             "page": 0,
             "schoolId": loginData.data.school.schoolId,
-            "userId": loginData.data.school.userId,
             "downloadRes": false
+        }
+        if (filteredData.hasOwnProperty("set")) {
+            dataPayload.set = filteredData.set
         }
         let apiObj = new scanStatusDataAction(dataPayload);
         FetchSavedScannedData(apiObj, loginCred.schoolId, loginCred.password, filteredDatalen, localScanData)
@@ -300,6 +314,7 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
                     callCustomModal(Strings.message_text,Strings.saved_successfully,false);
                     apiResponse = res
                     clearTimeout(id)
+                    setIsLoading(false)
                     api.processResponse(res)
                     dispatch(dispatchAPIAsync(api));
                     setScannedDataIntoLocal(localScanData)
@@ -313,12 +328,19 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
         }
     }
 
-    function dispatchAPIAsync(api) {
+    function dispatchAPIAsyncSavedData(res) {
         return {
-            type: api.type,
-            payload: api.getPayload()
+            type: constants.SCANNED_DATA,
+            payload: res
         }
     }
+
+    function dispatchAPIAsync(api) {
+            return {
+                type: api.type,
+                payload: api.getPayload()
+            }
+        }
 
     return (
         <View style={styles.container}>
@@ -363,7 +385,7 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
             <Text style={styles.scanStatus}>{Strings.scan_status}</Text>
         
             <FlatList
-                data={ presentStudentList && presentStudentList}
+                data={ presentStudentList}
                 renderItem={renderItem}
                 ListEmptyComponent={renderEmptyData}
             keyExtractor={(item, index) => `${index.toString()}`}
@@ -406,6 +428,7 @@ const mapStateToProps = (state) => {
         multiBrandingData: state.multiBrandingData.response.data,
         bgFlag: state.bgFlag,
         roiData: state.roiData.response,
+        minimalFlag: state.minimalFlag
     }
 }
 

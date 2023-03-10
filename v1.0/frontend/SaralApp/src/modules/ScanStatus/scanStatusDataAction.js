@@ -8,8 +8,7 @@ export class scanStatusDataAction extends API {
     constructor(payload, obj, timeout = 30000) {
         super('POST', timeout, false);
         this.payload = payload;
-        this.obj = obj
-        // this.token = token;
+        this.obj = obj;
         this.type = C.SCANNED_DATA;
     }
     toString() {
@@ -24,7 +23,6 @@ export class scanStatusDataAction extends API {
     }
 
     apiEndPoint() {
-        // return `${super.apiEndPoint()}/getSavedScan`;
         return `${super.apiEndPoint()}/getSavedScan`;
     }
 
