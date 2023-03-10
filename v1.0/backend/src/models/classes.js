@@ -30,7 +30,7 @@ const classSchema = new mongoose.Schema({
 
 //model method created
 classSchema.statics.findClassesBySchools = async (schoolId) => {    
-    const classes = await ClassModel.find({ schoolId })
+    const classes = await Classes.find({ schoolId })
     
     if(!classes) {
         throw new Error('No Classes')
