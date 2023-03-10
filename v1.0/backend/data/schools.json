@@ -10,7 +10,9 @@
     "supportEmail": "abc@gmail.com , xyz@gmail.com",
     "offlineMode": true,
     "isAppForceUpdateEnabled": true,
-    "district": "district1"
+    "district": "district1",
+    "timer": 60000,
+    "isManualEditEnable": true
   },
   {
     "name": "Dummy school 2",
