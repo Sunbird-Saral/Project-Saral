@@ -88,7 +88,8 @@ const ScanDataModal = ({
         dispatch(dispatchCustomModalStatus(true));
         dispatch(dispatchCustomModalMessage(data));
     }
-    const subject = `Saral App v1.0 Marks JSON - SchoolId:${loginData.data.school.schoolId} & Exam Id:${filteredData.examTestID}`
+
+    const subject = `Saral App v1.0 Marks JSON - SchoolId:${loginData.data.school.schoolId} ${!minimalFlag ? ` & Exam Id:${filteredData.examTestID}` : "" }`
     const message = `${(dataForShare ? dataForShare : '')}`;
 
    
