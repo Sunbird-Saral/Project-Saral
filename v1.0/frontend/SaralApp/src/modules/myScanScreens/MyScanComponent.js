@@ -673,7 +673,6 @@ class MyScanComponent extends Component {
                 })
                 
             } else {
-                console.log("hellolllllllllllllllllllllllll");
                 let loginCred = await getLoginCred()
                 let dataPayload = {
                     "classId": 0,
