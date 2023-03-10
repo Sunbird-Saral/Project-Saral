@@ -1,11 +1,11 @@
 const express = require('express')
-const ClassModel = require('../models/classModel')
+const Classes = require('../models/classModel')
 const { auth } = require('../middleware/auth')
 const _ = require('lodash')
 const Promise = require('bluebird')
-const Student = require('../models/students')
-const Exam = require('../models/exams')
-const Mark = require('../models/marks')
+const Students = require('../models/students')
+const Exams = require('../models/exams')
+const Marks = require('../models/marks')
 const router = new express.Router()
 
 router.post('/classes', auth, async (req, res) => {
@@ -13,7 +13,7 @@ router.post('/classes', auth, async (req, res) => {
     const body = [...req.body]
     const classModel = []
     body.forEach(data => {
-        const classData = new ClassModel({
+        const classData = new Classes({
             ...data,
             className: `Class-${data.classId}`,
             schoolId: req.school.schoolId
@@ -22,14 +22,13 @@ router.post('/classes', auth, async (req, res) => {
         classModel.push(classData)
     });
     try {
-        // await ClassModel.insertMany(classModel)
         let finalUpdatedData = []
         Promise.map(classModel, async doc => {
             let match = {
                 schoolId: doc.schoolId,
                 classId: doc.classId
             }
-            let dataExists = await ClassModel.findOne(match);
+            let dataExists = await Classes.findOne(match);
             if (!dataExists) {
                 await doc.save()
                 let response = {
@@ -82,10 +81,10 @@ router.put('/classes', auth, async (req, res) => {
     }
 
     try {
-        const classData = await ClassModel.findOne(match)
+        const classData = await Classes.findOne(match)
 
         if (!classData || (classData && classData.length == 0)) {
-            const classModel = new ClassModel({
+            const classModel = new Classes({
                 ...req.body,
                 className: `Class-${req.body.classId}`,
                 schoolId: req.school.schoolId
@@ -139,21 +138,21 @@ router.delete('/classes', auth, async (req, res) => {
     }
 
     try {
-        const classData = await ClassModel.findOne(match)
+        const classData = await Classes.findOne(match)
         if (classData) {
-            await ClassModel.deleteOne(match)
+            await Classes.deleteOne(match)
             let lookup = {
                 schoolId: req.school.schoolId,
                 studentClass: { $elemMatch: { classId: req.body.classId } }
             }
-            let students = await Student.find(lookup).lean()
+            let students = await Students.find(lookup).lean()
             if (students.length) {
                 for (let student of students) {
-                    await Mark.deleteMany({ schoolId: req.school.schoolId, studentId: student.studentId })
+                    await Marks.deleteMany({ schoolId: req.school.schoolId, studentId: student.studentId })
                 }
-                await Student.deleteMany(lookup).lean()
+                await Students.deleteMany(lookup).lean()
             }
-            await Exam.deleteMany(match)
+            await Exams.deleteMany(match)
             res.status(200).send({ "message": "Class has been deleted successfully." })
         } else {
             res.status(404).send({ "message": 'Class does not exist.' })

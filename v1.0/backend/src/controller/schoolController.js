@@ -1,5 +1,6 @@
 const Schools = require('../models/school')
 const Classes = require("../models/classModel")
+const Users = require("../models/users")
 const Helper = require('../middleware/helper')
 const { stringObject } = require('../utils/commonUtils');
 const { auth } = require('../middleware/auth');
@@ -17,7 +18,7 @@ exports.loginSchool = async (req, res, next) => {
 
     await Helper.lockScreenValidator(schools)
 
-    const token = await User.generateAuthToken(users)
+    const token = await Users.generateAuthToken(users)
 
     let classes = []
     let school = {

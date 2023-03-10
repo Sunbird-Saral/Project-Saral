@@ -1,11 +1,9 @@
 const express = require('express')
 const router = express.Router({ mergeParams: true });
-const School = require('../models/school')
-const User = require('../models/users')
-const ClassModel = require("../models/classModel")
-const Student = require("../models/students")
-const Mark = require("../models/marks")
-const Helper = require('../middleware/helper')
+const Schools = require('../models/school')
+const Classes = require("../models/classModel")
+const Students = require("../models/students")
+const Marks = require("../models/marks")
 const schoolController = require("../controller/schoolController")
 const { stringObject } = require('../utils/commonUtils');
 const { auth } = require('../middleware/auth');
@@ -15,7 +13,7 @@ router.route('/schools/login').post(schoolController.loginSchool)
 
 
 router.post('/schools/create', async (req, res) => {
-    const school = new School({ ...req.body })
+    const school = new Schools({ ...req.body })
     try {
 
         school.state = req.body.state.toLowerCase()
@@ -49,7 +47,7 @@ router.post('/schools/create', async (req, res) => {
 
 router.get('/schools', async (req, res) => {
     try {
-        const school = await School.find({})
+        const school = await Schools.find({})
         let schools = []
         if (school) {
             school.forEach(element => {
@@ -71,15 +69,15 @@ router.get('/schools', async (req, res) => {
 
 router.delete('/schools/:schoolId', async (req, res) => {
     try {
-        const school = await School.findOne({ schoolId: req.params.schoolId.toLowerCase() })
+        const school = await Schools.findOne({ schoolId: req.params.schoolId.toLowerCase() })
         if (!school) return res.status(404).send({ message: 'School Id does not exist.' })
         let lookup = {
             schoolId: school.schoolId
         }
-        await School.deleteOne(lookup).lean()
-        await ClassModel.findOneAndRemove(lookup).lean()
-        await Student.findOneAndRemove(lookup).lean()
-        await Mark.findOneAndRemove(lookup).lean()
+        await Schools.deleteOne(lookup).lean()
+        await Classes.findOneAndRemove(lookup).lean()
+        await Students.findOneAndRemove(lookup).lean()
+        await Marks.findOneAndRemove(lookup).lean()
         res.status(200).send({ message: 'School has been deleted.' })
     }
     catch (e) {
@@ -103,10 +101,10 @@ router.patch('/schools/:schoolId', async (req, res) => {
         }
         let update = req.body
 
-        const school = await School.findOne(lookup).lean();
+        const school = await Schools.findOne(lookup).lean();
         if (!school) return res.status(404).send({ message: 'School Id does not exist.' })
 
-        await School.updateOne(lookup, update).lean().exec();
+        await Schools.updateOne(lookup, update).lean().exec();
         res.status(200).send({ message: 'School has been updated.' })
 
     }

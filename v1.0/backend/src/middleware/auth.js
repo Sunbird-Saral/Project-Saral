@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-const User = require('../models/users')
+const Users = require('../models/users')
 const Helper = require('../middleware/helper')
 
 const auth  = async (req, res, next) => {
@@ -7,7 +7,7 @@ const auth  = async (req, res, next) => {
         const token = req.header('Authorization').replace('Bearer ', '')
         const decoded = jwt.verify(token, process.env.JWT_SECRET)
         
-        const school = await User.findOne({ userId: decoded.userId })
+        const school = await Users.findOne({ userId: decoded.userId })
         
         if(!school) {
             throw new Error()
