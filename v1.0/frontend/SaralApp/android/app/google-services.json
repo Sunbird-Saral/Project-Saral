@@ -1,41 +1,33 @@
 {
   "project_info": {
-    "project_number": "388979771754",
-    "project_id": "appmonitor-4790f",
-    "storage_bucket": "appmonitor-4790f.appspot.com"
+    "project_number": "898598515470",
+    "project_id": "saralapptelemetary",
+    "storage_bucket": "saralapptelemetary.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:388979771754:android:8f173609d360e08aa73d13",
+        "mobilesdk_app_id": "1:898598515470:android:916f6bc04fb8c6b3e5dd5f",
         "android_client_info": {
           "package_name": "com.saralapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "388979771754-mi203uaa2bladsnq22b9bg4p9f78pscc.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.saralapp",
-            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
-          }
-        },
-        {
-          "client_id": "388979771754-du8vjrq8upip4f884mj07sbacp113v6a.apps.googleusercontent.com",
+          "client_id": "898598515470-b6e18eg75jq226ommh4oahfjra1lrdoc.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAvWbEaJZLGuhavZ5SgHE8XWnvqJXM-6ig"
+          "current_key": "AIzaSyCQEfurAjgeY5tJIlDfuft24uOv7-mr8-E"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "388979771754-du8vjrq8upip4f884mj07sbacp113v6a.apps.googleusercontent.com",
+              "client_id": "898598515470-b6e18eg75jq226ommh4oahfjra1lrdoc.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

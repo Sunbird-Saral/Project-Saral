@@ -231,9 +231,14 @@ dependencies {
     implementation project(path: ':saralsdk')
     // new code for google firebase analytics
 
-implementation ('com.google.firebase:firebase-iid:21.1.0') {
+    implementation platform('com.google.firebase:firebase-bom:31.2.3')
+
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-crashlytics'
+
+    implementation ('com.google.firebase:firebase-iid:21.1.0') {
     transitive = true
-}
+    }
 
 // implementation 'com.google.firebase:firebase-perf'
 

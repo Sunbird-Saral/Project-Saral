@@ -38,7 +38,10 @@ exports.loginSchool = async (req, res, next) => {
       offlineMode: schools.offlineMode,
       isAppForceUpdateEnabled: schools.isAppForceUpdateEnabled,
       lock: schools.lock,
-      userId: users.userId
+      enableFBAnalytics: schools.enableFBAnalytics,
+      userId: users.userId,
+
+
     }
 
     let data = {

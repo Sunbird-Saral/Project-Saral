@@ -46,6 +46,7 @@
     "autoSyncBatchSize": 10,
     "offlineMode": true,
     "isAppForceUpdateEnabled": false,
+    "enableFBAnalytics": true,
     "district": "district1"
   },
   {
