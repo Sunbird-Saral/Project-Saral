@@ -1,11 +1,7 @@
-const Mark = require('../models/marks')
-const User = require('../models/users')
+const Marks = require('../models/marks')
+const Users = require('../models/users')
 const Helper = require('../middleware/helper')
 const { stringObject } = require('../utils/commonUtils')
-
-const fromTime = "T00:00:00"
-const toTime = "T23:59:59"
-
 
 exports.saveMarks = async (req, res, next) => {
     const marks = []
@@ -24,7 +20,7 @@ exports.saveMarks = async (req, res, next) => {
     const roiId = req.body.roiId
 
     req.body.studentsMarkInfo.forEach(studentsData => {
-        const marksData = new Mark({
+        const marksData = new Marks({
             ...studentsData,
             schoolId,
             examDate,
@@ -40,31 +36,28 @@ exports.saveMarks = async (req, res, next) => {
     try {
 
         await Helper.lockScreenValidator(req.school)
-        
-        for (let data of marks) {
-            if (!data.examDate && data.examDate == undefined) {
-                data.examDate = new Date().toLocaleDateString()
-            }
 
-            let studentMarksExist = await Mark.findOne({ schoolId: data.schoolId, studentId: data.studentId, classId: data.classId, subject: data.subject, examDate: data.examDate, roiId: data.roiId })
-            
-            if (!studentMarksExist) {
-                await Mark.create(data)
-            } else {
-                if (data.schoolId == studentMarksExist.schoolId && data.studentId == studentMarksExist.studentId && data.classId == studentMarksExist.classId && data.subject == studentMarksExist.subject && data.examDate == studentMarksExist.examDate) {
+        let updates = []
 
-                    let lookup = {
-                        studentId: data.studentId,
-                        subject: data.subject,
-                        examDate: data.examDate
-                    }
-                    let update = { $set: { studentIdTrainingData: data.studentIdTrainingData, predictedStudentId: data.predictedStudentId, studentAvailability: data.studentAvailability, marksInfo: data.marksInfo, maxMarksTrainingData: data.maxMarksTrainingData, maxMarksPredicted: data.maxMarksPredicted, securedMarks: data.securedMarks, totalMarks: data.totalMarks, obtainedMarksTrainingData: data.obtainedMarksTrainingData, obtainedMarksPredicted: data.obtainedMarksPredicted, set: data.set, userId: data.userId } }
-                    await Mark.update(lookup, update)
+        for (let i = 0; i < marks.length; i++) {
+
+            updates.push({
+                updateOne: {
+                    filter: {
+                        studentId: marks[i].studentId,
+                        subject: marks[i].subject,
+                        examDate: marks[i].examDate
+                    },
+                    update: { $set: { studentIdTrainingData: marks[i].studentIdTrainingData, studentId: marks[i].studentId, predictionConfidence: marks[i].predictionConfidence, schoolId: marks[i].schoolId, examDate: marks[i].examDate, predictedStudentId: marks[i].predictedStudentId, studentAvailability: marks[i].studentAvailability, marksInfo: marks[i].marksInfo, maxMarksTrainingData: marks[i].maxMarksTrainingData, maxMarksPredicted: marks[i].maxMarksPredicted, securedMarks: marks[i].securedMarks, totalMarks: marks[i].totalMarks, obtainedMarksTrainingData: marks[i].obtainedMarksTrainingData, obtainedMarksPredicted: marks[i].obtainedMarksPredicted, set: marks[i].set, subject: marks[i].subject, classId: marks[i].classId, section: marks[i].section, subject: marks[i].subject, examId: marks[i].examId, userId: marks[i].userId  ,roiId: marks[i].roiId} },
+                    upsert: true
                 }
-            }
+            })
         }
+        
+        let marksResult = await Marks.bulkWrite(updates);
+        console.log("marks responsee---->", marksResult)
 
-            let match = {
+        let match = {
             schoolId: marks[0].schoolId,
             classId: marks[0].classId,
             section: marks[0].section,
@@ -72,7 +65,7 @@ exports.saveMarks = async (req, res, next) => {
             subject: marks[0].subject
         }
 
-            let marksData = await Mark.find(match, { _id: 0, __v: 0 })
+        let marksData = await Marks.find(match, { _id: 0, __v: 0 })
         res.status(200).json({ data: marksData })
     } catch (e) {
         if (e && e.message == stringObject().lockScreen) {
@@ -94,18 +87,18 @@ exports.getSaveScan = async (req, res, next) => {
 
         if (req.body.userId && !req.body.schoolId) {
             req.body.userId = req.body.userId.toLowerCase()
-            const userData = await User.findOne({userId: req.body.userId})
+            const userData = await Users.findOne({ userId: req.body.userId })
             match.schoolId = userData.schoolId
         }
 
 
         const { schoolId, classId, section, subject, fromDate, roiId } = req.body
-    
+
         if (schoolId) {
             match.schoolId = schoolId
         }
 
-        if(fromDate){
+        if (fromDate) {
             match.examDate = fromDate
         }
 
@@ -131,11 +124,11 @@ exports.getSaveScan = async (req, res, next) => {
             req.body.limit = 0;
             req.body.page = 1;
         }
-       
-        const savedScan = await Mark.find(match, { _id: 0, __v: 0 })
+
+        const savedScan = await Marks.find(match, { _id: 0, __v: 0 })
             .limit(parseInt(req.body.limit) * 1)
             .skip((parseInt(parseInt(req.body.page)) - 1) * parseInt(parseInt(req.body.limit)))
-     
+
 
         res.status(200).json({ data: savedScan })
     } catch (e) {

@@ -40,7 +40,8 @@ const ScanStatusLocal = ({
     multiBrandingData,
     navigation,
     bgFlag,
-    roiData
+    roiData,
+    minimalFlag
 }) => {
 
     const [unsavedstudentList, setUnsavedstudentList] = useState([])
@@ -74,7 +75,7 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
 }
 
 
-    const subject = `Saral App v1.0 Marks JSON - SchoolId:${loginData.data.school.schoolId} & Exam Id:${filteredData.examTestID}`
+    const subject = `Saral App v1.0 Marks JSON - SchoolId:${loginData.data.school.schoolId} ${!minimalFlag ? ` & Exam Id:${filteredData.examTestID}` : "" }`
     const message = `${(dataForShare ? dataForShare : '')}`;
 
     const options = {
@@ -427,6 +428,7 @@ const mapStateToProps = (state) => {
         multiBrandingData: state.multiBrandingData.response.data,
         bgFlag: state.bgFlag,
         roiData: state.roiData.response,
+        minimalFlag: state.minimalFlag
     }
 }
 

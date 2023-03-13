@@ -1,8 +1,8 @@
 const express = require('express')
-const Exam = require('../models/exams')
+const Exams = require('../models/exams')
 const { auth } = require('../middleware/auth')
 const { getSubjectCode } = require('../utils/commonUtils')
-const Counter = require('../models/counter')
+const Counters = require('../models/counter')
 const router = new express.Router()
 
 router.post('/exam', auth, async (req, res) => {
@@ -12,15 +12,15 @@ router.post('/exam', auth, async (req, res) => {
 
     for (let input of body) {
 
-        if(input.examDate && input.examDate == undefined){
+        if (input.examDate && input.examDate == undefined) {
             input.examDate = new Date().toLocaleDateString()
         }
- 
+
         input.type = input.type.toUpperCase()
-        let examExist = await Exam.find({ schoolId, classId: input.classId, examDate: input.examDate, subject: input.subject })
+        let examExist = await Exams.find({ schoolId, classId: input.classId, examDate: input.examDate, subject: input.subject })
         if (examExist.length) continue
-        let examId = await Counter.getValueForNextSequence("examId")
-        const examData = new Exam({
+        let examId = await Counters.getValueForNextSequence("examId")
+        const examData = new Exams({
             ...input,
             examId,
             schoolId
@@ -29,7 +29,7 @@ router.post('/exam', auth, async (req, res) => {
     }
     try {
         if (exams.length) {
-            await Exam.insertMany(exams)
+            await Exams.insertMany(exams)
             res.status(201).send({ exams })
         } else {
             res.status(400).send({ "message": "Exam Id should be unique." })
@@ -55,7 +55,7 @@ router.get('/examByClass/:classId', auth, async (req, res) => {
     }
 
     try {
-        const exams = await Exam.find(match, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 }).lean()
+        const exams = await Exams.find(match, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 }).lean()
 
         if (!exams.length) {
             return res.status(404).send({ "message": `Exam dose not exist for ${req.params.classId}` })
@@ -70,11 +70,11 @@ router.get('/examByClass/:classId', auth, async (req, res) => {
 
 router.delete('/exam/:examId', auth, async (req, res) => {
     try {
-        const exam = await Exam.findOneAndDelete({ examId: req.params.examId }).lean()
+        const exam = await Exams.findOneAndDelete({ examId: req.params.examId }).lean()
 
         if (exam) {
             res.status(200).send({ "message": "Exam has been deleted successfully." })
-        }else{
+        } else {
             res.status(404).send({ "message": 'Exam Id does not exist.' })
         }
     }
@@ -99,9 +99,9 @@ router.patch('/exam/:examId', auth, async (req, res) => {
             schoolId: req.school.schoolId
         }
         let update = { $set: req.body }
-        const exam = await Exam.find(match).lean()
+        const exam = await Exams.find(match).lean()
         if (exam.length) {
-            await Exam.updateOne(match, update).lean().exec();
+            await Exams.updateOne(match, update).lean().exec();
             res.status(200).send({ "message": "Exam has been updated successfully." })
         } else {
             res.status(404).send({ "message": 'Exam Id does not exist.' })
