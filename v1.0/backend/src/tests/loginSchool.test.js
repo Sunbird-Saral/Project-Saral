@@ -1,6 +1,6 @@
 const User = require('../models/users');
 const School = require("../models/school")
-const ClassModel = require("../models/classModel")
+const ClassModel = require("../models/classes")
 const schoolController = require('../controller/schoolController')
 
 const AppError = require('../utils/appError')

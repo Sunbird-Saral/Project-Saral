@@ -1,11 +1,11 @@
 const express = require('express')
 const router = new express.Router()
-const Exam = require('../models/exams')
-const ROI = require('../models/roi')
+const Exams = require('../models/exams')
+const Rois = require('../models/roi')
 const { auth } = require('../middleware/auth')
-const School = require('../models/school')
+const Schools = require('../models/school')
 const { compareSync } = require('bcryptjs')
-const Counter = require('../models/counter')
+const Counters = require('../models/counter')
 const roiController = require("../controller/roiController")
 
 router.get('/roi/:examId?',auth,roiController.getRoiData)
@@ -26,16 +26,15 @@ router.post('/roi', auth, async (req, res) => {
             subject: req.body.subject,
             classId: req.body.classId
         }
-        const examExist = await Exam.findOne(lookup)
+        const examExist = await Exams.findOne(lookup)
         if (examExist) {
-            const school = await School.findOne({ schoolId: examExist.schoolId })
+            const school = await Schools.findOne({ schoolId: examExist.schoolId })
             req.body.type = req.body.type.toUpperCase()
-            const roiExist = await ROI.findOne({ classId: req.body.classId, subject: req.body.subject, state: school.state, type: req.body.type })
+            const roiExist = await Rois.findOne({ classId: req.body.classId, subject: req.body.subject, state: school.state, type: req.body.type })
             if (!roiExist) {
-                // const school = await School.findOne({schoolId:examExist.schoolId})
                 req.body.state = school.state
-                req.body.roiId = await Counter.getValueForNextSequence("roiId")
-                let roi = await ROI.create(req.body)
+                req.body.roiId = await Counters.getValueForNextSequence("roiId")
+                let roi = await Rois.create(req.body)
                 let roiResponse = {
                     roiId: roi.roiId,
                     classId: roi.classId,
@@ -60,16 +59,16 @@ router.patch('/roi/:examId', auth, async (req, res) => {
     try {
         if (Object.keys(req.body) != "roi") return res.status(400).send({ message: 'Invalid Input .' })
 
-        const examExist = await Exam.findOne({ examId: req.params.examId }).lean()
+        const examExist = await Exams.findOne({ examId: req.params.examId }).lean()
         if (examExist) {
-            const school = await School.findOne({ schoolId: req.school.schoolId })
+            const school = await Schools.findOne({ schoolId: req.school.schoolId })
             let lookup = {
                 classId: examExist.classId,
                 subject: examExist.subject,
                 state: school.state
             }
 
-            const roiData = await ROI.findOne(lookup).lean()
+            const roiData = await Rois.findOne(lookup).lean()
             if (!roiData) return res.status(404).send({ "message": "ROI Id does not exist." })
             let updateObj = {}
 
@@ -78,7 +77,7 @@ router.patch('/roi/:examId', auth, async (req, res) => {
             let filter = {
                 roiId: roiData.roiId
             }
-            await ROI.update(filter, updateObj).lean();
+            await Rois.update(filter, updateObj).lean();
             res.status(201).send({ "message": 'ROI is updated successfully.' })
         }
     } catch (e) {
@@ -88,16 +87,16 @@ router.patch('/roi/:examId', auth, async (req, res) => {
 
 router.delete('/roi/:examId', auth, async (req, res) => {
     try {
-        const examExist = await Exam.findOne({ examId: req.params.examId }).lean()
+        const examExist = await Exams.findOne({ examId: req.params.examId }).lean()
         if (examExist) {
-            const school = await School.findOne({ schoolId: req.school.schoolId })
+            const school = await Schools.findOne({ schoolId: req.school.schoolId })
             let lookup = {
                 classId: examExist.classId,
                 subject: examExist.subject,
                 state: school.state
             }
-            const roiExist = await ROI.findOne(lookup).lean()
-            let roi = await ROI.findOneAndRemove({ roiId: roiExist.roiId })
+            const roiExist = await Rois.findOne(lookup).lean()
+            let roi = await Rois.findOneAndRemove({ roiId: roiExist.roiId })
             if (roi) {
                 res.status(200).send({ "message": "ROI has been deleted successfully." })
             } else {

@@ -65,7 +65,7 @@ const ScanDataModal = ({
             loacalstutlist[0]
                 ?
                 dataList.filter((o, index) => {
-                    let stdCondition = setValue != null && hasSet.length >= 0 ? o.studentAvailability && o.marksInfo.length > 0 && o.set == hasSet : o.studentAvailability && o.marksInfo.length > 0
+                    let stdCondition = hasSet != null && hasSet.length >= 0 ? o.studentAvailability && o.marksInfo.length > 0 && o.set == hasSet : o.studentAvailability && o.marksInfo.length > 0
                     if (stdCondition) {
                         return true
                     }
@@ -88,7 +88,8 @@ const ScanDataModal = ({
         dispatch(dispatchCustomModalStatus(true));
         dispatch(dispatchCustomModalMessage(data));
     }
-    const subject = `Saral App v1.0 Marks JSON - SchoolId:${loginData.data.school.schoolId} & Exam Id:${filteredData.examTestID}`
+
+    const subject = `Saral App v1.0 Marks JSON - SchoolId:${loginData.data.school.schoolId} ${!minimalFlag ? ` & Exam Id:${filteredData.examTestID}` : "" }`
     const message = `${(dataForShare ? dataForShare : '')}`;
 
    
