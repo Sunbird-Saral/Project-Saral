@@ -50,6 +50,7 @@ const App = () => {
   useEffect(async()=>{
     let hasFBAnalytics = await getLoginData();
     const hasFBAnalyticsValue = hasFBAnalytics.school && hasFBAnalytics.school.enableFBAnalytics
+    if(hasFBAnalyticsValue != null){
     if (__DEV__) {
       analytics().setAnalyticsCollectionEnabled(hasFBAnalyticsValue);
       crashlytics().setCrashlyticsCollectionEnabled(hasFBAnalyticsValue);
@@ -57,6 +58,7 @@ const App = () => {
       analytics().setAnalyticsCollectionEnabled(hasFBAnalyticsValue);
       crashlytics().setCrashlyticsCollectionEnabled(hasFBAnalyticsValue);
   }
+}
 
    },[])
 
