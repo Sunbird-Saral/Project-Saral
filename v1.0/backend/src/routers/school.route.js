@@ -7,12 +7,14 @@ const Marks = require("../models/marks")
 const schoolController = require("../controller/schoolController")
 const { stringObject } = require('../utils/commonUtils');
 const { auth } = require('../middleware/auth');
+const logging = require('../logging/logger')
 
-
+logging.info('Redirecting to school controller')
 router.route('/schools/login').post(schoolController.loginSchool)
 
 
 router.post('/schools/create', async (req, res) => {
+    logging.info('school create API')
     const school = new Schools({ ...req.body })
     try {
 
@@ -46,6 +48,7 @@ router.post('/schools/create', async (req, res) => {
 })
 
 router.get('/schools', async (req, res) => {
+    logging.info('find school API')
     try {
         const school = await Schools.find({})
         let schools = []
@@ -68,6 +71,7 @@ router.get('/schools', async (req, res) => {
 })
 
 router.delete('/schools/:schoolId', async (req, res) => {
+    logging.info('delete school API')
     try {
         const school = await Schools.findOne({ schoolId: req.params.schoolId.toLowerCase() })
         if (!school) return res.status(404).send({ message: 'School Id does not exist.' })
@@ -87,6 +91,7 @@ router.delete('/schools/:schoolId', async (req, res) => {
 })
 
 router.patch('/schools/:schoolId', async (req, res) => {
+    logging.info('updating school API')
     try {
         if (Object.keys(req.body).length === 0) res.status(400).send({ message: 'Validation error.' })
         const updates = Object.keys(req.body)

@@ -4,8 +4,10 @@ const Users = require("../models/users")
 const Helper = require('../middleware/helper')
 const { stringObject } = require('../utils/commonUtils');
 const { auth } = require('../middleware/auth');
+const logging = require('../logging/logger')
 
 exports.loginSchool = async (req, res, next) => {
+  logging.info('login API')
   try {
     let userId = {}
     if (req.body.schoolId) {
@@ -59,7 +61,7 @@ exports.loginSchool = async (req, res, next) => {
       classes.sort((a, b) => a.classId.trim().localeCompare(b.classId.trim()))
       data.classes = classes
     }
-
+    logging.info('login API response %s',JSON.stringify(data.school.schoolId))
     res.status(200).json({
       ... data
     });
@@ -75,6 +77,7 @@ exports.loginSchool = async (req, res, next) => {
       })
     }
     else {
+      logging.error('login API error response %s', e.message)
       res.status(400).json({
         e
       });
