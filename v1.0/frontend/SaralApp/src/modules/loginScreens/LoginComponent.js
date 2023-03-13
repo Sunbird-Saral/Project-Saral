@@ -18,7 +18,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getBrandingDataApi, getLoginApi, setLoginApi,setBrandingDataApi } from '../../utils/offlineStorageUtils';
 import { storeFactory } from '../../flux/store/store';
 import constants from '../../flux/actions/constants';
-import crashlytics from '@react-native-firebase/crashlytics';
 
 class LoginComponent extends Component {
     constructor(props) {
@@ -47,7 +46,6 @@ class LoginComponent extends Component {
         this.setState({ hidePassword: !this.state.hidePassword });
       }
     async componentDidMount() {
-        crashlytics().log('App mounted.');
         const schollId = await this.rememberMeSchoolId();
         const password = await this.rememberMePassword();
         this.setState({
@@ -548,8 +546,6 @@ class LoginComponent extends Component {
                     <View style={styles.container1}>
                         <Image style={{ width: 100, height: 100 }} source={{ uri: defaultBrandingdata && 'data:image/png;base64,' + this.props.defaultBrandingdata.logoImage }} />
                     </View>
-
-                    {/* <Button title="Test Crash" onPress={() => crashlytics().crash()} /> */}
                     <View style={styles.container2}>
                         <View style={styles.loginContainer}>
                             <Text style={[styles.header1TextStyle, { paddingTop: '5%',fontFamily : monospace_FF }]}>

@@ -23,7 +23,3 @@
 -keep class com.bumptech.glide.load.data.ParcelFileDescriptorRewinder$InternalRewinder {
   *** rewind();
 }
-
-# -keep class com.newrelic.** { *; }
-# -dontwarn com.newrelic.**
-# -keepattributes Exceptions, Signature, InnerClasses, LineNumberTable

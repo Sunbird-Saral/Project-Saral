@@ -39,7 +39,6 @@ import { collectErrorLogs } from '../CollectErrorLogs';
 import { getRegularRoipi, getRegularSavedScanpi, getRegularStudentExamApi, setRegularRoiApi, setRegularSavedScanApi, setRegularStudentExamApi } from '../../utils/offlineStorageUtils';
 import constants from '../../flux/actions/constants';
 import { storeFactory } from '../../flux/store/store';
-import analytics from '@react-native-firebase/analytics';
 
 const StudentsList = ({
     filteredData,
