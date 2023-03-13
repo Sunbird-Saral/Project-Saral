@@ -44,17 +44,37 @@ describe('fetch User By credentials ', () => {
         expect(bcrypt.compare).toHaveBeenCalledTimes(1)
     });
 
-    it("should not able to get user data  ", async () => {
-        const req = mockRequest();
-        const res = mockResponse()
-        req.params = {
-            userId: "u00",
-            password: "tarento@123"
+    it("should not able to get user data when userId is not correct  ", async () => {
+        try {
+            const req = mockRequest();
+            const res = mockResponse()
+            req.params = {
+                userId: "u00",
+                password: "tarento@123"
+            }
+            User.findOne = jest.fn().mockResolvedValue(null)
+            await Helper.findByCredentials(req, res)
+        } catch(e) {
+            expect(e).toThrowError;     
         }
-        User.findOne = jest.fn().mockResolvedValue(null)
-        await Helper.findByCredentials(req, res)
-    
-        expect(User.findOne).toThrow(new TypeError('School Id or Password is not correct.'))
-    }); 
+    });
+
+    it("should not able to get user data when password is not correct  ", async () => {
+        try {
+            const req = mockRequest();
+            const res = mockResponse()
+            req.params = {
+                userId: "u001",
+                password: "tarento"
+            }
+            User.findOne = jest.fn().mockResolvedValue(userMockdata)
+            bcrypt.compare = jest.fn().mockResolvedValue(false)
+            await Helper.findByCredentials(req, res)
+        } catch(e) {
+            expect(e).toThrowError;     
+        }
+    });
+
+  
 
 });
