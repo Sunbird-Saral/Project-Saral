@@ -7,9 +7,9 @@ const Marks = require("../models/marks")
 const schoolController = require("../controller/schoolController")
 const { stringObject } = require('../utils/commonUtils');
 const { auth } = require('../middleware/auth');
-const logging = require('../logging/logger')
+const logging = require('../logger/logger')
 
-logging.info('Redirecting to school controller')
+// logging.info('Redirecting to school controller')
 router.route('/schools/login').post(schoolController.loginSchool)
 
 

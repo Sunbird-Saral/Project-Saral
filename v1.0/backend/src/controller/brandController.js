@@ -1,5 +1,6 @@
 const Schools = require('../models/school')
 const Brands = require('../models/brand')
+const logger = require('../logger/logger')
 
 
 exports.fetchBrandData = async (req, res, next) => {
@@ -35,6 +36,7 @@ exports.fetchBrandData = async (req, res, next) => {
 exports.fetchDefaultBrandData = async (req, res, next) => {
     try {
         const brand = await Brands.find({ state: { $exists: false } }, { appName: 1, themeColor1: 1, themeColor2: 1, logoImage: 1, _id: 0 }).lean()
+    
         if (brand.length) {
             let resultObj = brand[0]
             res.status(200).json({ ...resultObj })
