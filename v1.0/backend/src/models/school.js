@@ -61,7 +61,7 @@ const schoolSchema = new mongoose.Schema({
         type: Boolean,
         required: false
     },
-    timer: { 
+    scanTimeoutMs: { 
         type: Number,
         required: false
     },
