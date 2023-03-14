@@ -11,7 +11,7 @@
     "offlineMode": true,
     "isAppForceUpdateEnabled": true,
     "district": "district1",
-    "timer": 60000,
+    "scanTimeoutMs": 60000,
     "isManualEditEnable": true
   },
   {
