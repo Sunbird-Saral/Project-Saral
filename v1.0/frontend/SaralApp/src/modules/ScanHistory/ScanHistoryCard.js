@@ -1,10 +1,10 @@
 import React, { memo, useEffect, useState } from 'react';
-import { ActivityIndicator, Alert, Text, TouchableOpacity, View, Modal, StyleSheet, Dimensions } from 'react-native';
+import { ActivityIndicator, Text, TouchableOpacity, View, Modal, StyleSheet, Dimensions } from 'react-native';
 import { connect, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
 import AppTheme from '../../utils/AppTheme';
-import { getErrorMessage, getLoginCred, getPresentAbsentStudent, getScanData, getScannedDataFromLocal, setErrorMessage, setScannedDataIntoLocal } from '../../utils/StorageUtils';
+import { getLoginCred, getPresentAbsentStudent, getScannedDataFromLocal, setScannedDataIntoLocal } from '../../utils/StorageUtils';
 import { checkAppVersion, checkNetworkConnectivity, dispatchCustomModalMessage, dispatchCustomModalStatus, Exam_QuestionHeader, monospace_FF } from '../../utils/CommonUtils';
 import ExamDetailsPopup from '../common/components/ExamDetailsPopup';
 import ButtonComponent from '../common/components/ButtonComponent';
@@ -17,6 +17,8 @@ import { scanStatusDataAction } from '../ScanStatus/scanStatusDataAction';
 import axios from 'axios';
 import { ScrollView } from 'react-native-gesture-handler';
 import { collectErrorLogs } from '../CollectErrorLogs';
+import Constant from '../../flux/actions/constants';
+
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
 const HEIGHT_MODAL = 150;
@@ -50,13 +52,19 @@ const ScanHistoryCard = ({
         getStudentList()
     }, [])
     const getSaveCount = () => {
-        let hasSet = filteredData.response.hasOwnProperty("set") ? filteredData.response.set.length >= 0 ? filteredData.response.set : '' : ''
+        let hasSet = filteredData.response.hasOwnProperty("set") ? filteredData.response.set.length >= 0 ? filteredData.response.set : '' : null
        
         let data =
             typeof (scanedData.response) === "object" ?
                 scanedData.response.data ?
                     scanedData.response.data.filter((o, index) => {
-                        let stdCondition = hasSet.length >= 0 ? o.studentAvailability && o.marksInfo.length > 0 && hasSet == o.set : o.studentAvailability && o.marksInfo.length > 0 && o.examDate == filteredData.response.examDate
+                        let stdCondition = hasSet == null ? 
+                         o.studentAvailability && o.marksInfo.length > 0 && o.examDate == filteredData.response.examDate
+                         :
+                          hasSet.length >= 0 ? o.studentAvailability && o.marksInfo.length > 0 && hasSet == o.set 
+                         :
+                          false
+
                         if (stdCondition) {
                             return true
                         }
@@ -69,8 +77,7 @@ const ScanHistoryCard = ({
         return data.length;
     }
 
-    const SAVED_SCANNED_DATA_INTO_LOCAL = 'saved_scanned_data_into_local'
-    const onPressContinue = () => {
+        const onPressContinue = () => {
         navigation.push('myScan')
     }
 
@@ -161,13 +168,22 @@ const ScanHistoryCard = ({
                 .then(function (res) {
                     apiResponse = res;
                     clearTimeout(id);
-                    api.processResponse(res);
-                    dispatch(dispatchAPIAsync(api));
-                    callScanStatusData(filteredDatalen, localScanData)
+                    let hasMessage = res ? typeof res.data == "string" ? true : false : false
+                    if (hasMessage) {
+                        api.processResponse(res);
+                        callScanStatusData(filteredDatalen, localScanData)
+                        
+                    } else {
+                        dispatch(dispatchAPIAsync(res.data));
+                        setScanStatusData(filteredDatalen);
+                        setScannedDataIntoLocal(localScanData);
+                        callCustomModal(Strings.message_text,Strings.saved_successfully,false);
+                        setIsLoading(false);
+                    }
                 })
                 .catch(function (err) {
                     collectErrorLogs("ScanHistoryCard.js","saveScanData",api.apiEndPoint(),err,false);
-                    callCustomModal(Strings.message_text,err.response.data && err.response.data.error ? err.response.data.error  : Strings.contactAdmin,false);
+                    callCustomModal(Strings.message_text,err && err.response && err.response.data && err.response.data.error ? err.response.data.error  : Strings.contactAdmin,false);
                     clearTimeout(id);
                     setIsLoading(false);
                 });
@@ -186,6 +202,9 @@ const ScanHistoryCard = ({
             "page": 0,
             "schoolId": loginData.data.school.schoolId,
             "downloadRes": false
+        }
+        if (filteredData.response.hasOwnProperty("set")) {
+            dataPayload.set = filteredData.response.set
         }
         let apiObj = new scanStatusDataAction(dataPayload);
         FetchSavedScannedData(apiObj, loginCred.schoolId, loginCred.password, filteredDatalen, localScanData)
@@ -212,7 +231,7 @@ const ScanHistoryCard = ({
                     apiResponse = res
                     clearTimeout(id)
                     api.processResponse(res)
-                    dispatch(dispatchAPIAsync(api));
+                    dispatch(dispatchAPIAsyncSavedData(api));
                     setScanStatusData(filterDataLen)
                     setScannedDataIntoLocal(localScanData)
                     setIsLoading(false)
@@ -228,7 +247,14 @@ const ScanHistoryCard = ({
         }
     }
 
-    function dispatchAPIAsync(api) {
+    function dispatchAPIAsync(res) {
+        return {
+            type: Constant.SCANNED_DATA,
+            payload: res
+        }
+    }
+
+    function dispatchAPIAsyncSavedData(api) {
         return {
             type: api.type,
             payload: api.getPayload()
@@ -543,8 +569,6 @@ const mapStateToProps = (state) => {
         studentsAndExamData : state.studentsAndExamData,
         apiStatus: state.apiStatus,
         bgFlag: state.bgFlag,
-        studentsAndExamData: state.studentsAndExamData,
-        apiStatus: state.apiStatus,
         multiBrandingData: state.multiBrandingData.response.data
     }
 }

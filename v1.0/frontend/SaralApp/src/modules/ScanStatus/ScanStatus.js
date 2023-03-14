@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, Text, View, BackHandler } from 'react-native';
+import { FlatList, Text, View } from 'react-native';
 
 //redux
 import { connect } from 'react-redux';
@@ -19,7 +19,7 @@ import { bindActionCreators } from 'redux';
 //api
 import APITransport from '../../flux/actions/transport/apitransport'
 import AppTheme from '../../utils/AppTheme';
-import { getPresentAbsentStudent, getScannedDataFromLocal,getErrorMessage } from '../../utils/StorageUtils';
+import { getPresentAbsentStudent, getScannedDataFromLocal } from '../../utils/StorageUtils';
 import ShareComponent from '../common/components/Share';
 import MultibrandLabels from '../common/components/multibrandlabels';
 import { monospace_FF } from '../../utils/CommonUtils';
@@ -85,13 +85,16 @@ const ScanStatus = ({
     }
 
     const getPresentStudentList = ()=>{
-        let hasSet = filteredData.hasOwnProperty("set") ? filteredData.set.length >= 0 ? filteredData.set : '' : ''
+        let hasSet = filteredData.hasOwnProperty("set") ? filteredData.set.length >= 0 ? filteredData.set : '' : null
         let data = typeof (scanedData) === "object"
         ?
         scanedData.data
             ?
             scanedData.data.filter((o, index) => {
-                let stdCondition = hasSet.length >= 0 ? o.studentAvailability && o.marksInfo.length > 0 && hasSet == o.set : o.studentAvailability && o.marksInfo.length > 0 & o.examDate == filteredData.examDate
+                let stdCondition = hasSet==null ?
+                 o.studentAvailability && o.marksInfo.length > 0 & o.examDate == filteredData.examDate 
+                 : hasSet.length >= 0 ? o.studentAvailability && o.marksInfo.length > 0 && hasSet == o.set 
+                 : false
                 if (stdCondition) {
                     return true
                 }
