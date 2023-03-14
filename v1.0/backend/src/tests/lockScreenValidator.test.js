@@ -30,46 +30,30 @@ describe('should lock school ', () => {
     })
 
 
-
-    it("should able to lock school when locktype is schoolId ", () => {
-        const req = mockRequest();
-        const res = mockResponse()
-        req.params = schoolMockdata
-
-        Lock.find = jest.fn().mockReturnValue({ lean: () => lockMockdata })
-
-        Helper.lockScreenValidator(req, res)
-        expect(Lock.find).toHaveBeenCalledTimes(1)
-        expect(Helper.lockScreenValidator(schoolMockdata, "schoolId"))
-    });
-
-
     it("should  able to lock school when locktype is state ", async () => {
-        const req = mockRequest();
-        const res = mockResponse()
-        req.params = schoolMockdata
 
         Lock.find = jest.fn().mockReturnValue({ lean: () => lockStateMockdata })
 
-        await Helper.lockScreenValidator(req, res)
+        await expect(Helper.lockScreenValidator(schoolMockdata,"state")).rejects.toThrow()
         expect(Lock.find).toHaveBeenCalledTimes(1)
-        expect(Helper.lockScreenValidator(schoolMockdata, "state"))
     });
 
+
+
     it("should able to lock school when locktype is district ", async () => {
-        try{
-        const req = mockRequest();
-        const res = mockResponse()
-        req.params = schoolMockdata
 
         Lock.find = jest.fn().mockReturnValue({ lean: () => lockDistrictMockdata })
 
-        await Helper.lockScreenValidator(req, res,'district')
+        await expect(Helper.lockScreenValidator(schoolMockdata,"district")).rejects.toThrow()
         expect(Lock.find).toHaveBeenCalledTimes(1)
-        expect(Helper.lockScreenValidator(schoolMockdata, "district"))
-        }catch(e){
-            expect(e).toThrowError;  
-        }
+    });
+
+    it("should able to lock school when locktype is schoolId ", async () => {
+
+        Lock.find = jest.fn().mockReturnValue({ lean: () => lockMockdata })
+
+        await expect(Helper.lockScreenValidator(schoolMockdata,"state")).rejects.toThrow()
+        expect(Lock.find).toHaveBeenCalledTimes(1)
     });
 
 
