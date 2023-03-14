@@ -48,7 +48,7 @@ let stringObject = () => {
   };
 
 module.exports = {
-    getFilePath,
-    deleteAllfilesFromReports,
+    // getFilePath,
+    // deleteAllfilesFromReports,
     stringObject
 }
