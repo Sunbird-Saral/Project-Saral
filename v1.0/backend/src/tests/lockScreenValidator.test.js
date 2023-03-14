@@ -66,7 +66,7 @@ describe('should lock school ', () => {
 
         await Helper.lockScreenValidator(req, res,'district')
         expect(Lock.find).toHaveBeenCalledTimes(1)
-        // expect(Helper.lockScreenValidator(schoolMockdata, "district"))
+        expect(Helper.lockScreenValidator(schoolMockdata, "district"))
         }catch(e){
             expect(e).toThrowError;  
         }
