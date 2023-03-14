@@ -98,7 +98,7 @@ public class SaralSDKModule extends ReactContextBaseJavaModule implements Activi
     }
 
     @ReactMethod
-    void startCamera(String layoutSchema,String page, Promise promise) {
+    void startCamera(String layoutSchema,String page, int hasTimer, boolean isManualEditEnable, Promise promise) {
         Log.d(TAG, "startCamera called with: " + layoutSchema);
         Log.d(TAG, "startCamera called with: " + page);
 
@@ -110,6 +110,8 @@ public class SaralSDKModule extends ReactContextBaseJavaModule implements Activi
         Intent intent                   = new Intent(currentActivity, SaralSDKOpenCVScannerActivity.class);
         intent.putExtra("layoutConfigs", layoutSchema);
         intent.putExtra("page", page);
+        intent.putExtra("timer", hasTimer);
+        intent.putExtra("isManualEditEnable", isManualEditEnable);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         currentActivity.startActivity(intent);
     }

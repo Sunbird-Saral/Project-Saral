@@ -59,6 +59,8 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
 
     private String mlayoutConfigs                       = null;
     private String pageNumber                           = null;
+    private int timer                                   = 0;
+    private boolean isManualEditEnable                  = false;
     private boolean isHWClassiferAvailable              = true;
     private boolean isRelevantFrameAvailable            = false;
     private boolean mIsScanningComplete                 = false;
@@ -81,7 +83,8 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
     private int layoutMinWidth = 0;
     private int layoutMinHeight = 0;
     private int detectionRadius = 0;
-    private int timeInMiliSecond = 60000;
+    private int timeInMiliSecond = 0;
+    private boolean hasEditEnable = false;
 
     public SaralSDKOpenCVScannerActivity() {
         Log.i(TAG, "Instantiated new " + this.getClass());
@@ -97,8 +100,14 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
         super.onCreate(savedInstanceState);
         Bundle b = getIntent().getExtras();
         if(b != null) {
-            mlayoutConfigs = b.getString("layoutConfigs");
-            pageNumber     = b.getString("page");
+            mlayoutConfigs          = b.getString("layoutConfigs");
+            pageNumber              = b.getString("page");
+            timer                   = b.getInt("timer");
+            isManualEditEnable      = b.getBoolean("isManualEditEnable");
+
+            timeInMiliSecond        = timer > 0 ? timer : 60000;
+            hasEditEnable           = isManualEditEnable ? isManualEditEnable : false;
+
             Log.d(TAG, "Scanner type: " + mlayoutConfigs);
             Log.d(TAG, "Page Number" + pageNumber);
             timerTask(mlayoutConfigs, pageNumber);
@@ -281,30 +290,28 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
     }
 
     private void timerTask(String layoutSchema, String pageNumber){
-        new android.os.Handler(Looper.getMainLooper()).postDelayed(
-                new Runnable() {
-                    public void run() {
-
-                        boolean hasDestroyed = isDestroyed() ? false : true ;
-
-                        if (hasDestroyed){
-                        AlertDialog.Builder alertDialog = new AlertDialog.Builder(
-                                SaralSDKOpenCVScannerActivity.this);
-
-                            alertDialog
-                                    .setTitle("Message")
-                                    .setMessage("Do you want to contiue with manual edit screen ?")
-                                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                            setDefaultValue(layoutSchema, pageNumber);
-                                        }
-                                    })
-                                    .setNegativeButton("No", null)
-                                    .show();
+        if (hasEditEnable)
+            new android.os.Handler(Looper.getMainLooper()).postDelayed(
+                    new Runnable() {
+                        public void run() {
+                            boolean hasDestroyed = isDestroyed() ? false : true;
+                            if (hasDestroyed){
+                                AlertDialog.Builder alertDialog = new AlertDialog.Builder(
+                                        SaralSDKOpenCVScannerActivity.this);
+                                alertDialog
+                                        .setTitle("Message")
+                                        .setMessage("Do you want to contiue with manual edit screen ?")
+                                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                setDefaultValue(layoutSchema, pageNumber);
+                                            }
+                                        })
+                                        .setNegativeButton("No", null)
+                                        .show();
+                            }
                         }
-                    }
-                }, timeInMiliSecond);
+                        }, timeInMiliSecond);
     }
 
     private void setDefaultValue(String mlayoutConfigs, String pageNumber){
