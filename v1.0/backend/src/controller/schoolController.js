@@ -4,6 +4,7 @@ const Users = require("../models/users")
 const Helper = require('../middleware/helper')
 const { stringObject } = require('../utils/commonUtils');
 const { auth } = require('../middleware/auth');
+const {log} = require('../logging/logger')
 
 exports.loginSchool = async (req, res, next) => {
   try {
@@ -59,7 +60,7 @@ exports.loginSchool = async (req, res, next) => {
       classes.sort((a, b) => a.classId.trim().localeCompare(b.classId.trim()))
       data.classes = classes
     }
-
+    log.customError = (error, req, '>>>This was my custom message<<<')
     res.status(200).json({
       ... data
     });
