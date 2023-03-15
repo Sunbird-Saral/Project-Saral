@@ -4,7 +4,7 @@ const User = require("../models/users")
 const Helper = require('../middleware/helper')
 const userMockdata = require('./mock-data/user.json')
 const bcrypt = require('bcryptjs')
-const AppError = require('../utils/appError')
+const dummyPass =  require("../utils/commonUtils")
 
 
 
@@ -33,7 +33,7 @@ describe('fetch User By credentials ', () => {
         const res = mockResponse()
         req.params = {
             userId: "u001",
-            password: "tarento@123"
+            password: dummyPass
         }
 
         User.findOne = jest.fn().mockResolvedValue(userMockdata)
@@ -50,7 +50,7 @@ describe('fetch User By credentials ', () => {
             const res = mockResponse()
             req.params = {
                 userId: "u00",
-                password: "tarento@123"
+                password: dummyPass
             }
             User.findOne = jest.fn().mockResolvedValue(null)
             await Helper.findByCredentials(req, res)
@@ -65,7 +65,7 @@ describe('fetch User By credentials ', () => {
             const res = mockResponse()
             req.params = {
                 userId: "u001",
-                password: "tarento"
+                password: dummyPass
             }
             User.findOne = jest.fn().mockResolvedValue(userMockdata)
             bcrypt.compare = jest.fn().mockResolvedValue(false)

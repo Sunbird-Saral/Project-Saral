@@ -5,6 +5,8 @@ let stringObject = () => {
   };
 };
 
+let testPass =  "tarento@123"
+
 module.exports = {
   stringObject
 }
