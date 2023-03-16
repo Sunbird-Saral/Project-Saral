@@ -4,7 +4,7 @@ const Users = require("../models/users")
 const Helper = require('../middleware/helper')
 const { stringObject } = require('../utils/commonUtils');
 const { auth } = require('../middleware/auth');
-const {log} = require('../logging/logger')
+const {logger,loggerMiddleware} = require('../logging/logger')
 
 exports.loginSchool = async (req, res, next) => {
   try {
@@ -60,22 +60,27 @@ exports.loginSchool = async (req, res, next) => {
       classes.sort((a, b) => a.classId.trim().localeCompare(b.classId.trim()))
       data.classes = classes
     }
-    log.customError = (error, req, '>>>This was my custom message<<<')
+    // log.customError = (error, req, '>>>This was my custom message<<<')
+     logger.info(`userId :${JSON.stringify(data)}`)
     res.status(200).json({
       ... data
     });
   } catch (e) {
     if (e && e.message == 'School Id or Password is not correct.') {
+      logger.warn(e.message)
+      
       res.status(401).json({
         error: e.message
       })
     }
     else if (e && e.message == stringObject().lockScreen) {
+      logger.warn(e.message)
       res.status(500).json({
         error: e.message
       })
     }
     else {
+      logger.warn(e)
       res.status(400).json({
         e
       });

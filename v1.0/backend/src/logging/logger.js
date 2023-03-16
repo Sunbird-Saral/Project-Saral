@@ -1,5 +1,49 @@
 const pino = require('pino')
+const prettty = require('pino-pretty')
+const uuid = require('uuid');
+const uniqeId = uuid.v4();
+const moment = require('moment')
 const log = pino({});
+const levels = {
+  http: 10,
+  debug: 20,
+  info: 30,
+  warn: 40,
+  error: 50,
+  fatal: 60,
+};
+const logger = pino({
+  level: process.env.NODE_ENV === 'production' ? 'info' : 'debug',
+  customLevels: levels,
+  useOnlyCustomLevels: true,
+  
+  // formatters: {
+  //   level: (label) => {
+  //     return { severity: label.toUpperCase() };
+  //   },
+  // },
+  // base: {
+  //   pid : true
+  // },
+  timestamp: pino.stdTimeFunctions.isoTime,
+  formatters: {
+    bindings: (bindings) => {
+      return { pid: bindings.pid, host: bindings.hostname ,uuid: uniqeId};
+    },
+    level: (label) => {
+      return { level: label.toUpperCase() };
+    },
+  },
+},
+prettty()
+)
+
+
+
+
+
+
+
 
 log.customError = (error, req, details = '', LogLevel = process.env.LOG_LEVEL) => {
     // const req = global.reqInfo;
@@ -65,5 +109,5 @@ log.customError = (error, req, details = '', LogLevel = process.env.LOG_LEVEL) =
   };
   
   module.exports = {
-    log,
+    log,logger
   };
