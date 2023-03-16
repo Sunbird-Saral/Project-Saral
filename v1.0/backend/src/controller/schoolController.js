@@ -3,7 +3,6 @@ const Classes = require("../models/classes")
 const Users = require("../models/users")
 const Helper = require('../middleware/helper')
 const { stringObject } = require('../utils/commonUtils');
-const { auth } = require('../middleware/auth');
 
 exports.loginSchool = async (req, res, next) => {
   try {
