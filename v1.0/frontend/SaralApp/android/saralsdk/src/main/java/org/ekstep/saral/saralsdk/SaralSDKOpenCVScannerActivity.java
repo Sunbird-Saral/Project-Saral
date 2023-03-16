@@ -60,7 +60,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
     private String mlayoutConfigs                       = null;
     private String pageNumber                           = null;
     private int timer                                   = 0;
-    private boolean isManualEditEnable                  = false;
+    private boolean isManualEditEnabled                  = false;
     private boolean isHWClassiferAvailable              = true;
     private boolean isRelevantFrameAvailable            = false;
     private boolean mIsScanningComplete                 = false;
@@ -103,10 +103,10 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
             mlayoutConfigs          = b.getString("layoutConfigs");
             pageNumber              = b.getString("page");
             timer                   = b.getInt("timer");
-            isManualEditEnable      = b.getBoolean("isManualEditEnable");
+            isManualEditEnabled      = b.getBoolean("isManualEditEnabled");
 
             timeInMiliSecond        = timer > 0 ? timer : 60000;
-            hasEditEnable           = isManualEditEnable ? isManualEditEnable : false;
+            hasEditEnable           = isManualEditEnabled ? isManualEditEnabled : false;
 
             Log.d(TAG, "Scanner type: " + mlayoutConfigs);
             Log.d(TAG, "Page Number" + pageNumber);
