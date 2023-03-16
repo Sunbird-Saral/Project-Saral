@@ -12,7 +12,7 @@
     "isAppForceUpdateEnabled": true,
     "district": "district1",
     "scanTimeoutMs": 60000,
-    "isManualEditEnable": true
+    "isManualEditEnabled": true
   },
   {
     "name": "Dummy school 2",
