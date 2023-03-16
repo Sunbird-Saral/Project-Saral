@@ -6,8 +6,6 @@ const mockStudentMarksExist = require("./mock-data/mockStudentMarksExist.json")
 const mockUpdateMarksBody = require("./mock-data/mockUpdateSaveMarks.json")
 const mockSavedData = require("./mock-data/savedScanData.json")
 const Helper = require('../middleware/helper')
-const AppError = require('../utils/appError')
-
 
 
 const mockRequest = () => {
