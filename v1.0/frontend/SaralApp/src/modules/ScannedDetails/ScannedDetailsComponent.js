@@ -1249,7 +1249,10 @@ const ScannedDetailsComponent = ({
     const openCameraActivity = async () => {
         try {
 
-            SaralSDK.startCamera(JSON.stringify(ocrLocalResponse), (currentIndex + 1).toString()).then(res => {
+            let hasTimer   =  loginData.data.school.hasOwnProperty("scanTimeoutMs") ? loginData.data.school.scanTimeoutMs : 0
+            let isManualEditEnabled   =  loginData.data.school.hasOwnProperty("isManualEditEnabled") ? loginData.data.school.isManualEditEnabled : false
+
+            SaralSDK.startCamera(JSON.stringify(ocrLocalResponse), (currentIndex + 1).toString(), hasTimer, isManualEditEnabled).then(res => {
                 let roisData = JSON.parse(res);
                 let cells = roisData.layout.cells;
                 consolidatePrediction(cells, roisData)
