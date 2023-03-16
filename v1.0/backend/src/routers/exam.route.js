@@ -1,7 +1,6 @@
 const express = require('express')
 const Exams = require('../models/exams')
 const { auth } = require('../middleware/auth')
-const { getSubjectCode } = require('../utils/commonUtils')
 const Counters = require('../models/counter')
 const router = new express.Router()
 

@@ -3,7 +3,6 @@ const Classes = require("../models/classes")
 const Users = require("../models/users")
 const Helper = require('../middleware/helper')
 const { stringObject } = require('../utils/commonUtils');
-const { auth } = require('../middleware/auth');
 
 exports.loginSchool = async (req, res, next) => {
   try {
@@ -32,6 +31,8 @@ exports.loginSchool = async (req, res, next) => {
       tags: schools.tags,
       autoSyncBatchSize: schools.autoSyncBatchSize,
       isMinimalMode: schools.isMinimalMode,
+      isManualEditEnabled: schools.isManualEditEnabled,
+      scanTimeoutMs: schools.scanTimeoutMs,
       supportEmail: schools.supportEmail,
       offlineMode: schools.offlineMode,
       isAppForceUpdateEnabled: schools.isAppForceUpdateEnabled,
