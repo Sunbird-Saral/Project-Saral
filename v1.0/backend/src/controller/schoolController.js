@@ -32,7 +32,7 @@ exports.loginSchool = async (req, res, next) => {
       tags: schools.tags,
       autoSyncBatchSize: schools.autoSyncBatchSize,
       isMinimalMode: schools.isMinimalMode,
-      isManualEditEnable: schools.isManualEditEnable,
+      isManualEditEnabled: schools.isManualEditEnabled,
       scanTimeoutMs: schools.scanTimeoutMs,
       supportEmail: schools.supportEmail,
       offlineMode: schools.offlineMode,

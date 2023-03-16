@@ -57,7 +57,7 @@ const schoolSchema = new mongoose.Schema({
         type: Boolean,
         required: false
     },
-    isManualEditEnable: { 
+    isManualEditEnabled: { 
         type: Boolean,
         required: false
     },
