@@ -61,7 +61,7 @@ const schoolSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    enableFBAnalytics: {
+    isFBAnalyticsEnabled: {
         type: Boolean,
         required: false,
     },

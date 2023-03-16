@@ -36,7 +36,7 @@ exports.loginSchool = async (req, res, next) => {
       offlineMode: schools.offlineMode,
       isAppForceUpdateEnabled: schools.isAppForceUpdateEnabled,
       lock: schools.lock,
-      enableFBAnalytics: schools.enableFBAnalytics,
+      isFBAnalyticsEnabled: schools.isFBAnalyticsEnabled,
       userId: users.userId,
 
 

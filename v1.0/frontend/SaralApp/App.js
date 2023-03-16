@@ -49,7 +49,7 @@ setCustomTouchableOpacity(customTouchableOpacityProps);
 const App = () => {
   useEffect(async()=>{
     let hasFBAnalytics = await getLoginData();
-    const hasFBAnalyticsValue = hasFBAnalytics.school && hasFBAnalytics.school.enableFBAnalytics
+    const hasFBAnalyticsValue =  hasFBAnalytics.school.hasOwnProperty("isFBAnalyticsEnabled") && hasFBAnalytics.school.isFBAnalyticsEnabled
     if(hasFBAnalyticsValue != null){
     if (__DEV__) {
       analytics().setAnalyticsCollectionEnabled(hasFBAnalyticsValue);
