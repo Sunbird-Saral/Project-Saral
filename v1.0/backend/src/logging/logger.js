@@ -14,17 +14,9 @@ const levels = {
 };
 const logger = pino({
   level: process.env.NODE_ENV === 'production' ? 'info' : 'debug',
-  customLevels: levels,
-  useOnlyCustomLevels: true,
+  // customLevels: levels,
+  // useOnlyCustomLevels: true,
   
-  // formatters: {
-  //   level: (label) => {
-  //     return { severity: label.toUpperCase() };
-  //   },
-  // },
-  // base: {
-  //   pid : true
-  // },
   timestamp: pino.stdTimeFunctions.isoTime,
   formatters: {
     bindings: (bindings) => {
@@ -45,13 +37,13 @@ prettty()
 
 
 
-log.customError = (error, req, details = '', LogLevel = process.env.LOG_LEVEL) => {
+log.customError = (e, req, details = '', LogLevel = process.env.LOG_LEVEL) => {
     // const req = global.reqInfo;
-    console.log("This is req part>>>", req.schoolId)
-    const e = new Error(error);
-    const frame = e.stack.split('\n')[2];
-    const functionName = frame.split(' ')[5];
-    const lineNumber = frame.split(':').reverse()[1];
+     console.log("This is req part>>>", req)
+    // const e = new Error(error);
+    // const frame = e.stack.split('\n')[2];
+    // const functionName = frame.split(' ')[5];
+    // const lineNumber = frame.split(':').reverse()[1];
     const errorInfo = {
       // If we have a request object then parse it otherwise it is null
     //   reqInfo: req
@@ -77,13 +69,13 @@ log.customError = (error, req, details = '', LogLevel = process.env.LOG_LEVEL) =
     //       }
     //     : null,
     //   req.schoolId,  
-      schoolId: req.schoolId,
-        functionName,
-      lineNumber,
+       schoolId: req.schoolId,
+      //   functionName,
+      // lineNumber,
       // Assuming that error is occured in application layer and not the database end.
-      errorType: 'application error',
-      stack: error.stack || e.stack,
-      message: error.message || e.message,
+      // errorType: 'application error',
+      // stack: error.stack || e.stack,
+      // message: error.message || e.message,
       env: process.env.NODE_ENV,
       // defaults read from environment variable
       logLevel: LogLevel,
