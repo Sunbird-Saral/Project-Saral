@@ -57,6 +57,14 @@ const schoolSchema = new mongoose.Schema({
         type: Boolean,
         required: false
     },
+    isManualEditEnabled: { 
+        type: Boolean,
+        required: false
+    },
+    scanTimeoutMs: { 
+        type: Number,
+        required: false
+    },
     district:{
         type: String,
         required: true

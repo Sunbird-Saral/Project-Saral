@@ -410,7 +410,9 @@ class MyScanComponent extends Component {
                 let totalPages = this.props.roiData.data.layout.hasOwnProperty("pages") && this.props.roiData.data.layout.pages
                 let pageNumber = totalPages || totalPages > 0 ? "1" : null
                 let jsonRoiData = this.props.roiData.data
-                SaralSDK.startCamera(JSON.stringify(jsonRoiData), pageNumber).then(res => {
+                let hasTimer   =  this.props.loginData.data.school.hasOwnProperty("scanTimeoutMs") ? this.props.loginData.data.school.scanTimeoutMs : 0
+                let isManualEditEnabled   =  this.props.loginData.data.school.hasOwnProperty("isManualEditEnabled") ? this.props.loginData.data.school.isManualEditEnabled : false
+                SaralSDK.startCamera(JSON.stringify(jsonRoiData), pageNumber, hasTimer, isManualEditEnabled).then(res => {
                     let roisData = JSON.parse(res);
                     let cells = roisData.layout.cells;
                     this.consolidatePrediction(cells, roisData)

@@ -1,11 +1,15 @@
 package org.ekstep.saral.saralsdk;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.media.MediaActionSound;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Looper;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.SurfaceView;
@@ -44,6 +48,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class SaralSDKOpenCVScannerActivity extends ReactActivity implements CameraBridgeViewBase.CvCameraViewListener2 {
     private static final String  TAG                    = "SrlSDK::Scanner";
@@ -53,6 +59,8 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
 
     private String mlayoutConfigs                       = null;
     private String pageNumber                           = null;
+    private int timer                                   = 0;
+    private boolean isManualEditEnabled                  = false;
     private boolean isHWClassiferAvailable              = true;
     private boolean isRelevantFrameAvailable            = false;
     private boolean mIsScanningComplete                 = false;
@@ -75,6 +83,8 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
     private int layoutMinWidth = 0;
     private int layoutMinHeight = 0;
     private int detectionRadius = 0;
+    private int timeInMiliSecond = 0;
+    private boolean hasEditEnable = false;
 
     public SaralSDKOpenCVScannerActivity() {
         Log.i(TAG, "Instantiated new " + this.getClass());
@@ -90,10 +100,17 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
         super.onCreate(savedInstanceState);
         Bundle b = getIntent().getExtras();
         if(b != null) {
-            mlayoutConfigs = b.getString("layoutConfigs");
-            pageNumber     = b.getString("page");
+            mlayoutConfigs          = b.getString("layoutConfigs");
+            pageNumber              = b.getString("page");
+            timer                   = b.getInt("timer");
+            isManualEditEnabled      = b.getBoolean("isManualEditEnabled");
+
+            timeInMiliSecond        = timer > 0 ? timer : 60000;
+            hasEditEnable           = isManualEditEnabled ? isManualEditEnabled : false;
+
             Log.d(TAG, "Scanner type: " + mlayoutConfigs);
             Log.d(TAG, "Page Number" + pageNumber);
+            timerTask(mlayoutConfigs, pageNumber);
         }
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -271,6 +288,106 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
     public void onCameraViewStopped() {
         mRgba.release();
     }
+
+    private void timerTask(String layoutSchema, String pageNumber){
+        if (hasEditEnable)
+            new android.os.Handler(Looper.getMainLooper()).postDelayed(
+                    new Runnable() {
+                        public void run() {
+                            boolean hasDestroyed = isDestroyed() ? false : true;
+                            if (hasDestroyed){
+                                AlertDialog.Builder alertDialog = new AlertDialog.Builder(
+                                        SaralSDKOpenCVScannerActivity.this);
+                                alertDialog
+                                        .setTitle("Message")
+                                        .setMessage("Do you want to contiue with manual edit screen ?")
+                                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                setDefaultValue(layoutSchema, pageNumber);
+                                            }
+                                        })
+                                        .setNegativeButton("No", null)
+                                        .show();
+                            }
+                        }
+                        }, timeInMiliSecond);
+    }
+
+    private void setDefaultValue(String mlayoutConfigs, String pageNumber){
+        try {
+            JSONObject layoutConfigs    = new JSONObject(mlayoutConfigs);
+            JSONObject layoutObject     = layoutConfigs.getJSONObject("layout");
+            JSONArray  cells            = layoutObject.getJSONArray("cells");
+
+            for (int i = 0; i < cells.length(); i++) {
+                JSONArray cellROIs      = cells.getJSONObject(i).getJSONArray("rois");
+                JSONObject cell = cells.getJSONObject(i);
+                boolean includeRois = (cell.has("page") && pageNumber!=null && cell.getString("page").equals(pageNumber)) || (!cell.has("page"));
+                if (includeRois) {
+                    for (int j = 0; j < cellROIs.length(); j++) {
+                        JSONObject roi      = cellROIs.getJSONObject(j);
+
+                        if (roi.getString("extractionMethod").equals("CELL_OMR")) {
+                            JSONObject result  = new JSONObject();
+                            result.put("prediction", 0);
+                            result.put("confidence", new Double(1.00));
+
+                            if(!roi.has("result")){
+                                roi.put("result", result);
+                            }else{
+                                JSONObject resultObj = roi.getJSONObject("result");
+                                if(resultObj.getString("prediction") != null){
+                                    roi.put("result", result);
+                                }
+                            }
+                        }
+
+                        if (roi.getString("extractionMethod").equals("NUMERIC_CLASSIFICATION")){
+                            JSONObject result  = new JSONObject();
+                            result.put("prediction", 1);
+                            result.put("confidence", new Double(1.00));
+
+                            if(!roi.has("result")){
+                                roi.put("result", result);
+                            }else{
+                                JSONObject resultObj = roi.getJSONObject("result");
+                                if(resultObj.getString("prediction") != null){
+                                    roi.put("result", result);
+                                }
+                            }
+                        }
+
+                        if (roi.get("extractionMethod").equals("BLOCK_ALPHANUMERIC_CLASSIFICATION")){
+                            JSONObject result  = new JSONObject();
+                            result.put("prediction", "A");
+                            result.put("confidence", new Double(1.00));
+
+                            if(!roi.has("result")){
+                                roi.put("result", result);
+                            }else{
+                                JSONObject resultObj = roi.getJSONObject("result");
+                                if(resultObj.getString("prediction") != null){
+                                    roi.put("result", result);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            ReactInstanceManager mReactInstanceManager  = getReactNativeHost().getReactInstanceManager();
+            ReactContext reactContext                   = mReactInstanceManager.getCurrentReactContext();
+            Intent intent                               = new Intent(reactContext, SaralSDKOpenCVScannerActivity.class);
+            intent.putExtra("layoutConfigsResult", layoutConfigs.toString());
+            mReactInstanceManager.onActivityResult(this, 1, 2, intent);
+            finish();
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
         mRgba               = inputFrame.rgba();

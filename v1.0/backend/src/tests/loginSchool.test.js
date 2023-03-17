@@ -3,8 +3,8 @@ const School = require("../models/school")
 const ClassModel = require("../models/classes")
 const schoolController = require('../controller/schoolController')
 
-const AppError = require('../utils/appError')
 const Helper = require('../middleware/helper')
+const dummyPass = require('../utils/commonUtils')
 
 
 const mockSchoolData = require("./mock-data/school.json")
@@ -59,7 +59,7 @@ describe('login school', () => {
     const res = mockResponse()
     req.body = {
       "schoolId": "u001",
-      "password": "tarento@123"
+      "password": dummyPass
     }
     Helper.findByCredentials = jest.fn().mockImplementationOnce(() => ({ select: jest.fn().mockResolvedValueOnce(mockSignInUser) }));
     School.findOne = jest.fn().mockResolvedValue(mockSchoolData)
@@ -81,7 +81,7 @@ describe('login school', () => {
     const res = mockResponse()
     req.body = {
       "schoolId": "u001",
-      "password": "tarento@123",
+      "password": dummyPass,
       "classes": true
     }
 
