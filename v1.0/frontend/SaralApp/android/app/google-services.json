@@ -1,34 +1,33 @@
 {
   "project_info": {
-    "project_number": "2733844998",
-    "firebase_url": "https://ocrapp-3da24.firebaseio.com",
-    "project_id": "ocrapp-3da24",
-    "storage_bucket": "ocrapp-3da24.appspot.com"
+    "project_number": "898598515470",
+    "project_id": "saralapptelemetary",
+    "storage_bucket": "saralapptelemetary.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:2733844998:android:2988d17ff95b46545ab187",
+        "mobilesdk_app_id": "1:898598515470:android:916f6bc04fb8c6b3e5dd5f",
         "android_client_info": {
           "package_name": "com.saralapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "2733844998-u2rof1lb62nf2kg1r9lr39mtashqp81s.apps.googleusercontent.com",
+          "client_id": "898598515470-b6e18eg75jq226ommh4oahfjra1lrdoc.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "ABzaSyD478Ivfz0uvMFARJIJSeyqnwFOBdC20zs"
+          "current_key": "AIzaSyCQEfurAjgeY5tJIlDfuft24uOv7-mr8-E"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "2733844998-u2rof1lb62nf2kg1r9lr39mtashqp81s.apps.googleusercontent.com",
+              "client_id": "898598515470-b6e18eg75jq226ommh4oahfjra1lrdoc.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

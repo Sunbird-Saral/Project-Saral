@@ -1,5 +1,10 @@
 apply plugin: "com.android.application"
+apply plugin: 'android'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
 
+
+// apply plugin: 'newrelic'
 import com.android.build.OutputFile
 
 /**
@@ -169,7 +174,6 @@ android {
 
             //println project.hasProperty('MYAPP_RELEASE_STORE_FILE')
             //println signingConfigs.release
-
             signingConfig signingConfigs.release
             //signingConfig signingConfigs.debug
       
@@ -203,9 +207,9 @@ android {
 }
 
 dependencies {
+
     implementation 'com.github.bumptech.glide:glide:4.13.2'
   
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.2'
 
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
@@ -219,6 +223,18 @@ dependencies {
 
     // SaralSDK use OpenCV and SaralSDK code, make them as dependencies here
     implementation project(path: ':saralsdk')
+    // new code for google firebase analytics
+
+    implementation platform('com.google.firebase:firebase-bom:31.2.3')
+
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-crashlytics'
+
+    implementation ('com.google.firebase:firebase-iid:21.1.0') {
+    transitive = true
+    }
+
+// implementation 'com.google.firebase:firebase-perf'
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
       exclude group:'com.facebook.fbjni'
@@ -251,4 +267,4 @@ task copyDownloadableDepsToLibs(type: Copy) {
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
 // SaralSDK uses Firebase library to load and make model prediction
-apply plugin: 'com.google.gms.google-services'
+

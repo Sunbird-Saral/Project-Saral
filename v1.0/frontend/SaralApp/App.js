@@ -26,9 +26,10 @@ import checkVersion from 'react-native-store-version';
 import { apkURL, apkVersionId } from './src/configs/config';
 import { getLoginData } from './src/utils/StorageUtils';
 import { collectErrorLogs } from './src/modules/CollectErrorLogs';
-
-const customTextProps = {
-  allowFontScaling: false,
+import  analytics  from '@react-native-firebase/analytics';
+import crashlytics from '@react-native-firebase/crashlytics';
+ const customTextProps = {
+allowFontScaling: false,
 };
 
 const customTextInputProps = {
@@ -44,8 +45,23 @@ setCustomText(customTextProps);
 setCustomTextInput(customTextInputProps);
 setCustomTouchableOpacity(customTouchableOpacityProps);
 
+
 const App = () => {
-  
+  useEffect(async()=>{
+    let hasFBAnalytics = await getLoginData();
+    const hasFBAnalyticsValue =  hasFBAnalytics.school.hasOwnProperty("isFBAnalyticsEnabled") && hasFBAnalytics.school.isFBAnalyticsEnabled
+    if(hasFBAnalyticsValue != null){
+    if (__DEV__) {
+      analytics().setAnalyticsCollectionEnabled(hasFBAnalyticsValue);
+      crashlytics().setCrashlyticsCollectionEnabled(hasFBAnalyticsValue);
+  } else {
+      analytics().setAnalyticsCollectionEnabled(hasFBAnalyticsValue);
+      crashlytics().setCrashlyticsCollectionEnabled(hasFBAnalyticsValue);
+  }
+}
+
+   },[])
+
   useEffect(async() => {
     let hasAppForceEnable = await getLoginData();
     StatusBar.setBackgroundColor('#FFF')
@@ -87,12 +103,40 @@ const App = () => {
     }
 }
 
+
+function getActiveRouteName(navigationState) {
+  if (!navigationState) {
+    return null;
+  }
+  const route = navigationState.routes[navigationState.index];
+  // dive into nested navigators
+  if (route.routes) {
+    return getActiveRouteName(route);
+  }
+  return route.routeName;
+}
+
   return (
     <>
       <Provider store={storeFactory}>
           {Platform.os !== 'ios' &&  <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />}
           <SafeAreaView style={{ flex: 1, backgroundColor: '#ffffff' }}>
-            <AppNavigator />
+            <AppNavigator 
+             onNavigationStateChange={async (prevState, currentState) => {
+              const currentRouteName = getActiveRouteName(currentState);
+              const previousRouteName = getActiveRouteName(prevState);
+        
+              if (previousRouteName !== currentRouteName) {
+                // the line below uses the @react-native-firebase/analytics tracker
+                // change the tracker here to use other Mobile analytics SDK.
+                  // alert(currentRouteName)
+                await analytics().logScreenView({
+                  screen_name: currentRouteName,
+                  screen_class: currentRouteName
+                });
+              }
+            }} 
+            />
           </SafeAreaView>
       </Provider>
     </>
@@ -100,3 +144,4 @@ const App = () => {
 };
 
 export default App;
+

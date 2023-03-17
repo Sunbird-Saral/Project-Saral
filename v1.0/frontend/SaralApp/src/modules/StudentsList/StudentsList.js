@@ -40,7 +40,6 @@ import { getRegularRoipi, getRegularSavedScanpi, getRegularStudentExamApi, setRe
 import constants from '../../flux/actions/constants';
 import { storeFactory } from '../../flux/store/store';
 
-
 const StudentsList = ({
     filteredData,
     loginData,
@@ -547,7 +546,6 @@ useEffect(() => {
                 </View>
 
             }
-         
             <FlatList
                 data={allStudentData}
                 renderItem={renderStudentData}
