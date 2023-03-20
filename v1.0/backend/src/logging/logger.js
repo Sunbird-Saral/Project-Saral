@@ -2,39 +2,42 @@ const pino = require('pino')
 const prettty = require('pino-pretty')
 const uuid = require('uuid');
 const uniqeId = uuid.v4();
+const httpContext = require('express-http-context');
 const moment = require('moment')
 const log = pino({});
 const levels = {
-  http: 10,
-  debug: 20,
-  info: 30,
-  warn: 40,
   error: 50,
-  fatal: 60,
+  warn: 40,
+  notice: 30,
+  info: 20,
+  debug: 10,
 };
+const fileTransport = pino.transport({
+  target: 'pino/file',
+  options: { destination: `${__dirname}/app.log` },
+});
+
 const logger = pino({
-  level: process.env.NODE_ENV === 'production' ? 'info' : 'debug',
-  // customLevels: levels,
-  // useOnlyCustomLevels: true,
-  
+  level: process.env.NODE_ENV === 'production' ? 'info' : 'info',
+  customLevels: levels,
+   useOnlyCustomLevels: true,
+
+
   timestamp: pino.stdTimeFunctions.isoTime,
   formatters: {
     bindings: (bindings) => {
-      return { pid: bindings.pid, host: bindings.hostname ,uuid: uniqeId};
+      return { pid: bindings.pid, host: bindings.hostname};
     },
     level: (label) => {
       return { level: label.toUpperCase() };
     },
+    
   },
-},
-prettty()
+ },
+//  fileTransport,
+  prettty()
+
 )
-
-
-
-
-
-
 
 
 log.customError = (e, req, details = '', LogLevel = process.env.LOG_LEVEL) => {

@@ -5,6 +5,8 @@ const Helper = require('../middleware/helper')
 const { stringObject } = require('../utils/commonUtils');
 const { auth } = require('../middleware/auth');
 const {logger,loggerMiddleware,log} = require('../logging/logger')
+const uniqeId = require('uuid');
+
 
 exports.loginSchool = async (req, res, next) => {
   try {
@@ -20,6 +22,7 @@ exports.loginSchool = async (req, res, next) => {
     await Helper.lockScreenValidator(schools)
 
     const token = await Users.generateAuthToken(users)
+    const uuid = uniqeId.v4(users);
 
     let classes = []
     let school = {
@@ -44,7 +47,8 @@ exports.loginSchool = async (req, res, next) => {
 
     let data = {
       school,
-      token
+      token,
+      uuid
     }
 
     if (req.body.classes) {
@@ -63,7 +67,7 @@ exports.loginSchool = async (req, res, next) => {
       data.classes = classes
     }
     // log.customError( req, data)
-     logger.info(`${JSON.stringify(data)}`)
+    //  logger.info(`"userId":${ JSON.stringify(data.school.userId)} "uuid":${data.uuid} "token":${data.token}`)
     res.status(200).json({
       ... data
     });

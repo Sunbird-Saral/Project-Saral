@@ -3,7 +3,8 @@
  */
  import API from '../apis/api';
  import C from '../constants';
- 
+ import { v4 as uuidv4 } from 'uuid';
+ const uuid = uuidv4()
  export class LoginAction extends API {
      constructor(loginObj, timeout = 30000) {
          super('POST', timeout, false);
@@ -29,6 +30,7 @@
      getHeaders() {
          return {
              'Content-Type': 'application/json',
+             'X-App-uuid': uuid
          }
      }
  
