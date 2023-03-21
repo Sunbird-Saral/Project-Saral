@@ -68,7 +68,11 @@ const schoolSchema = new mongoose.Schema({
     district:{
         type: String,
         required: true
-    }
+    },
+    isFBAnalyticsEnabled: {
+        type: Boolean,
+        required: false,
+    },
 }, {
     timestamps: false
 })

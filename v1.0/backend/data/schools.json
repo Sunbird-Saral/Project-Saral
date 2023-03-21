@@ -48,6 +48,7 @@
     "autoSyncBatchSize": 10,
     "offlineMode": true,
     "isAppForceUpdateEnabled": false,
+    "isFBAnalyticsEnabled": true,
     "district": "district1",
     "scanTimeoutMs": 60000,
     "isManualEditEnabled": true

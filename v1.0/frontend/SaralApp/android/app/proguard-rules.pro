@@ -23,3 +23,5 @@
 -keep class com.bumptech.glide.load.data.ParcelFileDescriptorRewinder$InternalRewinder {
   *** rewind();
 }
+-keep class io.invertase.firebase.** { *; }
+-dontwarn io.invertase.firebase.**
