@@ -5,7 +5,7 @@ const Helper = require('../middleware/helper')
 const { stringObject } = require('../utils/commonUtils');
 const { auth } = require('../middleware/auth');
 const {logger,loggerMiddleware,log} = require('../logging/logger')
-const uniqeId = require('uuid');
+
 
 
 exports.loginSchool = async (req, res, next) => {
@@ -14,7 +14,7 @@ exports.loginSchool = async (req, res, next) => {
     if (req.body.schoolId) {
       userId = req.body.schoolId.toLowerCase()
     }
-  
+    
     const users = await Helper.findByCredentials(userId, req.body.password)
     
     const schools = await Schools.findOne({ schoolId: users.schoolId })
@@ -22,7 +22,6 @@ exports.loginSchool = async (req, res, next) => {
     await Helper.lockScreenValidator(schools)
 
     const token = await Users.generateAuthToken(users)
-    const uuid = uniqeId.v4(users);
 
     let classes = []
     let school = {
@@ -47,8 +46,7 @@ exports.loginSchool = async (req, res, next) => {
 
     let data = {
       school,
-      token,
-      uuid
+      token
     }
 
     if (req.body.classes) {
@@ -67,13 +65,13 @@ exports.loginSchool = async (req, res, next) => {
       data.classes = classes
     }
     // log.customError( req, data)
-    //  logger.info(`"userId":${ JSON.stringify(data.school.userId)} "uuid":${data.uuid} "token":${data.token}`)
+    logger.info(`"userId":${JSON.stringify(data.school.userId)} "uuid":${req.headers["x-request-id"]} "token":${data.token}`)
     res.status(200).json({
       ... data
     });
   } catch (e) {
     if (e && e.message == 'School Id or Password is not correct.') {
-      logger.error(e.message)
+      logger.error(` "uuid":${req.headers["x-request-id"]} ${e.message}` )
       
       res.status(401).json({
         error: e.message

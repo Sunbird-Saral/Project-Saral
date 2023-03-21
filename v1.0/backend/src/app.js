@@ -25,10 +25,10 @@ const {logger} = require('./logging/logger')
 // const maintenanceSpec = yaml.load(spec2);
 const app = express()
 
-const loggerMiddleware = (req, res, next) => {
-    console.log('New request to: ' + req)
-    next()
-}
+// const loggerMiddleware = (req, res, next) => {
+//     console.log('New request to: ' + req)
+//     next()
+// }
 
 const loggerMidlleware = expressPinoLogger({
     logger: logger,
@@ -52,7 +52,7 @@ app.use(cors());
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 // Register the function as middleware for the application
-  app.use(loggerMiddleware)
+  // app.use(loggerMiddleware)
 //  app.use(loggerMidlleware)
 app.use(schoolRouter)
 app.use(studentRouter)
