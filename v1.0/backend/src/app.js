@@ -20,14 +20,28 @@ const frontendSpec = yaml.load(spec);
 const maintenanceSpec = yaml.load(spec2);
 const app = express()
 
+const CORS_ORIGIN = [{"origin": 'http://192.168.0.102:3000', "optionsSuccessStatus": 200,"methods": ["GET", "PUT"]},{"origin": 'http://192.168.0.104:3000', "optionsSuccessStatus": 200,"methods": ["GET", "PUT"]}]
+
+    const corsOptionsDelegate = (req, callback) => {
+
+    let isDomainAllowed = CORS_ORIGIN.filter((el)=> { return el.origin == req.header('Origin') });
+
+    if (isDomainAllowed.length > 0) {
+        callback(null, isDomainAllowed[0])
+    } else {
+        callback(new Error('Not allowed by CORS'))
+    }
+}
+
 const loggerMiddleware = (req, res, next) => {
     console.log('New request to: ' + req.method + ' ' + req.path, req.body)
     next()
 }
+
 app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }))
 app.use(express.json())
-app.use(cors());
+app.use(cors(corsOptionsDelegate));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 // Register the function as middleware for the application
