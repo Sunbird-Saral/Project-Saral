@@ -688,7 +688,6 @@ dispatchStudentExamData(payload){
 
             if (isCalledStudentAndExam) {
                 const hasNetworkData = await checkNetworkConnectivity()
-                let data = JSON.parse(studentsAndExamData.config.data)
                 if (studentsAndExamData) {
 
                     this.setState({isCalledStudentAndExam: false, isLoading: false})                    
