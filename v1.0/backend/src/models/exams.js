@@ -58,6 +58,8 @@ const examSchema = new mongoose.Schema({
     timestamps: true
 })
 
+examSchema.index({examId: -1, classId: -1, schoolId: -1})
+
 const Exams = mongoose.model('Exam', examSchema)
 
 module.exports = Exams

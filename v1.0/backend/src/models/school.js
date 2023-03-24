@@ -77,6 +77,8 @@ const schoolSchema = new mongoose.Schema({
     timestamps: false
 })
 
+schoolSchema.index({schoolId: -1})
+
 
 // Hiding private data
 schoolSchema.methods.toJSON = function () {
