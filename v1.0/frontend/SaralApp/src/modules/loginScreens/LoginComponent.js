@@ -186,11 +186,10 @@ class LoginComponent extends Component {
             }, () => {
                 let loginCredObj = {
                     "schoolId": schoolId,
-                    "password": password,
-                    "deviceUniqId":deviceUniqId
+                    "password": password
                 }
     
-                let apiObj = new LoginAction(loginCredObj);
+                let apiObj = new LoginAction(loginCredObj,deviceUniqId);
                 this.props.APITransport(apiObj);
             })
         } else if(!hasNetwork && schoolId.length > 0) {
