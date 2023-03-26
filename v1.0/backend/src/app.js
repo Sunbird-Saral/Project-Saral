@@ -18,17 +18,17 @@ const brandRouter = require('./routers/brand.route')
 var cors = require('cors');
 const {logger} = require('./logging/logger')
 
-// const spec = fs.readFileSync(`${__dirname}/swagger-saral-frontend.yaml`, 'utf-8');
-// const spec2 = fs.readFileSync(`${__dirname}/swagger-saral-maintenance.yaml`, 'utf-8');
+const spec = fs.readFileSync(`${__dirname}/swagger-saral-frontend.yaml`, 'utf-8');
+const spec2 = fs.readFileSync(`${__dirname}/swagger-saral-maintenance.yaml`, 'utf-8');
 
-// const frontendSpec = yaml.load(spec);
-// const maintenanceSpec = yaml.load(spec2);
+const frontendSpec = yaml.load(spec);
+const maintenanceSpec = yaml.load(spec2);
 const app = express()
 
-// const loggerMiddleware = (req, res, next) => {
-//     console.log('New request to: ' + req)
-//     next()
-// }
+const loggerMiddleware = (req, res, next) => {
+    console.log('New request to: ' + req)
+    next()
+}
 
 const loggerMidlleware = expressPinoLogger({
     logger: logger,
@@ -52,7 +52,7 @@ app.use(cors());
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 // Register the function as middleware for the application
-  // app.use(loggerMiddleware)
+   app.use(loggerMiddleware)
 //  app.use(loggerMidlleware)
 app.use(schoolRouter)
 app.use(studentRouter)
@@ -61,6 +61,6 @@ app.use(examRouter)
 app.use(markRouter)
 app.use(roiRouter)
 app.use(brandRouter)
-// app.use("/api-docs/saral/frontend", swaggerUi.serve, (...args) => swaggerUi.setup(frontendSpec)(...args));
-// app.use("/api-docs/saral/maintenance", swaggerUi.serve, (...args) => swaggerUi.setup(maintenanceSpec)(...args));
+app.use("/api-docs/saral/frontend", swaggerUi.serve, (...args) => swaggerUi.setup(frontendSpec)(...args));
+app.use("/api-docs/saral/maintenance", swaggerUi.serve, (...args) => swaggerUi.setup(maintenanceSpec)(...args));
 module.exports = app
