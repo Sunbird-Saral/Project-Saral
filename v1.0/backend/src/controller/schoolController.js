@@ -67,13 +67,13 @@ exports.loginSchool = async (req, res, next) => {
       data.classes = classes
     }
     // log.customError( req, data)
-    logger.info(`"userId":${JSON.stringify(data.school.userId)} "uuid":${req.headers["x-request-uuid"]} "deviceId":${req.headers["x-request-deviceid"]} "token":${data.token}`)
+    logger.info(`"userId":${JSON.stringify(data.school.userId)} "deviceId":${req.headers["x-request-deviceid"]} "token":${data.token}`)
     res.status(200).json({
       ... data
     });
   } catch (e) {
     if (e && e.message == 'School Id or Password is not correct.') {
-      logger.error(` "uuid":${req.headers["x-request-uuid"]} "deviceId":${req.headers["x-request-deviceid"]} ${e.message}` )
+      logger.error(`"deviceId":${req.headers["x-request-deviceid"]} ${e.message}` )
       
       res.status(401).json({
         error: e.message

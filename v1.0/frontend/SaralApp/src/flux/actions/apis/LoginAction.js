@@ -3,8 +3,7 @@
  */
  import API from '../apis/api';
  import C from '../constants';
- import uuid from 'react-native-uuid';
- const UUID = uuid.v4()
+
  export class LoginAction extends API {
      constructor(loginObj,deviceUniqId, timeout = 30000) {
          super('POST', timeout, false);
@@ -31,7 +30,6 @@
      getHeaders() {
          return {
              'Content-Type': 'application/json',
-             'x-request-uuid': `${UUID}`,
              'x-request-deviceid' :`${this.deviceUniqId}`
          }
      }
