@@ -80,7 +80,7 @@ exports.loginSchool = async (req, res, next) => {
       })
     }
     else if (e && e.message == stringObject().lockScreen) {
-       logger.debug(e.message)
+       logger.warn(e.message)
       res.status(500).json({
         error: e.message
       })
