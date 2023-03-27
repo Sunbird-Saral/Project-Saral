@@ -3,8 +3,7 @@ const Classes = require("../models/classes")
 const Users = require("../models/users")
 const Helper = require('../middleware/helper')
 const { stringObject } = require('../utils/commonUtils');
-const { auth } = require('../middleware/auth');
-const {logger,loggerMiddleware,log} = require('../logging/logger')
+const {logger} = require('../logging/logger')
 
 
 
