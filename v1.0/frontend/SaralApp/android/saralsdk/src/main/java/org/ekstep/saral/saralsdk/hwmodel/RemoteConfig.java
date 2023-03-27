@@ -22,10 +22,11 @@ public class RemoteConfig {
 
 
 
-    public static boolean isFBDownloadModelEnable(Context context) {
+    public boolean isFBDownloadModelEnable(Context context) {
 
         boolean networkAvailable = isNetworkAvailable(context);
         FirebaseRemoteConfig mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
+        final boolean[] hasValue = {false};
 
         Log.d(TAG, "isFBDownloadModelEnable: networkAvailable"+networkAvailable);
 
@@ -40,6 +41,8 @@ public class RemoteConfig {
                         @Override
                         public void onComplete(@NonNull Task<Boolean> task) {
                             if (task.isSuccessful()) {
+                               hasValue[0] = mFirebaseRemoteConfig.getBoolean("isFBDownloadEnable");
+                                isFBDownloadModel.set(hasValue[0]);
                                 boolean value = task.getResult();
                                 Log.d(TAG, "onComplete: value " + value);
                             } else {
@@ -55,8 +58,11 @@ public class RemoteConfig {
 
 
         }
-            boolean hasValue = mFirebaseRemoteConfig.getBoolean("isFBDownloadEnable");
-            isFBDownloadModel.set(hasValue);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
             return isFBDownloadModel.get();
     }
 
