@@ -34,7 +34,7 @@ const studentSchema = new mongoose.Schema({
     timestamps: true
 })
 
-studentSchema.index({studentId: -1, schoolId: -1})
+studentSchema.index({schoolId: -1, studentClass: -1, section: -1})
 
 //model method created
 studentSchema.statics.getStudentsCountByClassAndSection = async (schoolId, classId, section) => {
