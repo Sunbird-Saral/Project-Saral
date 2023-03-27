@@ -6,7 +6,7 @@
  * @flow
  */
 
-import React,{useEffect} from 'react';
+import React,{useEffect,useState} from 'react';
 import {
   SafeAreaView,
   StatusBar,
@@ -28,7 +28,8 @@ import { getLoginData } from './src/utils/StorageUtils';
 import { collectErrorLogs } from './src/modules/CollectErrorLogs';
 import  analytics  from '@react-native-firebase/analytics';
 import crashlytics from '@react-native-firebase/crashlytics';
-import DeviceInfo from 'react-native-device-info';
+
+
  const customTextProps = {
 allowFontScaling: false,
 };
@@ -48,21 +49,9 @@ setCustomTouchableOpacity(customTouchableOpacityProps);
 
 
 
-const App = () => {
-  // let deviceJSON = {};
-//  const devicedata = DeviceInfo.getUniqueId()
-//  .then(async(data) =>{
-//   return await data
-//  }).catch(err => console.log(err))
-//   console.log(devicedata);
 
- 
-//  console.log(deviceJSON);
-  // deviceJSON.getBuildId = DeviceInfo.getAvailableLocationProviders();
- 
+const App = () => { 
   useEffect(async()=>{
-    // let appName = DeviceInfo.getApplicationName();
-    // let deviceinfo = DeviceInfo.getBuildNumber()
     let hasFBAnalytics = await getLoginData();
     const hasFBAnalyticsValue =  hasFBAnalytics.school.hasOwnProperty("isFBAnalyticsEnabled") && hasFBAnalytics.school.isFBAnalyticsEnabled
     if(hasFBAnalyticsValue != null){
@@ -130,6 +119,12 @@ function getActiveRouteName(navigationState) {
   }
   return route.routeName;
 }
+
+
+
+  
+
+
 
   return (
     <>
