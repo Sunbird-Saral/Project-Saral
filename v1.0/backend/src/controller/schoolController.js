@@ -73,14 +73,14 @@ exports.loginSchool = async (req, res, next) => {
     });
   } catch (e) {
     if (e && e.message == 'School Id or Password is not correct.') {
-      logger.error(` "uuid":${req.headers["x-request-id"]} "deviceId":${req.headers["x-request-deviceid"]} ${e.message}` )
+      logger.error(` "uuid":${req.headers["x-request-uuid"]} "deviceId":${req.headers["x-request-deviceid"]} ${e.message}` )
       
       res.status(401).json({
         error: e.message
       })
     }
     else if (e && e.message == stringObject().lockScreen) {
-       logger.warn(e.message)
+       logger.debug(e.message)
       res.status(500).json({
         error: e.message
       })
