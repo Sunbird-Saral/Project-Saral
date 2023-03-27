@@ -20,7 +20,6 @@
     "@react-native-firebase/crashlytics": "^17.3.0",
     "axios": "^0.21.1",
     "base-64": "^1.0.0",
-    "buffer": "^6.0.3",
     "lodash": "^4.17.20",
     "moment": "^2.29.1",
     "react": "17.0.2",
