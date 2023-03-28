@@ -172,5 +172,23 @@
         "userId": "49897896",
         "schoolId": "u002",
         "password": "tarento@123"
+    },
+    {
+        "name": "user1",
+        "userId": "10000001",
+        "schoolId": "u003",
+        "password": "tarento@123"
+    },
+    {
+        "name": "user2",
+        "userId": "39897896",
+        "schoolId": "u003",
+        "password": "tarento@123"
+    },
+    {
+        "name": "user3",
+        "userId": "39897896",
+        "schoolId": "u003",
+        "password": "tarento@123"
     }
 ]

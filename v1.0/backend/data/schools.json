@@ -10,9 +10,7 @@
     "supportEmail": "abc@gmail.com , xyz@gmail.com",
     "offlineMode": true,
     "isAppForceUpdateEnabled": true,
-    "district": "district1",
-    "scanTimeoutMs": 60000,
-    "isManualEditEnabled": true
+    "district": "district1"
   },
   {
     "name": "Dummy school 2",
@@ -48,10 +46,7 @@
     "autoSyncBatchSize": 10,
     "offlineMode": true,
     "isAppForceUpdateEnabled": false,
-    "isFBAnalyticsEnabled": true,
-    "district": "district1",
-    "scanTimeoutMs": 60000,
-    "isManualEditEnabled": true
+    "district": "district1"
   },
   {
     "name": "Dummy Skill School",
@@ -127,5 +122,44 @@
     "tags": false,
     "supportEmail": "abc@gmail.com",
     "district": "district8"
+  },
+  {
+    "name": "Dummy school 3",
+    "schoolId": "u003",
+    "state": "up",
+    "autoSync": false,
+    "autoSyncFrequency": 600000,
+    "storeTrainingData": true,
+    "tags": true,
+    "supportEmail": "abc@gmail.com , xyz@gmail.com",
+    "offlineMode": true,
+    "isAppForceUpdateEnabled": true,
+    "district": "district1"
+  },
+  {
+    "name": "Dummy school 4",
+    "schoolId": "u004",
+    "state": "up",
+    "autoSync": false,
+    "autoSyncFrequency": 600000,
+    "storeTrainingData": true,
+    "tags": true,
+    "supportEmail": "abc@gmail.com , xyz@gmail.com",
+    "offlineMode": true,
+    "isAppForceUpdateEnabled": true,
+    "district": "district1"
+  },
+  {
+    "name": "Dummy school 4",
+    "schoolId": "u004",
+    "state": "up",
+    "autoSync": false,
+    "autoSyncFrequency": 600000,
+    "storeTrainingData": true,
+    "tags": true,
+    "supportEmail": "abc@gmail.com , xyz@gmail.com",
+    "offlineMode": true,
+    "isAppForceUpdateEnabled": true,
+    "district": "district1"
   }
 ]
