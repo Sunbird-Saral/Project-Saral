@@ -1,20 +1,20 @@
 package org.ekstep.saral.saralsdk;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaActionSound;
 import android.os.Looper;
 import android.util.Log;
 
-import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.bridge.ActivityEventListener;
 import com.facebook.react.bridge.Promise;
+import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
+import org.ekstep.saral.saralsdk.hwmodel.RemoteConfig;
 
 import org.ekstep.saral.saralsdk.commons.FileOps;
 import org.ekstep.saral.saralsdk.hwmodel.HWClassifier;
@@ -27,6 +27,7 @@ import org.json.JSONObject;
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class SaralSDKModule extends ReactContextBaseJavaModule implements ActivityEventListener {
     private static final String TAG             = "SrlSDK::Module";
@@ -54,6 +55,9 @@ public class SaralSDKModule extends ReactContextBaseJavaModule implements Activi
         context.addActivityEventListener(this);
         FileOps.getInstance().initialize(context);
 
+        RemoteConfig remoteConfig = new RemoteConfig();
+        boolean isFBDownloadModelEnable = remoteConfig.isFBDownloadModelEnable(context);
+
         Log.d(TAG, "SaralSDKModule loaded, trying to load OpenCV libs & Models");
         if (!OpenCVLoader.initDebug()) {
             Log.d(TAG, "Internal OpenCV library not found. Using OpenCV Manager for initialization");
@@ -74,7 +78,7 @@ public class SaralSDKModule extends ReactContextBaseJavaModule implements Activi
             public void OnModelLoadError(String message) {
                 Log.d(TAG, "HWClassifer model cannot be loaded :" + message);
             }
-        });
+        },isFBDownloadModelEnable, context);
 
         HWBlockLettersClassifier.getInstance();
         Log.d(TAG, "Loading HWBlockLettersClassifier models");
@@ -88,7 +92,7 @@ public class SaralSDKModule extends ReactContextBaseJavaModule implements Activi
             public void OnModelLoadError(String message) {
                 Log.d(TAG, "HWBlockLettersClassifier model cannot be loaded :" + message);
             }
-        });
+        }, isFBDownloadModelEnable, context);
 
     }
 
@@ -129,6 +133,9 @@ public class SaralSDKModule extends ReactContextBaseJavaModule implements Activi
         if (requestCode == 1) {
             Log.d(TAG, "Response: " + data.getStringExtra("layoutConfigsResult"));
             this.mPromise.resolve(data.getStringExtra("layoutConfigsResult"));
+        } else if (requestCode == 2) {
+            Log.d(TAG, "Response: " + data.getStringExtra("isModelAvailable"));
+            this.mPromise.resolve(data.getStringExtra("isModelAvailable"));
         }
     }
 

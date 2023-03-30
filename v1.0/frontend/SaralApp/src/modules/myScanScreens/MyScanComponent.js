@@ -410,12 +410,20 @@ class MyScanComponent extends Component {
                 let totalPages = this.props.roiData.data.layout.hasOwnProperty("pages") && this.props.roiData.data.layout.pages
                 let pageNumber = totalPages || totalPages > 0 ? "1" : null
                 let jsonRoiData = this.props.roiData.data
-                let hasTimer   =  this.props.loginData.data.school.hasOwnProperty("scanTimeoutMs") ? this.props.loginData.data.school.scanTimeoutMs : 0
-                let isManualEditEnabled   =  this.props.loginData.data.school.hasOwnProperty("isManualEditEnabled") ? this.props.loginData.data.school.isManualEditEnabled : false
-                SaralSDK.startCamera(JSON.stringify(jsonRoiData), pageNumber, hasTimer, isManualEditEnabled).then(res => {
+                SaralSDK.startCamera(JSON.stringify(jsonRoiData), pageNumber).then(res => {
+                    
                     let roisData = JSON.parse(res);
-                    let cells = roisData.layout.cells;
-                    this.consolidatePrediction(cells, roisData)
+
+                    if (roisData.hasOwnProperty("hwDigitModel") && roisData.hwDigitModel) {
+                        this.callCustomModal(Strings.message_text, Strings.Digit_model_is_not_availaible, false);
+                    
+                    } else if (roisData.hasOwnProperty("blockLetterModel") && roisData.blockLetterModel) {
+                        this.callCustomModal(Strings.message_text, Strings.Alpha_numeric_model_is_not_availaible, false);
+                    
+                    } else {
+                        let cells = roisData.layout.cells;
+                        this.consolidatePrediction(cells, roisData)
+                    }
 
                 }).catch((code, message) => {
                 })

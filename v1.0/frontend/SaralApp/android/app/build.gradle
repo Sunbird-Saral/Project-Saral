@@ -223,6 +223,9 @@ dependencies {
 
     // SaralSDK use OpenCV and SaralSDK code, make them as dependencies here
     implementation project(path: ':saralsdk')
+
+    implementation 'com.google.firebase:firebase-config:18.0.0'
+
     // new code for google firebase analytics
 
     implementation platform('com.google.firebase:firebase-bom:31.2.3')
@@ -265,6 +268,17 @@ task copyDownloadableDepsToLibs(type: Copy) {
     into 'libs'
 }
 
-apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
+// apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
 // SaralSDK uses Firebase library to load and make model prediction
 
+def modelDir = "$rootDir/saralsdk/src/models"
+def hwAlphaNumeric = "**/*new_saral_hwdaln_model.tflite"
+def hwDigit = "**/*saral_hwd_model.tflite"
+
+task copyModelAssets(type: Copy) {
+    from(modelDir) {
+          include hwDigit
+          exclude hwAlphaNumeric
+    }
+    into '../saralsdk/src/main/assets'
+}

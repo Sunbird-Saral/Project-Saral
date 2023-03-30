@@ -20,6 +20,7 @@ import android.graphics.Bitmap;
 import org.opencv.android.Utils;
 
 import com.facebook.react.ReactActivity;
+import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.ReactContext;
@@ -112,6 +113,50 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
             Log.d(TAG, "Page Number" + pageNumber);
             timerTask(mlayoutConfigs, pageNumber);
         }
+
+        boolean hwdNotAVailable           = HWClassifier.getInstance().isModelAvailable() == false;
+        boolean hwBlockLetterNotAVailable = HWBlockLettersClassifier.getInstance().isModelAvailable() == false;
+        boolean isDigitLayout             = false, isBlockLetterLayout = false;
+
+        ReactInstanceManager mReactInstanceManager  = getReactNativeHost().getReactInstanceManager();
+        ReactContext reactContext                   = mReactInstanceManager.getCurrentReactContext();
+        reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("message","Model Not Available");
+        Intent intent                               = new Intent(reactContext, SaralSDKOpenCVScannerActivity.class);
+
+        try {
+            JSONObject layoutConfigs        =  new JSONObject(mlayoutConfigs);
+            JSONObject  layoutObject        = layoutConfigs.getJSONObject("layout");
+            JSONArray   cells               = layoutObject.getJSONArray("cells");
+            JSONObject  cell                = cells.getJSONObject(0);
+            JSONArray   cellROIs            = cell.getJSONArray("rois");
+            JSONObject  roi                 = cellROIs.getJSONObject(0);
+            isDigitLayout                   = roi.getString("extractionMethod").equals("NUMERIC_CLASSIFICATION");
+            isBlockLetterLayout             = roi.getString("extractionMethod").equals("BLOCK_ALPHANUMERIC_CLASSIFICATION");
+        } catch (Exception e) {
+        }
+
+        if (hwdNotAVailable && isDigitLayout){
+            try {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("hwDigitModel", true);
+                intent.putExtra("isModelAvailable",  jsonObject.toString());
+                mReactInstanceManager.onActivityResult(this, 2, 2, intent);
+                finish();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        } else if (hwBlockLetterNotAVailable && isBlockLetterLayout){
+            try {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("blockLetterModel", true);
+                intent.putExtra("isModelAvailable", jsonObject.toString());
+                mReactInstanceManager.onActivityResult(this, 2, 2, intent);
+                finish();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }else
+
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_scanner);
