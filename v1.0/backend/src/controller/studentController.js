@@ -68,7 +68,7 @@ exports.fetchStudentsandExams = async (req, res, next) => {
             }
         }
 
-        console.log("exammmmmmmmm", examMatch)
+       
         const exams = await Exams.find(examMatch, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 })
 
         res.status(200).json({
