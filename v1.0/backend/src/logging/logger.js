@@ -1,6 +1,26 @@
 const pino = require('pino')
 const prettty = require('pino-pretty')
+const store = require('store')
+const LOGIN_DATA_KEY = 'login_data_key'
+const TOKEN = 'token'
 
+ const setLoginData =(data) => {
+  let saved =store.set(LOGIN_DATA_KEY,{'userID':data.body.schoolId,'deviceID':data.headers['x-request-deviceid']})
+ }
+
+ const getLoginData = () => {
+  let loginData =store.get(LOGIN_DATA_KEY)
+    return loginData
+}
+
+const setToken =(data) => {
+  let saved =store.set(TOKEN,data)
+ }
+
+ const getToken = () => {
+  let token =store.get(TOKEN)
+    return token
+}
 
 const levels = {
   error: 50,
@@ -33,5 +53,5 @@ const logger = pino({
 )
   
   module.exports = {
-    logger
+    logger,getLoginData,setLoginData,setToken,getToken
   };

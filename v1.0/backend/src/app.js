@@ -13,7 +13,7 @@ const markRouter = require('./routers/mark.route')
 const roiRouter = require('./routers/roi.route')
 const brandRouter = require('./routers/brand.route')
 var cors = require('cors');
-const {logger} = require('./logging/logger')
+const {getLoginData,getToken,logger} = require('./logging/logger')
 
 const spec = fs.readFileSync(`${__dirname}/swagger-saral-frontend.yaml`, 'utf-8');
 const spec2 = fs.readFileSync(`${__dirname}/swagger-saral-maintenance.yaml`, 'utf-8');
@@ -22,10 +22,11 @@ const frontendSpec = yaml.load(spec);
 const maintenanceSpec = yaml.load(spec2);
 const app = express()
 
-// const loggerMiddleware = (req, res, next) => {
-//     console.log('New request to: ' + req)
-//     next()
-// }
+
+const expressMiddleware = async(req, res, next) => {
+ let data= await getLoginData();
+  next()
+}
 
 const loggerMidlleware = expressPinoLogger({
     logger: logger,
@@ -33,15 +34,18 @@ const loggerMidlleware = expressPinoLogger({
       req: (req) => ({
         method: req.method,
         url: req.url,
-      }),
-      res: (res) => ({
-        status: res.statusCode,
+        user: req.raw.user,
+        token:req.raw.token
       }),
     },
     autoLogging: true,
   });
 
-  
+  app.use((req, res, next) => {
+    req.user =  getLoginData();
+    req.token = getToken()
+    next();
+  })
 app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }))
 app.use(express.json())
@@ -49,7 +53,8 @@ app.use(cors());
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 // Register the function as middleware for the application
-// app.use(loggerMiddleware)
+
+app.use(expressMiddleware)
 app.use(loggerMidlleware)
 app.use(schoolRouter)
 app.use(studentRouter)

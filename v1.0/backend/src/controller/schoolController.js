@@ -4,10 +4,12 @@ const Users = require("../models/users")
 const Helper = require('../middleware/helper')
 const { stringObject } = require('../utils/commonUtils');
 const {logger} = require('../logging/logger')
-
-
+const {getLoginData,setLoginData,getToken,setToken} = require('../logging/logger')
 
 exports.loginSchool = async (req, res, next) => {
+  await setLoginData(req)
+  await getLoginData()
+  
   try {
     let userId = {}
     if (req.body.schoolId) {
@@ -21,6 +23,8 @@ exports.loginSchool = async (req, res, next) => {
     await Helper.lockScreenValidator(schools)
 
     const token = await Users.generateAuthToken(users)
+    await setToken(token)
+    await getToken()
 
     let classes = []
     let school = {
@@ -66,21 +70,21 @@ exports.loginSchool = async (req, res, next) => {
       classes.sort((a, b) => a.classId.trim().localeCompare(b.classId.trim()))
       data.classes = classes
     }
-    // log.customError( req, data)
-    logger.info(`"userId":${JSON.stringify(data.school.userId)} "deviceId":${req.headers["x-request-deviceid"]} "token":${data.token}`)
+  
+    logger.info(`"token":${data.token}`)
     res.status(200).json({
       ... data
     });
   } catch (e) {
     if (e && e.message == 'School Id or Password is not correct.') {
-      logger.error(`"deviceId":${req.headers["x-request-deviceid"]} ${e.message}` )
+      logger.error(`${e}` )
       
       res.status(401).json({
         error: e.message
       })
     }
     else if (e && e.message == stringObject().lockScreen) {
-       logger.warn(e.message)
+       logger.warn(e)
       res.status(500).json({
         error: e.message
       })
