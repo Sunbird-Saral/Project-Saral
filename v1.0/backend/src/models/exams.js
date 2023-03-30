@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+
 const examSchema = new mongoose.Schema({
     examId: {
         type: Number,
@@ -8,7 +9,7 @@ const examSchema = new mongoose.Schema({
     },
     schoolId: {
         type: String,
-        required: true,
+        required: false,
         trim: true,
     },
     examLO: {
@@ -53,7 +54,12 @@ const examSchema = new mongoose.Schema({
         }
         ],
         questionMarks: { type: String }
-    }]
+    }],
+    state:{
+        type: String,
+        required: false,
+        trim: true
+    }
 }, {
     timestamps: true
 })
