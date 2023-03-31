@@ -615,6 +615,9 @@ definitions:
           type: string
           description: "Unique Id"
           example: "u001"
+        state:
+          type: string
+          example: "up"
     
   Questions:
     type: array
