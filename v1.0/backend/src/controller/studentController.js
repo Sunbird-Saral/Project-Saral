@@ -1,6 +1,7 @@
 const Students = require("../models/students")
 const Marks = require("../models/marks")
 const Exams = require('../models/exams')
+const Schools = require('../models/school')
 const Helper = require('../middleware/helper')
 
 
@@ -18,14 +19,8 @@ exports.fetchStudentsandExams = async (req, res, next) => {
         let studentClass = [studentClassObj]
         match.studentClass = studentClass
         examMatch.classId = studentClassObj.classId
-        
-        if (req.school.schoolId && req.body.state) {
-            examMatch.schoolId = req.school.schoolId
-        } else if (req.body.state) {
-            examMatch.state = req.body.state
-        } else {
-            examMatch.schoolId = req.school.schoolId
-        }
+        const school = await Schools.findOne({ schoolId: req.school.schoolId })
+        examMatch.state = school.state
 
     } else {
         return res.status(404).json({ message: 'Please send classId' })
@@ -68,7 +63,7 @@ exports.fetchStudentsandExams = async (req, res, next) => {
             }
         }
 
-       
+       console.log("heyyyy",examMatch)
         const exams = await Exams.find(examMatch, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 })
 
         res.status(200).json({

@@ -8,10 +8,7 @@ router.post('/exam', auth, async (req, res) => {
     const body = [...req.body]
     const exams = []
     let schoolId = req.school.schoolId
-    let state
-    if (req.body.state) {
-        state = req.body.schoolId
-    }
+
     for (let input of body) {
 
         if (input.examDate && input.examDate == undefined) {
@@ -21,17 +18,11 @@ router.post('/exam', auth, async (req, res) => {
         input.type = input.type.toUpperCase()
 
         let lookup = {
-            schoolId: schoolId,
+            state: input.state,
             classId: input.classId,
             examDate: input.examDate,
             subject: input.subject
         }
-
-        if (state) {
-            lookup.state = state
-        }
-
-        console.log("lookuppp", lookup)
 
         let examExist = await Exams.find(lookup)
         if (examExist.length) continue
