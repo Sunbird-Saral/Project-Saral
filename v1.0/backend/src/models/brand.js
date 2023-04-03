@@ -165,7 +165,7 @@ const BrandSchema = new mongoose.Schema({
     timestamps: true
 })
 
-BrandSchema.index({state: -1, schoolId: -1})
+BrandSchema.index({state: -1})
 
 const Brands = mongoose.model('Brand', BrandSchema)
 

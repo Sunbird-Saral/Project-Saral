@@ -58,7 +58,7 @@ const examSchema = new mongoose.Schema({
     timestamps: true
 })
 
-examSchema.index({classId: 1, examDate: 1, schoolId: 1, subject: 1}, {examId: 1})
+examSchema.index({classId: -1, examDate: -1, schoolId: -1, subject: -1}, {examId: -1})
 
 const Exams = mongoose.model('Exam', examSchema)
 
