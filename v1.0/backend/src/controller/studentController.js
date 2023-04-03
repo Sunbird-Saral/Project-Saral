@@ -11,13 +11,8 @@ exports.fetchStudentsandExams = async (req, res, next) => {
 
     match.schoolId = req.school.schoolId
     if (req.body.classId) {
-        let studentClassObj = {
-            classId: req.body.classId,
-            className: `Class-${req.body.classId}`
-        }
-        let studentClass = [studentClassObj]
-        match.studentClass = studentClass
-        examMatch.classId = studentClassObj.classId
+        match.classId = req.body.classId,
+        examMatch.classId = req.body.classId
         examMatch.schoolId = req.school.schoolId
     } else {
         return res.status(404).json({ message: 'Please send classId' })
@@ -47,18 +42,18 @@ exports.fetchStudentsandExams = async (req, res, next) => {
                 examDate: examMatch.examDate
             }
 
-            if(req.body.set){
-                lookup.set = req.body.set 
+            if (req.body.set) {
+                lookup.set = req.body.set
             }
-        
-            let marks = await Marks.findOne(lookup) 
 
-            if(marks && typeof marks == "object" ){
+            let marks = await Marks.findOne(lookup)
+
+            if (marks && typeof marks == "object") {
                 student["studentAvailability"] = marks.studentAvailability
-            }else{
+            } else {
                 student["studentAvailability"] = true
-                }
-                }
+            }
+        }
 
 
         const exams = await Exams.find(examMatch, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 })

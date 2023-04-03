@@ -10,7 +10,6 @@ const userSchema = new mongoose.Schema({
     },
     userId: {
         type: String,
-        unique: true,
         required: true,
         trim: true,
     },
@@ -34,7 +33,8 @@ const userSchema = new mongoose.Schema({
     timestamps: true
 })
 
-userSchema.index({userId: -1})
+userSchema.index({ userId: -1}, { unique: true });
+
 
 userSchema.statics.generateAuthToken = async function (user) {
 

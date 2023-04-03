@@ -10,7 +10,6 @@ const schoolSchema = new mongoose.Schema({
     },
     schoolId: {
         type: String,
-        unique: true,
         required: true,
         trim: true,
     },
@@ -77,7 +76,9 @@ const schoolSchema = new mongoose.Schema({
     timestamps: false
 })
 
-schoolSchema.index({schoolId: -1})
+
+schoolSchema.index({ schoolId: -1}, { unique: true });
+
 
 
 // Hiding private data
