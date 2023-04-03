@@ -11,6 +11,7 @@ const userSchema = new mongoose.Schema({
     userId: {
         type: String,
         required: true,
+        unique: true,
         trim: true,
     },
     schoolId: {
@@ -33,7 +34,6 @@ const userSchema = new mongoose.Schema({
     timestamps: true
 })
 
-userSchema.index({ userId: -1}, { unique: true });
 
 
 userSchema.statics.generateAuthToken = async function (user) {

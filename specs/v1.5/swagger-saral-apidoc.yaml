@@ -880,7 +880,10 @@ definitions:
     properties:
       name: 
         type: string
-        example: "1210001"
+        example: "Student 1"
+      classId:
+        type: string
+        example: 3
         
   GetSavedScanBody:
     type: object
@@ -1140,14 +1143,22 @@ definitions:
         type: string
         description: "Student ID"
         example: "1210001"
-      studentClass:
-        $ref: '#/definitions/StudentClass'
+      classId:
+        type: string
+        example: 2
+      className:
+        type: string
+        example: "Class-2"
         
   FetchStudentsByQueryResponse:
     type: object
     properties:
-      studentClass:
-        $ref: '#/definitions/StudentClassName'
+      classId:
+        type: string
+        example: 2
+      className:
+        type: string
+        example: "Class-2"
       section:
         type: string
         example: "D"
@@ -1191,8 +1202,12 @@ definitions:
   CreateStudentResponse:
     type: object
     properties:
-      studentClass: 
-        $ref: '#/definitions/StudentClassName' 
+      classId:
+        type: string
+        example: 2
+      className:
+        type: string
+        example: "Class-2"
       section:
         type: string
         description: "Class Section"

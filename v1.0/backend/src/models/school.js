@@ -11,6 +11,7 @@ const schoolSchema = new mongoose.Schema({
     schoolId: {
         type: String,
         required: true,
+        unique: true,
         trim: true,
     },
     state:{
@@ -76,8 +77,6 @@ const schoolSchema = new mongoose.Schema({
     timestamps: false
 })
 
-
-schoolSchema.index({ schoolId: -1}, { unique: true });
 
 
 
