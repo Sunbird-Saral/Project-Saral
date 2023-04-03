@@ -44,14 +44,14 @@ const ROISchema = new mongoose.Schema({
         type: String,
         required: false
     },
-    type:{
-        type: String
-        // enum: ["SAT","PAT"]
-    },
     state:{
         type: String,
         required: true,
         trim: true
+    },
+    type:{
+        type: String
+        // enum: ["SAT","PAT"]
     }
 },{
     timestamps: true

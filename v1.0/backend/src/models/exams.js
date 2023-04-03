@@ -6,23 +6,23 @@ const examSchema = new mongoose.Schema({
         unique: true,
         trim: true,
     },
-    schoolId: {
-        type: String,
-        required: true,
-        trim: true,
-    },
     examLO: {
         type: String,
         required: true,
         trim: true,
     },
+    classId: {
+        type: String,
+        required: true
+    },
     examDate: {
         type: String,
         required: false
     },
-    classId: {
+    schoolId: {
         type: String,
-        required: true
+        required: true,
+        trim: true,
     },
     subject: {
         type: String,
@@ -58,7 +58,7 @@ const examSchema = new mongoose.Schema({
     timestamps: true
 })
 
-examSchema.index({classId: -1, examDate: -1, schoolId: -1, subject: -1}, {examId: -1})
+examSchema.index({classId: 1, examDate: 1, schoolId: 1, subject: 1}, {examId: 1})
 
 const Exams = mongoose.model('Exam', examSchema)
 
