@@ -1166,8 +1166,12 @@ definitions:
     items:
       type: object
       properties: 
-        studentClass:
-          $ref: '#/definitions/StudentClassName'
+        classId:
+          type: string
+          example: "2"
+        className:
+          type: string
+          example: "Class-2"
         section:
           type: string
           example: "D"
