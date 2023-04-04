@@ -534,12 +534,12 @@ definitions:
       type: object
       properties: 
         classId:
-           type: string
-           description: "Id of class"
-           example: "2"
-        className: 
-           type: string
-           example: "Class-2"
+          type: string
+          example: 2
+        className:
+          type: string
+          description: "class Name"
+          example: "Class-2"
         section:
           type: string
           example: "D"
@@ -595,6 +595,9 @@ definitions:
           type: string
           description: "Unique Id"
           example: "u001"
+        state:
+          type: string
+          example: "up"
     
   Questions:
     type: array
