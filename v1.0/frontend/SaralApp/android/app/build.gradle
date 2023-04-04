@@ -1,5 +1,10 @@
 apply plugin: "com.android.application"
+apply plugin: 'android'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
 
+
+// apply plugin: 'newrelic'
 import com.android.build.OutputFile
 
 /**
@@ -132,6 +137,13 @@ android {
         versionCode 1
         versionName "1.0"
     }
+
+    configurations.all {
+            resolutionStrategy {
+                force 'androidx.browser:browser:1.2.0'
+            }
+        }
+
     splits {
         abi {
             reset()
@@ -219,6 +231,18 @@ dependencies {
 
     // SaralSDK use OpenCV and SaralSDK code, make them as dependencies here
     implementation project(path: ':saralsdk')
+    // new code for google firebase analytics
+
+    implementation platform('com.google.firebase:firebase-bom:26.8.0')
+
+    // implementation 'com.google.firebase:firebase-analytics'
+    // implementation 'com.google.firebase:firebase-crashlytics'
+
+    implementation ('com.google.firebase:firebase-iid:21.1.0') {
+    transitive = true
+    }
+
+// implementation 'com.google.firebase:firebase-perf'
 
     implementation 'com.google.firebase:firebase-config:18.0.0'
 

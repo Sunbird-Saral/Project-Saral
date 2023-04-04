@@ -1,9 +1,6 @@
 const Mark = require("../models/marks")
 const marksController = require('../controller/marksController')
 const mockSavedData = require("./mock-data/savedScanData.json")
-const mockMinimalSaveScanData = require('./mock-data/minimalSavedScan.json')
-const AppError = require('../utils/appError')
-
 
 
 const mockRequest = () => {

@@ -10,7 +10,9 @@
     "supportEmail": "abc@gmail.com , xyz@gmail.com",
     "offlineMode": true,
     "isAppForceUpdateEnabled": true,
-    "district": "district1"
+    "district": "district1",
+    "scanTimeoutMs": 60000,
+    "isManualEditEnabled": true
   },
   {
     "name": "Dummy school 2",
@@ -46,7 +48,10 @@
     "autoSyncBatchSize": 10,
     "offlineMode": true,
     "isAppForceUpdateEnabled": false,
-    "district": "district1"
+    "isFBAnalyticsEnabled": true,
+    "district": "district1",
+    "scanTimeoutMs": 60000,
+    "isManualEditEnabled": true
   },
   {
     "name": "Dummy Skill School",

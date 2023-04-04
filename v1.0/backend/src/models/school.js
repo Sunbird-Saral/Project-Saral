@@ -57,10 +57,22 @@ const schoolSchema = new mongoose.Schema({
         type: Boolean,
         required: false
     },
+    isManualEditEnabled: { 
+        type: Boolean,
+        required: false
+    },
+    scanTimeoutMs: { 
+        type: Number,
+        required: false
+    },
     district:{
         type: String,
         required: true
-    }
+    },
+    isFBAnalyticsEnabled: {
+        type: Boolean,
+        required: false,
+    },
 }, {
     timestamps: false
 })
@@ -77,6 +89,6 @@ schoolSchema.methods.toJSON = function () {
     return schoolObject
 }
 
-const School = mongoose.model('School', schoolSchema)
+const Schools = mongoose.model('School', schoolSchema)
 
-module.exports = School
+module.exports = Schools

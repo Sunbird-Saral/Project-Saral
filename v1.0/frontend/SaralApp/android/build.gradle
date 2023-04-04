@@ -21,6 +21,13 @@ buildscript {
         // in the individual module build.gradle files
         classpath("com.google.gms:google-services:4.3.13")
          classpath 'com.google.firebase:firebase-crashlytics-gradle:2.7.1'
+        // classpath("com.google.gms:google-services:4.3.3")
+      
+        // new code for google firebase analytics
+        
+        //   classpath "com.google.firebase:firebase-iid:19.0.0"
+        //   classpath "com.google.firebase:firebase-messaging:21.1.0"
+        //   classpath 'com.google.firebase:firebase-crashlytics-gradle:2.7.1'
     }
 }
 

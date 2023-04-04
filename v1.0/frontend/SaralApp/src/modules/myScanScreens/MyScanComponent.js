@@ -68,7 +68,7 @@ class MyScanComponent extends Component {
                 this.setState({ calledRoiData: false, callApi: '' })
                 if (roiData.status && roiData.status == 200) {
                    let total =  await this.sumOfLocalData();
-                   this.callScanStatusData(true, total, 0);
+                   this.callScanStatusData(true, total, 0, null);
                    if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode) {
                    await this.setRoiCache(roiData);
                    }
@@ -79,7 +79,7 @@ class MyScanComponent extends Component {
             if (calledRoiData & this.props.minimalFlag & !hasNetwork) {
                 this.setState({calledRoiData: false})
                 let total =  await this.sumOfLocalData();
-                this.callScanStatusData(true, total, 0);
+                this.callScanStatusData(true, total, 0, null);
             }
         }
     }
@@ -136,7 +136,7 @@ class MyScanComponent extends Component {
         const data = await getScannedDataFromLocal()
         const loginCred = await getLoginCred()
         let len = 0
-        if (data != null) {
+        if (data) {
             let filter = data.filter((e) => {
                 let findSection = false
                 findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.section)
@@ -152,8 +152,10 @@ class MyScanComponent extends Component {
                 }
             });
 
-            let hasSet = filteredData ? filteredData.set ? filteredData.set.length >= 0 ? filteredData.set : "" : "" : ""
-            if (hasSet.length >= 0 && filter.length > 0) {
+            let hasSet = filteredData 
+            ?
+             filteredData.hasOwnProperty('set') ? filteredData.set.length >= 0 ? filteredData.set : "" : null : ""
+            if (hasSet != null && hasSet != undefined && hasSet.length >= 0 && filter.length > 0) {
                 let findSetStudent = filter.length > 0 ? filter[0].studentsMarkInfo.filter((item) => {
                     if (hasSet.length >= 0) {
                         return item.set == hasSet;
@@ -280,11 +282,11 @@ class MyScanComponent extends Component {
             key: this.props.loginData.data.school.schoolId
         }
         let scaned = await getScanDataApi()
-        let setValue = this.props.filteredData.hasOwnProperty("set")  ? this.props.filteredData.set.length> 0 ? this.props.filteredData.set : '' : ''
+        let setValue = this.props.filteredData.hasOwnProperty("set")  ? this.props.filteredData.set.length> 0 ? this.props.filteredData.set : '' : null
         if (scaned != null) {
 
             let data = scaned.filter((value)=> {
-                let conditionSwitch = setValue.length > 0 ? value.examId == this.state.examId && value.key == this.props.loginData.data.school.schoolId && this.props.filteredData.set == value.set : value.examId == this.state.examId && value.key == this.props.loginData.data.school.schoolId
+                let conditionSwitch = setValue != null && setValue.length >= 0 ? value.examId == this.state.examId && value.key == this.props.loginData.data.school.schoolId && this.props.filteredData.set == value.set : value.examId == this.state.examId && value.key == this.props.loginData.data.school.schoolId
                 if (conditionSwitch) {
                     return true
                 }
@@ -298,7 +300,7 @@ class MyScanComponent extends Component {
                     }
                 };
             } else {
-                if (setValue.length > 0) {
+                if (setValue != null && setValue.length >= 0) {
                     payload.set = setValue
                 }
                 scaned.push(payload);
@@ -306,7 +308,7 @@ class MyScanComponent extends Component {
             await setScanDataApi(scaned)
             
         } else {
-            if (setValue.length > 0) {
+            if (setValue != null && setValue.length >= 0) {
                 payload.set = setValue
             }
             await setScanDataApi([payload])
@@ -408,8 +410,9 @@ class MyScanComponent extends Component {
                 let totalPages = this.props.roiData.data.layout.hasOwnProperty("pages") && this.props.roiData.data.layout.pages
                 let pageNumber = totalPages || totalPages > 0 ? "1" : null
                 let jsonRoiData = this.props.roiData.data
-                SaralSDK.startCamera(JSON.stringify(jsonRoiData), pageNumber).then(res => {
-                    
+                let hasTimer   =  this.props.loginData.data.school.hasOwnProperty("scanTimeoutMs") ? this.props.loginData.data.school.scanTimeoutMs : 0
+                let isManualEditEnabled   =  this.props.loginData.data.school.hasOwnProperty("isManualEditEnabled") ? this.props.loginData.data.school.isManualEditEnabled : false
+                SaralSDK.startCamera(JSON.stringify(jsonRoiData), pageNumber, hasTimer, isManualEditEnabled).then(res => {
                     let roisData = JSON.parse(res);
 
                     if (roisData.hasOwnProperty("hwDigitModel") && roisData.hwDigitModel) {
@@ -616,7 +619,7 @@ class MyScanComponent extends Component {
                     apiResponse = res;
                     clearTimeout(id);
                     api.processResponse(res);
-                    obj.callScanStatusData(false, filteredDatalen, localScanData)
+                    obj.callScanStatusData(false, filteredDatalen, localScanData, res)
                 })
                 .catch(function (err) {
                     if (err && err.response.status == 500) {
@@ -634,7 +637,7 @@ class MyScanComponent extends Component {
         }
     }
 
-    callScanStatusData = async (isApiCalled, filteredDatalen, localScanData) => {
+    callScanStatusData = async (isApiCalled, filteredDatalen, localScanData, res) => {
         let hasNetwork = await checkNetworkConnectivity();
         const { loginData } = this.props;
         if (!hasNetwork) {
@@ -660,27 +663,40 @@ class MyScanComponent extends Component {
                 //Alert message show message "something went wrong or u don't have cache in local"
             }
         } else {
-            let loginCred = await getLoginCred()
-
-            let dataPayload = {
-                "classId": 0,
-                "subject": 0,
-                "section": 0,
-                "fromDate": 0,
-                "page": 0,
-                "downloadRes": false
+            let hasMessage = res ? typeof res.data == "string" ? true : false : null
+            if (hasMessage != null && !hasMessage) {
+                    this.callCustomModal(Strings.message_text, Strings.saved_successfully, false);
+                    setScannedDataIntoLocal(localScanData)
+                    this.dispatchScanDataApi(res.data)
+                    this.setState({
+                        localScanedData: []
+                    })
+                 
+                if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode) {
+                    this.setScanDataCache(res.data);
+                }
+                this.setState({
+                    scanStatusData: filteredDatalen,
+                    saveStatusData: res.data.data.length,
+                    isLoading: false,
+                    dbScanSavedData: res.data.data
+                })
+                
+            } else {
+                let loginCred = await getLoginCred()
+                let dataPayload = {
+                    "classId": 0,
+                    "subject": 0,
+                    "section": 0,
+                    "fromDate": 0,
+                    "page": 0,
+                    "downloadRes": false
+                }
+                let roiId = this.props.roiData && this.props.roiData.data.roiId;
+                dataPayload.roiId = roiId;
+                let apiObj = new scanStatusDataAction(dataPayload);
+                this.FetchSavedScannedData(isApiCalled, apiObj, loginCred.schoolId, loginCred.password, filteredDatalen, localScanData)
             }
-            let roiId = this.props.roiData && this.props.roiData.data.roiId;
-            dataPayload.roiId = roiId;
-            let apiObj = new scanStatusDataAction(dataPayload);
-            this.FetchSavedScannedData(isApiCalled, apiObj, loginCred.schoolId, loginCred.password, filteredDatalen, localScanData)
-        }
-    }
-
-    dispatchScanDataApi(payload) {
-        return {
-            type: constants.SCANNED_DATA,
-            payload
         }
     }
 
@@ -733,6 +749,13 @@ class MyScanComponent extends Component {
         }
     }
 
+    dispatchScanDataApi(payload) {
+        return {
+            type: constants.SCANNED_DATA,
+            payload
+        }
+    }
+
     setScanModalDataVisible() {
         const { scanModalDataVisible } = this.state;
         this.setState({
@@ -751,11 +774,11 @@ class MyScanComponent extends Component {
                 const hasNetwork = await checkNetworkConnectivity()
                 if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode & !hasNetwork) {
                     let scaned = await getScanDataApi()
-                    let setValue = filteredData.hasOwnProperty("set")  ? filteredData.set.length> 0 ? filteredData.set : '' : ''
+                    let setValue = filteredData.hasOwnProperty("set")  ? filteredData.set.length> 0 ? filteredData.set : '' : null
                     let data = []
                     if (scaned != null) {
                         data = scaned.filter( async(e) => {
-                            let conditionSwitch = setValue.length > 0 ? e.examId == this.state.examId && e.key == this.props.loginData.data.school.schoolId && filteredData.set == e.set : e.examId == this.state.examId && e.key == this.props.loginData.data.school.schoolId
+                            let conditionSwitch = setValue != null && setValue.length >= 0 ? e.examId == this.state.examId && e.key == this.props.loginData.data.school.schoolId && filteredData.set == e.set : e.examId == this.state.examId && e.key == this.props.loginData.data.school.schoolId
                             if (conditionSwitch) {
                                 return true
                             }

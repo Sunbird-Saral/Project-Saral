@@ -1,0 +1,36 @@
+# Alphanumeric Handwritten model
+--------------------------------
+
+--Iteration 1:
+	Model accuracy - 99.80%
+	Dataset trained on - Existing dataset
+
+--Iteration 2:
+	Model accuracy - 93.90%
+	Dataset trained on - Existing dataset + NIST missclassifications (after inference using old model)
+
+--Iteration 3:
+	Model accuracy - 94.10%
+	Dataset trained on - Existing dataset + manually collected dataset (~1K images)
+
+
+# Numeric Handwritten model
+---------------------------
+
+--Iteration 1:
+	Model accuracy - 99.90%
+	Dataset trained on - Existing dataset
+
+--Iteration 2:
+	Model accuracy - 99.70%
+	Dataset trained on - Existing dataset + NIST data + inference on production dataset (~50 images)
+
+--Iteration 3:
+	Model accuracy - 98.30%
+	Dataset trained on - Existing dataset + NIST missclassifications (from previous model in Iteration 3) + manually collected dataset (~8.6K images)
+
+
+
+
+
+

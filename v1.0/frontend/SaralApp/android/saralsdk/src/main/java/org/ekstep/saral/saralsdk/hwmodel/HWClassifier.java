@@ -1,6 +1,5 @@
 package org.ekstep.saral.saralsdk.hwmodel;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
@@ -9,7 +8,6 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.facebook.react.bridge.ReactApplicationContext;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -37,9 +35,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.util.concurrent.atomic.AtomicBoolean;
-
-import static androidx.core.content.ContextCompat.getSystemService;
 
 public class HWClassifier {
     private static final String TAG             = "SrlSDK::HWClassify";
@@ -138,11 +133,12 @@ public class HWClassifier {
                 // remote model instance
                 FirebaseCustomRemoteModel remoteModel =
                         new FirebaseCustomRemoteModel.Builder(FB_REMOTE_MODEL).build();
-
+                 Log.d(TAG, "initialize: Hello");
                 FirebaseModelManager.getInstance().getLatestModelFile(remoteModel)
                         .addOnCompleteListener(new OnCompleteListener<File>() {
                             @Override
                             public void onComplete(@NonNull Task<File> task) {
+                                Log.d(TAG, "onComplete: File" + task);
                                 File modelFile = task.getResult();
                                 if (modelFile != null) {
                                     FirebaseModelInterpreterOptions options =
@@ -168,6 +164,7 @@ public class HWClassifier {
                                                         downloadInterpreter = FirebaseModelInterpreter.getInstance(options);
                                                     } catch (FirebaseMLException e) {
                                                         e.printStackTrace();
+                                                        Log.d(TAG, "onSuccess: eee=>> " + e);
                                                     }
                                                     listener.OnModelLoadSuccess("model loaded from firebase successful");
                                                 }
@@ -179,6 +176,7 @@ public class HWClassifier {
 
                                             } catch (FirebaseMLException firebaseMLException) {
                                                 firebaseMLException.printStackTrace();
+                                                Log.d(TAG, "onFailure: CAtch=> " + firebaseMLException);
                                             }
                                         }
                                     });
@@ -188,6 +186,7 @@ public class HWClassifier {
             }
         } catch (FirebaseMLException e) {
             listener.OnModelLoadError("model loading failed");
+            Log.d(TAG, "initialize: eeee=> " + e);
             e.printStackTrace();
         }
     }

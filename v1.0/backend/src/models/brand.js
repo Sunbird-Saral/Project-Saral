@@ -20,13 +20,11 @@ const BrandSchema = new mongoose.Schema({
     },
     state:{
         type: String,
-        // required: true,
         trim: true
     },
     schoolId: {
         type: String,
         unique: true,
-        // required: true,
         trim: true,
     },
     screenLabels: {
@@ -168,6 +166,6 @@ const BrandSchema = new mongoose.Schema({
 })
 
 
-const Brand = mongoose.model('Brand', BrandSchema)
+const Brands = mongoose.model('Brand', BrandSchema)
 
-module.exports = Brand
+module.exports = Brands

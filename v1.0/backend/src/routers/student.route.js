@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router();
 const { auth } = require('../middleware/auth')
-const Student = require("../models/students")
+const Students = require("../models/students")
 const Marks = require("../models/marks")
 
 const studentController = require('../controller/studentController')
@@ -11,20 +11,12 @@ router.post('/fetchStudentsandExamsByQuery',auth,studentController.fetchStudents
 router.post('/student', auth, async (req, res) => {
     try {
         if(!req.body.studentId)  return res.status(400).send({ error: "Student Id is required." })
-        // let commonDigit = "0000000"
-        const classId = req.body.studentClass && req.body.studentClass.length > 0 ? req.body.studentClass[0].classId : "2"
-        const section = req.body.section ? req.body.section : "A"
-        // const studentsCount = await Student.getStudentsCountByClassAndSection(req.school.schoolId, classId, section)
-
-        // const newStudentCount = String(studentsCount + 1)
-        // const newStudentLastSevenDigit = commonDigit.slice(0, - newStudentCount.length) + newStudentCount
-        // const sectionCode = getSectionCode(section)
     
         const studentClass = req.body.studentClass && req.body.studentClass.length > 0 && [{
             classId: req.body.studentClass[0].classId,
             className: `Class-${req.body.studentClass[0].classId}`
         }]
-        const students = new Student({
+        const students = new Students({
             ...req.body,
             studentClass,
             schoolId: req.school.schoolId
@@ -65,7 +57,7 @@ router.post('/fetchStudentsByQuery', auth, async (req, res) => {
     }
 
     try {
-        const students = await Student.find(match, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 })
+        const students = await Students.find(match, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 })
         res.send(students)
     } catch (e) {
         console.log(e);
@@ -75,12 +67,12 @@ router.post('/fetchStudentsByQuery', auth, async (req, res) => {
 
 router.delete('/student/:studentId', async (req, res) => {
     try {
-        const student = await Student.findOne({ studentId: req.params.studentId })
+        const student = await Students.findOne({ studentId: req.params.studentId })
         if (!student) return res.status(404).send({ message: 'Student Id does not exist.' })
         let lookup = {
             studentId: student.studentId
         }
-        await Student.deleteOne(lookup).lean()
+        await Students.deleteOne(lookup).lean()
         await Marks.findOneAndRemove(lookup).lean()
         return res.status(200).send({ "message": "Student has been deleted." })
     }
@@ -115,10 +107,10 @@ router.patch('/student/:studentId', async (req, res) => {
             }]
             updateData["studentClass"] = studentClass
         }
-        const school = await Student.findOne(lookup).lean();
+        const school = await Students.findOne(lookup).lean();
         if (!school) return res.status(404).send({ message: 'Student Id does not exist.' })
 
-        await Student.updateOne(lookup, updateData).lean().exec();
+        await Students.updateOne(lookup, updateData).lean().exec();
         res.status(200).send({ message: 'Student has been updated.' })
 
     }

@@ -1,11 +1,15 @@
 package org.ekstep.saral.saralsdk;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.MediaActionSound;
+import android.os.Looper;
 import android.util.Log;
 
+import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.bridge.ActivityEventListener;
-import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContext;
@@ -21,6 +25,7 @@ import org.ekstep.saral.saralsdk.hwmodel.HWBlockLettersClassifierStatusListener;
 import org.ekstep.saral.saralsdk.hwmodel.RemoteConfig;
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
@@ -101,7 +106,7 @@ public class SaralSDKModule extends ReactContextBaseJavaModule implements Activi
     }
 
     @ReactMethod
-    void startCamera(String layoutSchema,String page, Promise promise) {
+    void startCamera(String layoutSchema,String page, int hasTimer, boolean isManualEditEnabled, Promise promise) {
         Log.d(TAG, "startCamera called with: " + layoutSchema);
         Log.d(TAG, "startCamera called with: " + page);
 
@@ -113,6 +118,8 @@ public class SaralSDKModule extends ReactContextBaseJavaModule implements Activi
         Intent intent                   = new Intent(currentActivity, SaralSDKOpenCVScannerActivity.class);
         intent.putExtra("layoutConfigs", layoutSchema);
         intent.putExtra("page", page);
+        intent.putExtra("timer", hasTimer);
+        intent.putExtra("isManualEditEnabled", isManualEditEnabled);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         currentActivity.startActivity(intent);
     }
