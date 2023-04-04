@@ -28,9 +28,7 @@ import { getLoginData } from './src/utils/StorageUtils';
 import { collectErrorLogs } from './src/modules/CollectErrorLogs';
 import  analytics  from '@react-native-firebase/analytics';
 import crashlytics from '@react-native-firebase/crashlytics';
-
-
- const customTextProps = {
+const customTextProps = {
 allowFontScaling: false,
 };
 
