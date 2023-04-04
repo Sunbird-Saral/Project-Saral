@@ -119,13 +119,6 @@ function getActiveRouteName(navigationState) {
   }
   return route.routeName;
 }
-
-
-
-  
-
-
-
   return (
     <>
       <Provider store={storeFactory}>
