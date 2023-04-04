@@ -14,11 +14,12 @@ exports.fetchStudentsandExams = async (req, res, next) => {
     if (req.body.classId) {
         match.classId = req.body.classId,
         examMatch.classId = req.body.classId
-        const school = await Schools.findOne({ schoolId: req.school.schoolId })
-        examMatch.state = school.state
     } else {
         return res.status(404).json({ message: 'Please send classId' })
     }
+
+    const school = await Schools.findOne({ schoolId: req.school.schoolId })
+    examMatch.state = school.state
 
     if (req.body.section && req.body.section != "0") {
         match.section = req.body.section
