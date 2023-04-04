@@ -1,3 +1,4 @@
+const Schools = require("../models/school")
 const Students = require("../models/students")
 const Marks = require("../models/marks")
 const Exams = require('../models/exams')
@@ -13,7 +14,8 @@ exports.fetchStudentsandExams = async (req, res, next) => {
     if (req.body.classId) {
         match.classId = req.body.classId,
         examMatch.classId = req.body.classId
-        examMatch.schoolId = req.school.schoolId
+        const school = await Schools.findOne({ schoolId: req.school.schoolId })
+        examMatch.state = school.state
     } else {
         return res.status(404).json({ message: 'Please send classId' })
     }
