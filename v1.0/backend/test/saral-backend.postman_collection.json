@@ -375,7 +375,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjQyNzdiOTZjZjQxZTI1ZDBjNjFkMzUiLCJpYXQiOjE2NDg1MjMyOTN9.GUFaH-k6Gsx_8WE8pyetX4_BEexdFXJI8bZiuD9Eul4",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1MDAyIiwic2Nob29sSWQiOiJ1MDAyIiwiaWF0IjoxNjgwNTI3NTU4fQ.TZ6srpK0qyqfC6TE7bpkvl5wuICBn4_5GwvnuQlFQhk",
 									"type": "string"
 								}
 							]
@@ -384,7 +384,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Ajay\",\r\n    \"section\": \"D\",\r\n    \"studentClass\": [\r\n        {\r\n            \"classId\": \"2\"\r\n        }\r\n    ],\r\n    \"studentId\": \"2204000000800001\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Nikhil\",\r\n    \"section\": \"D\",\r\n     \"classId\": \"2\",\r\n    \"studentId\": \"2204000800001\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -409,7 +409,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"Ajay\",\r\n    \"section\": \"D\",\r\n    \"studentClass\": [\r\n        {\r\n            \"classId\": \"2\"\r\n        }\r\n    ],\r\n    \"studentId\": \"2204000000800001\"\r\n}",
+									"raw": "{\r\n    \"name\": \"Nikhil\",\r\n    \"section\": \"D\",\r\n     \"classId\": \"2\",\r\n    \"studentId\": \"2204000800001\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -435,20 +435,24 @@
 									"value": "Express"
 								},
 								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
 									"key": "Content-Type",
 									"value": "application/json; charset=utf-8"
 								},
 								{
 									"key": "Content-Length",
-									"value": "212"
+									"value": "191"
 								},
 								{
 									"key": "ETag",
-									"value": "W/\"d4-JNP5/kKVNk+TOJ6yBp0xgQOOJDs\""
+									"value": "W/\"bf-SyB5KNZbizardoadMnBMF6AdFL4\""
 								},
 								{
 									"key": "Date",
-									"value": "Tue, 29 Mar 2022 03:08:45 GMT"
+									"value": "Mon, 03 Apr 2023 13:13:26 GMT"
 								},
 								{
 									"key": "Connection",
@@ -460,18 +464,28 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"studentClass\": [\n        {\n            \"classId\": \"2\",\n            \"className\": \"Class-2\"\n        }\n    ],\n    \"section\": \"D\",\n    \"name\": \"Ajay\",\n    \"studentId\": \"2204000000800001\",\n    \"schoolId\": \"od001\",\n    \"createdAt\": \"2022-03-29T03:08:45.186Z\",\n    \"updatedAt\": \"2022-03-29T03:08:45.186Z\"\n}"
+							"body": "{\n    \"classId\": \"2\",\n    \"className\": \"Class-2\",\n    \"section\": \"D\",\n    \"name\": \"Nikhil\",\n    \"studentId\": \"2204000800001\",\n    \"schoolId\": \"u002\",\n    \"createdAt\": \"2023-04-03T13:13:26.663Z\",\n    \"updatedAt\": \"2023-04-03T13:13:26.663Z\"\n}"
 						}
 					]
 				},
 				{
 					"name": "Update student",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1MDAyIiwic2Nob29sSWQiOiJ1MDAyIiwiaWF0IjoxNjgwNTI2NjE3fQ.tNVUV9SwfYe5m5Jlkh2HDCY4GYO5CGmoGA1Dl-_zGxo",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PATCH",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n   \"name\": \"Ajay chamyal\"\r\n}",
+							"raw": "{\r\n   \"name\": \"Nikhil Rawat\",\r\n   \"classId\": \"3\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -490,7 +504,7 @@
 							"variable": [
 								{
 									"key": "studentId",
-									"value": "2204000000800001"
+									"value": "2204000800001"
 								}
 							]
 						}
@@ -503,7 +517,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n   \"name\": \"Ajay chamyal\"\r\n}",
+									"raw": "{\r\n   \"name\": \"Nikhil Rawat\",\r\n   \"classId\": \"3\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -522,7 +536,7 @@
 									"variable": [
 										{
 											"key": "studentId",
-											"value": "2204000000800001"
+											"value": "2204000800001"
 										}
 									]
 								}
@@ -534,6 +548,10 @@
 								{
 									"key": "X-Powered-By",
 									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
 								},
 								{
 									"key": "Content-Type",
@@ -549,7 +567,7 @@
 								},
 								{
 									"key": "Date",
-									"value": "Tue, 29 Mar 2022 03:09:24 GMT"
+									"value": "Mon, 03 Apr 2023 13:13:31 GMT"
 								},
 								{
 									"key": "Connection",
@@ -649,14 +667,14 @@
 					]
 				},
 				{
-					"name": "Fetch Students",
+					"name": "Fetch student Exam By query",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjQyNzdiOTZjZjQxZTI1ZDBjNjFkMzUiLCJpYXQiOjE2NDg1MjMyOTN9.GUFaH-k6Gsx_8WE8pyetX4_BEexdFXJI8bZiuD9Eul4",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1MDAyIiwic2Nob29sSWQiOiJ1MDAyIiwiaWF0IjoxNjgwNTI2NjE3fQ.tNVUV9SwfYe5m5Jlkh2HDCY4GYO5CGmoGA1Dl-_zGxo",
 									"type": "string"
 								}
 							]
@@ -665,7 +683,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n   \"classId\": \"2\"\r\n}",
+							"raw": "{\r\n    \"classId\": \"2\",\r\n    \"className\": \"Class-2\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -684,13 +702,13 @@
 					},
 					"response": [
 						{
-							"name": "Fetch Students",
+							"name": "Fetch student Exam By query",
 							"originalRequest": {
 								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n   \"classId\": \"2\"\r\n}",
+									"raw": "{\r\n    \"classId\": \"2\",\r\n    \"className\": \"Class-2\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -716,20 +734,24 @@
 									"value": "Express"
 								},
 								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
 									"key": "Content-Type",
 									"value": "application/json; charset=utf-8"
 								},
 								{
 									"key": "Content-Length",
-									"value": "136"
+									"value": "5982"
 								},
 								{
 									"key": "ETag",
-									"value": "W/\"88-x/SzgnkbwAp6lb6xG7L/nEaKFdI\""
+									"value": "W/\"175e-CuVYVZcY15HGzLXW9JW3ICdMP+M\""
 								},
 								{
 									"key": "Date",
-									"value": "Tue, 29 Mar 2022 03:12:02 GMT"
+									"value": "Mon, 03 Apr 2023 12:59:39 GMT"
 								},
 								{
 									"key": "Connection",
@@ -741,7 +763,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "[\n    {\n        \"studentClass\": [\n            {\n                \"classId\": \"2\",\n                \"className\": \"Class-2\"\n            }\n        ],\n        \"section\": \"D\",\n        \"name\": \"Ajay\",\n        \"studentId\": \"2204000000800001\",\n        \"schoolId\": \"od001\"\n    }\n]"
+							"body": "[\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student1\",\n        \"studentId\": \"420400123\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student2\",\n        \"studentId\": \"420400234\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student3\",\n        \"studentId\": \"420400345\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student4\",\n        \"studentId\": \"420400456\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student5\",\n        \"studentId\": \"420400567\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student6\",\n        \"studentId\": \"420400678\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student7\",\n        \"studentId\": \"420400789\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student8\",\n        \"studentId\": \"420400890\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student9\",\n        \"studentId\": \"420400912\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student10\",\n        \"studentId\": \"420401012\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student11\",\n        \"studentId\": \"420401123\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student12\",\n        \"studentId\": \"420401245\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student13\",\n        \"studentId\": \"420401367\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student14\",\n        \"studentId\": \"420401456\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student15\",\n        \"studentId\": \"420401567\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student16\",\n        \"studentId\": \"420401678\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student17\",\n        \"studentId\": \"420401789\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student18\",\n        \"studentId\": \"420401890\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student19\",\n        \"studentId\": \"420401901\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student20\",\n        \"studentId\": \"420402012\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student21\",\n        \"studentId\": \"420402123\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student22\",\n        \"studentId\": \"420402234\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student23\",\n        \"studentId\": \"420402345\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student24\",\n        \"studentId\": \"420402456\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student25\",\n        \"studentId\": \"420402567\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student26\",\n        \"studentId\": \"420402678\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student27\",\n        \"studentId\": \"420402789\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student28\",\n        \"studentId\": \"420402890\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student29\",\n        \"studentId\": \"420402910\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student30\",\n        \"studentId\": \"420403012\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student31\",\n        \"studentId\": \"420403123\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student32\",\n        \"studentId\": \"420403234\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student33\",\n        \"studentId\": \"420403345\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student34\",\n        \"studentId\": \"420403456\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student35\",\n        \"studentId\": \"420403567\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student36\",\n        \"studentId\": \"420403678\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student37\",\n        \"studentId\": \"420403789\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student38\",\n        \"studentId\": \"420403890\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student39\",\n        \"studentId\": \"420403910\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student40\",\n        \"studentId\": \"420404012\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student41\",\n        \"studentId\": \"420404123\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student42\",\n        \"studentId\": \"420404234\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student43\",\n        \"studentId\": \"420404345\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student44\",\n        \"studentId\": \"420404456\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student45\",\n        \"studentId\": \"420404567\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student46\",\n        \"studentId\": \"420404678\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student47\",\n        \"studentId\": \"420404789\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student48\",\n        \"studentId\": \"420404890\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student49\",\n        \"studentId\": \"420404901\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student 50\",\n        \"studentId\": \"420405012\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student51\",\n        \"studentId\": \"420405123\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student52\",\n        \"studentId\": \"420405234\",\n        \"schoolId\": \"u002\"\n    },\n    {\n        \"section\": \"D\",\n        \"classId\": \"2\",\n        \"className\": \"Class-2\",\n        \"name\": \"Student53\",\n        \"studentId\": \"420405345\",\n        \"schoolId\": \"u002\"\n    }\n]"
 						}
 					]
 				}
