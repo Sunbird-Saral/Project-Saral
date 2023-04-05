@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 // url/databasename
 const connectionURL = process.env.MONGODB_URL
-const poolSize = process.env.POOL_SIZE
+const poolSize = process.env.MONGODB_POOL_SIZE
 
 mongoose.connect(connectionURL, {
     useNewUrlParser: true,
