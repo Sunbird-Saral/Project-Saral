@@ -5,6 +5,7 @@ ENV PROFILE=dev
 ENV PORT=3000
 ENV MONGODB_URL=mongodb://docker.for.mac.localhost:27017/saralnew
 ENV JWT_SECRET=SARALDATA_NODE
+ENV MONGODB_POOL_SIZE= 5
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
