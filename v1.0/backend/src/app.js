@@ -27,7 +27,7 @@ const loggerMiddleware = (req, res, next) => {
     next()
 }
 
-const generatePdf = async () => {
+const generateJestReportPdf = async () => {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
         const invoicePath = path.resolve("./output/coverage/lcov-report/index.html");
@@ -61,7 +61,7 @@ app.use(examRouter)
 app.use(markRouter)
 app.use(roiRouter)
 app.use(brandRouter)
-generatePdf()
+generateJestReportPdf() //generate jest report pdf
 app.use("/api-docs/saral/frontend", swaggerUi.serve, (...args) => swaggerUi.setup(frontendSpec)(...args));
 app.use("/api-docs/saral/maintenance", swaggerUi.serve, (...args) => swaggerUi.setup(maintenanceSpec)(...args));
 module.exports = app
