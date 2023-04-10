@@ -24,16 +24,7 @@
         "statements": 80
       }
     },
-    "coverageDirectory": "output/coverage",
-    "reporters": [
-      "default",
-      [
-        "./node_modules/jest-html-reporter",
-        {
-          "pageTitle": "Test Report"
-        }
-      ]
-    ]
+    "coverageDirectory": "output/coverage"
   },
   "keywords": [],
   "author": "",
