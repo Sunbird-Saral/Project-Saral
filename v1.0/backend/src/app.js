@@ -4,8 +4,6 @@ var path = require('path');
 const fs = require('fs')
 const utils = require('util')
 const puppeteer = require('puppeteer')
-const hb = require('handlebars')
-const readFile = utils.promisify(fs.readFile)
 const yaml = require('js-yaml');
 const swaggerUi = require('swagger-ui-express');
 const schoolRouter = require('./routers/school.route')
@@ -29,40 +27,23 @@ const loggerMiddleware = (req, res, next) => {
     next()
 }
 
-const getTemplateHtml = async (req, res, next) => {
-    console.log("Loading template file in memory")
-    try {
-        const invoicePath = path.resolve("./output/coverage/lcov-report/index.html");
-        console.log("heyyy",invoicePath)
-        return await readFile(invoicePath, 'utf8');
-    } catch (err) {
-        console.log("errorrrrr",err)
-        return Promise.reject("Could not load html template");
-    }
-}
-
 const generatePdf = async () => {
-    let data = {};
-    getTemplateHtml().then(async (res) => {
-        console.log("Compiing the template with handlebars")
-        const template = hb.compile(res, { strict: true });
-    
-        const result = template(data);
-   
-        const html = result;
-   
-        const browser = await puppeteer.launch();
-        const page = await browser.newPage()
-        
-        await page.setContent(html)
-      
-        await page.pdf({ path: './output/jestReport2.pdf', format: 'A4' })
-        await browser.close();
-        console.log("PDF Generated")
-    }).catch(err => {
-        console.error(err)
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+        const invoicePath = path.resolve("./output/coverage/lcov-report/index.html");
+    await page.goto(invoicePath, { waitUntil: 'networkidle0' });
+    await page.pdf({
+        path: './output/jestTestReport.pdf',
+        displayHeaderFooter: true,
+        headerTemplate: '',
+        footerTemplate: '',
+        printBackground: true,
+        margin: {
+            top: '20px', right: '20px', bottom: '20px', left: '20px'
+    }
     });
-
+        await browser.close();
+    console.log("pdf printed")
 }
 
 app.use(express.json({ limit: '50mb' }));
