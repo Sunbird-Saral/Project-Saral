@@ -220,7 +220,7 @@ class MyScanComponent extends Component {
                 this.props.navigation.navigate('ScanHistory', { from_screen: 'cameraActivity' })
                 return true
             } else {
-                this.props.navigation.navigate('Home', { from_screen: 'cameraActivity' })
+                this.props.navigation.navigate('selectDetails', { from_screen: 'cameraActivity' })
                 return true
 
             }

@@ -455,10 +455,14 @@ class LoginComponent extends Component {
                         </View> :
 
                         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                            <Image style={{ width: 100, height: 100 }} source={Assets.AppLogo} />
+                            <Image style={{ width: 80, height: 80 }} source={Assets.AppLogo} />
                         </View>
 
                     }
+                    <View style={{justifyContent:'center',alignItems:"center",bottom:40}}>
+                        <Text style={{fontSize:22,fontWeight:'bold'}}> {Strings.Saral.toUpperCase()}</Text>
+                        <Text style={{color:'gray'}}> {'Assessments-Q1'}</Text>
+                    </View>
 
                     <View style={styles.container2}>
                         <View style={styles.loginContainer}>
@@ -535,7 +539,7 @@ class LoginComponent extends Component {
             </View>
         }
         return (
-            <View style={styles.container}>
+            <View style={[styles.container,{backgroundColor:defaultBrandingdata.themeColor2}]}>
                 <ScrollView
                     contentContainerStyle={{ flexGrow: 1 }}
                     showsVerticalScrollIndicator={false}
@@ -544,7 +548,11 @@ class LoginComponent extends Component {
                 >
 
                     <View style={styles.container1}>
-                        <Image style={{ width: 100, height: 100 }} source={{ uri: defaultBrandingdata && 'data:image/png;base64,' + this.props.defaultBrandingdata.logoImage }} />
+                        <Image style={{ width: 80, height: 80,borderRadius:50,border:1 }} source={{ uri: defaultBrandingdata && 'data:image/png;base64,' + this.props.defaultBrandingdata.logoImage }} />
+                    </View>
+                    <View style={{justifyContent:'center',alignItems:"center",bottom:30}}>
+                        <Text style={{fontSize:22,fontWeight:'bold'}}> {Strings.Saral.toUpperCase()}</Text>
+                        <Text style={{color:'gray'}}> {'Assessments-Q1'}</Text>
                     </View>
                     <View style={styles.container2}>
                         <View style={styles.loginContainer}>
@@ -622,7 +630,7 @@ const styles = {
         backgroundColor: AppTheme.GREY_WHITE
     },
     container1: {
-        minHeight: 230,
+        minHeight: 200,
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -632,7 +640,7 @@ const styles = {
     },
     header1TextStyle: {
         textAlign: 'center',
-        fontSize: AppTheme.HEADER_FONT_SIZE_REGULAR,
+        fontSize: 18,
         color: AppTheme.BLACK,
         fontWeight: 'bold',
         letterSpacing: 1,
@@ -651,17 +659,19 @@ const styles = {
         letterSpacing: 1,
     },
     container2: {
-        flex: 1
+        flex: 1,
+        bottom:10
     },
     loginContainer: {
         marginHorizontal: '5%',
         backgroundColor: AppTheme.WHITE,
         borderRadius: 8,
         padding: '4%',
-        elevation: 2
+        elevation: 2,
+        height:330
     },
     fieldContainerStyle: {
-        paddingVertical: '2.5%',
+        paddingVertical: '1%',
     },
     labelTextStyle: {
         width: '40%',

@@ -33,9 +33,9 @@ const MainStack = createStackNavigator(
         dashboard: {
             screen: DashboardComponent
         },
-        Home: {
-            screen: HomeComponent
-        },
+        // Home: {
+        //     screen: HomeComponent
+        // },
         selectDetails: {
             screen: SelectDetailsComponent
         },
@@ -68,7 +68,7 @@ const MainStack = createStackNavigator(
         }
     },
     {
-        initialRouteName: 'Home',
+        initialRouteName: 'selectDetails',
         headerMode: 'none'
     }
 )
