@@ -23,29 +23,36 @@ const maintenanceSpec = yaml.load(spec2);
 const app = express()
 
 
-const expressMiddleware = async(req, res, next) => {
- let data= await getLoginData();
+
+const expressMiddleware = (req, res, next) => {
+   const deviceID = req.headers['x-request-deviceid']
+  if(deviceID != 'undefined'){
+    logger.info(`deviceID : ${deviceID}`)
+  }
   next()
 }
 
-const loggerMidlleware = expressPinoLogger({
-    logger: logger,
-    serializers: {
-      req: (req) => ({
-        method: req.method,
-        url: req.url,
-        user: req.raw.user,
-        token:req.raw.token
-      }),
-    },
-    autoLogging: true,
-  });
 
-  app.use((req, res, next) => {
-    req.user =  getLoginData();
-    req.token = getToken()
-    next();
-  })
+
+
+// const loggerMidlleware = expressPinoLogger({
+//     logger: logger,
+//     serializers: {
+//       req: (req) => ({
+//         // method: req.method,
+//         // url: req.url,
+//         user: req.raw.user,
+//         token:req.raw.token
+//       }),
+//     },
+//     autoLogging: true,
+//   });
+
+  // app.use((req, res, next) => {
+  //   req.user =  'userid';
+  //   req.token = 'getToken()'
+  //   next();
+  // })
 app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }))
 app.use(express.json())

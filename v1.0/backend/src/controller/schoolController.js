@@ -7,9 +7,8 @@ const {logger} = require('../logging/logger')
 const {getLoginData,setLoginData,getToken,setToken} = require('../logging/logger')
 
 exports.loginSchool = async (req, res, next) => {
-  await setLoginData(req)
-  await getLoginData()
   
+
   try {
     let userId = {}
     if (req.body.schoolId) {
@@ -23,8 +22,6 @@ exports.loginSchool = async (req, res, next) => {
     await Helper.lockScreenValidator(schools)
 
     const token = await Users.generateAuthToken(users)
-    await setToken(token)
-    await getToken()
 
     let classes = []
     let school = {

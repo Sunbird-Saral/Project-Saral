@@ -29,6 +29,7 @@ import ScanDataModal from './ScanDataModal';
 import { getRoiDataApi, getScanDataApi, setRoiDataApi, setScanDataApi } from '../../utils/offlineStorageUtils';
 import constants from '../../flux/actions/constants';
 import { storeFactory } from '../../flux/store/store';
+import DeviceInfo from 'react-native-device-info';
 
 LogBox.ignoreAllLogs()
 
@@ -531,6 +532,7 @@ class MyScanComponent extends Component {
         const data = await getScannedDataFromLocal();
         const loginCred = await getLoginCred();
         const hasNetwork = await checkNetworkConnectivity();
+        const deviceUniqId = await DeviceInfo.getUniqueId();
         if (hasNetwork) {
         if (this.state.roiIndex != -1) {
 
@@ -565,7 +567,7 @@ class MyScanComponent extends Component {
                             })
                         })
 
-                        let apiObj = new SaveScanData(filterData[0], this.props.loginData.data.token);
+                        let apiObj = new SaveScanData(filterData[0], this.props.loginData.data.token,deviceUniqId);
                         this.saveScanData(apiObj, filterDataLen, setIntolocalAfterFilter);
 
                     } else {

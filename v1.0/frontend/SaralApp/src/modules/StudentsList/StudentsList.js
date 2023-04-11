@@ -39,7 +39,7 @@ import { collectErrorLogs } from '../CollectErrorLogs';
 import { getRegularRoipi, getRegularSavedScanpi, getRegularStudentExamApi, setRegularRoiApi, setRegularSavedScanApi, setRegularStudentExamApi } from '../../utils/offlineStorageUtils';
 import constants from '../../flux/actions/constants';
 import { storeFactory } from '../../flux/store/store';
-
+import DeviceInfo from 'react-native-device-info';
 const StudentsList = ({
     filteredData,
     loginData,
@@ -464,7 +464,7 @@ useEffect(() => {
     }
 
     const getRoi = async() => {
-
+        const deviceUniqId = await DeviceInfo.getUniqueId();
         let hasNetwork = await checkNetworkConnectivity();
         let setValue = filteredData.hasOwnProperty("set") > 0 ? filteredData.set.length > 0 ? filteredData.set : '' : null
 
@@ -495,7 +495,7 @@ useEffect(() => {
             payload.set = hasSet
             }
             let token = loginData.data.token
-            let apiObj = new ROIAction(payload, token);
+            let apiObj = new ROIAction(payload, token, deviceUniqId);
             dispatch(APITransport(apiObj))
             callScanStatusData()
         } else {

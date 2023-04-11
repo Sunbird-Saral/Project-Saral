@@ -18,7 +18,7 @@ import axios from 'axios';
 import { ScrollView } from 'react-native-gesture-handler';
 import { collectErrorLogs } from '../CollectErrorLogs';
 import Constant from '../../flux/actions/constants';
-
+import DeviceInfo from 'react-native-device-info';
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
 const HEIGHT_MODAL = 150;
@@ -106,6 +106,7 @@ const ScanHistoryCard = ({
         const data = await getScannedDataFromLocal();
         const hasNetwork = await checkNetworkConnectivity();
         let hasUpdate = await checkAppVersion();
+        const deviceUniqId = await DeviceInfo.getUniqueId();
         const { subject, examDate } = filteredData.response
 
         if (!hasUpdate) {
@@ -134,7 +135,7 @@ const ScanHistoryCard = ({
                                     }
                                 })
                             })
-                            let apiObj = new SaveScanData(filterData[0], loginData.data.token);
+                            let apiObj = new SaveScanData(filterData[0], loginData.data.token,deviceUniqId);
                             saveScanData(apiObj, filterDataLen, setIntolocalAfterFilter);
                         } else {
                             callCustomModal(Strings.message_text,Strings.there_is_no_data,false);

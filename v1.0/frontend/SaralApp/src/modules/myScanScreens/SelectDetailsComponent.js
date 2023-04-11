@@ -28,6 +28,7 @@ import CustomPopup from '../common/components/CustomPopup';
 import { getRegularStudentExamApi, setRegularStudentExamApi } from '../../utils/offlineStorageUtils';
 import constants from '../../flux/actions/constants';
 import { storeFactory } from '../../flux/store/store';
+import DeviceInfo from 'react-native-device-info';
 
 //redux
 
@@ -308,6 +309,8 @@ class SelectDetailsComponent extends Component {
 
     callStudentsData = async (token) => {
         const { dataPayload, selectedClass, selectedSection } = this.state
+        const deviceUniqId = await DeviceInfo.getUniqueId();
+        console.log('deviceUniqId??????????',deviceUniqId);
         let hasNetwork = await checkNetworkConnectivity();
 
 
@@ -329,7 +332,7 @@ class SelectDetailsComponent extends Component {
         this.setState({
             calledStudentsData: true,
         }, () => {
-            let apiObj = new GetStudentsAndExamData(dataPayload, token);
+            let apiObj = new GetStudentsAndExamData(dataPayload, token, deviceUniqId);
             this.props.APITransport(apiObj)})
         } else {
             this.setState({isLoading: false})
@@ -856,10 +859,7 @@ dispatchStudentExamData(payload){
     }
 
   async  callExamAndStudentData(token){
-
         let hasNetwork = await checkNetworkConnectivity();
-
-
             let hasCacheData = await getRegularStudentExamApi();
             let cacheFilterData = hasCacheData != null 
             ?

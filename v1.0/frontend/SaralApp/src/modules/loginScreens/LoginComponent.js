@@ -128,9 +128,10 @@ class LoginComponent extends Component {
     }
 
 
-    callDefaultbrandingData() {
+    callDefaultbrandingData= async()=> {
+        const deviceUniqId = await DeviceInfo.getUniqueId();
         let payload = this.props.defaultBrandingdata
-        let apiObj = new DefaultBrandAction(payload);
+        let apiObj = new DefaultBrandAction(payload,deviceUniqId);
         this.props.APITransport(apiObj)
     }
 
