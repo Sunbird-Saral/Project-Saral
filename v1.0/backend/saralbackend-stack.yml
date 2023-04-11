@@ -22,7 +22,7 @@ services:
     networks: 
       - saralbackend-network
     volumes:
-      - /usr/local/mongodb/data/saralv1db:/data/db
+      - /usr/local/mongodb/data/saralv1newdb:/data/db
 networks:
   saralbackend-network:
     driver: overlay
