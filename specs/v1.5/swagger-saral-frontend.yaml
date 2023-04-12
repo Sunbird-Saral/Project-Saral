@@ -533,8 +533,13 @@ definitions:
     items:
       type: object
       properties: 
-        studentClass:
-          $ref: '#/definitions/StudentClassName'
+        classId:
+          type: string
+          example: 2
+        className:
+          type: string
+          description: "class Name"
+          example: "Class-2"
         section:
           type: string
           example: "D"
@@ -550,31 +555,6 @@ definitions:
         studentAvailability:
           type: boolean
           example: true
-    
-        
-  StudentClass:
-    type: array
-    items:
-      type: object
-      properties: 
-        classId:
-          type: string
-          description: "Id of class"
-          example: "2"
-          
-  StudentClassName:
-    type: array
-    items:
-      type: object
-      properties: 
-        classId:
-          type: string
-          description: "Id of class"
-          example: "2"
-        className:
-          type: string
-          description: "class Name"
-          example: "Class-2"
           
   GetExamByClassResponse:
     type: array
@@ -615,6 +595,9 @@ definitions:
           type: string
           description: "Unique Id"
           example: "u001"
+        state:
+          type: string
+          example: "up"
     
   Questions:
     type: array

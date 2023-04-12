@@ -60,7 +60,10 @@ app.use(examRouter)
 app.use(markRouter)
 app.use(roiRouter)
 app.use(brandRouter)
-generateJestReportPdf() //generate jest report pdf
 app.use("/api-docs/saral/frontend", swaggerUi.serve, (...args) => swaggerUi.setup(frontendSpec)(...args));
 app.use("/api-docs/saral/maintenance", swaggerUi.serve, (...args) => swaggerUi.setup(maintenanceSpec)(...args));
+
+// uncomment below function to generate jest report pdf 
+// generateJestReportPdf() 
+
 module.exports = app
