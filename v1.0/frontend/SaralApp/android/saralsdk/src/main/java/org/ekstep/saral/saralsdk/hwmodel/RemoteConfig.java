@@ -30,7 +30,6 @@ public class RemoteConfig {
         FirebaseRemoteConfig mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
         final boolean[] hasValue = {false};
 
-        Log.d(TAG, "isFBDownloadModelEnable: networkAvailable"+networkAvailable);
 
         if (networkAvailable) {
             FirebaseRemoteConfigSettings configSettings = new FirebaseRemoteConfigSettings.Builder()
@@ -44,12 +43,9 @@ public class RemoteConfig {
                         public void onComplete(@NonNull Task<Boolean> task) {
                             if (task.isSuccessful()) {
                                hasValue[0] = mFirebaseRemoteConfig.getBoolean("isFBDownloadEnable");
-                                Log.d(TAG, "onComplete: hasValue[0]=> " + hasValue[0]);
-                                hasValue[0] = true;
                                 isFBDownloadModel.set(hasValue[0]);
                                 boolean value = task.getResult();
                                 Log.d(TAG, "onComplete: value " + value);
-                                Log.d(TAG, "onComplete: isFBDownloadModel=> " + isFBDownloadModel.get());
                             } else {
                                 Log.d(TAG, "onComplete: else" + task);
                             }
@@ -68,7 +64,6 @@ public class RemoteConfig {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        Log.d(TAG, "isFBDownloadModelEnable: isFBDownloadModelEnabble=> " + isFBDownloadModel.get());
             return isFBDownloadModel.get();
     }
 
