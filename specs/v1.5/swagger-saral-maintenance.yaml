@@ -610,6 +610,9 @@ definitions:
       name: 
         type: string
         example: "1210001"
+      classId:
+        type: string
+        example: 2
           
   CreateStudentBody:
     type: object
@@ -629,14 +632,22 @@ definitions:
         type: string
         description: "Student ID"
         example: "1210001"
-      studentClass:
-        $ref: '#/definitions/StudentClass'
+      classId:
+        type: string
+        example: 2
+      className:
+        type: string
+        example: "Class-2"
         
   FetchStudentsByQueryResponse:
     type: object
     properties:
-      studentClass:
-        $ref: '#/definitions/StudentClassName'
+      classId:
+        type: string
+        example: 2
+      className:
+        type: string
+        example: "Class-2"
       section:
         type: string
         example: "D"
@@ -653,8 +664,12 @@ definitions:
   CreateStudentResponse:
     type: object
     properties:
-      studentClass: 
-        $ref: '#/definitions/StudentClassName' 
+      classId:
+        type: string
+        example: 2
+      className:
+        type: string
+        example: "Class-2"
       section:
         type: string
         description: "Class Section"
@@ -678,30 +693,6 @@ definitions:
         type: string
         format: date-time
         
-  StudentClass:
-    type: array
-    items:
-      type: object
-      properties: 
-        classId:
-          type: string
-          description: "Id of class"
-          example: "2"
-          
-  StudentClassName:
-    type: array
-    items:
-      type: object
-      properties: 
-        classId:
-          type: string
-          description: "Id of class"
-          example: "2"
-        className:
-          type: string
-          description: "class Name"
-          example: "Class-2"
-          
   CreateExamBodyResponse:
       type: object
       properties:

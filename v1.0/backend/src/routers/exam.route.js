@@ -16,7 +16,15 @@ router.post('/exam', auth, async (req, res) => {
         }
 
         input.type = input.type.toUpperCase()
-        let examExist = await Exams.find({ schoolId, classId: input.classId, examDate: input.examDate, subject: input.subject })
+
+        let lookup = {
+            state: input.state,
+            classId: input.classId,
+            examDate: input.examDate,
+            subject: input.subject
+        }
+
+        let examExist = await Exams.find(lookup)
         if (examExist.length) continue
         let examId = await Counters.getValueForNextSequence("examId")
         const examData = new Exams({

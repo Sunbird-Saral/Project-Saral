@@ -1,3 +1,4 @@
+const Schools = require("../models/school")
 const Students = require("../models/students")
 const Marks = require("../models/marks")
 const Exams = require('../models/exams')
@@ -11,20 +12,17 @@ exports.fetchStudentsandExams = async (req, res, next) => {
 
     match.schoolId = req.school.schoolId
     if (req.query.classId) {
-        let studentClassObj = {
-            classId: req.query.classId,
-            className: `Class-${req.query.classId}`
-        }
-        let studentClass = [studentClassObj]
-        match.studentClass = studentClass
-        examMatch.classId = studentClassObj.classId
-        examMatch.schoolId = req.school.schoolId
+        match.classId = req.body.classId,
+        examMatch.classId = req.body.classId
     } else {
         return res.status(404).json({ message: 'Please send classId' })
     }
 
+    const school = await Schools.findOne({ schoolId: req.school.schoolId })
+    examMatch.state = school.state
+
     if (req.query.section && req.query.section != "0") {
-        match.section = req.query.section
+        match.section = req.body.section
     }
 
     if (req.query.hasOwnProperty('subject')) {
@@ -50,16 +48,15 @@ exports.fetchStudentsandExams = async (req, res, next) => {
             if(req.query.set){
                 lookup.set = req.query.set 
             }
-        
-            let marks = await Marks.findOne(lookup) 
 
-            if(marks && typeof marks == "object" ){
+            let marks = await Marks.findOne(lookup)
+
+            if (marks && typeof marks == "object") {
                 student["studentAvailability"] = marks.studentAvailability
-            }else{
+            } else {
                 student["studentAvailability"] = true
-                }
-                }
-
+            }
+        }
 
         const exams = await Exams.find(examMatch, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 })
 

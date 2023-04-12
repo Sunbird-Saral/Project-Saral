@@ -18,7 +18,6 @@ router.post('/classes', auth, async (req, res) => {
             className: `Class-${data.classId}`,
             schoolId: req.school.schoolId
         })
-        console.log(classData)
         classModel.push(classData)
     });
     try {
