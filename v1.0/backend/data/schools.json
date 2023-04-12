@@ -2,7 +2,7 @@
   {
     "name": "Dummy school 1",
     "schoolId": "u001",
-    "state": "up",
+    "state": "UP",
     "autoSync": false,
     "autoSyncFrequency": 600000,
     "storeTrainingData": true,

@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">97.14% </span>
+                <span class="strong">97.05% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>34/35</span>
+                <span class='fraction'>33/34</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">97.14% </span>
+                <span class="strong">97.05% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>34/35</span>
+                <span class='fraction'>33/34</span>
             </div>
         
             
@@ -140,10 +140,8 @@
 <a name='L75'></a><a href='#L75'>75</a>
 <a name='L76'></a><a href='#L76'>76</a>
 <a name='L77'></a><a href='#L77'>77</a>
-<a name='L78'></a><a href='#L78'>78</a>
-<a name='L79'></a><a href='#L79'>79</a>
-<a name='L80'></a><a href='#L80'>80</a>
-<a name='L81'></a><a href='#L81'>81</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L78'></a><a href='#L78'>78</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -159,14 +157,11 @@
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -205,7 +200,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
@@ -223,7 +217,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const Students = require("../models/students")
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const Schools = require("../models/school")
+const Students = require("../models/students")
 const Marks = require("../models/marks")
 const Exams = require('../models/exams')
 const Helper = require('../middleware/helper')
@@ -236,17 +231,14 @@ exports.fetchStudentsandExams = async (req, res, next) =&gt; {
 &nbsp;
     match.schoolId = req.school.schoolId
     if (req.body.classId) {
-        let studentClassObj = {
-            classId: req.body.classId,
-            className: `Class-${req.body.classId}`
-        }
-        let studentClass = [studentClassObj]
-        match.studentClass = studentClass
-        examMatch.classId = studentClassObj.classId
-        examMatch.schoolId = req.school.schoolId
+        match.classId = req.body.classId,
+        examMatch.classId = req.body.classId
     } else {
         return res.status(404).json({ message: 'Please send classId' })
     }
+&nbsp;
+    const school = await Schools.findOne({ schoolId: req.school.schoolId })
+    examMatch.state = school.state
 &nbsp;
     <span class="missing-if-branch" title="else path not taken" >E</span>if (req.body.section &amp;&amp; req.body.section != "0") {
         match.section = req.body.section
@@ -272,19 +264,18 @@ exports.fetchStudentsandExams = async (req, res, next) =&gt; {
                 examDate: examMatch.examDate
             }
 &nbsp;
-            <span class="missing-if-branch" title="else path not taken" >E</span>if(req.body.set){
-                lookup.set = req.body.set 
+            <span class="missing-if-branch" title="else path not taken" >E</span>if (req.body.set) {
+                lookup.set = req.body.set
             }
-        
-            let marks = await Marks.findOne(lookup) 
 &nbsp;
-            if(marks &amp;&amp; typeof marks == "object" ){
+            let marks = await Marks.findOne(lookup)
+&nbsp;
+            if (marks &amp;&amp; typeof marks == "object") {
                 student["studentAvailability"] = marks.studentAvailability
-            }else{
+            } else {
                 student["studentAvailability"] = true
-                }
-                }
-&nbsp;
+            }
+        }
 &nbsp;
         const exams = await Exams.find(examMatch, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 })
 &nbsp;
@@ -310,7 +301,7 @@ exports.fetchStudentsandExams = async (req, res, next) =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-04-10T06:33:41.244Z
+                at 2023-04-10T14:25:12.475Z
             </div>
         <script src="../prettify.js"></script>
         <script>

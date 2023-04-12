@@ -889,7 +889,8 @@
       }
     ],
     "examId": 1,
-    "schoolId": "u001"
+    "schoolId": "u001",
+    "state": "UP"
   },
   {
     "subject": "Hindi",
@@ -1885,7 +1886,8 @@
       }
     ],
     "examId": 2,
-    "schoolId": "u001"
+    "schoolId": "u001",
+    "state": "UP"
   },
   {
     "subject": "Multi-Subject",
@@ -2441,7 +2443,8 @@
       }
     ],
     "examId": 3,
-    "schoolId": "u001"
+    "schoolId": "u001",
+    "state": "UP"
   },
   {
     "subject": "Hindi",
@@ -3333,7 +3336,8 @@
       }
     ],
     "examId": 4,
-    "schoolId": "u001"
+    "schoolId": "u001",
+    "state": "UP"
   },
   {
     "subject": "Hindi",
@@ -4225,7 +4229,8 @@
       }
     ],
     "examId": 5,
-    "schoolId": "u001"
+    "schoolId": "u001",
+    "state": "UP"
   },
   {
     "subject": "Hindi",
@@ -5117,7 +5122,8 @@
       }
     ],
     "examId": 6,
-    "schoolId": "u001"
+    "schoolId": "u001",
+    "state": "UP"
   },
   {
     "subject": "Multi-Subject",
@@ -5673,7 +5679,8 @@
       }
     ],
     "examId": 7,
-    "schoolId": "u001"
+    "schoolId": "u001",
+    "state": "UP"
   },
   {
     "subject": "Hindi",
@@ -5785,7 +5792,8 @@
       }
     ],
     "examId": 8,
-    "schoolId": "od001"
+    "schoolId": "od001",
+    "state": "odisha"
   },
   {
     "subject": "Hindi",
@@ -5897,7 +5905,8 @@
       }
     ],
     "examId": 9,
-    "schoolId": "od001"
+    "schoolId": "od001",
+    "state": "odisha"
   },
   {
     "subject": "Maths",
@@ -6009,7 +6018,8 @@
       }
     ],
     "examId": 10,
-    "schoolId": "od001"
+    "schoolId": "od001",
+    "state": "odisha"
   },
   {
     "subject": "Hindi",
@@ -6191,7 +6201,8 @@
       }
     ],
     "examId": 11,
-    "schoolId": "demouser"
+    "schoolId": "demouser",
+    "state": "gujrat"
   },
   {
     "subject": "Maths",
@@ -6373,7 +6384,8 @@
       }
     ],
     "examId": 12,
-    "schoolId": "demouser"
+    "schoolId": "demouser",
+    "state": "gujrat"
   },
   {
     "subject": "English",
@@ -6555,7 +6567,8 @@
       }
     ],
     "examId": 13,
-    "schoolId": "demouser"
+    "schoolId": "demouser",
+    "state": "gujrat"
   },
   {
     "subject": "Hindi",
@@ -6564,7 +6577,11 @@
     "examDate": "11/10/2021",
     "totalMarks": 20,
     "type": "hindi_8s_13q_9d_omr",
-    "set": ["A","B","C"],
+    "set": [
+      "A",
+      "B",
+      "C"
+    ],
     "questions": [
       {
         "questionId": "ROLLNUMBER1_Q1_1",
@@ -7712,7 +7729,8 @@
       }
     ],
     "examId": 14,
-    "schoolId": "u002"
+    "schoolId": "u001",
+    "state": "up"
   },
   {
     "subject": "Maths",
@@ -8868,7 +8886,8 @@
       }
     ],
     "examId": 15,
-    "schoolId": "u002"
+    "schoolId": "u001",
+    "state": "up"
   },
   {
     "subject": "English",
@@ -10024,7 +10043,8 @@
       }
     ],
     "examId": 16,
-    "schoolId": "u002"
+    "schoolId": "u001",
+    "state": "up"
   },
   {
     "subject": "Hindi",
@@ -10366,7 +10386,8 @@
       }
     ],
     "examId": 17,
-    "schoolId": "u001"
+    "schoolId": "u001",
+    "state": "UP"
   },
   {
     "subject": "Hindi",
@@ -10438,7 +10459,8 @@
       }
     ],
     "examId": 18,
-    "schoolId": "demouser"
+    "schoolId": "demouser",
+    "state": "gujrat"
   },
   {
     "subject": "Hindi",
@@ -10475,7 +10497,8 @@
       }
     ],
     "examId": 19,
-    "schoolId": "demouser"
+    "schoolId": "demouser",
+    "state": "gujrat"
   },
   {
     "subject": "Carpentary Assesment",
@@ -10512,7 +10535,8 @@
       }
     ],
     "examId": 20,
-    "schoolId": "skill001"
+    "schoolId": "skill001",
+    "state": "karnataka"
   },
   {
     "subject": "Hindi",
@@ -10599,7 +10623,8 @@
       }
     ],
     "examId": 21,
-    "schoolId": "demouser"
+    "schoolId": "demouser",
+    "state": "gujrat"
   },
   {
     "subject": "Hindi",
@@ -10731,7 +10756,8 @@
       }
     ],
     "examId": 24,
-    "schoolId": "demouser"
+    "schoolId": "demouser",
+    "state": "gujrat"
   },
   {
     "subject": "Hindi",
@@ -10793,7 +10819,8 @@
       }
     ],
     "examId": 25,
-    "schoolId": "a001"
+    "schoolId": "a001",
+    "state": "assam"
   },
   {
     "subject": "Hindi",
@@ -10855,7 +10882,8 @@
       }
     ],
     "examId": 26,
-    "schoolId": "a001"
+    "schoolId": "a001",
+    "state": "assam"
   },
   {
     "subject": "0",
@@ -10927,7 +10955,8 @@
       }
     ],
     "examId": 27,
-    "schoolId": "m001"
+    "schoolId": "m001",
+    "state": "mp"
   },
   {
     "subject": "0",
@@ -10999,7 +11028,8 @@
       }
     ],
     "examId": 28,
-    "schoolId": "m001"
+    "schoolId": "m001",
+    "state": "mp"
   },
   {
     "subject": "0",
@@ -11071,7 +11101,8 @@
       }
     ],
     "examId": 29,
-    "schoolId": "m001"
+    "schoolId": "m001",
+    "state": "mp"
   },
   {
     "subject": "Hindi",
@@ -11133,7 +11164,8 @@
       }
     ],
     "examId": 30,
-    "schoolId": "a001"
+    "schoolId": "a001",
+    "state": "assam"
   },
   {
     "subject": "Hindi",
@@ -12465,7 +12497,8 @@
       }
     ],
     "examId": 32,
-    "schoolId": "u001"
+    "schoolId": "u001",
+    "state": "UP"
   },
   {
     "subject": "hindi",
@@ -16768,7 +16801,8 @@
       }
     ],
     "examId": 40,
-    "schoolId": "09670703101"
+    "schoolId": "09670703101",
+    "state": "up"
   },
   {
     "subject": "Hindi",
@@ -17924,7 +17958,8 @@
       }
     ],
     "examId": 41,
-    "schoolId": "u001"
+    "schoolId": "u001",
+    "state": "UP"
   },
   {
     "subject": "0",
@@ -17996,7 +18031,8 @@
       }
     ],
     "examId": 43,
-    "schoolId": "u001"
+    "schoolId": "u001",
+    "state": "UP"
   },
   {
     "subject": "0",
@@ -18068,7 +18104,8 @@
       }
     ],
     "examId": 44,
-    "schoolId": "u002"
+    "schoolId": "u001",
+    "state": "up"
   },
   {
     "subject": "0",
@@ -18140,7 +18177,8 @@
       }
     ],
     "examId": 45,
-    "schoolId": "demouser"
+    "schoolId": "demouser",
+    "state": "gujrat"
   },
   {
     "subject": "0",
@@ -18212,7 +18250,8 @@
       }
     ],
     "examId": 46,
-    "schoolId": "od001"
+    "schoolId": "od001",
+    "state": "odisha"
   },
   {
     "subject": "0",
@@ -18223,7 +18262,8 @@
     "type": "personal-details",
     "questions": null,
     "examId": 47,
-    "schoolId": "m001"
+    "schoolId": "m001",
+    "state": "mp"
   },
   {
     "subject": "0",
@@ -18285,7 +18325,8 @@
       }
     ],
     "examId": 48,
-    "schoolId": "m001"
+    "schoolId": "m001",
+    "state": "mp"
   },
   {
     "subject": "0",
@@ -18347,7 +18388,8 @@
       }
     ],
     "examId": 49,
-    "schoolId": "m001"
+    "schoolId": "m001",
+    "state": "mp"
   },
   {
     "subject": "0",
@@ -18409,7 +18451,8 @@
       }
     ],
     "examId": 50,
-    "schoolId": "m001"
+    "schoolId": "m001",
+    "state": "mp"
   },
   {
     "subject": "0",
@@ -18471,7 +18514,8 @@
       }
     ],
     "examId": 51,
-    "schoolId": "m001"
+    "schoolId": "m001",
+    "state": "mp"
   },
   {
     "subject": "0",
@@ -18533,7 +18577,8 @@
       }
     ],
     "examId": 52,
-    "schoolId": "m001"
+    "schoolId": "m001",
+    "state": "mp"
   },
   {
     "subject": "0",
@@ -18595,7 +18640,8 @@
       }
     ],
     "examId": 53,
-    "schoolId": "m001"
+    "schoolId": "m001",
+    "state": "mp"
   },
   {
     "subject": "0",
@@ -18657,7 +18703,8 @@
       }
     ],
     "examId": 54,
-    "schoolId": "m001"
+    "schoolId": "m001",
+    "state": "mp"
   },
   {
     "subject": "0",
@@ -18719,7 +18766,8 @@
       }
     ],
     "examId": 55,
-    "schoolId": "m001"
+    "schoolId": "m001",
+    "state": "mp"
   },
   {
     "subject": "0",
@@ -18781,7 +18829,8 @@
       }
     ],
     "examId": 56,
-    "schoolId": "m001"
+    "schoolId": "m001",
+    "state": "mp"
   },
   {
     "subject": "0",
@@ -18792,7 +18841,8 @@
     "type": "beneficiary-details",
     "questions": null,
     "examId": 57,
-    "schoolId": "m001"
+    "schoolId": "m001",
+    "state": "mp"
   },
   {
     "subject": "Hindi",
@@ -18854,7 +18904,8 @@
       }
     ],
     "examId": 58,
-    "schoolId": "jk001"
+    "schoolId": "jk001",
+    "state": "jharakhand"
   },
   {
     "subject": "Hindi",
@@ -20186,7 +20237,8 @@
       }
     ],
     "examId": 59,
-    "schoolId": "u002"
+    "schoolId": "u001",
+    "state": "up"
   },
   {
     "subject": "hindi",
@@ -20738,7 +20790,8 @@
       }
     ],
     "examId": 60,
-    "schoolId": "u002"
+    "schoolId": "u001",
+    "state": "up"
   },
   {
     "subject": "Hindi",
@@ -22070,7 +22123,8 @@
       }
     ],
     "examId": 61,
-    "schoolId": "u002"
+    "schoolId": "u001",
+    "state": "up"
   },
   {
     "subject": "Hindi",
@@ -23402,7 +23456,8 @@
       }
     ],
     "examId": 62,
-    "schoolId": "u002"
+    "schoolId": "u001",
+    "state": "up"
   },
   {
     "subject": "Hindi",
@@ -24734,7 +24789,8 @@
       }
     ],
     "examId": 63,
-    "schoolId": "u002"
+    "schoolId": "u001",
+    "state": "up"
   },
   {
     "subject": "Hindi",
@@ -25890,7 +25946,8 @@
       }
     ],
     "examId": 64,
-    "schoolId": "u002"
+    "schoolId": "u001",
+    "state": "up"
   },
   {
     "subject": "Hindi",
@@ -27222,7 +27279,8 @@
       }
     ],
     "examId": 65,
-    "schoolId": "u002"
+    "schoolId": "u001",
+    "state": "up"
   },
   {
     "subject": "Hindi",
@@ -28378,6 +28436,7 @@
       }
     ],
     "examId": 66,
-    "schoolId": "u002"
+    "schoolId": "u001",
+    "state": "up"
   }
 ]
