@@ -8,7 +8,7 @@ const auth  = async (req, res, next) => {
         const token = req.header('Authorization').replace('Bearer ', '')
         const decoded = jwt.verify(token, process.env.JWT_SECRET)
         const school = await Users.findOne({ userId: decoded.userId })
-        logger.info(`userId: ${school.userId}`);
+    
         if(!school) {
             throw new Error()
         }

@@ -3,8 +3,8 @@ const Classes = require("../models/classes")
 const Users = require("../models/users")
 const Helper = require('../middleware/helper')
 const { stringObject } = require('../utils/commonUtils');
-const {logger} = require('../logging/logger')
-const {getLoginData,setLoginData,getToken,setToken} = require('../logging/logger')
+const logger = require('../logging/logger')
+// const {getLoginData,setLoginData,getToken,setToken} = require('../logging/logger')
 
 exports.loginSchool = async (req, res, next) => {
   
