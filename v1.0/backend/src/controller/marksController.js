@@ -109,6 +109,7 @@ exports.getSaveScan = async (req, res, next) => {
         if (section && section != "0") {
             match.section = section
         }
+       
         if (roiId) {
             match.roiId = roiId
         }
