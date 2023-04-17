@@ -450,21 +450,19 @@ class LoginComponent extends Component {
                     keyboardShouldPersistTaps={'handled'}
                 >
                     {Loading ?
-                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                        <View style={styles.container1}>
                             <Text style={{ fontSize: 12, fontWeight: 'bold',fontFamily : monospace_FF }}>Loading Branding ...</Text>
                         </View> :
 
-                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                         <View style={styles.container1}>
                             <Image style={{ width: 80, height: 80 }} source={Assets.AppLogo} />
                         </View>
 
                     }
-                    <View style={{justifyContent:'center',alignItems:"center",bottom:40}}>
+                    <View style={{justifyContent:'center',alignItems:"center",marginVertical:20}}>
                         <Text style={{fontSize:22,fontWeight:'bold'}}> {Strings.Saral.toUpperCase()}</Text>
-                        <Text style={{color:'gray'}}> {'Assessments-Q1'}</Text>
                     </View>
 
-                    <View style={styles.container2}>
                         <View style={styles.loginContainer}>
                             <Text style={[styles.header1TextStyle, { paddingTop: '5%',fontFamily : monospace_FF }]}>
                                 {Strings.login_text.toUpperCase()}
@@ -532,7 +530,7 @@ class LoginComponent extends Component {
                                             /></View></View>}
                                 </View>
                             </View>
-                        </View>
+                       
                     </View>
                 </ScrollView>
                 {isLoading && <Spinner animating={isLoading} />}
@@ -548,13 +546,14 @@ class LoginComponent extends Component {
                 >
 
                     <View style={styles.container1}>
-                        <Image style={{ width: 80, height: 80,borderRadius:50,border:1 }} source={{ uri: defaultBrandingdata && 'data:image/png;base64,' + this.props.defaultBrandingdata.logoImage }} />
+                        <Image style={{width:80,height:80, borderRadius:50,border:1 }} source={{ uri: defaultBrandingdata && 'data:image/png;base64,' + this.props.defaultBrandingdata.logoImage }} />
                     </View>
-                    <View style={{justifyContent:'center',alignItems:"center",bottom:30}}>
+                    <View style={{justifyContent:'center',alignItems:"center",marginVertical:20}}>
                         <Text style={{fontSize:22,fontWeight:'bold'}}> {Strings.Saral.toUpperCase()}</Text>
-                        <Text style={{color:'gray'}}> {'Assessments-Q1'}</Text>
                     </View>
-                    <View style={styles.container2}>
+
+
+                    
                         <View style={styles.loginContainer}>
                             <Text style={[styles.header1TextStyle, { paddingTop: '5%',fontFamily : monospace_FF }]}>
                                 {Strings.login_text.toUpperCase()}
@@ -616,7 +615,6 @@ class LoginComponent extends Component {
                                 </View>
                             </View>
                         </View>
-                    </View>
                 </ScrollView>
                 {isLoading && <Spinner animating={isLoading} />}
             </View>
@@ -630,7 +628,7 @@ const styles = {
         backgroundColor: AppTheme.GREY_WHITE
     },
     container1: {
-        minHeight: 200,
+        marginTop:80,
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -658,20 +656,16 @@ const styles = {
         color: AppTheme.WHITE_OPACITY,
         letterSpacing: 1,
     },
-    container2: {
-        flex: 1,
-        bottom:10
-    },
     loginContainer: {
         marginHorizontal: '5%',
         backgroundColor: AppTheme.WHITE,
         borderRadius: 8,
         padding: '4%',
         elevation: 2,
-        height:330
+        
     },
     fieldContainerStyle: {
-        paddingVertical: '1%',
+        paddingVertical: '2.5%',
     },
     labelTextStyle: {
         width: '40%',

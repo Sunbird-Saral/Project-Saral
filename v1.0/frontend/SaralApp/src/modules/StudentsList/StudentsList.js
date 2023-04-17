@@ -51,7 +51,6 @@ const StudentsList = ({
     roiData
 }) => {
 
-
     function usePrevious(value) {
         const ref = useRef();
         useEffect(() => {
@@ -287,12 +286,14 @@ useEffect(() => {
 
 
 
-    const renderStudentData = ({ item }) => {
+    const renderStudentData = ({ item,index }) => {
         return (
+            <View style={{backgroundColor:multiBrandingData ? multiBrandingData.themeColor2:AppTheme.WHITE}}>
             <StudentsDataComponent
                 themeColor1={multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}
                 themeColor2={multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE}
                 item={item}
+                index={index}
                 pabsent={item.studentAvailability}
                 scanedData={scanedData}
                 filteredData={filteredData}
@@ -302,12 +303,13 @@ useEffect(() => {
                 dispatch={dispatch}
                 loginData={loginData}
             />
+            </View>
         )
     }
 
     const renderEmptyList = () => {
         return (
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
                 <Text style={{fontFamily : monospace_FF}}>No Students Available</Text>
             </View>
         )
@@ -509,9 +511,8 @@ useEffect(() => {
             payload
         }
     }
-
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor:multiBrandingData.themeColor2 ? multiBrandingData.themeColor2 : 'white' }}>
              <ShareComponent
                  navigation={navigation}
                  />
@@ -520,13 +521,13 @@ useEffect(() => {
                     (BrandLabel) ?
                         <MultibrandLabels
                         Label1={BrandLabel.School}
-                        Label2={BrandLabel.SchoolId}
+                        // Label2={BrandLabel.SchoolId}
                         School ={loginData.data.school.name}
-                        SchoolId={loginData.data.school.schoolId}
+                        // SchoolId={loginData.data.school.schoolId}
                         />
                      :
             (loginData && loginData.data) &&
-                <View style={{width:'60%'}}>
+                <View style={{width:'65%'}}>
                     <Text
                         style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingTop: '4%',fontFamily : monospace_FF }}
                     >
@@ -536,23 +537,42 @@ useEffect(() => {
                         </Text>
                     </Text>
                     <Text
+                        style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingTop: '4%',fontFamily : monospace_FF }}
+                    >
+                        {Strings.class_text + ' : '}
+                        <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
+                            {`${filteredData.className}, ${filteredData.section ? filteredData.section : ''}`}
+                        </Text>
+                    </Text>
+                    <Text
+                        style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingTop: '4%',fontFamily : monospace_FF }}
+                    >
+                        {Strings.subject + ' : '}
+                        <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
+                               {filteredData.subject} {filteredData.set ? `(Set ${filteredData.set})`:''}
+                        </Text>
+                    </Text>
+                    {/* <Text
                         style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '1%',fontFamily : monospace_FF }}
                     >
                         {Strings.schoolId_text + ' : '}
                         <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
                             {loginData.data.school.schoolId}
                         </Text>
-                    </Text>
+                    </Text> */}
                 </View>
 
             }
+            <View style={{justifyContent: 'center',alignItems:'center',marginVertical:10}}>
+            <Text style={{fontSize:18,fontWeight:'bold'}}>{'Mark Attendance'}</Text>
+            </View>
+            
             <FlatList
                 data={allStudentData}
                 renderItem={renderStudentData}
-                background={multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}
                 ListEmptyComponent={renderEmptyList}
                 keyExtractor={(item) => item.studentId.toString()}
-                contentContainerStyle={styles.flatlistCon}
+                contentContainerStyle={{backgroundColor:multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}}
                 showsVerticalScrollIndicator={false}
             />
 
@@ -594,7 +614,8 @@ const mapStateToProps = (state) => {
         absentStudentDataResponse: state.absentStudentDataResponse,
         apiStatus: state.apiStatus,
         multiBrandingData: state.multiBrandingData.response.data,
-        scanedData: state.scanedData.response
+        scanedData: state.scanedData.response,
+        studentsAndExamData: state.studentsAndExamData,
     }
 }
 

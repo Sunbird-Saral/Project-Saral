@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Alert, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, Text, TouchableOpacity, View, Switch } from 'react-native';
 import AppTheme from '../../utils/AppTheme';
 import { checkNetworkConnectivity, dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF } from '../../utils/CommonUtils';
 import { getScannedDataFromLocal, setScannedDataIntoLocal } from '../../utils/StorageUtils';
@@ -16,10 +16,12 @@ const StudentsDataComponent = ({
     setStdArray,
     filteredData,
     dispatch,
-    loginData
+    loginData,
+    index
 }) => {
     const [isPresent, setIsPresent] = useState(pabsent)
-
+    const [isEnabled, setIsEnabled] = useState(false);
+    const toggleSwitch = () => setIsEnabled(previousState => !previousState);
     const checkStdAbsPrst = (data, chkPresent, filteredData, valid) => {
         if (chkPresent) {
             stdArray.forEach(element => {
@@ -108,6 +110,7 @@ const StudentsDataComponent = ({
     }
 
     const onBtnClick = (data) => {
+        console.log('isPresent>>>>>',isPresent);
         let chkPresent = stdArray.some(item => item.studentId == data.studentId)
         setStdMarkAsPrsAbst(data, chkPresent)
     }
@@ -165,9 +168,59 @@ const StudentsDataComponent = ({
     }
 
     return (
-        <View style={[styles.cardCon, { backgroundColor: themeColor1 ? themeColor1 : AppTheme.BLUE }]}>
+        <View style={{flexDirection:'row',margin:5,justifyContent:'center', alignItems:'center'}}>
+             <View style={{width:'15%',height:50,borderWidth:0.5,border:10,justifyContent:'center',alignItems:'center',backgroundColor:AppTheme.WHITE}}>
+            {/* <View style={[styles.cardChildCon, { backgroundColor: "#ffffffED" }]}> */}
+             <Text>{index + 1}</Text>
+             {/* </View> */}
+             </View>
+             <View style={{width:'60%',backgroundColor:AppTheme.WHITE}}>
+             <View style={{height:25,borderWidth:0.5,border:10,justifyContent:'center'}}>
+             <Text style={{marginLeft:10}}>{item.studentId}</Text>
+             </View>
+             <View style={{height:25,borderWidth:0.5,border:10,justifyContent:'center'}}>
+             <Text style={{marginLeft:10}}>{item.name}</Text>
+             </View>
+             </View>
+             <View style={{}}>
+             <Switch
+                                        trackColor={{ true: 'green', false: 'red' }}
+                                        // thumbColor={isPresent ? AppTheme.GREEN : 'red'}
+                                        // style={{ transform:[{ scaleX: .7 }, { scaleY: .7 }] }}
+                                        value={isPresent}
+                                        onValueChange={(value) => onBtnClick(item)}/>
+                                        {
+                        !isPresent
+                            ?
+                            <Text style={{color:AppTheme.BLACK,fontWeight:'bold',marginLeft:5}}>{'Absent'}</Text>
+                            :
+                            <Text style={{color:AppTheme.BLACK,fontWeight:'bold',marginLeft:5}}>{'Present'}</Text>
+                    }
+                    </View>
+                                       
+             {/* <TouchableOpacity
+                    activeOpacity={0.7}
+                    onPress={() => onBtnClick(item)}
+                    style={{width:'20%'}}
+                >
+                    {
+                        isPresent
+                            ?
+                            <Text style={[ { backgroundColor: themeColor1 ? themeColor1 : AppTheme.LIGHT_BLUE,fontFamily : monospace_FF }]}>{Strings.Mark_Absent}</Text>
+                            :
+                            <Text style={[ { backgroundColor: themeColor2 ? themeColor2 : AppTheme.LIGHT_BLUE,fontFamily : monospace_FF }]}>{Strings.Mark_Present}</Text>
+                    }
+                </TouchableOpacity> */}
+           
+           
+           {/* <View style={{width:'80%'}}>
             <View style={[styles.cardChildCon, { backgroundColor: "#ffffffED" }]}>
-
+             <Text style={styles.aadhar}>{item.studentId}</Text>
+             <View style={styles.line} />
+             </View>
+             </View> */}
+        
+            {/* <View style={[styles.cardChildCon, { backgroundColor: "#ffffffED" }]}>
                 <Text style={styles.aadhar}>{item.studentId}</Text>
                 <View style={styles.line} />
                 <Text style={styles.aadhar}>{item.name}</Text>
@@ -186,7 +239,7 @@ const StudentsDataComponent = ({
                     }
                 </TouchableOpacity>
 
-            </View>
+            </View> */}
         </View>
     );
 }

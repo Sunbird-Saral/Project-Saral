@@ -233,7 +233,7 @@
       }
     ],
     "classId": "1",
-    "className": "Class-1",
+    "className": "1",
     "schoolId": "u002"
   },
   {
@@ -249,7 +249,7 @@
       }
     ],
     "classId": "2",
-    "className": "Class-2",
+    "className": "2",
     "schoolId": "u002"
   },
   {
@@ -259,7 +259,7 @@
       }
     ],
     "classId": "3",
-    "className": "Class-3",
+    "className": "3",
     "schoolId": "u002"
   },
   {
@@ -269,7 +269,7 @@
       }
     ],
     "classId": "4",
-    "className": "Class-4",
+    "className": "4",
     "schoolId": "u002"
   },
   {
@@ -279,7 +279,7 @@
       }
     ],
     "classId": "5",
-    "className": "Class-5",
+    "className": "5",
     "schoolId": "u002"
   },
   {
@@ -460,7 +460,7 @@
       }
     ],
     "classId": "6",
-    "className": "Class-6",
+    "className": "6",
     "schoolId": "u002"
   },
   {
@@ -470,7 +470,7 @@
       }
     ],
     "classId": "7",
-    "className": "Class-7",
+    "className": "7",
     "schoolId": "u002"
   },
   {
@@ -480,7 +480,7 @@
       }
     ],
     "classId": "8",
-    "className": "Class-8",
+    "className": "8",
     "schoolId": "u002"
   },
   {
@@ -490,7 +490,7 @@
       }
     ],
     "classId": "9",
-    "className": "Class-9",
+    "className": "9",
     "schoolId": "u002"
   }
 ]
