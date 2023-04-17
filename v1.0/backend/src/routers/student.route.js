@@ -6,7 +6,7 @@ const Marks = require("../models/marks")
 
 const studentController = require('../controller/studentController')
 
-router.post('/fetchStudentsandExamsByQuery', auth, studentController.fetchStudentsandExams)
+router.get('/fetchStudentsandExamsByQuery',auth,studentController.fetchStudentsandExams)
 
 router.post('/student', auth, async (req, res) => {
     try {

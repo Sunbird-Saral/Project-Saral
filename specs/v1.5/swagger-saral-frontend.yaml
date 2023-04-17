@@ -49,29 +49,30 @@ paths:
           description: "Server error or State/District/School is locked for scanning"
           
   /fetchStudentsandExamsByQuery:
-    post:
+    get:
       security:
         - Bearer: []
       tags:
       - Student
       summary: "Get Exam Details by class Id"
       parameters:
-       - in: body
-         name: body
-         schema:
-            type: object
-            required:
-              - classId
-            properties:
-              classId:
-                type: string
-                example: "2"
-              section:
-                type: string
-                example: "D"
-              subject:
-                type: string
-                example: "Hindi 11/02/2021"
+      - in: query
+        name: classId
+        type: string
+        required: true
+      - in: query
+        name: section
+        type: string
+        required: true
+      - in: query
+        name: subject
+        type: string
+        required: true
+      - in: query
+        name: set
+        type: string
+        required: false
+
       responses:
         "200":
           description: "successful operation"
