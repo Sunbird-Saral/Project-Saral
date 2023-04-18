@@ -1,0 +1,37 @@
+prometheus & Grafana installation using Helm on minikube
+
+1\. Make sure helm is installed on your system(Ubuntu), if not follow
+the steps below.
+
+curl https://baltocdn.com/helm/signing.asc \| gpg \--dearmor \| sudo tee
+/usr/share/keyrings/helm.gpg \> /dev/null sudo apt-get install
+apt-transport-https \--yes echo \"deb \[arch=\$(dpkg
+\--print-architecture) signed-by=/usr/share/keyrings/helm.gpg\]
+https://baltocdn.com/helm/stable/debian/ all main\" \| sudo tee
+/etc/apt/sources.list.d/helm-stable-debian.list sudo apt-get update sudo
+apt-get install helm
+
+2\. create a namespace called \"monitoring\" inside the K8\'s cluster
+kubectl create namespace monitoring
+
+3\. Installing kube-prometheus-stack with Helm helm repo add
+prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+
+4\. Deploy the kube-stack-prometheus chart in the namespace monitoring
+with Helm helm upgrade \--namespace monitoring \--install
+kube-stack-prometheus prometheus-community/kube-prometheus-stack \--set
+prometheus-node-exporter.hostRootFsMount.enabled=false
+
+5\. The Prometheus web UI is accessible through port-forward with this
+command: kubectl port-forward \--namespace monitoring
+svc/kube-stack-prometheus-kube-prometheus 9090:9090
+
+6\. Installing Grafana with Helm helm repo add grafana
+https://grafana.github.io/helm-charts helm repo update helm install
+grafana stable/grafana kubectl expose service grafana \--type=NodePort
+\--target-port=3000 \--name=grafana-ext
+
+7\. To get default password of grafana use below command kubectl get
+secret \--namespace default grafana -o
+jsonpath=\"{.data.admin-password}\" \| base64 \--decode ; echo
