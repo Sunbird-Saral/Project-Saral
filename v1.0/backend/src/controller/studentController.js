@@ -12,8 +12,8 @@ exports.fetchStudentsandExams = async (req, res, next) => {
 
     match.schoolId = req.school.schoolId
     if (req.query.classId) {
-        match.classId = req.body.classId,
-        examMatch.classId = req.body.classId
+        match.classId = req.query.classId,
+        examMatch.classId = req.query.classId
     } else {
         return res.status(404).json({ message: 'Please send classId' })
     }
@@ -22,7 +22,7 @@ exports.fetchStudentsandExams = async (req, res, next) => {
     examMatch.state = school.state
 
     if (req.query.section && req.query.section != "0") {
-        match.section = req.body.section
+        match.section = req.query.section
     }
 
     if (req.query.hasOwnProperty('subject')) {
