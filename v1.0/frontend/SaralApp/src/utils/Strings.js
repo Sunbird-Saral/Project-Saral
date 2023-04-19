@@ -137,6 +137,7 @@ export default strings = new LocalizedStrings({
         Mark_Absent:"Mark as Absent",
         Mark_Present:"Mark as Present",
         Saral:"Saral",
-        Registred_Mob_No:'Registered Mobile Number'
+        Registred_Mob_No:'Registered Mobile Number',
+        Summary_page : 'Summary Page'
     }
 })

@@ -178,10 +178,10 @@ const ShareComponent = ({
     <View>
 
       <View style={styles.imageViewContainer}>
-        <TouchableOpacity onPress={() => showModal()} style={[styles.imageContainerStyle, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE }]}>
+        <TouchableOpacity onPress={() => showModal()} style={[styles.imageContainerStyle, { backgroundColor: multiBrandingData.themeColor1 ? multiBrandingData.themeColor1 : AppTheme.LIGHT_BLUE }]}>
             <Text style={{  fontSize: AppTheme.HEADER_FONT_SIZE_LARGE, fontFamily: monospace_FF }}>{loginData.data.school.name.charAt(0)}</Text>
         </TouchableOpacity>
-      </View>
+      
 
 
       <Modal
@@ -210,6 +210,7 @@ const ShareComponent = ({
 
         </TouchableOpacity>
       </Modal>
+    </View>
     </View>
   )
 }
@@ -242,7 +243,6 @@ const styles = {
   imageViewContainer: {
 
     alignItems: 'flex-end',
-    backgroundColor: '#fff'
   },
   imageContainerStyle: {
      marginRight: 10,

@@ -44,6 +44,7 @@ const ScanStatus = ({
             <ScanStatusList
                 themeColor1={multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}
                 scanitemdata={item} 
+                index ={index}
                 id={item.studentId}
                 subject={item.subject}
                 studentList={studentList}
@@ -61,7 +62,7 @@ const ScanStatus = ({
     }
 
     const onBackPress = () => {
-        navigation.push('ScanHistory');
+        navigation.push('myScan');
     };
 
         useEffect(() => {
@@ -108,38 +109,9 @@ const ScanStatus = ({
     }
 
     return (
-        <View style={styles.container}>
-              <ShareComponent
-                 navigation={navigation}
-                 />
-                 <View>
-                 {(multiBrandingData && BrandLabel) ?
-                <MultibrandLabels
-                Label1={BrandLabel.School}
-                Label2={BrandLabel.SchoolId}
-                School ={loginData.data.school.name}
-                SchoolId={loginData.data.school.schoolId}
-                />
-                     :
-                (loginData && loginData.data)
-                &&
-                <View style={{width:'60%'}}>
-                    <Text
-                        style={styles.schoolName}
-                    >
-                        {Strings.school_name + '  : '}
-                        <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>{loginData.data.school.name}</Text>
-                    </Text>
-                    <Text style={styles.schoolId}>
-                        {Strings.schoolId_text + ' : '}
-                        <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
-                            {loginData.data.school.schoolId}
-                        </Text>
-                    </Text>
-                </View>
-            }
-            </View>
+        <View style={[styles.container,{ flex: 1, backgroundColor:multiBrandingData.themeColor2 ? multiBrandingData.themeColor2 : 'white' }]}>
 
+           <View style={{marginTop:30}}>
             <Text style={styles.scanStatus}>{Strings.save_status}</Text>
 
             <FlatList
@@ -152,13 +124,13 @@ const ScanStatus = ({
 
            <View style={{alignItems:'center'}}>
             <ButtonComponent
-               customBtnStyle={[styles.nxtBtnStyle1, {flex:0, width: '90%', backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+               customBtnStyle={[styles.nxtBtnStyle1, {flex:0, width: '90%', backgroundColor: multiBrandingData.themeColor1 ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
                 btnText={Strings.close.toUpperCase()}
                 activeOpacity={0.8}
                 onPress={()=> onBackPress()}
                 />
                 </View>
-
+                </View>
         </View>
     );
 }

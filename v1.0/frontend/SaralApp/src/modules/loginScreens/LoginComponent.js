@@ -601,7 +601,7 @@ class LoginComponent extends Component {
                                 <View style={{ flexDirection: 'row', paddingTop: 10 }}>
                                     <Switch
                                         trackColor={{ true: '#111', false: '#111' }}
-                                        thumbColor={defaultBrandingdata && defaultBrandingdata.themeColor1}
+                                        thumbColor={defaultBrandingdata && defaultBrandingdata.themeColor1 ? defaultBrandingdata.themeColor1:AppTheme.BLUE}
                                         value={this.state.rememberMe}
                                         onValueChange={(value) => this.toggleRememberMe(value)} />
                                     <Text>Remember Me</Text>
@@ -610,7 +610,7 @@ class LoginComponent extends Component {
                                     <ButtonComponent
                                         btnText={Strings.login_text.toUpperCase()}
                                         onPress={this.onSubmit}
-                                        themeColor1={{ backgroundColor: defaultBrandingdata && defaultBrandingdata.themeColor1 }}
+                                        themeColor1={{ backgroundColor: defaultBrandingdata && defaultBrandingdata.themeColor1 ? defaultBrandingdata.themeColor1:AppTheme.BLUE}}
                                     />
                                 </View>
                             </View>

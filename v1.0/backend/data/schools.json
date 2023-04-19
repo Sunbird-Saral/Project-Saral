@@ -51,7 +51,8 @@
     "isFBAnalyticsEnabled": true,
     "district": "district1",
     "scanTimeoutMs": 60000,
-    "isManualEditEnabled": true
+    "isManualEditEnabled": true,
+    "block":"block"
   },
   {
     "name": "Dummy Skill School",

@@ -789,12 +789,13 @@ class MyScanComponent extends Component {
 
     render() {
         const { isLoading, saveStatusData, scanStatusData, scanModalDataVisible, passDataToModal, savingStatus } = this.state;
-        const { loginData, multiBrandingData, modalMessage, modalStatus } = this.props
+        const { loginData, multiBrandingData, modalMessage, modalStatus,filteredData } = this.props
         const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.myScan[0]
         
         return (
 
-            <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
+            <View style={{ flex: 1, backgroundColor: multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.WHITE_OPACITY }}>
+                 <View style={{flexDirection:'row-reverse',justifyContent:'space-between'}}>
                 <ShareComponent
                     navigation={this.props.navigation}
                 />
@@ -802,44 +803,50 @@ class MyScanComponent extends Component {
                     {(BrandLabel) ?
                         <MultibrandLabels
                             Label1={BrandLabel.School}
-                            Label2={BrandLabel.SchoolId}
-                            School={loginData.data.school.name}
-                            SchoolId={loginData.data.school.schoolId}
+                            School=  {`${loginData.data.school.name},${loginData.data.school.block ? loginData.data.school.block : ''},${loginData.data.school.district ? loginData.data.school.district : ''}`}
                             minimalFlag={this.props.minimalFlag}
                         /> :
                         (loginData && loginData.data)
                         &&
-                        <View style={{ width: '60%' }}>
+                        <View style={{ width: '80%' }}>
                             <Text
                                 style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%', fontFamily: monospace_FF }}
                             >
                                 {Strings.school_name + ' : '}
                                 <Text style={{ fontWeight: 'normal', fontFamily: monospace_FF }}>
-                                    {loginData.data.school.name}
+                                {`${loginData.data.school.name},${loginData.data.school.block ? loginData.data.school.block : ''},${loginData.data.school.district ? loginData.data.school.district : ''}`}
                                 </Text>
                             </Text>
                             <Text
-                                style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%', fontFamily: monospace_FF }}
-                            >
-                                {Strings.schoolId_text + ' : '}
-                                <Text style={{ fontWeight: 'normal', fontFamily: monospace_FF }}>
-                                    {loginData.data.school.schoolId}
-                                </Text>
-                            </Text>
+                        style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingTop: '4%',fontFamily : monospace_FF }}
+                    >
+                        {Strings.class_text + ' : '}
+                        <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
+                            {`${filteredData.className}, ${filteredData.section ? filteredData.section : ''}`}
+                        </Text>
+                    </Text>
+
+                    <Text
+                        style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingTop: '4%',fontFamily : monospace_FF }}
+                    >
+                        {Strings.subject + ' : '}
+                        <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
+                               {filteredData.subject} {filteredData.set ? `(Set ${filteredData.set})`:''}
+                        </Text>
+                    </Text>
                         </View>
                     }
 
+                </View>
                 </View>
 
                 {
                      !this.props.minimalFlag
                         ?
                         <ScrollView scrollEnabled>
-                            <View style={styles.container1}>
-                                <Text style={[styles.header1TextStyle, { borderColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE, backgroundColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE, fontFamily: monospace_FF }]}>
-                                    {Strings.ongoing_scan}
-                                </Text>
-                            </View>
+                            <View style={{justifyContent:'center',alignItems:'center',marginTop:15}}>
+                           <Text style={{fontWeight:'bold',fontSize:18}}>{Strings.Summary_page}</Text>
+                           </View>
                             <ScanHistoryCard
                                 scanstatusbutton={true}
                                 themeColor1={this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE}
@@ -851,21 +858,15 @@ class MyScanComponent extends Component {
                                 setIsLoading={()=>this.setState({isLoading:false})}
                             />
 
-                            <View style={styles.viewnxtBtnStyle1}>
-                                <ButtonComponent
-                                    customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
-                                    btnText={Strings.backToDashboard.toUpperCase()}
-                                    activeOpacity={0.8}
-                                    onPress={() => this.props.navigation.navigate('selectDetails')}
-                                />
+                          
 
                                 <ButtonComponent
-                                    customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+                                    customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData.themeColor1 ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
                                     btnText={Strings.Back.toUpperCase()}
                                     activeOpacity={0.8}
-                                    onPress={() => this.props.navigation.push('ScanHistory')}
+                                    onPress={() => this.props.navigation.push('StudentsList')}
                                 />
-                            </View>
+                           
                         </ScrollView>
                         :
 
@@ -933,30 +934,23 @@ class MyScanComponent extends Component {
                     </View>
                 }
 
-                <View style={styles.bottomTabStyle}>
-                    <View style={[{ elevation: 10, backgroundColor: 'transparent', justifyContent: 'center', alignItems: 'center' }]}>
+                <View>
+
+                </View>
+                
+                {/* <View style={[{ elevation: 10, backgroundColor: 'transparent', justifyContent: 'center', alignItems: 'center',bottom:50}]}> */}
                         <TouchableOpacity style={[styles.subTabContainerStyle]}
                             onPress={this.onScanClick}
                         >
-                            <TouchableOpacity
-                                style={[styles.scanTabContainerStyle,]}
-                            >
-                                <TouchableOpacity
-                                    style={[styles.scanSubTabContainerStyle, { backgroundColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE }]}
-                                >
-                                    <Image
-                                        source={Assets.ScanButton}
+                            <Image
+                                        source={Assets.scan}
                                         style={styles.tabIconStyle}
                                         resizeMode={'contain'}
                                     />
-                                </TouchableOpacity>
-                            </TouchableOpacity>
-                            <Text style={styles.tabLabelStyle}>
-                                {Strings.scan_text}
-                            </Text>
-
-                        </TouchableOpacity>
-                    </View>
+                                        </TouchableOpacity>
+                    {/* </View> */}
+                <View style={styles.bottomTabStyle}>
+                    
                 </View>
                 {
                     isLoading
@@ -1010,9 +1004,8 @@ const styles = {
         letterSpacing: 1
     },
     bottomTabStyle: {
-        position: 'absolute',
         flexDirection: 'row',
-        bottom: 0,
+        
         height: 35,
         left: 0,
         right: 0,
@@ -1025,10 +1018,14 @@ const styles = {
     subTabContainerStyle: {
         justifyContent: 'center',
         alignItems: 'center',
+        bottom:30
+        
     },
+    
     tabIconStyle: {
-        width: 40,
-        height: 40
+        width: 100,
+        height: 100,
+      
     },
     Backbutton: {
         width: 200,
@@ -1053,7 +1050,6 @@ const styles = {
     scanTabContainerStyle: {
         width: 80,
         height: 80,
-        position: 'absolute',
         borderRadius: 40,
         justifyContent: 'center',
         alignItems: 'center'
@@ -1071,11 +1067,12 @@ const styles = {
 
     nxtBtnStyle1: {
         marginTop: 15,
-        width: '40%',
+        width: '90%',
         height: 52,
-        marginHorizontal: 5,
-        bottom: 10,
-        borderRadius: 10
+        marginHorizontal: 20,
+        bottom: 0,
+        borderRadius: 10,
+        
     },
     viewnxtBtnStyle1: {
         flexDirection: 'row',

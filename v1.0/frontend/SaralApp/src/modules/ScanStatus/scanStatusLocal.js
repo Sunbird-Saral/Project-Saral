@@ -107,6 +107,7 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
     const renderItem = ({ item, index }) => {
         return <ScanStatusLocalList
             scanitemdata={item} 
+            index={index}
             id={item.studentId}
             loacalstutlist={unsavedstudentList}
             themeColor1={multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}
@@ -343,46 +344,10 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
         }
 
     return (
-        <View style={styles.container}>
-             <ShareComponent
-                 navigation={navigation}
-                 />
-            <View style={{ flexDirection:'row',justifyContent: 'space-between' }}>
-            {(multiBrandingData && BrandLabel) ?
-                <MultibrandLabels
-                Label1={BrandLabel.School}
-                Label2={BrandLabel.SchoolId}
-                School ={loginData.data.school.name}
-                SchoolId={loginData.data.school.schoolId}
-                />
-                     :
-                (loginData && loginData.data)
-                &&
-                <View>
-                    <Text
-                        style={styles.schoolName}
-                    >
-                        {Strings.school_name + ' Name : '}
-                        <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>{loginData.data.school.name}</Text>
-                    </Text>
-                    <Text style={[styles.schoolId, { marginLeft: 5 }]}>
-                        {Strings.schoolId_text + ' : '}
-                        <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
-                            {loginData.data.school.schoolId}
-                        </Text>
-                    </Text>
-                </View>
-            }
+        <View style={[styles.container,{ flex: 1, backgroundColor:multiBrandingData.themeColor2 ? multiBrandingData.themeColor2 : 'white' }]}>
 
-            {presentStudentList.length > 0 &&
-            <TouchableOpacity  onPress={()=>onShare()} style={{width:40,height:40,marginRight:20,marginTop:10}}>
-                    <Image style={{ height: 25, width: 25, marginHorizontal: 15, marginVertical: 20 }} source={Assets.Share} />
-            </TouchableOpacity> 
-            }
-            
-            </View>
-
-            <Text style={styles.scanStatus}>{Strings.scan_status}</Text>
+            <View style={{marginTop:40}}>
+            <Text style={styles.scanStatus}>{'Review Scans'}</Text>
         
             <FlatList
                 data={ presentStudentList}
@@ -394,15 +359,15 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
 
           <View style={{justifyContent:'space-between',flexDirection:'row'}}>
           <ButtonComponent
-                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData.themeColor1 ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
                 btnText={Strings.close}
                 activeOpacity={0.8}
                 onPress={()=> onBackPress()}
                 />
 
             <ButtonComponent
-                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
-                btnText={Strings.save_scan}
+                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData.themeColor1 ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+                btnText={'Save All Scans'}
                 activeOpacity={0.8}
                 onPress={()=> onPressSaveInDB()}
                 />
@@ -417,6 +382,7 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
                     />
                 }
 
+        </View>
         </View>
     );
 }

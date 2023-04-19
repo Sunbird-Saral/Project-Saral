@@ -1307,7 +1307,7 @@ const ScannedDetailsComponent = ({
    }
 
     return (
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, backgroundColor:multiBrandingData.themeColor2 ? multiBrandingData.themeColor2 : 'white' }}>
 
             <View style={{ flex: 1 }}>
                 <ScrollView
@@ -1510,12 +1510,12 @@ const ScannedDetailsComponent = ({
 
                                             <View style={[styles.viewnxtBtnStyle1, { paddingTop: '7%' }]}>
                                                 <ButtonComponent
-                                                    customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE, marginTop: '5%' }]}
+                                                    customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData.themeColor1 ? multiBrandingData.themeColor1 : AppTheme.BLUE, marginTop: '5%' }]}
                                                     btnText={btnName.toUpperCase()}
                                                     onPress={() => isMultipleStudent ? goBackFrame() : multiPage > 0 ? goBackPage() : onBackButtonClick()}
                                                 />
                                                 <ButtonComponent
-                                                    customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE, marginTop: '5%' }]}
+                                                    customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData.themeColor1 ? multiBrandingData.themeColor1 : AppTheme.BLUE, marginTop: '5%' }]}
                                                     btnText={nextBtn.toUpperCase()}
                                                     onPress={() => isMultipleStudent ? goNextFrame() : multiPage > 0 ? goNextPage() : onSubmitClick()}
                                                 />

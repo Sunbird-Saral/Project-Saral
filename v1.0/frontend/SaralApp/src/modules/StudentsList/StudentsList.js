@@ -368,7 +368,7 @@ useEffect(() => {
 
         if (absentPresentStatus.studentsMarkInfo.length == 0) {
             setPresentAbsentStudent(allStudentData)
-            navigation.push('ScanHistory');
+            navigation.push('myScan');
         }else if (absentPresentStatus.studentsMarkInfo.length > 0) {
             await setDataIntoRegularStudentExamApi()
         }
@@ -393,7 +393,7 @@ useEffect(() => {
     }
         await setRegularStudentExamApi(getStudentExamCache);
         await setPresentAbsentStudent(allStudentData)
-        navigation.push('ScanHistory');
+        navigation.push('myScan');
     }
 
     const saveStudentData = (api) => {
@@ -409,7 +409,7 @@ useEffect(() => {
                 .then(function (res) {
                     setIsLoading(false)
                     setPresentAbsentStudent(allStudentData)
-                    navigation.push('ScanHistory');
+                    navigation.push('myScan');
                     setDataIntoRegularStudentExamApi()
                     apiResponse = res
                     clearTimeout(id)
@@ -513,6 +513,7 @@ useEffect(() => {
     }
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor:multiBrandingData.themeColor2 ? multiBrandingData.themeColor2 : 'white' }}>
+           <View style={{flexDirection:'row-reverse',justifyContent:'space-between'}}>
              <ShareComponent
                  navigation={navigation}
                  />
@@ -521,19 +522,18 @@ useEffect(() => {
                     (BrandLabel) ?
                         <MultibrandLabels
                         Label1={BrandLabel.School}
-                        // Label2={BrandLabel.SchoolId}
-                        School ={loginData.data.school.name}
-                        // SchoolId={loginData.data.school.schoolId}
+                        School =   {`${loginData.data.school.name},${loginData.data.school.block ? loginData.data.school.block : ''},${loginData.data.school.district ? loginData.data.school.district : ''}`}
+
                         />
                      :
             (loginData && loginData.data) &&
-                <View style={{width:'65%'}}>
+                <View style={{width:'80%'}}>
                     <Text
                         style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingTop: '4%',fontFamily : monospace_FF }}
                     >
                         {Strings.school_name + ' : '}
                         <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
-                            {loginData.data.school.name}
+                        {`${loginData.data.school.name},${loginData.data.school.block ? loginData.data.school.block : ''},${loginData.data.school.district ? loginData.data.school.district : ''}`}
                         </Text>
                     </Text>
                     <Text
@@ -552,17 +552,11 @@ useEffect(() => {
                                {filteredData.subject} {filteredData.set ? `(Set ${filteredData.set})`:''}
                         </Text>
                     </Text>
-                    {/* <Text
-                        style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '1%',fontFamily : monospace_FF }}
-                    >
-                        {Strings.schoolId_text + ' : '}
-                        <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
-                            {loginData.data.school.schoolId}
-                        </Text>
-                    </Text> */}
+                    
                 </View>
 
             }
+            </View>
             <View style={{justifyContent: 'center',alignItems:'center',marginVertical:10}}>
             <Text style={{fontSize:18,fontWeight:'bold'}}>{'Mark Attendance'}</Text>
             </View>
@@ -579,14 +573,14 @@ useEffect(() => {
 
             <View style={styles.viewnxtBtnStyle1}>
                 <ButtonComponent
-                    customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+                    customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData.themeColor1 ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
                     btnText={Strings.Back.toUpperCase()}
                     activeOpacity={0.8}
                     onPress={navigateToBack}
                 />
 
                 <ButtonComponent
-                    customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+                    customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData.themeColor1 ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
                     btnText={Strings.next_text.toUpperCase()}
                     activeOpacity={0.8}
                     onPress={navigateToNext}

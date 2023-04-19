@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View,Text, BackHandler } from 'react-native';
+import { View,Text, BackHandler,TouchableOpacity,Image } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash'
@@ -272,13 +272,18 @@ dispatchBrandingDataApi(payload) {
 
         }
         return (
-            <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
-                            <Brands
-                                Image={this.props.multiBrandingData && 'data:image/png;base64,' + this.props.multiBrandingData.logoImage}
-                                appName={this.props.multiBrandingData && this.props.multiBrandingData.appName}
-                                themeColor={this.props.multiBrandingData && this.props.multiBrandingData.themeColor1}
-                                onPress={() => this.props.minimalFlag ? this.props.navigation.navigate("myScan") : this.props.navigation.navigate('selectDetails')}
-                            /> 
+            <View style={{ flex: 1, backgroundColor:this.props.multiBrandingData.themeColor2 ? this.props.multiBrandingData.themeColor2:AppTheme.WHITE,justifyContent:'center',alignItems:'center' }}>
+            <View>
+             <TouchableOpacity  onPress={() => this.props.minimalFlag ? this.props.navigation.navigate("myScan") : this.props.navigation.navigate('selectDetails')}
+              style={{backgroundColor:this.props.multiBrandingData&&this.props.multiBrandingData.themeColor1 ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE,height:120,width:120,borderRadius:15,justifyContent:'center',alignItems:'center'}}
+              >
+             <Image style={{ height: 100, width: 80,resizeMode:"stretch" }} source={Assets.assessments}/>
+             </TouchableOpacity>
+             <Text style={{textAlign:'center',fontSize:18,fontWeight:'bold'}}>Assessments</Text>
+             <View style={{backgroundColor:this.props.multiBrandingData&&this.props.multiBrandingData.themeColor1?this.props.multiBrandingData.themeColor1 : AppTheme.BLUE,height:120,width:120,borderRadius:15,top:50}}>
+             </View>
+             </View>
+                           
                             {
                     isLoading
                     &&
