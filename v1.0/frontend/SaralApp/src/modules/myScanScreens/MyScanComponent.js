@@ -803,7 +803,7 @@ class MyScanComponent extends Component {
                     {(BrandLabel) ?
                         <MultibrandLabels
                             Label1={BrandLabel.School}
-                            School=  {`${loginData.data.school.name},${loginData.data.school.block ? loginData.data.school.block : ''},${loginData.data.school.district ? loginData.data.school.district : ''}`}
+                            School=  {`${loginData.data.school.name}${loginData.data.school.block ? ','+loginData.data.school.block : ''}${loginData.data.school.district ? ','+loginData.data.school.district : ''}`}
                             minimalFlag={this.props.minimalFlag}
                         /> :
                         (loginData && loginData.data)
@@ -814,7 +814,7 @@ class MyScanComponent extends Component {
                             >
                                 {Strings.school_name + ' : '}
                                 <Text style={{ fontWeight: 'normal', fontFamily: monospace_FF }}>
-                                {`${loginData.data.school.name},${loginData.data.school.block ? loginData.data.school.block : ''},${loginData.data.school.district ? loginData.data.school.district : ''}`}
+                                {`${loginData.data.school.name}${loginData.data.school.block ? ','+loginData.data.school.block : ''}${loginData.data.school.district ? ','+ loginData.data.school.district : ''}`}
                                 </Text>
                             </Text>
                             <Text
@@ -885,7 +885,10 @@ class MyScanComponent extends Component {
                 {
                      this.props.minimalFlag
                     &&
-                    <View style={{ backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE, marginHorizontal: 20, padding: 6, borderRadius: 10, paddingBottom: 16, paddingTop: 14 }}>
+                    <View style={{ backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE,
+                         marginHorizontal: 20, padding: 6, borderRadius: 10, paddingBottom: 16, paddingTop: 14 , width: '90%',
+                    justifyContent:'center',
+                    alignSelf:"center"}}>
                         <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle, { padding: "3.4%" }]}>
                                 <Text style={{ fontFamily: monospace_FF }}>{BrandLabel && BrandLabel.ScanCount ? BrandLabel.ScanCount : Strings.scan_count}</Text>

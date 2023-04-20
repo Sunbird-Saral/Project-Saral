@@ -15,11 +15,15 @@ const ScanStatusLocalList = ({
     scanitemdata,
     status = "Saved",
     Review = "Review",
+    Reviewd = "Reviewd",
     minimalFlag = false,
     BrandLabel,
-    index
+    themeColor2,
+    index,
+    
 }) => {
     const [modalVisible, setModalVisible] = useState(false)
+    const [reviewed, setReviewd] = useState(true)
     let studentName = loacalstutlist.filter((e) => {
         if (id == e.studentId) {
             return true
@@ -29,6 +33,12 @@ const ScanStatusLocalList = ({
     const renderSRNo = (m, i) => {
         return `${i + 1}`
     }
+
+    const closeModelfun = () =>{
+        setModalVisible(!modalVisible)
+        setReviewd(false)
+    }
+
   
     return (
         <View style={{flexDirection:'row',margin:5,justifyContent:'center', alignItems:'center'}}>
@@ -49,9 +59,9 @@ const ScanStatusLocalList = ({
              </View>
              <View style={{width:'35%' }}>
                     <ButtonComponent
-                        customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: themeColor1 ? themeColor1 : AppTheme.BLUE }]}
-                        customBtnTextStyle={styles.buttonText}
-                        btnText={Review.toUpperCase()}
+                        customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: !reviewed ? themeColor2 ? '#AED3D3' : AppTheme.BLUE :  themeColor1 ? themeColor1 : AppTheme.BLUE}]}
+                        customBtnTextStyle={[styles.buttonText,{color:!reviewed ? 'black' : 'white'}]}
+                        btnText={!reviewed ? Reviewd.toUpperCase() :Review.toUpperCase()}
                         activeOpacity={0.8}
                         onPress={() => setModalVisible(true)}
                     />
@@ -60,7 +70,7 @@ const ScanStatusLocalList = ({
             <ModalPopup
                 visible={modalVisible}
                 onRequestClose={() => setModalVisible(!modalVisible)}
-                onPress={() => setModalVisible(!modalVisible)}
+                onPress={closeModelfun}
                 btnText={Strings.close.toUpperCase()}
                 themeColor1={themeColor1}
                 borderCutomStyle={[styles.borderStyle, { borderColor: themeColor1 ? themeColor1 : AppTheme.GREEN }]}

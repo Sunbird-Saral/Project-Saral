@@ -954,7 +954,7 @@ dispatchStudentExamData(payload){
                     <MultibrandLabels
                         Label1={BrandLabel.School}
                         // Label2={BrandLabel.SchoolId}
-                        School=  {`${loginData.data.school.name},${loginData.data.school.block ? loginData.data.school.block : ''},${loginData.data.school.district ? loginData.data.school.district : ''}`}
+                        School=  {`${loginData.data.school.name}${loginData.data.school.block ? ','+loginData.data.school.block : ''}${loginData.data.school.district ? ','+loginData.data.school.district : ''}`}
                         // SchoolId={loginData.data.school.schoolId}
                     />
 
@@ -967,7 +967,7 @@ dispatchStudentExamData(payload){
                         >
                             {`${Strings.school_name} : `}
                             <Text style={{ fontWeight: 'normal', fontFamily: monospace_FF }}>
-                            {`${loginData.data.school.name},${loginData.data.school.block ? loginData.data.school.block : ''},${loginData.data.school.district ? loginData.data.school.district : ''}`}
+                            {`${loginData.data.school.name}${loginData.data.school.block ?','+ loginData.data.school.block : ''}${loginData.data.school.district ? ','+loginData.data.school.district : ''}`}
                             </Text>
                         </Text>
                        

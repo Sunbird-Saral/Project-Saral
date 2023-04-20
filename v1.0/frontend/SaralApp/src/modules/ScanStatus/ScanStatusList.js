@@ -9,14 +9,18 @@ import Strings from '../../utils/Strings';
 const{width,height} = Dimensions.get('window');
 const ScanStatusList = ({
     themeColor1,
+    themeColor2,
     id,
     studentList,
     scanitemdata,
     BrandLabel,
     Review = "Review",
+    Reviewd = "Reviewd",
     index
 }) => {
     const [modalVisible, setModalVisible] = useState(false)
+    const [reviewed, setReviewd] = useState(true)
+    console.log('reviewed',reviewed);
 
     let studentName = studentList.filter((e) => {
         if (id == e.studentId) {
@@ -27,6 +31,13 @@ const ScanStatusList = ({
     const renderSRNo = (m, i) => {
         return `${i + 1}`
     }
+
+    const closeModelfun = () =>{
+        setModalVisible(!modalVisible)
+        setReviewd(false)
+    }
+
+    
     return (
         <View style={{flexDirection:'row',margin:5,justifyContent:'center', alignItems:'center'}}>
              <View style={{width:'10%',height:50,borderWidth:0.5,border:10,justifyContent:'center',alignItems:'center',backgroundColor:AppTheme.WHITE}}>
@@ -42,9 +53,9 @@ const ScanStatusList = ({
              </View>
              <View style={{ width:'35%' }}>
                     <ButtonComponent
-                        customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: themeColor1 ? themeColor1 : AppTheme.BLUE }]}
-                        customBtnTextStyle={styles.buttonText}
-                        btnText={Review.toUpperCase()}
+                        customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: !reviewed ? themeColor2 ? '#AED3D3' : AppTheme.BLUE :  themeColor1 ? themeColor1 : AppTheme.BLUE}]}
+                        customBtnTextStyle={[styles.buttonText,{color:!reviewed ? 'black' : 'white'}]}
+                        btnText={!reviewed ? Reviewd.toUpperCase() :Review.toUpperCase()}
                         activeOpacity={0.8}
                         onPress={() => setModalVisible(true)}
                     />
@@ -52,10 +63,11 @@ const ScanStatusList = ({
             <ModalPopup
                 visible={modalVisible}
                 onRequestClose={() => setModalVisible(!modalVisible)}
-                onPress={() => setModalVisible(!modalVisible)}
+                onPress={closeModelfun}
                 btnText={Strings.close.toUpperCase()}
                 themeColor1={themeColor1}
-                borderCutomStyle={[styles.borderStyle, { borderColor: themeColor1 ? themeColor1 : AppTheme.GREEN }]}
+                themeColor2={themeColor2}
+                borderCutomStyle={[styles.borderStyle, { borderColor: themeColor1 ? themeColor1 : AppTheme.GREEN,backgroundColor: themeColor1 ? themeColor2 : AppTheme.GREEN}]}
                 data={
                     <View style={{ marginVertical: 0 }}>
                          <Text style={styles.textStyle}>{`studentId : ` }<Text style={{fontWeight:'normal',fontFamily : monospace_FF}}>{`${scanitemdata&&scanitemdata.studentId}`}</Text></Text>

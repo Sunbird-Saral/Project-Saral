@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { Alert, Text, TouchableOpacity, View, Switch } from 'react-native';
+import { Alert, Text, TouchableOpacity, View, Switch, Dimensions } from 'react-native';
 import AppTheme from '../../utils/AppTheme';
 import { checkNetworkConnectivity, dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF } from '../../utils/CommonUtils';
 import { getScannedDataFromLocal, setScannedDataIntoLocal } from '../../utils/StorageUtils';
 import Strings from '../../utils/Strings';
 import { styles } from './StudentsDataStyle';
-
+import MarksHeaderTable from '../ScannedDetails/MarksHeaderTable';
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 const StudentsDataComponent = ({
     item,
     themeColor1,
@@ -169,16 +171,15 @@ const StudentsDataComponent = ({
 
     return (
         <View style={{flexDirection:'row',margin:5,justifyContent:'center', alignItems:'center'}}>
-             <View style={{width:'15%',height:50,borderWidth:0.5,border:10,justifyContent:'center',alignItems:'center',backgroundColor:AppTheme.WHITE}}>
-            {/* <View style={[styles.cardChildCon, { backgroundColor: "#ffffffED" }]}> */}
+             <View style={{width:AppTheme.WIDTH_15,height:AppTheme.HEIGHT_60,borderWidth:0.5,border:10,justifyContent:'center',alignItems:'center',backgroundColor:AppTheme.WHITE}}>
              <Text>{index + 1}</Text>
-             {/* </View> */}
+
              </View>
              <View style={{width:'60%',backgroundColor:AppTheme.WHITE}}>
-             <View style={{height:25,borderWidth:0.5,border:10,justifyContent:'center'}}>
+             <View style={{height:AppTheme.HEIGHT_25,borderWidth:0.5,border:10,justifyContent:'center'}}>
              <Text style={{marginLeft:10}}>{item.studentId}</Text>
              </View>
-             <View style={{height:25,borderWidth:0.5,border:10,justifyContent:'center'}}>
+             <View style={{height:AppTheme.HEIGHT_25,borderWidth:0.5,border:10,justifyContent:'center'}}>
              <Text style={{marginLeft:10}}>{item.name}</Text>
              </View>
              </View>
@@ -198,48 +199,7 @@ const StudentsDataComponent = ({
                     }
                     </View>
                                        
-             {/* <TouchableOpacity
-                    activeOpacity={0.7}
-                    onPress={() => onBtnClick(item)}
-                    style={{width:'20%'}}
-                >
-                    {
-                        isPresent
-                            ?
-                            <Text style={[ { backgroundColor: themeColor1 ? themeColor1 : AppTheme.LIGHT_BLUE,fontFamily : monospace_FF }]}>{Strings.Mark_Absent}</Text>
-                            :
-                            <Text style={[ { backgroundColor: themeColor2 ? themeColor2 : AppTheme.LIGHT_BLUE,fontFamily : monospace_FF }]}>{Strings.Mark_Present}</Text>
-                    }
-                </TouchableOpacity> */}
-           
-           
-           {/* <View style={{width:'80%'}}>
-            <View style={[styles.cardChildCon, { backgroundColor: "#ffffffED" }]}>
-             <Text style={styles.aadhar}>{item.studentId}</Text>
-             <View style={styles.line} />
-             </View>
-             </View> */}
-        
-            {/* <View style={[styles.cardChildCon, { backgroundColor: "#ffffffED" }]}>
-                <Text style={styles.aadhar}>{item.studentId}</Text>
-                <View style={styles.line} />
-                <Text style={styles.aadhar}>{item.name}</Text>
-                <View style={styles.line} />
-
-                <TouchableOpacity
-                    activeOpacity={0.7}
-                    onPress={() => onBtnClick(item)}
-                >
-                    {
-                        isPresent
-                            ?
-                            <Text style={[styles.markasAbsent, { backgroundColor: themeColor1 ? themeColor1 : AppTheme.LIGHT_BLUE,fontFamily : monospace_FF }]}>{Strings.Mark_Absent}</Text>
-                            :
-                            <Text style={[styles.markasPresent, { backgroundColor: themeColor2 ? themeColor2 : AppTheme.LIGHT_BLUE,fontFamily : monospace_FF }]}>{Strings.Mark_Present}</Text>
-                    }
-                </TouchableOpacity>
-
-            </View> */}
+            
         </View>
     );
 }

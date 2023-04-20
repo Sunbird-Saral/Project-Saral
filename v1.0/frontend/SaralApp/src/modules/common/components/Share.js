@@ -174,6 +174,10 @@ const ShareComponent = ({
   const showModal = () => {
     setIshidden(!ishidden);
   };
+
+  const dashboard =()=>{
+    navigation.navigate('selectDetails')
+  }
   return (
     <View>
 
@@ -205,6 +209,7 @@ const ShareComponent = ({
             onLogoutClick={Logoutcall}
             aboutMenu={aboutMenu}
             helpMenu={helpMenu}
+            onDashboardClick={dashboard}
             navigation={navigation}
           />
 
