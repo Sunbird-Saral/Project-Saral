@@ -5,7 +5,7 @@ const Schools = require('../models/school')
 const Exams = require('../models/exams')
 const Classes = require('../models/classes')
 const Lock = require('../models/lock')
-const { auth, basicAuth } = require('../middleware/auth')
+const { auth } = require('../middleware/auth')
 const excel = require('exceljs');
 const { getFilePath, deleteAllfilesFromReports } = require('../utils/commonUtils')
 const Helper = require('../middleware/helper')
@@ -16,6 +16,6 @@ const marksController = require("../controller/marksController")
 
 
 router.put('/saveMarks',auth,marksController.saveMarks)
-router.post('/getSavedScan', basicAuth,marksController.getSaveScan) 
+router.post('/getSavedScan', auth,marksController.getSaveScan) 
 
 module.exports = router
