@@ -16,6 +16,6 @@ const marksController = require("../controller/marksController")
 
 
 router.put('/saveMarks',auth,marksController.saveMarks)
-router.post('/getSavedScan', basicAuth,marksController.getSaveScan) 
+router.post('/getSavedScan', auth,marksController.getSaveScan) 
 
 module.exports = router
