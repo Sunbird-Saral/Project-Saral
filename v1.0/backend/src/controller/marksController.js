@@ -65,7 +65,7 @@ exports.saveMarks = async (req, res, next) => {
             subject: marks[0].subject
         }
 
-        let marksData = await Marks.find(match, { _id: 0, __v: 0 })
+        let marksData = await Marks.find(match, {$comment: "Find Marks Details."},{ _id: 0, __v: 0 })
         res.status(200).json({ data: marksData })
     } catch (e) {
         if (e && e.message == stringObject().lockScreen) {
@@ -87,7 +87,7 @@ exports.getSaveScan = async (req, res, next) => {
 
         if (req.body.userId && !req.body.schoolId) {
             req.body.userId = req.body.userId.toLowerCase()
-            const userData = await Users.findOne({ userId: req.body.userId })
+            const userData = await Users.findOne({ userId: req.body.userId ,$comment: "Find User Data."})
             match.schoolId = userData.schoolId
         }
 
@@ -126,7 +126,7 @@ exports.getSaveScan = async (req, res, next) => {
             req.body.page = 1;
         }
 
-        const savedScan = await Marks.find(match, { _id: 0, __v: 0 })
+        const savedScan = await Marks.find(match ,{ _id: 0, __v: 0 })
             .limit(parseInt(req.body.limit) * 1)
             .skip((parseInt(parseInt(req.body.page)) - 1) * parseInt(parseInt(req.body.limit)))
 

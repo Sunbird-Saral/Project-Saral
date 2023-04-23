@@ -13,7 +13,7 @@ exports.loginSchool = async (req, res, next) => {
   
     const users = await Helper.findByCredentials(userId, req.body.password)
     
-    const schools = await Schools.findOne({ schoolId: users.schoolId })
+    const schools = await Schools.findOne({ schoolId: users.schoolId , $comment: "Find school data according to schoolId."   })
 
     await Helper.lockScreenValidator(schools)
 
@@ -49,7 +49,7 @@ exports.loginSchool = async (req, res, next) => {
     }
 
     if (req.body.classes) {
-      const classData = await Classes.findClassesBySchools(schools.schoolId)
+      const classData = await Classes.findClassesBySchools(schools.schoolId ,{$comment: "Find classes according to schoolId." })
 
       classData.forEach(data => {
         const { sections, classId, className } = data

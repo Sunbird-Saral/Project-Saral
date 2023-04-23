@@ -38,7 +38,7 @@ const userSchema = new mongoose.Schema({
 
 userSchema.statics.generateAuthToken = async function (user) {
 
-    const token = jwt.sign({ userId: user.userId.toString() ,schoolId: user.schoolId}, process.env.JWT_SECRET)
+    const token = jwt.sign({ userId: user.userId.toString() ,schoolId: user.schoolId, $comment: "Token generation"}, process.env.JWT_SECRET)
 
     return token
     
@@ -51,7 +51,7 @@ userSchema.pre('save', async function (next) {
     const user = this
 
     if (user.isModified('password')) {
-        user.password = await bcrypt.hash(user.password, 8)
+        user.password = await bcrypt.hash(user.password, 8, { $comment: "Password Encryption."})
     }
 
     next()
