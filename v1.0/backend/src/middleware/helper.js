@@ -42,7 +42,7 @@ const commonHelperFunctions = {
                 {
                     userId: userId,
                     __v: 0,
-                    $comment: "Comparing password."
+                    $comment: "Login School API For Find User Data."
                 }
             )
            

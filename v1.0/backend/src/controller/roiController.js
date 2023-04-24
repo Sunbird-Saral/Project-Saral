@@ -5,10 +5,10 @@ const Schools = require('../models/school')
 
 exports.getRoiData = async (req, res, next) => {
     try {
-        const examExist = await Exams.findOne({ examId: req.params.examId, $comment: "Find Exam Data." }).lean()
+        const examExist = await Exams.findOne({ examId: req.params.examId, $comment: "Get Roi Data API For Find Exam Data." }).lean()
 
         if (examExist) {
-            const school = await Schools.findOne({ schoolId: req.school.schoolId, $comment: "Find Exam Data." })
+            const school = await Schools.findOne({ schoolId: req.school.schoolId, $comment: "Get Roi Data API For Find School Data." })
             const roiExist = await Rois.findOne({ classId: examExist.classId, subject: examExist.subject, state: school.state, type: examExist.type, $comment: "Find ROI Data." }).lean()
             let examSetLookupExist = {}
 
@@ -27,7 +27,8 @@ exports.getRoiData = async (req, res, next) => {
                         classId: examExist.classId,
                         subject: examExist.subject,
                         state: school.state,
-                        type: examExist.type
+                        type: examExist.type,
+                        $comment :"Get Roi Data API For Find ROI Data"
                     }
                 }
                 let roi = await Rois.find(examSetLookupExist, { roiId: 1, roi: 1 }).lean()
