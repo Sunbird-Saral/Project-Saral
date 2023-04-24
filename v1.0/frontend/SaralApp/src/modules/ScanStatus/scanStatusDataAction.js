@@ -5,10 +5,10 @@ import API from '../../flux/actions/apis/api';
 import C from '../../flux/actions/constants'
 
 export class scanStatusDataAction extends API {
-    constructor(payload, obj, timeout = 30000) {
+    constructor(payload, token, timeout = 30000) {
         super('POST', timeout, false);
         this.payload = payload;
-        this.obj = obj;
+        this.token = token;
         this.type = C.SCANNED_DATA;
     }
     toString() {
@@ -29,7 +29,7 @@ export class scanStatusDataAction extends API {
     getHeaders() {
         return {
             'Content-Type': 'application/json',
-            'Authorization': `basic ${this.obj}`
+            'Authorization': `Bearer ${this.token}`
         }
     }
 
