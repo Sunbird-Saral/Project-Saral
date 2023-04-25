@@ -175,10 +175,10 @@ const StudentsDataComponent = ({
 
              </View>
              <View style={{width:'60%',backgroundColor:AppTheme.WHITE}}>
-             <View style={{height:AppTheme.HEIGHT_25,borderWidth:0.5,borderLeftWidth:0,borderBottomWidth:0 ,justifyContent:'center'}}>
+             <View style={{height:AppTheme.HEIGHT_25,borderWidth:0.5,justifyContent:'center'}}>
              <Text style={{marginLeft:10}}>{item.studentId}</Text>
              </View>
-             <View style={{height:AppTheme.HEIGHT_25,borderWidth:0.5,borderLeftWidth:0,justifyContent:'center'}}>
+             <View style={{height:AppTheme.HEIGHT_25,borderWidth:0.5,justifyContent:'center'}}>
              <Text style={{marginLeft:10}}>{`${item.name} ${item.fatherName ? '/' + item.fatherName : ''}`}</Text>
              </View>
              </View>
