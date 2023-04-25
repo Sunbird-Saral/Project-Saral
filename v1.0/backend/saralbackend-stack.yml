@@ -12,8 +12,9 @@ services:
     environment:
       PROFILE: dev
       PORT: 3005
-      MONGODB_URL: mongodb://tasks.saral-mongodb:27017/saralv1db
+      MONGODB_URL: mongodb://tasks.saral-mongodb:27017/saralv1newdb
       JWT_SECRET: SARALDATA_NODE
+      MONGODB_POOL_SIZE: 5
   saral-mongodb:
     image: mongo:latest
     ports:
@@ -21,7 +22,7 @@ services:
     networks: 
       - saralbackend-network
     volumes:
-      - /usr/local/mongodb/data/saralv1db:/data/db
+      - /usr/local/mongodb/data/saralv1newdb:/data/db
 networks:
   saralbackend-network:
     driver: overlay

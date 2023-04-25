@@ -22,11 +22,6 @@ const BrandSchema = new mongoose.Schema({
         type: String,
         trim: true
     },
-    schoolId: {
-        type: String,
-        unique: true,
-        trim: true,
-    },
     screenLabels: {
         selectDetails: [{
             _id: false,
@@ -165,6 +160,7 @@ const BrandSchema = new mongoose.Schema({
     timestamps: true
 })
 
+BrandSchema.index({ state: -1 }, { unique: true });
 
 const Brands = mongoose.model('Brand', BrandSchema)
 

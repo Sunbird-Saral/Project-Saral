@@ -1,3 +1,4 @@
+const Schools = require("../models/school")
 const Students = require("../models/students")
 const Marks = require("../models/marks")
 const Exams = require('../models/exams')
@@ -10,25 +11,22 @@ exports.fetchStudentsandExams = async (req, res, next) => {
     const examMatch = {}
 
     match.schoolId = req.school.schoolId
-    if (req.body.classId) {
-        let studentClassObj = {
-            classId: req.body.classId,
-            className: `Class-${req.body.classId}`
-        }
-        let studentClass = [studentClassObj]
-        match.studentClass = studentClass
-        examMatch.classId = studentClassObj.classId
-        examMatch.schoolId = req.school.schoolId
+    if (req.query.classId) {
+        match.classId = req.query.classId,
+        examMatch.classId = req.query.classId
     } else {
         return res.status(404).json({ message: 'Please send classId' })
     }
 
-    if (req.body.section && req.body.section != "0") {
-        match.section = req.body.section
+    const school = await Schools.findOne({ schoolId: req.school.schoolId })
+    examMatch.state = school.state
+
+    if (req.query.section && req.query.section != "0") {
+        match.section = req.query.section
     }
 
-    if (req.body.hasOwnProperty('subject')) {
-        let subject = req.body.subject.split(' ')
+    if (req.query.hasOwnProperty('subject')) {
+        let subject = req.query.subject.split(' ')
         examMatch.subject = subject[0]
         examMatch.examDate = subject[1]
     }
@@ -47,19 +45,18 @@ exports.fetchStudentsandExams = async (req, res, next) => {
                 examDate: examMatch.examDate
             }
 
-            if(req.body.set){
-                lookup.set = req.body.set 
+            if(req.query.set){
+                lookup.set = req.query.set 
             }
-        
-            let marks = await Marks.findOne(lookup) 
 
-            if(marks && typeof marks == "object" ){
+            let marks = await Marks.findOne(lookup)
+
+            if (marks && typeof marks == "object") {
                 student["studentAvailability"] = marks.studentAvailability
-            }else{
+            } else {
                 student["studentAvailability"] = true
-                }
-                }
-
+            }
+        }
 
         const exams = await Exams.find(examMatch, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 })
 

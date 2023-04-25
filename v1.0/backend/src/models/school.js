@@ -10,8 +10,8 @@ const schoolSchema = new mongoose.Schema({
     },
     schoolId: {
         type: String,
-        unique: true,
         required: true,
+        unique: true,
         trim: true,
     },
     state:{
@@ -80,6 +80,8 @@ const schoolSchema = new mongoose.Schema({
 }, {
     timestamps: false
 })
+
+
 
 
 // Hiding private data
