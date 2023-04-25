@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import React, { useState,useEffect } from 'react';
+import { StyleSheet, Text, View, Dimensions, BackHandler } from 'react-native';
 import AppTheme from '../../utils/AppTheme';
 import { monospace_FF, MARKS_INFO,MARKS_INFO_DEFAULT} from '../../utils/CommonUtils';
 import ModalPopup from '../common/components/Modal';
@@ -29,6 +29,19 @@ const ScanStatusLocalList = ({
             return true
         }
     })
+
+    useEffect(() => {
+        const backAction = () => {
+          return true;
+        };
+    
+        const backHandler = BackHandler.addEventListener(
+          'hardwareBackPress',
+          backAction,
+        );
+    
+        return () => backHandler.remove();
+      }, []);
 
     const renderSRNo = (m, i) => {
         return `${i + 1}`
@@ -61,7 +74,7 @@ const ScanStatusLocalList = ({
                     <ButtonComponent
                         customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: !reviewed ? themeColor2 ? '#AED3D3' : AppTheme.BLUE :  themeColor1 ? themeColor1 : AppTheme.BLUE}]}
                         customBtnTextStyle={[styles.buttonText,{color:!reviewed ? 'black' : 'white'}]}
-                        btnText={!reviewed ? Reviewd.toUpperCase() :Review.toUpperCase()}
+                        btnText={!reviewed ? Reviewd :Review}
                         activeOpacity={0.8}
                         onPress={() => setModalVisible(true)}
                     />

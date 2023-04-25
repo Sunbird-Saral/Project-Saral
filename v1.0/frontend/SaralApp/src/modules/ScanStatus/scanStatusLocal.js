@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, Text, View, Image, TouchableOpacity,Platform } from 'react-native';
+import { FlatList, Text, View, Image, TouchableOpacity,Platform,BackHandler,Alert } from 'react-native';
 
 //redux
 import { connect, useDispatch } from 'react-redux';
@@ -59,8 +59,21 @@ const ScanStatusLocal = ({
 
     const onBackPress = () => {
         navigation.navigate('myScan');
-        return true;
+       
     };
+
+    useEffect(() => {
+        const backAction = () => {
+          return true;
+        };
+    
+        const backHandler = BackHandler.addEventListener(
+          'hardwareBackPress',
+          backAction,
+        );
+    
+        return () => backHandler.remove();
+      }, []);
 
 const callCustomModal = (title, message, isAvailable, func, cancel) => {
     let data = {

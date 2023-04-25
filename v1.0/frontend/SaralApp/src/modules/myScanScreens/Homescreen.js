@@ -280,9 +280,9 @@ dispatchBrandingDataApi(payload) {
              <Image style={{ height: 100, width: 80,resizeMode:"stretch" }} source={Assets.assessments}/>
              </TouchableOpacity>
              <Text style={{textAlign:'center',fontSize:16,fontWeight:'bold'}}>Assessments</Text>
-             {/* <View style={{backgroundColor:this.props.multiBrandingData&&this.props.multiBrandingData.themeColor1?this.props.multiBrandingData.themeColor1 : AppTheme.BLUE,height:120,width:120,borderRadius:15,top:50}}>
+             <View style={{backgroundColor:this.props.multiBrandingData&&this.props.multiBrandingData.themeColor1?this.props.multiBrandingData.themeColor1 : AppTheme.BLUE,height:120,width:120,borderRadius:15,top:50}}>
              </View>
-             <Text style={{textAlign:'center',fontSize:16,fontWeight:'bold',top:50}}>Use Case 2</Text> */}
+             <Text style={{textAlign:'center',fontSize:16,fontWeight:'bold',top:50}}>Use Case 2</Text>
              </View>
                            
                             {

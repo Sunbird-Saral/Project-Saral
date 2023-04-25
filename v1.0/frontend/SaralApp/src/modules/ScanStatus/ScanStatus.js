@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, Text, View, Platform ,PermissionsAndroid} from 'react-native';
+import { FlatList, Text, View, Platform ,PermissionsAndroid,BackHandler} from 'react-native';
 
 //redux
 import { connect } from 'react-redux';
@@ -46,7 +46,18 @@ const ScanStatus = ({
     const [activityOpen,setActivityOpen] = useState(false)
     const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.scanStatus[0]
     
-
+    useEffect(() => {
+        const backAction = () => {
+          return true;
+        };
+    
+        const backHandler = BackHandler.addEventListener(
+          'hardwareBackPress',
+          backAction,
+        );
+    
+        return () => backHandler.remove();
+      }, []);
     //function
     const renderItem = ({ item, index }) => {
         return (

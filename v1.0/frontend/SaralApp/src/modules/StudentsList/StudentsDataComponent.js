@@ -112,7 +112,6 @@ const StudentsDataComponent = ({
     }
 
     const onBtnClick = (data) => {
-        console.log('isPresent>>>>>',isPresent);
         let chkPresent = stdArray.some(item => item.studentId == data.studentId)
         setStdMarkAsPrsAbst(data, chkPresent)
     }
@@ -170,34 +169,48 @@ const StudentsDataComponent = ({
     }
 
     return (
-        <View style={{flexDirection:'row',margin:5,justifyContent:'center', alignItems:'center'}}>
-             <View style={{width:AppTheme.WIDTH_15,height:AppTheme.HEIGHT_60,borderWidth:0.5,border:10,justifyContent:'center',alignItems:'center',backgroundColor:AppTheme.WHITE}}>
+        <View style={{flexDirection:'row',margin:4,justifyContent:'center', alignItems:'center'}}>
+             <View style={{width:AppTheme.WIDTH_15,height:AppTheme.HEIGHT_60,borderWidth:0.5,justifyContent:'center',alignItems:'center',backgroundColor:AppTheme.WHITE}}>
              <Text>{index + 1}</Text>
 
              </View>
              <View style={{width:'60%',backgroundColor:AppTheme.WHITE}}>
-             <View style={{height:AppTheme.HEIGHT_25,borderWidth:0.5,border:10,justifyContent:'center'}}>
+             <View style={{height:AppTheme.HEIGHT_25,borderWidth:0.5,borderLeftWidth:0,borderBottomWidth:0 ,justifyContent:'center'}}>
              <Text style={{marginLeft:10}}>{item.studentId}</Text>
              </View>
-             <View style={{height:AppTheme.HEIGHT_25,borderWidth:0.5,border:10,justifyContent:'center'}}>
-             <Text style={{marginLeft:10}}>{item.name}</Text>
+             <View style={{height:AppTheme.HEIGHT_25,borderWidth:0.5,borderLeftWidth:0,justifyContent:'center'}}>
+             <Text style={{marginLeft:10}}>{`${item.name} ${item.fatherName ? '/' + item.fatherName : ''}`}</Text>
              </View>
              </View>
              <View style={{}}>
-             <Switch
-                                        trackColor={{ true: 'green', false: 'red' }}
-                                        // thumbColor={isPresent ? AppTheme.GREEN : 'red'}
-                                        // style={{ transform:[{ scaleX: .7 }, { scaleY: .7 }] }}
-                                        value={isPresent}
-                                        onValueChange={(value) => onBtnClick(item)}/>
-                                        {
+             
+                            <TouchableOpacity
+                    activeOpacity={0.7}
+                    onPress={() => onBtnClick(item)}
+                    // style={{width:'20%'}}
+                >
+                  
+{
                         !isPresent
                             ?
-                            <Text style={{color:AppTheme.BLACK,fontWeight:'bold',marginLeft:5}}>{'Absent'}</Text>
+                            <View style={{backgroundColor: '#e5b6b3',width:50,height:20,margin:10,borderRadius:10}}>
+                            <View style={{flexDirection:"row",justifyContent:'space-between'}}>
+                             <View style={{backgroundColor:'red',width:20,height:20,borderRadius:10}}></View>
+                             <Text style={{marginRight:12,color:'red',fontWeight:"bold"}}>{'A'}</Text>
+                             </View>
+                             </View>
+                            
                             :
-                            <Text style={{color:AppTheme.BLACK,fontWeight:'bold',marginLeft:5}}>{'Present'}</Text>
+                            <View style={{backgroundColor:themeColor2 ? '#93CECE' : AppTheme.BLUE,width:50,height:20,margin:10,borderRadius:10}}>
+                           <View style={{flexDirection:"row",justifyContent:'space-between'}}>
+                            <Text style={{marginLeft:12,color:themeColor1,fontWeight:'bold'}}>{'P'}</Text>
+                            <View style={{backgroundColor:themeColor1,width:20,height:20,borderRadius:10}}></View>
+                            </View>
+                            </View>
+                           
                     }
-                    </View>
+                    </TouchableOpacity>
+                    </View>            
                                        
             
         </View>

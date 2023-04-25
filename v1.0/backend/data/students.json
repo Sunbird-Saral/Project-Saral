@@ -969,6 +969,7 @@
     "section": "D",
     "name": "Student1",
     "studentId": "420400123",
+    "fatherName": "father Name",
     "schoolId": "u002"
   },
   {
@@ -981,6 +982,7 @@
     "section": "D",
     "name": "Student2",
     "studentId": "420400234",
+    "fatherName": "father Name",
     "schoolId": "u002"
   },
   {

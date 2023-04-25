@@ -18,9 +18,11 @@ const AppTheme = {
     FONT_SIZE_EXTRA_SMALL:responsiveFontSize(1.3),
     FONT_SIZE_TINY:responsiveFontSize(1.1),
     
-    HEIGHT_25:responsiveHeight(4),
+    HEIGHT_25:responsiveHeight(5),
+    HEIGHT_30:responsiveHeight(10),
     HEIGHT_50:responsiveHeight(7),
-    HEIGHT_60:responsiveHeight(8),
+    HEIGHT_60:responsiveHeight(10),
+    HEIGHT_70:responsiveHeight(12),
     WIDTH_10:responsiveWidth(10),
     WIDTH_15:responsiveWidth(15),
     WIDTH_20:responsiveWidth(20),
