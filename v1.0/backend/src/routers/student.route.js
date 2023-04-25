@@ -6,7 +6,7 @@ const Marks = require("../models/marks")
 
 const studentController = require('../controller/studentController')
 
-router.get('/fetchStudentsandExamsByQuery',auth,studentController.fetchStudentsandExams)
+router.get('/fetchStudentsandExamsByQuery', auth, studentController.fetchStudentsandExams)
 
 router.post('/student', auth, async (req, res) => {
     try {
@@ -20,7 +20,8 @@ router.post('/student', auth, async (req, res) => {
         const students = new Students({
             ...req.body,
             className,
-            schoolId: req.school.schoolId
+            schoolId: req.school.schoolId,
+            $comment: "Create Student API for Saving Students"
         })
 
         await students.save()
@@ -47,7 +48,8 @@ router.post('/fetchStudentsByQuery', auth, async (req, res) => {
     match.schoolId = req.school.schoolId
     if (req.body.classId) {
         match.classId = req.body.classId,
-            match.className = req.body.className
+            match.className = req.body.className,
+            $comment = "Get Student API for Find Students Data"
     }
 
     if (req.body.section && req.body.section != "0") {
@@ -65,7 +67,7 @@ router.post('/fetchStudentsByQuery', auth, async (req, res) => {
 
 router.delete('/student/:studentId', async (req, res) => {
     try {
-        const student = await Students.findOne({ studentId: req.params.studentId })
+        const student = await Students.findOne({ studentId: req.params.studentId, $comment: "Delete Student API for Find Student Data" })
         if (!student) return res.status(404).send({ message: 'Student Id does not exist.' })
         let lookup = {
             studentId: student.studentId
@@ -90,7 +92,8 @@ router.patch('/student/:studentId', async (req, res) => {
         return res.status(400).send({ message: 'Invaid Updates' })
     }
     let lookup = {
-        studentId: req.params.studentId
+        studentId: req.params.studentId,
+        $comment: "Update Student API For Find And Update Student Data"
     }
     try {
         let updateData = {}

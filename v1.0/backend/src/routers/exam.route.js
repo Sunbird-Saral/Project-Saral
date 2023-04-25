@@ -77,7 +77,7 @@ router.get('/examByClass/:classId', auth, async (req, res) => {
 
 router.delete('/exam/:examId', auth, async (req, res) => {
     try {
-        const exam = await Exams.findOneAndDelete({ examId: req.params.examId }).lean()
+        const exam = await Exams.findOneAndDelete({ examId: req.params.examId , $comment: "Delete Exams API For Find And Delete Exams Data"}).lean()
 
         if (exam) {
             res.status(200).send({ "message": "Exam has been deleted successfully." })
