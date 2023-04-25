@@ -21,7 +21,8 @@ router.post('/exam', auth, async (req, res) => {
             state: input.state,
             classId: input.classId,
             examDate: input.examDate,
-            subject: input.subject
+            subject: input.subject,
+            $comment: "Create Exam API For Find Exam Data"
         }
 
         let examExist = await Exams.find(lookup)
@@ -51,7 +52,8 @@ router.post('/exam', auth, async (req, res) => {
 router.get('/examByClass/:classId', auth, async (req, res) => {
     const match = {
         schoolId: req.school.schoolId,
-        classId: req.params.classId
+        classId: req.params.classId,
+        $comment: "Get Exam API For Find Exam Data"
     }
 
     if (req.query.subject) {
@@ -103,7 +105,8 @@ router.patch('/exam/:examId', auth, async (req, res) => {
         }
         let match = {
             examId: req.params.examId,
-            schoolId: req.school.schoolId
+            schoolId: req.school.schoolId,
+            $comment: "Update Exam API For Find And Update Exam Data"
         }
         let update = { $set: req.body }
         const exam = await Exams.find(match).lean()
