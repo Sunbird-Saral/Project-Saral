@@ -9,6 +9,7 @@ Before we begin, ensure that you have the Software Prerequisites installed on yo
  4. Apache JMeter (https://jmeter.apache.org/download_jmeter.cgi)
  5. JMeterPluginsCMD utility (https://jmeter-plugins.org/wiki/JMeterPluginsCMD/)
 
+Please go through Performance test strategy (*data\Loadtest\Performance_Test_Strategy.jpg*) to understand the objectives, approach, scope of performance testing effort.
 ### Steps to create test data for load test
 1. Open visual studio code
 2. Click on File, Open File and Load the _test_data_generation_v4.py_ file load the python file on VS code
@@ -218,4 +219,5 @@ That's it! You have successfully created an HTML report from a JMeter test plan 
 By following the steps outlined in this guide, you should now be able to execute JMeter scripts using the non-GUI mode. The non-GUI mode provides a convenient way to run your tests in batch mode or to integrate JMeter into your continuous integration or deployment pipelines.
 
 ********************************
+
 
