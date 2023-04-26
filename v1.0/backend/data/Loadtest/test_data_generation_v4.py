@@ -20,7 +20,7 @@ print("JSON files are being created please wait")
 for schools in range(0,schoolsCount):
     objSchools = {        
     "name": "Dummy school"+" "+str(schools),
-    "schoolId": "u00"+str(schools),
+    "schoolId": "900"+str(schools),
     "state": "up",
     "autoSync": False,
     "autoSyncFrequency": 600000,
@@ -48,7 +48,7 @@ for users in range(0,usersCount):
         
         "name": "user"+str(users),
         "userId": "1000"+str(users),
-        "schoolId": "u00"+str(countSchoolID),
+        "schoolId": "900"+str(countSchoolID),
         "password": "$2a$08$6Ds4yry.6FhIMOylhQyvruuxiXG4Zh8IRrYxoZanlGJDLyBNT8j3S"
   
     }      
@@ -73,7 +73,7 @@ for students in range(0,studentsCount):
     "section": "A",
     "name": "Student"+str(students),
     "studentId": "4500"+str(students),
-    "schoolId": "u00"+str(countStudents)
+    "schoolId": "900"+str(countStudents)
     
     }      
                 
@@ -97,7 +97,7 @@ for classes in range(0,schoolsCount * 8):
                 ],
     "classId": str(classID),
     "className": "Class-"+str(classID),
-    "schoolId": "u00"+""+str(countSchoolID_Classes)
+    "schoolId": "900"+""+str(countSchoolID_Classes)
       }
     classData.append(objClass)
 
