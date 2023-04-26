@@ -11,9 +11,9 @@ exports.fetchStudentsandExams = async (req, res, next) => {
     const examMatch = {}
 
     match.schoolId = req.school.schoolId
-    if (req.body.classId) {
-        match.classId = req.body.classId,
-        examMatch.classId = req.body.classId
+    if (req.query.classId) {
+        match.classId = req.query.classId,
+        examMatch.classId = req.query.classId
     } else {
         return res.status(404).json({ message: 'Please send classId' })
     }
@@ -21,12 +21,12 @@ exports.fetchStudentsandExams = async (req, res, next) => {
     const school = await Schools.findOne({ schoolId: req.school.schoolId })
     examMatch.state = school.state
 
-    if (req.body.section && req.body.section != "0") {
-        match.section = req.body.section
+    if (req.query.section && req.query.section != "0") {
+        match.section = req.query.section
     }
 
-    if (req.body.hasOwnProperty('subject')) {
-        let subject = req.body.subject.split(' ')
+    if (req.query.hasOwnProperty('subject')) {
+        let subject = req.query.subject.split(' ')
         examMatch.subject = subject[0]
         examMatch.examDate = subject[1]
     }
@@ -45,8 +45,8 @@ exports.fetchStudentsandExams = async (req, res, next) => {
                 examDate: examMatch.examDate
             }
 
-            if (req.body.set) {
-                lookup.set = req.body.set
+            if(req.query.set){
+                lookup.set = req.query.set 
             }
 
             let marks = await Marks.findOne(lookup)
