@@ -47,7 +47,7 @@ router.post('/schools/create', async (req, res) => {
 
 router.get('/schools', async (req, res) => {
     try {
-        const school = await Schools.find({})
+        const school = await Schools.find({$comment: "Get School API For Find Schools Data."})
         let schools = []
         if (school) {
             school.forEach(element => {
@@ -69,7 +69,7 @@ router.get('/schools', async (req, res) => {
 
 router.delete('/schools/:schoolId', async (req, res) => {
     try {
-        const school = await Schools.findOne({ schoolId: req.params.schoolId.toLowerCase() })
+        const school = await Schools.findOne({ schoolId: req.params.schoolId.toLowerCase() , $comment: "Delete School API For Find School Data." })
         if (!school) return res.status(404).send({ message: 'School Id does not exist.' })
         let lookup = {
             schoolId: school.schoolId
@@ -97,7 +97,8 @@ router.patch('/schools/:schoolId', async (req, res) => {
             return res.status(400).send({ error: 'Invaid Updates' })
         }
         let lookup = {
-            schoolId: req.params.schoolId.toLowerCase()
+            schoolId: req.params.schoolId.toLowerCase(),
+            $comment: "Update School API For Find And Update School Data." 
         }
         let update = req.body
 
