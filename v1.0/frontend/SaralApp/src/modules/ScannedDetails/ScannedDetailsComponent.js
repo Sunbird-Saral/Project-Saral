@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Text, View, ScrollView, ToastAndroid, Alert, Image, TouchableOpacity, PermissionsAndroid } from 'react-native';
+import { Text, View, ScrollView, ToastAndroid, Alert, Image, TouchableOpacity, PermissionsAndroid,Dimensions } from 'react-native';
 import { connect, useDispatch } from 'react-redux';
 import AppTheme from '../../utils/AppTheme';
 import { CELL_OMR, extractionMethod, multipleStudent, MULTIPLE_TAG_DATAS,dispatchCustomModalMessage, dispatchCustomModalStatus,monospace_FF , neglectData, SCAN_TYPES, studentLimitSaveInLocal, student_ID, TABLE_HEADER, TABLE_HEADER_WITH_TAG,defaultHeaderTable } from '../../utils/CommonUtils';
@@ -31,7 +31,7 @@ import SaralSDK from '../../../SaralSDK'
 import CheckBox from '@react-native-community/checkbox';
 import TaggingModal from '../common/TaggingModal';
 
-
+const { width, height } = Dimensions.get('window')
 const ScannedDetailsComponent = ({
     navigation,
     filteredData,
@@ -143,10 +143,11 @@ const ScannedDetailsComponent = ({
 
         }
 
-
-        // if(studentId == 0 || studentId == '' && isMultipleStudent){
-        //     setToggleCheckBox(true)
-        // }
+        if(studentId == 0 || studentId == '' && isMultipleStudent){
+            setToggleCheckBox(true)
+        }else{
+            setToggleCheckBox(false)
+        }
         if (absent.length > 0) {
             setStdErr("Student is Absent")
             setStudentValid(false)
@@ -207,7 +208,7 @@ const ScannedDetailsComponent = ({
             let withNoDigits = e.format.name.replace(/[0-9]/g, '');
             let wordLen = withNoDigits.length;
             let multiple = 0
-            if (wordLen === checkRoLLNumberExist.length && withNoDigits === checkRoLLNumberExist && (e.consolidatedPrediction) != 0) {
+            if (wordLen === checkRoLLNumberExist.length && withNoDigits === checkRoLLNumberExist) {
                 multiple = multiple + 1
             }
             return multiple
@@ -416,7 +417,6 @@ const ScannedDetailsComponent = ({
                 let number = consolidated;
                 let regex = new RegExp(regexExp)
                 result = regex.test(number);
-                // setOmrResult(regexErrormsg)
                   setOmrResult(defaultValidateError)
                   
 
@@ -455,7 +455,7 @@ const ScannedDetailsComponent = ({
 
                 let toggle = structureList[currentIndex + 1].hasOwnProperty("isNotAbleToSave") ? structureList[currentIndex + 1].isNotAbleToSave : false
                 setToggleCheckBox(toggle)
-
+                goToTop()
                 //for student validataion
 
                 ocrLocalResponse.layout.cells.forEach(element => {
@@ -576,7 +576,9 @@ const ScannedDetailsComponent = ({
                     "securedMarks": stdTotalMarks,
                     "totalMarks": 0,
                     "studentAvailability": true,
-                    "set": filteredData.set,
+                }
+                if(filteredData.hasOwnProperty("set")){
+                    stdData.set = filteredData.set
                 }
 
                 stdData.studentId = el.RollNo
@@ -624,8 +626,12 @@ const ScannedDetailsComponent = ({
             "studentsMarkInfo": stdMarkInfo,
             "examId": filteredData.examTestID,
             "userId": loginData.data.school.schoolId,
-            "set": filteredData.set,
+
         }
+        if(filteredData.hasOwnProperty("set")){
+            saveObj.set = filteredData.hasOwnProperty("set") ? filteredData.set : ""
+        }
+
         saveAndFetchFromLocalStorag(saveObj)
     }
 
@@ -789,6 +795,7 @@ const ScannedDetailsComponent = ({
                 setBtnName('cancel')
             }
             setNextBtn(Strings.next_text)
+            goToTop()
         }
         else {
             onBackButtonClick()
@@ -1196,10 +1203,13 @@ const ScannedDetailsComponent = ({
                     "securedMarks": sumOfAllMarks > 0 ? sumOfAllMarks : 0,
                     "totalMarks": maxMarksTotal > 0 ? maxMarksTotal : 0,
                     "marksInfo": Studentmarks,
-                    "set": minimalFlag ? 0 : filteredData.set ,
                     "studentAvailability": true,
                 }
             ]
+            
+        }
+        if(filteredData.hasOwnProperty("set")){
+            saveObj.studentsMarkInfo[0].set = minimalFlag ? "" : filteredData.set
         }
 
         if (minimalFlag) {
@@ -1239,7 +1249,10 @@ const ScannedDetailsComponent = ({
     const openCameraActivity = async () => {
         try {
 
-            SaralSDK.startCamera(JSON.stringify(ocrLocalResponse), (currentIndex + 1).toString()).then(res => {
+            let hasTimer   =  loginData.data.school.hasOwnProperty("scanTimeoutMs") ? loginData.data.school.scanTimeoutMs : 0
+            let isManualEditEnabled   =  loginData.data.school.hasOwnProperty("isManualEditEnabled") ? loginData.data.school.isManualEditEnabled : false
+
+            SaralSDK.startCamera(JSON.stringify(ocrLocalResponse), (currentIndex + 1).toString(), hasTimer, isManualEditEnabled).then(res => {
                 let roisData = JSON.parse(res);
                 let cells = roisData.layout.cells;
                 consolidatePrediction(cells, roisData)
@@ -1257,7 +1270,6 @@ const ScannedDetailsComponent = ({
             marks = ""
             predictionConfidenceArray = []
             for (let j = 0; j < cells[i].rois.length; j++) {
-
                 marks = marks + cells[i].rois[j].result.prediction,
                     predictionConfidenceArray.push(cells[i].rois[j].result.confidence)
             }
@@ -1286,6 +1298,14 @@ const ScannedDetailsComponent = ({
         }
     }
 
+    const scrollRef = useRef();
+    const goToTop = () => {
+    scrollRef.current?.scrollTo({
+    y: 0,
+    animated: true,
+    });
+   }
+
     return (
         <View style={{ flex: 1 }}>
 
@@ -1295,6 +1315,7 @@ const ScannedDetailsComponent = ({
                     showsVerticalScrollIndicator={false}
                     bounces={false}
                     keyboardShouldPersistTaps={'handled'}
+                    ref={scrollRef}
                 >
                     <ShareComponent
                         navigation={navigation}
@@ -1345,11 +1366,11 @@ const ScannedDetailsComponent = ({
                                                     {
                                                         isMultipleStudent
                                                             ?
-                                                            <Text style={styles.nameTextStyle}>{Strings.page_no + ': ' + (currentIndex + 1)}</Text>
+                                                            <Text style={styles.nameTextStyle}>{BrandLabel && BrandLabel.Record_no ? BrandLabel.Record_no:Strings.Record_no + ': ' + (currentIndex + 1)}</Text>
                                                             :
                                                             ocrLocalResponse.layout.pages > 0
                                                                 ?
-                                                                <Text style={styles.nameTextStyle}>{Strings.page_no + ': ' + (currentIndex)}</Text>
+                                                                <Text style={styles.nameTextStyle}>{BrandLabel && BrandLabel.Record_no ? BrandLabel.Record_no:Strings.Record_no + ': ' + (currentIndex)}</Text>
                                                                 :
                                                                 null
                                                     }
@@ -1437,25 +1458,25 @@ const ScannedDetailsComponent = ({
                                                         <View element={element} key={index} style={{ flexDirection: 'row' }}>
 
                                                             <MarksHeaderTable
-                                                                customRowStyle={{ width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '25%' : '30%', }}
+                                                                customRowStyle={{height:height/12, width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '25%' : '30%', }}
                                                                 rowTitle={renderSRNo(element, index)}
                                                                 rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                                                 editable={false}
                                                                 keyboardType={'number-pad'}
                                                             />
                                                             <MarksHeaderTable
-                                                                customRowStyle={{ width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '25%' : '30%', }}
+                                                                customRowStyle={{height:height/12, width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '25%' : '30%', }}
                                                                 rowTitle={element.format.value}
                                                                 rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                                                 editable={false}
                                                                 keyboardType={'number-pad'}
                                                             />
                                                             <MarksHeaderTable
-                                                                customRowStyle={{ width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '50%' : '30%', }}
+                                                                customRowStyle={{height:height/12, width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '50%' : '30%', }}
                                                                 rowTitle={element.consolidatedPrediction}
                                                                 rowBorderColor={markBorderOnCell(element)}
                                                                 editable={true}
-                                                                keyboardType={element.hasOwnProperty("omrOptions") ?  'name' : 'name'}
+                                                                keyboardType={element.hasOwnProperty("omrOptions") ?  'name' : ''}
                                                                 maxLength={lengthAccordingSheet(element)}
                                                                 onChangeText={(text) => {
                                                                     handleTextChange(text.trim(), index, newArrayValue, element)
@@ -1467,7 +1488,7 @@ const ScannedDetailsComponent = ({
                                                             loginData.data.school.tags
                                                             &&
                                                             <MarksHeaderTable
-                                                                customRowStyle={{ width: '25%', }}
+                                                                customRowStyle={{height:height/12, width: '25%', }}
                                                                 rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                                                 editable={false}
                                                                 icon={true}

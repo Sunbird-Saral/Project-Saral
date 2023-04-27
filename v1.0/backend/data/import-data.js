@@ -1,14 +1,16 @@
 const fs = require('fs');
 const mongoose = require('mongoose');
-const School = require('../src/models/school')
-const ClassModel = require('../src/models/classModel')
-const Student = require('../src/models/students')
-const Exam = require('../src/models/exams')
+const Schools = require('../src/models/school')
+const Classes = require('../src/models/classes')
+const Students = require('../src/models/students')
+const Exams = require('../src/models/exams')
 const Marks = require('../src/models/marks')
-const ROI = require('../src/models/roi')
-const Counter = require('../src/models/counter')
-const Brand = require('../src/models/brand')
-const Lock = require('../src/models/lock')
+const Rois = require('../src/models/roi')
+const Counters = require('../src/models/counter')
+const Brands = require('../src/models/brand')
+const Users = require('../src/models/users')
+const Locks = require('../src/models/lock')
+
 
 const dotenv = require('dotenv');
 dotenv.config({ path: './config/dev.env' });
@@ -34,19 +36,20 @@ const exam = JSON.parse(fs.readFileSync(`${__dirname}/exams.json`, 'utf-8'));
 const roi = JSON.parse(fs.readFileSync(`${__dirname}/rois.json`, 'utf-8'));
 const counter = JSON.parse(fs.readFileSync(`${__dirname}/counters.json`, 'utf-8'));
 const brand = JSON.parse(fs.readFileSync(`${__dirname}/brands.json`, 'utf-8'));
+const user = JSON.parse(fs.readFileSync(`${__dirname}/users.json`, 'utf-8'));
 const lock = JSON.parse(fs.readFileSync(`${__dirname}/lock.json`,'utf-8'));
 
 const importData = async () => {
   try {
-    await School.create(school);
-    await ClassModel.create(classes);
-    await Student.create(student);
-    await Exam.create(exam);
-    // await Marks.create(marks);
-    await ROI.create(roi);
-    await Counter.create(counter)
-    await Brand.create(brand)
-    await Lock.create(lock)
+    await Schools.create(school);
+    await Classes.create(classes);
+    await Students.create(student);
+    await Exams.create(exam);
+    await Rois.create(roi);
+    await Counters.create(counter)
+    await Brands.create(brand)
+    await Users.create(user)
+    await Locks.create(lock)
 
     console.log('Data successfully added');
   } catch (err) {
@@ -56,15 +59,16 @@ const importData = async () => {
 };
 const deleteData = async () => {
   try {
-    await School.deleteMany();
-    await Student.deleteMany();
-    await ClassModel.deleteMany()
-    await Exam.deleteMany();
+    await Schools.deleteMany();
+    await Students.deleteMany();
+    await Classes.deleteMany()
+    await Exams.deleteMany();
     await Marks.deleteMany();
-    await ROI.deleteMany();
-    await Counter.deleteMany();
-    await Brand.deleteMany();
-    await Lock.deleteMany()
+    await Rois.deleteMany();
+    await Counters.deleteMany()
+    await Brands.deleteMany()
+    await Users.deleteMany()
+    await Locks.deleteMany()
 
     console.log('Data successfully deleted');
   } catch (err) {

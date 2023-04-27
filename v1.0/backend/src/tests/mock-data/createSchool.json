@@ -1,0 +1,14 @@
+{
+    "name": "Dummy school 1",
+    "schoolId": "od001",
+    "password": "tarento@123",
+    "state": "up",
+    "autoSync": false,
+    "autoSyncFrequency": 600000,
+    "storeTrainingData": true,
+    "tags": true,
+    "supportEmail": "abc@gmail.com , xyz@gmail.com",
+    "offlineMode": true,
+    "lock":true,
+    "district": "district2"
+  }

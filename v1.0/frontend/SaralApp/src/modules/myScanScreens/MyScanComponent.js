@@ -12,7 +12,7 @@ import ScanHistoryCard from '../ScanHistory/ScanHistoryCard';
 import SaralSDK from '../../../SaralSDK'
 import { getScannedDataFromLocal, getErrorMessage, getLoginCred, setScannedDataIntoLocal } from '../../utils/StorageUtils';
 import ButtonComponent from '../common/components/ButtonComponent';
-import { checkNetworkConnectivity, dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF, multipleStudent, neglectData } from '../../utils/CommonUtils';
+import { checkAppVersion, checkNetworkConnectivity, dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF, multipleStudent, neglectData } from '../../utils/CommonUtils';
 import ShareComponent from '../common/components/Share';
 import MultibrandLabels from '../common/components/multibrandlabels';
 import { Assets } from '../../assets';
@@ -52,7 +52,8 @@ class MyScanComponent extends Component {
             scanModalDataVisible: false,
             passDataToModal: [],
             savingStatus: '',
-            examId: ''
+            examId: '',
+            setIsLoading:false
         }
     }
 
@@ -67,7 +68,7 @@ class MyScanComponent extends Component {
                 this.setState({ calledRoiData: false, callApi: '' })
                 if (roiData.status && roiData.status == 200) {
                    let total =  await this.sumOfLocalData();
-                   this.callScanStatusData(true, total, 0);
+                   this.callScanStatusData(true, total, 0, null);
                    if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode) {
                    await this.setRoiCache(roiData);
                    }
@@ -78,7 +79,7 @@ class MyScanComponent extends Component {
             if (calledRoiData & this.props.minimalFlag & !hasNetwork) {
                 this.setState({calledRoiData: false})
                 let total =  await this.sumOfLocalData();
-                this.callScanStatusData(true, total, 0);
+                this.callScanStatusData(true, total, 0, null);
             }
         }
     }
@@ -107,7 +108,6 @@ class MyScanComponent extends Component {
 
         if (this.props.minimalFlag) {
             let examList = []
-            
             this.props.studentsAndExamData
             ?
             this.props.studentsAndExamData.data
@@ -136,7 +136,7 @@ class MyScanComponent extends Component {
         const data = await getScannedDataFromLocal()
         const loginCred = await getLoginCred()
         let len = 0
-        if (data != null) {
+        if (data) {
             let filter = data.filter((e) => {
                 let findSection = false
                 findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.section)
@@ -152,11 +152,13 @@ class MyScanComponent extends Component {
                 }
             });
 
-            let hasSet = filteredData.hasOwnProperty("set") ? filteredData.set.length > 0 ? filteredData.set : '' : ''
-            if (hasSet.length > 0 && filter.length > 0) {
+            let hasSet = filteredData 
+            ?
+             filteredData.hasOwnProperty('set') ? filteredData.set.length >= 0 ? filteredData.set : "" : null : ""
+            if (hasSet != null && hasSet != undefined && hasSet.length >= 0 && filter.length > 0) {
                 let findSetStudent = filter.length > 0 ? filter[0].studentsMarkInfo.filter((item) => {
-                    if (hasSet.length > 0) {
-                        return item.set == filteredData.set;
+                    if (hasSet.length >= 0) {
+                        return item.set == hasSet;
                     }
                 })
                 :
@@ -280,11 +282,11 @@ class MyScanComponent extends Component {
             key: this.props.loginData.data.school.schoolId
         }
         let scaned = await getScanDataApi()
-        let setValue = this.props.filteredData.hasOwnProperty("set")  ? this.props.filteredData.set.length> 0 ? this.props.filteredData.set : '' : ''
+        let setValue = this.props.filteredData.hasOwnProperty("set")  ? this.props.filteredData.set.length> 0 ? this.props.filteredData.set : '' : null
         if (scaned != null) {
 
             let data = scaned.filter((value)=> {
-                let conditionSwitch = setValue.length > 0 ? value.examId == this.state.examId && value.key == this.props.loginData.data.school.schoolId && filteredData.set == value.set : value.examId == this.state.examId && value.key == this.props.loginData.data.school.schoolId
+                let conditionSwitch = setValue != null && setValue.length >= 0 ? value.examId == this.state.examId && value.key == this.props.loginData.data.school.schoolId && this.props.filteredData.set == value.set : value.examId == this.state.examId && value.key == this.props.loginData.data.school.schoolId
                 if (conditionSwitch) {
                     return true
                 }
@@ -298,7 +300,7 @@ class MyScanComponent extends Component {
                     }
                 };
             } else {
-                if (setValue.length > 0) {
+                if (setValue != null && setValue.length >= 0) {
                     payload.set = setValue
                 }
                 scaned.push(payload);
@@ -306,7 +308,7 @@ class MyScanComponent extends Component {
             await setScanDataApi(scaned)
             
         } else {
-            if (setValue.length > 0) {
+            if (setValue != null && setValue.length >= 0) {
                 payload.set = setValue
             }
             await setScanDataApi([payload])
@@ -315,6 +317,8 @@ class MyScanComponent extends Component {
 
 
     onScanClick = async () => {
+        let hasUpdate = await checkAppVersion();
+        if (!hasUpdate) {
         SystemSetting.getBrightness().then((brightness) => {
             this.setState({ oldBrightness: brightness })
         });
@@ -384,6 +388,7 @@ class MyScanComponent extends Component {
             }
         }
     }
+    }
 
     openCameraActivity = async () => {
         try {
@@ -405,12 +410,25 @@ class MyScanComponent extends Component {
                 let totalPages = this.props.roiData.data.layout.hasOwnProperty("pages") && this.props.roiData.data.layout.pages
                 let pageNumber = totalPages || totalPages > 0 ? "1" : null
                 let jsonRoiData = this.props.roiData.data
-                SaralSDK.startCamera(JSON.stringify(jsonRoiData), pageNumber).then(res => {
+                let hasTimer   =  this.props.loginData.data.school.hasOwnProperty("scanTimeoutMs") ? this.props.loginData.data.school.scanTimeoutMs : 0
+                let isManualEditEnabled   =  this.props.loginData.data.school.hasOwnProperty("isManualEditEnabled") ? this.props.loginData.data.school.isManualEditEnabled : false
+                SaralSDK.startCamera(JSON.stringify(jsonRoiData), pageNumber, hasTimer, isManualEditEnabled).then(res => {
                     let roisData = JSON.parse(res);
-                    let cells = roisData.layout.cells;
-                    this.consolidatePrediction(cells, roisData)
+                    console.log('roisData.hasOwnProperty("hwDigitModel")' +roisData.hasOwnProperty("hwDigitModel"));
+
+                    if (roisData.hasOwnProperty("hwDigitModel") && roisData.hwDigitModel) {
+                        this.callCustomModal(Strings.message_text, Strings.Digit_model_is_not_availaible, false);
+                    
+                    } else if (roisData.hasOwnProperty("blockLetterModel") && roisData.blockLetterModel) {
+                        this.callCustomModal(Strings.message_text, Strings.Alpha_numeric_model_is_not_availaible, false);
+                    
+                    } else {
+                        let cells = roisData.layout.cells;
+                        this.consolidatePrediction(cells, roisData)
+                    }
 
                 }).catch((code, message) => {
+                    console.log("code",code,message);
                 })
             } else {
             }
@@ -427,7 +445,7 @@ class MyScanComponent extends Component {
             predictionConfidenceArray = []
             for (let j = 0; j < cells[i].rois.length; j++) {
                 if (cells[i].rois[j].hasOwnProperty("result")) {
-                    marks = marks + cells[i].rois[j].result.prediction,
+                    marks = marks + cells[i].rois[j].result.prediction
                         predictionConfidenceArray.push(cells[i].rois[j].result.confidence)
                     // roisData.layout.cells[i].predictionConfidence = cells[i].rois[j].result.confidence
                 } else {
@@ -464,7 +482,7 @@ class MyScanComponent extends Component {
         this.props.navigation.navigate('ScannedDetailsComponent', { oldBrightness: this.state.oldBrightness })
     }
 
-  async  onDropDownSelect(idx, value) {
+  async onDropDownSelect(idx, value) {
         for (const el of this.props.studentsAndExamData.data.exams) {
             if (el.type == value) {
 
@@ -603,7 +621,7 @@ class MyScanComponent extends Component {
                     apiResponse = res;
                     clearTimeout(id);
                     api.processResponse(res);
-                    obj.callScanStatusData(false, filteredDatalen, localScanData)
+                    obj.callScanStatusData(false, filteredDatalen, localScanData, res)
                 })
                 .catch(function (err) {
                     if (err && err.response.status == 500) {
@@ -621,7 +639,7 @@ class MyScanComponent extends Component {
         }
     }
 
-    callScanStatusData = async (isApiCalled, filteredDatalen, localScanData) => {
+    callScanStatusData = async (isApiCalled, filteredDatalen, localScanData, res) => {
         let hasNetwork = await checkNetworkConnectivity();
         const { loginData } = this.props;
         if (!hasNetwork) {
@@ -647,27 +665,40 @@ class MyScanComponent extends Component {
                 //Alert message show message "something went wrong or u don't have cache in local"
             }
         } else {
-            let loginCred = await getLoginCred()
-
-            let dataPayload = {
-                "classId": 0,
-                "subject": 0,
-                "section": 0,
-                "fromDate": 0,
-                "page": 0,
-                "downloadRes": false
+            let hasMessage = res ? typeof res.data == "string" ? true : false : null
+            if (hasMessage != null && !hasMessage) {
+                    this.callCustomModal(Strings.message_text, Strings.saved_successfully, false);
+                    setScannedDataIntoLocal(localScanData)
+                    this.dispatchScanDataApi(res.data)
+                    this.setState({
+                        localScanedData: []
+                    })
+                 
+                if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode) {
+                    this.setScanDataCache(res.data);
+                }
+                this.setState({
+                    scanStatusData: filteredDatalen,
+                    saveStatusData: res.data.data.length,
+                    isLoading: false,
+                    dbScanSavedData: res.data.data
+                })
+                
+            } else {
+                let loginCred = await getLoginCred()
+                let dataPayload = {
+                    "classId": 0,
+                    "subject": 0,
+                    "section": 0,
+                    "fromDate": 0,
+                    "page": 0,
+                    "downloadRes": false
+                }
+                let roiId = this.props.roiData && this.props.roiData.data.roiId;
+                dataPayload.roiId = roiId;
+                let apiObj = new scanStatusDataAction(dataPayload);
+                this.FetchSavedScannedData(isApiCalled, apiObj, loginCred.schoolId, loginCred.password, filteredDatalen, localScanData)
             }
-            let roiId = this.props.roiData && this.props.roiData.data.roiId;
-            dataPayload.roiId = roiId;
-            let apiObj = new scanStatusDataAction(dataPayload);
-            this.FetchSavedScannedData(isApiCalled, apiObj, loginCred.schoolId, loginCred.password, filteredDatalen, localScanData)
-        }
-    }
-
-    dispatchScanDataApi(payload) {
-        return {
-            type: constants.SCANNED_DATA,
-            payload
         }
     }
 
@@ -720,6 +751,13 @@ class MyScanComponent extends Component {
         }
     }
 
+    dispatchScanDataApi(payload) {
+        return {
+            type: constants.SCANNED_DATA,
+            payload
+        }
+    }
+
     setScanModalDataVisible() {
         const { scanModalDataVisible } = this.state;
         this.setState({
@@ -727,7 +765,7 @@ class MyScanComponent extends Component {
         })
     }
 
-  async  openScanModal(data) {
+  async openScanModal(data) {
         const { localScanedData, dbScanSavedData, scanModalDataVisible } = this.state;
         const { roiIndex, loginData, filteredData } = this.props;
 
@@ -738,11 +776,11 @@ class MyScanComponent extends Component {
                 const hasNetwork = await checkNetworkConnectivity()
                 if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode & !hasNetwork) {
                     let scaned = await getScanDataApi()
-                    let setValue = filteredData.hasOwnProperty("set")  ? filteredData.set.length> 0 ? filteredData.set : '' : ''
+                    let setValue = filteredData.hasOwnProperty("set")  ? filteredData.set.length> 0 ? filteredData.set : '' : null
                     let data = []
                     if (scaned != null) {
                         data = scaned.filter( async(e) => {
-                            let conditionSwitch = setValue.length > 0 ? e.examId == this.state.examId && e.key == this.props.loginData.data.school.schoolId && filteredData.set == e.set : e.examId == this.state.examId && e.key == this.props.loginData.data.school.schoolId
+                            let conditionSwitch = setValue != null && setValue.length >= 0 ? e.examId == this.state.examId && e.key == this.props.loginData.data.school.schoolId && filteredData.set == e.set : e.examId == this.state.examId && e.key == this.props.loginData.data.school.schoolId
                             if (conditionSwitch) {
                                 return true
                             }
@@ -818,7 +856,10 @@ class MyScanComponent extends Component {
                                 themeColor1={this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE}
                                 showButtons={false}
                                 scanStatusData={this.state.scanStatusData}
+                                setScanStatusData={()=>this.setState({scanStatusData:0})}
                                 navigation={this.props.navigation}
+                                // isLoading={isLoading}
+                                setIsLoading={()=>this.setState({isLoading:false})}
                             />
 
                             <View style={styles.viewnxtBtnStyle1}>
@@ -875,27 +916,27 @@ class MyScanComponent extends Component {
 
                         <View style={{ flexWrap: "wrap", flexDirection: "row", width: "100%", alignItems: "center", justifyContent: 'center', marginTop: 10 }}>
                             <ButtonComponent
-                                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: "#A9A9A9", height: 30, width: "45%", marginHorizontal: 0, marginRight: 10 }]}
-                                btnText={Strings.saved_data.toUpperCase()}
+                                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: AppTheme.WHITE, height: 30, width: "45%", marginHorizontal: 0, marginRight: 10 }]}
+                                btnText={Strings.saved_data}
                                 activeOpacity={0.8}
-                                customBtnTextStyle={{ fontSize: 12 }}
+                                customBtnTextStyle={{fontFamily: monospace_FF, fontSize: 13, color: AppTheme.BLACK}}
                                 onPress={() => this.openScanModal("save")}
                             />
 
 
                             <ButtonComponent
-                                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: "#A9A9A9", height: 30, width: "50%", marginHorizontal: 0 }]}
-                                btnText={Strings.scan_data.toUpperCase()}
+                                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor:AppTheme.WHITE, height: 30, width: "50%", marginHorizontal: 0 }]}
+                                btnText={Strings.scan_data}
                                 activeOpacity={0.8}
-                                customBtnTextStyle={{ fontSize: 12 }}
+                                customBtnTextStyle={{fontFamily: monospace_FF, fontSize: 13, color: AppTheme.BLACK }}
                                 onPress={() => this.openScanModal("scan")}
                             />
 
                         <ButtonComponent
-                                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: "#A9A9A9", height: 30, width: "45%", marginHorizontal: 0 }]}
-                                btnText={Strings.save_all_scan.toUpperCase()}
+                                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor:AppTheme.WHITE, height: 30, width: "45%", marginHorizontal: 0 }]}
+                                btnText={Strings.save_all_scan}
                                 activeOpacity={0.8}
-                                customBtnTextStyle={{ fontSize: 12 }}
+                                customBtnTextStyle={{fontFamily: monospace_FF, fontSize: 13, color: AppTheme.BLACK }}
                                 onPress={this.onPressSaveInDB}
                             />
                         </View>
@@ -948,6 +989,8 @@ class MyScanComponent extends Component {
                     savingStatus={savingStatus}
                     bgColor={this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1: AppTheme.BLUE}
                     navigation={this.props.navigation}
+                    saveData={this.onPressSaveInDB}
+
               />
             </View>
         );

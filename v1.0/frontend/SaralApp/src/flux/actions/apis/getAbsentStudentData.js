@@ -24,7 +24,6 @@
      }
  
      apiEndPoint() {
-         // return `${super.apiEndPoint()}/app/v1/save-ocr-data`;
          return `${super.apiEndPoint()}/StudentsAPI/GetExamAttendanceWithStudentId`;
      }
  

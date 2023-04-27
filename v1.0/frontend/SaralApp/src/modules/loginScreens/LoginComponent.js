@@ -480,7 +480,7 @@ class LoginComponent extends Component {
                                         this.onLoginDetailsChange(text, 'schoolId')
                                     }}
                                     value={this.state.schoolId}
-                                    placeholder={Strings.schoolId_text}
+                                    placeholder={Strings.userId_text}
                                     placeholderTextColor={AppTheme.BLACK_OPACITY_30}
                                     autoCapitalize={'none'}
                                     importantForAutofill="yes"
@@ -546,8 +546,6 @@ class LoginComponent extends Component {
                     <View style={styles.container1}>
                         <Image style={{ width: 100, height: 100 }} source={{ uri: defaultBrandingdata && 'data:image/png;base64,' + this.props.defaultBrandingdata.logoImage }} />
                     </View>
-
-
                     <View style={styles.container2}>
                         <View style={styles.loginContainer}>
                             <Text style={[styles.header1TextStyle, { paddingTop: '5%',fontFamily : monospace_FF }]}>
@@ -568,7 +566,7 @@ class LoginComponent extends Component {
                                         this.onLoginDetailsChange(text, 'schoolId')
                                     }}
                                     value={this.state.schoolId}
-                                    placeholder={Strings.schoolId_text}
+                                    placeholder={Strings.userId_text}
                                     placeholderTextColor={AppTheme.BLACK_OPACITY_30}
                                     autoCapitalize={'none'}
                                 />

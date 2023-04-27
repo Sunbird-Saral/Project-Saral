@@ -1,11 +1,11 @@
 import React, { memo, useEffect, useState } from 'react';
-import { ActivityIndicator, Alert, Text, TouchableOpacity, View, Modal, StyleSheet, Dimensions } from 'react-native';
+import { ActivityIndicator, Text, TouchableOpacity, View, Modal, StyleSheet, Dimensions } from 'react-native';
 import { connect, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
 import AppTheme from '../../utils/AppTheme';
-import { getErrorMessage, getLoginCred, getPresentAbsentStudent, getScanData, getScannedDataFromLocal, setErrorMessage, setScannedDataIntoLocal } from '../../utils/StorageUtils';
-import { checkNetworkConnectivity, dispatchCustomModalMessage, dispatchCustomModalStatus, Exam_QuestionHeader, monospace_FF } from '../../utils/CommonUtils';
+import { getLoginCred, getPresentAbsentStudent, getScannedDataFromLocal, setScannedDataIntoLocal } from '../../utils/StorageUtils';
+import { checkAppVersion, checkNetworkConnectivity, dispatchCustomModalMessage, dispatchCustomModalStatus, Exam_QuestionHeader, monospace_FF } from '../../utils/CommonUtils';
 import ExamDetailsPopup from '../common/components/ExamDetailsPopup';
 import ButtonComponent from '../common/components/ButtonComponent';
 import Strings from '../../utils/Strings';
@@ -17,11 +17,14 @@ import { scanStatusDataAction } from '../ScanStatus/scanStatusDataAction';
 import axios from 'axios';
 import { ScrollView } from 'react-native-gesture-handler';
 import { collectErrorLogs } from '../CollectErrorLogs';
+import Constant from '../../flux/actions/constants';
+
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
 const HEIGHT_MODAL = 150;
 const ScanHistoryCard = ({
     showButtons = true,
+    showButtons1 = true,
     scanstatusbutton = true,
     navigation,
     filteredData,
@@ -49,12 +52,19 @@ const ScanHistoryCard = ({
         getStudentList()
     }, [])
     const getSaveCount = () => {
-        let hasSet = filteredData.response.hasOwnProperty("set") ? filteredData.response.set.length > 0 ? filteredData.response.set : '' : ''
+        let hasSet = filteredData.response.hasOwnProperty("set") ? filteredData.response.set.length >= 0 ? filteredData.response.set : '' : null
+       
         let data =
             typeof (scanedData.response) === "object" ?
                 scanedData.response.data ?
                     scanedData.response.data.filter((o, index) => {
-                        let stdCondition = hasSet.length > 0 ? o.studentAvailability && o.marksInfo.length > 0 && hasSet == o.set : o.studentAvailability && o.marksInfo.length > 0 && o.examDate == filteredData.response.examDate
+                        let stdCondition = hasSet == null ? 
+                         o.studentAvailability && o.marksInfo.length > 0 && o.examDate == filteredData.response.examDate
+                         :
+                          hasSet.length >= 0 ? o.studentAvailability && o.marksInfo.length > 0 && hasSet == o.set 
+                         :
+                          false
+
                         if (stdCondition) {
                             return true
                         }
@@ -67,8 +77,7 @@ const ScanHistoryCard = ({
         return data.length;
     }
 
-    const SAVED_SCANNED_DATA_INTO_LOCAL = 'saved_scanned_data_into_local'
-    const onPressContinue = () => {
+        const onPressContinue = () => {
         navigation.push('myScan')
     }
 
@@ -96,63 +105,54 @@ const ScanHistoryCard = ({
     const onPressSaveInDB = async () => {
         const data = await getScannedDataFromLocal();
         const hasNetwork = await checkNetworkConnectivity();
+        let hasUpdate = await checkAppVersion();
         const { subject, examDate } = filteredData.response
 
-        if (hasNetwork) {
-            if (data) {
-                if (!bgFlag) {
-                    
-            const filterData = data.filter((e) => {
-
-                let findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.response.section)
-        
-                if (e.classId == filteredData.response.class && e.subject == subject && e.examDate == examDate &&findSection) {
-                    return true
-                } else {
-                    return false
-                }
-            })
-
-            setIsLoading(true)
-            let filterDataLen = 0
-
-            let setIntolocalAfterFilter = ''
-            if (filterData.length != 0) {
-                filterData.filter((f) => {
-
-                    let findSection = f.studentsMarkInfo.some((item) => item.section == filteredData.response.section)
-
-                    setIntolocalAfterFilter = data.filter((e) => {
-                     
-                        if (e.classId == f.classId && e.subject == f.subject && e.examDate == f.examDate && findSection) {
-                            return false
+        if (!hasUpdate) {
+            if (hasNetwork) {
+                if (data) {
+                    if (!bgFlag) {
+                        const filterData = data.filter((e) => {
+                            let findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.response.section)
+                            if (e.classId == filteredData.response.class && e.subject == subject && e.examDate == examDate &&findSection) {
+                                return true
+                            } else {
+                                return false
+                            }
+                        })
+                        setIsLoading(true)
+                        let filterDataLen = 0
+                        let setIntolocalAfterFilter = ''
+                        if (filterData.length != 0) {
+                            filterData.filter((f) => {
+                                let findSection = f.studentsMarkInfo.some((item) => item.section == filteredData.response.section)
+                                setIntolocalAfterFilter = data.filter((e) => {
+                                    if (e.classId == f.classId && e.subject == f.subject && e.examDate == f.examDate && findSection) {
+                                        return false
+                                    } else {
+                                        return true
+                                    }
+                                })
+                            })
+                            let apiObj = new SaveScanData(filterData[0], loginData.data.token);
+                            saveScanData(apiObj, filterDataLen, setIntolocalAfterFilter);
                         } else {
-                            return true
+                            callCustomModal(Strings.message_text,Strings.there_is_no_data,false);
+                            setIsLoading(false)
                         }
-                    })
-                })
-
-                let apiObj = new SaveScanData(filterData[0], loginData.data.token);
-                saveScanData(apiObj, filterDataLen, setIntolocalAfterFilter);
-               
-
+                    }else{
+                        callCustomModal(Strings.message_text,Strings.auto_sync_in_progress_please_wait,false);
+                    }
+                }
+                else {
+                    setIsLoading(false)
+                    callCustomModal(Strings.message_text,Strings.there_is_no_data,false);
+                }
             } else {
-                callCustomModal(Strings.message_text,Strings.there_is_no_data,false);
-                setIsLoading(false)
+                callCustomModal(Strings.message_text, Strings.please_try_again_later_network_is_not_available, false, true)
             }
-        }else{
-            callCustomModal(Strings.message_text,Strings.auto_sync_in_progress_please_wait,false);
         }
-        
     }
-    else {
-        setIsLoading(false)
-        callCustomModal(Strings.message_text,Strings.there_is_no_data,false);
-        }
-    } else {
-        callCustomModal(Strings.message_text, Strings.please_try_again_later_network_is_not_available, false, true)
-    }
-}
     
     const saveScanData = async(api, filteredDatalen, localScanData) => {
 
@@ -168,13 +168,22 @@ const ScanHistoryCard = ({
                 .then(function (res) {
                     apiResponse = res;
                     clearTimeout(id);
-                    api.processResponse(res);
-                    dispatch(dispatchAPIAsync(api));
-                    callScanStatusData(filteredDatalen, localScanData)
+                    let hasMessage = res ? typeof res.data == "string" ? true : false : false
+                    if (hasMessage) {
+                        api.processResponse(res);
+                        callScanStatusData(filteredDatalen, localScanData)
+                        
+                    } else {
+                        dispatch(dispatchAPIAsync(res.data));
+                        setScanStatusData(filteredDatalen);
+                        setScannedDataIntoLocal(localScanData);
+                        callCustomModal(Strings.message_text,Strings.saved_successfully,false);
+                        setIsLoading(false);
+                    }
                 })
                 .catch(function (err) {
                     collectErrorLogs("ScanHistoryCard.js","saveScanData",api.apiEndPoint(),err,false);
-                    callCustomModal(Strings.message_text,err.response.data && err.response.data.error ? err.response.data.error  : Strings.contactAdmin,false);
+                    callCustomModal(Strings.message_text,err && err.response && err.response.data && err.response.data.error ? err.response.data.error  : Strings.contactAdmin,false);
                     clearTimeout(id);
                     setIsLoading(false);
                 });
@@ -193,6 +202,9 @@ const ScanHistoryCard = ({
             "page": 0,
             "schoolId": loginData.data.school.schoolId,
             "downloadRes": false
+        }
+        if (filteredData.response.hasOwnProperty("set")) {
+            dataPayload.set = filteredData.response.set
         }
         let apiObj = new scanStatusDataAction(dataPayload);
         FetchSavedScannedData(apiObj, loginCred.schoolId, loginCred.password, filteredDatalen, localScanData)
@@ -219,7 +231,7 @@ const ScanHistoryCard = ({
                     apiResponse = res
                     clearTimeout(id)
                     api.processResponse(res)
-                    dispatch(dispatchAPIAsync(api));
+                    dispatch(dispatchAPIAsyncSavedData(api));
                     setScanStatusData(filterDataLen)
                     setScannedDataIntoLocal(localScanData)
                     setIsLoading(false)
@@ -235,7 +247,14 @@ const ScanHistoryCard = ({
         }
     }
 
-    function dispatchAPIAsync(api) {
+    function dispatchAPIAsync(res) {
+        return {
+            type: Constant.SCANNED_DATA,
+            payload: res
+        }
+    }
+
+    function dispatchAPIAsyncSavedData(api) {
         return {
             type: api.type,
             payload: api.getPayload()
@@ -406,28 +425,61 @@ const ScanHistoryCard = ({
                     <View style={{ marginBottom: '5%', marginTop: '2%', width: '100%', alignItems: 'center' }}>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', width: '100%' }}>
                             <TouchableOpacity
-                                style={{ backgroundColor: AppTheme.GREY, borderRadius: 4, width: '80%', alignItems: 'center', justifyContent: 'center', elevation: 8, paddingVertical: 4 }}
+                                style={{
+                                    backgroundColor: AppTheme.WHITE, borderRadius: 4,
+
+                                    width: true ? '45%' : '80%',
+                                    alignItems: 'center', justifyContent: 'center', elevation: 8, paddingVertical: 4,
+                                    marginLeft: 5,
+                                    marginRight: 5
+                                }}
                                 onPress={onPressContinue}
                             >
-                                <Text  style={{fontFamily : monospace_FF,color : AppTheme.WHITE}} >{Strings.continue_scan}</Text>
+                                <Text style={{ fontFamily: monospace_FF, color: AppTheme.BLACK }} >{Strings.continue_scan}</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
                 }
-                 {
-                    scanstatusbutton
-                    &&
-                    <View style={{bottom:10,  width: '100%', alignItems: 'center' }}>
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', width: '100%' }}>
+
+                <View style={{ marginBottom: '3%', width: '100%', alignItems: 'center' }}>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', width: '100%' }}>
+                        {
+                            scanstatusbutton
+                            &&
+
                             <TouchableOpacity
-                                style={{ backgroundColor: AppTheme.GREY, borderRadius: 4, width: '80%', alignItems: 'center', justifyContent: 'center', elevation: 8, paddingVertical: 4 }}
-                                 onPress={onPressScanStatus}
+                                style={{
+                                    backgroundColor: AppTheme.WHITE, borderRadius: 4,
+
+                                    width: true ? '45%' : '80%',
+                                    alignItems: 'center', justifyContent: 'center', elevation: 8, paddingVertical: 4,
+                                    marginLeft: 5,
+                                    marginRight: 5
+                                }}
+                                onPress={onPressScanStatus}
                             >
-                                <Text  style={{fontFamily : monospace_FF, color : AppTheme.WHITE}}>{Strings.scan_status}</Text>
+                                <Text style={{ fontFamily: monospace_FF, color: AppTheme.BLACK }}>{Strings.scan_status}</Text>
                             </TouchableOpacity>
-                        </View>
+
+                        }
+                        {
+                            scanstatusbutton
+                            &&
+                            <TouchableOpacity
+                                style={{
+                                    backgroundColor: AppTheme.WHITE, borderRadius: 4, width: '45%',
+                                    alignItems: 'center', justifyContent: 'center', elevation: 8, paddingVertical: 4,
+                                    marginLeft: 5,
+                                    marginRight: 5
+                                }}
+                                onPress={onPressSaveInDB}
+                            >
+                                <Text style={{ fontFamily: monospace_FF, color: AppTheme.BLACK }}>{Strings.save_scan}</Text>
+                            </TouchableOpacity>}
                     </View>
-                }
+                </View>
+
+
 
             </TouchableOpacity>
 
@@ -517,8 +569,6 @@ const mapStateToProps = (state) => {
         studentsAndExamData : state.studentsAndExamData,
         apiStatus: state.apiStatus,
         bgFlag: state.bgFlag,
-        studentsAndExamData: state.studentsAndExamData,
-        apiStatus: state.apiStatus,
         multiBrandingData: state.multiBrandingData.response.data
     }
 }

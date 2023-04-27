@@ -1,0 +1,29 @@
+{
+    "_id": "63bfe9316fd64c62fc931d56",
+    "set": [],
+    "subject": "midday-meal",
+    "examLO": "midday-meal",
+    "classId": "2",
+    "examDate": "07/01/2022",
+    "totalMarks": 20,
+    "type": "any_20s_midday_meal",
+    "questions": [
+      {
+        "questionId": "ROLLNUMBER1_Q1",
+        "tags": [],
+        "indicatorTitle": "L0-1",
+        "questionMarks": "1"
+      },
+      {
+        "questionId": "ROLLNUMBER2_Q1",
+        "tags": [],
+        "indicatorTitle": "L0-1",
+        "questionMarks": "1"
+      }
+    ],
+    "examId": 22,
+    "schoolId": "u002",
+    "createdAt": "2023-01-12T11:04:17.520Z",
+    "updatedAt": "2023-01-12T11:04:17.520Z",
+    "__v": 0
+  }

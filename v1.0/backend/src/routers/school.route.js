@@ -1,27 +1,31 @@
 const express = require('express')
-const School = require('../models/school')
-const ClassModel = require('../models/classModel')
-const Student = require('../models/students')
-const Mark = require('../models/marks')
-const { auth } = require('../middleware/auth')
-const { stringObject } = require('../utils/commonUtils')
-const Helper = require('../middleware/helper')
-const router = new express.Router()
+const router = express.Router({ mergeParams: true });
+const Schools = require('../models/school')
+const Classes = require("../models/classes")
+const Students = require("../models/students")
+const Marks = require("../models/marks")
+const schoolController = require("../controller/schoolController")
+const { stringObject } = require('../utils/commonUtils');
+const { auth } = require('../middleware/auth');
+
+
+router.route('/schools/login').post(schoolController.loginSchool)
 
 
 router.post('/schools/create', async (req, res) => {
-    const school = new School({ ...req.body })
+    const school = new Schools({ ...req.body })
     try {
+
         school.state = req.body.state.toLowerCase()
         school.schoolId = req.body.schoolId.toLowerCase()
 
         if (req.body.autoSync) school.autoSync = req.body.autoSync
-        if(req.body.autoSyncFrequency)   school.autoSyncFrequency = req.body.autoSyncFrequency
-        if(req.body.tags) school.tags = req.body.tags
-        if(req.body.autoSyncBatchSize)   school.autoSyncBatchSize = req.body.autoSyncBatchSize
-       
-        
+        if (req.body.autoSyncFrequency) school.autoSyncFrequency = req.body.autoSyncFrequency
+        if (req.body.tags) school.tags = req.body.tags
+        if (req.body.autoSyncBatchSize) school.autoSyncBatchSize = req.body.autoSyncBatchSize
+
         await school.save()
+
         let schools = {
             storeTrainingData: school.storeTrainingData,
             name: school.name,
@@ -29,8 +33,8 @@ router.post('/schools/create', async (req, res) => {
             state: school.state,
             district: school.district
         }
-        const token = await school.generateAuthToken()
-        res.status(201).send({ schools, token })
+
+        res.status(201).send({ schools })
     } catch (e) {
         if (e.message.includes(' duplicate key error')) {
             let key = Object.keys(e.keyValue)
@@ -41,10 +45,9 @@ router.post('/schools/create', async (req, res) => {
     }
 })
 
-
 router.get('/schools', async (req, res) => {
     try {
-        const school = await School.find({})
+        const school = await Schools.find({})
         let schools = []
         if (school) {
             school.forEach(element => {
@@ -64,74 +67,17 @@ router.get('/schools', async (req, res) => {
     }
 })
 
-router.post('/schools/login', async (req, res) => {
-    try {
-        const schools = await School.findByCredentials(req.body.schoolId.toLowerCase(), req.body.password)
-        
-        await Helper.lockScreenValidator(schools)
-        const token = await schools.generateAuthToken()
-        let classes = []
-        let school = {
-            storeTrainingData: schools.storeTrainingData,
-            name: schools.name,
-            schoolId: schools.schoolId,
-            state: schools.state,
-            district: schools.district,
-            autoSync: schools.autoSync,
-            autoSyncFrequency: schools.autoSyncFrequency,
-            tags: schools.tags,
-            autoSyncBatchSize: schools.autoSyncBatchSize,
-            isMinimalMode: schools.isMinimalMode,
-            supportEmail: schools.supportEmail,
-            offlineMode: schools.offlineMode,
-            lock: schools.lock
-        }
-
-        let response = {
-            school,
-            token
-        }
-        if (req.body.classes) {
-            const classData = await ClassModel.findClassesBySchools(schools.schoolId)
-
-            classData.forEach(data => {
-                const { sections, classId, className } = data
-                let obj = {
-                    sections,
-                    classId,
-                    className
-                }
-                classes.push(obj)
-            });
-            classes.sort((a, b) => a.classId.trim().localeCompare(b.classId.trim()))
-            response.classes = classes
-        }
-
-        res.send(response)
-    } catch (e) {
-        if (e && e.message == 'School Id or Password is not correct.') {
-            res.status(422).send({ error: e.message })
-        }
-        else if(e && e.message == stringObject().lockScreen){
-            res.status(500).send({ error: e.message })
-        }
-        else {
-            res.status(400).send(e)
-        }
-    }
-})
-
 router.delete('/schools/:schoolId', async (req, res) => {
     try {
-        const school = await School.findOne({ schoolId: req.params.schoolId.toLowerCase() })
+        const school = await Schools.findOne({ schoolId: req.params.schoolId.toLowerCase() })
         if (!school) return res.status(404).send({ message: 'School Id does not exist.' })
         let lookup = {
             schoolId: school.schoolId
         }
-        await School.deleteOne(lookup).lean()
-        await ClassModel.findOneAndRemove(lookup).lean()
-        await Student.findOneAndRemove(lookup).lean()
-        await Mark.findOneAndRemove(lookup).lean()
+        await Schools.deleteOne(lookup).lean()
+        await Classes.findOneAndRemove(lookup).lean()
+        await Students.findOneAndRemove(lookup).lean()
+        await Marks.findOneAndRemove(lookup).lean()
         res.status(200).send({ message: 'School has been deleted.' })
     }
     catch (e) {
@@ -144,7 +90,7 @@ router.patch('/schools/:schoolId', async (req, res) => {
     try {
         if (Object.keys(req.body).length === 0) res.status(400).send({ message: 'Validation error.' })
         const updates = Object.keys(req.body)
-        const allowedUpdates = ['name', 'state', 'district','udisceCode', 'storeTrainingData', 'autoSync', 'autoSyncFrequency','tags','autoSyncBatchSize']
+        const allowedUpdates = ['name', 'state', 'district', 'udisceCode', 'storeTrainingData', 'autoSync', 'autoSyncFrequency', 'tags', 'autoSyncBatchSize']
         const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
 
         if (!isValidOperation) {
@@ -155,10 +101,10 @@ router.patch('/schools/:schoolId', async (req, res) => {
         }
         let update = req.body
 
-        const school = await School.findOne(lookup).lean();
+        const school = await Schools.findOne(lookup).lean();
         if (!school) return res.status(404).send({ message: 'School Id does not exist.' })
 
-        await School.updateOne(lookup, update).lean().exec();
+        await Schools.updateOne(lookup, update).lean().exec();
         res.status(200).send({ message: 'School has been updated.' })
 
     }

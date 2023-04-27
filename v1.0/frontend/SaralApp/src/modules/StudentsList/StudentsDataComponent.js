@@ -48,7 +48,7 @@ const StudentsDataComponent = ({
         const hasNetwork = await checkNetworkConnectivity()
         let isStudentScannedInLocal = ''
         let filterStdData           = ''
-
+        let hasSet = filteredData.hasOwnProperty("set") ? filteredData.set.length >= 0 ? filteredData.set : '' : null
         if (stdData != null) {
              filterStdData = stdData.filter((e, i) => {
 
@@ -60,11 +60,26 @@ const StudentsDataComponent = ({
             })
 
             if (filterStdData.length > 0) {
-                isStudentScannedInLocal = filterStdData[0].studentsMarkInfo.filter((o) => { return o.studentId == data.studentId && o.studentAvailability === true && o.marksInfo.length > 0})
+                isStudentScannedInLocal = filterStdData[0].studentsMarkInfo.filter((o) => {
+                    if (hasSet != null && hasSet.length >= 0) {
+                        return o.studentId == data.studentId && o.studentAvailability === true && o.marksInfo.length > 0 && hasSet == o.set
+                    } else {
+                        return o.studentId == data.studentId && o.studentAvailability === true && o.marksInfo.length > 0 
+                    }
+                })
             }
         }
 
-        const isSheetScanned = typeof (scanedData) === 'object' && scanedData.hasOwnProperty("data") ? scanedData.data.length > 0 && scanedData.data.filter((o) => o.studentId == data.studentId && o.studentAvailability === true && o.marksInfo.length > 0) : []
+        const isSheetScanned = typeof (scanedData) === 'object' && scanedData.hasOwnProperty("data") ? scanedData.data.length > 0 && scanedData.data.filter((o) => {
+            if (hasSet != null && hasSet.length >= 0) {
+                return o.studentId == data.studentId && o.studentAvailability === true && o.marksInfo.length > 0 && hasSet == o.set
+            } else {
+                return o.studentId == data.studentId && o.studentAvailability === true && o.marksInfo.length > 0 
+            }
+        })
+        :
+         []
+        
         if (isStudentPresent) {
             if (isSheetScanned.length > 0 || isStudentScannedInLocal.length > 0) {
                 let data = {
@@ -79,14 +94,14 @@ const StudentsDataComponent = ({
                 setIsPresent(false)
                 checkStdAbsPrst(data, chkPresent, filteredData, false)
             }
-            if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode && (isSheetScanned.length == 0 || isStudentScannedInLocal.length == 0)) {
+            if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode && (isSheetScanned.length == 0 && isStudentScannedInLocal.length == 0)) {
                 saveStudentIntoLocalStorage(data.studentId, isStudentPresent, filterStdData, stdData)
             } 
         } else if (data.studentAvailability == false) {
             data.studentAvailability = true
             setIsPresent(true)
             checkStdAbsPrst(data, chkPresent, filteredData, true)
-            if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode && (isSheetScanned.length == 0 || isStudentScannedInLocal.length == 0)) {
+            if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode && (isSheetScanned.length == 0 && isStudentScannedInLocal.length == 0)) {
                 saveStudentIntoLocalStorage(data.studentId, false, filterStdData, stdData)
             } 
         }
@@ -108,6 +123,12 @@ const StudentsDataComponent = ({
             "totalMarks": 0,
             "studentAvailability": !studentAvailability
         }
+
+        let hasSet = filteredData.hasOwnProperty("set") ? filteredData.set.length >= 0 ? filteredData.set : '' : '' 
+        if(hasSet != null && hasSet.length >= 0){
+            stdObj.set = hasSet
+        }
+
         if (filterStdData.length > 0) {
             let chkStdPresent = filterStdData[0].studentsMarkInfo.findIndex((val) => val.studentId == studentId && val.marksInfo.length == 0);
             if (chkStdPresent > -1) {
@@ -159,9 +180,9 @@ const StudentsDataComponent = ({
                     {
                         isPresent
                             ?
-                            <Text style={[styles.markasAbsent, { backgroundColor: themeColor1 ? themeColor1 : AppTheme.LIGHT_BLUE,fontFamily : monospace_FF }]}>Mark as Absent</Text>
+                            <Text style={[styles.markasAbsent, { backgroundColor: themeColor1 ? themeColor1 : AppTheme.LIGHT_BLUE,fontFamily : monospace_FF }]}>{Strings.Mark_Absent}</Text>
                             :
-                            <Text style={[styles.markasPresent, { backgroundColor: themeColor2 ? themeColor2 : AppTheme.LIGHT_BLUE,fontFamily : monospace_FF }]}>Mark as Present</Text>
+                            <Text style={[styles.markasPresent, { backgroundColor: themeColor2 ? themeColor2 : AppTheme.LIGHT_BLUE,fontFamily : monospace_FF }]}>{Strings.Mark_Present}</Text>
                     }
                 </TouchableOpacity>
 

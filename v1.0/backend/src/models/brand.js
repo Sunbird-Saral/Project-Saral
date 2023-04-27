@@ -20,14 +20,7 @@ const BrandSchema = new mongoose.Schema({
     },
     state:{
         type: String,
-        // required: true,
         trim: true
-    },
-    schoolId: {
-        type: String,
-        unique: true,
-        // required: true,
-        trim: true,
     },
     screenLabels: {
         selectDetails: [{
@@ -155,6 +148,9 @@ const BrandSchema = new mongoose.Schema({
            CorrectId:{
                type: String
             },
+            RecordNo:{
+                type: String
+            },
            ListTableHeading:{
                type:Array
             }
@@ -164,7 +160,8 @@ const BrandSchema = new mongoose.Schema({
     timestamps: true
 })
 
+BrandSchema.index({ state: -1 }, { unique: true });
 
-const Brand = mongoose.model('Brand', BrandSchema)
+const Brands = mongoose.model('Brand', BrandSchema)
 
-module.exports = Brand
+module.exports = Brands

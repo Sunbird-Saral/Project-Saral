@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, BackHandler, Pressable, Dimensions } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import AppTheme from '../../utils/AppTheme';
 import { monospace_FF, MARKS_INFO,MARKS_INFO_DEFAULT} from '../../utils/CommonUtils';
 import ModalPopup from '../common/components/Modal';
@@ -65,7 +65,7 @@ const ScanStatusLocalList = ({
                 data={
                     <View style={{  }}>
                         <Text style={styles.textStyle}>{`studentId : `}<Text style={{fontWeight:'normal',fontFamily : monospace_FF}}>{`${scanitemdata&&scanitemdata.studentId}`}</Text></Text>
-                        <Text style={styles.textStyle}>{`predictedStudentId : ` }<Text style={{fontWeight:'normal',fontFamily : monospace_FF}}>{`${scanitemdata&&scanitemdata.predictedStudentId}`}</Text></Text>
+                        <Text style={styles.textStyle}>{`predictedStudentId : ` }<Text style={{fontWeight:'normal',fontFamily : monospace_FF}}>{`${scanitemdata&&scanitemdata.predictedStudentId ? scanitemdata.predictedStudentId : '' }`}</Text></Text>
                         <Text style={styles.textStyle}>{`section : ` }<Text style={{fontWeight:'normal',fontFamily : monospace_FF}}>{`${scanitemdata&&scanitemdata.section}`}</Text></Text>
                         <Text style={styles.textStyle}>{`studentAvailability : ` }<Text style={{fontWeight:'normal',fontFamily : monospace_FF}}>{`${scanitemdata&&scanitemdata.studentAvailability}`}</Text></Text>
                         <Text style={styles.textStyle}>{`marksInfo : `}</Text>
@@ -119,14 +119,14 @@ const ScanStatusLocalList = ({
                                     <View M={M} key={i} style={{ flexDirection: 'row' }}>
 
                                         <MarksHeaderTable
-                                            customRowStyle={{width:width/4.5 }}
+                                            customRowStyle={{height:height/12,width:width/4.5 }}
                                             rowTitle={renderSRNo(M, i)}
                                             rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                             editable={false}
                                             keyboardType={'number-pad'}
                                         />
                                         <MarksHeaderTable
-                                            customRowStyle={{ width:width/4.5 }}
+                                            customRowStyle={{height:height/12, width:width/4.5 }}
                                             rowTitle={M.questionId}
                                             rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                             editable={false}
@@ -134,14 +134,14 @@ const ScanStatusLocalList = ({
                             
                                         />
                                         <MarksHeaderTable
-                                            customRowStyle={{width:width/4.5 }}
+                                            customRowStyle={{height:height/12,width:width/4.5 }}
                                             rowTitle={M.obtainedMarks}
                                             rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                             editable={false}
                                             keyboardType={'number-pad'}
                                         />
                                         <MarksHeaderTable
-                                            customRowStyle={{width:width/4.5 }}
+                                            customRowStyle={{height:height/12,width:width/4.5 }}
                                             rowTitle={M.predictedMarks}
                                             rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                             editable={false}
@@ -198,6 +198,7 @@ const styles = StyleSheet.create({
     nxtBtnStyle1: {
         padding: 5, marginVertical: 5, height: 35, width: 150
     },
+    nxtBtnStyle:{marginHorizontal:20, borderRadius: 10,height: 40, width: width/1.5,padding: 5, marginTop:10 },
     buttonText: {
         fontSize: 14
     }

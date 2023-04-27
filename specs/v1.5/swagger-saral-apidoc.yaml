@@ -720,6 +720,10 @@ definitions:
             type: boolean
             description: "If this is set to true , app can operate in offline mode after frist navigation ."
             example: true
+          userId:
+            type: string
+            description: "School user id"
+            example: "9417856"
           
       classes:
             $ref: '#/definitions/classResponse'
@@ -757,6 +761,7 @@ definitions:
     properties:
       schoolId:
         type: string
+        description: "It can be school id or school user id"
         example: "u001"
       password:
         type: string
@@ -827,7 +832,8 @@ definitions:
             example: "up"
           district:
             type: string
-            example:" district 1"
+            example: "district1"
+            
       token:
         type: object
         example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTMwOWQyYjJlNzEyMzAyZGY5NmM3NjEiLCJpYXQiOjE2MzA1NzU5MTV9.FCt2Q4R_sN1ctdOfoOPzBzfdUohAPA-TlLFtJJEeTBE"
@@ -863,9 +869,9 @@ definitions:
         type: number
         description:  "Limit of student records to be stored in local storage before we push to backend."
         example: 10
-          district:
-            type: string
-            example:" district 1"
+      district:
+        type: string
+        example: "district1"
         
   UpdateStudentBody:
     type: object
@@ -874,7 +880,10 @@ definitions:
     properties:
       name: 
         type: string
-        example: "1210001"
+        example: "Student 1"
+      classId:
+        type: string
+        example: 3
         
   GetSavedScanBody:
     type: object
@@ -1134,14 +1143,22 @@ definitions:
         type: string
         description: "Student ID"
         example: "1210001"
-      studentClass:
-        $ref: '#/definitions/StudentClass'
+      classId:
+        type: string
+        example: 2
+      className:
+        type: string
+        example: "Class-2"
         
   FetchStudentsByQueryResponse:
     type: object
     properties:
-      studentClass:
-        $ref: '#/definitions/StudentClassName'
+      classId:
+        type: string
+        example: 2
+      className:
+        type: string
+        example: "Class-2"
       section:
         type: string
         example: "D"
@@ -1160,8 +1177,12 @@ definitions:
     items:
       type: object
       properties: 
-        studentClass:
-          $ref: '#/definitions/StudentClassName'
+        classId:
+          type: string
+          example: "2"
+        className:
+          type: string
+          example: "Class-2"
         section:
           type: string
           example: "D"
@@ -1181,8 +1202,12 @@ definitions:
   CreateStudentResponse:
     type: object
     properties:
-      studentClass: 
-        $ref: '#/definitions/StudentClassName' 
+      classId:
+        type: string
+        example: 2
+      className:
+        type: string
+        example: "Class-2"
       section:
         type: string
         description: "Class Section"

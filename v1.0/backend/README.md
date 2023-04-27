@@ -63,3 +63,22 @@
 # swagger documentation
 $BASE_URL/api-docs/saral/frontend/
 $BASE_URL/api-docs/saral/maintenance/
+
+# Below command to be executed for unit test case .
+
+>> `npm run test`
+
+
+# Below command to be exceuted for profiling .
+
+>> db.getProfilingStatus()
+
+* We can then change the status of the MongoDB profiler according to what we want it to do.
+
+>> Level 0 – The profiler is off and does not collect any data. This is the default profiler level.
+>> Level 1 – The profiler collects data for operations that take longer than the value of slowms, which you can set.
+>> Level 2 – The profiler collects data for all operations.
+
+>> db.setProfilingLevel(2)
+>> db.setProfilingLevel(2, {slowns: 1})
+>> show collections 

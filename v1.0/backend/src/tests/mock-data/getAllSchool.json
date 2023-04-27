@@ -1,0 +1,77 @@
+{
+    "status": "success",
+    "data": {
+      "schools": [
+        {
+          "name": "Dummy school 1",
+          "schoolId": "u001",
+          "state": "up",
+          "district": "district1",
+          "storeTrainingData": true
+        },
+        {
+          "name": "Dummy school 2",
+          "schoolId": "od001",
+          "state": "odisha",
+          "district": "district2",
+          "storeTrainingData": true
+        },
+        {
+          "name": "Dummy school 3",
+          "schoolId": "demouser",
+          "state": "gujrat",
+          "district": "district3",
+          "storeTrainingData": true
+        },
+        {
+          "name": "Dummy school 4",
+          "schoolId": "u002",
+          "state": "up",
+          "district": "district1",
+          "storeTrainingData": true
+        },
+        {
+          "name": "Dummy Skill School",
+          "schoolId": "skill001",
+          "state": "karnataka",
+          "district": "district4",
+          "storeTrainingData": true
+        },
+        {
+          "name": "Dummy school 5",
+          "schoolId": "a001",
+          "state": "assam",
+          "district": "district5",
+          "storeTrainingData": true
+        },
+        {
+          "name": "Dummy Organization",
+          "schoolId": "m001",
+          "state": "mp",
+          "district": "district6",
+          "storeTrainingData": true
+        },
+        {
+          "name": "Ps Vishnupura",
+          "schoolId": "09670702901",
+          "state": "up",
+          "district": "district1",
+          "storeTrainingData": true
+        },
+        {
+          "name": "Ps Phoolpur",
+          "schoolId": "09670703101",
+          "state": "up",
+          "district": "district1",
+          "storeTrainingData": true
+        },
+        {
+          "name": "Dummy school 5",
+          "schoolId": "jk001",
+          "state": "jharakhand",
+          "district": "district7",
+          "storeTrainingData": true
+        }
+      ]
+    }
+  }
