@@ -96,7 +96,8 @@ exports.getSaveScan = async (req, res, next) => {
         const { schoolId, classId, section, subject, fromDate, roiId } = req.body
 
         if (schoolId) {
-            match.schoolId = schoolId
+            match.schoolId = schoolId,
+            $comment = "Get Saved Scan API for Find Marks Data"
         }
 
         if (fromDate) {
@@ -127,7 +128,7 @@ exports.getSaveScan = async (req, res, next) => {
             req.body.page = 1;
         }
 
-        const savedScan = await Marks.find({match, $comment: "Get Saved Scan API for Find Marks Data"} ,{ _id: 0, __v: 0 })
+        const savedScan = await Marks.find(match ,{ _id: 0, __v: 0 })
             .limit(parseInt(req.body.limit) * 1)
             .skip((parseInt(parseInt(req.body.page)) - 1) * parseInt(parseInt(req.body.limit)))
 
