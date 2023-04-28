@@ -13,7 +13,7 @@ exports.fetchStudentsandExams = async (req, res, next) => {
     match.schoolId = req.school.schoolId
     if (req.query.classId) {
         match.classId = req.query.classId,
-        examMatch.classId = req.query.classId
+            examMatch.classId = req.query.classId
     } else {
         return res.status(404).json({ message: 'Please send classId' })
     }
@@ -49,7 +49,7 @@ exports.fetchStudentsandExams = async (req, res, next) => {
                 lookup.set = req.query.set 
             }
 
-            let marks = await Marks.findOne(lookup)
+            let marks = await Marks.findOne({lookup, $comment: "Find Students Marks"})
 
             if (marks && typeof marks == "object") {
                 student["studentAvailability"] = marks.studentAvailability

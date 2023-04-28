@@ -414,10 +414,21 @@ class MyScanComponent extends Component {
                 let isManualEditEnabled   =  this.props.loginData.data.school.hasOwnProperty("isManualEditEnabled") ? this.props.loginData.data.school.isManualEditEnabled : false
                 SaralSDK.startCamera(JSON.stringify(jsonRoiData), pageNumber, hasTimer, isManualEditEnabled).then(res => {
                     let roisData = JSON.parse(res);
-                    let cells = roisData.layout.cells;
-                    this.consolidatePrediction(cells, roisData)
+                    console.log('roisData.hasOwnProperty("hwDigitModel")' +roisData.hasOwnProperty("hwDigitModel"));
+
+                    if (roisData.hasOwnProperty("hwDigitModel") && roisData.hwDigitModel) {
+                        this.callCustomModal(Strings.message_text, Strings.Digit_model_is_not_availaible, false);
+                    
+                    } else if (roisData.hasOwnProperty("blockLetterModel") && roisData.blockLetterModel) {
+                        this.callCustomModal(Strings.message_text, Strings.Alpha_numeric_model_is_not_availaible, false);
+                    
+                    } else {
+                        let cells = roisData.layout.cells;
+                        this.consolidatePrediction(cells, roisData)
+                    }
 
                 }).catch((code, message) => {
+                    console.log("code",code,message);
                 })
             } else {
             }

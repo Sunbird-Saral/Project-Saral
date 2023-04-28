@@ -137,6 +137,11 @@ android {
         versionCode 1
         versionName "1.0"
     }
+    configurations.all {
+            resolutionStrategy {
+                force 'androidx.browser:browser:1.2.0'
+            }
+        }
     splits {
         abi {
             reset()
@@ -210,7 +215,7 @@ dependencies {
 
     implementation 'com.github.bumptech.glide:glide:4.13.2'
   
-
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.2'
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
@@ -225,7 +230,9 @@ dependencies {
     implementation project(path: ':saralsdk')
     // new code for google firebase analytics
 
-    implementation platform('com.google.firebase:firebase-bom:31.2.3')
+    implementation platform('com.google.firebase:firebase-bom:26.8.0')
+
+    implementation 'com.google.firebase:firebase-config:18.0.0'
 
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-crashlytics'
@@ -268,3 +275,14 @@ task copyDownloadableDepsToLibs(type: Copy) {
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
 // SaralSDK uses Firebase library to load and make model prediction
 
+def modelDir = "$rootDir/saralsdk/src/models"
+def hwAlphaNumeric = "**/*new_saral_hwdaln_model.tflite"
+def hwDigit = "**/*saral_hwd_model.tflite"
+
+task copyModelAssets(type: Copy) {
+    from(modelDir) {
+          include hwDigit
+          exclude hwAlphaNumeric
+    }
+    into '../saralsdk/src/main/assets'
+}

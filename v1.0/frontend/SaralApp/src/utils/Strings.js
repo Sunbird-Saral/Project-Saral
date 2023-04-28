@@ -138,6 +138,8 @@ export default strings = new LocalizedStrings({
         Mark_Present:"Mark as Present",
         Saral:"Saral",
         Registred_Mob_No:'Registered Mobile Number',
-        Summary_page : 'Summary Page'
+        Summary_page : 'Summary Page',
+        Digit_model_is_not_availaible: "Digit model is not availaible",
+        Alpha_numeric_model_is_not_availaible: "Alpha numeric model is not availaible"
     }
 })

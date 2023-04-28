@@ -1,42 +1,36 @@
 package org.ekstep.saral.saralsdk;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Bitmap;
 import android.media.MediaActionSound;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Looper;
 import android.os.SystemClock;
+import android.util.Base64;
 import android.util.Log;
 import android.view.SurfaceView;
 import android.view.Window;
 import android.view.WindowManager;
-import android.util.Base64;
-import android.graphics.Bitmap;
-import org.opencv.android.Utils;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactInstanceManager;
-import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.ReactContext;
+import com.facebook.react.modules.core.DeviceEventManagerModule;
 
-import org.ekstep.saral.saralsdk.hwmodel.HWClassifier;
 import org.ekstep.saral.saralsdk.hwmodel.HWBlockLettersClassifier;
+import org.ekstep.saral.saralsdk.hwmodel.HWClassifier;
 import org.ekstep.saral.saralsdk.hwmodel.PredictionListener;
 import org.ekstep.saral.saralsdk.opencv.DetectShaded;
 import org.ekstep.saral.saralsdk.opencv.TableCornerCirclesDetection;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase;
-import org.opencv.android.LoaderCallbackInterface;
-import org.opencv.android.OpenCVLoader;
+import org.opencv.android.Utils;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
@@ -44,12 +38,9 @@ import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.Map;
 
 public class SaralSDKOpenCVScannerActivity extends ReactActivity implements CameraBridgeViewBase.CvCameraViewListener2 {
     private static final String  TAG                    = "SrlSDK::Scanner";
@@ -108,10 +99,49 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
             timeInMiliSecond        = timer > 0 ? timer : 60000;
             hasEditEnable           = isManualEditEnabled ? isManualEditEnabled : false;
 
-            Log.d(TAG, "Scanner type: " + mlayoutConfigs);
-            Log.d(TAG, "Page Number" + pageNumber);
             timerTask(mlayoutConfigs, pageNumber);
-        }
+            boolean hwdNotAVailable           = HWClassifier.getInstance().isModelAvailable() == false;
+            boolean hwBlockLetterNotAVailable = HWBlockLettersClassifier.getInstance().isModelAvailable() == false;
+            boolean isDigitLayout             = false, isBlockLetterLayout = false;
+
+            ReactInstanceManager mReactInstanceManager  = getReactNativeHost().getReactInstanceManager();
+            ReactContext reactContext                   = mReactInstanceManager.getCurrentReactContext();
+            reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("message","Model Not Available");
+            Intent intent                               = new Intent(reactContext, SaralSDKOpenCVScannerActivity.class);
+            try {
+                JSONObject layoutConfigs        =  new JSONObject(mlayoutConfigs);
+                JSONObject  layoutObject        = layoutConfigs.getJSONObject("layout");
+                JSONArray   cells               = layoutObject.getJSONArray("cells");
+                JSONObject  cell                = cells.getJSONObject(0);
+                JSONArray   cellROIs            = cell.getJSONArray("rois");
+                JSONObject  roi                 = cellROIs.getJSONObject(0);
+                isDigitLayout                   = roi.getString("extractionMethod").equals("NUMERIC_CLASSIFICATION");
+                isBlockLetterLayout             = roi.getString("extractionMethod").equals("BLOCK_ALPHANUMERIC_CLASSIFICATION");
+            } catch (Exception e) {
+
+            }
+            if (hwdNotAVailable && isDigitLayout){
+                try {
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("hwDigitModel", true);
+                    intent.putExtra("isModelAvailable",  jsonObject.toString());
+                    mReactInstanceManager.onActivityResult(this, 2, 2, intent);
+                    finish();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            } else if (hwBlockLetterNotAVailable && isBlockLetterLayout){
+                try {
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("blockLetterModel", true);
+                    intent.putExtra("isModelAvailable", jsonObject.toString());
+                    mReactInstanceManager.onActivityResult(this, 2, 2, intent);
+                    finish();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }else
+        
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_scanner);
@@ -124,7 +154,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
         mOpenCvCameraView.setCameraPermissionGranted();
         mOpenCvCameraView.enableView();
     }
-
+}
     @Override
     public void onPause()
     {
