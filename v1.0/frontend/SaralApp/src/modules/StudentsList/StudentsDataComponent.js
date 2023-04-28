@@ -167,22 +167,21 @@ const StudentsDataComponent = ({
             }
         }
     }
-
     return (
-        <View style={{flexDirection:'row',margin:4,justifyContent:'center', alignItems:'center'}}>
-             <View style={{width:AppTheme.WIDTH_15,height:AppTheme.HEIGHT_60,borderWidth:0.5,justifyContent:'center',alignItems:'center',backgroundColor:AppTheme.WHITE}}>
+        <View style={{flex:1, flexDirection:'row',margin:4,justifyContent:'center', alignItems:'center'}}>
+             <View style={{width:AppTheme.WIDTH_15,height:item.name.length > 50 ? AppTheme.HEIGHT_70 : AppTheme.HEIGHT_60,borderWidth:0.5,justifyContent:'center',alignItems:'center',backgroundColor:AppTheme.WHITE}}>
              <Text>{index + 1}</Text>
 
              </View>
-             <View style={{width:'60%',backgroundColor:AppTheme.WHITE}}>
+             <View style={{width:AppTheme.WIDTH_60 ,backgroundColor:AppTheme.WHITE}}>
              <View style={{height:AppTheme.HEIGHT_25,borderWidth:0.5,justifyContent:'center'}}>
              <Text style={{marginLeft:10}}>{item.studentId}</Text>
              </View>
-             <View style={{height:AppTheme.HEIGHT_25,borderWidth:0.5,justifyContent:'center'}}>
-             <Text style={{marginLeft:10}}>{`${item.name} ${item.fatherName ? '/' + item.fatherName : ''}`}</Text>
+             <View style={{height:item.name.length > 50 ? AppTheme.HEIGHT_30 : AppTheme.HEIGHT_25,borderWidth:0.5,justifyContent:'center'}}>
+             <Text style={{marginLeft:10}}>{`${item.name}${item.fatherName ? '/' + item.fatherName : ''}`}</Text>
              </View>
              </View>
-             <View style={{}}>
+             <View style={{width:AppTheme.WIDTH_15}}>
              
                             <TouchableOpacity
                     activeOpacity={0.7}

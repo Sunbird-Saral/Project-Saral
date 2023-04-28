@@ -22,7 +22,7 @@ const AppTheme = {
     HEIGHT_30:responsiveHeight(10),
     HEIGHT_50:responsiveHeight(7),
     HEIGHT_60:responsiveHeight(10),
-    HEIGHT_70:responsiveHeight(12),
+    HEIGHT_70:responsiveHeight(15),
     WIDTH_10:responsiveWidth(10),
     WIDTH_15:responsiveWidth(15),
     WIDTH_20:responsiveWidth(20),
@@ -30,6 +30,7 @@ const AppTheme = {
     WIDTH_40:responsiveWidth(40),
     WIDTH_50:responsiveWidth(50),
     WIDTH_60:responsiveWidth(60),
+    WIDTH_70:responsiveWidth(70),
 
 
 

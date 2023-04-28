@@ -795,46 +795,54 @@ class MyScanComponent extends Component {
         return (
 
             <View style={{ flex: 1, backgroundColor: multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.WHITE_OPACITY }}>
-                 <View style={{flexDirection:'row-reverse',justifyContent:'space-between'}}>
+               {
+                     !this.props.minimalFlag ?
                 <ShareComponent
                     navigation={this.props.navigation}
+                    onPress={()=>this.props.navigation.navigate('StudentsList')}
+                />:
+                <ShareComponent
+                    navigation={this.props.navigation}
+                    onPress={()=>this.props.navigation.navigate('Home')}
                 />
+               }
+                <View>
                 <View>
                     {(BrandLabel) ?
                         <MultibrandLabels
-                            Label1={BrandLabel.School}
+                            // Label1={BrandLabel.School}
                             School=  {`${loginData.data.school.name}${loginData.data.school.block ? ','+loginData.data.school.block : ''}${loginData.data.school.district ? ','+loginData.data.school.district : ''}`}
                             minimalFlag={this.props.minimalFlag}
                         /> :
                         (loginData && loginData.data)
                         &&
-                        <View style={{ width: '80%' }}>
-                            <Text
-                                style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%', fontFamily: monospace_FF }}
-                            >
-                                {Strings.school_name + ' : '}
-                                <Text style={{ fontWeight: 'normal', fontFamily: monospace_FF }}>
-                                {`${loginData.data.school.name}${loginData.data.school.block ? ','+loginData.data.school.block : ''}${loginData.data.school.district ? ','+ loginData.data.school.district : ''}`}
-                                </Text>
-                            </Text>
-                            <Text
-                        style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingTop: '4%',fontFamily : monospace_FF }}
-                    >
+                        <View>
+                   
+                        <Text style={{fontWeight: 'normal', fontFamily: monospace_FF ,marginLeft:5,color:'#000000'}}>
+                            
+                        {`${loginData.data.school.name}${loginData.data.school.block ? ','+loginData.data.school.block : ''}${loginData.data.school.district ? ','+loginData.data.school.district : ''}`}
+                        </Text>
+                   
+                        {
+                     !this.props.minimalFlag &&
+                    <View style={{flexDirection:'row',marginLeft:5,marginTop:5}}>
+                    <Text>
                         {Strings.class_text + ' : '}
                         <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
                             {`${filteredData.className}, ${filteredData.section ? filteredData.section : ''}`}
                         </Text>
                     </Text>
-
-                    <Text
-                        style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingTop: '4%',fontFamily : monospace_FF }}
-                    >
+                    <Text style={{marginLeft:10,fontWeight:"600"}}>
                         {Strings.subject + ' : '}
                         <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
                                {filteredData.subject} {filteredData.set ? `(Set ${filteredData.set})`:''}
                         </Text>
                     </Text>
-                        </View>
+                    </View>
+    }
+                    
+                </View>
+
                     }
 
                 </View>
@@ -849,6 +857,7 @@ class MyScanComponent extends Component {
                            </View>
                             <ScanHistoryCard
                                 scanstatusbutton={true}
+                                scanFun={this.onScanClick}
                                 themeColor1={this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE}
                                 showButtons={false}
                                 scanStatusData={this.state.scanStatusData}
@@ -858,14 +867,7 @@ class MyScanComponent extends Component {
                                 setIsLoading={()=>this.setState({isLoading:false})}
                             />
 
-                          
-
-                                <ButtonComponent
-                                    customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData.themeColor1 ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
-                                    btnText={Strings.Back.toUpperCase()}
-                                    activeOpacity={0.8}
-                                    onPress={() => this.props.navigation.push('StudentsList')}
-                                />
+                      
                            
                         </ScrollView>
                         :
@@ -885,6 +887,7 @@ class MyScanComponent extends Component {
                 {
                      this.props.minimalFlag
                     &&
+                    <ScrollView scrollEnabled>
                     <View style={{ backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE,
                          marginHorizontal: 20, padding: 6, borderRadius: 10, paddingBottom: 16, paddingTop: 14 , width: '90%',
                     justifyContent:'center',
@@ -935,6 +938,7 @@ class MyScanComponent extends Component {
                         </View>
 
                     </View>
+                    </ScrollView>
                 }
 
                 <View>

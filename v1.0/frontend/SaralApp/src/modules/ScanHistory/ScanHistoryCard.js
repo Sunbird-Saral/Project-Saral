@@ -37,7 +37,8 @@ const ScanHistoryCard = ({
     studentsAndExamData,
     apiStatus,
     bgFlag,
-    multiBrandingData
+    multiBrandingData,
+    scanFun
 }) => {
     const [loading, setLoading] = useState(false)
     const [isModalVisible, setIsModalVisible] = useState(false)
@@ -82,7 +83,7 @@ const ScanHistoryCard = ({
     }
 
     const onPressStatus = () => {
-        navigation.push('ScanStatus')
+        navigation.push('ScanStatus',{scanFun:scanFun})
     }
 
     const onPressScanStatus = () => {

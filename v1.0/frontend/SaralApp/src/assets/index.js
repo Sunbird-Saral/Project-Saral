@@ -15,7 +15,10 @@ export const Assets = {
     downArrow: require('./images/down_arrow.png'),
     delete: require('./images/remove.png'),
     assessments: require('./images/assessments.png'),
-    scan: require('./images/scan.png')
+    scan: require('./images/qrcode.png'),
+    leftArrow: require('./images/leftArrow.png'),
+    visibleEye: require('./images/visible.png'),
+    user: require('./images/userProfile.png')
 
 }
 

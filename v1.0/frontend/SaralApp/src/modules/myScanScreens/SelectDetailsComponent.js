@@ -943,15 +943,17 @@ dispatchStudentExamData(payload){
         const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.selectDetails[0]
         return (
             <View style={{ flex: 1, backgroundColor: multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.WHITE_OPACITY }}>
-              <View style={{flexDirection:'row-reverse',justifyContent:'space-between'}}>
+             
                 <ShareComponent
                     navigation={this.props.navigation}
                     message={this.state.logmessage ? JSON.stringify(this.state.logmessage, null, 2) : ''}
+                    onPress={()=>this.props.navigation.navigate('Home')}
 
                 />
+                 <View style={''}>
                 {BrandLabel ?
                     <MultibrandLabels
-                        Label1={BrandLabel.School}
+                        // Label1={BrandLabel.School}
                         // Label2={BrandLabel.SchoolId}
                         School=  {`${loginData.data.school.name}${loginData.data.school.block ? ','+loginData.data.school.block : ''}${loginData.data.school.district ? ','+loginData.data.school.district : ''}`}
                         // SchoolId={loginData.data.school.schoolId}
@@ -960,15 +962,15 @@ dispatchStudentExamData(payload){
                     :
 
                     (loginData && loginData.data) &&
-                    <View style={{ marginTop: 20, width: '80%' }}>
-                        <Text
-                            style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%', fontFamily: monospace_FF }}
+                    <View style={{ }}>
+                        {/* <Text
+                            style={{ fontSize: 14, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%', fontFamily: monospace_FF }}
                         >
-                            {`${Strings.school_name} : `}
-                            <Text style={{ fontWeight: 'normal', fontFamily: monospace_FF }}>
-                            {`${loginData.data.school.name}${loginData.data.school.block ?','+ loginData.data.school.block : ''}${loginData.data.school.district ? ','+loginData.data.school.district : ''}`}
+                            {`${Strings.school_name} : `} */}
+                            <Text style={{ fontWeight: 'normal', fontFamily: monospace_FF ,marginLeft:5,color:'#000000'}}>
+                            {`${loginData.data.school.name} ${loginData.data.school.block ?','+ loginData.data.school.block : ''} ${loginData.data.school.district ? ','+loginData.data.school.district : ''}`}
                             </Text>
-                        </Text>
+                        {/* </Text> */}
                        
                     </View>}
                     </View>
@@ -1108,7 +1110,8 @@ const styles = {
         borderColor: AppTheme.LIGHT_GREY,
         width: '100%',
         textAlign: 'center',
-        fontSize: AppTheme.FONT_SIZE_SMALL + 2,
+        fontSize: AppTheme.FONT_SIZE_LARGE,
+        fontWeight:'bold',
         color: AppTheme.BLACK,
         letterSpacing: 1,
         marginBottom: '5%',
@@ -1127,6 +1130,8 @@ const styles = {
         fontFamily: monospace_FF
     },
     nxtBtnStyle: {
+        width:160,
+        height:43
     },
     imageViewContainer: {
 

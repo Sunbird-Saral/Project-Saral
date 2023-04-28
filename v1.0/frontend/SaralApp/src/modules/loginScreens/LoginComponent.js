@@ -454,7 +454,7 @@ class LoginComponent extends Component {
                             <Text style={{ fontSize: 12, fontWeight: 'bold',fontFamily : monospace_FF }}>Loading Branding ...</Text>
                         </View> :
 
-                         <View style={styles.container1}>
+                         <View style={[styles.container1,{width:80,height:80,borderRadius:40,backgroundColor:AppTheme.BLUE,alignSelf:'center'}]}>
                             <Image style={{ width: 80, height: 80 }} source={Assets.AppLogo} />
                         </View>
 
@@ -482,7 +482,7 @@ class LoginComponent extends Component {
                                         this.onLoginDetailsChange(text, 'schoolId')
                                     }}
                                     value={this.state.schoolId}
-                                    placeholder={Strings.userId_text}
+                                    placeholder={Strings.Registred_Mob_No}
                                     placeholderTextColor={AppTheme.BLACK_OPACITY_30}
                                     autoCapitalize={'none'}
                                     importantForAutofill="yes"
@@ -545,8 +545,8 @@ class LoginComponent extends Component {
                     keyboardShouldPersistTaps={'handled'}
                 >
 
-                    <View style={styles.container1}>
-                        <Image style={{width:80,height:80, borderRadius:50,border:1 }} source={{ uri: defaultBrandingdata && 'data:image/png;base64,' + this.props.defaultBrandingdata.logoImage }} />
+                    <View style={[styles.container1,{width:80,height:80,borderRadius:40,backgroundColor:defaultBrandingdata.themeColor1?defaultBrandingdata.themeColor1:AppTheme.BLUE,alignSelf:'center'}]}>
+                        {/* <Image style={{width:80,height:80, borderRadius:50,border:1 }} source={{ uri: defaultBrandingdata && 'data:image/png;base64,' + this.props.defaultBrandingdata.logoImage }} /> */}
                     </View>
                     <View style={{justifyContent:'center',alignItems:"center",marginVertical:20}}>
                         <Text style={{fontSize:22,fontWeight:'bold'}}> {Strings.Saral.toUpperCase()}</Text>
@@ -573,7 +573,7 @@ class LoginComponent extends Component {
                                         this.onLoginDetailsChange(text, 'schoolId')
                                     }}
                                     value={this.state.schoolId}
-                                    placeholder={Strings.userId_text}
+                                    placeholder={Strings.Registred_Mob_No}
                                     placeholderTextColor={AppTheme.BLACK_OPACITY_30}
                                     autoCapitalize={'none'}
                                 />
@@ -608,9 +608,10 @@ class LoginComponent extends Component {
                                 </View>
                                 <View style={styles.btnContainer}>
                                     <ButtonComponent
+                                        customBtnStyle = {[styles.nxtBtnStyle,{backgroundColor: defaultBrandingdata && defaultBrandingdata.themeColor1 ? defaultBrandingdata.themeColor1:AppTheme.BLUE}]}
                                         btnText={Strings.login_text.toUpperCase()}
                                         onPress={this.onSubmit}
-                                        themeColor1={{ backgroundColor: defaultBrandingdata && defaultBrandingdata.themeColor1 ? defaultBrandingdata.themeColor1:AppTheme.BLUE}}
+                                        // themeColor1={{ backgroundColor: defaultBrandingdata && defaultBrandingdata.themeColor1 ? defaultBrandingdata.themeColor1:AppTheme.BLUE}}
                                     />
                                 </View>
                             </View>
@@ -686,7 +687,7 @@ const styles = {
         color: AppTheme.BLACK,
     },
     btnContainer: {
-        paddingVertical: '5%'
+        marginTop:20
     },
     buttonImage: {
         width: 30, height: 30
@@ -705,6 +706,12 @@ const styles = {
         width: 35,
         padding: 2
     },
+    nxtBtnStyle:{
+        width:300,
+        height:50,
+        justifyContent:'center',
+        alignItems:'center'
+    }
 }
 
 

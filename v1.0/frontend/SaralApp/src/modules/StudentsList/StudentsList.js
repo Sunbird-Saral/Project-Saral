@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Text, View, FlatList, SafeAreaView, BackHandler } from 'react-native';
+import { Text, View, FlatList, SafeAreaView, BackHandler,StyleSheet } from 'react-native';
 
 //redux
 import { connect, useDispatch } from 'react-redux';
@@ -288,10 +288,10 @@ useEffect(() => {
 
     const renderStudentData = ({ item,index }) => {
         return (
-            <View style={{backgroundColor:multiBrandingData ? multiBrandingData.themeColor2:AppTheme.WHITE}}>
+            <View style={{backgroundColor:multiBrandingData.themeColor2 ? multiBrandingData.themeColor2:AppTheme.WHITE}}>
             <StudentsDataComponent
-                themeColor1={multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}
-                themeColor2={multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE}
+                themeColor1={multiBrandingData.themeColor1 ? multiBrandingData.themeColor1 : AppTheme.BLUE}
+                themeColor2={multiBrandingData.themeColor2 ? multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE}
                 item={item}
                 index={index}
                 pabsent={item.studentAvailability}
@@ -513,46 +513,41 @@ useEffect(() => {
     }
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor:multiBrandingData.themeColor2 ? multiBrandingData.themeColor2 : 'white' }}>
-           <View style={{flexDirection:'row-reverse',justifyContent:'space-between'}}>
              <ShareComponent
                  navigation={navigation}
+                 onPress={navigateToBack}
                  />
-
+ <View>
             {
                     (BrandLabel) ?
                         <MultibrandLabels
-                        Label1={BrandLabel.School}
+                        // Label1={BrandLabel.School}
                         School =   {`${loginData.data.school.name}${loginData.data.school.block ? ','+loginData.data.school.block : ''}${loginData.data.school.district ? ','+loginData.data.school.district : ''}`}
 
                         />
                      :
             (loginData && loginData.data) &&
-                <View style={{width:'80%'}}>
-                    <Text
-                        style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingTop: '4%',fontFamily : monospace_FF }}
-                    >
-                        {Strings.school_name + ' : '}
-                        <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
+                <View>
+                   
+                        <Text style={{fontWeight: 'normal', fontFamily: monospace_FF ,marginLeft:5,color:'#000000'}}>
                             
                         {`${loginData.data.school.name}${loginData.data.school.block ? ','+loginData.data.school.block : ''}${loginData.data.school.district ? ','+loginData.data.school.district : ''}`}
                         </Text>
-                    </Text>
-                    <Text
-                        style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingTop: '4%',fontFamily : monospace_FF }}
-                    >
+                   
+                    <View style={{flexDirection:'row',marginLeft:5,marginTop:5}}>
+                    <Text>
                         {Strings.class_text + ' : '}
                         <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
                             {`${filteredData.className}, ${filteredData.section ? filteredData.section : ''}`}
                         </Text>
                     </Text>
-                    <Text
-                        style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingTop: '4%',fontFamily : monospace_FF }}
-                    >
+                    <Text style={{marginLeft:10,fontWeight:"600"}}>
                         {Strings.subject + ' : '}
                         <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
                                {filteredData.subject} {filteredData.set ? `(Set ${filteredData.set})`:''}
                         </Text>
                     </Text>
+                    </View>
                     
                 </View>
 
@@ -567,21 +562,14 @@ useEffect(() => {
                 renderItem={renderStudentData}
                 ListEmptyComponent={renderEmptyList}
                 keyExtractor={(item) => item.studentId.toString()}
-                contentContainerStyle={{backgroundColor:multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}}
+                // contentContainerStyle={{backgroundColor:multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}}
                 showsVerticalScrollIndicator={false}
             />
 
 
             <View style={styles.viewnxtBtnStyle1}>
                 <ButtonComponent
-                    customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData.themeColor1 ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
-                    btnText={Strings.Back.toUpperCase()}
-                    activeOpacity={0.8}
-                    onPress={navigateToBack}
-                />
-
-                <ButtonComponent
-                    customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData.themeColor1 ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+                    customBtnStyle={[styled.nxtBtnStyle, { backgroundColor: multiBrandingData.themeColor1 ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
                     btnText={Strings.next_text.toUpperCase()}
                     activeOpacity={0.8}
                     onPress={navigateToNext}
@@ -598,6 +586,14 @@ useEffect(() => {
         </SafeAreaView>
     );
 }
+
+const styled = StyleSheet.create({
+    nxtBtnStyle: {
+        marginVertical:10,
+        width:160,
+        height:43
+    },
+})
 
 const mapStateToProps = (state) => {
     return {

@@ -55,14 +55,14 @@ const ScanStatusLocalList = ({
   
     return (
         <View style={{flexDirection:'row',margin:5,justifyContent:'center', alignItems:'center'}}>
-             <View style={{width:'10%',height:50,borderWidth:0.5,border:10,justifyContent:'center',alignItems:'center',backgroundColor:AppTheme.WHITE}}>
+             <View style={{width:'10%',height:studentName[0] && studentName[0].name.length >50 ? 100:50,borderWidth:0.5,border:10,justifyContent:'center',alignItems:'center',backgroundColor:AppTheme.WHITE}}>
              <Text>{index + 1}</Text>
              </View>
              <View style={{width:'50%',backgroundColor:AppTheme.WHITE}}>
              <View style={{height:25,borderWidth:0.5,border:10,justifyContent:'center'}}>
              <Text style={{marginLeft:10}}>{id}</Text>
              </View>
-             <View style={{height:25,borderWidth:0.5,border:10,justifyContent:'center'}}>
+             <View style={{height:studentName[0] && studentName[0].name.length >50 ? 75 :25,borderWidth:0.5,border:10,justifyContent:'center'}}>
              {
                     !minimalFlag
                     &&
@@ -72,7 +72,7 @@ const ScanStatusLocalList = ({
              </View>
              <View style={{width:'35%' }}>
                     <ButtonComponent
-                        customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: !reviewed ? themeColor2 ? '#AED3D3' : AppTheme.BLUE :  themeColor1 ? themeColor1 : AppTheme.BLUE}]}
+                        customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: !reviewed ? themeColor2 ? '#AED3D3' : AppTheme.BLUE :  themeColor1 ? themeColor1 : AppTheme.BLUE,height:studentName[0] && studentName[0].name.length >50 ? 100:50}]}
                         customBtnTextStyle={[styles.buttonText,{color:!reviewed ? 'black' : 'white'}]}
                         btnText={!reviewed ? Reviewd :Review}
                         activeOpacity={0.8}

@@ -1320,6 +1320,7 @@ const ScannedDetailsComponent = ({
                     <ShareComponent
                         navigation={navigation}
                         message={logmessage ? JSON.stringify(logmessage, null, 2) : ''}
+                        onPress={()=>navigation.navigate('myScan')}
                     />
                     {
                         !summary &&

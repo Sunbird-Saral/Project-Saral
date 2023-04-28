@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { FlatList, Text, View, Platform ,PermissionsAndroid,BackHandler} from 'react-native';
 
 //redux
-import { connect } from 'react-redux';
+import { connect,useDispatch } from 'react-redux';
 
 //constant
 import Strings from '../../utils/Strings';
@@ -37,7 +37,8 @@ const ScanStatus = ({
     navigation,
     filteredData,
     roiData,
-    minimalFlag
+    minimalFlag,
+    scanFun
 }) => {
 
     const [studentList, setStudentList] = useState([])
@@ -46,6 +47,8 @@ const ScanStatus = ({
     const [activityOpen,setActivityOpen] = useState(false)
     const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.scanStatus[0]
     
+    console.log('props>>>>>>>>>>>',scanFun);
+    const dispatch = useDispatch()
     useEffect(() => {
         const backAction = () => {
           return true;
@@ -234,10 +237,15 @@ const ScanStatus = ({
                 let jsonRoiData = roiData.data
                 let hasTimer   =  loginData.data.school.hasOwnProperty("scanTimeoutMs") ? loginData.data.school.scanTimeoutMs : 0
                 let isManualEditEnabled   =  loginData.data.school.hasOwnProperty("isManualEditEnabled") ? loginData.data.school.isManualEditEnabled : false
+              console.log('jsonRoiData>>>>',jsonRoiData);
+              console.log('isManualEditEnabled>>>',isManualEditEnabled);
                 SaralSDK.startCamera(JSON.stringify(jsonRoiData), pageNumber, hasTimer, isManualEditEnabled).then(res => {
+                    console.log('res>>>>>>>>',res);
                     let roisData = JSON.parse(res);
                     let cells = roisData.layout.cells;
                     consolidatePrediction(cells, roisData)
+                    console.log('roisData>>>>',roisData);
+                    console.log('cells>>>>',cells);
 
                 }).catch((code, message) => {
                 })
@@ -290,7 +298,7 @@ const ScanStatus = ({
                 roisData.layout.cells[i].predictedMarks = marks
             }
         }
-        OcrLocalResponseAction(JSON.parse(JSON.stringify(roisData)))
+        dispatch(OcrLocalResponseAction(JSON.parse(JSON.stringify(roisData))))
         navigation.navigate('ScannedDetailsComponent')
     }
 
@@ -298,7 +306,10 @@ const ScanStatus = ({
 
     return (
         <View style={[styles.container,{ flex: 1, backgroundColor:multiBrandingData.themeColor2 ? multiBrandingData.themeColor2 : 'white' }]}>
-
+ <ShareComponent
+                    navigation={navigation}
+                    onPress={()=>navigation.navigate('myScan')}
+                />
            <View style={{marginTop:30}}>
             <Text style={styles.scanStatus}>{Strings.save_status}</Text>
 
@@ -313,14 +324,16 @@ const ScanStatus = ({
            <View style={{alignItems:'center',flexDirection:"row"}}>
             <ButtonComponent
                customBtnStyle={[styles.nxtBtnStyle1, {flex:0, width: '45%', backgroundColor: multiBrandingData.themeColor1 ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
-                btnText={Strings.close.toUpperCase()}
+               customBtnTextStyle={{fontWeight:'normal',fontSize:14}}
+               btnText={Strings.close.toUpperCase()}
                 activeOpacity={0.8}
                 onPress={()=> onBackPress()}
                 />
 
           <ButtonComponent
                customBtnStyle={[styles.nxtBtnStyle1, {flex:0, width: '45%', backgroundColor: multiBrandingData.themeColor1 ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
-                btnText={'scan'.toUpperCase()}
+               customBtnTextStyle={{fontWeight:'normal',fontSize:14}}
+               btnText={'Re-scan'.toUpperCase()}
                 activeOpacity={0.8}
                 onPress={onScanClick}
                 />

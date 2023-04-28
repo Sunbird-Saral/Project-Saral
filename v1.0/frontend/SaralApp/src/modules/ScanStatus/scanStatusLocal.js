@@ -359,7 +359,10 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
 
     return (
         <View style={[styles.container,{ flex: 1, backgroundColor:multiBrandingData.themeColor2 ? multiBrandingData.themeColor2 : 'white' }]}>
-
+          <ShareComponent
+                    navigation={navigation}
+                    onPress={()=>navigation.navigate('myScan')}
+                />
             <View style={{marginTop:40}}>
             <Text style={styles.scanStatus}>{'Review Scans'}</Text>
         
@@ -374,14 +377,16 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
           <View style={{justifyContent:'space-between',flexDirection:'row'}}>
           <ButtonComponent
                 customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData.themeColor1 ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
-                btnText={Strings.close}
+                customBtnTextStyle={{fontWeight:'normal',fontSize:14}}
+                btnText={Strings.close.toUpperCase()}
                 activeOpacity={0.8}
                 onPress={()=> onBackPress()}
                 />
 
             <ButtonComponent
                 customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData.themeColor1 ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
-                btnText={'Save All Scans'}
+                customBtnTextStyle={{fontWeight:'normal',fontSize:14}}
+                btnText={'Save All Scans'.toUpperCase()}
                 activeOpacity={0.8}
                 onPress={()=> onPressSaveInDB()}
                 />
