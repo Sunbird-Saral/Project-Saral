@@ -145,10 +145,10 @@ public class TableCornerCirclesDetection {
     }
 
     private void showFocusAlert(Mat image) {
-        String text     = ">>>> Please focus the camera by moving up or down <<<< ";
+        String text     = "Please focus the camera by moving up or down";
         Point position  = new Point(image.width()/6, image.height() / 2);
         Scalar color    = new Scalar(255, 0, 0);
-        int font        = org.opencv.core.Core.FONT_HERSHEY_SIMPLEX;
+        int font        = org.opencv.core.Core.FONT_HERSHEY_COMPLEX_SMALL;
         int scale       = 1;
         int thickness   = 2;
         Imgproc.putText(image, text, position, font, scale, color, thickness);
