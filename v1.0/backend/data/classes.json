@@ -18,12 +18,6 @@
   {
     "sections": [
       {
-        "section": "B"
-      },
-      {
-        "section": "C"
-      },
-      {
         "section": "D"
       }
     ],
@@ -33,12 +27,6 @@
   },
   {
     "sections": [
-      {
-        "section": "B"
-      },
-      {
-        "section": "C"
-      },
       {
         "section": "D"
       }
@@ -51,12 +39,6 @@
     "sections": [
       {
         "section": "B"
-      },
-      {
-        "section": "C"
-      },
-      {
-        "section": "D"
       }
     ],
     "classId": "5",
@@ -65,12 +47,6 @@
   },
   {
     "sections": [
-      {
-        "section": "B"
-      },
-      {
-        "section": "C"
-      },
       {
         "section": "D"
       }
@@ -82,12 +58,6 @@
   {
     "sections": [
       {
-        "section": "B"
-      },
-      {
-        "section": "C"
-      },
-      {
         "section": "D"
       }
     ],
@@ -97,12 +67,6 @@
   },
   {
     "sections": [
-      {
-        "section": "B"
-      },
-      {
-        "section": "C"
-      },
       {
         "section": "D"
       }
