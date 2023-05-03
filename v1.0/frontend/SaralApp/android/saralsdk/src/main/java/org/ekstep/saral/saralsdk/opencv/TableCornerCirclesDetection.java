@@ -149,8 +149,8 @@ public class TableCornerCirclesDetection {
         Point position  = new Point(image.width()/6, image.height() / 2);
         Scalar color    = new Scalar(255, 0, 0);
         int font        = org.opencv.core.Core.FONT_HERSHEY_COMPLEX_SMALL;
-        int scale       = 1;
-        int thickness   = 2;
+        int scale       = 2;
+        int thickness   = 3;
         Imgproc.putText(image, text, position, font, scale, color, thickness);
     }
 

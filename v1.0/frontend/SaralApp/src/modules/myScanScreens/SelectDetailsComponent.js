@@ -950,13 +950,13 @@ dispatchStudentExamData(payload){
                     onPress={()=>this.props.navigation.navigate('Home')}
 
                 />
-                 <View style={''}>
+                 <View style={{margin:5}}>
                 {BrandLabel ?
                     <MultibrandLabels
-                        // Label1={BrandLabel.School}
-                        // Label2={BrandLabel.SchoolId}
-                        School=  {`${loginData.data.school.name}${loginData.data.school.block ? ','+loginData.data.school.block : ''}${loginData.data.school.district ? ','+loginData.data.school.district : ''}`}
-                        // SchoolId={loginData.data.school.schoolId}
+                         Label1={BrandLabel.School}
+                         Label2={BrandLabel.SchoolId}
+                         School=  {`${loginData.data.school.name}${loginData.data.school.block ? ','+loginData.data.school.block : ''}${loginData.data.school.district ? ','+loginData.data.school.district : ''}`}
+                         SchoolId={loginData.data.school.schoolId}
                     />
 
                     :
@@ -972,7 +972,8 @@ dispatchStudentExamData(payload){
                             </Text>
                         {/* </Text> */}
                        
-                    </View>}
+                    </View>
+                    }
                     </View>
                 <ScrollView
                     contentContainerStyle={{ paddingTop: '5%', paddingBottom: '35%' }}

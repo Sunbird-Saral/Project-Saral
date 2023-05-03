@@ -517,11 +517,11 @@ useEffect(() => {
                  navigation={navigation}
                  onPress={navigateToBack}
                  />
- <View>
+ <View style={{margin:5}}>
             {
                     (BrandLabel) ?
                         <MultibrandLabels
-                        // Label1={BrandLabel.School}
+                        Label1={BrandLabel.School}
                         School =   {`${loginData.data.school.name}${loginData.data.school.block ? ','+loginData.data.school.block : ''}${loginData.data.school.district ? ','+loginData.data.school.district : ''}`}
 
                         />
@@ -529,21 +529,21 @@ useEffect(() => {
             (loginData && loginData.data) &&
                 <View>
                    
-                        <Text style={{fontWeight: 'normal', fontFamily: monospace_FF ,marginLeft:5,color:'#000000'}}>
+                        <Text style={{fontWeight: 'normal', fontFamily: monospace_FF ,marginLeft:5}}>
                             
                         {`${loginData.data.school.name}${loginData.data.school.block ? ','+loginData.data.school.block : ''}${loginData.data.school.district ? ','+loginData.data.school.district : ''}`}
                         </Text>
                    
-                    <View style={{flexDirection:'row',marginLeft:5,marginTop:5}}>
-                    <Text>
+                    <View style={{flexDirection:'row',marginLeft:5,marginTop:5,}}>
+                    <Text style={{fontWeight:'bold'}}>
                         {Strings.class_text + ' : '}
-                        <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
+                        <Text style={{ fontWeight:'normal' }}>
                             {`${filteredData.className}, ${filteredData.section ? filteredData.section : ''}`}
                         </Text>
                     </Text>
-                    <Text style={{marginLeft:10,fontWeight:"600"}}>
+                    <Text style={{marginLeft:10,fontWeight:"bold"}}>
                         {Strings.subject + ' : '}
-                        <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
+                        <Text style={{ fontWeight: 'normal'}}>
                                {filteredData.subject} {filteredData.set ? `(Set ${filteredData.set})`:''}
                         </Text>
                     </Text>
