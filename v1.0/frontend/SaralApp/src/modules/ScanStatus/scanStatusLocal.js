@@ -397,7 +397,7 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
                     &&
                     <Spinner
                         animating={isLoading}
-                        customContainer={{ opacity: 0.6, elevation: 15 }}
+                        customContainer={{ opacity: 0.6, elevation: 15, backgroundColor:AppTheme.WHITE }}
                     />
                 }
 
