@@ -1,25 +1,38 @@
 package org.ekstep.saral.saralsdk.hwmodel;
 
-import android.app.Activity;
+import android.content.Context;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.ml.common.FirebaseMLException;
+import com.google.firebase.ml.common.modeldownload.FirebaseModelDownloadConditions;
+import com.google.firebase.ml.common.modeldownload.FirebaseModelManager;
 import com.google.firebase.ml.custom.FirebaseCustomLocalModel;
+import com.google.firebase.ml.custom.FirebaseCustomRemoteModel;
 import com.google.firebase.ml.custom.FirebaseModelDataType;
 import com.google.firebase.ml.custom.FirebaseModelInputOutputOptions;
 import com.google.firebase.ml.custom.FirebaseModelInputs;
 import com.google.firebase.ml.custom.FirebaseModelInterpreter;
 import com.google.firebase.ml.custom.FirebaseModelInterpreterOptions;
 
+import org.jetbrains.annotations.NotNull;
 import org.opencv.android.Utils;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfDouble;
 import org.opencv.imgproc.Imgproc;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
@@ -33,6 +46,7 @@ public class HWClassifier {
     private static final String HOSTED_MODEL_NAME = null;
     //private static final String LOCAL_MODEL_ASSET = "trained_resnet_real_synthetic_v2_20.tflite";
     private static final String LOCAL_MODEL_ASSET = "saral_hwd_model.tflite";
+    private static final String FB_REMOTE_MODEL   = "saral_hwd_model";
     /**
      * Dimensions of inputs.
      */
@@ -44,7 +58,7 @@ public class HWClassifier {
     /**
      * An instance of the driver class to run model inference with Firebase.
      */
-    private FirebaseModelInterpreter                mInterpreter;
+    private FirebaseModelInterpreter                mInterpreter, downloadInterpreter;
 
     /**
      * Data configuration of input & output data of model.
@@ -64,10 +78,18 @@ public class HWClassifier {
     }
 
     public boolean isInitialized() {
-        if (mInterpreter != null) {
+        if (mInterpreter != null || downloadInterpreter != null) {
             return true;
         }
         return false;
+    }
+
+
+    public boolean isModelAvailable() {
+        if (mInterpreter == null && downloadInterpreter == null) {
+            return false;
+        }
+        return true;
     }
 
     public void HWClassifierCallback(PredictionListener listener) throws IOException {
@@ -78,7 +100,20 @@ public class HWClassifier {
         predictionListener  = listener;
     }
 
-    public void initialize(HWClassifierStatusListener listener) {
+    public void localModelAsset (HWClassifierStatusListener listener, Context context) throws FirebaseMLException {
+        boolean hasFile = isAssetExists(LOCAL_MODEL_ASSET, context);
+        if (hasFile){
+        FirebaseCustomLocalModel localSource = new FirebaseCustomLocalModel.Builder()
+                .setAssetFilePath(LOCAL_MODEL_ASSET)
+                .build();
+        FirebaseModelInterpreterOptions options =
+                new FirebaseModelInterpreterOptions.Builder(localSource).build();
+        mInterpreter = FirebaseModelInterpreter.getInstance(options);
+        listener.OnModelLoadSuccess("model loading successful");
+        }
+    }
+
+    public void initialize(HWClassifierStatusListener listener, boolean isFBDownloadEnable , Context context) {
         int[] inputDims = {DIM_BATCH_SIZE, DIM_IMG_SIZE_X, DIM_IMG_SIZE_Y, DIM_PIXEL_SIZE};
         int[] outputDims = {DIM_BATCH_SIZE, 11};
         try {
@@ -89,24 +124,87 @@ public class HWClassifier {
                             .setOutputFormat(0, firebaseModelDataType, outputDims)
                             .build();
 
-            FirebaseCustomLocalModel localSource = new FirebaseCustomLocalModel.Builder()
-                    .setAssetFilePath(LOCAL_MODEL_ASSET)
-                    .build();
-
-            FirebaseModelInterpreterOptions options =
-                    new FirebaseModelInterpreterOptions.Builder(localSource).build();
-            mInterpreter = FirebaseModelInterpreter.getInstance(options);
-            listener.OnModelLoadSuccess("model loading successful");
+                            if (!isFBDownloadEnable) {
+                                localModelAsset(listener, context);
+                           } else {
+                               // remote model instance
+                               FirebaseCustomRemoteModel remoteModel =
+                                       new FirebaseCustomRemoteModel.Builder(FB_REMOTE_MODEL).build();
+                               FirebaseModelManager.getInstance().getLatestModelFile(remoteModel)
+                                       .addOnCompleteListener(new OnCompleteListener<File>() {
+                                           @Override
+                                           public void onComplete(@NonNull Task<File> task) {
+                                               File modelFile = task.getResult();
+                                               if (modelFile != null) {
+                                                   FirebaseModelInterpreterOptions options =
+                                                           new FirebaseModelInterpreterOptions.Builder(remoteModel).build();
+                                                   try {
+                                                       downloadInterpreter = FirebaseModelInterpreter.getInstance(options);
+                                                   } catch (FirebaseMLException e) {
+                                                       e.printStackTrace();
+                                                   }
+                                                   listener.OnModelLoadSuccess("firebase model loaded from local successful");
+                                               } else {
+                                                   FirebaseModelDownloadConditions conditions = new FirebaseModelDownloadConditions.Builder()
+                                                           .requireWifi()
+                                                           .build();
+                                                   FirebaseModelManager.getInstance().download(remoteModel, conditions)
+                                                           .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                               @Override
+                                                               public void onSuccess(Void unused) {
+                                                                   FirebaseModelInterpreterOptions options =
+                                                                           new FirebaseModelInterpreterOptions.Builder(remoteModel).build();
+                                                                   try {
+                                                                       downloadInterpreter = FirebaseModelInterpreter.getInstance(options);
+                                                                   } catch (FirebaseMLException e) {
+                                                                       e.printStackTrace();
+                                                                   }
+                                                                   listener.OnModelLoadSuccess("model loaded from firebase successful");
+                                                               }
+                                                           }).addOnFailureListener(new OnFailureListener() {
+                                                       @Override
+                                                       public void onFailure(@NonNull @NotNull Exception e) {
+                                                           try {
+                                                               localModelAsset(listener, context);
+                                                           } catch (FirebaseMLException firebaseMLException) {
+                                                               firebaseMLException.printStackTrace();
+                                                           }
+                                                       }
+                                                   });
+                                               }
+                                           }
+                                       }).addOnFailureListener(new OnFailureListener() {
+                                   @Override
+                                   public void onFailure(@NonNull @NotNull Exception e) {
+                                       Log.d(TAG, "onFailure: EEEEEEE=>> " + e);
+                                   }
+                               });
+                           }
         } catch (FirebaseMLException e) {
             listener.OnModelLoadError("model loading failed");
             e.printStackTrace();
         }
     }
 
+    private boolean isAssetExists(String pathInAssetsDir, Context context){
+        AssetManager assetManager = context.getAssets();
+        InputStream inputStream = null;
+        try {
+            inputStream = assetManager.open(pathInAssetsDir);
+            if(null != inputStream ) {
+                return true;
+            }
+        }  catch(IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     public void classifyMat(Mat mat, String id) {
-        if(mInterpreter != null) {
+        if(mInterpreter != null || downloadInterpreter != null) {
+            FirebaseModelInterpreter finalInterpreter = downloadInterpreter != null ? downloadInterpreter : mInterpreter;
             Mat processedMat    = preprocessMatForModel(mat);
-            runInference(convertMattoTfLiteInput(processedMat), id);
+            runInference(convertMattoTfLiteInput(processedMat), id, finalInterpreter);
         }
     }
 
@@ -157,12 +255,12 @@ public class HWClassifier {
         return imgData;
     }
 
-    private void runInference(ByteBuffer data, String id) {
+    private void runInference(ByteBuffer data, String id, FirebaseModelInterpreter interpreter) {
 
-        if (mInterpreter !=  null) {
+        if (interpreter !=  null) {
             try {
                 FirebaseModelInputs inputs          = new FirebaseModelInputs.Builder().add(data).build();
-                mInterpreter.run(inputs, mDataOptions)
+                interpreter.run(inputs, mDataOptions)
                         .addOnSuccessListener(result -> {
                             float[][] output        = result.getOutput(0);
                             float[] probabilities   = output[0];

@@ -18,7 +18,6 @@ router.post('/classes', auth, async (req, res) => {
             className: `Class-${data.classId}`,
             schoolId: req.school.schoolId
         })
-        console.log(classData)
         classModel.push(classData)
     });
     try {
@@ -26,7 +25,8 @@ router.post('/classes', auth, async (req, res) => {
         Promise.map(classModel, async doc => {
             let match = {
                 schoolId: doc.schoolId,
-                classId: doc.classId
+                classId: doc.classId,
+                $comment: "Create Classes API For Find Class Data"
             }
             let dataExists = await Classes.findOne(match);
             if (!dataExists) {
@@ -43,7 +43,7 @@ router.post('/classes', auth, async (req, res) => {
             } else {
                 let updatedSections = dataExists['sections'] ? dataExists['sections'].concat(doc['sections']) : doc['sections']
                 dataExists['sections'] = _.uniqBy(updatedSections, 'section');
-                
+
                 await dataExists.save()
                 let response = {
                     sections: doc.sections,
@@ -77,7 +77,8 @@ router.put('/classes', auth, async (req, res) => {
 
     const match = {
         schoolId: req.school.schoolId,
-        classId: req.body.classId
+        classId: req.body.classId,
+        $comment: "Update Classes API For Find Class Data"
     }
 
     try {
@@ -100,14 +101,14 @@ router.put('/classes', auth, async (req, res) => {
                     createdAt: classModel.createdAt,
                     updatedAt: classModel.updatedAt
                 }
-                
+
                 res.status(201).send(response)
             } catch (e) {
                 console.log(e);
                 res.status(400).send(e)
             }
         } else {
-            
+
             let updatedSections = classData['sections'] ? classData['sections'].concat(req.body['sections']) : req.body['sections']
             classData['sections'] = _.uniqBy(updatedSections, 'section');
             await classData.save()
@@ -119,7 +120,7 @@ router.put('/classes', auth, async (req, res) => {
                 createdAt: classData.createdAt,
                 updatedAt: classData.updatedAt
             }
-            
+
             res.send(response)
         }
     }
@@ -134,7 +135,8 @@ router.delete('/classes', auth, async (req, res) => {
 
     const match = {
         schoolId: req.school.schoolId,
-        classId: req.body.classId
+        classId: req.body.classId,
+        $comment: "Delete Classes API For Find Class and Exam Data"
     }
 
     try {
@@ -143,12 +145,13 @@ router.delete('/classes', auth, async (req, res) => {
             await Classes.deleteOne(match)
             let lookup = {
                 schoolId: req.school.schoolId,
-                studentClass: { $elemMatch: { classId: req.body.classId } }
+                studentClass: { $elemMatch: { classId: req.body.classId } },
+                $comment: "Delete Classes API For Find Student And Delete Data"
             }
             let students = await Students.find(lookup).lean()
             if (students.length) {
                 for (let student of students) {
-                    await Marks.deleteMany({ schoolId: req.school.schoolId, studentId: student.studentId })
+                    await Marks.deleteMany({ schoolId: req.school.schoolId, studentId: student.studentId, $comment: "Delete Classes API For Find Marks and Delete Data" })
                 }
                 await Students.deleteMany(lookup).lean()
             }

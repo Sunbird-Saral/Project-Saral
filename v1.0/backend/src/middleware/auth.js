@@ -21,17 +21,4 @@ const auth  = async (req, res, next) => {
     }
 }
 
-const basicAuth = async (req, res, next) => {
-    try {  
-        let basicAuthHeader = req.header('Authorization').replace(/^Basic/, '')
-        basicAuthHeader = (Buffer.from(basicAuthHeader, 'base64')).toString('utf8')
-        let loginInfo = basicAuthHeader.split(':'); 
-        const school = await Helper.findByCredentials(loginInfo[0].toLowerCase(), loginInfo[1])
-        req.school = school
-        next()
-    } catch (e) {
-        res.status(401).send({ error: "Please authenticate" })
-    }
-}
-
-module.exports = { auth, basicAuth }
+module.exports = { auth }

@@ -28,6 +28,7 @@ const classSchema = new mongoose.Schema({
     timestamps: true
 })
 
+classSchema.index({schoolId: -1})
 //model method created
 classSchema.statics.findClassesBySchools = async (schoolId) => {    
     const classes = await Classes.find({ schoolId })

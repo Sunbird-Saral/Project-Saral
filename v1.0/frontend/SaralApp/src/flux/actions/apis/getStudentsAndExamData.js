@@ -6,8 +6,7 @@ import C from '../constants';
 
 export class GetStudentsAndExamData extends API {
     constructor(requestBody, token,deviceUniqId, timeout = 30000) {
-        console.log('deviceUniqId>>>',deviceUniqId);
-        super('POST', timeout, false);
+        super('GET', timeout, false);
         this.requestBody = requestBody;
         this.token = token;
         this.type = C.GET_STUDENTS_EXAMS_LIST;
@@ -26,7 +25,9 @@ export class GetStudentsAndExamData extends API {
     }
 
     apiEndPoint() {
-        return `${super.apiEndPoint()}/fetchStudentsandExamsByQuery`;
+        let url = ''
+        url = `${super.apiEndPoint()}/fetchStudentsandExamsByQuery?classId=${this.requestBody.classId}&section=${this.requestBody.section}`;
+        return url
     }
 
     getHeaders() {
@@ -38,7 +39,7 @@ export class GetStudentsAndExamData extends API {
     }
 
     getBody() {
-        return this.requestBody
+      
     }
 
     getPayload() {

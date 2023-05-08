@@ -1,17 +1,19 @@
 const Student = require("../models/students")
+const School = require("../models/school")
 const Exam = require("../models/exams")
 const Marks = require("../models/marks")
 const studentController = require('../controller/studentController')
-const studentMockdata = require('./mock-data/student.json')
+const mockStudentdata = require('./mock-data/student.json')
 const AppError = require('../utils/appError')
 const Helper = require('../middleware/helper')
 const mockFetchExamData = require('./mock-data/mockFetchExam.json')
 const mockMarksData = require('./mock-data/mockMarksData.json')
+const mockSchoolData = require("./mock-data/school.json")
 
 
 const mockRequest = () => {
   const req = {}
-  req.body = jest.fn().mockReturnValue(req)
+  req.query = jest.fn().mockReturnValue(req)
   req.params = jest.fn().mockReturnValue(req)
   req.school = jest.fn().mockReturnValue(req)
   return req
@@ -67,7 +69,7 @@ describe('fetch student and exam data ', () => {
       "updatedAt": "2022-12-27T05:25:38.298Z",
       __v: 0
     }
-    req.body = {
+    req.query = {
       "classId": "2",
       "section":"D",
       "subject": "Hindi 23/09/2021",
@@ -75,13 +77,15 @@ describe('fetch student and exam data ', () => {
     }
 
     Helper.lockScreenValidator  = jest.fn().mockResolvedValue(undefined)
+    School.findOne = jest.fn().mockResolvedValue(mockSchoolData)
     Marks.findOne = jest.fn().mockResolvedValue(mockMarksData)
-    Student.find = jest.fn().mockReturnValue({ lean: () => studentMockdata })
+    Student.find = jest.fn().mockReturnValue({ lean: () => mockStudentdata })
     Exam.find = jest.fn().mockResolvedValue(mockFetchExamData)
     await studentController.fetchStudentsandExams(req, res)
 
-    expect(req.body.classId).toEqual('2');
+    expect(req.query.classId).toEqual('2');
     expect(Helper.lockScreenValidator ).toHaveBeenCalledTimes(1)
+    expect(School.findOne).toHaveBeenCalledTimes(1)
     expect(Student.find).toHaveBeenCalledTimes(1)
     expect(Exam.find).toHaveBeenCalledTimes(1)
     expect(res.status).toHaveBeenCalledWith(200);
@@ -101,7 +105,7 @@ describe('fetch student and exam data ', () => {
       "updatedAt": "2022-12-27T05:25:38.298Z",
       __v: 0
     }
-    req.body = {
+    req.query = {
       "classId": "2",
       "section":"D",
       "subject": "Hindi 23/09/2021",
@@ -109,13 +113,15 @@ describe('fetch student and exam data ', () => {
     }
 
     Helper.lockScreenValidator  = jest.fn().mockResolvedValue(undefined)
+    School.findOne = jest.fn().mockResolvedValue(mockSchoolData)
     Marks.findOne = jest.fn().mockResolvedValue(null)
-    Student.find = jest.fn().mockReturnValue({ lean: () => studentMockdata })
-    // Student.find = jest.fn().mockImplementationOnce(() => ({ select: jest.fn().mockResolvedValueOnce(studentMockdata)}));
+    Student.find = jest.fn().mockReturnValue({ lean: () => mockStudentdata })
+    // Student.find = jest.fn().mockImplementationOnce(() => ({ select: jest.fn().mockResolvedValueOnce(mockStudentdata)}));
     Exam.find = jest.fn().mockResolvedValue(mockFetchExamData)
     await studentController.fetchStudentsandExams(req, res)
 
-    expect(req.body.classId).toEqual('2');
+    expect(req.query.classId).toEqual('2');
+    expect(School.findOne).toHaveBeenCalledTimes(1)
     expect(Helper.lockScreenValidator ).toHaveBeenCalledTimes(1)
     expect(Student.find).toHaveBeenCalledTimes(1)
     expect(Exam.find).toHaveBeenCalledTimes(1)
@@ -136,7 +142,7 @@ describe('fetch student and exam data ', () => {
       "updatedAt": "2022-12-27T05:25:38.298Z",
       __v: 0
     }
-    req.body = {
+    req.query = {
       "classId": "2",
       "section":"D",
       "subject": "Hindi 23/09/2021",
@@ -144,13 +150,15 @@ describe('fetch student and exam data ', () => {
     }
 
     Helper.lockScreenValidator  = jest.fn().mockResolvedValue(undefined)
+    School.findOne = jest.fn().mockResolvedValue(mockSchoolData)
     Marks.findOne = jest.fn().mockResolvedValue(null)
-    Student.find = jest.fn().mockReturnValue({ lean: () => studentMockdata })
+    Student.find = jest.fn().mockReturnValue({ lean: () => mockStudentdata })
     Exam.find = jest.fn().mockResolvedValue(mockFetchExamData)
     await studentController.fetchStudentsandExams(req, res)
 
-    expect(req.body.classId).toEqual('2');
+    expect(req.query.classId).toEqual('2');
     expect(Helper.lockScreenValidator ).toHaveBeenCalledTimes(1)
+    expect(School.findOne).toHaveBeenCalledTimes(1)
     expect(Student.find).toHaveBeenCalledTimes(1)
     expect(Exam.find).toHaveBeenCalledTimes(1)
     expect(res.status).toHaveBeenCalledWith(200);

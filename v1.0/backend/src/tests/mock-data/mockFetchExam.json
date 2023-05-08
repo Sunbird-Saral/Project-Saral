@@ -890,6 +890,7 @@
             }
         ],
         "examId": 1,
-        "schoolId": "u001"
+        "schoolId": "u001",
+        "state": "up"
     }
 ]

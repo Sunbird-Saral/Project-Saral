@@ -4,17 +4,16 @@ const Exams = require('../models/exams')
 const Rois = require('../models/roi')
 const { auth } = require('../middleware/auth')
 const Schools = require('../models/school')
-const { compareSync } = require('bcryptjs')
 const Counters = require('../models/counter')
 const roiController = require("../controller/roiController")
 
-router.get('/roi/:examId?',auth,roiController.getRoiData)
+router.get('/roi/:examId?', auth, roiController.getRoiData)
 
 
 router.post('/roi', auth, async (req, res) => {
     try {
         const inputKeys = Object.keys(req.body)
-        const allowedUpdates = ['subject', 'classId', 'type', 'roi','set']
+        const allowedUpdates = ['subject', 'classId', 'type', 'roi', 'set']
         const isValidOperation = inputKeys.every((input) => allowedUpdates.includes(input))
 
         if (!isValidOperation) {
@@ -24,13 +23,14 @@ router.post('/roi', auth, async (req, res) => {
         let lookup = {
             schoolId: req.school.schoolId,
             subject: req.body.subject,
-            classId: req.body.classId
+            classId: req.body.classId,
+            $comment: "Create ROI API For Find Exam Data"
         }
         const examExist = await Exams.findOne(lookup)
         if (examExist) {
-            const school = await Schools.findOne({ schoolId: examExist.schoolId })
+            const school = await Schools.findOne({ schoolId: examExist.schoolId, $comment: "Create ROI API For Find School Data" })
             req.body.type = req.body.type.toUpperCase()
-            const roiExist = await Rois.findOne({ classId: req.body.classId, subject: req.body.subject, state: school.state, type: req.body.type })
+            const roiExist = await Rois.findOne({ classId: req.body.classId, subject: req.body.subject, state: school.state, type: req.body.type, $comment: "Create ROI API For Find ROI Data" })
             if (!roiExist) {
                 req.body.state = school.state
                 req.body.roiId = await Counters.getValueForNextSequence("roiId")
@@ -59,13 +59,14 @@ router.patch('/roi/:examId', auth, async (req, res) => {
     try {
         if (Object.keys(req.body) != "roi") return res.status(400).send({ message: 'Invalid Input .' })
 
-        const examExist = await Exams.findOne({ examId: req.params.examId }).lean()
+        const examExist = await Exams.findOne({ examId: req.params.examId, $comment: "Update ROI API for Find Exam Data" }).lean()
         if (examExist) {
-            const school = await Schools.findOne({ schoolId: req.school.schoolId })
+            const school = await Schools.findOne({ schoolId: req.school.schoolId, $comment: "Update ROI API for Find School Data" })
             let lookup = {
                 classId: examExist.classId,
                 subject: examExist.subject,
-                state: school.state
+                state: school.state,
+                $comment: "Update ROI API For Find ROI Data"
             }
 
             const roiData = await Rois.findOne(lookup).lean()
@@ -75,7 +76,8 @@ router.patch('/roi/:examId', auth, async (req, res) => {
             if (req.body.roi) updateObj["roi"] = req.body.roi
 
             let filter = {
-                roiId: roiData.roiId
+                roiId: roiData.roiId,
+                $comment: "Update ROI API for updating ROI"
             }
             await Rois.update(filter, updateObj).lean();
             res.status(201).send({ "message": 'ROI is updated successfully.' })
@@ -87,16 +89,18 @@ router.patch('/roi/:examId', auth, async (req, res) => {
 
 router.delete('/roi/:examId', auth, async (req, res) => {
     try {
-        const examExist = await Exams.findOne({ examId: req.params.examId }).lean()
+        const examExist = await Exams.findOne({ examId: req.params.examId, $comment: "DELETE ROI API For Find Exam Data" }).lean()
         if (examExist) {
-            const school = await Schools.findOne({ schoolId: req.school.schoolId })
+            const school = await Schools.findOne({ schoolId: req.school.schoolId, $comment: "DELETE ROI API For Find School Data" })
             let lookup = {
                 classId: examExist.classId,
                 subject: examExist.subject,
-                state: school.state
+                state: school.state,
+                $comment: "DELETE ROI API For Find ROI Data"
             }
             const roiExist = await Rois.findOne(lookup).lean()
-            let roi = await Rois.findOneAndRemove({ roiId: roiExist.roiId })
+            let roi = await Rois.findOneAndRemove({ roiId: roiExist.roiId, $comment: "DELETE ROI API For Find And Remove ROI Data" })
+
             if (roi) {
                 res.status(200).send({ "message": "ROI has been deleted successfully." })
             } else {

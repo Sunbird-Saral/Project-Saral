@@ -691,8 +691,7 @@ dispatchStudentExamData(payload){
 
             if (isCalledStudentAndExam) {
                 const hasNetworkData = await checkNetworkConnectivity()
-                let data = JSON.parse(studentsAndExamData.config.data)
-                if (studentsAndExamData && data.hasOwnProperty("subject")) {
+                if (studentsAndExamData) {
 
                     this.setState({isCalledStudentAndExam: false, isLoading: false})                    
                     const hasNetwork = await checkNetworkConnectivity();
@@ -879,9 +878,9 @@ dispatchStudentExamData(payload){
         }
         else if(hasNetwork){
             let dataPayload = {
-                classId: this.state.selectedClassId,
-                section: this.state.selectedSection,
-                subject: this.state.selectedSubject,
+                "classId": this.state.selectedClassId,
+                "section": this.state.selectedSection,
+                "subject": this.state.selectedSubject,
             }
             let apiObj = new GetStudentsAndExamData(dataPayload, token);
             this.props.APITransport(apiObj)

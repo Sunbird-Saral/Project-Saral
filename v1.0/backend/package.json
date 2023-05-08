@@ -18,12 +18,13 @@
     ],
     "coverageThreshold": {
       "global": {
-        "branches": 80,
-        "functions": 80,
-        "lines": 80,
-        "statements": 80
+        "branches": 84,
+        "functions": 84,
+        "lines": 84,
+        "statements": 84
       }
-    }
+    },
+    "coverageDirectory": "output/coverage"
   },
   "keywords": [],
   "author": "",
@@ -38,13 +39,14 @@
     "express-pino-logger": "^7.0.0",
     "express-winston": "^4.2.0",
     "fs": "0.0.1-security",
+    "jest-html-reporter": "^3.7.1",
     "js-yaml": "^4.1.0",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.20",
     "mongodb": "^3.6.3",
     "mongoose": "^5.11.5",
     "pug": "^3.0.0",
-    "store": "^2.0.12",
+    "puppeteer": "^19.8.3",
     "swagger-ui-express": "^4.4.0",
     "validator": "^13.5.2"
   },
