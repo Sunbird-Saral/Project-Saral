@@ -59,23 +59,37 @@
 
 
 const {createLogger, format, transports} = require('winston');
+const { combine, timestamp, label, printf } = format;
 const jwt = require('jsonwebtoken')
 
-const myFormat = format.printf(({level, meta, timestamp})=>{
+// const myFormat = format.printf(({level, meta, timestamp})=>{
 
-  //  const token = JSON.stringify(meta) && JSON.stringify(meta.req) && JSON.stringify(meta.req.headers['authorization']).replace('Bearer ', '')
+//   //  const token = JSON.stringify(meta) && JSON.stringify(meta.req) && JSON.stringify(meta.req.headers['authorization']).replace('Bearer ', '')
   
-  // // const decoded = jwt.verify(token, process.env.JWT_SECRET)
-  // console.log('decoded',token);
+//   // // const decoded = jwt.verify(token, process.env.JWT_SECRET)
+//   // console.log('decoded',token);
 
-  const deviceId =  JSON.stringify(meta) && JSON.stringify(meta.req.headers)  && JSON.stringify(meta.req.headers['x-request-deviceid'])
-  return `${timestamp} ${level} "deviceID : ${deviceId != undefined ? deviceId : ''}`
-})
+  // const deviceId =  JSON.stringify(meta) && JSON.stringify(meta.req.headers)  && JSON.stringify(meta.req.headers['x-request-deviceid']) != undefined && JSON.stringify(meta.req.headers['x-request-deviceid']) 
+  // console.log('deviceId?>>>>>>>>>>>',deviceId == undefined && '');
+  
+//   return `${timestamp} ${level} "deviceID : ${deviceId == undefined ? '' : deviceId}`
+// })
+
+const myFormat = printf(({ level, message, meta, timestamp, data }) => {
+    const deviceId =  JSON.stringify(meta) && JSON.stringify(meta.req.headers)  && JSON.stringify(meta.req.headers['x-request-deviceid']) 
+    const token = JSON.stringify(meta) && JSON.stringify(meta.req) && JSON.stringify(meta.req.headers['authorization'])
+    // const decoded = jwt.verify(token, process.env.JWT_SECRET)
+  
+    //  console.log('decoded?>>>>>>>>>>>',decoded);
+  
+  return `${timestamp}  ${level}: ${message} ${deviceId} ${token}`;
+});
 
 const logger = createLogger({
   transports: [
     new transports.Console()
 ],
+// exitOnError: false,
 format : format.combine(
     format.json(),
     format.timestamp(),
