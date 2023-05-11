@@ -237,15 +237,11 @@ const ScanStatus = ({
                 let jsonRoiData = roiData.data
                 let hasTimer   =  loginData.data.school.hasOwnProperty("scanTimeoutMs") ? loginData.data.school.scanTimeoutMs : 0
                 let isManualEditEnabled   =  loginData.data.school.hasOwnProperty("isManualEditEnabled") ? loginData.data.school.isManualEditEnabled : false
-              console.log('jsonRoiData>>>>',jsonRoiData);
-              console.log('isManualEditEnabled>>>',isManualEditEnabled);
                 SaralSDK.startCamera(JSON.stringify(jsonRoiData), pageNumber, hasTimer, isManualEditEnabled).then(res => {
-                    console.log('res>>>>>>>>',res);
                     let roisData = JSON.parse(res);
                     let cells = roisData.layout.cells;
                     consolidatePrediction(cells, roisData)
-                    console.log('roisData>>>>',roisData);
-                    console.log('cells>>>>',cells);
+
 
                 }).catch((code, message) => {
                 })

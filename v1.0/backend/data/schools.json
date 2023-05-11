@@ -44,7 +44,7 @@
     "autoSyncFrequency": 900000,
     "state": "up",
     "storeTrainingData": true,
-    "tags": true,
+    "tags": false,
     "autoSyncBatchSize": 10,
     "offlineMode": true,
     "isAppForceUpdateEnabled": false,
