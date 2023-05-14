@@ -14,6 +14,9 @@ echo $commit_id> commit_id.txt
 cp ../../specs/v1.5/swagger-saral-maintenance.yaml ./src
 cp ../../specs/v1.5/swagger-saral-frontend.yaml ./src
 cp ../../specs/v1.5/swagger-saral-apidoc.yaml ./src
+
+image_name="backend-saral"
+image_tag="2.0"
                                           
 
 docker build -t saaral123/$image_name:$image_tag .
