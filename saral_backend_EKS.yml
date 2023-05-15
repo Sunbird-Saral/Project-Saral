@@ -23,7 +23,7 @@ spec:
             - name: PORT
               value: "3005"
             - name: MONGODB_URL
-              value: "mongodb://saral-mongodb:27017/saralv1newdb"
+              value: "mongodb://10.0.31.152:27017,10.0.50.162:27017/saralv2_DB"
             - name: JWT_SECRET
               value: SARALDATA_NODE
             - name: MONGODB_POOL_SIZE
