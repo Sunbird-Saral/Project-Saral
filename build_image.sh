@@ -15,7 +15,7 @@ cp ../../specs/v1.5/swagger-saral-maintenance.yaml ./src
 cp ../../specs/v1.5/swagger-saral-frontend.yaml ./src
 cp ../../specs/v1.5/swagger-saral-apidoc.yaml ./src
 
-image_name="backend-saral"
+image_name="backendapi"
 image_tag="2.0"
                                           
 
