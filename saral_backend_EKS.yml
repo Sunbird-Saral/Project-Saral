@@ -16,7 +16,7 @@ spec:
       - name: import-data
         image: node:latest
         command: ["node"]
-        args: ["./data/import-data.js", "--import"]
+        args: ["./v1.0/data/import-data.js", "--import"]
         volumeMounts:
         - name: mongodb-data
           mountPath: /data/db
