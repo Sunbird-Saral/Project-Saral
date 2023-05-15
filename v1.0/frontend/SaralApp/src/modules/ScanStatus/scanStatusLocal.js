@@ -126,6 +126,7 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
             themeColor1={multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}
             BrandLabel={BrandLabel}
             themeColor2={multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.BLUE}
+            navigation ={navigation}
         />
 
     }

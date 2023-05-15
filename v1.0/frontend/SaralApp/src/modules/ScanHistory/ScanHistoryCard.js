@@ -292,7 +292,7 @@ const ScanHistoryCard = ({
                 disabled
 
             >
-                <View style={{ flexDirection: 'row', width: '100%', alignItems: 'center', paddingTop: '10%',paddingBottom:'5%', paddingLeft: '1%', paddingRight: '1%', marginBottom:10}}>
+                <View style={{ flexDirection: 'row', width: '100%', alignItems: 'center', paddingTop: 40, paddingLeft: '1%', paddingRight: '1%', marginBottom:40}}>
                     <View>
                     <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
@@ -428,7 +428,7 @@ const ScanHistoryCard = ({
                                 <Text style={{ fontFamily: monospace_FF, color: AppTheme.BLACK }}>{Strings.save_scan}</Text>
                             </TouchableOpacity>}
                     </View>
-                    {
+                    {/* {
                             scanstatusbutton
                             &&
                             <View style={{  marginTop: '5%', width: '100%', alignItems: 'center' }}>
@@ -448,7 +448,7 @@ const ScanHistoryCard = ({
                             </TouchableOpacity>
                             </View>
                         
-                        }
+                        } */}
                 </View>
 
 

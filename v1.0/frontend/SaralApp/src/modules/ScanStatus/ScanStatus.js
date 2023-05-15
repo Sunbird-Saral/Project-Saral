@@ -47,7 +47,6 @@ const ScanStatus = ({
     const [activityOpen,setActivityOpen] = useState(false)
     const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.scanStatus[0]
     
-    console.log('props>>>>>>>>>>>',scanFun);
     const dispatch = useDispatch()
     useEffect(() => {
         const backAction = () => {
