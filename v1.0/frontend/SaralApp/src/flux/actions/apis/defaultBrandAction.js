@@ -5,7 +5,8 @@
  import C from '../constants';
  
  export class DefaultBrandAction extends API {
-     constructor(requestBody, token,deviceUniqId, timeout = 30000) {
+     constructor(requestBody,deviceUniqId, timeout = 30000) {
+        console.log('deviceUniqId|||||||||||',deviceUniqId);
          super('GET', timeout, false);
          
          this.requestBody = '';

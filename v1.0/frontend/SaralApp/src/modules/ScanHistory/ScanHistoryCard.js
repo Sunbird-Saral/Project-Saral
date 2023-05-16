@@ -192,6 +192,7 @@ const ScanHistoryCard = ({
     }
 
     const callScanStatusData = async (filteredDatalen, localScanData) => {
+        const deviceUniqId = await DeviceInfo.getUniqueId();
         let loginCred = await getLoginCred()
 
         let dataPayload = {
@@ -207,7 +208,7 @@ const ScanHistoryCard = ({
         if (filteredData.response.hasOwnProperty("set")) {
             dataPayload.set = filteredData.response.set
         }
-        let apiObj = new scanStatusDataAction(dataPayload);
+        let apiObj = new scanStatusDataAction(dataPayload,deviceUniqId);
         FetchSavedScannedData(apiObj, loginCred.schoolId, loginCred.password, filteredDatalen, localScanData)
     }
 

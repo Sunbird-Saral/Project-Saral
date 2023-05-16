@@ -68,7 +68,7 @@ exports.loginSchool = async (req, res, next) => {
       data.classes = classes
     }
   
-    logger.info()
+    logger.info('this is login api')
     res.status(200).json({
       ... data
     });

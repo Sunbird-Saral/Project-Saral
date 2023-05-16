@@ -310,7 +310,6 @@ class SelectDetailsComponent extends Component {
     callStudentsData = async (token) => {
         const { dataPayload, selectedClass, selectedSection } = this.state
         const deviceUniqId = await DeviceInfo.getUniqueId();
-        console.log('deviceUniqId??????????',deviceUniqId);
         let hasNetwork = await checkNetworkConnectivity();
 
 
@@ -858,6 +857,7 @@ dispatchStudentExamData(payload){
     }
 
   async  callExamAndStudentData(token){
+    const deviceUniqId = await DeviceInfo.getUniqueId();
         let hasNetwork = await checkNetworkConnectivity();
             let hasCacheData = await getRegularStudentExamApi();
             let cacheFilterData = hasCacheData != null 
@@ -882,7 +882,7 @@ dispatchStudentExamData(payload){
                 "section": this.state.selectedSection,
                 "subject": this.state.selectedSubject,
             }
-            let apiObj = new GetStudentsAndExamData(dataPayload, token);
+            let apiObj = new GetStudentsAndExamData(dataPayload, token, deviceUniqId);
             this.props.APITransport(apiObj)
             this.setState({
                 isLoading: false,
