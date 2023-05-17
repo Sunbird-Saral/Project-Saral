@@ -687,7 +687,11 @@ const styles = {
         color: AppTheme.BLACK,
     },
     btnContainer: {
-        marginTop:20
+        marginTop:20,
+        alignSelf:"stretch",
+        justifyContent:"center",
+        position:"relative",
+        
     },
     buttonImage: {
         width: 30, height: 30
@@ -707,7 +711,6 @@ const styles = {
         padding: 2
     },
     nxtBtnStyle:{
-        width:300,
         height:50,
         justifyContent:'center',
         alignItems:'center'
