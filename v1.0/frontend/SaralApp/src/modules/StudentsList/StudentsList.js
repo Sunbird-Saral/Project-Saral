@@ -187,8 +187,8 @@ useEffect(() => {
     }
 
     const callScanStatusData = async () => {
+        const deviceUniqId = await DeviceInfo.getUniqueId();
         let hasNetwork = await checkNetworkConnectivity();
-
         if (!hasNetwork) {
             let hasCacheData = await getRegularSavedScanpi();
             let setValue = filteredData.hasOwnProperty("set")  ? filteredData.set.length> 0 ? filteredData.set : '' : null
@@ -219,7 +219,7 @@ useEffect(() => {
             "page": 0,
             "downloadRes": false
         }
-        let apiObj = new scanStatusDataAction(dataPayload);
+        let apiObj = new scanStatusDataAction(dataPayload,deviceUniqId);
         FetchSavedScannedData(apiObj, loginCred.schoolId, loginCred.password)
     }
 }
