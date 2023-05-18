@@ -2,19 +2,8 @@ const Marks = require('../models/marks')
 const Users = require('../models/users')
 const Helper = require('../middleware/helper')
 const { stringObject } = require('../utils/commonUtils')
-require('../db/mongoose')
-const mongoose = require('mongoose')
-
 
 exports.saveMarks = async (req, res, next) => {
-
-    const session = await mongoose.startSession();
-    const transactionOptions = {
-        readPreference: 'primary',
-        readConcern: { level: 'local' },
-        writeConcern: { w: 'majority' }
-    };
-
     const marks = []
 
     if (req.header('X-App-Version')) {
@@ -45,70 +34,47 @@ exports.saveMarks = async (req, res, next) => {
         marks.push(marksData)
     });
     try {
-        const transactionOutput = await session.withTransaction(async () => {
 
-            await Helper.lockScreenValidator(req.school)
+        await Helper.lockScreenValidator(req.school)
 
-            let updates = []
+        let updates = []
 
-            for (let i = 0; i < marks.length; i++) {
+        for (let i = 0; i < marks.length; i++) {
 
-                updates.push({
-                    updateOne: {
-                        filter: {
-                            studentId: marks[i].studentId,
-                            subject: marks[i].subject,
-                            examDate: marks[i].examDate
-                        },
-                        update: { $set: { studentIdTrainingData: marks[i].studentIdTrainingData, studentId: marks[i].studentId, predictionConfidence: marks[i].predictionConfidence, schoolId: marks[i].schoolId, examDate: marks[i].examDate, predictedStudentId: marks[i].predictedStudentId, studentAvailability: marks[i].studentAvailability, marksInfo: marks[i].marksInfo, maxMarksTrainingData: marks[i].maxMarksTrainingData, maxMarksPredicted: marks[i].maxMarksPredicted, securedMarks: marks[i].securedMarks, totalMarks: marks[i].totalMarks, obtainedMarksTrainingData: marks[i].obtainedMarksTrainingData, obtainedMarksPredicted: marks[i].obtainedMarksPredicted, set: marks[i].set, subject: marks[i].subject, classId: marks[i].classId, section: marks[i].section, examId: marks[i].examId, userId: marks[i].userId, roiId: marks[i].roiId } },
-                        upsert: true
-                    }
-                })
-            }
-
-            let marksResult = await Marks.bulkWrite(updates, session);
-            console.log("marks responsee---->", marksResult)
-
-            if (!marksResult) {
-                await session.abortTransaction();
-                console.error("The marks could not be created.");
-                console.error("Any operations that already occurred as part of this transaction will be rolled back.")
-                return;
-            }
-
-            let match = {
-                schoolId: marks[0].schoolId,
-                classId: marks[0].classId,
-                section: marks[0].section,
-                examDate: marks[0].examDate,
-                subject: marks[0].subject,
-                $comment: "Save Marks API For Find Marks Details."
-            }
-
-            let marksData = await Marks.find(match)
-            console.log("marksssssssss", marksData)
-
-            await session.commitTransaction();
-            res.status(200).json({ data: marksData })
-
-        }, transactionOptions);
-        console.log("transactionOutput", transactionOutput)
-        if (transactionOutput) {
-            console.log("The Marks was successfully created.");
-        } else {
-            console.log("The Marks was intentionally aborted.");
+            updates.push({
+                updateOne: {
+                    filter: {
+                        studentId: marks[i].studentId,
+                        subject: marks[i].subject,
+                        examDate: marks[i].examDate
+                    },
+                    update: { $set: { studentIdTrainingData: marks[i].studentIdTrainingData, studentId: marks[i].studentId, predictionConfidence: marks[i].predictionConfidence, schoolId: marks[i].schoolId, examDate: marks[i].examDate, predictedStudentId: marks[i].predictedStudentId, studentAvailability: marks[i].studentAvailability, marksInfo: marks[i].marksInfo, maxMarksTrainingData: marks[i].maxMarksTrainingData, maxMarksPredicted: marks[i].maxMarksPredicted, securedMarks: marks[i].securedMarks, totalMarks: marks[i].totalMarks, obtainedMarksTrainingData: marks[i].obtainedMarksTrainingData, obtainedMarksPredicted: marks[i].obtainedMarksPredicted, set: marks[i].set, subject: marks[i].subject, classId: marks[i].classId, section: marks[i].section, examId: marks[i].examId, userId: marks[i].userId  ,roiId: marks[i].roiId} },
+                    upsert: true
+                }
+            })
         }
+        
+        let marksResult = await Marks.bulkWrite(updates);
+        console.log("marks responsee---->", marksResult)
+
+        let match = {
+            schoolId: marks[0].schoolId,
+            classId: marks[0].classId,
+            section: marks[0].section,
+            examDate: marks[0].examDate,
+            subject: marks[0].subject,
+            $comment: "Save Marks API For Find Marks Details."
+        }
+
+        let marksData = await Marks.find(match,{ _id: 0, __v: 0 })
+        res.status(200).json({ data: marksData })
     } catch (e) {
-        console.log("The transaction was aborted due to an unexpected error: " + e);
         if (e && e.message == stringObject().lockScreen) {
             res.status(500).json({ error: e.message })
         }
         else {
             res.status(400).json({ e })
         }
-    } finally {
-        // Ending the session
-        session.endSession();
     }
 }
 
@@ -122,7 +88,7 @@ exports.getSaveScan = async (req, res, next) => {
 
         if (req.body.userId && !req.body.schoolId) {
             req.body.userId = req.body.userId.toLowerCase()
-            const userData = await Users.findOne({ userId: req.body.userId, $comment: "Get Saved Scan API for Find User Data." })
+            const userData = await Users.findOne({ userId: req.body.userId ,$comment: "Get Saved Scan API for Find User Data."})
             match.schoolId = userData.schoolId
         }
 
@@ -131,7 +97,7 @@ exports.getSaveScan = async (req, res, next) => {
 
         if (schoolId) {
             match.schoolId = schoolId,
-                $comment = "Get Saved Scan API for Find Marks Data"
+            $comment = "Get Saved Scan API for Find Marks Data"
         }
 
         if (fromDate) {
@@ -145,7 +111,7 @@ exports.getSaveScan = async (req, res, next) => {
         if (section && section != "0") {
             match.section = section
         }
-
+       
         if (roiId) {
             match.roiId = roiId
         }
@@ -162,7 +128,7 @@ exports.getSaveScan = async (req, res, next) => {
             req.body.page = 1;
         }
 
-        const savedScan = await Marks.find(match, { _id: 0, __v: 0 })
+        const savedScan = await Marks.find(match ,{ _id: 0, __v: 0 })
             .limit(parseInt(req.body.limit) * 1)
             .skip((parseInt(parseInt(req.body.page)) - 1) * parseInt(parseInt(req.body.limit)))
 
