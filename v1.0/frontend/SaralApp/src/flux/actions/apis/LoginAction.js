@@ -3,12 +3,13 @@
  */
  import API from '../apis/api';
  import C from '../constants';
- 
+
  export class LoginAction extends API {
-     constructor(loginObj, timeout = 30000) {
+     constructor(loginObj,deviceUniqId, timeout = 30000) {
          super('POST', timeout, false);
          this.loginObj = loginObj;
          this.type = C.LOGIN_PROCESS;
+         this.deviceUniqId = deviceUniqId
      }
  
      toString() {
@@ -29,6 +30,7 @@
      getHeaders() {
          return {
              'Content-Type': 'application/json',
+             'x-request-deviceid' :`${this.deviceUniqId}`
          }
      }
  
