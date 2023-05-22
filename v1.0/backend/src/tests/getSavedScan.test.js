@@ -1,9 +1,8 @@
 const Mark = require("../models/marks")
+const User = require("../models/users")
 const marksController = require('../controller/marksController')
 const mockSavedData = require("./mock-data/savedScanData.json")
-const mockMinimalSaveScanData = require('./mock-data/minimalSavedScan.json')
-const AppError = require('../utils/appError')
-
+const mockUserData = require("../tests/mock-data/user.json")
 
 
 const mockRequest = () => {
@@ -44,6 +43,7 @@ describe('saved scan data ', () => {
             "section": "C",
             "subject": "Hindi",
             "schoolId": "u001",
+            "fromDate": "1/07/2022",
             "downloadRes": false,
             "limit": 10,
             "page": 1
@@ -57,6 +57,43 @@ describe('saved scan data ', () => {
 
         await marksController.getSaveScan(req, res)
 
+        expect(Mark.find).toHaveBeenCalledTimes(1)
+        expect(res.json({ status: 'success' }).status(200))
+    });
+
+    it("should able to fetch saved data when userId is present", async () => {
+        const req = mockRequest();
+        const res = mockResponse()
+        req.school = {
+            "_id": "63aa81d2d33aca650009c946",
+            "name": "user13",
+            "userId": "u001",
+            "schoolId": "u001",
+            "password": "$2a$08$fCagseJwhdNd3SEd8EB.oO6n990WLmDr4ptUpzJxLp2nvMFSZGpjG",
+            "createdAt": "2022-12-27T05:25:38.298Z",
+            "updatedAt": "2022-12-27T05:25:38.298Z",
+            __v: 0
+        }
+        req.body = {
+            "classId": "9",
+            "section": "C",
+            "subject": "Hindi",
+            "userId": "u001",
+            "downloadRes": false,
+            "limit": 10,
+            "page": 1
+        }
+
+        User.findOne = jest.fn().mockResolvedValue(mockUserData)
+
+        Mark.find = jest.fn().mockImplementationOnce(() => ({
+            limit: jest.fn().mockImplementationOnce(() => ({
+                skip: jest.fn().mockResolvedValue(mockSavedData)
+            }))
+        }))
+
+        await marksController.getSaveScan(req, res)
+        expect(User.findOne).toHaveBeenCalledTimes(1)
         expect(Mark.find).toHaveBeenCalledTimes(1)
         expect(res.json({ status: 'success' }).status(200))
     });

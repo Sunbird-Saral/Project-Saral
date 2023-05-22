@@ -48,7 +48,7 @@ exports.saveMarks = async (req, res, next) => {
                         subject: marks[i].subject,
                         examDate: marks[i].examDate
                     },
-                    update: { $set: { studentIdTrainingData: marks[i].studentIdTrainingData, studentId: marks[i].studentId, predictionConfidence: marks[i].predictionConfidence, schoolId: marks[i].schoolId, examDate: marks[i].examDate, predictedStudentId: marks[i].predictedStudentId, studentAvailability: marks[i].studentAvailability, marksInfo: marks[i].marksInfo, maxMarksTrainingData: marks[i].maxMarksTrainingData, maxMarksPredicted: marks[i].maxMarksPredicted, securedMarks: marks[i].securedMarks, totalMarks: marks[i].totalMarks, obtainedMarksTrainingData: marks[i].obtainedMarksTrainingData, obtainedMarksPredicted: marks[i].obtainedMarksPredicted, set: marks[i].set, subject: marks[i].subject, classId: marks[i].classId, section: marks[i].section, subject: marks[i].subject, examId: marks[i].examId, userId: marks[i].userId  ,roiId: marks[i].roiId} },
+                    update: { $set: { studentIdTrainingData: marks[i].studentIdTrainingData, studentId: marks[i].studentId, predictionConfidence: marks[i].predictionConfidence, schoolId: marks[i].schoolId, examDate: marks[i].examDate, predictedStudentId: marks[i].predictedStudentId, studentAvailability: marks[i].studentAvailability, marksInfo: marks[i].marksInfo, maxMarksTrainingData: marks[i].maxMarksTrainingData, maxMarksPredicted: marks[i].maxMarksPredicted, securedMarks: marks[i].securedMarks, totalMarks: marks[i].totalMarks, obtainedMarksTrainingData: marks[i].obtainedMarksTrainingData, obtainedMarksPredicted: marks[i].obtainedMarksPredicted, set: marks[i].set, subject: marks[i].subject, classId: marks[i].classId, section: marks[i].section, examId: marks[i].examId, userId: marks[i].userId  ,roiId: marks[i].roiId} },
                     upsert: true
                 }
             })
@@ -62,10 +62,11 @@ exports.saveMarks = async (req, res, next) => {
             classId: marks[0].classId,
             section: marks[0].section,
             examDate: marks[0].examDate,
-            subject: marks[0].subject
+            subject: marks[0].subject,
+            $comment: "Save Marks API For Find Marks Details."
         }
 
-        let marksData = await Marks.find(match, { _id: 0, __v: 0 })
+        let marksData = await Marks.find(match,{ _id: 0, __v: 0 })
         res.status(200).json({ data: marksData })
     } catch (e) {
         if (e && e.message == stringObject().lockScreen) {
@@ -87,7 +88,7 @@ exports.getSaveScan = async (req, res, next) => {
 
         if (req.body.userId && !req.body.schoolId) {
             req.body.userId = req.body.userId.toLowerCase()
-            const userData = await Users.findOne({ userId: req.body.userId })
+            const userData = await Users.findOne({ userId: req.body.userId ,$comment: "Get Saved Scan API for Find User Data."})
             match.schoolId = userData.schoolId
         }
 
@@ -95,7 +96,8 @@ exports.getSaveScan = async (req, res, next) => {
         const { schoolId, classId, section, subject, fromDate, roiId } = req.body
 
         if (schoolId) {
-            match.schoolId = schoolId
+            match.schoolId = schoolId,
+            $comment = "Get Saved Scan API for Find Marks Data"
         }
 
         if (fromDate) {
@@ -109,6 +111,7 @@ exports.getSaveScan = async (req, res, next) => {
         if (section && section != "0") {
             match.section = section
         }
+       
         if (roiId) {
             match.roiId = roiId
         }
@@ -125,7 +128,7 @@ exports.getSaveScan = async (req, res, next) => {
             req.body.page = 1;
         }
 
-        const savedScan = await Marks.find(match, { _id: 0, __v: 0 })
+        const savedScan = await Marks.find(match ,{ _id: 0, __v: 0 })
             .limit(parseInt(req.body.limit) * 1)
             .skip((parseInt(parseInt(req.body.page)) - 1) * parseInt(parseInt(req.body.limit)))
 

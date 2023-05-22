@@ -2,6 +2,7 @@ const express = require('express')
 require('./db/mongoose')
 var path = require('path');
 const fs = require('fs')
+const puppeteer = require('puppeteer')
 const yaml = require('js-yaml');
 const swaggerUi = require('swagger-ui-express');
 const schoolRouter = require('./routers/school.route')
@@ -20,7 +21,30 @@ const frontendSpec = yaml.load(spec);
 const maintenanceSpec = yaml.load(spec2);
 const app = express()
 
-const expectedURL = 'http://192.168.0.106:3000';
+const loggerMiddleware = (req, res, next) => {
+    console.log('New request to: ' + req.method + ' ' + req.path, req.body)
+    next()
+}
+
+const generateJestReportPdf = async () => {
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+        const invoicePath = path.resolve("./output/coverage/lcov-report/index.html");
+    await page.goto(invoicePath, { waitUntil: 'networkidle0' });
+    await page.pdf({
+        path: './output/jestTestReport.pdf',
+        displayHeaderFooter: true,
+        headerTemplate: '',
+        footerTemplate: '',
+        printBackground: true,
+        margin: {
+            top: '20px', right: '20px', bottom: '20px', left: '20px'
+    }
+    });
+        await browser.close();
+    console.log("pdf printed")
+}
+
 const CORS_ORIGIN = [{"origin": 'http://192.168.0.106:3000', "optionsSuccessStatus": 200,"methods": "PUT"},{"origin": 'http://192.168.0.104:3000', "optionsSuccessStatus": 200,"methods": "PUT"}]
 
 const checkURL = (req, res, next) => {
@@ -35,12 +59,8 @@ const checkURL = (req, res, next) => {
     next();
   };
 
-const loggerMiddleware = (req, res, next) => {
-    console.log('New request to: ' + req.method + ' ' + req.path, req.body)
-    next()
-}
 
-app.use(express.json({limit: '50mb'}));
+app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }))
 app.use(express.json())
 app.use(cors());
@@ -58,4 +78,8 @@ app.use(roiRouter)
 app.use(brandRouter)
 app.use("/api-docs/saral/frontend", swaggerUi.serve, (...args) => swaggerUi.setup(frontendSpec)(...args));
 app.use("/api-docs/saral/maintenance", swaggerUi.serve, (...args) => swaggerUi.setup(maintenanceSpec)(...args));
+
+// uncomment below function to generate jest report pdf 
+// generateJestReportPdf() 
+
 module.exports = app

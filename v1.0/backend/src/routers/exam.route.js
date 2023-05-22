@@ -1,7 +1,6 @@
 const express = require('express')
 const Exams = require('../models/exams')
 const { auth } = require('../middleware/auth')
-const { getSubjectCode } = require('../utils/commonUtils')
 const Counters = require('../models/counter')
 const router = new express.Router()
 
@@ -17,7 +16,16 @@ router.post('/exam', auth, async (req, res) => {
         }
 
         input.type = input.type.toUpperCase()
-        let examExist = await Exams.find({ schoolId, classId: input.classId, examDate: input.examDate, subject: input.subject })
+
+        let lookup = {
+            state: input.state,
+            classId: input.classId,
+            examDate: input.examDate,
+            subject: input.subject,
+            $comment: "Create Exam API For Find Exam Data"
+        }
+
+        let examExist = await Exams.find(lookup)
         if (examExist.length) continue
         let examId = await Counters.getValueForNextSequence("examId")
         const examData = new Exams({
@@ -44,7 +52,8 @@ router.post('/exam', auth, async (req, res) => {
 router.get('/examByClass/:classId', auth, async (req, res) => {
     const match = {
         schoolId: req.school.schoolId,
-        classId: req.params.classId
+        classId: req.params.classId,
+        $comment: "Get Exam API For Find Exam Data"
     }
 
     if (req.query.subject) {
@@ -70,7 +79,7 @@ router.get('/examByClass/:classId', auth, async (req, res) => {
 
 router.delete('/exam/:examId', auth, async (req, res) => {
     try {
-        const exam = await Exams.findOneAndDelete({ examId: req.params.examId }).lean()
+        const exam = await Exams.findOneAndDelete({ examId: req.params.examId , $comment: "Delete Exams API For Find And Delete Exams Data"}).lean()
 
         if (exam) {
             res.status(200).send({ "message": "Exam has been deleted successfully." })
@@ -96,7 +105,8 @@ router.patch('/exam/:examId', auth, async (req, res) => {
         }
         let match = {
             examId: req.params.examId,
-            schoolId: req.school.schoolId
+            schoolId: req.school.schoolId,
+            $comment: "Update Exam API For Find And Update Exam Data"
         }
         let update = { $set: req.body }
         const exam = await Exams.find(match).lean()

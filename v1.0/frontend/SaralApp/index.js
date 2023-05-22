@@ -9,9 +9,6 @@ import {decode, encode} from 'base-64'
 import PushNotification from "react-native-push-notification";
 import Strings from './src/utils/Strings';
 
-
-
-
 PushNotification.createChannel(
     {
         channelId: Strings.saral_app_auto_sync_channel, // (required)
@@ -45,7 +42,6 @@ PushNotification.configure({
 });
 
 AppRegistry.registerComponent(appName, () => App);
-
 
 if (!global.btoa) {
     global.btoa = encode;

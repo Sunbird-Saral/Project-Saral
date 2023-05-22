@@ -10,8 +10,8 @@ const userSchema = new mongoose.Schema({
     },
     userId: {
         type: String,
-        unique: true,
         required: true,
+        unique: true,
         trim: true,
     },
     schoolId: {
@@ -34,11 +34,11 @@ const userSchema = new mongoose.Schema({
     timestamps: true
 })
 
-userSchema.index({userId: -1})
+
 
 userSchema.statics.generateAuthToken = async function (user) {
 
-    const token = jwt.sign({ userId: user.userId.toString() ,schoolId: user.schoolId}, process.env.JWT_SECRET)
+    const token = jwt.sign({ userId: user.userId.toString() ,schoolId: user.schoolId, $comment: "Token generation"}, process.env.JWT_SECRET)
 
     return token
     

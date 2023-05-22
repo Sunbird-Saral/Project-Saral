@@ -44,19 +44,20 @@ const ROISchema = new mongoose.Schema({
         type: String,
         required: false
     },
-    type:{
-        type: String
-        // enum: ["SAT","PAT"]
-    },
     state:{
         type: String,
         required: true,
         trim: true
+    },
+    type:{
+        type: String
+        // enum: ["SAT","PAT"]
     }
 },{
     timestamps: true
 })
 
+ROISchema.index({classId: -1, subject: -1, state: -1, type: -1, set: -1})
 
 const Rois = mongoose.model('ROI', ROISchema)
 

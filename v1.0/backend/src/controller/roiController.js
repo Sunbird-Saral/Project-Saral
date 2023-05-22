@@ -5,13 +5,13 @@ const Schools = require('../models/school')
 
 exports.getRoiData = async (req, res, next) => {
     try {
-        const examExist = await Exams.findOne({ examId: req.params.examId }).lean()
- 
+        const examExist = await Exams.findOne({ examId: req.params.examId, $comment: "Get Roi Data API For Find Exam Data." }).lean()
+
         if (examExist) {
-            const school = await Schools.findOne({ schoolId: req.school.schoolId })  
-            const roiExist = await Rois.findOne({ classId: examExist.classId, subject: examExist.subject, state: school.state, type: examExist.type }).lean()
+            const school = await Schools.findOne({ schoolId: req.school.schoolId, $comment: "Get Roi Data API For Find School Data." })
+            const roiExist = await Rois.findOne({ classId: examExist.classId, subject: examExist.subject, state: school.state, type: examExist.type, $comment: "Find ROI Data." }).lean()
             let examSetLookupExist = {}
-            
+
             if (roiExist) {
                 if (req.query.set && examExist && typeof examExist == "object" && examExist.set) {
 
@@ -27,15 +27,16 @@ exports.getRoiData = async (req, res, next) => {
                         classId: examExist.classId,
                         subject: examExist.subject,
                         state: school.state,
-                        type: examExist.type
+                        type: examExist.type,
+                        $comment :"Get Roi Data API For Find ROI Data"
                     }
                 }
-                let roi = await Rois.find(examSetLookupExist, { roiId: 1,roi:1 }).lean()
-           
+                let roi = await Rois.find(examSetLookupExist, { roiId: 1, roi: 1 }).lean()
+
                 if (roi.length) {
                     res.status(200).json({
-                        layout : roi[0].roi.layout,
-                        roiId : roi[0].roiId
+                        layout: roi[0].roi.layout,
+                        roiId: roi[0].roiId
                     });
                 } else {
                     res.status(404).json({ "message": "ROI does not exist" })

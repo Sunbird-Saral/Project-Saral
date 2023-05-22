@@ -3,7 +3,6 @@ const Classes = require("../models/classes")
 const Users = require("../models/users")
 const Helper = require('../middleware/helper')
 const { stringObject } = require('../utils/commonUtils');
-const { auth } = require('../middleware/auth');
 
 exports.loginSchool = async (req, res, next) => {
   try {
@@ -14,7 +13,7 @@ exports.loginSchool = async (req, res, next) => {
   
     const users = await Helper.findByCredentials(userId, req.body.password)
     
-    const schools = await Schools.findOne({ schoolId: users.schoolId })
+    const schools = await Schools.findOne({ schoolId: users.schoolId , $comment: "Login School API For Find school data according to schoolId."   })
 
     await Helper.lockScreenValidator(schools)
 
@@ -32,11 +31,16 @@ exports.loginSchool = async (req, res, next) => {
       tags: schools.tags,
       autoSyncBatchSize: schools.autoSyncBatchSize,
       isMinimalMode: schools.isMinimalMode,
+      isManualEditEnabled: schools.isManualEditEnabled,
+      scanTimeoutMs: schools.scanTimeoutMs,
       supportEmail: schools.supportEmail,
       offlineMode: schools.offlineMode,
       isAppForceUpdateEnabled: schools.isAppForceUpdateEnabled,
       lock: schools.lock,
-      userId: users.userId
+      isFBAnalyticsEnabled: schools.isFBAnalyticsEnabled,
+      userId: users.userId,
+
+
     }
 
     let data = {
@@ -45,7 +49,7 @@ exports.loginSchool = async (req, res, next) => {
     }
 
     if (req.body.classes) {
-      const classData = await Classes.findClassesBySchools(schools.schoolId)
+      const classData = await Classes.findClassesBySchools(schools.schoolId ,{$comment: "Login School API For Find classes according to schoolId." })
 
       classData.forEach(data => {
         const { sections, classId, className } = data
