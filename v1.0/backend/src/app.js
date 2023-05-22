@@ -1,6 +1,5 @@
 const express = require('express')
 require('./db/mongoose')
-const expressPinoLogger = require('express-pino-logger')
 var path = require('path');
 const fs = require('fs')
 const puppeteer = require('puppeteer')
