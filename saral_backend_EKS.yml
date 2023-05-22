@@ -44,3 +44,20 @@ spec:
         hostPath:
           path: /usr/local/mongodb/data/db
       restartPolicy: Always
+      
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: saral-backend-service
+spec:
+  selector:
+    app: saral-backend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3005
+  type: ClusterIP
+  
+  
+      
