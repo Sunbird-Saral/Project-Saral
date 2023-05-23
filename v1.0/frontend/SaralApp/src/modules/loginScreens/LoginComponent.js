@@ -482,7 +482,7 @@ class LoginComponent extends Component {
                                         this.onLoginDetailsChange(text, 'schoolId')
                                     }}
                                     value={this.state.schoolId}
-                                    placeholder={Strings.Registred_Mob_No}
+                                    placeholder={Strings.userId_text}
                                     placeholderTextColor={AppTheme.BLACK_OPACITY_30}
                                     autoCapitalize={'none'}
                                     importantForAutofill="yes"
@@ -546,7 +546,7 @@ class LoginComponent extends Component {
                 >
 
                     <View style={[styles.container1,{width:80,height:80,borderRadius:40,backgroundColor:defaultBrandingdata.themeColor1?defaultBrandingdata.themeColor1:AppTheme.BLUE,alignSelf:'center'}]}>
-                        {/* <Image style={{width:80,height:80, borderRadius:50,border:1 }} source={{ uri: defaultBrandingdata && 'data:image/png;base64,' + this.props.defaultBrandingdata.logoImage }} /> */}
+                        <Image style={{width:80,height:80, borderRadius:50,border:1 }} source={{ uri: defaultBrandingdata && 'data:image/png;base64,' + this.props.defaultBrandingdata.logoImage }} />
                     </View>
                     <View style={{justifyContent:'center',alignItems:"center",marginVertical:20}}>
                         <Text style={{fontSize:22,fontWeight:'bold'}}> {Strings.Saral.toUpperCase()}</Text>
@@ -573,7 +573,7 @@ class LoginComponent extends Component {
                                         this.onLoginDetailsChange(text, 'schoolId')
                                     }}
                                     value={this.state.schoolId}
-                                    placeholder={Strings.Registred_Mob_No}
+                                    placeholder={Strings.userId_text}
                                     placeholderTextColor={AppTheme.BLACK_OPACITY_30}
                                     autoCapitalize={'none'}
                                 />

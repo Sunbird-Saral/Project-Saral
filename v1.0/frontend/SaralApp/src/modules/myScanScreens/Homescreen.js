@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View,Text, BackHandler,TouchableOpacity,Image } from 'react-native';
+import { View, Text, BackHandler, TouchableOpacity, Image } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash'
@@ -37,66 +37,66 @@ class HomeComponent extends Component {
                 BackHandler.removeEventListener('hardwareBackPress', this.onBack)
             );
         }
-        
+
         this.callMultiBrandingActiondata()
     }
 
-   async componentDidUpdate(prevProps) {
-        const { studentsAndExamData, multiBranding, loginData, minimalFlag }  = this.props;
+    async componentDidUpdate(prevProps) {
+        const { studentsAndExamData, multiBranding, loginData, minimalFlag } = this.props;
 
         const { loginData: { data: { school } } } = this.props;
         let hasNetwork = await checkNetworkConnectivity();
-        
+
         if (multiBranding && prevProps.multiBranding != multiBranding) {
             if (multiBranding.status && multiBranding.status == 200) {
 
                 //set minimal Flag
                 let isMinimalMode = await getMinimalValue();
                 const isMinimalModedata = this.props.loginData && this.props.loginData.data && this.props.loginData.data.school && this.props.loginData.data.school.hasOwnProperty("isMinimalMode") ? this.props.loginData.data.school.isMinimalMode : null
-               
+
                 let hasminimal = false
-              
-               if(isMinimalMode === false || isMinimalMode){
-                hasminimal = isMinimalMode
-               }else if(isMinimalModedata){
-                  hasminimal = isMinimalModedata
-               }else{
-                hasminimal = false
-               }
+
+                if (isMinimalMode === false || isMinimalMode) {
+                    hasminimal = isMinimalMode
+                } else if (isMinimalModedata) {
+                    hasminimal = isMinimalModedata
+                } else {
+                    hasminimal = false
+                }
                 storeFactory.dispatch(this.minimalFlagAction(hasminimal));
 
                 //calling students and exam api if minimal mode true
                 if (hasminimal) {
                     this.callStudentsData(this.props.loginData.data.token)
                 } else {
-                    this.setState({isLoading : false})
+                    this.setState({ isLoading: false })
                 }
-                
+
                 if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode && hasNetwork) {
                     let getBrandingCache = await getBrandingDataApi();
                     let userId = JSON.parse(loginData.config.data)
                     if (getBrandingCache != null) {
 
-                        let data = getBrandingCache.filter((e)=> {
+                        let data = getBrandingCache.filter((e) => {
                             if (e.key == userId.schoolId) {
                                 return true
                             }
                         });
 
-                            if (data.length > 0) {
-                                for (let element of getBrandingCache) {
-                                    if (element.key == data[0].key) {
-                                        element.data = multiBranding
-                                        break;
-                                    }
-                                };
-                            } else {
-                                let payload = {
-                                    key: `${userId.schoolId}`,
-                                    data: multiBranding
+                        if (data.length > 0) {
+                            for (let element of getBrandingCache) {
+                                if (element.key == data[0].key) {
+                                    element.data = multiBranding
+                                    break;
                                 }
-                                getBrandingCache.push(payload);
+                            };
+                        } else {
+                            let payload = {
+                                key: `${userId.schoolId}`,
+                                data: multiBranding
                             }
+                            getBrandingCache.push(payload);
+                        }
                         await setBrandingDataApi(getBrandingCache);
                     } else {
                         let payload = {
@@ -109,14 +109,14 @@ class HomeComponent extends Component {
             }
         }
 
-        if (studentsAndExamData &&  prevProps.studentsAndExamData != studentsAndExamData ) {
+        if (studentsAndExamData && prevProps.studentsAndExamData != studentsAndExamData) {
             if (studentsAndExamData.status && studentsAndExamData.status == 200) {
-                this.setState({isLoading : false})
+                this.setState({ isLoading: false })
                 if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode && minimalFlag && hasNetwork) {
-                    let getStudentExamCache = await getStudentExamApi(0,0);
+                    let getStudentExamCache = await getStudentExamApi(0, 0);
                     if (getStudentExamCache != null) {
 
-                        let data = getStudentExamCache.filter((e)=> {
+                        let data = getStudentExamCache.filter((e) => {
                             if (e.key == loginData.data.school.schoolId) {
                                 return true
                             }
@@ -142,30 +142,30 @@ class HomeComponent extends Component {
                             data: studentsAndExamData
                         }
                         await setStudentExamApi([payload], 0, 0);
-                        }
+                    }
                 }
             }
         }
     }
-    
+
 
     callStudentsData = async (token) => {
 
         let hasNetwork = await checkNetworkConnectivity();
-        let hasCacheData = await getStudentExamApi(0,0);
+        let hasCacheData = await getStudentExamApi(0, 0);
 
-        let cacheFilterData =  hasCacheData != null ? hasCacheData.filter((element)=>{
+        let cacheFilterData = hasCacheData != null ? hasCacheData.filter((element) => {
             if (element.key == this.props.loginData.data.school.schoolId) {
                 return true
             }
         })
-        :
-        []
+            :
+            []
 
         if (hasCacheData && cacheFilterData.length > 0) {
             storeFactory.dispatch(this.dispatchStudentExamData(cacheFilterData[0].data))
-            this.setState({isLoading: false})
-        } else if(hasNetwork) {
+            this.setState({ isLoading: false })
+        } else if (hasNetwork) {
             let dataPayload = {
                 "classId": "0",
                 "section": "0"
@@ -175,11 +175,11 @@ class HomeComponent extends Component {
             })
             let apiObj = new GetStudentsAndExamData(dataPayload, token);
             this.props.APITransport(apiObj)
-        }  else {
+        } else {
             this.callCustomModal(Strings.message_text, Strings.you_dont_have_cache, false)
-            this.setState({isLoading: false})
+            this.setState({ isLoading: false })
             //Alert message show message "something went wrong or u don't have cache in local"            
-        } 
+        }
     }
 
     callCustomModal(title, message, isAvailable, cancel) {
@@ -187,58 +187,58 @@ class HomeComponent extends Component {
             title: title,
             message: message,
             isOkAvailable: isAvailable,
-            isCancel : cancel
+            isCancel: cancel
         }
         this.props.dispatchCustomModalStatus(true);
         this.props.dispatchCustomModalMessage(data);
     }
 
-    dispatchStudentExamData(payload){
+    dispatchStudentExamData(payload) {
         return {
             type: constants.GET_STUDENTS_EXAMS_LIST,
             payload
         }
     }
 
-   minimalFlagAction (payload){
-    return {
-        type: constants.MINIMAL_FLAG,
-        payload
+    minimalFlagAction(payload) {
+        return {
+            type: constants.MINIMAL_FLAG,
+            payload
+        }
     }
-}
 
-   async callMultiBrandingActiondata() {
+    async callMultiBrandingActiondata() {
         let hasNetwork = await checkNetworkConnectivity();
         let hasCacheData = await getBrandingDataApi();
 
-        let cacheFilterData =  hasCacheData != null ? hasCacheData.filter((element)=>{
+        let cacheFilterData = hasCacheData != null ? hasCacheData.filter((element) => {
             let userId = JSON.parse(this.props.loginData.config.data)
             if (element.key == userId.schoolId) {
                 return true
             }
         })
-        :
-        []
+            :
+            []
 
         if (hasCacheData && cacheFilterData.length > 0) {
             storeFactory.dispatch(this.dispatchBrandingDataApi(cacheFilterData[0].data))
-        } else if(hasNetwork) {
+        } else if (hasNetwork) {
             let payload = this.props.multiBrandingData
             let token = this.props.loginData.data.token
             let apiObj = new MultiBrandingAction(payload, token);
             this.props.APITransport(apiObj)
-        }  else {
+        } else {
             this.callCustomModal(Strings.message_text, Strings.you_dont_have_cache, false)
-            this.setState({isLoading: false})
+            this.setState({ isLoading: false })
             //Alert message show message "something went wrong or u don't have cache in local"            
-        } 
-}
-
-dispatchBrandingDataApi(payload) {
-    return {
-        type: constants.MULTI_BRANDING,
-        payload
+        }
     }
+
+    dispatchBrandingDataApi(payload) {
+        return {
+            type: constants.MULTI_BRANDING,
+            payload
+        }
     }
 
     onBack = () => {
@@ -250,42 +250,89 @@ dispatchBrandingDataApi(payload) {
 
     render() {
         const { isLoading } = this.state;
-       const isMinimalModedata = this.props.loginData && this.props.loginData.data && this.props.loginData.data.school && this.props.loginData.data.school.isMinimalMode
-       const  Mode = isMinimalModedata ? !this.props.minimalFlag : this.props.minimalFlag
-       if(this.props.multiBrandingData === undefined || this.props.multiBrandingData === null || this.state.isLoading){
-           
-            return <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
-            {
+        const isMinimalModedata = this.props.loginData && this.props.loginData.data && this.props.loginData.data.school && this.props.loginData.data.school.isMinimalMode
+        const Mode = isMinimalModedata ? !this.props.minimalFlag : this.props.minimalFlag
+        const loginData = this.props.loginData && this.props.loginData.data && this.props.loginData.data.school
+        console.log('this.props.loginData >>', this.props.loginData);
+        if (this.props.multiBrandingData === undefined || this.props.multiBrandingData === null || this.state.isLoading) {
 
-                this.state.isLoading ?
-                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={{ fontSize: 12, fontWeight: 'bold', fontFamily : monospace_FF }}>Loading Branding ...</Text>
-                    </View> :
+            return <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
+                {
+
+                    this.state.isLoading ?
+                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                            <Text style={{ fontSize: 12, fontWeight: 'bold', fontFamily: monospace_FF }}>Loading Branding ...</Text>
+                        </View> :
                         <Brands
                             Image1={Assets.AppLogo}
                             appName={'Saral OCR App'}
                             themeColor={AppTheme.BLUE}
                             onPress={() => this.props.navigation.navigate('selectDetails')}
                         />
-            }
-        </View>
+                }
+            </View>
 
         }
         return (
-            <View style={{ flex: 1, backgroundColor:this.props.multiBrandingData.themeColor2 ? this.props.multiBrandingData.themeColor2:AppTheme.WHITE,justifyContent:'center',alignItems:'center' }}>
-            <View>
-             <TouchableOpacity  onPress={() => this.props.minimalFlag ? this.props.navigation.navigate("myScan") : this.props.navigation.navigate('selectDetails')}
-              style={{backgroundColor:this.props.multiBrandingData&&this.props.multiBrandingData.themeColor1 ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE,height:120,width:120,borderRadius:15,justifyContent:'center',alignItems:'center'}}
-              >
-             <Image style={{ height: 100, width: 80,resizeMode:"stretch" }} source={Assets.assessments}/>
-             </TouchableOpacity>
-             <Text style={{textAlign:'center',fontSize:18,fontWeight:'bold'}}>Assessments</Text>
-             <View style={{backgroundColor:this.props.multiBrandingData&&this.props.multiBrandingData.themeColor1?this.props.multiBrandingData.themeColor1 : AppTheme.BLUE,height:120,width:120,borderRadius:15,top:50}}>
-             </View>
-             <Text style={{textAlign:'center',fontSize:18,fontWeight:'bold',top:50}}>Use Case 2</Text>
-             </View>
-                           
-                            {
+            <View style={{ flex: 1, backgroundColor: this.props.multiBrandingData.themeColor2 ? this.props.multiBrandingData.themeColor2 : AppTheme.WHITE, justifyContent: 'center', alignItems: 'center' }}>
+                <View>
+                    <TouchableOpacity onPress={() => this.props.minimalFlag ? this.props.navigation.navigate("myScan") : this.props.navigation.navigate('selectDetails')}
+                        style={{ backgroundColor: this.props.multiBrandingData && this.props.multiBrandingData.themeColor1 ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE, height: 120, width: 120, borderRadius: 15, justifyContent: 'center', alignItems: 'center' }}
+                    >
+                        <Image style={{ height: 100, width: 80, resizeMode: "stretch" }} source={Assets.assessments} />
+                    </TouchableOpacity>
+                    <Text style={{ textAlign: 'center', fontSize: 18, fontWeight: 'bold' }}>Assessments</Text>
+                    {
+                        loginData && loginData.useCase2 === true &&
+                        <View style={{marginTop:10}}>
+                            <TouchableOpacity
+                                style={{ backgroundColor: this.props.multiBrandingData && this.props.multiBrandingData.themeColor1 ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE, height: 120, width: 120, borderRadius: 15, justifyContent: 'center', alignItems: 'center' }}
+                            >
+                                <Image style={{ height: 100, width: 80, resizeMode: "stretch" }} source={Assets.assessments} />
+                            </TouchableOpacity>
+                            <Text style={{ textAlign: 'center', fontSize: 18, fontWeight: 'bold' }}>Use Case 2</Text>
+                        </View>
+                    }
+
+                    {
+                        loginData && loginData.useCase3 === true &&
+                        <View style={{marginTop:10}}>
+                            <TouchableOpacity
+                                style={{ backgroundColor: this.props.multiBrandingData && this.props.multiBrandingData.themeColor1 ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE, height: 120, width: 120, borderRadius: 15, justifyContent: 'center', alignItems: 'center' }}
+                            >
+                                <Image style={{ height: 100, width: 80, resizeMode: "stretch" }} source={Assets.assessments} />
+                            </TouchableOpacity>
+                            <Text style={{ textAlign: 'center', fontSize: 18, fontWeight: 'bold' }}>Use Case 3</Text>
+                        </View>
+                    }
+
+                    {
+                        loginData && loginData.useCase4 === true &&
+                        <View style={{marginTop:10}}>
+                            <TouchableOpacity
+                                style={{ backgroundColor: this.props.multiBrandingData && this.props.multiBrandingData.themeColor1 ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE, height: 120, width: 120, borderRadius: 15, justifyContent: 'center', alignItems: 'center' }}
+                            >
+                                <Image style={{ height: 100, width: 80, resizeMode: "stretch" }} source={Assets.assessments} />
+                            </TouchableOpacity>
+                            <Text style={{ textAlign: 'center', fontSize: 18, fontWeight: 'bold' }}>Use Case 4</Text>
+                        </View>
+                    }
+
+                    {
+                        loginData && loginData.useCase5 === true &&
+                        <View style={{marginTop:10}}>
+                            <TouchableOpacity
+                                style={{ backgroundColor: this.props.multiBrandingData && this.props.multiBrandingData.themeColor1 ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE, height: 120, width: 120, borderRadius: 15, justifyContent: 'center', alignItems: 'center' }}
+                            >
+                                <Image style={{ height: 100, width: 80, resizeMode: "stretch" }} source={Assets.assessments} />
+                            </TouchableOpacity>
+                            <Text style={{ textAlign: 'center', fontSize: 18, fontWeight: 'bold' }}>Use Case 5</Text>
+                        </View>
+                    }
+
+                </View>
+
+                {
                     isLoading
                     &&
                     <Spinner

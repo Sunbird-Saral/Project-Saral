@@ -54,7 +54,7 @@ export default strings = new LocalizedStrings({
         login_text: 'Login',
         up_saralData: 'UP Saraldata',
         schoolId_text: 'School Id',
-        userId_text: 'User Id',
+        userId_text: 'User ID',
         password_text: 'Password',
         schoolid_password_doesnot_match: 'School Id or Password does not match',
         subject:'Subject',
