@@ -49,9 +49,8 @@ const CORS_ORIGIN = [{"origin": 'http://192.168.0.106:3000', "optionsSuccessStat
 
 const checkURL = (req, res, next) => {
     const { origin, url, methods } = req.headers;
-    const method = methods.toUpperCase();
     let isUrlExist = CORS_ORIGIN.findIndex((el)=> { return el.origin == origin });
-    let isMethodExist = CORS_ORIGIN.findIndex((el)=> { return el.methods == method });
+    let isMethodExist = CORS_ORIGIN.findIndex((el)=> { return el.methods == methods });
     
     if (isUrlExist == -1) {
       return res.status(403).json({ error: 'Invalid URL' });
