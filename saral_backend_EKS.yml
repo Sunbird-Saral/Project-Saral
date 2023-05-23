@@ -12,14 +12,6 @@ spec:
       labels:
         app: saral-backend
     spec:
-      initContainers:
-      - name: import-data
-        image: node:14.21.2
-        command: ["node"]
-        args: ["./data/import-data.js", "--import"]
-        volumeMounts:
-        - name: mongodb-data
-          mountPath: /data/db
       containers:
       - name: saral-backend
         image: registry.hub.docker.com/saaral123/backendapi:2.0
