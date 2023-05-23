@@ -49,12 +49,14 @@ const CORS_ORIGIN = [{"origin": 'http://192.168.0.106:3000', "optionsSuccessStat
 
 const checkURL = (req, res, next) => {
     const { origin, url, methods } = req.headers;
-    let isUrlExist = CORS_ORIGIN.findIndex((el)=> { return el.origin == origin });
-    let isMethodExist = CORS_ORIGIN.findIndex((el)=> { return el.methods == methods });
+    let isUrlExist = CORS_ORIGIN.findIndex((el) => { return el.origin == origin });
+    let isMethodAvailable = methods ? methods.toUpperCase() : "";
+
+    let isMethodExist = CORS_ORIGIN[isUrlExist].methods.findIndex((el) => { return el == isMethodAvailable });
     
     if (isUrlExist == -1) {
       return res.status(403).json({ error: 'Invalid URL' });
-    } else if(isMethodExist == -1) {
+    } else if (isMethodExist == -1) {
         return res.status(403).json({ error: 'Invalid Method' });
     }
     next();
