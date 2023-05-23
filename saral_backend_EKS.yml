@@ -14,7 +14,7 @@ spec:
     spec:
       initContainers:
       - name: import-data
-        image: node:latest
+        image: node:18.16.0
         command: ["node"]
         args: ["./data/import-data.js", "--import"]
         volumeMounts:
