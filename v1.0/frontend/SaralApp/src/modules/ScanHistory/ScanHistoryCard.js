@@ -314,7 +314,7 @@ const ScanHistoryCard = ({
 
                         <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                                <Text style={{fontFamily : monospace_FF}}>{BrandLabel&&BrandLabel.Class ? BrandLabel.Class : 'Scans to be Saved'}</Text>
+                                <Text style={{fontFamily : monospace_FF}}>{BrandLabel&&BrandLabel.Class ? BrandLabel.Class : 'Scans not submitted yet'}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
                                 <Text style={{fontFamily : monospace_FF,color:'red',fontWeight:"bold"}} >{scanStatusData}</Text>
@@ -323,7 +323,7 @@ const ScanHistoryCard = ({
 
                         <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                                <Text style={{fontFamily : monospace_FF}}>{BrandLabel&&BrandLabel.Class ? BrandLabel.Class : 'Scans Saved'}</Text>
+                                <Text style={{fontFamily : monospace_FF}}>{BrandLabel&&BrandLabel.Class ? BrandLabel.Class : 'Total scans submitted'}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
                                 <Text style={{fontFamily : monospace_FF,fontWeight:"bold"}} >{getSaveCount()}</Text>
@@ -425,7 +425,7 @@ const ScanHistoryCard = ({
                                 }}
                                 onPress={onPressSaveInDB}
                             >
-                                <Text style={{ fontFamily: monospace_FF, color: AppTheme.BLACK }}>{Strings.save_scan}</Text>
+                                <Text style={{ fontFamily: monospace_FF, color: AppTheme.BLACK }}>{'Submit all scans'}</Text>
                             </TouchableOpacity>}
                     </View>
                     {/* {

@@ -114,27 +114,27 @@ export const MARKS_INFO = {
 }
 
 export const MARKS_INFO_DEFAULT = [
-    "Sr No",
+    // "Sr No",
     "Question",
-    "Obtained Marks",
-    "Predicted Marks"
+    "Answer",
+    // "Predicted Marks"
 ]
 
 export const TABLE_HEADER = [
     // "Sr No",
-     "Questions", "Marks"
+     "Questions", "Answer"
 ]
 
 export const defaultHeaderTable = {
     "id": "Identifier",
     // "sr_no": "Sr No",
     "questions":"Questions",
-    "marks":"Marks"  
+    "marks":"Answer"  
 }
 
 export const TABLE_HEADER_WITH_TAG = [
     // "Sr No", 
-    "Questions", "Marks", "Tags"
+    "Questions", "Answer", "Tags"
 ]
 
 export const Exam_QuestionHeader = [

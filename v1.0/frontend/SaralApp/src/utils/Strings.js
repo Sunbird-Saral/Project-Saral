@@ -7,6 +7,7 @@ export default strings = new LocalizedStrings({
         cancel_text: 'Cancel',
         ok_text: 'Ok',
         submit_text: 'SUBMIT',
+        Save:'SAVE',
         Back :'Back',
         close:'Close',
         get_start: 'GET STARTED',

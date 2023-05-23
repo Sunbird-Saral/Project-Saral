@@ -38,13 +38,13 @@ export const styles = StyleSheet.create({
         borderColor: AppTheme.BLACK
     },
     scanLabelKeyStyle: {
-        width: '50%',
+        width: '60%',
         backgroundColor: AppTheme.TAB_BORDER,
         borderLeftWidth: 1,
         borderRightWidth: .5,
     },
     scanLabelValueStyle: {
-        width: '50%',
+        width: '40%',
         backgroundColor: AppTheme.WHITE,
         borderLeftWidth: .5,
         borderRightWidth: 1,

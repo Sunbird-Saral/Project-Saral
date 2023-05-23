@@ -70,7 +70,7 @@ const ScannedDetailsComponent = ({
     const [isStudentValid, setIsStudentValid] = useState(false);
     const [multiPageStdId, setMultipageStdId] = useState();
 
-    const [nextBtn, setNextBtn] = useState('SUBMIT')
+    const [nextBtn, setNextBtn] = useState('SAVE')
     const [checkStdRollDuplicate, setCheckStdRollDuplicate] = useState([])
     const [stdAddRollData, setStdAddRollData] = useState([])
     const [toggleCheckBox, setToggleCheckBox] = useState(false)
@@ -482,7 +482,7 @@ const ScannedDetailsComponent = ({
                 setCurrentIndex(currentIndex + 1)
                 setBtnName('Back')
                 if (currentIndex + 1 == stdRollArray.length - 1) {
-                    setNextBtn(Strings.submit_text)
+                    setNextBtn(Strings.Save)
                 }
             } else {
                 let chkSkip = 0
@@ -528,7 +528,7 @@ const ScannedDetailsComponent = ({
 
 
     const saveMultipleStudentDataSheet = () => {
-        if (isMultipleStudent && nextBtn === Strings.submit_text) {
+        if (isMultipleStudent && nextBtn === Strings.Save) {
             saveMultiData()
         }
     }
@@ -1058,7 +1058,7 @@ const ScannedDetailsComponent = ({
             setBtnName(Strings.Back)
             setNewArrayValue(filterDataAccordingPage)
             if (currentIndex + 1 == multiPage) {
-                setNextBtn(Strings.submit_text)
+                setNextBtn(Strings.Save)
             }
         }
     }
@@ -1455,6 +1455,7 @@ const ScannedDetailsComponent = ({
                                           
                                             {
                                                 newArrayValue.map((element, index) => {
+                                                    console.log(index);
                                                     return (
                                                         <View element={element} key={index} style={{ flexDirection: 'row',justifyContent:'center' }}>
 {/* 
@@ -1467,7 +1468,7 @@ const ScannedDetailsComponent = ({
                                                             /> */}
                                                             <MarksHeaderTable
                                                                 customRowStyle={{height:height/12, width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '25%' : '50%', }}
-                                                                rowTitle={element.format.value}
+                                                                rowTitle={renderSRNo(element, index)}
                                                                 rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                                                 editable={false}
                                                                 keyboardType={'number-pad'}

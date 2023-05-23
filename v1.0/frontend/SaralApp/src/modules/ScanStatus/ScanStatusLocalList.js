@@ -292,36 +292,36 @@ const ScanStatusLocalList = ({
                             {
                               BrandLabel && MARKS_INFO ?
                              <View style={{ flexDirection: 'row', width: '100%' }}>
-                               <MarksHeaderTable
+                               {/* <MarksHeaderTable
                                  customRowStyle={{width:width/4.5, backgroundColor: AppTheme.TABLE_HEADER}}
                                  rowTitle={ BrandLabel && BrandLabel.sr_no || MARKS_INFO.sr_no}
                                  rowBorderColor={AppTheme.TAB_BORDER}
                                  editable={false}
-                               />
+                               /> */}
                                <MarksHeaderTable
-                                 customRowStyle={{width:width/4.5, backgroundColor: AppTheme.TABLE_HEADER}}
+                                 customRowStyle={{width:width/2.25, backgroundColor: AppTheme.TABLE_HEADER}}
                                  rowTitle={ BrandLabel && BrandLabel.questionId || MARKS_INFO.questionId}
                                  rowBorderColor={AppTheme.TAB_BORDER}
                                  editable={false}
                                />
                                <MarksHeaderTable
-                                 customRowStyle={{ width:width/4.5, backgroundColor: AppTheme.TABLE_HEADER}}
+                                 customRowStyle={{ width:width/2.25, backgroundColor: AppTheme.TABLE_HEADER}}
                                  rowTitle={ BrandLabel && BrandLabel.obtainedMarks || MARKS_INFO.obtainedMarks}
                                  rowBorderColor={AppTheme.TAB_BORDER}
                                  editable={false}
                                />
-                                <MarksHeaderTable
+                                {/* <MarksHeaderTable
                                  customRowStyle={{ width:width/4.5, backgroundColor: AppTheme.TABLE_HEADER}}
                                  rowTitle={ BrandLabel && BrandLabel.predictedMarks || MARKS_INFO.predictedMarks}
                                  rowBorderColor={AppTheme.TAB_BORDER}
                                  editable={false}
-                               />
+                               /> */}
                              </View>
                              :
                              MARKS_INFO_DEFAULT.map((data) => {
                                 return (
                                     <MarksHeaderTable
-                                        customRowStyle={{ width:width/4.5, backgroundColor: AppTheme.TABLE_HEADER }}
+                                        customRowStyle={{ width:width/2.25, backgroundColor: AppTheme.TABLE_HEADER }}
                                         key={data}
                                         rowTitle={data}
                                         rowBorderColor={AppTheme.TAB_BORDER}
@@ -337,35 +337,35 @@ const ScanStatusLocalList = ({
                                     <View M={M} key={i} style={{ flexDirection: 'row' }}>
 
                                         <MarksHeaderTable
-                                            customRowStyle={{height:height/12,width:width/4.5 }}
+                                            customRowStyle={{height:height/12,width:width/2.25 }}
                                             rowTitle={renderSRNo(M, i)}
                                             rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                             editable={false}
                                             keyboardType={'number-pad'}
                                         />
-                                        <MarksHeaderTable
+                                        {/* <MarksHeaderTable
                                             customRowStyle={{height:height/12, width:width/4.5 }}
                                             rowTitle={M.questionId}
                                             rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                             editable={false}
                                             keyboardType={'number-pad'}
                             
-                                        />
+                                        /> */}
                                         <MarksHeaderTable
-                                            customRowStyle={{height:height/12,width:width/4.5 }}
+                                            customRowStyle={{height:height/12,width:width/2.25 }}
                                             rowTitle={M.obtainedMarks}
                                             rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                             editable={false}
                                             keyboardType={'number-pad'}
                                         />
-                                        <MarksHeaderTable
+                                        {/* <MarksHeaderTable
                                             customRowStyle={{height:height/12,width:width/4.5 }}
                                             rowTitle={M.predictedMarks}
                                             rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                             editable={false}
                                             keyboardType={'number-pad'}
                             
-                                        />
+                                        /> */}
                                         
 
                                     </View>
