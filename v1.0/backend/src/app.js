@@ -45,7 +45,7 @@ const generateJestReportPdf = async () => {
     console.log("pdf printed")
 }
 
-const CORS_ORIGIN = [{"origin": 'http://192.168.0.106:3000', "optionsSuccessStatus": 200,"methods": "PUT"},{"origin": 'http://192.168.0.104:3000', "optionsSuccessStatus": 200,"methods": "PUT"}]
+const CORS_ORIGIN = [{ "origin": 'https://saral-dev-api.anuvaad.org', "optionsSuccessStatus": 200, "methods": ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'] }, { "origin": 'https://saral-dev-api.anuvaad.org', "optionsSuccessStatus": 200, "methods": ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'] }]
 
 const checkURL = (req, res, next) => {
     const { origin, url, methods } = req.headers;
