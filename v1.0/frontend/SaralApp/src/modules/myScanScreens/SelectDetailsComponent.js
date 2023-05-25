@@ -527,7 +527,7 @@ dispatchStudentExamData(payload){
                                     let subjects = []
                                     let set =[]
                                     _.filter(studentsAndExamData.data.exams, function (o) {
-                                        subArr.push(o.subject + " " + o.examDate)
+                                        subArr.push(o.subject)
                                         testID.push(o.examId)
                                         examDates.push(o.examDate)
                                         subjects.push(o.subject)

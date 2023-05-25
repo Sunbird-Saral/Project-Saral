@@ -168,17 +168,19 @@ const StudentsDataComponent = ({
         }
     }
     return (
-        <View style={{flex:1, flexDirection:'row',margin:4,justifyContent:'center', alignItems:'center'}}>
-             <View style={{width:AppTheme.WIDTH_15,height:item.name.length > 50 ? AppTheme.HEIGHT_70 : AppTheme.HEIGHT_60,borderWidth:0.5,justifyContent:'center',alignItems:'center',backgroundColor:AppTheme.WHITE}}>
+        <View style={{flex:1, flexDirection:'row',margin:5,justifyContent:'center', alignItems:'center'}}>
+            <View style={{flexDirection:"row",width:292,height:50}}>
+             <View style={{width:AppTheme.WIDTH_15,borderWidth:0.5,justifyContent:'center',alignItems:'center',backgroundColor:AppTheme.WHITE}}>
              <Text>{index + 1}</Text>
 
              </View>
              <View style={{width:AppTheme.WIDTH_60 ,backgroundColor:AppTheme.WHITE}}>
-             <View style={{height:AppTheme.HEIGHT_25,borderWidth:0.5,justifyContent:'center'}}>
+             <View style={{borderWidth:0.5,height:item.name.length > 50 ?40 : 25,justifyContent:'center'}}>
+             <Text style={{marginLeft:10}}>{`${item.name}${item.fatherName ? '/' + item.fatherName : ''}`}</Text>
+             </View>
+             <View style={{borderWidth:0.5,height:25,justifyContent:'center'}}>
              <Text style={{marginLeft:10}}>{item.studentId}</Text>
              </View>
-             <View style={{height:item.name.length > 50 ? AppTheme.HEIGHT_30 : AppTheme.HEIGHT_25,borderWidth:0.5,justifyContent:'center'}}>
-             <Text style={{marginLeft:10}}>{`${item.name}${item.fatherName ? '/' + item.fatherName : ''}`}</Text>
              </View>
              </View>
              <View style={{width:AppTheme.WIDTH_15}}>
@@ -192,18 +194,18 @@ const StudentsDataComponent = ({
 {
                         !isPresent
                             ?
-                            <View style={{backgroundColor: '#e5b6b3',width:50,height:20,margin:10,borderRadius:10}}>
-                            <View style={{flexDirection:"row",justifyContent:'space-between'}}>
-                             <View style={{backgroundColor:'red',width:20,height:20,borderRadius:10}}></View>
+                            <View style={{backgroundColor: '#e5b6b3',width:54,height:24,borderRadius:10}}>
+                            <View style={{flexDirection:"row",justifyContent:'space-between',alignItems:'center'}}>
+                             <View style={{backgroundColor:'red',width:22,height:22,borderRadius:11,top:1}}></View>
                              <Text style={{marginRight:12,color:'red',fontWeight:"bold"}}>{'A'}</Text>
                              </View>
                              </View>
                             
                             :
-                            <View style={{backgroundColor:themeColor2 ? '#93CECE' : AppTheme.BLUE,width:50,height:20,margin:10,borderRadius:10}}>
-                           <View style={{flexDirection:"row",justifyContent:'space-between'}}>
+                            <View style={{backgroundColor:themeColor2 ? '#93CECE' : AppTheme.BLUE,width:54,height:24,borderRadius:10}}>
+                           <View style={{flexDirection:"row",justifyContent:'space-between',alignItems:'center'}}>
                             <Text style={{marginLeft:12,color:themeColor1,fontWeight:'bold'}}>{'P'}</Text>
-                            <View style={{backgroundColor:themeColor1,width:20,height:20,borderRadius:10}}></View>
+                            <View style={{backgroundColor:themeColor1,width:22,height:22,borderRadius:11,top:1}}></View>
                             </View>
                             </View>
                            

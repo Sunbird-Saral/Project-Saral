@@ -22,7 +22,7 @@ const ScanStatusLocalList = ({
     scanitemdata,
     status = "Saved",
     Review = "Review",
-    Reviewd = "Reviewd",
+    Reviewd = "Reviewed",
     minimalFlag = false,
     BrandLabel,
     themeColor2,
@@ -245,8 +245,8 @@ const ScanStatusLocalList = ({
 
   
     return (
-        <View style={{flexDirection:'row',margin:5,justifyContent:'center', alignItems:'center'}}>
-             <View style={{width:'10%',height:studentName[0] && studentName[0].name.length >50 ? 100:50,borderWidth:0.5,border:10,justifyContent:'center',alignItems:'center',backgroundColor:AppTheme.WHITE}}>
+        <View style={{flexDirection:'row',justifyContent:'center', alignItems:'center'}}>
+             <View style={{width:'10%', height:studentName[0] && studentName[0].name.length >50 ? 100:50,borderWidth:0.5,border:10,justifyContent:'center',alignItems:'center',backgroundColor:AppTheme.WHITE}}>
              <Text>{index + 1}</Text>
              </View>
              <View style={{width:'50%',backgroundColor:AppTheme.WHITE}}>
@@ -261,7 +261,7 @@ const ScanStatusLocalList = ({
            }
              </View>
              </View>
-             <View style={{width:'35%' }}>
+             <View style={{width:'30%',marginLeft:10 }}>
                     <ButtonComponent
                         customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: !reviewed ? themeColor2 ? '#AED3D3' : AppTheme.BLUE :  themeColor1 ? themeColor1 : AppTheme.BLUE,height:studentName[0] && studentName[0].name.length >50 ? 100:50}]}
                         customBtnTextStyle={[styles.buttonText,{color:!reviewed ? 'black' : 'white'}]}
@@ -283,7 +283,7 @@ const ScanStatusLocalList = ({
                 data={
                     <View style={{  }}>
                         <Text style={styles.textStyle}>{`studentId : `}<Text style={{fontWeight:'normal',fontFamily : monospace_FF}}>{`${scanitemdata&&scanitemdata.studentId}`}</Text></Text>
-                        <Text style={styles.textStyle}>{`predictedStudentId : ` }<Text style={{fontWeight:'normal',fontFamily : monospace_FF}}>{`${scanitemdata&&scanitemdata.predictedStudentId ? scanitemdata.predictedStudentId : '' }`}</Text></Text>
+                        {/* <Text style={styles.textStyle}>{`predictedStudentId : ` }<Text style={{fontWeight:'normal',fontFamily : monospace_FF}}>{`${scanitemdata&&scanitemdata.predictedStudentId ? scanitemdata.predictedStudentId : '' }`}</Text></Text> */}
                         <Text style={styles.textStyle}>{`section : ` }<Text style={{fontWeight:'normal',fontFamily : monospace_FF}}>{`${scanitemdata&&scanitemdata.section}`}</Text></Text>
                         <Text style={styles.textStyle}>{`studentAvailability : ` }<Text style={{fontWeight:'normal',fontFamily : monospace_FF}}>{`${scanitemdata&&scanitemdata.studentAvailability}`}</Text></Text>
                         <Text style={styles.textStyle}>{`marksInfo : `}</Text>
@@ -414,7 +414,7 @@ const styles = StyleSheet.create({
         borderRadius: 10
     },
     nxtBtnStyle1: {
-        padding: 5, marginVertical: 5, height: 50,marginLeft:0,borderBottomRightRadius:5,borderTopRightRadius:5,borderBottomLeftRadius:0,borderTopLeftRadius:0
+        padding: 5, marginVertical: 5, height: 50,marginLeft:0,borderRadius:10
     },
     nxtBtnStyle:{marginHorizontal:20, borderRadius: 10,height: 40, width: width/1.5,padding: 5, marginTop:10 },
     buttonText: {
