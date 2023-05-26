@@ -5,47 +5,46 @@ const { stringObject } = require('../utils/commonUtils')
 require('../db/mongoose')
 const logger = require('../logging/logger')
 const mongoose = require('mongoose')
+const httperror = require("http-errors");
 
 exports.saveMarks = async (req, res, next) => {
-
     const marks = []
 
     if (req.header('X-App-Version')) {
         // console.log("APP VERSION", req.get('X-App-Version'))
     }
-    const subject = req.body.subject
-    const examDate = req.body.examDate
-    const examId = req.body.examId
-    const schoolId = req.school.schoolId
-    const classId = req.body.classId
-    const userId = req.school.userId
-    const createdOn = new Date().getTime()
-    const roiId = req.body.roiId
 
-    req.body.studentsMarkInfo.forEach(studentsData => {
-        const marksData = new Marks({
-            ...studentsData,
-            schoolId,
-            examDate,
-            subject,
-            classId,
-            createdOn,
-            roiId,
-            examId,
-            userId
-        })
-        marks.push(marksData)
-    });
     try {
+        if (Object.keys(req.body).length === 0) res.status(400).send({ message: 'Validation error.' })
+        const input_keys = Object.keys(req.body)
+        if (!["subject", "classId","userId","examId"].every((i) => input_keys.includes(i)))
+            throw new httperror(400, "Invalid Request");
 
-        const updates = Object.keys(req.body)
-        const allowedUpdates = ['classId', 'subject', 'section', 'studentId', 'schoolId']
-        const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
 
-        if (!isValidOperation) {
-            throw new Error('Invaild Request');
-        }
+        const subject = req.body.subject
+        const examDate = req.body.examDate
+        const examId = req.body.examId
+        const schoolId = req.school.schoolId
+        const classId = req.body.classId
+        const userId = req.school.userId
+        const createdOn = new Date().getTime()
+        const roiId = req.body.roiId
 
+
+        req.body.studentsMarkInfo.forEach(studentsData => {
+            const marksData = new Marks({
+                ...studentsData,
+                schoolId,
+                examDate,
+                subject,
+                classId,
+                createdOn,
+                roiId,
+                examId,
+                userId
+            })
+            marks.push(marksData)
+        });
 
         await Helper.lockScreenValidator(req.school)
 
@@ -59,7 +58,7 @@ exports.saveMarks = async (req, res, next) => {
                         examDate: mark.examDate
                     },
                     update: { $set: { studentIdTrainingData: mark.studentIdTrainingData, studentId: mark.studentId, predictionConfidence: mark.predictionConfidence, schoolId: mark.schoolId, examDate: mark.examDate, predictedStudentId: mark.predictedStudentId, studentAvailability: mark.studentAvailability, marksInfo: mark.marksInfo, maxMarksTrainingData: mark.maxMarksTrainingData, maxMarksPredicted: mark.maxMarksPredicted, securedMarks: mark.securedMarks, totalMarks: mark.totalMarks, obtainedMarksTrainingData: mark.obtainedMarksTrainingData, obtainedMarksPredicted: mark.obtainedMarksPredicted, set: mark.set, subject: mark.subject, classId: mark.classId, section: mark.section, examId: mark.examId, userId: mark.userId, roiId: mark.roiId } },
-                    upsert: true
+                    upsert:true
                 }
             }))
         );
