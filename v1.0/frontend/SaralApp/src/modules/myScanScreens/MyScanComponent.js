@@ -643,6 +643,7 @@ class MyScanComponent extends Component {
 
     callScanStatusData = async (isApiCalled, filteredDatalen, localScanData, res) => {
         const deviceUniqId = await DeviceInfo.getUniqueId();
+        let token = loginData.data.token
         let hasNetwork = await checkNetworkConnectivity();
         const { loginData } = this.props;
         if (!hasNetwork) {
@@ -699,7 +700,7 @@ class MyScanComponent extends Component {
                 }
                 let roiId = this.props.roiData && this.props.roiData.data.roiId;
                 dataPayload.roiId = roiId;
-                let apiObj = new scanStatusDataAction(dataPayload,deviceUniqId);
+                let apiObj = new scanStatusDataAction(dataPayload, token, deviceUniqId);
                 this.FetchSavedScannedData(isApiCalled, apiObj, loginCred.schoolId, loginCred.password, filteredDatalen, localScanData)
             }
         }
@@ -716,12 +717,7 @@ class MyScanComponent extends Component {
                     source.cancel('The request timed out.');
                 }
             }, 60000);
-            axios.post(api.apiEndPoint(), api.getBody(), {
-                auth: {
-                    username: uname,
-                    password: pass
-                }
-            })
+            axios.post(api.apiEndPoint(), api.getBody(), { headers: api.getHeaders(), cancelToken: source.token })
                 .then(function (res) {
                     apiResponse = res
                     clearTimeout(id)

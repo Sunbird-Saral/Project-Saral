@@ -5,7 +5,7 @@ import API from '../../flux/actions/apis/api';
 import C from '../../flux/actions/constants'
 
 export class scanStatusDataAction extends API {
-    constructor(payload, token,deviceUniqId, timeout = 30000) {
+    constructor(payload, token, deviceUniqId, timeout = 30000) {
         super('POST', timeout, false);
         this.payload = payload;
         this.token = token;
