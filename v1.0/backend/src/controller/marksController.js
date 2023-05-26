@@ -3,6 +3,7 @@ const Users = require('../models/users')
 const Helper = require('../middleware/helper')
 const { stringObject } = require('../utils/commonUtils')
 require('../db/mongoose')
+const logger = require('../logging/logger')
 const mongoose = require('mongoose')
 
 exports.saveMarks = async (req, res, next) => {
@@ -62,7 +63,7 @@ exports.saveMarks = async (req, res, next) => {
                 }
             }))
         );
-        console.log("marks responsee---->", marksResult)
+        logger.info("marks responsee---->", marksResult)
 
         let match = {
             schoolId: marks[0].schoolId,
@@ -74,7 +75,6 @@ exports.saveMarks = async (req, res, next) => {
         }
 
         let marksData = await Marks.find(match)
-        console.log("marksssssssss", marksData)
 
         res.status(200).json({ data: marksData })
 
