@@ -32,7 +32,7 @@ import { collectErrorLogs } from '../CollectErrorLogs';
 import { scanStatusDataAction } from './scanStatusDataAction';
 import Spinner from '../common/components/loadingIndicator';
 import constants from '../../flux/actions/constants';
-
+import DeviceInfo from 'react-native-device-info';
 
 const ScanStatusLocal = ({
     loginData,
@@ -275,6 +275,7 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
     }
     
     const callScanStatusData = async (bool,filteredDatalen, localScanData) => {
+        const deviceUniqId = await DeviceInfo.getUniqueId();
         let loginCred = await getLoginCred()
 
         let dataPayload = {
@@ -290,7 +291,7 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
         if (filteredData.hasOwnProperty("set")) {
             dataPayload.set = filteredData.set
         }
-        let apiObj = new scanStatusDataAction(dataPayload);
+        let apiObj = new scanStatusDataAction(dataPayload,deviceUniqId);
         FetchSavedScannedData(apiObj, loginCred.schoolId, loginCred.password, filteredDatalen, localScanData)
     }
 
