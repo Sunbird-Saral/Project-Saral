@@ -967,7 +967,7 @@ dispatchStudentExamData(payload){
                             style={{ fontSize: 14, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%', fontFamily: monospace_FF }}
                         >
                             {`${Strings.school_name} : `} */}
-                            <Text style={{ fontWeight: 'normal', fontFamily: monospace_FF ,marginLeft:5,color:'#000000'}}>
+                            <Text style={{marginLeft:5}}>
                             {`${loginData.data.school.name} ${loginData.data.school.block ?','+ loginData.data.school.block : ''} ${loginData.data.school.district ? ','+loginData.data.school.district : ''}`}
                             </Text>
                         {/* </Text> */}

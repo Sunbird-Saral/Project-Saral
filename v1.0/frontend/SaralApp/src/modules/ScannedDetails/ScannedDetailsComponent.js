@@ -1375,7 +1375,7 @@ const ScannedDetailsComponent = ({
                                                                 :
                                                                 null
                                                     }
-                                                    {/* {
+                                                    {
                                                         isMultipleStudent
                                                         &&
                                                         <View style={styles.row}>
@@ -1394,7 +1394,7 @@ const ScannedDetailsComponent = ({
                                                                 }}
                                                             />
                                                         </View>
-                                                    } */}
+                                                    }
                                                 </View>
                                             </View>
                                         </View>

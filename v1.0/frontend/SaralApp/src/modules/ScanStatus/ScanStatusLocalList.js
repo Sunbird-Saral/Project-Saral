@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from 'react';
-import { StyleSheet, Text, View, Dimensions, BackHandler, Platform ,PermissionsAndroid } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, BackHandler, Platform ,PermissionsAndroid, ScrollView } from 'react-native';
 import AppTheme from '../../utils/AppTheme';
 import ModalPopup from '../common/components/Modal';
 import Strings from '../../utils/Strings';
@@ -245,15 +245,16 @@ const ScanStatusLocalList = ({
 
   
     return (
-        <View style={{flexDirection:'row',justifyContent:'center', alignItems:'center'}}>
-             <View style={{width:'10%', height:studentName[0] && studentName[0].name.length >50 ? 100:50,borderWidth:0.5,border:10,justifyContent:'center',alignItems:'center',backgroundColor:AppTheme.WHITE}}>
-             <Text>{index + 1}</Text>
+        <ScrollView>
+        <View style={{flex:1, flexDirection:'row',justifyContent:'center', alignItems:'center'}}>
+             <View style={{width:'10%', height:studentName[0] && studentName[0].name.length >50 ? 100:50,borderWidth:1,borderColor:'#DADADA',borderRightWidth:0, border:10,justifyContent:'center',alignItems:'center',backgroundColor:AppTheme.WHITE}}>
+             <Text style={{fontSize:18}}>{index + 1}</Text>
              </View>
              <View style={{width:'50%',backgroundColor:AppTheme.WHITE}}>
-             <View style={{height:25,borderWidth:0.5,border:10,justifyContent:'center'}}>
-             <Text style={{marginLeft:10}}>{id}</Text>
+             <View style={{height:25,borderWidth:1,borderColor:'#DADADA', border:10,justifyContent:'center'}}>
+             <Text style={{marginLeft:10,fontWeight:'bold'}}>{id}</Text>
              </View>
-             <View style={{height:studentName[0] && studentName[0].name.length >50 ? 75 :25,borderWidth:0.5,border:10,justifyContent:'center'}}>
+             <View style={{height:studentName[0] && studentName[0].name.length >50 ? 75 :25,borderWidth:1,borderColor:'#DADADA',borderTopWidth:0, border:10,justifyContent:'center'}}>
              {
                     !minimalFlag
                     &&
@@ -270,7 +271,8 @@ const ScanStatusLocalList = ({
                         onPress={() => setModalVisible(true)}
                     />
                 </View>
-
+            
+            
             <ModalPopup
                 visible={modalVisible}
                 onRequestClose={() => setModalVisible(!modalVisible)}
@@ -282,22 +284,19 @@ const ScanStatusLocalList = ({
                 borderCutomStyle={[styles.borderStyle, { borderColor: themeColor1 ? themeColor1 : AppTheme.GREEN }]}
                 data={
                     <View style={{  }}>
-                        <Text style={styles.textStyle}>{`studentId : `}<Text style={{fontWeight:'normal',fontFamily : monospace_FF}}>{`${scanitemdata&&scanitemdata.studentId}`}</Text></Text>
-                        {/* <Text style={styles.textStyle}>{`predictedStudentId : ` }<Text style={{fontWeight:'normal',fontFamily : monospace_FF}}>{`${scanitemdata&&scanitemdata.predictedStudentId ? scanitemdata.predictedStudentId : '' }`}</Text></Text> */}
-                        <Text style={styles.textStyle}>{`section : ` }<Text style={{fontWeight:'normal',fontFamily : monospace_FF}}>{`${scanitemdata&&scanitemdata.section}`}</Text></Text>
-                        <Text style={styles.textStyle}>{`studentAvailability : ` }<Text style={{fontWeight:'normal',fontFamily : monospace_FF}}>{`${scanitemdata&&scanitemdata.studentAvailability}`}</Text></Text>
-                        <Text style={styles.textStyle}>{`marksInfo : `}</Text>
+                        <Text style={styles.textStyle}>{`Student ID : `}<Text style={{fontWeight:'400'}}>{`${scanitemdata&&scanitemdata.studentId}`}</Text></Text>
+                        {
+                    !minimalFlag
+                    &&
+                    <Text style={styles.textStyle}>{`Student Name : `}<Text style={{fontWeight:'400'}}>{`${studentName.length > 0 && studentName[0].name}`}</Text></Text>
+    
+           }
+                        {/* <Text style={styles.textStyle}>{`Section : ` }<Text style={{fontWeight:'400'}}>{`${scanitemdata&&scanitemdata.section}`}</Text></Text> */}
 
                         <View style={{ flexDirection: 'row', marginTop: 20 }}>
                             {
                               BrandLabel && MARKS_INFO ?
                              <View style={{ flexDirection: 'row', width: '100%' }}>
-                               {/* <MarksHeaderTable
-                                 customRowStyle={{width:width/4.5, backgroundColor: AppTheme.TABLE_HEADER}}
-                                 rowTitle={ BrandLabel && BrandLabel.sr_no || MARKS_INFO.sr_no}
-                                 rowBorderColor={AppTheme.TAB_BORDER}
-                                 editable={false}
-                               /> */}
                                <MarksHeaderTable
                                  customRowStyle={{width:width/2.25, backgroundColor: AppTheme.TABLE_HEADER}}
                                  rowTitle={ BrandLabel && BrandLabel.questionId || MARKS_INFO.questionId}
@@ -310,12 +309,6 @@ const ScanStatusLocalList = ({
                                  rowBorderColor={AppTheme.TAB_BORDER}
                                  editable={false}
                                />
-                                {/* <MarksHeaderTable
-                                 customRowStyle={{ width:width/4.5, backgroundColor: AppTheme.TABLE_HEADER}}
-                                 rowTitle={ BrandLabel && BrandLabel.predictedMarks || MARKS_INFO.predictedMarks}
-                                 rowBorderColor={AppTheme.TAB_BORDER}
-                                 editable={false}
-                               /> */}
                              </View>
                              :
                              MARKS_INFO_DEFAULT.map((data) => {
@@ -343,14 +336,6 @@ const ScanStatusLocalList = ({
                                             editable={false}
                                             keyboardType={'number-pad'}
                                         />
-                                        {/* <MarksHeaderTable
-                                            customRowStyle={{height:height/12, width:width/4.5 }}
-                                            rowTitle={M.questionId}
-                                            rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
-                                            editable={false}
-                                            keyboardType={'number-pad'}
-                            
-                                        /> */}
                                         <MarksHeaderTable
                                             customRowStyle={{height:height/12,width:width/2.25 }}
                                             rowTitle={M.obtainedMarks}
@@ -358,24 +343,16 @@ const ScanStatusLocalList = ({
                                             editable={false}
                                             keyboardType={'number-pad'}
                                         />
-                                        {/* <MarksHeaderTable
-                                            customRowStyle={{height:height/12,width:width/4.5 }}
-                                            rowTitle={M.predictedMarks}
-                                            rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
-                                            editable={false}
-                                            keyboardType={'number-pad'}
-                            
-                                        /> */}
-                                        
 
                                     </View>
                                 )
-                                // }
                             })
                         }
                     </View>}
             />
         </View>
+        </ScrollView>
+        
     );
 }
 const styles = StyleSheet.create({
@@ -403,10 +380,9 @@ const styles = StyleSheet.create({
     textStyle: {
         fontSize: 15,
         color: AppTheme.BLACK,
-        fontWeight: 'bold',
+        fontWeight: '600',
         paddingHorizontal: '5%',
         paddingVertical: '2%',
-        fontFamily : monospace_FF
     },
     borderStyle: {
         borderWidth: 5,

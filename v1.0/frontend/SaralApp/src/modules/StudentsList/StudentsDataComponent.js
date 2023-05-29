@@ -170,15 +170,15 @@ const StudentsDataComponent = ({
     return (
         <View style={{flex:1, flexDirection:'row',margin:5,justifyContent:'center', alignItems:'center'}}>
             <View style={{flexDirection:"row",width:292,height:50}}>
-             <View style={{width:AppTheme.WIDTH_15,borderWidth:0.5,justifyContent:'center',alignItems:'center',backgroundColor:AppTheme.WHITE}}>
-             <Text>{index + 1}</Text>
+             <View style={{width:AppTheme.WIDTH_15,borderWidth:1, borderRightWidth:0, borderColor:'#DADADA', justifyContent:'center',alignItems:'center',backgroundColor:AppTheme.WHITE}}>
+             <Text style={{fontSize:18}}>{index + 1}</Text>
 
              </View>
              <View style={{width:AppTheme.WIDTH_60 ,backgroundColor:AppTheme.WHITE}}>
-             <View style={{borderWidth:0.5,height:item.name.length > 50 ?40 : 25,justifyContent:'center'}}>
-             <Text style={{marginLeft:10}}>{`${item.name}${item.fatherName ? '/' + item.fatherName : ''}`}</Text>
+             <View style={{borderWidth:1,borderColor:'#DADADA',height:item.name.length > 50 ?40 : 25,justifyContent:'center'}}>
+             <Text style={{marginLeft:10,fontWeight:'bold'}}>{`${item.name} `} <Text style={{fontWeight:'normal'}}>{`${item.fatherName ? '(' + item.fatherName + ')': '' }`}</Text></Text>
              </View>
-             <View style={{borderWidth:0.5,height:25,justifyContent:'center'}}>
+             <View style={{borderWidth:1,borderTopWidth:0, borderColor:'#DADADA',height:25,justifyContent:'center'}}>
              <Text style={{marginLeft:10}}>{item.studentId}</Text>
              </View>
              </View>

@@ -296,7 +296,7 @@ const ScanHistoryCard = ({
                     <View>
                     <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                                <Text style={{fontFamily : monospace_FF}}>{BrandLabel&&BrandLabel.Class ? BrandLabel.Class : 'Total Students'}</Text>
+                                <Text style={{}}>{BrandLabel&&BrandLabel.Class ? BrandLabel.Class : 'Total Students'}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
                                 <Text style={{fontFamily : monospace_FF,fontWeight:"bold"}} >{studentCount.totalCount}</Text>
@@ -305,7 +305,7 @@ const ScanHistoryCard = ({
 
                         <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                                <Text style={{fontFamily : monospace_FF}}>{BrandLabel&&BrandLabel.Class ? BrandLabel.Class : 'Present Students'}</Text>
+                                <Text style={{}}>{BrandLabel&&BrandLabel.Class ? BrandLabel.Class : 'Present Students'}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
                                 <Text style={{fontFamily : monospace_FF,fontWeight:"bold"}} >{studentCount.totalCount -studentCount.absentCount}</Text>
@@ -314,7 +314,7 @@ const ScanHistoryCard = ({
 
                         <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                                <Text style={{fontFamily : monospace_FF}}>{BrandLabel&&BrandLabel.Class ? BrandLabel.Class : 'Scans not submitted yet'}</Text>
+                                <Text style={{}}>{BrandLabel&&BrandLabel.Class ? BrandLabel.Class : 'Scans not submitted yet'}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
                                 <Text style={{fontFamily : monospace_FF,color:'red',fontWeight:"bold"}} >{scanStatusData}</Text>
@@ -323,7 +323,7 @@ const ScanHistoryCard = ({
 
                         <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                                <Text style={{fontFamily : monospace_FF}}>{BrandLabel&&BrandLabel.Class ? BrandLabel.Class : 'Total scans submitted'}</Text>
+                                <Text style={{}}>{BrandLabel&&BrandLabel.Class ? BrandLabel.Class : 'Total scans submitted'}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
                                 <Text style={{fontFamily : monospace_FF,fontWeight:"bold"}} >{getSaveCount()}</Text>

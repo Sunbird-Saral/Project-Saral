@@ -529,7 +529,7 @@ useEffect(() => {
             (loginData && loginData.data) &&
                 <View>
                    
-                        <Text style={{fontWeight: 'normal', fontFamily: monospace_FF ,marginLeft:5}}>
+                        <Text style={{marginLeft:5}}>
                             
                         {`${loginData.data.school.name}${loginData.data.school.block ? ','+loginData.data.school.block : ''}${loginData.data.school.district ? ','+loginData.data.school.district : ''}`}
                         </Text>

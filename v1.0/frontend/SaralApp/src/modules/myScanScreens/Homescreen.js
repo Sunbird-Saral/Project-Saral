@@ -281,8 +281,8 @@ class HomeComponent extends Component {
                     <TouchableOpacity onPress={() => this.props.minimalFlag ? this.props.navigation.navigate("myScan") : this.props.navigation.navigate('selectDetails')}
                         style={{ backgroundColor: this.props.multiBrandingData && this.props.multiBrandingData.themeColor1 ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE, height: 120, width: 120, borderRadius: 15, justifyContent: 'center', alignItems: 'center' }}
                     >
-                        {BrandLabel && BrandLabel.assessmentLogo ? <Image style={{ height: 100, width: 80, resizeMode: "stretch" }} source={{ uri: BrandLabel && "data:image/png;base64," + BrandLabel.assessmentLogo }} /> :
-                            <Image style={{ height: 100, width: 80, resizeMode: "stretch" }} source={Assets.assessments} />}
+                        {BrandLabel && BrandLabel.assessmentLogo ? <Image style={{ height: 80, width: 80, resizeMode: "stretch" }} source={{ uri: BrandLabel && "data:image/png;base64," + BrandLabel.assessmentLogo }} /> :
+                            <Image style={{ height: 80, width: 60, resizeMode: 'stretch' }} source={Assets.assessments} />}
                     </TouchableOpacity>
                     <Text style={{ textAlign: 'center', fontSize: 18, fontWeight: 'bold' }}>{BrandLabel && BrandLabel.useCase1 ? BrandLabel.useCase1 : 'Assessments'}</Text>
                     {
@@ -291,8 +291,8 @@ class HomeComponent extends Component {
                             <TouchableOpacity
                                 style={{ backgroundColor: this.props.multiBrandingData && this.props.multiBrandingData.themeColor1 ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE, height: 120, width: 120, borderRadius: 15, justifyContent: 'center', alignItems: 'center' }}
                             >
-                                {BrandLabel && BrandLabel.assessmentLogo ? <Image style={{ height: 100, width: 80, resizeMode: "stretch" }} source={{ uri: BrandLabel && "data:image/png;base64," + BrandLabel.assessmentLogo }} /> :
-                                    <Image style={{ height: 100, width: 80, resizeMode: "stretch" }} source={Assets.assessments} />}
+                                {BrandLabel && BrandLabel.assessmentLogo ? <Image style={{ height: 80, width: 60, resizeMode: "stretch" }} source={{ uri: BrandLabel && "data:image/png;base64," + BrandLabel.assessmentLogo }} /> :
+                                    <Image style={{ height: 80, width: 60, resizeMode: "stretch" }} source={Assets.assessments} />}
                             </TouchableOpacity>
                             <Text style={{ textAlign: 'center', fontSize: 18, fontWeight: 'bold' }}>{BrandLabel && BrandLabel.useCase2 ? BrandLabel.useCase2 : 'Use Case 2'}</Text>
                         </View>
@@ -305,7 +305,7 @@ class HomeComponent extends Component {
                                 style={{ backgroundColor: this.props.multiBrandingData && this.props.multiBrandingData.themeColor1 ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE, height: 120, width: 120, borderRadius: 15, justifyContent: 'center', alignItems: 'center' }}
                             >
                                 {BrandLabel && BrandLabel.assessmentLogo ? <Image style={{ height: 100, width: 80, resizeMode: "stretch" }} source={{ uri: BrandLabel && "data:image/png;base64," + BrandLabel.assessmentLogo }} /> :
-                                    <Image style={{ height: 100, width: 80, resizeMode: "stretch" }} source={Assets.assessments} />}
+                                    <Image style={{ height: 80, width: 60, resizeMode: "stretch" }} source={Assets.assessments} />}
                             </TouchableOpacity>
                             <Text style={{ textAlign: 'center', fontSize: 18, fontWeight: 'bold' }}>{BrandLabel && BrandLabel.useCase3 ? BrandLabel.useCase3 : 'Use Case 3'}</Text>
                         </View>
@@ -317,8 +317,8 @@ class HomeComponent extends Component {
                             <TouchableOpacity
                                 style={{ backgroundColor: this.props.multiBrandingData && this.props.multiBrandingData.themeColor1 ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE, height: 120, width: 120, borderRadius: 15, justifyContent: 'center', alignItems: 'center' }}
                             >
-                                {BrandLabel && BrandLabel.assessmentLogo ? <Image style={{ height: 100, width: 80, resizeMode: "stretch" }} source={{ uri: BrandLabel && "data:image/png;base64," + BrandLabel.assessmentLogo }} /> :
-                                    <Image style={{ height: 100, width: 80, resizeMode: "stretch" }} source={Assets.assessments} />}
+                                {BrandLabel && BrandLabel.assessmentLogo ? <Image style={{ height: 80, width: 60, resizeMode: "stretch" }} source={{ uri: BrandLabel && "data:image/png;base64," + BrandLabel.assessmentLogo }} /> :
+                                    <Image style={{ height: 80, width: 60, resizeMode: "stretch" }} source={Assets.assessments} />}
                             </TouchableOpacity>
                             <Text style={{ textAlign: 'center', fontSize: 18, fontWeight: 'bold' }}>{BrandLabel && BrandLabel.useCase4 ? BrandLabel.useCase4 : 'Use Case 4'}</Text>
                         </View>
@@ -330,8 +330,8 @@ class HomeComponent extends Component {
                             <TouchableOpacity
                                 style={{ backgroundColor: this.props.multiBrandingData && this.props.multiBrandingData.themeColor1 ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE, height: 120, width: 120, borderRadius: 15, justifyContent: 'center', alignItems: 'center' }}
                             >
-                                {BrandLabel && BrandLabel.assessmentLogo ? <Image style={{ height: 100, width: 80, resizeMode: "stretch" }} source={{ uri: BrandLabel && "data:image/png;base64," + BrandLabel.assessmentLogo }} /> :
-                                    <Image style={{ height: 100, width: 80, resizeMode: "stretch" }} source={Assets.assessments} />}
+                                {BrandLabel && BrandLabel.assessmentLogo ? <Image style={{ height: 80, width: 60, resizeMode: "stretch" }} source={{ uri: BrandLabel && "data:image/png;base64," + BrandLabel.assessmentLogo }} /> :
+                                    <Image style={{ height: 80, width: 60, resizeMode: "stretch" }} source={Assets.assessments} />}
                             </TouchableOpacity>
                             <Text style={{ textAlign: 'center', fontSize: 18, fontWeight: 'bold' }}>{BrandLabel && BrandLabel.useCase5 ? BrandLabel.useCase5 : 'Use Case 5'}</Text>
                         </View>
