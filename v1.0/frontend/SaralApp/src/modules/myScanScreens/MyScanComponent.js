@@ -63,7 +63,7 @@ class MyScanComponent extends Component {
 
    async componentDidUpdate(prevProps) {
         const { calledRoiData} = this.state;
-        const { roiData, minimalFlag, loginData } = this.props
+        const { roiData, minimalFlag, loginData, apiStatus } = this.props
         if (calledRoiData) {
             if (roiData && prevProps.roiData != roiData && this.props.minimalFlag) {
                 this.setState({ calledRoiData: false, callApi: '' })
@@ -73,6 +73,13 @@ class MyScanComponent extends Component {
                    if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode) {
                    await this.setRoiCache(roiData);
                    }
+                }
+            }
+
+            if (apiStatus && prevProps.apiStatus != apiStatus && apiStatus.error) {
+                this.setState({ isLoading: false, calledLogin: false })
+                if (roiData.length === 0) {
+                    this.callCustomModal(Strings.message_text, "Roi Doesn't Exist",false,false)
                 }
             }
 
@@ -271,8 +278,10 @@ class MyScanComponent extends Component {
                 roi.push(payload);
             }
             await setRoiDataApi(roi)
+            this.setState({isLoading :false})
         } else {
             await setRoiDataApi([payload])
+            this.setState({isLoading :false})
         }
     }
 
