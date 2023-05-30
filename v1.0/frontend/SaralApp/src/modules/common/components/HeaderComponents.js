@@ -169,7 +169,7 @@ class HeaderComponents extends Component {
                         }
                             
                         
-                        <View 
+                        {/* <View 
                         style={{flexDirection: 'row', marginBottom: 10}}
                         >
                             <Switch
@@ -194,7 +194,7 @@ class HeaderComponents extends Component {
 
                         
                         
-                        </View>
+                        </View> */}
                     </View>
                 </View>
 
