@@ -188,6 +188,7 @@ useEffect(() => {
 
     const callScanStatusData = async () => {
         const deviceUniqId = await DeviceInfo.getUniqueId();
+        let token = loginData.data.token;
         let hasNetwork = await checkNetworkConnectivity();
         if (!hasNetwork) {
             let hasCacheData = await getRegularSavedScanpi();
@@ -219,7 +220,7 @@ useEffect(() => {
             "page": 0,
             "downloadRes": false
         }
-        let apiObj = new scanStatusDataAction(dataPayload,deviceUniqId);
+        let apiObj = new scanStatusDataAction(dataPayload, token, deviceUniqId);
         FetchSavedScannedData(apiObj, loginCred.schoolId, loginCred.password)
     }
 }
@@ -234,12 +235,7 @@ useEffect(() => {
                     source.cancel('The request timed out.');
                 }
             }, 60000);
-            axios.post(api.apiEndPoint(), api.getBody(), {
-                auth: {
-                    username: uname,
-                    password: pass
-                }
-            })
+            axios.post(api.apiEndPoint(), api.getBody(),{ headers: api.getHeaders(), cancelToken: source.token })
                 .then(function (res) {
                     if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode) {
                         getSavedScanApiCache(res.data)

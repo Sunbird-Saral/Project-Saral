@@ -193,6 +193,7 @@ const ScanHistoryCard = ({
 
     const callScanStatusData = async (filteredDatalen, localScanData) => {
         const deviceUniqId = await DeviceInfo.getUniqueId();
+        let token = loginData.data.token
         let loginCred = await getLoginCred()
 
         let dataPayload = {
@@ -208,7 +209,7 @@ const ScanHistoryCard = ({
         if (filteredData.response.hasOwnProperty("set")) {
             dataPayload.set = filteredData.response.set
         }
-        let apiObj = new scanStatusDataAction(dataPayload,deviceUniqId);
+        let apiObj = new scanStatusDataAction(dataPayload, token, deviceUniqId);
         FetchSavedScannedData(apiObj, loginCred.schoolId, loginCred.password, filteredDatalen, localScanData)
     }
 
@@ -222,12 +223,7 @@ const ScanHistoryCard = ({
                     source.cancel('The request timed out.');
                 }
             }, 60000);
-            axios.post(api.apiEndPoint(), api.getBody(), {
-                auth: {
-                    username: uname,
-                    password: pass
-                }
-            })
+            axios.post(api.apiEndPoint(), api.getBody(), { headers: api.getHeaders(), cancelToken: source.token })
                 .then(function (res) {
                     callCustomModal(Strings.message_text,Strings.saved_successfully,false);
                     apiResponse = res
