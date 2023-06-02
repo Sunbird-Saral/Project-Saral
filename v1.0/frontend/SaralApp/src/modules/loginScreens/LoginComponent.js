@@ -18,6 +18,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getBrandingDataApi, getLoginApi, setLoginApi,setBrandingDataApi } from '../../utils/offlineStorageUtils';
 import { storeFactory } from '../../flux/store/store';
 import constants from '../../flux/actions/constants';
+import DeviceInfo from 'react-native-device-info';
 
 class LoginComponent extends Component {
     constructor(props) {
@@ -127,9 +128,10 @@ class LoginComponent extends Component {
     }
 
 
-    callDefaultbrandingData() {
+    callDefaultbrandingData= async()=> {
+        const deviceUniqId = await DeviceInfo.getUniqueId();
         let payload = this.props.defaultBrandingdata
-        let apiObj = new DefaultBrandAction(payload);
+        let apiObj = new DefaultBrandAction(payload,deviceUniqId);
         this.props.APITransport(apiObj)
     }
 
@@ -154,7 +156,7 @@ class LoginComponent extends Component {
     callLogin = async () => {
         const { schoolId, password } = this.state
         const { loginData } = this.props
-
+        const deviceUniqId = await DeviceInfo.getUniqueId();
         let hasNetwork = await checkNetworkConnectivity();
 
 
@@ -188,7 +190,7 @@ class LoginComponent extends Component {
                     "password": password
                 }
     
-                let apiObj = new LoginAction(loginCredObj);
+                let apiObj = new LoginAction(loginCredObj,deviceUniqId);
                 this.props.APITransport(apiObj);
             })
         } else if(!hasNetwork && schoolId.length > 0) {

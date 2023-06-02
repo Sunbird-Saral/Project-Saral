@@ -39,7 +39,7 @@ import { collectErrorLogs } from '../CollectErrorLogs';
 import { getRegularRoipi, getRegularSavedScanpi, getRegularStudentExamApi, setRegularRoiApi, setRegularSavedScanApi, setRegularStudentExamApi } from '../../utils/offlineStorageUtils';
 import constants from '../../flux/actions/constants';
 import { storeFactory } from '../../flux/store/store';
-
+import DeviceInfo from 'react-native-device-info';
 const StudentsList = ({
     filteredData,
     loginData,
@@ -186,8 +186,8 @@ useEffect(() => {
     }
 
     const callScanStatusData = async () => {
+        const deviceUniqId = await DeviceInfo.getUniqueId();
         let hasNetwork = await checkNetworkConnectivity();
-
         if (!hasNetwork) {
             let hasCacheData = await getRegularSavedScanpi();
             let setValue = filteredData.hasOwnProperty("set")  ? filteredData.set.length> 0 ? filteredData.set : '' : null
@@ -218,7 +218,7 @@ useEffect(() => {
             "page": 0,
             "downloadRes": false
         }
-        let apiObj = new scanStatusDataAction(dataPayload);
+        let apiObj = new scanStatusDataAction(dataPayload,deviceUniqId);
         FetchSavedScannedData(apiObj, loginCred.schoolId, loginCred.password)
     }
 }
@@ -466,7 +466,7 @@ useEffect(() => {
     }
 
     const getRoi = async() => {
-
+        const deviceUniqId = await DeviceInfo.getUniqueId();
         let hasNetwork = await checkNetworkConnectivity();
         let setValue = filteredData.hasOwnProperty("set") > 0 ? filteredData.set.length > 0 ? filteredData.set : '' : null
 
@@ -497,7 +497,7 @@ useEffect(() => {
             payload.set = hasSet
             }
             let token = loginData.data.token
-            let apiObj = new ROIAction(payload, token);
+            let apiObj = new ROIAction(payload, token, deviceUniqId);
             dispatch(APITransport(apiObj))
             callScanStatusData()
         } else {

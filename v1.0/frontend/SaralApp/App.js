@@ -6,7 +6,7 @@
  * @flow
  */
 
-import React,{useEffect} from 'react';
+import React,{useEffect,useState} from 'react';
 import {
   SafeAreaView,
   StatusBar,
@@ -28,7 +28,7 @@ import { getLoginData } from './src/utils/StorageUtils';
 import { collectErrorLogs } from './src/modules/CollectErrorLogs';
 import  analytics  from '@react-native-firebase/analytics';
 import crashlytics from '@react-native-firebase/crashlytics';
- const customTextProps = {
+const customTextProps = {
 allowFontScaling: false,
 };
 
@@ -46,7 +46,9 @@ setCustomTextInput(customTextInputProps);
 setCustomTouchableOpacity(customTouchableOpacityProps);
 
 
-const App = () => {
+
+
+const App = () => { 
   useEffect(async()=>{
     let hasFBAnalytics = await getLoginData();
     const hasFBAnalyticsValue =  hasFBAnalytics.school.hasOwnProperty("isFBAnalyticsEnabled") && hasFBAnalytics.school.isFBAnalyticsEnabled
@@ -115,7 +117,6 @@ function getActiveRouteName(navigationState) {
   }
   return route.routeName;
 }
-
   return (
     <>
       <Provider store={storeFactory}>

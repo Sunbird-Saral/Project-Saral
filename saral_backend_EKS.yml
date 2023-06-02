@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: saral-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: saral-backend
+  template:
+    metadata:
+      labels:
+        app: saral-backend
+    spec:
+      containers:
+      - name: saral-backend
+        image: registry.hub.docker.com/saaral123/backendapi:2.0
+        ports:
+        - containerPort: 3005
+        env:
+        - name: PROFILE
+          value: dev
+        - name: PORT
+          value: "3005"
+        - name: MONGODB_URL
+          value: "mongodb://10.0.31.152:27017,10.0.50.162:27017/saralv3_DB"
+        - name: JWT_SECRET
+          value: SARALDATA_NODE
+        - name: MONGODB_POOL_SIZE
+          value: "5"
+        volumeMounts:
+        - name: mongodb-data
+          mountPath: /data/db
+      volumes:
+      - name: mongodb-data
+        hostPath:
+          path: /usr/local/mongodb/data/db
+      restartPolicy: Always
+      
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: saral-backend
+spec:
+  selector:
+    app: saral-backend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3005
+  type: ClusterIP
+  
+  
+      
