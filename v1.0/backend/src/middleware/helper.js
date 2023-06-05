@@ -41,8 +41,8 @@ const commonHelperFunctions = {
             const user = await Users.findOne(
                 {
                     userId: userId,
-                    __v: 0,
-                    $comment: "Login School API For Find User Data."
+                    // __v: 0,
+                    // $comment: "Login School API For Find User Data."
                 }
             )
            
