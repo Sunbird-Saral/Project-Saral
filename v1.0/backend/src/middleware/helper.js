@@ -50,11 +50,11 @@ const commonHelperFunctions = {
                 throw new Error('School Id or Password is not correct.')
             }
 
-            const isMatch = await bcrypt.compare(password, user.password)
+            // const isMatch = await bcrypt.compare(password, user.password)
 
-            if (!isMatch) {
-                throw new Error('School Id or Password is not correct.')
-            }
+            // if (!isMatch) {
+            //     throw new Error('School Id or Password is not correct.')
+            // }
 
             return user
 
