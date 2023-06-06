@@ -29,6 +29,9 @@ docker build -t "$image_name:$image_tag" .
 # Push the Docker image to a registry if needed
 docker push "$image_name:$image_tag"
 
+# Export the IMAGE_TAG environment variable
+export IMAGE_TAG="$image_tag"
+
                                           
 
 docker build -t saaral123/$image_name:$image_tag .
