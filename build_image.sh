@@ -24,13 +24,16 @@ image_tag="2.0"
 image_tag="${image_tag}-$BUILD_NUMBER"
 
 # Build and tag the Docker image
-docker build -t "$image_name:$image_tag" .
+docker build -t "saaral123/$image_name:$image_tag" .
+
+#login to dockerhub
+docker login -u saaral123 -p Saral@123
 
 # Push the Docker image to a registry if needed
-docker push "$image_name:$image_tag"
+docker push "saaral123/$image_name:$image_tag"
 
                                           
 
-docker build -t saaral123/$image_name:$image_tag .
-docker login -u saaral123 -p Saral@123
-docker push saaral123/$image_name:$image_tag
+#docker build -t saaral123/$image_name:$image_tag .
+#docker login -u saaral123 -p Saral@123
+#docker push saaral123/$image_name:$image_tag
