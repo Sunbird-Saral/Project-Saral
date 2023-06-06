@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: saral-backend
-        image: registry.hub.docker.com/saaral123/backendapi:{{IMAGE_TAG}}
+        image: registry.hub.docker.com/saaral123/backendapi:2.0-{{IMAGE_TAG}}
         ports:
         - containerPort: 3005
         env:
