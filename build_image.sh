@@ -32,6 +32,9 @@ docker login -u saaral123 -p Saral@123
 # Push the Docker image to a registry if needed
 docker push "saaral123/$image_name:$image_tag"
 
+# Export the IMAGE_TAG environment variable
+export IMAGE_TAG="$image_tag"
+
                                           
 
 #docker build -t saaral123/$image_name:$image_tag .
