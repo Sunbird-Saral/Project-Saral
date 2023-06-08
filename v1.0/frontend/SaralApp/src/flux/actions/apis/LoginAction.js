@@ -1,7 +1,8 @@
 /**
  * Login API
  */
- import API from '../apis/api';
+ import configs from '../../../configs/config';
+import API from '../apis/api';
  import C from '../constants';
  
  export class LoginAction extends API {
@@ -29,6 +30,8 @@
      getHeaders() {
          return {
              'Content-Type': 'application/json',
+             'methods': super.method,
+             'origin': configs.BASE_URL
          }
      }
  

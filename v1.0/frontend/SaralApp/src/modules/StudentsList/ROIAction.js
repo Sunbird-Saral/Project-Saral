@@ -1,7 +1,8 @@
 /**
  * ROI API
  */
- import API from '../../flux/actions/apis/api';
+ import configs from '../../configs/config';
+import API from '../../flux/actions/apis/api';
  import C from '../../flux/actions/constants'
  
  export class ROIAction extends API {
@@ -35,7 +36,9 @@
     getHeaders() {
         return {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${this.token}`
+            'Authorization': `Bearer ${this.token}`,
+            'methods': super.method,
+             'origin': configs.BASE_URL
         }
     }
 

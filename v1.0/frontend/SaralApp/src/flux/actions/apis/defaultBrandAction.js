@@ -1,7 +1,8 @@
 /**
  * Save Scan Data
  */
- import API from '../apis/api';
+ import configs from '../../../configs/config';
+import API from '../apis/api';
  import C from '../constants';
  
  export class DefaultBrandAction extends API {
@@ -32,7 +33,9 @@
      getHeaders() {
          return {
              'Content-Type': 'application/json',
-             'Authorization': `Bearer `
+             'Authorization': `Bearer `,
+             'methods': super.method,
+             'origin': configs.BASE_URL
          }
      }
  
