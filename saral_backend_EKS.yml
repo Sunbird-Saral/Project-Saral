@@ -12,17 +12,9 @@ spec:
       labels:
         app: saral-backend
     spec:
-      initContainers:
-      - name: import-data
-        image: node:latest
-        command: ["node"]
-        args: ["./data/import-data.js", "--import"]
-        volumeMounts:
-        - name: mongodb-data
-          mountPath: /data/db
       containers:
       - name: saral-backend
-        image: registry.hub.docker.com/saaral123/backendapi:2.0
+        image: registry.hub.docker.com/saaral123/backendapi:{{IMAGE_TAG}}
         ports:
         - containerPort: 3005
         env:
@@ -31,7 +23,7 @@ spec:
         - name: PORT
           value: "3005"
         - name: MONGODB_URL
-          value: "mongodb://10.0.31.152:27017,10.0.50.162:27017/saralv2_DB"
+          value: "mongodb://10.0.31.152:27017,10.0.50.162:27017/saralv3_DB"
         - name: JWT_SECRET
           value: SARALDATA_NODE
         - name: MONGODB_POOL_SIZE
@@ -44,3 +36,20 @@ spec:
         hostPath:
           path: /usr/local/mongodb/data/db
       restartPolicy: Always
+      
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: saral-backend
+spec:
+  selector:
+    app: saral-backend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3005
+  type: ClusterIP
+  
+  
+      

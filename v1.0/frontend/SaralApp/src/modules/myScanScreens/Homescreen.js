@@ -18,6 +18,7 @@ import { GetStudentsAndExamData } from '../../flux/actions/apis/getStudentsAndEx
 import { getMinimalValue } from '../../utils/StorageUtils';
 import { getBrandingDataApi, getStudentExamApi, setBrandingDataApi, setStudentExamApi } from '../../utils/offlineStorageUtils';
 import Strings from '../../utils/Strings';
+import DeviceInfo from 'react-native-device-info';
 
 class HomeComponent extends Component {
     constructor(props) {
@@ -208,6 +209,7 @@ class HomeComponent extends Component {
 }
 
    async callMultiBrandingActiondata() {
+    const deviceUniqId = await DeviceInfo.getUniqueId();
         let hasNetwork = await checkNetworkConnectivity();
         let hasCacheData = await getBrandingDataApi();
 
@@ -225,7 +227,8 @@ class HomeComponent extends Component {
         } else if(hasNetwork) {
             let payload = this.props.multiBrandingData
             let token = this.props.loginData.data.token
-            let apiObj = new MultiBrandingAction(payload, token);
+            // console.log('deviceUniqId//////>>>>',deviceUniqId);
+            let apiObj = new MultiBrandingAction(payload, token, deviceUniqId);
             this.props.APITransport(apiObj)
         }  else {
             this.callCustomModal(Strings.message_text, Strings.you_dont_have_cache, false)
