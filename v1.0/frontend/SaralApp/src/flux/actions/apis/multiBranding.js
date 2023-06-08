@@ -1,7 +1,8 @@
 /**
  * Save Scan Data
  */
- import API from '../apis/api';
+ import configs from '../../../configs/config';
+import API from '../apis/api';
  import C from '../constants';
  
  export class MultiBrandingAction extends API {
@@ -36,6 +37,8 @@
          return {
              'Content-Type': 'application/json',
              'Authorization': `Bearer ${this.token}`,
+             'methods': 'GET',
+             'origin': configs.BASE_URL,
              'x-request-deviceid' :`${this.deviceUniqId}`
          }
      }
