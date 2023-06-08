@@ -20,7 +20,7 @@ import DataCard from './DataCard';
 import TextField from '../common/components/TextField';
 import { callScanStatusDataConst } from '../callScanStatusDataConst';
 import { scanStatusDataAction } from '../ScanStatus/scanStatusDataAction';
-
+import DeviceInfo from 'react-native-device-info';
 class ScanDetailsComponent extends Component {
     constructor(props) {
         super(props);
@@ -307,14 +307,15 @@ class ScanDetailsComponent extends Component {
         }
     }
 
-    onSubmitClick = () => {
+    onSubmitClick = async () => {
+        const deviceUniqId = await DeviceInfo.getUniqueId();
         const { loginData } = this.props
         const { saveObj } = this.state
         this.setState({
             calledSavedData: true,
             isLoading: true
         }, () => {
-            let apiObj = new scanStatusDataAction(saveObj, loginData.data.token);
+            let apiObj = new scanStatusDataAction(saveObj, loginData.data.token, deviceUniqId);
             this.props.APITransport(apiObj)
         })
     }

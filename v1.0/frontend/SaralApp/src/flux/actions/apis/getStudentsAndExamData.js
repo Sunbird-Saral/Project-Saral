@@ -6,11 +6,12 @@ import API from '../apis/api';
 import C from '../constants';
 
 export class GetStudentsAndExamData extends API {
-    constructor(requestBody, token, timeout = 30000) {
+    constructor(requestBody, token,deviceUniqId, timeout = 30000) {
         super('GET', timeout, false);
         this.requestBody = requestBody;
         this.token = token;
         this.type = C.GET_STUDENTS_EXAMS_LIST;
+        this.deviceUniqId = deviceUniqId
     }
 
     toString() {
@@ -35,7 +36,8 @@ export class GetStudentsAndExamData extends API {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${this.token}`,
             'methods': super.method,
-             'origin': configs.BASE_URL
+             'origin': configs.BASE_URL,
+            'x-request-deviceid' :`${this.deviceUniqId}`
         }
     }
 

@@ -32,7 +32,7 @@ import { collectErrorLogs } from '../CollectErrorLogs';
 import { scanStatusDataAction } from './scanStatusDataAction';
 import Spinner from '../common/components/loadingIndicator';
 import constants from '../../flux/actions/constants';
-
+import DeviceInfo from 'react-native-device-info';
 
 const ScanStatusLocal = ({
     loginData,
@@ -275,6 +275,8 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
     }
     
     const callScanStatusData = async (bool,filteredDatalen, localScanData) => {
+        const deviceUniqId = await DeviceInfo.getUniqueId();
+        let token = loginData.data.token
         let loginCred = await getLoginCred()
 
         let dataPayload = {
@@ -290,7 +292,7 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
         if (filteredData.hasOwnProperty("set")) {
             dataPayload.set = filteredData.set
         }
-        let apiObj = new scanStatusDataAction(dataPayload);
+        let apiObj = new scanStatusDataAction(dataPayload, token, deviceUniqId);
         FetchSavedScannedData(apiObj, loginCred.schoolId, loginCred.password, filteredDatalen, localScanData)
     }
 
@@ -304,12 +306,7 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
                     source.cancel('The request timed out.');
                 }
             }, 60000);
-            axios.post(api.apiEndPoint(), api.getBody(), {
-                auth: {
-                    username: uname,
-                    password: pass
-                }
-            })
+            axios.post(api.apiEndPoint(), api.getBody(),{ headers: api.getHeaders(), cancelToken: source.token })
                 .then(function (res) {
                     callCustomModal(Strings.message_text,Strings.saved_successfully,false);
                     apiResponse = res

@@ -4,12 +4,13 @@
  import configs from '../../../configs/config';
 import API from '../apis/api';
  import C from '../constants';
- 
+
  export class LoginAction extends API {
-     constructor(loginObj, timeout = 30000) {
+     constructor(loginObj,deviceUniqId, timeout = 30000) {
          super('POST', timeout, false);
          this.loginObj = loginObj;
          this.type = C.LOGIN_PROCESS;
+         this.deviceUniqId = deviceUniqId
      }
  
      toString() {
@@ -31,7 +32,8 @@ import API from '../apis/api';
          return {
              'Content-Type': 'application/json',
              'methods': super.method,
-             'origin': configs.BASE_URL
+             'origin': configs.BASE_URL,
+             'x-request-deviceid' :`${this.deviceUniqId}`
          }
      }
  
