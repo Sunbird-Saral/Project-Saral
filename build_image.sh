@@ -27,7 +27,7 @@ image_tag="${image_tag}-$BUILD_NUMBER"
 docker build -t "saaral123/$image_name:$image_tag" .
 
 #login to dockerhub
-docker login -u saaral123 -p Saral@123
+#:docker login -u saaral123 -p Saral@123
 
 # Push the Docker image to a registry if needed
 docker push "saaral123/$image_name:$image_tag"
