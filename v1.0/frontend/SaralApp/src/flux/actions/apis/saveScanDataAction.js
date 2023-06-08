@@ -1,7 +1,7 @@
 /**
  * Save Scan Data
  */
-import { apkVersion } from '../../../configs/config';
+import configs, { apkVersion } from '../../../configs/config';
 import API from '../apis/api';
 import C from '../constants';
 
@@ -34,6 +34,8 @@ export class SaveScanData extends API {
         return {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${this.token}`,
+            'methods': 'PUT',
+            'origin': configs.BASE_URL,
             'X-App-Version': apkVersion,
             'x-request-deviceid' :`${this.deviceUniqId}`
         }

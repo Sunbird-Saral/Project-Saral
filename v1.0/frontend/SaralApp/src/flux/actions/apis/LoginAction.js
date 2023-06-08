@@ -31,7 +31,7 @@ import API from '../apis/api';
      getHeaders() {
          return {
              'Content-Type': 'application/json',
-             'methods': super.method,
+             'methods': 'POST',
              'origin': configs.BASE_URL,
              'x-request-deviceid' :`${this.deviceUniqId}`
          }

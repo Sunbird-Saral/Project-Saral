@@ -37,7 +37,7 @@ import API from '../apis/api';
          return {
              'Content-Type': 'application/json',
              'Authorization': `Bearer ${this.token}`,
-             'methods': super.method,
+             'methods': 'GET',
              'origin': configs.BASE_URL,
              'x-request-deviceid' :`${this.deviceUniqId}`
          }

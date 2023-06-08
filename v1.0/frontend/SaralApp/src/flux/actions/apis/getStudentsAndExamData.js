@@ -35,8 +35,8 @@ export class GetStudentsAndExamData extends API {
         return {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${this.token}`,
-            'methods': super.method,
-             'origin': configs.BASE_URL,
+            'methods': 'GET',
+            'origin': configs.BASE_URL,
             'x-request-deviceid' :`${this.deviceUniqId}`
         }
     }

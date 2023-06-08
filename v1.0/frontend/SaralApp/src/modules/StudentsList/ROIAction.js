@@ -38,8 +38,8 @@ import API from '../../flux/actions/apis/api';
         return {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${this.token}`,
-            'methods': super.method,
-             'origin': configs.BASE_URL,
+            'methods': 'GET',
+            'origin': configs.BASE_URL,
             'x-request-deviceid' :`${this.deviceUniqId}`
         }
     }
