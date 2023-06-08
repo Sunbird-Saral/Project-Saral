@@ -45,14 +45,14 @@ const generateJestReportPdf = async () => {
     console.log("pdf printed")
 }
 
-const CORS_ORIGIN = [{ "origin": 'https://saral-dev-api.anuvaad.org', "optionsSuccessStatus": 200, "methods": ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'] }, { "origin": 'https://saral-dev-api.anuvaad.org', "optionsSuccessStatus": 200, "methods": ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'] }]
+const CORS_ORIGIN = [{ "origin": 'https://saral-dev-api.anuvaad.org', "optionsSuccessStatus": 200, "methods": ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'] },{ "origin": 'http://192.168.0.103:3000', "optionsSuccessStatus": 200, "methods": ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'] }, { "origin": 'https://saral-dev-api.anuvaad.org', "optionsSuccessStatus": 200, "methods": ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'] }]
 
 const checkURL = (req, res, next) => {
     const { origin, url, methods } = req.headers;
     let isUrlExist = CORS_ORIGIN.findIndex((el) => { return el.origin == origin });
     let isMethodAvailable = methods ? methods.toUpperCase() : "";
 
-    let isMethodExist = CORS_ORIGIN[isUrlExist].methods.findIndex((el) => { return el == isMethodAvailable });
+    let isMethodExist = CORS_ORIGIN[isUrlExist] ? CORS_ORIGIN[isUrlExist].methods.findIndex((el) => { return el == isMethodAvailable }) : -1;
     
     if (isUrlExist == -1) {
       return res.status(403).json({ error: 'Invalid URL' });
