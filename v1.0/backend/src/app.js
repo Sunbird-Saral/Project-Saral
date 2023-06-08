@@ -13,6 +13,8 @@ const markRouter = require('./routers/mark.route')
 const roiRouter = require('./routers/roi.route')
 const brandRouter = require('./routers/brand.route')
 var cors = require('cors');
+const expressWinston = require('express-winston')
+const logger = require('./logging/logger')
 
 const spec = fs.readFileSync(`${__dirname}/swagger-saral-frontend.yaml`, 'utf-8');
 const spec2 = fs.readFileSync(`${__dirname}/swagger-saral-maintenance.yaml`, 'utf-8');
@@ -21,6 +23,12 @@ const frontendSpec = yaml.load(spec);
 const maintenanceSpec = yaml.load(spec2);
 const app = express()
 
+app.use(expressWinston.logger({
+   winstonInstance : logger,
+   statusLevels : true
+}))
+
+app.use(express.json({limit: '50mb'}));
 const loggerMiddleware = (req, res, next) => {
     console.log('New request to: ' + req.method + ' ' + req.path, req.body)
     next()
@@ -71,7 +79,9 @@ app.use(checkURL)
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 // Register the function as middleware for the application
-app.use(loggerMiddleware)
+
+// app.use(expressMiddleware)
+// app.use(loggerMidlleware)
 app.use(schoolRouter)
 app.use(studentRouter)
 app.use(classRouter)

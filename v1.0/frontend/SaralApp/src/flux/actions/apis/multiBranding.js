@@ -5,12 +5,14 @@
  import C from '../constants';
  
  export class MultiBrandingAction extends API {
-     constructor(requestBody, token, timeout = 30000) {
+     constructor(requestBody, token,deviceUniqId, timeout = 30000) {
+        // console.log('deviceUniqId???>>>>',deviceUniqId);
          super('GET', timeout, false);
          
          this.requestBody = '';
          this.token = token;
          this.type = C.MULTI_BRANDING;
+         this.deviceUniqId = deviceUniqId
      }
  
      toString() {
@@ -33,7 +35,8 @@
      getHeaders() {
          return {
              'Content-Type': 'application/json',
-             'Authorization': `Bearer ${this.token}`
+             'Authorization': `Bearer ${this.token}`,
+             'x-request-deviceid' :`${this.deviceUniqId}`
          }
      }
  

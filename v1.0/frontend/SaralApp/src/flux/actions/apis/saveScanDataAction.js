@@ -6,12 +6,13 @@ import API from '../apis/api';
 import C from '../constants';
 
 export class SaveScanData extends API {
-    constructor(requestBody, token, timeout = 30000) {
+    constructor(requestBody, token,deviceUniqId, timeout = 30000) {
+        console.log('deviceUniqId?????????',deviceUniqId);
         super('PUT', timeout, false);
-        
         this.requestBody = requestBody;
         this.token = token;
         this.type = C.SAVE_SCAN_DATA;
+        this.deviceUniqId = deviceUniqId
     }
 
     toString() {
@@ -33,7 +34,8 @@ export class SaveScanData extends API {
         return {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${this.token}`,
-            'X-App-Version': apkVersion
+            'X-App-Version': apkVersion,
+            'x-request-deviceid' :`${this.deviceUniqId}`
         }
     }
 
