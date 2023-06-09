@@ -126,6 +126,8 @@ marksSchema.statics.StudentsMark = async (studentIds) => {
     return marks
 }
 
+marksSchema.index({classId: -1, subject: -1, examDate: -1, section: -1, schoolId: -1})
+
 const Marks = mongoose.model('Mark', marksSchema)
 
 module.exports = Marks
