@@ -168,13 +168,13 @@ const StudentsDataComponent = ({
         }
     }
     return (
-        <View style={{flex:1, flexDirection:'row',margin:5,justifyContent:'center', alignItems:'center'}}>
-            <View style={{flexDirection:"row",width:292,height:50}}>
-             <View style={{width:AppTheme.WIDTH_15,borderWidth:1, borderRightWidth:0, borderColor:'#DADADA', justifyContent:'center',alignItems:'center',backgroundColor:AppTheme.WHITE}}>
+        <View style={{flex:1, flexDirection:'row',margin:5,justifyContent:'space-around', alignItems:'center'}}>
+            <View style={{flexDirection:"row",width:'80%',height:50}}>
+             <View style={{width:'18%',borderWidth:1, borderRightWidth:0, borderColor:'#DADADA', justifyContent:'center',alignItems:'center',backgroundColor:AppTheme.WHITE}}>
              <Text style={{fontSize:18}}>{index + 1}</Text>
-
              </View>
-             <View style={{width:AppTheme.WIDTH_60 ,backgroundColor:AppTheme.WHITE}}>
+             
+             <View style={{width:'80%' ,backgroundColor:AppTheme.WHITE}}>
              <View style={{borderWidth:1,borderColor:'#DADADA',height:item.name.length > 50 ?40 : 25,justifyContent:'center'}}>
              <Text style={{marginLeft:10,fontWeight:'bold'}}>{`${item.name} `} <Text style={{fontWeight:'normal'}}>{`${item.fatherName ? '(' + item.fatherName + ')': '' }`}</Text></Text>
              </View>
@@ -183,7 +183,7 @@ const StudentsDataComponent = ({
              </View>
              </View>
              </View>
-             <View style={{width:AppTheme.WIDTH_15}}>
+             <View style={{width:'15%'}}>
              
                             <TouchableOpacity
                     activeOpacity={0.7}
