@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, TextInput, Image, AppState, ActivityIndicator, Switch,TouchableOpacity } from 'react-native';
+import { View, ScrollView, Text, TextInput, Image, AppState, ActivityIndicator,TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Strings from '../../utils/Strings';
@@ -19,6 +19,7 @@ import { getBrandingDataApi, getLoginApi, setLoginApi,setBrandingDataApi } from 
 import { storeFactory } from '../../flux/store/store';
 import constants from '../../flux/actions/constants';
 import DeviceInfo from 'react-native-device-info';
+import { Switch } from 'react-native-switch';
 
 class LoginComponent extends Component {
     constructor(props) {
@@ -132,6 +133,7 @@ class LoginComponent extends Component {
         const deviceUniqId = await DeviceInfo.getUniqueId();
         let payload = this.props.defaultBrandingdata
         let apiObj = new DefaultBrandAction(payload,deviceUniqId);
+        console.log('payload>>>',payload);
         this.props.APITransport(apiObj)
     }
 
@@ -158,10 +160,6 @@ class LoginComponent extends Component {
         const { loginData } = this.props
         const deviceUniqId = await DeviceInfo.getUniqueId();
         let hasNetwork = await checkNetworkConnectivity();
-
-
-
-        
         let hasCacheData = await getLoginApi();
         
         let cacheFilterData = hasCacheData != null
@@ -443,6 +441,7 @@ class LoginComponent extends Component {
     render() {
         const { password, isLoading, Loading, errUsername, errPassword, errCommon } = this.state;
         const { defaultBrandingdata } = this.props
+        console.log('defaultBrandingdata>>>>',defaultBrandingdata);
         if (defaultBrandingdata === undefined || defaultBrandingdata === null) {
             return <View style={styles.container}>
                 <ScrollView
@@ -518,11 +517,16 @@ class LoginComponent extends Component {
                                         <View>
                                             <View style={{ flexDirection: 'row', paddingTop: 10 }}>
                                                 <Switch
-                                                    trackColor={{ true: '#111', false: '#111' }}
-                                                    thumbColor={AppTheme.GREY}
+                                                   disabled={false}
+                                                   activeText={'On'}
+                                                   inActiveText={'Off'}
+                                                   backgroundActive={'green'}
+                                                   backgroundInactive={'gray'}
+                                                   circleActiveColor={'#30a566'}
+                                                   circleInActiveColor={'#000000'}
                                                     value={this.state.rememberMe}
                                                     onValueChange={(value) => this.toggleRememberMe(value)} />
-                                                <Text>Remember Me</Text>
+                                                <Text style={{marginLeft:10}}>Remember Me</Text>
                                             </View>
                                             <View style={styles.btnContainer}>
                                             <ButtonComponent
@@ -600,13 +604,24 @@ class LoginComponent extends Component {
                                         <Image source={(this.state.hidePassword) ? Assets.closeEye : Assets.openEye} style={styles.buttonImage} />
                                     </TouchableOpacity>
                                 </View>
-                                <View style={{ flexDirection: 'row', paddingTop: 10 }}>
+                                <View style={{ flexDirection: 'row', paddingTop: 15,marginLeft:10 }}>
                                     <Switch
-                                        trackColor={{ true: '#111', false: '#111' }}
-                                        thumbColor={defaultBrandingdata && defaultBrandingdata.themeColor1 ? defaultBrandingdata.themeColor1:AppTheme.BLUE}
+                                    //    disabled={false}
+                                       activeText={'On'}
+                                       inActiveText={'Off'}
+                                       backgroundActive={'green'}
+                                       backgroundInactive={'gray'}
+                                       circleActiveColor={'#30a566'}
+                                       circleInActiveColor={'#000000'}
+                                       circleSize={22}
+                                       barHeight={22}
+                                       switchLeftPx={2.5}
+                                       switchRightPx={2.5}
+                                       switchBorderRadius={30}
+                                       switchWidthMultiplier={2.5}
                                         value={this.state.rememberMe}
                                         onValueChange={(value) => this.toggleRememberMe(value)} />
-                                    <Text>Remember Me</Text>
+                                    <Text style={{marginLeft:10}}>Remember Me</Text>
                                 </View>
                                 <View style={styles.btnContainer}>
                                     <ButtonComponent
