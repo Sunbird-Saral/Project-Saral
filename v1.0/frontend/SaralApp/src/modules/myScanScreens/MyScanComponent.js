@@ -63,7 +63,7 @@ class MyScanComponent extends Component {
 
    async componentDidUpdate(prevProps) {
         const { calledRoiData} = this.state;
-        const { roiData, minimalFlag, loginData } = this.props
+        const { roiData, minimalFlag, loginData, apiStatus } = this.props
         if (calledRoiData) {
             if (roiData && prevProps.roiData != roiData && this.props.minimalFlag) {
                 this.setState({ calledRoiData: false, callApi: '' })
@@ -73,6 +73,13 @@ class MyScanComponent extends Component {
                    if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode) {
                    await this.setRoiCache(roiData);
                    }
+                }
+            }
+
+            if (apiStatus && prevProps.apiStatus != apiStatus && apiStatus.error) {
+                this.setState({ isLoading: false, calledLogin: false })
+                if (roiData.length === 0) {
+                    this.callCustomModal(Strings.message_text, "Roi Doesn't Exist",false,false)
                 }
             }
 
@@ -271,8 +278,10 @@ class MyScanComponent extends Component {
                 roi.push(payload);
             }
             await setRoiDataApi(roi)
+            this.setState({isLoading :false})
         } else {
             await setRoiDataApi([payload])
+            this.setState({isLoading :false})
         }
     }
 
@@ -643,8 +652,9 @@ class MyScanComponent extends Component {
 
     callScanStatusData = async (isApiCalled, filteredDatalen, localScanData, res) => {
         const deviceUniqId = await DeviceInfo.getUniqueId();
-        let hasNetwork = await checkNetworkConnectivity();
         const { loginData } = this.props;
+        let token = loginData.data.token
+        let hasNetwork = await checkNetworkConnectivity();
         if (!hasNetwork) {
             let hasCacheData = await getScanDataApi();
             if (hasCacheData) {
@@ -699,7 +709,7 @@ class MyScanComponent extends Component {
                 }
                 let roiId = this.props.roiData && this.props.roiData.data.roiId;
                 dataPayload.roiId = roiId;
-                let apiObj = new scanStatusDataAction(dataPayload,deviceUniqId);
+                let apiObj = new scanStatusDataAction(dataPayload, token, deviceUniqId);
                 this.FetchSavedScannedData(isApiCalled, apiObj, loginCred.schoolId, loginCred.password, filteredDatalen, localScanData)
             }
         }
@@ -716,12 +726,7 @@ class MyScanComponent extends Component {
                     source.cancel('The request timed out.');
                 }
             }, 60000);
-            axios.post(api.apiEndPoint(), api.getBody(), {
-                auth: {
-                    username: uname,
-                    password: pass
-                }
-            })
+            axios.post(api.apiEndPoint(), api.getBody(), { headers: api.getHeaders(), cancelToken: source.token })
                 .then(function (res) {
                     apiResponse = res
                     clearTimeout(id)
@@ -821,10 +826,10 @@ class MyScanComponent extends Component {
                 />
                }
                 <View>
-                <View>
+                <View style={{margin:5}}>
                     {(BrandLabel) ?
                         <MultibrandLabels
-                            // Label1={BrandLabel.School}
+                            Label1={BrandLabel.School}
                             School=  {`${loginData.data.school.name}${loginData.data.school.block ? ','+loginData.data.school.block : ''}${loginData.data.school.district ? ','+loginData.data.school.district : ''}`}
                             minimalFlag={this.props.minimalFlag}
                         /> :
@@ -832,7 +837,7 @@ class MyScanComponent extends Component {
                         &&
                         <View>
                    
-                        <Text style={{fontWeight: 'normal', fontFamily: monospace_FF ,marginLeft:5,color:'#000000'}}>
+                        <Text style={{marginLeft:5}}>
                             
                         {`${loginData.data.school.name}${loginData.data.school.block ? ','+loginData.data.school.block : ''}${loginData.data.school.district ? ','+loginData.data.school.district : ''}`}
                         </Text>
@@ -840,15 +845,15 @@ class MyScanComponent extends Component {
                         {
                      !this.props.minimalFlag &&
                     <View style={{flexDirection:'row',marginLeft:5,marginTop:5}}>
-                    <Text>
+                    <Text style={{fontWeight:'bold'}}>
                         {Strings.class_text + ' : '}
-                        <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
+                        <Text style={{ fontWeight: 'normal' }}>
                             {`${filteredData.className}, ${filteredData.section ? filteredData.section : ''}`}
                         </Text>
                     </Text>
-                    <Text style={{marginLeft:10,fontWeight:"600"}}>
+                    <Text style={{marginLeft:10,fontWeight:"bold"}}>
                         {Strings.subject + ' : '}
-                        <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
+                        <Text style={{ fontWeight: 'normal' }}>
                                {filteredData.subject} {filteredData.set ? `(Set ${filteredData.set})`:''}
                         </Text>
                     </Text>

@@ -187,6 +187,7 @@ useEffect(() => {
 
     const callScanStatusData = async () => {
         const deviceUniqId = await DeviceInfo.getUniqueId();
+        let token = loginData.data.token;
         let hasNetwork = await checkNetworkConnectivity();
         if (!hasNetwork) {
             let hasCacheData = await getRegularSavedScanpi();
@@ -218,7 +219,7 @@ useEffect(() => {
             "page": 0,
             "downloadRes": false
         }
-        let apiObj = new scanStatusDataAction(dataPayload,deviceUniqId);
+        let apiObj = new scanStatusDataAction(dataPayload, token, deviceUniqId);
         FetchSavedScannedData(apiObj, loginCred.schoolId, loginCred.password)
     }
 }
@@ -233,12 +234,7 @@ useEffect(() => {
                     source.cancel('The request timed out.');
                 }
             }, 60000);
-            axios.post(api.apiEndPoint(), api.getBody(), {
-                auth: {
-                    username: uname,
-                    password: pass
-                }
-            })
+            axios.post(api.apiEndPoint(), api.getBody(),{ headers: api.getHeaders(), cancelToken: source.token })
                 .then(function (res) {
                     if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode) {
                         getSavedScanApiCache(res.data)
@@ -517,11 +513,11 @@ useEffect(() => {
                  navigation={navigation}
                  onPress={navigateToBack}
                  />
- <View>
+ <View style={{margin:5}}>
             {
                     (BrandLabel) ?
                         <MultibrandLabels
-                        // Label1={BrandLabel.School}
+                        Label1={BrandLabel.School}
                         School =   {`${loginData.data.school.name}${loginData.data.school.block ? ','+loginData.data.school.block : ''}${loginData.data.school.district ? ','+loginData.data.school.district : ''}`}
 
                         />
@@ -529,21 +525,21 @@ useEffect(() => {
             (loginData && loginData.data) &&
                 <View>
                    
-                        <Text style={{fontWeight: 'normal', fontFamily: monospace_FF ,marginLeft:5,color:'#000000'}}>
+                        <Text style={{marginLeft:5}}>
                             
                         {`${loginData.data.school.name}${loginData.data.school.block ? ','+loginData.data.school.block : ''}${loginData.data.school.district ? ','+loginData.data.school.district : ''}`}
                         </Text>
                    
-                    <View style={{flexDirection:'row',marginLeft:5,marginTop:5}}>
-                    <Text>
+                    <View style={{flexDirection:'row',marginLeft:5,marginTop:5,}}>
+                    <Text style={{fontWeight:'bold'}}>
                         {Strings.class_text + ' : '}
-                        <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
+                        <Text style={{ fontWeight:'normal' }}>
                             {`${filteredData.className}, ${filteredData.section ? filteredData.section : ''}`}
                         </Text>
                     </Text>
-                    <Text style={{marginLeft:10,fontWeight:"600"}}>
+                    <Text style={{marginLeft:10,fontWeight:"bold"}}>
                         {Strings.subject + ' : '}
-                        <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
+                        <Text style={{ fontWeight: 'normal'}}>
                                {filteredData.subject} {filteredData.set ? `(Set ${filteredData.set})`:''}
                         </Text>
                     </Text>

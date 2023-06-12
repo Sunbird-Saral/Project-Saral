@@ -23,6 +23,27 @@ const BrandSchema = new mongoose.Schema({
         trim: true
     },
     screenLabels: {
+        homeScreen: [{
+            _id: false,
+            useCase1: {
+                type: String
+            },
+            useCase2: {
+                type: String
+            },
+            useCase3: {
+                type: String
+            },
+            useCase4: {
+                type: String
+            },
+            useCase5:{
+                type: String
+            },
+            assessmentLogo:{
+                type: String
+            }
+        }],
         selectDetails: [{
             _id: false,
             School: {

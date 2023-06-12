@@ -44,7 +44,7 @@
     "autoSyncFrequency": 900000,
     "state": "up",
     "storeTrainingData": true,
-    "tags": true,
+    "tags": false,
     "autoSyncBatchSize": 10,
     "offlineMode": true,
     "isAppForceUpdateEnabled": false,
@@ -52,7 +52,11 @@
     "district": "district1",
     "scanTimeoutMs": 60000,
     "isManualEditEnabled": true,
-    "block":"block"
+    "block":"block",
+    "useCase2":false,
+    "useCase3":false,
+    "useCase4":false,
+    "useCase5":false
   },
   {
     "name": "Dummy Skill School",

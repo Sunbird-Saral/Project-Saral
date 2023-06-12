@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, Text, View, Image, TouchableOpacity,Platform,BackHandler,Alert } from 'react-native';
+import { FlatList, Text, View, Image, TouchableOpacity,Platform,BackHandler,Alert, ScrollView } from 'react-native';
 
 //redux
 import { connect, useDispatch } from 'react-redux';
@@ -126,6 +126,7 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
             themeColor1={multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}
             BrandLabel={BrandLabel}
             themeColor2={multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.BLUE}
+            navigation ={navigation}
         />
 
     }
@@ -291,6 +292,7 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
     
     const callScanStatusData = async (bool,filteredDatalen, localScanData) => {
         const deviceUniqId = await DeviceInfo.getUniqueId();
+        let token = loginData.data.token
         let loginCred = await getLoginCred()
 
         let dataPayload = {
@@ -306,7 +308,7 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
         if (filteredData.hasOwnProperty("set")) {
             dataPayload.set = filteredData.set
         }
-        let apiObj = new scanStatusDataAction(dataPayload,deviceUniqId);
+        let apiObj = new scanStatusDataAction(dataPayload, token, deviceUniqId);
         FetchSavedScannedData(apiObj, loginCred.schoolId, loginCred.password, filteredDatalen, localScanData)
     }
 
@@ -320,12 +322,7 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
                     source.cancel('The request timed out.');
                 }
             }, 60000);
-            axios.post(api.apiEndPoint(), api.getBody(), {
-                auth: {
-                    username: uname,
-                    password: pass
-                }
-            })
+            axios.post(api.apiEndPoint(), api.getBody(),{ headers: api.getHeaders(), cancelToken: source.token })
                 .then(function (res) {
                     callCustomModal(Strings.message_text,Strings.saved_successfully,false);
                     apiResponse = res
@@ -364,18 +361,23 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
                     navigation={navigation}
                     onPress={()=>navigation.navigate('myScan')}
                 />
-            <View style={{marginTop:40}}>
+            
+            <View style={{marginTop:30}}>
             <Text style={styles.scanStatus}>{'Review Scans'}</Text>
-        
+            </View>
+            {/* <ScrollView> */}
             <FlatList
-                data={ presentStudentList}
+                data={presentStudentList}
                 renderItem={renderItem}
                 ListEmptyComponent={renderEmptyData}
             keyExtractor={(item, index) => `${index.toString()}`}
             contentContainerStyle={styles.content}
+            showsVerticalScrollIndicator={false}
             />
-
-          <View style={{justifyContent:'space-between',flexDirection:'row'}}>
+              
+           
+              
+          <View style={{justifyContent:'space-between',flexDirection:'row',top:10}}>
           <ButtonComponent
                 customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData.themeColor1 ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
                 customBtnTextStyle={{fontWeight:'normal',fontSize:14}}
@@ -387,7 +389,7 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
             <ButtonComponent
                 customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData.themeColor1 ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
                 customBtnTextStyle={{fontWeight:'normal',fontSize:14}}
-                btnText={'Save All Scans'.toUpperCase()}
+                btnText={'Submit All Scans'.toUpperCase()}
                 activeOpacity={0.8}
                 onPress={()=> onPressSaveInDB()}
                 />
@@ -398,11 +400,12 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
                     &&
                     <Spinner
                         animating={isLoading}
-                        customContainer={{ opacity: 0.6, elevation: 15 }}
+                        customContainer={{ opacity: 0.6, elevation: 15, backgroundColor:AppTheme.WHITE }}
                     />
                 }
 
-        </View>
+     
+       
         </View>
     );
 }

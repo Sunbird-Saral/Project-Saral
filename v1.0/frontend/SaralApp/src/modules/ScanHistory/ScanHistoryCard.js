@@ -194,6 +194,7 @@ const ScanHistoryCard = ({
 
     const callScanStatusData = async (filteredDatalen, localScanData) => {
         const deviceUniqId = await DeviceInfo.getUniqueId();
+        let token = loginData.data.token
         let loginCred = await getLoginCred()
 
         let dataPayload = {
@@ -209,7 +210,7 @@ const ScanHistoryCard = ({
         if (filteredData.response.hasOwnProperty("set")) {
             dataPayload.set = filteredData.response.set
         }
-        let apiObj = new scanStatusDataAction(dataPayload,deviceUniqId);
+        let apiObj = new scanStatusDataAction(dataPayload, token, deviceUniqId);
         FetchSavedScannedData(apiObj, loginCred.schoolId, loginCred.password, filteredDatalen, localScanData)
     }
 
@@ -223,12 +224,7 @@ const ScanHistoryCard = ({
                     source.cancel('The request timed out.');
                 }
             }, 60000);
-            axios.post(api.apiEndPoint(), api.getBody(), {
-                auth: {
-                    username: uname,
-                    password: pass
-                }
-            })
+            axios.post(api.apiEndPoint(), api.getBody(), { headers: api.getHeaders(), cancelToken: source.token })
                 .then(function (res) {
                     callCustomModal(Strings.message_text,Strings.saved_successfully,false);
                     apiResponse = res
@@ -294,11 +290,11 @@ const ScanHistoryCard = ({
                 disabled
 
             >
-                <View style={{ flexDirection: 'row', width: '100%', alignItems: 'center', paddingTop: '10%',paddingBottom:'5%', paddingLeft: '1%', paddingRight: '1%', marginBottom:10}}>
+                <View style={{ flexDirection: 'row', width: '100%', alignItems: 'center', paddingTop: 40, paddingLeft: '1%', paddingRight: '1%', marginBottom:40}}>
                     <View>
                     <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                                <Text style={{fontFamily : monospace_FF}}>{BrandLabel&&BrandLabel.Class ? BrandLabel.Class : 'Total Students'}</Text>
+                                <Text style={{}}>{BrandLabel&&BrandLabel.Class ? BrandLabel.Class : 'Total Students'}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
                                 <Text style={{fontFamily : monospace_FF,fontWeight:"bold"}} >{studentCount.totalCount}</Text>
@@ -307,7 +303,7 @@ const ScanHistoryCard = ({
 
                         <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                                <Text style={{fontFamily : monospace_FF}}>{BrandLabel&&BrandLabel.Class ? BrandLabel.Class : 'Present Students'}</Text>
+                                <Text style={{}}>{BrandLabel&&BrandLabel.Class ? BrandLabel.Class : 'Present Students'}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
                                 <Text style={{fontFamily : monospace_FF,fontWeight:"bold"}} >{studentCount.totalCount -studentCount.absentCount}</Text>
@@ -316,7 +312,7 @@ const ScanHistoryCard = ({
 
                         <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                                <Text style={{fontFamily : monospace_FF}}>{BrandLabel&&BrandLabel.Class ? BrandLabel.Class : 'Scans to be Saved'}</Text>
+                                <Text style={{}}>{BrandLabel&&BrandLabel.Class ? BrandLabel.Class : 'Scans not submitted yet'}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
                                 <Text style={{fontFamily : monospace_FF,color:'red',fontWeight:"bold"}} >{scanStatusData}</Text>
@@ -325,7 +321,7 @@ const ScanHistoryCard = ({
 
                         <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                                <Text style={{fontFamily : monospace_FF}}>{BrandLabel&&BrandLabel.Class ? BrandLabel.Class : 'Scans Saved'}</Text>
+                                <Text style={{}}>{BrandLabel&&BrandLabel.Class ? BrandLabel.Class : 'Total scans submitted'}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
                                 <Text style={{fontFamily : monospace_FF,fontWeight:"bold"}} >{getSaveCount()}</Text>
@@ -427,10 +423,10 @@ const ScanHistoryCard = ({
                                 }}
                                 onPress={onPressSaveInDB}
                             >
-                                <Text style={{ fontFamily: monospace_FF, color: AppTheme.BLACK }}>{Strings.save_scan}</Text>
+                                <Text style={{ fontFamily: monospace_FF, color: AppTheme.BLACK }}>{'Submit all scans'}</Text>
                             </TouchableOpacity>}
                     </View>
-                    {
+                    {/* {
                             scanstatusbutton
                             &&
                             <View style={{  marginTop: '5%', width: '100%', alignItems: 'center' }}>
@@ -450,7 +446,7 @@ const ScanHistoryCard = ({
                             </TouchableOpacity>
                             </View>
                         
-                        }
+                        } */}
                 </View>
 
 

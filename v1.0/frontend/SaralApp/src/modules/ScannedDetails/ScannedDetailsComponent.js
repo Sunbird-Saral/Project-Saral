@@ -70,7 +70,7 @@ const ScannedDetailsComponent = ({
     const [isStudentValid, setIsStudentValid] = useState(false);
     const [multiPageStdId, setMultipageStdId] = useState();
 
-    const [nextBtn, setNextBtn] = useState('SUBMIT')
+    const [nextBtn, setNextBtn] = useState('SAVE')
     const [checkStdRollDuplicate, setCheckStdRollDuplicate] = useState([])
     const [stdAddRollData, setStdAddRollData] = useState([])
     const [toggleCheckBox, setToggleCheckBox] = useState(false)
@@ -482,7 +482,7 @@ const ScannedDetailsComponent = ({
                 setCurrentIndex(currentIndex + 1)
                 setBtnName('Back')
                 if (currentIndex + 1 == stdRollArray.length - 1) {
-                    setNextBtn(Strings.submit_text)
+                    setNextBtn(Strings.Save)
                 }
             } else {
                 let chkSkip = 0
@@ -528,7 +528,7 @@ const ScannedDetailsComponent = ({
 
 
     const saveMultipleStudentDataSheet = () => {
-        if (isMultipleStudent && nextBtn === Strings.submit_text) {
+        if (isMultipleStudent && nextBtn === Strings.Save) {
             saveMultiData()
         }
     }
@@ -1058,7 +1058,7 @@ const ScannedDetailsComponent = ({
             setBtnName(Strings.Back)
             setNewArrayValue(filterDataAccordingPage)
             if (currentIndex + 1 == multiPage) {
-                setNextBtn(Strings.submit_text)
+                setNextBtn(Strings.Save)
             }
         }
     }
@@ -1400,24 +1400,24 @@ const ScannedDetailsComponent = ({
                                         </View>
 
 
-                                        <View style={{ flexDirection: 'row', marginTop: 20 }}>
+                                        <View style={{ flexDirection: 'row', marginTop: 20,justifyContent:"center" }}>
                       {
                         jsonLabels || listbrandlabel && defaultHeaderTable ?
                           <View style={{ flexDirection: 'row', width: '100%' }}>
-                            <MarksHeaderTable
+                            {/* <MarksHeaderTable
                               customRowStyle={{ width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '25%' : '30%', backgroundColor: AppTheme.TABLE_HEADER}}
                               rowTitle={jsonLabels && jsonLabels.sr_no || listbrandlabel && listbrandlabel.sr_no || defaultHeaderTable.sr_no}
                               rowBorderColor={AppTheme.TAB_BORDER}
                               editable={false}
-                            />
+                            /> */}
                             <MarksHeaderTable
-                              customRowStyle={{ width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '25%' : '30%', backgroundColor: AppTheme.TABLE_HEADER}}
+                              customRowStyle={{ width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '25%' : '50%', backgroundColor: AppTheme.TABLE_HEADER}}
                               rowTitle={jsonLabels && jsonLabels.questions || listbrandlabel && listbrandlabel.questions || defaultHeaderTable.questions}
                               rowBorderColor={AppTheme.TAB_BORDER}
                               editable={false}
                             />
                             <MarksHeaderTable
-                              customRowStyle={{ width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '55%' : '30%', backgroundColor: AppTheme.TABLE_HEADER}}
+                              customRowStyle={{ width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '55%' : '50%', backgroundColor: AppTheme.TABLE_HEADER}}
                               rowTitle={jsonLabels && jsonLabels.marks || listbrandlabel && listbrandlabel.marks || defaultHeaderTable.marks}
                               rowBorderColor={AppTheme.TAB_BORDER}
                               editable={false}
@@ -1441,7 +1441,7 @@ const ScannedDetailsComponent = ({
                             TABLE_HEADER.map((data) => {
                               return (
                                 <MarksHeaderTable
-                                  customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
+                                  customRowStyle={{ width: '50%', backgroundColor: AppTheme.TABLE_HEADER }}
                                   key={data}
                                   rowTitle={data}
                                   rowBorderColor={AppTheme.TAB_BORDER}
@@ -1455,25 +1455,26 @@ const ScannedDetailsComponent = ({
                                           
                                             {
                                                 newArrayValue.map((element, index) => {
+                                                    console.log(index);
                                                     return (
-                                                        <View element={element} key={index} style={{ flexDirection: 'row' }}>
-
+                                                        <View element={element} key={index} style={{ flexDirection: 'row',justifyContent:'center' }}>
+{/* 
                                                             <MarksHeaderTable
                                                                 customRowStyle={{height:height/12, width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '25%' : '30%', }}
                                                                 rowTitle={renderSRNo(element, index)}
                                                                 rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                                                 editable={false}
                                                                 keyboardType={'number-pad'}
-                                                            />
+                                                            /> */}
                                                             <MarksHeaderTable
-                                                                customRowStyle={{height:height/12, width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '25%' : '30%', }}
-                                                                rowTitle={element.format.value}
+                                                                customRowStyle={{height:height/12, width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '25%' : '50%', }}
+                                                                rowTitle={renderSRNo(element, index)}
                                                                 rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                                                 editable={false}
                                                                 keyboardType={'number-pad'}
                                                             />
                                                             <MarksHeaderTable
-                                                                customRowStyle={{height:height/12, width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '50%' : '30%', }}
+                                                                customRowStyle={{height:height/12, width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '50%' : '50%', }}
                                                                 rowTitle={element.consolidatedPrediction}
                                                                 rowBorderColor={markBorderOnCell(element)}
                                                                 editable={true}

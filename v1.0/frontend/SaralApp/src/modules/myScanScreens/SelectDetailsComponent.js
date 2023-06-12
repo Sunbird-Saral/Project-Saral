@@ -529,7 +529,7 @@ dispatchStudentExamData(payload){
                                     let subjects = []
                                     let set =[]
                                     _.filter(studentsAndExamData.data.exams, function (o) {
-                                        subArr.push(o.subject + " " + o.examDate)
+                                        subArr.push(o.subject)
                                         testID.push(o.examId)
                                         examDates.push(o.examDate)
                                         subjects.push(o.subject)
@@ -950,13 +950,13 @@ dispatchStudentExamData(payload){
                     onPress={()=>this.props.navigation.navigate('Home')}
 
                 />
-                 <View style={''}>
+                 <View style={{margin:5}}>
                 {BrandLabel ?
                     <MultibrandLabels
-                        // Label1={BrandLabel.School}
-                        // Label2={BrandLabel.SchoolId}
-                        School=  {`${loginData.data.school.name}${loginData.data.school.block ? ','+loginData.data.school.block : ''}${loginData.data.school.district ? ','+loginData.data.school.district : ''}`}
-                        // SchoolId={loginData.data.school.schoolId}
+                         Label1={BrandLabel.School}
+                         Label2={BrandLabel.SchoolId}
+                         School=  {`${loginData.data.school.name}${loginData.data.school.block ? ','+loginData.data.school.block : ''}${loginData.data.school.district ? ','+loginData.data.school.district : ''}`}
+                         SchoolId={loginData.data.school.schoolId}
                     />
 
                     :
@@ -967,12 +967,13 @@ dispatchStudentExamData(payload){
                             style={{ fontSize: 14, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%', fontFamily: monospace_FF }}
                         >
                             {`${Strings.school_name} : `} */}
-                            <Text style={{ fontWeight: 'normal', fontFamily: monospace_FF ,marginLeft:5,color:'#000000'}}>
+                            <Text style={{marginLeft:5}}>
                             {`${loginData.data.school.name} ${loginData.data.school.block ?','+ loginData.data.school.block : ''} ${loginData.data.school.district ? ','+loginData.data.school.district : ''}`}
                             </Text>
                         {/* </Text> */}
                        
-                    </View>}
+                    </View>
+                    }
                     </View>
                 <ScrollView
                     contentContainerStyle={{ paddingTop: '5%', paddingBottom: '35%' }}

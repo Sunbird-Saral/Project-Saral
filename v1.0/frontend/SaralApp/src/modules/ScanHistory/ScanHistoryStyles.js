@@ -34,20 +34,23 @@ export const styles = StyleSheet.create({
     },
     scanLabelStyle: {
         padding: '2.4%',
-        borderTopWidth: 1,
-        borderColor: AppTheme.BLACK
+        // borderTopWidth: 1,
+        borderColor: AppTheme.BLACK,
+        // borderColor:'#DADADA',
+        borderWidth:0.4,
+        borderLeftWidth:0,
+        borderRightWidth:0
+
     },
     scanLabelKeyStyle: {
-        width: '50%',
-        backgroundColor: AppTheme.TAB_BORDER,
-        borderLeftWidth: 1,
-        borderRightWidth: .5,
+        width: '60%',
+        backgroundColor: AppTheme.WHITE,
+        // borderLeftWidth: 1,
+        // borderRightWidth: 1,
     },
     scanLabelValueStyle: {
-        width: '50%',
+        width: '40%',
         backgroundColor: AppTheme.WHITE,
-        borderLeftWidth: .5,
-        borderRightWidth: 1,
         alignItems:'center',
     },
 
