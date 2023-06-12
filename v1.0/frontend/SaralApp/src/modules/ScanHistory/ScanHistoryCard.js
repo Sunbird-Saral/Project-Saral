@@ -18,7 +18,7 @@ import axios from 'axios';
 import { ScrollView } from 'react-native-gesture-handler';
 import { collectErrorLogs } from '../CollectErrorLogs';
 import Constant from '../../flux/actions/constants';
-
+import DeviceInfo from 'react-native-device-info';
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
 const HEIGHT_MODAL = 150;
@@ -107,6 +107,7 @@ const ScanHistoryCard = ({
         const data = await getScannedDataFromLocal();
         const hasNetwork = await checkNetworkConnectivity();
         let hasUpdate = await checkAppVersion();
+        const deviceUniqId = await DeviceInfo.getUniqueId();
         const { subject, examDate } = filteredData.response
 
         if (!hasUpdate) {
@@ -135,7 +136,7 @@ const ScanHistoryCard = ({
                                     }
                                 })
                             })
-                            let apiObj = new SaveScanData(filterData[0], loginData.data.token);
+                            let apiObj = new SaveScanData(filterData[0], loginData.data.token,deviceUniqId);
                             saveScanData(apiObj, filterDataLen, setIntolocalAfterFilter);
                         } else {
                             callCustomModal(Strings.message_text,Strings.there_is_no_data,false);
@@ -192,6 +193,8 @@ const ScanHistoryCard = ({
     }
 
     const callScanStatusData = async (filteredDatalen, localScanData) => {
+        const deviceUniqId = await DeviceInfo.getUniqueId();
+        let token = loginData.data.token
         let loginCred = await getLoginCred()
 
         let dataPayload = {
@@ -207,7 +210,7 @@ const ScanHistoryCard = ({
         if (filteredData.response.hasOwnProperty("set")) {
             dataPayload.set = filteredData.response.set
         }
-        let apiObj = new scanStatusDataAction(dataPayload);
+        let apiObj = new scanStatusDataAction(dataPayload, token, deviceUniqId);
         FetchSavedScannedData(apiObj, loginCred.schoolId, loginCred.password, filteredDatalen, localScanData)
     }
 
@@ -221,12 +224,7 @@ const ScanHistoryCard = ({
                     source.cancel('The request timed out.');
                 }
             }, 60000);
-            axios.post(api.apiEndPoint(), api.getBody(), {
-                auth: {
-                    username: uname,
-                    password: pass
-                }
-            })
+            axios.post(api.apiEndPoint(), api.getBody(), { headers: api.getHeaders(), cancelToken: source.token })
                 .then(function (res) {
                     callCustomModal(Strings.message_text,Strings.saved_successfully,false);
                     apiResponse = res

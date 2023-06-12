@@ -36,6 +36,7 @@
     "dotenv": "^10.0.0",
     "exceljs": "^4.2.0",
     "express": "^4.17.1",
+    "express-winston": "^4.2.0",
     "fs": "0.0.1-security",
     "jest-html-reporter": "^3.7.1",
     "js-yaml": "^4.1.0",
@@ -46,7 +47,6 @@
     "pug": "^3.0.0",
     "puppeteer": "^19.8.3",
     "swagger-ui-express": "^4.4.0",
-    "uuidv1": "^1.6.14",
     "validator": "^13.5.2"
   },
   "devDependencies": {

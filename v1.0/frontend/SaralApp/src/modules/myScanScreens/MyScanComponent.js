@@ -29,6 +29,7 @@ import ScanDataModal from './ScanDataModal';
 import { getRoiDataApi, getScanDataApi, setRoiDataApi, setScanDataApi } from '../../utils/offlineStorageUtils';
 import constants from '../../flux/actions/constants';
 import { storeFactory } from '../../flux/store/store';
+import DeviceInfo from 'react-native-device-info';
 
 LogBox.ignoreAllLogs()
 
@@ -62,7 +63,7 @@ class MyScanComponent extends Component {
 
    async componentDidUpdate(prevProps) {
         const { calledRoiData} = this.state;
-        const { roiData, minimalFlag, loginData } = this.props
+        const { roiData, minimalFlag, loginData, apiStatus } = this.props
         if (calledRoiData) {
             if (roiData && prevProps.roiData != roiData && this.props.minimalFlag) {
                 this.setState({ calledRoiData: false, callApi: '' })
@@ -72,6 +73,13 @@ class MyScanComponent extends Component {
                    if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode) {
                    await this.setRoiCache(roiData);
                    }
+                }
+            }
+
+            if (apiStatus && prevProps.apiStatus != apiStatus && apiStatus.error) {
+                this.setState({ isLoading: false, calledLogin: false })
+                if (roiData.length === 0) {
+                    this.callCustomModal(Strings.message_text, "Roi Doesn't Exist",false,false)
                 }
             }
 
@@ -270,8 +278,10 @@ class MyScanComponent extends Component {
                 roi.push(payload);
             }
             await setRoiDataApi(roi)
+            this.setState({isLoading :false})
         } else {
             await setRoiDataApi([payload])
+            this.setState({isLoading :false})
         }
     }
 
@@ -542,6 +552,7 @@ class MyScanComponent extends Component {
         const data = await getScannedDataFromLocal();
         const loginCred = await getLoginCred();
         const hasNetwork = await checkNetworkConnectivity();
+        const deviceUniqId = await DeviceInfo.getUniqueId();
         if (hasNetwork) {
         if (this.state.roiIndex != -1) {
 
@@ -576,7 +587,7 @@ class MyScanComponent extends Component {
                             })
                         })
 
-                        let apiObj = new SaveScanData(filterData[0], this.props.loginData.data.token);
+                        let apiObj = new SaveScanData(filterData[0], this.props.loginData.data.token,deviceUniqId);
                         this.saveScanData(apiObj, filterDataLen, setIntolocalAfterFilter);
 
                     } else {
@@ -640,8 +651,10 @@ class MyScanComponent extends Component {
     }
 
     callScanStatusData = async (isApiCalled, filteredDatalen, localScanData, res) => {
-        let hasNetwork = await checkNetworkConnectivity();
+        const deviceUniqId = await DeviceInfo.getUniqueId();
         const { loginData } = this.props;
+        let token = loginData.data.token
+        let hasNetwork = await checkNetworkConnectivity();
         if (!hasNetwork) {
             let hasCacheData = await getScanDataApi();
             if (hasCacheData) {
@@ -696,7 +709,7 @@ class MyScanComponent extends Component {
                 }
                 let roiId = this.props.roiData && this.props.roiData.data.roiId;
                 dataPayload.roiId = roiId;
-                let apiObj = new scanStatusDataAction(dataPayload);
+                let apiObj = new scanStatusDataAction(dataPayload, token, deviceUniqId);
                 this.FetchSavedScannedData(isApiCalled, apiObj, loginCred.schoolId, loginCred.password, filteredDatalen, localScanData)
             }
         }
@@ -713,12 +726,7 @@ class MyScanComponent extends Component {
                     source.cancel('The request timed out.');
                 }
             }, 60000);
-            axios.post(api.apiEndPoint(), api.getBody(), {
-                auth: {
-                    username: uname,
-                    password: pass
-                }
-            })
+            axios.post(api.apiEndPoint(), api.getBody(), { headers: api.getHeaders(), cancelToken: source.token })
                 .then(function (res) {
                     apiResponse = res
                     clearTimeout(id)

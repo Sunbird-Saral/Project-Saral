@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">93.75% </span>
+                <span class="strong">91.89% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>30/32</span>
+                <span class='fraction'>34/37</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96.77% </span>
+                <span class="strong">94.44% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>30/31</span>
+                <span class='fraction'>34/36</span>
             </div>
         
             
@@ -150,13 +150,26 @@
 <a name='L85'></a><a href='#L85'>85</a>
 <a name='L86'></a><a href='#L86'>86</a>
 <a name='L87'></a><a href='#L87'>87</a>
-<a name='L88'></a><a href='#L88'>88</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L88'></a><a href='#L88'>88</a>
+<a name='L89'></a><a href='#L89'>89</a>
+<a name='L90'></a><a href='#L90'>90</a>
+<a name='L91'></a><a href='#L91'>91</a>
+<a name='L92'></a><a href='#L92'>92</a>
+<a name='L93'></a><a href='#L93'>93</a>
+<a name='L94'></a><a href='#L94'>94</a>
+<a name='L95'></a><a href='#L95'>95</a>
+<a name='L96'></a><a href='#L96'>96</a>
+<a name='L97'></a><a href='#L97'>97</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -217,20 +230,25 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -242,17 +260,21 @@ const Classes = require("../models/classes")
 const Users = require("../models/users")
 const Helper = require('../middleware/helper')
 const { stringObject } = require('../utils/commonUtils');
+const logger = require('../logging/logger')
+// const {getLoginData,setLoginData,getToken,setToken} = require('../logging/logger')
 &nbsp;
 exports.loginSchool = async (req, res, next) =&gt; {
+  
+&nbsp;
   try {
     let userId = {}
     <span class="missing-if-branch" title="else path not taken" >E</span>if (req.body.schoolId) {
       userId = req.body.schoolId.toLowerCase()
     }
-  
+    
     const users = await Helper.findByCredentials(userId, req.body.password)
     
-    const schools = await Schools.findOne({ schoolId: users.schoolId })
+    const schools = await Schools.findOne({ schoolId: users.schoolId , $comment: "Login School API For Find school data according to schoolId."   })
 &nbsp;
     await Helper.lockScreenValidator(schools)
 &nbsp;
@@ -288,7 +310,7 @@ exports.loginSchool = async (req, res, next) =&gt; {
     }
 &nbsp;
     <span class="missing-if-branch" title="else path not taken" >E</span>if (req.body.classes) {
-      const classData = await Classes.findClassesBySchools(schools.schoolId)
+      const classData = await Classes.findClassesBySchools(schools.schoolId ,{$comment: "Login School API For Find classes according to schoolId." })
 &nbsp;
       classData.forEach(data =&gt; {
         const { sections, classId, className } = data
@@ -302,22 +324,27 @@ exports.loginSchool = async (req, res, next) =&gt; {
       classes.sort(<span class="fstat-no" title="function not covered" >(a</span>, b) =&gt; <span class="cstat-no" title="statement not covered" >a.classId.trim().localeCompare(b.classId.trim()))</span>
       data.classes = classes
     }
-&nbsp;
+  
+    logger.info()
     res.status(200).json({
       ... data
     });
   } catch (e) {
     if (e &amp;&amp; e.message == 'School Id or Password is not correct.') {
+      logger.error(`${e}` )
+      
       res.status(401).json({
         error: e.message
       })
     }
     else if (e &amp;&amp; e.message == stringObject().lockScreen) {
+       logger.warn(e)
       res.status(500).json({
         error: e.message
       })
     }
     else <span class="missing-if-branch" title="else path not taken" >E</span>{
+<span class="cstat-no" title="statement not covered" >      logger.warn(e)</span>
 <span class="cstat-no" title="statement not covered" >      res.status(400).json({</span>
         e
       });
@@ -331,7 +358,7 @@ exports.loginSchool = async (req, res, next) =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-04-17T03:11:11.646Z
+                at 2023-06-08T07:09:05.074Z
             </div>
         <script src="../prettify.js"></script>
         <script>

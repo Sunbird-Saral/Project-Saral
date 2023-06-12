@@ -3,7 +3,7 @@ LABEL maintainer="dileep.gadiraju@tarento.com"
 
 ENV PROFILE=dev
 ENV PORT=3000
-ENV MONGODB_URL=mongodb://docker.for.mac.localhost:27017/saralnew
+ENV MONGODB_URL=mongodb://10.0.31.152:27017,10.0.50.162:27017/saralv3_DB
 ENV JWT_SECRET=SARALDATA_NODE
 WORKDIR /app
 COPY package*.json ./

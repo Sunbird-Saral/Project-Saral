@@ -1,15 +1,17 @@
 /**
  * ROI API
  */
- import API from '../../flux/actions/apis/api';
+ import configs from '../../configs/config';
+import API from '../../flux/actions/apis/api';
  import C from '../../flux/actions/constants'
  
  export class ROIAction extends API {
-    constructor(payload,token, timeout = 30000) {
+    constructor(payload,token,deviceUniqId, timeout = 30000) {
         super('GET', timeout, false);
         this.payload = payload;
         this.token = token;
         this.type = C.ROI_DATA;
+        this.deviceUniqId = deviceUniqId
     }
     toString() {
         return `${super.toString()} payload: ${this.payload} `
@@ -35,7 +37,10 @@
     getHeaders() {
         return {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${this.token}`
+            'Authorization': `Bearer ${this.token}`,
+            'methods': 'GET',
+            'origin': configs.BASE_URL,
+            'x-request-deviceid' :`${this.deviceUniqId}`
         }
     }
 
