@@ -14,71 +14,86 @@ exports.saveMarks = async (req, res, next) => {
         // console.log("APP VERSION", req.get('X-App-Version'))
     }
 
+    const session = await mongoose.startSession();
+
+    const transactionOptions = {
+        readPreference: 'primary',
+        readConcern: { level: 'local' },
+        writeConcern: { w: 'majority' }
+    };
+
     try {
-        if (Object.keys(req.body).length === 0) res.status(400).send({ message: 'Validation error.' })
-        const input_keys = Object.keys(req.body)
-        if (!["subject", "classId","userId","examId"].every((i) => input_keys.includes(i)))
-            throw new httperror(400, "Invalid Request");
+        await session.withTransaction(async () => {
+
+            if (Object.keys(req.body).length === 0) res.status(400).send({ message: 'Validation error.' })
+            const input_keys = Object.keys(req.body)
+            if (!["subject", "classId", "userId", "examId"].every((i) => input_keys.includes(i)))
+                throw new httperror(400, "Invalid Request");
 
 
-        const subject = req.body.subject
-        const examDate = req.body.examDate
-        const examId = req.body.examId
-        const schoolId = req.school.schoolId
-        const classId = req.body.classId
-        const userId = req.school.userId
-        const createdOn = new Date().getTime()
-        const roiId = req.body.roiId
+            const subject = req.body.subject
+            const examDate = req.body.examDate
+            const examId = req.body.examId
+            const schoolId = req.school.schoolId
+            const classId = req.body.classId
+            const userId = req.school.userId
+            const createdOn = new Date().getTime()
+            const roiId = req.body.roiId
 
 
-        req.body.studentsMarkInfo.forEach(studentsData => {
-            const marksData = new Marks({
-                ...studentsData,
-                schoolId,
-                examDate,
-                subject,
-                classId,
-                createdOn,
-                roiId,
-                examId,
-                userId
-            })
-            marks.push(marksData)
-        });
+            req.body.studentsMarkInfo.forEach(studentsData => {
+                const marksData = new Marks({
+                    ...studentsData,
+                    schoolId,
+                    examDate,
+                    subject,
+                    classId,
+                    createdOn,
+                    roiId,
+                    examId,
+                    userId
+                })
+                marks.push(marksData)
+            });
 
-        await Helper.lockScreenValidator(req.school)
-
-
-        let marksResult = await Marks.bulkWrite(
-            marks.map((mark) => ({
-                updateOne: {
-                    filter: {
-                        studentId: mark.studentId,
-                        subject: mark.subject,
-                        examDate: mark.examDate
-                    },
-                    update: { $set: { studentIdTrainingData: mark.studentIdTrainingData, studentId: mark.studentId, predictionConfidence: mark.predictionConfidence, schoolId: mark.schoolId, examDate: mark.examDate, predictedStudentId: mark.predictedStudentId, studentAvailability: mark.studentAvailability, marksInfo: mark.marksInfo, maxMarksTrainingData: mark.maxMarksTrainingData, maxMarksPredicted: mark.maxMarksPredicted, securedMarks: mark.securedMarks, totalMarks: mark.totalMarks, obtainedMarksTrainingData: mark.obtainedMarksTrainingData, obtainedMarksPredicted: mark.obtainedMarksPredicted, set: mark.set, subject: mark.subject, classId: mark.classId, section: mark.section, examId: mark.examId, userId: mark.userId, roiId: mark.roiId } },
-                    upsert:true
-                }
-            }))
-        );
-        logger.info("marks responsee---->", marksResult)
-
-        let match = {
-            schoolId: marks[0].schoolId,
-            classId: marks[0].classId,
-            section: marks[0].section,
-            examDate: marks[0].examDate,
-            subject: marks[0].subject,
-            $comment: "Save Marks API For Find Marks Details."
-        }
-
-        let marksData = await Marks.find(match)
-
-        res.status(200).json({ data: marksData })
+            await Helper.lockScreenValidator(req.school)
 
 
+            let marksResult = await Marks.bulkWrite(
+                marks.map((mark) => ({
+                    updateOne: {
+                        filter: {
+                            studentId: mark.studentId,
+                            subject: mark.subject,
+                            examDate: mark.examDate
+                        },
+                        update: { $set: { studentIdTrainingData: mark.studentIdTrainingData, studentId: mark.studentId, predictionConfidence: mark.predictionConfidence, schoolId: mark.schoolId, examDate: mark.examDate, predictedStudentId: mark.predictedStudentId, studentAvailability: mark.studentAvailability, marksInfo: mark.marksInfo, maxMarksTrainingData: mark.maxMarksTrainingData, maxMarksPredicted: mark.maxMarksPredicted, securedMarks: mark.securedMarks, totalMarks: mark.totalMarks, obtainedMarksTrainingData: mark.obtainedMarksTrainingData, obtainedMarksPredicted: mark.obtainedMarksPredicted, set: mark.set, subject: mark.subject, classId: mark.classId, section: mark.section, examId: mark.examId, userId: mark.userId, roiId: mark.roiId } },
+                        upsert: true
+                    }
+                }))
+            );
+            logger.info("marks responsee---->", marksResult)
+
+            if (!marksResult) {
+                await session.abortTransaction();
+                console.error("Any operations that already occurred as part of this transaction will be rolled back.");
+                return;
+            }
+            let match = {
+                schoolId: marks[0].schoolId,
+                classId: marks[0].classId,
+                section: marks[0].section,
+                examDate: marks[0].examDate,
+                subject: marks[0].subject,
+                $comment: "Save Marks API For Find Marks Details."
+            }
+
+            let marksData = await Marks.find(match)
+
+            res.status(200).json({ data: marksData })
+        }, transactionOptions);
     } catch (e) {
+        console.log("The transaction was aborted due to an unexpected error: " + e);
         if (e && e.message == stringObject().lockScreen) {
             res.status(500).json({ error: e.message })
         }
