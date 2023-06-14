@@ -88,7 +88,7 @@ exports.saveMarks = async (req, res, next) => {
                 $comment: "Save Marks API For Find Marks Details."
             }
 
-            let marksData = await Marks.find(match)
+            let marksData = await Marks.find(match, {_id: 0})
 
             res.status(200).json({ data: marksData })
         }, transactionOptions);
