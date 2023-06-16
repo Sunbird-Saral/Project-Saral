@@ -9,7 +9,7 @@ const httperror = require("http-errors");
 
 exports.saveMarks = async (req, res, next) => {
     const marks = []
-
+    const startTime = new Date();
     if (req.header('X-App-Version')) {
         // console.log("APP VERSION", req.get('X-App-Version'))
     }
@@ -74,7 +74,10 @@ exports.saveMarks = async (req, res, next) => {
         }
 
         let marksData = await Marks.find(match)
-
+        const endTime = new Date(); 
+        const executionTime = endTime - startTime; 
+        logger.info(`Execution time for Save Marks API : ${executionTime}ms`);
+        
         res.status(200).json({ data: marksData })
 
 
