@@ -62,6 +62,10 @@ exports.saveMarks = async (req, res, next) => {
                 }
             }))
         );
+        const endTime = new Date(); 
+        const executionTime = endTime - startTime; 
+        logger.info(`Execution time for Save Marks BulkWrite : ${executionTime}ms`);
+        
         logger.info("marks responsee---->", marksResult)
 
         let match = {
@@ -74,9 +78,6 @@ exports.saveMarks = async (req, res, next) => {
         }
 
         let marksData = await Marks.find(match)
-        const endTime = new Date(); 
-        const executionTime = endTime - startTime; 
-        logger.info(`Execution time for Save Marks API : ${executionTime}ms`);
         
         res.status(200).json({ data: marksData })
 
