@@ -3,10 +3,12 @@ const Students = require("../models/students")
 const Marks = require("../models/marks")
 const Exams = require('../models/exams')
 const Helper = require('../middleware/helper')
+const logger = require('../logging/logger')
 
 
 
 exports.fetchStudentsandExams = async (req, res, next) => {
+    const startTime = new Date();
     const match = {}
     const examMatch = {}
 
@@ -36,7 +38,10 @@ exports.fetchStudentsandExams = async (req, res, next) => {
         await Helper.lockScreenValidator(req.school)
 
         const students = await Students.find(match, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 }).lean()
+        const endTime = new Date();
+        const executionTime = endTime - startTime;
 
+        logger.info(`Execution time for Get Students in Fetch Student and Marks API : ${executionTime}ms`);
 
         for (let student of students) {
             let lookup = {
@@ -59,7 +64,10 @@ exports.fetchStudentsandExams = async (req, res, next) => {
         }
 
         const exams = await Exams.find(examMatch, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 })
+        const endTime2 = new Date();
+        const executionTime2 = endTime2 - startTime;
 
+        logger.info(`Execution time for Get Exams in Fetch Student and Marks API : ${executionTime2}ms`);
         res.status(200).json({
             students, exams
         });

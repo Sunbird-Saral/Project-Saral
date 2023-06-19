@@ -1,10 +1,11 @@
 const Exams = require('../models/exams')
 const Rois = require('../models/roi')
 const Schools = require('../models/school')
-
+const logger = require('../logging/logger')
 
 exports.getRoiData = async (req, res, next) => {
     try {
+        const startTime = new Date();
         const examExist = await Exams.findOne({ examId: req.params.examId, $comment: "Get Roi Data API For Find Exam Data." }).lean()
 
         if (examExist) {
@@ -32,7 +33,10 @@ exports.getRoiData = async (req, res, next) => {
                     }
                 }
                 let roi = await Rois.find(examSetLookupExist, { roiId: 1, roi: 1 }).lean()
-
+                const endTime = new Date();
+                const executionTime = endTime - startTime;
+        
+                logger.info(`Execution time for Get ROI API : ${executionTime}ms`);
                 if (roi.length) {
                     res.status(200).json({
                         layout: roi[0].roi.layout,

@@ -10,6 +10,7 @@ exports.loginSchool = async (req, res, next) => {
   
 
   try {
+    const startTime = new Date();
     let userId = {}
     if (req.body.schoolId) {
       userId = req.body.schoolId.toLowerCase()
@@ -67,8 +68,11 @@ exports.loginSchool = async (req, res, next) => {
       classes.sort((a, b) => a.classId.trim().localeCompare(b.classId.trim()))
       data.classes = classes
     }
-  
-    logger.info()
+    const endTime = new Date();
+    const executionTime = endTime - startTime;
+
+    logger.info(`Execution time for Get Login API : ${executionTime}ms`);
+
     res.status(200).json({
       ... data
     });

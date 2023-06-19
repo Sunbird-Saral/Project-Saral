@@ -17,7 +17,7 @@ exports.saveMarks = async (req, res, next) => {
     try {
         if (Object.keys(req.body).length === 0) res.status(400).send({ message: 'Validation error.' })
         const input_keys = Object.keys(req.body)
-        if (!["subject", "classId","userId","examId"].every((i) => input_keys.includes(i)))
+        if (!["subject", "classId", "userId", "examId"].every((i) => input_keys.includes(i)))
             throw new httperror(400, "Invalid Request");
 
 
@@ -58,14 +58,14 @@ exports.saveMarks = async (req, res, next) => {
                         examDate: mark.examDate
                     },
                     update: { $set: { studentIdTrainingData: mark.studentIdTrainingData, studentId: mark.studentId, predictionConfidence: mark.predictionConfidence, schoolId: mark.schoolId, examDate: mark.examDate, predictedStudentId: mark.predictedStudentId, studentAvailability: mark.studentAvailability, marksInfo: mark.marksInfo, maxMarksTrainingData: mark.maxMarksTrainingData, maxMarksPredicted: mark.maxMarksPredicted, securedMarks: mark.securedMarks, totalMarks: mark.totalMarks, obtainedMarksTrainingData: mark.obtainedMarksTrainingData, obtainedMarksPredicted: mark.obtainedMarksPredicted, set: mark.set, subject: mark.subject, classId: mark.classId, section: mark.section, examId: mark.examId, userId: mark.userId, roiId: mark.roiId } },
-                    upsert:true
+                    upsert: true
                 }
             }))
         );
-        const endTime = new Date(); 
-        const executionTime = endTime - startTime; 
+        const endTime = new Date();
+        const executionTime = endTime - startTime;
         logger.info(`Execution time for Save Marks BulkWrite : ${executionTime}ms`);
-        
+
         logger.info("marks responsee---->", marksResult)
 
         let match = {
@@ -78,7 +78,10 @@ exports.saveMarks = async (req, res, next) => {
         }
 
         let marksData = await Marks.find(match)
-        
+        const endTime2 = new Date();
+        const executionTime2 = endTime2 - startTime;
+
+        logger.info(`Execution time for Save Marks Find Query : ${executionTime2}ms`);
         res.status(200).json({ data: marksData })
 
 
@@ -94,6 +97,7 @@ exports.saveMarks = async (req, res, next) => {
 
 exports.getSaveScan = async (req, res, next) => {
     try {
+        const startTime = new Date();
         if (req.body.schoolId) {
             req.body.schoolId = req.body.schoolId.toLowerCase()
         }
@@ -146,7 +150,10 @@ exports.getSaveScan = async (req, res, next) => {
             .limit(parseInt(req.body.limit) * 1)
             .skip((parseInt(parseInt(req.body.page)) - 1) * parseInt(parseInt(req.body.limit)))
 
+        const endTime = new Date();
+        const executionTime2 = endTime - startTime;
 
+        logger.info(`Execution time for Get Saved Scan API : ${executionTime2}ms`);
         res.status(200).json({ data: savedScan })
     } catch (e) {
         res.status(400).json({ "error": true, e })
