@@ -68,21 +68,7 @@ exports.saveMarks = async (req, res, next) => {
 
         logger.info("marks responsee---->", marksResult)
 
-        let match = {
-            schoolId: marks[0].schoolId,
-            classId: marks[0].classId,
-            section: marks[0].section,
-            examDate: marks[0].examDate,
-            subject: marks[0].subject,
-            $comment: "Save Marks API For Find Marks Details."
-        }
-
-        let marksData = await Marks.find(match)
-        const endTime2 = new Date();
-        const executionTime2 = endTime2 - startTime;
-
-        logger.info(`Execution time for Save Marks Find Query : ${executionTime2}ms`);
-        res.status(200).json({ data: marksData })
+        res.status(200).json({ message: "Saved Successfully." })
 
 
     } catch (e) {
