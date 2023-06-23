@@ -53,6 +53,7 @@ exports.saveMarks = async (req, res, next) => {
             marks.map((mark) => ({
                 updateOne: {
                     filter: {
+                        schoolId: mark.schoolId,
                         studentId: mark.studentId,
                         subject: mark.subject,
                         examDate: mark.examDate
