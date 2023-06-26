@@ -15,7 +15,7 @@ exports.saveMarks = async (req, res, next) => {
     }
 
     try {
-        if (Object.keys(req.body).length === 0) res.status(400).send({ message: 'Validation error.' })
+        if (Object.keys(req.body).length === 0)  throw new httperror(400, "Validation error.")
         const input_keys = Object.keys(req.body)
         if (!["subject", "classId", "userId", "examId"].every((i) => input_keys.includes(i)))
             throw new httperror(400, "Invalid Request");
