@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Text, View, FlatList, SafeAreaView, BackHandler } from 'react-native';
+import { Text, View, FlatList, SafeAreaView, BackHandler,StyleSheet } from 'react-native';
 
 //redux
 import { connect, useDispatch } from 'react-redux';
@@ -50,7 +50,6 @@ const StudentsList = ({
     apiStatus,
     roiData
 }) => {
-
 
     function usePrevious(value) {
         const ref = useRef();
@@ -283,12 +282,14 @@ useEffect(() => {
 
 
 
-    const renderStudentData = ({ item }) => {
+    const renderStudentData = ({ item,index }) => {
         return (
+            <View style={{backgroundColor:multiBrandingData.themeColor2 ? multiBrandingData.themeColor2:AppTheme.WHITE}}>
             <StudentsDataComponent
-                themeColor1={multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}
-                themeColor2={multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE}
+                themeColor1={multiBrandingData.themeColor1 ? multiBrandingData.themeColor1 : AppTheme.BLUE}
+                themeColor2={multiBrandingData.themeColor2 ? multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE}
                 item={item}
+                index={index}
                 pabsent={item.studentAvailability}
                 scanedData={scanedData}
                 filteredData={filteredData}
@@ -298,12 +299,13 @@ useEffect(() => {
                 dispatch={dispatch}
                 loginData={loginData}
             />
+            </View>
         )
     }
 
     const renderEmptyList = () => {
         return (
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
                 <Text style={{fontFamily : monospace_FF}}>No Students Available</Text>
             </View>
         )
@@ -362,7 +364,7 @@ useEffect(() => {
 
         if (absentPresentStatus.studentsMarkInfo.length == 0) {
             setPresentAbsentStudent(allStudentData)
-            navigation.push('ScanHistory');
+            navigation.push('myScan');
         }else if (absentPresentStatus.studentsMarkInfo.length > 0) {
             await setDataIntoRegularStudentExamApi()
         }
@@ -387,7 +389,7 @@ useEffect(() => {
     }
         await setRegularStudentExamApi(getStudentExamCache);
         await setPresentAbsentStudent(allStudentData)
-        navigation.push('ScanHistory');
+        navigation.push('myScan');
     }
 
     const saveStudentData = (api) => {
@@ -403,7 +405,7 @@ useEffect(() => {
                 .then(function (res) {
                     setIsLoading(false)
                     setPresentAbsentStudent(allStudentData)
-                    navigation.push('ScanHistory');
+                    navigation.push('myScan');
                     setDataIntoRegularStudentExamApi()
                     apiResponse = res
                     clearTimeout(id)
@@ -505,64 +507,65 @@ useEffect(() => {
             payload
         }
     }
-
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor:multiBrandingData.themeColor2 ? multiBrandingData.themeColor2 : 'white' }}>
              <ShareComponent
                  navigation={navigation}
+                 onPress={navigateToBack}
                  />
-
+ <View style={{margin:5}}>
             {
                     (BrandLabel) ?
                         <MultibrandLabels
                         Label1={BrandLabel.School}
-                        Label2={BrandLabel.SchoolId}
-                        School ={loginData.data.school.name}
-                        SchoolId={loginData.data.school.schoolId}
+                        School =   {`${loginData.data.school.name}${loginData.data.school.block ? ','+loginData.data.school.block : ''}${loginData.data.school.district ? ','+loginData.data.school.district : ''}`}
+
                         />
                      :
             (loginData && loginData.data) &&
-                <View style={{width:'60%'}}>
-                    <Text
-                        style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingTop: '4%',fontFamily : monospace_FF }}
-                    >
-                        {Strings.school_name + ' : '}
-                        <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
-                            {loginData.data.school.name}
+                <View>
+                   
+                        <Text style={{marginLeft:5}}>
+                            
+                        {`${loginData.data.school.name}${loginData.data.school.block ? ','+loginData.data.school.block : ''}${loginData.data.school.district ? ','+loginData.data.school.district : ''}`}
+                        </Text>
+                   
+                    <View style={{flexDirection:'row',marginLeft:5,marginTop:5,}}>
+                    <Text style={{fontWeight:'bold'}}>
+                        {Strings.class_text + ' : '}
+                        <Text style={{ fontWeight:'normal' }}>
+                            {`${filteredData.className}, ${filteredData.section ? filteredData.section : ''}`}
                         </Text>
                     </Text>
-                    <Text
-                        style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '1%',fontFamily : monospace_FF }}
-                    >
-                        {Strings.schoolId_text + ' : '}
-                        <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
-                            {loginData.data.school.schoolId}
+                    <Text style={{marginLeft:10,fontWeight:"bold"}}>
+                        {Strings.subject + ' : '}
+                        <Text style={{ fontWeight: 'normal'}}>
+                               {filteredData.subject} {filteredData.set ? `(Set ${filteredData.set})`:''}
                         </Text>
                     </Text>
+                    </View>
+                    
                 </View>
 
             }
+            </View>
+            <View style={{justifyContent: 'center',alignItems:'center',marginVertical:10}}>
+            <Text style={{fontSize:18,fontWeight:'bold'}}>{'Mark Attendance'}</Text>
+            </View>
+            
             <FlatList
                 data={allStudentData}
                 renderItem={renderStudentData}
-                background={multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}
                 ListEmptyComponent={renderEmptyList}
                 keyExtractor={(item) => item.studentId.toString()}
-                contentContainerStyle={styles.flatlistCon}
+                // contentContainerStyle={{backgroundColor:multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}}
                 showsVerticalScrollIndicator={false}
             />
 
 
             <View style={styles.viewnxtBtnStyle1}>
                 <ButtonComponent
-                    customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
-                    btnText={Strings.Back.toUpperCase()}
-                    activeOpacity={0.8}
-                    onPress={navigateToBack}
-                />
-
-                <ButtonComponent
-                    customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+                    customBtnStyle={[styled.nxtBtnStyle, { backgroundColor: multiBrandingData.themeColor1 ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
                     btnText={Strings.next_text.toUpperCase()}
                     activeOpacity={0.8}
                     onPress={navigateToNext}
@@ -580,6 +583,14 @@ useEffect(() => {
     );
 }
 
+const styled = StyleSheet.create({
+    nxtBtnStyle: {
+        marginVertical:10,
+        width:160,
+        height:43
+    },
+})
+
 const mapStateToProps = (state) => {
     return {
         filteredData: state.filteredData.response,
@@ -590,7 +601,8 @@ const mapStateToProps = (state) => {
         absentStudentDataResponse: state.absentStudentDataResponse,
         apiStatus: state.apiStatus,
         multiBrandingData: state.multiBrandingData.response.data,
-        scanedData: state.scanedData.response
+        scanedData: state.scanedData.response,
+        studentsAndExamData: state.studentsAndExamData,
     }
 }
 

@@ -1,5 +1,7 @@
-import { responsiveFontSize } from 'react-native-responsive-dimensions';
-
+import { responsiveFontSize,
+        responsiveHeight,
+        responsiveWidth, } from 'react-native-responsive-dimensions';
+import { Dimensions } from 'react-native';
 const AppTheme = {
     HEADER_FONT_SIZE_LARGE:responsiveFontSize(3.5),
     HEADER_FONT_SIZE_REGULAR_LARGE:responsiveFontSize(3),
@@ -15,6 +17,22 @@ const AppTheme = {
     FONT_SIZE_MEDIUM_SMALL:responsiveFontSize(1.4),
     FONT_SIZE_EXTRA_SMALL:responsiveFontSize(1.3),
     FONT_SIZE_TINY:responsiveFontSize(1.1),
+    
+    HEIGHT_25:responsiveHeight(5),
+    HEIGHT_30:responsiveHeight(10),
+    HEIGHT_50:responsiveHeight(7),
+    HEIGHT_60:responsiveHeight(10),
+    HEIGHT_70:responsiveHeight(15),
+    WIDTH_10:responsiveWidth(10),
+    WIDTH_15:responsiveWidth(15),
+    WIDTH_20:responsiveWidth(20),
+    WIDTH_30:responsiveWidth(30),
+    WIDTH_40:responsiveWidth(40),
+    WIDTH_50:responsiveWidth(50),
+    WIDTH_60:responsiveWidth(60),
+    WIDTH_70:responsiveWidth(70),
+
+
 
     BLACK: '#000000',
     LIGHT_BLACK: '#414141',

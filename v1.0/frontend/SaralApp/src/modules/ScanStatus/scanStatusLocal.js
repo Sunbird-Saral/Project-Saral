@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, Text, View, Image, TouchableOpacity,Platform } from 'react-native';
+import { FlatList, Text, View, Image, TouchableOpacity,Platform,BackHandler,Alert, ScrollView } from 'react-native';
 
 //redux
 import { connect, useDispatch } from 'react-redux';
@@ -59,8 +59,21 @@ const ScanStatusLocal = ({
 
     const onBackPress = () => {
         navigation.navigate('myScan');
-        return true;
+       
     };
+
+    useEffect(() => {
+        const backAction = () => {
+          return true;
+        };
+    
+        const backHandler = BackHandler.addEventListener(
+          'hardwareBackPress',
+          backAction,
+        );
+    
+        return () => backHandler.remove();
+      }, []);
 
 const callCustomModal = (title, message, isAvailable, func, cancel) => {
     let data = {
@@ -107,10 +120,13 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
     const renderItem = ({ item, index }) => {
         return <ScanStatusLocalList
             scanitemdata={item} 
+            index={index}
             id={item.studentId}
             loacalstutlist={unsavedstudentList}
             themeColor1={multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}
             BrandLabel={BrandLabel}
+            themeColor2={multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.BLUE}
+            navigation ={navigation}
         />
 
     }
@@ -340,66 +356,40 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
         }
 
     return (
-        <View style={styles.container}>
-             <ShareComponent
-                 navigation={navigation}
-                 />
-            <View style={{ flexDirection:'row',justifyContent: 'space-between' }}>
-            {(multiBrandingData && BrandLabel) ?
-                <MultibrandLabels
-                Label1={BrandLabel.School}
-                Label2={BrandLabel.SchoolId}
-                School ={loginData.data.school.name}
-                SchoolId={loginData.data.school.schoolId}
+        <View style={[styles.container,{ flex: 1, backgroundColor:multiBrandingData.themeColor2 ? multiBrandingData.themeColor2 : 'white' }]}>
+          <ShareComponent
+                    navigation={navigation}
+                    onPress={()=>navigation.navigate('myScan')}
                 />
-                     :
-                (loginData && loginData.data)
-                &&
-                <View>
-                    <Text
-                        style={styles.schoolName}
-                    >
-                        {Strings.school_name + ' Name : '}
-                        <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>{loginData.data.school.name}</Text>
-                    </Text>
-                    <Text style={[styles.schoolId, { marginLeft: 5 }]}>
-                        {Strings.schoolId_text + ' : '}
-                        <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
-                            {loginData.data.school.schoolId}
-                        </Text>
-                    </Text>
-                </View>
-            }
-
-            {presentStudentList.length > 0 &&
-            <TouchableOpacity  onPress={()=>onShare()} style={{width:40,height:40,marginRight:20,marginTop:10}}>
-                    <Image style={{ height: 25, width: 25, marginHorizontal: 15, marginVertical: 20 }} source={Assets.Share} />
-            </TouchableOpacity> 
-            }
             
+            <View style={{marginTop:30}}>
+            <Text style={styles.scanStatus}>{'Review Scans'}</Text>
             </View>
-
-            <Text style={styles.scanStatus}>{Strings.scan_status}</Text>
-        
+            {/* <ScrollView> */}
             <FlatList
-                data={ presentStudentList}
+                data={presentStudentList}
                 renderItem={renderItem}
                 ListEmptyComponent={renderEmptyData}
             keyExtractor={(item, index) => `${index.toString()}`}
             contentContainerStyle={styles.content}
+            showsVerticalScrollIndicator={false}
             />
-
-          <View style={{justifyContent:'space-between',flexDirection:'row'}}>
+              
+           
+              
+          <View style={{justifyContent:'space-between',flexDirection:'row',top:10}}>
           <ButtonComponent
-                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
-                btnText={Strings.close}
+                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData.themeColor1 ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+                customBtnTextStyle={{fontWeight:'normal',fontSize:14}}
+                btnText={Strings.close.toUpperCase()}
                 activeOpacity={0.8}
                 onPress={()=> onBackPress()}
                 />
 
             <ButtonComponent
-                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
-                btnText={Strings.save_scan}
+                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData.themeColor1 ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+                customBtnTextStyle={{fontWeight:'normal',fontSize:14}}
+                btnText={'Submit All Scans'.toUpperCase()}
                 activeOpacity={0.8}
                 onPress={()=> onPressSaveInDB()}
                 />
@@ -410,10 +400,12 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
                     &&
                     <Spinner
                         animating={isLoading}
-                        customContainer={{ opacity: 0.6, elevation: 15 }}
+                        customContainer={{ opacity: 0.6, elevation: 15, backgroundColor:AppTheme.WHITE }}
                     />
                 }
 
+     
+       
         </View>
     );
 }

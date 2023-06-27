@@ -73,6 +73,26 @@ const schoolSchema = new mongoose.Schema({
         type: Boolean,
         required: false,
     },
+    block:{
+        type: String,
+        required: false
+    },
+    useCase2:{
+        type: Boolean,
+        required: false
+    },
+    useCase3:{
+        type: Boolean,
+        required: false
+    },
+    useCase4:{
+        type: Boolean,
+        required: false
+    },
+    useCase5:{
+        type: Boolean,
+        required: false
+    },
 }, {
     timestamps: false
 })

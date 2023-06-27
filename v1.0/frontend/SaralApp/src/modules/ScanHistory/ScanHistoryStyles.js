@@ -3,10 +3,12 @@ import AppTheme from "../../utils/AppTheme";
 export const styles = StyleSheet.create({
     container: {
         backgroundColor:AppTheme.BLUE,
-        width: '80%',
+        width: '90%',
         borderRadius: 8,
         marginTop: 20,
-        marginHorizontal: '10%'
+        justifyContent:'center',
+        alignSelf:"center"
+        
     },
     container1: {
         flex: 1,
@@ -32,20 +34,24 @@ export const styles = StyleSheet.create({
     },
     scanLabelStyle: {
         padding: '2.4%',
-        borderTopWidth: 1,
-        borderColor: AppTheme.BLACK
+        // borderTopWidth: 1,
+        borderColor: AppTheme.BLACK,
+        // borderColor:'#DADADA',
+        borderWidth:0.4,
+        borderLeftWidth:0,
+        borderRightWidth:0
+
     },
     scanLabelKeyStyle: {
-        width: '40%',
-        backgroundColor: AppTheme.TAB_BORDER,
-        borderLeftWidth: 1,
-        borderRightWidth: .5,
-    },
-    scanLabelValueStyle: {
         width: '60%',
         backgroundColor: AppTheme.WHITE,
-        borderLeftWidth: .5,
-        borderRightWidth: 1,
+        // borderLeftWidth: 1,
+        // borderRightWidth: 1,
+    },
+    scanLabelValueStyle: {
+        width: '40%',
+        backgroundColor: AppTheme.WHITE,
+        alignItems:'center',
     },
 
 });

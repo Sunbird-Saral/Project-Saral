@@ -733,7 +733,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
         String text     = "Layout image captured, processing for results !!";
         Point position  = new Point(image.width()/6, image.height() / 2);
         Scalar color    = new Scalar(0,100,0);
-        int font        = Imgproc.COLOR_BGR5652GRAY;
+        int font        = org.opencv.core.Core.FONT_HERSHEY_COMPLEX_SMALL;
         int scale       = 2;
         int thickness   = 3;
         Imgproc.putText(image, text, position, font, scale, color, thickness);

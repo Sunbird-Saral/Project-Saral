@@ -12,7 +12,9 @@ const ModalPopup = ({
     btnText,
     themeColor1,
     data,
-    borderCutomStyle
+    borderCutomStyle,
+    reScan,
+    onPressReScanBtn
 })=> {
     
   return (
@@ -28,6 +30,7 @@ const ModalPopup = ({
           <View style={borderCutomStyle}>
             <Text style={[styles.modalText]}>{data}</Text>
             </View>
+            <View style={{flexDirection:'row',justifyContent:'space-around'}}>
             <Pressable
               style={[styles.nxtBtnStyle,{ backgroundColor: themeColor1 ? themeColor1 : AppTheme.BLUE }]}
               onPress={onPress}
@@ -35,6 +38,14 @@ const ModalPopup = ({
             >
               <Text style={styles.btnTextStyle}>{btnText}</Text>
             </Pressable>
+            <Pressable
+              style={[styles.nxtBtnStyle,{ backgroundColor: themeColor1 ? themeColor1 : AppTheme.BLUE }]}
+              onPress={onPressReScanBtn}
+              activeOpacity={0.8}    
+            >
+              <Text style={styles.btnTextStyle}>{reScan}</Text>
+            </Pressable>
+            </View>
           </ScrollView>
         </View>
       </Modal>
@@ -60,7 +71,7 @@ centeredView: {
   modalText: {
    padding:10
   },
-  nxtBtnStyle:{marginHorizontal:20, borderRadius: 10,padding:15 },
+  nxtBtnStyle:{width:'45%', borderRadius: 10,padding:15 },
   modelView:{
     margin:10,
     borderWidth:5
