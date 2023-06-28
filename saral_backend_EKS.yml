@@ -28,6 +28,12 @@ spec:
           value: SARALDATA_NODE
         - name: MONGODB_POOL_SIZE
           value: "5"
+        resources:
+          limits:
+            cpu: 1000m
+          requests:
+            cpu: 2000m        
+      
         volumeMounts:
         - name: mongodb-data
           mountPath: /data/db
