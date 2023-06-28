@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: saral-backend
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: saral-backend
@@ -30,11 +30,11 @@ spec:
           value: "5"
         resources:
           limits:
-            cpu: 2000m
-            memory: 2Gi
+            cpu: 4000m
+            memory: 4Gi
           requests:
-            cpu: 2000m 
-            memory: 2Gi
+            cpu: 4000m 
+            memory: 4Gi
       
         volumeMounts:
         - name: mongodb-data
