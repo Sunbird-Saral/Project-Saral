@@ -7,7 +7,7 @@ ENV MONGODB_URL=mongodb://10.0.0.185:27017/saraldata_dev
 ENV JWT_SECRET=SARALDATA_NODE
 WORKDIR /app
 COPY package*.json ./
-RUN npm ci && npm cache clean --force
+RUN npm install
 COPY . .
 RUN npm run test
 
