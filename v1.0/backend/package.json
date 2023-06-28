@@ -4,10 +4,10 @@
   "description": "Saral Backend APIs",
   "main": "index.js",
   "scripts": {
-    "start": "env-cmd ./config/prod.env pm2 start src/index.js",
-    "dev": "env-cmd ./config/dev.env nodemon src/index.js -e js,pug",
+    "start": "env-cmd ./config/prod.env pm2 start --max_old_space_size=2048 src/index.js",
+    "dev": "env-cmd ./config/dev.env nodemon --max_old_space_size=2048 src/index.js -e js,pug",
     "uat": "env-cmd ./config/uat.env nodemon src/index.js -e js,pug",
-    "prod": "env-cmd ./config/prod.env nodemon src/index.js -e js,pug",
+    "prod": "env-cmd ./config/prod.env nodemon --max_old_space_size=2048 src/index.js -e js,pug",
     "test": "jest --collectCoverage=true",
     "coverage": "jest --coverage"
   },
