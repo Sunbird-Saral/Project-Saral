@@ -1,4 +1,4 @@
-FROM node:16.8
+FROM node:16.10
 LABEL maintainer="dileep.gadiraju@tarento.com"
 
 ENV PROFILE=dev
