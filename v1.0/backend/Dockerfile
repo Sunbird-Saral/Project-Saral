@@ -1,5 +1,5 @@
-FROM node:16-alpine
-RUN apk update && apk add bash
+FROM node:16.8
+
 LABEL maintainer="dileep.gadiraju@tarento.com"
 
 ENV PROFILE=dev
@@ -8,7 +8,7 @@ ENV MONGODB_URL=mongodb://10.0.0.185:27017/saraldata_dev
 ENV JWT_SECRET=SARALDATA_NODE
 WORKDIR /app
 COPY package*.json ./
-RUN npm ci
+RUN npm install
 COPY . .
 RUN npm run test
 
