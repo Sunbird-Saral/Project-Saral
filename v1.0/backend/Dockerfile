@@ -1,4 +1,4 @@
-FROM node:16.8
+FROM node:16-alpine
 LABEL maintainer="dileep.gadiraju@tarento.com"
 
 ENV PROFILE=dev
@@ -7,7 +7,7 @@ ENV MONGODB_URL=mongodb://10.0.0.185:27017/saraldata_dev
 ENV JWT_SECRET=SARALDATA_NODE
 WORKDIR /app
 COPY package*.json ./
-RUN npm install
+RUN npm ci
 COPY . .
 RUN npm run test
 
