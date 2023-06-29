@@ -1,5 +1,5 @@
 FROM node:16-alpine
-RUN apt update && apt add bash
+RUN apt-get update && apt-get add bash
 LABEL maintainer="dileep.gadiraju@tarento.com"
 
 ENV PROFILE=dev
