@@ -30,11 +30,11 @@ spec:
           value: "5"
         resources:
           limits:
-            cpu: 4000m
-            memory: 4Gi
+            cpu: 2000m
+            memory: 2Gi
           requests:
-            cpu: 4000m 
-            memory: 4Gi
+            cpu: 2000m 
+            memory: 2Gi
       
         volumeMounts:
         - name: mongodb-data
