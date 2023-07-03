@@ -3,7 +3,7 @@ const { createPool } = require('generic-pool');
 
 // url/databasename
 const connectionURL = process.env.MONGODB_URL
-const poolSize = 20
+const poolSize = 100
 
 //TODO would be removed
 mongoose.connect(connectionURL, {
