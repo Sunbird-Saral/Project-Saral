@@ -1,0 +1,1409 @@
+{
+    "layout": {
+        "version": "1.0",
+        "name": "MULTISUBJECT1S10Q Exam Sheet Form",
+        "cells": [
+            {
+                "cellId": "1",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBERID1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "1",
+                        "index": 0,
+                        "rect": {
+                            "top": 40,
+                            "left": 155,
+                            "bottom": 73,
+                            "right": 181
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "2",
+                        "index": 1,
+                        "rect": {
+                            "top": 41,
+                            "left": 204,
+                            "bottom": 72,
+                            "right": 226
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID3",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "3",
+                        "index": 2,
+                        "rect": {
+                            "top": 41,
+                            "left": 249,
+                            "bottom": 74,
+                            "right": 276
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 1
+                },
+                "format": {
+                    "name": "ROLLNUMBER",
+                    "value": "ROLLNUMBER"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "2",
+                "rois": [
+                    {
+                        "annotationTags": "HINDIID1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "4",
+                        "index": 0,
+                        "rect": {
+                            "top": 200,
+                            "left": 155,
+                            "bottom": 235,
+                            "right": 179
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 2
+                },
+                "format": {
+                    "name": "HINDIID1",
+                    "value": "HINDI 1"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "3",
+                "rois": [
+                    {
+                        "annotationTags": "HINDIID2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "5",
+                        "index": 0,
+                        "rect": {
+                            "top": 200,
+                            "left": 202,
+                            "bottom": 235,
+                            "right": 228
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 3
+                },
+                "format": {
+                    "name": "HINDIID2",
+                    "value": "HINDI 2"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "4",
+                "rois": [
+                    {
+                        "annotationTags": "HINDIID3",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "6",
+                        "index": 0,
+                        "rect": {
+                            "top": 201,
+                            "left": 251,
+                            "bottom": 236,
+                            "right": 276
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 4
+                },
+                "format": {
+                    "name": "HINDIID3",
+                    "value": "HINDI 3"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "5",
+                "rois": [
+                    {
+                        "annotationTags": "HINDIID4",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "7",
+                        "index": 0,
+                        "rect": {
+                            "top": 202,
+                            "left": 297,
+                            "bottom": 236,
+                            "right": 324
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 5
+                },
+                "format": {
+                    "name": "HINDIID4",
+                    "value": "HINDI 4"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "6",
+                "rois": [
+                    {
+                        "annotationTags": "HINDIID5",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "8",
+                        "index": 0,
+                        "rect": {
+                            "top": 200,
+                            "left": 344,
+                            "bottom": 236,
+                            "right": 369
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 6
+                },
+                "format": {
+                    "name": "HINDIID5",
+                    "value": "HINDI 5"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "7",
+                "rois": [
+                    {
+                        "annotationTags": "HINDIID6",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "9",
+                        "index": 0,
+                        "rect": {
+                            "top": 202,
+                            "left": 392,
+                            "bottom": 236,
+                            "right": 418
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 7
+                },
+                "format": {
+                    "name": "HINDIID6",
+                    "value": "HINDI 6"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "8",
+                "rois": [
+                    {
+                        "annotationTags": "HINDIID7",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "10",
+                        "index": 0,
+                        "rect": {
+                            "top": 202,
+                            "left": 439,
+                            "bottom": 237,
+                            "right": 464
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 8
+                },
+                "format": {
+                    "name": "HINDIID7",
+                    "value": "HINDI 7"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "9",
+                "rois": [
+                    {
+                        "annotationTags": "HINDIID8",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "11",
+                        "index": 0,
+                        "rect": {
+                            "top": 201,
+                            "left": 486,
+                            "bottom": 235,
+                            "right": 512
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 9
+                },
+                "format": {
+                    "name": "HINDIID8",
+                    "value": "HINDI 8"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "10",
+                "rois": [
+                    {
+                        "annotationTags": "HINDIID9",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "12",
+                        "index": 0,
+                        "rect": {
+                            "top": 201,
+                            "left": 534,
+                            "bottom": 237,
+                            "right": 561
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 10
+                },
+                "format": {
+                    "name": "HINDIID9",
+                    "value": "HINDI 9"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "11",
+                "rois": [
+                    {
+                        "annotationTags": "HINDIID10",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "13",
+                        "index": 0,
+                        "rect": {
+                            "top": 202,
+                            "left": 582,
+                            "bottom": 237,
+                            "right": 607
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 11
+                },
+                "format": {
+                    "name": "HINDIID10",
+                    "value": "HINDI 10"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "12",
+                "rois": [
+                    {
+                        "annotationTags": "ENGLISHID1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "14",
+                        "index": 0,
+                        "rect": {
+                            "top": 253,
+                            "left": 155,
+                            "bottom": 287,
+                            "right": 182
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 12
+                },
+                "format": {
+                    "name": "ENGLISHID1",
+                    "value": "ENGLISH 1"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "13",
+                "rois": [
+                    {
+                        "annotationTags": "ENGLISHID2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "15",
+                        "index": 0,
+                        "rect": {
+                            "top": 254,
+                            "left": 203,
+                            "bottom": 288,
+                            "right": 229
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 13
+                },
+                "format": {
+                    "name": "ENGLISHID2",
+                    "value": "ENGLISH 2"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "14",
+                "rois": [
+                    {
+                        "annotationTags": "ENGLISHID3",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "16",
+                        "index": 0,
+                        "rect": {
+                            "top": 254,
+                            "left": 250,
+                            "bottom": 288,
+                            "right": 274
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 14
+                },
+                "format": {
+                    "name": "ENGLISHID3",
+                    "value": "ENGLISH 3"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "15",
+                "rois": [
+                    {
+                        "annotationTags": "ENGLISHID4",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "17",
+                        "index": 0,
+                        "rect": {
+                            "top": 255,
+                            "left": 296,
+                            "bottom": 290,
+                            "right": 322
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 15
+                },
+                "format": {
+                    "name": "ENGLISHID4",
+                    "value": "ENGLISH 4"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "16",
+                "rois": [
+                    {
+                        "annotationTags": "ENGLISHID5",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "18",
+                        "index": 0,
+                        "rect": {
+                            "top": 255,
+                            "left": 345,
+                            "bottom": 289,
+                            "right": 371
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 16
+                },
+                "format": {
+                    "name": "ENGLISHID5",
+                    "value": "ENGLISH 5"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "17",
+                "rois": [
+                    {
+                        "annotationTags": "ENGLISHID6",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "19",
+                        "index": 0,
+                        "rect": {
+                            "top": 253,
+                            "left": 392,
+                            "bottom": 288,
+                            "right": 416
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 17
+                },
+                "format": {
+                    "name": "ENGLISHID6",
+                    "value": "ENGLISH 6"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "18",
+                "rois": [
+                    {
+                        "annotationTags": "ENGLISHID7",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "20",
+                        "index": 0,
+                        "rect": {
+                            "top": 253,
+                            "left": 439,
+                            "bottom": 289,
+                            "right": 466
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 18
+                },
+                "format": {
+                    "name": "ENGLISHID7",
+                    "value": "ENGLISH 7"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "19",
+                "rois": [
+                    {
+                        "annotationTags": "ENGLISHID8",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "21",
+                        "index": 0,
+                        "rect": {
+                            "top": 254,
+                            "left": 488,
+                            "bottom": 288,
+                            "right": 513
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 19
+                },
+                "format": {
+                    "name": "ENGLISHID8",
+                    "value": "ENGLISH 8"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "20",
+                "rois": [
+                    {
+                        "annotationTags": "ENGLISHID9",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "22",
+                        "index": 0,
+                        "rect": {
+                            "top": 254,
+                            "left": 535,
+                            "bottom": 289,
+                            "right": 561
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 20
+                },
+                "format": {
+                    "name": "ENGLISHID9",
+                    "value": "ENGLISH 9"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "21",
+                "rois": [
+                    {
+                        "annotationTags": "ENGLISHID10",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "23",
+                        "index": 0,
+                        "rect": {
+                            "top": 254,
+                            "left": 583,
+                            "bottom": 289,
+                            "right": 608
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 21
+                },
+                "format": {
+                    "name": "ENGLISHID10",
+                    "value": "ENGLISH 10"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "22",
+                "rois": [
+                    {
+                        "annotationTags": "MATHSID1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "24",
+                        "index": 0,
+                        "rect": {
+                            "top": 304,
+                            "left": 155,
+                            "bottom": 340,
+                            "right": 179
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 22
+                },
+                "format": {
+                    "name": "MATHSID1",
+                    "value": "MATHS 1"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "23",
+                "rois": [
+                    {
+                        "annotationTags": "MATHSID2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "25",
+                        "index": 0,
+                        "rect": {
+                            "top": 306,
+                            "left": 203,
+                            "bottom": 339,
+                            "right": 229
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 23
+                },
+                "format": {
+                    "name": "MATHSID2",
+                    "value": "MATHS 2"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "24",
+                "rois": [
+                    {
+                        "annotationTags": "MATHSID3",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "26",
+                        "index": 0,
+                        "rect": {
+                            "top": 306,
+                            "left": 252,
+                            "bottom": 339,
+                            "right": 276
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 24
+                },
+                "format": {
+                    "name": "MATHSID3",
+                    "value": "MATHS 3"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "25",
+                "rois": [
+                    {
+                        "annotationTags": "MATHSID4",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "27",
+                        "index": 0,
+                        "rect": {
+                            "top": 306,
+                            "left": 299,
+                            "bottom": 341,
+                            "right": 323
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 25
+                },
+                "format": {
+                    "name": "MATHSID4",
+                    "value": "MATHS 4"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "26",
+                "rois": [
+                    {
+                        "annotationTags": "MATHSID5",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "28",
+                        "index": 0,
+                        "rect": {
+                            "top": 308,
+                            "left": 345,
+                            "bottom": 341,
+                            "right": 371
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 26
+                },
+                "format": {
+                    "name": "MATHSID5",
+                    "value": "MATHS 5"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "27",
+                "rois": [
+                    {
+                        "annotationTags": "MATHSID6",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "29",
+                        "index": 0,
+                        "rect": {
+                            "top": 308,
+                            "left": 392,
+                            "bottom": 343,
+                            "right": 418
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 27
+                },
+                "format": {
+                    "name": "MATHSID6",
+                    "value": "MATHS 6"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "28",
+                "rois": [
+                    {
+                        "annotationTags": "MATHSID7",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "30",
+                        "index": 0,
+                        "rect": {
+                            "top": 308,
+                            "left": 440,
+                            "bottom": 343,
+                            "right": 466
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 28
+                },
+                "format": {
+                    "name": "MATHSID7",
+                    "value": "MATHS 7"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "29",
+                "rois": [
+                    {
+                        "annotationTags": "MATHSID8",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "31",
+                        "index": 0,
+                        "rect": {
+                            "top": 306,
+                            "left": 487,
+                            "bottom": 343,
+                            "right": 513
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 29
+                },
+                "format": {
+                    "name": "MATHSID8",
+                    "value": "MATHS 8"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "30",
+                "rois": [
+                    {
+                        "annotationTags": "MATHSID9",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "32",
+                        "index": 0,
+                        "rect": {
+                            "top": 308,
+                            "left": 534,
+                            "bottom": 343,
+                            "right": 563
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 30
+                },
+                "format": {
+                    "name": "MATHSID9",
+                    "value": "MATHS 9"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "31",
+                "rois": [
+                    {
+                        "annotationTags": "MATHSID10",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "33",
+                        "index": 0,
+                        "rect": {
+                            "top": 308,
+                            "left": 584,
+                            "bottom": 341,
+                            "right": 610
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 31
+                },
+                "format": {
+                    "name": "MATHSID10",
+                    "value": "MATHS 10"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "32",
+                "rois": [
+                    {
+                        "annotationTags": "EVSID1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "34",
+                        "index": 0,
+                        "rect": {
+                            "top": 359,
+                            "left": 155,
+                            "bottom": 394,
+                            "right": 181
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 32
+                },
+                "format": {
+                    "name": "EVSID1",
+                    "value": "EVS 1"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "33",
+                "rois": [
+                    {
+                        "annotationTags": "EVSID2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "35",
+                        "index": 0,
+                        "rect": {
+                            "top": 358,
+                            "left": 203,
+                            "bottom": 395,
+                            "right": 229
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 33
+                },
+                "format": {
+                    "name": "EVSID2",
+                    "value": "EVS 2"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "34",
+                "rois": [
+                    {
+                        "annotationTags": "EVSID3",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "36",
+                        "index": 0,
+                        "rect": {
+                            "top": 357,
+                            "left": 251,
+                            "bottom": 393,
+                            "right": 276
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 34
+                },
+                "format": {
+                    "name": "EVSID3",
+                    "value": "EVS 3"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "35",
+                "rois": [
+                    {
+                        "annotationTags": "EVSID4",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "37",
+                        "index": 0,
+                        "rect": {
+                            "top": 359,
+                            "left": 298,
+                            "bottom": 395,
+                            "right": 322
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 35
+                },
+                "format": {
+                    "name": "EVSID4",
+                    "value": "EVS 4"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "36",
+                "rois": [
+                    {
+                        "annotationTags": "EVSID5",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "38",
+                        "index": 0,
+                        "rect": {
+                            "top": 359,
+                            "left": 345,
+                            "bottom": 395,
+                            "right": 372
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 36
+                },
+                "format": {
+                    "name": "EVSID5",
+                    "value": "EVS 5"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "37",
+                "rois": [
+                    {
+                        "annotationTags": "EVSID6",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "39",
+                        "index": 0,
+                        "rect": {
+                            "top": 359,
+                            "left": 393,
+                            "bottom": 394,
+                            "right": 417
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 37
+                },
+                "format": {
+                    "name": "EVSID6",
+                    "value": "EVS 6"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "38",
+                "rois": [
+                    {
+                        "annotationTags": "EVSID7",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "40",
+                        "index": 0,
+                        "rect": {
+                            "top": 360,
+                            "left": 441,
+                            "bottom": 396,
+                            "right": 465
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 38
+                },
+                "format": {
+                    "name": "EVSID7",
+                    "value": "EVS 7"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "39",
+                "rois": [
+                    {
+                        "annotationTags": "EVSID8",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "41",
+                        "index": 0,
+                        "rect": {
+                            "top": 359,
+                            "left": 489,
+                            "bottom": 394,
+                            "right": 513
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 39
+                },
+                "format": {
+                    "name": "EVSID8",
+                    "value": "EVS 8"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "40",
+                "rois": [
+                    {
+                        "annotationTags": "EVSID9",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "42",
+                        "index": 0,
+                        "rect": {
+                            "top": 361,
+                            "left": 534,
+                            "bottom": 394,
+                            "right": 562
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 40
+                },
+                "format": {
+                    "name": "EVSID9",
+                    "value": "EVS 9"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "41",
+                "rois": [
+                    {
+                        "annotationTags": "EVSID10",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "43",
+                        "index": 0,
+                        "rect": {
+                            "top": 360,
+                            "left": 582,
+                            "bottom": 394,
+                            "right": 610
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 41
+                },
+                "format": {
+                    "name": "EVSID10",
+                    "value": "EVS 10"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "42",
+                "rois": [
+                    {
+                        "annotationTags": "SCIENCEID1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "44",
+                        "index": 0,
+                        "rect": {
+                            "top": 413,
+                            "left": 155,
+                            "bottom": 448,
+                            "right": 182
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 42
+                },
+                "format": {
+                    "name": "SCIENCEID1",
+                    "value": "SCIENCE 1"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "43",
+                "rois": [
+                    {
+                        "annotationTags": "SCIENCEID2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "45",
+                        "index": 0,
+                        "rect": {
+                            "top": 411,
+                            "left": 202,
+                            "bottom": 449,
+                            "right": 230
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 43
+                },
+                "format": {
+                    "name": "SCIENCEID2",
+                    "value": "SCIENCE 2"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "44",
+                "rois": [
+                    {
+                        "annotationTags": "SCIENCEID3",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "46",
+                        "index": 0,
+                        "rect": {
+                            "top": 411,
+                            "left": 251,
+                            "bottom": 447,
+                            "right": 277
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 44
+                },
+                "format": {
+                    "name": "SCIENCEID3",
+                    "value": "SCIENCE 3"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "45",
+                "rois": [
+                    {
+                        "annotationTags": "SCIENCEID4",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "47",
+                        "index": 0,
+                        "rect": {
+                            "top": 411,
+                            "left": 298,
+                            "bottom": 448,
+                            "right": 324
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 45
+                },
+                "format": {
+                    "name": "SCIENCEID4",
+                    "value": "SCIENCE 4"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "46",
+                "rois": [
+                    {
+                        "annotationTags": "SCIENCEID5",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "48",
+                        "index": 0,
+                        "rect": {
+                            "top": 411,
+                            "left": 346,
+                            "bottom": 447,
+                            "right": 370
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 46
+                },
+                "format": {
+                    "name": "SCIENCEID5",
+                    "value": "SCIENCE 5"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "47",
+                "rois": [
+                    {
+                        "annotationTags": "SCIENCEID6",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "49",
+                        "index": 0,
+                        "rect": {
+                            "top": 412,
+                            "left": 393,
+                            "bottom": 448,
+                            "right": 419
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 47
+                },
+                "format": {
+                    "name": "SCIENCEID6",
+                    "value": "SCIENCE 6"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "48",
+                "rois": [
+                    {
+                        "annotationTags": "SCIENCEID7",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "50",
+                        "index": 0,
+                        "rect": {
+                            "top": 411,
+                            "left": 439,
+                            "bottom": 447,
+                            "right": 466
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 48
+                },
+                "format": {
+                    "name": "SCIENCEID7",
+                    "value": "SCIENCE 7"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "49",
+                "rois": [
+                    {
+                        "annotationTags": "SCIENCEID8",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "51",
+                        "index": 0,
+                        "rect": {
+                            "top": 412,
+                            "left": 488,
+                            "bottom": 446,
+                            "right": 515
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 49
+                },
+                "format": {
+                    "name": "SCIENCEID8",
+                    "value": "SCIENCE 8"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "50",
+                "rois": [
+                    {
+                        "annotationTags": "SCIENCEID9",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "52",
+                        "index": 0,
+                        "rect": {
+                            "top": 413,
+                            "left": 536,
+                            "bottom": 445,
+                            "right": 562
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 50
+                },
+                "format": {
+                    "name": "SCIENCEID9",
+                    "value": "SCIENCE 9"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "51",
+                "rois": [
+                    {
+                        "annotationTags": "SCIENCEID10",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "53",
+                        "index": 0,
+                        "rect": {
+                            "top": 412,
+                            "left": 582,
+                            "bottom": 447,
+                            "right": 607
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 51
+                },
+                "format": {
+                    "name": "SCIENCEID10",
+                    "value": "SCIENCE 10"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            }
+        ]
+    }
+}

@@ -1,0 +1,3381 @@
+
+{
+    "layout": {
+        "version": "1.0",
+        "name": "ANY10S10QOMR Exam Sheet Form",
+        "threshold": {
+            "minWidth": 625,
+            "minHeight": 480,
+            "detectionRadius": 12
+        },
+        "resultValidation": {
+            "validate": {
+                "regExp": "^[0-1]$",
+                "errorMsg": "Omr result should be 1 or 0"
+            }
+        },
+        "cells": [
+            {
+                "cellId": "1",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBERID1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "1",
+                        "index": 0,
+                        "rect": {
+                            "top": 117,
+                            "left": 66,
+                            "bottom": 141,
+                            "right": 84
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID1_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "2",
+                        "index": 1,
+                        "rect": {
+                            "top": 116,
+                            "left": 85,
+                            "bottom": 141,
+                            "right": 105
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID1_3",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "3",
+                        "index": 2,
+                        "rect": {
+                            "top": 116,
+                            "left": 106,
+                            "bottom": 139,
+                            "right": 125
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID1_4",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "4",
+                        "index": 3,
+                        "rect": {
+                            "top": 116,
+                            "left": 125,
+                            "bottom": 141,
+                            "right": 145
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID1_5",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "5",
+                        "index": 4,
+                        "rect": {
+                            "top": 115,
+                            "left": 145,
+                            "bottom": 140,
+                            "right": 162
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID1_6",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "6",
+                        "index": 5,
+                        "rect": {
+                            "top": 116,
+                            "left": 164,
+                            "bottom": 141,
+                            "right": 182
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID1_7",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "7",
+                        "index": 6,
+                        "rect": {
+                            "top": 116,
+                            "left": 184,
+                            "bottom": 140,
+                            "right": 202
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 1
+                },
+                "format": {
+                    "name": "ROLLNUMBERID1",
+                    "value": "ROLLNUMBERID1"
+                }
+            },
+            {
+                "cellId": "2",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER1_Q1",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "8",
+                        "index": 0,
+                        "rect": {
+                            "top": 121,
+                            "left": 224,
+                            "bottom": 137,
+                            "right": 239
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 2
+                },
+                "format": {
+                    "name": "ROLLNUMBER1_Q1",
+                    "value": "ROLLNUMBER1 Q1"
+                }
+            },
+            {
+                "cellId": "3",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER1_Q2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "9",
+                        "index": 0,
+                        "rect": {
+                            "top": 120,
+                            "left": 265,
+                            "bottom": 136,
+                            "right": 280
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 3
+                },
+                "format": {
+                    "name": "ROLLNUMBER1_Q2",
+                    "value": "ROLLNUMBER1 Q2"
+                }
+            },
+            {
+                "cellId": "4",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER1_Q3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "10",
+                        "index": 0,
+                        "rect": {
+                            "top": 120,
+                            "left": 306,
+                            "bottom": 136,
+                            "right": 320
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 4
+                },
+                "format": {
+                    "name": "ROLLNUMBER1_Q3",
+                    "value": "ROLLNUMBER1 Q3"
+                }
+            },
+            {
+                "cellId": "5",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER1_Q4",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "11",
+                        "index": 0,
+                        "rect": {
+                            "top": 122,
+                            "left": 347,
+                            "bottom": 136,
+                            "right": 362
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 5
+                },
+                "format": {
+                    "name": "ROLLNUMBER1_Q4",
+                    "value": "ROLLNUMBER1 Q4"
+                }
+            },
+            {
+                "cellId": "6",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER1_Q5",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "12",
+                        "index": 0,
+                        "rect": {
+                            "top": 122,
+                            "left": 388,
+                            "bottom": 138,
+                            "right": 403
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 6
+                },
+                "format": {
+                    "name": "ROLLNUMBER1_Q5",
+                    "value": "ROLLNUMBER1 Q5"
+                }
+            },
+            {
+                "cellId": "7",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER1_Q6",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "13",
+                        "index": 0,
+                        "rect": {
+                            "top": 122,
+                            "left": 431,
+                            "bottom": 137,
+                            "right": 445
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 7
+                },
+                "format": {
+                    "name": "ROLLNUMBER1_Q6",
+                    "value": "ROLLNUMBER1 Q6"
+                }
+            },
+            {
+                "cellId": "8",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER1_Q7",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "14",
+                        "index": 0,
+                        "rect": {
+                            "top": 122,
+                            "left": 469,
+                            "bottom": 137,
+                            "right": 486
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 8
+                },
+                "format": {
+                    "name": "ROLLNUMBER1_Q7",
+                    "value": "ROLLNUMBER1 Q7"
+                }
+            },
+            {
+                "cellId": "9",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER1_Q8",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "15",
+                        "index": 0,
+                        "rect": {
+                            "top": 121,
+                            "left": 511,
+                            "bottom": 137,
+                            "right": 525
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 9
+                },
+                "format": {
+                    "name": "ROLLNUMBER1_Q8",
+                    "value": "ROLLNUMBER1 Q8"
+                }
+            },
+            {
+                "cellId": "10",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER1_Q9",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "16",
+                        "index": 0,
+                        "rect": {
+                            "top": 121,
+                            "left": 552,
+                            "bottom": 137,
+                            "right": 568
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 10
+                },
+                "format": {
+                    "name": "ROLLNUMBER1_Q9",
+                    "value": "ROLLNUMBER1 Q9"
+                }
+            },
+            {
+                "cellId": "11",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER1_Q10",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "17",
+                        "index": 0,
+                        "rect": {
+                            "top": 119,
+                            "left": 592,
+                            "bottom": 135,
+                            "right": 608
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 11
+                },
+                "format": {
+                    "name": "ROLLNUMBER1_Q10",
+                    "value": "ROLLNUMBER1 Q10"
+                }
+            },
+            {
+                "cellId": "12",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBERID2_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "18",
+                        "index": 0,
+                        "rect": {
+                            "top": 151,
+                            "left": 65,
+                            "bottom": 175,
+                            "right": 85
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID2_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "19",
+                        "index": 1,
+                        "rect": {
+                            "top": 152,
+                            "left": 86,
+                            "bottom": 176,
+                            "right": 105
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID2_3",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "20",
+                        "index": 2,
+                        "rect": {
+                            "top": 152,
+                            "left": 105,
+                            "bottom": 175,
+                            "right": 123
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID2_4",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "21",
+                        "index": 3,
+                        "rect": {
+                            "top": 151,
+                            "left": 125,
+                            "bottom": 174,
+                            "right": 143
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID2_5",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "22",
+                        "index": 4,
+                        "rect": {
+                            "top": 151,
+                            "left": 144,
+                            "bottom": 174,
+                            "right": 164
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID2_6",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "23",
+                        "index": 5,
+                        "rect": {
+                            "top": 151,
+                            "left": 164,
+                            "bottom": 176,
+                            "right": 182
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID2_7",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "24",
+                        "index": 6,
+                        "rect": {
+                            "top": 151,
+                            "left": 182,
+                            "bottom": 175,
+                            "right": 202
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 12
+                },
+                "format": {
+                    "name": "ROLLNUMBERID2",
+                    "value": "ROLLNUMBERID2"
+                }
+            },
+            {
+                "cellId": "13",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER2_Q1",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "25",
+                        "index": 0,
+                        "rect": {
+                            "top": 157,
+                            "left": 224,
+                            "bottom": 172,
+                            "right": 238
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 13
+                },
+                "format": {
+                    "name": "ROLLNUMBER2_Q1",
+                    "value": "ROLLNUMBER2 Q1"
+                }
+            },
+            {
+                "cellId": "14",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER2_Q2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "26",
+                        "index": 0,
+                        "rect": {
+                            "top": 156,
+                            "left": 266,
+                            "bottom": 172,
+                            "right": 280
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 14
+                },
+                "format": {
+                    "name": "ROLLNUMBER2_Q2",
+                    "value": "ROLLNUMBER2 Q2"
+                }
+            },
+            {
+                "cellId": "15",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER2_Q3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "27",
+                        "index": 0,
+                        "rect": {
+                            "top": 157,
+                            "left": 305,
+                            "bottom": 172,
+                            "right": 320
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 15
+                },
+                "format": {
+                    "name": "ROLLNUMBER2_Q3",
+                    "value": "ROLLNUMBER2 Q3"
+                }
+            },
+            {
+                "cellId": "16",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER2_Q4",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "28",
+                        "index": 0,
+                        "rect": {
+                            "top": 156,
+                            "left": 347,
+                            "bottom": 171,
+                            "right": 363
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 16
+                },
+                "format": {
+                    "name": "ROLLNUMBER2_Q4",
+                    "value": "ROLLNUMBER2 Q4"
+                }
+            },
+            {
+                "cellId": "17",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER2_Q5",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "29",
+                        "index": 0,
+                        "rect": {
+                            "top": 157,
+                            "left": 388,
+                            "bottom": 172,
+                            "right": 404
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 17
+                },
+                "format": {
+                    "name": "ROLLNUMBER2_Q5",
+                    "value": "ROLLNUMBER2 Q5"
+                }
+            },
+            {
+                "cellId": "18",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER2_Q6",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "30",
+                        "index": 0,
+                        "rect": {
+                            "top": 157,
+                            "left": 428,
+                            "bottom": 171,
+                            "right": 443
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 18
+                },
+                "format": {
+                    "name": "ROLLNUMBER2_Q6",
+                    "value": "ROLLNUMBER2 Q6"
+                }
+            },
+            {
+                "cellId": "19",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER2_Q7",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "31",
+                        "index": 0,
+                        "rect": {
+                            "top": 156,
+                            "left": 468,
+                            "bottom": 171,
+                            "right": 484
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 19
+                },
+                "format": {
+                    "name": "ROLLNUMBER2_Q7",
+                    "value": "ROLLNUMBER2 Q7"
+                }
+            },
+            {
+                "cellId": "20",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER2_Q8",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "32",
+                        "index": 0,
+                        "rect": {
+                            "top": 156,
+                            "left": 511,
+                            "bottom": 172,
+                            "right": 526
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 20
+                },
+                "format": {
+                    "name": "ROLLNUMBER2_Q8",
+                    "value": "ROLLNUMBER2 Q8"
+                }
+            },
+            {
+                "cellId": "21",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER2_Q9",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "33",
+                        "index": 0,
+                        "rect": {
+                            "top": 155,
+                            "left": 552,
+                            "bottom": 171,
+                            "right": 567
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 21
+                },
+                "format": {
+                    "name": "ROLLNUMBER2_Q9",
+                    "value": "ROLLNUMBER2 Q9"
+                }
+            },
+            {
+                "cellId": "22",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER2_Q10",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "34",
+                        "index": 0,
+                        "rect": {
+                            "top": 156,
+                            "left": 592,
+                            "bottom": 172,
+                            "right": 608
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 22
+                },
+                "format": {
+                    "name": "ROLLNUMBER2_Q10",
+                    "value": "ROLLNUMBER2 Q10"
+                }
+            },
+            {
+                "cellId": "23",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBERID3_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "35",
+                        "index": 0,
+                        "rect": {
+                            "top": 188,
+                            "left": 64,
+                            "bottom": 210,
+                            "right": 84
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID3_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "36",
+                        "index": 1,
+                        "rect": {
+                            "top": 187,
+                            "left": 85,
+                            "bottom": 210,
+                            "right": 105
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID3_3",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "37",
+                        "index": 2,
+                        "rect": {
+                            "top": 186,
+                            "left": 106,
+                            "bottom": 208,
+                            "right": 124
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID3_4",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "38",
+                        "index": 3,
+                        "rect": {
+                            "top": 187,
+                            "left": 125,
+                            "bottom": 210,
+                            "right": 144
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID3_5",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "39",
+                        "index": 4,
+                        "rect": {
+                            "top": 186,
+                            "left": 144,
+                            "bottom": 210,
+                            "right": 162
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID3_6",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "40",
+                        "index": 5,
+                        "rect": {
+                            "top": 186,
+                            "left": 163,
+                            "bottom": 210,
+                            "right": 183
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID3_7",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "41",
+                        "index": 6,
+                        "rect": {
+                            "top": 187,
+                            "left": 184,
+                            "bottom": 211,
+                            "right": 203
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 23
+                },
+                "format": {
+                    "name": "ROLLNUMBERID3",
+                    "value": "ROLLNUMBERID3"
+                }
+            },
+            {
+                "cellId": "24",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER3_Q1",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "42",
+                        "index": 0,
+                        "rect": {
+                            "top": 191,
+                            "left": 224,
+                            "bottom": 205,
+                            "right": 239
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 24
+                },
+                "format": {
+                    "name": "ROLLNUMBER3_Q1",
+                    "value": "ROLLNUMBER3 Q1"
+                }
+            },
+            {
+                "cellId": "25",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER3_Q2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "43",
+                        "index": 0,
+                        "rect": {
+                            "top": 191,
+                            "left": 264,
+                            "bottom": 206,
+                            "right": 279
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 25
+                },
+                "format": {
+                    "name": "ROLLNUMBER3_Q2",
+                    "value": "ROLLNUMBER3 Q2"
+                }
+            },
+            {
+                "cellId": "26",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER3_Q3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "44",
+                        "index": 0,
+                        "rect": {
+                            "top": 193,
+                            "left": 305,
+                            "bottom": 206,
+                            "right": 321
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 26
+                },
+                "format": {
+                    "name": "ROLLNUMBER3_Q3",
+                    "value": "ROLLNUMBER3 Q3"
+                }
+            },
+            {
+                "cellId": "27",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER3_Q4",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "45",
+                        "index": 0,
+                        "rect": {
+                            "top": 191,
+                            "left": 348,
+                            "bottom": 207,
+                            "right": 361
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 27
+                },
+                "format": {
+                    "name": "ROLLNUMBER3_Q4",
+                    "value": "ROLLNUMBER3 Q4"
+                }
+            },
+            {
+                "cellId": "28",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER3_Q5",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "46",
+                        "index": 0,
+                        "rect": {
+                            "top": 192,
+                            "left": 388,
+                            "bottom": 207,
+                            "right": 402
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 28
+                },
+                "format": {
+                    "name": "ROLLNUMBER3_Q5",
+                    "value": "ROLLNUMBER3 Q5"
+                }
+            },
+            {
+                "cellId": "29",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER3_Q6",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "47",
+                        "index": 0,
+                        "rect": {
+                            "top": 192,
+                            "left": 429,
+                            "bottom": 207,
+                            "right": 444
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 29
+                },
+                "format": {
+                    "name": "ROLLNUMBER3_Q6",
+                    "value": "ROLLNUMBER3 Q6"
+                }
+            },
+            {
+                "cellId": "30",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER3_Q7",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "48",
+                        "index": 0,
+                        "rect": {
+                            "top": 191,
+                            "left": 469,
+                            "bottom": 206,
+                            "right": 485
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 30
+                },
+                "format": {
+                    "name": "ROLLNUMBER3_Q7",
+                    "value": "ROLLNUMBER3 Q7"
+                }
+            },
+            {
+                "cellId": "31",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER3_Q8",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "49",
+                        "index": 0,
+                        "rect": {
+                            "top": 190,
+                            "left": 509,
+                            "bottom": 205,
+                            "right": 526
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 31
+                },
+                "format": {
+                    "name": "ROLLNUMBER3_Q8",
+                    "value": "ROLLNUMBER3 Q8"
+                }
+            },
+            {
+                "cellId": "32",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER3_Q9",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "50",
+                        "index": 0,
+                        "rect": {
+                            "top": 190,
+                            "left": 551,
+                            "bottom": 204,
+                            "right": 566
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 32
+                },
+                "format": {
+                    "name": "ROLLNUMBER3_Q9",
+                    "value": "ROLLNUMBER3 Q9"
+                }
+            },
+            {
+                "cellId": "33",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER3_Q10",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "51",
+                        "index": 0,
+                        "rect": {
+                            "top": 192,
+                            "left": 593,
+                            "bottom": 205,
+                            "right": 608
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 33
+                },
+                "format": {
+                    "name": "ROLLNUMBER3_Q10",
+                    "value": "ROLLNUMBER3 Q10"
+                }
+            },
+            {
+                "cellId": "34",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBERID4_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "52",
+                        "index": 0,
+                        "rect": {
+                            "top": 222,
+                            "left": 65,
+                            "bottom": 245,
+                            "right": 84
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID4_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "53",
+                        "index": 1,
+                        "rect": {
+                            "top": 221,
+                            "left": 84,
+                            "bottom": 245,
+                            "right": 105
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID4_3",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "54",
+                        "index": 2,
+                        "rect": {
+                            "top": 221,
+                            "left": 106,
+                            "bottom": 245,
+                            "right": 124
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID4_4",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "55",
+                        "index": 3,
+                        "rect": {
+                            "top": 221,
+                            "left": 125,
+                            "bottom": 245,
+                            "right": 143
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID4_5",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "56",
+                        "index": 4,
+                        "rect": {
+                            "top": 222,
+                            "left": 145,
+                            "bottom": 245,
+                            "right": 162
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID4_6",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "57",
+                        "index": 5,
+                        "rect": {
+                            "top": 222,
+                            "left": 164,
+                            "bottom": 245,
+                            "right": 182
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID4_7",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "58",
+                        "index": 6,
+                        "rect": {
+                            "top": 222,
+                            "left": 183,
+                            "bottom": 244,
+                            "right": 202
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 34
+                },
+                "format": {
+                    "name": "ROLLNUMBERID4",
+                    "value": "ROLLNUMBERID4"
+                }
+            },
+            {
+                "cellId": "35",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER4_Q1",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "59",
+                        "index": 0,
+                        "rect": {
+                            "top": 226,
+                            "left": 223,
+                            "bottom": 240,
+                            "right": 239
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 35
+                },
+                "format": {
+                    "name": "ROLLNUMBER4_Q1",
+                    "value": "ROLLNUMBER4 Q1"
+                }
+            },
+            {
+                "cellId": "36",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER4_Q2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "60",
+                        "index": 0,
+                        "rect": {
+                            "top": 226,
+                            "left": 264,
+                            "bottom": 241,
+                            "right": 280
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 36
+                },
+                "format": {
+                    "name": "ROLLNUMBER4_Q2",
+                    "value": "ROLLNUMBER4 Q2"
+                }
+            },
+            {
+                "cellId": "37",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER4_Q3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "61",
+                        "index": 0,
+                        "rect": {
+                            "top": 227,
+                            "left": 306,
+                            "bottom": 241,
+                            "right": 321
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 37
+                },
+                "format": {
+                    "name": "ROLLNUMBER4_Q3",
+                    "value": "ROLLNUMBER4 Q3"
+                }
+            },
+            {
+                "cellId": "38",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER4_Q4",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "62",
+                        "index": 0,
+                        "rect": {
+                            "top": 227,
+                            "left": 347,
+                            "bottom": 241,
+                            "right": 362
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 38
+                },
+                "format": {
+                    "name": "ROLLNUMBER4_Q4",
+                    "value": "ROLLNUMBER4 Q4"
+                }
+            },
+            {
+                "cellId": "39",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER4_Q5",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "63",
+                        "index": 0,
+                        "rect": {
+                            "top": 227,
+                            "left": 389,
+                            "bottom": 241,
+                            "right": 405
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 39
+                },
+                "format": {
+                    "name": "ROLLNUMBER4_Q5",
+                    "value": "ROLLNUMBER4 Q5"
+                }
+            },
+            {
+                "cellId": "40",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER4_Q6",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "64",
+                        "index": 0,
+                        "rect": {
+                            "top": 226,
+                            "left": 431,
+                            "bottom": 241,
+                            "right": 444
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 40
+                },
+                "format": {
+                    "name": "ROLLNUMBER4_Q6",
+                    "value": "ROLLNUMBER4 Q6"
+                }
+            },
+            {
+                "cellId": "41",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER4_Q7",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "65",
+                        "index": 0,
+                        "rect": {
+                            "top": 226,
+                            "left": 471,
+                            "bottom": 241,
+                            "right": 485
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 41
+                },
+                "format": {
+                    "name": "ROLLNUMBER4_Q7",
+                    "value": "ROLLNUMBER4 Q7"
+                }
+            },
+            {
+                "cellId": "42",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER4_Q8",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "66",
+                        "index": 0,
+                        "rect": {
+                            "top": 226,
+                            "left": 510,
+                            "bottom": 241,
+                            "right": 526
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 42
+                },
+                "format": {
+                    "name": "ROLLNUMBER4_Q8",
+                    "value": "ROLLNUMBER4 Q8"
+                }
+            },
+            {
+                "cellId": "43",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER4_Q9",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "67",
+                        "index": 0,
+                        "rect": {
+                            "top": 227,
+                            "left": 551,
+                            "bottom": 241,
+                            "right": 567
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 43
+                },
+                "format": {
+                    "name": "ROLLNUMBER4_Q9",
+                    "value": "ROLLNUMBER4 Q9"
+                }
+            },
+            {
+                "cellId": "44",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER4_Q10",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "68",
+                        "index": 0,
+                        "rect": {
+                            "top": 226,
+                            "left": 592,
+                            "bottom": 241,
+                            "right": 609
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 44
+                },
+                "format": {
+                    "name": "ROLLNUMBER4_Q10",
+                    "value": "ROLLNUMBER4 Q10"
+                }
+            },
+            {
+                "cellId": "45",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBERID5_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "69",
+                        "index": 0,
+                        "rect": {
+                            "top": 256,
+                            "left": 65,
+                            "bottom": 280,
+                            "right": 85
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID5_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "70",
+                        "index": 1,
+                        "rect": {
+                            "top": 256,
+                            "left": 86,
+                            "bottom": 280,
+                            "right": 103
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID5_3",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "71",
+                        "index": 2,
+                        "rect": {
+                            "top": 256,
+                            "left": 105,
+                            "bottom": 280,
+                            "right": 124
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID5_4",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "72",
+                        "index": 3,
+                        "rect": {
+                            "top": 256,
+                            "left": 125,
+                            "bottom": 280,
+                            "right": 143
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID5_5",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "73",
+                        "index": 4,
+                        "rect": {
+                            "top": 256,
+                            "left": 145,
+                            "bottom": 280,
+                            "right": 163
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID5_6",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "74",
+                        "index": 5,
+                        "rect": {
+                            "top": 257,
+                            "left": 165,
+                            "bottom": 280,
+                            "right": 183
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID5_7",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "75",
+                        "index": 6,
+                        "rect": {
+                            "top": 257,
+                            "left": 184,
+                            "bottom": 280,
+                            "right": 201
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 45
+                },
+                "format": {
+                    "name": "ROLLNUMBERID5",
+                    "value": "ROLLNUMBERID5"
+                }
+            },
+            {
+                "cellId": "46",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER5_Q1",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "76",
+                        "index": 0,
+                        "rect": {
+                            "top": 261,
+                            "left": 222,
+                            "bottom": 274,
+                            "right": 238
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 46
+                },
+                "format": {
+                    "name": "ROLLNUMBER5_Q1",
+                    "value": "ROLLNUMBER5 Q1"
+                }
+            },
+            {
+                "cellId": "47",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER5_Q2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "77",
+                        "index": 0,
+                        "rect": {
+                            "top": 261,
+                            "left": 266,
+                            "bottom": 275,
+                            "right": 280
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 47
+                },
+                "format": {
+                    "name": "ROLLNUMBER5_Q2",
+                    "value": "ROLLNUMBER5 Q2"
+                }
+            },
+            {
+                "cellId": "48",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER5_Q3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "78",
+                        "index": 0,
+                        "rect": {
+                            "top": 261,
+                            "left": 307,
+                            "bottom": 275,
+                            "right": 321
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 48
+                },
+                "format": {
+                    "name": "ROLLNUMBER5_Q3",
+                    "value": "ROLLNUMBER5 Q3"
+                }
+            },
+            {
+                "cellId": "49",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER5_Q4",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "79",
+                        "index": 0,
+                        "rect": {
+                            "top": 261,
+                            "left": 348,
+                            "bottom": 276,
+                            "right": 362
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 49
+                },
+                "format": {
+                    "name": "ROLLNUMBER5_Q4",
+                    "value": "ROLLNUMBER5 Q4"
+                }
+            },
+            {
+                "cellId": "50",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER5_Q5",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "80",
+                        "index": 0,
+                        "rect": {
+                            "top": 262,
+                            "left": 387,
+                            "bottom": 275,
+                            "right": 402
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 50
+                },
+                "format": {
+                    "name": "ROLLNUMBER5_Q5",
+                    "value": "ROLLNUMBER5 Q5"
+                }
+            },
+            {
+                "cellId": "51",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER5_Q6",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "81",
+                        "index": 0,
+                        "rect": {
+                            "top": 261,
+                            "left": 429,
+                            "bottom": 276,
+                            "right": 444
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 51
+                },
+                "format": {
+                    "name": "ROLLNUMBER5_Q6",
+                    "value": "ROLLNUMBER5 Q6"
+                }
+            },
+            {
+                "cellId": "52",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER5_Q7",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "82",
+                        "index": 0,
+                        "rect": {
+                            "top": 260,
+                            "left": 470,
+                            "bottom": 276,
+                            "right": 486
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 52
+                },
+                "format": {
+                    "name": "ROLLNUMBER5_Q7",
+                    "value": "ROLLNUMBER5 Q7"
+                }
+            },
+            {
+                "cellId": "53",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER5_Q8",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "83",
+                        "index": 0,
+                        "rect": {
+                            "top": 260,
+                            "left": 510,
+                            "bottom": 276,
+                            "right": 524
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 53
+                },
+                "format": {
+                    "name": "ROLLNUMBER5_Q8",
+                    "value": "ROLLNUMBER5 Q8"
+                }
+            },
+            {
+                "cellId": "54",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER5_Q9",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "84",
+                        "index": 0,
+                        "rect": {
+                            "top": 260,
+                            "left": 550,
+                            "bottom": 275,
+                            "right": 565
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 54
+                },
+                "format": {
+                    "name": "ROLLNUMBER5_Q9",
+                    "value": "ROLLNUMBER5 Q9"
+                }
+            },
+            {
+                "cellId": "55",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER5_Q10",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "85",
+                        "index": 0,
+                        "rect": {
+                            "top": 259,
+                            "left": 591,
+                            "bottom": 274,
+                            "right": 608
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 55
+                },
+                "format": {
+                    "name": "ROLLNUMBER5_Q10",
+                    "value": "ROLLNUMBER5 Q10"
+                }
+            },
+            {
+                "cellId": "56",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBERID6_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "86",
+                        "index": 0,
+                        "rect": {
+                            "top": 292,
+                            "left": 65,
+                            "bottom": 314,
+                            "right": 84
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID6_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "87",
+                        "index": 1,
+                        "rect": {
+                            "top": 291,
+                            "left": 85,
+                            "bottom": 314,
+                            "right": 103
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID6_3",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "88",
+                        "index": 2,
+                        "rect": {
+                            "top": 291,
+                            "left": 106,
+                            "bottom": 314,
+                            "right": 123
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID6_4",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "89",
+                        "index": 3,
+                        "rect": {
+                            "top": 292,
+                            "left": 124,
+                            "bottom": 315,
+                            "right": 142
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID6_5",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "90",
+                        "index": 4,
+                        "rect": {
+                            "top": 291,
+                            "left": 144,
+                            "bottom": 315,
+                            "right": 163
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID6_6",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "91",
+                        "index": 5,
+                        "rect": {
+                            "top": 291,
+                            "left": 164,
+                            "bottom": 314,
+                            "right": 181
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID6_7",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "92",
+                        "index": 6,
+                        "rect": {
+                            "top": 291,
+                            "left": 183,
+                            "bottom": 314,
+                            "right": 201
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 56
+                },
+                "format": {
+                    "name": "ROLLNUMBERID6",
+                    "value": "ROLLNUMBERID6"
+                }
+            },
+            {
+                "cellId": "57",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER6_Q1",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "93",
+                        "index": 0,
+                        "rect": {
+                            "top": 296,
+                            "left": 223,
+                            "bottom": 311,
+                            "right": 239
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 57
+                },
+                "format": {
+                    "name": "ROLLNUMBER6_Q1",
+                    "value": "ROLLNUMBER6 Q1"
+                }
+            },
+            {
+                "cellId": "58",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER6_Q2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "94",
+                        "index": 0,
+                        "rect": {
+                            "top": 296,
+                            "left": 265,
+                            "bottom": 311,
+                            "right": 280
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 58
+                },
+                "format": {
+                    "name": "ROLLNUMBER6_Q2",
+                    "value": "ROLLNUMBER6 Q2"
+                }
+            },
+            {
+                "cellId": "59",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER6_Q3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "95",
+                        "index": 0,
+                        "rect": {
+                            "top": 297,
+                            "left": 305,
+                            "bottom": 310,
+                            "right": 320
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 59
+                },
+                "format": {
+                    "name": "ROLLNUMBER6_Q3",
+                    "value": "ROLLNUMBER6 Q3"
+                }
+            },
+            {
+                "cellId": "60",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER6_Q4",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "96",
+                        "index": 0,
+                        "rect": {
+                            "top": 296,
+                            "left": 347,
+                            "bottom": 310,
+                            "right": 362
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 60
+                },
+                "format": {
+                    "name": "ROLLNUMBER6_Q4",
+                    "value": "ROLLNUMBER6 Q4"
+                }
+            },
+            {
+                "cellId": "61",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER6_Q5",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "97",
+                        "index": 0,
+                        "rect": {
+                            "top": 297,
+                            "left": 388,
+                            "bottom": 311,
+                            "right": 404
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 61
+                },
+                "format": {
+                    "name": "ROLLNUMBER6_Q5",
+                    "value": "ROLLNUMBER6 Q5"
+                }
+            },
+            {
+                "cellId": "62",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER6_Q6",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "98",
+                        "index": 0,
+                        "rect": {
+                            "top": 295,
+                            "left": 430,
+                            "bottom": 310,
+                            "right": 444
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 62
+                },
+                "format": {
+                    "name": "ROLLNUMBER6_Q6",
+                    "value": "ROLLNUMBER6 Q6"
+                }
+            },
+            {
+                "cellId": "63",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER6_Q7",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "99",
+                        "index": 0,
+                        "rect": {
+                            "top": 295,
+                            "left": 470,
+                            "bottom": 311,
+                            "right": 484
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 63
+                },
+                "format": {
+                    "name": "ROLLNUMBER6_Q7",
+                    "value": "ROLLNUMBER6 Q7"
+                }
+            },
+            {
+                "cellId": "64",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER6_Q8",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "100",
+                        "index": 0,
+                        "rect": {
+                            "top": 296,
+                            "left": 511,
+                            "bottom": 311,
+                            "right": 526
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 64
+                },
+                "format": {
+                    "name": "ROLLNUMBER6_Q8",
+                    "value": "ROLLNUMBER6 Q8"
+                }
+            },
+            {
+                "cellId": "65",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER6_Q9",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "101",
+                        "index": 0,
+                        "rect": {
+                            "top": 296,
+                            "left": 551,
+                            "bottom": 311,
+                            "right": 567
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 65
+                },
+                "format": {
+                    "name": "ROLLNUMBER6_Q9",
+                    "value": "ROLLNUMBER6 Q9"
+                }
+            },
+            {
+                "cellId": "66",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER6_Q10",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "102",
+                        "index": 0,
+                        "rect": {
+                            "top": 296,
+                            "left": 592,
+                            "bottom": 311,
+                            "right": 608
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 66
+                },
+                "format": {
+                    "name": "ROLLNUMBER6_Q10",
+                    "value": "ROLLNUMBER6 Q10"
+                }
+            },
+            {
+                "cellId": "67",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBERID7_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "103",
+                        "index": 0,
+                        "rect": {
+                            "top": 326,
+                            "left": 64,
+                            "bottom": 349,
+                            "right": 82
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID7_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "104",
+                        "index": 1,
+                        "rect": {
+                            "top": 327,
+                            "left": 83,
+                            "bottom": 350,
+                            "right": 103
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID7_3",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "105",
+                        "index": 2,
+                        "rect": {
+                            "top": 326,
+                            "left": 104,
+                            "bottom": 349,
+                            "right": 123
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID7_4",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "106",
+                        "index": 3,
+                        "rect": {
+                            "top": 326,
+                            "left": 124,
+                            "bottom": 350,
+                            "right": 142
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID7_5",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "107",
+                        "index": 4,
+                        "rect": {
+                            "top": 326,
+                            "left": 144,
+                            "bottom": 349,
+                            "right": 162
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID7_6",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "108",
+                        "index": 5,
+                        "rect": {
+                            "top": 328,
+                            "left": 163,
+                            "bottom": 350,
+                            "right": 183
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID7_7",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "109",
+                        "index": 6,
+                        "rect": {
+                            "top": 326,
+                            "left": 184,
+                            "bottom": 349,
+                            "right": 202
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 67
+                },
+                "format": {
+                    "name": "ROLLNUMBERID7",
+                    "value": "ROLLNUMBERID7"
+                }
+            },
+            {
+                "cellId": "68",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER7_Q1",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "110",
+                        "index": 0,
+                        "rect": {
+                            "top": 331,
+                            "left": 223,
+                            "bottom": 345,
+                            "right": 237
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 68
+                },
+                "format": {
+                    "name": "ROLLNUMBER7_Q1",
+                    "value": "ROLLNUMBER7 Q1"
+                }
+            },
+            {
+                "cellId": "69",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER7_Q2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "111",
+                        "index": 0,
+                        "rect": {
+                            "top": 331,
+                            "left": 263,
+                            "bottom": 344,
+                            "right": 278
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 69
+                },
+                "format": {
+                    "name": "ROLLNUMBER7_Q2",
+                    "value": "ROLLNUMBER7 Q2"
+                }
+            },
+            {
+                "cellId": "70",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER7_Q3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "112",
+                        "index": 0,
+                        "rect": {
+                            "top": 331,
+                            "left": 307,
+                            "bottom": 345,
+                            "right": 321
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 70
+                },
+                "format": {
+                    "name": "ROLLNUMBER7_Q3",
+                    "value": "ROLLNUMBER7 Q3"
+                }
+            },
+            {
+                "cellId": "71",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER7_Q4",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "113",
+                        "index": 0,
+                        "rect": {
+                            "top": 330,
+                            "left": 346,
+                            "bottom": 344,
+                            "right": 362
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 71
+                },
+                "format": {
+                    "name": "ROLLNUMBER7_Q4",
+                    "value": "ROLLNUMBER7 Q4"
+                }
+            },
+            {
+                "cellId": "72",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER7_Q5",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "114",
+                        "index": 0,
+                        "rect": {
+                            "top": 330,
+                            "left": 388,
+                            "bottom": 345,
+                            "right": 404
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 72
+                },
+                "format": {
+                    "name": "ROLLNUMBER7_Q5",
+                    "value": "ROLLNUMBER7 Q5"
+                }
+            },
+            {
+                "cellId": "73",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER7_Q6",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "115",
+                        "index": 0,
+                        "rect": {
+                            "top": 331,
+                            "left": 428,
+                            "bottom": 345,
+                            "right": 444
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 73
+                },
+                "format": {
+                    "name": "ROLLNUMBER7_Q6",
+                    "value": "ROLLNUMBER7 Q6"
+                }
+            },
+            {
+                "cellId": "74",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER7_Q7",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "116",
+                        "index": 0,
+                        "rect": {
+                            "top": 330,
+                            "left": 470,
+                            "bottom": 346,
+                            "right": 485
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 74
+                },
+                "format": {
+                    "name": "ROLLNUMBER7_Q7",
+                    "value": "ROLLNUMBER7 Q7"
+                }
+            },
+            {
+                "cellId": "75",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER7_Q8",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "117",
+                        "index": 0,
+                        "rect": {
+                            "top": 330,
+                            "left": 512,
+                            "bottom": 345,
+                            "right": 527
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 75
+                },
+                "format": {
+                    "name": "ROLLNUMBER7_Q8",
+                    "value": "ROLLNUMBER7 Q8"
+                }
+            },
+            {
+                "cellId": "76",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER7_Q9",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "118",
+                        "index": 0,
+                        "rect": {
+                            "top": 330,
+                            "left": 552,
+                            "bottom": 345,
+                            "right": 566
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 76
+                },
+                "format": {
+                    "name": "ROLLNUMBER7_Q9",
+                    "value": "ROLLNUMBER7 Q9"
+                }
+            },
+            {
+                "cellId": "77",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER7_Q10",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "119",
+                        "index": 0,
+                        "rect": {
+                            "top": 330,
+                            "left": 593,
+                            "bottom": 345,
+                            "right": 608
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 77
+                },
+                "format": {
+                    "name": "ROLLNUMBER7_Q10",
+                    "value": "ROLLNUMBER7 Q10"
+                }
+            },
+            {
+                "cellId": "78",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBERID8_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "120",
+                        "index": 0,
+                        "rect": {
+                            "top": 360,
+                            "left": 64,
+                            "bottom": 384,
+                            "right": 84
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID8_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "121",
+                        "index": 1,
+                        "rect": {
+                            "top": 361,
+                            "left": 85,
+                            "bottom": 383,
+                            "right": 104
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID8_3",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "122",
+                        "index": 2,
+                        "rect": {
+                            "top": 360,
+                            "left": 104,
+                            "bottom": 384,
+                            "right": 123
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID8_4",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "123",
+                        "index": 3,
+                        "rect": {
+                            "top": 361,
+                            "left": 125,
+                            "bottom": 383,
+                            "right": 143
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID8_6",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "124",
+                        "index": 4,
+                        "rect": {
+                            "top": 360,
+                            "left": 144,
+                            "bottom": 385,
+                            "right": 163
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID8_6",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "125",
+                        "index": 5,
+                        "rect": {
+                            "top": 361,
+                            "left": 163,
+                            "bottom": 383,
+                            "right": 181
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID8_7",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "126",
+                        "index": 6,
+                        "rect": {
+                            "top": 361,
+                            "left": 184,
+                            "bottom": 384,
+                            "right": 202
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 78
+                },
+                "format": {
+                    "name": "ROLLNUMBERID8",
+                    "value": "ROLLNUMBERID8"
+                }
+            },
+            {
+                "cellId": "79",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER8_Q1",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "127",
+                        "index": 0,
+                        "rect": {
+                            "top": 366,
+                            "left": 225,
+                            "bottom": 381,
+                            "right": 239
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 79
+                },
+                "format": {
+                    "name": "ROLLNUMBER8_Q1",
+                    "value": "ROLLNUMBER8 Q1"
+                }
+            },
+            {
+                "cellId": "80",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER8_Q2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "128",
+                        "index": 0,
+                        "rect": {
+                            "top": 365,
+                            "left": 265,
+                            "bottom": 381,
+                            "right": 279
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 80
+                },
+                "format": {
+                    "name": "ROLLNUMBER8_Q2",
+                    "value": "ROLLNUMBER8 Q2"
+                }
+            },
+            {
+                "cellId": "81",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER8_Q3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "129",
+                        "index": 0,
+                        "rect": {
+                            "top": 365,
+                            "left": 306,
+                            "bottom": 380,
+                            "right": 320
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 81
+                },
+                "format": {
+                    "name": "ROLLNUMBER8_Q3",
+                    "value": "ROLLNUMBER8 Q3"
+                }
+            },
+            {
+                "cellId": "82",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER8_Q4",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "130",
+                        "index": 0,
+                        "rect": {
+                            "top": 365,
+                            "left": 347,
+                            "bottom": 381,
+                            "right": 362
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 82
+                },
+                "format": {
+                    "name": "ROLLNUMBER8_Q4",
+                    "value": "ROLLNUMBER8 Q4"
+                }
+            },
+            {
+                "cellId": "83",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER8_Q5",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "131",
+                        "index": 0,
+                        "rect": {
+                            "top": 365,
+                            "left": 389,
+                            "bottom": 381,
+                            "right": 403
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 83
+                },
+                "format": {
+                    "name": "ROLLNUMBER8_Q5",
+                    "value": "ROLLNUMBER8 Q5"
+                }
+            },
+            {
+                "cellId": "84",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER8_Q6",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "132",
+                        "index": 0,
+                        "rect": {
+                            "top": 365,
+                            "left": 429,
+                            "bottom": 380,
+                            "right": 444
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 84
+                },
+                "format": {
+                    "name": "ROLLNUMBER8_Q6",
+                    "value": "ROLLNUMBER8 Q6"
+                }
+            },
+            {
+                "cellId": "85",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER8_Q7",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "133",
+                        "index": 0,
+                        "rect": {
+                            "top": 366,
+                            "left": 470,
+                            "bottom": 382,
+                            "right": 485
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 85
+                },
+                "format": {
+                    "name": "ROLLNUMBER8_Q7",
+                    "value": "ROLLNUMBER8 Q7"
+                }
+            },
+            {
+                "cellId": "86",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER8_Q8",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "134",
+                        "index": 0,
+                        "rect": {
+                            "top": 366,
+                            "left": 510,
+                            "bottom": 381,
+                            "right": 525
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 86
+                },
+                "format": {
+                    "name": "ROLLNUMBER8_Q8",
+                    "value": "ROLLNUMBER8 Q8"
+                }
+            },
+            {
+                "cellId": "87",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER8_Q9",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "135",
+                        "index": 0,
+                        "rect": {
+                            "top": 367,
+                            "left": 552,
+                            "bottom": 381,
+                            "right": 567
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 87
+                },
+                "format": {
+                    "name": "ROLLNUMBER8_Q9",
+                    "value": "ROLLNUMBER8 Q9"
+                }
+            },
+            {
+                "cellId": "88",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER8_Q10",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "136",
+                        "index": 0,
+                        "rect": {
+                            "top": 367,
+                            "left": 593,
+                            "bottom": 382,
+                            "right": 608
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 88
+                },
+                "format": {
+                    "name": "ROLLNUMBER8_Q10",
+                    "value": "ROLLNUMBER8 Q10"
+                }
+            },
+            {
+                "cellId": "89",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBERID9_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "137",
+                        "index": 0,
+                        "rect": {
+                            "top": 395,
+                            "left": 64,
+                            "bottom": 418,
+                            "right": 82
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID9_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "138",
+                        "index": 1,
+                        "rect": {
+                            "top": 395,
+                            "left": 83,
+                            "bottom": 420,
+                            "right": 103
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID9_3",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "139",
+                        "index": 2,
+                        "rect": {
+                            "top": 394,
+                            "left": 105,
+                            "bottom": 420,
+                            "right": 123
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID9_4",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "140",
+                        "index": 3,
+                        "rect": {
+                            "top": 394,
+                            "left": 124,
+                            "bottom": 418,
+                            "right": 141
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID9_5",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "141",
+                        "index": 4,
+                        "rect": {
+                            "top": 395,
+                            "left": 144,
+                            "bottom": 420,
+                            "right": 163
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID9_6",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "142",
+                        "index": 5,
+                        "rect": {
+                            "top": 396,
+                            "left": 164,
+                            "bottom": 419,
+                            "right": 182
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID9_7",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "143",
+                        "index": 6,
+                        "rect": {
+                            "top": 396,
+                            "left": 184,
+                            "bottom": 419,
+                            "right": 202
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 89
+                },
+                "format": {
+                    "name": "ROLLNUMBERID9",
+                    "value": "ROLLNUMBERID9"
+                }
+            },
+            {
+                "cellId": "90",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER9_Q1",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "144",
+                        "index": 0,
+                        "rect": {
+                            "top": 400,
+                            "left": 223,
+                            "bottom": 415,
+                            "right": 239
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 90
+                },
+                "format": {
+                    "name": "ROLLNUMBER9_Q1",
+                    "value": "ROLLNUMBER9 Q1"
+                }
+            },
+            {
+                "cellId": "91",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER9_Q2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "145",
+                        "index": 0,
+                        "rect": {
+                            "top": 400,
+                            "left": 264,
+                            "bottom": 416,
+                            "right": 280
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 91
+                },
+                "format": {
+                    "name": "ROLLNUMBER9_Q2",
+                    "value": "ROLLNUMBER9 Q2"
+                }
+            },
+            {
+                "cellId": "92",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER9_Q3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "146",
+                        "index": 0,
+                        "rect": {
+                            "top": 400,
+                            "left": 306,
+                            "bottom": 415,
+                            "right": 320
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 92
+                },
+                "format": {
+                    "name": "ROLLNUMBER9_Q3",
+                    "value": "ROLLNUMBER9 Q3"
+                }
+            },
+            {
+                "cellId": "93",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER9_Q4",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "147",
+                        "index": 0,
+                        "rect": {
+                            "top": 401,
+                            "left": 347,
+                            "bottom": 416,
+                            "right": 362
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 93
+                },
+                "format": {
+                    "name": "ROLLNUMBER9_Q4",
+                    "value": "ROLLNUMBER9 Q4"
+                }
+            },
+            {
+                "cellId": "94",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER9_Q5",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "148",
+                        "index": 0,
+                        "rect": {
+                            "top": 400,
+                            "left": 387,
+                            "bottom": 417,
+                            "right": 403
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 94
+                },
+                "format": {
+                    "name": "ROLLNUMBER9_Q5",
+                    "value": "ROLLNUMBER9 Q5"
+                }
+            },
+            {
+                "cellId": "95",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER9_Q6",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "149",
+                        "index": 0,
+                        "rect": {
+                            "top": 400,
+                            "left": 430,
+                            "bottom": 416,
+                            "right": 445
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 95
+                },
+                "format": {
+                    "name": "ROLLNUMBER9_Q6",
+                    "value": "ROLLNUMBER9 Q6"
+                }
+            },
+            {
+                "cellId": "96",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER9_Q7",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "150",
+                        "index": 0,
+                        "rect": {
+                            "top": 400,
+                            "left": 469,
+                            "bottom": 415,
+                            "right": 483
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 96
+                },
+                "format": {
+                    "name": "ROLLNUMBER9_Q7",
+                    "value": "ROLLNUMBER9 Q7"
+                }
+            },
+            {
+                "cellId": "97",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER9_Q8",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "151",
+                        "index": 0,
+                        "rect": {
+                            "top": 401,
+                            "left": 512,
+                            "bottom": 418,
+                            "right": 526
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 97
+                },
+                "format": {
+                    "name": "ROLLNUMBER9_Q8",
+                    "value": "ROLLNUMBER9 Q8"
+                }
+            },
+            {
+                "cellId": "98",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER9_Q9",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "152",
+                        "index": 0,
+                        "rect": {
+                            "top": 401,
+                            "left": 553,
+                            "bottom": 417,
+                            "right": 567
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 98
+                },
+                "format": {
+                    "name": "ROLLNUMBER9_Q9",
+                    "value": "ROLLNUMBER9 Q9"
+                }
+            },
+            {
+                "cellId": "99",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER9_Q10",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "153",
+                        "index": 0,
+                        "rect": {
+                            "top": 400,
+                            "left": 595,
+                            "bottom": 416,
+                            "right": 607
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 99
+                },
+                "format": {
+                    "name": "ROLLNUMBER9_Q10",
+                    "value": "ROLLNUMBER9 Q10"
+                }
+            },
+            {
+                "cellId": "100",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBERID10_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "154",
+                        "index": 0,
+                        "rect": {
+                            "top": 430,
+                            "left": 64,
+                            "bottom": 454,
+                            "right": 83
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID10_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "155",
+                        "index": 1,
+                        "rect": {
+                            "top": 432,
+                            "left": 85,
+                            "bottom": 454,
+                            "right": 102
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID10_3 ",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "156",
+                        "index": 2,
+                        "rect": {
+                            "top": 431,
+                            "left": 105,
+                            "bottom": 455,
+                            "right": 122
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID10_4",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "157",
+                        "index": 3,
+                        "rect": {
+                            "top": 432,
+                            "left": 125,
+                            "bottom": 454,
+                            "right": 142
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID10_5",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "158",
+                        "index": 4,
+                        "rect": {
+                            "top": 431,
+                            "left": 143,
+                            "bottom": 454,
+                            "right": 163
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID10_6",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "159",
+                        "index": 5,
+                        "rect": {
+                            "top": 431,
+                            "left": 164,
+                            "bottom": 453,
+                            "right": 181
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID10_7",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "160",
+                        "index": 6,
+                        "rect": {
+                            "top": 431,
+                            "left": 184,
+                            "bottom": 452,
+                            "right": 201
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 100
+                },
+                "format": {
+                    "name": "ROLLNUMBERID10",
+                    "value": "ROLLNUMBERID10"
+                }
+            },
+            {
+                "cellId": "101",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER10_Q1",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "161",
+                        "index": 0,
+                        "rect": {
+                            "top": 435,
+                            "left": 223,
+                            "bottom": 448,
+                            "right": 237
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 101
+                },
+                "format": {
+                    "name": "ROLLNUMBER10_Q1",
+                    "value": "ROLLNUMBER10 Q1"
+                }
+            },
+            {
+                "cellId": "102",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER10_Q2",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "162",
+                        "index": 0,
+                        "rect": {
+                            "top": 435,
+                            "left": 264,
+                            "bottom": 449,
+                            "right": 278
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 102
+                },
+                "format": {
+                    "name": "ROLLNUMBER10_Q2",
+                    "value": "ROLLNUMBER10 Q2"
+                }
+            },
+            {
+                "cellId": "103",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER10_Q3",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "163",
+                        "index": 0,
+                        "rect": {
+                            "top": 436,
+                            "left": 306,
+                            "bottom": 450,
+                            "right": 320
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 103
+                },
+                "format": {
+                    "name": "ROLLNUMBER10_Q3",
+                    "value": "ROLLNUMBER10 Q3"
+                }
+            },
+            {
+                "cellId": "104",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER10_Q4",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "164",
+                        "index": 0,
+                        "rect": {
+                            "top": 435,
+                            "left": 348,
+                            "bottom": 450,
+                            "right": 361
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 104
+                },
+                "format": {
+                    "name": "ROLLNUMBER10_Q4",
+                    "value": "ROLLNUMBER10 Q4"
+                }
+            },
+            {
+                "cellId": "105",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER10_Q5",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "165",
+                        "index": 0,
+                        "rect": {
+                            "top": 435,
+                            "left": 388,
+                            "bottom": 450,
+                            "right": 402
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 105
+                },
+                "format": {
+                    "name": "ROLLNUMBER10_Q5",
+                    "value": "ROLLNUMBER10 Q5"
+                }
+            },
+            {
+                "cellId": "106",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER10_Q6",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "166",
+                        "index": 0,
+                        "rect": {
+                            "top": 435,
+                            "left": 430,
+                            "bottom": 452,
+                            "right": 445
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 106
+                },
+                "format": {
+                    "name": "ROLLNUMBER10_Q6",
+                    "value": "ROLLNUMBER10 Q6"
+                }
+            },
+            {
+                "cellId": "107",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER10_Q7",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "167",
+                        "index": 0,
+                        "rect": {
+                            "top": 436,
+                            "left": 471,
+                            "bottom": 453,
+                            "right": 484
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 107
+                },
+                "format": {
+                    "name": "ROLLNUMBER10_Q7",
+                    "value": "ROLLNUMBER10 Q7"
+                }
+            },
+            {
+                "cellId": "108",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER10_Q8",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "168",
+                        "index": 0,
+                        "rect": {
+                            "top": 436,
+                            "left": 512,
+                            "bottom": 452,
+                            "right": 525
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 108
+                },
+                "format": {
+                    "name": "ROLLNUMBER10_Q8",
+                    "value": "ROLLNUMBER10 Q8"
+                }
+            },
+            {
+                "cellId": "109",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER10_Q9",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "169",
+                        "index": 0,
+                        "rect": {
+                            "top": 437,
+                            "left": 553,
+                            "bottom": 452,
+                            "right": 568
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 109
+                },
+                "format": {
+                    "name": "ROLLNUMBER10_Q9",
+                    "value": "ROLLNUMBER10 Q9"
+                }
+            },
+            {
+                "cellId": "110",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBER10_QTEN",
+                        "extractionMethod": "CELL_OMR",
+                        "roiId": "170",
+                        "index": 0,
+                        "rect": {
+                            "top": 436,
+                            "left": 594,
+                            "bottom": 452,
+                            "right": 609
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 110
+                },
+                "format": {
+                    "name": "ROLLNUMBER10_Q10",
+                    "value": "ROLLNUMBER10 Q10"
+                }
+            }
+        ]
+    },
+    "roiId": "10"
+}
