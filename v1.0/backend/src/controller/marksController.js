@@ -1,15 +1,15 @@
-const Marks = require('../models/marks')
+const marksSchema = require('../models/marks')
 const Users = require('../models/users')
 const Helper = require('../middleware/helper')
-const { stringObject } = require('../utils/commonUtils')
-require('../db/mongoose')
+const { stringObject } = require('../utils/commonUtils');
 const logger = require('../logging/logger')
-const mongoose = require('mongoose')
 const httperror = require("http-errors");
+const clientPool = require('../db/mongoose');
 
 exports.saveMarks = async (req, res, next) => {
     const marks = []
     const startTime = new Date();
+    let connection;
     if (req.header('X-App-Version')) {
         // console.log("APP VERSION", req.get('X-App-Version'))
     }
@@ -29,8 +29,8 @@ exports.saveMarks = async (req, res, next) => {
         const userId = req.school.userId
         const createdOn = new Date().getTime()
         const roiId = req.body.roiId
-
-
+        connection = await clientPool.acquire();
+        const Marks = connection.model('Marks', marksSchema);
         req.body.studentsMarkInfo.forEach(studentsData => {
             const marksData = new Marks({
                 ...studentsData,
@@ -79,10 +79,15 @@ exports.saveMarks = async (req, res, next) => {
         else {
             res.status(400).json({ error: e.message })
         }
+    } finally {
+        if(connection) {
+            clientPool.release(connection);
+        }
     }
 }
 
 exports.getSaveScan = async (req, res, next) => {
+    let connection;
     try {
         const startTime = new Date();
         if (req.body.schoolId) {
@@ -133,6 +138,8 @@ exports.getSaveScan = async (req, res, next) => {
             req.body.page = 1;
         }
 
+        connection = await clientPool.acquire();
+        const Marks = connection.model('Marks', marksSchema);
         const savedScan = await Marks.find(match, { _id: 0, __v: 0 })
             .limit(parseInt(req.body.limit) * 1)
             .skip((parseInt(parseInt(req.body.page)) - 1) * parseInt(parseInt(req.body.limit)))
@@ -144,5 +151,9 @@ exports.getSaveScan = async (req, res, next) => {
         res.status(200).json({ data: savedScan })
     } catch (e) {
         res.status(400).json({ "error": true, e })
+    } finally {
+        if(connection) {
+            clientPool.release(connection);
+        }
     }
 }
