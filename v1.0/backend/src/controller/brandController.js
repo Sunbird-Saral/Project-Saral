@@ -57,7 +57,7 @@ exports.fetchDefaultBrandData = async (req, res, next) => {
     try {
         const startTime = new Date();
         connection = await clientPool.acquire();
-        const Brands = connection.model('Exams', brandsSchema)
+        const Brands = connection.model('Brands', brandsSchema)
 
         const brand = await Brands.find({ state: { $exists: false } ,$comment: "Fetch Default Brand Data API For Find Brand where state is not present."}, { appName: 1, themeColor1: 1, themeColor2: 1, logoImage: 1, _id: 0 }).lean()
      
@@ -76,7 +76,7 @@ exports.fetchDefaultBrandData = async (req, res, next) => {
         }
 
     } catch (e) {
-        console.log(e)
+        console.log("errrrrrrrrrrrrrrrrrrrrrrrrrrrrrr",e)
         res.status(400).json({
             e
         });
