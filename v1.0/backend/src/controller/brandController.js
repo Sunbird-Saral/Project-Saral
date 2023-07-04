@@ -10,7 +10,7 @@ exports.fetchBrandData = async (req, res, next) => {
         const startTime = new Date()
         connection = await clientPool.acquire();
         const Schools = connection.model('Schools', schoolsSchema)
-        const Brands = connection.model('Exams', brandsSchema)
+        const Brands = connection.model('Brands', brandsSchema)
 
         const school = await Schools.findOne({ schoolId: req.school.schoolId , $comment: "Find School Data"})
 
