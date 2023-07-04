@@ -330,7 +330,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                                         SaralSDKOpenCVScannerActivity.this);
                                 alertDialog
                                         .setTitle("Message")
-                                        .setMessage("Do you want to contiue with manual edit screen ?")
+                                        .setMessage("Do you want to continue with manual edit screen ?")
                                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
