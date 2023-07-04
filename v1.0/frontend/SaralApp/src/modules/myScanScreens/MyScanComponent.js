@@ -964,7 +964,9 @@ class MyScanComponent extends Component {
 
                 </View>
                 
-                {/* <View style={[{ elevation: 10, backgroundColor: 'transparent', justifyContent: 'center', alignItems: 'center',bottom:50}]}> */}
+                <View style={[{  backgroundColor: 'transparent', justifyContent: 'center', alignItems: 'center'}]}>
+                      <Text style={{bottom:10, elevation: 20,fontSize:18,fontWeight:'bold'}}>click here to scan</Text>
+                      
                         <TouchableOpacity style={[styles.subTabContainerStyle]}
                             onPress={this.onScanClick}
                         >
@@ -974,7 +976,7 @@ class MyScanComponent extends Component {
                                         resizeMode={'contain'}
                                     />
                                         </TouchableOpacity>
-                    {/* </View> */}
+                    </View>
                 <View style={styles.bottomTabStyle}>
                     
                 </View>
@@ -1044,13 +1046,13 @@ const styles = {
     subTabContainerStyle: {
         justifyContent: 'center',
         alignItems: 'center',
-        bottom:30
+        marginBottom:30
         
     },
     
     tabIconStyle: {
-        width: 100,
-        height: 100,
+        width: 80,
+        height: 80,
       
     },
     Backbutton: {
