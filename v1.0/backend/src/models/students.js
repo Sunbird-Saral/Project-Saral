@@ -67,6 +67,6 @@ studentSchema.statics.getStudentsCountByClassAndSection = async (schoolId, class
 }
 
 
-const Students = mongoose.model('Student', studentSchema)
+// const Students = mongoose.model('Student', studentSchema)
 
-module.exports = Students
+module.exports = studentSchema

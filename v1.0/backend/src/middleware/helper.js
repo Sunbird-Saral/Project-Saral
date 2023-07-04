@@ -1,12 +1,16 @@
 const { stringObject } = require('../utils/commonUtils')
-const Locks = require('../models/lock')
-const Users = require("../models/users")
+const locksSchema = require('../models/lock')
+const usersSchema = require("../models/users")
 const bcrypt = require('bcryptjs')
-
+const clientPool = require('../db/mongoose');
 
 const commonHelperFunctions = {
     lockScreenValidator: async function (schoolData) {
+        let connection
         try {
+            connection = await clientPool.acquire();
+            const Locks = connection.model('Locks', locksSchema)
+ 
             const locks = await Locks.find({ $comment: "Find lock Details." }).lean()
             for (let lockData of locks) {
                 let lockType = lockData.lockType;
@@ -33,18 +37,25 @@ const commonHelperFunctions = {
             }
         } catch (error) {
             throw error;
+        }finally {
+            if (connection) {
+                clientPool.release(connection);
+            }
         }
     },
 
     findByCredentials: async function (userId, password) {
+        let connection
         try {
+            connection = await clientPool.acquire();
+            const Users = connection.model('Users', usersSchema)
             const user = await Users.findOne(
                 {
                     userId: userId,
                     $comment: "Login School API For Find User Data."
                 }
             )
-           
+
             if (!user) {
                 throw new Error('School Id or Password is not correct.')
             }
@@ -59,6 +70,10 @@ const commonHelperFunctions = {
 
         } catch (error) {
             throw error
+        } finally {
+            if (connection) {
+                clientPool.release(connection);
+            }
         }
     }
 }

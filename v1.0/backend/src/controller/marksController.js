@@ -1,5 +1,5 @@
 const marksSchema = require('../models/marks')
-const Users = require('../models/users')
+const usersSchema = require('../models/users')
 const Helper = require('../middleware/helper')
 const { stringObject } = require('../utils/commonUtils');
 const logger = require('../logging/logger')
@@ -90,6 +90,11 @@ exports.getSaveScan = async (req, res, next) => {
     let connection;
     try {
         const startTime = new Date();
+        connection = await clientPool.acquire();
+        const Users = connection.model('Users', usersSchema);
+        const Marks = connection.model('Marks', marksSchema);
+
+
         if (req.body.schoolId) {
             req.body.schoolId = req.body.schoolId.toLowerCase()
         }
@@ -138,8 +143,7 @@ exports.getSaveScan = async (req, res, next) => {
             req.body.page = 1;
         }
 
-        connection = await clientPool.acquire();
-        const Marks = connection.model('Marks', marksSchema);
+        
         const savedScan = await Marks.find(match, { _id: 0, __v: 0 })
             .limit(parseInt(req.body.limit) * 1)
             .skip((parseInt(parseInt(req.body.page)) - 1) * parseInt(parseInt(req.body.limit)))

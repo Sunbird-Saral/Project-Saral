@@ -1,11 +1,18 @@
-const Exams = require('../models/exams')
-const Rois = require('../models/roi')
-const Schools = require('../models/school')
+const examsSchema = require('../models/exams')
+const RoisSchema = require('../models/roi')
+const schoolsSchema = require('../models/school')
 const logger = require('../logging/logger')
+const clientPool = require('../db/mongoose');
 
 exports.getRoiData = async (req, res, next) => {
+    let connection
     try {
         const startTime = new Date();
+        connection = await clientPool.acquire();
+        const Exams = connection.model('Exams', examsSchema)
+        const Schools = connection.model('Schools', schoolsSchema)
+        const Rois = connection.model('Rois', RoisSchema)
+     
         const examExist = await Exams.findOne({ examId: req.params.examId, $comment: "Get Roi Data API For Find Exam Data." }).lean()
 
         if (examExist) {
@@ -52,6 +59,11 @@ exports.getRoiData = async (req, res, next) => {
             res.status(404).json({ "message": "Exam Id does not exist" })
         }
     } catch (e) {
+        console.log("errorrrrrrrrr",e)
         res.status(400).json(e)
-    }
+    }finally {
+        if (connection) {
+          clientPool.release(connection);
+        }
+      }
 }

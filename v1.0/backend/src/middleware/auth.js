@@ -1,10 +1,13 @@
 const jwt = require('jsonwebtoken')
-const Users = require('../models/users')
-const Helper = require('../middleware/helper')
-// const logger = wrapLogger(pino());
-const {logger} = require('../logging/logger')
+const usersSchema = require('../models/users')
+const clientPool = require('../db/mongoose');
+
 const auth  = async (req, res, next) => {
+    let connection
     try {
+        connection = await clientPool.acquire();
+        const Users = connection.model('Users', usersSchema)
+
         const token = req.header('Authorization').replace('Bearer ', '')
         const decoded = jwt.verify(token, process.env.JWT_SECRET)
         const school = await Users.findOne({ userId: decoded.userId })
@@ -18,7 +21,11 @@ const auth  = async (req, res, next) => {
         next()
     } catch (e) {
         res.status(401).send({ error: "Please authenticate" })
-    }
+    } finally {
+        if (connection) {
+          clientPool.release(connection);
+        }
+      }
 }
 
 module.exports = { auth }
