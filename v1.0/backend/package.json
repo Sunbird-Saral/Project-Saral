@@ -7,7 +7,7 @@
     "start": "env-cmd ./config/prod.env pm2 start src/index.js",
     "dev": "env-cmd ./config/dev.env nodemon src/index.js -e js,pug",
     "uat": "env-cmd ./config/uat.env nodemon src/index.js -e js,pug",
-    "prod": "env-cmd ./config/prod.env nodemon src/index.js -e js,pug",
+    "prod": "env-cmd ./config/prod.env node src/index.js -e js,pug",
     "test": "jest --collectCoverage=true",
     "coverage": "jest --coverage"
   },
