@@ -11,17 +11,4 @@ const counterSchema = new mongoose.Schema({
 
 })
 
-counterSchema.statics.getValueForNextSequence = async (counterOfName) => {
-    let match ={ 
-        _id: counterOfName
-    }
-    let update = { $inc: {counter_value: 1} }
-    let options = { upsert: true, 'new': true  } ;
-    const seqData = await Counters.findOneAndUpdate(match,update,options)
-    return seqData.counter_value
-}
-
-
-const Counters = mongoose.model('counter', counterSchema)
-
-module.exports = Counters
+module.exports = counterSchema

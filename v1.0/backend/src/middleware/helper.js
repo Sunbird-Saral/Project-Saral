@@ -1,6 +1,7 @@
 const { stringObject } = require('../utils/commonUtils')
 const locksSchema = require('../models/lock')
 const usersSchema = require("../models/users")
+const countersSchema = require("../models/counter")
 const bcrypt = require('bcryptjs')
 const clientPool = require('../db/mongoose');
 
@@ -10,7 +11,7 @@ const commonHelperFunctions = {
         try {
             connection = await clientPool.acquire();
             const Locks = connection.model('Locks', locksSchema)
- 
+
             const locks = await Locks.find({ $comment: "Find lock Details." }).lean()
             for (let lockData of locks) {
                 let lockType = lockData.lockType;
@@ -37,7 +38,7 @@ const commonHelperFunctions = {
             }
         } catch (error) {
             throw error;
-        }finally {
+        } finally {
             if (connection) {
                 clientPool.release(connection);
             }
@@ -68,6 +69,27 @@ const commonHelperFunctions = {
 
             return user
 
+        } catch (error) {
+            throw error
+        } finally {
+            if (connection) {
+                clientPool.release(connection);
+            }
+        }
+    },
+    getValueForNextSequence: async function (counterOfName) {
+        let connection
+        try {
+            connection = await clientPool.acquire();
+            const Counters = connection.model('Counters', countersSchema)
+
+            let match = {
+                _id: counterOfName
+            }
+            let update = { $inc: { counter_value: 1 } }
+            let options = { upsert: true, 'new': true };
+            const seqData = await Counters.findOneAndUpdate(match, update, options)
+            return seqData.counter_value
         } catch (error) {
             throw error
         } finally {

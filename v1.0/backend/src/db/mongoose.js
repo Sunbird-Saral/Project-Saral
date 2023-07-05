@@ -6,13 +6,13 @@ const connectionURL = process.env.MONGODB_URL
 const poolSize = 100
 
 //TODO would be removed
-mongoose.connect(connectionURL, {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true,
-    poolSize: poolSize,
-    useFindAndModify: false, // to handle deprication warning for findByIdandUpdate
-})
+// mongoose.connect(connectionURL, {
+//     useNewUrlParser: true,
+//     useCreateIndex: true,
+//     useUnifiedTopology: true,
+//     poolSize: poolSize,
+//     useFindAndModify: false, // to handle deprication warning for findByIdandUpdate
+// })
 
 //----------New way of getting connection to mongodb-----------
 

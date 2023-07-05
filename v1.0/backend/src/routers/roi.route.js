@@ -1,17 +1,24 @@
 const express = require('express')
 const router = new express.Router()
-const Exams = require('../models/exams')
-const Rois = require('../models/roi')
 const { auth } = require('../middleware/auth')
-const Schools = require('../models/school')
-const Counters = require('../models/counter')
+const examsSchema = require('../models/exams')
+const roisSchema = require('../models/roi')
+const schoolsSchema = require('../models/school')
+const Helper = require('../middleware/helper')
 const roiController = require("../controller/roiController")
+const clientPool = require('../db/mongoose');
 
 router.get('/roi/:examId?', auth, roiController.getRoiData)
 
 
 router.post('/roi', auth, async (req, res) => {
+    let connection
     try {
+        connection = await clientPool.acquire();
+        const Schools = connection.model('Schools', schoolsSchema)
+        const Exams = connection.model('Exams', examsSchema)
+        const Rois = connection.model('Rois', roisSchema)
+
         const inputKeys = Object.keys(req.body)
         const allowedUpdates = ['subject', 'classId', 'type', 'roi', 'set']
         const isValidOperation = inputKeys.every((input) => allowedUpdates.includes(input))
@@ -33,7 +40,7 @@ router.post('/roi', auth, async (req, res) => {
             const roiExist = await Rois.findOne({ classId: req.body.classId, subject: req.body.subject, state: school.state, type: req.body.type, $comment: "Create ROI API For Find ROI Data" })
             if (!roiExist) {
                 req.body.state = school.state
-                req.body.roiId = await Counters.getValueForNextSequence("roiId")
+                req.body.roiId = await Helper.getValueForNextSequence("roiId")
                 let roi = await Rois.create(req.body)
                 let roiResponse = {
                     roiId: roi.roiId,
@@ -52,11 +59,21 @@ router.post('/roi', auth, async (req, res) => {
 
     } catch (e) {
         res.status(400).send(e)
-    }
+    }finally {
+        if (connection) {
+          clientPool.release(connection);
+        }
+      }
 })
 
 router.patch('/roi/:examId', auth, async (req, res) => {
+    let connection
     try {
+        connection = await clientPool.acquire();
+        const Schools = connection.model('Schools', schoolsSchema)
+        const Exams = connection.model('Exams', examsSchema)
+        const Rois = connection.model('Rois', roisSchema)
+
         if (Object.keys(req.body) != "roi") return res.status(400).send({ message: 'Invalid Input .' })
 
         const examExist = await Exams.findOne({ examId: req.params.examId, $comment: "Update ROI API for Find Exam Data" }).lean()
@@ -84,11 +101,21 @@ router.patch('/roi/:examId', auth, async (req, res) => {
         }
     } catch (e) {
         res.status(400).send(e)
-    }
+    }finally {
+        if (connection) {
+          clientPool.release(connection);
+        }
+      }
 })
 
 router.delete('/roi/:examId', auth, async (req, res) => {
+    let connection
     try {
+        connection = await clientPool.acquire();
+        const Schools = connection.model('Schools', schoolsSchema)
+        const Exams = connection.model('Exams', examsSchema)
+        const Rois = connection.model('Rois', roisSchema)
+        
         const examExist = await Exams.findOne({ examId: req.params.examId, $comment: "DELETE ROI API For Find Exam Data" }).lean()
         if (examExist) {
             const school = await Schools.findOne({ schoolId: req.school.schoolId, $comment: "DELETE ROI API For Find School Data" })
@@ -110,7 +137,11 @@ router.delete('/roi/:examId', auth, async (req, res) => {
 
     } catch (e) {
         res.status(400).send(e)
-    }
+    }finally {
+        if (connection) {
+          clientPool.release(connection);
+        }
+      }
 })
 
 

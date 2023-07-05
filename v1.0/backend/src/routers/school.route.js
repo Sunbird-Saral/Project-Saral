@@ -1,20 +1,26 @@
 const express = require('express')
 const router = express.Router({ mergeParams: true });
-const Schools = require('../models/school')
-const Classes = require("../models/classes")
-const Students = require("../models/students")
-const Marks = require("../models/marks")
+const schoolsSchema = require('../models/school')
+const classesSchema = require("../models/classes")
+const studentsSchema = require("../models/students")
+const marksSchema = require("../models/marks")
 const schoolController = require("../controller/schoolController")
 const { stringObject } = require('../utils/commonUtils');
 const { auth } = require('../middleware/auth');
+const clientPool = require('../db/mongoose');
 
 
 router.route('/schools/login').post(schoolController.loginSchool)
 
 
 router.post('/schools/create', async (req, res) => {
-    const school = new Schools({ ...req.body })
+    let connection
     try {
+
+        connection = await clientPool.acquire();
+        const Schools = connection.model('Schools', schoolsSchema)
+
+        const school = new Schools({ ...req.body })
 
         school.state = req.body.state.toLowerCase()
         school.schoolId = req.body.schoolId.toLowerCase()
@@ -42,11 +48,19 @@ router.post('/schools/create', async (req, res) => {
         } else {
             res.status(400).send(e)
         }
-    }
+    }finally {
+        if (connection) {
+          clientPool.release(connection);
+        }
+      }
 })
 
 router.get('/schools', async (req, res) => {
+    let connection
     try {
+        connection = await clientPool.acquire();
+        const Schools = connection.model('Schools', schoolsSchema)
+
         const school = await Schools.find({$comment: "Get School API For Find Schools Data."})
         let schools = []
         if (school) {
@@ -64,11 +78,23 @@ router.get('/schools', async (req, res) => {
         res.send({ schools })
     } catch (e) {
         res.send(e)
-    }
+    }finally {
+        if (connection) {
+          clientPool.release(connection);
+        }
+      }
 })
 
 router.delete('/schools/:schoolId', async (req, res) => {
+    let connection
     try {
+        connection = await clientPool.acquire();
+        const Schools = connection.model('Schools', schoolsSchema)
+        const Classes = connection.model('Classes', classesSchema)
+        const Students = connection.model('Students', studentsSchema)
+        const Marks = connection.model('Marks', marksSchema);
+        
+
         const school = await Schools.findOne({ schoolId: req.params.schoolId.toLowerCase() , $comment: "Delete School API For Find School Data." })
         if (!school) return res.status(404).send({ message: 'School Id does not exist.' })
         let lookup = {
@@ -83,11 +109,19 @@ router.delete('/schools/:schoolId', async (req, res) => {
     catch (e) {
         console.log(e);
         res.status(400).send(e)
-    }
+    }finally {
+        if (connection) {
+          clientPool.release(connection);
+        }
+      }
 })
 
 router.patch('/schools/:schoolId', async (req, res) => {
+    let connection
     try {
+        connection = await clientPool.acquire();
+        const Schools = connection.model('Schools', schoolsSchema)
+        
         if (Object.keys(req.body).length === 0) res.status(400).send({ message: 'Validation error.' })
         const updates = Object.keys(req.body)
         const allowedUpdates = ['name', 'state', 'district', 'udisceCode', 'storeTrainingData', 'autoSync', 'autoSyncFrequency', 'tags', 'autoSyncBatchSize']
@@ -112,7 +146,11 @@ router.patch('/schools/:schoolId', async (req, res) => {
     catch (e) {
         console.log(e);
         res.status(400).send(e)
-    }
+    }finally {
+        if (connection) {
+          clientPool.release(connection);
+        }
+      }
 })
 
 module.exports = router

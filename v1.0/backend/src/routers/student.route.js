@@ -1,15 +1,20 @@
 const express = require('express')
 const router = express.Router();
 const { auth } = require('../middleware/auth')
-const Students = require("../models/students")
-const Marks = require("../models/marks")
+const studentsSchema = require("../models/students")
+const marksSchema = require("../models/marks")
+const clientPool = require('../db/mongoose');
 
 const studentController = require('../controller/studentController')
 
 router.get('/fetchStudentsandExamsByQuery', auth, studentController.fetchStudentsandExams)
 
 router.post('/student', auth, async (req, res) => {
+    let connection
     try {
+        connection = await clientPool.acquire();
+        const Students = connection.model('Students', studentsSchema)
+
         if (!req.body.studentId) return res.status(400).send({ error: "Student Id is required." })
 
         let className
@@ -40,7 +45,11 @@ router.post('/student', auth, async (req, res) => {
     } catch (e) {
         console.log(e);
         res.status(400).send(e)
-    }
+    }finally {
+        if (connection) {
+          clientPool.release(connection);
+        }
+      }
 })
 
 router.post('/fetchStudentsByQuery', auth, async (req, res) => {
@@ -55,18 +64,30 @@ router.post('/fetchStudentsByQuery', auth, async (req, res) => {
     if (req.body.section && req.body.section != "0") {
         match.section = req.body.section
     }
-
+    let connection
     try {
+        connection = await clientPool.acquire();
+        const Students = connection.model('Students', studentsSchema)
+
         const students = await Students.find(match, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 })
         res.send(students)
     } catch (e) {
         console.log(e);
         res.status(500).send()
-    }
+    }finally {
+        if (connection) {
+          clientPool.release(connection);
+        }
+      }
 })
 
 router.delete('/student/:studentId', async (req, res) => {
+    let connection
     try {
+        connection = await clientPool.acquire();
+        const Students = connection.model('Students', studentsSchema)
+        const Marks = connection.model('Marks', marksSchema)
+
         const student = await Students.findOne({ studentId: req.params.studentId, $comment: "Delete Student API for Find Student Data" })
         if (!student) return res.status(404).send({ message: 'Student Id does not exist.' })
         let lookup = {
@@ -77,9 +98,13 @@ router.delete('/student/:studentId', async (req, res) => {
         return res.status(200).send({ "message": "Student has been deleted." })
     }
     catch (e) {
-        console.log(e);
+        console.log("------------------------------>>",e);
         res.status(400).send(e)
-    }
+    }finally {
+        if (connection) {
+          clientPool.release(connection);
+        }
+      }
 
 })
 
@@ -95,7 +120,10 @@ router.patch('/student/:studentId', async (req, res) => {
         studentId: req.params.studentId,
         $comment: "Update Student API For Find And Update Student Data"
     }
+    let connection
     try {
+        connection = await clientPool.acquire();
+        const Students = connection.model('Students', studentsSchema)
         let updateData = {}
         if (inputKey.includes("name"))
             updateData["name"] = req.body.name;
@@ -116,7 +144,11 @@ router.patch('/student/:studentId', async (req, res) => {
     catch (e) {
         console.log(e);
         res.status(400).send(e)
-    }
+    }finally {
+        if (connection) {
+          clientPool.release(connection);
+        }
+      }
 })
 
 

@@ -1,26 +1,33 @@
 const express = require('express')
-const Classes = require('../models/classes')
 const { auth } = require('../middleware/auth')
 const _ = require('lodash')
 const Promise = require('bluebird')
-const Students = require('../models/students')
-const Exams = require('../models/exams')
-const Marks = require('../models/marks')
+const studentsSchema = require('../models/students')
+const classesSchema = require('../models/classes')
+const examsSchema = require('../models/exams')
+const marksSchema = require('../models/marks')
 const router = new express.Router()
+const clientPool = require('../db/mongoose');
 
 router.post('/classes', auth, async (req, res) => {
 
-    const body = [...req.body]
-    const classModel = []
-    body.forEach(data => {
-        const classData = new Classes({
-            ...data,
-            className: `Class-${data.classId}`,
-            schoolId: req.school.schoolId
-        })
-        classModel.push(classData)
-    });
+    let connection
     try {
+        connection = await clientPool.acquire();
+        const Classes = connection.model('Classes', classesSchema)
+
+
+        const body = [...req.body]
+        const classModel = []
+        body.forEach(data => {
+            const classData = new Classes({
+                ...data,
+                className: `Class-${data.classId}`,
+                schoolId: req.school.schoolId
+            })
+            classModel.push(classData)
+        });
+
         let finalUpdatedData = []
         Promise.map(classModel, async doc => {
             let match = {
@@ -63,6 +70,10 @@ router.post('/classes', auth, async (req, res) => {
     } catch (e) {
         console.log(e);
         res.status(400).send(e)
+    } finally {
+        if (connection) {
+            clientPool.release(connection);
+        }
     }
 })
 
@@ -80,8 +91,11 @@ router.put('/classes', auth, async (req, res) => {
         classId: req.body.classId,
         $comment: "Update Classes API For Find Class Data"
     }
-
+    let connection
     try {
+        connection = await clientPool.acquire();
+        const Classes = connection.model('Classes', classesSchema)
+
         const classData = await Classes.findOne(match)
 
         if (!classData || (classData && classData.length == 0)) {
@@ -127,6 +141,10 @@ router.put('/classes', auth, async (req, res) => {
     catch (e) {
         console.log(e);
         res.status(400).send(e)
+    } finally {
+        if (connection) {
+            clientPool.release(connection);
+        }
     }
 })
 
@@ -138,8 +156,14 @@ router.delete('/classes', auth, async (req, res) => {
         classId: req.body.classId,
         $comment: "Delete Classes API For Find Class and Exam Data"
     }
-
+    let connection
     try {
+        connection = await clientPool.acquire();
+        const Classes = connection.model('Classes', classesSchema)
+        const Students = connection.model('Students', studentsSchema)
+        const Marks = connection.model('Marks', marksSchema)
+        const Exams = connection.model('Exams', examsSchema)
+
         const classData = await Classes.findOne(match)
         if (classData) {
             await Classes.deleteOne(match)
