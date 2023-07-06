@@ -118,12 +118,15 @@ router.delete('/roi/:examId', auth, async (req, res, next) => {
                 state: school.state,
                 $comment: "DELETE ROI API For Find ROI Data"
             }
-            const roiExist = await Rois.findOne(lookup).lean()
-            let roi = await Rois.findOneAndRemove({ roiId: roiExist.roiId, $comment: "DELETE ROI API For Find And Remove ROI Data" })
 
-            if (roi) {
-                res.status(200).send({ "message": "ROI has been deleted successfully." })
-            } else {
+            const roiExist = await Rois.findOne(lookup).lean()
+           
+            if(typeof roiExist === "object" && roiExist !== null) {
+                let roi = await Rois.findOneAndRemove({ roiId: roiExist.roiId, $comment: "DELETE ROI API For Find And Remove ROI Data" })
+                if (roi) {
+                    res.status(200).send({ "message": "ROI has been deleted successfully." })
+                }
+            }else {
                 res.status(404).send({ "message": "ROI does not exist." })
             }
         }
