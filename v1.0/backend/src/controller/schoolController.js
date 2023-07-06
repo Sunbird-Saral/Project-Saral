@@ -4,14 +4,13 @@ const usersSchema = require("../models/users")
 const Helper = require('../middleware/helper')
 const { stringObject } = require('../utils/commonUtils');
 const logger = require('../logging/logger')
-const clientPool = require('../db/mongoose');
 // const {getLoginData,setLoginData,getToken,setToken} = require('../logging/logger')
 
 exports.loginSchool = async (req, res, next) => {
-  let connection
+
   try {
     const startTime = new Date();
-    connection = await clientPool.acquire();
+    let connection = req.dbConnection
     const Users = connection.model('Users', usersSchema)
     const Schools = connection.model('Schools', schoolsSchema)
     const Classes = connection.model('Classes', classesSchema)
@@ -21,11 +20,11 @@ exports.loginSchool = async (req, res, next) => {
       userId = req.body.schoolId.toLowerCase()
     }
 
-    const users = await Helper.findByCredentials(userId, req.body.password)
+    const users = await Helper.findByCredentials(connection, userId, req.body.password)
 
     const schools = await Schools.findOne({ schoolId: users.schoolId, $comment: "Login School API For Find school data according to schoolId." })
 
-    await Helper.lockScreenValidator(schools)
+    await Helper.lockScreenValidator(connection, schools)
 
     const token = await Users.generateAuthToken(users)
 
@@ -106,8 +105,6 @@ exports.loginSchool = async (req, res, next) => {
       });
     }
   } finally {
-    if (connection) {
-      clientPool.release(connection);
-    }
+     next()
   }
 };

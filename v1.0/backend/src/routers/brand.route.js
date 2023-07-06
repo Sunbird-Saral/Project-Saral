@@ -40,7 +40,6 @@ router.post('/brand?', auth, async (req, res) => {
             res.status(403).send({ message: "Brand already exist." })
         }
     } catch (e) {
-        console.log("errorrrrr",e)
         res.status(400).send(e)
     }finally {
         if (connection) {

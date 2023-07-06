@@ -6,7 +6,7 @@ const studentsSchema = require('../src/models/students')
 const examsSchema = require('../src/models/exams')
 const marksSchema = require('../src/models/marks')
 const RoisSchema = require('../src/models/roi')
-const Counters = require('../src/models/counter')
+const countersSchema = require('../src/models/counter')
 const brandsSchema = require('../src/models/brand')
 const usersSchema = require('../src/models/users')
 const locksSchema = require('../src/models/lock')
@@ -50,6 +50,7 @@ const importData = async () => {
     const Exams = mongoose.model('Exams', examsSchema)
     const Locks = mongoose.model('Locks', locksSchema);
     const Brands = mongoose.model('Brands', brandsSchema)
+    const Counters = mongoose.model('Counters', countersSchema)
 
     await Schools.create(school);
     await Classes.create(classes);
@@ -78,6 +79,7 @@ const deleteData = async () => {
     const Locks = mongoose.model('Locks', locksSchema);
     const Brands = mongoose.model('Brands', brandsSchema)
     const Marks = mongoose.model('Marks', marksSchema)
+    const Counters = mongoose.model('Counters', countersSchema)
 
     await Schools.deleteMany();
     await Students.deleteMany();

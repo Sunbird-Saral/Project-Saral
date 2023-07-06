@@ -3,13 +3,11 @@ const locksSchema = require('../models/lock')
 const usersSchema = require("../models/users")
 const countersSchema = require("../models/counter")
 const bcrypt = require('bcryptjs')
-const clientPool = require('../db/mongoose');
+
 
 const commonHelperFunctions = {
-    lockScreenValidator: async function (schoolData) {
-        let connection
+    lockScreenValidator: async function (connection, schoolData) {
         try {
-            connection = await clientPool.acquire();
             const Locks = connection.model('Locks', locksSchema)
 
             const locks = await Locks.find({ $comment: "Find lock Details." }).lean()
@@ -38,17 +36,11 @@ const commonHelperFunctions = {
             }
         } catch (error) {
             throw error;
-        } finally {
-            if (connection) {
-                clientPool.release(connection);
-            }
-        }
+        } 
     },
 
-    findByCredentials: async function (userId, password) {
-        let connection
+    findByCredentials: async function (connection , userId, password) {
         try {
-            connection = await clientPool.acquire();
             const Users = connection.model('Users', usersSchema)
             const user = await Users.findOne(
                 {
@@ -71,16 +63,10 @@ const commonHelperFunctions = {
 
         } catch (error) {
             throw error
-        } finally {
-            if (connection) {
-                clientPool.release(connection);
-            }
-        }
+        } 
     },
-    getValueForNextSequence: async function (counterOfName) {
-        let connection
+    getValueForNextSequence: async function (connection , counterOfName) {
         try {
-            connection = await clientPool.acquire();
             const Counters = connection.model('Counters', countersSchema)
 
             let match = {
@@ -92,10 +78,6 @@ const commonHelperFunctions = {
             return seqData.counter_value
         } catch (error) {
             throw error
-        } finally {
-            if (connection) {
-                clientPool.release(connection);
-            }
         }
     }
 }

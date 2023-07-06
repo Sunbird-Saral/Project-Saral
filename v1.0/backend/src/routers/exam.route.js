@@ -5,11 +5,10 @@ const examsSchema = require('../models/exams')
 const router = new express.Router()
 const clientPool = require('../db/mongoose');
 
-router.post('/exam', auth, async (req, res) => {
-    let connection
+router.post('/exam', auth, async (req, res, next) => {
     try {
 
-        connection = await clientPool.acquire();
+        let connection = req.dbConnection;
         const Exams = connection.model('Exams', examsSchema)
 
         const body = [...req.body]
@@ -34,7 +33,7 @@ router.post('/exam', auth, async (req, res) => {
     
             let examExist = await Exams.find(lookup)
             if (examExist.length) continue
-            let examId = await Helper.getValueForNextSequence("examId")
+            let examId = await Helper.getValueForNextSequence(connection , "examId")
             const examData = new Exams({
                 ...input,
                 examId,
@@ -50,12 +49,9 @@ router.post('/exam', auth, async (req, res) => {
             res.status(400).send({ "message": "Exam Id should be unique." })
         }
     } catch (e) {
-        console.log("errorrrrrrrrrrrrrrrrr-------------->", e);
         res.status(400).send(e)
     }finally {
-        if (connection) {
-            clientPool.release(connection);
-        }
+        next()
     }
 })
 

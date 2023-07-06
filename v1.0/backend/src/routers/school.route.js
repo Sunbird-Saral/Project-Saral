@@ -5,19 +5,15 @@ const classesSchema = require("../models/classes")
 const studentsSchema = require("../models/students")
 const marksSchema = require("../models/marks")
 const schoolController = require("../controller/schoolController")
-const { stringObject } = require('../utils/commonUtils');
-const { auth } = require('../middleware/auth');
-const clientPool = require('../db/mongoose');
 
 
 router.route('/schools/login').post(schoolController.loginSchool)
 
 
-router.post('/schools/create', async (req, res) => {
-    let connection
+router.post('/schools/create', async (req, res, next) => {
     try {
 
-        connection = await clientPool.acquire();
+        let connection = req.dbConnection
         const Schools = connection.model('Schools', schoolsSchema)
 
         const school = new Schools({ ...req.body })
@@ -49,16 +45,13 @@ router.post('/schools/create', async (req, res) => {
             res.status(400).send(e)
         }
     }finally {
-        if (connection) {
-          clientPool.release(connection);
-        }
+        next()
       }
 })
 
-router.get('/schools', async (req, res) => {
-    let connection
+router.get('/schools', async (req, res,next) => {
     try {
-        connection = await clientPool.acquire();
+        let connection = req.dbConnection
         const Schools = connection.model('Schools', schoolsSchema)
 
         const school = await Schools.find({$comment: "Get School API For Find Schools Data."})
@@ -79,16 +72,13 @@ router.get('/schools', async (req, res) => {
     } catch (e) {
         res.send(e)
     }finally {
-        if (connection) {
-          clientPool.release(connection);
-        }
+        next()
       }
 })
 
 router.delete('/schools/:schoolId', async (req, res) => {
-    let connection
     try {
-        connection = await clientPool.acquire();
+        let connection = req.dbConnection
         const Schools = connection.model('Schools', schoolsSchema)
         const Classes = connection.model('Classes', classesSchema)
         const Students = connection.model('Students', studentsSchema)
@@ -110,16 +100,13 @@ router.delete('/schools/:schoolId', async (req, res) => {
         console.log(e);
         res.status(400).send(e)
     }finally {
-        if (connection) {
-          clientPool.release(connection);
-        }
+        next()
       }
 })
 
 router.patch('/schools/:schoolId', async (req, res) => {
-    let connection
     try {
-        connection = await clientPool.acquire();
+        let connection = req.dbConnetion
         const Schools = connection.model('Schools', schoolsSchema)
         
         if (Object.keys(req.body).length === 0) res.status(400).send({ message: 'Validation error.' })
@@ -147,9 +134,7 @@ router.patch('/schools/:schoolId', async (req, res) => {
         console.log(e);
         res.status(400).send(e)
     }finally {
-        if (connection) {
-          clientPool.release(connection);
-        }
+        next()
       }
 })
 

@@ -4,15 +4,12 @@ const marksSchema = require("../models/marks")
 const examsSchema = require('../models/exams')
 const Helper = require('../middleware/helper')
 const logger = require('../logging/logger')
-const clientPool = require('../db/mongoose');
 
 
 
 exports.fetchStudentsandExams = async (req, res, next) => {
-    let connection
-
     try {
-        connection = await clientPool.acquire();
+        let connection = req.dbConnection
         const Schools = connection.model('Schools', schoolsSchema)
         const Students = connection.model('Students', studentsSchema)
         const Marks = connection.model('Marks', marksSchema);
@@ -42,7 +39,7 @@ exports.fetchStudentsandExams = async (req, res, next) => {
             examMatch.subject = subject[0]
             examMatch.examDate = subject[1]
         }
-        await Helper.lockScreenValidator(req.school)
+        await Helper.lockScreenValidator(connection, req.school)
 
         const students = await Students.find(match, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 }).lean()
         const endTime = new Date();
@@ -79,14 +76,11 @@ exports.fetchStudentsandExams = async (req, res, next) => {
             students, exams
         });
     } catch (e) {
-
         res.status(400).json({
             e
         });
     }finally {
-        if (connection) {
-          clientPool.release(connection);
-        }
+        next()
       }
 };
 

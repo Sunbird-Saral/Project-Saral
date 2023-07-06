@@ -77,7 +77,7 @@ router.post('/classes', auth, async (req, res) => {
     }
 })
 
-router.put('/classes', auth, async (req, res) => {
+router.put('/classes', auth, async (req, res, next) => {
     const updates = Object.keys(req.body)
     const allowedUpdates = ['sections', 'classId']
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
@@ -91,9 +91,9 @@ router.put('/classes', auth, async (req, res) => {
         classId: req.body.classId,
         $comment: "Update Classes API For Find Class Data"
     }
-    let connection
+    
     try {
-        connection = await clientPool.acquire();
+        let connection = req.dbConnection;
         const Classes = connection.model('Classes', classesSchema)
 
         const classData = await Classes.findOne(match)
@@ -142,13 +142,11 @@ router.put('/classes', auth, async (req, res) => {
         console.log(e);
         res.status(400).send(e)
     } finally {
-        if (connection) {
-            clientPool.release(connection);
-        }
+        next()
     }
 })
 
-router.delete('/classes', auth, async (req, res) => {
+router.delete('/classes', auth, async (req, res, next) => {
     if (Object.keys(req.body) != "classId") return res.status(400).send({ message: 'Validation error.' })
 
     const match = {
@@ -156,9 +154,9 @@ router.delete('/classes', auth, async (req, res) => {
         classId: req.body.classId,
         $comment: "Delete Classes API For Find Class and Exam Data"
     }
-    let connection
+    
     try {
-        connection = await clientPool.acquire();
+        let connection = req.dbConnection;
         const Classes = connection.model('Classes', classesSchema)
         const Students = connection.model('Students', studentsSchema)
         const Marks = connection.model('Marks', marksSchema)
@@ -188,6 +186,8 @@ router.delete('/classes', auth, async (req, res) => {
     catch (e) {
         console.log(e);
         res.status(400).send(e)
+    }finally{
+        next()
     }
 })
 

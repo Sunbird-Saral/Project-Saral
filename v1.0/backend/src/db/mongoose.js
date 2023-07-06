@@ -30,4 +30,23 @@ const poolFactory = {
 
 const pool = createPool(poolFactory, { max: poolSize });
 
-module.exports = pool;
+const getClientPool = (req, res, next) => {
+    pool.acquire()
+      .then((connection) => {
+        req.dbConnection = connection;
+        next();
+      })
+      .catch((error) => {
+        res.status(500).json({ error: 'Internal Server Error' });
+      });
+};
+
+const releaseClientPool = (req, res, next) => {
+        if(req.dbConnection){
+            pool.release(req.dbConnection);
+        }
+        next()
+};
+
+
+module.exports = { getClientPool , releaseClientPool };

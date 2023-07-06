@@ -10,9 +10,8 @@ const studentController = require('../controller/studentController')
 router.get('/fetchStudentsandExamsByQuery', auth, studentController.fetchStudentsandExams)
 
 router.post('/student', auth, async (req, res) => {
-    let connection
     try {
-        connection = await clientPool.acquire();
+        let connection = req.dbConnection
         const Students = connection.model('Students', studentsSchema)
 
         if (!req.body.studentId) return res.status(400).send({ error: "Student Id is required." })
@@ -46,13 +45,11 @@ router.post('/student', auth, async (req, res) => {
         console.log(e);
         res.status(400).send(e)
     }finally {
-        if (connection) {
-          clientPool.release(connection);
-        }
+        next()
       }
 })
 
-router.post('/fetchStudentsByQuery', auth, async (req, res) => {
+router.post('/fetchStudentsByQuery', auth, async (req, res, next) => {
     const match = {}
     match.schoolId = req.school.schoolId
     if (req.body.classId) {
@@ -64,9 +61,9 @@ router.post('/fetchStudentsByQuery', auth, async (req, res) => {
     if (req.body.section && req.body.section != "0") {
         match.section = req.body.section
     }
-    let connection
+    
     try {
-        connection = await clientPool.acquire();
+        let connection = req.dbConnection;
         const Students = connection.model('Students', studentsSchema)
 
         const students = await Students.find(match, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 })
@@ -75,16 +72,13 @@ router.post('/fetchStudentsByQuery', auth, async (req, res) => {
         console.log(e);
         res.status(500).send()
     }finally {
-        if (connection) {
-          clientPool.release(connection);
-        }
+        next()
       }
 })
 
-router.delete('/student/:studentId', async (req, res) => {
-    let connection
+router.delete('/student/:studentId', async (req, res, next) => {
     try {
-        connection = await clientPool.acquire();
+        let connection = req.dbConnection;
         const Students = connection.model('Students', studentsSchema)
         const Marks = connection.model('Marks', marksSchema)
 
@@ -98,17 +92,14 @@ router.delete('/student/:studentId', async (req, res) => {
         return res.status(200).send({ "message": "Student has been deleted." })
     }
     catch (e) {
-        console.log("------------------------------>>",e);
         res.status(400).send(e)
     }finally {
-        if (connection) {
-          clientPool.release(connection);
-        }
+       next()
       }
 
 })
 
-router.patch('/student/:studentId', async (req, res) => {
+router.patch('/student/:studentId', async (req, res, next) => {
     if (Object.keys(req.body).length === 0) res.status(400).send({ message: 'Validation error.' })
     const inputKey = Object.keys(req.body)
     const allowedUpdates = ['name', 'classId']
@@ -120,9 +111,9 @@ router.patch('/student/:studentId', async (req, res) => {
         studentId: req.params.studentId,
         $comment: "Update Student API For Find And Update Student Data"
     }
-    let connection
+    
     try {
-        connection = await clientPool.acquire();
+        let connection = req.dbConnection;
         const Students = connection.model('Students', studentsSchema)
         let updateData = {}
         if (inputKey.includes("name"))
@@ -145,9 +136,7 @@ router.patch('/student/:studentId', async (req, res) => {
         console.log(e);
         res.status(400).send(e)
     }finally {
-        if (connection) {
-          clientPool.release(connection);
-        }
+        next()
       }
 })
 

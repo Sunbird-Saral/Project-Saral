@@ -1,19 +1,17 @@
 const schoolsSchema = require('../models/school')
 const brandsSchema = require('../models/brand')
 const logger = require('../logging/logger')
-const clientPool = require('../db/mongoose');
 
 
 exports.fetchBrandData = async (req, res, next) => {
-    let connection
     try {
         const startTime = new Date()
-        connection = await clientPool.acquire();
+
+        let connection = req.dbConnection;
         const Schools = connection.model('Schools', schoolsSchema)
         const Brands = connection.model('Brands', brandsSchema)
 
         const school = await Schools.findOne({ schoolId: req.school.schoolId , $comment: "Find School Data"})
-
         const brand = await Brands.findOne({ state: school.state ,  $comment: "Fetch Brand Data API For Find Brand according to state." }, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 })
 
         if (brand && typeof brand == "object") {
@@ -46,20 +44,16 @@ exports.fetchBrandData = async (req, res, next) => {
             e
         });
     }finally {
-        if (connection) {
-          clientPool.release(connection);
-        }
+        next()
       }
 }
 
 exports.fetchDefaultBrandData = async (req, res, next) => {
-    let connection
     try {
         const startTime = new Date();
-        connection = await clientPool.acquire();
+        let connection = req.dbConnection;
         const Brands = connection.model('Brands', brandsSchema)
-
-        const brand = await Brands.find({ state: { $exists: false } ,$comment: "Fetch Default Brand Data API For Find Brand where state is not present."}, { appName: 1, themeColor1: 1, themeColor2: 1, logoImage: 1, _id: 0 }).lean()
+        const brand = await Brands.find({ state: { $exists: false } , $comment: "Fetch Brand Data API For Find Brand where state is not present."  }, { appName: 1, themeColor1: 1, themeColor2: 1, logoImage: 1, _id: 0 }).lean()
      
         if (brand.length) {
             let resultObj = brand[0]
@@ -76,13 +70,10 @@ exports.fetchDefaultBrandData = async (req, res, next) => {
         }
 
     } catch (e) {
-        console.log("errrrrrrrrrrrrrrrrrrrrrrrrrrrrrr",e)
         res.status(400).json({
             e
         });
     } finally {
-        if (connection) {
-          clientPool.release(connection);
-        }
+        next()
       }
 }

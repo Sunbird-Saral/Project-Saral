@@ -4,17 +4,17 @@ const Helper = require('../middleware/helper')
 const { stringObject } = require('../utils/commonUtils');
 const logger = require('../logging/logger')
 const httperror = require("http-errors");
-const clientPool = require('../db/mongoose');
 
 exports.saveMarks = async (req, res, next) => {
     const marks = []
     const startTime = new Date();
-    let connection;
     if (req.header('X-App-Version')) {
         // console.log("APP VERSION", req.get('X-App-Version'))
     }
 
     try {
+        let connection = req.dbConnection
+
         if (Object.keys(req.body).length === 0)  throw new httperror(400, "Validation error.")
         const input_keys = Object.keys(req.body)
         if (!["subject", "classId", "userId", "examId"].every((i) => input_keys.includes(i)))
@@ -29,7 +29,7 @@ exports.saveMarks = async (req, res, next) => {
         const userId = req.school.userId
         const createdOn = new Date().getTime()
         const roiId = req.body.roiId
-        connection = await clientPool.acquire();
+    
         const Marks = connection.model('Marks', marksSchema);
         req.body.studentsMarkInfo.forEach(studentsData => {
             const marksData = new Marks({
@@ -46,7 +46,7 @@ exports.saveMarks = async (req, res, next) => {
             marks.push(marksData)
         });
 
-        await Helper.lockScreenValidator(req.school)
+        await Helper.lockScreenValidator(connection,req.school)
 
 
         let marksResult = await Marks.bulkWrite(
@@ -80,17 +80,15 @@ exports.saveMarks = async (req, res, next) => {
             res.status(400).json({ error: e.message })
         }
     } finally {
-        if(connection) {
-            clientPool.release(connection);
-        }
+        next()
     }
 }
 
 exports.getSaveScan = async (req, res, next) => {
-    let connection;
+   
     try {
         const startTime = new Date();
-        connection = await clientPool.acquire();
+        let connection = req.dbConnection
         const Users = connection.model('Users', usersSchema);
         const Marks = connection.model('Marks', marksSchema);
 
@@ -156,8 +154,6 @@ exports.getSaveScan = async (req, res, next) => {
     } catch (e) {
         res.status(400).json({ "error": true, e })
     } finally {
-        if(connection) {
-            clientPool.release(connection);
-        }
+        next()
     }
 }

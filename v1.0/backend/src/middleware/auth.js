@@ -1,11 +1,10 @@
 const jwt = require('jsonwebtoken')
 const usersSchema = require('../models/users')
-const clientPool = require('../db/mongoose');
 
 const auth  = async (req, res, next) => {
-    let connection
+    
     try {
-        connection = await clientPool.acquire();
+        let connection = req.dbConnection
         const Users = connection.model('Users', usersSchema)
 
         const token = req.header('Authorization').replace('Bearer ', '')
@@ -21,11 +20,7 @@ const auth  = async (req, res, next) => {
         next()
     } catch (e) {
         res.status(401).send({ error: "Please authenticate" })
-    } finally {
-        if (connection) {
-          clientPool.release(connection);
-        }
-      }
+    } 
 }
 
 module.exports = { auth }
