@@ -49,4 +49,4 @@ const releaseClientPool = (req, res, next) => {
 };
 
 
-module.exports = { getClientPool , releaseClientPool };
+module.exports = { getClientPool , releaseClientPool, pool };
