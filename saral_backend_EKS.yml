@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: saral-backend
 spec:
-  replicas: 10
+  replicas: 13
   selector:
     matchLabels:
       app: saral-backend
@@ -33,7 +33,7 @@ spec:
             cpu: 2000m
             memory: 2Gi
           requests:
-            cpu: 1000m 
+            cpu: 500m 
             memory: 1Gi
       
         volumeMounts:
