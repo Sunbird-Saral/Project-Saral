@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
 const usersSchema = require('../models/users')
-
+const {pool} = require('../db/mongoose');
 const auth  = async (req, res, next) => {
     
     try {
@@ -20,6 +20,11 @@ const auth  = async (req, res, next) => {
         next()
     } catch (e) {
         res.status(401).send({ error: "Please authenticate" })
+        if(req.dbConnection) {
+
+            pool.release(req.dbConnection)
+
+        }
     } 
 }
 
