@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: saral-backend
 spec:
-  replicas: 10
+  replicas: 6
   selector:
     matchLabels:
       app: saral-backend
