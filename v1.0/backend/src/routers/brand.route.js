@@ -10,10 +10,10 @@ const clientPool = require('../db/mongoose');
 router.get('/brand/default', brandController.fetchDefaultBrandData)
 router.get('/brand', auth, brandController.fetchBrandData)
 
-router.post('/brand?', auth, async (req, res) => {
-    let connection
+router.post('/brand?', auth, async (req, res, next) => {
+    
     try {
-        connection = await clientPool.acquire();
+        let connection = req.dbConnection;
         const Schools = connection.model('Schools', schoolsSchema)
         const Brands = connection.model('Brands', brandsSchema)
 
@@ -42,16 +42,14 @@ router.post('/brand?', auth, async (req, res) => {
     } catch (e) {
         res.status(400).send(e)
     }finally {
-        if (connection) {
-          clientPool.release(connection);
-        }
+        next()
       }
 })
 
-router.delete('/brand', auth, async (req, res) => {
-    let connection
+router.delete('/brand', auth, async (req, res, next) => {
+    
     try {
-        connection = await clientPool.acquire();
+        let connection = req.dbConnection;
         const Schools = connection.model('Schools', schoolsSchema)
         const Brands = connection.model('Brands', brandsSchema)
 
@@ -66,16 +64,14 @@ router.delete('/brand', auth, async (req, res) => {
     } catch (e) {
         res.status(400).send(e)
     }finally {
-        if (connection) {
-          clientPool.release(connection);
-        }
+        next()
       }
 })
 
 router.put('/brand', auth, async (req, res) => {
-    let connection
+    
     try {
-        connection = await clientPool.acquire();
+        let connection = req.dbConnection;
         const Schools = connection.model('Schools', schoolsSchema)
         const Brands = connection.model('Brands', brandsSchema)
 
@@ -96,9 +92,7 @@ router.put('/brand', auth, async (req, res) => {
     } catch (e) {
         res.status(400).send(e)
     }finally {
-        if (connection) {
-          clientPool.release(connection);
-        }
+         next()
       }
 })
 

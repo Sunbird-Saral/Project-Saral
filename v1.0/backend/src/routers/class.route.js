@@ -9,11 +9,10 @@ const marksSchema = require('../models/marks')
 const router = new express.Router()
 const clientPool = require('../db/mongoose');
 
-router.post('/classes', auth, async (req, res) => {
+router.post('/classes', auth, async (req, res,next) => {
 
-    let connection
     try {
-        connection = await clientPool.acquire();
+        let connection = req.dbConnection
         const Classes = connection.model('Classes', classesSchema)
 
 
@@ -68,12 +67,10 @@ router.post('/classes', auth, async (req, res) => {
             res.status(400).send(e)
         })
     } catch (e) {
-        console.log(e);
+        console.log("errrrrrrrrrorrrrrrrrrrrrrrrrrrrr--------------->",e);
         res.status(400).send(e)
     } finally {
-        if (connection) {
-            clientPool.release(connection);
-        }
+          next()
     }
 })
 

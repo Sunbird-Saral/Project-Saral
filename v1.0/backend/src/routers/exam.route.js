@@ -56,7 +56,7 @@ router.post('/exam', auth, async (req, res, next) => {
 })
 
 
-router.get('/examByClass/:classId', auth, async (req, res) => {
+router.get('/examByClass/:classId', auth, async (req, res,next) => {
     const match = {
         schoolId: req.school.schoolId,
         classId: req.params.classId,
@@ -69,9 +69,9 @@ router.get('/examByClass/:classId', auth, async (req, res) => {
     if (req.query.examDate) {
         match.examDate = req.query.examDate
     }
-    let connection
+
     try {
-        connection = await clientPool.acquire();
+        let connection = req.dbConnection;
         const Exams = connection.model('Exams', examsSchema)
 
         const exams = await Exams.find(match, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 }).lean()
@@ -85,16 +85,13 @@ router.get('/examByClass/:classId', auth, async (req, res) => {
         console.log(e);
         res.status(400).send(e)
     }finally {
-        if (connection) {
-            clientPool.release(connection);
-        }
+        next()
     }
 })
 
-router.delete('/exam/:examId', auth, async (req, res) => {
-    let connection
+router.delete('/exam/:examId', auth, async (req, res,next) => {
     try {
-        connection = await clientPool.acquire();
+        let connection = req.dbConnection;
         const Exams = connection.model('Exams', examsSchema)
 
         const exam = await Exams.findOneAndDelete({ examId: req.params.examId , $comment: "Delete Exams API For Find And Delete Exams Data"}).lean()
@@ -109,17 +106,14 @@ router.delete('/exam/:examId', auth, async (req, res) => {
         console.log(e);
         res.status(400).send(e)
     }finally {
-        if (connection) {
-            clientPool.release(connection);
-        }
+        next()
     }
 
 })
 
-router.patch('/exam/:examId', auth, async (req, res) => {
-    let connection
+router.patch('/exam/:examId', auth, async (req, res,next) => {
     try {
-        connection = await clientPool.acquire();
+        let connection = req.dbConnection;
         const Exams = connection.model('Exams', examsSchema)
 
         const updates = Object.keys(req.body)
@@ -148,9 +142,7 @@ router.patch('/exam/:examId', auth, async (req, res) => {
         console.log(e);
         res.status(400).send(e)
     }finally {
-        if (connection) {
-            clientPool.release(connection);
-        }
+        next()
     }
 
 })

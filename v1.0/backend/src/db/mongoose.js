@@ -19,7 +19,8 @@ const poolSize = process.env.MONGODB_POOL_SIZE
 const options = {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true
+    useCreateIndex: true,
+    useFindAndModify: false
 };
 
 // Create a connection pool manager
