@@ -1,0 +1,10 @@
+apiVersion: 1
+datasources:
+  - name: Prometheus
+    type: prometheus
+    # access: proxy
+    orgId: 1
+    url: http://localhost:3000/metrics
+    basicAuth: false
+    isDefault: true
+    editable: true

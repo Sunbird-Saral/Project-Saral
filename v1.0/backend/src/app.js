@@ -12,6 +12,9 @@ const examRouter = require('./routers/exam.route')
 const markRouter = require('./routers/mark.route')
 const roiRouter = require('./routers/roi.route')
 const brandRouter = require('./routers/brand.route')
+const http = require('http')
+const url = require('url')
+const client = require('prom-client')
 var cors = require('cors');
 const expressWinston = require('express-winston')
 const logger = require('./logging/logger')
@@ -78,6 +81,37 @@ app.use(cors());
 app.use(checkURL)
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+
+// Create a Registry which registers the metrics
+const register = new client.Registry()
+
+// Add a default label which is added to all metrics
+register.setDefaultLabels({
+  app: 'saral-backend-app'
+})
+
+// Enable the collection of default metrics
+client.collectDefaultMetrics({ register })
+
+// Create a histogram metric
+const httpRequestDurationMicroseconds = new client.Histogram({
+    name: 'http_request_duration_seconds',
+    help: 'Duration of HTTP requests in microseconds',
+    labelNames: ['method', 'route', 'code'],
+    buckets: [0.1, 0.3, 0.5, 0.7, 1, 3, 5, 7, 10]
+  })
+  
+  // Register the histogram
+  register.registerMetric(httpRequestDurationMicroseconds)
+
+// Expose metrics endpoint
+app.get('/metrics', async function (req, res) {
+    // Return all metrics the Prometheus exposition format
+    res.set('Content-Type', register.contentType);
+    let metrics = await register.metrics();
+    res.send(metrics);
+})
+
 // Register the function as middleware for the application
 
 // app.use(expressMiddleware)

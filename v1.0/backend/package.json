@@ -44,6 +44,7 @@
     "lodash": "^4.17.20",
     "mongodb": "^3.6.3",
     "mongoose": "^5.11.5",
+    "prom-client": "^14.1.1",
     "pug": "^3.0.0",
     "puppeteer": "^19.8.3",
     "swagger-ui-express": "^4.4.0",
