@@ -58,6 +58,7 @@ exports.getRoiData = async (req, res, next) => {
             res.status(404).json({ "message": "Exam Id does not exist" })
         }
     } catch (e) {
+        logger.warn(e)
         res.status(400).json(e)
     }finally {
         next()

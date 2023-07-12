@@ -76,6 +76,7 @@ exports.fetchStudentsandExams = async (req, res, next) => {
             students, exams
         });
     } catch (e) {
+        logger.warn(e)
         res.status(400).json({
             e
         });

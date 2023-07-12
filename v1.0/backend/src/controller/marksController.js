@@ -73,6 +73,7 @@ exports.saveMarks = async (req, res, next) => {
 
 
     } catch (e) {
+        logger.warn(e)
         if (e && e.message == stringObject().lockScreen) {
             res.status(500).json({ error: e.message })
         }
@@ -152,6 +153,7 @@ exports.getSaveScan = async (req, res, next) => {
         logger.info(`Execution time for Get Saved Scan API : ${executionTime2}ms`);
         res.status(200).json({ data: savedScan })
     } catch (e) {
+        logger.warn(e)
         res.status(400).json({ "error": true, e })
     } finally {
         next()

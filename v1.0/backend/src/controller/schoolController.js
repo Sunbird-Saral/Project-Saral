@@ -99,7 +99,7 @@ exports.loginSchool = async (req, res, next) => {
       })
     }
     else {
-      logger.warn("errorrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr", e)
+      logger.warn( e)
       res.status(400).json({
         e
       });

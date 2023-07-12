@@ -40,6 +40,7 @@ exports.fetchBrandData = async (req, res, next) => {
         }
 
     } catch (e) {
+        logger.warn(e)
         res.status(400).json({
             e
         });
@@ -70,6 +71,7 @@ exports.fetchDefaultBrandData = async (req, res, next) => {
         }
 
     } catch (e) {
+        logger.warn(e)
         res.status(400).json({
             e
         });
