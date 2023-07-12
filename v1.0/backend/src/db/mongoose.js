@@ -3,7 +3,7 @@ const { createPool } = require('generic-pool');
 
 // url/databasename
 const connectionURL = process.env.MONGODB_URL
-const poolSize = process.env.MONGODB_POOL_SIZE
+const poolSize = 50 //process.env.MONGODB_POOL_SIZE
 
 //TODO would be removed
 // mongoose.connect(connectionURL, {
@@ -50,4 +50,4 @@ const releaseClientPool = (req, res, next) => {
 };
 
 
-module.exports = { getClientPool , releaseClientPool };
+module.exports = { getClientPool , releaseClientPool, pool };
