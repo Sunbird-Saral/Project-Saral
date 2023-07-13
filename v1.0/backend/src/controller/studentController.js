@@ -49,6 +49,7 @@ exports.fetchStudentsandExams = async (req, res, next) => {
 
         for (let student of students) {
             let lookup = {
+                schoolId: req.school.schoolId,
                 studentId: student.studentId,
                 subject: examMatch.subject,
                 examDate: examMatch.examDate
