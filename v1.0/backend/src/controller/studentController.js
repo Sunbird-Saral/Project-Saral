@@ -46,7 +46,7 @@ exports.fetchStudentsandExams = async (req, res, next) => {
         const executionTime = endTime - startTime;
 
         logger.info(`Execution time for Get Students in Fetch Student and Marks API : ${executionTime}ms`);
-
+        console.log('students',students)
         for (let student of students) {
             let lookup = {
                 schoolId: req.school.schoolId,
@@ -54,7 +54,7 @@ exports.fetchStudentsandExams = async (req, res, next) => {
                 subject: examMatch.subject,
                 examDate: examMatch.examDate
             }
-
+        console.log('lookup',lookup)
             if(req.query.set){
                 lookup.set = req.query.set 
             }
