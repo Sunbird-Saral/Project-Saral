@@ -85,6 +85,7 @@ router.delete('/student/:studentId', async (req, res, next) => {
         const student = await Students.findOne({ studentId: req.params.studentId, $comment: "Delete Student API for Find Student Data" })
         if (!student) return res.status(404).send({ message: 'Student Id does not exist.' })
         let lookup = {
+            schoolId: req.school.schoolId,
             studentId: student.studentId
         }
         await Students.deleteOne(lookup).lean()
