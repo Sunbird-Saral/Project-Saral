@@ -60,7 +60,7 @@ exports.fetchStudentsandExams = async (req, res, next) => {
             }
 
             let marks = await Marks.findOne({lookup, $comment: "Find Students Marks"})
-
+            console.log('marks',marks)
             if (marks && typeof marks == "object") {
                 student["studentAvailability"] = marks.studentAvailability
             } else {
@@ -69,6 +69,7 @@ exports.fetchStudentsandExams = async (req, res, next) => {
         }
 
         const exams = await Exams.find(examMatch, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 })
+        console.log('exams',exams)
         const endTime2 = new Date();
         const executionTime2 = endTime2 - startTime;
 
