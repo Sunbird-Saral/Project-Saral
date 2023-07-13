@@ -46,7 +46,7 @@ exports.fetchStudentsandExams = async (req, res, next) => {
         const executionTime = endTime - startTime;
 
         logger.info(`Execution time for Get Students in Fetch Student and Marks API : ${executionTime}ms`);
-        console.log('students',students)
+        
         for (let student of students) {
             let lookup = {
                 schoolId: req.school.schoolId,
@@ -54,13 +54,13 @@ exports.fetchStudentsandExams = async (req, res, next) => {
                 subject: examMatch.subject,
                 examDate: examMatch.examDate
             }
-        console.log('lookup',lookup)
+        
             if(req.query.set){
                 lookup.set = req.query.set 
             }
 
-            let marks = await Marks.findOne({lookup, $comment: "Find Students Marks"})
-            console.log('marks',marks)
+            let marks = await Marks.findOne({...lookup, $comment: "Find Students Marks"})
+            
             if (marks && typeof marks == "object") {
                 student["studentAvailability"] = marks.studentAvailability
             } else {
@@ -69,7 +69,7 @@ exports.fetchStudentsandExams = async (req, res, next) => {
         }
 
         const exams = await Exams.find(examMatch, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 })
-        console.log('exams',exams)
+        
         const endTime2 = new Date();
         const executionTime2 = endTime2 - startTime;
 
