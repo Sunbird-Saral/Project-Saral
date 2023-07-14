@@ -24,7 +24,7 @@ exports.fetchStudentsandExams = async (req, res, next) => {
             match.classId = req.query.classId,
                 examMatch.classId = req.query.classId
         } else {
-            return res.status(404).json({ message: 'Please send classId' })
+            return res.status(400).json({ message: 'Please send classId' })
         }
     
         const school = await Schools.findOne({ schoolId: req.school.schoolId })

@@ -93,6 +93,9 @@ exports.getSaveScan = async (req, res, next) => {
         const Users = connection.model('Users', usersSchema);
         const Marks = connection.model('Marks', marksSchema);
 
+        if(!req.body.classId){
+            return res.status(400).json({ message: 'Please send classId' })
+        }
 
         if (req.body.schoolId) {
             req.body.schoolId = req.body.schoolId.toLowerCase()
