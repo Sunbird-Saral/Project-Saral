@@ -14,6 +14,7 @@ import {
 } from '../../utils/StorageUtils'
 import { Assets } from '../../assets/index'
 import { checkNetworkConnectivity, monospace_FF } from '../../utils/CommonUtils';
+import { loginEvent } from '../../utils/Analytics';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getBrandingDataApi, getLoginApi, setLoginApi, setBrandingDataApi } from '../../utils/offlineStorageUtils';
 import { storeFactory } from '../../flux/store/store';
@@ -182,7 +183,7 @@ class LoginComponent extends Component {
             this.setState({
                 isLoading: true,
                 calledLogin: true
-            }, () => {
+            }, async() => {
                 let loginCredObj = {
                     "schoolId": schoolId,
                     "password": password
@@ -190,6 +191,7 @@ class LoginComponent extends Component {
 
                 let apiObj = new LoginAction(loginCredObj, deviceUniqId);
                 this.props.APITransport(apiObj);
+                
             })
         } else if (!hasNetwork && schoolId.length > 0) {
             this.setState({
@@ -302,6 +304,7 @@ class LoginComponent extends Component {
         if (prevProps != this.props) {
             const { apiStatus, loginData, navigation } = this.props
             const { schoolId, password, calledLogin } = this.state
+            const schoolIdForFA  = loginData && loginData.data && loginData.data.school && loginData.data.school.schoolId
             if (apiStatus && prevProps.apiStatus != apiStatus && apiStatus.error) {
                 if (calledLogin) {
                     this.setState({ isLoading: false, calledLogin: false })
@@ -365,6 +368,7 @@ class LoginComponent extends Component {
                                     data: loginData
                                 }
                                 await setLoginApi([payload])
+                                await loginEvent(schoolIdForFA)
                             }
                         }
                         if (loginCred && loginSaved) {
