@@ -1,10 +1,10 @@
 import React, { memo, useEffect, useState } from 'react';
-import { ActivityIndicator, Alert, Text, TouchableOpacity, View, Modal, StyleSheet, Dimensions } from 'react-native';
+import { ActivityIndicator, Text, TouchableOpacity, View, Modal, StyleSheet, Dimensions } from 'react-native';
 import { connect, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { SaveScanData } from '../../flux/actions/apis/saveScanDataAction';
 import AppTheme from '../../utils/AppTheme';
-import { getErrorMessage, getLoginCred, getPresentAbsentStudent, getScanData, getScannedDataFromLocal, setErrorMessage, setScannedDataIntoLocal } from '../../utils/StorageUtils';
+import { getLoginCred, getPresentAbsentStudent, getScannedDataFromLocal, setScannedDataIntoLocal } from '../../utils/StorageUtils';
 import { checkAppVersion, checkNetworkConnectivity, dispatchCustomModalMessage, dispatchCustomModalStatus, Exam_QuestionHeader, monospace_FF } from '../../utils/CommonUtils';
 import ExamDetailsPopup from '../common/components/ExamDetailsPopup';
 import ButtonComponent from '../common/components/ButtonComponent';
@@ -17,7 +17,8 @@ import { scanStatusDataAction } from '../ScanStatus/scanStatusDataAction';
 import axios from 'axios';
 import { ScrollView } from 'react-native-gesture-handler';
 import { collectErrorLogs } from '../CollectErrorLogs';
-import constants from '../../flux/actions/constants';
+import Constant from '../../flux/actions/constants';
+import DeviceInfo from 'react-native-device-info';
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
 const HEIGHT_MODAL = 150;
@@ -36,7 +37,8 @@ const ScanHistoryCard = ({
     studentsAndExamData,
     apiStatus,
     bgFlag,
-    multiBrandingData
+    multiBrandingData,
+    scanFun
 }) => {
     const [loading, setLoading] = useState(false)
     const [isModalVisible, setIsModalVisible] = useState(false)
@@ -52,7 +54,7 @@ const ScanHistoryCard = ({
     }, [])
     const getSaveCount = () => {
         let hasSet = filteredData.response.hasOwnProperty("set") ? filteredData.response.set.length >= 0 ? filteredData.response.set : '' : null
-        
+       
         let data =
             typeof (scanedData.response) === "object" ?
                 scanedData.response.data ?
@@ -63,6 +65,7 @@ const ScanHistoryCard = ({
                           hasSet.length >= 0 ? o.studentAvailability && o.marksInfo.length > 0 && hasSet == o.set 
                          :
                           false
+
                         if (stdCondition) {
                             return true
                         }
@@ -75,13 +78,12 @@ const ScanHistoryCard = ({
         return data.length;
     }
 
-    const SAVED_SCANNED_DATA_INTO_LOCAL = 'saved_scanned_data_into_local'
-    const onPressContinue = () => {
+        const onPressContinue = () => {
         navigation.push('myScan')
     }
 
     const onPressStatus = () => {
-        navigation.push('ScanStatus')
+        navigation.push('ScanStatus',{scanFun:scanFun})
     }
 
     const onPressScanStatus = () => {
@@ -105,6 +107,7 @@ const ScanHistoryCard = ({
         const data = await getScannedDataFromLocal();
         const hasNetwork = await checkNetworkConnectivity();
         let hasUpdate = await checkAppVersion();
+        const deviceUniqId = await DeviceInfo.getUniqueId();
         const { subject, examDate } = filteredData.response
 
         if (!hasUpdate) {
@@ -133,7 +136,7 @@ const ScanHistoryCard = ({
                                     }
                                 })
                             })
-                            let apiObj = new SaveScanData(filterData[0], loginData.data.token);
+                            let apiObj = new SaveScanData(filterData[0], loginData.data.token,deviceUniqId);
                             saveScanData(apiObj, filterDataLen, setIntolocalAfterFilter);
                         } else {
                             callCustomModal(Strings.message_text,Strings.there_is_no_data,false);
@@ -167,12 +170,11 @@ const ScanHistoryCard = ({
                 .then(function (res) {
                     apiResponse = res;
                     clearTimeout(id);
-
                     let hasMessage = res ? typeof res.data == "string" ? true : false : false
                     if (hasMessage) {
                         api.processResponse(res);
                         callScanStatusData(filteredDatalen, localScanData)
-
+                        
                     } else {
                         dispatch(dispatchAPIAsync(res.data));
                         setScanStatusData(filteredDatalen);
@@ -180,7 +182,6 @@ const ScanHistoryCard = ({
                         callCustomModal(Strings.message_text,Strings.saved_successfully,false);
                         setIsLoading(false);
                     }
-
                 })
                 .catch(function (err) {
                     collectErrorLogs("ScanHistoryCard.js","saveScanData",api.apiEndPoint(),err,false);
@@ -192,6 +193,8 @@ const ScanHistoryCard = ({
     }
 
     const callScanStatusData = async (filteredDatalen, localScanData) => {
+        const deviceUniqId = await DeviceInfo.getUniqueId();
+        let token = loginData.data.token
         let loginCred = await getLoginCred()
 
         let dataPayload = {
@@ -199,6 +202,7 @@ const ScanHistoryCard = ({
             "subject": filteredData.response.subject,
             "section": filteredData.response.section,
             "fromDate": filteredData.response.examDate,
+            "set": filteredData.response.set,
             "page": 0,
             "schoolId": loginData.data.school.schoolId,
             "downloadRes": false
@@ -206,7 +210,7 @@ const ScanHistoryCard = ({
         if (filteredData.response.hasOwnProperty("set")) {
             dataPayload.set = filteredData.response.set
         }
-        let apiObj = new scanStatusDataAction(dataPayload);
+        let apiObj = new scanStatusDataAction(dataPayload, token, deviceUniqId);
         FetchSavedScannedData(apiObj, loginCred.schoolId, loginCred.password, filteredDatalen, localScanData)
     }
 
@@ -220,12 +224,7 @@ const ScanHistoryCard = ({
                     source.cancel('The request timed out.');
                 }
             }, 60000);
-            axios.post(api.apiEndPoint(), api.getBody(), {
-                auth: {
-                    username: uname,
-                    password: pass
-                }
-            })
+            axios.post(api.apiEndPoint(), api.getBody(), { headers: api.getHeaders(), cancelToken: source.token })
                 .then(function (res) {
                     callCustomModal(Strings.message_text,Strings.saved_successfully,false);
                     apiResponse = res
@@ -249,7 +248,7 @@ const ScanHistoryCard = ({
 
     function dispatchAPIAsync(res) {
         return {
-            type: constants.SCANNED_DATA,
+            type: Constant.SCANNED_DATA,
             payload: res
         }
     }
@@ -291,94 +290,44 @@ const ScanHistoryCard = ({
                 disabled
 
             >
-                <View style={{ flexDirection: 'row', width: '100%', alignItems: 'center', paddingTop: '3%', paddingLeft: '1%', paddingRight: '1%', marginBottom:10}}>
+                <View style={{ flexDirection: 'row', width: '100%', alignItems: 'center', paddingTop: 40, paddingLeft: '1%', paddingRight: '1%', marginBottom:40}}>
                     <View>
-                        <View style={styles.scanCardStyle}>
+                    <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                                <Text style={{fontFamily : monospace_FF}}>{BrandLabel&&BrandLabel.Class ? BrandLabel.Class : Strings.class_text}</Text>
+                                <Text style={{}}>{BrandLabel&&BrandLabel.Class ? BrandLabel.Class : 'Total Students'}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
-                                <Text style={{fontFamily : monospace_FF}} >{filteredData.response.className}</Text>
-                            </View>
-                        </View>
-                        <View style={styles.scanCardStyle}>
-                            <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                                <Text style={{fontFamily : monospace_FF}} >{BrandLabel && BrandLabel.Section ? BrandLabel.Section:Strings.section}</Text>
-                            </View>
-                            <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
-                                <Text style={{fontFamily : monospace_FF}} >{filteredData.response.section}</Text>
-                            </View>
-                        </View>
-                        <View style={styles.scanCardStyle}>
-                            <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                            <Text style={{fontFamily : monospace_FF}} >{BrandLabel&&BrandLabel.ExamDate ? BrandLabel.ExamDate:Strings.exam_date}</Text>
-                            </View>
-                            <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
-                                <Text style={{fontFamily : monospace_FF}} >{filteredData.response.examDate}</Text>
-                            </View>
-                        </View>
-                        <View style={styles.scanCardStyle}>
-                            <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                                <Text style={{fontFamily : monospace_FF}} >{BrandLabel&&BrandLabel.Subject ? BrandLabel.Subject:Strings.subject}</Text>
-                            </View>
-                            <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
-                                <Text style={{fontFamily : monospace_FF}} >{filteredData.response.subject}</Text>
-                            </View>
-                        </View>
-                        <View style={styles.scanCardStyle}>
-                            <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle,]}>
-                            <Text style={{fontFamily : monospace_FF}} >{BrandLabel&&BrandLabel.ExamType ? BrandLabel.ExamType:Strings.Exam_Type}</Text>
-                            </View>
-                            <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle,]}>
-                                {Examtypedata&&Examtypedata.map((item) =>
-                                    <View key={item}>
-                                        <Text style={{fontFamily : monospace_FF}} >{item.type}</Text>
-                                    </View>
-                                )}
-                            </View>
-                        </View>
-                        <View style={styles.scanCardStyle}>
-                            <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                            <Text style={{fontFamily : monospace_FF}} >{BrandLabel && BrandLabel.ExamId ? BrandLabel.ExamId:Strings.exam_id}</Text>
-                            </View>
-                            <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
-                                <Text style={{fontFamily : monospace_FF}} >{filteredData.response.examTestID}</Text>
-                            </View>
-                        </View>
-                        <View style={styles.scanCardStyle}>
-                            <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                            <Text style={{fontFamily : monospace_FF}} >{BrandLabel && BrandLabel.ExamDetail ? BrandLabel.ExamDetail:Strings.exam_details}</Text>
-                            </View>
-                            <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
-                                <Text style={{fontFamily : monospace_FF,textDecorationLine:'underline',color:'blue'}}   onPress={() => setIsModalVisible(!isModalVisible)} >{BrandLabel && BrandLabel.Details ? BrandLabel.Details: Strings.details}</Text>
-                            </View>
-                        </View>
-                        <View style={styles.scanCardStyle}>
-                            <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle,]}>
-                                <Text style={{fontFamily : monospace_FF}} >{Strings.scan_status}</Text>
-                            </View>
-                            <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle,]}>
-                                <Text style={{fontFamily : monospace_FF}} >{scanStatusData}</Text>
-                            </View>
-                        </View>
-                        <View style={styles.scanCardStyle}>
-                            <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle, { borderBottomWidth: 1 }]}>
-                                <Text style={{fontFamily : monospace_FF}} >{Strings.save_status}</Text>
-                            </View>
-                            <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle, { borderBottomWidth: 1 }]}>
-                                {loading ?
-                                    <Text style={{fontFamily : monospace_FF}} >{getSaveCount()}</Text> : <View style={{ alignItems: 'flex-start' }}><ActivityIndicator size={'small'} color={'grey'} /></View>}
+                                <Text style={{fontFamily : monospace_FF,fontWeight:"bold"}} >{studentCount.totalCount}</Text>
                             </View>
                         </View>
 
                         <View style={styles.scanCardStyle}>
-                            <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle, { borderBottomWidth: 1, borderTopWidth: 0 }]}>
-                                <Text>{Strings.absent_status}</Text>
+                            <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
+                                <Text style={{}}>{BrandLabel&&BrandLabel.Class ? BrandLabel.Class : 'Present Students'}</Text>
                             </View>
-                            <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle, { borderBottomWidth: 1, borderTopWidth: 0 }]}>
-                                <Text>{studentCount.absentCount} of {studentCount.totalCount}</Text>
+                            <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
+                                <Text style={{fontFamily : monospace_FF,fontWeight:"bold"}} >{studentCount.totalCount -studentCount.absentCount}</Text>
                             </View>
                         </View>
+
+                        <View style={styles.scanCardStyle}>
+                            <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
+                                <Text style={{}}>{BrandLabel&&BrandLabel.Class ? BrandLabel.Class : 'Scans not submitted yet'}</Text>
+                            </View>
+                            <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
+                                <Text style={{fontFamily : monospace_FF,color:'red',fontWeight:"bold"}} >{scanStatusData}</Text>
+                            </View>
+                        </View>
+
+                        <View style={styles.scanCardStyle}>
+                            <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
+                                <Text style={{}}>{BrandLabel&&BrandLabel.Class ? BrandLabel.Class : 'Total scans submitted'}</Text>
+                            </View>
+                            <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
+                                <Text style={{fontFamily : monospace_FF,fontWeight:"bold"}} >{getSaveCount()}</Text>
+                            </View>
+                        </View>
+                      
 
                     </View>
                 </View>
@@ -441,7 +390,7 @@ const ScanHistoryCard = ({
                     </View>
                 }
 
-                <View style={{ marginBottom: '3%', width: '100%', alignItems: 'center' }}>
+                <View style={{ marginBottom: '8%', width: '100%', alignItems: 'center' }}>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', width: '100%' }}>
                         {
                             scanstatusbutton
@@ -458,7 +407,7 @@ const ScanHistoryCard = ({
                                 }}
                                 onPress={onPressScanStatus}
                             >
-                                <Text style={{ fontFamily: monospace_FF, color: AppTheme.BLACK }}>{Strings.scan_status}</Text>
+                                <Text style={{ fontFamily: monospace_FF, color: AppTheme.BLACK }}>{'Review scan'}</Text>
                             </TouchableOpacity>
 
                         }
@@ -474,9 +423,30 @@ const ScanHistoryCard = ({
                                 }}
                                 onPress={onPressSaveInDB}
                             >
-                                <Text style={{ fontFamily: monospace_FF, color: AppTheme.BLACK }}>{Strings.save_scan}</Text>
+                                <Text style={{ fontFamily: monospace_FF, color: AppTheme.BLACK }}>{'Submit all scans'}</Text>
                             </TouchableOpacity>}
                     </View>
+                    {/* {
+                            scanstatusbutton
+                            &&
+                            <View style={{  marginTop: '5%', width: '100%', alignItems: 'center' }}>
+                            <TouchableOpacity
+                                style={{
+                                    backgroundColor: AppTheme.WHITE, borderRadius: 4,
+
+                                    width: true ? '45%' : '80%',
+                                    alignItems: 'center', justifyContent: 'center', elevation: 8, paddingVertical: 4,
+                                    marginLeft: 5,
+                                    marginRight: 5,
+                                    
+                                }}
+                                onPress={onPressStatus}
+                            >
+                                <Text  style={{fontFamily : monospace_FF}}>{Strings.save_status}</Text>
+                            </TouchableOpacity>
+                            </View>
+                        
+                        } */}
                 </View>
 
 
@@ -569,8 +539,6 @@ const mapStateToProps = (state) => {
         studentsAndExamData : state.studentsAndExamData,
         apiStatus: state.apiStatus,
         bgFlag: state.bgFlag,
-        studentsAndExamData: state.studentsAndExamData,
-        apiStatus: state.apiStatus,
         multiBrandingData: state.multiBrandingData.response.data
     }
 }

@@ -29,6 +29,7 @@ import ScanDataModal from './ScanDataModal';
 import { getRoiDataApi, getScanDataApi, setRoiDataApi, setScanDataApi } from '../../utils/offlineStorageUtils';
 import constants from '../../flux/actions/constants';
 import { storeFactory } from '../../flux/store/store';
+import DeviceInfo from 'react-native-device-info';
 
 LogBox.ignoreAllLogs()
 
@@ -62,16 +63,23 @@ class MyScanComponent extends Component {
 
    async componentDidUpdate(prevProps) {
         const { calledRoiData} = this.state;
-        const { roiData, minimalFlag, loginData } = this.props
+        const { roiData, minimalFlag, loginData, apiStatus } = this.props
         if (calledRoiData) {
             if (roiData && prevProps.roiData != roiData && this.props.minimalFlag) {
                 this.setState({ calledRoiData: false, callApi: '' })
                 if (roiData.status && roiData.status == 200) {
                    let total =  await this.sumOfLocalData();
-                   this.callScanStatusData(true, total, 0);
+                   this.callScanStatusData(true, total, 0, null);
                    if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode) {
                    await this.setRoiCache(roiData);
                    }
+                }
+            }
+
+            if (apiStatus && prevProps.apiStatus != apiStatus && apiStatus.error) {
+                this.setState({ isLoading: false, calledLogin: false })
+                if (roiData.length === 0) {
+                    this.callCustomModal(Strings.message_text, "Roi Doesn't Exist",false,false)
                 }
             }
 
@@ -79,7 +87,7 @@ class MyScanComponent extends Component {
             if (calledRoiData & this.props.minimalFlag & !hasNetwork) {
                 this.setState({calledRoiData: false})
                 let total =  await this.sumOfLocalData();
-                this.callScanStatusData(true, total, 0);
+                this.callScanStatusData(true, total, 0, null);
             }
         }
     }
@@ -108,7 +116,6 @@ class MyScanComponent extends Component {
 
         if (this.props.minimalFlag) {
             let examList = []
-            
             this.props.studentsAndExamData
             ?
             this.props.studentsAndExamData.data
@@ -134,7 +141,7 @@ class MyScanComponent extends Component {
     //functions
     sumOfLocalData = async () => {
         const { filteredData, roiData } = this.props
-         const data =  await getScannedDataFromLocal();
+        const data = await getScannedDataFromLocal()
         const loginCred = await getLoginCred()
         let len = 0
         if (data) {
@@ -152,7 +159,6 @@ class MyScanComponent extends Component {
                    return checkDataExistence = e.roiId == roiData.data.roiId
                 }
             });
-
 
             let hasSet = filteredData 
             ?
@@ -222,7 +228,7 @@ class MyScanComponent extends Component {
                 this.props.navigation.navigate('ScanHistory', { from_screen: 'cameraActivity' })
                 return true
             } else {
-                this.props.navigation.navigate('Home', { from_screen: 'cameraActivity' })
+                this.props.navigation.navigate('selectDetails', { from_screen: 'cameraActivity' })
                 return true
 
             }
@@ -272,8 +278,10 @@ class MyScanComponent extends Component {
                 roi.push(payload);
             }
             await setRoiDataApi(roi)
+            this.setState({isLoading :false})
         } else {
             await setRoiDataApi([payload])
+            this.setState({isLoading :false})
         }
     }
 
@@ -288,7 +296,7 @@ class MyScanComponent extends Component {
         if (scaned != null) {
 
             let data = scaned.filter((value)=> {
-                let conditionSwitch = setValue != null && setValue.length > 0 ? value.examId == this.state.examId && value.key == this.props.loginData.data.school.schoolId && this.props.filteredData.set == value.set : value.examId == this.state.examId && value.key == this.props.loginData.data.school.schoolId
+                let conditionSwitch = setValue != null && setValue.length >= 0 ? value.examId == this.state.examId && value.key == this.props.loginData.data.school.schoolId && this.props.filteredData.set == value.set : value.examId == this.state.examId && value.key == this.props.loginData.data.school.schoolId
                 if (conditionSwitch) {
                     return true
                 }
@@ -302,7 +310,7 @@ class MyScanComponent extends Component {
                     }
                 };
             } else {
-                if (setValue != null && setValue.length > 0) {
+                if (setValue != null && setValue.length >= 0) {
                     payload.set = setValue
                 }
                 scaned.push(payload);
@@ -310,7 +318,7 @@ class MyScanComponent extends Component {
             await setScanDataApi(scaned)
             
         } else {
-            if (setValue != null && setValue.length > 0) {
+            if (setValue != null && setValue.length >= 0) {
                 payload.set = setValue
             }
             await setScanDataApi([payload])
@@ -412,12 +420,25 @@ class MyScanComponent extends Component {
                 let totalPages = this.props.roiData.data.layout.hasOwnProperty("pages") && this.props.roiData.data.layout.pages
                 let pageNumber = totalPages || totalPages > 0 ? "1" : null
                 let jsonRoiData = this.props.roiData.data
-                SaralSDK.startCamera(JSON.stringify(jsonRoiData), pageNumber).then(res => {
+                let hasTimer   =  this.props.loginData.data.school.hasOwnProperty("scanTimeoutMs") ? this.props.loginData.data.school.scanTimeoutMs : 0
+                let isManualEditEnabled   =  this.props.loginData.data.school.hasOwnProperty("isManualEditEnabled") ? this.props.loginData.data.school.isManualEditEnabled : false
+                SaralSDK.startCamera(JSON.stringify(jsonRoiData), pageNumber, hasTimer, isManualEditEnabled).then(res => {
                     let roisData = JSON.parse(res);
-                    let cells = roisData.layout.cells;
-                    this.consolidatePrediction(cells, roisData)
+                    console.log('roisData.hasOwnProperty("hwDigitModel")' +roisData.hasOwnProperty("hwDigitModel"));
+
+                    if (roisData.hasOwnProperty("hwDigitModel") && roisData.hwDigitModel) {
+                        this.callCustomModal(Strings.message_text, Strings.Digit_model_is_not_availaible, false);
+                    
+                    } else if (roisData.hasOwnProperty("blockLetterModel") && roisData.blockLetterModel) {
+                        this.callCustomModal(Strings.message_text, Strings.Alpha_numeric_model_is_not_availaible, false);
+                    
+                    } else {
+                        let cells = roisData.layout.cells;
+                        this.consolidatePrediction(cells, roisData)
+                    }
 
                 }).catch((code, message) => {
+                    console.log("code",code,message);
                 })
             } else {
             }
@@ -434,7 +455,7 @@ class MyScanComponent extends Component {
             predictionConfidenceArray = []
             for (let j = 0; j < cells[i].rois.length; j++) {
                 if (cells[i].rois[j].hasOwnProperty("result")) {
-                    marks = marks + cells[i].rois[j].result.prediction,
+                    marks = marks + cells[i].rois[j].result.prediction
                         predictionConfidenceArray.push(cells[i].rois[j].result.confidence)
                     // roisData.layout.cells[i].predictionConfidence = cells[i].rois[j].result.confidence
                 } else {
@@ -531,6 +552,7 @@ class MyScanComponent extends Component {
         const data = await getScannedDataFromLocal();
         const loginCred = await getLoginCred();
         const hasNetwork = await checkNetworkConnectivity();
+        const deviceUniqId = await DeviceInfo.getUniqueId();
         if (hasNetwork) {
         if (this.state.roiIndex != -1) {
 
@@ -565,7 +587,7 @@ class MyScanComponent extends Component {
                             })
                         })
 
-                        let apiObj = new SaveScanData(filterData[0], this.props.loginData.data.token);
+                        let apiObj = new SaveScanData(filterData[0], this.props.loginData.data.token,deviceUniqId);
                         this.saveScanData(apiObj, filterDataLen, setIntolocalAfterFilter);
 
                     } else {
@@ -629,8 +651,10 @@ class MyScanComponent extends Component {
     }
 
     callScanStatusData = async (isApiCalled, filteredDatalen, localScanData, res) => {
-        let hasNetwork = await checkNetworkConnectivity();
+        const deviceUniqId = await DeviceInfo.getUniqueId();
         const { loginData } = this.props;
+        let token = loginData.data.token
+        let hasNetwork = await checkNetworkConnectivity();
         if (!hasNetwork) {
             let hasCacheData = await getScanDataApi();
             if (hasCacheData) {
@@ -654,17 +678,15 @@ class MyScanComponent extends Component {
                 //Alert message show message "something went wrong or u don't have cache in local"
             }
         } else {
-            
-            let hasMessage = res ? typeof res.data == "string" ? true : false : false
-            if (hasMessage) {
-                if (!isApiCalled) {
-                    obj.callCustomModal(Strings.message_text, Strings.saved_successfully, false);
+            let hasMessage = res ? typeof res.data == "string" ? true : false : null
+            if (hasMessage != null && !hasMessage) {
+                    this.callCustomModal(Strings.message_text, Strings.saved_successfully, false);
                     setScannedDataIntoLocal(localScanData)
-                    storeFactory.dispatch(this.dispatchScanDataApi(res.data))
+                    this.dispatchScanDataApi(res.data)
                     this.setState({
                         localScanedData: []
                     })
-                }
+                 
                 if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode) {
                     this.setScanDataCache(res.data);
                 }
@@ -674,31 +696,22 @@ class MyScanComponent extends Component {
                     isLoading: false,
                     dbScanSavedData: res.data.data
                 })
-
+                
             } else {
-
-            let loginCred = await getLoginCred()
-
-            let dataPayload = {
-                "classId": 0,
-                "subject": 0,
-                "section": 0,
-                "fromDate": 0,
-                "page": 0,
-                "downloadRes": false
+                let loginCred = await getLoginCred()
+                let dataPayload = {
+                    "classId": 0,
+                    "subject": 0,
+                    "section": 0,
+                    "fromDate": 0,
+                    "page": 0,
+                    "downloadRes": false
+                }
+                let roiId = this.props.roiData && this.props.roiData.data.roiId;
+                dataPayload.roiId = roiId;
+                let apiObj = new scanStatusDataAction(dataPayload, token, deviceUniqId);
+                this.FetchSavedScannedData(isApiCalled, apiObj, loginCred.schoolId, loginCred.password, filteredDatalen, localScanData)
             }
-            let roiId = this.props.roiData && this.props.roiData.data.roiId;
-            dataPayload.roiId = roiId;
-            let apiObj = new scanStatusDataAction(dataPayload);
-            this.FetchSavedScannedData(isApiCalled, apiObj, loginCred.schoolId, loginCred.password, filteredDatalen, localScanData)
-        }
-    }
-}
-
-    dispatchScanDataApi(payload) {
-        return {
-            type: constants.SCANNED_DATA,
-            payload
         }
     }
 
@@ -713,12 +726,7 @@ class MyScanComponent extends Component {
                     source.cancel('The request timed out.');
                 }
             }, 60000);
-            axios.post(api.apiEndPoint(), api.getBody(), {
-                auth: {
-                    username: uname,
-                    password: pass
-                }
-            })
+            axios.post(api.apiEndPoint(), api.getBody(), { headers: api.getHeaders(), cancelToken: source.token })
                 .then(function (res) {
                     apiResponse = res
                     clearTimeout(id)
@@ -726,7 +734,6 @@ class MyScanComponent extends Component {
                     if (!isApiCalled) {
                         obj.callCustomModal(Strings.message_text, Strings.saved_successfully, false);
                         setScannedDataIntoLocal(localScanData)
-                        storeFactory.dispatch(obj.dispatchAPIAsync(api))
                         obj.setState({
                             localScanedData: []
                         })
@@ -752,10 +759,10 @@ class MyScanComponent extends Component {
         }
     }
 
-    dispatchAPIAsync(api) {
+    dispatchScanDataApi(payload) {
         return {
-            type: api.type,
-            payload: api.getPayload()
+            type: constants.SCANNED_DATA,
+            payload
         }
     }
 
@@ -781,7 +788,7 @@ class MyScanComponent extends Component {
                     let data = []
                     if (scaned != null) {
                         data = scaned.filter( async(e) => {
-                            let conditionSwitch = setValue != null && setValue.length > 0 ? e.examId == this.state.examId && e.key == this.props.loginData.data.school.schoolId && filteredData.set == e.set : e.examId == this.state.examId && e.key == this.props.loginData.data.school.schoolId
+                            let conditionSwitch = setValue != null && setValue.length >= 0 ? e.examId == this.state.examId && e.key == this.props.loginData.data.school.schoolId && filteredData.set == e.set : e.examId == this.state.examId && e.key == this.props.loginData.data.school.schoolId
                             if (conditionSwitch) {
                                 return true
                             }
@@ -801,59 +808,75 @@ class MyScanComponent extends Component {
 
     render() {
         const { isLoading, saveStatusData, scanStatusData, scanModalDataVisible, passDataToModal, savingStatus } = this.state;
-        const { loginData, multiBrandingData, modalMessage, modalStatus } = this.props
+        const { loginData, multiBrandingData, modalMessage, modalStatus,filteredData } = this.props
         const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.myScan[0]
         
         return (
 
-            <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
+            <View style={{ flex: 1, backgroundColor: multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.WHITE_OPACITY }}>
+               {
+                     !this.props.minimalFlag ?
                 <ShareComponent
                     navigation={this.props.navigation}
+                    onPress={()=>this.props.navigation.navigate('StudentsList')}
+                />:
+                <ShareComponent
+                    navigation={this.props.navigation}
+                    onPress={()=>this.props.navigation.navigate('Home')}
                 />
+               }
                 <View>
+                <View style={{margin:5}}>
                     {(BrandLabel) ?
                         <MultibrandLabels
                             Label1={BrandLabel.School}
-                            Label2={BrandLabel.SchoolId}
-                            School={loginData.data.school.name}
-                            SchoolId={loginData.data.school.schoolId}
+                            School=  {`${loginData.data.school.name}${loginData.data.school.block ? ','+loginData.data.school.block : ''}${loginData.data.school.district ? ','+loginData.data.school.district : ''}`}
                             minimalFlag={this.props.minimalFlag}
                         /> :
                         (loginData && loginData.data)
                         &&
-                        <View style={{ width: '60%' }}>
-                            <Text
-                                style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%', fontFamily: monospace_FF }}
-                            >
-                                {Strings.school_name + ' : '}
-                                <Text style={{ fontWeight: 'normal', fontFamily: monospace_FF }}>
-                                    {loginData.data.school.name}
-                                </Text>
-                            </Text>
-                            <Text
-                                style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%', fontFamily: monospace_FF }}
-                            >
-                                {Strings.schoolId_text + ' : '}
-                                <Text style={{ fontWeight: 'normal', fontFamily: monospace_FF }}>
-                                    {loginData.data.school.schoolId}
-                                </Text>
-                            </Text>
-                        </View>
+                        <View>
+                   
+                        <Text style={{marginLeft:5}}>
+                            
+                        {`${loginData.data.school.name}${loginData.data.school.block ? ','+loginData.data.school.block : ''}${loginData.data.school.district ? ','+loginData.data.school.district : ''}`}
+                        </Text>
+                   
+                        {
+                     !this.props.minimalFlag &&
+                    <View style={{flexDirection:'row',marginLeft:5,marginTop:5}}>
+                    <Text style={{fontWeight:'bold'}}>
+                        {Strings.class_text + ' : '}
+                        <Text style={{ fontWeight: 'normal' }}>
+                            {`${filteredData.className}, ${filteredData.section ? filteredData.section : ''}`}
+                        </Text>
+                    </Text>
+                    <Text style={{marginLeft:10,fontWeight:"bold"}}>
+                        {Strings.subject + ' : '}
+                        <Text style={{ fontWeight: 'normal' }}>
+                               {filteredData.subject} {filteredData.set ? `(Set ${filteredData.set})`:''}
+                        </Text>
+                    </Text>
+                    </View>
+    }
+                    
+                </View>
+
                     }
 
+                </View>
                 </View>
 
                 {
                      !this.props.minimalFlag
                         ?
                         <ScrollView scrollEnabled>
-                            <View style={styles.container1}>
-                                <Text style={[styles.header1TextStyle, { borderColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE, backgroundColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE, fontFamily: monospace_FF }]}>
-                                    {Strings.ongoing_scan}
-                                </Text>
-                            </View>
+                            <View style={{justifyContent:'center',alignItems:'center',marginTop:15}}>
+                           <Text style={{fontWeight:'bold',fontSize:18}}>{Strings.Summary_page}</Text>
+                           </View>
                             <ScanHistoryCard
                                 scanstatusbutton={true}
+                                scanFun={this.onScanClick}
                                 themeColor1={this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE}
                                 showButtons={false}
                                 scanStatusData={this.state.scanStatusData}
@@ -863,21 +886,8 @@ class MyScanComponent extends Component {
                                 setIsLoading={()=>this.setState({isLoading:false})}
                             />
 
-                            <View style={styles.viewnxtBtnStyle1}>
-                                <ButtonComponent
-                                    customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
-                                    btnText={Strings.backToDashboard.toUpperCase()}
-                                    activeOpacity={0.8}
-                                    onPress={() => this.props.navigation.navigate('selectDetails')}
-                                />
-
-                                <ButtonComponent
-                                    customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
-                                    btnText={Strings.Back.toUpperCase()}
-                                    activeOpacity={0.8}
-                                    onPress={() => this.props.navigation.push('ScanHistory')}
-                                />
-                            </View>
+                      
+                           
                         </ScrollView>
                         :
 
@@ -896,7 +906,11 @@ class MyScanComponent extends Component {
                 {
                      this.props.minimalFlag
                     &&
-                    <View style={{ backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE, marginHorizontal: 20, padding: 6, borderRadius: 10, paddingBottom: 16, paddingTop: 14 }}>
+                    <ScrollView scrollEnabled>
+                    <View style={{ backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE,
+                         marginHorizontal: 20, padding: 6, borderRadius: 10, paddingBottom: 16, paddingTop: 14 , width: '90%',
+                    justifyContent:'center',
+                    alignSelf:"center"}}>
                         <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle, { padding: "3.4%" }]}>
                                 <Text style={{ fontFamily: monospace_FF }}>{BrandLabel && BrandLabel.ScanCount ? BrandLabel.ScanCount : Strings.scan_count}</Text>
@@ -943,32 +957,28 @@ class MyScanComponent extends Component {
                         </View>
 
                     </View>
+                    </ScrollView>
                 }
 
-                <View style={styles.bottomTabStyle}>
-                    <View style={[{ elevation: 10, backgroundColor: 'transparent', justifyContent: 'center', alignItems: 'center' }]}>
+                <View>
+
+                </View>
+                
+                <View style={[{  backgroundColor: 'transparent', justifyContent: 'center', alignItems: 'center'}]}>
+                      <Text style={{bottom:10, elevation: 20,fontSize:18,fontWeight:'bold'}}>click here to scan</Text>
+                      
                         <TouchableOpacity style={[styles.subTabContainerStyle]}
                             onPress={this.onScanClick}
                         >
-                            <TouchableOpacity
-                                style={[styles.scanTabContainerStyle,]}
-                            >
-                                <TouchableOpacity
-                                    style={[styles.scanSubTabContainerStyle, { backgroundColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE }]}
-                                >
-                                    <Image
-                                        source={Assets.ScanButton}
+                            <Image
+                                        source={Assets.scan}
                                         style={styles.tabIconStyle}
                                         resizeMode={'contain'}
                                     />
-                                </TouchableOpacity>
-                            </TouchableOpacity>
-                            <Text style={styles.tabLabelStyle}>
-                                {Strings.scan_text}
-                            </Text>
-
-                        </TouchableOpacity>
+                                        </TouchableOpacity>
                     </View>
+                <View style={styles.bottomTabStyle}>
+                    
                 </View>
                 {
                     isLoading
@@ -1022,9 +1032,8 @@ const styles = {
         letterSpacing: 1
     },
     bottomTabStyle: {
-        position: 'absolute',
         flexDirection: 'row',
-        bottom: 0,
+        
         height: 35,
         left: 0,
         right: 0,
@@ -1037,10 +1046,14 @@ const styles = {
     subTabContainerStyle: {
         justifyContent: 'center',
         alignItems: 'center',
+        marginBottom:30
+        
     },
+    
     tabIconStyle: {
-        width: 40,
-        height: 40
+        width: 80,
+        height: 80,
+      
     },
     Backbutton: {
         width: 200,
@@ -1065,7 +1078,6 @@ const styles = {
     scanTabContainerStyle: {
         width: 80,
         height: 80,
-        position: 'absolute',
         borderRadius: 40,
         justifyContent: 'center',
         alignItems: 'center'
@@ -1083,11 +1095,12 @@ const styles = {
 
     nxtBtnStyle1: {
         marginTop: 15,
-        width: '40%',
+        width: '90%',
         height: 52,
-        marginHorizontal: 5,
-        bottom: 10,
-        borderRadius: 10
+        marginHorizontal: 20,
+        bottom: 0,
+        borderRadius: 10,
+        
     },
     viewnxtBtnStyle1: {
         flexDirection: 'row',

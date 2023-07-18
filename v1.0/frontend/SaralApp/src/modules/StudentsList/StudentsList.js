@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Text, View, FlatList, SafeAreaView, BackHandler } from 'react-native';
+import { Text, View, FlatList, SafeAreaView, BackHandler,StyleSheet } from 'react-native';
 
 //redux
 import { connect, useDispatch } from 'react-redux';
@@ -39,8 +39,7 @@ import { collectErrorLogs } from '../CollectErrorLogs';
 import { getRegularRoipi, getRegularSavedScanpi, getRegularStudentExamApi, setRegularRoiApi, setRegularSavedScanApi, setRegularStudentExamApi } from '../../utils/offlineStorageUtils';
 import constants from '../../flux/actions/constants';
 import { storeFactory } from '../../flux/store/store';
-
-
+import DeviceInfo from 'react-native-device-info';
 const StudentsList = ({
     filteredData,
     loginData,
@@ -51,7 +50,6 @@ const StudentsList = ({
     apiStatus,
     roiData
 }) => {
-
 
     function usePrevious(value) {
         const ref = useRef();
@@ -149,7 +147,7 @@ useEffect(() => {
 
         if (getSavedScanCache != null) {
             let result = getSavedScanCache.findIndex((e)=> {
-                return setValue != null && setValue.length > 0 ? e.key == loginData.data.school.schoolId && e.classId == filteredData.class && e.subject == filteredData.subject && e.section == filteredData.section && e.fromDate == filteredData.examDate && filteredData.set == e.set : e.key == loginData.data.school.schoolId && e.classId == filteredData.class && e.subject == filteredData.subject && e.section == filteredData.section && e.fromDate == filteredData.examDate
+                return setValue != null && setValue.length >= 0 ? e.key == loginData.data.school.schoolId && e.classId == filteredData.class && e.subject == filteredData.subject && e.section == filteredData.section && e.fromDate == filteredData.examDate && filteredData.set == e.set : e.key == loginData.data.school.schoolId && e.classId == filteredData.class && e.subject == filteredData.subject && e.section == filteredData.section && e.fromDate == filteredData.examDate
             });
             if (result > -1) {
                 getSavedScanCache[result].data = savedScanData
@@ -188,14 +186,15 @@ useEffect(() => {
     }
 
     const callScanStatusData = async () => {
+        const deviceUniqId = await DeviceInfo.getUniqueId();
+        let token = loginData.data.token;
         let hasNetwork = await checkNetworkConnectivity();
-
         if (!hasNetwork) {
             let hasCacheData = await getRegularSavedScanpi();
             let setValue = filteredData.hasOwnProperty("set")  ? filteredData.set.length> 0 ? filteredData.set : '' : null
             if (hasCacheData) {
                 let cacheFilterData =  hasCacheData.filter((element)=>{
-                    let conditionSwitch = setValue != null && setValue.length ? element.key == loginData.data.school.userId && element.classId == filteredData.class && element.subject == filteredData.subject && element.section == filteredData.section && element.fromDate == filteredData.examDate && filteredData.set == element.set : element.key == loginData.data.school.userId && element.classId == filteredData.class && element.subject == filteredData.subject && element.section == filteredData.section && element.fromDate == filteredData.examDate
+                    let conditionSwitch = setValue != null && setValue.length >=0 ? element.key == loginData.data.school.userId && element.classId == filteredData.class && element.subject == filteredData.subject && element.section == filteredData.section && element.fromDate == filteredData.examDate && filteredData.set == element.set : element.key == loginData.data.school.userId && element.classId == filteredData.class && element.subject == filteredData.subject && element.section == filteredData.section && element.fromDate == filteredData.examDate
                     if (conditionSwitch) {
                         return true
                     }
@@ -220,10 +219,7 @@ useEffect(() => {
             "page": 0,
             "downloadRes": false
         }
-        if (filteredData.hasOwnProperty("set")) {
-            dataPayload.set = filteredData.set
-        }
-        let apiObj = new scanStatusDataAction(dataPayload);
+        let apiObj = new scanStatusDataAction(dataPayload, token, deviceUniqId);
         FetchSavedScannedData(apiObj, loginCred.schoolId, loginCred.password)
     }
 }
@@ -238,12 +234,7 @@ useEffect(() => {
                     source.cancel('The request timed out.');
                 }
             }, 60000);
-            axios.post(api.apiEndPoint(), api.getBody(), {
-                auth: {
-                    username: uname,
-                    password: pass
-                }
-            })
+            axios.post(api.apiEndPoint(), api.getBody(),{ headers: api.getHeaders(), cancelToken: source.token })
                 .then(function (res) {
                     if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode) {
                         getSavedScanApiCache(res.data)
@@ -291,12 +282,14 @@ useEffect(() => {
 
 
 
-    const renderStudentData = ({ item }) => {
+    const renderStudentData = ({ item,index }) => {
         return (
+            <View style={{backgroundColor:multiBrandingData.themeColor2 ? multiBrandingData.themeColor2:AppTheme.WHITE}}>
             <StudentsDataComponent
-                themeColor1={multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}
-                themeColor2={multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE}
+                themeColor1={multiBrandingData.themeColor1 ? multiBrandingData.themeColor1 : AppTheme.BLUE}
+                themeColor2={multiBrandingData.themeColor2 ? multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE}
                 item={item}
+                index={index}
                 pabsent={item.studentAvailability}
                 scanedData={scanedData}
                 filteredData={filteredData}
@@ -306,12 +299,13 @@ useEffect(() => {
                 dispatch={dispatch}
                 loginData={loginData}
             />
+            </View>
         )
     }
 
     const renderEmptyList = () => {
         return (
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
                 <Text style={{fontFamily : monospace_FF}}>No Students Available</Text>
             </View>
         )
@@ -338,8 +332,8 @@ useEffect(() => {
                 "securedMarks": 0,
                 "totalMarks": 0
             }
-            let hasSet = filteredData.hasOwnProperty("set") ? filteredData.set.length >= 0 ? filteredData.set : '' : null
-            if(filteredData != null && hasSet != null && hasSet.length >= 0){
+            let hasSet = filteredData.hasOwnProperty("set") ? filteredData.set.length >= 0 ? filteredData.set : '' : '' 
+            if(hasSet.length >= 0){
                 stdPstAbs.set = hasSet
             }
             stdPstAbs.studentAvailability = element.studentAvailability
@@ -356,7 +350,7 @@ useEffect(() => {
             if (e.class == filteredData.className && e.section == filteredData.section) {
                 e.data.students.forEach((element) => {
 
-                    const updated = allStudentData.filter((o) => {
+                    const updated = allStudentData.filter((o)=>{
                         if (element.studentId == o.studentId) {
                             element.studentAvailability = o.studentAvailability
                         }
@@ -370,7 +364,7 @@ useEffect(() => {
 
         if (absentPresentStatus.studentsMarkInfo.length == 0) {
             setPresentAbsentStudent(allStudentData)
-            navigation.push('ScanHistory');
+            navigation.push('myScan');
         }else if (absentPresentStatus.studentsMarkInfo.length > 0) {
             await setDataIntoRegularStudentExamApi()
         }
@@ -395,7 +389,7 @@ useEffect(() => {
     }
         await setRegularStudentExamApi(getStudentExamCache);
         await setPresentAbsentStudent(allStudentData)
-        navigation.push('ScanHistory');
+        navigation.push('myScan');
     }
 
     const saveStudentData = (api) => {
@@ -411,7 +405,7 @@ useEffect(() => {
                 .then(function (res) {
                     setIsLoading(false)
                     setPresentAbsentStudent(allStudentData)
-                    navigation.push('ScanHistory');
+                    navigation.push('myScan');
                     setDataIntoRegularStudentExamApi()
                     apiResponse = res
                     clearTimeout(id)
@@ -468,7 +462,7 @@ useEffect(() => {
     }
 
     const getRoi = async() => {
-
+        const deviceUniqId = await DeviceInfo.getUniqueId();
         let hasNetwork = await checkNetworkConnectivity();
         let setValue = filteredData.hasOwnProperty("set") > 0 ? filteredData.set.length > 0 ? filteredData.set : '' : null
 
@@ -477,7 +471,7 @@ useEffect(() => {
         let cacheFilterData = hasCacheData != null 
             ?
             hasCacheData.filter((element)=>{
-                let conditionSwitch = setValue != null && setValue.length > 0 ? element.key == loginData.data.school.schoolId && element.examId == filteredData.examTestID && element.set == filteredData.set : element.key == loginData.data.school.schoolId && element.examId == filteredData.examTestID
+                let conditionSwitch = setValue != null && setValue.length >= 0 ? element.key == loginData.data.school.schoolId && element.examId == filteredData.examTestID && element.set == filteredData.set : element.key == loginData.data.school.schoolId && element.examId == filteredData.examTestID
                 if (conditionSwitch) {
                     return true
                 }
@@ -490,16 +484,16 @@ useEffect(() => {
             callScanStatusData()
             
         } else if (hasNetwork) {
-            let hasSet = filteredData.hasOwnProperty("set") ? filteredData.set.length >= 0 ? `?set=${filteredData.set}` : '' : null
+            let hasSet = filteredData.hasOwnProperty("set") ? filteredData.set.length >= 0 ? `?set=${filteredData.set}` : '' : ''
             let payload =
             {
             "examId": filteredData.examTestID,
             }
-            if (hasSet != null && hasSet.length >= 0) {
+            if (hasSet.length >= 0) {
             payload.set = hasSet
             }
             let token = loginData.data.token
-            let apiObj = new ROIAction(payload, token);
+            let apiObj = new ROIAction(payload, token, deviceUniqId);
             dispatch(APITransport(apiObj))
             callScanStatusData()
         } else {
@@ -513,65 +507,65 @@ useEffect(() => {
             payload
         }
     }
-
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor:multiBrandingData.themeColor2 ? multiBrandingData.themeColor2 : 'white' }}>
              <ShareComponent
                  navigation={navigation}
+                 onPress={navigateToBack}
                  />
-
+ <View style={{margin:5}}>
             {
                     (BrandLabel) ?
                         <MultibrandLabels
                         Label1={BrandLabel.School}
-                        Label2={BrandLabel.SchoolId}
-                        School ={loginData.data.school.name}
-                        SchoolId={loginData.data.school.schoolId}
+                        School =   {`${loginData.data.school.name}${loginData.data.school.block ? ','+loginData.data.school.block : ''}${loginData.data.school.district ? ','+loginData.data.school.district : ''}`}
+
                         />
                      :
             (loginData && loginData.data) &&
-                <View style={{width:'60%'}}>
-                    <Text
-                        style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingTop: '4%',fontFamily : monospace_FF }}
-                    >
-                        {Strings.school_name + ' : '}
-                        <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
-                            {loginData.data.school.name}
+                <View>
+                   
+                        <Text style={{marginLeft:5}}>
+                            
+                        {`${loginData.data.school.name}${loginData.data.school.block ? ','+loginData.data.school.block : ''}${loginData.data.school.district ? ','+loginData.data.school.district : ''}`}
+                        </Text>
+                   
+                    <View style={{flexDirection:'row',marginLeft:5,marginTop:5,}}>
+                    <Text style={{fontWeight:'bold'}}>
+                        {Strings.class_text + ' : '}
+                        <Text style={{ fontWeight:'normal' }}>
+                            {`${filteredData.className}, ${filteredData.section ? filteredData.section : ''}`}
                         </Text>
                     </Text>
-                    <Text
-                        style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '1%',fontFamily : monospace_FF }}
-                    >
-                        {Strings.schoolId_text + ' : '}
-                        <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
-                            {loginData.data.school.schoolId}
+                    <Text style={{marginLeft:10,fontWeight:"bold"}}>
+                        {Strings.subject + ' : '}
+                        <Text style={{ fontWeight: 'normal'}}>
+                               {filteredData.subject} {filteredData.set ? `(Set ${filteredData.set})`:''}
                         </Text>
                     </Text>
+                    </View>
+                    
                 </View>
 
             }
-         
+            </View>
+            <View style={{justifyContent: 'center',alignItems:'center',marginVertical:10}}>
+            <Text style={{fontSize:18,fontWeight:'bold'}}>{'Mark Attendance'}</Text>
+            </View>
+            
             <FlatList
                 data={allStudentData}
                 renderItem={renderStudentData}
-                background={multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}
                 ListEmptyComponent={renderEmptyList}
                 keyExtractor={(item) => item.studentId.toString()}
-                contentContainerStyle={styles.flatlistCon}
+                // contentContainerStyle={{backgroundColor:multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}}
                 showsVerticalScrollIndicator={false}
             />
 
 
             <View style={styles.viewnxtBtnStyle1}>
                 <ButtonComponent
-                    customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
-                    btnText={Strings.Back.toUpperCase()}
-                    activeOpacity={0.8}
-                    onPress={navigateToBack}
-                />
-
-                <ButtonComponent
-                    customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+                    customBtnStyle={[styled.nxtBtnStyle, { backgroundColor: multiBrandingData.themeColor1 ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
                     btnText={Strings.next_text.toUpperCase()}
                     activeOpacity={0.8}
                     onPress={navigateToNext}
@@ -589,6 +583,14 @@ useEffect(() => {
     );
 }
 
+const styled = StyleSheet.create({
+    nxtBtnStyle: {
+        marginVertical:10,
+        width:160,
+        height:43
+    },
+})
+
 const mapStateToProps = (state) => {
     return {
         filteredData: state.filteredData.response,
@@ -599,7 +601,8 @@ const mapStateToProps = (state) => {
         absentStudentDataResponse: state.absentStudentDataResponse,
         apiStatus: state.apiStatus,
         multiBrandingData: state.multiBrandingData.response.data,
-        scanedData: state.scanedData.response
+        scanedData: state.scanedData.response,
+        studentsAndExamData: state.studentsAndExamData,
     }
 }
 

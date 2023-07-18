@@ -1,11 +1,11 @@
-const Mark = require('../models/marks')
-const User = require('../models/users')
+const Marks = require('../models/marks')
+const Users = require('../models/users')
 const Helper = require('../middleware/helper')
 const { stringObject } = require('../utils/commonUtils')
-
-const fromTime = "T00:00:00"
-const toTime = "T23:59:59"
-
+require('../db/mongoose')
+const logger = require('../logging/logger')
+const mongoose = require('mongoose')
+const httperror = require("http-errors");
 
 exports.saveMarks = async (req, res, next) => {
     const marks = []
@@ -14,73 +14,76 @@ exports.saveMarks = async (req, res, next) => {
         // console.log("APP VERSION", req.get('X-App-Version'))
     }
 
-    const subject = req.body.subject
-    const examDate = req.body.examDate
-    const examId = req.body.examId
-    const schoolId = req.school.schoolId
-    const classId = req.body.classId
-    const userId = req.school.userId
-    const createdOn = new Date().getTime()
-    const roiId = req.body.roiId
-
-
-    req.body.studentsMarkInfo.forEach(studentsData => {
-        const marksData = new Mark({
-            ...studentsData,
-            schoolId,
-            examDate,
-            subject,
-            classId,
-            createdOn,
-            roiId,
-            examId,
-            userId
-        })
-        marks.push(marksData)
-    });
     try {
+        if (Object.keys(req.body).length === 0) res.status(400).send({ message: 'Validation error.' })
+        const input_keys = Object.keys(req.body)
+        if (!["subject", "classId","userId","examId"].every((i) => input_keys.includes(i)))
+            throw new httperror(400, "Invalid Request");
+
+
+        const subject = req.body.subject
+        const examDate = req.body.examDate
+        const examId = req.body.examId
+        const schoolId = req.school.schoolId
+        const classId = req.body.classId
+        const userId = req.school.userId
+        const createdOn = new Date().getTime()
+        const roiId = req.body.roiId
+
+
+        req.body.studentsMarkInfo.forEach(studentsData => {
+            const marksData = new Marks({
+                ...studentsData,
+                schoolId,
+                examDate,
+                subject,
+                classId,
+                createdOn,
+                roiId,
+                examId,
+                userId
+            })
+            marks.push(marksData)
+        });
 
         await Helper.lockScreenValidator(req.school)
 
-        for (let data of marks) {
-            if (!data.examDate && data.examDate == undefined) {
-                data.examDate = new Date().toLocaleDateString()
-            }
 
-            let studentMarksExist = await Mark.findOne({ schoolId: data.schoolId, studentId: data.studentId, classId: data.classId, subject: data.subject, examDate: data.examDate, roiId: data.roiId })
-
-            if (!studentMarksExist) {
-                await Mark.create(data)
-            } else {
-                if (data.schoolId == studentMarksExist.schoolId && data.studentId == studentMarksExist.studentId && data.classId == studentMarksExist.classId && data.subject == studentMarksExist.subject && data.examDate == studentMarksExist.examDate) {
-
-                    let lookup = {
-                        studentId: data.studentId,
-                        subject: data.subject,
-                        examDate: data.examDate
-                    }
-                    let update = { $set: { studentIdTrainingData: data.studentIdTrainingData, predictedStudentId: data.predictedStudentId, studentAvailability: data.studentAvailability, marksInfo: data.marksInfo, maxMarksTrainingData: data.maxMarksTrainingData, maxMarksPredicted: data.maxMarksPredicted, securedMarks: data.securedMarks, totalMarks: data.totalMarks, obtainedMarksTrainingData: data.obtainedMarksTrainingData, obtainedMarksPredicted: data.obtainedMarksPredicted, set: data.set, userId: data.userId } }
-                    await Mark.update(lookup, update)
+        let marksResult = await Marks.bulkWrite(
+            marks.map((mark) => ({
+                updateOne: {
+                    filter: {
+                        studentId: mark.studentId,
+                        subject: mark.subject,
+                        examDate: mark.examDate
+                    },
+                    update: { $set: { studentIdTrainingData: mark.studentIdTrainingData, studentId: mark.studentId, predictionConfidence: mark.predictionConfidence, schoolId: mark.schoolId, examDate: mark.examDate, predictedStudentId: mark.predictedStudentId, studentAvailability: mark.studentAvailability, marksInfo: mark.marksInfo, maxMarksTrainingData: mark.maxMarksTrainingData, maxMarksPredicted: mark.maxMarksPredicted, securedMarks: mark.securedMarks, totalMarks: mark.totalMarks, obtainedMarksTrainingData: mark.obtainedMarksTrainingData, obtainedMarksPredicted: mark.obtainedMarksPredicted, set: mark.set, subject: mark.subject, classId: mark.classId, section: mark.section, examId: mark.examId, userId: mark.userId, roiId: mark.roiId } },
+                    upsert:true
                 }
-            }
-        }
+            }))
+        );
+        logger.info("marks responsee---->", marksResult)
 
         let match = {
             schoolId: marks[0].schoolId,
             classId: marks[0].classId,
             section: marks[0].section,
             examDate: marks[0].examDate,
-            subject: marks[0].subject
+            subject: marks[0].subject,
+            $comment: "Save Marks API For Find Marks Details."
         }
 
-        let marksData = await Mark.find(match, { _id: 0, __v: 0 })
+        let marksData = await Marks.find(match)
+
         res.status(200).json({ data: marksData })
+
+
     } catch (e) {
         if (e && e.message == stringObject().lockScreen) {
             res.status(500).json({ error: e.message })
         }
         else {
-            res.status(400).json({ e })
+            res.status(400).json({ error: e.message })
         }
     }
 }
@@ -95,7 +98,7 @@ exports.getSaveScan = async (req, res, next) => {
 
         if (req.body.userId && !req.body.schoolId) {
             req.body.userId = req.body.userId.toLowerCase()
-            const userData = await User.findOne({ userId: req.body.userId })
+            const userData = await Users.findOne({ userId: req.body.userId, $comment: "Get Saved Scan API for Find User Data." })
             match.schoolId = userData.schoolId
         }
 
@@ -103,7 +106,8 @@ exports.getSaveScan = async (req, res, next) => {
         const { schoolId, classId, section, subject, fromDate, roiId } = req.body
 
         if (schoolId) {
-            match.schoolId = schoolId
+            match.schoolId = schoolId,
+                $comment = "Get Saved Scan API for Find Marks Data"
         }
 
         if (fromDate) {
@@ -117,6 +121,7 @@ exports.getSaveScan = async (req, res, next) => {
         if (section && section != "0") {
             match.section = section
         }
+
         if (roiId) {
             match.roiId = roiId
         }
@@ -133,7 +138,7 @@ exports.getSaveScan = async (req, res, next) => {
             req.body.page = 1;
         }
 
-        const savedScan = await Mark.find(match, { _id: 0, __v: 0 })
+        const savedScan = await Marks.find(match, { _id: 0, __v: 0 })
             .limit(parseInt(req.body.limit) * 1)
             .skip((parseInt(parseInt(req.body.page)) - 1) * parseInt(parseInt(req.body.limit)))
 

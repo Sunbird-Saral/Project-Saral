@@ -7,6 +7,7 @@ export default strings = new LocalizedStrings({
         cancel_text: 'Cancel',
         ok_text: 'Ok',
         submit_text: 'SUBMIT',
+        Save:'SAVE',
         Back :'Back',
         close:'Close',
         get_start: 'GET STARTED',
@@ -53,7 +54,7 @@ export default strings = new LocalizedStrings({
         login_text: 'Login',
         up_saralData: 'UP Saraldata',
         schoolId_text: 'School Id',
-        userId_text: 'User Id',
+        userId_text: 'User ID',
         password_text: 'Password',
         schoolid_password_doesnot_match: 'School Id or Password does not match',
         subject:'Subject',
@@ -76,7 +77,6 @@ export default strings = new LocalizedStrings({
         exam_taken_at: 'exam taken at',
         exam_date: 'Exam Date',
         test_date: 'Test Date',
-        submit_text: 'Submit',
         please_select_valid_section: 'Please select valid Option',
         please_select_class: 'Please select valid Option',
         please_select_section: 'Please select Section',
@@ -132,10 +132,15 @@ export default strings = new LocalizedStrings({
         you_dont_have_cache: "You don't have cache",
         please_try_again_later_network_is_not_available: "Please try again later network isn't available",
         roi_cache_not_available: "Roi cache not available",
-        set_text:'Set',
+        set_text:'Paper Set',
         you_dont_have_cache_for_save_count: "You don't have cache for save count",
         lock_screen: "State/District/School is locked for scanning" ,
         Mark_Absent:"Mark as Absent",
-        Mark_Present:"Mark as Present"
+        Mark_Present:"Mark as Present",
+        Saral:"Saral",
+        Registred_Mob_No:'Registered Mobile Number',
+        Summary_page : 'Summary Page',
+        Digit_model_is_not_availaible: "Digit model is not availaible",
+        Alpha_numeric_model_is_not_availaible: "Alpha numeric model is not availaible"
     }
 })

@@ -1,13 +1,13 @@
 const { stringObject } = require('../utils/commonUtils')
-const Lock = require('../models/lock')
-const User = require("../models/users")
+const Locks = require('../models/lock')
+const Users = require("../models/users")
 const bcrypt = require('bcryptjs')
 
 
 const commonHelperFunctions = {
     lockScreenValidator: async function (schoolData) {
         try {
-            const locks = await Lock.find().lean()
+            const locks = await Locks.find({ $comment: "Find lock Details." }).lean()
             for (let lockData of locks) {
                 let lockType = lockData.lockType;
                 switch (lockType) {
@@ -37,12 +37,14 @@ const commonHelperFunctions = {
     },
 
     findByCredentials: async function (userId, password) {
-        try {    
-            const user = await User.findOne({
-                userId: userId,
-                __v: 0
-            })
-          
+        try {
+            const user = await Users.findOne(
+                {
+                    userId: userId,
+                    $comment: "Login School API For Find User Data."
+                }
+            )
+           
             if (!user) {
                 throw new Error('School Id or Password is not correct.')
             }

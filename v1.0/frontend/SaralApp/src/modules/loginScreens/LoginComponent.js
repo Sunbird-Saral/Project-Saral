@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, TextInput, Image, AppState, ActivityIndicator, Switch,TouchableOpacity } from 'react-native';
+import { View, ScrollView, Text, TextInput, Image, AppState, ActivityIndicator, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Strings from '../../utils/Strings';
@@ -15,9 +15,11 @@ import {
 import { Assets } from '../../assets/index'
 import { checkNetworkConnectivity, monospace_FF } from '../../utils/CommonUtils';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { getBrandingDataApi, getLoginApi, setLoginApi,setBrandingDataApi } from '../../utils/offlineStorageUtils';
+import { getBrandingDataApi, getLoginApi, setLoginApi, setBrandingDataApi } from '../../utils/offlineStorageUtils';
 import { storeFactory } from '../../flux/store/store';
 import constants from '../../flux/actions/constants';
+import DeviceInfo from 'react-native-device-info';
+import { Switch } from 'react-native-switch';
 
 class LoginComponent extends Component {
     constructor(props) {
@@ -36,7 +38,7 @@ class LoginComponent extends Component {
             text: '',
             rememberMe: false,
             rememberMe1: false,
-            hidePassword:true
+            hidePassword: true
 
 
         }
@@ -44,16 +46,16 @@ class LoginComponent extends Component {
 
     setPasswordVisibility = () => {
         this.setState({ hidePassword: !this.state.hidePassword });
-      }
+    }
     async componentDidMount() {
         const schollId = await this.rememberMeSchoolId();
         const password = await this.rememberMePassword();
         this.setState({
-            schoolId: schollId || "" ,
-            password: password || "" ,
+            schoolId: schollId || "",
+            password: password || "",
             rememberMe: schollId && password ? true : false,
-            isLoading:false,
-          
+            isLoading: false,
+
         });
 
         let hasNetwork = await checkNetworkConnectivity();
@@ -74,18 +76,18 @@ class LoginComponent extends Component {
     async callBrandingCache(key, type) {
         let hasCacheData = await getBrandingDataApi();
         let hasNetwork = await checkNetworkConnectivity();
-        
-        let cacheFilterData = hasCacheData != null
-        ?
-         hasCacheData.filter((element) => {
-            if (element.key == "global") {
-                return true
-            }
-        })
-        :
-        []
 
-        if (hasCacheData &&  type == 'schoolId' && cacheFilterData.length > 0) {
+        let cacheFilterData = hasCacheData != null
+            ?
+            hasCacheData.filter((element) => {
+                if (element.key == "global") {
+                    return true
+                }
+            })
+            :
+            []
+
+        if (hasCacheData && type == 'schoolId' && cacheFilterData.length > 0) {
             storeFactory.dispatch(this.dispatchBrandingDataApi(cacheFilterData.length > 0 ? cacheFilterData[0].data : []))
             this.setState({
                 errCommon: '',
@@ -93,7 +95,7 @@ class LoginComponent extends Component {
             })
         } else if (hasNetwork) {
             this.callDefaultbrandingData()
-        } else if(type == "schoolId" && key != undefined && key.length > 0 ) {
+        } else if (type == "schoolId" && key != undefined && key.length > 0) {
             storeFactory.dispatch(this.dispatchBrandingDataApi({}))
             this.setState({
                 errCommon: Strings.you_dont_have_cache,
@@ -127,9 +129,11 @@ class LoginComponent extends Component {
     }
 
 
-    callDefaultbrandingData() {
+    callDefaultbrandingData = async () => {
+        const deviceUniqId = await DeviceInfo.getUniqueId();
         let payload = this.props.defaultBrandingdata
-        let apiObj = new DefaultBrandAction(payload);
+        let apiObj = new DefaultBrandAction(payload, deviceUniqId);
+        console.log('payload>>>', payload);
         this.props.APITransport(apiObj)
     }
 
@@ -154,17 +158,13 @@ class LoginComponent extends Component {
     callLogin = async () => {
         const { schoolId, password } = this.state
         const { loginData } = this.props
-
+        const deviceUniqId = await DeviceInfo.getUniqueId();
         let hasNetwork = await checkNetworkConnectivity();
-
-
-
-        
         let hasCacheData = await getLoginApi();
-        
+
         let cacheFilterData = hasCacheData != null
             ?
-            hasCacheData.filter((element)=>{
+            hasCacheData.filter((element) => {
                 let userId = JSON.parse(element.data.config.data)
                 if (userId.schoolId == schoolId) {
                     return true
@@ -172,13 +172,13 @@ class LoginComponent extends Component {
             })
             :
             []
-        
+
         if (hasCacheData != null && cacheFilterData.length > 0) {
             if (cacheFilterData.length > 0) {
                 storeFactory.dispatch(this.dispatchLoginData(cacheFilterData[0].data))
                 this.props.navigation.navigate('mainMenu')
             }
-        } else if (hasNetwork){
+        } else if (hasNetwork) {
             this.setState({
                 isLoading: true,
                 calledLogin: true
@@ -187,21 +187,21 @@ class LoginComponent extends Component {
                     "schoolId": schoolId,
                     "password": password
                 }
-    
-                let apiObj = new LoginAction(loginCredObj);
+
+                let apiObj = new LoginAction(loginCredObj, deviceUniqId);
                 this.props.APITransport(apiObj);
             })
-        } else if(!hasNetwork && schoolId.length > 0) {
+        } else if (!hasNetwork && schoolId.length > 0) {
             this.setState({
                 errCommon: Strings.you_dont_have_cache,
                 isLoading: false
-            })    
+            })
         }
-         else {
+        else {
             this.setState({
                 errCommon: Strings.you_seem_to_be_offline_please_check_your_internet_connection,
                 isLoading: false
-            })            
+            })
         }
     }
 
@@ -236,7 +236,7 @@ class LoginComponent extends Component {
                 password: password,
             }, () => {
                 this.callLogin()
-        
+
             })
         }
 
@@ -252,10 +252,10 @@ class LoginComponent extends Component {
         }
     }
 
-    onLoginDetailsChange = (text, type,value) => {
-         this.callBrandingCache(text, type)
+    onLoginDetailsChange = (text, type, value) => {
+        this.callBrandingCache(text, type)
         this.setState({ [type]: text })
-         this.toggleRememberMe()
+        this.toggleRememberMe()
     }
 
     rememberUserfunction = async () => {
@@ -298,7 +298,7 @@ class LoginComponent extends Component {
     };
 
 
-   async componentDidUpdate(prevProps) {
+    async componentDidUpdate(prevProps) {
         if (prevProps != this.props) {
             const { apiStatus, loginData, navigation } = this.props
             const { schoolId, password, calledLogin } = this.state
@@ -358,7 +358,7 @@ class LoginComponent extends Component {
                                     getLoginCache.push(payload);
                                 }
                                 await setLoginApi(getLoginCache);
-                                
+
                             } else {
                                 let payload = {
                                     key: `${loginUser}`,
@@ -397,32 +397,32 @@ class LoginComponent extends Component {
 
         }
         let hasNetwork = await checkNetworkConnectivity();
-        if (this.props.defaultBrandingApidata && this.props.defaultBrandingApidata.status&& this.props.defaultBrandingApidata.status == 200 &&  hasNetwork) {
-           const {defaultBrandingApidata} = this.props
+        if (this.props.defaultBrandingApidata && this.props.defaultBrandingApidata.status && this.props.defaultBrandingApidata.status == 200 && hasNetwork) {
+            const { defaultBrandingApidata } = this.props
             let getBrandingCache = await getBrandingDataApi();
-            
+
             if (getBrandingCache != null) {
 
-                let data = getBrandingCache.filter((e)=> {
+                let data = getBrandingCache.filter((e) => {
                     if (e.key == 'global') {
                         return true
                     }
                 });
 
-                    if (data.length > 0) {
-                        for (let element of getBrandingCache) {
-                            if (element.key == data[0].key) {
-                                element.data = defaultBrandingApidata
-                                break;
-                            }
-                        };
-                    } else {
-                        let payload = {
-                            key: `global`,
-                            data: defaultBrandingApidata
+                if (data.length > 0) {
+                    for (let element of getBrandingCache) {
+                        if (element.key == data[0].key) {
+                            element.data = defaultBrandingApidata
+                            break;
                         }
-                        getBrandingCache.push(payload);
+                    };
+                } else {
+                    let payload = {
+                        key: `global`,
+                        data: defaultBrandingApidata
                     }
+                    getBrandingCache.push(payload);
+                }
                 await setBrandingDataApi(getBrandingCache);
             } else {
                 let payload = {
@@ -436,11 +436,12 @@ class LoginComponent extends Component {
 
 
 
-  
+
 
     render() {
         const { password, isLoading, Loading, errUsername, errPassword, errCommon } = this.state;
         const { defaultBrandingdata } = this.props
+        console.log('defaultBrandingdata>>>>', defaultBrandingdata);
         if (defaultBrandingdata === undefined || defaultBrandingdata === null) {
             return <View style={styles.container}>
                 <ScrollView
@@ -450,92 +451,105 @@ class LoginComponent extends Component {
                     keyboardShouldPersistTaps={'handled'}
                 >
                     {Loading ?
-                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                            <Text style={{ fontSize: 12, fontWeight: 'bold',fontFamily : monospace_FF }}>Loading Branding ...</Text>
+                        <View style={styles.container1}>
+                            <Text style={{ fontSize: 12, fontWeight: 'bold', fontFamily: monospace_FF }}>Loading Branding ...</Text>
                         </View> :
 
-                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                            <Image style={{ width: 100, height: 100 }} source={Assets.AppLogo} />
+                        <View style={[styles.container1, { width: 80, height: 80, borderRadius: 40, backgroundColor: AppTheme.BLUE, alignSelf: 'center' }]}>
+                            <Image style={{ width: 80, height: 80 }} source={Assets.AppLogo} />
                         </View>
 
                     }
+                    <View style={{ justifyContent: 'center', alignItems: "center", marginVertical: 20 }}>
+                        <Text style={{ fontSize: 22, fontWeight: 'bold' }}> {Strings.Saral.toUpperCase()}</Text>
+                    </View>
 
-                    <View style={styles.container2}>
-                        <View style={styles.loginContainer}>
-                            <Text style={[styles.header1TextStyle, { paddingTop: '5%',fontFamily : monospace_FF }]}>
-                                {Strings.login_text.toUpperCase()}
-                            </Text>
+                    <View style={styles.loginContainer}>
+                        <Text style={[styles.header1TextStyle, { paddingTop: '5%', fontFamily: monospace_FF }]}>
+                            {Strings.login_text.toUpperCase()}
+                        </Text>
+                        <View style={{ flexDirection: 'row' }}>
+                            {errCommon != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 2, width: '100%', fontWeight: 'normal', textAlign: 'center', fontFamily: monospace_FF }]}>{errCommon}</Text>}
+                        </View>
+                        <View style={styles.fieldContainerStyle}>
                             <View style={{ flexDirection: 'row' }}>
-                                {errCommon != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 2, width: '100%', fontWeight: 'normal', textAlign: 'center',fontFamily : monospace_FF }]}>{errCommon}</Text>}
+                                <Text style={[styles.labelTextStyle, { width: errUsername != '' ? '55%' : '100%', fontFamily: monospace_FF }]}>{Strings.enter_username}</Text>
+                                {errUsername != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 1, width: '45%', textAlign: 'right', fontWeight: 'normal', fontFamily: monospace_FF }]}>{errUsername}</Text>}
                             </View>
-                            <View style={styles.fieldContainerStyle}>
-                                <View style={{ flexDirection: 'row' }}>
-                                    <Text style={[styles.labelTextStyle, { width: errUsername != '' ? '55%' : '100%',fontFamily : monospace_FF }]}>{Strings.enter_username}</Text>
-                                    {errUsername != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 1, width: '45%', textAlign: 'right', fontWeight: 'normal',fontFamily : monospace_FF }]}>{errUsername}</Text>}
-                                </View>
-                                <TextInput
-                                    ref="schoolId"
-                                    style={styles.inputStyle}
-                                    onChangeText={(text) => {
-                                        this.onLoginDetailsChange(text, 'schoolId')
-                                    }}
-                                    value={this.state.schoolId}
-                                    placeholder={Strings.userId_text}
-                                    placeholderTextColor={AppTheme.BLACK_OPACITY_30}
-                                    autoCapitalize={'none'}
-                                    importantForAutofill="yes"
-                                />
+                            <TextInput
+                                ref="schoolId"
+                                style={styles.inputStyle}
+                                onChangeText={(text) => {
+                                    this.onLoginDetailsChange(text, 'schoolId')
+                                }}
+                                value={this.state.schoolId}
+                                placeholder={Strings.userId_text}
+                                placeholderTextColor={AppTheme.BLACK_OPACITY_30}
+                                autoCapitalize={'none'}
+                                importantForAutofill="yes"
+                            />
 
+                        </View>
+                        <View style={styles.fieldContainerStyle}>
+                            <View style={{ flexDirection: 'row' }}>
+                                <Text style={[styles.labelTextStyle, { width: errPassword != '' ? '50%' : '100%', fontFamily: monospace_FF }]}>{Strings.enter_password}</Text>
+                                {errPassword != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 1, width: '50%', textAlign: 'right', fontWeight: 'normal', fontFamily: monospace_FF }]}>{errPassword}</Text>}
                             </View>
-                            <View style={styles.fieldContainerStyle}>
-                                <View style={{ flexDirection: 'row' }}>
-                                    <Text style={[styles.labelTextStyle, { width: errPassword != '' ? '50%' : '100%',fontFamily : monospace_FF }]}>{Strings.enter_password}</Text>
-                                    {errPassword != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 1, width: '50%', textAlign: 'right', fontWeight: 'normal',fontFamily : monospace_FF }]}>{errPassword}</Text>}
-                                </View>
-                                <View style={styles.textBoxContainer}>
-                                    <TextInput
-                                        ref="password"
-                                        style={styles.inputStyle}
-                                        onChangeText={(text) => this.onLoginDetailsChange(text, 'password')}
-                                        value={password}
-                                        placeholder={Strings.password_text}
-                                        placeholderTextColor={AppTheme.BLACK_OPACITY_30}
-                                        secureTextEntry={this.state.hidePassword}
-                                    />
-                                    <TouchableOpacity activeOpacity={0.8} style={styles.touachableButton} onPress={this.setPasswordVisibility}>
-                                        <Image source={(this.state.hidePassword) ? Assets.closeEye : Assets.openEye} style={styles.buttonImage} />
-                                    </TouchableOpacity>
-                                </View>
-                                <View style={styles.btnContainer}>
-                                    {Loading ?
-                                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                            <Text style={{ fontSize: 12, fontWeight: 'bold', fontFamily : monospace_FF }}>Loading Branding ...</Text>
-                                        </View> :
-                                        <View>
-                                            <View style={{ flexDirection: 'row', paddingTop: 10 }}>
-                                                <Switch
-                                                    trackColor={{ true: '#111', false: '#111' }}
-                                                    thumbColor={AppTheme.GREY}
-                                                    value={this.state.rememberMe}
-                                                    onValueChange={(value) => this.toggleRememberMe(value)} />
-                                                <Text>Remember Me</Text>
-                                            </View>
-                                            <View style={styles.btnContainer}>
+                            <View style={styles.textBoxContainer}>
+                                <TextInput
+                                    ref="password"
+                                    style={styles.inputStyle}
+                                    onChangeText={(text) => this.onLoginDetailsChange(text, 'password')}
+                                    value={password}
+                                    placeholder={Strings.password_text}
+                                    placeholderTextColor={AppTheme.BLACK_OPACITY_30}
+                                    secureTextEntry={this.state.hidePassword}
+                                />
+                                <TouchableOpacity activeOpacity={0.8} style={styles.touachableButton} onPress={this.setPasswordVisibility}>
+                                    <Image source={(this.state.hidePassword) ? Assets.closeEye : Assets.openEye} style={styles.buttonImage} />
+                                </TouchableOpacity>
+                            </View>
+                            <View style={styles.btnContainer}>
+                                {Loading ?
+                                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                                        <Text style={{ fontSize: 12, fontWeight: 'bold', fontFamily: monospace_FF }}>Loading Branding ...</Text>
+                                    </View> :
+                                    <View>
+                                        <View style={{ flexDirection: 'row', paddingTop: 15, marginLeft: 10 }}>
+                                            <Switch
+                                                //    disabled={false}
+                                                activeText={'On'}
+                                                inActiveText={'Off'}
+                                                backgroundActive={'green'}
+                                                backgroundInactive={'gray'}
+                                                circleActiveColor={'#30a566'}
+                                                circleInActiveColor={'#000000'}
+                                                circleSize={22}
+                                                barHeight={22}
+                                                switchLeftPx={2.5}
+                                                switchRightPx={2.5}
+                                                switchBorderRadius={30}
+                                                switchWidthMultiplier={2.5}
+                                                value={this.state.rememberMe}
+                                                onValueChange={(value) => this.toggleRememberMe(value)} />
+                                            <Text style={{ marginLeft: 10 }}>Remember Me</Text>
+                                        </View>
+                                        <View style={styles.btnContainer}>
                                             <ButtonComponent
                                                 btnText={Strings.login_text.toUpperCase()}
                                                 onPress={this.onSubmit}
                                                 themeColor1={{ backgroundColor: AppTheme.BLUE }}
                                             /></View></View>}
-                                </View>
                             </View>
                         </View>
+
                     </View>
                 </ScrollView>
                 {isLoading && <Spinner animating={isLoading} />}
             </View>
         }
         return (
-            <View style={styles.container}>
+            <View style={[styles.container, { backgroundColor: defaultBrandingdata.themeColor2 }]}>
                 <ScrollView
                     contentContainerStyle={{ flexGrow: 1 }}
                     showsVerticalScrollIndicator={false}
@@ -543,71 +557,85 @@ class LoginComponent extends Component {
                     keyboardShouldPersistTaps={'handled'}
                 >
 
-                    <View style={styles.container1}>
-                        <Image style={{ width: 100, height: 100 }} source={{ uri: defaultBrandingdata && 'data:image/png;base64,' + this.props.defaultBrandingdata.logoImage }} />
+                    <View style={[styles.container1, { width: 80, height: 80, borderRadius: 40, backgroundColor: defaultBrandingdata.themeColor1 ? defaultBrandingdata.themeColor1 : AppTheme.BLUE, alignSelf: 'center' }]}>
+                        <Image style={{ width: 80, height: 80, borderRadius: 50, border: 1 }} source={{ uri: defaultBrandingdata && 'data:image/png;base64,' + this.props.defaultBrandingdata.logoImage }} />
+                    </View>
+                    <View style={{ justifyContent: 'center', alignItems: "center", marginVertical: 20 }}>
+                        <Text style={{ fontSize: 22, fontWeight: 'bold' }}> {Strings.Saral.toUpperCase()}</Text>
                     </View>
 
 
-                    <View style={styles.container2}>
-                        <View style={styles.loginContainer}>
-                            <Text style={[styles.header1TextStyle, { paddingTop: '5%',fontFamily : monospace_FF }]}>
-                                {Strings.login_text.toUpperCase()}
-                            </Text>
-                            <View style={{ flexDirection: 'row' }}>
-                                {errCommon != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 2, width: '100%', fontWeight: 'normal', textAlign: 'center',fontFamily : monospace_FF }]}>{errCommon}</Text>}
-                            </View>
-                            <View style={styles.fieldContainerStyle}>
-                                <View style={{ flexDirection: 'row' }}>
-                                    <Text style={[styles.labelTextStyle, { width: errUsername != '' ? '55%' : '100%',fontFamily : monospace_FF }]}>{Strings.enter_username}</Text>
-                                    {errUsername != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 1, width: '45%', textAlign: 'right', fontWeight: 'normal',fontFamily : monospace_FF }]}>{errUsername}</Text>}
-                                </View>
-                                <TextInput
-                                    ref="schoolId"
-                                    style={styles.inputStyle}
-                                    onChangeText={(text) => {
-                                        this.onLoginDetailsChange(text, 'schoolId')
-                                    }}
-                                    value={this.state.schoolId}
-                                    placeholder={Strings.userId_text}
-                                    placeholderTextColor={AppTheme.BLACK_OPACITY_30}
-                                    autoCapitalize={'none'}
-                                />
 
+                    <View style={styles.loginContainer}>
+                        <Text style={[styles.header1TextStyle, { paddingTop: '5%', fontFamily: monospace_FF }]}>
+                            {Strings.login_text.toUpperCase()}
+                        </Text>
+                        <View style={{ flexDirection: 'row' }}>
+                            {errCommon != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 2, width: '100%', fontWeight: 'normal', textAlign: 'center', fontFamily: monospace_FF }]}>{errCommon}</Text>}
+                        </View>
+                        <View style={styles.fieldContainerStyle}>
+                            <View style={{ flexDirection: 'row' }}>
+                                <Text style={[styles.labelTextStyle, { width: errUsername != '' ? '55%' : '100%', fontFamily: monospace_FF }]}>{Strings.enter_username}</Text>
+                                {errUsername != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 1, width: '45%', textAlign: 'right', fontWeight: 'normal', fontFamily: monospace_FF }]}>{errUsername}</Text>}
                             </View>
-                            <View style={styles.fieldContainerStyle}>
-                                <View style={{ flexDirection: 'row' }}>
-                                    <Text style={[styles.labelTextStyle, { width: errPassword != '' ? '50%' : '100%',fontFamily : monospace_FF }]}>{Strings.enter_password}</Text>
-                                    {errPassword != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 1, width: '50%', textAlign: 'right', fontWeight: 'normal',fontFamily : monospace_FF }]}>{errPassword}</Text>}
-                                </View>
-                                <View style={styles.textBoxContainer}>
-                                    <TextInput
-                                        ref="password"
-                                        style={styles.inputStyle}
-                                        onChangeText={(text) => this.onLoginDetailsChange(text, 'password')}
-                                        value={password}
-                                        placeholder={Strings.password_text}
-                                        placeholderTextColor={AppTheme.BLACK_OPACITY_30}
-                                        secureTextEntry={this.state.hidePassword}
-                                    />
-                                    <TouchableOpacity activeOpacity={0.8} style={styles.touachableButton} onPress={this.setPasswordVisibility}>
-                                        <Image source={(this.state.hidePassword) ? Assets.closeEye : Assets.openEye} style={styles.buttonImage} />
-                                    </TouchableOpacity>
-                                </View>
-                                <View style={{ flexDirection: 'row', paddingTop: 10 }}>
-                                    <Switch
-                                        trackColor={{ true: '#111', false: '#111' }}
-                                        thumbColor={defaultBrandingdata && defaultBrandingdata.themeColor1}
-                                        value={this.state.rememberMe}
-                                        onValueChange={(value) => this.toggleRememberMe(value)} />
-                                    <Text>Remember Me</Text>
-                                </View>
-                                <View style={styles.btnContainer}>
-                                    <ButtonComponent
-                                        btnText={Strings.login_text.toUpperCase()}
-                                        onPress={this.onSubmit}
-                                        themeColor1={{ backgroundColor: defaultBrandingdata && defaultBrandingdata.themeColor1 }}
-                                    />
-                                </View>
+                            <TextInput
+                                ref="schoolId"
+                                style={styles.inputStyle}
+                                onChangeText={(text) => {
+                                    this.onLoginDetailsChange(text, 'schoolId')
+                                }}
+                                value={this.state.schoolId}
+                                placeholder={Strings.userId_text}
+                                placeholderTextColor={AppTheme.BLACK_OPACITY_30}
+                                autoCapitalize={'none'}
+                            />
+
+                        </View>
+                        <View style={styles.fieldContainerStyle}>
+                            <View style={{ flexDirection: 'row' }}>
+                                <Text style={[styles.labelTextStyle, { width: errPassword != '' ? '50%' : '100%', fontFamily: monospace_FF }]}>{Strings.enter_password}</Text>
+                                {errPassword != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 1, width: '50%', textAlign: 'right', fontWeight: 'normal', fontFamily: monospace_FF }]}>{errPassword}</Text>}
+                            </View>
+                            <View style={styles.textBoxContainer}>
+                                <TextInput
+                                    ref="password"
+                                    style={styles.inputStyle}
+                                    onChangeText={(text) => this.onLoginDetailsChange(text, 'password')}
+                                    value={password}
+                                    placeholder={Strings.password_text}
+                                    placeholderTextColor={AppTheme.BLACK_OPACITY_30}
+                                    secureTextEntry={this.state.hidePassword}
+                                />
+                                <TouchableOpacity activeOpacity={0.8} style={styles.touachableButton} onPress={this.setPasswordVisibility}>
+                                    <Image source={(this.state.hidePassword) ? Assets.closeEye : Assets.openEye} style={styles.buttonImage} />
+                                </TouchableOpacity>
+                            </View>
+                            <View style={{ flexDirection: 'row', paddingTop: 15, marginLeft: 10 }}>
+                                <Switch
+                                    //    disabled={false}
+                                    activeText={'On'}
+                                    inActiveText={'Off'}
+                                    backgroundActive={'green'}
+                                    backgroundInactive={'gray'}
+                                    circleActiveColor={'#30a566'}
+                                    circleInActiveColor={'#000000'}
+                                    circleSize={22}
+                                    barHeight={22}
+                                    switchLeftPx={2.5}
+                                    switchRightPx={2.5}
+                                    switchBorderRadius={30}
+                                    switchWidthMultiplier={2.5}
+                                    value={this.state.rememberMe}
+                                    onValueChange={(value) => this.toggleRememberMe(value)} />
+                                <Text style={{ marginLeft: 10 }}>Remember Me</Text>
+                            </View>
+                            <View style={styles.btnContainer}>
+                                <ButtonComponent
+                                    customBtnStyle={[styles.nxtBtnStyle, { backgroundColor: defaultBrandingdata && defaultBrandingdata.themeColor1 ? defaultBrandingdata.themeColor1 : AppTheme.BLUE }]}
+                                    btnText={Strings.login_text.toUpperCase()}
+                                    onPress={this.onSubmit}
+                                // themeColor1={{ backgroundColor: defaultBrandingdata && defaultBrandingdata.themeColor1 ? defaultBrandingdata.themeColor1:AppTheme.BLUE}}
+                                />
                             </View>
                         </View>
                     </View>
@@ -624,7 +652,7 @@ const styles = {
         backgroundColor: AppTheme.GREY_WHITE
     },
     container1: {
-        minHeight: 230,
+        marginTop: 80,
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -634,7 +662,7 @@ const styles = {
     },
     header1TextStyle: {
         textAlign: 'center',
-        fontSize: AppTheme.HEADER_FONT_SIZE_REGULAR,
+        fontSize: 18,
         color: AppTheme.BLACK,
         fontWeight: 'bold',
         letterSpacing: 1,
@@ -652,15 +680,13 @@ const styles = {
         color: AppTheme.WHITE_OPACITY,
         letterSpacing: 1,
     },
-    container2: {
-        flex: 1
-    },
     loginContainer: {
         marginHorizontal: '5%',
         backgroundColor: AppTheme.WHITE,
         borderRadius: 8,
         padding: '4%',
-        elevation: 2
+        elevation: 2,
+
     },
     fieldContainerStyle: {
         paddingVertical: '2.5%',
@@ -684,7 +710,11 @@ const styles = {
         color: AppTheme.BLACK,
     },
     btnContainer: {
-        paddingVertical: '5%'
+        marginTop: 20,
+        alignSelf: "stretch",
+        justifyContent: "center",
+        position: "relative",
+
     },
     buttonImage: {
         width: 30, height: 30
@@ -695,7 +725,7 @@ const styles = {
         justifyContent: 'center',
 
     },
-  
+
     touachableButton: {
         position: 'absolute',
         right: 3,
@@ -703,6 +733,11 @@ const styles = {
         width: 35,
         padding: 2
     },
+    nxtBtnStyle: {
+        height: 50,
+        justifyContent: 'center',
+        alignItems: 'center'
+    }
 }
 
 

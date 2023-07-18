@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, Text, View, Image, TouchableOpacity,Platform } from 'react-native';
+import { FlatList, Text, View, Image, TouchableOpacity,Platform,BackHandler,Alert, ScrollView } from 'react-native';
 
 //redux
 import { connect, useDispatch } from 'react-redux';
@@ -19,7 +19,7 @@ import { bindActionCreators } from 'redux';
 //api
 import APITransport from '../../flux/actions/transport/apitransport'
 import AppTheme from '../../utils/AppTheme';
-import { getPresentAbsentStudent, getScannedDataFromLocal,getErrorMessage, getLoginCred, setScannedDataIntoLocal } from '../../utils/StorageUtils';
+import { getPresentAbsentStudent, getScannedDataFromLocal, getLoginCred, setScannedDataIntoLocal } from '../../utils/StorageUtils';
 import { Assets } from '../../assets';
 import ShareComponent from '../common/components/Share';
 import MultibrandLabels from '../common/components/multibrandlabels';
@@ -32,7 +32,7 @@ import { collectErrorLogs } from '../CollectErrorLogs';
 import { scanStatusDataAction } from './scanStatusDataAction';
 import Spinner from '../common/components/loadingIndicator';
 import constants from '../../flux/actions/constants';
-
+import DeviceInfo from 'react-native-device-info';
 
 const ScanStatusLocal = ({
     loginData,
@@ -40,7 +40,8 @@ const ScanStatusLocal = ({
     multiBrandingData,
     navigation,
     bgFlag,
-    roiData
+    roiData,
+    minimalFlag
 }) => {
 
     const [unsavedstudentList, setUnsavedstudentList] = useState([])
@@ -58,8 +59,21 @@ const ScanStatusLocal = ({
 
     const onBackPress = () => {
         navigation.navigate('myScan');
-        return true;
+       
     };
+
+    useEffect(() => {
+        const backAction = () => {
+          return true;
+        };
+    
+        const backHandler = BackHandler.addEventListener(
+          'hardwareBackPress',
+          backAction,
+        );
+    
+        return () => backHandler.remove();
+      }, []);
 
 const callCustomModal = (title, message, isAvailable, func, cancel) => {
     let data = {
@@ -74,7 +88,7 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
 }
 
 
-    const subject = `Saral App v1.0 Marks JSON - SchoolId:${loginData.data.school.schoolId} & Exam Id:${filteredData.examTestID}`
+    const subject = `Saral App v1.0 Marks JSON - SchoolId:${loginData.data.school.schoolId} ${!minimalFlag ? ` & Exam Id:${filteredData.examTestID}` : "" }`
     const message = `${(dataForShare ? dataForShare : '')}`;
 
     const options = {
@@ -106,10 +120,13 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
     const renderItem = ({ item, index }) => {
         return <ScanStatusLocalList
             scanitemdata={item} 
+            index={index}
             id={item.studentId}
             loacalstutlist={unsavedstudentList}
             themeColor1={multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE}
             BrandLabel={BrandLabel}
+            themeColor2={multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.BLUE}
+            navigation ={navigation}
         />
 
     }
@@ -251,7 +268,7 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
                     if (hasMessage) {
                         api.processResponse(res);
                         callScanStatusData(false, filteredDatalen, localScanData)
-
+                        
                     } else {
                         dispatch(dispatchAPIAsyncSavedData(res.data));
                         setScannedDataIntoLocal(localScanData)
@@ -259,7 +276,6 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
                         onBackPress();
                         callCustomModal(Strings.message_text,Strings.saved_successfully,false);
                     }
-
                 })
                 .catch(function (err) {
                     if (err && err.response && err.response.status == 500) {
@@ -273,8 +289,10 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
             });
         }
     }
-
+    
     const callScanStatusData = async (bool,filteredDatalen, localScanData) => {
+        const deviceUniqId = await DeviceInfo.getUniqueId();
+        let token = loginData.data.token
         let loginCred = await getLoginCred()
 
         let dataPayload = {
@@ -282,6 +300,7 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
             "subject": filteredData.subject,
             "section": filteredData.section,
             "fromDate": filteredData.examDate,
+            "set": filteredData.set,
             "page": 0,
             "schoolId": loginData.data.school.schoolId,
             "downloadRes": false
@@ -289,7 +308,7 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
         if (filteredData.hasOwnProperty("set")) {
             dataPayload.set = filteredData.set
         }
-        let apiObj = new scanStatusDataAction(dataPayload);
+        let apiObj = new scanStatusDataAction(dataPayload, token, deviceUniqId);
         FetchSavedScannedData(apiObj, loginCred.schoolId, loginCred.password, filteredDatalen, localScanData)
     }
 
@@ -303,12 +322,7 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
                     source.cancel('The request timed out.');
                 }
             }, 60000);
-            axios.post(api.apiEndPoint(), api.getBody(), {
-                auth: {
-                    username: uname,
-                    password: pass
-                }
-            })
+            axios.post(api.apiEndPoint(), api.getBody(),{ headers: api.getHeaders(), cancelToken: source.token })
                 .then(function (res) {
                     callCustomModal(Strings.message_text,Strings.saved_successfully,false);
                     apiResponse = res
@@ -327,81 +341,55 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
         }
     }
 
-    function dispatchAPIAsync(api) {
+    function dispatchAPIAsyncSavedData(res) {
         return {
-            type: api.type,
-            payload: api.getPayload()
+            type: constants.SCANNED_DATA,
+            payload: res
         }
     }
-    
-    function dispatchAPIAsyncSavedData(res) {
+
+    function dispatchAPIAsync(api) {
             return {
-                type: constants.SCANNED_DATA,
-                payload: res
+                type: api.type,
+                payload: api.getPayload()
             }
         }
 
     return (
-        <View style={styles.container}>
-             <ShareComponent
-                 navigation={navigation}
-                 />
-            <View style={{ flexDirection:'row',justifyContent: 'space-between' }}>
-            {(multiBrandingData && BrandLabel) ?
-                <MultibrandLabels
-                Label1={BrandLabel.School}
-                Label2={BrandLabel.SchoolId}
-                School ={loginData.data.school.name}
-                SchoolId={loginData.data.school.schoolId}
+        <View style={[styles.container,{ flex: 1, backgroundColor:multiBrandingData.themeColor2 ? multiBrandingData.themeColor2 : 'white' }]}>
+          <ShareComponent
+                    navigation={navigation}
+                    onPress={()=>navigation.navigate('myScan')}
                 />
-                     :
-                (loginData && loginData.data)
-                &&
-                <View>
-                    <Text
-                        style={styles.schoolName}
-                    >
-                        {Strings.school_name + ' Name : '}
-                        <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>{loginData.data.school.name}</Text>
-                    </Text>
-                    <Text style={[styles.schoolId, { marginLeft: 5 }]}>
-                        {Strings.schoolId_text + ' : '}
-                        <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
-                            {loginData.data.school.schoolId}
-                        </Text>
-                    </Text>
-                </View>
-            }
-
-            {presentStudentList.length > 0 &&
-            <TouchableOpacity  onPress={()=>onShare()} style={{width:40,height:40,marginRight:20,marginTop:10}}>
-                    <Image style={{ height: 25, width: 25, marginHorizontal: 15, marginVertical: 20 }} source={Assets.Share} />
-            </TouchableOpacity> 
-            }
             
+            <View style={{marginTop:30}}>
+            <Text style={styles.scanStatus}>{'Review Scans'}</Text>
             </View>
-
-            <Text style={styles.scanStatus}>{Strings.scan_status}</Text>
-        
+            {/* <ScrollView> */}
             <FlatList
-                data={ presentStudentList && presentStudentList}
+                data={presentStudentList}
                 renderItem={renderItem}
                 ListEmptyComponent={renderEmptyData}
             keyExtractor={(item, index) => `${index.toString()}`}
             contentContainerStyle={styles.content}
+            showsVerticalScrollIndicator={false}
             />
-
-          <View style={{justifyContent:'space-between',flexDirection:'row'}}>
+              
+           
+              
+          <View style={{justifyContent:'space-between',flexDirection:'row',top:10}}>
           <ButtonComponent
-                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
-                btnText={Strings.close}
+                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData.themeColor1 ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+                customBtnTextStyle={{fontWeight:'normal',fontSize:14}}
+                btnText={Strings.close.toUpperCase()}
                 activeOpacity={0.8}
                 onPress={()=> onBackPress()}
                 />
 
             <ButtonComponent
-                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
-                btnText={Strings.save_scan}
+                customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData.themeColor1 ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+                customBtnTextStyle={{fontWeight:'normal',fontSize:14}}
+                btnText={'Submit All Scans'.toUpperCase()}
                 activeOpacity={0.8}
                 onPress={()=> onPressSaveInDB()}
                 />
@@ -412,10 +400,12 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
                     &&
                     <Spinner
                         animating={isLoading}
-                        customContainer={{ opacity: 0.6, elevation: 15 }}
+                        customContainer={{ opacity: 0.6, elevation: 15, backgroundColor:AppTheme.WHITE }}
                     />
                 }
 
+     
+       
         </View>
     );
 }
@@ -427,6 +417,7 @@ const mapStateToProps = (state) => {
         multiBrandingData: state.multiBrandingData.response.data,
         bgFlag: state.bgFlag,
         roiData: state.roiData.response,
+        minimalFlag: state.minimalFlag
     }
 }
 

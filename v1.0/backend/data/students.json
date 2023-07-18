@@ -1,4151 +1,2769 @@
 [
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student1",
     "studentId": "1210001",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student2",
     "studentId": "1220002",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student3",
     "studentId": "1220003",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student4",
     "studentId": "1220004",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student5",
     "studentId": "1220005",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "3",
-        "className": "Class-3"
-      }
-    ],
+    "classId": "3",
+    "className": "Class-3",
     "section": "D",
     "name": "Student1",
     "studentId": "1000001",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "3",
-        "className": "Class-3"
-      }
-    ],
+    "classId": "3",
+    "className": "Class-3",
     "section": "D",
     "name": "Student2",
     "studentId": "1000002",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "3",
-        "className": "Class-3"
-      }
-    ],
+    "classId": "3",
+    "className": "Class-3",
     "section": "D",
     "name": "Student3",
     "studentId": "1000003",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "6",
-        "className": "Class-6"
-      }
-    ],
+    "classId": "6",
+    "className": "Class-6",
     "section": "D",
     "name": "Student1",
     "studentId": "1210003",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "6",
-        "className": "Class-6"
-      }
-    ],
+    "classId": "6",
+    "className": "Class-6",
     "section": "D",
     "name": "Student2",
     "studentId": "1212603",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "6",
-        "className": "Class-6"
-      }
-    ],
+    "classId": "6",
+    "className": "Class-6",
     "section": "D",
     "name": "Student3",
     "studentId": "1230003",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "6",
-        "className": "Class-6"
-      }
-    ],
+    "classId": "6",
+    "className": "Class-6",
     "section": "D",
     "name": "Student4",
     "studentId": "1240003",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "6",
-        "className": "Class-6"
-      }
-    ],
+    "classId": "6",
+    "className": "Class-6",
     "section": "D",
     "name": "Student5",
     "studentId": "1250003",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "6",
-        "className": "Class-6"
-      }
-    ],
+    "classId": "6",
+    "className": "Class-6",
     "section": "D",
     "name": "Student6",
     "studentId": "1260003",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "6",
-        "className": "Class-6"
-      }
-    ],
+    "classId": "6",
+    "className": "Class-6",
     "section": "D",
     "name": "Student7",
     "studentId": "1278003",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "7",
-        "className": "Class-7"
-      }
-    ],
+    "classId": "7",
+    "className": "Class-7",
     "section": "D",
     "name": "Student1",
     "studentId": "1216704",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "7",
-        "className": "Class-7"
-      }
-    ],
+    "classId": "7",
+    "className": "Class-7",
     "section": "D",
     "name": "Student2",
     "studentId": "1213564",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "7",
-        "className": "Class-7"
-      }
-    ],
+    "classId": "7",
+    "className": "Class-7",
     "section": "D",
     "name": "Student3",
     "studentId": "1217894",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "7",
-        "className": "Class-7"
-      }
-    ],
+    "classId": "7",
+    "className": "Class-7",
     "section": "D",
     "name": "Student 4",
     "studentId": "1210004",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "D",
     "name": "Student1",
     "studentId": "1210005",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "D",
     "name": "Student2",
     "studentId": "1212005",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "D",
     "name": "Student3",
     "studentId": "1213005",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "D",
     "name": "Student4",
     "studentId": "1214005",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "D",
     "name": "Student5",
     "studentId": "1215005",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "4",
-        "className": "Class-4"
-      }
-    ],
+    "classId": "4",
+    "className": "Class-4",
     "section": "D",
     "name": "Student1",
     "studentId": "122",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "4",
-        "className": "Class-4"
-      }
-    ],
+    "classId": "4",
+    "className": "Class-4",
     "section": "D",
     "name": "Student2",
     "studentId": "123",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "4",
-        "className": "Class-4"
-      }
-    ],
+    "classId": "4",
+    "className": "Class-4",
     "section": "D",
     "name": "Student3",
     "studentId": "124",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "4",
-        "className": "Class-4"
-      }
-    ],
+    "classId": "4",
+    "className": "Class-4",
     "section": "D",
     "name": "Student4",
     "studentId": "945",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "4",
-        "className": "Class-4"
-      }
-    ],
+    "classId": "4",
+    "className": "Class-4",
     "section": "D",
     "name": "Student5",
     "studentId": "928",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "4",
-        "className": "Class-4"
-      }
-    ],
+    "classId": "4",
+    "className": "Class-4",
     "section": "D",
     "name": "Student6",
     "studentId": "888",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "4",
-        "className": "Class-4"
-      }
-    ],
+    "classId": "4",
+    "className": "Class-4",
     "section": "D",
     "name": "Student7",
     "studentId": "826",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "4",
-        "className": "Class-4"
-      }
-    ],
+    "classId": "4",
+    "className": "Class-4",
     "section": "D",
     "name": "Student8",
     "studentId": "836",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "4",
-        "className": "Class-4"
-      }
-    ],
+    "classId": "4",
+    "className": "Class-4",
     "section": "D",
     "name": "Student9",
     "studentId": "846",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "4",
-        "className": "Class-4"
-      }
-    ],
+    "classId": "4",
+    "className": "Class-4",
     "section": "D",
     "name": "Student10",
     "studentId": "856",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "4",
-        "className": "Class-4"
-      }
-    ],
+    "classId": "4",
+    "className": "Class-4",
     "section": "D",
     "name": "Student11",
     "studentId": "936",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "8",
-        "className": "Class-8"
-      }
-    ],
+    "classId": "8",
+    "className": "Class-8",
     "section": "D",
     "name": "Student1",
     "studentId": "181",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "8",
-        "className": "Class-8"
-      }
-    ],
+    "classId": "8",
+    "className": "Class-8",
     "section": "D",
     "name": "Student2",
     "studentId": "182",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "8",
-        "className": "Class-8"
-      }
-    ],
+    "classId": "8",
+    "className": "Class-8",
     "section": "D",
     "name": "Student3",
     "studentId": "183",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student1",
     "studentId": "2204000000000001",
     "schoolId": "od001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student2",
     "studentId": "2234567899984301",
     "schoolId": "od001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student3",
     "studentId": "2234567899984311",
     "schoolId": "od001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student4",
     "studentId": "2234567890084311",
     "schoolId": "od001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student5",
     "studentId": "2233567890084311",
     "schoolId": "od001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student6",
     "studentId": "2233507890084311",
     "schoolId": "od001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "3",
-        "className": "Class-3"
-      }
-    ],
+    "classId": "3",
+    "className": "Class-3",
     "section": "C",
     "name": "Student1",
     "studentId": "2203000000000001",
     "schoolId": "od001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "3",
-        "className": "Class-3"
-      }
-    ],
+    "classId": "3",
+    "className": "Class-3",
     "section": "C",
     "name": "Student2",
     "studentId": "2203300000000001",
     "schoolId": "od001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "3",
-        "className": "Class-3"
-      }
-    ],
+    "classId": "3",
+    "className": "Class-3",
     "section": "C",
     "name": "Student3",
     "studentId": "2203400000000001",
     "schoolId": "od001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "3",
-        "className": "Class-3"
-      }
-    ],
+    "classId": "3",
+    "className": "Class-3",
     "section": "C",
     "name": "Student4",
     "studentId": "2203500000000001",
     "schoolId": "od001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "3",
-        "className": "Class-3"
-      }
-    ],
+    "classId": "3",
+    "className": "Class-3",
     "section": "C",
     "name": "Student5",
     "studentId": "2203600000000001",
     "schoolId": "od001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "B",
     "name": "Student1",
     "studentId": "2203000000000002",
     "schoolId": "od001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "B",
     "name": "Student2",
     "studentId": "2203000000000112",
     "schoolId": "od001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "B",
     "name": "Student3",
     "studentId": "2203000000000122",
     "schoolId": "od001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "B",
     "name": "Student4",
     "studentId": "2203000000000132",
     "schoolId": "od001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "B",
     "name": "Student5",
     "studentId": "2203000000000142",
     "schoolId": "od001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "3",
-        "className": "Class-3"
-      }
-    ],
+    "classId": "3",
+    "className": "Class-3",
     "section": "B",
     "name": "Student1",
     "studentId": "2203000000000003",
     "schoolId": "od001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "3",
-        "className": "Class-3"
-      }
-    ],
+    "classId": "3",
+    "className": "Class-3",
     "section": "B",
     "name": "Student2",
     "studentId": "2203000000000043",
     "schoolId": "od001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "3",
-        "className": "Class-3"
-      }
-    ],
+    "classId": "3",
+    "className": "Class-3",
     "section": "B",
     "name": "Student3",
     "studentId": "2203000000000053",
     "schoolId": "od001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "3",
-        "className": "Class-3"
-      }
-    ],
+    "classId": "3",
+    "className": "Class-3",
     "section": "B",
     "name": "Student4",
     "studentId": "2203000000000063",
     "schoolId": "od001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "3",
-        "className": "Class-3"
-      }
-    ],
+    "classId": "3",
+    "className": "Class-3",
     "section": "B",
     "name": "Student4",
     "studentId": "2203000000000073",
     "schoolId": "od001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "3",
-        "className": "Class-3"
-      }
-    ],
+    "classId": "3",
+    "className": "Class-3",
     "section": "B",
     "name": "Student5",
     "studentId": "2203000000000083",
     "schoolId": "od001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "B",
     "name": "Student6",
     "studentId": "2203000000000004",
     "schoolId": "od001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "3",
-        "className": "Class-3"
-      }
-    ],
+    "classId": "3",
+    "className": "Class-3",
     "section": "D",
     "name": "Student1",
     "studentId": "3304001",
     "schoolId": "demouser"
   },
   {
-    "studentClass": [
-      {
-        "classId": "3",
-        "className": "Class-3"
-      }
-    ],
+    "classId": "3",
+    "className": "Class-3",
     "section": "D",
     "name": "Student2",
     "studentId": "3394871",
     "schoolId": "demouser"
   },
   {
-    "studentClass": [
-      {
-        "classId": "3",
-        "className": "Class-3"
-      }
-    ],
+    "classId": "3",
+    "className": "Class-3",
     "section": "D",
     "name": "Student3",
     "studentId": "3365871",
     "schoolId": "demouser"
   },
   {
-    "studentClass": [
-      {
-        "classId": "3",
-        "className": "Class-3"
-      }
-    ],
+    "classId": "3",
+    "className": "Class-3",
     "section": "D",
     "name": "Student4",
     "studentId": "3365851",
     "schoolId": "demouser"
   },
   {
-    "studentClass": [
-      {
-        "classId": "3",
-        "className": "Class-3"
-      }
-    ],
+    "classId": "3",
+    "className": "Class-3",
     "section": "D",
     "name": "Student5",
     "studentId": "3365831",
     "schoolId": "demouser"
   },
   {
-    "studentClass": [
-      {
-        "classId": "3",
-        "className": "Class-3"
-      }
-    ],
+    "classId": "3",
+    "className": "Class-3",
     "section": "B",
     "name": "Student1",
     "studentId": "3302001",
     "schoolId": "demouser"
   },
   {
-    "studentClass": [
-      {
-        "classId": "3",
-        "className": "Class-3"
-      }
-    ],
+    "classId": "3",
+    "className": "Class-3",
     "section": "B",
     "name": "Student2",
     "studentId": "3302002",
     "schoolId": "demouser"
   },
   {
-    "studentClass": [
-      {
-        "classId": "3",
-        "className": "Class-3"
-      }
-    ],
+    "classId": "3",
+    "className": "Class-3",
     "section": "B",
     "name": "Student3",
     "studentId": "3302003",
     "schoolId": "demouser"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "D",
     "name": "Student1",
     "studentId": "3302004",
     "schoolId": "demouser"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "D",
     "name": "Student2",
     "studentId": "3302005",
     "schoolId": "demouser"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "A",
     "name": "Student1",
     "studentId": "3302055",
     "schoolId": "demouser"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "D",
     "name": "Student3",
     "studentId": "3872645",
     "schoolId": "demouser"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "D",
     "name": "Student4",
     "studentId": "3901345",
     "schoolId": "demouser"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "D",
     "name": "Student5",
     "studentId": "4987654",
     "schoolId": "demouser"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "D",
     "name": "Student6",
     "studentId": "4765432",
     "schoolId": "demouser"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "D",
     "name": "Student7",
     "studentId": "4963432",
     "schoolId": "demouser"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "D",
     "name": "Student8",
     "studentId": "4963431",
     "schoolId": "demouser"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "D",
     "name": "Student9",
     "studentId": "4963471",
     "schoolId": "demouser"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "D",
     "name": "Student10",
     "studentId": "4963461",
     "schoolId": "demouser"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student1",
     "studentId": "420400123",
+    "fatherName": "father Name",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student2",
     "studentId": "420400234",
+    "fatherName": "father Name",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student3",
     "studentId": "420400345",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student4",
     "studentId": "420400456",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student5",
     "studentId": "420400567",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student6",
     "studentId": "420400678",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student7",
     "studentId": "420400789",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student8",
     "studentId": "420400890",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student9",
     "studentId": "420400912",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student10",
     "studentId": "420401012",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student11",
     "studentId": "420401123",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student12",
     "studentId": "420401245",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student13",
     "studentId": "420401367",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student14",
     "studentId": "420401456",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student15",
     "studentId": "420401567",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student16",
     "studentId": "420401678",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student17",
     "studentId": "420401789",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student18",
     "studentId": "420401890",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student19",
     "studentId": "420401901",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student20",
     "studentId": "420402012",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student21",
     "studentId": "420402123",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student22",
     "studentId": "420402234",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student23",
     "studentId": "420402345",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student24",
     "studentId": "420402456",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student25",
     "studentId": "420402567",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student26",
     "studentId": "420402678",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student27",
     "studentId": "420402789",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student28",
     "studentId": "420402890",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student29",
     "studentId": "420402910",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student30",
     "studentId": "420403012",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student31",
     "studentId": "420403123",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student32",
     "studentId": "420403234",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student33",
     "studentId": "420403345",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student34",
     "studentId": "420403456",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student35",
     "studentId": "420403567",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student36",
     "studentId": "420403678",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student37",
     "studentId": "420403789",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student38",
     "studentId": "420403890",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student39",
     "studentId": "420403910",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student40",
     "studentId": "420404012",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student41",
     "studentId": "420404123",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student42",
     "studentId": "420404234",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student43",
     "studentId": "420404345",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student44",
     "studentId": "420404456",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student45",
     "studentId": "420404567",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student46",
     "studentId": "420404678",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student47",
     "studentId": "420404789",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student48",
     "studentId": "420404890",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student49",
     "studentId": "420404901",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student 50",
     "studentId": "420405012",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student51",
     "studentId": "420405123",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student52",
     "studentId": "420405234",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "D",
     "name": "Student53",
     "studentId": "420405345",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "B",
     "name": "Student1",
     "studentId": "2000001",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "B",
     "name": "Student2",
     "studentId": "2000002",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "B",
     "name": "Student",
     "studentId": "2000003",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "B",
     "name": "Student",
     "studentId": "2000004",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "4",
-        "className": "Class-4"
-      }
-    ],
+    "classId": "4",
+    "className": "Class-4",
     "section": "B",
     "name": "Student1",
     "studentId": "3000001",
     "schoolId": "demouser"
   },
   {
-    "studentClass": [
-      {
-        "classId": "4",
-        "className": "Class-4"
-      }
-    ],
+    "classId": "4",
+    "className": "Class-4",
     "section": "B",
     "name": "Student2",
     "studentId": "3000002",
     "schoolId": "demouser"
   },
   {
-    "studentClass": [
-      {
-        "classId": "4",
-        "className": "Class-4"
-      }
-    ],
+    "classId": "4",
+    "className": "Class-4",
     "section": "B",
     "name": "Student3",
     "studentId": "3000003",
     "schoolId": "demouser"
   },
   {
-    "studentClass": [
-      {
-        "classId": "4",
-        "className": "Class-4"
-      }
-    ],
+    "classId": "4",
+    "className": "Class-4",
     "section": "B",
     "name": "Student4",
     "studentId": "3000004",
     "schoolId": "demouser"
   },
   {
-    "studentClass": [
-      {
-        "classId": "4",
-        "className": "Class-4"
-      }
-    ],
+    "classId": "4",
+    "className": "Class-4",
     "section": "B",
     "name": "Student5",
     "studentId": "3000005",
     "schoolId": "demouser"
   },
   {
-    "studentClass": [
-      {
-        "classId": "4",
-        "className": "Class-4"
-      }
-    ],
+    "classId": "4",
+    "className": "Class-4",
     "section": "B",
     "name": "Student6",
     "studentId": "3000006",
     "schoolId": "demouser"
   },
   {
-    "studentClass": [
-      {
-        "classId": "4",
-        "className": "Class-4"
-      }
-    ],
+    "classId": "4",
+    "className": "Class-4",
     "section": "B",
     "name": "Student7",
     "studentId": "3000007",
     "schoolId": "demouser"
   },
   {
-    "studentClass": [
-      {
-        "classId": "6",
-        "className": "Class-6"
-      }
-    ],
+    "classId": "6",
+    "className": "Class-6",
     "section": "B",
     "name": "Student1",
     "studentId": "3000008",
     "schoolId": "demouser"
   },
   {
-    "studentClass": [
-      {
-        "classId": "6",
-        "className": "Class-6"
-      }
-    ],
+    "classId": "6",
+    "className": "Class-6",
     "section": "B",
     "name": "Student2",
     "studentId": "3000010",
     "schoolId": "demouser"
   },
   {
-    "studentClass": [
-      {
-        "classId": "6",
-        "className": "Class-6"
-      }
-    ],
+    "classId": "6",
+    "className": "Class-6",
     "section": "B",
     "name": "Student3",
     "studentId": "3000011",
     "schoolId": "demouser"
   },
   {
-    "studentClass": [
-      {
-        "classId": "6",
-        "className": "Class-6"
-      }
-    ],
+    "classId": "6",
+    "className": "Class-6",
     "section": "B",
     "name": "Student4",
     "studentId": "3000012",
     "schoolId": "demouser"
   },
   {
-    "studentClass": [
-      {
-        "classId": "7",
-        "className": "Class-7"
-      }
-    ],
+    "classId": "7",
+    "className": "Class-7",
     "section": "B",
     "name": "Student1",
     "studentId": "3004211",
     "schoolId": "demouser"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "Carpentry",
     "name": "Employee1",
     "studentId": "4000001",
     "schoolId": "skill001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "Carpentry",
     "name": "Employee2",
     "studentId": "4000002",
     "schoolId": "skill001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "Carpentry",
     "name": "Employee3",
     "studentId": "4000003",
     "schoolId": "skill001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "Carpentry",
     "name": "Employee4",
     "studentId": "4000004",
     "schoolId": "skill001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "Carpentry",
     "name": "Employee5",
     "studentId": "4000005",
     "schoolId": "skill001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "Carpentry",
     "name": "Employee6",
     "studentId": "4000006",
     "schoolId": "skill001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "Carpentry",
     "name": "Employee7",
     "studentId": "4000007",
     "schoolId": "skill001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "Carpentry",
     "name": "Employee8",
     "studentId": "4000008",
     "schoolId": "skill001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "A",
     "name": "Student1",
     "studentId": "543210",
     "schoolId": "a001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "A",
     "name": "Student2",
     "studentId": "543211",
     "schoolId": "a001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "A",
     "name": "Student3",
     "studentId": "543212",
     "schoolId": "a001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "3",
-        "className": "Class-3"
-      }
-    ],
+    "classId": "3",
+    "className": "Class-3",
     "section": "A",
     "name": "Student1",
     "studentId": "543213",
     "schoolId": "a001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "3",
-        "className": "Class-3"
-      }
-    ],
+    "classId": "3",
+    "className": "Class-3",
     "section": "A",
     "name": "Student2",
     "studentId": "543214",
     "schoolId": "a001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "3",
-        "className": "Class-3"
-      }
-    ],
+    "classId": "3",
+    "className": "Class-3",
     "section": "A",
     "name": "Student3",
     "studentId": "543215",
     "schoolId": "a001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "3",
-        "className": "Class-3"
-      }
-    ],
+    "classId": "3",
+    "className": "Class-3",
     "section": "A",
     "name": "Student4",
     "studentId": "543216",
     "schoolId": "a001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "3",
-        "className": "Class-3"
-      }
-    ],
+    "classId": "3",
+    "className": "Class-3",
     "section": "A",
     "name": "Student5",
     "studentId": "543217",
     "schoolId": "a001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "3",
-        "className": "Class-3"
-      }
-    ],
+    "classId": "3",
+    "className": "Class-3",
     "section": "A",
     "name": "Student6",
     "studentId": "543218",
     "schoolId": "a001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "3",
-        "className": "Class-3"
-      }
-    ],
+    "classId": "3",
+    "className": "Class-3",
     "section": "A",
     "name": "Student7",
     "studentId": "543219",
     "schoolId": "a001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "3",
-        "className": "Class-3"
-      }
-    ],
+    "classId": "3",
+    "className": "Class-3",
     "section": "A",
     "name": "Student8",
     "studentId": "543220",
     "schoolId": "a001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "3",
-        "className": "Class-3"
-      }
-    ],
+    "classId": "3",
+    "className": "Class-3",
     "section": "A",
     "name": "Student9",
     "studentId": "543222",
     "schoolId": "a001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "3",
-        "className": "Class-3"
-      }
-    ],
+    "classId": "3",
+    "className": "Class-3",
     "section": "A",
     "name": "Student10",
     "studentId": "543223",
     "schoolId": "a001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "0",
-        "className": "Class-0"
-      }
-    ],
+    "classId": "0",
+    "className": "Class-0",
     "section": "0",
     "name": "Priya Sood",
     "studentId": "3302014",
     "schoolId": "m001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "0",
-        "className": "Class-0"
-      }
-    ],
+    "classId": "0",
+    "className": "Class-0",
     "section": "0",
     "name": "Ram Kapoor",
     "studentId": "3302015",
     "schoolId": "m001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "4",
-        "className": "Class-4"
-      }
-    ],
+    "classId": "4",
+    "className": "Class-4",
     "section": "A",
     "name": "Student1",
     "studentId": "3302115",
     "schoolId": "a001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "4",
-        "className": "Class-4"
-      }
-    ],
+    "classId": "4",
+    "className": "Class-4",
     "section": "A",
     "name": "Student2",
     "studentId": "4402115",
     "schoolId": "a001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "4",
-        "className": "Class-4"
-      }
-    ],
+    "classId": "4",
+    "className": "Class-4",
     "section": "A",
     "name": "Student3",
     "studentId": "4402114",
     "schoolId": "a001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "4",
-        "className": "Class-4"
-      }
-    ],
+    "classId": "4",
+    "className": "Class-4",
     "section": "A",
     "name": "Student4",
     "studentId": "4402116",
     "schoolId": "a001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "4",
-        "className": "Class-4"
-      }
-    ],
+    "classId": "4",
+    "className": "Class-4",
     "section": "A",
     "name": "Student5",
     "studentId": "4402117",
     "schoolId": "a001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "4",
-        "className": "Class-4"
-      }
-    ],
+    "classId": "4",
+    "className": "Class-4",
     "section": "A",
     "name": "Student6",
     "studentId": "4402118",
     "schoolId": "a001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "4",
-        "className": "Class-4"
-      }
-    ],
+    "classId": "4",
+    "className": "Class-4",
     "section": "A",
     "name": "Student7",
     "studentId": "4402119",
     "schoolId": "a001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "4",
-        "className": "Class-4"
-      }
-    ],
+    "classId": "4",
+    "className": "Class-4",
     "section": "A",
     "name": "Student8",
     "studentId": "4402120",
     "schoolId": "a001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "4",
-        "className": "Class-4"
-      }
-    ],
+    "classId": "4",
+    "className": "Class-4",
     "section": "A",
     "name": "Student9",
     "studentId": "4402121",
     "schoolId": "a001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "4",
-        "className": "Class-4"
-      }
-    ],
+    "classId": "4",
+    "className": "Class-4",
     "section": "A",
     "name": "Student10",
     "studentId": "4402122",
     "schoolId": "a001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "9",
-        "className": "Class-9"
-      }
-    ],
+    "classId": "9",
+    "className": "Class-9",
     "section": "B",
     "name": "Student1",
     "studentId": "7654321",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "9",
-        "className": "Class-9"
-      }
-    ],
+    "classId": "9",
+    "className": "Class-9",
     "section": "B",
     "name": "Student2",
     "studentId": "7684321",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "9",
-        "className": "Class-9"
-      }
-    ],
+    "classId": "9",
+    "className": "Class-9",
     "section": "B",
     "name": "Student3",
     "studentId": "7694321",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "9",
-        "className": "Class-9"
-      }
-    ],
+    "classId": "9",
+    "className": "Class-9",
     "section": "C",
     "name": "Student1",
     "studentId": "123456789",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "9",
-        "className": "Class-9"
-      }
-    ],
+    "classId": "9",
+    "className": "Class-9",
     "section": "C",
     "name": "Student2",
     "studentId": "123456790",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "9",
-        "className": "Class-9"
-      }
-    ],
+    "classId": "9",
+    "className": "Class-9",
     "section": "C",
     "name": "Student3",
     "studentId": "123456791",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "9",
-        "className": "Class-9"
-      }
-    ],
+    "classId": "9",
+    "className": "Class-9",
     "section": "C",
     "name": "Student4",
     "studentId": "123456792",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "9",
-        "className": "Class-9"
-      }
-    ],
+    "classId": "9",
+    "className": "Class-9",
     "section": "C",
     "name": "Student5",
     "studentId": "123456793",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "9",
-        "className": "Class-9"
-      }
-    ],
+    "classId": "9",
+    "className": "Class-9",
     "section": "C",
     "name": "Student6",
     "studentId": "123456794",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "9",
-        "className": "Class-9"
-      }
-    ],
+    "classId": "9",
+    "className": "Class-9",
     "section": "C",
     "name": "Student7",
     "studentId": "123456795",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "9",
-        "className": "Class-9"
-      }
-    ],
+    "classId": "9",
+    "className": "Class-9",
     "section": "C",
     "name": "Student8",
     "studentId": "123456796",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "9",
-        "className": "Class-9"
-      }
-    ],
+    "classId": "9",
+    "className": "Class-9",
     "section": "C",
     "name": "Student9",
     "studentId": "123456797",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "9",
-        "className": "Class-9"
-      }
-    ],
+    "classId": "9",
+    "className": "Class-9",
     "section": "C",
     "name": "Student10",
     "studentId": "123456798",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "9",
-        "className": "Class-9"
-      }
-    ],
+    "classId": "9",
+    "className": "Class-9",
     "section": "C",
     "name": "Student11",
     "studentId": "123456799",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "9",
-        "className": "Class-9"
-      }
-    ],
+    "classId": "9",
+    "className": "Class-9",
     "section": "C",
     "name": "Student12",
     "studentId": "123456801",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "9",
-        "className": "Class-9"
-      }
-    ],
+    "classId": "9",
+    "className": "Class-9",
     "section": "C",
     "name": "Student13",
     "studentId": "123456802",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "9",
-        "className": "Class-9"
-      }
-    ],
+    "classId": "9",
+    "className": "Class-9",
     "section": "C",
     "name": "Student14",
     "studentId": "123456803",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "9",
-        "className": "Class-9"
-      }
-    ],
+    "classId": "9",
+    "className": "Class-9",
     "section": "C",
     "name": "Student15",
     "studentId": "123456804",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "9",
-        "className": "Class-9"
-      }
-    ],
+    "classId": "9",
+    "className": "Class-9",
     "section": "C",
     "name": "Student16",
     "studentId": "123456805",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "9",
-        "className": "Class-9"
-      }
-    ],
+    "classId": "9",
+    "className": "Class-9",
     "section": "C",
     "name": "Student17",
     "studentId": "123456806",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "A",
     "name": "Ashok",
     "studentId": "1227296",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "A",
     "name": "Shoaib",
     "studentId": "1228400",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "A",
     "name": "Krishna",
     "studentId": "1177582",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "A",
     "name": "Ajeet",
     "studentId": "1189549",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "A",
     "name": "Raja",
     "studentId": "1161011",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "A",
     "name": "Sharad",
     "studentId": "1127166",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "A",
     "name": "Geeta",
     "studentId": "1176655",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "A",
     "name": "Nitu",
     "studentId": "1125711",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "A",
     "name": "Preeti",
     "studentId": "1217546",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "A",
     "name": "Kiran",
     "studentId": "1218325",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "B",
     "name": "Student1",
     "studentId": "130402",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "B",
     "name": "Student2",
     "studentId": "130403",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "B",
     "name": "Student3",
     "studentId": "130404",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "B",
     "name": "Student4",
     "studentId": "130405",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "B",
     "name": "Student5",
     "studentId": "130406",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "3",
-        "className": "Class-3"
-      }
-    ],
+    "classId": "3",
+    "className": "Class-3",
     "section": "A",
     "name": "Student1",
     "studentId": "5500231006789401",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "3",
-        "className": "Class-3"
-      }
-    ],
+    "classId": "3",
+    "className": "Class-3",
     "section": "A",
     "name": "Student2",
     "studentId": "5500231006789701",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "3",
-        "className": "Class-3"
-      }
-    ],
+    "classId": "3",
+    "className": "Class-3",
     "section": "A",
     "name": "Student3",
     "studentId": "5900231006789401",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "3",
-        "className": "Class-3"
-      }
-    ],
+    "classId": "3",
+    "className": "Class-3",
     "section": "A",
     "name": "Student4",
     "studentId": "5500231006589401",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "3",
-        "className": "Class-3"
-      }
-    ],
+    "classId": "3",
+    "className": "Class-3",
     "section": "A",
     "name": "Student5",
     "studentId": "5506231006789401",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "6",
-        "className": "Class-6"
-      }
-    ],
+    "classId": "6",
+    "className": "Class-6",
     "section": "A",
     "name": "Student1",
     "studentId": "2403456",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "6",
-        "className": "Class-6"
-      }
-    ],
+    "classId": "6",
+    "className": "Class-6",
     "section": "A",
     "name": "Student2",
     "studentId": "2403457",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "6",
-        "className": "Class-6"
-      }
-    ],
+    "classId": "6",
+    "className": "Class-6",
     "section": "A",
     "name": "Student3",
     "studentId": "2403458",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "6",
-        "className": "Class-6"
-      }
-    ],
+    "classId": "6",
+    "className": "Class-6",
     "section": "A",
     "name": "Student4",
     "studentId": "2403459",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "6",
-        "className": "Class-6"
-      }
-    ],
+    "classId": "6",
+    "className": "Class-6",
     "section": "A",
     "name": "Student5",
     "studentId": "2405458",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "7",
-        "className": "Class-7"
-      }
-    ],
+    "classId": "7",
+    "className": "Class-7",
     "section": "B",
     "name": "Student1",
     "studentId": "2200102",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "7",
-        "className": "Class-7"
-      }
-    ],
+    "classId": "7",
+    "className": "Class-7",
     "section": "B",
     "name": "Student2",
     "studentId": "2200103",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "7",
-        "className": "Class-7"
-      }
-    ],
+    "classId": "7",
+    "className": "Class-7",
     "section": "B",
     "name": "Student3",
     "studentId": "2200104",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "7",
-        "className": "Class-7"
-      }
-    ],
+    "classId": "7",
+    "className": "Class-7",
     "section": "B",
     "name": "Student4",
     "studentId": "2200105",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "7",
-        "className": "Class-7"
-      }
-    ],
+    "classId": "7",
+    "className": "Class-7",
     "section": "B",
     "name": "Student5",
     "studentId": "2200106",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "7",
-        "className": "Class-7"
-      }
-    ],
+    "classId": "7",
+    "className": "Class-7",
     "section": "B",
     "name": "Student6",
     "studentId": "2200107",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "7",
-        "className": "Class-7"
-      }
-    ],
+    "classId": "7",
+    "className": "Class-7",
     "section": "B",
     "name": "Student8",
     "studentId": "2200108",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "7",
-        "className": "Class-7"
-      }
-    ],
+    "classId": "7",
+    "className": "Class-7",
     "section": "B",
     "name": "Student9",
     "studentId": "2200109",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "7",
-        "className": "Class-7"
-      }
-    ],
+    "classId": "7",
+    "className": "Class-7",
     "section": "B",
     "name": "Student10",
     "studentId": "2200110",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "7",
-        "className": "Class-7"
-      }
-    ],
+    "classId": "7",
+    "className": "Class-7",
     "section": "B",
     "name": "Student11",
     "studentId": "2200111",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "7",
-        "className": "Class-7"
-      }
-    ],
+    "classId": "7",
+    "className": "Class-7",
     "section": "B",
     "name": "Student12",
     "studentId": "2200112",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "7",
-        "className": "Class-7"
-      }
-    ],
+    "classId": "7",
+    "className": "Class-7",
     "section": "B",
     "name": "Student13",
     "studentId": "2200113",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "7",
-        "className": "Class-7"
-      }
-    ],
+    "classId": "7",
+    "className": "Class-7",
     "section": "B",
     "name": "Student14",
     "studentId": "2200114",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "7",
-        "className": "Class-7"
-      }
-    ],
+    "classId": "7",
+    "className": "Class-7",
     "section": "B",
     "name": "Student15",
     "studentId": "2200115",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "7",
-        "className": "Class-7"
-      }
-    ],
+    "classId": "7",
+    "className": "Class-7",
     "section": "B",
     "name": "Student16",
     "studentId": "2200116",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "7",
-        "className": "Class-7"
-      }
-    ],
+    "classId": "7",
+    "className": "Class-7",
     "section": "B",
     "name": "Student17",
     "studentId": "2200117",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "7",
-        "className": "Class-7"
-      }
-    ],
+    "classId": "7",
+    "className": "Class-7",
     "section": "B",
     "name": "Student18",
     "studentId": "2200118",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "7",
-        "className": "Class-7"
-      }
-    ],
+    "classId": "7",
+    "className": "Class-7",
     "section": "B",
     "name": "Student19",
     "studentId": "2200119",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "7",
-        "className": "Class-7"
-      }
-    ],
+    "classId": "7",
+    "className": "Class-7",
     "section": "B",
     "name": "Student20",
     "studentId": "2200120",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "7",
-        "className": "Class-7"
-      }
-    ],
+    "classId": "7",
+    "className": "Class-7",
     "section": "B",
     "name": "Student21",
     "studentId": "2200121",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "8",
-        "className": "Class-8"
-      }
-    ],
+    "classId": "8",
+    "className": "Class-8",
     "section": "B",
     "name": "Student1",
     "studentId": "8171061",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "8",
-        "className": "Class-8"
-      }
-    ],
+    "classId": "8",
+    "className": "Class-8",
     "section": "B",
     "name": "Student2",
     "studentId": "8171062",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "8",
-        "className": "Class-8"
-      }
-    ],
+    "classId": "8",
+    "className": "Class-8",
     "section": "B",
     "name": "Student3",
     "studentId": "8171063",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "8",
-        "className": "Class-8"
-      }
-    ],
+    "classId": "8",
+    "className": "Class-8",
     "section": "B",
     "name": "Student4",
     "studentId": "8171064",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "8",
-        "className": "Class-8"
-      }
-    ],
+    "classId": "8",
+    "className": "Class-8",
     "section": "B",
     "name": "Student5",
     "studentId": "8171065",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "4",
-        "className": "Class-4"
-      }
-    ],
+    "classId": "4",
+    "className": "Class-4",
     "section": "B",
     "name": "Student1",
     "studentId": "4057081",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "4",
-        "className": "Class-4"
-      }
-    ],
+    "classId": "4",
+    "className": "Class-4",
     "section": "B",
     "name": "Student2",
     "studentId": "4069902",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "4",
-        "className": "Class-4"
-      }
-    ],
+    "classId": "4",
+    "className": "Class-4",
     "section": "B",
     "name": "Student3",
     "studentId": "5178604",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "4",
-        "className": "Class-4"
-      }
-    ],
+    "classId": "4",
+    "className": "Class-4",
     "section": "B",
     "name": "Student4",
     "studentId": "6121007",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "4",
-        "className": "Class-4"
-      }
-    ],
+    "classId": "4",
+    "className": "Class-4",
     "section": "B",
     "name": "Student5",
     "studentId": "8102779",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "4",
-        "className": "Class-4"
-      }
-    ],
+    "classId": "4",
+    "className": "Class-4",
     "section": "B",
     "name": "Student6",
     "studentId": "4179208",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "4",
-        "className": "Class-4"
-      }
-    ],
+    "classId": "4",
+    "className": "Class-4",
     "section": "B",
     "name": "Student7",
     "studentId": "1423456",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "4",
-        "className": "Class-4"
-      }
-    ],
+    "classId": "4",
+    "className": "Class-4",
     "section": "B",
     "name": "Student8",
     "studentId": "7891011",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "4",
-        "className": "Class-4"
-      }
-    ],
+    "classId": "4",
+    "className": "Class-4",
     "section": "B",
     "name": "Student9",
     "studentId": "1213141",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "4",
-        "className": "Class-4"
-      }
-    ],
+    "classId": "4",
+    "className": "Class-4",
     "section": "B",
     "name": "Student10",
     "studentId": "5161718",
     "schoolId": "09670702901"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "A",
     "name": "Sangeeta",
     "studentId": "1169731",
     "schoolId": "09670703101"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "A",
     "name": "Khushboo",
     "studentId": "1145443",
     "schoolId": "09670703101"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "A",
     "name": "Vijay",
     "studentId": "1181783",
     "schoolId": "09670703101"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "A",
     "name": "Laxmi",
     "studentId": "1136408",
     "schoolId": "09670703101"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "A",
     "name": "Sadhana",
     "studentId": "1121238",
     "schoolId": "09670703101"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "A",
     "name": "Shruti",
     "studentId": "1222699",
     "schoolId": "09670703101"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "A",
     "name": "Tanu",
     "studentId": "1195624",
     "schoolId": "09670703101"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "A",
     "name": "Tanweer",
     "studentId": "1139534",
     "schoolId": "09670703101"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "A",
     "name": "Lavanya",
     "studentId": "1135255",
     "schoolId": "09670703101"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "A",
     "name": "Khushboo",
     "studentId": "1210888",
     "schoolId": "09670703101"
   },
   {
-    "studentClass": [
-      {
-        "classId": "1",
-        "className": "Class-1"
-      }
-    ],
+    "classId": "1",
+    "className": "Class-1",
     "section": "A",
     "name": "Student1",
     "studentId": "121088801",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "1",
-        "className": "Class-1"
-      }
-    ],
+    "classId": "1",
+    "className": "Class-1",
     "section": "A",
     "name": "Student2",
     "studentId": "121088802",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "1",
-        "className": "Class-1"
-      }
-    ],
+    "classId": "1",
+    "className": "Class-1",
     "section": "A",
     "name": "Student3",
     "studentId": "121088803",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "1",
-        "className": "Class-1"
-      }
-    ],
+    "classId": "1",
+    "className": "Class-1",
     "section": "A",
     "name": "Student4",
     "studentId": "121088804",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "1",
-        "className": "Class-1"
-      }
-    ],
+    "classId": "1",
+    "className": "Class-1",
     "section": "A",
     "name": "Student5",
     "studentId": "121088805",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "9",
-        "className": "Class-9"
-      }
-    ],
+    "classId": "9",
+    "className": "Class-9",
     "section": "C",
     "name": "Student18",
     "studentId": "123786549",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "9",
-        "className": "Class-9"
-      }
-    ],
+    "classId": "9",
+    "className": "Class-9",
     "section": "C",
     "name": "Student19",
     "studentId": "343216589",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "9",
-        "className": "Class-9"
-      }
-    ],
+    "classId": "9",
+    "className": "Class-9",
     "section": "C",
     "name": "Student20",
     "studentId": "675909024",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "9",
-        "className": "Class-9"
-      }
-    ],
+    "classId": "9",
+    "className": "Class-9",
     "section": "C",
     "name": "Student21",
     "studentId": "387654321",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "9",
-        "className": "Class-9"
-      }
-    ],
+    "classId": "9",
+    "className": "Class-9",
     "section": "C",
     "name": "Student22",
     "studentId": "233898716",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "9",
-        "className": "Class-9"
-      }
-    ],
+    "classId": "9",
+    "className": "Class-9",
     "section": "C",
     "name": "Student23",
     "studentId": "233567894",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "9",
-        "className": "Class-9"
-      }
-    ],
+    "classId": "9",
+    "className": "Class-9",
     "section": "C",
     "name": "Student24",
     "studentId": "123345768",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "9",
-        "className": "Class-9"
-      }
-    ],
+    "classId": "9",
+    "className": "Class-9",
     "section": "C",
     "name": "Student25",
     "studentId": "123456787",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "9",
-        "className": "Class-9"
-      }
-    ],
+    "classId": "9",
+    "className": "Class-9",
     "section": "C",
     "name": "Student26",
     "studentId": "128976463",
     "schoolId": "u001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "A",
     "name": "Student1",
     "studentId": "45678901231",
     "schoolId": "jk001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "A",
     "name": "Student2",
     "studentId": "45678901232",
     "schoolId": "jk001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "A",
     "name": "Student3",
     "studentId": "45678901233",
     "schoolId": "jk001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "A",
     "name": "Student4",
     "studentId": "45678901234",
     "schoolId": "jk001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "A",
     "name": "Student5",
     "studentId": "45678901235",
     "schoolId": "jk001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "A",
     "name": "Student6",
     "studentId": "45678901236",
     "schoolId": "jk001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "A",
     "name": "Student7",
     "studentId": "45678901237",
     "schoolId": "jk001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "A",
     "name": "Student8",
     "studentId": "45678901238",
     "schoolId": "jk001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "A",
     "name": "Student9",
     "studentId": "45678901239",
     "schoolId": "jk001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "2",
-        "className": "Class-2"
-      }
-    ],
+    "classId": "2",
+    "className": "Class-2",
     "section": "A",
     "name": "Student10",
     "studentId": "45678901240",
     "schoolId": "jk001"
   },
   {
-    "studentClass": [
-      {
-        "classId": "6",
-        "className": "Class-6"
-      }
-    ],
+    "classId": "6",
+    "className": "Class-6",
     "section": "A",
     "name": "Student1",
     "studentId": "876543210",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "6",
-        "className": "Class-6"
-      }
-    ],
+    "classId": "6",
+    "className": "Class-6",
     "section": "A",
     "name": "Student2",
     "studentId": "987654345",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "6",
-        "className": "Class-6"
-      }
-    ],
+    "classId": "6",
+    "className": "Class-6",
     "section": "A",
     "name": "Student3",
     "studentId": "187654345",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "6",
-        "className": "Class-6"
-      }
-    ],
+    "classId": "6",
+    "className": "Class-6",
     "section": "A",
     "name": "Student4",
     "studentId": "287654367",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "6",
-        "className": "Class-6"
-      }
-    ],
+    "classId": "6",
+    "className": "Class-6",
     "section": "A",
     "name": "Student5",
     "studentId": "907654389",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "6",
-        "className": "Class-6"
-      }
-    ],
+    "classId": "6",
+    "className": "Class-6",
     "section": "A",
     "name": "Student6",
     "studentId": "900654390",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "9",
-        "className": "Class-9"
-      }
-    ],
+    "classId": "9",
+    "className": "Class-9",
     "section": "A",
     "name": "Student1",
     "studentId": "1210003456789",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "7",
-        "className": "Class-7"
-      }
-    ],
+    "classId": "7",
+    "className": "Class-7",
     "section": "A",
     "name": "Student1",
     "studentId": "200654345",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "7",
-        "className": "Class-7"
-      }
-    ],
+    "classId": "7",
+    "className": "Class-7",
     "section": "A",
     "name": "Student2",
     "studentId": "300654356",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "7",
-        "className": "Class-7"
-      }
-    ],
+    "classId": "7",
+    "className": "Class-7",
     "section": "A",
     "name": "Student3",
     "studentId": "400654367",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "7",
-        "className": "Class-7"
-      }
-    ],
+    "classId": "7",
+    "className": "Class-7",
     "section": "A",
     "name": "Student5",
     "studentId": "500654390",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "7",
-        "className": "Class-7"
-      }
-    ],
+    "classId": "7",
+    "className": "Class-7",
     "section": "A",
     "name": "Student6",
     "studentId": "600654389",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "8",
-        "className": "Class-8"
-      }
-    ],
+    "classId": "8",
+    "className": "Class-8",
     "section": "A",
     "name": "Student1",
     "studentId": "210654367",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "8",
-        "className": "Class-8"
-      }
-    ],
+    "classId": "8",
+    "className": "Class-8",
     "section": "A",
     "name": "Student2",
     "studentId": "220654321",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "8",
-        "className": "Class-8"
-      }
-    ],
+    "classId": "8",
+    "className": "Class-8",
     "section": "A",
     "name": "Student3",
     "studentId": "230654389",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "8",
-        "className": "Class-8"
-      }
-    ],
+    "classId": "8",
+    "className": "Class-8",
     "section": "A",
     "name": "Student4",
     "studentId": "240654390",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "8",
-        "className": "Class-8"
-      }
-    ],
+    "classId": "8",
+    "className": "Class-8",
     "section": "A",
     "name": "Student5",
     "studentId": "250654367",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "8",
-        "className": "Class-8"
-      }
-    ],
+    "classId": "8",
+    "className": "Class-8",
     "section": "A",
     "name": "Student6",
     "studentId": "260654389",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "3",
-        "className": "Class-3"
-      }
-    ],
+    "classId": "3",
+    "className": "Class-3",
     "section": "A",
     "name": "Student1",
     "studentId": "440400189",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "3",
-        "className": "Class-3"
-      }
-    ],
+    "classId": "3",
+    "className": "Class-3",
     "section": "A",
     "name": "Student2",
     "studentId": "440400290",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "3",
-        "className": "Class-3"
-      }
-    ],
+    "classId": "3",
+    "className": "Class-3",
     "section": "A",
     "name": "Student3",
     "studentId": "440400345",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "3",
-        "className": "Class-3"
-      }
-    ],
+    "classId": "3",
+    "className": "Class-3",
     "section": "A",
     "name": "Student4",
     "studentId": "440400478",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "3",
-        "className": "Class-3"
-      }
-    ],
+    "classId": "3",
+    "className": "Class-3",
     "section": "A",
     "name": "Student5",
     "studentId": "440400599",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "3",
-        "className": "Class-3"
-      }
-    ],
+    "classId": "3",
+    "className": "Class-3",
     "section": "A",
     "name": "Student6",
     "studentId": "440400612",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "3",
-        "className": "Class-3"
-      }
-    ],
+    "classId": "3",
+    "className": "Class-3",
     "section": "A",
     "name": "Student7",
     "studentId": "440400723",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "3",
-        "className": "Class-3"
-      }
-    ],
+    "classId": "3",
+    "className": "Class-3",
     "section": "A",
     "name": "Student8",
     "studentId": "440400856",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "4",
-        "className": "Class-4"
-      }
-    ],
+    "classId": "4",
+    "className": "Class-4",
     "section": "A",
     "name": "Student1",
     "studentId": "450400178",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "4",
-        "className": "Class-4"
-      }
-    ],
+    "classId": "4",
+    "className": "Class-4",
     "section": "A",
     "name": "Student2",
     "studentId": "450400289",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "4",
-        "className": "Class-4"
-      }
-    ],
+    "classId": "4",
+    "className": "Class-4",
     "section": "A",
     "name": "Student3",
     "studentId": "450400399",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "4",
-        "className": "Class-4"
-      }
-    ],
+    "classId": "4",
+    "className": "Class-4",
     "section": "A",
     "name": "Student4",
     "studentId": "450400445",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "4",
-        "className": "Class-4"
-      }
-    ],
+    "classId": "4",
+    "className": "Class-4",
     "section": "A",
     "name": "Student5",
     "studentId": "450400544",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "4",
-        "className": "Class-4"
-      }
-    ],
+    "classId": "4",
+    "className": "Class-4",
     "section": "A",
     "name": "Student6",
     "studentId": "450400699",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "4",
-        "className": "Class-4"
-      }
-    ],
+    "classId": "4",
+    "className": "Class-4",
     "section": "A",
     "name": "Student7",
     "studentId": "450400799",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "4",
-        "className": "Class-4"
-      }
-    ],
+    "classId": "4",
+    "className": "Class-4",
     "section": "A",
     "name": "Student8",
     "studentId": "450400823",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "1",
-        "className": "Class-1"
-      }
-    ],
+    "classId": "1",
+    "className": "Class-1",
     "section": "A",
     "name": "Student1",
     "studentId": "410400123",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "1",
-        "className": "Class-1"
-      }
-    ],
+    "classId": "1",
+    "className": "Class-1",
     "section": "A",
     "name": "Student2",
     "studentId": "410400234",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "1",
-        "className": "Class-1"
-      }
-    ],
+    "classId": "1",
+    "className": "Class-1",
     "section": "A",
     "name": "Student3",
     "studentId": "410400356",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "1",
-        "className": "Class-1"
-      }
-    ],
+    "classId": "1",
+    "className": "Class-1",
     "section": "A",
     "name": "Student4",
     "studentId": "410400490",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "1",
-        "className": "Class-1"
-      }
-    ],
+    "classId": "1",
+    "className": "Class-1",
     "section": "A",
     "name": "Student5",
     "studentId": "410400589",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "1",
-        "className": "Class-1"
-      }
-    ],
+    "classId": "1",
+    "className": "Class-1",
     "section": "A",
     "name": "Student6",
     "studentId": "410400667",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "1",
-        "className": "Class-1"
-      }
-    ],
+    "classId": "1",
+    "className": "Class-1",
     "section": "A",
     "name": "Student7",
     "studentId": "410400789",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "1",
-        "className": "Class-1"
-      }
-    ],
+    "classId": "1",
+    "className": "Class-1",
     "section": "A",
     "name": "Student8",
     "studentId": "410400890",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "A",
     "name": "Student1",
     "studentId": "987654321",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "A",
     "name": "Student2",
     "studentId": "678909024",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "A",
     "name": "Student3",
     "studentId": "345216589",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "A",
     "name": "Student4",
     "studentId": "121786549",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "A",
     "name": "Student5",
     "studentId": "234898716",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "A",
     "name": "Student6",
     "studentId": "234567894",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "A",
     "name": "Student7",
     "studentId": "121345768",
     "schoolId": "u002"
   },
   {
-    "studentClass": [
-      {
-        "classId": "5",
-        "className": "Class-5"
-      }
-    ],
+    "classId": "5",
+    "className": "Class-5",
     "section": "A",
     "name": "Student8",
     "studentId": "121456787",

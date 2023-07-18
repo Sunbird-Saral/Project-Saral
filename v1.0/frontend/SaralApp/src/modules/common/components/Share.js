@@ -1,5 +1,5 @@
 import React, { Component, useCallback, useState, useEffect } from 'react';
-import { Alert, View, TouchableOpacity, Text, Modal, Linking } from 'react-native';
+import { Alert, View, TouchableOpacity, Text, Modal, Linking,Image } from 'react-native';
 
 //redux
 import { connect, useDispatch } from 'react-redux';
@@ -28,6 +28,7 @@ import { getScannedDataFromLocal, eraseErrorLogs, getErrorMessage, erasesetLogin
 import C from '../../../flux/actions/constants'
 import { monospace_FF } from '../../../utils/CommonUtils';
 import Share from 'react-native-share';
+import { Assets } from '../../../assets';
 
 
 const ShareComponent = ({
@@ -35,7 +36,8 @@ const ShareComponent = ({
   message,
   navigation,
   multiBrandingData,
-  bgFlag
+  bgFlag,
+  onPress
 }) => {
   const [ishidden, setIshidden] = useState(false)
   const dispatch = useDispatch()
@@ -174,14 +176,26 @@ const ShareComponent = ({
   const showModal = () => {
     setIshidden(!ishidden);
   };
+
+  const dashboard =()=>{
+    navigation.navigate('selectDetails')
+  }
   return (
     <View>
 
       <View style={styles.imageViewContainer}>
-        <TouchableOpacity onPress={() => showModal()} style={[styles.imageContainerStyle, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE }]}>
+        <View style={{flexDirection:'row',justifyContent:'space-between',margin:5}}>
+          <TouchableOpacity onPress={onPress}>
+            <Image style={{width:35,height:35}} source={Assets.leftArrow}/>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={{marginRight:10,backgroundColor:  '#ACCCCE' ,width:30,height:30,borderRadius:15,justifyContent:'center',alignItems:'center' }} onPress={() => showModal()}>
+            <Image style={{width:21,height:21}} source={Assets.user}/>
+          </TouchableOpacity>
+        {/* <TouchableOpacity onPress={() => showModal()} style={[styles.imageContainerStyle, { backgroundColor: multiBrandingData.themeColor1 ? multiBrandingData.themeColor1 : AppTheme.LIGHT_BLUE }]}>
             <Text style={{  fontSize: AppTheme.HEADER_FONT_SIZE_LARGE, fontFamily: monospace_FF }}>{loginData.data.school.name.charAt(0)}</Text>
-        </TouchableOpacity>
-      </View>
+        </TouchableOpacity> */}
+        </View>
 
 
       <Modal
@@ -205,11 +219,13 @@ const ShareComponent = ({
             onLogoutClick={Logoutcall}
             aboutMenu={aboutMenu}
             helpMenu={helpMenu}
+            onDashboardClick={dashboard}
             navigation={navigation}
           />
 
         </TouchableOpacity>
       </Modal>
+    </View>
     </View>
   )
 }
@@ -241,8 +257,7 @@ const styles = {
 
   imageViewContainer: {
 
-    alignItems: 'flex-end',
-    backgroundColor: '#fff'
+   
   },
   imageContainerStyle: {
      marginRight: 10,

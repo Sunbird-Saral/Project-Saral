@@ -47,7 +47,7 @@ const ScanDataModal = ({
             getPresentStudentList(localstutlist)
             getStudentList()
         } else {
-            let hasSet = filteredData ? filteredData.hasOwnProperty("set") ? filteredData.set.length >= 0 ? filteredData.set : "" : null : ""
+            let hasSet = filteredData ? filteredData.hasOwnProperty("set") ? filteredData.set.length >= 0 ? filteredData.set : "" : null : null
             if (hasSet != null && hasSet.length >= 0) {
                 getPresentStudentList(localstutlist)
             } else {
@@ -88,7 +88,8 @@ const ScanDataModal = ({
         dispatch(dispatchCustomModalStatus(true));
         dispatch(dispatchCustomModalMessage(data));
     }
-    const subject = `Saral App v1.0 Marks JSON - SchoolId:${loginData.data.school.schoolId} & Exam Id:${filteredData.examTestID}`
+
+    const subject = `Saral App v1.0 Marks JSON - SchoolId:${loginData.data.school.schoolId} ${!minimalFlag ? ` & Exam Id:${filteredData.examTestID}` : "" }`
     const message = `${(dataForShare ? dataForShare : '')}`;
 
    

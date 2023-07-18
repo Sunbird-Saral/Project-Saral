@@ -5,20 +5,17 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.facebook.react.bridge.ActivityEventListener;
-import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 
 import org.ekstep.saral.saralsdk.commons.FileOps;
-import org.ekstep.saral.saralsdk.hwmodel.HWClassifier;
-import org.ekstep.saral.saralsdk.hwmodel.HWClassifierStatusListener;
 import org.ekstep.saral.saralsdk.hwmodel.HWBlockLettersClassifier;
 import org.ekstep.saral.saralsdk.hwmodel.HWBlockLettersClassifierStatusListener;
-import org.json.JSONArray;
-import org.json.JSONException;
+import org.ekstep.saral.saralsdk.hwmodel.HWClassifier;
+import org.ekstep.saral.saralsdk.hwmodel.HWClassifierStatusListener;
+import org.ekstep.saral.saralsdk.hwmodel.RemoteConfig;
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
@@ -48,8 +45,12 @@ public class SaralSDKModule extends ReactContextBaseJavaModule implements Activi
 
         context.addActivityEventListener(this);
         FileOps.getInstance().initialize(context);
-
-        Log.d(TAG, "SaralSDKModule loaded, trying to load OpenCV libs & Models");
+        
+        RemoteConfig remoteConfig = new RemoteConfig();
+        boolean isFBDownloadModelEnable = remoteConfig.isFBDownloadModelEnable(context);	
+        	
+        Log.d(TAG, "SaralSDKModule loaded, trying to load OpenCV libs & Models isFBDownloadModelEnable=> "+isFBDownloadModelEnable);
+        
         if (!OpenCVLoader.initDebug()) {
             Log.d(TAG, "Internal OpenCV library not found. Using OpenCV Manager for initialization");
             OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION, getReactApplicationContext(), mLoaderCallback);
@@ -69,7 +70,7 @@ public class SaralSDKModule extends ReactContextBaseJavaModule implements Activi
             public void OnModelLoadError(String message) {
                 Log.d(TAG, "HWClassifer model cannot be loaded :" + message);
             }
-        });
+        },isFBDownloadModelEnable, context);
 
         HWBlockLettersClassifier.getInstance();
         Log.d(TAG, "Loading HWBlockLettersClassifier models");
@@ -83,7 +84,7 @@ public class SaralSDKModule extends ReactContextBaseJavaModule implements Activi
             public void OnModelLoadError(String message) {
                 Log.d(TAG, "HWBlockLettersClassifier model cannot be loaded :" + message);
             }
-        });
+        },isFBDownloadModelEnable, context);
 
     }
 
@@ -93,7 +94,7 @@ public class SaralSDKModule extends ReactContextBaseJavaModule implements Activi
     }
 
     @ReactMethod
-    void startCamera(String layoutSchema,String page, Promise promise) {
+    void startCamera(String layoutSchema,String page, int hasTimer, boolean isManualEditEnabled, Promise promise) {
         Log.d(TAG, "startCamera called with: " + layoutSchema);
         Log.d(TAG, "startCamera called with: " + page);
 
@@ -105,6 +106,8 @@ public class SaralSDKModule extends ReactContextBaseJavaModule implements Activi
         Intent intent                   = new Intent(currentActivity, SaralSDKOpenCVScannerActivity.class);
         intent.putExtra("layoutConfigs", layoutSchema);
         intent.putExtra("page", page);
+        intent.putExtra("timer", hasTimer);
+        intent.putExtra("isManualEditEnabled", isManualEditEnabled);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         currentActivity.startActivity(intent);
     }
@@ -122,6 +125,9 @@ public class SaralSDKModule extends ReactContextBaseJavaModule implements Activi
         if (requestCode == 1) {
             Log.d(TAG, "Response: " + data.getStringExtra("layoutConfigsResult"));
             this.mPromise.resolve(data.getStringExtra("layoutConfigsResult"));
+        } else if (requestCode == 2) {
+            Log.d(TAG, "Response: " + data.getStringExtra("isModelAvailable"));
+            this.mPromise.resolve(data.getStringExtra("isModelAvailable"));
         }
     }
 

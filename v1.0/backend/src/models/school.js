@@ -10,8 +10,8 @@ const schoolSchema = new mongoose.Schema({
     },
     schoolId: {
         type: String,
-        unique: true,
         required: true,
+        unique: true,
         trim: true,
     },
     state:{
@@ -57,13 +57,47 @@ const schoolSchema = new mongoose.Schema({
         type: Boolean,
         required: false
     },
+    isManualEditEnabled: { 
+        type: Boolean,
+        required: false
+    },
+    scanTimeoutMs: { 
+        type: Number,
+        required: false
+    },
     district:{
         type: String,
         required: true
-    }
+    },
+    isFBAnalyticsEnabled: {
+        type: Boolean,
+        required: false,
+    },
+    block:{
+        type: String,
+        required: false
+    },
+    useCase2:{
+        type: Boolean,
+        required: false
+    },
+    useCase3:{
+        type: Boolean,
+        required: false
+    },
+    useCase4:{
+        type: Boolean,
+        required: false
+    },
+    useCase5:{
+        type: Boolean,
+        required: false
+    },
 }, {
     timestamps: false
 })
+
+
 
 
 // Hiding private data
@@ -77,6 +111,6 @@ schoolSchema.methods.toJSON = function () {
     return schoolObject
 }
 
-const School = mongoose.model('School', schoolSchema)
+const Schools = mongoose.model('School', schoolSchema)
 
-module.exports = School
+module.exports = Schools

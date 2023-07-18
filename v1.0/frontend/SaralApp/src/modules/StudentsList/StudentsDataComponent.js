@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { Alert, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, Text, TouchableOpacity, View, Switch, Dimensions } from 'react-native';
 import AppTheme from '../../utils/AppTheme';
 import { checkNetworkConnectivity, dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF } from '../../utils/CommonUtils';
 import { getScannedDataFromLocal, setScannedDataIntoLocal } from '../../utils/StorageUtils';
 import Strings from '../../utils/Strings';
 import { styles } from './StudentsDataStyle';
-
+import MarksHeaderTable from '../ScannedDetails/MarksHeaderTable';
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 const StudentsDataComponent = ({
     item,
     themeColor1,
@@ -16,10 +18,12 @@ const StudentsDataComponent = ({
     setStdArray,
     filteredData,
     dispatch,
-    loginData
+    loginData,
+    index
 }) => {
     const [isPresent, setIsPresent] = useState(pabsent)
-
+    const [isEnabled, setIsEnabled] = useState(false);
+    const toggleSwitch = () => setIsEnabled(previousState => !previousState);
     const checkStdAbsPrst = (data, chkPresent, filteredData, valid) => {
         if (chkPresent) {
             stdArray.forEach(element => {
@@ -60,7 +64,7 @@ const StudentsDataComponent = ({
             })
 
             if (filterStdData.length > 0) {
-                isStudentScannedInLocal = filterStdData[0].studentsMarkInfo.filter((o) => { 
+                isStudentScannedInLocal = filterStdData[0].studentsMarkInfo.filter((o) => {
                     if (hasSet != null && hasSet.length >= 0) {
                         return o.studentId == data.studentId && o.studentAvailability === true && o.marksInfo.length > 0 && hasSet == o.set
                     } else {
@@ -94,7 +98,6 @@ const StudentsDataComponent = ({
                 setIsPresent(false)
                 checkStdAbsPrst(data, chkPresent, filteredData, false)
             }
-
             if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode && (isSheetScanned.length == 0 && isStudentScannedInLocal.length == 0)) {
                 saveStudentIntoLocalStorage(data.studentId, isStudentPresent, filterStdData, stdData)
             } 
@@ -125,7 +128,7 @@ const StudentsDataComponent = ({
             "studentAvailability": !studentAvailability
         }
 
-        let hasSet = filteredData.hasOwnProperty("set") ? filteredData.set.length >= 0 ? filteredData.set : '' : null
+        let hasSet = filteredData.hasOwnProperty("set") ? filteredData.set.length >= 0 ? filteredData.set : '' : '' 
         if(hasSet != null && hasSet.length >= 0){
             stdObj.set = hasSet
         }
@@ -164,30 +167,53 @@ const StudentsDataComponent = ({
             }
         }
     }
-
     return (
-        <View style={[styles.cardCon, { backgroundColor: themeColor1 ? themeColor1 : AppTheme.BLUE }]}>
-            <View style={[styles.cardChildCon, { backgroundColor: "#ffffffED" }]}>
-
-                <Text style={styles.aadhar}>{item.studentId}</Text>
-                <View style={styles.line} />
-                <Text style={styles.aadhar}>{item.name}</Text>
-                <View style={styles.line} />
-
-                <TouchableOpacity
+        <View style={{flex:1, flexDirection:'row',margin:5,justifyContent:'space-around', alignItems:'center'}}>
+            <View style={{flexDirection:"row",width:'80%',height:50}}>
+             <View style={{width:'18%',borderWidth:1, borderRightWidth:0, borderColor:'#DADADA', justifyContent:'center',alignItems:'center',backgroundColor:AppTheme.WHITE}}>
+             <Text style={{fontSize:18}}>{index + 1}</Text>
+             </View>
+             
+             <View style={{width:'80%' ,backgroundColor:AppTheme.WHITE}}>
+             <View style={{borderWidth:1,borderColor:'#DADADA',height:item.name.length > 50 ?40 : 25,justifyContent:'center'}}>
+             <Text style={{marginLeft:10,fontWeight:'bold'}}>{`${item.name} `} <Text style={{fontWeight:'normal'}}>{`${item.fatherName ? '(' + item.fatherName + ')': '' }`}</Text></Text>
+             </View>
+             <View style={{borderWidth:1,borderTopWidth:0, borderColor:'#DADADA',height:25,justifyContent:'center'}}>
+             <Text style={{marginLeft:10}}>{item.studentId}</Text>
+             </View>
+             </View>
+             </View>
+             <View style={{width:'15%'}}>
+             
+                            <TouchableOpacity
                     activeOpacity={0.7}
                     onPress={() => onBtnClick(item)}
+                    // style={{width:'20%'}}
                 >
-                    {
-                        isPresent
+                  
+{
+                        !isPresent
                             ?
-                            <Text style={[styles.markasAbsent, { backgroundColor: themeColor1 ? themeColor1 : AppTheme.LIGHT_BLUE,fontFamily : monospace_FF }]}>{Strings.Mark_Absent}</Text>
+                            <View style={{backgroundColor: '#e5b6b3',width:54,height:24,borderRadius:10}}>
+                            <View style={{flexDirection:"row",justifyContent:'space-between',alignItems:'center'}}>
+                             <View style={{backgroundColor:'red',width:22,height:22,borderRadius:11,top:1}}></View>
+                             <Text style={{marginRight:12,color:'red',fontWeight:"bold"}}>{'A'}</Text>
+                             </View>
+                             </View>
+                            
                             :
-                            <Text style={[styles.markasPresent, { backgroundColor: themeColor2 ? themeColor2 : AppTheme.LIGHT_BLUE,fontFamily : monospace_FF }]}>{Strings.Mark_Present}</Text>
+                            <View style={{backgroundColor:themeColor2 ? '#93CECE' : AppTheme.BLUE,width:54,height:24,borderRadius:10}}>
+                           <View style={{flexDirection:"row",justifyContent:'space-between',alignItems:'center'}}>
+                            <Text style={{marginLeft:12,color:themeColor1,fontWeight:'bold'}}>{'P'}</Text>
+                            <View style={{backgroundColor:themeColor1,width:22,height:22,borderRadius:11,top:1}}></View>
+                            </View>
+                            </View>
+                           
                     }
-                </TouchableOpacity>
-
-            </View>
+                    </TouchableOpacity>
+                    </View>            
+                                       
+            
         </View>
     );
 }

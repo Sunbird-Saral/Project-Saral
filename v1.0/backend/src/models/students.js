@@ -12,27 +12,37 @@ const studentSchema = new mongoose.Schema({
         required: true,
         trim: true,
     },
-    studentClass: {
-        type: Array,
-        default: {
-            classId: "2",
-            className: 'Class-2'
-        }
+    fatherName: {
+        type: String,
+        required: false,
+        trim: true,
+    },
+    classId: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    className:{
+        type: String,
+        required: true,
+        trim: true
+    },
+    schoolId: {
+        type: String,
+        required: true,
+        ref: 'School'
     },
     section: {
         type: String,
         trim: true,
         uppercase: true,
         default: "A"
-    },
-    schoolId: {
-        type: String,
-        required: true,
-        ref: 'School'
     }
 }, {
     timestamps: true
 })
+
+studentSchema.index({classId: -1, className: -1, schoolId: -1, section: -1})
 
 //model method created
 studentSchema.statics.getStudentsCountByClassAndSection = async (schoolId, classId, section) => {
@@ -62,6 +72,6 @@ studentSchema.statics.getStudentsCountByClassAndSection = async (schoolId, class
 }
 
 
-const Student = mongoose.model('Student', studentSchema)
+const Students = mongoose.model('Student', studentSchema)
 
-module.exports = Student
+module.exports = Students

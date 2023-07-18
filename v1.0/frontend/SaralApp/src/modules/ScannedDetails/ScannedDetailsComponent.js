@@ -70,7 +70,7 @@ const ScannedDetailsComponent = ({
     const [isStudentValid, setIsStudentValid] = useState(false);
     const [multiPageStdId, setMultipageStdId] = useState();
 
-    const [nextBtn, setNextBtn] = useState('SUBMIT')
+    const [nextBtn, setNextBtn] = useState('SAVE')
     const [checkStdRollDuplicate, setCheckStdRollDuplicate] = useState([])
     const [stdAddRollData, setStdAddRollData] = useState([])
     const [toggleCheckBox, setToggleCheckBox] = useState(false)
@@ -417,7 +417,6 @@ const ScannedDetailsComponent = ({
                 let number = consolidated;
                 let regex = new RegExp(regexExp)
                 result = regex.test(number);
-                // setOmrResult(regexErrormsg)
                   setOmrResult(defaultValidateError)
                   
 
@@ -483,7 +482,7 @@ const ScannedDetailsComponent = ({
                 setCurrentIndex(currentIndex + 1)
                 setBtnName('Back')
                 if (currentIndex + 1 == stdRollArray.length - 1) {
-                    setNextBtn(Strings.submit_text)
+                    setNextBtn(Strings.Save)
                 }
             } else {
                 let chkSkip = 0
@@ -529,7 +528,7 @@ const ScannedDetailsComponent = ({
 
 
     const saveMultipleStudentDataSheet = () => {
-        if (isMultipleStudent && nextBtn === Strings.submit_text) {
+        if (isMultipleStudent && nextBtn === Strings.Save) {
             saveMultiData()
         }
     }
@@ -581,7 +580,6 @@ const ScannedDetailsComponent = ({
                 if(filteredData.hasOwnProperty("set")){
                     stdData.set = filteredData.set
                 }
-        
 
                 stdData.studentId = el.RollNo
                 let putTrainingData = loginData.data.school.storeTrainingData ? stdData.studentIdTrainingData = storeTrainingData.length > 0 ? el.RollNo != storeTrainingData[index].studentIdPrediction ? storeTrainingData[index].trainingDataSet : [] : [] : ''
@@ -628,7 +626,7 @@ const ScannedDetailsComponent = ({
             "studentsMarkInfo": stdMarkInfo,
             "examId": filteredData.examTestID,
             "userId": loginData.data.school.schoolId,
-           
+
         }
         if(filteredData.hasOwnProperty("set")){
             saveObj.set = filteredData.hasOwnProperty("set") ? filteredData.set : ""
@@ -1060,7 +1058,7 @@ const ScannedDetailsComponent = ({
             setBtnName(Strings.Back)
             setNewArrayValue(filterDataAccordingPage)
             if (currentIndex + 1 == multiPage) {
-                setNextBtn(Strings.submit_text)
+                setNextBtn(Strings.Save)
             }
         }
     }
@@ -1207,7 +1205,6 @@ const ScannedDetailsComponent = ({
                     "marksInfo": Studentmarks,
                     "studentAvailability": true,
                 }
-                
             ]
             
         }
@@ -1252,7 +1249,10 @@ const ScannedDetailsComponent = ({
     const openCameraActivity = async () => {
         try {
 
-            SaralSDK.startCamera(JSON.stringify(ocrLocalResponse), (currentIndex + 1).toString()).then(res => {
+            let hasTimer   =  loginData.data.school.hasOwnProperty("scanTimeoutMs") ? loginData.data.school.scanTimeoutMs : 0
+            let isManualEditEnabled   =  loginData.data.school.hasOwnProperty("isManualEditEnabled") ? loginData.data.school.isManualEditEnabled : false
+
+            SaralSDK.startCamera(JSON.stringify(ocrLocalResponse), (currentIndex + 1).toString(), hasTimer, isManualEditEnabled).then(res => {
                 let roisData = JSON.parse(res);
                 let cells = roisData.layout.cells;
                 consolidatePrediction(cells, roisData)
@@ -1270,7 +1270,6 @@ const ScannedDetailsComponent = ({
             marks = ""
             predictionConfidenceArray = []
             for (let j = 0; j < cells[i].rois.length; j++) {
-
                 marks = marks + cells[i].rois[j].result.prediction,
                     predictionConfidenceArray.push(cells[i].rois[j].result.confidence)
             }
@@ -1308,7 +1307,7 @@ const ScannedDetailsComponent = ({
    }
 
     return (
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, backgroundColor:multiBrandingData.themeColor2 ? multiBrandingData.themeColor2 : 'white' }}>
 
             <View style={{ flex: 1 }}>
                 <ScrollView
@@ -1321,6 +1320,7 @@ const ScannedDetailsComponent = ({
                     <ShareComponent
                         navigation={navigation}
                         message={logmessage ? JSON.stringify(logmessage, null, 2) : ''}
+                        onPress={()=>navigation.navigate('myScan')}
                     />
                     {
                         !summary &&
@@ -1400,24 +1400,24 @@ const ScannedDetailsComponent = ({
                                         </View>
 
 
-                                        <View style={{ flexDirection: 'row', marginTop: 20 }}>
+                                        <View style={{ flexDirection: 'row', marginTop: 20,justifyContent:"center" }}>
                       {
                         jsonLabels || listbrandlabel && defaultHeaderTable ?
                           <View style={{ flexDirection: 'row', width: '100%' }}>
-                            <MarksHeaderTable
+                            {/* <MarksHeaderTable
                               customRowStyle={{ width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '25%' : '30%', backgroundColor: AppTheme.TABLE_HEADER}}
                               rowTitle={jsonLabels && jsonLabels.sr_no || listbrandlabel && listbrandlabel.sr_no || defaultHeaderTable.sr_no}
                               rowBorderColor={AppTheme.TAB_BORDER}
                               editable={false}
-                            />
+                            /> */}
                             <MarksHeaderTable
-                              customRowStyle={{ width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '25%' : '30%', backgroundColor: AppTheme.TABLE_HEADER}}
+                              customRowStyle={{ width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '25%' : '50%', backgroundColor: AppTheme.TABLE_HEADER}}
                               rowTitle={jsonLabels && jsonLabels.questions || listbrandlabel && listbrandlabel.questions || defaultHeaderTable.questions}
                               rowBorderColor={AppTheme.TAB_BORDER}
                               editable={false}
                             />
                             <MarksHeaderTable
-                              customRowStyle={{ width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '55%' : '30%', backgroundColor: AppTheme.TABLE_HEADER}}
+                              customRowStyle={{ width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '55%' : '50%', backgroundColor: AppTheme.TABLE_HEADER}}
                               rowTitle={jsonLabels && jsonLabels.marks || listbrandlabel && listbrandlabel.marks || defaultHeaderTable.marks}
                               rowBorderColor={AppTheme.TAB_BORDER}
                               editable={false}
@@ -1441,7 +1441,7 @@ const ScannedDetailsComponent = ({
                             TABLE_HEADER.map((data) => {
                               return (
                                 <MarksHeaderTable
-                                  customRowStyle={{ width: '30%', backgroundColor: AppTheme.TABLE_HEADER }}
+                                  customRowStyle={{ width: '50%', backgroundColor: AppTheme.TABLE_HEADER }}
                                   key={data}
                                   rowTitle={data}
                                   rowBorderColor={AppTheme.TAB_BORDER}
@@ -1455,29 +1455,30 @@ const ScannedDetailsComponent = ({
                                           
                                             {
                                                 newArrayValue.map((element, index) => {
+                                                    console.log(index);
                                                     return (
-                                                        <View element={element} key={index} style={{ flexDirection: 'row' }}>
-
+                                                        <View element={element} key={index} style={{ flexDirection: 'row',justifyContent:'center' }}>
+{/* 
                                                             <MarksHeaderTable
                                                                 customRowStyle={{height:height/12, width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '25%' : '30%', }}
                                                                 rowTitle={renderSRNo(element, index)}
                                                                 rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                                                 editable={false}
                                                                 keyboardType={'number-pad'}
-                                                            />
+                                                            /> */}
                                                             <MarksHeaderTable
-                                                                customRowStyle={{height:height/12, width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '25%' : '30%', }}
-                                                                rowTitle={element.format.value}
+                                                                customRowStyle={{height:height/12, width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '25%' : '50%', }}
+                                                                rowTitle={renderSRNo(element, index)}
                                                                 rowBorderColor={AppTheme.INACTIVE_BTN_TEXT}
                                                                 editable={false}
                                                                 keyboardType={'number-pad'}
                                                             />
                                                             <MarksHeaderTable
-                                                                customRowStyle={{height:height/12, width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '50%' : '30%', }}
+                                                                customRowStyle={{height:height/12, width: loginData.data.school.tags ? '25%' : isAlphaNumeric ? '50%' : '50%', }}
                                                                 rowTitle={element.consolidatedPrediction}
                                                                 rowBorderColor={markBorderOnCell(element)}
                                                                 editable={true}
-                                                                keyboardType={element.hasOwnProperty("omrOptions") ?  'name' : 'name'}
+                                                                keyboardType={element.hasOwnProperty("omrOptions") ?  'name' : ''}
                                                                 maxLength={lengthAccordingSheet(element)}
                                                                 onChangeText={(text) => {
                                                                     handleTextChange(text.trim(), index, newArrayValue, element)
@@ -1511,12 +1512,12 @@ const ScannedDetailsComponent = ({
 
                                             <View style={[styles.viewnxtBtnStyle1, { paddingTop: '7%' }]}>
                                                 <ButtonComponent
-                                                    customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE, marginTop: '5%' }]}
+                                                    customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData.themeColor1 ? multiBrandingData.themeColor1 : AppTheme.BLUE, marginTop: '5%' }]}
                                                     btnText={btnName.toUpperCase()}
                                                     onPress={() => isMultipleStudent ? goBackFrame() : multiPage > 0 ? goBackPage() : onBackButtonClick()}
                                                 />
                                                 <ButtonComponent
-                                                    customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE, marginTop: '5%' }]}
+                                                    customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData.themeColor1 ? multiBrandingData.themeColor1 : AppTheme.BLUE, marginTop: '5%' }]}
                                                     btnText={nextBtn.toUpperCase()}
                                                     onPress={() => isMultipleStudent ? goNextFrame() : multiPage > 0 ? goNextPage() : onSubmitClick()}
                                                 />

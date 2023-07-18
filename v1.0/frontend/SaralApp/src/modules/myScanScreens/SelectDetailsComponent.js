@@ -1,22 +1,20 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, BackHandler, Alert, TouchableOpacity, Share } from 'react-native';
+import { View, ScrollView, Text, BackHandler, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import _ from 'lodash'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import Strings from '../../utils/Strings';
 import AppTheme from '../../utils/AppTheme';
 import Spinner from '../common/components/loadingIndicator';
-import HeaderComponents from '../common/components/HeaderComponents';
 import DropDownMenu from '../common/components/DropDownComponent';
 import ButtonComponent from '../common/components/ButtonComponent';
-import { getLoginData, setStudentsExamData, getStudentsExamData, getLoginCred, setLoginData, getErrorMessage, eraseErrorLogs } from '../../utils/StorageUtils'
+import { getLoginData, setStudentsExamData, getStudentsExamData, getLoginCred, setLoginData } from '../../utils/StorageUtils'
 import { OcrLocalResponseAction } from '../../flux/actions/apis/OcrLocalResponseAction'
 import { GetStudentsAndExamData } from '../../flux/actions/apis/getStudentsAndExamData';
 import { FilteredDataAction } from '../../flux/actions/apis/filteredDataActions';
 import APITransport from '../../flux/actions/transport/apitransport';
-import { checkNetworkConnectivity, cryptoText, dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF, SCAN_TYPES, validateToken } from '../../utils/CommonUtils';
+import { checkNetworkConnectivity, dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF, SCAN_TYPES, validateToken } from '../../utils/CommonUtils';
 import { ROIAction } from '../StudentsList/ROIAction';
 import { GetAbsentStudentData } from '../../flux/actions/apis/getAbsentStudentData';
 import { LoginAction } from '../../flux/actions/apis/LoginAction';
@@ -30,7 +28,7 @@ import CustomPopup from '../common/components/CustomPopup';
 import { getRegularStudentExamApi, setRegularStudentExamApi } from '../../utils/offlineStorageUtils';
 import constants from '../../flux/actions/constants';
 import { storeFactory } from '../../flux/store/store';
-import { indexOf } from 'lodash';
+import DeviceInfo from 'react-native-device-info';
 
 //redux
 
@@ -170,15 +168,10 @@ class SelectDetailsComponent extends Component {
                 })
             }
         })
-        this.willBlur = navigation.addListener('willBlur', payload =>
-            BackHandler.removeEventListener('hardwareBackPress', this.onBack)
-        );
     }
 
     onBack = () => {
-        const { navigation } = this.props;
         BackHandler.exitApp()
-        // navigation.goBack();
         return true
     }
 
@@ -216,9 +209,6 @@ class SelectDetailsComponent extends Component {
                         this.setState({
                             dataPayload: payload
                         }, () => {
-
-                            // let isTokenValid = validateToken(loginDetails.expiresOn)                                 
-                            // if(isTokenValid) {
                             this.callStudentsData(loginDetails.token)
 
                         })
@@ -319,6 +309,7 @@ class SelectDetailsComponent extends Component {
 
     callStudentsData = async (token) => {
         const { dataPayload, selectedClass, selectedSection } = this.state
+        const deviceUniqId = await DeviceInfo.getUniqueId();
         let hasNetwork = await checkNetworkConnectivity();
 
 
@@ -340,7 +331,7 @@ class SelectDetailsComponent extends Component {
         this.setState({
             calledStudentsData: true,
         }, () => {
-            let apiObj = new GetStudentsAndExamData(dataPayload, token);
+            let apiObj = new GetStudentsAndExamData(dataPayload, token, deviceUniqId);
             this.props.APITransport(apiObj)})
         } else {
             this.setState({isLoading: false})
@@ -356,7 +347,7 @@ dispatchStudentExamData(payload){
 }
 
     validateAbsentStatusApi = () => {
-        const { selectedClassId, selectedExam, selectedSection, loginDetails } = this.state
+        const { selectedClassId, selectedSection, loginDetails } = this.state
         let schoolId = loginDetails.school.schoolId
         let payload = {
             schoolId: schoolId,
@@ -408,7 +399,6 @@ dispatchStudentExamData(payload){
             isLoading: true,
             calledLogin: true
         }, () => {
-            let encPass = cryptoText(this.state.password)
             let loginObj = {
                 "schoolId": this.state.username,
                 "password": this.state.password
@@ -539,7 +529,7 @@ dispatchStudentExamData(payload){
                                     let subjects = []
                                     let set =[]
                                     _.filter(studentsAndExamData.data.exams, function (o) {
-                                        subArr.push(o.subject + " " + o.examDate)
+                                        subArr.push(o.subject)
                                         testID.push(o.examId)
                                         examDates.push(o.examDate)
                                         subjects.push(o.subject)
@@ -700,8 +690,7 @@ dispatchStudentExamData(payload){
 
             if (isCalledStudentAndExam) {
                 const hasNetworkData = await checkNetworkConnectivity()
-                let data = JSON.parse(studentsAndExamData.config.data)
-                if (studentsAndExamData && data.hasOwnProperty("subject")) {
+                if (studentsAndExamData) {
 
                     this.setState({isCalledStudentAndExam: false, isLoading: false})                    
                     const hasNetwork = await checkNetworkConnectivity();
@@ -762,7 +751,7 @@ dispatchStudentExamData(payload){
                             }
                         })
                         finalStudentsAndExamArr.push(obj)
-                        let studentsExamDataSaved = await setStudentsExamData(finalStudentsAndExamArr)
+                         let studentsExamDataSaved = await setStudentsExamData(finalStudentsAndExamArr)
                         this.props.navigation.push('StudentsList');
                     }
                 } else if (!hasNetworkData) {
@@ -774,7 +763,6 @@ dispatchStudentExamData(payload){
 
     validateFields = () => {
         const { classListIndex, subIndex, sectionListIndex, sectionValid ,setIndex,ExamSetArray} = this.state
-        const { scanTypeData } = this.props
         if (classListIndex == -1) {
             this.setState({
                 errClass: Strings.please_select_class,
@@ -828,7 +816,7 @@ dispatchStudentExamData(payload){
     }
 
     onSubmitClick = () => {
-        const { selectedClass, selectedClassId, selectedSection, examTestID, subIndex, examDate, subjectsData ,selectSet,setIndex} = this.state
+        const { selectedClass, selectedClassId, selectedSection, examTestID, subIndex, examDate, subjectsData ,selectSet} = this.state
         const { loginData } = this.props
        
         this.setState({
@@ -850,7 +838,6 @@ dispatchStudentExamData(payload){
                     examDate: examDate[subIndex],
                     section: selectedSection,
                     subject: subjectsData[subIndex],
-            
                     examTestID: examTestID[subIndex],
                 }
                 if(setValue.length>0){
@@ -870,10 +857,8 @@ dispatchStudentExamData(payload){
     }
 
   async  callExamAndStudentData(token){
-
+    const deviceUniqId = await DeviceInfo.getUniqueId();
         let hasNetwork = await checkNetworkConnectivity();
-
-
             let hasCacheData = await getRegularStudentExamApi();
             let cacheFilterData = hasCacheData != null 
             ?
@@ -893,11 +878,11 @@ dispatchStudentExamData(payload){
         }
         else if(hasNetwork){
             let dataPayload = {
-                classId: this.state.selectedClassId,
-                section: this.state.selectedSection,
-                subject: this.state.selectedSubject,
+                "classId": this.state.selectedClassId,
+                "section": this.state.selectedSection,
+                "subject": this.state.selectedSubject,
             }
-            let apiObj = new GetStudentsAndExamData(dataPayload, token);
+            let apiObj = new GetStudentsAndExamData(dataPayload, token, deviceUniqId);
             this.props.APITransport(apiObj)
             this.setState({
                 isLoading: false,
@@ -910,7 +895,6 @@ dispatchStudentExamData(payload){
     }
 
     callROIData = (dataPayload, token) => {
-        const { apiStatus } = this.props;
         let apiObj = new ROIAction(dataPayload, token);
         this.props.APITransport(apiObj)
         this.setState({
@@ -954,46 +938,43 @@ dispatchStudentExamData(payload){
      
 
     render() {
-        const { navigation, isLoading, defaultSelected, classList, classListIndex, selectedClass, sectionList,setIndex,set,ExamSetArray, sectionListIndex, selectedSection, pickerDate, selectedDate, subArr, selectedSubject,selectSet, subIndex, errClass, errSub,errSet, errDate, errSection, sectionValid, dateVisible, examTestID,examSetData,disabled } = this.state
-        const { loginData, multiBrandingData, modalStatus, modalMessage ,studentsAndExamData} = this.props
+        const { isLoading, defaultSelected, classList, classListIndex, selectedClass, sectionList,setIndex,ExamSetArray, sectionListIndex, selectedSection, pickerDate, subArr, selectedSubject,selectSet, subIndex, errClass, errSub,errSet, errSection, sectionValid, dateVisible,disabled } = this.state
+        const { loginData, multiBrandingData, modalStatus, modalMessage } = this.props
         const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.selectDetails[0]
         return (
-            <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
+            <View style={{ flex: 1, backgroundColor: multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.WHITE_OPACITY }}>
+             
                 <ShareComponent
                     navigation={this.props.navigation}
                     message={this.state.logmessage ? JSON.stringify(this.state.logmessage, null, 2) : ''}
+                    onPress={()=>this.props.navigation.navigate('Home')}
 
                 />
+                 <View style={{margin:5}}>
                 {BrandLabel ?
                     <MultibrandLabels
-                        Label1={BrandLabel.School}
-                        Label2={BrandLabel.SchoolId}
-                        School={loginData.data.school.name}
-                        SchoolId={loginData.data.school.schoolId}
+                         Label1={BrandLabel.School}
+                         Label2={BrandLabel.SchoolId}
+                         School=  {`${loginData.data.school.name}${loginData.data.school.block ? ','+loginData.data.school.block : ''}${loginData.data.school.district ? ','+loginData.data.school.district : ''}`}
+                         SchoolId={loginData.data.school.schoolId}
                     />
 
                     :
 
                     (loginData && loginData.data) &&
-                    <View style={{ marginTop: 20, width: '60%' }}>
-                        <Text
-                            style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%', fontFamily: monospace_FF }}
+                    <View style={{ }}>
+                        {/* <Text
+                            style={{ fontSize: 14, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%', fontFamily: monospace_FF }}
                         >
-                            {Strings.school_name + ' : '}
-                            <Text style={{ fontWeight: 'normal', fontFamily: monospace_FF }}>
-                                {loginData.data.school.name}
+                            {`${Strings.school_name} : `} */}
+                            <Text style={{marginLeft:5}}>
+                            {`${loginData.data.school.name} ${loginData.data.school.block ?','+ loginData.data.school.block : ''} ${loginData.data.school.district ? ','+loginData.data.school.district : ''}`}
                             </Text>
-                        </Text>
-                        <Text
-                            style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%', fontFamily: monospace_FF }}
-                        >
-                            {Strings.schoolId_text + ' : '}
-                            <Text style={{ fontWeight: 'normal', fontFamily: monospace_FF }}>
-                                {loginData.data.school.schoolId}
-                            </Text>
-                        </Text>
-                    </View>}
-
+                        {/* </Text> */}
+                       
+                    </View>
+                    }
+                    </View>
                 <ScrollView
                     contentContainerStyle={{ paddingTop: '5%', paddingBottom: '35%' }}
                     showsVerticalScrollIndicator={false}
@@ -1015,7 +996,7 @@ dispatchStudentExamData(payload){
                                     {errClass != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 1, width: '60%', textAlign: 'right', fontWeight: 'normal' }]}>{errClass}</Text>}
                                 </View>
                                 <DropDownMenu
-                                    options={classList && classList}
+                                    options={classList}
                                     onSelect={(idx, value) => this.onDropDownSelect(idx, value, 'class')}
                                     defaultData={defaultSelected}
                                     defaultIndex={classListIndex}
@@ -1032,7 +1013,7 @@ dispatchStudentExamData(payload){
                                         {errSection != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 1, width: '60%', textAlign: 'right', fontWeight: 'normal' }]}>{errSection}</Text>}
                                     </View>
                                     <DropDownMenu
-                                        options={sectionList && sectionList}
+                                        options={sectionList}
                                         onSelect={(idx, value) => this.onDropDownSelect(idx, value, 'section')}
                                         defaultData={defaultSelected}
                                         defaultIndex={sectionListIndex}
@@ -1042,13 +1023,13 @@ dispatchStudentExamData(payload){
                                 </View>}
                             {
                                 sectionListIndex != -1 && sectionValid &&
-                                <View style={[styles.fieldContainerStyle, { paddingBottom: subIndex != -1 ? '10%' : '10%' }]}>
+                                <View style={[styles.fieldContainerStyle, { paddingBottom: subIndex != -1 ? '10%' : 0 }]}>
                                     <View style={{ flexDirection: 'row' }}>
                                         <Text style={[styles.labelTextStyle]}>{BrandLabel && BrandLabel.Subject ? BrandLabel.Subject : Strings.subject}</Text>
                                         {errSub != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 1, width: '50%', textAlign: 'right', fontWeight: 'normal' }]}>{errSub}</Text>}
                                     </View>
                                     <DropDownMenu
-                                        options={subArr && subArr}
+                                        options={subArr}
                                         onSelect={(idx, value) => this.onDropDownSelect(idx, value, 'sub')}
                                         defaultData={defaultSelected}
                                         defaultIndex={subIndex}
@@ -1060,7 +1041,7 @@ dispatchStudentExamData(payload){
 
                       {
                             ExamSetArray && ExamSetArray.length > 0 && ExamSetArray[subIndex] != null &&
-                                <View style={[styles.fieldContainerStyle, {bottom:25, paddingBottom: subIndex != -1 ? '10%' : '10%' }]}>
+                                <View style={[styles.fieldContainerStyle, {bottom:25, paddingBottom: subIndex != -1 ? '10%' : 0 }]}>
                                     <View style={{ flexDirection: 'row' }}>
                                         <Text style={[styles.labelTextStyle]}>{BrandLabel && BrandLabel.Set ? BrandLabel.Set : Strings.set_text}</Text>
                                         {errSet != '' && <Text style={[styles.labelTextStyle, { color: AppTheme.ERROR_RED, fontSize: AppTheme.FONT_SIZE_TINY + 1, width: '50%', textAlign: 'right', fontWeight: 'normal' }]}>{errSet}</Text>}
@@ -1085,7 +1066,7 @@ dispatchStudentExamData(payload){
                 </ScrollView>
                 <View style={styles.btnContainer}>
                     <ButtonComponent
-                        customBtnStyle={[styles.nxtBtnStyle, { backgroundColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+                        customBtnStyle={[styles.nxtBtnStyle, { backgroundColor: this.props.multiBrandingData.themeColor1 ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE }]}
                         btnText={Strings.submit_text.toUpperCase()}
                         onPress={this.onSubmitClick}
                     />
@@ -1130,7 +1111,8 @@ const styles = {
         borderColor: AppTheme.LIGHT_GREY,
         width: '100%',
         textAlign: 'center',
-        fontSize: AppTheme.FONT_SIZE_SMALL + 2,
+        fontSize: AppTheme.FONT_SIZE_LARGE,
+        fontWeight:'bold',
         color: AppTheme.BLACK,
         letterSpacing: 1,
         marginBottom: '5%',
@@ -1149,6 +1131,8 @@ const styles = {
         fontFamily: monospace_FF
     },
     nxtBtnStyle: {
+        width:160,
+        height:43
     },
     imageViewContainer: {
 

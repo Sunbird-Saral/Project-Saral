@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux';
 
 //constant
 import AppTheme from '../../utils/AppTheme';
-import { getScannedDataFromLocal,getErrorMessage } from '../../utils/StorageUtils';
+import { getScannedDataFromLocal } from '../../utils/StorageUtils';
 import Strings from '../../utils/Strings';
 
 //component
@@ -15,7 +15,6 @@ import Spinner from '../common/components/loadingIndicator';
 import ScanHistoryCard from './ScanHistoryCard';
 import ButtonComponent from '../common/components/ButtonComponent';
 import ShareComponent from '../common/components/Share';
-import APITransport from '../../flux/actions/transport/apitransport';
 import { collectErrorLogs } from '../CollectErrorLogs';
 import MultibrandLabels from '../common/components/multibrandlabels';
 
@@ -38,17 +37,17 @@ const ScanHistory = ({
         sumOfLocalData()
     }, [])
 
-    const sumOfLocalData = async () => {
+    const sumOfLocalData = async ()=>{
         const data = await getScannedDataFromLocal()
 
-        if (data != null) {
+        if(data != null) {
             let filter = data.filter((e) => {
                 let findSection = false
                 findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.section)
 
-                if (filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject && findSection) {
+                if(filteredData.class == e.classId && e.examDate == filteredData.examDate && e.subject == filteredData.subject && findSection) {
                     return true
-                } else {
+                }else {
                     return false
                 }
             })
@@ -56,7 +55,7 @@ const ScanHistory = ({
             let hasSet = filteredData.hasOwnProperty("set") ?  filteredData.set.length >= 0 ? filteredData.set : '' : null
             if (hasSet != null && hasSet != undefined && hasSet.length >= 0 && filter.length > 0) {
                 let findSetStudent = filter.length > 0 ? filter[0].studentsMarkInfo.filter((item) => {
-                    if (hasSet.length >= 0) {
+                    if(hasSet.length >= 0) {
                         return item.set == hasSet;
                     }
                 })
@@ -75,7 +74,7 @@ const ScanHistory = ({
                 })
             });
             setScanStatusData(len)
-        } else {
+        } else{
             setScanStatusData(0)
         }
     }
@@ -93,7 +92,8 @@ const ScanHistory = ({
     );
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container,{backgroundColor: multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.WHITE_OPACITY }]}>
+             <View style={{flexDirection:'row-reverse',justifyContent:'space-between'}}>
               <ShareComponent
                  navigation={navigation}
                  />
@@ -102,36 +102,44 @@ const ScanHistory = ({
                  {( BrandLabel) ?
                 <MultibrandLabels
                 Label1={BrandLabel.School}
-                Label2={BrandLabel.SchoolId}
-                School ={loginData.data.school.name}
-                SchoolId={loginData.data.school.schoolId}
+                School =  {`${loginData.data.school.name},${loginData.data.school.block ? loginData.data.school.block : ''},${loginData.data.school.district ? loginData.data.school.district : ''}`}
                 />:
                     (loginData && loginData.data)
                     &&
-                    <View style={{ width:'60%' }}>
+                    <View style={{ width:'80%' }}>
                         <Text
                             style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%',fontFamily : monospace_FF }}
                         >
                             {Strings.school_name + ' : '}
                             <Text style={{ fontWeight: 'normal' }}>
-                                {loginData.data.school.name}
+                            {`${loginData.data.school.name},${loginData.data.school.block ? loginData.data.school.block : ''},${loginData.data.school.district ? loginData.data.school.district : ''}`}
                             </Text>
                         </Text>
+
                         <Text
-                            style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}>
-                                { Strings.schoolId_text + ' : '}
-                            <Text style={{ fontWeight: 'normal' }}>
-                                {loginData.data.school.schoolId}
-                                </Text>
-                                </Text>
+                        style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingTop: '4%',fontFamily : monospace_FF }}
+                    >
+                        {Strings.class_text + ' : '}
+                        <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
+                            {`${filteredData.className}, ${filteredData.section ? filteredData.section : ''}`}
+                        </Text>
+                    </Text>
+
+                    <Text
+                        style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingTop: '4%',fontFamily : monospace_FF }}
+                    >
+                        {Strings.subject + ' : '}
+                        <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
+                               {filteredData.subject} {filteredData.set ? `(Set ${filteredData.set})`:''}
+                        </Text>
+                    </Text>
                     </View>
                 }
                 </View>
+                </View>
             <ScrollView showsVerticalScrollIndicator={false}>
-            <View style={styles.container1}>
-                <Text style={[styles.header1TextStyle, { borderColor: multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE, backgroundColor: multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE,fontFamily : monospace_FF }]}>
-                    {Strings.ongoing_scan}
-                </Text>
+            <View style={{justifyContent:'center',alignItems:'center',marginTop:15}}>
+                <Text style={{fontWeight:'bold',fontSize:18}}>{Strings.Summary_page}</Text>
             </View>
             {
                 apiStatus.unauthorized
@@ -151,7 +159,7 @@ const ScanHistory = ({
             />
             
             <ButtonComponent
-                customBtnStyle={[styles.nxtBtnStyle, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+                customBtnStyle={[styles.nxtBtnStyle, { backgroundColor: multiBrandingData.themeColor1 ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
                 btnText={Strings.Back.toUpperCase()}
                 activeOpacity={0.8}
                 onPress={() => navigation.push('StudentsList')}

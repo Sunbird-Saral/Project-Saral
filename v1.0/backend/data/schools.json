@@ -2,15 +2,17 @@
   {
     "name": "Dummy school 1",
     "schoolId": "u001",
-    "state": "up",
+    "state": "UP",
     "autoSync": false,
     "autoSyncFrequency": 600000,
     "storeTrainingData": true,
-    "tags": true,
+    "tags": false,
     "supportEmail": "abc@gmail.com , xyz@gmail.com",
     "offlineMode": true,
     "isAppForceUpdateEnabled": true,
-    "district": "district1"
+    "district": "district1",
+    "scanTimeoutMs": 60000,
+    "isManualEditEnabled": true
   },
   {
     "name": "Dummy school 2",
@@ -42,11 +44,19 @@
     "autoSyncFrequency": 900000,
     "state": "up",
     "storeTrainingData": true,
-    "tags": true,
+    "tags": false,
     "autoSyncBatchSize": 10,
     "offlineMode": true,
     "isAppForceUpdateEnabled": false,
-    "district": "district1"
+    "isFBAnalyticsEnabled": true,
+    "district": "district1",
+    "scanTimeoutMs": 60000,
+    "isManualEditEnabled": true,
+    "block":"block",
+    "useCase2":false,
+    "useCase3":false,
+    "useCase4":false,
+    "useCase5":false
   },
   {
     "name": "Dummy Skill School",
