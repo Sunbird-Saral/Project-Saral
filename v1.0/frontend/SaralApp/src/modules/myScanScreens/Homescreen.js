@@ -15,7 +15,7 @@ import Spinner from '../common/components/loadingIndicator';
 import { storeFactory } from '../../flux/store/store';
 import constants from '../../flux/actions/constants';
 import { GetStudentsAndExamData } from '../../flux/actions/apis/getStudentsAndExamData';
-import { getMinimalValue,setScannedDataIntoLocal } from '../../utils/StorageUtils';
+import { getMinimalValue,setScannedDataIntoLocal,getScannedDataFromLocal } from '../../utils/StorageUtils';
 import { getBrandingDataApi, getStudentExamApi, setBrandingDataApi, setStudentExamApi } from '../../utils/offlineStorageUtils';
 import Strings from '../../utils/Strings';
 import MultibrandLabels from '../common/components/multibrandlabels';
