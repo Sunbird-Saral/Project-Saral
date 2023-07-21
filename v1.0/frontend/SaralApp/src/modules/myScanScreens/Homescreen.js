@@ -15,13 +15,15 @@ import Spinner from '../common/components/loadingIndicator';
 import { storeFactory } from '../../flux/store/store';
 import constants from '../../flux/actions/constants';
 import { GetStudentsAndExamData } from '../../flux/actions/apis/getStudentsAndExamData';
-import { getMinimalValue } from '../../utils/StorageUtils';
+import { getMinimalValue,setScannedDataIntoLocal,getScannedDataFromLocal } from '../../utils/StorageUtils';
 import { getBrandingDataApi, getStudentExamApi, setBrandingDataApi, setStudentExamApi } from '../../utils/offlineStorageUtils';
 import Strings from '../../utils/Strings';
 import MultibrandLabels from '../common/components/multibrandlabels';
-
+import Constant from '../../flux/actions/constants'
 import DeviceInfo from 'react-native-device-info';
-
+import { SaveScanData } from "../../flux/actions/apis/saveScanDataAction";
+import axios from 'axios';
+import PushNotification, { Importance } from "react-native-push-notification";
 class HomeComponent extends Component {
     constructor(props) {
         super(props);
@@ -30,19 +32,130 @@ class HomeComponent extends Component {
         }
         this.onBack = this.onBack.bind(this)
     }
-    componentDidMount() {
-        const { navigation } = this.props;
-        if (this.props.minimalFlag) {
-            navigation.addListener('willFocus', async payload => {
-                BackHandler.addEventListener('hardwareBackPress', this.onBack)
-            })
-            this.willBlur = navigation.addListener('willBlur', payload =>
-                BackHandler.removeEventListener('hardwareBackPress', this.onBack)
-            );
-        }
 
-        this.callMultiBrandingActiondata()
+    flagAction(payload) {
+        return {
+            type: Constant.BACKGROUND_FLAG,
+            payload
+        }
     }
+
+    dispatchAPIAsync(apiObj) {
+        return {
+            type: apiObj.type,
+            payload: apiObj.getPayload()
+        }
+    }
+
+    hitPushNotification = (title, msg) => {
+
+        PushNotification.localNotification({
+            channelId: Strings.saral_app_auto_sync_channel,
+            // smallIcon: "ic_notification",
+            // color: "white",
+            vibrate: true,
+            // shortcutId: "shortcut-id",
+            title: title,
+            message: msg,
+            playSound: true,
+            // soundName: "notification.mp3",
+            priority: "high",
+            importance: "high"
+        });
+    }
+
+    removeItemFromLocalStorage = (res, value) => {
+
+        let data = JSON.parse(res.config.data)
+    
+        value.forEach((element, index) => {
+            if (element.classId == data.classId) {
+                value.splice(index, 1)
+            }
+        });
+    
+        return value
+    }
+
+    saveDataInDB = async () => {
+        const { loginData, dispatch } = this.props
+        const autoSyncBatchSize = Object.keys(loginData).length > 0  && loginData.data.school.hasOwnProperty("autoSyncBatchSize") ? loginData.data.school.autoSyncBatchSize : 10
+        const data = await getScannedDataFromLocal();
+        storeFactory.dispatch(this.flagAction(false))
+        if (data != null) {
+            let len = 0
+            data.forEach(element => {
+                len = len + element.studentsMarkInfo.length
+            });
+    
+            if (len >= autoSyncBatchSize) {
+                storeFactory.dispatch(this.flagAction(true))
+                this.hitPushNotification("Uploading•••", Strings.auto_sync_in_progress_please_wait)
+    
+                data.map(element => {
+    
+                    let apiObj = new SaveScanData(element, loginData.data.token);
+                    let apiResponse = null
+                    const source = axios.CancelToken.source()
+                    const id = setTimeout(() => {
+                        if (apiResponse === null) {
+                            source.cancel('The request timed out.');
+                        }
+                    }, 60000);
+                    var self =  this
+                    axios.put(apiObj.apiEndPoint(), apiObj.getBody(), { headers: apiObj.getHeaders(), cancelToken: source.token },)
+                        .then(function (res) {
+                            let localDataResponse = self.removeItemFromLocalStorage(res, data)
+                            if (localDataResponse.length == 0) {
+                                setScannedDataIntoLocal(localDataResponse)
+                                self.hitPushNotification("Uploaded", Strings.auto_sync_completed)
+                            }
+                            apiResponse = res
+                            
+                            clearTimeout(id)
+                            apiObj.processResponse(res)
+                            storeFactory.dispatch(self.dispatchAPIAsync(apiObj));
+                            if (typeof apiObj.getNextStep === 'function' && res.data && (res.status == 200 || res.status == 201))
+                                storeFactory.dispatch(apiObj.getNextStep())
+                            storeFactory.dispatch(self.flagAction(false))
+                        })
+                        .catch(function (err) {
+                            collectErrorLogs("Brand.js","backgroundJob",apiObj.apiEndPoint(),err,false)
+                            clearTimeout(id)
+                            let data = {
+                                title : Strings.message_text,
+                                message : "Something went wrong with background process, please contact Admin",
+                                isOkAvailable : false,
+                                isCancel : false
+                            }
+                            dispatch(dispatchCustomModalStatus(true));
+                            dispatch(dispatchCustomModalMessage(data));
+                            storeFactory.dispatch(self.flagAction(false))
+                        });
+                });
+            }
+    
+        }
+    }
+
+    async componentDidMount() {
+        this.callMultiBrandingActiondata()
+        const { loginData } = this.props;
+        const bgTimer = Object.keys(loginData).length > 0  && loginData.data.school.hasOwnProperty("autoSyncFrequency") ? loginData.data.school.autoSyncFrequency : 600000
+        setInterval(async() => {
+            const hasAutoSync = Object.keys(loginData).length > 0  && loginData.data.school.hasOwnProperty("autoSync") && loginData.data.school.autoSync ? true : false
+            const hasNetwork = await checkNetworkConnectivity();
+            if (hasAutoSync) {
+                const isLogin = loginData.status
+                if (isLogin == 200 & hasNetwork) {
+                    storeFactory.dispatch( this.flagAction(true))
+                        this.saveDataInDB()
+                }
+            }
+            //timer for 10 min
+        }, bgTimer);
+
+      }
 
     async componentDidUpdate(prevProps) {
         const { studentsAndExamData, multiBranding, loginData, minimalFlag } = this.props;
@@ -259,6 +372,7 @@ class HomeComponent extends Component {
         const Mode = isMinimalModedata ? !this.props.minimalFlag : this.props.minimalFlag
         const loginData = this.props.loginData && this.props.loginData.data && this.props.loginData.data.school
         const BrandLabel = this.props.multiBrandingData && this.props.multiBrandingData.screenLabels && this.props.multiBrandingData.screenLabels.homeScreen && this.props.multiBrandingData.screenLabels.homeScreen[0]
+       
         if (this.props.multiBrandingData === undefined || this.props.multiBrandingData === null || this.state.isLoading) {
 
             return <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
@@ -280,6 +394,7 @@ class HomeComponent extends Component {
         }
         return (
             <View style={{ flex: 1, backgroundColor: this.props.multiBrandingData.themeColor2 ? this.props.multiBrandingData.themeColor2 : AppTheme.WHITE, justifyContent: 'center', alignItems: 'center' }}>
+               {/* <Brands /> */}
                 <View>
                     <TouchableOpacity onPress={() => this.props.minimalFlag ? this.props.navigation.navigate("myScan") : this.props.navigation.navigate('selectDetails')}
                         style={{ backgroundColor: this.props.multiBrandingData && this.props.multiBrandingData.themeColor1 ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE, height: 120, width: 120, borderRadius: 15, justifyContent: 'center', alignItems: 'center' }}
