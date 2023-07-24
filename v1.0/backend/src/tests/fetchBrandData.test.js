@@ -15,6 +15,11 @@ const mockRequest = () => {
   req.body = jest.fn().mockReturnValue(req)
   req.params = jest.fn().mockReturnValue(req)
   req.school = jest.fn().mockReturnValue(req)
+  req.dbConnection = {
+    model: (ref, schema) => {
+        return schema
+    }
+  }
   return req
 }
 
@@ -50,7 +55,7 @@ describe('fetch brand data ', () => {
     School.findOne = jest.fn().mockResolvedValue(schoolMockdata) 
     Brand.findOne = jest.fn().mockResolvedValue(null)
     Brand.find = jest.fn().mockReturnValue({ lean: () => null })
-    await brandController.fetchBrandData(req, res)
+    await brandController.fetchBrandData(req, res, jest.fn())
 
     expect(School.findOne).toHaveBeenCalledTimes(1)  
     expect(Brand.findOne).toHaveBeenCalledTimes(1)
@@ -79,7 +84,7 @@ describe('fetch brand data ', () => {
     School.findOne = jest.fn().mockResolvedValue(schoolMockdata) 
     Brand.findOne = jest.fn().mockResolvedValue(null)
     Brand.find = jest.fn().mockReturnValue({ lean: () => mockDefaultBrandData })
-    await brandController.fetchBrandData(req, res)
+    await brandController.fetchBrandData(req, res, jest.fn())
 
     expect(School.findOne).toHaveBeenCalledTimes(1)  
     expect(Brand.findOne).toHaveBeenCalledTimes(1)
@@ -107,7 +112,7 @@ describe('fetch brand data ', () => {
 
     School.findOne = jest.fn().mockResolvedValue(schoolMockdata) 
     Brand.findOne = jest.fn().mockReturnValue({ lean: () => brandMockdata })
-    await brandController.fetchBrandData(req, res)
+    await brandController.fetchBrandData(req, res, jest.fn())
 
     expect(School.findOne).toHaveBeenCalledTimes(1)
     expect(res.json({ status: 'success' }).status(200));

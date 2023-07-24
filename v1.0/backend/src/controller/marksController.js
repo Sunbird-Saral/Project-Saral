@@ -67,8 +67,6 @@ exports.saveMarks = async (req, res, next) => {
         const executionTime = endTime - startTime;
         logger.info(`Execution time for Save Marks BulkWrite : ${executionTime}ms`);
 
-        logger.info("marks responsee---->", marksResult)
-
         res.status(200).json({ message: "Saved Successfully." })
 
 
@@ -93,7 +91,7 @@ exports.getSaveScan = async (req, res, next) => {
         const Users = connection.model('Users', usersSchema);
         const Marks = connection.model('Marks', marksSchema);
 
-        if(!req.body.classId){
+        if(req.body.classId == undefined){
             return res.status(400).json({ message: 'Please send classId' })
         }
 

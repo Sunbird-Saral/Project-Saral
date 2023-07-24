@@ -16,6 +16,11 @@ const mockRequest = () => {
   req.query = jest.fn().mockReturnValue(req)
   req.params = jest.fn().mockReturnValue(req)
   req.school = jest.fn().mockReturnValue(req)
+  req.dbConnection = {
+    model: (ref, schema) => {
+        return schema
+    }
+  }
   return req
 }
 
@@ -48,7 +53,7 @@ describe('fetch student and exam data ', () => {
       __v: 0
     }
    
-    await studentController.fetchStudentsandExams(req, res)
+    await studentController.fetchStudentsandExams(req, res, jest.fn())
     
     let error = new AppError('Please send classId', 404);
     expect(error.statusCode).toBe(404);
@@ -81,7 +86,7 @@ describe('fetch student and exam data ', () => {
     Marks.findOne = jest.fn().mockResolvedValue(mockMarksData)
     Student.find = jest.fn().mockReturnValue({ lean: () => mockStudentdata })
     Exam.find = jest.fn().mockResolvedValue(mockFetchExamData)
-    await studentController.fetchStudentsandExams(req, res)
+    await studentController.fetchStudentsandExams(req, res, jest.fn())
 
     expect(req.query.classId).toEqual('2');
     expect(Helper.lockScreenValidator ).toHaveBeenCalledTimes(1)
@@ -118,7 +123,7 @@ describe('fetch student and exam data ', () => {
     Student.find = jest.fn().mockReturnValue({ lean: () => mockStudentdata })
     // Student.find = jest.fn().mockImplementationOnce(() => ({ select: jest.fn().mockResolvedValueOnce(mockStudentdata)}));
     Exam.find = jest.fn().mockResolvedValue(mockFetchExamData)
-    await studentController.fetchStudentsandExams(req, res)
+    await studentController.fetchStudentsandExams(req, res, jest.fn())
 
     expect(req.query.classId).toEqual('2');
     expect(School.findOne).toHaveBeenCalledTimes(1)
@@ -154,7 +159,7 @@ describe('fetch student and exam data ', () => {
     Marks.findOne = jest.fn().mockResolvedValue(null)
     Student.find = jest.fn().mockReturnValue({ lean: () => mockStudentdata })
     Exam.find = jest.fn().mockResolvedValue(mockFetchExamData)
-    await studentController.fetchStudentsandExams(req, res)
+    await studentController.fetchStudentsandExams(req, res, jest.fn())
 
     expect(req.query.classId).toEqual('2');
     expect(Helper.lockScreenValidator ).toHaveBeenCalledTimes(1)
