@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, Image, Share, Switch } from 'react-native';
+import { View, Text, TouchableOpacity, Image, Share, Switch,Dimensions } from 'react-native';
 import { NavigationActions, StackActions } from 'react-navigation';
 import { connect } from 'react-redux';
 import { Assets } from '../../../assets';
@@ -10,7 +10,8 @@ import { dispatchCustomModalMessage, dispatchCustomModalStatus, monospace_FF } f
 import { removeAllCache, removeMinimalUserCache, removeRegularUserCache } from '../../../utils/offlineStorageUtils';
 import { setMinimalValue } from '../../../utils/StorageUtils';
 import Strings from '../../../utils/Strings';
-
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 class HeaderComponents extends Component {
     constructor(props) {
@@ -39,7 +40,8 @@ class HeaderComponents extends Component {
             minimalFlag,
             multiBrandingData,
             navigation,
-            loginData
+            loginData,
+            onDashboardClick
         } = this.props
 
         async function changeMinimalMode() {
@@ -95,10 +97,18 @@ class HeaderComponents extends Component {
         return (
             <View style={{flex:1,marginTop: '10%',marginRight:'5%'}}>
                 <View style={styles.imageViewContainer}>
-                    <View style={[styles.imageContainerStyle,{height: loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode ? 240 : 180}]}>
-                        
+                    <View style={[styles.imageContainerStyle,{height: loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode ? 270 : 180}]}>
+                           
+                    <TouchableOpacity
+                        style={[styles.imageContainerViewstyle]}
+                        onPress={onDashboardClick}
+                        > 
+                         {/* <Image style={{width:15,height:15,top:5}}  source={Assets.Help}/> */}
+                            <Text style={[ customLogoutTextStyle,{marginTop:20,fontWeight:'bold',fontSize:20}]}>{Strings.backToDashboard}</Text>
+                        </TouchableOpacity>
+
                         <TouchableOpacity
-                        style={[styles.imageContainerViewstyle,{marginTop:10}]}
+                        style={[styles.imageContainerViewstyle]}
                         onPress={onSupportClick}
                         > 
                          <Image style={{width:15,height:15,top:5}}  source={Assets.Support}/>
@@ -159,7 +169,7 @@ class HeaderComponents extends Component {
                         }
                             
                         
-                        <View 
+                        {/* <View 
                         style={{flexDirection: 'row', marginBottom: 10}}
                         >
                             <Switch
@@ -184,7 +194,7 @@ class HeaderComponents extends Component {
 
                         
                         
-                        </View>
+                        </View> */}
                     </View>
                 </View>
 

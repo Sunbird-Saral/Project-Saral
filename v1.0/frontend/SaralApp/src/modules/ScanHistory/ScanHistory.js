@@ -92,7 +92,8 @@ const ScanHistory = ({
     );
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container,{backgroundColor: multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.WHITE_OPACITY }]}>
+             <View style={{flexDirection:'row-reverse',justifyContent:'space-between'}}>
               <ShareComponent
                  navigation={navigation}
                  />
@@ -101,36 +102,44 @@ const ScanHistory = ({
                  {( BrandLabel) ?
                 <MultibrandLabels
                 Label1={BrandLabel.School}
-                Label2={BrandLabel.SchoolId}
-                School ={loginData.data.school.name}
-                SchoolId={loginData.data.school.schoolId}
+                School =  {`${loginData.data.school.name},${loginData.data.school.block ? loginData.data.school.block : ''},${loginData.data.school.district ? loginData.data.school.district : ''}`}
                 />:
                     (loginData && loginData.data)
                     &&
-                    <View style={{ width:'60%' }}>
+                    <View style={{ width:'80%' }}>
                         <Text
                             style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%',fontFamily : monospace_FF }}
                         >
                             {Strings.school_name + ' : '}
                             <Text style={{ fontWeight: 'normal' }}>
-                                {loginData.data.school.name}
+                            {`${loginData.data.school.name},${loginData.data.school.block ? loginData.data.school.block : ''},${loginData.data.school.district ? loginData.data.school.district : ''}`}
                             </Text>
                         </Text>
+
                         <Text
-                            style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%' }}>
-                                { Strings.schoolId_text + ' : '}
-                            <Text style={{ fontWeight: 'normal' }}>
-                                {loginData.data.school.schoolId}
-                                </Text>
-                                </Text>
+                        style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingTop: '4%',fontFamily : monospace_FF }}
+                    >
+                        {Strings.class_text + ' : '}
+                        <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
+                            {`${filteredData.className}, ${filteredData.section ? filteredData.section : ''}`}
+                        </Text>
+                    </Text>
+
+                    <Text
+                        style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingTop: '4%',fontFamily : monospace_FF }}
+                    >
+                        {Strings.subject + ' : '}
+                        <Text style={{ fontWeight: 'normal',fontFamily : monospace_FF }}>
+                               {filteredData.subject} {filteredData.set ? `(Set ${filteredData.set})`:''}
+                        </Text>
+                    </Text>
                     </View>
                 }
                 </View>
+                </View>
             <ScrollView showsVerticalScrollIndicator={false}>
-            <View style={styles.container1}>
-                <Text style={[styles.header1TextStyle, { borderColor: multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE, backgroundColor: multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE,fontFamily : monospace_FF }]}>
-                    {Strings.ongoing_scan}
-                </Text>
+            <View style={{justifyContent:'center',alignItems:'center',marginTop:15}}>
+                <Text style={{fontWeight:'bold',fontSize:18}}>{Strings.Summary_page}</Text>
             </View>
             {
                 apiStatus.unauthorized
@@ -150,7 +159,7 @@ const ScanHistory = ({
             />
             
             <ButtonComponent
-                customBtnStyle={[styles.nxtBtnStyle, { backgroundColor: multiBrandingData ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+                customBtnStyle={[styles.nxtBtnStyle, { backgroundColor: multiBrandingData.themeColor1 ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
                 btnText={Strings.Back.toUpperCase()}
                 activeOpacity={0.8}
                 onPress={() => navigation.push('StudentsList')}

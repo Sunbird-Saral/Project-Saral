@@ -529,7 +529,7 @@ dispatchStudentExamData(payload){
                                     let subjects = []
                                     let set =[]
                                     _.filter(studentsAndExamData.data.exams, function (o) {
-                                        subArr.push(o.subject + " " + o.examDate)
+                                        subArr.push(o.subject)
                                         testID.push(o.examId)
                                         examDates.push(o.examDate)
                                         subjects.push(o.subject)
@@ -942,42 +942,39 @@ dispatchStudentExamData(payload){
         const { loginData, multiBrandingData, modalStatus, modalMessage } = this.props
         const BrandLabel = multiBrandingData && multiBrandingData.screenLabels && multiBrandingData.screenLabels.selectDetails[0]
         return (
-            <View style={{ flex: 1, backgroundColor: AppTheme.WHITE_OPACITY }}>
+            <View style={{ flex: 1, backgroundColor: multiBrandingData ? multiBrandingData.themeColor2 : AppTheme.WHITE_OPACITY }}>
+             
                 <ShareComponent
                     navigation={this.props.navigation}
                     message={this.state.logmessage ? JSON.stringify(this.state.logmessage, null, 2) : ''}
+                    onPress={()=>this.props.navigation.navigate('Home')}
 
                 />
+                 <View style={{margin:5}}>
                 {BrandLabel ?
                     <MultibrandLabels
-                        Label1={BrandLabel.School}
-                        Label2={BrandLabel.SchoolId}
-                        School={loginData.data.school.name}
-                        SchoolId={loginData.data.school.schoolId}
+                         Label1={BrandLabel.School}
+                         Label2={BrandLabel.SchoolId}
+                         School=  {`${loginData.data.school.name}${loginData.data.school.block ? ','+loginData.data.school.block : ''}${loginData.data.school.district ? ','+loginData.data.school.district : ''}`}
+                         SchoolId={loginData.data.school.schoolId}
                     />
 
                     :
 
                     (loginData && loginData.data) &&
-                    <View style={{ marginTop: 20, width: '60%' }}>
-                        <Text
-                            style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%', fontFamily: monospace_FF }}
+                    <View style={{ }}>
+                        {/* <Text
+                            style={{ fontSize: 14, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%', fontFamily: monospace_FF }}
                         >
-                            {Strings.school_name + ' : '}
-                            <Text style={{ fontWeight: 'normal', fontFamily: monospace_FF }}>
-                                {loginData.data.school.name}
+                            {`${Strings.school_name} : `} */}
+                            <Text style={{marginLeft:5}}>
+                            {`${loginData.data.school.name} ${loginData.data.school.block ?','+ loginData.data.school.block : ''} ${loginData.data.school.district ? ','+loginData.data.school.district : ''}`}
                             </Text>
-                        </Text>
-                        <Text
-                            style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%', fontFamily: monospace_FF }}
-                        >
-                            {Strings.schoolId_text + ' : '}
-                            <Text style={{ fontWeight: 'normal', fontFamily: monospace_FF }}>
-                                {loginData.data.school.schoolId}
-                            </Text>
-                        </Text>
-                    </View>}
-
+                        {/* </Text> */}
+                       
+                    </View>
+                    }
+                    </View>
                 <ScrollView
                     contentContainerStyle={{ paddingTop: '5%', paddingBottom: '35%' }}
                     showsVerticalScrollIndicator={false}
@@ -1069,7 +1066,7 @@ dispatchStudentExamData(payload){
                 </ScrollView>
                 <View style={styles.btnContainer}>
                     <ButtonComponent
-                        customBtnStyle={[styles.nxtBtnStyle, { backgroundColor: this.props.multiBrandingData ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE }]}
+                        customBtnStyle={[styles.nxtBtnStyle, { backgroundColor: this.props.multiBrandingData.themeColor1 ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE }]}
                         btnText={Strings.submit_text.toUpperCase()}
                         onPress={this.onSubmitClick}
                     />
@@ -1114,7 +1111,8 @@ const styles = {
         borderColor: AppTheme.LIGHT_GREY,
         width: '100%',
         textAlign: 'center',
-        fontSize: AppTheme.FONT_SIZE_SMALL + 2,
+        fontSize: AppTheme.FONT_SIZE_LARGE,
+        fontWeight:'bold',
         color: AppTheme.BLACK,
         letterSpacing: 1,
         marginBottom: '5%',
@@ -1133,6 +1131,8 @@ const styles = {
         fontFamily: monospace_FF
     },
     nxtBtnStyle: {
+        width:160,
+        height:43
     },
     imageViewContainer: {
 

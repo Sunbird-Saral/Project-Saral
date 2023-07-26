@@ -7,7 +7,6 @@ import API from '../apis/api';
  
  export class DefaultBrandAction extends API {
      constructor(requestBody,deviceUniqId, timeout = 30000) {
-        console.log('deviceUniqId|||||||||||',deviceUniqId);
          super('GET', timeout, false);
          
          this.requestBody = '';

@@ -23,7 +23,7 @@ export const styles = StyleSheet.create({
         paddingHorizontal: '5%',
     },
     scanStatus: {
-        fontSize: 16,
+        fontSize: 18,
         fontWeight: 'bold',
         marginTop: 15,
         textAlign: 'center',
@@ -39,5 +39,6 @@ export const styles = StyleSheet.create({
         borderRadius: 10,
         marginBottom: 20,
         marginHorizontal: 10,
+        height:45
     },
 });

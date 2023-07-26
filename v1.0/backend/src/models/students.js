@@ -12,6 +12,11 @@ const studentSchema = new mongoose.Schema({
         required: true,
         trim: true,
     },
+    fatherName: {
+        type: String,
+        required: false,
+        trim: true,
+    },
     classId: {
         type: String,
         required: true,
