@@ -185,7 +185,7 @@ const ScanHistoryCard = ({
                 })
                 .catch(function (err) {
                     collectErrorLogs("ScanHistoryCard.js","saveScanData",api.apiEndPoint(),err,false);
-                    callCustomModal(Strings.message_text,err && err.response && err.response.data && err.response.data.error ? err.response.data.error  : Strings.contactAdmin,false);
+                    callCustomModal(Strings.message_text,err && err.response && err.response?.data && err.response?.data?.error ? err.response.data.error  : Strings.contactAdmin,false);
                     clearTimeout(id);
                     setIsLoading(false);
                 });
