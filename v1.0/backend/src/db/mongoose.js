@@ -30,15 +30,18 @@ const poolFactory = {
 };
 
 const pool = createPool(poolFactory, {
-  max: 50,
-  min: 10, // Minimum number of connections in the pool,
+  max: 100,
+  min: 50, // Minimum number of connections in the pool,
   autostart: true,
   idleTimeoutMillis: 30000, // How long a resource can stay idle in the pool before being removed (30 seconds in this case)
 });
 
 const getClientPool = (req, res, next) => {
+    const startTime = new Date();
+    req.startTime = startTime;
     pool.acquire()
       .then((connection) => {
+        req.connectionWaitTime = (new Date() - startTime);
         req.dbConnection = connection;
         next();
       })

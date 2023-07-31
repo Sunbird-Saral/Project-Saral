@@ -65,7 +65,11 @@ exports.saveMarks = async (req, res, next) => {
         );
         const endTime = new Date();
         const executionTime = endTime - startTime;
+        const executionTime2 = endTime - req.startTime;
+        console.log('-----------logging started------------');
         logger.info(`Execution time for Save Marks BulkWrite : ${executionTime}ms`);
+        logger.info(`Execution time for Save Marks API : ${executionTime2}ms`);
+        logger.info(`Wait time to get mongodb client ${req.connectionWaitTime}ms`);
 
         res.status(200).json({ message: "Saved Successfully." })
 
