@@ -134,7 +134,6 @@ class LoginComponent extends Component {
         const deviceUniqId = await DeviceInfo.getUniqueId();
         let payload = this.props.defaultBrandingdata
         let apiObj = new DefaultBrandAction(payload, deviceUniqId);
-        console.log('payload>>>', payload);
         this.props.APITransport(apiObj)
     }
 
@@ -445,7 +444,7 @@ class LoginComponent extends Component {
     render() {
         const { password, isLoading, Loading, errUsername, errPassword, errCommon } = this.state;
         const { defaultBrandingdata } = this.props
-        console.log('defaultBrandingdata>>>>', defaultBrandingdata);
+        // console.log('defaultBrandingdata>>>>', defaultBrandingdata);
         if (defaultBrandingdata === undefined || defaultBrandingdata === null) {
             return <View style={styles.container}>
                 <ScrollView

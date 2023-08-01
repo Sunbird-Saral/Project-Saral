@@ -40,6 +40,7 @@ import { getRegularRoipi, getRegularSavedScanpi, getRegularStudentExamApi, setRe
 import constants from '../../flux/actions/constants';
 import { storeFactory } from '../../flux/store/store';
 import DeviceInfo from 'react-native-device-info';
+import { markAttendanceNext } from '../../utils/Analytics';
 const StudentsList = ({
     filteredData,
     loginData,
@@ -50,7 +51,7 @@ const StudentsList = ({
     apiStatus,
     roiData
 }) => {
-
+console.log('loginData>>>>',loginData.data.school.schoolId);
     function usePrevious(value) {
         const ref = useRef();
         useEffect(() => {
@@ -365,6 +366,7 @@ useEffect(() => {
         if (absentPresentStatus.studentsMarkInfo.length == 0) {
             setPresentAbsentStudent(allStudentData)
             navigation.push('myScan');
+            markAttendanceNext(loginData.data.school.schoolId)
         }else if (absentPresentStatus.studentsMarkInfo.length > 0) {
             await setDataIntoRegularStudentExamApi()
         }
@@ -390,6 +392,7 @@ useEffect(() => {
         await setRegularStudentExamApi(getStudentExamCache);
         await setPresentAbsentStudent(allStudentData)
         navigation.push('myScan');
+        markAttendanceNext(loginData.data.school.schoolId)
     }
 
     const saveStudentData = (api) => {

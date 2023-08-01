@@ -13,6 +13,7 @@ import { checkAppVersion, checkNetworkConnectivity, dispatchCustomModalMessage, 
 import SystemSetting from 'react-native-system-setting'
 import SaralSDK from '../../../SaralSDK'
 import { OcrLocalResponseAction } from '../../flux/actions/apis/OcrLocalResponseAction'
+import { ReScanButton } from '../../utils/Analytics';
 
 const{width,height} = Dimensions.get('window');
 const ScanStatusLocalList = ({
@@ -103,12 +104,15 @@ const ScanStatusLocalList = ({
                         callCustomModal(Strings.message_text, Strings.roi_cache_not_available,false,false)
                     } else {
                         openCameraActivity()
+                        ReScanButton(loginData.data.school.schoolId)
                     }
                 } else if (!minimalFlag ) {
                     if (loginData.data.school.hasOwnProperty("offlineMode") && loginData.data.school.offlineMode && hasEmpty) {
                         openCameraActivity()
+                        ReScanButton(loginData.data.school.schoolId)
                     } else if(loginData.data.school.hasOwnProperty("offlineMode") == false || loginData.data.school.offlineMode == false && hasEmpty){
                         openCameraActivity()
+                        ReScanButton(loginData.data.school.schoolId)
                     } else {
                         callCustomModal(Strings.message_text,Strings.roi_cache_not_available,false,false)
                     }
@@ -133,8 +137,10 @@ const ScanStatusLocalList = ({
                     ) {
                         if (minimalFlag && roiIndex != -1) {
                             openCameraActivity()
+                            ReScanButton(loginData.data.school.schoolId)
                         } else if (!minimalFlag ) {
                             openCameraActivity()
+                            ReScanButton(loginData.data.school.schoolId)
                         }
                          else {
                             callCustomModal(Strings.message_text,Strings.please_select_roi_layout,false,false)

@@ -30,6 +30,7 @@ import { getRoiDataApi, getScanDataApi, setRoiDataApi, setScanDataApi } from '..
 import constants from '../../flux/actions/constants';
 import { storeFactory } from '../../flux/store/store';
 import DeviceInfo from 'react-native-device-info';
+import { onScanButtonClickEvent } from '../../utils/Analytics';
 
 LogBox.ignoreAllLogs()
 
@@ -345,12 +346,15 @@ class MyScanComponent extends Component {
                         this.callCustomModal(Strings.message_text, Strings.roi_cache_not_available,false,false)
                     } else {
                         this.openCameraActivity()
+                        onScanButtonClickEvent(this.props.loginData.data.school.schoolId)
                     }
                 } else if (!this.props.minimalFlag ) {
                     if (this.props.loginData.data.school.hasOwnProperty("offlineMode") && this.props.loginData.data.school.offlineMode && hasEmpty) {
                         this.openCameraActivity()
+                        onScanButtonClickEvent(this.props.loginData.data.school.schoolId)
                     } else if(this.props.loginData.data.school.hasOwnProperty("offlineMode") == false || this.props.loginData.data.school.offlineMode == false && hasEmpty){
                         this.openCameraActivity()
+                        onScanButtonClickEvent(this.props.loginData.data.school.schoolId)
                     } else {
                         this.callCustomModal(Strings.message_text,Strings.roi_cache_not_available,false,false)
                     }
@@ -375,8 +379,10 @@ class MyScanComponent extends Component {
                     ) {
                         if (this.props.minimalFlag && this.state.roiIndex != -1) {
                             this.openCameraActivity()
+                            onScanButtonClickEvent(this.props.loginData.data.school.schoolId)
                         } else if (!this.props.minimalFlag ) {
                             this.openCameraActivity()
+                            onScanButtonClickEvent(this.props.loginData.data.school.schoolId)
                         }
                          else {
                             this.callCustomModal(Strings.message_text,Strings.please_select_roi_layout,false,false)

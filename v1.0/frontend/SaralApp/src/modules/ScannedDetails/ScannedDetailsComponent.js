@@ -30,6 +30,7 @@ import SaralSDK from '../../../SaralSDK'
 //npm
 import CheckBox from '@react-native-community/checkbox';
 import TaggingModal from '../common/TaggingModal';
+import { saveLocalAfterScan } from '../../utils/Analytics';
 
 const { width, height } = Dimensions.get('window')
 const ScannedDetailsComponent = ({
@@ -483,6 +484,7 @@ const ScannedDetailsComponent = ({
                 setBtnName('Back')
                 if (currentIndex + 1 == stdRollArray.length - 1) {
                     setNextBtn(Strings.Save)
+                    saveLocalAfterScan(loginData.data.school.schoolId)
                 }
             } else {
                 let chkSkip = 0
@@ -530,6 +532,7 @@ const ScannedDetailsComponent = ({
     const saveMultipleStudentDataSheet = () => {
         if (isMultipleStudent && nextBtn === Strings.Save) {
             saveMultiData()
+            saveLocalAfterScan(loginData.data.school.schoolId)
         }
     }
 
@@ -1059,6 +1062,7 @@ const ScannedDetailsComponent = ({
             setNewArrayValue(filterDataAccordingPage)
             if (currentIndex + 1 == multiPage) {
                 setNextBtn(Strings.Save)
+                saveLocalAfterScan(loginData.data.school.schoolId)
             }
         }
     }

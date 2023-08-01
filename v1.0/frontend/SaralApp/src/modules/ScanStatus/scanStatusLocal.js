@@ -33,6 +33,7 @@ import { scanStatusDataAction } from './scanStatusDataAction';
 import Spinner from '../common/components/loadingIndicator';
 import constants from '../../flux/actions/constants';
 import DeviceInfo from 'react-native-device-info';
+import { SaveInDbEvent } from '../../utils/Analytics';
 
 const ScanStatusLocal = ({
     loginData,
@@ -275,6 +276,8 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
                         setIsLoading(false)
                         onBackPress();
                         callCustomModal(Strings.message_text,Strings.saved_successfully,false);
+                        SaveInDbEvent()
+
                     }
                 })
                 .catch(function (err) {
@@ -325,6 +328,7 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
             axios.post(api.apiEndPoint(), api.getBody(),{ headers: api.getHeaders(), cancelToken: source.token })
                 .then(function (res) {
                     callCustomModal(Strings.message_text,Strings.saved_successfully,false);
+                    SaveInDbEvent()
                     apiResponse = res
                     clearTimeout(id)
                     setIsLoading(false)
