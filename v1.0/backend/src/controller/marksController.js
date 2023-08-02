@@ -8,6 +8,7 @@ const httperror = require("http-errors");
 exports.saveMarks = async (req, res, next) => {
     const marks = []
     const startTime = new Date();
+    req.bulkopst = (startTime - req.startTime);
     if (req.header('X-App-Version')) {
         // console.log("APP VERSION", req.get('X-App-Version'))
     }
@@ -61,7 +62,11 @@ exports.saveMarks = async (req, res, next) => {
                     update: { $set: { studentIdTrainingData: mark.studentIdTrainingData, studentId: mark.studentId, predictionConfidence: mark.predictionConfidence, schoolId: mark.schoolId, examDate: mark.examDate, predictedStudentId: mark.predictedStudentId, studentAvailability: mark.studentAvailability, marksInfo: mark.marksInfo, maxMarksTrainingData: mark.maxMarksTrainingData, maxMarksPredicted: mark.maxMarksPredicted, securedMarks: mark.securedMarks, totalMarks: mark.totalMarks, obtainedMarksTrainingData: mark.obtainedMarksTrainingData, obtainedMarksPredicted: mark.obtainedMarksPredicted, set: mark.set, subject: mark.subject, classId: mark.classId, section: mark.section, examId: mark.examId, userId: mark.userId, roiId: mark.roiId } },
                     upsert: true
                 }
-            }))
+            })),
+            {
+                writeConcern : {w:0},
+                ordered : false
+             }
         );
         const endTime = new Date();
         const executionTime = endTime - startTime;
@@ -70,6 +75,8 @@ exports.saveMarks = async (req, res, next) => {
         logger.info(`Execution time for Save Marks BulkWrite : ${executionTime}ms`);
         logger.info(`Execution time for Save Marks API : ${executionTime2}ms`);
         logger.info(`Wait time to get mongodb client ${req.connectionWaitTime}ms`);
+        logger.info(`Auth check wait time ${req.authChkt}ms`);
+        logger.info(`start bulkwrite control exec ${req.bulkopst}ms`);
 
         res.status(200).json({ message: "Saved Successfully." })
 
