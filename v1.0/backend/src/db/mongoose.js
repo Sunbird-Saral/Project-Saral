@@ -30,8 +30,8 @@ const poolFactory = {
 };
 
 const pool = createPool(poolFactory, {
-  max: 50,
-  min: 10, // Minimum number of connections in the pool,
+  max: 300,
+  min: 100, // Minimum number of connections in the pool,
   autostart: true,
   idleTimeoutMillis: 30000, // How long a resource can stay idle in the pool before being removed (30 seconds in this case)
 });
