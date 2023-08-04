@@ -2,7 +2,6 @@ const Marks = require('../models/marks')
 const Users = require('../models/users')
 const Helper = require('../middleware/helper')
 const { stringObject } = require('../utils/commonUtils')
-require('../db/mongoose')
 const logger = require('../logging/logger')
 const mongoose = require('mongoose')
 const httperror = require("http-errors");
