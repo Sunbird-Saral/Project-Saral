@@ -249,6 +249,14 @@ useEffect(() => {
                     setIsLoading(false)
                     collectErrorLogs("StudentList.js","FetchSavedScannedData",api.apiEndPoint(),err,false)
                     clearTimeout(id)
+                    let data = {
+                        title : Strings.message_text,
+                        message : Strings.please_try_again,
+                        isOkAvailable : false,
+                        isCancel : false
+                    }
+                    dispatch(dispatchCustomModalStatus(true));
+                    dispatch(dispatchCustomModalMessage(data));
                 });
         }
     }
