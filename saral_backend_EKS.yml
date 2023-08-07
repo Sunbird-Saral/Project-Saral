@@ -60,6 +60,22 @@ spec:
       port: 80
       targetPort: 3005
   type: ClusterIP
+
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: saral-backend
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: saral-backend
+  minReplicas: 3  # Update the minimum number of replicas to 3
+  maxReplicas: 6  # Update the maximum number of replicas to 3
+  targetCPUUtilizationPercentage: 70
+
+  
   
   
       
