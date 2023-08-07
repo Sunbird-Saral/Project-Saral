@@ -3,18 +3,8 @@ const { createPool } = require('generic-pool');
 
 // url/databasename
 const connectionURL = process.env.MONGODB_URL
-const poolSize = process.env.MONGODB_POOL_SIZE || 50
-
-//TODO would be removed
-// mongoose.connect(connectionURL, {
-//     useNewUrlParser: true,
-//     useCreateIndex: true,
-//     useUnifiedTopology: true,
-//     poolSize: poolSize,
-//     useFindAndModify: false, // to handle deprication warning for findByIdandUpdate
-// })
-
-//----------New way of getting connection to mongodb-----------
+const maxPoolSize = process.env.MONGODB_POOL_SIZE || 50
+const minPoolSize = process.env.MIN_MONGODB_POOL_SIZE || 20
 
 const options = {
     useNewUrlParser: true,
@@ -30,18 +20,15 @@ const poolFactory = {
 };
 
 const pool = createPool(poolFactory, {
-  max: 50,
-  min: 20, // Minimum number of connections in the pool,
+  max: maxPoolSize,
+  min: minPoolSize, // Minimum number of connections in the pool,
   autostart: true,
   idleTimeoutMillis: 30000, // How long a resource can stay idle in the pool before being removed (30 seconds in this case)
 });
 
 const getClientPool = (req, res, next) => {
-    const startTime = new Date();
-    req.startTime = startTime;
     pool.acquire()
       .then((connection) => {
-        req.connectionWaitTime = (new Date() - startTime);
         req.dbConnection = connection;
         next();
       })

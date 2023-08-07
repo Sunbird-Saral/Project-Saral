@@ -23,11 +23,13 @@ spec:
         - name: PORT
           value: "3005"
         - name: MONGODB_URL
-          value: "mongodb://10.0.31.152:27017,10.0.50.162:27017/prod_saral"
+          value: "mongodb://10.0.0.185:27017/saraldata_dev"
         - name: JWT_SECRET
           value: SARALDATA_NODE
         - name: MONGODB_POOL_SIZE
           value: "50"
+        - name: MIN_MONGODB_POOL_SIZE
+          value: "20"
         resources:
           limits:
             cpu: 2000m

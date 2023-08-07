@@ -8,7 +8,6 @@ const httperror = require("http-errors");
 exports.saveMarks = async (req, res, next) => {
     const marks = []
     const startTime = new Date();
-    req.bulkopst = (startTime - req.startTime);
     if (req.header('X-App-Version')) {
         // console.log("APP VERSION", req.get('X-App-Version'))
     }
@@ -33,7 +32,7 @@ exports.saveMarks = async (req, res, next) => {
     
         const Marks = connection.model('Marks', marksSchema);
         req.body.studentsMarkInfo.forEach(studentsData => {
-            const marksData = new Marks({
+            const mark = new Marks({
                 ...studentsData,
                 schoolId,
                 examDate,
@@ -44,40 +43,33 @@ exports.saveMarks = async (req, res, next) => {
                 examId,
                 userId
             })
+
+            const marksData = {
+                updateOne: {
+                    filter: {
+                        schoolId: mark.schoolId,
+                        studentId: mark.studentId,
+                        subject: mark.subject,
+                        examDate: mark.examDate,
+                        __v: mark.__v
+                    },
+                    update: { $set: { studentIdTrainingData: mark.studentIdTrainingData, studentId: mark.studentId, predictionConfidence: mark.predictionConfidence, schoolId: mark.schoolId, examDate: mark.examDate, predictedStudentId: mark.predictedStudentId, studentAvailability: mark.studentAvailability, marksInfo: mark.marksInfo, maxMarksTrainingData: mark.maxMarksTrainingData, maxMarksPredicted: mark.maxMarksPredicted, securedMarks: mark.securedMarks, totalMarks: mark.totalMarks, obtainedMarksTrainingData: mark.obtainedMarksTrainingData, obtainedMarksPredicted: mark.obtainedMarksPredicted, set: mark.set, subject: mark.subject, classId: mark.classId, section: mark.section, examId: mark.examId, userId: mark.userId, roiId: mark.roiId, __v: mark.__v + 1 } },
+                    upsert: true
+                }
+            }
             marks.push(marksData)
         });
 
         await Helper.lockScreenValidator(connection,req.school)
 
 
-        let marksResult = await Marks.bulkWrite(
-            marks.map((mark) => ({
-                updateOne: {
-                    filter: {
-                        schoolId: mark.schoolId,
-                        studentId: mark.studentId,
-                        subject: mark.subject,
-                        examDate: mark.examDate
-                    },
-                    update: { $set: { studentIdTrainingData: mark.studentIdTrainingData, studentId: mark.studentId, predictionConfidence: mark.predictionConfidence, schoolId: mark.schoolId, examDate: mark.examDate, predictedStudentId: mark.predictedStudentId, studentAvailability: mark.studentAvailability, marksInfo: mark.marksInfo, maxMarksTrainingData: mark.maxMarksTrainingData, maxMarksPredicted: mark.maxMarksPredicted, securedMarks: mark.securedMarks, totalMarks: mark.totalMarks, obtainedMarksTrainingData: mark.obtainedMarksTrainingData, obtainedMarksPredicted: mark.obtainedMarksPredicted, set: mark.set, subject: mark.subject, classId: mark.classId, section: mark.section, examId: mark.examId, userId: mark.userId, roiId: mark.roiId, __v: mark.__v + 1 } },
-                    upsert: true
-                }
-            })),
-            {
-                writeConcern : {w:1},
-                ordered : true
-             }
-        );
+        await Marks.bulkWrite(marks, {
+            writeConcern : {w:1},
+            ordered : true
+         });
         const endTime = new Date();
         const executionTime = endTime - startTime;
-        const executionTime2 = endTime - req.startTime;
-        console.log('-----------logging started------------');
         logger.info(`Execution time for Save Marks BulkWrite : ${executionTime}ms`);
-        logger.info(`Execution time for Save Marks API : ${executionTime2}ms`);
-        logger.info(`Wait time to get mongodb client ${req.connectionWaitTime}ms`);
-        logger.info(`Auth check wait time ${req.authChkt}ms`);
-        logger.info(`start bulkwrite control exec ${req.bulkopst}ms`);
-
         res.status(200).json({ message: "Saved Successfully." })
 
 
