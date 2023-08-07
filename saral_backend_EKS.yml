@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: saral-backend
 spec:
-  replicas: 10
+  replicas: 3
   selector:
     matchLabels:
       app: saral-backend
@@ -29,7 +29,7 @@ spec:
         - name: MONGODB_POOL_SIZE
           value: "50"
         - name: MIN_MONGODB_POOL_SIZE
-          value: "20"
+          value: "30"
         resources:
           limits:
             cpu: 2000m

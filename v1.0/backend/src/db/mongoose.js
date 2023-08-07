@@ -4,7 +4,7 @@ const { createPool } = require('generic-pool');
 // url/databasename
 const connectionURL = process.env.MONGODB_URL
 const maxPoolSize = process.env.MONGODB_POOL_SIZE || 50
-const minPoolSize = process.env.MIN_MONGODB_POOL_SIZE || 20
+const minPoolSize = process.env.MIN_MONGODB_POOL_SIZE || 30
 
 const options = {
     useNewUrlParser: true,
