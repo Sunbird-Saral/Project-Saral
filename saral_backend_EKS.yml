@@ -73,7 +73,7 @@ spec:
     name: saral-backend
   minReplicas: 3  # Update the minimum number of replicas to 3
   maxReplicas: 6  # Update the maximum number of replicas to 3
-  targetCPUUtilizationPercentage: 70
+  targetCPUUtilizationPercentage: 50
 
   
   
