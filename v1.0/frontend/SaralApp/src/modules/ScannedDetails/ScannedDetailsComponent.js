@@ -482,7 +482,7 @@ const ScannedDetailsComponent = ({
                 setCurrentIndex(currentIndex + 1)
                 setBtnName('Back')
                 if (currentIndex + 1 == stdRollArray.length - 1) {
-                    setNextBtn(Strings.Save)
+                    setNextBtn(BrandLabel&&BrandLabel.Save ? BrandLabel.Save : Strings.Save)
                 }
             } else {
                 let chkSkip = 0
@@ -792,7 +792,7 @@ const ScannedDetailsComponent = ({
             setStudentID(structureList[currentIndex - 1].RollNo)
             setCurrentIndex(currentIndex - 1)
             if (currentIndex == 1) {
-                setBtnName('cancel')
+                setBtnName(BrandLabel&&BrandLabel.Cancel ? BrandLabel.Cancel:'cancel')
             }
             setNextBtn(Strings.next_text)
             goToTop()
@@ -1058,7 +1058,7 @@ const ScannedDetailsComponent = ({
             setBtnName(Strings.Back)
             setNewArrayValue(filterDataAccordingPage)
             if (currentIndex + 1 == multiPage) {
-                setNextBtn(Strings.Save)
+                setNextBtn(BrandLabel&&BrandLabel.Save ? BrandLabel.Save: Strings.Save)
             }
         }
     }
@@ -1127,7 +1127,7 @@ const ScannedDetailsComponent = ({
                 setNewArrayValue(filterDataAccordingPage)
                 setCurrentIndex(currentIndex - 1)
                 if (currentIndex - 1 == 1) {
-                    setBtnName(Strings.cancel_text)
+                    setBtnName(BrandLabel&&BrandLabel.Cancel ? BrandLabel.Cancel : Strings.cancel_text)
                 }
             }
         } else {

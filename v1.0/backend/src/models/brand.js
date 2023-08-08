@@ -13,6 +13,18 @@ const BrandSchema = new mongoose.Schema({
         type: String,
         trim: true
     },
+    themeColor3:{
+        type: String,
+        trim: true
+    },
+    themeColor4:{
+        type: String,
+        trim: true
+    },
+    themeColor5:{
+        type: String,
+        trim: true
+    },
     appName:{
         type: String,
         required: true,
@@ -23,6 +35,21 @@ const BrandSchema = new mongoose.Schema({
         trim: true
     },
     screenLabels: {
+          loginComponent: [{
+            _id: false,
+            UserId: {
+                type: String
+            },
+            Password: {
+                type: String
+            },
+            RememberMeText: {
+                type: String
+            },
+            LoginText: {
+                type: String
+            },
+        }],
         homeScreen: [{
             _id: false,
             useCase1: {
@@ -114,7 +141,16 @@ const BrandSchema = new mongoose.Schema({
             },
             SchoolId: {
                 type:String
-            }
+            },
+            ReviewScanText: {
+                type:String
+            },
+            SubmitAllScan: {
+                type:String
+            },
+            SummaryPage: {
+                type:String
+            },
         }],
         scanHistoryCard: [{
             _id: false,
@@ -147,7 +183,28 @@ const BrandSchema = new mongoose.Schema({
             },
             Details:{
                 type: String
-            }
+            },
+            TotalStudent:{
+                type: String
+            },
+            PresentStudents:{
+                type: String
+            },
+            ScanNotSubmitedYet:{
+                type: String
+            },
+            TotalScanSubmited:{
+                type: String
+            },
+            ReviewScanText:{
+                type: String
+            },
+            SubmitAllScan:{
+                type: String
+            },
+            SummaryPage:{
+                type: String
+            },
         }],
         examDetailsPopup: {
             type:Array
@@ -172,9 +229,16 @@ const BrandSchema = new mongoose.Schema({
             RecordNo:{
                 type: String
             },
+            Cancel:{
+                type:Array
+             },
+             Save:{
+                type:Array
+             },
            ListTableHeading:{
                type:Array
-            }
+            },
+           
         }]
     }   
 },{

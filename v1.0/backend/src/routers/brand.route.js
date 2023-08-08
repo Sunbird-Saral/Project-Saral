@@ -57,7 +57,7 @@ router.delete('/brand', auth, async (req, res) => {
 router.put('/brand', auth, async (req, res) => {
     try {
         const inputKeys = Object.keys(req.body)
-        const allowedUpdates = ['logoImage', 'themeColor1', 'themeColor2', 'appName']
+        const allowedUpdates = ['logoImage', 'themeColor1', 'themeColor2','themeColor3','themeColor4','themeColor5', 'appName']
         const isValidOperation = inputKeys.every((input) => allowedUpdates.includes(input))
 
         if (!isValidOperation) {

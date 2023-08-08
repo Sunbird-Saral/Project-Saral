@@ -294,8 +294,11 @@ useEffect(() => {
         return (
             <View style={{backgroundColor:multiBrandingData.themeColor2 ? multiBrandingData.themeColor2:AppTheme.WHITE}}>
             <StudentsDataComponent
-                themeColor1={multiBrandingData.themeColor1 ? multiBrandingData.themeColor1 : AppTheme.BLUE}
+                themeColor1={multiBrandingData.themeColor1 ? multiBrandingData.themeColor1 : '#52A08D'}
                 themeColor2={multiBrandingData.themeColor2 ? multiBrandingData.themeColor2 : AppTheme.LIGHT_BLUE}
+                themeColor3={multiBrandingData.themeColor3 ? multiBrandingData.themeColor3 : '#ACCCCE'}
+                themeColor4={multiBrandingData.themeColor4 ? multiBrandingData.themeColor4 : '#FF5733'}
+                themeColor5={multiBrandingData.themeColor5 ? multiBrandingData.themeColor5 : '#e5b6b3'}
                 item={item}
                 index={index}
                 pabsent={item.studentAvailability}

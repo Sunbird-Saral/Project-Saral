@@ -25,7 +25,7 @@ const  MultibrandLabels = ({
         <Text
             style={{ fontSize: AppTheme.FONT_SIZE_REGULAR, color: AppTheme.BLACK, fontWeight: 'bold', paddingHorizontal: '5%', paddingVertical: '2%',fontFamily : monospace_FF }}
         >
-           {Label2 ? Label2 + ' : ' : Strings.schoolId_text + ' : '}
+           {/* {Label2 ? Label2 + ' : ' : Strings.schoolId_text + ' : '} */}
             <Text style={{ fontWeight: 'normal', fontFamily : monospace_FF }}>
                 {SchoolId}
             </Text>

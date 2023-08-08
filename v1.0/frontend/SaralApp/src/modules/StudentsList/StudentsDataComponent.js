@@ -12,6 +12,9 @@ const StudentsDataComponent = ({
     item,
     themeColor1,
     themeColor2,
+    themeColor3,
+    themeColor4,
+    themeColor5,
     pabsent,
     stdArray,
     scanedData,
@@ -194,15 +197,15 @@ const StudentsDataComponent = ({
 {
                         !isPresent
                             ?
-                            <View style={{backgroundColor: '#e5b6b3',width:54,height:24,borderRadius:10}}>
+                            <View style={{backgroundColor: themeColor5,width:54,height:24,borderRadius:10}}>
                             <View style={{flexDirection:"row",justifyContent:'space-between',alignItems:'center'}}>
-                             <View style={{backgroundColor:'red',width:22,height:22,borderRadius:11,top:1}}></View>
-                             <Text style={{marginRight:12,color:'red',fontWeight:"bold"}}>{'A'}</Text>
+                             <View style={{backgroundColor:themeColor4,width:22,height:22,borderRadius:11,top:1}}></View>
+                             <Text style={{marginRight:12,color:themeColor4,fontWeight:"bold"}}>{'A'}</Text>
                              </View>
                              </View>
                             
                             :
-                            <View style={{backgroundColor:themeColor2 ? '#93CECE' : AppTheme.BLUE,width:54,height:24,borderRadius:10}}>
+                            <View style={{backgroundColor:themeColor3 ,width:54,height:24,borderRadius:10}}>
                            <View style={{flexDirection:"row",justifyContent:'space-between',alignItems:'center'}}>
                             <Text style={{marginLeft:12,color:themeColor1,fontWeight:'bold'}}>{'P'}</Text>
                             <View style={{backgroundColor:themeColor1,width:22,height:22,borderRadius:11,top:1}}></View>

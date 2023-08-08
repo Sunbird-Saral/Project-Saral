@@ -294,7 +294,7 @@ const ScanHistoryCard = ({
                     <View>
                     <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                                <Text style={{}}>{BrandLabel&&BrandLabel.Class ? BrandLabel.Class : 'Total Students'}</Text>
+                                <Text style={{}}>{BrandLabel&&BrandLabel.TotalStudent ? BrandLabel.TotalStudent : 'Total Students'}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
                                 <Text style={{fontFamily : monospace_FF,fontWeight:"bold"}} >{studentCount.totalCount}</Text>
@@ -303,7 +303,7 @@ const ScanHistoryCard = ({
 
                         <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                                <Text style={{}}>{BrandLabel&&BrandLabel.Class ? BrandLabel.Class : 'Present Students'}</Text>
+                                <Text style={{}}>{BrandLabel&&BrandLabel.PresentStudents ? BrandLabel.PresentStudents : 'Present Students'}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
                                 <Text style={{fontFamily : monospace_FF,fontWeight:"bold"}} >{studentCount.totalCount -studentCount.absentCount}</Text>
@@ -312,7 +312,7 @@ const ScanHistoryCard = ({
 
                         <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                                <Text style={{}}>{BrandLabel&&BrandLabel.Class ? BrandLabel.Class : 'Scans not submitted yet'}</Text>
+                                <Text style={{}}>{BrandLabel&&BrandLabel.ScanNotSubmitedYet ? BrandLabel.ScanNotSubmitedYet : 'Scans not submitted yet'}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
                                 <Text style={{fontFamily : monospace_FF,color:'red',fontWeight:"bold"}} >{scanStatusData}</Text>
@@ -321,7 +321,7 @@ const ScanHistoryCard = ({
 
                         <View style={styles.scanCardStyle}>
                             <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-                                <Text style={{}}>{BrandLabel&&BrandLabel.Class ? BrandLabel.Class : 'Total scans submitted'}</Text>
+                                <Text style={{}}>{BrandLabel&&BrandLabel.TotalScanSubmited ? BrandLabel.TotalScanSubmited : 'Total scans submitted'}</Text>
                             </View>
                             <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
                                 <Text style={{fontFamily : monospace_FF,fontWeight:"bold"}} >{getSaveCount()}</Text>
@@ -407,7 +407,7 @@ const ScanHistoryCard = ({
                                 }}
                                 onPress={onPressScanStatus}
                             >
-                                <Text style={{ fontFamily: monospace_FF, color: AppTheme.BLACK }}>{'Review scan'}</Text>
+                                <Text style={{ fontFamily: monospace_FF, color: AppTheme.BLACK }}>{BrandLabel&&BrandLabel.ReviewScanText ? BrandLabel.ReviewScanText :'Review scan'}</Text>
                             </TouchableOpacity>
 
                         }
@@ -423,7 +423,7 @@ const ScanHistoryCard = ({
                                 }}
                                 onPress={onPressSaveInDB}
                             >
-                                <Text style={{ fontFamily: monospace_FF, color: AppTheme.BLACK }}>{'Submit all scans'}</Text>
+                                <Text style={{ fontFamily: monospace_FF, color: AppTheme.BLACK }}>{BrandLabel&&BrandLabel.SubmitAllScan ? BrandLabel.SubmitAllScan :'Submit all scans'}</Text>
                             </TouchableOpacity>}
                     </View>
                     {/* {

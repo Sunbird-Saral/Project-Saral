@@ -179,17 +179,19 @@ const ShareComponent = ({
 
   const dashboard =()=>{
     navigation.navigate('selectDetails')
+   
   }
+  console.log('multiBrandingData>>>',multiBrandingData)
   return (
     <View>
 
       <View style={styles.imageViewContainer}>
         <View style={{flexDirection:'row',justifyContent:'space-between',margin:5}}>
-          <TouchableOpacity onPress={onPress}>
-            <Image style={{width:35,height:35}} source={Assets.leftArrow}/>
+          <TouchableOpacity onPress={onPress} style={{backgroundColor: multiBrandingData.themeColor3 ? multiBrandingData.themeColor3 : AppTheme.LIGHT_BLUE,borderRadius:15,width:30,height:30,}}>
+            <Image style={{width:30,height:30,}} source={Assets.leftArrow}/>
           </TouchableOpacity>
 
-          <TouchableOpacity style={{marginRight:10,backgroundColor:  '#ACCCCE' ,width:30,height:30,borderRadius:15,justifyContent:'center',alignItems:'center' }} onPress={() => showModal()}>
+          <TouchableOpacity style={{marginRight:10,backgroundColor: multiBrandingData.themeColor3 ? multiBrandingData.themeColor3 : AppTheme.LIGHT_BLUE,width:30,height:30,borderRadius:15,justifyContent:'center',alignItems:'center' }} onPress={() => showModal()}>
             <Image style={{width:21,height:21}} source={Assets.user}/>
           </TouchableOpacity>
         {/* <TouchableOpacity onPress={() => showModal()} style={[styles.imageContainerStyle, { backgroundColor: multiBrandingData.themeColor1 ? multiBrandingData.themeColor1 : AppTheme.LIGHT_BLUE }]}>
