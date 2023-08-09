@@ -35,16 +35,12 @@ pipeline {
                 sh './deploy_EKS.sh'
             }
         }
-        stage ('Sonar Analysis') {
-            steps {
-                script {
-                    withSonarQubeEnv(installationName: 'saral sonarqube', credentialsId: 'Saral') {
-                        sh 'npm install sonar:sonar'
-                    }
-                }
-           }
+        stage('SonarQube analysis') {
+            steps{
+            withSonarQubeEnv('sonarqube-5.0.1') {
+            sh "npm sonar:sonar"
+            }    
+            }
         }
-
-
     }
 }
