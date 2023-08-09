@@ -7,10 +7,8 @@ const classesSchema = require('../models/classes')
 const examsSchema = require('../models/exams')
 const marksSchema = require('../models/marks')
 const router = new express.Router()
-const clientPool = require('../db/mongoose');
 
 router.post('/classes', auth, async (req, res,next) => {
-
     try {
         let connection = req.dbConnection
         const Classes = connection.model('Classes', classesSchema)
@@ -28,7 +26,7 @@ router.post('/classes', auth, async (req, res,next) => {
         });
 
         let finalUpdatedData = []
-        Promise.map(classModel, async doc => {
+        await Promise.map(classModel, async doc => {
             let match = {
                 schoolId: doc.schoolId,
                 classId: doc.classId,
@@ -61,13 +59,10 @@ router.post('/classes', auth, async (req, res,next) => {
                 }
                 finalUpdatedData.push(response)
             }
-        }).then(() => {
-            res.status(201).send(finalUpdatedData)
-        }).catch(e => {
-            res.status(400).send(e)
-        })
+        });
+        res.status(201).send(finalUpdatedData)
     } catch (e) {
-        console.log("errrrrrrrrrorrrrrrrrrrrrrrrrrrrr--------------->",e);
+        console.log(e);
         res.status(400).send(e)
     } finally {
           next()

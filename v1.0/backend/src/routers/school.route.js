@@ -76,7 +76,7 @@ router.get('/schools', async (req, res,next) => {
       }
 })
 
-router.delete('/schools/:schoolId', async (req, res) => {
+router.delete('/schools/:schoolId', async (req, res, next) => {
     try {
         let connection = req.dbConnection
         const Schools = connection.model('Schools', schoolsSchema)
@@ -104,9 +104,9 @@ router.delete('/schools/:schoolId', async (req, res) => {
       }
 })
 
-router.patch('/schools/:schoolId', async (req, res) => {
+router.patch('/schools/:schoolId', async (req, res, next) => {
     try {
-        let connection = req.dbConnetion
+        let connection = req.dbConnection
         const Schools = connection.model('Schools', schoolsSchema)
         
         if (Object.keys(req.body).length === 0) res.status(400).send({ message: 'Validation error.' })

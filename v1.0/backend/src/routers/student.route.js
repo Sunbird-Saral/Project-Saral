@@ -9,7 +9,7 @@ const studentController = require('../controller/studentController')
 
 router.get('/fetchStudentsandExamsByQuery', auth, studentController.fetchStudentsandExams)
 
-router.post('/student', auth, async (req, res) => {
+router.post('/student', auth, async (req, res, next) => {
     try {
         let connection = req.dbConnection
         const Students = connection.model('Students', studentsSchema)
@@ -43,7 +43,12 @@ router.post('/student', auth, async (req, res) => {
         res.status(201).send(response)
     } catch (e) {
         console.log(e);
-        res.status(400).send(e)
+        if (e.message.includes(' duplicate key error')) {
+            let key = Object.keys(e.keyValue)
+            res.status(400).send({ error: `${key[0]}: ${e.keyValue[key[0]]} already exist` })
+        } else {
+            res.status(400).send(e)
+        }
     }finally {
         next()
       }
@@ -76,7 +81,7 @@ router.post('/fetchStudentsByQuery', auth, async (req, res, next) => {
       }
 })
 
-router.delete('/student/:studentId', async (req, res, next) => {
+router.delete('/student/:studentId', auth, async (req, res, next) => {
     try {
         let connection = req.dbConnection;
         const Students = connection.model('Students', studentsSchema)
@@ -93,6 +98,7 @@ router.delete('/student/:studentId', async (req, res, next) => {
         return res.status(200).send({ "message": "Student has been deleted." })
     }
     catch (e) {
+        console.log(e)
         res.status(400).send(e)
     }finally {
        next()
@@ -100,7 +106,7 @@ router.delete('/student/:studentId', async (req, res, next) => {
 
 })
 
-router.patch('/student/:studentId', async (req, res, next) => {
+router.patch('/student/:studentId', auth, async (req, res, next) => {
     if (Object.keys(req.body).length === 0) res.status(400).send({ message: 'Validation error.' })
     const inputKey = Object.keys(req.body)
     const allowedUpdates = ['name', 'classId']

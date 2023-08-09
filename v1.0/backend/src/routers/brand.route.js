@@ -68,7 +68,7 @@ router.delete('/brand', auth, async (req, res, next) => {
       }
 })
 
-router.put('/brand', auth, async (req, res) => {
+router.put('/brand', auth, async (req, res, next) => {
     
     try {
         let connection = req.dbConnection;

@@ -848,14 +848,7 @@
 					"name": "Fetch student Exam By query",
 					"request": {
 						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1MDAyIiwic2Nob29sSWQiOiJ1MDAyIiwiaWF0IjoxNjgwNTI2NjE3fQ.tNVUV9SwfYe5m5Jlkh2HDCY4GYO5CGmoGA1Dl-_zGxo",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "POST",
 						"header": [
@@ -1499,14 +1492,7 @@
 					"name": "Get Exam By Class",
 					"request": {
 						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1MDAxIiwic2Nob29sSWQiOiJ1MDAxIiwiaWF0IjoxNjczNTgyNTc2fQ.e_qZQ551lNxd8eVz_kEZE_PkJ07O4Zd-6oTIb1iZSNk",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "GET",
 						"header": [
@@ -1752,17 +1738,26 @@
 					"name": "Update Exam",
 					"request": {
 						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjQyNzdiOTZjZjQxZTI1ZDBjNjFkMzUiLCJpYXQiOjE2NDg1MjMyOTN9.GUFaH-k6Gsx_8WE8pyetX4_BEexdFXJI8bZiuD9Eul4",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "PATCH",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer_token}}",
+								"type": "default"
+							},
+							{
+								"key": "methods",
+								"value": "PATCH",
+								"type": "default"
+							},
+							{
+								"key": "Origin",
+								"value": "http://192.168.31.200:3000",
+								"type": "default"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"examLO\": \"Science\",\r\n    \"subject\": \"Science\"\r\n}",
@@ -1868,14 +1863,7 @@
 					"name": "Create Roi",
 					"request": {
 						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJvZDAwMSIsImlhdCI6MTY2NjI0NTgzM30.Dd1DNgN-8dkCTJw6YzuMzkq8LfCHeCfyGf0mhUypITU",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "POST",
 						"header": [
@@ -2510,14 +2498,7 @@
 					"name": "Update brand",
 					"request": {
 						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0OTg5Nzg5NiIsInNjaG9vbElkIjoidTAwMiIsImlhdCI6MTY3ODE3OTUzMH0.YqAQuQXKTwkRE116AZvj-fBzIb2RCqYWLGXfQ8yqU3I",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "PUT",
 						"header": [

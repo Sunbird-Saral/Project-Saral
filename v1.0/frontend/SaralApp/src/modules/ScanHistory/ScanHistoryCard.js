@@ -78,8 +78,6 @@ const ScanHistoryCard = ({
         return data.length;
     }
 
- 
-
         const onPressContinue = () => {
         navigation.push('myScan')
     }
@@ -108,64 +106,55 @@ const ScanHistoryCard = ({
     const onPressSaveInDB = async () => {
         const data = await getScannedDataFromLocal();
         const hasNetwork = await checkNetworkConnectivity();
+        let hasUpdate = await checkAppVersion();
         const deviceUniqId = await DeviceInfo.getUniqueId();
         const { subject, examDate } = filteredData.response
 
-        if (hasNetwork) {
-            if (data) {
-                if (!bgFlag) {
-                    
-            const filterData = data.filter((e) => {
-
-                let findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.response.section)
-        
-                if (e.classId == filteredData.response.class && e.subject == subject && e.examDate == examDate &&findSection) {
-                    return true
-                } else {
-                    return false
-                }
-            })
-
-            setIsLoading(true)
-            let filterDataLen = 0
-
-            let setIntolocalAfterFilter = ''
-            if (filterData.length != 0) {
-                filterData.filter((f) => {
-
-                    let findSection = f.studentsMarkInfo.some((item) => item.section == filteredData.response.section)
-
-                    setIntolocalAfterFilter = data.filter((e) => {
-                     
-                        if (e.classId == f.classId && e.subject == f.subject && e.examDate == f.examDate && findSection) {
-                            return false
+        if (!hasUpdate) {
+            if (hasNetwork) {
+                if (data) {
+                    if (!bgFlag) {
+                        const filterData = data.filter((e) => {
+                            let findSection = e.studentsMarkInfo.some((item) => item.section == filteredData.response.section)
+                            if (e.classId == filteredData.response.class && e.subject == subject && e.examDate == examDate &&findSection) {
+                                return true
+                            } else {
+                                return false
+                            }
+                        })
+                        setIsLoading(true)
+                        let filterDataLen = 0
+                        let setIntolocalAfterFilter = ''
+                        if (filterData.length != 0) {
+                            filterData.filter((f) => {
+                                let findSection = f.studentsMarkInfo.some((item) => item.section == filteredData.response.section)
+                                setIntolocalAfterFilter = data.filter((e) => {
+                                    if (e.classId == f.classId && e.subject == f.subject && e.examDate == f.examDate && findSection) {
+                                        return false
+                                    } else {
+                                        return true
+                                    }
+                                })
+                            })
+                            let apiObj = new SaveScanData(filterData[0], loginData.data.token,deviceUniqId);
+                            saveScanData(apiObj, filterDataLen, setIntolocalAfterFilter);
                         } else {
-                            return true
+                            callCustomModal(Strings.message_text,Strings.there_is_no_data,false);
+                            setIsLoading(false)
                         }
-                    })
-                })
-
-                let apiObj = new SaveScanData(filterData[0], loginData.data.token,deviceUniqId);
-                saveScanData(apiObj, filterDataLen, setIntolocalAfterFilter);
-               
-
+                    }else{
+                        callCustomModal(Strings.message_text,Strings.auto_sync_in_progress_please_wait,false);
+                    }
+                }
+                else {
+                    setIsLoading(false)
+                    callCustomModal(Strings.message_text,Strings.there_is_no_data,false);
+                }
             } else {
-                callCustomModal(Strings.message_text,Strings.there_is_no_data,false);
-                setIsLoading(false)
+                callCustomModal(Strings.message_text, Strings.please_try_again_later_network_is_not_available, false, true)
             }
-        }else{
-            callCustomModal(Strings.message_text,Strings.auto_sync_in_progress_please_wait,false);
         }
-        
     }
-    else {
-        setIsLoading(false)
-        callCustomModal(Strings.message_text,Strings.there_is_no_data,false);
-        }
-    } else {
-        callCustomModal(Strings.message_text, Strings.please_try_again_later_network_is_not_available, false, true)
-    }
-}
     
     const saveScanData = async(api, filteredDatalen, localScanData) => {
 
@@ -181,13 +170,22 @@ const ScanHistoryCard = ({
                 .then(function (res) {
                     apiResponse = res;
                     clearTimeout(id);
-                    api.processResponse(res);
-                    dispatch(dispatchAPIAsync(api));
-                    callScanStatusData(filteredDatalen, localScanData)
+                    let hasMessage = res ? typeof res.data == "string" ? true : false : false
+                    if (hasMessage) {
+                        api.processResponse(res);
+                        callScanStatusData(filteredDatalen, localScanData)
+                        
+                    } else {
+                        dispatch(dispatchAPIAsync(res.data));
+                        setScanStatusData(filteredDatalen);
+                        setScannedDataIntoLocal(localScanData);
+                        callCustomModal(Strings.message_text,Strings.saved_successfully,false);
+                        setIsLoading(false);
+                    }
                 })
                 .catch(function (err) {
                     collectErrorLogs("ScanHistoryCard.js","saveScanData",api.apiEndPoint(),err,false);
-                    callCustomModal(Strings.message_text,err.response.data && err.response.data.message ? err.response.data.message  : Strings.contactAdmin,false);
+                    callCustomModal(Strings.message_text,err && err.response && err.response.data && err.response.data.error ? err.response.data.error  : Strings.contactAdmin,false);
                     clearTimeout(id);
                     setIsLoading(false);
                 });
@@ -217,7 +215,7 @@ const ScanHistoryCard = ({
     }
 
     const FetchSavedScannedData = async(api, uname, pass, filterDataLen, localScanData) => {
-        
+
         if (api.method === 'POST') {
             let apiResponse = null
             const source = axios.CancelToken.source()
@@ -226,13 +224,10 @@ const ScanHistoryCard = ({
                     source.cancel('The request timed out.');
                 }
             }, 60000);
-            axios.post(api.apiEndPoint(), 
-            api.getBody(),
-             { headers: api.getHeaders(), cancelToken: source.token })
+            axios.post(api.apiEndPoint(), api.getBody(), { headers: api.getHeaders(), cancelToken: source.token })
                 .then(function (res) {
                     callCustomModal(Strings.message_text,Strings.saved_successfully,false);
                     apiResponse = res
-                    console.log('FetchSavedScannedData???????',res)
                     clearTimeout(id)
                     api.processResponse(res)
                     dispatch(dispatchAPIAsyncSavedData(api));

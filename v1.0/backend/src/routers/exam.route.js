@@ -73,11 +73,11 @@ router.get('/examByClass/:classId', auth, async (req, res,next) => {
     try {
         let connection = req.dbConnection;
         const Exams = connection.model('Exams', examsSchema)
-
+        console.log('match', match)
         const exams = await Exams.find(match, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 }).lean()
 
         if (!exams.length) {
-            return res.status(404).send({ "message": `Exam dose not exist for ${req.params.classId}` })
+            return res.status(404).send({ "message": `Exam does not exist for ${req.params.classId}` })
         }
         res.send(exams)
     }
