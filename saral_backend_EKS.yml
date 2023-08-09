@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: saral-backend
 spec:
-  replicas: 3
+  replicas: 10
   selector:
     matchLabels:
       app: saral-backend
@@ -60,6 +60,10 @@ spec:
       port: 80
       targetPort: 3005
   type: ClusterIP
+
+
+
+  
   
   
       
