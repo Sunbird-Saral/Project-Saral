@@ -38,7 +38,7 @@ pipeline {
         stage ('SonarQube Analysis') {
             steps {
                 script {
-                    def scannerHome = tool name: 'saral sonarqube', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+                    def scannerHome = tool name: 'saral', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
                     def projectName = 'saral' // Change this to your actual project name
                     def scannerOpts = "-Dsonar.projectKey=${projectName} -Dsonar.sources=./src" // Customize as needed
 
