@@ -35,7 +35,7 @@ pipeline {
                 sh './deploy_EKS.sh'
             }
         }
-        stage ('Scan and Build Jar File') {
+        stage ('Sonar Analysis') {
             steps {
                withSonarQubeEnv(installationName: 'saral sonarqube', credentialsId: 'Saral') {
                 sh 'npm install sonar:sonar'
