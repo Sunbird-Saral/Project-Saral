@@ -35,16 +35,10 @@ pipeline {
                 sh './deploy_EKS.sh'
             }
         }
-        stage ('SonarQube Analysis') {
+        stage ('Scan and Build Jar File') {
             steps {
-                script {
-                    def scannerHome = tool name: 'saral', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-                    def projectName = 'saral' // Change this to your actual project name
-                    def scannerOpts = "-Dsonar.projectKey=${projectName} -Dsonar.sources=./src" // Customize as needed
-
-                    withSonarQubeEnv('SonarQubeServer') {
-                        sh "${scannerHome}/bin/sonar-scanner ${scannerOpts}"
-                    }
+               withSonarQubeEnv(installationName: 'saral sonarqube', credentialsId: 'Saral') {
+                sh 'npm install sonar:sonar'
                 }
             }
         }
