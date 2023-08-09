@@ -4,13 +4,13 @@ LABEL maintainer="dileep.gadiraju@tarento.com"
 
 ENV PROFILE=prod
 ENV PORT=3000
-ENV MONGODB_URL=mongodb://10.0.31.152:27017,10.0.50.162:27017/prod_saral
+ENV MONGODB_URL=mongodb://10.0.0.185:27017/saraldata_dev
 ENV JWT_SECRET=SARALDATA_NODE
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
-###RUN npm run test
+RUN npm run test
 
 RUN echo JWT_SECRET=$JWT_SECRET
 

@@ -108,5 +108,32 @@ describe('login school', () => {
     expect(res.json({ status: 'success' }).status(200));
   });
 
+  it("should not be able to login to school when class data is missing ", async () => {
+    const req = mockRequest();
+    const res = mockResponse()
+    req.body = {
+      "schoolId": "u001",
+      "password": dummyPass,
+      "classes": true
+    }
+
+    Helper.findByCredentials = jest.fn().mockImplementationOnce(() => ({ select: jest.fn().mockResolvedValueOnce(mockSignInUser) }));
+    School.findOne = jest.fn().mockResolvedValue(mockSchoolData)
+    ClassModel.find = jest.fn().mockResolvedValue()
+    Helper.lockScreenValidator = jest.fn().mockResolvedValue(undefined)
+
+    User.generateAuthToken = jest.fn().mockResolvedValue(token)
+
+    await schoolController.loginSchool(req, res, jest.fn())
+
+    expect(Helper.findByCredentials).toHaveBeenCalledTimes(1)
+    expect(School.findOne).toHaveBeenCalledTimes(1)
+    expect(Helper.lockScreenValidator).toHaveBeenCalledTimes(1)
+    expect(User.generateAuthToken).toHaveBeenCalledTimes(1)
+    expect(ClassModel.find).toHaveBeenCalledTimes(1)
+    expect(res.status).toHaveBeenCalledWith(400);
+    expect(res.json({ e: "No Classes" }).status(400));
+  });
+
 });
 

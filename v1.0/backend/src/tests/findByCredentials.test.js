@@ -58,9 +58,10 @@ describe('fetch User By credentials ', () => {
                 password: dummyPass
             }
             User.findOne = jest.fn().mockResolvedValue(null)
-            await Helper.findByCredentials(req, res, jest.fn())
+            await Helper.findByCredentials(req.dbConnection, res, jest.fn())
         } catch(e) {
-            expect(e).toThrowError;     
+            expect(e).toThrowError;
+            expect(e.message).toEqual('School Id or Password is not correct.');    
         }
     });
 
@@ -74,9 +75,10 @@ describe('fetch User By credentials ', () => {
             }
             User.findOne = jest.fn().mockResolvedValue(userMockdata)
             bcrypt.compare = jest.fn().mockResolvedValue(false)
-            await Helper.findByCredentials(req, res, jest.fn())
+            await Helper.findByCredentials(req.dbConnection, res, jest.fn())
         } catch(e) {
-            expect(e).toThrowError;     
+            expect(e).toThrowError;
+            expect(e.message).toEqual('School Id or Password is not correct.');    
         }
     });
 

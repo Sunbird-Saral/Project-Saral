@@ -62,7 +62,7 @@ exports.saveMarks = async (req, res, next) => {
         await Helper.lockScreenValidator(connection,req.school)
 
 
-        await Marks.bulkWrite(marks, {ordered: false, writeConcern: {w:0, j: false}});
+        await Marks.bulkWrite(marks);
         const endTime = new Date();
         const executionTime = endTime - startTime;
         logger.info(`Execution time for Save Marks BulkWrite : ${executionTime}ms`);
