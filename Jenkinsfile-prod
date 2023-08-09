@@ -37,12 +37,14 @@ pipeline {
         }
         stage ('Sonar Analysis') {
             steps {
-               withSonarQubeEnv(installationName: 'saral sonarqube', credentialsId: 'Saral') {
-                sh 'npm install sonar:sonar'
+                script {
+                    withSonarQubeEnv(installationName: 'saral sonarqube', credentialsId: 'Saral') {
+                        sh 'npm install sonar:sonar'
+                    }
                 }
-            }
+           }
         }
 
-    
+
     }
 }
