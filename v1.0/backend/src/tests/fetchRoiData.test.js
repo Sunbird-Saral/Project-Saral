@@ -17,6 +17,11 @@ const mockRequest = () => {
     req.params = jest.fn().mockReturnValue(req)
     req.query = jest.fn().mockReturnValue(req)
     req.school = jest.fn().mockReturnValue(req)
+    req.dbConnection = {
+        model: (ref, schema) => {
+            return schema
+        }
+      }
     return req
 }
 
@@ -50,7 +55,7 @@ describe('fetch roi data ', () => {
             __v: 0
         }
         Exam.findOne = jest.fn().mockReturnValue({ lean: () => null })
-        await roiController.getRoiData(req, res)
+        await roiController.getRoiData(req, res, jest.fn())
         let error = new AppError("Exam Id does not exist", 404);
         expect(Exam.findOne).toHaveBeenCalledTimes(1)
         expect(error.statusCode).toBe(404);
@@ -77,7 +82,7 @@ describe('fetch roi data ', () => {
         School.findOne = jest.fn().mockResolvedValue(schoolMockdata)
         Roi.findOne= jest.fn().mockReturnValue({ lean: () => mockResponseRoi })
         Roi.find= jest.fn().mockReturnValue({ lean: () => mockResponseRoi })
-        await roiController.getRoiData(req, res)
+        await roiController.getRoiData(req, res, jest.fn())
 
         expect(Exam.findOne).toHaveBeenCalledTimes(1)
         expect(School.findOne).toHaveBeenCalledTimes(1)
@@ -104,7 +109,7 @@ describe('fetch roi data ', () => {
         Exam.findOne = jest.fn().mockReturnValue({ lean: () => mockFetchExamData })
         School.findOne = jest.fn().mockResolvedValue(schoolMockdata)
         Roi.findOne = jest.fn().mockReturnValue({ lean: () => null })
-        await roiController.getRoiData(req, res)
+        await roiController.getRoiData(req, res, jest.fn())
 
         let error = new AppError("Roi Id does not exist", 404);
         expect(Exam.findOne).toHaveBeenCalledTimes(1)
@@ -135,7 +140,7 @@ describe('fetch roi data ', () => {
         School.findOne = jest.fn().mockResolvedValue(schoolMockdata)
         Roi.findOne = jest.fn().mockReturnValue({ lean: () => [] })
         Roi.find = jest.fn().mockReturnValue({ lean: () =>  mockResponseRoi })
-        await roiController.getRoiData(req, res)
+        await roiController.getRoiData(req, res, jest.fn())
 
         expect(Exam.findOne).toHaveBeenCalledTimes(1)
         expect(School.findOne).toHaveBeenCalledTimes(1)
@@ -165,7 +170,7 @@ describe('fetch roi data ', () => {
         School.findOne = jest.fn().mockResolvedValue(schoolMockdata)
         Roi.findOne = jest.fn().mockReturnValue({ lean: () => [] })
         Roi.find = jest.fn().mockReturnValue({ lean: () =>  [] })
-        await roiController.getRoiData(req, res)
+        await roiController.getRoiData(req, res, jest.fn())
 
         
         let error = new AppError("Roi Id does not exist", 404);

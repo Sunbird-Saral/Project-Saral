@@ -16,6 +16,11 @@ const mockRequest = () => {
   req.query = jest.fn().mockReturnValue(req)
   req.params = jest.fn().mockReturnValue(req)
   req.school = jest.fn().mockReturnValue(req)
+  req.dbConnection = {
+    model: (ref, schema) => {
+        return schema
+    }
+  }
   return req
 }
 
@@ -48,7 +53,7 @@ describe('fetch student and exam data ', () => {
       __v: 0
     }
    
-    await studentController.fetchStudentsandExams(req, res)
+    await studentController.fetchStudentsandExams(req, res, jest.fn())
     
     let error = new AppError('Please send classId', 404);
     expect(error.statusCode).toBe(404);
@@ -81,7 +86,7 @@ describe('fetch student and exam data ', () => {
     Marks.findOne = jest.fn().mockResolvedValue(mockMarksData)
     Student.find = jest.fn().mockReturnValue({ lean: () => mockStudentdata })
     Exam.find = jest.fn().mockResolvedValue(mockFetchExamData)
-    await studentController.fetchStudentsandExams(req, res)
+    await studentController.fetchStudentsandExams(req, res, jest.fn())
 
     expect(req.query.classId).toEqual('2');
     expect(Helper.lockScreenValidator ).toHaveBeenCalledTimes(1)
@@ -118,7 +123,7 @@ describe('fetch student and exam data ', () => {
     Student.find = jest.fn().mockReturnValue({ lean: () => mockStudentdata })
     // Student.find = jest.fn().mockImplementationOnce(() => ({ select: jest.fn().mockResolvedValueOnce(mockStudentdata)}));
     Exam.find = jest.fn().mockResolvedValue(mockFetchExamData)
-    await studentController.fetchStudentsandExams(req, res)
+    await studentController.fetchStudentsandExams(req, res, jest.fn())
 
     expect(req.query.classId).toEqual('2');
     expect(School.findOne).toHaveBeenCalledTimes(1)
@@ -154,7 +159,7 @@ describe('fetch student and exam data ', () => {
     Marks.findOne = jest.fn().mockResolvedValue(null)
     Student.find = jest.fn().mockReturnValue({ lean: () => mockStudentdata })
     Exam.find = jest.fn().mockResolvedValue(mockFetchExamData)
-    await studentController.fetchStudentsandExams(req, res)
+    await studentController.fetchStudentsandExams(req, res, jest.fn())
 
     expect(req.query.classId).toEqual('2');
     expect(Helper.lockScreenValidator ).toHaveBeenCalledTimes(1)
@@ -163,6 +168,42 @@ describe('fetch student and exam data ', () => {
     expect(Exam.find).toHaveBeenCalledTimes(1)
     expect(res.status).toHaveBeenCalledWith(200);
     expect(res.json({ status: 'success' }).status(200));
+  });
+  
+  it("should log an error when any exception occurs", async () => {
+    const req = mockRequest();
+    const res = mockResponse()
+    req.school = {
+      "_id": "63aa81d2d33aca650009c946",
+      "name": "user13",
+      "userId": "u001",
+      "schoolId": "u001",
+      "password": "$2a$08$fCagseJwhdNd3SEd8EB.oO6n990WLmDr4ptUpzJxLp2nvMFSZGpjG",
+      "createdAt": "2022-12-27T05:25:38.298Z",
+      "updatedAt": "2022-12-27T05:25:38.298Z",
+      __v: 0
+    }
+    req.query = {
+      "classId": "2",
+      "section":"D",
+      "subject": "Hindi 23/09/2021",
+      "set": "A"
+    }
+
+    Helper.lockScreenValidator  = jest.fn().mockResolvedValue(undefined)
+    School.findOne = jest.fn().mockResolvedValue(mockSchoolData)
+    Marks.findOne = jest.fn().mockRejectedValue(new Error('Something went wrong'))
+    Student.find = jest.fn().mockReturnValue({ lean: () => mockStudentdata })
+    // Student.find = jest.fn().mockImplementationOnce(() => ({ select: jest.fn().mockResolvedValueOnce(mockStudentdata)}));
+    Exam.find = jest.fn().mockResolvedValue(mockFetchExamData)
+    await studentController.fetchStudentsandExams(req, res, jest.fn())
+
+    expect(req.query.classId).toEqual('2');
+    expect(School.findOne).toHaveBeenCalledTimes(1)
+    expect(Helper.lockScreenValidator ).toHaveBeenCalledTimes(1)
+    expect(Student.find).toHaveBeenCalledTimes(1)
+    expect(Exam.find).toHaveBeenCalledTimes(0)
+    expect(res.status).toHaveBeenCalledWith(400);
   });
 
 });

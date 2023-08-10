@@ -170,11 +170,10 @@ const ScanHistoryCard = ({
                 .then(function (res) {
                     apiResponse = res;
                     clearTimeout(id);
-                    let hasMessage = res ? typeof res.data == "string" ? true : false : false
+                    let hasMessage = res ? typeof res.data == "string" || typeof res.data.message == "string" ? true : false : false
                     if (hasMessage) {
                         api.processResponse(res);
                         callScanStatusData(filteredDatalen, localScanData)
-                        
                     } else {
                         dispatch(dispatchAPIAsync(res.data));
                         setScanStatusData(filteredDatalen);

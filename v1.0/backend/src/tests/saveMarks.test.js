@@ -14,6 +14,11 @@ const mockRequest = () => {
     req.school = jest.fn().mockReturnValue(req)
     req.header = jest.fn().mockReturnValue(req)
     req.get = jest.fn().mockReturnValue(req)
+    req.dbConnection = {
+        model: (ref, schema) => {
+            return schema
+        }
+      }
     return req
 }
 
@@ -50,7 +55,7 @@ describe('save marks data ', () => {
         Marks.bulkWrite = jest.fn().mockResolvedValue(null)
         Marks.find = jest.fn().mockResolvedValue(mockSavedData)
 
-        await marksController.saveMarks(req, res)
+        await marksController.saveMarks(req, res, jest.fn())
         expect(res.json({ status: 'success' }).status(200))
     });
 
@@ -70,7 +75,7 @@ describe('save marks data ', () => {
         req.body = mockSaveMarks2Body
 
 
-        await marksController.saveMarks(req, res)
+        await marksController.saveMarks(req, res, jest.fn())
 
         expect(res.status).toHaveBeenCalledWith(400);
         expect(res.json({ status: 'fail' }));
@@ -97,7 +102,7 @@ describe('save marks data ', () => {
             throw new Error('State/District/School is locked for scanning')
         });
 
-        await marksController.saveMarks(req, res)
+        await marksController.saveMarks(req, res, jest.fn())
         expect(res.json({ status: 'fail' }));
 
 

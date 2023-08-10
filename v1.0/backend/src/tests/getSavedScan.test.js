@@ -10,6 +10,11 @@ const mockRequest = () => {
     req.body = jest.fn().mockReturnValue(req)
     req.params = jest.fn().mockReturnValue(req)
     req.school = jest.fn().mockReturnValue(req)
+    req.dbConnection = {
+        model: (ref, schema) => {
+            return schema
+        }
+      }
     return req
 }
 
@@ -55,7 +60,7 @@ describe('saved scan data ', () => {
             }))
         }))
 
-        await marksController.getSaveScan(req, res)
+        await marksController.getSaveScan(req, res, jest.fn())
 
         expect(Mark.find).toHaveBeenCalledTimes(1)
         expect(res.json({ status: 'success' }).status(200))
@@ -92,7 +97,7 @@ describe('saved scan data ', () => {
             }))
         }))
 
-        await marksController.getSaveScan(req, res)
+        await marksController.getSaveScan(req, res, jest.fn())
         expect(User.findOne).toHaveBeenCalledTimes(1)
         expect(Mark.find).toHaveBeenCalledTimes(1)
         expect(res.json({ status: 'success' }).status(200))
@@ -129,7 +134,7 @@ describe('saved scan data ', () => {
             }))
         }))
 
-        await marksController.getSaveScan(req, res)
+        await marksController.getSaveScan(req, res, jest.fn())
 
         expect(Mark.find).toHaveBeenCalledTimes(1)
         expect(res.json({ status: 'success' }).status(200))
