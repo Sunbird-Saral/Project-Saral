@@ -175,6 +175,7 @@ const StudentsList = ({
         }
       }
     }
+
   }, [roiData]);
 
   const dispatch = useDispatch();
@@ -208,6 +209,7 @@ const StudentsList = ({
         getSavedScanCache[result].data = savedScanData;
         if (setValue != null && setValue.length > 0) {
           getSavedScanCache[result].set = setValue;
+
         }
       } else {
         let payload = {
