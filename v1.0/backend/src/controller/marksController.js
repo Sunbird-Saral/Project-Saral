@@ -66,9 +66,7 @@ exports.saveMarks = async (req, res, next) => {
         const endTime = new Date();
         const executionTime = endTime - startTime;
         logger.info(`Execution time for Save Marks BulkWrite : ${executionTime}ms`);
-        res.status(200).json("Saved Successfully.")
-
-
+        res.status(200).json({ message: "Saved Successfully." })
     } catch (e) {
         logger.warn(e)
         if (e && e.message == stringObject().lockScreen) {

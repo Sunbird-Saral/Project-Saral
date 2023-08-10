@@ -2,9 +2,9 @@ FROM node:16.8
 
 LABEL maintainer="dileep.gadiraju@tarento.com"
 
-ENV PROFILE=prod
+ENV PROFILE=dev
 ENV PORT=3000
-ENV MONGODB_URL=mongodb://10.0.0.185:27017/saraldata_dev
+ENV MONGODB_URL=mongodb://172.31.51.8:27017/saralv1newdb
 ENV JWT_SECRET=SARALDATA_NODE
 WORKDIR /app
 COPY package*.json ./
