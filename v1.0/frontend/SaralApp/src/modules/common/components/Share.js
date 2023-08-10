@@ -264,7 +264,11 @@ const ShareComponent = ({
             <Image
               style={{width: 30, height: 30}}
               source={Assets.leftArrow}
-              tintColor={AppTheme.GREEN}
+              tintColor={
+                multiBrandingData.themeColor1
+                  ? multiBrandingData.themeColor1
+                  : AppTheme.GREEN
+              }
             />
           </TouchableOpacity>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -282,7 +286,11 @@ const ShareComponent = ({
               <Image
                 style={{width: 32, height: 32}}
                 source={Assets.home}
-                tintColor={AppTheme.GREEN}
+                tintColor={
+                  multiBrandingData.themeColor1
+                    ? multiBrandingData.themeColor1
+                    : AppTheme.GREEN
+                }
               />
             </TouchableOpacity>
             <TouchableOpacity
@@ -299,7 +307,11 @@ const ShareComponent = ({
               <Image
                 style={{width: 28, height: 28}}
                 source={Assets.options}
-                tintColor={AppTheme.GREEN}
+                tintColor={
+                  multiBrandingData.themeColor1
+                    ? multiBrandingData.themeColor1
+                    : AppTheme.GREEN
+                }
               />
             </TouchableOpacity>
           </View>
