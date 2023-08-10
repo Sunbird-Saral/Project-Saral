@@ -44,8 +44,7 @@ const HEIGHT = Dimensions.get('window').height;
 const HEIGHT_MODAL = 150;
 const ScanHistoryCard = ({
   showButtons = true,
-  showButtons1 = true,
-  scanstatusbutton = true,
+
   navigation,
   filteredData,
   scanedData,
@@ -445,7 +444,7 @@ const ScanHistoryCard = ({
             paddingTop: 40,
             paddingLeft: '1%',
             paddingRight: '1%',
-            marginBottom: 40,
+            marginBottom: 20,
           }}>
           <View>
             <View style={styles.scanCardStyle}>

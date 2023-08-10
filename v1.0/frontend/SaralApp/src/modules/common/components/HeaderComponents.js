@@ -120,7 +120,7 @@ class HeaderComponents extends Component {
                 height:
                   loginData.data.school.hasOwnProperty('offlineMode') &&
                   loginData.data.school.offlineMode
-                    ? 270
+                    ? 220
                     : 180,
               },
             ]}>
@@ -355,7 +355,6 @@ const styles = {
   imageContainerStyle: {
     padding: 10,
     marginRight: 10,
-    height: 140,
     elevation: 10,
     justifyContent: 'center',
     backgroundColor: AppTheme.WHITE,
