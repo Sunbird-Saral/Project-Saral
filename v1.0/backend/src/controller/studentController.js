@@ -49,10 +49,12 @@ exports.fetchStudentsandExams = async (req, res, next) => {
         
         for (let student of students) {
             let lookup = {
+
                 schoolId: req.school.schoolId,
                 studentId: student.studentId,
                 subject: examMatch.subject,
                 examDate: examMatch.examDate
+
             }
         
             if(req.query.set){
@@ -60,7 +62,7 @@ exports.fetchStudentsandExams = async (req, res, next) => {
             }
 
             let marks = await Marks.findOne({...lookup, $comment: "Find Students Marks"})
-            
+
             if (marks && typeof marks == "object") {
                 student["studentAvailability"] = marks.studentAvailability
             } else {
