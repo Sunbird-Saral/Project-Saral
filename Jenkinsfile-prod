@@ -1,0 +1,39 @@
+pipeline {
+    
+    agent any
+    
+    stages{
+        stage ('checkout') {
+            steps {
+               git branch: 'feature/saveMarks-v1', url: 'https://github.com/Sunbird-Saral/Project-Saral.git' 
+            }
+        }
+        
+        stage ('docker_image_build'){
+            steps {
+                sh 'chmod +x ./build_image.sh'
+                sh './build_image.sh'
+            }
+        }
+        
+        stage('Pull Docker Image') {
+            steps {
+              script {
+                docker.withRegistry('https://registry.hub.docker.com', 'dockerhub_credentials') {
+                  def dockerImage = docker.image('saaral123/backendapi:2.0')
+                  dockerImage.pull()
+                }
+              }
+            }
+        }
+
+
+        stage ('deploy to EKS'){
+            steps{
+                sh 'export KUBECONFIG=/var/lib/jenkins/.kube/config'
+                sh 'chmod +x ./deploy_EKS.sh'
+                sh './deploy_EKS.sh'
+            }
+        }
+    }
+}

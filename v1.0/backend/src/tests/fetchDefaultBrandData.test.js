@@ -11,6 +11,11 @@ const mockRequest = () => {
   const req = {}
   req.body = jest.fn().mockReturnValue(req)
   req.params = jest.fn().mockReturnValue(req)
+  req.dbConnection = {
+    model: (ref, schema) => {
+        return schema
+    }
+  }
   return req
 }
 
@@ -32,7 +37,7 @@ describe('fetch default brand data ', () => {
     const res = mockResponse()
 
     Brand.find = jest.fn().mockReturnValue({ lean: () => null})
-    await brandController.fetchDefaultBrandData(req, res)
+    await brandController.fetchDefaultBrandData(req, res, jest.fn())
 
     let error = new AppError('Brand does not exist.', 404);
     expect(error.statusCode).toBe(404);
@@ -55,7 +60,7 @@ describe('fetch default brand data ', () => {
     }
 
     Brand.find = jest.fn().mockReturnValue({ lean: () => mockDefaultBrandData})
-    await brandController.fetchDefaultBrandData(req, res)
+    await brandController.fetchDefaultBrandData(req, res, jest.fn())
 
     expect(Brand.find).toHaveBeenCalledTimes(1)
     expect(res.json({ status: 'success' }).status(200));
