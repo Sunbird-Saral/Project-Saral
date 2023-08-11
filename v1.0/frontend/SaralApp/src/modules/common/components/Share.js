@@ -240,6 +240,7 @@ const ShareComponent = ({
   const dashboard = () => {
     navigation.navigate('selectDetails');
   };
+
   return (
     <View>
       <View style={styles.imageViewContainer}>
@@ -254,7 +255,7 @@ const ShareComponent = ({
             onPress={onPress}
             style={{
               marginLeft: 5,
-              backgroundColor: '#ACCCCE',
+              backgroundColor: multiBrandingData.themeColor2 ?? '#ACCCCE',
               width: 33,
               height: 33,
               borderRadius: 15,
@@ -264,18 +265,14 @@ const ShareComponent = ({
             <Image
               style={{width: 30, height: 30}}
               source={Assets.leftArrow}
-              tintColor={
-                multiBrandingData.themeColor1
-                  ? multiBrandingData.themeColor1
-                  : AppTheme.GREEN
-              }
+              tintColor={multiBrandingData.themeColor1 ?? AppTheme.GREEN}
             />
           </TouchableOpacity>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <TouchableOpacity
               style={{
                 marginRight: 10,
-                backgroundColor: '#ACCCCE',
+                backgroundColor: multiBrandingData.themeColor2 ?? '#ACCCCE',
                 width: 33,
                 height: 33,
                 borderRadius: 15,
@@ -286,17 +283,13 @@ const ShareComponent = ({
               <Image
                 style={{width: 32, height: 32}}
                 source={Assets.home}
-                tintColor={
-                  multiBrandingData.themeColor1
-                    ? multiBrandingData.themeColor1
-                    : AppTheme.GREEN
-                }
+                tintColor={multiBrandingData.themeColor1 ?? AppTheme.GREEN}
               />
             </TouchableOpacity>
             <TouchableOpacity
               style={{
                 marginRight: 10,
-                backgroundColor: '#ACCCCE',
+                backgroundColor: multiBrandingData.themeColor2 ?? '#ACCCCE',
                 width: 33,
                 height: 33,
                 borderRadius: 15,
@@ -307,11 +300,7 @@ const ShareComponent = ({
               <Image
                 style={{width: 28, height: 28}}
                 source={Assets.options}
-                tintColor={
-                  multiBrandingData.themeColor1
-                    ? multiBrandingData.themeColor1
-                    : AppTheme.GREEN
-                }
+                tintColor={multiBrandingData.themeColor1 ?? AppTheme.GREEN}
               />
             </TouchableOpacity>
           </View>
