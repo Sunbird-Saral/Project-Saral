@@ -44,7 +44,8 @@ const HEIGHT = Dimensions.get('window').height;
 const HEIGHT_MODAL = 150;
 const ScanHistoryCard = ({
   showButtons = true,
-
+  showButtons1 = true,
+  scanstatusbutton = true,
   navigation,
   filteredData,
   scanedData,
@@ -68,7 +69,6 @@ const ScanHistoryCard = ({
   const [disableButton, setDisableButton] = useState(
     scanStatusData > 0 ? true : false,
   );
-
   const BrandLabel =
     multiBrandingData &&
     multiBrandingData.screenLabels &&
@@ -232,61 +232,15 @@ const ScanHistoryCard = ({
         );
       }
     }
+  };
 
-    
-    const saveScanData = async(api, filteredDatalen, localScanData) => {
-
-        if (api.method === 'PUT') {
-            let apiResponse = null;
-            const source = axios.CancelToken.source();
-            const id = setTimeout(() => {
-                if (apiResponse === null) {
-                    source.cancel('The request timed out.');
-                }
-            }, 60000);
-            axios.put(api.apiEndPoint(), api.getBody(), { headers: api.getHeaders(), cancelToken: source.token },)
-                .then(function (res) {
-                    apiResponse = res;
-                    clearTimeout(id);
-                    let hasMessage = res ? typeof res.data == "string" || typeof res.data.message == "string" ? true : false : false
-                    if (hasMessage) {
-                        api.processResponse(res);
-                        callScanStatusData(filteredDatalen, localScanData)
-                    } else {
-                        dispatch(dispatchAPIAsync(res.data));
-                        setScanStatusData(filteredDatalen);
-                        setScannedDataIntoLocal(localScanData);
-                        callCustomModal(Strings.message_text,Strings.saved_successfully,false);
-                        setIsLoading(false);
-                    }
-                })
-                .catch(function (err) {
-                    collectErrorLogs("ScanHistoryCard.js","saveScanData",api.apiEndPoint(),err,false);
-                    callCustomModal(Strings.message_text,err && err.response && err.response.data && err.response.data.error ? err.response.data.error  : Strings.contactAdmin,false);
-                    clearTimeout(id);
-                    setIsLoading(false);
-                });
-        }
-    }
-
-    const callScanStatusData = async (filteredDatalen, localScanData) => {
-        const deviceUniqId = await DeviceInfo.getUniqueId();
-        let token = loginData.data.token
-        let loginCred = await getLoginCred()
-
-        let dataPayload = {
-            "classId": filteredData.response.class,
-            "subject": filteredData.response.subject,
-            "section": filteredData.response.section,
-            "fromDate": filteredData.response.examDate,
-            "set": filteredData.response.set,
-            "page": 0,
-            "schoolId": loginData.data.school.schoolId,
-            "downloadRes": false
-        }
-        if (filteredData.response.hasOwnProperty("set")) {
-            dataPayload.set = filteredData.response.set
-
+  const saveScanData = async (api, filteredDatalen, localScanData) => {
+    if (api.method === 'PUT') {
+      let apiResponse = null;
+      const source = axios.CancelToken.source();
+      const id = setTimeout(() => {
+        if (apiResponse === null) {
+          source.cancel('The request timed out.');
         }
       }, 60000);
       axios
@@ -298,7 +252,7 @@ const ScanHistoryCard = ({
           apiResponse = res;
           clearTimeout(id);
           let hasMessage = res
-            ? typeof res.data == 'string'
+            ? typeof res.data == 'string' || typeof res.data.message == 'string'
               ? true
               : false
             : false;
