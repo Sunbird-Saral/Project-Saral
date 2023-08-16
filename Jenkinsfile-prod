@@ -39,7 +39,8 @@ pipeline {
             steps{
             withSonarQubeEnv('saralsonar9.0.1') {
             sh '''
-            cd v1.0/backend/src
+            cd v1.0/backend/
+            npm install 
             npm run sonar
             '''
             }    
