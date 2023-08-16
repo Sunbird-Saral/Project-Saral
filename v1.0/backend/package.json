@@ -10,7 +10,7 @@
     "prod": "env-cmd ./config/prod.env node src/index.js -e js,pug",
     "test": "jest --collectCoverage=true",
     "coverage": "jest --coverage",
-    "sonar": "npx sonarqube-scanner -Dsonar.host.url=http://localhost:9005 -Dsonar.login=731c70026717e72d9e925fbea049d5ff33165cc5"
+    "sonar": "sonar-scanner -Dsonar.host.url=http://localhost:9005 -Dsonar.login=731c70026717e72d9e925fbea049d5ff33165cc5"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -56,7 +56,6 @@
     "env-cmd": "^8.0.2",
     "jest": "^29.3.1",
     "nodemon": "^2.0.6",
-    "npx": "^10.2.2",
     "sonarqube-scanner": "^3.0.1"
   }
 }
