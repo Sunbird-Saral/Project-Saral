@@ -35,5 +35,12 @@ pipeline {
                 sh './deploy_EKS.sh'
             }
         }
+        stage('SonarQube analysis') {
+            steps{
+            withSonarQubeEnv('saralsonar9.0.1') {
+            sh "npm sonar:sonar"
+            }    
+            }
+        }
     }
 }
