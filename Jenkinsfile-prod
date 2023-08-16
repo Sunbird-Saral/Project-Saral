@@ -37,6 +37,7 @@ pipeline {
         }
         stage('SonarQube analysis') {
             steps{
+            cd v1.0/backend/src
             withSonarQubeEnv('saralsonar9.0.1') {
             sh "npm run sonar"
             }    
