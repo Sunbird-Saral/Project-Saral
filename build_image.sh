@@ -24,7 +24,7 @@ image_tag="2.0"
 image_tag="${image_tag}-$BUILD_NUMBER"
 
 # Build and tag the Docker image
-docker build -t "saaral123/$image_name:$image_tag" Dockerfile.prod . --network="host"
+docker buildx build -t "saaral123/$image_name:$image_tag" Dockerfile.prod . --network="host"
 
 #login to dockerhub
 docker login -u saaral123 -p Saral@123
