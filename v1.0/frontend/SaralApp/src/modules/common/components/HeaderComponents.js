@@ -111,7 +111,7 @@ class HeaderComponents extends Component {
                         style={[styles.imageContainerViewstyle]}
                         onPress={onSupportClick}
                         > 
-                         <Image style={{width:15,height:15,top:5}}  source={Assets.Support}/>
+                         <Image style={{width:15,height:15,top:5}} source={multiBrandingData && this.props.multiBrandingData.supportIcon ?{ uri: multiBrandingData && 'data:image/png;base64,' + this.props.multiBrandingData.supportIcon }:Assets.Support} />
                             <Text style={[styles.headerTitleTextStyle, customLogoutTextStyle]}>{supportTeamText}</Text>
                         </TouchableOpacity>
                        
@@ -120,7 +120,7 @@ class HeaderComponents extends Component {
                                style={styles.imageContainerViewstyle}
                                 onPress={onLogoutClick}
                             >
-                                 <Image style={{width:15,height:25}}  source={Assets.Logout}/>
+                                  <Image style={{width:15,height:25}} source={multiBrandingData && this.props.multiBrandingData.Logout ?{ uri: multiBrandingData && 'data:image/png;base64,' + this.props.multiBrandingData.Logout }:Assets.Logout} />
                                 <Text style={[styles.headerTitleTextStyle, customLogoutTextStyle]}>{logoutHeaderText}</Text>
                             </TouchableOpacity>}
 
@@ -128,7 +128,7 @@ class HeaderComponents extends Component {
                         style={styles.imageContainerViewstyle}
                         onPress={aboutMenu}
                         > 
-                         <Image style={{width:15,height:15,top:5}}  source={Assets.About}/>
+                        <Image style={{width:15,height:15,top:5}}  source={multiBrandingData && this.props.multiBrandingData.About ?{ uri: multiBrandingData && 'data:image/png;base64,' + this.props.multiBrandingData.About }:Assets.About} />
                             <Text style={[styles.headerTitleTextStyle, customLogoutTextStyle]}>{Strings.about_menu}</Text>
                         </TouchableOpacity>
                         
@@ -136,7 +136,7 @@ class HeaderComponents extends Component {
                         style={[styles.imageContainerViewstyle]}
                         onPress={helpMenu}
                         > 
-                         <Image style={{width:15,height:15,top:5}}  source={Assets.Help}/>
+                        <Image style={{width:15,height:15,top:5}}  source={multiBrandingData && this.props.multiBrandingData.Help ?{ uri: multiBrandingData && 'data:image/png;base64,' + this.props.multiBrandingData.Help }:Assets.Help} />
                             <Text style={[styles.headerTitleTextStyle, customLogoutTextStyle]}>{Strings.help_menu}</Text>
                         </TouchableOpacity>
 
@@ -149,7 +149,7 @@ class HeaderComponents extends Component {
                                     callCustomModal(Strings.message_text, Strings.are_you_sure_you_want_to_clear_local_cache, true, removeLocalCache, true)
                                 }}
                                 >
-                                 <Image style={{width:10,height:20}}  source={Assets.delete}/>
+                              <Image  style={{width:10,height:20}}  source={multiBrandingData && this.props.multiBrandingData.ClearCache ?{ uri: multiBrandingData && 'data:image/png;base64,' + this.props.multiBrandingData.ClearCache }:Assets.delete} />
                                 <Text style={[styles.headerTitleTextStyle, customLogoutTextStyle]}>{Strings.clear_local_cache}</Text>
                             </TouchableOpacity>
                         }
@@ -163,7 +163,7 @@ class HeaderComponents extends Component {
                                 callCustomModal(Strings.message_text, Strings.are_you_sure_you_want_to_clear_global_cache, true, removeGlobalCache, true)
                             }}
                             >
-                                 <Image style={{width:10,height:20}}  source={Assets.delete}/>
+                                <Image  style={{width:10,height:20}} source={multiBrandingData && this.props.multiBrandingData.ClearCache ?{ uri: multiBrandingData && 'data:image/png;base64,' + this.props.multiBrandingData.ClearCache }:Assets.delete} />
                                 <Text style={[styles.headerTitleTextStyle, customLogoutTextStyle]}>{Strings.clear_global_cache}</Text>
                             </TouchableOpacity>
                         }

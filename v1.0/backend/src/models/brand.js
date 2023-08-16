@@ -34,6 +34,26 @@ const BrandSchema = new mongoose.Schema({
         type: String,
         trim: true
     },
+    supportIcon:{
+        type: String,
+        required: false
+    },
+    Logout:{
+        type: String,
+        required: false
+    },
+    About:{
+        type: String,
+        required: false
+    },
+    Help:{
+        type: String,
+        required: false
+    },
+    ClearCache:{
+        type: String,
+        required: false
+    },
     screenLabels: {
           loginComponent: [{
             _id: false,

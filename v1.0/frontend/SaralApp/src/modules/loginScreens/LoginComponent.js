@@ -442,7 +442,7 @@ class LoginComponent extends Component {
         const { password, isLoading, Loading, errUsername, errPassword, errCommon } = this.state;
         const { defaultBrandingdata } = this.props
         const BrandLabel = defaultBrandingdata && defaultBrandingdata.screenLabels && defaultBrandingdata.screenLabels.loginComponent && defaultBrandingdata.screenLabels.loginComponent[0]
-        console.log('defaultBrandingdata>>>>', BrandLabel);
+
         if (defaultBrandingdata === undefined || defaultBrandingdata === null) {
             return <View style={styles.container}>
                 <ScrollView
