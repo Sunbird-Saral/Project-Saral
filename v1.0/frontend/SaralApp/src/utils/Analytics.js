@@ -10,7 +10,7 @@ import analytics from '@react-native-firebase/analytics';
 
 export async function loginEvent(username) {
     // console.log('usernamefirebaseevent>>>>>',username);
-    await analytics().logEvent("userIds", {userName:username});
+    await analytics().logEvent("successfullLogin", {userName:username});
   }
 
   export async function SchoolDetailSubmit(username) {
