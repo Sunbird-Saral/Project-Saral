@@ -1,3 +1,4 @@
 **/*.md
 **/docker-compose.yml
 **/saralbackend-stack.yml
+*/node_modules/

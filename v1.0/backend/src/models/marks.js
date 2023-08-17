@@ -2,25 +2,30 @@ const mongoose = require('mongoose')
 
 // const defaultTimeStamp = new Date(2021, 02, 25, 10, 00, 00, 0).getTime()
 const marksSchema = new mongoose.Schema({
+    schoolId: {
+        type: String,
+        required: true,
+        trim: true
+    },
     classId: {
         type: String,
         required: true,
         trim: true
-    },
-    subject: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    examDate: {
-        type: String,
-        default: null
     },
     section: {
         type: String,
         required: true,
         trim: true,
         uppercase: true
+    },
+    examDate: {
+        type: String,
+        default: null
+    },
+    subject: {
+        type: String,
+        required: true,
+        trim: true
     },
     studentId: {
         type: String,
@@ -43,11 +48,6 @@ const marksSchema = new mongoose.Schema({
         type: Boolean,
         default: true,
         required: true
-    },
-    schoolId: {
-        type: String,
-        required: true,
-        trim: true
     },
     roiId: {
         type: String,
@@ -114,7 +114,7 @@ const marksSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true,
-    },
+    }
 })
 
 marksSchema.statics.StudentsMark = async (studentIds) => {   
@@ -126,6 +126,7 @@ marksSchema.statics.StudentsMark = async (studentIds) => {
     return marks
 }
 
-const Marks = mongoose.model('Mark', marksSchema)
+marksSchema.index({schoolId: -1, classId: -1, section: -1, examDate: -1, subject: -1, studentId: -1})
+// const Marks = mongoose.model('Mark', marksSchema)
 
-module.exports = Marks
+module.exports = marksSchema

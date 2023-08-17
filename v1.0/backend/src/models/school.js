@@ -111,6 +111,6 @@ schoolSchema.methods.toJSON = function () {
     return schoolObject
 }
 
-const Schools = mongoose.model('School', schoolSchema)
+// const Schools = mongoose.model('School', schoolSchema)
 
-module.exports = Schools
+module.exports = schoolSchema

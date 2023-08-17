@@ -1,23 +1,25 @@
-const Marks = require('../models/marks')
-const Users = require('../models/users')
+const marksSchema = require('../models/marks')
+const usersSchema = require('../models/users')
 const Helper = require('../middleware/helper')
-const { stringObject } = require('../utils/commonUtils')
-require('../db/mongoose')
+
+const { stringObject } = require('../utils/commonUtils');
+
 const logger = require('../logging/logger')
-const mongoose = require('mongoose')
 const httperror = require("http-errors");
 
 exports.saveMarks = async (req, res, next) => {
     const marks = []
-
+    const startTime = new Date();
     if (req.header('X-App-Version')) {
         // console.log("APP VERSION", req.get('X-App-Version'))
     }
 
     try {
-        if (Object.keys(req.body).length === 0) res.status(400).send({ message: 'Validation error.' })
+        let connection = req.dbConnection
+
+        if (Object.keys(req.body).length === 0)  throw new httperror(400, "Validation error.")
         const input_keys = Object.keys(req.body)
-        if (!["subject", "classId","userId","examId"].every((i) => input_keys.includes(i)))
+        if (!["subject", "classId", "userId", "examId"].every((i) => input_keys.includes(i)))
             throw new httperror(400, "Invalid Request");
 
 
@@ -29,10 +31,10 @@ exports.saveMarks = async (req, res, next) => {
         const userId = req.school.userId
         const createdOn = new Date().getTime()
         const roiId = req.body.roiId
-
-
+    
+        const Marks = connection.model('Marks', marksSchema);
         req.body.studentsMarkInfo.forEach(studentsData => {
-            const marksData = new Marks({
+            const mark = new Marks({
                 ...studentsData,
                 schoolId,
                 examDate,
@@ -43,53 +45,55 @@ exports.saveMarks = async (req, res, next) => {
                 examId,
                 userId
             })
-            marks.push(marksData)
-        });
 
-        await Helper.lockScreenValidator(req.school)
-
-
-        let marksResult = await Marks.bulkWrite(
-            marks.map((mark) => ({
+            const marksData = {
                 updateOne: {
                     filter: {
+                        schoolId: mark.schoolId,
                         studentId: mark.studentId,
                         subject: mark.subject,
                         examDate: mark.examDate
                     },
-                    update: { $set: { studentIdTrainingData: mark.studentIdTrainingData, studentId: mark.studentId, predictionConfidence: mark.predictionConfidence, schoolId: mark.schoolId, examDate: mark.examDate, predictedStudentId: mark.predictedStudentId, studentAvailability: mark.studentAvailability, marksInfo: mark.marksInfo, maxMarksTrainingData: mark.maxMarksTrainingData, maxMarksPredicted: mark.maxMarksPredicted, securedMarks: mark.securedMarks, totalMarks: mark.totalMarks, obtainedMarksTrainingData: mark.obtainedMarksTrainingData, obtainedMarksPredicted: mark.obtainedMarksPredicted, set: mark.set, subject: mark.subject, classId: mark.classId, section: mark.section, examId: mark.examId, userId: mark.userId, roiId: mark.roiId } },
-                    upsert:true
+                    update: { $set: { studentIdTrainingData: mark.studentIdTrainingData, studentId: mark.studentId, predictionConfidence: mark.predictionConfidence, schoolId: mark.schoolId, examDate: mark.examDate, predictedStudentId: mark.predictedStudentId, studentAvailability: mark.studentAvailability, marksInfo: mark.marksInfo, maxMarksTrainingData: mark.maxMarksTrainingData, maxMarksPredicted: mark.maxMarksPredicted, securedMarks: mark.securedMarks, totalMarks: mark.totalMarks, obtainedMarksTrainingData: mark.obtainedMarksTrainingData, obtainedMarksPredicted: mark.obtainedMarksPredicted, set: mark.set, subject: mark.subject, classId: mark.classId, section: mark.section, examId: mark.examId, userId: mark.userId, roiId: mark.roiId} },
+                    upsert: true
                 }
-            }))
-        );
-        logger.info("marks responsee---->", marksResult)
+            }
+            marks.push(marksData)
+        });
 
-        let match = {
-            schoolId: marks[0].schoolId,
-            classId: marks[0].classId,
-            section: marks[0].section,
-            examDate: marks[0].examDate,
-            subject: marks[0].subject,
-            $comment: "Save Marks API For Find Marks Details."
-        }
-
-        let marksData = await Marks.find(match)
-
-        res.status(200).json({ data: marksData })
+        await Helper.lockScreenValidator(connection,req.school)
 
 
+        await Marks.bulkWrite(marks);
+        const endTime = new Date();
+        const executionTime = endTime - startTime;
+        logger.info(`Execution time for Save Marks BulkWrite : ${executionTime}ms`);
+        res.status(200).json({ message: "Saved Successfully." })
     } catch (e) {
+        logger.warn(e)
         if (e && e.message == stringObject().lockScreen) {
             res.status(500).json({ error: e.message })
         }
         else {
             res.status(400).json({ error: e.message })
         }
+    } finally {
+        next()
     }
 }
 
 exports.getSaveScan = async (req, res, next) => {
+   
     try {
+        const startTime = new Date();
+        let connection = req.dbConnection
+        const Users = connection.model('Users', usersSchema);
+        const Marks = connection.model('Marks', marksSchema);
+
+        if(req.body.classId == undefined){
+            return res.status(400).json({ message: 'Please send classId' })
+        }
+
         if (req.body.schoolId) {
             req.body.schoolId = req.body.schoolId.toLowerCase()
         }
@@ -138,13 +142,20 @@ exports.getSaveScan = async (req, res, next) => {
             req.body.page = 1;
         }
 
+        
         const savedScan = await Marks.find(match, { _id: 0, __v: 0 })
             .limit(parseInt(req.body.limit) * 1)
             .skip((parseInt(parseInt(req.body.page)) - 1) * parseInt(parseInt(req.body.limit)))
 
+        const endTime = new Date();
+        const executionTime2 = endTime - startTime;
 
+        logger.info(`Execution time for Get Saved Scan API : ${executionTime2}ms`);
         res.status(200).json({ data: savedScan })
     } catch (e) {
+        logger.warn(e)
         res.status(400).json({ "error": true, e })
+    } finally {
+        next()
     }
 }
