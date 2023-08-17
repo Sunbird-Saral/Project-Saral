@@ -663,20 +663,7 @@ const StudentsList = ({
       }}>
       <ShareComponent navigation={navigation} onPress={navigateToBack} />
       <View style={{margin: 5}}>
-        {BrandLabel ? (
-          <MultibrandLabels
-            Label1={BrandLabel.School}
-            School={`${loginData.data.school.name}${
-              loginData.data.school.block
-                ? ',' + loginData.data.school.block
-                : ''
-            }${
-              loginData.data.school.district
-                ? ',' + loginData.data.school.district
-                : ''
-            }`}
-          />
-        ) : (
+        {
           loginData &&
           loginData.data && (
             <View>
@@ -700,7 +687,7 @@ const StudentsList = ({
 
               <View style={{flexDirection: 'row', marginLeft: 5, marginTop: 5}}>
                 <Text style={{fontWeight: 'bold'}}>
-                  {Strings.class_text + ' : '}
+                  {BrandLabel&&BrandLabel.Class ? BrandLabel.Class : Strings.class_text + ' : '}
                   <Text style={{fontWeight: 'normal'}}>
                     {`${filteredData.className}, ${
                       filteredData.section ? filteredData.section : ''
@@ -708,7 +695,7 @@ const StudentsList = ({
                   </Text>
                 </Text>
                 <Text style={{marginLeft: 10, fontWeight: 'bold'}}>
-                  {Strings.subject + ' : '}
+                  {BrandLabel&&BrandLabel.Subject ? BrandLabel.Subject :Strings.subject + ' : '}
                   <Text style={{fontWeight: 'normal'}}>
                     {filteredData.subject}{' '}
                     {filteredData.set ? `(Set ${filteredData.set})` : ''}
@@ -716,7 +703,7 @@ const StudentsList = ({
                 </Text>
               </View>
             </View>
-          )
+          
         )}
       </View>
       <View

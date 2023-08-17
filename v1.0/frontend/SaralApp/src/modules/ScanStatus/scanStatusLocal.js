@@ -389,7 +389,7 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
             <ButtonComponent
                 customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData.themeColor1 ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
                 customBtnTextStyle={{fontWeight:'normal',fontSize:14}}
-                btnText={BrandLabel&&BrandLabel.SubmitAllScan ? BrandLabel.SubmitAllScan.toUpperCase :'Submit All Scans'.toUpperCase()}
+                btnText={BrandLabel&&BrandLabel.SubmitAllScan ? BrandLabel.SubmitAllScan.toUpperCase() :'Submit All Scans'.toUpperCase()}
                 activeOpacity={0.8}
                 onPress={()=> onPressSaveInDB()}
                 />

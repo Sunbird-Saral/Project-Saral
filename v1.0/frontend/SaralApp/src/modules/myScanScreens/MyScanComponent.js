@@ -1138,68 +1138,55 @@ class MyScanComponent extends Component {
         )}
         <View>
           <View style={{margin: 5}}>
-            {BrandLabel ? (
-              <MultibrandLabels
-                Label1={BrandLabel.School}
-                School={`${loginData.data.school.name}${
-                  loginData.data.school.block
-                    ? ',' + loginData.data.school.block
-                    : ''
-                }${
-                  loginData.data.school.district
-                    ? ',' + loginData.data.school.district
-                    : ''
-                }`}
-                minimalFlag={this.props.minimalFlag}
-              />
-            ) : (
-              loginData &&
-              loginData.data && (
-                <View>
-                  <Text
-                    style={{
-                      marginLeft: 5,
-                      fontSize: AppTheme.FONT_SIZE_MEDIUM,
-                      letterSpacing: 1,
-                      fontFamily: monospace_FF,
-                    }}>
-                    {`${loginData.data.school.name}${
-                      loginData.data.school.block
-                        ? ', ' + loginData.data.school.block
-                        : ''
-                    }${
-                      loginData.data.school.district
-                        ? ', ' + loginData.data.school.district
-                        : ''
-                    }`}
-                  </Text>
+            {loginData && loginData.data && (
+              <View>
+                <Text
+                  style={{
+                    marginLeft: 5,
+                    fontSize: AppTheme.FONT_SIZE_MEDIUM,
+                    letterSpacing: 1,
+                    fontFamily: monospace_FF,
+                  }}>
+                  {`${loginData.data.school.name}${
+                    loginData.data.school.block
+                      ? ', ' + loginData.data.school.block
+                      : ''
+                  }${
+                    loginData.data.school.district
+                      ? ', ' + loginData.data.school.district
+                      : ''
+                  }`}
+                </Text>
 
-                  {!this.props.minimalFlag && (
-                    <View
-                      style={{
-                        flexDirection: 'row',
-                        marginLeft: 5,
-                        marginTop: 5,
-                      }}>
-                      <Text style={{fontWeight: 'bold'}}>
-                        {Strings.class_text + ' : '}
-                        <Text style={{fontWeight: 'normal'}}>
-                          {`${filteredData.className}, ${
-                            filteredData.section ? filteredData.section : ''
-                          }`}
-                        </Text>
+                {!this.props.minimalFlag && (
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      marginLeft: 5,
+                      marginTop: 5,
+                    }}>
+                    <Text style={{fontWeight: 'bold'}}>
+                      {BrandLabel && BrandLabel.Class
+                        ? BrandLabel.Class
+                        : Strings.class_text + ' : '}
+                      <Text style={{fontWeight: 'normal'}}>
+                        {`${filteredData.className}, ${
+                          filteredData.section ? filteredData.section : ''
+                        }`}
                       </Text>
-                      <Text style={{marginLeft: 10, fontWeight: 'bold'}}>
-                        {Strings.subject + ' : '}
-                        <Text style={{fontWeight: 'normal'}}>
-                          {filteredData.subject}{' '}
-                          {filteredData.set ? `(Set ${filteredData.set})` : ''}
-                        </Text>
+                    </Text>
+                    <Text style={{marginLeft: 10, fontWeight: 'bold'}}>
+                      {BrandLabel && BrandLabel.Subject
+                        ? BrandLabel.Subject
+                        : Strings.subject + ' : '}
+                      <Text style={{fontWeight: 'normal'}}>
+                        {filteredData.subject}{' '}
+                        {filteredData.set ? `(Set ${filteredData.set})` : ''}
                       </Text>
-                    </View>
-                  )}
-                </View>
-              )
+                    </Text>
+                  </View>
+                )}
+              </View>
             )}
           </View>
         </View>
