@@ -114,6 +114,11 @@ const marksSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true,
+    },
+    shardedKey: {
+        type: String,
+        required: true,
+        trim: true,
     }
 })
 
@@ -126,7 +131,8 @@ marksSchema.statics.StudentsMark = async (studentIds) => {
     return marks
 }
 
-marksSchema.index({schoolId: -1, classId: -1, section: -1, examDate: -1, subject: -1, studentId: -1})
+//marksSchema.index({schoolId: -1, classId: -1, section: -1, examDate: -1, subject: -1})
+//marksSchema.index({shardedKey: 1})
 // const Marks = mongoose.model('Mark', marksSchema)
 
 module.exports = marksSchema
