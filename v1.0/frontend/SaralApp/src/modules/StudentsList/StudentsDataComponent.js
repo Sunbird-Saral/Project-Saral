@@ -6,6 +6,7 @@ import { getScannedDataFromLocal, setScannedDataIntoLocal } from '../../utils/St
 import Strings from '../../utils/Strings';
 import { styles } from './StudentsDataStyle';
 import MarksHeaderTable from '../ScannedDetails/MarksHeaderTable';
+import { markAttendance } from '../../utils/Analytics';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 const StudentsDataComponent = ({
@@ -114,9 +115,11 @@ const StudentsDataComponent = ({
         }
     }
 
-    const onBtnClick = (data) => {
+    const onBtnClick = async(data) => {
         let chkPresent = stdArray.some(item => item.studentId == data.studentId)
+        // console.log('data, chkPresent',data.studentAvailability);
         setStdMarkAsPrsAbst(data, chkPresent)
+        await markAttendance(data.studentAvailability)
     }
 
     const saveStudentIntoLocalStorage = async(studentId, studentAvailability, filterStdData, localStdData) => {

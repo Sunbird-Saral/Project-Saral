@@ -69,6 +69,7 @@ import {
 import constants from '../../flux/actions/constants';
 import {storeFactory} from '../../flux/store/store';
 import DeviceInfo from 'react-native-device-info';
+import {markAttendanceNext} from '../../utils/Analytics';
 const StudentsList = ({
   filteredData,
   loginData,
@@ -480,6 +481,7 @@ const StudentsList = ({
     if (absentPresentStatus.studentsMarkInfo.length == 0) {
       setPresentAbsentStudent(allStudentData);
       navigation.push('myScan');
+      markAttendanceNext(loginData.data.school.schoolId);
     } else if (absentPresentStatus.studentsMarkInfo.length > 0) {
       await setDataIntoRegularStudentExamApi();
     }
@@ -512,6 +514,7 @@ const StudentsList = ({
     await setRegularStudentExamApi(getStudentExamCache);
     await setPresentAbsentStudent(allStudentData);
     navigation.push('myScan');
+    markAttendanceNext(loginData.data.school.schoolId);
   };
 
   const saveStudentData = api => {
@@ -532,6 +535,7 @@ const StudentsList = ({
           setIsLoading(false);
           setPresentAbsentStudent(allStudentData);
           navigation.push('myScan');
+          markAttendanceNext(loginData.data.school.schoolId);
           setDataIntoRegularStudentExamApi();
           apiResponse = res;
           clearTimeout(id);

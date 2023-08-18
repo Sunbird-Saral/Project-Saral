@@ -46,7 +46,9 @@ import {
 import C from '../../../flux/actions/constants';
 import {monospace_FF} from '../../../utils/CommonUtils';
 import Share from 'react-native-share';
-import {Assets} from '../../../assets';
+import { Assets } from '../../../assets';
+import { AnalyticLogout } from '../../../utils/Analytics';
+
 
 const ShareComponent = ({
   loginData,
@@ -129,7 +131,10 @@ const ShareComponent = ({
           dispatch(LogoutAction());
           navigation.navigate('auth');
         }
-      };
+      }
+
+      callCustomModal(Strings.message_text, Strings.are_you_sure_you_want_to_logout, true, doLogout, true)
+      AnalyticLogout(loginData.data.school.schoolId)
 
       callCustomModal(
         Strings.message_text,

@@ -45,6 +45,7 @@ import {
 import constants from '../../flux/actions/constants';
 import {storeFactory} from '../../flux/store/store';
 import DeviceInfo from 'react-native-device-info';
+import { SchoolDetailSubmit } from '../../utils/Analytics';
 
 //redux
 
@@ -973,6 +974,7 @@ class SelectDetailsComponent extends Component {
               finalStudentsAndExamArr,
             );
             this.props.navigation.push('StudentsList');
+            SchoolDetailSubmit(loginData.data.school.schoolId)
           }
         } else if (!hasNetworkData) {
           this.callCustomModal(

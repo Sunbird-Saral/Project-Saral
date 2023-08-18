@@ -60,6 +60,7 @@ import {
 import constants from '../../flux/actions/constants';
 import {storeFactory} from '../../flux/store/store';
 import DeviceInfo from 'react-native-device-info';
+import { onScanButtonClickEvent } from '../../utils/Analytics';
 
 LogBox.ignoreAllLogs();
 
@@ -431,6 +432,7 @@ class MyScanComponent extends Component {
               );
             } else {
               this.openCameraActivity();
+              onScanButtonClickEvent(this.props.loginData.data.school.schoolId)
             }
           } else if (!this.props.minimalFlag) {
             if (
@@ -439,6 +441,7 @@ class MyScanComponent extends Component {
               hasEmpty
             ) {
               this.openCameraActivity();
+              onScanButtonClickEvent(this.props.loginData.data.school.schoolId)
             } else if (
               this.props.loginData.data.school.hasOwnProperty('offlineMode') ==
                 false ||
@@ -446,6 +449,7 @@ class MyScanComponent extends Component {
                 hasEmpty)
             ) {
               this.openCameraActivity();
+              onScanButtonClickEvent(this.props.loginData.data.school.schoolId)
             } else {
               this.callCustomModal(
                 Strings.message_text,
@@ -477,8 +481,10 @@ class MyScanComponent extends Component {
             ) {
               if (this.props.minimalFlag && this.state.roiIndex != -1) {
                 this.openCameraActivity();
+                onScanButtonClickEvent(this.props.loginData.data.school.schoolId)
               } else if (!this.props.minimalFlag) {
                 this.openCameraActivity();
+                onScanButtonClickEvent(this.props.loginData.data.school.schoolId)
               } else {
                 this.callCustomModal(
                   Strings.message_text,

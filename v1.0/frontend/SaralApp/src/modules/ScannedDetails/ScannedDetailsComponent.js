@@ -63,6 +63,7 @@ import SaralSDK from '../../../SaralSDK';
 //npm
 import CheckBox from '@react-native-community/checkbox';
 import TaggingModal from '../common/TaggingModal';
+import { saveLocalAfterScan,EditMarksMannually } from '../../utils/Analytics';
 
 const {width, height} = Dimensions.get('window');
 const ScannedDetailsComponent = ({
@@ -601,6 +602,7 @@ const ScannedDetailsComponent = ({
         setBtnName('Back');
         if (currentIndex + 1 == stdRollArray.length - 1) {
           setNextBtn(Strings.Save);
+          saveLocalAfterScan(loginData.data.school.schoolId)
         }
       } else {
         let chkSkip = 0;
@@ -649,6 +651,7 @@ const ScannedDetailsComponent = ({
   const saveMultipleStudentDataSheet = () => {
     if (isMultipleStudent && nextBtn === Strings.Save) {
       saveMultiData();
+      saveLocalAfterScan(loginData.data.school.schoolId)
     }
   };
 
@@ -1044,7 +1047,7 @@ const ScannedDetailsComponent = ({
       newArray[index].consolidatedPrediction =
         text.length > 0 && text > 1 ? 0 : text;
       setNewArrayValue(newArray);
-
+      EditMarksMannually(loginData.data.school.schoolId)
       ocrLocalResponse.layout.cells.forEach(element => {
         if (element.cellId == value.cellId) {
           structureList.forEach(Datas => {
@@ -1295,6 +1298,7 @@ const ScannedDetailsComponent = ({
       setNewArrayValue(filterDataAccordingPage);
       if (currentIndex + 1 == multiPage) {
         setNextBtn(Strings.Save);
+        saveLocalAfterScan(loginData.data.school.schoolId)
       }
     }
   };

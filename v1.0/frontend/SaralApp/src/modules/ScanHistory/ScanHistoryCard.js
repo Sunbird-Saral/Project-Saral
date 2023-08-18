@@ -39,6 +39,8 @@ import {ScrollView} from 'react-native-gesture-handler';
 import {collectErrorLogs} from '../CollectErrorLogs';
 import Constant from '../../flux/actions/constants';
 import DeviceInfo from 'react-native-device-info';
+import { SaveInDbEvent,ReviewScan } from '../../utils/Analytics';
+
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
 const HEIGHT_MODAL = 150;
@@ -132,6 +134,7 @@ const ScanHistoryCard = ({
 
   const onPressScanStatus = () => {
     navigation.push('ScanStatusLocal');
+    ReviewScan(loginData.data.school.schoolId)
   };
   const dispatch = useDispatch();
 
@@ -268,6 +271,7 @@ const ScanHistoryCard = ({
               Strings.saved_successfully,
               false,
             );
+            SaveInDbEvent(loginData.data.school.schoolId)
             setIsLoading(false);
           }
         })

@@ -7,7 +7,7 @@ import C from '../constants';
 
 export class SaveScanData extends API {
     constructor(requestBody, token,deviceUniqId, timeout = 30000) {
-        console.log('deviceUniqId?????????',deviceUniqId);
+        // console.log('deviceUniqId?????????',deviceUniqId);
         super('PUT', timeout, false);
         this.requestBody = requestBody;
         this.token = token;
