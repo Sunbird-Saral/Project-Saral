@@ -1232,45 +1232,27 @@ class SelectDetailsComponent extends Component {
           onPress={() => this.props.navigation.navigate('Home')}
         />
         <View style={{margin: 5}}>
-          {BrandLabel ? (
-            <MultibrandLabels
-              Label1={BrandLabel.School}
-              Label2={BrandLabel.SchoolId}
-              School={`${loginData.data.school.name}${
-                loginData.data.school.block
-                  ? ',' + loginData.data.school.block
-                  : ''
-              }${
-                loginData.data.school.district
-                  ? ',' + loginData.data.school.district
-                  : ''
-              }`}
-              SchoolId={loginData.data.school.schoolId}
-            />
-          ) : (
-            loginData &&
-            loginData.data && (
-              <View style={{}}>
-                <Text
-                  style={{
-                    marginLeft: 10,
-                    fontSize: AppTheme.FONT_SIZE_MEDIUM,
-                    color: AppTheme.BLACK,
-                    letterSpacing: 1,
-                    fontFamily: monospace_FF,
-                  }}>
-                  {`${loginData.data.school.name} ${
-                    loginData.data.school.block
-                      ? ', ' + loginData.data.school.block
-                      : ''
-                  } ${
-                    loginData.data.school.district
-                      ? ', ' + loginData.data.school.district
-                      : ''
-                  }`}
-                </Text>
-              </View>
-            )
+          {loginData && loginData.data && (
+            <View style={{}}>
+              <Text
+                style={{
+                  marginLeft: 10,
+                  fontSize: AppTheme.FONT_SIZE_MEDIUM,
+                  color: AppTheme.BLACK,
+                  letterSpacing: 1,
+                  fontFamily: monospace_FF,
+                }}>
+                {`${loginData.data.school.name} ${
+                  loginData.data.school.block
+                    ? ', ' + loginData.data.school.block
+                    : ''
+                } ${
+                  loginData.data.school.district
+                    ? ', ' + loginData.data.school.district
+                    : ''
+                }`}
+              </Text>
+            </View>
           )}
         </View>
         <ScrollView

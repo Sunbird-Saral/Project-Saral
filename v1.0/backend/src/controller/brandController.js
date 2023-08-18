@@ -21,7 +21,7 @@ exports.fetchBrandData = async (req, res, next) => {
             logger.info(`Execution time for Get Brand API : ${executionTime}ms`);
             res.status(200).json(brand)
         } else {
-            const defaultBrand = await Brands.find({ state: { $exists: false } , $comment: "Fetch Brand Data API For Find Brand where state is not present."  }, { appName: 1, themeColor1: 1, themeColor2: 1, logoImage: 1, _id: 0 }).lean()
+            const defaultBrand = await Brands.find({ state: { $exists: false } , $comment: "Fetch Brand Data API For Find Brand where state is not present."  }, { appName: 1, themeColor1: 1, themeColor2: 1,themeColor3: 1,themeColor4: 1,themeColor5: 1, logoImage: 1, _id: 0 }).lean()
 
             if (defaultBrand && defaultBrand.length) {
                 let resultObj = defaultBrand[0]
@@ -54,7 +54,7 @@ exports.fetchDefaultBrandData = async (req, res, next) => {
         const startTime = new Date();
         let connection = req.dbConnection;
         const Brands = connection.model('Brands', brandsSchema)
-        const brand = await Brands.find({ state: { $exists: false } , $comment: "Fetch Brand Data API For Find Brand where state is not present."  }, { appName: 1, themeColor1: 1, themeColor2: 1, logoImage: 1, _id: 0 }).lean()
+        const brand = await Brands.find({ state: { $exists: false } ,$comment: "Fetch Brand Data API For Find Brand where state is not present."}, { appName: 1, themeColor1: 1, themeColor2: 1,themeColor3: 1,themeColor4: 1,themeColor5: 1, logoImage: 1,screenLabels:1, _id: 0 }).lean()
      
         if (brand.length) {
             let resultObj = brand[0]

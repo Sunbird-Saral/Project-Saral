@@ -175,7 +175,6 @@ const StudentsList = ({
         }
       }
     }
-
   }, [roiData]);
 
   const dispatch = useDispatch();
@@ -209,7 +208,6 @@ const StudentsList = ({
         getSavedScanCache[result].data = savedScanData;
         if (setValue != null && setValue.length > 0) {
           getSavedScanCache[result].set = setValue;
-
         }
       } else {
         let payload = {
@@ -380,12 +378,27 @@ const StudentsList = ({
           themeColor1={
             multiBrandingData.themeColor1
               ? multiBrandingData.themeColor1
-              : AppTheme.BLUE
+              : '#52A08D'
           }
           themeColor2={
             multiBrandingData.themeColor2
               ? multiBrandingData.themeColor2
               : AppTheme.LIGHT_BLUE
+          }
+          themeColor3={
+            multiBrandingData.themeColor3
+              ? multiBrandingData.themeColor3
+              : '#ACCCCE'
+          }
+          themeColor4={
+            multiBrandingData.themeColor4
+              ? multiBrandingData.themeColor4
+              : '#FF5733'
+          }
+          themeColor5={
+            multiBrandingData.themeColor5
+              ? multiBrandingData.themeColor5
+              : '#e5b6b3'
           }
           item={item}
           index={index}
@@ -650,60 +663,48 @@ const StudentsList = ({
       }}>
       <ShareComponent navigation={navigation} onPress={navigateToBack} />
       <View style={{margin: 5}}>
-        {BrandLabel ? (
-          <MultibrandLabels
-            Label1={BrandLabel.School}
-            School={`${loginData.data.school.name}${
-              loginData.data.school.block
-                ? ',' + loginData.data.school.block
-                : ''
-            }${
-              loginData.data.school.district
-                ? ',' + loginData.data.school.district
-                : ''
-            }`}
-          />
-        ) : (
-          loginData &&
-          loginData.data && (
-            <View>
-              <Text
-                style={{
-                  marginLeft: 5,
-                  fontSize: AppTheme.FONT_SIZE_MEDIUM,
-                  letterSpacing: 1,
-                  fontFamily: monospace_FF,
-                }}>
-                {`${loginData.data.school.name}${
-                  loginData.data.school.block
-                    ? ', ' + loginData.data.school.block
-                    : ''
-                }${
-                  loginData.data.school.district
-                    ? ', ' + loginData.data.school.district
-                    : ''
-                }`}
-              </Text>
+        {loginData && loginData.data && (
+          <View>
+            <Text
+              style={{
+                marginLeft: 5,
+                fontSize: AppTheme.FONT_SIZE_MEDIUM,
+                letterSpacing: 1,
+                fontFamily: monospace_FF,
+              }}>
+              {`${loginData.data.school.name}${
+                loginData.data.school.block
+                  ? ', ' + loginData.data.school.block
+                  : ''
+              }${
+                loginData.data.school.district
+                  ? ', ' + loginData.data.school.district
+                  : ''
+              }`}
+            </Text>
 
-              <View style={{flexDirection: 'row', marginLeft: 5, marginTop: 5}}>
-                <Text style={{fontWeight: 'bold'}}>
-                  {Strings.class_text + ' : '}
-                  <Text style={{fontWeight: 'normal'}}>
-                    {`${filteredData.className}, ${
-                      filteredData.section ? filteredData.section : ''
-                    }`}
-                  </Text>
+            <View style={{flexDirection: 'row', marginLeft: 5, marginTop: 5}}>
+              <Text style={{fontWeight: 'bold'}}>
+                {BrandLabel && BrandLabel.Class
+                  ? BrandLabel.Class
+                  : Strings.class_text + ' : '}
+                <Text style={{fontWeight: 'normal'}}>
+                  {`${filteredData.className}, ${
+                    filteredData.section ? filteredData.section : ''
+                  }`}
                 </Text>
-                <Text style={{marginLeft: 10, fontWeight: 'bold'}}>
-                  {Strings.subject + ' : '}
-                  <Text style={{fontWeight: 'normal'}}>
-                    {filteredData.subject}{' '}
-                    {filteredData.set ? `(Set ${filteredData.set})` : ''}
-                  </Text>
+              </Text>
+              <Text style={{marginLeft: 10, fontWeight: 'bold'}}>
+                {BrandLabel && BrandLabel.Subject
+                  ? BrandLabel.Subject
+                  : Strings.subject + ' : '}
+                <Text style={{fontWeight: 'normal'}}>
+                  {filteredData.subject}{' '}
+                  {filteredData.set ? `(Set ${filteredData.set})` : ''}
                 </Text>
-              </View>
+              </Text>
             </View>
-          )
+          </View>
         )}
       </View>
       <View

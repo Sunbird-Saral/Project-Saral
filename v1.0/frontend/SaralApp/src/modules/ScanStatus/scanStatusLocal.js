@@ -363,7 +363,7 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
                 />
             
             <View style={{marginTop:30}}>
-            <Text style={styles.scanStatus}>{'Review Scans'}</Text>
+            <Text style={styles.scanStatus}>{BrandLabel&&BrandLabel.ReviewScanText ? BrandLabel.ReviewScanText :'Review Scans'}</Text>
             </View>
             {/* <ScrollView> */}
             <FlatList
@@ -389,7 +389,7 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
             <ButtonComponent
                 customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData.themeColor1 ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
                 customBtnTextStyle={{fontWeight:'normal',fontSize:14}}
-                btnText={'Submit All Scans'.toUpperCase()}
+                btnText={BrandLabel&&BrandLabel.SubmitAllScan ? BrandLabel.SubmitAllScan.toUpperCase() :'Submit All Scans'.toUpperCase()}
                 activeOpacity={0.8}
                 onPress={()=> onPressSaveInDB()}
                 />

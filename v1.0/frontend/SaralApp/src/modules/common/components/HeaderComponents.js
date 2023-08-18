@@ -142,7 +142,16 @@ class HeaderComponents extends Component {
               onPress={onSupportClick}>
               <Image
                 style={{width: 15, height: 15, top: 5}}
-                source={Assets.Support}
+                source={
+                  multiBrandingData && this.props.multiBrandingData.supportIcon
+                    ? {
+                        uri:
+                          multiBrandingData &&
+                          'data:image/png;base64,' +
+                            this.props.multiBrandingData.supportIcon,
+                      }
+                    : Assets.Support
+                }
               />
               <Text
                 style={[styles.headerTitleTextStyle, customLogoutTextStyle]}>
@@ -154,7 +163,19 @@ class HeaderComponents extends Component {
               <TouchableOpacity
                 style={styles.imageContainerViewstyle}
                 onPress={onLogoutClick}>
-                <Image style={{width: 15, height: 25}} source={Assets.Logout} />
+                <Image
+                  style={{width: 15, height: 25}}
+                  source={
+                    multiBrandingData && this.props.multiBrandingData.Logout
+                      ? {
+                          uri:
+                            multiBrandingData &&
+                            'data:image/png;base64,' +
+                              this.props.multiBrandingData.Logout,
+                        }
+                      : Assets.Logout
+                  }
+                />
                 <Text
                   style={[styles.headerTitleTextStyle, customLogoutTextStyle]}>
                   {logoutHeaderText}
@@ -167,7 +188,16 @@ class HeaderComponents extends Component {
               onPress={aboutMenu}>
               <Image
                 style={{width: 15, height: 15, top: 5}}
-                source={Assets.About}
+                source={
+                  multiBrandingData && this.props.multiBrandingData.About
+                    ? {
+                        uri:
+                          multiBrandingData &&
+                          'data:image/png;base64,' +
+                            this.props.multiBrandingData.About,
+                      }
+                    : Assets.About
+                }
               />
               <Text
                 style={[styles.headerTitleTextStyle, customLogoutTextStyle]}>
@@ -180,7 +210,16 @@ class HeaderComponents extends Component {
               onPress={helpMenu}>
               <Image
                 style={{width: 15, height: 15, top: 5}}
-                source={Assets.Help}
+                source={
+                  multiBrandingData && this.props.multiBrandingData.Help
+                    ? {
+                        uri:
+                          multiBrandingData &&
+                          'data:image/png;base64,' +
+                            this.props.multiBrandingData.Help,
+                      }
+                    : Assets.Help
+                }
               />
               <Text
                 style={[styles.headerTitleTextStyle, customLogoutTextStyle]}>
@@ -203,7 +242,17 @@ class HeaderComponents extends Component {
                   }}>
                   <Image
                     style={{width: 10, height: 20}}
-                    source={Assets.delete}
+                    source={
+                      multiBrandingData &&
+                      this.props.multiBrandingData.ClearCache
+                        ? {
+                            uri:
+                              multiBrandingData &&
+                              'data:image/png;base64,' +
+                                this.props.multiBrandingData.ClearCache,
+                          }
+                        : Assets.delete
+                    }
                   />
                   <Text
                     style={[
@@ -230,7 +279,17 @@ class HeaderComponents extends Component {
                   }}>
                   <Image
                     style={{width: 10, height: 20}}
-                    source={Assets.delete}
+                    source={
+                      multiBrandingData &&
+                      this.props.multiBrandingData.ClearCache
+                        ? {
+                            uri:
+                              multiBrandingData &&
+                              'data:image/png;base64,' +
+                                this.props.multiBrandingData.ClearCache,
+                          }
+                        : Assets.delete
+                    }
                   />
                   <Text
                     style={[
