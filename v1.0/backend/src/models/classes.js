@@ -30,17 +30,17 @@ const classSchema = new mongoose.Schema({
 
 classSchema.index({schoolId: -1})
 //model method created
-classSchema.statics.findClassesBySchools = async (schoolId) => {    
-    const classes = await Classes.find({ schoolId })
+// classSchema.statics.findClassesBySchools = async (schoolId) => {    
+//     const classes = await Classes.find({ schoolId })
     
-    if(!classes) {
-        throw new Error('No Classes')
-    }
+//     if(!classes) {
+//         throw new Error('No Classes')
+//     }
     
-    return classes
-}
+//     return classes
+// }
 
 
-const Classes = mongoose.model('Class', classSchema)
+// const Classes = mongoose.model('Class', classSchema)
 
-module.exports = Classes
+module.exports = classSchema

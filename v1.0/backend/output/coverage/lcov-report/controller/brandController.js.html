@@ -180,7 +180,7 @@ exports.fetchBrandData = async (req, res, next) =&gt; {
         if (brand &amp;&amp; typeof brand == "object") {
             res.status(200).json(brand)
         } else {
-            const defaultBrand = await Brands.find({ state: { $exists: false } , $comment: "Fetch Brand Data API For Find Brand where state is not present."  }, { appName: 1, themeColor1: 1, themeColor2: 1, logoImage: 1, _id: 0 }).lean()
+            const defaultBrand = await Brands.find({ state: { $exists: false } , $comment: "Fetch Brand Data API For Find Brand where state is not present."  }, { appName: 1, themeColor1: 1, themeColor2: 1,themeColor3: 1,themeColor4: 1,themeColor5: 1, logoImage: 1, _id: 0 }).lean()
 &nbsp;
             if (defaultBrand &amp;&amp; defaultBrand.length) {
                 let resultObj = defaultBrand[0]
@@ -203,7 +203,7 @@ exports.fetchBrandData = async (req, res, next) =&gt; {
 &nbsp;
 exports.fetchDefaultBrandData = async (req, res, next) =&gt; {
     try {
-        const brand = await Brands.find({ state: { $exists: false } ,$comment: "Fetch Default Brand Data API For Find Brand where state is not present."}, { appName: 1, themeColor1: 1, themeColor2: 1, logoImage: 1, _id: 0 }).lean()
+        const brand = await Brands.find({ state: { $exists: false } ,$comment: "Fetch Default Brand Data API For Find Brand where state is not present."}, { appName: 1, themeColor1: 1, themeColor2: 1,themeColor3: 1,themeColor4: 1,themeColor5: 1, logoImage: 1, _id: 0 }).lean()
         if (brand.length) {
             let resultObj = brand[0]
             res.status(200).json({ ...resultObj })

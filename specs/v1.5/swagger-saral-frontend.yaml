@@ -117,7 +117,7 @@ paths:
         "201":
           description: "successful operation"
           schema: 
-            $ref: "#/definitions/GetSavedScanResponse"
+            $ref: "#/definitions/SaveMarksResponseBody"
         "400":
           description: "Custom message can be set to message about the error or failure"
         "500":
@@ -932,17 +932,10 @@ definitions:
       state:
         type: string
         example: "up"
-
-
-    
   
-
-    
-        
-        
-      
-        
-      
-       
-  
-        
+  SaveMarksResponseBody:
+    type: object
+    properties:
+      message:
+        type: string
+        example: "Saved Successfully."

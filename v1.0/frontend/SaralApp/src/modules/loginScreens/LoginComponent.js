@@ -444,7 +444,8 @@ class LoginComponent extends Component {
     render() {
         const { password, isLoading, Loading, errUsername, errPassword, errCommon } = this.state;
         const { defaultBrandingdata } = this.props
-        // console.log('defaultBrandingdata>>>>', defaultBrandingdata);
+        const BrandLabel = defaultBrandingdata && defaultBrandingdata.screenLabels && defaultBrandingdata.screenLabels.loginComponent && defaultBrandingdata.screenLabels.loginComponent[0]
+
         if (defaultBrandingdata === undefined || defaultBrandingdata === null) {
             return <View style={styles.container}>
                 <ScrollView
@@ -588,7 +589,7 @@ class LoginComponent extends Component {
                                     this.onLoginDetailsChange(text, 'schoolId')
                                 }}
                                 value={this.state.schoolId}
-                                placeholder={Strings.userId_text}
+                                placeholder={BrandLabel && BrandLabel.UserId ? BrandLabel.UserId : Strings.userId_text}
                                 placeholderTextColor={AppTheme.BLACK_OPACITY_30}
                                 autoCapitalize={'none'}
                             />
@@ -605,7 +606,7 @@ class LoginComponent extends Component {
                                     style={styles.inputStyle}
                                     onChangeText={(text) => this.onLoginDetailsChange(text, 'password')}
                                     value={password}
-                                    placeholder={Strings.password_text}
+                                    placeholder={BrandLabel && BrandLabel.Password ? BrandLabel.Password :  Strings.password_text}
                                     placeholderTextColor={AppTheme.BLACK_OPACITY_30}
                                     secureTextEntry={this.state.hidePassword}
                                 />
@@ -618,9 +619,9 @@ class LoginComponent extends Component {
                                     //    disabled={false}
                                     activeText={'On'}
                                     inActiveText={'Off'}
-                                    backgroundActive={'green'}
+                                    backgroundActive={defaultBrandingdata.themeColor3  ?defaultBrandingdata.themeColor3 :'green'}
                                     backgroundInactive={'gray'}
-                                    circleActiveColor={'#30a566'}
+                                    circleActiveColor={defaultBrandingdata.themeColor1  ?defaultBrandingdata.themeColor1:'#30a566'}
                                     circleInActiveColor={'#000000'}
                                     circleSize={22}
                                     barHeight={22}
@@ -630,12 +631,12 @@ class LoginComponent extends Component {
                                     switchWidthMultiplier={2.5}
                                     value={this.state.rememberMe}
                                     onValueChange={(value) => this.toggleRememberMe(value)} />
-                                <Text style={{ marginLeft: 10 }}>Remember Me</Text>
+                                <Text style={{ marginLeft: 10 }}>{BrandLabel && BrandLabel.RememberMeText ? BrandLabel.RememberMeText :" Remember Me"}</Text>
                             </View>
                             <View style={styles.btnContainer}>
                                 <ButtonComponent
                                     customBtnStyle={[styles.nxtBtnStyle, { backgroundColor: defaultBrandingdata && defaultBrandingdata.themeColor1 ? defaultBrandingdata.themeColor1 : AppTheme.BLUE }]}
-                                    btnText={Strings.login_text.toUpperCase()}
+                                    btnText={BrandLabel && BrandLabel.LoginText ? BrandLabel.LoginText.toUpperCase() : Strings.login_text.toUpperCase()}
                                     onPress={this.onSubmit}
                                 // themeColor1={{ backgroundColor: defaultBrandingdata && defaultBrandingdata.themeColor1 ? defaultBrandingdata.themeColor1:AppTheme.BLUE}}
                                 />

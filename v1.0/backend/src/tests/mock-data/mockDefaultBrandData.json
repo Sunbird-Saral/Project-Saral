@@ -1,6 +1,7 @@
 [  {
     "_id": "63bd55405ee01c0e54a7344c",
     "screenLabels": {
+      "loginComponent": [],
       "examDetailsPopup": [],
       "selectDetails": [],
       "myScan": [],

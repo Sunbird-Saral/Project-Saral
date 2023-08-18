@@ -1,15 +1,16 @@
 const fs = require('fs');
 const mongoose = require('mongoose');
-const Schools = require('../src/models/school')
-const Classes = require('../src/models/classes')
-const Students = require('../src/models/students')
-const Exams = require('../src/models/exams')
-const Marks = require('../src/models/marks')
-const Rois = require('../src/models/roi')
-const Counters = require('../src/models/counter')
-const Brands = require('../src/models/brand')
-const Users = require('../src/models/users')
-const Locks = require('../src/models/lock')
+const schoolsSchema = require('../src/models/school')
+const classesSchema = require('../src/models/classes')
+const studentsSchema = require('../src/models/students')
+const examsSchema = require('../src/models/exams')
+const marksSchema = require('../src/models/marks')
+const RoisSchema = require('../src/models/roi')
+const countersSchema = require('../src/models/counter')
+const brandsSchema = require('../src/models/brand')
+const usersSchema = require('../src/models/users')
+const locksSchema = require('../src/models/lock')
+
 
 
 const dotenv = require('dotenv');
@@ -25,7 +26,7 @@ mongoose
     useCreateIndex: true,
     useFindAndModify: false,
   })
-  .then(() => console.log('Connection successful'))
+  .then(() => console.log('mongoose successful'))
   .catch(function () {
     console.log('Promise Rejected');
   });
@@ -41,6 +42,16 @@ const lock = JSON.parse(fs.readFileSync(`${__dirname}/lock.json`,'utf-8'));
 
 const importData = async () => {
   try {
+    const Users = mongoose.model('Users', usersSchema)
+    const Schools = mongoose.model('Schools', schoolsSchema)
+    const Classes = mongoose.model('Classes', classesSchema)
+    const Rois = mongoose.model('Rois', RoisSchema)
+    const Students = mongoose.model('Students', studentsSchema)
+    const Exams = mongoose.model('Exams', examsSchema)
+    const Locks = mongoose.model('Locks', locksSchema);
+    const Brands = mongoose.model('Brands', brandsSchema)
+    const Counters = mongoose.model('Counters', countersSchema)
+
     await Schools.create(school);
     await Classes.create(classes);
     await Students.create(student);
@@ -59,6 +70,17 @@ const importData = async () => {
 };
 const deleteData = async () => {
   try {
+    const Users = mongoose.model('Users', usersSchema)
+    const Schools = mongoose.model('Schools', schoolsSchema)
+    const Classes = mongoose.model('Classes', classesSchema)
+    const Rois = mongoose.model('Rois', RoisSchema)
+    const Students = mongoose.model('Students', studentsSchema)
+    const Exams = mongoose.model('Exams', examsSchema)
+    const Locks = mongoose.model('Locks', locksSchema);
+    const Brands = mongoose.model('Brands', brandsSchema)
+    const Marks = mongoose.model('Marks', marksSchema)
+    const Counters = mongoose.model('Counters', countersSchema)
+
     await Schools.deleteMany();
     await Students.deleteMany();
     await Classes.deleteMany()

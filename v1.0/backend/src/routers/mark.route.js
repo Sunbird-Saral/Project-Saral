@@ -10,8 +10,6 @@ const excel = require('exceljs');
 const { getFilePath, deleteAllfilesFromReports } = require('../utils/commonUtils')
 const Helper = require('../middleware/helper')
 const router = new express.Router()
-const _ = require('lodash')
-const fs = require('fs');
 const marksController = require("../controller/marksController")
 
 

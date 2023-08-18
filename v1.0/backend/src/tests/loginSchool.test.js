@@ -16,6 +16,11 @@ const mockRequest = () => {
   const req = {}
   req.body = jest.fn().mockReturnValue(req)
   req.params = jest.fn().mockReturnValue(req)
+  req.dbConnection = {
+    model: (ref, schema) => {
+        return schema
+    }
+  }
   return req
 }
 
@@ -46,7 +51,7 @@ describe('login school', () => {
     Helper.findByCredentials = jest.fn().mockImplementation(() => {
       throw new Error('School Id or Password is not correct.')
     });
-    await schoolController.loginSchool(req, res)
+    await schoolController.loginSchool(req, res, jest.fn())
 
     expect(Helper.findByCredentials).toHaveBeenCalledTimes(1)
     expect(res.status).toHaveBeenCalledWith(401);
@@ -67,7 +72,7 @@ describe('login school', () => {
       throw new Error('State/District/School is locked for scanning')
     });
 
-    await schoolController.loginSchool(req, res)
+    await schoolController.loginSchool(req, res, jest.fn())
 
     expect(Helper.findByCredentials).toHaveBeenCalledTimes(1)
     expect(School.findOne).toHaveBeenCalledTimes(1)
@@ -87,20 +92,47 @@ describe('login school', () => {
 
     Helper.findByCredentials = jest.fn().mockImplementationOnce(() => ({ select: jest.fn().mockResolvedValueOnce(mockSignInUser) }));
     School.findOne = jest.fn().mockResolvedValue(mockSchoolData)
+    ClassModel.find = jest.fn().mockResolvedValue(mockClassData)
     Helper.lockScreenValidator = jest.fn().mockResolvedValue(undefined)
 
     User.generateAuthToken = jest.fn().mockResolvedValue(token)
-    ClassModel.findClassesBySchools = jest.fn().mockResolvedValue(mockClassData)
 
-    await schoolController.loginSchool(req, res)
+    await schoolController.loginSchool(req, res, jest.fn())
 
     expect(Helper.findByCredentials).toHaveBeenCalledTimes(1)
     expect(School.findOne).toHaveBeenCalledTimes(1)
     expect(Helper.lockScreenValidator).toHaveBeenCalledTimes(1)
     expect(User.generateAuthToken).toHaveBeenCalledTimes(1)
-    expect(ClassModel.findClassesBySchools).toHaveBeenCalledTimes(1)
+    expect(ClassModel.find).toHaveBeenCalledTimes(1)
     expect(res.status).toHaveBeenCalledWith(200);
     expect(res.json({ status: 'success' }).status(200));
+  });
+
+  it("should not be able to login to school when class data is missing ", async () => {
+    const req = mockRequest();
+    const res = mockResponse()
+    req.body = {
+      "schoolId": "u001",
+      "password": dummyPass,
+      "classes": true
+    }
+
+    Helper.findByCredentials = jest.fn().mockImplementationOnce(() => ({ select: jest.fn().mockResolvedValueOnce(mockSignInUser) }));
+    School.findOne = jest.fn().mockResolvedValue(mockSchoolData)
+    ClassModel.find = jest.fn().mockResolvedValue()
+    Helper.lockScreenValidator = jest.fn().mockResolvedValue(undefined)
+
+    User.generateAuthToken = jest.fn().mockResolvedValue(token)
+
+    await schoolController.loginSchool(req, res, jest.fn())
+
+    expect(Helper.findByCredentials).toHaveBeenCalledTimes(1)
+    expect(School.findOne).toHaveBeenCalledTimes(1)
+    expect(Helper.lockScreenValidator).toHaveBeenCalledTimes(1)
+    expect(User.generateAuthToken).toHaveBeenCalledTimes(1)
+    expect(ClassModel.find).toHaveBeenCalledTimes(1)
+    expect(res.status).toHaveBeenCalledWith(400);
+    expect(res.json({ e: "No Classes" }).status(400));
   });
 
 });
