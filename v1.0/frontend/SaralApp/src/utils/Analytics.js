@@ -31,17 +31,22 @@ export async function markAttendanceNext(username) {
 
 
 export async function SaveInDbEvent(username) {
-  console.log('saveAllScanClick>>>',username);
+  // console.log('saveAllScanClick>>>',username);
   await analytics().logEvent("saveAllScanClick",{saveinDbuser:username});
 }
 
 export async function onScanButtonClickEvent(username) {
-  console.log('onclickscan');
+  // console.log('onclickscan');
   await analytics().logEvent("clickOnScanButton",{scanButtonclickuser:username});
 }
 
+export async function EditMarksMannually(username) {
+  // console.log('EditMarksMannually',username);
+  await analytics().logEvent("EditMarksMannually",{EditMarksMannually:username});
+}
+
 export async function saveLocalAfterScan(username) {
-  console.log('saveDatainLocal');
+  // console.log('saveDatainLocal');
   await analytics().logEvent("SaveinLocalstorage",{savelocaldata:username});
 }
 
@@ -51,12 +56,12 @@ export async function ReviewScan(username) {
 }
 
 export async function ReScanButton(username) {
-  console.log('rescanButton');
+  // console.log('rescanButton');
   await analytics().logEvent("ReScanButton",{rescanUser:username});
 }
 
 export async function AnalyticLogout(username) {
-  console.log('logoutssss',username);
+  // console.log('logoutssss',username);
   await analytics().logEvent("logout",{logout:username});
 }
 

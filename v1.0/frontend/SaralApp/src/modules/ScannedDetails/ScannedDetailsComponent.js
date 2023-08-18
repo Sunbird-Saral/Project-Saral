@@ -63,7 +63,7 @@ import SaralSDK from '../../../SaralSDK';
 //npm
 import CheckBox from '@react-native-community/checkbox';
 import TaggingModal from '../common/TaggingModal';
-import { saveLocalAfterScan } from '../../utils/Analytics';
+import { saveLocalAfterScan,EditMarksMannually } from '../../utils/Analytics';
 
 const {width, height} = Dimensions.get('window');
 const ScannedDetailsComponent = ({
@@ -1047,7 +1047,7 @@ const ScannedDetailsComponent = ({
       newArray[index].consolidatedPrediction =
         text.length > 0 && text > 1 ? 0 : text;
       setNewArrayValue(newArray);
-
+      EditMarksMannually(loginData.data.school.schoolId)
       ocrLocalResponse.layout.cells.forEach(element => {
         if (element.cellId == value.cellId) {
           structureList.forEach(Datas => {
