@@ -4,8 +4,11 @@ const Helper = require('../middleware/helper')
 const { stringObject } = require('../utils/commonUtils');
 const logger = require('../logging/logger')
 const httperror = require("http-errors");
+let concurrentCount = 0;
 
 exports.saveMarks = async (req, res, next) => {
+    concurrentCount++;
+    console.log('Concurrent Save Marks Request', concurrentCount);
     const marks = []
     const startTime = new Date();
     if (req.header('X-App-Version')) {
@@ -58,7 +61,7 @@ exports.saveMarks = async (req, res, next) => {
 
         await Helper.lockScreenValidator(connection,req.school)
 
-        await Marks.bulkWrite(marks, { ordered: false });
+        await Marks.bulkWrite(marks);
         const endTime = new Date();
         const executionTime = endTime - startTime;
         logger.info(`Execution time for Save Marks BulkWrite : ${executionTime}ms`);
@@ -72,6 +75,8 @@ exports.saveMarks = async (req, res, next) => {
             res.status(400).json({ error: e.message })
         }
     } finally {
+        concurrentCount--;
+        console.log('After Concurrent Save Marks Request', concurrentCount);
         next()
     }
 }
