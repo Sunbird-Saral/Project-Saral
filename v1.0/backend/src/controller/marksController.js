@@ -44,17 +44,16 @@ exports.saveMarks = async (req, res, next) => {
                 userId
             })
 
-            // const marksData = {
-            //     updateOne: {
-            //         filter: {
-            //             shardedKey: `${mark.schoolId}_${mark.studentId}_${mark.subject}_${mark.examDate}`
-            //         },
-            //         update: { $set: { studentIdTrainingData: mark.studentIdTrainingData, studentId: mark.studentId, predictionConfidence: mark.predictionConfidence, schoolId: mark.schoolId, examDate: mark.examDate, predictedStudentId: mark.predictedStudentId, studentAvailability: mark.studentAvailability, marksInfo: mark.marksInfo, maxMarksTrainingData: mark.maxMarksTrainingData, maxMarksPredicted: mark.maxMarksPredicted, securedMarks: mark.securedMarks, totalMarks: mark.totalMarks, obtainedMarksTrainingData: mark.obtainedMarksTrainingData, obtainedMarksPredicted: mark.obtainedMarksPredicted, set: mark.set, subject: mark.subject, classId: mark.classId, section: mark.section, examId: mark.examId, userId: mark.userId, roiId: mark.roiId, shardedKey:`${mark.schoolId}_${mark.studentId}_${mark.subject}_${mark.examDate}`} },
-            //         upsert: true
-            //     }
-            // }
-            marks.push({insertOne: {
-                document: { studentIdTrainingData: mark.studentIdTrainingData, studentId: mark.studentId, predictionConfidence: mark.predictionConfidence, schoolId: mark.schoolId, examDate: mark.examDate, predictedStudentId: mark.predictedStudentId, studentAvailability: mark.studentAvailability, marksInfo: mark.marksInfo, maxMarksTrainingData: mark.maxMarksTrainingData, maxMarksPredicted: mark.maxMarksPredicted, securedMarks: mark.securedMarks, totalMarks: mark.totalMarks, obtainedMarksTrainingData: mark.obtainedMarksTrainingData, obtainedMarksPredicted: mark.obtainedMarksPredicted, set: mark.set, subject: mark.subject, classId: mark.classId, section: mark.section, examId: mark.examId, userId: mark.userId, roiId: mark.roiId, shardedKey:`${mark.schoolId}_${mark.studentId}_${mark.subject}_${mark.examDate}`}}})
+            const marksData = {
+                updateOne: {
+                    filter: {
+                        shardedKey: `${mark.schoolId}_${mark.studentId}_${mark.subject}_${mark.examDate}`
+                    },
+                    update: { $set: { studentIdTrainingData: mark.studentIdTrainingData, studentId: mark.studentId, predictionConfidence: mark.predictionConfidence, schoolId: mark.schoolId, examDate: mark.examDate, predictedStudentId: mark.predictedStudentId, studentAvailability: mark.studentAvailability, marksInfo: mark.marksInfo, maxMarksTrainingData: mark.maxMarksTrainingData, maxMarksPredicted: mark.maxMarksPredicted, securedMarks: mark.securedMarks, totalMarks: mark.totalMarks, obtainedMarksTrainingData: mark.obtainedMarksTrainingData, obtainedMarksPredicted: mark.obtainedMarksPredicted, set: mark.set, subject: mark.subject, classId: mark.classId, section: mark.section, examId: mark.examId, userId: mark.userId, roiId: mark.roiId, shardedKey:`${mark.schoolId}_${mark.studentId}_${mark.subject}_${mark.examDate}`} },
+                    upsert: true
+                }
+            }
+            marks.push(marksData)
         });
 
         await Helper.lockScreenValidator(connection,req.school)
