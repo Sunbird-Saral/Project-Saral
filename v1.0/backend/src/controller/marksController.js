@@ -1,9 +1,10 @@
-const marksSchema = require('../models/marks')
+//const Marks = require('../models/marks')
 const usersSchema = require('../models/users')
 const Helper = require('../middleware/helper')
 const { stringObject } = require('../utils/commonUtils');
 const logger = require('../logging/logger')
 const httperror = require("http-errors");
+const poolManager = require("../db/mongoose");
 let concurrentCount = 0;
 
 exports.saveMarks = async (req, res, next) => {
@@ -11,13 +12,14 @@ exports.saveMarks = async (req, res, next) => {
     console.log('Concurrent Save Marks Request', concurrentCount);
     const marks = []
     const startTime = new Date();
+    let nativeClient;
     if (req.header('X-App-Version')) {
         // console.log("APP VERSION", req.get('X-App-Version'))
     }
 
     try {
         let connection = req.dbConnection
-
+        nativeClient = await poolManager.getNativeClient();
         if (Object.keys(req.body).length === 0)  throw new httperror(400, "Validation error.")
         const input_keys = Object.keys(req.body)
         if (!["subject", "classId", "userId", "examId"].every((i) => input_keys.includes(i)))
@@ -33,9 +35,8 @@ exports.saveMarks = async (req, res, next) => {
         const createdOn = new Date().getTime()
         const roiId = req.body.roiId
     
-        const Marks = connection.model('Marks', marksSchema);
         req.body.studentsMarkInfo.forEach(studentsData => {
-            const mark = new Marks({
+            const mark = {
                 ...studentsData,
                 schoolId,
                 examDate,
@@ -45,7 +46,7 @@ exports.saveMarks = async (req, res, next) => {
                 roiId,
                 examId,
                 userId
-            })
+            }
 
             const marksData = {
                 updateOne: {
@@ -61,7 +62,7 @@ exports.saveMarks = async (req, res, next) => {
 
         await Helper.lockScreenValidator(connection,req.school)
 
-        await Marks.bulkWrite(marks);
+        await nativeClient.collection('marks').bulkWrite(marks);
         const endTime = new Date();
         const executionTime = endTime - startTime;
         logger.info(`Execution time for Save Marks BulkWrite : ${executionTime}ms`);
@@ -77,6 +78,7 @@ exports.saveMarks = async (req, res, next) => {
     } finally {
         concurrentCount--;
         console.log('After Concurrent Save Marks Request', concurrentCount);
+        poolManager.releaseNativeClient(nativeClient);
         next()
     }
 }
