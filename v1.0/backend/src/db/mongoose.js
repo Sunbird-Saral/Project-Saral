@@ -4,7 +4,7 @@ const { MongoClient } = require('mongodb');
 
 // url/databasename
 const connectionURL = process.env.MONGODB_URL
-const maxPoolSize = process.env.MONGODB_POOL_SIZE || 100
+const maxPoolSize = process.env.MONGODB_POOL_SIZE || 20
 const minPoolSize = process.env.MIN_MONGODB_POOL_SIZE || 30
 
 const options = {
@@ -32,7 +32,7 @@ const nativePoolFactory = {
 };
 
 const pool = createPool(poolFactory, { max: maxPoolSize });
-const nativePool = createPool(nativePoolFactory, { max: 100 });
+const nativePool = createPool(nativePoolFactory, { max: 50 });
 
 const getClientPool = (req, res, next) => {
     pool.acquire()
