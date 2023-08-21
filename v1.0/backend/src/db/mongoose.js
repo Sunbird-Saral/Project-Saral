@@ -4,7 +4,7 @@ const { MongoClient } = require('mongodb');
 
 // url/databasename
 const connectionURL = process.env.MONGODB_URL
-const maxPoolSize = process.env.MONGODB_POOL_SIZE || 50
+const maxPoolSize = process.env.MONGODB_POOL_SIZE || 100
 const minPoolSize = process.env.MIN_MONGODB_POOL_SIZE || 30
 
 const options = {
