@@ -1,4 +1,4 @@
-//const Marks = require('../models/marks')
+const { marksSchema, rawSchemaJson } = require('../models/marks')
 const usersSchema = require('../models/users')
 const Helper = require('../middleware/helper')
 const { stringObject } = require('../utils/commonUtils');
@@ -36,7 +36,7 @@ exports.saveMarks = async (req, res, next) => {
         const roiId = req.body.roiId
     
         req.body.studentsMarkInfo.forEach(studentsData => {
-            const mark = {
+            const mark = Helper.transformAndValidateDataBasedOnModel({
                 ...studentsData,
                 schoolId,
                 examDate,
@@ -46,7 +46,7 @@ exports.saveMarks = async (req, res, next) => {
                 roiId,
                 examId,
                 userId
-            }
+            }, rawSchemaJson)
 
             const marksData = {
                 updateOne: {

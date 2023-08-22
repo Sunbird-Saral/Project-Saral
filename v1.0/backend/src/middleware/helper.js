@@ -79,6 +79,67 @@ const commonHelperFunctions = {
         } catch (error) {
             throw error
         }
+    },
+
+    //custom function to validate and modify PUT/POST payload against schema model
+    transformAndValidateDataBasedOnModel: function (objectRef, schemaRef) {
+        let fobj = {}
+    
+        function transformData(key, schemaobj, val) {
+            let modval = null;
+            if(!val && val !== 0 && !schemaobj.required) {
+                if(schemaobj.default) {
+                    modval = schemaobj.default
+                } else {
+                    if(schemaobj.type == Array) {
+                        modval = []
+                    }
+                }
+            } else if(val || val == 0) {
+                if(schemaobj.type == String) {
+                    modval = val.toString().trim()
+                }
+                if(schemaobj.uppercase) {
+                    modval = val.toUpperCase()
+                } else {
+                    modval = val
+                }
+            }
+    
+            return modval;
+        }
+    
+        function iterateOverObject(obj, i=null, path=null, object = objectRef) {
+            if(typeof obj == 'object') {
+                Object.keys(obj).forEach(key => {
+                    if(!Array.isArray(obj[key])) {
+                        
+                        let schemaobj = path ? schemaRef[path][0][key] : schemaRef[key]
+                        if(schemaobj) {
+                            if(path) {
+                                fobj[path] = fobj[path] || [];
+                                fobj[path][i] = fobj[path][i] || {};
+                                fobj[path][i][key] = transformData(key, schemaobj, object[key]);
+                            }
+                            else {
+                                fobj[key] = transformData(key, schemaobj, object[key]);
+                            }
+                        }   
+                    } else if(Array.isArray(obj[key])) {
+                        if(object[key] !== null && object[key] !== undefined) {
+                        object[key].forEach((sobj, i) => {
+                            iterateOverObject(schemaRef[key][0], i, key, sobj)
+                        })
+                    }
+                    }
+                })
+            } else {
+                fobj[path] = transformData(path, schemaRef[path], obj[path]);
+            }
+        }
+        
+        iterateOverObject(schemaRef)
+        return fobj;
     }
 }
 
