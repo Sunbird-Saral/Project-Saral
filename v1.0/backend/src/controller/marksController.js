@@ -5,11 +5,8 @@ const { stringObject } = require('../utils/commonUtils');
 const logger = require('../logging/logger')
 const httperror = require("http-errors");
 const poolManager = require("../db/mongoose");
-let concurrentCount = 0;
 
 exports.saveMarks = async (req, res, next) => {
-    concurrentCount++;
-    console.log('Concurrent Save Marks Request', concurrentCount);
     const marks = []
     const startTime = new Date();
     let nativeClient;
@@ -76,8 +73,6 @@ exports.saveMarks = async (req, res, next) => {
             res.status(400).json({ error: e.message })
         }
     } finally {
-        concurrentCount--;
-        console.log('After Concurrent Save Marks Request', concurrentCount);
         poolManager.releaseNativeClient(nativeClient);
         next()
     }

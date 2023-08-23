@@ -85,56 +85,54 @@ const commonHelperFunctions = {
     transformAndValidateDataBasedOnModel: function (objectRef, schemaRef) {
         let fobj = {}
     
-        function transformData(key, schemaobj, val) {
+        function transformData(key, schemaobj, val, objRef, fObjRef) {
+            if(!objRef.hasOwnProperty(key) && !schemaobj.hasOwnProperty('default') && schemaobj.type == String) {
+                return;
+            }
             let modval = null;
-            if(!val && val !== 0 && !schemaobj.required) {
-                if(schemaobj.default) {
+            if((val == null || val == undefined) && !schemaobj.required) {
+                if(schemaobj.hasOwnProperty('default')) {
                     modval = schemaobj.default
-                } else {
-                    if(schemaobj.type == Array) {
-                        modval = []
-                    }
+                } else if(schemaobj.type == Array) {
+                    modval = []
                 }
-            } else if(val || val == 0) {
+            } else if(val || val == 0 || val == '') {
                 if(schemaobj.type == String) {
                     modval = val.toString().trim()
-                }
-                if(schemaobj.uppercase) {
-                    modval = val.toUpperCase()
+                    if(schemaobj.uppercase) {
+                        modval = val.toUpperCase()
+                    }
                 } else {
                     modval = val
                 }
             }
     
-            return modval;
+            fObjRef[key] = modval;
         }
     
         function iterateOverObject(obj, i=null, path=null, object = objectRef) {
             if(typeof obj == 'object') {
                 Object.keys(obj).forEach(key => {
                     if(!Array.isArray(obj[key])) {
-                        
-                        let schemaobj = path ? schemaRef[path][0][key] : schemaRef[key]
-                        if(schemaobj) {
-                            if(path) {
-                                fobj[path] = fobj[path] || [];
-                                fobj[path][i] = fobj[path][i] || {};
-                                fobj[path][i][key] = transformData(key, schemaobj, object[key]);
-                            }
-                            else {
-                                fobj[key] = transformData(key, schemaobj, object[key]);
-                            }
-                        }   
+                        if(path) {
+                            fobj[path] = fobj[path] || [];
+                            fobj[path][i] = fobj[path][i] || {};
+                            transformData(key, schemaRef[path][0][key], object[key], object, fobj[path][i]);
+                        }
+                        else if(schemaRef[key]){
+                            transformData(key, schemaRef[key], object[key], object, fobj);
+                        }
                     } else if(Array.isArray(obj[key])) {
-                        if(object[key] !== null && object[key] !== undefined) {
+                        if(object[key].length == 0 || !object[key]) {
+                            fobj[key] = []
+                        }
                         object[key].forEach((sobj, i) => {
                             iterateOverObject(schemaRef[key][0], i, key, sobj)
                         })
                     }
-                    }
                 })
             } else {
-                fobj[path] = transformData(path, schemaRef[path], obj[path]);
+                transformData(path, schemaRef[path], object[path], object, fobj);
             }
         }
         

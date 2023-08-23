@@ -56,7 +56,6 @@ const rawSchemaJson = {
     },
     marksInfo: [
         {
-            _id: false,
             questionId: { type: String, required: true },
             predictedMarks: {type: String,required: false},
             predictionConfidence: {type: Array,required: false},
