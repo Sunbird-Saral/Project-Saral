@@ -45,7 +45,7 @@ import {
 import constants from '../../flux/actions/constants';
 import {storeFactory} from '../../flux/store/store';
 import DeviceInfo from 'react-native-device-info';
-import { SchoolDetailSubmit } from '../../utils/Analytics';
+import {SchoolDetailSubmit} from '../../utils/Analytics';
 
 //redux
 
@@ -974,7 +974,7 @@ class SelectDetailsComponent extends Component {
               finalStudentsAndExamArr,
             );
             this.props.navigation.push('StudentsList');
-            SchoolDetailSubmit(loginData.data.school.schoolId)
+            SchoolDetailSubmit(loginData.data.school.schoolId);
           }
         } else if (!hasNetworkData) {
           this.callCustomModal(
@@ -1119,12 +1119,14 @@ class SelectDetailsComponent extends Component {
           })
         : [];
 
-    if (hasCacheData && cacheFilterData.length > 0) {
-      this.setState({isCalledStudentAndExam: true, isLoading: false});
-      storeFactory.dispatch(
-        this.dispatchStudentExamData(cacheFilterData[0].data),
-      );
-    } else if (hasNetwork) {
+    // if (hasCacheData && cacheFilterData.length > 0) {
+    //   console.log('INSIDEIF>>>>>>>>>>>>>>>>>>');
+    //   this.setState({isCalledStudentAndExam: true, isLoading: false});
+    //   storeFactory.dispatch(
+    //     this.dispatchStudentExamData(cacheFilterData[0].data),
+    //   );
+    // } else
+    if (hasNetwork) {
       let dataPayload = {
         classId: this.state.selectedClassId,
         section: this.state.selectedSection,
@@ -1132,6 +1134,7 @@ class SelectDetailsComponent extends Component {
       };
       let apiObj = new GetStudentsAndExamData(dataPayload, token, deviceUniqId);
       this.props.APITransport(apiObj);
+      console.log(apiObj);
       this.setState({
         isLoading: false,
         isCalledStudentAndExam: true,
