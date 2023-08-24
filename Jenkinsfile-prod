@@ -20,7 +20,7 @@ pipeline {
             steps {
               script {
                 docker.withRegistry('https://registry.hub.docker.com', 'dockerhub_credentials') {
-                  def dockerImage = docker.image('saaral123/backendapi:2.0')
+                  def dockerImage = docker.image('saaral123/backendtest:2.0')
                   dockerImage.pull()
                 }
               }
