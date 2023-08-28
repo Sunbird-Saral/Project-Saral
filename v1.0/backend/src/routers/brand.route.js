@@ -3,14 +3,19 @@ const router = express.Router();
 const { auth } = require('../middleware/auth')
 
 const brandController = require("../controller/brandController")
-const Schools = require('../models/school')
-const Brands = require('../models/brand')
+const schoolsSchema = require('../models/school')
+const brandsSchema = require('../models/brand')
+const clientPool = require('../db/mongoose');
 
 router.get('/brand/default', brandController.fetchDefaultBrandData)
 router.get('/brand', auth, brandController.fetchBrandData)
 
-router.post('/brand?', auth, async (req, res) => {
+router.post('/brand?', auth, async (req, res, next) => {
+    
     try {
+        let connection = req.dbConnection;
+        const Schools = connection.model('Schools', schoolsSchema)
+        const Brands = connection.model('Brands', brandsSchema)
 
         let brandExist = {}
 
@@ -36,11 +41,18 @@ router.post('/brand?', auth, async (req, res) => {
         }
     } catch (e) {
         res.status(400).send(e)
-    }
+    }finally {
+        next()
+      }
 })
 
-router.delete('/brand', auth, async (req, res) => {
+router.delete('/brand', auth, async (req, res, next) => {
+    
     try {
+        let connection = req.dbConnection;
+        const Schools = connection.model('Schools', schoolsSchema)
+        const Brands = connection.model('Brands', brandsSchema)
+
         const school = await Schools.findOne({ schoolId: req.school.schoolId ,$comment: "Delete Brand API For Find School Data"})
         const brand = await Brands.deleteOne({ state: school.state , $comment: "Delete Brand API For Find Brand And delete Brand"}, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0, state: 0 })
         if (brand.deletedCount > 0) {
@@ -51,13 +63,20 @@ router.delete('/brand', auth, async (req, res) => {
 
     } catch (e) {
         res.status(400).send(e)
-    }
+    }finally {
+        next()
+      }
 })
 
-router.put('/brand', auth, async (req, res) => {
+router.put('/brand', auth, async (req, res, next) => {
+    
     try {
+        let connection = req.dbConnection;
+        const Schools = connection.model('Schools', schoolsSchema)
+        const Brands = connection.model('Brands', brandsSchema)
+
         const inputKeys = Object.keys(req.body)
-        const allowedUpdates = ['logoImage', 'themeColor1', 'themeColor2', 'appName']
+        const allowedUpdates = ['logoImage', 'themeColor1', 'themeColor2','themeColor3','themeColor4','themeColor5', 'appName']
         const isValidOperation = inputKeys.every((input) => allowedUpdates.includes(input))
 
         if (!isValidOperation) {
@@ -72,7 +91,9 @@ router.put('/brand', auth, async (req, res) => {
 
     } catch (e) {
         res.status(400).send(e)
-    }
+    }finally {
+         next()
+      }
 })
 
 module.exports = router

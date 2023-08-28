@@ -13,6 +13,11 @@ const mockRequest = () => {
     const req = {}
     req.body = jest.fn().mockReturnValue(req)
     req.params = jest.fn().mockReturnValue(req)
+    req.dbConnection = {
+        model: (ref, schema) => {
+            return schema
+        }
+      }
     return req
 }
 
@@ -38,7 +43,7 @@ describe('fetch User By credentials ', () => {
 
         User.findOne = jest.fn().mockResolvedValue(userMockdata)
         bcrypt.compare = jest.fn().mockResolvedValue(true)
-        await Helper.findByCredentials(req, res)
+        await Helper.findByCredentials(req.dbConnection, req, res)
 
         expect(User.findOne).toHaveBeenCalledTimes(1)
         expect(bcrypt.compare).toHaveBeenCalledTimes(1)
@@ -53,9 +58,10 @@ describe('fetch User By credentials ', () => {
                 password: dummyPass
             }
             User.findOne = jest.fn().mockResolvedValue(null)
-            await Helper.findByCredentials(req, res)
+            await Helper.findByCredentials(req.dbConnection, res, jest.fn())
         } catch(e) {
-            expect(e).toThrowError;     
+            expect(e).toThrowError;
+            expect(e.message).toEqual('School Id or Password is not correct.');    
         }
     });
 
@@ -69,9 +75,10 @@ describe('fetch User By credentials ', () => {
             }
             User.findOne = jest.fn().mockResolvedValue(userMockdata)
             bcrypt.compare = jest.fn().mockResolvedValue(false)
-            await Helper.findByCredentials(req, res)
+            await Helper.findByCredentials(req.dbConnection, res, jest.fn())
         } catch(e) {
-            expect(e).toThrowError;     
+            expect(e).toThrowError;
+            expect(e.message).toEqual('School Id or Password is not correct.');    
         }
     });
 

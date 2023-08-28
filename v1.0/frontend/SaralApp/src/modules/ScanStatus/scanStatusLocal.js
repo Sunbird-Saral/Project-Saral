@@ -33,6 +33,7 @@ import { scanStatusDataAction } from './scanStatusDataAction';
 import Spinner from '../common/components/loadingIndicator';
 import constants from '../../flux/actions/constants';
 import DeviceInfo from 'react-native-device-info';
+import { SaveInDbEvent } from '../../utils/Analytics';
 
 const ScanStatusLocal = ({
     loginData,
@@ -275,6 +276,8 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
                         setIsLoading(false)
                         onBackPress();
                         callCustomModal(Strings.message_text,Strings.saved_successfully,false);
+                        SaveInDbEvent()
+
                     }
                 })
                 .catch(function (err) {
@@ -325,6 +328,7 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
             axios.post(api.apiEndPoint(), api.getBody(),{ headers: api.getHeaders(), cancelToken: source.token })
                 .then(function (res) {
                     callCustomModal(Strings.message_text,Strings.saved_successfully,false);
+                    SaveInDbEvent()
                     apiResponse = res
                     clearTimeout(id)
                     setIsLoading(false)
@@ -363,7 +367,7 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
                 />
             
             <View style={{marginTop:30}}>
-            <Text style={styles.scanStatus}>{'Review Scans'}</Text>
+            <Text style={styles.scanStatus}>{BrandLabel&&BrandLabel.ReviewScanText ? BrandLabel.ReviewScanText :'Review Scans'}</Text>
             </View>
             {/* <ScrollView> */}
             <FlatList
@@ -389,7 +393,7 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
             <ButtonComponent
                 customBtnStyle={[styles.nxtBtnStyle1, { backgroundColor: multiBrandingData.themeColor1 ? multiBrandingData.themeColor1 : AppTheme.BLUE }]}
                 customBtnTextStyle={{fontWeight:'normal',fontSize:14}}
-                btnText={'Submit All Scans'.toUpperCase()}
+                btnText={BrandLabel&&BrandLabel.SubmitAllScan ? BrandLabel.SubmitAllScan.toUpperCase() :'Submit All Scans'.toUpperCase()}
                 activeOpacity={0.8}
                 onPress={()=> onPressSaveInDB()}
                 />

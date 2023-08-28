@@ -1,5 +1,5 @@
 const express = require('express')
-require('./db/mongoose')
+const db = require('./db/mongoose')
 var path = require('path');
 const fs = require('fs')
 const puppeteer = require('puppeteer')
@@ -53,7 +53,7 @@ const generateJestReportPdf = async () => {
     console.log("pdf printed")
 }
 
-const CORS_ORIGIN = [{ "origin": 'https://saral-dev-api.anuvaad.org', "optionsSuccessStatus": 200, "methods": ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'] },{ "origin": 'BASE_URL', "optionsSuccessStatus": 200, "methods": ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'] }, { "origin": 'https://saral-dev-api.anuvaad.org', "optionsSuccessStatus": 200, "methods": ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'] }]
+const CORS_ORIGIN = [{ "origin": 'https://saral-dev-api.anuvaad.org', "optionsSuccessStatus": 200, "methods": ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'] },{ "origin": 'https://saral-api.anuvaad.org', "optionsSuccessStatus": 200, "methods": ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'] }, { "origin": 'https://saral-api.anuvaad.org', "optionsSuccessStatus": 200, "methods": ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'] }]
 
 const checkURL = (req, res, next) => {
     const { origin, url, methods } = req.headers;
@@ -70,7 +70,6 @@ const checkURL = (req, res, next) => {
     next();
   };
 
-
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }))
 app.use(express.json())
@@ -82,6 +81,7 @@ app.set('view engine', 'pug');
 
 // app.use(expressMiddleware)
 // app.use(loggerMidlleware)
+app.use(db.getClientPool)
 app.use(schoolRouter)
 app.use(studentRouter)
 app.use(classRouter)
@@ -89,6 +89,7 @@ app.use(examRouter)
 app.use(markRouter)
 app.use(roiRouter)
 app.use(brandRouter)
+app.use(db.releaseClientPool)
 app.use("/api-docs/saral/frontend", swaggerUi.serve, (...args) => swaggerUi.setup(frontendSpec)(...args));
 app.use("/api-docs/saral/maintenance", swaggerUi.serve, (...args) => swaggerUi.setup(maintenanceSpec)(...args));
 

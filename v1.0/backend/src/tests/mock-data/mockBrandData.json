@@ -1,5 +1,6 @@
 {
     "screenLabels": {
+        "loginComponent": [],
         "examDetailsPopup": [],
         "selectDetails": [],
         "studentList": [],

@@ -59,6 +59,6 @@ const ROISchema = new mongoose.Schema({
 
 ROISchema.index({classId: -1, subject: -1, state: -1, type: -1, set: -1})
 
-const Rois = mongoose.model('ROI', ROISchema)
+// const Rois = mongoose.model('ROI', ROISchema)
 
-module.exports = Rois
+module.exports = ROISchema

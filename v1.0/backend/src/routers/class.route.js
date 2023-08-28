@@ -1,28 +1,32 @@
 const express = require('express')
-const Classes = require('../models/classes')
 const { auth } = require('../middleware/auth')
 const _ = require('lodash')
 const Promise = require('bluebird')
-const Students = require('../models/students')
-const Exams = require('../models/exams')
-const Marks = require('../models/marks')
+const studentsSchema = require('../models/students')
+const classesSchema = require('../models/classes')
+const examsSchema = require('../models/exams')
+const marksSchema = require('../models/marks')
 const router = new express.Router()
 
-router.post('/classes', auth, async (req, res) => {
-
-    const body = [...req.body]
-    const classModel = []
-    body.forEach(data => {
-        const classData = new Classes({
-            ...data,
-            className: `Class-${data.classId}`,
-            schoolId: req.school.schoolId
-        })
-        classModel.push(classData)
-    });
+router.post('/classes', auth, async (req, res,next) => {
     try {
+        let connection = req.dbConnection
+        const Classes = connection.model('Classes', classesSchema)
+
+
+        const body = [...req.body]
+        const classModel = []
+        body.forEach(data => {
+            const classData = new Classes({
+                ...data,
+                className: `Class-${data.classId}`,
+                schoolId: req.school.schoolId
+            })
+            classModel.push(classData)
+        });
+
         let finalUpdatedData = []
-        Promise.map(classModel, async doc => {
+        await Promise.map(classModel, async doc => {
             let match = {
                 schoolId: doc.schoolId,
                 classId: doc.classId,
@@ -55,18 +59,17 @@ router.post('/classes', auth, async (req, res) => {
                 }
                 finalUpdatedData.push(response)
             }
-        }).then(() => {
-            res.status(201).send(finalUpdatedData)
-        }).catch(e => {
-            res.status(400).send(e)
-        })
+        });
+        res.status(201).send(finalUpdatedData)
     } catch (e) {
         console.log(e);
         res.status(400).send(e)
+    } finally {
+          next()
     }
 })
 
-router.put('/classes', auth, async (req, res) => {
+router.put('/classes', auth, async (req, res, next) => {
     const updates = Object.keys(req.body)
     const allowedUpdates = ['sections', 'classId']
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
@@ -80,8 +83,11 @@ router.put('/classes', auth, async (req, res) => {
         classId: req.body.classId,
         $comment: "Update Classes API For Find Class Data"
     }
-
+    
     try {
+        let connection = req.dbConnection;
+        const Classes = connection.model('Classes', classesSchema)
+
         const classData = await Classes.findOne(match)
 
         if (!classData || (classData && classData.length == 0)) {
@@ -127,10 +133,12 @@ router.put('/classes', auth, async (req, res) => {
     catch (e) {
         console.log(e);
         res.status(400).send(e)
+    } finally {
+        next()
     }
 })
 
-router.delete('/classes', auth, async (req, res) => {
+router.delete('/classes', auth, async (req, res, next) => {
     if (Object.keys(req.body) != "classId") return res.status(400).send({ message: 'Validation error.' })
 
     const match = {
@@ -138,8 +146,14 @@ router.delete('/classes', auth, async (req, res) => {
         classId: req.body.classId,
         $comment: "Delete Classes API For Find Class and Exam Data"
     }
-
+    
     try {
+        let connection = req.dbConnection;
+        const Classes = connection.model('Classes', classesSchema)
+        const Students = connection.model('Students', studentsSchema)
+        const Marks = connection.model('Marks', marksSchema)
+        const Exams = connection.model('Exams', examsSchema)
+
         const classData = await Classes.findOne(match)
         if (classData) {
             await Classes.deleteOne(match)
@@ -164,6 +178,8 @@ router.delete('/classes', auth, async (req, res) => {
     catch (e) {
         console.log(e);
         res.status(400).send(e)
+    }finally{
+        next()
     }
 })
 

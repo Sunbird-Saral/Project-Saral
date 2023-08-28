@@ -6,6 +6,11 @@ const schoolMockdata = require('./mock-data/school.json')
 const lockMockdata = require('./mock-data/mockLockData.json')
 const lockStateMockdata = require('./mock-data/mockStateLockData.json')
 const lockDistrictMockdata = require('./mock-data/mockDistrictLockData.json')
+const connection = {
+    model: (ref, schema) => {
+        return schema
+    }
+  }
 
 
 describe('should lock school ', () => {
@@ -18,7 +23,7 @@ describe('should lock school ', () => {
 
         Lock.find = jest.fn().mockReturnValue({ lean: () => lockStateMockdata })
 
-        await expect(Helper.lockScreenValidator(schoolMockdata,"state")).rejects.toThrow()
+        await expect(Helper.lockScreenValidator(connection, schoolMockdata,"state")).rejects.toThrow()
         expect(Lock.find).toHaveBeenCalledTimes(1)
     });
 
@@ -28,7 +33,7 @@ describe('should lock school ', () => {
 
         Lock.find = jest.fn().mockReturnValue({ lean: () => lockDistrictMockdata })
 
-        await expect(Helper.lockScreenValidator(schoolMockdata,"district")).rejects.toThrow()
+        await expect(Helper.lockScreenValidator(connection, schoolMockdata,"district")).rejects.toThrow()
         expect(Lock.find).toHaveBeenCalledTimes(1)
     });
 
@@ -36,7 +41,7 @@ describe('should lock school ', () => {
 
         Lock.find = jest.fn().mockReturnValue({ lean: () => lockMockdata })
 
-        await expect(Helper.lockScreenValidator(schoolMockdata,"state")).rejects.toThrow()
+        await expect(Helper.lockScreenValidator(connection, schoolMockdata,"state")).rejects.toThrow()
         expect(Lock.find).toHaveBeenCalledTimes(1)
     });
 

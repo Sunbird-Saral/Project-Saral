@@ -14,6 +14,7 @@ import {
 } from '../../utils/StorageUtils'
 import { Assets } from '../../assets/index'
 import { checkNetworkConnectivity, monospace_FF } from '../../utils/CommonUtils';
+import { loginEvent } from '../../utils/Analytics';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getBrandingDataApi, getLoginApi, setLoginApi, setBrandingDataApi } from '../../utils/offlineStorageUtils';
 import { storeFactory } from '../../flux/store/store';
@@ -133,7 +134,6 @@ class LoginComponent extends Component {
         const deviceUniqId = await DeviceInfo.getUniqueId();
         let payload = this.props.defaultBrandingdata
         let apiObj = new DefaultBrandAction(payload, deviceUniqId);
-        console.log('payload>>>', payload);
         this.props.APITransport(apiObj)
     }
 
@@ -182,7 +182,7 @@ class LoginComponent extends Component {
             this.setState({
                 isLoading: true,
                 calledLogin: true
-            }, () => {
+            }, async() => {
                 let loginCredObj = {
                     "schoolId": schoolId,
                     "password": password
@@ -190,6 +190,7 @@ class LoginComponent extends Component {
 
                 let apiObj = new LoginAction(loginCredObj, deviceUniqId);
                 this.props.APITransport(apiObj);
+                
             })
         } else if (!hasNetwork && schoolId.length > 0) {
             this.setState({
@@ -302,6 +303,7 @@ class LoginComponent extends Component {
         if (prevProps != this.props) {
             const { apiStatus, loginData, navigation } = this.props
             const { schoolId, password, calledLogin } = this.state
+            const schoolIdForFA  = loginData && loginData.data && loginData.data.school && loginData.data.school.schoolId
             if (apiStatus && prevProps.apiStatus != apiStatus && apiStatus.error) {
                 if (calledLogin) {
                     this.setState({ isLoading: false, calledLogin: false })
@@ -365,6 +367,7 @@ class LoginComponent extends Component {
                                     data: loginData
                                 }
                                 await setLoginApi([payload])
+                                await loginEvent(schoolIdForFA)
                             }
                         }
                         if (loginCred && loginSaved) {
@@ -441,7 +444,8 @@ class LoginComponent extends Component {
     render() {
         const { password, isLoading, Loading, errUsername, errPassword, errCommon } = this.state;
         const { defaultBrandingdata } = this.props
-        console.log('defaultBrandingdata>>>>', defaultBrandingdata);
+        const BrandLabel = defaultBrandingdata && defaultBrandingdata.screenLabels && defaultBrandingdata.screenLabels.loginComponent && defaultBrandingdata.screenLabels.loginComponent[0]
+
         if (defaultBrandingdata === undefined || defaultBrandingdata === null) {
             return <View style={styles.container}>
                 <ScrollView
@@ -585,7 +589,7 @@ class LoginComponent extends Component {
                                     this.onLoginDetailsChange(text, 'schoolId')
                                 }}
                                 value={this.state.schoolId}
-                                placeholder={Strings.userId_text}
+                                placeholder={BrandLabel && BrandLabel.UserId ? BrandLabel.UserId : Strings.userId_text}
                                 placeholderTextColor={AppTheme.BLACK_OPACITY_30}
                                 autoCapitalize={'none'}
                             />
@@ -602,7 +606,7 @@ class LoginComponent extends Component {
                                     style={styles.inputStyle}
                                     onChangeText={(text) => this.onLoginDetailsChange(text, 'password')}
                                     value={password}
-                                    placeholder={Strings.password_text}
+                                    placeholder={BrandLabel && BrandLabel.Password ? BrandLabel.Password :  Strings.password_text}
                                     placeholderTextColor={AppTheme.BLACK_OPACITY_30}
                                     secureTextEntry={this.state.hidePassword}
                                 />
@@ -615,9 +619,9 @@ class LoginComponent extends Component {
                                     //    disabled={false}
                                     activeText={'On'}
                                     inActiveText={'Off'}
-                                    backgroundActive={'green'}
+                                    backgroundActive={defaultBrandingdata.themeColor3  ?defaultBrandingdata.themeColor3 :'green'}
                                     backgroundInactive={'gray'}
-                                    circleActiveColor={'#30a566'}
+                                    circleActiveColor={defaultBrandingdata.themeColor1  ?defaultBrandingdata.themeColor1:'#30a566'}
                                     circleInActiveColor={'#000000'}
                                     circleSize={22}
                                     barHeight={22}
@@ -627,12 +631,12 @@ class LoginComponent extends Component {
                                     switchWidthMultiplier={2.5}
                                     value={this.state.rememberMe}
                                     onValueChange={(value) => this.toggleRememberMe(value)} />
-                                <Text style={{ marginLeft: 10 }}>Remember Me</Text>
+                                <Text style={{ marginLeft: 10 }}>{BrandLabel && BrandLabel.RememberMeText ? BrandLabel.RememberMeText :" Remember Me"}</Text>
                             </View>
                             <View style={styles.btnContainer}>
                                 <ButtonComponent
                                     customBtnStyle={[styles.nxtBtnStyle, { backgroundColor: defaultBrandingdata && defaultBrandingdata.themeColor1 ? defaultBrandingdata.themeColor1 : AppTheme.BLUE }]}
-                                    btnText={Strings.login_text.toUpperCase()}
+                                    btnText={BrandLabel && BrandLabel.LoginText ? BrandLabel.LoginText.toUpperCase() : Strings.login_text.toUpperCase()}
                                     onPress={this.onSubmit}
                                 // themeColor1={{ backgroundColor: defaultBrandingdata && defaultBrandingdata.themeColor1 ? defaultBrandingdata.themeColor1:AppTheme.BLUE}}
                                 />
