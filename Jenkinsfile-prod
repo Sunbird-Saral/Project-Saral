@@ -5,7 +5,6 @@ pipeline {
         DOCKERHUB_USERNAME = credentials('dockerhub-credentials').username
         DOCKERHUB_PASSWORD = credentials('dockerhub-credentials').password
         DOCKER_IMAGE_NAME = "saaral123/backendtest"
-        DOCKER_IMAGE_TAG = "${DOCKER_IMAGE_NAME}:${BUILD_NUMBER}"
     }
     
     stages{
@@ -31,6 +30,8 @@ pipeline {
                 script {
                     // Log in to Docker Hub
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-credentials') {
+                       // Construct the dynamic Docker image tag based on the build number
+                        def DOCKER_IMAGE_TAG = "${DOCKER_IMAGE_NAME}:${BUILD_NUMBER}"
                         // Pull the specific image with the dynamic tag
                         def dockerImage = docker.image(DOCKER_IMAGE_TAG)
                         dockerImage.pull()
