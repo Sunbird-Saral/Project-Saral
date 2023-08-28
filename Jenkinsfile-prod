@@ -1,6 +1,12 @@
 pipeline {
     
     agent any
+    environment {
+        DOCKERHUB_USERNAME = credentials('dockerhub-credentials').username
+        DOCKERHUB_PASSWORD = credentials('dockerhub-credentials').password
+        DOCKER_IMAGE_NAME = "saaral123/backendtest"
+        DOCKER_IMAGE_TAG = "${DOCKER_IMAGE_NAME}:${BUILD_NUMBER}"
+    }
     
     stages{
         stage('Cleanup Workspace') {
@@ -20,14 +26,18 @@ pipeline {
                 sh './build_image.sh'
             }
         }
-        
         stage('Pull Docker Image') {
             steps {
-                sh 'echo "Pulling Docker Image..."'
-                sh 'docker pull saaral123/backendtest:2.0'
-                sh 'docker images'  // Display the list of Docker images on the Jenkins server
+                script {
+                    // Log in to Docker Hub
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-credentials') {
+                        // Pull the specific image with the dynamic tag
+                        def dockerImage = docker.image(DOCKER_IMAGE_TAG)
+                        dockerImage.pull()
+                    }
+                }
             }
-       }
+        }
 
         stage ('deploy to EKS'){
             steps{
