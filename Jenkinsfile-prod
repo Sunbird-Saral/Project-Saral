@@ -26,9 +26,15 @@ pipeline {
         }
         stage('Pull Docker Image') {
             steps {
-                sh 'echo "Pulling Docker Image..."'
-                sh 'docker pull saaral123/backendtest:2.0-23'
-                sh 'docker images'  // Display the list of Docker images on the Jenkins server
+                script {
+                    sh 'echo "Pulling Docker Image..."'
+                     // Generate the dynamic image tag based on the build number
+                    def image_name = "backendtest"
+                    def image_tag = "2.0"
+                    image_tag = "${image_tag}-${BUILD_NUMBER}"
+                    sh "docker pull saaral123/${image_name}:${image_tag}"
+                    sh 'docker images'  // Display the list of Docker images on the Jenkins server
+                }
             }
        }
 
