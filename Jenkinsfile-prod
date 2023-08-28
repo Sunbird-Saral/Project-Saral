@@ -25,7 +25,7 @@ pipeline {
             steps {
                 script {
                     echo 'Debug: Before Docker Pull'
-                    docker.withRegistry('https://https://index.docker.io/v1/', 'dockerhub_credentials') {
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub_credentials') {
                         echo 'Debug: Inside Docker Registry Block'
                         def dockerImage = docker.image('saaral123/backendtest:2.0')
                         echo 'Debug: After Getting Docker Image'
