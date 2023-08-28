@@ -35,7 +35,7 @@ pipeline {
         stage ('deploy to EKS'){
             steps{
                 sh 'export KUBECONFIG=/var/lib/jenkins/.kube/config'
-                sh 'export PATH=$PATH:export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/home/jenkins/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+                sh 'export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/home/jenkins/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'
                 sh 'chmod +x ./deploy_EKS.sh'
                 sh './deploy_EKS.sh'
             }
