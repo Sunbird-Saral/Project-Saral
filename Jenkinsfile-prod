@@ -23,9 +23,11 @@ pipeline {
         
         stage('Pull Docker Image') {
             steps {
-                sh 'docker pull saaral123/backendtest:2.0'
+                sh 'echo "Pulling Docker Image..."'
+                sh 'docker pull saaral123/backendtest:latest'
+                sh 'docker images'  // Display the list of Docker images on the Jenkins server
             }
-        }
+       }
 
         stage ('deploy to EKS'){
             steps{
