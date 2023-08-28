@@ -18,15 +18,18 @@ pipeline {
         
         stage('Pull Docker Image') {
             steps {
-              script {
-                docker.withRegistry('https://registry.hub.docker.com', 'dockerhub_credentials') {
-                  def dockerImage = docker.image('saaral123/backendtest:2.0')
-                  dockerImage.pull()
+                script {
+                    echo 'Debug: Before Docker Pull'
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub_credentials') {
+                        echo 'Debug: Inside Docker Registry Block'
+                        def dockerImage = docker.image('saaral123/backendtest:2.0')
+                        echo 'Debug: After Getting Docker Image'
+                        dockerImage.pull()
+                        echo 'Debug: After Docker Pull'
+                    }
                 }
-              }
             }
         }
-
 
         stage ('deploy to EKS'){
             steps{
