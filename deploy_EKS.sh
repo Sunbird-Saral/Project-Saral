@@ -7,4 +7,4 @@ image_tag="2.0-$BUILD_NUMBER"
 sed -i "s/{{IMAGE_TAG}}/$image_tag/g" saral_backend_EKS.yml
 
 # Apply the modified deployment file to Kubernetes
-kubectl apply -f saral_backend_EKS.yml -n test
+/home/jenkins/bin/kubectl apply -f saral_backend_EKS.yml -n test
