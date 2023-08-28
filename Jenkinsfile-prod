@@ -5,7 +5,7 @@ pipeline {
     stages{
         stage('Cleanup Workspace') {
             steps {
-                deleteDir()   #this is to clean up the workspace
+                deleteDir()  
             }
         }
         stage ('checkout') {
