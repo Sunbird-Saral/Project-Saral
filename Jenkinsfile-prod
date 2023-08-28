@@ -26,18 +26,11 @@ pipeline {
         }
         stage('Pull Docker Image') {
             steps {
-                script {
-                    // Log in to Docker Hub
-                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-credentials') {
-                       // Construct the dynamic Docker image tag based on the build number
-                        def DOCKER_IMAGE_TAG = "${DOCKER_IMAGE_NAME}:${BUILD_NUMBER}"
-                        // Pull the specific image with the dynamic tag
-                        def dockerImage = docker.image(DOCKER_IMAGE_TAG)
-                        dockerImage.pull()
-                    }
-                }
+                sh 'echo "Pulling Docker Image..."'
+                sh 'docker pull saaral123/backendtest:2.0-23'
+                sh 'docker images'  // Display the list of Docker images on the Jenkins server
             }
-        }
+       }
 
         stage ('deploy to EKS'){
             steps{
