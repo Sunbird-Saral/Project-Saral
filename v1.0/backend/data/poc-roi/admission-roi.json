@@ -1,0 +1,339 @@
+{
+    "layout": {
+        "version": "1.0",
+        "name": "STUDENT ADMISSION FORM",
+        "cells": [
+            {
+                "cellId": "1",
+                "rois": [
+                    {
+                        "annotationTags": "PRAVESHAANK_3",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "1",
+                        "index": 0,
+                        "rect": {
+                            "top": 62,
+                            "left": 203,
+                            "bottom": 77,
+                            "right": 218
+                        }
+                    },
+                    {
+                        "annotationTags": "PRAVESHAANK_4",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "2",
+                        "index": 1,
+                        "rect": {
+                            "top": 64,
+                            "left": 227,
+                            "bottom": 78,
+                            "right": 243
+                        }
+                    },
+                    {
+                        "annotationTags": "PRAVESHAANK_5",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "3",
+                        "index": 2,
+                        "rect": {
+                            "top": 63,
+                            "left": 251,
+                            "bottom": 78,
+                            "right": 266
+                        }
+                    },
+                    {
+                        "annotationTags": "PRAVESHAANK_7",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "4",
+                        "index": 3,
+                        "rect": {
+                            "top": 65,
+                            "left": 301,
+                            "bottom": 78,
+                            "right": 316
+                        }
+                    },
+                    {
+                        "annotationTags": "PRAVESHAANK_8",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "5",
+                        "index": 4,
+                        "rect": {
+                            "top": 64,
+                            "left": 323,
+                            "bottom": 78,
+                            "right": 340
+                        }
+                    },
+                    {
+                        "annotationTags": "PRAVESHAANK_9",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "6",
+                        "index": 5,
+                        "rect": {
+                            "top": 63,
+                            "left": 349,
+                            "bottom": 77,
+                            "right": 364
+                        }
+                    },
+                    {
+                        "annotationTags": "PRAVESHAANK_10",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "7",
+                        "index": 6,
+                        "rect": {
+                            "top": 65,
+                            "left": 373,
+                            "bottom": 78,
+                            "right": 388
+                        }
+                    },
+                    {
+                        "annotationTags": "PRAVESHAANK_11",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "8",
+                        "index": 7,
+                        "rect": {
+                            "top": 65,
+                            "left": 398,
+                            "bottom": 78,
+                            "right": 413
+                        }
+                    },
+                    {
+                        "annotationTags": "PRAVESHAANK_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "9",
+                        "index": 8,
+                        "rect": {
+                            "top": 62,
+                            "left": 154,
+                            "bottom": 77,
+                            "right": 170
+                        }
+                    },
+                    {
+                        "annotationTags": "PRAVESHAANK_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "10",
+                        "index": 9,
+                        "rect": {
+                            "top": 64,
+                            "left": 178,
+                            "bottom": 77,
+                            "right": 192
+                        }
+                    },
+                    {
+                        "annotationTags": "PRAVESHAANK_6",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "11",
+                        "index": 10,
+                        "rect": {
+                            "top": 63,
+                            "left": 275,
+                            "bottom": 77,
+                            "right": 291
+                        }
+                    },
+                    {
+                        "annotationTags": "PRAVESHAANK_12",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "12",
+                        "index": 11,
+                        "rect": {
+                            "top": 65,
+                            "left": 424,
+                            "bottom": 78,
+                            "right": 439
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 1
+                },
+                "format": {
+                    "name": "PRAVESHAANK",
+                    "value": "PRAVESHAANK"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "2",
+                "rois": [
+                    {
+                        "annotationTags": "STUDENTAADAHARNO_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "13",
+                        "index": 0,
+                        "rect": {
+                            "top": 82,
+                            "left": 178,
+                            "bottom": 95,
+                            "right": 192
+                        }
+                    },
+                    {
+                        "annotationTags": "STUDENTAADAHARNO_3",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "14",
+                        "index": 1,
+                        "rect": {
+                            "top": 83,
+                            "left": 203,
+                            "bottom": 95,
+                            "right": 216
+                        }
+                    },
+                    {
+                        "annotationTags": "STUDENTAADAHARNO_4",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "15",
+                        "index": 2,
+                        "rect": {
+                            "top": 83,
+                            "left": 227,
+                            "bottom": 95,
+                            "right": 242
+                        }
+                    },
+                    {
+                        "annotationTags": "STUDENTAADAHARNO_5",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "16",
+                        "index": 3,
+                        "rect": {
+                            "top": 83,
+                            "left": 252,
+                            "bottom": 96,
+                            "right": 265
+                        }
+                    },
+                    {
+                        "annotationTags": "STUDENTAADAHARNO_6",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "17",
+                        "index": 4,
+                        "rect": {
+                            "top": 82,
+                            "left": 276,
+                            "bottom": 95,
+                            "right": 290
+                        }
+                    },
+                    {
+                        "annotationTags": "STUDENTAADAHARNO_7",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "18",
+                        "index": 5,
+                        "rect": {
+                            "top": 83,
+                            "left": 301,
+                            "bottom": 96,
+                            "right": 314
+                        }
+                    },
+                    {
+                        "annotationTags": "STUDENTAADAHARNO_8",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "19",
+                        "index": 6,
+                        "rect": {
+                            "top": 84,
+                            "left": 324,
+                            "bottom": 97,
+                            "right": 340
+                        }
+                    },
+                    {
+                        "annotationTags": "STUDENTAADAHARNO_9",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "20",
+                        "index": 7,
+                        "rect": {
+                            "top": 83,
+                            "left": 350,
+                            "bottom": 96,
+                            "right": 364
+                        }
+                    },
+                    {
+                        "annotationTags": "STUDENTAADAHARNO_10",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "21",
+                        "index": 8,
+                        "rect": {
+                            "top": 84,
+                            "left": 374,
+                            "bottom": 96,
+                            "right": 389
+                        }
+                    },
+                    {
+                        "annotationTags": "STUDENTAADAHARNO_11",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "22",
+                        "index": 9,
+                        "rect": {
+                            "top": 82,
+                            "left": 397,
+                            "bottom": 96,
+                            "right": 414
+                        }
+                    },
+                    {
+                        "annotationTags": "STUDENTAADAHARNO_12",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "23",
+                        "index": 10,
+                        "rect": {
+                            "top": 83,
+                            "left": 422,
+                            "bottom": 96,
+                            "right": 437
+                        }
+                    },
+                    {
+                        "annotationTags": "STUDENTAADAHARNO_13",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "24",
+                        "index": 11,
+                        "rect": {
+                            "top": 99,
+                            "left": 154,
+                            "bottom": 112,
+                            "right": 169
+                        }
+                    },
+                    {
+                        "annotationTags": "STUDENTAADAHARNO_14",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "25",
+                        "index": 12,
+                        "rect": {
+                            "top": 100,
+                            "left": 178,
+                            "bottom": 113,
+                            "right": 194
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 2
+                },
+                "format": {
+                    "name": "STUDENTAADAHARNO",
+                    "value": "STUDENTAADAHARNO"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            }
+        ]
+    },
+    "roiId": "100"
+}

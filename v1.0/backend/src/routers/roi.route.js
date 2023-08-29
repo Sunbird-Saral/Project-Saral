@@ -7,8 +7,19 @@ const schoolsSchema = require('../models/school')
 const Helper = require('../middleware/helper')
 const roiController = require("../controller/roiController")
 const clientPool = require('../db/mongoose');
+const admissionFormRoi = require('../../data/poc-roi/admission-roi.json')
 
 router.get('/roi/:examId?', auth, roiController.getRoiData)
+
+router.get('/pocroi', auth, async (req, res, next) => {
+    try {
+        res.status(200).json(admissionFormRoi);
+    } catch (err) {
+        console.log('error', err)
+    } finally {
+        next()
+    }
+})
 
 
 router.post('/roi', auth, async (req, res, next) => {
