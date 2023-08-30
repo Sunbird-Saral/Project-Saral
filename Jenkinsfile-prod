@@ -17,6 +17,23 @@ pipeline {
                git branch: 'devopstestimp2', url: 'https://github.com/Sunbird-Saral/Project-Saral.git' 
             }
         }
+        stage('run test'){
+            steps{
+            sh '''
+            cd v1.0/backend/
+            /usr/bin/npm install
+            /usr/bin/npm run test
+            '''
+            }
+        }
+
+        stage('SonarQube analysis') {
+            steps{
+            withSonarQubeEnv('sonarqube-10.1') {
+            sh '/usr/bin/npm run sonar'
+            }    
+            }
+        }
         
         stage ('docker_image_build'){
             steps {
@@ -25,17 +42,7 @@ pipeline {
             }
         }
 
-        stage('SonarQube analysis') {
-            steps{
-            withSonarQubeEnv('sonarqube-10.1') {
-            sh '''
-            cd v1.0/backend/
-            /usr/bin/npm install 
-            /usr/bin/npm run sonar
-            '''
-            }    
-            }
-        }
+
 
         stage('Pull Docker Image') {
             steps {
