@@ -10,7 +10,7 @@
     "prod": "env-cmd ./config/prod.env node src/index.js -e js,pug",
     "test": "jest --collectCoverage=true",
     "coverage": "jest --coverage",
-    "sonar": "sonar-scanner -Dsonar.host.url=http://35.154.24.76:9000 -Dsonar.login=sqp_003ffa6bc6e39391457a3f67f442dff10aa65e1f"
+    "sonar": "sonar-scanner -Dsonar.host.url=http://35.154.24.76:9000 -Dsonar.login=sqp_9ae34074f75b2ba5e6e8e1043058424db2d97635"
   },
   "jest": {
     "collectCoverageFrom": [
