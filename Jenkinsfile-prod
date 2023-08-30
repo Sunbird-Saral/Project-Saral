@@ -24,6 +24,19 @@ pipeline {
                 sh './build_image.sh'
             }
         }
+
+        stage('SonarQube analysis') {
+            steps{
+            withSonarQubeEnv('sonar-scanner') {
+            sh '''
+            cd v1.0/backend/
+            npm install 
+            npm run sonar
+            '''
+            }    
+            }
+        }
+
         stage('Pull Docker Image') {
             steps {
                 script {
@@ -46,16 +59,6 @@ pipeline {
                 sh './deploy_EKS.sh'
             }
         }
-        stage('SonarQube analysis') {
-            steps{
-            withSonarQubeEnv('saralsonar9.0.1') {
-            sh '''
-            cd v1.0/backend/
-            npm install 
-            npm run sonar
-            '''
-            }    
-            }
-        }
+
     }
 }
