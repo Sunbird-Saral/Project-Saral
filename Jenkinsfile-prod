@@ -30,7 +30,10 @@ pipeline {
         stage('SonarQube analysis') {
             steps{
             withSonarQubeEnv('sonarqube-10.1') {
-            sh '/usr/bin/npm run sonar'
+            sh '''
+            cd v1.0/backend/
+            /usr/bin/npm run sonar
+            '''
             }    
             }
         }
