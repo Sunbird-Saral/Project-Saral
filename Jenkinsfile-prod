@@ -30,8 +30,8 @@ pipeline {
             withSonarQubeEnv('sonarqube-10.1') {
             sh '''
             cd v1.0/backend/
-            npm install 
-            npm run sonar
+            /usr/bin/npm install 
+            /usr/bin/npm run sonar
             '''
             }    
             }
