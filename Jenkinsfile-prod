@@ -12,11 +12,13 @@ pipeline {
                 deleteDir()  
             }
         }
+
         stage ('checkout') {
             steps {
                git branch: 'devopstestimp2', url: 'https://github.com/Sunbird-Saral/Project-Saral.git' 
             }
         }
+
         stage('run test'){
             steps{
             sh '''
@@ -45,7 +47,24 @@ pipeline {
             }
         }
 
+        // Add a new stage for Trivy scanning
+        stage('Trivy Scan') {
+            steps {
+                script {
+                    def trivyOutput = sh(
+                        script: 'trivy saaral123/backendtest:latest', 
+                        returnStatus: true
+                    )
 
+                    if (trivyOutput == 0) {
+                        echo 'No vulnerabilities found.'
+                    } else {
+                        currentBuild.result = 'FAILURE'
+                        error 'Vulnerabilities found. Build failed.'
+                    }
+                }
+            }
+        }
 
         stage('Pull Docker Image') {
             steps {
