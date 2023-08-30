@@ -27,7 +27,7 @@ pipeline {
 
         stage('SonarQube analysis') {
             steps{
-            withSonarQubeEnv('sonar-scanner') {
+            withSonarQubeEnv('sonarqube-10.1') {
             sh '''
             cd v1.0/backend/
             npm install 
