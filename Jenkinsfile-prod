@@ -30,13 +30,24 @@ pipeline {
         }
 
         stage('SonarQube analysis') {
-            steps{
-            withSonarQubeEnv('sonarqube-10.1') {
-            sh '''
-            cd v1.0/backend/
-            /usr/bin/npm run sonar
-            '''
-            }    
+            steps {
+                script {
+                    def scannerHome = tool name: 'sonarqube-10.1', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+                    def sonarScannerHome = tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+
+                    withSonarQubeEnv('sonarqube-10.1') {
+                        sh '''
+                        cd v1.0/backend/
+                        /usr/bin/npm run sonar
+                        '''
+                    }
+                    
+                    // Wait for the quality gate to complete
+                    def qg = waitForQualityGate()
+                    if (qg.status != 'OK') {
+                        error "Quality gate did not pass: ${qg.status}"
+                    }
+                }
             }
         }
         
