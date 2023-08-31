@@ -1105,28 +1105,26 @@ class SelectDetailsComponent extends Component {
     const deviceUniqId = await DeviceInfo.getUniqueId();
     let hasNetwork = await checkNetworkConnectivity();
     let hasCacheData = await getRegularStudentExamApi();
-    // let cacheFilterData =
-    //   hasCacheData != null
-    //     ? hasCacheData.filter(element => {
-    //         let conditionSwitch =
-    //           element.key == this.props.loginData.data.school.schoolId &&
-    //           element.class == this.state.selectedClass &&
-    //           element.section == this.state.selectedSection &&
-    //           element.subject == this.state.selectedSubject;
-    //         if (conditionSwitch) {
-    //           return true;
-    //         }
-    //       })
-    //     : [];
+    let cacheFilterData =
+      hasCacheData != null
+        ? hasCacheData.filter(element => {
+            let conditionSwitch =
+              element.key == this.props.loginData.data.school.schoolId &&
+              element.class == this.state.selectedClass &&
+              element.section == this.state.selectedSection &&
+              element.subject == this.state.selectedSubject;
+            if (conditionSwitch) {
+              return true;
+            }
+          })
+        : [];
 
-    // if (hasCacheData && cacheFilterData.length > 0) {
-    //   console.log('INSIDEIF>>>>>>>>>>>>>>>>>>');
-    //   this.setState({isCalledStudentAndExam: true, isLoading: false});
-    //   storeFactory.dispatch(
-    //     this.dispatchStudentExamData(cacheFilterData[0].data),
-    //   );
-    // } else
-    if (hasNetwork) {
+    if (hasCacheData && cacheFilterData.length > 0) {
+      this.setState({isCalledStudentAndExam: true, isLoading: false});
+      storeFactory.dispatch(
+        this.dispatchStudentExamData(cacheFilterData[0].data),
+      );
+    } else if (hasNetwork) {
       let dataPayload = {
         classId: this.state.selectedClassId,
         section: this.state.selectedSection,
