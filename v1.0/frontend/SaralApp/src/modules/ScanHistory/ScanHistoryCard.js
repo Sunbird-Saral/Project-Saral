@@ -17,6 +17,8 @@ import {
   getPresentAbsentStudent,
   getScannedDataFromLocal,
   setScannedDataIntoLocal,
+  setStudentsExamData,
+  getStudentsExamData,
 } from '../../utils/StorageUtils';
 import {
   checkAppVersion,
@@ -39,7 +41,7 @@ import {ScrollView} from 'react-native-gesture-handler';
 import {collectErrorLogs} from '../CollectErrorLogs';
 import Constant from '../../flux/actions/constants';
 import DeviceInfo from 'react-native-device-info';
-import { SaveInDbEvent,ReviewScan } from '../../utils/Analytics';
+import {SaveInDbEvent, ReviewScan} from '../../utils/Analytics';
 
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
@@ -134,7 +136,7 @@ const ScanHistoryCard = ({
 
   const onPressScanStatus = () => {
     navigation.push('ScanStatusLocal');
-    ReviewScan(loginData.data.school.schoolId)
+    ReviewScan(loginData.data.school.schoolId);
   };
   const dispatch = useDispatch();
 
@@ -202,6 +204,36 @@ const ScanHistoryCard = ({
                 loginData.data.token,
                 deviceUniqId,
               );
+
+              //update cache
+              let studentsAndExamArr = await getStudentsExamData();
+
+              let finalStudentsAndExamArr = [];
+              if (studentsAndExamArr != null) {
+                studentsAndExamArr.forEach(element => {
+                  finalStudentsAndExamArr.push(element);
+                });
+              }
+
+              finalStudentsAndExamArr.forEach((data, index) => {
+                if (data && data.classId == filterData[0].classId) {
+                  filterData[0].studentsMarkInfo.forEach((student, index) => {
+                    let tempIndex = data.data.students.findIndex(
+                      element =>
+                        student.studentId == element.studentId &&
+                        student.studentAvailability !=
+                          element.studentAvailability,
+                    );
+
+                    data.data.students.splice(tempIndex);
+                    data.data.students[tempIndex] =
+                      filterData[0].studentsMarkInfo[index];
+                  });
+                }
+              });
+
+              await setStudentsExamData(finalStudentsAndExamArr);
+
               saveScanData(apiObj, filterDataLen, setIntolocalAfterFilter);
             } else {
               callCustomModal(
@@ -271,7 +303,7 @@ const ScanHistoryCard = ({
               Strings.saved_successfully,
               false,
             );
-            SaveInDbEvent(loginData.data.school.schoolId)
+            SaveInDbEvent(loginData.data.school.schoolId);
             setIsLoading(false);
           }
         })
@@ -453,25 +485,41 @@ const ScanHistoryCard = ({
           <View>
             <View style={styles.scanCardStyle}>
               <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-              <Text style={{}}>{BrandLabel&&BrandLabel.TotalStudent ? BrandLabel.TotalStudent : 'Total Students'}</Text>
+                <Text style={{}}>
+                  {BrandLabel && BrandLabel.TotalStudent
+                    ? BrandLabel.TotalStudent
+                    : 'Total Students'}
+                </Text>
               </View>
               <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
-              <Text style={{fontFamily : monospace_FF,fontWeight:"bold"}} >{studentCount.totalCount}</Text>
+                <Text style={{fontFamily: monospace_FF, fontWeight: 'bold'}}>
+                  {studentCount.totalCount}
+                </Text>
               </View>
             </View>
 
             <View style={styles.scanCardStyle}>
               <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-              <Text style={{}}>{BrandLabel&&BrandLabel.PresentStudents ? BrandLabel.PresentStudents : 'Present Students'}</Text>
+                <Text style={{}}>
+                  {BrandLabel && BrandLabel.PresentStudents
+                    ? BrandLabel.PresentStudents
+                    : 'Present Students'}
+                </Text>
               </View>
               <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
-              <Text style={{fontFamily : monospace_FF,fontWeight:"bold"}} >{studentCount.totalCount -studentCount.absentCount}</Text>
+                <Text style={{fontFamily: monospace_FF, fontWeight: 'bold'}}>
+                  {studentCount.totalCount - studentCount.absentCount}
+                </Text>
               </View>
             </View>
 
             <View style={styles.scanCardStyle}>
               <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-              <Text style={{}}>{BrandLabel&&BrandLabel.ScanNotSubmitedYet ? BrandLabel.ScanNotSubmitedYet : 'Scans not submitted yet'}</Text>
+                <Text style={{}}>
+                  {BrandLabel && BrandLabel.ScanNotSubmitedYet
+                    ? BrandLabel.ScanNotSubmitedYet
+                    : 'Scans not submitted yet'}
+                </Text>
               </View>
               <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
                 <Text
@@ -487,7 +535,11 @@ const ScanHistoryCard = ({
 
             <View style={styles.scanCardStyle}>
               <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-              <Text style={{}}>{BrandLabel&&BrandLabel.TotalScanSubmited ? BrandLabel.TotalScanSubmited : 'Total scans submitted'}</Text>
+                <Text style={{}}>
+                  {BrandLabel && BrandLabel.TotalScanSubmited
+                    ? BrandLabel.TotalScanSubmited
+                    : 'Total scans submitted'}
+                </Text>
               </View>
               <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
                 <Text style={{fontFamily: monospace_FF, fontWeight: 'bold'}}>
@@ -605,7 +657,11 @@ const ScanHistoryCard = ({
                   marginRight: 5,
                 }}
                 onPress={onPressScanStatus}>
-                <Text style={{ fontFamily: monospace_FF, color: AppTheme.BLACK }}>{BrandLabel&&BrandLabel.ReviewScanText ? BrandLabel.ReviewScanText :'Review scan'}</Text>
+                <Text style={{fontFamily: monospace_FF, color: AppTheme.BLACK}}>
+                  {BrandLabel && BrandLabel.ReviewScanText
+                    ? BrandLabel.ReviewScanText
+                    : 'Review scan'}
+                </Text>
               </TouchableOpacity>
             )}
             {disableButton && (
@@ -622,7 +678,11 @@ const ScanHistoryCard = ({
                   marginRight: 5,
                 }}
                 onPress={onPressSaveInDB}>
-                <Text style={{ fontFamily: monospace_FF, color: AppTheme.BLACK }}>{BrandLabel&&BrandLabel.SubmitAllScan ? BrandLabel.SubmitAllScan :'Submit all scans'}</Text>
+                <Text style={{fontFamily: monospace_FF, color: AppTheme.BLACK}}>
+                  {BrandLabel && BrandLabel.SubmitAllScan
+                    ? BrandLabel.SubmitAllScan
+                    : 'Submit all scans'}
+                </Text>
               </TouchableOpacity>
             )}
           </View>

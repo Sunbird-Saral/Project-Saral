@@ -18,6 +18,7 @@ import {
 } from '../../utils/StorageUtils';
 import {OcrLocalResponseAction} from '../../flux/actions/apis/OcrLocalResponseAction';
 import {GetStudentsAndExamData} from '../../flux/actions/apis/getStudentsAndExamData';
+import {GetStudentsData} from '../../flux/actions/apis/getStudentsData';
 import {FilteredDataAction} from '../../flux/actions/apis/filteredDataActions';
 import APITransport from '../../flux/actions/transport/apitransport';
 import {
@@ -225,24 +226,24 @@ class SelectDetailsComponent extends Component {
             selectedDate: '',
             pickerDate: new Date(),
           },
-          () => {
-            if (loginDetails) {
-              let payload = {
-                classId: classesArr[index].classId,
-                section: sectionListArr[0],
-              };
+          // () => {
+          //   if (loginDetails) {
+          //     let payload = {
+          //       classId: classesArr[index].classId,
+          //       section: sectionListArr[0],
+          //     };
 
-              this.loader(true);
-              this.setState(
-                {
-                  dataPayload: payload,
-                },
-                () => {
-                  this.callStudentsData(loginDetails.token);
-                },
-              );
-            }
-          },
+          //     this.loader(true);
+          //     this.setState(
+          //       {
+          //         dataPayload: payload,
+          //       },
+          //       () => {
+          //         // this.callStudentsData(loginDetails.token);
+          //       },
+          //     );
+          //   }
+          // },
         );
       }
       this.setState({
@@ -322,6 +323,34 @@ class SelectDetailsComponent extends Component {
         ExamSetArray: this.state.set,
         setIndex: hasSetData,
       });
+      this.setState(
+        {
+          sectionListIndex: Number(index),
+          selectedSubject: value,
+        },
+        () => {
+          if (loginDetails) {
+            let payload = {
+              classId: selectedClassId,
+              section: selectedSection,
+              subject: value,
+            };
+            if (value == 'All') {
+              payload.subject = 0;
+            }
+            this.loader(true);
+
+            this.setState(
+              {
+                dataPayload: payload,
+              },
+              () => {
+                this.getStudentData(loginDetails.token);
+              },
+            );
+          }
+        },
+      );
     } else if (type == 'set') {
       if (value != selectSet) {
         this.setState({
@@ -342,8 +371,9 @@ class SelectDetailsComponent extends Component {
     }
   };
 
-  callStudentsData = async token => {
-    const {dataPayload, selectedClass, selectedSection} = this.state;
+  getStudentData = async token => {
+    const {dataPayload, selectedClass, selectedSection, selectedSubject} =
+      this.state;
     const deviceUniqId = await DeviceInfo.getUniqueId();
     let hasNetwork = await checkNetworkConnectivity();
 
@@ -355,7 +385,58 @@ class SelectDetailsComponent extends Component {
             if (
               element.key == this.props.loginData.data.school.schoolId &&
               element.class == selectedClass &&
-              element.section == selectedSection
+              element.section == selectedSection &&
+              element.subject == selectedSubject
+            ) {
+              return false;
+            }
+          })
+        : [];
+
+    if (hasCacheData && cacheFilterData.length > 0) {
+      this.setState({isLoading: false, calledStudentsData: true});
+      storeFactory.dispatch(
+        this.dispatchStudentExamData(cacheFilterData[0].data2),
+      );
+      this.setState({isLoading: false});
+    } else if (hasNetwork) {
+      console.log('dataPayload', dataPayload);
+      this.setState(
+        {
+          calledStudentsData: true,
+          isLoading: false,
+        },
+        () => {
+          let apiObj = new GetStudentsData(dataPayload, token, deviceUniqId);
+          this.props.APITransport(apiObj);
+        },
+      );
+    } else {
+      this.setState({isLoading: false});
+      this.callCustomModal(
+        Strings.message_text,
+        Strings.you_dont_have_cache,
+        false,
+      );
+    }
+  };
+
+  callStudentsData = async token => {
+    const {dataPayload, selectedClass, selectedSection, selectedSubject} =
+      this.state;
+    const deviceUniqId = await DeviceInfo.getUniqueId();
+    let hasNetwork = await checkNetworkConnectivity();
+
+    let hasCacheData = await getRegularStudentExamApi();
+
+    let cacheFilterData =
+      hasCacheData != null
+        ? hasCacheData.filter(element => {
+            if (
+              element.key == this.props.loginData.data.school.schoolId &&
+              element.class == selectedClass &&
+              element.section == selectedSection &&
+              element.subject == selectedSubject
             ) {
               return true;
             }

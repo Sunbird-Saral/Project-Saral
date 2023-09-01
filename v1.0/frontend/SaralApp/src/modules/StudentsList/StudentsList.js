@@ -353,6 +353,12 @@ const StudentsList = ({
 
   const studentData = async () => {
     let studentsExamData = await getStudentsExamData();
+    console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', studentsExamData);
+    console.log(
+      '----------------------',
+      filteredData.className,
+      filteredData.section,
+    );
     const filterStudentsData = studentsExamData.filter(e => {
       if (
         e.class == filteredData.className &&
@@ -363,6 +369,10 @@ const StudentsList = ({
     });
     setTotalStudent(
       filterStudentsData[0].data ? filterStudentsData[0].data.students : [],
+    );
+    console.log(
+      '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>after filter',
+      filterStudentsData,
     );
     setAllStudentData(filterStudentsData[0].data.students);
   };
