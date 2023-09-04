@@ -1,5 +1,5 @@
 const configs = {
-  BASE_URL: 'TO_BE_REPLACED',
+  BASE_URL: 'https://saralapp.prernaup.in/api',
 };
 
 export default configs;

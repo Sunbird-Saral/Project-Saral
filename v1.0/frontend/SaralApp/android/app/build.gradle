@@ -134,7 +134,7 @@ android {
         applicationId "com.up_saralapp"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 5
+        versionCode 10
         versionName "1.2"
     }
     configurations.all {
