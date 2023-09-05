@@ -16,30 +16,23 @@ export class Admissions extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {PocRoi: null};
+    this.state = {
+      PocRoi: null,
+      disblePage1: false,
+      disablePage2: true,
+      disableShowData: true,
+      predictionArray: [],
+    };
   }
 
-  //   componentDidMount() {
-  //     axios
-  //       .get('https://saral-dev-api.anuvaad.org/pocroi')
-  //       .then(function (response) {
-  //         // handle success
-  //         console.log(response);
-  //       })
-  //       .catch(function (error) {
-  //         // handle error
-  //         console.log(error);
-  //       });
-  //   }
-
-  onScan = async () => {
+  onScan = async pageNo => {
     if (Platform.OS !== 'ios') {
       const grantedCamera = await PermissionsAndroid.check(
         PermissionsAndroid.PERMISSIONS.CAMERA,
       );
 
       if (grantedCamera) {
-        this.onOpenCameraActivity();
+        this.onOpenCameraActivity(pageNo);
       } else {
         PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA).then(
           permRes => {
@@ -47,7 +40,7 @@ export class Admissions extends Component {
               permRes['android.permission.CAMERA'] ===
               PermissionsAndroid.RESULTS.GRANTED
             ) {
-              this.onOpenCameraActivity();
+              this.onOpenCameraActivity(pageNo);
             }
           },
         );
@@ -55,38 +48,37 @@ export class Admissions extends Component {
     }
   };
 
-  onOpenCameraActivity = () => {
-    SaralSDK.startCamera(JSON.stringify(roi), '1', 0, true)
+  onOpenCameraActivity = pageNo => {
+    SaralSDK.startCamera(JSON.stringify(roi), pageNo.toString(), 0, true)
       .then(res => {
         let roisData = JSON.parse(res);
-        console.log('=================================', roisData);
         let cells = roisData.layout.cells;
-        this.consolidatePrediction(cells, roisData);
+        this.consolidatePrediction(cells, roisData, pageNo);
       })
       .catch((code, message) => {
         console.log('code', code, message);
       });
   };
 
-  consolidatePrediction = (cells, roisData) => {
+  consolidatePrediction = (cells, roisData, pageNo) => {
     var marks = '';
-    let predictionConfidenceArray = [];
     for (let i = 0; i < cells.length; i++) {
       marks = '';
+      let prediction = {};
       for (let j = 0; j < cells[i].rois.length; j++) {
         if (cells[i].rois[j].hasOwnProperty('result')) {
           marks = marks + cells[i].rois[j].result.prediction;
-          console.log(cells[i].format.name, marks);
-        } else {
-          let resultProperty = {
-            prediction: '0',
-            confidence: 0,
-          };
-          roisData.layout.cells[i].rois[j].result = resultProperty;
         }
       }
-    }
 
+      if (pageNo.toString() == cells[i].page) {
+        prediction = {
+          label: cells[i].format.name,
+          value: marks,
+        };
+        this.state.predictionArray.push(prediction);
+      }
+    }
     this.props.navigation.navigate('Admissions');
   };
 
@@ -95,15 +87,21 @@ export class Admissions extends Component {
       <View style={style.container}>
         <TouchableOpacity
           style={[style.buttonContainer, {marginBottom: 20}]}
-          onPress={() => this.onScan()}>
+          onPress={() => this.onScan(1)}>
           <Text style={style.buttonText}>Scan Admission Page 1</Text>
         </TouchableOpacity>
         <TouchableOpacity style={[style.buttonContainer, {marginBottom: 20}]}>
-          <Text style={style.buttonText}>Scan Admission Page 2</Text>
+          <Text style={style.buttonText} onPress={() => this.onScan(2)}>
+            Scan Admission Page 2
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={[style.buttonContainer, {backgroundColor: '#5dbea3'}]}
-          disabled={true}>
+          onPress={() => {
+            this.props.navigation.navigate('ShowScannedData', {
+              data: this.state.predictionArray,
+            });
+          }}>
           <Text style={style.buttonText}>Show scanned data</Text>
         </TouchableOpacity>
       </View>

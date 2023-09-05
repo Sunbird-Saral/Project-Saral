@@ -4,6 +4,9 @@ export let roi = {
     name: 'SCHOOL_ADMISSION_FORM',
     threshold: {
       experimentalOMRDetection: false,
+      minWidth: 200,
+      minHeight: 500,
+      detectionRadius: 12,
     },
     pages: '2',
     cells: [
