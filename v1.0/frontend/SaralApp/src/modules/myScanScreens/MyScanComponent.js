@@ -30,6 +30,7 @@ import {
 } from '../../utils/StorageUtils';
 import ButtonComponent from '../common/components/ButtonComponent';
 import {
+  askPermissions,
   checkAppVersion,
   checkNetworkConnectivity,
   dispatchCustomModalMessage,
@@ -60,7 +61,7 @@ import {
 import constants from '../../flux/actions/constants';
 import {storeFactory} from '../../flux/store/store';
 import DeviceInfo from 'react-native-device-info';
-import { onScanButtonClickEvent } from '../../utils/Analytics';
+import {onScanButtonClickEvent} from '../../utils/Analytics';
 
 LogBox.ignoreAllLogs();
 
@@ -407,115 +408,80 @@ class MyScanComponent extends Component {
         this.setState({oldBrightness: brightness});
       });
 
-      if (Platform.OS !== 'ios') {
-        const grantedRead = await PermissionsAndroid.check(
-          PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
-        );
-        const grantedWrite = await PermissionsAndroid.check(
-          PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
-        );
-        const grantedCamera = await PermissionsAndroid.check(
-          PermissionsAndroid.PERMISSIONS.CAMERA,
-        );
+      let permissionStatus = await askPermissions();
 
-        if (grantedRead && grantedWrite && grantedCamera) {
-          let hasEmpty = this.props.roiData.hasOwnProperty('config')
-            ? true
-            : this.props.roiData.length > 0;
-          if (this.props.minimalFlag && this.state.roiIndex != -1) {
-            if (!hasEmpty) {
-              this.callCustomModal(
-                Strings.message_text,
-                Strings.roi_cache_not_available,
-                false,
-                false,
-              );
-            } else {
-              this.openCameraActivity();
-              onScanButtonClickEvent(this.props.loginData.data.school.schoolId)
-            }
-          } else if (!this.props.minimalFlag) {
-            if (
-              this.props.loginData.data.school.hasOwnProperty('offlineMode') &&
-              this.props.loginData.data.school.offlineMode &&
-              hasEmpty
-            ) {
-              this.openCameraActivity();
-              onScanButtonClickEvent(this.props.loginData.data.school.schoolId)
-            } else if (
-              this.props.loginData.data.school.hasOwnProperty('offlineMode') ==
-                false ||
-              (this.props.loginData.data.school.offlineMode == false &&
-                hasEmpty)
-            ) {
-              this.openCameraActivity();
-              onScanButtonClickEvent(this.props.loginData.data.school.schoolId)
-            } else {
-              this.callCustomModal(
-                Strings.message_text,
-                Strings.roi_cache_not_available,
-                false,
-                false,
-              );
-            }
+      if (permissionStatus == 'granted') {
+        let hasEmpty = this.props.roiData.hasOwnProperty('config')
+          ? true
+          : this.props.roiData.length > 0;
+        if (this.props.minimalFlag && this.state.roiIndex != -1) {
+          if (!hasEmpty) {
+            this.callCustomModal(
+              Strings.message_text,
+              Strings.roi_cache_not_available,
+              false,
+              false,
+            );
+          } else {
+            this.openCameraActivity();
+            onScanButtonClickEvent(this.props.loginData.data.school.schoolId);
           }
+        } else if (!this.props.minimalFlag) {
+          if (
+            this.props.loginData.data.school.hasOwnProperty('offlineMode') &&
+            this.props.loginData.data.school.offlineMode &&
+            hasEmpty
+          ) {
+            this.openCameraActivity();
+            onScanButtonClickEvent(this.props.loginData.data.school.schoolId);
+          } else if (
+            this.props.loginData.data.school.hasOwnProperty('offlineMode') ==
+              false ||
+            (this.props.loginData.data.school.offlineMode == false && hasEmpty)
+          ) {
+            this.openCameraActivity();
+            onScanButtonClickEvent(this.props.loginData.data.school.schoolId);
+          } else {
+            this.callCustomModal(
+              Strings.message_text,
+              Strings.roi_cache_not_available,
+              false,
+              false,
+            );
+          }
+        }
+      } else {
+        let permissionStatus = await askPermissions();
+        if (permissionStatus == 'granted') {
+          if (this.props.minimalFlag && this.state.roiIndex != -1) {
+            this.openCameraActivity();
+            onScanButtonClickEvent(this.props.loginData.data.school.schoolId);
+          } else if (!this.props.minimalFlag) {
+            this.openCameraActivity();
+            onScanButtonClickEvent(this.props.loginData.data.school.schoolId);
+          } else {
+            this.callCustomModal(
+              Strings.message_text,
+              Strings.please_select_roi_layout,
+              false,
+              false,
+            );
+          }
+        } else if (permissionStatus == 'blocked') {
+          Alert.alert(
+            Strings.message_text,
+            Strings.give_permission_from_settings,
+            [{text: Strings.ok_text, style: 'cancel'}],
+          );
         } else {
-          PermissionsAndroid.requestMultiple(
+          Alert.alert(
+            Strings.message_text,
+            Strings.please_give_permission_to_use_app,
             [
-              PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
-              PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
-              PermissionsAndroid.PERMISSIONS.CAMERA,
+              {text: Strings.cancel_text, style: 'cancel'},
+              {text: Strings.ok_text, onPress: () => this.onScanClick()},
             ],
-            {
-              title: Strings.permission_text,
-              message: Strings.app_needs_permission,
-            },
-          ).then(permRes => {
-            if (
-              permRes['android.permission.READ_EXTERNAL_STORAGE'] ===
-                PermissionsAndroid.RESULTS.GRANTED &&
-              permRes['android.permission.WRITE_EXTERNAL_STORAGE'] ===
-                PermissionsAndroid.RESULTS.GRANTED &&
-              permRes['android.permission.CAMERA'] ===
-                PermissionsAndroid.RESULTS.GRANTED
-            ) {
-              if (this.props.minimalFlag && this.state.roiIndex != -1) {
-                this.openCameraActivity();
-                onScanButtonClickEvent(this.props.loginData.data.school.schoolId)
-              } else if (!this.props.minimalFlag) {
-                this.openCameraActivity();
-                onScanButtonClickEvent(this.props.loginData.data.school.schoolId)
-              } else {
-                this.callCustomModal(
-                  Strings.message_text,
-                  Strings.please_select_roi_layout,
-                  false,
-                  false,
-                );
-              }
-            } else if (
-              permRes['android.permission.READ_EXTERNAL_STORAGE'] ==
-                'never_ask_again' ||
-              permRes['android.permission.WRITE_EXTERNAL_STORAGE'] ==
-                'never_ask_again' ||
-              permRes['android.permission.CAMERA'] == 'never_ask_again'
-            ) {
-              Alert.alert(
-                Strings.message_text,
-                Strings.give_permission_from_settings,
-                [{text: Strings.ok_text, style: 'cancel'}],
-              );
-            } else {
-              Alert.alert(
-                Strings.message_text,
-                Strings.please_give_permission_to_use_app,
-                [
-                  {text: Strings.cancel_text, style: 'cancel'},
-                  {text: Strings.ok_text, onPress: () => this.onScanClick()},
-                ],
-              );
-            }
-          });
+          );
         }
       }
     }
@@ -523,18 +489,9 @@ class MyScanComponent extends Component {
 
   openCameraActivity = async () => {
     try {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.CAMERA,
-        {
-          title: 'SaralSDK Demo App Camera Permission',
-          message:
-            'SaralSDK Demo application require camera to perform scanning operation ',
-          buttonNeutral: 'Ask Me Later',
-          buttonNegative: 'Cancel',
-          buttonPositive: 'OK',
-        },
-      );
-      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+      let permissionStatus = await askPermissions();
+
+      if (permissionStatus == 'granted') {
         this.setState({
           activityOpen: true,
         });
