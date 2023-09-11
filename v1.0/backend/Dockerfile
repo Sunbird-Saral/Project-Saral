@@ -4,7 +4,7 @@ LABEL maintainer="dileep.gadiraju@tarento.com"
 
 ENV PROFILE=dev
 ENV PORT=3000
-ENV MONGODB_URL=mongodb://10.0.1.221:27017/saralv1newdb
+ENV MONGODB_URL=mongodb://10.0.4.48:27017/saralv1newdb
 ENV JWT_SECRET=SARALDATA_NODE
 WORKDIR /app
 COPY package*.json ./
