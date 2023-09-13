@@ -1,0 +1,12 @@
+1. First, install the required dependencies using the following command:
+    apt-get install wget curl unzip software-properties-common gnupg2 -y
+2. Next, download and add the HashiCorp signed gpg keys to your system:
+    curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add -
+3. Next, add the HashiCorp repository to the APT using the following command:
+    apt-add-repository "deb [arch=$(dpkg --print-architecture)] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+4. Next, update the repository using the command given below:
+    apt-get update -y
+5. Finally, install the Terraform by running the following command:
+    apt-get install terraform -y
+6. Once the Terraform has been installed, verify it using the following command:
+    terraform -v
