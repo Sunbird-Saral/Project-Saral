@@ -17,14 +17,14 @@ cp ../../specs/v1.5/swagger-saral-maintenance.yaml ./src
 cp ../../specs/v1.5/swagger-saral-frontend.yaml ./src
 cp ../../specs/v1.5/swagger-saral-apidoc.yaml ./src
 
-image_name="backendapi"
+image_name="backendtest"
 image_tag="2.0"
 
 # Generate a dynamic tag based on the build number
 image_tag="${image_tag}-$BUILD_NUMBER"
 
 # Build and tag the Docker image
-docker build -t "saaral123/$image_name:$image_tag" . --network="host"
+docker build -t "saaral123/$image_name:$image_tag" -f Dockerfile.prod . --network="host"
 
 #login to dockerhub
 docker login -u saaral123 -p Saral@123

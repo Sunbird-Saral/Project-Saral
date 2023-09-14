@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 const { createPool } = require('generic-pool');
+const { MongoClient } = require('mongodb');
 
 // url/databasename
 const connectionURL = process.env.MONGODB_URL
-const maxPoolSize = process.env.MONGODB_POOL_SIZE || 50
+const maxPoolSize = process.env.MONGODB_POOL_SIZE || 20
 const minPoolSize = process.env.MIN_MONGODB_POOL_SIZE || 30
 
 const options = {
@@ -19,7 +20,19 @@ const poolFactory = {
     destroy: (connection) => connection.close(),
 };
 
+const nativePoolFactory = {
+  create: async () => {
+    const client = new MongoClient(connectionURL, options);
+    await client.connect();
+    return client.db();
+  },
+  destroy: dbInstance => {
+    dbInstance.client.close();
+  },
+};
+
 const pool = createPool(poolFactory, { max: maxPoolSize });
+const nativePool = createPool(nativePoolFactory, { max: 50 });
 
 const getClientPool = (req, res, next) => {
     pool.acquire()
@@ -39,5 +52,15 @@ const releaseClientPool = (req, res, next) => {
         next()
 };
 
+const getNativeClient = () => {
+  return nativePool.acquire();
+};
 
-module.exports = { getClientPool , releaseClientPool, pool };
+const releaseNativeClient = (connection) => {
+      if(connection){
+        nativePool.release(connection);
+      }
+};
+
+
+module.exports = { getClientPool , releaseClientPool, pool, getNativeClient, releaseNativeClient };

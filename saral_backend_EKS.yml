@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: saral-backend
-        image: registry.hub.docker.com/saaral123/backendapi:{{IMAGE_TAG}}
+        image: registry.hub.docker.com/saaral123/backendtest:{{IMAGE_TAG}}
         ports:
         - containerPort: 3005
         env:
@@ -23,7 +23,7 @@ spec:
         - name: PORT
           value: "3005"
         - name: MONGODB_URL
-          value: "mongodb://10.0.0.185:27017/saraldata_dev"
+          value: "mongodb://10.0.31.152:27017,10.0.50.162:27017/prod_saral"
         - name: JWT_SECRET
           value: SARALDATA_NODE
         - name: MONGODB_POOL_SIZE

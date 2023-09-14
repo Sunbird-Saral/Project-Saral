@@ -1,11 +1,53 @@
 pipeline {
     
     agent any
+    environment {
+        //DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials')
+        DOCKER_IMAGE_NAME = "saaral123/backendtest"
+    }
     
     stages{
+        stage('Cleanup Workspace') {
+            steps {
+                deleteDir()  
+            }
+        }
+
         stage ('checkout') {
             steps {
-               git branch: 'feature/saveMarks-v1', url: 'https://github.com/Sunbird-Saral/Project-Saral.git' 
+               git branch: 'devopstestimp2', url: 'https://github.com/Sunbird-Saral/Project-Saral.git' 
+            }
+        }
+
+        stage('run test'){
+            steps{
+            sh '''
+            cd v1.0/backend/
+            /usr/bin/npm install
+            /usr/bin/npm run test
+            '''
+            }
+        }
+
+        stage('SonarQube analysis') {
+            steps {
+                script {
+                    def scannerHome = tool name: 'sonarqube-10.1', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+                    def sonarScannerHome = tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+
+                    withSonarQubeEnv('sonarqube-10.1') {
+                        sh '''
+                        cd v1.0/backend/
+                        /usr/bin/npm run sonar
+                        '''
+                    }
+                    
+                    // Wait for the quality gate to complete
+                    def qg = waitForQualityGate()
+                    if (qg.status != 'OK') {
+                        error "Quality gate did not pass: ${qg.status}"
+                    }
+                }
             }
         }
         
@@ -15,25 +57,48 @@ pipeline {
                 sh './build_image.sh'
             }
         }
-        
-        stage('Pull Docker Image') {
+
+        // Add a new stage for Trivy scanning
+        stage('Trivy Scan') {
             steps {
-              script {
-                docker.withRegistry('https://registry.hub.docker.com', 'dockerhub_credentials') {
-                  def dockerImage = docker.image('saaral123/backendapi:2.0')
-                  dockerImage.pull()
+                script {
+                    def trivyOutput = sh(
+                        script: 'trivy saaral123/backendtest:latest', 
+                        returnStatus: true
+                    )
+
+                    if (trivyOutput == 0) {
+                        echo 'No vulnerabilities found.'
+                    } else {
+                        currentBuild.result = 'FAILURE'
+                        error 'Vulnerabilities found. Build failed.'
+                    }
                 }
-              }
             }
         }
 
+        stage('Pull Docker Image') {
+            steps {
+                script {
+                    sh 'echo "Pulling Docker Image..."'
+                     // Generate the dynamic image tag based on the build number
+                    def image_name = "backendtest"
+                    def image_tag = "2.0"
+                    image_tag = "${image_tag}-${BUILD_NUMBER}"
+                    sh "docker pull saaral123/${image_name}:${image_tag}"
+                    sh 'docker images'  // Display the list of Docker images on the Jenkins server
+                }
+            }
+       }
 
         stage ('deploy to EKS'){
             steps{
                 sh 'export KUBECONFIG=/var/lib/jenkins/.kube/config'
+                sh 'export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/home/jenkins/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'
                 sh 'chmod +x ./deploy_EKS.sh'
                 sh './deploy_EKS.sh'
             }
         }
+
     }
 }
