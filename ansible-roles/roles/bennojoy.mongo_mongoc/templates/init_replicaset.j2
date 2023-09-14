@@ -1,0 +1,10 @@
+rs.initiate(
+  {
+    _id: "{{ mongoc_replica_name }}",
+    configsvr: true,
+    members: [
+      { _id : 0, host : "{{ mongoc_node1 }}:27017" },
+      { _id : 1, host : "{{ mongoc_node2 }}:27017" }
+    ]
+  }
+)

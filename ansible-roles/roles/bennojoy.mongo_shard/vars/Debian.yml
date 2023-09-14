@@ -1,0 +1,9 @@
+---
+
+mongod_pkgs:
+  # - python-selinux
+  # - mongodb-10gen
+  - gcc
+  - python3-pip
+mongo_user: mongodb
+mongo_group: mongodb
