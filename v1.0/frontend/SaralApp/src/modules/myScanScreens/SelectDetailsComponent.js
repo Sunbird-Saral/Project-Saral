@@ -345,7 +345,7 @@ class SelectDetailsComponent extends Component {
                 dataPayload: payload,
               },
               () => {
-                this.getStudentData(loginDetails.token);
+                this.callStudentsData(loginDetails.token);
               },
             );
           }
@@ -399,8 +399,9 @@ class SelectDetailsComponent extends Component {
         this.dispatchStudentExamData(cacheFilterData[0].data2),
       );
       this.setState({isLoading: false});
-    } else if (hasNetwork) {
-      console.log('dataPayload', dataPayload);
+    }
+    if (hasNetwork) {
+      console.log('dataPayload................', dataPayload);
       this.setState(
         {
           calledStudentsData: true,
@@ -449,7 +450,8 @@ class SelectDetailsComponent extends Component {
         this.dispatchStudentExamData(cacheFilterData[0].data2),
       );
       this.setState({isLoading: false});
-    } else if (hasNetwork) {
+    }
+    if (hasNetwork) {
       this.setState(
         {
           calledStudentsData: true,
@@ -971,6 +973,11 @@ class SelectDetailsComponent extends Component {
                     : ''
                   : '';
               let getStudentExamCache = await getRegularStudentExamApi();
+              console.log(
+                'getStudentExamCache...........',
+                getStudentExamCache,
+              );
+              console.log('studentsAndExamData', studentsAndExamData);
               if (getStudentExamCache != null) {
                 let result = getStudentExamCache.findIndex(e =>
                   e.key == loginData.data.school.schoolId &&
@@ -1002,7 +1009,12 @@ class SelectDetailsComponent extends Component {
                     ? e.set == setValue
                     : false,
                 );
-
+                console.log(
+                  'result,hasSubject,resultDataIndex',
+                  result,
+                  hasSubject,
+                  resultDataIndex,
+                );
                 let subjBool = hasSubject >= 0 ? true : false;
 
                 if (resultDataIndex > -1 && subjBool == false) {
@@ -1052,6 +1064,10 @@ class SelectDetailsComponent extends Component {
             });
             finalStudentsAndExamArr.push(obj);
             let studentsExamDataSaved = await setStudentsExamData(
+              finalStudentsAndExamArr,
+            );
+            console.log(
+              '....................................coming from here',
               finalStudentsAndExamArr,
             );
             this.props.navigation.push('StudentsList');
@@ -1205,7 +1221,9 @@ class SelectDetailsComponent extends Component {
       storeFactory.dispatch(
         this.dispatchStudentExamData(cacheFilterData[0].data),
       );
-    } else if (hasNetwork) {
+      console.log('coming from if');
+    }
+    if (hasNetwork) {
       let dataPayload = {
         classId: this.state.selectedClassId,
         section: this.state.selectedSection,
@@ -1217,6 +1235,7 @@ class SelectDetailsComponent extends Component {
         isLoading: false,
         isCalledStudentAndExam: true,
       });
+      console.log('coming from else');
     } else {
       this.setState({isLoading: false});
       this.callCustomModal(

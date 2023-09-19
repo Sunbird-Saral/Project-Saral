@@ -124,6 +124,7 @@ const StudentsList = ({
         loginData.data.school.offlineMode &&
         hasNetwork
       ) {
+        console.log('foem use effect ----->', filteredData);
         let getRoiCache = await getRegularRoipi();
         let setValue = filteredData.hasOwnProperty('set')
           ? filteredData.set.length > 0
@@ -353,11 +354,12 @@ const StudentsList = ({
 
   const studentData = async () => {
     let studentsExamData = await getStudentsExamData();
-    console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', studentsExamData);
+    console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> from cache', studentsExamData);
     console.log(
       '----------------------',
       filteredData.className,
       filteredData.section,
+      filteredData.class,
     );
     const filterStudentsData = studentsExamData.filter(e => {
       if (
