@@ -1,4 +1,4 @@
-package com.up_saralapp;
+package com.saralapp;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
