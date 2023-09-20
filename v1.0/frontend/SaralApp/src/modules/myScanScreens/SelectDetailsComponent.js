@@ -334,6 +334,7 @@ class SelectDetailsComponent extends Component {
               classId: selectedClassId,
               section: selectedSection,
               subject: value,
+              examDate: this.state.examDate,
             };
             if (value == 'All') {
               payload.subject = 0;
@@ -345,7 +346,7 @@ class SelectDetailsComponent extends Component {
                 dataPayload: payload,
               },
               () => {
-                this.callStudentsData(loginDetails.token);
+                this.getStudentData(loginDetails.token);
               },
             );
           }

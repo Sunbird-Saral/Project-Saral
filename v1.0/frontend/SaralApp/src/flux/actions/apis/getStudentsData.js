@@ -31,7 +31,9 @@ export class GetStudentsData extends API {
     let url = '';
     url = `${super.apiEndPoint()}/fetchStudentsandExamsByQuery?classId=${
       this.requestBody.classId
-    }&section=${this.requestBody.section}&subject=${this.requestBody.subject}`;
+    }&section=${this.requestBody.section}&examDate=${
+      this.requestBody.examDate
+    }`;
     return url;
   }
 
@@ -48,7 +50,7 @@ export class GetStudentsData extends API {
   getBody() {}
 
   getPayload() {
-    console.log('FROM SUB', this.response);
+    console.log('FROM SUBJECT', this.response);
     return this.response;
   }
 }
