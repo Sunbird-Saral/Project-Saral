@@ -35,10 +35,15 @@ exports.fetchStudentsandExams = async (req, res, next) => {
         }
     
         if (req.query.hasOwnProperty('subject')) {
-            let subject = req.query.subject.split(' ')
-            examMatch.subject = subject[0]
-            examMatch.examDate = subject[1]
+            //let subject = req.query.subject.split(' ')
+            examMatch.subject = req.query.subject
+            //examMatch.examDate = subject[1]
         }
+
+        if (req.query.hasOwnProperty('examDate')) {
+            examMatch.examDate = req.query.examDate
+        }
+
         await Helper.lockScreenValidator(connection, req.school)
 
         const students = await Students.find(match, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 }).lean()
@@ -54,7 +59,10 @@ exports.fetchStudentsandExams = async (req, res, next) => {
             }
 
             if(examMatch.subject) {
-                lookup.subject =  examMatch.subject,
+                lookup.subject =  examMatch.subject
+            }
+
+            if(examMatch.examDate) {
                 lookup.examDate = examMatch.examDate
             }
         
