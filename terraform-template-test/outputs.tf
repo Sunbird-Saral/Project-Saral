@@ -11,7 +11,7 @@ metadata:
   namespace: kube-system
 data:
   mapRoles: |
-    - rolearn: ${aws_iam_role.saral_nodes.arn}
+    - rolearn: ${aws_iam_role.saral_ekstep_nodes.arn}
       username: system:node:{{EC2PrivateDNSName}}
       groups:
         - system:bootstrappers
@@ -22,8 +22,8 @@ CONFIGMAPAWSAUTH
 apiVersion: v1
 clusters:
 - cluster:
-    server: ${aws_eks_cluster.saral.endpoint}
-    certificate-authority-data: ${aws_eks_cluster.saral.certificate_authority.0.data}
+    server: ${aws_eks_cluster.saral_ekstep.endpoint}
+    certificate-authority-data: ${aws_eks_cluster.saral_ekstep.certificate_authority.0.data}
   name: kubernetes
 contexts:
 - context:

@@ -3,6 +3,6 @@
 #
 
 variable "cluster-name" {
-  default = "eks-cluster-saral"
+  default = "eks-cluster-saral_ekstep"
   type    = string
 }
