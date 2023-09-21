@@ -73,8 +73,8 @@ resource "aws_eks_node_group" "private-saral_ekstep_nodes" {
   ]
 }
 
- resource "aws_launch_template" "eks-with-disks" {
-   name = "eks-with-disks"
+ resource "aws_launch_template" "eks-saral-ekstep-with-disks" {
+   name = "eks-saral-ekstep-with-disks"
 
    key_name = "local-provisioner"
 
