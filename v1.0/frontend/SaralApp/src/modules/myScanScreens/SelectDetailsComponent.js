@@ -365,10 +365,11 @@ class SelectDetailsComponent extends Component {
     if (hasCacheData && cacheFilterData.length > 0) {
       this.setState({isLoading: false, calledStudentsData: true});
       storeFactory.dispatch(
-        this.dispatchStudentExamData(cacheFilterData[0].data2),
+        this.dispatchStudentExamData(cacheFilterData[0].data),
       );
       this.setState({isLoading: false});
-    } else if (hasNetwork) {
+    }
+    if (hasNetwork) {
       this.setState(
         {
           calledStudentsData: true,
@@ -382,7 +383,7 @@ class SelectDetailsComponent extends Component {
           this.props.APITransport(apiObj);
         },
       );
-    } else {
+    } else if (hasCacheData == null) {
       this.setState({isLoading: false});
       this.callCustomModal(
         Strings.message_text,
@@ -393,6 +394,7 @@ class SelectDetailsComponent extends Component {
   };
 
   dispatchStudentExamData(payload) {
+    console.log('payload', payload);
     return {
       type: constants.GET_STUDENTS_EXAMS_LIST,
       payload,
@@ -618,6 +620,7 @@ class SelectDetailsComponent extends Component {
                   };
 
                   let studentsAndExamArr = await getStudentsExamData();
+
                   let finalStudentsAndExamArr = [];
                   if (studentsAndExamArr != null) {
                     studentsAndExamArr.forEach(element => {
@@ -640,6 +643,7 @@ class SelectDetailsComponent extends Component {
                     }
                   });
                   finalStudentsAndExamArr.push(obj);
+
                   let studentsExamDataSaved = await setStudentsExamData(
                     finalStudentsAndExamArr,
                   );
@@ -702,16 +706,10 @@ class SelectDetailsComponent extends Component {
                           e.class == selectedClass &&
                           e.section == selectedSection,
                       );
-                      let hasSubject = getStudentExamCache.findIndex(
-                        e =>
-                          e.key == loginData.data.school.schoolId &&
-                          e.class == selectedClass &&
-                          e.section == selectedSection &&
-                          e.hasOwnProperty('subject'),
-                      );
-                      if (result > -1 && hasSubject == -1) {
+
+                      if (result != -1) {
                         getStudentExamCache[result].data = studentsAndExamData;
-                      } else if (hasSubject == -1) {
+                      } else {
                         let payload = {
                           key: `${loginData.data.school.schoolId}`,
                           class: selectedClass,
@@ -721,6 +719,7 @@ class SelectDetailsComponent extends Component {
                         };
                         getStudentExamCache.push(payload);
                       }
+
                       await setRegularStudentExamApi(getStudentExamCache);
                     } else {
                       let payload = {
@@ -1111,8 +1110,7 @@ class SelectDetailsComponent extends Component {
             let conditionSwitch =
               element.key == this.props.loginData.data.school.schoolId &&
               element.class == this.state.selectedClass &&
-              element.section == this.state.selectedSection &&
-              element.subject == this.state.selectedSubject;
+              element.section == this.state.selectedSection;
             if (conditionSwitch) {
               return true;
             }
@@ -1124,19 +1122,23 @@ class SelectDetailsComponent extends Component {
       storeFactory.dispatch(
         this.dispatchStudentExamData(cacheFilterData[0].data),
       );
-    } else if (hasNetwork) {
+    }
+    if (hasNetwork) {
       let dataPayload = {
         classId: this.state.selectedClassId,
         section: this.state.selectedSection,
-        subject: this.state.selectedSubject,
       };
       let apiObj = new GetStudentsAndExamData(dataPayload, token, deviceUniqId);
+
       this.props.APITransport(apiObj);
       this.setState({
         isLoading: false,
         isCalledStudentAndExam: true,
       });
-    } else {
+      storeFactory.dispatch(
+        this.dispatchStudentExamData(cacheFilterData[0].data),
+      );
+    } else if (hasCacheData == null) {
       this.setState({isLoading: false});
       this.callCustomModal(
         Strings.message_text,
