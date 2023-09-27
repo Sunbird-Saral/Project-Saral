@@ -131,8 +131,10 @@ marksSchema.statics.StudentsMark = async (studentIds) => {
     return marks
 }
 
+//uncomment the below line when using mongodb as standalone
 //marksSchema.index({schoolId: -1, classId: -1, section: -1, examDate: -1, subject: -1})
-//marksSchema.index({shardedKey: 1})
+
+
 // const Marks = mongoose.model('Mark', marksSchema)
 
 module.exports = { marksSchema, rawSchemaJson }
