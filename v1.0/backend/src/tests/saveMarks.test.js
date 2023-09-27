@@ -1,4 +1,4 @@
-const Marks = require("../models/marks")
+const Marks = require("../models/marks").marksSchema
 const marksController = require('../controller/marksController')
 const mockSaveMarksBody = require("./mock-data/mockSaveMarksBody.json")
 const mockUpdateMarksBody = require("./mock-data/mockUpdateSaveMarks.json")
