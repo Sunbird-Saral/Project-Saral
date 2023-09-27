@@ -236,6 +236,9 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-crashlytics'
+    implementation'com.facebook.soloader:soloader:0.9.0+'
+
+
 
     implementation ('com.google.firebase:firebase-iid:21.1.0') {
     transitive = true
