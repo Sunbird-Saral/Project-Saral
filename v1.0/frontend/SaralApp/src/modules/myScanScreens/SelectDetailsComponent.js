@@ -1463,9 +1463,11 @@ class SelectDetailsComponent extends Component {
             customBtnStyle={[
               styles.nxtBtnStyle,
               {
-                backgroundColor: this.props.multiBrandingData.themeColor1
-                  ? this.props.multiBrandingData.themeColor1
-                  : AppTheme.BLUE,
+                backgroundColor:
+                  this.props.multiBrandingData &&
+                  this.props.multiBrandingData.themeColor1
+                    ? this.props.multiBrandingData.themeColor1
+                    : AppTheme.BLUE,
               },
             ]}
             btnText={Strings.submit_text.toUpperCase()}
@@ -1489,7 +1491,8 @@ class SelectDetailsComponent extends Component {
           title={'Messagess'}
           ok_button={'Ok'}
           bgColor={
-            this.props.multiBrandingData
+            this.props.multiBrandingData &&
+            this.props.multiBrandingData.themeColor1
               ? this.props.multiBrandingData.themeColor1
               : AppTheme.BLUE
           }
