@@ -158,7 +158,7 @@ class HomeComponent extends Component {
       }
 
     async componentDidUpdate(prevProps) {
-        const { studentsAndExamData, multiBranding, loginData, minimalFlag } = this.props;
+        const { studentsAndExamData, multiBranding, loginData, minimalFlag, apiStatus } = this.props;
 
         const { loginData: { data: { school } } } = this.props;
         let hasNetwork = await checkNetworkConnectivity();
@@ -261,6 +261,11 @@ class HomeComponent extends Component {
                     }
                 }
             }
+        }
+
+        if (apiStatus && prevProps.apiStatus != apiStatus && apiStatus.error) {
+            this.callCustomModal(Strings.message_text, Strings.something_went_wrong_please_try_again, false, false);
+            this.setState({ isLoading: false });
         }
     }
 
@@ -477,7 +482,8 @@ const mapStateToProps = (state) => {
         multiBrandingData: state.multiBrandingData.response.data,
         multiBranding: state.multiBrandingData.response,
         minimalFlag: state.minimalFlag,
-        studentsAndExamData: state.studentsAndExamData
+        studentsAndExamData: state.studentsAndExamData,
+        apiStatus: state.apiStatus
     }
 }
 const mapDispatchToProps = (dispatch) => {
