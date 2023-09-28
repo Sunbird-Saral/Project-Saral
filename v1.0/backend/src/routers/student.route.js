@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router();
 const { auth } = require('../middleware/auth')
 const studentsSchema = require("../models/students")
-const marksSchema = require("../models/marks")
+const marksSchema = require("../models/marks").marksSchema
 const clientPool = require('../db/mongoose');
 
 const studentController = require('../controller/studentController')

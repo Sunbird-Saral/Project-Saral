@@ -1,4 +1,4 @@
-const marksSchema = require('../models/marks')
+const { marksSchema, rawSchemaJson } = require('../models/marks')
 const usersSchema = require('../models/users')
 const Helper = require('../middleware/helper')
 
@@ -6,17 +6,19 @@ const { stringObject } = require('../utils/commonUtils');
 
 const logger = require('../logging/logger')
 const httperror = require("http-errors");
+const poolManager = require("../db/mongoose");
 
 exports.saveMarks = async (req, res, next) => {
     const marks = []
     const startTime = new Date();
+    let nativeClient;
     if (req.header('X-App-Version')) {
         // console.log("APP VERSION", req.get('X-App-Version'))
     }
 
     try {
         let connection = req.dbConnection
-
+        nativeClient = await poolManager.getNativeClient();
         if (Object.keys(req.body).length === 0)  throw new httperror(400, "Validation error.")
         const input_keys = Object.keys(req.body)
         if (!["subject", "classId", "userId", "examId"].every((i) => input_keys.includes(i)))
@@ -32,9 +34,8 @@ exports.saveMarks = async (req, res, next) => {
         const createdOn = new Date().getTime()
         const roiId = req.body.roiId
     
-        const Marks = connection.model('Marks', marksSchema);
         req.body.studentsMarkInfo.forEach(studentsData => {
-            const mark = new Marks({
+            const mark = Helper.transformAndValidateDataBasedOnModel({
                 ...studentsData,
                 schoolId,
                 examDate,
@@ -44,17 +45,14 @@ exports.saveMarks = async (req, res, next) => {
                 roiId,
                 examId,
                 userId
-            })
+            }, rawSchemaJson)
 
             const marksData = {
                 updateOne: {
                     filter: {
-                        schoolId: mark.schoolId,
-                        studentId: mark.studentId,
-                        subject: mark.subject,
-                        examDate: mark.examDate
+                        shardedKey: `${mark.schoolId}_${mark.studentId}_${mark.subject}_${mark.examDate}`
                     },
-                    update: { $set: { studentIdTrainingData: mark.studentIdTrainingData, studentId: mark.studentId, predictionConfidence: mark.predictionConfidence, schoolId: mark.schoolId, examDate: mark.examDate, predictedStudentId: mark.predictedStudentId, studentAvailability: mark.studentAvailability, marksInfo: mark.marksInfo, maxMarksTrainingData: mark.maxMarksTrainingData, maxMarksPredicted: mark.maxMarksPredicted, securedMarks: mark.securedMarks, totalMarks: mark.totalMarks, obtainedMarksTrainingData: mark.obtainedMarksTrainingData, obtainedMarksPredicted: mark.obtainedMarksPredicted, set: mark.set, subject: mark.subject, classId: mark.classId, section: mark.section, examId: mark.examId, userId: mark.userId, roiId: mark.roiId} },
+                    update: { $set: { studentIdTrainingData: mark.studentIdTrainingData, studentId: mark.studentId, predictionConfidence: mark.predictionConfidence, schoolId: mark.schoolId, examDate: mark.examDate, predictedStudentId: mark.predictedStudentId, studentAvailability: mark.studentAvailability, marksInfo: mark.marksInfo, maxMarksTrainingData: mark.maxMarksTrainingData, maxMarksPredicted: mark.maxMarksPredicted, securedMarks: mark.securedMarks, totalMarks: mark.totalMarks, obtainedMarksTrainingData: mark.obtainedMarksTrainingData, obtainedMarksPredicted: mark.obtainedMarksPredicted, set: mark.set, subject: mark.subject, classId: mark.classId, section: mark.section, examId: mark.examId, userId: mark.userId, roiId: mark.roiId, shardedKey:`${mark.schoolId}_${mark.studentId}_${mark.subject}_${mark.examDate}`} },
                     upsert: true
                 }
             }
@@ -63,8 +61,7 @@ exports.saveMarks = async (req, res, next) => {
 
         await Helper.lockScreenValidator(connection,req.school)
 
-
-        await Marks.bulkWrite(marks);
+        await nativeClient.collection('marks').bulkWrite(marks);
         const endTime = new Date();
         const executionTime = endTime - startTime;
         logger.info(`Execution time for Save Marks BulkWrite : ${executionTime}ms`);
@@ -78,6 +75,7 @@ exports.saveMarks = async (req, res, next) => {
             res.status(400).json({ error: e.message })
         }
     } finally {
+        poolManager.releaseNativeClient(nativeClient);
         next()
     }
 }

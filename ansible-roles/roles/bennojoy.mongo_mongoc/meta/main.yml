@@ -1,0 +1,19 @@
+---
+galaxy_info:
+  author: "Benno Joy"
+  company: Ansible
+  license: BSD
+  min_ansible_version: 1.4 
+  platforms:
+   - name: EL
+     versions:
+      - 6
+   - name: Ubuntu
+     versions:
+      - precise
+      - quantal
+      - raring
+  categories:
+   - database:nosql
+dependencies: []
+  

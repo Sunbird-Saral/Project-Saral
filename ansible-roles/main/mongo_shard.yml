@@ -1,0 +1,9 @@
+---
+- hosts: mongo_shard
+  become: yes
+  roles:
+    - role: ./roles/bennojoy.mongo_shard
+      mongo_datadir_prefix: "/var/lib/mongodb"
+      mongo_port: 27017
+      mongoc_admin_pass: <testpass>
+      mongo_shard_replicaset: <shard>

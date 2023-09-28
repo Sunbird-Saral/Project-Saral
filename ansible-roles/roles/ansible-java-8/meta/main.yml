@@ -1,0 +1,21 @@
+---
+galaxy_info:
+  author: Simon Leigh
+  description: Oracle Java 8 JDK
+  license: MIT
+  min_ansible_version: 2.x
+  platforms:
+    - name: Fedora
+      versions:
+      - all
+    - name: EL
+      versions:
+      - all
+  galaxy_tags:
+    - java
+    - java8
+    - jdk
+    - jdk8
+    - oracle
+
+dependencies: []

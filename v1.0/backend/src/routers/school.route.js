@@ -3,7 +3,7 @@ const router = express.Router({ mergeParams: true });
 const schoolsSchema = require('../models/school')
 const classesSchema = require("../models/classes")
 const studentsSchema = require("../models/students")
-const marksSchema = require("../models/marks")
+const marksSchema = require("../models/marks").marksSchema
 const schoolController = require("../controller/schoolController")
 
 
