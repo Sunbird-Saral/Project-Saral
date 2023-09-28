@@ -16,3 +16,4 @@ localhost
 #172.17.0.15 mongod_port=27017 new_hostname=mongo-shard-data-4 mongo_private_ip=172.17.0.15
 #172.17.0.16 mongod_port=27017 new_hostname=mongo-shard-data-5 mongo_private_ip=172.17.0.16
 #172.17.0.17 mongod_port=27017 new_hostname=mongo-shard-data-6 mongo_private_ip=172.17.0.17
+

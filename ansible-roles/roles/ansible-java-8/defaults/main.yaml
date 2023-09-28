@@ -1,0 +1,8 @@
+---
+
+java_archive_name: jdk-8u131-linux-x64.tar.gz
+java_download_url: 'http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.tar.gz'
+#java_download_url: 'https://download.oracle.com/otn/java/jdk/8u211-b12/478a62b7d4e34b78b671c754eaaf38ab/{{ java_archive_name }}'
+#java_download_url: 'http://download.oracle.com/otn-pub/java/jdk/8u112-b15/{{ java_archive_name }}'
+java_root_dir: /usr/share/java-1.8.0
+java_jdk_dir: '{{ java_root_dir }}/jdk1.8.0_131'
