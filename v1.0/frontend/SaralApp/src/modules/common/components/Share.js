@@ -46,9 +46,8 @@ import {
 import C from '../../../flux/actions/constants';
 import {monospace_FF} from '../../../utils/CommonUtils';
 import Share from 'react-native-share';
-import { Assets } from '../../../assets';
-import { AnalyticLogout } from '../../../utils/Analytics';
-
+import {Assets} from '../../../assets';
+import {AnalyticLogout} from '../../../utils/Analytics';
 
 const ShareComponent = ({
   loginData,
@@ -131,10 +130,16 @@ const ShareComponent = ({
           dispatch(LogoutAction());
           navigation.navigate('auth');
         }
-      }
+      };
 
-      callCustomModal(Strings.message_text, Strings.are_you_sure_you_want_to_logout, true, doLogout, true)
-      AnalyticLogout(loginData.data.school.schoolId)
+      callCustomModal(
+        Strings.message_text,
+        Strings.are_you_sure_you_want_to_logout,
+        true,
+        doLogout,
+        true,
+      );
+      AnalyticLogout(loginData.data.school.schoolId);
 
       callCustomModal(
         Strings.message_text,
@@ -206,12 +211,15 @@ const ShareComponent = ({
       social: Share.Social.EMAIL,
     };
 
-    try {
-      const ShareResponse = await Share.shareSingle(shareOptions);
-      console.log('ShareResponse', JSON.stringify(ShareResponse));
-    } catch (error) {
-      console.log(error);
-    }
+    Linking.openURL(
+      `mailto:?subject=Saral App v1.0 logs collection&body=${shareOptions.message}`,
+    );
+    // try {
+    //   const ShareResponse = await Share.shareSingle(shareOptions);
+    //   console.log('ShareResponse', JSON.stringify(ShareResponse));
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   const dispatchModalStatus = value => {
