@@ -1,0 +1,23 @@
+#where to log
+systemLog:
+  destination: file
+  logAppend: true
+  path: /var/log/mongodb/mongod.log
+
+# fork and run in background
+#fork = false
+
+#storage:
+#  dbPath: {{ mongo_datadir_prefix }}/configdb
+#  journal:
+#    enabled: true
+
+
+sharding:
+  configDB: {{ mongoc_replicaset }}/{{ mongoc_private_ip1 }}:{{ mongo_port }},{{ mongoc_private_ip2 }}:{{ mongo_port }}
+
+net:
+  port: {{ mongo_port }}
+  bindIp: {{ mongo_private_ip }},127.0.0.1
+  maxIncomingConnections: 999999
+

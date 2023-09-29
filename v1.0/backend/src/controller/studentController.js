@@ -1,6 +1,6 @@
 const schoolsSchema = require("../models/school")
 const studentsSchema = require("../models/students")
-const marksSchema = require("../models/marks")
+const marksSchema = require("../models/marks").marksSchema
 const examsSchema = require('../models/exams')
 const Helper = require('../middleware/helper')
 const logger = require('../logging/logger')

@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90.47% </span>
+                <span class="strong">90.62% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>19/21</span>
+                <span class='fraction'>29/32</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90.47% </span>
+                <span class="strong">90.62% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>19/21</span>
+                <span class='fraction'>29/32</span>
             </div>
         
             
@@ -116,13 +116,33 @@
 <a name='L51'></a><a href='#L51'>51</a>
 <a name='L52'></a><a href='#L52'>52</a>
 <a name='L53'></a><a href='#L53'>53</a>
-<a name='L54'></a><a href='#L54'>54</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
@@ -150,7 +170,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -167,15 +190,25 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const Exams = require('../models/exams')
-const Rois = require('../models/roi')
-const Schools = require('../models/school')
-&nbsp;
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const examsSchema = require('../models/exams')
+const RoisSchema = require('../models/roi')
+const schoolsSchema = require('../models/school')
+const logger = require('../logging/logger')
 &nbsp;
 exports.getRoiData = async (req, res, next) =&gt; {
+  
     try {
+        const startTime = new Date();
+        let connection = req.dbConnection;
+        const Exams = connection.model('Exams', examsSchema)
+        const Schools = connection.model('Schools', schoolsSchema)
+        const Rois = connection.model('Rois', RoisSchema)
+     
         const examExist = await Exams.findOne({ examId: req.params.examId, $comment: "Get Roi Data API For Find Exam Data." }).lean()
 &nbsp;
         if (examExist) {
@@ -203,7 +236,10 @@ exports.getRoiData = async (req, res, next) =&gt; {
                     }
                 }
                 let roi = await Rois.find(examSetLookupExist, { roiId: 1, roi: 1 }).lean()
-&nbsp;
+                const endTime = new Date();
+                const executionTime = endTime - startTime;
+        
+                logger.info(`Execution time for Get ROI API : ${executionTime}ms`);
                 <span class="missing-if-branch" title="if path not taken" >I</span>if (roi.length) {
 <span class="cstat-no" title="statement not covered" >                    res.status(200).json({</span>
                         layout: roi[0].roi.layout,
@@ -219,8 +255,11 @@ exports.getRoiData = async (req, res, next) =&gt; {
             res.status(404).json({ "message": "Exam Id does not exist" })
         }
     } catch (e) {
+<span class="cstat-no" title="statement not covered" >        logger.warn(e)</span>
 <span class="cstat-no" title="statement not covered" >        res.status(400).json(e)</span>
-    }
+    }finally {
+        next()
+      }
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -229,7 +268,7 @@ exports.getRoiData = async (req, res, next) =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-06-08T07:09:05.074Z
+                at 2023-09-27T05:33:26.114Z
             </div>
         <script src="../prettify.js"></script>
         <script>

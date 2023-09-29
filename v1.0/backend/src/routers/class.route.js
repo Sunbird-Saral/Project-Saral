@@ -5,7 +5,7 @@ const Promise = require('bluebird')
 const studentsSchema = require('../models/students')
 const classesSchema = require('../models/classes')
 const examsSchema = require('../models/exams')
-const marksSchema = require('../models/marks')
+const marksSchema = require('../models/marks').marksSchema
 const router = new express.Router()
 
 router.post('/classes', auth, async (req, res,next) => {

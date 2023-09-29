@@ -1,4 +1,4 @@
-const Mark = require("../models/marks")
+const Mark = require("../models/marks").marksSchema
 const User = require("../models/users")
 const marksController = require('../controller/marksController')
 const mockSavedData = require("./mock-data/savedScanData.json")

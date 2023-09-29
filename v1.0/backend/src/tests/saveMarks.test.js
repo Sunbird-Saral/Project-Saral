@@ -1,4 +1,4 @@
-const Marks = require("../models/marks")
+const Marks = require("../models/marks").marksSchema
 const marksController = require('../controller/marksController')
 const mockSaveMarksBody = require("./mock-data/mockSaveMarksBody.json")
 const mockUpdateMarksBody = require("./mock-data/mockUpdateSaveMarks.json")
@@ -29,6 +29,19 @@ const mockResponse = () => {
     return res
 }
 
+jest.mock('../db/mongoose', () => {
+    return {
+        getNativeClient: jest.fn().mockResolvedValue({
+            collection: () => {
+                return {
+                    bulkWrite: jest.fn().mockResolvedValue(null)
+                }
+            }
+        }),
+        releaseNativeClient: jest.fn().mockResolvedValue(null)
+    }
+})
+
 const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1MDAxIiwic2Nob29sSWQiOiJ1MDAxIiwiaWF0IjoxNjcxMTY4OTY3fQ.jwx3xxTTP3dtJwJFUD4QAUsuBT8uemzyTpiKEIRhzKg"
 
 describe('save marks data ', () => {
@@ -52,11 +65,13 @@ describe('save marks data ', () => {
         req.body = mockUpdateMarksBody
 
         Helper.lockScreenValidator = jest.fn().mockResolvedValue(undefined)
+        Helper.transformAndValidateDataBasedOnModel = jest.fn().mockResolvedValue(undefined)
         Marks.bulkWrite = jest.fn().mockResolvedValue(null)
         Marks.find = jest.fn().mockResolvedValue(mockSavedData)
 
         await marksController.saveMarks(req, res, jest.fn())
-        expect(res.json({ status: 'success' }).status(200))
+        expect(res.status).toHaveBeenCalledWith(200);
+        expect(res.json).toHaveBeenCalledWith({ message: "Saved Successfully." });
     });
 
     it("should not able to save marks data when request body is invalid ", async () => {
@@ -78,7 +93,7 @@ describe('save marks data ', () => {
         await marksController.saveMarks(req, res, jest.fn())
 
         expect(res.status).toHaveBeenCalledWith(400);
-        expect(res.json({ status: 'fail' }));
+        expect(res.json).toHaveBeenCalledWith({ error: "Invalid Request" });
 
 
     });
@@ -103,7 +118,8 @@ describe('save marks data ', () => {
         });
 
         await marksController.saveMarks(req, res, jest.fn())
-        expect(res.json({ status: 'fail' }));
+        expect(res.status).toHaveBeenCalledWith(500);
+        expect(res.json).toHaveBeenCalledWith({ error: "State/District/School is locked for scanning" });
 
 
     });

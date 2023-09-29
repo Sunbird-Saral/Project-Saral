@@ -5,7 +5,7 @@ pipeline {
     stages{
         stage ('checkout') {
             steps {
-               git branch: 'feature/saveMarks-v1', url: 'https://github.com/Sunbird-Saral/Project-Saral.git' 
+               git branch: 'main', url: 'https://github.com/Sunbird-Saral/Project-Saral.git' 
             }
         }
         
@@ -33,6 +33,17 @@ pipeline {
                 sh 'export KUBECONFIG=/var/lib/jenkins/.kube/config'
                 sh 'chmod +x ./deploy_EKS.sh'
                 sh './deploy_EKS.sh'
+            }
+        }
+        stage('SonarQube analysis') {
+            steps{
+            withSonarQubeEnv('saralsonar9.0.1') {
+            sh '''
+            cd v1.0/backend/
+            npm install 
+            npm run sonar
+            '''
+            }    
             }
         }
     }
