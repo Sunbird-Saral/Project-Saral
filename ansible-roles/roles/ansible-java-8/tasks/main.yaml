@@ -1,0 +1,74 @@
+---
+
+- name: Check if Java has already been downloaded and unpacked
+  stat:
+    path: '{{ java_jdk_dir }}'
+  register: dir
+
+- name: Download Java JDK
+  get_url:
+    url: "{{ java_download_url }}"
+    headers: "Cookie: oraclelicense=accept-securebackup-cookie"
+    dest: /tmp/
+#  when: not dir.stat.exists
+  tags:
+    - java_install
+
+- name: Create Java directory
+  file:
+    name: "{{ java_root_dir }}"
+    state: directory
+  when: not dir.stat.exists
+  tags:
+    - java_install
+
+- name: Install tar
+  yum: pkg=tar
+- name: Install wget
+  yum: pkg=wget
+
+- name: Install unzip
+  yum: pkg=unzip
+- file:
+    path: "/tmp/{{ java_archive_name }}"
+
+# Untar the downloaded Java archive. The owner and group must be set otherwise the folder
+# structure is created using numerical values for these.
+- name: Unpack Java JDK
+  unarchive:
+    src: /tmp/{{ java_archive_name }}
+    dest: "{{ java_root_dir }}"
+    copy: no
+    owner: root
+    group: root
+  when: not dir.stat.exists
+  tags:
+    - java_install
+
+# Use the alternatives command to install the appropriate links to the executables in the PATH.
+# Alternatives allows multiple versions of Java to be installed with the correct executable
+# on the PATH being used.
+- name: Install Java alternatives
+  alternatives:
+    name: java
+    link: /usr/bin/java
+    path: '{{ java_jdk_dir }}/bin/java'
+  tags:
+    - java_install_alternatives
+
+# Cleanup install by deleting downloaded Java archive
+- name: Delete Java JDK tar.gz file
+  file:
+    path: /tmp/{{ java_archive_name }}
+    state: absent
+  tags:
+    - java_cleanup
+
+# Set Ansible fact that Java has completed installation. This is so that this role can be used in
+# other dependent roles. Those roles can check for this fact to determine whether or not this role
+# should be run. Failing to do so will mean that this role is executed even if it has already been run.
+- name: Set fact java_8_installed
+  set_fact:
+    java_8_installed: true
+  tags:
+    - java_install

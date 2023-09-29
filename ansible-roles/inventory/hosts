@@ -1,0 +1,19 @@
+
+[jenkins_hosts]
+localhost
+
+[mongo_configs]
+#172.17.0.8 new_hostname=mongo-shard-configs-1 mongoc_private_ip=172.17.0.8
+#172.17.0.9 new_hostname=mongo-shard-configs-2 mongoc_private_ip=172.17.0.9
+[mongo_mongos]
+#172.17.0.10 new_hostname=mongo-shard-mongos-1 mongo_private_ip=172.17.0.10
+#172.17.0.11 new_hostname=mongo-shard-mongos-2 mongo_private_ip=172.17.0.11
+[mongo_shard]
+#this has to setup for 3 times, each time only two servers should active.
+#172.17.0.12 mongod_port=27017 new_hostname=mongo-shard-data-1 mongo_private_ip=172.17.0.12
+#172.17.0.13 mongod_port=27017 new_hostname=mongo-shard-data-2 mongo_private_ip=172.17.0.13
+#172.17.0.14 mongod_port=27017 new_hostname=mongo-shard-data-3 mongo_private_ip=172.17.0.14
+#172.17.0.15 mongod_port=27017 new_hostname=mongo-shard-data-4 mongo_private_ip=172.17.0.15
+#172.17.0.16 mongod_port=27017 new_hostname=mongo-shard-data-5 mongo_private_ip=172.17.0.16
+#172.17.0.17 mongod_port=27017 new_hostname=mongo-shard-data-6 mongo_private_ip=172.17.0.17
+

@@ -1,0 +1,9 @@
+---
+- hosts: mongo_configs
+  become: yes
+  roles:
+    - role: ./roles/bennojoy.mongo_mongoc
+      mongoc_datadir_prefix: "/var/lib/mongodb"
+      mongoc_port: 27017
+      mongoc_admin_pass: myadminpass
+      mongoc_replicaset: ulcaconfigs

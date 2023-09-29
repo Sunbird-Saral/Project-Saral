@@ -1,0 +1,11 @@
+---
+- hosts: mongo_mongos
+  become: yes
+  roles:
+    - role: ./roles/bennojoy.mongo_mongos
+      mongo_datadir_prefix: "/var/lib/mongodb"
+      mongo_port: 27017
+      mongoc_private_ip1: 172.17.0.8
+      mongoc_private_ip2: 172.17.0.9
+      mongoc_admin_pass: <testpass>
+      mongoc_replicaset: ulcaconfigs

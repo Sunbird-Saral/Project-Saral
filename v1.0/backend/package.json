@@ -9,7 +9,8 @@
     "uat": "env-cmd ./config/uat.env nodemon src/index.js -e js,pug",
     "prod": "env-cmd ./config/prod.env node src/index.js -e js,pug",
     "test": "jest --collectCoverage=true",
-    "coverage": "jest --coverage"
+    "coverage": "jest --coverage",
+    "sonar": "sonar-scanner -Dsonar.host.url=http://13.234.151.67:9005 -Dsonar.login=731c70026717e72d9e925fbea049d5ff33165cc5"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -54,6 +55,7 @@
   "devDependencies": {
     "env-cmd": "^8.0.2",
     "jest": "^29.3.1",
-    "nodemon": "^2.0.6"
+    "nodemon": "^2.0.6",
+    "sonarqube-scanner": "^3.0.1"
   }
 }
