@@ -4,8 +4,10 @@ from PIL import Image
 import os
 
 class Xml_masking:
-    def __init__(self, path_to_directory):
+    def __init__(self, path_to_directory, path_to_table_mask, path_to_column_mask):
         self.path_to_directory = path_to_directory
+        self.path_to_table_mask = path_to_table_mask
+        self.path_to_column_mask = path_to_column_mask
 
     def euc_dist(self,point1, point2):
         dist = np.linalg.norm(point1 - point2)
@@ -94,12 +96,13 @@ class Xml_masking:
                 prev_ymax = int(bndbox.find('ymax').text)
                 prev_dist = dist
 
-                self.save_image("table_mask.jpeg", table_mask_empty)
-                self.save_image("column_mask.jpeg", col_mask_empty)
+                self.save_image(xml_doc +"table.jpeg", table_mask_empty)
+                self.save_image(xml_doc + "column.jpeg", col_mask_empty)
     
 
 def main():
-        reading_xml = Xml_masking(path_to_directory='./trial_dataset/xmls')
+        reading_xml = Xml_masking(path_to_directory='./trial_dataset/xmls', path_to_table_mask='./trail_dataset/table_mask',
+                                  path_to_column_mask='./trail_dataset/column_mask')
         for xml_doc in os.listdir(reading_xml.path_to_directory):
             reading_xml.read_xml_and_masking(xml_doc)
 
@@ -108,5 +111,6 @@ if __name__ =='__main__':
     
     
     
-    
+# self.path_to_table_mask +"/"+ 
+# self.path_to_column_mask +"/" + 
 
