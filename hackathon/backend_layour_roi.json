@@ -1,0 +1,164 @@
+[
+    {
+        "cellId": "1",
+        "rois": [
+            {
+                "annotationTags": "INVOICENO_FTE",
+                "extractionMethod": "FTE",
+                "roiId": "1",
+                "index": 0,
+                "rect": {
+                    "top": 4,
+                    "left": 157,
+                    "bottom": 15,
+                    "right": 234
+                }
+            }
+        ],
+        "render": {
+            "index": 1
+        },
+        "format": {
+            "name": "INVOICENO_FTE",
+            "value": "INVOICENO_FTE"
+        },
+        "validate": {
+            "regExp": ""
+        }
+    },
+    {
+        "cellId": "2",
+        "rois": [
+            {
+                "annotationTags": "DATEOFISSUE_FTE",
+                "extractionMethod": "FTE",
+                "roiId": "2",
+                "index": 1,
+                "rect": {
+                    "top": 15,
+                    "left": 322,
+                    "bottom": 29,
+                    "right": 442
+                }
+            }
+        ],
+        "render": {
+            "index": 2
+        },
+        "format": {
+            "name": "DATEOFISSUE_FTE",
+            "value": "DATEOFISSUE_FTE"
+        },
+        "validate": {
+            "regExp": ""
+        }
+    },
+    {
+        "cellId": "3",
+        "rois": [
+            {
+                "annotationTags": "SELLERINFO_FTE",
+                "extractionMethod": "FTE",
+                "roiId": "3",
+                "index": 2,
+                "rect": {
+                    "top": 89,
+                    "left": 60,
+                    "bottom": 143,
+                    "right": 273
+                }
+            }
+        ],
+        "render": {
+            "index": 3
+        },
+        "format": {
+            "name": "SELLERINFO_FTE",
+            "value": "SELLERINFO_FTE"
+        },
+        "validate": {
+            "regExp": ""
+        }
+    },
+    {
+        "cellId": "4",
+        "rois": [
+            {
+                "annotationTags": "CLIENTINFO_FTE",
+                "extractionMethod": "FTE",
+                "roiId": "4",
+                "index": 3,
+                "rect": {
+                    "top": 89,
+                    "left": 336,
+                    "bottom": 140,
+                    "right": 498
+                }
+            }
+        ],
+        "render": {
+            "index": 4
+        },
+        "format": {
+            "name": "CLIENTINFO_FTE",
+            "value": "CLIENTINFO_FTE"
+        },
+        "validate": {
+            "regExp": ""
+        }
+    },
+    {
+        "cellId": "5",
+        "rois": [
+            {
+                "annotationTags": "ITEMSTABLE_FTE",
+                "extractionMethod": "FTE",
+                "roiId": "5",
+                "index": 4,
+                "rect": {
+                    "top": 157,
+                    "left": 63,
+                    "bottom": 353,
+                    "right": 617
+                }
+            }
+        ],
+        "render": {
+            "index": 5
+        },
+        "format": {
+            "name": "ITEMSTABLE_FTE",
+            "value": "ITEMSTABLE_FTE"
+        },
+        "validate": {
+            "regExp": ""
+        }
+    },
+    {
+        "cellId": "6",
+        "rois": [
+            {
+                "annotationTags": "SUMMARYINFO_FTE",
+                "extractionMethod": "FTE",
+                "roiId": "6",
+                "index": 5,
+                "rect": {
+                    "top": 375,
+                    "left": 57,
+                    "bottom": 420,
+                    "right": 620
+                }
+            }
+        ],
+        "render": {
+            "index": 6
+        },
+        "format": {
+            "name": "SUMMARYINFO_FTE",
+            "value": "SUMMARYINFO_FTE"
+        },
+        "validate": {
+            "regExp": ""
+        }
+    }
+]
