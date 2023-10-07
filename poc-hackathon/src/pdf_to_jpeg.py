@@ -11,5 +11,11 @@ class Convert_image:
             for count, page in enumerate(image):
                 page.save(pdf +'_'+str(count)+'.jpeg', 'JPEG')
 
-c = Convert_image(path_to_read='./trial_dataset/pdfs/', path_to_write='./trail_dataset/jpegs/')
-c.convert_to_jpeg()
+def main():
+    convert = Convert_image(path_to_read='./trial_dataset/pdfs/', path_to_write='./trail_dataset/jpegs/')
+    convert.convert_to_jpeg()
+
+if __name__ =='__main__':
+    main()
+
+

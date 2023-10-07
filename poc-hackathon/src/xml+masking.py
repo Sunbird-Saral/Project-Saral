@@ -1,21 +1,22 @@
 import xml.etree.ElementTree as ET
 import numpy as np
 from PIL import Image
+import os
 
 class Xml_masking:
     def __init__(self, path_to_directory):
         self.path_to_directory = path_to_directory
 
-    def euc_dist(point1, point2):
+    def euc_dist(self,point1, point2):
         dist = np.linalg.norm(point1 - point2)
         return dist
 
-    def save_image(name, image_arr):
+    def save_image(self, name, image_arr):
         im = Image.fromarray(image_arr)
         im.save(name)
 
     def read_xml_and_masking(self, xml_doc):
-        tree = ET.parse(xml_doc)
+        tree = ET.parse(self.path_to_directory +'/'+ xml_doc)
         root = tree.getroot()
         size = root.find('size')
         width = int(size.find('width').text)
@@ -65,7 +66,7 @@ class Xml_masking:
                     backward_flag = True
                     forward_flag = False
                 if forward_flag:
-                    dist = Xml_masking.euc_dist(np.array([xmin, ymin]), np.array([prev_xmax, prev_ymin]))
+                    dist = self.euc_dist(np.array([xmin, ymin]), np.array([prev_xmax, prev_ymin]))
                     if prev_dist == 0:
                         prev_dist = dist
                     else:
@@ -78,7 +79,7 @@ class Xml_masking:
                             table_mask_empty[table_ymin:ymax, table_xmin:xmax] = 255
                             prev_dist = 0
                 if backward_flag:
-                    dist = Xml_masking.euc_dist(np.array([xmax, ymin]), np.array([prev_xmin, prev_ymin]))
+                    dist = self.euc_dist(np.array([xmax, ymin]), np.array([prev_xmin, prev_ymin]))
                     if prev_dist == 0:
                         prev_dist = dist
                     else:
@@ -93,5 +94,19 @@ class Xml_masking:
                 prev_ymax = int(bndbox.find('ymax').text)
                 prev_dist = dist
 
-                Xml_masking.save_image("table_mask.jpeg", table_mask_empty)
-                Xml_masking.save_image("column_mask.jpeg", col_mask_empty)
+                self.save_image("table_mask.jpeg", table_mask_empty)
+                self.save_image("column_mask.jpeg", col_mask_empty)
+    
+
+def main():
+        reading_xml = Xml_masking(path_to_directory='./trial_dataset/xmls')
+        for xml_doc in os.listdir(reading_xml.path_to_directory):
+            reading_xml.read_xml_and_masking(xml_doc)
+
+if __name__ =='__main__':
+    main()
+    
+    
+    
+    
+
