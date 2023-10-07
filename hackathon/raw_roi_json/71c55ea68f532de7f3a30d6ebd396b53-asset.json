@@ -47,7 +47,7 @@
             "id": "j1j-4z2RP",
             "type": "RECTANGLE",
             "tags": [
-                "DOB_ISSUE"
+                "DATE_OF_ISSUE"
             ],
             "boundingBox": {
                 "height": 14.184401491855066,
