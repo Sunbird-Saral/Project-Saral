@@ -4,6 +4,7 @@
 import 'react-native-gesture-handler';
 import { AppRegistry } from 'react-native';
 import App from './App';
+import Camera from './Camera'
 import {name as appName} from './app.json';
 import {decode, encode} from 'base-64'
 import PushNotification from "react-native-push-notification";
@@ -41,7 +42,7 @@ PushNotification.configure({
     requestPermissions: true,
 });
 
-AppRegistry.registerComponent(appName, () => App);
+AppRegistry.registerComponent(appName, () => Camera);
 
 if (!global.btoa) {
     global.btoa = encode;
