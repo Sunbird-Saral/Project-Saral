@@ -44,8 +44,8 @@ public class HWBlockLettersClassifier {
      */
     private static final String HOSTED_MODEL_NAME = null;
     // private static final String LOCAL_MODEL_ASSET = "model_letter_digits_finetune_18_07_22_epoch_15.tflite";
-    private static final String LOCAL_MODEL_ASSET = "saral_hwdaln_model.tflite";
-    private static final String FB_REMOTE_MODEL   = "saral_hwdaln_model";
+    private static final String LOCAL_MODEL_ASSET = "saral_freetext_model.tflite";
+    private static final String FB_REMOTE_MODEL   = "saral_freetext_model.tflite";
     /**
      * Dimensions of inputs.
      */
