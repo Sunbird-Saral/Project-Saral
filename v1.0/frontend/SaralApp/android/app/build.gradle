@@ -227,7 +227,7 @@ dependencies {
     implementation project(':react-native-push-notification')
 
     // SaralSDK use OpenCV and SaralSDK code, make them as dependencies here
-    implementation project(path: ':saralsdk')
+    //implementation project(path: ':saralsdk')
     // new code for google firebase analytics
 
     implementation platform('com.google.firebase:firebase-bom:26.8.0')
