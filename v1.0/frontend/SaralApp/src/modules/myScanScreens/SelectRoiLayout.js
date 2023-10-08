@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, ScrollView, Text, BackHandler, Alert,Platform,PermissionsAndroid} from 'react-native';
+import {View, ScrollView, Text, BackHandler, Alert,Platform,PermissionsAndroid,FlatList} from 'react-native';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import _ from 'lodash';
@@ -49,51 +49,6 @@ import constants from '../../flux/actions/constants';
 import {storeFactory} from '../../flux/store/store';
 import DeviceInfo from 'react-native-device-info';
 import {SchoolDetailSubmit} from '../../utils/Analytics';
-
-//redux
-
-const clearState = {
-  defaultSelected: Strings.select_text,
-  classesArr: [],
-  optionList: [],
-  classListIndex: -1,
-  selectedClass: '',
-  sectionList: [],
-  sectionListIndex: -1,
-  setIndex: 0,
-  selectedSection: '',
-  pickerDate: new Date(),
-  selectedDate: '',
-  subArr: [],
-  examTestID: [],
-  selectSet: '',
-  setArr: [],
-  subIndex: -1,
-  selectedSubject: '',
-  errClass: '',
-  errSub: '',
-  errSet: '',
-  errDate: '',
-  errSection: '',
-  selectedClassId: '',
-  calledStudentsData: false,
-  sectionValid: false,
-  username: '',
-  password: '',
-  dataPayload: null,
-  calledLogin: false,
-  callApi: '',
-  dateVisible: false,
-  examDate: [],
-  calledAbsentStatus: false,
-  calledScanStaus: false,
-  absentStatusPayload: null,
-  subjectsData: [],
-  isCalledStudentAndExam: false,
-  set: [],
-  ExamSetArray: [],
-  disabled: false,
-};
 
 class SelectRoiLayout extends Component {
   constructor(props) {
@@ -145,9 +100,8 @@ class SelectRoiLayout extends Component {
       set: [],
       ExamSetArray: [],
       disabled: false,
-    };
-    this.onPress = this.onPress.bind(this);
-    this.onBack = this.onBack.bind(this);
+      predictionJson: {}
+    }
   }
 
   onPress() {
@@ -155,7 +109,9 @@ class SelectRoiLayout extends Component {
   }
 
   processDataOptions(data) {
-    console.log('data here>>>>>>>>>', data.data)
+    this.setState({
+      optionList: []
+    })
     data.data.sort((a, b) => {
         return a.layout_name - b.layout_name;
       });
@@ -170,7 +126,6 @@ class SelectRoiLayout extends Component {
   }
 
   getOptions = async (api) => {
-    console.log('started api>>>>>>>>>>')
     var obj = this;
     if (api.method === 'GET') {
       let apiResponse = null;
@@ -186,7 +141,6 @@ class SelectRoiLayout extends Component {
           cancelToken: source.token,
         })
         .then(function (res) {
-          console.log('got api res>>>>>>>>>>>>>>>>', res)
           apiResponse = res;
           clearTimeout(id);
           api.processResponse(res);
@@ -199,7 +153,6 @@ class SelectRoiLayout extends Component {
   };
 
   getRoi = async (api) => {
-    console.log('started api>>>>>>>>>>')
     var obj = this;
     if (api.method === 'GET') {
       let apiResponse = null;
@@ -215,7 +168,6 @@ class SelectRoiLayout extends Component {
           cancelToken: source.token,
         })
         .then(function (res) {
-          console.log('got api res>>>>>>>>>>>>>>>>', res)
           apiResponse = res;
           clearTimeout(id);
           api.processResponse(res);
@@ -230,34 +182,11 @@ class SelectRoiLayout extends Component {
   componentDidMount() {
     const {navigation, scanTypeData} = this.props;
     navigation.addListener('willFocus', async payload => {
-    console.log('insdie did mount>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', apiObj)
     let loginDetails = await getLoginData();
-    console.log('got login details>>>>>>>>>>', loginDetails)
         let apiObj = new GetOptions({}, loginDetails.token);
-        console.log('apiObj>>>>>>>', apiObj)
-        //this.props.APITransport(apiObj);
         this.getOptions(apiObj);
-        //this.setState({calledOptions: true})
-        
-        // classesArr.sort((a, b) => {
-        //   return a.classId - b.classId;
-        // });
-        // let sortclassdata = [];
-        // classesArr.forEach(e => {
-        //   sortclassdata.push(`${e.className}`);
-        // });
-        // this.setState({
-        //   classList: sortclassdata,
-        //   classesArr: classesArr,
-        //   loginDetails: loginDetails,
-        // });
     })
       }
-
-  onBack = () => {
-    BackHandler.exitApp();
-    return true;
-  };
 
   loader = flag => {
     this.setState({
@@ -271,94 +200,6 @@ class SelectRoiLayout extends Component {
     console.log('apiObj>>>>>>>', apiObj)
     //this.props.APITransport(apiObj);
     this.getRoi(apiObj);
-  };
-
-  callStudentsData = async token => {
-    const {dataPayload, selectedClass, selectedSection} = this.state;
-    const deviceUniqId = await DeviceInfo.getUniqueId();
-    let hasNetwork = await checkNetworkConnectivity();
-
-    let hasCacheData = await getRegularStudentExamApi();
-
-    let cacheFilterData =
-      hasCacheData != null
-        ? hasCacheData.filter(element => {
-            if (
-              element.key == this.props.loginData.data.school.schoolId &&
-              element.class == selectedClass &&
-              element.section == selectedSection
-            ) {
-              return true;
-            }
-          })
-        : [];
-
-    if (hasCacheData && cacheFilterData.length > 0) {
-      this.setState({isLoading: false, calledStudentsData: true});
-      storeFactory.dispatch(
-        this.dispatchStudentExamData(cacheFilterData[0].data2),
-      );
-      this.setState({isLoading: false});
-    } else if (hasNetwork) {
-      this.setState(
-        {
-          calledStudentsData: true,
-        },
-        () => {
-          let apiObj = new GetStudentsAndExamData(
-            dataPayload,
-            token,
-            deviceUniqId,
-          );
-          this.props.APITransport(apiObj);
-        },
-      );
-    } else {
-      this.setState({isLoading: false});
-      this.callCustomModal(
-        Strings.message_text,
-        Strings.you_dont_have_cache,
-        false,
-      );
-    }
-  };
-
-  dispatchStudentExamData(payload) {
-    return {
-      type: constants.GET_STUDENTS_EXAMS_LIST,
-      payload,
-    };
-  }
-
-  validateAbsentStatusApi = () => {
-    const {selectedClassId, selectedSection, loginDetails} = this.state;
-    let schoolId = loginDetails.school.schoolId;
-    let payload = {
-      schoolId: schoolId,
-      classId: selectedClassId,
-      section: selectedSection == 'All' ? 0 : selectedSection,
-    };
-
-    this.setState(
-      {
-        absentStatusPayload: payload,
-      },
-      () => {
-        this.callAbsentStatus(payload, loginDetails.jwtToken);
-      },
-    );
-  };
-
-  callCustomModal = (title, message, isAvailable, okFunction, cancel) => {
-    let data = {
-      title: title,
-      message: message,
-      isOkAvailable: isAvailable,
-      okFunc: okFunction,
-      isCancel: cancel,
-    };
-    this.props.dispatchCustomModalStatus(true);
-    this.props.dispatchCustomModalMessage(data);
   };
 
   loginAgain = async () => {
@@ -458,98 +299,11 @@ class SelectRoiLayout extends Component {
     );
   };
 
-  setLoginDataLocally = data => {
-    this.setState({
-      loginData: data,
-    });
-  };
-
-  async componentDidUpdate(prevProps) {
-    if (prevProps != this.props) {
-      const {
-        apiStatus,
-        studentsAndExamData,
-        absentStudentDataResponse,
-        getScanStatusData,
-        loginData,
-        optionsData
-      } = this.props;
-      const {
-        calledStudentsData,
-        calledOptions,
-        calledAbsentStatus,
-        selectedClass,
-        selectedSection,
-        selectSet,
-        selectedClassId,
-        calledScanStaus,
-        calledLogin,
-        callApi,
-        absentStatusPayload,
-        isCalledStudentAndExam,
-        subIndex,
-      } = this.state;
-      if(calledOptions) {
-          console.log('inside called..................', optionsData)
-      }
-    }
-  }
-
-  validateFields = () => {
-    const {
-      classListIndex,
-      subIndex,
-      sectionListIndex,
-      sectionValid,
-      setIndex,
-      ExamSetArray,
-    } = this.state;
-    if (classListIndex == -1) {
-      this.setState({
-        errClass: Strings.please_select_class,
-        errSection: '',
-        errSub: '',
-        errDate: '',
-        isLoading: false,
-      });
-      return false;
-    } else if (sectionListIndex == -1) {
-      this.setState({
-        errClass: '',
-        errSection: Strings.please_select_section,
-        errSub: '',
-        errDate: '',
-      });
-      return false;
-    } else if (!sectionValid) {
-      this.setState({
-        errClass: '',
-        errSection: Strings.please_select_valid_section,
-        errSub: '',
-        errDate: '',
-      });
-      return false;
-    } else if (subIndex == -1) {
-      this.setState({
-        errClass: '',
-        errSection: '',
-        errSub: Strings.please_select_sub,
-        errDate: '',
-      });
-      return false;
-    } else if (setIndex == -1 && ExamSetArray[subIndex] != '') {
-      this.setState({
-        errClass: '',
-        errSection: '',
-        errSub: '',
-        errDate: '',
-        errSet: Strings.please_select_valid_section,
-      });
-      return false;
-    }
-
-    return true;
-  };
+  renderItem = ({ item }) => (
+    <View>
+      <Text>{item.name}</Text>
+    </View>
+  );
 
   onSubmitClick = async (roi) => {
     
@@ -620,7 +374,8 @@ class SelectRoiLayout extends Component {
         )
           .then(res => {
             let roisData = JSON.parse(res);
-            console.log('roiData after process>>>>>>>>>>', JSON.stringify(roisData,null,4))
+            let cells = roisData.layout.cells;
+            this.consolidatePrediction(cells, roisData);
           })
           .catch((code, message) => {
             console.log('code', code, message);
@@ -629,6 +384,29 @@ class SelectRoiLayout extends Component {
       }
     } catch (err) {}
   };
+
+
+  consolidatePrediction(cells, roisData) {
+    var pridictedJsontemp = {};
+    var predictionConfidenceArray = [];
+    for (let i = 0; i < cells.length; i++) {
+      let marks = '';
+      predictionConfidenceArray = [];
+      for (let j = 0; j < cells[i].rois.length; j++) {
+        if (cells[i].rois[j].hasOwnProperty('result')) {
+          marks = marks + cells[i].rois[j].result.prediction;
+          predictionConfidenceArray.push(cells[i].rois[j].result.confidence);
+          // roisData.layout.cells[i].predictionConfidence = cells[i].rois[j].result.confidence
+        }
+      }
+      pridictedJsontemp[roisData.layout.cells[i].format.name] = marks;
+    }
+
+    this.setState({
+      predictionJson: pridictedJsontemp
+    })
+    
+  }
 
   async callExamAndStudentData(token) {
     const deviceUniqId = await DeviceInfo.getUniqueId();
@@ -677,45 +455,6 @@ class SelectRoiLayout extends Component {
     }
   }
 
-  callROIData = (dataPayload, token) => {
-    let apiObj = new ROIAction(dataPayload, token);
-    this.props.APITransport(apiObj);
-    this.setState({
-      isLoading: false,
-    });
-
-    // this.props.navigation.push('StudentsList')
-  };
-
-  setDate = date => {
-    var dateData = new Date(date);
-    this.setState({
-      minimumDate: dateData,
-    });
-    let monthData = dateData.getMonth() + 1;
-    let currentDate =
-      dateData.getDate().toString().length < 2
-        ? '0' + dateData.getDate()
-        : dateData.getDate();
-    let month = String(monthData).length < 2 ? '0' + monthData : monthData;
-    let year = dateData.getFullYear();
-
-    this.setState({
-      selectedDate: year + '-' + month + '-' + currentDate,
-      pickerDate: date,
-      dateVisible: false,
-    });
-  };
-
-  onDateChange = (event, date) => {
-    if (event.type == 'set') {
-      const currentDate = date || this.state.pickerDate;
-      this.setDate(currentDate);
-    } else {
-      this.setState({dateVisible: false});
-    }
-  };
-
   render() {
     const {
       isLoading,
@@ -740,6 +479,7 @@ class SelectRoiLayout extends Component {
       sectionValid,
       dateVisible,
       disabled,
+      predictionJson
     } = this.state;
     const {loginData, multiBrandingData, modalStatus, modalMessage} =
       this.props;
@@ -760,56 +500,60 @@ class SelectRoiLayout extends Component {
           showsVerticalScrollIndicator={false}
           bounces={false}
           keyboardShouldPersistTaps={'handled'}>
-          <View style={styles.container1}>
-            <Text style={styles.header1TextStyle}>
-              {Strings.please_select_below_details}
-            </Text>
-            <View
-              style={{
-                backgroundColor: 'white',
-                paddingHorizontal: '5%',
-                minWidth: '100%',
-                paddingVertical: '10%',
-                borderRadius: 4,
-              }}>
+          <View>
+            { Object.entries(predictionJson).length == 0 ? (
+            <View style={styles.container1}>
+              <Text style={styles.header1TextStyle}>
+                {Strings.please_select_below_details}
+              </Text>
               <View
-                style={[
-                  styles.fieldContainerStyle,
-                  {paddingBottom: classListIndex != -1 ? 0 : '10%'},
-                ]}>
-                <View style={{flexDirection: 'row'}}>
-                  <Text style={[styles.labelTextStyle]}>
-                    {'Select Layout'}
-                  </Text>
+                style={{
+                  backgroundColor: 'white',
+                  paddingHorizontal: '5%',
+                  minWidth: '100%',
+                  paddingVertical: '10%',
+                  borderRadius: 4,
+                }}>
+                <View
+                  style={[
+                    styles.fieldContainerStyle,
+                    {paddingBottom: classListIndex != -1 ? 0 : '10%'},
+                  ]}>
+                  <View style={{flexDirection: 'row'}}>
+                    <Text style={[styles.labelTextStyle]}>
+                      {'Select Layout'}
+                    </Text>
+                  </View>
+                  <DropDownMenu
+                    options={optionList}
+                    onSelect={(idx, value) =>
+                      this.onDropDownSelect(idx, value, 'option')
+                    }
+                    defaultData={defaultSelected}
+                    defaultIndex={classListIndex}
+                    selectedData={selectedClass}
+                    icon={require('../../assets/images/arrow_down.png')}
+                  />
                 </View>
-                <DropDownMenu
-                  options={optionList}
-                  onSelect={(idx, value) =>
-                    this.onDropDownSelect(idx, value, 'option')
-                  }
-                  defaultData={defaultSelected}
-                  defaultIndex={classListIndex}
-                  selectedData={selectedClass}
-                  icon={require('../../assets/images/arrow_down.png')}
-                />
               </View>
-            </View>
+            </View> ) : (
+            <View>
+              {Object.entries(predictionJson).map(([key, value]) => (
+              <View key={key}>
+                <Text style={{ backgroundColor: AppTheme.GREY_WHITE, borderRadius: 10,
+    padding: 20,
+    margin: 10,
+    shadowColor: 'black',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    elevation: 5}}>{key}: {value}</Text>
+              </View>
+              ))}
+            </View>)
+            }
           </View>
         </ScrollView>
-        <View style={styles.btnContainer}>
-          <ButtonComponent
-            customBtnStyle={[
-              styles.nxtBtnStyle,
-              {
-                backgroundColor: this.props.multiBrandingData.themeColor1
-                  ? this.props.multiBrandingData.themeColor1
-                  : AppTheme.BLUE,
-              },
-            ]}
-            btnText={Strings.submit_text.toUpperCase()}
-            onPress={this.onSubmitClick}
-          />
-        </View>
+        
       </View>
     );
   }
