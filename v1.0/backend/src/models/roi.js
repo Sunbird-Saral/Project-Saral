@@ -32,12 +32,12 @@ const ROISchema = new mongoose.Schema({
     // },
     classId:{
         type: String,
-        required: true,
+        required: false,
         trim: true
     },
     subject:{
         type: String,
-        required: true,
+        required: false,
         trim: true
     },
     set:{
@@ -46,12 +46,16 @@ const ROISchema = new mongoose.Schema({
     },
     state:{
         type: String,
-        required: true,
+        required: false,
         trim: true
     },
     type:{
         type: String
         // enum: ["SAT","PAT"]
+    },
+    layout_name: {
+        type: String,
+        trim: true
     }
 },{
     timestamps: true

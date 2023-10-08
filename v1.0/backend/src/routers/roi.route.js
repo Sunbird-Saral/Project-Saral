@@ -7,16 +7,55 @@ const schoolsSchema = require('../models/school')
 const Helper = require('../middleware/helper')
 const roiController = require("../controller/roiController")
 const clientPool = require('../db/mongoose');
+const optionsSchema = require('../models/options')
 
 router.get('/roi/:examId?', auth, roiController.getRoiData)
+
+
+router.get('/roi/generic/:layout_name', auth, async (req, res, next) => {
+    try {
+        let connection = req.dbConnection;
+        const roiLookup = {
+            layout_name: req.params.layout_name
+        }
+        const Rois = connection.model('Rois', roisSchema)
+        let roi = await Rois.find(roiLookup, { roiId: 1, roi: 1 }).lean()
+        if (roi.length) {
+            res.status(200).json({
+                layout: roi[0].roi.layout,
+                roiId: roi[0].roiId
+            });
+        }
+    } catch (e) {
+        res.status(400).send(e)
+    } finally {
+        next()
+    }
+})
 
 
 router.post('/roi', auth, async (req, res, next) => {
     try {
         let connection = req.dbConnection;
         const Schools = connection.model('Schools', schoolsSchema)
+        const Options = connection.model('Options', optionsSchema)
         const Exams = connection.model('Exams', examsSchema)
         const Rois = connection.model('Rois', roisSchema)
+        if(req.body.layout_name) {
+            console.log('inside>>>', req.body)
+            req.body.roiId = await Helper.getValueForNextSequence(connection, "roiId")
+            console.log('roi body', req.body);
+            let roi = await Rois.create(req.body)
+            await Options.create({roi_id: roi.roiId, layout_name: req.body.layout_name})
+            let roiResponse = {
+                roiId: roi.roiId,
+                classId: roi.classId || null,
+                subject: roi.subject || null,
+                state: roi.state?.toLowerCase() || null,
+                createdAt: roi.createdAt
+            }
+            return res.status(201).send(roiResponse)
+        }
 
         const inputKeys = Object.keys(req.body)
         const allowedUpdates = ['subject', 'classId', 'type', 'roi', 'set']
@@ -57,6 +96,7 @@ router.post('/roi', auth, async (req, res, next) => {
         }
 
     } catch (e) {
+        console.log('error', e)
         res.status(400).send(e)
     } finally {
         next()
