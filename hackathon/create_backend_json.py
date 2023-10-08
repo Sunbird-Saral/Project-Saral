@@ -125,7 +125,7 @@ def main():
     tagroup_dict={}
     separator = '_'
     backend_roi = Generate_backend_roi()
-    regions = backend_roi.get_annotation('/home/venkateshiyer/Project-Saral/hackathon/raw_roi_json/71c55ea68f532de7f3a30d6ebd396b53-asset.json')
+    regions = backend_roi.get_annotation('/home/venkateshiyer/Documents/output/c88120a65f1a995e33681775a1e84f1c-asset.json')
     for item in regions:
         tagroup = item['tags']
         tagroup_item = tagroup[0]
