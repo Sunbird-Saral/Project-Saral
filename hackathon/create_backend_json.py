@@ -1,6 +1,7 @@
 import uuid
 import json
-import http.client
+# import http.client
+import requests
 
 class Generate_backend_roi:
     # def __init__(self, filename):
@@ -139,28 +140,29 @@ class Generate_backend_roi:
         return json_object
     
     def api_connection(self, json_object):
-        connection = http.client.HTTPSConnection("localhost")
-        payload = json.dumps({
-            "layout_name": "test_form",
-            "roi": json_object,
-            })
-        print(payload)
+        # connection = http.client.HTTPSConnection("localhost", 3000)
+        # print("connection",connection)
+        # payload = json.dumps({
+        #     "layout_name": "test_form",
+        #     "roi": json_object,
+        #     })
         headers = {
             'Content-Type': 'application/json',
             'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1MDAyIiwic2Nob29sSWQiOiJ1MDAyIiwiJGNvbW1lbnQiOiJUb2tlbiBnZW5lcmF0aW9uIiwiaWF0IjoxNjk2Njc4Nzk2fQ.CEcIlDM5v2ojqax4WRSe64P0EubgjklgQsFbgqs3jSQ',
             'methods': 'POST',
             'Origin': 'http://192.168.31.200:3000',
             'Content-Type': 'application/json'}
-        connection.request("POST", "/roi", payload, headers)
-        res = connection.getresponse()
-        data = res.read()
-        print(data.decode("utf-8"))
+        res = requests.post('http://localhost:3000/roi', json = {
+            "layout_name": "test_form",
+            "roi": json.loads(json_object),
+            }, headers = headers)
+        print(res)
 
 def main():
     tagroup_dict={}
     separator = '_'
     backend_roi = Generate_backend_roi()
-    regions = backend_roi.get_annotation('/home/venkateshiyer/Documents/output/c88120a65f1a995e33681775a1e84f1c-asset.json')
+    regions = backend_roi.get_annotation('./raw_roi_json/71c55ea68f532de7f3a30d6ebd396b53-asset.json')
     for item in regions:
         tagroup = item['tags']
         tagroup_item = tagroup[0]
