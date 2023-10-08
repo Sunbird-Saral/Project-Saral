@@ -60,6 +60,25 @@ class Generate_backend_roi:
                         }
 
                     })
+            elif val == 'DE':
+                if region['tags'][0]==(key):
+                # try:
+                #     # annotationTagsValue = formatAnnotationLookup[region['tags'][0]]
+                # except KeyError as ke:
+                #     annotationTagsValue =  region['tags'][0] 
+                    rois.append({
+                        "annotationTags": str(key),
+                        "extractionMethod": str('NUMERIC_CLASSIFICATION'),
+                        "roiId": str(roiIndex),
+                        "index": index,
+                        "rect": {
+                            "top": int(region['boundingBox']['top']),
+                            "left": int(region['boundingBox']['left']),
+                            "bottom": int(region['boundingBox']['top']) + int(region['boundingBox']['height']),
+                            "right": int(region['boundingBox']['left']) + int(region['boundingBox']['width'])
+                        }
+
+                    })
             index = index + 1
             roiIndex = roiIndex +1
         return rois
@@ -104,7 +123,7 @@ class Generate_backend_roi:
         layout_data.append({
             "layout": {
                 "version": "1.0",
-                "name": "Invoice_Form",
+                "name": "PersonalDetails_Form",
                 "Threshold":{
                     "minWidth": "",
                     "minHeight":"",
@@ -129,8 +148,8 @@ class Generate_backend_roi:
         if type(json_thing) is str:
             # print(json.dumps(json.loads(json_thing), sort_keys=sort, indent=indents))
             json_object = json.dumps(json.loads(json_thing), sort_keys=sort, indent=indents)
-            with open("backend_layout_roi.json", "w") as outfile:
-                outfile.write(json_object)
+            # with open("backend_layout_roi.json", "w") as outfile:
+                # outfile.write(json_object)
         else:
             # print(json.dumps(json_thing, sort_keys=sort, indent=indents))
             json_object = json.dumps(json_thing, sort_keys=sort, indent=indents)
@@ -162,7 +181,7 @@ def main():
     tagroup_dict={}
     separator = '_'
     backend_roi = Generate_backend_roi()
-    regions = backend_roi.get_annotation('./raw_roi_json/71c55ea68f532de7f3a30d6ebd396b53-asset.json')
+    regions = backend_roi.get_annotation('/home/venkateshiyer/Documents/layout_output/5429894d64d0215791fb62b4518d0555-asset.json')
     for item in regions:
         tagroup = item['tags']
         tagroup_item = tagroup[0]
@@ -173,6 +192,6 @@ def main():
     layout_json_object = backend_roi.pp_json(all_data, False)
     print('backend layout roi generated!')
     backend_roi.api_connection(layout_json_object)
-    
+
 if __name__=='__main__':
     main()
