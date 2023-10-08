@@ -1,5 +1,6 @@
 import uuid
 import json
+import http.client
 
 class Generate_backend_roi:
     # def __init__(self, filename):
@@ -103,8 +104,23 @@ class Generate_backend_roi:
             "layout": {
                 "version": "1.0",
                 "name": "Invoice_Form",
-                "cells": cells
-            }
+                "Threshold":{
+                    "minWidth": "",
+                    "minHeight":"",
+                    "detectionRadius":"",
+                    "experimentalOMRDetection":""
+                },
+                "resultvalidation":{
+                    "validate":{
+                        "regExp":"",
+                        "errorMsg":""
+                    }
+
+                },
+                
+            "cells": cells
+                
+        }
         })    
         return layout_data[0]
 
@@ -112,14 +128,33 @@ class Generate_backend_roi:
         if type(json_thing) is str:
             # print(json.dumps(json.loads(json_thing), sort_keys=sort, indent=indents))
             json_object = json.dumps(json.loads(json_thing), sort_keys=sort, indent=indents)
-            with open("backend_layour_roi.json", "w") as outfile:
+            with open("backend_layout_roi.json", "w") as outfile:
                 outfile.write(json_object)
         else:
             # print(json.dumps(json_thing, sort_keys=sort, indent=indents))
             json_object = json.dumps(json_thing, sort_keys=sort, indent=indents)
-            with open("backend_layour_roi.json", "w") as outfile:
+            with open("backend_layout_roi.json", "w") as outfile:
                 outfile.write(json_object)
-        return None
+        
+        return json_object
+    
+    def api_connection(self, json_object):
+        connection = http.client.HTTPSConnection("localhost")
+        payload = json.dumps({
+            "layout_name": "test_form",
+            "roi": json_object,
+            })
+        print(payload)
+        headers = {
+            'Content-Type': 'application/json',
+            'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1MDAyIiwic2Nob29sSWQiOiJ1MDAyIiwiJGNvbW1lbnQiOiJUb2tlbiBnZW5lcmF0aW9uIiwiaWF0IjoxNjk2Njc4Nzk2fQ.CEcIlDM5v2ojqax4WRSe64P0EubgjklgQsFbgqs3jSQ',
+            'methods': 'POST',
+            'Origin': 'http://192.168.31.200:3000',
+            'Content-Type': 'application/json'}
+        connection.request("POST", "/roi", payload, headers)
+        res = connection.getresponse()
+        data = res.read()
+        print(data.decode("utf-8"))
 
 def main():
     tagroup_dict={}
@@ -132,22 +167,10 @@ def main():
         if not tagroup_item in tagroup_dict:
             tagroup_dict[tagroup_item] = tagroup_item.split(separator,1)[1]
     cells = backend_roi.get_cells(regions, tagroup_dict)
-    layout_data = backend_roi.pp_json(cells, False)
+    all_data = backend_roi.get_layout(cells)
+    layout_json_object = backend_roi.pp_json(all_data, False)
     print('backend layout roi generated!')
-
+    backend_roi.api_connection(layout_json_object)
+    
 if __name__=='__main__':
     main()
-
- 
-
-# separator = '_'
-# new_list = {}
-# for items in regions:
-#     tagroup = items['tags']
-#     tagroup_item = tagroup[0]
-#     if not tagroup_item in new_list:
-#         new_list[tagroup_item] = tagroup_item.split(separator,1)[1]
-#         # new_list.append(tagroup.split(separator,1)[0])
-
-# print(new_list)
-# c.get_cells(regions, new_list)
