@@ -408,6 +408,14 @@ class HomeComponent extends Component {
                             <Image style={{ height: 80, width: 60, resizeMode: 'stretch' }} source={Assets.assessments} />}
                     </TouchableOpacity>
                     <Text style={{ textAlign: 'center', fontSize: 18, fontWeight: 'bold' }}>{BrandLabel && BrandLabel.useCase1 ? BrandLabel.useCase1 : 'Assessments'}</Text>
+
+                    <TouchableOpacity onPress={() => this.props.minimalFlag ? this.props.navigation.navigate("myScan") : this.props.navigation.navigate('selectRoi')}
+                        style={{ backgroundColor: this.props.multiBrandingData && this.props.multiBrandingData.themeColor1 ? this.props.multiBrandingData.themeColor1 : AppTheme.BLUE, height: 120, width: 120, borderRadius: 15, justifyContent: 'center', alignItems: 'center' }}
+                    >
+                        {BrandLabel && BrandLabel.assessmentLogo ? <Image style={{ height: 80, width: 80, resizeMode: "stretch" }} source={{ uri: BrandLabel && "data:image/png;base64," + BrandLabel.assessmentLogo }} /> :
+                            <Image style={{ height: 80, width: 60, resizeMode: 'stretch' }} source={Assets.assessments} />}
+                    </TouchableOpacity>
+                    <Text style={{ textAlign: 'center', fontSize: 18, fontWeight: 'bold' }}>{BrandLabel && BrandLabel.useCase1 ? BrandLabel.useCase1 : 'Select ROI'}</Text>
                     {
                         loginData && loginData.useCase2 === true &&
                         <View style={{ marginTop: 10 }}>

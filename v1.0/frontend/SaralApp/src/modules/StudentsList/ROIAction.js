@@ -28,7 +28,10 @@ import API from '../../flux/actions/apis/api';
         let url = ''
         if (this.payload.hasOwnProperty('set')) {
             url = `${super.apiEndPoint()}/roi/${this.payload.examId}${this.payload.set}`;
-        } else {
+        } else if(this.payload.hasOwnProperty('layout_name')) {
+            url = `${super.apiEndPoint()}/roi/generic/${this.payload.layout_name}`;
+        }
+        else {
             url = `${super.apiEndPoint()}/roi/${this.payload.examId}`;
         }
         return url

@@ -8,6 +8,7 @@ import LoginComponent from "../modules/loginScreens/LoginComponent";
 import MyScanComponent from '../modules/myScanScreens/MyScanComponent';
 import ScanDetailsComponent from "../modules/myScanScreens/ScanDetailsComponent";
 import SelectDetailsComponent from "../modules/myScanScreens/SelectDetailsComponent";
+import SelectRoiLayout from "../modules/myScanScreens/SelectRoiLayout";
 import PatScanDetailsComponent from "../modules/myScanScreens/PatScanDetailsComponent";
 import SatScanDetailsComponent from "../modules/myScanScreens/SatScanDetailsComponent";
 import StudentsList from "../modules/StudentsList/StudentsList";
@@ -38,6 +39,9 @@ const MainStack = createStackNavigator(
         },
         selectDetails: {
             screen: SelectDetailsComponent
+        },
+        selectRoi: {
+            screen: SelectRoiLayout
         },
         StudentsList: {
             screen: StudentsList
