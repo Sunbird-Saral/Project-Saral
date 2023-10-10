@@ -126,8 +126,8 @@ const commonHelperFunctions = {
                         if(object[key].length == 0 || !object[key]) {
                             fobj[key] = []
                         }
-                        object[key].forEach((sobj, i) => {
-                            iterateOverObject(schemaRef[key][0], i, key, sobj)
+                        object[key].forEach((sobj, j) => {
+                            iterateOverObject(schemaRef[key][0], j, key, sobj)
                         })
                     }
                 })

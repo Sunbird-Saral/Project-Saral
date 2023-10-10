@@ -108,8 +108,8 @@ exports.getSaveScan = async (req, res, next) => {
         const { schoolId, classId, section, subject, fromDate, roiId } = req.body
 
         if (schoolId) {
-            match.schoolId = schoolId,
-                $comment = "Get Saved Scan API for Find Marks Data"
+            match.schoolId = schoolId
+            match.$comment = "Get Saved Scan API for Find Marks Data"
         }
 
         if (fromDate) {

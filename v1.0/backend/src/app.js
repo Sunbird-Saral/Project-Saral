@@ -56,7 +56,7 @@ const generateJestReportPdf = async () => {
 const CORS_ORIGIN = [{ "origin": 'https://saral-dev-api.anuvaad.org', "optionsSuccessStatus": 200, "methods": ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'] },{ "origin": 'https://saral-api.anuvaad.org', "optionsSuccessStatus": 200, "methods": ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'] }, { "origin": 'https://saral-api.anuvaad.org', "optionsSuccessStatus": 200, "methods": ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'] }]
 
 const checkURL = (req, res, next) => {
-    const { origin, url, methods } = req.headers;
+    const { origin, methods } = req.headers;
     let isUrlExist = CORS_ORIGIN.findIndex((el) => { return el.origin == origin });
     let isMethodAvailable = methods ? methods.toUpperCase() : "";
 
@@ -79,8 +79,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 // Register the function as middleware for the application
 
-// app.use(expressMiddleware)
-// app.use(loggerMidlleware)
 app.use(db.getClientPool)
 app.use(schoolRouter)
 app.use(studentRouter)

@@ -58,9 +58,9 @@ router.post('/fetchStudentsByQuery', auth, async (req, res, next) => {
     const match = {}
     match.schoolId = req.school.schoolId
     if (req.body.classId) {
-        match.classId = req.body.classId,
-            match.className = req.body.className,
-            $comment = "Get Student API for Find Students Data"
+        match.classId = req.body.classId
+        match.className = req.body.className
+        match.$comment = "Get Student API for Find Students Data"
     }
 
     if (req.body.section && req.body.section != "0") {
