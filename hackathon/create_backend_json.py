@@ -13,61 +13,63 @@ class Generate_backend_roi:
             f.close()
             return data['regions']
     # , formatAnnotationLookup
-    def get_rois(self, regions, key,val):
+    def get_rois(self, regions, i):
         rois = []
         index = 0
         roiIndex = 1
         for region in regions:
-            if val == 'FTE':
-                if region['tags'][0]==(key):
-                # try:
-                #     # annotationTagsValue = formatAnnotationLookup[region['tags'][0]]
-                # except KeyError as ke:
-                #     annotationTagsValue =  region['tags'][0]
-                    rois.append({
-                        "annotationTags": str(key),
-                        "extractionMethod": str(val),
-                        "roiId": str(roiIndex),
-                        "index": index,
-                        "rect": {
-                            # "top": top,
-                            # "left": left,
-                            # "bottom": bottom,
-                            # "right": right
-                            "top": int(region['boundingBox']['top']),
-                            "left": int(region['boundingBox']['left']),
-                            "bottom": int(region['boundingBox']['top']) + int(region['boundingBox']['height']),
-                            "right": int(region['boundingBox']['left']) + int(region['boundingBox']['width'])
-                        }
+            # if val == 'FTE':
+            #     if region['tags'][0]==(key):
+            #     # try:
+            #     #     # annotationTagsValue = formatAnnotationLookup[region['tags'][0]]
+            #     # except KeyError as ke:
+            #     #     annotationTagsValue =  region['tags'][0]
+            #         rois.append({
+            #             "annotationTags": str(key),
+            #             "extractionMethod": str(val),
+            #             "roiId": str(roiIndex),
+            #             "index": index,
+            #             "rect": {
+            #                 # "top": top,
+            #                 # "left": left,
+            #                 # "bottom": bottom,
+            #                 # "right": right
+            #                 "top": int(region['boundingBox']['top']),
+            #                 "left": int(region['boundingBox']['left']),
+            #                 "bottom": int(region['boundingBox']['top']) + int(region['boundingBox']['height']),
+            #                 "right": int(region['boundingBox']['left']) + int(region['boundingBox']['width'])
+            #             }
 
-                    })
-            elif val == 'TABLE':
-                if region['tags'][0]==(key):
+            #         })
+            # elif val == 'TABLE':
+            #     if region['tags'][0]==(key):
+            #     # try:
+            #     #     # annotationTagsValue = formatAnnotationLookup[region['tags'][0]]
+            #     # except KeyError as ke:
+            #     #     annotationTagsValue =  region['tags'][0] 
+            #         rois.append({
+            #             "annotationTags": str(key),
+            #             "extractionMethod": str(val),
+            #             "roiId": str(roiIndex),
+            #             "index": index,
+            #             "rect": {
+            #                 "top": int(region['boundingBox']['top']),
+            #                 "left": int(region['boundingBox']['left']),
+            #                 "bottom": int(region['boundingBox']['top']) + int(region['boundingBox']['height']),
+            #                 "right": int(region['boundingBox']['left']) + int(region['boundingBox']['width'])
+            #             }
+
+                    # })
+            if region['tags'][0].startswith(i):
+                # item = region['tags'][0].split(separator,1)[0]
+                # item = item[0:-1]
+                if 'NO' in region['tags'][0]:
                 # try:
                 #     # annotationTagsValue = formatAnnotationLookup[region['tags'][0]]
                 # except KeyError as ke:
                 #     annotationTagsValue =  region['tags'][0] 
                     rois.append({
-                        "annotationTags": str(key),
-                        "extractionMethod": str(val),
-                        "roiId": str(roiIndex),
-                        "index": index,
-                        "rect": {
-                            "top": int(region['boundingBox']['top']),
-                            "left": int(region['boundingBox']['left']),
-                            "bottom": int(region['boundingBox']['top']) + int(region['boundingBox']['height']),
-                            "right": int(region['boundingBox']['left']) + int(region['boundingBox']['width'])
-                        }
-
-                    })
-            elif val == 'DE':
-                if region['tags'][0]==(key):
-                # try:
-                #     # annotationTagsValue = formatAnnotationLookup[region['tags'][0]]
-                # except KeyError as ke:
-                #     annotationTagsValue =  region['tags'][0] 
-                    rois.append({
-                        "annotationTags": str(key),
+                        "annotationTags": str(region['tags'][0]),
                         "extractionMethod": str('NUMERIC_CLASSIFICATION'),
                         "roiId": str(roiIndex),
                         "index": index,
@@ -84,12 +86,12 @@ class Generate_backend_roi:
         return rois
     
     # , formatLookup,formatNameLookup,formatAnnotationLookup
-    def get_cells(self, regions, tag_groups):
+    def get_cells(self, regions, tagroup_list):
         region_n = 0
         cells_data = []
         renderIndex = 1
         cellIndex =1
-        for key, val in tag_groups.items(): 
+        for i in tagroup_list: 
                 # try:
                 #     # formatValue = formatLookup[str(tagGroup)]
                 # except KeyError as ke:
@@ -101,13 +103,13 @@ class Generate_backend_roi:
                 # ,formatAnnotationLookup, formatName, formatValue
                 cells_data.append({
                             "cellId": str(cellIndex),
-                            "rois": self.get_rois(regions,key, val),
+                            "rois": self.get_rois(regions, i),
                             "render": {
                                 "index": renderIndex
                             },
                             "format": {
-                                "name":  str(key),
-                                "value": str(key)
+                                "name":  str(i),
+                                "value": str(i)
                             },
                             "validate": {
                                 "regExp": ""
@@ -178,16 +180,19 @@ class Generate_backend_roi:
         print(res)
 
 def main():
-    tagroup_dict={}
+    tagroup_list=[]
     separator = '_'
     backend_roi = Generate_backend_roi()
     regions = backend_roi.get_annotation('/home/venkateshiyer/Documents/layout_output/5429894d64d0215791fb62b4518d0555-asset.json')
     for item in regions:
         tagroup = item['tags']
-        tagroup_item = tagroup[0]
-        if not tagroup_item in tagroup_dict:
-            tagroup_dict[tagroup_item] = tagroup_item.split(separator,1)[1]
-    cells = backend_roi.get_cells(regions, tagroup_dict)
+        tagroup_item = tagroup[0].split(separator,1)[0]
+        if not tagroup_item in tagroup_list:
+            # tagroup_item_key = tagroup_item.split(separator,1)[0]
+            # tagroup_item_value = tagroup_item.split(separator,1)[1]
+            # tagroup_dict[tagroup_item_key] = tagroup_item_value
+            tagroup_list.append(tagroup_item)
+    cells = backend_roi.get_cells(regions, tagroup_list)
     all_data = backend_roi.get_layout(cells)
     layout_json_object = backend_roi.pp_json(all_data, False)
     print('backend layout roi generated!')
