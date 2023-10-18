@@ -81,6 +81,20 @@ class Generate_backend_roi:
                         }
 
                     })
+                else:
+                    rois.append({
+                        "annotationTags": str(region['tags'][0]),
+                        "extractionMethod": str('BLOCK_ALPHANUMERIC_CLASSIFICATION'),
+                        "roiId": str(roiIndex),
+                        "index": index,
+                        "rect": {
+                            "top": int(region['boundingBox']['top']),
+                            "left": int(region['boundingBox']['left']),
+                            "bottom": int(region['boundingBox']['top']) + int(region['boundingBox']['height']),
+                            "right": int(region['boundingBox']['left']) + int(region['boundingBox']['width'])
+                        }
+
+                    })
             index = index + 1
             roiIndex = roiIndex +1
         return rois
@@ -126,11 +140,11 @@ class Generate_backend_roi:
             "layout": {
                 "version": "1.0",
                 "name": "PersonalDetails_Form",
-                "Threshold":{
-                    "minWidth": "",
-                    "minHeight":"",
-                    "detectionRadius":"",
-                    "experimentalOMRDetection":""
+                "threshold":{
+                    "minWidth": 0,
+                    "minHeight":0,
+                    "detectionRadius":12,
+                    "experimentalOMRDetection":False
                 },
                 "resultvalidation":{
                     "validate":{
@@ -169,12 +183,12 @@ class Generate_backend_roi:
         #     })
         headers = {
             'Content-Type': 'application/json',
-            'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1MDAyIiwic2Nob29sSWQiOiJ1MDAyIiwiJGNvbW1lbnQiOiJUb2tlbiBnZW5lcmF0aW9uIiwiaWF0IjoxNjk2Njc4Nzk2fQ.CEcIlDM5v2ojqax4WRSe64P0EubgjklgQsFbgqs3jSQ',
+            'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1MDAyIiwic2Nob29sSWQiOiJ1MDAyIiwiJGNvbW1lbnQiOiJUb2tlbiBnZW5lcmF0aW9uIiwiaWF0IjoxNjk3NDU2ODUzfQ.qcrPYKp4E3ECtQGufGLH8_-fiTcIq08gHPb-u-DIO7E',
             'methods': 'POST',
             'Origin': 'http://192.168.31.200:3000',
             'Content-Type': 'application/json'}
         res = requests.post('http://localhost:3000/roi', json = {
-            "layout_name": "test_form",
+            "layout_name": "invoice_form",
             "roi": json.loads(json_object),
             }, headers = headers)
         print(res)
@@ -183,7 +197,7 @@ def main():
     tagroup_list=[]
     separator = '_'
     backend_roi = Generate_backend_roi()
-    regions = backend_roi.get_annotation('/home/venkateshiyer/Documents/layout_output/5429894d64d0215791fb62b4518d0555-asset.json')
+    regions = backend_roi.get_annotation('/home/venkateshiyer/Documents/oo/2fdd8658bbb2d1b1125ccbbd8ad29a88-asset.json')
     for item in regions:
         tagroup = item['tags']
         tagroup_item = tagroup[0].split(separator,1)[0]
