@@ -52,7 +52,7 @@ describe('Test /brand routes', () => {
       
     });
 
-    it('should return 201 success when POST to /brand does not exists', async () => {
+    it('should return 201 success when POST to /brand ', async () => {
         School.findOne = jest.fn().mockResolvedValue(schoolMockdata)
         Brand.find = jest.fn().mockReturnValue([])
         Brand.create = jest.fn().mockResolvedValue(null)
