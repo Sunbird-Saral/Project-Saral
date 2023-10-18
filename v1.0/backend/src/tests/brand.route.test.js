@@ -41,7 +41,7 @@ describe('Test /brand routes', () => {
       const response = await request(app)
         .post('/brand')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'POST')
         .send(brandMockdata);
 
@@ -59,7 +59,7 @@ describe('Test /brand routes', () => {
       const response = await request(app)
         .post('/brand')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'POST')
         .send(brandMockdata);
 
@@ -76,7 +76,7 @@ describe('Test /brand routes', () => {
       const response = await request(app)
         .delete('/brand')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'DELETE')
 
         expect(Brand.deleteOne).toHaveBeenCalledTimes(1);
@@ -91,7 +91,7 @@ describe('Test /brand routes', () => {
       const response = await request(app)
         .delete('/brand')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'DELETE')
 
         expect(Brand.deleteOne).toHaveBeenCalledTimes(1);
@@ -107,7 +107,7 @@ describe('Test /brand routes', () => {
       const response = await request(app)
         .put('/brand')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'PUT')
         .send(updatePayload);
 
@@ -123,7 +123,7 @@ describe('Test /brand routes', () => {
       const response = await request(app)
         .put('/brand')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'PUT')
         .send(brandMockdata);
 

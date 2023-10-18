@@ -62,7 +62,7 @@ describe('Test /classes routes', () => {
       const response = await request(app)
         .post('/classes')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'POST')
         .send(mockClassData);
 
@@ -98,7 +98,7 @@ describe('Test /classes routes', () => {
       const response = await request(app)
         .post('/classes')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'POST')
         .send(mockClassData);
 
@@ -130,7 +130,7 @@ describe('Test /classes routes', () => {
       const response = await request(app)
         .post('/classes')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'POST')
         .send(mockClassData);
 
@@ -163,7 +163,7 @@ describe('Test /classes routes', () => {
       const response = await request(app)
         .put('/classes')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'PUT')
         .send(payload);
 
@@ -200,7 +200,7 @@ describe('Test /classes routes', () => {
       const response = await request(app)
         .put('/classes')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'PUT')
         .send(payload);
 
@@ -232,7 +232,7 @@ describe('Test /classes routes', () => {
       const response = await request(app)
         .put('/classes')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'PUT')
         .send(mockClassData);
 
@@ -266,7 +266,7 @@ describe('Test /classes routes', () => {
       const response = await request(app)
         .put('/classes')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'PUT')
         .send(payload);
 
@@ -299,7 +299,7 @@ describe('Test /classes routes', () => {
       const response = await request(app)
         .put('/classes')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'PUT')
         .send(payload);
 
@@ -338,7 +338,7 @@ describe('Test /classes routes', () => {
       const response = await request(app)
         .delete('/classes')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'DELETE')
         .send({
             "classId": "3"
@@ -379,7 +379,7 @@ describe('Test /classes routes', () => {
       const response = await request(app)
         .delete('/classes')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'DELETE')
         .send({
             "classId": "3"
@@ -420,7 +420,7 @@ describe('Test /classes routes', () => {
       const response = await request(app)
         .delete('/classes')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'DELETE')
         .send({
             
@@ -462,7 +462,7 @@ describe('Test /classes routes', () => {
       const response = await request(app)
         .delete('/classes')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'DELETE')
         .send({
             "classId": "3"

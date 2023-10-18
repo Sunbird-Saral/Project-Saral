@@ -107,7 +107,7 @@ router.delete('/student/:studentId', auth, async (req, res, next) => {
 })
 
 router.patch('/student/:studentId', auth, async (req, res, next) => {
-    if (Object.keys(req.body).length === 0) res.status(400).send({ message: 'Validation error.' })
+    if (Object.keys(req.body).length === 0) return res.status(400).send({ message: 'Validation error.' })
     const inputKey = Object.keys(req.body)
     const allowedUpdates = ['name', 'classId']
     const isValidOperation = inputKey.every((update) => allowedUpdates.includes(update))

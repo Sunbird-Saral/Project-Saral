@@ -70,7 +70,7 @@ router.get('/schools', async (req, res,next) => {
         }
         res.send({ schools })
     } catch (e) {
-        res.send(e)
+        res.status(400).send(e)
     }finally {
         next()
       }
@@ -109,7 +109,7 @@ router.patch('/schools/:schoolId', async (req, res, next) => {
         let connection = req.dbConnection
         const Schools = connection.model('Schools', schoolsSchema)
         
-        if (Object.keys(req.body).length === 0) res.status(400).send({ message: 'Validation error.' })
+        if (Object.keys(req.body).length === 0) return res.status(400).send({ message: 'Validation error.' })
         const updates = Object.keys(req.body)
         const allowedUpdates = ['name', 'state', 'district', 'udisceCode', 'storeTrainingData', 'autoSync', 'autoSyncFrequency', 'tags', 'autoSyncBatchSize']
         const isValidOperation = updates.every((update) => allowedUpdates.includes(update))

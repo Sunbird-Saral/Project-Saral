@@ -54,7 +54,7 @@ const generateJestReportPdf = async () => {
     console.log("pdf printed")
 }
 
-const whitelist = ['https://saral-dev-api.anuvaad.org', 'https://saral-api.anuvaad.org', 'https://saral-api.anuvaad.org']
+const whitelist = ['https://saral-dev-api.anuvaad.org', 'https://saral-api.anuvaad.org', 'https://test-api.dummy.org']
 const corsOptions = {
   origin: (origin, callback) => {
     if (whitelist.indexOf(origin) !== -1) {

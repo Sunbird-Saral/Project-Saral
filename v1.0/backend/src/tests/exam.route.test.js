@@ -46,7 +46,7 @@ describe('Test /exam routes', () => {
       const response = await request(app)
         .post('/exam')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'POST')
         .send([mockExamData]);
 
@@ -62,7 +62,7 @@ describe('Test /exam routes', () => {
       const response = await request(app)
         .post('/exam')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'POST')
         .send([mockExamData]);
 
@@ -79,7 +79,7 @@ describe('Test /exam routes', () => {
       const response = await request(app)
         .post('/exam')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'POST')
         .send([mockExamData]);
 
@@ -92,7 +92,7 @@ describe('Test /exam routes', () => {
       const response = await request(app)
         .get('/examByClass/2')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'GET')
 
         expect(response.statusCode).toBe(404);
@@ -105,7 +105,20 @@ describe('Test /exam routes', () => {
       const response = await request(app)
         .get('/examByClass/2')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
+        .set('methods', 'GET')
+
+        expect(response.statusCode).toBe(200);
+        expect(response.body).toStrictEqual([mockExamData])
+      
+    });
+
+    it('should return 200 when GET to /examByClass/:classId along with query params subject and examDate', async () => {
+        Exams.find = jest.fn().mockReturnValue({ lean: () => [mockExamData]})
+      const response = await request(app)
+        .get('/examByClass/2?subject=Hindi&examDate=24/09/2021')
+        .set('Content-Type', 'application/json')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'GET')
 
         expect(response.statusCode).toBe(200);
@@ -118,7 +131,7 @@ describe('Test /exam routes', () => {
       const response = await request(app)
         .get('/examByClass/2')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'GET')
 
         expect(response.statusCode).toBe(400);
@@ -130,7 +143,7 @@ describe('Test /exam routes', () => {
       const response = await request(app)
         .delete('/exam/3')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'DELETE')
 
         expect(response.statusCode).toBe(404);
@@ -143,7 +156,7 @@ describe('Test /exam routes', () => {
       const response = await request(app)
         .delete('/exam/3')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'DELETE')
 
         expect(response.statusCode).toBe(200);
@@ -156,7 +169,7 @@ describe('Test /exam routes', () => {
       const response = await request(app)
         .delete('/exam/3')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'DELETE')
 
         expect(response.statusCode).toBe(400);
@@ -170,7 +183,7 @@ describe('Test /exam routes', () => {
       const response = await request(app)
         .patch('/exam/3')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'PATCH')
         .send(updateExam)
 
@@ -185,7 +198,7 @@ describe('Test /exam routes', () => {
       const response = await request(app)
         .patch('/exam/3')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'PATCH')
         .send(updateExam)
 
@@ -199,7 +212,7 @@ describe('Test /exam routes', () => {
       const response = await request(app)
         .patch('/exam/3')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'PATCH')
         .send(mockExamData)
 
@@ -215,7 +228,7 @@ describe('Test /exam routes', () => {
       const response = await request(app)
         .patch('/exam/3')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'PATCH')
         .send(updateExam)
 

@@ -51,7 +51,7 @@ describe('Test /roi routes', () => {
       const response = await request(app)
         .post('/roi')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'POST')
         .send(roiPayload);
 
@@ -68,7 +68,7 @@ describe('Test /roi routes', () => {
       const response = await request(app)
         .post('/roi')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'POST')
         .send(roiPayload);
 
@@ -81,7 +81,7 @@ describe('Test /roi routes', () => {
       const response = await request(app)
         .post('/roi')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'POST')
         .send(mockRoiData);
 
@@ -99,7 +99,7 @@ describe('Test /roi routes', () => {
       const response = await request(app)
         .post('/roi')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'POST')
         .send(roiPayload);
 
@@ -117,7 +117,7 @@ describe('Test /roi routes', () => {
       const response = await request(app)
         .patch('/roi/2')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'PATCH')
         .send(roiPayload);
 
@@ -136,7 +136,7 @@ describe('Test /roi routes', () => {
       const response = await request(app)
         .patch('/roi/2')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'PATCH')
         .send(roiPayload);
 
@@ -154,7 +154,7 @@ describe('Test /roi routes', () => {
       const response = await request(app)
         .patch('/roi/2')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'PATCH')
         .send(roiPayload);
 
@@ -171,7 +171,7 @@ describe('Test /roi routes', () => {
       const response = await request(app)
         .delete('/roi/2')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'DELETE')
 
         expect(Rois.findOneAndRemove).toHaveBeenCalledTimes(1);
@@ -187,7 +187,7 @@ describe('Test /roi routes', () => {
       const response = await request(app)
         .delete('/roi/2')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'DELETE')
         expect(response.statusCode).toBe(404);
         expect(response.body.message).toBe("ROI does not exist.")

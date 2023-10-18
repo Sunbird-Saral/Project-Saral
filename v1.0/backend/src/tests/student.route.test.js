@@ -55,7 +55,7 @@ describe('Test /student routes', () => {
       const response = await request(app)
         .post('/student')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'POST')
         .send(mockStudentData[0]);
 
@@ -83,7 +83,7 @@ describe('Test /student routes', () => {
       const response = await request(app)
         .post('/student')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'POST')
         .send(mockStudentData[0]);
 
@@ -109,7 +109,7 @@ describe('Test /student routes', () => {
       const response = await request(app)
         .post('/student')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'POST')
         .send(mockStudentData[0]);
 
@@ -129,10 +129,33 @@ describe('Test /student routes', () => {
       const response = await request(app)
         .post('/fetchStudentsByQuery')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'POST')
         .send({
             "classId": "2",
+            "className": "Class-2",
+            "section": "A"
+        });
+
+        expect(response.body).toStrictEqual(mockStudentData[0]);
+      
+    });
+
+    it('should return students data when POST to /fetchStudentsByQuery with only className', async () => {
+        getClientPool.mockImplementation((req, res, next) => {
+            req.dbConnection = {
+                model: (ref, schema) => {
+                    return schema
+                }
+            }
+            next()});
+      Students.find = jest.fn().mockReturnValue(mockStudentData[0])
+      const response = await request(app)
+        .post('/fetchStudentsByQuery')
+        .set('Content-Type', 'application/json')
+        .set('Origin', 'https://test-api.dummy.org')
+        .set('methods', 'POST')
+        .send({
             "className": "Class-2"
         });
 
@@ -153,7 +176,7 @@ describe('Test /student routes', () => {
       const response = await request(app)
         .post('/fetchStudentsByQuery')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'POST')
         .send({
             "classId": "2",
@@ -178,7 +201,7 @@ describe('Test /student routes', () => {
       const response = await request(app)
         .delete('/student/1')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'DELETE')
 
         expect(response.statusCode).toBe(200);
@@ -198,7 +221,7 @@ describe('Test /student routes', () => {
       const response = await request(app)
         .delete('/student/1')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'DELETE')
 
         expect(response.statusCode).toBe(404);
@@ -220,7 +243,7 @@ describe('Test /student routes', () => {
       const response = await request(app)
         .delete('/student/1')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'DELETE')
 
         expect(response.statusCode).toBe(400);
@@ -241,7 +264,7 @@ describe('Test /student routes', () => {
       const response = await request(app)
         .patch('/student/1')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'PATCH')
         .send(patchPayload)
 
@@ -264,7 +287,7 @@ describe('Test /student routes', () => {
       const response = await request(app)
         .patch('/student/1')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'PATCH')
         .send(patchPayload)
 
@@ -286,12 +309,34 @@ describe('Test /student routes', () => {
       const response = await request(app)
         .patch('/student/1')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'PATCH')
         .send(mockStudentData[0])
 
         expect(response.statusCode).toBe(400);
         expect(response.body.message).toBe("Invaid Updates")
+      
+    });
+
+    it('should return 400 when PATCH to /student/:studentId fails missing payload', async () => {
+        getClientPool.mockImplementation((req, res, next) => {
+            req.dbConnection = {
+                model: (ref, schema) => {
+                    return schema
+                }
+            }
+            next()});
+        Students.findOne = jest.fn().mockReturnValue({ lean: () => mockStudentData[0]})
+        Students.updateOne = jest.fn().mockReturnValue({ lean: () => {return {exec:()=>null}}})
+      const response = await request(app)
+        .patch('/student/1')
+        .set('Content-Type', 'application/json')
+        .set('Origin', 'https://test-api.dummy.org')
+        .set('methods', 'PATCH')
+        .send({})
+
+        expect(response.statusCode).toBe(400);
+        expect(response.body.message).toBe("Validation error.")
       
     });
 
@@ -309,7 +354,7 @@ describe('Test /student routes', () => {
       const response = await request(app)
         .patch('/student/1')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'PATCH')
         .send(patchPayload)
 

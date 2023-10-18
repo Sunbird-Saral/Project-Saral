@@ -57,7 +57,7 @@ describe('Test /schools routes', () => {
       const response = await request(app)
         .post('/schools/create')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'POST')
         .send(mockSchoolData);
 
@@ -85,7 +85,7 @@ describe('Test /schools routes', () => {
       const response = await request(app)
         .post('/schools/create')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'POST')
         .send(mockSchoolData);
 
@@ -111,9 +111,23 @@ describe('Test /schools routes', () => {
       const response = await request(app)
         .post('/schools/create')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'POST')
-        .send(mockSchoolData);
+        .send({
+            "name": "Dummy school 1",
+            "schoolId": "od001",
+            "password": "tarento@123",
+            "state": "up",
+            "autoSync": true,
+            "autoSyncFrequency": 600000,
+            "storeTrainingData": true,
+            "tags": true,
+            "supportEmail": "abc@gmail.com , xyz@gmail.com",
+            "offlineMode": true,
+            "lock":true,
+            "district": "district2",
+            "autoSyncBatchSize": 10
+          });
 
         expect(response.statusCode).toBe(201);
       
@@ -131,11 +145,30 @@ describe('Test /schools routes', () => {
       const response = await request(app)
         .get('/schools')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'GET')
 
         expect(response.statusCode).toBe(200);
         expect(Object.keys(response.body)).toStrictEqual(["schools"])
+      
+    });
+
+    it('should return 400 error when GET to /schools fails with unknown error', async () => {
+        getClientPool.mockImplementation((req, res, next) => {
+            req.dbConnection = {
+                model: (ref, schema) => {
+                    return schema
+                }
+            }
+            next()});
+        Schools.find = jest.fn().mockImplementation(()=>{throw new Error("some error")})
+      const response = await request(app)
+        .get('/schools')
+        .set('Content-Type', 'application/json')
+        .set('Origin', 'https://test-api.dummy.org')
+        .set('methods', 'GET')
+
+        expect(response.statusCode).toBe(400)
       
     });
 
@@ -155,7 +188,7 @@ describe('Test /schools routes', () => {
       const response = await request(app)
         .delete('/schools/1')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'DELETE')
 
         expect(response.statusCode).toBe(200);
@@ -179,7 +212,7 @@ describe('Test /schools routes', () => {
       const response = await request(app)
         .delete('/schools/1')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'DELETE')
 
         expect(response.statusCode).toBe(404);
@@ -203,7 +236,7 @@ describe('Test /schools routes', () => {
       const response = await request(app)
         .delete('/schools/1')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'DELETE')
 
         expect(response.statusCode).toBe(400);
@@ -224,7 +257,7 @@ describe('Test /schools routes', () => {
       const response = await request(app)
         .patch('/schools/1')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'PATCH')
         .send(patchPayload)
 
@@ -247,7 +280,7 @@ describe('Test /schools routes', () => {
       const response = await request(app)
         .patch('/schools/1')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'PATCH')
         .send(patchPayload)
 
@@ -269,12 +302,34 @@ describe('Test /schools routes', () => {
       const response = await request(app)
         .patch('/schools/1')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'PATCH')
         .send(mockSchoolData)
 
         expect(response.statusCode).toBe(400);
         expect(response.body.error).toBe("Invaid Updates")
+      
+    });
+
+    it('should return 400 when PATCH to /schools/:schoolId fails due to empty payload', async () => {
+        getClientPool.mockImplementation((req, res, next) => {
+            req.dbConnection = {
+                model: (ref, schema) => {
+                    return schema
+                }
+            }
+            next()});
+        Schools.findOne = jest.fn().mockReturnValue({ lean: () => mockSchoolData})
+        Schools.updateOne = jest.fn().mockReturnValue({ lean: () => {return {exec:()=>null}}})
+      const response = await request(app)
+        .patch('/schools/1')
+        .set('Content-Type', 'application/json')
+        .set('Origin', 'https://test-api.dummy.org')
+        .set('methods', 'PATCH')
+        .send({})
+
+        expect(response.statusCode).toBe(400);
+        expect(response.body.message).toBe("Validation error.")
       
     });
 
@@ -292,7 +347,7 @@ describe('Test /schools routes', () => {
       const response = await request(app)
         .patch('/schools/1')
         .set('Content-Type', 'application/json')
-        .set('Origin', 'http://test-api.org')
+        .set('Origin', 'https://test-api.dummy.org')
         .set('methods', 'PATCH')
         .send(patchPayload)
 
