@@ -9,7 +9,7 @@
 
 # Add any project specific keep options here:
 
--keep class com.saralapp.MainActivity
+-keep class com.saralappreference.MainActivity
 
 
 -keep public class * implements com.bumptech.glide.module.GlideModule
