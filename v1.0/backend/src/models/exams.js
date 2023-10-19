@@ -64,6 +64,4 @@ const examSchema = new mongoose.Schema({
     timestamps: true
 })
 
-// const Exams = mongoose.model('Exam', examSchema)
-
 module.exports = examSchema

@@ -15,7 +15,8 @@
   "jest": {
     "collectCoverageFrom": [
       "src/controller/**/*.js",
-      "src/middleware/helper.js"
+      "src/middleware/helper.js",
+      "src/routers/**/*.js"
     ],
     "coverageThreshold": {
       "global": {
@@ -48,6 +49,7 @@
     "mongoose": "^5.12.7",
     "pug": "^3.0.0",
     "puppeteer": "^19.8.3",
+    "supertest": "^6.3.3",
     "swagger-ui-express": "^4.4.0",
     "validator": "^13.5.2",
     "winston": "^3.9.0"

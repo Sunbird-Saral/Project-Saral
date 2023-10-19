@@ -15,6 +15,4 @@ const lockSchema = new mongoose.Schema({
 })
 
 
-// const Locks = mongoose.model('Lock', lockSchema)
-
 module.exports = lockSchema

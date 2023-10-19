@@ -267,6 +267,4 @@ const BrandSchema = new mongoose.Schema({
 
 BrandSchema.index({ state: -1 }, { unique: true });
 
-// const Brands = mongoose.model('Brand', BrandSchema)
-
 module.exports = BrandSchema
