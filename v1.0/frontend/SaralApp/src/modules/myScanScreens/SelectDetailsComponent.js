@@ -349,8 +349,6 @@ class SelectDetailsComponent extends Component {
 
     let hasCacheData = await getRegularStudentExamApi();
 
-    console.log('...............callStudentsDat hasCacheData', hasCacheData);
-
     let cacheFilterData =
       hasCacheData != null
         ? hasCacheData.filter(element => {
@@ -365,10 +363,6 @@ class SelectDetailsComponent extends Component {
         : [];
 
     if (hasCacheData && cacheFilterData.length > 0) {
-      console.log(
-        '...............callStudentsData cacheFilterData',
-        cacheFilterData,
-      );
       this.setState({isLoading: false, calledStudentsData: true});
       storeFactory.dispatch(
         this.dispatchStudentExamData(cacheFilterData[0].data),
@@ -387,7 +381,6 @@ class SelectDetailsComponent extends Component {
             deviceUniqId,
           );
           this.props.APITransport(apiObj);
-          console.log('...............callStudentsData apiObj', apiObj);
         },
       );
     } else if (hasCacheData == null) {
@@ -1132,7 +1125,7 @@ class SelectDetailsComponent extends Component {
         // subject: this.state.selectedSubject,
       };
       let apiObj = new GetStudentsAndExamData(dataPayload, token, deviceUniqId);
-      console.log('.........', apiObj);
+
       this.props.APITransport(apiObj);
       this.setState({
         isLoading: false,
