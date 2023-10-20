@@ -2,6 +2,8 @@ plugins {
     id 'com.android.library'
 }
 
+apply plugin: 'com.android.library'
+
 android {
     compileSdk 31
 
@@ -61,4 +63,9 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-ml-model-interpreter:22.0.4'
     implementation 'org.tensorflow:tensorflow-lite:1.13.1@aar'
+    // implementation 'com.google.firebase:firebase-ml-vision:24.1.0'
+    // implementation 'com.google.android.gms:play-services-vision:20.1.1'
+    // implementation 'com.google.android.gms:play-services-vision-common:19.1.1'
+    implementation 'com.google.android.gms:play-services-mlkit-text-recognition:16.0.0'
+
 }

@@ -114,8 +114,8 @@ public class DetectShaded {
      * Resize the rect to 28x28 size.
      */
     private final Mat resizeImage(Mat image) {
-        int MODEL_IMAGE_WIDTH   = 28;
-        int MODEL_IMAGE_HEIGHT  = 28;
+        int MODEL_IMAGE_WIDTH   = 200;
+        int MODEL_IMAGE_HEIGHT  = 100;
         int width               = 0;
         int height              = 0;
 
