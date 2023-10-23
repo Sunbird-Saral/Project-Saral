@@ -6,7 +6,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.ImageFormat;
 import android.graphics.Matrix;
 
 import androidx.annotation.NonNull;
@@ -22,7 +21,6 @@ import com.google.firebase.ml.custom.FirebaseCustomLocalModel;
 import com.google.firebase.ml.custom.FirebaseCustomRemoteModel;
 import com.google.firebase.ml.custom.FirebaseModelDataType;
 import com.google.firebase.ml.custom.FirebaseModelInputOutputOptions;
-import com.google.firebase.ml.custom.FirebaseModelInputs;
 import com.google.firebase.ml.custom.FirebaseModelInterpreter;
 import com.google.firebase.ml.custom.FirebaseModelInterpreterOptions;
 //import com.google.firebase.ml.vision.FirebaseVision;
@@ -34,7 +32,6 @@ import com.google.firebase.ml.custom.FirebaseModelInterpreterOptions;
 import org.jetbrains.annotations.NotNull;
 import org.opencv.android.Utils;
 import org.opencv.core.Core;
-import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfByte;
 import org.opencv.core.MatOfDouble;
@@ -46,15 +43,11 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.util.Arrays;
 
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.graphics.YuvImage;
 import android.util.Base64;
-import android.util.Log;
 
 import com.google.mlkit.common.MlKitException;
 import com.google.mlkit.vision.common.InputImage;
@@ -92,7 +85,7 @@ public class HWBlockLettersClassifier {
      */
     private FirebaseModelInputOutputOptions         mDataOptions;
 
-    public PredictionListener                       predictionListener;
+    public TextPredictionListener                       predictionListener;
 
     public static HWBlockLettersClassifier getInstance() {
         if (mInstance == null) {
@@ -111,11 +104,11 @@ public class HWBlockLettersClassifier {
         return false;
     }
 
-    public void HWBlockLettersClassifierCallback(PredictionListener listener) throws IOException {
+    public void HWBlockLettersClassifierCallback(TextPredictionListener listener) throws IOException {
         predictionListener  = listener;
     }
 
-    public void setPredictionListener(PredictionListener listener) {
+    public void setPredictionListener(TextPredictionListener listener) {
         predictionListener  = listener;
     }
 
@@ -456,6 +449,7 @@ textRecognizer.process(image)
             .addOnSuccessListener(text -> {
                 String recognizedText = processTextBlocks(text);
                 System.out.println("Recognized Text: " + recognizedText);
+                predictionListener.OnTextPredictionSuccess(recognizedText, 100, id);
             })
             .addOnFailureListener(e -> {
                 if (e instanceof MlKitException) {
@@ -464,6 +458,7 @@ textRecognizer.process(image)
                 } else {
                     System.out.println("Text recognition exception: " + e.getMessage());
                 }
+                predictionListener.OnPredictionFailed("PREDICTION FAILED", id);
             });
 
             } catch (Exception e) {

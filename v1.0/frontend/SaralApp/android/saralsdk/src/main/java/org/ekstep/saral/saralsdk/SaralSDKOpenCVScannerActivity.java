@@ -24,6 +24,7 @@ import com.facebook.react.modules.core.DeviceEventManagerModule;
 import org.ekstep.saral.saralsdk.hwmodel.HWBlockLettersClassifier;
 import org.ekstep.saral.saralsdk.hwmodel.HWClassifier;
 import org.ekstep.saral.saralsdk.hwmodel.PredictionListener;
+import org.ekstep.saral.saralsdk.hwmodel.TextPredictionListener;
 import org.ekstep.saral.saralsdk.opencv.DetectShaded;
 import org.ekstep.saral.saralsdk.opencv.TableCornerCirclesDetection;
 import org.json.JSONArray;
@@ -221,35 +222,35 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
             }
         });
 
-        HWBlockLettersClassifier.getInstance().setPredictionListener(new PredictionListener() {
+        HWBlockLettersClassifier.getInstance().setPredictionListener(new TextPredictionListener() {
             @Override
-            public void OnPredictionSuccess(int digit, float confidence, String id) {
-                Log.d(TAG, "predicted digit:" + digit + " unique id:" + id + " confidence:" + confidence);
-                Map<Integer,String> lettersMap = new HashMap<>();
-                int index=0;
-                for(int i=0;i<=9;i++)
-                {
-                    lettersMap.put(index,String.valueOf(i));
-                    index++;                  
-                }
-                lettersMap.put(index," ");
-                index++;
-                for(char c = 'A'; c <= 'Z'; ++c)
-                {
-                    lettersMap.put(index,c+"");
-                    index++;
-                }
+            public void OnTextPredictionSuccess(String predictedText, float confidence, String id) {
+                //Log.d(TAG, "predicted digit:" + digit + " unique id:" + id + " confidence:" + confidence);
+                // Map<Integer,String> lettersMap = new HashMap<>();
+                // int index=0;
+                // for(int i=0;i<=9;i++)
+                // {
+                //     lettersMap.put(index,String.valueOf(i));
+                //     index++;                  
+                // }
+                // lettersMap.put(index," ");
+                // index++;
+                // for(char c = 'A'; c <= 'Z'; ++c)
+                // {
+                //     lettersMap.put(index,c+"");
+                //     index++;
+                // }
                 mTotalClassifiedCount++;
                     try {
                         JSONObject result = new JSONObject();
-                        if(digit != 37 && lettersMap.get(digit)!=null) {
-                            result.put("prediction", lettersMap.get(digit));
-                            result.put("confidence", new Double(confidence));
-                        }else{
+                        // if(digit != 37 && lettersMap.get(digit)!=null) {
+                        //     result.put("prediction", lettersMap.get(digit));
+                        //     result.put("confidence", new Double(confidence));
+                        // }else{
                             // if classifier is 10 , assigning prediction as 0
-                            result.put("prediction", " ");
-                            result.put("confidence", new Double(0));
-                        }
+                            result.put("prediction", predictedText);
+                            result.put("confidence", confidence);
+                        // }
                         mPredictedDigits.put(id, result.toString());
                     } catch (JSONException e) {
                         Log.e(TAG, "unable to create prediction object");
