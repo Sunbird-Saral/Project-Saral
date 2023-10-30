@@ -57,6 +57,7 @@ export default strings = new LocalizedStrings({
         userId_text: 'User ID',
         password_text: 'Password',
         schoolid_password_doesnot_match: 'School Id or Password does not match',
+        password_doesnot_match: 'Password does not match',
         subject:'Subject',
         school_name: 'School',
         logout_text: 'Logout',
