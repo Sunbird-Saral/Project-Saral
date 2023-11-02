@@ -132,15 +132,13 @@ exports.getSaveScan = async (req, res, next) => {
             match.subject = new RegExp(`^${subject}$`, 'i')
         }
 
-        if (req.body.page) {
-            req.body.limit = 10;
-            req.body.page = 1;
-        } else {
-            req.body.limit = 0;
-            req.body.page = 1;
-        }
+        req.body.page=req.body.page || 1
+        req.body.limit=req.body.limit || 10
+     // Calculate the total number of records
+        const totalRecord=(await Marks.find(match)).length;
 
-        
+      // Calculate the total number of pages
+        const totalPages = Math.ceil(totalRecord / req.body.limit);
         const savedScan = await Marks.find(match, { _id: 0, __v: 0 })
             .limit(parseInt(req.body.limit) * 1)
             .skip((parseInt(parseInt(req.body.page)) - 1) * parseInt(parseInt(req.body.limit)))
@@ -149,7 +147,7 @@ exports.getSaveScan = async (req, res, next) => {
         const executionTime2 = endTime - startTime;
 
         logger.info(`Execution time for Get Saved Scan API : ${executionTime2}ms`);
-        res.status(200).json({ data: savedScan })
+        res.status(200).json({ data: savedScan , totalRecords:totalRecord, totalPages:totalPages})
     } catch (e) {
         logger.warn(e)
         res.status(400).json({ "error": true, e })
