@@ -161,13 +161,18 @@ class LoginComponent extends Component {
         const deviceUniqId = await DeviceInfo.getUniqueId();
         let hasNetwork = await checkNetworkConnectivity();
         let hasCacheData = await getLoginApi();
+        let isPasswordMismatchFromCache = false;
 
         let cacheFilterData = hasCacheData != null
             ?
             hasCacheData.filter((element) => {
-                let userId = JSON.parse(element.data.config.data)
-                if (userId.schoolId == schoolId) {
-                    return true
+                let userData = JSON.parse(element.data.config.data)
+                if (userData.schoolId == schoolId) {
+                    if(userData.password == password) {
+                        return true
+                    } else {
+                        isPasswordMismatchFromCache = true
+                    }
                 }
             })
             :
@@ -192,11 +197,18 @@ class LoginComponent extends Component {
                 this.props.APITransport(apiObj);
                 
             })
-        } else if (!hasNetwork && schoolId.length > 0) {
-            this.setState({
-                errCommon: Strings.you_dont_have_cache,
-                isLoading: false
-            })
+        } else if (hasCacheData != null && !hasNetwork && schoolId.length > 0) {
+            if(isPasswordMismatchFromCache) {
+                this.setState({
+                    errCommon: Strings.password_doesnot_match,
+                    isLoading: false
+                })
+            } else {
+                this.setState({
+                    errCommon: Strings.you_dont_have_cache,
+                    isLoading: false
+                })
+            }
         }
         else {
             this.setState({
