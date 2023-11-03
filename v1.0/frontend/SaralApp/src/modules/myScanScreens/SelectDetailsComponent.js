@@ -362,15 +362,7 @@ class SelectDetailsComponent extends Component {
           })
         : [];
 
-    console.log(
-      '..........',
-      hasCacheData,
-      cacheFilterData == null,
-      hasNetwork,
-    );
-
     if (cacheFilterData == false && hasNetwork == false) {
-      console.log('here');
       this.setState({isLoading: false});
       this.callCustomModal(
         Strings.message_text,
@@ -385,7 +377,6 @@ class SelectDetailsComponent extends Component {
         this.dispatchStudentExamData(cacheFilterData[0].data),
       );
       this.setState({isLoading: false});
-      console.log('comning from cache.....', cacheFilterData[0].data);
     }
     if (hasNetwork) {
       this.setState(
