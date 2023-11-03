@@ -232,7 +232,7 @@ class SelectDetailsComponent extends Component {
                 section: sectionListArr[0],
               };
 
-              this.loader(true);
+              // this.loader(true);
               this.setState(
                 {
                   dataPayload: payload,
@@ -282,7 +282,7 @@ class SelectDetailsComponent extends Component {
             if (value == 'All') {
               payload.section = 0;
             }
-            this.loader(true);
+            // this.loader(true);
             this.setState(
               {
                 dataPayload: payload,
@@ -362,12 +362,30 @@ class SelectDetailsComponent extends Component {
           })
         : [];
 
+    console.log(
+      '..........',
+      hasCacheData,
+      cacheFilterData == null,
+      hasNetwork,
+    );
+
+    if (cacheFilterData == false && hasNetwork == false) {
+      console.log('here');
+      this.setState({isLoading: false});
+      this.callCustomModal(
+        Strings.message_text,
+        Strings.you_dont_have_cache,
+        false,
+      );
+    }
+
     if (hasCacheData && cacheFilterData.length > 0) {
       this.setState({isLoading: false, calledStudentsData: true});
       storeFactory.dispatch(
         this.dispatchStudentExamData(cacheFilterData[0].data),
       );
       this.setState({isLoading: false});
+      console.log('comning from cache.....', cacheFilterData[0].data);
     }
     if (hasNetwork) {
       this.setState(
@@ -383,13 +401,9 @@ class SelectDetailsComponent extends Component {
           this.props.APITransport(apiObj);
         },
       );
-    } else if (hasCacheData == null) {
-      this.setState({isLoading: false});
-      this.callCustomModal(
-        Strings.message_text,
-        Strings.you_dont_have_cache,
-        false,
-      );
+      // storeFactory.dispatch(
+      //   this.dispatchStudentExamData(cacheFilterData[0].data),
+      // );
     }
   };
 
