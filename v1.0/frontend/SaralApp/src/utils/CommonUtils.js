@@ -19,6 +19,7 @@ import {
   RESULTS,
   requestMultiple,
   PermissionStatus,
+  requestNotifications
 } from 'react-native-permissions';
 
 export const validateToken = expireTime => {
@@ -122,8 +123,7 @@ export const checkAppVersion = async () => {
 };
 
 export const askPermissions = async () => {
-  let permissionStatus = '';
-
+  let permissionStatus = '', notificationPermissionStatus = '';
   if (Platform.OS == 'android' && Platform.Version < 33) {
     permissionStatus = await requestMultiple([
       PERMISSIONS.ANDROID.CAMERA,
@@ -131,11 +131,14 @@ export const askPermissions = async () => {
       PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE,
     ]);
 
+    notificationPermissionStatus = await requestNotifications(['alert', 'sound'])
+
     if (
       permissionStatus['android.permission.CAMERA'] == 'granted' &&
       permissionStatus['android.permission.READ_EXTERNAL_STORAGE'] ==
         'granted' &&
-      permissionStatus['android.permission.WRITE_EXTERNAL_STORAGE'] == 'granted'
+      permissionStatus['android.permission.WRITE_EXTERNAL_STORAGE'] == 'granted' &&
+      notificationPermissionStatus.status == 'granted'
     ) {
       return 'granted';
     } else if (
@@ -148,7 +151,10 @@ export const askPermissions = async () => {
       (permissionStatus['android.permission.WRITE_EXTERNAL_STORAGE'] ==
         'denied' ||
         permissionStatus['android.permission.WRITE_EXTERNAL_STORAGE'] ==
-          'blocked')
+          'blocked') && (
+            notificationPermissionStatus.status == 'denied' ||
+            notificationPermissionStatus.status == 'blocked'
+          )
     ) {
       return 'blocked';
     }
@@ -158,18 +164,22 @@ export const askPermissions = async () => {
       PERMISSIONS.ANDROID.READ_MEDIA_IMAGES,
       PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE,
       PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE,
+      PERMISSIONS.ANDROID.POST_NOTIFICATIONS
     ]);
   }
   if (
     permissionStatus['android.permission.CAMERA'] == 'granted' &&
-    permissionStatus['android.permission.READ_MEDIA_IMAGES'] == 'granted'
+    permissionStatus['android.permission.READ_MEDIA_IMAGES'] == 'granted' &&
+    permissionStatus['android.permission.POST_NOTIFICATIONS'] == 'granted'
   ) {
     return 'granted';
   } else if (
     (permissionStatus['android.permission.CAMERA'] == 'denied' ||
       permissionStatus['android.permission.CAMERA'] == 'blocked') &&
     (permissionStatus['android.permission.READ_MEDIA_IMAGES'] == 'denied' ||
-      permissionStatus['android.permission.READ_MEDIA_IMAGES'] == 'blocked')
+      permissionStatus['android.permission.READ_MEDIA_IMAGES'] == 'blocked') &&
+      (permissionStatus['android.permission.POST_NOTIFICATIONS'] == 'denied' ||
+      permissionStatus['android.permission.POST_NOTIFICATIONS'] == 'blocked')
   ) {
     return 'blocked';
   }

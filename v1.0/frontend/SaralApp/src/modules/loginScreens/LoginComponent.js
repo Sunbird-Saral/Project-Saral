@@ -13,7 +13,7 @@ import {
     setLoginData, setLoginCred, getLoginCred, setRememberUser, getRememberedUser, forgetUser, setRememberPassword, getRememberedPassword, forgetUserpass, getLoginData
 } from '../../utils/StorageUtils'
 import { Assets } from '../../assets/index'
-import { checkNetworkConnectivity, monospace_FF } from '../../utils/CommonUtils';
+import { checkNetworkConnectivity, monospace_FF, askPermissions } from '../../utils/CommonUtils';
 import { loginEvent } from '../../utils/Analytics';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getBrandingDataApi, getLoginApi, setLoginApi, setBrandingDataApi } from '../../utils/offlineStorageUtils';
@@ -49,6 +49,7 @@ class LoginComponent extends Component {
         this.setState({ hidePassword: !this.state.hidePassword });
     }
     async componentDidMount() {
+        await askPermissions();
         const schollId = await this.rememberMeSchoolId();
         const password = await this.rememberMePassword();
         this.setState({
