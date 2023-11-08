@@ -179,12 +179,7 @@ class LoginComponent extends Component {
             :
             []
 
-        if (hasCacheData != null && cacheFilterData.length > 0) {
-            if (cacheFilterData.length > 0) {
-                storeFactory.dispatch(this.dispatchLoginData(cacheFilterData[0].data))
-                this.props.navigation.navigate('mainMenu')
-            }
-        } else if (hasNetwork) {
+        if (hasNetwork) {
             this.setState({
                 isLoading: true,
                 calledLogin: true
@@ -199,7 +194,11 @@ class LoginComponent extends Component {
                 
             })
         } else if (hasCacheData != null && !hasNetwork && schoolId.length > 0) {
-            if(isPasswordMismatchFromCache) {
+
+            if (cacheFilterData.length > 0) {
+                storeFactory.dispatch(this.dispatchLoginData(cacheFilterData[0].data))
+                this.props.navigation.navigate('mainMenu')
+            } else if(isPasswordMismatchFromCache) {
                 this.setState({
                     errCommon: Strings.password_doesnot_match,
                     isLoading: false
