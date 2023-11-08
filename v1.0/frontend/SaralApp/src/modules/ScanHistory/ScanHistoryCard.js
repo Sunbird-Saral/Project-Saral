@@ -39,7 +39,7 @@ import {ScrollView} from 'react-native-gesture-handler';
 import {collectErrorLogs} from '../CollectErrorLogs';
 import Constant from '../../flux/actions/constants';
 import DeviceInfo from 'react-native-device-info';
-import { SaveInDbEvent,ReviewScan } from '../../utils/Analytics';
+import {SaveInDbEvent, ReviewScan} from '../../utils/Analytics';
 
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
@@ -134,7 +134,7 @@ const ScanHistoryCard = ({
 
   const onPressScanStatus = () => {
     navigation.push('ScanStatusLocal');
-    ReviewScan(loginData.data.school.schoolId)
+    ReviewScan(loginData.data.school.schoolId);
   };
   const dispatch = useDispatch();
 
@@ -153,6 +153,7 @@ const ScanHistoryCard = ({
   const onPressSaveInDB = async () => {
     const data = await getScannedDataFromLocal();
     const hasNetwork = await checkNetworkConnectivity();
+
     let hasUpdate = await checkAppVersion();
     const deviceUniqId = await DeviceInfo.getUniqueId();
     const {subject, examDate} = filteredData.response;
@@ -238,61 +239,75 @@ const ScanHistoryCard = ({
   };
 
   const saveScanData = async (api, filteredDatalen, localScanData) => {
-    if (api.method === 'PUT') {
-      let apiResponse = null;
-      const source = axios.CancelToken.source();
-      const id = setTimeout(() => {
-        if (apiResponse === null) {
-          source.cancel('The request timed out.');
-        }
-      }, 60000);
-      axios
-        .put(api.apiEndPoint(), api.getBody(), {
-          headers: api.getHeaders(),
-          cancelToken: source.token,
-        })
-        .then(function (res) {
-          apiResponse = res;
-          clearTimeout(id);
-          let hasMessage = res
-            ? typeof res.data == 'string' || typeof res.data.message == 'string'
-              ? true
-              : false
-            : false;
-          if (hasMessage) {
-            api.processResponse(res);
-            callScanStatusData(filteredDatalen, localScanData);
-          } else {
-            dispatch(dispatchAPIAsync(res.data));
-            setScanStatusData(filteredDatalen);
-            setScannedDataIntoLocal(localScanData);
-            callCustomModal(
-              Strings.message_text,
-              Strings.saved_successfully,
+    const hasNetwork = await checkNetworkConnectivity();
+    if (hasNetwork) {
+      if (api.method === 'PUT') {
+        let apiResponse = null;
+        const source = axios.CancelToken.source();
+        const id = setTimeout(() => {
+          if (apiResponse === null) {
+            source.cancel('The request timed out.');
+          }
+        }, 60000);
+        axios
+          .put(api.apiEndPoint(), api.getBody(), {
+            headers: api.getHeaders(),
+            cancelToken: source.token,
+          })
+          .then(function (res) {
+            apiResponse = res;
+            clearTimeout(id);
+            let hasMessage = res
+              ? typeof res.data == 'string' ||
+                typeof res.data.message == 'string'
+                ? true
+                : false
+              : false;
+            if (hasMessage) {
+              api.processResponse(res);
+              callScanStatusData(filteredDatalen, localScanData);
+            } else {
+              dispatch(dispatchAPIAsync(res.data));
+              setScanStatusData(filteredDatalen);
+              setScannedDataIntoLocal(localScanData);
+              callCustomModal(
+                Strings.message_text,
+                Strings.saved_successfully,
+                false,
+              );
+              SaveInDbEvent(loginData.data.school.schoolId);
+              setIsLoading(false);
+            }
+          })
+          .catch(function (err) {
+            collectErrorLogs(
+              'ScanHistoryCard.js',
+              'saveScanData',
+              api.apiEndPoint(),
+              err,
               false,
             );
-            SaveInDbEvent(loginData.data.school.schoolId)
+            callCustomModal(
+              Strings.message_text,
+              err &&
+                err.response &&
+                err.response.data &&
+                err.response.data.error
+                ? err.response.data.error
+                : Strings.contactAdmin,
+              false,
+            );
+            clearTimeout(id);
             setIsLoading(false);
-          }
-        })
-        .catch(function (err) {
-          collectErrorLogs(
-            'ScanHistoryCard.js',
-            'saveScanData',
-            api.apiEndPoint(),
-            err,
-            false,
-          );
-          callCustomModal(
-            Strings.message_text,
-            err && err.response && err.response.data && err.response.data.error
-              ? err.response.data.error
-              : Strings.contactAdmin,
-            false,
-          );
-          clearTimeout(id);
-          setIsLoading(false);
-        });
+          });
+      }
+    } else {
+      callCustomModal(
+        Strings.message_text,
+        Strings.please_try_again_later_network_is_not_available,
+        false,
+        true,
+      );
     }
   };
 
@@ -453,25 +468,41 @@ const ScanHistoryCard = ({
           <View>
             <View style={styles.scanCardStyle}>
               <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-              <Text style={{}}>{BrandLabel&&BrandLabel.TotalStudent ? BrandLabel.TotalStudent : 'Total Students'}</Text>
+                <Text style={{}}>
+                  {BrandLabel && BrandLabel.TotalStudent
+                    ? BrandLabel.TotalStudent
+                    : 'Total Students'}
+                </Text>
               </View>
               <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
-              <Text style={{fontFamily : monospace_FF,fontWeight:"bold"}} >{studentCount.totalCount}</Text>
+                <Text style={{fontFamily: monospace_FF, fontWeight: 'bold'}}>
+                  {studentCount.totalCount}
+                </Text>
               </View>
             </View>
 
             <View style={styles.scanCardStyle}>
               <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-              <Text style={{}}>{BrandLabel&&BrandLabel.PresentStudents ? BrandLabel.PresentStudents : 'Present Students'}</Text>
+                <Text style={{}}>
+                  {BrandLabel && BrandLabel.PresentStudents
+                    ? BrandLabel.PresentStudents
+                    : 'Present Students'}
+                </Text>
               </View>
               <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
-              <Text style={{fontFamily : monospace_FF,fontWeight:"bold"}} >{studentCount.totalCount -studentCount.absentCount}</Text>
+                <Text style={{fontFamily: monospace_FF, fontWeight: 'bold'}}>
+                  {studentCount.totalCount - studentCount.absentCount}
+                </Text>
               </View>
             </View>
 
             <View style={styles.scanCardStyle}>
               <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-              <Text style={{}}>{BrandLabel&&BrandLabel.ScanNotSubmitedYet ? BrandLabel.ScanNotSubmitedYet : 'Scans not submitted yet'}</Text>
+                <Text style={{}}>
+                  {BrandLabel && BrandLabel.ScanNotSubmitedYet
+                    ? BrandLabel.ScanNotSubmitedYet
+                    : 'Scans not submitted yet'}
+                </Text>
               </View>
               <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
                 <Text
@@ -487,7 +518,11 @@ const ScanHistoryCard = ({
 
             <View style={styles.scanCardStyle}>
               <View style={[styles.scanLabelStyle, styles.scanLabelKeyStyle]}>
-              <Text style={{}}>{BrandLabel&&BrandLabel.TotalScanSubmited ? BrandLabel.TotalScanSubmited : 'Total scans submitted'}</Text>
+                <Text style={{}}>
+                  {BrandLabel && BrandLabel.TotalScanSubmited
+                    ? BrandLabel.TotalScanSubmited
+                    : 'Total scans submitted'}
+                </Text>
               </View>
               <View style={[styles.scanLabelStyle, styles.scanLabelValueStyle]}>
                 <Text style={{fontFamily: monospace_FF, fontWeight: 'bold'}}>
@@ -605,7 +640,11 @@ const ScanHistoryCard = ({
                   marginRight: 5,
                 }}
                 onPress={onPressScanStatus}>
-                <Text style={{ fontFamily: monospace_FF, color: AppTheme.BLACK }}>{BrandLabel&&BrandLabel.ReviewScanText ? BrandLabel.ReviewScanText :'Review scan'}</Text>
+                <Text style={{fontFamily: monospace_FF, color: AppTheme.BLACK}}>
+                  {BrandLabel && BrandLabel.ReviewScanText
+                    ? BrandLabel.ReviewScanText
+                    : 'Review scan'}
+                </Text>
               </TouchableOpacity>
             )}
             {disableButton && (
@@ -622,7 +661,11 @@ const ScanHistoryCard = ({
                   marginRight: 5,
                 }}
                 onPress={onPressSaveInDB}>
-                <Text style={{ fontFamily: monospace_FF, color: AppTheme.BLACK }}>{BrandLabel&&BrandLabel.SubmitAllScan ? BrandLabel.SubmitAllScan :'Submit all scans'}</Text>
+                <Text style={{fontFamily: monospace_FF, color: AppTheme.BLACK}}>
+                  {BrandLabel && BrandLabel.SubmitAllScan
+                    ? BrandLabel.SubmitAllScan
+                    : 'Submit all scans'}
+                </Text>
               </TouchableOpacity>
             )}
           </View>
