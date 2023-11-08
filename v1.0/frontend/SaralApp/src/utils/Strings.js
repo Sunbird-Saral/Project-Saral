@@ -28,7 +28,7 @@ export default strings = new LocalizedStrings({
         page_no:'Page Number',
         Record_no:'Record Number',
         skip:'Skip',
-        give_permission_from_settings: 'Please give permission from Settings to use app',
+        give_permission_from_settings: 'Please give permissions for Camera, Storage and Notifications from Settings to use app',
         optional_update_available: 'A new update is available of App. Do you want to update now?',
         force_update_available: 'We have an updated version for you. Please Update to continue using App.',
         you_can_save_only_limited_student_In_Order_to_continue_have_to_save_first:`You can Save Only ${studentLimitSaveInLocal} ID. In Order to Continue have to save first`,
