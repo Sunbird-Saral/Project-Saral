@@ -111,6 +111,7 @@ const StudentsList = ({
     });
 
     return () => {
+      setAllStudentData([])
       focusListener.remove();
     };
   }, [navigation]);
