@@ -1,5 +1,5 @@
 const configs = {
-  BASE_URL: 'https://saral-dev-api.anuvaad.org',
+  BASE_URL: 'BASE_URL',
 };
 
 export default configs;
