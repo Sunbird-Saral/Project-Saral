@@ -104,6 +104,18 @@ const StudentsList = ({
     studentData();
   }, []);
 
+  useEffect(() => {
+    const focusListener = navigation.addListener('didFocus', () => {
+      setIsLoading(true);
+      studentData(true);
+    });
+
+    return () => {
+      setAllStudentData([])
+      focusListener.remove();
+    };
+  }, [navigation]);
+
   useEffect(
     React.useCallback(() => {
       const onBackPress = () => {
@@ -351,7 +363,7 @@ const StudentsList = ({
     };
   }
 
-  const studentData = async () => {
+  const studentData = async (isLoading = false) => {
     let studentsExamData = await getStudentsExamData();
     const filterStudentsData = studentsExamData.filter(e => {
       if (
@@ -365,6 +377,9 @@ const StudentsList = ({
       filterStudentsData[0].data ? filterStudentsData[0].data.students : [],
     );
     setAllStudentData(filterStudentsData[0].data.students);
+    if(isLoading) {
+      setIsLoading(false);
+    }
   };
 
   const renderStudentData = ({item, index}) => {
