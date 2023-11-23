@@ -303,8 +303,8 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
 
     public void onCameraViewStarted(int width, int height) {
         mRgba                           = new Mat(height, width, CvType.CV_8UC4);
-        mTableCornerDetection           = new TableCornerCirclesDetection(false);
-        mDetectShaded                   = new DetectShaded(false);
+        mTableCornerDetection           = new TableCornerCirclesDetection(true);
+        mDetectShaded                   = new DetectShaded(true);
         mTotalClassifiedCount           = 0;
         mIsScanningComplete             = false;
         mScanningResultShared           = false;
@@ -434,8 +434,18 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
         double DARKNESS_THRESHOLD   = 80.0;
         mStartTime                  = SystemClock.uptimeMillis();
         loadLayoutConfiguration();
-        Mat tableMat                = mTableCornerDetection.processMat(image,layoutMinWidth,layoutMinHeight,detectionRadius);
-        if(isMultiChoiceOMRLayout)
+        Mat tableMat;
+        // JSONObject layoutConfigs = new JSONObject(mlayoutConfigs);
+        // JSONObject layoutObject = layoutConfigs.getJSONObject("layout");
+        // JSONObject threshold = layoutObject.getJSONObject("threshold");
+        //Boolean hasExperimentalEdge1 = getBoolean("experimentalEdgeDetection"); //added
+        if(hasExperimentalEdge1){
+            tableMat                = mTableCornerDetection.processMatExp(image,layoutMinWidth,layoutMinHeight,detectionRadius);
+        }else{
+            tableMat                = mTableCornerDetection.processMat(image,layoutMinWidth,layoutMinHeight,detectionRadius);
+
+        }
+            if(isMultiChoiceOMRLayout)
         {
             DARKNESS_THRESHOLD = 70.0;
         }
@@ -460,6 +470,8 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                 JSONObject layoutObject = layoutConfigs.getJSONObject("layout");
                 JSONObject threshold = layoutObject.getJSONObject("threshold");
                 Boolean hasExperimentalOmr = threshold.has("experimentalOMRDetection") ? threshold.getBoolean("experimentalOMRDetection")? true :false:false;
+                //Boolean hasExperimentalEdge = threshold.has("experimentalEdgeDetection") ? threshold.getBoolean("experimentalEdgeDetection")? true :false:false; //added
+
                 for (int i = 0; i < rois.length(); i++) {
                     JSONObject roiConfig  = rois.getJSONObject(i);
 
@@ -668,6 +680,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                         {
                             //Handling Multi Choice OMR Layout predictions
                             String prediction =mPredictedOMRs.get(roiId);
+                            Log.d(TAG, "prediction" +prediction);
                             if(prediction!=null && prediction.equals("1")){
                                 if (cell.has("omrOptions")) {
                                    JSONArray omrOption = cells.getJSONObject(i).getJSONArray("omrOptions");
