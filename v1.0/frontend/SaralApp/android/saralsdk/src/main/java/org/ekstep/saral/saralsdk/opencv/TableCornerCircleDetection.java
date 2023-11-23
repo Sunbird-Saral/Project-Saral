@@ -96,7 +96,7 @@ public class TableCornerCirclesDetection {
             }
 
             if (corners.rows() == 4) {
-                Log.d(TAG, "Detected 4 corners. Sorting points...");        //added
+                Log.d(TAG, "Detected 4 corners. Sorting points...");        
                 CVOperations.sortPointListFromLeft(points);
                 List<Point> leftPoints = new ArrayList<Point>();
                 List<Point> rightPoints = new ArrayList<Point>();
@@ -126,8 +126,8 @@ public class TableCornerCirclesDetection {
                 int maxWidth    = maxX-minX;
                 
                 Rect rectCrop = new Rect((int)((int)topLeft.x+(int)bottomLeft.x)/2, (int)topLeft.y-5, maxWidth, maxHeight+10);
-                Log.d(TAG, "Rect Width " + rectCrop.width+" Rect Height "+rectCrop.height);     //changed
-                Log.d(TAG, "ROI Rect: " + rectCrop);        //added
+                Log.d(TAG, "TableCornerCirclesDetection::processMat() Rect Width " + rectCrop.width+" Rect Height "+rectCrop.height);     
+            
                 if(minWidth > 0 && minHeight > 0 && (rectCrop.width < minWidth || rectCrop.height < minHeight))
                 {
                     showFocusAlert(image);
@@ -152,7 +152,7 @@ public class TableCornerCirclesDetection {
 
                     Mat croppedMat  = cropROI(image, topLeft, topRight, bottomLeft, bottomRight);
                     if (DEBUG){
-                        Log.d(TAG, "Detected corners: " + corners.rows());       //added
+                        Log.d(TAG, "Detected corners: " + corners.rows());       
                         CVOperations.saveImage(croppedMat, "table", 3, false);
                     }
                     return croppedMat;
@@ -175,7 +175,7 @@ public class TableCornerCirclesDetection {
     }
 
     private void showFocusAlert(Mat image) {
-        Log.d(TAG, "Showing Focus Alert");              //added
+        //Log.d(TAG, "Showing Focus Alert");              
         String text     = "Please focus the camera by moving up or down";
         Point position  = new Point(image.width()/6, image.height() / 2);
         Scalar color    = new Scalar(255, 0, 0);
@@ -200,7 +200,6 @@ public class TableCornerCirclesDetection {
                 }
             }
         }
-    
         // Return the validity status
         return isValid;
     }
@@ -210,7 +209,7 @@ public class TableCornerCirclesDetection {
             Imgproc.circle(image, topLeft, 10, new Scalar(255.0, 0.0, 0.0), 10);
             Imgproc.circle(image, topRight, 10, new Scalar(0.0, 255.0, 0.0), 10);
             Imgproc.circle(image, bottomLeft, 10, new Scalar(0.0, 0.0, 255.0), 10);
-            Imgproc.circle(image, bottomRight, 10, new Scalar(255.0, 255.0, 0.0), 10);      //changed
+            Imgproc.circle(image, bottomRight, 10, new Scalar(255.0, 255.0, 0.0), 10);      
         }
         Imgproc.line(image, topLeft,    topRight,       new Scalar(0.0, 255.0, 0.0), 5);
         Imgproc.line(image, bottomLeft, bottomRight,    new Scalar(0.0, 255.0, 0.0), 5);
