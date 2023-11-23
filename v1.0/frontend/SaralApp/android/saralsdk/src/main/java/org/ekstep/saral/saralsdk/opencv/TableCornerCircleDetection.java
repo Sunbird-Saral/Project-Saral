@@ -18,12 +18,12 @@ import org.opencv.imgproc.Imgproc;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PageEdgeDetection {
-    private static final String  TAG        = "SrlSDK::TableDetector";     
+public class TableCornerCirclesDetection {
+    private static final String  TAG        = "SrlSDK::TableDetector";      //change
     private boolean DEBUG                   = false; 
     private double mROI                     = 0.0;
     private Point mTopLeft, mTopRight, mBottomLeft, mBottomRight;
-    private List<Point> points = new ArrayList<Point>();
+    // private int detectionRadius = 10;
 
     public Point getmTopLeft() {
         return mTopLeft;
@@ -47,55 +47,44 @@ public class PageEdgeDetection {
     }
 
     public TableCornerCirclesDetection(boolean debug){  
+        debug = true;    //change
         DEBUG = debug;
     }
 
     public Mat processMat(Mat image,int minWidth,int minHeight,int detectionRadius) {
-
+        Log.d(TAG, "Starting processMat");
+        minHeight = 50;
+        minWidth = 50;                      //added
         Mat gray        = new Mat();
-        Imgproc.Canny(image, gray, 30, 100);
-        Mat hierarchy = new Mat();
-        List<MatOfPoint> contours = new ArrayList<>();
-        Imgproc.findContours(gray, contours, hierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
+        Imgproc.cvtColor(image, gray, Imgproc.COLOR_BGR2GRAY);
+        Imgproc.medianBlur(gray, gray, 11);
+        MatOfPoint corners     = new MatOfPoint();      //changed
+        // Mat thresh = new Mat();
+        // Imgproc.threshold(gray, thresh, 150, 255, Imgproc.THRESH_BINARY);
+        Imgproc.goodFeaturesToTrack(gray, corners, 4, 0.8, 30 );        //changed
+        /**
+         * Draw the detected circles.
+         */
+        if (DEBUG) {
+            Log.d(TAG, "Detected corners: " + corners.rows());       //added
+            drawDetectedCircles(image, corners);        //change
+        }
+        
+        if (corners.rows() > 0) {       //changed
+            Point topLeft, topRight;
+            Point bottomLeft, bottomRight;
 
-        double maxArea          = 0;
-        int maxAreaContourIndex = 0;
-        if (contours.size() > 0) {
-            for (int i = 0; i < contours.size(); i++) {
-                double contourArea = Imgproc.contourArea(contours.get(i));
-                if (maxArea < contourArea) {                                
-                    maxArea                 = contourArea;
-                    maxAreaContourIndex     = i;
-                }
-            }       //gets biggest contour
-
-            Rect r = Imgproc.boundingRect(contours.get(maxAreaContourIndex));       //get coordinates
-            Imgproc.rectangle(image, new Point(r.x, r.y), new Point(r.x + r.width, r.y + r.height), new Scalar(255, 0, 0, 255), 2); //draw
-            
-            Point topLeft = new Point(r.x, r.y);
-            Point topRight = new Point(r.x + r.width, r.y);
-            Point bottomLeft = new Point(r.x, r.y + r.height);
-            Point bottomRight = new Point(r.x + r.width, r.y + r.height);
-
-            Point[] cornerPoints = new Point[4];
-            cornerPoints[0] = topLeft;
-            cornerPoints[1] = topRight;
-            cornerPoints[2] = bottomLeft;
-            cornerPoints[3] = bottomRight;
-            MatOfPoint corners = new MatOfPoint();
-            corners.fromArray(cornerPoints);
             List<Point> points = new ArrayList<Point>();
             for (int i = 0; i < corners.rows(); i++) {
                 double[] point = corners.get(i, 0);
                 points.add(new Point(point[0], point[1]));
-            }                 
-            if(detectionRadius > 0 && !hasLayoutDetectionCorners(image, corners,detectionRadius))
+            }     //changed
+            if(detectionRadius > 0 && !hasLayoutDetectionCorners(image, corners,detectionRadius))       //changed
             {
                 showFocusAlert(image);
                 return null;
             }
-
-            if (corners.rows() == 4) {
+            if (points.size() == 4) {
                 Log.d(TAG, "Detected 4 corners. Sorting points...");        //added
                 CVOperations.sortPointListFromLeft(points);
                 List<Point> leftPoints = new ArrayList<Point>();
@@ -124,7 +113,7 @@ public class PageEdgeDetection {
                 int minX        = Math.min((int)topLeft.x, (int)bottomLeft.x);
                 int maxX        = Math.max((int)topRight.x, (int)bottomRight.x);
                 int maxWidth    = maxX-minX;
-                
+
                 Rect rectCrop = new Rect((int)((int)topLeft.x+(int)bottomLeft.x)/2, (int)topLeft.y-5, maxWidth, maxHeight+10);
                 Log.d(TAG, "Rect Width " + rectCrop.width+" Rect Height "+rectCrop.height);     //changed
                 Log.d(TAG, "ROI Rect: " + rectCrop);        //added
@@ -157,8 +146,8 @@ public class PageEdgeDetection {
                     }
                     return croppedMat;
                 }
-            } 
-            else {
+            
+            }else{
                 Log.d(TAG, "Not enough points detected. Showing focus alert.");
                 showFocusAlert(image);
                 return null;
@@ -166,7 +155,6 @@ public class PageEdgeDetection {
         }
         return null;
     }
-
 
     private final Mat cropROI(Mat image, Point topLeft, Point topRight, Point bottomLeft, Point bottomRight) {
         Mat capturedImage       = image.clone();
@@ -187,13 +175,27 @@ public class PageEdgeDetection {
 
     private final boolean hasLayoutDetectionCorners(Mat src, MatOfPoint corners, int detectionRadius) {
         boolean isValid = true;
+         List<Point> points = new ArrayList<Point>();
+            for (int i = 0; i < corners.rows(); i++) {
+                double[] point = corners.get(i, 0);
+                points.add(new Point(point[0], point[1]));
+            }
+        // Check if there are any detected corners
         if (points.size() > 0) {
+            // Iterate through each detected corner
             for (int i = 0; i < points.size(); i++) {
                 Point corner1 = points.get(i);
+    
+                // Check against other corners
                 for (int j = i + 1; j < points.size(); j++) {
                     Point corner2 = points.get(j);
+    
+                    // Calculate the Euclidean distance between two corners
                     double distance = Math.sqrt(Math.pow(corner2.x - corner1.x, 2) + Math.pow(corner2.y - corner1.y, 2));
+    
+                    // Check if the distance between the corners is less than the specified detection radius
                     if (distance < detectionRadius) {
+                        // If the distance is less than detectionRadius, set isValid to false and break out of the loop
                         isValid = false;
                         break;
                     }
@@ -203,6 +205,25 @@ public class PageEdgeDetection {
     
         // Return the validity status
         return isValid;
+    }
+    
+    
+    
+
+    private final void drawDetectedCircles(Mat src, MatOfPoint corners) {
+        if (corners.rows() > 0) {
+            for (int i = 0; i < corners.rows(); i++) {
+                double[] point = corners.get(i, 0);
+                Point corner = new Point(point[0], point[1]);               //CHANGED FULL
+                Imgproc.circle(src, corner, 10, new Scalar(255,0,255), 3);
+               /*  // circle center
+                Imgproc.circle(src, center, 1, new Scalar(0,100,100), 3, 8, 0 );
+                // circle outline
+                int radius = (int) Math.round(c[2]);
+                // Log.d(TAG, "drawDetectedCircles Circle ("+x+") Radius :: " + radius);
+                Imgproc.circle(src, center, radius, new Scalar(255,0,255), 3, 8, 0 ); */
+            }
+        }
     }
 
     private final void drawPOIArea(Mat image, Point topLeft, Point topRight, Point bottomLeft, Point bottomRight) {
