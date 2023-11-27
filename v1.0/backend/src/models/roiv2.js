@@ -14,7 +14,7 @@ const ROIV2Schema = new mongoose.Schema({
         type: Object,
         required: true
     },
-    orgId:{
+    schoolId:{
         type: String,
         required: true,
         trim: true

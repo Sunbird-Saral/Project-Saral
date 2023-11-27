@@ -13,6 +13,7 @@ const markRouter = require('./routers/mark.route')
 const roiRouter = require('./routers/roi.route')
 const brandRouter = require('./routers/brand.route')
 const admissionRouter = require('./routers/admission.route');
+const roiv2Router = require('./routers/roiv2.route');
 var cors = require('cors');
 const expressWinston = require('express-winston')
 const logger = require('./logging/logger')
@@ -85,6 +86,7 @@ app.use(markRouter)
 app.use(roiRouter)
 app.use(brandRouter)
 app.use(admissionRouter)
+app.use(roiv2Router)
 app.use(db.releaseClientPool)
 app.use("/api-docs/saral/frontend", swaggerUi.serve, (...args) => swaggerUi.setup(frontendSpec)(...args));
 app.use("/api-docs/saral/maintenance", swaggerUi.serve, (...args) => swaggerUi.setup(maintenanceSpec)(...args));
