@@ -441,6 +441,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
             JSONObject threshold1 = layoutObject1.getJSONObject("threshold");
             boolean isExpEdgeDetection = threshold1.has("expPageCornerDetection") && threshold1.getBoolean("expPageCornerDetection");     
             boolean isTableCornerDetection = !isExpEdgeDetection; 
+            Log.d(TAG, "isExpEdgeDetection "+isExpEdgeDetection);
             if(isTableCornerDetection)    
             {
                 tableMat                = mTableCornerDetection.processMat(image,layoutMinWidth,layoutMinHeight,detectionRadius); 
@@ -475,10 +476,12 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
             sound.play(MediaActionSound.FOCUS_COMPLETE);
 
             try {
+
                 JSONObject layoutConfigs = new JSONObject(mlayoutConfigs);
                 JSONObject layoutObject = layoutConfigs.getJSONObject("layout");
                 JSONObject threshold = layoutObject.getJSONObject("threshold");
                 Boolean hasExperimentalOmr = threshold.has("experimentalOMRDetection") ? threshold.getBoolean("experimentalOMRDetection")? true :false:false;
+                Log.d(TAG, "isExpOMRDetection ", +hasExperimentalOmr);
                 for (int i = 0; i < rois.length(); i++) {
                     JSONObject roiConfig  = rois.getJSONObject(i);
 
