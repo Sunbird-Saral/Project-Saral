@@ -20,7 +20,7 @@ exports.getRoiData = async (req, res, next) => {
             let examSetLookupExist = {}
 
             if (roiExist) {
-                if (req.query.set && examExist && typeof examExist == "object" && examExist.set) {
+                if (req.query.set && typeof examExist == "object" && examExist.set) {
 
                     examSetLookupExist = {
                         classId: examExist.classId,

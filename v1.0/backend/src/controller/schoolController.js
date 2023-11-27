@@ -4,7 +4,6 @@ const usersSchema = require("../models/users")
 const Helper = require('../middleware/helper')
 const { stringObject } = require('../utils/commonUtils');
 const logger = require('../logging/logger')
-// const {getLoginData,setLoginData,getToken,setToken} = require('../logging/logger')
 
 exports.loginSchool = async (req, res, next) => {
 
@@ -70,8 +69,8 @@ exports.loginSchool = async (req, res, next) => {
         throw new Error('No Classes')
       }
 
-      classData.forEach(data => {
-        const { sections, classId, className } = data
+      classData.forEach(detail => {
+        const { sections, classId, className } = detail
         let obj = {
           sections,
           classId,

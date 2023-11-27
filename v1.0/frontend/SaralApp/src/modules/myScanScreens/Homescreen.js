@@ -38,6 +38,7 @@ import DeviceInfo from 'react-native-device-info';
 import {SaveScanData} from '../../flux/actions/apis/saveScanDataAction';
 import axios from 'axios';
 import PushNotification, {Importance} from 'react-native-push-notification';
+import {collectErrorLogs} from '../CollectErrorLogs';
 class HomeComponent extends Component {
   constructor(props) {
     super(props);

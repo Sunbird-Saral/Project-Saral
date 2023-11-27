@@ -13,7 +13,7 @@ import {
     setLoginData, setLoginCred, getLoginCred, setRememberUser, getRememberedUser, forgetUser, setRememberPassword, getRememberedPassword, forgetUserpass, getLoginData
 } from '../../utils/StorageUtils'
 import { Assets } from '../../assets/index'
-import { checkNetworkConnectivity, monospace_FF } from '../../utils/CommonUtils';
+import { checkNetworkConnectivity, monospace_FF, askPermissions } from '../../utils/CommonUtils';
 import { loginEvent } from '../../utils/Analytics';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getBrandingDataApi, getLoginApi, setLoginApi, setBrandingDataApi } from '../../utils/offlineStorageUtils';
@@ -49,6 +49,7 @@ class LoginComponent extends Component {
         this.setState({ hidePassword: !this.state.hidePassword });
     }
     async componentDidMount() {
+        await askPermissions();
         const schollId = await this.rememberMeSchoolId();
         const password = await this.rememberMePassword();
         this.setState({
@@ -161,24 +162,24 @@ class LoginComponent extends Component {
         const deviceUniqId = await DeviceInfo.getUniqueId();
         let hasNetwork = await checkNetworkConnectivity();
         let hasCacheData = await getLoginApi();
+        let isPasswordMismatchFromCache = false;
 
         let cacheFilterData = hasCacheData != null
             ?
             hasCacheData.filter((element) => {
-                let userId = JSON.parse(element.data.config.data)
-                if (userId.schoolId == schoolId) {
-                    return true
+                let userData = JSON.parse(element.data.config.data)
+                if (userData.schoolId == schoolId) {
+                    if(userData.password == password) {
+                        return true
+                    } else {
+                        isPasswordMismatchFromCache = true
+                    }
                 }
             })
             :
             []
 
-        if (hasCacheData != null && cacheFilterData.length > 0) {
-            if (cacheFilterData.length > 0) {
-                storeFactory.dispatch(this.dispatchLoginData(cacheFilterData[0].data))
-                this.props.navigation.navigate('mainMenu')
-            }
-        } else if (hasNetwork) {
+        if (hasNetwork) {
             this.setState({
                 isLoading: true,
                 calledLogin: true
@@ -192,11 +193,22 @@ class LoginComponent extends Component {
                 this.props.APITransport(apiObj);
                 
             })
-        } else if (!hasNetwork && schoolId.length > 0) {
-            this.setState({
-                errCommon: Strings.you_dont_have_cache,
-                isLoading: false
-            })
+        } else if (hasCacheData != null && !hasNetwork && schoolId.length > 0) {
+
+            if (cacheFilterData.length > 0) {
+                storeFactory.dispatch(this.dispatchLoginData(cacheFilterData[0].data))
+                this.props.navigation.navigate('mainMenu')
+            } else if(isPasswordMismatchFromCache) {
+                this.setState({
+                    errCommon: Strings.password_doesnot_match,
+                    isLoading: false
+                })
+            } else {
+                this.setState({
+                    errCommon: Strings.you_dont_have_cache,
+                    isLoading: false
+                })
+            }
         }
         else {
             this.setState({

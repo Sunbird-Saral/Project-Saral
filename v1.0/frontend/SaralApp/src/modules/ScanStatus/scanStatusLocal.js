@@ -266,7 +266,7 @@ const callCustomModal = (title, message, isAvailable, func, cancel) => {
                     clearTimeout(id);
 
                     let hasMessage = res ? typeof res.data == "string" ? true : false : false
-                    if (hasMessage) {
+                    if (!hasMessage) {
                         api.processResponse(res);
                         callScanStatusData(false, filteredDatalen, localScanData)
                         

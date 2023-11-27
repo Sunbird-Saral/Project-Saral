@@ -1,6 +1,6 @@
 const schoolsSchema = require("../models/school")
 const studentsSchema = require("../models/students")
-const marksSchema = require("../models/marks")
+const marksSchema = require("../models/marks").marksSchema
 const examsSchema = require('../models/exams')
 const Helper = require('../middleware/helper')
 const logger = require('../logging/logger')
@@ -21,8 +21,8 @@ exports.fetchStudentsandExams = async (req, res, next) => {
     
         match.schoolId = req.school.schoolId
         if (req.query.classId) {
-            match.classId = req.query.classId,
-                examMatch.classId = req.query.classId
+            match.classId = req.query.classId
+            examMatch.classId = req.query.classId
         } else {
             return res.status(400).json({ message: 'Please send classId' })
         }
@@ -54,7 +54,7 @@ exports.fetchStudentsandExams = async (req, res, next) => {
             }
 
             if(examMatch.subject) {
-                lookup.subject =  examMatch.subject,
+                lookup.subject =  examMatch.subject
                 lookup.examDate = examMatch.examDate
             }
         

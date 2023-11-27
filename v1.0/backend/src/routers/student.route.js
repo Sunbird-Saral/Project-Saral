@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router();
 const { auth } = require('../middleware/auth')
 const studentsSchema = require("../models/students")
-const marksSchema = require("../models/marks")
+const marksSchema = require("../models/marks").marksSchema
 const clientPool = require('../db/mongoose');
 
 const studentController = require('../controller/studentController')
@@ -58,9 +58,9 @@ router.post('/fetchStudentsByQuery', auth, async (req, res, next) => {
     const match = {}
     match.schoolId = req.school.schoolId
     if (req.body.classId) {
-        match.classId = req.body.classId,
-            match.className = req.body.className,
-            $comment = "Get Student API for Find Students Data"
+        match.classId = req.body.classId
+        match.className = req.body.className
+        match.$comment = "Get Student API for Find Students Data"
     }
 
     if (req.body.section && req.body.section != "0") {
@@ -107,7 +107,7 @@ router.delete('/student/:studentId', auth, async (req, res, next) => {
 })
 
 router.patch('/student/:studentId', auth, async (req, res, next) => {
-    if (Object.keys(req.body).length === 0) res.status(400).send({ message: 'Validation error.' })
+    if (Object.keys(req.body).length === 0) return res.status(400).send({ message: 'Validation error.' })
     const inputKey = Object.keys(req.body)
     const allowedUpdates = ['name', 'classId']
     const isValidOperation = inputKey.every((update) => allowedUpdates.includes(update))
