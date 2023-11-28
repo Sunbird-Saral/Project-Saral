@@ -40,7 +40,4 @@ classSchema.index({schoolId: -1})
 //     return classes
 // }
 
-
-// const Classes = mongoose.model('Class', classSchema)
-
 module.exports = classSchema

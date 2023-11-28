@@ -1091,7 +1091,7 @@ class MyScanComponent extends Component {
         {!this.props.minimalFlag ? (
           <ShareComponent
             navigation={this.props.navigation}
-            onPress={() => this.props.navigation.navigate('StudentsList')}
+            onPress={() => this.props.navigation.navigate('StudentsList', {filteredData: filteredData})}
           />
         ) : (
           <ShareComponent

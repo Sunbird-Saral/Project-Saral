@@ -24,6 +24,7 @@ import DeviceInfo from 'react-native-device-info';
 import { SaveScanData } from "../../flux/actions/apis/saveScanDataAction";
 import axios from 'axios';
 import PushNotification, { Importance } from "react-native-push-notification";
+import { collectErrorLogs } from '../CollectErrorLogs';
 class HomeComponent extends Component {
     constructor(props) {
         super(props);
@@ -120,7 +121,7 @@ class HomeComponent extends Component {
                             storeFactory.dispatch(self.flagAction(false))
                         })
                         .catch(function (err) {
-                            collectErrorLogs("Brand.js","backgroundJob",apiObj.apiEndPoint(),err,false)
+                            collectErrorLogs("Homescreen.js","backgroundJob",apiObj.apiEndPoint(),err,false)
                             clearTimeout(id)
                             let data = {
                                 title : Strings.message_text,
@@ -128,8 +129,8 @@ class HomeComponent extends Component {
                                 isOkAvailable : false,
                                 isCancel : false
                             }
-                            dispatch(dispatchCustomModalStatus(true));
-                            dispatch(dispatchCustomModalMessage(data));
+                            self.props.dispatchCustomModalStatus(true);
+                            dispatch(self.props.dispatchCustomModalMessage(data));
                             storeFactory.dispatch(self.flagAction(false))
                         });
                 });

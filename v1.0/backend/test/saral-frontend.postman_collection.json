@@ -33,7 +33,7 @@
 								"disabled": true
 							},
 							{
-								"key": "Origins",
+								"key": "Origin",
 								"value": "http://192.168.31.200:3000",
 								"type": "text",
 								"disabled": true
@@ -1582,6 +1582,16 @@
 							{
 								"key": "Authorization",
 								"value": "{{bearer_token}}",
+								"type": "text"
+							},
+							{
+								"key": "methods",
+								"value": "POST",
+								"type": "text"
+							},
+							{
+								"key": "Origin",
+								"value": "http://192.168.31.200:3000",
 								"type": "text"
 							}
 						],
