@@ -8,6 +8,7 @@ import org.opencv.calib3d.Calib3d;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint2f;
+import org.opencv.core.MatOfPoint;
 import org.opencv.core.Point;
 import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
@@ -18,10 +19,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TableCornerCirclesDetection {
-    private static final String  TAG        = "SrlSDK::TableDetector";
-    private boolean DEBUG                   = false;
+    private static final String  TAG        = "SrlSDK::TableDetector";     
+    private boolean DEBUG                   = false; 
     private double mROI                     = 0.0;
     private Point mTopLeft, mTopRight, mBottomLeft, mBottomRight;
+    private List<Point> points = new ArrayList<Point>();
 
     public Point getmTopLeft() {
         return mTopLeft;
@@ -44,11 +46,116 @@ public class TableCornerCirclesDetection {
         return mROI;
     }
 
-    public TableCornerCirclesDetection(boolean debug){
+    public TableCornerCirclesDetection(boolean debug){  
         DEBUG = debug;
     }
 
-    public Mat processMat(Mat image,int minWidth,int minHeight,int detectionRadius) {
+    public Mat processMatExp(Mat image) {
+
+        Mat gray        = new Mat();
+        Imgproc.Canny(image, gray, 30, 100);
+        Mat hierarchy = new Mat();
+        List<MatOfPoint> contours = new ArrayList<>();
+        Imgproc.findContours(gray, contours, hierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
+
+        double maxArea          = 0;
+        int maxAreaContourIndex = 0;
+        if (contours.size() > 0) {
+            for (int i = 0; i < contours.size(); i++) {
+                double contourArea = Imgproc.contourArea(contours.get(i));
+                if (maxArea < contourArea) {                                
+                    maxArea                 = contourArea;
+                    maxAreaContourIndex     = i;
+                }
+            }//gets biggest contour
+
+            Rect r = Imgproc.boundingRect(contours.get(maxAreaContourIndex));       //get coordinates
+            Imgproc.rectangle(image, new Point(r.x, r.y), new Point(r.x + r.width, r.y + r.height), new Scalar(255, 0, 0, 255), 2); //draw
+            
+            Point topLeft = new Point(r.x, r.y);
+            Point topRight = new Point(r.x + r.width, r.y);
+            Point bottomLeft = new Point(r.x, r.y + r.height);
+            Point bottomRight = new Point(r.x + r.width, r.y + r.height);
+
+            Point[] cornerPoints = new Point[4];
+            cornerPoints[0] = topLeft;
+            cornerPoints[1] = topRight;
+            cornerPoints[2] = bottomLeft;
+            cornerPoints[3] = bottomRight;
+            MatOfPoint corners = new MatOfPoint();
+            corners.fromArray(cornerPoints);
+            List<Point> points = new ArrayList<Point>();
+            for (int i = 0; i < corners.rows(); i++) {
+                double[] point = corners.get(i, 0);
+                points.add(new Point(point[0], point[1]));
+            }                 
+            if (corners.rows() == 4) {
+                Log.d(TAG, "Detected 4 corners. Sorting points...");        //added
+                CVOperations.sortPointListFromLeft(points);
+                List<Point> leftPoints = new ArrayList<Point>();
+                List<Point> rightPoints = new ArrayList<Point>();
+
+                leftPoints.add(0, points.get(0));
+                leftPoints.add(1, points.get(1));
+
+                rightPoints.add(0, points.get(2));
+                rightPoints.add(1, points.get(3));
+
+                CVOperations.sortPointListFromTop(leftPoints);
+                CVOperations.sortPointListFromTop(rightPoints);
+
+                topLeft     = leftPoints.get(0);
+                topRight    = rightPoints.get(0);
+                bottomLeft  = leftPoints.get(1);
+                bottomRight = rightPoints.get(1);
+
+                // distance 
+                mROI        = (bottomRight.x - topLeft.x) * (bottomLeft.y - topRight.y);
+                int minY        = Math.min((int)topLeft.y, (int)topRight.y);
+                int maxY        = Math.max((int)bottomLeft.y, (int)bottomRight.y);
+                int maxHeight   = maxY-minY;
+
+                int minX        = Math.min((int)topLeft.x, (int)bottomLeft.x);
+                int maxX        = Math.max((int)topRight.x, (int)bottomRight.x);
+                int maxWidth    = maxX-minX;
+                
+                Rect rectCrop = new Rect((int)((int)topLeft.x+(int)bottomLeft.x)/2, (int)topLeft.y-5, maxWidth, maxHeight+10);
+                Log.d(TAG, "Rect Width " + rectCrop.width+" Rect Height "+rectCrop.height);     //changed
+                Log.d(TAG, "ROI Rect: " + rectCrop);        //added
+
+                if (0 <= rectCrop.x
+                        && 0 <= rectCrop.width
+                        && rectCrop.x + rectCrop.width <= image.cols()
+                        && 0 <= rectCrop.y
+                        && 0 <= rectCrop.height
+                        && rectCrop.y + rectCrop.height <= image.rows()) {
+
+                    mTopLeft        = topLeft;
+                    mBottomLeft     = bottomLeft;
+                    mTopRight       = topRight;
+                    mBottomRight    = bottomRight;
+
+                    Log.d(TAG, "Detected ROI Area: " + mROI);
+                    drawPOIArea(image, topLeft, topRight, bottomLeft, bottomRight);
+
+                    Mat croppedMat  = cropROI(image, topLeft, topRight, bottomLeft, bottomRight);
+                    if (DEBUG){
+                        Log.d(TAG, "Detected corners: " + corners.rows());       //added
+                        CVOperations.saveImage(croppedMat, "table", 3, false);
+                    }
+                    return croppedMat;
+                }
+            } 
+            else {
+                Log.d(TAG, "Not enough points detected. Showing focus alert.");
+                showFocusAlert(image);
+                return null;
+            }
+        }
+        return null;
+    }
+    public Mat processMat(Mat image,int minWidth,int minHeight,int detectionRadius) 
+    {
 
         Mat gray        = new Mat();
         Imgproc.cvtColor(image, gray, Imgproc.COLOR_BGR2GRAY);
@@ -138,6 +245,7 @@ public class TableCornerCirclesDetection {
         return null;
     }
 
+
     private final Mat cropROI(Mat image, Point topLeft, Point topRight, Point bottomLeft, Point bottomRight) {
         Mat capturedImage       = image.clone();
         Mat croppedImage        = homographicTransformation(capturedImage, topRight, bottomRight, topLeft, bottomLeft);
@@ -145,6 +253,7 @@ public class TableCornerCirclesDetection {
     }
 
     private void showFocusAlert(Mat image) {
+        Log.d(TAG, "Showing Focus Alert");              //added
         String text     = "Please focus the camera by moving up or down";
         Point position  = new Point(image.width()/6, image.height() / 2);
         Scalar color    = new Scalar(255, 0, 0);
@@ -153,7 +262,6 @@ public class TableCornerCirclesDetection {
         int thickness   = 3;
         Imgproc.putText(image, text, position, font, scale, color, thickness);
     }
-
     private final boolean hasLayoutDetectionCircles(Mat src, Mat circles,int detectionRadius) {
         boolean isValid= true;
         if (circles.cols() > 0) {
@@ -194,7 +302,7 @@ public class TableCornerCirclesDetection {
             Imgproc.circle(image, topLeft, 10, new Scalar(255.0, 0.0, 0.0), 10);
             Imgproc.circle(image, topRight, 10, new Scalar(0.0, 255.0, 0.0), 10);
             Imgproc.circle(image, bottomLeft, 10, new Scalar(0.0, 0.0, 255.0), 10);
-            Imgproc.circle(image, bottomRight, 10, new Scalar(255.0, 255.0, 0.0), 10);
+            Imgproc.circle(image, bottomRight, 10, new Scalar(255.0, 255.0, 0.0), 10);      //changed
         }
         Imgproc.line(image, topLeft,    topRight,       new Scalar(0.0, 255.0, 0.0), 5);
         Imgproc.line(image, bottomLeft, bottomRight,    new Scalar(0.0, 255.0, 0.0), 5);
