@@ -1,147 +1,82 @@
 {
-    "admissionNumber":"0123",
-    "dateOfAdmission":{
-       "obtained":"22/11/2023"
-    },
-    "studentAadharNumber":{
-       "obtained":"123456"
-    },
-    "studentDetails":{
-       "firstName":{
-          "obtained":"student1"
-       },
-       "surname":{
-          "obtained":"student"
-       },
-       "dateOfBirth":{
-          "obtained":"12/03/1998"
-       },
-       "gender":{
-          "obtained":"male"
-       },
-       "address":{
-          "obtained":"address"
-       },
-       "block":{
-          "obtained":"block"
-       },
-       "district":{
-          "obtained":"district"
-       },
-       "guardianFirstName":{
-          "obtained":"father name"
-       },
-       "guardianSurname":{
-          "obtained":"father surname"
-       },
-       "guardianRelation":{
-          "obtained":"father"
-       }
-    },
-    "fatherDetails":{
-       "name":{
-          "obtained":"father name"
-       },
-       "education":{
-          "obtained":"MBA"
-       },
-       "occupation":{
-          "obtained":"Buisness"
-       },
-       "contactDetails":{
-          "obtained":"123456"
-       }
-    },
-    "motherDetails":{
-       "name":{
-          "obtained":"mother name"
-       },
-       "education":{
-          "obtained":"Mcom"
-       },
-       "occupation":{
-          "obtained":"Entrepreneur"
-       },
-       "contactDetails":{
-          "obtained":"78901"
-       }
-    },
-    "rollNumber":{
-       "obtained":"456"
-    },
-    "religion":{
-        "hindu": {
-           "obtained": "1"
-        },
-        "muslim": {
-            "obtained": "0"
-         },
-        "christian": {
-            "obtained": "0"
-         },
-        "sikh": {
-            "obtained": "0"
-         },
-        "other": {
-            "obtained": "other"
-         }
-     },
-    "category":{
-        "general": {
-            "obtained": "1"
-         },
-        "OBC": {
-            "obtained": "0"
-         },
-        "SC": {
-            "obtained": "0"
-         },
-        "ST": {
-            "obtained": "0"
-         }
-     },
-    "typeOfRationCard":{
-       "APL":{
-          "obtained":"1"
-       },
-       "APM":{
-          "obtained":"0"
-       },
-       "Antyodaya":{
-          "obtained":"0"
-       },
-       "other":{
-          "obtained":"other"
-       }
-    },
-    "CwSN":{
-       "Yes":{
-          "obtained":"0"
-       },
-       "No":{
-          "obtained":"1"
-       }
-    },
-    "addressOnRationCard":{
-       "address":{
-          "obtained":"adress"
-       },
-       "ward":{
-          "obtained":"ward"
-       },
-       "block":{
-          "obtained":"block"
-       },
-       "district":{
-          "obtained":"district"
-       }
-    },
-    "outOfSchool":{
-       "Yes":{
-          "obtained":"0"
-       },
-       "No":{
-          "obtained":"1"
-       }
-    }
- }
+   "admissionNumber":"0123",
+   "dateOfAdmission":"23/1/2023",
+   "studentAadharNumber":"1234235",
+   "studentDetails":{
+      "firstName":"student",
+      "surname":"student",
+      "dateOfBirth":"12/03/1998",
+      "gender":{
+          "male": "1",
+          "female": "0"
+      },
+      "address":"address",
+      "block":"block",
+      "district":"district",
+      "guardianFirstName":"guardian",
+      "guardianSurname":"guardian",
+      "guardianRelation": {
+          "father": "1",
+          "mother": "0",
+          "other": "NA"
+      }
+   },
+   "fatherDetails":{
+      "name":"father",
+      "education":"MBA",
+      "occupation":"Manager",
+      "contactDetails":{
+          "phone1": "1234",
+          "phone2": "5678"
+      }
+   },
+   "motherDetails":{
+      "name":"mother",
+      "education":"MSc",
+      "occupation":"Engineer",
+      "contactDetails":{
+          "phone1": "5678",
+          "phone2": "1234"
+      }
+   },
+   "rollNumber":"12",
+   "religion":{
+       "hindu": "1",
+       "muslim": "0",
+       "christian": "0",
+       "sikh": "0",
+       "other": "NA"
+   },
+   "category":{
+       "general": "1",
+       "OBC": "0",
+       "SC": "0",
+       "ST": "0"
+   },
+   "typeOfRationCard":{
+      "APL":"1",
+      "APM":"0",
+      "Antyodaya":"0",
+      "other":"NA"
+   },
+   "CwSN":{
+      "Yes":"1",
+      "No":"0"
+   },
+   "addressOnRationCard":{
+      "address":"address",
+      "ward":"ward",
+      "block":"block",
+      "district":"district"
+   },
+   "outOfSchool":{
+      "Yes":"1",
+      "No":"0"
+   },
+   "predictionInfo": [{
+      "reference": "outOfSchool.Yes",
+      "predictedValue": "1",
+      "predictionConfidence": [],
+      "trainingData": []
+ }]
+}

@@ -7,8 +7,8 @@ exports.saveAdmissions = async (req, res, next) => {
         const Admissions = connection.model('Admissions', admissionsSchema)
         const studentAdmissionData = new Admissions(req.body)
         const filter = {
-            admissionNumber: studentAdmissionData.admissionNumber,
-            schoolId: req.school.schoolId
+            schoolId: req.school.schoolId,
+            admissionNumber: studentAdmissionData.admissionNumber
         }
 
         const update = {
@@ -28,9 +28,10 @@ exports.saveAdmissions = async (req, res, next) => {
             typeOfRationCard: studentAdmissionData.typeOfRationCard,
             CwSN: studentAdmissionData.CwSN,
             addressOnRationCard: studentAdmissionData.addressOnRationCard,
-            outOfSchool: studentAdmissionData.outOfSchool
+            outOfSchool: studentAdmissionData.outOfSchool,
+            predictionInfo: studentAdmissionData.predictionInfo
         }
-        await Admissions.updateOne(filter, update, {upsert:true})
+        await Admissions.updateOne(filter, update, {upsert:true, runValidators: true})
         const match = {
             schoolId: req.school.schoolId,
             userId: req.school.userId

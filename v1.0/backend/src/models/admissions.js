@@ -10,914 +10,257 @@ const admissionsSchema = new mongoose.Schema({
       type: String,
       required: true,
       trim: true,
-  },
+   },
    admissionNumber: {
       type: String,
       required: true,
-      trim: true,
-      index: true
-   },
-   admissionNumberTrainingData: {
-      type: Array,
-      required: false
-   },
-   predictedAdmissionNumber: {
-      type: String,
-      required: false
+      trim: true
    },
    dateOfAdmission: {
-      predicted: {
-         type: String,
-         required: false
-      },
-      predictionConfidence: {
-         type: Array,
-         required: false
-      },
-      obtained: {
-         type: String,
-         required: true
-      },
-      trainingData: {
-         type: Array,
-         required: false
-      }
+      type: String,
+      required: true
    },
    studentAadharNumber: {
-      predicted: {
-         type: String,
-         required: false
-      },
-      predictionConfidence: {
-         type: Array,
-         required: false
-      },
-      obtained: {
-         type: String,
-         required: true
-      },
-      trainingData: {
-         type: Array,
-         required: false
-      }
+      type: String,
+      required: true
    },
    studentDetails: {
       firstName: {
-         predicted: {
-            type: String,
-            required: false
-         },
-         predictionConfidence: {
-            type: Array,
-            required: false
-         },
-         obtained: {
-            type: String,
-            required: true,
-            trim: true
-         },
-         trainingData: {
-            type: Array,
-            required: false
-         }
+         type: String,
+         required: true,
+         trim: true
       },
       surname: {
-         predicted: {
-            type: String,
-            required: false
-         },
-         predictionConfidence: {
-            type: Array,
-            required: false
-         },
-         obtained: {
-            type: String,
-            required: true,
-            trim: true
-         },
-         trainingData: {
-            type: Array,
-            required: false
-         }
+         type: String,
+         required: true,
+         trim: true
       },
       dateOfBirth: {
-         predicted: {
-            type: String,
-            required: false
-         },
-         predictionConfidence: {
-            type: Array,
-            required: false
-         },
-         obtained: {
-            type: String,
-            required: true
-         },
-         trainingData: {
-            type: Array,
-            required: false
-         }
+         type: String,
+         required: true
       },
       gender: {
          male: {
-            predicted: {
-               type: String,
-               required: false
-            },
-            predictionConfidence: {
-               type: Array,
-               required: false
-            },
-            obtained: {
-               type: String,
-               required: true
-            },
-            trainingData: {
-               type: Array,
-               required: false
-            }
+            type: String,
+            required: true
          },
          female: {
-            predicted: {
-               type: String,
-               required: false
-            },
-            predictionConfidence: {
-               type: Array,
-               required: false
-            },
-            obtained: {
-               type: String,
-               required: true
-            },
-            trainingData: {
-               type: Array,
-               required: false
-            }
+            type: String,
+            required: true
          }
       },
       address: {
-         predicted: {
-            type: String,
-            required: false
-         },
-         predictionConfidence: {
-            type: Array,
-            required: false
-         },
-         obtained: {
-            type: String,
-            required: true,
-            trim: true
-         },
-         trainingData: {
-            type: Array,
-            required: false
-         }
+         type: String,
+         required: true,
+         trim: true
       },
       block: {
-         predicted: {
-            type: String,
-            required: false
-         },
-         predictionConfidence: {
-            type: Array,
-            required: false
-         },
-         obtained: {
-            type: String,
-            required: true,
-            trim: true
-         },
-         trainingData: {
-            type: Array,
-            required: false
-         }
+         type: String,
+         required: true,
+         trim: true
       },
       district: {
-         predicted: {
-            type: String,
-            required: false
-         },
-         predictionConfidence: {
-            type: Array,
-            required: false
-         },
-         obtained: {
-            type: String,
-            required: true,
-            trim: true
-         },
-         trainingData: {
-            type: Array,
-            required: false
-         }
+         type: String,
+         required: true,
+         trim: true
       },
       guardianFirstName: {
-         predicted: {
-            type: String,
-            required: false
-         },
-         predictionConfidence: {
-            type: Array,
-            required: false
-         },
-         obtained: {
-            type: String,
-            required: true,
-            trim: true
-         },
-         trainingData: {
-            type: Array,
-            required: false
-         }
+         type: String,
+         required: true,
+         trim: true
       },
       guardianSurname: {
-         predicted: {
-            type: String,
-            required: false
-         },
-         predictionConfidence: {
-            type: Array,
-            required: false
-         },
-         obtained: {
-            type: String,
-            required: true,
-            trim: true
-         },
-         trainingData: {
-            type: Array,
-            required: false
-         }
+         type: String,
+         required: true,
+         trim: true
       },
       guardianRelation: {
          father: {
-            predicted: {
-               type: String,
-               required: false
-            },
-            predictionConfidence: {
-               type: Array,
-               required: false
-            },
-            obtained: {
-               type: String,
-               required: true
-            },
-            trainingData: {
-               type: Array,
-               required: false
-            }
+            type: String,
+            required: true
          },
          mother: {
-            predicted: {
-               type: String,
-               required: false
-            },
-            predictionConfidence: {
-               type: Array,
-               required: false
-            },
-            obtained: {
-               type: String,
-               required: true
-            },
-            trainingData: {
-               type: Array,
-               required: false
-            }
+            type: String,
+            required: true
          },
          other: {
-            predicted: {
-               type: String,
-               required: false,
-               trim: true
-            },
-            predictionConfidence: {
-               type: Array,
-               required: false
-            },
-            obtained: {
-               type: String,
-               required: true,
-               trim: true
-            },
-            trainingData: {
-               type: Array,
-               required: false
-            }
+            type: String,
+            required: true,
+            trim: true
          }
       }
    },
    fatherDetails: {
       name: {
-         predicted: {
-            type: String,
-            required: false
-         },
-         predictionConfidence: {
-            type: Array,
-            required: false
-         },
-         obtained: {
-            type: String,
-            required: true,
-            trim: true
-         },
-         trainingData: {
-            type: Array,
-            required: false
-         }
+         type: String,
+         required: true,
+         trim: true
       },
       education: {
-         predicted: {
-            type: String,
-            required: false
-         },
-         predictionConfidence: {
-            type: Array,
-            required: false
-         },
-         obtained: {
-            type: String,
-            required: true,
-            trim: true
-         },
-         trainingData: {
-            type: Array,
-            required: false
-         }
+         type: String,
+         required: true,
+         trim: true
       },
       occupation: {
-         predicted: {
-            type: String,
-            required: false
-         },
-         predictionConfidence: {
-            type: Array,
-            required: false
-         },
-         obtained: {
-            type: String,
-            required: true,
-            trim: true
-         },
-         trainingData: {
-            type: Array,
-            required: false
-         }
+         type: String,
+         required: true,
+         trim: true
       },
       contactDetails: {
          phone1: {
-            predicted: {
-               type: String,
-               required: false
-            },
-            predictionConfidence: {
-               type: Array,
-               required: false
-            },
-            obtained: {
-               type: String,
-               required: true
-            },
-            trainingData: {
-               type: Array,
-               required: false
-            }
+            type: String,
+            required: true
          },
          phone2: {
-            predicted: {
-               type: String,
-               required: false
-            },
-            predictionConfidence: {
-               type: Array,
-               required: false
-            },
-            obtained: {
-               type: String,
-               required: true
-            },
-            trainingData: {
-               type: Array,
-               required: false
-            }
+            type: String,
+            required: true
          }
       }
    },
    motherDetails: {
       name: {
-         predicted: {
-            type: String,
-            required: false
-         },
-         predictionConfidence: {
-            type: Array,
-            required: false
-         },
-         obtained: {
-            type: String,
-            required: true,
-            trim: true
-         },
-         trainingData: {
-            type: Array,
-            required: false
-         }
+         type: String,
+         required: true,
+         trim: true
       },
       education: {
-         predicted: {
-            type: String,
-            required: false
-         },
-         predictionConfidence: {
-            type: Array,
-            required: false
-         },
-         obtained: {
-            type: String,
-            required: true,
-            trim: true
-         },
-         trainingData: {
-            type: Array,
-            required: false
-         }
+         type: String,
+         required: true,
+         trim: true
       },
       occupation: {
-         predicted: {
-            type: String,
-            required: false
-         },
-         predictionConfidence: {
-            type: Array,
-            required: false
-         },
-         obtained: {
-            type: String,
-            required: true,
-            trim: true
-         },
-         trainingData: {
-            type: Array,
-            required: false
-         }
+         type: String,
+         required: true,
+         trim: true
       },
       contactDetails: {
          phone1: {
-            predicted: {
-               type: String,
-               required: false
-            },
-            predictionConfidence: {
-               type: Array,
-               required: false
-            },
-            obtained: {
-               type: String,
-               required: true
-            },
-            trainingData: {
-               type: Array,
-               required: false
-            }
+            type: String,
+            required: true
          },
          phone2: {
-            predicted: {
-               type: String,
-               required: false
-            },
-            predictionConfidence: {
-               type: Array,
-               required: false
-            },
-            obtained: {
-               type: String,
-               required: true
-            },
-            trainingData: {
-               type: Array,
-               required: false
-            }
+            type: String,
+            required: true
          }
       }
    },
    rollNumber: {
-      predicted: {
-         type: String,
-         required: false
-      },
-      predictionConfidence: {
-         type: Array,
-         required: false
-      },
-      obtained: {
-         type: String,
-         required: true
-      },
-      trainingData: {
-         type: Array,
-         required: false
-      }
+      type: String,
+      required: true
    },
    religion: {
       hindu: {
-         predicted: {
-            type: String,
-            required: false
-         },
-         predictionConfidence: {
-            type: Array,
-            required: false
-         },
-         obtained: {
-            type: String,
-            required: true
-         },
-         trainingData: {
-            type: Array,
-            required: false
-         }
+         type: String,
+         required: true
       },
       muslim: {
-         predicted: {
-            type: String,
-            required: false
-         },
-         predictionConfidence: {
-            type: Array,
-            required: false
-         },
-         obtained: {
-            type: String,
-            required: true
-         },
-         trainingData: {
-            type: Array,
-            required: false
-         }
+         type: String,
+         required: true
       },
       christian: {
-         predicted: {
-            type: String,
-            required: false
-         },
-         predictionConfidence: {
-            type: Array,
-            required: false
-         },
-         obtained: {
-            type: String,
-            required: true
-         },
-         trainingData: {
-            type: Array,
-            required: false
-         }
+         type: String,
+         required: true
       },
       sikh: {
-         predicted: {
-            type: String,
-            required: false
-         },
-         predictionConfidence: {
-            type: Array,
-            required: false
-         },
-         obtained: {
-            type: String,
-            required: true
-         },
-         trainingData: {
-            type: Array,
-            required: false
-         }
+         type: String,
+         required: true
       },
       other: {
-         predicted: {
-            type: String,
-            required: false
-         },
-         predictionConfidence: {
-            type: Array,
-            required: false
-         },
-         obtained: {
-            type: String,
-            required: true,
-            trim: true
-         },
-         trainingData: {
-            type: Array,
-            required: false
-         }
+         type: String,
+         required: true,
+         trim: true
       }
    },
    category: {
       general: {
-         predicted: {
-            type: String,
-            required: false
-         },
-         predictionConfidence: {
-            type: Array,
-            required: false
-         },
-         obtained: {
-            type: String,
-            required: true
-         },
-         trainingData: {
-            type: Array,
-            required: false
-         }
+         type: String,
+         required: true
       },
       OBC: {
-         predicted: {
-            type: String,
-            required: false
-         },
-         predictionConfidence: {
-            type: Array,
-            required: false
-         },
-         obtained: {
-            type: String,
-            required: true
-         },
-         trainingData: {
-            type: Array,
-            required: false
-         }
+         type: String,
+         required: true
       },
       SC: {
-         predicted: {
-            type: String,
-            required: false
-         },
-         predictionConfidence: {
-            type: Array,
-            required: false
-         },
-         obtained: {
-            type: String,
-            required: true
-         },
-         trainingData: {
-            type: Array,
-            required: false
-         }
+         type: String,
+         required: true
       },
       ST: {
-         predicted: {
-            type: String,
-            required: false
-         },
-         predictionConfidence: {
-            type: Array,
-            required: false
-         },
-         obtained: {
-            type: String,
-            required: true
-         },
-         trainingData: {
-            type: Array,
-            required: false
-         }
+         type: String,
+         required: true
       }
    },
    typeOfRationCard: {
       APL: {
-         predicted: {
-            type: String,
-            required: false
-         },
-         predictionConfidence: {
-            type: Array,
-            required: false
-         },
-         obtained: {
-            type: String,
-            required: true
-         },
-         trainingData: {
-            type: Array,
-            required: false
-         }
+         type: String,
+         required: true
       },
       APM: {
-         predicted: {
-            type: String,
-            required: false
-         },
-         predictionConfidence: {
-            type: Array,
-            required: false
-         },
-         obtained: {
-            type: String,
-            required: true
-         },
-         trainingData: {
-            type: Array,
-            required: false
-         }
+         type: String,
+         required: true
       },
       Antyodaya: {
-         predicted: {
-            type: String,
-            required: false
-         },
-         predictionConfidence: {
-            type: Array,
-            required: false
-         },
-         obtained: {
-            type: String,
-            required: true
-         },
-         trainingData: {
-            type: Array,
-            required: false
-         }
+         type: String,
+         required: true
       },
       other: {
-         predicted: {
-            type: String,
-            required: false
-         },
-         predictionConfidence: {
-            type: Array,
-            required: false
-         },
-         obtained: {
-            type: String,
-            required: true,
-            trim: true
-         },
-         trainingData: {
-            type: Array,
-            required: false
-         }
+         type: String,
+         required: true,
+         trim: true
       }
    },
    CwSN: {
       Yes: {
-         predicted: {
-            type: String,
-            required: false
-         },
-         predictionConfidence: {
-            type: Array,
-            required: false
-         },
-         obtained: {
-            type: String,
-            required: true
-         },
-         trainingData: {
-            type: Array,
-            required: false
-         }
+         type: String,
+         required: true
       },
       No: {
-         predicted: {
-            type: String,
-            required: false
-         },
-         predictionConfidence: {
-            type: Array,
-            required: false
-         },
-         obtained: {
-            type: String,
-            required: true
-         },
-         trainingData: {
-            type: Array,
-            required: false
-         }
+         type: String,
+         required: true
       }
    },
    addressOnRationCard: {
       address: {
-         predicted: {
-            type: String,
-            required: false
-         },
-         predictionConfidence: {
-            type: Array,
-            required: false
-         },
-         obtained: {
-            type: String,
-            required: true,
-            trim: true
-         },
-         trainingData: {
-            type: Array,
-            required: false
-         }
+         type: String,
+         required: true,
+         trim: true
       },
       ward: {
-         predicted: {
-            type: String,
-            required: false
-         },
-         predictionConfidence: {
-            type: Array,
-            required: false
-         },
-         obtained: {
-            type: String,
-            required: true,
-            trim: true
-         },
-         trainingData: {
-            type: Array,
-            required: false
-         }
+         type: String,
+         required: true,
+         trim: true
       },
       block: {
-         predicted: {
-            type: String,
-            required: false
-         },
-         predictionConfidence: {
-            type: Array,
-            required: false
-         },
-         obtained: {
-            type: String,
-            required: true,
-            trim: true
-         },
-         trainingData: {
-            type: Array,
-            required: false
-         }
+         type: String,
+         required: true,
+         trim: true
       },
       district: {
-         predicted: {
-            type: String,
-            required: false
-         },
-         predictionConfidence: {
-            type: Array,
-            required: false
-         },
-         obtained: {
-            type: String,
-            required: true,
-            trim: true
-         },
-         trainingData: {
-            type: Array,
-            required: false
-         }
+         type: String,
+         required: true,
+         trim: true
       }
    },
    outOfSchool: {
       Yes: {
-         predicted: {
-            type: String,
-            required: false
-         },
-         predictionConfidence: {
-            type: Array,
-            required: false
-         },
-         obtained: {
-            type: String,
-            required: true
-         },
-         trainingData: {
-            type: Array,
-            required: false
-         }
+         type: String,
+         required: true
       },
       No: {
-         predicted: {
-            type: String,
-            required: false
-         },
-         predictionConfidence: {
-            type: Array,
-            required: false
-         },
-         obtained: {
-            type: String,
-            required: true
-         },
-         trainingData: {
-            type: Array,
-            required: false
-         }
+         type: String,
+         required: true
       }
-   }
+   },
+   //This field contains prediction related data of above fields as a list of data objects.
+   predictionInfo: [
+      {
+         reference: { type: String, required: true, enum: ['admissionNumber', 'dateOfAdmission', 'studentAadharNumber', 'studentDetails.firstName', 'studentDetails.surname', 'studentDetails.dateOfBirth', 'studentDetails.gender.male', 'studentDetails.gender.female', 'studentDetails.address', 'studentDetails.block', 'studentDetails.district', 'studentDetails.guardianFirstName', 'studentDetails.guardianSurname', 'studentDetails.guardianRelation.father', 'studentDetails.guradianRelation.mother', 'studentDetails.guradianRelation.other', 'fatherDetails.name', 'fatherDetails.education', 'fatherDetails.occupation', 'fatherDetails.contactDetails.phone1', 'fatherDetails.name.contactDetails.phone2', 'motherDetails.name', 'motherDetails.education', 'motherDetails.occupation', 'motherDetails.contactDetails.phone1', 'motherDetails.name.contactDetails.phone2', 'rollNumber', 'religion.hindu', 'religion.muslim', 'religion.christian', 'religion.sikh', 'religion.other', 'category.general', 'category.OBC', 'category.SC', 'category.ST', 'typeOfRationCard.APL', 'typeOfRationCard.APM', 'typeOfRationCard.Antyodaya', 'typeOfRationCard.other', 'CwSN.Yes', 'CwSN.No', 'addressOnRationCard.address', 'addressOnRationCard.ward', 'addressOnRationCard.block', 'addressOnRationCard.district', 'outOfSchool.Yes', 'outOfSchool.No'] },
+         predictedValue: { type: String, required: true },
+         predictionConfidence: { type: Array, required: false },
+         trainingData: { type: Array, required: false }
+      }
+   ]
 })
+
+admissionsSchema.index({schoolId: -1, admissionNumber: -1, studentAadharNumber: -1})
 
 module.exports = admissionsSchema
