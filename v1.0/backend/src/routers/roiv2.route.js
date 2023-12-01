@@ -86,11 +86,8 @@ router.patch('/v2/roi/:schemaName', auth, async (req, res, next) => {
         let connection = req.dbConnection;
         const inputKeys = Object.keys(req.body)
         const allowedUpdates = ['roi']
-        const isValidOperation = inputKeys.every((input) => allowedUpdates.includes(input))
+        if (Object.keys(req.body) != "roi") return res.status(400).send({ message: 'Invalid Input .' })
 
-        if (!isValidOperation) {
-            return res.status(400).send({ error: 'Invaid Input' })
-        }
         const Schools = connection.model('Schools', schoolsSchema)
         const Roisv2 = connection.model('Roisv2', roisv2Schema)
         const school = await Schools.findOne({ schoolId: req.school.schoolId, $comment: "Update V2 ROI API For Find School Data" });
@@ -101,7 +98,7 @@ router.patch('/v2/roi/:schemaName', auth, async (req, res, next) => {
             $comment: "Update V2 ROI API For Find ROI Data"
         }
 
-        const roiExist = await Roisv2.findOne(roiLookup)
+        const roiExist = await Roisv2.findOne(roiLookup).lean()
         if (roiExist) {
             let filter = {
                 roiId: roiExist.roiId,
@@ -133,14 +130,14 @@ router.delete('/v2/roi/:schemaName', auth, async (req, res, next) => {
             $comment: "Delete V2 ROI API For Find ROI Data"
         }
 
-        const roiExist = await Roisv2.findOne(roiLookup)
+        const roiExist = await Roisv2.findOne(roiLookup).lean()
         if (roiExist) {
             let filter = {
                 roiId: roiExist.roiId,
                 $comment: "Delete ROI V2 API for updating ROI"
             }
             await Roisv2.findOneAndRemove(filter);
-            res.status(201).send({ "message": 'ROI has been deleted successfully.' })
+            res.status(200).send({ "message": 'ROI has been deleted successfully.' })
         } else {
             res.status(400).send({ "message": `roi does not exist` })
         }
