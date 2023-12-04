@@ -14,8 +14,9 @@ import DashboardComponent from '../modules/myScanScreens/DashboardComponent';
 import ScannedDetailsComponent from '../modules/ScannedDetails/ScannedDetailsComponent';
 import HomeComponent from '../modules/myScanScreens/Homescreen';
 import ScanStatusLocal from '../modules/ScanStatus/scanStatusLocal';
-import Admissions from '../modules/POC/Admissions';
-import ShowScannedData from '../modules/POC/ShowScannedData';
+import AdmissionLanding from '../Admission/AdmissionLanding';
+import AdmissionsScan from '../Admission/AdmissionsScan';
+import ShowScannedData from '../Admission/ShowScannedData';
 
 const AuthStack = createStackNavigator(
   {
@@ -68,10 +69,13 @@ const MainStack = createStackNavigator(
       screen: ScannedDetailsComponent,
     },
     Admissions: {
-      screen: Admissions,
+      screen: AdmissionLanding,
     },
     ShowScannedData: {
       screen: ShowScannedData,
+    },
+    AdmissionsScan: {
+      screen: AdmissionsScan,
     },
   },
   {

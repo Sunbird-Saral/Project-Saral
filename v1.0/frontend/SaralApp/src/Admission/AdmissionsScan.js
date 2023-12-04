@@ -7,7 +7,7 @@ import {
   PermissionsAndroid,
 } from 'react-native';
 import React, {Component} from 'react';
-import SaralSDK from '../../../SaralSDK';
+import SaralSDK from '../../SaralSDK';
 
 import axios from 'axios';
 import {roi} from './roi';
@@ -88,11 +88,11 @@ export class Admissions extends Component {
         <TouchableOpacity
           style={[style.buttonContainer, {marginBottom: 20}]}
           onPress={() => this.onScan(1)}>
-          <Text style={style.buttonText}>Scan Admission Page 1</Text>
+          <Text style={style.buttonText}>SCAN PAGE 1</Text>
         </TouchableOpacity>
         <TouchableOpacity style={[style.buttonContainer, {marginBottom: 20}]}>
           <Text style={style.buttonText} onPress={() => this.onScan(2)}>
-            Scan Admission Page 2
+            SCAN PAGE 2
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
