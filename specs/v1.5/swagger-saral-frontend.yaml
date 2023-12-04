@@ -10,6 +10,7 @@ tags:
 - name: "Marks"
 - name: "ROI"
 - name: "Brand"
+- name: "Admissions"
 
 
 securityDefinitions:
@@ -177,6 +178,29 @@ paths:
         "404":
           description: "Brand does not exist."
   
+  /admissions:
+    put:
+      security:
+        - Bearer: []
+      tags:
+        - Admissions
+      summary: "Create admissions for a student"
+      parameters:
+        - name: body
+          in: body
+          schema:
+            $ref: "#/definitions/SaveAdmissions"
+          description: Create admissions record for students .Application may send  "X-App-Version" in header.
+
+      responses:
+        "201":
+          description: "successful operation"
+          schema: 
+            $ref: "#/definitions/SaveAdmissionsResponseBody"
+        "400":
+          description: "Custom message can be set to message about the error or failure"
+        "500":
+          description: "Server error or State/District/School is locked for scanning"
 
 
 definitions:
@@ -939,3 +963,357 @@ definitions:
       message:
         type: string
         example: "Saved Successfully."
+
+  SaveAdmissionsResponseBody:
+    type: object
+    properties:
+      message:
+        type: string
+        example: "Saved Successfully." 
+      documentCount: 
+        type: number
+        example:  1      
+
+  SaveAdmissions:
+    type: object
+    required:
+      - admissionNumber
+      - dateOfAdmission
+      - studentAadharNumber
+      - studentDetails
+      - fatherDetails
+      - motherDetails
+      - rollNumber
+      - religion
+      - category
+      - typeOfRationCard
+      - CwSN
+      - addressOnRationCard
+      - outOfSchool
+      - predictionInfo
+    properties:
+      admissionNumber:
+        type: string
+        description: "Admission Number"
+        example: "01234"
+      dateOfAdmission:
+        type: string
+        description: "Date Of Admission"
+        example: "2023-09-24"
+      studentAadharNumber:
+        type: string
+        description: "Student Aadhar Number"
+        example: "123456"
+      studentDetails:
+        $ref: '#/definitions/StudentDetails'
+      fatherDetails:
+        $ref: '#/definitions/FatherDetails'
+      motherDetails:
+        $ref: '#/definitions/MotherDetails'
+      rollNumber:
+        type: string
+        description: "Roll Number"
+        example: "123456"
+      religion:
+        $ref: '#/definitions/Religion'
+      category:
+        $ref: '#/definitions/Category'
+      typeOfRationCard:
+        $ref: '#/definitions/TypeOfRationCard'
+      CwSN:
+        $ref: '#/definitions/YesNo'
+      addressOnRationCard:
+        $ref: '#/definitions/AddressOnRationCard' 
+      outOfSchool:
+        $ref: '#/definitions/YesNo'
+      predictionInfo:
+        $ref: '#/definitions/PredictionInfo'                
+
+  StudentDetails:
+    type: object
+    required:
+      - firstName
+      - surname
+      - dateOfBirth
+      - gender
+      - address
+      - block
+      - district
+      - guardianFirstName
+      - guardianSurname
+      - guardianRelation
+    properties:
+      firstName:
+        type: string
+        description: "First Name"
+        example: "student"
+      surname:
+        type: string
+        description: "Surname"
+        example: "student"
+      dateOfBirth:
+        type: string
+        description: "Date of Birth"
+        example: "24-05-1998"
+      gender:
+        $ref: '#/definitions/Gender'
+      address:
+        type: string
+        description: "Address"
+        example: "address 1"
+      block:
+        type: string
+        description: "Block"
+        example: "block 1"
+      district:
+        type: string
+        description: "District"
+        example: "district"
+      guardianFirstName:
+        type: string
+        description: "Guardian FirstName"
+        example: "guardianFirstName"
+      guardianSurname:
+        type: string
+        description: "Guardian Surname"
+        example: "guardianSurname"            
+      guardianRelation:
+        $ref: '#/definitions/GuardianRelation'
+  
+  GuardianRelation:
+    type: object
+    required:
+      - father
+      - mother
+      - other
+    properties:
+      father:
+        type: string
+        description: "Father"
+        example: "1"
+      mother:
+        type: string
+        description: "Mother"
+        example: "0"
+      other:
+        type: string
+        description: "Other"
+        example: "other"    
+
+  Gender:
+    type: object
+    required:
+      - male
+      - female
+    properties:
+      male:
+        type: string
+        description: "Male"
+        example: "1"
+      female:
+        type: string
+        description: "Female"
+        example: "0"    
+
+  FatherDetails:
+    type: object
+    required:
+      - name
+      - education
+      - occupation
+      - contactDetails
+    properties:
+      name:
+        type: string
+        description: "Name"
+        example: "father"
+      education:
+        type: string
+        description: "Education"
+        example: "MBA"
+      occupation:
+        type: string
+        description: "Occupation"
+        example: "Manager"
+      contactDetails:
+        $ref: '#/definitions/ContactDetails'
+
+  MotherDetails:
+    type: object
+    required:
+      - name
+      - education
+      - occupation
+      - contactDetails
+    properties:
+      name:
+        type: string
+        description: "Name"
+        example: "mother"
+      education:
+        type: string
+        description: "Education"
+        example: "MBA"
+      occupation:
+        type: string
+        description: "Occupation"
+        example: "Manager"
+      contactDetails:
+        $ref: '#/definitions/ContactDetails'        
+
+  ContactDetails:
+    type: object
+    required:
+      - phone1
+      - phone2
+    properties:
+      phone1:
+        type: string
+        description: "Phone 1"
+        example: "123456"
+      phone2:
+        type: string
+        description: "Phone 2"
+        example: "789324"
+
+  Religion:
+    type: object
+    required:
+      - hindu
+      - muslim
+      - christian
+      - sikh
+      - other
+    properties:
+      hindu:
+        type: string
+        description: "Hindu"
+        example: "1"
+      muslim:
+        type: string
+        description: "Muslim"
+        example: "0"
+      christian:
+        type: string
+        description: "Christian"
+        example: "0"
+      sikh:
+        type: string
+        description: "Sikh"
+        example: "0"    
+      other:
+        type: string
+        description: "Other"
+        example: "other"
+
+  Category:
+    type: object
+    required:
+      - general
+      - OBC
+      - SC
+      - ST
+    properties:
+      general:
+        type: string
+        description: "General"
+        example: "1"
+      OBC:
+        type: string
+        description: "OBC"
+        example: "0"
+      SC:
+        type: string
+        description: "SC"
+        example: "0"
+      ST:
+        type: string
+        description: "ST"
+        example: "0"     
+
+  TypeOfRationCard:
+    type: object
+    required:
+      - APL
+      - APM
+      - Antyodaya
+      - other
+    properties:
+      APL:
+        type: string
+        description: "APL"
+        example: "1"
+      APM:
+        type: string
+        description: "APM"
+        example: "0"
+      Antyodaya:
+        type: string
+        description: "Antyodaya"
+        example: "0"
+      other:
+        type: string
+        description: "Other"
+        example: "other"  
+
+  YesNo:
+    type: object
+    required:
+      - Yes
+      - No
+    properties:
+      Yes:
+        type: string
+        description: "Yes"
+        example: "1"
+      No:
+        type: string
+        description: "No"
+        example: "0" 
+
+  AddressOnRationCard:
+    type: object
+    required:
+      - address
+      - ward
+      - block
+      - district
+    properties:
+      address:
+        type: string
+        description: "Address"
+        example: "address 1"
+      ward:
+        type: string
+        description: "Ward"
+        example: "ward 1"  
+      block:
+        type: string
+        description: "Block"
+        example: "block 1"
+      district:
+        type: string
+        description: "District"
+        example: "district"  
+
+  PredictionInfo:
+    type: array
+    items:
+      type: object
+      properties: 
+        reference:
+          type: string
+          description: "Refrence to admission field's scanning metadata"
+          example: "admissionNumber"
+        predictedValue:
+          type: string
+          description: "Predicted Value"
+          example: "1234"
+        predictionConfidence:
+          type: string
+          description: "Prediction Confidence"
+          example: "0.89"
+        trainingData:
+          type: Array
+          description: "Training Data"
+          example: []
