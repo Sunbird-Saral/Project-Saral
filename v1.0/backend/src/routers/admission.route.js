@@ -5,5 +5,6 @@ const admissionsController = require('../controller/admissionsController')
 
 
 router.put('/admissions',auth,admissionsController.saveAdmissions)
+router.get('/admissions',auth,admissionsController.getAdmissions)
 
 module.exports = router
