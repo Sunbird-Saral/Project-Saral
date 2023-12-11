@@ -17,6 +17,7 @@ import ScanStatusLocal from '../modules/ScanStatus/scanStatusLocal';
 import AdmissionLanding from '../Admission/AdmissionLanding';
 import AdmissionsScan from '../Admission/AdmissionsScan';
 import ShowScannedData from '../Admission/ShowScannedData';
+import EditAndSave from '../Admission/EditAndSave';
 
 const AuthStack = createStackNavigator(
   {
@@ -76,6 +77,9 @@ const MainStack = createStackNavigator(
     },
     AdmissionsScan: {
       screen: AdmissionsScan,
+    },
+    EditAndSave: {
+      screen: EditAndSave,
     },
   },
   {

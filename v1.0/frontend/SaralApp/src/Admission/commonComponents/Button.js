@@ -1,15 +1,17 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {Pressable, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+
 import {monospace_FF} from '../../utils/CommonUtils';
 import AppTheme from '../../utils/AppTheme';
 
-const Button = ({label, onPress, buttonStyle, textStyle}) => {
+const Button = ({label, onPress, buttonStyle, textStyle, disabled}) => {
+  console.log('from button', disabled);
   return (
-    <TouchableOpacity
+    <Pressable
       onPress={() => {
         onPress();
       }}
+      disabled={disabled}
       style={{
         backgroundColor: AppTheme.BLUE,
         height: 60,
@@ -20,6 +22,7 @@ const Button = ({label, onPress, buttonStyle, textStyle}) => {
         elevation: 1,
         shadowColor: 'lightgrey',
         margin: 5,
+        opacity: disabled ? 0.5 : 1,
         ...buttonStyle,
       }}>
       <Text
@@ -33,7 +36,7 @@ const Button = ({label, onPress, buttonStyle, textStyle}) => {
         }}>
         {label}
       </Text>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 

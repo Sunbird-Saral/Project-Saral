@@ -597,7 +597,7 @@ class HomeComponent extends Component {
               style={{textAlign: 'center', fontSize: 18, fontWeight: 'bold'}}>
               {BrandLabel && BrandLabel.useCase2
                 ? BrandLabel.useCase2
-                : 'Admissions POC'}
+                : 'Admissions'}
             </Text>
           </View>
 

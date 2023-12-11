@@ -7,10 +7,13 @@ import {
   PermissionsAndroid,
 } from 'react-native';
 import React, {Component} from 'react';
-import SaralSDK from '../../SaralSDK';
-
 import axios from 'axios';
+import {connect} from 'react-redux';
+
+import Button from './commonComponents/Button';
+import SaralSDK from '../../SaralSDK';
 import {roi} from './roi';
+import AppTheme from '../utils/AppTheme';
 
 export class Admissions extends Component {
   constructor(props) {
@@ -79,31 +82,46 @@ export class Admissions extends Component {
         this.state.predictionArray.push(prediction);
       }
     }
-    this.props.navigation.navigate('Admissions');
+
+    this.props.setData(this.state.predictionArray);
+    this.props.pageNo(pageNo);
+
+    this.props.navigation.navigate('EditAndSave');
   };
 
   render() {
+    console.log(this.props.pageno);
     return (
       <View style={style.container}>
-        <TouchableOpacity
-          style={[style.buttonContainer, {marginBottom: 20}]}
-          onPress={() => this.onScan(1)}>
-          <Text style={style.buttonText}>SCAN PAGE 1</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={[style.buttonContainer, {marginBottom: 20}]}>
-          <Text style={style.buttonText} onPress={() => this.onScan(2)}>
-            SCAN PAGE 2
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[style.buttonContainer, {backgroundColor: '#5dbea3'}]}
-          onPress={() => {
-            this.props.navigation.navigate('ShowScannedData', {
-              data: this.state.predictionArray,
-            });
-          }}>
-          <Text style={style.buttonText}>Show scanned data</Text>
-        </TouchableOpacity>
+        <Button
+          buttonStyle={{
+            backgroundColor: this.props.multiBrandingData.themeColor1
+              ? this.props.multiBrandingData.themeColor1
+              : AppTheme.BLUE,
+          }}
+          disabled={this.props.pageno == 1 ? true : false}
+          onPress={() => this.onScan(1)}
+          label={'SCAN PAGE 1'}
+        />
+        <Button
+          buttonStyle={{
+            backgroundColor: this.props.multiBrandingData.themeColor1
+              ? this.props.multiBrandingData.themeColor1
+              : AppTheme.BLUE,
+            marginTop: 10,
+          }}
+          disabled={this.props.pageno == 0 ? true : false}
+          onPress={() => this.onScan(2)}
+          label={'SCAN PAGE 2'}
+        />
+        <Button
+          buttonStyle={{
+            backgroundColor: '#d11a2a',
+            marginTop: 50,
+          }}
+          onPress={() => this.props.navigation.goBack()}
+          label={'CANCEL'}
+        />
       </View>
     );
   }
@@ -114,21 +132,22 @@ const style = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  buttonContainer: {
-    backgroundColor: '#5783db',
-    height: 70,
-    width: 250,
-    borderRadius: 15,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 10,
-  },
-  buttonText: {
-    fontFamily: 'sans-serif-medium',
-    fontSize: 20,
-    color: 'white',
+    backgroundColor: AppTheme.WHITE,
   },
 });
 
-export default Admissions;
+const mapDispatchToProps = dispatch => {
+  return {
+    setData: data => dispatch({type: 'SET_DATA', data}),
+    pageNo: pageNo => dispatch({type: 'PAGE_NO', pageNo}),
+  };
+};
+
+const mapStateToProps = state => {
+  return {
+    multiBrandingData: state.multiBrandingData.response.data,
+    pageno: state.admissionData.pageNo,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Admissions);

@@ -21,7 +21,10 @@ export class AdmissionLanding extends Component {
         }}>
         <Button
           label={'SCAN NEW FORM'}
-          onPress={() => this.props.navigation.navigate('AdmissionsScan')}
+          onPress={() => {
+            this.props.clearCache();
+            this.props.navigation.navigate('AdmissionsScan');
+          }}
           buttonStyle={{
             backgroundColor: this.props.multiBrandingData.themeColor1
               ? this.props.multiBrandingData.themeColor1
@@ -52,10 +55,16 @@ export class AdmissionLanding extends Component {
   }
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+    clearCache: () => dispatch({type: 'CLEAR_CACHE'}),
+  };
+};
+
 const mapStateToProps = state => {
   return {
     multiBrandingData: state.multiBrandingData.response.data,
   };
 };
 
-export default connect(mapStateToProps)(AdmissionLanding);
+export default connect(mapStateToProps, mapDispatchToProps)(AdmissionLanding);
