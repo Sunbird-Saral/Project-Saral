@@ -54,7 +54,7 @@ describe('Save Admissions data', () => {
 
         await admissionsController.saveAdmissions(req, res, jest.fn())
         expect(res.status).toHaveBeenCalledWith(200);
-        expect(res.json).toHaveBeenCalledWith({ message: "Saved Successfully.", documentCount: 1 });
+        expect(res.json).toHaveBeenCalledWith({ message: "Saved Successfully."});
     });
 
     it("should throw err when an exception occurs while save admissions data", async () => {

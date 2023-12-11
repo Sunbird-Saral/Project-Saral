@@ -24,236 +24,210 @@ const admissionsSchema = new mongoose.Schema({
       type: String,
       required: true
    },
-   studentDetails: {
-      firstName: {
-         type: String,
-         required: true,
-         trim: true
-      },
-      surname: {
-         type: String,
-         required: true,
-         trim: true
-      },
-      dateOfBirth: {
-         type: String,
-         required: true
-      },
-      gender: {
-         male: {
-            type: String,
-            required: true
-         },
-         female: {
-            type: String,
-            required: true
-         }
-      },
-      address: {
-         type: String,
-         required: true,
-         trim: true
-      },
-      block: {
-         type: String,
-         required: true,
-         trim: true
-      },
-      district: {
-         type: String,
-         required: true,
-         trim: true
-      },
-      guardianFirstName: {
-         type: String,
-         required: true,
-         trim: true
-      },
-      guardianSurname: {
-         type: String,
-         required: true,
-         trim: true
-      },
-      guardianRelation: {
-         father: {
-            type: String,
-            required: true
-         },
-         mother: {
-            type: String,
-            required: true
-         },
-         other: {
-            type: String,
-            required: true,
-            trim: true
-         }
-      }
+   studentFirstname: {
+      type: String,
+      required: true,
+      trim: true
    },
-   fatherDetails: {
-      name: {
-         type: String,
-         required: true,
-         trim: true
-      },
-      education: {
-         type: String,
-         required: true,
-         trim: true
-      },
-      occupation: {
-         type: String,
-         required: true,
-         trim: true
-      },
-      contactDetails: {
-         phone1: {
-            type: String,
-            required: true
-         },
-         phone2: {
-            type: String,
-            required: true
-         }
-      }
+   studentSurname: {
+      type: String,
+      required: true,
+      trim: true
    },
-   motherDetails: {
-      name: {
+   studentDateOfBirth: {
+      type: String,
+      required: true
+   },
+   studentGender_male: {
+      type: String,
+      required: true
+   },
+   studentGender_female: {
+      type: String,
+      required: true
+   },
+   studentAddress: {
+      type: String,
+      required: true,
+      trim: true
+   },
+   studentBlock: {
+      type: String,
+      required: true,
+      trim: true
+   },
+   studentDistrict: {
+      type: String,
+      required: true,
+      trim: true
+   },
+   guardianFirstName: {
+      type: String,
+      required: true,
+      trim: true
+   },
+   guardianSurname: {
+      type: String,
+      required: true,
+      trim: true
+   },
+   guardianRelation_father: {
+      type: String,
+      required: true
+   },
+   guardianRelation_mother: {
+      type: String,
+      required: true
+   },
+   guardianRelation_other: {
+      type: String,
+      required: true,
+      trim: true
+   },
+   fatherName: {
          type: String,
          required: true,
          trim: true
-      },
-      education: {
+   },
+   fatherEducation: {
          type: String,
          required: true,
          trim: true
-      },
-      occupation: {
+   },
+   fatherOccupation: {
          type: String,
          required: true,
          trim: true
-      },
-      contactDetails: {
-         phone1: {
+   },
+   fatherContactDetails_phone1: {
             type: String,
             required: true
-         },
-         phone2: {
+   },
+   fatherContactDetails_phone2: {
             type: String,
             required: true
-         }
-      }
+   },
+   motherName: {
+         type: String,
+         required: true,
+         trim: true
+   },
+   motherEducation: {
+         type: String,
+         required: true,
+         trim: true
+   },
+   motherOccupation: {
+         type: String,
+         required: true,
+         trim: true
+   },
+   motherContactDetails_phone1: {
+            type: String,
+            required: true
+   },
+   motherContactDetails_phone2: {
+            type: String,
+            required: true
    },
    rollNumber: {
       type: String,
       required: true
    },
-   religion: {
-      hindu: {
+   religion_hindu: {
          type: String,
          required: true
-      },
-      muslim: {
-         type: String,
-         required: true
-      },
-      christian: {
-         type: String,
-         required: true
-      },
-      sikh: {
-         type: String,
-         required: true
-      },
-      other: {
-         type: String,
-         required: true,
-         trim: true
-      }
    },
-   category: {
-      general: {
+   religion_muslim: {
          type: String,
          required: true
-      },
-      OBC: {
-         type: String,
-         required: true
-      },
-      SC: {
-         type: String,
-         required: true
-      },
-      ST: {
-         type: String,
-         required: true
-      }
    },
-   typeOfRationCard: {
-      APL: {
+   religion_christian: {
          type: String,
          required: true
-      },
-      APM: {
-         type: String,
-         required: true
-      },
-      Antyodaya: {
-         type: String,
-         required: true
-      },
-      other: {
-         type: String,
-         required: true,
-         trim: true
-      }
    },
-   CwSN: {
-      Yes: {
+   religion_sikh: {
          type: String,
          required: true
-      },
-      No: {
-         type: String,
-         required: true
-      }
    },
-   addressOnRationCard: {
-      address: {
+   religion_other: {
          type: String,
          required: true,
          trim: true
-      },
-      ward: {
-         type: String,
-         required: true,
-         trim: true
-      },
-      block: {
-         type: String,
-         required: true,
-         trim: true
-      },
-      district: {
-         type: String,
-         required: true,
-         trim: true
-      }
    },
-   outOfSchool: {
-      Yes: {
+   category_general: {
          type: String,
          required: true
-      },
-      No: {
+   },
+   category_OBC: {
          type: String,
          required: true
-      }
+   },
+   category_SC: {
+         type: String,
+         required: true
+   },
+   category_ST: {
+         type: String,
+         required: true
+   },
+   typeOfRationCard_APL: {
+         type: String,
+         required: true
+   },
+   typeOfRationCard_APM: {
+         type: String,
+         required: true
+   },
+   typeOfRationCard_Antyodaya: {
+         type: String,
+         required: true
+   },
+   typeOfRationCard_other: {
+         type: String,
+         required: true,
+         trim: true
+   },
+   CwSN_Yes: {
+         type: String,
+         required: true
+   },
+   CwSN_No: {
+         type: String,
+         required: true
+   },
+   addressOnRationCard_address: {
+         type: String,
+         required: true,
+         trim: true
+   },
+   addressOnRationCard_ward: {
+         type: String,
+         required: true,
+         trim: true
+   },
+   addressOnRationCard_block: {
+         type: String,
+         required: true,
+         trim: true
+   },
+   addressOnRationCard_district: {
+         type: String,
+         required: true,
+         trim: true
+   },
+   outOfSchool_Yes: {
+         type: String,
+         required: true
+   },
+   outOfSchool_No: {
+         type: String,
+         required: true
    },
    //This field contains prediction related data of above fields as a list of data objects.
    predictionInfo: [
       {
-         reference: { type: String, required: true, enum: ['admissionNumber', 'dateOfAdmission', 'studentAadharNumber', 'studentDetails.firstName', 'studentDetails.surname', 'studentDetails.dateOfBirth', 'studentDetails.gender.male', 'studentDetails.gender.female', 'studentDetails.address', 'studentDetails.block', 'studentDetails.district', 'studentDetails.guardianFirstName', 'studentDetails.guardianSurname', 'studentDetails.guardianRelation.father', 'studentDetails.guradianRelation.mother', 'studentDetails.guradianRelation.other', 'fatherDetails.name', 'fatherDetails.education', 'fatherDetails.occupation', 'fatherDetails.contactDetails.phone1', 'fatherDetails.name.contactDetails.phone2', 'motherDetails.name', 'motherDetails.education', 'motherDetails.occupation', 'motherDetails.contactDetails.phone1', 'motherDetails.name.contactDetails.phone2', 'rollNumber', 'religion.hindu', 'religion.muslim', 'religion.christian', 'religion.sikh', 'religion.other', 'category.general', 'category.OBC', 'category.SC', 'category.ST', 'typeOfRationCard.APL', 'typeOfRationCard.APM', 'typeOfRationCard.Antyodaya', 'typeOfRationCard.other', 'CwSN.Yes', 'CwSN.No', 'addressOnRationCard.address', 'addressOnRationCard.ward', 'addressOnRationCard.block', 'addressOnRationCard.district', 'outOfSchool.Yes', 'outOfSchool.No'] },
+         reference: { type: String, required: true, enum: ['admissionNumber', 'dateOfAdmission', 'studentAadharNumber', 'studentFirstname', 'studentSurname', 'studentGender_male', 'studentGender_female', 'studentDateOfBirth', 'studentAddress', 'studentBlock', 'studentDistrict', 'guardianFirstName', 'guardianSurname', 'guardianRelation_father', 'guardianRelation_mother', 'guardianRelation_other', 'fatherName', 'fatherEducation', 'fatherOccupation', 'fatherContactDetails_phone1', 'fatherContactDetails_phone2', 'motherName', 'motherEducation', 'motherOccupation', 'motherContactDetails_phone1', 'motherContactDetails_phone1', 'rollNumber', 'religion_hindu', 'religion_muslim', 'religion_christian', 'religion_sikh', 'religion_other', 'category_general', 'category_OBC', 'category_SC', 'category_ST', 'typeOfRationCard_APL', 'typeOfRationCard_APM', 'typeOfRationCard_Antyodaya', 'typeOfRationCard_other', 'CwSN_Yes', 'CwSN_N0', 'addressOnRationCard_address', 'addressOnRationCard_ward', 'addressOnRationCard_block', 'addressOnRationCard_district', 'outOfSchool_Yes', 'outOfSchool_No'] },
          predictedValue: { type: String, required: true },
          predictionConfidence: { type: Array, required: false },
          trainingData: { type: Array, required: false }

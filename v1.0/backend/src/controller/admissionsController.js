@@ -10,34 +10,11 @@ exports.saveAdmissions = async (req, res, next) => {
             schoolId: req.school.schoolId,
             admissionNumber: studentAdmissionData.admissionNumber
         }
-
-        const update = {
-            schoolId: req.school.schoolId,
-            userId: req.school.userId,
-            admissionNumber: studentAdmissionData.admissionNumber,
-            admissionNumberTrainingData: studentAdmissionData.admissionNumberTrainingData,
-            predictedAdmissionNumber: studentAdmissionData.predictedAdmissionNumber,
-            dateOfAdmission: studentAdmissionData.dateOfAdmission,
-            studentAadharNumber: studentAdmissionData.studentAadharNumber,
-            studentDetails: studentAdmissionData.studentDetails,
-            fatherDetails: studentAdmissionData.fatherDetails,
-            motherDetails: studentAdmissionData.motherDetails,
-            rollNumber: studentAdmissionData.rollNumber,
-            religion: studentAdmissionData.religion,
-            category: studentAdmissionData.category,
-            typeOfRationCard: studentAdmissionData.typeOfRationCard,
-            CwSN: studentAdmissionData.CwSN,
-            addressOnRationCard: studentAdmissionData.addressOnRationCard,
-            outOfSchool: studentAdmissionData.outOfSchool,
-            predictionInfo: studentAdmissionData.predictionInfo
-        }
-        await Admissions.updateOne(filter, update, {upsert:true, runValidators: true})
-        const match = {
-            schoolId: req.school.schoolId,
-            userId: req.school.userId
-        }
-        const totalCount = await Admissions.countDocuments(match);
-        res.status(200).json({ message: "Saved Successfully.", documentCount: totalCount })
+        studentAdmissionData.schoolId = req.school.schoolId;
+        studentAdmissionData.userId = req.school.userId;
+        delete studentAdmissionData._doc._id
+        await Admissions.updateOne(filter, studentAdmissionData, {upsert:true, runValidators: true})
+        res.status(200).json({ message: "Saved Successfully."})
     } catch (err) {
         res.status(400).send(err)
     } finally {
