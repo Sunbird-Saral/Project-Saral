@@ -175,15 +175,15 @@ const admissionsSchema = new mongoose.Schema({
          type: String,
          required: true
    },
-   typeOfRationCard_APM: {
+   typeOfRationCard_BPL: {
          type: String,
          required: true
    },
-   typeOfRationCard_Antyodaya: {
+   typeOfRationCard_ANYODAY: {
          type: String,
          required: true
    },
-   typeOfRationCard_other: {
+   typeOfRationCard_ANYA: {
          type: String,
          required: true,
          trim: true
