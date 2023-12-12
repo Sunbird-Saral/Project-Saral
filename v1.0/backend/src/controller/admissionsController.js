@@ -61,7 +61,6 @@ exports.getAdmissions = async (req, res, next) => {
             res.status(400).json({"error": "Invalid operation, please set summary=true"})
         }
     } catch (e) {
-        logger.warn(e)
         res.status(400).json({ "error": true, e })
     } finally {
         next()

@@ -3,8 +3,8 @@ const admissionsController = require('../controller/admissionsController')
 const mockAdmissionsBody = require("./mock-data/mockAdmissionsBody.json")
 
 class AdmissionsMock {
-    constructor() {
-
+    constructor(data) {
+        this._doc = {_id: "test"}
     }
     static updateOne = jest.fn().mockResolvedValue(null)
     static countDocuments = jest.fn().mockResolvedValue(1)
@@ -32,7 +32,7 @@ const mockResponse = () => {
     return res
 }
 
-describe('Save Admissions data', () => {
+describe('Admissions controller', () => {
     beforeEach(() => {
         jest.useFakeTimers()
     })
@@ -77,5 +77,48 @@ describe('Save Admissions data', () => {
 
         await admissionsController.saveAdmissions(req, res, jest.fn())
         expect(res.status).toHaveBeenCalledWith(400);
+    });
+
+    it("should able to fetch admissions data", async () => {
+        const req = mockRequest();
+        const res = mockResponse()
+        req.school = {
+            "_id": "63aa81d2d33aca650009c946",
+            "name": "user13",
+            "userId": "u001",
+            "schoolId": "u001",
+            "password": "$2a$08$fCagseJwhdNd3SEd8EB.oO6n990WLmDr4ptUpzJxLp2nvMFSZGpjG",
+            "createdAt": "2022-12-27T05:25:38.298Z",
+            "updatedAt": "2022-12-27T05:25:38.298Z",
+            __v: 0
+        }
+        req.query = {
+            summary: true
+        }
+
+        await admissionsController.getAdmissions(req, res, jest.fn())
+        expect(res.status).toHaveBeenCalledWith(200);
+        expect(res.json).toHaveBeenCalledWith({ totalScannedDocument: 1});
+    });
+
+    it("should throw err when an exception occurs while save admissions data", async () => {
+        const req = mockRequest();
+        const res = mockResponse()
+        req.school = {
+            "_id": "63aa81d2d33aca650009c946",
+            "name": "user13",
+            "userId": "u001",
+            "schoolId": "u001",
+            "password": "$2a$08$fCagseJwhdNd3SEd8EB.oO6n990WLmDr4ptUpzJxLp2nvMFSZGpjG",
+            "createdAt": "2022-12-27T05:25:38.298Z",
+            "updatedAt": "2022-12-27T05:25:38.298Z",
+            __v: 0
+        }
+        req.query = {
+            
+        }
+        await admissionsController.getAdmissions(req, res, jest.fn())
+        expect(res.status).toHaveBeenCalledWith(400);
+        expect(res.json).toHaveBeenCalledWith({"error": "Invalid operation, please set summary=true"})
     });
 })
