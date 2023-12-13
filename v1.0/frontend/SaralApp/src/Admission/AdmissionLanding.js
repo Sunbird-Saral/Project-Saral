@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import Button from './commonComponents/Button';
 import AppTheme from '../utils/AppTheme';
 import {monospace_FF} from '../utils/CommonUtils';
+import {CLEAR_CACHE} from './constants';
 
 export class AdmissionLanding extends Component {
   constructor(props) {
@@ -57,7 +58,7 @@ export class AdmissionLanding extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    clearCache: () => dispatch({type: 'CLEAR_CACHE'}),
+    clearCache: () => dispatch({type: CLEAR_CACHE}),
   };
 };
 

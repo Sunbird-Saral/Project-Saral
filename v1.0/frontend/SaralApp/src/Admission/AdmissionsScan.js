@@ -14,6 +14,7 @@ import Button from './commonComponents/Button';
 import SaralSDK from '../../SaralSDK';
 import {roi} from './roi';
 import AppTheme from '../utils/AppTheme';
+import {GET_PAGE_NO, SET_DATA} from './constants';
 
 export class Admissions extends Component {
   constructor(props) {
@@ -138,8 +139,8 @@ const style = StyleSheet.create({
 
 const mapDispatchToProps = dispatch => {
   return {
-    setData: data => dispatch({type: 'SET_DATA', data}),
-    pageNo: pageNo => dispatch({type: 'PAGE_NO', pageNo}),
+    setData: data => dispatch({type: SET_DATA, data}),
+    pageNo: pageNo => dispatch({type: GET_PAGE_NO, pageNo}),
   };
 };
 

@@ -13,6 +13,7 @@ import {connect} from 'react-redux';
 import AppTheme from '../utils/AppTheme';
 import {monospace_FF} from '../utils/CommonUtils';
 import Button from './commonComponents/Button';
+import {SET_DATA} from './constants';
 
 class EditAndSave extends Component {
   constructor(props) {
@@ -53,7 +54,6 @@ class EditAndSave extends Component {
     this.props.setData(this.props.formData);
     if (this.props.pageNo == 1) this.props.navigation.goBack();
     else {
-      console.log('here');
       this.props.navigation.navigate('Admissions');
     }
   };
@@ -106,14 +106,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: AppTheme.WHITE,
     paddingTop: 10,
-    // alignItems: 'center',
-    // justifyContent: 'center',
   },
 });
 
 const mapDispatchToProps = dispatch => {
   return {
-    setData: data => dispatch({type: 'SET_DATA', data}),
+    setData: data => dispatch({type: SET_DATA, data}),
   };
 };
 
