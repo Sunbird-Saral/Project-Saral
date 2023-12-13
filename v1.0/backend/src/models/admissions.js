@@ -38,11 +38,7 @@ const admissionsSchema = new mongoose.Schema({
       type: String,
       required: true
    },
-   studentGender_male: {
-      type: String,
-      required: true
-   },
-   studentGender_female: {
+   studentGender: {
       type: String,
       required: true
    },
@@ -71,18 +67,9 @@ const admissionsSchema = new mongoose.Schema({
       required: true,
       trim: true
    },
-   guardianRelation_father: {
+   guardianRelation: {
       type: String,
       required: true
-   },
-   guardianRelation_mother: {
-      type: String,
-      required: true
-   },
-   guardianRelation_other: {
-      type: String,
-      required: true,
-      trim: true
    },
    fatherName: {
          type: String,
@@ -134,65 +121,19 @@ const admissionsSchema = new mongoose.Schema({
       type: String,
       required: true
    },
-   religion_hindu: {
+   religion: {
          type: String,
          required: true
    },
-   religion_muslim: {
+   category: {
          type: String,
          required: true
    },
-   religion_christian: {
+   typeOfRationCard: {
          type: String,
          required: true
    },
-   religion_sikh: {
-         type: String,
-         required: true
-   },
-   religion_other: {
-         type: String,
-         required: true,
-         trim: true
-   },
-   category_general: {
-         type: String,
-         required: true
-   },
-   category_OBC: {
-         type: String,
-         required: true
-   },
-   category_SC: {
-         type: String,
-         required: true
-   },
-   category_ST: {
-         type: String,
-         required: true
-   },
-   typeOfRationCard_APL: {
-         type: String,
-         required: true
-   },
-   typeOfRationCard_BPL: {
-         type: String,
-         required: true
-   },
-   typeOfRationCard_ANYODAY: {
-         type: String,
-         required: true
-   },
-   typeOfRationCard_ANYA: {
-         type: String,
-         required: true,
-         trim: true
-   },
-   CwSN_Yes: {
-         type: String,
-         required: true
-   },
-   CwSN_No: {
+   CwSN: {
          type: String,
          required: true
    },
@@ -216,18 +157,14 @@ const admissionsSchema = new mongoose.Schema({
          required: true,
          trim: true
    },
-   outOfSchool_Yes: {
-         type: String,
-         required: true
-   },
-   outOfSchool_No: {
+   outOfSchool: {
          type: String,
          required: true
    },
    //This field contains prediction related data of above fields as a list of data objects.
    predictionInfo: [
       {
-         reference: { type: String, required: true, enum: ['admissionNumber', 'dateOfAdmission', 'studentAadharNumber', 'studentFirstname', 'studentSurname', 'studentGender_male', 'studentGender_female', 'studentDateOfBirth', 'studentAddress', 'studentBlock', 'studentDistrict', 'guardianFirstName', 'guardianSurname', 'guardianRelation_father', 'guardianRelation_mother', 'guardianRelation_other', 'fatherName', 'fatherEducation', 'fatherOccupation', 'fatherContactDetails_phone1', 'fatherContactDetails_phone2', 'motherName', 'motherEducation', 'motherOccupation', 'motherContactDetails_phone1', 'motherContactDetails_phone1', 'rollNumber', 'religion_hindu', 'religion_muslim', 'religion_christian', 'religion_sikh', 'religion_other', 'category_general', 'category_OBC', 'category_SC', 'category_ST', 'typeOfRationCard_APL', 'typeOfRationCard_BPL', 'typeOfRationCard_ANYODAY', 'typeOfRationCard_ANYA', 'CwSN_Yes', 'CwSN_N0', 'addressOnRationCard_address', 'addressOnRationCard_ward', 'addressOnRationCard_block', 'addressOnRationCard_district', 'outOfSchool_Yes', 'outOfSchool_No'] },
+         reference: { type: String, required: true, enum: ['admissionNumber', 'dateOfAdmission', 'studentAadharNumber', 'studentFirstname', 'studentSurname', 'studentGender', 'studentDateOfBirth', 'studentAddress', 'studentBlock', 'studentDistrict', 'guardianFirstName', 'guardianSurname', 'guardianRelation', 'fatherName', 'fatherEducation', 'fatherOccupation', 'fatherContactDetails_phone1', 'fatherContactDetails_phone2', 'motherName', 'motherEducation', 'motherOccupation', 'motherContactDetails_phone1', 'motherContactDetails_phone1', 'rollNumber', 'religion', 'category', 'typeOfRationCard', 'CwSN', 'addressOnRationCard_address', 'addressOnRationCard_ward', 'addressOnRationCard_block', 'addressOnRationCard_district', 'outOfSchool'] },
          predictedValue: { type: String, required: true },
          predictionConfidence: { type: Array, required: false },
          trainingData: { type: Array, required: false }
