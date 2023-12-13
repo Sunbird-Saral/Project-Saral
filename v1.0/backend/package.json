@@ -51,6 +51,7 @@
     "puppeteer": "^19.8.3",
     "supertest": "^6.3.3",
     "swagger-ui-express": "^4.4.0",
+    "uuid": "^9.0.1",
     "validator": "^13.5.2",
     "winston": "^3.9.0"
   },

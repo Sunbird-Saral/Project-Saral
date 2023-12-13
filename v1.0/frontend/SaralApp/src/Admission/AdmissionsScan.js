@@ -55,6 +55,16 @@ export class Admissions extends Component {
     SaralSDK.startCamera(JSON.stringify(roi), pageNo.toString(), 0, true)
       .then(res => {
         let roisData = JSON.parse(res);
+        console.log('roisData>>>>>>>>>>', roisData);
+        axios
+        .post('http://localhost:3000/dump', roisData, {
+          headers: {'methods': 'POST', 
+          'Origin': 'http://192.168.31.200:3000', 
+          'Content-Type': 'application/json'}
+        })
+        .then(function (res) {
+          console.log('res', res)
+        })
         let cells = roisData.layout.cells;
         this.consolidatePrediction(cells, roisData, pageNo);
       })
