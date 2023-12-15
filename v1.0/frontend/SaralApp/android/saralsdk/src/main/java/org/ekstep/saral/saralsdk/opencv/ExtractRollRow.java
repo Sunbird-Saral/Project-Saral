@@ -142,9 +142,9 @@ public class ExtractRollRow {
                     && 0 <= rect.y
                     && 0 <= rect.height
                     && rect.y + IMAGE_BUFFER + rect.height - 2 * IMAGE_BUFFER <= image.rows()) {
-                Mat ROI = image.submat(rect.y + IMAGE_BUFFER, rect.y + IMAGE_BUFFER + rect.height - 1 * IMAGE_BUFFER,
-                        rect.x + IMAGE_BUFFER,
-                        rect.x + IMAGE_BUFFER + rect.width - 2 * IMAGE_BUFFER);
+                Mat ROI = image.submat(rect.y, rect.y + 2 * IMAGE_BUFFER + rect.height,
+                        rect.x,
+                        rect.x + 2 * IMAGE_BUFFER + rect.width);
 
                 Mat resized = resizeImage(ROI, rect);
                 mats.add(resized);

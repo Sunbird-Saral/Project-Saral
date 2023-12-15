@@ -5,6 +5,7 @@ import android.util.Log;
 import org.ekstep.saral.saralsdk.commons.CVOperations;
 
 import org.opencv.calib3d.Calib3d;
+import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint2f;
@@ -126,9 +127,11 @@ public class TableCornerCirclesDetection {
                     drawPOIArea(image, topLeft, topRight, bottomLeft, bottomRight);
 
                     Mat croppedMat  = cropROI(image, topLeft, topRight, bottomLeft, bottomRight);
+                    Mat dst = new Mat();
+                    Core.rotate(croppedMat, dst, Core.ROTATE_90_CLOCKWISE);
                     if (DEBUG)
-                        CVOperations.saveImage(croppedMat, "table", 3, false);
-                    return croppedMat;
+                        CVOperations.saveImage(dst, "table", 3, false);
+                    return dst;
                 }
             }else{
                 showFocusAlert(image);
