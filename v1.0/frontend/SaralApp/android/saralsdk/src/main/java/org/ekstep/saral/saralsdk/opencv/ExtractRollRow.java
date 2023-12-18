@@ -142,10 +142,14 @@ public class ExtractRollRow {
                     && 0 <= rect.y
                     && 0 <= rect.height
                     && rect.y + IMAGE_BUFFER + rect.height - 2 * IMAGE_BUFFER <= image.rows()) {
-                Mat ROI = image.submat(rect.y, rect.y + 2 * IMAGE_BUFFER + rect.height,
-                        rect.x,
-                        rect.x + 2 * IMAGE_BUFFER + rect.width);
-
+                // works ok ok        
+                // Mat ROI = image.submat(rect.y-5*IMAGE_BUFFER, rect.y + 6 * IMAGE_BUFFER + rect.height,
+                //         rect.x-4*IMAGE_BUFFER,
+                //         rect.x + 8 * IMAGE_BUFFER + rect.width);
+                
+                Mat ROI = image.submat(rect.y-2*IMAGE_BUFFER, rect.y + rect.height,
+                        rect.x-2*IMAGE_BUFFER,
+                        rect.x + rect.width-IMAGE_BUFFER);
                 Mat resized = resizeImage(ROI, rect);
                 mats.add(resized);
 //                CVOperations.saveImage(resized, "digi_"+j, 3, false);
