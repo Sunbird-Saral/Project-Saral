@@ -29,14 +29,12 @@
 							{
 								"key": "methods",
 								"value": "POST",
-								"type": "text",
-								"disabled": true
+								"type": "text"
 							},
 							{
 								"key": "Origin",
 								"value": "http://192.168.31.200:3000",
-								"type": "text",
-								"disabled": true
+								"type": "text"
 							}
 						],
 						"body": {
@@ -1793,7 +1791,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n   \"admissionNumber\":\"0123\",\r\n   \"dateOfAdmission\":\"23/1/2023\",\r\n   \"studentAadharNumber\":\"1234235\",\r\n   \"studentDetails\":{\r\n      \"firstName\":\"student\",\r\n      \"surname\":\"student\",\r\n      \"dateOfBirth\":\"12/03/1998\",\r\n      \"gender\":{\r\n          \"male\": \"1\",\r\n          \"female\": \"0\"\r\n      },\r\n      \"address\":\"address\",\r\n      \"block\":\"block\",\r\n      \"district\":\"district\",\r\n      \"guardianFirstName\":\"guardian\",\r\n      \"guardianSurname\":\"guardian\",\r\n      \"guardianRelation\": {\r\n          \"father\": \"1\",\r\n          \"mother\": \"0\",\r\n          \"other\": \"NA\"\r\n      }\r\n   },\r\n   \"fatherDetails\":{\r\n      \"name\":\"father\",\r\n      \"education\":\"MBA\",\r\n      \"occupation\":\"Manager\",\r\n      \"contactDetails\":{\r\n          \"phone1\": \"1234\",\r\n          \"phone2\": \"5678\"\r\n      }\r\n   },\r\n   \"motherDetails\":{\r\n      \"name\":\"mother\",\r\n      \"education\":\"MSc\",\r\n      \"occupation\":\"Engineer\",\r\n      \"contactDetails\":{\r\n          \"phone1\": \"5678\",\r\n          \"phone2\": \"1234\"\r\n      }\r\n   },\r\n   \"rollNumber\":\"12\",\r\n   \"religion\":{\r\n       \"hindu\": \"1\",\r\n       \"muslim\": \"0\",\r\n       \"christian\": \"0\",\r\n       \"sikh\": \"0\",\r\n       \"other\": \"NA\"\r\n   },\r\n   \"category\":{\r\n       \"general\": \"1\",\r\n       \"OBC\": \"0\",\r\n       \"SC\": \"0\",\r\n       \"ST\": \"0\"\r\n   },\r\n   \"typeOfRationCard\":{\r\n      \"APL\":\"1\",\r\n      \"APM\":\"0\",\r\n      \"Antyodaya\":\"0\",\r\n      \"other\":\"NA\"\r\n   },\r\n   \"CwSN\":{\r\n      \"Yes\":\"1\",\r\n      \"No\":\"0\"\r\n   },\r\n   \"addressOnRationCard\":{\r\n      \"address\":\"address\",\r\n      \"ward\":\"ward\",\r\n      \"block\":\"block\",\r\n      \"district\":\"district\"\r\n   },\r\n   \"outOfSchool\":{\r\n      \"Yes\":\"1\",\r\n      \"No\":\"0\"\r\n   },\r\n   \"predictionInfo\": [{\r\n      \"reference\": \"outOfSchool.Yes\",\r\n      \"predictedValue\": \"1\",\r\n      \"predictionConfidence\": [],\r\n      \"trainingData\": []\r\n }]\r\n}",
+							"raw": "{\r\n   \"admissionNumber\": \"01233\",\r\n   \"dateOfAdmission\": \"23/1/2023\",\r\n   \"studentAadharNumber\": \"1234235\",\r\n   \"studentFirstName\": \"student\",\r\n   \"studentSurname\": \"student\",\r\n   \"studentDateOfBirth\": \"12/03/1998\",\r\n   \"studentGender\": \"male\",\r\n   \"studentAddress\": \"address\",\r\n   \"studentBlock\": \"block\",\r\n   \"studentDistrict\": \"district\",\r\n   \"guardianFirstName\": \"guardian\",\r\n   \"guardianSurname\": \"guardian\",\r\n   \"guardianRelation\": \"uncle\",\r\n   \"fatherName\": \"father\",\r\n   \"fatherEducation\": \"MBA\",\r\n   \"fatherOccupation\": \"Manager\",\r\n   \"fatherContactDetails_mobile1\": \"11234\",\r\n   \"fatherContactDetails_mobile2\": \"02416\",\r\n   \"motherName\": \"mother\",\r\n   \"motherEducation\": \"MSc\",\r\n   \"motherOccupation\": \"Engineer\",\r\n   \"motherContactDetails_mobile1\": \"11234\",\r\n   \"motherContactDetails_mobile2\": \"02416\",\r\n   \"rollNumber\": \"12\",\r\n   \"religion_hindu\": \"hindu\",\r\n   \"category\": \"OBC\",\r\n   \"typeOfRationCard\": \"APL\",\r\n   \"CwSN\": \"Yes\",\r\n   \"addressOnRationCard_address\": \"address\",\r\n   \"addressOnRationCard_ward\": \"ward\",\r\n   \"addressOnRationCard_block\": \"block\",\r\n   \"addressOnRationCard_district\": \"district\",\r\n   \"outOfSchool\": \"Yes\",\r\n   \"predictionInfo\": [\r\n      {\r\n         \"reference\": \"outOfSchool\",\r\n         \"predictedValue\": \"1\",\r\n         \"predictionConfidence\": [],\r\n         \"trainingData\": []\r\n      }\r\n   ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1834,7 +1832,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n   \"admissionNumber\":\"0123\",\r\n   \"dateOfAdmission\":\"23/1/2023\",\r\n   \"studentAadharNumber\":\"1234235\",\r\n   \"studentDetails\":{\r\n      \"firstName\":\"student\",\r\n      \"surname\":\"student\",\r\n      \"dateOfBirth\":\"12/03/1998\",\r\n      \"gender\":{\r\n          \"male\": \"1\",\r\n          \"female\": \"0\"\r\n      },\r\n      \"address\":\"address\",\r\n      \"block\":\"block\",\r\n      \"district\":\"district\",\r\n      \"guardianFirstName\":\"guardian\",\r\n      \"guardianSurname\":\"guardian\",\r\n      \"guardianRelation\": {\r\n          \"father\": \"1\",\r\n          \"mother\": \"0\",\r\n          \"other\": \"NA\"\r\n      }\r\n   },\r\n   \"fatherDetails\":{\r\n      \"name\":\"father\",\r\n      \"education\":\"MBA\",\r\n      \"occupation\":\"Manager\",\r\n      \"contactDetails\":{\r\n          \"phone1\": \"1234\",\r\n          \"phone2\": \"5678\"\r\n      }\r\n   },\r\n   \"motherDetails\":{\r\n      \"name\":\"mother\",\r\n      \"education\":\"MSc\",\r\n      \"occupation\":\"Engineer\",\r\n      \"contactDetails\":{\r\n          \"phone1\": \"5678\",\r\n          \"phone2\": \"1234\"\r\n      }\r\n   },\r\n   \"rollNumber\":\"12\",\r\n   \"religion\":{\r\n       \"hindu\": \"1\",\r\n       \"muslim\": \"0\",\r\n       \"christian\": \"0\",\r\n       \"sikh\": \"0\",\r\n       \"other\": \"NA\"\r\n   },\r\n   \"category\":{\r\n       \"general\": \"1\",\r\n       \"OBC\": \"0\",\r\n       \"SC\": \"0\",\r\n       \"ST\": \"0\"\r\n   },\r\n   \"typeOfRationCard\":{\r\n      \"APL\":\"1\",\r\n      \"APM\":\"0\",\r\n      \"Antyodaya\":\"0\",\r\n      \"other\":\"NA\"\r\n   },\r\n   \"CwSN\":{\r\n      \"Yes\":\"1\",\r\n      \"No\":\"0\"\r\n   },\r\n   \"addressOnRationCard\":{\r\n      \"address\":\"address\",\r\n      \"ward\":\"ward\",\r\n      \"block\":\"block\",\r\n      \"district\":\"district\"\r\n   },\r\n   \"outOfSchool\":{\r\n      \"Yes\":\"1\",\r\n      \"No\":\"0\"\r\n   },\r\n   \"predictionInfo\": [{\r\n      \"reference\": \"outOfSchool.Yes\",\r\n      \"predictedValue\": \"1\",\r\n      \"predictionConfidence\": [],\r\n      \"trainingData\": []\r\n }]\r\n}",
+									"raw": "{\r\n   \"admissionNumber\": \"01233\",\r\n   \"dateOfAdmission\": \"23/1/2023\",\r\n   \"studentAadharNumber\": \"1234235\",\r\n   \"studentFirstName\": \"student\",\r\n   \"studentSurname\": \"student\",\r\n   \"studentDateOfBirth\": \"12/03/1998\",\r\n   \"studentGender\": \"male\",\r\n   \"studentAddress\": \"address\",\r\n   \"studentBlock\": \"block\",\r\n   \"studentDistrict\": \"district\",\r\n   \"guardianFirstName\": \"guardian\",\r\n   \"guardianSurname\": \"guardian\",\r\n   \"guardianRelation\": \"uncle\",\r\n   \"fatherName\": \"father\",\r\n   \"fatherEducation\": \"MBA\",\r\n   \"fatherOccupation\": \"Manager\",\r\n   \"fatherContactDetails_mobile1\": \"11234\",\r\n   \"fatherContactDetails_mobile2\": \"02416\",\r\n   \"motherName\": \"mother\",\r\n   \"motherEducation\": \"MSc\",\r\n   \"motherOccupation\": \"Engineer\",\r\n   \"motherContactDetails_mobile1\": \"11234\",\r\n   \"motherContactDetails_mobile2\": \"02416\",\r\n   \"rollNumber\": \"12\",\r\n   \"religion_hindu\": \"hindu\",\r\n   \"category\": \"OBC\",\r\n   \"typeOfRationCard\": \"APL\",\r\n   \"CwSN\": \"Yes\",\r\n   \"addressOnRationCard_address\": \"address\",\r\n   \"addressOnRationCard_ward\": \"ward\",\r\n   \"addressOnRationCard_block\": \"block\",\r\n   \"addressOnRationCard_district\": \"district\",\r\n   \"outOfSchool\": \"Yes\",\r\n   \"predictionInfo\": [\r\n      {\r\n         \"reference\": \"outOfSchool\",\r\n         \"predictedValue\": \"1\",\r\n         \"predictionConfidence\": [],\r\n         \"trainingData\": []\r\n      }\r\n   ]\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1890,6 +1888,132 @@
 							],
 							"cookie": [],
 							"body": "{\r\n    \"message\": \"Saved Successfully.\",\r\n    \"documentCount\": 1\r\n}"
+						}
+					]
+				},
+				{
+					"name": "Fetch admissions",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer_token}}",
+								"type": "text"
+							},
+							{
+								"key": "methods",
+								"value": "PUT",
+								"type": "text"
+							},
+							{
+								"key": "Origin",
+								"value": "http://192.168.31.200:3000",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/admissions?summary=true",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admissions"
+							],
+							"query": [
+								{
+									"key": "summary",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Fetch admissions",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{bearer_token}}",
+										"type": "text"
+									},
+									{
+										"key": "methods",
+										"value": "GET",
+										"type": "text"
+									},
+									{
+										"key": "origin",
+										"value": "http://192.168.31.200:3000",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/admissions?summary=true",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admissions"
+									],
+									"query": [
+										{
+											"key": "summary",
+											"value": "true"
+										}
+									],
+									"variable": [
+										{
+											"value": "14",
+											"key": "examId"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43597"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"aa4d-CVYoZTtbvEa3kfcvOHa9R3/6+Ps\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 08 Jun 2023 09:00:20 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"totalScannedDocument\": 1\n}"
 						}
 					]
 				}
