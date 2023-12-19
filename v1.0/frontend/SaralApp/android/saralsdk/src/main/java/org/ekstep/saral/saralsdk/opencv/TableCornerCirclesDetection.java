@@ -48,7 +48,7 @@ public class TableCornerCirclesDetection {
         DEBUG = debug;
     }
 
-    public Mat processMat(Mat image,int minWidth,int minHeight,int detectionRadius) {
+    public Mat processMat(Mat image,int minWidth,int minHeight,int detectionRadius,boolean isVerticalScanLayout) {
 
         Mat gray        = new Mat();
         Imgproc.cvtColor(image, gray, Imgproc.COLOR_BGR2GRAY);
@@ -126,6 +126,11 @@ public class TableCornerCirclesDetection {
                     drawPOIArea(image, topLeft, topRight, bottomLeft, bottomRight);
 
                     Mat croppedMat  = cropROI(image, topLeft, topRight, bottomLeft, bottomRight);
+                    Mat dst = croppedMat;
+                    if (isVerticalScanLayout) {
+                        dst = new Mat();
+                        Core.rotate(croppedMat, dst, Core.ROTATE_90_CLOCKWISE);
+                    }
                     if (DEBUG)
                         CVOperations.saveImage(croppedMat, "table", 3, false);
                     return croppedMat;

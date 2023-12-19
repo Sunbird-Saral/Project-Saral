@@ -10,6 +10,7 @@ const countersSchema = require('../src/models/counter')
 const brandsSchema = require('../src/models/brand')
 const usersSchema = require('../src/models/users')
 const locksSchema = require('../src/models/lock')
+const roiv2Schema = require('../src/models/roiv2')
 
 
 
@@ -39,6 +40,7 @@ const counter = JSON.parse(fs.readFileSync(`${__dirname}/counters.json`, 'utf-8'
 const brand = JSON.parse(fs.readFileSync(`${__dirname}/brands.json`, 'utf-8'));
 const user = JSON.parse(fs.readFileSync(`${__dirname}/users.json`, 'utf-8'));
 const lock = JSON.parse(fs.readFileSync(`${__dirname}/lock.json`,'utf-8'));
+const roiv2 = JSON.parse(fs.readFileSync(`${__dirname}/roisv2.json`, 'utf-8')); //schema based rois
 
 const importData = async () => {
   try {
@@ -51,6 +53,7 @@ const importData = async () => {
     const Locks = mongoose.model('Locks', locksSchema);
     const Brands = mongoose.model('Brands', brandsSchema)
     const Counters = mongoose.model('Counters', countersSchema)
+    const ROIsV2 = mongoose.model('Roisv2', roiv2Schema)
 
     await Schools.create(school);
     await Classes.create(classes);
@@ -61,6 +64,7 @@ const importData = async () => {
     await Brands.create(brand)
     await Users.create(user)
     await Locks.create(lock)
+    await ROIsV2.create(roiv2)
 
     console.log('Data successfully added');
   } catch (err) {
@@ -80,6 +84,7 @@ const deleteData = async () => {
     const Brands = mongoose.model('Brands', brandsSchema)
     const Marks = mongoose.model('Marks', marksSchema)
     const Counters = mongoose.model('Counters', countersSchema)
+    const ROIsV2 = mongoose.model('Roisv2', roiv2Schema)
 
     await Schools.deleteMany();
     await Students.deleteMany();
@@ -91,6 +96,7 @@ const deleteData = async () => {
     await Brands.deleteMany()
     await Users.deleteMany()
     await Locks.deleteMany()
+    await ROIsV2.deleteMany()
 
     console.log('Data successfully deleted');
   } catch (err) {
