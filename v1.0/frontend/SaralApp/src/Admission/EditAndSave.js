@@ -13,7 +13,7 @@ import axios from 'axios';
 import AppTheme from '../utils/AppTheme';
 import {monospace_FF} from '../utils/CommonUtils';
 import Button from './commonComponents/Button';
-import {SET_DATA} from './constants';
+import {GET_PAGE_NO, SET_DATA} from './constants';
 import {
   getNoOFFormsSubmitted,
   setAdmissionData,
@@ -116,7 +116,10 @@ class EditAndSave extends Component {
           />
           <Button
             buttonStyle={{width: 150, backgroundColor: AppTheme.ERROR_RED}}
-            onPress={() => this.props.navigation.goBack()}
+            onPress={() => {
+              this.props.pageNoFunction(this.props.pageNo - 1);
+              this.props.navigation.goBack();
+            }}
             label={'CANCEL'}
           />
         </View>
@@ -138,6 +141,7 @@ const mapDispatchToProps = dispatch => {
     setData: data => dispatch({type: SET_DATA, data}),
     noOFormsSubmitted: token => dispatch(getNoOFFormsSubmitted(token)),
     setAdmissionData: (data, token) => dispatch(setAdmissionData(data, token)),
+    pageNoFunction: pageNo => dispatch({type: GET_PAGE_NO, pageNo}),
   };
 };
 
