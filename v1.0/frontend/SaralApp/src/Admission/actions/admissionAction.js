@@ -11,8 +11,6 @@ export const setAdmissionData = (formData, token) => {
     reformatedObj = {...reformatedObj, [formData[i].key]: formData[i].value};
   }
 
-  console.log('......formDataformData', reformatedObj);
-
   return dispatch => {
     axios
       .put(`${BASE_URL.BASE_URL}/admissions`, reformatedObj, {
@@ -23,13 +21,10 @@ export const setAdmissionData = (formData, token) => {
       })
       .then(response => {
         Alert.alert('Data submittied successfully');
-        // dispatch({
-        //   type: FORMS_SUBMITTED,
-        //   noOfFormsSubmitted: response.data.totalScannedDocument,
-        // });
+        dispatch(getNoOFFormsSubmitted(token));
       })
       .catch(function (error) {
-        Alert.alert(error);
+        Alert.alert(error.message);
         console.log(error);
       });
   };

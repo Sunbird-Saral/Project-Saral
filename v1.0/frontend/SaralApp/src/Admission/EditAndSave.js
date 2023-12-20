@@ -51,7 +51,6 @@ class EditAndSave extends Component {
   };
 
   renderItem = (item, index) => {
-    console.log(item);
     return (
       <View
         style={{
@@ -88,7 +87,7 @@ class EditAndSave extends Component {
     if (this.props.pageNo == 1) this.props.navigation.goBack();
     else {
       let token = this.props.loginData.data.token;
-      console.log('FROM ON PRESS CONFIRM', this.state.data);
+
       this.props.setAdmissionData(this.state.data, token);
 
       this.props.navigation.navigate('Admissions');
