@@ -5,6 +5,8 @@ import {
   SafeAreaView,
   FlatList,
   TextInput,
+  Alert,
+  BackHandler,
 } from 'react-native';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
@@ -26,6 +28,18 @@ class EditAndSave extends Component {
     this.state = {
       data: [...this.props.formData],
     };
+  }
+
+  handleBackButton() {
+    return true;
+  }
+
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
   }
 
   handleTextChange = (label, modifiedValue, index) => {

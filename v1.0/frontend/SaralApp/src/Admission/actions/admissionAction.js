@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {Alert} from 'react-native';
 
 import BASE_URL from '../../configs/config';
 import {FORMS_SUBMITTED} from '../constants';
@@ -21,20 +22,14 @@ export const setAdmissionData = (formData, token) => {
         },
       })
       .then(response => {
-        console.log('SUBMITTED', response, response.data.totalScannedDocument);
-        console.log(
-          'response.data.totalScannedDocument',
-          response.data.totalScannedDocument,
-        );
-        //         let res = JSON.parse(response);
-        //         noOfForms = res.data.totalScannedDocument;
-        //  console.log('res.data.totalScannedDocument', res.data.totalScannedDocument);
-        dispatch({
-          type: FORMS_SUBMITTED,
-          noOfFormsSubmitted: response.data.totalScannedDocument,
-        });
+        Alert.alert('Data submittied successfully');
+        // dispatch({
+        //   type: FORMS_SUBMITTED,
+        //   noOfFormsSubmitted: response.data.totalScannedDocument,
+        // });
       })
       .catch(function (error) {
+        Alert.alert(error);
         console.log(error);
       });
   };

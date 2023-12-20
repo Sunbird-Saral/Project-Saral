@@ -1,4 +1,10 @@
-import {View, StyleSheet, Platform, PermissionsAndroid} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Platform,
+  PermissionsAndroid,
+  Text,
+} from 'react-native';
 import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
@@ -142,6 +148,15 @@ export class Admissions extends Component {
           onPress={() => this.onScan(2)}
           label={'SCAN PAGE 2'}
         />
+
+        {this.state.predictionArray[3]?.value &&
+          this.state.predictionArray[4]?.value && (
+            <Text>
+              Name: {this.state.predictionArray[3].value}{' '}
+              {this.state.predictionArray[4].value}
+            </Text>
+          )}
+
         <Button
           buttonStyle={{
             backgroundColor: '#d11a2a',
