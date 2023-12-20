@@ -111,13 +111,6 @@ export class Admissions extends Component {
       }
     }
 
-    // let arr = [];
-
-    // for (let i = 0; i < this.state.predictionArray.length; i++) {
-    //   let newObj = {...this.state.predictionArray[i], };
-    //   arr.push(newObj);
-    // }
-
     this.props.setData(this.state.predictionArray);
 
     this.props.pageNo(pageNo);

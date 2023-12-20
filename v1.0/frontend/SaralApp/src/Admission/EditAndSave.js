@@ -28,7 +28,7 @@ class EditAndSave extends Component {
     };
   }
 
-  handleTextChange = (modifiedValue, index) => {
+  handleTextChange = (label, modifiedValue, index) => {
     let obj = this.state.data[index];
     obj.value = modifiedValue;
     let arr = this.state.data;
@@ -37,6 +37,7 @@ class EditAndSave extends Component {
   };
 
   renderItem = (item, index) => {
+    console.log(item);
     return (
       <View
         style={{
@@ -91,6 +92,7 @@ class EditAndSave extends Component {
           keyExtractor={item => item.id}
           ListFooterComponent={() => <View />}
           ListFooterComponentStyle={{paddingBottom: 80}}
+          initialScrollIndex={this.props.pageNo == 1 ? 0 : 18}
         />
         <View
           style={{

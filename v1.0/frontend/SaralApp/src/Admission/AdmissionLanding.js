@@ -8,7 +8,6 @@ import AppTheme from '../utils/AppTheme';
 import {monospace_FF} from '../utils/CommonUtils';
 import {CLEAR_CACHE} from './constants';
 import {getNoOFFormsSubmitted} from './actions/admissionAction';
-import BASE_URL from '../configs/config';
 
 export class AdmissionLanding extends Component {
   constructor(props) {
