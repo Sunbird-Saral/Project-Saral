@@ -33,7 +33,7 @@ const admissionDataReducer = (state = initialState, action) => {
     case FORMS_SUBMITTED: {
       return {
         ...state,
-        noOfFormsSubmitted: action.data,
+        noOfFormsSubmitted: action.noOfFormsSubmitted,
       };
     }
     default:

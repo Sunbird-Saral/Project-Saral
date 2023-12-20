@@ -1,11 +1,4 @@
-import {
-  Text,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Platform,
-  PermissionsAndroid,
-} from 'react-native';
+import {View, StyleSheet, Platform, PermissionsAndroid} from 'react-native';
 import React, {Component} from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
@@ -25,7 +18,7 @@ export class Admissions extends Component {
       disblePage1: false,
       disablePage2: true,
       disableShowData: true,
-      predictionArray: [],
+      predictionArray: [...this.props.formData],
     };
   }
 
@@ -66,6 +59,39 @@ export class Admissions extends Component {
 
   consolidatePrediction = (cells, roisData, pageNo) => {
     var marks = '';
+    let labels = [
+      'Admission Number',
+      'Date of Admission',
+      "Student's Aadhaar No.",
+      "Student's First Name",
+      "Student's Surname",
+      'Date Of Birth',
+      'Sex',
+      'Address',
+      'Block',
+      'District',
+      'C/O First Name',
+      'C/O Surname',
+      'C/O Relation',
+      "Father's Name",
+      "Father's Education",
+      "Father's Occupation",
+      'Mobile Number',
+      "Mother's Name",
+      "Mother's Education",
+      "Mother's Occupation",
+      'Mobile Number',
+      'Roll No',
+      'Religion',
+      'Category',
+      'Type of Ration Card',
+      'CwSN',
+      'Address on Ration Card',
+      'Gram Panchayat/Ward',
+      'Block',
+      'District',
+      'Out Of School',
+    ];
     for (let i = 0; i < cells.length; i++) {
       marks = '';
       let prediction = {};
@@ -77,21 +103,29 @@ export class Admissions extends Component {
 
       if (pageNo.toString() == cells[i].page) {
         prediction = {
-          label: cells[i].format.name,
+          key: cells[i].format.name,
           value: marks,
+          label: labels[i],
         };
         this.state.predictionArray.push(prediction);
       }
     }
 
+    // let arr = [];
+
+    // for (let i = 0; i < this.state.predictionArray.length; i++) {
+    //   let newObj = {...this.state.predictionArray[i], };
+    //   arr.push(newObj);
+    // }
+
     this.props.setData(this.state.predictionArray);
+
     this.props.pageNo(pageNo);
 
     this.props.navigation.navigate('EditAndSave');
   };
 
   render() {
-    console.log(this.props.pageno);
     return (
       <View style={style.container}>
         <Button
@@ -148,6 +182,7 @@ const mapStateToProps = state => {
   return {
     multiBrandingData: state.multiBrandingData.response.data,
     pageno: state.admissionData.pageNo,
+    formData: state.admissionData.formData,
   };
 };
 

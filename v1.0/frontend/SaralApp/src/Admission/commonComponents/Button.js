@@ -5,7 +5,6 @@ import {monospace_FF} from '../../utils/CommonUtils';
 import AppTheme from '../../utils/AppTheme';
 
 const Button = ({label, onPress, buttonStyle, textStyle, disabled}) => {
-  console.log('from button', disabled);
   return (
     <Pressable
       onPress={() => {

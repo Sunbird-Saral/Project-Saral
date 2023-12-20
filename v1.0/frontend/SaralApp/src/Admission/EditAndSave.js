@@ -2,26 +2,41 @@ import {
   Text,
   StyleSheet,
   View,
-  ScrollView,
   SafeAreaView,
   FlatList,
   TextInput,
 } from 'react-native';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import axios from 'axios';
 
 import AppTheme from '../utils/AppTheme';
 import {monospace_FF} from '../utils/CommonUtils';
 import Button from './commonComponents/Button';
 import {SET_DATA} from './constants';
+import {
+  getNoOFFormsSubmitted,
+  setAdmissionData,
+} from './actions/admissionAction';
 
 class EditAndSave extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      data: [...this.props.formData],
+    };
   }
 
-  renderItem = ({item}) => {
-    console.log('item', item.value);
+  handleTextChange = (modifiedValue, index) => {
+    let obj = this.state.data[index];
+    obj.value = modifiedValue;
+    let arr = this.state.data;
+    arr[index] = obj;
+    this.setState({data: arr});
+  };
+
+  renderItem = (item, index) => {
     return (
       <View
         style={{
@@ -43,7 +58,9 @@ class EditAndSave extends Component {
             alignItems: 'center',
           }}
           value={item.value}
-          // onChangeText={()=>}
+          onChangeText={newValue =>
+            this.handleTextChange(item.label, newValue, index)
+          }
           multiline={true}
         />
       </View>
@@ -51,21 +68,26 @@ class EditAndSave extends Component {
   };
 
   onPressConfirm = () => {
-    this.props.setData(this.props.formData);
+    this.props.setData(this.state.data);
+
     if (this.props.pageNo == 1) this.props.navigation.goBack();
     else {
+      let token = this.props.loginData.data.token;
+      console.log('FROM ON PRESS CONFIRM', this.state.data);
+      this.props.setAdmissionData(this.state.data, token);
+
       this.props.navigation.navigate('Admissions');
     }
   };
 
   render() {
-    console.log('...........', this.props.formData, this.props.pageNo);
-
     return (
       <SafeAreaView style={styles.container}>
         <FlatList
           data={this.props.formData}
-          renderItem={item => this.renderItem(item)}
+          renderItem={({item, index}) => {
+            return this.renderItem(item, index);
+          }}
           keyExtractor={item => item.id}
           ListFooterComponent={() => <View />}
           ListFooterComponentStyle={{paddingBottom: 80}}
@@ -112,6 +134,8 @@ const styles = StyleSheet.create({
 const mapDispatchToProps = dispatch => {
   return {
     setData: data => dispatch({type: SET_DATA, data}),
+    noOFormsSubmitted: token => dispatch(getNoOFFormsSubmitted(token)),
+    setAdmissionData: (data, token) => dispatch(setAdmissionData(data, token)),
   };
 };
 
@@ -120,6 +144,7 @@ const mapStateToProps = state => {
     formData: state.admissionData.formData,
     multiBrandingData: state.multiBrandingData.response.data,
     pageNo: state.admissionData.pageNo,
+    loginData: state.loginData,
   };
 };
 
