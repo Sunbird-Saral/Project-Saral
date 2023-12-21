@@ -11,26 +11,47 @@ export const setAdmissionData = (formData, token) => {
     reformatedObj = {...reformatedObj, [formData[i].key]: formData[i].value};
   }
 
+  let headers = {
+    method: 'PUT',
+    headers: {
+      Authorization: `${token}`,
+      origin: BASE_URL.BASE_URL,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(reformatedObj),
+  };
+
   return dispatch => {
-    axios
-      .put(`${BASE_URL.BASE_URL}/admissions`, reformatedObj, {
-        headers: {
-          Authorization: `${token}`,
-          origin: BASE_URL.BASE_URL,
-          'Content-Type': 'application/json',
-        },
-      })
+    fetch(`${BASE_URL.BASE_URL}/admissions`, headers)
       .then(response => {
         console.log('reformatedObj from success', reformatedObj);
         Alert.alert('Data submittied successfully');
         dispatch(getNoOFFormsSubmitted(token));
       })
-      .catch(function (error) {
-        console.log('reformatedObj from error', reformatedObj);
-
+      .catch(error => {
         Alert.alert(error.message);
         console.log('error.....', error);
       });
+
+    // axios
+    //   .put(`${BASE_URL.BASE_URL}/admissions`, reformatedObj, {
+    //     headers: {
+    //       Authorization: `${token}`,
+    //       origin: BASE_URL.BASE_URL,
+    //       'Content-Type': 'application/json',
+    //     },
+    //   })
+    // .then(response => {
+    //   console.log('reformatedObj from success', reformatedObj);
+    //   Alert.alert('Data submittied successfully');
+    //   dispatch(getNoOFFormsSubmitted(token));
+    // })
+    // .catch(function (error) {
+    //   console.log('reformatedObj from error', reformatedObj);
+
+    //   Alert.alert(error.message);
+    //   console.log('error.....', error);
+    // });
   };
 };
 
