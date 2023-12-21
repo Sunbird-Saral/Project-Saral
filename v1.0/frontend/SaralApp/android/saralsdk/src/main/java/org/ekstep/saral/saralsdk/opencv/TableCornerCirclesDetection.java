@@ -13,6 +13,7 @@ import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
+import org.opencv.core.Core;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -132,8 +133,8 @@ public class TableCornerCirclesDetection {
                         Core.rotate(croppedMat, dst, Core.ROTATE_90_CLOCKWISE);
                     }
                     if (DEBUG)
-                        CVOperations.saveImage(croppedMat, "table", 3, false);
-                    return croppedMat;
+                        CVOperations.saveImage(dst, "table", 3, false);
+                    return dst;
                 }
             }else{
                 showFocusAlert(image);
