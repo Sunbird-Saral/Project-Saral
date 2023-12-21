@@ -17,15 +17,19 @@ export const setAdmissionData = (formData, token) => {
         headers: {
           Authorization: `${token}`,
           origin: BASE_URL.BASE_URL,
+          'Content-Type': 'application/json',
         },
       })
       .then(response => {
+        console.log('reformatedObj from success', reformatedObj);
         Alert.alert('Data submittied successfully');
         dispatch(getNoOFFormsSubmitted(token));
       })
       .catch(function (error) {
+        console.log('reformatedObj from error', reformatedObj);
+
         Alert.alert(error.message);
-        console.log(error);
+        console.log('error.....', error);
       });
   };
 };
