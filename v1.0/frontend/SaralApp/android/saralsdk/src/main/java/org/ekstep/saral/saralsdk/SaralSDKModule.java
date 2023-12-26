@@ -77,6 +77,7 @@ public class SaralSDKModule extends ReactContextBaseJavaModule implements Activi
         HWBlockLettersClassifier.getInstance().initialize(new HWBlockLettersClassifierStatusListener() {
             @Override
             public void OnModelLoadSuccess(String message) {
+                System.out.println("Model loaded successfully");
                 Log.d(TAG, "HWBlockLettersClassifier model loaded : " + message);
             }
 
