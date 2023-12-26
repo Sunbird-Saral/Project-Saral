@@ -225,25 +225,26 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
         HWBlockLettersClassifier.getInstance().setPredictionListener(new PredictionListener() {
             @Override
             public void OnPredictionSuccess(int digit, float confidence, String id) {
-                Log.d(TAG, "predicted digit:" + digit + " unique id:" + id + " confidence:" + confidence);
+                Log.d(TAG, "predicted digits change:" + digit + " unique id:" + id + " confidence:" + confidence);
                 Map<Integer,String> lettersMap = new HashMap<>();
                 int index=0;
-                for(int i=0;i<=9;i++)
-                {
-                    lettersMap.put(index,String.valueOf(i));
-                    index++;                  
-                }
-                lettersMap.put(index," ");
-                index++;
+                // for(int i=0;i<=9;i++)
+                // {
+                //     lettersMap.put(index,String.valueOf(i));
+                //     index++;                  
+                // }
                 for(char c = 'A'; c <= 'Z'; ++c)
                 {
                     lettersMap.put(index,c+"");
                     index++;
                 }
+                lettersMap.put(index," ");
+                index++;
                 mTotalClassifiedCount++;
+                Log.d(TAG, "predicted digit:" + digit + "letterMap" + lettersMap.get(digit) + " confidence:" + confidence);
                     try {
                         JSONObject result = new JSONObject();
-                        if(digit != 37 && lettersMap.get(digit)!=null) {
+                        if(digit != 27 && lettersMap.get(digit)!=null) {
                             result.put("prediction", lettersMap.get(digit));
                             result.put("confidence", new Double(confidence));
                         }else{

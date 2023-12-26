@@ -45,8 +45,8 @@ public class HWClassifier {
      */
     private static final String HOSTED_MODEL_NAME = null;
     //private static final String LOCAL_MODEL_ASSET = "trained_resnet_real_synthetic_v2_20.tflite";
-    private static final String LOCAL_MODEL_ASSET = "saral_hwd_model.tflite";
-    private static final String FB_REMOTE_MODEL   = "saral_hwd_model";
+    private static final String LOCAL_MODEL_ASSET = "hw_digits.tflite";
+    private static final String FB_REMOTE_MODEL   = "hw_digits";
     /**
      * Dimensions of inputs.
      */
