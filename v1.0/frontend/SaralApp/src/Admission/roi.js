@@ -6248,7 +6248,7 @@ export let roi = {
             "rois": [
                 {
                     "annotationTags": "ROLLNUMBER_1",
-                    "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                    "extractionMethod": "NUMERIC_CLASSIFICATION",
                     "roiId": "489",
                     "index": 0,
                     "rect": {
@@ -6260,7 +6260,7 @@ export let roi = {
                 },
                 {
                     "annotationTags": "ROLLNUMBER_2",
-                    "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                    "extractionMethod": "NUMERIC_CLASSIFICATION",
                     "roiId": "490",
                     "index": 1,
                     "rect": {
@@ -6272,7 +6272,7 @@ export let roi = {
                 },
                 {
                     "annotationTags": "ROLLNUMBER_3",
-                    "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                    "extractionMethod": "NUMERIC_CLASSIFICATION",
                     "roiId": "491",
                     "index": 2,
                     "rect": {
@@ -6284,7 +6284,7 @@ export let roi = {
                 },
                 {
                     "annotationTags": "ROLLNUMBER_4",
-                    "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                    "extractionMethod": "NUMERIC_CLASSIFICATION",
                     "roiId": "492",
                     "index": 3,
                     "rect": {
@@ -6296,7 +6296,7 @@ export let roi = {
                 },
                 {
                     "annotationTags": "ROLLNUMBER_5",
-                    "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                    "extractionMethod": "NUMERIC_CLASSIFICATION",
                     "roiId": "493",
                     "index": 4,
                     "rect": {
@@ -6308,7 +6308,7 @@ export let roi = {
                 },
                 {
                     "annotationTags": "ROLLNUMBER_6",
-                    "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                    "extractionMethod": "NUMERIC_CLASSIFICATION",
                     "roiId": "494",
                     "index": 5,
                     "rect": {
@@ -6320,7 +6320,7 @@ export let roi = {
                 },
                 {
                     "annotationTags": "ROLLNUMBER_7",
-                    "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                    "extractionMethod": "NUMERIC_CLASSIFICATION",
                     "roiId": "495",
                     "index": 6,
                     "rect": {
@@ -6332,7 +6332,7 @@ export let roi = {
                 },
                 {
                     "annotationTags": "ROLLNUMBER_8",
-                    "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                    "extractionMethod": "NUMERIC_CLASSIFICATION",
                     "roiId": "496",
                     "index": 7,
                     "rect": {
@@ -6344,7 +6344,7 @@ export let roi = {
                 },
                 {
                     "annotationTags": "ROLLNUMBER_9",
-                    "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                    "extractionMethod": "NUMERIC_CLASSIFICATION",
                     "roiId": "497",
                     "index": 8,
                     "rect": {
@@ -6356,7 +6356,7 @@ export let roi = {
                 },
                 {
                     "annotationTags": "ROLLNUMBER_10",
-                    "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                    "extractionMethod": "NUMERIC_CLASSIFICATION",
                     "roiId": "498",
                     "index": 9,
                     "rect": {
@@ -6368,7 +6368,7 @@ export let roi = {
                 },
                 {
                     "annotationTags": "ROLLNUMBER_11",
-                    "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                    "extractionMethod": "NUMERIC_CLASSIFICATION",
                     "roiId": "499",
                     "index": 10,
                     "rect": {
@@ -6380,7 +6380,7 @@ export let roi = {
                 },
                 {
                     "annotationTags": "ROLLNUMBER_12",
-                    "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                    "extractionMethod": "NUMERIC_CLASSIFICATION",
                     "roiId": "500",
                     "index": 11,
                     "rect": {
