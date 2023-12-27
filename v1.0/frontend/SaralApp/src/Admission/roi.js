@@ -1820,9 +1820,9 @@ export let roi = {
                     "roiId": "140",
                     "index": 1,
                     "rect": {
-                        "top": 321,
+                        "top": 320,
                         "left": 238,
-                        "bottom": 332,
+                        "bottom": 331,
                         "right": 252
                     }
                 },
@@ -1832,9 +1832,9 @@ export let roi = {
                     "roiId": "141",
                     "index": 2,
                     "rect": {
-                        "top": 319,
+                        "top": 320,
                         "left": 257,
-                        "bottom": 330,
+                        "bottom": 331,
                         "right": 271
                     }
                 },
@@ -1845,9 +1845,9 @@ export let roi = {
                     "index": 3,
                     "rect": {
                         "top": 320,
-                        "left": 277,
+                        "left": 276,
                         "bottom": 331,
-                        "right": 291
+                        "right": 290
                     }
                 },
                 {
@@ -1856,9 +1856,9 @@ export let roi = {
                     "roiId": "143",
                     "index": 4,
                     "rect": {
-                        "top": 321,
+                        "top": 320,
                         "left": 296,
-                        "bottom": 332,
+                        "bottom": 331,
                         "right": 310
                     }
                 },
@@ -1880,10 +1880,10 @@ export let roi = {
                     "roiId": "145",
                     "index": 6,
                     "rect": {
-                        "top": 319,
-                        "left": 336,
-                        "bottom": 330,
-                        "right": 350
+                        "top": 320,
+                        "left": 335,
+                        "bottom": 331,
+                        "right": 349
                     }
                 },
                 {
@@ -1892,10 +1892,10 @@ export let roi = {
                     "roiId": "146",
                     "index": 7,
                     "rect": {
-                        "top": 320,
-                        "left": 354,
-                        "bottom": 331,
-                        "right": 368
+                        "top": 319,
+                        "left": 353,
+                        "bottom": 330,
+                        "right": 367
                     }
                 },
                 {
@@ -1904,9 +1904,9 @@ export let roi = {
                     "roiId": "147",
                     "index": 8,
                     "rect": {
-                        "top": 320,
+                        "top": 319,
                         "left": 373,
-                        "bottom": 331,
+                        "bottom": 330,
                         "right": 387
                     }
                 },
@@ -1917,9 +1917,9 @@ export let roi = {
                     "index": 9,
                     "rect": {
                         "top": 320,
-                        "left": 393,
+                        "left": 392,
                         "bottom": 331,
-                        "right": 407
+                        "right": 406
                     }
                 },
                 {
@@ -1928,10 +1928,10 @@ export let roi = {
                     "roiId": "149",
                     "index": 10,
                     "rect": {
-                        "top": 319,
-                        "left": 413,
-                        "bottom": 330,
-                        "right": 427
+                        "top": 320,
+                        "left": 412,
+                        "bottom": 331,
+                        "right": 426
                     }
                 },
                 {
@@ -1988,9 +1988,9 @@ export let roi = {
                     "roiId": "154",
                     "index": 15,
                     "rect": {
-                        "top": 336,
+                        "top": 335,
                         "left": 277,
-                        "bottom": 347,
+                        "bottom": 346,
                         "right": 291
                     }
                 },
@@ -2024,10 +2024,10 @@ export let roi = {
                     "roiId": "157",
                     "index": 18,
                     "rect": {
-                        "top": 336,
-                        "left": 336,
-                        "bottom": 347,
-                        "right": 350
+                        "top": 335,
+                        "left": 335,
+                        "bottom": 346,
+                        "right": 349
                     }
                 },
                 {
@@ -2036,9 +2036,9 @@ export let roi = {
                     "roiId": "158",
                     "index": 19,
                     "rect": {
-                        "top": 335,
+                        "top": 336,
                         "left": 353,
-                        "bottom": 346,
+                        "bottom": 347,
                         "right": 367
                     }
                 },
@@ -2073,9 +2073,9 @@ export let roi = {
                     "index": 22,
                     "rect": {
                         "top": 335,
-                        "left": 412,
+                        "left": 413,
                         "bottom": 346,
-                        "right": 426
+                        "right": 427
                     }
                 },
                 {
@@ -2112,10 +2112,10 @@ export let roi = {
                     "roiId": "163",
                     "index": 0,
                     "rect": {
-                        "top": 354,
-                        "left": 218,
-                        "bottom": 365,
-                        "right": 232
+                        "top": 353,
+                        "left": 219,
+                        "bottom": 364,
+                        "right": 233
                     }
                 },
                 {
@@ -2124,9 +2124,9 @@ export let roi = {
                     "roiId": "164",
                     "index": 1,
                     "rect": {
-                        "top": 355,
+                        "top": 354,
                         "left": 238,
-                        "bottom": 366,
+                        "bottom": 365,
                         "right": 252
                     }
                 },
@@ -2136,9 +2136,9 @@ export let roi = {
                     "roiId": "165",
                     "index": 2,
                     "rect": {
-                        "top": 355,
+                        "top": 354,
                         "left": 258,
-                        "bottom": 366,
+                        "bottom": 365,
                         "right": 272
                     }
                 },
@@ -2148,9 +2148,9 @@ export let roi = {
                     "roiId": "166",
                     "index": 3,
                     "rect": {
-                        "top": 353,
+                        "top": 355,
                         "left": 277,
-                        "bottom": 364,
+                        "bottom": 366,
                         "right": 291
                     }
                 },
@@ -2161,9 +2161,9 @@ export let roi = {
                     "index": 4,
                     "rect": {
                         "top": 354,
-                        "left": 296,
+                        "left": 297,
                         "bottom": 365,
-                        "right": 310
+                        "right": 311
                     }
                 },
                 {
@@ -2172,9 +2172,9 @@ export let roi = {
                     "roiId": "168",
                     "index": 5,
                     "rect": {
-                        "top": 355,
+                        "top": 354,
                         "left": 316,
-                        "bottom": 366,
+                        "bottom": 365,
                         "right": 330
                     }
                 },
@@ -2196,10 +2196,10 @@ export let roi = {
                     "roiId": "170",
                     "index": 7,
                     "rect": {
-                        "top": 355,
-                        "left": 353,
-                        "bottom": 366,
-                        "right": 367
+                        "top": 353,
+                        "left": 354,
+                        "bottom": 364,
+                        "right": 368
                     }
                 },
                 {
@@ -2220,9 +2220,9 @@ export let roi = {
                     "roiId": "172",
                     "index": 9,
                     "rect": {
-                        "top": 355,
+                        "top": 354,
                         "left": 393,
-                        "bottom": 366,
+                        "bottom": 365,
                         "right": 407
                     }
                 },
@@ -2256,9 +2256,9 @@ export let roi = {
                     "roiId": "175",
                     "index": 12,
                     "rect": {
-                        "top": 369,
+                        "top": 370,
                         "left": 218,
-                        "bottom": 380,
+                        "bottom": 381,
                         "right": 232
                     }
                 },
@@ -2268,9 +2268,9 @@ export let roi = {
                     "roiId": "176",
                     "index": 13,
                     "rect": {
-                        "top": 369,
+                        "top": 370,
                         "left": 238,
-                        "bottom": 380,
+                        "bottom": 381,
                         "right": 252
                     }
                 },
@@ -2280,10 +2280,10 @@ export let roi = {
                     "roiId": "177",
                     "index": 14,
                     "rect": {
-                        "top": 370,
-                        "left": 258,
-                        "bottom": 381,
-                        "right": 272
+                        "top": 369,
+                        "left": 257,
+                        "bottom": 380,
+                        "right": 271
                     }
                 },
                 {
@@ -2352,9 +2352,9 @@ export let roi = {
                     "roiId": "183",
                     "index": 20,
                     "rect": {
-                        "top": 369,
+                        "top": 370,
                         "left": 373,
-                        "bottom": 380,
+                        "bottom": 381,
                         "right": 387
                     }
                 },
@@ -2388,9 +2388,9 @@ export let roi = {
                     "roiId": "186",
                     "index": 23,
                     "rect": {
-                        "top": 370,
+                        "top": 371,
                         "left": 432,
-                        "bottom": 381,
+                        "bottom": 382,
                         "right": 446
                     }
                 }
