@@ -1,4 +1,5 @@
 const admissionsSchema = require('../models/admissions')
+const encryptionUtil = require('../utils/encryptionUtils');
 
 exports.saveAdmissions = async (req, res, next) => {
 
@@ -13,7 +14,13 @@ exports.saveAdmissions = async (req, res, next) => {
         studentAdmissionData.schoolId = req.school.schoolId;
         studentAdmissionData.userId = req.school.userId;
         delete studentAdmissionData._doc._id
-        await Admissions.updateOne(filter, studentAdmissionData, {upsert:true, runValidators: true})
+        delete studentAdmissionData._doc.predictionInfo
+        const encryptedData = {}
+        Object.keys(studentAdmissionData._doc).forEach((key)=>{
+            encryptedData[key] = encryptionUtil.encrypt(studentAdmissionData[key]);
+        })
+        console.log("encryptedData", encryptedData)
+        await Admissions.updateOne(filter, encryptedData, {upsert:true, runValidators: true})
         res.status(200).json({ message: "Saved Successfully."})
     } catch (err) {
         res.status(400).send(err)
