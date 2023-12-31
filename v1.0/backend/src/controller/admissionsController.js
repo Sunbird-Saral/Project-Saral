@@ -1,25 +1,19 @@
 const admissionsSchema = require('../models/admissions')
-const encryptionUtil = require('../utils/encryptionUtils');
-
+const {transformDataBasedOnEncryption} = require('../middleware/helper')
 exports.saveAdmissions = async (req, res, next) => {
 
     try {
         let connection = req.dbConnection;
         const Admissions = connection.model('Admissions', admissionsSchema)
         const studentAdmissionData = new Admissions(req.body)
-        const filter = {
-            schoolId: req.school.schoolId,
-            admissionNumber: studentAdmissionData.admissionNumber
-        }
         studentAdmissionData.schoolId = req.school.schoolId;
         studentAdmissionData.userId = req.school.userId;
         delete studentAdmissionData._doc._id
-        delete studentAdmissionData._doc.predictionInfo
-        const encryptedData = {}
-        Object.keys(studentAdmissionData._doc).forEach((key)=>{
-            encryptedData[key] = encryptionUtil.encrypt(studentAdmissionData[key]);
-        })
-        console.log("encryptedData", encryptedData)
+        const encryptedData = await transformDataBasedOnEncryption(connection, studentAdmissionData._doc, 'admissions', req.school.schoolId)
+        const filter = {
+            schoolId: req.school.schoolId,
+            admissionNumber: encryptedData.admissionNumber
+        }
         await Admissions.updateOne(filter, encryptedData, {upsert:true, runValidators: true})
         res.status(200).json({ message: "Saved Successfully."})
     } catch (err) {
