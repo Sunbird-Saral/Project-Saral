@@ -232,6 +232,34 @@
           "Rating"
         ]
       }]
+    },
+    "encryptionSchemas": {
+      "admissions": {
+       "admissionNumber": "ENCRYPTANDHASH",
+       "studentAadharNumber": "ENCRYPTANDMASK",
+       "studentFirstname": "ENCRYPT",
+       "studentSurname": "ENCRYPT",
+       "studentDateOfBirth": "ENCRYPT",
+       "studentAddress": "ENCRYPT",
+       "studentBlock": "ENCRYPT",
+       "studentDistrict": "ENCRYPT",
+       "guardianFirstName": "ENCRYPT",
+       "guardianSurname": "ENCRYPT",
+       "fatherName": "ENCRYPT",
+       "fatherContactDetails_phone1": "ENCRYPTANDMASK",
+       "fatherContactDetails_phone2": "ENCRYPTANDMASK",
+       "motherName": "ENCRYPT",
+       "motherContactDetails_phone1": "ENCRYPTANDMASK",
+       "motherContactDetails_phone2": "ENCRYPTANDMASK",
+       "rollNumber": "ENCRYPTANDHASH",
+       "addressOnRationCard_address": "ENCRYPTANDHASH",
+       "addressOnRationCard_ward": "ENCRYPTANDHASH",
+       "addressOnRationCard_block": "ENCRYPTANDHASH",
+       "addressOnRationCard_district": "ENCRYPTANDHASH",
+       "predictionInfo": {
+          "trainingData": "ENCRYPTARRAY"
+       }
+      }
     }
   },
   

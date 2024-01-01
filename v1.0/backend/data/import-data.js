@@ -11,6 +11,7 @@ const brandsSchema = require('../src/models/brand')
 const usersSchema = require('../src/models/users')
 const locksSchema = require('../src/models/lock')
 const roiv2Schema = require('../src/models/roiv2')
+const addmissionsSchema = require('../src/models/admissions')
 
 
 
@@ -85,6 +86,7 @@ const deleteData = async () => {
     const Marks = mongoose.model('Marks', marksSchema)
     const Counters = mongoose.model('Counters', countersSchema)
     const ROIsV2 = mongoose.model('Roisv2', roiv2Schema)
+    const Addmissions = mongoose.model('Admissions', addmissionsSchema)
 
     await Schools.deleteMany();
     await Students.deleteMany();
@@ -97,6 +99,7 @@ const deleteData = async () => {
     await Users.deleteMany()
     await Locks.deleteMany()
     await ROIsV2.deleteMany()
+    await Addmissions.deleteMany()
 
     console.log('Data successfully deleted');
   } catch (err) {

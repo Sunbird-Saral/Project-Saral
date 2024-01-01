@@ -1005,7 +1005,7 @@ definitions:
       - admissionNumber
       - dateOfAdmission
       - studentAadharNumber
-      - studentFirstName
+      - studentFirstname
       - studentSurname
       - studentDateOfBirth
       - studentGender
@@ -1018,13 +1018,13 @@ definitions:
       - fatherName
       - fatherEducation
       - fatherOccupation
-      - fatherContactDetails_mobile1
-      - fatherContactDetails_mobile2
+      - fatherContactDetails_phone1
+      - fatherContactDetails_phone2
       - motherName
       - motherEducation
       - motherOccupation
-      - motherContactDetails_mobile1
-      - motherContactDetails_mobile2
+      - motherContactDetails_phone1
+      - motherContactDetails_phone2
       - rollNumber
       - religion
       - category
@@ -1046,7 +1046,7 @@ definitions:
       studentAadharNumber: 
         type: string
         example: 1234235
-      studentFirstName: 
+      studentFirstname: 
         type: string
         example: student
       studentSurname: 
@@ -1085,10 +1085,10 @@ definitions:
       fatherOccupation: 
         type: string
         example: Manager
-      fatherContactDetails_mobile1: 
+      fatherContactDetails_phone1: 
         type: string
         example: 11234
-      fatherContactDetails_mobile2: 
+      fatherContactDetails_phone2: 
         type: string
         example: 02416
       motherName: 
@@ -1100,10 +1100,10 @@ definitions:
       motherOccupation: 
         type: string
         example: Engineer
-      motherContactDetails_mobile1: 
+      motherContactDetails_phone1: 
         type: string
         example: 11234
-      motherContactDetails_mobile2: 
+      motherContactDetails_phone2: 
         type: string
         example: 02416
       rollNumber: 

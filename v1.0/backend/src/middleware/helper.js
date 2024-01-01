@@ -150,7 +150,11 @@ const commonHelperFunctions = {
 
             const school = await Schools.findOne({ schoolId: schoolId, $comment: "Find School Data"})
             const brand = await Brands.findOne({ state: school.state ,  $comment: "Fetch Brand Data API For Find Brand according to state." }, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 })
-            const encryptionSchemaInfo = brand.encryptionSchemas? brand.encryptionSchemas[schemaName] :false;
+            let encryptionSchemaInfo = brand?.encryptionSchemas? brand.encryptionSchemas[schemaName] :false;
+            if(!encryptionSchemaInfo) {
+                const defaultBrand = await Brands.findOne({ state: { $exists: false } , $comment: "Fetch Brand Data API For Find Brand where state is not present."  }, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 })
+                encryptionSchemaInfo = defaultBrand.encryptionSchemas? defaultBrand.encryptionSchemas[schemaName] :false;
+            }
             return encryptData(encryptionSchemaInfo, data)
         } catch (err){
             throw err;
@@ -166,7 +170,7 @@ const commonHelperFunctions = {
                                 if(!encryptedData[key]) {
                                     encryptedData[key] = []
                                 }
-                                encryptedData[key]= encryptData(encryptionSchemaInfo[key], el._doc)
+                                encryptedData[key].push(encryptData(encryptionSchemaInfo[key], el._doc))
                             })
                         } else {
                             encryptedData[key] = []
@@ -185,7 +189,7 @@ const commonHelperFunctions = {
                                 encryptedData[key] = encryptionUtil.maskData(encryptionUtil.encrypt(data[key]));
                                 break;
                             case "ENCRYPTARRAY":
-                                encryptedData[key] = encryptionUtil.encrypt(JSON.stringify(data[key]));
+                                encryptedData[key] = encryptionUtil.encrypt(JSON.stringify(data[key]).slice(1, -1));
                                 break;
                             default:
                                 encryptedData[key] = data[key]
