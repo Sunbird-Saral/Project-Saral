@@ -10,6 +10,7 @@ tags:
 - name: "Marks"
 - name: "ROI"
 - name: "Brand"
+- name: "Admissions"
 
 
 securityDefinitions:
@@ -177,7 +178,51 @@ paths:
         "404":
           description: "Brand does not exist."
   
+  /admissions:
+    put:
+      security:
+        - Bearer: []
+      tags:
+        - Admissions
+      summary: "Create admissions for a student"
+      parameters:
+        - name: body
+          in: body
+          schema:
+            $ref: "#/definitions/SaveAdmissions"
+          description: Create admissions record for students .Application may send  "X-App-Version" in header.
 
+      responses:
+        "201":
+          description: "successful operation"
+          schema: 
+            $ref: "#/definitions/SaveAdmissionsResponseBody"
+        "400":
+          description: "Custom message can be set to message about the error or failure"
+        "500":
+          description: "Server error or State/District/School is locked for scanning"
+
+  /admissions?summary=true:
+    get:
+      security:
+        - Bearer: []
+      tags:
+      - Admissions
+      summary: "Fetch admissions"
+      parameters:
+      - in: query
+        name: summary
+        type: boolean
+        required: true
+
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/FetchAdmissionsResponseBody"
+        "400":
+          description: "unsuccessful operation"
+          
 
 definitions:
 
@@ -939,3 +984,179 @@ definitions:
       message:
         type: string
         example: "Saved Successfully."
+
+  SaveAdmissionsResponseBody:
+    type: object
+    properties:
+      message:
+        type: string
+        example: "Saved Successfully."
+
+  FetchAdmissionsResponseBody:
+    type: object
+    properties:
+      totalScannedDocument:
+        type: number
+        example: 1           
+
+  SaveAdmissions:
+    type: object
+    required:
+      - admissionNumber
+      - dateOfAdmission
+      - studentAadharNumber
+      - studentFirstName
+      - studentSurname
+      - studentDateOfBirth
+      - studentGender
+      - studentAddress
+      - studentDistrict
+      - studentBlock
+      - guardianFirstName
+      - guardianSurname
+      - guardianRelation
+      - fatherName
+      - fatherEducation
+      - fatherOccupation
+      - fatherContactDetails_mobile1
+      - fatherContactDetails_mobile2
+      - motherName
+      - motherEducation
+      - motherOccupation
+      - motherContactDetails_mobile1
+      - motherContactDetails_mobile2
+      - rollNumber
+      - religion
+      - category
+      - typeOfRationCard
+      - CwSN
+      - addressOnRationCard_address
+      - addressOnRationCard_ward
+      - addressOnRationCard_block
+      - addressOnRationCard_district
+      - outOfSchool
+      - predictionInfo
+    properties:
+      admissionNumber: 
+        type: string
+        example: 01233
+      dateOfAdmission: 
+        type: string
+        example: 23/1/2023
+      studentAadharNumber: 
+        type: string
+        example: 1234235
+      studentFirstName: 
+        type: string
+        example: student
+      studentSurname: 
+        type: string
+        example: student
+      studentDateOfBirth: 
+        type: string
+        example: 12/03/1998
+      studentGender: 
+        type: string
+        example: male
+      studentAddress: 
+        type: string
+        example: address
+      studentBlock: 
+        type: string
+        example: block
+      studentDistrict: 
+        type: string
+        example: district
+      guardianFirstName: 
+        type: string
+        example: guardian
+      guardianSurname: 
+        type: string
+        example: guardian
+      guardianRelation: 
+        type: string
+        example: uncle
+      fatherName: 
+        type: string
+        example: father
+      fatherEducation: 
+        type: string
+        example: MBA
+      fatherOccupation: 
+        type: string
+        example: Manager
+      fatherContactDetails_mobile1: 
+        type: string
+        example: 11234
+      fatherContactDetails_mobile2: 
+        type: string
+        example: 02416
+      motherName: 
+        type: string
+        example: mother
+      motherEducation: 
+        type: string
+        example: MSc
+      motherOccupation: 
+        type: string
+        example: Engineer
+      motherContactDetails_mobile1: 
+        type: string
+        example: 11234
+      motherContactDetails_mobile2: 
+        type: string
+        example: 02416
+      rollNumber: 
+        type: string
+        example: 12
+      religion_hindu: 
+        type: string
+        example: hindu
+      category: 
+        type: string
+        example: OBC
+      typeOfRationCard: 
+        type: string
+        example: APL
+      CwSN: 
+        type: string
+        example: Yes
+      addressOnRationCard_address: 
+        type: string
+        example: address
+      addressOnRationCard_ward: 
+        type: string
+        example: ward
+      addressOnRationCard_block: 
+        type: string
+        example: block
+      addressOnRationCard_district: 
+        type: string
+        example: district
+      outOfSchool: 
+        type: string
+        example: Yes
+      predictionInfo: 
+        type: array
+        items: 
+          type: object
+          properties: 
+            reference: 
+              type: string
+              example: outOfSchool
+            predictedValue: 
+              type: string
+              example: 1
+            predictionConfidence: 
+              type: array
+              items: 
+                type: object
+                properties:  
+              example: []
+            trainingData: 
+              type: array
+              items: 
+                type: object
+                properties:  
+              example: []               
+

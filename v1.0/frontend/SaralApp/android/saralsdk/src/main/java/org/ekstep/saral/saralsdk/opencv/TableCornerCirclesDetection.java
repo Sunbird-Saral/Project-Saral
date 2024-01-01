@@ -13,6 +13,7 @@ import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
+import org.opencv.core.Core;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +49,7 @@ public class TableCornerCirclesDetection {
         DEBUG = debug;
     }
 
-    public Mat processMat(Mat image,int minWidth,int minHeight,int detectionRadius) {
+    public Mat processMat(Mat image,int minWidth,int minHeight,int detectionRadius,boolean isVerticalScanLayout) {
 
         Mat gray        = new Mat();
         Imgproc.cvtColor(image, gray, Imgproc.COLOR_BGR2GRAY);
@@ -126,9 +127,14 @@ public class TableCornerCirclesDetection {
                     drawPOIArea(image, topLeft, topRight, bottomLeft, bottomRight);
 
                     Mat croppedMat  = cropROI(image, topLeft, topRight, bottomLeft, bottomRight);
+                    Mat dst = croppedMat;
+                    if (isVerticalScanLayout) {
+                        dst = new Mat();
+                        Core.rotate(croppedMat, dst, Core.ROTATE_90_CLOCKWISE);
+                    }
                     if (DEBUG)
-                        CVOperations.saveImage(croppedMat, "table", 3, false);
-                    return croppedMat;
+                        CVOperations.saveImage(dst, "table", 3, false);
+                    return dst;
                 }
             }else{
                 showFocusAlert(image);

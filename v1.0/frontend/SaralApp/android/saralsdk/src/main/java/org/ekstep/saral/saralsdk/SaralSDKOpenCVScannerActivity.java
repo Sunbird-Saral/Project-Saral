@@ -76,6 +76,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
     private int detectionRadius = 0;
     private int timeInMiliSecond = 0;
     private boolean hasEditEnable = false;
+    private boolean isVerticalScanLayout = false;
 
     public SaralSDKOpenCVScannerActivity() {
         Log.i(TAG, "Instantiated new " + this.getClass());
@@ -434,7 +435,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
         double DARKNESS_THRESHOLD   = 80.0;
         mStartTime                  = SystemClock.uptimeMillis();
         loadLayoutConfiguration();
-        Mat tableMat                = mTableCornerDetection.processMat(image,layoutMinWidth,layoutMinHeight,detectionRadius);
+        Mat tableMat                = mTableCornerDetection.processMat(image,layoutMinWidth,layoutMinHeight,detectionRadius,isVerticalScanLayout);
         if(isMultiChoiceOMRLayout)
         {
             DARKNESS_THRESHOLD = 70.0;
@@ -589,6 +590,9 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                 }
                 if(threshold.has("minHeight") && threshold.getString("detectionRadius")!=null){
                     detectionRadius=Integer.parseInt(threshold.getString("detectionRadius"));
+                }
+                if(threshold.has("verticalScanLayout") && threshold.getString("verticalScanLayout")!=null){
+                    isVerticalScanLayout=threshold.getBoolean("verticalScanLayout");
                 }                
             }
             JSONArray  cells            = layoutObject.getJSONArray("cells");
