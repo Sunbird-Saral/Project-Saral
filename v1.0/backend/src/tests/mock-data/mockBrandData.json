@@ -26,7 +26,7 @@
          "studentAddress": "ENCRYPT",
          "studentBlock": "ENCRYPT",
          "studentDistrict": "ENCRYPT",
-         "guardianFirstName": "ENCRYPT",
+         "guardianFirstname": "ENCRYPT",
          "guardianSurname": "ENCRYPT",
          "fatherName": "ENCRYPT",
          "fatherContactDetails_phone1": "ENCRYPTANDMASK",

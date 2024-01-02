@@ -1012,7 +1012,7 @@ definitions:
       - studentAddress
       - studentDistrict
       - studentBlock
-      - guardianFirstName
+      - guardianFirstname
       - guardianSurname
       - guardianRelation
       - fatherName
@@ -1067,7 +1067,7 @@ definitions:
       studentDistrict: 
         type: string
         example: district
-      guardianFirstName: 
+      guardianFirstname: 
         type: string
         example: guardian
       guardianSurname: 
