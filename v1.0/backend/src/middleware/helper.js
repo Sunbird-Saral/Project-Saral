@@ -170,7 +170,7 @@ const commonHelperFunctions = {
                                 if(!encryptedData[key]) {
                                     encryptedData[key] = []
                                 }
-                                encryptedData[key].push(encryptData(encryptionSchemaInfo[key], el._doc))
+                                encryptedData[key].push(encryptData(encryptionSchemaInfo[key], el._doc?el._doc: el))
                             })
                         } else {
                             encryptedData[key] = []
