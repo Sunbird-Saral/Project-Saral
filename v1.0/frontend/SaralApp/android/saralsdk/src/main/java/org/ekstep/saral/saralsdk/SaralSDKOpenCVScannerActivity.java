@@ -22,6 +22,7 @@ import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 
 import org.ekstep.saral.saralsdk.hwmodel.HWBlockLettersClassifier;
+import org.ekstep.saral.saralsdk.hwmodel.HWAlphaNumericClassifier;
 import org.ekstep.saral.saralsdk.hwmodel.HWClassifier;
 import org.ekstep.saral.saralsdk.hwmodel.PredictionListener;
 import org.ekstep.saral.saralsdk.opencv.DetectShaded;
@@ -103,7 +104,8 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
             timerTask(mlayoutConfigs, pageNumber);
             boolean hwdNotAVailable           = HWClassifier.getInstance().isModelAvailable() == false;
             boolean hwBlockLetterNotAVailable = HWBlockLettersClassifier.getInstance().isModelAvailable() == false;
-            boolean isDigitLayout             = false, isBlockLetterLayout = false;
+            boolean hwAlphaNumericNotAVailable = HWAlphaNumericClassifier.getInstance().isModelAvailable() == false;
+            boolean isDigitLayout             = false, isBlockLetterLayout = false, isAlphaNumericLayout = false;
 
             ReactInstanceManager mReactInstanceManager  = getReactNativeHost().getReactInstanceManager();
             ReactContext reactContext                   = mReactInstanceManager.getCurrentReactContext();
@@ -117,7 +119,8 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                 JSONArray   cellROIs            = cell.getJSONArray("rois");
                 JSONObject  roi                 = cellROIs.getJSONObject(0);
                 isDigitLayout                   = roi.getString("extractionMethod").equals("NUMERIC_CLASSIFICATION");
-                isBlockLetterLayout             = roi.getString("extractionMethod").equals("BLOCK_ALPHANUMERIC_CLASSIFICATION");
+                isBlockLetterLayout             = roi.getString("extractionMethod").equals("BLOCK_LETTER_CLASSIFICATION");
+                isAlphaNumericLayout            = roi.getString("extractionMethod").equals("BLOCK_ALPHANUMERIC_CLASSIFICATION");
             } catch (Exception e) {
 
             }
@@ -135,6 +138,16 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                 try {
                     JSONObject jsonObject = new JSONObject();
                     jsonObject.put("blockLetterModel", true);
+                    intent.putExtra("isModelAvailable", jsonObject.toString());
+                    mReactInstanceManager.onActivityResult(this, 2, 2, intent);
+                    finish();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            } else if (hwAlphaNumericNotAVailable && isAlphaNumericLayout){
+                try {
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("alphaNumericModel", true);
                     intent.putExtra("isModelAvailable", jsonObject.toString());
                     mReactInstanceManager.onActivityResult(this, 2, 2, intent);
                     finish();
@@ -225,14 +238,9 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
         HWBlockLettersClassifier.getInstance().setPredictionListener(new PredictionListener() {
             @Override
             public void OnPredictionSuccess(int digit, float confidence, String id) {
-                Log.d(TAG, "predicted digits change:" + digit + " unique id:" + id + " confidence:" + confidence);
+                Log.d(TAG, "predicted digit:" + digit + " unique id:" + id + " confidence:" + confidence);
                 Map<Integer,String> lettersMap = new HashMap<>();
                 int index=0;
-                // for(int i=0;i<=9;i++)
-                // {
-                //     lettersMap.put(index,String.valueOf(i));
-                //     index++;                  
-                // }
                 for(char c = 'A'; c <= 'Z'; ++c)
                 {
                     lettersMap.put(index,c+"");
@@ -245,6 +253,75 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                     try {
                         JSONObject result = new JSONObject();
                         if(digit != 27 && lettersMap.get(digit)!=null) {
+                            result.put("prediction", lettersMap.get(digit));
+                            result.put("confidence", new Double(confidence));
+                        }else{
+                            // if classifier is 10 , assigning prediction as 0
+                            result.put("prediction", " ");
+                            result.put("confidence", new Double(0));
+                        }
+                        mPredictedDigits.put(id, result.toString());
+                    } catch (JSONException e) {
+                        Log.e(TAG, "unable to create prediction object");
+                    }
+                if (mIsClassifierRequestSubmitted && mTotalClassifiedCount >= mPredictedDigits.size()) {
+                    mIsScanningComplete     = true;
+                }
+
+                if (mIsScanningComplete) {
+                    Log.d(TAG, "Scaning completed, classification count " + mTotalClassifiedCount);
+                    processScanningCompleted();
+                }
+          
+            }
+
+            @Override
+            public void OnPredictionFailed(String error, String id) {
+                Log.e(TAG, "Model prediction failed");
+                mTotalClassifiedCount++;
+                try {
+                    JSONObject result = new JSONObject();
+                    result.put("prediction", new Integer(0));
+                    result.put("confidence", new Double(0.0));
+                    mPredictedDigits.put(id, result.toString());
+                } catch (JSONException e) {
+                    Log.e(TAG, "unable to create prediction object");
+                }
+
+                if (mIsClassifierRequestSubmitted && mTotalClassifiedCount >= mPredictedDigits.size()) {
+                    mIsScanningComplete     = true;
+                }
+
+                if (mIsScanningComplete) {
+                    Log.d(TAG, "Scaning completed, classification count " + mTotalClassifiedCount);
+                    processScanningCompleted();
+                }
+            }
+        });
+
+        HWAlphaNumericClassifier.getInstance().setPredictionListener(new PredictionListener() {
+            @Override
+            public void OnPredictionSuccess(int digit, float confidence, String id) {
+                Log.d(TAG, "predicted digit:" + digit + " unique id:" + id + " confidence:" + confidence);
+                Map<Integer,String> lettersMap = new HashMap<>();
+                int index=0;
+                for(int i=0;i<=9;i++)
+                {
+                    lettersMap.put(index,String.valueOf(i));
+                    index++;                  
+                }
+                lettersMap.put(index," ");
+                index++;
+                for(char c = 'A'; c <= 'Z'; ++c)
+                {
+                    lettersMap.put(index,c+"");
+                    index++;
+                }
+                mTotalClassifiedCount++;
+                Log.d(TAG, "predicted digit:" + digit + "letterMap" + lettersMap.get(digit) + " confidence:" + confidence);
+                    try {
+                        JSONObject result = new JSONObject();
+                        if(digit != 37 && lettersMap.get(digit)!=null) {
                             result.put("prediction", lettersMap.get(digit));
                             result.put("confidence", new Double(confidence));
                         }else{
@@ -404,6 +481,21 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                                 }
                             }
                         }
+
+                        if (roi.get("extractionMethod").equals("BLOCK_LETTER_CLASSIFICATION")){
+                            JSONObject result  = new JSONObject();
+                            result.put("prediction", "A");
+                            result.put("confidence", new Double(1.00));
+
+                            if(!roi.has("result")){
+                                roi.put("result", result);
+                            }else{
+                                JSONObject resultObj = roi.getJSONObject("result");
+                                if(resultObj.getString("prediction") != null){
+                                    roi.put("result", result);
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -504,6 +596,19 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                         }
                     }
 
+                    if (roiConfig.getString("extractionMethod").equals("BLOCK_LETTER_CLASSIFICATION")) {
+                        String roiId        = roiConfig.getString("roiId");
+                        JSONObject rect      = roiConfig.getJSONObject("rect");
+
+                        mPredictedDigits.put(roiId, "0");
+                        Mat alphaROI        = mDetectShaded.getROIMat(tableMat, rect.getInt("top"), rect.getInt("left"), rect.getInt("bottom"), rect.getInt("right"));
+                        mRoiMatBase64.put(roiId,createBase64FromMat(alphaROI));
+                        if(HWBlockLettersClassifier.getInstance().isInitialized() == true) {
+                            Log.d(TAG, "Requesting prediction for: " + roiId);
+                            HWBlockLettersClassifier.getInstance().classifyMat(alphaROI, roiId);
+                        }
+                    }
+
                     if (roiConfig.getString("extractionMethod").equals("BLOCK_ALPHANUMERIC_CLASSIFICATION")) {
                         String roiId        = roiConfig.getString("roiId");
                         JSONObject rect      = roiConfig.getJSONObject("rect");
@@ -511,9 +616,9 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                         mPredictedDigits.put(roiId, "0");
                         Mat alphaNumericROI        = mDetectShaded.getROIMat(tableMat, rect.getInt("top"), rect.getInt("left"), rect.getInt("bottom"), rect.getInt("right"));
                         mRoiMatBase64.put(roiId,createBase64FromMat(alphaNumericROI));
-                        if(HWBlockLettersClassifier.getInstance().isInitialized() == true) {
+                        if(HWAlphaNumericClassifier.getInstance().isInitialized() == true) {
                             Log.d(TAG, "Requesting prediction for: " + roiId);
-                            HWBlockLettersClassifier.getInstance().classifyMat(alphaNumericROI, roiId);
+                            HWAlphaNumericClassifier.getInstance().classifyMat(alphaNumericROI, roiId);
                         }
                     }
 
@@ -658,7 +763,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                 for (int j = 0; j < cellROIs.length(); j++) {
                     JSONObject roi      = cellROIs.getJSONObject(j);
                     String roiId = roi.getString("roiId");
-                    if (roi.getString("extractionMethod").equals("NUMERIC_CLASSIFICATION") || roi.getString("extractionMethod").equals("BLOCK_ALPHANUMERIC_CLASSIFICATION")) {
+                    if (roi.getString("extractionMethod").equals("NUMERIC_CLASSIFICATION") || roi.getString("extractionMethod").equals("BLOCK_ALPHANUMERIC_CLASSIFICATION") || roi.getString("extractionMethod").equals("BLOCK_LETTER_CLASSIFICATION")) {
                         JSONObject result  = new JSONObject(mPredictedDigits.get(roiId));
                         roi.put("result", result);
                         if(mRoiMatBase64.get(roiId)!=null)
