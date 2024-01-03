@@ -1840,12 +1840,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}/saveMarks",
+									"raw": "{{url}}/admissions",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
-										"saveMarks"
+										"admissions"
 									]
 								}
 							},
@@ -1887,7 +1887,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\r\n    \"message\": \"Saved Successfully.\",\r\n    \"documentCount\": 1\r\n}"
+							"body": "{ \"message\": \"Saved Successfully.\" }"
 						}
 					]
 				},
