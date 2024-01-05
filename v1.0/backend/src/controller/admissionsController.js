@@ -1,19 +1,20 @@
 const admissionsSchema = require('../models/admissions')
-
+const {transformDataBasedOnEncryption} = require('../middleware/helper')
 exports.saveAdmissions = async (req, res, next) => {
 
     try {
         let connection = req.dbConnection;
         const Admissions = connection.model('Admissions', admissionsSchema)
         const studentAdmissionData = new Admissions(req.body)
-        const filter = {
-            schoolId: req.school.schoolId,
-            admissionNumber: studentAdmissionData.admissionNumber
-        }
         studentAdmissionData.schoolId = req.school.schoolId;
         studentAdmissionData.userId = req.school.userId;
         delete studentAdmissionData._doc._id
-        await Admissions.updateOne(filter, studentAdmissionData, {upsert:true, runValidators: true})
+        const encryptedData = await transformDataBasedOnEncryption(connection, studentAdmissionData._doc, 'admissions', req.school.schoolId)
+        const filter = {
+            schoolId: req.school.schoolId,
+            admissionNumber: encryptedData.admissionNumber
+        }
+        await Admissions.updateOne(filter, encryptedData, {upsert:true, runValidators: true})
         res.status(200).json({ message: "Saved Successfully."})
     } catch (err) {
         res.status(400).send(err)

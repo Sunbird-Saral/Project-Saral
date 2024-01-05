@@ -2,7 +2,10 @@ const { stringObject } = require('../utils/commonUtils')
 const locksSchema = require('../models/lock')
 const usersSchema = require("../models/users")
 const countersSchema = require("../models/counter")
+const schoolsSchema = require('../models/school')
+const brandsSchema = require('../models/brand')
 const bcrypt = require('bcryptjs')
+const encryptionUtil = require('../utils/encryptionUtils');
 
 
 const commonHelperFunctions = {
@@ -138,6 +141,67 @@ const commonHelperFunctions = {
         
         iterateOverObject(schemaRef)
         return fobj;
+    },
+
+    transformDataBasedOnEncryption: async function (connection, data, schemaName, schoolId){
+        try {
+            const Schools = connection.model('Schools', schoolsSchema)
+            const Brands = connection.model('Brands', brandsSchema)
+
+            const school = await Schools.findOne({ schoolId: schoolId, $comment: "Find School Data"})
+            const brand = await Brands.findOne({ state: school.state ,  $comment: "Fetch Brand Data API For Find Brand according to state." }, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 })
+            let encryptionSchemaInfo = brand?.encryptionSchemas? brand.encryptionSchemas[schemaName] :false;
+            if(!encryptionSchemaInfo) {
+                const defaultBrand = await Brands.findOne({ state: { $exists: false } , $comment: "Fetch Brand Data API For Find Brand where state is not present."  }, { _id: 0, __v: 0, createdAt: 0, updatedAt: 0 })
+                encryptionSchemaInfo = defaultBrand.encryptionSchemas? defaultBrand.encryptionSchemas[schemaName] :false;
+            }
+            return encryptData(encryptionSchemaInfo, data)
+        } catch (err){
+            throw err;
+        }
+
+        function encryptData(encryptionSchemaInfo, data) {
+            if(encryptionSchemaInfo) {
+                let encryptedData = {};
+                Object.keys(data).forEach((key)=>{
+                    if(Array.isArray(data[key]) && typeof encryptionSchemaInfo[key] === 'object') {
+                        if(data[key].length > 0) {
+                            data[key].forEach((el, i)=>{
+                                if(!encryptedData[key]) {
+                                    encryptedData[key] = []
+                                }
+                                encryptedData[key].push(encryptData(encryptionSchemaInfo[key], el._doc?el._doc: el))
+                            })
+                        } else {
+                            encryptedData[key] = []
+                        }
+                    } else {
+                        let encryptionMethod = encryptionSchemaInfo[key]
+                        switch(encryptionMethod) {
+                            case "ENCRYPT":
+                                encryptedData[key] = encryptionUtil.encrypt(data[key]);
+                                break;
+                            case "ENCRYPTANDHASH":
+                                let enVal = encryptionUtil.encrypt(data[key]);
+                                encryptedData[key] = encryptionUtil.hashWithSalt(enVal);
+                                break;
+                            case "ENCRYPTANDMASK":
+                                encryptedData[key] = encryptionUtil.maskData(encryptionUtil.encrypt(data[key]));
+                                break;
+                            case "ENCRYPTARRAY":
+                                encryptedData[key] = encryptionUtil.encrypt(JSON.stringify(data[key]).slice(1, -1));
+                                break;
+                            default:
+                                encryptedData[key] = data[key]
+                                break;     
+                        }
+                    }
+                })
+                return encryptedData;
+            } else {
+                return data;
+            }
+        }
     }
 }
 

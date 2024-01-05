@@ -260,7 +260,11 @@ const BrandSchema = new mongoose.Schema({
             },
            
         }]
-    }   
+    },
+    encryptionSchemas: {
+        type: Object,
+        required: false
+    }
 },{
     timestamps: true
 })
