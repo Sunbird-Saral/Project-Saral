@@ -92,7 +92,7 @@ const admissionsSchema = new mongoose.Schema({
    },
    fatherContactDetails_phone2: {
             type: String,
-            required: true
+            required: false
    },
    motherName: {
          type: String,
@@ -115,7 +115,7 @@ const admissionsSchema = new mongoose.Schema({
    },
    motherContactDetails_phone2: {
             type: String,
-            required: true
+            required: false
    },
    rollNumber: {
       type: String,
