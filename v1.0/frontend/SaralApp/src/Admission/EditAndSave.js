@@ -7,6 +7,8 @@ import {
   TextInput,
   Alert,
   BackHandler,
+  KeyboardAvoidingView,
+  Keyboard,
 } from 'react-native';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
@@ -114,18 +116,24 @@ class EditAndSave extends Component {
             return this.renderItem(item, index);
           }}
           keyExtractor={item => item.id}
-          ListFooterComponent={() => <View />}
-          ListFooterComponentStyle={{marginBottom: 80}}
+          ListFooterComponent={<View />}
+          ListFooterComponentStyle={{
+            marginBottom: 100,
+            backgroundColor: 'red',
+          }}
+          removeClippedSubviews={false}
+          onScrollBeginDrag={Keyboard.dismiss}
         />
+
         <View
           style={{
             position: 'absolute',
-            top: '90%',
+            top: '78%',
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'center',
-
             alignSelf: 'center',
+            marginTop: 120,
           }}>
           <Button
             buttonStyle={{
