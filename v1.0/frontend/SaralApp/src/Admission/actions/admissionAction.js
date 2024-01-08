@@ -2,9 +2,9 @@ import axios from 'axios';
 import {Alert} from 'react-native';
 
 import BASE_URL from '../../configs/config';
-import {FORMS_SUBMITTED} from '../constants';
+import {FORMS_SUBMITTED, SET_DATA_SUCCESS} from '../constants';
 
-export const setAdmissionData = (formData, token) => {
+export const setAdmissionData = (formData, token, navigation) => {
   let reformatedObj = {};
 
   for (let i = 0; i < formData.length; i++) {
@@ -21,37 +21,29 @@ export const setAdmissionData = (formData, token) => {
     body: JSON.stringify(reformatedObj),
   };
 
+  console.log('reformatedObj........................', reformatedObj);
+
   return dispatch => {
     fetch(`${BASE_URL.BASE_URL}/admissions`, headers)
       .then(response => {
-        console.log('reformatedObj from success', reformatedObj);
-        Alert.alert('Data submittied successfully');
-        dispatch(getNoOFFormsSubmitted(token));
+        Alert.alert('Data submittied successfully', '', [
+          {
+            text: 'Okay',
+            onPress: () => {
+              dispatch(getNoOFFormsSubmitted(token));
+              dispatch({
+                type: SET_DATA_SUCCESS,
+                dataSubmitted: true,
+              });
+            },
+            style: 'default',
+          },
+        ]);
       })
       .catch(error => {
         Alert.alert(error.message);
         console.log('error.....', error);
       });
-
-    // axios
-    //   .put(`${BASE_URL.BASE_URL}/admissions`, reformatedObj, {
-    //     headers: {
-    //       Authorization: `${token}`,
-    //       origin: BASE_URL.BASE_URL,
-    //       'Content-Type': 'application/json',
-    //     },
-    //   })
-    // .then(response => {
-    //   console.log('reformatedObj from success', reformatedObj);
-    //   Alert.alert('Data submittied successfully');
-    //   dispatch(getNoOFFormsSubmitted(token));
-    // })
-    // .catch(function (error) {
-    //   console.log('reformatedObj from error', reformatedObj);
-
-    //   Alert.alert(error.message);
-    //   console.log('error.....', error);
-    // });
   };
 };
 

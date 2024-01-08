@@ -15,7 +15,13 @@ import axios from 'axios';
 import AppTheme from '../utils/AppTheme';
 import {monospace_FF} from '../utils/CommonUtils';
 import Button from './commonComponents/Button';
-import {GET_PAGE_NO, SET_DATA} from './constants';
+import {
+  GET_PAGE_NO,
+  HANDLE_CANCLE,
+  HANDLE_CANCLE_PAGE_1,
+  HANDLE_CANCLE_PAGE_2,
+  SET_DATA,
+} from './constants';
 import {
   getNoOFFormsSubmitted,
   setAdmissionData,
@@ -26,7 +32,10 @@ class EditAndSave extends Component {
     super(props);
 
     this.state = {
-      data: [...this.props.formData],
+      data:
+        this.props.pageNo == 1
+          ? [...this.props.formDataPage1]
+          : [...this.props.formDataPage2],
     };
   }
 
@@ -81,15 +90,17 @@ class EditAndSave extends Component {
     );
   };
 
-  onPressConfirm = () => {
+  onPressConfirm = async () => {
     this.props.setData(this.state.data);
 
     if (this.props.pageNo == 1) this.props.navigation.goBack();
     else {
       let token = this.props.loginData.data.token;
-
-      this.props.setAdmissionData(this.state.data, token);
-
+      this.props.setAdmissionData(
+        [...this.props.formDataPage1, ...this.state.data],
+        token,
+        this.props,
+      );
       this.props.navigation.navigate('Admissions');
     }
   };
@@ -98,14 +109,13 @@ class EditAndSave extends Component {
     return (
       <SafeAreaView style={styles.container}>
         <FlatList
-          data={this.props.formData}
+          data={this.state.data}
           renderItem={({item, index}) => {
             return this.renderItem(item, index);
           }}
           keyExtractor={item => item.id}
           ListFooterComponent={() => <View />}
-          ListFooterComponentStyle={{paddingBottom: 80}}
-          initialScrollIndex={this.props.pageNo == 1 ? 0 : 18}
+          ListFooterComponentStyle={{marginBottom: 80}}
         />
         <View
           style={{
@@ -130,6 +140,8 @@ class EditAndSave extends Component {
           <Button
             buttonStyle={{width: 150, backgroundColor: AppTheme.ERROR_RED}}
             onPress={() => {
+              if (this.props.pageNo == 1) this.props.handleCanclePage1();
+              else this.props.handleCanclePage2();
               this.props.pageNoFunction(this.props.pageNo - 1);
               this.props.navigation.goBack();
             }}
@@ -155,15 +167,19 @@ const mapDispatchToProps = dispatch => {
     noOFormsSubmitted: token => dispatch(getNoOFFormsSubmitted(token)),
     setAdmissionData: (data, token) => dispatch(setAdmissionData(data, token)),
     pageNoFunction: pageNo => dispatch({type: GET_PAGE_NO, pageNo}),
+    handleCanclePage1: () => dispatch({type: HANDLE_CANCLE_PAGE_1}),
+    handleCanclePage2: () => dispatch({type: HANDLE_CANCLE_PAGE_2}),
   };
 };
 
 const mapStateToProps = state => {
   return {
-    formData: state.admissionData.formData,
+    formDataPage1: state.admissionData.formDataPage1,
+    formDataPage2: state.admissionData.formDataPage2,
     multiBrandingData: state.multiBrandingData.response.data,
     pageNo: state.admissionData.pageNo,
     loginData: state.loginData,
+    dataSubmitted: state.dataSubmitted,
   };
 };
 
