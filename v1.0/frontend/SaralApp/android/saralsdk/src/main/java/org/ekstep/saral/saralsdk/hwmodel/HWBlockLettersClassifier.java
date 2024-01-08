@@ -44,8 +44,8 @@ public class HWBlockLettersClassifier {
      */
     private static final String HOSTED_MODEL_NAME = null;
     // private static final String LOCAL_MODEL_ASSET = "model_letter_digits_finetune_18_07_22_epoch_15.tflite";
-    private static final String LOCAL_MODEL_ASSET = "saral_hwdaln_model.tflite";
-    private static final String FB_REMOTE_MODEL   = "saral_hwdaln_model";
+    private static final String LOCAL_MODEL_ASSET = "hw_characters.tflite";
+    private static final String FB_REMOTE_MODEL   = "hw_characters";
     /**
      * Dimensions of inputs.
      */
@@ -100,7 +100,7 @@ public class HWBlockLettersClassifier {
 
     public void initialize(HWBlockLettersClassifierStatusListener listener, boolean isFBDownloadEnable, Context context) {
         int[] inputDims = {DIM_BATCH_SIZE, DIM_IMG_SIZE_X, DIM_IMG_SIZE_Y, DIM_PIXEL_SIZE};
-        int[] outputDims = {DIM_BATCH_SIZE, 37};
+        int[] outputDims = {DIM_BATCH_SIZE, 27};
         try {
             int firebaseModelDataType = FirebaseModelDataType.FLOAT32;
             mDataOptions =
