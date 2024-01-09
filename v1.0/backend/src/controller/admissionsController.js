@@ -9,6 +9,10 @@ exports.saveAdmissions = async (req, res, next) => {
         studentAdmissionData.schoolId = req.school.schoolId;
         studentAdmissionData.userId = req.school.userId;
         delete studentAdmissionData._doc._id
+        const validationResult = studentAdmissionData.validateSync()
+        if (validationResult instanceof Error) {
+            throw validationResult
+        }
         const encryptedData = await transformDataBasedOnEncryption(connection, studentAdmissionData._doc, 'admissions', req.school.schoolId)
         const filter = {
             schoolId: req.school.schoolId,

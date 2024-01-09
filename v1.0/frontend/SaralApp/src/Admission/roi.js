@@ -2,7 +2,7 @@ export let roi = {
     "layout": {
         "version": "1.0",
         "name": "AdmissionFrom",
-        "page": "2",
+        "pages": "2",
         "threshold": {
             "experimentalOMRDetection": false,
             "minWidth": 0,
@@ -2704,8 +2704,8 @@ export let roi = {
                     "index": 11
                 },
                 "format": {
-                    "name": "guardianFirstName",
-                    "value": "guardianFirstName"
+                    "name": "guardianFirstname",
+                    "value": "guardianFirstname"
                 },
                 "validate": {
                     "regExp": ""
@@ -5785,10 +5785,10 @@ export let roi = {
                         "roiId": "126",
                         "index": 9,
                         "rect": {
-                            "top": 200,
-                            "left": 406,
+                            "top": 201,
+                            "left": 387,
                             "bottom": 211,
-                            "right": 419
+                            "right": 400
                         }
                     },
                     {
@@ -5797,10 +5797,10 @@ export let roi = {
                         "roiId": "127",
                         "index": 10,
                         "rect": {
-                            "top": 201,
-                            "left": 387,
+                            "top": 200,
+                            "left": 406,
                             "bottom": 211,
-                            "right": 400
+                            "right": 419
                         }
                     },
                     {
@@ -6801,7 +6801,7 @@ export let roi = {
                     "regExp": ""
                 },
                 "omrOptions": [
-                    "samanya",
+                    "SAMANYA",
                     "OBC",
                     "SC",
                     "ST"
@@ -6836,7 +6836,7 @@ export let roi = {
                         }
                     },
                     {
-                        "annotationTags": "RATIONCARD_ANYODAYA",
+                        "annotationTags": "RATIONCARD_ANTYODAYA",
                         "extractionMethod": "CELL_OMR",
                         "roiId": "205",
                         "index": 2,
@@ -6873,7 +6873,7 @@ export let roi = {
                 "omrOptions": [
                     "APL",
                     "BPL",
-                    "ANYODAY",
+                    "ANTYODAYA",
                     "ANYA"
                 ]
             },
