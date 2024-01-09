@@ -2,6 +2,13 @@ const Admissions = require("../models/admissions");
 const admissionsController = require('../controller/admissionsController')
 const mockAdmissionsBody = require("./mock-data/mockAdmissionsBody.json")
 
+
+jest.mock('../middleware/helper', () => {
+    return {
+        transformDataBasedOnEncryption: jest.fn().mockResolvedValue({})
+    }
+})
+
 class AdmissionsMock {
     constructor(data) {
         this._doc = {_id: "test"}
@@ -51,7 +58,6 @@ describe('Admissions controller', () => {
             __v: 0
         }
         req.body = mockAdmissionsBody
-
         await admissionsController.saveAdmissions(req, res, jest.fn())
         expect(res.status).toHaveBeenCalledWith(200);
         expect(res.json).toHaveBeenCalledWith({ message: "Saved Successfully."});
@@ -74,7 +80,6 @@ describe('Admissions controller', () => {
         AdmissionsMock.updateOne = jest.fn().mockImplementation(() => {
             throw new Error('Error while saving')
         });
-
         await admissionsController.saveAdmissions(req, res, jest.fn())
         expect(res.status).toHaveBeenCalledWith(400);
     });
