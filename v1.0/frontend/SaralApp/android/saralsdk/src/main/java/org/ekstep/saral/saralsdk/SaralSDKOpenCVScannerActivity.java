@@ -318,7 +318,6 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                     index++;
                 }
                 mTotalClassifiedCount++;
-                Log.d(TAG, "predicted digit:" + digit + "letterMap" + lettersMap.get(digit) + " confidence:" + confidence);
                     try {
                         JSONObject result = new JSONObject();
                         if(digit != 37 && lettersMap.get(digit)!=null) {
