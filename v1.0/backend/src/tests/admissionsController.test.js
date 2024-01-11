@@ -12,6 +12,7 @@ jest.mock('../middleware/helper', () => {
 class AdmissionsMock {
     constructor(data) {
         this._doc = {_id: "test"}
+        this.validateSync = jest.fn().mockResolvedValue(null)
     }
     static updateOne = jest.fn().mockResolvedValue(null)
     static countDocuments = jest.fn().mockResolvedValue(1)
