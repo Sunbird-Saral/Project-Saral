@@ -1,7 +1,6 @@
 import {Text, View} from 'react-native';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import axios from 'axios';
 
 import Button from './commonComponents/Button';
 import AppTheme from '../utils/AppTheme';
