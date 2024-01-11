@@ -115,11 +115,25 @@ export class Admissions extends Component {
       }
 
       if (pageNo.toString() == cells[i].page) {
-        prediction = {
-          key: cells[i].format.name,
-          value: marks,
-          label: labels[i],
-        };
+        if ((i == 1 || i == 5) && pageNo == 1 && marks != '' && marks) {
+          prediction = {
+            key: cells[i].format.name,
+            value: marks
+              .substring(0, 2)
+              .concat('/')
+              .concat(
+                marks.substring(2, 4).concat('/').concat(marks.substring(4)),
+              ),
+            label: labels[i],
+          };
+        } else {
+          prediction = {
+            key: cells[i].format.name,
+            value: marks.trim(),
+            label: labels[i],
+          };
+        }
+
         this.state.predictionArray.push(prediction);
       }
     }
@@ -130,6 +144,12 @@ export class Admissions extends Component {
     this.props.pageNo(pageNo);
     this.props.navigation.navigate('EditAndSave');
   };
+
+  checkIsValid(element) {
+    if (element && element != null && element != '' && element != undefined)
+      return true;
+    return false;
+  }
 
   render() {
     return (
@@ -155,9 +175,11 @@ export class Admissions extends Component {
           onPress={() => this.onScan(2)}
           label={'SCAN PAGE 2'}
         />
-
-        {this.props.formDataPage1[3]?.value &&
-          this.props.formDataPage1[4]?.value && (
+        {this.checkIsValid(this.props.formDataPage1[0]?.value) && (
+          <Text>Admission Number: {this.props.formDataPage1[0].value}</Text>
+        )}
+        {this.checkIsValid(this.props.formDataPage1[3]?.value) &&
+          this.checkIsValid(this.props.formDataPage1[4]?.value) && (
             <Text>
               Name: {this.props.formDataPage1[3].value}{' '}
               {this.props.formDataPage1[4].value}

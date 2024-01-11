@@ -23,6 +23,8 @@ import {
   HANDLE_CANCLE_PAGE_1,
   HANDLE_CANCLE_PAGE_2,
   SET_DATA,
+  SET_DATA_PAGE_1,
+  SET_DATA_PAGE_2,
 } from './constants';
 import {
   getNoOFFormsSubmitted,
@@ -53,6 +55,15 @@ class EditAndSave extends Component {
     BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
   }
 
+  isFormFilled() {
+    for (let i = 0; i < this.state.data.length; i++) {
+      if (!this.state.data[i].value) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   handleTextChange = (label, modifiedValue, index) => {
     let obj = this.state.data[index];
     obj.value = modifiedValue;
@@ -68,6 +79,7 @@ class EditAndSave extends Component {
           padding: 10,
         }}>
         <Text style={{fontFamily: monospace_FF, fontSize: 15}}>
+          <Text style={{color: 'red'}}>* </Text>
           {item.label}:
         </Text>
         <TextInput
@@ -87,17 +99,19 @@ class EditAndSave extends Component {
             this.handleTextChange(item.label, newValue, index)
           }
           multiline={true}
+          placeholder={'NA'}
         />
       </View>
     );
   };
 
   onPressConfirm = async () => {
-    this.props.setData(this.state.data);
-
-    if (this.props.pageNo == 1) this.props.navigation.goBack();
-    else {
+    if (this.props.pageNo == 1) {
+      this.props.navigation.goBack();
+      this.props.setDataPage1(this.state.data);
+    } else {
       let token = this.props.loginData.data.token;
+      this.props.setDataPage2(this.state.data);
       this.props.setAdmissionData(
         [...this.props.formDataPage1, ...this.state.data],
         token,
@@ -141,8 +155,16 @@ class EditAndSave extends Component {
               backgroundColor: this.props.multiBrandingData.themeColor1
                 ? this.props.multiBrandingData.themeColor1
                 : AppTheme.BLUE,
+              opacity: this.isFormFilled() ? 0.5 : 1,
             }}
-            onPress={this.onPressConfirm}
+            onPress={() => {
+              if (this.isFormFilled()) {
+                Alert.alert(
+                  'All fields mandatory!',
+                  'Please enter NA if not applicable.',
+                );
+              } else this.onPressConfirm();
+            }}
             label={'CONFIRM'}
           />
           <Button
@@ -171,12 +193,14 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = dispatch => {
   return {
-    setData: data => dispatch({type: SET_DATA, data}),
+    // setData: data => dispatch({type: SET_DATA, data}),
     noOFormsSubmitted: token => dispatch(getNoOFFormsSubmitted(token)),
     setAdmissionData: (data, token) => dispatch(setAdmissionData(data, token)),
     pageNoFunction: pageNo => dispatch({type: GET_PAGE_NO, pageNo}),
     handleCanclePage1: () => dispatch({type: HANDLE_CANCLE_PAGE_1}),
     handleCanclePage2: () => dispatch({type: HANDLE_CANCLE_PAGE_2}),
+    setDataPage1: data => dispatch({type: SET_DATA_PAGE_1, data}),
+    setDataPage2: data => dispatch({type: SET_DATA_PAGE_2, data}),
   };
 };
 
