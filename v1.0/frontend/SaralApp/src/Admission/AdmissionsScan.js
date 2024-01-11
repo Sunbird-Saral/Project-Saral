@@ -13,7 +13,12 @@ import Button from './commonComponents/Button';
 import SaralSDK from '../../SaralSDK';
 import {roi} from './roi';
 import AppTheme from '../utils/AppTheme';
-import {GET_PAGE_NO, SET_DATA} from './constants';
+import {
+  GET_PAGE_NO,
+  SET_DATA,
+  SET_DATA_PAGE_1,
+  SET_DATA_PAGE_2,
+} from './constants';
 
 export class Admissions extends Component {
   constructor(props) {
@@ -24,7 +29,7 @@ export class Admissions extends Component {
       disblePage1: false,
       disablePage2: true,
       disableShowData: true,
-      predictionArray: [...this.props.formData],
+      predictionArray: [],
     };
   }
 
@@ -110,21 +115,41 @@ export class Admissions extends Component {
       }
 
       if (pageNo.toString() == cells[i].page) {
-        prediction = {
-          key: cells[i].format.name,
-          value: marks,
-          label: labels[i],
-        };
+        if ((i == 1 || i == 5) && pageNo == 1 && marks != '' && marks) {
+          prediction = {
+            key: cells[i].format.name,
+            value: marks
+              .substring(0, 2)
+              .concat('/')
+              .concat(
+                marks.substring(2, 4).concat('/').concat(marks.substring(4)),
+              ),
+            label: labels[i],
+          };
+        } else {
+          prediction = {
+            key: cells[i].format.name,
+            value: marks.trim(),
+            label: labels[i],
+          };
+        }
+
         this.state.predictionArray.push(prediction);
       }
     }
 
-    this.props.setData(this.state.predictionArray);
-
+    if (pageNo == 1) this.props.setDataPage1(this.state.predictionArray);
+    else this.props.setDataPage2(this.state.predictionArray);
+    this.state.predictionArray = [];
     this.props.pageNo(pageNo);
-
     this.props.navigation.navigate('EditAndSave');
   };
+
+  checkIsValid(element) {
+    if (element && element != null && element != '' && element != undefined)
+      return true;
+    return false;
+  }
 
   render() {
     return (
@@ -150,12 +175,14 @@ export class Admissions extends Component {
           onPress={() => this.onScan(2)}
           label={'SCAN PAGE 2'}
         />
-
-        {this.state.predictionArray[3]?.value &&
-          this.state.predictionArray[4]?.value && (
+        {this.checkIsValid(this.props.formDataPage1[0]?.value) && (
+          <Text>Admission Number: {this.props.formDataPage1[0].value}</Text>
+        )}
+        {this.checkIsValid(this.props.formDataPage1[3]?.value) &&
+          this.checkIsValid(this.props.formDataPage1[4]?.value) && (
             <Text>
-              Name: {this.state.predictionArray[3].value}{' '}
-              {this.state.predictionArray[4].value}
+              Name: {this.props.formDataPage1[3].value}{' '}
+              {this.props.formDataPage1[4].value}
             </Text>
           )}
 
@@ -183,7 +210,8 @@ const style = StyleSheet.create({
 
 const mapDispatchToProps = dispatch => {
   return {
-    setData: data => dispatch({type: SET_DATA, data}),
+    setDataPage1: data => dispatch({type: SET_DATA_PAGE_1, data}),
+    setDataPage2: data => dispatch({type: SET_DATA_PAGE_2, data}),
     pageNo: pageNo => dispatch({type: GET_PAGE_NO, pageNo}),
   };
 };
@@ -192,7 +220,8 @@ const mapStateToProps = state => {
   return {
     multiBrandingData: state.multiBrandingData.response.data,
     pageno: state.admissionData.pageNo,
-    formData: state.admissionData.formData,
+    formDataPage1: state.admissionData.formDataPage1,
+    formDataPage2: state.admissionData.formDataPage2,
   };
 };
 
