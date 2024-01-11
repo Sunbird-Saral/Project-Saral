@@ -21,12 +21,10 @@ export const setAdmissionData = (formData, token, navigation) => {
     body: JSON.stringify(reformatedObj),
   };
 
-  console.log('reformatedObj........................', reformatedObj);
-
   return dispatch => {
     fetch(`${BASE_URL.BASE_URL}/admissions`, headers)
       .then(response => {
-        Alert.alert('Data submittied successfully', '', [
+        Alert.alert('Data submitted successfully', '', [
           {
             text: 'Okay',
             onPress: () => {
@@ -42,7 +40,7 @@ export const setAdmissionData = (formData, token, navigation) => {
       })
       .catch(error => {
         Alert.alert(error.message);
-        console.log('error.....', error);
+        console.log('error', error);
       });
   };
 };

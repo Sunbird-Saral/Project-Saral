@@ -147,7 +147,8 @@ class EditAndSave extends Component {
             alignItems: 'center',
             justifyContent: 'center',
             alignSelf: 'center',
-            marginTop: 120,
+            marginTop: 115,
+            marginBottom: 15,
           }}>
           <Button
             buttonStyle={{
@@ -155,7 +156,7 @@ class EditAndSave extends Component {
               backgroundColor: this.props.multiBrandingData.themeColor1
                 ? this.props.multiBrandingData.themeColor1
                 : AppTheme.BLUE,
-              opacity: this.isFormFilled() ? 0.5 : 1,
+              opacity: this.isFormFilled() ? 0.7 : 1,
             }}
             onPress={() => {
               if (this.isFormFilled()) {
