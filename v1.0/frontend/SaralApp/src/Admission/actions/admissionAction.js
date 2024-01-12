@@ -39,7 +39,7 @@ export const setAdmissionData = (formData, token, navigation) => {
             },
           ]);
         } else {
-          Alert.alert('Server responded with error', '', [
+          Alert.alert('Server error: Something went wrong , contact Admin', '', [
             {
               text: 'Okay',
               onPress: () => {
