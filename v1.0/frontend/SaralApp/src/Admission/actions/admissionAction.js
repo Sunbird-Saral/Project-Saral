@@ -24,19 +24,30 @@ export const setAdmissionData = (formData, token, navigation) => {
   return dispatch => {
     fetch(`${BASE_URL.BASE_URL}/admissions`, headers)
       .then(response => {
-        Alert.alert('Data submitted successfully', '', [
-          {
-            text: 'Okay',
-            onPress: () => {
-              dispatch(getNoOFFormsSubmitted(token));
-              dispatch({
-                type: SET_DATA_SUCCESS,
-                dataSubmitted: true,
-              });
+        if(response.status == 200) {
+          Alert.alert('Data submitted successfully', '', [
+            {
+              text: 'Okay',
+              onPress: () => {
+                dispatch(getNoOFFormsSubmitted(token));
+                dispatch({
+                  type: SET_DATA_SUCCESS,
+                  dataSubmitted: true,
+                });
+              },
+              style: 'default',
             },
-            style: 'default',
-          },
-        ]);
+          ]);
+        } else {
+          Alert.alert('Server responded with error', '', [
+            {
+              text: 'Okay',
+              onPress: () => {
+              },
+              style: 'default',
+            },
+          ]);
+        }
       })
       .catch(error => {
         Alert.alert(error.message);

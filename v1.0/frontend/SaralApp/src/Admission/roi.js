@@ -276,8 +276,8 @@ export let roi = {
                   "index": 2
               },
               "format": {
-                  "name": "dateofAdmission",
-                  "value": "dateofAdmission"
+                  "name": "dateOfAdmission",
+                  "value": "dateOfAdmission"
               },
               "validate": {
                   "regExp": ""
@@ -3008,8 +3008,8 @@ export let roi = {
                   "index": 12
               },
               "format": {
-                  "name": "guardianSurName",
-                  "value": "guardianSurName"
+                  "name": "guardianSurname",
+                  "value": "guardianSurname"
               },
               "validate": {
                   "regExp": ""
