@@ -11,7 +11,7 @@
     "offlineMode": true,
     "isAppForceUpdateEnabled": true,
     "district": "district1",
-    "scanTimeoutMs": 300000,
+    "scanTimeoutMs": 180000,
     "isManualEditEnabled": true
   },
   {
@@ -50,7 +50,7 @@
     "isAppForceUpdateEnabled": false,
     "isFBAnalyticsEnabled": true,
     "district": "district1",
-    "scanTimeoutMs": 300000,
+    "scanTimeoutMs": 180000,
     "isManualEditEnabled": true,
     "block":"block",
     "useCase2":false,
