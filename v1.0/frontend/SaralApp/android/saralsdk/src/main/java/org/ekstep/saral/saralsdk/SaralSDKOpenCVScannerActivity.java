@@ -65,13 +65,16 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
     private long                            mStartTime;
     private long                            mStartPredictTime;
 
-    private int     mTotalClassifiedCount               = 0;
-    private boolean mIsClassifierRequestSubmitted       = false;
-    private HashMap<String, String> mPredictedDigits    = new HashMap<>();
-    private HashMap<String, String> mPredictedOMRs      = new HashMap<>();
-    private HashMap<String, String> mPredictedClass     = new HashMap<>();
-    private HashMap<String, String> mRoiMatBase64       = new HashMap<>();
+    private int mTotalClassifiedCount = 0;
+    private boolean mIsClassifierRequestSubmitted = false;
+    private HashMap<String, String> mPredictedDigits = new HashMap<>();
+    private HashMap<String, String> mPredictedOMRs = new HashMap<>();
+    private HashMap<String, String> mPredictedClass = new HashMap<>();
+    private HashMap<String, String> mRoiMatBase64 = new HashMap<>();
+    private JSONObject predictionResult = new JSONObject();
+    private HashMap<String, Integer> roiLen = new HashMap<>();
     private boolean isMultiChoiceOMRLayout = false;
+    private boolean isFirstBatchDataProcessed = false;
     private int layoutMinWidth = 0;
     private int layoutMinHeight = 0;
     private int detectionRadius = 0;
@@ -183,7 +186,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
         super.onResume();
         HWClassifier.getInstance().setPredictionListener(new PredictionListener() {
             @Override
-            public void OnPredictionSuccess(int digit, float confidence, String id) {
+            public void OnPredictionSuccess(int digit, float confidence, String id, String annotate, int total) {
                 Log.d(TAG, "predicted digit:" + digit + " unique id:" + id + " confidence:" + confidence);
                 mTotalClassifiedCount++;
                     try {
@@ -196,7 +199,26 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                             result.put("prediction", new Integer(0));
                             result.put("confidence", new Double(0));
                         }
-                        mPredictedDigits.put(id, result.toString());
+                        //mPredictedDigits.put(id, result.toString());
+                        if(predictionResult.has(annotate)) {
+                            JSONObject innerJson = predictionResult.getJSONObject(annotate);
+                            innerJson.put(id, result.toString());
+                        } else {
+                            JSONObject innerJson = new JSONObject();
+                            innerJson.put(id, result.toString());
+                            predictionResult.put(annotate, innerJson);
+                        }
+
+                        if(predictionResult.getJSONObject(annotate).length() == total) {
+                            ReactInstanceManager mReactInstanceManager = getReactNativeHost().getReactInstanceManager();
+                            ReactContext reactContext = mReactInstanceManager.getCurrentReactContext();
+                            reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("streamReady", predictionResult.toString());
+                            predictionResult = new JSONObject();
+                            if(!isFirstBatchDataProcessed) {
+                                isFirstBatchDataProcessed = true;
+                                processScanningCompleted();
+                            }
+                        }
                     } catch (JSONException e) {
                         Log.e(TAG, "unable to create prediction object");
                     }
@@ -204,10 +226,10 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                     mIsScanningComplete     = true;
                 }
 
-                if (mIsScanningComplete) {
-                    Log.d(TAG, "Scaning completed, classification count " + mTotalClassifiedCount);
-                    processScanningCompleted();
-                }
+                // if (mIsScanningComplete) {
+                //     Log.d(TAG, "Scaning completed, classification count " + mTotalClassifiedCount);
+                //     processScanningCompleted();
+                // }
           
             }
 
@@ -237,7 +259,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
 
         HWBlockLettersClassifier.getInstance().setPredictionListener(new PredictionListener() {
             @Override
-            public void OnPredictionSuccess(int digit, float confidence, String id) {
+            public void OnPredictionSuccess(int digit, float confidence, String id, String annotate, int total) {
                 Log.d(TAG, "predicted digit:" + digit + " unique id:" + id + " confidence:" + confidence);
                 Map<Integer,String> lettersMap = new HashMap<>();
                 int index=0;
@@ -260,7 +282,26 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                             result.put("prediction", " ");
                             result.put("confidence", new Double(0));
                         }
-                        mPredictedDigits.put(id, result.toString());
+                        //mPredictedDigits.put(id, result.toString());
+                         if(predictionResult.has(annotate)) {
+                            JSONObject innerJson = predictionResult.getJSONObject(annotate);
+                            innerJson.put(id, result.toString());
+                        } else {
+                            JSONObject innerJson = new JSONObject();
+                            innerJson.put(id, result.toString());
+                            predictionResult.put(annotate, innerJson);
+                        }
+
+                        if(predictionResult.getJSONObject(annotate).length() == total) {
+                            ReactInstanceManager mReactInstanceManager = getReactNativeHost().getReactInstanceManager();
+                            ReactContext reactContext = mReactInstanceManager.getCurrentReactContext();
+                            reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("streamReady", predictionResult.toString());
+                            predictionResult = new JSONObject();
+                            if(!isFirstBatchDataProcessed) {
+                                isFirstBatchDataProcessed = true;
+                                processScanningCompleted();
+                            }
+                        }
                     } catch (JSONException e) {
                         Log.e(TAG, "unable to create prediction object");
                     }
@@ -268,10 +309,10 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                     mIsScanningComplete     = true;
                 }
 
-                if (mIsScanningComplete) {
-                    Log.d(TAG, "Scaning completed, classification count " + mTotalClassifiedCount);
-                    processScanningCompleted();
-                }
+                // if (mIsScanningComplete) {
+                //     Log.d(TAG, "Scaning completed, classification count " + mTotalClassifiedCount);
+                //     processScanningCompleted();
+                // }
           
             }
 
@@ -301,7 +342,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
 
         HWAlphaNumericClassifier.getInstance().setPredictionListener(new PredictionListener() {
             @Override
-            public void OnPredictionSuccess(int digit, float confidence, String id) {
+            public void OnPredictionSuccess(int digit, float confidence, String id, String annotate, int total) {
                 Log.d(TAG, "predicted digit:" + digit + " unique id:" + id + " confidence:" + confidence);
                 Map<Integer,String> lettersMap = new HashMap<>();
                 int index=0;
@@ -328,7 +369,26 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                             result.put("prediction", " ");
                             result.put("confidence", new Double(0));
                         }
-                        mPredictedDigits.put(id, result.toString());
+                        //mPredictedDigits.put(id, result.toString());
+                         if(predictionResult.has(annotate)) {
+                            JSONObject innerJson = predictionResult.getJSONObject(annotate);
+                            innerJson.put(id, result.toString());
+                        } else {
+                            JSONObject innerJson = new JSONObject();
+                            innerJson.put(id, result.toString());
+                            predictionResult.put(annotate, innerJson);
+                        }
+
+                        if(predictionResult.getJSONObject(annotate).length() == total) {
+                            ReactInstanceManager mReactInstanceManager = getReactNativeHost().getReactInstanceManager();
+                            ReactContext reactContext = mReactInstanceManager.getCurrentReactContext();
+                            reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("streamReady", predictionResult.toString());
+                            predictionResult = new JSONObject();
+                            if(!isFirstBatchDataProcessed) {
+                                isFirstBatchDataProcessed = true;
+                                processScanningCompleted();
+                            }
+                        }
                     } catch (JSONException e) {
                         Log.e(TAG, "unable to create prediction object");
                     }
@@ -336,10 +396,10 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                     mIsScanningComplete     = true;
                 }
 
-                if (mIsScanningComplete) {
-                    Log.d(TAG, "Scaning completed, classification count " + mTotalClassifiedCount);
-                    processScanningCompleted();
-                }
+                // if (mIsScanningComplete) {
+                //     Log.d(TAG, "Scaning completed, classification count " + mTotalClassifiedCount);
+                //     processScanningCompleted();
+                // }
           
             }
 
@@ -585,39 +645,42 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                     if (roiConfig.getString("extractionMethod").equals("NUMERIC_CLASSIFICATION")) {
                         String roiId        = roiConfig.getString("roiId");
                         JSONObject rect      = roiConfig.getJSONObject("rect");
-
+                        String annotate = roiConfig.getString("annotationTags").split("_")[0];
+                        int totalRoi = roiLen.get(annotate);
                         mPredictedDigits.put(roiId, "0");
                         Mat digitROI        = mDetectShaded.getROIMat(tableMat, rect.getInt("top"), rect.getInt("left"), rect.getInt("bottom"), rect.getInt("right"));
                         mRoiMatBase64.put(roiId,createBase64FromMat(digitROI));
                         if(HWClassifier.getInstance().isInitialized() == true) {
                             Log.d(TAG, "Requesting prediction for: " + roiId);
-                            HWClassifier.getInstance().classifyMat(digitROI, roiId);
+                            HWClassifier.getInstance().classifyMat(digitROI, roiId, annotate, totalRoi);
                         }
                     }
 
                     if (roiConfig.getString("extractionMethod").equals("BLOCK_LETTER_CLASSIFICATION")) {
                         String roiId        = roiConfig.getString("roiId");
                         JSONObject rect      = roiConfig.getJSONObject("rect");
-
+                        String annotate = roiConfig.getString("annotationTags").split("_")[0];
+                        int totalRoi = roiLen.get(annotate);
                         mPredictedDigits.put(roiId, "0");
                         Mat alphaROI        = mDetectShaded.getROIMat(tableMat, rect.getInt("top"), rect.getInt("left"), rect.getInt("bottom"), rect.getInt("right"));
                         mRoiMatBase64.put(roiId,createBase64FromMat(alphaROI));
                         if(HWBlockLettersClassifier.getInstance().isInitialized() == true) {
                             Log.d(TAG, "Requesting prediction for: " + roiId);
-                            HWBlockLettersClassifier.getInstance().classifyMat(alphaROI, roiId);
+                            HWBlockLettersClassifier.getInstance().classifyMat(alphaROI, roiId, annotate, totalRoi);
                         }
                     }
 
                     if (roiConfig.getString("extractionMethod").equals("BLOCK_ALPHANUMERIC_CLASSIFICATION")) {
                         String roiId        = roiConfig.getString("roiId");
                         JSONObject rect      = roiConfig.getJSONObject("rect");
-
+                        String annotate = roiConfig.getString("annotationTags").split("_")[0];
+                        int totalRoi = roiLen.get(annotate);
                         mPredictedDigits.put(roiId, "0");
                         Mat alphaNumericROI        = mDetectShaded.getROIMat(tableMat, rect.getInt("top"), rect.getInt("left"), rect.getInt("bottom"), rect.getInt("right"));
                         mRoiMatBase64.put(roiId,createBase64FromMat(alphaNumericROI));
                         if(HWAlphaNumericClassifier.getInstance().isInitialized() == true) {
                             Log.d(TAG, "Requesting prediction for: " + roiId);
-                            HWAlphaNumericClassifier.getInstance().classifyMat(alphaNumericROI, roiId);
+                            HWAlphaNumericClassifier.getInstance().classifyMat(alphaNumericROI, roiId, annotate, totalRoi);
                         }
                     }
 
@@ -647,6 +710,8 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                             JSONObject roi      = cellROIs.getJSONObject(j);
                             rois.put(roi);
                         }
+                        String annotate = cellROIs.getJSONObject(1).getString("annotationTags").split("_")[0];
+                        roiLen.put(annotate, cellROIs.length());
                     }
                 }
                 return rois;
@@ -675,7 +740,13 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
         ReactInstanceManager mReactInstanceManager  = getReactNativeHost().getReactInstanceManager();
         ReactContext reactContext                   = mReactInstanceManager.getCurrentReactContext();
         Intent intent                               = new Intent(reactContext, SaralSDKOpenCVScannerActivity.class);
-        intent.putExtra("layoutConfigsResult", response.toString());
+        if(response != null) {
+            Log.d(TAG, "Scanning completed !!, OMR count:");
+            intent.putExtra("layoutConfigsResult", response.toString());
+        } else {
+            Log.d(TAG, "Scanning completed null !!, OMR count:");
+            intent.putExtra("layoutConfigsResult", "");
+        }
         mReactInstanceManager.onActivityResult(this, 1, 2, intent);
         finish();
     }
