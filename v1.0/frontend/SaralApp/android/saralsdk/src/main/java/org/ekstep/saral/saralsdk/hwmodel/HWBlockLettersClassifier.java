@@ -192,11 +192,11 @@ public class HWBlockLettersClassifier {
         return false;
     }
 
-    public void classifyMat(Mat mat, String id) {
+    public void classifyMat(Mat mat, String id, String annotate, int totalRoi) {
         if(mInterpreter != null || downloadInterpreter != null) {
             FirebaseModelInterpreter finalInterpreter = downloadInterpreter != null ? downloadInterpreter : mInterpreter;
             Mat processedMat    = preprocessMatForModel(mat);
-            runInference(convertMattoTfLiteInput(processedMat), id, finalInterpreter);
+            runInference(convertMattoTfLiteInput(processedMat), id, finalInterpreter, annotate, totalRoi);
         }
     }
 
@@ -247,7 +247,7 @@ public class HWBlockLettersClassifier {
         return imgData;
     }
 
-    private void runInference(ByteBuffer data, String id, FirebaseModelInterpreter interpreter) {
+    private void runInference(ByteBuffer data, String id, FirebaseModelInterpreter interpreter, String annotate, int totalRoi) {
 
         if (interpreter !=  null) {
             try {
@@ -257,7 +257,7 @@ public class HWBlockLettersClassifier {
                             float[][] output        = result.getOutput(0);
                             float[] probabilities   = output[0];
                             int digit               = getMarksValue(probabilities);
-                            predictionListener.OnPredictionSuccess(digit, probabilities[digit], id);
+                            predictionListener.OnPredictionSuccess(digit, probabilities[digit], id, annotate, totalRoi);
                         })
                         .addOnFailureListener(e -> {
                             e.printStackTrace();
