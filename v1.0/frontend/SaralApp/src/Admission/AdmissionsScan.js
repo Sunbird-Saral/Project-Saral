@@ -65,10 +65,8 @@ export class Admissions extends Component {
     DeviceEventEmitter.addListener('streamReady', (eventData) => {
       let roisData = JSON.parse(eventData);
       console.log("dive event here>>>>>>>>>>>>", roisData)
-        let cells = roi.layout.cells
-        for(let key in roisData) {
-          this.consolidatePrediction(cells, roisData, pageNo, key);
-        }
+        let cells = roisData.layout.cells;
+        this.consolidatePrediction(cells, roisData, pageNo);
     });
     SaralSDK.startCamera(JSON.stringify(roi), pageNo.toString(), 0, true)
       .then(res => {
@@ -121,15 +119,11 @@ export class Admissions extends Component {
     for (let i = 0; i < cells.length; i++) {
       marks = '';
       let prediction = {};
-      if(cells[i].format.name == annotate) {
-        for (let j = 0; j < cells[i].rois.length; j++) {
-            let roiId = parseInt(cells[i]["rois"][j].roiId);
-            console.log("cells[i].roiId", cells[i]["rois"][j].roiId, roiId)
-            console.log('roisData[annotate]',roisData[annotate][roiId]);
-            if (roisData[annotate][roiId]) {
-            marks = marks + JSON.parse(roisData[annotate][roiId])["prediction"];
-            }
-          }
+      for (let j = 0; j < cells[i].rois.length; j++) {
+        if (cells[i].rois[j].hasOwnProperty('result')) {
+          marks = marks + cells[i].rois[j].result.prediction;
+        }
+      }
 
       if (pageNo.toString() == cells[i].page && marks) {
         // if ((i == 1 || i == 5) && pageNo == 1 && marks != '' && marks) { 
@@ -155,7 +149,6 @@ export class Admissions extends Component {
 
         this.state.predictionArray.push(prediction);
       }
-    }
     }
 
     // for(let i=0; i<labels.length; i++) {

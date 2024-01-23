@@ -71,7 +71,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
     private HashMap<String, String> mPredictedOMRs = new HashMap<>();
     private HashMap<String, String> mPredictedClass = new HashMap<>();
     private HashMap<String, String> mRoiMatBase64 = new HashMap<>();
-    private JSONObject predictionResult = new JSONObject();
+    private HashMap<String, HashMap<String, String>> predictionResult = new HashMap<>();
     private HashMap<String, Integer> roiLen = new HashMap<>();
     private boolean isMultiChoiceOMRLayout = false;
     private boolean isFirstBatchDataProcessed = false;
@@ -202,22 +202,21 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                         }
 
                         //stream data in chunk for big forms
-                        if(chunkSendData) {
-                            if(predictionResult.has(annotate)) {
-                            JSONObject innerJson = predictionResult.getJSONObject(annotate);
-                            innerJson.put(id, result.toString());
+                        if(doesChunkSendData) {
+                            if(predictionResult.containsKey(annotate)) {
+                                HashMap<String, String> innerJson = predictionResult.get(annotate);
+                                innerJson.put(id, result.toString());
                             } else {
-                                JSONObject innerJson = new JSONObject();
+                                HashMap<String, String> innerJson = new HashMap<>();
                                 innerJson.put(id, result.toString());
                                 predictionResult.put(annotate, innerJson);
                             }
 
-                            if(predictionResult.getJSONObject(annotate).length() == total) {
+                            if(predictionResult.get(annotate).size() == total) {
                                 JSONObject res = getScanResultByAnnotation(annotate);
                                 ReactInstanceManager mReactInstanceManager = getReactNativeHost().getReactInstanceManager();
                                 ReactContext reactContext = mReactInstanceManager.getCurrentReactContext();
                                 reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("streamReady", res.toString());
-                                predictionResult = new JSONObject();
                                 if(!isFirstBatchDataProcessed) {
                                     isFirstBatchDataProcessed = true;
                                     processScanningCompleted();
@@ -291,22 +290,21 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                             result.put("confidence", new Double(0));
                         }
                         //stream data in chunk for big forms
-                        if(chunkSendData) {
-                            if(predictionResult.has(annotate)) {
-                            JSONObject innerJson = predictionResult.getJSONObject(annotate);
-                            innerJson.put(id, result.toString());
+                        if(doesChunkSendData) {
+                            if(predictionResult.containsKey(annotate)) {
+                                HashMap<String, String> innerJson = predictionResult.get(annotate);
+                                innerJson.put(id, result.toString());
                             } else {
-                                JSONObject innerJson = new JSONObject();
+                                HashMap<String, String> innerJson = new HashMap<>();
                                 innerJson.put(id, result.toString());
                                 predictionResult.put(annotate, innerJson);
                             }
 
-                            if(predictionResult.getJSONObject(annotate).length() == total) {
+                            if(predictionResult.get(annotate).size() == total) {
                                 JSONObject res = getScanResultByAnnotation(annotate);
                                 ReactInstanceManager mReactInstanceManager = getReactNativeHost().getReactInstanceManager();
                                 ReactContext reactContext = mReactInstanceManager.getCurrentReactContext();
                                 reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("streamReady", res.toString());
-                                predictionResult = new JSONObject();
                                 if(!isFirstBatchDataProcessed) {
                                     isFirstBatchDataProcessed = true;
                                     processScanningCompleted();
@@ -384,22 +382,21 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                             result.put("confidence", new Double(0));
                         }
                         //stream data in chunk for big forms
-                        if(chunkSendData) {
-                            if(predictionResult.has(annotate)) {
-                            JSONObject innerJson = predictionResult.getJSONObject(annotate);
-                            innerJson.put(id, result.toString());
+                        if(doesChunkSendData) {
+                            if(predictionResult.containsKey(annotate)) {
+                                HashMap<String, String> innerJson = predictionResult.get(annotate);
+                                innerJson.put(id, result.toString());
                             } else {
-                                JSONObject innerJson = new JSONObject();
+                                HashMap<String, String> innerJson = new HashMap<>();
                                 innerJson.put(id, result.toString());
                                 predictionResult.put(annotate, innerJson);
                             }
 
-                            if(predictionResult.getJSONObject(annotate).length() == total) {
+                            if(predictionResult.get(annotate).size() == total) {
                                 JSONObject res = getScanResultByAnnotation(annotate);
                                 ReactInstanceManager mReactInstanceManager = getReactNativeHost().getReactInstanceManager();
                                 ReactContext reactContext = mReactInstanceManager.getCurrentReactContext();
                                 reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("streamReady", res.toString());
-                                predictionResult = new JSONObject();
                                 if(!isFirstBatchDataProcessed) {
                                     isFirstBatchDataProcessed = true;
                                     processScanningCompleted();
@@ -661,25 +658,27 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                         }
                         mRoiMatBase64.put(roiId,createBase64FromMat(omrROI));
                         mPredictedOMRs.put(roiId, answer.toString());
-                        if(predictionResult.has(annotate)) {
-                            JSONObject innerJson = predictionResult.getJSONObject(annotate);
-                            innerJson.put(id, answer.toString());
-                        } else {
-                            JSONObject innerJson = new JSONObject();
-                            innerJson.put(id, answer.toString());
-                            predictionResult.put(annotate, innerJson);
-                        }
-
-                        if(predictionResult.getJSONObject(annotate).length() == totalRoi) {
-                            JSONObject res = getScanResultByAnnotation(annotate);
-                            ReactInstanceManager mReactInstanceManager = getReactNativeHost().getReactInstanceManager();
-                            ReactContext reactContext = mReactInstanceManager.getCurrentReactContext();
-                            reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("streamReady", res.toString());
-                            predictionResult = new JSONObject();
-                            if(!isFirstBatchDataProcessed) {
-                                isFirstBatchDataProcessed = true;
-                                processScanningCompleted();
+                        if(doesChunkSendData) {
+                            if(predictionResult.containsKey(annotate)) {
+                                HashMap<String, String> innerJson = predictionResult.get(annotate);
+                                innerJson.put(roiId, answer.toString());
+                            } else {
+                                HashMap<String, String> innerJson = new HashMap<>();
+                                innerJson.put(roiId, answer.toString());
+                                predictionResult.put(annotate, innerJson);
                             }
+
+                            if(predictionResult.get(annotate).size() == totalRoi) {
+                                JSONObject res = getScanResultByAnnotation(annotate);
+                                ReactInstanceManager mReactInstanceManager = getReactNativeHost().getReactInstanceManager();
+                                ReactContext reactContext = mReactInstanceManager.getCurrentReactContext();
+                                reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("streamReady", res.toString());
+                                if(!isFirstBatchDataProcessed) {
+                                    isFirstBatchDataProcessed = true;
+                                    processScanningCompleted();
+                                }
+                            }
+
                         }
                         Log.d(TAG, "key: " + roiId + " answer: " + answer.toString());
                     }
@@ -752,7 +751,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                             JSONObject roi      = cellROIs.getJSONObject(j);
                             rois.put(roi);
                         }
-                        String annotate = cellROIs.getJSONObject(1).getString("annotationTags").split("_")[0];
+                        String annotate = cellROIs.getJSONObject(0).getString("annotationTags").split("_")[0];
                         roiLen.put(annotate, cellROIs.length());
                     }
                 }
@@ -974,7 +973,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                     JSONObject roi      = cellROIs.getJSONObject(j);
                     String roiId = roi.getString("roiId");
                     if (roi.getString("extractionMethod").equals("NUMERIC_CLASSIFICATION") || roi.getString("extractionMethod").equals("BLOCK_ALPHANUMERIC_CLASSIFICATION") || roi.getString("extractionMethod").equals("BLOCK_LETTER_CLASSIFICATION")) {
-                        JSONObject result  = predictionResult.getJSONObject(annotate).getJSONObject(roiId);
+                        JSONObject result  = new JSONObject(predictionResult.get(annotate).get(roiId));
                         roi.put("result", result);
                         if(mRoiMatBase64.get(roiId)!=null)
                         {
