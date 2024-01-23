@@ -81,6 +81,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
     private int timeInMiliSecond = 0;
     private boolean hasEditEnable = false;
     private boolean isVerticalScanLayout = false;
+    private boolean doesChunkSendData = false;
 
     public SaralSDKOpenCVScannerActivity() {
         Log.i(TAG, "Instantiated new " + this.getClass());
@@ -199,37 +200,44 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                             result.put("prediction", new Integer(0));
                             result.put("confidence", new Double(0));
                         }
-                        //mPredictedDigits.put(id, result.toString());
-                        if(predictionResult.has(annotate)) {
+
+                        //stream data in chunk for big forms
+                        if(chunkSendData) {
+                            if(predictionResult.has(annotate)) {
                             JSONObject innerJson = predictionResult.getJSONObject(annotate);
                             innerJson.put(id, result.toString());
-                        } else {
-                            JSONObject innerJson = new JSONObject();
-                            innerJson.put(id, result.toString());
-                            predictionResult.put(annotate, innerJson);
-                        }
+                            } else {
+                                JSONObject innerJson = new JSONObject();
+                                innerJson.put(id, result.toString());
+                                predictionResult.put(annotate, innerJson);
+                            }
 
-                        if(predictionResult.getJSONObject(annotate).length() == total) {
-                            ReactInstanceManager mReactInstanceManager = getReactNativeHost().getReactInstanceManager();
-                            ReactContext reactContext = mReactInstanceManager.getCurrentReactContext();
-                            reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("streamReady", predictionResult.toString());
-                            predictionResult = new JSONObject();
-                            if(!isFirstBatchDataProcessed) {
-                                isFirstBatchDataProcessed = true;
+                            if(predictionResult.getJSONObject(annotate).length() == total) {
+                                JSONObject res = getScanResultByAnnotation(annotate);
+                                ReactInstanceManager mReactInstanceManager = getReactNativeHost().getReactInstanceManager();
+                                ReactContext reactContext = mReactInstanceManager.getCurrentReactContext();
+                                reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("streamReady", res.toString());
+                                predictionResult = new JSONObject();
+                                if(!isFirstBatchDataProcessed) {
+                                    isFirstBatchDataProcessed = true;
+                                    processScanningCompleted();
+                                }
+                            }
+
+                        } else {
+                            mPredictedDigits.put(id, result.toString());
+                            if (mIsClassifierRequestSubmitted && mTotalClassifiedCount >= mPredictedDigits.size()) {
+                                mIsScanningComplete     = true;
+                            }
+
+                            if (mIsScanningComplete) {
+                                Log.d(TAG, "Scaning completed, classification count " + mTotalClassifiedCount);
                                 processScanningCompleted();
                             }
                         }
                     } catch (JSONException e) {
                         Log.e(TAG, "unable to create prediction object");
                     }
-                if (mIsClassifierRequestSubmitted && mTotalClassifiedCount >= mPredictedDigits.size()) {
-                    mIsScanningComplete     = true;
-                }
-
-                // if (mIsScanningComplete) {
-                //     Log.d(TAG, "Scaning completed, classification count " + mTotalClassifiedCount);
-                //     processScanningCompleted();
-                // }
           
             }
 
@@ -282,37 +290,43 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                             result.put("prediction", " ");
                             result.put("confidence", new Double(0));
                         }
-                        //mPredictedDigits.put(id, result.toString());
-                         if(predictionResult.has(annotate)) {
+                        //stream data in chunk for big forms
+                        if(chunkSendData) {
+                            if(predictionResult.has(annotate)) {
                             JSONObject innerJson = predictionResult.getJSONObject(annotate);
                             innerJson.put(id, result.toString());
-                        } else {
-                            JSONObject innerJson = new JSONObject();
-                            innerJson.put(id, result.toString());
-                            predictionResult.put(annotate, innerJson);
-                        }
+                            } else {
+                                JSONObject innerJson = new JSONObject();
+                                innerJson.put(id, result.toString());
+                                predictionResult.put(annotate, innerJson);
+                            }
 
-                        if(predictionResult.getJSONObject(annotate).length() == total) {
-                            ReactInstanceManager mReactInstanceManager = getReactNativeHost().getReactInstanceManager();
-                            ReactContext reactContext = mReactInstanceManager.getCurrentReactContext();
-                            reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("streamReady", predictionResult.toString());
-                            predictionResult = new JSONObject();
-                            if(!isFirstBatchDataProcessed) {
-                                isFirstBatchDataProcessed = true;
+                            if(predictionResult.getJSONObject(annotate).length() == total) {
+                                JSONObject res = getScanResultByAnnotation(annotate);
+                                ReactInstanceManager mReactInstanceManager = getReactNativeHost().getReactInstanceManager();
+                                ReactContext reactContext = mReactInstanceManager.getCurrentReactContext();
+                                reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("streamReady", res.toString());
+                                predictionResult = new JSONObject();
+                                if(!isFirstBatchDataProcessed) {
+                                    isFirstBatchDataProcessed = true;
+                                    processScanningCompleted();
+                                }
+                            }
+
+                        } else {
+                            mPredictedDigits.put(id, result.toString());
+                            if (mIsClassifierRequestSubmitted && mTotalClassifiedCount >= mPredictedDigits.size()) {
+                                mIsScanningComplete     = true;
+                            }
+
+                            if (mIsScanningComplete) {
+                                Log.d(TAG, "Scaning completed, classification count " + mTotalClassifiedCount);
                                 processScanningCompleted();
                             }
                         }
                     } catch (JSONException e) {
                         Log.e(TAG, "unable to create prediction object");
                     }
-                if (mIsClassifierRequestSubmitted && mTotalClassifiedCount >= mPredictedDigits.size()) {
-                    mIsScanningComplete     = true;
-                }
-
-                // if (mIsScanningComplete) {
-                //     Log.d(TAG, "Scaning completed, classification count " + mTotalClassifiedCount);
-                //     processScanningCompleted();
-                // }
           
             }
 
@@ -369,37 +383,43 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                             result.put("prediction", " ");
                             result.put("confidence", new Double(0));
                         }
-                        //mPredictedDigits.put(id, result.toString());
-                         if(predictionResult.has(annotate)) {
+                        //stream data in chunk for big forms
+                        if(chunkSendData) {
+                            if(predictionResult.has(annotate)) {
                             JSONObject innerJson = predictionResult.getJSONObject(annotate);
                             innerJson.put(id, result.toString());
-                        } else {
-                            JSONObject innerJson = new JSONObject();
-                            innerJson.put(id, result.toString());
-                            predictionResult.put(annotate, innerJson);
-                        }
+                            } else {
+                                JSONObject innerJson = new JSONObject();
+                                innerJson.put(id, result.toString());
+                                predictionResult.put(annotate, innerJson);
+                            }
 
-                        if(predictionResult.getJSONObject(annotate).length() == total) {
-                            ReactInstanceManager mReactInstanceManager = getReactNativeHost().getReactInstanceManager();
-                            ReactContext reactContext = mReactInstanceManager.getCurrentReactContext();
-                            reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("streamReady", predictionResult.toString());
-                            predictionResult = new JSONObject();
-                            if(!isFirstBatchDataProcessed) {
-                                isFirstBatchDataProcessed = true;
+                            if(predictionResult.getJSONObject(annotate).length() == total) {
+                                JSONObject res = getScanResultByAnnotation(annotate);
+                                ReactInstanceManager mReactInstanceManager = getReactNativeHost().getReactInstanceManager();
+                                ReactContext reactContext = mReactInstanceManager.getCurrentReactContext();
+                                reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("streamReady", res.toString());
+                                predictionResult = new JSONObject();
+                                if(!isFirstBatchDataProcessed) {
+                                    isFirstBatchDataProcessed = true;
+                                    processScanningCompleted();
+                                }
+                            }
+
+                        } else {
+                            mPredictedDigits.put(id, result.toString());
+                            if (mIsClassifierRequestSubmitted && mTotalClassifiedCount >= mPredictedDigits.size()) {
+                                mIsScanningComplete     = true;
+                            }
+
+                            if (mIsScanningComplete) {
+                                Log.d(TAG, "Scaning completed, classification count " + mTotalClassifiedCount);
                                 processScanningCompleted();
                             }
                         }
                     } catch (JSONException e) {
                         Log.e(TAG, "unable to create prediction object");
                     }
-                if (mIsClassifierRequestSubmitted && mTotalClassifiedCount >= mPredictedDigits.size()) {
-                    mIsScanningComplete     = true;
-                }
-
-                // if (mIsScanningComplete) {
-                //     Log.d(TAG, "Scaning completed, classification count " + mTotalClassifiedCount);
-                //     processScanningCompleted();
-                // }
           
             }
 
@@ -623,6 +643,8 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                         //double percent      = mDetectShaded.getShadedPercentage(tableMat, rect.getInt("top"), rect.getInt("left"), rect.getInt("bottom"), rect.getInt("right"),isMultiChoiceOMRLayout);
                         Mat omrROI        = mDetectShaded.getROIMat(tableMat, rect.getInt("top"), rect.getInt("left"), rect.getInt("bottom"), rect.getInt("right"));
                         Integer answer      = 0;
+                        String annotate = roiConfig.getString("annotationTags").split("_")[0];
+                        int totalRoi = roiLen.get(annotate);
                         // if (percent > DARKNESS_THRESHOLD) {
                         //     answer = 1;
                         // }
@@ -639,6 +661,26 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                         }
                         mRoiMatBase64.put(roiId,createBase64FromMat(omrROI));
                         mPredictedOMRs.put(roiId, answer.toString());
+                        if(predictionResult.has(annotate)) {
+                            JSONObject innerJson = predictionResult.getJSONObject(annotate);
+                            innerJson.put(id, answer.toString());
+                        } else {
+                            JSONObject innerJson = new JSONObject();
+                            innerJson.put(id, answer.toString());
+                            predictionResult.put(annotate, innerJson);
+                        }
+
+                        if(predictionResult.getJSONObject(annotate).length() == totalRoi) {
+                            JSONObject res = getScanResultByAnnotation(annotate);
+                            ReactInstanceManager mReactInstanceManager = getReactNativeHost().getReactInstanceManager();
+                            ReactContext reactContext = mReactInstanceManager.getCurrentReactContext();
+                            reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("streamReady", res.toString());
+                            predictionResult = new JSONObject();
+                            if(!isFirstBatchDataProcessed) {
+                                isFirstBatchDataProcessed = true;
+                                processScanningCompleted();
+                            }
+                        }
                         Log.d(TAG, "key: " + roiId + " answer: " + answer.toString());
                     }
 
@@ -769,6 +811,9 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                 }
                 if(threshold.has("verticalScanLayout") && threshold.getString("verticalScanLayout")!=null){
                     isVerticalScanLayout=threshold.getBoolean("verticalScanLayout");
+                }
+                if(threshold.has("chunkSendData") && threshold.getString("chunkSendData")!=null){
+                    doesChunkSendData=threshold.getBoolean("chunkSendData");
                 }                
             }
             JSONArray  cells            = layoutObject.getJSONArray("cells");
@@ -835,6 +880,101 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                     String roiId = roi.getString("roiId");
                     if (roi.getString("extractionMethod").equals("NUMERIC_CLASSIFICATION") || roi.getString("extractionMethod").equals("BLOCK_ALPHANUMERIC_CLASSIFICATION") || roi.getString("extractionMethod").equals("BLOCK_LETTER_CLASSIFICATION")) {
                         JSONObject result  = new JSONObject(mPredictedDigits.get(roiId));
+                        roi.put("result", result);
+                        if(mRoiMatBase64.get(roiId)!=null)
+                        {
+                            trainingDataSet.put(j,mRoiMatBase64.get(roiId));
+                        }    
+                    }
+
+                    if (roi.getString("extractionMethod").equals("CELL_OMR")) {
+                        JSONObject result  = new JSONObject();
+                        if(isMultiChoiceOMRLayout)
+                        {
+                            //Handling Multi Choice OMR Layout predictions
+                            String prediction =mPredictedOMRs.get(roiId);
+                            if(prediction!=null && prediction.equals("1")){
+                                if (cell.has("omrOptions")) {
+                                   JSONArray omrOption = cells.getJSONObject(i).getJSONArray("omrOptions");
+                                    result.put("prediction", omrOption.getString(j));
+                                    result.put("confidence", new Double(1.00));
+                                    countOMRChoice++;
+                                    
+                                } else {
+                                    result.put("prediction", String.valueOf(j));
+                                    result.put("confidence", new Double(1.00));
+                                    countOMRChoice++;
+                                }
+                            }
+                            else if(cellROIs.length() == 1 && cell.has("omrOptions")){
+                                    JSONArray omrOption = cells.getJSONObject(i).getJSONArray("omrOptions");
+                                    result.put("prediction", omrOption.getString(1));
+                                    result.put("confidence", new Double(1.00));
+                            }
+                            else{
+                                result.put("prediction", "");
+                                result.put("confidence", new Double(0.0));
+                            }
+                        }else {
+                            result.put("prediction", mPredictedOMRs.get(roiId));
+                            result.put("confidence", new Double(1.00));
+                        }
+                        if(mRoiMatBase64.get(roiId)!=null)
+                        {
+                            trainingDataSet.put(j,mRoiMatBase64.get(roiId));
+                        }
+
+                        if(!roi.has("result")){
+                            roi.put("result", result);    
+                        }else{
+                            JSONObject resultObj = roi.getJSONObject("result");
+                            if(resultObj.getString("prediction") != null){
+                                roi.put("result", result);    
+                            }
+                        }
+                    }
+                
+                if(isMultiChoiceOMRLayout && countOMRChoice > 1)
+                {
+                    resetInvalidOMRChoice(cellROIs);
+                }
+                if(trainingDataSet.length() > 0)
+                {
+                    cell.put("trainingDataSet",trainingDataSet);
+                    Log.d(TAG, "CellId:" + cell.getString("cellId")+" trainingDataSet :: "+trainingDataSet);
+                }                
+            }
+        }
+        }
+            return layoutConfigs;
+
+        } catch (JSONException e) {
+            Log.e(TAG, "unable to create response LayoutConfigs object");
+            return null;
+        }
+    }
+
+    private JSONObject getScanResultByAnnotation(String annotate) {
+
+        try {
+            JSONObject layoutConfigs    = new JSONObject(mlayoutConfigs);
+            JSONObject layoutObject     = layoutConfigs.getJSONObject("layout");
+            JSONArray  cells            = layoutObject.getJSONArray("cells");
+            
+
+            for (int i = 0; i < cells.length(); i++) {
+                JSONArray cellROIs      = cells.getJSONObject(i).getJSONArray("rois");
+                JSONObject cell = cells.getJSONObject(i);
+                String anTag = cellROIs.getJSONObject(1).getString("annotationTags").split("_")[0];
+                boolean includeRois = (cell.has("page") && (anTag.equals(annotate)) && pageNumber!=null && cell.getString("page").equals(pageNumber)) || (!cell.has("page"));
+                if (includeRois) {
+                JSONArray trainingDataSet = new JSONArray();
+                int countOMRChoice =0;
+                for (int j = 0; j < cellROIs.length(); j++) {
+                    JSONObject roi      = cellROIs.getJSONObject(j);
+                    String roiId = roi.getString("roiId");
+                    if (roi.getString("extractionMethod").equals("NUMERIC_CLASSIFICATION") || roi.getString("extractionMethod").equals("BLOCK_ALPHANUMERIC_CLASSIFICATION") || roi.getString("extractionMethod").equals("BLOCK_LETTER_CLASSIFICATION")) {
+                        JSONObject result  = predictionResult.getJSONObject(annotate).getJSONObject(roiId);
                         roi.put("result", result);
                         if(mRoiMatBase64.get(roiId)!=null)
                         {

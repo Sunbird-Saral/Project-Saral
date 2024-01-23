@@ -8,7 +8,8 @@ export let roi = {
           "minWidth": 0,
           "minHeight": 0,
           "detectionRadius": 12,
-          "verticalScanLayout": true
+          "verticalScanLayout": true,
+          "chunkSendData": true
       },
       "cells": [
           {
