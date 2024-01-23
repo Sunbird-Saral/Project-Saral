@@ -551,7 +551,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
 
             mStartPredictTime = SystemClock.uptimeMillis();
             MediaActionSound sound = new MediaActionSound();
-            sound.play(MediaActionSound.FOCUS_COMPLETE);
+            // sound.play(MediaActionSound.FOCUS_COMPLETE);
 
             try {
                 JSONObject layoutConfigs = new JSONObject(mlayoutConfigs);
@@ -933,7 +933,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
         mScanningResultShared = true;
 
         MediaActionSound sound = new MediaActionSound();
-        sound.play(MediaActionSound.SHUTTER_CLICK);
+        // sound.play(MediaActionSound.SHUTTER_CLICK);
 
         //JSONObject response = getScanResult("");
         Log.d(TAG, "Scanning completed !!, OMR count: " + mPredictedOMRs.size() + " classifier count: " + mPredictedDigits.size());

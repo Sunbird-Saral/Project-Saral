@@ -7,7 +7,7 @@ import {
   DeviceEventEmitter,
   FlatList,
   ListItem,
-  TextInput
+  TextInput,
 } from 'react-native';
 import React, {Component} from 'react';
 import axios from 'axios';
@@ -62,24 +62,24 @@ export class Admissions extends Component {
   };
 
   onOpenCameraActivity = pageNo => {
-    DeviceEventEmitter.addListener('streamReady', (eventData) => {
-      let roisData = JSON.parse(eventData);
-      console.log("dive event here>>>>>>>>>>>>", roisData)
-        let cells = roisData.layout.cells;
-        this.consolidatePrediction(cells, roisData, pageNo);
-    });
-    SaralSDK.startCamera(JSON.stringify(roi), pageNo.toString(), 0, true)
-      .then(res => {
-        // let roisData = JSON.parse(res);
-        // let cells = roisData.layout.cells;
-        //this.consolidatePrediction(pageNo);
-      })
-      .catch((code, message) => {
-        console.log('code', code, message);
-      });
+    SaralSDK.startCamera(JSON.stringify(roi), pageNo.toString(), 0, true);
+    // .then(res => {
+    //   // let roisData = JSON.parse(res);
+    //   // let cells = roisData.layout.cells;
+    //   //this.consolidatePrediction(pageNo);
+    // })
+    // .catch((code, message) => {
+    //   console.log('code', code, message);
+    // });
   };
 
   consolidatePrediction = (cells, roisData, pageNo, annotate) => {
+    DeviceEventEmitter.addListener('streamReady', eventData => {
+      let roisData = JSON.parse(eventData);
+      console.log('dive event here>>>>>>>>>>>>', roisData);
+      let cells = roisData.layout.cells;
+      this.consolidatePrediction(cells, roisData, pageNo);
+    });
     var marks = '';
     let labels = [
       'Admission Number',
@@ -126,26 +126,26 @@ export class Admissions extends Component {
       }
 
       if (pageNo.toString() == cells[i].page && marks) {
-        // if ((i == 1 || i == 5) && pageNo == 1 && marks != '' && marks) {
-        //   prediction = {
-        //     key: cells[i].format.name,
-        //     value: marks
-        //       .substring(0, 2)
-        //       .concat('/')
-        //       .concat(
-        //         marks.substring(2, 4).concat('/').concat(marks.substring(4)),
-        //       ),
-        //     label: labels[i],
-        //   };
-        // } else {
+        if ((i == 1 || i == 5) && pageNo == 1 && marks != '' && marks) {
+          prediction = {
+            key: cells[i].format.name,
+            value: marks
+              .substring(0, 2)
+              .concat('/')
+              .concat(
+                marks.substring(2, 4).concat('/').concat(marks.substring(4)),
+              ),
+            label: labels[i],
+          };
+        } else {
           prediction = {
             key: cells[i].format.name,
             value: marks.trim(),
             label: labels[i],
-          //};
+          };
         }
 
-        console.log("prediction", prediction)
+        console.log('prediction......................', prediction);
 
         this.state.predictionArray.push(prediction);
       }
@@ -164,7 +164,7 @@ export class Admissions extends Component {
     else this.props.setDataPage2(this.state.predictionArray);
     //this.state.predictionArray = [];
     this.props.pageNo(pageNo);
-    //this.props.navigation.navigate('EditAndSave');
+    this.props.navigation.navigate('EditAndSave');
   };
 
   checkIsValid(element) {
@@ -173,7 +173,7 @@ export class Admissions extends Component {
     return false;
   }
 
-  renderItem = ({ item }) => (
+  renderItem = ({item}) => (
     <View style={style.container}>
       <Text>{item.label}</Text>
       <TextInput
@@ -194,61 +194,50 @@ export class Admissions extends Component {
   );
 
   render() {
-    if(this.state.predictionArray.length <= 0 ) {
-      return (
-        <View style={style.container}>
-          <Button
-            buttonStyle={{
-              backgroundColor: this.props.multiBrandingData.themeColor1
-                ? this.props.multiBrandingData.themeColor1
-                : AppTheme.BLUE,
-            }}
-            disabled={this.props.pageno == 1 ? true : false}
-            onPress={() => this.onScan(1)}
-            label={'SCAN PAGE 1'}
-          />
-          <Button
-            buttonStyle={{
-              backgroundColor: this.props.multiBrandingData.themeColor1
-                ? this.props.multiBrandingData.themeColor1
-                : AppTheme.BLUE,
-              marginTop: 10,
-            }}
-            disabled={this.props.pageno == 0 ? true : false}
-            onPress={() => this.onScan(2)}
-            label={'SCAN PAGE 2'}
-          />
-          {this.checkIsValid(this.props.formDataPage1[0]?.value) && (
-            <Text>Admission Number: {this.props.formDataPage1[0].value}</Text>
-          )}
-          {this.checkIsValid(this.props.formDataPage1[3]?.value) &&
-            this.checkIsValid(this.props.formDataPage1[4]?.value) && (
-              <Text>
-                Name: {this.props.formDataPage1[3].value}{' '}
-                {this.props.formDataPage1[4].value}
-              </Text>
-            )}
-  
-          <Button
-            buttonStyle={{
-              backgroundColor: '#d11a2a',
-              marginTop: 50,
-            }}
-            onPress={() => this.props.navigation.goBack()}
-            label={'CANCEL'}
-          />
-        </View>
-      )
-    } 
     return (
       <View style={style.container}>
-        <FlatList
-        data={this.state.predictionArray}
-        renderItem={this.renderItem}
-        keyExtractor={(item) => item.key}
-      />
+        <Button
+          buttonStyle={{
+            backgroundColor: this.props.multiBrandingData.themeColor1
+              ? this.props.multiBrandingData.themeColor1
+              : AppTheme.BLUE,
+          }}
+          disabled={this.props.pageno == 1 ? true : false}
+          onPress={() => this.onScan(1)}
+          label={'SCAN PAGE 1'}
+        />
+        <Button
+          buttonStyle={{
+            backgroundColor: this.props.multiBrandingData.themeColor1
+              ? this.props.multiBrandingData.themeColor1
+              : AppTheme.BLUE,
+            marginTop: 10,
+          }}
+          disabled={this.props.pageno == 0 ? true : false}
+          onPress={() => this.onScan(2)}
+          label={'SCAN PAGE 2'}
+        />
+        {this.checkIsValid(this.props.formDataPage1[0]?.value) && (
+          <Text>Admission Number: {this.props.formDataPage1[0].value}</Text>
+        )}
+        {this.checkIsValid(this.props.formDataPage1[3]?.value) &&
+          this.checkIsValid(this.props.formDataPage1[4]?.value) && (
+            <Text>
+              Name: {this.props.formDataPage1[3].value}{' '}
+              {this.props.formDataPage1[4].value}
+            </Text>
+          )}
+
+        <Button
+          buttonStyle={{
+            backgroundColor: '#d11a2a',
+            marginTop: 50,
+          }}
+          onPress={() => this.props.navigation.goBack()}
+          label={'CANCEL'}
+        />
       </View>
-    )
+    );
   }
 }
 

@@ -40,8 +40,23 @@ class EditAndSave extends Component {
         this.props.pageNo == 1
           ? [...this.props.formDataPage1]
           : [...this.props.formDataPage2],
+      count: 0,
     };
   }
+
+  // componentDidUpdate(prevProps) {
+  //   if (
+  //     this.state.data.length != prevProps.formDataPage1.length &&
+  //     this.props.pageNo == 1
+  //   ) {
+  //     console.log('......................', prevProps);
+  //     this.setState({count: count++});
+  //     this.setState({data: this.props.formDataPage1});
+  //   }
+  //   if (this.state.data != prevProps.formDataPage2 && this.props.pageNo == 2) {
+  //     this.setState({data: this.props.formDataPage2});
+  //   }
+  // }
 
   handleBackButton() {
     return true;
@@ -57,7 +72,7 @@ class EditAndSave extends Component {
 
   isFormFilled() {
     for (let i = 0; i < this.state.data.length; i++) {
-      if (!this.state.data[i].value) {
+      if (!this.state.data[i].value || this.state.data.length != 14) {
         return true;
       }
     }
@@ -73,6 +88,7 @@ class EditAndSave extends Component {
   };
 
   renderItem = (item, index) => {
+    console.log();
     return (
       <View
         style={{
@@ -137,8 +153,9 @@ class EditAndSave extends Component {
           }}
           removeClippedSubviews={false}
           onScrollBeginDrag={Keyboard.dismiss}
+          extraData={this.state.data}
         />
-
+        {/* <this.RenderItem item={(this.state.data[0], 0)} /> */}
         <View
           style={{
             position: 'absolute',
