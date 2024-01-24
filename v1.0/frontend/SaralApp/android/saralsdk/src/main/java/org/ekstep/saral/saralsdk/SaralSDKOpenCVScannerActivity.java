@@ -225,17 +225,17 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
 
                         } else {
                             mPredictedDigits.put(id, result.toString());
-                            if (mIsClassifierRequestSubmitted && mTotalClassifiedCount >= mPredictedDigits.size()) {
-                                mIsScanningComplete     = true;
-                            }
-
-                            if (mIsScanningComplete) {
-                                Log.d(TAG, "Scaning completed, classification count " + mTotalClassifiedCount);
-                                processScanningCompleted();
-                            }
                         }
                     } catch (JSONException e) {
                         Log.e(TAG, "unable to create prediction object");
+                    }
+                    if (mIsClassifierRequestSubmitted && mTotalClassifiedCount >= mPredictedDigits.size()) {
+                        mIsScanningComplete     = true;
+                    }
+
+                    if (mIsScanningComplete) {
+                        Log.d(TAG, "Scaning completed, classification count " + mTotalClassifiedCount);
+                        processScanningCompleted();
                     }
           
             }
@@ -313,17 +313,17 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
 
                         } else {
                             mPredictedDigits.put(id, result.toString());
-                            if (mIsClassifierRequestSubmitted && mTotalClassifiedCount >= mPredictedDigits.size()) {
-                                mIsScanningComplete     = true;
-                            }
-
-                            if (mIsScanningComplete) {
-                                Log.d(TAG, "Scaning completed, classification count " + mTotalClassifiedCount);
-                                processScanningCompleted();
-                            }
                         }
                     } catch (JSONException e) {
                         Log.e(TAG, "unable to create prediction object");
+                    }
+                    if (mIsClassifierRequestSubmitted && mTotalClassifiedCount >= mPredictedDigits.size()) {
+                        mIsScanningComplete     = true;
+                    }
+
+                    if (mIsScanningComplete) {
+                        Log.d(TAG, "Scaning completed, classification count " + mTotalClassifiedCount);
+                        processScanningCompleted();
                     }
           
             }
@@ -405,17 +405,17 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
 
                         } else {
                             mPredictedDigits.put(id, result.toString());
-                            if (mIsClassifierRequestSubmitted && mTotalClassifiedCount >= mPredictedDigits.size()) {
-                                mIsScanningComplete     = true;
-                            }
-
-                            if (mIsScanningComplete) {
-                                Log.d(TAG, "Scaning completed, classification count " + mTotalClassifiedCount);
-                                processScanningCompleted();
-                            }
                         }
                     } catch (JSONException e) {
                         Log.e(TAG, "unable to create prediction object");
+                    }
+                    if (mIsClassifierRequestSubmitted && mTotalClassifiedCount >= mPredictedDigits.size()) {
+                        mIsScanningComplete     = true;
+                    }
+
+                    if (mIsScanningComplete) {
+                        Log.d(TAG, "Scaning completed, classification count " + mTotalClassifiedCount);
+                        processScanningCompleted();
                     }
           
             }
@@ -964,81 +964,81 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
             for (int i = 0; i < cells.length(); i++) {
                 JSONArray cellROIs      = cells.getJSONObject(i).getJSONArray("rois");
                 JSONObject cell = cells.getJSONObject(i);
-                String anTag = cellROIs.getJSONObject(1).getString("annotationTags").split("_")[0];
+                String anTag = cellROIs.getJSONObject(0).getString("annotationTags").split("_")[0];
                 boolean includeRois = (cell.has("page") && (anTag.equals(annotate)) && pageNumber!=null && cell.getString("page").equals(pageNumber)) || (!cell.has("page"));
                 if (includeRois) {
-                JSONArray trainingDataSet = new JSONArray();
-                int countOMRChoice =0;
-                for (int j = 0; j < cellROIs.length(); j++) {
-                    JSONObject roi      = cellROIs.getJSONObject(j);
-                    String roiId = roi.getString("roiId");
-                    if (roi.getString("extractionMethod").equals("NUMERIC_CLASSIFICATION") || roi.getString("extractionMethod").equals("BLOCK_ALPHANUMERIC_CLASSIFICATION") || roi.getString("extractionMethod").equals("BLOCK_LETTER_CLASSIFICATION")) {
-                        JSONObject result  = new JSONObject(predictionResult.get(annotate).get(roiId));
-                        roi.put("result", result);
-                        if(mRoiMatBase64.get(roiId)!=null)
-                        {
-                            trainingDataSet.put(j,mRoiMatBase64.get(roiId));
-                        }    
-                    }
+                    JSONArray trainingDataSet = new JSONArray();
+                    int countOMRChoice =0;
+                    for (int j = 0; j < cellROIs.length(); j++) {
+                        JSONObject roi      = cellROIs.getJSONObject(j);
+                        String roiId = roi.getString("roiId");
+                        if (roi.getString("extractionMethod").equals("NUMERIC_CLASSIFICATION") || roi.getString("extractionMethod").equals("BLOCK_ALPHANUMERIC_CLASSIFICATION") || roi.getString("extractionMethod").equals("BLOCK_LETTER_CLASSIFICATION")) {
+                            JSONObject result  = new JSONObject(predictionResult.get(annotate).get(roiId));
+                            roi.put("result", result);
+                            if(mRoiMatBase64.get(roiId)!=null)
+                            {
+                                trainingDataSet.put(j,mRoiMatBase64.get(roiId));
+                            }    
+                        }
 
-                    if (roi.getString("extractionMethod").equals("CELL_OMR")) {
-                        JSONObject result  = new JSONObject();
-                        if(isMultiChoiceOMRLayout)
-                        {
-                            //Handling Multi Choice OMR Layout predictions
-                            String prediction =mPredictedOMRs.get(roiId);
-                            if(prediction!=null && prediction.equals("1")){
-                                if (cell.has("omrOptions")) {
-                                   JSONArray omrOption = cells.getJSONObject(i).getJSONArray("omrOptions");
-                                    result.put("prediction", omrOption.getString(j));
-                                    result.put("confidence", new Double(1.00));
-                                    countOMRChoice++;
-                                    
-                                } else {
-                                    result.put("prediction", String.valueOf(j));
-                                    result.put("confidence", new Double(1.00));
-                                    countOMRChoice++;
+                        if (roi.getString("extractionMethod").equals("CELL_OMR")) {
+                            JSONObject result  = new JSONObject();
+                            if(isMultiChoiceOMRLayout)
+                            {
+                                //Handling Multi Choice OMR Layout predictions
+                                String prediction =mPredictedOMRs.get(roiId);
+                                if(prediction!=null && prediction.equals("1")){
+                                    if (cell.has("omrOptions")) {
+                                    JSONArray omrOption = cells.getJSONObject(i).getJSONArray("omrOptions");
+                                        result.put("prediction", omrOption.getString(j));
+                                        result.put("confidence", new Double(1.00));
+                                        countOMRChoice++;
+                                        
+                                    } else {
+                                        result.put("prediction", String.valueOf(j));
+                                        result.put("confidence", new Double(1.00));
+                                        countOMRChoice++;
+                                    }
+                                }
+                                else if(cellROIs.length() == 1 && cell.has("omrOptions")){
+                                        JSONArray omrOption = cells.getJSONObject(i).getJSONArray("omrOptions");
+                                        result.put("prediction", omrOption.getString(1));
+                                        result.put("confidence", new Double(1.00));
+                                }
+                                else{
+                                    result.put("prediction", "");
+                                    result.put("confidence", new Double(0.0));
+                                }
+                            }else {
+                                result.put("prediction", mPredictedOMRs.get(roiId));
+                                result.put("confidence", new Double(1.00));
+                            }
+                            if(mRoiMatBase64.get(roiId)!=null)
+                            {
+                                trainingDataSet.put(j,mRoiMatBase64.get(roiId));
+                            }
+
+                            if(!roi.has("result")){
+                                roi.put("result", result);    
+                            }else{
+                                JSONObject resultObj = roi.getJSONObject("result");
+                                if(resultObj.getString("prediction") != null){
+                                    roi.put("result", result);    
                                 }
                             }
-                            else if(cellROIs.length() == 1 && cell.has("omrOptions")){
-                                    JSONArray omrOption = cells.getJSONObject(i).getJSONArray("omrOptions");
-                                    result.put("prediction", omrOption.getString(1));
-                                    result.put("confidence", new Double(1.00));
-                            }
-                            else{
-                                result.put("prediction", "");
-                                result.put("confidence", new Double(0.0));
-                            }
-                        }else {
-                            result.put("prediction", mPredictedOMRs.get(roiId));
-                            result.put("confidence", new Double(1.00));
                         }
-                        if(mRoiMatBase64.get(roiId)!=null)
+                    
+                        if(isMultiChoiceOMRLayout && countOMRChoice > 1)
                         {
-                            trainingDataSet.put(j,mRoiMatBase64.get(roiId));
+                            resetInvalidOMRChoice(cellROIs);
                         }
-
-                        if(!roi.has("result")){
-                            roi.put("result", result);    
-                        }else{
-                            JSONObject resultObj = roi.getJSONObject("result");
-                            if(resultObj.getString("prediction") != null){
-                                roi.put("result", result);    
-                            }
-                        }
+                        if(trainingDataSet.length() > 0)
+                        {
+                            cell.put("trainingDataSet",trainingDataSet);
+                            Log.d(TAG, "CellId:" + cell.getString("cellId")+" trainingDataSet :: "+trainingDataSet);
+                        }                
                     }
-                
-                if(isMultiChoiceOMRLayout && countOMRChoice > 1)
-                {
-                    resetInvalidOMRChoice(cellROIs);
                 }
-                if(trainingDataSet.length() > 0)
-                {
-                    cell.put("trainingDataSet",trainingDataSet);
-                    Log.d(TAG, "CellId:" + cell.getString("cellId")+" trainingDataSet :: "+trainingDataSet);
-                }                
-            }
-        }
         }
             return layoutConfigs;
 
