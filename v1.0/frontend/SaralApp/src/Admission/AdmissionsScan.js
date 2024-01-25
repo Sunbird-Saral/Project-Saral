@@ -142,29 +142,30 @@ export class Admissions extends Component {
             key: cells[i].format.name,
             value: marks.trim(),
             label: labels[i],
+            //};
           };
+
+          console.log('prediction......................', prediction);
+
+          this.state.predictionArray.push(prediction);
         }
-
-        console.log('prediction......................', prediction);
-
-        this.state.predictionArray.push(prediction);
       }
+
+      // for(let i=0; i<labels.length; i++) {
+      //   let prediction = {
+      //     key: labels[i],
+      //     value: '',
+      //     label: labels[i],
+      //   };
+      //   this.state.predictionArray.push(prediction);
+      // }
+
+      if (pageNo == 1) this.props.setDataPage1(this.state.predictionArray);
+      else this.props.setDataPage2(this.state.predictionArray);
+      //this.state.predictionArray = [];
+      this.props.pageNo(pageNo);
+      //this.props.navigation.navigate('EditAndSave');
     }
-
-    // for(let i=0; i<labels.length; i++) {
-    //   let prediction = {
-    //     key: labels[i],
-    //     value: '',
-    //     label: labels[i],
-    //   };
-    //   this.state.predictionArray.push(prediction);
-    // }
-
-    if (pageNo == 1) this.props.setDataPage1(this.state.predictionArray);
-    else this.props.setDataPage2(this.state.predictionArray);
-    //this.state.predictionArray = [];
-    this.props.pageNo(pageNo);
-    this.props.navigation.navigate('EditAndSave');
   };
 
   checkIsValid(element) {
@@ -194,47 +195,58 @@ export class Admissions extends Component {
   );
 
   render() {
+    if (this.state.predictionArray.length <= 0) {
+      return (
+        <View style={style.container}>
+          <Button
+            buttonStyle={{
+              backgroundColor: this.props.multiBrandingData.themeColor1
+                ? this.props.multiBrandingData.themeColor1
+                : AppTheme.BLUE,
+            }}
+            disabled={this.props.pageno == 1 ? true : false}
+            onPress={() => this.onScan(1)}
+            label={'SCAN PAGE 1'}
+          />
+          <Button
+            buttonStyle={{
+              backgroundColor: this.props.multiBrandingData.themeColor1
+                ? this.props.multiBrandingData.themeColor1
+                : AppTheme.BLUE,
+              marginTop: 10,
+            }}
+            disabled={this.props.pageno == 0 ? true : false}
+            onPress={() => this.onScan(2)}
+            label={'SCAN PAGE 2'}
+          />
+          {this.checkIsValid(this.props.formDataPage1[0]?.value) && (
+            <Text>Admission Number: {this.props.formDataPage1[0].value}</Text>
+          )}
+          {this.checkIsValid(this.props.formDataPage1[3]?.value) &&
+            this.checkIsValid(this.props.formDataPage1[4]?.value) && (
+              <Text>
+                Name: {this.props.formDataPage1[3].value}{' '}
+                {this.props.formDataPage1[4].value}
+              </Text>
+            )}
+
+          <Button
+            buttonStyle={{
+              backgroundColor: '#d11a2a',
+              marginTop: 50,
+            }}
+            onPress={() => this.props.navigation.goBack()}
+            label={'CANCEL'}
+          />
+        </View>
+      );
+    }
     return (
       <View style={style.container}>
-        <Button
-          buttonStyle={{
-            backgroundColor: this.props.multiBrandingData.themeColor1
-              ? this.props.multiBrandingData.themeColor1
-              : AppTheme.BLUE,
-          }}
-          disabled={this.props.pageno == 1 ? true : false}
-          onPress={() => this.onScan(1)}
-          label={'SCAN PAGE 1'}
-        />
-        <Button
-          buttonStyle={{
-            backgroundColor: this.props.multiBrandingData.themeColor1
-              ? this.props.multiBrandingData.themeColor1
-              : AppTheme.BLUE,
-            marginTop: 10,
-          }}
-          disabled={this.props.pageno == 0 ? true : false}
-          onPress={() => this.onScan(2)}
-          label={'SCAN PAGE 2'}
-        />
-        {this.checkIsValid(this.props.formDataPage1[0]?.value) && (
-          <Text>Admission Number: {this.props.formDataPage1[0].value}</Text>
-        )}
-        {this.checkIsValid(this.props.formDataPage1[3]?.value) &&
-          this.checkIsValid(this.props.formDataPage1[4]?.value) && (
-            <Text>
-              Name: {this.props.formDataPage1[3].value}{' '}
-              {this.props.formDataPage1[4].value}
-            </Text>
-          )}
-
-        <Button
-          buttonStyle={{
-            backgroundColor: '#d11a2a',
-            marginTop: 50,
-          }}
-          onPress={() => this.props.navigation.goBack()}
-          label={'CANCEL'}
+        <FlatList
+          data={this.state.predictionArray}
+          renderItem={this.renderItem}
+          keyExtractor={item => item.key}
         />
       </View>
     );

@@ -73,16 +73,17 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
     private HashMap<String, String> mPredictedOMRs = new HashMap<>();
     private HashMap<String, String> mPredictedClass = new HashMap<>();
     private HashMap<String, String> mRoiMatBase64 = new HashMap<>();
-    private HashMap<String, HashMap<String, String>> hashmapData = new HashMap<>();
+    private HashMap<String, HashMap<String, String>> predictionResult = new HashMap<>();
     private HashMap<String, Integer> roiLen = new HashMap<>();
     private boolean isMultiChoiceOMRLayout = false;
+    private boolean isFirstBatchDataProcessed = false;
     private int layoutMinWidth = 0;
     private int layoutMinHeight = 0;
     private int detectionRadius = 0;
     private int timeInMiliSecond = 0;
     private boolean hasEditEnable = false;
     private boolean isVerticalScanLayout = false;
-    private ExecutorService executorService;
+    private boolean doesChunkSendData = false;
 
     public SaralSDKOpenCVScannerActivity() {
         Log.i(TAG, "Instantiated new " + this.getClass());
@@ -187,28 +188,143 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
     @Override
     public void onResume() {
         super.onResume();
-        // HWClassifier.getInstance().setPredictionListener(new PredictionListener() {
+        HWClassifier.getInstance().setPredictionListener(new PredictionListener() {
+            @Override
+            public void OnPredictionSuccess(int digit, float confidence, String id, String annotate, int total) {
+                Log.d(TAG, "predicted digit:" + digit + " unique id:" + id + " confidence:" + confidence);
+                mTotalClassifiedCount++;
+                    try {
+                        JSONObject result = new JSONObject();
+                        if(digit != 10 ) {
+                            result.put("prediction", new Integer(digit));
+                            result.put("confidence", new Double(confidence));
+                        }else{
+                            // if classifier is 10 , assigning prediction as 0
+                            result.put("prediction", new Integer(0));
+                            result.put("confidence", new Double(0));
+                        }
+
+                        //stream data in chunk for big forms
+                        if(doesChunkSendData) {
+                            if(predictionResult.containsKey(annotate)) {
+                                HashMap<String, String> innerJson = predictionResult.get(annotate);
+                                innerJson.put(id, result.toString());
+                            } else {
+                                HashMap<String, String> innerJson = new HashMap<>();
+                                innerJson.put(id, result.toString());
+                                predictionResult.put(annotate, innerJson);
+                            }
+
+                            if(predictionResult.get(annotate).size() == total) {
+                                JSONObject res = getScanResultByAnnotation(annotate);
+                                ReactInstanceManager mReactInstanceManager = getReactNativeHost().getReactInstanceManager();
+                                ReactContext reactContext = mReactInstanceManager.getCurrentReactContext();
+                                reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("streamReady", res.toString());
+                                if(!isFirstBatchDataProcessed) {
+                                    isFirstBatchDataProcessed = true;
+                                    processScanningCompleted();
+                                }
+                            }
+
+                        } else {
+                            mPredictedDigits.put(id, result.toString());
+                        }
+                    } catch (JSONException e) {
+                        Log.e(TAG, "unable to create prediction object");
+                    }
+                    if (mIsClassifierRequestSubmitted && mTotalClassifiedCount >= mPredictedDigits.size()) {
+                        mIsScanningComplete     = true;
+                    }
+
+                    if (mIsScanningComplete) {
+                        Log.d(TAG, "Scaning completed, classification count " + mTotalClassifiedCount);
+                        processScanningCompleted();
+                    }
+          
+            }
+
+        //     }
+
         //     @Override
-        //     public void OnPredictionSuccess(int digit, float confidence, String id) {
-        //         Log.d(TAG, "predicted digit:" + digit + " unique id:" + id + " confidence:" + confidence);
+        //     public void OnPredictionFailed(String error, String id) {
+        //         Log.e(TAG, "Model prediction failed");
         //         mTotalClassifiedCount++;
-        //             try {
-        //                 JSONObject result = new JSONObject();
-        //                 if(digit != 10 ) {
-        //                     result.put("prediction", new Integer(digit));
-        //                     result.put("confidence", new Double(confidence));
-        //                 }else{
-        //                     // if classifier is 10 , assigning prediction as 0
-        //                     result.put("prediction", new Integer(0));
-        //                     result.put("confidence", new Double(0));
-        //                 }
-        //                 mPredictedDigits.put(id, result.toString());
-        //             } catch (JSONException e) {
-        //                 Log.e(TAG, "unable to create prediction object");
-        //             }
+        //         try {
+        //             JSONObject result = new JSONObject();
+        //             result.put("prediction", new Integer(0));
+        //             result.put("confidence", new Double(0.0));
+        //             mPredictedDigits.put(id, result.toString());
+        //         } catch (JSONException e) {
+        //             Log.e(TAG, "unable to create prediction object");
+        //         }
+
         //         if (mIsClassifierRequestSubmitted && mTotalClassifiedCount >= mPredictedDigits.size()) {
         //             mIsScanningComplete     = true;
         //         }
+
+        HWBlockLettersClassifier.getInstance().setPredictionListener(new PredictionListener() {
+            @Override
+            public void OnPredictionSuccess(int digit, float confidence, String id, String annotate, int total) {
+                Log.d(TAG, "predicted digit:" + digit + " unique id:" + id + " confidence:" + confidence);
+                Map<Integer,String> lettersMap = new HashMap<>();
+                int index=0;
+                for(char c = 'A'; c <= 'Z'; ++c)
+                {
+                    lettersMap.put(index,c+"");
+                    index++;
+                }
+                lettersMap.put(index," ");
+                index++;
+                mTotalClassifiedCount++;
+                Log.d(TAG, "predicted digit:" + digit + "letterMap" + lettersMap.get(digit) + " confidence:" + confidence);
+                    try {
+                        JSONObject result = new JSONObject();
+                        if(digit != 27 && lettersMap.get(digit)!=null) {
+                            result.put("prediction", lettersMap.get(digit));
+                            result.put("confidence", new Double(confidence));
+                        }else{
+                            // if classifier is 10 , assigning prediction as 0
+                            result.put("prediction", " ");
+                            result.put("confidence", new Double(0));
+                        }
+                        //stream data in chunk for big forms
+                        if(doesChunkSendData) {
+                            if(predictionResult.containsKey(annotate)) {
+                                HashMap<String, String> innerJson = predictionResult.get(annotate);
+                                innerJson.put(id, result.toString());
+                            } else {
+                                HashMap<String, String> innerJson = new HashMap<>();
+                                innerJson.put(id, result.toString());
+                                predictionResult.put(annotate, innerJson);
+                            }
+
+                            if(predictionResult.get(annotate).size() == total) {
+                                JSONObject res = getScanResultByAnnotation(annotate);
+                                ReactInstanceManager mReactInstanceManager = getReactNativeHost().getReactInstanceManager();
+                                ReactContext reactContext = mReactInstanceManager.getCurrentReactContext();
+                                reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("streamReady", res.toString());
+                                if(!isFirstBatchDataProcessed) {
+                                    isFirstBatchDataProcessed = true;
+                                    processScanningCompleted();
+                                }
+                            }
+
+                        } else {
+                            mPredictedDigits.put(id, result.toString());
+                        }
+                    } catch (JSONException e) {
+                        Log.e(TAG, "unable to create prediction object");
+                    }
+                    if (mIsClassifierRequestSubmitted && mTotalClassifiedCount >= mPredictedDigits.size()) {
+                        mIsScanningComplete     = true;
+                    }
+
+                    if (mIsScanningComplete) {
+                        Log.d(TAG, "Scaning completed, classification count " + mTotalClassifiedCount);
+                        processScanningCompleted();
+                    }
+          
+            }
 
         //         if (mIsScanningComplete) {
         //             Log.d(TAG, "Scaning completed, classification count " + mTotalClassifiedCount);
@@ -230,80 +346,73 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
         //             Log.e(TAG, "unable to create prediction object");
         //         }
 
-        //         if (mIsClassifierRequestSubmitted && mTotalClassifiedCount >= mPredictedDigits.size()) {
-        //             mIsScanningComplete     = true;
-        //         }
+        HWAlphaNumericClassifier.getInstance().setPredictionListener(new PredictionListener() {
+            @Override
+            public void OnPredictionSuccess(int digit, float confidence, String id, String annotate, int total) {
+                Log.d(TAG, "predicted digit:" + digit + " unique id:" + id + " confidence:" + confidence);
+                Map<Integer,String> lettersMap = new HashMap<>();
+                int index=0;
+                for(int i=0;i<=9;i++)
+                {
+                    lettersMap.put(index,String.valueOf(i));
+                    index++;                  
+                }
+                lettersMap.put(index," ");
+                index++;
+                for(char c = 'A'; c <= 'Z'; ++c)
+                {
+                    lettersMap.put(index,c+"");
+                    index++;
+                }
+                mTotalClassifiedCount++;
+                    try {
+                        JSONObject result = new JSONObject();
+                        if(digit != 37 && lettersMap.get(digit)!=null) {
+                            result.put("prediction", lettersMap.get(digit));
+                            result.put("confidence", new Double(confidence));
+                        }else{
+                            // if classifier is 10 , assigning prediction as 0
+                            result.put("prediction", " ");
+                            result.put("confidence", new Double(0));
+                        }
+                        //stream data in chunk for big forms
+                        if(doesChunkSendData) {
+                            if(predictionResult.containsKey(annotate)) {
+                                HashMap<String, String> innerJson = predictionResult.get(annotate);
+                                innerJson.put(id, result.toString());
+                            } else {
+                                HashMap<String, String> innerJson = new HashMap<>();
+                                innerJson.put(id, result.toString());
+                                predictionResult.put(annotate, innerJson);
+                            }
 
-        //         if (mIsScanningComplete) {
-        //             Log.d(TAG, "Scaning completed, classification count " + mTotalClassifiedCount);
-        //             processScanningCompleted();
-        //         }
-        //     }
-        // });
+                            if(predictionResult.get(annotate).size() == total) {
+                                JSONObject res = getScanResultByAnnotation(annotate);
+                                ReactInstanceManager mReactInstanceManager = getReactNativeHost().getReactInstanceManager();
+                                ReactContext reactContext = mReactInstanceManager.getCurrentReactContext();
+                                reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("streamReady", res.toString());
+                                if(!isFirstBatchDataProcessed) {
+                                    isFirstBatchDataProcessed = true;
+                                    processScanningCompleted();
+                                }
+                            }
 
-        // HWBlockLettersClassifier.getInstance().setPredictionListener(new PredictionListener() {
-        //     @Override
-        //     public void OnPredictionSuccess(int digit, float confidence, String id) {
-        //         Log.d(TAG, "predicted digit:" + digit + " unique id:" + id + " confidence:" + confidence);
-        //         Map<Integer,String> lettersMap = new HashMap<>();
-        //         int index=0;
-        //         for(char c = 'A'; c <= 'Z'; ++c)
-        //         {
-        //             lettersMap.put(index,c+"");
-        //             index++;
-        //         }
-        //         lettersMap.put(index," ");
-        //         index++;
-        //         mTotalClassifiedCount++;
-        //         Log.d(TAG, "predicted digit:" + digit + "letterMap" + lettersMap.get(digit) + " confidence:" + confidence);
-        //             try {
-        //                 JSONObject result = new JSONObject();
-        //                 if(digit != 27 && lettersMap.get(digit)!=null) {
-        //                     result.put("prediction", lettersMap.get(digit));
-        //                     result.put("confidence", new Double(confidence));
-        //                 }else{
-        //                     // if classifier is 10 , assigning prediction as 0
-        //                     result.put("prediction", " ");
-        //                     result.put("confidence", new Double(0));
-        //                 }
-        //                 mPredictedDigits.put(id, result.toString());
-        //             } catch (JSONException e) {
-        //                 Log.e(TAG, "unable to create prediction object");
-        //             }
-        //         if (mIsClassifierRequestSubmitted && mTotalClassifiedCount >= mPredictedDigits.size()) {
-        //             mIsScanningComplete     = true;
-        //         }
+                        } else {
+                            mPredictedDigits.put(id, result.toString());
+                        }
+                    } catch (JSONException e) {
+                        Log.e(TAG, "unable to create prediction object");
+                    }
+                    if (mIsClassifierRequestSubmitted && mTotalClassifiedCount >= mPredictedDigits.size()) {
+                        mIsScanningComplete     = true;
+                    }
 
-        //         if (mIsScanningComplete) {
-        //             Log.d(TAG, "Scaning completed, classification count " + mTotalClassifiedCount);
-        //             processScanningCompleted();
-        //         }
-
-        //     }
-
-        //     @Override
-        //     public void OnPredictionFailed(String error, String id) {
-        //         Log.e(TAG, "Model prediction failed");
-        //         mTotalClassifiedCount++;
-        //         try {
-        //             JSONObject result = new JSONObject();
-        //             result.put("prediction", new Integer(0));
-        //             result.put("confidence", new Double(0.0));
-        //             mPredictedDigits.put(id, result.toString());
-        //         } catch (JSONException e) {
-        //             Log.e(TAG, "unable to create prediction object");
-        //         }
-
-        //         if (mIsClassifierRequestSubmitted && mTotalClassifiedCount >= mPredictedDigits.size()) {
-        //             mIsScanningComplete     = true;
-        //         }
-
-        //         if (mIsScanningComplete) {
-        //             Log.d(TAG, "Scaning completed, classification count " + mTotalClassifiedCount);
-        //             processScanningCompleted();
-        //         }
-        //     }
-        // });
+                    if (mIsScanningComplete) {
+                        Log.d(TAG, "Scaning completed, classification count " + mTotalClassifiedCount);
+                        processScanningCompleted();
+                    }
+          
+            }
 
         // HWAlphaNumericClassifier.getInstance().setPredictionListener(new PredictionListener() {
         //     @Override
@@ -563,22 +672,23 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                 int availableProcessors = (Runtime.getRuntime().availableProcessors()) / 2;
                 int batches = Math.max(1, totalROIs / availableProcessors); // Calculate number of batches
 
-                executorService = Executors.newFixedThreadPool(2); // Adjust the pool size //half the process by 2, //check on logcat for cpu utilization
-                HWClassifier.getInstance().setPredictionListener(new PredictionListener() {
-                    @Override
-                    public void OnPredictionSuccess(int digit, float confidence, String id, String annotate, int total) {
-                        Log.d(TAG, "starting thread: hwclass" + digit);
-                        Log.d(TAG, "predicted digit:" + digit + " unique id:" + id + " confidence:" + confidence);
-                        mTotalClassifiedCount++;
-                        try {
-                            JSONObject result = new JSONObject();
-                            if (digit != 10) {
-                                result.put("prediction", new Integer(digit));
-                                result.put("confidence", new Double(confidence));
-                            } else {
-                                // if classifier is 10 , assigning prediction as 0
-                                result.put("prediction", new Integer(0));
-                                result.put("confidence", new Double(0));
+                    if (roiConfig.getString("extractionMethod").equals("CELL_OMR")) {
+                        String roiId        = roiConfig.getString("roiId");
+                        JSONObject rect      = roiConfig.getJSONObject("rect");
+
+                        //double percent      = mDetectShaded.getShadedPercentage(tableMat, rect.getInt("top"), rect.getInt("left"), rect.getInt("bottom"), rect.getInt("right"),isMultiChoiceOMRLayout);
+                        Mat omrROI        = mDetectShaded.getROIMat(tableMat, rect.getInt("top"), rect.getInt("left"), rect.getInt("bottom"), rect.getInt("right"));
+                        Integer answer      = 0;
+                        String annotate = roiConfig.getString("annotationTags").split("_")[0];
+                        int totalRoi = roiLen.get(annotate);
+                        // if (percent > DARKNESS_THRESHOLD) {
+                        //     answer = 1;
+                        // }
+                        // New Logic
+                        if (hasExperimentalOmr) {
+                            if (mDetectShaded.isOMRFilledWitExperimentalOMR(omrROI)) {
+                                answer = 1;
+    
                             }
                             //mPredictedDigits.put(id, result.toString());
                             if(hashmapData.containsKey(annotate)) {
@@ -601,290 +711,75 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                         } catch (JSONException e) {
                             Log.e(TAG, "unable to create prediction object");
                         }
-                        if (mIsClassifierRequestSubmitted && mTotalClassifiedCount >= mPredictedDigits.size()) {
-                            mIsScanningComplete = true;
+                        mRoiMatBase64.put(roiId,createBase64FromMat(omrROI));
+                        mPredictedOMRs.put(roiId, answer.toString());
+                        if(doesChunkSendData) {
+                            if(predictionResult.containsKey(annotate)) {
+                                HashMap<String, String> innerJson = predictionResult.get(annotate);
+                                innerJson.put(roiId, answer.toString());
+                            } else {
+                                HashMap<String, String> innerJson = new HashMap<>();
+                                innerJson.put(roiId, answer.toString());
+                                predictionResult.put(annotate, innerJson);
+                            }
+
+                            if(predictionResult.get(annotate).size() == totalRoi) {
+                                JSONObject res = getScanResultByAnnotation(annotate);
+                                ReactInstanceManager mReactInstanceManager = getReactNativeHost().getReactInstanceManager();
+                                ReactContext reactContext = mReactInstanceManager.getCurrentReactContext();
+                                reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("streamReady", res.toString());
+                                if(!isFirstBatchDataProcessed) {
+                                    isFirstBatchDataProcessed = true;
+                                    processScanningCompleted();
+                                }
+                            }
+
                         }
-
-                        //if (mIsScanningComplete) {
-                            Log.d(TAG, "Scaning completed, classification count " + mTotalClassifiedCount);
-                            processScanningCompleted();
-                        //}
-
+                        Log.d(TAG, "key: " + roiId + " answer: " + answer.toString());
                     }
 
-                    @Override
-                    public void OnPredictionFailed(String error, String id) {
-                        Log.e(TAG, "Model prediction failed");
-                        mTotalClassifiedCount++;
-                        try {
-                            JSONObject result = new JSONObject();
-                            result.put("prediction", new Integer(0));
-                            result.put("confidence", new Double(0.0));
-                            mPredictedDigits.put(id, result.toString());
-                        } catch (JSONException e) {
-                            Log.e(TAG, "unable to create prediction object");
-                        }
-
-                        if (mIsClassifierRequestSubmitted && mTotalClassifiedCount >= mPredictedDigits.size()) {
-                            mIsScanningComplete = true;
-                        }
-
-                        if (mIsScanningComplete) {
-                            Log.d(TAG, "Scaning completed, classification count " + mTotalClassifiedCount);
-                            processScanningCompleted();
+                    if (roiConfig.getString("extractionMethod").equals("NUMERIC_CLASSIFICATION")) {
+                        String roiId        = roiConfig.getString("roiId");
+                        JSONObject rect      = roiConfig.getJSONObject("rect");
+                        String annotate = roiConfig.getString("annotationTags").split("_")[0];
+                        int totalRoi = roiLen.get(annotate);
+                        mPredictedDigits.put(roiId, "0");
+                        Mat digitROI        = mDetectShaded.getROIMat(tableMat, rect.getInt("top"), rect.getInt("left"), rect.getInt("bottom"), rect.getInt("right"));
+                        mRoiMatBase64.put(roiId,createBase64FromMat(digitROI));
+                        if(HWClassifier.getInstance().isInitialized() == true) {
+                            Log.d(TAG, "Requesting prediction for: " + roiId);
+                            HWClassifier.getInstance().classifyMat(digitROI, roiId, annotate, totalRoi);
                         }
                     }
                 });
 
-               HWBlockLettersClassifier.getInstance().setPredictionListener(new PredictionListener() {
-                   @Override
-                   public void OnPredictionSuccess(int digit, float confidence, String id, String annotate, int total) {
-                       Log.d(TAG, "starting thread: hwblockclass" + digit);
-                       Log.d(TAG, "predicted digit:" + digit + " unique id:" + id + " confidence:" + confidence);
-                       Map<Integer, String> lettersMap = new HashMap<>();
-                       int index = 0;
-                       for (char c = 'A'; c <= 'Z'; ++c) {
-                           lettersMap.put(index, c + "");
-                           index++;
-                       }
-                       lettersMap.put(index, " ");
-                       index++;
-                       mTotalClassifiedCount++;
-                       Log.d(TAG, "predicted digit:" + digit + "letterMap" + lettersMap.get(digit) + " confidence:" + confidence);
-                       try {
-                           JSONObject result = new JSONObject();
-                           if (digit != 27 && lettersMap.get(digit) != null) {
-                               result.put("prediction", lettersMap.get(digit));
-                               result.put("confidence", new Double(confidence));
-                           } else {
-                               // if classifier is 10 , assigning prediction as 0
-                               result.put("prediction", " ");
-                               result.put("confidence", new Double(0));
-                           }
-                           //mPredictedDigits.put(id, result.toString());
-                           if(hashmapData.containsKey(annotate)) {
-                                HashMap<String, String> innerHashMap = hashmapData.get(annotate);
-                                innerHashMap.put(id, result.toString());
-                            } else {
-                                HashMap<String, String> innerHashMap = new HashMap<>();
-                                innerHashMap.put(id, result.toString());
-                                hashmapData.put(annotate, innerHashMap);
-                            }
+                    if (roiConfig.getString("extractionMethod").equals("BLOCK_LETTER_CLASSIFICATION")) {
+                        String roiId        = roiConfig.getString("roiId");
+                        JSONObject rect      = roiConfig.getJSONObject("rect");
+                        String annotate = roiConfig.getString("annotationTags").split("_")[0];
+                        int totalRoi = roiLen.get(annotate);
+                        mPredictedDigits.put(roiId, "0");
+                        Mat alphaROI        = mDetectShaded.getROIMat(tableMat, rect.getInt("top"), rect.getInt("left"), rect.getInt("bottom"), rect.getInt("right"));
+                        mRoiMatBase64.put(roiId,createBase64FromMat(alphaROI));
+                        if(HWBlockLettersClassifier.getInstance().isInitialized() == true) {
+                            Log.d(TAG, "Requesting prediction for: " + roiId);
+                            HWBlockLettersClassifier.getInstance().classifyMat(alphaROI, roiId, annotate, totalRoi);
+                        }
+                    }
 
-                            if(hashmapData.get(annotate).size() == total) {
-                                JSONObject res = getScanResult(annotate);
-                                res.put("annotate", annotate);
-                                ReactInstanceManager mReactInstanceManager = getReactNativeHost().getReactInstanceManager();
-                                ReactContext reactContext = mReactInstanceManager.getCurrentReactContext();
-                                reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("streamReady", res.toString());
-                            }
-                       } catch (JSONException e) {
-                           Log.e(TAG, "unable to create prediction object");
-                       }
-                       if (mIsClassifierRequestSubmitted && mTotalClassifiedCount >= mPredictedDigits.size()) {
-                           mIsScanningComplete = true;
-                       }
-
-
-                       //if (mIsScanningComplete) {
-                           Log.d(TAG, "Scaning completed, classification count " + mTotalClassifiedCount);
-                           processScanningCompleted();
-                       //}
-
-                   }
-
-                   @Override
-                   public void OnPredictionFailed(String error, String id) {
-                       Log.e(TAG, "Model prediction failed");
-                       mTotalClassifiedCount++;
-                       try {
-                           JSONObject result = new JSONObject();
-                           result.put("prediction", new Integer(0));
-                           result.put("confidence", new Double(0.0));
-                           mPredictedDigits.put(id, result.toString());
-                       } catch (JSONException e) {
-                           Log.e(TAG, "unable to create prediction object");
-                       }
-
-                       if (mIsClassifierRequestSubmitted && mTotalClassifiedCount >= mPredictedDigits.size()) {
-                           mIsScanningComplete = true;
-                       }
-
-                       if (mIsScanningComplete) {
-                           Log.d(TAG, "Scaning completed, classification count " + mTotalClassifiedCount);
-                           processScanningCompleted();
-                       }
-                   }
-               });
-
-               HWAlphaNumericClassifier.getInstance().setPredictionListener(new PredictionListener() {
-                   @Override
-                   public void OnPredictionSuccess(int digit, float confidence, String id, String annotate, int total) {
-                       Log.d(TAG, "starting thread: hwalphaclass" + digit);
-                       Log.d(TAG, "predicted digit:" + digit + " unique id:" + id + " confidence:" + confidence);
-                       Map<Integer, String> lettersMap = new HashMap<>();
-                       int index = 0;
-                       for (int i = 0; i <= 9; i++) {
-                           lettersMap.put(index, String.valueOf(i));
-                           index++;
-                       }
-                       lettersMap.put(index, " ");
-                       index++;
-                       for (char c = 'A'; c <= 'Z'; ++c) {
-                           lettersMap.put(index, c + "");
-                           index++;
-                       }
-                       mTotalClassifiedCount++;
-                       try {
-                           JSONObject result = new JSONObject();
-                           if (digit != 37 && lettersMap.get(digit) != null) {
-                               result.put("prediction", lettersMap.get(digit));
-                               result.put("confidence", new Double(confidence));
-                           } else {
-                               // if classifier is 10 , assigning prediction as 0
-                               result.put("prediction", " ");
-                               result.put("confidence", new Double(0));
-                           }
-                           //mPredictedDigits.put(id, result.toString());
-                           if(hashmapData.containsKey(annotate)) {
-                                HashMap<String, String> innerHashMap = hashmapData.get(annotate);
-                                innerHashMap.put(id, result.toString());
-                            } else {
-                                HashMap<String, String> innerHashMap = new HashMap<>();
-                                innerHashMap.put(id, result.toString());
-                                hashmapData.put(annotate, innerHashMap);
-                            }
-
-                            if(hashmapData.get(annotate).size() == total) {
-                                JSONObject res = getScanResult(annotate);
-                                res.put("annotate", annotate);
-                                ReactInstanceManager mReactInstanceManager = getReactNativeHost().getReactInstanceManager();
-                                ReactContext reactContext = mReactInstanceManager.getCurrentReactContext();
-                                reactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("streamReady", res.toString());
-                            }
-                       } catch (JSONException e) {
-                           Log.e(TAG, "unable to create prediction object");
-                       }
-                       if (mIsClassifierRequestSubmitted && mTotalClassifiedCount >= mPredictedDigits.size()) {
-                           mIsScanningComplete = true;
-                       }
-
-                       //if (mIsScanningComplete) {
-                           Log.d(TAG, "Scaning completed, classification count " + mTotalClassifiedCount);
-                           processScanningCompleted();
-                       //}
-
-                   }
-
-                   @Override
-                   public void OnPredictionFailed(String error, String id) {
-                       Log.e(TAG, "Model prediction failed");
-                       mTotalClassifiedCount++;
-                       try {
-                           JSONObject result = new JSONObject();
-                           result.put("prediction", new Integer(0));
-                           result.put("confidence", new Double(0.0));
-                           mPredictedDigits.put(id, result.toString());
-                       } catch (JSONException e) {
-                           Log.e(TAG, "unable to create prediction object");
-                       }
-
-                       if (mIsClassifierRequestSubmitted && mTotalClassifiedCount >= mPredictedDigits.size()) {
-                           mIsScanningComplete = true;
-                       }
-
-                       if (mIsScanningComplete) {
-                           Log.d(TAG, "Scaning completed, classification count " + mTotalClassifiedCount);
-                           processScanningCompleted();
-                       }
-                   }
-               });
-                //for (int batchIndex = 0; batchIndex < totalROIs; batchIndex += batches) {
-                  for (int i = 0; i < totalROIs; i++) {  
-                    //final int start = batchIndex;
-                    //final int end = Math.min(batchIndex + batches, totalROIs);
-                      int finalI = i;
-                      executorService.submit(() -> {
-                        Log.d(TAG, "starting thread: " + finalI + "threads:" + availableProcessors);
-                        //for (int i = start; i < end; i++) {
-                            try {
-                                JSONObject roiConfig = rois.getJSONObject(finalI);
-                                // if (roiConfig.getString("extractionMethod").equals("CELL_OMR")) {
-                                //     String roiId = roiConfig.getString("roiId");
-                                //     JSONObject rect = roiConfig.getJSONObject("rect");
-
-                                //     //double percent      = mDetectShaded.getShadedPercentage(tableMat, rect.getInt("top"), rect.getInt("left"), rect.getInt("bottom"), rect.getInt("right"),isMultiChoiceOMRLayout);
-                                //     Mat omrROI = mDetectShaded.getROIMat(tableMat, rect.getInt("top"), rect.getInt("left"), rect.getInt("bottom"), rect.getInt("right"));
-                                //     Integer answer = 0;
-                                //     // if (percent > DARKNESS_THRESHOLD) {
-                                //     //     answer = 1;
-                                //     // }
-                                //     // New Logic
-                                //     if (hasExperimentalOmr) {
-                                //         if (mDetectShaded.isOMRFilledWitExperimentalOMR(omrROI)) {
-                                //             answer = 1;
-
-                                //         }
-                                //     } else {
-                                //         if (mDetectShaded.isOMRFilled(omrROI)) {
-                                //             answer = 1;
-                                //         }
-                                //     }
-                                //     mRoiMatBase64.put(roiId, createBase64FromMat(omrROI));
-                                //     mPredictedOMRs.put(roiId, answer.toString());
-                                //     Log.d(TAG, "key: " + roiId + " answer: " + answer.toString());
-                                // }
-
-                                if (roiConfig.getString("extractionMethod").equals("NUMERIC_CLASSIFICATION")) {
-                                    String roiId = roiConfig.getString("roiId");
-                                    JSONObject rect = roiConfig.getJSONObject("rect");
-                                    String annotate = roiConfig.getString("annotationTags").split("_")[0];
-                                    int totalRoi = roiLen.get(annotate);
-
-                                    mPredictedDigits.put(roiId, "0");
-                                    Mat digitROI = mDetectShaded.getROIMat(tableMat, rect.getInt("top"), rect.getInt("left"), rect.getInt("bottom"), rect.getInt("right"));
-                                    mRoiMatBase64.put(roiId, createBase64FromMat(digitROI));
-                                    if (HWClassifier.getInstance().isInitialized() == true) {
-                                        Log.d(TAG, "Requesting prediction for: " + roiId);
-                                        HWClassifier.getInstance().classifyMat(digitROI, roiId, annotate, totalRoi);
-                                    }
-                                }
-
-                                if (roiConfig.getString("extractionMethod").equals("BLOCK_LETTER_CLASSIFICATION")) {
-                                    String roiId = roiConfig.getString("roiId");
-                                    JSONObject rect = roiConfig.getJSONObject("rect");
-                                    String annotate = roiConfig.getString("annotationTags").split("_")[0];
-                                    int totalRoi = roiLen.get(annotate);
-
-                                    mPredictedDigits.put(roiId, "0");
-                                    Mat alphaROI = mDetectShaded.getROIMat(tableMat, rect.getInt("top"), rect.getInt("left"), rect.getInt("bottom"), rect.getInt("right"));
-                                    mRoiMatBase64.put(roiId, createBase64FromMat(alphaROI));
-                                    if (HWBlockLettersClassifier.getInstance().isInitialized() == true) {
-                                        Log.d(TAG, "Requesting prediction for: " + roiId);
-                                        HWBlockLettersClassifier.getInstance().classifyMat(alphaROI, roiId, annotate, totalRoi);
-                                    }
-                                }
-
-                                if (roiConfig.getString("extractionMethod").equals("BLOCK_ALPHANUMERIC_CLASSIFICATION")) {
-                                    String roiId = roiConfig.getString("roiId");
-                                    JSONObject rect = roiConfig.getJSONObject("rect");
-                                    String annotate = roiConfig.getString("annotationTags").split("_")[0];
-                                    int totalRoi = roiLen.get(annotate);
-
-                                    mPredictedDigits.put(roiId, "0");
-                                    Mat alphaNumericROI = mDetectShaded.getROIMat(tableMat, rect.getInt("top"), rect.getInt("left"), rect.getInt("bottom"), rect.getInt("right"));
-                                    mRoiMatBase64.put(roiId, createBase64FromMat(alphaNumericROI));
-                                    if (HWAlphaNumericClassifier.getInstance().isInitialized() == true) {
-                                        Log.d(TAG, "Requesting prediction for: " + roiId);
-                                        HWAlphaNumericClassifier.getInstance().classifyMat(alphaNumericROI, roiId, annotate, totalRoi);
-                                    }
-                                }
-                            } catch (JSONException e) {
-                                throw new RuntimeException(e);
-                            }
-                        //}
-                    });
-
+                    if (roiConfig.getString("extractionMethod").equals("BLOCK_ALPHANUMERIC_CLASSIFICATION")) {
+                        String roiId        = roiConfig.getString("roiId");
+                        JSONObject rect      = roiConfig.getJSONObject("rect");
+                        String annotate = roiConfig.getString("annotationTags").split("_")[0];
+                        int totalRoi = roiLen.get(annotate);
+                        mPredictedDigits.put(roiId, "0");
+                        Mat alphaNumericROI        = mDetectShaded.getROIMat(tableMat, rect.getInt("top"), rect.getInt("left"), rect.getInt("bottom"), rect.getInt("right"));
+                        mRoiMatBase64.put(roiId,createBase64FromMat(alphaNumericROI));
+                        if(HWAlphaNumericClassifier.getInstance().isInitialized() == true) {
+                            Log.d(TAG, "Requesting prediction for: " + roiId);
+                            HWAlphaNumericClassifier.getInstance().classifyMat(alphaNumericROI, roiId, annotate, totalRoi);
+                        }
+                    }
 
                 }
 
@@ -905,14 +800,17 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
             JSONObject layoutObject = layoutConfigs.getJSONObject("layout");
             JSONArray cells = layoutObject.getJSONArray("cells");
 
-            for (int i = 0; i < cells.length(); i++) {
-                JSONObject cell = cells.getJSONObject(i);
-                boolean includeRois = (cell.has("page") && pageNumber != null && cell.getString("page").equals(pageNumber)) || (!cell.has("page"));
-                if (includeRois) {
-                    JSONArray cellROIs = cells.getJSONObject(i).getJSONArray("rois");
-                    for (int j = 0; j < cellROIs.length(); j++) {
-                        JSONObject roi = cellROIs.getJSONObject(j);
-                        rois.put(roi);
+                for (int i = 0; i < cells.length(); i++) {
+                    JSONObject cell = cells.getJSONObject(i);
+                    boolean includeRois = (cell.has("page") && pageNumber!=null && cell.getString("page").equals(pageNumber)) || (!cell.has("page"));
+                    if(includeRois) {
+                    JSONArray cellROIs      = cells.getJSONObject(i).getJSONArray("rois");
+                        for (int j = 0; j < cellROIs.length(); j++) {
+                            JSONObject roi      = cellROIs.getJSONObject(j);
+                            rois.put(roi);
+                        }
+                        String annotate = cellROIs.getJSONObject(0).getString("annotationTags").split("_")[0];
+                        roiLen.put(annotate, cellROIs.length());
                     }
                     String annotate = cellROIs.getJSONObject(1).getString("annotationTags").split("_")[0];
                     roiLen.put(annotate, cellROIs.length());
@@ -941,10 +839,16 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
         /**
          * return result to react-native
          */
-        ReactInstanceManager mReactInstanceManager = getReactNativeHost().getReactInstanceManager();
-        ReactContext reactContext = mReactInstanceManager.getCurrentReactContext();
-        Intent intent = new Intent(reactContext, SaralSDKOpenCVScannerActivity.class);
-        intent.putExtra("layoutConfigsResult", "");
+        ReactInstanceManager mReactInstanceManager  = getReactNativeHost().getReactInstanceManager();
+        ReactContext reactContext                   = mReactInstanceManager.getCurrentReactContext();
+        Intent intent                               = new Intent(reactContext, SaralSDKOpenCVScannerActivity.class);
+        if(response != null) {
+            Log.d(TAG, "Scanning completed !!, OMR count:");
+            intent.putExtra("layoutConfigsResult", response.toString());
+        } else {
+            Log.d(TAG, "Scanning completed null !!, OMR count:");
+            intent.putExtra("layoutConfigsResult", "");
+        }
         mReactInstanceManager.onActivityResult(this, 1, 2, intent);
         finish();
     }
@@ -967,6 +871,12 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                 if (threshold.has("verticalScanLayout") && threshold.getString("verticalScanLayout") != null) {
                     isVerticalScanLayout = threshold.getBoolean("verticalScanLayout");
                 }
+                if(threshold.has("verticalScanLayout") && threshold.getString("verticalScanLayout")!=null){
+                    isVerticalScanLayout=threshold.getBoolean("verticalScanLayout");
+                }
+                if(threshold.has("chunkSendData") && threshold.getString("chunkSendData")!=null){
+                    doesChunkSendData=threshold.getBoolean("chunkSendData");
+                }                
             }
             JSONArray cells = layoutObject.getJSONArray("cells");
             for (int i = 0; i < cells.length(); i++) {
@@ -1093,6 +1003,101 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                     }
                 }
             }
+            return layoutConfigs;
+
+        } catch (JSONException e) {
+            Log.e(TAG, "unable to create response LayoutConfigs object");
+            return null;
+        }
+    }
+
+    private JSONObject getScanResultByAnnotation(String annotate) {
+
+        try {
+            JSONObject layoutConfigs    = new JSONObject(mlayoutConfigs);
+            JSONObject layoutObject     = layoutConfigs.getJSONObject("layout");
+            JSONArray  cells            = layoutObject.getJSONArray("cells");
+            
+
+            for (int i = 0; i < cells.length(); i++) {
+                JSONArray cellROIs      = cells.getJSONObject(i).getJSONArray("rois");
+                JSONObject cell = cells.getJSONObject(i);
+                String anTag = cellROIs.getJSONObject(0).getString("annotationTags").split("_")[0];
+                boolean includeRois = (cell.has("page") && (anTag.equals(annotate)) && pageNumber!=null && cell.getString("page").equals(pageNumber)) || (!cell.has("page"));
+                if (includeRois) {
+                    JSONArray trainingDataSet = new JSONArray();
+                    int countOMRChoice =0;
+                    for (int j = 0; j < cellROIs.length(); j++) {
+                        JSONObject roi      = cellROIs.getJSONObject(j);
+                        String roiId = roi.getString("roiId");
+                        if (roi.getString("extractionMethod").equals("NUMERIC_CLASSIFICATION") || roi.getString("extractionMethod").equals("BLOCK_ALPHANUMERIC_CLASSIFICATION") || roi.getString("extractionMethod").equals("BLOCK_LETTER_CLASSIFICATION")) {
+                            JSONObject result  = new JSONObject(predictionResult.get(annotate).get(roiId));
+                            roi.put("result", result);
+                            if(mRoiMatBase64.get(roiId)!=null)
+                            {
+                                trainingDataSet.put(j,mRoiMatBase64.get(roiId));
+                            }    
+                        }
+
+                        if (roi.getString("extractionMethod").equals("CELL_OMR")) {
+                            JSONObject result  = new JSONObject();
+                            if(isMultiChoiceOMRLayout)
+                            {
+                                //Handling Multi Choice OMR Layout predictions
+                                String prediction =mPredictedOMRs.get(roiId);
+                                if(prediction!=null && prediction.equals("1")){
+                                    if (cell.has("omrOptions")) {
+                                    JSONArray omrOption = cells.getJSONObject(i).getJSONArray("omrOptions");
+                                        result.put("prediction", omrOption.getString(j));
+                                        result.put("confidence", new Double(1.00));
+                                        countOMRChoice++;
+                                        
+                                    } else {
+                                        result.put("prediction", String.valueOf(j));
+                                        result.put("confidence", new Double(1.00));
+                                        countOMRChoice++;
+                                    }
+                                }
+                                else if(cellROIs.length() == 1 && cell.has("omrOptions")){
+                                        JSONArray omrOption = cells.getJSONObject(i).getJSONArray("omrOptions");
+                                        result.put("prediction", omrOption.getString(1));
+                                        result.put("confidence", new Double(1.00));
+                                }
+                                else{
+                                    result.put("prediction", "");
+                                    result.put("confidence", new Double(0.0));
+                                }
+                            }else {
+                                result.put("prediction", mPredictedOMRs.get(roiId));
+                                result.put("confidence", new Double(1.00));
+                            }
+                            if(mRoiMatBase64.get(roiId)!=null)
+                            {
+                                trainingDataSet.put(j,mRoiMatBase64.get(roiId));
+                            }
+
+                            if(!roi.has("result")){
+                                roi.put("result", result);    
+                            }else{
+                                JSONObject resultObj = roi.getJSONObject("result");
+                                if(resultObj.getString("prediction") != null){
+                                    roi.put("result", result);    
+                                }
+                            }
+                        }
+                    
+                        if(isMultiChoiceOMRLayout && countOMRChoice > 1)
+                        {
+                            resetInvalidOMRChoice(cellROIs);
+                        }
+                        if(trainingDataSet.length() > 0)
+                        {
+                            cell.put("trainingDataSet",trainingDataSet);
+                            Log.d(TAG, "CellId:" + cell.getString("cellId")+" trainingDataSet :: "+trainingDataSet);
+                        }                
+                    }
+                }
+        }
             return layoutConfigs;
 
         } catch (JSONException e) {
