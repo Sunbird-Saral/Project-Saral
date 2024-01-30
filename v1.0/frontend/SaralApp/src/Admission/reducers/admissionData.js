@@ -9,6 +9,7 @@ import {
   SET_DATA_PAGE_2,
   HANDLE_CANCEL_PAGE_1,
   HANDLE_CANCEL_PAGE_2,
+  API_CALL_COMPLETE,
 } from '../constants';
 
 const initialState = {
@@ -17,6 +18,7 @@ const initialState = {
   pageNo: 0,
   noOfFormsSubmitted: 0,
   dataSubmitted: false,
+  apiCallComplete: false,
 };
 
 const admissionDataReducer = (state = initialState, action) => {
@@ -67,6 +69,12 @@ const admissionDataReducer = (state = initialState, action) => {
       return {
         ...state,
         formDataPage2: [],
+      };
+    }
+    case API_CALL_COMPLETE: {
+      return {
+        ...state,
+        apiCallComplete: action.apiCallComplete,
       };
     }
     default:

@@ -41,12 +41,13 @@ class EditAndSave extends Component {
   }
 
   componentDidUpdate(prevProps) {
+    if (this.props.apiCallComplete) {
+      this.props.navigation.navigate('Admissions');
+    }
     if (
       this.props.formDataPage1 != prevProps.formDataPage1 &&
       this.props.pageNo == 1
     ) {
-      console.log('......................setState Called', prevProps);
-
       this.setState({data: this.props.formDataPage1});
     }
     if (
@@ -95,7 +96,6 @@ class EditAndSave extends Component {
   }
 
   handleTextChange = (label, modifiedValue, index) => {
-    console.log('...', modifiedValue);
     let obj = this.state.data[index];
     obj.value = modifiedValue;
     let arr = this.state.data;
@@ -148,7 +148,7 @@ class EditAndSave extends Component {
         token,
         this.props,
       );
-      this.props.navigation.navigate('Admissions');
+      // this.props.navigation.navigate('Admissions');
     }
   };
 
@@ -164,7 +164,6 @@ class EditAndSave extends Component {
   };
 
   render() {
-    console.log(this.isFormFilled(), this.checkAllFieldsDisplayed());
     return (
       <SafeAreaView style={styles.container}>
         <ScrollView>
@@ -255,6 +254,7 @@ const mapStateToProps = state => {
     pageNo: state.admissionData.pageNo,
     loginData: state.loginData,
     dataSubmitted: state.dataSubmitted,
+    apiCallComplete: state.admissionData.apiCallComplete,
   };
 };
 

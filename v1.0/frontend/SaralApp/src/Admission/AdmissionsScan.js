@@ -36,10 +36,8 @@ export class Admissions extends PureComponent {
 
     DeviceEventEmitter.addListener('streamReady', eventData => {
       let roisData = JSON.parse(eventData);
-      console.log('dive event here>>>>>>>>>>>>', roisData);
       let cells = roisData.layout.cells;
 
-      console.log('...........', this.props.pageno);
       this.consolidatePrediction(cells, this.props.pageno);
     });
   }
@@ -205,14 +203,14 @@ export class Admissions extends PureComponent {
           }}
           label={'SCAN PAGE 2'}
         />
-        {this.checkIsValid(this.props.formDataPage1[0]?.value) && (
-          <Text>Admission Number: {this.props.formDataPage1[0].value}</Text>
+        {this.checkIsValid(this.props.formDataPage1[1]?.value) && (
+          <Text>Admission Number: {this.props.formDataPage1[1].value}</Text>
         )}
-        {this.checkIsValid(this.props.formDataPage1[3]?.value) &&
-          this.checkIsValid(this.props.formDataPage1[4]?.value) && (
+        {this.checkIsValid(this.props.formDataPage1[4]?.value) &&
+          this.checkIsValid(this.props.formDataPage1[5]?.value) && (
             <Text>
-              Name: {this.props.formDataPage1[3].value}{' '}
-              {this.props.formDataPage1[4].value}
+              Name: {this.props.formDataPage1[4].value}{' '}
+              {this.props.formDataPage1[5].value}
             </Text>
           )}
 

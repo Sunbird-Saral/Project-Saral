@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import Button from './commonComponents/Button';
 import AppTheme from '../utils/AppTheme';
 import {monospace_FF} from '../utils/CommonUtils';
-import {CLEAR_CACHE} from './constants';
+import {API_CALL_COMPLETE, CLEAR_CACHE} from './constants';
 import {getNoOFFormsSubmitted} from './actions/admissionAction';
 
 export class AdmissionLanding extends Component {
@@ -47,6 +47,7 @@ export class AdmissionLanding extends Component {
           onPress={() => {
             this.props.clearCache();
             this.props.navigation.navigate('AdmissionsScan');
+            this.props.apiCallComplete(false);
           }}
           buttonStyle={{
             backgroundColor: this.props.multiBrandingData.themeColor1
@@ -82,6 +83,8 @@ const mapDispatchToProps = dispatch => {
   return {
     clearCache: () => dispatch({type: CLEAR_CACHE}),
     noOFormsSubmitted: token => dispatch(getNoOFFormsSubmitted(token)),
+    apiCallComplete: () =>
+      dispatch({type: API_CALL_COMPLETE, apiCallComplete: false}),
   };
 };
 
