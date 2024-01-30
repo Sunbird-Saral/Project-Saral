@@ -18,7 +18,6 @@
     "schoolId": "09670702901",
     "encryptionSchemas": {
         "admissions": {
-         "admissionNumber": "ENCRYPTANDHASH",
          "studentAadharNumber": "ENCRYPTANDMASK",
          "studentFirstname": "ENCRYPT",
          "studentSurname": "ENCRYPT",

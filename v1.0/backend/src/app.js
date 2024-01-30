@@ -18,11 +18,11 @@ var cors = require('cors');
 const expressWinston = require('express-winston')
 const logger = require('./logging/logger')
 
-const spec = fs.readFileSync(`${__dirname}/swagger-saral-frontend.yaml`, 'utf-8');
-const spec2 = fs.readFileSync(`${__dirname}/swagger-saral-maintenance.yaml`, 'utf-8');
+// const spec = fs.readFileSync(`${__dirname}/swagger-saral-frontend.yaml`, 'utf-8');
+// const spec2 = fs.readFileSync(`${__dirname}/swagger-saral-maintenance.yaml`, 'utf-8');
 
-const frontendSpec = yaml.load(spec);
-const maintenanceSpec = yaml.load(spec2);
+// const frontendSpec = yaml.load(spec);
+// const maintenanceSpec = yaml.load(spec2);
 const app = express()
 app.disable("x-powered-by");
 
@@ -88,8 +88,8 @@ app.use(brandRouter)
 app.use(admissionRouter)
 app.use(roiv2Router)
 app.use(db.releaseClientPool)
-app.use("/api-docs/saral/frontend", swaggerUi.serve, (...args) => swaggerUi.setup(frontendSpec)(...args));
-app.use("/api-docs/saral/maintenance", swaggerUi.serve, (...args) => swaggerUi.setup(maintenanceSpec)(...args));
+// app.use("/api-docs/saral/frontend", swaggerUi.serve, (...args) => swaggerUi.setup(frontendSpec)(...args));
+// app.use("/api-docs/saral/maintenance", swaggerUi.serve, (...args) => swaggerUi.setup(maintenanceSpec)(...args));
 
 //error handling middleware
 app.use((err, req, res, next) => {

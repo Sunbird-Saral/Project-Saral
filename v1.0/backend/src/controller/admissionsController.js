@@ -13,7 +13,9 @@ exports.saveAdmissions = async (req, res, next) => {
         if (validationResult instanceof Error) {
             throw validationResult
         }
-        const encryptedData = await transformDataBasedOnEncryption(connection, studentAdmissionData._doc, 'admissions', req.school.schoolId)
+
+        //revert this added for testing
+        const encryptedData = studentAdmissionData._doc//await transformDataBasedOnEncryption(connection, studentAdmissionData._doc, 'admissions', req.school.schoolId)
         const filter = {
             schoolId: req.school.schoolId,
             admissionNumber: encryptedData.admissionNumber
@@ -39,31 +41,28 @@ exports.getAdmissions = async (req, res, next) => {
             userId: req.school.userId
         }
 
-        // no search document capability yet
-        // let pageSize = 10; pageNumber = 1;
-        // if(req.query) {
-        //     match = {...req.query, ...match}
-        //     if(req.query.pageSize) {
-        //         pageSize = req.query.pageSize
-        //         delete match.pageSize
-        //     }
-        //     if(req.query.pageNumber) {
-        //         pageNumber = req.query.pageNumber
-        //         delete match.pageNumber
-        //     }
-        // }
+        let pageSize = 10; pageNumber = 1;
+        if(req.query) {
+            match = {...req.query, ...match}
+            if(req.query.pageSize) {
+                pageSize = req.query.pageSize
+                delete match.pageSize
+            }
+            if(req.query.pageNumber) {
+                pageNumber = req.query.pageNumber
+                delete match.pageNumber
+            }
+        }
 
         const totalCount = await Admissions.countDocuments(match);
         
-        if(summary) {
-        // const savedScan = await Admissions.find(match, { _id: 0, __v: 0 })
-        //     .limit(parseInt(pageSize) * 1)
-        //     .skip((parseInt(parseInt(pageNumber)) - 1) * parseInt(parseInt(pageSize)))
-        //     res.status(200).json({ data: savedScan, pageSize, pageNumber, totalCount })
-        // } else {
-            res.status(200).json({totalScannedDocument: totalCount})
+        if(!summary) {
+        const savedScan = await Admissions.find(match, { _id: 0, __v: 0 })
+            .limit(parseInt(pageSize) * 1)
+            .skip((parseInt(parseInt(pageNumber)) - 1) * parseInt(parseInt(pageSize)))
+            res.status(200).json({ data: savedScan, pageSize, pageNumber, totalCount })
         } else {
-            res.status(400).json({"error": "Invalid operation, please set summary=true"})
+            res.status(200).json({totalScannedDocument: totalCount})
         }
     } catch (e) {
         res.status(400).json({ "error": true, e })
