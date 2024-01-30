@@ -7,8 +7,8 @@ import {
   HANDLE_CANCLE,
   SET_DATA_PAGE_1,
   SET_DATA_PAGE_2,
-  HANDLE_CANCLE_PAGE_1,
-  HANDLE_CANCLE_PAGE_2,
+  HANDLE_CANCEL_PAGE_1,
+  HANDLE_CANCEL_PAGE_2,
 } from '../constants';
 
 const initialState = {
@@ -24,12 +24,12 @@ const admissionDataReducer = (state = initialState, action) => {
     case SET_DATA_PAGE_1:
       return {
         ...state,
-        formDataPage1: action.data,
+        formDataPage1: [...action.data],
       };
     case SET_DATA_PAGE_2:
       return {
         ...state,
-        formDataPage2: action.data,
+        formDataPage2: [...action.data],
       };
     case GET_PAGE_NO:
       return {
@@ -57,13 +57,13 @@ const admissionDataReducer = (state = initialState, action) => {
         dataSubmitted: action.dataSubmitted,
       };
     }
-    case HANDLE_CANCLE_PAGE_1: {
+    case HANDLE_CANCEL_PAGE_1: {
       return {
         ...state,
         formDataPage1: [],
       };
     }
-    case HANDLE_CANCLE_PAGE_2: {
+    case HANDLE_CANCEL_PAGE_2: {
       return {
         ...state,
         formDataPage2: [],
