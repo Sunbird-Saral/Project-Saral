@@ -35,7 +35,8 @@
        "addressOnRationCard_block": "ENCRYPTANDHASH",
        "addressOnRationCard_district": "ENCRYPTANDHASH",
        "predictionInfo": {
-          "trainingData": "ENCRYPTARRAY"
+          "trainingData": "ENCRYPTARRAY",
+          "predictedValue": "ENCRYPT"
        }
       }
     },
@@ -255,7 +256,8 @@
        "addressOnRationCard_block": "ENCRYPTANDHASH",
        "addressOnRationCard_district": "ENCRYPTANDHASH",
        "predictionInfo": {
-          "trainingData": "ENCRYPTARRAY"
+          "trainingData": "ENCRYPTARRAY",
+          "predictedValue": "ENCRYPT"
        }
       }
     }

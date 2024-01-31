@@ -16,11 +16,49 @@ exports.saveAdmissions = async (req, res, next) => {
 
         //revert this added for testing
         const encryptedData = studentAdmissionData._doc//await transformDataBasedOnEncryption(connection, studentAdmissionData._doc, 'admissions', req.school.schoolId)
+        const update = {
+            "admissionNumber": encryptedData.admissionNumber,
+            "dateOfAdmission": encryptedData.dateOfAdmission,
+            "studentAadharNumber": encryptedData.studentAadharNumber,
+            "studentFirstname": encryptedData.studentFirstname,
+            "studentSurname": encryptedData.studentSurname,
+            "studentDateOfBirth": encryptedData.studentDateOfBirth,
+            "studentGender": encryptedData.studentGender,
+            "studentAddress": encryptedData.studentAddress,
+            "studentBlock": encryptedData.studentBlock,
+            "studentDistrict": encryptedData.studentDistrict,
+            "guardianFirstname": encryptedData.guardianFirstname,
+            "guardianSurname": encryptedData.guardianSurname,
+            "guardianRelation": encryptedData.guardianRelation,
+            "fatherName": encryptedData.fatherName,
+            "fatherEducation": encryptedData.fatherEducation,
+            "fatherOccupation": encryptedData.fatherOccupation,
+            "fatherContactDetails_phone1": encryptedData.fatherContactDetails_phone1,
+            "fatherContactDetails_phone2": encryptedData.fatherContactDetails_phone2,
+            "motherName": encryptedData.motherName,
+            "motherEducation": encryptedData.motherEducation,
+            "motherOccupation": encryptedData.motherOccupation,
+            "motherContactDetails_phone1": encryptedData.motherContactDetails_phone1,
+            "motherContactDetails_phone2": encryptedData.motherContactDetails_phone2,
+            "rollNumber": encryptedData.rollNumber,
+            "religion": encryptedData.religion,
+            "category": encryptedData.category,
+            "typeOfRationCard": encryptedData.typeOfRationCard,
+            "CwSN": encryptedData.CwSN,
+            "addressOnRationCard_address": encryptedData.addressOnRationCard_address,
+            "addressOnRationCard_ward": encryptedData.addressOnRationCard_ward,
+            "addressOnRationCard_block": encryptedData.addressOnRationCard_block,
+            "addressOnRationCard_district": encryptedData.addressOnRationCard_district,
+            "outOfSchool": encryptedData.outOfSchool,
+            "predictionInfo": encryptedData.predictionInfo,
+            "userId": req.school.userId,
+            "schoolId": req.school.schoolId
+         }
         const filter = {
             schoolId: req.school.schoolId,
             admissionNumber: encryptedData.admissionNumber
         }
-        await Admissions.updateOne(filter, encryptedData, {upsert:true, runValidators: true})
+        await Admissions.replaceOne(filter, update, {upsert:true, runValidators: true})
         res.status(200).json({ message: "Saved Successfully."})
     } catch (err) {
         res.status(400).send(err)
