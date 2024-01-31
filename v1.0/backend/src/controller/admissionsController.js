@@ -43,23 +43,20 @@ exports.getAdmissions = async (req, res, next) => {
 
         let pageSize = 100; pageNumber = 1;
         if(req.query) {
-            match = {...req.query, ...match}
             if(req.query.pageSize) {
                 pageSize = req.query.pageSize
                 if(pageSize > 100) {
                     throw new Error("pageSize should be between 1-100")
                 }
-                delete match.pageSize
             }
             if(req.query.pageNumber) {
                 pageNumber = req.query.pageNumber
-                delete match.pageNumber
             }
         }
 
         const totalCount = await Admissions.countDocuments(match);
         
-        if(!summary) {
+        if(!summary || summary == 'false') {
         const savedScan = await Admissions.find(match, { _id: 0, __v: 0 })
             .limit(parseInt(pageSize) * 1)
             .skip((parseInt(parseInt(pageNumber)) - 1) * parseInt(parseInt(pageSize)))
