@@ -41,11 +41,14 @@ exports.getAdmissions = async (req, res, next) => {
             userId: req.school.userId
         }
 
-        let pageSize = 10; pageNumber = 1;
+        let pageSize = 100; pageNumber = 1;
         if(req.query) {
             match = {...req.query, ...match}
             if(req.query.pageSize) {
                 pageSize = req.query.pageSize
+                if(pageSize > 100) {
+                    throw new Error("pageSize should be between 1-100")
+                }
                 delete match.pageSize
             }
             if(req.query.pageNumber) {
@@ -65,7 +68,7 @@ exports.getAdmissions = async (req, res, next) => {
             res.status(200).json({totalScannedDocument: totalCount})
         }
     } catch (e) {
-        res.status(400).json({ "error": true, e })
+        res.status(400).json({ "error": e.message ? e.message: e })
     } finally {
         next()
     }
