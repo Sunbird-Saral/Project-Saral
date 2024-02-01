@@ -39,7 +39,7 @@ describe('should encrypt data object based on set encryption type in branding', 
         encryptionUtil.hashWithSalt = jest.fn().mockReturnValue('hashedData')
         encryptionUtil.maskData = jest.fn().mockReturnValue('maskedData')
         const processedData = await Helper.transformDataBasedOnEncryption(req.dbConnection, mockAdmissionsBody, 'admissions', 'u002');
-        expect(processedData.admissionNumber).toEqual('hashedData')
+        expect(processedData.rollNumber).toEqual('hashedData')
         expect(processedData.studentAadharNumber).toEqual('maskedData')
         expect(processedData.studentFirstname).toEqual('encryptedData')
     });
@@ -69,7 +69,7 @@ describe('should encrypt data object based on set encryption type in branding', 
         encryptionUtil.hashWithSalt = jest.fn().mockReturnValue('hashedData')
         encryptionUtil.maskData = jest.fn().mockReturnValue('maskedData')
         const processedData = await Helper.transformDataBasedOnEncryption(req.dbConnection, mockAdmissionsBody, 'admissions', 'u002');
-        expect(processedData.admissionNumber).toEqual('hashedData')
+        expect(processedData.rollNumber).toEqual('hashedData')
         expect(processedData.studentAadharNumber).toEqual('maskedData')
         expect(processedData.studentFirstname).toEqual('encryptedData')
     });
