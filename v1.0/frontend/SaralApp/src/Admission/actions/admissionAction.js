@@ -2,11 +2,7 @@ import axios from 'axios';
 import {Alert} from 'react-native';
 
 import BASE_URL from '../../configs/config';
-import {
-  API_CALL_COMPLETE,
-  FORMS_SUBMITTED,
-  SET_DATA_SUCCESS,
-} from '../constants';
+import {API_CALL_COMPLETE, FORMS_SUBMITTED} from '../constants';
 
 export const setAdmissionData = (formData, token, navigation) => {
   let reformatedObj = {};
@@ -29,10 +25,7 @@ export const setAdmissionData = (formData, token, navigation) => {
       .then(response => {
         if (response.status == 200) {
           dispatch(getNoOFFormsSubmitted(token));
-          dispatch({
-            type: SET_DATA_SUCCESS,
-            dataSubmitted: true,
-          });
+
           dispatch({
             type: API_CALL_COMPLETE,
             apiCallComplete: true,

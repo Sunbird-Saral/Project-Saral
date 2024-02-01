@@ -35,9 +35,14 @@ class EditAndSave extends Component {
     this.state = {
       data:
         this.props.pageNo == 1
-          ? [...this.props.formDataPage1]
-          : [...this.props.formDataPage2],
+          ? this.props.formDataPage1
+          : this.props.formDataPage2,
     };
+    console.log(
+      '??????????????????????????',
+      this.props.pageNo,
+      this.props.formDataPage1,
+    );
   }
 
   componentDidUpdate(prevProps) {
@@ -63,16 +68,11 @@ class EditAndSave extends Component {
   }
 
   componentDidMount() {
-    this.setState({
-      data:
-        this.props.pageNo == 1
-          ? [...this.props.formDataPage1]
-          : [...this.props.formDataPage2],
-    });
     BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
   }
 
   componentWillUnmount() {
+    // this.setState({data: []});
     BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
   }
 
@@ -153,7 +153,7 @@ class EditAndSave extends Component {
   };
 
   onPressCancle = () => {
-    if (this.props.pageNo == 1) {
+    if (this.props.pageNo == 1 || this.props.pageNo == 0) {
       this.props.handleCanclePage1();
     } else {
       this.props.handleCanclePage2();

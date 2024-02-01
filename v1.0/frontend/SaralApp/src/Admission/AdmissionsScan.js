@@ -37,12 +37,26 @@ export class Admissions extends PureComponent {
     DeviceEventEmitter.addListener('streamReady', eventData => {
       let roisData = JSON.parse(eventData);
       let cells = roisData.layout.cells;
-
+      console.log('Event listner>>>>>>>>>>>>', roisData);
       this.consolidatePrediction(cells, this.props.pageno);
     });
   }
 
+  componentDidUpdate() {
+    console.log(
+      '+++++++++++++++++++++++',
+      this.props.formDataPage1,
+      this.state.predictionArray,
+    );
+
+    if (this.props.formDataPage1 != this.state.predictionArray) {
+      this.setState({predictionArray: this.props.formDataPage1});
+    }
+  }
+
   componentWillUnmount() {
+    this.setState({predictionArray: []});
+
     DeviceEventEmitter.removeAllListeners();
   }
 
@@ -80,7 +94,7 @@ export class Admissions extends PureComponent {
   };
 
   consolidatePrediction = (cells, pageNo) => {
-    var marks = '';
+    var marks = ' ';
     let labels = [
       'Admission Number',
       'Date of Admission',
@@ -119,13 +133,14 @@ export class Admissions extends PureComponent {
     for (let i = 0; i < cells.length; i++) {
       marks = '';
       let prediction = {};
+      let isResultPresent = false;
       for (let j = 0; j < cells[i].rois.length; j++) {
         if (cells[i].rois[j].hasOwnProperty('result')) {
+          isResultPresent = true;
           marks = marks + cells[i].rois[j].result.prediction;
         }
       }
-
-      if (pageNo.toString() == cells[i].page && marks) {
+      if (pageNo.toString() == cells[i].page && isResultPresent) {
         prediction = {
           key: cells[i].format.name,
           value: marks.trim(),
@@ -144,6 +159,11 @@ export class Admissions extends PureComponent {
 
       this.props.pageNo(pageNo);
       this.props.navigation.navigate('EditAndSave');
+
+      // if (pageNo == 1 && this.state.predictionArray.length == 15)
+      //   this.setState({predictionArray: []});
+      // if (pageNo == 2 && this.state.predictionArray.length == 18)
+      //   this.setState({predictionArray: []});
     }
   };
 
