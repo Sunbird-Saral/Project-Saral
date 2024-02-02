@@ -181,6 +181,12 @@ const commonHelperFunctions = {
                             case "ENCRYPT":
                                 encryptedData[key] = encryptionUtil.encrypt(data[key]);
                                 break;
+                            case "HASH":
+                                encryptedData[key] = encryptionUtil.hashWithSalt(data[key]);
+                                break;
+                            case "MASK":
+                                encryptedData[key] = encryptionUtil.maskData(data[key]);
+                                break;        
                             case "ENCRYPTANDHASH":
                                 let enVal = encryptionUtil.encrypt(data[key]);
                                 encryptedData[key] = encryptionUtil.hashWithSalt(enVal);

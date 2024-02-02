@@ -18,7 +18,7 @@
     "schoolId": "09670702901",
     "encryptionSchemas": {
         "admissions": {
-         "studentAadharNumber": "ENCRYPTANDMASK",
+         "studentAadharNumber": "MASK",
          "studentFirstname": "ENCRYPT",
          "studentSurname": "ENCRYPT",
          "studentDateOfBirth": "ENCRYPT",
@@ -33,7 +33,7 @@
          "motherName": "ENCRYPT",
          "motherContactDetails_phone1": "ENCRYPTANDMASK",
          "motherContactDetails_phone2": "ENCRYPTANDMASK",
-         "rollNumber": "ENCRYPTANDHASH",
+         "rollNumber": "HASH",
          "addressOnRationCard_address": "ENCRYPTANDHASH",
          "addressOnRationCard_ward": "ENCRYPTANDHASH",
          "addressOnRationCard_block": "ENCRYPTANDHASH",
