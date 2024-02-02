@@ -46,17 +46,20 @@ export class Admissions extends PureComponent {
     console.log(
       '+++++++++++++++++++++++',
       this.props.formDataPage1,
+      this.props.formDataPage2,
       this.state.predictionArray,
     );
-
-    if (this.props.formDataPage1 != this.state.predictionArray) {
+    console.log(this.props.formDataPage1.length == 0 && this.props.pageno == 1);
+    if (this.props.formDataPage1.length == 0) {
       this.setState({predictionArray: this.props.formDataPage1});
+    }
+    if (this.props.formDataPage2.length == 0 && this.props.pageno == 2) {
+      this.setState({predictionArray: this.props.formDataPage2});
     }
   }
 
   componentWillUnmount() {
     this.setState({predictionArray: []});
-
     DeviceEventEmitter.removeAllListeners();
   }
 

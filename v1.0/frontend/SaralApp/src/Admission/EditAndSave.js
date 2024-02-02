@@ -88,7 +88,7 @@ class EditAndSave extends Component {
   checkAllFieldsDisplayed() {
     if (
       (this.state.data.length != 15 && this.props.pageNo == 1) ||
-      (this.state.data.length != 33 && this.props.pageNo == 2)
+      (this.state.data.length != 18 && this.props.pageNo == 2)
     ) {
       return true;
     }
@@ -154,6 +154,7 @@ class EditAndSave extends Component {
 
   onPressCancle = () => {
     if (this.props.pageNo == 1 || this.props.pageNo == 0) {
+      console.log('cancle called');
       this.props.handleCanclePage1();
     } else {
       this.props.handleCanclePage2();
