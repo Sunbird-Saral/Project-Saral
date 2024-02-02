@@ -141,11 +141,27 @@ export class Admissions extends PureComponent {
         }
       }
       if (pageNo.toString() == cells[i].page && isResultPresent) {
-        prediction = {
-          key: cells[i].format.name,
-          value: marks.trim(),
-          label: labels[i],
-        };
+        if (
+          cells[i].format.name == 'dateOfAdmission' ||
+          cells[i].format.name == 'studentDateOfBirth'
+        ) {
+          prediction = {
+            key: cells[i].format.name,
+            value: marks
+              .substring(0, 2)
+              .concat('/')
+              .concat(
+                marks.substring(2, 4).concat('/').concat(marks.substring(4)),
+              ),
+            label: labels[i],
+          };
+        } else {
+          prediction = {
+            key: cells[i].format.name,
+            value: marks.trim(),
+            label: labels[i],
+          };
+        }
 
         this.state.predictionArray.push(prediction);
       }
