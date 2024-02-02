@@ -37,19 +37,11 @@ export class Admissions extends PureComponent {
     DeviceEventEmitter.addListener('streamReady', eventData => {
       let roisData = JSON.parse(eventData);
       let cells = roisData.layout.cells;
-      console.log('Event listner>>>>>>>>>>>>', roisData);
       this.consolidatePrediction(cells, this.props.pageno);
     });
   }
 
   componentDidUpdate() {
-    console.log(
-      '+++++++++++++++++++++++',
-      this.props.formDataPage1,
-      this.props.formDataPage2,
-      this.state.predictionArray,
-    );
-    console.log(this.props.formDataPage1.length == 0 && this.props.pageno == 1);
     if (this.props.formDataPage1.length == 0) {
       this.setState({predictionArray: this.props.formDataPage1});
     }
@@ -178,11 +170,6 @@ export class Admissions extends PureComponent {
 
       this.props.pageNo(pageNo);
       this.props.navigation.navigate('EditAndSave');
-
-      // if (pageNo == 1 && this.state.predictionArray.length == 15)
-      //   this.setState({predictionArray: []});
-      // if (pageNo == 2 && this.state.predictionArray.length == 18)
-      //   this.setState({predictionArray: []});
     }
   };
 

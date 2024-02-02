@@ -26,10 +26,6 @@ export const setAdmissionData = (formData, token, navigation) => {
         if (response.status == 200) {
           dispatch(getNoOFFormsSubmitted(token));
 
-          dispatch({
-            type: API_CALL_COMPLETE,
-            apiCallComplete: true,
-          });
           Alert.alert('Data submitted successfully', '', [
             {
               text: 'Okay',
@@ -67,6 +63,10 @@ export const getNoOFFormsSubmitted = token => {
     axios
       .get(`${BASE_URL.BASE_URL}/admissions?summary=true`, config)
       .then(res => {
+        dispatch({
+          type: API_CALL_COMPLETE,
+          apiCallComplete: true,
+        });
         dispatch({
           type: FORMS_SUBMITTED,
           noOfFormsSubmitted: res.data.totalScannedDocument,
