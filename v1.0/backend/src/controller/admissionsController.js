@@ -14,7 +14,6 @@ exports.saveAdmissions = async (req, res, next) => {
             throw validationResult
         }
 
-        //revert this added for testing
         const encryptedData = await transformDataBasedOnEncryption(connection, studentAdmissionData._doc, 'admissions', req.school.schoolId)
         const update = {
             "admissionNumber": encryptedData.admissionNumber,
