@@ -38,11 +38,6 @@ class EditAndSave extends Component {
           ? this.props.formDataPage1
           : this.props.formDataPage2,
     };
-    console.log(
-      '??????????????????????????',
-      this.props.pageNo,
-      this.props.formDataPage1,
-    );
   }
 
   componentDidUpdate(prevProps) {
@@ -154,7 +149,6 @@ class EditAndSave extends Component {
 
   onPressCancle = () => {
     if (this.props.pageNo == 1 || this.props.pageNo == 0) {
-      console.log('cancle called');
       this.props.handleCanclePage1();
     } else {
       this.props.handleCanclePage2();
