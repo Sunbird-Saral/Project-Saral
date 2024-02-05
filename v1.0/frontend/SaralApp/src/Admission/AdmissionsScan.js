@@ -4,6 +4,10 @@ import {
   Platform,
   PermissionsAndroid,
   Text,
+  DeviceEventEmitter,
+  FlatList,
+  ListItem,
+  TextInput,
 } from 'react-native';
 import React, {Component} from 'react';
 import axios from 'axios';
@@ -13,14 +17,11 @@ import Button from './commonComponents/Button';
 import SaralSDK from '../../SaralSDK';
 import {roi} from './roi';
 import AppTheme from '../utils/AppTheme';
-import {
-  GET_PAGE_NO,
-  SET_DATA,
-  SET_DATA_PAGE_1,
-  SET_DATA_PAGE_2,
-} from './constants';
+import {GET_PAGE_NO, SET_DATA_PAGE_1, SET_DATA_PAGE_2} from './constants';
+import {monospace_FF} from '../utils/CommonUtils';
+import {PureComponent} from 'react';
 
-export class Admissions extends Component {
+export class Admissions extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -30,10 +31,33 @@ export class Admissions extends Component {
       disablePage2: true,
       disableShowData: true,
       predictionArray: [],
+      localPageNo: 0,
     };
+
+    DeviceEventEmitter.addListener('streamReady', eventData => {
+      let roisData = JSON.parse(eventData);
+      let cells = roisData.layout.cells;
+      this.consolidatePrediction(cells, this.props.pageno);
+    });
+  }
+
+  componentDidUpdate() {
+    if (this.props.formDataPage1.length == 0) {
+      this.setState({predictionArray: this.props.formDataPage1});
+    }
+    if (this.props.formDataPage2.length == 0 && this.props.pageno == 2) {
+      this.setState({predictionArray: this.props.formDataPage2});
+    }
+  }
+
+  componentWillUnmount() {
+    this.setState({predictionArray: []});
+    DeviceEventEmitter.removeAllListeners();
   }
 
   onScan = async pageNo => {
+    //set page number
+    this.props.pageNo(pageNo);
     if (Platform.OS !== 'ios') {
       const grantedCamera = await PermissionsAndroid.check(
         PermissionsAndroid.PERMISSIONS.CAMERA,
@@ -58,18 +82,14 @@ export class Admissions extends Component {
 
   onOpenCameraActivity = pageNo => {
     SaralSDK.startCamera(JSON.stringify(roi), pageNo.toString(), 0, true)
-      .then(res => {
-        let roisData = JSON.parse(res);
-        let cells = roisData.layout.cells;
-        this.consolidatePrediction(cells, roisData, pageNo);
-      })
+      .then(res => {})
       .catch((code, message) => {
         console.log('code', code, message);
       });
   };
 
-  consolidatePrediction = (cells, roisData, pageNo) => {
-    var marks = '';
+  consolidatePrediction = (cells, pageNo) => {
+    var marks = ' ';
     let labels = [
       'Admission Number',
       'Date of Admission',
@@ -108,14 +128,18 @@ export class Admissions extends Component {
     for (let i = 0; i < cells.length; i++) {
       marks = '';
       let prediction = {};
+      let isResultPresent = false;
       for (let j = 0; j < cells[i].rois.length; j++) {
         if (cells[i].rois[j].hasOwnProperty('result')) {
+          isResultPresent = true;
           marks = marks + cells[i].rois[j].result.prediction;
         }
       }
-
-      if (pageNo.toString() == cells[i].page) {
-        if ((i == 1 || i == 5) && pageNo == 1 && marks != '' && marks) {
+      if (pageNo.toString() == cells[i].page && isResultPresent) {
+        if (
+          cells[i].format.name == 'dateOfAdmission' ||
+          cells[i].format.name == 'studentDateOfBirth'
+        ) {
           prediction = {
             key: cells[i].format.name,
             value: marks
@@ -136,13 +160,17 @@ export class Admissions extends Component {
 
         this.state.predictionArray.push(prediction);
       }
-    }
+      // }
 
-    if (pageNo == 1) this.props.setDataPage1(this.state.predictionArray);
-    else this.props.setDataPage2(this.state.predictionArray);
-    this.state.predictionArray = [];
-    this.props.pageNo(pageNo);
-    this.props.navigation.navigate('EditAndSave');
+      if (pageNo == 1) {
+        this.props.setDataPage1(this.state.predictionArray);
+      } else {
+        this.props.setDataPage2(this.state.predictionArray);
+      }
+
+      this.props.pageNo(pageNo);
+      this.props.navigation.navigate('EditAndSave');
+    }
   };
 
   checkIsValid(element) {
@@ -150,6 +178,26 @@ export class Admissions extends Component {
       return true;
     return false;
   }
+
+  renderItem = ({item}) => (
+    <View style={style.container}>
+      <Text>{item.label}</Text>
+      <TextInput
+        style={{
+          fontFamily: monospace_FF,
+          fontWeight: 'bold',
+          height: 50,
+          margin: 12,
+          borderWidth: 1,
+          padding: 10,
+          color: 'black',
+          fontSize: 18,
+          alignItems: 'center',
+        }}
+        value={item.value}
+      />
+    </View>
+  );
 
   render() {
     return (
@@ -161,7 +209,10 @@ export class Admissions extends Component {
               : AppTheme.BLUE,
           }}
           disabled={this.props.pageno == 1 ? true : false}
-          onPress={() => this.onScan(1)}
+          onPress={() => {
+            this.onScan(1);
+            this.setState({localPageNo: 1});
+          }}
           label={'SCAN PAGE 1'}
         />
         <Button
@@ -172,17 +223,20 @@ export class Admissions extends Component {
             marginTop: 10,
           }}
           disabled={this.props.pageno == 0 ? true : false}
-          onPress={() => this.onScan(2)}
+          onPress={() => {
+            this.onScan(2);
+            this.setState({localPageNo: 2});
+          }}
           label={'SCAN PAGE 2'}
         />
-        {this.checkIsValid(this.props.formDataPage1[0]?.value) && (
-          <Text>Admission Number: {this.props.formDataPage1[0].value}</Text>
+        {this.checkIsValid(this.props.formDataPage1[1]?.value) && (
+          <Text>Admission Number: {this.props.formDataPage1[1].value}</Text>
         )}
-        {this.checkIsValid(this.props.formDataPage1[3]?.value) &&
-          this.checkIsValid(this.props.formDataPage1[4]?.value) && (
+        {this.checkIsValid(this.props.formDataPage1[4]?.value) &&
+          this.checkIsValid(this.props.formDataPage1[5]?.value) && (
             <Text>
-              Name: {this.props.formDataPage1[3].value}{' '}
-              {this.props.formDataPage1[4].value}
+              Name: {this.props.formDataPage1[4].value}{' '}
+              {this.props.formDataPage1[5].value}
             </Text>
           )}
 

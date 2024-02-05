@@ -3,26 +3,21 @@ import {
   StyleSheet,
   View,
   SafeAreaView,
-  FlatList,
   TextInput,
   Alert,
   BackHandler,
-  KeyboardAvoidingView,
-  Keyboard,
+  ScrollView,
 } from 'react-native';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import axios from 'axios';
 
 import AppTheme from '../utils/AppTheme';
 import {monospace_FF} from '../utils/CommonUtils';
 import Button from './commonComponents/Button';
 import {
   GET_PAGE_NO,
-  HANDLE_CANCLE,
   HANDLE_CANCLE_PAGE_1,
   HANDLE_CANCLE_PAGE_2,
-  SET_DATA,
   SET_DATA_PAGE_1,
   SET_DATA_PAGE_2,
 } from './constants';
@@ -31,6 +26,8 @@ import {
   setAdmissionData,
 } from './actions/admissionAction';
 
+import FormItem from './commonComponents/FormItem';
+
 class EditAndSave extends Component {
   constructor(props) {
     super(props);
@@ -38,9 +35,27 @@ class EditAndSave extends Component {
     this.state = {
       data:
         this.props.pageNo == 1
-          ? [...this.props.formDataPage1]
-          : [...this.props.formDataPage2],
+          ? this.props.formDataPage1
+          : this.props.formDataPage2,
     };
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.apiCallComplete) {
+      this.props.navigation.navigate('Admissions');
+    }
+    if (
+      this.props.formDataPage1 != prevProps.formDataPage1 &&
+      this.props.pageNo == 1
+    ) {
+      this.setState({data: this.props.formDataPage1});
+    }
+    if (
+      this.props.formDataPage2 != prevProps.formDataPage2 &&
+      this.props.pageNo == 2
+    ) {
+      this.setState({data: this.props.formDataPage2});
+    }
   }
 
   handleBackButton() {
@@ -52,6 +67,7 @@ class EditAndSave extends Component {
   }
 
   componentWillUnmount() {
+    // this.setState({data: []});
     BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
   }
 
@@ -60,6 +76,16 @@ class EditAndSave extends Component {
       if (!this.state.data[i].value) {
         return true;
       }
+    }
+    return false;
+  }
+
+  checkAllFieldsDisplayed() {
+    if (
+      (this.state.data.length != 15 && this.props.pageNo == 1) ||
+      (this.state.data.length != 18 && this.props.pageNo == 2)
+    ) {
+      return true;
     }
     return false;
   }
@@ -117,37 +143,43 @@ class EditAndSave extends Component {
         token,
         this.props,
       );
-      this.props.navigation.navigate('Admissions');
+      // this.props.navigation.navigate('Admissions');
     }
+  };
+
+  onPressCancle = () => {
+    if (this.props.pageNo == 1 || this.props.pageNo == 0) {
+      this.props.handleCanclePage1();
+    } else {
+      this.props.handleCanclePage2();
+    }
+    this.state.data = [];
+    this.props.pageNoFunction(this.props.pageNo - 1);
+    this.props.navigation.goBack();
   };
 
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <FlatList
-          data={this.state.data}
-          renderItem={({item, index}) => {
-            return this.renderItem(item, index);
-          }}
-          keyExtractor={item => item.id}
-          ListFooterComponent={<View />}
-          ListFooterComponentStyle={{
-            marginBottom: 100,
-            backgroundColor: 'red',
-          }}
-          removeClippedSubviews={false}
-          onScrollBeginDrag={Keyboard.dismiss}
-        />
+        <ScrollView>
+          {this.state.data.map((item, index) => {
+            return (
+              <FormItem
+                item={item}
+                handleTextChange={(label, newValue) =>
+                  this.handleTextChange(label, newValue, index)
+                }
+              />
+            );
+          })}
+        </ScrollView>
 
         <View
           style={{
-            position: 'absolute',
-            top: '78%',
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'center',
             alignSelf: 'center',
-            marginTop: 115,
             marginBottom: 15,
           }}>
           <Button
@@ -156,12 +188,13 @@ class EditAndSave extends Component {
               backgroundColor: this.props.multiBrandingData.themeColor1
                 ? this.props.multiBrandingData.themeColor1
                 : AppTheme.BLUE,
-              opacity: this.isFormFilled() ? 0.7 : 1,
+              opacity:
+                this.isFormFilled() || this.checkAllFieldsDisplayed() ? 0.7 : 1,
             }}
             onPress={() => {
-              if (this.isFormFilled()) {
+              if (this.isFormFilled() || this.checkAllFieldsDisplayed()) {
                 Alert.alert(
-                  'All fields mandatory!',
+                  'Wait Till all the fields are loaded.All fields mandatory!',
                   'Please enter NA if not applicable.',
                 );
               } else this.onPressConfirm();
@@ -169,12 +202,15 @@ class EditAndSave extends Component {
             label={'CONFIRM'}
           />
           <Button
-            buttonStyle={{width: 150, backgroundColor: AppTheme.ERROR_RED}}
+            buttonStyle={{
+              width: 150,
+              backgroundColor: AppTheme.ERROR_RED,
+              opacity: this.checkAllFieldsDisplayed() ? 0.5 : 1,
+            }}
             onPress={() => {
-              if (this.props.pageNo == 1) this.props.handleCanclePage1();
-              else this.props.handleCanclePage2();
-              this.props.pageNoFunction(this.props.pageNo - 1);
-              this.props.navigation.goBack();
+              if (this.checkAllFieldsDisplayed()) {
+                Alert.alert('Wait Till all the fields are loaded');
+              } else this.onPressCancle();
             }}
             label={'CANCEL'}
           />
@@ -213,6 +249,7 @@ const mapStateToProps = state => {
     pageNo: state.admissionData.pageNo,
     loginData: state.loginData,
     dataSubmitted: state.dataSubmitted,
+    apiCallComplete: state.admissionData.apiCallComplete,
   };
 };
 

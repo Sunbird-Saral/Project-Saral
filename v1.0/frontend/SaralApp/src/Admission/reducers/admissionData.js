@@ -2,21 +2,21 @@ import {
   CLEAR_CACHE,
   FORMS_SUBMITTED,
   GET_PAGE_NO,
-  SET_DATA,
-  SET_DATA_SUCCESS,
-  HANDLE_CANCLE,
   SET_DATA_PAGE_1,
   SET_DATA_PAGE_2,
-  HANDLE_CANCLE_PAGE_1,
+  API_CALL_COMPLETE,
   HANDLE_CANCLE_PAGE_2,
+  HANDLE_CANCLE_PAGE_1,
 } from '../constants';
 
 const initialState = {
+  admissionROI: {},
   formDataPage1: [],
   formDataPage2: [],
   pageNo: 0,
   noOfFormsSubmitted: 0,
   dataSubmitted: false,
+  apiCallComplete: false,
 };
 
 const admissionDataReducer = (state = initialState, action) => {
@@ -24,12 +24,12 @@ const admissionDataReducer = (state = initialState, action) => {
     case SET_DATA_PAGE_1:
       return {
         ...state,
-        formDataPage1: action.data,
+        formDataPage1: [...action.data],
       };
     case SET_DATA_PAGE_2:
       return {
         ...state,
-        formDataPage2: action.data,
+        formDataPage2: [...action.data],
       };
     case GET_PAGE_NO:
       return {
@@ -51,12 +51,6 @@ const admissionDataReducer = (state = initialState, action) => {
         noOfFormsSubmitted: action.noOfFormsSubmitted,
       };
     }
-    case SET_DATA_SUCCESS: {
-      return {
-        ...state,
-        dataSubmitted: action.dataSubmitted,
-      };
-    }
     case HANDLE_CANCLE_PAGE_1: {
       return {
         ...state,
@@ -67,6 +61,12 @@ const admissionDataReducer = (state = initialState, action) => {
       return {
         ...state,
         formDataPage2: [],
+      };
+    }
+    case API_CALL_COMPLETE: {
+      return {
+        ...state,
+        apiCallComplete: action.apiCallComplete,
       };
     }
     default:

@@ -2,11 +2,10 @@ import axios from 'axios';
 import {Alert} from 'react-native';
 
 import BASE_URL from '../../configs/config';
-import {FORMS_SUBMITTED, SET_DATA_SUCCESS} from '../constants';
+import {API_CALL_COMPLETE, FORMS_SUBMITTED} from '../constants';
 
 export const setAdmissionData = (formData, token, navigation) => {
   let reformatedObj = {};
-
   for (let i = 0; i < formData.length; i++) {
     reformatedObj = {...reformatedObj, [formData[i].key]: formData[i].value};
   }
@@ -24,29 +23,26 @@ export const setAdmissionData = (formData, token, navigation) => {
   return dispatch => {
     fetch(`${BASE_URL.BASE_URL}/admissions`, headers)
       .then(response => {
-        if(response.status == 200) {
+        if (response.status == 200) {
+          dispatch(getNoOFFormsSubmitted(token));
+
           Alert.alert('Data submitted successfully', '', [
             {
               text: 'Okay',
-              onPress: () => {
-                dispatch(getNoOFFormsSubmitted(token));
-                dispatch({
-                  type: SET_DATA_SUCCESS,
-                  dataSubmitted: true,
-                });
-              },
-              style: 'default',
             },
           ]);
         } else {
-          Alert.alert('Server error: Something went wrong , contact Admin', '', [
-            {
-              text: 'Okay',
-              onPress: () => {
+          Alert.alert(
+            'Server error: Something went wrong , contact Admin',
+            '',
+            [
+              {
+                text: 'Okay',
+                onPress: () => {},
+                style: 'default',
               },
-              style: 'default',
-            },
-          ]);
+            ],
+          );
         }
       })
       .catch(error => {
@@ -67,6 +63,10 @@ export const getNoOFFormsSubmitted = token => {
     axios
       .get(`${BASE_URL.BASE_URL}/admissions?summary=true`, config)
       .then(res => {
+        dispatch({
+          type: API_CALL_COMPLETE,
+          apiCallComplete: true,
+        });
         dispatch({
           type: FORMS_SUBMITTED,
           noOfFormsSubmitted: res.data.totalScannedDocument,
