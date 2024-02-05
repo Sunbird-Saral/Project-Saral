@@ -12,7 +12,8 @@
                     "minWidth": 0,
                     "minHeight": 0,
                     "detectionRadius": 12,
-                    "verticalScanLayout": true
+                    "verticalScanLayout": true,
+                    "chunkSendData": true
                 },
                 "cells": [
                     {
@@ -280,8 +281,8 @@
                             "index": 2
                         },
                         "format": {
-                            "name": "dateofAdmission",
-                            "value": "dateofAdmission"
+                            "name": "dateOfAdmission",
+                            "value": "dateOfAdmission"
                         },
                         "validate": {
                             "regExp": ""
@@ -3012,8 +3013,8 @@
                             "index": 12
                         },
                         "format": {
-                            "name": "guardianSurName",
-                            "value": "guardianSurName"
+                            "name": "guardianSurname",
+                            "value": "guardianSurname"
                         },
                         "validate": {
                             "regExp": ""
@@ -8455,7 +8456,7 @@
                     }
                 ]
             }
-         },
+          },
         "state": "up",
         "roiId": "1"
     }

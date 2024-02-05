@@ -1892,7 +1892,7 @@
 					]
 				},
 				{
-					"name": "Fetch admissions",
+					"name": "Fetch admissions count",
 					"request": {
 						"auth": {
 							"type": "noauth"
@@ -1933,7 +1933,7 @@
 					},
 					"response": [
 						{
-							"name": "Fetch admissions",
+							"name": "Fetch admissions count",
 							"originalRequest": {
 								"method": "GET",
 								"header": [
@@ -1965,6 +1965,219 @@
 										{
 											"key": "summary",
 											"value": "true"
+										}
+									],
+									"variable": [
+										{
+											"key": "examId",
+											"value": "14"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43597"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"aa4d-CVYoZTtbvEa3kfcvOHa9R3/6+Ps\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 08 Jun 2023 09:00:20 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"totalScannedDocument\": 1\n}"
+						}
+					]
+				},
+				{
+					"name": "Fetch all admissions record",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{bearer_token}}",
+								"type": "text"
+							},
+							{
+								"key": "methods",
+								"value": "PUT",
+								"type": "text"
+							},
+							{
+								"key": "Origin",
+								"value": "http://192.168.31.200:3000",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/admissions",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admissions"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "100",
+									"disabled": true
+								},
+								{
+									"key": "pageNumber",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Fetch all admissions record",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{bearer_token}}",
+										"type": "text"
+									},
+									{
+										"key": "methods",
+										"value": "GET",
+										"type": "text"
+									},
+									{
+										"key": "origin",
+										"value": "http://192.168.31.200:3000",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/admissions",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admissions"
+									],
+									"variable": [
+										{
+											"value": "14",
+											"key": "examId"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43597"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"aa4d-CVYoZTtbvEa3kfcvOHa9R3/6+Ps\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 08 Jun 2023 09:00:20 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"admissionNumber\": \"01233\",\n            \"dateOfAdmission\": \"23/1/2023\",\n            \"studentAadharNumber\": \"************************\",\n            \"studentFirstname\": \"iWPh+oQnJcttP831iNnERA==\",\n            \"studentSurname\": \"iWPh+oQnJcttP831iNnERA==\",\n            \"studentDateOfBirth\": \"0F/mvcZePf53L8GzkMnTOehxJpwu8cEC\",\n            \"studentGender\": \"male\",\n            \"studentAddress\": \"iCrD+sMZKtBtOL72i4zERA==\",\n            \"studentBlock\": \"iCncpMZSB+F8a+D8\",\n            \"studentDistrict\": \"iVzEjIceE850P8nuo4PURA==\",\n            \"guardianFirstname\": \"iVnhu8MJKtB/ZMnuj97yRA==\",\n            \"guardianSurname\": \"iVnhu8MJKtB/ZMnuj97yRA==\",\n            \"guardianRelation\": \"uncle\",\n            \"fatherName\": \"iVLc/oQJMcttOLv8\",\n            \"fatherEducation\": \"MBA\",\n            \"fatherOccupation\": \"Manager\",\n            \"fatherContactDetails_phone1\": \"****************\",\n            \"fatherContactDetails_phone2\": \"****************\",\n            \"motherName\": \"iXHEhIQJMcttOLv8\",\n            \"motherEducation\": \"MSc\",\n            \"motherOccupation\": \"Engineer\",\n            \"motherContactDetails_phone1\": \"****************\",\n            \"motherContactDetails_phone2\": \"****************\",\n            \"rollNumber\": \"6187f54eb87259db4fc8ec168e61855e1dfddefe0aeb5cd81324ce26d234d54e\",\n            \"religion\": \"hindu\",\n            \"category\": \"OBC\",\n            \"typeOfRationCard\": \"APL\",\n            \"CwSN\": \"Yes\",\n            \"addressOnRationCard_address\": \"d62723162943eb60fe89ab9f5c01b38502440afbbc14d45db9fbf96b91674db3\",\n            \"addressOnRationCard_ward\": \"b0f468bc51c42b4ee38015c6fd1ef86dd324546bdf9205d89d07a228f06f1617\",\n            \"addressOnRationCard_block\": \"cca1ef24fa2b7ca2f7e649784e997611493a5adc951301dfb660b2a601b441df\",\n            \"addressOnRationCard_district\": \"57c972a942a27f4be122350b6fa10e62782cbb82965fc6f83677aea113e4d82c\",\n            \"outOfSchool\": \"Yes\",\n            \"predictionInfo\": [\n                {\n                    \"predictionConfidence\": [\n                        0.2,\n                        0.3\n                    ],\n                    \"trainingData\": [\n                        \"jCnuuIQJKd53L7q0hoLhM+9JYKY9wrpY0gQLhQ==\"\n                    ],\n                    \"_id\": \"65bb60c4701de72248e3fc63\",\n                    \"reference\": \"outOfSchool\",\n                    \"predictedValue\": \"0F/95IUrWbk=\"\n                }\n            ],\n            \"userId\": \"u002\",\n            \"schoolId\": \"u002\"\n        }\n    ],\n    \"pageSize\": \"100\",\n    \"pageNumber\": \"1\",\n    \"totalCount\": 1\n}"
+						},
+						{
+							"name": "Fetch all admissions record with pagination",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{bearer_token}}",
+										"type": "text"
+									},
+									{
+										"key": "methods",
+										"value": "GET",
+										"type": "text"
+									},
+									{
+										"key": "origin",
+										"value": "http://192.168.31.200:3000",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/admissions?pageSize=100&pageNumber=1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admissions"
+									],
+									"query": [
+										{
+											"key": "pageSize",
+											"value": "100"
+										},
+										{
+											"key": "pageNumber",
+											"value": "1"
 										}
 									],
 									"variable": [
@@ -2013,7 +2226,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"totalScannedDocument\": 1\n}"
+							"body": "{\n    \"data\": [\n        {\n            \"admissionNumber\": \"01233\",\n            \"dateOfAdmission\": \"23/1/2023\",\n            \"studentAadharNumber\": \"************************\",\n            \"studentFirstname\": \"iWPh+oQnJcttP831iNnERA==\",\n            \"studentSurname\": \"iWPh+oQnJcttP831iNnERA==\",\n            \"studentDateOfBirth\": \"0F/mvcZePf53L8GzkMnTOehxJpwu8cEC\",\n            \"studentGender\": \"male\",\n            \"studentAddress\": \"iCrD+sMZKtBtOL72i4zERA==\",\n            \"studentBlock\": \"iCncpMZSB+F8a+D8\",\n            \"studentDistrict\": \"iVzEjIceE850P8nuo4PURA==\",\n            \"guardianFirstname\": \"iVnhu8MJKtB/ZMnuj97yRA==\",\n            \"guardianSurname\": \"iVnhu8MJKtB/ZMnuj97yRA==\",\n            \"guardianRelation\": \"uncle\",\n            \"fatherName\": \"iVLc/oQJMcttOLv8\",\n            \"fatherEducation\": \"MBA\",\n            \"fatherOccupation\": \"Manager\",\n            \"fatherContactDetails_phone1\": \"****************\",\n            \"fatherContactDetails_phone2\": \"****************\",\n            \"motherName\": \"iXHEhIQJMcttOLv8\",\n            \"motherEducation\": \"MSc\",\n            \"motherOccupation\": \"Engineer\",\n            \"motherContactDetails_phone1\": \"****************\",\n            \"motherContactDetails_phone2\": \"****************\",\n            \"rollNumber\": \"6187f54eb87259db4fc8ec168e61855e1dfddefe0aeb5cd81324ce26d234d54e\",\n            \"religion\": \"hindu\",\n            \"category\": \"OBC\",\n            \"typeOfRationCard\": \"APL\",\n            \"CwSN\": \"Yes\",\n            \"addressOnRationCard_address\": \"d62723162943eb60fe89ab9f5c01b38502440afbbc14d45db9fbf96b91674db3\",\n            \"addressOnRationCard_ward\": \"b0f468bc51c42b4ee38015c6fd1ef86dd324546bdf9205d89d07a228f06f1617\",\n            \"addressOnRationCard_block\": \"cca1ef24fa2b7ca2f7e649784e997611493a5adc951301dfb660b2a601b441df\",\n            \"addressOnRationCard_district\": \"57c972a942a27f4be122350b6fa10e62782cbb82965fc6f83677aea113e4d82c\",\n            \"outOfSchool\": \"Yes\",\n            \"predictionInfo\": [\n                {\n                    \"predictionConfidence\": [\n                        0.2,\n                        0.3\n                    ],\n                    \"trainingData\": [\n                        \"jCnuuIQJKd53L7q0hoLhM+9JYKY9wrpY0gQLhQ==\"\n                    ],\n                    \"_id\": \"65bb60c4701de72248e3fc63\",\n                    \"reference\": \"outOfSchool\",\n                    \"predictedValue\": \"0F/95IUrWbk=\"\n                }\n            ],\n            \"userId\": \"u002\",\n            \"schoolId\": \"u002\"\n        }\n    ],\n    \"pageSize\": \"100\",\n    \"pageNumber\": \"1\",\n    \"totalCount\": 1\n}"
 						}
 					]
 				}

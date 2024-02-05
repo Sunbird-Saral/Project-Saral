@@ -184,7 +184,7 @@ paths:
         - Bearer: []
       tags:
         - Admissions
-      summary: "Create admissions for a student"
+      summary: "Save admissions record"
       parameters:
         - name: body
           in: body
@@ -208,12 +208,45 @@ paths:
         - Bearer: []
       tags:
       - Admissions
-      summary: "Fetch admissions"
+      summary: "Fetch admissions count"
       parameters:
       - in: query
         name: summary
+        description: "Boolean value to indicate to pull only count or whole data of admissions record"
         type: boolean
-        required: true
+        required: false
+
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/FetchAdmissionsResponseBodyCount"
+        "400":
+          description: "unsuccessful operation"
+
+  /admissions?summary=false:
+    get:
+      security:
+        - Bearer: []
+      tags:
+      - Admissions
+      summary: "Fetch all admissions record"
+      parameters:
+      - in: query
+        name: summary
+        description: "Boolean value to indicate to pull only count or whole data of admissions record"
+        type: boolean
+        required: false
+      - in: query
+        name: pageSize
+        description: "Number to indicate number of admissions record to pull, should be between 1-100"
+        type: boolean
+        required: false
+      - in: query
+        name: pageNumber
+        description: "Number to indicate pagination"
+        type: boolean
+        required: false    
 
       responses:
         "200":
@@ -221,8 +254,7 @@ paths:
           schema:
             $ref: "#/definitions/FetchAdmissionsResponseBody"
         "400":
-          description: "unsuccessful operation"
-          
+          description: "unsuccessful operation"          
 
 definitions:
 
@@ -992,12 +1024,77 @@ definitions:
         type: string
         example: "Saved Successfully."
 
-  FetchAdmissionsResponseBody:
+  FetchAdmissionsResponseBodyCount:
     type: object
     properties:
       totalScannedDocument:
         type: number
-        example: 1           
+        example: 1
+
+  FetchAdmissionsResponseBody:
+    type: object
+    properties:
+      data:
+        type: Array
+        example: [{
+            "admissionNumber": "01233",
+            "dateOfAdmission": "23/1/2023",
+            "studentAadharNumber": "************************",
+            "studentFirstname": "iWPh+oQnJcttP831iNnERA==",
+            "studentSurname": "iWPh+oQnJcttP831iNnERA==",
+            "studentDateOfBirth": "0F/mvcZePf53L8GzkMnTOehxJpwu8cEC",
+            "studentGender": "male",
+            "studentAddress": "iCrD+sMZKtBtOL72i4zERA==",
+            "studentBlock": "iCncpMZSB+F8a+D8",
+            "studentDistrict": "iVzEjIceE850P8nuo4PURA==",
+            "guardianFirstname": "iVnhu8MJKtB/ZMnuj97yRA==",
+            "guardianSurname": "iVnhu8MJKtB/ZMnuj97yRA==",
+            "guardianRelation": "uncle",
+            "fatherName": "iVLc/oQJMcttOLv8",
+            "fatherEducation": "MBA",
+            "fatherOccupation": "Manager",
+            "fatherContactDetails_phone1": "****************",
+            "fatherContactDetails_phone2": "****************",
+            "motherName": "iXHEhIQJMcttOLv8",
+            "motherEducation": "MSc",
+            "motherOccupation": "Engineer",
+            "motherContactDetails_phone1": "****************",
+            "motherContactDetails_phone2": "****************",
+            "rollNumber": "6187f54eb87259db4fc8ec168e61855e1dfddefe0aeb5cd81324ce26d234d54e",
+            "religion": "hindu",
+            "category": "OBC",
+            "typeOfRationCard": "APL",
+            "CwSN": "Yes",
+            "addressOnRationCard_address": "d62723162943eb60fe89ab9f5c01b38502440afbbc14d45db9fbf96b91674db3",
+            "addressOnRationCard_ward": "b0f468bc51c42b4ee38015c6fd1ef86dd324546bdf9205d89d07a228f06f1617",
+            "addressOnRationCard_block": "cca1ef24fa2b7ca2f7e649784e997611493a5adc951301dfb660b2a601b441df",
+            "addressOnRationCard_district": "57c972a942a27f4be122350b6fa10e62782cbb82965fc6f83677aea113e4d82c",
+            "outOfSchool": "Yes",
+            "predictionInfo": [
+                {
+                    "predictionConfidence": [
+                        0.2,
+                        0.3
+                    ],
+                    "trainingData": [
+                        "jCnuuIQJKd53L7q0hoLhM+9JYKY9wrpY0gQLhQ=="
+                    ],
+                    "_id": "65bb60c4701de72248e3fc63",
+                    "reference": "outOfSchool",
+                    "predictedValue": "0F/95IUrWbk="
+                }
+            ],
+            "userId": "u002",
+            "schoolId": "u002"}]
+      totalCount:
+        type: number
+        example: 1
+      pageSize:
+        type: number
+        example: 100
+      pageNumber:
+        type: number
+        example: 1                    
 
   SaveAdmissions:
     type: object
