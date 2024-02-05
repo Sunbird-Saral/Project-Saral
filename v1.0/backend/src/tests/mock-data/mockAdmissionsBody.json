@@ -1,0 +1,43 @@
+{
+   "admissionNumber": "01233",
+   "dateOfAdmission": "23/1/2023",
+   "studentAadharNumber": "1234235",
+   "studentFirstname": "student",
+   "studentSurname": "student",
+   "studentDateOfBirth": "12/03/1998",
+   "studentGender": "male",
+   "studentAddress": "address",
+   "studentBlock": "block",
+   "studentDistrict": "district",
+   "guardianFirstName": "guardian",
+   "guardianSurname": "guardian",
+   "guardianRelation": "uncle",
+   "fatherName": "father",
+   "fatherEducation": "MBA",
+   "fatherOccupation": "Manager",
+   "fatherContactDetails_phone1": "11234",
+   "fatherContactDetails_phone2": "02416",
+   "motherName": "mother",
+   "motherEducation": "MSc",
+   "motherOccupation": "Engineer",
+   "motherContactDetails_phone1": "11234",
+   "motherContactDetails_phone2": "02416",
+   "rollNumber": "12",
+   "religion_hindu": "hindu",
+   "category": "OBC",
+   "typeOfRationCard": "APL",
+   "CwSN": "Yes",
+   "addressOnRationCard_address": "address",
+   "addressOnRationCard_ward": "ward",
+   "addressOnRationCard_block": "block",
+   "addressOnRationCard_district": "district",
+   "outOfSchool": "Yes",
+   "predictionInfo": [
+      {
+         "reference": "outOfSchool",
+         "predictedValue": "1",
+         "predictionConfidence": [],
+         "trainingData": []
+      }
+   ]
+}

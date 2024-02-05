@@ -13,6 +13,8 @@ import com.facebook.react.bridge.ReactMethod;
 import org.ekstep.saral.saralsdk.commons.FileOps;
 import org.ekstep.saral.saralsdk.hwmodel.HWBlockLettersClassifier;
 import org.ekstep.saral.saralsdk.hwmodel.HWBlockLettersClassifierStatusListener;
+import org.ekstep.saral.saralsdk.hwmodel.HWAlphaNumericClassifier;
+import org.ekstep.saral.saralsdk.hwmodel.HWAlphaNumericClassifierStatusListener;
 import org.ekstep.saral.saralsdk.hwmodel.HWClassifier;
 import org.ekstep.saral.saralsdk.hwmodel.HWClassifierStatusListener;
 import org.ekstep.saral.saralsdk.hwmodel.RemoteConfig;
@@ -83,6 +85,20 @@ public class SaralSDKModule extends ReactContextBaseJavaModule implements Activi
             @Override
             public void OnModelLoadError(String message) {
                 Log.d(TAG, "HWBlockLettersClassifier model cannot be loaded :" + message);
+            }
+        },isFBDownloadModelEnable, context);
+
+        HWAlphaNumericClassifier.getInstance();
+        Log.d(TAG, "Loading HWAlphaNumericClassifier models");
+        HWAlphaNumericClassifier.getInstance().initialize(new HWAlphaNumericClassifierStatusListener() {
+            @Override
+            public void OnModelLoadSuccess(String message) {
+                Log.d(TAG, "HWAlphaNumericClassifier model loaded : " + message);
+            }
+
+            @Override
+            public void OnModelLoadError(String message) {
+                Log.d(TAG, "HWAlphaNumericClassifier model cannot be loaded :" + message);
             }
         },isFBDownloadModelEnable, context);
 
