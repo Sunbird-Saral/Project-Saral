@@ -5,8 +5,8 @@ import {connect} from 'react-redux';
 import Button from './commonComponents/Button';
 import AppTheme from '../utils/AppTheme';
 import {monospace_FF} from '../utils/CommonUtils';
-import {API_CALL_COMPLETE, CLEAR_CACHE} from './constants';
-import {getNoOFFormsSubmitted} from './actions/admissionAction';
+import {API_CALL_COMPLETE, CLEAR_CACHE, GET_ROI_DATA} from './constants';
+import {getNoOFFormsSubmitted, getROIdata} from './actions/admissionAction';
 
 export class AdmissionLanding extends Component {
   constructor(props) {
@@ -20,6 +20,7 @@ export class AdmissionLanding extends Component {
   componentDidMount() {
     let token = this.props.loginData.data.token;
     this.props.noOFormsSubmitted(token);
+    this.props.getRoiData(token);
   }
 
   componentDidUpdate(prevProps) {
@@ -85,6 +86,7 @@ const mapDispatchToProps = dispatch => {
     noOFormsSubmitted: token => dispatch(getNoOFFormsSubmitted(token)),
     apiCallComplete: () =>
       dispatch({type: API_CALL_COMPLETE, apiCallComplete: false}),
+    getRoiData: token => dispatch(getROIdata(token)),
   };
 };
 

@@ -7,6 +7,7 @@ import {
   API_CALL_COMPLETE,
   HANDLE_CANCLE_PAGE_2,
   HANDLE_CANCLE_PAGE_1,
+  GET_ROI_DATA,
 } from '../constants';
 
 const initialState = {
@@ -17,6 +18,7 @@ const initialState = {
   noOfFormsSubmitted: 0,
   dataSubmitted: false,
   apiCallComplete: false,
+  roi: {},
 };
 
 const admissionDataReducer = (state = initialState, action) => {
@@ -67,6 +69,12 @@ const admissionDataReducer = (state = initialState, action) => {
       return {
         ...state,
         apiCallComplete: action.apiCallComplete,
+      };
+    }
+    case GET_ROI_DATA: {
+      return {
+        ...state,
+        roi: {...action.roiData},
       };
     }
     default:
