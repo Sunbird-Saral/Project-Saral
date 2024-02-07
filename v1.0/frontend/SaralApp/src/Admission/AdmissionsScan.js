@@ -32,6 +32,10 @@ export class Admissions extends PureComponent {
       disableShowData: true,
       predictionArray: [],
       localPageNo: 0,
+      chunkArray: [],
+      batchIndex: 0,
+      pageNo: 0,
+      isLoading: false
     };
 
     DeviceEventEmitter.addListener('streamReady', eventData => {
@@ -41,22 +45,23 @@ export class Admissions extends PureComponent {
     });
   }
 
-  componentDidUpdate() {
-    if (this.props.formDataPage1.length == 0) {
-      this.setState({predictionArray: this.props.formDataPage1});
-    }
-    if (this.props.formDataPage2.length == 0 && this.props.pageno == 2) {
-      this.setState({predictionArray: this.props.formDataPage2});
-    }
+  componentWillUnmount() {
+    DeviceEventEmitter.removeAllListeners();
   }
 
-  componentWillUnmount() {
-    this.setState({predictionArray: []});
-    DeviceEventEmitter.removeAllListeners();
+  //clear local states on navigating back
+  onNavigatingBack = (pageNo) => {
+    this.setState({predictionArray: [], chunkArray: [], pageNo: 0});
+    if(pageNo == 1) {
+      this.setState({batchIndex: 0});
+    } else if(pageNo == 2) {
+      this.setState({batchIndex: 15});
+    }
   }
 
   onScan = async pageNo => {
     //set page number
+    this.pageNo = pageNo;
     this.props.pageNo(pageNo);
     if (Platform.OS !== 'ios') {
       const grantedCamera = await PermissionsAndroid.check(
@@ -81,11 +86,42 @@ export class Admissions extends PureComponent {
   };
 
   onOpenCameraActivity = pageNo => {
+    this.setState({isLoading: true});
     SaralSDK.startCamera(JSON.stringify(roi), pageNo.toString(), 0, true)
       .then(res => {})
       .catch((code, message) => {
+        this.setState({isLoading: false});
         console.log('code', code, message);
       });
+  };
+
+  handleDataField = (dataField,i,pageNo, fieldLen) => {
+    this.setState((prevState)=>{
+      const newField = [...prevState.chunkArray]
+      newField[i] = dataField;
+      return {chunkArray: newField};
+    })
+
+    let chunkReady = true;
+    //check if batch of 5 data from array are ready
+    for(let i=this.state.batchIndex; i<this.state.batchIndex+3; i++) {
+      if(!this.state.chunkArray[i] && i < fieldLen) {
+        chunkReady = false;
+        return;
+      }
+    }
+
+    if(chunkReady) {
+      this.setState({isLoading: false});
+      this.setState((prevState)=>{
+        return {predictionArray: [...prevState.predictionArray, ...this.state.chunkArray.slice(this.state.batchIndex, this.state.batchIndex+3)]}
+      });
+
+      this.state.batchIndex = this.state.batchIndex+3;
+      (pageNo == 1) ? this.props.setDataPage1(this.state.predictionArray) : this.props.setDataPage2(this.state.predictionArray);
+      this.props.pageNo(pageNo);
+      this.props.navigation.navigate('EditAndSave', {ongoback: (pageNo) => this.onNavigatingBack(pageNo)});
+    }
   };
 
   consolidatePrediction = (cells, pageNo) => {
@@ -157,19 +193,8 @@ export class Admissions extends PureComponent {
             label: labels[i],
           };
         }
-
-        this.state.predictionArray.push(prediction);
+        this.handleDataField(prediction, i, pageNo, labels.length);
       }
-      // }
-
-      if (pageNo == 1) {
-        this.props.setDataPage1(this.state.predictionArray);
-      } else {
-        this.props.setDataPage2(this.state.predictionArray);
-      }
-
-      this.props.pageNo(pageNo);
-      this.props.navigation.navigate('EditAndSave');
     }
   };
 
@@ -208,7 +233,7 @@ export class Admissions extends PureComponent {
               ? this.props.multiBrandingData.themeColor1
               : AppTheme.BLUE,
           }}
-          disabled={this.props.pageno == 1 ? true : false}
+          disabled={(this.props.pageno == 1) || this.state.isLoading ? true : false}
           onPress={() => {
             this.onScan(1);
             this.setState({localPageNo: 1});
@@ -222,21 +247,21 @@ export class Admissions extends PureComponent {
               : AppTheme.BLUE,
             marginTop: 10,
           }}
-          disabled={this.props.pageno == 0 ? true : false}
+          disabled={(this.props.pageno == 0) || this.state.isLoading ? true : false}
           onPress={() => {
             this.onScan(2);
             this.setState({localPageNo: 2});
           }}
           label={'SCAN PAGE 2'}
         />
-        {this.checkIsValid(this.props.formDataPage1[1]?.value) && (
-          <Text>Admission Number: {this.props.formDataPage1[1].value}</Text>
+        {this.checkIsValid(this.props.formDataPage1[0]?.value) && (
+          <Text>Admission Number: {this.props.formDataPage1[0].value}</Text>
         )}
-        {this.checkIsValid(this.props.formDataPage1[4]?.value) &&
-          this.checkIsValid(this.props.formDataPage1[5]?.value) && (
+        {this.checkIsValid(this.props.formDataPage1[3]?.value) &&
+          this.checkIsValid(this.props.formDataPage1[4]?.value) && (
             <Text>
-              Name: {this.props.formDataPage1[4].value}{' '}
-              {this.props.formDataPage1[5].value}
+              Name: {this.props.formDataPage1[3].value}{' '}
+              {this.props.formDataPage1[4].value}
             </Text>
           )}
 
@@ -245,6 +270,7 @@ export class Admissions extends PureComponent {
             backgroundColor: '#d11a2a',
             marginTop: 50,
           }}
+          disabled={this.state.isLoading ? true : false}
           onPress={() => this.props.navigation.goBack()}
           label={'CANCEL'}
         />
