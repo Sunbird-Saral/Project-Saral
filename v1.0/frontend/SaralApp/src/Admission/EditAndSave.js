@@ -133,6 +133,7 @@ class EditAndSave extends Component {
 
   onPressConfirm = async () => {
     if (this.props.pageNo == 1) {
+      this.props.navigation.state.params.ongoback();
       this.props.navigation.goBack();
       this.props.setDataPage1(this.state.data);
     } else {
@@ -155,6 +156,7 @@ class EditAndSave extends Component {
     }
     this.state.data = [];
     this.props.pageNoFunction(this.props.pageNo - 1);
+    this.props.navigation.state.params.ongoback(this.props.pageNo);
     this.props.navigation.goBack();
   };
 
