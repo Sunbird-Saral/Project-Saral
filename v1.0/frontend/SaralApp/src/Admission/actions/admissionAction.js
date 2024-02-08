@@ -24,6 +24,7 @@ export const setAdmissionData = (formData, token) => {
     fetch(`${BASE_URL.BASE_URL}/admissions`, headers)
       .then(response => {
         if (response.status == 200) {
+          dispatch(getNoOFFormsSubmitted(token));
           Alert.alert('Data submitted successfully', '', [
             {
               text: 'Okay',
