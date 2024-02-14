@@ -2,9 +2,9 @@ import axios from 'axios';
 import {Alert} from 'react-native';
 
 import BASE_URL from '../../configs/config';
-import {API_CALL_COMPLETE, FORMS_SUBMITTED} from '../constants';
+import {API_CALL_COMPLETE, FORMS_SUBMITTED, GET_ROI_DATA} from '../constants';
 
-export const setAdmissionData = (formData, token, navigation) => {
+export const setAdmissionData = (formData, token) => {
   let reformatedObj = {};
   for (let i = 0; i < formData.length; i++) {
     reformatedObj = {...reformatedObj, [formData[i].key]: formData[i].value};
@@ -25,7 +25,6 @@ export const setAdmissionData = (formData, token, navigation) => {
       .then(response => {
         if (response.status == 200) {
           dispatch(getNoOFFormsSubmitted(token));
-
           Alert.alert('Data submitted successfully', '', [
             {
               text: 'Okay',
@@ -70,6 +69,27 @@ export const getNoOFFormsSubmitted = token => {
         dispatch({
           type: FORMS_SUBMITTED,
           noOfFormsSubmitted: res.data.totalScannedDocument,
+        });
+      })
+      .catch(err => console.log(err));
+  };
+};
+
+export const getROIdata = token => {
+  const config = {
+    headers: {
+      Authorization: `${token}`,
+      origin: BASE_URL.BASE_URL,
+      'Content-Type': 'application/json',
+    },
+  };
+  return dispatch => {
+    axios
+      .get(`${BASE_URL.BASE_URL}/v2/roi/admissions`, config)
+      .then(res => {
+        dispatch({
+          type: GET_ROI_DATA,
+          roiData: res.data,
         });
       })
       .catch(err => console.log(err));

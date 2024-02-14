@@ -26,12 +26,12 @@ export class Admissions extends PureComponent {
     super(props);
 
     this.state = {
-      PocRoi: null,
       disblePage1: false,
       disablePage2: true,
       disableShowData: true,
       predictionArray: [],
       localPageNo: 0,
+      roi: this.props.roi,
     };
 
     DeviceEventEmitter.addListener('streamReady', eventData => {
@@ -81,7 +81,12 @@ export class Admissions extends PureComponent {
   };
 
   onOpenCameraActivity = pageNo => {
-    SaralSDK.startCamera(JSON.stringify(roi), pageNo.toString(), 0, true)
+    SaralSDK.startCamera(
+      JSON.stringify(this.state.roi),
+      pageNo.toString(),
+      0,
+      true,
+    )
       .then(res => {})
       .catch((code, message) => {
         console.log('code', code, message);
@@ -276,6 +281,7 @@ const mapStateToProps = state => {
     pageno: state.admissionData.pageNo,
     formDataPage1: state.admissionData.formDataPage1,
     formDataPage2: state.admissionData.formDataPage2,
+    roi: state.admissionData.roi,
   };
 };
 
