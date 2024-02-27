@@ -96,13 +96,13 @@ export class Admissions extends PureComponent {
   consolidatePrediction = (cells, pageNo) => {
     var marks = ' ';
     let labels = [
+      'Sex',
       'Admission Number',
       'Date of Admission',
       "Student's Aadhaar No.",
       "Student's First Name",
       "Student's Surname",
       'Date Of Birth',
-      'Sex',
       'Address',
       'Block',
       'District',
@@ -111,6 +111,10 @@ export class Admissions extends PureComponent {
       'C/O Relation',
       "Father's Name",
       "Father's Education",
+      'Category',
+      'Type of Ration Card',
+      'CwSN',
+      'Out Of School',
       "Father's Occupation",
       "Father's Mobile Number 1",
       "Father's Mobile Number 2",
@@ -121,14 +125,10 @@ export class Admissions extends PureComponent {
       "Mother's Mobile Number 2",
       'Roll No',
       'Religion',
-      'Category',
-      'Type of Ration Card',
-      'CwSN',
       'Address on Ration Card',
       'Gram Panchayat/Ward',
       'Block',
       'District',
-      'Out Of School',
     ];
     for (let i = 0; i < cells.length; i++) {
       marks = '';
