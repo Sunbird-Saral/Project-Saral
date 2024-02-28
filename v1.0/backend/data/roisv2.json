@@ -4434,7 +4434,7 @@
                         "rois": [
                             {
                                 "annotationTags": "FATHEROCCUPATION_1",
-                                "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                "extractionMethod": "BLOCK_LETTER_CLASSIFICATION",
                                 "roiId": "13",
                                 "index": 0,
                                 "rect": {
@@ -4446,7 +4446,7 @@
                             },
                             {
                                 "annotationTags": "FATHEROCCUPATION_2",
-                                "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                "extractionMethod": "BLOCK_LETTER_CLASSIFICATION",
                                 "roiId": "14",
                                 "index": 1,
                                 "rect": {
@@ -4458,7 +4458,7 @@
                             },
                             {
                                 "annotationTags": "FATHEROCCUPATION_3",
-                                "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                "extractionMethod": "BLOCK_LETTER_CLASSIFICATION",
                                 "roiId": "15",
                                 "index": 2,
                                 "rect": {
@@ -4470,7 +4470,7 @@
                             },
                             {
                                 "annotationTags": "FATHEROCCUPATION_4",
-                                "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                "extractionMethod": "BLOCK_LETTER_CLASSIFICATION",
                                 "roiId": "16",
                                 "index": 3,
                                 "rect": {
@@ -4482,7 +4482,7 @@
                             },
                             {
                                 "annotationTags": "FATHEROCCUPATION_5",
-                                "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                "extractionMethod": "BLOCK_LETTER_CLASSIFICATION",
                                 "roiId": "17",
                                 "index": 4,
                                 "rect": {
@@ -4494,7 +4494,7 @@
                             },
                             {
                                 "annotationTags": "FATHEROCCUPATION_6",
-                                "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                "extractionMethod": "BLOCK_LETTER_CLASSIFICATION",
                                 "roiId": "18",
                                 "index": 5,
                                 "rect": {
@@ -4506,7 +4506,7 @@
                             },
                             {
                                 "annotationTags": "FATHEROCCUPATION_7",
-                                "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                "extractionMethod": "BLOCK_LETTER_CLASSIFICATION",
                                 "roiId": "19",
                                 "index": 6,
                                 "rect": {
@@ -4518,7 +4518,7 @@
                             },
                             {
                                 "annotationTags": "FATHEROCCUPATION_8",
-                                "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                "extractionMethod": "BLOCK_LETTER_CLASSIFICATION",
                                 "roiId": "20",
                                 "index": 7,
                                 "rect": {
@@ -4530,7 +4530,7 @@
                             },
                             {
                                 "annotationTags": "FATHEROCCUPATION_9",
-                                "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                "extractionMethod": "BLOCK_LETTER_CLASSIFICATION",
                                 "roiId": "21",
                                 "index": 8,
                                 "rect": {
@@ -4542,7 +4542,7 @@
                             },
                             {
                                 "annotationTags": "FATHEROCCUPATION_10",
-                                "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                "extractionMethod": "BLOCK_LETTER_CLASSIFICATION",
                                 "roiId": "22",
                                 "index": 9,
                                 "rect": {
@@ -4554,7 +4554,7 @@
                             },
                             {
                                 "annotationTags": "FATHEROCCUPATION_11",
-                                "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                "extractionMethod": "BLOCK_LETTER_CLASSIFICATION",
                                 "roiId": "23",
                                 "index": 10,
                                 "rect": {
@@ -4566,7 +4566,7 @@
                             },
                             {
                                 "annotationTags": "FATHEROCCUPATION_12",
-                                "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                "extractionMethod": "BLOCK_LETTER_CLASSIFICATION",
                                 "roiId": "24",
                                 "index": 11,
                                 "rect": {
@@ -4578,7 +4578,7 @@
                             },
                             {
                                 "annotationTags": "FATHEROCCUPATION_13",
-                                "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                "extractionMethod": "BLOCK_LETTER_CLASSIFICATION",
                                 "roiId": "25",
                                 "index": 12,
                                 "rect": {
@@ -4590,7 +4590,7 @@
                             },
                             {
                                 "annotationTags": "FATHEROCCUPATION_14",
-                                "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                "extractionMethod": "BLOCK_LETTER_CLASSIFICATION",
                                 "roiId": "26",
                                 "index": 13,
                                 "rect": {
@@ -4602,7 +4602,7 @@
                             },
                             {
                                 "annotationTags": "FATHEROCCUPATION_15",
-                                "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                "extractionMethod": "BLOCK_LETTER_CLASSIFICATION",
                                 "roiId": "27",
                                 "index": 14,
                                 "rect": {
@@ -4614,7 +4614,7 @@
                             },
                             {
                                 "annotationTags": "FATHEROCCUPATION_16",
-                                "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                "extractionMethod": "BLOCK_LETTER_CLASSIFICATION",
                                 "roiId": "28",
                                 "index": 15,
                                 "rect": {
@@ -4626,7 +4626,7 @@
                             },
                             {
                                 "annotationTags": "FATHEROCCUPATION_17",
-                                "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                "extractionMethod": "BLOCK_LETTER_CLASSIFICATION",
                                 "roiId": "29",
                                 "index": 16,
                                 "rect": {
@@ -4638,7 +4638,7 @@
                             },
                             {
                                 "annotationTags": "FATHEROCCUPATION_18",
-                                "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                "extractionMethod": "BLOCK_LETTER_CLASSIFICATION",
                                 "roiId": "30",
                                 "index": 17,
                                 "rect": {
@@ -4650,7 +4650,7 @@
                             },
                             {
                                 "annotationTags": "FATHEROCCUPATION_19",
-                                "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                "extractionMethod": "BLOCK_LETTER_CLASSIFICATION",
                                 "roiId": "31",
                                 "index": 18,
                                 "rect": {
@@ -4662,7 +4662,7 @@
                             },
                             {
                                 "annotationTags": "FATHEROCCUPATION_20",
-                                "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                "extractionMethod": "BLOCK_LETTER_CLASSIFICATION",
                                 "roiId": "32",
                                 "index": 19,
                                 "rect": {
@@ -4674,7 +4674,7 @@
                             },
                             {
                                 "annotationTags": "FATHEROCCUPATION_21",
-                                "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                "extractionMethod": "BLOCK_LETTER_CLASSIFICATION",
                                 "roiId": "33",
                                 "index": 20,
                                 "rect": {
@@ -4686,7 +4686,7 @@
                             },
                             {
                                 "annotationTags": "FATHEROCCUPATION_22",
-                                "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                "extractionMethod": "BLOCK_LETTER_CLASSIFICATION",
                                 "roiId": "34",
                                 "index": 21,
                                 "rect": {
@@ -4698,7 +4698,7 @@
                             },
                             {
                                 "annotationTags": "FATHEROCCUPATION_23",
-                                "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                "extractionMethod": "BLOCK_LETTER_CLASSIFICATION",
                                 "roiId": "35",
                                 "index": 22,
                                 "rect": {
@@ -4710,7 +4710,7 @@
                             },
                             {
                                 "annotationTags": "FATHEROCCUPATION_24",
-                                "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                "extractionMethod": "BLOCK_LETTER_CLASSIFICATION",
                                 "roiId": "36",
                                 "index": 23,
                                 "rect": {
@@ -5906,7 +5906,7 @@
                         "rois": [
                             {
                                 "annotationTags": "MOTHEROCCUPATION_1",
-                                "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                "extractionMethod": "BLOCK_LETTER_CLASSIFICATION",
                                 "roiId": "129",
                                 "index": 0,
                                 "rect": {
@@ -5918,7 +5918,7 @@
                             },
                             {
                                 "annotationTags": "MOTHEROCCUPATION_2",
-                                "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                "extractionMethod": "BLOCK_LETTER_CLASSIFICATION",
                                 "roiId": "130",
                                 "index": 1,
                                 "rect": {
@@ -5930,7 +5930,7 @@
                             },
                             {
                                 "annotationTags": "MOTHEROCCUPATION_3",
-                                "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                "extractionMethod": "BLOCK_LETTER_CLASSIFICATION",
                                 "roiId": "131",
                                 "index": 2,
                                 "rect": {
@@ -5942,7 +5942,7 @@
                             },
                             {
                                 "annotationTags": "MOTHEROCCUPATION_4",
-                                "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                "extractionMethod": "BLOCK_LETTER_CLASSIFICATION",
                                 "roiId": "132",
                                 "index": 3,
                                 "rect": {
@@ -5954,7 +5954,7 @@
                             },
                             {
                                 "annotationTags": "MOTHEROCCUPATION_5",
-                                "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                "extractionMethod": "BLOCK_LETTER_CLASSIFICATION",
                                 "roiId": "133",
                                 "index": 4,
                                 "rect": {
@@ -5966,7 +5966,7 @@
                             },
                             {
                                 "annotationTags": "MOTHEROCCUPATION_6",
-                                "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                "extractionMethod": "BLOCK_LETTER_CLASSIFICATION",
                                 "roiId": "134",
                                 "index": 5,
                                 "rect": {
@@ -5978,7 +5978,7 @@
                             },
                             {
                                 "annotationTags": "MOTHEROCCUPATION_7",
-                                "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                "extractionMethod": "BLOCK_LETTER_CLASSIFICATION",
                                 "roiId": "135",
                                 "index": 6,
                                 "rect": {
@@ -5990,7 +5990,7 @@
                             },
                             {
                                 "annotationTags": "MOTHEROCCUPATION_8",
-                                "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                "extractionMethod": "BLOCK_LETTER_CLASSIFICATION",
                                 "roiId": "136",
                                 "index": 7,
                                 "rect": {
@@ -6002,7 +6002,7 @@
                             },
                             {
                                 "annotationTags": "MOTHEROCCUPATION_9",
-                                "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                "extractionMethod": "BLOCK_LETTER_CLASSIFICATION",
                                 "roiId": "137",
                                 "index": 8,
                                 "rect": {
@@ -6014,7 +6014,7 @@
                             },
                             {
                                 "annotationTags": "MOTHEROCCUPATION_10",
-                                "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                "extractionMethod": "BLOCK_LETTER_CLASSIFICATION",
                                 "roiId": "138",
                                 "index": 9,
                                 "rect": {
@@ -6026,7 +6026,7 @@
                             },
                             {
                                 "annotationTags": "MOTHEROCCUPATION_11",
-                                "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                "extractionMethod": "BLOCK_LETTER_CLASSIFICATION",
                                 "roiId": "139",
                                 "index": 10,
                                 "rect": {
@@ -6038,7 +6038,7 @@
                             },
                             {
                                 "annotationTags": "MOTHEROCCUPATION_12",
-                                "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                "extractionMethod": "BLOCK_LETTER_CLASSIFICATION",
                                 "roiId": "140",
                                 "index": 11,
                                 "rect": {
@@ -6050,7 +6050,7 @@
                             },
                             {
                                 "annotationTags": "MOTHEROCCUPATION_13",
-                                "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                "extractionMethod": "BLOCK_LETTER_CLASSIFICATION",
                                 "roiId": "141",
                                 "index": 12,
                                 "rect": {
@@ -6062,7 +6062,7 @@
                             },
                             {
                                 "annotationTags": "MOTHEROCCUPATION_14",
-                                "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                "extractionMethod": "BLOCK_LETTER_CLASSIFICATION",
                                 "roiId": "142",
                                 "index": 13,
                                 "rect": {
@@ -6074,7 +6074,7 @@
                             },
                             {
                                 "annotationTags": "MOTHEROCCUPATION_15",
-                                "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                "extractionMethod": "BLOCK_LETTER_CLASSIFICATION",
                                 "roiId": "143",
                                 "index": 14,
                                 "rect": {
@@ -6086,7 +6086,7 @@
                             },
                             {
                                 "annotationTags": "MOTHEROCCUPATION_16",
-                                "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                "extractionMethod": "BLOCK_LETTER_CLASSIFICATION",
                                 "roiId": "144",
                                 "index": 15,
                                 "rect": {
@@ -6098,7 +6098,7 @@
                             },
                             {
                                 "annotationTags": "MOTHEROCCUPATION_17",
-                                "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                "extractionMethod": "BLOCK_LETTER_CLASSIFICATION",
                                 "roiId": "145",
                                 "index": 16,
                                 "rect": {
@@ -6110,7 +6110,7 @@
                             },
                             {
                                 "annotationTags": "MOTHEROCCUPATION_18",
-                                "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                "extractionMethod": "BLOCK_LETTER_CLASSIFICATION",
                                 "roiId": "146",
                                 "index": 17,
                                 "rect": {
@@ -6122,7 +6122,7 @@
                             },
                             {
                                 "annotationTags": "MOTHEROCCUPATION_19",
-                                "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                "extractionMethod": "BLOCK_LETTER_CLASSIFICATION",
                                 "roiId": "147",
                                 "index": 18,
                                 "rect": {
@@ -6134,7 +6134,7 @@
                             },
                             {
                                 "annotationTags": "MOTHEROCCUPATION_20",
-                                "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                "extractionMethod": "BLOCK_LETTER_CLASSIFICATION",
                                 "roiId": "148",
                                 "index": 19,
                                 "rect": {
@@ -6146,7 +6146,7 @@
                             },
                             {
                                 "annotationTags": "MOTHEROCCUPATION_21",
-                                "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                "extractionMethod": "BLOCK_LETTER_CLASSIFICATION",
                                 "roiId": "149",
                                 "index": 20,
                                 "rect": {
@@ -6158,7 +6158,7 @@
                             },
                             {
                                 "annotationTags": "MOTHEROCCUPATION_22",
-                                "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                "extractionMethod": "BLOCK_LETTER_CLASSIFICATION",
                                 "roiId": "150",
                                 "index": 21,
                                 "rect": {
@@ -6170,7 +6170,7 @@
                             },
                             {
                                 "annotationTags": "MOTHEROCCUPATION_23",
-                                "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                "extractionMethod": "BLOCK_LETTER_CLASSIFICATION",
                                 "roiId": "151",
                                 "index": 22,
                                 "rect": {
@@ -6182,7 +6182,7 @@
                             },
                             {
                                 "annotationTags": "MOTHEROCCUPATION_24",
-                                "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                "extractionMethod": "BLOCK_LETTER_CLASSIFICATION",
                                 "roiId": "152",
                                 "index": 23,
                                 "rect": {
