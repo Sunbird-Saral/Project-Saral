@@ -138,9 +138,11 @@ class EditAndSave extends Component {
     } else {
       let token = this.props.loginData.data.token;
       this.props.setDataPage2(this.state.data);
+
       this.props.setAdmissionData(
         [...this.props.formDataPage1, ...this.state.data],
         token,
+        [...this.props.predictionInfoPage1, ...this.props.predictionInfoPage2],
         this.props,
       );
       // this.props.navigation.navigate('Admissions');
@@ -232,7 +234,8 @@ const mapDispatchToProps = dispatch => {
   return {
     // setData: data => dispatch({type: SET_DATA, data}),
     noOFormsSubmitted: token => dispatch(getNoOFFormsSubmitted(token)),
-    setAdmissionData: (data, token) => dispatch(setAdmissionData(data, token)),
+    setAdmissionData: (data, token, predictionInfo) =>
+      dispatch(setAdmissionData(data, token, predictionInfo)),
     pageNoFunction: pageNo => dispatch({type: GET_PAGE_NO, pageNo}),
     handleCanclePage1: () => dispatch({type: HANDLE_CANCLE_PAGE_1}),
     handleCanclePage2: () => dispatch({type: HANDLE_CANCLE_PAGE_2}),
@@ -250,6 +253,8 @@ const mapStateToProps = state => {
     loginData: state.loginData,
     dataSubmitted: state.dataSubmitted,
     apiCallComplete: state.admissionData.apiCallComplete,
+    predictionInfoPage1: state.admissionData.predictionInfoPage1,
+    predictionInfoPage2: state.admissionData.predictionInfoPage2,
   };
 };
 
