@@ -28,6 +28,6 @@ const ROIV2Schema = new mongoose.Schema({
     timestamps: true
 })
 
-ROIV2Schema.index({orgId: -1, state: -1})
+ROIV2Schema.index({schoolId: -1, state: -1})
 
 module.exports = ROIV2Schema
