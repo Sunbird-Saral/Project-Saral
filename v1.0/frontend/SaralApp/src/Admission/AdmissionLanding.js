@@ -1,4 +1,4 @@
-import {Text, View} from 'react-native';
+import {Text, View, ActivityIndicator} from 'react-native';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
@@ -14,6 +14,7 @@ export class AdmissionLanding extends Component {
 
     this.state = {
       noOfFormsSubmitted: this.props.noOfForms,
+      isLoading: true,
     };
   }
 
@@ -32,10 +33,24 @@ export class AdmissionLanding extends Component {
         noOfFormsSubmitted: this.props.noOfForms,
       });
     }
+    if (this.state.isLoading == true && this.props.roi) {
+      this.setState({isLoading: false});
+    }
   }
 
   render() {
-    return (
+    return this.state.isLoading ? (
+      <ActivityIndicator
+        size="large"
+        color={'black'}
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: 'white',
+        }}
+      />
+    ) : (
       <View
         style={{
           flex: 1,
@@ -43,6 +58,7 @@ export class AdmissionLanding extends Component {
           alignItems: 'center',
           backgroundColor: 'white',
         }}>
+        {/* {this.state.isLoading && } */}
         <Button
           label={'SCAN NEW FORM'}
           onPress={() => {
@@ -96,6 +112,7 @@ const mapStateToProps = state => {
     loginData: state.loginData,
     admissionData: state.admissionData,
     noOfForms: state.admissionData.noOfFormsSubmitted,
+    roi: state.admissionData.roi,
   };
 };
 
