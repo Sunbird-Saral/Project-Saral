@@ -96,7 +96,7 @@ public class DetectShaded {
     }
 
     public Mat getROIMat(Mat image, int top, int left, int bottom, int right) {
-        Rect rect           = new Rect(left, top, right - left, bottom - top);
+        Rect rect           = new Rect(left-1, top-1, (right+1) - (left-1), (bottom+1) - (top-1));
         Mat croppedImage    = new Mat(image.clone(), rect);
         Mat resizedImage    = resizeImage(croppedImage);
 
