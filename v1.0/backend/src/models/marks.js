@@ -131,7 +131,7 @@ marksSchema.statics.StudentsMark = async (studentIds) => {
     return marks
 }
 
-//uncomment the below line when using mongodb as standalone to set index
-//marksSchema.index({schoolId: -1, classId: -1, section: -1, examDate: -1, subject: -1})
+//comment the below line when using mongodb as sharded cluster
+marksSchema.index({schoolId: -1, classId: -1, section: -1, examDate: -1, subject: -1})
 
 module.exports = { marksSchema, rawSchemaJson }
