@@ -17,7 +17,13 @@ import Button from './commonComponents/Button';
 import SaralSDK from '../../SaralSDK';
 import {roi} from './roi';
 import AppTheme from '../utils/AppTheme';
-import {GET_PAGE_NO, SET_DATA_PAGE_1, SET_DATA_PAGE_2} from './constants';
+import {
+  GET_PAGE_NO,
+  SET_DATA_PAGE_1,
+  SET_DATA_PAGE_2,
+  SET_PREDICTION_INFO_PAGE_1,
+  SET_PREDICTION_INFO_PAGE_2,
+} from './constants';
 import {monospace_FF} from '../utils/CommonUtils';
 import {PureComponent} from 'react';
 
@@ -32,21 +38,25 @@ export class Admissions extends PureComponent {
       predictionArray: [],
       localPageNo: 0,
       roi: this.props.roi,
+      predictionInfo: [],
     };
 
     DeviceEventEmitter.addListener('streamReady', eventData => {
       let roisData = JSON.parse(eventData);
-      let cells = roisData.layout.cells;
-      this.consolidatePrediction(cells, this.props.pageno);
+      // console.log('..................', roisData);
+      // let cells = roisData.layout.cells;
+      this.consolidatePrediction(roisData, this.props.pageno);
     });
   }
 
   componentDidUpdate() {
     if (this.props.formDataPage1.length == 0) {
       this.setState({predictionArray: this.props.formDataPage1});
+      this.setState({predictionInfo: this.props.predictionInfoPage1});
     }
     if (this.props.formDataPage2.length == 0 && this.props.pageno == 2) {
       this.setState({predictionArray: this.props.formDataPage2});
+      this.setState({predictionInfo: this.props.predictionInfoPage2});
     }
   }
 
@@ -93,16 +103,16 @@ export class Admissions extends PureComponent {
       });
   };
 
-  consolidatePrediction = (cells, pageNo) => {
+  consolidatePrediction = (roisData, pageNo) => {
     var marks = ' ';
     let labels = [
+      'Sex',
       'Admission Number',
       'Date of Admission',
       "Student's Aadhaar No.",
       "Student's First Name",
       "Student's Surname",
       'Date Of Birth',
-      'Sex',
       'Address',
       'Block',
       'District',
@@ -111,6 +121,10 @@ export class Admissions extends PureComponent {
       'C/O Relation',
       "Father's Name",
       "Father's Education",
+      'Category',
+      'Type of Ration Card',
+      'CwSN',
+      'Out Of School',
       "Father's Occupation",
       "Father's Mobile Number 1",
       "Father's Mobile Number 2",
@@ -121,23 +135,26 @@ export class Admissions extends PureComponent {
       "Mother's Mobile Number 2",
       'Roll No',
       'Religion',
-      'Category',
-      'Type of Ration Card',
-      'CwSN',
       'Address on Ration Card',
       'Gram Panchayat/Ward',
       'Block',
       'District',
-      'Out Of School',
     ];
+    let confidence = [];
+
+    let cells = roisData.layout.cells;
     for (let i = 0; i < cells.length; i++) {
       marks = '';
+      // confidence = '';
       let prediction = {};
+      let predictionInfo = {};
       let isResultPresent = false;
+
       for (let j = 0; j < cells[i].rois.length; j++) {
         if (cells[i].rois[j].hasOwnProperty('result')) {
           isResultPresent = true;
           marks = marks + cells[i].rois[j].result.prediction;
+          confidence.push(cells[i].rois[j].result.confidence);
         }
       }
       if (pageNo.toString() == cells[i].page && isResultPresent) {
@@ -155,7 +172,19 @@ export class Admissions extends PureComponent {
               ),
             label: labels[i],
           };
+          predictionInfo = {
+            reference: cells[i].format.name,
+            predictedValue: marks.trim(),
+            predictionConfidence: confidence,
+            trainingData: [...cells[i].trainingDataSet],
+          };
         } else {
+          predictionInfo = {
+            reference: cells[i].format.name,
+            predictedValue: marks.trim(),
+            predictionConfidence: confidence,
+            trainingData: [...cells[i].trainingDataSet],
+          };
           prediction = {
             key: cells[i].format.name,
             value: marks.trim(),
@@ -164,13 +193,16 @@ export class Admissions extends PureComponent {
         }
 
         this.state.predictionArray.push(prediction);
+        this.state.predictionInfo.push(predictionInfo);
       }
       // }
 
       if (pageNo == 1) {
         this.props.setDataPage1(this.state.predictionArray);
+        this.props.setPredictionInfoPage1(this.state.predictionInfo);
       } else {
         this.props.setDataPage2(this.state.predictionArray);
+        this.props.setPredictionInfoPage2(this.state.predictionInfo);
       }
 
       this.props.pageNo(pageNo);
@@ -271,6 +303,10 @@ const mapDispatchToProps = dispatch => {
   return {
     setDataPage1: data => dispatch({type: SET_DATA_PAGE_1, data}),
     setDataPage2: data => dispatch({type: SET_DATA_PAGE_2, data}),
+    setPredictionInfoPage1: data =>
+      dispatch({type: SET_PREDICTION_INFO_PAGE_1, data}),
+    setPredictionInfoPage2: data =>
+      dispatch({type: SET_PREDICTION_INFO_PAGE_2, data}),
     pageNo: pageNo => dispatch({type: GET_PAGE_NO, pageNo}),
   };
 };
@@ -281,6 +317,8 @@ const mapStateToProps = state => {
     pageno: state.admissionData.pageNo,
     formDataPage1: state.admissionData.formDataPage1,
     formDataPage2: state.admissionData.formDataPage2,
+    predictionInfoPage1: state.admissionData.predictionInfoPage1,
+    predictionInfoPage2: state.admissionData.predictionInfoPage2,
     roi: state.admissionData.roi,
   };
 };

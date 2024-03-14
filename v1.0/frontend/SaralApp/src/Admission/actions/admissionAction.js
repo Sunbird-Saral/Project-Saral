@@ -4,12 +4,12 @@ import {Alert} from 'react-native';
 import BASE_URL from '../../configs/config';
 import {API_CALL_COMPLETE, FORMS_SUBMITTED, GET_ROI_DATA} from '../constants';
 
-export const setAdmissionData = (formData, token) => {
+export const setAdmissionData = (formData, token, predictionInfo) => {
   let reformatedObj = {};
   for (let i = 0; i < formData.length; i++) {
     reformatedObj = {...reformatedObj, [formData[i].key]: formData[i].value};
   }
-
+  reformatedObj = {...reformatedObj, predictionInfo: [...predictionInfo]};
   let headers = {
     method: 'PUT',
     headers: {

@@ -878,8 +878,10 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                     JSONObject roi      = cellROIs.getJSONObject(j);
                     String roiId = roi.getString("roiId");
                     if (roi.getString("extractionMethod").equals("NUMERIC_CLASSIFICATION") || roi.getString("extractionMethod").equals("BLOCK_ALPHANUMERIC_CLASSIFICATION") || roi.getString("extractionMethod").equals("BLOCK_LETTER_CLASSIFICATION")) {
-                        JSONObject result  = new JSONObject(mPredictedDigits.get(roiId));
-                        roi.put("result", result);
+                        if(mPredictedDigits.get(roiId)!=null) {
+                            JSONObject result  = new JSONObject(mPredictedDigits.get(roiId));
+                            roi.put("result", result);
+                        }
                         if(mRoiMatBase64.get(roiId)!=null)
                         {
                             trainingDataSet.put(j,mRoiMatBase64.get(roiId));

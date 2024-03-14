@@ -8,6 +8,8 @@ import {
   HANDLE_CANCLE_PAGE_2,
   HANDLE_CANCLE_PAGE_1,
   GET_ROI_DATA,
+  SET_PREDICTION_INFO_PAGE_1,
+  SET_PREDICTION_INFO_PAGE_2,
 } from '../constants';
 
 const initialState = {
@@ -19,6 +21,8 @@ const initialState = {
   dataSubmitted: false,
   apiCallComplete: false,
   roi: {},
+  predictionInfoPage1: [],
+  predictionInfoPage2: [],
 };
 
 const admissionDataReducer = (state = initialState, action) => {
@@ -45,6 +49,8 @@ const admissionDataReducer = (state = initialState, action) => {
         formDataPage2: [],
         pageNo: 0,
         dataSubmitted: false,
+        predictionInfoPage1: [],
+        predictionInfoPage2: [],
       };
     }
     case FORMS_SUBMITTED: {
@@ -57,12 +63,14 @@ const admissionDataReducer = (state = initialState, action) => {
       return {
         ...state,
         formDataPage1: [],
+        predictionInfoPage1: [],
       };
     }
     case HANDLE_CANCLE_PAGE_2: {
       return {
         ...state,
         formDataPage2: [],
+        predictionInfoPage2: [],
       };
     }
     case API_CALL_COMPLETE: {
@@ -75,6 +83,18 @@ const admissionDataReducer = (state = initialState, action) => {
       return {
         ...state,
         roi: {...action.roiData},
+      };
+    }
+    case SET_PREDICTION_INFO_PAGE_1: {
+      return {
+        ...state,
+        predictionInfoPage1: [...action.data],
+      };
+    }
+    case SET_PREDICTION_INFO_PAGE_2: {
+      return {
+        ...state,
+        predictionInfoPage2: [...action.data],
       };
     }
     default:

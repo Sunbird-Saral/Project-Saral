@@ -476,26 +476,6 @@ paths:
           description: "ROI ID has been already deleted."
         "400":
           description: "unsuccessful operation"
-    get:
-      security:
-        - Bearer: []
-      tags:
-      - ROI V2
-      summary: "Get ROI v2 data"
-      parameters:
-      - in: path
-        name: schemaName
-        type: string
-        description: schemaName is required for fetching roi
-        required: true
-
-      responses:
-        "200":
-          description: "successful operation"
-          schema:
-            $ref: "#/definitions/Roiv2ResponseBody"
-        "400":
-          description: "unsuccessful operation"
           
   /brand:
     post:
@@ -1156,42 +1136,6 @@ definitions:
       roi:
         $ref: "#/definitions/rois"
 
-  Roiv2ResponseBody:
-    type: object
-    properties:
-      version: 
-            type: string
-            example: "1.0"
-      name:
-        type: string
-        example: "UP SAT Exam Sheet Form"
-      identifierPrefix:
-        type: string
-        example: ROLLNUMBERID
-      threshold:
-        type: object
-        properties:
-          minWidth:
-            type: number
-            example: 690
-            description: Minimum widht of layout for detection
-          minHeight:
-            type: number
-            example: 390
-            description: Minimum height of layout for detection
-          detectionRadius:
-            type: number
-            example: 12
-          experimentalOMRDetection:
-            type: boolean
-            example: true
-            description: when this flag is true pencil detection of layout will be predicted .
-      cells:
-        $ref: '#/definitions/cells'
-      roiId: 
-        type: string
-        example: "12"      
-        
   sections:
     type: array
     items:
