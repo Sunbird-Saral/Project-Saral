@@ -197,7 +197,7 @@ public class SaralSDKOpenCVScannerActivity extends ReactActivity implements Came
                             result.put("confidence", new Double(confidence));
                         }else{
                             // if classifier is 10 , assigning prediction as 0
-                            result.put("prediction", new Integer(0));
+                            result.put("prediction", "");
                             result.put("confidence", new Double(0));
                         }
 
