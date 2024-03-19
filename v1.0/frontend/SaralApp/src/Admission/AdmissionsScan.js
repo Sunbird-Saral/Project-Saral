@@ -15,7 +15,6 @@ import {connect} from 'react-redux';
 
 import Button from './commonComponents/Button';
 import SaralSDK from '../../SaralSDK';
-import {roi} from './roi';
 import AppTheme from '../utils/AppTheme';
 import {
   GET_PAGE_NO,
@@ -26,6 +25,7 @@ import {
 } from './constants';
 import {monospace_FF} from '../utils/CommonUtils';
 import {PureComponent} from 'react';
+import {roi} from '../Admission/roi35margin';
 
 export class Admissions extends PureComponent {
   constructor(props) {
@@ -91,12 +91,7 @@ export class Admissions extends PureComponent {
   };
 
   onOpenCameraActivity = pageNo => {
-    SaralSDK.startCamera(
-      JSON.stringify(this.state.roi),
-      pageNo.toString(),
-      0,
-      true,
-    )
+    SaralSDK.startCamera(JSON.stringify(roi), pageNo.toString(), 0, true)
       .then(res => {})
       .catch((code, message) => {
         console.log('code', code, message);
