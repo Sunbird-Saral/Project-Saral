@@ -105,7 +105,7 @@ class EditAndSave extends Component {
           padding: 10,
         }}>
         <Text style={{fontFamily: monospace_FF, fontSize: 15}}>
-          <Text style={{color: 'red'}}>* </Text>
+          {item.required && <Text style={{color: 'red'}}>*</Text>}
           {item.label}:
         </Text>
         <TextInput

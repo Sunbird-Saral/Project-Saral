@@ -131,7 +131,7 @@ const admissionsSchema = new mongoose.Schema({
   },
   typeOfRationCard: {
     type: String,
-    required: true,
+    required: false,
   },
   CwSN: {
     type: String,
@@ -139,7 +139,7 @@ const admissionsSchema = new mongoose.Schema({
   },
   addressOnRationCard_address: {
     type: String,
-    required: true,
+    required: false,
     trim: true,
   },
   addressOnRationCard_ward: {

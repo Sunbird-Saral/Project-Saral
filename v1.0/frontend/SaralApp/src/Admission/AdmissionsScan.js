@@ -166,6 +166,7 @@ export class Admissions extends PureComponent {
                 marks.substring(2, 4).concat('/').concat(marks.substring(4)),
               ),
             label: labels[i],
+            required: !([3,16,28].includes(i))
           };
           predictionInfo = {
             reference: cells[i].format.name,
@@ -184,6 +185,7 @@ export class Admissions extends PureComponent {
             key: cells[i].format.name,
             value: marks.trim(),
             label: labels[i],
+            required: !([3,16,28].includes(i))
           };
         }
 
