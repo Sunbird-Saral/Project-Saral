@@ -54,7 +54,6 @@ exports.saveAdmissions = async (req, res, next) => {
             "schoolId": req.school.schoolId
          }
         const filter = {
-            schoolId: req.school.schoolId,
             admissionNumber: encryptedData.admissionNumber
         }
         await Admissions.replaceOne(filter, update, {upsert:true, runValidators: true})
