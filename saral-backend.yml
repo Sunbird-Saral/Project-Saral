@@ -14,7 +14,7 @@ services:
       PORT: 3005
       MONGODB_URL: mongodb://10.32.0.194:27017/saralv1newdb
       JWT_SECRET: SARALDATA_NODE
-      WHITELIST_DOMAINS: ['http://15.207.30.199','https://test-api.dummy.org', 'http://localhost:3000']
+      WHITELIST_DOMAINS: "['https://saral-dev-api.anuvaad.org','https://test-api.dummy.org', 'http://localhost:3000']"
     ports:
     - "3005:3005"
 
