@@ -9,7 +9,8 @@ export const setAdmissionData = (formData, token, predictionInfo) => {
   for (let i = 0; i < formData.length; i++) {
     reformatedObj = {...reformatedObj, [formData[i].key]: formData[i].value};
   }
-  reformatedObj = {...reformatedObj, predictionInfo: [...predictionInfo]};
+  reformatedObj = {...reformatedObj};
+
   let headers = {
     method: 'PUT',
     headers: {
@@ -30,18 +31,6 @@ export const setAdmissionData = (formData, token, predictionInfo) => {
               text: 'Okay',
             },
           ]);
-        } else {
-          Alert.alert(
-            'Server error: Something went wrong , contact Admin',
-            '',
-            [
-              {
-                text: 'Okay',
-                onPress: () => {},
-                style: 'default',
-              },
-            ],
-          );
         }
       })
       .catch(error => {

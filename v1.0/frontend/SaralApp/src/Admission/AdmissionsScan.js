@@ -10,7 +10,6 @@ import {
   TextInput,
 } from 'react-native';
 import React, {Component} from 'react';
-import axios from 'axios';
 import {connect} from 'react-redux';
 
 import Button from './commonComponents/Button';
@@ -67,6 +66,7 @@ export class Admissions extends PureComponent {
 
   onScan = async pageNo => {
     //set page number
+
     this.props.pageNo(pageNo);
     if (Platform.OS !== 'ios') {
       const grantedCamera = await PermissionsAndroid.check(
