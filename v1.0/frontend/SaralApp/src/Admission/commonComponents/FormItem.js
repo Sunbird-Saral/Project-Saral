@@ -27,7 +27,7 @@ const FormItem = ({item, handleTextChange, isMandatory, index}) => {
         value={item.value}
         onChangeText={newValue => handleTextChange(item.label, newValue)}
         multiline={true}
-        placeholder={'NA'}
+        placeholder="NA"
       />
     </View>
   );

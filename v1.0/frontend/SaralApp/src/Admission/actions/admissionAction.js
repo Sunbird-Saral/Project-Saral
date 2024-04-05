@@ -9,7 +9,7 @@ export const setAdmissionData = (formData, token, predictionInfo) => {
   for (let i = 0; i < formData.length; i++) {
     reformatedObj = {...reformatedObj, [formData[i].key]: formData[i].value};
   }
-  reformatedObj = {...reformatedObj};
+  reformatedObj = {...reformatedObj, predictionInfo: [...predictionInfo]};
 
   let headers = {
     method: 'PUT',
