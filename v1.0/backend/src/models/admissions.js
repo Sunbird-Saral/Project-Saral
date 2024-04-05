@@ -22,7 +22,7 @@ const admissionsSchema = new mongoose.Schema({
   },
   studentAadharNumber: {
     type: String,
-    required: true,
+    required: false,
   },
   studentFirstname: {
     type: String,
