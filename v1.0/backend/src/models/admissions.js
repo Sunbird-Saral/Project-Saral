@@ -22,7 +22,7 @@ const admissionsSchema = new mongoose.Schema({
   },
   studentAadharNumber: {
     type: String,
-    required: true,
+    required: false,
   },
   studentFirstname: {
     type: String,
@@ -144,17 +144,17 @@ const admissionsSchema = new mongoose.Schema({
   },
   addressOnRationCard_ward: {
     type: String,
-    required: true,
+    required: false,
     trim: true,
   },
   addressOnRationCard_block: {
     type: String,
-    required: true,
+    required: false,
     trim: true,
   },
   addressOnRationCard_district: {
     type: String,
-    required: true,
+    required: false,
     trim: true,
   },
   outOfSchool: {

@@ -12,8 +12,9 @@ services:
     environment:
       PROFILE: dev
       PORT: 3005
-      MONGODB_URL: mongodb://10.0.4.48:27017/saralv1newdb
+      MONGODB_URL: mongodb://10.32.0.194:27017/saralv1newdb
       JWT_SECRET: SARALDATA_NODE
+      WHITELIST_DOMAINS: "['https://saral-dev-api.anuvaad.org','https://test-api.dummy.org', 'http://localhost:3000']"
     ports:
     - "3005:3005"
 
