@@ -10,7 +10,6 @@ import {
   TextInput,
 } from 'react-native';
 import React, {Component} from 'react';
-import axios from 'axios';
 import {connect} from 'react-redux';
 
 import Button from './commonComponents/Button';
@@ -67,6 +66,7 @@ export class Admissions extends PureComponent {
 
   onScan = async pageNo => {
     //set page number
+
     this.props.pageNo(pageNo);
     if (Platform.OS !== 'ios') {
       const grantedCamera = await PermissionsAndroid.check(
@@ -153,7 +153,11 @@ export class Admissions extends PureComponent {
       for (let j = 0; j < cells[i].rois.length; j++) {
         if (cells[i].rois[j].hasOwnProperty('result')) {
           isResultPresent = true;
-          marks = marks + cells[i].rois[j].result.prediction;
+          if(cells[i].rois[j].result.confidence > 0.4) {
+            marks = marks + cells[i].rois[j].result.prediction;
+          } else {
+            marks = marks + " "
+          }
           confidence.push(cells[i].rois[j].result.confidence);
         }
       }

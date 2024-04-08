@@ -71,9 +71,19 @@ class EditAndSave extends Component {
     BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
   }
 
+  isMandatory(i) {
+    if (this.props.pageNo == 1 && i == 3) return false;
+    else if (
+      this.props.pageNo == 2 &&
+      (i == 1 || i == 14 || i == 14 || i == 15 || i == 16 || i == 17)
+    )
+      return false;
+    return true;
+  }
+
   isFormFilled() {
     for (let i = 0; i < this.state.data.length; i++) {
-      if (!this.state.data[i].value) {
+      if (!this.state.data[i].value && this.isMandatory(i)) {
         return true;
       }
     }
@@ -98,38 +108,39 @@ class EditAndSave extends Component {
     this.setState({data: arr});
   };
 
-  renderItem = (item, index) => {
-    return (
-      <View
-        style={{
-          padding: 10,
-        }}>
-        <Text style={{fontFamily: monospace_FF, fontSize: 15}}>
-          <Text style={{color: 'red'}}>* </Text>
-          {item.label}:
-        </Text>
-        <TextInput
-          style={{
-            fontFamily: monospace_FF,
-            fontWeight: 'bold',
-            height: 50,
-            margin: 12,
-            borderWidth: 1,
-            padding: 10,
-            color: 'black',
-            fontSize: 18,
-            alignItems: 'center',
-          }}
-          value={item.value}
-          onChangeText={newValue =>
-            this.handleTextChange(item.label, newValue, index)
-          }
-          multiline={true}
-          placeholder={'NA'}
-        />
-      </View>
-    );
-  };
+  //   return (
+  //     <View
+  //       style={{
+  //         padding: 10,
+  //       }}>
+  //       <Text style={{fontFamily: monospace_FF, fontSize: 15}}>
+  //         {/* {this.isMandatory(this.props.pageNo, index) && (
+  //           <Text style={{color: 'red'}}>* </Text>
+  //         )} */}
+  //         {item.label}:
+  //       </Text>
+  //       <TextInput
+  //         style={{
+  //           fontFamily: monospace_FF,
+  //           fontWeight: 'bold',
+  //           height: 50,
+  //           margin: 12,
+  //           borderWidth: 1,
+  //           padding: 10,
+  //           color: 'black',
+  //           fontSize: 18,
+  //           alignItems: 'center',
+  //         }}
+  //         value={item.value}
+  //         onChangeText={newValue =>
+  //           this.handleTextChange(item.label, newValue, index)
+  //         }
+  //         multiline={true}
+  //         placeholder={'NA'}
+  //       />
+  //     </View>
+  //   );
+  // };
 
   onPressConfirm = async () => {
     if (this.props.pageNo == 1) {
@@ -171,6 +182,8 @@ class EditAndSave extends Component {
                 handleTextChange={(label, newValue) =>
                   this.handleTextChange(label, newValue, index)
                 }
+                isMandatory={index => this.isMandatory(index)}
+                index={index}
               />
             );
           })}

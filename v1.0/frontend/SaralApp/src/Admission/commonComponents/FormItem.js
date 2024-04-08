@@ -2,14 +2,14 @@ import {View, Text, TextInput} from 'react-native';
 import React from 'react';
 import {monospace_FF} from '../../utils/CommonUtils';
 
-const FormItem = ({item, handleTextChange}) => {
+const FormItem = ({item, handleTextChange, isMandatory, index}) => {
   return (
     <View
       style={{
         padding: 10,
       }}>
       <Text style={{fontFamily: monospace_FF, fontSize: 15}}>
-        <Text style={{color: 'red'}}>* </Text>
+        {isMandatory(index) && <Text style={{color: 'red'}}>* </Text>}
         {item.label}:
       </Text>
       <TextInput
@@ -27,7 +27,7 @@ const FormItem = ({item, handleTextChange}) => {
         value={item.value}
         onChangeText={newValue => handleTextChange(item.label, newValue)}
         multiline={true}
-        placeholder={'NA'}
+        placeholder="NA"
       />
     </View>
   );
