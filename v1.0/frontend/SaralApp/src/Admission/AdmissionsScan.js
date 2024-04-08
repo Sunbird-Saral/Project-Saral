@@ -153,7 +153,11 @@ export class Admissions extends PureComponent {
       for (let j = 0; j < cells[i].rois.length; j++) {
         if (cells[i].rois[j].hasOwnProperty('result')) {
           isResultPresent = true;
-          marks = marks + cells[i].rois[j].result.prediction;
+          if(cells[i].rois[j].result.confidence > 0.4) {
+            marks = marks + cells[i].rois[j].result.prediction;
+          } else {
+            marks = marks + " "
+          }
           confidence.push(cells[i].rois[j].result.confidence);
         }
       }
