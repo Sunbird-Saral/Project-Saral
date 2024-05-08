@@ -59,7 +59,7 @@ class SelectRoiLayout extends Component {
       loginDetails: null,
       defaultSelected: Strings.select_text,
       classesArr: [],
-      optionList: [],
+      optionList: ['test'],
       classListIndex: -1,
       selectedClass: '',
       sectionList: [],
@@ -329,6 +329,129 @@ class SelectRoiLayout extends Component {
               permRes['android.permission.CAMERA'] ===
                 PermissionsAndroid.RESULTS.GRANTED
             ) {
+                let roi = {data: {
+                  "layout": {
+                    "version": "1.0",
+                    "name": "NEWFORMS",
+                    "threshold": {
+                      "experimentalOMRDetection": false,
+                      "minWidth": 0,
+                      "minHeight": 0,
+                      "detectionRadius": 12,
+                      "verticalScanLayout": false
+                    },
+                    "cells": [
+                      {
+                          "cellId": "1",
+                          "rois": [
+                              {
+                                  "annotationTags": "SUBJECT_1",
+                                  "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                  "roiId": "1",
+                                  "index": 0,
+                                  "rect": {
+                                      "top": 30,
+                                      "left": 334,
+                                      "bottom": 87,
+                                      "right": 607
+                                  }
+                              }
+                          ],
+                          "render": {
+                              "index": 1
+                          },
+                          "format": {
+                              "name": "subject",
+                              "value": "subject"
+                          },
+                          "validate": {
+                              "regExp": ""
+                          }
+                      },
+                      {
+                          "cellId": "2",
+                          "rois": [
+                              {
+                                  "annotationTags": "STUDENTID_1",
+                                  "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                  "roiId": "2",
+                                  "index": 0,
+                                  "rect": {
+                                      "top": 106,
+                                      "left": 117,
+                                      "bottom": 145,
+                                      "right": 384
+                                  }
+                              }
+                          ],
+                          "render": {
+                              "index": 2
+                          },
+                          "format": {
+                              "name": "studentId",
+                              "value": "studentId"
+                          },
+                          "validate": {
+                              "regExp": ""
+                          }
+                      },
+                      {
+                          "cellId": "3",
+                          "rois": [
+                              {
+                                  "annotationTags": "ANSWER1_1",
+                                  "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                  "roiId": "3",
+                                  "index": 0,
+                                  "rect": {
+                                      "top": 208,
+                                      "left": 117,
+                                      "bottom": 245,
+                                      "right": 309
+                                  }
+                              }
+                          ],
+                          "render": {
+                              "index": 3
+                          },
+                          "format": {
+                              "name": "answer1",
+                              "value": "answer1"
+                          },
+                          "validate": {
+                              "regExp": ""
+                          }
+                      },
+                      {
+                          "cellId": "4",
+                          "rois": [
+                              {
+                                  "annotationTags": "ANSWER2_1",
+                                  "extractionMethod": "BLOCK_ALPHANUMERIC_CLASSIFICATION",
+                                  "roiId": "4",
+                                  "index": 0,
+                                  "rect": {
+                                      "top": 261,
+                                      "left": 117,
+                                      "bottom": 298,
+                                      "right": 275
+                                  }
+                              }
+                          ],
+                          "render": {
+                              "index": 4
+                          },
+                          "format": {
+                              "name": "answer2",
+                              "value": "answer2"
+                          },
+                          "validate": {
+                              "regExp": ""
+                          }
+                      }
+                  ]
+                  }
+                }};
                 this.openCameraActivity(roi);
               }
           });
@@ -336,6 +459,7 @@ class SelectRoiLayout extends Component {
   };
 
   openCameraActivity = async (roiData) => {
+    console.log("inside open camer>>>>>>>>>>")
     try {
       const granted = await PermissionsAndroid.request(
         PermissionsAndroid.PERMISSIONS.CAMERA,
@@ -366,6 +490,7 @@ class SelectRoiLayout extends Component {
           this.props.loginData.data.school.hasOwnProperty('isManualEditEnabled')
             ? this.props.loginData.data.school.isManualEditEnabled
             : false;
+            console.log("inside open camer call sdk cam>>>>>>>>>>")
         SaralSDK.startCamera(
           JSON.stringify(jsonRoiData),
           pageNumber,
@@ -527,7 +652,7 @@ class SelectRoiLayout extends Component {
                   <DropDownMenu
                     options={optionList}
                     onSelect={(idx, value) =>
-                      this.onDropDownSelect(idx, value, 'option')
+                      this.onSubmitClick({})
                     }
                     defaultData={defaultSelected}
                     defaultIndex={classListIndex}

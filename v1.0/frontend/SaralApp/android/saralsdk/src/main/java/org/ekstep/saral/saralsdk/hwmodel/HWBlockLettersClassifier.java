@@ -54,6 +54,7 @@ import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.text.Text;
 import com.google.mlkit.vision.text.TextRecognition;
 import com.google.mlkit.vision.text.TextRecognizer;
+import com.google.mlkit.vision.text.devanagari.DevanagariTextRecognizerOptions;
 
 public class HWBlockLettersClassifier {
     private static final String TAG             = "SrlSDK::HWBlockLettersClassify";
@@ -410,7 +411,7 @@ ByteBuffer nv21ByteBuffer = ByteBuffer.wrap(nv21ByteArray);
 
 
 //////////////////////mlkit from image//////////////////////////
-//Bitmap img = getBitmapFromAsset(context, "test-image.png"); //working code
+//Bitmap img = getBitmapFromAsset(context, "test-hindi-crp-sm.jpg"); //working code
 /////////////from on the fly bitmap///////////
 // int width = 800; // Larger image for better recognition
 //         int height = 600;
@@ -443,8 +444,9 @@ InputImage image = InputImage.fromBitmap(bitmap, 0);
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
                 byte[] byteArray1 = outputStream.toByteArray();
                 System.out.println("Base64 Image: " + Base64.encodeToString(byteArray1, Base64.DEFAULT));
-//System.out.println("Base64 Image: " + bitmapToBase64(data));
-TextRecognizer textRecognizer = TextRecognition.getClient();
+                //System.out.println("Base64 Image: " + bitmapToBase64(data));
+                DevanagariTextRecognizerOptions opt = new DevanagariTextRecognizerOptions.Builder().build();
+                TextRecognizer textRecognizer = TextRecognition.getClient(opt);
 textRecognizer.process(image)
             .addOnSuccessListener(text -> {
                 String recognizedText = processTextBlocks(text);

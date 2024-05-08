@@ -106,7 +106,7 @@ public class DetectShaded {
             CVOperations.saveImage(resizedImage, "rows-", 3, false);
         }
 
-        return resizedImage;
+        return croppedImage;
     }
 
 
@@ -114,7 +114,7 @@ public class DetectShaded {
      * Resize the rect to 28x28 size.
      */
     private final Mat resizeImage(Mat image) {
-        int MODEL_IMAGE_WIDTH   = 200;
+        int MODEL_IMAGE_WIDTH   = 400;
         int MODEL_IMAGE_HEIGHT  = 100;
         int width               = 0;
         int height              = 0;

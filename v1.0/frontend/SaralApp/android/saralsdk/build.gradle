@@ -66,6 +66,6 @@ dependencies {
     // implementation 'com.google.firebase:firebase-ml-vision:24.1.0'
     // implementation 'com.google.android.gms:play-services-vision:20.1.1'
     // implementation 'com.google.android.gms:play-services-vision-common:19.1.1'
-    implementation 'com.google.android.gms:play-services-mlkit-text-recognition:16.0.0'
-
+    //implementation 'com.google.android.gms:play-services-mlkit-text-recognition-devanagari:16.0.0'
+    implementation 'com.google.mlkit:text-recognition-devanagari:16.0.0'
 }
