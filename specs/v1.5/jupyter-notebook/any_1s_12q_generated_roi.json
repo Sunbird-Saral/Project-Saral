@@ -1,0 +1,575 @@
+{
+    "layout": {
+        "version": "1.0",
+        "name": "ANY1S12Q Exam Sheet Form",
+        "cells": [
+            {
+                "cellId": "1",
+                "rois": [
+                    {
+                        "annotationTags": "ROLLNUMBERID1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "1",
+                        "index": 0,
+                        "rect": {
+                            "top": 40,
+                            "left": 185,
+                            "bottom": 77,
+                            "right": 225
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID1_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "2",
+                        "index": 1,
+                        "rect": {
+                            "top": 40,
+                            "left": 226,
+                            "bottom": 78,
+                            "right": 264
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID1_3",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "3",
+                        "index": 2,
+                        "rect": {
+                            "top": 39,
+                            "left": 265,
+                            "bottom": 78,
+                            "right": 305
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID1_4",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "4",
+                        "index": 3,
+                        "rect": {
+                            "top": 40,
+                            "left": 305,
+                            "bottom": 77,
+                            "right": 346
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID1_5",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "5",
+                        "index": 4,
+                        "rect": {
+                            "top": 40,
+                            "left": 347,
+                            "bottom": 78,
+                            "right": 384
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID1_6",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "6",
+                        "index": 5,
+                        "rect": {
+                            "top": 40,
+                            "left": 385,
+                            "bottom": 77,
+                            "right": 425
+                        }
+                    },
+                    {
+                        "annotationTags": "ROLLNUMBERID1_7",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "7",
+                        "index": 6,
+                        "rect": {
+                            "top": 39,
+                            "left": 425,
+                            "bottom": 77,
+                            "right": 465
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 1
+                },
+                "format": {
+                    "name": "ROLLNUMBER",
+                    "value": "ROLLNUMBER"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "2",
+                "rois": [
+                    {
+                        "annotationTags": "QUESTION1_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "8",
+                        "index": 0,
+                        "rect": {
+                            "top": 151,
+                            "left": 177,
+                            "bottom": 187,
+                            "right": 216
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION1_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "9",
+                        "index": 1,
+                        "rect": {
+                            "top": 151,
+                            "left": 230,
+                            "bottom": 187,
+                            "right": 270
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 2
+                },
+                "format": {
+                    "name": "QUESTION1",
+                    "value": "QUESTION 1"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "3",
+                "rois": [
+                    {
+                        "annotationTags": "QUESTION2_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "10",
+                        "index": 0,
+                        "rect": {
+                            "top": 201,
+                            "left": 176,
+                            "bottom": 240,
+                            "right": 217
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION2_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "11",
+                        "index": 1,
+                        "rect": {
+                            "top": 201,
+                            "left": 232,
+                            "bottom": 240,
+                            "right": 270
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 3
+                },
+                "format": {
+                    "name": "QUESTION2",
+                    "value": "QUESTION 2"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "4",
+                "rois": [
+                    {
+                        "annotationTags": "QUESTION3_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "12",
+                        "index": 0,
+                        "rect": {
+                            "top": 254,
+                            "left": 176,
+                            "bottom": 290,
+                            "right": 216
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION3_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "13",
+                        "index": 1,
+                        "rect": {
+                            "top": 254,
+                            "left": 232,
+                            "bottom": 292,
+                            "right": 270
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 4
+                },
+                "format": {
+                    "name": "QUESTION3",
+                    "value": "QUESTION 3"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "5",
+                "rois": [
+                    {
+                        "annotationTags": "QUESTION4_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "14",
+                        "index": 0,
+                        "rect": {
+                            "top": 306,
+                            "left": 177,
+                            "bottom": 343,
+                            "right": 216
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION4_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "15",
+                        "index": 1,
+                        "rect": {
+                            "top": 305,
+                            "left": 230,
+                            "bottom": 343,
+                            "right": 270
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 5
+                },
+                "format": {
+                    "name": "QUESTION4",
+                    "value": "QUESTION 4"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "6",
+                "rois": [
+                    {
+                        "annotationTags": "QUESTION5_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "16",
+                        "index": 0,
+                        "rect": {
+                            "top": 357,
+                            "left": 176,
+                            "bottom": 394,
+                            "right": 216
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION5_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "17",
+                        "index": 1,
+                        "rect": {
+                            "top": 359,
+                            "left": 230,
+                            "bottom": 394,
+                            "right": 269
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 6
+                },
+                "format": {
+                    "name": "QUESTION5",
+                    "value": "QUESTION 5"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "7",
+                "rois": [
+                    {
+                        "annotationTags": "QUESTION6_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "18",
+                        "index": 0,
+                        "rect": {
+                            "top": 408,
+                            "left": 176,
+                            "bottom": 445,
+                            "right": 215
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION6_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "19",
+                        "index": 1,
+                        "rect": {
+                            "top": 408,
+                            "left": 230,
+                            "bottom": 445,
+                            "right": 269
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 7
+                },
+                "format": {
+                    "name": "QUESTION6",
+                    "value": "QUESTION 6"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "8",
+                "rois": [
+                    {
+                        "annotationTags": "QUESTION7_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "20",
+                        "index": 0,
+                        "rect": {
+                            "top": 150,
+                            "left": 470,
+                            "bottom": 187,
+                            "right": 510
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION7_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "21",
+                        "index": 1,
+                        "rect": {
+                            "top": 149,
+                            "left": 522,
+                            "bottom": 188,
+                            "right": 562
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 8
+                },
+                "format": {
+                    "name": "QUESTION7",
+                    "value": "QUESTION 7"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "9",
+                "rois": [
+                    {
+                        "annotationTags": "QUESTION8_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "22",
+                        "index": 0,
+                        "rect": {
+                            "top": 201,
+                            "left": 467,
+                            "bottom": 241,
+                            "right": 508
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION8_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "23",
+                        "index": 1,
+                        "rect": {
+                            "top": 202,
+                            "left": 523,
+                            "bottom": 241,
+                            "right": 563
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 9
+                },
+                "format": {
+                    "name": "QUESTION8",
+                    "value": "QUESTION 8"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "10",
+                "rois": [
+                    {
+                        "annotationTags": "QUESTION9_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "24",
+                        "index": 0,
+                        "rect": {
+                            "top": 254,
+                            "left": 469,
+                            "bottom": 290,
+                            "right": 508
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION9_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "25",
+                        "index": 1,
+                        "rect": {
+                            "top": 255,
+                            "left": 523,
+                            "bottom": 292,
+                            "right": 562
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 10
+                },
+                "format": {
+                    "name": "QUESTION9",
+                    "value": "QUESTION 9"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "11",
+                "rois": [
+                    {
+                        "annotationTags": "QUESTION10_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "26",
+                        "index": 0,
+                        "rect": {
+                            "top": 308,
+                            "left": 467,
+                            "bottom": 345,
+                            "right": 508
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION10_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "27",
+                        "index": 1,
+                        "rect": {
+                            "top": 307,
+                            "left": 521,
+                            "bottom": 346,
+                            "right": 563
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 11
+                },
+                "format": {
+                    "name": "QUESTION10",
+                    "value": "QUESTION 10"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "12",
+                "rois": [
+                    {
+                        "annotationTags": "QUESTION11_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "28",
+                        "index": 0,
+                        "rect": {
+                            "top": 360,
+                            "left": 467,
+                            "bottom": 396,
+                            "right": 507
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION11_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "29",
+                        "index": 1,
+                        "rect": {
+                            "top": 359,
+                            "left": 523,
+                            "bottom": 396,
+                            "right": 562
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 12
+                },
+                "format": {
+                    "name": "QUESTION11",
+                    "value": "QUESTION 11"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            },
+            {
+                "cellId": "13",
+                "rois": [
+                    {
+                        "annotationTags": "QUESTION12_1",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "30",
+                        "index": 0,
+                        "rect": {
+                            "top": 410,
+                            "left": 467,
+                            "bottom": 449,
+                            "right": 509
+                        }
+                    },
+                    {
+                        "annotationTags": "QUESTION12_2",
+                        "extractionMethod": "NUMERIC_CLASSIFICATION",
+                        "roiId": "31",
+                        "index": 1,
+                        "rect": {
+                            "top": 411,
+                            "left": 520,
+                            "bottom": 449,
+                            "right": 561
+                        }
+                    }
+                ],
+                "render": {
+                    "index": 13
+                },
+                "format": {
+                    "name": "QUESTION12",
+                    "value": "QUESTION 12"
+                },
+                "validate": {
+                    "regExp": ""
+                }
+            }
+        ]
+    }
+}
